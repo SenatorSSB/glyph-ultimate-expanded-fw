@@ -46,5 +46,25 @@ CommunicationBackendId detect_console(const Pinout &pinout) {
         result = COMMS_BACKEND_N64;
     }
 
+    /*
+    if(result == COMMS_BACKEND_UNSPECIFIED) {
+        delay(500);
+        if (usb_connected) {
+            result = COMMS_BACKEND_XINPUT;
+        } else if (latch_pulses && (clock_pulses / latch_pulses) > 8) {
+            result = COMMS_BACKEND_SNES;
+        } else if (latch_pulses && (clock_pulses / latch_pulses) > 1) {
+            result = COMMS_BACKEND_NES;
+        } else if (GamecubeConsole(pinout.joybus_data).Detect()) {
+            result = COMMS_BACKEND_GAMECUBE;
+        } else if (N64Console(pinout.joybus_data).Detect()) {
+            result = COMMS_BACKEND_N64;
+        }
+    }
+    */
+
+    detachInterrupt(pinout.nes_latch);
+    detachInterrupt(pinout.nes_clock);
+
     return result;
 }

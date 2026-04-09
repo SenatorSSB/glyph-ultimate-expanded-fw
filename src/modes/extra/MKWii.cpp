@@ -15,7 +15,7 @@ void MKWii::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs)
     outputs.start = inputs.mb1;
 }
 
-void MKWii::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void MKWii::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     bool up = inputs.lf2 || inputs.lt1 || inputs.lt2;
 
     UpdateDirections(

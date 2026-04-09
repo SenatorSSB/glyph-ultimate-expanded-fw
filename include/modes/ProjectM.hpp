@@ -22,7 +22,6 @@ class ProjectM : public ControllerMode {
 
     void HandleSocd(InputState &inputs);
     void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs);
-    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs);
-};
+    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);};
 
 #endif

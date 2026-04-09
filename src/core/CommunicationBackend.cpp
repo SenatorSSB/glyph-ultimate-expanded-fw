@@ -28,6 +28,7 @@ OutputState &CommunicationBackend::GetOutputs() {
 void CommunicationBackend::ScanInputs() {
     for (size_t i = 0; i < _input_source_count; i++) {
         _input_sources[i]->UpdateInputs(_inputs);
+        _inputs.counter++;
     }
 }
 
@@ -37,6 +38,7 @@ void CommunicationBackend::ScanInputs(InputScanSpeed input_source_filter) {
         if (input_source->ScanSpeed() == input_source_filter) {
             input_source->UpdateInputs(_inputs);
         }
+        _inputs.counter++;
     }
 }
 
@@ -45,9 +47,9 @@ void CommunicationBackend::ResetOutputs() {
 }
 
 void CommunicationBackend::UpdateOutputs() {
-    ResetOutputs();
+    //ResetOutputs();
     if (_gamemode != nullptr) {
-        _gamemode->UpdateOutputs(_inputs, _outputs);
+        _gamemode->UpdateOutputs(_inputs, _outputs, BackendId());
     }
 }
 

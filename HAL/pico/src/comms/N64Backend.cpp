@@ -1,5 +1,4 @@
 #include "comms/N64Backend.hpp"
-
 #include "core/InputSource.hpp"
 
 #include <N64Console.hpp>
@@ -23,19 +22,24 @@ CommunicationBackendId N64Backend::BackendId() {
     return COMMS_BACKEND_N64;
 }
 
-void N64Backend::SendReport() {
+void __no_inline_not_in_flash_func(N64Backend::SendReport()) {
     // Update slower inputs before we start waiting for poll.
     ScanInputs(InputScanSpeed::SLOW);
     ScanInputs(InputScanSpeed::MEDIUM);
 
     // Read inputs
-    _n64.WaitForPoll();
+    bool pollTime = true;
+    while(pollTime == true) {
+        ScanInputs(InputScanSpeed::FAST);
+        UpdateOutputs();
+        pollTime = _n64.WaitForPoll();
+    };
+
+    rp2040.idleOtherCore();
 
     // Update fast inputs in response to poll.
-    ScanInputs(InputScanSpeed::FAST);
 
     // Run gamemode logic.
-    UpdateOutputs();
 
     // Digital outputs
     _report.a = _outputs.a;
@@ -48,11 +52,11 @@ void N64Backend::SendReport() {
     _report.dpad_right = _outputs.dpadRight;
     _report.dpad_down = _outputs.dpadDown;
     _report.dpad_up = _outputs.dpadUp;
-    // Somewhat ugly way of mapping right stick to C-Pad
-    _report.c_left = _outputs.rightStickX < 128;
-    _report.c_right = _outputs.rightStickX > 128;
-    _report.c_down = _outputs.rightStickY < 128;
-    _report.c_up = _outputs.rightStickY > 128;
+
+    _report.c_left = _outputs.rightStickLeft;
+    _report.c_right = _outputs.rightStickRight;
+    _report.c_down = _outputs.rightStickDown;
+    _report.c_up = _outputs.rightStickUp;
 
     // Analog outputs
     _report.stick_x = _outputs.leftStickX - 128;
@@ -60,6 +64,7 @@ void N64Backend::SendReport() {
 
     // Send outputs to console.
     _n64.SendReport(&_report);
+    rp2040.resumeOtherCore();
 }
 
 int N64Backend::GetOffset() {

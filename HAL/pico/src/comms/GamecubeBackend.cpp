@@ -1,5 +1,4 @@
 #include "comms/GamecubeBackend.hpp"
-
 #include "core/InputSource.hpp"
 
 #include <GamecubeConsole.hpp>
@@ -24,19 +23,21 @@ CommunicationBackendId GamecubeBackend::BackendId() {
     return COMMS_BACKEND_GAMECUBE;
 }
 
-void GamecubeBackend::SendReport() {
+void  __no_inline_not_in_flash_func(GamecubeBackend::SendReport()) {
     // Update slower inputs before we start waiting for poll.
     ScanInputs(InputScanSpeed::SLOW);
     ScanInputs(InputScanSpeed::MEDIUM);
 
     // Read inputs
-    _gamecube.WaitForPollStart();
+    bool pollTime = true;
+    while(pollTime == true) {
+        ScanInputs(InputScanSpeed::FAST);
+        pollTime = _gamecube.WaitForPollStart();
+    }
+
+    rp2040.idleOtherCore();
 
     // Update fast inputs in response to poll.
-    // But wait 40us first so that we read inputs at the start of the 3rd byte of the poll command
-    // not the second, so inputs are maximum 40us old by the time we start sending the report.
-    busy_wait_us(40);
-    ScanInputs(InputScanSpeed::FAST);
 
     // Run gamemode logic.
     UpdateOutputs();
@@ -50,8 +51,8 @@ void GamecubeBackend::SendReport() {
     _report.l = _outputs.triggerLDigital;
     _report.r = _outputs.triggerRDigital;
     _report.start = _outputs.start;
-    _report.dpad_left = _outputs.dpadLeft | _outputs.select;
-    _report.dpad_right = _outputs.dpadRight | _outputs.home;
+    _report.dpad_left = _outputs.dpadLeft;
+    _report.dpad_right = _outputs.dpadRight;
     _report.dpad_down = _outputs.dpadDown;
     _report.dpad_up = _outputs.dpadUp;
 
@@ -67,6 +68,7 @@ void GamecubeBackend::SendReport() {
     if (_gamecube.WaitForPollEnd() != PollStatus::ERROR) {
         _gamecube.SendReport(&_report);
     }
+    rp2040.resumeOtherCore();
 }
 
 int GamecubeBackend::GetOffset() {

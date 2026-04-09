@@ -61,7 +61,7 @@ void CustomControllerMode::UpdateDigitalOutputs(const InputState &inputs, Output
     }
 }
 
-void CustomControllerMode::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void CustomControllerMode::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     if (_custom_mode_config == nullptr) {
         return;
     }

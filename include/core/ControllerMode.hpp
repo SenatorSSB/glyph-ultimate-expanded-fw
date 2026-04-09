@@ -10,7 +10,7 @@
 class ControllerMode : public InputMode {
   public:
     ControllerMode();
-    void UpdateOutputs(const InputState &inputs, OutputState &outputs);
+    void UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);
     void ResetDirections();
     virtual void UpdateDirections(
         bool lsLeft,
@@ -32,7 +32,7 @@ class ControllerMode : public InputMode {
 
   private:
     virtual void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) = 0;
-    virtual void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) = 0;
+    virtual void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) = 0;
 };
 
 #endif

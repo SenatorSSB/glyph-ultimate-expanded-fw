@@ -31,7 +31,7 @@ void Ultimate2::UpdateDigitalOutputs(const InputState &inputs, OutputState &outp
         outputs.dpadRight = true;
 }
 
-void Ultimate2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void Ultimate2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3, // Left

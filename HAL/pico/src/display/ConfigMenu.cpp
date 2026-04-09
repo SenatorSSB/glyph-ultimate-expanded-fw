@@ -1,4 +1,7 @@
 #include "display/ConfigMenu.hpp"
+#include "display/ConfigMenuAssets/GlyphMenuBitmaps.h"
+#include "config/glyph/common/include/display/Font4x7Fixed.h"
+#include "config/glyph/common/include/icons/12x12bitmaps.hpp"
 
 #include "core/Persistence.hpp"
 #include "core/config_utils.hpp"
@@ -26,10 +29,46 @@ void ConfigMenu::HandleControls(
     }
 
     if (button == controls.up) {
-        _highlighted_menu_item = max(0, _highlighted_menu_item - 1);
+        if(_current_menu_page == _top_level_page) {
+            switch(_backends[0]->BackendId()) {
+                case COMMS_BACKEND_DINPUT:
+                case COMMS_BACKEND_XINPUT:
+                case COMMS_BACKEND_NINTENDO_SWITCH:
+                    _highlighted_menu_item = max(0, _highlighted_menu_item - 1);
+                    break;
+                default:
+                    _highlighted_menu_item = max(0, _highlighted_menu_item - 1);
+                    while(_current_menu_page->items[_highlighted_menu_item].usb == true) {
+                        _highlighted_menu_item = max(0, _highlighted_menu_item - 1);
+                    }
+                    break;
+            }
+
+        } else {
+            _highlighted_menu_item = max(0, _highlighted_menu_item - 1);
+        }
     } else if (button == controls.down) {
-        _highlighted_menu_item =
-            min(_current_menu_page->items_count - 1, _highlighted_menu_item + 1);
+        if(_current_menu_page == _top_level_page) {
+            switch(_backends[0]->BackendId()) {
+                case COMMS_BACKEND_DINPUT:
+                case COMMS_BACKEND_XINPUT:
+                case COMMS_BACKEND_NINTENDO_SWITCH:
+                    _highlighted_menu_item =
+                        min(_current_menu_page->items_count - 1, _highlighted_menu_item + 1);
+                    break;
+                default:
+                    _highlighted_menu_item =
+                        min(_current_menu_page->items_count - 1, _highlighted_menu_item + 1);
+                    while(_current_menu_page->items[_highlighted_menu_item].usb == true) {
+                        _highlighted_menu_item =
+                            min(_current_menu_page->items_count - 1, _highlighted_menu_item + 1);
+                    }
+                    break;
+            }
+        } else {
+            _highlighted_menu_item =
+                min(_current_menu_page->items_count - 1, _highlighted_menu_item + 1);
+        }
     } else if (button == controls.enter) {
         // Bounds check.
         if (_highlighted_menu_item > _current_menu_page->items_count) {
@@ -82,24 +121,128 @@ void ConfigMenu::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &displa
         _backends[0]->SetGameMode(nullptr);
     }
 
-    uint8_t font_width = instance->font_width;
-    uint8_t font_height = instance->font_height;
+    InputState &inputs = instance->GetInputs();
 
-    if (_highlighted_menu_item - _current_menu_offset > max_visible_lines - 1) {
-        _current_menu_offset++;
-    } else if (_highlighted_menu_item < _current_menu_offset) {
-        _current_menu_offset--;
-    }
-    uint8_t last_item_to_display =
-        min(_current_menu_page->items_count - _current_menu_offset, max_visible_lines + 1);
-    for (size_t i = 0; i < last_item_to_display; i++) {
-        if (i + _current_menu_offset == _highlighted_menu_item) {
-            display.setCursor(0, i * (font_height + padding));
-            display.print(highlight_string);
+    display.setFont(&Font4x7Fixed);
+    display.setTextWrap(false);
+
+    if(_current_menu_page == _top_level_page) {
+
+        // As far as I can tell, this variable is only used for scrolling
+        // the screen on the profile selection menu. Resetting it when the
+        // main menu is loaded is needed otherwise it will crash when going
+        // back to the main menu after scrolling the screen.
+        _current_menu_offset = 0;
+
+        display.drawBitmap(0, 0, bitmap_glyph_menu_base, 128, 64, 1);
+        uint8_t margin = 2;
+        bool usb = false;
+        //usbmargin 17
+        switch(_backends[0]->BackendId()) {
+            case COMMS_BACKEND_DINPUT:
+            case COMMS_BACKEND_XINPUT:
+            case COMMS_BACKEND_NINTENDO_SWITCH:
+                usb = true;
+                break;
+            default:
+                margin = 17;
+                break;
         }
-        display.setCursor(font_width + padding, i * (font_height + padding));
-        display.print(_current_menu_page->items[i + _current_menu_offset].text);
+        uint8_t spacing = 2;
+        uint8_t small_icon_size = 10;
+        uint8_t large_icon_size = 28;
+        uint8_t y_location = 8;
+
+        uint8_t xVal = 0;
+        xVal += margin;
+        size_t drawn_item_index = 0;
+        for (size_t i = 0; i < _current_menu_page->items_count; i++) {
+            if(_current_menu_page->items[i + _current_menu_offset].usb && !usb){
+                continue;
+            }
+            if (i + _current_menu_offset == _highlighted_menu_item) {
+                display.drawBitmap(xVal, y_location, _current_menu_page->items[i + _current_menu_offset].largeIcon, 28, 28, 1);
+                xVal += spacing + large_icon_size;
+                display.setCursor(77, 54);
+                for(size_t j = 0; j < 32; j++) {
+                    if(_current_menu_page->items[i + _current_menu_offset].text[j] == '.') {
+                        display.setCursor(77, 64);
+                    } else {
+                        display.print(_current_menu_page->items[i + _current_menu_offset].text[j]);
+                    }
+                }
+            } else {
+                display.drawBitmap(xVal, y_location, _current_menu_page->items[i + _current_menu_offset].smallIcon, 10, 10, 1);
+                xVal += spacing + small_icon_size;
+            }
+        }
+
+    } else {
+        uint8_t font_width = instance->font_width;
+        uint8_t font_height = instance->font_height;
+        uint8_t xOffset = 78;
+
+        display.drawBitmap(0, 0, bitmap_glyph_list_menu_base, 128, 64, 1);
+
+        display.setCursor(17, 24);
+        display.println("Set Profile");
+
+        if (_highlighted_menu_item - _current_menu_offset > max_visible_lines - 1) {
+            _current_menu_offset++;
+        } else if (_highlighted_menu_item < _current_menu_offset) {
+            _current_menu_offset--;
+        }
+        uint8_t last_item_to_display =
+            min(_current_menu_page->items_count - _current_menu_offset, max_visible_lines + 1);
+        for (size_t i = 0; i < last_item_to_display; i++) {
+            bool highlighted = i + _current_menu_offset == _highlighted_menu_item;
+
+            if (highlighted) {
+                display.setCursor(xOffset, (i * (font_height + padding)) + 10);
+                display.print(highlight_string);
+            }
+            display.setCursor(xOffset + font_width + padding, (i * (font_height + padding)) + 10);
+            display.print(_current_menu_page->items[i + _current_menu_offset].text);
+            if (highlighted) {
+                display.print(" <");
+            }
+        }
     }
+
+    if(inputs.mb1) {
+        display.fillRect(2, 46, 18, 18, 1);
+        display.drawBitmap(4, 48, Back12, 12, 12, 0);
+    }
+    if(inputs.mb2) {
+        display.fillRect(20, 46, 18, 18, 1);
+        if(_current_menu_page == _top_level_page) {
+            display.drawBitmap(22, 48, LeftArrow12, 12, 12, 0);
+        } else {
+            display.drawBitmap(22, 48, UpArrow12, 12, 12, 0);
+        }
+    }
+    if(inputs.mb3) {
+        display.fillRect(38, 46, 18, 18, 1);
+        if(_current_menu_page == _top_level_page) {
+            display.drawBitmap(40, 48, RightArrow12, 12, 12, 0);
+        } else {
+            display.drawBitmap(40, 48, DownArrow12, 12, 12, 0);
+        }
+    }
+    if(inputs.mb4) {
+        display.fillRect(56, 46, 18, 18, 1);
+        if(_current_menu_page) {
+            display.drawBitmap(58, 48, Confirm12, 12, 12, 0);
+        } else {
+            display.drawBitmap(58, 48, Confirm12, 12, 12, 0);
+        }
+    }
+
+/*
+    if(inputs.mb1) {
+        display.fillRect(2, 46, 18, 18, 1);
+    }
+*/
 }
 
 void ConfigMenu::ReturnToDashboard(IntegratedDisplay *instance) {

@@ -1,6 +1,11 @@
 name: Build device config
 
-on: [workflow_call]
+on: 
+  workflow_call:
+    secrets:
+      PAT: 
+        required: true
+        description: ''
 
 jobs:
   metadata:
@@ -40,13 +45,13 @@ jobs:
     steps:
     - name: Check out specific HayBox revision
       run: |
-        git clone "https://github.com/$HAYBOX_REPO" .
+        git clone "https://GregTurbo:${{ secrets.PAT }}@github.com/$HAYBOX_REPO" .
         git checkout "$HAYBOX_REVISION"
 
     - name: Check out config repo
       uses: actions/checkout@v4
       with:
-        path: config/device
+        path: config/glyph-config
 
     - name: Set up Python
       uses: actions/setup-python@v5

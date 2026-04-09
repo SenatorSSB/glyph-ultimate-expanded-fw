@@ -46,7 +46,7 @@ void Melee18Button::UpdateDigitalOutputs(const InputState &inputs, OutputState &
         outputs.dpadRight = true;
 }
 
-void Melee18Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void Melee18Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3, // Left

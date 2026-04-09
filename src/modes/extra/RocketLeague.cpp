@@ -39,7 +39,7 @@ void RocketLeague::UpdateDigitalOutputs(const InputState &inputs, OutputState &o
     }
 }
 
-void RocketLeague::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void RocketLeague::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3,

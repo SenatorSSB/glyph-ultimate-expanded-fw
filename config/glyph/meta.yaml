@@ -1,0 +1,7 @@
+repo: GregTurbo/Haybox-Glyph
+revision: 05a7d2b
+build:
+  - env: glyph_protoA
+    bin_ext: uf2
+  - env: glyph_mk6
+    bin_ext: uf2

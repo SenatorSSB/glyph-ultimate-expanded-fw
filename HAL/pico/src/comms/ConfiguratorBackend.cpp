@@ -20,6 +20,8 @@
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
 #include "reboot.hpp"
+#include "arduino/Adafruit_USBD_Device.h"
+
 
 #include <pb_arduino.h>
 #include <pb_decode.h>
@@ -36,7 +38,10 @@ ConfiguratorBackend::ConfiguratorBackend(
       _in(stream),
       _out(stream),
       _base_stream(stream),
-      _config(config) {}
+      _config(config) {
+
+    TinyUSBDevice.setID(0x2E8A, 0x1092);
+}
 
 CommunicationBackendId ConfiguratorBackend::BackendId() {
     return COMMS_BACKEND_CONFIGURATOR;
@@ -60,7 +65,14 @@ void ConfiguratorBackend::SendReport() {
             HandleGetConfig();
             break;
         case CMD_SET_CONFIG:
-            HandleSetConfig();
+            rp2040.idleOtherCore();
+            if(HandleSetConfig()) {
+                rp2040.resumeOtherCore();
+                watchdog_hw->scratch[0] = 0;
+                watchdog_hw->scratch[1] = 0;
+                reboot_firmware();
+            }
+            rp2040.resumeOtherCore();
             break;
         case CMD_REBOOT_FIRMWARE:
             reboot_firmware();

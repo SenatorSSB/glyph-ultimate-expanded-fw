@@ -11,7 +11,7 @@ class MultiVersus : public ControllerMode {
 
   protected:
     virtual void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs);
-    virtual void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs);
+    virtual void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);
 };
 
 #endif

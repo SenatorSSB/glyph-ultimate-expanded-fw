@@ -38,7 +38,7 @@ void DarkSouls::UpdateDigitalOutputs(const InputState &inputs, OutputState &outp
     }
 }
 
-void DarkSouls::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void DarkSouls::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     UpdateDirections(
         inputs.lf3,
         inputs.lf1,

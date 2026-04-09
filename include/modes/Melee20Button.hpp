@@ -13,8 +13,7 @@ class Melee20Button : public ControllerMode {
 
   protected:
     void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs);
-    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs);
-
+    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);
   private:
     MeleeOptions _options;
     bool _horizontal_socd;

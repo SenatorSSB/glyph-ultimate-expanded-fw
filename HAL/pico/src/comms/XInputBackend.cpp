@@ -2,6 +2,7 @@
 
 #include "core/CommunicationBackend.hpp"
 #include "core/state.hpp"
+#include "hardware/timer.h"
 
 #include <Adafruit_USBD_XInput.hpp>
 
@@ -24,11 +25,20 @@ CommunicationBackendId XInputBackend::BackendId() {
 }
 
 void XInputBackend::SendReport() {
+    //we get stalled if the computer doesn't like us
+    //if we get stalled, the screen gets starved for inputs and we can't do shit
+    //so we have a timeout
+    absolute_time_t start_time = get_absolute_time();
+    bool timeout = false;
+    
     ScanInputs(InputScanSpeed::SLOW);
     ScanInputs(InputScanSpeed::MEDIUM);
 
     while (!_xinput.ready()) {
-        tight_loop_contents();
+        if((get_absolute_time() - start_time)  > 1000 * 50) {
+            timeout = true;
+            break;
+        }
     }
 
     ScanInputs(InputScanSpeed::FAST);
@@ -58,6 +68,8 @@ void XInputBackend::SendReport() {
     _report.ly = (_outputs.leftStickY - 128) * 65535 / 255 + 128;
     _report.rx = (_outputs.rightStickX - 128) * 65535 / 255 + 128;
     _report.ry = (_outputs.rightStickY - 128) * 65535 / 255 + 128;
+
+    if(timeout) return;
 
     _xinput.sendReport(&_report);
 }

@@ -7,7 +7,9 @@
 #include "modes/Melee20Button.hpp"
 #include "modes/ProjectM.hpp"
 #include "modes/RivalsOfAether.hpp"
+#include "modes/Rivals2.hpp"
 #include "modes/Ultimate.hpp"
+#include "modes/64.hpp"
 #include "util/state_util.hpp"
 
 #include <config.pb.h>
@@ -17,8 +19,10 @@ ProjectM projectm_mode;
 Ultimate ultimate_mode;
 FgcMode fgc_mode;
 RivalsOfAether rivals_mode;
+Rivals2 rivals2_mode;
 CustomKeyboardMode keyboard_mode;
 CustomControllerMode custom_mode;
+Smash64 s64_mode;
 
 uint64_t mode_activation_masks[10];
 
@@ -68,6 +72,10 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
             rivals_mode.SetConfig(mode_config);
             set_mode(backend, &rivals_mode);
             break;
+        case MODE_RIVALS2:
+            rivals2_mode.SetConfig(mode_config);
+            set_mode(backend, &rivals2_mode);
+            break;
         case MODE_KEYBOARD:
             if (backend->BackendId() != COMMS_BACKEND_DINPUT ||
                 mode_config.keyboard_mode_config < 1 ||
@@ -90,6 +98,10 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
                 config.custom_modes[mode_config.custom_mode_config - 1]
             );
             set_mode(backend, &custom_mode);
+            break;
+        case MODE_64:
+            s64_mode.SetConfig(mode_config);
+            set_mode(backend, &s64_mode);
             break;
         case MODE_UNSPECIFIED:
         default:

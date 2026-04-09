@@ -1,0 +1,7 @@
+name: Build device config
+on: [push, pull_request]
+jobs:
+  build:
+    uses: GregTurbo/HayBox-Glyph/.github/workflows/build-device-config.yml@configurator 
+    secrets:
+      PAT: ${{ secrets.PAT }}

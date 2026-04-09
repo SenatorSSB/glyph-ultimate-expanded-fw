@@ -7,10 +7,12 @@
 class FgcMode : public ControllerMode {
   public:
     FgcMode();
+    void SetConfig(GameModeConfig &config);
 
   private:
     void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs);
-    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs);
+    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);
+    void HandleSocd(InputState &inputs);
 };
 
 #endif

@@ -12,7 +12,7 @@ class ConfigMenu;
 
 typedef struct _MenuPage {
     typedef struct _MenuItem {
-        char text[20];
+        char text[32];
         uint8_t key = 0;
         void (*action)(
             IntegratedDisplay *instance,
@@ -21,6 +21,9 @@ typedef struct _MenuPage {
             uint8_t key
         ) = nullptr;
         struct _MenuPage *page = nullptr;
+        const unsigned char* smallIcon;
+        const unsigned char* largeIcon;
+        bool usb = false;
     } MenuItem;
 
     struct _MenuPage *parent = nullptr;

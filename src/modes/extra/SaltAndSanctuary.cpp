@@ -25,7 +25,7 @@ void SaltAndSanctuary::UpdateDigitalOutputs(const InputState &inputs, OutputStat
     outputs.start = inputs.mb1; // Inventory
 }
 
-void SaltAndSanctuary::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void SaltAndSanctuary::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3,

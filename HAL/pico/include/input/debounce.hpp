@@ -4,7 +4,11 @@
 #include "stdlib.hpp"
 
 typedef struct _DebounceState {
-    absolute_time_t locked_until = 0;
+    #ifdef NDEBUG
+        absolute_time_t locked_until = 0;
+    #else
+        absolute_time_t locked_until = {._private_us_since_boot = 0};
+    #endif
     bool pressed = false;
 } DebounceState;
 

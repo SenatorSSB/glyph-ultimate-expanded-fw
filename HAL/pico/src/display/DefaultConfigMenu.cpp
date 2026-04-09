@@ -1,9 +1,12 @@
 #include "display/DefaultConfigMenu.hpp"
-
+#include "display/ConfigMenuAssets/GlyphMenuBitmaps.h"
 #include "core/Persistence.hpp"
 #include "core/config_utils.hpp"
 #include "core/mode_selection.hpp"
 #include "reboot.hpp"
+#include "config/glyph/common/include/LEDTemplates.hpp"
+#include "comms/NeoPixelBackend.hpp"
+#include "img/update.hpp"
 
 DefaultConfigMenu::DefaultConfigMenu(
     Config &config,
@@ -20,10 +23,13 @@ DefaultConfigMenu::DefaultConfigMenu(
         CommunicationBackendConfig &backend_config = config.communication_backend_configs[i];
         MenuPage::MenuItem &current_option = usb_backend_options[usb_backend_options_count];
 
-        if (backend_config.backend_id != COMMS_BACKEND_XINPUT &&
+        if(_backends[0]->CurrentGameMode()->GetConfig()->keyboard_mode_config != 0) {
+            if(backend_config.backend_id != COMMS_BACKEND_DINPUT) {
+                continue;
+            }
+        } else if (backend_config.backend_id != COMMS_BACKEND_XINPUT &&
             backend_config.backend_id != COMMS_BACKEND_DINPUT &&
-            backend_config.backend_id != COMMS_BACKEND_NINTENDO_SWITCH &&
-            backend_config.backend_id != COMMS_BACKEND_CONFIGURATOR) {
+            backend_config.backend_id != COMMS_BACKEND_NINTENDO_SWITCH) {
             continue;
         }
 
@@ -50,10 +56,11 @@ DefaultConfigMenu::DefaultConfigMenu(
         GameModeConfig &mode_config = config.game_mode_configs[i];
         MenuPage::MenuItem &current_option = gamemode_options[gamemode_options_count];
 
-        // Don't show keyboard modes as a gamemode option unless using DInputBackend.
         if (_backends_count > 0 && _backends[0] != nullptr) {
             CommunicationBackendId primary_backend_id = _backends[0]->BackendId();
-            if (primary_backend_id != COMMS_BACKEND_DINPUT &&
+            if ( !(primary_backend_id == COMMS_BACKEND_DINPUT
+                    || primary_backend_id == COMMS_BACKEND_XINPUT
+                    || primary_backend_id == COMMS_BACKEND_NINTENDO_SWITCH) &&
                 mode_config.mode_id == MODE_KEYBOARD) {
                 continue;
             }
@@ -87,28 +94,31 @@ DefaultConfigMenu::DefaultConfigMenu(
         current_option.action = &SetSocdType;
     }
 
+/*
     static MenuPage socd_page = {
         .items = socd_options,
         .items_count = sizeof(socd_options) / sizeof(MenuPage::MenuItem),
     };
-
+*/
     /* Build top-level page */
     // clang-format off
     static MenuPage::MenuItem top_level_items[] = {
         {
-            .text = "Profile",
+            .text = ".Profile",
             .page = &_gamemode_options_page,
+            .smallIcon = bitmap_gamemode_small,
+            .largeIcon = bitmap_gamemode_large,
+            .usb = false,
         },
         {
-            .text = "USB Mode",
+            .text = ".USB Mode",
             .page = &_usb_backends_page,
+            .smallIcon = bitmap_usb_small,
+            .largeIcon = bitmap_usb_large,
+            .usb = true,
         },
         {
-            .text = "SOCD Mode",
-            .page = &socd_page,
-        },
-        {
-            .text = "RGB Brightness",
+            .text = "RGB.Brightness",
             .action = [](
                 IntegratedDisplay *display_backend,
                 ConfigMenu *menu,
@@ -117,9 +127,12 @@ DefaultConfigMenu::DefaultConfigMenu(
             ) {
                 display_backend->SetDisplayMode(DISPLAY_MODE_RGB_BRIGHTNESS);
             },
+            .smallIcon = bitmap_brightness_small,
+            .largeIcon = bitmap_brightness_large,
+            .usb = false,
         },
         {
-            .text = "Input Viewer",
+            .text = "Input.Viewer",
             .action = [](
                 IntegratedDisplay *display_backend,
                 ConfigMenu *menu,
@@ -133,41 +146,107 @@ DefaultConfigMenu::DefaultConfigMenu(
                 }
                 display_backend->SetDisplayMode(DISPLAY_MODE_VIEWER);
             },
+            .smallIcon = bitmap_input_small,
+            .largeIcon = bitmap_input_large,
+            .usb = false,
         },
         {
-            .text = "Save changes",
+            .text = "Connect to.Configurator",
             .action = [](
                 IntegratedDisplay *display_backend,
                 ConfigMenu *menu,
                 Config &config,
                 uint8_t key
             ) {
-                persistence.SaveConfig(config);
-                reboot_firmware();
+                display_backend->Clear();
+                Adafruit_GFX *display = &display_backend->_display;
+                display->fillScreen(0);
+                display->setCursor(2, 11);
+                display->print("Configurator Mode");
+
+                display->setCursor(2, 50);
+                display->print("Please visit [URL]");
+                display->setCursor(2, 61);
+                display->print("to connect");
+                //whatever
+
+                for(size_t i = 0; i < config.communication_backend_configs_count; i++) {
+                    if(config.communication_backend_configs[i].backend_id == COMMS_BACKEND_CONFIGURATOR) {
+                        //TODO: maybe use another byte so I don't have to deal with this
+                        //rp2040.idleOtherCore();
+                        tud_disconnect();
+                        watchdog_hw->scratch[0] = i + 1;
+                        display_backend->UpdateDisplay();
+                        reboot_firmware();
+                    }
+                }
             },
+            .smallIcon = bitmap_config_small,
+            .largeIcon = bitmap_config_large,
+            .usb = true,
         },
         {
-            .text = "Discard changes",
+            .text = "Manual FW.Update",
             .action = [](
                 IntegratedDisplay *display_backend,
                 ConfigMenu *menu,
                 Config &config,
                 uint8_t key
             ) {
-                reboot_firmware();
-            },
-        },
-        {
-            .text = "Firmware update",
-            .action = [](
-                IntegratedDisplay *display_backend,
-                ConfigMenu *menu,
-                Config &config,
-                uint8_t key
-            ) {
+                display_backend->Clear();
+                Adafruit_GFX *display = &display_backend->_display;
+                
+                // Draw update splash image (128x64 mono)
+                display->drawBitmap(0, 0, Bitmap_Update, 128, 64, 1);
+                display_backend->UpdateDisplay();
+
+                CRGB *ledArray = FastLED.leds();
+                for(int i = 0; i < 76; i++) {
+                    ledArray[i] = bootloaderRGB[i];
+                }
+                FastLED.show();
+
                 reboot_bootloader();
-            }
-        }
+            },
+            .smallIcon = bitmap_firmware_small,
+            .largeIcon = bitmap_firmware_large,
+            .usb = true,
+        },
+        {
+            .text = "Gaming.(coming soon)",
+            .action = [](
+                IntegratedDisplay *display_backend,
+                ConfigMenu *menu,
+                Config &config,
+                uint8_t key
+            ) {
+                /*
+                display_backend->Clear();
+                display_backend->UpdateDisplay();
+                display_backend->SetDisplayMode(DISPLAY_MODE_ABOUT);
+                */
+            },
+            .smallIcon = bitmap_gameing_small,
+            .largeIcon = bitmap_gameing_large,
+            .usb = false,
+        },
+        {
+            .text = "About",
+            .action = [](
+                IntegratedDisplay *display_backend,
+                ConfigMenu *menu,
+                Config &config,
+                uint8_t key
+            ) {
+                display_backend->Clear();
+                display_backend->UpdateDisplay();
+                display_backend->SetDisplayMode(DISPLAY_MODE_ABOUT);
+            },
+
+            .smallIcon = bitmap_about_small,
+            .largeIcon = bitmap_about_large,
+            .usb = false,
+        },
     };
     // clang-format on
 
@@ -179,7 +258,7 @@ DefaultConfigMenu::DefaultConfigMenu(
 
     _usb_backends_page.parent = _top_level_page;
     _gamemode_options_page.parent = _top_level_page;
-    socd_page.parent = _top_level_page;
+    //socd_page.parent = _top_level_page;
 
     // Set initial page.
     _current_menu_page = _top_level_page;
@@ -200,17 +279,36 @@ void DefaultConfigMenu::SetDefaultMode(
         return;
     }
 
-    // Overwrite default game mode for all backend configs.
-    for (size_t i = 0; i < config.communication_backend_configs_count; i++) {
-        config.communication_backend_configs[i].default_mode_config = mode_config_index + 1;
+    uint8_t forced_backend_index = 0;
+    //dinput is the only valid usb backend for keyboard modes
+    if(config.game_mode_configs[mode_config_index].keyboard_mode_config != 0) {
+        //find dinput backend
+        for(size_t i = 0; i < config.communication_backend_configs_count; i++) {
+            if(config.communication_backend_configs[i].backend_id == COMMS_BACKEND_DINPUT) {
+                forced_backend_index = i + 1;
+                break;
+            }
+        }
     }
 
-    // Update mode for all backends.
-    DefaultConfigMenu *config_menu = (DefaultConfigMenu *)menu;
-    for (size_t i = 0; i < config_menu->_backends_count; i++) {
-        set_mode(config_menu->_backends[i], config.game_mode_configs[mode_config_index], config);
+    tud_disconnect();
+    //only required in xinput mode...for now
+    delay(500);
+
+    watchdog_hw->scratch[0] = forced_backend_index;
+    watchdog_hw->scratch[1] = mode_config_index + 1;
+    delay(30);
+    reboot_firmware();
+}
+
+//18 len, as defined in the protobuf
+bool sameName(char* name1, char* name2) {
+    for(size_t i = 0; i < 18; i++) {
+        if(name1[i] != name2[i]) {
+            return false;
+        }
     }
-    set_mode(display_backend, config.game_mode_configs[mode_config_index], config);
+    return true;
 }
 
 void DefaultConfigMenu::SetUsbBackend(
@@ -223,9 +321,20 @@ void DefaultConfigMenu::SetUsbBackend(
         backend_config_index >= config.communication_backend_configs_count) {
         return;
     }
-    // Set backend in watchdog SCRATCH0 register and reboot.
-    watchdog_hw->scratch[0] = backend_config_index + 1;
-    reboot_firmware();
+
+    char* name = display_backend->CurrentGameMode()->GetConfig()->name;
+
+    for(size_t i = 0; i < config.game_mode_configs_count; i++) {
+        if(sameName(name, config.game_mode_configs[i].name)) {
+            tud_disconnect();
+            delay(500);
+            watchdog_hw->scratch[1] = i + 1;
+            watchdog_hw->scratch[0] = backend_config_index + 1;
+            delay(30);
+            reboot_firmware();
+        }
+    }
+
 }
 
 void DefaultConfigMenu::SetSocdType(
@@ -234,6 +343,8 @@ void DefaultConfigMenu::SetSocdType(
     Config &config,
     uint8_t socd_type
 ) {
+    return;
+    /*
     if (socd_type <= SOCD_UNSPECIFIED || socd_type > _SocdType_MAX) {
         return;
     }
@@ -245,4 +356,5 @@ void DefaultConfigMenu::SetSocdType(
             mode_config->socd_pairs[i].socd_type = (SocdType)socd_type;
         }
     }
+    */
 }

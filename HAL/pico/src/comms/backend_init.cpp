@@ -14,6 +14,8 @@
 #include "core/mode_selection.hpp"
 #include "core/pinout.hpp"
 
+#include "core/Persistence.hpp"
+
 #include <TUGamepad.hpp>
 #include <TUKeyboard.hpp>
 #include <config.pb.h>
@@ -42,8 +44,10 @@ size_t initialize_backends(
 
     CommunicationBackend *primary_backend = nullptr;
 
+    bool failed_to_detect = false;
+
     /* If no match found for button hold, use console/USB detection to select backend instead. */
-    if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED) {
+    if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED || watchdog_caused_reboot()) {
         /* Must check default USB backend here and initialize it before console detection, so that
          * we can respond correctly to device descriptor requests from host. */
         CommunicationBackendConfig usb_backend_config;
@@ -58,8 +62,13 @@ size_t initialize_backends(
             pinout
         );
         CommunicationBackendId detected_backend_id = COMMS_BACKEND_UNSPECIFIED;
+
         detected_backend_id = detect_console(pinout);
-        if (detected_backend_id == COMMS_BACKEND_XINPUT) {
+
+        if (detected_backend_id == COMMS_BACKEND_XINPUT || 
+            detected_backend_id == COMMS_BACKEND_DINPUT ||
+            detected_backend_id == COMMS_BACKEND_NINTENDO_SWITCH ||
+            detected_backend_id == COMMS_BACKEND_CONFIGURATOR) {
             backend_config = usb_backend_config;
         } else {
             backend_config = backend_config_from_id(
@@ -68,10 +77,12 @@ size_t initialize_backends(
                 config.communication_backend_configs_count
             );
         }
-    }
-    if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED &&
-        config.default_backend_config > 0) {
-        backend_config = config.communication_backend_configs[config.default_backend_config - 1];
+        if(detected_backend_id == COMMS_BACKEND_UNSPECIFIED) {
+            failed_to_detect = true;
+        }
+    }     
+    if(watchdog_caused_reboot() && watchdog_hw->scratch[0] > 0) {//probably redundant
+        failed_to_detect = false;
     }
 
     init_primary_backend(
@@ -83,6 +94,30 @@ size_t initialize_backends(
         config,
         pinout
     );
+
+    //get backend config already happened so we just need to save that value
+    if (watchdog_caused_reboot()) {
+        // Check watchdog SCRATCH0 register for temporarily set backend config index.
+        uint8_t temp_backend_index = watchdog_hw->scratch[0];
+        uint8_t temp_gamemode_index = watchdog_hw->scratch[1];
+
+        if(temp_gamemode_index > 0) {
+            for(size_t i = 0; i < config.communication_backend_configs_count; i++) {
+                auto conf = config.communication_backend_configs[i];
+                if(conf.backend_id == backend_config.backend_id) {
+                    config.communication_backend_configs[i].default_mode_config = temp_gamemode_index;
+                    backend_config.default_mode_config = temp_gamemode_index;
+                }
+            }
+         }
+
+        if(backend_config.backend_id != COMMS_BACKEND_CONFIGURATOR) {
+            if(temp_backend_index > 0 || temp_gamemode_index > 0) {
+                persistence.SaveConfig(config);
+            }
+        }
+
+    }
 
     size_t backend_count = 1;
     if (init_secondary_backends != nullptr) {
@@ -105,6 +140,9 @@ size_t initialize_backends(
             set_mode(backends[i], mode_config, config);
         }
     }
+
+
+    if(failed_to_detect) return 0;
 
     return backend_count;
 }
@@ -159,6 +197,7 @@ void init_primary_backend(
                 pinout.nes_latch
             );
             break;
+        case COMMS_BACKEND_UNSPECIFIED:
         case COMMS_BACKEND_SNES:
             delete primary_backend;
             primary_backend = new SnesBackend(
@@ -170,7 +209,6 @@ void init_primary_backend(
                 pinout.nes_latch
             );
             break;
-        case COMMS_BACKEND_UNSPECIFIED: // Fall back to configurator if invalid backend selected.
         case COMMS_BACKEND_CONFIGURATOR:
         default:
             delete primary_backend;
@@ -216,22 +254,30 @@ backend_config_selector_t get_backend_config_default = [](
     const InputState &inputs,
     Config &config
 ) {
-    if (watchdog_caused_reboot()) {
+    if(!watchdog_caused_reboot()) {
+        backend_config = backend_config_from_buttons(
+            inputs,
+            config.communication_backend_configs,
+            config.communication_backend_configs_count
+        );
+    }
+    if (watchdog_caused_reboot() && backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED) {
         // Check watchdog SCRATCH0 register for temporarily set backend config index.
         uint8_t temp_backend_index = watchdog_hw->scratch[0];
         if (temp_backend_index > 0 &&
             temp_backend_index <= config.communication_backend_configs_count) {
             backend_config = config.communication_backend_configs[temp_backend_index - 1];
-            config.default_usb_backend_config = temp_backend_index;
-            return;
+            if(backend_config.backend_id == COMMS_BACKEND_DINPUT ||
+                backend_config.backend_id == COMMS_BACKEND_XINPUT ||
+                backend_config.backend_id == COMMS_BACKEND_NINTENDO_SWITCH ||
+                backend_config.backend_id == COMMS_BACKEND_CONFIGURATOR) {
+                config.default_usb_backend_config = temp_backend_index;
+            } else {
+                config.default_backend_config = temp_backend_index;
+            }
+            //return;
         }
     }
-
-    backend_config = backend_config_from_buttons(
-        inputs,
-        config.communication_backend_configs,
-        config.communication_backend_configs_count
-    );
 };
 
 /* Default is to get default USB backend from config. */

@@ -29,8 +29,8 @@ void SnesBackend::SendReport() {
     _report.b = _outputs.b;
     _report.x = _outputs.x;
     _report.y = _outputs.y;
-    _report.l = _outputs.buttonL || _outputs.triggerLDigital;
-    _report.r = _outputs.buttonR || _outputs.triggerRDigital;
+    _report.l = _outputs.buttonL;
+    _report.r = _outputs.buttonR;
     _report.select = _outputs.select;
     _report.start = _outputs.start;
     _report.dpad_left = _outputs.dpadLeft || _outputs.leftStickX < 128;

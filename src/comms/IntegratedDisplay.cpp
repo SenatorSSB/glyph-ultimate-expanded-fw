@@ -4,6 +4,10 @@
 #include "core/config_utils.hpp"
 #include "util/state_util.hpp"
 
+#include <config.pb.h>
+
+#define NA BTN_UNSPECIFIED
+
 IntegratedDisplay::IntegratedDisplay(
     InputState &inputs,
     Adafruit_GFX &display,
@@ -12,8 +16,7 @@ IntegratedDisplay::IntegratedDisplay(
     const DisplayControls controls,
     DisplayMode **display_modes,
     size_t display_modes_count
-)
-    : CommunicationBackend(inputs, nullptr, 0),
+) : CommunicationBackend(inputs, nullptr, 0),
       _display(display),
       _clear_display(clear_display),
       _update_display(update_display),
@@ -38,24 +41,46 @@ void IntegratedDisplay::SendReport() {
 
     _clear_display();
     active_mode->UpdateDisplay(this, _display);
-    _update_display();
+    _update_display();    
 
     // This is done *after* display update so any side effects of HandleControls are not shown
     // without active_mode also being up-to-date.
     HandleControls(active_mode);
 }
 
+void IntegratedDisplay::ShowSplashScreen(unsigned char* bmp) {
+    _display.drawBitmap(0, 0, bmp, 128, 64, 1);
+}
+
+
+
 void IntegratedDisplay::HandleControls(DisplayMode *active_mode) {
+    static bool mb1Enabled = true;
+    static bool mb4Enabled = true;
+
     if (!time_reached(_button_cooldown_end)) {
         return;
     }
 
+    //ScanInputs();
+
     for (uint8_t i = 0; i < controls_count; i++) {
         Button button = _controls_array[i];
         if (get_button(_inputs.buttons, button)) {
+            if(button == BTN_MB1) {
+                if(!mb1Enabled) continue;
+                mb1Enabled = false;
+            }
+            if(button == BTN_MB4) {
+                if(!mb4Enabled) continue;
+                mb4Enabled = false;
+            }
             _button_cooldown_end = make_timeout_time_ms(button_cooldown_ms);
             active_mode->HandleControls(this, _controls, button);
             return;
+        } else {
+            if(button == BTN_MB1) mb1Enabled = true;
+            if(button == BTN_MB4) mb4Enabled = true;
         }
     }
 }
@@ -63,6 +88,15 @@ void IntegratedDisplay::HandleControls(DisplayMode *active_mode) {
 void IntegratedDisplay::SetDisplayMode(DisplayModeId display_mode) {
     _display_mode = display_mode;
 }
+
+void IntegratedDisplay::Clear() {
+    _clear_display();
+}
+
+void IntegratedDisplay::UpdateDisplay() {
+    _update_display();
+}
+
 
 DisplayMode *IntegratedDisplay::GetActiveDisplayMode() {
     for (size_t i = 0; i < _display_modes_count; i++) {

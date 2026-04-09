@@ -11,7 +11,6 @@ class Ultimate2 : public ControllerMode {
 
   private:
     void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs);
-    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs);
-};
+    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);};
 
 #endif

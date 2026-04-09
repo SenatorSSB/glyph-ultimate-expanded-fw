@@ -8,51 +8,20 @@ jobs:
     permissions:
       contents: write
     env:
-      VERSION_REF: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
       PIO_ENV: ${{ matrix.env }}
       BIN_EXT: ${{ matrix.bin_ext }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - env: c53
+          - env: glyph_mk6
             bin_ext: uf2
-          - env: b0xx_r4
-            bin_ext: uf2
-          - env: glyph
-            bin_ext: uf2
-          - env: pico
-            bin_ext: uf2
-          - env: schism
-            bin_ext: uf2
-          - env: arduino_uno
-            bin_ext: hex
-          - env: arduino_nano
-            bin_ext: hex
-          - env: arduino_mega
-            bin_ext: hex
-          - env: arduino_leonardo
-            bin_ext: hex
-          - env: arduino_micro
-            bin_ext: hex
-          - env: b0xx_r1
-            bin_ext: hex
-          - env: b0xx_r2
-            bin_ext: hex
-          - env: gccmx
-            bin_ext: hex
-          - env: gccpcb1
-            bin_ext: hex
-          - env: gccpcb2
-            bin_ext: hex
-          - env: lbx
-            bin_ext: hex
-          - env: smashbox
-            bin_ext: hex
-
     steps:
     - name: Check out source code
       uses: actions/checkout@v4
+
+    - name: short sha
+      run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -66,7 +35,7 @@ jobs:
 
     - name: Set artifact filename environment variable
       run: |
-        echo "ARTIFACT_NAME=HayBox-${VERSION_REF}-${PIO_ENV}.${BIN_EXT}" >> "$GITHUB_ENV"
+        echo "ARTIFACT_NAME=Glyph-${SHA_SHORT}.${BIN_EXT}" >> "$GITHUB_ENV"
 
     - name: Set artifact path environment variable
       run: |
@@ -78,14 +47,16 @@ jobs:
         mkdir -p "$PIO_ENV"
         cp ".pio/build/${PIO_ENV}/firmware.${BIN_EXT}" "$ARTIFACT_PATH"
 
+    - name: nuke
+      run: |
+        mv glyph_nuker $PIO_ENV/glyph_nuker
+        cd $PIO_ENV
+        ls *.uf2 | xargs ./glyph_nuker
+        rm glyph_nuker
+
     - name: Publish ${{ matrix.env }} artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.ARTIFACT_NAME }}
-        path: ${{ env.ARTIFACT_PATH }}
-
-    - name: Upload binaries to release
-      uses: softprops/action-gh-release@v1
-      if: github.ref_type == 'tag'
-      with:
-        files: ${{ env.ARTIFACT_PATH }}
+        name: Glyph_FW
+        path: ${{ env.PIO_ENV }}
+    

@@ -27,6 +27,7 @@ void ProjectM::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     if (_options.true_z_press || inputs.lt1) {
         outputs.buttonR = inputs.rf3;
     } else {
+        outputs.buttonR = false;
         outputs.a = inputs.rt1 || inputs.rf3;
     }
     if (inputs.nunchuk_connected) {
@@ -35,7 +36,20 @@ void ProjectM::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
         outputs.triggerLDigital = inputs.lf4;
     }
     outputs.triggerRDigital = inputs.rf5;
-    outputs.start = inputs.mb1;
+
+    outputs.start = inputs.mb7;
+    outputs.select = inputs.mb6;
+    outputs.home = inputs.mb5;
+    outputs.capture = inputs.mb4;
+    /*
+    outputs.leftStickClick = inputs.mb3;
+    outputs.rightStickClick = inputs.mb2;
+    outputs.buttonL = inputs.rf9;
+    */
+    outputs.dpadUp = 0;
+    outputs.dpadDown = 0;
+    outputs.dpadLeft = 0;
+    outputs.dpadRight = 0;
 
     // Activate D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
     if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
@@ -47,15 +61,26 @@ void ProjectM::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 
     // Don't override dpad up if it's already pressed using the MX + MY dpad
     // layer.
-    outputs.dpadUp = outputs.dpadUp || inputs.rf8;
+    outputs.dpadUp |= inputs.rf8;
+    outputs.dpadDown |= inputs.rf7;
+    outputs.dpadLeft |= inputs.lf8;
+    outputs.dpadRight |= inputs.lf6;
 
-    if (inputs.mb3)
-        outputs.dpadLeft = true;
-    if (inputs.mb2)
-        outputs.dpadRight = true;
+    outputs.leftStickLeft = inputs.lf3;
+    outputs.leftStickRight = inputs.lf1;
+    outputs.leftStickDown = inputs.lf2;
+    outputs.leftStickUp = inputs.rf4;
+
+    outputs.rightStickLeft = inputs.rt3;
+    outputs.rightStickRight = inputs.rt5;
+    outputs.rightStickDown = inputs.rt2;
+    outputs.rightStickUp = inputs.rt4;
+
+    outputs.modX = inputs.lt1;
+    outputs.modY = inputs.lt2;
 }
 
-void ProjectM::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void ProjectM::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     UpdateDirections(
         inputs.lf3, // Left
         inputs.lf1, // Right
@@ -71,7 +96,7 @@ void ProjectM::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         outputs
     );
 
-    bool shield_button_pressed = inputs.lf4 || inputs.rf7;
+    bool shield_button_pressed = inputs.lf4 || inputs.rf5;
 
     if (directions.diagonal) {
         if (directions.y == 1) {
@@ -199,22 +224,28 @@ void ProjectM::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         outputs.leftStickX = 128 + (directions.x * 100);
     }
 
-    if (inputs.rf7) {
-        outputs.triggerRAnalog = 49;
+    uint8_t triggerLAnalog = 0;
+    uint8_t triggerRAnalog = 0;
+
+    if (inputs.rf9) {
+        triggerRAnalog = 49;
     }
 
     // Send lightshield input if we are using Z = lightshield + A macro.
     if (inputs.rf3 && !(inputs.lt1 || _options.true_z_press)) {
-        outputs.triggerRAnalog = 49;
+        triggerRAnalog = 49;
     }
 
     if (outputs.triggerLDigital) {
-        outputs.triggerLAnalog = 140;
+       triggerLAnalog = 140;
     }
 
     if (outputs.triggerRDigital) {
-        outputs.triggerRAnalog = 140;
+       triggerRAnalog = 140;
     }
+
+    outputs.triggerLAnalog = triggerLAnalog;
+    outputs.triggerRAnalog = triggerRAnalog;
 
     // Shut off C-stick when using D-Pad layer.
     if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {

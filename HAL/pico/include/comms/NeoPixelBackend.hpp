@@ -3,6 +3,8 @@
 
 #include "core/CommunicationBackend.hpp"
 
+#include "rgb/ButtonLocations.hpp"
+
 #include <FastLED.h>
 #include <config.pb.h>
 #include <time.h>
@@ -48,24 +50,136 @@ template <uint8_t data_pin, int led_count> class NeoPixelBackend : public Commun
         }
         _config = &_rgb_configs[rgb_config_id - 1];
 
-        // Build new mapping array to give O(n) lookup later.
-        for (size_t i = 0; i < _config->button_colors_count; i++) {
-            ButtonToColorMapping mapping = _config->button_colors[i];
-            _button_colors[max(0, mapping.button - 1)] = mapping.color;
+        RgbAnimationId id = _config->animation;
+
+        switch(id) {
+            case RGB_ANIM_BREATHE:
+                //not a real thing yet lol
+                _config = nullptr;
+                return;
+            case RGB_ANIM_REACTIVE_SIMPLE:
+                //not a real thing yet lol
+                _config = nullptr;
+                return;
+            case RGB_ANIM_STATIC:
+                // Build new mapping array to give O(n) lookup later.
+                for (size_t i = 0; i < _config->button_colors_count; i++) {
+                    ButtonToColorMapping mapping = _config->button_colors[i];
+                    _button_colors[max(0, mapping.button - 1)] = mapping.color;
+                }
+                break;
+            case RGB_ANIM_RAINBOW_SHIFT:
+                for (size_t i = 0; i < 36; i++) {
+                    ButtonToColorMappingHSV mapping = RGB_Wave_StarterHSV[i];
+                    mapping.color = CHSV(0, 255, 255);
+                    bool mappable = false;
+                    for(size_t j = 0; j < _config->button_colors_count; j++) {
+                        if(_config->button_colors[j].button == mapping.button) {
+                            if(_config->button_colors[j].color < 0x00FFFFFF) {
+                                mappable = false;
+                            } else {
+                                mappable = true;
+                            }
+                        } 
+                    }
+                    if(!mappable) {
+                        mapping.color.v = 0;
+                        mapping.color.s = 0;
+                    }
+                    _ledsHSV[max(0, mapping.button - 1)] = mapping.color;
+                }
+                break;
+            case RGB_ANIM_RAINBOW_XWAVE_LEFT:
+                for (size_t i = 0; i < 36; i++) {
+                    ButtonToColorMappingHSV mapping = RGB_Wave_StarterHSV[i];
+                    bool mappable = false;
+                    for(size_t j = 0; j < _config->button_colors_count; j++) {
+                        if(_config->button_colors[j].button == mapping.button) {
+                            if(_config->button_colors[j].color < 0x00FFFFFF) {
+                                mappable = false;
+                            } else {
+                                mappable = true;
+                            }
+                        } 
+                    }
+                    if(!mappable) {
+                        mapping.color.v = 0;
+                        mapping.color.s = 0;
+                    }
+                    _ledsHSV[max(0, mapping.button - 1)] = mapping.color;
+                }
+                break;
+            default:
+                _config = nullptr;
+                return;
         }
+    }
+
+    //For use before going into modes like ConfigMode and Manual FW mode
+    //where you can't/won't be calling SendReport()
+    virtual void ManualSendReport(CRGB led_map[led_count], uint8_t brightness) {
+        for(int i = 0; i < led_count; i++) {
+            _leds[i] = led_map[i];
+        }
+        FastLED.setBrightness(brightness);
+        FastLED.show();
     }
 
     virtual void SendReport() {
         // Use timeout to avoid refreshing too fast which results in FastLED library blocking.
+        /*
         if (!time_reached(_refresh_timeout)) {
             return;
         }
         _refresh_timeout = make_timeout_time_ms(refresh_interval_ms);
+        */
 
-        for (int i = 0; i < led_count; i++) {
-            Button button = this->_button_mappings[i];
-            _leds[i] = _config != nullptr ? _button_colors[max(0, button - 1)] : 0;
+        static absolute_time_t prevTime = get_absolute_time();
+        absolute_time_t time = get_absolute_time();
+        #ifdef NDEBUG
+            absolute_time_t diff = abs(absolute_time_diff_us(prevTime, time));
+        #else
+            int64_t diff = abs(absolute_time_diff_us(prevTime, time));
+        #endif
+        prevTime = time;
+        float interval = 0.08;
+        uint8_t deltaHue = (diff/1000) * (interval * _config->speed);
+
+        if(_config == nullptr) {
+            for (int i = 0; i < led_count; i++) {
+                Button button = this->_button_mappings[i];
+                _leds[i] = 0;
+            }
+            FastLED.setBrightness(0);
+            FastLED.show();
+            return;
         }
+
+        RgbAnimationId id = _config->animation;
+
+        if(id == RGB_ANIM_STATIC) {
+            for (int i = 0; i < led_count; i++) {
+                Button button = this->_button_mappings[i];
+                _leds[i] = _button_colors[max(0, button - 1)];
+            }
+        } else if(id == RGB_ANIM_RAINBOW_XWAVE_LEFT) {
+            for (int i = 0; i < led_count; i++) {
+                _ledsHSV[i].hue += deltaHue;
+            }
+            for (int i = 0; i < led_count; i++) {
+                Button button = this->_button_mappings[i];
+                _leds[i] = _ledsHSV[max(0, button - 1)];
+            }
+        } else if(id == RGB_ANIM_RAINBOW_SHIFT) {
+            for (int i = 0; i < led_count; i++) {
+                _ledsHSV[i].hue += deltaHue / 2;
+            }
+            for (int i = 0; i < led_count; i++) {
+                Button button = this->_button_mappings[i];
+                _leds[i] = _ledsHSV[max(0, button - 1)];
+            }
+        } 
+
         FastLED.setBrightness(_brightness);
         FastLED.show();
     }
@@ -82,8 +196,13 @@ template <uint8_t data_pin, int led_count> class NeoPixelBackend : public Commun
     const uint8_t &_brightness;
 
     CRGB _leds[led_count];
+    CHSV _ledsHSV[led_count];
     uint32_t _button_colors[button_colors_count];
-    absolute_time_t _refresh_timeout = 0;
+    #ifdef NDEBUG
+        absolute_time_t _refresh_timeout = 0;
+    #else
+        absolute_time_t _refresh_timeout = {._private_us_since_boot = 0};
+    #endif
 };
 
 #endif

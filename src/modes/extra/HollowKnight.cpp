@@ -20,7 +20,7 @@ void HollowKnight::UpdateDigitalOutputs(const InputState &inputs, OutputState &o
     outputs.start = inputs.mb1; // Pause
 }
 
-void HollowKnight::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void HollowKnight::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     UpdateDirections(
         inputs.lf3,
         inputs.lf1,

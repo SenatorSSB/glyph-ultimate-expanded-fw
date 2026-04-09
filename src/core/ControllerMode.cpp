@@ -5,14 +5,14 @@ ControllerMode::ControllerMode() : InputMode() {
     ResetDirections();
 }
 
-void ControllerMode::UpdateOutputs(const InputState &inputs, OutputState &outputs) {
+void ControllerMode::UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     // Create a copy of the input state here so remapping can be many-to-one (many physical buttons
     // to one activated button).
     InputState remapped_inputs = inputs;
     HandleRemap(inputs, remapped_inputs);
     HandleSocd(remapped_inputs);
     UpdateDigitalOutputs(remapped_inputs, outputs);
-    UpdateAnalogOutputs(remapped_inputs, outputs);
+    UpdateAnalogOutputs(remapped_inputs, outputs, backend_id);
 }
 
 void ControllerMode::ResetDirections() {

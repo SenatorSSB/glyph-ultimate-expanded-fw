@@ -1,5 +1,6 @@
 /* Ultimate profile by Taker */
 #include "modes/Ultimate.hpp"
+#include <config.pb.h>
 
 #define ANALOG_STICK_MIN 28
 #define ANALOG_STICK_NEUTRAL 128
@@ -12,14 +13,24 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.b = inputs.rf1;
     outputs.x = inputs.rf2;
     outputs.y = inputs.rf6;
-    outputs.buttonL = inputs.rf7;
-    outputs.buttonR = inputs.rf3 || inputs.rf8;
+    //outputs.buttonL = inputs.rf7;
+    outputs.buttonR = inputs.rf3;
     outputs.triggerLDigital = inputs.lf4;
     outputs.triggerRDigital = inputs.rf5;
-    outputs.start = inputs.mb1;
-    outputs.select = inputs.mb3;
-    outputs.home = inputs.mb2;
 
+    outputs.start = inputs.mb7;
+    outputs.select = inputs.mb6;
+    outputs.home = inputs.mb5;
+    outputs.capture = inputs.mb4;
+    /*
+    outputs.leftStickClick = inputs.mb3;
+    outputs.rightStickClick = inputs.mb2;
+    outputs.buttonL = inputs.rf9;
+    */
+    outputs.dpadUp = 0;
+    outputs.dpadDown = 0;
+    outputs.dpadLeft = 0;
+    outputs.dpadRight = 0;
     // Turn on D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
     if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
         outputs.dpadUp = inputs.rt4;
@@ -27,9 +38,27 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
         outputs.dpadLeft = inputs.rt3;
         outputs.dpadRight = inputs.rt5;
     }
+
+    outputs.dpadUp |= inputs.rf8;
+    outputs.dpadDown |= inputs.rf7;
+    outputs.dpadLeft |= inputs.lf8;
+    outputs.dpadRight |= inputs.lf6;
+
+    outputs.leftStickLeft = inputs.lf3;
+    outputs.leftStickRight = inputs.lf1;
+    outputs.leftStickDown = inputs.lf2;
+    outputs.leftStickUp = inputs.rf4;
+
+    outputs.rightStickLeft = inputs.rt3;
+    outputs.rightStickRight = inputs.rt5;
+    outputs.rightStickDown = inputs.rt2;
+    outputs.rightStickUp = inputs.rt4;
+
+    outputs.modX = inputs.lt1;
+    outputs.modY = inputs.lt2;
 }
 
-void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
+void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3, // Left
@@ -246,10 +275,15 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
 
     if (inputs.lf4) {
         outputs.triggerLAnalog = 140;
+    } else {
+        outputs.triggerLAnalog = 0;
+
     }
 
     if (inputs.rf5) {
         outputs.triggerRAnalog = 140;
+    } else {
+        outputs.triggerRAnalog = 0;
     }
 
     // Shut off C-stick when using D-Pad layer.

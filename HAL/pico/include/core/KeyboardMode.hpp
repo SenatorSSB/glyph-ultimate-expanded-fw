@@ -14,7 +14,7 @@ class KeyboardMode : public InputMode {
     ~KeyboardMode();
     void SendReport(const InputState &inputs);
 
-    void UpdateOutputs(const InputState &inputs, OutputState &outputs) {}
+    void UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {}
 
   protected:
     void Press(uint8_t keycode, bool press);

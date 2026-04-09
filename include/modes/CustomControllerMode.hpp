@@ -13,8 +13,7 @@ class CustomControllerMode : public ControllerMode {
 
   protected:
     void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs);
-    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs);
-
+    void UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);
   private:
     const CustomModeConfig *_custom_mode_config;
     uint64_t _modifier_button_masks[10];

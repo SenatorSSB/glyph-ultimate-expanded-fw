@@ -3,6 +3,7 @@
 
 #include "core/CommunicationBackend.hpp"
 #include "display/DisplayMode.hpp"
+#include "core/state.hpp"
 
 #include <Adafruit_GFX.h>
 #include <config.pb.h>
@@ -18,8 +19,9 @@ class IntegratedDisplay : public CommunicationBackend {
   public:
     static constexpr uint8_t controls_count = 4;
     static constexpr uint32_t button_cooldown_ms = 150;
-    static constexpr uint8_t font_width = 6;
-    static constexpr uint8_t font_height = 8;
+    static constexpr uint32_t input_timeout_ms = 30;
+    static constexpr uint8_t font_width = 4;
+    static constexpr uint8_t font_height = 7;
     static constexpr uint8_t default_color = 1;
 
     IntegratedDisplay(
@@ -33,16 +35,26 @@ class IntegratedDisplay : public CommunicationBackend {
     );
     ~IntegratedDisplay();
     virtual void SendReport();
+    void ShowSplashScreen(unsigned char* bmp);
     void SetDisplayMode(DisplayModeId display_mode);
+    void Clear();
+    void UpdateDisplay();
+    Adafruit_GFX &_display;
+    DisplayModeId CurrentDisplayMode() const { return _display_mode; };
 
   protected:
-    Adafruit_GFX &_display;
     void (*_clear_display)();
     void (*_update_display)();
     const DisplayControls _controls;
     const Button _controls_array[controls_count];
     DisplayModeId _display_mode = DISPLAY_MODE_VIEWER;
+
+    absolute_time_t _input_timeout_end = 0;
+    #ifdef NDEBUG
     absolute_time_t _button_cooldown_end = 0;
+    #else
+    absolute_time_t _button_cooldown_end = { ._private_us_since_boot = 0};
+    #endif
 
   private:
     DisplayMode **_display_modes;

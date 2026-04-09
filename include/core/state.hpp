@@ -87,6 +87,8 @@ typedef struct _InputState {
 
     int8_t nunchuk_x = 0;
     int8_t nunchuk_y = 0;
+    
+    uint64_t counter;
 } InputState;
 
 // State describing stick direction at the quadrant level.
@@ -125,6 +127,16 @@ typedef struct _OutputState {
             bool dpadRight : 1;
             bool leftStickClick : 1;
             bool rightStickClick : 1;
+            bool leftStickLeft : 1;
+            bool leftStickRight : 1;
+            bool leftStickUp : 1;
+            bool leftStickDown : 1;
+            bool rightStickLeft : 1;
+            bool rightStickRight : 1;
+            bool rightStickUp : 1;
+            bool rightStickDown : 1;
+            bool modX : 1;
+            bool modY : 1;
         };
     };
 
@@ -141,6 +153,7 @@ typedef struct _OutputState {
             uint8_t triggerRAnalog;
         };
     };
+
 } OutputState;
 
 #endif
