@@ -367,10 +367,10 @@ void MenuButtonHints::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &d
     display.print((int)(outputs.rightStickY - 128));
 
     display.setCursor(112, 26);
-    display.print((int)(outputs.triggerLAnalog));
+    display.print((int)(outputs.triggerRAnalog));
 
     display.setCursor(112, 34);
-    display.print((int)(outputs.triggerRAnalog));
+    display.print((int)(outputs.triggerLAnalog));
 
     //display.setCursor(0, 20);
     //const char *currently_pressed_button_text = CurrentlyPressedButtonText();
