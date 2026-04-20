@@ -64,11 +64,7 @@ void ConfiguratorBackend::SendReport() {
             HandleGetConfig();
             break;
         case CMD_SET_CONFIG:
-            if (HandleSetConfig()) {
-                watchdog_hw->scratch[0] = 0;
-                watchdog_hw->scratch[1] = 0;
-                reboot_firmware();
-            }
+            HandleSetConfig();
             break;
         case CMD_REBOOT_FIRMWARE:
             reboot_firmware();
