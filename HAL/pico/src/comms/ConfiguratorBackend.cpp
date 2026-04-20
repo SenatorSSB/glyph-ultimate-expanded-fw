@@ -22,7 +22,6 @@
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
 
-
 #include <pb_arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -65,14 +64,7 @@ void ConfiguratorBackend::SendReport() {
             HandleGetConfig();
             break;
         case CMD_SET_CONFIG:
-            rp2040.idleOtherCore();
-            if(HandleSetConfig()) {
-                rp2040.resumeOtherCore();
-                watchdog_hw->scratch[0] = 0;
-                watchdog_hw->scratch[1] = 0;
-                reboot_firmware();
-            }
-            rp2040.resumeOtherCore();
+            HandleSetConfig();
             break;
         case CMD_REBOOT_FIRMWARE:
             reboot_firmware();

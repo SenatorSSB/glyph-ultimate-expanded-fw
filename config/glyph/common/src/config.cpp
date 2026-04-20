@@ -237,8 +237,6 @@ void loop1() {
     }
 
     if(display_backend->CurrentDisplayMode() == DISPLAY_MODE_REMAPPER) {
-        //dummyloop();
-        while(1);
         return;
     }
 

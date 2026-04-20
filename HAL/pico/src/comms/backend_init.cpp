@@ -45,9 +45,11 @@ size_t initialize_backends(
     CommunicationBackend *primary_backend = nullptr;
 
     bool failed_to_detect = false;
+    bool has_watchdog_override =
+        watchdog_caused_reboot() && (watchdog_hw->scratch[0] > 0 || watchdog_hw->scratch[1] > 0);
 
     /* If no match found for button hold, use console/USB detection to select backend instead. */
-    if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED || watchdog_caused_reboot()) {
+    if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED || has_watchdog_override) {
         /* Must check default USB backend here and initialize it before console detection, so that
          * we can respond correctly to device descriptor requests from host. */
         CommunicationBackendConfig usb_backend_config;
@@ -81,7 +83,7 @@ size_t initialize_backends(
             failed_to_detect = true;
         }
     }     
-    if(watchdog_caused_reboot() && watchdog_hw->scratch[0] > 0) {//probably redundant
+    if(has_watchdog_override && watchdog_hw->scratch[0] > 0) {//probably redundant
         failed_to_detect = false;
     }
 
@@ -96,7 +98,7 @@ size_t initialize_backends(
     );
 
     //get backend config already happened so we just need to save that value
-    if (watchdog_caused_reboot()) {
+    if (has_watchdog_override) {
         // Check watchdog SCRATCH0 register for temporarily set backend config index.
         uint8_t temp_backend_index = watchdog_hw->scratch[0];
         uint8_t temp_gamemode_index = watchdog_hw->scratch[1];
@@ -254,14 +256,16 @@ backend_config_selector_t get_backend_config_default = [](
     const InputState &inputs,
     Config &config
 ) {
-    if(!watchdog_caused_reboot()) {
+    bool has_watchdog_override =
+        watchdog_caused_reboot() && (watchdog_hw->scratch[0] > 0 || watchdog_hw->scratch[1] > 0);
+    if(!has_watchdog_override) {
         backend_config = backend_config_from_buttons(
             inputs,
             config.communication_backend_configs,
             config.communication_backend_configs_count
         );
     }
-    if (watchdog_caused_reboot() && backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED) {
+    if (has_watchdog_override && backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED) {
         // Check watchdog SCRATCH0 register for temporarily set backend config index.
         uint8_t temp_backend_index = watchdog_hw->scratch[0];
         if (temp_backend_index > 0 &&
