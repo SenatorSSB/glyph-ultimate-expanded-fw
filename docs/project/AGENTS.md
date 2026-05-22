@@ -1,19 +1,24 @@
-# AGENTS
+# Project AGENTS
 
-This repository is the Glyph firmware and backend realization workstream for Senscope.
+This file is the legacy project-local companion to the repository root [AGENTS.md](/Users/rasmus.pekkarinen/Library/Mobile%20Documents/com~apple~CloudDocs/Smash/glyph-ultimate-expanded-fw/AGENTS.md).
 
-Scope boundaries:
+Use the root file as the primary operating contract.
 
-- Main Senscope semantic-source work lives elsewhere.
-- The no-smash / dataset semantic pipeline must not be modified here.
-- Firmware behavior changes require explicit scope approval.
-- This repo is for repo-local docs, build support, and realization-layer work.
+## What this file is for
 
-Operating rules:
+This directory historically held docs/setup guidance for the Glyph workstream. The active, broader rules now live in the repository root and in:
 
-- Use `./scripts/pio-local.sh` or `python -m platformio` for repo-local PlatformIO work.
-- Do not use `git reset`, `git clean`, `git stash`, `git revert`, or `git push --force`.
-- Final workflow is commit, push, stop, report.
-- Preferred baseline verification is `./scripts/pio-local.sh run -e glyph_mk6`.
+- [docs/project/AGENT_OPERATING_CONTRACT.md](/Users/rasmus.pekkarinen/Library/Mobile%20Documents/com~apple~CloudDocs/Smash/glyph-ultimate-expanded-fw/docs/project/AGENT_OPERATING_CONTRACT.md)
+- [docs/project/AGENT_STOP_CONDITIONS.md](/Users/rasmus.pekkarinen/Library/Mobile%20Documents/com~apple~CloudDocs/Smash/glyph-ultimate-expanded-fw/docs/project/AGENT_STOP_CONDITIONS.md)
+- [docs/project/GLYPH_WORKSTREAM_BOUNDARIES.md](/Users/rasmus.pekkarinen/Library/Mobile%20Documents/com~apple~CloudDocs/Smash/glyph-ultimate-expanded-fw/docs/project/GLYPH_WORKSTREAM_BOUNDARIES.md)
 
-If a task would cross from docs/setup into firmware behavior, stop and re-scope first.
+## Legacy guidance
+
+- Stay within docs/setup unless the active queue explicitly expands scope.
+- Use repo-local PlatformIO commands when working on firmware-related tasks.
+- Keep Senscope semantic authority separate from Glyph backend realization work.
+- Do not use destructive Git operations.
+
+## Compatibility note
+
+If this file and the root AGENTS file differ, follow the root file unless a task explicitly says otherwise.
