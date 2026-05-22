@@ -18,3 +18,8 @@ Behavioral themes to preserve as reference only:
 - analog shield behavior
 
 If the raw ESAM1 source files become available later, they should be stored under `docs/sources/raw/` and treated as reference artifacts only.
+
+Raw reference copy:
+
+- `docs/sources/raw/ESAM1.hpp`
+- `docs/sources/raw/ESAM1.cpp`

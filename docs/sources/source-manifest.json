@@ -24,18 +24,18 @@
     },
     {
       "key": "esam1_hpp",
-      "status": "missing",
-      "target_path": "docs/sources/raw/ESAM1.hpp"
+      "status": "copied_reference",
+      "local_path": "docs/sources/raw/ESAM1.hpp"
     },
     {
       "key": "esam1_cpp",
-      "status": "missing",
-      "target_path": "docs/sources/raw/ESAM1.cpp"
+      "status": "copied_reference",
+      "local_path": "docs/sources/raw/ESAM1.cpp"
     },
     {
       "key": "glyph_user_profiles_json",
-      "status": "missing",
-      "target_path": "docs/sources/raw/GlyphUserProfiles.json"
+      "status": "copied_reference",
+      "local_path": "docs/sources/raw/GlyphUserProfiles.json"
     }
   ]
 }
