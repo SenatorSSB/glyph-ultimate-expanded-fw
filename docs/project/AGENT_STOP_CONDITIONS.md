@@ -1,17 +1,75 @@
 # Agent Stop Conditions
 
-Stop immediately and report if any of the following occur:
+Agents must stop and ask the user if any listed condition occurs.
 
-- A requested change would alter firmware behavior without explicit scope.
-- A change would touch the no-smash / dataset semantic pipeline.
-- `./scripts/pio-local.sh run -e glyph_mk6` fails in a way that indicates an environment or dependency problem.
-- A source artifact is referenced but its provenance is unclear.
-- A task would require `git reset`, `git clean`, `git stash`, `git revert`, or `git push --force`.
-- Unexpected unrelated file changes appear and need interpretation before proceeding.
+## Source authority stop conditions
 
-When the work is complete, the final sequence is:
+Stop if:
 
-1. Commit.
-2. Push.
-3. Stop.
-4. Report what changed, what passed, and what remains missing.
+- backend behavior is undocumented;
+- source files contradict docs;
+- tests contradict source interpretation;
+- a capability is inferred but not confirmed;
+- behavior from another controller/backend would need to be assumed;
+- repository source is insufficient to support the claim.
+
+## Controller behavior stop conditions
+
+Stop if task requires deciding:
+
+- SOCD behavior;
+- priority ordering;
+- modifier fusion rules;
+- layer/mode interaction;
+- analog output scaling;
+- coordinate transformation;
+- USB/GC/protocol behavior;
+- push-to-device behavior;
+- export-file semantics;
+- firmware field meaning.
+
+unless the repo source/docs already make the answer explicit.
+
+## Senscope integration stop conditions
+
+Stop if task requires:
+
+- changing neutral Profile schema;
+- changing Senscope game semantic source authority;
+- selecting a Smash gameplay semantic source;
+- changing no-smash/no-strong-input behavior;
+- adding gameplay thresholds;
+- treating backend constraints as game semantics.
+
+## Git / repo safety stop conditions
+
+Stop if task appears to require:
+
+- `git reset`;
+- `git clean`;
+- `git stash`;
+- `git revert`;
+- force-push;
+- deleting source files;
+- broad unrelated rewrites;
+- dependency installation not justified by repo setup.
+
+## Test stop conditions
+
+Stop if:
+
+- targeted tests fail after reasonable local fixes;
+- test failures imply backend behavior changed;
+- expected outputs differ without source explanation;
+- broad tests are required but too expensive/unclear.
+
+## Export / push stop conditions
+
+Stop before:
+
+- implementing export file generation;
+- implementing push-to-device;
+- reverse-engineering private/encrypted formats;
+- claiming generated files are importable by a vendor tool.
+
+unless the task explicitly authorizes it and source support is clear.

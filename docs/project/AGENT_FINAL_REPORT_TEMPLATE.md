@@ -1,28 +1,58 @@
-# Final Report Template
+# Agent Final Report Template
 
-Use this shape when closing a batch:
+Agents must use this structure at the end of a task or batch.
 
-## Summary
+```text
+Summary:
+- One to five bullets describing what changed.
 
-- Branch:
-- Scope:
+Issues completed:
+- G1 — title
+- G2 — title
 
-## Files Created
+Files changed:
+- path/to/file
+- path/to/file
 
-- `path/to/file`
+Verification:
+- command: passed/failed/not run
+- command: passed/failed/not run
 
-## Verification
+Behavior changes:
+- none
+- or exact description
 
-- `git status --short`:
-- `./scripts/pio-local.sh --version`:
-- `./scripts/pio-local.sh run -e glyph_mk6`:
+Semantic changes:
+- none
+- or exact description
 
-## Source Materials
+Backend behavior claims:
+- none
+- source-backed: describe source
+- inferred: describe uncertainty
+- unknown: describe gap
 
-- Present:
-- Missing:
-- External references:
+Generated artifact changes:
+- none
+- or exact description with counts
 
-## Risks / Follow-up
+Stop conditions hit:
+- none
+- or exact condition and why stopped
 
-- 
+Follow-ups:
+- next recommended issue
+- risk or blocker
+```
+
+## Rules
+
+Do not claim tests passed unless they were run.
+
+Do not hide skipped verification.
+
+Do not say “no semantic changes” if any gameplay labels, mappings, thresholds, or source-authority classifications changed.
+
+Do not claim backend behavior without a source.
+
+Do not summarize generated count changes vaguely. Provide exact counts.
