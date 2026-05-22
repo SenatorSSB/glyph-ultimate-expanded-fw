@@ -71,13 +71,13 @@ docs/project/G3_NEUTRAL_PROFILE_INTEGRATION_BOUNDARY_DESIGN.md
 
 ## Current status
 
-Initial G1-G3 sequence complete. Stop for inspection before runtime implementation.
+G5 non-runtime capability model schema draft is complete. Stop for inspection before any G6 code/test scaffolding.
 
 ## Next candidate batches
 
 ### G4 - Review/normalize G1-G3 and active queue
 
-Status: this batch
+Status: complete and pushed
 
 Scope:
 
@@ -87,7 +87,7 @@ Scope:
 
 ### G5 - Non-runtime capability model schema draft
 
-Status: candidate
+Status: complete
 
 Scope:
 
@@ -127,7 +127,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G4, stop for inspection. Do not implement G5/G6/G7/G8 unless the user explicitly asks.
+After G5, stop for inspection. Do not implement G6/G7/G8 unless the user explicitly asks.
 
 ## Verification
 
