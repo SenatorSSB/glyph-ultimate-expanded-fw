@@ -71,7 +71,11 @@ docs/project/G3_NEUTRAL_PROFILE_INTEGRATION_BOUNDARY_DESIGN.md
 
 ## Current status
 
-G5 non-runtime capability model schema draft is complete. Stop for inspection before any G6 code/test scaffolding.
+G5 non-runtime capability model schema draft is complete.
+
+G6 evaluator contract tests with mock capabilities are now complete as a docs-only scaffold.
+
+Stop for inspection before any G7/G8 work.
 
 ## Next candidate batches
 
@@ -97,7 +101,7 @@ Scope:
 
 ### G6 - Evaluator contract tests using mock capabilities
 
-Status: candidate
+Status: complete (docs-only scaffold)
 
 Scope:
 
@@ -127,7 +131,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G5, stop for inspection. Do not implement G6/G7/G8 unless the user explicitly asks.
+After G6, stop for inspection. Do not implement G7/G8 unless the user explicitly asks.
 
 ## Verification
 
