@@ -1,0 +1,41 @@
+{
+  "repository": "glyph-ultimate-expanded-fw",
+  "generated_from": [
+    "repo inspection",
+    "docs/research/GLYPH_FINDINGS_2026-05-21.md",
+    "nearby reference copy at /Users/rasmus.pekkarinen/Library/Mobile Documents/com~apple~CloudDocs/Smash/senscope/docs/research/GLYPH_FINDINGS_2026-05-21.md"
+  ],
+  "sources": [
+    {
+      "key": "fw_glyph_upstream",
+      "status": "external_reference",
+      "reference": "https://github.com/LimitLabs/FW-Glyph"
+    },
+    {
+      "key": "haybox_proto",
+      "status": "external_reference",
+      "reference": "https://github.com/LimitLabs/HayBox-proto"
+    },
+    {
+      "key": "glyph_findings_doc",
+      "status": "copied_reference",
+      "local_path": "docs/research/GLYPH_FINDINGS_2026-05-21.md",
+      "external_reference": "/Users/rasmus.pekkarinen/Library/Mobile Documents/com~apple~CloudDocs/Smash/senscope/docs/research/GLYPH_FINDINGS_2026-05-21.md"
+    },
+    {
+      "key": "esam1_hpp",
+      "status": "copied_reference",
+      "local_path": "docs/sources/raw/ESAM1.hpp"
+    },
+    {
+      "key": "esam1_cpp",
+      "status": "copied_reference",
+      "local_path": "docs/sources/raw/ESAM1.cpp"
+    },
+    {
+      "key": "glyph_user_profiles_json",
+      "status": "copied_reference",
+      "local_path": "docs/sources/raw/GlyphUserProfiles.json"
+    }
+  ]
+}
