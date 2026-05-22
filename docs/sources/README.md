@@ -11,4 +11,7 @@ Status values used in `source-manifest.json`:
 
 Raw reference files, when available, should live in `docs/sources/raw/`.
 
-Current local source artifacts named by the task were not present in this repo or the nearby working directory, so they are recorded as missing in the manifest.
+Current local source artifacts named by the task are present under `docs/sources/raw/`:
+- `ESAM1.cpp`
+- `ESAM1.hpp`
+- `GlyphUserProfiles.json`
