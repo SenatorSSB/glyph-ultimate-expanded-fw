@@ -119,7 +119,19 @@ git status
 git diff --stat
 ```
 
-If code is touched, inspect package files and run targeted repo-native tests.
+If code is touched or build output is relevant, inspect package files and verify wrappers before relying on them.
+
+Use:
+
+```bash
+test -x ./scripts/pio-local.sh
+test -x ./scripts/build-glyph-mk6-quiet.sh
+./scripts/build-glyph-mk6-quiet.sh
+```
+
+Use `./scripts/pio-local.sh run -e glyph_mk6` only when debugging full build output.
+
+Do not paste full successful PlatformIO logs into final reports. On failure, report only the final 80 lines unless the user asks for more.
 
 ## Final report
 

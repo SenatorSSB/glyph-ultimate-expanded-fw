@@ -9,8 +9,9 @@ Use [docs/project/CODEX_CLOUD_WORKFLOW.md](/Users/rasmus.pekkarinen/Library/Mobi
 - Confirm work is on `docs/senscope-glyph-baseline` unless instructed otherwise.
 - Inspect repo status before editing.
 - Prefer docs/setup work unless the active queue expands scope.
-- Use repo-local PlatformIO via `./scripts/pio-local.sh` for firmware-adjacent tasks.
-- Prefer the baseline verification command `./scripts/pio-local.sh run -e glyph_mk6` when that workflow is relevant.
+- Verify `./scripts/pio-local.sh` and `./scripts/build-glyph-mk6-quiet.sh` are executable before relying on them.
+- Use `./scripts/build-glyph-mk6-quiet.sh` for firmware/build-affecting tasks.
+- Use `./scripts/pio-local.sh run -e glyph_mk6` only when debugging full build output.
 - Record source provenance instead of inventing missing artifacts.
 - Commit, push, stop, and report when the branch policy is clear.
 

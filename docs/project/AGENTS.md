@@ -15,7 +15,8 @@ This directory historically held docs/setup guidance for the Glyph workstream. T
 ## Legacy guidance
 
 - Stay within docs/setup unless the active queue explicitly expands scope.
-- Use repo-local PlatformIO commands when working on firmware-related tasks.
+- Use `./scripts/build-glyph-mk6-quiet.sh` for firmware/build-affecting tasks.
+- Use `./scripts/pio-local.sh run -e glyph_mk6` only when debugging full build output.
 - Keep Senscope semantic authority separate from Glyph backend realization work.
 - Do not use destructive Git operations.
 

@@ -6,10 +6,17 @@ Use these templates when launching Codex agents in this repo.
 
 ```text
 Command policy:
+  - Verify ./scripts/pio-local.sh and ./scripts/build-glyph-mk6-quiet.sh are executable before relying on them.
+  - For docs-only tasks, use git status and git diff --stat.
+  - For firmware/build-affecting tasks, use ./scripts/build-glyph-mk6-quiet.sh.
+  - Use ./scripts/pio-local.sh run -e glyph_mk6 only when debugging full build output.
+  - Do not paste full successful PlatformIO logs into final reports.
+  - On build failure, report only the final 80 log lines unless the user asks for more.
   - Use repo-native commands after inspecting package files.
   - Do not assume rtk exists.
   - Do not assume .venv exists.
   - Do not assume semble exists.
+  - Cloud environments may not have .venv; local environments may have .venv, but scripts must fall back safely.
   - If a prompt mentions unavailable tools, use safe direct equivalents and report fallback.
   - Use python3 only if needed and available.
   - If Python dependencies are missing, stop and report the missing dependency.

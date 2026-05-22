@@ -99,12 +99,39 @@ Do not merge into protected/default branches unless explicitly instructed.
 
 Command usage must support local and cloud environments.
 
+- Before relying on `./scripts/pio-local.sh` or `./scripts/build-glyph-mk6-quiet.sh`, verify they exist and are executable:
+
+```bash
+test -x ./scripts/pio-local.sh
+test -x ./scripts/build-glyph-mk6-quiet.sh
+```
+
 - Do not assume `rtk` exists.
 - Do not assume `.venv` exists.
 - Do not assume `semble` exists.
+- Cloud environments may not have `.venv`; local environments may have `.venv`, but scripts must fall back safely.
 - Use repo-native commands after inspecting package files.
 - Prefer safe direct commands if wrappers are unavailable.
 - Report fallback when using direct equivalents.
+
+## Command policy
+
+- For docs-only tasks, use:
+
+```bash
+git status
+git diff --stat
+```
+
+- For firmware/build-affecting tasks, use:
+
+```bash
+./scripts/build-glyph-mk6-quiet.sh
+```
+
+- Use `./scripts/pio-local.sh run -e glyph_mk6` only when debugging full build output.
+- Do not paste full successful PlatformIO logs into final reports.
+- On build failure, report only the final 80 log lines unless the user asks for more.
 
 Safe baseline commands:
 

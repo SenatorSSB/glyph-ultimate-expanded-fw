@@ -52,6 +52,17 @@ Do not invent controller behavior.
 Do not add gameplay semantics.
 ```
 
+## Command-policy check
+
+Before depending on the build wrappers, verify they are present and executable:
+
+```bash
+test -x ./scripts/pio-local.sh
+test -x ./scripts/build-glyph-mk6-quiet.sh
+```
+
+Cloud environments may not have `.venv`; local environments may have `.venv`, but scripts must fall back safely. Do not assume `rtk` or `semble` exists in cloud environments.
+
 ## Approval policy
 
 Approve:

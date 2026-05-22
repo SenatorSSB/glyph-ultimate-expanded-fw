@@ -89,11 +89,35 @@ If branch policy is unclear, stop and report.
 
 Support both local and cloud environments.
 
+- Verify wrappers exist and are executable before relying on them:
+
+```bash
+test -x ./scripts/pio-local.sh
+test -x ./scripts/build-glyph-mk6-quiet.sh
+```
+
 - Use plain/direct commands when tool wrappers are unavailable.
+- For docs-only tasks, use:
+
+```bash
+git status
+git diff --stat
+```
+
+- For firmware/build-affecting tasks, use:
+
+```bash
+./scripts/build-glyph-mk6-quiet.sh
+```
+
+- Use `./scripts/pio-local.sh run -e glyph_mk6` only when debugging full build output.
+- Do not paste full successful PlatformIO logs into final reports.
+- On build failure, report only the final 80 log lines unless the user asks for more.
 - Use repo-native package/test/build commands after inspecting package files.
 - Do not assume `rtk` exists in this repo.
 - Do not assume `.venv` exists.
 - Do not assume `semble` exists.
+- Cloud environments may not have `.venv`; local environments may have `.venv`, but scripts must fall back safely.
 - If a prompt mentions a tool that is unavailable, use a safe direct equivalent and report the fallback.
 - If Python dependencies are missing, stop and report the missing dependency instead of inventing environment setup.
 
