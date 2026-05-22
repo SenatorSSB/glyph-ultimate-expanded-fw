@@ -35,11 +35,13 @@ Do not add export/push workflows.
 
 Do not claim undocumented firmware behavior.
 
-## First implementation sequence
+## Completed sequence
 
-### G1 — Glyph repo inventory and architecture map
+G1, G2, and G3 are complete and pushed.
 
-Inspect the repo structure, docs, source files, tests, and any existing backend/firmware/configuration modules.
+### G1 - Glyph repo inventory and architecture map
+
+Status: complete and pushed
 
 Deliverable:
 
@@ -47,21 +49,9 @@ Deliverable:
 docs/project/G1_GLYPH_REPO_INVENTORY_AND_ARCHITECTURE_MAP.md
 ```
 
-The document should include:
+### G2 - Controller capability surface extraction
 
-- top-level repo structure;
-- important source directories;
-- important docs/tests;
-- build/test commands discovered;
-- likely firmware/backend modules;
-- likely configuration/schema modules;
-- likely integration-relevant files;
-- unknowns and source-authority gaps;
-- recommended next investigation targets.
-
-### G2 — Controller capability surface extraction
-
-Extract documented/source-backed controller capabilities.
+Status: complete and pushed
 
 Deliverable:
 
@@ -69,23 +59,9 @@ Deliverable:
 docs/project/G2_CONTROLLER_CAPABILITY_SURFACE_EXTRACTION.md
 ```
 
-The document should classify capabilities such as:
+### G3 - Neutral profile integration boundary design
 
-- input buttons;
-- modifiers;
-- layers/modes;
-- analog coordinate/output representation;
-- SOCD handling if sourced;
-- priority/fusion behavior if sourced;
-- profile/config format if sourced;
-- transport/output behavior if sourced;
-- unsupported/unknown areas.
-
-Do not infer unsupported behavior.
-
-### G3 — Neutral profile integration boundary design
-
-Design how Senscope neutral profile concepts could integrate with this backend.
+Status: complete and pushed
 
 Deliverable:
 
@@ -93,22 +69,65 @@ Deliverable:
 docs/project/G3_NEUTRAL_PROFILE_INTEGRATION_BOUNDARY_DESIGN.md
 ```
 
-The document should cover:
+## Current status
 
-- neutral profile assumptions;
-- 9-way modifier-direction targets;
-- raw coordinate realization;
-- exact match / mismatch / unsupported / unknown statuses;
-- adapter boundary;
-- evaluator boundary;
-- diagnostics;
-- non-goals.
+Initial G1-G3 sequence complete. Stop for inspection before runtime implementation.
 
-## Stop after G3
+## Next candidate batches
 
-After G3, push if branch policy is clear and stop for inspection.
+### G4 - Review/normalize G1-G3 and active queue
 
-Do not implement runtime backend adapters until G1-G3 are reviewed.
+Status: this batch
+
+Scope:
+
+- review the completed G1/G2/G3 docs;
+- normalize queue wording and stop conditions;
+- keep the repo ready for human inspection before any runtime implementation.
+
+### G5 - Non-runtime capability model schema draft
+
+Status: candidate
+
+Scope:
+
+- docs/design only unless explicitly approved;
+- keep the model source-refed and conservative;
+- do not introduce runtime code.
+
+### G6 - Evaluator contract tests using mock capabilities
+
+Status: candidate
+
+Scope:
+
+- code/test scaffold only if explicitly approved after G5;
+- use mock capabilities;
+- keep behavior classification conservative.
+
+### G7 - Firmware custom mode design spike
+
+Status: candidate
+
+Scope:
+
+- requires explicit approval;
+- design only unless otherwise approved;
+- do not change neutral profile schema.
+
+### G8 - Realization evaluator prototype
+
+Status: candidate
+
+Scope:
+
+- requires explicit approval;
+- prototype only;
+- no runtime adapter, no export/push workflow.
+
+## Explicit stop condition
+
+After G4, stop for inspection. Do not implement G5/G6/G7/G8 unless the user explicitly asks.
 
 ## Verification
 
