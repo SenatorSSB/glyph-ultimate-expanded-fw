@@ -70,7 +70,7 @@ Key boundaries:
 
 ## 6. Issues found
 
-- Non-blocking wording risk: `docs/sources/README.md` was already identified in G1 as stale relative to staged reference artifacts now present under `docs/sources/raw/`. This does not block G4, but it is worth cleaning up later if the docs inventory is revisited.
+- Resolved prior wording risk: `docs/sources/README.md` had previously been identified as stale relative to staged reference artifacts under `docs/sources/raw/`. That README now correctly lists `ESAM1.cpp`, `ESAM1.hpp`, and `GlyphUserProfiles.json` as present source artifacts.
 - Non-blocking ambiguity: some G2/G3 phrases around export and push remain deliberately conservative, which is correct, but future readers may still want a short reminder that device-side config handlers are not the same as an approved host-side workflow.
 
 No blocking contradictions were found between G1, G2, and G3.
