@@ -85,7 +85,9 @@ G11g-h isolated shell helper integration and compile/build audit is complete on 
 
 G11i-j prototype self-test vectors + mode-selection wiring design docs are complete on `proto/glyph-prototype-selftest-and-wiring-design-g11i-j`.
 
-After G11i-j, stop for inspection. Do not proceed to G11k/G11l mode-selection wiring or runtime behavior without explicit approval.
+G11k mode-selection wiring implementation plan (docs-only) is complete on `design/glyph-mode-selection-wiring-g11k`.
+
+After G11k-design, stop for inspection. Do not proceed to G11k-impl or G11l runtime behavior without explicit approval.
 
 ## Next candidate batches
 
@@ -151,7 +153,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11i-j, stop for inspection. Do not implement G11k/G11l mode-selection wiring or runtime behavior without explicit user approval.
+After G11k-design, stop for inspection. Do not implement G11k-impl or G11l runtime behavior without explicit user approval.
 
 ## Verification
 
