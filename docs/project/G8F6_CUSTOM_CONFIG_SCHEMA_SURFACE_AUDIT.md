@@ -24,9 +24,10 @@ Device-side parser evidence alone does not prove host configurator UX, Senscope 
 | --- | --- | --- | --- |
 | active CustomControllerMode runtime | `src/modes/CustomControllerMode.cpp` | reads `CustomModeConfig` direction mappings, `stick_range`, analog modifiers, analog triggers, and button combos | High |
 | runtime declaration | `include/modes/CustomControllerMode.hpp` | stores a `CustomModeConfig` pointer and fixed mask arrays | High |
-| active proto source from PlatformIO dependency | `.pio/libdeps/glyph_mk6/HayBox-proto/config.proto` | defines `CustomModeConfig`, `AnalogModifier`, direction enums, axis enums, config container, and custom mode reference path | High |
-| nanopb options | `.pio/libdeps/glyph_mk6/HayBox-proto/config.options` | sets max counts and integer widths for generated structs | High |
-| generated nanopb header | `.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h` | generated structs are present for current local build output | High for local build artifact, not source-of-truth schema |
+| local proto source from PlatformIO dependency | `.pio/libdeps/glyph_mk6/HayBox-proto/config.proto` | defines `CustomModeConfig`, `AnalogModifier`, direction enums, axis enums, config container, and custom mode reference path for the local Glyph build environment | High for this workspace; dependency output is not host UX authority |
+| local nanopb options | `.pio/libdeps/glyph_mk6/HayBox-proto/config.options` | sets max counts and integer widths for generated structs in the local Glyph build dependency | High for this workspace; not a standalone export contract |
+| generated nanopb header | `.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h` | generated structs are present for current local build output | High for local build artifact, not source-of-truth schema or host UX authority |
+| repo AVR nanopb options | `HAL/avr/proto/config.options` | repo-tracked AVR options exist but do not provide the Glyph mk6 CustomModeConfig surface audited here | Medium; not used as CustomControllerMode schema evidence |
 | config transport | `HAL/pico/src/comms/ConfiguratorBackend.cpp` | decodes full `Config`, validates custom-mode references, saves accepted config | High |
 | persistence | `HAL/pico/src/core/Persistence.cpp` | saves/loads protobuf config with size and CRC header | High |
 | Glyph defaults | `config/glyph/common/include/glyph_overrides.hpp` | default Glyph config defines many built-in profiles and backend defaults; no `custom_modes_count` entry was found in this file by audit grep | High |
@@ -126,7 +127,7 @@ Classification:
 
 ## Generated Proto/Header Refs And Unknowns
 
-Generated/local header refs exist under `.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h`. They reflect the local build artifact and are useful for current struct layout and counts, but the source schema comes from `.pio/libdeps/glyph_mk6/HayBox-proto/config.proto` and options from `.pio/libdeps/glyph_mk6/HayBox-proto/config.options`.
+Generated/local header refs exist under `.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h`. They reflect the local build artifact and are useful for current struct layout and counts, but the schema evidence for this workspace comes from `.pio/libdeps/glyph_mk6/HayBox-proto/config.proto` and local options from `.pio/libdeps/glyph_mk6/HayBox-proto/config.options`. The repo-tracked `HAL/avr/proto/config.options` was inspected as a protobuf-related config surface, but it is not evidence for the Glyph mk6 CustomModeConfig fields used by `CustomControllerMode`.
 
 Unknowns:
 - whether an external host configurator UI exposes all CustomModeConfig fields;

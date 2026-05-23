@@ -53,6 +53,7 @@ Unknowns include:
 - whether external host/configurator UX can author every CustomModeConfig field;
 - whether external tooling applies additional validation or transformations;
 - exact numeric edge behavior for unusual multipliers, ranges, overflow, or float-to-byte conversion without tests;
+- whether incidental override-modifier no-direction outputs should ever be modeled as neutral-intent support, rather than scalar modifier behavior;
 - whether limited Senscope neutral profiles can be proven representable through a future scalar/range evaluator;
 - whether Senscope should target CustomControllerMode at all;
 - whether any approved export/manual-entry/push workflow should exist.
@@ -62,6 +63,7 @@ Unknowns include:
 Current source does not support these as audited CustomControllerMode capabilities:
 - arbitrary exact raw left-stick `(x,y)` pair assignment;
 - first-class non-center neutral raw pair configuration;
+- neutral raw-pair support inferred from incidental scalar modifier effects;
 - full 9-way raw direction table keyed by direction and modifier combination;
 - pair-coordinate analog modifier entries;
 - additive analog modifiers;

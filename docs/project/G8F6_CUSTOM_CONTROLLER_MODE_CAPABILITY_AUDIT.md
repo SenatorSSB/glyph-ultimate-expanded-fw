@@ -73,7 +73,7 @@ Source: `src/modes/CustomControllerMode.cpp:105-110`.
 axis = 128 + stick_range * multiplier * SIGNUM(axis)
 ```
 
-Source: `src/modes/CustomControllerMode.cpp:98-104`. The source uses `SIGNUM(outputs.*axis)` directly, not `SIGNUM(outputs.*axis - 128)`. This audit records that implementation shape without assigning intent beyond the code.
+Source: `src/modes/CustomControllerMode.cpp:98-104`. The source uses `SIGNUM(outputs.*axis)` directly, not `SIGNUM(outputs.*axis - 128)`. Since stick axes are initialized to `128`, this means an override modifier can produce a non-center value on its target axis even when no direction button is held. This audit records that implementation shape without assigning intent beyond the code.
 
 Capability claim: analog modifiers are source-backed as per-axis scalar transforms gated by button masks. They are not source-backed as pair-coordinate assignments.
 
@@ -104,7 +104,7 @@ Conclusion: exact arbitrary raw pair support is `UNSUPPORTED_BY_CURRENT_SOURCE` 
 
 `UpdateDirections` sets both stick pairs to `analogStickNeutral`, and CustomControllerMode passes `128` as neutral. Source: `src/core/ControllerMode.cpp:46-49` and `src/modes/CustomControllerMode.cpp:80-82`.
 
-No inspected `CustomModeConfig` field changes neutral away from center. `AnalogModifier` could run while no direction is active if its buttons are held, but the runtime formula remains axis-scalar and source does not identify that as a first-class neutral target. Treat non-center neutral support as `UNKNOWN` only for incidental scalar outcomes and `UNSUPPORTED_BY_CURRENT_SOURCE` for first-class neutral raw-pair representation.
+No inspected `CustomModeConfig` field changes neutral away from center. `AnalogModifier` can run while no direction is active if its buttons are held. In override mode, the current implementation can shift the target axis from center because it uses `SIGNUM(outputs.*axis)` while the neutral axis value is `128`. That is source-backed incidental scalar behavior, not a first-class neutral raw-pair field or 9-way table row. Treat first-class non-center neutral raw-pair representation as `UNSUPPORTED_BY_CURRENT_SOURCE`.
 
 ## Full 9-Way Directional Tables
 
@@ -139,7 +139,7 @@ Capability claim: full 9-way arbitrary raw table support is `UNSUPPORTED_BY_CURR
 | exact raw coordinate support | `UNSUPPORTED_BY_CURRENT_SOURCE` for arbitrary pair realization | no raw pair table or pair assignment field in `CustomModeConfig`; runtime uses range and scalar modifiers | particular coordinates may be representable incidentally, but arbitrary support is not proven |
 | scalar/range modification | `SOURCE_BACKED` | `stick_range`, `AnalogModifier.multiplier`, runtime formulas | scoped to selected CustomControllerMode and individual axes |
 | direction button mapping | `SOURCE_BACKED` | eight direction mapping slots and `UpdateDirections` | maps buttons to min/max axis states, not raw table rows |
-| neutral behavior | `SOURCE_BACKED` as center; `UNSUPPORTED_BY_CURRENT_SOURCE` as first-class non-center raw pair | neutral constant `128` passed into helper | modifier-held no-direction outcomes are not a source-backed neutral table |
+| neutral behavior | `SOURCE_BACKED` as center; `SOURCE_BACKED` for incidental override scalar shift; `UNSUPPORTED_BY_CURRENT_SOURCE` as first-class non-center raw pair | neutral constant `128` passed into helper; override modifier formula can shift one axis with no direction held | modifier-held no-direction outcomes are not a source-backed neutral table |
 | backend generic support | `UNKNOWN` or `UNSUPPORTED_BY_CURRENT_SOURCE` depending claim | G8f2/G8f3 distinguish selected mode from generic backend | do not promote selected CustomControllerMode evidence to generic backend exact support |
 
 ## Conclusion

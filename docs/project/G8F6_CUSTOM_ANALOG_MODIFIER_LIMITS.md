@@ -39,6 +39,8 @@ axis = 128 + stick_range * multiplier * SIGNUM(axis)
 
 Source: `src/modes/CustomControllerMode.cpp:98-104`.
 
+The override formula uses `SIGNUM(outputs.*axis)`. For stick axes initialized to neutral `128`, that can produce a positive non-center scalar value on the target axis even when no direction button is held. That is source-backed implementation behavior, but it is not a stored neutral coordinate row and not pair-coordinate assignment.
+
 No active CustomControllerMode source shows an additive modifier of the form `axis += delta`, and no active source shows a modifier entry that assigns both X and Y from a stored coordinate pair.
 
 Status:
