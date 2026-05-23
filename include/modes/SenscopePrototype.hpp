@@ -3,10 +3,6 @@
 
 #include "core/ControllerMode.hpp"
 
-namespace senscope::prototype {
-struct SenscopePrototypeValidationResult;
-}
-
 // G11b experimental shell only.
 // This mode is intentionally not wired into mode selection and has no runtime effect
 // unless a future batch explicitly instantiates and activates it.
@@ -24,7 +20,6 @@ class SenscopePrototype : public ControllerMode {
     ) override;
 
     static bool RunPrototypeStaticSmokeCheck();
-    static senscope::prototype::SenscopePrototypeValidationResult ValidateScaffoldExampleProfile();
 };
 
 #endif

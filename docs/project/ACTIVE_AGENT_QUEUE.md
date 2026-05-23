@@ -83,7 +83,9 @@ G10 compile-time prototype design is complete on `design/glyph-compile-time-prot
 
 G11g-h isolated shell helper integration and compile/build audit is complete on `proto/glyph-shell-helper-integration-g11g-h`.
 
-After G11g-h, stop for inspection. Do not proceed to mode-selection wiring or runtime behavior without explicit approval.
+G11i-j prototype self-test vectors + mode-selection wiring design docs are complete on `proto/glyph-prototype-selftest-and-wiring-design-g11i-j`.
+
+After G11i-j, stop for inspection. Do not proceed to G11k/G11l mode-selection wiring or runtime behavior without explicit approval.
 
 ## Next candidate batches
 
@@ -149,7 +151,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11g-h, stop for inspection. Do not implement mode-selection wiring or runtime behavior without explicit user approval.
+After G11i-j, stop for inspection. Do not implement G11k/G11l mode-selection wiring or runtime behavior without explicit user approval.
 
 ## Verification
 
