@@ -77,7 +77,9 @@ G6 evaluator contract tests with mock capabilities are now complete as a docs-on
 
 G7 custom mode / controller logic engine design is complete on `design/glyph-controller-logic-engine-g7`.
 
-After G7, stop for inspection. Do not proceed to G8/G9/G10/G11 without explicit approval.
+G9 config capacity / table storage inventory is complete on `docs/glyph-config-capacity-g9`.
+
+After G9, stop for inspection. Do not proceed to G8/G10/G10b/G11 without explicit approval.
 
 ## Next candidate batches
 
@@ -133,7 +135,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G7, stop for inspection. Do not implement G8/G9/G10/G11 unless the user explicitly asks.
+After G9, stop for inspection. Do not implement G8/G10/G10b/G11 unless the user explicitly asks.
 
 ## Verification
 
