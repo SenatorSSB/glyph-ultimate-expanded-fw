@@ -17,6 +17,11 @@ enum class SenscopePrototypeSelfTestStatus : uint8_t {
 
 enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     ValidationExampleProfile = 0,
+    ValidationDuplicateExactComboMaskRejectedOrDiagnosed,
+    ValidationDirectionFiveEntryAllowed,
+    ValidationDigitalRuleUnknownOutputRejected,
+    ValidationForceRuleMissingDigitalOutputRejected,
+    ValidationLayerRoleMapEmptyRejected,
     DirectionNeutralRoleMaskResolvesD5,
     DirectionLeftUpResolvesD7,
     DirectionLeftRightUpNeutralOnOppositeResolvesD8,
@@ -31,13 +36,14 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     ForceUpwardHorizontalRuleResolvesLeftXAndForcedY,
     ForceEqualPriorityAmbiguityDetected,
     OutputCompositionForceWins,
+    OutputCompositionForceSkipsTableResolver,
     OutputCompositionTableResolverUsedWhenNoForce,
     OutputCompositionDigitalFailurePropagates,
     OutputCompositionDirectionFailurePropagates,
     OutputCompositionNoLeftStickWhenNoMatchingCombo,
 };
 
-constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 24;
+constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 32;
 
 struct SenscopePrototypeSelfTestCaseResult {
     SenscopePrototypeSelfTestCaseId case_id =

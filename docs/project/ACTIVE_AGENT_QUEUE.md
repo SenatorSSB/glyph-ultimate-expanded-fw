@@ -93,7 +93,9 @@ G11l-n first output behavior design + test strategy docs + isolated output-compo
 
 G11n2 output composition self-test expansion + audit cleanup is complete on `proto/glyph-output-selftest-audit-g11n2`.
 
-After G11n2, stop for inspection. Do not proceed to selected runtime output behavior implementation without explicit approval.
+G11o validation hardening + runtime-readiness gate is complete on `proto/glyph-validation-readiness-g11o`.
+
+After G11o, stop for inspection. Do not proceed to selected runtime output behavior implementation without explicit approval.
 
 ## Next candidate batches
 
@@ -159,7 +161,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11n2, stop for inspection. Do not implement selected runtime output behavior without explicit user approval.
+After G11o, stop for inspection. Do not implement selected runtime output behavior without explicit user approval.
 
 ## Verification
 

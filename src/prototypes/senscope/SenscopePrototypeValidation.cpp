@@ -126,11 +126,13 @@ void ValidateComboProfiles(
             if (!ProfileIsEnabled(rhs)) {
                 continue;
             }
-            if (lhs.modifiers == rhs.modifiers && lhs.priority == rhs.priority) {
+            if (lhs.modifiers == rhs.modifiers) {
                 AddDiagnostic(
                     result,
                     SenscopePrototypeValidationSeverity::Error,
-                    SenscopePrototypeValidationCode::ComboExactDuplicateSamePriority,
+                    lhs.priority == rhs.priority
+                        ? SenscopePrototypeValidationCode::ComboExactDuplicateSamePriority
+                        : SenscopePrototypeValidationCode::ComboExactDuplicateDifferentPriority,
                     static_cast<uint8_t>(i),
                     static_cast<uint8_t>(j)
                 );
