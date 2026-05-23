@@ -22,6 +22,12 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     ValidationDigitalRuleUnknownOutputRejected,
     ValidationForceRuleMissingDigitalOutputRejected,
     ValidationLayerRoleMapEmptyRejected,
+    ModifierNoBindingsReturnsZeroMask,
+    ModifierSingleBindingSetsBit0,
+    ModifierMultipleBindingsSetBits,
+    ModifierDuplicateSourcesOrComposeSameBit,
+    ModifierInvalidBitIndexRejected,
+    ModifierEmptyBindingRejected,
     DirectionNeutralRoleMaskResolvesD5,
     DirectionLeftUpResolvesD7,
     DirectionLeftRightUpNeutralOnOppositeResolvesD8,
@@ -46,7 +52,7 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     OutputCompositionNoLeftStickWhenNoMatchingCombo,
 };
 
-constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 32;
+constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 40;
 
 struct SenscopePrototypeSelfTestCaseResult {
     SenscopePrototypeSelfTestCaseId case_id =
