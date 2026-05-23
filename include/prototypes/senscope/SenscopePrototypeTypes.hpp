@@ -161,6 +161,7 @@ enum class SenscopePrototypeValidationCode : uint8_t {
     ComboTableIndexOutOfRange,
     ComboTableNotEnabled,
     ComboExactDuplicateSamePriority,
+    ComboExactDuplicateDifferentPriority,
     EqualPriorityComboSubsetAmbiguity,
     UndefinedComboFallbackUnknownReachability,
     ForceRuleEmptyTriggerMask,

@@ -43,6 +43,18 @@ bool CoordEquals(const SenscopePrototypeRawCoord &coord, uint8_t x, uint8_t y) {
     return coord.x == x && coord.y == y;
 }
 
+bool HasValidationCode(
+    const SenscopePrototypeValidationResult &validation,
+    SenscopePrototypeValidationCode code
+) {
+    for (std::size_t i = 0; i < validation.diagnostic_count; i++) {
+        if (validation.diagnostics[i].code == code) {
+            return true;
+        }
+    }
+    return false;
+}
+
 } // namespace
 
 SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
@@ -58,6 +70,105 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
     if (!validation.is_valid) {
         result.status = SenscopePrototypeSelfTestStatus::ProfileInvalid;
         return result;
+    }
+
+    {
+        SenscopePrototypeProfile profile_with_duplicate_mask = example_profile;
+        profile_with_duplicate_mask.combo_profiles[2] = {
+            .enabled = true,
+            .modifiers = profile_with_duplicate_mask.combo_profiles[1].modifiers,
+            .priority = static_cast<uint8_t>(profile_with_duplicate_mask.combo_profiles[1].priority + 1u),
+            .left_stick_table_index =
+                profile_with_duplicate_mask.combo_profiles[1].left_stick_table_index,
+        };
+        const SenscopePrototypeValidationResult duplicate_mask_validation =
+            ValidateSenscopePrototypeProfile(profile_with_duplicate_mask);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ValidationDuplicateExactComboMaskRejectedOrDiagnosed,
+            !duplicate_mask_validation.is_valid &&
+                HasValidationCode(
+                    duplicate_mask_validation,
+                    SenscopePrototypeValidationCode::ComboExactDuplicateDifferentPriority
+                )
+        );
+    }
+
+    {
+        const bool direction_five_entry_present =
+            example_profile.left_stick_tables[1].enabled &&
+            example_profile.left_stick_tables[1].entry_present[kSenscopePrototypeDirectionFiveIndex];
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ValidationDirectionFiveEntryAllowed,
+            direction_five_entry_present && validation.is_valid
+        );
+    }
+
+    {
+        SenscopePrototypeProfile profile_with_unknown_digital_output = example_profile;
+        profile_with_unknown_digital_output.digital_multi_output_rules[1] = {
+            .enabled = true,
+            .condition_mask = 1ull << 50,
+            .outputs = kUnknownDigitalOutputBit,
+        };
+        const SenscopePrototypeValidationResult unknown_digital_output_validation =
+            ValidateSenscopePrototypeProfile(profile_with_unknown_digital_output);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ValidationDigitalRuleUnknownOutputRejected,
+            !unknown_digital_output_validation.is_valid &&
+                HasValidationCode(
+                    unknown_digital_output_validation,
+                    SenscopePrototypeValidationCode::DigitalRuleUnknownOutputBit
+                )
+        );
+    }
+
+    {
+        SenscopePrototypeProfile profile_with_missing_force_outputs = example_profile;
+        profile_with_missing_force_outputs.force_override_rules[2] = {
+            .enabled = true,
+            .trigger_mask = 1ull << 51,
+            .priority = 127,
+            .form = SenscopePrototypeForceUpBForm::FixedExactCoordinate,
+            .fixed_coordinate = {128, 200},
+            .forced_upward_y = 200,
+            .use_post_socd_horizontal_x = false,
+            .digital_outputs = 0,
+        };
+        const SenscopePrototypeValidationResult missing_force_outputs_validation =
+            ValidateSenscopePrototypeProfile(profile_with_missing_force_outputs);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ValidationForceRuleMissingDigitalOutputRejected,
+            !missing_force_outputs_validation.is_valid &&
+                HasValidationCode(
+                    missing_force_outputs_validation,
+                    SenscopePrototypeValidationCode::ForceRuleMissingDigitalOutputs
+                )
+        );
+    }
+
+    {
+        SenscopePrototypeProfile profile_with_empty_layer_role_map = example_profile;
+        profile_with_empty_layer_role_map.layer_role_maps[1] = {
+            .enabled = true,
+            .held_condition_mask = 1ull << 52,
+            .role_outputs = 0,
+            .direction_outputs = 0,
+        };
+        const SenscopePrototypeValidationResult empty_layer_role_map_validation =
+            ValidateSenscopePrototypeProfile(profile_with_empty_layer_role_map);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ValidationLayerRoleMapEmptyRejected,
+            !empty_layer_role_map_validation.is_valid &&
+                HasValidationCode(
+                    empty_layer_role_map_validation,
+                    SenscopePrototypeValidationCode::LayerRoleMapNoRoleOutputs
+                )
+        );
     }
 
     {
@@ -283,6 +394,20 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
                 CoordEquals(output_result.output_packet.left_stick_raw_coordinate, 128, 228) &&
                 (output_result.output_packet.digital_output_mask & expected_output_mask) ==
                     expected_output_mask
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.active_physical_button_mask = kExampleFixedForceRuleTriggerMask;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionForceSkipsTableResolver,
+            output_result.status == SenscopePrototypeOutputStatus::Composed &&
+                output_result.output_packet.has_force_override &&
+                !output_result.output_packet.used_table_resolver
         );
     }
 
