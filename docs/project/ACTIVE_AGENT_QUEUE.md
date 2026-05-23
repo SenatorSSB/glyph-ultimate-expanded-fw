@@ -87,7 +87,9 @@ G11i-j prototype self-test vectors + mode-selection wiring design docs are compl
 
 G11k mode-selection wiring implementation plan (docs-only) is complete on `design/glyph-mode-selection-wiring-g11k`.
 
-After G11k-design, stop for inspection. Do not proceed to G11k-impl or G11l runtime behavior without explicit approval.
+G11k-impl minimal mode-selection preparation is complete on `proto/glyph-mode-selection-prep-g11k-impl`.
+
+After G11k-impl, stop for inspection. Do not proceed to G11l runtime output behavior without explicit approval.
 
 ## Next candidate batches
 
@@ -153,7 +155,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11k-design, stop for inspection. Do not implement G11k-impl or G11l runtime behavior without explicit user approval.
+After G11k-impl, stop for inspection. Do not implement G11l runtime output behavior without explicit user approval.
 
 ## Verification
 
