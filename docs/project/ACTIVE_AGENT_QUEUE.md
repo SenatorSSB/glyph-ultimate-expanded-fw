@@ -95,7 +95,9 @@ G11n2 output composition self-test expansion + audit cleanup is complete on `pro
 
 G11o validation hardening + runtime-readiness gate is complete on `proto/glyph-validation-readiness-g11o`.
 
-After G11o, stop for inspection. Do not proceed to selected runtime output behavior implementation without explicit approval.
+G11m2-n-r runtime debug-path audit + modifier-mask enablement design + selected-path readiness checks is complete on `proto/glyph-runtime-audit-modifier-design-g11m2-n-r`.
+
+After G11m2-n-r, stop for inspection. Do not proceed to modifier runtime enablement, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit approval.
 
 ## Next candidate batches
 
@@ -161,7 +163,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11o, stop for inspection. Do not implement selected runtime output behavior without explicit user approval.
+After G11m2-n-r, stop for inspection. Do not implement modifier runtime enablement, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit user approval.
 
 ## Verification
 
