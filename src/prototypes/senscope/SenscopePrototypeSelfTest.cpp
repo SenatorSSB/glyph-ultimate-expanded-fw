@@ -3,6 +3,7 @@
 #include "prototypes/senscope/SenscopePrototypeDigital.hpp"
 #include "prototypes/senscope/SenscopePrototypeDirection.hpp"
 #include "prototypes/senscope/SenscopePrototypeForce.hpp"
+#include "prototypes/senscope/SenscopePrototypeModifier.hpp"
 #include "prototypes/senscope/SenscopePrototypeOutput.hpp"
 #include "prototypes/senscope/SenscopePrototypeResolver.hpp"
 #include "prototypes/senscope/SenscopePrototypeTypes.hpp"
@@ -14,6 +15,9 @@ namespace {
 constexpr SenscopePrototypePhysicalButtonMask kExampleDigitalRuleTriggerMask = 1ull << 42;
 constexpr SenscopePrototypePhysicalButtonMask kExampleFixedForceRuleTriggerMask = 1ull << 40;
 constexpr SenscopePrototypePhysicalButtonMask kExampleHorizontalForceRuleTriggerMask = 1ull << 41;
+constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskA = 1ull << 44;
+constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskB = 1ull << 45;
+constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskC = 1ull << 46;
 constexpr SenscopePrototypeModifierCombinationMask kExampleModifierMask001 = 0b001;
 constexpr SenscopePrototypeModifierCombinationMask kUndefinedExactModifierMask010 = 0b010;
 constexpr SenscopePrototypeModifierCombinationMask kSubsetFallbackModifierMask101 = 0b101;
@@ -168,6 +172,135 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
                     empty_layer_role_map_validation,
                     SenscopePrototypeValidationCode::LayerRoleMapNoRoleOutputs
                 )
+        );
+    }
+
+    {
+        const SenscopePrototypeModifierRequest request = {};
+        const SenscopePrototypeModifierResult modifier_result =
+            BuildSenscopePrototypeActiveModifierMask(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ModifierNoBindingsReturnsZeroMask,
+            modifier_result.status == SenscopePrototypeModifierStatus::Resolved &&
+                modifier_result.active_modifier_mask == 0 &&
+                modifier_result.triggered_binding_count == 0
+        );
+    }
+
+    {
+        SenscopePrototypeModifierRequest request = {};
+        request.active_physical_button_mask = kModifierBindingSourceMaskA;
+        request.bindings[0] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskA,
+            .modifier_bit_index = 0,
+        };
+        const SenscopePrototypeModifierResult modifier_result =
+            BuildSenscopePrototypeActiveModifierMask(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ModifierSingleBindingSetsBit0,
+            modifier_result.status == SenscopePrototypeModifierStatus::Resolved &&
+                modifier_result.active_modifier_mask == static_cast<SenscopePrototypeModifierCombinationMask>(0b001) &&
+                modifier_result.triggered_binding_count == 1
+        );
+    }
+
+    {
+        SenscopePrototypeModifierRequest request = {};
+        request.active_physical_button_mask =
+            kModifierBindingSourceMaskA | kModifierBindingSourceMaskC;
+        request.bindings[0] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskA,
+            .modifier_bit_index = 0,
+        };
+        request.bindings[1] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskB,
+            .modifier_bit_index = 1,
+        };
+        request.bindings[2] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskC,
+            .modifier_bit_index = 2,
+        };
+        const SenscopePrototypeModifierResult modifier_result =
+            BuildSenscopePrototypeActiveModifierMask(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ModifierMultipleBindingsSetBits,
+            modifier_result.status == SenscopePrototypeModifierStatus::Resolved &&
+                modifier_result.active_modifier_mask == static_cast<SenscopePrototypeModifierCombinationMask>(0b101) &&
+                modifier_result.triggered_binding_count == 2
+        );
+    }
+
+    {
+        SenscopePrototypeModifierRequest request = {};
+        request.active_physical_button_mask = kModifierBindingSourceMaskA;
+        request.bindings[0] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskA,
+            .modifier_bit_index = 1,
+        };
+        request.bindings[1] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskA,
+            .modifier_bit_index = 1,
+        };
+        const SenscopePrototypeModifierResult modifier_result =
+            BuildSenscopePrototypeActiveModifierMask(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ModifierDuplicateSourcesOrComposeSameBit,
+            modifier_result.status == SenscopePrototypeModifierStatus::Resolved &&
+                modifier_result.active_modifier_mask == static_cast<SenscopePrototypeModifierCombinationMask>(0b010) &&
+                modifier_result.triggered_binding_count == 2
+        );
+    }
+
+    {
+        SenscopePrototypeModifierRequest request = {};
+        request.active_physical_button_mask = kModifierBindingSourceMaskA;
+        request.bindings[0] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskA,
+            .modifier_bit_index = static_cast<uint8_t>(kSenscopePrototypeModifierRoleCount),
+        };
+        const SenscopePrototypeModifierResult modifier_result =
+            BuildSenscopePrototypeActiveModifierMask(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ModifierInvalidBitIndexRejected,
+            modifier_result.status == SenscopePrototypeModifierStatus::InvalidBinding &&
+                modifier_result.active_modifier_mask == 0 &&
+                modifier_result.triggered_binding_count == 0 &&
+                modifier_result.diagnostic_binding_index == 0 &&
+                modifier_result.diagnostic_code ==
+                    SenscopePrototypeModifierDiagnosticCode::BindingModifierBitIndexOutOfRange
+        );
+    }
+
+    {
+        SenscopePrototypeModifierRequest request = {};
+        request.bindings[0] = {
+            .enabled = true,
+            .physical_button_mask = 0,
+            .modifier_bit_index = 0,
+        };
+        const SenscopePrototypeModifierResult modifier_result =
+            BuildSenscopePrototypeActiveModifierMask(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ModifierEmptyBindingRejected,
+            modifier_result.status == SenscopePrototypeModifierStatus::InvalidBinding &&
+                modifier_result.active_modifier_mask == 0 &&
+                modifier_result.triggered_binding_count == 0 &&
+                modifier_result.diagnostic_binding_index == 0 &&
+                modifier_result.diagnostic_code ==
+                    SenscopePrototypeModifierDiagnosticCode::BindingPhysicalButtonMaskEmpty
         );
     }
 

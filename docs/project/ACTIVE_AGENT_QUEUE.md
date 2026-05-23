@@ -97,7 +97,9 @@ G11o validation hardening + runtime-readiness gate is complete on `proto/glyph-v
 
 G11m2-n-r runtime debug-path audit + modifier-mask enablement design + selected-path readiness checks is complete on `proto/glyph-runtime-audit-modifier-design-g11m2-n-r`.
 
-After G11m2-n-r, stop for inspection. Do not proceed to modifier runtime enablement, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit approval.
+G11n-impl1 isolated modifier-mask helper (no runtime wiring) is complete on `proto/glyph-modifier-mask-helper-g11n1`.
+
+After G11n-impl1, stop for inspection. Do not proceed to modifier runtime wiring, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit approval and a real binding decision.
 
 ## Next candidate batches
 
@@ -163,7 +165,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11m2-n-r, stop for inspection. Do not implement modifier runtime enablement, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit user approval.
+After G11n-impl1, stop for inspection. Do not implement modifier runtime wiring, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit user approval and a real binding decision.
 
 ## Verification
 
