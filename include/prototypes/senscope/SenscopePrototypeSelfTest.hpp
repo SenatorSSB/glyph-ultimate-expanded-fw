@@ -28,9 +28,15 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     ModifierDuplicateSourcesOrComposeSameBit,
     ModifierInvalidBitIndexRejected,
     ModifierEmptyBindingRejected,
+    ModifierRf2Rf3Rf4BindingsPreserveBitSemantics,
+    DirectionLeftDownResolvesD1,
+    DirectionDownResolvesD2,
+    DirectionRightDownResolvesD3,
     DirectionNeutralRoleMaskResolvesD5,
+    DirectionRightResolvesD6,
     DirectionLeftUpResolvesD7,
     DirectionLeftRightUpNeutralOnOppositeResolvesD8,
+    DirectionRightUpResolvesD9,
     DirectionLeftRightLeftPriorityResolvesD4,
     DirectionDownUpUpPriorityResolvesD8,
     ResolverModifier000DirectionD5ResolvesBaseNeutral,
@@ -39,8 +45,10 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     ResolverModifier001DirectionD7ResolvesTable1,
     ResolverExactRequiredUndefinedComboNoMatch,
     ResolverSubsetFallbackDefinedSubsetResolves,
+    DigitalNeutralDefaultsToNoOutputs,
     DigitalDirectAWithTriggeredByRuleComposesABY,
     DigitalUnknownDirectOutputBitDiagnostic,
+    ForceNoMatchingRuleRemainsDisabled,
     ForceFixedRuleResolvesCoordinateAndB,
     ForceUpwardHorizontalRuleResolvesLeftXAndForcedY,
     ForceEqualPriorityAmbiguityDetected,
@@ -50,9 +58,10 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     OutputCompositionDigitalFailurePropagates,
     OutputCompositionDirectionFailurePropagates,
     OutputCompositionNoLeftStickWhenNoMatchingCombo,
+    OutputCompositionNoLeftStickKeepsNeutralPacketCoordinate,
 };
 
-constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 40;
+constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 56;
 
 struct SenscopePrototypeSelfTestCaseResult {
     SenscopePrototypeSelfTestCaseId case_id =
