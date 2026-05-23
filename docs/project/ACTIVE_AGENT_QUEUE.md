@@ -99,7 +99,9 @@ G11m2-n-r runtime debug-path audit + modifier-mask enablement design + selected-
 
 G11n-impl1 isolated modifier-mask helper (no runtime wiring) is complete on `proto/glyph-modifier-mask-helper-g11n1`.
 
-After G11n-impl1, stop for inspection. Do not proceed to modifier runtime wiring, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit approval and a real binding decision.
+G11n-impl2 runtime modifier-mask wiring (selected SenscopePrototype path only) is complete on `proto/glyph-runtime-modifier-mask-g11n2`.
+
+After G11n2, stop for inspection. Do not proceed to Force Up-B, digital outputs, right-stick/C-stick behavior, default activation, or flashing without explicit approval.
 
 ## Next candidate batches
 
@@ -165,7 +167,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11n-impl1, stop for inspection. Do not implement modifier runtime wiring, Force Up-B, digital outputs, right-stick/C-stick behavior, or flashing without explicit user approval and a real binding decision.
+After G11n2, stop for inspection. Do not implement Force Up-B, digital outputs, right-stick/C-stick behavior, default activation, or flashing without explicit user approval.
 
 ## Verification
 
