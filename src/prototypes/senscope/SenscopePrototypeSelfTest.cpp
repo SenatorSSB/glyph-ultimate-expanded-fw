@@ -18,6 +18,9 @@ constexpr SenscopePrototypePhysicalButtonMask kExampleHorizontalForceRuleTrigger
 constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskA = 1ull << 44;
 constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskB = 1ull << 45;
 constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskC = 1ull << 46;
+constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskRf2 = 1ull << 0;
+constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskRf3 = 1ull << 1;
+constexpr SenscopePrototypePhysicalButtonMask kModifierBindingSourceMaskRf4 = 1ull << 2;
 constexpr SenscopePrototypeModifierCombinationMask kExampleModifierMask001 = 0b001;
 constexpr SenscopePrototypeModifierCombinationMask kUndefinedExactModifierMask010 = 0b010;
 constexpr SenscopePrototypeModifierCombinationMask kSubsetFallbackModifierMask101 = 0b101;
@@ -305,6 +308,87 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
     }
 
     {
+        SenscopePrototypeModifierRequest request = {};
+        request.bindings[0] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskRf2,
+            .modifier_bit_index = 0,
+        };
+        request.bindings[1] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskRf3,
+            .modifier_bit_index = 1,
+        };
+        request.bindings[2] = {
+            .enabled = true,
+            .physical_button_mask = kModifierBindingSourceMaskRf4,
+            .modifier_bit_index = 2,
+        };
+
+        bool semantics_preserved = true;
+        request.active_physical_button_mask = kModifierBindingSourceMaskRf2;
+        semantics_preserved &= BuildSenscopePrototypeActiveModifierMask(request).active_modifier_mask == 0b001;
+        request.active_physical_button_mask = kModifierBindingSourceMaskRf3;
+        semantics_preserved &= BuildSenscopePrototypeActiveModifierMask(request).active_modifier_mask == 0b010;
+        request.active_physical_button_mask = kModifierBindingSourceMaskRf4;
+        semantics_preserved &= BuildSenscopePrototypeActiveModifierMask(request).active_modifier_mask == 0b100;
+        request.active_physical_button_mask = kModifierBindingSourceMaskRf2 | kModifierBindingSourceMaskRf4;
+        semantics_preserved &= BuildSenscopePrototypeActiveModifierMask(request).active_modifier_mask == 0b101;
+        request.active_physical_button_mask =
+            kModifierBindingSourceMaskRf2 |
+            kModifierBindingSourceMaskRf3 |
+            kModifierBindingSourceMaskRf4;
+        semantics_preserved &= BuildSenscopePrototypeActiveModifierMask(request).active_modifier_mask == 0b111;
+
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ModifierRf2Rf3Rf4BindingsPreserveBitSemantics,
+            semantics_preserved
+        );
+    }
+
+    {
+        SenscopePrototypeDirectionRequest request = {};
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleLeft | kSenscopePrototypeDirectionRoleDown;
+        request.opposite_policy = SenscopePrototypeDirectionOppositePolicy::NeutralOnOpposite;
+        const SenscopePrototypeDirectionResult direction_result = ResolveSenscopePrototypeDirection(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::DirectionLeftDownResolvesD1,
+            direction_result.status == SenscopePrototypeDirectionStatus::Resolved &&
+                direction_result.resolved_direction_key == SenscopePrototypeDirectionKey::D1
+        );
+    }
+
+    {
+        SenscopePrototypeDirectionRequest request = {};
+        request.pre_socd_direction_roles = kSenscopePrototypeDirectionRoleDown;
+        request.opposite_policy = SenscopePrototypeDirectionOppositePolicy::NeutralOnOpposite;
+        const SenscopePrototypeDirectionResult direction_result = ResolveSenscopePrototypeDirection(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::DirectionDownResolvesD2,
+            direction_result.status == SenscopePrototypeDirectionStatus::Resolved &&
+                direction_result.resolved_direction_key == SenscopePrototypeDirectionKey::D2
+        );
+    }
+
+    {
+        SenscopePrototypeDirectionRequest request = {};
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleRight | kSenscopePrototypeDirectionRoleDown;
+        request.opposite_policy = SenscopePrototypeDirectionOppositePolicy::NeutralOnOpposite;
+        const SenscopePrototypeDirectionResult direction_result = ResolveSenscopePrototypeDirection(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::DirectionRightDownResolvesD3,
+            direction_result.status == SenscopePrototypeDirectionStatus::Resolved &&
+                direction_result.resolved_direction_key == SenscopePrototypeDirectionKey::D3
+        );
+    }
+
+    {
         SenscopePrototypeDirectionRequest request = {};
         request.pre_socd_direction_roles = 0;
         request.opposite_policy = SenscopePrototypeDirectionOppositePolicy::NeutralOnOpposite;
@@ -319,6 +403,19 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
 
     {
         SenscopePrototypeDirectionRequest request = {};
+        request.pre_socd_direction_roles = kSenscopePrototypeDirectionRoleRight;
+        request.opposite_policy = SenscopePrototypeDirectionOppositePolicy::NeutralOnOpposite;
+        const SenscopePrototypeDirectionResult direction_result = ResolveSenscopePrototypeDirection(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::DirectionRightResolvesD6,
+            direction_result.status == SenscopePrototypeDirectionStatus::Resolved &&
+                direction_result.resolved_direction_key == SenscopePrototypeDirectionKey::D6
+        );
+    }
+
+    {
+        SenscopePrototypeDirectionRequest request = {};
         request.pre_socd_direction_roles =
             kSenscopePrototypeDirectionRoleLeft | kSenscopePrototypeDirectionRoleUp;
         request.opposite_policy = SenscopePrototypeDirectionOppositePolicy::NeutralOnOpposite;
@@ -328,6 +425,20 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
             SenscopePrototypeSelfTestCaseId::DirectionLeftUpResolvesD7,
             direction_result.status == SenscopePrototypeDirectionStatus::Resolved &&
                 direction_result.resolved_direction_key == SenscopePrototypeDirectionKey::D7
+        );
+    }
+
+    {
+        SenscopePrototypeDirectionRequest request = {};
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleRight | kSenscopePrototypeDirectionRoleUp;
+        request.opposite_policy = SenscopePrototypeDirectionOppositePolicy::NeutralOnOpposite;
+        const SenscopePrototypeDirectionResult direction_result = ResolveSenscopePrototypeDirection(request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::DirectionRightUpResolvesD9,
+            direction_result.status == SenscopePrototypeDirectionStatus::Resolved &&
+                direction_result.resolved_direction_key == SenscopePrototypeDirectionKey::D9
         );
     }
 
@@ -476,6 +587,21 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
 
     {
         SenscopePrototypeDigitalRequest request = {};
+        request.direct_digital_output_mask = 0;
+        request.active_physical_button_mask = 0;
+        const SenscopePrototypeDigitalResult digital_result =
+            ComposeSenscopePrototypeProfileDigitalOutputs(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::DigitalNeutralDefaultsToNoOutputs,
+            digital_result.status == SenscopePrototypeDigitalStatus::Composed &&
+                digital_result.composed_digital_output_mask == 0 &&
+                digital_result.triggered_rule_count == 0
+        );
+    }
+
+    {
+        SenscopePrototypeDigitalRequest request = {};
         request.direct_digital_output_mask = kSenscopePrototypeOutputA;
         request.active_physical_button_mask = kExampleDigitalRuleTriggerMask;
         const SenscopePrototypeDigitalResult digital_result =
@@ -503,6 +629,21 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
             digital_result.status == SenscopePrototypeDigitalStatus::InvalidDirectOutputMask &&
                 digital_result.diagnostic_code ==
                     SenscopePrototypeDigitalDiagnosticCode::DirectMaskHasUnknownOutputBits
+        );
+    }
+
+    {
+        SenscopePrototypeForceRequest request = {};
+        request.active_physical_button_mask = 0;
+        request.post_socd_direction_key = static_cast<uint8_t>(SenscopePrototypeDirectionKey::D5);
+        const SenscopePrototypeForceResult force_result =
+            ResolveSenscopePrototypeProfileForceOverride(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ForceNoMatchingRuleRemainsDisabled,
+            force_result.status == SenscopePrototypeForceStatus::NoMatchingRule &&
+                !force_result.matched &&
+                force_result.digital_output_contribution == 0
         );
     }
 
@@ -663,6 +804,23 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
                     SenscopePrototypeResolverStatus::NoMatchingComboProfile &&
                 output_result.resolver_result.diagnostic_code ==
                     SenscopePrototypeResolverDiagnosticCode::ExactMatchRequiredButNotFound
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleLeft | kSenscopePrototypeDirectionRoleUp;
+        request.active_modifier_mask = kUndefinedExactModifierMask010;
+        request.resolver_fallback_policy = SenscopePrototypeResolverFallbackPolicy::RequireExactComboProfile;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionNoLeftStickKeepsNeutralPacketCoordinate,
+            output_result.status == SenscopePrototypeOutputStatus::NoLeftStickOutput &&
+                !output_result.output_packet.has_left_stick &&
+                CoordEquals(output_result.output_packet.left_stick_raw_coordinate, 128, 128)
         );
     }
 
