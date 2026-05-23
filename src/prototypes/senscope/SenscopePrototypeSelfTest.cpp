@@ -244,6 +244,57 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
 
     {
         SenscopePrototypeResolverRequest request = {};
+        request.active_modifier_mask = 0;
+        request.resolved_direction_key = static_cast<uint8_t>(SenscopePrototypeDirectionKey::D5);
+        request.fallback_policy = SenscopePrototypeResolverFallbackPolicy::RequireExactComboProfile;
+        const SenscopePrototypeResolverResult resolver_result =
+            ResolveSenscopePrototypeLeftStickRawCoordinate(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ResolverModifier000DirectionD5ResolvesBaseNeutral,
+            resolver_result.status == SenscopePrototypeResolverStatus::Resolved &&
+                resolver_result.selected_combo_profile_index == 0 &&
+                resolver_result.selected_left_stick_table_index == 0 &&
+                CoordEquals(resolver_result.raw_coordinate, 128, 128)
+        );
+    }
+
+    {
+        SenscopePrototypeResolverRequest request = {};
+        request.active_modifier_mask = 0;
+        request.resolved_direction_key = static_cast<uint8_t>(SenscopePrototypeDirectionKey::D6);
+        request.fallback_policy = SenscopePrototypeResolverFallbackPolicy::RequireExactComboProfile;
+        const SenscopePrototypeResolverResult resolver_result =
+            ResolveSenscopePrototypeLeftStickRawCoordinate(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ResolverModifier000DirectionD6ResolvesBaseRight,
+            resolver_result.status == SenscopePrototypeResolverStatus::Resolved &&
+                resolver_result.selected_combo_profile_index == 0 &&
+                resolver_result.selected_left_stick_table_index == 0 &&
+                CoordEquals(resolver_result.raw_coordinate, 228, 128)
+        );
+    }
+
+    {
+        SenscopePrototypeResolverRequest request = {};
+        request.active_modifier_mask = 0;
+        request.resolved_direction_key = static_cast<uint8_t>(SenscopePrototypeDirectionKey::D4);
+        request.fallback_policy = SenscopePrototypeResolverFallbackPolicy::RequireExactComboProfile;
+        const SenscopePrototypeResolverResult resolver_result =
+            ResolveSenscopePrototypeLeftStickRawCoordinate(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::ResolverModifier000DirectionD4ResolvesBaseLeft,
+            resolver_result.status == SenscopePrototypeResolverStatus::Resolved &&
+                resolver_result.selected_combo_profile_index == 0 &&
+                resolver_result.selected_left_stick_table_index == 0 &&
+                CoordEquals(resolver_result.raw_coordinate, 28, 128)
+        );
+    }
+
+    {
+        SenscopePrototypeResolverRequest request = {};
         request.active_modifier_mask = kExampleModifierMask001;
         request.resolved_direction_key = static_cast<uint8_t>(SenscopePrototypeDirectionKey::D7);
         request.fallback_policy = SenscopePrototypeResolverFallbackPolicy::AllowHighestPrioritySubset;
