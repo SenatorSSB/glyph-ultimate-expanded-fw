@@ -8,6 +8,7 @@
 #include "modes/ProjectM.hpp"
 #include "modes/RivalsOfAether.hpp"
 #include "modes/Rivals2.hpp"
+#include "modes/SenscopePrototype.hpp"
 #include "modes/Ultimate.hpp"
 #include "modes/64.hpp"
 #include "util/state_util.hpp"
@@ -23,6 +24,7 @@ Rivals2 rivals2_mode;
 CustomKeyboardMode keyboard_mode;
 CustomControllerMode custom_mode;
 Smash64 s64_mode;
+SenscopePrototype senscope_prototype_mode;
 
 uint64_t mode_activation_masks[10];
 

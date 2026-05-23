@@ -7,13 +7,15 @@ namespace {
 constexpr uint8_t kAnalogNeutral = 128;
 constexpr uint8_t kAnalogMin = 0;
 constexpr uint8_t kAnalogMax = 255;
+constexpr bool kRunSenscopePrototypeConstructorSelfTest = false;
 
 } // namespace
 
 SenscopePrototype::SenscopePrototype() : ControllerMode() {
-    // G11i compile-visible prototype self-test helper call only. This remains isolated because
-    // SenscopePrototype is still unregistered and unselected in mode selection.
-    (void)RunPrototypeStaticSmokeCheck();
+    if constexpr (kRunSenscopePrototypeConstructorSelfTest) {
+        // Keep self-test available for explicit debug/test bring-up paths.
+        (void)RunPrototypeStaticSmokeCheck();
+    }
 }
 
 bool SenscopePrototype::RunPrototypeStaticSmokeCheck() {
