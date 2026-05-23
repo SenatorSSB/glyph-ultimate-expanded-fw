@@ -55,8 +55,11 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     OutputCompositionForceWins,
     OutputCompositionForceSkipsTableResolver,
     OutputCompositionTableResolverUsedWhenNoForce,
+    OutputCompositionNeutralNoInputBaseline,
     OutputCompositionDigitalFailurePropagates,
+    OutputCompositionDigitalInvalidBitFailClosedNoPassthrough,
     OutputCompositionDirectionFailurePropagates,
+    OutputCompositionNoForceTriggerKeepsForceDisabled,
     OutputCompositionNoLeftStickWhenNoMatchingCombo,
     OutputCompositionNoLeftStickKeepsNeutralPacketCoordinate,
 };
