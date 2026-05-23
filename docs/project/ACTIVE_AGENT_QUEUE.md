@@ -75,7 +75,9 @@ G5 non-runtime capability model schema draft is complete.
 
 G6 evaluator contract tests with mock capabilities are now complete as a docs-only scaffold.
 
-Stop for inspection before any G7/G8 work.
+G7 custom mode / controller logic engine design is complete on `design/glyph-controller-logic-engine-g7`.
+
+After G7, stop for inspection. Do not proceed to G8/G9/G10/G11 without explicit approval.
 
 ## Next candidate batches
 
@@ -111,7 +113,7 @@ Scope:
 
 ### G7 - Firmware custom mode design spike
 
-Status: candidate
+Status: complete
 
 Scope:
 
@@ -131,7 +133,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G6, stop for inspection. Do not implement G7/G8 unless the user explicitly asks.
+After G7, stop for inspection. Do not implement G8/G9/G10/G11 unless the user explicitly asks.
 
 ## Verification
 
