@@ -79,7 +79,9 @@ G7 custom mode / controller logic engine design is complete on `design/glyph-con
 
 G9 config capacity / table storage inventory is complete on `docs/glyph-config-capacity-g9`.
 
-After G9, stop for inspection. Do not proceed to G8/G10/G10b/G11 without explicit approval.
+G10 compile-time prototype design is complete on `design/glyph-compile-time-prototype-g10`.
+
+After G10, stop for inspection. Do not proceed to G8/G10b/G11 without explicit approval.
 
 ## Next candidate batches
 
@@ -133,9 +135,19 @@ Scope:
 - prototype only;
 - no runtime adapter, no export/push workflow.
 
+### G10 - Compile-time custom controller logic prototype design
+
+Status: complete (docs/design only)
+
+Scope:
+
+- design-only compile-time prototype path for the G7 stateless controller logic engine;
+- preserve G9 conclusion that existing config-backed structures do not directly fit the desired G7 table/profile model yet;
+- no firmware, schema, runtime adapter, evaluator, export, push, or game-semantic changes.
+
 ## Explicit stop condition
 
-After G9, stop for inspection. Do not implement G8/G10/G10b/G11 unless the user explicitly asks.
+After G10, stop for inspection. Do not implement G8/G10b/G11 unless the user explicitly asks.
 
 ## Verification
 
