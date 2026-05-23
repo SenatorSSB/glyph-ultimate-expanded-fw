@@ -30,6 +30,42 @@ uint64_t mode_activation_masks[10];
 
 size_t current_mode_index = SIZE_MAX;
 
+namespace {
+
+constexpr bool kEnableSenscopePrototypeManualSelection = false;
+
+bool IsSenscopePrototypeManualDebugChordHeld(const InputState &inputs) {
+    // Manual/debug-only chord, intentionally outside config/protobuf/default mode wiring.
+    return inputs.lt1 && inputs.lt2 && inputs.mb1 && inputs.mb2;
+}
+
+bool TrySelectSenscopePrototypeManualDebugMode(
+    CommunicationBackend **backends,
+    size_t backends_count,
+    const InputState &inputs
+) {
+    static bool was_manual_chord_held = false;
+    const bool manual_chord_held = IsSenscopePrototypeManualDebugChordHeld(inputs);
+    if (!manual_chord_held) {
+        was_manual_chord_held = false;
+        return false;
+    }
+
+    if (was_manual_chord_held) {
+        return true;
+    }
+
+    was_manual_chord_held = true;
+    current_mode_index = SIZE_MAX;
+    for (size_t i = 0; i < backends_count; i++) {
+        set_mode(backends[i], &senscope_prototype_mode);
+    }
+
+    return true;
+}
+
+} // namespace
+
 void set_mode(CommunicationBackend *backend, ControllerMode *mode) {
     // Delete keyboard mode in case one is set, so we don't end up getting both controller and
     // keyboard inputs.
@@ -130,6 +166,12 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
     // rather than on every single poll.
 
     InputState &inputs = backends[0]->GetInputs();
+
+    if constexpr (kEnableSenscopePrototypeManualSelection) {
+        if (TrySelectSenscopePrototypeManualDebugMode(backends, backends_count, inputs)) {
+            return;
+        }
+    }
 
     for (size_t i = 0; i < config.game_mode_configs_count; i++) {
         GameModeConfig &mode_config = config.game_mode_configs[i];
