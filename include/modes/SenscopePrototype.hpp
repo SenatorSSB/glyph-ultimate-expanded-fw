@@ -23,6 +23,7 @@ class SenscopePrototype : public ControllerMode {
         CommunicationBackendId backend_id
     ) override;
 
+    static bool RunPrototypeStaticSmokeCheck();
     static senscope::prototype::SenscopePrototypeValidationResult ValidateScaffoldExampleProfile();
 };
 

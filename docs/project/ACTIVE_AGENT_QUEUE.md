@@ -81,7 +81,9 @@ G9 config capacity / table storage inventory is complete on `docs/glyph-config-c
 
 G10 compile-time prototype design is complete on `design/glyph-compile-time-prototype-g10`.
 
-After G10, stop for inspection. Do not proceed to G8/G10b/G11 without explicit approval.
+G11g-h isolated shell helper integration and compile/build audit is complete on `proto/glyph-shell-helper-integration-g11g-h`.
+
+After G11g-h, stop for inspection. Do not proceed to mode-selection wiring or runtime behavior without explicit approval.
 
 ## Next candidate batches
 
@@ -147,7 +149,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G10, stop for inspection. Do not implement G8/G10b/G11 unless the user explicitly asks.
+After G11g-h, stop for inspection. Do not implement mode-selection wiring or runtime behavior without explicit user approval.
 
 ## Verification
 
