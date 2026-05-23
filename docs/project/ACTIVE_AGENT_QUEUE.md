@@ -91,7 +91,9 @@ G11k-impl minimal mode-selection preparation is complete on `proto/glyph-mode-se
 
 G11l-n first output behavior design + test strategy docs + isolated output-composition scaffold is complete on `proto/glyph-output-composition-design-g11l-n`.
 
-After G11l-n, stop for inspection. Do not proceed to selected runtime output behavior implementation without explicit approval.
+G11n2 output composition self-test expansion + audit cleanup is complete on `proto/glyph-output-selftest-audit-g11n2`.
+
+After G11n2, stop for inspection. Do not proceed to selected runtime output behavior implementation without explicit approval.
 
 ## Next candidate batches
 
@@ -157,7 +159,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11l-n, stop for inspection. Do not implement selected runtime output behavior without explicit user approval.
+After G11n2, stop for inspection. Do not implement selected runtime output behavior without explicit user approval.
 
 ## Verification
 

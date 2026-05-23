@@ -30,9 +30,14 @@ enum class SenscopePrototypeSelfTestCaseId : uint8_t {
     ForceFixedRuleResolvesCoordinateAndB,
     ForceUpwardHorizontalRuleResolvesLeftXAndForcedY,
     ForceEqualPriorityAmbiguityDetected,
+    OutputCompositionForceWins,
+    OutputCompositionTableResolverUsedWhenNoForce,
+    OutputCompositionDigitalFailurePropagates,
+    OutputCompositionDirectionFailurePropagates,
+    OutputCompositionNoLeftStickWhenNoMatchingCombo,
 };
 
-constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 16;
+constexpr std::size_t kSenscopePrototypeSelfTestMaxCaseResults = 24;
 
 struct SenscopePrototypeSelfTestCaseResult {
     SenscopePrototypeSelfTestCaseId case_id =
