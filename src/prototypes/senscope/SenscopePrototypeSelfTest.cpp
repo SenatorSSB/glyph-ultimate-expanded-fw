@@ -758,6 +758,31 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
     }
 
     {
+        const SenscopePrototypeOutputRequest request = {};
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionNeutralNoInputBaseline,
+            output_result.status == SenscopePrototypeOutputStatus::Composed &&
+                output_result.direction_result.status == SenscopePrototypeDirectionStatus::Resolved &&
+                output_result.direction_result.resolved_direction_key == SenscopePrototypeDirectionKey::D5 &&
+                output_result.force_result.status == SenscopePrototypeForceStatus::NoMatchingRule &&
+                !output_result.force_result.matched &&
+                output_result.force_result.digital_output_contribution == 0 &&
+                output_result.digital_result.status == SenscopePrototypeDigitalStatus::Composed &&
+                output_result.digital_result.composed_digital_output_mask == 0 &&
+                output_result.digital_result.triggered_rule_count == 0 &&
+                output_result.output_packet.has_left_stick &&
+                !output_result.output_packet.has_force_override &&
+                output_result.output_packet.used_table_resolver &&
+                output_result.output_packet.used_digital_composition &&
+                output_result.output_packet.digital_output_mask == 0 &&
+                CoordEquals(output_result.output_packet.left_stick_raw_coordinate, 128, 128)
+        );
+    }
+
+    {
         SenscopePrototypeOutputRequest request = {};
         request.direct_digital_output_mask = kUnknownDigitalOutputBit;
         const SenscopePrototypeOutputResult output_result =
@@ -773,6 +798,25 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
 
     {
         SenscopePrototypeOutputRequest request = {};
+        request.direct_digital_output_mask = kSenscopePrototypeOutputA | kUnknownDigitalOutputBit;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionDigitalInvalidBitFailClosedNoPassthrough,
+            output_result.status == SenscopePrototypeOutputStatus::DigitalFailed &&
+                output_result.diagnostic_code ==
+                    SenscopePrototypeOutputDiagnosticCode::DigitalInvalidDirectOutputMask &&
+                output_result.digital_result.status ==
+                    SenscopePrototypeDigitalStatus::InvalidDirectOutputMask &&
+                !output_result.output_packet.used_digital_composition &&
+                output_result.output_packet.digital_output_mask == 0 &&
+                !output_result.output_packet.has_force_override
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
         request.pre_socd_direction_roles =
             kSenscopePrototypeDirectionRoleLeft | static_cast<SenscopePrototypeDirectionRoleMask>(1u << 7);
         const SenscopePrototypeOutputResult output_result =
@@ -783,6 +827,27 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
             output_result.status == SenscopePrototypeOutputStatus::DirectionFailed &&
                 output_result.diagnostic_code ==
                     SenscopePrototypeOutputDiagnosticCode::DirectionUnknownRoleBitsMasked
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleLeft | kSenscopePrototypeDirectionRoleUp;
+        request.active_modifier_mask = kExampleModifierMask001;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionNoForceTriggerKeepsForceDisabled,
+            output_result.status == SenscopePrototypeOutputStatus::Composed &&
+                output_result.force_result.status == SenscopePrototypeForceStatus::NoMatchingRule &&
+                !output_result.force_result.matched &&
+                output_result.force_result.digital_output_contribution == 0 &&
+                output_result.output_packet.selected_force_rule_index ==
+                    kSenscopePrototypeOutputInvalidIndex &&
+                !output_result.output_packet.has_force_override &&
+                output_result.output_packet.used_table_resolver
         );
     }
 
@@ -820,6 +885,12 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
             SenscopePrototypeSelfTestCaseId::OutputCompositionNoLeftStickKeepsNeutralPacketCoordinate,
             output_result.status == SenscopePrototypeOutputStatus::NoLeftStickOutput &&
                 !output_result.output_packet.has_left_stick &&
+                !output_result.output_packet.has_force_override &&
+                output_result.output_packet.digital_output_mask == 0 &&
+                output_result.output_packet.used_digital_composition &&
+                output_result.output_packet.used_table_resolver &&
+                output_result.force_result.status == SenscopePrototypeForceStatus::NoMatchingRule &&
+                output_result.digital_result.status == SenscopePrototypeDigitalStatus::Composed &&
                 CoordEquals(output_result.output_packet.left_stick_raw_coordinate, 128, 128)
         );
     }
