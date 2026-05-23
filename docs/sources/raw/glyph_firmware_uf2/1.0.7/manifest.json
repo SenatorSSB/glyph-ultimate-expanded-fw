@@ -1,0 +1,32 @@
+{
+  "source_set_id": "glyph_firmware_uf2_1_0_7_user_provided_official",
+  "source_kind": "OFFICIAL_GLYPH_FIRMWARE_UF2",
+  "version": "1.0.7",
+  "files": [
+    {
+      "filename": "GlyphFirmware-1.0.7.uf2",
+      "role": "UPDATE",
+      "size_bytes": 769536,
+      "sha256": "2fe38be67b68b9f8b9cb8be2f338837785e63a3732e0c1c269380f6c48f70c6d",
+      "source_status": "USER_PROVIDED_OFFICIAL_FIRMWARE",
+      "notes": "User-facing Update firmware file. Read-only UF2 inspection found a valid UF2 image with one app segment at 0x10000000..0x1005df00 and 384768 payload bytes."
+    },
+    {
+      "filename": "GlyphFirmware-1.0.7-Clean.uf2",
+      "role": "CLEAN_FRESH_INSTALL",
+      "size_bytes": 1818112,
+      "sha256": "22fd7f8f29fb33d9cb601187e9503411e5330e72c7297fbce0df710eec8ff200",
+      "source_status": "USER_PROVIDED_OFFICIAL_FIRMWARE",
+      "notes": "User-facing Fresh Install / Clean firmware file. Read-only UF2 inspection found the same app segment as the Update file plus a 524288-byte all-zero high-flash segment at 0x1017f000..0x101ff000."
+    }
+  ],
+  "user_provided_update_procedure": "“Download the latest Firmware below, there are two options.\n- Update: Keep all controller profiles as is.\n- Fresh Install: Wipes all profiles and restores the factory default profiles.\nConnect your Glyph to a computer while holding the illuminated Menu button.\nThe Glyph will enter programming mode, and appear as a USB drive named RPI-RP2.\nDrag and drop the downloaded .uf2 firmware file onto the RPI-RP2 drive.\nThe USB drive will disconnect, closing the window and the Glyph will connect to the computer as a controller.”",
+  "analysis_status": "UF2_FILES_AVAILABLE_TO_AGENT_AND_INSPECTED_READ_ONLY",
+  "caveats": [
+    "The update procedure text is user-provided official webpage text and is not independently repo-verified in this branch.",
+    "UF2 file structure, sizes, ranges, and hashes are exact for the stored files.",
+    "Profile/config wipe interpretation is inferred from the user-facing Fresh Install behavior, the all-zero high-flash segment, and repo build configuration.",
+    "Storing these UF2 files does not authorize flashing hardware or copying files to RPI-RP2.",
+    "Custom firmware must not be described as safe to flash until artifact format, write ranges, recovery path, and rollback procedure are verified."
+  ]
+}
