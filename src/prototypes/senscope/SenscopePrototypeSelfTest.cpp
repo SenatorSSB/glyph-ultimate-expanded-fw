@@ -3,6 +3,7 @@
 #include "prototypes/senscope/SenscopePrototypeDigital.hpp"
 #include "prototypes/senscope/SenscopePrototypeDirection.hpp"
 #include "prototypes/senscope/SenscopePrototypeForce.hpp"
+#include "prototypes/senscope/SenscopePrototypeOutput.hpp"
 #include "prototypes/senscope/SenscopePrototypeResolver.hpp"
 #include "prototypes/senscope/SenscopePrototypeTypes.hpp"
 
@@ -261,6 +262,98 @@ SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
                 force_result.matched &&
                 force_result.diagnostic_code ==
                     SenscopePrototypeForceDiagnosticCode::EqualPriorityRuleAmbiguity
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.active_physical_button_mask = kExampleFixedForceRuleTriggerMask;
+        request.direct_digital_output_mask = kSenscopePrototypeOutputA;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        const SenscopePrototypeDigitalOutputMask expected_output_mask =
+            kSenscopePrototypeOutputA | kSenscopePrototypeOutputB;
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionForceWins,
+            output_result.status == SenscopePrototypeOutputStatus::Composed &&
+                output_result.output_packet.has_force_override &&
+                output_result.output_packet.has_left_stick &&
+                !output_result.output_packet.used_table_resolver &&
+                CoordEquals(output_result.output_packet.left_stick_raw_coordinate, 128, 228) &&
+                (output_result.output_packet.digital_output_mask & expected_output_mask) ==
+                    expected_output_mask
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.active_physical_button_mask = kExampleDigitalRuleTriggerMask;
+        request.direct_digital_output_mask = kSenscopePrototypeOutputA;
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleLeft | kSenscopePrototypeDirectionRoleUp;
+        request.active_modifier_mask = kExampleModifierMask001;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionTableResolverUsedWhenNoForce,
+            output_result.status == SenscopePrototypeOutputStatus::Composed &&
+                !output_result.output_packet.has_force_override &&
+                output_result.output_packet.used_table_resolver &&
+                output_result.output_packet.used_digital_composition &&
+                CoordEquals(output_result.output_packet.left_stick_raw_coordinate, 44, 212) &&
+                output_result.digital_result.status == SenscopePrototypeDigitalStatus::Composed
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.direct_digital_output_mask = kUnknownDigitalOutputBit;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionDigitalFailurePropagates,
+            output_result.status == SenscopePrototypeOutputStatus::DigitalFailed &&
+                output_result.diagnostic_code ==
+                    SenscopePrototypeOutputDiagnosticCode::DigitalInvalidDirectOutputMask
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleLeft | static_cast<SenscopePrototypeDirectionRoleMask>(1u << 7);
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionDirectionFailurePropagates,
+            output_result.status == SenscopePrototypeOutputStatus::DirectionFailed &&
+                output_result.diagnostic_code ==
+                    SenscopePrototypeOutputDiagnosticCode::DirectionUnknownRoleBitsMasked
+        );
+    }
+
+    {
+        SenscopePrototypeOutputRequest request = {};
+        request.pre_socd_direction_roles =
+            kSenscopePrototypeDirectionRoleLeft | kSenscopePrototypeDirectionRoleUp;
+        request.active_modifier_mask = kUndefinedExactModifierMask010;
+        request.resolver_fallback_policy = SenscopePrototypeResolverFallbackPolicy::RequireExactComboProfile;
+        const SenscopePrototypeOutputResult output_result =
+            ComposeSenscopePrototypeOutput(example_profile, request);
+        AddSelfTestCaseResult(
+            result,
+            SenscopePrototypeSelfTestCaseId::OutputCompositionNoLeftStickWhenNoMatchingCombo,
+            output_result.status == SenscopePrototypeOutputStatus::NoLeftStickOutput &&
+                output_result.diagnostic_code ==
+                    SenscopePrototypeOutputDiagnosticCode::TableResolverNoMatchingComboProfile &&
+                output_result.resolver_result.status ==
+                    SenscopePrototypeResolverStatus::NoMatchingComboProfile &&
+                output_result.resolver_result.diagnostic_code ==
+                    SenscopePrototypeResolverDiagnosticCode::ExactMatchRequiredButNotFound
         );
     }
 

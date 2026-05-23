@@ -58,14 +58,14 @@ Boundary:
 
 ## 6. Verification
 
-Planned/required commands for this batch:
+Re-verified during G11n2 audit follow-on:
 
-- `git status`
-- `git diff --stat`
-- `find . -maxdepth 4 -type f | rg '/(test|tests|spec)/|(_test\\.|\\.test\\.|\\.spec\\.)|package.json|pytest|CMakeLists|platformio.ini' || true`
-- `test -x ./scripts/pio-local.sh`
-- `test -x ./scripts/build-glyph-mk6-quiet.sh`
-- `./scripts/build-glyph-mk6-quiet.sh`
+- `git status`: passed
+- `git diff --stat`: passed
+- `find . -maxdepth 4 -type f | rg '/(test|tests|spec)/|(_test\\.|\\.test\\.|\\.spec\\.)|package.json|pytest|CMakeLists|platformio.ini' || true`: matched expected inventory entries including `platformio.ini`
+- `test -x ./scripts/pio-local.sh`: passed
+- `test -x ./scripts/build-glyph-mk6-quiet.sh`: passed
+- `./scripts/build-glyph-mk6-quiet.sh`: passed (`glyph_mk6 build passed`)
 
 ## 7. Recommended next batches
 
