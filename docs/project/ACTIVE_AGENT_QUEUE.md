@@ -89,7 +89,9 @@ G11k mode-selection wiring implementation plan (docs-only) is complete on `desig
 
 G11k-impl minimal mode-selection preparation is complete on `proto/glyph-mode-selection-prep-g11k-impl`.
 
-After G11k-impl, stop for inspection. Do not proceed to G11l runtime output behavior without explicit approval.
+G11l-n first output behavior design + test strategy docs + isolated output-composition scaffold is complete on `proto/glyph-output-composition-design-g11l-n`.
+
+After G11l-n, stop for inspection. Do not proceed to selected runtime output behavior implementation without explicit approval.
 
 ## Next candidate batches
 
@@ -155,7 +157,7 @@ Scope:
 
 ## Explicit stop condition
 
-After G11k-impl, stop for inspection. Do not implement G11l runtime output behavior without explicit user approval.
+After G11l-n, stop for inspection. Do not implement selected runtime output behavior without explicit user approval.
 
 ## Verification
 
