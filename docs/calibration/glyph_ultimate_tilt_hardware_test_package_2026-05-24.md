@@ -43,6 +43,19 @@ Record the artifact identity before any manual flash:
 | Size bytes | `TODO` |
 | SHA-256 | `TODO` |
 
+Generate and validate the RC manifest for this candidate:
+
+```bash
+.venv/bin/python tools/write_glyph_ultimate_tilt_rc_manifest.py --output docs/calibration/glyph_ultimate_tilt_rc_manifest.md
+.venv/bin/python tools/check_glyph_ultimate_tilt_rc_manifest.py
+```
+
+RC manifest reference:
+
+- `docs/calibration/glyph_ultimate_tilt_rc_manifest.md`
+- `tools/write_glyph_ultimate_tilt_rc_manifest.py`
+- `tools/check_glyph_ultimate_tilt_rc_manifest.py`
+
 ## 4. Required Pre-Flash Checks
 
 - Python checks listed in the hardware-test branch handoff have passed.
@@ -62,6 +75,13 @@ Record the artifact identity before any manual flash:
 
 ```bash
 .venv/bin/python tools/inspect_glyph_mk6_build_artifact.py
+```
+
+- RC manifest generated and validated:
+
+```bash
+.venv/bin/python tools/write_glyph_ultimate_tilt_rc_manifest.py --output docs/calibration/glyph_ultimate_tilt_rc_manifest.md
+.venv/bin/python tools/check_glyph_ultimate_tilt_rc_manifest.py
 ```
 
 - Worktree is clean.

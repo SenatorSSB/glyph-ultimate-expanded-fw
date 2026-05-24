@@ -18,11 +18,23 @@ The real result file must include:
 
 - tester, date, and hardware identifier
 - branch name and commit SHA
+- RC manifest path and generation/check status
 - firmware artifact path and SHA-256 hash
 - profile/config used during test
 - smoke-test outcomes (including Tilt1/Tilt2 direction rows)
 - rollback status
 - final disposition
+
+## RC Manifest Evidence
+
+Before manual hardware use, record RC manifest evidence using:
+
+- `tools/write_glyph_ultimate_tilt_rc_manifest.py`
+- `tools/check_glyph_ultimate_tilt_rc_manifest.py`
+
+The default RC manifest path is:
+
+- `docs/calibration/glyph_ultimate_tilt_rc_manifest.md`
 
 ## Allowed Final Dispositions
 

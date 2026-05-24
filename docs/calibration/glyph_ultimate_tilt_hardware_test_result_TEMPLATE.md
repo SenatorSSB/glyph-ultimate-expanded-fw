@@ -11,6 +11,7 @@ Do not fill this template until a human-controlled hardware test is performed.
 | Hardware |  |
 | Branch |  |
 | Commit SHA |  |
+| RC manifest path | `docs/calibration/glyph_ultimate_tilt_rc_manifest.md` |
 | Artifact path |  |
 | Artifact SHA-256 |  |
 | Profile/config used |  |
@@ -24,6 +25,8 @@ Do not fill this template until a human-controlled hardware test is performed.
 | Firmware build passed |  |  |
 | Artifact path recorded |  |  |
 | Artifact SHA-256 recorded |  |  |
+| RC manifest generated |  |  |
+| RC manifest checker passed |  |  |
 | Worktree clean |  |  |
 | Known-good rollback firmware available |  |  |
 | Known-good rollback profile/config available |  |  |
