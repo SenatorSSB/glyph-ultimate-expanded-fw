@@ -11,6 +11,7 @@
 #include "modes/SenscopePrototype.hpp"
 #include "modes/Ultimate.hpp"
 #include "modes/64.hpp"
+#include "prototypes/senscope/SenscopePrototypeBuildFlags.hpp"
 #include "util/state_util.hpp"
 
 #include <config.pb.h>
@@ -31,8 +32,6 @@ uint64_t mode_activation_masks[10];
 size_t current_mode_index = SIZE_MAX;
 
 namespace {
-
-constexpr bool kEnableSenscopePrototypeManualSelection = false;
 
 bool IsSenscopePrototypeManualDebugChordHeld(const InputState &inputs) {
     // Manual/debug-only chord, intentionally outside config/protobuf/default mode wiring.
@@ -167,7 +166,7 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
 
     InputState &inputs = backends[0]->GetInputs();
 
-    if constexpr (kEnableSenscopePrototypeManualSelection) {
+    if constexpr (senscope::prototype::kEnableSenscopePrototypeManualSelection) {
         if (TrySelectSenscopePrototypeManualDebugMode(backends, backends_count, inputs)) {
             return;
         }
