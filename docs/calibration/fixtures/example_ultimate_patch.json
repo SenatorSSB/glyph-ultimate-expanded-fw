@@ -1,0 +1,13 @@
+{
+  "note": "Illustrative only; this is not a production Senscope export patch.",
+  "ultimateRemaps": [
+    {
+      "physicalButton": "BTN_RF13",
+      "activates": "BTN_RF7"
+    },
+    {
+      "physicalButton": "BTN_RF14",
+      "activates": "BTN_RF3"
+    }
+  ]
+}
