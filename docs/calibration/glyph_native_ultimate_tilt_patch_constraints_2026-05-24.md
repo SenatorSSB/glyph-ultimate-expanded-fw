@@ -17,6 +17,9 @@ This is a constraints document only. It does not add runtime behavior.
 
 - Final Tilt1/Tilt2 numeric values must be provided/approved.
 - Activation button or chord mapping must be provided/approved.
+  - Current uploaded MVP layout confirmation: Tilt1 / TILT is physical `BTN_RF3` -> logical `BTN_LT1` -> future runtime `inputs.lt1`.
+  - Current uploaded MVP layout confirmation: Tilt2 is physical `BTN_RF4` -> logical `BTN_LT2` -> future runtime `inputs.lt2`.
+  - Future runtime should use post-remap logical inputs, not raw physical `RF3`/`RF4` bypass semantics.
 - Explicit decision whether Tilt/Tilt2 targets left stick only.
 - Explicit decision whether behavior must preserve existing C-stick/right-stick/trigger behavior unchanged.
 

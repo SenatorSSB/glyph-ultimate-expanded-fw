@@ -1,0 +1,223 @@
+{
+  "spec_name": "glyph_ultimate_tilt_domain_spec",
+  "spec_date": "2026-05-24",
+  "source_kind": "USER_SUPPLIED_DOMAIN_SPEC",
+  "status": {
+    "firmware_implemented": false,
+    "hardware_tested": false,
+    "runtime_behavior_changed_in_branch": false
+  },
+  "coordinate_convention": {
+    "space": "absolute_raw_byte",
+    "range": [
+      0,
+      255
+    ],
+    "neutral": {
+      "x": 128,
+      "y": 128
+    },
+    "direction_keys": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ]
+  },
+  "source_smash_box_values": {
+    "tilt1": {
+      "x": 197,
+      "y_up": 41,
+      "y_down": 41,
+      "signed_interpretation": {
+        "x_as_int8": -59,
+        "note": "Conceptual only; runtime must use explicit coordinates."
+      }
+    },
+    "tilt2": {
+      "x": 40,
+      "y_up": 49,
+      "y_down": 49
+    }
+  },
+  "tables": {
+    "base": {
+      "1": { "x": 28, "y": 28 },
+      "2": { "x": 128, "y": 28 },
+      "3": { "x": 228, "y": 28 },
+      "4": { "x": 28, "y": 128 },
+      "5": { "x": 128, "y": 128 },
+      "6": { "x": 228, "y": 128 },
+      "7": { "x": 28, "y": 228 },
+      "8": { "x": 128, "y": 228 },
+      "9": { "x": 228, "y": 228 }
+    },
+    "tilt1": {
+      "1": { "x": 187, "y": 87 },
+      "2": { "x": 128, "y": 87 },
+      "3": { "x": 69, "y": 87 },
+      "4": { "x": 187, "y": 128 },
+      "5": { "x": 128, "y": 128 },
+      "6": { "x": 69, "y": 128 },
+      "7": { "x": 187, "y": 169 },
+      "8": { "x": 128, "y": 169 },
+      "9": { "x": 69, "y": 169 }
+    },
+    "tilt2": {
+      "1": { "x": 88, "y": 79 },
+      "2": { "x": 128, "y": 79 },
+      "3": { "x": 168, "y": 79 },
+      "4": { "x": 88, "y": 128 },
+      "5": { "x": 128, "y": 128 },
+      "6": { "x": 168, "y": 128 },
+      "7": { "x": 88, "y": 177 },
+      "8": { "x": 128, "y": 177 },
+      "9": { "x": 168, "y": 177 }
+    }
+  },
+  "button_id_confirmation": {
+    "status": "CONFIRMED_FOR_UPLOADED_MVP_LAYOUT",
+    "evidence_kind": [
+      "USER_UPLOADED_PROFILE_JSON",
+      "USER_UPLOADED_SCREENSHOT",
+      "REPO_SOURCE_GEOMETRY"
+    ],
+    "evidence_paths": [
+      "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
+      "config/glyph/glyph_mk6/include/button_positions.hpp",
+      "config/glyph/glyph_mk6/include/matrix_definition.hpp"
+    ],
+    "tilt1": {
+      "name": "TILT",
+      "semantic_role": "replace_mx",
+      "physical_button": "BTN_RF3",
+      "logical_post_remap_input": "BTN_LT1",
+      "future_runtime_input": "inputs.lt1"
+    },
+    "tilt2": {
+      "name": "Tilt2",
+      "semantic_role": "replace_my",
+      "physical_button": "BTN_RF4",
+      "logical_post_remap_input": "BTN_LT2",
+      "future_runtime_input": "inputs.lt2"
+    },
+    "rejected_button_ids": [
+      {
+        "id": "BTN_RF5",
+        "reason": "Not the intended MX/MY replacement for the uploaded MVP layout."
+      }
+    ],
+    "runtime_semantics": {
+      "use_post_remap_logical_inputs": true,
+      "bypass_remap_with_physical_inputs": false,
+      "profile_remap_change_required": false,
+      "runtime_approved": false
+    },
+    "preserve_outputs": [
+      "right_stick",
+      "triggers"
+    ],
+    "notes": [
+      "Future runtime implementation must remain left-stick only unless separately approved.",
+      "No runtime implementation is added by this fixture update."
+    ]
+  },
+  "explicit_byte_safe_coordinates": true,
+  "no_overflow_dependency": true,
+  "byte_safety": {
+    "explicit_coordinate_strategy": true,
+    "no_overflow_dependency": true,
+    "notes": [
+      "Tilt1/Tilt2 must be implemented using explicit absolute raw coordinates.",
+      "Do not depend on uint8 wraparound or overflow behavior."
+    ]
+  },
+  "target_outputs": [
+    "left_stick"
+  ],
+  "preserve_outputs": [
+    "right_stick",
+    "triggers"
+  ],
+  "activation_mapping": {
+    "status": "confirmed_for_uploaded_mvp_layout",
+    "profile_fixture": "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
+    "tilt1": {
+      "name": "TILT",
+      "semantic_role": "replace_mx",
+      "physical_button": "BTN_RF3",
+      "logical_post_remap_input": "BTN_LT1",
+      "future_runtime_input": "inputs.lt1"
+    },
+    "tilt2": {
+      "name": "Tilt2",
+      "semantic_role": "replace_my",
+      "physical_button": "BTN_RF4",
+      "logical_post_remap_input": "BTN_LT2",
+      "future_runtime_input": "inputs.lt2"
+    },
+    "rejected_button_ids": [
+      "BTN_RF5"
+    ],
+    "runtime_semantics": {
+      "use_post_remap_logical_inputs": true,
+      "bypass_remap_with_physical_inputs": false,
+      "profile_remap_change_required": false,
+      "runtime_approved": false
+    }
+  },
+  "default_ultimate_mapping_supplied_by_user": {
+    "digital_buttons": {
+      "A": "rt1",
+      "B": "rf1",
+      "X": "rf2",
+      "Y": "rf6",
+      "R": "rf3",
+      "L": "lf4",
+      "R_digital_trigger": "rf5",
+      "Start": "mb7",
+      "Select": "mb6",
+      "Home": "mb5",
+      "Capture": "mb4"
+    },
+    "left_stick_directions": {
+      "Left": "lf3",
+      "Right": "lf1",
+      "Down": "lf2",
+      "Up": "rf4"
+    },
+    "c_stick_directions": {
+      "C_left": "rt3",
+      "C_right": "rt5",
+      "C_down": "rt2",
+      "C_up": "rt4"
+    },
+    "modifiers": {
+      "MX": "lt1",
+      "MY": "lt2"
+    },
+    "dpad": {
+      "Up": "rf8",
+      "Down": "rf7",
+      "Left": "lf8",
+      "Right": "lf6"
+    },
+    "dpad_layer_when_lt1_lt2_or_nunchuk_c": {
+      "Up": "rt4",
+      "Down": "rt2",
+      "Left": "rt3",
+      "Right": "rt5"
+    }
+  },
+  "notes": [
+    "The uploaded/current MVP profile already routes physical BTN_RF3 to logical BTN_LT1 and physical BTN_RF4 to logical BTN_LT2 in Ultimate mode.",
+    "Future runtime code should observe post-remap logical inputs inputs.lt1 and inputs.lt2, not bypass remap with raw physical RF3/RF4 checks.",
+    "BTN_RF5 is rejected for this layout's Tilt1/Tilt2 target.",
+    "The unassigned button below the left-hand WASD-like cluster remains unresolved (user/domain note)."
+  ]
+}
