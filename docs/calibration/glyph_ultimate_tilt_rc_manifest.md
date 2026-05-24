@@ -1,19 +1,43 @@
 # Glyph Ultimate Tilt RC Manifest
 
 ## RC Identity
-- branch: `configurator`
-- commit_sha: `c28b9f2d51f721567dfcbdb2c104be5bf2961233`
+- manifest_generated_from_branch: `glyph/ultimate-tilt-rc-manifest-provenance`
+- firmware_source_commit_sha: `b69d91ad3425a8820be0240b060be1cd182e0171`
+- manifest_generation_note: This manifest is generated before the manifest commit exists; it is not self-referential to a final manifest commit SHA.
 - build_command: `./scripts/build-glyph-mk6-quiet.sh`
 - runtime_implementation_source: `src/modes/Ultimate.cpp`
 - hardware_test_status: NOT_TESTED
 - flashing_automation: NOT_INCLUDED
 
 ## Git Dirty Summary
-- git_dirty_state: CLEAN
-- staged_entries: 0
-- unstaged_entries: 0
-- untracked_entries: 0
-- git_status_short: CLEAN
+- git_dirty_state: DIRTY
+- firmware_relevant_dirty_state: CLEAN
+- staged_entries: 1
+- unstaged_entries: 5
+- untracked_entries: 2
+- firmware_relevant_dirty_entries: none
+- non_firmware_dirty_entries:
+```text
+ M docs/calibration/glyph_ultimate_tilt_hardware_test_package_2026-05-24.md
+ M docs/calibration/glyph_ultimate_tilt_rc_manifest.md
+ M docs/calibration/glyph_ultimate_tilt_rc_manifest_handoff.md
+ M tools/check_glyph_ultimate_tilt_rc_manifest.py
+ M tools/write_glyph_ultimate_tilt_rc_manifest.py
+?? docs/calibration/glyph_ultimate_tilt_rc_manifest_provenance_2026-05-24.md
+?? docs/calibration/glyph_ultimate_tilt_rc_manifest_provenance_handoff.md
+M docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md
+```
+- git_status_short:
+```text
+ M docs/calibration/glyph_ultimate_tilt_hardware_test_package_2026-05-24.md
+ M docs/calibration/glyph_ultimate_tilt_rc_manifest.md
+ M docs/calibration/glyph_ultimate_tilt_rc_manifest_handoff.md
+ M tools/check_glyph_ultimate_tilt_rc_manifest.py
+ M tools/write_glyph_ultimate_tilt_rc_manifest.py
+?? docs/calibration/glyph_ultimate_tilt_rc_manifest_provenance_2026-05-24.md
+?? docs/calibration/glyph_ultimate_tilt_rc_manifest_provenance_handoff.md
+M docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md
+```
 
 ## Artifact Candidates
 - artifact_status: FOUND
@@ -21,13 +45,13 @@
 - candidate_suffixes: `.uf2, .bin, .elf, .hex`
 - artifact_1_path: `.pio/build/glyph_mk6/firmware.uf2`
 - artifact_1_size_bytes: `784384`
-- artifact_1_sha256: `a507d28273591c0c2bdbda1f023af82fdee435e476d1217155e22d48a3d51985`
+- artifact_1_sha256: `0530460c22604dc88c8f2766153bc717ff29e09e228cb319d3f7058894800606`
 - artifact_2_path: `.pio/build/glyph_mk6/firmware.bin`
-- artifact_2_size_bytes: `391952`
-- artifact_2_sha256: `8042d2c7898b884aa28e53bb587aa4a4a22e61faaefbc7926e191e8ad2324b31`
+- artifact_2_size_bytes: `391960`
+- artifact_2_sha256: `371c3fb99f218410fabb13e6faf2efb7b859a3f9398ba214eff6c889dc77e04b`
 - artifact_3_path: `.pio/build/glyph_mk6/firmware.elf`
 - artifact_3_size_bytes: `5405012`
-- artifact_3_sha256: `18f4a083be6c48b84b8efa743558ebe8c57ad67fdbd3b7a12de8e9cdaae9b52b`
+- artifact_3_sha256: `ff83197589744133c9b6bc6715ee2d317319578037205656fde9f7946944376c`
 
 ## Tilt Input Summary
 - tilt1_input: `inputs.lt1` (post-remap logical input)

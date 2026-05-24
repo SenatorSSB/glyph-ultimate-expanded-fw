@@ -31,10 +31,18 @@ Before manual hardware use, record RC manifest evidence using:
 
 - `tools/write_glyph_ultimate_tilt_rc_manifest.py`
 - `tools/check_glyph_ultimate_tilt_rc_manifest.py`
+- `docs/calibration/glyph_ultimate_tilt_rc_manifest_provenance_2026-05-24.md`
 
 The default RC manifest path is:
 
 - `docs/calibration/glyph_ultimate_tilt_rc_manifest.md`
+
+Minimum provenance assertions before manual flash:
+
+- `firmware_source_commit_sha` is recorded as a 40-hex commit SHA.
+- `manifest_generated_from_branch` is recorded.
+- `firmware_relevant_dirty_state` is `CLEAN`.
+- `git_dirty_state` may be `DIRTY` only when dirty entries are non-firmware docs/tools paths.
 
 ## Allowed Final Dispositions
 

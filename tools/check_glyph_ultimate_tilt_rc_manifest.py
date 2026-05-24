@@ -34,6 +34,13 @@ def _require(pattern: str, text: str, label: str) -> None:
         _fail(f"missing {label}")
 
 
+def _extract_scalar(field: str, text: str) -> str:
+    match = re.search(rf"^\s*-\s*{re.escape(field)}:\s*(.+)\s*$", text, flags=re.MULTILINE)
+    if match is None:
+        _fail(f"missing {field}")
+    return match.group(1).strip()
+
+
 def _resolve_path(path_arg: str) -> Path:
     path = Path(path_arg)
     if path.is_absolute():
@@ -54,16 +61,44 @@ def run(path: Path) -> None:
     text = path.read_text(encoding="utf-8")
 
     _require(r"^#\s+Glyph Ultimate Tilt RC Manifest\s*$", text, "title")
-    _require(r"branch:\s*`[^`]+`", text, "branch")
-    _require(r"commit_sha:\s*`[0-9a-fA-F]{40}`", text, "commit SHA")
+    _require(
+        r"manifest_generated_from_branch:\s*`[^`]+`",
+        text,
+        "manifest_generated_from_branch",
+    )
+    _require(
+        r"firmware_source_commit_sha:\s*`[0-9a-fA-F]{40}`",
+        text,
+        "firmware_source_commit_sha",
+    )
+    _require(r"manifest_generation_note:\s*.+", text, "manifest_generation_note")
     _require(r"^##\s+Artifact Candidates\s*$", text, "artifact section")
     _require(r"artifact_status:\s*(FOUND|MISSING)", text, "artifact status")
     _require(r"hardware_test_status:\s*NOT_TESTED", text, "hardware test status NOT_TESTED")
     _require(r"flashing_automation:\s*NOT_INCLUDED", text, "flashing automation NOT_INCLUDED")
+    _require(r"git_dirty_state:\s*(CLEAN|DIRTY)", text, "git_dirty_state")
+    _require(
+        r"firmware_relevant_dirty_state:\s*(CLEAN|DIRTY)",
+        text,
+        "firmware_relevant_dirty_state",
+    )
     _require(r"^##\s+Tilt Input Summary\s*$", text, "Tilt input summary section")
     _require(r"inputs\.lt1", text, "Tilt1 logical input summary")
     _require(r"inputs\.lt2", text, "Tilt2 logical input summary")
     _require(r"^##\s+Verification Commands\s*$", text, "verification commands section")
+
+    git_dirty_state = _extract_scalar("git_dirty_state", text)
+    firmware_relevant_dirty_state = _extract_scalar("firmware_relevant_dirty_state", text)
+
+    if git_dirty_state not in {"CLEAN", "DIRTY"}:
+        _fail(f"git_dirty_state must be CLEAN or DIRTY, got {git_dirty_state!r}")
+    if firmware_relevant_dirty_state not in {"CLEAN", "DIRTY"}:
+        _fail(
+            "firmware_relevant_dirty_state must be CLEAN or DIRTY, "
+            f"got {firmware_relevant_dirty_state!r}"
+        )
+    if firmware_relevant_dirty_state == "DIRTY":
+        _fail("firmware_relevant_dirty_state must be CLEAN for RC validation")
 
     _validate_sha256_values(text)
 
