@@ -67,6 +67,15 @@ Tilt2 runtime input: post-remap logical `inputs.lt2`.
 - Overflow/wrap dependency avoided: yes.
 - Hardware tested: no.
 
+## Hardware Test Package
+
+- Manual hardware test package: `docs/calibration/glyph_ultimate_tilt_hardware_test_package_2026-05-24.md`
+- Blank result template: `docs/calibration/glyph_ultimate_tilt_hardware_test_result_TEMPLATE.md`
+- Hardware-test package handoff: `docs/calibration/glyph_ultimate_tilt_hardware_test_package_handoff.md`
+- Build artifact checksum helper: `tools/inspect_glyph_mk6_build_artifact.py`
+- Flashing/push-to-device automation added by the package: no.
+- Hardware test performed: no.
+
 ## Verification Commands And Results
 
 Record final command results after branch verification:
