@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import subprocess
@@ -21,6 +22,25 @@ DOMAIN_FIXTURE_REL = Path("docs/calibration/fixtures/glyph_ultimate_tilt_domain_
 ARTIFACT_ROOT_REL = Path(".pio/build/glyph_mk6")
 ARTIFACT_ROOT = REPO_ROOT / ARTIFACT_ROOT_REL
 ARTIFACT_SUFFIXES = (".uf2", ".bin", ".elf", ".hex")
+FIRMWARE_RELEVANT_PREFIXES = (
+    "src/",
+    "include/",
+    "HAL/",
+    "config/",
+    "proto/",
+    "schema/",
+    "configurator/",
+    "backend/",
+    "persistence/",
+)
+FIRMWARE_RELEVANT_EXACT = ("platformio.ini",)
+FIRMWARE_RELEVANT_SEGMENTS = (
+    "/proto/",
+    "/schema/",
+    "/configurator/",
+    "/backend/",
+    "/persistence/",
+)
 
 VERIFICATION_COMMANDS = (
     ".venv/bin/python tools/check_glyph_calibration_fixtures.py",
@@ -192,12 +212,75 @@ def _dirty_summary(status_lines: list[str]) -> tuple[str, int, int, int]:
     return ("DIRTY", staged, unstaged, untracked)
 
 
+def _decode_status_path_token(token: str) -> str:
+    token = token.strip()
+    if token.startswith('"') and token.endswith('"'):
+        try:
+            decoded = ast.literal_eval(token)
+        except (SyntaxError, ValueError):
+            return token.strip('"')
+        if isinstance(decoded, str):
+            return decoded
+    return token
+
+
+def _extract_status_paths(status_line: str) -> list[str]:
+    payload = status_line[3:].strip() if len(status_line) >= 3 else ""
+    if not payload:
+        return []
+    if " -> " in payload:
+        left, right = payload.split(" -> ", 1)
+        return [_decode_status_path_token(left), _decode_status_path_token(right)]
+    return [_decode_status_path_token(payload)]
+
+
+def _is_build_script_path(path: str) -> bool:
+    normalized = path.replace("\\", "/").lstrip("./")
+    if not normalized.startswith("scripts/"):
+        return False
+    name = Path(normalized).name.lower()
+    if "build" in name:
+        return True
+    return name == "pio-local.sh" or name.startswith("pio-") or name.startswith("pio_")
+
+
+def _is_firmware_relevant_path(path: str) -> bool:
+    normalized = path.replace("\\", "/").lstrip("./")
+    if normalized in FIRMWARE_RELEVANT_EXACT:
+        return True
+    if _is_build_script_path(normalized):
+        return True
+    if any(
+        normalized == prefix.rstrip("/") or normalized.startswith(prefix)
+        for prefix in FIRMWARE_RELEVANT_PREFIXES
+    ):
+        return True
+
+    padded = f"/{normalized}/"
+    return any(segment in padded for segment in FIRMWARE_RELEVANT_SEGMENTS)
+
+
+def _split_dirty_entries(status_lines: list[str]) -> tuple[list[str], list[str]]:
+    firmware_relevant: list[str] = []
+    non_firmware: list[str] = []
+    for status_line in status_lines:
+        paths = _extract_status_paths(status_line)
+        is_relevant = any(_is_firmware_relevant_path(path) for path in paths)
+        if is_relevant:
+            firmware_relevant.append(status_line)
+        else:
+            non_firmware.append(status_line)
+    return firmware_relevant, non_firmware
+
+
 def _render_manifest() -> tuple[str, bool]:
     branch = _git(["rev-parse", "--abbrev-ref", "HEAD"])
-    commit_sha = _git(["rev-parse", "HEAD"])
+    firmware_source_commit_sha = _git(["rev-parse", "HEAD"])
     status_short = _git(["status", "--short"])
     status_lines = sorted(line for line in status_short.splitlines() if line.strip())
     dirty_state, staged_count, unstaged_count, untracked_count = _dirty_summary(status_lines)
+    firmware_relevant_entries, non_firmware_entries = _split_dirty_entries(status_lines)
+    firmware_relevant_dirty_state = "DIRTY" if firmware_relevant_entries else "CLEAN"
 
     artifacts = _scan_artifacts()
     artifact_status = "FOUND" if artifacts else "MISSING"
@@ -207,8 +290,11 @@ def _render_manifest() -> tuple[str, bool]:
     lines.append("# Glyph Ultimate Tilt RC Manifest")
     lines.append("")
     lines.append("## RC Identity")
-    lines.append(f"- branch: `{branch}`")
-    lines.append(f"- commit_sha: `{commit_sha}`")
+    lines.append(f"- manifest_generated_from_branch: `{branch}`")
+    lines.append(f"- firmware_source_commit_sha: `{firmware_source_commit_sha}`")
+    lines.append(
+        "- manifest_generation_note: This manifest is generated before the manifest commit exists; it is not self-referential to a final manifest commit SHA."
+    )
     lines.append(f"- build_command: `{BUILD_COMMAND}`")
     lines.append(f"- runtime_implementation_source: `{RUNTIME_SOURCE_REL.as_posix()}`")
     lines.append("- hardware_test_status: NOT_TESTED")
@@ -216,9 +302,24 @@ def _render_manifest() -> tuple[str, bool]:
     lines.append("")
     lines.append("## Git Dirty Summary")
     lines.append(f"- git_dirty_state: {dirty_state}")
+    lines.append(f"- firmware_relevant_dirty_state: {firmware_relevant_dirty_state}")
     lines.append(f"- staged_entries: {staged_count}")
     lines.append(f"- unstaged_entries: {unstaged_count}")
     lines.append(f"- untracked_entries: {untracked_count}")
+    if firmware_relevant_entries:
+        lines.append("- firmware_relevant_dirty_entries:")
+        lines.append("```text")
+        lines.extend(firmware_relevant_entries)
+        lines.append("```")
+    else:
+        lines.append("- firmware_relevant_dirty_entries: none")
+    if non_firmware_entries:
+        lines.append("- non_firmware_dirty_entries:")
+        lines.append("```text")
+        lines.extend(non_firmware_entries)
+        lines.append("```")
+    else:
+        lines.append("- non_firmware_dirty_entries: none")
     if status_lines:
         lines.append("- git_status_short:")
         lines.append("```text")
