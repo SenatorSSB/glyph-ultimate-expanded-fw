@@ -3,9 +3,9 @@
   "spec_date": "2026-05-24",
   "source_kind": "USER_SUPPLIED_DOMAIN_SPEC",
   "status": {
-    "firmware_implemented": false,
+    "firmware_implemented": true,
     "hardware_tested": false,
-    "runtime_behavior_changed_in_branch": false
+    "runtime_behavior_changed_in_branch": true
   },
   "coordinate_convention": {
     "space": "absolute_raw_byte",
@@ -116,7 +116,7 @@
       "use_post_remap_logical_inputs": true,
       "bypass_remap_with_physical_inputs": false,
       "profile_remap_change_required": false,
-      "runtime_approved": false
+      "runtime_approved": true
     },
     "preserve_outputs": [
       "right_stick",
@@ -124,8 +124,20 @@
     ],
     "notes": [
       "Future runtime implementation must remain left-stick only unless separately approved.",
-      "No runtime implementation is added by this fixture update."
+      "Runtime implementation is native Ultimate left-stick only; hardware smoke testing is still required before device use."
     ]
+  },
+  "runtime_implementation": {
+    "status": "IMPLEMENTED_IN_NATIVE_ULTIMATE",
+    "source_file": "src/modes/Ultimate.cpp",
+    "uses_post_remap_logical_inputs": true,
+    "tilt1_runtime_input": "inputs.lt1",
+    "tilt2_runtime_input": "inputs.lt2",
+    "left_stick_only": true,
+    "preserve_right_stick": true,
+    "preserve_triggers": true,
+    "no_overflow_dependency": true,
+    "hardware_tested": false
   },
   "explicit_byte_safe_coordinates": true,
   "no_overflow_dependency": true,
@@ -168,7 +180,7 @@
       "use_post_remap_logical_inputs": true,
       "bypass_remap_with_physical_inputs": false,
       "profile_remap_change_required": false,
-      "runtime_approved": false
+      "runtime_approved": true
     }
   },
   "default_ultimate_mapping_supplied_by_user": {

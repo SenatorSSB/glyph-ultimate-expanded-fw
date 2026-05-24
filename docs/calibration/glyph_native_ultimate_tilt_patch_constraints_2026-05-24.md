@@ -2,15 +2,14 @@
 
 ## Purpose
 
-Define guardrails for a later minimal native `MODE_ULTIMATE` Tilt/Tilt2 runtime branch.
+Define guardrails for the minimal native `MODE_ULTIMATE` Tilt/Tilt2 runtime branch.
 
-This is a constraints document only. It does not add runtime behavior.
+This document records constraints for the runtime branch. It does not define flashing, push-to-device behavior, or hardware-test completion.
 
 ## 1) Allowed later runtime scope
 
-- Exactly one implementation branch for runtime experimentation.
-- Native `MODE_ULTIMATE` scope only, and only if explicitly approved.
-- One or two custom modifier outputs only (narrowly scoped).
+- Native `MODE_ULTIMATE` scope only.
+- Tilt1/Tilt2 left-stick outputs only.
 - No broad firmware refactor.
 
 ## 2) Required explicit inputs before runtime patch
@@ -39,6 +38,8 @@ This is a constraints document only. It does not add runtime behavior.
 - Perform targeted source diff review for `MODE_ULTIMATE` runtime changes.
 - Confirm build passes.
 - Require owner-reviewed hardware smoke-test protocol before any manual flash.
+- Hardware-owner smoke test is still required before device use; no hardware testing is claimed by this runtime implementation.
+- Do not add flashing automation or push-to-device workflow.
 
 ## Source notes
 
