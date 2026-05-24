@@ -66,7 +66,7 @@ Base branch: `configurator`
 - `.venv/bin/python tools/list_glyph_tilt_runtime_gate_sources.py` -> pass.
 - `.venv/bin/python tools/list_glyph_native_ultimate_analog_sources.py` -> pass.
 - `.venv/bin/python tools/check_glyph_native_ultimate_snapshot.py` -> pass.
-- `.venv/bin/python tools/check_glyph_future_tilt_patch_scope.py --base configurator --mode docs-only` -> pass before commit with no committed diff; rerun after commit expected.
+- `.venv/bin/python tools/check_glyph_future_tilt_patch_scope.py --base configurator --mode docs-only` -> pass after commit; 11 changed docs/tools files, all allowlisted.
 - `.venv/bin/python tools/check_glyph_ultimate_tilt_domain_spec.py` -> pass.
 - `.venv/bin/python tools/list_glyph_tilt_button_id_candidates.py` -> pass.
 - `.venv/bin/python tools/check_glyph_tilt_button_id_probe.py` -> pass.
