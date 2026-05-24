@@ -45,11 +45,19 @@ Do not guess values.
 
 - Physical button(s): `<fill>`
 - Logical input name(s): `<fill>`
+- Post-remap runtime input(s): `<fill>`
 - Chord requirement(s): `<fill>`
 - Direction interaction: `<fill>`
 - Priority/order relative to existing branches (`ModX` / `ModY` / native branches): `<fill>`
 - Collision handling when multiple mappings are active: `<fill>`
 - Source/provenance: `<file path / fixture / note>`
+
+Reference for uploaded MVP layout:
+
+- Tilt1 / TILT replaces MX: physical `BTN_RF3`, logical `BTN_LT1`, future native Ultimate runtime `inputs.lt1`.
+- Tilt2 replaces MY: physical `BTN_RF4`, logical `BTN_LT2`, future native Ultimate runtime `inputs.lt2`.
+- `BTN_RF5` is rejected for this layout's Tilt1/Tilt2 target.
+- Runtime behavior should use post-remap logical inputs unless a later approved spec explicitly says otherwise.
 
 ## 5) Output Target Scope
 
