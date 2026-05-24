@@ -3,9 +3,19 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
-from typing import Any
+
+from glyph_config_model import (
+    GlyphButtonRemap,
+    GlyphModeConfig,
+    GlyphSocdPair,
+    find_mode_by_id,
+    find_mode_by_name,
+    get_ultimate_mode,
+    list_button_remapping,
+    list_socd_pairs,
+    load_profile_json,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -14,63 +24,18 @@ CAL1_PATH = FIXTURE_DIR / "GlyphUserProfilesUlt-filled.json"
 CAL2_PATH = FIXTURE_DIR / "GlyphUltFilled2.json"
 
 
-def _load_json(path: Path) -> dict[str, Any]:
+def _load_json(path: Path) -> dict[str, object]:
     if not path.exists():
         raise AssertionError(f"missing fixture: {path}")
-    with path.open("r", encoding="utf-8") as handle:
-        data = json.load(handle)
-    if not isinstance(data, dict):
-        raise AssertionError(f"fixture root must be object: {path}")
-    return data
+    return load_profile_json(path)
 
 
-def _find_ultimate_mode(config: dict[str, Any]) -> dict[str, Any]:
-    game_modes = config.get("gameModeConfigs")
-    if not isinstance(game_modes, list):
-        raise AssertionError("gameModeConfigs must be a list")
-    for mode in game_modes:
-        if not isinstance(mode, dict):
-            continue
-        if mode.get("name") == "Ultimate" or mode.get("modeId") == "MODE_ULTIMATE":
-            return mode
-    raise AssertionError("could not find Ultimate mode (name=Ultimate or modeId=MODE_ULTIMATE)")
+def _to_remap_tuples(remaps: list[GlyphButtonRemap]) -> list[tuple[str, str | None]]:
+    return [(entry.physical_button, entry.activates) for entry in remaps]
 
 
-def _get_button_remaps(mode: dict[str, Any]) -> list[tuple[str, str | None]]:
-    remapping = mode.get("buttonRemapping")
-    if not isinstance(remapping, list):
-        raise AssertionError("buttonRemapping must be a list")
-    result: list[tuple[str, str | None]] = []
-    for index, entry in enumerate(remapping):
-        if not isinstance(entry, dict):
-            raise AssertionError(f"buttonRemapping[{index}] must be an object")
-        physical_button = entry.get("physicalButton")
-        if not isinstance(physical_button, str) or not physical_button:
-            raise AssertionError(f"buttonRemapping[{index}] missing physicalButton")
-        activates = entry.get("activates")
-        if activates is not None and not isinstance(activates, str):
-            raise AssertionError(f"buttonRemapping[{index}].activates must be string when present")
-        result.append((physical_button, activates))
-    return result
-
-
-def _get_socd_pairs(mode: dict[str, Any]) -> list[tuple[str, str, str | None]]:
-    socd_pairs = mode.get("socdPairs")
-    if not isinstance(socd_pairs, list):
-        raise AssertionError("socdPairs must be a list")
-    result: list[tuple[str, str, str | None]] = []
-    for index, entry in enumerate(socd_pairs):
-        if not isinstance(entry, dict):
-            raise AssertionError(f"socdPairs[{index}] must be an object")
-        first = entry.get("buttonDir1")
-        second = entry.get("buttonDir2")
-        if not isinstance(first, str) or not isinstance(second, str):
-            raise AssertionError(f"socdPairs[{index}] missing buttonDir1/buttonDir2")
-        socd_type = entry.get("socdType")
-        if socd_type is not None and not isinstance(socd_type, str):
-            raise AssertionError(f"socdPairs[{index}].socdType must be string when present")
-        result.append((first, second, socd_type))
-    return result
+def _to_socd_tuples(pairs: list[GlyphSocdPair]) -> list[tuple[str, str, str | None]]:
+    return [(entry.button_dir_1, entry.button_dir_2, entry.socd_type) for entry in pairs]
 
 
 def _unordered_pair(first: str, second: str) -> tuple[str, str]:
@@ -116,22 +81,34 @@ def _assert_omitted_activates(remaps: list[tuple[str, str | None]], physical_but
         raise AssertionError(f"expected omitted activates for {physical_button}, got {entries[0]!r}")
 
 
+def _assert_found_by_name_and_mode_id(config: dict[str, object]) -> None:
+    mode_by_name = find_mode_by_name(config, "Ultimate")
+    if mode_by_name is None:
+        raise AssertionError("Ultimate mode lookup by name failed")
+    mode_by_id = find_mode_by_id(config, "MODE_ULTIMATE")
+    if mode_by_id is None:
+        raise AssertionError("Ultimate mode lookup by modeId failed")
+
+
 def main() -> None:
     cal1 = _load_json(CAL1_PATH)
     cal2 = _load_json(CAL2_PATH)
 
-    ultimate1 = _find_ultimate_mode(cal1)
-    ultimate2 = _find_ultimate_mode(cal2)
+    _assert_found_by_name_and_mode_id(cal1)
+    _assert_found_by_name_and_mode_id(cal2)
 
-    if ultimate1.get("layoutPlate") != "LAYOUT_PLATE_EVERYTHING":
+    ultimate1: GlyphModeConfig = get_ultimate_mode(cal1)
+    ultimate2: GlyphModeConfig = get_ultimate_mode(cal2)
+
+    if ultimate1.layout_plate != "LAYOUT_PLATE_EVERYTHING":
         raise AssertionError("calibration 1 Ultimate layoutPlate mismatch")
-    if ultimate2.get("layoutPlate") != "LAYOUT_PLATE_EVERYTHING":
+    if ultimate2.layout_plate != "LAYOUT_PLATE_EVERYTHING":
         raise AssertionError("calibration 2 Ultimate layoutPlate mismatch")
 
-    remaps1 = _get_button_remaps(ultimate1)
-    remaps2 = _get_button_remaps(ultimate2)
-    socd1 = _get_socd_pairs(ultimate1)
-    socd2 = _get_socd_pairs(ultimate2)
+    remaps1 = _to_remap_tuples(list_button_remapping(ultimate1))
+    remaps2 = _to_remap_tuples(list_button_remapping(ultimate2))
+    socd1 = _to_socd_tuples(list_socd_pairs(ultimate1))
+    socd2 = _to_socd_tuples(list_socd_pairs(ultimate2))
 
     if len(socd1) != 6:
         raise AssertionError(f"calibration 1 SOCD pair count expected 6, got {len(socd1)}")
