@@ -22,6 +22,12 @@ This is a human-controlled protocol draft for the native Ultimate Tilt/Tilt2 run
 
 ## 2. Build Artifact Handling
 
+For the manual hardware test package, use:
+
+- `docs/calibration/glyph_ultimate_tilt_hardware_test_package_2026-05-24.md`
+- `docs/calibration/glyph_ultimate_tilt_hardware_test_result_TEMPLATE.md`
+- `tools/inspect_glyph_mk6_build_artifact.py`
+
 - Build command:
 
 ```bash
@@ -36,7 +42,7 @@ This is a human-controlled protocol draft for the native Ultimate Tilt/Tilt2 run
   - artifact path if reported by the build system
   - artifact checksum if the artifact path is discoverable
 
-This draft does not assume a specific artifact path. Use the path produced by the local PlatformIO/Glyph build output.
+This draft does not assume a specific artifact path. Use the path produced by the local PlatformIO/Glyph build output, or the local artifact path reported by the read-only checksum helper.
 
 ## 3. Manual Flash Step Placeholder
 
