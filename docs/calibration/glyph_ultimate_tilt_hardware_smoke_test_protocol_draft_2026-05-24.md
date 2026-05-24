@@ -2,7 +2,7 @@
 
 ## Scope
 
-This is a human-controlled protocol draft for a later runtime firmware test branch. It does not define automated flashing, push-to-device behavior, or final Tilt/Tilt2 runtime behavior.
+This is a human-controlled protocol draft for the native Ultimate Tilt/Tilt2 runtime firmware branch. It does not define automated flashing or push-to-device behavior, and it does not claim hardware testing has happened.
 
 ## 1. Preconditions
 
@@ -56,11 +56,11 @@ After manual flashing:
 - Button remapping behavior is unchanged.
 - Unmodified Ultimate actions still behave as before.
 - Left stick neutral remains neutral with no direction held.
-- Existing Ultimate modifier behavior remains unchanged except for the explicitly implemented later test scope.
-- C-stick/right-stick behavior is unaffected unless the later runtime branch explicitly changes it.
+- Existing Ultimate modifier behavior remains unchanged except for the explicitly implemented native Ultimate left-stick Tilt/Tilt2 scope.
+- C-stick/right-stick behavior is unaffected.
 - Analog triggers still behave as expected.
-- New Tilt/Tilt2 buttons are tested only if and when a later runtime branch implements them.
-- New Tilt/Tilt2 outputs match the approved observation values for that later branch.
+- New Tilt/Tilt2 buttons are tested against post-remap logical `inputs.lt1` and `inputs.lt2`.
+- New Tilt/Tilt2 outputs match the approved observation values for this runtime branch.
 
 ## 5. Rollback
 

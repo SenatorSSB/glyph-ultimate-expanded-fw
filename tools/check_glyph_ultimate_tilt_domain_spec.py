@@ -142,11 +142,39 @@ def _assert_button_id_confirmation(spec: dict[str, object]) -> None:
     _assert_bool(runtime_semantics, "use_post_remap_logical_inputs", True)
     _assert_bool(runtime_semantics, "bypass_remap_with_physical_inputs", False)
     _assert_bool(runtime_semantics, "profile_remap_change_required", False)
-    _assert_bool(runtime_semantics, "runtime_approved", False)
+    _assert_bool(runtime_semantics, "runtime_approved", True)
 
     rejected_ids = {entry.get("id") for entry in rejected if isinstance(entry, dict)}
     if "BTN_RF5" not in rejected_ids:
         raise AssertionError("button_id_confirmation.rejected_button_ids must include BTN_RF5")
+
+
+def _assert_runtime_implementation(spec: dict[str, object]) -> None:
+    runtime = spec.get("runtime_implementation")
+    if not isinstance(runtime, dict):
+        raise AssertionError("runtime_implementation must be an object")
+
+    expected_fields = {
+        "status": "IMPLEMENTED_IN_NATIVE_ULTIMATE",
+        "source_file": "src/modes/Ultimate.cpp",
+        "tilt1_runtime_input": "inputs.lt1",
+        "tilt2_runtime_input": "inputs.lt2",
+    }
+    for key, expected in expected_fields.items():
+        observed = runtime.get(key)
+        if observed != expected:
+            raise AssertionError(f"runtime_implementation.{key} expected {expected!r}, got {observed!r}")
+
+    for key in (
+        "uses_post_remap_logical_inputs",
+        "left_stick_only",
+        "preserve_right_stick",
+        "preserve_triggers",
+        "no_overflow_dependency",
+    ):
+        _assert_bool(runtime, key, True)
+
+    _assert_bool(runtime, "hardware_tested", False)
 
 
 def main() -> None:
@@ -158,10 +186,12 @@ def main() -> None:
     status = spec.get("status")
     if not isinstance(status, dict):
         raise AssertionError("status must be an object")
-    if status.get("firmware_implemented") is not False:
-        raise AssertionError("status.firmware_implemented must be false")
+    if status.get("firmware_implemented") is not True:
+        raise AssertionError("status.firmware_implemented must be true")
     if status.get("hardware_tested") is not False:
         raise AssertionError("status.hardware_tested must be false")
+    if status.get("runtime_behavior_changed_in_branch") is not True:
+        raise AssertionError("status.runtime_behavior_changed_in_branch must be true")
 
     tables = spec.get("tables")
     if not isinstance(tables, dict):
@@ -194,11 +224,12 @@ def main() -> None:
         raise AssertionError("preserve_outputs must include right_stick and triggers")
 
     _assert_button_id_confirmation(spec)
+    _assert_runtime_implementation(spec)
 
     print(
         "glyph_ultimate_tilt_domain_spec: pass "
         "tables=3 directions=9 button_id_confirmation=confirmed "
-        "byte_safe=true no_overflow_dependency=true"
+        "runtime_implementation=native_ultimate byte_safe=true no_overflow_dependency=true"
     )
 
 

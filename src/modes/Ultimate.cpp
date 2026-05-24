@@ -265,6 +265,19 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         }
     }
 
+    // Senscope Glyph Ultimate Tilt patch begin
+    // Tilt1/Tilt2 use post-remap logical LT1/LT2 inputs. In the MVP profile,
+    // physical RF3/RF4 are mapped to LT1/LT2; do not bypass remap here.
+    // Explicit signed math avoids uint8 overflow/flipper tricks.
+    if (inputs.lt1 && !inputs.lt2) {
+        outputs.leftStickX = 128 - (directions.x * 59);
+        outputs.leftStickY = 128 + (directions.y * 41);
+    } else if (inputs.lt2 && !inputs.lt1) {
+        outputs.leftStickX = 128 + (directions.x * 40);
+        outputs.leftStickY = 128 + (directions.y * 49);
+    }
+    // Senscope Glyph Ultimate Tilt patch end
+
     // C-stick ASDI Slideoff angle overrides any other C-stick modifiers (such as
     // angled fsmash).
     if (directions.cx != 0 && directions.cy != 0) {

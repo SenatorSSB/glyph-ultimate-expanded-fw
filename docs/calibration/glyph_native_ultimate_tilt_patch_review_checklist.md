@@ -1,6 +1,6 @@
 # Glyph Native Ultimate Tilt Patch Review Checklist
 
-Use this checklist while reviewing the future behavior-changing runtime branch.
+Use this checklist while reviewing the behavior-changing runtime branch.
 Mark each item with `[x]` only when source-backed and verified.
 
 ## 1) Source Diff Scope
@@ -51,3 +51,5 @@ Mark each item with `[x]` only when source-backed and verified.
 - [ ] Hardware smoke-test checklist document is linked and current.
 - [ ] Hardware owner approved the smoke-test plan.
 - [ ] Runtime patch branch is not flashed before checklist sign-off.
+- [ ] Hardware-owner smoke test is still required before device use; this checklist does not claim hardware testing has happened.
+- [ ] No flashing or push-to-device automation was added by the runtime branch.
