@@ -16,6 +16,8 @@ DEFAULT_ALLOW_PREFIXES = ("docs/calibration/", "tools/")
 DEFAULT_ALLOW_EXACT = ("src/modes/Ultimate.cpp",)
 
 DOCS_ONLY_ALLOW_PREFIXES = ("docs/", "tools/")
+RUNTIME_IMPLEMENTATION_ALLOW_PREFIXES = ("docs/", "tools/")
+RUNTIME_IMPLEMENTATION_ALLOW_EXACT = ("src/modes/Ultimate.cpp",)
 
 SOCD_RE = re.compile(r"(^|/|_)(socd)(/|_|\.|$)", re.IGNORECASE)
 
@@ -31,9 +33,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--mode",
-        choices=("default", "docs-only"),
+        choices=("default", "docs-only", "runtime-implementation"),
         default="default",
-        help="scope mode: default (future runtime patch) or docs-only",
+        help="scope mode: default (future runtime patch), docs-only, or runtime-implementation",
     )
     parser.add_argument(
         "--allow-docs-tools-only",
@@ -64,6 +66,13 @@ def run_git_diff_name_only(base_ref: str) -> list[str]:
 def is_allowed(path: str, mode: str) -> bool:
     if mode == "docs-only":
         return any(path == prefix.rstrip("/") or path.startswith(prefix) for prefix in DOCS_ONLY_ALLOW_PREFIXES)
+    if mode == "runtime-implementation":
+        if path in RUNTIME_IMPLEMENTATION_ALLOW_EXACT:
+            return True
+        return any(
+            path == prefix.rstrip("/") or path.startswith(prefix)
+            for prefix in RUNTIME_IMPLEMENTATION_ALLOW_PREFIXES
+        )
     if path in DEFAULT_ALLOW_EXACT:
         return True
     return any(path == prefix.rstrip("/") or path.startswith(prefix) for prefix in DEFAULT_ALLOW_PREFIXES)
