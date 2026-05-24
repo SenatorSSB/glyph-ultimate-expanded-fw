@@ -11,11 +11,48 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 BEGIN_MARKER = "// Senscope Glyph Ultimate Tilt patch begin"
 END_MARKER = "// Senscope Glyph Ultimate Tilt patch end"
-FORBIDDEN_ASSIGNMENTS = (
+
+FORBIDDEN_ANALOG_ASSIGNMENTS = (
     "outputs.rightStickX",
     "outputs.rightStickY",
     "outputs.triggerLAnalog",
     "outputs.triggerRAnalog",
+)
+
+FORBIDDEN_DIGITAL_ASSIGNMENTS = (
+    "outputs.a",
+    "outputs.b",
+    "outputs.x",
+    "outputs.y",
+    "outputs.buttonL",
+    "outputs.buttonR",
+    "outputs.triggerLDigital",
+    "outputs.triggerRDigital",
+    "outputs.start",
+    "outputs.select",
+    "outputs.home",
+    "outputs.capture",
+    "outputs.leftStickClick",
+    "outputs.rightStickClick",
+    "outputs.dpadUp",
+    "outputs.dpadDown",
+    "outputs.dpadLeft",
+    "outputs.dpadRight",
+    "outputs.leftStickLeft",
+    "outputs.leftStickRight",
+    "outputs.leftStickDown",
+    "outputs.leftStickUp",
+)
+
+FORBIDDEN_TIMING_TOKENS = (
+    "static",
+    "previous",
+    "last",
+    "timer",
+    "millis",
+    "toggle",
+    "sleep",
+    "delay",
 )
 
 
@@ -24,23 +61,41 @@ def _fail(message: str) -> None:
 
 
 def _extract_patch_block(source: str) -> str:
+    begin_count = source.count(BEGIN_MARKER)
+    end_count = source.count(END_MARKER)
+    if begin_count != 1:
+        _fail(f"expected exactly one begin marker, found {begin_count}")
+    if end_count != 1:
+        _fail(f"expected exactly one end marker, found {end_count}")
+
     begin = source.find(BEGIN_MARKER)
+    end = source.find(END_MARKER, begin)
     if begin == -1:
         _fail(f"missing begin marker: {BEGIN_MARKER}")
-    end = source.find(END_MARKER, begin)
     if end == -1:
         _fail(f"missing end marker: {END_MARKER}")
-    block = source[begin : end + len(END_MARKER)]
-    if source.find(BEGIN_MARKER, begin + 1) != -1:
-        _fail("multiple Tilt patch begin markers found")
-    if source.find(END_MARKER, end + 1) != -1:
-        _fail("multiple Tilt patch end markers found")
-    return block
+    if end < begin:
+        _fail("end marker appears before begin marker")
+
+    return source[begin : end + len(END_MARKER)]
 
 
 def _require(pattern: str, text: str, label: str, *, flags: int = 0) -> None:
     if re.search(pattern, text, flags) is None:
         _fail(f"missing evidence: {label}")
+
+
+def _forbid_assignments(fields: tuple[str, ...], block: str) -> None:
+    for field in fields:
+        if re.search(rf"\b{re.escape(field)}\s*=", block):
+            _fail(f"Tilt patch block must not assign {field}")
+
+
+def _forbid_tokens(tokens: tuple[str, ...], block: str) -> None:
+    lower_block = block.lower()
+    for token in tokens:
+        if token.lower() in lower_block:
+            _fail(f"Tilt patch block must not include timing/toggle token: {token}")
 
 
 def main() -> None:
@@ -68,14 +123,14 @@ def main() -> None:
     if "inputs.rf3" in block or "inputs.rf4" in block:
         _fail("Tilt patch block must not bypass remap with inputs.rf3/inputs.rf4")
 
-    for field in FORBIDDEN_ASSIGNMENTS:
-        if re.search(rf"\b{re.escape(field)}\s*=", block):
-            _fail(f"Tilt patch block must not assign {field}")
+    _forbid_assignments(FORBIDDEN_ANALOG_ASSIGNMENTS, block)
+    _forbid_assignments(FORBIDDEN_DIGITAL_ASSIGNMENTS, block)
+    _forbid_tokens(FORBIDDEN_TIMING_TOKENS, block)
 
     print(
         "glyph_ultimate_tilt_runtime_source: PASS "
-        "inputs=lt1/lt2 constants=59,41,40,49 left_stick_only=true "
-        "raw_rf3_rf4_bypass=false"
+        "patch_block_count=1 inputs=lt1/lt2 constants=59,41,40,49 "
+        "left_stick_only=true raw_rf3_rf4_bypass=false no_timing_tokens=true"
     )
 
 
