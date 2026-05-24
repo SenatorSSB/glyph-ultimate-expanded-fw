@@ -12,3 +12,11 @@ Thumbs.db
 .venv/
 .pio/
 .platformio-home/
+
+# macOS Finder metadata
+.DS_Store
+**/.DS_Store
+
+# macOS Finder metadata
+.DS_Store
+**/.DS_Store
