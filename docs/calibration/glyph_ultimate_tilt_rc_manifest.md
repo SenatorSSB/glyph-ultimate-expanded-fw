@@ -1,28 +1,19 @@
 # Glyph Ultimate Tilt RC Manifest
 
 ## RC Identity
-- branch: `glyph/ultimate-tilt-rc-manifest`
-- commit_sha: `52570d2458be593ab88a80defb74f0efd82ef827`
+- branch: `configurator`
+- commit_sha: `c28b9f2d51f721567dfcbdb2c104be5bf2961233`
 - build_command: `./scripts/build-glyph-mk6-quiet.sh`
 - runtime_implementation_source: `src/modes/Ultimate.cpp`
 - hardware_test_status: NOT_TESTED
 - flashing_automation: NOT_INCLUDED
 
 ## Git Dirty Summary
-- git_dirty_state: DIRTY
-- staged_entries: 1
-- unstaged_entries: 2
-- untracked_entries: 4
-- git_status_short:
-```text
- M docs/calibration/glyph_ultimate_tilt_hardware_test_package_2026-05-24.md
- M docs/calibration/glyph_ultimate_tilt_hardware_test_result_TEMPLATE.md
-?? docs/calibration/glyph_ultimate_tilt_rc_manifest.md
-?? docs/calibration/glyph_ultimate_tilt_rc_manifest_handoff.md
-?? tools/check_glyph_ultimate_tilt_rc_manifest.py
-?? tools/write_glyph_ultimate_tilt_rc_manifest.py
-M docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md
-```
+- git_dirty_state: CLEAN
+- staged_entries: 0
+- unstaged_entries: 0
+- untracked_entries: 0
+- git_status_short: CLEAN
 
 ## Artifact Candidates
 - artifact_status: FOUND
@@ -30,13 +21,13 @@ M docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md
 - candidate_suffixes: `.uf2, .bin, .elf, .hex`
 - artifact_1_path: `.pio/build/glyph_mk6/firmware.uf2`
 - artifact_1_size_bytes: `784384`
-- artifact_1_sha256: `aa4aabf166eedfb6f7250910ce22f2b8b436d97953df07a3f4f8aa6b6e7f3b97`
+- artifact_1_sha256: `a507d28273591c0c2bdbda1f023af82fdee435e476d1217155e22d48a3d51985`
 - artifact_2_path: `.pio/build/glyph_mk6/firmware.bin`
-- artifact_2_size_bytes: `391960`
-- artifact_2_sha256: `aff4a08ac08f68c3f65d2d7584a8e06eb267d04bb631fe05e22cccb7cf992ae3`
+- artifact_2_size_bytes: `391952`
+- artifact_2_sha256: `8042d2c7898b884aa28e53bb587aa4a4a22e61faaefbc7926e191e8ad2324b31`
 - artifact_3_path: `.pio/build/glyph_mk6/firmware.elf`
 - artifact_3_size_bytes: `5405012`
-- artifact_3_sha256: `0e4ccd5419d6e2463fbd2ab8f216b5bd9823e5ffb800c44895e9064bd29b3e12`
+- artifact_3_sha256: `18f4a083be6c48b84b8efa743558ebe8c57ad67fdbd3b7a12de8e9cdaae9b52b`
 
 ## Tilt Input Summary
 - tilt1_input: `inputs.lt1` (post-remap logical input)
