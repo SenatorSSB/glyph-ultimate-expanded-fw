@@ -1,0 +1,197 @@
+{
+  "date": "2026-05-24",
+  "mode": {
+    "name": "Ultimate",
+    "modeId": "MODE_ULTIMATE",
+    "layoutPlate": "LAYOUT_PLATE_EVERYTHING"
+  },
+  "fixtures": [
+    "docs/calibration/fixtures/GlyphUserProfilesUlt-filled.json",
+    "docs/calibration/fixtures/GlyphUltFilled2.json"
+  ],
+  "clusterPrefixGlossary": {
+    "LF": "left finger cluster",
+    "LT": "left thumb cluster",
+    "RF": "right-side/right-finger cluster",
+    "RT": "right thumb cluster",
+    "MB": "menu button family"
+  },
+  "observedPhysicalButtons": [
+    "BTN_LF1",
+    "BTN_LF2",
+    "BTN_LF3",
+    "BTN_LF4",
+    "BTN_LF5",
+    "BTN_LF6",
+    "BTN_LF7",
+    "BTN_LF8",
+    "BTN_LT1",
+    "BTN_LT2",
+    "BTN_LT3",
+    "BTN_LT4",
+    "BTN_LT5",
+    "BTN_LT6",
+    "BTN_RF1",
+    "BTN_RF2",
+    "BTN_RF3",
+    "BTN_RF4",
+    "BTN_RF5",
+    "BTN_RF6",
+    "BTN_RF7",
+    "BTN_RF8",
+    "BTN_RF9",
+    "BTN_RF10",
+    "BTN_RF11",
+    "BTN_RF12",
+    "BTN_RF13",
+    "BTN_RF14",
+    "BTN_RF15",
+    "BTN_RF16",
+    "BTN_RT1",
+    "BTN_RT2",
+    "BTN_RT3",
+    "BTN_RT4",
+    "BTN_RT5",
+    "BTN_MB1",
+    "BTN_MB2",
+    "BTN_MB3"
+  ],
+  "logicalTargetsObserved": [
+    "BTN_MB7"
+  ],
+  "calibration1": {
+    "socdPairs": [
+      {
+        "buttonDir1": "BTN_LF3",
+        "buttonDir2": "BTN_LF1",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_LF2",
+        "buttonDir2": "BTN_RF4",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_RT3",
+        "buttonDir2": "BTN_RT5",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_RT2",
+        "buttonDir2": "BTN_RT4",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_LF8",
+        "buttonDir2": "BTN_LF6"
+      },
+      {
+        "buttonDir1": "BTN_RF7",
+        "buttonDir2": "BTN_RF8"
+      }
+    ],
+    "selectedRemaps": [
+      {
+        "physicalButton": "BTN_LF2",
+        "activates": "BTN_RF4"
+      },
+      {
+        "physicalButton": "BTN_LT3",
+        "activates": "BTN_LF8"
+      },
+      {
+        "physicalButton": "BTN_LT4",
+        "activates": "BTN_LF6"
+      },
+      {
+        "physicalButton": "BTN_RF13",
+        "activates": "BTN_RF7"
+      },
+      {
+        "physicalButton": "BTN_RF14",
+        "activates": "BTN_RF3"
+      },
+      {
+        "physicalButton": "BTN_RF15",
+        "activates": "BTN_RF6"
+      },
+      {
+        "physicalButton": "BTN_MB1"
+      },
+      {
+        "physicalButton": "BTN_MB2"
+      },
+      {
+        "physicalButton": "BTN_MB3"
+      }
+    ]
+  },
+  "calibration2": {
+    "socdPairs": [
+      {
+        "buttonDir1": "BTN_LF3",
+        "buttonDir2": "BTN_LF1",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_RT3",
+        "buttonDir2": "BTN_RT5",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_RT2",
+        "buttonDir2": "BTN_RT4",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_LF8",
+        "buttonDir2": "BTN_LF6"
+      }
+    ],
+    "selectedRemaps": [
+      {
+        "physicalButton": "BTN_LF1",
+        "activates": "BTN_LF3"
+      },
+      {
+        "physicalButton": "BTN_LF2",
+        "activates": "BTN_LF8"
+      },
+      {
+        "physicalButton": "BTN_RF12",
+        "activates": "BTN_RT4"
+      },
+      {
+        "physicalButton": "BTN_RF11",
+        "activates": "BTN_MB7"
+      },
+      {
+        "physicalButton": "BTN_RF13",
+        "activates": "BTN_LT1"
+      },
+      {
+        "physicalButton": "BTN_RF14",
+        "activates": "BTN_LT2"
+      },
+      {
+        "physicalButton": "BTN_RF16",
+        "activates": "BTN_RF8"
+      },
+      {
+        "physicalButton": "BTN_MB1"
+      },
+      {
+        "physicalButton": "BTN_MB2"
+      },
+      {
+        "physicalButton": "BTN_MB3"
+      }
+    ]
+  },
+  "confidenceNotes": [
+    "Cluster-level interpretation is high confidence.",
+    "SOCD directional groups are high confidence where profile pairs exist.",
+    "Omitted activates remain omitted/unknown/default and are not interpreted as disabled.",
+    "Exact pixel-perfect visual coordinates remain out of scope."
+  ]
+}
