@@ -92,7 +92,7 @@ Record final command results after branch verification:
 .venv/bin/python tools/list_glyph_tilt_button_id_candidates.py: PASS
 .venv/bin/python tools/check_glyph_tilt_button_id_probe.py: PASS
 .venv/bin/python tools/check_glyph_ultimate_tilt_runtime_source.py: PASS
-rg conflict marker check: PASS, no output
+grep conflict marker check: PASS, no output
 find .DS_Store check: PASS, no output
 ./scripts/build-glyph-mk6-quiet.sh: PASS, glyph_mk6 SUCCESS
 ```

@@ -31,7 +31,9 @@ Before manual hardware use, record RC manifest evidence using:
 
 - `tools/write_glyph_ultimate_tilt_rc_manifest.py`
 - `tools/check_glyph_ultimate_tilt_rc_manifest.py`
+- `tools/run_glyph_ultimate_tilt_prehardware_checks.py`
 - `docs/calibration/glyph_ultimate_tilt_rc_manifest_provenance_2026-05-24.md`
+- `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md`
 
 The default RC manifest path is:
 

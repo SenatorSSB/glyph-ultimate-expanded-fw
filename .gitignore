@@ -12,6 +12,8 @@ Thumbs.db
 .venv/
 .pio/
 .platformio-home/
+__pycache__/
+*.py[cod]
 
 # macOS Finder metadata
 .DS_Store

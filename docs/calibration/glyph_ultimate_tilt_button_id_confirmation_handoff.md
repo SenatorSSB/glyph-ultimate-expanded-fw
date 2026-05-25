@@ -70,7 +70,7 @@ Base branch: `configurator`
 - `.venv/bin/python tools/check_glyph_ultimate_tilt_domain_spec.py` -> pass.
 - `.venv/bin/python tools/list_glyph_tilt_button_id_candidates.py` -> pass.
 - `.venv/bin/python tools/check_glyph_tilt_button_id_probe.py` -> pass.
-- `rg -n "^(<<<<<<<|=======|>>>>>>>)" docs tools config include src HAL || true` -> no conflict markers found.
+- `grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true` -> no conflict markers found.
 - `find . -name .DS_Store -print` -> no `.DS_Store` files found.
 - `./scripts/build-glyph-mk6-quiet.sh` -> pass.
 

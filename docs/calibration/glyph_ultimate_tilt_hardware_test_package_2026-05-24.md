@@ -56,6 +56,7 @@ RC manifest reference:
 - `tools/write_glyph_ultimate_tilt_rc_manifest.py`
 - `tools/check_glyph_ultimate_tilt_rc_manifest.py`
 - `docs/calibration/glyph_ultimate_tilt_rc_manifest_provenance_2026-05-24.md`
+- `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md`
 
 ## 4. Required Pre-Flash Checks
 
@@ -88,6 +89,15 @@ RC manifest reference:
 - RC manifest reports:
   - `firmware_relevant_dirty_state: CLEAN`
   - `git_dirty_state` may still be `DIRTY` when dirty entries are docs/tools-only.
+- Aggregated prehardware checker passed:
+
+```bash
+.venv/bin/python tools/run_glyph_ultimate_tilt_prehardware_checks.py
+.venv/bin/python tools/run_glyph_ultimate_tilt_prehardware_checks.py --include-build --check-artifact --check-hardware-result
+```
+
+- Prehardware readiness index recorded at:
+  - `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md`
 - Known-good rollback firmware is available.
 - Known-good rollback profile/config is available.
 - Hardware owner has approved the manual flash workflow.

@@ -49,7 +49,7 @@
 - `.venv/bin/python tools/check_glyph_future_tilt_patch_scope.py --base configurator --mode runtime-implementation` -> PASS
 - `.venv/bin/python tools/check_glyph_ultimate_tilt_hardware_result.py` -> `status=NO_RESULT_FILE` (expected until manual test result is created)
 - `./scripts/build-glyph-mk6-quiet.sh` -> PASS
-- `rg -n "^(<<<<<<<|=======|>>>>>>>)" docs tools config include src HAL || true` -> no conflict markers
+- `grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true` -> no conflict markers
 - `find . -name .DS_Store -print` -> none found
 
 ## Remaining Blockers Before Manual Hardware Use
