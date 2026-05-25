@@ -57,7 +57,7 @@ Record final results after verification:
 .venv/bin/python tools/check_glyph_ultimate_tilt_runtime_source.py: PASS
 ./scripts/build-glyph-mk6-quiet.sh: PASS
 .venv/bin/python tools/inspect_glyph_mk6_build_artifact.py: PASS, artifacts found
-rg conflict marker check: PASS, no output
+grep conflict marker check: PASS, no output
 find .DS_Store check: PASS, no output
 ```
 

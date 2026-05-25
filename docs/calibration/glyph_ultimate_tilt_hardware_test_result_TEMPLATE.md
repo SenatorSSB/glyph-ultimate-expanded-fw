@@ -12,6 +12,7 @@ Do not fill this template until a human-controlled hardware test is performed.
 | Branch |  |
 | Commit SHA |  |
 | RC manifest path | `docs/calibration/glyph_ultimate_tilt_rc_manifest.md` |
+| Prehardware readiness index path | `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md` |
 | Artifact path |  |
 | Artifact SHA-256 |  |
 | Profile/config used |  |
@@ -27,6 +28,7 @@ Do not fill this template until a human-controlled hardware test is performed.
 | Artifact SHA-256 recorded |  |  |
 | RC manifest generated |  |  |
 | RC manifest checker passed |  |  |
+| Prehardware aggregator passed (`tools/run_glyph_ultimate_tilt_prehardware_checks.py`) |  |  |
 | Worktree clean |  |  |
 | Known-good rollback firmware available |  |  |
 | Known-good rollback profile/config available |  |  |

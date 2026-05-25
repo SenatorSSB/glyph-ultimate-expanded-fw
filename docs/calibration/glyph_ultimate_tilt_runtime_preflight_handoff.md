@@ -38,7 +38,7 @@
 - `.venv/bin/python tools/check_glyph_native_ultimate_snapshot.py` -> pass
 - `.venv/bin/python tools/check_glyph_future_tilt_patch_scope.py --base configurator --mode docs-only` -> pass
 - `grep -R "<<<<<<<\|=======\|>>>>>>>" docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true` -> executed; one known documentation-string match in an existing handoff file
-- `rg -n "^(<<<<<<<|=======|>>>>>>>)" docs tools config include src HAL || true` -> no conflict markers found
+- `grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true` -> no conflict markers found
 - `find . -name .DS_Store -print` -> none found
 - `./scripts/build-glyph-mk6-quiet.sh` -> pass
 

@@ -63,7 +63,7 @@ This handoff reflects the initial RC manifest branch. Provenance semantics were 
 - `./scripts/build-glyph-mk6-quiet.sh` -> PASS
 - `.venv/bin/python tools/write_glyph_ultimate_tilt_rc_manifest.py --output docs/calibration/glyph_ultimate_tilt_rc_manifest.md` -> PASS
 - `.venv/bin/python tools/check_glyph_ultimate_tilt_rc_manifest.py` -> PASS
-- `rg -n "^(<<<<<<<|=======|>>>>>>>)" docs tools config include src HAL || true` -> PASS (no conflicts found)
+- `grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true` -> PASS (no conflicts found)
 - `find . -name .DS_Store -print` -> PASS (none found)
 
 ## Remaining Blockers Before Manual Hardware Use

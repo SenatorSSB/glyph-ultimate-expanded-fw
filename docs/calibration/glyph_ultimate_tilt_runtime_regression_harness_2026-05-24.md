@@ -54,7 +54,7 @@ Run from repo root.
 .venv/bin/python tools/check_glyph_future_tilt_patch_scope.py --base configurator --mode runtime-implementation
 .venv/bin/python tools/check_glyph_ultimate_tilt_hardware_result.py
 ./scripts/build-glyph-mk6-quiet.sh
-rg -n "^(<<<<<<<|=======|>>>>>>>)" docs tools config include src HAL || true
+grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true
 find . -name .DS_Store -print
 ```
 

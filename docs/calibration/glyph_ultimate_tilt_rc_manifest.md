@@ -2,7 +2,7 @@
 
 ## RC Identity
 - manifest_generated_from_branch: `configurator`
-- firmware_source_commit_sha: `898dae80d7f2493d08bcc1e8037d29ab25167b6c`
+- firmware_source_commit_sha: `5dc9b122a3188344cef3ba800902b0f3fd2449ce`
 - manifest_generation_note: This manifest is generated before the manifest commit exists; it is not self-referential to a final manifest commit SHA.
 - build_command: `./scripts/build-glyph-mk6-quiet.sh`
 - runtime_implementation_source: `src/modes/Ultimate.cpp`
@@ -10,14 +10,22 @@
 - flashing_automation: NOT_INCLUDED
 
 ## Git Dirty Summary
-- git_dirty_state: CLEAN
+- git_dirty_state: DIRTY
 - firmware_relevant_dirty_state: CLEAN
-- staged_entries: 0
-- unstaged_entries: 0
+- staged_entries: 1
+- unstaged_entries: 1
 - untracked_entries: 0
 - firmware_relevant_dirty_entries: none
-- non_firmware_dirty_entries: none
-- git_status_short: CLEAN
+- non_firmware_dirty_entries:
+```text
+ M tools/__pycache__/patch_glyph_ultimate_profile.cpython-314.pyc
+M tools/__pycache__/glyph_config_model.cpython-314.pyc
+```
+- git_status_short:
+```text
+ M tools/__pycache__/patch_glyph_ultimate_profile.cpython-314.pyc
+M tools/__pycache__/glyph_config_model.cpython-314.pyc
+```
 
 ## Artifact Candidates
 - artifact_status: FOUND
@@ -25,13 +33,13 @@
 - candidate_suffixes: `.uf2, .bin, .elf, .hex`
 - artifact_1_path: `.pio/build/glyph_mk6/firmware.uf2`
 - artifact_1_size_bytes: `784384`
-- artifact_1_sha256: `06005388f7bbead63caf0907b3da6a18e2ae2dbc6b05299366786d70d7a5a0a1`
+- artifact_1_sha256: `3ec423aa2b09ac6c176d8324f66095011d2c77f744a693c3363d533502faee53`
 - artifact_2_path: `.pio/build/glyph_mk6/firmware.bin`
-- artifact_2_size_bytes: `391952`
-- artifact_2_sha256: `99fe82f2696ba28c84aac2a629bf3e5c871c772323394e2cd0bf2492f9757320`
+- artifact_2_size_bytes: `391960`
+- artifact_2_sha256: `707b5912295afb3aa48664eb0d61f6fbac9be6b78c9e6a0e16a8994cf0b0806d`
 - artifact_3_path: `.pio/build/glyph_mk6/firmware.elf`
 - artifact_3_size_bytes: `5405012`
-- artifact_3_sha256: `1b72e524e41f923e42782594fa93f1563b6125bc44efb3506437252a99b5885c`
+- artifact_3_sha256: `38b275eecfe668076c1742d3cba755959895e1c7133dc554fae759fe5212fdca`
 
 ## Tilt Input Summary
 - tilt1_input: `inputs.lt1` (post-remap logical input)
@@ -55,6 +63,10 @@
 | 8 | (128, 169) | (128, 177) |
 | 9 | (69, 169) | (168, 177) |
 
+## Prehardware References
+- prehardware_aggregator: `tools/run_glyph_ultimate_tilt_prehardware_checks.py`
+- readiness_index: `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md`
+
 ## Verification Commands
 ```bash
 .venv/bin/python tools/check_glyph_calibration_fixtures.py
@@ -72,7 +84,11 @@
 .venv/bin/python tools/inspect_glyph_mk6_build_artifact.py
 .venv/bin/python tools/check_glyph_ultimate_tilt_tables.py
 .venv/bin/python tools/check_glyph_ultimate_tilt_hardware_result.py
-./scripts/build-glyph-mk6-quiet.sh
+.venv/bin/python tools/check_glyph_ultimate_tilt_docs_consistency.py
+.venv/bin/python tools/run_glyph_ultimate_tilt_prehardware_checks.py
+.venv/bin/python tools/run_glyph_ultimate_tilt_prehardware_checks.py --include-build --check-artifact --check-hardware-result
+.venv/bin/python -m platformio run -e glyph_mk6
 .venv/bin/python tools/write_glyph_ultimate_tilt_rc_manifest.py --output docs/calibration/glyph_ultimate_tilt_rc_manifest.md
 .venv/bin/python tools/check_glyph_ultimate_tilt_rc_manifest.py
+grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true
 ```
