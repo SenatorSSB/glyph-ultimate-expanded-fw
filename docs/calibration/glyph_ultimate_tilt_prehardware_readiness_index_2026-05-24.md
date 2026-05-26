@@ -7,7 +7,7 @@ This index tracks whether the native Glyph Ultimate Tilt/Tilt2 package is ready 
 - Runtime firmware behavior changes in this prehardware package: none.
 - Flashing automation included: no.
 - Push-to-device behavior included: no.
-- Hardware smoke test result: not yet performed.
+- Hardware smoke test result: manual smoke PASS recorded in `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md`.
 
 ## Readiness Levels
 
@@ -25,12 +25,12 @@ This index tracks whether the native Glyph Ultimate Tilt/Tilt2 package is ready 
 | Docs consistency | `.venv/bin/python tools/check_glyph_ultimate_tilt_docs_consistency.py` | PASS | PASS |
 | Conflict markers scan | `grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true` | no output | PASS |
 | Hardware result file policy | `docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md` | defined | PASS |
-| Manual hardware smoke test | `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` | real result file recorded | PENDING |
+| Manual hardware smoke test | `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` | real result file recorded | PASS_SMOKE |
 
 ## Current Classification
 
-- readiness_level: `R1_PREHARDWARE_READY`
-- rationale: automated prehardware checks pass, but manual hardware test evidence is still pending.
+- readiness_level: `R2_HARDWARE_VERIFIED`
+- rationale: automated prehardware checks pass and a manual hardware smoke PASS result is recorded; this is not broad exhaustive hardware certification.
 
 ## References
 
