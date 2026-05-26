@@ -119,6 +119,7 @@
   - run post-patch hardware validation for any approved runtime change.
   - prehardware RC preparation should follow `docs/calibration/glyph_prehardware_rc_runbook_2026-05-27.md` and `tools/inspect_glyph_mk6_build_artifact.py` before manual hardware execution.
   - aggregate dry-run and final operator preparation should use `tools/run_glyph_prehardware_dry_run_checks.py` and `docs/calibration/glyph_manual_hardware_owner_checklist_2026-05-27.md`.
+  - prehardware branch hygiene should include `tools/check_glyph_no_forbidden_artifacts.py`.
 
 ### Phase F - Adapter/Export Work
 
@@ -162,6 +163,7 @@
 | `docs/calibration/glyph_user_requirements_packet_checker_2026-05-27.md` | Structure-only checker policy for user requirements packet presence validation. |
 | `docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md` | Design-only readiness gate before next runtime patch. |
 | `docs/calibration/glyph_preservation_hardware_execution_packet_2026-05-27.md` | Manual preservation test execution preparation packet (no result capture in packet). |
+| `docs/calibration/glyph_no_forbidden_artifacts_checker_2026-05-27.md` | Prehardware branch hygiene checker policy for generated/build artifacts. |
 | `docs/calibration/glyph_full_firmware_workstream_sequence_handoff_2026-05-26.md` | Sequence-level handoff and carried-forward caveats. |
 | `docs/calibration/glyph_merged_state_consistency_audit_2026-05-26.md` | Merged-state stale-claim audit and consistency notes. |
 
@@ -183,6 +185,7 @@
 | `tools/check_glyph_merged_state_consistency.py` | Merged-state required-file and stale-phrase consistency checks. |
 | `tools/check_glyph_user_requirements_packet.py` | Structure/presence checks for required user requirements packet anchors and blocker language. |
 | `tools/check_glyph_preservation_execution_packet.py` | Structure/presence checks for preservation execution packet constraints and required references. |
+| `tools/check_glyph_no_forbidden_artifacts.py` | Read-only git-state hygiene check for forbidden tracked artifacts and visible untracked artifact warnings. |
 
 ## Non-Goals
 

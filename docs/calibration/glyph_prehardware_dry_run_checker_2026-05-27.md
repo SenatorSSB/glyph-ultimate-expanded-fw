@@ -25,6 +25,7 @@ Default command list:
 - `tools/check_glyph_native_ultimate_table_runtime_scope.py`
 - `tools/run_glyph_next_runtime_change_readiness_checks.py`
 - `tools/check_glyph_merged_state_consistency.py`
+- `tools/check_glyph_no_forbidden_artifacts.py`
 - `tools/check_glyph_ultimate_preservation_hardware_result.py`
 
 ## What It Intentionally Does Not Do

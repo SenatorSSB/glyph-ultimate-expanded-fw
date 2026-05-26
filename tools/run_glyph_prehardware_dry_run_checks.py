@@ -50,6 +50,7 @@ def default_commands() -> list[CommandSpec]:
         CommandSpec("tools/check_glyph_native_ultimate_table_runtime_scope.py"),
         CommandSpec("tools/run_glyph_next_runtime_change_readiness_checks.py"),
         CommandSpec("tools/check_glyph_merged_state_consistency.py"),
+        CommandSpec("tools/check_glyph_no_forbidden_artifacts.py"),
         CommandSpec(
             "tools/check_glyph_ultimate_preservation_hardware_result.py",
             acceptable_caveat_statuses=("NO_RESULT_FILE",),

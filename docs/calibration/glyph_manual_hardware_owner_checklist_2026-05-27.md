@@ -10,6 +10,15 @@ Purpose: concise operator checklist for the hardware owner to follow after dry-r
 - confirm build command available
 - confirm artifact inspector available
 
+## Branch Hygiene
+
+- run `tools/check_glyph_no_forbidden_artifacts.py`
+- confirm no tracked generated firmware/build artifacts are present
+- confirm explicitly allowlisted source/reference firmware artifacts may exist
+- confirm new firmware artifacts from local builds are not committed
+- local `.pio` and `.venv` may exist but must not be committed
+- before committing any hardware result later, run `git status --short`
+
 ## Build / Artifact
 
 - run `.venv/bin/python -m platformio run -e glyph_mk6` only when ready to create RC artifact
