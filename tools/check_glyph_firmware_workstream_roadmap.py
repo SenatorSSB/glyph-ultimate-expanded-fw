@@ -42,6 +42,7 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_prehardware_rc_runbook_2026-05-27.md",
     "docs/calibration/glyph_prehardware_rc_runbook_checker_2026-05-27.md",
     "docs/calibration/glyph_prehardware_dry_run_checker_2026-05-27.md",
+    "docs/calibration/glyph_no_forbidden_artifacts_checker_2026-05-27.md",
     "docs/calibration/glyph_manual_hardware_owner_checklist_2026-05-27.md",
     "tools/run_glyph_ultimate_tilt_prehardware_checks.py",
     "tools/check_glyph_ultimate_tilt_hardware_result.py",
@@ -61,6 +62,7 @@ REQUIRED_FILES = [
     "tools/check_glyph_prehardware_rc_runbook.py",
     "tools/inspect_glyph_mk6_build_artifact.py",
     "tools/run_glyph_prehardware_dry_run_checks.py",
+    "tools/check_glyph_no_forbidden_artifacts.py",
     "tools/check_glyph_manual_hardware_owner_checklist.py",
 ]
 

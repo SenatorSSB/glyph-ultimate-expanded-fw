@@ -14,6 +14,12 @@ DEFAULT_CHECKLIST_PATH = (
 
 REQUIRED_PHRASES = [
     "aggregate dry-run checker passes",
+    "`tools/check_glyph_no_forbidden_artifacts.py`",
+    "no tracked generated firmware/build artifacts",
+    "explicitly allowlisted source/reference firmware artifacts may exist",
+    "new firmware artifacts from local builds are not committed",
+    "`.pio` and `.venv` may exist but must not be committed",
+    "`git status --short`",
     "`.venv/bin/python -m platformio run -e glyph_mk6`",
     "`tools/inspect_glyph_mk6_build_artifact.py`",
     "record artifact path, size, SHA-256",
