@@ -1,0 +1,83 @@
+{
+  "table_contract_version": 1,
+  "source_status": "CURRENT_RUNTIME_SOURCE_AND_HARDWARE_EVIDENCED_NON_PRODUCTION_FIXTURE",
+  "mode_scope": "MODE_ULTIMATE_NATIVE_TABLE_CANDIDATE_CURRENT_ULTIMATE_TILT_BASELINE",
+  "named_table_entries": [
+    "base_no_modifier",
+    "tilt1_lt1",
+    "tilt2_lt2"
+  ],
+  "branch_exclusivity": {
+    "expected": true,
+    "policy": "Tilt1 applies when inputs.lt1 && !inputs.lt2. Tilt2 applies when inputs.lt2 && !inputs.lt1. Both-held does not apply a new Tilt override.",
+    "source_cross_check": "src/modes/Ultimate.cpp Senscope Glyph Ultimate Tilt patch branch logic"
+  },
+  "chord_both_held_policy": {
+    "status": "OBSERVED_EXISTING_COMBINED_BEHAVIOR_NON_CONTRACTUAL",
+    "description": "Both-held LT1+LT2 behavior is documented as observed existing combined behavior and is not promoted to a production table contract in this fixture."
+  },
+  "preservation_requirements": {
+    "status": "REQUIRED_FOR_ANY_FUTURE_RUNTIME_TABLE_IMPLEMENTATION",
+    "description": "Any future runtime table implementation must preserve right-stick/C-stick behavior, trigger behavior, SOCD behavior, remap behavior, nunchuk behavior, and current Tilt/Tilt2 behavior unless explicitly approved and source-backed."
+  },
+  "notes": [
+    "No runtime table implementation is added by this fixture.",
+    "No profile/schema/proto/configurator changes are made by this fixture.",
+    "No flashing or push-to-device automation is added by this fixture.",
+    "This fixture does not make Smash or game-semantic claims.",
+    "Both-held LT1+LT2 behavior remains observed-only and non-contractual in this artifact."
+  ],
+  "modifier_states": [
+    {
+      "state_id": "base_no_modifier",
+      "display_name": "Base no modifier",
+      "modifier_sources": [],
+      "source_evidence": "source-confirmed baseline table and hardware-smoke corroboration from docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md and docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
+      "direction_table": {
+        "1": {"raw_x": 28, "raw_y": 28, "offset_x": -100, "offset_y": -100, "evidence_notes": "current baseline no-modifier value"},
+        "2": {"raw_x": 128, "raw_y": 28, "offset_x": 0, "offset_y": -100, "evidence_notes": "current baseline no-modifier value"},
+        "3": {"raw_x": 228, "raw_y": 28, "offset_x": 100, "offset_y": -100, "evidence_notes": "current baseline no-modifier value"},
+        "4": {"raw_x": 28, "raw_y": 128, "offset_x": -100, "offset_y": 0, "evidence_notes": "current baseline no-modifier value"},
+        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "explicit neutral"},
+        "6": {"raw_x": 228, "raw_y": 128, "offset_x": 100, "offset_y": 0, "evidence_notes": "current baseline no-modifier value"},
+        "7": {"raw_x": 28, "raw_y": 228, "offset_x": -100, "offset_y": 100, "evidence_notes": "current baseline no-modifier value"},
+        "8": {"raw_x": 128, "raw_y": 228, "offset_x": 0, "offset_y": 100, "evidence_notes": "current baseline no-modifier value"},
+        "9": {"raw_x": 228, "raw_y": 228, "offset_x": 100, "offset_y": 100, "evidence_notes": "current baseline no-modifier value"}
+      }
+    },
+    {
+      "state_id": "tilt1_lt1",
+      "display_name": "Tilt1 LT1 exclusive branch",
+      "modifier_sources": ["inputs.lt1", "!inputs.lt2"],
+      "source_evidence": "source-confirmed formula and table from docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md with hardware-smoke corroboration in docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
+      "direction_table": {
+        "1": {"raw_x": 187, "raw_y": 87, "offset_x": 59, "offset_y": -41, "evidence_notes": "Tilt1 row"},
+        "2": {"raw_x": 128, "raw_y": 87, "offset_x": 0, "offset_y": -41, "evidence_notes": "Tilt1 row"},
+        "3": {"raw_x": 69, "raw_y": 87, "offset_x": -59, "offset_y": -41, "evidence_notes": "Tilt1 row"},
+        "4": {"raw_x": 187, "raw_y": 128, "offset_x": 59, "offset_y": 0, "evidence_notes": "Tilt1 row"},
+        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "explicit neutral"},
+        "6": {"raw_x": 69, "raw_y": 128, "offset_x": -59, "offset_y": 0, "evidence_notes": "Tilt1 row"},
+        "7": {"raw_x": 187, "raw_y": 169, "offset_x": 59, "offset_y": 41, "evidence_notes": "Tilt1 row"},
+        "8": {"raw_x": 128, "raw_y": 169, "offset_x": 0, "offset_y": 41, "evidence_notes": "Tilt1 row"},
+        "9": {"raw_x": 69, "raw_y": 169, "offset_x": -59, "offset_y": 41, "evidence_notes": "Tilt1 row"}
+      }
+    },
+    {
+      "state_id": "tilt2_lt2",
+      "display_name": "Tilt2 LT2 exclusive branch",
+      "modifier_sources": ["inputs.lt2", "!inputs.lt1"],
+      "source_evidence": "source-confirmed formula and table from docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md with hardware-smoke corroboration in docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
+      "direction_table": {
+        "1": {"raw_x": 88, "raw_y": 79, "offset_x": -40, "offset_y": -49, "evidence_notes": "Tilt2 row"},
+        "2": {"raw_x": 128, "raw_y": 79, "offset_x": 0, "offset_y": -49, "evidence_notes": "Tilt2 row"},
+        "3": {"raw_x": 168, "raw_y": 79, "offset_x": 40, "offset_y": -49, "evidence_notes": "Tilt2 row"},
+        "4": {"raw_x": 88, "raw_y": 128, "offset_x": -40, "offset_y": 0, "evidence_notes": "Tilt2 row"},
+        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "explicit neutral"},
+        "6": {"raw_x": 168, "raw_y": 128, "offset_x": 40, "offset_y": 0, "evidence_notes": "Tilt2 row"},
+        "7": {"raw_x": 88, "raw_y": 177, "offset_x": -40, "offset_y": 49, "evidence_notes": "Tilt2 row"},
+        "8": {"raw_x": 128, "raw_y": 177, "offset_x": 0, "offset_y": 49, "evidence_notes": "Tilt2 row"},
+        "9": {"raw_x": 168, "raw_y": 177, "offset_x": 40, "offset_y": 49, "evidence_notes": "Tilt2 row"}
+      }
+    }
+  ]
+}
