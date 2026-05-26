@@ -44,6 +44,8 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_prehardware_dry_run_checker_2026-05-27.md",
     "docs/calibration/glyph_no_forbidden_artifacts_checker_2026-05-27.md",
     "docs/calibration/glyph_manual_hardware_owner_checklist_2026-05-27.md",
+    "docs/calibration/glyph_ultimate_tilt3_runtime_implementation_2026-05-27.md",
+    "docs/calibration/glyph_ultimate_tilt3_hardware_test_plan_2026-05-27.md",
     "tools/run_glyph_ultimate_tilt_prehardware_checks.py",
     "tools/check_glyph_ultimate_tilt_hardware_result.py",
     "tools/check_glyph_ultimate_tilt_rc_manifest.py",
@@ -64,6 +66,7 @@ REQUIRED_FILES = [
     "tools/run_glyph_prehardware_dry_run_checks.py",
     "tools/check_glyph_no_forbidden_artifacts.py",
     "tools/check_glyph_manual_hardware_owner_checklist.py",
+    "tools/check_glyph_ultimate_tilt3_runtime_source.py",
 ]
 
 OPTIONAL_FUTURE_FILES = [

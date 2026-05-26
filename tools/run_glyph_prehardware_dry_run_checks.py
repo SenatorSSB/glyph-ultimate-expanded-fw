@@ -48,6 +48,7 @@ def default_commands() -> list[CommandSpec]:
             ("docs/calibration/fixtures/glyph_native_ultimate_current_tilt_tables_2026-05-26.json",),
         ),
         CommandSpec("tools/check_glyph_native_ultimate_table_runtime_scope.py"),
+        CommandSpec("tools/check_glyph_ultimate_tilt3_runtime_source.py"),
         CommandSpec("tools/run_glyph_next_runtime_change_readiness_checks.py"),
         CommandSpec("tools/check_glyph_merged_state_consistency.py"),
         CommandSpec("tools/check_glyph_no_forbidden_artifacts.py"),

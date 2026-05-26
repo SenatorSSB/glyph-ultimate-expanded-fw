@@ -73,24 +73,29 @@ def _extract_macro(source: str, name: str) -> int:
 
 def _extract_formula_constants(block: str) -> dict[str, tuple[int, str, int, str]]:
     pattern = re.compile(
-        r"if\s*\(\s*inputs\.lt1\s*&&\s*!inputs\.lt2\s*\)\s*\{\s*"
+        r"if\s*\(\s*senscope_tilt3_active\s*\)\s*\{\s*"
         r"outputs\.leftStickX\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.x\s*\*\s*(\d+)\s*\)\s*;\s*"
         r"outputs\.leftStickY\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.y\s*\*\s*(\d+)\s*\)\s*;\s*"
-        r"\}\s*else\s+if\s*\(\s*inputs\.lt2\s*&&\s*!inputs\.lt1\s*\)\s*\{\s*"
+        r"\}\s*else\s+if\s*\(\s*inputs\.lt1\s*\)\s*\{\s*"
+        r"outputs\.leftStickX\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.x\s*\*\s*(\d+)\s*\)\s*;\s*"
+        r"outputs\.leftStickY\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.y\s*\*\s*(\d+)\s*\)\s*;\s*"
+        r"\}\s*else\s+if\s*\(\s*inputs\.lt2\s*\)\s*\{\s*"
         r"outputs\.leftStickX\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.x\s*\*\s*(\d+)\s*\)\s*;\s*"
         r"outputs\.leftStickY\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.y\s*\*\s*(\d+)\s*\)\s*;",
         flags=re.DOTALL,
     )
     match = pattern.search(block)
     if match is None:
-        _fail("unable to parse Tilt1/Tilt2 formulas from marked patch block")
+        _fail("unable to parse Tilt1/Tilt2/Tilt3 formulas from marked patch block")
 
     groups = [int(value) if value.isdigit() else value for value in match.groups()]
     return {
-        "tilt1": (groups[0], groups[1], groups[2], groups[4]),
-        "tilt2": (groups[6], groups[7], groups[8], groups[10]),
-        "tilt1_y": (groups[3], groups[4], groups[5], "y"),
-        "tilt2_y": (groups[9], groups[10], groups[11], "y"),
+        "tilt3": (groups[0], groups[1], groups[2], groups[4]),
+        "tilt3_y": (groups[3], groups[4], groups[5], "y"),
+        "tilt1": (groups[6], groups[7], groups[8], groups[10]),
+        "tilt1_y": (groups[9], groups[10], groups[11], "y"),
+        "tilt2": (groups[12], groups[13], groups[14], groups[16]),
+        "tilt2_y": (groups[15], groups[16], groups[17], "y"),
     }
 
 
@@ -110,13 +115,16 @@ def _compute_tables(source: str, constants: dict[str, tuple[int, str, int, str]]
 
     tilt1_center_x, tilt1_x_sign, tilt1_x_mag, _ = constants["tilt1"]
     tilt2_center_x, tilt2_x_sign, tilt2_x_mag, _ = constants["tilt2"]
+    tilt3_center_x, tilt3_x_sign, tilt3_x_mag, _ = constants["tilt3"]
     tilt1_center_y, tilt1_y_sign, tilt1_y_mag, _ = constants["tilt1_y"]
     tilt2_center_y, tilt2_y_sign, tilt2_y_mag, _ = constants["tilt2_y"]
+    tilt3_center_y, tilt3_y_sign, tilt3_y_mag, _ = constants["tilt3_y"]
 
-    if (tilt1_x_mag, tilt1_y_mag, tilt2_x_mag, tilt2_y_mag) != (59, 41, 40, 49):
+    if (tilt1_x_mag, tilt1_y_mag, tilt2_x_mag, tilt2_y_mag, tilt3_x_mag, tilt3_y_mag) != (59, 41, 40, 49, 53, 42):
         _fail(
-            "runtime constants mismatch: expected Tilt1(59,41) Tilt2(40,49), got "
-            f"Tilt1({tilt1_x_mag},{tilt1_y_mag}) Tilt2({tilt2_x_mag},{tilt2_y_mag})"
+            "runtime constants mismatch: expected Tilt1(59,41) Tilt2(40,49) Tilt3(53,42), got "
+            f"Tilt1({tilt1_x_mag},{tilt1_y_mag}) Tilt2({tilt2_x_mag},{tilt2_y_mag}) "
+            f"Tilt3({tilt3_x_mag},{tilt3_y_mag})"
         )
     if tilt1_x_sign != "-":
         _fail(f"Tilt1 X sign mismatch: expected '-', got {tilt1_x_sign!r}")
@@ -126,8 +134,12 @@ def _compute_tables(source: str, constants: dict[str, tuple[int, str, int, str]]
         _fail(f"Tilt2 X sign mismatch: expected '+', got {tilt2_x_sign!r}")
     if tilt2_y_sign != "+":
         _fail(f"Tilt2 Y sign mismatch: expected '+', got {tilt2_y_sign!r}")
+    if tilt3_x_sign != "+":
+        _fail(f"Tilt3 X sign mismatch: expected '+', got {tilt3_x_sign!r}")
+    if tilt3_y_sign != "+":
+        _fail(f"Tilt3 Y sign mismatch: expected '+', got {tilt3_y_sign!r}")
 
-    expected: dict[str, dict[str, dict[str, int]]] = {"base": {}, "tilt1": {}, "tilt2": {}}
+    expected: dict[str, dict[str, dict[str, int]]] = {"base": {}, "tilt1": {}, "tilt2": {}, "tilt3": {}}
 
     for direction, (dx, dy) in DIRECTION_MAP.items():
         base_x = analog_min if dx == -1 else analog_max if dx == 1 else analog_neutral
@@ -136,10 +148,13 @@ def _compute_tables(source: str, constants: dict[str, tuple[int, str, int, str]]
         tilt1_y = _apply_axis(tilt1_center_y, tilt1_y_sign, dy, tilt1_y_mag)
         tilt2_x = _apply_axis(tilt2_center_x, tilt2_x_sign, dx, tilt2_x_mag)
         tilt2_y = _apply_axis(tilt2_center_y, tilt2_y_sign, dy, tilt2_y_mag)
+        tilt3_x = _apply_axis(tilt3_center_x, tilt3_x_sign, dx, tilt3_x_mag)
+        tilt3_y = _apply_axis(tilt3_center_y, tilt3_y_sign, dy, tilt3_y_mag)
 
         expected["base"][direction] = {"x": base_x, "y": base_y}
         expected["tilt1"][direction] = {"x": tilt1_x, "y": tilt1_y}
         expected["tilt2"][direction] = {"x": tilt2_x, "y": tilt2_y}
+        expected["tilt3"][direction] = {"x": tilt3_x, "y": tilt3_y}
 
     return expected
 
@@ -191,10 +206,26 @@ def run() -> None:
     _assert_table_equal("base", observed_base, computed_tables["base"])
     _assert_table_equal("tilt1", observed_tilt1, computed_tables["tilt1"])
     _assert_table_equal("tilt2", observed_tilt2, computed_tables["tilt2"])
+    _assert_table_equal(
+        "tilt3",
+        computed_tables["tilt3"],
+        {
+            "1": {"x": 75, "y": 86},
+            "2": {"x": 128, "y": 86},
+            "3": {"x": 181, "y": 86},
+            "4": {"x": 75, "y": 128},
+            "5": {"x": 128, "y": 128},
+            "6": {"x": 181, "y": 128},
+            "7": {"x": 75, "y": 170},
+            "8": {"x": 128, "y": 170},
+            "9": {"x": 181, "y": 170},
+        },
+    )
 
     _assert_neutral("base", observed_base)
     _assert_neutral("tilt1", observed_tilt1)
     _assert_neutral("tilt2", observed_tilt2)
+    _assert_neutral("tilt3", computed_tables["tilt3"])
 
 
 def main() -> None:
@@ -204,7 +235,7 @@ def main() -> None:
         print(f"glyph_ultimate_tilt_tables: FAIL {exc}")
         raise SystemExit(1)
 
-    print("glyph_ultimate_tilt_tables: PASS tables=base,tilt1,tilt2 directions=9 constants=59,41,40,49")
+    print("glyph_ultimate_tilt_tables: PASS tables=base,tilt1,tilt2,tilt3 directions=9 constants=59,41,40,49,53,42")
 
 
 if __name__ == "__main__":

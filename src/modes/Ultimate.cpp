@@ -31,8 +31,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.dpadDown = 0;
     outputs.dpadLeft = 0;
     outputs.dpadRight = 0;
-    // Turn on D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
-    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
+    // Turn on D-Pad layer with the Nunchuk C button.
+    if (inputs.nunchuk_c) {
         outputs.dpadUp = inputs.rt4;
         outputs.dpadDown = inputs.rt2;
         outputs.dpadLeft = inputs.rt3;
@@ -75,9 +75,11 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         outputs
     );
 
+    const bool senscope_tilt3_active = inputs.lt3 || (inputs.lt1 && inputs.lt2);
+
     bool shield_button_pressed = inputs.lf4 || inputs.rf5;
 
-    if (inputs.lt1) {
+    if (inputs.lt1 && !senscope_tilt3_active) {
         // MX + Horizontal = 6625 = 53
         if (directions.horizontal) {
             outputs.leftStickX = 128 + (directions.x * 53);
@@ -171,7 +173,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         }
     }
 
-    if (inputs.lt2) {
+    if (inputs.lt2 && !senscope_tilt3_active) {
         // MY + Horizontal (even if shield is held) = 41
         if (directions.horizontal) {
             outputs.leftStickX = 128 + (directions.x * 41);
@@ -266,13 +268,16 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     }
 
     // Senscope Glyph Ultimate Tilt patch begin
-    // Tilt1/Tilt2 use post-remap logical LT1/LT2 inputs. In the MVP profile,
+    // Tilt1/Tilt2/Tilt3 use post-remap logical LT inputs. In the MVP profile,
     // physical RF3/RF4 are mapped to LT1/LT2; do not bypass remap here.
     // Explicit signed math avoids uint8 overflow/flipper tricks.
-    if (inputs.lt1 && !inputs.lt2) {
+    if (senscope_tilt3_active) {
+        outputs.leftStickX = 128 + (directions.x * 53);
+        outputs.leftStickY = 128 + (directions.y * 42);
+    } else if (inputs.lt1) {
         outputs.leftStickX = 128 - (directions.x * 59);
         outputs.leftStickY = 128 + (directions.y * 41);
-    } else if (inputs.lt2 && !inputs.lt1) {
+    } else if (inputs.lt2) {
         outputs.leftStickX = 128 + (directions.x * 40);
         outputs.leftStickY = 128 + (directions.y * 49);
     }
@@ -300,7 +305,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     }
 
     // Shut off C-stick when using D-Pad layer.
-    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
+    if (inputs.nunchuk_c) {
         outputs.rightStickX = 128;
         outputs.rightStickY = 128;
     }
