@@ -117,6 +117,7 @@
 - Focus:
   - execute preservation hardware result,
   - run post-patch hardware validation for any approved runtime change.
+  - prehardware RC preparation should follow `docs/calibration/glyph_prehardware_rc_runbook_2026-05-27.md` and `tools/inspect_glyph_mk6_build_artifact.py` before manual hardware execution.
 
 ### Phase F - Adapter/Export Work
 
