@@ -12,6 +12,10 @@ REQUIRED_NEW_DOCS = [
     "docs/calibration/glyph_native_ultimate_runtime_implementation_plan_v0_2026-05-27.md",
     "docs/calibration/glyph_user_requirements_input_packet_2026-05-27.md",
     "docs/calibration/glyph_preimplementation_blocker_index_2026-05-27.md",
+    "docs/calibration/glyph_user_requirements_packet_checker_2026-05-27.md",
+    "docs/calibration/glyph_preservation_hardware_execution_packet_2026-05-27.md",
+    "tools/check_glyph_user_requirements_packet.py",
+    "tools/check_glyph_preservation_execution_packet.py",
 ]
 
 REQUIRED_EXISTING_ANCHORS = [
@@ -50,7 +54,7 @@ def run_group(repo_root: Path, title: str, rel_paths: list[str]) -> list[str]:
 def main() -> int:
     repo_root = Path(__file__).resolve().parents[1]
 
-    missing_new = run_group(repo_root, "new docs", REQUIRED_NEW_DOCS)
+    missing_new = run_group(repo_root, "new docs/checkers", REQUIRED_NEW_DOCS)
     missing_existing = run_group(repo_root, "existing anchor docs/checkers", REQUIRED_EXISTING_ANCHORS)
 
     missing_all = missing_new + missing_existing

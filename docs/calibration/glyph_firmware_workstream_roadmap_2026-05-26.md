@@ -156,7 +156,10 @@
 | `docs/calibration/glyph_native_ultimate_table_source_checker_2026-05-26.md` | Source-scope checker intent for native runtime guardrails. |
 | `docs/calibration/glyph_full_layout_requirements_spec_2026-05-26.md` | Current requirements ledger with evidence status. |
 | `docs/calibration/glyph_full_layout_requirements_questions_2026-05-26.md` | Open user/source/corpus/hardware questions. |
+| `docs/calibration/glyph_user_requirements_input_packet_2026-05-27.md` | Fillable user/domain requirements packet with blocker-rule framing. |
+| `docs/calibration/glyph_user_requirements_packet_checker_2026-05-27.md` | Structure-only checker policy for user requirements packet presence validation. |
 | `docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md` | Design-only readiness gate before next runtime patch. |
+| `docs/calibration/glyph_preservation_hardware_execution_packet_2026-05-27.md` | Manual preservation test execution preparation packet (no result capture in packet). |
 | `docs/calibration/glyph_full_firmware_workstream_sequence_handoff_2026-05-26.md` | Sequence-level handoff and carried-forward caveats. |
 | `docs/calibration/glyph_merged_state_consistency_audit_2026-05-26.md` | Merged-state stale-claim audit and consistency notes. |
 
@@ -176,6 +179,8 @@
 | `tools/check_glyph_native_ultimate_table_runtime_scope.py` | Native Ultimate source-scope guardrails for Tilt patch and runtime markers. |
 | `tools/run_glyph_next_runtime_change_readiness_checks.py` | Aggregated readiness checks for next runtime change planning. |
 | `tools/check_glyph_merged_state_consistency.py` | Merged-state required-file and stale-phrase consistency checks. |
+| `tools/check_glyph_user_requirements_packet.py` | Structure/presence checks for required user requirements packet anchors and blocker language. |
+| `tools/check_glyph_preservation_execution_packet.py` | Structure/presence checks for preservation execution packet constraints and required references. |
 
 ## Non-Goals
 
