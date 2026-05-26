@@ -16,10 +16,14 @@ REQUIRED_NEW_DOCS = [
     "docs/calibration/glyph_preservation_hardware_execution_packet_2026-05-27.md",
     "docs/calibration/glyph_prehardware_rc_runbook_2026-05-27.md",
     "docs/calibration/glyph_prehardware_rc_runbook_checker_2026-05-27.md",
+    "docs/calibration/glyph_prehardware_dry_run_checker_2026-05-27.md",
+    "docs/calibration/glyph_manual_hardware_owner_checklist_2026-05-27.md",
     "tools/check_glyph_user_requirements_packet.py",
     "tools/check_glyph_preservation_execution_packet.py",
     "tools/check_glyph_prehardware_rc_runbook.py",
     "tools/inspect_glyph_mk6_build_artifact.py",
+    "tools/run_glyph_prehardware_dry_run_checks.py",
+    "tools/check_glyph_manual_hardware_owner_checklist.py",
 ]
 
 REQUIRED_EXISTING_ANCHORS = [
