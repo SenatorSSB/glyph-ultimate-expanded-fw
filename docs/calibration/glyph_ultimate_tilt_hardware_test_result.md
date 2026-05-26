@@ -79,7 +79,7 @@ raw_y = 128 + offset_y
 | Tilt2 LT2 direction 7 produces expected table value | PASS | Physical RF4 / logical Tilt2 matched expected Tilt2 offset. |
 | Tilt2 LT2 direction 8 produces expected table value | PASS | Physical RF4 / logical Tilt2 matched expected Tilt2 offset. |
 | Tilt2 LT2 direction 9 produces expected table value | PASS | Physical RF4 / logical Tilt2 up-right observed offset `(40, 49)`, raw `(168, 177)`. |
-| Both LT1+LT2 does not apply new Tilt override | PASS_SMOKE_OBSERVED_EXISTING_COMBINED_BEHAVIOR | Senscope Tilt override branch should not apply when both Tilt inputs are active. Stable existing combined-behavior offsets were observed for directions 1, 2, 3, 4, 5, 6, 7, and 9; direction 8 was not separately provided and is recorded as NOT_TESTED below. |
+| Both LT1+LT2 does not apply new Tilt override | PASS_SMOKE_OBSERVED_EXISTING_COMBINED_BEHAVIOR | Senscope Tilt override branch should not apply when both Tilt inputs are active. Stable existing combined-behavior offsets were observed for all directions 1 through 9. |
 
 ## No-Modifier Baseline
 
@@ -98,7 +98,7 @@ No exact expected table was required for both-held Tilt1+Tilt2. This smoke resul
 | 5 | PASS_SMOKE_OBSERVED_EXISTING_COMBINED_BEHAVIOR | `(0, 0)` |
 | 6 | PASS_SMOKE_OBSERVED_EXISTING_COMBINED_BEHAVIOR | `(41, 0)` |
 | 7 | PASS_SMOKE_OBSERVED_EXISTING_COMBINED_BEHAVIOR | `(-35, 53)` |
-| 8 | NOT_TESTED | Direction 8 was not separately provided. |
+| 8 | PASS_SMOKE_OBSERVED_EXISTING_COMBINED_BEHAVIOR | `(0, 53)` |
 | 9 | PASS_SMOKE_OBSERVED_EXISTING_COMBINED_BEHAVIOR | `(35, 53)` |
 
 ## RF5 Negative Check
@@ -132,7 +132,6 @@ Plugging the controller into Nintendo Switch visualized and Ultimate actualized 
 ## Caveats
 
 - RF5 physical identity was ambiguous, so RF5 negative check is not source-confirmed.
-- Tilt1+Tilt2 direction 8 was not separately provided and is recorded as NOT_TESTED.
 - macOS RPI-RP2 disconnect/eject warning occurred after UF2 copy, but the device reconnected normally.
 - Profiles appeared preserved, but profile preservation was not exhaustively verified.
 
