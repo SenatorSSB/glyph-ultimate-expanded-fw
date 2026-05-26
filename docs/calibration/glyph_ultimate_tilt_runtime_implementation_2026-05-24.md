@@ -149,6 +149,7 @@ Recovery clarification for this branch:
 
 - `LT1+LT2` no longer activates the old D-pad layer in `MODE_ULTIMATE`.
 - `LT1+LT2` no longer causes the old C-stick/right-stick neutralization side effect.
+- Tilt3-active paths (`inputs.lt3`, `inputs.lt1 && inputs.lt2`, and mixed `LT3+LT1/LT2`) bypass the old pre-patch `LT1`/`LT2` prototype modifier blocks.
 - The remaining source-local D-pad-layer condition is `inputs.nunchuk_c`.
 
 Hardware testing is required before final acceptance. Until that hardware test is complete, this branch only has source/build/checker evidence and no broad preservation PASS claim.

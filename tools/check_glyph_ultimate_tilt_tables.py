@@ -73,8 +73,7 @@ def _extract_macro(source: str, name: str) -> int:
 
 def _extract_formula_constants(block: str) -> dict[str, tuple[int, str, int, str]]:
     pattern = re.compile(
-        r"tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)\s*;\s*"
-        r"if\s*\(\s*tilt3_active\s*\)\s*\{\s*"
+        r"if\s*\(\s*senscope_tilt3_active\s*\)\s*\{\s*"
         r"outputs\.leftStickX\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.x\s*\*\s*(\d+)\s*\)\s*;\s*"
         r"outputs\.leftStickY\s*=\s*(\d+)\s*([+-])\s*\(\s*directions\.y\s*\*\s*(\d+)\s*\)\s*;\s*"
         r"\}\s*else\s+if\s*\(\s*inputs\.lt1\s*\)\s*\{\s*"

@@ -55,6 +55,17 @@ This means `LT1+LT2` now resolves to Tilt3 in this branch.
 side effect that was tied to the D-pad layer. The remaining source-local D-pad
 layer condition is `inputs.nunchuk_c`.
 
+Tilt3-active paths also bypass the old Ultimate prototype `LT1`/`LT2`
+modifier blocks that run before the Senscope Tilt patch. For this branch:
+
+- `LT3` is a clean Tilt3-only path.
+- `LT1+LT2` is a clean Tilt3-only path.
+- `LT3+LT1`, `LT3+LT2`, and `LT3+LT1+LT2` resolve to clean Tilt3.
+- Clean Tilt3 means no old D-pad-layer activation, no old C-stick/right-stick
+  neutralization, no old `LT1` C-stick angled fsmash/ftilt side effects, and no
+  old `LT1`/`LT2` extended Up-B/prototype modifier side effects beyond the final
+  Tilt3 left-stick output.
+
 ## Tilt3 Formula And Table
 
 Formula for `directions.x` / `directions.y` in `-1, 0, 1`:
@@ -87,6 +98,8 @@ Intentional runtime change:
 - `LT1+LT2` both-held no longer activates the old D-pad layer.
 - `LT1+LT2` both-held no longer shuts off or neutralizes C-stick/right-stick output through the old D-pad-layer side effect.
 - For this scope, the old `LT1+LT2` combined behavior is replaced with Tilt3-only left-stick behavior.
+- Tilt3-active paths bypass the old pre-patch `LT1`/`LT2` prototype modifier blocks.
+- `LT3` mixed with `LT1` and/or `LT2` still resolves to Tilt3-only behavior.
 
 Preserved by implementation scope:
 
@@ -96,8 +109,16 @@ Preserved by implementation scope:
 - Trigger assignments are not changed by the Tilt3 block.
 - Existing nunchuk C D-pad-layer behavior remains the source-local D-pad-layer condition.
 - Nunchuk left-stick overwrite remains after the Tilt block and remains authoritative when connected.
+- `LT1` alone and `LT2` alone retain prior Tilt1/Tilt2 behavior for this branch.
 - Other modes are untouched.
 - Profile/schema/proto/configurator behavior is untouched.
+
+## Future Hardening Note
+
+Existing `LT1`-alone and `LT2`-alone paths still coexist with old Ultimate
+prototype modifier code outside the Senscope Tilt patch. A future cleanup branch
+may isolate all Senscope modifiers from old prototype modifier behavior. This
+branch only gates the old blocks when Tilt3 is active.
 
 ## Hardware-Test Requirements
 
@@ -107,8 +128,10 @@ Required hardware checks include:
 
 - Dedicated logical `LT3` directions 1..9 produce the Tilt3 table.
 - `LT1+LT2` directions 1..9 produce the Tilt3 table.
+- `LT3+LT1`, `LT3+LT2`, and `LT3+LT1+LT2` directions 1..9 produce the Tilt3 table.
 - `LT1+LT2` does not activate D-pad outputs.
 - `LT1+LT2` does not shut off or neutralize C-stick/right-stick output unless another actual D-pad-layer condition applies.
+- `LT1+LT2` and `LT3` Tilt3-active states do not trigger old `LT1`/`LT2` prototype modifier side effects.
 - `LT1` alone directions 1..9 still produce the existing Tilt1 table.
 - `LT2` alone directions 1..9 still produce the existing Tilt2 table.
 - Baseline no-modifier directions 1..9 remain unchanged.

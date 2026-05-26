@@ -75,9 +75,11 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         outputs
     );
 
+    const bool senscope_tilt3_active = inputs.lt3 || (inputs.lt1 && inputs.lt2);
+
     bool shield_button_pressed = inputs.lf4 || inputs.rf5;
 
-    if (inputs.lt1) {
+    if (inputs.lt1 && !senscope_tilt3_active) {
         // MX + Horizontal = 6625 = 53
         if (directions.horizontal) {
             outputs.leftStickX = 128 + (directions.x * 53);
@@ -171,7 +173,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         }
     }
 
-    if (inputs.lt2) {
+    if (inputs.lt2 && !senscope_tilt3_active) {
         // MY + Horizontal (even if shield is held) = 41
         if (directions.horizontal) {
             outputs.leftStickX = 128 + (directions.x * 41);
@@ -269,8 +271,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     // Tilt1/Tilt2/Tilt3 use post-remap logical LT inputs. In the MVP profile,
     // physical RF3/RF4 are mapped to LT1/LT2; do not bypass remap here.
     // Explicit signed math avoids uint8 overflow/flipper tricks.
-    const bool tilt3_active = inputs.lt3 || (inputs.lt1 && inputs.lt2);
-    if (tilt3_active) {
+    if (senscope_tilt3_active) {
         outputs.leftStickX = 128 + (directions.x * 53);
         outputs.leftStickY = 128 + (directions.y * 42);
     } else if (inputs.lt1) {

@@ -56,6 +56,13 @@ def extract_patch_block(source: str) -> str:
     return source[begin : end + len(END_MARKER)]
 
 
+def extract_before_patch(source: str) -> str:
+    begin = source.find(BEGIN_MARKER)
+    if begin < 0:
+        fail(f"missing begin marker: {BEGIN_MARKER}")
+    return source[:begin]
+
+
 def require(pattern: str, text: str, label: str, *, flags: int = 0) -> None:
     if re.search(pattern, text, flags) is None:
         fail(f"missing source evidence: {label}")
@@ -91,6 +98,33 @@ def extract_cstick_neutralization_body(source: str) -> str:
     return match.group("body")
 
 
+def check_tilt3_active_gates_legacy_blocks(source: str, before_patch: str) -> None:
+    active_match = re.search(
+        r"const\s+bool\s+senscope_tilt3_active\s*=\s*"
+        r"inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)\s*;",
+        source,
+    )
+    if active_match is None:
+        fail("missing senscope_tilt3_active boolean with LT3 OR LT1+LT2")
+
+    lt1_match = re.search(
+        r"if\s*\(\s*inputs\.lt1\s*&&\s*!\s*senscope_tilt3_active\s*\)\s*\{",
+        before_patch,
+    )
+    if lt1_match is None:
+        fail("old LT1 prototype block must be gated by !senscope_tilt3_active")
+
+    lt2_match = re.search(
+        r"if\s*\(\s*inputs\.lt2\s*&&\s*!\s*senscope_tilt3_active\s*\)\s*\{",
+        before_patch,
+    )
+    if lt2_match is None:
+        fail("old LT2 prototype block must be gated by !senscope_tilt3_active")
+
+    if not (active_match.start() < lt1_match.start() < lt2_match.start()):
+        fail("senscope_tilt3_active must be computed before old LT1/LT2 prototype blocks")
+
+
 def forbid_patch_assignments(block: str) -> None:
     for field in FORBIDDEN_PATCH_ASSIGNMENTS:
         if re.search(rf"\b{re.escape(field)}\s*=", block):
@@ -122,11 +156,12 @@ def formula_value_bounds() -> dict[str, tuple[int, int]]:
 def main() -> int:
     source = ULTIMATE_PATH.read_text(encoding="utf-8")
     block = extract_patch_block(source)
+    before_patch = extract_before_patch(source)
     dpad_layer_body = extract_dpad_layer_body(source)
     cstick_neutralization_body = extract_cstick_neutralization_body(source)
 
-    require(r"tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)", block, "Tilt3 active condition")
-    require(r"if\s*\(\s*tilt3_active\s*\)", block, "Tilt3 priority branch")
+    check_tilt3_active_gates_legacy_blocks(source, before_patch)
+    require(r"if\s*\(\s*senscope_tilt3_active\s*\)", block, "Tilt3 priority branch uses shared active condition")
     require(r"else\s+if\s*\(\s*inputs\.lt1\s*\)", block, "lt1 branch after Tilt3")
     require(r"else\s+if\s*\(\s*inputs\.lt2\s*\)", block, "lt2 branch after Tilt3")
     require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(directions\.x\s*\*\s*53\)", block, "Tilt3 leftStickX formula")
@@ -160,8 +195,10 @@ def main() -> int:
     print("tilt_tilt2_tilt3_formulas_byte_safe=true")
     print(f"formula_ranges={bounds}")
     print(f"table_runtime_markers={'present:' + ','.join(table_markers) if table_markers else 'absent'}")
-    print("tilt3_active=inputs.lt3 || (inputs.lt1 && inputs.lt2)")
+    print("senscope_tilt3_active=inputs.lt3 || (inputs.lt1 && inputs.lt2)")
     print("lt1_lt2_both_held_resolves_to_tilt3=true")
+    print("legacy_lt1_block_gated_by_tilt3_active=true")
+    print("legacy_lt2_block_gated_by_tilt3_active=true")
     print("lt1_lt2_dpad_layer_activation=false")
     print("lt1_lt2_cstick_neutralization=false")
     print("lt1_branch=inputs.lt1 after Tilt3 priority")

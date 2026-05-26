@@ -108,7 +108,7 @@ def main() -> None:
 
     _require(r"\binputs\.lt1\b", block, "inputs.lt1")
     _require(r"\binputs\.lt2\b", block, "inputs.lt2")
-    _require(r"\binputs\.lt3\b", block, "inputs.lt3")
+    _require(r"\binputs\.lt3\b", source, "inputs.lt3")
     _require(r"\b59\b", block, "Tilt1 X magnitude 59")
     _require(r"\b41\b", block, "Tilt1 Y magnitude 41")
     _require(r"\b40\b", block, "Tilt2 X magnitude 40")
@@ -121,11 +121,13 @@ def main() -> None:
     _require(r"outputs\.leftStickX\s*=", block, "leftStickX assignment")
     _require(r"outputs\.leftStickY\s*=", block, "leftStickY assignment")
     _require(
-        r"tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)",
-        block,
+        r"const\s+bool\s+senscope_tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)",
+        source,
         "Tilt3 active condition",
     )
-    _require(r"if\s*\(\s*tilt3_active\s*\)", block, "Tilt3 priority activation")
+    _require(r"if\s*\(\s*inputs\.lt1\s*&&\s*!\s*senscope_tilt3_active\s*\)", source, "legacy LT1 block gated by Tilt3")
+    _require(r"if\s*\(\s*inputs\.lt2\s*&&\s*!\s*senscope_tilt3_active\s*\)", source, "legacy LT2 block gated by Tilt3")
+    _require(r"if\s*\(\s*senscope_tilt3_active\s*\)", block, "Tilt3 priority activation")
     _require(r"else\s+if\s*\(\s*inputs\.lt1\s*\)", block, "Tilt1 activation after Tilt3")
     _require(r"else\s+if\s*\(\s*inputs\.lt2\s*\)", block, "Tilt2 activation after Tilt3")
 
@@ -140,8 +142,8 @@ def main() -> None:
     print(
         "glyph_ultimate_tilt_runtime_source: PASS "
         "patch_block_count=1 inputs=lt1/lt2/lt3 constants=59,41,40,49,53,42 "
-        "tilt3_active=lt3_or_lt1_lt2 left_stick_only=true raw_rf_bypass=false "
-        "no_timing_tokens=true"
+        "senscope_tilt3_active=lt3_or_lt1_lt2 legacy_lt1_lt2_gated=true "
+        "left_stick_only=true raw_rf_bypass=false no_timing_tokens=true"
     )
 
 

@@ -35,8 +35,13 @@ leftStickY = 128 + directions.y * 42
 | --- | --- | --- | --- | --- |
 | Dedicated Tilt3 | Logical `LT3` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 chord | `LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
+| Tilt3 mixed input | `LT3+LT1` | 1..9 | Tilt3 table above | NOT_TESTED |
+| Tilt3 mixed input | `LT3+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
+| Tilt3 mixed input | `LT3+LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 chord D-pad side effect guard | `LT1+LT2` plus D-pad-observable buttons as needed | Representative smoke | `LT1+LT2` does not activate D-pad outputs by itself | NOT_TESTED |
 | Tilt3 chord C-stick side effect guard | `LT1+LT2` plus C-left/C-right/C-down/C-up | Cardinal and diagonal smoke | `LT1+LT2` does not shut off or neutralize C-stick/right-stick unless another actual D-pad-layer condition applies | NOT_TESTED |
+| Tilt3 chord prototype side effect guard | `LT1+LT2` plus C-stick direction smoke | Cardinal and diagonal smoke | No hidden C-stick/right-stick modification from the old `LT1` prototype block | NOT_TESTED |
+| Dedicated Tilt3 prototype side effect guard | `LT3` plus C-stick direction smoke | Cardinal and diagonal smoke | No hidden C-stick/right-stick modification from old prototype blocks | NOT_TESTED |
 | Tilt1 preservation | `LT1` alone | 1..9 | Existing Tilt1 table `(187,87)`, `(128,87)`, `(69,87)`, `(187,128)`, `(128,128)`, `(69,128)`, `(187,169)`, `(128,169)`, `(69,169)` | NOT_TESTED |
 | Tilt2 preservation | `LT2` alone | 1..9 | Existing Tilt2 table `(88,79)`, `(128,79)`, `(168,79)`, `(88,128)`, `(128,128)`, `(168,128)`, `(88,177)`, `(128,177)`, `(168,177)` | NOT_TESTED |
 | Baseline preservation | No modifier | 1..9 | Existing baseline table `(28,28)`, `(128,28)`, `(228,28)`, `(28,128)`, `(128,128)`, `(228,128)`, `(28,228)`, `(128,228)`, `(228,228)` | NOT_TESTED |
