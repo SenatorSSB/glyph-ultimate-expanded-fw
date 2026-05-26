@@ -290,14 +290,14 @@ rightStickX:
 - src/core/ControllerMode.cpp:81: tokens=directions.cx
 - src/modes/Ultimate.cpp:162: tokens=directions.cx, directions.y
 - src/modes/Ultimate.cpp:289: tokens=directions.cx, directions.cy
-- src/modes/Ultimate.cpp:308: tokens=inputs.lt1, inputs.lt2, inputs.nunchuk_c
+- src/modes/Ultimate.cpp:308: tokens=inputs.nunchuk_c
 rightStickY:
 - src/core/ControllerMode.cpp:49: tokens=none
 - src/core/ControllerMode.cpp:87: tokens=directions.cy
 - src/core/ControllerMode.cpp:90: tokens=directions.cy
 - src/modes/Ultimate.cpp:163: tokens=directions.cx, directions.y
 - src/modes/Ultimate.cpp:290: tokens=directions.cx, directions.cy, inputs.lf4
-- src/modes/Ultimate.cpp:309: tokens=inputs.lt1, inputs.lt2, inputs.nunchuk_c
+- src/modes/Ultimate.cpp:309: tokens=inputs.nunchuk_c
 triggerLAnalog:
 - src/modes/Ultimate.cpp:294: tokens=inputs.lf4
 - src/modes/Ultimate.cpp:296: tokens=inputs.lf4

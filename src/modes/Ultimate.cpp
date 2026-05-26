@@ -31,8 +31,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.dpadDown = 0;
     outputs.dpadLeft = 0;
     outputs.dpadRight = 0;
-    // Turn on D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
-    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
+    // Turn on D-Pad layer with the Nunchuk C button.
+    if (inputs.nunchuk_c) {
         outputs.dpadUp = inputs.rt4;
         outputs.dpadDown = inputs.rt2;
         outputs.dpadLeft = inputs.rt3;
@@ -304,7 +304,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     }
 
     // Shut off C-stick when using D-Pad layer.
-    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
+    if (inputs.nunchuk_c) {
         outputs.rightStickX = 128;
         outputs.rightStickY = 128;
     }

@@ -50,6 +50,11 @@ Runtime priority inside the Tilt block:
 
 This means `LT1+LT2` now resolves to Tilt3 in this branch.
 
+`LT1+LT2` no longer activates the old D-pad layer in `MODE_ULTIMATE`.
+`LT1+LT2` also no longer triggers the old C-stick/right-stick neutralization
+side effect that was tied to the D-pad layer. The remaining source-local D-pad
+layer condition is `inputs.nunchuk_c`.
+
 ## Tilt3 Formula And Table
 
 Formula for `directions.x` / `directions.y` in `-1, 0, 1`:
@@ -79,13 +84,17 @@ Intentional runtime change:
 
 - `MODE_ULTIMATE` left-stick Tilt behavior now includes Tilt3.
 - `LT1+LT2` both-held no longer falls through to old combined behavior inside the Tilt override path; it resolves to Tilt3.
+- `LT1+LT2` both-held no longer activates the old D-pad layer.
+- `LT1+LT2` both-held no longer shuts off or neutralizes C-stick/right-stick output through the old D-pad-layer side effect.
+- For this scope, the old `LT1+LT2` combined behavior is replaced with Tilt3-only left-stick behavior.
 
 Preserved by implementation scope:
 
 - SOCD handling remains in the existing pre-output path.
 - Remap handling remains in the existing pre-output path.
-- C-stick/right-stick assignments are not changed by the Tilt3 block.
+- C-stick/right-stick assignments are not changed by the Tilt3 block, and `LT1+LT2` is no longer a D-pad-layer neutralization trigger.
 - Trigger assignments are not changed by the Tilt3 block.
+- Existing nunchuk C D-pad-layer behavior remains the source-local D-pad-layer condition.
 - Nunchuk left-stick overwrite remains after the Tilt block and remains authoritative when connected.
 - Other modes are untouched.
 - Profile/schema/proto/configurator behavior is untouched.
@@ -98,6 +107,8 @@ Required hardware checks include:
 
 - Dedicated logical `LT3` directions 1..9 produce the Tilt3 table.
 - `LT1+LT2` directions 1..9 produce the Tilt3 table.
+- `LT1+LT2` does not activate D-pad outputs.
+- `LT1+LT2` does not shut off or neutralize C-stick/right-stick output unless another actual D-pad-layer condition applies.
 - `LT1` alone directions 1..9 still produce the existing Tilt1 table.
 - `LT2` alone directions 1..9 still produce the existing Tilt2 table.
 - Baseline no-modifier directions 1..9 remain unchanged.

@@ -62,6 +62,36 @@ def require(pattern: str, text: str, label: str, *, flags: int = 0) -> None:
         fail(f"missing source evidence: {label}")
 
 
+def extract_dpad_layer_body(source: str) -> str:
+    match = re.search(
+        r"outputs\.dpadRight\s*=\s*0\s*;\s*(?P<body>.*?)outputs\.dpadUp\s*\|=",
+        source,
+        flags=re.DOTALL,
+    )
+    if match is None:
+        fail("unable to locate D-pad layer body")
+    return match.group("body")
+
+
+def extract_cstick_neutralization_body(source: str) -> str:
+    match = re.search(
+        r"//\s*Shut off C-stick when using D-Pad layer\.\s*"
+        r"(?P<body>if\s*\([^)]*\)\s*\{[^}]*outputs\.rightStickX\s*=\s*128\s*;"
+        r"[^}]*outputs\.rightStickY\s*=\s*128\s*;[^}]*\})",
+        source,
+        flags=re.DOTALL,
+    )
+    if match is None:
+        fail("unable to locate C-stick/right-stick neutralization body")
+    return match.group("body")
+
+
+def forbid_lt1_lt2_chord(text: str, label: str) -> None:
+    compact = re.sub(r"\s+", "", text)
+    if "inputs.lt1&&inputs.lt2" in compact:
+        fail(f"{label} must not include LT1+LT2 chord")
+
+
 def forbid_assignments(block: str) -> None:
     for field in FORBIDDEN_ASSIGNMENTS:
         if re.search(rf"\b{re.escape(field)}\s*=", block):
@@ -90,6 +120,8 @@ def forbid_overflow_patterns(block: str) -> None:
 def main() -> int:
     source = SOURCE_PATH.read_text(encoding="utf-8")
     block = extract_patch_block(source)
+    dpad_layer_body = extract_dpad_layer_body(source)
+    cstick_neutralization_body = extract_cstick_neutralization_body(source)
 
     require(
         r"tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)",
@@ -105,6 +137,10 @@ def main() -> int:
     require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(\s*directions\.y\s*\*\s*41\s*\)", block, "Tilt1 Y formula preserved")
     require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(\s*directions\.x\s*\*\s*40\s*\)", block, "Tilt2 X formula preserved")
     require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(\s*directions\.y\s*\*\s*49\s*\)", block, "Tilt2 Y formula preserved")
+    require(r"if\s*\(\s*inputs\.nunchuk_c\s*\)", dpad_layer_body, "D-pad layer uses remaining nunchuk C condition")
+    require(r"if\s*\(\s*inputs\.nunchuk_c\s*\)", cstick_neutralization_body, "C-stick/right-stick neutralization uses remaining nunchuk C condition")
+    forbid_lt1_lt2_chord(dpad_layer_body, "D-pad layer condition")
+    forbid_lt1_lt2_chord(cstick_neutralization_body, "C-stick/right-stick neutralization condition")
 
     forbid_raw_physical_bypass(block)
     forbid_assignments(block)
@@ -129,6 +165,9 @@ def main() -> int:
     print("tilt3_active=inputs.lt3 || (inputs.lt1 && inputs.lt2)")
     print("dedicated_tilt3_input=inputs.lt3")
     print("lt1_lt2_both_held_resolves_to_tilt3=true")
+    print("lt1_lt2_dpad_layer_activation=false")
+    print("lt1_lt2_cstick_neutralization=false")
+    print("nunchuk_c_dpad_layer_preserved=true")
     print("left_stick_only=true")
     print("raw_physical_bypass=false")
     print("unsigned_overflow_dependency=false")

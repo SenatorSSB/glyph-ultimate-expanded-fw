@@ -145,4 +145,10 @@ Tilt3 table:
 
 The old both-held observed behavior is superseded for this new runtime branch only after implementation and hardware test: `LT1+LT2` is intended to resolve to Tilt3 instead of falling through to the old combined behavior.
 
+Recovery clarification for this branch:
+
+- `LT1+LT2` no longer activates the old D-pad layer in `MODE_ULTIMATE`.
+- `LT1+LT2` no longer causes the old C-stick/right-stick neutralization side effect.
+- The remaining source-local D-pad-layer condition is `inputs.nunchuk_c`.
+
 Hardware testing is required before final acceptance. Until that hardware test is complete, this branch only has source/build/checker evidence and no broad preservation PASS claim.

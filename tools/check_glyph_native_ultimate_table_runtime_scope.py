@@ -61,6 +61,36 @@ def require(pattern: str, text: str, label: str, *, flags: int = 0) -> None:
         fail(f"missing source evidence: {label}")
 
 
+def forbid_lt1_lt2_chord(text: str, label: str) -> None:
+    compact = re.sub(r"\s+", "", text)
+    if "inputs.lt1&&inputs.lt2" in compact:
+        fail(f"{label} must not include LT1+LT2 chord")
+
+
+def extract_dpad_layer_body(source: str) -> str:
+    match = re.search(
+        r"outputs\.dpadRight\s*=\s*0\s*;\s*(?P<body>.*?)outputs\.dpadUp\s*\|=",
+        source,
+        flags=re.DOTALL,
+    )
+    if match is None:
+        fail("unable to locate D-pad layer body")
+    return match.group("body")
+
+
+def extract_cstick_neutralization_body(source: str) -> str:
+    match = re.search(
+        r"//\s*Shut off C-stick when using D-Pad layer\.\s*"
+        r"(?P<body>if\s*\([^)]*\)\s*\{[^}]*outputs\.rightStickX\s*=\s*128\s*;"
+        r"[^}]*outputs\.rightStickY\s*=\s*128\s*;[^}]*\})",
+        source,
+        flags=re.DOTALL,
+    )
+    if match is None:
+        fail("unable to locate C-stick/right-stick neutralization body")
+    return match.group("body")
+
+
 def forbid_patch_assignments(block: str) -> None:
     for field in FORBIDDEN_PATCH_ASSIGNMENTS:
         if re.search(rf"\b{re.escape(field)}\s*=", block):
@@ -92,6 +122,8 @@ def formula_value_bounds() -> dict[str, tuple[int, int]]:
 def main() -> int:
     source = ULTIMATE_PATH.read_text(encoding="utf-8")
     block = extract_patch_block(source)
+    dpad_layer_body = extract_dpad_layer_body(source)
+    cstick_neutralization_body = extract_cstick_neutralization_body(source)
 
     require(r"tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)", block, "Tilt3 active condition")
     require(r"if\s*\(\s*tilt3_active\s*\)", block, "Tilt3 priority branch")
@@ -103,6 +135,10 @@ def main() -> int:
     require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(directions\.y\s*\*\s*41\)", block, "Tilt1 leftStickY formula")
     require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(directions\.x\s*\*\s*40\)", block, "Tilt2 leftStickX formula")
     require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(directions\.y\s*\*\s*49\)", block, "Tilt2 leftStickY formula")
+    require(r"if\s*\(\s*inputs\.nunchuk_c\s*\)", dpad_layer_body, "D-pad layer remaining nunchuk C condition")
+    require(r"if\s*\(\s*inputs\.nunchuk_c\s*\)", cstick_neutralization_body, "C-stick neutralization remaining nunchuk C condition")
+    forbid_lt1_lt2_chord(dpad_layer_body, "D-pad layer condition")
+    forbid_lt1_lt2_chord(cstick_neutralization_body, "C-stick/right-stick neutralization condition")
     forbid_patch_assignments(block)
 
     push_flash_matches = check_no_push_flashing(source)
@@ -126,6 +162,8 @@ def main() -> int:
     print(f"table_runtime_markers={'present:' + ','.join(table_markers) if table_markers else 'absent'}")
     print("tilt3_active=inputs.lt3 || (inputs.lt1 && inputs.lt2)")
     print("lt1_lt2_both_held_resolves_to_tilt3=true")
+    print("lt1_lt2_dpad_layer_activation=false")
+    print("lt1_lt2_cstick_neutralization=false")
     print("lt1_branch=inputs.lt1 after Tilt3 priority")
     print("lt2_branch=inputs.lt2 after Tilt3 priority")
     print("right_stick_or_trigger_assignments_inside_tilt_patch=false")
