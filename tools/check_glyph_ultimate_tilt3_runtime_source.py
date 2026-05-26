@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+"""Read-only source checker for the native Ultimate Tilt3 runtime patch."""
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
+BEGIN_MARKER = "// Senscope Glyph Ultimate Tilt patch begin"
+END_MARKER = "// Senscope Glyph Ultimate Tilt patch end"
+
+FORBIDDEN_ASSIGNMENTS = (
+    "outputs.rightStickX",
+    "outputs.rightStickY",
+    "outputs.triggerLAnalog",
+    "outputs.triggerRAnalog",
+    "outputs.triggerLDigital",
+    "outputs.triggerRDigital",
+)
+
+FORBIDDEN_TIMING_TOKENS = (
+    "previous",
+    "last",
+    "timer",
+    "millis",
+    "toggle",
+    "sleep",
+    "delay",
+)
+
+OVERFLOW_PATTERNS = (
+    r"\buint8_t\s+\w+\s*=\s*128\s*[+-]",
+    r"\(\s*uint8_t\s*\)",
+    r"\b255\s*-",
+    r"\bwrap\b",
+)
+
+
+def fail(message: str) -> None:
+    raise AssertionError(message)
+
+
+def extract_patch_block(source: str) -> str:
+    begin_count = source.count(BEGIN_MARKER)
+    end_count = source.count(END_MARKER)
+    if begin_count != 1:
+        fail(f"expected exactly one Tilt patch begin marker, found {begin_count}")
+    if end_count != 1:
+        fail(f"expected exactly one Tilt patch end marker, found {end_count}")
+    begin = source.find(BEGIN_MARKER)
+    end = source.find(END_MARKER, begin)
+    if begin < 0 or end < 0 or end < begin:
+        fail("Tilt patch markers are missing or out of order")
+    return source[begin : end + len(END_MARKER)]
+
+
+def require(pattern: str, text: str, label: str, *, flags: int = 0) -> None:
+    if re.search(pattern, text, flags) is None:
+        fail(f"missing source evidence: {label}")
+
+
+def forbid_assignments(block: str) -> None:
+    for field in FORBIDDEN_ASSIGNMENTS:
+        if re.search(rf"\b{re.escape(field)}\s*=", block):
+            fail(f"Tilt3 patch block must not assign {field}")
+
+
+def forbid_timing_tokens(block: str) -> None:
+    lower = block.lower()
+    for token in FORBIDDEN_TIMING_TOKENS:
+        if token in lower:
+            fail(f"Tilt3 patch block must not include timing/toggle token: {token}")
+
+
+def forbid_raw_physical_bypass(block: str) -> None:
+    for token in ("inputs.rf", "inputs.lf", "inputs.rt", "inputs.mb"):
+        if token in block:
+            fail(f"Tilt3 patch block must not bypass remap with raw physical input token: {token}")
+
+
+def forbid_overflow_patterns(block: str) -> None:
+    for pattern in OVERFLOW_PATTERNS:
+        if re.search(pattern, block, flags=re.IGNORECASE):
+            fail(f"Tilt3 patch block contains obvious overflow/wrap pattern: {pattern}")
+
+
+def main() -> int:
+    source = SOURCE_PATH.read_text(encoding="utf-8")
+    block = extract_patch_block(source)
+
+    require(
+        r"tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)",
+        block,
+        "Tilt3 active condition includes dedicated LT3 OR LT1+LT2",
+    )
+    require(r"if\s*\(\s*tilt3_active\s*\)", block, "Tilt3 priority branch")
+    require(r"else\s+if\s*\(\s*inputs\.lt1\s*\)", block, "Tilt1 branch after Tilt3")
+    require(r"else\s+if\s*\(\s*inputs\.lt2\s*\)", block, "Tilt2 branch after Tilt3")
+    require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(\s*directions\.x\s*\*\s*53\s*\)", block, "Tilt3 X formula")
+    require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(\s*directions\.y\s*\*\s*42\s*\)", block, "Tilt3 Y formula")
+    require(r"outputs\.leftStickX\s*=\s*128\s*-\s*\(\s*directions\.x\s*\*\s*59\s*\)", block, "Tilt1 X formula preserved")
+    require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(\s*directions\.y\s*\*\s*41\s*\)", block, "Tilt1 Y formula preserved")
+    require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(\s*directions\.x\s*\*\s*40\s*\)", block, "Tilt2 X formula preserved")
+    require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(\s*directions\.y\s*\*\s*49\s*\)", block, "Tilt2 Y formula preserved")
+
+    forbid_raw_physical_bypass(block)
+    forbid_assignments(block)
+    forbid_timing_tokens(block)
+    forbid_overflow_patterns(block)
+
+    ranges = {
+        "tilt1_x": (128 - 59, 128 + 59),
+        "tilt1_y": (128 - 41, 128 + 41),
+        "tilt2_x": (128 - 40, 128 + 40),
+        "tilt2_y": (128 - 49, 128 + 49),
+        "tilt3_x": (128 - 53, 128 + 53),
+        "tilt3_y": (128 - 42, 128 + 42),
+    }
+    out_of_range = [label for label, (low, high) in ranges.items() if low < 0 or high > 255]
+    if out_of_range:
+        fail("Tilt formula ranges exceed byte range: " + ", ".join(out_of_range))
+
+    print("glyph_ultimate_tilt3_runtime_source")
+    print("status=PASS")
+    print(f"source={SOURCE_PATH.relative_to(REPO_ROOT)}")
+    print("tilt3_active=inputs.lt3 || (inputs.lt1 && inputs.lt2)")
+    print("dedicated_tilt3_input=inputs.lt3")
+    print("lt1_lt2_both_held_resolves_to_tilt3=true")
+    print("left_stick_only=true")
+    print("raw_physical_bypass=false")
+    print("unsigned_overflow_dependency=false")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -103,3 +103,46 @@ Expected verification for this branch:
 ```
 
 Future hardware-owner smoke testing is still required before device use. This branch does not add flashing or push-to-device automation.
+
+## 2026-05-27 Tilt3 Branch Amendment
+
+This amendment applies to branch `glyph/gfw2-ultimate-tilt3-runtime` only and preserves the historical Tilt1/Tilt2 information above.
+
+User-approved Tilt3 runtime behavior:
+
+- Dedicated Tilt3 uses the source-supported post-remap logical `inputs.lt3` path.
+- Tilt3 also activates when `inputs.lt1 && inputs.lt2` are both held.
+- Tilt3 X offset is `53`.
+- Tilt3 Y offset is `42`.
+- No macro, turbo, toggle, one-shot, timing, flashing, or push-to-device behavior is added.
+
+Runtime active condition:
+
+```text
+tilt3_active = inputs.lt3 || (inputs.lt1 && inputs.lt2)
+```
+
+Tilt3 formula:
+
+```text
+leftStickX = 128 + directions.x * 53
+leftStickY = 128 + directions.y * 42
+```
+
+Tilt3 table:
+
+| Direction | Left-stick output |
+| --- | --- |
+| 1 | `(75, 86)` |
+| 2 | `(128, 86)` |
+| 3 | `(181, 86)` |
+| 4 | `(75, 128)` |
+| 5 | `(128, 128)` |
+| 6 | `(181, 128)` |
+| 7 | `(75, 170)` |
+| 8 | `(128, 170)` |
+| 9 | `(181, 170)` |
+
+The old both-held observed behavior is superseded for this new runtime branch only after implementation and hardware test: `LT1+LT2` is intended to resolve to Tilt3 instead of falling through to the old combined behavior.
+
+Hardware testing is required before final acceptance. Until that hardware test is complete, this branch only has source/build/checker evidence and no broad preservation PASS claim.

@@ -19,6 +19,8 @@ REQUIRED_NEW_DOCS = [
     "docs/calibration/glyph_prehardware_dry_run_checker_2026-05-27.md",
     "docs/calibration/glyph_no_forbidden_artifacts_checker_2026-05-27.md",
     "docs/calibration/glyph_manual_hardware_owner_checklist_2026-05-27.md",
+    "docs/calibration/glyph_ultimate_tilt3_runtime_implementation_2026-05-27.md",
+    "docs/calibration/glyph_ultimate_tilt3_hardware_test_plan_2026-05-27.md",
     "tools/check_glyph_user_requirements_packet.py",
     "tools/check_glyph_preservation_execution_packet.py",
     "tools/check_glyph_prehardware_rc_runbook.py",
@@ -26,6 +28,7 @@ REQUIRED_NEW_DOCS = [
     "tools/run_glyph_prehardware_dry_run_checks.py",
     "tools/check_glyph_no_forbidden_artifacts.py",
     "tools/check_glyph_manual_hardware_owner_checklist.py",
+    "tools/check_glyph_ultimate_tilt3_runtime_source.py",
 ]
 
 REQUIRED_EXISTING_ANCHORS = [

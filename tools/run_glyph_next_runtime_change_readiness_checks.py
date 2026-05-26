@@ -73,6 +73,11 @@ def steps() -> list[Step]:
             "tools/check_glyph_native_ultimate_table_runtime_scope.py",
             optional=True,
         ),
+        step(
+            "ultimate tilt3 runtime source",
+            "tools/check_glyph_ultimate_tilt3_runtime_source.py",
+            optional=True,
+        ),
     ]
 
 

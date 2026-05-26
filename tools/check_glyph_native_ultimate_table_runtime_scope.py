@@ -84,6 +84,8 @@ def formula_value_bounds() -> dict[str, tuple[int, int]]:
         "tilt1_y": (128 - 41, 128 + 41),
         "tilt2_x": (128 - 40, 128 + 40),
         "tilt2_y": (128 - 49, 128 + 49),
+        "tilt3_x": (128 - 53, 128 + 53),
+        "tilt3_y": (128 - 42, 128 + 42),
     }
 
 
@@ -91,8 +93,12 @@ def main() -> int:
     source = ULTIMATE_PATH.read_text(encoding="utf-8")
     block = extract_patch_block(source)
 
-    require(r"inputs\.lt1\s*&&\s*!inputs\.lt2", block, "lt1 exclusive branch")
-    require(r"inputs\.lt2\s*&&\s*!inputs\.lt1", block, "lt2 exclusive branch")
+    require(r"tilt3_active\s*=\s*inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)", block, "Tilt3 active condition")
+    require(r"if\s*\(\s*tilt3_active\s*\)", block, "Tilt3 priority branch")
+    require(r"else\s+if\s*\(\s*inputs\.lt1\s*\)", block, "lt1 branch after Tilt3")
+    require(r"else\s+if\s*\(\s*inputs\.lt2\s*\)", block, "lt2 branch after Tilt3")
+    require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(directions\.x\s*\*\s*53\)", block, "Tilt3 leftStickX formula")
+    require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(directions\.y\s*\*\s*42\)", block, "Tilt3 leftStickY formula")
     require(r"outputs\.leftStickX\s*=\s*128\s*-\s*\(directions\.x\s*\*\s*59\)", block, "Tilt1 leftStickX formula")
     require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(directions\.y\s*\*\s*41\)", block, "Tilt1 leftStickY formula")
     require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(directions\.x\s*\*\s*40\)", block, "Tilt2 leftStickX formula")
@@ -106,7 +112,7 @@ def main() -> int:
     bounds = formula_value_bounds()
     out_of_bounds = [label for label, (low, high) in bounds.items() if low < 0 or high > 255]
     if out_of_bounds:
-        fail("Tilt/Tilt2 formula ranges exceed byte range: " + ", ".join(out_of_bounds))
+        fail("Tilt/Tilt2/Tilt3 formula ranges exceed byte range: " + ", ".join(out_of_bounds))
 
     table_markers = [marker for marker in TABLE_MARKER_PATTERNS if marker in source]
 
@@ -115,11 +121,13 @@ def main() -> int:
     print(f"source={ULTIMATE_PATH.relative_to(REPO_ROOT)}")
     print("tilt_patch_markers=present")
     print("push_flashing_code_in_checked_files=absent")
-    print("tilt_tilt2_formulas_byte_safe=true")
+    print("tilt_tilt2_tilt3_formulas_byte_safe=true")
     print(f"formula_ranges={bounds}")
     print(f"table_runtime_markers={'present:' + ','.join(table_markers) if table_markers else 'absent'}")
-    print("lt1_exclusive=inputs.lt1 && !inputs.lt2")
-    print("lt2_exclusive=inputs.lt2 && !inputs.lt1")
+    print("tilt3_active=inputs.lt3 || (inputs.lt1 && inputs.lt2)")
+    print("lt1_lt2_both_held_resolves_to_tilt3=true")
+    print("lt1_branch=inputs.lt1 after Tilt3 priority")
+    print("lt2_branch=inputs.lt2 after Tilt3 priority")
     print("right_stick_or_trigger_assignments_inside_tilt_patch=false")
     return 0
 

@@ -56,22 +56,25 @@ def _python_step(label: str, *argv: str) -> CheckStep:
     return CheckStep(label=label, command=[sys.executable, *argv])
 
 
+def _runtime_file_changed(base_ref: str) -> bool:
+    completed = subprocess.run(
+        ["git", "diff", "--name-only", f"{base_ref}...HEAD", "--", "src/modes/Ultimate.cpp"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return completed.returncode == 0 and bool(completed.stdout.strip())
+
+
 def _base_steps(base_ref: str) -> list[CheckStep]:
-    return [
+    steps = [
         _python_step("check fixtures", "tools/check_glyph_calibration_fixtures.py"),
         _python_step("check patch script", "tools/check_glyph_patch_script.py"),
         _python_step("list modifier symbols", "tools/list_glyph_modifier_symbols.py"),
         _python_step("list tilt runtime gate sources", "tools/list_glyph_tilt_runtime_gate_sources.py"),
         _python_step("list native ultimate analog sources", "tools/list_glyph_native_ultimate_analog_sources.py"),
         _python_step("check native ultimate snapshot", "tools/check_glyph_native_ultimate_snapshot.py"),
-        _python_step(
-            "check future tilt patch scope docs-only",
-            "tools/check_glyph_future_tilt_patch_scope.py",
-            "--base",
-            base_ref,
-            "--mode",
-            "docs-only",
-        ),
         _python_step(
             "check future tilt patch scope runtime-implementation",
             "tools/check_glyph_future_tilt_patch_scope.py",
@@ -84,6 +87,7 @@ def _base_steps(base_ref: str) -> list[CheckStep]:
         _python_step("list tilt button id candidates", "tools/list_glyph_tilt_button_id_candidates.py"),
         _python_step("check tilt button id probe", "tools/check_glyph_tilt_button_id_probe.py"),
         _python_step("check ultimate tilt runtime source", "tools/check_glyph_ultimate_tilt_runtime_source.py"),
+        _python_step("check ultimate tilt3 runtime source", "tools/check_glyph_ultimate_tilt3_runtime_source.py"),
         _python_step("check ultimate tilt tables", "tools/check_glyph_ultimate_tilt_tables.py"),
         _python_step("check ultimate tilt rc manifest", "tools/check_glyph_ultimate_tilt_rc_manifest.py"),
         _python_step(
@@ -91,6 +95,19 @@ def _base_steps(base_ref: str) -> list[CheckStep]:
             "tools/check_glyph_ultimate_tilt_docs_consistency.py",
         ),
     ]
+    if not _runtime_file_changed(base_ref):
+        steps.insert(
+            6,
+            _python_step(
+                "check future tilt patch scope docs-only",
+                "tools/check_glyph_future_tilt_patch_scope.py",
+                "--base",
+                base_ref,
+                "--mode",
+                "docs-only",
+            ),
+        )
+    return steps
 
 
 def _optional_steps(args: argparse.Namespace) -> list[CheckStep]:

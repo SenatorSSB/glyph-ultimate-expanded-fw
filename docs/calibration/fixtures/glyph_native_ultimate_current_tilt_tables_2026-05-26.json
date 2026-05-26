@@ -1,20 +1,21 @@
 {
   "table_contract_version": 1,
-  "source_status": "CURRENT_RUNTIME_SOURCE_AND_HARDWARE_EVIDENCED_NON_PRODUCTION_FIXTURE",
-  "mode_scope": "MODE_ULTIMATE_NATIVE_TABLE_CANDIDATE_CURRENT_ULTIMATE_TILT_BASELINE",
+  "source_status": "CURRENT_RUNTIME_SOURCE_BRANCH_PENDING_HARDWARE_TILT3_NON_PRODUCTION_FIXTURE",
+  "mode_scope": "MODE_ULTIMATE_NATIVE_TABLE_CANDIDATE_TILT3_BRANCH",
   "named_table_entries": [
     "base_no_modifier",
     "tilt1_lt1",
-    "tilt2_lt2"
+    "tilt2_lt2",
+    "tilt3_lt3_or_lt1_lt2"
   ],
   "branch_exclusivity": {
-    "expected": true,
-    "policy": "Tilt1 applies when inputs.lt1 && !inputs.lt2. Tilt2 applies when inputs.lt2 && !inputs.lt1. Both-held does not apply a new Tilt override.",
+    "expected": false,
+    "policy": "Tilt3 has priority when inputs.lt3 is held or when inputs.lt1 && inputs.lt2 are both held. Tilt1 applies when inputs.lt1 is held without Tilt3. Tilt2 applies when inputs.lt2 is held without Tilt3.",
     "source_cross_check": "src/modes/Ultimate.cpp Senscope Glyph Ultimate Tilt patch branch logic"
   },
   "chord_both_held_policy": {
-    "status": "OBSERVED_EXISTING_COMBINED_BEHAVIOR_NON_CONTRACTUAL",
-    "description": "Both-held LT1+LT2 behavior is documented as observed existing combined behavior and is not promoted to a production table contract in this fixture."
+    "status": "INTENDED_TILT3_BRANCH_BEHAVIOR_PENDING_HARDWARE_TEST",
+    "description": "In glyph/gfw2-ultimate-tilt3-runtime, LT1+LT2 is intended to resolve to Tilt3 instead of the old observed combined behavior. Hardware testing is still required before final acceptance."
   },
   "preservation_requirements": {
     "status": "REQUIRED_FOR_ANY_FUTURE_RUNTIME_TABLE_IMPLEMENTATION",
@@ -25,7 +26,10 @@
     "No profile/schema/proto/configurator changes are made by this fixture.",
     "No flashing or push-to-device automation is added by this fixture.",
     "This fixture does not make Smash or game-semantic claims.",
-    "Both-held LT1+LT2 behavior remains observed-only and non-contractual in this artifact."
+    "Both-held LT1+LT2 behavior remains observed-only and non-contractual in this artifact.",
+    "Tilt3 dedicated input is source-traced as logical inputs.lt3 and must remain post-remap only.",
+    "LT1+LT2 both-held is intended to resolve to Tilt3 in this branch, pending hardware test.",
+    "The old both-held observed behavior is superseded for this runtime branch only after implementation and hardware test."
   ],
   "modifier_states": [
     {
@@ -34,49 +38,291 @@
       "modifier_sources": [],
       "source_evidence": "source-confirmed baseline table and hardware-smoke corroboration from docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md and docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
       "direction_table": {
-        "1": {"raw_x": 28, "raw_y": 28, "offset_x": -100, "offset_y": -100, "evidence_notes": "current baseline no-modifier value"},
-        "2": {"raw_x": 128, "raw_y": 28, "offset_x": 0, "offset_y": -100, "evidence_notes": "current baseline no-modifier value"},
-        "3": {"raw_x": 228, "raw_y": 28, "offset_x": 100, "offset_y": -100, "evidence_notes": "current baseline no-modifier value"},
-        "4": {"raw_x": 28, "raw_y": 128, "offset_x": -100, "offset_y": 0, "evidence_notes": "current baseline no-modifier value"},
-        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "explicit neutral"},
-        "6": {"raw_x": 228, "raw_y": 128, "offset_x": 100, "offset_y": 0, "evidence_notes": "current baseline no-modifier value"},
-        "7": {"raw_x": 28, "raw_y": 228, "offset_x": -100, "offset_y": 100, "evidence_notes": "current baseline no-modifier value"},
-        "8": {"raw_x": 128, "raw_y": 228, "offset_x": 0, "offset_y": 100, "evidence_notes": "current baseline no-modifier value"},
-        "9": {"raw_x": 228, "raw_y": 228, "offset_x": 100, "offset_y": 100, "evidence_notes": "current baseline no-modifier value"}
+        "1": {
+          "raw_x": 28,
+          "raw_y": 28,
+          "offset_x": -100,
+          "offset_y": -100,
+          "evidence_notes": "current baseline no-modifier value"
+        },
+        "2": {
+          "raw_x": 128,
+          "raw_y": 28,
+          "offset_x": 0,
+          "offset_y": -100,
+          "evidence_notes": "current baseline no-modifier value"
+        },
+        "3": {
+          "raw_x": 228,
+          "raw_y": 28,
+          "offset_x": 100,
+          "offset_y": -100,
+          "evidence_notes": "current baseline no-modifier value"
+        },
+        "4": {
+          "raw_x": 28,
+          "raw_y": 128,
+          "offset_x": -100,
+          "offset_y": 0,
+          "evidence_notes": "current baseline no-modifier value"
+        },
+        "5": {
+          "raw_x": 128,
+          "raw_y": 128,
+          "offset_x": 0,
+          "offset_y": 0,
+          "evidence_notes": "explicit neutral"
+        },
+        "6": {
+          "raw_x": 228,
+          "raw_y": 128,
+          "offset_x": 100,
+          "offset_y": 0,
+          "evidence_notes": "current baseline no-modifier value"
+        },
+        "7": {
+          "raw_x": 28,
+          "raw_y": 228,
+          "offset_x": -100,
+          "offset_y": 100,
+          "evidence_notes": "current baseline no-modifier value"
+        },
+        "8": {
+          "raw_x": 128,
+          "raw_y": 228,
+          "offset_x": 0,
+          "offset_y": 100,
+          "evidence_notes": "current baseline no-modifier value"
+        },
+        "9": {
+          "raw_x": 228,
+          "raw_y": 228,
+          "offset_x": 100,
+          "offset_y": 100,
+          "evidence_notes": "current baseline no-modifier value"
+        }
       }
     },
     {
       "state_id": "tilt1_lt1",
       "display_name": "Tilt1 LT1 exclusive branch",
-      "modifier_sources": ["inputs.lt1", "!inputs.lt2"],
+      "modifier_sources": [
+        "inputs.lt1",
+        "!inputs.lt2"
+      ],
       "source_evidence": "source-confirmed formula and table from docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md with hardware-smoke corroboration in docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
       "direction_table": {
-        "1": {"raw_x": 187, "raw_y": 87, "offset_x": 59, "offset_y": -41, "evidence_notes": "Tilt1 row"},
-        "2": {"raw_x": 128, "raw_y": 87, "offset_x": 0, "offset_y": -41, "evidence_notes": "Tilt1 row"},
-        "3": {"raw_x": 69, "raw_y": 87, "offset_x": -59, "offset_y": -41, "evidence_notes": "Tilt1 row"},
-        "4": {"raw_x": 187, "raw_y": 128, "offset_x": 59, "offset_y": 0, "evidence_notes": "Tilt1 row"},
-        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "explicit neutral"},
-        "6": {"raw_x": 69, "raw_y": 128, "offset_x": -59, "offset_y": 0, "evidence_notes": "Tilt1 row"},
-        "7": {"raw_x": 187, "raw_y": 169, "offset_x": 59, "offset_y": 41, "evidence_notes": "Tilt1 row"},
-        "8": {"raw_x": 128, "raw_y": 169, "offset_x": 0, "offset_y": 41, "evidence_notes": "Tilt1 row"},
-        "9": {"raw_x": 69, "raw_y": 169, "offset_x": -59, "offset_y": 41, "evidence_notes": "Tilt1 row"}
+        "1": {
+          "raw_x": 187,
+          "raw_y": 87,
+          "offset_x": 59,
+          "offset_y": -41,
+          "evidence_notes": "Tilt1 row"
+        },
+        "2": {
+          "raw_x": 128,
+          "raw_y": 87,
+          "offset_x": 0,
+          "offset_y": -41,
+          "evidence_notes": "Tilt1 row"
+        },
+        "3": {
+          "raw_x": 69,
+          "raw_y": 87,
+          "offset_x": -59,
+          "offset_y": -41,
+          "evidence_notes": "Tilt1 row"
+        },
+        "4": {
+          "raw_x": 187,
+          "raw_y": 128,
+          "offset_x": 59,
+          "offset_y": 0,
+          "evidence_notes": "Tilt1 row"
+        },
+        "5": {
+          "raw_x": 128,
+          "raw_y": 128,
+          "offset_x": 0,
+          "offset_y": 0,
+          "evidence_notes": "explicit neutral"
+        },
+        "6": {
+          "raw_x": 69,
+          "raw_y": 128,
+          "offset_x": -59,
+          "offset_y": 0,
+          "evidence_notes": "Tilt1 row"
+        },
+        "7": {
+          "raw_x": 187,
+          "raw_y": 169,
+          "offset_x": 59,
+          "offset_y": 41,
+          "evidence_notes": "Tilt1 row"
+        },
+        "8": {
+          "raw_x": 128,
+          "raw_y": 169,
+          "offset_x": 0,
+          "offset_y": 41,
+          "evidence_notes": "Tilt1 row"
+        },
+        "9": {
+          "raw_x": 69,
+          "raw_y": 169,
+          "offset_x": -59,
+          "offset_y": 41,
+          "evidence_notes": "Tilt1 row"
+        }
       }
     },
     {
       "state_id": "tilt2_lt2",
       "display_name": "Tilt2 LT2 exclusive branch",
-      "modifier_sources": ["inputs.lt2", "!inputs.lt1"],
+      "modifier_sources": [
+        "inputs.lt2",
+        "!inputs.lt1"
+      ],
       "source_evidence": "source-confirmed formula and table from docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md with hardware-smoke corroboration in docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
       "direction_table": {
-        "1": {"raw_x": 88, "raw_y": 79, "offset_x": -40, "offset_y": -49, "evidence_notes": "Tilt2 row"},
-        "2": {"raw_x": 128, "raw_y": 79, "offset_x": 0, "offset_y": -49, "evidence_notes": "Tilt2 row"},
-        "3": {"raw_x": 168, "raw_y": 79, "offset_x": 40, "offset_y": -49, "evidence_notes": "Tilt2 row"},
-        "4": {"raw_x": 88, "raw_y": 128, "offset_x": -40, "offset_y": 0, "evidence_notes": "Tilt2 row"},
-        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "explicit neutral"},
-        "6": {"raw_x": 168, "raw_y": 128, "offset_x": 40, "offset_y": 0, "evidence_notes": "Tilt2 row"},
-        "7": {"raw_x": 88, "raw_y": 177, "offset_x": -40, "offset_y": 49, "evidence_notes": "Tilt2 row"},
-        "8": {"raw_x": 128, "raw_y": 177, "offset_x": 0, "offset_y": 49, "evidence_notes": "Tilt2 row"},
-        "9": {"raw_x": 168, "raw_y": 177, "offset_x": 40, "offset_y": 49, "evidence_notes": "Tilt2 row"}
+        "1": {
+          "raw_x": 88,
+          "raw_y": 79,
+          "offset_x": -40,
+          "offset_y": -49,
+          "evidence_notes": "Tilt2 row"
+        },
+        "2": {
+          "raw_x": 128,
+          "raw_y": 79,
+          "offset_x": 0,
+          "offset_y": -49,
+          "evidence_notes": "Tilt2 row"
+        },
+        "3": {
+          "raw_x": 168,
+          "raw_y": 79,
+          "offset_x": 40,
+          "offset_y": -49,
+          "evidence_notes": "Tilt2 row"
+        },
+        "4": {
+          "raw_x": 88,
+          "raw_y": 128,
+          "offset_x": -40,
+          "offset_y": 0,
+          "evidence_notes": "Tilt2 row"
+        },
+        "5": {
+          "raw_x": 128,
+          "raw_y": 128,
+          "offset_x": 0,
+          "offset_y": 0,
+          "evidence_notes": "explicit neutral"
+        },
+        "6": {
+          "raw_x": 168,
+          "raw_y": 128,
+          "offset_x": 40,
+          "offset_y": 0,
+          "evidence_notes": "Tilt2 row"
+        },
+        "7": {
+          "raw_x": 88,
+          "raw_y": 177,
+          "offset_x": -40,
+          "offset_y": 49,
+          "evidence_notes": "Tilt2 row"
+        },
+        "8": {
+          "raw_x": 128,
+          "raw_y": 177,
+          "offset_x": 0,
+          "offset_y": 49,
+          "evidence_notes": "Tilt2 row"
+        },
+        "9": {
+          "raw_x": 168,
+          "raw_y": 177,
+          "offset_x": 40,
+          "offset_y": 49,
+          "evidence_notes": "Tilt2 row"
+        }
+      }
+    },
+    {
+      "state_id": "tilt3_lt3_or_lt1_lt2",
+      "display_name": "Tilt3 LT3 or LT1+LT2 branch",
+      "modifier_sources": [
+        "inputs.lt3",
+        "inputs.lt1 && inputs.lt2"
+      ],
+      "source_evidence": "source-confirmed formula from src/modes/Ultimate.cpp on glyph/gfw2-ultimate-tilt3-runtime; hardware test still required before final acceptance",
+      "direction_table": {
+        "1": {
+          "raw_x": 75,
+          "raw_y": 86,
+          "offset_x": -53,
+          "offset_y": -42,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        },
+        "2": {
+          "raw_x": 128,
+          "raw_y": 86,
+          "offset_x": 0,
+          "offset_y": -42,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        },
+        "3": {
+          "raw_x": 181,
+          "raw_y": 86,
+          "offset_x": 53,
+          "offset_y": -42,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        },
+        "4": {
+          "raw_x": 75,
+          "raw_y": 128,
+          "offset_x": -53,
+          "offset_y": 0,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        },
+        "5": {
+          "raw_x": 128,
+          "raw_y": 128,
+          "offset_x": 0,
+          "offset_y": 0,
+          "evidence_notes": "explicit neutral"
+        },
+        "6": {
+          "raw_x": 181,
+          "raw_y": 128,
+          "offset_x": 53,
+          "offset_y": 0,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        },
+        "7": {
+          "raw_x": 75,
+          "raw_y": 170,
+          "offset_x": -53,
+          "offset_y": 42,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        },
+        "8": {
+          "raw_x": 128,
+          "raw_y": 170,
+          "offset_x": 0,
+          "offset_y": 42,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        },
+        "9": {
+          "raw_x": 181,
+          "raw_y": 170,
+          "offset_x": 53,
+          "offset_y": 42,
+          "evidence_notes": "Tilt3 row pending hardware test"
+        }
       }
     }
   ]
