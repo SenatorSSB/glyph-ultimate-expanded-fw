@@ -126,11 +126,15 @@ def analyze_fixture(path: Path) -> FileResult:
     game_modes = payload.get("gameModeConfigs")
     backend_configs = payload.get("communicationBackendConfigs")
 
-    if not isinstance(game_modes, list):
-        result.errors.append("gameModeConfigs must be present as a list")
+    if game_modes is None:
         game_modes = []
-    if not isinstance(backend_configs, list):
-        result.errors.append("communicationBackendConfigs must be present as a list")
+    elif not isinstance(game_modes, list):
+        result.errors.append("gameModeConfigs must be a list when present")
+        game_modes = []
+    if backend_configs is None:
+        backend_configs = []
+    elif not isinstance(backend_configs, list):
+        result.errors.append("communicationBackendConfigs must be a list when present")
         backend_configs = []
 
     result.game_modes_count = len(game_modes)

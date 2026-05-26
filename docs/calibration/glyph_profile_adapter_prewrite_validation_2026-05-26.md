@@ -13,15 +13,20 @@ Scope: design and checker notes for a future read-only preflight gate that could
 
 `tools/check_glyph_profile_adapter_prewrite.py` accepts one or more explicit JSON fixture paths and reports structural errors separately from warning-level decision surfaces.
 
-The checker reports:
+The checker validates:
 
 - root JSON object shape;
-- `gameModeConfigs` and `communicationBackendConfigs` list presence;
+- `gameModeConfigs` and `communicationBackendConfigs` are lists when present;
+- default index values are integers, non-negative, and within the available one-based target count when present.
+
+The checker reports:
+
+- game mode count;
+- backend config count;
 - omitted `activates` count;
 - explicit `BTN_UNSPECIFIED` count;
 - many-to-one logical aliases;
 - duplicate physical remaps;
-- one-based default-index checks where fields are present;
 - warning when `gameModeConfigs` exceeds the known mode activation-mask capacity of 10;
 - omitted `defaultModeConfig` by backend;
 - omitted `socdType` count.
@@ -31,7 +36,8 @@ The checker reports:
 - Structural errors fail the command.
 - Warnings do not fail the command.
 - Omitted `activates` and explicit `BTN_UNSPECIFIED` remain distinct reports.
-- Many-to-one aliases and duplicate physical remaps are reported as runtime-relevant signals, not automatically rejected.
+- Many-to-one aliases are valid runtime-supported remap shapes and are reported so future adapter policy can decide whether to preserve or constrain them.
+- Duplicate physical remaps are reported because runtime remap handling gives first matching entry precedence; the checker does not reorder entries or claim reordering is safe.
 
 ## Source Basis
 
@@ -48,3 +54,11 @@ Warnings are deliberate decision surfaces. They are not automatic adapter failur
 - Omitted `activates` versus explicit `BTN_UNSPECIFIED` remains unresolved for outbound adapter encoding.
 - `defaultModeConfig = 0` is source-confirmed as not rejected by current validation, but outbound adapter use still requires policy approval.
 - Mode-count capacity warnings need runtime/source review before any adapter writes reshape mode lists.
+
+## Current Limitations
+
+- The checker does not prove that Senscope neutral Profile JSON maps directly to Glyph JSON.
+- The checker does not validate Smash/gameplay semantics.
+- The checker does not validate configurator import/export round-trip behavior.
+- The checker does not create protobuf, firmware, or device-write artifacts.
+- The checker does not implement an adapter and cannot be used to push or flash a device.
