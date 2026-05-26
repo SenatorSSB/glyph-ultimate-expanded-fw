@@ -72,7 +72,13 @@
 .venv/bin/python tools/inspect_glyph_mk6_build_artifact.py
 .venv/bin/python tools/check_glyph_ultimate_tilt_tables.py
 .venv/bin/python tools/check_glyph_ultimate_tilt_hardware_result.py
+.venv/bin/python tools/run_glyph_ultimate_tilt_prehardware_checks.py
 ./scripts/build-glyph-mk6-quiet.sh
 .venv/bin/python tools/write_glyph_ultimate_tilt_rc_manifest.py --output docs/calibration/glyph_ultimate_tilt_rc_manifest.md
 .venv/bin/python tools/check_glyph_ultimate_tilt_rc_manifest.py
+grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' docs tools config include src HAL --exclude-dir=.git --exclude-dir=.venv || true
 ```
+
+## Readiness Reference
+
+- `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md`
