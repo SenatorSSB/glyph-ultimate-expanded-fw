@@ -1,0 +1,16 @@
+{
+  "corpus_id": null,
+  "captured_at": null,
+  "captured_by": null,
+  "glyph_repo_commit": null,
+  "firmware_source_commit": null,
+  "configurator_source_reference": null,
+  "configurator_version_label": null,
+  "device_model": null,
+  "hardware_required": null,
+  "source_kind": null,
+  "fixture_files": [],
+  "expected_semantic_features": [],
+  "known_unknowns": [],
+  "notes": null
+}
