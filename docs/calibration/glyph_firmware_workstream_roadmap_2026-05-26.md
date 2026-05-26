@@ -118,6 +118,7 @@
   - execute preservation hardware result,
   - run post-patch hardware validation for any approved runtime change.
   - prehardware RC preparation should follow `docs/calibration/glyph_prehardware_rc_runbook_2026-05-27.md` and `tools/inspect_glyph_mk6_build_artifact.py` before manual hardware execution.
+  - aggregate dry-run and final operator preparation should use `tools/run_glyph_prehardware_dry_run_checks.py` and `docs/calibration/glyph_manual_hardware_owner_checklist_2026-05-27.md`.
 
 ### Phase F - Adapter/Export Work
 
