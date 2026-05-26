@@ -33,6 +33,10 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md",
     "docs/calibration/glyph_full_firmware_workstream_sequence_handoff_2026-05-26.md",
     "docs/calibration/glyph_merged_state_consistency_audit_2026-05-26.md",
+    "docs/calibration/glyph_controller_output_contract_v0_2026-05-27.md",
+    "docs/calibration/glyph_native_ultimate_runtime_implementation_plan_v0_2026-05-27.md",
+    "docs/calibration/glyph_user_requirements_input_packet_2026-05-27.md",
+    "docs/calibration/glyph_preimplementation_blocker_index_2026-05-27.md",
     "tools/run_glyph_ultimate_tilt_prehardware_checks.py",
     "tools/check_glyph_ultimate_tilt_hardware_result.py",
     "tools/check_glyph_ultimate_tilt_rc_manifest.py",
@@ -45,6 +49,7 @@ REQUIRED_FILES = [
     "tools/check_glyph_native_ultimate_table_runtime_scope.py",
     "tools/run_glyph_next_runtime_change_readiness_checks.py",
     "tools/check_glyph_merged_state_consistency.py",
+    "tools/check_glyph_preimplementation_blockers.py",
 ]
 
 OPTIONAL_FUTURE_FILES = [
