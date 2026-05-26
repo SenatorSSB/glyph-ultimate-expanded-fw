@@ -27,10 +27,10 @@ REQUIRED_PATHS = [
     "docs/calibration/fixtures/glyph_ultimate_tilt_domain_spec.json",
     "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
     "docs/calibration/glyph_full_capability_inventory_2026-05-26.md",
+    "docs/calibration/glyph_profile_config_adapter_policy_decisions_2026-05-26.md",
 ]
 
 OPTIONAL_PATHS = [
-    "docs/calibration/glyph_profile_config_adapter_policy_decisions_2026-05-26.md",
     "docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md",
 ]
 
