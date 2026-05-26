@@ -1,139 +1,112 @@
 #!/usr/bin/env python3
-"""List source-backed Glyph physical/logical layout mapping signals.
+"""Read-only inventory helper for Glyph physical/logical layout mapping evidence.
 
-Read-only helper for docs/calibration layout work. It parses simple matrix and
-button-position source shapes where practical, then prints grep-style runtime and
-fixture lines relevant to the current Ultimate MVP Tilt mapping.
+- Prints relevant source/fixture/doc paths.
+- Reports file existence.
+- Performs conservative text scans for key button/runtime tokens.
+- Exits non-zero only when required files are missing.
 """
 
 from __future__ import annotations
 
-import json
-import re
 from pathlib import Path
-from typing import Iterable
+import sys
+
+REQUIRED_PATHS = [
+    "config/glyph/glyph_mk6/include/matrix_definition.hpp",
+    "config/glyph/glyph_mk6/include/button_positions.hpp",
+    "HAL/pico/src/display/InputDisplay.cpp",
+    "config/glyph/common/src/config.cpp",
+    "include/core/state.hpp",
+    "HAL/pico/include/util/state_util.hpp",
+    "src/core/InputMode.cpp",
+    "src/core/ControllerMode.cpp",
+    "src/modes/Ultimate.cpp",
+    "docs/calibration/glyph_ultimate_tilt_button_id_confirmation_2026-05-24.md",
+    "docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
+    "docs/calibration/fixtures/glyph_ultimate_tilt_domain_spec.json",
+    "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
+    "docs/calibration/glyph_full_capability_inventory_2026-05-26.md",
+]
+
+OPTIONAL_PATHS = [
+    "docs/calibration/glyph_profile_config_adapter_policy_decisions_2026-05-26.md",
+    "docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md",
+]
+
+TOKENS = [
+    "BTN_RF3",
+    "BTN_RF4",
+    "BTN_RF5",
+    "BTN_LT1",
+    "BTN_LT2",
+    "inputs.lt1",
+    "inputs.lt2",
+]
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-MATRIX_PATH = REPO_ROOT / "config" / "glyph" / "glyph_mk6" / "include" / "matrix_definition.hpp"
-POSITIONS_PATH = REPO_ROOT / "config" / "glyph" / "glyph_mk6" / "include" / "button_positions.hpp"
-ULTIMATE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
-MVP_FIXTURE = (
-    REPO_ROOT
-    / "docs"
-    / "calibration"
-    / "fixtures"
-    / "tilt_button_id_probe"
-    / "GlyphUserProfilesUltimateMVP01.json"
-)
-TRACKED_BUTTONS = ["BTN_RF3", "BTN_RF4", "BTN_RF5", "BTN_LT1", "BTN_LT2", "BTN_LF3", "BTN_LF1", "BTN_LF2"]
+
+def print_path_status(label: str, path_str: str) -> bool:
+    p = Path(path_str)
+    exists = p.exists()
+    status = "EXISTS" if exists else "MISSING"
+    print(f"[{label}] {status} {path_str}")
+    return exists
 
 
-def display_path(path: Path) -> str:
-    return str(path.relative_to(REPO_ROOT))
 
+def scan_tokens(path_str: str) -> None:
+    p = Path(path_str)
+    if not p.exists() or not p.is_file():
+        return
 
-def read_lines(path: Path) -> list[str]:
-    return path.read_text(encoding="utf-8").splitlines()
+    try:
+        text = p.read_text(encoding="utf-8", errors="replace")
+    except OSError as exc:
+        print(f"  [SCAN_ERROR] {path_str}: {exc}")
+        return
 
+    lines = text.splitlines()
+    print(f"  [SCAN] {path_str}")
+    for token in TOKENS:
+        hit_lines = [i + 1 for i, line in enumerate(lines) if token in line]
+        if hit_lines:
+            preview = ", ".join(str(n) for n in hit_lines[:8])
+            if len(hit_lines) > 8:
+                preview += ", ..."
+            print(f"    - {token}: {len(hit_lines)} hit(s) at line(s) {preview}")
 
-def parse_matrix() -> dict[str, str]:
-    lines = read_lines(MATRIX_PATH)
-    result: dict[str, str] = {}
-    row_index = 0
-    for line_number, line in enumerate(lines, start=1):
-        stripped = line.strip()
-        if not stripped.startswith("{") or "BTN_" not in stripped:
-            continue
-        tokens = re.findall(r"\b(?:BTN_[A-Z0-9_]+|NA)\b", stripped)
-        for col_index, token in enumerate(tokens):
-            if token == "NA":
-                continue
-            result[token] = f"row={row_index}, col={col_index}, line={line_number}"
-        row_index += 1
-    return result
-
-
-def parse_positions() -> dict[str, list[str]]:
-    lines = read_lines(POSITIONS_PATH)
-    positions: dict[str, list[str]] = {}
-    current_layout = "<unknown>"
-    for line_number, line in enumerate(lines, start=1):
-        layout_match = re.match(r"InputViewerButton\s+(\w+)\[\]\s*=", line.strip())
-        if layout_match:
-            current_layout = layout_match.group(1)
-            continue
-        entry_match = re.search(r"\{\s*(BTN_[A-Z0-9_]+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,", line)
-        if not entry_match:
-            continue
-        button, x_value, y_value = entry_match.groups()
-        positions.setdefault(button, []).append(
-            f"{current_layout}:x={x_value},y={y_value},line={line_number}",
-        )
-    return positions
-
-
-def grep_lines(path: Path, patterns: Iterable[str]) -> list[str]:
-    compiled = [re.compile(pattern) for pattern in patterns]
-    matches: list[str] = []
-    for line_number, line in enumerate(read_lines(path), start=1):
-        if any(pattern.search(line) for pattern in compiled):
-            matches.append(f"{display_path(path)}:{line_number}: {line.rstrip()}")
-    return matches
-
-
-def load_mvp_remaps() -> list[tuple[str, str]]:
-    payload = json.loads(MVP_FIXTURE.read_text(encoding="utf-8"))
-    remaps: list[tuple[str, str]] = []
-    for mode in payload.get("gameModeConfigs", []):
-        if mode.get("modeId") != "MODE_ULTIMATE":
-            continue
-        for remap in mode.get("buttonRemapping", []):
-            physical = remap.get("physicalButton")
-            activates = remap.get("activates")
-            if physical in {"BTN_RF3", "BTN_RF4", "BTN_RF5"}:
-                remaps.append((physical, activates if isinstance(activates, str) else "<omitted>"))
-    return remaps
 
 
 def main() -> int:
-    matrix = parse_matrix()
-    positions = parse_positions()
+    print("Glyph physical/logical layout source inventory")
+    print("=" * 48)
 
-    print("glyph_physical_logical_layout_sources")
-    print("source_files:")
-    for path in (MATRIX_PATH, POSITIONS_PATH, ULTIMATE_PATH, MVP_FIXTURE):
-        print(f"- {display_path(path)}")
+    missing_required = []
 
-    print("\ntracked_button_matrix_positions:")
-    for button in TRACKED_BUTTONS:
-        print(f"- {button}: {matrix.get(button, 'not_found')}")
+    print("\nRequired paths:")
+    for path_str in REQUIRED_PATHS:
+        exists = print_path_status("REQUIRED", path_str)
+        if not exists:
+            missing_required.append(path_str)
 
-    print("\ntracked_button_display_positions:")
-    for button in TRACKED_BUTTONS:
-        entries = positions.get(button, [])
-        rendered = "; ".join(entries) if entries else "not_found"
-        print(f"- {button}: {rendered}")
+    print("\nOptional/related paths:")
+    for path_str in OPTIONAL_PATHS:
+        print_path_status("OPTIONAL", path_str)
 
-    print("\nmvp_profile_remaps:")
-    for physical, activates in load_mvp_remaps():
-        print(f"- {physical} -> {activates}")
+    print("\nConservative token scan (existing files only):")
+    for path_str in REQUIRED_PATHS + OPTIONAL_PATHS:
+        scan_tokens(path_str)
 
-    print("\nultimate_runtime_input_lines:")
-    runtime_patterns = [
-        r"outputs\.leftStick(Left|Right|Down|Up)",
-        r"outputs\.rightStick(Left|Right|Down|Up)",
-        r"outputs\.mod[XY]",
-        r"outputs\.trigger[LR]Digital",
-        r"trigger[LR]Analog",
-        r"UpdateDirections\(",
-        r"inputs\.lt1|inputs\.lt2|inputs\.rf5|inputs\.rf4|inputs\.lf[1234]",
-    ]
-    for line in grep_lines(ULTIMATE_PATH, runtime_patterns):
-        print(f"- {line}")
+    if missing_required:
+        print("\nMissing required paths:")
+        for path_str in missing_required:
+            print(f"- {path_str}")
+        return 1
 
+    print("\nAll required source paths are present.")
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())

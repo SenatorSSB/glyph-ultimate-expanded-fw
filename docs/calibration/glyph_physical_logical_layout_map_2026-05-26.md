@@ -1,49 +1,125 @@
-# Glyph Physical Logical Layout Map - 2026-05-26
+# Glyph MK6 Physical/Logical Layout Map (2026-05-26)
 
-Scope: source/user-evidence map between Glyph MK6 physical buttons, logical post-remap inputs, display positions, runtime input fields, and known profile roles for the current prehardware firmware/configurator workstream.
+## Scope and Evidence Taxonomy
 
-This is not a Smash/game-semantic document. It does not invent ergonomic names from geometry and does not claim that Senscope neutral Profile JSON maps directly to Glyph JSON.
+This document is a source-grounded layout map for Glyph MK6 that separates physical button identity from logical post-remap behavior.
 
-## Evidence Layers
+Status taxonomy used in this file:
 
-- Matrix position: electrical scan matrix from `config/glyph/glyph_mk6/include/matrix_definition.hpp`.
-- Display position: mini-screen input viewer coordinates from `config/glyph/glyph_mk6/include/button_positions.hpp`.
-- Physical `BTN_*` id: pre-remap button identifier in a profile fixture or source matrix.
-- Logical post-remap id: `activates` target after `ControllerMode::HandleRemap` / `InputMode::HandleRemap`.
-- Runtime input field: `InputState` field consumed by `src/modes/Ultimate.cpp` after remap.
-- User-facing role: user/domain label only when specifically provided or already documented for the MVP layout.
+- `SOURCE_CONFIRMED`: directly supported by checked-in source/docs.
+- `FIXTURE_OBSERVED`: directly observed in checked-in fixture/profile JSON.
+- `HARDWARE_OBSERVED_USER_REPORTED`: user-reported hardware observation from manual testing context.
+- `USER_LABEL_CONFIRMED`: user/domain label explicitly provided for the mapped role.
+- `INFERRED_DO_NOT_USE_FOR_MAPPING`: inference only; not safe as mapping authority.
+- `UNKNOWN`: not currently established by source/fixture/user transcription.
 
-## Layout Map
+## Layer Separation (Do Not Collapse)
 
-| physical_button | matrix_position_if_source_known | display_position_if_source_known | observed_profile_role | logical_activates | runtime_input_field | evidence_status | source_or_fixture | caveats |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `BTN_RF3` | row 2, col 9 | full/platform/split display `(112,24)` | Tilt1 / TILT for uploaded MVP layout | `BTN_LT1` | `inputs.lt1` | `CONFIRMED_FOR_MVP_LAYOUT` | `matrix_definition.hpp`, `button_positions.hpp`, `GlyphUserProfilesUltimateMVP01.json`, `glyph_ultimate_tilt_button_id_confirmation_2026-05-24.md`, `Ultimate.cpp` | Role is profile/user-evidence specific, not universal geometry meaning. |
-| `BTN_RF4` | row 2, col 10 | full/platform/split display `(122,29)` | Tilt2 for uploaded MVP layout | `BTN_LT2` | `inputs.lt2` | `CONFIRMED_FOR_MVP_LAYOUT` | same as above | Role is profile/user-evidence specific, not universal geometry meaning. |
-| `BTN_RF5` | row 1, col 7 | full/platform/split/fgc display `(93,17)` | Ambiguous/rejected as Tilt1/Tilt2 target for MVP; currently maps to `BTN_RF1` in MVP fixture | `BTN_RF1` in MVP fixture | `inputs.rf1` if activated post-remap | `AMBIGUOUS_FOR_HARDWARE_RESULT` | `GlyphUserProfilesUltimateMVP01.json`, `glyph_ultimate_tilt_button_id_confirmation_2026-05-24.md`, `button_positions.hpp` | Do not infer user-facing role from display geometry. Hardware result left RF5 identity ambiguous beyond not being Tilt1/Tilt2. |
-| `BTN_LT1` | row 3, col 2 | full/platform display `(38,52)` | Logical MX / existing firmware modifier target in current docs | self or target from remap | `inputs.lt1` | `SOURCE_CONFIRMED_LOGICAL_INPUT` | `Ultimate.cpp`, existing calibration docs | `BTN_LT1` can be a physical id or a logical post-remap id; docs must label which layer is meant. |
-| `BTN_LT2` | row 3, col 4 | full/platform display `(46,58)` | Logical MY / existing firmware modifier target in current docs | self or target from remap | `inputs.lt2` | `SOURCE_CONFIRMED_LOGICAL_INPUT` | `Ultimate.cpp`, existing calibration docs | Same physical/logical caveat as `BTN_LT1`. |
-| `BTN_LF3` | row 1, col 0 | full/platform/split display `(15,23)` | left-stick left logical direction in native Ultimate | varies by profile/remap | `inputs.lf3` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | `Ultimate.cpp`, `button_positions.hpp`, `matrix_definition.hpp` | This is controller/backend behavior, not gameplay semantics. |
-| `BTN_LF1` | row 2, col 2 | full/platform/split display `(35,27)` | left-stick right logical direction in native Ultimate | varies by profile/remap | `inputs.lf1` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | same as above | This is controller/backend behavior, not gameplay semantics. |
-| `BTN_LF2` | row 1, col 1 | full/platform/split display `(25,22)` | left-stick down logical direction in native Ultimate | varies by profile/remap | `inputs.lf2` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | same as above | This is controller/backend behavior, not gameplay semantics. |
-| `BTN_RF4` | row 2, col 10 | full/platform/split display `(122,29)` | left-stick up logical direction when used post-remap by native Ultimate | varies by profile/remap; `BTN_LT2` for MVP Tilt2 physical role | `inputs.rf4` for logical up, or `inputs.lt2` after MVP remap | `SOURCE_CONFIRMED_WITH_LAYER_CAVEAT` | `Ultimate.cpp`, MVP fixture | Same `BTN_RF4` symbol appears as a physical button in the MVP remap and as a logical Ultimate up input when not remapped away. Keep layer labels explicit. |
-| `BTN_RT3` | row 3, col 7 | full/platform display `(82,46)` | right-stick/C-stick left logical direction | varies by profile/remap | `inputs.rt3` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | `Ultimate.cpp`, `button_positions.hpp`, `matrix_definition.hpp` | Preservation tests still need hardware coverage. |
-| `BTN_RT5` | row 3, col 10 | full/platform display `(98,46)` | right-stick/C-stick right logical direction | varies by profile/remap | `inputs.rt5` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | same as above | Preservation tests still need hardware coverage. |
-| `BTN_RT2` | row 3, col 6 | full/platform display `(82,58)` | right-stick/C-stick down logical direction | varies by profile/remap | `inputs.rt2` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | same as above | Preservation tests still need hardware coverage. |
-| `BTN_RT4` | row 3, col 9 | full/platform display `(90,40)` | right-stick/C-stick up logical direction | varies by profile/remap | `inputs.rt4` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | same as above | Preservation tests still need hardware coverage. |
-| `BTN_LF4` | row 2, col 0 | full display `(6,29)` | left trigger digital/analog source in native Ultimate | varies by profile/remap | `inputs.lf4` | `SOURCE_CONFIRMED_RUNTIME_INPUT` | `Ultimate.cpp` | Trigger preservation still needs expanded hardware checklist coverage. |
-| `BTN_RF5` | row 1, col 7 | full/platform/split/fgc display `(93,17)` | right trigger digital/analog source in native Ultimate when logical `rf5` is active | varies by profile/remap | `inputs.rf5` | `SOURCE_CONFIRMED_RUNTIME_INPUT_WITH_MVP_AMBIGUITY` | `Ultimate.cpp`, MVP fixture | Do not collapse this with the separate MVP physical RF5 ambiguity row. |
+The same `BTN_*` symbol namespace appears in multiple layers, but each layer has distinct meaning:
 
-## Confirmed MVP Tilt Routing
+1. Matrix scan position:
+   - Electrical scan-cell location in `matrix[num_rows][num_cols]`.
+   - Source: `config/glyph/glyph_mk6/include/matrix_definition.hpp`.
 
-- Physical `BTN_RF3` maps to logical `BTN_LT1` in `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json`.
-- Physical `BTN_RF4` maps to logical `BTN_LT2` in that fixture.
-- Native Ultimate runtime consumes logical `inputs.lt1` and `inputs.lt2` in the Tilt/Tilt2 patch.
-- Runtime must not bypass remap by reading raw physical `inputs.rf3` or `inputs.rf4` for this behavior.
+2. Display/input-viewer position:
+   - Mini-screen draw coordinates (`center_x`, `center_y`) used by Input Viewer rendering.
+   - Source: `config/glyph/glyph_mk6/include/button_positions.hpp`, `HAL/pico/src/display/InputDisplay.cpp`.
 
-## Caveats
+3. Physical `BTN_*` id:
+   - Raw pressed button identity from matrix scan before remap.
 
-- RF5 remains ambiguous from the current hardware result and is not confirmed as a Tilt1/Tilt2 physical identity.
-- Display coordinates are input-viewer positions, not gameplay or stick-output coordinates.
-- Geometry does not prove ergonomic/user-facing names.
-- User/domain labels are separated from source-confirmed IDs in the table.
-- This document does not change runtime, remap, SOCD, profile schema, or configurator behavior.
+4. Logical post-remap `BTN_*` target:
+   - `ButtonRemap.activates` output after `HandleRemap`.
+   - Source flow: `src/core/ControllerMode.cpp` -> `src/core/InputMode.cpp`.
+
+5. Runtime `InputState` field:
+   - Consumer code reads `inputs.<field>` from remapped `InputState`.
+   - Source: `include/core/state.hpp`, `src/modes/Ultimate.cpp`.
+
+6. User-facing role:
+   - Role labels (for example Tilt1/TILT, Tilt2) are profile/user-context-specific unless source/user evidence confirms scope.
+
+7. Printed faceplate/base marking:
+   - Physical text printed on hardware base under plexi.
+   - Must be recorded exactly as transcribed; do not infer missing values.
+
+## Source-Confirmed Physical/Matrix/Display Map
+
+Matrix scan cells (0-based index from `matrix_definition.hpp`):
+
+- `BTN_RF5`: row 1, col 7
+- `BTN_RF3`: row 2, col 9
+- `BTN_RF4`: row 2, col 10
+- `BTN_LT1`: row 3, col 2
+- `BTN_LT2`: row 3, col 4
+
+Input-viewer coordinates (platform-fighter and full-layout entries in `button_positions.hpp`):
+
+- `BTN_RF3`: `(112, 24)`
+- `BTN_RF4`: `(122, 29)`
+- `BTN_RF5`: `(93, 17)`
+- `BTN_LT1`: `(38, 52)`
+- `BTN_LT2`: `(46, 58)`
+
+Important: these display coordinates are rendering positions only; they are not physical matrix coordinates.
+
+## Confirmed Current Ultimate MVP Tilt Mapping (Profile-Specific)
+
+For the provided Ultimate MVP fixture/profile context:
+
+- physical `BTN_RF3` -> logical `BTN_LT1` -> runtime `inputs.lt1` -> user role Tilt1/TILT
+- physical `BTN_RF4` -> logical `BTN_LT2` -> runtime `inputs.lt2` -> user role Tilt2
+
+Evidence:
+
+- `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json` (`MODE_ULTIMATE` remaps)
+- `docs/calibration/glyph_ultimate_tilt_button_id_confirmation_2026-05-24.md`
+- `src/core/InputMode.cpp` (remap behavior)
+- `src/modes/Ultimate.cpp` (runtime `inputs.lt1` and `inputs.lt2` consumption)
+- `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` (manual smoke observations for RF3/RF4 path)
+
+Caveat: this is confirmed for current uploaded MVP profile evidence; it is not a universal/fixed Glyph mapping claim.
+
+## RF5 Ambiguity (Do Not Resolve Yet)
+
+Per `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md`:
+
+- RF5 negative check result is `NOT_TESTED_AMBIGUOUS`.
+- Tester was not certain which physical button corresponded to RF5.
+- A tested top-row right-most right-side button behaved identically with Tilt2/LT2.
+- This does not resolve RF5 identity or provide definitive RF5-negative verification.
+
+RF5 remains unresolved pending exact printed marking transcription.
+
+## Faceplate/Base Marking Pending
+
+User reports that printed physical ID markings are present on the controller base under plexi.
+
+Current status:
+
+- exact transcription is pending.
+- no inferred spellings/capitalization are recorded here.
+- once supplied, exact strings should be added as `HARDWARE_OBSERVED_USER_REPORTED` evidence in this map.
+
+## Physical/Logical Mapping Table
+
+| row_id | physical_button_id | matrix_position_if_source_known | display_position_if_source_known | fixture_profile_role | logical_activates | runtime_input_field | user_facing_role | printed_base_marking | evidence_status | source_or_fixture | caveats |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| row_rf3_tilt1 | `BTN_RF3` | row=2,col=9 | `(112,24)` | `MODE_ULTIMATE` remap entry present | `BTN_LT1` | `inputs.lt1` | Tilt1/TILT | pending transcription | `SOURCE_CONFIRMED` + `FIXTURE_OBSERVED` + `USER_LABEL_CONFIRMED` | `config/glyph/glyph_mk6/include/matrix_definition.hpp`; `config/glyph/glyph_mk6/include/button_positions.hpp`; `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json`; `src/modes/Ultimate.cpp`; `docs/calibration/glyph_ultimate_tilt_button_id_confirmation_2026-05-24.md` | Profile-specific confirmation for current MVP evidence; not universal mapping authority. |
+| row_rf4_tilt2 | `BTN_RF4` | row=2,col=10 | `(122,29)` | `MODE_ULTIMATE` remap entry present | `BTN_LT2` | `inputs.lt2` | Tilt2 | pending transcription | `SOURCE_CONFIRMED` + `FIXTURE_OBSERVED` + `USER_LABEL_CONFIRMED` | `config/glyph/glyph_mk6/include/matrix_definition.hpp`; `config/glyph/glyph_mk6/include/button_positions.hpp`; `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json`; `src/modes/Ultimate.cpp`; `docs/calibration/glyph_ultimate_tilt_button_id_confirmation_2026-05-24.md` | Profile-specific confirmation for current MVP evidence; not universal mapping authority. |
+| row_rf5_ambiguous | `BTN_RF5` | row=1,col=7 | `(93,17)` | `MODE_ULTIMATE` remap entry present | `BTN_RF1` | `inputs.rf1` | unknown | pending transcription | `SOURCE_CONFIRMED` + `FIXTURE_OBSERVED` + `UNKNOWN` | `config/glyph/glyph_mk6/include/matrix_definition.hpp`; `config/glyph/glyph_mk6/include/button_positions.hpp`; `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json`; `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` | Hardware test explicitly marks RF5 identity/negative check ambiguous; do not resolve from geometry. |
+| row_lt1_physical | `BTN_LT1` | row=3,col=2 | `(38,52)` | `MODE_ULTIMATE` remap entry present | `BTN_RF5` | `inputs.rf5` | unknown | pending transcription | `SOURCE_CONFIRMED` + `FIXTURE_OBSERVED` | `config/glyph/glyph_mk6/include/matrix_definition.hpp`; `config/glyph/glyph_mk6/include/button_positions.hpp`; `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json`; `src/modes/Ultimate.cpp` | Physical LT1 row here is fixture remap evidence only; not a claim about ergonomic naming. |
+| row_lt2_physical | `BTN_LT2` | row=3,col=4 | `(46,58)` | `MODE_ULTIMATE` remap entry present (no `activates`) | omitted/unspecified in fixture row | `inputs.lt2` (field exists; consumed when active logically) | unknown | pending transcription | `SOURCE_CONFIRMED` + `FIXTURE_OBSERVED` | `config/glyph/glyph_mk6/include/matrix_definition.hpp`; `config/glyph/glyph_mk6/include/button_positions.hpp`; `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json`; `include/core/state.hpp`; `src/modes/Ultimate.cpp` | Omitted `activates` behavior is profile/remap-data dependent; do not infer semantic role. |
+| row_base_markings_pending | unknown | unknown | unknown | not yet provided | unknown | unknown | unknown | pending user transcription | `HARDWARE_OBSERVED_USER_REPORTED` | user report in task context (plexi removed, printed IDs observed) | Await exact spelling/capitalization before adding explicit per-button marking rows. |
+
+## Adapter Implications
+
+- Any adapter/evaluator must preserve the physical-vs-logical distinction (`physicalButton` vs post-remap logical input).
+- User-facing role labels must not be mapped directly to runtime fields without passing through remap evidence.
+- Future printed-base transcription can improve confidence for physical ID identification, but only as exact user-reported strings.
+- Write-capable adapter/push workflow remains deferred; this map is documentation + read-only evidence alignment only.
+
+## Evidence Notes
+
+- `docs/calibration/glyph_profile_config_adapter_policy_decisions_2026-05-26.md` was requested in task inputs but is not present in this repository at authoring time.
+- Closest related checked-in policy doc discovered during this pass: `docs/calibration/glyph_ultimate_tilt_hardware_result_policy_2026-05-24.md`.
