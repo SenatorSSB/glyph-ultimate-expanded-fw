@@ -75,32 +75,6 @@ def require_int(value: Any, label: str, errors: list[str]) -> int | None:
     return value
 
 
-def validate_coord(value: Any, label: str, errors: list[str]) -> tuple[int, int] | None:
-    obj = require_object(value, label, errors)
-    if obj is None:
-        return None
-    x_value = require_int(obj.get("x"), f"{label}.x", errors)
-    y_value = require_int(obj.get("y"), f"{label}.y", errors)
-    if x_value is None or y_value is None:
-        return None
-    if not 0 <= x_value <= 255:
-        errors.append(f"{label}.x must be in [0,255], got {x_value}")
-    if not 0 <= y_value <= 255:
-        errors.append(f"{label}.y must be in [0,255], got {y_value}")
-    return x_value, y_value
-
-
-def validate_offset(value: Any, label: str, errors: list[str]) -> tuple[int, int] | None:
-    obj = require_object(value, label, errors)
-    if obj is None:
-        return None
-    x_value = require_int(obj.get("x"), f"{label}.x", errors)
-    y_value = require_int(obj.get("y"), f"{label}.y", errors)
-    if x_value is None or y_value is None:
-        return None
-    return x_value, y_value
-
-
 def validate_direction_table(table: Any, state_label: str, errors: list[str]) -> None:
     table_obj = require_object(table, f"{state_label}.direction_table", errors)
     if table_obj is None:
@@ -121,13 +95,20 @@ def validate_direction_table(table: Any, state_label: str, errors: list[str]) ->
         entry = require_object(table_obj[direction], entry_label, errors)
         if entry is None:
             continue
-        raw = validate_coord(entry.get("raw"), f"{entry_label}.raw", errors)
-        offset = validate_offset(entry.get("center_relative"), f"{entry_label}.center_relative", errors)
-        if raw is not None and offset is not None:
-            expected = (raw[0] - 128, raw[1] - 128)
+        raw_x = require_int(entry.get("raw_x"), f"{entry_label}.raw_x", errors)
+        raw_y = require_int(entry.get("raw_y"), f"{entry_label}.raw_y", errors)
+        offset_x = require_int(entry.get("offset_x"), f"{entry_label}.offset_x", errors)
+        offset_y = require_int(entry.get("offset_y"), f"{entry_label}.offset_y", errors)
+        if raw_x is not None and not 0 <= raw_x <= 255:
+            errors.append(f"{entry_label}.raw_x must be in [0,255], got {raw_x}")
+        if raw_y is not None and not 0 <= raw_y <= 255:
+            errors.append(f"{entry_label}.raw_y must be in [0,255], got {raw_y}")
+        if None not in (raw_x, raw_y, offset_x, offset_y):
+            expected = (raw_x - 128, raw_y - 128)
+            offset = (offset_x, offset_y)
             if offset != expected:
                 errors.append(
-                    f"{entry_label}.center_relative must equal raw minus 128; "
+                    f"{entry_label}.offset_x/offset_y must equal raw_x/raw_y minus 128; "
                     f"got {offset}, expected {expected}",
                 )
 
@@ -141,15 +122,28 @@ def validate_payload(payload: dict[str, Any], duplicate_keys: list[str]) -> list
     if version is not None and version < 1:
         errors.append("table_contract_version must be >= 1")
 
-    if "runtime_branch_exclusivity" not in payload:
-        errors.append("runtime_branch_exclusivity metadata is required")
-    elif not isinstance(payload.get("runtime_branch_exclusivity"), dict):
-        errors.append("runtime_branch_exclusivity must be an object")
+    if not isinstance(payload.get("source_status"), str) or not payload.get("source_status", "").strip():
+        errors.append("source_status must be a non-empty string")
 
-    if "conflict_chord_policy" not in payload:
-        errors.append("conflict_chord_policy metadata is required")
-    elif not isinstance(payload.get("conflict_chord_policy"), dict):
-        errors.append("conflict_chord_policy must be an object")
+    if not isinstance(payload.get("mode_scope"), str) or not payload.get("mode_scope", "").strip():
+        errors.append("mode_scope must be a non-empty string")
+
+    named_entries = payload.get("named_table_entries")
+    if not isinstance(named_entries, list) or not named_entries:
+        errors.append("named_table_entries must be a non-empty list")
+    elif not all(isinstance(entry, str) and entry.strip() for entry in named_entries):
+        errors.append("named_table_entries must contain only non-empty strings")
+
+    required_metadata = {
+        "branch_exclusivity": "branch_exclusivity metadata is required",
+        "chord_both_held_policy": "chord_both_held_policy metadata is required",
+        "preservation_requirements": "preservation_requirements metadata is required",
+    }
+    for key, message in required_metadata.items():
+        if key not in payload:
+            errors.append(message)
+        elif not isinstance(payload.get(key), dict):
+            errors.append(f"{key} must be an object")
 
     states = payload.get("modifier_states")
     if not isinstance(states, list) or not states:
@@ -157,6 +151,7 @@ def validate_payload(payload: dict[str, Any], duplicate_keys: list[str]) -> list
         return errors
 
     seen_state_ids: set[str] = set()
+    state_ids: set[str] = set()
     for state_index, state in enumerate(states):
         state_label = f"modifier_states[{state_index}]"
         state_obj = require_object(state, state_label, errors)
@@ -169,11 +164,19 @@ def validate_payload(payload: dict[str, Any], duplicate_keys: list[str]) -> list
             errors.append(f"duplicate modifier state_id: {state_id}")
         else:
             seen_state_ids.add(state_id)
+            state_ids.add(state_id)
 
         modifier_sources = state_obj.get("modifier_sources")
         if not isinstance(modifier_sources, list):
             errors.append(f"{state_label}.modifier_sources must be a list")
+        if not isinstance(state_obj.get("source_evidence"), str) or not state_obj.get("source_evidence", "").strip():
+            errors.append(f"{state_label}.source_evidence must be a non-empty string")
         validate_direction_table(state_obj.get("direction_table"), state_label, errors)
+
+    if isinstance(named_entries, list):
+        missing_entries = sorted(set(named_entries) - state_ids)
+        if missing_entries:
+            errors.append("named_table_entries missing matching modifier state_id values: " + ", ".join(missing_entries))
 
     return errors
 
