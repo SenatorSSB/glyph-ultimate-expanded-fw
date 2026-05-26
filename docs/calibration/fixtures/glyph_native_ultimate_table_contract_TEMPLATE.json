@@ -1,0 +1,62 @@
+{
+  "table_contract_version": 1,
+  "source_status": "TEMPLATE_ONLY",
+  "mode_scope": "MODE_ULTIMATE_NATIVE_TABLE_CANDIDATE",
+  "named_table_entries": [
+    "base_no_modifier",
+    "modifier_state_example_1"
+  ],
+  "branch_exclusivity": {
+    "expected": true,
+    "policy": "exactly one named modifier state may own a resolved left-stick table branch for a given runtime evaluation unless a reviewed conflict policy says otherwise"
+  },
+  "chord_both_held_policy": {
+    "status": "USER_INPUT_REQUIRED",
+    "description": "Chord and conflict behavior must be explicit metadata before production runtime use. This template does not choose gameplay semantics."
+  },
+  "preservation_requirements": {
+    "status": "HARDWARE_REQUIRED",
+    "description": "Future production use must preserve right-stick/C-stick, trigger, SOCD, remap, nunchuk, and current Tilt/Tilt2 behavior unless source-backed and explicitly approved otherwise."
+  },
+  "notes": [
+    "Template coordinates are contract examples only, not production table values.",
+    "Direction keys are numeric strings 1..9. Direction 5 is neutral and must be explicit.",
+    "No game-semantic labels are required behavior in this contract."
+  ],
+  "modifier_states": [
+    {
+      "state_id": "base_no_modifier",
+      "display_name": "Base no modifier",
+      "modifier_sources": [],
+      "source_evidence": "template example only",
+      "direction_table": {
+        "1": {"raw_x": 100, "raw_y": 100, "offset_x": -28, "offset_y": -28, "evidence_notes": "template coordinate"},
+        "2": {"raw_x": 128, "raw_y": 100, "offset_x": 0, "offset_y": -28, "evidence_notes": "template coordinate"},
+        "3": {"raw_x": 156, "raw_y": 100, "offset_x": 28, "offset_y": -28, "evidence_notes": "template coordinate"},
+        "4": {"raw_x": 100, "raw_y": 128, "offset_x": -28, "offset_y": 0, "evidence_notes": "template coordinate"},
+        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "neutral direction is explicit"},
+        "6": {"raw_x": 156, "raw_y": 128, "offset_x": 28, "offset_y": 0, "evidence_notes": "template coordinate"},
+        "7": {"raw_x": 100, "raw_y": 156, "offset_x": -28, "offset_y": 28, "evidence_notes": "template coordinate"},
+        "8": {"raw_x": 128, "raw_y": 156, "offset_x": 0, "offset_y": 28, "evidence_notes": "template coordinate"},
+        "9": {"raw_x": 156, "raw_y": 156, "offset_x": 28, "offset_y": 28, "evidence_notes": "template coordinate"}
+      }
+    },
+    {
+      "state_id": "modifier_state_example_1",
+      "display_name": "Modifier state example 1",
+      "modifier_sources": ["BTN_LT1"],
+      "source_evidence": "template example only",
+      "direction_table": {
+        "1": {"raw_x": 96, "raw_y": 96, "offset_x": -32, "offset_y": -32, "evidence_notes": "template coordinate"},
+        "2": {"raw_x": 128, "raw_y": 96, "offset_x": 0, "offset_y": -32, "evidence_notes": "template coordinate"},
+        "3": {"raw_x": 160, "raw_y": 96, "offset_x": 32, "offset_y": -32, "evidence_notes": "template coordinate"},
+        "4": {"raw_x": 96, "raw_y": 128, "offset_x": -32, "offset_y": 0, "evidence_notes": "template coordinate"},
+        "5": {"raw_x": 128, "raw_y": 128, "offset_x": 0, "offset_y": 0, "evidence_notes": "neutral direction is explicit"},
+        "6": {"raw_x": 160, "raw_y": 128, "offset_x": 32, "offset_y": 0, "evidence_notes": "template coordinate"},
+        "7": {"raw_x": 96, "raw_y": 160, "offset_x": -32, "offset_y": 32, "evidence_notes": "template coordinate"},
+        "8": {"raw_x": 128, "raw_y": 160, "offset_x": 0, "offset_y": 32, "evidence_notes": "template coordinate"},
+        "9": {"raw_x": 160, "raw_y": 160, "offset_x": 32, "offset_y": 32, "evidence_notes": "template coordinate"}
+      }
+    }
+  ]
+}
