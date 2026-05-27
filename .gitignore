@@ -22,3 +22,6 @@ __pycache__/
 # macOS Finder metadata
 .DS_Store
 **/.DS_Store
+
+# Local Glyph config backups
+local_backups/

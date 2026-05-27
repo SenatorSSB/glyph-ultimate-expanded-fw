@@ -113,3 +113,10 @@ Interpretation for this result document:
 - All Tilt modifier combinations work as expected.
 - Right-stick and D-pad inputs are orthogonal to Tilt3.
 - D-pad visual/profile duplicate-left defect remains open.
+
+## 2026-05-27 Amendment: Final LT3 and D-pad Repair Confirmation
+
+- Final active profile path now has standalone LT3 and repaired D-pad mapping hardware-confirmed.
+- The original chord-path result (`PASS_TILT3_CHORD_PATH`) remains historically accurate for its recorded test state.
+- Final repaired-profile confirmation is recorded in:
+  - `docs/calibration/glyph_ultimate_lt3_dpad_fix_hardware_result_2026-05-27.md`

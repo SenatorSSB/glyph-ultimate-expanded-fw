@@ -86,3 +86,8 @@ Earlier Tilt1/Tilt2 identification work rejected `BTN_RF5` for the uploaded MVP 
 - If nunchuk hardware is unavailable, keep nunchuk row as `NOT_TESTED_UNAVAILABLE`.
 - This plan does not authorize flashing automation.
 - This plan does not add or imply push-to-device workflow support.
+
+## 2026-05-27 Note: Final Plan Row Satisfaction
+
+- Current hardware plan rows for standalone LT3 and D-pad profile repair are satisfied by:
+  - `docs/calibration/glyph_ultimate_lt3_dpad_fix_hardware_result_2026-05-27.md`

@@ -34,3 +34,9 @@
 
 - D-pad profile mapping defect remains open separately: two D-pad Left mappings were observed.
 - This result validates Tilt behavior, not full profile layout correctness.
+
+## 2026-05-27 Amendment: Repaired D-pad Profile Confirmation
+
+- The repaired D-pad profile artifact was later applied and confirmed working on hardware.
+- Final confirmation is recorded in:
+  - `docs/calibration/glyph_ultimate_lt3_dpad_fix_hardware_result_2026-05-27.md`
