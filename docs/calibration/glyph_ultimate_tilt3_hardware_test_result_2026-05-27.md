@@ -84,3 +84,9 @@ Interpretation for this result document:
 - No claim of D-pad interaction hardware verification.
 - No claim of exhaustive C-stick/right-stick/trigger/SOCD/remap/profile preservation.
 - No overwrite of historical RF5 ambiguity (no explicit RF5 retest evidence was provided here).
+
+## 2026-05-27 Amendment: Post-Binding Path Check
+
+- Post-binding-path review still found no standalone LT3 action on hardware.
+- `LT1+LT2 -> Tilt3` remains hardware-verified.
+- Dedicated LT3 remains blocked by the active profile binding path until the stored on-device Ultimate profile is actually updated.

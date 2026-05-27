@@ -42,3 +42,9 @@ Relation to the existing Tilt mappings:
 
 - This branch establishes a source-supported physical-to-logical reassignment pattern for later allocation updates.
 - It does not automatically allocate all remaining desired buttons.
+
+## 2026-05-27 Amendment: Active Profile Binding Path
+
+- The previous fixture-only binding change in `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json` did **not** update the active on-device profile during normal firmware update.
+- Source trace confirms the fixture file is not firmware build-consumed runtime source.
+- Dedicated LT3 remains unverified until the active profile is actually updated through a source-backed active-profile path (for example configurator config import/write), or through a default-restore/fresh-install path if factory defaults are changed.
