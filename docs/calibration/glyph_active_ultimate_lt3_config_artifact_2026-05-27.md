@@ -52,3 +52,10 @@ Warnings:
 - No claim that any active on-device profile changed until the user performs manual import/apply.
 - No claim that dedicated LT3 hardware verification has passed in this branch.
 - Repo source confirms device-side protobuf get/set transport and persistence, but does not include external configurator UI source semantics.
+
+## 2026-05-27 Amendment: Webapp Path vs Path B
+
+- Limit Labs configurator webapp is closed-source from this repository perspective and was observed not to preserve/action standalone LT3 after import/push in this test stream.
+- This observation does not disprove the artifact content itself.
+- It means the webapp import path is not treated here as a verified native config write path for this LT3 binding.
+- Active direction is now Path B: direct source-backed serial/config write flow when protocol and payload handling are source-confirmed.
