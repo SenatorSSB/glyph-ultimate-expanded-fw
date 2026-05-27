@@ -72,6 +72,12 @@ Interpretation for this result document:
 - D-pad side-effect removal remains unverified until a future layout exposes D-pad outputs.
 - This is not a full broad preservation result.
 
+## 2026-05-27 Amendment: LT3 Profile Binding Branch
+
+- At the time this hardware result was recorded, no dedicated Tilt3 button was configured/actionable.
+- In branch `glyph/gfw2-ultimate-lt3-profile-binding`, the Ultimate MVP profile binding changes physical `BTN_LT3` from logical `BTN_LF4` to logical `BTN_LT3`.
+- A new hardware test is required to validate standalone physical LT3 -> logical LT3 -> Tilt3 behavior.
+
 ## Boundaries and Non-Claims
 
 - No claim of dedicated LT3 hardware verification.

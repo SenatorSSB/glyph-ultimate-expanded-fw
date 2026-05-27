@@ -33,8 +33,8 @@ leftStickY = 128 + directions.y * 42
 
 | Area | Input | Directions | Expected result | Status |
 | --- | --- | --- | --- | --- |
-| Dedicated Tilt3 | Logical `LT3` | 1..9 | Tilt3 table above | NOT_TESTED |
-| Tilt3 chord | `LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
+| Standalone physical LT3 | Physical `BTN_LT3` (remapped to logical `BTN_LT3` in Ultimate MVP profile) | 1..9 | Tilt3 table above | NOT_TESTED |
+| LT1+LT2 Tilt3 regression | `LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 mixed input | `LT3+LT1` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 mixed input | `LT3+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 mixed input | `LT3+LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
@@ -42,8 +42,9 @@ leftStickY = 128 + directions.y * 42
 | Tilt3 chord C-stick side effect guard | `LT1+LT2` plus C-left/C-right/C-down/C-up | Cardinal and diagonal smoke | `LT1+LT2` does not shut off or neutralize C-stick/right-stick unless another actual D-pad-layer condition applies | NOT_TESTED |
 | Tilt3 chord prototype side effect guard | `LT1+LT2` plus C-stick direction smoke | Cardinal and diagonal smoke | No hidden C-stick/right-stick modification from the old `LT1` prototype block | NOT_TESTED |
 | Dedicated Tilt3 prototype side effect guard | `LT3` plus C-stick direction smoke | Cardinal and diagonal smoke | No hidden C-stick/right-stick modification from old prototype blocks | NOT_TESTED |
-| Tilt1 preservation | `LT1` alone | 1..9 | Existing Tilt1 table `(187,87)`, `(128,87)`, `(69,87)`, `(187,128)`, `(128,128)`, `(69,128)`, `(187,169)`, `(128,169)`, `(69,169)` | NOT_TESTED |
-| Tilt2 preservation | `LT2` alone | 1..9 | Existing Tilt2 table `(88,79)`, `(128,79)`, `(168,79)`, `(88,128)`, `(128,128)`, `(168,128)`, `(88,177)`, `(128,177)`, `(168,177)` | NOT_TESTED |
+| LT1 regression | `LT1` alone | 1..9 | Existing Tilt1 table `(187,87)`, `(128,87)`, `(69,87)`, `(187,128)`, `(128,128)`, `(69,128)`, `(187,169)`, `(128,169)`, `(69,169)` | NOT_TESTED |
+| LT2 regression | `LT2` alone | 1..9 | Existing Tilt2 table `(88,79)`, `(128,79)`, `(168,79)`, `(88,128)`, `(128,128)`, `(168,128)`, `(88,177)`, `(128,177)`, `(168,177)` | NOT_TESTED |
+| LT3 previous-role removal | Physical `BTN_LT3` press in Ultimate MVP profile | N/A | Does not activate previous logical `BTN_LF4` / `triggerLDigital` role | NOT_TESTED |
 | Baseline preservation | No modifier | 1..9 | Existing baseline table `(28,28)`, `(128,28)`, `(228,28)`, `(28,128)`, `(128,128)`, `(228,128)`, `(28,228)`, `(128,228)`, `(228,228)` | NOT_TESTED |
 | Other buttons smoke | A/B/X/Y/R/L/start/select/home/capture as applicable | N/A | Existing digital behavior unchanged | NOT_TESTED |
 | C-stick/right-stick smoke | C-left/C-right/C-down/C-up | Cardinal and diagonal smoke | Existing right-stick behavior unchanged | NOT_TESTED |
@@ -58,5 +59,7 @@ Earlier Tilt1/Tilt2 identification work rejected `BTN_RF5` for the uploaded MVP 
 ## Acceptance Notes
 
 - Hardware acceptance requires a Tilt3-specific result file or equivalent user-provided measurements.
+- If the tested layout still has no D-pad-observable buttons, keep D-pad side-effect rows as `NOT_TESTED_NO_DPAD_BUTTONS_IN_NORMAL_LAYOUT`.
+- If nunchuk hardware is unavailable, keep nunchuk row as `NOT_TESTED_UNAVAILABLE`.
 - This plan does not authorize flashing automation.
 - This plan does not add or imply push-to-device workflow support.
