@@ -7,6 +7,15 @@
 - No schema/proto/configurator structural change.
 - No flashing or push-to-device automation.
 
+## Checker Semantics
+
+- This branch is a source-trace/planning stop, not a runtime implementation branch.
+- Missing Smash Box runtime markers in `src/modes/Ultimate.cpp` are expected in this branch.
+- Runtime implementation requires explicit user decisions for:
+  - physical/logical role bindings
+  - modifier priority/composition
+  - LS->DPad left-stick neutral/active policy
+
 ## Source-Traced Role Bindings
 
 Resolved from current repository sources and active artifact evidence:

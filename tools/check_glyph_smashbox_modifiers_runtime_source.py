@@ -22,6 +22,12 @@ EXPECTED_MARKERS = (
     "Smash Box modifiers runtime end",
 )
 
+EXPECTED_STOP_CODES = (
+    "MODIFIER_ROLE_BINDING_SOURCE_GAP",
+    "LS_DPAD_LEFT_STICK_NEUTRAL_POLICY_UNRESOLVED",
+    "MODIFIER_COMPOSITION_POLICY_UNRESOLVED",
+)
+
 FORBIDDEN_RUNTIME_TOKENS = (
     "uf2",
     "reboot_bootloader",
@@ -42,6 +48,10 @@ def rel(path: Path) -> str:
         return str(path)
 
 
+def contains_intentional_stop_statement(text: str) -> bool:
+    return "runtime implementation intentionally not performed" in text.lower()
+
+
 def main() -> int:
     failures: list[str] = []
 
@@ -58,19 +68,31 @@ def main() -> int:
     marker_begin_present = EXPECTED_MARKERS[0] in source
     marker_end_present = EXPECTED_MARKERS[1] in source
 
-    if marker_begin_present != marker_end_present:
-        failures.append("runtime marker pair mismatch in Ultimate.cpp")
-
-    if not marker_begin_present:
-        failures.append(
-            "fixed-profile Smash Box runtime markers missing (implementation not present)"
-        )
-
     for token in FORBIDDEN_RUNTIME_TOKENS:
         if re.search(rf"\b{re.escape(token)}\b", source, flags=re.IGNORECASE):
             failures.append(f"forbidden token found in runtime source: {token}")
 
-    if marker_begin_present:
+    implementation_present = marker_begin_present and marker_end_present
+    stopped_before_runtime = False
+    runtime_source_unchanged = False
+    stop_codes_output = "none"
+
+    runtime_doc_present = RUNTIME_DOC.exists()
+    runtime_doc_text = ""
+    if runtime_doc_present:
+        runtime_doc_text = RUNTIME_DOC.read_text(encoding="utf-8")
+
+    missing_stop_codes: list[str] = []
+    for code in EXPECTED_STOP_CODES:
+        if code not in runtime_doc_text:
+            missing_stop_codes.append(code)
+
+    intentional_stop_statement_present = contains_intentional_stop_statement(runtime_doc_text)
+
+    if marker_begin_present != marker_end_present:
+        failures.append("runtime marker pair mismatch in Ultimate.cpp")
+
+    if implementation_present:
         marker_block = source.split(EXPECTED_MARKERS[0], 1)[1].split(EXPECTED_MARKERS[1], 1)[0]
 
         if "uint8_t" in marker_block and "signed" not in marker_block:
@@ -79,13 +101,26 @@ def main() -> int:
         if any(token in marker_block for token in RAW_PHYSICAL_BYPASS_TOKENS):
             failures.append("runtime marker block uses raw RF3/RF4 physical inputs; expected logical post-remap inputs")
 
-    runtime_doc_present = RUNTIME_DOC.exists()
-    blocker_doc_tag_present = False
-    if runtime_doc_present:
-        runtime_doc_text = RUNTIME_DOC.read_text(encoding="utf-8")
-        blocker_doc_tag_present = "MODIFIER_ROLE_BINDING_SOURCE_GAP" in runtime_doc_text
-
     ls_dpad_mentions = "LS->DPad" in source or "LS to DPad" in source or "left stick to dpad" in source.lower()
+    blocker_doc_tag_present = "MODIFIER_ROLE_BINDING_SOURCE_GAP" in runtime_doc_text
+
+    if not implementation_present:
+        if not runtime_doc_present:
+            failures.append(f"missing runtime implementation doc: {rel(RUNTIME_DOC)}")
+        if missing_stop_codes:
+            failures.append(
+                "runtime implementation doc missing stop code(s): "
+                + ",".join(missing_stop_codes)
+            )
+        if runtime_doc_present and not intentional_stop_statement_present:
+            failures.append(
+                "runtime implementation doc missing intentional-stop statement"
+            )
+
+        if not failures:
+            stopped_before_runtime = True
+            runtime_source_unchanged = True
+            stop_codes_output = ",".join(EXPECTED_STOP_CODES)
 
     print(f"runtime_source={rel(ULTIMATE_CPP)}")
     print(f"runtime_doc={rel(RUNTIME_DOC)}")
@@ -94,6 +129,10 @@ def main() -> int:
     print(f"runtime_marker_end_present={'true' if marker_end_present else 'false'}")
     print(f"role_binding_gap_doc_tag_present={'true' if blocker_doc_tag_present else 'false'}")
     print(f"ls_dpad_source_shape_present={'true' if ls_dpad_mentions else 'false'}")
+    print(f"implementation_present={'true' if implementation_present else 'false'}")
+    print(f"stopped_before_runtime={'true' if stopped_before_runtime else 'false'}")
+    print(f"stop_codes={stop_codes_output}")
+    print(f"runtime_source_unchanged={'true' if runtime_source_unchanged else 'false'}")
     print("firmware_flashing_logic_present=false")
 
     if failures:
