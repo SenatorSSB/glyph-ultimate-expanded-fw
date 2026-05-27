@@ -99,3 +99,9 @@ Interpretation for this result document:
 - Existing hardware disposition in this file is still limited to:
   - `PASS_TILT3_CHORD_PATH`
 - Dedicated standalone LT3 remains `NOT_TESTED_NO_ACTIONABLE_TILT3_BINDING` until that artifact/default path is applied and retested on hardware.
+
+## 2026-05-27 Amendment: Webapp Import Observation
+
+- After webapp import/push attempts, standalone LT3 still did not produce Tilt3 in observed hardware behavior.
+- `LT1+LT2 -> Tilt3` remained the verified path.
+- Dedicated standalone LT3 remains unverified pending a verified active config write/readback path (Path B) or another verified configurator write path.

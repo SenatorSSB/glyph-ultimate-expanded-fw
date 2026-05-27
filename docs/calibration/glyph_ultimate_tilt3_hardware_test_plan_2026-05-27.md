@@ -7,9 +7,22 @@ Manual hardware test plan for `glyph/gfw2-ultimate-tilt3-runtime`.
 - No flashing automation is included.
 - No push-to-device automation is included.
 - Results must not claim PASS until measured on hardware.
-- This plan requires one recorded application method before test execution:
-  - `ARTIFACT_IMPORT` using `docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json`, or
-  - `DEFAULT_RESTORE_FRESH_INSTALL` if using a default-source path in a different branch.
+- This plan requires one recorded and verified application method before test execution.
+
+## Application Methods
+
+- `WEBAPP_IMPORT_UNSUPPORTED_FOR_LT3`
+  - Closed-source webapp path observed as not verified for standalone LT3 in this workstream.
+- `SERIAL_CONFIG_TOOL_WRITE`
+  - Use source-backed serial configurator protocol write with verified readback.
+- `FRESH_INSTALL_DEFAULT_RESTORE`
+  - Use verified default-restore path when testing default-source edits.
+- `OTHER_VERIFIED_CONFIGURATOR_PATH`
+  - Use another configurator write path only when verified for active profile state.
+
+Standalone LT3 hardware rows in this plan should run only after either:
+- verified write + verified readback, or
+- another verified profile-state confirmation path.
 
 ## Expected Tilt3 Table
 
