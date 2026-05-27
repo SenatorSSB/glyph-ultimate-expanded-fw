@@ -49,6 +49,7 @@ def default_commands() -> list[CommandSpec]:
         ),
         CommandSpec("tools/check_glyph_native_ultimate_table_runtime_scope.py"),
         CommandSpec("tools/check_glyph_ultimate_tilt3_runtime_source.py"),
+        CommandSpec("tools/check_glyph_ultimate_lt3_profile_binding.py"),
         CommandSpec("tools/run_glyph_next_runtime_change_readiness_checks.py"),
         CommandSpec("tools/check_glyph_merged_state_consistency.py"),
         CommandSpec("tools/check_glyph_no_forbidden_artifacts.py"),
