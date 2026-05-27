@@ -48,3 +48,12 @@ Relation to the existing Tilt mappings:
 - The previous fixture-only binding change in `docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json` did **not** update the active on-device profile during normal firmware update.
 - Source trace confirms the fixture file is not firmware build-consumed runtime source.
 - Dedicated LT3 remains unverified until the active profile is actually updated through a source-backed active-profile path (for example configurator config import/write), or through a default-restore/fresh-install path if factory defaults are changed.
+
+## 2026-05-27 Amendment: Source-Backed Application Path Added
+
+- This branch adds a validated active-profile artifact path:
+  - `docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json`
+  - `tools/check_glyph_active_ultimate_lt3_config_artifact.py`
+  - `docs/calibration/glyph_active_ultimate_lt3_config_artifact_2026-05-27.md`
+- This path is intended for manual configurator import/apply, which then writes active config through the source-backed firmware set-config persistence path.
+- Standalone LT3 remains unverified until the artifact is applied and a new hardware run is recorded.

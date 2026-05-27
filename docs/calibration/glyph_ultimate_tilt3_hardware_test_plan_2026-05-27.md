@@ -7,6 +7,9 @@ Manual hardware test plan for `glyph/gfw2-ultimate-tilt3-runtime`.
 - No flashing automation is included.
 - No push-to-device automation is included.
 - Results must not claim PASS until measured on hardware.
+- This plan requires one recorded application method before test execution:
+  - `ARTIFACT_IMPORT` using `docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json`, or
+  - `DEFAULT_RESTORE_FRESH_INSTALL` if using a default-source path in a different branch.
 
 ## Expected Tilt3 Table
 
@@ -33,6 +36,7 @@ leftStickY = 128 + directions.y * 42
 
 | Area | Input | Directions | Expected result | Status |
 | --- | --- | --- | --- | --- |
+| Application path record | N/A | N/A | Record exactly one: `ARTIFACT_IMPORT` or `DEFAULT_RESTORE_FRESH_INSTALL` before test evidence | NOT_RECORDED |
 | Standalone physical LT3 | Physical `BTN_LT3` (remapped to logical `BTN_LT3` in Ultimate MVP profile) | 1..9 | Tilt3 table above | NOT_TESTED |
 | LT1+LT2 Tilt3 regression | `LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 mixed input | `LT3+LT1` | 1..9 | Tilt3 table above | NOT_TESTED |
