@@ -24,6 +24,7 @@ REQUIRED_NEW_DOCS = [
     "docs/calibration/glyph_ultimate_lt3_profile_binding_2026-05-27.md",
     "docs/calibration/glyph_active_ultimate_lt3_config_artifact_2026-05-27.md",
     "docs/calibration/glyph_ultimate_lt3_standalone_hardware_result_2026-05-27.md",
+    "docs/calibration/glyph_ultimate_lt3_dpad_fix_hardware_result_2026-05-27.md",
     "docs/calibration/glyph_serial_active_config_writer_trace_2026-05-27.md",
     "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
     "tools/check_glyph_user_requirements_packet.py",

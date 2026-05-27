@@ -65,3 +65,9 @@ Warnings:
 - The serial config write path is now hardware-proven to activate standalone LT3 behavior.
 - After apply, the active artifact/profile mapping was observed to produce duplicate D-pad Left behavior.
 - This branch repairs the D-pad Down mapping in the active profile artifacts when source evidence supports the specific `BTN_RF10 -> BTN_RF7` correction.
+
+## 2026-05-27 Amendment: Repaired Artifact Final Hardware Confirmation
+
+- Repaired artifact apply was hardware-confirmed as working.
+- Duplicate D-pad Left defect is fixed in the active profile mapping outcome.
+- Standalone physical LT3 remains hardware-verified through the serial-config-applied active profile path.
