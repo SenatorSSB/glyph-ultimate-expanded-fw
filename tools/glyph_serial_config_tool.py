@@ -395,6 +395,12 @@ def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> lis
     ultimate_mode = ultimate_modes[0]
     remaps = list(ultimate_mode.button_remapping)
 
+    rf3_entries = [
+        remap for remap in remaps if remap.physical_button == config_pb2.BTN_RF3
+    ]
+    rf4_entries = [
+        remap for remap in remaps if remap.physical_button == config_pb2.BTN_RF4
+    ]
     rf3_to_lt1 = [
         remap
         for remap in remaps
@@ -408,29 +414,57 @@ def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> lis
     lt3_entries = [remap for remap in remaps if remap.physical_button == config_pb2.BTN_LT3]
     lt3_to_lt3 = [remap for remap in lt3_entries if remap.activates == config_pb2.BTN_LT3]
     lt3_to_lf4 = [remap for remap in lt3_entries if remap.activates == config_pb2.BTN_LF4]
+    semantic_remap_count = sum(
+        1
+        for remap in remaps
+        if remap.activates not in (config_pb2.BTN_UNSPECIFIED, remap.physical_button)
+    )
+    identity_mode = semantic_remap_count == 0
+    historical_mode = (
+        len(rf3_to_lt1) == 1 and len(rf4_to_lt2) == 1 and len(lt3_to_lt3) == 1
+    )
 
-    if len(rf3_to_lt1) != 1:
+    if len(rf3_entries) != 1:
         failures.append(
-            "expected exactly one BTN_RF3 -> BTN_LT1 mapping, "
-            f"found {len(rf3_to_lt1)}"
+            "expected exactly one BTN_RF3 physical remap entry, "
+            f"found {len(rf3_entries)}"
         )
-    if len(rf4_to_lt2) != 1:
+    if len(rf4_entries) != 1:
         failures.append(
-            "expected exactly one BTN_RF4 -> BTN_LT2 mapping, "
-            f"found {len(rf4_to_lt2)}"
+            "expected exactly one BTN_RF4 physical remap entry, "
+            f"found {len(rf4_entries)}"
         )
     if len(lt3_entries) != 1:
         failures.append(
             "expected exactly one BTN_LT3 physical remap entry, "
             f"found {len(lt3_entries)}"
         )
-    if len(lt3_to_lt3) != 1:
+    if lt3_to_lf4:
+        failures.append("unexpected BTN_LT3 -> BTN_LF4 mapping present")
+
+    if not historical_mode and not identity_mode:
+        failures.append(
+            "expected either historical LT3 remap bindings "
+            "(RF3->LT1, RF4->LT2, LT3->LT3) or identity-baseline remap representation"
+        )
+    if historical_mode and identity_mode:
+        failures.append("ambiguous mode: both historical and identity conditions matched")
+
+    if historical_mode and len(rf3_to_lt1) != 1:
+        failures.append(
+            "expected exactly one BTN_RF3 -> BTN_LT1 mapping, "
+            f"found {len(rf3_to_lt1)}"
+        )
+    if historical_mode and len(rf4_to_lt2) != 1:
+        failures.append(
+            "expected exactly one BTN_RF4 -> BTN_LT2 mapping, "
+            f"found {len(rf4_to_lt2)}"
+        )
+    if historical_mode and len(lt3_to_lt3) != 1:
         failures.append(
             "expected exactly one BTN_LT3 -> BTN_LT3 mapping, "
             f"found {len(lt3_to_lt3)}"
         )
-    if lt3_to_lf4:
-        failures.append("unexpected BTN_LT3 -> BTN_LF4 mapping present")
 
     return failures
 

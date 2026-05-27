@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate uploaded MVP profile remaps for Tilt1/Tilt2 button ID confirmation."""
+"""Validate Tilt button ID probe in historical remap mode or identity baseline mode."""
 
 from __future__ import annotations
 
@@ -53,20 +53,51 @@ def main() -> int:
 
     remaps = _remap_map(PROFILE_FIXTURE)
 
-    expected = {
+    historical_expected = {
         "BTN_RF3": "BTN_LT1",
         "BTN_RF4": "BTN_LT2",
     }
+    identity_expected = {
+        "BTN_RF3": None,
+        "BTN_RF4": None,
+    }
     failures: list[str] = []
-    for physical_button, logical_input in expected.items():
-        observed = remaps.get(physical_button)
-        if observed != logical_input:
-            failures.append(f"{physical_button} expected {logical_input}, got {observed!r}")
+
+    historical_matches = all(
+        remaps.get(physical_button) == logical_input
+        for physical_button, logical_input in historical_expected.items()
+    )
+    identity_matches = all(
+        remaps.get(physical_button) == logical_input
+        for physical_button, logical_input in identity_expected.items()
+    )
+
+    semantic_remap_count = sum(
+        1
+        for logical in remaps.values()
+        if logical is not None and logical != "BTN_UNSPECIFIED"
+    )
+
+    profile_mode = "UNDETERMINED"
+    if historical_matches:
+        profile_mode = "HISTORICAL_LT3_DPAD_REMAP"
+    elif identity_matches:
+        profile_mode = "IDENTITY_BASELINE"
+        if semantic_remap_count != 0:
+            failures.append(
+                "identity baseline expected no semantic remaps in MODE_ULTIMATE remap map"
+            )
+    else:
+        for physical_button, logical_input in historical_expected.items():
+            observed = remaps.get(physical_button)
+            failures.append(f"{physical_button} expected {logical_input!r} or None, got {observed!r}")
 
     print("tilt1_physical_button=BTN_RF3")
     print(f"tilt1_logical_post_remap_input={remaps.get('BTN_RF3')}")
     print("tilt2_physical_button=BTN_RF4")
     print(f"tilt2_logical_post_remap_input={remaps.get('BTN_RF4')}")
+    print(f"profile_mode={profile_mode}")
+    print(f"semantic_remap_count={semantic_remap_count}")
 
     if failures:
         for failure in failures:
@@ -74,7 +105,12 @@ def main() -> int:
         print("status=FAIL")
         return 1
 
-    print("status=PASS")
+    if profile_mode == "IDENTITY_BASELINE":
+        print("runtime_followup_required=true")
+        print("status=PASS_IDENTITY_BASELINE")
+    else:
+        print("runtime_followup_required=false")
+        print("status=PASS_HISTORICAL_REMAP")
     return 0
 
 

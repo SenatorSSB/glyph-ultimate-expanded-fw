@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only checker for Ultimate D-pad profile mapping in LT3 artifacts/fixtures."""
+"""Read-only checker for Ultimate D-pad mapping in historical or identity-baseline mode."""
 
 from __future__ import annotations
 
@@ -29,13 +29,6 @@ EXPECTED_DPAD_CLUSTER = {
     "BTN_RF10": "BTN_RF7",
     "BTN_LF6": "BTN_LF8",
     "BTN_RF11": "BTN_LF6",
-}
-
-EXPECTED_DPAD_LOGICAL_COUNTS = {
-    "BTN_RF8": 1,
-    "BTN_RF7": 1,
-    "BTN_LF8": 1,
-    "BTN_LF6": 1,
 }
 
 EXPECTED_TILT_BINDINGS = {
@@ -112,7 +105,7 @@ def _find(remaps: list[dict[str, str | None]], physical: str, logical: str) -> l
     ]
 
 
-def _check_target_file(path: Path) -> tuple[list[str], str]:
+def _check_target_file(path: Path) -> tuple[list[str], str, str]:
     failures: list[str] = []
 
     try:
@@ -120,12 +113,11 @@ def _check_target_file(path: Path) -> tuple[list[str], str]:
         mode = _ultimate_mode(payload)
         remaps = _normalized_remaps(mode)
     except (FileNotFoundError, json.JSONDecodeError, AssertionError) as exc:
-        return [str(exc)], "UNAVAILABLE"
+        return [str(exc)], "UNAVAILABLE", "UNAVAILABLE"
 
     cluster_render_parts: list[str] = []
-    cluster_entries = [
-        remap for remap in remaps if remap["physicalButton"] in EXPECTED_DPAD_CLUSTER
-    ]
+    historical_matches = 0
+    identity_matches = 0
 
     for physical, expected_logical in EXPECTED_DPAD_CLUSTER.items():
         matches = [
@@ -138,49 +130,70 @@ def _check_target_file(path: Path) -> tuple[list[str], str]:
             cluster_render_parts.append(f"{physical}->AMBIGUOUS({len(matches)})")
             continue
 
-        actual_logical = matches[0]["activates"]
+        cluster_entry = matches[0]
+        actual_logical = cluster_entry["activates"]
         cluster_render_parts.append(f"{physical}->{actual_logical}")
-        if actual_logical != expected_logical:
-            failures.append(
-                f"{_rel(path)} expected {physical} -> {expected_logical}, found {physical} -> {actual_logical}"
-            )
+        if actual_logical == expected_logical:
+            historical_matches += 1
+        if actual_logical is None:
+            identity_matches += 1
 
-    for logical, expected_count in EXPECTED_DPAD_LOGICAL_COUNTS.items():
-        count = sum(1 for remap in remaps if remap["activates"] == logical)
-        if count != expected_count:
-            failures.append(
-                f"{_rel(path)} expected exactly {expected_count} mapping(s) to {logical}, found {count}"
-            )
-
-    lf8_cluster_count = sum(
-        1 for remap in cluster_entries if remap["activates"] == "BTN_LF8"
+    semantic_remap_count = sum(
+        1
+        for remap in remaps
+        if remap["activates"] is not None and remap["activates"] != remap["physicalButton"]
     )
-    if lf8_cluster_count != 1:
+    all_omitted_activates = all(remap["activates"] is None for remap in remaps)
+
+    mode = "UNDETERMINED"
+    if historical_matches == len(EXPECTED_DPAD_CLUSTER):
+        mode = "HISTORICAL_LT3_DPAD_REMAP"
+        expected_logicals = set(EXPECTED_DPAD_CLUSTER.values())
+        for logical in sorted(expected_logicals):
+            count = sum(1 for remap in remaps if remap["activates"] == logical)
+            if count != 1:
+                failures.append(
+                    f"{_rel(path)} expected exactly one mapping to {logical}, found {count}"
+                )
+        for physical, logical in EXPECTED_TILT_BINDINGS.items():
+            matches = _find(remaps, physical, logical)
+            if len(matches) != 1:
+                failures.append(
+                    f"{_rel(path)} expected exactly one {physical} -> {logical}, found {len(matches)}"
+                )
+    elif identity_matches == len(EXPECTED_DPAD_CLUSTER):
+        mode = "IDENTITY_BASELINE"
+        if not all_omitted_activates or semantic_remap_count != 0:
+            failures.append(
+                f"{_rel(path)} identity baseline mode must omit activates and remove semantic remaps"
+            )
+    else:
         failures.append(
-            f"{_rel(path)} expected exactly one BTN_LF8 mapping in D-pad cluster, found {lf8_cluster_count}"
+            f"{_rel(path)} D-pad cluster does not match historical remap or identity baseline mode"
         )
 
-    for physical, logical in EXPECTED_TILT_BINDINGS.items():
-        matches = _find(remaps, physical, logical)
-        if len(matches) != 1:
-            failures.append(
-                f"{_rel(path)} expected exactly one {physical} -> {logical}, found {len(matches)}"
-            )
-
-    return failures, ", ".join(cluster_render_parts)
+    return failures, ", ".join(cluster_render_parts), mode
 
 
 def main() -> int:
     failures: list[str] = []
+    modes: list[str] = []
 
     print("checker=ultimate_dpad_profile_mapping")
     print("mode=MODE_ULTIMATE")
 
     for path in TARGET_FILES:
-        file_failures, cluster = _check_target_file(path)
+        file_failures, cluster, file_mode = _check_target_file(path)
         print(f"file={_rel(path)}")
+        print(f"profile_mode={file_mode}")
         print(f"resolved_dpad_cluster={cluster}")
         failures.extend(file_failures)
+        modes.append(file_mode)
+
+    resolved_modes = sorted(set(modes))
+    print("resolved_modes=" + ",".join(resolved_modes))
+    if len(resolved_modes) > 1:
+        failures.append("inconsistent D-pad checker modes across target files")
 
     if failures:
         for failure in failures:

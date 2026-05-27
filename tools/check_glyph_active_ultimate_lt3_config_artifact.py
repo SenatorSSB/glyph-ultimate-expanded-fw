@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only checker for the active Ultimate LT3 config artifact."""
+"""Read-only checker for historical LT3 artifact mode or identity baseline mode."""
 
 from __future__ import annotations
 
@@ -78,8 +78,9 @@ def _extract_remaps(mode: dict[str, Any]) -> tuple[list[str], list[dict[str, str
 def main() -> int:
     failures: list[str] = []
 
+    artifact_mode = "UNDETERMINED"
     physical_lt3_bound_to_logical_lt3 = False
-    previous_lt3_to_lf4_binding_removed = False
+    previous_lt3_to_lf4_binding_removed = True
     existing_tilt1_tilt2_bindings_preserved = False
 
     if not TARGET_ARTIFACT.exists():
@@ -103,16 +104,6 @@ def main() -> int:
                 remap_failures, remaps = _extract_remaps(modes[0])
                 failures.extend(remap_failures)
 
-                rf3_to_lt1 = [
-                    remap
-                    for remap in remaps
-                    if remap["physicalButton"] == "BTN_RF3" and remap["activates"] == "BTN_LT1"
-                ]
-                rf4_to_lt2 = [
-                    remap
-                    for remap in remaps
-                    if remap["physicalButton"] == "BTN_RF4" and remap["activates"] == "BTN_LT2"
-                ]
                 lt3_all = [
                     remap for remap in remaps if remap["physicalButton"] == "BTN_LT3"
                 ]
@@ -123,38 +114,59 @@ def main() -> int:
                     remap for remap in lt3_all if remap["activates"] == "BTN_LF4"
                 ]
 
-                if len(rf3_to_lt1) != 1:
-                    failures.append(
-                        "expected exactly one BTN_RF3 -> BTN_LT1 mapping, "
-                        f"found {len(rf3_to_lt1)}"
-                    )
-                if len(rf4_to_lt2) != 1:
-                    failures.append(
-                        "expected exactly one BTN_RF4 -> BTN_LT2 mapping, "
-                        f"found {len(rf4_to_lt2)}"
-                    )
                 if len(lt3_all) != 1:
                     failures.append(
                         "expected exactly one BTN_LT3 physical remap entry, "
                         f"found {len(lt3_all)}"
                     )
-                if len(lt3_to_lt3) != 1:
-                    failures.append(
-                        "expected exactly one BTN_LT3 -> BTN_LT3 mapping, "
-                        f"found {len(lt3_to_lt3)}"
-                    )
                 if lt3_to_lf4:
                     failures.append("unexpected BTN_LT3 -> BTN_LF4 mapping present")
 
-                physical_lt3_bound_to_logical_lt3 = len(lt3_all) == 1 and len(lt3_to_lt3) == 1
-                previous_lt3_to_lf4_binding_removed = len(lt3_to_lf4) == 0
-                existing_tilt1_tilt2_bindings_preserved = (
-                    len(rf3_to_lt1) == 1 and len(rf4_to_lt2) == 1
+                rf3_to_lt1 = [
+                    remap
+                    for remap in remaps
+                    if remap["physicalButton"] == "BTN_RF3" and remap["activates"] == "BTN_LT1"
+                ]
+                rf4_to_lt2 = [
+                    remap
+                    for remap in remaps
+                    if remap["physicalButton"] == "BTN_RF4" and remap["activates"] == "BTN_LT2"
+                ]
+                semantic_remap_count = sum(
+                    1
+                    for remap in remaps
+                    if remap["activates"] is not None
+                    and remap["activates"] != remap["physicalButton"]
                 )
+                all_omitted_activates = all(remap["activates"] is None for remap in remaps)
+
+                historical_mode = (
+                    len(rf3_to_lt1) == 1 and len(rf4_to_lt2) == 1 and len(lt3_to_lt3) == 1
+                )
+                identity_mode = all_omitted_activates and semantic_remap_count == 0
+
+                if historical_mode and identity_mode:
+                    failures.append("ambiguous artifact mode: both historical and identity conditions matched")
+                elif historical_mode:
+                    artifact_mode = "HISTORICAL_LT3_DPAD_REMAP"
+                    physical_lt3_bound_to_logical_lt3 = len(lt3_all) == 1 and len(lt3_to_lt3) == 1
+                    existing_tilt1_tilt2_bindings_preserved = True
+                elif identity_mode:
+                    artifact_mode = "IDENTITY_BASELINE"
+                    physical_lt3_bound_to_logical_lt3 = len(lt3_all) == 1 and all_omitted_activates
+                    existing_tilt1_tilt2_bindings_preserved = False
+                else:
+                    failures.append(
+                        "unsupported MODE_ULTIMATE mapping state: expected either "
+                        "historical LT3 remap mode or identity baseline mode"
+                    )
+
+                previous_lt3_to_lf4_binding_removed = len(lt3_to_lf4) == 0
 
     print(f"target_file_checked={_rel(TARGET_ARTIFACT)}")
     print("implementation_kind=importable_config_profile_artifact")
     print("artifact_kind=profile_config_json_projection")
+    print(f"artifact_mode={artifact_mode}")
     print("requires_manual_import=true")
     print("applies_to_default_restore_only=false")
     print(

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only checker for Ultimate MVP LT3 profile binding."""
+"""Read-only checker for Ultimate MVP historical LT3 or identity baseline binding."""
 
 from __future__ import annotations
 
@@ -69,8 +69,9 @@ def main() -> int:
     rel_source = SOURCE_FILE.relative_to(REPO_ROOT)
     print(f"source_file_checked={rel_source}")
 
+    profile_mode = "UNDETERMINED"
     physical_lt3_bound_to_logical_lt3 = False
-    previous_lt3_to_lf4_binding_removed = False
+    previous_lt3_to_lf4_binding_removed = True
     existing_tilt1_tilt2_bindings_preserved = False
 
     failures: list[str] = []
@@ -93,22 +94,39 @@ def main() -> int:
     lt3_to_lt3 = [r for r in lt3_all if r["activates"] == "BTN_LT3"]
     lt3_to_lf4 = [r for r in lt3_all if r["activates"] == "BTN_LF4"]
 
-    if len(rf3_matches) != 1:
-        failures.append(f"expected exactly one BTN_RF3 -> BTN_LT1 mapping, found {len(rf3_matches)}")
-    if len(rf4_matches) != 1:
-        failures.append(f"expected exactly one BTN_RF4 -> BTN_LT2 mapping, found {len(rf4_matches)}")
-
     if len(lt3_all) != 1:
         failures.append(f"expected exactly one BTN_LT3 physical mapping, found {len(lt3_all)}")
-    if len(lt3_to_lt3) != 1:
-        failures.append(f"expected BTN_LT3 -> BTN_LT3 mapping, found {len(lt3_to_lt3)}")
     if lt3_to_lf4:
         failures.append("found removed binding BTN_LT3 -> BTN_LF4")
 
-    physical_lt3_bound_to_logical_lt3 = len(lt3_to_lt3) == 1 and len(lt3_all) == 1
-    previous_lt3_to_lf4_binding_removed = len(lt3_to_lf4) == 0
-    existing_tilt1_tilt2_bindings_preserved = len(rf3_matches) == 1 and len(rf4_matches) == 1
+    all_omitted_activates = all(remap["activates"] is None for remap in remaps)
+    semantic_remap_count = sum(
+        1
+        for remap in remaps
+        if remap["activates"] is not None and remap["activates"] != remap["physicalButton"]
+    )
+    historical_mode = len(rf3_matches) == 1 and len(rf4_matches) == 1 and len(lt3_to_lt3) == 1
+    identity_mode = all_omitted_activates and semantic_remap_count == 0
 
+    if historical_mode and identity_mode:
+        failures.append("ambiguous profile mode: both historical and identity conditions matched")
+    elif historical_mode:
+        profile_mode = "HISTORICAL_LT3_DPAD_REMAP"
+        physical_lt3_bound_to_logical_lt3 = len(lt3_to_lt3) == 1 and len(lt3_all) == 1
+        existing_tilt1_tilt2_bindings_preserved = True
+    elif identity_mode:
+        profile_mode = "IDENTITY_BASELINE"
+        physical_lt3_bound_to_logical_lt3 = len(lt3_all) == 1 and all_omitted_activates
+        existing_tilt1_tilt2_bindings_preserved = False
+    else:
+        failures.append(
+            "unsupported MODE_ULTIMATE mapping state: expected either historical LT3 remap mode "
+            "or identity baseline mode"
+        )
+
+    previous_lt3_to_lf4_binding_removed = len(lt3_to_lf4) == 0
+
+    print(f"profile_mode={profile_mode}")
     print(f"physical_lt3_bound_to_logical_lt3={'true' if physical_lt3_bound_to_logical_lt3 else 'false'}")
     print(
         "previous_lt3_to_lf4_binding_removed="

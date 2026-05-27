@@ -42,3 +42,9 @@
 
 - Nunchuk not tested.
 - This result applies to the current active Ultimate MVP profile artifact path, not as a generic guarantee for future profiles.
+
+## 2026-05-27 Amendment: Identity Baseline Transition
+
+- This hardware result remains valid historical evidence for the serial-applied LT3/D-pad remap artifact path used at the time of test execution.
+- The identity-baseline branch moves active development away from profile semantic remap preservation and toward runtime-owned behavior.
+- Future identity-baseline behavior requires dedicated runtime implementation and new hardware testing before any equivalent LT3/D-pad behavioral claims are made.
