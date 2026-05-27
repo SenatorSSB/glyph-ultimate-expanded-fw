@@ -51,6 +51,7 @@ def default_commands() -> list[CommandSpec]:
         CommandSpec("tools/check_glyph_ultimate_tilt3_runtime_source.py"),
         CommandSpec("tools/check_glyph_ultimate_lt3_profile_binding.py"),
         CommandSpec("tools/check_glyph_active_ultimate_lt3_config_artifact.py"),
+        CommandSpec("tools/check_glyph_ultimate_dpad_profile_mapping.py"),
         CommandSpec("tools/check_glyph_serial_config_writer.py"),
         CommandSpec("tools/run_glyph_next_runtime_change_readiness_checks.py"),
         CommandSpec("tools/check_glyph_merged_state_consistency.py"),

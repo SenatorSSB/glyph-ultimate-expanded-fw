@@ -59,3 +59,9 @@ Warnings:
 - This observation does not disprove the artifact content itself.
 - It means the webapp import path is not treated here as a verified native config write path for this LT3 binding.
 - Active direction is now Path B: direct source-backed serial/config write flow when protocol and payload handling are source-confirmed.
+
+## 2026-05-27 Amendment: Serial Write Success and D-pad Profile Defect
+
+- The serial config write path is now hardware-proven to activate standalone LT3 behavior.
+- After apply, the active artifact/profile mapping was observed to produce duplicate D-pad Left behavior.
+- This branch repairs the D-pad Down mapping in the active profile artifacts when source evidence supports the specific `BTN_RF10 -> BTN_RF7` correction.

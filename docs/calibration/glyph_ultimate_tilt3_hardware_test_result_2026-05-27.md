@@ -105,3 +105,11 @@ Interpretation for this result document:
 - After webapp import/push attempts, standalone LT3 still did not produce Tilt3 in observed hardware behavior.
 - `LT1+LT2 -> Tilt3` remained the verified path.
 - Dedicated standalone LT3 remains unverified pending a verified active config write/readback path (Path B) or another verified configurator write path.
+
+## 2026-05-27 Amendment: Serial Active Config Standalone LT3 Validation
+
+- After serial active config write, standalone physical LT3 was hardware-verified.
+- `LT1+LT2` remains verified.
+- All Tilt modifier combinations work as expected.
+- Right-stick and D-pad inputs are orthogonal to Tilt3.
+- D-pad visual/profile duplicate-left defect remains open.
