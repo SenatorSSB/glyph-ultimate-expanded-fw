@@ -52,6 +52,12 @@ leftStickY = 128 + directions.y * 42
 | Application path record | N/A | N/A | Record exactly one: `ARTIFACT_IMPORT` or `DEFAULT_RESTORE_FRESH_INSTALL` before test evidence | NOT_RECORDED |
 | Standalone physical LT3 | Physical `BTN_LT3` (remapped to logical `BTN_LT3` in Ultimate MVP profile) | 1..9 | Tilt3 table above | NOT_TESTED |
 | LT1+LT2 Tilt3 regression | `LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
+| D-pad Up physical mapping (post-fix profile) | D-pad Up physical binding | N/A | D-pad Up only (`BTN_RF8`) | NOT_TESTED |
+| D-pad Down physical mapping (post-fix profile) | D-pad Down physical binding | N/A | D-pad Down only (`BTN_RF7`) | NOT_TESTED |
+| D-pad Left physical mapping (post-fix profile) | D-pad Left physical binding | N/A | D-pad Left only (`BTN_LF8`) | NOT_TESTED |
+| D-pad Right physical mapping (post-fix profile) | D-pad Right physical binding | N/A | D-pad Right only (`BTN_LF6`) | NOT_TESTED |
+| D-pad duplicate-left guard (post-fix profile) | D-pad cluster smoke | N/A | No duplicate D-pad Left behavior | NOT_TESTED |
+| Orthogonality regression (post-fix profile) | Tilt3 with D-pad and right-stick smoke | Representative smoke | Tilt3 remains orthogonal to D-pad/right-stick | NOT_TESTED |
 | Tilt3 mixed input | `LT3+LT1` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 mixed input | `LT3+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |
 | Tilt3 mixed input | `LT3+LT1+LT2` | 1..9 | Tilt3 table above | NOT_TESTED |

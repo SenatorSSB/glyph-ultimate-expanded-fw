@@ -169,6 +169,7 @@ def main() -> int:
         "existing_tilt1_tilt2_bindings_preserved="
         f"{'true' if existing_tilt1_tilt2_bindings_preserved else 'false'}"
     )
+    print("dpad_mapping_validation=covered_by_tools/check_glyph_ultimate_dpad_profile_mapping.py")
     print("active_device_profile_updated=false")
 
     if failures:
