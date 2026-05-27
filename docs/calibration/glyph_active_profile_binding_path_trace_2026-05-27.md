@@ -83,3 +83,17 @@
   - `BTN_LT3 -> BTN_LT3`
 - Keep runtime source unchanged.
 - Treat default-source edits as a separate, deliberate factory-profile change that requires fresh-install/default-restore semantics to affect already-provisioned devices.
+
+## 2026-05-27 Amendment: Implemented Active Artifact Path
+
+- This branch implements the Option 2 path by adding:
+  - `docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json`
+  - `tools/check_glyph_active_ultimate_lt3_config_artifact.py`
+  - `docs/calibration/glyph_active_ultimate_lt3_config_artifact_2026-05-27.md`
+- Implementation kind in this branch: validated importable config/profile artifact for manual configurator apply path.
+- Active application path remains:
+  - configurator config write (`CMD_SET_CONFIG`)
+  - `ConfiguratorBackend::HandleSetConfig`
+  - `Persistence::SaveConfig`
+- Caveat remains unchanged:
+  - no claim that an active device profile is updated until the artifact is manually imported/applied.

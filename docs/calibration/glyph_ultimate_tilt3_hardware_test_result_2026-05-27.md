@@ -90,3 +90,12 @@ Interpretation for this result document:
 - Post-binding-path review still found no standalone LT3 action on hardware.
 - `LT1+LT2 -> Tilt3` remains hardware-verified.
 - Dedicated LT3 remains blocked by the active profile binding path until the stored on-device Ultimate profile is actually updated.
+
+## 2026-05-27 Amendment: Next Application Path
+
+- This branch provides the next source-backed application path for active profile update:
+  - `docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json`
+  - manual configurator apply path to write active config
+- Existing hardware disposition in this file is still limited to:
+  - `PASS_TILT3_CHORD_PATH`
+- Dedicated standalone LT3 remains `NOT_TESTED_NO_ACTIONABLE_TILT3_BINDING` until that artifact/default path is applied and retested on hardware.
