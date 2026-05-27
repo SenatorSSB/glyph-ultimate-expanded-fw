@@ -71,3 +71,9 @@ Warnings:
 - Repaired artifact apply was hardware-confirmed as working.
 - Duplicate D-pad Left defect is fixed in the active profile mapping outcome.
 - Standalone physical LT3 remains hardware-verified through the serial-config-applied active profile path.
+
+## 2026-05-27 Amendment: Identity Baseline Supersession
+
+- The prior LT3-active artifact path remains successful historical evidence for validating the LT3/D-pad remap path.
+- The identity-baseline branch (`glyph/gfw2-ultimate-identity-profile-baseline`) supersedes this artifact as the active development baseline for future runtime-only custom behavior work.
+- Do not confuse historical LT3/D-pad remap artifact behavior with identity-baseline behavior; the identity baseline intentionally removes semantic remap assumptions so follow-up runtime implementation can own those behaviors explicitly.
