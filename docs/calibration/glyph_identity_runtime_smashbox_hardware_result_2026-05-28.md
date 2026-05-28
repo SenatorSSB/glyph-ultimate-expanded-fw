@@ -50,3 +50,12 @@
 
 - Direction-plus-A behavior changed after this hardware result to hard final direction+A overrides (`LT6=Down+A`, `RF12=Up+A`).
 - New hard override behavior requires a dedicated hardware validation pass before claiming hardware pass for those rows.
+
+## 2026-05-28 LT1/LT3 Reassignment Amendment
+
+- This PASS result predates the LT3/L reassignment, Y2/MY2 runtime scratch, and LT1 Z-airdodge low-magnitude override changes.
+- This PASS result therefore does not validate:
+  - `LT3 -> L`,
+  - `LT1 -> Z` plus low-magnitude table override,
+  - unreachable/scratched `Y2/MY2` runtime paths.
+- A new hardware validation run is required before claiming PASS for these reassigned rows.

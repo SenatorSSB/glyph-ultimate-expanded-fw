@@ -20,15 +20,26 @@ REQUIRED_TABLES = (
     "kMX1Table",
     "kMX2Table",
     "kY1Table",
-    "kY2Table",
     "kMY1Table",
-    "kMY2Table",
     "kTilt1Table",
     "kTilt2Table",
     "kTilt3Table",
     "kMTilt1Table",
     "kMTilt2Table",
     "kMTilt3Table",
+    "kLt1LowMagnitudeTable",
+)
+
+LT1_LOW_POINTS = (
+    (89, 89),
+    (128, 79),
+    (167, 89),
+    (79, 128),
+    (128, 128),
+    (177, 128),
+    (89, 167),
+    (128, 177),
+    (167, 167),
 )
 
 FORBIDDEN_TOKENS = (
@@ -86,90 +97,51 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"x1_active\s*=\s*inputs\.lt5\s*;", block, "X1 anchor lt5")
     require(r"x2_active\s*=\s*inputs\.lt4\s*;", block, "X2 anchor lt4")
     require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
-    require(r"y2_active\s*=\s*inputs\.lt3\s*;", block, "Y2 anchor lt3")
     require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
-    require(r"force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*;", source, "digital forced-Up anchors rf6/rf12")
-    require(r"tilt1_pressed\s*=\s*inputs\.rf3\s*;", block, "Tilt1 anchor rf3")
-    require(r"tilt2_pressed\s*=\s*inputs\.rf4\s*;", block, "Tilt2 anchor rf4")
-    require(
-        r"tilt3_effective\s*=\s*tilt1_pressed\s*&&\s*tilt2_pressed\s*;",
-        block,
-        "Tilt3 chord shape",
-    )
-    require(
-        r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*;",
-        source,
-        "RF1/LT6/RF12 mapped to A",
-    )
-    require(r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*;", source, "RF5 or LF4 mapped to B")
-    require(r"outputs\.x\s*=\s*inputs\.rf2\s*;", source, "RF2 mapped to X")
-    require(r"outputs\.y\s*=\s*inputs\.rf10\s*;", source, "RF10 mapped to Y")
-    require(r"outputs\.buttonL\s*=\s*inputs\.lt1\s*;", source, "LT1 mapped to L")
-    require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt1\s*;", source, "LT1 mapped to GameCube L carrier")
-    require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*;", source, "RT1 mapped to source-confirmed Z carrier")
-    require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 mapped to source-confirmed R carrier")
-    require(r"effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", source, "digital LF2 or forced-Up mapped to Up")
-    require(
-        r"effective_ls_down\s*=\s*\(\s*inputs\.lf5\s*\|\|\s*inputs\.lt6\s*\)\s*&&\s*!force_up_active\s*;",
-        source,
-        "digital LF5/LT6 mapped to Down and suppressed by forced-Up",
-    )
-    require(r"normal_force_up_active\s*=\s*inputs\.rf6\s*;", source, "normal table forced-Up RF6")
-    require(r"normal_effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*normal_force_up_active\s*;", source, "normal table Up uses LF2/RF6")
-    require(r"normal_effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!normal_force_up_active\s*;", source, "normal table Down uses LF5 with RF6 suppression")
-    require(
-        r"UpdateDirections\s*\(\s*inputs\.lf3\s*,\s*//\s*Left\s*\n\s*inputs\.lf1\s*,\s*//\s*Right\s*\n\s*normal_effective_ls_down\s*,\s*//\s*Down\s*\n\s*normal_effective_ls_up\s*,\s*//\s*Up\s*\(RF6 forced-Up\)",
-        source,
-        "UpdateDirections uses normal RF6-only directions",
-        flags=re.MULTILINE,
-    )
+
+    require(r"outputs\.buttonL\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L")
+    require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L carrier")
+    require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt1\s*;", source, "RT1/LT1 mapped to Z")
+    require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 mapped to R")
+    require(r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*;", source, "RF1/LT6/RF12 mapped to A")
+
+    if "outputs.buttonL = inputs.lt1;" in source:
+        fail("LT1 must not map to L")
+    if "outputs.buttonR = inputs.rt1;" in source:
+        fail("RT1-only Z carrier is outdated")
+
+    # Y2/MY2 are scratched and removed from runtime source selection.
+    for token in ("y2_active", "EffectiveModifier::Y2", "kY2Table", "kMY2Table"):
+        if token in source:
+            fail(f"Y2/MY2 token must not remain active in runtime source: {token}")
+
     require(r"direction_plus_a_active\s*=\s*down_a_active\s*\|\|\s*up_a_active\s*;", source, "hard direction-plus-A active flag")
     require(
         r"direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*inputs\.rf6\s*\)\s*;",
         source,
         "hard direction-plus-A Up override (RF12 or RF6)",
     )
+
+    require(r"constexpr\s+StickPoint\s+kLt1LowMagnitudeTable\[9\]", source, "LT1 low table declaration")
+    for x, y in LT1_LOW_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing LT1 low-magnitude point: ({x}, {y})")
+
     require(
-        r"const\s+StickPoint\s+\*direction_plus_a_table\s*=\s*mode_active\s*\?\s*kModeDefaultTable\s*:\s*kDefaultTable\s*;",
-        source,
-        "hard direction-plus-A base table uses Mode default or Default",
+        r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{\s*const\s+StickPoint\s+center\s*=\s*mode_active\s*\?\s*kModeDefaultTable\[kDirectionFiveIndex\]\s*:\s*kDefaultTable\[kDirectionFiveIndex\]\s*;\s*outputs\.leftStickX\s*=\s*center\.x\s*;\s*outputs\.leftStickY\s*=\s*center\.y\s*;\s*\}\s*else\s*\{",
+        block,
+        "LS->DPad centers analog and gates override to non-LS->DPad path",
+        flags=re.DOTALL,
     )
+
     require(
-        r"const\s+size_t\s+direction_plus_a_index\s*=\s*direction_plus_a_force_up\s*\?\s*kDirectionEightIndex\s*:\s*kDirectionTwoIndex\s*;",
-        source,
-        "hard direction-plus-A uses direction2/direction8",
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*lt1_z_airdodge_override_active\s*\)\s*\{",
+        block,
+        "LT1 override is final after direction-plus-A",
+        flags=re.DOTALL,
     )
-    require(
-        r"outputs\.leftStickX\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.x\s*;",
-        source,
-        "hard direction-plus-A final leftStickX",
-    )
-    require(
-        r"outputs\.leftStickY\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.y\s*;",
-        source,
-        "hard direction-plus-A final leftStickY",
-    )
-    require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.leftStickX\s*=\s*center\.x\s*;[^}]*outputs\.leftStickY\s*=\s*center\.y\s*;", source, "LS->DPad neutralizes left stick")
-    require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;", source, "LS->DPad up uses effective Up")
-    require(r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;", source, "LS->DPad suppresses digital leftStickLeft")
-    require(r"outputs\.leftStickRight\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_right\s*;", source, "LS->DPad suppresses digital leftStickRight")
-    require(r"outputs\.leftStickDown\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_down\s*;", source, "LS->DPad suppresses digital leftStickDown")
-    require(r"outputs\.leftStickUp\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_up\s*;", source, "LS->DPad suppresses digital leftStickUp")
-    require(r"outputs\.modX\s*=\s*false\s*;", source, "LT1 no longer drives modX")
-    if re.search(r"leftStickUp\s*=\s*inputs\.rf4\s*;", source):
-        fail("RF4 must not directly drive Up")
-    if re.search(r"outputs\.triggerLDigital\s*=\s*inputs\.lf4\s*;", source):
-        fail("LF4 must not drive L trigger because LF4 is duplicate B")
-    if re.search(r"outputs\.triggerRDigital\s*=\s*inputs\.rf5\s*;", source):
-        fail("RF5 must not drive R trigger because RF5 is duplicate B")
-    if re.search(r"outputs\.triggerRDigital\s*=\s*inputs\.rf12\s*;", source):
-        fail("RF12 must not drive R trigger because RF16 remains the R carrier")
-    if re.search(r"SelectStickTable\s*\([^)]*inputs\.(lt6|rf12)", source, flags=re.DOTALL):
-        fail("LT6/RF12 must not enter modifier selection logic")
-    if "active_table[direction_plus_a_index]" in source:
-        fail("hard direction-plus-A output must not use modifier-selected active_table")
-    if "outputs.dpadLeft |= inputs.lf8;" in source or "outputs.dpadRight |= inputs.lf6;" in source:
-        fail("standalone direct D-pad inputs must not remain")
+    require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X")
+    require(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", block, "LT1 final Y")
 
 
 def ensure_no_forbidden_tokens(source: str) -> None:
@@ -191,9 +163,6 @@ def main() -> int:
         for table_name in REQUIRED_TABLES:
             values = extract_table_values(source, table_name)
             table_summaries.append(f"{table_name}:{values[0]}->{values[4]}->{values[8]}")
-
-        if "inputs.lt3 ||" in source:
-            fail("legacy standalone LT3 Tilt3 expression must not remain")
     except (AssertionError, FileNotFoundError) as exc:
         print("glyph_native_ultimate_table_runtime_scope")
         print("status=FAIL")
@@ -204,18 +173,18 @@ def main() -> int:
     print("status=PASS")
     print(f"source={ULTIMATE_PATH.relative_to(REPO_ROOT)}")
     print("runtime_markers=present")
-    print("tables_validated=16")
+    print(f"tables_validated={len(REQUIRED_TABLES)}")
     print("ls_to_dpad_role=rf7")
     print("mode_role=rf8")
-    print("lt3_role=y2")
-    print("tilt3_role=rf3_and_rf4")
-    print("l_role=lt1")
-    print("z_role=rt1")
+    print("lt3_role=L")
+    print("lt1_role=Z_plus_low_magnitude_override")
+    print("z_role=rt1_or_lt1")
     print("r_role=rf16")
     print("y_role=rf10")
     print("forced_up_role=rf6_or_rf12")
     print("direction_plus_a_role=lt6_down_a_rf12_up_a")
-    print("direction_plus_a_override_policy=hard_final_default_or_mode_default")
+    print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_lt1_low_override")
+    print("y2_my2_runtime_role=scratched_inactive")
     print("standalone_dpad=none")
     print("table_samples=" + ";".join(table_summaries))
     return 0

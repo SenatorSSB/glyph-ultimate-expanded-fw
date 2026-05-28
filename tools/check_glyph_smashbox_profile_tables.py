@@ -9,6 +9,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOC_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_smash_box_profile_output_tables_2026-05-27.md"
+RUNTIME_DOC_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_smashbox_modifiers_runtime_implementation_2026-05-27.md"
 
 EXPECTED: dict[str, dict[str, tuple[int, int]]] = {
     "Default": {
@@ -133,8 +134,13 @@ def main() -> int:
         print(f"status=FAIL")
         print(f"failure=missing_doc:{DOC_PATH.relative_to(REPO_ROOT)}")
         return 1
+    if not RUNTIME_DOC_PATH.exists():
+        print("status=FAIL")
+        print(f"failure=missing_runtime_doc:{RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
+        return 1
 
     text = DOC_PATH.read_text(encoding="utf-8")
+    runtime_doc_text = RUNTIME_DOC_PATH.read_text(encoding="utf-8")
 
     failures: list[str] = []
     for table_name, expected_values in EXPECTED.items():
@@ -146,17 +152,25 @@ def main() -> int:
         except AssertionError as exc:
             failures.append(str(exc))
 
+    # Historical table values should remain documented while runtime marks Y2/MY2 inactive.
+    if re.search(r"Y2/MY2.*scratched|scratched.*Y2/MY2", runtime_doc_text, flags=re.IGNORECASE) is None:
+        failures.append("runtime_doc_missing_y2_my2_scratched_policy")
+
     if failures:
         print("status=FAIL")
         print(f"doc={DOC_PATH.relative_to(REPO_ROOT)}")
+        print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
         for failure in failures:
             print(f"failure={failure}")
         return 1
 
     print("status=PASS")
     print(f"doc={DOC_PATH.relative_to(REPO_ROOT)}")
+    print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print(f"tables_validated={len(EXPECTED)}")
     print("directions_validated=1..9")
+    print("y2_my2_table_values=historical_preserved")
+    print("y2_my2_runtime_role=scratched_inactive")
     return 0
 
 

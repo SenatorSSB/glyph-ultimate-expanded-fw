@@ -33,11 +33,12 @@ Main game buttons:
 - `LF4 = B`
 - `RF2 = X`
 - `RF10 = Y`
+- `LT1 = Z` (plus low-magnitude directional override when LS->DPad is inactive)
 - `RT1 = Z`
 
 Shoulders / triggers:
 
-- `LT1 = L`
+- `LT3 = L`
 - `RF16 = R`
 
 Source-backed carrier note:
@@ -45,8 +46,9 @@ Source-backed carrier note:
 - `OutputState` has no literal `z` member.
 - The inspected GameCube/N64 backends serialize `outputs.buttonR` as report `z`.
 - The inspected GameCube/N64 backends serialize `outputs.triggerRDigital` as report `r`.
-- Runtime therefore assigns `RT1` to `outputs.buttonR` for source-confirmed Z and assigns `RF16` to `outputs.triggerRDigital` for source-confirmed R on those backends.
-- `LT1` drives `outputs.buttonL` and `outputs.triggerLDigital`; the analog L trigger follows the digital carrier at value `140`.
+- Runtime therefore assigns `RT1` and `LT1` to `outputs.buttonR` for source-confirmed Z and assigns `RF16` to `outputs.triggerRDigital` for source-confirmed R on those backends.
+- `LT3` drives `outputs.buttonL` and `outputs.triggerLDigital`; the analog L trigger follows the digital carrier at value `140`.
+- `LT1` contributes to the source-confirmed Z carrier and also applies a low-magnitude left-stick override when LS->DPad is inactive.
 - `RF16` drives `outputs.triggerRDigital`; the analog R trigger follows the digital carrier at value `140`.
 
 Left-stick directions:
@@ -91,12 +93,13 @@ Empty/no-output physical IDs:
 - `LT5 = X1`
 - `LT4 = X2`
 - `LT2 = Y1`
-- `LT3 = Y2`
+- `LT3 = L` (game output role; no longer a modifier role)
 - `RF7 = LS->DPad`
 - `RF6 = forced Up`
 - `RF3 = Tilt1`
 - `RF4 = Tilt2`
 - `RF3 + RF4 = Tilt3`
+- `Y2/MY2` are scratched/inactive in runtime selection.
 
 Direction-plus-A runtime roles (not modifiers):
 
@@ -107,7 +110,8 @@ Direction-plus-A runtime roles (not modifiers):
 Historical replacement:
 
 - Previous standalone `LT3 -> Tilt3` behavior is historical only.
-- In this identity runtime profile, `LT3` is `Y2`.
+- Previous `LT3 -> Y2` behavior is historical only for this runtime path.
+- `Y2/MY2` values remain documented in table docs for historical/source completeness.
 - Tilt3 is now the `RF3+RF4` chord.
 
 Direction mapping used by identity runtime:
@@ -140,8 +144,9 @@ Tilt family compression:
 
 Active effective non-mode modifiers counted:
 
-- X1, X2, Y1, Y2, effective Tilt1/Tilt2/Tilt3
+- X1, X2, Y1, effective Tilt1/Tilt2/Tilt3
 - Direction-plus-A buttons `LT6` and `RF12` are not modifiers and do not participate in modifier-count composition.
+- Scratched/inactive tables `Y2/MY2` do not participate in modifier-count composition.
 
 Selection logic:
 
@@ -173,9 +178,36 @@ Direction-plus-A hard final override policy:
   - direction `2` for Down+A,
   - direction `8` for Up+A.
 - Up override precedence while direction-plus-A is active:
-  - `RF12 + LT6` resolves to Up+A,
-  - `RF6 + LT6` resolves to Up+A.
+- `RF12 + LT6` resolves to Up+A,
+- `RF6 + LT6` resolves to Up+A.
 - X/Y/Tilt modifier tables are ignored for final left-stick output when direction-plus-A is active.
+
+LT1 Z-airdodge low-magnitude hard final override policy:
+
+- `LT1` contributes to Z (`outputs.buttonR = inputs.rt1 || inputs.lt1`).
+- When LS->DPad is inactive and `LT1` is held, final left-stick output is hard-overridden by a dedicated low-magnitude table, after modifier-table selection and after direction-plus-A hard override.
+- This LT1 override ignores X/Y/Tilt modifier-table output for final left-stick values.
+- This LT1 override ignores Mode default table output for final left-stick values.
+- This LT1 override also overrides the LT6/RF12 direction-plus-A analog table output, while LT6/RF12 still press A through `outputs.a`.
+- Effective direction source for LT1 low table uses:
+  - Left: `LF3`
+  - Right: `LF1`
+  - Up: `LF2` or forced-Up (`RF6`/`RF12`)
+  - Down: `LF5` or `LT6`, suppressed by forced-Up
+- LT1 low-magnitude absolute raw coordinate table:
+  - `1 = (89, 89)`
+  - `2 = (128, 79)`
+  - `3 = (167, 89)`
+  - `4 = (79, 128)`
+  - `5 = (128, 128)`
+  - `6 = (177, 128)`
+  - `7 = (89, 167)`
+  - `8 = (128, 177)`
+  - `9 = (167, 167)`
+- These low-magnitude values are selected to stay below the neutral-airdodge directional threshold target:
+  - cardinal effective radius `78.000`
+  - diagonal effective radius `77.782`
+  - all below `79.2`
 
 ## LS->DPad Policy
 
@@ -194,17 +226,22 @@ Direction-plus-A hard final override policy:
 - `RF7 + RF12` resolves to D-pad Up + A.
 - `RF7 + RF12 + LT6` resolves to D-pad Up + A.
 - `RF7 + RF6 + LT6` resolves to D-pad Up + A.
+- Under LS->DPad, `LT1` still presses Z through the shared Z carrier, while analog left stick remains centered by LS->DPad behavior.
+- `RF7 + LT1 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
 - There are no direct standalone D-pad inputs from `LF6`, `LF8`, or the old D-pad cluster.
 
 ## L/R/Z Button Behavior
 
-- `LT1` now drives `outputs.buttonL` and the GameCube/N64 L carrier `outputs.triggerLDigital` in native Ultimate.
+- `LT3` now drives `outputs.buttonL` and the GameCube/N64 L carrier `outputs.triggerLDigital` in native Ultimate.
 - `outputs.modX = inputs.lt1` is removed/neutralized for this identity runtime path (`modX` no longer follows LT1).
-- `LT1` also drives `outputs.triggerLDigital`; `outputs.triggerLAnalog` follows that digital carrier at `140`.
-- `RT1` drives `outputs.buttonR`, which the inspected GameCube/N64 backends serialize as report `z`.
+- `LT3` drives `outputs.triggerLDigital`; `outputs.triggerLAnalog` follows that digital carrier at `140`.
+- `RT1` remains a source-confirmed Z input and drives `outputs.buttonR`.
+- `LT1` also contributes to `outputs.buttonR` so Z can be pressed from either RT1 or LT1.
+- `outputs.buttonR` is `inputs.rt1 || inputs.lt1`.
 - `RF16` drives `outputs.triggerRDigital`, which the inspected GameCube/N64 backends serialize as report `r`.
 - `outputs.triggerRAnalog` follows `RF16` through `outputs.triggerRDigital` at `140`.
 - `LF4` and `RF5` are no longer trigger carriers; they are duplicate B bindings in this runtime map.
+- `RF16` remains runtime-owned `R`.
 
 ## Y Button and modY Behavior
 
@@ -232,8 +269,9 @@ Manual hardware validation is required for:
 - all Default/Mode/X/Y/Tilt/M-table direction outputs,
 - RF6 forced-Up direction resolution rows (`RF6` with no direction, Down, Left/Right, and Down+Left/Right),
 - `RF3+RF4 => Tilt3`,
-- `LT3 => Y2` and no standalone LT3 Tilt3 claim,
-- `LT1 => L`,
+- `LT3 => L`,
+- `LT1 => Z` plus low-magnitude table override behavior,
+- `Y2/MY2` scratched (inactive/unreachable) in runtime selection,
 - `RT1 => Z`,
 - `RF16 => R`,
 - `RF1 => A`, `RF5/LF4 => B`, `RF2 => X`, and `RF10 => Y`,
@@ -246,7 +284,10 @@ Manual hardware validation is required for:
 - `RF12` Up+A path hard-overrides final left-stick output to direction `8` using Default/Mode-default base tables,
 - LT6/RF12 hard-override rows ignore X/Y/Tilt final table outputs while preserving Mode base-table selection,
 - `LT6/RF12` do not count as modifiers in X/Y/Tilt/Mode composition,
+- LT1 low-table hard final override rows ignore X/Y/Tilt/Mode table outputs for final left-stick values,
+- LT1 low-table hard final override rows supersede LT6/RF12 analog override output while preserving A press,
 - LS->DPad behavior and orthogonality,
+- LS->DPad + LT1 rows produce Z plus D-pad with analog left-stick centered,
 - no standalone D-pad outputs from empty buttons,
 - empty/no-output buttons remain inert,
 - nunchuk availability row handling.
@@ -257,8 +298,13 @@ Manual hardware validation is required for:
 - Final result doc: `docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md`.
 - Hardware validation coverage reported by user includes all angles, functions, and combinations.
 
-## 2026-05-28 Amendment: Direction-Plus-A Additions
+## 2026-05-28 Amendment: LT1/LT3 Runtime Reassignment
 
-- `LT6 = Down+A` and `RF12 = Up+A` are runtime-owned direction-plus-A additions in native Ultimate.
-- `RF16` remains runtime-owned `R`; `RF12` does not replace `R`.
-- Direction-plus-A additions require a new hardware validation pass for those rows.
+- `LT3` is reassigned to runtime-owned `L`.
+- `LT1` is reassigned to runtime-owned `Z` carrier plus low-magnitude directional override behavior.
+- `Y2/MY2` are scratched/inactive in runtime selection and are no longer reachable modifier states.
+- `RT1` remains runtime-owned `Z`.
+- `RF16` remains runtime-owned `R`.
+- `LT6 = Down+A` and `RF12 = Up+A` remain runtime-owned direction-plus-A additions.
+- LT1 hard final analog override supersedes modifier-table and direction-plus-A analog outputs while preserving LT6/RF12 A press behavior.
+- This reassignment requires a new hardware validation pass before claiming hardware PASS for these rows.
