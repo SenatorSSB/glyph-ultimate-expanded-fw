@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only checker for Ultimate MVP historical LT3 or identity baseline binding."""
+"""Read-only checker for Ultimate MVP historical LT3 or explicit identity baseline binding."""
 
 from __future__ import annotations
 
@@ -99,14 +99,27 @@ def main() -> int:
     if lt3_to_lf4:
         failures.append("found removed binding BTN_LT3 -> BTN_LF4")
 
-    all_omitted_activates = all(remap["activates"] is None for remap in remaps)
+    omitted_activates_count = sum(1 for remap in remaps if remap["activates"] is None)
     semantic_remap_count = sum(
         1
         for remap in remaps
         if remap["activates"] is not None and remap["activates"] != remap["physicalButton"]
     )
+    explicit_self_activates_count = sum(
+        1 for remap in remaps if remap["activates"] == remap["physicalButton"]
+    )
     historical_mode = len(rf3_matches) == 1 and len(rf4_matches) == 1 and len(lt3_to_lt3) == 1
-    identity_mode = all_omitted_activates and semantic_remap_count == 0
+    identity_mode = (
+        omitted_activates_count == 0
+        and semantic_remap_count == 0
+        and explicit_self_activates_count == len(remaps)
+    )
+
+    if omitted_activates_count > 0 and not historical_mode:
+        failures.append(
+            "identity baseline requires explicit activates; "
+            f"found {omitted_activates_count} omitted activates entries"
+        )
 
     if historical_mode and identity_mode:
         failures.append("ambiguous profile mode: both historical and identity conditions matched")
@@ -116,12 +129,12 @@ def main() -> int:
         existing_tilt1_tilt2_bindings_preserved = True
     elif identity_mode:
         profile_mode = "IDENTITY_BASELINE"
-        physical_lt3_bound_to_logical_lt3 = len(lt3_all) == 1 and all_omitted_activates
+        physical_lt3_bound_to_logical_lt3 = len(lt3_all) == 1 and len(lt3_to_lt3) == 1
         existing_tilt1_tilt2_bindings_preserved = False
     else:
         failures.append(
             "unsupported MODE_ULTIMATE mapping state: expected either historical LT3 remap mode "
-            "or identity baseline mode"
+            "or explicit self-activates identity baseline mode"
         )
 
     previous_lt3_to_lf4_binding_removed = len(lt3_to_lf4) == 0

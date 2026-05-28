@@ -16,6 +16,11 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 
 | Area | Input condition | Directions | Expected result | Status |
 | --- | --- | --- | --- | --- |
+| Profile artifact baseline | Apply active Ultimate artifact with explicit self-activates identity | N/A | `MODE_ULTIMATE` remaps use `physicalButton == activates` | NOT_TESTED |
+| A restore check | Press A binding in `MODE_ULTIMATE` runtime path | N/A | A is restored and visible as runtime input | NOT_TESTED |
+| Down restore check | Press Down (`LF2`) in `MODE_ULTIMATE` runtime path | N/A | Down is restored and visible as runtime input | NOT_TESTED |
+| RF6 forced-Up restore check | Press RF6 in `MODE_ULTIMATE` runtime path | N/A | RF6 forced-Up is restored and visible as runtime input | NOT_TESTED |
+| Modifier visibility check | Press X1/X2/Y1/Y2/Tilt1/Tilt2 inputs | N/A | `LT5/LT4/LT2/LT3/RF3/RF4` are visible to runtime | NOT_TESTED |
 | Default table | Mode off, no non-Mode modifiers | 1..9 | Default table exact outputs | NOT_TESTED |
 | Mode default table | Mode on, no non-Mode modifiers | 1..9 | Mode default table exact outputs | NOT_TESTED |
 | X family | X1, X2, MX1, MX2 (single-modifier only) | 1..9 each | Exact X/X+Mode table outputs | NOT_TESTED |

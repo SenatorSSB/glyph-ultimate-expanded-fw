@@ -41,6 +41,31 @@ SOURCE_ANCHORS = (
     "inputs.rf4",
 )
 
+RUNTIME_REQUIRED_SELF_ACTIVATES = (
+    "BTN_RT1",
+    "BTN_RF1",
+    "BTN_RF2",
+    "BTN_RF6",
+    "BTN_LT1",
+    "BTN_LF4",
+    "BTN_RF5",
+    "BTN_LF3",
+    "BTN_LF1",
+    "BTN_LF2",
+    "BTN_RF7",
+    "BTN_RF8",
+    "BTN_LT5",
+    "BTN_LT4",
+    "BTN_LT2",
+    "BTN_LT3",
+    "BTN_RF3",
+    "BTN_RF4",
+    "BTN_RT3",
+    "BTN_RT5",
+    "BTN_RT2",
+    "BTN_RT4",
+)
+
 
 def fail(message: str) -> None:
     raise AssertionError(message)
@@ -71,29 +96,45 @@ def get_ultimate_mode(payload: dict[str, object], path: Path) -> dict[str, objec
     return {}
 
 
-def semantic_remap_count(mode_config: dict[str, object], path: Path) -> int:
+def explicit_self_activate_map(mode_config: dict[str, object], path: Path) -> dict[str, str]:
     remaps = mode_config.get("buttonRemapping")
     if not isinstance(remaps, list):
         fail(f"MODE_ULTIMATE.buttonRemapping must be a list in {path.relative_to(REPO_ROOT)}")
 
-    count = 0
+    mapping: dict[str, str] = {}
     for index, remap in enumerate(remaps):
         if not isinstance(remap, dict):
             fail(f"buttonRemapping[{index}] must be an object in {path.relative_to(REPO_ROOT)}")
         physical = remap.get("physicalButton")
-        if not isinstance(physical, str):
+        if not isinstance(physical, str) or not physical:
             fail(f"buttonRemapping[{index}] missing physicalButton in {path.relative_to(REPO_ROOT)}")
+        if physical == "BTN_UNSPECIFIED":
+            fail(f"buttonRemapping[{index}] uses forbidden BTN_UNSPECIFIED in {path.relative_to(REPO_ROOT)}")
+        if physical in mapping:
+            fail(
+                "duplicate physicalButton entries in "
+                f"{path.relative_to(REPO_ROOT)}: {physical}"
+            )
 
+        if "activates" not in remap:
+            fail(
+                f"buttonRemapping[{index}] must include activates in {path.relative_to(REPO_ROOT)}"
+            )
         activates = remap.get("activates")
-        if activates is None:
-            continue
-        if not isinstance(activates, str):
+        if not isinstance(activates, str) or not activates:
             fail(f"buttonRemapping[{index}] activates must be a string in {path.relative_to(REPO_ROOT)}")
+        if activates == "BTN_UNSPECIFIED":
+            fail(
+                f"buttonRemapping[{index}] uses forbidden activates BTN_UNSPECIFIED in {path.relative_to(REPO_ROOT)}"
+            )
+        if activates != physical:
+            fail(
+                "MODE_ULTIMATE explicit identity violation in "
+                f"{path.relative_to(REPO_ROOT)}: {physical} -> {activates}"
+            )
+        mapping[physical] = activates
 
-        if activates not in (physical, "BTN_UNSPECIFIED"):
-            count += 1
-
-    return count
+    return mapping
 
 
 def require_runtime_doc() -> str:
@@ -210,12 +251,14 @@ def main() -> int:
         artifact_mode = get_ultimate_mode(artifact, ARTIFACT_PATH)
         fixture_mode = get_ultimate_mode(fixture, FIXTURE_PATH)
 
-        artifact_semantic = semantic_remap_count(artifact_mode, ARTIFACT_PATH)
-        fixture_semantic = semantic_remap_count(fixture_mode, FIXTURE_PATH)
-        if artifact_semantic != 0:
-            fail(f"artifact semantic_remap_count must be 0, got {artifact_semantic}")
-        if fixture_semantic != 0:
-            fail(f"fixture semantic_remap_count must be 0, got {fixture_semantic}")
+        artifact_mapping = explicit_self_activate_map(artifact_mode, ARTIFACT_PATH)
+        fixture_mapping = explicit_self_activate_map(fixture_mode, FIXTURE_PATH)
+
+        for button in RUNTIME_REQUIRED_SELF_ACTIVATES:
+            if artifact_mapping.get(button) != button:
+                fail(f"artifact missing explicit self-activates binding for {button}")
+            if fixture_mapping.get(button) != button:
+                fail(f"fixture missing explicit self-activates binding for {button}")
 
         require_runtime_doc()
         require_runtime_source()
@@ -233,7 +276,9 @@ def main() -> int:
     print(f"fixture={FIXTURE_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_source={SOURCE_PATH.relative_to(REPO_ROOT)}")
+    print("identity_representation=explicit_self_activates")
     print("identity_semantic_remaps=0")
+    print("runtime_required_inputs_explicit_self_activated=true")
     print("forced_up_role=RF6")
     print("rf4_up_conflict=absent")
     print("lt3_role=Y2")

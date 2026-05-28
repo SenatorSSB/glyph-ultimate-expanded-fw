@@ -43,3 +43,6 @@ Do not apply this identity artifact expecting full Smash Box X/Y/Mode/LS->DPad b
 
 - `glyph/gfw2-identity-runtime-smashbox-modifiers` is the first runtime implementation branch that consumes this identity baseline directly.
 - For active development, custom Smash Box behavior is now runtime-owned in `MODE_ULTIMATE` source and not profile-semantic-remap-owned.
+- Hardware testing showed omitted-`activates` identity was not reliable for runtime/configurator behavior.
+- Active development identity baseline now uses explicit self-activates identity where `physicalButton == activates`.
+- Explicit self-activates remains identity behavior and is not semantic remapping.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only checker for Ultimate D-pad mapping in historical or identity-baseline mode."""
+"""Read-only checker for Ultimate D-pad mapping in historical or explicit-identity mode."""
 
 from __future__ import annotations
 
@@ -135,7 +135,7 @@ def _check_target_file(path: Path) -> tuple[list[str], str, str]:
         cluster_render_parts.append(f"{physical}->{actual_logical}")
         if actual_logical == expected_logical:
             historical_matches += 1
-        if actual_logical is None:
+        if actual_logical == physical:
             identity_matches += 1
 
     semantic_remap_count = sum(
@@ -143,7 +143,10 @@ def _check_target_file(path: Path) -> tuple[list[str], str, str]:
         for remap in remaps
         if remap["activates"] is not None and remap["activates"] != remap["physicalButton"]
     )
-    all_omitted_activates = all(remap["activates"] is None for remap in remaps)
+    omitted_activates_count = sum(1 for remap in remaps if remap["activates"] is None)
+    explicit_self_activates_count = sum(
+        1 for remap in remaps if remap["activates"] == remap["physicalButton"]
+    )
 
     mode = "UNDETERMINED"
     if historical_matches == len(EXPECTED_DPAD_CLUSTER):
@@ -163,9 +166,13 @@ def _check_target_file(path: Path) -> tuple[list[str], str, str]:
                 )
     elif identity_matches == len(EXPECTED_DPAD_CLUSTER):
         mode = "IDENTITY_BASELINE"
-        if not all_omitted_activates or semantic_remap_count != 0:
+        if (
+            omitted_activates_count != 0
+            or semantic_remap_count != 0
+            or explicit_self_activates_count != len(remaps)
+        ):
             failures.append(
-                f"{_rel(path)} identity baseline mode must omit activates and remove semantic remaps"
+                f"{_rel(path)} identity baseline mode must use explicit self-activates with no semantic remaps"
             )
     else:
         failures.append(

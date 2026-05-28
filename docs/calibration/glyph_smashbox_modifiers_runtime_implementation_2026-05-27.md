@@ -17,6 +17,11 @@ Implementation is complete in this branch for native `MODE_ULTIMATE` runtime sou
 - Runtime consumes post-remap same-name logical fields directly.
 - No semantic profile remapping for these custom modifier roles is used in this branch.
 
+## Identity Artifact Caveat (2026-05-28)
+
+- Runtime now requires an explicit self-activated identity profile artifact (`physicalButton == activates` in `MODE_ULTIMATE.buttonRemapping`).
+- Hardware testing showed omitted-`activates` identity caused missing logical inputs, so omitted-`activates` is not treated as a reliable active baseline representation.
+
 ## Runtime Role Table
 
 - `RF8 = Mode`
