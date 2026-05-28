@@ -6,15 +6,245 @@
 #define ANALOG_STICK_NEUTRAL 128
 #define ANALOG_STICK_MAX 228
 
+namespace {
+struct StickPoint {
+    uint8_t x;
+    uint8_t y;
+};
+
+constexpr StickPoint kDefaultTable[9] = {
+    {61, 51}, {128, 51}, {195, 51},
+    {61, 128}, {128, 128}, {195, 128},
+    {61, 205}, {128, 205}, {195, 205},
+};
+
+constexpr StickPoint kModeDefaultTable[9] = {
+    {1, 84}, {128, 84}, {255, 84},
+    {1, 172}, {128, 172}, {255, 172},
+    {1, 172}, {128, 172}, {255, 172},
+};
+
+constexpr StickPoint kX1Table[9] = {
+    {93, 51}, {128, 51}, {163, 51},
+    {93, 128}, {128, 128}, {163, 128},
+    {93, 205}, {128, 205}, {163, 205},
+};
+
+constexpr StickPoint kX2Table[9] = {
+    {82, 51}, {128, 51}, {174, 51},
+    {82, 128}, {128, 128}, {174, 128},
+    {82, 205}, {128, 205}, {174, 205},
+};
+
+constexpr StickPoint kMX1Table[9] = {
+    {74, 84}, {128, 84}, {182, 84},
+    {74, 172}, {128, 172}, {182, 172},
+    {74, 172}, {128, 172}, {182, 172},
+};
+
+constexpr StickPoint kMX2Table[9] = {
+    {59, 84}, {128, 84}, {197, 84},
+    {59, 172}, {128, 172}, {197, 172},
+    {59, 172}, {128, 172}, {197, 172},
+};
+
+constexpr StickPoint kY1Table[9] = {
+    {61, 99}, {128, 99}, {195, 99},
+    {61, 128}, {128, 128}, {195, 128},
+    {61, 157}, {128, 157}, {195, 157},
+};
+
+constexpr StickPoint kY2Table[9] = {
+    {61, 82}, {128, 82}, {195, 82},
+    {61, 128}, {128, 128}, {195, 128},
+    {61, 174}, {128, 174}, {195, 174},
+};
+
+constexpr StickPoint kMY1Table[9] = {
+    {1, 184}, {128, 184}, {255, 184},
+    {1, 172}, {128, 172}, {255, 172},
+    {1, 72}, {128, 72}, {255, 72},
+};
+
+constexpr StickPoint kMY2Table[9] = {
+    {1, 165}, {128, 165}, {255, 165},
+    {1, 172}, {128, 172}, {255, 172},
+    {1, 91}, {128, 91}, {255, 91},
+};
+
+constexpr StickPoint kTilt1Table[9] = {
+    {187, 87}, {128, 87}, {69, 87},
+    {187, 128}, {128, 128}, {69, 128},
+    {187, 169}, {128, 169}, {69, 169},
+};
+
+constexpr StickPoint kTilt2Table[9] = {
+    {88, 79}, {128, 79}, {168, 79},
+    {88, 128}, {128, 128}, {168, 128},
+    {88, 177}, {128, 177}, {168, 177},
+};
+
+constexpr StickPoint kTilt3Table[9] = {
+    {75, 86}, {128, 86}, {181, 86},
+    {75, 128}, {128, 128}, {181, 128},
+    {75, 170}, {128, 170}, {181, 170},
+};
+
+constexpr StickPoint kMTilt1Table[9] = {
+    {95, 81}, {128, 81}, {161, 81},
+    {95, 172}, {128, 172}, {161, 172},
+    {95, 175}, {128, 175}, {161, 175},
+};
+
+constexpr StickPoint kMTilt2Table[9] = {
+    {95, 81}, {128, 81}, {161, 81},
+    {95, 172}, {128, 172}, {161, 172},
+    {95, 175}, {128, 175}, {161, 175},
+};
+
+constexpr StickPoint kMTilt3Table[9] = {
+    {96, 82}, {128, 82}, {160, 82},
+    {96, 172}, {128, 172}, {160, 172},
+    {96, 174}, {128, 174}, {160, 174},
+};
+
+constexpr size_t kDirectionFiveIndex = 4;
+
+enum class EffectiveModifier {
+    None,
+    X1,
+    X2,
+    Y1,
+    Y2,
+    Tilt1,
+    Tilt2,
+    Tilt3,
+};
+
+const StickPoint *SelectStickTable(
+    bool mode_active,
+    bool x1_active,
+    bool x2_active,
+    bool y1_active,
+    bool y2_active,
+    bool tilt1_effective,
+    bool tilt2_effective,
+    bool tilt3_effective
+) {
+    int active_modifier_count = 0;
+    EffectiveModifier single_modifier = EffectiveModifier::None;
+
+    if (x1_active) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::X1;
+    }
+    if (x2_active) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::X2;
+    }
+    if (y1_active) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::Y1;
+    }
+    if (y2_active) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::Y2;
+    }
+
+    if (tilt3_effective) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::Tilt3;
+    } else if (tilt1_effective) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::Tilt1;
+    } else if (tilt2_effective) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::Tilt2;
+    }
+
+    if (active_modifier_count != 1) {
+        return mode_active ? kModeDefaultTable : kDefaultTable;
+    }
+
+    if (!mode_active) {
+        switch (single_modifier) {
+            case EffectiveModifier::X1:
+                return kX1Table;
+            case EffectiveModifier::X2:
+                return kX2Table;
+            case EffectiveModifier::Y1:
+                return kY1Table;
+            case EffectiveModifier::Y2:
+                return kY2Table;
+            case EffectiveModifier::Tilt1:
+                return kTilt1Table;
+            case EffectiveModifier::Tilt2:
+                return kTilt2Table;
+            case EffectiveModifier::Tilt3:
+                return kTilt3Table;
+            default:
+                return kDefaultTable;
+        }
+    }
+
+    switch (single_modifier) {
+        case EffectiveModifier::X1:
+            return kMX1Table;
+        case EffectiveModifier::X2:
+            return kMX2Table;
+        case EffectiveModifier::Y1:
+            return kMY1Table;
+        case EffectiveModifier::Y2:
+            return kMY2Table;
+        case EffectiveModifier::Tilt1:
+            return kMTilt1Table;
+        case EffectiveModifier::Tilt2:
+            return kMTilt2Table;
+        case EffectiveModifier::Tilt3:
+            return kMTilt3Table;
+        default:
+            return kModeDefaultTable;
+    }
+}
+
+size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
+    int x = static_cast<int>(x_axis);
+    int y = static_cast<int>(y_axis);
+
+    if (x < -1) {
+        x = -1;
+    } else if (x > 1) {
+        x = 1;
+    }
+
+    if (y < -1) {
+        y = -1;
+    } else if (y > 1) {
+        y = 1;
+    }
+
+    const int index = ((y + 1) * 3) + (x + 1);
+    return static_cast<size_t>(index);
+}
+
+} // namespace
+
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
+    const bool force_up_active = inputs.rf6;
+    const bool effective_ls_up = force_up_active;
+    const bool effective_ls_down = inputs.lf2 && !force_up_active;
+    const bool effective_ls_left = inputs.lf3;
+    const bool effective_ls_right = inputs.lf1;
+    const bool ls_to_dpad_active = inputs.rf7;
+
     outputs.a = inputs.rt1;
     outputs.b = inputs.rf1;
     outputs.x = inputs.rf2;
-    outputs.y = inputs.rf6;
-    //outputs.buttonL = inputs.rf7;
-    outputs.buttonR = inputs.rf3;
+    outputs.y = false;
+    outputs.buttonL = inputs.lt1;
+    outputs.buttonR = false;
     outputs.triggerLDigital = inputs.lf4;
     outputs.triggerRDigital = inputs.rf5;
 
@@ -22,16 +252,13 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.select = inputs.mb6;
     outputs.home = inputs.mb5;
     outputs.capture = inputs.mb4;
-    /*
-    outputs.leftStickClick = inputs.mb3;
-    outputs.rightStickClick = inputs.mb2;
-    outputs.buttonL = inputs.rf9;
-    */
+
     outputs.dpadUp = 0;
     outputs.dpadDown = 0;
     outputs.dpadLeft = 0;
     outputs.dpadRight = 0;
-    // Turn on D-Pad layer with the Nunchuk C button.
+
+    // Preserve source-backed nunchuk C D-pad layer behavior.
     if (inputs.nunchuk_c) {
         outputs.dpadUp = inputs.rt4;
         outputs.dpadDown = inputs.rt2;
@@ -39,32 +266,43 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
         outputs.dpadRight = inputs.rt5;
     }
 
-    outputs.dpadUp |= inputs.rf8;
-    outputs.dpadDown |= inputs.rf7;
+    // Preserve direct D-pad left/right inputs.
     outputs.dpadLeft |= inputs.lf8;
     outputs.dpadRight |= inputs.lf6;
 
-    outputs.leftStickLeft = inputs.lf3;
-    outputs.leftStickRight = inputs.lf1;
-    outputs.leftStickDown = inputs.lf2;
-    outputs.leftStickUp = inputs.rf4;
+    if (ls_to_dpad_active) {
+        outputs.dpadUp |= effective_ls_up;
+        outputs.dpadDown |= effective_ls_down;
+        outputs.dpadLeft |= effective_ls_left;
+        outputs.dpadRight |= effective_ls_right;
+    }
+
+    outputs.leftStickLeft = ls_to_dpad_active ? false : effective_ls_left;
+    outputs.leftStickRight = ls_to_dpad_active ? false : effective_ls_right;
+    outputs.leftStickDown = ls_to_dpad_active ? false : effective_ls_down;
+    outputs.leftStickUp = ls_to_dpad_active ? false : effective_ls_up;
 
     outputs.rightStickLeft = inputs.rt3;
     outputs.rightStickRight = inputs.rt5;
     outputs.rightStickDown = inputs.rt2;
     outputs.rightStickUp = inputs.rt4;
 
-    outputs.modX = inputs.lt1;
-    outputs.modY = inputs.lt2;
+    outputs.modX = false;
+    outputs.modY = false;
 }
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
+    (void)backend_id;
+    const bool force_up_active = inputs.rf6;
+    const bool effective_ls_up = force_up_active;
+    const bool effective_ls_down = inputs.lf2 && !force_up_active;
+
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3, // Left
         inputs.lf1, // Right
-        inputs.lf2, // Down
-        inputs.rf4, // Up
+        effective_ls_down, // Down
+        effective_ls_up, // Up (RF6 forced-Up)
         inputs.rt3, // C-Left
         inputs.rt5, // C-Right
         inputs.rt2, // C-Down
@@ -75,213 +313,42 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         outputs
     );
 
-    const bool senscope_tilt3_active = inputs.lt3 || (inputs.lt1 && inputs.lt2);
+    // Senscope Glyph Smash Box runtime begin
+    const bool mode_active = inputs.rf8;
+    const bool x1_active = inputs.lt5;
+    const bool x2_active = inputs.lt4;
+    const bool y1_active = inputs.lt2;
+    const bool y2_active = inputs.lt3;
+    const bool ls_to_dpad_active = inputs.rf7;
 
-    bool shield_button_pressed = inputs.lf4 || inputs.rf5;
+    const bool tilt1_pressed = inputs.rf3;
+    const bool tilt2_pressed = inputs.rf4;
 
-    if (inputs.lt1 && !senscope_tilt3_active) {
-        // MX + Horizontal = 6625 = 53
-        if (directions.horizontal) {
-            outputs.leftStickX = 128 + (directions.x * 53);
-            // Horizontal Shield tilt = 51
-            if (shield_button_pressed) {
-                outputs.leftStickX = 128 + (directions.x * 51);
-            }
-            // Horizontal Tilts = 36
-            if (inputs.rt1) {
-                outputs.leftStickX = 128 + (directions.x * 36);
-            }
-        }
-        // MX + Vertical = 44
-        if (directions.vertical) {
-            outputs.leftStickY = 128 + (directions.y * 44);
-            // Vertical Shield Tilt = 51
-            if (shield_button_pressed) {
-                outputs.leftStickY = 128 + (directions.y * 51);
-            }
-        }
-        if (directions.diagonal && shield_button_pressed) {
-            // MX + L, R, LS, and MS + q1/2/3/4 = 6375 3750 = 51 30
-            outputs.leftStickX = 128 + (directions.x * 51);
-            outputs.leftStickY = 128 + (directions.y * 30);
-        }
+    const bool tilt3_effective = tilt1_pressed && tilt2_pressed;
+    const bool tilt1_effective = tilt1_pressed && !tilt2_pressed;
+    const bool tilt2_effective = tilt2_pressed && !tilt1_pressed;
 
-        /* Up B angles */
-        if (directions.diagonal && !shield_button_pressed) {
-            // MX + q1/2/3/4 = 33.44 degrees | 53 35
-            outputs.leftStickX = 128 + (directions.x * 53);
-            outputs.leftStickY = 128 + (directions.y * 35);
-            // (39.05) = 53 43
-            if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 53);
-                outputs.leftStickY = 128 + (directions.y * 43);
-            }
-            // (36.35) = 53 39
-            if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 53);
-                outputs.leftStickY = 128 + (directions.y * 39);
-            }
-            // (30.32) = 56 41
-            if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 53);
-                outputs.leftStickY = 128 + (directions.y * 31);
-            }
-            // (27.85) = 49 42
-            if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 53);
-                outputs.leftStickY = 128 + (directions.y * 28);
-            }
+    const StickPoint *active_table = SelectStickTable(
+        mode_active,
+        x1_active,
+        x2_active,
+        y1_active,
+        y2_active,
+        tilt1_effective,
+        tilt2_effective,
+        tilt3_effective
+    );
 
-            /* Extended Up B Angles */
-            if (inputs.rf1) {
-                // (33.29) = 67 44
-                outputs.leftStickX = 128 + (directions.x * 67);
-                outputs.leftStickY = 128 + (directions.y * 44);
-                // (39.38) = 67 55
-                if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 67);
-                    outputs.leftStickY = 128 + (directions.y * 55);
-                }
-                // (36.18) = 67 49
-                if (inputs.rt3) {
-                    outputs.leftStickX = 128 + (directions.x * 67);
-                    outputs.leftStickY = 128 + (directions.y * 49);
-                }
-                // (30.2) = 67 39
-                if (inputs.rt4) {
-                    outputs.leftStickX = 128 + (directions.x * 67);
-                    outputs.leftStickY = 128 + (directions.y * 39);
-                }
-                // (27.58) = 67 35
-                if (inputs.rt5) {
-                    outputs.leftStickX = 128 + (directions.x * 67);
-                    outputs.leftStickY = 128 + (directions.y * 35);
-                }
-            }
-
-            // Angled fsmash/ftilt with C-Stick + MX
-            if (directions.cx != 0) {
-                outputs.rightStickX = 128 + (directions.cx * 127);
-                outputs.rightStickY = 128 + (directions.y * 59);
-            }
-
-            // Angled Ftilts
-            if (inputs.rt1) {
-                outputs.leftStickX = 128 + (directions.x * 36);
-                outputs.leftStickY = 128 + (directions.y * 26);
-            }
-        }
+    if (ls_to_dpad_active) {
+        const StickPoint center = mode_active ? kModeDefaultTable[kDirectionFiveIndex] : kDefaultTable[kDirectionFiveIndex];
+        outputs.leftStickX = center.x;
+        outputs.leftStickY = center.y;
+    } else {
+        const size_t direction_index = DirectionIndexFromAxes(directions.x, directions.y);
+        outputs.leftStickX = active_table[direction_index].x;
+        outputs.leftStickY = active_table[direction_index].y;
     }
-
-    if (inputs.lt2 && !senscope_tilt3_active) {
-        // MY + Horizontal (even if shield is held) = 41
-        if (directions.horizontal) {
-            outputs.leftStickX = 128 + (directions.x * 41);
-            // MY Horizontal Tilts
-            if (inputs.rt1) {
-                outputs.leftStickX = 128 + (directions.x * 36);
-            }
-        }
-        // MY + Vertical (even if shield is held) = 53
-        if (directions.vertical) {
-            outputs.leftStickY = 128 + (directions.y * 53);
-            // MY Vertical Tilts
-            if (inputs.rt1) {
-                outputs.leftStickY = 128 + (directions.y * 36);
-            }
-        }
-        if (directions.diagonal) {
-            // MY + q1/2/3/4 = 35 59
-            outputs.leftStickX = 128 + (directions.x * 35);
-            outputs.leftStickY = 128 + (directions.y * 53);
-            if (shield_button_pressed) {
-                // MY + L, R, LS, and MS + q1/2 = 38 70
-                outputs.leftStickX = 128 + (directions.x * 38);
-                outputs.leftStickY = 128 + (directions.y * 70);
-                // MY + L, R, LS, and MS + q3/4 = 40 68
-                if (directions.x == -1) {
-                    outputs.leftStickX = 128 + (directions.x * 40);
-                    outputs.leftStickY = 128 + (directions.y * 68);
-                }
-            }
-        }
-
-        /* Up B angles */
-        if (directions.diagonal && !shield_button_pressed) {
-            // (56.56) = 35 53
-            outputs.leftStickX = 128 + (directions.x * 35);
-            outputs.leftStickY = 128 + (directions.y * 53);
-            // (50.95) = 43 53
-            if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 43);
-                outputs.leftStickY = 128 + (directions.y * 53);
-            }
-            // (53.65) = 39 53
-            if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 49);
-                outputs.leftStickY = 128 + (directions.y * 53);
-            }
-            // (59.68) = 31 53
-            if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 31);
-                outputs.leftStickY = 128 + (directions.y * 53);
-            }
-            // (62.15) = 28 53
-            if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 28);
-                outputs.leftStickY = 128 + (directions.y * 53);
-            }
-
-            /* Extended Up B Angles */
-            if (inputs.rf1) {
-                // (56.71) = 44 67
-                outputs.leftStickX = 128 + (directions.x * 44);
-                outputs.leftStickY = 128 + (directions.y * 67);
-                // (50.62) = 55 67
-                if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 55);
-                    outputs.leftStickY = 128 + (directions.y * 67);
-                }
-                // (53.82) = 49 67
-                if (inputs.rt3) {
-                    outputs.leftStickX = 128 + (directions.x * 49);
-                    outputs.leftStickY = 128 + (directions.y * 67);
-                }
-                // (59.8) = 39 67
-                if (inputs.rt4) {
-                    outputs.leftStickX = 128 + (directions.x * 39);
-                    outputs.leftStickY = 128 + (directions.y * 67);
-                }
-                // (62.42) = 35 67
-                if (inputs.rt5) {
-                    outputs.leftStickX = 128 + (directions.x * 35);
-                    outputs.leftStickY = 128 + (directions.y * 67);
-                }
-            }
-
-            // MY Pivot Uptilt/Dtilt
-            if (inputs.rt1) {
-                outputs.leftStickX = 128 + (directions.x * 34);
-                outputs.leftStickY = 128 + (directions.y * 38);
-            }
-        }
-    }
-
-    // Senscope Glyph Ultimate Tilt patch begin
-    // Tilt1/Tilt2/Tilt3 use post-remap logical LT inputs. In the MVP profile,
-    // physical RF3/RF4 are mapped to LT1/LT2; do not bypass remap here.
-    // Explicit signed math avoids uint8 overflow/flipper tricks.
-    if (senscope_tilt3_active) {
-        outputs.leftStickX = 128 + (directions.x * 53);
-        outputs.leftStickY = 128 + (directions.y * 42);
-    } else if (inputs.lt1) {
-        outputs.leftStickX = 128 - (directions.x * 59);
-        outputs.leftStickY = 128 + (directions.y * 41);
-    } else if (inputs.lt2) {
-        outputs.leftStickX = 128 + (directions.x * 40);
-        outputs.leftStickY = 128 + (directions.y * 49);
-    }
-    // Senscope Glyph Ultimate Tilt patch end
+    // Senscope Glyph Smash Box runtime end
 
     // C-stick ASDI Slideoff angle overrides any other C-stick modifiers (such as
     // angled fsmash).
@@ -295,7 +362,6 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         outputs.triggerLAnalog = 140;
     } else {
         outputs.triggerLAnalog = 0;
-
     }
 
     if (inputs.rf5) {

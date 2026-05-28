@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only source-shape checker for future native Ultimate table runtime scope.
-
-This checker guards the current source shape before any arbitrary table runtime
-patch exists. It does not require table runtime markers to be present yet.
-"""
+"""Read-only scope checker for native Ultimate identity-runtime table implementation."""
 
 from __future__ import annotations
 
@@ -13,28 +9,35 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ULTIMATE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
-BEGIN_MARKER = "// Senscope Glyph Ultimate Tilt patch begin"
-END_MARKER = "// Senscope Glyph Ultimate Tilt patch end"
-TABLE_MARKER_PATTERNS = (
-    "Native Ultimate table",
-    "native ultimate table",
-    "glyph_native_ultimate_table",
-    "UltimateTable",
+BEGIN_MARKER = "// Senscope Glyph Smash Box runtime begin"
+END_MARKER = "// Senscope Glyph Smash Box runtime end"
+
+REQUIRED_TABLES = (
+    "kDefaultTable",
+    "kModeDefaultTable",
+    "kX1Table",
+    "kX2Table",
+    "kMX1Table",
+    "kMX2Table",
+    "kY1Table",
+    "kY2Table",
+    "kMY1Table",
+    "kMY2Table",
+    "kTilt1Table",
+    "kTilt2Table",
+    "kTilt3Table",
+    "kMTilt1Table",
+    "kMTilt2Table",
+    "kMTilt3Table",
 )
-PUSH_FLASH_PATTERNS = (
-    r"\bflash\b",
-    r"\bbootloader\b",
-    r"\buf2\b",
-    r"push-to-device",
-    r"push_to_device",
-)
-FORBIDDEN_PATCH_ASSIGNMENTS = (
-    "outputs.rightStickX",
-    "outputs.rightStickY",
-    "outputs.triggerLAnalog",
-    "outputs.triggerRAnalog",
-    "outputs.triggerLDigital",
-    "outputs.triggerRDigital",
+
+FORBIDDEN_TOKENS = (
+    "flash",
+    "bootloader",
+    "uf2",
+    "push-to-device",
+    "push_to_device",
+    "senscope_tilt3_active",
 )
 
 
@@ -42,168 +45,109 @@ def fail(message: str) -> None:
     raise AssertionError(message)
 
 
-def extract_patch_block(source: str) -> str:
-    begin_count = source.count(BEGIN_MARKER)
-    end_count = source.count(END_MARKER)
-    if begin_count != 1:
-        fail(f"expected exactly one Tilt patch begin marker, found {begin_count}")
-    if end_count != 1:
-        fail(f"expected exactly one Tilt patch end marker, found {end_count}")
-    begin = source.find(BEGIN_MARKER)
-    end = source.find(END_MARKER, begin)
-    if begin < 0 or end < 0 or end < begin:
-        fail("Tilt patch markers are missing or out of order")
-    return source[begin : end + len(END_MARKER)]
-
-
-def extract_before_patch(source: str) -> str:
-    begin = source.find(BEGIN_MARKER)
-    if begin < 0:
-        fail(f"missing begin marker: {BEGIN_MARKER}")
-    return source[:begin]
-
-
 def require(pattern: str, text: str, label: str, *, flags: int = 0) -> None:
-    if re.search(pattern, text, flags) is None:
+    if re.search(pattern, text, flags=flags) is None:
         fail(f"missing source evidence: {label}")
 
 
-def forbid_lt1_lt2_chord(text: str, label: str) -> None:
-    compact = re.sub(r"\s+", "", text)
-    if "inputs.lt1&&inputs.lt2" in compact:
-        fail(f"{label} must not include LT1+LT2 chord")
+def extract_marker_block(source: str) -> str:
+    begin_count = source.count(BEGIN_MARKER)
+    end_count = source.count(END_MARKER)
+    if begin_count != 1 or end_count != 1:
+        fail(f"expected exactly one marker block, found begin={begin_count} end={end_count}")
+    begin = source.find(BEGIN_MARKER)
+    end = source.find(END_MARKER, begin)
+    if begin < 0 or end < 0 or end < begin:
+        fail("runtime marker block missing or malformed")
+    return source[begin : end + len(END_MARKER)]
 
 
-def extract_dpad_layer_body(source: str) -> str:
+def extract_table_values(source: str, table_name: str) -> list[tuple[int, int]]:
     match = re.search(
-        r"outputs\.dpadRight\s*=\s*0\s*;\s*(?P<body>.*?)outputs\.dpadUp\s*\|=",
+        rf"constexpr\s+StickPoint\s+{re.escape(table_name)}\[9\]\s*=\s*\{{(?P<body>.*?)\}};",
         source,
         flags=re.DOTALL,
     )
     if match is None:
-        fail("unable to locate D-pad layer body")
-    return match.group("body")
+        fail(f"missing table definition: {table_name}")
+    body = match.group("body")
+    pairs = re.findall(r"\{\s*(\d+)\s*,\s*(\d+)\s*\}", body)
+    if len(pairs) != 9:
+        fail(f"table {table_name} must contain 9 points, found {len(pairs)}")
+    values = [(int(x), int(y)) for x, y in pairs]
+    for x, y in values:
+        if not (0 <= x <= 255 and 0 <= y <= 255):
+            fail(f"table {table_name} has out-of-range value ({x}, {y})")
+    return values
 
 
-def extract_cstick_neutralization_body(source: str) -> str:
-    match = re.search(
-        r"//\s*Shut off C-stick when using D-Pad layer\.\s*"
-        r"(?P<body>if\s*\([^)]*\)\s*\{[^}]*outputs\.rightStickX\s*=\s*128\s*;"
-        r"[^}]*outputs\.rightStickY\s*=\s*128\s*;[^}]*\})",
-        source,
-        flags=re.DOTALL,
+def ensure_required_shapes(source: str, block: str) -> None:
+    require(r"mode_active\s*=\s*inputs\.rf8\s*;", block, "Mode anchor rf8")
+    require(r"x1_active\s*=\s*inputs\.lt5\s*;", block, "X1 anchor lt5")
+    require(r"x2_active\s*=\s*inputs\.lt4\s*;", block, "X2 anchor lt4")
+    require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
+    require(r"y2_active\s*=\s*inputs\.lt3\s*;", block, "Y2 anchor lt3")
+    require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
+    require(r"force_up_active\s*=\s*inputs\.rf6\s*;", source, "forced-Up anchor rf6")
+    require(r"tilt1_pressed\s*=\s*inputs\.rf3\s*;", block, "Tilt1 anchor rf3")
+    require(r"tilt2_pressed\s*=\s*inputs\.rf4\s*;", block, "Tilt2 anchor rf4")
+    require(
+        r"tilt3_effective\s*=\s*tilt1_pressed\s*&&\s*tilt2_pressed\s*;",
+        block,
+        "Tilt3 chord shape",
     )
-    if match is None:
-        fail("unable to locate C-stick/right-stick neutralization body")
-    return match.group("body")
+    require(r"outputs\.buttonL\s*=\s*inputs\.lt1\s*;", source, "LT1 mapped to L")
+    require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.leftStickX\s*=\s*center\.x\s*;[^}]*outputs\.leftStickY\s*=\s*center\.y\s*;", source, "LS->DPad neutralizes left stick")
+    require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;", source, "LS->DPad up uses effective Up")
+    require(r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;", source, "LS->DPad suppresses digital leftStickLeft")
+    require(r"outputs\.leftStickRight\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_right\s*;", source, "LS->DPad suppresses digital leftStickRight")
+    require(r"outputs\.leftStickDown\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_down\s*;", source, "LS->DPad suppresses digital leftStickDown")
+    require(r"outputs\.leftStickUp\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_up\s*;", source, "LS->DPad suppresses digital leftStickUp")
+    require(r"outputs\.buttonR\s*=\s*false\s*;", source, "RF3 no longer drives R")
+    require(r"outputs\.modX\s*=\s*false\s*;", source, "LT1 no longer drives modX")
+    if re.search(r"leftStickUp\s*=\s*inputs\.rf4\s*;", source):
+        fail("RF4 must not directly drive Up")
 
 
-def check_tilt3_active_gates_legacy_blocks(source: str, before_patch: str) -> None:
-    active_match = re.search(
-        r"const\s+bool\s+senscope_tilt3_active\s*=\s*"
-        r"inputs\.lt3\s*\|\|\s*\(\s*inputs\.lt1\s*&&\s*inputs\.lt2\s*\)\s*;",
-        source,
-    )
-    if active_match is None:
-        fail("missing senscope_tilt3_active boolean with LT3 OR LT1+LT2")
-
-    lt1_match = re.search(
-        r"if\s*\(\s*inputs\.lt1\s*&&\s*!\s*senscope_tilt3_active\s*\)\s*\{",
-        before_patch,
-    )
-    if lt1_match is None:
-        fail("old LT1 prototype block must be gated by !senscope_tilt3_active")
-
-    lt2_match = re.search(
-        r"if\s*\(\s*inputs\.lt2\s*&&\s*!\s*senscope_tilt3_active\s*\)\s*\{",
-        before_patch,
-    )
-    if lt2_match is None:
-        fail("old LT2 prototype block must be gated by !senscope_tilt3_active")
-
-    if not (active_match.start() < lt1_match.start() < lt2_match.start()):
-        fail("senscope_tilt3_active must be computed before old LT1/LT2 prototype blocks")
-
-
-def forbid_patch_assignments(block: str) -> None:
-    for field in FORBIDDEN_PATCH_ASSIGNMENTS:
-        if re.search(rf"\b{re.escape(field)}\s*=", block):
-            fail(f"Tilt patch block must not assign {field}")
-
-
-def check_no_push_flashing(source: str) -> list[str]:
-    matches: list[str] = []
-    for line_number, line in enumerate(source.splitlines(), start=1):
-        for pattern in PUSH_FLASH_PATTERNS:
-            if re.search(pattern, line, re.IGNORECASE):
-                matches.append(f"{ULTIMATE_PATH.relative_to(REPO_ROOT)}:{line_number}: {line.strip()}")
-    return matches
-
-
-def formula_value_bounds() -> dict[str, tuple[int, int]]:
-    # Current formulas use directions.x/y in {-1, 0, 1}. These ranges confirm
-    # the resulting byte values stay within [0, 255] without overflow tricks.
-    return {
-        "tilt1_x": (128 - 59, 128 + 59),
-        "tilt1_y": (128 - 41, 128 + 41),
-        "tilt2_x": (128 - 40, 128 + 40),
-        "tilt2_y": (128 - 49, 128 + 49),
-        "tilt3_x": (128 - 53, 128 + 53),
-        "tilt3_y": (128 - 42, 128 + 42),
-    }
+def ensure_no_forbidden_tokens(source: str) -> None:
+    lowered = source.lower()
+    for token in FORBIDDEN_TOKENS:
+        if token in lowered:
+            fail(f"forbidden token present: {token}")
 
 
 def main() -> int:
-    source = ULTIMATE_PATH.read_text(encoding="utf-8")
-    block = extract_patch_block(source)
-    before_patch = extract_before_patch(source)
-    dpad_layer_body = extract_dpad_layer_body(source)
-    cstick_neutralization_body = extract_cstick_neutralization_body(source)
+    try:
+        source = ULTIMATE_PATH.read_text(encoding="utf-8")
+        block = extract_marker_block(source)
 
-    check_tilt3_active_gates_legacy_blocks(source, before_patch)
-    require(r"if\s*\(\s*senscope_tilt3_active\s*\)", block, "Tilt3 priority branch uses shared active condition")
-    require(r"else\s+if\s*\(\s*inputs\.lt1\s*\)", block, "lt1 branch after Tilt3")
-    require(r"else\s+if\s*\(\s*inputs\.lt2\s*\)", block, "lt2 branch after Tilt3")
-    require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(directions\.x\s*\*\s*53\)", block, "Tilt3 leftStickX formula")
-    require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(directions\.y\s*\*\s*42\)", block, "Tilt3 leftStickY formula")
-    require(r"outputs\.leftStickX\s*=\s*128\s*-\s*\(directions\.x\s*\*\s*59\)", block, "Tilt1 leftStickX formula")
-    require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(directions\.y\s*\*\s*41\)", block, "Tilt1 leftStickY formula")
-    require(r"outputs\.leftStickX\s*=\s*128\s*\+\s*\(directions\.x\s*\*\s*40\)", block, "Tilt2 leftStickX formula")
-    require(r"outputs\.leftStickY\s*=\s*128\s*\+\s*\(directions\.y\s*\*\s*49\)", block, "Tilt2 leftStickY formula")
-    require(r"if\s*\(\s*inputs\.nunchuk_c\s*\)", dpad_layer_body, "D-pad layer remaining nunchuk C condition")
-    require(r"if\s*\(\s*inputs\.nunchuk_c\s*\)", cstick_neutralization_body, "C-stick neutralization remaining nunchuk C condition")
-    forbid_lt1_lt2_chord(dpad_layer_body, "D-pad layer condition")
-    forbid_lt1_lt2_chord(cstick_neutralization_body, "C-stick/right-stick neutralization condition")
-    forbid_patch_assignments(block)
+        ensure_required_shapes(source, block)
+        ensure_no_forbidden_tokens(source)
 
-    push_flash_matches = check_no_push_flashing(source)
-    if push_flash_matches:
-        fail("push/flashing terms found in checked runtime file: " + "; ".join(push_flash_matches))
+        table_summaries: list[str] = []
+        for table_name in REQUIRED_TABLES:
+            values = extract_table_values(source, table_name)
+            table_summaries.append(f"{table_name}:{values[0]}->{values[4]}->{values[8]}")
 
-    bounds = formula_value_bounds()
-    out_of_bounds = [label for label, (low, high) in bounds.items() if low < 0 or high > 255]
-    if out_of_bounds:
-        fail("Tilt/Tilt2/Tilt3 formula ranges exceed byte range: " + ", ".join(out_of_bounds))
-
-    table_markers = [marker for marker in TABLE_MARKER_PATTERNS if marker in source]
+        if "inputs.lt3 ||" in source:
+            fail("legacy standalone LT3 Tilt3 expression must not remain")
+    except (AssertionError, FileNotFoundError) as exc:
+        print("glyph_native_ultimate_table_runtime_scope")
+        print("status=FAIL")
+        print(f"failure={exc}")
+        return 1
 
     print("glyph_native_ultimate_table_runtime_scope")
     print("status=PASS")
     print(f"source={ULTIMATE_PATH.relative_to(REPO_ROOT)}")
-    print("tilt_patch_markers=present")
-    print("push_flashing_code_in_checked_files=absent")
-    print("tilt_tilt2_tilt3_formulas_byte_safe=true")
-    print(f"formula_ranges={bounds}")
-    print(f"table_runtime_markers={'present:' + ','.join(table_markers) if table_markers else 'absent'}")
-    print("senscope_tilt3_active=inputs.lt3 || (inputs.lt1 && inputs.lt2)")
-    print("lt1_lt2_both_held_resolves_to_tilt3=true")
-    print("legacy_lt1_block_gated_by_tilt3_active=true")
-    print("legacy_lt2_block_gated_by_tilt3_active=true")
-    print("lt1_lt2_dpad_layer_activation=false")
-    print("lt1_lt2_cstick_neutralization=false")
-    print("lt1_branch=inputs.lt1 after Tilt3 priority")
-    print("lt2_branch=inputs.lt2 after Tilt3 priority")
-    print("right_stick_or_trigger_assignments_inside_tilt_patch=false")
+    print("runtime_markers=present")
+    print("tables_validated=16")
+    print("ls_to_dpad_role=rf7")
+    print("mode_role=rf8")
+    print("lt3_role=y2")
+    print("tilt3_role=rf3_and_rf4")
+    print("l_role=lt1")
+    print("table_samples=" + ";".join(table_summaries))
     return 0
 
 

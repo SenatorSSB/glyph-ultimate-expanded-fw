@@ -77,3 +77,8 @@ Warnings:
 - The prior LT3-active artifact path remains successful historical evidence for validating the LT3/D-pad remap path.
 - The identity-baseline branch (`glyph/gfw2-ultimate-identity-profile-baseline`) supersedes this artifact as the active development baseline for future runtime-only custom behavior work.
 - Do not confuse historical LT3/D-pad remap artifact behavior with identity-baseline behavior; the identity baseline intentionally removes semantic remap assumptions so follow-up runtime implementation can own those behaviors explicitly.
+
+## 2026-05-28 Amendment: Runtime Supersession For Active Development
+
+- The historical LT3/D-pad remap artifact path is superseded for active development by the identity-runtime implementation branch (`glyph/gfw2-identity-runtime-smashbox-modifiers`).
+- Under the identity runtime policy, no claim is made that old standalone LT3 Tilt3 behavior remains active; LT3 is runtime-owned as Y2 and Tilt3 is runtime-owned as RF3+RF4 chord behavior.

@@ -74,8 +74,18 @@ def steps() -> list[Step]:
             optional=True,
         ),
         step(
-            "ultimate tilt3 runtime source",
-            "tools/check_glyph_ultimate_tilt3_runtime_source.py",
+            "smashbox profile tables",
+            "tools/check_glyph_smashbox_profile_tables.py",
+            optional=True,
+        ),
+        step(
+            "smashbox runtime source",
+            "tools/check_glyph_smashbox_modifiers_runtime_source.py",
+            optional=True,
+        ),
+        step(
+            "smashbox identity runtime bindings",
+            "tools/check_glyph_smashbox_identity_runtime_bindings.py",
             optional=True,
         ),
     ]
