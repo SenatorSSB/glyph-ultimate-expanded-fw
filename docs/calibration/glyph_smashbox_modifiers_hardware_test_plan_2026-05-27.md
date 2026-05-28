@@ -77,3 +77,9 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 - If nunchuk hardware is unavailable, keep `NOT_TESTED_UNAVAILABLE`.
 - Do not claim standalone LT3 Tilt3 behavior for this identity runtime.
 - Report physical/logical role evidence and measured outputs together in the hardware result.
+
+## 2026-05-28 Note
+
+- Current plan rows are satisfied by:
+  - `docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md`
+- Nunchuk remains unavailable/not tested.

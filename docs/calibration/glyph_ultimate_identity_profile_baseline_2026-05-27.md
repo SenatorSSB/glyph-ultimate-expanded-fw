@@ -56,3 +56,8 @@ Do not apply this identity artifact expecting full Smash Box X/Y/Mode/LS->DPad b
 - The Ultimate SOCD pairs are profile-level input processing source-backed by `src/core/InputMode.cpp`.
 - The active Ultimate SOCD pairs are `LF3` vs `LF1`, `LF5` vs `LF2`, `RT3` vs `RT5`, and `RT2` vs `RT4`.
 - `RF6` is intentionally not included in the Up/Down SOCD pair because runtime forced-Up must bypass Down.
+
+## 2026-05-28 Hardware Confirmation Amendment
+
+- Explicit self-activated identity profile plus identity-runtime firmware was hardware-confirmed.
+- Omitted-activates identity remains superseded for the active hardware workflow.

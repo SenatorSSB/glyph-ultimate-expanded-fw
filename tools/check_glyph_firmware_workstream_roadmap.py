@@ -49,6 +49,7 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_smash_box_profile_output_tables_2026-05-27.md",
     "docs/calibration/glyph_smashbox_modifiers_runtime_implementation_2026-05-27.md",
     "docs/calibration/glyph_smashbox_modifiers_hardware_test_plan_2026-05-27.md",
+    "docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md",
     "docs/calibration/glyph_ultimate_lt3_profile_binding_2026-05-27.md",
     "docs/calibration/glyph_active_ultimate_lt3_config_artifact_2026-05-27.md",
     "docs/calibration/glyph_ultimate_identity_profile_baseline_2026-05-27.md",

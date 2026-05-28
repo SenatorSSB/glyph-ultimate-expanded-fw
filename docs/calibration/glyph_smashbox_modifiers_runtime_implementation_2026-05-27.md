@@ -222,3 +222,9 @@ Manual hardware validation is required for:
 - no standalone D-pad outputs from empty buttons,
 - empty/no-output buttons remain inert,
 - nunchuk availability row handling.
+
+## 2026-05-28 Amendment: Identity Runtime Hardware Confirmation
+
+- Identity-runtime Smash Box firmware plus explicit self-activated identity profile was hardware-confirmed by user report.
+- Final result doc: `docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md`.
+- Hardware validation coverage reported by user includes all angles, functions, and combinations.
