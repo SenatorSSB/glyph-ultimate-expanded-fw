@@ -115,6 +115,14 @@ def require_runtime_doc() -> str:
         fail("runtime doc must state LT1=L")
     if "RF4` is Tilt2-only" not in text and "RF4 is Tilt2-only" not in text:
         fail("runtime doc must state RF4 is Tilt2-only")
+    if re.search(r"`?RF6`?\s+is\s+forced-Up\s+only\s+and\s+no\s+longer\s+drives\s+game\s+Y\s+output", text) is None:
+        fail("runtime doc must state RF6 no longer drives game Y")
+    if "Game Y is intentionally left unassigned" not in text:
+        fail("runtime doc must document unassigned game Y policy")
+    if re.search(r"`?LT2`?\s+remains\s+the\s+`?Y1`?\s+modifier\s+role\s+only", text) is None:
+        fail("runtime doc must state LT2 remains Y1-only")
+    if "outputs.modY = inputs.lt2" not in text or "removed/neutralized" not in text:
+        fail("runtime doc must document LT2/modY removal policy")
     if "R is intentionally left unassigned" not in text:
         fail("runtime doc must document unassigned R policy")
     if "outputs.modX = inputs.lt1" not in text or "removed/neutralized" not in text:
@@ -136,6 +144,14 @@ def require_runtime_source() -> str:
 
     if "outputs.buttonL = inputs.lt1;" not in text:
         fail("runtime source must assign LT1 to L button")
+    if "outputs.y = inputs.rf6;" in text:
+        fail("runtime source must not assign RF6 to game Y")
+    if "outputs.y = false;" not in text:
+        fail("runtime source must leave game Y unassigned (outputs.y=false) unless explicitly redesigned")
+    if "outputs.modY = inputs.lt2;" in text:
+        fail("runtime source must not assign LT2 to modY")
+    if "outputs.modY = false;" not in text:
+        fail("runtime source must neutralize modY for LT2 Y1-only policy")
     if "outputs.modX = inputs.lt1;" in text:
         fail("runtime source must not assign LT1 to modX")
     if "outputs.buttonR = inputs.rf3;" in text:
@@ -223,7 +239,9 @@ def main() -> int:
     print("lt3_role=Y2")
     print("tilt3_role=RF3+RF4")
     print("r_role=unassigned")
+    print("y_role=unassigned")
     print("l_role=LT1")
+    print("lt2_mody_conflict=absent")
     print("lt1_modx_conflict=absent")
     return 0
 

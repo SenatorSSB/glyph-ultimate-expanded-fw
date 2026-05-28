@@ -27,12 +27,15 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF6 forced-Up with Right | `RF6 + Right` | N/A | Effective direction `9` table output | NOT_TESTED |
 | RF6 forced-Up with Down+Left | `RF6 + Down + Left` | N/A | Effective direction `7` table output | NOT_TESTED |
 | RF6 forced-Up with Down+Right | `RF6 + Down + Right` | N/A | Effective direction `9` table output | NOT_TESTED |
+| RF6 game Y guard | `RF6` only | N/A | Forced-Up behavior is present and game Y is not pressed | NOT_TESTED |
 | Tilt3 chord source | `RF3 + RF4` | 1..9 | Effective Tilt3 table (or MTilt3 when Mode on) | NOT_TESTED |
 | LT3 role | `LT3` only | 1..9 | Y2 table (or MY2 when Mode on), not standalone Tilt3 | NOT_TESTED |
 | RF4 role guard | `RF4` only (no direction inputs) | N/A | Tilt2 neutral-direction behavior; RF4 does not act as Up direction source | NOT_TESTED |
 | RF3 role guard | `RF3` only | N/A | Tilt1 behavior and does not assert R | NOT_TESTED |
 | L button role | `LT1` | N/A | Native Ultimate `L` output asserted | NOT_TESTED |
 | LT1 modifier guard | `LT1` only | N/A | Does not emit old LT1->modX behavior | NOT_TESTED |
+| LT2 modY guard | `LT2` only | N/A | Y1 modifier behavior only and no LT2->modY output | NOT_TESTED |
+| Game Y assignment status | No separately assigned Y physical button | N/A | Game Y is unassigned in this runtime branch | NOT_TESTED |
 | Multi-mod X+Y deactivation | Any X plus any Y | Representative + 1..9 spot checks | Falls back to Default/Mode default | NOT_TESTED |
 | Multi-mod X/Y+Tilt deactivation | Any X or Y plus any effective Tilt | Representative + 1..9 spot checks | Falls back to Default/Mode default | NOT_TESTED |
 | Mode with multiple modifiers | Mode + 2 or more effective non-mode modifiers | Representative + 1..9 spot checks | Mode default table | NOT_TESTED |

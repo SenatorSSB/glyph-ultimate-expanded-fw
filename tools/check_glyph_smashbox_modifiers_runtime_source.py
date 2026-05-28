@@ -154,6 +154,21 @@ def ensure_r_and_modx_policies(source: str, doc_text: str) -> None:
     require(r"outputs\.buttonL\s*=\s*inputs\.lt1\s*;", source, "LT1 drives L button")
 
 
+def ensure_y_and_mody_policies(source: str, doc_text: str) -> None:
+    if re.search(r"outputs\.y\s*=\s*inputs\.rf6\s*;", source):
+        fail("RF6 forced-Up must not drive game Y")
+    if re.search(r"outputs\.modY\s*=\s*inputs\.lt2\s*;", source):
+        if "source-confirmed harmless" not in doc_text:
+            fail("LT2 (Y1 role) must not drive modY unless doc marks it source-confirmed harmless")
+
+    if re.search(r"outputs\.y\s*=\s*false\s*;", source) is None:
+        if "source-approved alternative game Y binding" not in doc_text:
+            fail("game Y must be unassigned (outputs.y=false) or doc must declare source-approved alternative game Y binding")
+    if re.search(r"outputs\.modY\s*=\s*false\s*;", source) is None:
+        if "modY source-confirmed harmless" not in doc_text:
+            fail("modY must be neutralized (outputs.modY=false) unless doc declares modY source-confirmed harmless")
+
+
 def ensure_no_forbidden_tokens(source: str, block: str) -> None:
     lowered_source = source.lower()
     lowered_block = block.lower()
@@ -182,6 +197,10 @@ def read_runtime_doc() -> str:
     require(r"Implementation is complete", text, "runtime doc completion state")
     require(r"RF6\s*=\s*forced Up", text, "runtime doc RF6 forced-Up role")
     require(r"`?RF4`?\s*is\s*Tilt2-only", text, "runtime doc RF4 Tilt2-only policy")
+    require(r"`?RF6`?\s+is\s+forced-Up\s+only\s+and\s+no\s+longer\s+drives\s+game\s+Y", text, "runtime doc RF6 no longer game Y policy")
+    require(r"Game Y\s+is\s+intentionally\s+left\s+unassigned", text, "runtime doc game Y unassigned policy")
+    require(r"`?LT2`?\s+remains\s+the\s+`?Y1`?\s+modifier\s+role\s+only", text, "runtime doc LT2 Y1-only policy")
+    require(r"modY.*removed/neutralized|removed/neutralized.*modY", text, "runtime doc LT2/modY removal policy", flags=re.IGNORECASE)
     require(r"R\s+is\s+intentionally\s+left\s+unassigned", text, "runtime doc R unassigned policy")
     require(r"modX\s*=\s*inputs\.lt1\s*.*removed|removed/neutralized", text, "runtime doc LT1/modX policy", flags=re.IGNORECASE)
 
@@ -210,6 +229,7 @@ def main() -> int:
         ensure_rf4_not_up(source)
         ensure_ls_to_dpad_shape(source)
         ensure_r_and_modx_policies(source, doc_text)
+        ensure_y_and_mody_policies(source, doc_text)
         ensure_no_forbidden_tokens(source, block)
     except AssertionError as exc:
         print("status=FAIL")
@@ -228,6 +248,8 @@ def main() -> int:
     print("ls_to_dpad_role=rf7")
     print("l_button_role=lt1")
     print("r_button_role=unassigned")
+    print("y_button_role=unassigned")
+    print("lt2_mody_conflict=absent")
     print("lt1_modx_conflict=absent")
     return 0
 

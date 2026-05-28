@@ -242,7 +242,7 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.a = inputs.rt1;
     outputs.b = inputs.rf1;
     outputs.x = inputs.rf2;
-    outputs.y = inputs.rf6;
+    outputs.y = false;
     outputs.buttonL = inputs.lt1;
     outputs.buttonR = false;
     outputs.triggerLDigital = inputs.lf4;
@@ -288,7 +288,7 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.rightStickUp = inputs.rt4;
 
     outputs.modX = false;
-    outputs.modY = inputs.lt2;
+    outputs.modY = false;
 }
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {

@@ -45,6 +45,7 @@ Direction mapping used by identity runtime:
 - `RF6 = forced Up`
 
 `RF4` is Tilt2-only and is no longer consumed as Up direction input in the Smash Box runtime path.
+`RF6` is forced-Up only and no longer drives game Y output in this runtime branch.
 
 ## Canonical Table Source
 
@@ -112,6 +113,14 @@ RF6 forced-Up policy for table direction:
 - `outputs.modX = inputs.lt1` is removed/neutralized for this identity runtime path (`modX` no longer follows LT1).
 - Existing trigger behavior remains on its prior trigger paths.
 
+## Y Button and modY Behavior
+
+- `RF6` is reserved for forced-Up direction behavior and is not used as game Y in this branch (`outputs.y = false`).
+- Game Y is intentionally left unassigned until a user-approved/source-backed physical binding is provided.
+- `LT2` remains the `Y1` modifier role only.
+- `outputs.modY = inputs.lt2` is removed/neutralized for this identity runtime path (`outputs.modY = false`).
+- `modY` remains neutralized unless later source-confirmed harmless/internal-only evidence is explicitly documented.
+
 ## R Button Behavior
 
 - `outputs.buttonR = inputs.rf3` is removed in this branch because RF3 is reserved for Tilt1.
@@ -138,8 +147,10 @@ Manual hardware validation is required for:
 - `RF3+RF4 => Tilt3`,
 - `LT3 => Y2` and no standalone LT3 Tilt3 claim,
 - `LT1 => L`,
+- `RF6` forced-Up path does not press game Y,
 - `RF4` behaves as Tilt2 and does not act as Up direction source,
 - `RF3` Tilt1 path does not press R,
+- `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` does not emit prior LT1->modX behavior,
 - LS->DPad behavior and orthogonality,
 - nunchuk availability row handling.
