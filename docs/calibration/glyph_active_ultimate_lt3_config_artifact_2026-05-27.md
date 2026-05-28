@@ -82,3 +82,7 @@ Warnings:
 
 - The historical LT3/D-pad remap artifact path is superseded for active development by the identity-runtime implementation branch (`glyph/gfw2-identity-runtime-smashbox-modifiers`).
 - Under the identity runtime policy, no claim is made that old standalone LT3 Tilt3 behavior remains active; LT3 is runtime-owned as Y2 and Tilt3 is runtime-owned as RF3+RF4 chord behavior.
+
+## 2026-05-28 Amendment: Identity Runtime Hardware Confirmation
+
+- The current active artifact identity profile has now been hardware-confirmed with the identity-runtime Smash Box firmware.
