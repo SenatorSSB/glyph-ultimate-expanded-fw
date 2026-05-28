@@ -107,9 +107,13 @@ def ensure_chord_shape(block: str) -> None:
 
 def ensure_rf6_forced_up_shape(source: str) -> None:
     require(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*;", source, "RF6 forced-Up source")
-    require(r"const\s+bool\s+effective_ls_up\s*=\s*force_up_active\s*;", source, "effective Up uses RF6")
     require(
-        r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;",
+        r"const\s+bool\s+effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;",
+        source,
+        "effective Up uses LF2 or RF6",
+    )
+    require(
+        r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!force_up_active\s*;",
         source,
         "Down suppressed by RF6 forced-Up",
     )
@@ -119,6 +123,20 @@ def ensure_rf6_forced_up_shape(source: str) -> None:
         "UpdateDirections uses effective RF6-based Up/Down",
         flags=re.MULTILINE,
     )
+
+
+def ensure_no_standalone_dpad_shape(source: str) -> None:
+    forbidden_direct_dpad = (
+        r"outputs\.dpadLeft\s*\|=\s*inputs\.lf8\s*;",
+        r"outputs\.dpadRight\s*\|=\s*inputs\.lf6\s*;",
+        r"outputs\.dpadUp\s*\|=\s*inputs\.rf13\s*;",
+        r"outputs\.dpadDown\s*\|=\s*inputs\.rf10\s*;",
+        r"outputs\.dpadLeft\s*=\s*inputs\.lf8\s*;",
+        r"outputs\.dpadRight\s*=\s*inputs\.lf6\s*;",
+    )
+    for pattern in forbidden_direct_dpad:
+        if re.search(pattern, source):
+            fail("runtime source must not preserve old standalone/direct D-pad cluster outputs")
 
 
 def ensure_rf4_not_up(source: str) -> None:
@@ -152,6 +170,9 @@ def ensure_r_and_modx_policies(source: str, doc_text: str) -> None:
         if "source-confirmed harmless" not in doc_text:
             fail("LT1 must not drive modX unless doc marks it source-confirmed harmless")
     require(r"outputs\.buttonL\s*=\s*inputs\.lt1\s*;", source, "LT1 drives L button")
+    require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt1\s*;", source, "LT1 drives GameCube L trigger digital carrier")
+    require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 drives GameCube R trigger digital carrier")
+    require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*;", source, "RT1 drives source-confirmed GameCube/N64 Z carrier")
 
 
 def ensure_y_and_mody_policies(source: str, doc_text: str) -> None:
@@ -161,12 +182,21 @@ def ensure_y_and_mody_policies(source: str, doc_text: str) -> None:
         if "source-confirmed harmless" not in doc_text:
             fail("LT2 (Y1 role) must not drive modY unless doc marks it source-confirmed harmless")
 
-    if re.search(r"outputs\.y\s*=\s*false\s*;", source) is None:
-        if "source-approved alternative game Y binding" not in doc_text:
-            fail("game Y must be unassigned (outputs.y=false) or doc must declare source-approved alternative game Y binding")
+    require(r"outputs\.y\s*=\s*inputs\.rf10\s*;", source, "RF10 drives game Y")
     if re.search(r"outputs\.modY\s*=\s*false\s*;", source) is None:
         if "modY source-confirmed harmless" not in doc_text:
             fail("modY must be neutralized (outputs.modY=false) unless doc declares modY source-confirmed harmless")
+
+
+def ensure_main_button_shape(source: str) -> None:
+    require(r"outputs\.a\s*=\s*inputs\.rf1\s*;", source, "RF1 drives A")
+    require(r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*;", source, "RF5 or LF4 drives B")
+    require(r"outputs\.x\s*=\s*inputs\.rf2\s*;", source, "RF2 drives X")
+    require(r"outputs\.y\s*=\s*inputs\.rf10\s*;", source, "RF10 drives Y")
+    if re.search(r"outputs\.triggerLDigital\s*=\s*inputs\.lf4\s*;", source):
+        fail("LF4 must not be stolen by L trigger digital when LF4 is B")
+    if re.search(r"outputs\.triggerRDigital\s*=\s*inputs\.rf5\s*;", source):
+        fail("RF5 must not be stolen by R trigger digital when RF5 is B")
 
 
 def ensure_no_forbidden_tokens(source: str, block: str) -> None:
@@ -198,11 +228,12 @@ def read_runtime_doc() -> str:
     require(r"RF6\s*=\s*forced Up", text, "runtime doc RF6 forced-Up role")
     require(r"`?RF4`?\s*is\s*Tilt2-only", text, "runtime doc RF4 Tilt2-only policy")
     require(r"`?RF6`?\s+is\s+forced-Up\s+only\s+and\s+no\s+longer\s+drives\s+game\s+Y", text, "runtime doc RF6 no longer game Y policy")
-    require(r"Game Y\s+is\s+intentionally\s+left\s+unassigned", text, "runtime doc game Y unassigned policy")
     require(r"`?LT2`?\s+remains\s+the\s+`?Y1`?\s+modifier\s+role\s+only", text, "runtime doc LT2 Y1-only policy")
     require(r"modY.*removed/neutralized|removed/neutralized.*modY", text, "runtime doc LT2/modY removal policy", flags=re.IGNORECASE)
-    require(r"R\s+is\s+intentionally\s+left\s+unassigned", text, "runtime doc R unassigned policy")
-    require(r"modX\s*=\s*inputs\.lt1\s*.*removed|removed/neutralized", text, "runtime doc LT1/modX policy", flags=re.IGNORECASE)
+    require(r"RF10\s*=\s*Y", text, "runtime doc RF10 game Y role")
+    require(r"RT1\s*=\s*Z", text, "runtime doc RT1 Z role")
+    require(r"RF16\s*=\s*R", text, "runtime doc RF16 R role")
+    require(r"no standalone D-pad", text, "runtime doc no standalone D-pad policy", flags=re.IGNORECASE)
 
     for token in FORBIDDEN_STOP_CODES:
         if token in text:
@@ -226,8 +257,10 @@ def main() -> int:
         ensure_no_old_lt3_tilt3_shape(source, block)
         ensure_chord_shape(block)
         ensure_rf6_forced_up_shape(source)
+        ensure_main_button_shape(source)
         ensure_rf4_not_up(source)
         ensure_ls_to_dpad_shape(source)
+        ensure_no_standalone_dpad_shape(source)
         ensure_r_and_modx_policies(source, doc_text)
         ensure_y_and_mody_policies(source, doc_text)
         ensure_no_forbidden_tokens(source, block)
@@ -247,8 +280,10 @@ def main() -> int:
     print("tilt3_role=rf3_and_rf4_chord")
     print("ls_to_dpad_role=rf7")
     print("l_button_role=lt1")
-    print("r_button_role=unassigned")
-    print("y_button_role=unassigned")
+    print("r_button_role=rf16")
+    print("z_button_role=rt1_source_confirmed_buttonR_carrier")
+    print("y_button_role=rf10")
+    print("standalone_dpad=none")
     print("lt2_mody_conflict=absent")
     print("lt1_modx_conflict=absent")
     return 0

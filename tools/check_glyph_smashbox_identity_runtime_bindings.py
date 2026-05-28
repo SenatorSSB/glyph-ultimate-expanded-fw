@@ -15,6 +15,14 @@ RUNTIME_DOC_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_smashbox_modifier
 SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 
 ROLE_LINES = (
+    "`RF1 = A`",
+    "`RF5 = B`",
+    "`LF4 = B`",
+    "`RF2 = X`",
+    "`RF10 = Y`",
+    "`RT1 = Z`",
+    "`LT1 = L`",
+    "`RF16 = R`",
     "`RF8 = Mode`",
     "`LT5 = X1`",
     "`LT4 = X2`",
@@ -22,7 +30,6 @@ ROLE_LINES = (
     "`LT3 = Y2`",
     "`RF7 = LS->DPad`",
     "`RF6 = forced Up`",
-    "`LT1 = L`",
     "`RF3 = Tilt1`",
     "`RF4 = Tilt2`",
     "`RF3 + RF4 = Tilt3`",
@@ -37,6 +44,7 @@ SOURCE_ANCHORS = (
     "inputs.rf7",
     "inputs.rf6",
     "inputs.lt1",
+    "inputs.rf16",
     "inputs.rf3",
     "inputs.rf4",
 )
@@ -45,6 +53,7 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_RT1",
     "BTN_RF1",
     "BTN_RF2",
+    "BTN_RF10",
     "BTN_RF6",
     "BTN_LT1",
     "BTN_LF4",
@@ -64,6 +73,27 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_RT5",
     "BTN_RT2",
     "BTN_RT4",
+    "BTN_RF16",
+    "BTN_MB4",
+    "BTN_MB5",
+    "BTN_MB6",
+    "BTN_MB7",
+)
+
+EMPTY_NO_OUTPUT_INPUTS = (
+    "inputs.lf6",
+    "inputs.lf7",
+    "inputs.lf8",
+    "inputs.lt6",
+    "inputs.rf9",
+    "inputs.rf11",
+    "inputs.rf12",
+    "inputs.rf13",
+    "inputs.rf14",
+    "inputs.rf15",
+    "inputs.mb1",
+    "inputs.mb2",
+    "inputs.mb3",
 )
 
 
@@ -158,16 +188,18 @@ def require_runtime_doc() -> str:
         fail("runtime doc must state RF4 is Tilt2-only")
     if re.search(r"`?RF6`?\s+is\s+forced-Up\s+only\s+and\s+no\s+longer\s+drives\s+game\s+Y\s+output", text) is None:
         fail("runtime doc must state RF6 no longer drives game Y")
-    if "Game Y is intentionally left unassigned" not in text:
-        fail("runtime doc must document unassigned game Y policy")
+    if "RF10 = Y" not in text:
+        fail("runtime doc must document RF10=Y")
     if re.search(r"`?LT2`?\s+remains\s+the\s+`?Y1`?\s+modifier\s+role\s+only", text) is None:
         fail("runtime doc must state LT2 remains Y1-only")
     if "outputs.modY = inputs.lt2" not in text or "removed/neutralized" not in text:
         fail("runtime doc must document LT2/modY removal policy")
-    if "R is intentionally left unassigned" not in text:
-        fail("runtime doc must document unassigned R policy")
-    if "outputs.modX = inputs.lt1" not in text or "removed/neutralized" not in text:
-        fail("runtime doc must document LT1/modX removal policy")
+    if "RT1 = Z" not in text:
+        fail("runtime doc must document RT1=Z")
+    if "RF16 = R" not in text:
+        fail("runtime doc must document RF16=R")
+    if "no standalone D-pad" not in text:
+        fail("runtime doc must document no standalone D-pad policy")
     if "standalone `LT3 -> Tilt3` behavior is historical only" not in text:
         fail("runtime doc must mark standalone LT3->Tilt3 as historical only")
 
@@ -183,12 +215,21 @@ def require_runtime_source() -> str:
         if anchor not in text:
             fail(f"missing runtime source anchor: {anchor}")
 
-    if "outputs.buttonL = inputs.lt1;" not in text:
-        fail("runtime source must assign LT1 to L button")
+    expected_source_lines = (
+        ("outputs.a = inputs.rf1;", "runtime source must assign RF1 to A"),
+        ("outputs.b = inputs.rf5 || inputs.lf4;", "runtime source must assign RF5 or LF4 to B"),
+        ("outputs.x = inputs.rf2;", "runtime source must assign RF2 to X"),
+        ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
+        ("outputs.buttonL = inputs.lt1;", "runtime source must assign LT1 to L button"),
+        ("outputs.buttonR = inputs.rt1;", "runtime source must assign RT1 to source-confirmed Z carrier"),
+        ("outputs.triggerLDigital = inputs.lt1;", "runtime source must assign LT1 to GameCube L carrier"),
+        ("outputs.triggerRDigital = inputs.rf16;", "runtime source must assign RF16 to GameCube R carrier"),
+    )
+    for line, message in expected_source_lines:
+        if line not in text:
+            fail(message)
     if "outputs.y = inputs.rf6;" in text:
         fail("runtime source must not assign RF6 to game Y")
-    if "outputs.y = false;" not in text:
-        fail("runtime source must leave game Y unassigned (outputs.y=false) unless explicitly redesigned")
     if "outputs.modY = inputs.lt2;" in text:
         fail("runtime source must not assign LT2 to modY")
     if "outputs.modY = false;" not in text:
@@ -197,16 +238,22 @@ def require_runtime_source() -> str:
         fail("runtime source must not assign LT1 to modX")
     if "outputs.buttonR = inputs.rf3;" in text:
         fail("runtime source must not assign RF3 to R")
+    if "outputs.triggerLDigital = inputs.lf4;" in text:
+        fail("runtime source must not assign LF4 to L trigger digital when LF4 is B")
+    if "outputs.triggerRDigital = inputs.rf5;" in text:
+        fail("runtime source must not assign RF5 to R trigger digital when RF5 is B")
     if "leftStickUp = inputs.rf4;" in text:
         fail("runtime source must not consume RF4 as Up")
     if re.search(r"inputs\.rf4\s*,\s*//\s*Up", text):
         fail("runtime source must not pass RF4 as Up into UpdateDirections")
     if re.search(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*;", text) is None:
         fail("runtime source must define RF6 forced-Up source")
-    if re.search(r"const\s+bool\s+effective_ls_up\s*=\s*force_up_active\s*;", text) is None:
-        fail("runtime source must define effective Up from RF6")
-    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;", text) is None:
-        fail("runtime source must suppress Down when RF6 forced-Up is active")
+    if re.search(r"const\s+bool\s+effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", text) is None:
+        fail("runtime source must define effective Up from LF2 or RF6")
+    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;", text) is not None:
+        fail("runtime source must not use old LF2 Down shape")
+    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!force_up_active\s*;", text) is None:
+        fail("runtime source must suppress LF5 Down when RF6 forced-Up is active")
     if re.search(
         r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;",
         text,
@@ -232,6 +279,12 @@ def require_runtime_source() -> str:
         text,
     ) is None:
         fail("runtime source must use effective Up for LS->DPad")
+    if "outputs.dpadLeft |= inputs.lf8;" in text or "outputs.dpadRight |= inputs.lf6;" in text:
+        fail("runtime source must not preserve old standalone D-pad direct inputs")
+
+    for empty_input in EMPTY_NO_OUTPUT_INPUTS:
+        if re.search(r"outputs\.[A-Za-z0-9_]+\s*(?:=|\|=)\s*" + re.escape(empty_input), text):
+            fail(f"empty/no-output input drives a known game output: {empty_input}")
 
     if re.search(r"tilt3_effective\s*=\s*tilt1_pressed\s*&&\s*tilt2_pressed\s*;", text) is None:
         fail("runtime source must define Tilt3 as rf3&&rf4 chord")
@@ -283,9 +336,12 @@ def main() -> int:
     print("rf4_up_conflict=absent")
     print("lt3_role=Y2")
     print("tilt3_role=RF3+RF4")
-    print("r_role=unassigned")
-    print("y_role=unassigned")
+    print("z_role=RT1")
+    print("r_role=RF16")
+    print("y_role=RF10")
+    print("b_role=RF5_or_LF4")
     print("l_role=LT1")
+    print("standalone_dpad=none")
     print("lt2_mody_conflict=absent")
     print("lt1_modx_conflict=absent")
     return 0

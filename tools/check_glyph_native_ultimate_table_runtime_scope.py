@@ -96,17 +96,31 @@ def ensure_required_shapes(source: str, block: str) -> None:
         block,
         "Tilt3 chord shape",
     )
+    require(r"outputs\.a\s*=\s*inputs\.rf1\s*;", source, "RF1 mapped to A")
+    require(r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*;", source, "RF5 or LF4 mapped to B")
+    require(r"outputs\.x\s*=\s*inputs\.rf2\s*;", source, "RF2 mapped to X")
+    require(r"outputs\.y\s*=\s*inputs\.rf10\s*;", source, "RF10 mapped to Y")
     require(r"outputs\.buttonL\s*=\s*inputs\.lt1\s*;", source, "LT1 mapped to L")
+    require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt1\s*;", source, "LT1 mapped to GameCube L carrier")
+    require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*;", source, "RT1 mapped to source-confirmed Z carrier")
+    require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 mapped to source-confirmed R carrier")
+    require(r"effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", source, "LF2 or RF6 mapped to Up")
+    require(r"effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!force_up_active\s*;", source, "LF5 mapped to Down and suppressed by RF6")
     require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.leftStickX\s*=\s*center\.x\s*;[^}]*outputs\.leftStickY\s*=\s*center\.y\s*;", source, "LS->DPad neutralizes left stick")
     require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;", source, "LS->DPad up uses effective Up")
     require(r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;", source, "LS->DPad suppresses digital leftStickLeft")
     require(r"outputs\.leftStickRight\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_right\s*;", source, "LS->DPad suppresses digital leftStickRight")
     require(r"outputs\.leftStickDown\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_down\s*;", source, "LS->DPad suppresses digital leftStickDown")
     require(r"outputs\.leftStickUp\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_up\s*;", source, "LS->DPad suppresses digital leftStickUp")
-    require(r"outputs\.buttonR\s*=\s*false\s*;", source, "RF3 no longer drives R")
     require(r"outputs\.modX\s*=\s*false\s*;", source, "LT1 no longer drives modX")
     if re.search(r"leftStickUp\s*=\s*inputs\.rf4\s*;", source):
         fail("RF4 must not directly drive Up")
+    if re.search(r"outputs\.triggerLDigital\s*=\s*inputs\.lf4\s*;", source):
+        fail("LF4 must not drive L trigger because LF4 is duplicate B")
+    if re.search(r"outputs\.triggerRDigital\s*=\s*inputs\.rf5\s*;", source):
+        fail("RF5 must not drive R trigger because RF5 is duplicate B")
+    if "outputs.dpadLeft |= inputs.lf8;" in source or "outputs.dpadRight |= inputs.lf6;" in source:
+        fail("standalone direct D-pad inputs must not remain")
 
 
 def ensure_no_forbidden_tokens(source: str) -> None:
@@ -147,6 +161,10 @@ def main() -> int:
     print("lt3_role=y2")
     print("tilt3_role=rf3_and_rf4")
     print("l_role=lt1")
+    print("z_role=rt1")
+    print("r_role=rf16")
+    print("y_role=rf10")
+    print("standalone_dpad=none")
     print("table_samples=" + ";".join(table_summaries))
     return 0
 
