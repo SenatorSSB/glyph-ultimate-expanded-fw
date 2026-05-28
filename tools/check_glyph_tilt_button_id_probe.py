@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Tilt button ID probe in historical remap mode or identity baseline mode."""
+"""Validate Tilt button ID probe in historical remap mode or explicit identity baseline mode."""
 
 from __future__ import annotations
 
@@ -58,8 +58,8 @@ def main() -> int:
         "BTN_RF4": "BTN_LT2",
     }
     identity_expected = {
-        "BTN_RF3": None,
-        "BTN_RF4": None,
+        "BTN_RF3": "BTN_RF3",
+        "BTN_RF4": "BTN_RF4",
     }
     failures: list[str] = []
 
@@ -74,8 +74,11 @@ def main() -> int:
 
     semantic_remap_count = sum(
         1
-        for logical in remaps.values()
-        if logical is not None and logical != "BTN_UNSPECIFIED"
+        for physical, logical in remaps.items()
+        if logical not in (None, "BTN_UNSPECIFIED", physical)
+    )
+    omitted_activates_count = sum(
+        1 for logical in remaps.values() if logical in (None, "BTN_UNSPECIFIED")
     )
 
     profile_mode = "UNDETERMINED"
@@ -83,6 +86,10 @@ def main() -> int:
         profile_mode = "HISTORICAL_LT3_DPAD_REMAP"
     elif identity_matches:
         profile_mode = "IDENTITY_BASELINE"
+        if omitted_activates_count != 0:
+            failures.append(
+                "identity baseline expected explicit self-activates for MODE_ULTIMATE remap map"
+            )
         if semantic_remap_count != 0:
             failures.append(
                 "identity baseline expected no semantic remaps in MODE_ULTIMATE remap map"
@@ -97,6 +104,7 @@ def main() -> int:
     print("tilt2_physical_button=BTN_RF4")
     print(f"tilt2_logical_post_remap_input={remaps.get('BTN_RF4')}")
     print(f"profile_mode={profile_mode}")
+    print(f"omitted_activates_count={omitted_activates_count}")
     print(f"semantic_remap_count={semantic_remap_count}")
 
     if failures:

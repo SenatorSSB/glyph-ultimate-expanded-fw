@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Read-only checker for Ultimate identity profile baseline artifacts."""
+"""Read-only checker for Ultimate explicit self-activates identity baseline artifacts."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
-import sys
 from typing import Any
 
 
@@ -55,6 +54,15 @@ EXPECTED_PHYSICAL_BUTTONS = (
     "BTN_MB1",
     "BTN_MB2",
     "BTN_MB3",
+    "BTN_RF2",
+    "BTN_LF3",
+    "BTN_LF1",
+    "BTN_RF7",
+    "BTN_RF8",
+    "BTN_RT3",
+    "BTN_RT5",
+    "BTN_RT2",
+    "BTN_RT4",
 )
 
 
@@ -91,12 +99,12 @@ def _ultimate_mode(payload: dict[str, Any]) -> dict[str, Any]:
     return matches[0]
 
 
-def _normalized_remaps(mode: dict[str, Any]) -> list[dict[str, str | None]]:
+def _normalized_remaps(mode: dict[str, Any]) -> list[dict[str, str]]:
     remaps = mode.get("buttonRemapping")
     if not isinstance(remaps, list):
         raise AssertionError("MODE_ULTIMATE buttonRemapping must be a list")
 
-    normalized: list[dict[str, str | None]] = []
+    normalized: list[dict[str, str]] = []
     for index, entry in enumerate(remaps):
         if not isinstance(entry, dict):
             raise AssertionError(f"buttonRemapping[{index}] must be an object")
@@ -109,42 +117,25 @@ def _normalized_remaps(mode: dict[str, Any]) -> list[dict[str, str | None]]:
         if physical == "BTN_UNSPECIFIED":
             raise AssertionError(f"buttonRemapping[{index}] uses forbidden BTN_UNSPECIFIED")
 
+        if "activates" not in entry:
+            raise AssertionError(f"buttonRemapping[{index}] must include activates")
         activates = entry.get("activates")
-        if activates is not None:
-            if not isinstance(activates, str):
-                raise AssertionError(
-                    f"buttonRemapping[{index}].activates must be a string when present"
-                )
-            if activates == "BTN_UNSPECIFIED":
-                raise AssertionError(f"buttonRemapping[{index}] uses forbidden activates BTN_UNSPECIFIED")
+        if not isinstance(activates, str) or not activates:
+            raise AssertionError(
+                f"buttonRemapping[{index}].activates must be a non-empty string"
+            )
+        if activates == "BTN_UNSPECIFIED":
+            raise AssertionError(f"buttonRemapping[{index}] uses forbidden activates BTN_UNSPECIFIED")
+        if activates != physical:
+            raise AssertionError(
+                f"buttonRemapping[{index}] must be explicit identity ({physical} -> {physical}), got {physical} -> {activates}"
+            )
 
         normalized.append({"physicalButton": physical, "activates": activates})
     return normalized
 
 
-def _identity_representation(remaps: list[dict[str, str | None]]) -> str | None:
-    omitted_count = sum(1 for remap in remaps if remap["activates"] is None)
-    explicit_self_count = sum(
-        1
-        for remap in remaps
-        if remap["activates"] is not None and remap["activates"] == remap["physicalButton"]
-    )
-    semantic_count = sum(
-        1
-        for remap in remaps
-        if remap["activates"] is not None and remap["activates"] != remap["physicalButton"]
-    )
-
-    if semantic_count > 0:
-        return None
-    if omitted_count == len(remaps):
-        return "omitted_activates"
-    if explicit_self_count == len(remaps):
-        return "explicit_self_activates"
-    return None
-
-
-def _check_file(path: Path) -> tuple[list[str], str | None, int, int]:
+def _check_file(path: Path) -> tuple[list[str], int, int]:
     failures: list[str] = []
 
     try:
@@ -152,18 +143,20 @@ def _check_file(path: Path) -> tuple[list[str], str | None, int, int]:
         mode = _ultimate_mode(payload)
         remaps = _normalized_remaps(mode)
     except (FileNotFoundError, json.JSONDecodeError, AssertionError) as exc:
-        return [f"{_rel(path)}: {exc}"], None, 0, 0
+        return [f"{_rel(path)}: {exc}"], 0, 0
 
     physicals = [remap["physicalButton"] for remap in remaps]
-    duplicates = sorted(
-        {
-            physical
-            for physical in physicals
-            if physicals.count(physical) > 1
-        }
-    )
-    if duplicates:
-        failures.append(f"{_rel(path)} duplicate physicalButton entries: {', '.join(duplicates)}")
+    seen: set[str] = set()
+    duplicates: set[str] = set()
+    for physical in physicals:
+        if physical in seen:
+            duplicates.add(physical)
+        seen.add(physical)
+    duplicates_sorted = sorted(duplicates)
+    if duplicates_sorted:
+        failures.append(
+            f"{_rel(path)} duplicate physicalButton entries: {', '.join(duplicates_sorted)}"
+        )
 
     expected_set = set(EXPECTED_PHYSICAL_BUTTONS)
     actual_set = set(physicals)
@@ -174,51 +167,28 @@ def _check_file(path: Path) -> tuple[list[str], str | None, int, int]:
     if extras:
         failures.append(f"{_rel(path)} unexpected physicalButton(s): {', '.join(extras)}")
 
-    identity_representation = _identity_representation(remaps)
-    if identity_representation is None:
-        failures.append(
-            f"{_rel(path)} identity representation is inconsistent or contains semantic remaps"
-        )
-
-    semantic_remap_count = sum(
-        1
-        for remap in remaps
-        if remap["activates"] is not None and remap["activates"] != remap["physicalButton"]
-    )
+    semantic_remap_count = sum(1 for remap in remaps if remap["activates"] != remap["physicalButton"])
     if semantic_remap_count > 0:
         failures.append(
             f"{_rel(path)} semantic remaps remain in MODE_ULTIMATE: {semantic_remap_count}"
         )
 
-    return failures, identity_representation, semantic_remap_count, len(physicals)
+    return failures, semantic_remap_count, len(physicals)
 
 
 def main() -> int:
     failures: list[str] = []
-    representations: list[str] = []
     semantic_remap_total = 0
     physical_counts: list[int] = []
 
     for path in TARGET_FILES:
-        file_failures, representation, semantic_remap_count, physical_count = _check_file(path)
+        file_failures, semantic_remap_count, physical_count = _check_file(path)
         failures.extend(file_failures)
         semantic_remap_total += semantic_remap_count
         physical_counts.append(physical_count)
-        if representation is not None:
-            representations.append(representation)
-
-    if representations and len(set(representations)) != 1:
-        failures.append(
-            "identity representation mismatch across files: "
-            + ", ".join(sorted(set(representations)))
-        )
-
-    resolved_representation = "unknown"
-    if representations and len(set(representations)) == 1:
-        resolved_representation = representations[0]
 
     print("files_checked=" + ",".join(_rel(path) for path in TARGET_FILES))
-    print(f"identity_representation={resolved_representation}")
+    print("identity_representation=explicit_self_activates")
     print(f"semantic_remap_count={semantic_remap_total}")
     # Both files should carry the same MODE_ULTIMATE physical button count.
     unique_counts = sorted(set(physical_counts))
