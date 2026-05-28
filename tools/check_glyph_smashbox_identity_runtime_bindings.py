@@ -18,18 +18,21 @@ ROLE_LINES = (
     "`RF1 = A`",
     "`LT6 = Down+A`",
     "`RF12 = Up+A`",
+    "`RF15 = Up+A`",
     "`RF5 = B`",
     "`LF4 = B`",
     "`RF2 = X`",
     "`RF10 = Y`",
+    "`LT1 = Z`",
+    "`RF11 = Z`",
     "`RT1 = Z`",
-    "`LT1 = L`",
+    "`LT3 = L`",
     "`RF16 = R`",
     "`RF8 = Mode`",
+    "`RF9 = null modifier`",
     "`LT5 = X1`",
     "`LT4 = X2`",
     "`LT2 = Y1`",
-    "`LT3 = Y2`",
     "`RF7 = LS->DPad`",
     "`RF6 = forced Up`",
     "`RF3 = Tilt1`",
@@ -39,18 +42,24 @@ ROLE_LINES = (
 
 SOURCE_ANCHORS = (
     "inputs.rf8",
+    "inputs.rf9",
     "inputs.lt5",
     "inputs.lt4",
     "inputs.lt2",
-    "inputs.lt3",
     "inputs.rf7",
     "inputs.rf6",
     "inputs.rf12",
+    "inputs.rf15",
     "inputs.lt6",
     "inputs.lt1",
+    "inputs.rf11",
+    "inputs.lt3",
     "inputs.rf16",
     "inputs.rf3",
     "inputs.rf4",
+    "kLt1LowMagnitudeTable",
+    "kY1Tilt1Table",
+    "kMY1Tilt1Table",
 )
 
 RUNTIME_REQUIRED_SELF_ACTIVATES = (
@@ -60,7 +69,10 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_RF10",
     "BTN_RF6",
     "BTN_RF12",
+    "BTN_RF15",
+    "BTN_RF11",
     "BTN_LT1",
+    "BTN_LT3",
     "BTN_LT6",
     "BTN_LF4",
     "BTN_RF5",
@@ -69,10 +81,10 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_LF2",
     "BTN_RF7",
     "BTN_RF8",
+    "BTN_RF9",
     "BTN_LT5",
     "BTN_LT4",
     "BTN_LT2",
-    "BTN_LT3",
     "BTN_RF3",
     "BTN_RF4",
     "BTN_RT3",
@@ -90,14 +102,59 @@ EMPTY_NO_OUTPUT_INPUTS = (
     "inputs.lf6",
     "inputs.lf7",
     "inputs.lf8",
-    "inputs.rf9",
-    "inputs.rf11",
     "inputs.rf13",
     "inputs.rf14",
-    "inputs.rf15",
     "inputs.mb1",
     "inputs.mb2",
     "inputs.mb3",
+)
+
+LT1_LOW_POINTS = (
+    "{89, 89}",
+    "{128, 79}",
+    "{167, 89}",
+    "{79, 128}",
+    "{128, 128}",
+    "{177, 128}",
+    "{89, 167}",
+    "{128, 177}",
+    "{167, 167}",
+)
+
+TILT1_POINTS = (
+    "{187, 47}",
+    "{128, 47}",
+    "{69, 47}",
+    "{187, 128}",
+    "{128, 128}",
+    "{69, 128}",
+    "{187, 209}",
+    "{128, 209}",
+    "{69, 209}",
+)
+
+Y1_TILT1_POINTS = (
+    "{169, 99}",
+    "{128, 99}",
+    "{87, 99}",
+    "{169, 128}",
+    "{128, 128}",
+    "{87, 128}",
+    "{169, 157}",
+    "{128, 157}",
+    "{87, 157}",
+)
+
+MY1_TILT1_POINTS = (
+    "{169, 179}",
+    "{128, 179}",
+    "{87, 179}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+    "{169, 77}",
+    "{128, 77}",
+    "{87, 77}",
 )
 
 
@@ -151,9 +208,7 @@ def explicit_self_activate_map(mode_config: dict[str, object], path: Path) -> di
             )
 
         if "activates" not in remap:
-            fail(
-                f"buttonRemapping[{index}] must include activates in {path.relative_to(REPO_ROOT)}"
-            )
+            fail(f"buttonRemapping[{index}] must include activates in {path.relative_to(REPO_ROOT)}")
         activates = remap.get("activates")
         if not isinstance(activates, str) or not activates:
             fail(f"buttonRemapping[{index}] activates must be a string in {path.relative_to(REPO_ROOT)}")
@@ -180,34 +235,30 @@ def require_runtime_doc() -> str:
         if role_line not in text:
             fail(f"missing runtime role line: {role_line}")
 
-    if "LT3 = Y2" not in text:
-        fail("runtime doc must state LT3=Y2")
-    if "RF3 + RF4 = Tilt3" not in text:
-        fail("runtime doc must state RF3+RF4=Tilt3")
-    if "RF6 = forced Up" not in text:
-        fail("runtime doc must state RF6=forced Up")
-    if "LT1 = L" not in text:
-        fail("runtime doc must state LT1=L")
-    if "RF4` is Tilt2-only" not in text and "RF4 is Tilt2-only" not in text:
-        fail("runtime doc must state RF4 is Tilt2-only")
-    if re.search(r"`?RF6`?\s+is\s+forced-Up\s+only\s+and\s+no\s+longer\s+drives\s+game\s+Y\s+output", text) is None:
-        fail("runtime doc must state RF6 no longer drives game Y")
-    if "RF10 = Y" not in text:
-        fail("runtime doc must document RF10=Y")
-    if re.search(r"`?LT2`?\s+remains\s+the\s+`?Y1`?\s+modifier\s+role\s+only", text) is None:
-        fail("runtime doc must state LT2 remains Y1-only")
-    if "outputs.modY = inputs.lt2" not in text or "removed/neutralized" not in text:
-        fail("runtime doc must document LT2/modY removal policy")
-    if "RT1 = Z" not in text:
-        fail("runtime doc must document RT1=Z")
-    if "RF16 = R" not in text:
-        fail("runtime doc must document RF16=R")
+    if re.search(r"Y2/MY2.*scratched|scratched.*Y2/MY2", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must state Y2/MY2 scratched/inactive")
+    if re.search(r"RF15\s*=\s*Up\+A", text) is None:
+        fail("runtime doc must state RF15 aliases RF12 as Up+A")
+    if re.search(r"RF11\s*=\s*Z", text) is None:
+        fail("runtime doc must state RF11 aliases LT1 for Z-airdodge behavior")
+    if re.search(r"RF11.*((alias|identic|same).*LT1|LT1.*(alias|identic|same))", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must state RF11 behaves identically to LT1 for Z-airdodge low-magnitude override")
+    if re.search(r"RF9\s*=\s*null modifier", text) is None:
+        fail("runtime doc must state RF9 is null modifier")
+    if re.search(r"RF9.*final analog.*128,128", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must state RF9 final analog override to (128,128)")
+    if re.search(r"Y1\+Tilt1.*special", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document Y1+Tilt1 special composite")
+    if re.search(r"RT4\s*=\s*C-Right", text) is None or re.search(r"RT5\s*=\s*C-Up", text) is None:
+        fail("runtime doc must document RT4/RT5 C-stick swap")
+    if "RT1 remains runtime-owned `Z`" not in text and "RT1 remains" not in text and "`RT1` remains" not in text:
+        fail("runtime doc must state RT1 remains Z")
     if re.search(r"`?RF16`?\s+remains\s+`?R`?", text) is None:
         fail("runtime doc must state RF16 remains R")
-    if "no standalone D-pad" not in text:
-        fail("runtime doc must document no standalone D-pad policy")
     if "standalone `LT3 -> Tilt3` behavior is historical only" not in text:
         fail("runtime doc must mark standalone LT3->Tilt3 as historical only")
+    if "no standalone D-pad" not in text:
+        fail("runtime doc must document no standalone D-pad policy")
 
     return text
 
@@ -223,76 +274,137 @@ def require_runtime_source() -> str:
 
     expected_source_lines = (
         (
-            "outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12;",
-            "runtime source must assign A from RF1 or LT6 or RF12",
+            "outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;",
+            "runtime source must assign A from RF1 or LT6 or RF12 or RF15",
         ),
         ("outputs.b = inputs.rf5 || inputs.lf4;", "runtime source must assign RF5 or LF4 to B"),
         ("outputs.x = inputs.rf2;", "runtime source must assign RF2 to X"),
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
-        ("outputs.buttonL = inputs.lt1;", "runtime source must assign LT1 to L button"),
-        ("outputs.buttonR = inputs.rt1;", "runtime source must assign RT1 to source-confirmed Z carrier"),
-        ("outputs.triggerLDigital = inputs.lt1;", "runtime source must assign LT1 to GameCube L carrier"),
+        ("outputs.buttonL = inputs.lt3;", "runtime source must assign LT3 to L button"),
+        (
+            "outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11;",
+            "runtime source must assign RT1/LT1/RF11 shared Z carrier",
+        ),
+        ("outputs.triggerLDigital = inputs.lt3;", "runtime source must assign LT3 to GameCube L carrier"),
         ("outputs.triggerRDigital = inputs.rf16;", "runtime source must assign RF16 to GameCube R carrier"),
+        ("outputs.rightStickRight = inputs.rt4;", "runtime source must map RT4 to C-right"),
+        ("outputs.rightStickUp = inputs.rt5;", "runtime source must map RT5 to C-up"),
+        ("const bool null_modifier_active = inputs.rf9;", "runtime source must read RF9 null modifier input"),
     )
     for line, message in expected_source_lines:
         if line not in text:
             fail(message)
-    if "outputs.y = inputs.rf6;" in text:
-        fail("runtime source must not assign RF6 to game Y")
-    if "outputs.modY = inputs.lt2;" in text:
-        fail("runtime source must not assign LT2 to modY")
+
+    forbidden_lines = (
+        "outputs.buttonL = inputs.lt1;",
+        "outputs.buttonR = inputs.rt1;",
+        "outputs.buttonR = inputs.rt1 || inputs.lt1;",
+        "outputs.triggerLDigital = inputs.lt1;",
+        "outputs.y = inputs.rf6;",
+        "outputs.modY = inputs.lt2;",
+        "outputs.modX = inputs.lt1;",
+        "outputs.buttonR = inputs.rf3;",
+        "outputs.triggerLDigital = inputs.lf4;",
+        "outputs.triggerRDigital = inputs.rf5;",
+        "outputs.triggerRDigital = inputs.rf12;",
+        "outputs.rightStickRight = inputs.rt5;",
+        "outputs.rightStickUp = inputs.rt4;",
+    )
+    for line in forbidden_lines:
+        if line in text:
+            fail(f"forbidden runtime source line present: {line}")
+
     if "outputs.modY = false;" not in text:
         fail("runtime source must neutralize modY for LT2 Y1-only policy")
-    if "outputs.modX = inputs.lt1;" in text:
-        fail("runtime source must not assign LT1 to modX")
-    if "outputs.buttonR = inputs.rf3;" in text:
-        fail("runtime source must not assign RF3 to R")
-    if "outputs.triggerLDigital = inputs.lf4;" in text:
-        fail("runtime source must not assign LF4 to L trigger digital when LF4 is B")
-    if "outputs.triggerRDigital = inputs.rf5;" in text:
-        fail("runtime source must not assign RF5 to R trigger digital when RF5 is B")
-    if "outputs.triggerRDigital = inputs.rf12;" in text:
-        fail("runtime source must not assign RF12 to R trigger digital")
-    if "leftStickUp = inputs.rf4;" in text:
-        fail("runtime source must not consume RF4 as Up")
-    if re.search(r"inputs\.rf4\s*,\s*//\s*Up", text):
-        fail("runtime source must not pass RF4 as Up into UpdateDirections")
-    if re.search(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*;", text) is None:
-        fail("runtime source must define digital RF6 or RF12 forced-Up source")
-    if re.search(r"const\s+bool\s+effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", text) is None:
-        fail("runtime source must define digital effective Up from LF2 or forced-Up source")
-    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;", text) is not None:
-        fail("runtime source must not use old LF2 Down shape")
-    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*\(\s*inputs\.lf5\s*\|\|\s*inputs\.lt6\s*\)\s*&&\s*!force_up_active\s*;", text) is None:
-        fail("runtime source must define digital effective Down from LF5 or LT6 and suppress it during forced-Up")
-    if re.search(r"const\s+bool\s+normal_force_up_active\s*=\s*inputs\.rf6\s*;", text) is None:
-        fail("runtime source must define RF6-only normal table forced-Up source")
-    if re.search(r"const\s+bool\s+normal_effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*normal_force_up_active\s*;", text) is None:
-        fail("runtime source must define RF6-only normal table effective Up")
-    if re.search(r"const\s+bool\s+normal_effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!normal_force_up_active\s*;", text) is None:
-        fail("runtime source must define RF6-only normal table effective Down")
+
+    if re.search(r"\by2_active\b", text):
+        fail("runtime source must not keep y2_active")
+    if "EffectiveModifier::Y2" in text:
+        fail("runtime source must not keep Y2 effective modifier path")
+    if "kY2Table" in text or "kMY2Table" in text:
+        fail("runtime source must not keep runtime-owned Y2/MY2 table constants")
+
+    if re.search(r"inputs\.lt3[^\n]*y2|y2[^\n]*inputs\.lt3", text, flags=re.IGNORECASE):
+        fail("runtime source must not use inputs.lt3 as Y2")
+
+    for point in LT1_LOW_POINTS:
+        if point not in text:
+            fail(f"runtime source missing LT1 low-magnitude point: {point}")
+
+    for point in TILT1_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Tilt1 point: {point}")
+
+    for point in Y1_TILT1_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Y1+Tilt1 point: {point}")
+
+    for point in MY1_TILT1_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode Y1+Tilt1 point: {point}")
+
     if re.search(
-        r"UpdateDirections\s*\(\s*inputs\.lf3\s*,\s*//\s*Left\s*\n\s*inputs\.lf1\s*,\s*//\s*Right\s*\n\s*normal_effective_ls_down\s*,\s*//\s*Down\s*\n\s*normal_effective_ls_up\s*,\s*//\s*Up\s*\(RF6 forced-Up\)",
+        r"const\s+bool\s+y1_tilt1_special_active\s*=\s*y1_active\s*&&\s*tilt1_effective\s*&&\s*!x1_active\s*&&\s*!x2_active\s*&&\s*!tilt2_effective\s*&&\s*!tilt3_effective\s*;",
         text,
-        flags=re.MULTILINE,
     ) is None:
-        fail("runtime source must use RF6-only normal table directions in UpdateDirections")
-    if re.search(r"const\s+bool\s+direction_plus_a_active\s*=\s*down_a_active\s*\|\|\s*up_a_active\s*;", text) is None:
-        fail("runtime source must define direction-plus-A activation")
-    if re.search(r"const\s+bool\s+direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*inputs\.rf6\s*\)\s*;", text) is None:
-        fail("runtime source must define direction-plus-A Up override with RF6")
-    if re.search(r"const\s+StickPoint\s+\*direction_plus_a_table\s*=\s*mode_active\s*\?\s*kModeDefaultTable\s*:\s*kDefaultTable\s*;", text) is None:
-        fail("runtime source must select Default/Mode-default base table for hard override")
-    if re.search(r"const\s+size_t\s+direction_plus_a_index\s*=\s*direction_plus_a_force_up\s*\?\s*kDirectionEightIndex\s*:\s*kDirectionTwoIndex\s*;", text) is None:
-        fail("runtime source must map hard override to direction 2 or 8")
-    if re.search(r"outputs\.leftStickX\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.x\s*;", text) is None:
-        fail("runtime source must hard-override final leftStickX for direction-plus-A")
-    if re.search(r"outputs\.leftStickY\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.y\s*;", text) is None:
-        fail("runtime source must hard-override final leftStickY for direction-plus-A")
-    if re.search(r"SelectStickTable\s*\([^)]*inputs\.(lt6|rf12)", text, flags=re.DOTALL):
-        fail("runtime source must not include LT6/RF12 in modifier table selection")
-    if "active_table[direction_plus_a_index]" in text:
-        fail("runtime source must not use modifier-selected tables for LT6/RF12 hard override")
+        fail("runtime source must gate Y1+Tilt1 special composite to Y1+Tilt1 only")
+    if re.search(
+        r"if\s*\(\s*y1_tilt1_special_active\s*\)\s*\{\s*return\s+mode_active\s*\?\s*kMY1Tilt1Table\s*:\s*kY1Tilt1Table\s*;",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must select Y1+Tilt1 special composite tables")
+
+    if re.search(
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include RF15 in digital forced-up logic")
+    if re.search(
+        r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include RF15 in Up+A logic")
+    if re.search(
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include RF15 in LT1 low-table forced-up logic")
+    if re.search(
+        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;",
+        text,
+    ) is None:
+        fail("runtime source must alias LT1/RF11 for shared low-magnitude Z-airdodge override")
+
+    if re.search(r"outputs\.dpadUp\s*=\s*inputs\.rt5\s*;", text) is None:
+        fail("runtime source must map nunchuk-C D-pad Up to RT5")
+    if re.search(r"outputs\.dpadRight\s*=\s*inputs\.rt4\s*;", text) is None:
+        fail("runtime source must map nunchuk-C D-pad Right to RT4")
+
+    if re.search(
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must apply LT1/RF11 hard override after direction-plus-A override")
+
+    if re.search(
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must apply RF9 override after LT1/RF11 and direction-plus-A overrides")
+
+    if re.search(r"outputs\.leftStickX\s*=\s*128\s*;", text) is None:
+        fail("runtime source must assign RF9 final leftStickX override to 128")
+    if re.search(r"outputs\.leftStickY\s*=\s*128\s*;", text) is None:
+        fail("runtime source must assign RF9 final leftStickY override to 128")
+
+    if re.search(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", text) is None:
+        fail("runtime source must assign LT1 low-magnitude leftStickX")
+    if re.search(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", text) is None:
+        fail("runtime source must assign LT1 low-magnitude leftStickY")
+
     if re.search(
         r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;",
         text,
@@ -313,23 +425,24 @@ def require_runtime_source() -> str:
         text,
     ) is None:
         fail("runtime source must suppress digital left-stick up during LS->DPad")
-    if re.search(
-        r"outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;",
-        text,
-    ) is None:
-        fail("runtime source must use effective Up for LS->DPad")
+
     if "outputs.dpadLeft |= inputs.lf8;" in text or "outputs.dpadRight |= inputs.lf6;" in text:
         fail("runtime source must not preserve old standalone D-pad direct inputs")
 
     for empty_input in EMPTY_NO_OUTPUT_INPUTS:
         if re.search(r"outputs\.[A-Za-z0-9_]+\s*(?:=|\|=)\s*" + re.escape(empty_input), text):
             fail(f"empty/no-output input drives a known game output: {empty_input}")
+    if re.search(r"outputs\.(?!buttonR)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf11", text):
+        fail("RF11 must not drive outputs other than the shared Z carrier")
+    if re.search(r"active_modifier_count\s*\+\+[^;]*inputs\.rf11", text):
+        fail("RF11 must not be counted as a modifier")
+    if re.search(r"SelectStickTable\s*\([^)]*inputs\.rf11", text, flags=re.DOTALL):
+        fail("RF11 must not alter modifier table selection")
+    if re.search(r"outputs\.(?!leftStickX|leftStickY)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf9", text):
+        fail("RF9 must not drive game-button/dpad/right-stick/menu outputs")
 
     if re.search(r"tilt3_effective\s*=\s*tilt1_pressed\s*&&\s*tilt2_pressed\s*;", text) is None:
         fail("runtime source must define Tilt3 as rf3&&rf4 chord")
-
-    if "senscope_tilt3_active" in text:
-        fail("legacy standalone LT3 tilt3 logic token still present")
 
     return text
 
@@ -371,15 +484,22 @@ def main() -> int:
     print("identity_representation=explicit_self_activates")
     print("identity_semantic_remaps=0")
     print("runtime_required_inputs_explicit_self_activated=true")
-    print("forced_up_role=RF6_or_RF12")
+    print("forced_up_role=RF6_or_RF12_or_RF15")
     print("rf4_up_conflict=absent")
-    print("lt3_role=Y2")
+    print("lt3_role=L")
     print("tilt3_role=RF3+RF4")
-    print("z_role=RT1")
+    print("lt1_rf11_role=Z_plus_low_magnitude_override_alias")
+    print("z_role=RT1_or_LT1_or_RF11")
     print("r_role=RF16")
     print("y_role=RF10")
     print("b_role=RF5_or_LF4")
-    print("l_role=LT1")
+    print("l_role=LT3")
+    print("rf15_role=Up+A_alias_of_RF12")
+    print("rf9_role=null_modifier_final_analog_override")
+    print("tilt1_non_mode_y_values=47_128_209")
+    print("y1_tilt1_special_composite=enabled")
+    print("rt4_rt5_cstick_swap=enabled")
+    print("y2_my2_role=scratched_inactive")
     print("standalone_dpad=none")
     print("lt2_mody_conflict=absent")
     print("lt1_modx_conflict=absent")

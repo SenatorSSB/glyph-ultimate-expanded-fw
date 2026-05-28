@@ -50,3 +50,58 @@
 
 - Direction-plus-A behavior changed after this hardware result to hard final direction+A overrides (`LT6=Down+A`, `RF12=Up+A`).
 - New hard override behavior requires a dedicated hardware validation pass before claiming hardware pass for those rows.
+
+## 2026-05-28 LT1/LT3 Reassignment Amendment
+
+- This PASS result predates the LT3/L reassignment, Y2/MY2 runtime scratch, and LT1 Z-airdodge low-magnitude override changes.
+- This PASS result therefore does not validate:
+  - `LT3 -> L`,
+  - `LT1 -> Z` plus low-magnitude table override,
+  - unreachable/scratched `Y2/MY2` runtime paths.
+- A new hardware validation run is required before claiming PASS for these reassigned rows.
+
+## 2026-05-28 Pre-Hardware Tuning Amendment
+
+- This PASS result predates additional runtime tuning in this branch:
+  - Tilt1 non-Mode y-offset change to 81 from center (`47/128/209`),
+  - `RF15` hard Up+A alias behavior matching `RF12`,
+  - `Y1+Tilt1` special composite tables (Mode and non-Mode),
+  - `RT4/RT5` C-stick right/up swap.
+- These rows require new hardware validation before claiming PASS for the updated behavior.
+
+## 2026-05-28 Latest Table/RF9 Amendment
+
+- This PASS result also predates the latest Smash Box table-value conversion update in this branch:
+  - Mode default table update (`Mode 5 = (128,169)`, `Mode 2 = (128,87)`),
+  - MX1/MX2 update,
+  - MY1 update,
+  - MTilt1/MTilt2/MTilt3 update,
+  - Mode Y1+Tilt1 composite update (`179/169/77` y-values).
+- This PASS result predates RF9 null-modifier runtime behavior:
+  - RF9 final analog left-stick override to `(128,128)`,
+  - RF9 exclusion from modifier-count composition,
+  - RF9 non-ownership of game buttons/D-pad/right-stick outputs.
+- New hardware validation is required before claiming PASS for these updated table rows and RF9 rows.
+
+## 2026-05-28 RF11 Z-Airdodge Alias Amendment
+
+- This PASS result predates the RF11 runtime alias to LT1 Z-airdodge low-magnitude behavior.
+- This PASS result therefore does not validate:
+  - `RF11 -> Z` shared carrier behavior,
+  - RF11 low-magnitude directional override parity with LT1,
+  - RF11 interactions with RF9 and LS->DPad rows.
+- New hardware validation is required before claiming PASS for RF11 alias rows.
+
+## 2026-05-28 Latest Hardware Result Amendment
+
+- Superseded/extended by:
+  - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
+- Latest result covers:
+  - updated table values,
+  - RF9 null modifier,
+  - RF11 Z-airdodge alias,
+  - RF15 Up+A alias,
+  - Y1+Tilt1 composites,
+  - LT1/LT3 changes,
+  - RT4/RT5 swap.
+- Earlier result remains historically valid for the previous runtime state.

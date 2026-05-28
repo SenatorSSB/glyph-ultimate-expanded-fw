@@ -9,6 +9,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOC_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_smash_box_profile_output_tables_2026-05-27.md"
+RUNTIME_DOC_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_smashbox_modifiers_runtime_implementation_2026-05-27.md"
 
 EXPECTED: dict[str, dict[str, tuple[int, int]]] = {
     "Default": {
@@ -17,9 +18,9 @@ EXPECTED: dict[str, dict[str, tuple[int, int]]] = {
         "7": (61, 205), "8": (128, 205), "9": (195, 205),
     },
     "Mode default": {
-        "1": (1, 84), "2": (128, 84), "3": (255, 84),
-        "4": (1, 172), "5": (128, 172), "6": (255, 172),
-        "7": (1, 172), "8": (128, 172), "9": (255, 172),
+        "1": (14, 87), "2": (128, 87), "3": (242, 87),
+        "4": (14, 169), "5": (128, 169), "6": (242, 169),
+        "7": (14, 169), "8": (128, 169), "9": (242, 169),
     },
     "X1": {
         "1": (93, 51), "2": (128, 51), "3": (163, 51),
@@ -32,14 +33,14 @@ EXPECTED: dict[str, dict[str, tuple[int, int]]] = {
         "7": (82, 205), "8": (128, 205), "9": (174, 205),
     },
     "MX1": {
-        "1": (74, 84), "2": (128, 84), "3": (182, 84),
-        "4": (74, 172), "5": (128, 172), "6": (182, 172),
-        "7": (74, 172), "8": (128, 172), "9": (182, 172),
+        "1": (78, 87), "2": (128, 87), "3": (178, 87),
+        "4": (78, 169), "5": (128, 169), "6": (178, 169),
+        "7": (78, 169), "8": (128, 169), "9": (178, 169),
     },
     "MX2": {
-        "1": (59, 84), "2": (128, 84), "3": (197, 84),
-        "4": (59, 172), "5": (128, 172), "6": (197, 172),
-        "7": (59, 172), "8": (128, 172), "9": (197, 172),
+        "1": (65, 87), "2": (128, 87), "3": (191, 87),
+        "4": (65, 169), "5": (128, 169), "6": (191, 169),
+        "7": (65, 169), "8": (128, 169), "9": (191, 169),
     },
     "Y1": {
         "1": (61, 99), "2": (128, 99), "3": (195, 99),
@@ -52,9 +53,9 @@ EXPECTED: dict[str, dict[str, tuple[int, int]]] = {
         "7": (61, 174), "8": (128, 174), "9": (195, 174),
     },
     "MY1": {
-        "1": (1, 184), "2": (128, 184), "3": (255, 184),
-        "4": (1, 172), "5": (128, 172), "6": (255, 172),
-        "7": (1, 72), "8": (128, 72), "9": (255, 72),
+        "1": (14, 179), "2": (128, 179), "3": (242, 179),
+        "4": (14, 169), "5": (128, 169), "6": (242, 169),
+        "7": (14, 77), "8": (128, 77), "9": (242, 77),
     },
     "MY2": {
         "1": (1, 165), "2": (128, 165), "3": (255, 165),
@@ -62,9 +63,9 @@ EXPECTED: dict[str, dict[str, tuple[int, int]]] = {
         "7": (1, 91), "8": (128, 91), "9": (255, 91),
     },
     "Tilt1": {
-        "1": (187, 87), "2": (128, 87), "3": (69, 87),
+        "1": (187, 47), "2": (128, 47), "3": (69, 47),
         "4": (187, 128), "5": (128, 128), "6": (69, 128),
-        "7": (187, 169), "8": (128, 169), "9": (69, 169),
+        "7": (187, 209), "8": (128, 209), "9": (69, 209),
     },
     "Tilt2": {
         "1": (88, 79), "2": (128, 79), "3": (168, 79),
@@ -77,19 +78,19 @@ EXPECTED: dict[str, dict[str, tuple[int, int]]] = {
         "7": (75, 170), "8": (128, 170), "9": (181, 170),
     },
     "MTilt1": {
-        "1": (95, 81), "2": (128, 81), "3": (161, 81),
-        "4": (95, 172), "5": (128, 172), "6": (161, 172),
-        "7": (95, 175), "8": (128, 175), "9": (161, 175),
+        "1": (169, 88), "2": (128, 88), "3": (87, 88),
+        "4": (169, 169), "5": (128, 169), "6": (87, 169),
+        "7": (169, 168), "8": (128, 168), "9": (87, 168),
     },
     "MTilt2": {
-        "1": (95, 81), "2": (128, 81), "3": (161, 81),
-        "4": (95, 172), "5": (128, 172), "6": (161, 172),
-        "7": (95, 175), "8": (128, 175), "9": (161, 175),
+        "1": (96, 82), "2": (128, 82), "3": (160, 82),
+        "4": (96, 169), "5": (128, 169), "6": (160, 169),
+        "7": (96, 174), "8": (128, 174), "9": (160, 174),
     },
     "MTilt3": {
-        "1": (96, 82), "2": (128, 82), "3": (160, 82),
-        "4": (96, 172), "5": (128, 172), "6": (160, 172),
-        "7": (96, 174), "8": (128, 174), "9": (160, 174),
+        "1": (96, 86), "2": (128, 86), "3": (160, 86),
+        "4": (96, 169), "5": (128, 169), "6": (160, 169),
+        "7": (96, 170), "8": (128, 170), "9": (160, 170),
     },
 }
 
@@ -133,8 +134,13 @@ def main() -> int:
         print(f"status=FAIL")
         print(f"failure=missing_doc:{DOC_PATH.relative_to(REPO_ROOT)}")
         return 1
+    if not RUNTIME_DOC_PATH.exists():
+        print("status=FAIL")
+        print(f"failure=missing_runtime_doc:{RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
+        return 1
 
     text = DOC_PATH.read_text(encoding="utf-8")
+    runtime_doc_text = RUNTIME_DOC_PATH.read_text(encoding="utf-8")
 
     failures: list[str] = []
     for table_name, expected_values in EXPECTED.items():
@@ -146,17 +152,27 @@ def main() -> int:
         except AssertionError as exc:
             failures.append(str(exc))
 
+    # Historical table values should remain documented while runtime marks Y2/MY2 inactive.
+    if re.search(r"Y2/MY2 runtime policy|historical table values retained", text, flags=re.IGNORECASE) is None:
+        failures.append("doc_missing_y2_my2_historical_policy")
+    if re.search(r"Y2/MY2.*scratched|scratched.*Y2/MY2", runtime_doc_text, flags=re.IGNORECASE) is None:
+        failures.append("runtime_doc_missing_y2_my2_scratched_policy")
+
     if failures:
         print("status=FAIL")
         print(f"doc={DOC_PATH.relative_to(REPO_ROOT)}")
+        print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
         for failure in failures:
             print(f"failure={failure}")
         return 1
 
     print("status=PASS")
     print(f"doc={DOC_PATH.relative_to(REPO_ROOT)}")
+    print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print(f"tables_validated={len(EXPECTED)}")
     print("directions_validated=1..9")
+    print("y2_my2_table_values=historical_preserved")
+    print("y2_my2_runtime_role=scratched_inactive")
     return 0
 
 

@@ -19,9 +19,9 @@ constexpr StickPoint kDefaultTable[9] = {
 };
 
 constexpr StickPoint kModeDefaultTable[9] = {
-    {1, 84}, {128, 84}, {255, 84},
-    {1, 172}, {128, 172}, {255, 172},
-    {1, 172}, {128, 172}, {255, 172},
+    {14, 87}, {128, 87}, {242, 87},
+    {14, 169}, {128, 169}, {242, 169},
+    {14, 169}, {128, 169}, {242, 169},
 };
 
 constexpr StickPoint kX1Table[9] = {
@@ -37,15 +37,15 @@ constexpr StickPoint kX2Table[9] = {
 };
 
 constexpr StickPoint kMX1Table[9] = {
-    {74, 84}, {128, 84}, {182, 84},
-    {74, 172}, {128, 172}, {182, 172},
-    {74, 172}, {128, 172}, {182, 172},
+    {78, 87}, {128, 87}, {178, 87},
+    {78, 169}, {128, 169}, {178, 169},
+    {78, 169}, {128, 169}, {178, 169},
 };
 
 constexpr StickPoint kMX2Table[9] = {
-    {59, 84}, {128, 84}, {197, 84},
-    {59, 172}, {128, 172}, {197, 172},
-    {59, 172}, {128, 172}, {197, 172},
+    {65, 87}, {128, 87}, {191, 87},
+    {65, 169}, {128, 169}, {191, 169},
+    {65, 169}, {128, 169}, {191, 169},
 };
 
 constexpr StickPoint kY1Table[9] = {
@@ -54,28 +54,28 @@ constexpr StickPoint kY1Table[9] = {
     {61, 157}, {128, 157}, {195, 157},
 };
 
-constexpr StickPoint kY2Table[9] = {
-    {61, 82}, {128, 82}, {195, 82},
-    {61, 128}, {128, 128}, {195, 128},
-    {61, 174}, {128, 174}, {195, 174},
-};
-
 constexpr StickPoint kMY1Table[9] = {
-    {1, 184}, {128, 184}, {255, 184},
-    {1, 172}, {128, 172}, {255, 172},
-    {1, 72}, {128, 72}, {255, 72},
+    {14, 179}, {128, 179}, {242, 179},
+    {14, 169}, {128, 169}, {242, 169},
+    {14, 77}, {128, 77}, {242, 77},
 };
 
-constexpr StickPoint kMY2Table[9] = {
-    {1, 165}, {128, 165}, {255, 165},
-    {1, 172}, {128, 172}, {255, 172},
-    {1, 91}, {128, 91}, {255, 91},
+constexpr StickPoint kY1Tilt1Table[9] = {
+    {169, 99}, {128, 99}, {87, 99},
+    {169, 128}, {128, 128}, {87, 128},
+    {169, 157}, {128, 157}, {87, 157},
+};
+
+constexpr StickPoint kMY1Tilt1Table[9] = {
+    {169, 179}, {128, 179}, {87, 179},
+    {169, 169}, {128, 169}, {87, 169},
+    {169, 77}, {128, 77}, {87, 77},
 };
 
 constexpr StickPoint kTilt1Table[9] = {
-    {187, 87}, {128, 87}, {69, 87},
+    {187, 47}, {128, 47}, {69, 47},
     {187, 128}, {128, 128}, {69, 128},
-    {187, 169}, {128, 169}, {69, 169},
+    {187, 209}, {128, 209}, {69, 209},
 };
 
 constexpr StickPoint kTilt2Table[9] = {
@@ -91,33 +91,39 @@ constexpr StickPoint kTilt3Table[9] = {
 };
 
 constexpr StickPoint kMTilt1Table[9] = {
-    {95, 81}, {128, 81}, {161, 81},
-    {95, 172}, {128, 172}, {161, 172},
-    {95, 175}, {128, 175}, {161, 175},
+    {169, 88}, {128, 88}, {87, 88},
+    {169, 169}, {128, 169}, {87, 169},
+    {169, 168}, {128, 168}, {87, 168},
 };
 
 constexpr StickPoint kMTilt2Table[9] = {
-    {95, 81}, {128, 81}, {161, 81},
-    {95, 172}, {128, 172}, {161, 172},
-    {95, 175}, {128, 175}, {161, 175},
+    {96, 82}, {128, 82}, {160, 82},
+    {96, 169}, {128, 169}, {160, 169},
+    {96, 174}, {128, 174}, {160, 174},
 };
 
 constexpr StickPoint kMTilt3Table[9] = {
-    {96, 82}, {128, 82}, {160, 82},
-    {96, 172}, {128, 172}, {160, 172},
-    {96, 174}, {128, 174}, {160, 174},
+    {96, 86}, {128, 86}, {160, 86},
+    {96, 169}, {128, 169}, {160, 169},
+    {96, 170}, {128, 170}, {160, 170},
 };
 
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
 
+// LT1/RF11 provide Z plus a low-magnitude left-stick override for neutral-airdodge-safe output.
+constexpr StickPoint kLt1LowMagnitudeTable[9] = {
+    {89, 89}, {128, 79}, {167, 89},
+    {79, 128}, {128, 128}, {177, 128},
+    {89, 167}, {128, 177}, {167, 167},
+};
+
 enum class EffectiveModifier {
     None,
     X1,
     X2,
     Y1,
-    Y2,
     Tilt1,
     Tilt2,
     Tilt3,
@@ -128,11 +134,15 @@ const StickPoint *SelectStickTable(
     bool x1_active,
     bool x2_active,
     bool y1_active,
-    bool y2_active,
     bool tilt1_effective,
     bool tilt2_effective,
     bool tilt3_effective
 ) {
+    const bool y1_tilt1_special_active = y1_active && tilt1_effective && !x1_active && !x2_active && !tilt2_effective && !tilt3_effective;
+    if (y1_tilt1_special_active) {
+        return mode_active ? kMY1Tilt1Table : kY1Tilt1Table;
+    }
+
     int active_modifier_count = 0;
     EffectiveModifier single_modifier = EffectiveModifier::None;
 
@@ -147,10 +157,6 @@ const StickPoint *SelectStickTable(
     if (y1_active) {
         active_modifier_count++;
         single_modifier = EffectiveModifier::Y1;
-    }
-    if (y2_active) {
-        active_modifier_count++;
-        single_modifier = EffectiveModifier::Y2;
     }
 
     if (tilt3_effective) {
@@ -176,8 +182,6 @@ const StickPoint *SelectStickTable(
                 return kX2Table;
             case EffectiveModifier::Y1:
                 return kY1Table;
-            case EffectiveModifier::Y2:
-                return kY2Table;
             case EffectiveModifier::Tilt1:
                 return kTilt1Table;
             case EffectiveModifier::Tilt2:
@@ -196,8 +200,6 @@ const StickPoint *SelectStickTable(
             return kMX2Table;
         case EffectiveModifier::Y1:
             return kMY1Table;
-        case EffectiveModifier::Y2:
-            return kMY2Table;
         case EffectiveModifier::Tilt1:
             return kMTilt1Table;
         case EffectiveModifier::Tilt2:
@@ -234,21 +236,21 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
-    const bool force_up_active = inputs.rf6 || inputs.rf12;
+    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
     const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
     const bool effective_ls_left = inputs.lf3;
     const bool effective_ls_right = inputs.lf1;
     const bool ls_to_dpad_active = inputs.rf7;
 
-    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12;
+    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
     outputs.b = inputs.rf5 || inputs.lf4;
     outputs.x = inputs.rf2;
     outputs.y = inputs.rf10;
-    outputs.buttonL = inputs.lt1;
+    outputs.buttonL = inputs.lt3;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
-    outputs.buttonR = inputs.rt1;
-    outputs.triggerLDigital = inputs.lt1;
+    outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11;
+    outputs.triggerLDigital = inputs.lt3;
     outputs.triggerRDigital = inputs.rf16;
 
     outputs.start = inputs.mb7;
@@ -263,10 +265,10 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 
     // Preserve source-backed nunchuk C D-pad layer behavior.
     if (inputs.nunchuk_c) {
-        outputs.dpadUp = inputs.rt4;
+        outputs.dpadUp = inputs.rt5;
         outputs.dpadDown = inputs.rt2;
         outputs.dpadLeft = inputs.rt3;
-        outputs.dpadRight = inputs.rt5;
+        outputs.dpadRight = inputs.rt4;
     }
 
     if (ls_to_dpad_active) {
@@ -282,9 +284,9 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.leftStickUp = ls_to_dpad_active ? false : effective_ls_up;
 
     outputs.rightStickLeft = inputs.rt3;
-    outputs.rightStickRight = inputs.rt5;
+    outputs.rightStickRight = inputs.rt4;
     outputs.rightStickDown = inputs.rt2;
-    outputs.rightStickUp = inputs.rt4;
+    outputs.rightStickUp = inputs.rt5;
 
     outputs.modX = false;
     outputs.modY = false;
@@ -303,9 +305,9 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         normal_effective_ls_down, // Down
         normal_effective_ls_up, // Up (RF6 forced-Up)
         inputs.rt3, // C-Left
-        inputs.rt5, // C-Right
+        inputs.rt4, // C-Right
         inputs.rt2, // C-Down
-        inputs.rt4, // C-Up
+        inputs.rt5, // C-Up
         ANALOG_STICK_MIN,
         ANALOG_STICK_NEUTRAL,
         ANALOG_STICK_MAX,
@@ -317,10 +319,11 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool x1_active = inputs.lt5;
     const bool x2_active = inputs.lt4;
     const bool y1_active = inputs.lt2;
-    const bool y2_active = inputs.lt3;
+    const bool z_airdodge_override_active = inputs.lt1 || inputs.rf11;
+    const bool null_modifier_active = inputs.rf9;
     const bool ls_to_dpad_active = inputs.rf7;
     const bool down_a_active = inputs.lt6;
-    const bool up_a_active = inputs.rf12;
+    const bool up_a_active = inputs.rf12 || inputs.rf15;
     const bool direction_plus_a_active = down_a_active || up_a_active;
     const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || inputs.rf6);
 
@@ -336,7 +339,6 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         x1_active,
         x2_active,
         y1_active,
-        y2_active,
         tilt1_effective,
         tilt2_effective,
         tilt3_effective
@@ -357,6 +359,24 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
             outputs.leftStickX = direction_plus_a_table[direction_plus_a_index].x;
             outputs.leftStickY = direction_plus_a_table[direction_plus_a_index].y;
         }
+
+        if (z_airdodge_override_active) {
+            const bool lt1_force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15;
+            const bool lt1_effective_left = inputs.lf3;
+            const bool lt1_effective_right = inputs.lf1;
+            const bool lt1_effective_up = inputs.lf2 || lt1_force_up_active;
+            const bool lt1_effective_down = (inputs.lf5 || inputs.lt6) && !lt1_force_up_active;
+            const int8_t lt1_x = lt1_effective_left == lt1_effective_right ? 0 : (lt1_effective_left ? -1 : 1);
+            const int8_t lt1_y = lt1_effective_down == lt1_effective_up ? 0 : (lt1_effective_down ? -1 : 1);
+            const size_t lt1_direction_index = DirectionIndexFromAxes(lt1_x, lt1_y);
+            outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
+            outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
+        }
+    }
+
+    if (null_modifier_active) {
+        outputs.leftStickX = 128;
+        outputs.leftStickY = 128;
     }
     // Senscope Glyph Smash Box runtime end
 
