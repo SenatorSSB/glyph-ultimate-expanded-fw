@@ -69,15 +69,99 @@ Y1_TILT1_POINTS = (
 )
 
 MY1_TILT1_POINTS = (
-    (169, 184),
-    (128, 184),
-    (87, 184),
-    (169, 172),
-    (128, 172),
-    (87, 172),
-    (169, 72),
-    (128, 72),
-    (87, 72),
+    (169, 179),
+    (128, 179),
+    (87, 179),
+    (169, 169),
+    (128, 169),
+    (87, 169),
+    (169, 77),
+    (128, 77),
+    (87, 77),
+)
+
+MODE_DEFAULT_POINTS = (
+    (14, 87),
+    (128, 87),
+    (242, 87),
+    (14, 169),
+    (128, 169),
+    (242, 169),
+    (14, 169),
+    (128, 169),
+    (242, 169),
+)
+
+MX1_POINTS = (
+    (78, 87),
+    (128, 87),
+    (178, 87),
+    (78, 169),
+    (128, 169),
+    (178, 169),
+    (78, 169),
+    (128, 169),
+    (178, 169),
+)
+
+MX2_POINTS = (
+    (65, 87),
+    (128, 87),
+    (191, 87),
+    (65, 169),
+    (128, 169),
+    (191, 169),
+    (65, 169),
+    (128, 169),
+    (191, 169),
+)
+
+MY1_POINTS = (
+    (14, 179),
+    (128, 179),
+    (242, 179),
+    (14, 169),
+    (128, 169),
+    (242, 169),
+    (14, 77),
+    (128, 77),
+    (242, 77),
+)
+
+MTILT1_POINTS = (
+    (169, 88),
+    (128, 88),
+    (87, 88),
+    (169, 169),
+    (128, 169),
+    (87, 169),
+    (169, 168),
+    (128, 168),
+    (87, 168),
+)
+
+MTILT2_POINTS = (
+    (96, 82),
+    (128, 82),
+    (160, 82),
+    (96, 169),
+    (128, 169),
+    (160, 169),
+    (96, 174),
+    (128, 174),
+    (160, 174),
+)
+
+MTILT3_POINTS = (
+    (96, 86),
+    (128, 86),
+    (160, 86),
+    (96, 169),
+    (128, 169),
+    (160, 169),
+    (96, 170),
+    (128, 170),
+    (160, 170),
 )
 
 FORBIDDEN_TOKENS = (
@@ -136,6 +220,7 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"x2_active\s*=\s*inputs\.lt4\s*;", block, "X2 anchor lt4")
     require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
     require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
+    require(r"null_modifier_active\s*=\s*inputs\.rf9\s*;", block, "RF9 null-modifier anchor")
 
     require(r"outputs\.buttonL\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L")
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L carrier")
@@ -195,6 +280,41 @@ def ensure_required_shapes(source: str, block: str) -> None:
         if f"{{{x}, {y}}}" not in source:
             fail(f"missing Mode Y1+Tilt1 point: ({x}, {y})")
 
+    require(r"constexpr\s+StickPoint\s+kModeDefaultTable\[9\]", source, "Mode default table declaration")
+    for x, y in MODE_DEFAULT_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing Mode default point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMX1Table\[9\]", source, "MX1 table declaration")
+    for x, y in MX1_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing MX1 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMX2Table\[9\]", source, "MX2 table declaration")
+    for x, y in MX2_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing MX2 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMY1Table\[9\]", source, "MY1 table declaration")
+    for x, y in MY1_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing MY1 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMTilt1Table\[9\]", source, "MTilt1 table declaration")
+    for x, y in MTILT1_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing MTilt1 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMTilt2Table\[9\]", source, "MTilt2 table declaration")
+    for x, y in MTILT2_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing MTilt2 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMTilt3Table\[9\]", source, "MTilt3 table declaration")
+    for x, y in MTILT3_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing MTilt3 point: ({x}, {y})")
+
     require(
         r"const\s+bool\s+y1_tilt1_special_active\s*=\s*y1_active\s*&&\s*tilt1_effective\s*&&\s*!x1_active\s*&&\s*!x2_active\s*&&\s*!tilt2_effective\s*&&\s*!tilt3_effective\s*;",
         source,
@@ -220,8 +340,22 @@ def ensure_required_shapes(source: str, block: str) -> None:
         "LT1 override is final after direction-plus-A",
         flags=re.DOTALL,
     )
+    require(
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*lt1_z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
+        block,
+        "RF9 override is final after LT1 and direction-plus-A",
+        flags=re.DOTALL,
+    )
     require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X")
     require(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", block, "LT1 final Y")
+    require(r"outputs\.leftStickX\s*=\s*128\s*;", block, "RF9 final X override")
+    require(r"outputs\.leftStickY\s*=\s*128\s*;", block, "RF9 final Y override")
+    if re.search(r"active_modifier_count\s*\+\+[^;]*null_modifier_active", source):
+        fail("RF9 must not be part of modifier count logic")
+    if re.search(r"SelectStickTable\s*\([^)]*null_modifier_active", source):
+        fail("RF9 must not alter table selection arguments")
+    if re.search(r"outputs\.(?!leftStickX|leftStickY)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf9", source):
+        fail("RF9 must not drive game/dpad/right-stick/menu outputs")
 
     require(r"outputs\.rightStickRight\s*=\s*inputs\.rt4\s*;", source, "RT4 drives C-right")
     require(r"outputs\.rightStickUp\s*=\s*inputs\.rt5\s*;", source, "RT5 drives C-up")
@@ -277,6 +411,7 @@ def main() -> int:
     print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_lt1_low_override")
     print("y1_tilt1_special_composite=enabled")
     print("rt4_rt5_cstick_swap=enabled")
+    print("rf9_null_modifier=enabled")
     print("y2_my2_runtime_role=scratched_inactive")
     print("standalone_dpad=none")
     print("table_samples=" + ";".join(table_summaries))

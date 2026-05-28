@@ -19,9 +19,9 @@ constexpr StickPoint kDefaultTable[9] = {
 };
 
 constexpr StickPoint kModeDefaultTable[9] = {
-    {1, 84}, {128, 84}, {255, 84},
-    {1, 172}, {128, 172}, {255, 172},
-    {1, 172}, {128, 172}, {255, 172},
+    {14, 87}, {128, 87}, {242, 87},
+    {14, 169}, {128, 169}, {242, 169},
+    {14, 169}, {128, 169}, {242, 169},
 };
 
 constexpr StickPoint kX1Table[9] = {
@@ -37,15 +37,15 @@ constexpr StickPoint kX2Table[9] = {
 };
 
 constexpr StickPoint kMX1Table[9] = {
-    {74, 84}, {128, 84}, {182, 84},
-    {74, 172}, {128, 172}, {182, 172},
-    {74, 172}, {128, 172}, {182, 172},
+    {78, 87}, {128, 87}, {178, 87},
+    {78, 169}, {128, 169}, {178, 169},
+    {78, 169}, {128, 169}, {178, 169},
 };
 
 constexpr StickPoint kMX2Table[9] = {
-    {59, 84}, {128, 84}, {197, 84},
-    {59, 172}, {128, 172}, {197, 172},
-    {59, 172}, {128, 172}, {197, 172},
+    {65, 87}, {128, 87}, {191, 87},
+    {65, 169}, {128, 169}, {191, 169},
+    {65, 169}, {128, 169}, {191, 169},
 };
 
 constexpr StickPoint kY1Table[9] = {
@@ -55,9 +55,9 @@ constexpr StickPoint kY1Table[9] = {
 };
 
 constexpr StickPoint kMY1Table[9] = {
-    {1, 184}, {128, 184}, {255, 184},
-    {1, 172}, {128, 172}, {255, 172},
-    {1, 72}, {128, 72}, {255, 72},
+    {14, 179}, {128, 179}, {242, 179},
+    {14, 169}, {128, 169}, {242, 169},
+    {14, 77}, {128, 77}, {242, 77},
 };
 
 constexpr StickPoint kY1Tilt1Table[9] = {
@@ -67,9 +67,9 @@ constexpr StickPoint kY1Tilt1Table[9] = {
 };
 
 constexpr StickPoint kMY1Tilt1Table[9] = {
-    {169, 184}, {128, 184}, {87, 184},
-    {169, 172}, {128, 172}, {87, 172},
-    {169, 72}, {128, 72}, {87, 72},
+    {169, 179}, {128, 179}, {87, 179},
+    {169, 169}, {128, 169}, {87, 169},
+    {169, 77}, {128, 77}, {87, 77},
 };
 
 constexpr StickPoint kTilt1Table[9] = {
@@ -91,21 +91,21 @@ constexpr StickPoint kTilt3Table[9] = {
 };
 
 constexpr StickPoint kMTilt1Table[9] = {
-    {95, 81}, {128, 81}, {161, 81},
-    {95, 172}, {128, 172}, {161, 172},
-    {95, 175}, {128, 175}, {161, 175},
+    {169, 88}, {128, 88}, {87, 88},
+    {169, 169}, {128, 169}, {87, 169},
+    {169, 168}, {128, 168}, {87, 168},
 };
 
 constexpr StickPoint kMTilt2Table[9] = {
-    {95, 81}, {128, 81}, {161, 81},
-    {95, 172}, {128, 172}, {161, 172},
-    {95, 175}, {128, 175}, {161, 175},
+    {96, 82}, {128, 82}, {160, 82},
+    {96, 169}, {128, 169}, {160, 169},
+    {96, 174}, {128, 174}, {160, 174},
 };
 
 constexpr StickPoint kMTilt3Table[9] = {
-    {96, 82}, {128, 82}, {160, 82},
-    {96, 172}, {128, 172}, {160, 172},
-    {96, 174}, {128, 174}, {160, 174},
+    {96, 86}, {128, 86}, {160, 86},
+    {96, 169}, {128, 169}, {160, 169},
+    {96, 170}, {128, 170}, {160, 170},
 };
 
 constexpr size_t kDirectionTwoIndex = 1;
@@ -320,6 +320,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool x2_active = inputs.lt4;
     const bool y1_active = inputs.lt2;
     const bool lt1_z_airdodge_override_active = inputs.lt1;
+    const bool null_modifier_active = inputs.rf9;
     const bool ls_to_dpad_active = inputs.rf7;
     const bool down_a_active = inputs.lt6;
     const bool up_a_active = inputs.rf12 || inputs.rf15;
@@ -371,6 +372,11 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
             outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
             outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
         }
+    }
+
+    if (null_modifier_active) {
+        outputs.leftStickX = 128;
+        outputs.leftStickY = 128;
     }
     // Senscope Glyph Smash Box runtime end
 

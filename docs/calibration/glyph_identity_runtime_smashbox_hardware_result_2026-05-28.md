@@ -68,3 +68,17 @@
   - `Y1+Tilt1` special composite tables (Mode and non-Mode),
   - `RT4/RT5` C-stick right/up swap.
 - These rows require new hardware validation before claiming PASS for the updated behavior.
+
+## 2026-05-28 Latest Table/RF9 Amendment
+
+- This PASS result also predates the latest Smash Box table-value conversion update in this branch:
+  - Mode default table update (`Mode 5 = (128,169)`, `Mode 2 = (128,87)`),
+  - MX1/MX2 update,
+  - MY1 update,
+  - MTilt1/MTilt2/MTilt3 update,
+  - Mode Y1+Tilt1 composite update (`179/169/77` y-values).
+- This PASS result predates RF9 null-modifier runtime behavior:
+  - RF9 final analog left-stick override to `(128,128)`,
+  - RF9 exclusion from modifier-count composition,
+  - RF9 non-ownership of game buttons/D-pad/right-stick outputs.
+- New hardware validation is required before claiming PASS for these updated table rows and RF9 rows.

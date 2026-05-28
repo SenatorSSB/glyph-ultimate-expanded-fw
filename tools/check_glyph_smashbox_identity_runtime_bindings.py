@@ -28,6 +28,7 @@ ROLE_LINES = (
     "`LT3 = L`",
     "`RF16 = R`",
     "`RF8 = Mode`",
+    "`RF9 = null modifier`",
     "`LT5 = X1`",
     "`LT4 = X2`",
     "`LT2 = Y1`",
@@ -40,6 +41,7 @@ ROLE_LINES = (
 
 SOURCE_ANCHORS = (
     "inputs.rf8",
+    "inputs.rf9",
     "inputs.lt5",
     "inputs.lt4",
     "inputs.lt2",
@@ -76,6 +78,7 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_LF2",
     "BTN_RF7",
     "BTN_RF8",
+    "BTN_RF9",
     "BTN_LT5",
     "BTN_LT4",
     "BTN_LT2",
@@ -96,7 +99,6 @@ EMPTY_NO_OUTPUT_INPUTS = (
     "inputs.lf6",
     "inputs.lf7",
     "inputs.lf8",
-    "inputs.rf9",
     "inputs.rf11",
     "inputs.rf13",
     "inputs.rf14",
@@ -142,15 +144,15 @@ Y1_TILT1_POINTS = (
 )
 
 MY1_TILT1_POINTS = (
-    "{169, 184}",
-    "{128, 184}",
-    "{87, 184}",
-    "{169, 172}",
-    "{128, 172}",
-    "{87, 172}",
-    "{169, 72}",
-    "{128, 72}",
-    "{87, 72}",
+    "{169, 179}",
+    "{128, 179}",
+    "{87, 179}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+    "{169, 77}",
+    "{128, 77}",
+    "{87, 77}",
 )
 
 
@@ -235,6 +237,10 @@ def require_runtime_doc() -> str:
         fail("runtime doc must state Y2/MY2 scratched/inactive")
     if re.search(r"RF15\s*=\s*Up\+A", text) is None:
         fail("runtime doc must state RF15 aliases RF12 as Up+A")
+    if re.search(r"RF9\s*=\s*null modifier", text) is None:
+        fail("runtime doc must state RF9 is null modifier")
+    if re.search(r"RF9.*final analog.*128,128", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must state RF9 final analog override to (128,128)")
     if re.search(r"Y1\+Tilt1.*special", text, flags=re.IGNORECASE) is None:
         fail("runtime doc must document Y1+Tilt1 special composite")
     if re.search(r"RT4\s*=\s*C-Right", text) is None or re.search(r"RT5\s*=\s*C-Up", text) is None:
@@ -277,6 +283,7 @@ def require_runtime_source() -> str:
         ("outputs.triggerRDigital = inputs.rf16;", "runtime source must assign RF16 to GameCube R carrier"),
         ("outputs.rightStickRight = inputs.rt4;", "runtime source must map RT4 to C-right"),
         ("outputs.rightStickUp = inputs.rt5;", "runtime source must map RT5 to C-up"),
+        ("const bool null_modifier_active = inputs.rf9;", "runtime source must read RF9 null modifier input"),
     )
     for line, message in expected_source_lines:
         if line not in text:
@@ -369,6 +376,18 @@ def require_runtime_source() -> str:
     ) is None:
         fail("runtime source must apply LT1 hard override after direction-plus-A override")
 
+    if re.search(
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*lt1_z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must apply RF9 override after LT1/direction-plus-A overrides")
+
+    if re.search(r"outputs\.leftStickX\s*=\s*128\s*;", text) is None:
+        fail("runtime source must assign RF9 final leftStickX override to 128")
+    if re.search(r"outputs\.leftStickY\s*=\s*128\s*;", text) is None:
+        fail("runtime source must assign RF9 final leftStickY override to 128")
+
     if re.search(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", text) is None:
         fail("runtime source must assign LT1 low-magnitude leftStickX")
     if re.search(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", text) is None:
@@ -401,6 +420,8 @@ def require_runtime_source() -> str:
     for empty_input in EMPTY_NO_OUTPUT_INPUTS:
         if re.search(r"outputs\.[A-Za-z0-9_]+\s*(?:=|\|=)\s*" + re.escape(empty_input), text):
             fail(f"empty/no-output input drives a known game output: {empty_input}")
+    if re.search(r"outputs\.(?!leftStickX|leftStickY)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf9", text):
+        fail("RF9 must not drive game-button/dpad/right-stick/menu outputs")
 
     if re.search(r"tilt3_effective\s*=\s*tilt1_pressed\s*&&\s*tilt2_pressed\s*;", text) is None:
         fail("runtime source must define Tilt3 as rf3&&rf4 chord")
@@ -456,6 +477,7 @@ def main() -> int:
     print("b_role=RF5_or_LF4")
     print("l_role=LT3")
     print("rf15_role=Up+A_alias_of_RF12")
+    print("rf9_role=null_modifier_final_analog_override")
     print("tilt1_non_mode_y_values=47_128_209")
     print("y1_tilt1_special_composite=enabled")
     print("rt4_rt5_cstick_swap=enabled")

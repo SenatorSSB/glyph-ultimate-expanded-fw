@@ -42,9 +42,9 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LT6 direction-plus-A baseline | `LT6` only | N/A | Default table direction `2` and A asserted | NOT_TESTED |
 | RF12 direction-plus-A baseline | `RF12` only | N/A | Default table direction `8` and A asserted | NOT_TESTED |
 | RF15 direction-plus-A baseline | `RF15` only | N/A | Default table direction `8` and A asserted | NOT_TESTED |
-| LT6 direction-plus-A with Mode | `LT6 + Mode` | N/A | Mode default table direction `2` and A asserted | NOT_TESTED |
-| RF12 direction-plus-A with Mode | `RF12 + Mode` | N/A | Mode default table direction `8` and A asserted | NOT_TESTED |
-| RF15 direction-plus-A with Mode | `RF15 + Mode` | N/A | Mode default table direction `8` and A asserted | NOT_TESTED |
+| LT6 direction-plus-A with Mode | `LT6 + Mode` | N/A | Mode default table direction `2` = `(128,87)` and A asserted | NOT_TESTED |
+| RF12 direction-plus-A with Mode | `RF12 + Mode` | N/A | Mode default table direction `8` = `(128,169)` and A asserted | NOT_TESTED |
+| RF15 direction-plus-A with Mode | `RF15 + Mode` | N/A | Mode default table direction `8` = `(128,169)` and A asserted | NOT_TESTED |
 | LT6 direction-plus-A with modifiers | `LT6 + X1/X2/Y1/Tilt1/Tilt2/Tilt3` (Mode optional) | Representative + 1..9 spot checks | Final output is Default direction `2` + A, or Mode default direction `2` + A if Mode is held | NOT_TESTED |
 | RF12 direction-plus-A with modifiers | `RF12 + X1/X2/Y1/Tilt1/Tilt2/Tilt3` (Mode optional) | Representative + 1..9 spot checks | Final output is Default direction `8` + A, or Mode default direction `8` + A if Mode is held | NOT_TESTED |
 | LT1 neutral low-table baseline | `LT1` only | 5 | Z asserted and low-magnitude neutral `(128,128)` output | NOT_TESTED |
@@ -74,7 +74,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LT1 modifier guard | `LT1` only | N/A | Does not emit old LT1->modX behavior; LT1 remains Z plus low-table behavior | NOT_TESTED |
 | LT2 modY guard | `LT2` only | N/A | Y1 modifier behavior only and no LT2->modY output | NOT_TESTED |
 | Y1+Tilt1 special composite | `LT2 + RF3` | 1..9 | Uses special non-Mode composite table: `1=(169,99) 2=(128,99) 3=(87,99) 4=(169,128) 5=(128,128) 6=(87,128) 7=(169,157) 8=(128,157) 9=(87,157)` | NOT_TESTED |
-| Mode+Y1+Tilt1 special composite | `Mode + LT2 + RF3` | 1..9 | Uses special Mode composite table: `1=(169,184) 2=(128,184) 3=(87,184) 4=(169,172) 5=(128,172) 6=(87,172) 7=(169,72) 8=(128,72) 9=(87,72)` | NOT_TESTED |
+| Mode+Y1+Tilt1 special composite | `Mode + LT2 + RF3` | 1..9 | Uses special Mode composite table: `1=(169,179) 2=(128,179) 3=(87,179) 4=(169,169) 5=(128,169) 6=(87,169) 7=(169,77) 8=(128,77) 9=(87,77)` | NOT_TESTED |
 | Y1+Tilt1 plus extra modifier fallback | `LT2 + RF3 + (X1/X2/Tilt2/Tilt3)` (Mode optional) | Representative + 1..9 spot checks | Falls back to ordinary multi-modifier policy (Default/Mode default) | NOT_TESTED |
 | Y2/MY2 scratch guard | `LT3` with/without Mode and directional inputs | 1..9 spot checks | No Y2/MY2 modifier-table path is reachable in runtime | NOT_TESTED |
 | Multi-mod X+Y deactivation | Any X plus any Y | Representative + 1..9 spot checks | Falls back to Default/Mode default | NOT_TESTED |
@@ -85,7 +85,13 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LS->DPad active core | `RF7` pressed | N/A | LS buttons drive D-pad directions and LS is centered | NOT_TESTED |
 | LS->DPad digital suppression | `RF7` pressed | N/A | `leftStickLeft/Right/Down/Up` digital outputs suppressed | NOT_TESTED |
 | LS->DPad center Mode off | `RF7` on, Mode off | N/A | Left stick forced to `(128,128)` | NOT_TESTED |
-| LS->DPad center Mode on | `RF7` on, Mode on | N/A | Left stick forced to `(128,172)` | NOT_TESTED |
+| LS->DPad center Mode on | `RF7` on, Mode on, RF9 off | N/A | Left stick forced to `(128,169)` | NOT_TESTED |
+| RF9 null baseline | `RF9` only | N/A | Analog left stick forced to `(128,128)` and no RF9-owned game output asserted | NOT_TESTED |
+| RF9 with game button | `RF9 + RF1` | N/A | A output asserted while analog left stick remains `(128,128)` | NOT_TESTED |
+| RF9 with LT1 | `RF9 + LT1` | N/A | Z output asserted while analog left stick remains `(128,128)` | NOT_TESTED |
+| RF9 with LT6/RF12/RF15 | `RF9 + LT6`, `RF9 + RF12`, `RF9 + RF15` | N/A | A output asserted while analog left stick remains `(128,128)` | NOT_TESTED |
+| RF9 with LS->DPad | `RF9 + RF7 + directions` | Left/Right/Down/Up and diagonals | D-pad behavior follows LS->DPad effective directions while analog left stick remains `(128,128)` | NOT_TESTED |
+| RF9 modifier-count exclusion | `RF9` with any single modifier (`X1/X2/Y1/Tilt1/Tilt2/Tilt3`) | Representative + 1..9 spot checks | RF9 does not count as table modifier; only final analog is forced to `(128,128)` | NOT_TESTED |
 | LS->DPad D-pad directions | `RF7` on + LS direction buttons | Left/Right/Down/Up and diagonals | Corresponding D-pad direction outputs | NOT_TESTED |
 | LS->DPad with RF6 | `RF7 + RF6` | N/A | D-pad Up asserted | NOT_TESTED |
 | LS->DPad with RF6 and Down | `RF7 + RF6 + Down` | N/A | D-pad Up asserted, Down not asserted | NOT_TESTED |
@@ -98,7 +104,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LS->DPad with RF6 and LT6 | `RF7 + RF6 + LT6` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
 | LS->DPad with LT1 | `RF7 + LT1 + direction` | Left/Right/Down/Up and diagonals | Z asserted; D-pad follows effective direction; analog left stick centered by LS->DPad | NOT_TESTED |
 | No standalone D-pad outputs | Press `LF6`, `LF8`, old D-pad cluster placeholders, and RF7 inactive | N/A | No D-pad output unless nunchuk C or RF7 LS->DPad is active | NOT_TESTED |
-| Empty button no-output smoke | Press `LF6/LF7/LF8/RF9/RF11/RF13/RF14/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
+| Empty button no-output smoke | Press `LF6/LF7/LF8/RF11/RF13/RF14/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
+| RF9 non-D-pad guard | `RF9` only with RF7 inactive | N/A | RF9 does not emit D-pad output | NOT_TESTED |
 | Custom modifiers still work | Press `RF8/LT5/LT4/LT2/RF3/RF4` across representative directions | 1..9 spot checks | Mode, X1, X2, Y1, Tilt1, Tilt2, and RF3+RF4 Tilt3 all select expected tables; Y2/MY2 remain scratched | NOT_TESTED |
 | Right-stick directions | Press `RT4/RT3/RT5/RT2` | Cardinal C-stick directions | `RT4=C-right`, `RT3=C-left`, `RT5=C-up`, `RT2=C-down` | NOT_TESTED |
 | Menu buttons | Press `MB4/MB5/MB6/MB7` | N/A | Capture/Home/Select-minus/Start-plus outputs asserted respectively | NOT_TESTED |
@@ -119,4 +126,5 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 - LT6/RF12 direction-plus-A rows require a new hardware result amendment/run.
 - LT3->L reassignment, LT1->Z low-magnitude override rows, and Y2/MY2 scratch rows require a new hardware result amendment/run.
 - Tilt1 y-offset update rows, RF15 Up+A alias rows, Y1+Tilt1 special composite rows, and RT4/RT5 swap rows require a new hardware result amendment/run.
+- Converted Mode/M-table value rows and RF9 null-modifier rows require a new hardware result amendment/run.
 - Nunchuk remains unavailable/not tested.

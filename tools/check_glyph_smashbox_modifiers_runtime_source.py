@@ -51,15 +51,99 @@ Y1_TILT1_POINTS = (
 )
 
 MY1_TILT1_POINTS = (
-    "{169, 184}",
-    "{128, 184}",
-    "{87, 184}",
-    "{169, 172}",
-    "{128, 172}",
-    "{87, 172}",
-    "{169, 72}",
-    "{128, 72}",
-    "{87, 72}",
+    "{169, 179}",
+    "{128, 179}",
+    "{87, 179}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+    "{169, 77}",
+    "{128, 77}",
+    "{87, 77}",
+)
+
+MODE_DEFAULT_POINTS = (
+    "{14, 87}",
+    "{128, 87}",
+    "{242, 87}",
+    "{14, 169}",
+    "{128, 169}",
+    "{242, 169}",
+    "{14, 169}",
+    "{128, 169}",
+    "{242, 169}",
+)
+
+MX1_POINTS = (
+    "{78, 87}",
+    "{128, 87}",
+    "{178, 87}",
+    "{78, 169}",
+    "{128, 169}",
+    "{178, 169}",
+    "{78, 169}",
+    "{128, 169}",
+    "{178, 169}",
+)
+
+MX2_POINTS = (
+    "{65, 87}",
+    "{128, 87}",
+    "{191, 87}",
+    "{65, 169}",
+    "{128, 169}",
+    "{191, 169}",
+    "{65, 169}",
+    "{128, 169}",
+    "{191, 169}",
+)
+
+MY1_POINTS = (
+    "{14, 179}",
+    "{128, 179}",
+    "{242, 179}",
+    "{14, 169}",
+    "{128, 169}",
+    "{242, 169}",
+    "{14, 77}",
+    "{128, 77}",
+    "{242, 77}",
+)
+
+MTILT1_POINTS = (
+    "{169, 88}",
+    "{128, 88}",
+    "{87, 88}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+    "{169, 168}",
+    "{128, 168}",
+    "{87, 168}",
+)
+
+MTILT2_POINTS = (
+    "{96, 82}",
+    "{128, 82}",
+    "{160, 82}",
+    "{96, 169}",
+    "{128, 169}",
+    "{160, 169}",
+    "{96, 174}",
+    "{128, 174}",
+    "{160, 174}",
+)
+
+MTILT3_POINTS = (
+    "{96, 86}",
+    "{128, 86}",
+    "{160, 86}",
+    "{96, 169}",
+    "{128, 169}",
+    "{160, 169}",
+    "{96, 170}",
+    "{128, 170}",
+    "{160, 170}",
 )
 
 
@@ -92,6 +176,8 @@ def read_runtime_doc() -> str:
     require(r"LT3\s*=\s*L", text, "runtime doc LT3=L")
     require(r"LT1\s*=\s*Z", text, "runtime doc LT1=Z")
     require(r"RF15\s*=\s*Up\+A", text, "runtime doc RF15 Up+A alias")
+    require(r"RF9\s*=\s*null modifier", text, "runtime doc RF9 null modifier role")
+    require(r"RF9.*final analog.*128,128", text, "runtime doc RF9 final analog override", flags=re.IGNORECASE)
     require(r"Y2/MY2.*scratched|scratched.*Y2/MY2", text, "runtime doc marks Y2/MY2 scratched", flags=re.IGNORECASE)
     require(r"Y1\+Tilt1.*special", text, "runtime doc Y1+Tilt1 special composite", flags=re.IGNORECASE)
     require(r"RT4\s*=\s*C-Right", text, "runtime doc RT4 C-right")
@@ -113,6 +199,7 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 drives L digital carrier")
     require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt1\s*;", source, "RT1/LT1 shared Z carrier")
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 remains R carrier")
+    require(r"const\s+bool\s+null_modifier_active\s*=\s*inputs\.rf9\s*;", block, "RF9 null modifier input")
 
     # Remove old LT1/LT3/Y2 shapes.
     if "outputs.buttonL = inputs.lt1;" in source:
@@ -149,6 +236,41 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         if point not in source:
             fail(f"missing Mode Y1+Tilt1 point: {point}")
 
+    require(r"constexpr\s+StickPoint\s+kModeDefaultTable\[9\]", source, "Mode default table declaration")
+    for point in MODE_DEFAULT_POINTS:
+        if point not in source:
+            fail(f"missing Mode default point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kMX1Table\[9\]", source, "MX1 table declaration")
+    for point in MX1_POINTS:
+        if point not in source:
+            fail(f"missing MX1 point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kMX2Table\[9\]", source, "MX2 table declaration")
+    for point in MX2_POINTS:
+        if point not in source:
+            fail(f"missing MX2 point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kMY1Table\[9\]", source, "MY1 table declaration")
+    for point in MY1_POINTS:
+        if point not in source:
+            fail(f"missing MY1 point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kMTilt1Table\[9\]", source, "MTilt1 table declaration")
+    for point in MTILT1_POINTS:
+        if point not in source:
+            fail(f"missing MTilt1 point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kMTilt2Table\[9\]", source, "MTilt2 table declaration")
+    for point in MTILT2_POINTS:
+        if point not in source:
+            fail(f"missing MTilt2 point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kMTilt3Table\[9\]", source, "MTilt3 table declaration")
+    for point in MTILT3_POINTS:
+        if point not in source:
+            fail(f"missing MTilt3 point: {point}")
+
     require(
         r"const\s+bool\s+y1_tilt1_special_active\s*=\s*y1_active\s*&&\s*tilt1_effective\s*&&\s*!x1_active\s*&&\s*!x2_active\s*&&\s*!tilt2_effective\s*&&\s*!tilt3_effective\s*;",
         source,
@@ -170,14 +292,17 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     # LT1 hard final override ordering.
     require(r"if\s*\(\s*direction_plus_a_active\s*\)", block, "direction-plus-A override block")
     require(r"if\s*\(\s*lt1_z_airdodge_override_active\s*\)", block, "LT1 hard override block")
+    require(r"if\s*\(\s*null_modifier_active\s*\)", block, "RF9 null override block")
     require(
-        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*lt1_z_airdodge_override_active\s*\)\s*\{",
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*lt1_z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
         block,
-        "LT1 override occurs after direction-plus-A override",
+        "RF9 override occurs after LT1 and direction-plus-A overrides",
         flags=re.DOTALL,
     )
     require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X override")
     require(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", block, "LT1 final Y override")
+    require(r"outputs\.leftStickX\s*=\s*128\s*;", block, "RF9 final X override")
+    require(r"outputs\.leftStickY\s*=\s*128\s*;", block, "RF9 final Y override")
 
     # LS->DPad keeps analog centering and suppresses LT1 low-table override in that branch.
     require(
@@ -186,6 +311,12 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         "LS->DPad center branch with else-path override",
         flags=re.DOTALL,
     )
+    if re.search(r"active_modifier_count\s*\+\+[^;]*null_modifier_active", source):
+        fail("RF9 must not be counted as modifier")
+    if re.search(r"SelectStickTable\s*\([^)]*null_modifier_active", source):
+        fail("RF9 must not affect table selection")
+    if re.search(r"outputs\.(?!leftStickX|leftStickY)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf9", source):
+        fail("RF9 must not directly drive game/dpad/right-stick outputs")
 
     # RF15 aliases RF12 across forced-up/direction-plus-A and LT1 direction resolution.
     require(
@@ -245,6 +376,7 @@ def main() -> int:
     print("r_button_role=rf16")
     print("y1_tilt1_special_composite=enabled")
     print("rt4_rt5_cstick_swap=enabled")
+    print("rf9_null_modifier=enabled")
     print("y2_my2_runtime_role=scratched_inactive")
     print("ls_to_dpad_role=rf7")
     return 0

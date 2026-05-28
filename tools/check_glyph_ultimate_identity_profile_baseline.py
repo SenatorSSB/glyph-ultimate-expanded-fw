@@ -86,6 +86,7 @@ REQUIRED_RUNTIME_IDENTITY_INPUTS = (
     "BTN_LT1",
     "BTN_LT3",
     "BTN_LT6",
+    "BTN_RF9",
     "BTN_RF12",
     "BTN_RF15",
     "BTN_RF16",
@@ -242,6 +243,8 @@ def _check_file(path: Path) -> tuple[list[str], int, int]:
                 f"{_rel(path)} forbidden legacy MODE_ULTIMATE SOCD pair remains: "
                 f"{forbidden_left} vs {forbidden_right}"
             )
+    if any(left == "BTN_RF9" or right == "BTN_RF9" for left, right, _socd_type in socd_pairs):
+        failures.append(f"{_rel(path)} BTN_RF9 must not appear in MODE_ULTIMATE socdPairs")
 
     return failures, semantic_remap_count, len(physicals)
 

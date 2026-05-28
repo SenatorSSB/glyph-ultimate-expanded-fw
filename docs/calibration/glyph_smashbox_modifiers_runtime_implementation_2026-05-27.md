@@ -86,11 +86,12 @@ Standalone D-pad:
 
 Empty/no-output physical IDs:
 
-- `LF6`, `LF7`, `LF8`, `RF9`, `RF11`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
+- `LF6`, `LF7`, `LF8`, `RF11`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
 
 ## Custom Modifier Role Table
 
 - `RF8 = Mode`
+- `RF9 = null modifier`
 - `LT5 = X1`
 - `LT4 = X2`
 - `LT2 = Y1`
@@ -101,6 +102,14 @@ Empty/no-output physical IDs:
 - `RF4 = Tilt2`
 - `RF3 + RF4 = Tilt3`
 - `Y2/MY2` are scratched/inactive in runtime selection.
+
+`RF9` null modifier policy:
+
+- `RF9` is not a game button output path.
+- `RF9` is not an X/Y/Tilt/Mode table selector.
+- `RF9` does not participate in modifier counting/composition.
+- `RF9` applies a final analog left-stick override to `(128,128)` after table selection, direction-plus-A override, and LT1 low-magnitude override.
+- Under LS->DPad, `RF9` still forces final analog left stick to `(128,128)` while preserving LS->DPad D-pad behavior.
 
 Direction-plus-A runtime roles (not modifiers):
 
@@ -149,6 +158,7 @@ Tilt family compression:
 Active effective non-mode modifiers counted:
 
 - X1, X2, Y1, effective Tilt1/Tilt2/Tilt3
+- RF9 is excluded from effective-modifier counting.
 - Direction-plus-A buttons `LT6` and `RF12` are not modifiers and do not participate in modifier-count composition.
 - Scratched/inactive tables `Y2/MY2` do not participate in modifier-count composition.
 
@@ -191,18 +201,18 @@ Y1+Tilt1 special composite exception:
     - `8 = (128, 157)`
     - `9 = (87, 157)`
 - If Mode is active, runtime uses special Mode Y1+Tilt1 composite:
-  - Y values come from MY1 table (`184/172/72`).
+  - Y values come from MY1 table (`179/169/77`).
   - X values use same flipper-style offset `41` from center `128`.
   - Table:
-    - `1 = (169, 184)`
-    - `2 = (128, 184)`
-    - `3 = (87, 184)`
-    - `4 = (169, 172)`
-    - `5 = (128, 172)`
-    - `6 = (87, 172)`
-    - `7 = (169, 72)`
-    - `8 = (128, 72)`
-    - `9 = (87, 72)`
+    - `1 = (169, 179)`
+    - `2 = (128, 179)`
+    - `3 = (87, 179)`
+    - `4 = (169, 169)`
+    - `5 = (128, 169)`
+    - `6 = (87, 169)`
+    - `7 = (169, 77)`
+    - `8 = (128, 77)`
+    - `9 = (87, 77)`
 - If any extra X/Y/Tilt modifier is present with Y1+Tilt1, runtime falls back to ordinary multi-modifier policy:
   - Mode inactive => Default
   - Mode active => Mode default
@@ -219,6 +229,9 @@ Direction-plus-A hard final override policy:
 - Hard override directions:
   - direction `2` for Down+A,
   - direction `8` for Up+A (`RF12` or `RF15`).
+- With converted Mode default values, hard Mode rows are:
+  - Mode + LT6 => `(128,87)` + A
+  - Mode + RF12/RF15 => `(128,169)` + A
 - Up override precedence while direction-plus-A is active:
 - `RF12 + LT6` resolves to Up+A,
 - `RF15 + LT6` resolves to Up+A,
@@ -252,6 +265,21 @@ LT1 Z-airdodge low-magnitude hard final override policy:
   - diagonal effective radius `77.782`
   - all below `79.2`
 
+## RF9 Null Modifier Policy
+
+- Runtime reads `RF9` as a dedicated null modifier (`null_modifier_active = inputs.rf9`).
+- RF9 does not change game-button output ownership (`A/B/X/Y/Z/L/R`), right-stick/C-stick, or menu outputs.
+- RF9 does not emit D-pad output by itself.
+- RF9 does not enter X/Y/Tilt/Mode table selection or effective-modifier counting.
+- RF9 final analog priority:
+  - after ordinary table selection,
+  - after direction-plus-A hard analog override,
+  - after LT1 low-magnitude override,
+  - set final analog left stick to `(128,128)`.
+- Under LS->DPad:
+  - D-pad behavior remains from LS->DPad effective directions,
+  - final analog left stick is still forced to `(128,128)` when RF9 is active.
+
 ## LS->DPad Policy
 
 - `RF7` enables LS->DPad.
@@ -259,7 +287,8 @@ LT1 Z-airdodge low-magnitude hard final override policy:
   - left-stick direction buttons drive D-pad directions,
   - left stick is forced to direction `5` center,
   - Mode inactive center is `(128,128)`,
-  - Mode active center is `(128,172)`.
+  - Mode active center is `(128,169)` when RF9 is not active.
+- If RF9 is active during LS->DPad, final analog left-stick output is `(128,128)`.
 - While LS->DPad is active, digital left-stick outputs are suppressed (`leftStickLeft/Right/Down/Up` forced off).
 - LS->DPad is orthogonal to right-stick/C-stick and trigger paths.
 - LS->DPad does not reintroduce the old prototype D-pad-layer side effects.
@@ -312,6 +341,8 @@ Preserved:
 Manual hardware validation is required for:
 
 - all Default/Mode/X/Y/Tilt/M-table direction outputs,
+- converted Mode default table rows (`1..9` with Mode center `(128,169)` and Mode Down `(128,87)`),
+- converted MX1/MX2, MY1, MTilt1/MTilt2/MTilt3 table rows,
 - RF6 forced-Up direction resolution rows (`RF6` with no direction, Down, Left/Right, and Down+Left/Right),
 - `RF3+RF4 => Tilt3`,
 - `LT3 => L`,
@@ -325,6 +356,7 @@ Manual hardware validation is required for:
 - `RF4` behaves as Tilt2 and does not act as Up direction source,
 - `RF3` Tilt1 path does not press R,
 - `Y1+Tilt1` special composite rows (Mode and non-Mode),
+- Mode Y1+Tilt1 special composite rows use updated MY1 values (`179/169/77`),
 - `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` does not emit prior LT1->modX behavior,
 - `LT6` Down+A path hard-overrides final left-stick output to direction `2` using Default/Mode-default base tables,
@@ -335,9 +367,16 @@ Manual hardware validation is required for:
 - LT1 low-table hard final override rows supersede LT6/RF12/RF15 analog override output while preserving A press,
 - LS->DPad behavior and orthogonality,
 - LS->DPad + LT1 rows produce Z plus D-pad with analog left-stick centered,
+- RF9 null modifier rows:
+  - RF9 alone forces final analog to `(128,128)` with no extra game output from RF9 itself,
+  - RF9 + A keeps A output while analog remains `(128,128)`,
+  - RF9 + LT1 keeps Z output while analog remains `(128,128)`,
+  - RF9 + LT6/RF12/RF15 keeps A output while analog remains `(128,128)`,
+  - RF9 + LS->DPad preserves D-pad behavior while analog remains `(128,128)`,
+  - RF9 does not participate in modifier-count composition and does not select tables,
 - RT4/RT5 C-stick swap rows (`RT4=C-right`, `RT5=C-up`),
 - no standalone D-pad outputs from empty buttons,
-- empty/no-output buttons remain inert (excluding RF15 because RF15 is active as Up+A alias),
+- empty/no-output buttons remain inert (excluding RF15 because RF15 is active as Up+A alias, and excluding RF9 because RF9 is now null-modifier analog override),
 - nunchuk availability row handling.
 
 ## 2026-05-28 Amendment: Identity Runtime Hardware Confirmation
@@ -363,4 +402,10 @@ Manual hardware validation is required for:
 - `RF15` now aliases `RF12` as hard Up+A across runtime paths.
 - `Y1+Tilt1` now has explicit special composite tables for Mode and non-Mode runtime.
 - `RT4/RT5` C-stick mapping is swapped (`RT4=C-right`, `RT5=C-up`) consistently in digital, analog, and nunchuk-C passthrough mapping.
+- Mode/M-table values are converted to the latest Smash Box profile values:
+  - Mode default center is `(128,169)` with Mode Down `(128,87)`,
+  - MX1/MX2 and MY1 values are updated,
+  - MTilt1/MTilt2/MTilt3 values are updated,
+  - Mode Y1+Tilt1 composite uses MY1 y-values `179/169/77`.
+- `RF9` is now a dedicated null modifier with final analog override to `(128,128)` and no game-button ownership.
 - These adjustments require a new hardware validation pass before claiming PASS for updated rows.
