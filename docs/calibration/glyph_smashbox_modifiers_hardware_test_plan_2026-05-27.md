@@ -138,3 +138,9 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 - Tilt1 y-offset update rows, RF15 Up+A alias rows, Y1+Tilt1 special composite rows, and RT4/RT5 swap rows require a new hardware result amendment/run.
 - Converted Mode/M-table value rows and RF9 null-modifier rows require a new hardware result amendment/run.
 - Nunchuk remains unavailable/not tested.
+
+## 2026-05-28 Latest Hardware Result Note
+
+- Current plan rows are satisfied by:
+  - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
+- Nunchuk remains unavailable/not tested.

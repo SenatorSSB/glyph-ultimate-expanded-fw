@@ -86,3 +86,8 @@ Warnings:
 ## 2026-05-28 Amendment: Identity Runtime Hardware Confirmation
 
 - The current active artifact identity profile has now been hardware-confirmed with the identity-runtime Smash Box firmware.
+
+## 2026-05-28 Amendment: Latest Resident Artifact Compatibility
+
+- The current explicit identity artifact remained resident and compatible with latest identity-runtime firmware.
+- Latest result doc: `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`.

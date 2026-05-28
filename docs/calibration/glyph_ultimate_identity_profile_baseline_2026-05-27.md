@@ -73,3 +73,8 @@ Do not apply this identity artifact expecting full Smash Box X/Y/Mode/LS->DPad b
 - Runtime roles changed while identity representation remained unchanged:
   - `LT1` is runtime-owned `Z` plus low-magnitude neutral-airdodge-safe directional override.
   - `LT3` is runtime-owned `L`.
+
+## 2026-05-28 Resident Profile Hardware Amendment
+
+- The explicit self-activated identity profile remained compatible across firmware updates and did not require re-push for the latest hardware test.
+- Latest result doc: `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`.

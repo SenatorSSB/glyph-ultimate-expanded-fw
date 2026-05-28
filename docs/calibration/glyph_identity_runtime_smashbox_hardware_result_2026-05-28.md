@@ -91,3 +91,17 @@
   - RF11 low-magnitude directional override parity with LT1,
   - RF11 interactions with RF9 and LS->DPad rows.
 - New hardware validation is required before claiming PASS for RF11 alias rows.
+
+## 2026-05-28 Latest Hardware Result Amendment
+
+- Superseded/extended by:
+  - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
+- Latest result covers:
+  - updated table values,
+  - RF9 null modifier,
+  - RF11 Z-airdodge alias,
+  - RF15 Up+A alias,
+  - Y1+Tilt1 composites,
+  - LT1/LT3 changes,
+  - RT4/RT5 swap.
+- Earlier result remains historically valid for the previous runtime state.

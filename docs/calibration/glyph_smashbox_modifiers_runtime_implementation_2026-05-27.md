@@ -418,3 +418,9 @@ Manual hardware validation is required for:
   - Mode Y1+Tilt1 composite uses MY1 y-values `179/169/77`.
 - `RF9` is now a dedicated null modifier with final analog override to `(128,128)` and no game-button ownership.
 - These adjustments require a new hardware validation pass before claiming PASS for updated rows.
+
+## 2026-05-28 Amendment: Latest Hardware Confirmation
+
+- Current branch after commit `68474ccbb818ff23350908ccfcb8f59ec6207d4e` is hardware-confirmed by user report.
+- Latest result doc: `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`.
+- Profile was not re-pushed for this run because the resident explicit self-activated identity profile persisted across firmware updates and remained compatible with the tested firmware.
