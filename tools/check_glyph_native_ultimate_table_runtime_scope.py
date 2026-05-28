@@ -88,6 +88,7 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
     require(r"y2_active\s*=\s*inputs\.lt3\s*;", block, "Y2 anchor lt3")
     require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
+    require(r"force_up_active\s*=\s*inputs\.rf6\s*;", source, "forced-Up anchor rf6")
     require(r"tilt1_pressed\s*=\s*inputs\.rf3\s*;", block, "Tilt1 anchor rf3")
     require(r"tilt2_pressed\s*=\s*inputs\.rf4\s*;", block, "Tilt2 anchor rf4")
     require(
@@ -97,7 +98,15 @@ def ensure_required_shapes(source: str, block: str) -> None:
     )
     require(r"outputs\.buttonL\s*=\s*inputs\.lt1\s*;", source, "LT1 mapped to L")
     require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.leftStickX\s*=\s*center\.x\s*;[^}]*outputs\.leftStickY\s*=\s*center\.y\s*;", source, "LS->DPad neutralizes left stick")
-    require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.dpadUp\s*\|=\s*inputs\.rf4\s*;", source, "LS->DPad up direction")
+    require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;", source, "LS->DPad up uses effective Up")
+    require(r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;", source, "LS->DPad suppresses digital leftStickLeft")
+    require(r"outputs\.leftStickRight\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_right\s*;", source, "LS->DPad suppresses digital leftStickRight")
+    require(r"outputs\.leftStickDown\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_down\s*;", source, "LS->DPad suppresses digital leftStickDown")
+    require(r"outputs\.leftStickUp\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_up\s*;", source, "LS->DPad suppresses digital leftStickUp")
+    require(r"outputs\.buttonR\s*=\s*false\s*;", source, "RF3 no longer drives R")
+    require(r"outputs\.modX\s*=\s*false\s*;", source, "LT1 no longer drives modX")
+    if re.search(r"leftStickUp\s*=\s*inputs\.rf4\s*;", source):
+        fail("RF4 must not directly drive Up")
 
 
 def ensure_no_forbidden_tokens(source: str) -> None:

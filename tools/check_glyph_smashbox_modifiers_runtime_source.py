@@ -24,6 +24,7 @@ ANCHORS = (
     "inputs.lt1",
     "inputs.rf3",
     "inputs.rf4",
+    "inputs.rf6",
 )
 
 FORBIDDEN_FLASH_TOKENS = (
@@ -104,14 +105,39 @@ def ensure_chord_shape(block: str) -> None:
     )
 
 
-def ensure_mode_ls_to_dpad_shape(source: str, block: str) -> None:
-    require(r"mode_active\s*=\s*inputs\.rf8\s*;", block, "Mode source input rf8")
-    require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad source input rf7")
-    require(r"if\s*\(\s*ls_to_dpad_active\s*\)", source, "LS->DPad conditional branches present")
-    require(r"outputs\.dpadUp\s*\|=\s*inputs\.rf4\s*;", source, "LS->DPad up mapping")
-    require(r"outputs\.dpadDown\s*\|=\s*inputs\.lf2\s*;", source, "LS->DPad down mapping")
-    require(r"outputs\.dpadLeft\s*\|=\s*inputs\.lf3\s*;", source, "LS->DPad left mapping")
-    require(r"outputs\.dpadRight\s*\|=\s*inputs\.lf1\s*;", source, "LS->DPad right mapping")
+def ensure_rf6_forced_up_shape(source: str) -> None:
+    require(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*;", source, "RF6 forced-Up source")
+    require(r"const\s+bool\s+effective_ls_up\s*=\s*force_up_active\s*;", source, "effective Up uses RF6")
+    require(
+        r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;",
+        source,
+        "Down suppressed by RF6 forced-Up",
+    )
+    require(
+        r"UpdateDirections\s*\(\s*inputs\.lf3\s*,\s*//\s*Left\s*\n\s*inputs\.lf1\s*,\s*//\s*Right\s*\n\s*effective_ls_down\s*,\s*//\s*Down\s*\n\s*effective_ls_up\s*,\s*//\s*Up\s*\(RF6 forced-Up\)",
+        source,
+        "UpdateDirections uses effective RF6-based Up/Down",
+        flags=re.MULTILINE,
+    )
+
+
+def ensure_rf4_not_up(source: str) -> None:
+    if re.search(r"leftStickUp\s*=\s*inputs\.rf4\s*;", source):
+        fail("RF4 must not directly drive leftStickUp")
+    if re.search(r"inputs\.rf4\s*,\s*//\s*Up", source):
+        fail("RF4 must not be passed as Up to UpdateDirections")
+
+
+def ensure_ls_to_dpad_shape(source: str) -> None:
+    require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", source, "LS->DPad source input rf7")
+    require(r"outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;", source, "LS->DPad up uses effective Up")
+    require(r"outputs\.dpadDown\s*\|=\s*effective_ls_down\s*;", source, "LS->DPad down uses effective Down")
+    require(r"outputs\.dpadLeft\s*\|=\s*effective_ls_left\s*;", source, "LS->DPad left")
+    require(r"outputs\.dpadRight\s*\|=\s*effective_ls_right\s*;", source, "LS->DPad right")
+    require(r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;", source, "LS->DPad suppresses digital leftStickLeft")
+    require(r"outputs\.leftStickRight\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_right\s*;", source, "LS->DPad suppresses digital leftStickRight")
+    require(r"outputs\.leftStickDown\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_down\s*;", source, "LS->DPad suppresses digital leftStickDown")
+    require(r"outputs\.leftStickUp\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_up\s*;", source, "LS->DPad suppresses digital leftStickUp")
     require(
         r"const\s+StickPoint\s+center\s*=\s*mode_active\s*\?\s*kModeDefaultTable\[kDirectionFiveIndex\]\s*:\s*kDefaultTable\[kDirectionFiveIndex\]\s*;",
         source,
@@ -119,7 +145,12 @@ def ensure_mode_ls_to_dpad_shape(source: str, block: str) -> None:
     )
 
 
-def ensure_l_button_path(source: str) -> None:
+def ensure_r_and_modx_policies(source: str, doc_text: str) -> None:
+    if re.search(r"outputs\.buttonR\s*=\s*inputs\.rf3\s*;", source):
+        fail("RF3 must not drive buttonR")
+    if re.search(r"outputs\.modX\s*=\s*inputs\.lt1\s*;", source):
+        if "source-confirmed harmless" not in doc_text:
+            fail("LT1 must not drive modX unless doc marks it source-confirmed harmless")
     require(r"outputs\.buttonL\s*=\s*inputs\.lt1\s*;", source, "LT1 drives L button")
 
 
@@ -143,15 +174,22 @@ def ensure_no_forbidden_tokens(source: str, block: str) -> None:
         fail("marker block should not rely on uint8_t arithmetic formulas")
 
 
-def ensure_runtime_doc_state() -> None:
+def read_runtime_doc() -> str:
     if not RUNTIME_DOC_PATH.exists():
         fail(f"missing runtime doc: {RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     text = RUNTIME_DOC_PATH.read_text(encoding="utf-8")
 
     require(r"Implementation is complete", text, "runtime doc completion state")
+    require(r"RF6\s*=\s*forced Up", text, "runtime doc RF6 forced-Up role")
+    require(r"`?RF4`?\s*is\s*Tilt2-only", text, "runtime doc RF4 Tilt2-only policy")
+    require(r"R\s+is\s+intentionally\s+left\s+unassigned", text, "runtime doc R unassigned policy")
+    require(r"modX\s*=\s*inputs\.lt1\s*.*removed|removed/neutralized", text, "runtime doc LT1/modX policy", flags=re.IGNORECASE)
+
     for token in FORBIDDEN_STOP_CODES:
         if token in text:
             fail(f"runtime doc contains unresolved stop code token: {token}")
+
+    return text
 
 
 def main() -> int:
@@ -164,13 +202,15 @@ def main() -> int:
     block = extract_marker_block(source)
 
     try:
+        doc_text = read_runtime_doc()
         ensure_anchor_tokens(source)
         ensure_no_old_lt3_tilt3_shape(source, block)
         ensure_chord_shape(block)
-        ensure_mode_ls_to_dpad_shape(source, block)
-        ensure_l_button_path(source)
+        ensure_rf6_forced_up_shape(source)
+        ensure_rf4_not_up(source)
+        ensure_ls_to_dpad_shape(source)
+        ensure_r_and_modx_policies(source, doc_text)
         ensure_no_forbidden_tokens(source, block)
-        ensure_runtime_doc_state()
     except AssertionError as exc:
         print("status=FAIL")
         print(f"source={SOURCE_PATH.relative_to(REPO_ROOT)}")
@@ -181,11 +221,14 @@ def main() -> int:
     print(f"source={SOURCE_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print("markers=present")
+    print("forced_up_role=rf6")
+    print("rf4_up_conflict=absent")
     print("lt3_role=Y2_not_tilt3")
     print("tilt3_role=rf3_and_rf4_chord")
     print("ls_to_dpad_role=rf7")
-    print("mode_role=rf8")
     print("l_button_role=lt1")
+    print("r_button_role=unassigned")
+    print("lt1_modx_conflict=absent")
     return 0
 
 

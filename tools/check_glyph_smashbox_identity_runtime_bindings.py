@@ -21,6 +21,7 @@ ROLE_LINES = (
     "`LT2 = Y1`",
     "`LT3 = Y2`",
     "`RF7 = LS->DPad`",
+    "`RF6 = forced Up`",
     "`LT1 = L`",
     "`RF3 = Tilt1`",
     "`RF4 = Tilt2`",
@@ -34,6 +35,7 @@ SOURCE_ANCHORS = (
     "inputs.lt2",
     "inputs.lt3",
     "inputs.rf7",
+    "inputs.rf6",
     "inputs.lt1",
     "inputs.rf3",
     "inputs.rf4",
@@ -107,8 +109,16 @@ def require_runtime_doc() -> str:
         fail("runtime doc must state LT3=Y2")
     if "RF3 + RF4 = Tilt3" not in text:
         fail("runtime doc must state RF3+RF4=Tilt3")
+    if "RF6 = forced Up" not in text:
+        fail("runtime doc must state RF6=forced Up")
     if "LT1 = L" not in text:
         fail("runtime doc must state LT1=L")
+    if "RF4` is Tilt2-only" not in text and "RF4 is Tilt2-only" not in text:
+        fail("runtime doc must state RF4 is Tilt2-only")
+    if "R is intentionally left unassigned" not in text:
+        fail("runtime doc must document unassigned R policy")
+    if "outputs.modX = inputs.lt1" not in text or "removed/neutralized" not in text:
+        fail("runtime doc must document LT1/modX removal policy")
     if "standalone `LT3 -> Tilt3` behavior is historical only" not in text:
         fail("runtime doc must mark standalone LT3->Tilt3 as historical only")
 
@@ -126,6 +136,45 @@ def require_runtime_source() -> str:
 
     if "outputs.buttonL = inputs.lt1;" not in text:
         fail("runtime source must assign LT1 to L button")
+    if "outputs.modX = inputs.lt1;" in text:
+        fail("runtime source must not assign LT1 to modX")
+    if "outputs.buttonR = inputs.rf3;" in text:
+        fail("runtime source must not assign RF3 to R")
+    if "leftStickUp = inputs.rf4;" in text:
+        fail("runtime source must not consume RF4 as Up")
+    if re.search(r"inputs\.rf4\s*,\s*//\s*Up", text):
+        fail("runtime source must not pass RF4 as Up into UpdateDirections")
+    if re.search(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*;", text) is None:
+        fail("runtime source must define RF6 forced-Up source")
+    if re.search(r"const\s+bool\s+effective_ls_up\s*=\s*force_up_active\s*;", text) is None:
+        fail("runtime source must define effective Up from RF6")
+    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;", text) is None:
+        fail("runtime source must suppress Down when RF6 forced-Up is active")
+    if re.search(
+        r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;",
+        text,
+    ) is None:
+        fail("runtime source must suppress digital left-stick left during LS->DPad")
+    if re.search(
+        r"outputs\.leftStickRight\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_right\s*;",
+        text,
+    ) is None:
+        fail("runtime source must suppress digital left-stick right during LS->DPad")
+    if re.search(
+        r"outputs\.leftStickDown\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_down\s*;",
+        text,
+    ) is None:
+        fail("runtime source must suppress digital left-stick down during LS->DPad")
+    if re.search(
+        r"outputs\.leftStickUp\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_up\s*;",
+        text,
+    ) is None:
+        fail("runtime source must suppress digital left-stick up during LS->DPad")
+    if re.search(
+        r"outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;",
+        text,
+    ) is None:
+        fail("runtime source must use effective Up for LS->DPad")
 
     if re.search(r"tilt3_effective\s*=\s*tilt1_pressed\s*&&\s*tilt2_pressed\s*;", text) is None:
         fail("runtime source must define Tilt3 as rf3&&rf4 chord")
@@ -169,9 +218,13 @@ def main() -> int:
     print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_source={SOURCE_PATH.relative_to(REPO_ROOT)}")
     print("identity_semantic_remaps=0")
+    print("forced_up_role=RF6")
+    print("rf4_up_conflict=absent")
     print("lt3_role=Y2")
     print("tilt3_role=RF3+RF4")
+    print("r_role=unassigned")
     print("l_role=LT1")
+    print("lt1_modx_conflict=absent")
     return 0
 
 

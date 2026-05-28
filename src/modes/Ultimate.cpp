@@ -232,12 +232,19 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
+    const bool force_up_active = inputs.rf6;
+    const bool effective_ls_up = force_up_active;
+    const bool effective_ls_down = inputs.lf2 && !force_up_active;
+    const bool effective_ls_left = inputs.lf3;
+    const bool effective_ls_right = inputs.lf1;
+    const bool ls_to_dpad_active = inputs.rf7;
+
     outputs.a = inputs.rt1;
     outputs.b = inputs.rf1;
     outputs.x = inputs.rf2;
     outputs.y = inputs.rf6;
     outputs.buttonL = inputs.lt1;
-    outputs.buttonR = inputs.rf3;
+    outputs.buttonR = false;
     outputs.triggerLDigital = inputs.lf4;
     outputs.triggerRDigital = inputs.rf5;
 
@@ -263,37 +270,39 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.dpadLeft |= inputs.lf8;
     outputs.dpadRight |= inputs.lf6;
 
-    const bool ls_to_dpad_active = inputs.rf7;
     if (ls_to_dpad_active) {
-        outputs.dpadUp |= inputs.rf4;
-        outputs.dpadDown |= inputs.lf2;
-        outputs.dpadLeft |= inputs.lf3;
-        outputs.dpadRight |= inputs.lf1;
+        outputs.dpadUp |= effective_ls_up;
+        outputs.dpadDown |= effective_ls_down;
+        outputs.dpadLeft |= effective_ls_left;
+        outputs.dpadRight |= effective_ls_right;
     }
 
-    outputs.leftStickLeft = inputs.lf3;
-    outputs.leftStickRight = inputs.lf1;
-    outputs.leftStickDown = inputs.lf2;
-    outputs.leftStickUp = inputs.rf4;
+    outputs.leftStickLeft = ls_to_dpad_active ? false : effective_ls_left;
+    outputs.leftStickRight = ls_to_dpad_active ? false : effective_ls_right;
+    outputs.leftStickDown = ls_to_dpad_active ? false : effective_ls_down;
+    outputs.leftStickUp = ls_to_dpad_active ? false : effective_ls_up;
 
     outputs.rightStickLeft = inputs.rt3;
     outputs.rightStickRight = inputs.rt5;
     outputs.rightStickDown = inputs.rt2;
     outputs.rightStickUp = inputs.rt4;
 
-    outputs.modX = inputs.lt1;
+    outputs.modX = false;
     outputs.modY = inputs.lt2;
 }
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
+    const bool force_up_active = inputs.rf6;
+    const bool effective_ls_up = force_up_active;
+    const bool effective_ls_down = inputs.lf2 && !force_up_active;
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3, // Left
         inputs.lf1, // Right
-        inputs.lf2, // Down
-        inputs.rf4, // Up
+        effective_ls_down, // Down
+        effective_ls_up, // Up (RF6 forced-Up)
         inputs.rt3, // C-Left
         inputs.rt5, // C-Right
         inputs.rt2, // C-Down

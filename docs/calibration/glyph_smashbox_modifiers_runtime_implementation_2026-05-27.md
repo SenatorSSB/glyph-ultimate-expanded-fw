@@ -25,6 +25,7 @@ Implementation is complete in this branch for native `MODE_ULTIMATE` runtime sou
 - `LT2 = Y1`
 - `LT3 = Y2`
 - `RF7 = LS->DPad`
+- `RF6 = forced Up`
 - `LT1 = L`
 - `RF3 = Tilt1`
 - `RF4 = Tilt2`
@@ -35,6 +36,15 @@ Historical replacement:
 - Previous standalone `LT3 -> Tilt3` behavior is historical only.
 - In this identity runtime profile, `LT3` is `Y2`.
 - Tilt3 is now the `RF3+RF4` chord.
+
+Direction mapping used by identity runtime:
+
+- `LF3 = Left`
+- `LF1 = Right`
+- `LF2 = Down`
+- `RF6 = forced Up`
+
+`RF4` is Tilt2-only and is no longer consumed as Up direction input in the Smash Box runtime path.
 
 ## Canonical Table Source
 
@@ -72,6 +82,16 @@ Therefore:
 - Mode + multiple modifiers gives Mode default.
 - Mode + exactly one modifier gives the matching M-table.
 
+RF6 forced-Up policy for table direction:
+
+- `RF6` forces effective Up regardless of simultaneous Down.
+- `RF6` alone resolves to direction `8`.
+- `RF6 + Down` resolves to direction `8`.
+- `RF6 + Left` resolves to direction `7`.
+- `RF6 + Right` resolves to direction `9`.
+- `RF6 + Left + Down` resolves to direction `7`.
+- `RF6 + Right + Down` resolves to direction `9`.
+
 ## LS->DPad Policy
 
 - `RF7` enables LS->DPad.
@@ -80,14 +100,23 @@ Therefore:
   - left stick is forced to direction `5` center,
   - Mode inactive center is `(128,128)`,
   - Mode active center is `(128,172)`.
+- While LS->DPad is active, digital left-stick outputs are suppressed (`leftStickLeft/Right/Down/Up` forced off).
 - LS->DPad is orthogonal to right-stick/C-stick and trigger paths.
 - LS->DPad does not reintroduce the old prototype D-pad-layer side effects.
 - Old nunchuk C D-pad behavior is preserved only when nunchuk C is active.
+- Under LS->DPad, RF6 still acts as forced Up and overrides Down.
 
 ## L Button Behavior
 
 - `LT1` now drives `outputs.buttonL` for native Ultimate backends (including Switch/GameCube mappings through existing backend output adapters).
+- `outputs.modX = inputs.lt1` is removed/neutralized for this identity runtime path (`modX` no longer follows LT1).
 - Existing trigger behavior remains on its prior trigger paths.
+
+## R Button Behavior
+
+- `outputs.buttonR = inputs.rf3` is removed in this branch because RF3 is reserved for Tilt1.
+- No replacement R physical assignment is introduced in this identity runtime branch.
+- R is intentionally left unassigned until a user-approved/source-backed replacement is specified.
 
 ## Preservation Boundaries
 
@@ -105,8 +134,12 @@ Preserved:
 Manual hardware validation is required for:
 
 - all Default/Mode/X/Y/Tilt/M-table direction outputs,
+- RF6 forced-Up direction resolution rows (`RF6` with no direction, Down, Left/Right, and Down+Left/Right),
 - `RF3+RF4 => Tilt3`,
 - `LT3 => Y2` and no standalone LT3 Tilt3 claim,
 - `LT1 => L`,
+- `RF4` behaves as Tilt2 and does not act as Up direction source,
+- `RF3` Tilt1 path does not press R,
+- `LT1` does not emit prior LT1->modX behavior,
 - LS->DPad behavior and orthogonality,
 - nunchuk availability row handling.
