@@ -55,10 +55,11 @@ Left-stick directions:
 - `LF1 = Right`
 - `LF2 = Up`
 - `LF5 = Down`
-- `LT6 = forced Down+A`
+- `LT6 = hard Down+A`
 - `RF6 = forced Up`
-- `RF12 = forced Up+A`
-- Forced-Up sources `RF6` and `RF12` suppress Down sources `LF5` and `LT6` for runtime table direction.
+- `RF12 = hard Up+A`
+- Normal table-direction resolution still uses LF direction inputs plus RF6 forced-Up.
+- LT6/RF12 direction-plus-A is applied afterward as a hard final left-stick override.
 
 Right stick / C-stick:
 
@@ -115,9 +116,9 @@ Direction mapping used by identity runtime:
 - `LF1 = Right`
 - `LF2 = Up`
 - `LF5 = Down`
-- `LT6 = forced Down+A`
 - `RF6 = forced Up`
-- `RF12 = forced Up+A`
+- `LT6/RF12` are not used as modifier-table direction-index sources.
+- `LT6` and `RF12` instead hard-override final left-stick output to direction `2`/`8` using Default or Mode-default base tables.
 
 `RF4` is Tilt2-only and is no longer consumed as Up direction input in the Smash Box runtime path.
 `RF6` is forced-Up only and no longer drives game Y output in this runtime branch.
@@ -160,19 +161,21 @@ Therefore:
 - Mode + multiple modifiers gives Mode default.
 - Mode + exactly one modifier gives the matching M-table.
 
-Direction-plus-A and forced-Up policy for table direction:
+Direction-plus-A hard final override policy:
 
 - Runtime A output is `outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12`.
-- `RF12` provides forced Up plus A and overrides simultaneous Down sources.
-- `LT6` provides Down plus A unless forced-Up (`RF6` or `RF12`) is active.
-- `RF12` alone resolves to direction `8` and presses A.
-- `RF12 + Down` resolves to direction `8` and presses A.
-- `RF12 + LT6` resolves to direction `8` and presses A.
-- `RF12 + Left` resolves to direction `7` and presses A.
-- `RF12 + Right` resolves to direction `9` and presses A.
-- `LT6` alone resolves to direction `2` and presses A.
-- `LT6 + RF6` resolves to direction `8` and presses A.
-- Existing `RF6` forced-Up rows remain valid (`RF6` keeps Up override semantics).
+- LT6/RF12 are hard direction+A outputs and are not modifier-table direction-index sources.
+- LT6/RF12 do not count as modifiers in composition and do not alter `SelectStickTable` modifier selection.
+- Mode is respected as base-table selection for hard override:
+  - Mode inactive hard override uses `kDefaultTable`.
+  - Mode active hard override uses `kModeDefaultTable`.
+- Hard override directions:
+  - direction `2` for Down+A,
+  - direction `8` for Up+A.
+- Up override precedence while direction-plus-A is active:
+  - `RF12 + LT6` resolves to Up+A,
+  - `RF6 + LT6` resolves to Up+A.
+- X/Y/Tilt modifier tables are ignored for final left-stick output when direction-plus-A is active.
 
 ## LS->DPad Policy
 
@@ -186,11 +189,11 @@ Direction-plus-A and forced-Up policy for table direction:
 - LS->DPad is orthogonal to right-stick/C-stick and trigger paths.
 - LS->DPad does not reintroduce the old prototype D-pad-layer side effects.
 - Old nunchuk C D-pad behavior is preserved only when nunchuk C is active.
-- Under LS->DPad, RF6/RF12 forced Up still override Down.
-- Under LS->DPad, direction-plus-A still presses A while routing direction to D-pad.
+- Under LS->DPad, direction-plus-A still presses A while routing hard effective direction to D-pad.
 - `RF7 + LT6` resolves to D-pad Down + A.
 - `RF7 + RF12` resolves to D-pad Up + A.
-- `RF7 + RF12 + Down` resolves to D-pad Up + A.
+- `RF7 + RF12 + LT6` resolves to D-pad Up + A.
+- `RF7 + RF6 + LT6` resolves to D-pad Up + A.
 - There are no direct standalone D-pad inputs from `LF6`, `LF8`, or the old D-pad cluster.
 
 ## L/R/Z Button Behavior
@@ -239,8 +242,9 @@ Manual hardware validation is required for:
 - `RF3` Tilt1 path does not press R,
 - `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` does not emit prior LT1->modX behavior,
-- `LT6` Down+A path presses A and selects direction `2` table rows when no forced-Up is active,
-- `RF12` Up+A path presses A and selects direction `8` table rows while overriding Down,
+- `LT6` Down+A path hard-overrides final left-stick output to direction `2` using Default/Mode-default base tables,
+- `RF12` Up+A path hard-overrides final left-stick output to direction `8` using Default/Mode-default base tables,
+- LT6/RF12 hard-override rows ignore X/Y/Tilt final table outputs while preserving Mode base-table selection,
 - `LT6/RF12` do not count as modifiers in X/Y/Tilt/Mode composition,
 - LS->DPad behavior and orthogonality,
 - no standalone D-pad outputs from empty buttons,

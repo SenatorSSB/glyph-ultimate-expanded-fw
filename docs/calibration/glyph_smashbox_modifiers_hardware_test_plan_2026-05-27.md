@@ -40,8 +40,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF12 direction-plus-A baseline | `RF12` only | N/A | Default table direction `8` and A asserted | NOT_TESTED |
 | LT6 direction-plus-A with Mode | `LT6 + Mode` | N/A | Mode default table direction `2` and A asserted | NOT_TESTED |
 | RF12 direction-plus-A with Mode | `RF12 + Mode` | N/A | Mode default table direction `8` and A asserted | NOT_TESTED |
-| LT6 direction-plus-A with modifiers | `LT6 + X1/X2/Y1/Y2/Tilt1/Tilt2/Tilt3` | Representative + 1..9 spot checks | Matching modifier table is selected at direction `2` and A asserted | NOT_TESTED |
-| RF12 direction-plus-A with modifiers | `RF12 + X1/X2/Y1/Y2/Tilt1/Tilt2/Tilt3` | Representative + 1..9 spot checks | Matching modifier table is selected at direction `8` and A asserted | NOT_TESTED |
+| LT6 direction-plus-A with modifiers | `LT6 + X1/X2/Y1/Y2/Tilt1/Tilt2/Tilt3` (Mode optional) | Representative + 1..9 spot checks | Final output is Default direction `2` + A, or Mode default direction `2` + A if Mode is held | NOT_TESTED |
+| RF12 direction-plus-A with modifiers | `RF12 + X1/X2/Y1/Y2/Tilt1/Tilt2/Tilt3` (Mode optional) | Representative + 1..9 spot checks | Final output is Default direction `8` + A, or Mode default direction `8` + A if Mode is held | NOT_TESTED |
 | RF6 forced-Up | `RF6` only | N/A | Effective direction `8` table output | NOT_TESTED |
 | RF6 forced-Up with Down | `RF6 + Down` | N/A | Effective direction `8` table output (Down overridden) | NOT_TESTED |
 | RF6 forced-Up with Left | `RF6 + Left` | N/A | Effective direction `7` table output | NOT_TESTED |
@@ -50,8 +50,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF6 forced-Up with Down+Right | `RF6 + Down + Right` | N/A | Effective direction `9` table output | NOT_TESTED |
 | RF6 game Y guard | `RF6` only | N/A | Forced-Up behavior is present and game Y is not pressed | NOT_TESTED |
 | RF6 Down override guard | `RF6 + LF5` | N/A | Up remains effective and Down is suppressed in runtime table direction | NOT_TESTED |
-| RF12 Up override guard | `RF12 + LF5` | N/A | Up remains effective and A is asserted | NOT_TESTED |
 | RF12 + LT6 override guard | `RF12 + LT6` | N/A | Up remains effective and A is asserted | NOT_TESTED |
+| RF6 + LT6 override guard | `RF6 + LT6` | N/A | Up remains effective and A is asserted | NOT_TESTED |
 | Tilt3 chord source | `RF3 + RF4` | 1..9 | Effective Tilt3 table (or MTilt3 when Mode on) | NOT_TESTED |
 | LT3 role | `LT3` only | 1..9 | Y2 table (or MY2 when Mode on), not standalone Tilt3 | NOT_TESTED |
 | RF4 role guard | `RF4` only (no direction inputs) | N/A | Tilt2 neutral-direction behavior; RF4 does not act as Up direction source | NOT_TESTED |
@@ -73,7 +73,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LS->DPad with RF6 and lateral | `RF7 + RF6 + Left/Right` | N/A | D-pad Up+Left / Up+Right if simultaneous D-pad outputs are supported | NOT_TESTED |
 | LS->DPad with LT6 | `RF7 + LT6` | N/A | D-pad Down asserted and A asserted | NOT_TESTED |
 | LS->DPad with RF12 | `RF7 + RF12` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
-| LS->DPad with RF12 and Down | `RF7 + RF12 + Down` | N/A | D-pad Up asserted and A asserted (Down overridden) | NOT_TESTED |
+| LS->DPad with RF12 and LT6 | `RF7 + RF12 + LT6` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
+| LS->DPad with RF6 and LT6 | `RF7 + RF6 + LT6` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
 | No standalone D-pad outputs | Press `LF6`, `LF8`, old D-pad cluster placeholders, and RF7 inactive | N/A | No D-pad output unless nunchuk C or RF7 LS->DPad is active | NOT_TESTED |
 | Empty button no-output smoke | Press `LF6/LF7/LF8/RF9/RF11/RF13/RF14/RF15/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
 | Custom modifiers still work | Press `RF8/LT5/LT4/LT2/LT3/RF3/RF4` across representative directions | 1..9 spot checks | Mode, X1, X2, Y1, Y2, Tilt1, Tilt2, and RF3+RF4 Tilt3 all select expected tables | NOT_TESTED |

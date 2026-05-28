@@ -258,13 +258,41 @@ def require_runtime_source() -> str:
     if re.search(r"inputs\.rf4\s*,\s*//\s*Up", text):
         fail("runtime source must not pass RF4 as Up into UpdateDirections")
     if re.search(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*;", text) is None:
-        fail("runtime source must define RF6 or RF12 forced-Up source")
+        fail("runtime source must define digital RF6 or RF12 forced-Up source")
     if re.search(r"const\s+bool\s+effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", text) is None:
-        fail("runtime source must define effective Up from LF2 or forced-Up source")
+        fail("runtime source must define digital effective Up from LF2 or forced-Up source")
     if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;", text) is not None:
         fail("runtime source must not use old LF2 Down shape")
     if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*\(\s*inputs\.lf5\s*\|\|\s*inputs\.lt6\s*\)\s*&&\s*!force_up_active\s*;", text) is None:
-        fail("runtime source must define effective Down from LF5 or LT6 and suppress it during forced-Up")
+        fail("runtime source must define digital effective Down from LF5 or LT6 and suppress it during forced-Up")
+    if re.search(r"const\s+bool\s+normal_force_up_active\s*=\s*inputs\.rf6\s*;", text) is None:
+        fail("runtime source must define RF6-only normal table forced-Up source")
+    if re.search(r"const\s+bool\s+normal_effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*normal_force_up_active\s*;", text) is None:
+        fail("runtime source must define RF6-only normal table effective Up")
+    if re.search(r"const\s+bool\s+normal_effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!normal_force_up_active\s*;", text) is None:
+        fail("runtime source must define RF6-only normal table effective Down")
+    if re.search(
+        r"UpdateDirections\s*\(\s*inputs\.lf3\s*,\s*//\s*Left\s*\n\s*inputs\.lf1\s*,\s*//\s*Right\s*\n\s*normal_effective_ls_down\s*,\s*//\s*Down\s*\n\s*normal_effective_ls_up\s*,\s*//\s*Up\s*\(RF6 forced-Up\)",
+        text,
+        flags=re.MULTILINE,
+    ) is None:
+        fail("runtime source must use RF6-only normal table directions in UpdateDirections")
+    if re.search(r"const\s+bool\s+direction_plus_a_active\s*=\s*down_a_active\s*\|\|\s*up_a_active\s*;", text) is None:
+        fail("runtime source must define direction-plus-A activation")
+    if re.search(r"const\s+bool\s+direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*inputs\.rf6\s*\)\s*;", text) is None:
+        fail("runtime source must define direction-plus-A Up override with RF6")
+    if re.search(r"const\s+StickPoint\s+\*direction_plus_a_table\s*=\s*mode_active\s*\?\s*kModeDefaultTable\s*:\s*kDefaultTable\s*;", text) is None:
+        fail("runtime source must select Default/Mode-default base table for hard override")
+    if re.search(r"const\s+size_t\s+direction_plus_a_index\s*=\s*direction_plus_a_force_up\s*\?\s*kDirectionEightIndex\s*:\s*kDirectionTwoIndex\s*;", text) is None:
+        fail("runtime source must map hard override to direction 2 or 8")
+    if re.search(r"outputs\.leftStickX\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.x\s*;", text) is None:
+        fail("runtime source must hard-override final leftStickX for direction-plus-A")
+    if re.search(r"outputs\.leftStickY\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.y\s*;", text) is None:
+        fail("runtime source must hard-override final leftStickY for direction-plus-A")
+    if re.search(r"SelectStickTable\s*\([^)]*inputs\.(lt6|rf12)", text, flags=re.DOTALL):
+        fail("runtime source must not include LT6/RF12 in modifier table selection")
+    if "active_table[direction_plus_a_index]" in text:
+        fail("runtime source must not use modifier-selected tables for LT6/RF12 hard override")
     if re.search(
         r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;",
         text,

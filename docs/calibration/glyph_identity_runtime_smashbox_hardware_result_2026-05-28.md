@@ -48,5 +48,5 @@
 
 ## 2026-05-28 Direction-Plus-A Amendment
 
-- This hardware result predates the `LT6 = Down+A` and `RF12 = Up+A` runtime additions.
-- Direction-plus-A behavior requires new hardware validation before claiming hardware pass for those rows.
+- Direction-plus-A behavior changed after this hardware result to hard final direction+A overrides (`LT6=Down+A`, `RF12=Up+A`).
+- New hard override behavior requires a dedicated hardware validation pass before claiming hardware pass for those rows.

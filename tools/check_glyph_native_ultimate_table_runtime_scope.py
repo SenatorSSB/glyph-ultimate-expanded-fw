@@ -88,11 +88,7 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
     require(r"y2_active\s*=\s*inputs\.lt3\s*;", block, "Y2 anchor lt3")
     require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
-    require(
-        r"force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*;",
-        source,
-        "forced-Up anchors rf6/rf12",
-    )
+    require(r"force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*;", source, "digital forced-Up anchors rf6/rf12")
     require(r"tilt1_pressed\s*=\s*inputs\.rf3\s*;", block, "Tilt1 anchor rf3")
     require(r"tilt2_pressed\s*=\s*inputs\.rf4\s*;", block, "Tilt2 anchor rf4")
     require(
@@ -112,11 +108,46 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt1\s*;", source, "LT1 mapped to GameCube L carrier")
     require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*;", source, "RT1 mapped to source-confirmed Z carrier")
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 mapped to source-confirmed R carrier")
-    require(r"effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", source, "LF2 or forced-Up mapped to Up")
+    require(r"effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", source, "digital LF2 or forced-Up mapped to Up")
     require(
         r"effective_ls_down\s*=\s*\(\s*inputs\.lf5\s*\|\|\s*inputs\.lt6\s*\)\s*&&\s*!force_up_active\s*;",
         source,
-        "LF5/LT6 mapped to Down and suppressed by forced-Up",
+        "digital LF5/LT6 mapped to Down and suppressed by forced-Up",
+    )
+    require(r"normal_force_up_active\s*=\s*inputs\.rf6\s*;", source, "normal table forced-Up RF6")
+    require(r"normal_effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*normal_force_up_active\s*;", source, "normal table Up uses LF2/RF6")
+    require(r"normal_effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!normal_force_up_active\s*;", source, "normal table Down uses LF5 with RF6 suppression")
+    require(
+        r"UpdateDirections\s*\(\s*inputs\.lf3\s*,\s*//\s*Left\s*\n\s*inputs\.lf1\s*,\s*//\s*Right\s*\n\s*normal_effective_ls_down\s*,\s*//\s*Down\s*\n\s*normal_effective_ls_up\s*,\s*//\s*Up\s*\(RF6 forced-Up\)",
+        source,
+        "UpdateDirections uses normal RF6-only directions",
+        flags=re.MULTILINE,
+    )
+    require(r"direction_plus_a_active\s*=\s*down_a_active\s*\|\|\s*up_a_active\s*;", source, "hard direction-plus-A active flag")
+    require(
+        r"direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*inputs\.rf6\s*\)\s*;",
+        source,
+        "hard direction-plus-A Up override (RF12 or RF6)",
+    )
+    require(
+        r"const\s+StickPoint\s+\*direction_plus_a_table\s*=\s*mode_active\s*\?\s*kModeDefaultTable\s*:\s*kDefaultTable\s*;",
+        source,
+        "hard direction-plus-A base table uses Mode default or Default",
+    )
+    require(
+        r"const\s+size_t\s+direction_plus_a_index\s*=\s*direction_plus_a_force_up\s*\?\s*kDirectionEightIndex\s*:\s*kDirectionTwoIndex\s*;",
+        source,
+        "hard direction-plus-A uses direction2/direction8",
+    )
+    require(
+        r"outputs\.leftStickX\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.x\s*;",
+        source,
+        "hard direction-plus-A final leftStickX",
+    )
+    require(
+        r"outputs\.leftStickY\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.y\s*;",
+        source,
+        "hard direction-plus-A final leftStickY",
     )
     require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.leftStickX\s*=\s*center\.x\s*;[^}]*outputs\.leftStickY\s*=\s*center\.y\s*;", source, "LS->DPad neutralizes left stick")
     require(r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{[^}]*outputs\.dpadUp\s*\|=\s*effective_ls_up\s*;", source, "LS->DPad up uses effective Up")
@@ -133,6 +164,10 @@ def ensure_required_shapes(source: str, block: str) -> None:
         fail("RF5 must not drive R trigger because RF5 is duplicate B")
     if re.search(r"outputs\.triggerRDigital\s*=\s*inputs\.rf12\s*;", source):
         fail("RF12 must not drive R trigger because RF16 remains the R carrier")
+    if re.search(r"SelectStickTable\s*\([^)]*inputs\.(lt6|rf12)", source, flags=re.DOTALL):
+        fail("LT6/RF12 must not enter modifier selection logic")
+    if "active_table[direction_plus_a_index]" in source:
+        fail("hard direction-plus-A output must not use modifier-selected active_table")
     if "outputs.dpadLeft |= inputs.lf8;" in source or "outputs.dpadRight |= inputs.lf6;" in source:
         fail("standalone direct D-pad inputs must not remain")
 
@@ -180,6 +215,7 @@ def main() -> int:
     print("y_role=rf10")
     print("forced_up_role=rf6_or_rf12")
     print("direction_plus_a_role=lt6_down_a_rf12_up_a")
+    print("direction_plus_a_override_policy=hard_final_default_or_mode_default")
     print("standalone_dpad=none")
     print("table_samples=" + ";".join(table_summaries))
     return 0
