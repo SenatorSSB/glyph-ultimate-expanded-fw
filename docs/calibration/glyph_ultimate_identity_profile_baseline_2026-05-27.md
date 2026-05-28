@@ -61,3 +61,8 @@ Do not apply this identity artifact expecting full Smash Box X/Y/Mode/LS->DPad b
 
 - Explicit self-activated identity profile plus identity-runtime firmware was hardware-confirmed.
 - Omitted-activates identity remains superseded for the active hardware workflow.
+
+## 2026-05-28 Direction-Plus-A Identity Amendment
+
+- `BTN_LT6` and `BTN_RF12` remain explicit self-activated identity inputs in `MODE_ULTIMATE` for runtime-owned direction-plus-A behavior.
+- `BTN_RF16` remains an explicit self-activated identity input for runtime-owned `R`.

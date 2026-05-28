@@ -25,6 +25,9 @@ ANCHORS = (
     "inputs.rf3",
     "inputs.rf4",
     "inputs.rf6",
+    "inputs.rf12",
+    "inputs.lt6",
+    "inputs.rf16",
 )
 
 FORBIDDEN_FLASH_TOKENS = (
@@ -105,23 +108,85 @@ def ensure_chord_shape(block: str) -> None:
     )
 
 
-def ensure_rf6_forced_up_shape(source: str) -> None:
-    require(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*;", source, "RF6 forced-Up source")
+def ensure_direction_plus_a_digital_shape(source: str) -> None:
+    require(
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*;",
+        source,
+        "digital forced-Up sources RF6 or RF12",
+    )
     require(
         r"const\s+bool\s+effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;",
         source,
-        "effective Up uses LF2 or RF6",
+        "digital effective Up uses LF2 or forced-Up",
     )
     require(
-        r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!force_up_active\s*;",
+        r"const\s+bool\s+effective_ls_down\s*=\s*\(\s*inputs\.lf5\s*\|\|\s*inputs\.lt6\s*\)\s*&&\s*!force_up_active\s*;",
         source,
-        "Down suppressed by RF6 forced-Up",
+        "digital effective Down uses LF5 or LT6 and is suppressed by forced-Up",
+    )
+
+
+def ensure_direction_plus_a_analog_shape(source: str) -> None:
+    require(
+        r"const\s+bool\s+normal_force_up_active\s*=\s*inputs\.rf6\s*;",
+        source,
+        "analog normal forced-Up source RF6",
     )
     require(
-        r"UpdateDirections\s*\(\s*inputs\.lf3\s*,\s*//\s*Left\s*\n\s*inputs\.lf1\s*,\s*//\s*Right\s*\n\s*effective_ls_down\s*,\s*//\s*Down\s*\n\s*effective_ls_up\s*,\s*//\s*Up\s*\(RF6 forced-Up\)",
+        r"const\s+bool\s+normal_effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*normal_force_up_active\s*;",
         source,
-        "UpdateDirections uses effective RF6-based Up/Down",
+        "analog normal effective Up uses LF2 or RF6",
+    )
+    require(
+        r"const\s+bool\s+normal_effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!normal_force_up_active\s*;",
+        source,
+        "analog normal effective Down uses LF5 and RF6 suppression",
+    )
+    require(
+        r"UpdateDirections\s*\(\s*inputs\.lf3\s*,\s*//\s*Left\s*\n\s*inputs\.lf1\s*,\s*//\s*Right\s*\n\s*normal_effective_ls_down\s*,\s*//\s*Down\s*\n\s*normal_effective_ls_up\s*,\s*//\s*Up\s*\(RF6 forced-Up\)",
+        source,
+        "UpdateDirections uses normal RF6-only directions",
         flags=re.MULTILINE,
+    )
+    require(
+        r"const\s+bool\s+down_a_active\s*=\s*inputs\.lt6\s*;",
+        source,
+        "hard override down+a source",
+    )
+    require(
+        r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*;",
+        source,
+        "hard override up+a source",
+    )
+    require(
+        r"const\s+bool\s+direction_plus_a_active\s*=\s*down_a_active\s*\|\|\s*up_a_active\s*;",
+        source,
+        "hard override activation",
+    )
+    require(
+        r"const\s+bool\s+direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*inputs\.rf6\s*\)\s*;",
+        source,
+        "hard override Up priority and RF6 interaction",
+    )
+    require(
+        r"const\s+StickPoint\s+\*direction_plus_a_table\s*=\s*mode_active\s*\?\s*kModeDefaultTable\s*:\s*kDefaultTable\s*;",
+        source,
+        "hard override uses Mode/default base table",
+    )
+    require(
+        r"const\s+size_t\s+direction_plus_a_index\s*=\s*direction_plus_a_force_up\s*\?\s*kDirectionEightIndex\s*:\s*kDirectionTwoIndex\s*;",
+        source,
+        "hard override uses direction2/direction8 indices",
+    )
+    require(
+        r"outputs\.leftStickX\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.x\s*;",
+        source,
+        "hard override final X assignment",
+    )
+    require(
+        r"outputs\.leftStickY\s*=\s*direction_plus_a_table\[direction_plus_a_index\]\.y\s*;",
+        source,
+        "hard override final Y assignment",
     )
 
 
@@ -173,6 +238,9 @@ def ensure_r_and_modx_policies(source: str, doc_text: str) -> None:
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt1\s*;", source, "LT1 drives GameCube L trigger digital carrier")
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 drives GameCube R trigger digital carrier")
     require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*;", source, "RT1 drives source-confirmed GameCube/N64 Z carrier")
+    if re.search(r"outputs\.triggerRDigital\s*=\s*inputs\.rf12\s*;", source):
+        fail("RF12 must not drive R carrier")
+    require(r"`?RF16`?\s+remains\s+`?R`?", doc_text, "runtime doc states RF16 remains R")
 
 
 def ensure_y_and_mody_policies(source: str, doc_text: str) -> None:
@@ -189,7 +257,11 @@ def ensure_y_and_mody_policies(source: str, doc_text: str) -> None:
 
 
 def ensure_main_button_shape(source: str) -> None:
-    require(r"outputs\.a\s*=\s*inputs\.rf1\s*;", source, "RF1 drives A")
+    require(
+        r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*;",
+        source,
+        "A is driven by RF1 or LT6 or RF12",
+    )
     require(r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*;", source, "RF5 or LF4 drives B")
     require(r"outputs\.x\s*=\s*inputs\.rf2\s*;", source, "RF2 drives X")
     require(r"outputs\.y\s*=\s*inputs\.rf10\s*;", source, "RF10 drives Y")
@@ -197,6 +269,20 @@ def ensure_main_button_shape(source: str) -> None:
         fail("LF4 must not be stolen by L trigger digital when LF4 is B")
     if re.search(r"outputs\.triggerRDigital\s*=\s*inputs\.rf5\s*;", source):
         fail("RF5 must not be stolen by R trigger digital when RF5 is B")
+
+
+def ensure_direction_plus_a_not_modifiers(source: str, block: str) -> None:
+    if re.search(r"(x1_active|x2_active|y1_active|y2_active|tilt1_effective|tilt2_effective|tilt3_effective)\s*=\s*inputs\.(lt6|rf12)", block):
+        fail("LT6/RF12 must not be consumed as modifier activators")
+    if re.search(r"SelectStickTable\s*\([^)]*inputs\.(lt6|rf12)", block, flags=re.DOTALL):
+        fail("LT6/RF12 must not be passed into SelectStickTable modifier selection")
+    if re.search(r"active_table\[direction_plus_a_index\]", source):
+        fail("hard direction-plus-A output must not use modifier-selected active_table")
+    require(
+        r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*;",
+        source,
+        "LT6/RF12 participate in A output",
+    )
 
 
 def ensure_no_forbidden_tokens(source: str, block: str) -> None:
@@ -226,6 +312,8 @@ def read_runtime_doc() -> str:
 
     require(r"Implementation is complete", text, "runtime doc completion state")
     require(r"RF6\s*=\s*forced Up", text, "runtime doc RF6 forced-Up role")
+    require(r"LT6\s*=\s*Down\+A", text, "runtime doc LT6 direction-plus-A role")
+    require(r"RF12\s*=\s*Up\+A", text, "runtime doc RF12 direction-plus-A role")
     require(r"`?RF4`?\s*is\s*Tilt2-only", text, "runtime doc RF4 Tilt2-only policy")
     require(r"`?RF6`?\s+is\s+forced-Up\s+only\s+and\s+no\s+longer\s+drives\s+game\s+Y", text, "runtime doc RF6 no longer game Y policy")
     require(r"`?LT2`?\s+remains\s+the\s+`?Y1`?\s+modifier\s+role\s+only", text, "runtime doc LT2 Y1-only policy")
@@ -233,6 +321,32 @@ def read_runtime_doc() -> str:
     require(r"RF10\s*=\s*Y", text, "runtime doc RF10 game Y role")
     require(r"RT1\s*=\s*Z", text, "runtime doc RT1 Z role")
     require(r"RF16\s*=\s*R", text, "runtime doc RF16 R role")
+    require(r"`?RF16`?\s+remains\s+`?R`?", text, "runtime doc RF16 remains R")
+    require(r"not modifiers", text, "runtime doc direction-plus-A not modifiers policy", flags=re.IGNORECASE)
+    require(
+        r"hard\s+direction\+A|hard\s+final\s+direction\+A|hard override",
+        text,
+        "runtime doc hard direction-plus-A policy",
+        flags=re.IGNORECASE,
+    )
+    require(
+        r"ignore.*modifier tables|modifier tables.*ignore|ignored.*modifier tables",
+        text,
+        "runtime doc LT6/RF12 ignore modifier tables for final output",
+        flags=re.IGNORECASE,
+    )
+    require(
+        r"Mode.*base table|base table.*Mode",
+        text,
+        "runtime doc mode base-table policy for hard override",
+        flags=re.IGNORECASE,
+    )
+    if re.search(
+        r"LS->DPad.*direction-plus-A.*(?:D-pad.*A|A.*D-pad)",
+        text,
+        flags=re.IGNORECASE | re.DOTALL,
+    ) is None:
+        fail("missing source evidence: runtime doc LS->DPad direction-plus-A policy")
     require(r"no standalone D-pad", text, "runtime doc no standalone D-pad policy", flags=re.IGNORECASE)
 
     for token in FORBIDDEN_STOP_CODES:
@@ -256,8 +370,10 @@ def main() -> int:
         ensure_anchor_tokens(source)
         ensure_no_old_lt3_tilt3_shape(source, block)
         ensure_chord_shape(block)
-        ensure_rf6_forced_up_shape(source)
+        ensure_direction_plus_a_digital_shape(source)
+        ensure_direction_plus_a_analog_shape(source)
         ensure_main_button_shape(source)
+        ensure_direction_plus_a_not_modifiers(source, block)
         ensure_rf4_not_up(source)
         ensure_ls_to_dpad_shape(source)
         ensure_no_standalone_dpad_shape(source)
@@ -274,8 +390,10 @@ def main() -> int:
     print(f"source={SOURCE_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print("markers=present")
-    print("forced_up_role=rf6")
+    print("forced_up_role=rf6_or_rf12")
     print("rf4_up_conflict=absent")
+    print("direction_plus_a_role=lt6_down_a_rf12_up_a")
+    print("direction_plus_a_modifier_conflict=absent")
     print("lt3_role=Y2_not_tilt3")
     print("tilt3_role=rf3_and_rf4_chord")
     print("ls_to_dpad_role=rf7")

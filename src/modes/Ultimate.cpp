@@ -108,7 +108,9 @@ constexpr StickPoint kMTilt3Table[9] = {
     {96, 174}, {128, 174}, {160, 174},
 };
 
+constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
+constexpr size_t kDirectionEightIndex = 7;
 
 enum class EffectiveModifier {
     None,
@@ -232,14 +234,14 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
-    const bool force_up_active = inputs.rf6;
+    const bool force_up_active = inputs.rf6 || inputs.rf12;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
-    const bool effective_ls_down = inputs.lf5 && !force_up_active;
+    const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
     const bool effective_ls_left = inputs.lf3;
     const bool effective_ls_right = inputs.lf1;
     const bool ls_to_dpad_active = inputs.rf7;
 
-    outputs.a = inputs.rf1;
+    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12;
     outputs.b = inputs.rf5 || inputs.lf4;
     outputs.x = inputs.rf2;
     outputs.y = inputs.rf10;
@@ -290,16 +292,16 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
-    const bool force_up_active = inputs.rf6;
-    const bool effective_ls_up = inputs.lf2 || force_up_active;
-    const bool effective_ls_down = inputs.lf5 && !force_up_active;
+    const bool normal_force_up_active = inputs.rf6;
+    const bool normal_effective_ls_up = inputs.lf2 || normal_force_up_active;
+    const bool normal_effective_ls_down = inputs.lf5 && !normal_force_up_active;
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3, // Left
         inputs.lf1, // Right
-        effective_ls_down, // Down
-        effective_ls_up, // Up (RF6 forced-Up)
+        normal_effective_ls_down, // Down
+        normal_effective_ls_up, // Up (RF6 forced-Up)
         inputs.rt3, // C-Left
         inputs.rt5, // C-Right
         inputs.rt2, // C-Down
@@ -317,6 +319,10 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool y1_active = inputs.lt2;
     const bool y2_active = inputs.lt3;
     const bool ls_to_dpad_active = inputs.rf7;
+    const bool down_a_active = inputs.lt6;
+    const bool up_a_active = inputs.rf12;
+    const bool direction_plus_a_active = down_a_active || up_a_active;
+    const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || inputs.rf6);
 
     const bool tilt1_pressed = inputs.rf3;
     const bool tilt2_pressed = inputs.rf4;
@@ -344,6 +350,13 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         const size_t direction_index = DirectionIndexFromAxes(directions.x, directions.y);
         outputs.leftStickX = active_table[direction_index].x;
         outputs.leftStickY = active_table[direction_index].y;
+
+        if (direction_plus_a_active) {
+            const StickPoint *direction_plus_a_table = mode_active ? kModeDefaultTable : kDefaultTable;
+            const size_t direction_plus_a_index = direction_plus_a_force_up ? kDirectionEightIndex : kDirectionTwoIndex;
+            outputs.leftStickX = direction_plus_a_table[direction_plus_a_index].x;
+            outputs.leftStickY = direction_plus_a_table[direction_plus_a_index].y;
+        }
     }
     // Senscope Glyph Smash Box runtime end
 

@@ -82,6 +82,12 @@ FORBIDDEN_ULTIMATE_SOCD_PAIRS = (
     ("BTN_RF7", "BTN_RF8"),
 )
 
+REQUIRED_RUNTIME_DIRECTION_PLUS_A_INPUTS = (
+    "BTN_LT6",
+    "BTN_RF12",
+    "BTN_RF16",
+)
+
 
 def _rel(path: Path) -> str:
     try:
@@ -211,6 +217,13 @@ def _check_file(path: Path) -> tuple[list[str], int, int]:
             f"{_rel(path)} semantic remaps remain in MODE_ULTIMATE: {semantic_remap_count}"
         )
 
+    remap_map = {remap["physicalButton"]: remap["activates"] for remap in remaps}
+    for button in REQUIRED_RUNTIME_DIRECTION_PLUS_A_INPUTS:
+        if remap_map.get(button) != button:
+            failures.append(
+                f"{_rel(path)} missing explicit self-activates runtime input: {button}"
+            )
+
     actual_socd_set = set(socd_pairs)
     for expected_pair in EXPECTED_ULTIMATE_SOCD_PAIRS:
         if expected_pair not in actual_socd_set:
@@ -243,6 +256,10 @@ def main() -> int:
 
     print("files_checked=" + ",".join(_rel(path) for path in TARGET_FILES))
     print("identity_representation=explicit_self_activates")
+    print(
+        "required_runtime_direction_plus_a_inputs="
+        + ",".join(REQUIRED_RUNTIME_DIRECTION_PLUS_A_INPUTS)
+    )
     print(f"semantic_remap_count={semantic_remap_total}")
     # Both files should carry the same MODE_ULTIMATE physical button count.
     unique_counts = sorted(set(physical_counts))
