@@ -232,14 +232,14 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
-    const bool force_up_active = inputs.rf6;
+    const bool force_up_active = inputs.rf6 || inputs.rf12;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
-    const bool effective_ls_down = inputs.lf5 && !force_up_active;
+    const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
     const bool effective_ls_left = inputs.lf3;
     const bool effective_ls_right = inputs.lf1;
     const bool ls_to_dpad_active = inputs.rf7;
 
-    outputs.a = inputs.rf1;
+    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12;
     outputs.b = inputs.rf5 || inputs.lf4;
     outputs.x = inputs.rf2;
     outputs.y = inputs.rf10;
@@ -290,16 +290,16 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
-    const bool force_up_active = inputs.rf6;
+    const bool force_up_active = inputs.rf6 || inputs.rf12;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
-    const bool effective_ls_down = inputs.lf5 && !force_up_active;
+    const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.lf3, // Left
         inputs.lf1, // Right
         effective_ls_down, // Down
-        effective_ls_up, // Up (RF6 forced-Up)
+        effective_ls_up, // Up (RF6/RF12 forced-Up)
         inputs.rt3, // C-Left
         inputs.rt5, // C-Right
         inputs.rt2, // C-Down

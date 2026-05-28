@@ -24,7 +24,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF10 game output | Press `RF10` in `MODE_ULTIMATE` runtime path | N/A | Y output asserted | NOT_TESTED |
 | RT1 game output | Press `RT1` in `MODE_ULTIMATE` runtime path | N/A | Z output asserted through source-confirmed Z carrier | NOT_TESTED |
 | LT1 game output | Press `LT1` in `MODE_ULTIMATE` runtime path | N/A | L output asserted | NOT_TESTED |
-| RF16 game output | Press `RF16` in `MODE_ULTIMATE` runtime path | N/A | R output asserted through source-confirmed R carrier; RF5 does not assert R | NOT_TESTED |
+| RF16 game output | Press `RF16` in `MODE_ULTIMATE` runtime path | N/A | R output asserted through source-confirmed R carrier; RF16 remains R and RF5 does not assert R | NOT_TESTED |
 | LF2 Up direction | Press `LF2` in `MODE_ULTIMATE` runtime path | N/A | Up direction is visible to runtime table | NOT_TESTED |
 | LF5 Down direction | Press `LF5` in `MODE_ULTIMATE` runtime path | N/A | Down direction is visible to runtime table | NOT_TESTED |
 | LF3 Left direction | Press `LF3` in `MODE_ULTIMATE` runtime path | N/A | Left direction is visible to runtime table | NOT_TESTED |
@@ -36,6 +36,12 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | X family | X1, X2, MX1, MX2 (single-modifier only) | 1..9 each | Exact X/X+Mode table outputs | NOT_TESTED |
 | Y family | Y1, Y2, MY1, MY2 (single-modifier only) | 1..9 each | Exact Y/Y+Mode table outputs | NOT_TESTED |
 | Tilt family | Tilt1, Tilt2, Tilt3, MTilt1, MTilt2, MTilt3 (single-modifier only) | 1..9 each | Exact Tilt/Tilt+Mode table outputs | NOT_TESTED |
+| LT6 direction-plus-A baseline | `LT6` only | N/A | Default table direction `2` and A asserted | NOT_TESTED |
+| RF12 direction-plus-A baseline | `RF12` only | N/A | Default table direction `8` and A asserted | NOT_TESTED |
+| LT6 direction-plus-A with Mode | `LT6 + Mode` | N/A | Mode default table direction `2` and A asserted | NOT_TESTED |
+| RF12 direction-plus-A with Mode | `RF12 + Mode` | N/A | Mode default table direction `8` and A asserted | NOT_TESTED |
+| LT6 direction-plus-A with modifiers | `LT6 + X1/X2/Y1/Y2/Tilt1/Tilt2/Tilt3` | Representative + 1..9 spot checks | Matching modifier table is selected at direction `2` and A asserted | NOT_TESTED |
+| RF12 direction-plus-A with modifiers | `RF12 + X1/X2/Y1/Y2/Tilt1/Tilt2/Tilt3` | Representative + 1..9 spot checks | Matching modifier table is selected at direction `8` and A asserted | NOT_TESTED |
 | RF6 forced-Up | `RF6` only | N/A | Effective direction `8` table output | NOT_TESTED |
 | RF6 forced-Up with Down | `RF6 + Down` | N/A | Effective direction `8` table output (Down overridden) | NOT_TESTED |
 | RF6 forced-Up with Left | `RF6 + Left` | N/A | Effective direction `7` table output | NOT_TESTED |
@@ -44,6 +50,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF6 forced-Up with Down+Right | `RF6 + Down + Right` | N/A | Effective direction `9` table output | NOT_TESTED |
 | RF6 game Y guard | `RF6` only | N/A | Forced-Up behavior is present and game Y is not pressed | NOT_TESTED |
 | RF6 Down override guard | `RF6 + LF5` | N/A | Up remains effective and Down is suppressed in runtime table direction | NOT_TESTED |
+| RF12 Up override guard | `RF12 + LF5` | N/A | Up remains effective and A is asserted | NOT_TESTED |
+| RF12 + LT6 override guard | `RF12 + LT6` | N/A | Up remains effective and A is asserted | NOT_TESTED |
 | Tilt3 chord source | `RF3 + RF4` | 1..9 | Effective Tilt3 table (or MTilt3 when Mode on) | NOT_TESTED |
 | LT3 role | `LT3` only | 1..9 | Y2 table (or MY2 when Mode on), not standalone Tilt3 | NOT_TESTED |
 | RF4 role guard | `RF4` only (no direction inputs) | N/A | Tilt2 neutral-direction behavior; RF4 does not act as Up direction source | NOT_TESTED |
@@ -63,8 +71,11 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LS->DPad with RF6 | `RF7 + RF6` | N/A | D-pad Up asserted | NOT_TESTED |
 | LS->DPad with RF6 and Down | `RF7 + RF6 + Down` | N/A | D-pad Up asserted, Down not asserted | NOT_TESTED |
 | LS->DPad with RF6 and lateral | `RF7 + RF6 + Left/Right` | N/A | D-pad Up+Left / Up+Right if simultaneous D-pad outputs are supported | NOT_TESTED |
+| LS->DPad with LT6 | `RF7 + LT6` | N/A | D-pad Down asserted and A asserted | NOT_TESTED |
+| LS->DPad with RF12 | `RF7 + RF12` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
+| LS->DPad with RF12 and Down | `RF7 + RF12 + Down` | N/A | D-pad Up asserted and A asserted (Down overridden) | NOT_TESTED |
 | No standalone D-pad outputs | Press `LF6`, `LF8`, old D-pad cluster placeholders, and RF7 inactive | N/A | No D-pad output unless nunchuk C or RF7 LS->DPad is active | NOT_TESTED |
-| Empty button no-output smoke | Press `LF6/LF7/LF8/LT6/RF9/RF11/RF12/RF13/RF14/RF15/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
+| Empty button no-output smoke | Press `LF6/LF7/LF8/RF9/RF11/RF13/RF14/RF15/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
 | Custom modifiers still work | Press `RF8/LT5/LT4/LT2/LT3/RF3/RF4` across representative directions | 1..9 spot checks | Mode, X1, X2, Y1, Y2, Tilt1, Tilt2, and RF3+RF4 Tilt3 all select expected tables | NOT_TESTED |
 | Right-stick directions | Press `RT4/RT3/RT5/RT2` | Cardinal C-stick directions | C-Up/C-Left/C-Right/C-Down work as before | NOT_TESTED |
 | Menu buttons | Press `MB4/MB5/MB6/MB7` | N/A | Capture/Home/Select-minus/Start-plus outputs asserted respectively | NOT_TESTED |
@@ -80,6 +91,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 
 ## 2026-05-28 Note
 
-- Current plan rows are satisfied by:
+- Pre-direction-plus-A rows are documented in:
   - `docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md`
+- LT6/RF12 direction-plus-A rows require a new hardware result amendment/run.
 - Nunchuk remains unavailable/not tested.

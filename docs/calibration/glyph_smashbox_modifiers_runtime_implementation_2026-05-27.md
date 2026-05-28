@@ -27,6 +27,8 @@ Implementation is complete in this branch for native `MODE_ULTIMATE` runtime sou
 Main game buttons:
 
 - `RF1 = A`
+- `LT6 = Down+A`
+- `RF12 = Up+A`
 - `RF5 = B`
 - `LF4 = B`
 - `RF2 = X`
@@ -53,8 +55,10 @@ Left-stick directions:
 - `LF1 = Right`
 - `LF2 = Up`
 - `LF5 = Down`
+- `LT6 = forced Down+A`
 - `RF6 = forced Up`
-- `RF6` forced Up suppresses `LF5` Down for runtime table direction.
+- `RF12 = forced Up+A`
+- Forced-Up sources `RF6` and `RF12` suppress Down sources `LF5` and `LT6` for runtime table direction.
 
 Right stick / C-stick:
 
@@ -78,7 +82,7 @@ Standalone D-pad:
 
 Empty/no-output physical IDs:
 
-- `LF6`, `LF7`, `LF8`, `LT6`, `RF9`, `RF11`, `RF12`, `RF13`, `RF14`, `RF15`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
+- `LF6`, `LF7`, `LF8`, `RF9`, `RF11`, `RF13`, `RF14`, `RF15`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
 
 ## Custom Modifier Role Table
 
@@ -93,6 +97,12 @@ Empty/no-output physical IDs:
 - `RF4 = Tilt2`
 - `RF3 + RF4 = Tilt3`
 
+Direction-plus-A runtime roles (not modifiers):
+
+- `LT6 = Down+A`
+- `RF12 = Up+A`
+- `RF16` remains `R` and is not replaced by `RF12`.
+
 Historical replacement:
 
 - Previous standalone `LT3 -> Tilt3` behavior is historical only.
@@ -105,7 +115,9 @@ Direction mapping used by identity runtime:
 - `LF1 = Right`
 - `LF2 = Up`
 - `LF5 = Down`
+- `LT6 = forced Down+A`
 - `RF6 = forced Up`
+- `RF12 = forced Up+A`
 
 `RF4` is Tilt2-only and is no longer consumed as Up direction input in the Smash Box runtime path.
 `RF6` is forced-Up only and no longer drives game Y output in this runtime branch.
@@ -128,6 +140,7 @@ Tilt family compression:
 Active effective non-mode modifiers counted:
 
 - X1, X2, Y1, Y2, effective Tilt1/Tilt2/Tilt3
+- Direction-plus-A buttons `LT6` and `RF12` are not modifiers and do not participate in modifier-count composition.
 
 Selection logic:
 
@@ -147,15 +160,19 @@ Therefore:
 - Mode + multiple modifiers gives Mode default.
 - Mode + exactly one modifier gives the matching M-table.
 
-RF6 forced-Up policy for table direction:
+Direction-plus-A and forced-Up policy for table direction:
 
-- `RF6` forces effective Up regardless of simultaneous Down.
-- `RF6` alone resolves to direction `8`.
-- `RF6 + Down` resolves to direction `8`.
-- `RF6 + Left` resolves to direction `7`.
-- `RF6 + Right` resolves to direction `9`.
-- `RF6 + Left + Down` resolves to direction `7`.
-- `RF6 + Right + Down` resolves to direction `9`.
+- Runtime A output is `outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12`.
+- `RF12` provides forced Up plus A and overrides simultaneous Down sources.
+- `LT6` provides Down plus A unless forced-Up (`RF6` or `RF12`) is active.
+- `RF12` alone resolves to direction `8` and presses A.
+- `RF12 + Down` resolves to direction `8` and presses A.
+- `RF12 + LT6` resolves to direction `8` and presses A.
+- `RF12 + Left` resolves to direction `7` and presses A.
+- `RF12 + Right` resolves to direction `9` and presses A.
+- `LT6` alone resolves to direction `2` and presses A.
+- `LT6 + RF6` resolves to direction `8` and presses A.
+- Existing `RF6` forced-Up rows remain valid (`RF6` keeps Up override semantics).
 
 ## LS->DPad Policy
 
@@ -169,7 +186,11 @@ RF6 forced-Up policy for table direction:
 - LS->DPad is orthogonal to right-stick/C-stick and trigger paths.
 - LS->DPad does not reintroduce the old prototype D-pad-layer side effects.
 - Old nunchuk C D-pad behavior is preserved only when nunchuk C is active.
-- Under LS->DPad, RF6 still acts as forced Up and overrides Down.
+- Under LS->DPad, RF6/RF12 forced Up still override Down.
+- Under LS->DPad, direction-plus-A still presses A while routing direction to D-pad.
+- `RF7 + LT6` resolves to D-pad Down + A.
+- `RF7 + RF12` resolves to D-pad Up + A.
+- `RF7 + RF12 + Down` resolves to D-pad Up + A.
 - There are no direct standalone D-pad inputs from `LF6`, `LF8`, or the old D-pad cluster.
 
 ## L/R/Z Button Behavior
@@ -218,6 +239,9 @@ Manual hardware validation is required for:
 - `RF3` Tilt1 path does not press R,
 - `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` does not emit prior LT1->modX behavior,
+- `LT6` Down+A path presses A and selects direction `2` table rows when no forced-Up is active,
+- `RF12` Up+A path presses A and selects direction `8` table rows while overriding Down,
+- `LT6/RF12` do not count as modifiers in X/Y/Tilt/Mode composition,
 - LS->DPad behavior and orthogonality,
 - no standalone D-pad outputs from empty buttons,
 - empty/no-output buttons remain inert,
@@ -228,3 +252,9 @@ Manual hardware validation is required for:
 - Identity-runtime Smash Box firmware plus explicit self-activated identity profile was hardware-confirmed by user report.
 - Final result doc: `docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md`.
 - Hardware validation coverage reported by user includes all angles, functions, and combinations.
+
+## 2026-05-28 Amendment: Direction-Plus-A Additions
+
+- `LT6 = Down+A` and `RF12 = Up+A` are runtime-owned direction-plus-A additions in native Ultimate.
+- `RF16` remains runtime-owned `R`; `RF12` does not replace `R`.
+- Direction-plus-A additions require a new hardware validation pass for those rows.

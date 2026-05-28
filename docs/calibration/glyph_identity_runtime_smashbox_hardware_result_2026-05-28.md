@@ -45,3 +45,8 @@
 - Nunchuk not tested.
 - Result applies to the current identity-runtime firmware plus explicit self-activated identity profile path.
 - Future modifier value changes require new firmware build until config-driven modifier tables are implemented.
+
+## 2026-05-28 Direction-Plus-A Amendment
+
+- This hardware result predates the `LT6 = Down+A` and `RF12 = Up+A` runtime additions.
+- Direction-plus-A behavior requires new hardware validation before claiming hardware pass for those rows.

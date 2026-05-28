@@ -16,6 +16,8 @@ SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 
 ROLE_LINES = (
     "`RF1 = A`",
+    "`LT6 = Down+A`",
+    "`RF12 = Up+A`",
     "`RF5 = B`",
     "`LF4 = B`",
     "`RF2 = X`",
@@ -43,6 +45,8 @@ SOURCE_ANCHORS = (
     "inputs.lt3",
     "inputs.rf7",
     "inputs.rf6",
+    "inputs.rf12",
+    "inputs.lt6",
     "inputs.lt1",
     "inputs.rf16",
     "inputs.rf3",
@@ -55,7 +59,9 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_RF2",
     "BTN_RF10",
     "BTN_RF6",
+    "BTN_RF12",
     "BTN_LT1",
+    "BTN_LT6",
     "BTN_LF4",
     "BTN_RF5",
     "BTN_LF3",
@@ -84,10 +90,8 @@ EMPTY_NO_OUTPUT_INPUTS = (
     "inputs.lf6",
     "inputs.lf7",
     "inputs.lf8",
-    "inputs.lt6",
     "inputs.rf9",
     "inputs.rf11",
-    "inputs.rf12",
     "inputs.rf13",
     "inputs.rf14",
     "inputs.rf15",
@@ -198,6 +202,8 @@ def require_runtime_doc() -> str:
         fail("runtime doc must document RT1=Z")
     if "RF16 = R" not in text:
         fail("runtime doc must document RF16=R")
+    if re.search(r"`?RF16`?\s+remains\s+`?R`?", text) is None:
+        fail("runtime doc must state RF16 remains R")
     if "no standalone D-pad" not in text:
         fail("runtime doc must document no standalone D-pad policy")
     if "standalone `LT3 -> Tilt3` behavior is historical only" not in text:
@@ -216,7 +222,10 @@ def require_runtime_source() -> str:
             fail(f"missing runtime source anchor: {anchor}")
 
     expected_source_lines = (
-        ("outputs.a = inputs.rf1;", "runtime source must assign RF1 to A"),
+        (
+            "outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12;",
+            "runtime source must assign A from RF1 or LT6 or RF12",
+        ),
         ("outputs.b = inputs.rf5 || inputs.lf4;", "runtime source must assign RF5 or LF4 to B"),
         ("outputs.x = inputs.rf2;", "runtime source must assign RF2 to X"),
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
@@ -242,18 +251,20 @@ def require_runtime_source() -> str:
         fail("runtime source must not assign LF4 to L trigger digital when LF4 is B")
     if "outputs.triggerRDigital = inputs.rf5;" in text:
         fail("runtime source must not assign RF5 to R trigger digital when RF5 is B")
+    if "outputs.triggerRDigital = inputs.rf12;" in text:
+        fail("runtime source must not assign RF12 to R trigger digital")
     if "leftStickUp = inputs.rf4;" in text:
         fail("runtime source must not consume RF4 as Up")
     if re.search(r"inputs\.rf4\s*,\s*//\s*Up", text):
         fail("runtime source must not pass RF4 as Up into UpdateDirections")
-    if re.search(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*;", text) is None:
-        fail("runtime source must define RF6 forced-Up source")
+    if re.search(r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*;", text) is None:
+        fail("runtime source must define RF6 or RF12 forced-Up source")
     if re.search(r"const\s+bool\s+effective_ls_up\s*=\s*inputs\.lf2\s*\|\|\s*force_up_active\s*;", text) is None:
-        fail("runtime source must define effective Up from LF2 or RF6")
+        fail("runtime source must define effective Up from LF2 or forced-Up source")
     if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf2\s*&&\s*!force_up_active\s*;", text) is not None:
         fail("runtime source must not use old LF2 Down shape")
-    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*inputs\.lf5\s*&&\s*!force_up_active\s*;", text) is None:
-        fail("runtime source must suppress LF5 Down when RF6 forced-Up is active")
+    if re.search(r"const\s+bool\s+effective_ls_down\s*=\s*\(\s*inputs\.lf5\s*\|\|\s*inputs\.lt6\s*\)\s*&&\s*!force_up_active\s*;", text) is None:
+        fail("runtime source must define effective Down from LF5 or LT6 and suppress it during forced-Up")
     if re.search(
         r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;",
         text,
@@ -332,7 +343,7 @@ def main() -> int:
     print("identity_representation=explicit_self_activates")
     print("identity_semantic_remaps=0")
     print("runtime_required_inputs_explicit_self_activated=true")
-    print("forced_up_role=RF6")
+    print("forced_up_role=RF6_or_RF12")
     print("rf4_up_conflict=absent")
     print("lt3_role=Y2")
     print("tilt3_role=RF3+RF4")
