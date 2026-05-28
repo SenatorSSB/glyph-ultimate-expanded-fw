@@ -29,6 +29,7 @@ Main game buttons:
 - `RF1 = A`
 - `LT6 = Down+A`
 - `RF12 = Up+A`
+- `RF15 = Up+A` (RF12 alias)
 - `RF5 = B`
 - `LF4 = B`
 - `RF2 = X`
@@ -65,9 +66,9 @@ Left-stick directions:
 
 Right stick / C-stick:
 
-- `RT4 = C-Up`
+- `RT4 = C-Right`
 - `RT3 = C-Left`
-- `RT5 = C-Right`
+- `RT5 = C-Up`
 - `RT2 = C-Down`
 
 Menu:
@@ -85,7 +86,7 @@ Standalone D-pad:
 
 Empty/no-output physical IDs:
 
-- `LF6`, `LF7`, `LF8`, `RF9`, `RF11`, `RF13`, `RF14`, `RF15`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
+- `LF6`, `LF7`, `LF8`, `RF9`, `RF11`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
 
 ## Custom Modifier Role Table
 
@@ -105,7 +106,8 @@ Direction-plus-A runtime roles (not modifiers):
 
 - `LT6 = Down+A`
 - `RF12 = Up+A`
-- `RF16` remains `R` and is not replaced by `RF12`.
+- `RF15 = Up+A` alias (same hard Up+A behavior as RF12)
+- `RF16` remains `R` and is not replaced by `RF12`/`RF15`.
 
 Historical replacement:
 
@@ -122,7 +124,8 @@ Direction mapping used by identity runtime:
 - `LF5 = Down`
 - `RF6 = forced Up`
 - `LT6/RF12` are not used as modifier-table direction-index sources.
-- `LT6` and `RF12` instead hard-override final left-stick output to direction `2`/`8` using Default or Mode-default base tables.
+- `LT6`, `RF12`, and `RF15` are not used as modifier-table direction-index sources.
+- `LT6` and `RF12`/`RF15` instead hard-override final left-stick output to direction `2`/`8` using Default or Mode-default base tables.
 
 `RF4` is Tilt2-only and is no longer consumed as Up direction input in the Smash Box runtime path.
 `RF6` is forced-Up only and no longer drives game Y output in this runtime branch.
@@ -141,6 +144,7 @@ Tilt family compression:
 - `RF3 && RF4` => effective Tilt3
 - `RF3` alone => effective Tilt1
 - `RF4` alone => effective Tilt2
+- Ordinary non-Mode Tilt1 y offset is `81` from neutral center `128`, yielding Tilt1 y values `47/128/209`.
 
 Active effective non-mode modifiers counted:
 
@@ -166,19 +170,58 @@ Therefore:
 - Mode + multiple modifiers gives Mode default.
 - Mode + exactly one modifier gives the matching M-table.
 
+Y1+Tilt1 special composite exception:
+
+- `Y1 + Tilt1` is an explicit runtime exception to ordinary multi-modifier deactivation.
+- The exception is active only when effective `Y1` and effective `Tilt1` are active with no other X/Y/Tilt modifier.
+- If Mode is inactive, runtime uses special non-Mode Y1+Tilt1 composite:
+  - Y values come from Y1 table (`99/128/157`).
+  - X values use flipper-style offset `41` from center `128`:
+    - left `169`
+    - neutral `128`
+    - right `87`
+  - Table:
+    - `1 = (169, 99)`
+    - `2 = (128, 99)`
+    - `3 = (87, 99)`
+    - `4 = (169, 128)`
+    - `5 = (128, 128)`
+    - `6 = (87, 128)`
+    - `7 = (169, 157)`
+    - `8 = (128, 157)`
+    - `9 = (87, 157)`
+- If Mode is active, runtime uses special Mode Y1+Tilt1 composite:
+  - Y values come from MY1 table (`184/172/72`).
+  - X values use same flipper-style offset `41` from center `128`.
+  - Table:
+    - `1 = (169, 184)`
+    - `2 = (128, 184)`
+    - `3 = (87, 184)`
+    - `4 = (169, 172)`
+    - `5 = (128, 172)`
+    - `6 = (87, 172)`
+    - `7 = (169, 72)`
+    - `8 = (128, 72)`
+    - `9 = (87, 72)`
+- If any extra X/Y/Tilt modifier is present with Y1+Tilt1, runtime falls back to ordinary multi-modifier policy:
+  - Mode inactive => Default
+  - Mode active => Mode default
+- `Y1+Tilt2` and `Y1+Tilt3` are not special exceptions.
+
 Direction-plus-A hard final override policy:
 
-- Runtime A output is `outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12`.
-- LT6/RF12 are hard direction+A outputs and are not modifier-table direction-index sources.
-- LT6/RF12 do not count as modifiers in composition and do not alter `SelectStickTable` modifier selection.
+- Runtime A output is `outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15`.
+- LT6/RF12/RF15 are hard direction+A outputs and are not modifier-table direction-index sources.
+- LT6/RF12/RF15 do not count as modifiers in composition and do not alter `SelectStickTable` modifier selection.
 - Mode is respected as base-table selection for hard override:
   - Mode inactive hard override uses `kDefaultTable`.
   - Mode active hard override uses `kModeDefaultTable`.
 - Hard override directions:
   - direction `2` for Down+A,
-  - direction `8` for Up+A.
+  - direction `8` for Up+A (`RF12` or `RF15`).
 - Up override precedence while direction-plus-A is active:
 - `RF12 + LT6` resolves to Up+A,
+- `RF15 + LT6` resolves to Up+A,
 - `RF6 + LT6` resolves to Up+A.
 - X/Y/Tilt modifier tables are ignored for final left-stick output when direction-plus-A is active.
 
@@ -192,7 +235,7 @@ LT1 Z-airdodge low-magnitude hard final override policy:
 - Effective direction source for LT1 low table uses:
   - Left: `LF3`
   - Right: `LF1`
-  - Up: `LF2` or forced-Up (`RF6`/`RF12`)
+  - Up: `LF2` or forced-Up (`RF6`/`RF12`/`RF15`)
   - Down: `LF5` or `LT6`, suppressed by forced-Up
 - LT1 low-magnitude absolute raw coordinate table:
   - `1 = (89, 89)`
@@ -224,7 +267,9 @@ LT1 Z-airdodge low-magnitude hard final override policy:
 - Under LS->DPad, direction-plus-A still presses A while routing hard effective direction to D-pad.
 - `RF7 + LT6` resolves to D-pad Down + A.
 - `RF7 + RF12` resolves to D-pad Up + A.
+- `RF7 + RF15` resolves to D-pad Up + A.
 - `RF7 + RF12 + LT6` resolves to D-pad Up + A.
+- `RF7 + RF15 + LT6` resolves to D-pad Up + A.
 - `RF7 + RF6 + LT6` resolves to D-pad Up + A.
 - Under LS->DPad, `LT1` still presses Z through the shared Z carrier, while analog left stick remains centered by LS->DPad behavior.
 - `RF7 + LT1 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
@@ -276,20 +321,23 @@ Manual hardware validation is required for:
 - `RF16 => R`,
 - `RF1 => A`, `RF5/LF4 => B`, `RF2 => X`, and `RF10 => Y`,
 - `RF6` forced-Up path does not press game Y,
+- Tilt1 non-Mode table rows use y-values `47/128/209` (81-pixel y offset from center),
 - `RF4` behaves as Tilt2 and does not act as Up direction source,
 - `RF3` Tilt1 path does not press R,
+- `Y1+Tilt1` special composite rows (Mode and non-Mode),
 - `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` does not emit prior LT1->modX behavior,
 - `LT6` Down+A path hard-overrides final left-stick output to direction `2` using Default/Mode-default base tables,
-- `RF12` Up+A path hard-overrides final left-stick output to direction `8` using Default/Mode-default base tables,
-- LT6/RF12 hard-override rows ignore X/Y/Tilt final table outputs while preserving Mode base-table selection,
-- `LT6/RF12` do not count as modifiers in X/Y/Tilt/Mode composition,
+- `RF12` and `RF15` Up+A rows hard-override final left-stick output to direction `8` using Default/Mode-default base tables,
+- LT6/RF12/RF15 hard-override rows ignore X/Y/Tilt final table outputs while preserving Mode base-table selection,
+- `LT6/RF12/RF15` do not count as modifiers in X/Y/Tilt/Mode composition,
 - LT1 low-table hard final override rows ignore X/Y/Tilt/Mode table outputs for final left-stick values,
-- LT1 low-table hard final override rows supersede LT6/RF12 analog override output while preserving A press,
+- LT1 low-table hard final override rows supersede LT6/RF12/RF15 analog override output while preserving A press,
 - LS->DPad behavior and orthogonality,
 - LS->DPad + LT1 rows produce Z plus D-pad with analog left-stick centered,
+- RT4/RT5 C-stick swap rows (`RT4=C-right`, `RT5=C-up`),
 - no standalone D-pad outputs from empty buttons,
-- empty/no-output buttons remain inert,
+- empty/no-output buttons remain inert (excluding RF15 because RF15 is active as Up+A alias),
 - nunchuk availability row handling.
 
 ## 2026-05-28 Amendment: Identity Runtime Hardware Confirmation
@@ -305,6 +353,14 @@ Manual hardware validation is required for:
 - `Y2/MY2` are scratched/inactive in runtime selection and are no longer reachable modifier states.
 - `RT1` remains runtime-owned `Z`.
 - `RF16` remains runtime-owned `R`.
-- `LT6 = Down+A` and `RF12 = Up+A` remain runtime-owned direction-plus-A additions.
-- LT1 hard final analog override supersedes modifier-table and direction-plus-A analog outputs while preserving LT6/RF12 A press behavior.
+- `LT6 = Down+A` and `RF12/RF15 = Up+A` remain runtime-owned direction-plus-A additions.
+- LT1 hard final analog override supersedes modifier-table and direction-plus-A analog outputs while preserving LT6/RF12/RF15 A press behavior.
 - This reassignment requires a new hardware validation pass before claiming hardware PASS for these rows.
+
+## 2026-05-28 Amendment: Pre-Hardware Runtime Tuning
+
+- Ordinary non-Mode Tilt1 y offset is updated to 81 from neutral center (y=`47/128/209`).
+- `RF15` now aliases `RF12` as hard Up+A across runtime paths.
+- `Y1+Tilt1` now has explicit special composite tables for Mode and non-Mode runtime.
+- `RT4/RT5` C-stick mapping is swapped (`RT4=C-right`, `RT5=C-up`) consistently in digital, analog, and nunchuk-C passthrough mapping.
+- These adjustments require a new hardware validation pass before claiming PASS for updated rows.

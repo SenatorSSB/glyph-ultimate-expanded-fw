@@ -59,3 +59,12 @@
   - `LT1 -> Z` plus low-magnitude table override,
   - unreachable/scratched `Y2/MY2` runtime paths.
 - A new hardware validation run is required before claiming PASS for these reassigned rows.
+
+## 2026-05-28 Pre-Hardware Tuning Amendment
+
+- This PASS result predates additional runtime tuning in this branch:
+  - Tilt1 non-Mode y-offset change to 81 from center (`47/128/209`),
+  - `RF15` hard Up+A alias behavior matching `RF12`,
+  - `Y1+Tilt1` special composite tables (Mode and non-Mode),
+  - `RT4/RT5` C-stick right/up swap.
+- These rows require new hardware validation before claiming PASS for the updated behavior.

@@ -18,6 +18,7 @@ ROLE_LINES = (
     "`RF1 = A`",
     "`LT6 = Down+A`",
     "`RF12 = Up+A`",
+    "`RF15 = Up+A`",
     "`RF5 = B`",
     "`LF4 = B`",
     "`RF2 = X`",
@@ -45,6 +46,7 @@ SOURCE_ANCHORS = (
     "inputs.rf7",
     "inputs.rf6",
     "inputs.rf12",
+    "inputs.rf15",
     "inputs.lt6",
     "inputs.lt1",
     "inputs.lt3",
@@ -52,6 +54,8 @@ SOURCE_ANCHORS = (
     "inputs.rf3",
     "inputs.rf4",
     "kLt1LowMagnitudeTable",
+    "kY1Tilt1Table",
+    "kMY1Tilt1Table",
 )
 
 RUNTIME_REQUIRED_SELF_ACTIVATES = (
@@ -61,6 +65,7 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_RF10",
     "BTN_RF6",
     "BTN_RF12",
+    "BTN_RF15",
     "BTN_LT1",
     "BTN_LT3",
     "BTN_LT6",
@@ -95,7 +100,6 @@ EMPTY_NO_OUTPUT_INPUTS = (
     "inputs.rf11",
     "inputs.rf13",
     "inputs.rf14",
-    "inputs.rf15",
     "inputs.mb1",
     "inputs.mb2",
     "inputs.mb3",
@@ -111,6 +115,42 @@ LT1_LOW_POINTS = (
     "{89, 167}",
     "{128, 177}",
     "{167, 167}",
+)
+
+TILT1_POINTS = (
+    "{187, 47}",
+    "{128, 47}",
+    "{69, 47}",
+    "{187, 128}",
+    "{128, 128}",
+    "{69, 128}",
+    "{187, 209}",
+    "{128, 209}",
+    "{69, 209}",
+)
+
+Y1_TILT1_POINTS = (
+    "{169, 99}",
+    "{128, 99}",
+    "{87, 99}",
+    "{169, 128}",
+    "{128, 128}",
+    "{87, 128}",
+    "{169, 157}",
+    "{128, 157}",
+    "{87, 157}",
+)
+
+MY1_TILT1_POINTS = (
+    "{169, 184}",
+    "{128, 184}",
+    "{87, 184}",
+    "{169, 172}",
+    "{128, 172}",
+    "{87, 172}",
+    "{169, 72}",
+    "{128, 72}",
+    "{87, 72}",
 )
 
 
@@ -193,6 +233,12 @@ def require_runtime_doc() -> str:
 
     if re.search(r"Y2/MY2.*scratched|scratched.*Y2/MY2", text, flags=re.IGNORECASE) is None:
         fail("runtime doc must state Y2/MY2 scratched/inactive")
+    if re.search(r"RF15\s*=\s*Up\+A", text) is None:
+        fail("runtime doc must state RF15 aliases RF12 as Up+A")
+    if re.search(r"Y1\+Tilt1.*special", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document Y1+Tilt1 special composite")
+    if re.search(r"RT4\s*=\s*C-Right", text) is None or re.search(r"RT5\s*=\s*C-Up", text) is None:
+        fail("runtime doc must document RT4/RT5 C-stick swap")
     if "RT1 remains runtime-owned `Z`" not in text and "RT1 remains" not in text and "`RT1` remains" not in text:
         fail("runtime doc must state RT1 remains Z")
     if re.search(r"`?RF16`?\s+remains\s+`?R`?", text) is None:
@@ -215,7 +261,10 @@ def require_runtime_source() -> str:
             fail(f"missing runtime source anchor: {anchor}")
 
     expected_source_lines = (
-        ("outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12;", "runtime source must assign A from RF1 or LT6 or RF12"),
+        (
+            "outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;",
+            "runtime source must assign A from RF1 or LT6 or RF12 or RF15",
+        ),
         ("outputs.b = inputs.rf5 || inputs.lf4;", "runtime source must assign RF5 or LF4 to B"),
         ("outputs.x = inputs.rf2;", "runtime source must assign RF2 to X"),
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
@@ -226,6 +275,8 @@ def require_runtime_source() -> str:
         ),
         ("outputs.triggerLDigital = inputs.lt3;", "runtime source must assign LT3 to GameCube L carrier"),
         ("outputs.triggerRDigital = inputs.rf16;", "runtime source must assign RF16 to GameCube R carrier"),
+        ("outputs.rightStickRight = inputs.rt4;", "runtime source must map RT4 to C-right"),
+        ("outputs.rightStickUp = inputs.rt5;", "runtime source must map RT5 to C-up"),
     )
     for line, message in expected_source_lines:
         if line not in text:
@@ -242,6 +293,8 @@ def require_runtime_source() -> str:
         "outputs.triggerLDigital = inputs.lf4;",
         "outputs.triggerRDigital = inputs.rf5;",
         "outputs.triggerRDigital = inputs.rf12;",
+        "outputs.rightStickRight = inputs.rt5;",
+        "outputs.rightStickUp = inputs.rt4;",
     )
     for line in forbidden_lines:
         if line in text:
@@ -263,6 +316,51 @@ def require_runtime_source() -> str:
     for point in LT1_LOW_POINTS:
         if point not in text:
             fail(f"runtime source missing LT1 low-magnitude point: {point}")
+
+    for point in TILT1_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Tilt1 point: {point}")
+
+    for point in Y1_TILT1_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Y1+Tilt1 point: {point}")
+
+    for point in MY1_TILT1_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode Y1+Tilt1 point: {point}")
+
+    if re.search(
+        r"const\s+bool\s+y1_tilt1_special_active\s*=\s*y1_active\s*&&\s*tilt1_effective\s*&&\s*!x1_active\s*&&\s*!x2_active\s*&&\s*!tilt2_effective\s*&&\s*!tilt3_effective\s*;",
+        text,
+    ) is None:
+        fail("runtime source must gate Y1+Tilt1 special composite to Y1+Tilt1 only")
+    if re.search(
+        r"if\s*\(\s*y1_tilt1_special_active\s*\)\s*\{\s*return\s+mode_active\s*\?\s*kMY1Tilt1Table\s*:\s*kY1Tilt1Table\s*;",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must select Y1+Tilt1 special composite tables")
+
+    if re.search(
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include RF15 in digital forced-up logic")
+    if re.search(
+        r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include RF15 in Up+A logic")
+    if re.search(
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include RF15 in LT1 low-table forced-up logic")
+
+    if re.search(r"outputs\.dpadUp\s*=\s*inputs\.rt5\s*;", text) is None:
+        fail("runtime source must map nunchuk-C D-pad Up to RT5")
+    if re.search(r"outputs\.dpadRight\s*=\s*inputs\.rt4\s*;", text) is None:
+        fail("runtime source must map nunchuk-C D-pad Right to RT4")
 
     if re.search(
         r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*lt1_z_airdodge_override_active\s*\)\s*\{",
@@ -347,7 +445,7 @@ def main() -> int:
     print("identity_representation=explicit_self_activates")
     print("identity_semantic_remaps=0")
     print("runtime_required_inputs_explicit_self_activated=true")
-    print("forced_up_role=RF6_or_RF12")
+    print("forced_up_role=RF6_or_RF12_or_RF15")
     print("rf4_up_conflict=absent")
     print("lt3_role=L")
     print("tilt3_role=RF3+RF4")
@@ -357,6 +455,10 @@ def main() -> int:
     print("y_role=RF10")
     print("b_role=RF5_or_LF4")
     print("l_role=LT3")
+    print("rf15_role=Up+A_alias_of_RF12")
+    print("tilt1_non_mode_y_values=47_128_209")
+    print("y1_tilt1_special_composite=enabled")
+    print("rt4_rt5_cstick_swap=enabled")
     print("y2_my2_role=scratched_inactive")
     print("standalone_dpad=none")
     print("lt2_mody_conflict=absent")

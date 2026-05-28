@@ -60,10 +60,22 @@ constexpr StickPoint kMY1Table[9] = {
     {1, 72}, {128, 72}, {255, 72},
 };
 
+constexpr StickPoint kY1Tilt1Table[9] = {
+    {169, 99}, {128, 99}, {87, 99},
+    {169, 128}, {128, 128}, {87, 128},
+    {169, 157}, {128, 157}, {87, 157},
+};
+
+constexpr StickPoint kMY1Tilt1Table[9] = {
+    {169, 184}, {128, 184}, {87, 184},
+    {169, 172}, {128, 172}, {87, 172},
+    {169, 72}, {128, 72}, {87, 72},
+};
+
 constexpr StickPoint kTilt1Table[9] = {
-    {187, 87}, {128, 87}, {69, 87},
+    {187, 47}, {128, 47}, {69, 47},
     {187, 128}, {128, 128}, {69, 128},
-    {187, 169}, {128, 169}, {69, 169},
+    {187, 209}, {128, 209}, {69, 209},
 };
 
 constexpr StickPoint kTilt2Table[9] = {
@@ -126,6 +138,11 @@ const StickPoint *SelectStickTable(
     bool tilt2_effective,
     bool tilt3_effective
 ) {
+    const bool y1_tilt1_special_active = y1_active && tilt1_effective && !x1_active && !x2_active && !tilt2_effective && !tilt3_effective;
+    if (y1_tilt1_special_active) {
+        return mode_active ? kMY1Tilt1Table : kY1Tilt1Table;
+    }
+
     int active_modifier_count = 0;
     EffectiveModifier single_modifier = EffectiveModifier::None;
 
@@ -219,14 +236,14 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
-    const bool force_up_active = inputs.rf6 || inputs.rf12;
+    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
     const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
     const bool effective_ls_left = inputs.lf3;
     const bool effective_ls_right = inputs.lf1;
     const bool ls_to_dpad_active = inputs.rf7;
 
-    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12;
+    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
     outputs.b = inputs.rf5 || inputs.lf4;
     outputs.x = inputs.rf2;
     outputs.y = inputs.rf10;
@@ -248,10 +265,10 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 
     // Preserve source-backed nunchuk C D-pad layer behavior.
     if (inputs.nunchuk_c) {
-        outputs.dpadUp = inputs.rt4;
+        outputs.dpadUp = inputs.rt5;
         outputs.dpadDown = inputs.rt2;
         outputs.dpadLeft = inputs.rt3;
-        outputs.dpadRight = inputs.rt5;
+        outputs.dpadRight = inputs.rt4;
     }
 
     if (ls_to_dpad_active) {
@@ -267,9 +284,9 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.leftStickUp = ls_to_dpad_active ? false : effective_ls_up;
 
     outputs.rightStickLeft = inputs.rt3;
-    outputs.rightStickRight = inputs.rt5;
+    outputs.rightStickRight = inputs.rt4;
     outputs.rightStickDown = inputs.rt2;
-    outputs.rightStickUp = inputs.rt4;
+    outputs.rightStickUp = inputs.rt5;
 
     outputs.modX = false;
     outputs.modY = false;
@@ -288,9 +305,9 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         normal_effective_ls_down, // Down
         normal_effective_ls_up, // Up (RF6 forced-Up)
         inputs.rt3, // C-Left
-        inputs.rt5, // C-Right
+        inputs.rt4, // C-Right
         inputs.rt2, // C-Down
-        inputs.rt4, // C-Up
+        inputs.rt5, // C-Up
         ANALOG_STICK_MIN,
         ANALOG_STICK_NEUTRAL,
         ANALOG_STICK_MAX,
@@ -305,7 +322,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool lt1_z_airdodge_override_active = inputs.lt1;
     const bool ls_to_dpad_active = inputs.rf7;
     const bool down_a_active = inputs.lt6;
-    const bool up_a_active = inputs.rf12;
+    const bool up_a_active = inputs.rf12 || inputs.rf15;
     const bool direction_plus_a_active = down_a_active || up_a_active;
     const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || inputs.rf6);
 
@@ -343,7 +360,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         }
 
         if (lt1_z_airdodge_override_active) {
-            const bool lt1_force_up_active = inputs.rf6 || inputs.rf12;
+            const bool lt1_force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15;
             const bool lt1_effective_left = inputs.lf3;
             const bool lt1_effective_right = inputs.lf1;
             const bool lt1_effective_up = inputs.lf2 || lt1_force_up_active;

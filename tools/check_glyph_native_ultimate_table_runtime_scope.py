@@ -21,6 +21,8 @@ REQUIRED_TABLES = (
     "kMX2Table",
     "kY1Table",
     "kMY1Table",
+    "kY1Tilt1Table",
+    "kMY1Tilt1Table",
     "kTilt1Table",
     "kTilt2Table",
     "kTilt3Table",
@@ -40,6 +42,42 @@ LT1_LOW_POINTS = (
     (89, 167),
     (128, 177),
     (167, 167),
+)
+
+TILT1_POINTS = (
+    (187, 47),
+    (128, 47),
+    (69, 47),
+    (187, 128),
+    (128, 128),
+    (69, 128),
+    (187, 209),
+    (128, 209),
+    (69, 209),
+)
+
+Y1_TILT1_POINTS = (
+    (169, 99),
+    (128, 99),
+    (87, 99),
+    (169, 128),
+    (128, 128),
+    (87, 128),
+    (169, 157),
+    (128, 157),
+    (87, 157),
+)
+
+MY1_TILT1_POINTS = (
+    (169, 184),
+    (128, 184),
+    (87, 184),
+    (169, 172),
+    (128, 172),
+    (87, 172),
+    (169, 72),
+    (128, 72),
+    (87, 72),
 )
 
 FORBIDDEN_TOKENS = (
@@ -103,7 +141,11 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L carrier")
     require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt1\s*;", source, "RT1/LT1 mapped to Z")
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 mapped to R")
-    require(r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*;", source, "RF1/LT6/RF12 mapped to A")
+    require(
+        r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        source,
+        "RF1/LT6/RF12/RF15 mapped to A",
+    )
 
     if "outputs.buttonL = inputs.lt1;" in source:
         fail("LT1 must not map to L")
@@ -116,16 +158,54 @@ def ensure_required_shapes(source: str, block: str) -> None:
             fail(f"Y2/MY2 token must not remain active in runtime source: {token}")
 
     require(r"direction_plus_a_active\s*=\s*down_a_active\s*\|\|\s*up_a_active\s*;", source, "hard direction-plus-A active flag")
+    require(r"up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;", source, "RF15 aliases RF12 for Up+A")
     require(
         r"direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*inputs\.rf6\s*\)\s*;",
         source,
-        "hard direction-plus-A Up override (RF12 or RF6)",
+        "hard direction-plus-A Up override (RF12/RF15 or RF6)",
+    )
+    require(
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        source,
+        "digital forced-up includes RF15",
+    )
+    require(
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        source,
+        "LT1 forced-up includes RF15",
     )
 
     require(r"constexpr\s+StickPoint\s+kLt1LowMagnitudeTable\[9\]", source, "LT1 low table declaration")
     for x, y in LT1_LOW_POINTS:
         if f"{{{x}, {y}}}" not in source:
             fail(f"missing LT1 low-magnitude point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kTilt1Table\[9\]", source, "Tilt1 table declaration")
+    for x, y in TILT1_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing Tilt1 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kY1Tilt1Table\[9\]", source, "Y1+Tilt1 table declaration")
+    for x, y in Y1_TILT1_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing Y1+Tilt1 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMY1Tilt1Table\[9\]", source, "Mode Y1+Tilt1 table declaration")
+    for x, y in MY1_TILT1_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing Mode Y1+Tilt1 point: ({x}, {y})")
+
+    require(
+        r"const\s+bool\s+y1_tilt1_special_active\s*=\s*y1_active\s*&&\s*tilt1_effective\s*&&\s*!x1_active\s*&&\s*!x2_active\s*&&\s*!tilt2_effective\s*&&\s*!tilt3_effective\s*;",
+        source,
+        "Y1+Tilt1-only special composite gating",
+    )
+    require(
+        r"if\s*\(\s*y1_tilt1_special_active\s*\)\s*\{\s*return\s+mode_active\s*\?\s*kMY1Tilt1Table\s*:\s*kY1Tilt1Table\s*;",
+        source,
+        "Y1+Tilt1 special composite selection",
+        flags=re.DOTALL,
+    )
 
     require(
         r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{\s*const\s+StickPoint\s+center\s*=\s*mode_active\s*\?\s*kModeDefaultTable\[kDirectionFiveIndex\]\s*:\s*kDefaultTable\[kDirectionFiveIndex\]\s*;\s*outputs\.leftStickX\s*=\s*center\.x\s*;\s*outputs\.leftStickY\s*=\s*center\.y\s*;\s*\}\s*else\s*\{",
@@ -142,6 +222,17 @@ def ensure_required_shapes(source: str, block: str) -> None:
     )
     require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X")
     require(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", block, "LT1 final Y")
+
+    require(r"outputs\.rightStickRight\s*=\s*inputs\.rt4\s*;", source, "RT4 drives C-right")
+    require(r"outputs\.rightStickUp\s*=\s*inputs\.rt5\s*;", source, "RT5 drives C-up")
+    require(r"outputs\.dpadUp\s*=\s*inputs\.rt5\s*;", source, "nunchuk-C Up uses RT5")
+    require(r"outputs\.dpadRight\s*=\s*inputs\.rt4\s*;", source, "nunchuk-C Right uses RT4")
+    require(
+        r"UpdateDirections\(\s*inputs\.lf3,\s*//\s*Left\s*inputs\.lf1,\s*//\s*Right\s*normal_effective_ls_down,\s*//\s*Down\s*normal_effective_ls_up,\s*//\s*Up\s*\(RF6 forced-Up\)\s*inputs\.rt3,\s*//\s*C-Left\s*inputs\.rt4,\s*//\s*C-Right\s*inputs\.rt2,\s*//\s*C-Down\s*inputs\.rt5,\s*//\s*C-Up",
+        source,
+        "UpdateDirections uses RT4 C-right and RT5 C-up",
+        flags=re.DOTALL,
+    )
 
 
 def ensure_no_forbidden_tokens(source: str) -> None:
@@ -181,9 +272,11 @@ def main() -> int:
     print("z_role=rt1_or_lt1")
     print("r_role=rf16")
     print("y_role=rf10")
-    print("forced_up_role=rf6_or_rf12")
-    print("direction_plus_a_role=lt6_down_a_rf12_up_a")
+    print("forced_up_role=rf6_or_rf12_or_rf15")
+    print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
     print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_lt1_low_override")
+    print("y1_tilt1_special_composite=enabled")
+    print("rt4_rt5_cstick_swap=enabled")
     print("y2_my2_runtime_role=scratched_inactive")
     print("standalone_dpad=none")
     print("table_samples=" + ";".join(table_summaries))

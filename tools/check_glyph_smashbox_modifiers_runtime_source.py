@@ -26,6 +26,42 @@ LT1_LOW_POINTS = (
     "{167, 167}",
 )
 
+TILT1_POINTS = (
+    "{187, 47}",
+    "{128, 47}",
+    "{69, 47}",
+    "{187, 128}",
+    "{128, 128}",
+    "{69, 128}",
+    "{187, 209}",
+    "{128, 209}",
+    "{69, 209}",
+)
+
+Y1_TILT1_POINTS = (
+    "{169, 99}",
+    "{128, 99}",
+    "{87, 99}",
+    "{169, 128}",
+    "{128, 128}",
+    "{87, 128}",
+    "{169, 157}",
+    "{128, 157}",
+    "{87, 157}",
+)
+
+MY1_TILT1_POINTS = (
+    "{169, 184}",
+    "{128, 184}",
+    "{87, 184}",
+    "{169, 172}",
+    "{128, 172}",
+    "{87, 172}",
+    "{169, 72}",
+    "{128, 72}",
+    "{87, 72}",
+)
+
 
 def fail(message: str) -> None:
     raise AssertionError(message)
@@ -55,7 +91,11 @@ def read_runtime_doc() -> str:
 
     require(r"LT3\s*=\s*L", text, "runtime doc LT3=L")
     require(r"LT1\s*=\s*Z", text, "runtime doc LT1=Z")
+    require(r"RF15\s*=\s*Up\+A", text, "runtime doc RF15 Up+A alias")
     require(r"Y2/MY2.*scratched|scratched.*Y2/MY2", text, "runtime doc marks Y2/MY2 scratched", flags=re.IGNORECASE)
+    require(r"Y1\+Tilt1.*special", text, "runtime doc Y1+Tilt1 special composite", flags=re.IGNORECASE)
+    require(r"RT4\s*=\s*C-Right", text, "runtime doc RT4 C-right")
+    require(r"RT5\s*=\s*C-Up", text, "runtime doc RT5 C-up")
     require(r"`?RT1`?\s*remains", text, "runtime doc RT1 remains Z")
     require(r"RF16\s*remains\s+runtime-owned\s+`?R`?|`?RF16`?\s+remains\s+`?R`?", text, "runtime doc RF16 remains R")
 
@@ -64,7 +104,11 @@ def read_runtime_doc() -> str:
 
 def ensure_runtime_shapes(source: str, block: str) -> None:
     # Core game output roles.
-    require(r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*;", source, "A role")
+    require(
+        r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        source,
+        "A role includes RF15 alias",
+    )
     require(r"outputs\.buttonL\s*=\s*inputs\.lt3\s*;", source, "LT3 drives L")
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 drives L digital carrier")
     require(r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt1\s*;", source, "RT1/LT1 shared Z carrier")
@@ -88,6 +132,34 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     require(r"const\s+bool\s+y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 modifier input")
     if re.search(r"inputs\.lt3[^\n]*Y2|Y2[^\n]*inputs\.lt3", block, flags=re.IGNORECASE):
         fail("LT3 must not be consumed as Y2 modifier input")
+
+    # Tilt1 table update and Y1+Tilt1 special composite tables.
+    require(r"constexpr\s+StickPoint\s+kTilt1Table\[9\]", source, "Tilt1 table declaration")
+    for point in TILT1_POINTS:
+        if point not in source:
+            fail(f"missing Tilt1 point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kY1Tilt1Table\[9\]", source, "Y1+Tilt1 table declaration")
+    for point in Y1_TILT1_POINTS:
+        if point not in source:
+            fail(f"missing Y1+Tilt1 point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kMY1Tilt1Table\[9\]", source, "Mode Y1+Tilt1 table declaration")
+    for point in MY1_TILT1_POINTS:
+        if point not in source:
+            fail(f"missing Mode Y1+Tilt1 point: {point}")
+
+    require(
+        r"const\s+bool\s+y1_tilt1_special_active\s*=\s*y1_active\s*&&\s*tilt1_effective\s*&&\s*!x1_active\s*&&\s*!x2_active\s*&&\s*!tilt2_effective\s*&&\s*!tilt3_effective\s*;",
+        source,
+        "Y1+Tilt1 special composite gating",
+    )
+    require(
+        r"if\s*\(\s*y1_tilt1_special_active\s*\)\s*\{\s*return\s+mode_active\s*\?\s*kMY1Tilt1Table\s*:\s*kY1Tilt1Table\s*;",
+        source,
+        "Y1+Tilt1 special composite selection",
+        flags=re.DOTALL,
+    )
 
     # LT1 low-magnitude table exists.
     require(r"constexpr\s+StickPoint\s+kLt1LowMagnitudeTable\[9\]", source, "LT1 low table declaration")
@@ -114,6 +186,29 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         "LS->DPad center branch with else-path override",
         flags=re.DOTALL,
     )
+
+    # RF15 aliases RF12 across forced-up/direction-plus-A and LT1 direction resolution.
+    require(
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        source,
+        "digital forced-up includes RF15",
+    )
+    require(
+        r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        block,
+        "direction-plus-A up input includes RF15",
+    )
+    require(
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        block,
+        "LT1 low-table forced-up includes RF15",
+    )
+
+    # C-stick right/up swap and nunchuk-C passthrough consistency.
+    require(r"outputs\.rightStickRight\s*=\s*inputs\.rt4\s*;", source, "RT4 drives C-right")
+    require(r"outputs\.rightStickUp\s*=\s*inputs\.rt5\s*;", source, "RT5 drives C-up")
+    require(r"outputs\.dpadUp\s*=\s*inputs\.rt5\s*;", source, "nunchuk-C Up uses RT5")
+    require(r"outputs\.dpadRight\s*=\s*inputs\.rt4\s*;", source, "nunchuk-C Right uses RT4")
 
     # Direction-plus-A still part of A output and not modifiers.
     if re.search(r"SelectStickTable\s*\([^)]*inputs\.(lt6|rf12)", source, flags=re.DOTALL):
@@ -142,12 +237,14 @@ def main() -> int:
     print(f"source={SOURCE_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print("markers=present")
-    print("forced_up_role=rf6_or_rf12")
-    print("direction_plus_a_role=lt6_down_a_rf12_up_a")
+    print("forced_up_role=rf6_or_rf12_or_rf15")
+    print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
     print("lt3_role=L")
     print("lt1_role=Z_plus_low_magnitude_override")
     print("z_button_role=rt1_or_lt1_shared_buttonR_carrier")
     print("r_button_role=rf16")
+    print("y1_tilt1_special_composite=enabled")
+    print("rt4_rt5_cstick_swap=enabled")
     print("y2_my2_runtime_role=scratched_inactive")
     print("ls_to_dpad_role=rf7")
     return 0
