@@ -86,9 +86,10 @@ def _base_steps(base_ref: str) -> list[CheckStep]:
         _python_step("check ultimate tilt domain spec", "tools/check_glyph_ultimate_tilt_domain_spec.py"),
         _python_step("list tilt button id candidates", "tools/list_glyph_tilt_button_id_candidates.py"),
         _python_step("check tilt button id probe", "tools/check_glyph_tilt_button_id_probe.py"),
-        _python_step("check ultimate tilt runtime source", "tools/check_glyph_ultimate_tilt_runtime_source.py"),
-        _python_step("check ultimate tilt3 runtime source", "tools/check_glyph_ultimate_tilt3_runtime_source.py"),
-        _python_step("check ultimate tilt tables", "tools/check_glyph_ultimate_tilt_tables.py"),
+        _python_step("check native ultimate runtime scope", "tools/check_glyph_native_ultimate_table_runtime_scope.py"),
+        _python_step("check smashbox profile tables", "tools/check_glyph_smashbox_profile_tables.py"),
+        _python_step("check smashbox runtime source", "tools/check_glyph_smashbox_modifiers_runtime_source.py"),
+        _python_step("check smashbox identity runtime bindings", "tools/check_glyph_smashbox_identity_runtime_bindings.py"),
         _python_step("check ultimate tilt rc manifest", "tools/check_glyph_ultimate_tilt_rc_manifest.py"),
         _python_step(
             "check ultimate tilt docs consistency",
