@@ -82,3 +82,12 @@
   - RF9 exclusion from modifier-count composition,
   - RF9 non-ownership of game buttons/D-pad/right-stick outputs.
 - New hardware validation is required before claiming PASS for these updated table rows and RF9 rows.
+
+## 2026-05-28 RF11 Z-Airdodge Alias Amendment
+
+- This PASS result predates the RF11 runtime alias to LT1 Z-airdodge low-magnitude behavior.
+- This PASS result therefore does not validate:
+  - `RF11 -> Z` shared carrier behavior,
+  - RF11 low-magnitude directional override parity with LT1,
+  - RF11 interactions with RF9 and LS->DPad rows.
+- New hardware validation is required before claiming PASS for RF11 alias rows.

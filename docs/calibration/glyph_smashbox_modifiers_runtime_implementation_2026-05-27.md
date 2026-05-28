@@ -35,7 +35,9 @@ Main game buttons:
 - `RF2 = X`
 - `RF10 = Y`
 - `LT1 = Z` (plus low-magnitude directional override when LS->DPad is inactive)
+- `RF11 = Z` (LT1 low-magnitude neutral-airdodge-safe alias)
 - `RT1 = Z`
+- `RF11` is no longer empty/no-output in this runtime map.
 
 Shoulders / triggers:
 
@@ -47,9 +49,9 @@ Source-backed carrier note:
 - `OutputState` has no literal `z` member.
 - The inspected GameCube/N64 backends serialize `outputs.buttonR` as report `z`.
 - The inspected GameCube/N64 backends serialize `outputs.triggerRDigital` as report `r`.
-- Runtime therefore assigns `RT1` and `LT1` to `outputs.buttonR` for source-confirmed Z and assigns `RF16` to `outputs.triggerRDigital` for source-confirmed R on those backends.
+- Runtime therefore assigns `RT1`, `LT1`, and `RF11` to `outputs.buttonR` for source-confirmed Z and assigns `RF16` to `outputs.triggerRDigital` for source-confirmed R on those backends.
 - `LT3` drives `outputs.buttonL` and `outputs.triggerLDigital`; the analog L trigger follows the digital carrier at value `140`.
-- `LT1` contributes to the source-confirmed Z carrier and also applies a low-magnitude left-stick override when LS->DPad is inactive.
+- `LT1` and `RF11` contribute to the source-confirmed Z carrier and share the same low-magnitude left-stick override behavior when LS->DPad is inactive.
 - `RF16` drives `outputs.triggerRDigital`; the analog R trigger follows the digital carrier at value `140`.
 
 Left-stick directions:
@@ -86,7 +88,7 @@ Standalone D-pad:
 
 Empty/no-output physical IDs:
 
-- `LF6`, `LF7`, `LF8`, `RF11`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
+- `LF6`, `LF7`, `LF8`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
 
 ## Custom Modifier Role Table
 
@@ -101,6 +103,7 @@ Empty/no-output physical IDs:
 - `RF3 = Tilt1`
 - `RF4 = Tilt2`
 - `RF3 + RF4 = Tilt3`
+- `RF11` is runtime-owned Z-airdodge alias behavior and is not a modifier-table role.
 - `Y2/MY2` are scratched/inactive in runtime selection.
 
 `RF9` null modifier policy:
@@ -238,19 +241,20 @@ Direction-plus-A hard final override policy:
 - `RF6 + LT6` resolves to Up+A.
 - X/Y/Tilt modifier tables are ignored for final left-stick output when direction-plus-A is active.
 
-LT1 Z-airdodge low-magnitude hard final override policy:
+LT1/RF11 Z-airdodge low-magnitude hard final override policy:
 
-- `LT1` contributes to Z (`outputs.buttonR = inputs.rt1 || inputs.lt1`).
-- When LS->DPad is inactive and `LT1` is held, final left-stick output is hard-overridden by a dedicated low-magnitude table, after modifier-table selection and after direction-plus-A hard override.
-- This LT1 override ignores X/Y/Tilt modifier-table output for final left-stick values.
-- This LT1 override ignores Mode default table output for final left-stick values.
-- This LT1 override also overrides the LT6/RF12 direction-plus-A analog table output, while LT6/RF12 still press A through `outputs.a`.
-- Effective direction source for LT1 low table uses:
+- `LT1` and `RF11` contribute to Z (`outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11`).
+- When LS->DPad is inactive and either `LT1` or `RF11` is held, final left-stick output is hard-overridden by a dedicated low-magnitude table, after modifier-table selection and after direction-plus-A hard override.
+- `RF11` behavior for this function is identical to `LT1`, including low-magnitude table values and override priority.
+- This LT1/RF11 override ignores X/Y/Tilt modifier-table output for final left-stick values.
+- This LT1/RF11 override ignores Mode default table output for final left-stick values.
+- This LT1/RF11 override also overrides the LT6/RF12 direction-plus-A analog table output, while LT6/RF12 still press A through `outputs.a`.
+- Effective direction source for LT1/RF11 low table uses:
   - Left: `LF3`
   - Right: `LF1`
   - Up: `LF2` or forced-Up (`RF6`/`RF12`/`RF15`)
   - Down: `LF5` or `LT6`, suppressed by forced-Up
-- LT1 low-magnitude absolute raw coordinate table:
+- LT1/RF11 low-magnitude absolute raw coordinate table:
   - `1 = (89, 89)`
   - `2 = (128, 79)`
   - `3 = (167, 89)`
@@ -274,7 +278,7 @@ LT1 Z-airdodge low-magnitude hard final override policy:
 - RF9 final analog priority:
   - after ordinary table selection,
   - after direction-plus-A hard analog override,
-  - after LT1 low-magnitude override,
+  - after LT1/RF11 low-magnitude override,
   - set final analog left stick to `(128,128)`.
 - Under LS->DPad:
   - D-pad behavior remains from LS->DPad effective directions,
@@ -300,8 +304,9 @@ LT1 Z-airdodge low-magnitude hard final override policy:
 - `RF7 + RF12 + LT6` resolves to D-pad Up + A.
 - `RF7 + RF15 + LT6` resolves to D-pad Up + A.
 - `RF7 + RF6 + LT6` resolves to D-pad Up + A.
-- Under LS->DPad, `LT1` still presses Z through the shared Z carrier, while analog left stick remains centered by LS->DPad behavior.
+- Under LS->DPad, `LT1`/`RF11` still press Z through the shared Z carrier, while analog left stick remains centered by LS->DPad behavior.
 - `RF7 + LT1 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
+- `RF7 + RF11 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
 - There are no direct standalone D-pad inputs from `LF6`, `LF8`, or the old D-pad cluster.
 
 ## L/R/Z Button Behavior
@@ -310,8 +315,8 @@ LT1 Z-airdodge low-magnitude hard final override policy:
 - `outputs.modX = inputs.lt1` is removed/neutralized for this identity runtime path (`modX` no longer follows LT1).
 - `LT3` drives `outputs.triggerLDigital`; `outputs.triggerLAnalog` follows that digital carrier at `140`.
 - `RT1` remains a source-confirmed Z input and drives `outputs.buttonR`.
-- `LT1` also contributes to `outputs.buttonR` so Z can be pressed from either RT1 or LT1.
-- `outputs.buttonR` is `inputs.rt1 || inputs.lt1`.
+- `LT1` and `RF11` also contribute to `outputs.buttonR` so Z can be pressed from RT1/LT1/RF11.
+- `outputs.buttonR` is `inputs.rt1 || inputs.lt1 || inputs.rf11`.
 - `RF16` drives `outputs.triggerRDigital`, which the inspected GameCube/N64 backends serialize as report `r`.
 - `outputs.triggerRAnalog` follows `RF16` through `outputs.triggerRDigital` at `140`.
 - `LF4` and `RF5` are no longer trigger carriers; they are duplicate B bindings in this runtime map.
@@ -347,6 +352,7 @@ Manual hardware validation is required for:
 - `RF3+RF4 => Tilt3`,
 - `LT3 => L`,
 - `LT1 => Z` plus low-magnitude table override behavior,
+- `RF11 => Z` plus LT1-identical low-magnitude table override behavior,
 - `Y2/MY2` scratched (inactive/unreachable) in runtime selection,
 - `RT1 => Z`,
 - `RF16 => R`,
@@ -359,24 +365,27 @@ Manual hardware validation is required for:
 - Mode Y1+Tilt1 special composite rows use updated MY1 values (`179/169/77`),
 - `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` does not emit prior LT1->modX behavior,
+- `RF11` is not counted as an X/Y/Tilt modifier and does not alter `SelectStickTable`,
 - `LT6` Down+A path hard-overrides final left-stick output to direction `2` using Default/Mode-default base tables,
 - `RF12` and `RF15` Up+A rows hard-override final left-stick output to direction `8` using Default/Mode-default base tables,
 - LT6/RF12/RF15 hard-override rows ignore X/Y/Tilt final table outputs while preserving Mode base-table selection,
 - `LT6/RF12/RF15` do not count as modifiers in X/Y/Tilt/Mode composition,
 - LT1 low-table hard final override rows ignore X/Y/Tilt/Mode table outputs for final left-stick values,
 - LT1 low-table hard final override rows supersede LT6/RF12/RF15 analog override output while preserving A press,
+- RF11 low-table hard final override rows match LT1 low-table behavior and supersede LT6/RF12/RF15 analog override output while preserving A press,
 - LS->DPad behavior and orthogonality,
 - LS->DPad + LT1 rows produce Z plus D-pad with analog left-stick centered,
+- LS->DPad + RF11 rows produce Z plus D-pad with analog left-stick centered,
 - RF9 null modifier rows:
   - RF9 alone forces final analog to `(128,128)` with no extra game output from RF9 itself,
   - RF9 + A keeps A output while analog remains `(128,128)`,
-  - RF9 + LT1 keeps Z output while analog remains `(128,128)`,
+  - RF9 + LT1 or RF11 keeps Z output while analog remains `(128,128)`,
   - RF9 + LT6/RF12/RF15 keeps A output while analog remains `(128,128)`,
   - RF9 + LS->DPad preserves D-pad behavior while analog remains `(128,128)`,
   - RF9 does not participate in modifier-count composition and does not select tables,
 - RT4/RT5 C-stick swap rows (`RT4=C-right`, `RT5=C-up`),
 - no standalone D-pad outputs from empty buttons,
-- empty/no-output buttons remain inert (excluding RF15 because RF15 is active as Up+A alias, and excluding RF9 because RF9 is now null-modifier analog override),
+- empty/no-output buttons remain inert (excluding RF11 because RF11 is active as Z-airdodge alias, excluding RF15 because RF15 is active as Up+A alias, and excluding RF9 because RF9 is now null-modifier analog override),
 - nunchuk availability row handling.
 
 ## 2026-05-28 Amendment: Identity Runtime Hardware Confirmation

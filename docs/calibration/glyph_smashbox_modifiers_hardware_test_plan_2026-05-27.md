@@ -24,6 +24,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF10 game output | Press `RF10` in `MODE_ULTIMATE` runtime path | N/A | Y output asserted | NOT_TESTED |
 | RT1 game output | Press `RT1` in `MODE_ULTIMATE` runtime path | N/A | Z output asserted through source-confirmed Z carrier (RT1 still maps to Z) | NOT_TESTED |
 | LT1 game output | Press `LT1` in `MODE_ULTIMATE` runtime path | N/A | Z output asserted through shared Z carrier; LT1 no longer maps to L | NOT_TESTED |
+| RF11 game output | Press `RF11` in `MODE_ULTIMATE` runtime path | N/A | Z output asserted through shared Z carrier; RF11 aliases LT1 low-magnitude behavior | NOT_TESTED |
 | LT3 game output | Press `LT3` in `MODE_ULTIMATE` runtime path | N/A | L output asserted (LT3 now maps to L) | NOT_TESTED |
 | RF16 game output | Press `RF16` in `MODE_ULTIMATE` runtime path | N/A | R output asserted through source-confirmed R carrier; RF16 remains R and RF5 does not assert R | NOT_TESTED |
 | RF15 game output | Press `RF15` in `MODE_ULTIMATE` runtime path | N/A | Up+A alias behavior (same as RF12); RF15 is not empty/no-output | NOT_TESTED |
@@ -49,11 +50,18 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF12 direction-plus-A with modifiers | `RF12 + X1/X2/Y1/Tilt1/Tilt2/Tilt3` (Mode optional) | Representative + 1..9 spot checks | Final output is Default direction `8` + A, or Mode default direction `8` + A if Mode is held | NOT_TESTED |
 | LT1 neutral low-table baseline | `LT1` only | 5 | Z asserted and low-magnitude neutral `(128,128)` output | NOT_TESTED |
 | LT1 low-magnitude 1..9 table | `LT1 + direction` | 1..9 | `1=(89,89) 2=(128,79) 3=(167,89) 4=(79,128) 5=(128,128) 6=(177,128) 7=(89,167) 8=(128,177) 9=(167,167)` | NOT_TESTED |
+| RF11 neutral low-table baseline | `RF11` only | 5 | Z asserted and low-magnitude neutral `(128,128)` output | NOT_TESTED |
+| RF11 low-magnitude 1..9 table | `RF11 + direction` | 1..9 | `1=(89,89) 2=(128,79) 3=(167,89) 4=(79,128) 5=(128,128) 6=(177,128) 7=(89,167) 8=(128,177) 9=(167,167)` | NOT_TESTED |
 | LT1 with modifiers | `LT1 + X1/X2/Y1/Tilt1/Tilt2/Tilt3` | Representative + 1..9 spot checks | Final stick output uses LT1 low table (not modifier table output) while Z is asserted | NOT_TESTED |
+| RF11 modifier exclusion guard | `RF11 + X1/X2/Y1/Tilt1/Tilt2/Tilt3` | Representative + 1..9 spot checks | RF11 does not count as X/Y/Tilt modifier; final stick output uses LT1/RF11 low table while Z is asserted | NOT_TESTED |
 | LT1 with Mode | `LT1 + Mode` | Representative + 1..9 spot checks | Final stick output uses LT1 low table (not Mode default table output) while Z is asserted | NOT_TESTED |
+| RF11 with Mode | `RF11 + Mode` | Representative + 1..9 spot checks | Final stick output uses LT1/RF11 low table (not Mode default table output) while Z is asserted | NOT_TESTED |
 | LT1 + LT6 | `LT1 + LT6` | N/A | Z + A with low-table Down `(128,79)` | NOT_TESTED |
+| RF11 + LT6 | `RF11 + LT6` | N/A | Z + A with low-table Down `(128,79)` unless forced-Up source is active | NOT_TESTED |
 | LT1 + RF12 | `LT1 + RF12` | N/A | Z + A with low-table Up `(128,177)` | NOT_TESTED |
 | LT1 + RF15 | `LT1 + RF15` | N/A | Z + A with low-table Up `(128,177)` | NOT_TESTED |
+| RF11 + RF12 | `RF11 + RF12` | N/A | Z + A with low-table Up `(128,177)` | NOT_TESTED |
+| RF11 + RF15 | `RF11 + RF15` | N/A | Z + A with low-table Up `(128,177)` | NOT_TESTED |
 | LT1 + RF12 + LT6 | `LT1 + RF12 + LT6` | N/A | Z + A with low-table Up `(128,177)` | NOT_TESTED |
 | LT1 + RF15 + LT6 | `LT1 + RF15 + LT6` | N/A | Z + A with low-table Up `(128,177)` | NOT_TESTED |
 | RF6 forced-Up | `RF6` only | N/A | Effective direction `8` table output | NOT_TESTED |
@@ -89,6 +97,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF9 null baseline | `RF9` only | N/A | Analog left stick forced to `(128,128)` and no RF9-owned game output asserted | NOT_TESTED |
 | RF9 with game button | `RF9 + RF1` | N/A | A output asserted while analog left stick remains `(128,128)` | NOT_TESTED |
 | RF9 with LT1 | `RF9 + LT1` | N/A | Z output asserted while analog left stick remains `(128,128)` | NOT_TESTED |
+| RF9 with RF11 | `RF9 + RF11` | N/A | Z output asserted while analog left stick remains `(128,128)` | NOT_TESTED |
 | RF9 with LT6/RF12/RF15 | `RF9 + LT6`, `RF9 + RF12`, `RF9 + RF15` | N/A | A output asserted while analog left stick remains `(128,128)` | NOT_TESTED |
 | RF9 with LS->DPad | `RF9 + RF7 + directions` | Left/Right/Down/Up and diagonals | D-pad behavior follows LS->DPad effective directions while analog left stick remains `(128,128)` | NOT_TESTED |
 | RF9 modifier-count exclusion | `RF9` with any single modifier (`X1/X2/Y1/Tilt1/Tilt2/Tilt3`) | Representative + 1..9 spot checks | RF9 does not count as table modifier; only final analog is forced to `(128,128)` | NOT_TESTED |
@@ -103,8 +112,9 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LS->DPad with RF15 and LT6 | `RF7 + RF15 + LT6` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
 | LS->DPad with RF6 and LT6 | `RF7 + RF6 + LT6` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
 | LS->DPad with LT1 | `RF7 + LT1 + direction` | Left/Right/Down/Up and diagonals | Z asserted; D-pad follows effective direction; analog left stick centered by LS->DPad | NOT_TESTED |
+| LS->DPad with RF11 | `RF7 + RF11 + direction` | Left/Right/Down/Up and diagonals | Z asserted; D-pad follows effective direction; analog left stick centered/null according to current LS->DPad and RF9 behavior | NOT_TESTED |
 | No standalone D-pad outputs | Press `LF6`, `LF8`, old D-pad cluster placeholders, and RF7 inactive | N/A | No D-pad output unless nunchuk C or RF7 LS->DPad is active | NOT_TESTED |
-| Empty button no-output smoke | Press `LF6/LF7/LF8/RF11/RF13/RF14/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
+| Empty button no-output smoke | Press `LF6/LF7/LF8/RF13/RF14/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
 | RF9 non-D-pad guard | `RF9` only with RF7 inactive | N/A | RF9 does not emit D-pad output | NOT_TESTED |
 | Custom modifiers still work | Press `RF8/LT5/LT4/LT2/RF3/RF4` across representative directions | 1..9 spot checks | Mode, X1, X2, Y1, Tilt1, Tilt2, and RF3+RF4 Tilt3 all select expected tables; Y2/MY2 remain scratched | NOT_TESTED |
 | Right-stick directions | Press `RT4/RT3/RT5/RT2` | Cardinal C-stick directions | `RT4=C-right`, `RT3=C-left`, `RT5=C-up`, `RT2=C-down` | NOT_TESTED |
