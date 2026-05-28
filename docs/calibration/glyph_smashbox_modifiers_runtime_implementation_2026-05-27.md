@@ -22,7 +22,65 @@ Implementation is complete in this branch for native `MODE_ULTIMATE` runtime sou
 - Runtime now requires an explicit self-activated identity profile artifact (`physicalButton == activates` in `MODE_ULTIMATE.buttonRemapping`).
 - Hardware testing showed omitted-`activates` identity caused missing logical inputs, so omitted-`activates` is not treated as a reliable active baseline representation.
 
-## Runtime Role Table
+## Game Output Role Table
+
+Main game buttons:
+
+- `RF1 = A`
+- `RF5 = B`
+- `LF4 = B`
+- `RF2 = X`
+- `RF10 = Y`
+- `RT1 = Z`
+
+Shoulders / triggers:
+
+- `LT1 = L`
+- `RF16 = R`
+
+Source-backed carrier note:
+
+- `OutputState` has no literal `z` member.
+- The inspected GameCube/N64 backends serialize `outputs.buttonR` as report `z`.
+- The inspected GameCube/N64 backends serialize `outputs.triggerRDigital` as report `r`.
+- Runtime therefore assigns `RT1` to `outputs.buttonR` for source-confirmed Z and assigns `RF16` to `outputs.triggerRDigital` for source-confirmed R on those backends.
+- `LT1` drives `outputs.buttonL` and `outputs.triggerLDigital`; the analog L trigger follows the digital carrier at value `140`.
+- `RF16` drives `outputs.triggerRDigital`; the analog R trigger follows the digital carrier at value `140`.
+
+Left-stick directions:
+
+- `LF3 = Left`
+- `LF1 = Right`
+- `LF2 = Up`
+- `LF5 = Down`
+- `RF6 = forced Up`
+- `RF6` forced Up suppresses `LF5` Down for runtime table direction.
+
+Right stick / C-stick:
+
+- `RT4 = C-Up`
+- `RT3 = C-Left`
+- `RT5 = C-Right`
+- `RT2 = C-Down`
+
+Menu:
+
+- `MB4 = Capture`
+- `MB5 = Home`
+- `MB6 = Select/Minus`
+- `MB7 = Start/Plus`
+- `MB1`, `MB2`, and `MB3` produce no game output in this runtime map.
+
+Standalone D-pad:
+
+- There are no standalone D-pad buttons in this runtime map.
+- D-pad output is produced only by preserved nunchuk C behavior or by `RF7` LS->DPad using effective left-stick directions.
+
+Empty/no-output physical IDs:
+
+- `LF6`, `LF7`, `LF8`, `LT6`, `RF9`, `RF11`, `RF12`, `RF13`, `RF14`, `RF15`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
+
+## Custom Modifier Role Table
 
 - `RF8 = Mode`
 - `LT5 = X1`
@@ -31,7 +89,6 @@ Implementation is complete in this branch for native `MODE_ULTIMATE` runtime sou
 - `LT3 = Y2`
 - `RF7 = LS->DPad`
 - `RF6 = forced Up`
-- `LT1 = L`
 - `RF3 = Tilt1`
 - `RF4 = Tilt2`
 - `RF3 + RF4 = Tilt3`
@@ -46,11 +103,13 @@ Direction mapping used by identity runtime:
 
 - `LF3 = Left`
 - `LF1 = Right`
-- `LF2 = Down`
+- `LF2 = Up`
+- `LF5 = Down`
 - `RF6 = forced Up`
 
 `RF4` is Tilt2-only and is no longer consumed as Up direction input in the Smash Box runtime path.
 `RF6` is forced-Up only and no longer drives game Y output in this runtime branch.
+`RF10` is the game Y binding in this runtime branch.
 
 ## Canonical Table Source
 
@@ -111,26 +170,25 @@ RF6 forced-Up policy for table direction:
 - LS->DPad does not reintroduce the old prototype D-pad-layer side effects.
 - Old nunchuk C D-pad behavior is preserved only when nunchuk C is active.
 - Under LS->DPad, RF6 still acts as forced Up and overrides Down.
+- There are no direct standalone D-pad inputs from `LF6`, `LF8`, or the old D-pad cluster.
 
-## L Button Behavior
+## L/R/Z Button Behavior
 
-- `LT1` now drives `outputs.buttonL` for native Ultimate backends (including Switch/GameCube mappings through existing backend output adapters).
+- `LT1` now drives `outputs.buttonL` and the GameCube/N64 L carrier `outputs.triggerLDigital` in native Ultimate.
 - `outputs.modX = inputs.lt1` is removed/neutralized for this identity runtime path (`modX` no longer follows LT1).
-- Existing trigger behavior remains on its prior trigger paths.
+- `LT1` also drives `outputs.triggerLDigital`; `outputs.triggerLAnalog` follows that digital carrier at `140`.
+- `RT1` drives `outputs.buttonR`, which the inspected GameCube/N64 backends serialize as report `z`.
+- `RF16` drives `outputs.triggerRDigital`, which the inspected GameCube/N64 backends serialize as report `r`.
+- `outputs.triggerRAnalog` follows `RF16` through `outputs.triggerRDigital` at `140`.
+- `LF4` and `RF5` are no longer trigger carriers; they are duplicate B bindings in this runtime map.
 
 ## Y Button and modY Behavior
 
-- `RF6` is reserved for forced-Up direction behavior and is not used as game Y in this branch (`outputs.y = false`).
-- Game Y is intentionally left unassigned until a user-approved/source-backed physical binding is provided.
+- `RF6` is reserved for forced-Up direction behavior and is not used as game Y in this branch.
+- `RF10` is the game Y binding in this branch (`outputs.y = inputs.rf10`).
 - `LT2` remains the `Y1` modifier role only.
 - `outputs.modY = inputs.lt2` is removed/neutralized for this identity runtime path (`outputs.modY = false`).
 - `modY` remains neutralized unless later source-confirmed harmless/internal-only evidence is explicitly documented.
-
-## R Button Behavior
-
-- `outputs.buttonR = inputs.rf3` is removed in this branch because RF3 is reserved for Tilt1.
-- No replacement R physical assignment is introduced in this identity runtime branch.
-- R is intentionally left unassigned until a user-approved/source-backed replacement is specified.
 
 ## Preservation Boundaries
 
@@ -152,10 +210,15 @@ Manual hardware validation is required for:
 - `RF3+RF4 => Tilt3`,
 - `LT3 => Y2` and no standalone LT3 Tilt3 claim,
 - `LT1 => L`,
+- `RT1 => Z`,
+- `RF16 => R`,
+- `RF1 => A`, `RF5/LF4 => B`, `RF2 => X`, and `RF10 => Y`,
 - `RF6` forced-Up path does not press game Y,
 - `RF4` behaves as Tilt2 and does not act as Up direction source,
 - `RF3` Tilt1 path does not press R,
 - `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` does not emit prior LT1->modX behavior,
 - LS->DPad behavior and orthogonality,
+- no standalone D-pad outputs from empty buttons,
+- empty/no-output buttons remain inert,
 - nunchuk availability row handling.

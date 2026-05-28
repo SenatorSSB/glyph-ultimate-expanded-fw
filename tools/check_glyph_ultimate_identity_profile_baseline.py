@@ -54,6 +54,10 @@ EXPECTED_PHYSICAL_BUTTONS = (
     "BTN_MB1",
     "BTN_MB2",
     "BTN_MB3",
+    "BTN_MB4",
+    "BTN_MB5",
+    "BTN_MB6",
+    "BTN_MB7",
     "BTN_RF2",
     "BTN_LF3",
     "BTN_LF1",
@@ -63,6 +67,19 @@ EXPECTED_PHYSICAL_BUTTONS = (
     "BTN_RT5",
     "BTN_RT2",
     "BTN_RT4",
+)
+
+EXPECTED_ULTIMATE_SOCD_PAIRS = (
+    ("BTN_LF3", "BTN_LF1", "SOCD_2IP"),
+    ("BTN_LF5", "BTN_LF2", "SOCD_2IP"),
+    ("BTN_RT3", "BTN_RT5", "SOCD_2IP"),
+    ("BTN_RT2", "BTN_RT4", "SOCD_2IP"),
+)
+
+FORBIDDEN_ULTIMATE_SOCD_PAIRS = (
+    ("BTN_LF2", "BTN_RF4"),
+    ("BTN_LF8", "BTN_LF6"),
+    ("BTN_RF7", "BTN_RF8"),
 )
 
 
@@ -135,6 +152,26 @@ def _normalized_remaps(mode: dict[str, Any]) -> list[dict[str, str]]:
     return normalized
 
 
+def _normalized_socd_pairs(mode: dict[str, Any]) -> list[tuple[str, str, str | None]]:
+    pairs = mode.get("socdPairs")
+    if not isinstance(pairs, list):
+        raise AssertionError("MODE_ULTIMATE socdPairs must be a list")
+
+    normalized: list[tuple[str, str, str | None]] = []
+    for index, entry in enumerate(pairs):
+        if not isinstance(entry, dict):
+            raise AssertionError(f"socdPairs[{index}] must be an object")
+        left = entry.get("buttonDir1")
+        right = entry.get("buttonDir2")
+        socd_type = entry.get("socdType")
+        if not isinstance(left, str) or not isinstance(right, str):
+            raise AssertionError(f"socdPairs[{index}] buttonDir1/buttonDir2 must be strings")
+        if socd_type is not None and not isinstance(socd_type, str):
+            raise AssertionError(f"socdPairs[{index}].socdType must be a string when present")
+        normalized.append((left, right, socd_type))
+    return normalized
+
+
 def _check_file(path: Path) -> tuple[list[str], int, int]:
     failures: list[str] = []
 
@@ -142,6 +179,7 @@ def _check_file(path: Path) -> tuple[list[str], int, int]:
         payload = _load_json(path)
         mode = _ultimate_mode(payload)
         remaps = _normalized_remaps(mode)
+        socd_pairs = _normalized_socd_pairs(mode)
     except (FileNotFoundError, json.JSONDecodeError, AssertionError) as exc:
         return [f"{_rel(path)}: {exc}"], 0, 0
 
@@ -172,6 +210,22 @@ def _check_file(path: Path) -> tuple[list[str], int, int]:
         failures.append(
             f"{_rel(path)} semantic remaps remain in MODE_ULTIMATE: {semantic_remap_count}"
         )
+
+    actual_socd_set = set(socd_pairs)
+    for expected_pair in EXPECTED_ULTIMATE_SOCD_PAIRS:
+        if expected_pair not in actual_socd_set:
+            failures.append(
+                f"{_rel(path)} missing expected MODE_ULTIMATE SOCD pair: {expected_pair}"
+            )
+    for forbidden_left, forbidden_right in FORBIDDEN_ULTIMATE_SOCD_PAIRS:
+        if any(
+            left == forbidden_left and right == forbidden_right
+            for left, right, _socd_type in socd_pairs
+        ):
+            failures.append(
+                f"{_rel(path)} forbidden legacy MODE_ULTIMATE SOCD pair remains: "
+                f"{forbidden_left} vs {forbidden_right}"
+            )
 
     return failures, semantic_remap_count, len(physicals)
 

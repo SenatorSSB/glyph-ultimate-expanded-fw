@@ -233,20 +233,21 @@ Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     const bool force_up_active = inputs.rf6;
-    const bool effective_ls_up = force_up_active;
-    const bool effective_ls_down = inputs.lf2 && !force_up_active;
+    const bool effective_ls_up = inputs.lf2 || force_up_active;
+    const bool effective_ls_down = inputs.lf5 && !force_up_active;
     const bool effective_ls_left = inputs.lf3;
     const bool effective_ls_right = inputs.lf1;
     const bool ls_to_dpad_active = inputs.rf7;
 
-    outputs.a = inputs.rt1;
-    outputs.b = inputs.rf1;
+    outputs.a = inputs.rf1;
+    outputs.b = inputs.rf5 || inputs.lf4;
     outputs.x = inputs.rf2;
-    outputs.y = false;
+    outputs.y = inputs.rf10;
     outputs.buttonL = inputs.lt1;
-    outputs.buttonR = false;
-    outputs.triggerLDigital = inputs.lf4;
-    outputs.triggerRDigital = inputs.rf5;
+    // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
+    outputs.buttonR = inputs.rt1;
+    outputs.triggerLDigital = inputs.lt1;
+    outputs.triggerRDigital = inputs.rf16;
 
     outputs.start = inputs.mb7;
     outputs.select = inputs.mb6;
@@ -265,10 +266,6 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
         outputs.dpadLeft = inputs.rt3;
         outputs.dpadRight = inputs.rt5;
     }
-
-    // Preserve direct D-pad left/right inputs.
-    outputs.dpadLeft |= inputs.lf8;
-    outputs.dpadRight |= inputs.lf6;
 
     if (ls_to_dpad_active) {
         outputs.dpadUp |= effective_ls_up;
@@ -294,8 +291,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
     const bool force_up_active = inputs.rf6;
-    const bool effective_ls_up = force_up_active;
-    const bool effective_ls_down = inputs.lf2 && !force_up_active;
+    const bool effective_ls_up = inputs.lf2 || force_up_active;
+    const bool effective_ls_down = inputs.lf5 && !force_up_active;
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
@@ -358,13 +355,13 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         outputs.rightStickY = 128 + (directions.cy * 68);
     }
 
-    if (inputs.lf4) {
+    if (outputs.triggerLDigital) {
         outputs.triggerLAnalog = 140;
     } else {
         outputs.triggerLAnalog = 0;
     }
 
-    if (inputs.rf5) {
+    if (outputs.triggerRDigital) {
         outputs.triggerRAnalog = 140;
     } else {
         outputs.triggerRAnalog = 0;

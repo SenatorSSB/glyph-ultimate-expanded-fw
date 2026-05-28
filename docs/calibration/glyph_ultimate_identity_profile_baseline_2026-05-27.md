@@ -46,3 +46,13 @@ Do not apply this identity artifact expecting full Smash Box X/Y/Mode/LS->DPad b
 - Hardware testing showed omitted-`activates` identity was not reliable for runtime/configurator behavior.
 - Active development identity baseline now uses explicit self-activates identity where `physicalButton == activates`.
 - Explicit self-activates remains identity behavior and is not semantic remapping.
+
+## 2026-05-28 Button/Function Map Amendment
+
+- Explicit self-activated identity profile entries are required so the Ultimate runtime sees all approved physical IDs as same-name logical inputs.
+- Firmware runtime now owns both custom modifier behavior and normal game output mapping for this test profile.
+- Profile artifacts expose physical buttons as same-name logical inputs only; they do not perform semantic physical-to-logical remaps.
+- The active artifact and MVP fixture include the approved menu inputs `MB4`, `MB5`, `MB6`, and `MB7` as explicit self-activated identity entries.
+- The Ultimate SOCD pairs are profile-level input processing source-backed by `src/core/InputMode.cpp`.
+- The active Ultimate SOCD pairs are `LF3` vs `LF1`, `LF5` vs `LF2`, `RT3` vs `RT5`, and `RT2` vs `RT4`.
+- `RF6` is intentionally not included in the Up/Down SOCD pair because runtime forced-Up must bypass Down.
