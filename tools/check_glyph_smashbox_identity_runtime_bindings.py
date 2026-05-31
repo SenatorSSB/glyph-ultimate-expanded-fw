@@ -23,15 +23,15 @@ ROLE_LINES = (
     "`LF4 = B`",
     "`RF2 = X`",
     "`RF10 = Y`",
-    "`LT1 = Z`",
+    "`LT5 = Z`",
     "`RF11 = Z`",
     "`RT1 = Z`",
     "`LT3 = L`",
     "`RF16 = R`",
     "`RF8 = Mode`",
     "`RF9 = null modifier`",
-    "`LT5 = X1`",
-    "`LT4 = X2`",
+    "`LT4 = X1`",
+    "`LT1 = X2`",
     "`LT2 = Y1`",
     "`RF7 = LS->DPad`",
     "`RF6 = forced Up`",
@@ -226,6 +226,24 @@ def explicit_self_activate_map(mode_config: dict[str, object], path: Path) -> di
     return mapping
 
 
+def ensure_role_inputs_not_in_socd_pairs(mode_config: dict[str, object], path: Path) -> None:
+    socd_pairs = mode_config.get("socdPairs")
+    if not isinstance(socd_pairs, list):
+        fail(f"MODE_ULTIMATE.socdPairs must be a list in {path.relative_to(REPO_ROOT)}")
+
+    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11"}
+    for index, pair in enumerate(socd_pairs):
+        if not isinstance(pair, dict):
+            fail(f"socdPairs[{index}] must be an object in {path.relative_to(REPO_ROOT)}")
+        left = pair.get("buttonDir1")
+        right = pair.get("buttonDir2")
+        if left in forbidden_socd_inputs or right in forbidden_socd_inputs:
+            fail(
+                "LT1/LT4/LT5/RF11 must not appear in MODE_ULTIMATE.socdPairs in "
+                f"{path.relative_to(REPO_ROOT)}"
+            )
+
+
 def require_runtime_doc() -> str:
     if not RUNTIME_DOC_PATH.exists():
         fail(f"missing runtime doc: {RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
@@ -239,10 +257,16 @@ def require_runtime_doc() -> str:
         fail("runtime doc must state Y2/MY2 scratched/inactive")
     if re.search(r"RF15\s*=\s*Up\+A", text) is None:
         fail("runtime doc must state RF15 aliases RF12 as Up+A")
+    if re.search(r"LT4\s*=\s*X1", text) is None:
+        fail("runtime doc must state LT4 is X1")
+    if re.search(r"LT1\s*=\s*X2", text) is None:
+        fail("runtime doc must state LT1 is X2")
+    if re.search(r"LT5\s*=\s*Z", text) is None:
+        fail("runtime doc must state LT5 is Z-airdodge")
     if re.search(r"RF11\s*=\s*Z", text) is None:
-        fail("runtime doc must state RF11 aliases LT1 for Z-airdodge behavior")
-    if re.search(r"RF11.*((alias|identic|same).*LT1|LT1.*(alias|identic|same))", text, flags=re.IGNORECASE) is None:
-        fail("runtime doc must state RF11 behaves identically to LT1 for Z-airdodge low-magnitude override")
+        fail("runtime doc must state RF11 aliases LT5 for Z-airdodge behavior")
+    if re.search(r"RF11.*((alias|identic|same).*LT5|LT5.*(alias|identic|same))", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must state RF11 behaves identically to LT5 for Z-airdodge low-magnitude override")
     if re.search(r"RF9\s*=\s*null modifier", text) is None:
         fail("runtime doc must state RF9 is null modifier")
     if re.search(r"RF9.*final analog.*128,128", text, flags=re.IGNORECASE) is None:
@@ -282,14 +306,16 @@ def require_runtime_source() -> str:
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
         ("outputs.buttonL = inputs.lt3;", "runtime source must assign LT3 to L button"),
         (
-            "outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11;",
-            "runtime source must assign RT1/LT1/RF11 shared Z carrier",
+            "outputs.buttonR = inputs.rt1 || inputs.lt5 || inputs.rf11;",
+            "runtime source must assign RT1/LT5/RF11 shared Z carrier",
         ),
         ("outputs.triggerLDigital = inputs.lt3;", "runtime source must assign LT3 to GameCube L carrier"),
         ("outputs.triggerRDigital = inputs.rf16;", "runtime source must assign RF16 to GameCube R carrier"),
         ("outputs.rightStickRight = inputs.rt4;", "runtime source must map RT4 to C-right"),
         ("outputs.rightStickUp = inputs.rt5;", "runtime source must map RT5 to C-up"),
         ("const bool null_modifier_active = inputs.rf9;", "runtime source must read RF9 null modifier input"),
+        ("const bool x1_active = inputs.lt4;", "runtime source must assign LT4 to X1"),
+        ("const bool x2_active = inputs.lt1;", "runtime source must assign LT1 to X2"),
     )
     for line, message in expected_source_lines:
         if line not in text:
@@ -299,6 +325,7 @@ def require_runtime_source() -> str:
         "outputs.buttonL = inputs.lt1;",
         "outputs.buttonR = inputs.rt1;",
         "outputs.buttonR = inputs.rt1 || inputs.lt1;",
+        "outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11;",
         "outputs.triggerLDigital = inputs.lt1;",
         "outputs.y = inputs.rf6;",
         "outputs.modY = inputs.lt2;",
@@ -309,6 +336,8 @@ def require_runtime_source() -> str:
         "outputs.triggerRDigital = inputs.rf12;",
         "outputs.rightStickRight = inputs.rt5;",
         "outputs.rightStickUp = inputs.rt4;",
+        "const bool x1_active = inputs.lt5;",
+        "const bool x2_active = inputs.lt4;",
     )
     for line in forbidden_lines:
         if line in text:
@@ -371,10 +400,15 @@ def require_runtime_source() -> str:
     ) is None:
         fail("runtime source must include RF15 in LT1 low-table forced-up logic")
     if re.search(
-        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;",
+        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         text,
     ) is None:
-        fail("runtime source must alias LT1/RF11 for shared low-magnitude Z-airdodge override")
+        fail("runtime source must alias LT5/RF11 for shared low-magnitude Z-airdodge override")
+    if re.search(
+        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;",
+        text,
+    ):
+        fail("runtime source must not use stale LT1/RF11 Z-airdodge activation")
 
     if re.search(r"outputs\.dpadUp\s*=\s*inputs\.rt5\s*;", text) is None:
         fail("runtime source must map nunchuk-C D-pad Up to RT5")
@@ -386,14 +420,14 @@ def require_runtime_source() -> str:
         text,
         flags=re.DOTALL,
     ) is None:
-        fail("runtime source must apply LT1/RF11 hard override after direction-plus-A override")
+        fail("runtime source must apply LT5/RF11 hard override after direction-plus-A override")
 
     if re.search(
         r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
         text,
         flags=re.DOTALL,
     ) is None:
-        fail("runtime source must apply RF9 override after LT1/RF11 and direction-plus-A overrides")
+        fail("runtime source must apply RF9 override after LT5/RF11 and direction-plus-A overrides")
 
     if re.search(r"outputs\.leftStickX\s*=\s*128\s*;", text) is None:
         fail("runtime source must assign RF9 final leftStickX override to 128")
@@ -458,6 +492,8 @@ def main() -> int:
 
         artifact_mapping = explicit_self_activate_map(artifact_mode, ARTIFACT_PATH)
         fixture_mapping = explicit_self_activate_map(fixture_mode, FIXTURE_PATH)
+        ensure_role_inputs_not_in_socd_pairs(artifact_mode, ARTIFACT_PATH)
+        ensure_role_inputs_not_in_socd_pairs(fixture_mode, FIXTURE_PATH)
 
         for button in RUNTIME_REQUIRED_SELF_ACTIVATES:
             if artifact_mapping.get(button) != button:
@@ -488,8 +524,8 @@ def main() -> int:
     print("rf4_up_conflict=absent")
     print("lt3_role=L")
     print("tilt3_role=RF3+RF4")
-    print("lt1_rf11_role=Z_plus_low_magnitude_override_alias")
-    print("z_role=RT1_or_LT1_or_RF11")
+    print("lt5_rf11_role=Z_plus_low_magnitude_override_alias")
+    print("z_role=RT1_or_LT5_or_RF11")
     print("r_role=RF16")
     print("y_role=RF10")
     print("b_role=RF5_or_LF4")

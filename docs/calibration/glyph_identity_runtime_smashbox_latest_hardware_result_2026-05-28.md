@@ -64,3 +64,13 @@
 - Result applies to current hardcoded runtime firmware plus explicit self-activated identity profile.
 - Future modifier value changes require new firmware build until config-driven modifier tables are implemented.
 - Profile was not re-pushed in this run; this is intentionally recorded as resident-profile compatibility, not as a fresh serial-write validation.
+
+## 2026-05-31 Amendment: LT1/LT4/LT5 Role Relocation
+
+- The PASS rows in this document predate the LT1/LT4/LT5 runtime role relocation.
+- Relocated runtime roles requiring a new hardware validation pass are:
+  - `LT5 = Z` low-magnitude neutral-airdodge-safe override,
+  - `LT4 = X1`,
+  - `LT1 = X2`,
+  - `RF11 = Z` low-magnitude alias (unchanged alias role).
+- Do not claim PASS for the relocated LT1/LT4/LT5 role set until a new hardware result documents those rows.
