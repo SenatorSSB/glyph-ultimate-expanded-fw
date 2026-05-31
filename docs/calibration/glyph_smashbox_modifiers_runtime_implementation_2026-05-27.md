@@ -426,3 +426,8 @@ Manual hardware validation is required for:
 - Current branch after commit `68474ccbb818ff23350908ccfcb8f59ec6207d4e` is hardware-confirmed by user report.
 - Latest result doc: `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`.
 - Profile was not re-pushed for this run because the resident explicit self-activated identity profile persisted across firmware updates and remained compatible with the tested firmware.
+
+## 2026-05-31 Amendment: LT1/LT4/LT5 Relocation Hardware Confirmation
+
+- LT1/LT4/LT5 relocation has now been hardware-confirmed.
+- Latest hardware result doc: `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`.

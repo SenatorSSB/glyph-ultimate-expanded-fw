@@ -150,3 +150,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 - Current plan rows are satisfied by:
   - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
 - Nunchuk remains unavailable/not tested.
+
+## 2026-05-31 Relocation Note
+
+- LT1/LT4/LT5 relocation rows are satisfied by latest hardware result doc:
+  - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`

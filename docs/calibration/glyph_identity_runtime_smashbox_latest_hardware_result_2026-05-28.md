@@ -65,12 +65,22 @@
 - Future modifier value changes require new firmware build until config-driven modifier tables are implemented.
 - Profile was not re-pushed in this run; this is intentionally recorded as resident-profile compatibility, not as a fresh serial-write validation.
 
-## 2026-05-31 Amendment: LT1/LT4/LT5 Role Relocation
+## LT1/LT4/LT5 Relocation Hardware Result
 
-- The PASS rows in this document predate the LT1/LT4/LT5 runtime role relocation.
-- Relocated runtime roles requiring a new hardware validation pass are:
-  - `LT5 = Z` low-magnitude neutral-airdodge-safe override,
-  - `LT4 = X1`,
-  - `LT1 = X2`,
-  - `RF11 = Z` low-magnitude alias (unchanged alias role).
-- Do not claim PASS for the relocated LT1/LT4/LT5 role set until a new hardware result documents those rows.
+- Date: `2026-05-28`
+- User confirmation quote: "works, it's time to merge"
+- Result: `PASS_USER_REPORTED`
+
+| Row | Result |
+| --- | --- |
+| LT5 Z-airdodge primary | PASS_USER_REPORTED |
+| RF11 Z-airdodge alias | PASS_USER_REPORTED |
+| LT4 X1/MX1 | PASS_USER_REPORTED |
+| LT1 X2/MX2 | PASS_USER_REPORTED |
+| stale LT1 Z-airdodge removed | PASS_USER_REPORTED |
+| stale LT5 X1 removed | PASS_USER_REPORTED |
+| stale LT4 X2 removed | PASS_USER_REPORTED |
+| prior branch behavior preserved | PASS_USER_REPORTED |
+| nunchuk | NOT_TESTED_UNAVAILABLE |
+
+- Final disposition remains: `PASS_IDENTITY_RUNTIME_SMASHBOX_LATEST_PROFILE`
