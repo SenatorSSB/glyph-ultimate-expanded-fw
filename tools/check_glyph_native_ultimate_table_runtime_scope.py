@@ -216,8 +216,8 @@ def extract_table_values(source: str, table_name: str) -> list[tuple[int, int]]:
 
 def ensure_required_shapes(source: str, block: str) -> None:
     require(r"mode_active\s*=\s*inputs\.rf8\s*;", block, "Mode anchor rf8")
-    require(r"x1_active\s*=\s*inputs\.lt5\s*;", block, "X1 anchor lt5")
-    require(r"x2_active\s*=\s*inputs\.lt4\s*;", block, "X2 anchor lt4")
+    require(r"x1_active\s*=\s*inputs\.lt4\s*;", block, "X1 anchor lt4")
+    require(r"x2_active\s*=\s*inputs\.lt1\s*;", block, "X2 anchor lt1")
     require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
     require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
     require(r"null_modifier_active\s*=\s*inputs\.rf9\s*;", block, "RF9 null-modifier anchor")
@@ -225,9 +225,9 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"outputs\.buttonL\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L")
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L carrier")
     require(
-        r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;",
+        r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         source,
-        "RT1/LT1/RF11 mapped to Z",
+        "RT1/LT5/RF11 mapped to Z",
     )
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 mapped to R")
     require(
@@ -242,6 +242,14 @@ def ensure_required_shapes(source: str, block: str) -> None:
         fail("RT1-only Z carrier is outdated")
     if "outputs.buttonR = inputs.rt1 || inputs.lt1;" in source:
         fail("RT1/LT1-only Z carrier is outdated")
+    if "outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11;" in source:
+        fail("stale RT1/LT1/RF11 Z carrier is outdated")
+    if re.search(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt5\s*;", block):
+        fail("stale X1 anchor lt5 must be removed")
+    if re.search(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt4\s*;", block):
+        fail("stale X2 anchor lt4 must be removed")
+    if re.search(r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;", block):
+        fail("stale LT1/RF11 Z-airdodge activation shape must be removed")
 
     # Y2/MY2 are scratched and removed from runtime source selection.
     for token in ("y2_active", "EffectiveModifier::Y2", "kY2Table", "kMY2Table"):
@@ -263,12 +271,12 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(
         r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
         source,
-        "LT1 forced-up includes RF15",
+        "Z-airdodge forced-up includes RF15",
     )
     require(
-        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;",
+        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         block,
-        "LT1/RF11 shared low-magnitude override alias",
+        "LT5/RF11 shared low-magnitude override alias",
     )
 
     require(r"constexpr\s+StickPoint\s+kLt1LowMagnitudeTable\[9\]", source, "LT1 low table declaration")
@@ -348,13 +356,13 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(
         r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{",
         block,
-        "LT1/RF11 override is final after direction-plus-A",
+        "LT5/RF11 override is final after direction-plus-A",
         flags=re.DOTALL,
     )
     require(
         r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
         block,
-        "RF9 override is final after LT1/RF11 and direction-plus-A",
+        "RF9 override is final after LT5/RF11 and direction-plus-A",
         flags=re.DOTALL,
     )
     require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X")
@@ -419,13 +427,13 @@ def main() -> int:
     print("ls_to_dpad_role=rf7")
     print("mode_role=rf8")
     print("lt3_role=L")
-    print("lt1_rf11_role=Z_plus_low_magnitude_override_alias")
-    print("z_role=rt1_or_lt1_or_rf11")
+    print("lt5_rf11_role=Z_plus_low_magnitude_override_alias")
+    print("z_role=rt1_or_lt5_or_rf11")
     print("r_role=rf16")
     print("y_role=rf10")
     print("forced_up_role=rf6_or_rf12_or_rf15")
     print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
-    print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_lt1_low_override")
+    print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_lt5_low_override")
     print("y1_tilt1_special_composite=enabled")
     print("rt4_rt5_cstick_swap=enabled")
     print("rf9_null_modifier=enabled")

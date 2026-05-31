@@ -67,12 +67,14 @@ Do not apply this identity artifact expecting full Smash Box X/Y/Mode/LS->DPad b
 - `BTN_LT6` and `BTN_RF12` remain explicit self-activated identity inputs in `MODE_ULTIMATE` for runtime-owned direction-plus-A behavior.
 - `BTN_RF16` remains an explicit self-activated identity input for runtime-owned `R`.
 
-## 2026-05-28 LT1/LT3 Runtime Role Amendment
+## 2026-05-28 LT1/LT4/LT5 Runtime Role Amendment
 
-- `BTN_LT1` and `BTN_LT3` remain explicit self-activated identity inputs in the active artifact and MVP fixture.
+- `BTN_LT1`, `BTN_LT4`, `BTN_LT5`, and `BTN_LT3` remain explicit self-activated identity inputs in the active artifact and MVP fixture.
 - Runtime roles changed while identity representation remained unchanged:
-  - `LT1` is runtime-owned `Z` plus low-magnitude neutral-airdodge-safe directional override.
-  - `LT3` is runtime-owned `L`.
+  - `LT5` is runtime-owned `Z` plus low-magnitude neutral-airdodge-safe directional override.
+  - `LT4` is runtime-owned `X1`.
+  - `LT1` is runtime-owned `X2`.
+  - `LT3` remains runtime-owned `L`.
 
 ## 2026-05-28 Resident Profile Hardware Amendment
 

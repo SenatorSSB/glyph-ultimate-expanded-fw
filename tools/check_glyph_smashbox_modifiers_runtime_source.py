@@ -194,13 +194,14 @@ def mode_ultimate(payload: dict[str, object], path: Path) -> dict[str, object]:
     return {}
 
 
-def ensure_rf11_profile_contract(path: Path) -> None:
+def ensure_identity_profile_contract(path: Path) -> None:
     mode = mode_ultimate(load_json(path), path)
     remaps = mode.get("buttonRemapping")
     if not isinstance(remaps, list):
         fail(f"MODE_ULTIMATE.buttonRemapping must be a list in {path.relative_to(REPO_ROOT)}")
 
-    rf11_self_activated = False
+    required_self_activates = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11"}
+    observed_self_activates: set[str] = set()
     for index, remap in enumerate(remaps):
         if not isinstance(remap, dict):
             fail(f"buttonRemapping[{index}] must be object in {path.relative_to(REPO_ROOT)}")
@@ -212,22 +213,30 @@ def ensure_rf11_profile_contract(path: Path) -> None:
             fail(f"buttonRemapping[{index}] missing activates in {path.relative_to(REPO_ROOT)}")
         if activates != physical:
             fail(f"semantic remap present in MODE_ULTIMATE {path.relative_to(REPO_ROOT)}: {physical}->{activates}")
-        if physical == "BTN_RF11" and activates == "BTN_RF11":
-            rf11_self_activated = True
+        if physical in required_self_activates:
+            observed_self_activates.add(physical)
 
-    if not rf11_self_activated:
-        fail(f"BTN_RF11 must self-activate in {path.relative_to(REPO_ROOT)}")
+    missing_self_activates = sorted(required_self_activates - observed_self_activates)
+    if missing_self_activates:
+        fail(
+            "missing required explicit self-activates in "
+            f"{path.relative_to(REPO_ROOT)}: {', '.join(missing_self_activates)}"
+        )
 
     socd_pairs = mode.get("socdPairs")
     if not isinstance(socd_pairs, list):
         fail(f"MODE_ULTIMATE.socdPairs must be a list in {path.relative_to(REPO_ROOT)}")
+    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11"}
     for index, pair in enumerate(socd_pairs):
         if not isinstance(pair, dict):
             fail(f"socdPairs[{index}] must be object in {path.relative_to(REPO_ROOT)}")
         left = pair.get("buttonDir1")
         right = pair.get("buttonDir2")
-        if left == "BTN_RF11" or right == "BTN_RF11":
-            fail(f"BTN_RF11 must not appear in MODE_ULTIMATE.socdPairs in {path.relative_to(REPO_ROOT)}")
+        if left in forbidden_socd_inputs or right in forbidden_socd_inputs:
+            fail(
+                "LT1/LT4/LT5/RF11 must not appear in MODE_ULTIMATE.socdPairs in "
+                f"{path.relative_to(REPO_ROOT)}"
+            )
 
 
 def read_runtime_doc() -> str:
@@ -236,14 +245,16 @@ def read_runtime_doc() -> str:
     text = RUNTIME_DOC_PATH.read_text(encoding="utf-8")
 
     require(r"LT3\s*=\s*L", text, "runtime doc LT3=L")
-    require(r"LT1\s*=\s*Z", text, "runtime doc LT1=Z")
+    require(r"LT5\s*=\s*Z", text, "runtime doc LT5=Z")
     require(r"RF11\s*=\s*Z", text, "runtime doc RF11=Z alias")
     require(
-        r"RF11.*((alias|identic|same).*LT1|LT1.*(alias|identic|same))",
+        r"RF11.*((alias|identic|same).*LT5|LT5.*(alias|identic|same))",
         text,
-        "runtime doc RF11 aliases LT1 behavior",
+        "runtime doc RF11 aliases LT5 behavior",
         flags=re.IGNORECASE,
     )
+    require(r"LT4\s*=\s*X1", text, "runtime doc LT4=X1")
+    require(r"LT1\s*=\s*X2", text, "runtime doc LT1=X2")
     require(r"RF15\s*=\s*Up\+A", text, "runtime doc RF15 Up+A alias")
     require(r"RF9\s*=\s*null modifier", text, "runtime doc RF9 null modifier role")
     require(r"RF9.*final analog.*128,128", text, "runtime doc RF9 final analog override", flags=re.IGNORECASE)
@@ -267,17 +278,25 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     require(r"outputs\.buttonL\s*=\s*inputs\.lt3\s*;", source, "LT3 drives L")
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 drives L digital carrier")
     require(
-        r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;",
+        r"outputs\.buttonR\s*=\s*inputs\.rt1\s*\|\|\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         source,
-        "RT1/LT1/RF11 shared Z carrier",
+        "RT1/LT5/RF11 shared Z carrier",
     )
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 remains R carrier")
     require(r"const\s+bool\s+null_modifier_active\s*=\s*inputs\.rf9\s*;", block, "RF9 null modifier input")
     require(
-        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;",
+        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         block,
-        "LT1/RF11 shared low-magnitude override alias",
+        "LT5/RF11 shared low-magnitude override alias",
     )
+    require(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt4\s*;", block, "X1 input is LT4")
+    require(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt1\s*;", block, "X2 input is LT1")
+    if re.search(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt5\s*;", block):
+        fail("stale x1_active=inputs.lt5 runtime shape must be removed")
+    if re.search(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt4\s*;", block):
+        fail("stale x2_active=inputs.lt4 runtime shape must be removed")
+    if re.search(r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt1\s*\|\|\s*inputs\.rf11\s*;", block):
+        fail("stale LT1/RF11 Z-airdodge activation shape must be removed")
 
     # Remove old LT1/LT3/Y2 shapes.
     if "outputs.buttonL = inputs.lt1;" in source:
@@ -285,7 +304,9 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     if "outputs.triggerLDigital = inputs.lt1;" in source:
         fail("LT1 must no longer drive L digital carrier")
     if "outputs.buttonR = inputs.rt1;" in source:
-        fail("Z carrier must include LT1 in addition to RT1")
+        fail("Z carrier must include LT5 in addition to RT1")
+    if "outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11;" in source:
+        fail("stale RT1/LT1/RF11 Z carrier must be removed")
     if re.search(r"\by2_active\b", source):
         fail("Y2 active runtime path must be removed")
     if "EffectiveModifier::Y2" in source:
@@ -367,14 +388,14 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         if point not in source:
             fail(f"missing LT1 low-magnitude point: {point}")
 
-    # LT1 hard final override ordering.
+    # LT5 hard final override ordering.
     require(r"if\s*\(\s*direction_plus_a_active\s*\)", block, "direction-plus-A override block")
-    require(r"if\s*\(\s*z_airdodge_override_active\s*\)", block, "LT1/RF11 hard override block")
+    require(r"if\s*\(\s*z_airdodge_override_active\s*\)", block, "LT5/RF11 hard override block")
     require(r"if\s*\(\s*null_modifier_active\s*\)", block, "RF9 null override block")
     require(
         r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
         block,
-        "RF9 override occurs after LT1/RF11 and direction-plus-A overrides",
+        "RF9 override occurs after LT5/RF11 and direction-plus-A overrides",
         flags=re.DOTALL,
     )
     require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X override")
@@ -382,7 +403,7 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     require(r"outputs\.leftStickX\s*=\s*128\s*;", block, "RF9 final X override")
     require(r"outputs\.leftStickY\s*=\s*128\s*;", block, "RF9 final Y override")
 
-    # LS->DPad keeps analog centering and suppresses LT1 low-table override in that branch.
+    # LS->DPad keeps analog centering and suppresses LT5 low-table override in that branch.
     require(
         r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{\s*const\s+StickPoint\s+center\s*=\s*mode_active\s*\?\s*kModeDefaultTable\[kDirectionFiveIndex\]\s*:\s*kDefaultTable\[kDirectionFiveIndex\]\s*;\s*outputs\.leftStickX\s*=\s*center\.x\s*;\s*outputs\.leftStickY\s*=\s*center\.y\s*;\s*\}\s*else\s*\{",
         block,
@@ -402,7 +423,7 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     if re.search(r"outputs\.(?!buttonR)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf11", source):
         fail("RF11 must not drive outputs other than the shared Z carrier")
 
-    # RF15 aliases RF12 across forced-up/direction-plus-A and LT1 direction resolution.
+    # RF15 aliases RF12 across forced-up/direction-plus-A and LT5 direction resolution.
     require(
         r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
         source,
@@ -416,7 +437,7 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     require(
         r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
         block,
-        "LT1 low-table forced-up includes RF15",
+        "LT5 low-table forced-up includes RF15",
     )
 
     # C-stick right/up swap and nunchuk-C passthrough consistency.
@@ -441,8 +462,8 @@ def main() -> int:
     try:
         block = extract_marker_block(source)
         read_runtime_doc()
-        ensure_rf11_profile_contract(ARTIFACT_PATH)
-        ensure_rf11_profile_contract(FIXTURE_PATH)
+        ensure_identity_profile_contract(ARTIFACT_PATH)
+        ensure_identity_profile_contract(FIXTURE_PATH)
         ensure_runtime_shapes(source, block)
     except AssertionError as exc:
         print("status=FAIL")
@@ -457,13 +478,13 @@ def main() -> int:
     print("forced_up_role=rf6_or_rf12_or_rf15")
     print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
     print("lt3_role=L")
-    print("lt1_rf11_role=Z_plus_low_magnitude_override_alias")
-    print("z_button_role=rt1_or_lt1_or_rf11_shared_buttonR_carrier")
+    print("lt5_rf11_role=Z_plus_low_magnitude_override_alias")
+    print("z_button_role=rt1_or_lt5_or_rf11_shared_buttonR_carrier")
     print("r_button_role=rf16")
     print("y1_tilt1_special_composite=enabled")
     print("rt4_rt5_cstick_swap=enabled")
     print("rf9_null_modifier=enabled")
-    print("rf11_profile_socd_semantic_remap_conflicts=absent")
+    print("lt1_lt4_lt5_rf11_profile_socd_semantic_remap_conflicts=absent")
     print("y2_my2_runtime_role=scratched_inactive")
     print("ls_to_dpad_role=rf7")
     return 0

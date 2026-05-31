@@ -112,7 +112,7 @@ constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
 
-// LT1/RF11 provide Z plus a low-magnitude left-stick override for neutral-airdodge-safe output.
+// LT5/RF11 provide Z plus a low-magnitude left-stick override for neutral-airdodge-safe output.
 constexpr StickPoint kLt1LowMagnitudeTable[9] = {
     {89, 89}, {128, 79}, {167, 89},
     {79, 128}, {128, 128}, {177, 128},
@@ -249,7 +249,7 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.y = inputs.rf10;
     outputs.buttonL = inputs.lt3;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
-    outputs.buttonR = inputs.rt1 || inputs.lt1 || inputs.rf11;
+    outputs.buttonR = inputs.rt1 || inputs.lt5 || inputs.rf11;
     outputs.triggerLDigital = inputs.lt3;
     outputs.triggerRDigital = inputs.rf16;
 
@@ -316,10 +316,10 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
 
     // Senscope Glyph Smash Box runtime begin
     const bool mode_active = inputs.rf8;
-    const bool x1_active = inputs.lt5;
-    const bool x2_active = inputs.lt4;
+    const bool x1_active = inputs.lt4;
+    const bool x2_active = inputs.lt1;
     const bool y1_active = inputs.lt2;
-    const bool z_airdodge_override_active = inputs.lt1 || inputs.rf11;
+    const bool z_airdodge_override_active = inputs.lt5 || inputs.rf11;
     const bool null_modifier_active = inputs.rf9;
     const bool ls_to_dpad_active = inputs.rf7;
     const bool down_a_active = inputs.lt6;
