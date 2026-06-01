@@ -173,6 +173,54 @@ MLAYER_FLIPPER_POINTS = (
     "{87, 169}",
 )
 
+LAYER_NORMAL_X_POINTS = (
+    "{87, 51}",
+    "{128, 51}",
+    "{169, 51}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 205}",
+    "{128, 205}",
+    "{169, 205}",
+)
+
+MLAYER_NORMAL_X_POINTS = (
+    "{87, 87}",
+    "{128, 87}",
+    "{169, 87}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+)
+
+Y1_LAYER_NORMAL_X_POINTS = (
+    "{87, 99}",
+    "{128, 99}",
+    "{169, 99}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 157}",
+    "{128, 157}",
+    "{169, 157}",
+)
+
+MY1_LAYER_NORMAL_X_POINTS = (
+    "{87, 179}",
+    "{128, 179}",
+    "{169, 179}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 77}",
+    "{128, 77}",
+    "{169, 77}",
+)
+
 
 def fail(message: str) -> None:
     raise AssertionError(message)
@@ -288,6 +336,8 @@ def read_runtime_doc() -> str:
     require(r"LF7\s*=\s*layer-right button", text, "runtime doc LF7 layer-right role")
     require(r"RF4.*flipper", text, "runtime doc RF4 layered flipper role", flags=re.IGNORECASE)
     require(r"RF3.*B", text, "runtime doc RF3 layered B role")
+    require(r"RF3.*normal[\s-]*x", text, "runtime doc RF3 layered normal-x role", flags=re.IGNORECASE)
+    require(r"RF4.*wins.*RF3|RF3.*RF4.*wins", text, "runtime doc RF4 layered precedence over RF3 normal-x", flags=re.IGNORECASE)
     require(r"RF2.*forced Up|forced Up.*RF2", text, "runtime doc RF2 layered forced-Up role", flags=re.IGNORECASE)
     require(r"RT4\s*=\s*C-Right", text, "runtime doc RT4 C-right")
     require(r"RT5\s*=\s*C-Up", text, "runtime doc RT5 C-up")
@@ -366,13 +416,33 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     )
     require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_active\s*;", block, "RF3 Tilt1 gated by !layer_active")
     require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_active\s*;", block, "RF4 Tilt2 gated by !layer_active")
+    require(r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*;", block, "layered RF3 normal-x active")
     require(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", block, "layered RF4 flipper active")
+    require(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", source, "RF4 layered precedence over RF3 normal-x")
+    require(r"EffectiveModifier::LayerNormalX", source, "effective modifier includes layer RF3 normal-x")
     require(
-        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
         source,
-        "table selection includes layered RF4 flipper modifier",
+        "table selection includes layered RF3 normal-x and RF4 flipper modifiers",
         flags=re.DOTALL,
     )
+
+    require(r"constexpr\s+StickPoint\s+kLayerNormalXTable\[9\]", source, "layer normal-x table declaration")
+    for point in LAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing layer RF3 normal-x point: {point}")
+    require(r"constexpr\s+StickPoint\s+kMLayerNormalXTable\[9\]", source, "mode layer normal-x table declaration")
+    for point in MLAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing mode layer RF3 normal-x point: {point}")
+    require(r"constexpr\s+StickPoint\s+kY1LayerNormalXTable\[9\]", source, "Y1 layer normal-x table declaration")
+    for point in Y1_LAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing Y1 layer RF3 normal-x point: {point}")
+    require(r"constexpr\s+StickPoint\s+kMY1LayerNormalXTable\[9\]", source, "mode Y1 layer normal-x table declaration")
+    for point in MY1_LAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing mode Y1 layer RF3 normal-x point: {point}")
 
     require(r"constexpr\s+StickPoint\s+kLayerFlipperTable\[9\]", source, "layer flipper table declaration")
     for point in LAYER_FLIPPER_POINTS:

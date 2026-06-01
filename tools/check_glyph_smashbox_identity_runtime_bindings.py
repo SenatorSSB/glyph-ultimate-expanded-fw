@@ -183,6 +183,54 @@ MLAYER_FLIPPER_POINTS = (
     "{87, 169}",
 )
 
+LAYER_NORMAL_X_POINTS = (
+    "{87, 51}",
+    "{128, 51}",
+    "{169, 51}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 205}",
+    "{128, 205}",
+    "{169, 205}",
+)
+
+MLAYER_NORMAL_X_POINTS = (
+    "{87, 87}",
+    "{128, 87}",
+    "{169, 87}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+)
+
+Y1_LAYER_NORMAL_X_POINTS = (
+    "{87, 99}",
+    "{128, 99}",
+    "{169, 99}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 157}",
+    "{128, 157}",
+    "{169, 157}",
+)
+
+MY1_LAYER_NORMAL_X_POINTS = (
+    "{87, 179}",
+    "{128, 179}",
+    "{169, 179}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 77}",
+    "{128, 77}",
+    "{169, 77}",
+)
+
 
 def fail(message: str) -> None:
     raise AssertionError(message)
@@ -307,6 +355,10 @@ def require_runtime_doc() -> str:
         fail("runtime doc must document RF4 layered flipper behavior")
     if re.search(r"RF3.*B", text) is None:
         fail("runtime doc must document RF3 layered B behavior")
+    if re.search(r"RF3.*normal[\s-]*x", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF3 layered normal-x behavior")
+    if re.search(r"RF4.*wins.*RF3|RF3.*RF4.*wins", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF4 layered precedence over RF3 normal-x")
     if re.search(r"RF2.*forced Up|forced Up.*RF2", text, flags=re.IGNORECASE) is None:
         fail("runtime doc must document RF2 layered forced-Up behavior")
     if re.search(r"RT4\s*=\s*C-Right", text) is None or re.search(r"RT5\s*=\s*C-Up", text) is None:
@@ -515,6 +567,18 @@ def require_runtime_source() -> str:
         fail("runtime source must gate RF4 Tilt2 by !layer_active")
     if re.search(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", text) is None:
         fail("runtime source must define layered RF4 flipper activation")
+    if re.search(r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*;", text) is None:
+        fail("runtime source must define layered RF3 normal-x activation")
+    if re.search(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", text) is None:
+        fail("runtime source must enforce RF4-over-RF3 layered modifier precedence")
+    if re.search(r"EffectiveModifier::LayerNormalX", text) is None:
+        fail("runtime source must define layered RF3 normal-x effective modifier")
+    if re.search(
+        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must pass layer RF3 normal-x and RF4 flipper into table selection")
 
     if re.search(r"constexpr\s+StickPoint\s+kLayerFlipperTable\[9\]", text) is None:
         fail("runtime source must define non-Mode layer RF4 flipper table")
@@ -526,6 +590,27 @@ def require_runtime_source() -> str:
     for point in MLAYER_FLIPPER_POINTS:
         if point not in text:
             fail(f"runtime source missing Mode layer RF4 flipper point: {point}")
+
+    if re.search(r"constexpr\s+StickPoint\s+kLayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define non-Mode layer RF3 normal-x table")
+    for point in LAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing layer RF3 normal-x point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kMLayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define Mode layer RF3 normal-x table")
+    for point in MLAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode layer RF3 normal-x point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kY1LayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define Y1 layer RF3 normal-x table")
+    for point in Y1_LAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Y1 layer RF3 normal-x point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kMY1LayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define Mode Y1 layer RF3 normal-x table")
+    for point in MY1_LAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode Y1 layer RF3 normal-x point: {point}")
 
     if "outputs.dpadLeft |= inputs.lf8;" in text or "outputs.dpadRight |= inputs.lf6;" in text:
         fail("runtime source must not preserve old standalone D-pad direct inputs")

@@ -100,7 +100,7 @@ Empty/no-output physical IDs:
 - `LT3 = L` (game output role; no longer a modifier role)
 - `RF7 = LS->DPad`
 - `RF6 = forced Up`
-- `RF3 = Tilt1` when LF7/LF8 layer is inactive; `RF3 = B` when LF7/LF8 layer is active
+- `RF3 = Tilt1` when LF7/LF8 layer is inactive; `RF3 = B + normal x-only 41px modifier` when LF7/LF8 layer is active
 - `RF4 = Tilt2` when LF7/LF8 layer is inactive; `RF4 = flipper x-only modifier` when LF7/LF8 layer is active
 - `RF3 + RF4 = Tilt3` only when LF7/LF8 layer is inactive
 - `RF11` is runtime-owned Z-airdodge alias behavior and is not a modifier-table role.
@@ -165,7 +165,7 @@ Layer direction behavior:
 Layer role changes while `layer_active`:
 
 - `RF4` changes from Tilt2 to a flipper x-only modifier.
-- `RF3` changes from Tilt1 to B.
+- `RF3` changes from Tilt1 to B plus a normal x-only 41px modifier.
 - `RF2` changes from X to forced Up.
 
 Inactive-layer behavior (preserved):
@@ -178,10 +178,29 @@ Inactive-layer behavior (preserved):
 Digital output policy:
 
 - `outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && inputs.rf3);`
-- `RF3` does not produce B when layer is inactive except existing B sources (`RF5`, `LF4`).
+- `RF3` does not produce B when layer is inactive except existing B sources (`RF5`, `LF4`), but under layer it still contributes B while also selecting the layer normal-x modifier path.
 - `outputs.x = inputs.rf2 && !layer_active;`
 - `RF2` does not output X while layer is active.
 - `RF4` does not directly output a game button in either mode.
+
+RF3 layer normal-x tables:
+
+- Non-Mode layer RF3 normal-x table (Default y):
+  - `1=(87,51) 2=(128,51) 3=(169,51)`
+  - `4=(87,128) 5=(128,128) 6=(169,128)`
+  - `7=(87,205) 8=(128,205) 9=(169,205)`
+- Mode layer RF3 normal-x table (Mode-default y):
+  - `1=(87,87) 2=(128,87) 3=(169,87)`
+  - `4=(87,169) 5=(128,169) 6=(169,169)`
+  - `7=(87,169) 8=(128,169) 9=(169,169)`
+- Y1 + layer RF3 normal-x table:
+  - `1=(87,99) 2=(128,99) 3=(169,99)`
+  - `4=(87,128) 5=(128,128) 6=(169,128)`
+  - `7=(87,157) 8=(128,157) 9=(169,157)`
+- Mode + Y1 + layer RF3 normal-x table:
+  - `1=(87,179) 2=(128,179) 3=(169,179)`
+  - `4=(87,169) 5=(128,169) 6=(169,169)`
+  - `7=(87,77) 8=(128,77) 9=(169,77)`
 
 RF4 layer flipper tables:
 
@@ -202,12 +221,17 @@ RF4 layer flipper tables:
   - `4=(169,169) 5=(128,169) 6=(87,169)`
   - `7=(169,77) 8=(128,77) 9=(87,77)`
 
-Layer RF4 composition policy:
+Layer RF3/RF4 composition policy:
 
 - Layer RF4 is a special x-only modifier and does not count as Tilt2/Tilt3.
+- Layer RF3 is a normal x-only modifier and does not count as Tilt1 when layer is active.
+- If both layer RF3 and layer RF4 are active, RF4 flipper wins for x-modifier selection while RF3 still contributes B.
+- `layer_active + RF3 + RF4` resolves to `B + RF4 flipper` and not Tilt3.
+- If `layer_active && inputs.rf3` with no RF4 and no extra X/Tilt modifier activity, runtime uses layer RF3 normal-x behavior.
+- If `layer_active && inputs.rf3 && Y1` with no RF4 and no extra X/Tilt modifier activity, runtime uses Y1+layer RF3 normal-x behavior.
 - If `layer_active && inputs.rf4` and no other X/Tilt modifier is active, runtime uses layer RF4 flipper behavior.
 - If `layer_active && inputs.rf4 && Y1` and no other X/Tilt modifier is active, runtime uses Y1+layer RF4 table behavior.
-- If `layer_active && inputs.rf4` with extra X1/X2/Tilt modifier activity, runtime falls back to ordinary multi-modifier policy:
+- If `layer_active && (inputs.rf3 || inputs.rf4)` with extra X1/X2/Tilt modifier activity, runtime falls back to ordinary multi-modifier policy:
   - Mode inactive -> Default table
   - Mode active -> Mode default table
 - `Y1+Tilt1` special composite remains tied to actual Tilt1 and does not consume layered RF4 flipper state.
@@ -243,14 +267,14 @@ Tilt family compression:
   - `RF3` alone => effective Tilt1
   - `RF4` alone => effective Tilt2
 - While LF7/LF8 layer is active:
-  - `RF3` is B (not Tilt1)
+  - `RF3` is B + layer normal-x (not Tilt1)
   - `RF4` is layer flipper (not Tilt2)
-  - `RF3+RF4` is B + layer flipper (not Tilt3)
+  - `RF3+RF4` is B + layer flipper (RF4 wins x-modifier selection; not Tilt3)
 - Ordinary non-Mode Tilt1 y offset is `81` from neutral center `128`, yielding Tilt1 y values `47/128/209`.
 
 Active effective non-mode modifiers counted:
 
-- X1, X2, Y1, layer flipper, effective Tilt1/Tilt2/Tilt3
+- X1, X2, Y1, layer normal-x, layer flipper, effective Tilt1/Tilt2/Tilt3
 - RF9 is excluded from effective-modifier counting.
 - Direction-plus-A buttons `LT6` and `RF12` are not modifiers and do not participate in modifier-count composition.
 - Scratched/inactive tables `Y2/MY2` do not participate in modifier-count composition.
@@ -454,8 +478,9 @@ Manual hardware validation is required for:
 - `RF4` behaves as Tilt2 only when layer inactive and does not act as Up direction source,
 - `RF4` under layer behaves as flipper x-only modifier and not Tilt2/Tilt3,
 - `RF3` is Tilt1 only when layer inactive and does not press R,
-- `RF3` under layer asserts B and does not act as Tilt1,
-- `RF3+RF4` under layer resolves to B + flipper and not Tilt3,
+- `RF3` under layer asserts B + layer normal-x and does not act as Tilt1,
+- `RF3+RF4` under layer resolves to B + flipper (RF4 flipper wins over RF3 normal-x) and not Tilt3,
+- `Y1 + layer RF3` uses layer normal-x with Y1 y values (Mode/non-Mode variants),
 - `Y1 + layer RF4` uses the layer-flipper x behavior with Y1 y values (Mode/non-Mode variants),
 - `Y1+Tilt1` special composite rows (Mode and non-Mode),
 - Mode Y1+Tilt1 special composite rows use updated MY1 values (`179/169/77`),

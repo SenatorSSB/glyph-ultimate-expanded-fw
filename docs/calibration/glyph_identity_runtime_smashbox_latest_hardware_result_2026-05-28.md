@@ -90,3 +90,5 @@
 - The PASS result in this file predates LF7/LF8 layer-direction runtime behavior (`LF8=layer-left`, `LF7=layer-right`, layered `RF2/RF3/RF4` behavior).
 - This file does not validate the new LF7/LF8 layer-direction behavior.
 - A new hardware validation run is required before claiming PASS for the LF7/LF8 layer-direction runtime update.
+- The previous LF7/LF8 layer amendment also predates the RF3 layer normal-x modifier addition and RF4-over-RF3 layered precedence update.
+- RF3 layer normal-x behavior and RF4 layered precedence require a fresh hardware validation run before any PASS claim for this revision.

@@ -21,6 +21,10 @@ REQUIRED_TABLES = (
     "kMX2Table",
     "kY1Table",
     "kMY1Table",
+    "kLayerNormalXTable",
+    "kMLayerNormalXTable",
+    "kY1LayerNormalXTable",
+    "kMY1LayerNormalXTable",
     "kLayerFlipperTable",
     "kMLayerFlipperTable",
     "kY1Tilt1Table",
@@ -192,6 +196,54 @@ MLAYER_FLIPPER_POINTS = (
     (87, 169),
 )
 
+LAYER_NORMAL_X_POINTS = (
+    (87, 51),
+    (128, 51),
+    (169, 51),
+    (87, 128),
+    (128, 128),
+    (169, 128),
+    (87, 205),
+    (128, 205),
+    (169, 205),
+)
+
+MLAYER_NORMAL_X_POINTS = (
+    (87, 87),
+    (128, 87),
+    (169, 87),
+    (87, 169),
+    (128, 169),
+    (169, 169),
+    (87, 169),
+    (128, 169),
+    (169, 169),
+)
+
+Y1_LAYER_NORMAL_X_POINTS = (
+    (87, 99),
+    (128, 99),
+    (169, 99),
+    (87, 128),
+    (128, 128),
+    (169, 128),
+    (87, 157),
+    (128, 157),
+    (169, 157),
+)
+
+MY1_LAYER_NORMAL_X_POINTS = (
+    (87, 179),
+    (128, 179),
+    (169, 179),
+    (87, 169),
+    (128, 169),
+    (169, 169),
+    (87, 77),
+    (128, 77),
+    (169, 77),
+)
+
 FORBIDDEN_TOKENS = (
     "flash",
     "bootloader",
@@ -253,6 +305,14 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"layer_right_active\s*=\s*inputs\.lf7\s*;", source, "layer-right anchor lf7")
     require(r"layer_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer active aggregation")
     require(r"layer_rf2_force_up_active\s*=\s*layer_active\s*&&\s*inputs\.rf2\s*;", source, "layered RF2 forced-Up anchor")
+    require(r"layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*;", source, "layered RF3 normal-x anchor")
+    require(r"rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", source, "layered RF4 flipper anchor")
+    require(
+        r"layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;",
+        source,
+        "RF4 layered flipper precedence over RF3 normal-x",
+    )
+    require(r"EffectiveModifier::LayerNormalX", source, "layered RF3 normal-x effective modifier")
 
     require(r"outputs\.buttonL\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L")
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L carrier")
@@ -276,6 +336,12 @@ def ensure_required_shapes(source: str, block: str) -> None:
         r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*!layer_active\s*;",
         source,
         "RF2->X is gated by !layer_active",
+    )
+    require(
+        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        source,
+        "table selection includes layer RF3 normal-x and RF4 flipper modifiers",
+        flags=re.DOTALL,
     )
 
     if "outputs.buttonL = inputs.lt1;" in source:
@@ -360,6 +426,26 @@ def ensure_required_shapes(source: str, block: str) -> None:
     for x, y in MY1_POINTS:
         if f"{{{x}, {y}}}" not in source:
             fail(f"missing MY1 point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kLayerNormalXTable\[9\]", source, "layer normal-x table declaration")
+    for x, y in LAYER_NORMAL_X_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing layer normal-x point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMLayerNormalXTable\[9\]", source, "mode layer normal-x table declaration")
+    for x, y in MLAYER_NORMAL_X_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing mode layer normal-x point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kY1LayerNormalXTable\[9\]", source, "Y1 layer normal-x table declaration")
+    for x, y in Y1_LAYER_NORMAL_X_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing Y1 layer normal-x point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMY1LayerNormalXTable\[9\]", source, "mode Y1 layer normal-x table declaration")
+    for x, y in MY1_LAYER_NORMAL_X_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing mode Y1 layer normal-x point: ({x}, {y})")
 
     require(r"constexpr\s+StickPoint\s+kMTilt1Table\[9\]", source, "MTilt1 table declaration")
     for x, y in MTILT1_POINTS:

@@ -60,6 +60,19 @@ constexpr StickPoint kMY1Table[9] = {
     {14, 77}, {128, 77}, {242, 77},
 };
 
+// RF3 under LF7/LF8 layer is a normal x-only 41px modifier over default y rows.
+constexpr StickPoint kLayerNormalXTable[9] = {
+    {87, 51}, {128, 51}, {169, 51},
+    {87, 128}, {128, 128}, {169, 128},
+    {87, 205}, {128, 205}, {169, 205},
+};
+
+constexpr StickPoint kMLayerNormalXTable[9] = {
+    {87, 87}, {128, 87}, {169, 87},
+    {87, 169}, {128, 169}, {169, 169},
+    {87, 169}, {128, 169}, {169, 169},
+};
+
 // RF4 under LF7/LF8 layer is an x-only flipper modifier over default y rows.
 constexpr StickPoint kLayerFlipperTable[9] = {
     {169, 51}, {128, 51}, {87, 51},
@@ -95,6 +108,18 @@ constexpr StickPoint kMY1LayerFlipperTable[9] = {
     {169, 179}, {128, 179}, {87, 179},
     {169, 169}, {128, 169}, {87, 169},
     {169, 77}, {128, 77}, {87, 77},
+};
+
+constexpr StickPoint kY1LayerNormalXTable[9] = {
+    {87, 99}, {128, 99}, {169, 99},
+    {87, 128}, {128, 128}, {169, 128},
+    {87, 157}, {128, 157}, {169, 157},
+};
+
+constexpr StickPoint kMY1LayerNormalXTable[9] = {
+    {87, 179}, {128, 179}, {169, 179},
+    {87, 169}, {128, 169}, {169, 169},
+    {87, 77}, {128, 77}, {169, 77},
 };
 
 constexpr StickPoint kTilt1Table[9] = {
@@ -149,6 +174,7 @@ enum class EffectiveModifier {
     X1,
     X2,
     Y1,
+    LayerNormalX,
     LayerFlipper,
     Tilt1,
     Tilt2,
@@ -178,6 +204,7 @@ const StickPoint *SelectStickTable(
     bool x1_active,
     bool x2_active,
     bool y1_active,
+    bool layer_normal_x_active,
     bool layer_flipper_active,
     bool tilt1_effective,
     bool tilt2_effective,
@@ -188,7 +215,16 @@ const StickPoint *SelectStickTable(
         return mode_active ? kMY1Tilt1Table : kY1Tilt1Table;
     }
 
-    const bool y1_layer_flipper_special_active = y1_active && layer_flipper_active
+    const bool layer_flipper_effective = layer_flipper_active;
+    const bool layer_normal_x_effective = layer_normal_x_active && !layer_flipper_effective;
+
+    const bool y1_layer_normal_x_special_active = y1_active && layer_normal_x_effective
+        && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
+    if (y1_layer_normal_x_special_active) {
+        return mode_active ? kMY1LayerNormalXTable : kY1LayerNormalXTable;
+    }
+
+    const bool y1_layer_flipper_special_active = y1_active && layer_flipper_effective
         && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
     if (y1_layer_flipper_special_active) {
         return mode_active ? kMY1LayerFlipperTable : kY1LayerFlipperTable;
@@ -209,7 +245,11 @@ const StickPoint *SelectStickTable(
         active_modifier_count++;
         single_modifier = EffectiveModifier::Y1;
     }
-    if (layer_flipper_active) {
+    if (layer_normal_x_effective) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::LayerNormalX;
+    }
+    if (layer_flipper_effective) {
         active_modifier_count++;
         single_modifier = EffectiveModifier::LayerFlipper;
     }
@@ -237,6 +277,8 @@ const StickPoint *SelectStickTable(
                 return kX2Table;
             case EffectiveModifier::Y1:
                 return kY1Table;
+            case EffectiveModifier::LayerNormalX:
+                return kLayerNormalXTable;
             case EffectiveModifier::LayerFlipper:
                 return kLayerFlipperTable;
             case EffectiveModifier::Tilt1:
@@ -257,6 +299,8 @@ const StickPoint *SelectStickTable(
             return kMX2Table;
         case EffectiveModifier::Y1:
             return kMY1Table;
+        case EffectiveModifier::LayerNormalX:
+            return kMLayerNormalXTable;
         case EffectiveModifier::LayerFlipper:
             return kMLayerFlipperTable;
         case EffectiveModifier::Tilt1:
@@ -398,6 +442,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool direction_plus_a_active = down_a_active || up_a_active;
     const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || force_up_active);
 
+    const bool layer_rf3_normal_x_active = layer_active && inputs.rf3;
     const bool rf4_layer_flipper_active = layer_active && inputs.rf4;
     const bool tilt1_pressed = inputs.rf3 && !layer_active;
     const bool tilt2_pressed = inputs.rf4 && !layer_active;
@@ -411,6 +456,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         x1_active,
         x2_active,
         y1_active,
+        layer_rf3_normal_x_active,
         rf4_layer_flipper_active,
         tilt1_effective,
         tilt2_effective,

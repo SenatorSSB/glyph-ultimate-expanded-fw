@@ -85,11 +85,15 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF15 + LT6 override guard | `RF15 + LT6` | N/A | Up remains effective and A is asserted | NOT_TESTED |
 | RF6 + LT6 override guard | `RF6 + LT6` | N/A | Up remains effective and A is asserted | NOT_TESTED |
 | Tilt3 chord source | `RF3 + RF4` | 1..9 | Effective Tilt3 table (or MTilt3 when Mode on) | NOT_TESTED |
-| Layer RF3 as B | `LF8 + RF3` and `LF7 + RF3` | N/A | B output asserted; RF3 does not act as Tilt1 while layer is active | NOT_TESTED |
+| Layer RF3 normal-x baseline | `LF8/LF7 + RF3` | 1..9 | B asserted; RF3 uses layer normal-x table (non-Mode) and does not act as Tilt1 | NOT_TESTED |
+| Layer RF3 normal-x Mode baseline | `Mode + LF8/LF7 + RF3` | 1..9 | B asserted; RF3 uses layer normal-x Mode table | NOT_TESTED |
+| Layer RF3 + Y1 normal-x composite | `LF8/LF7 + RF3 + LT2` | 1..9 | B asserted; RF3 uses Y1 + layer normal-x table | NOT_TESTED |
+| Layer RF3 + Y1 normal-x Mode composite | `Mode + LF8/LF7 + RF3 + LT2` | 1..9 | B asserted; RF3 uses Mode + Y1 + layer normal-x table | NOT_TESTED |
 | RF3 non-layer Tilt1 baseline | `RF3` with LF7/LF8 layer inactive | 1..9 | RF3 acts as Tilt1 and does not add B beyond RF5/LF4 | NOT_TESTED |
 | Layer RF4 flipper baseline | `LF8 + RF4` and `LF7 + RF4` | 1..9 | RF4 uses layer flipper table (x-only flipper behavior) | NOT_TESTED |
 | RF4 non-layer Tilt2 baseline | `RF4` with LF7/LF8 layer inactive | 1..9 | RF4 acts as Tilt2 | NOT_TESTED |
-| Layer RF3+RF4 composition | `LF8/LF7 + RF3 + RF4` | 1..9 | Resolves to B + layer flipper; does not resolve to Tilt3 | NOT_TESTED |
+| Layer RF3+RF4 composition | `LF8/LF7 + RF3 + RF4` | 1..9 | Resolves to B + layer flipper; RF4 flipper wins over RF3 normal-x; does not resolve to Tilt3 | NOT_TESTED |
+| Layer RF3+RF4+Y1 composition | `LF8/LF7 + RF3 + RF4 + LT2` | 1..9 | Resolves to B + Y1 layer RF4 flipper table; RF4 precedence preserved | NOT_TESTED |
 | Non-layer RF3+RF4 Tilt3 baseline | `RF3 + RF4` with LF7/LF8 layer inactive | 1..9 | Resolves to Tilt3 | NOT_TESTED |
 | LT3 role | `LT3` only | N/A | L output asserted; LT3 is not a Y2 modifier role | NOT_TESTED |
 | RF4 role guard | `RF4` only (no direction inputs) | N/A | Tilt2 neutral-direction behavior; RF4 does not act as Up direction source | NOT_TESTED |
@@ -99,8 +103,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LT5 no longer X1 guard | `LT5` with direction (Mode off/on) | 1..9 | LT5 does not select X1/MX1 tables; LT5 remains Z-airdodge | NOT_TESTED |
 | LT4 no longer X2 guard | `LT4` with direction (Mode off/on) | 1..9 | LT4 does not select X2/MX2 tables; LT4 selects X1/MX1 | NOT_TESTED |
 | LT2 modY guard | `LT2` only | N/A | Y1 modifier behavior only and no LT2->modY output | NOT_TESTED |
-| Y1+Tilt1 special composite | `LT2 + RF3` | 1..9 | Uses special non-Mode composite table: `1=(169,99) 2=(128,99) 3=(87,99) 4=(169,128) 5=(128,128) 6=(87,128) 7=(169,157) 8=(128,157) 9=(87,157)` | NOT_TESTED |
-| Mode+Y1+Tilt1 special composite | `Mode + LT2 + RF3` | 1..9 | Uses special Mode composite table: `1=(169,179) 2=(128,179) 3=(87,179) 4=(169,169) 5=(128,169) 6=(87,169) 7=(169,77) 8=(128,77) 9=(87,77)` | NOT_TESTED |
+| Y1+Tilt1 special composite | `LT2 + RF3` with LF7/LF8 layer inactive | 1..9 | Uses special non-Mode composite table: `1=(169,99) 2=(128,99) 3=(87,99) 4=(169,128) 5=(128,128) 6=(87,128) 7=(169,157) 8=(128,157) 9=(87,157)` | NOT_TESTED |
+| Mode+Y1+Tilt1 special composite | `Mode + LT2 + RF3` with LF7/LF8 layer inactive | 1..9 | Uses special Mode composite table: `1=(169,179) 2=(128,179) 3=(87,179) 4=(169,169) 5=(128,169) 6=(87,169) 7=(169,77) 8=(128,77) 9=(87,77)` | NOT_TESTED |
 | Y1 + layer RF4 flipper composite | `LT2 + LF8/LF7 + RF4` | 1..9 | Uses Y1 + layer RF4 flipper table values | NOT_TESTED |
 | Mode + Y1 + layer RF4 flipper composite | `Mode + LT2 + LF8/LF7 + RF4` | 1..9 | Uses Mode + Y1 + layer RF4 flipper table values | NOT_TESTED |
 | Layer RF4 + extra modifier fallback | `LF8/LF7 + RF4 + (LT4/LT1/Tilt*)` (Mode optional) | Representative + 1..9 spot checks | Falls back to Default/Mode default policy | NOT_TESTED |
