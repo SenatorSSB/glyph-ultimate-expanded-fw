@@ -21,8 +21,12 @@ REQUIRED_TABLES = (
     "kMX2Table",
     "kY1Table",
     "kMY1Table",
+    "kLayerFlipperTable",
+    "kMLayerFlipperTable",
     "kY1Tilt1Table",
     "kMY1Tilt1Table",
+    "kY1LayerFlipperTable",
+    "kMY1LayerFlipperTable",
     "kTilt1Table",
     "kTilt2Table",
     "kTilt3Table",
@@ -164,6 +168,30 @@ MTILT3_POINTS = (
     (160, 170),
 )
 
+LAYER_FLIPPER_POINTS = (
+    (169, 51),
+    (128, 51),
+    (87, 51),
+    (169, 128),
+    (128, 128),
+    (87, 128),
+    (169, 205),
+    (128, 205),
+    (87, 205),
+)
+
+MLAYER_FLIPPER_POINTS = (
+    (169, 87),
+    (128, 87),
+    (87, 87),
+    (169, 169),
+    (128, 169),
+    (87, 169),
+    (169, 169),
+    (128, 169),
+    (87, 169),
+)
+
 FORBIDDEN_TOKENS = (
     "flash",
     "bootloader",
@@ -221,6 +249,10 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
     require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
     require(r"null_modifier_active\s*=\s*inputs\.rf9\s*;", block, "RF9 null-modifier anchor")
+    require(r"layer_left_active\s*=\s*inputs\.lf8\s*;", source, "layer-left anchor lf8")
+    require(r"layer_right_active\s*=\s*inputs\.lf7\s*;", source, "layer-right anchor lf7")
+    require(r"layer_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer active aggregation")
+    require(r"layer_rf2_force_up_active\s*=\s*layer_active\s*&&\s*inputs\.rf2\s*;", source, "layered RF2 forced-Up anchor")
 
     require(r"outputs\.buttonL\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L")
     require(r"outputs\.triggerLDigital\s*=\s*inputs\.lt3\s*;", source, "LT3 mapped to L carrier")
@@ -234,6 +266,16 @@ def ensure_required_shapes(source: str, block: str) -> None:
         r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
         source,
         "RF1/LT6/RF12/RF15 mapped to A",
+    )
+    require(
+        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_active\s*&&\s*inputs\.rf3\s*\)\s*;",
+        source,
+        "layered RF3 contributes to B",
+    )
+    require(
+        r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*!layer_active\s*;",
+        source,
+        "RF2->X is gated by !layer_active",
     )
 
     if "outputs.buttonL = inputs.lt1;" in source:
@@ -259,19 +301,19 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"direction_plus_a_active\s*=\s*down_a_active\s*\|\|\s*up_a_active\s*;", source, "hard direction-plus-A active flag")
     require(r"up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;", source, "RF15 aliases RF12 for Up+A")
     require(
-        r"direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*inputs\.rf6\s*\)\s*;",
+        r"direction_plus_a_force_up\s*=\s*direction_plus_a_active\s*&&\s*\(\s*up_a_active\s*\|\|\s*force_up_active\s*\)\s*;",
         source,
-        "hard direction-plus-A Up override (RF12/RF15 or RF6)",
+        "hard direction-plus-A Up override (RF12/RF15 or shared forced-up sources)",
     )
     require(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*layer_rf2_force_up_active\s*;",
         source,
-        "digital forced-up includes RF15",
+        "forced-up includes layered RF2",
     )
     require(
-        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*force_up_active\s*;",
         source,
-        "Z-airdodge forced-up includes RF15",
+        "Z-airdodge forced-up includes layered RF2 source",
     )
     require(
         r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
@@ -387,9 +429,9 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"outputs\.dpadUp\s*=\s*inputs\.rt5\s*;", source, "nunchuk-C Up uses RT5")
     require(r"outputs\.dpadRight\s*=\s*inputs\.rt4\s*;", source, "nunchuk-C Right uses RT4")
     require(
-        r"UpdateDirections\(\s*inputs\.lf3,\s*//\s*Left\s*inputs\.lf1,\s*//\s*Right\s*normal_effective_ls_down,\s*//\s*Down\s*normal_effective_ls_up,\s*//\s*Up\s*\(RF6 forced-Up\)\s*inputs\.rt3,\s*//\s*C-Left\s*inputs\.rt4,\s*//\s*C-Right\s*inputs\.rt2,\s*//\s*C-Down\s*inputs\.rt5,\s*//\s*C-Up",
+        r"UpdateDirections\(\s*effective_ls_left,\s*//\s*Left\s*\(LF3 \+ LF8 layer-left contribution with cancellation\)\s*effective_ls_right,\s*//\s*Right\s*\(LF1 \+ LF7 layer-right contribution with cancellation\)\s*effective_ls_down,\s*//\s*Down\s*\(LT6/LF5, suppressed by forced-Up\)\s*effective_ls_up,\s*//\s*Up\s*\(RF6/RF12/RF15 and layer RF2 forced-Up\)\s*inputs\.rt3,\s*//\s*C-Left\s*inputs\.rt4,\s*//\s*C-Right\s*inputs\.rt2,\s*//\s*C-Down\s*inputs\.rt5,\s*//\s*C-Up",
         source,
-        "UpdateDirections uses RT4 C-right and RT5 C-up",
+        "UpdateDirections uses layer-aware effective LS directions and RT4/RT5 C-stick mapping",
         flags=re.DOTALL,
     )
 
@@ -431,7 +473,7 @@ def main() -> int:
     print("z_role=rt1_or_lt5_or_rf11")
     print("r_role=rf16")
     print("y_role=rf10")
-    print("forced_up_role=rf6_or_rf12_or_rf15")
+    print("forced_up_role=rf6_or_rf12_or_rf15_or_layered_rf2")
     print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
     print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_lt5_low_override")
     print("y1_tilt1_special_composite=enabled")
@@ -445,3 +487,22 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+    require(r"constexpr\s+StickPoint\s+kLayerFlipperTable\[9\]", source, "layer flipper table declaration")
+    for x, y in LAYER_FLIPPER_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing layer flipper point: ({x}, {y})")
+
+    require(r"constexpr\s+StickPoint\s+kMLayerFlipperTable\[9\]", source, "mode layer flipper table declaration")
+    for x, y in MLAYER_FLIPPER_POINTS:
+        if f"{{{x}, {y}}}" not in source:
+            fail(f"missing mode layer flipper point: ({x}, {y})")
+
+    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_active\s*;", source, "RF3 tilt1 is layer-gated")
+    require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_active\s*;", source, "RF4 tilt2 is layer-gated")
+    require(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", source, "RF4 layer flipper flag")
+    require(
+        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        source,
+        "table selection includes layer flipper modifier argument",
+        flags=re.DOTALL,
+    )

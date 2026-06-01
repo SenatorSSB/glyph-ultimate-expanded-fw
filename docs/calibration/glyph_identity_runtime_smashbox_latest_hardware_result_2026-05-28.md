@@ -84,3 +84,9 @@
 | nunchuk | NOT_TESTED_UNAVAILABLE |
 
 - Final disposition remains: `PASS_IDENTITY_RUNTIME_SMASHBOX_LATEST_PROFILE`
+
+## 2026-06-01 Amendment: LF7/LF8 Layer-Direction Behavior
+
+- The PASS result in this file predates LF7/LF8 layer-direction runtime behavior (`LF8=layer-left`, `LF7=layer-right`, layered `RF2/RF3/RF4` behavior).
+- This file does not validate the new LF7/LF8 layer-direction behavior.
+- A new hardware validation run is required before claiming PASS for the LF7/LF8 layer-direction runtime update.

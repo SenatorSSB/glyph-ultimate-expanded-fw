@@ -88,7 +88,7 @@ Standalone D-pad:
 
 Empty/no-output physical IDs:
 
-- `LF6`, `LF7`, `LF8`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
+- `LF6`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
 
 ## Custom Modifier Role Table
 
@@ -100,9 +100,9 @@ Empty/no-output physical IDs:
 - `LT3 = L` (game output role; no longer a modifier role)
 - `RF7 = LS->DPad`
 - `RF6 = forced Up`
-- `RF3 = Tilt1`
-- `RF4 = Tilt2`
-- `RF3 + RF4 = Tilt3`
+- `RF3 = Tilt1` when LF7/LF8 layer is inactive; `RF3 = B` when LF7/LF8 layer is active
+- `RF4 = Tilt2` when LF7/LF8 layer is inactive; `RF4 = flipper x-only modifier` when LF7/LF8 layer is active
+- `RF3 + RF4 = Tilt3` only when LF7/LF8 layer is inactive
 - `RF11` is runtime-owned Z-airdodge alias behavior and is not a modifier-table role.
 - `Y2/MY2` are scratched/inactive in runtime selection.
 
@@ -126,12 +126,14 @@ Historical replacement:
 - Previous standalone `LT3 -> Tilt3` behavior is historical only.
 - Previous `LT3 -> Y2` behavior is historical only for this runtime path.
 - `Y2/MY2` values remain documented in table docs for historical/source completeness.
-- Tilt3 is now the `RF3+RF4` chord.
+- Tilt3 is now the `RF3+RF4` chord while LF7/LF8 layer is inactive.
 
 Direction mapping used by identity runtime:
 
 - `LF3 = Left`
 - `LF1 = Right`
+- `LF8 = layer-left contribution`
+- `LF7 = layer-right contribution`
 - `LF2 = Up`
 - `LF5 = Down`
 - `RF6 = forced Up`
@@ -139,9 +141,92 @@ Direction mapping used by identity runtime:
 - `LT6`, `RF12`, and `RF15` are not used as modifier-table direction-index sources.
 - `LT6` and `RF12`/`RF15` instead hard-override final left-stick output to direction `2`/`8` using Default or Mode-default base tables.
 
-`RF4` is Tilt2-only and is no longer consumed as Up direction input in the Smash Box runtime path.
+`RF4` is Tilt2-only when LF7/LF8 layer is inactive and is no longer consumed as Up direction input in the Smash Box runtime path.
 `RF6` is forced-Up only and no longer drives game Y output in this runtime branch.
 `RF10` is the game Y binding in this runtime branch.
+
+## LF7/LF8 layer-direction behavior
+
+Layer activation:
+
+- `const bool layer_left_active = inputs.lf8;`
+- `const bool layer_right_active = inputs.lf7;`
+- `const bool layer_active = layer_left_active || layer_right_active;`
+
+Layer direction behavior:
+
+- `LF8 = layer-left button`.
+- `LF7 = layer-right button`.
+- Base Left source remains `LF3`.
+- Base Right source remains `LF1`.
+- Effective horizontal source includes LF7/LF8 layer directions.
+- If LF8 and LF7 are both held, layer-horizontal contribution cancels to neutral unless another source contributes horizontal resolution.
+
+Layer role changes while `layer_active`:
+
+- `RF4` changes from Tilt2 to a flipper x-only modifier.
+- `RF3` changes from Tilt1 to B.
+- `RF2` changes from X to forced Up.
+
+Inactive-layer behavior (preserved):
+
+- `RF2 = X`.
+- `RF3 = Tilt1`.
+- `RF4 = Tilt2`.
+- `RF3+RF4 = Tilt3`.
+
+Digital output policy:
+
+- `outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && inputs.rf3);`
+- `RF3` does not produce B when layer is inactive except existing B sources (`RF5`, `LF4`).
+- `outputs.x = inputs.rf2 && !layer_active;`
+- `RF2` does not output X while layer is active.
+- `RF4` does not directly output a game button in either mode.
+
+RF4 layer flipper tables:
+
+- Non-Mode layer RF4 table (Default y):
+  - `1=(169,51) 2=(128,51) 3=(87,51)`
+  - `4=(169,128) 5=(128,128) 6=(87,128)`
+  - `7=(169,205) 8=(128,205) 9=(87,205)`
+- Mode layer RF4 table (Mode-default y):
+  - `1=(169,87) 2=(128,87) 3=(87,87)`
+  - `4=(169,169) 5=(128,169) 6=(87,169)`
+  - `7=(169,169) 8=(128,169) 9=(87,169)`
+- Y1 + layer RF4 table:
+  - `1=(169,99) 2=(128,99) 3=(87,99)`
+  - `4=(169,128) 5=(128,128) 6=(87,128)`
+  - `7=(169,157) 8=(128,157) 9=(87,157)`
+- Mode + Y1 + layer RF4 table:
+  - `1=(169,179) 2=(128,179) 3=(87,179)`
+  - `4=(169,169) 5=(128,169) 6=(87,169)`
+  - `7=(169,77) 8=(128,77) 9=(87,77)`
+
+Layer RF4 composition policy:
+
+- Layer RF4 is a special x-only modifier and does not count as Tilt2/Tilt3.
+- If `layer_active && inputs.rf4` and no other X/Tilt modifier is active, runtime uses layer RF4 flipper behavior.
+- If `layer_active && inputs.rf4 && Y1` and no other X/Tilt modifier is active, runtime uses Y1+layer RF4 table behavior.
+- If `layer_active && inputs.rf4` with extra X1/X2/Tilt modifier activity, runtime falls back to ordinary multi-modifier policy:
+  - Mode inactive -> Default table
+  - Mode active -> Mode default table
+- `Y1+Tilt1` special composite remains tied to actual Tilt1 and does not consume layered RF4 flipper state.
+- Layer RF4 does not restore `Y2/MY2`.
+- Layer RF4 does not affect LT1/LT4/LT5 relocated roles.
+
+Layer RF2 forced-Up policy:
+
+- Existing forced-Up sources remain `RF6`, `RF12`, `RF15`.
+- Layered RF2 contributes forced Up only when `layer_active && inputs.rf2`.
+- Forced-Up sources override Down for runtime direction resolution.
+- Under LS->DPad, layer RF2 forced-Up routes to D-pad Up.
+
+RF9/LT5/RF11 priority interactions with layer behavior:
+
+- Layer LF7/LF8 direction and layer RF2 forced-Up feed LT5/RF11 low-magnitude direction resolution.
+- LT5/RF11 low-magnitude override remains after ordinary table selection and direction-plus-A override.
+- RF9 null modifier remains final analog override to `(128,128)` after LT5/RF11 low-magnitude override.
+- Under LS->DPad, LF7/LF8 and layer RF2 drive D-pad left/right/up while analog centering/null policy remains intact.
 
 ## Canonical Table Source
 
@@ -153,14 +238,19 @@ The runtime applies those exact absolute raw left-stick table values.
 
 Tilt family compression:
 
-- `RF3 && RF4` => effective Tilt3
-- `RF3` alone => effective Tilt1
-- `RF4` alone => effective Tilt2
+- While LF7/LF8 layer is inactive:
+  - `RF3 && RF4` => effective Tilt3
+  - `RF3` alone => effective Tilt1
+  - `RF4` alone => effective Tilt2
+- While LF7/LF8 layer is active:
+  - `RF3` is B (not Tilt1)
+  - `RF4` is layer flipper (not Tilt2)
+  - `RF3+RF4` is B + layer flipper (not Tilt3)
 - Ordinary non-Mode Tilt1 y offset is `81` from neutral center `128`, yielding Tilt1 y values `47/128/209`.
 
 Active effective non-mode modifiers counted:
 
-- X1, X2, Y1, effective Tilt1/Tilt2/Tilt3
+- X1, X2, Y1, layer flipper, effective Tilt1/Tilt2/Tilt3
 - RF9 is excluded from effective-modifier counting.
 - Direction-plus-A buttons `LT6` and `RF12` are not modifiers and do not participate in modifier-count composition.
 - Scratched/inactive tables `Y2/MY2` do not participate in modifier-count composition.
@@ -250,9 +340,9 @@ LT5/RF11 Z-airdodge low-magnitude hard final override policy:
 - This LT5/RF11 override ignores Mode default table output for final left-stick values.
 - This LT5/RF11 override also overrides the LT6/RF12 direction-plus-A analog table output, while LT6/RF12 still press A through `outputs.a`.
 - Effective direction source for LT5/RF11 low table uses:
-  - Left: `LF3`
-  - Right: `LF1`
-  - Up: `LF2` or forced-Up (`RF6`/`RF12`/`RF15`)
+  - Left: `LF3` plus layer-left `LF8`
+  - Right: `LF1` plus layer-right `LF7`
+  - Up: `LF2` or forced-Up (`RF6`/`RF12`/`RF15`/layered `RF2`)
   - Down: `LF5` or `LT6`, suppressed by forced-Up
 - LT5/RF11 low-magnitude absolute raw coordinate table:
   - `1 = (89, 89)`
@@ -307,7 +397,7 @@ LT5/RF11 Z-airdodge low-magnitude hard final override policy:
 - Under LS->DPad, `LT5`/`RF11` still press Z through the shared Z carrier, while analog left stick remains centered by LS->DPad behavior.
 - `RF7 + LT5 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
 - `RF7 + RF11 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
-- There are no direct standalone D-pad inputs from `LF6`, `LF8`, or the old D-pad cluster.
+- There are no direct standalone D-pad inputs from `LF6` or the old D-pad cluster.
 
 ## L/R/Z Button Behavior
 
@@ -349,6 +439,8 @@ Manual hardware validation is required for:
 - converted Mode default table rows (`1..9` with Mode center `(128,169)` and Mode Down `(128,87)`),
 - converted MX1/MX2, MY1, MTilt1/MTilt2/MTilt3 table rows,
 - RF6 forced-Up direction resolution rows (`RF6` with no direction, Down, Left/Right, and Down+Left/Right),
+- LF8/LF7 layer-direction rows (LF8=Left, LF7=Right, LF8+LF7 horizontal cancel unless other source resolves),
+- layer RF2 forced-Up rows (`layer_active + RF2` forces Up and suppresses RF2->X),
 - `RF3+RF4 => Tilt3`,
 - `LT3 => L`,
 - `LT5 => Z` plus low-magnitude table override behavior,
@@ -356,13 +448,18 @@ Manual hardware validation is required for:
 - `Y2/MY2` scratched (inactive/unreachable) in runtime selection,
 - `RT1 => Z`,
 - `RF16 => R`,
-- `RF1 => A`, `RF5/LF4 => B`, `RF2 => X`, and `RF10 => Y`,
+- `RF1 => A`, `RF5/LF4 => B`, `RF2 => X` only when layer inactive, and `RF10 => Y`,
 - `RF6` forced-Up path does not press game Y,
 - Tilt1 non-Mode table rows use y-values `47/128/209` (81-pixel y offset from center),
-- `RF4` behaves as Tilt2 and does not act as Up direction source,
-- `RF3` Tilt1 path does not press R,
+- `RF4` behaves as Tilt2 only when layer inactive and does not act as Up direction source,
+- `RF4` under layer behaves as flipper x-only modifier and not Tilt2/Tilt3,
+- `RF3` is Tilt1 only when layer inactive and does not press R,
+- `RF3` under layer asserts B and does not act as Tilt1,
+- `RF3+RF4` under layer resolves to B + flipper and not Tilt3,
+- `Y1 + layer RF4` uses the layer-flipper x behavior with Y1 y values (Mode/non-Mode variants),
 - `Y1+Tilt1` special composite rows (Mode and non-Mode),
 - Mode Y1+Tilt1 special composite rows use updated MY1 values (`179/169/77`),
+- layer RF4 + extra X1/X2/Tilt modifier rows fall back to Default/Mode default policy,
 - `LT2` Y1 path does not emit prior LT2->modY behavior,
 - `LT1` now selects X2 (and does not emit prior LT1->modX behavior),
 - `RF11` is not counted as an X/Y/Tilt modifier and does not alter `SelectStickTable`,
@@ -374,6 +471,8 @@ Manual hardware validation is required for:
 - LT5 low-table hard final override rows supersede LT6/RF12/RF15 analog override output while preserving A press,
 - RF11 low-table hard final override rows match LT5 low-table behavior and supersede LT6/RF12/RF15 analog override output while preserving A press,
 - LS->DPad behavior and orthogonality,
+- LS->DPad + LF8/LF7 routes layer-left/layer-right to D-pad left/right,
+- LS->DPad + layered RF2 routes forced-Up to D-pad Up,
 - LS->DPad + LT5 rows produce Z plus D-pad with analog left-stick centered,
 - LS->DPad + RF11 rows produce Z plus D-pad with analog left-stick centered,
 - RF9 null modifier rows:

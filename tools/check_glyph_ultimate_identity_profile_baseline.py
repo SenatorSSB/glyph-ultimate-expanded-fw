@@ -91,6 +91,8 @@ REQUIRED_RUNTIME_IDENTITY_INPUTS = (
     "BTN_RF12",
     "BTN_RF15",
     "BTN_RF16",
+    "BTN_LF7",
+    "BTN_LF8",
 )
 
 

@@ -38,6 +38,8 @@ ROLE_LINES = (
     "`RF3 = Tilt1`",
     "`RF4 = Tilt2`",
     "`RF3 + RF4 = Tilt3`",
+    "`LF8 = layer-left button`",
+    "`LF7 = layer-right button`",
 )
 
 SOURCE_ANCHORS = (
@@ -82,6 +84,8 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_RF7",
     "BTN_RF8",
     "BTN_RF9",
+    "BTN_LF7",
+    "BTN_LF8",
     "BTN_LT5",
     "BTN_LT4",
     "BTN_LT2",
@@ -100,8 +104,6 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
 
 EMPTY_NO_OUTPUT_INPUTS = (
     "inputs.lf6",
-    "inputs.lf7",
-    "inputs.lf8",
     "inputs.rf13",
     "inputs.rf14",
     "inputs.mb1",
@@ -155,6 +157,30 @@ MY1_TILT1_POINTS = (
     "{169, 77}",
     "{128, 77}",
     "{87, 77}",
+)
+
+LAYER_FLIPPER_POINTS = (
+    "{169, 51}",
+    "{128, 51}",
+    "{87, 51}",
+    "{169, 128}",
+    "{128, 128}",
+    "{87, 128}",
+    "{169, 205}",
+    "{128, 205}",
+    "{87, 205}",
+)
+
+MLAYER_FLIPPER_POINTS = (
+    "{169, 87}",
+    "{128, 87}",
+    "{87, 87}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
 )
 
 
@@ -231,7 +257,7 @@ def ensure_role_inputs_not_in_socd_pairs(mode_config: dict[str, object], path: P
     if not isinstance(socd_pairs, list):
         fail(f"MODE_ULTIMATE.socdPairs must be a list in {path.relative_to(REPO_ROOT)}")
 
-    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11"}
+    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11", "BTN_LF7", "BTN_LF8", "BTN_RF2", "BTN_RF3", "BTN_RF4"}
     for index, pair in enumerate(socd_pairs):
         if not isinstance(pair, dict):
             fail(f"socdPairs[{index}] must be an object in {path.relative_to(REPO_ROOT)}")
@@ -239,7 +265,7 @@ def ensure_role_inputs_not_in_socd_pairs(mode_config: dict[str, object], path: P
         right = pair.get("buttonDir2")
         if left in forbidden_socd_inputs or right in forbidden_socd_inputs:
             fail(
-                "LT1/LT4/LT5/RF11 must not appear in MODE_ULTIMATE.socdPairs in "
+                "LT1/LT4/LT5/RF11/LF7/LF8/RF2/RF3/RF4 must not appear in MODE_ULTIMATE.socdPairs in "
                 f"{path.relative_to(REPO_ROOT)}"
             )
 
@@ -273,6 +299,16 @@ def require_runtime_doc() -> str:
         fail("runtime doc must state RF9 final analog override to (128,128)")
     if re.search(r"Y1\+Tilt1.*special", text, flags=re.IGNORECASE) is None:
         fail("runtime doc must document Y1+Tilt1 special composite")
+    if re.search(r"LF8\s*=\s*layer-left button", text) is None:
+        fail("runtime doc must document LF8 as layer-left button")
+    if re.search(r"LF7\s*=\s*layer-right button", text) is None:
+        fail("runtime doc must document LF7 as layer-right button")
+    if re.search(r"RF4.*flipper", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF4 layered flipper behavior")
+    if re.search(r"RF3.*B", text) is None:
+        fail("runtime doc must document RF3 layered B behavior")
+    if re.search(r"RF2.*forced Up|forced Up.*RF2", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF2 layered forced-Up behavior")
     if re.search(r"RT4\s*=\s*C-Right", text) is None or re.search(r"RT5\s*=\s*C-Up", text) is None:
         fail("runtime doc must document RT4/RT5 C-stick swap")
     if "RT1 remains runtime-owned `Z`" not in text and "RT1 remains" not in text and "`RT1` remains" not in text:
@@ -301,8 +337,11 @@ def require_runtime_source() -> str:
             "outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;",
             "runtime source must assign A from RF1 or LT6 or RF12 or RF15",
         ),
-        ("outputs.b = inputs.rf5 || inputs.lf4;", "runtime source must assign RF5 or LF4 to B"),
-        ("outputs.x = inputs.rf2;", "runtime source must assign RF2 to X"),
+        (
+            "outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && inputs.rf3);",
+            "runtime source must assign layered RF3 to B only under layer_active",
+        ),
+        ("outputs.x = inputs.rf2 && !layer_active;", "runtime source must gate RF2->X by !layer_active"),
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
         ("outputs.buttonL = inputs.lt3;", "runtime source must assign LT3 to L button"),
         (
@@ -316,6 +355,10 @@ def require_runtime_source() -> str:
         ("const bool null_modifier_active = inputs.rf9;", "runtime source must read RF9 null modifier input"),
         ("const bool x1_active = inputs.lt4;", "runtime source must assign LT4 to X1"),
         ("const bool x2_active = inputs.lt1;", "runtime source must assign LT1 to X2"),
+        ("const bool layer_left_active = inputs.lf8;", "runtime source must read LF8 layer-left input"),
+        ("const bool layer_right_active = inputs.lf7;", "runtime source must read LF7 layer-right input"),
+        ("const bool layer_active = layer_left_active || layer_right_active;", "runtime source must define layer_active from LF8/LF7"),
+        ("const bool layer_rf2_force_up_active = layer_active && inputs.rf2;", "runtime source must define layered RF2 forced-Up"),
     )
     for line, message in expected_source_lines:
         if line not in text:
@@ -385,20 +428,20 @@ def require_runtime_source() -> str:
         fail("runtime source must select Y1+Tilt1 special composite tables")
 
     if re.search(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*layer_rf2_force_up_active\s*;",
         text,
     ) is None:
-        fail("runtime source must include RF15 in digital forced-up logic")
+        fail("runtime source must include layered RF2 in forced-up logic")
     if re.search(
         r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
         text,
     ) is None:
         fail("runtime source must include RF15 in Up+A logic")
     if re.search(
-        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*force_up_active\s*;",
         text,
     ) is None:
-        fail("runtime source must include RF15 in LT1 low-table forced-up logic")
+        fail("runtime source must feed LT5/RF11 low-table forced-up from shared forced-up sources")
     if re.search(
         r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         text,
@@ -460,6 +503,30 @@ def require_runtime_source() -> str:
     ) is None:
         fail("runtime source must suppress digital left-stick up during LS->DPad")
 
+    if re.search(
+        r"const\s+int8_t\s+horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer_left_active,\s*layer_right_active\)\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include LF8/LF7 in effective horizontal direction resolution")
+
+    if re.search(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_active\s*;", text) is None:
+        fail("runtime source must gate RF3 Tilt1 by !layer_active")
+    if re.search(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_active\s*;", text) is None:
+        fail("runtime source must gate RF4 Tilt2 by !layer_active")
+    if re.search(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", text) is None:
+        fail("runtime source must define layered RF4 flipper activation")
+
+    if re.search(r"constexpr\s+StickPoint\s+kLayerFlipperTable\[9\]", text) is None:
+        fail("runtime source must define non-Mode layer RF4 flipper table")
+    for point in LAYER_FLIPPER_POINTS:
+        if point not in text:
+            fail(f"runtime source missing layer RF4 flipper point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kMLayerFlipperTable\[9\]", text) is None:
+        fail("runtime source must define Mode layer RF4 flipper table")
+    for point in MLAYER_FLIPPER_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode layer RF4 flipper point: {point}")
+
     if "outputs.dpadLeft |= inputs.lf8;" in text or "outputs.dpadRight |= inputs.lf6;" in text:
         fail("runtime source must not preserve old standalone D-pad direct inputs")
 
@@ -520,15 +587,15 @@ def main() -> int:
     print("identity_representation=explicit_self_activates")
     print("identity_semantic_remaps=0")
     print("runtime_required_inputs_explicit_self_activated=true")
-    print("forced_up_role=RF6_or_RF12_or_RF15")
+    print("forced_up_role=RF6_or_RF12_or_RF15_or_layered_RF2")
     print("rf4_up_conflict=absent")
     print("lt3_role=L")
-    print("tilt3_role=RF3+RF4")
+    print("tilt3_role=RF3+RF4_when_layer_inactive")
     print("lt5_rf11_role=Z_plus_low_magnitude_override_alias")
     print("z_role=RT1_or_LT5_or_RF11")
     print("r_role=RF16")
     print("y_role=RF10")
-    print("b_role=RF5_or_LF4")
+    print("b_role=RF5_or_LF4_or_layered_RF3")
     print("l_role=LT3")
     print("rf15_role=Up+A_alias_of_RF12")
     print("rf9_role=null_modifier_final_analog_override")
