@@ -343,7 +343,9 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     const bool layer_right_active = inputs.lf7;
     const bool layer_direction_active = layer_left_active || layer_right_active;
     const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
-    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2;
+    const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
+    const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;
+    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;
     const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
     const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
     const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
@@ -351,11 +353,11 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
     const bool effective_ls_left = horizontal_axis < 0;
     const bool effective_ls_right = horizontal_axis > 0;
-    const bool ls_to_dpad_active = inputs.rf7;
+    const bool ls_to_dpad_active = inputs.rf13;
 
     outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
-    outputs.b = inputs.rf5 || inputs.lf4 || (layer_direction_active && !inputs.lf4 && inputs.rf3);
-    outputs.x = inputs.rf2 && (!layer_direction_active || inputs.lf4);
+    outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer_direction_active && !inputs.lf4 && inputs.rf3);
+    outputs.x = inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick && (!layer_direction_active || inputs.lf4);
     outputs.y = inputs.rf10;
     outputs.buttonL = inputs.lt3;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
@@ -408,8 +410,10 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool layer_right_active = inputs.lf7;
     const bool layer_direction_active = layer_left_active || layer_right_active;
     const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
+    const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
+    const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;
     const bool layer_transform_active = layer_direction_active || lf4_submode_active;
-    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2;
+    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;
     const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
     const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
@@ -441,7 +445,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool y1_active = inputs.lt2 && !inputs.lf4;
     const bool z_airdodge_override_active = inputs.lt5 || inputs.rf11;
     const bool null_modifier_active = inputs.rf9;
-    const bool ls_to_dpad_active = inputs.rf7;
+    const bool ls_to_dpad_active = inputs.rf13;
     const bool down_a_active = inputs.lt6;
     const bool up_a_active = inputs.rf12 || inputs.rf15;
     const bool direction_plus_a_active = down_a_active || up_a_active;
@@ -495,6 +499,13 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
             const size_t lt1_direction_index = DirectionIndexFromAxes(lt1_x, lt1_y);
             outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
             outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
+        }
+
+        if (inputs.rf7) {
+            // RF7 is a hard Up+B analog override with horizontal from effective direction.
+            const uint8_t rf7_horizontal = effective_ls_left == effective_ls_right ? 128 : (effective_ls_left ? 77 : 179);
+            outputs.leftStickX = rf7_horizontal;
+            outputs.leftStickY = 172;
         }
     }
 

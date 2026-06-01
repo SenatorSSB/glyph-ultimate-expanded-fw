@@ -84,11 +84,11 @@ Menu:
 Standalone D-pad:
 
 - There are no standalone D-pad buttons in this runtime map.
-- D-pad output is produced only by preserved nunchuk C behavior or by `RF7` LS->DPad using effective left-stick directions.
+- D-pad output is produced only by preserved nunchuk C behavior or by `RF13` LS->DPad using effective left-stick directions.
 
 Empty/no-output physical IDs:
 
-- `LF6`, `RF13`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
+- `LF6`, `RF14`, `MB1`, `MB2`, and `MB3` output nothing in the native Ultimate runtime map.
 
 ## Custom Modifier Role Table
 
@@ -98,7 +98,8 @@ Empty/no-output physical IDs:
 - `LT1 = X2`
 - `LT2 = Y1`
 - `LT3 = L` (game output role; no longer a modifier role)
-- `RF7 = LS->DPad`
+- `RF7 = hard Up+B`
+- `RF13 = LS->DPad`
 - `RF6 = forced Up`
 - `RF3 = Tilt1` when LF7/LF8 layer is inactive; `RF3 = B + normal x-only 41px modifier` when LF7/LF8 layer is active
 - `RF4 = Tilt2` when LF7/LF8 layer is inactive; `RF4 = flipper x-only modifier` when LF7/LF8 layer is active
@@ -153,6 +154,8 @@ Layer activation:
 - `const bool layer_right_active = inputs.lf7;`
 - `const bool layer_direction_active = layer_left_active || layer_right_active;`
 - `const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);`
+- `const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;`
+- `const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;`
 - `const bool layer_transform_active = layer_direction_active || lf4_submode_active;`
 
 Layer direction behavior:
@@ -176,12 +179,18 @@ LF4 layer sub-mode behavior:
 - LF4 layer sub-mode activates when `inputs.lf4 && (layer_direction_active || inputs.lt2)`.
 - This includes `LF4+LT2` even without LF7/LF8.
 - In LF4 sub-mode:
-  - `RF2 = X`.
+  - `RF2 = X` unless suppressed by C-stick.
   - `RF3 = forced Up`.
   - `RF3` does not contribute B or layer normal-x.
   - `RF4 = flipper x-only modifier`.
 - While LF4 is held, LT2/Y1 is suppressed:
   - `const bool y1_active = inputs.lt2 && !inputs.lf4;`.
+- In all LF4 sub-mode cases, any C-stick button (`RT2/RT3/RT4/RT5`) suppresses RF2 completely:
+  - no X,
+  - no forced Up,
+  - no D-pad Up contribution through LS->DPad,
+  - no analog direction contribution,
+  - no modifier behavior.
 
 Inactive-layer behavior (preserved):
 
@@ -192,12 +201,14 @@ Inactive-layer behavior (preserved):
 
 Digital output policy:
 
-- `outputs.b = inputs.rf5 || inputs.lf4 || (layer_direction_active && !inputs.lf4 && inputs.rf3);`
+- `outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer_direction_active && !inputs.lf4 && inputs.rf3);`
 - `LF4` keeps B active regardless of layer state.
+- `RF7` always contributes B as the hard Up+B button carrier.
 - `RF3` contributes B only in the pure LF7/LF8 layer without LF4.
-- `outputs.x = inputs.rf2 && (!layer_direction_active || inputs.lf4);`
+- `outputs.x = inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick && (!layer_direction_active || inputs.lf4);`
 - `RF2` does not output X in the pure LF7/LF8 layer without LF4.
 - `RF2` outputs X in LF4 sub-mode (including LF4+LT2 without LF7/LF8).
+- `RT2/RT3/RT4/RT5` suppress RF2 X output in LF4 sub-mode.
 - `RF4` does not directly output a game button in either mode.
 
 RF3 layer normal-x tables:
@@ -247,6 +258,7 @@ Layer RF3/RF4 composition policy:
 - `layer_direction_active + RF3 + RF4` (without LF4) resolves to `B + RF4 flipper` and not Tilt3.
 - `lf4_submode_active + RF3 + RF4` resolves to `B + forced Up + RF4 flipper` and not Tilt3.
 - `lf4_submode_active + RF2 + RF4` resolves to `B + X + RF4 flipper`.
+- `lf4_submode_active + RF2 + (RT2/RT3/RT4/RT5)` resolves to RF2-suppressed behavior (no X / no forced Up from RF2).
 - If `layer_direction_active && !inputs.lf4 && inputs.rf3` with no RF4 and no extra X/Tilt modifier activity, runtime uses layer RF3 normal-x behavior.
 - If `layer_direction_active && !inputs.lf4 && inputs.rf3 && y1_active` with no RF4 and no extra X/Tilt modifier activity, runtime uses Y1+layer RF3 normal-x behavior.
 - If `layer_transform_active && inputs.rf4` and no other X/Tilt modifier is active, runtime uses layer RF4 flipper behavior.
@@ -263,7 +275,7 @@ Forced-Up policy:
 
 - Existing forced-Up sources remain `RF6`, `RF12`, `RF15`.
 - Pure LF7/LF8 layer RF2 forced-Up source:
-  - `const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2;`
+  - `const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;`
 - LF4 sub-mode RF3 forced-Up source:
   - `const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;`
 - Shared forced-Up aggregation:
@@ -272,6 +284,7 @@ Forced-Up policy:
 - Under LS->DPad:
   - pure-layer RF2 forced-Up routes to D-pad Up,
   - LF4-submode RF3 forced-Up routes to D-pad Up.
+  - LF4-submode RF2 with any C-stick press does not route to D-pad Up.
 
 RF9/LT5/RF11 priority interactions with layer behavior:
 
@@ -404,7 +417,7 @@ LT5/RF11 Z-airdodge low-magnitude hard final override policy:
 - Effective direction source for LT5/RF11 low table uses:
   - Left: `LF3` plus layer-left `LF8`
   - Right: `LF1` plus layer-right `LF7`
-  - Up: `LF2` or forced-Up (`RF6`/`RF12`/`RF15`/layered `RF2`)
+  - Up: `LF2` or forced-Up (`RF6`/`RF12`/`RF15`/pure-layer `RF2`/LF4-submode `RF3`)
   - Down: `LF5` or `LT6`, suppressed by forced-Up
 - LT5/RF11 low-magnitude absolute raw coordinate table:
   - `1 = (89, 89)`
@@ -431,6 +444,7 @@ LT5/RF11 Z-airdodge low-magnitude hard final override policy:
   - after ordinary table selection,
   - after direction-plus-A hard analog override,
 - after LT5/RF11 low-magnitude override,
+  - after RF7 hard Up+B override,
   - set final analog left stick to `(128,128)`.
 - Under LS->DPad:
   - D-pad behavior remains from LS->DPad effective directions,
@@ -438,7 +452,7 @@ LT5/RF11 Z-airdodge low-magnitude hard final override policy:
 
 ## LS->DPad Policy
 
-- `RF7` enables LS->DPad.
+- `RF13` enables LS->DPad.
 - While LS->DPad is active:
   - left-stick direction buttons drive D-pad directions,
   - left stick is forced to direction `5` center,
@@ -450,16 +464,37 @@ LT5/RF11 Z-airdodge low-magnitude hard final override policy:
 - LS->DPad does not reintroduce the old prototype D-pad-layer side effects.
 - Old nunchuk C D-pad behavior is preserved only when nunchuk C is active.
 - Under LS->DPad, direction-plus-A still presses A while routing hard effective direction to D-pad.
-- `RF7 + LT6` resolves to D-pad Down + A.
-- `RF7 + RF12` resolves to D-pad Up + A.
-- `RF7 + RF15` resolves to D-pad Up + A.
-- `RF7 + RF12 + LT6` resolves to D-pad Up + A.
-- `RF7 + RF15 + LT6` resolves to D-pad Up + A.
-- `RF7 + RF6 + LT6` resolves to D-pad Up + A.
+- `RF13 + LT6` resolves to D-pad Down + A.
+- `RF13 + RF12` resolves to D-pad Up + A.
+- `RF13 + RF15` resolves to D-pad Up + A.
+- `RF13 + RF12 + LT6` resolves to D-pad Up + A.
+- `RF13 + RF15 + LT6` resolves to D-pad Up + A.
+- `RF13 + RF6 + LT6` resolves to D-pad Up + A.
 - Under LS->DPad, `LT5`/`RF11` still press Z through the shared Z carrier, while analog left stick remains centered by LS->DPad behavior.
-- `RF7 + LT5 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
-- `RF7 + RF11 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
+- `RF13 + LT5 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
+- `RF13 + RF11 + direction` resolves to `Z + D-pad direction` with analog left-stick centered.
 - There are no direct standalone D-pad inputs from `LF6` or the old D-pad cluster.
+
+## RF7 Hard Up+B Policy
+
+- `RF7` asserts B and applies a hard left-stick analog override when LS->DPad is inactive.
+- Hard RF7 analog constants:
+  - left: `(77,172)`
+  - neutral: `(128,172)`
+  - right: `(179,172)`
+- RF7 horizontal uses effective runtime left/right direction resolution (including LF8/LF7 layer direction contributions).
+- RF7 hard override priority (LS->DPad inactive):
+  1. ordinary table selection
+  2. direction-plus-A override
+  3. LT5/RF11 low-magnitude override
+  4. RF7 hard Up+B override
+  5. RF9 null override
+- RF7 does not count as an X/Y/Tilt modifier and does not select Mode/modifier tables.
+- RF7 does not enable LS->DPad.
+- RF13+RF7 interaction policy:
+  - RF7 still outputs B.
+  - RF13 keeps LS->DPad routing and analog-centering policy.
+  - RF7 analog hard override is not applied while LS->DPad is active.
 
 ## L/R/Z Button Behavior
 

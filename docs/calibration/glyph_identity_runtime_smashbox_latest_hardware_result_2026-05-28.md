@@ -95,3 +95,5 @@
 - The previous LF7/LF8 layer amendment also predates the LF4 sub-mode RF2/RF3 interchange (`LF4 sub-mode: RF2 => X, RF3 => forced Up`) and LF4+LT2 activation path.
 - The previous LF7/LF8 layer amendment also predates LF4-held LT2/Y1 suppression (`LF4 + LT2` no longer activates Y1).
 - LF4 sub-mode RF2/RF3 interchange plus LF4+LT2 Y1 suppression require fresh hardware validation before any PASS claim for this revision.
+- The previous LF7/LF8 layer amendment also predates RF13 LS->DPad source migration, RF7 hard Up+B behavior, and LF4-submode RF2 suppression when any C-stick button is held.
+- RF13 LS->DPad migration, RF7 hard Up+B behavior, and LF4-submode RF2 C-stick suppression require fresh hardware validation before any PASS claim for this revision.

@@ -86,3 +86,9 @@ Do not apply this identity artifact expecting full Smash Box X/Y/Mode/LS->DPad b
 - `BTN_LF7` and `BTN_LF8` remain explicit self-activated identity inputs in the active artifact and MVP fixture.
 - Runtime now uses `LF8` as layer-left and `LF7` as layer-right in native Ultimate layer-direction behavior.
 - Identity representation remains explicit self-activates; no semantic remap was introduced by this amendment.
+
+## 2026-06-02 RF13/RF7 Runtime Role Amendment
+
+- `BTN_RF13` remains an explicit self-activated identity input in the active artifact and MVP fixture and is now runtime-owned LS->DPad.
+- `BTN_RF7` remains an explicit self-activated identity input in the active artifact and MVP fixture and is now runtime-owned hard Up+B.
+- Identity representation remains explicit self-activates; no semantic remap was introduced by this amendment.
