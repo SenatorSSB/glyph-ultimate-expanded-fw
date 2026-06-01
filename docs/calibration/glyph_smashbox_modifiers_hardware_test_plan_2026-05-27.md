@@ -37,6 +37,13 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LF7 layer-right direction | Press `LF7` with no other horizontal source | N/A | Effective direction includes Right from LF7 layer behavior | NOT_TESTED |
 | LF8+LF7 layer horizontal cancel | Press `LF8 + LF7` with no other horizontal source | N/A | Horizontal layer contribution cancels to neutral | NOT_TESTED |
 | Layer LF4 direction hold | `LF8/LF7 + LF4` | N/A | B remains asserted from LF4 while LF8/LF7 still provide layer left/right direction contribution | NOT_TESTED |
+| LT2 Y1 baseline | `LT2` only | 1..9 | Y1 modifier behavior is active | NOT_TESTED |
+| LF4+LT2 Y1 suppression | `LF4 + LT2` | 1..9 | B asserted; LT2 Y1 modifier is suppressed while LF4 is held | NOT_TESTED |
+| LF4+LT2+RF2 sub-mode | `LF4 + LT2 + RF2` | N/A | B + X; RF2 does not contribute forced Up | NOT_TESTED |
+| LF4+LT2+RF3 sub-mode | `LF4 + LT2 + RF3` | N/A | B + forced Up; RF3 does not contribute B+normal-x | NOT_TESTED |
+| LF4+LT2+RF4 sub-mode | `LF4 + LT2 + RF4` | 1..9 | B + RF4 flipper using Default/Mode-default y rows (not Y1/MY1 rows) | NOT_TESTED |
+| LF4+LT2+RF3+RF4 sub-mode | `LF4 + LT2 + RF3 + RF4` | 1..9 | B + forced Up + RF4 flipper | NOT_TESTED |
+| LF4+LT2+RF2+RF4 sub-mode | `LF4 + LT2 + RF2 + RF4` | 1..9 | B + X + RF4 flipper | NOT_TESTED |
 | RF6 forced-Up restore check | Press RF6 in `MODE_ULTIMATE` runtime path | N/A | RF6 forced-Up is restored and visible as runtime input | NOT_TESTED |
 | Modifier visibility check | Press X1/X2/Y1/Tilt1/Tilt2 inputs | N/A | `LT4/LT1/LT2/RF3/RF4` are visible to runtime; LT5 is reserved for Z-airdodge | NOT_TESTED |
 | LT4 X1 role check | Press `LT4` with and without Mode | 1..9 spot checks | LT4 selects X1 (and MX1 when Mode is on) | NOT_TESTED |
@@ -79,7 +86,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF6 forced-Up with Down+Right | `RF6 + Down + Right` | N/A | Effective direction `9` table output | NOT_TESTED |
 | Layer RF2 forced-Up with LF8 | `LF8 + RF2` while LF7/LF8 layer is active | N/A | Effective Up-left direction; RF2 does not output X | NOT_TESTED |
 | Layer RF2 forced-Up with LF7 | `LF7 + RF2` while LF7/LF8 layer is active | N/A | Effective Up-right direction; RF2 does not output X | NOT_TESTED |
-| Layer RF2 forced-Up with LF4 | `LF8/LF7 + LF4 + RF2` while layer is active | N/A | B asserted from LF4; effective Up-left/Up-right direction; RF2 does not output X | NOT_TESTED |
+| Layer RF2 with LF4 sub-mode | `LF8/LF7 + LF4 + RF2` while layer is active | N/A | B asserted from LF4; RF2 outputs X and does not contribute forced Up | NOT_TESTED |
 | RF2 non-layer X baseline | `RF2` with LF7/LF8 layer inactive | N/A | X output asserted; no forced-Up contribution from RF2 | NOT_TESTED |
 | RF6 game Y guard | `RF6` only | N/A | Forced-Up behavior is present and game Y is not pressed | NOT_TESTED |
 | RF6 Down override guard | `RF6 + LF5` | N/A | Up remains effective and Down is suppressed in runtime table direction | NOT_TESTED |
@@ -91,14 +98,17 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | Layer RF3 normal-x Mode baseline (no LF4) | `Mode + LF8/LF7 + RF3` with `LF4` released | 1..9 | B asserted; RF3 uses layer normal-x Mode table | NOT_TESTED |
 | Layer RF3 + Y1 normal-x composite (no LF4) | `LF8/LF7 + RF3 + LT2` with `LF4` released | 1..9 | B asserted; RF3 uses Y1 + layer normal-x table | NOT_TESTED |
 | Layer RF3 + Y1 normal-x Mode composite (no LF4) | `Mode + LF8/LF7 + RF3 + LT2` with `LF4` released | 1..9 | B asserted; RF3 uses Mode + Y1 + layer normal-x table | NOT_TESTED |
-| Layer LF4+RF3 sub-mode | `LF8/LF7 + LF4 + RF3` | 1..9 | B asserted from LF4; RF3 outputs X; RF3 normal-x table is disabled | NOT_TESTED |
+| Layer LF4+RF3 sub-mode | `LF8/LF7 + LF4 + RF3` | 1..9 | B asserted from LF4; RF3 contributes forced Up; RF3 normal-x table is disabled | NOT_TESTED |
+| Layer LF4+RF2 sub-mode | `LF8/LF7 + LF4 + RF2` | N/A | B + X; RF2 does not contribute forced Up | NOT_TESTED |
 | RF3 non-layer Tilt1 baseline | `RF3` with LF7/LF8 layer inactive | 1..9 | RF3 acts as Tilt1 and does not add B beyond RF5/LF4 | NOT_TESTED |
 | Layer RF4 flipper baseline | `LF8 + RF4` and `LF7 + RF4` | 1..9 | RF4 uses layer flipper table (x-only flipper behavior) | NOT_TESTED |
 | Layer LF4+RF4 flipper | `LF8/LF7 + LF4 + RF4` | 1..9 | B asserted from LF4; RF4 uses layer flipper table unchanged | NOT_TESTED |
 | RF4 non-layer Tilt2 baseline | `RF4` with LF7/LF8 layer inactive | 1..9 | RF4 acts as Tilt2 | NOT_TESTED |
 | Layer RF3+RF4 composition | `LF8/LF7 + RF3 + RF4` | 1..9 | Resolves to B + layer flipper; RF4 flipper wins over RF3 normal-x; does not resolve to Tilt3 | NOT_TESTED |
-| Layer LF4+RF3+RF4 composition | `LF8/LF7 + LF4 + RF3 + RF4` | 1..9 | Resolves to B + X + layer flipper; RF3 normal-x remains disabled; not Tilt3 | NOT_TESTED |
+| Layer LF4+RF3+RF4 composition | `LF8/LF7 + LF4 + RF3 + RF4` | 1..9 | Resolves to B + forced Up + layer flipper; RF3 normal-x remains disabled; not Tilt3 | NOT_TESTED |
+| Layer LF4+RF2+RF4 composition | `LF8/LF7 + LF4 + RF2 + RF4` | 1..9 | Resolves to B + X + layer flipper; not Tilt3 | NOT_TESTED |
 | Layer RF3+RF4+Y1 composition | `LF8/LF7 + RF3 + RF4 + LT2` | 1..9 | Resolves to B + Y1 layer RF4 flipper table; RF4 precedence preserved | NOT_TESTED |
+| LF4 suppression over Y1 on RF4 | `LF8/LF7 + LF4 + LT2 + RF4` | 1..9 | LF4 suppresses Y1; RF4 flipper uses Default/Mode-default y rows, not Y1/MY1 rows | NOT_TESTED |
 | Non-layer RF3+RF4 Tilt3 baseline | `RF3 + RF4` with LF7/LF8 layer inactive | 1..9 | Resolves to Tilt3 | NOT_TESTED |
 | LT3 role | `LT3` only | N/A | L output asserted; LT3 is not a Y2 modifier role | NOT_TESTED |
 | RF4 role guard | `RF4` only (no direction inputs) | N/A | Tilt2 neutral-direction behavior; RF4 does not act as Up direction source | NOT_TESTED |
@@ -110,8 +120,8 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LT2 modY guard | `LT2` only | N/A | Y1 modifier behavior only and no LT2->modY output | NOT_TESTED |
 | Y1+Tilt1 special composite | `LT2 + RF3` with LF7/LF8 layer inactive | 1..9 | Uses special non-Mode composite table: `1=(169,99) 2=(128,99) 3=(87,99) 4=(169,128) 5=(128,128) 6=(87,128) 7=(169,157) 8=(128,157) 9=(87,157)` | NOT_TESTED |
 | Mode+Y1+Tilt1 special composite | `Mode + LT2 + RF3` with LF7/LF8 layer inactive | 1..9 | Uses special Mode composite table: `1=(169,179) 2=(128,179) 3=(87,179) 4=(169,169) 5=(128,169) 6=(87,169) 7=(169,77) 8=(128,77) 9=(87,77)` | NOT_TESTED |
-| Y1 + layer RF4 flipper composite | `LT2 + LF8/LF7 + RF4` | 1..9 | Uses Y1 + layer RF4 flipper table values | NOT_TESTED |
-| Mode + Y1 + layer RF4 flipper composite | `Mode + LT2 + LF8/LF7 + RF4` | 1..9 | Uses Mode + Y1 + layer RF4 flipper table values | NOT_TESTED |
+| Y1 + layer RF4 flipper composite | `LT2 + LF8/LF7 + RF4` with `LF4` released | 1..9 | Uses Y1 + layer RF4 flipper table values | NOT_TESTED |
+| Mode + Y1 + layer RF4 flipper composite | `Mode + LT2 + LF8/LF7 + RF4` with `LF4` released | 1..9 | Uses Mode + Y1 + layer RF4 flipper table values | NOT_TESTED |
 | Layer RF4 + extra modifier fallback | `LF8/LF7 + RF4 + (LT4/LT1/Tilt*)` (Mode optional) | Representative + 1..9 spot checks | Falls back to Default/Mode default policy | NOT_TESTED |
 | Y1+Tilt1 plus extra modifier fallback | `LT2 + RF3 + (X1/X2/Tilt2/Tilt3)` (Mode optional) | Representative + 1..9 spot checks | Falls back to ordinary multi-modifier policy (Default/Mode default) | NOT_TESTED |
 | Y2/MY2 scratch guard | `LT3` with/without Mode and directional inputs | 1..9 spot checks | No Y2/MY2 modifier-table path is reachable in runtime | NOT_TESTED |
@@ -143,11 +153,15 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LS->DPad with RF15 and LT6 | `RF7 + RF15 + LT6` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
 | LS->DPad with RF6 and LT6 | `RF7 + RF6 + LT6` | N/A | D-pad Up asserted and A asserted | NOT_TESTED |
 | LS->DPad with LF7/LF8 layer directions | `RF7 + LF8` and `RF7 + LF7` | N/A | D-pad Left/Right follows LF8/LF7 layer directions; digital left stick suppressed | NOT_TESTED |
-| LS->DPad with layer RF2 forced-Up | `RF7 + LF8/LF7 + RF2` | N/A | D-pad Up (and Up-left/Up-right with layer horizontal), RF2 does not output X | NOT_TESTED |
+| LS->DPad with pure-layer RF2 forced-Up | `RF7 + LF8/LF7 + RF2` with `LF4` released | N/A | D-pad Up (and Up-left/Up-right with layer horizontal), RF2 does not output X | NOT_TESTED |
+| LS->DPad with LF4 sub-mode RF3 forced-Up | `RF7 + (LF8/LF7 or LT2) + LF4 + RF3` | N/A | D-pad Up (plus layer left/right if LF8/LF7 held); B asserted from LF4 | NOT_TESTED |
+| LS->DPad with LF4 sub-mode RF2 X | `RF7 + (LF8/LF7 or LT2) + LF4 + RF2` | N/A | RF2 outputs X and does not contribute D-pad Up | NOT_TESTED |
 | LS->DPad with LT5 | `RF7 + LT5 + direction` | Left/Right/Down/Up and diagonals | Z asserted; D-pad follows effective direction; analog left stick centered by LS->DPad | NOT_TESTED |
 | LS->DPad with RF11 | `RF7 + RF11 + direction` | Left/Right/Down/Up and diagonals | Z asserted; D-pad follows effective direction; analog left stick centered/null according to current LS->DPad and RF9 behavior | NOT_TESTED |
 | LT5/RF11 with layer directions | `LT5 + LF8/LF7` and `RF11 + LF8/LF7` | N/A | Z asserted with low-magnitude left/right from LF8/LF7 layer directions | NOT_TESTED |
-| LT5/RF11 with layer RF2 forced-Up | `LT5/RF11 + LF8/LF7 + RF2` | N/A | Z asserted with low-magnitude up-left/up-right from layer RF2 forced-Up + layer horizontal direction | NOT_TESTED |
+| LT5/RF11 with pure-layer RF2 forced-Up | `LT5/RF11 + LF8/LF7 + RF2` with `LF4` released | N/A | Z asserted with low-magnitude up-left/up-right from layer RF2 forced-Up + layer horizontal direction | NOT_TESTED |
+| LT5/RF11 with LF4 sub-mode RF3 forced-Up | `LT5/RF11 + (LF8/LF7 or LT2) + LF4 + RF3` | N/A | Z asserted with LF4-submode forced Up contribution; RF3 does not contribute normal-x | NOT_TESTED |
+| LT5/RF11 with LF4 sub-mode RF2 X | `LT5/RF11 + (LF8/LF7 or LT2) + LF4 + RF2` | N/A | Z asserted; RF2 contributes X only and does not contribute Up | NOT_TESTED |
 | No standalone D-pad outputs | Press `LF6`, old D-pad cluster placeholders, and RF7 inactive | N/A | No D-pad output unless nunchuk C or RF7 LS->DPad is active | NOT_TESTED |
 | Empty button no-output smoke | Press `LF6/RF13/RF14/MB1/MB2/MB3` one at a time | N/A | No game output asserted | NOT_TESTED |
 | RF9 non-D-pad guard | `RF9` only with RF7 inactive | N/A | RF9 does not emit D-pad output | NOT_TESTED |

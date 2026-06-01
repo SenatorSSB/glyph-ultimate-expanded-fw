@@ -151,7 +151,9 @@ Layer activation:
 
 - `const bool layer_left_active = inputs.lf8;`
 - `const bool layer_right_active = inputs.lf7;`
-- `const bool layer_active = layer_left_active || layer_right_active;`
+- `const bool layer_direction_active = layer_left_active || layer_right_active;`
+- `const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);`
+- `const bool layer_transform_active = layer_direction_active || lf4_submode_active;`
 
 Layer direction behavior:
 
@@ -162,14 +164,24 @@ Layer direction behavior:
 - Effective horizontal source includes LF7/LF8 layer directions.
 - If LF8 and LF7 are both held, layer-horizontal contribution cancels to neutral unless another source contributes horizontal resolution.
 
-Layer role changes while `layer_active`:
+Pure LF7/LF8 layer behavior (without LF4):
 
 - `RF4` changes from Tilt2 to a flipper x-only modifier.
-- `RF3` changes from Tilt1 to a layer-dependent role:
-  - without `LF4`: `B + normal x-only 41px modifier`
-  - with `LF4`: `X` (RF3 normal-x disabled)
+- `RF3` changes from Tilt1 to `B + normal x-only 41px modifier`.
 - `RF2` changes from X to forced Up.
-- `LF4` is a layer sub-mode trigger and always keeps B asserted.
+
+LF4 layer sub-mode behavior:
+
+- `LF4` always keeps B asserted.
+- LF4 layer sub-mode activates when `inputs.lf4 && (layer_direction_active || inputs.lt2)`.
+- This includes `LF4+LT2` even without LF7/LF8.
+- In LF4 sub-mode:
+  - `RF2 = X`.
+  - `RF3 = forced Up`.
+  - `RF3` does not contribute B or layer normal-x.
+  - `RF4 = flipper x-only modifier`.
+- While LF4 is held, LT2/Y1 is suppressed:
+  - `const bool y1_active = inputs.lt2 && !inputs.lf4;`.
 
 Inactive-layer behavior (preserved):
 
@@ -180,13 +192,12 @@ Inactive-layer behavior (preserved):
 
 Digital output policy:
 
-- `const bool layer_b_submode_active = layer_active && inputs.lf4;`
-- `outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && !inputs.lf4 && inputs.rf3);`
+- `outputs.b = inputs.rf5 || inputs.lf4 || (layer_direction_active && !inputs.lf4 && inputs.rf3);`
 - `LF4` keeps B active regardless of layer state.
-- `RF3` contributes B only when layer is active and `LF4` is not held.
-- `outputs.x = (inputs.rf2 && !layer_active) || (layer_b_submode_active && inputs.rf3);`
-- `RF2` does not output X while layer is active.
-- `RF3` outputs X only for `layer_active && LF4 && RF3`.
+- `RF3` contributes B only in the pure LF7/LF8 layer without LF4.
+- `outputs.x = inputs.rf2 && (!layer_direction_active || inputs.lf4);`
+- `RF2` does not output X in the pure LF7/LF8 layer without LF4.
+- `RF2` outputs X in LF4 sub-mode (including LF4+LT2 without LF7/LF8).
 - `RF4` does not directly output a game button in either mode.
 
 RF3 layer normal-x tables:
@@ -230,37 +241,44 @@ RF4 layer flipper tables:
 Layer RF3/RF4 composition policy:
 
 - Layer RF4 is a special x-only modifier and does not count as Tilt2/Tilt3.
-- Layer RF3 is a normal x-only modifier and does not count as Tilt1 when layer is active.
-- `LF4` activates a layer sub-mode (`layer_b_submode_active`) that changes RF3 behavior from B+normal-x to X.
-- When `LF4` layer sub-mode is active, RF3 normal-x is disabled.
-- If both layer RF3 and layer RF4 are active without LF4 sub-mode, RF4 flipper wins for x-modifier selection while RF3 contributes B.
-- `layer_active + RF3 + RF4` resolves to `B + RF4 flipper` and not Tilt3.
-- If `layer_active && inputs.rf3` with no RF4 and no extra X/Tilt modifier activity, runtime uses layer RF3 normal-x behavior.
-- If `layer_active && inputs.rf3 && Y1` with no RF4 and no extra X/Tilt modifier activity, runtime uses Y1+layer RF3 normal-x behavior.
-- If `layer_active && inputs.lf4 && inputs.rf3`, runtime outputs X from RF3 and does not enable layer RF3 normal-x.
-- If `layer_active && inputs.lf4 && inputs.rf3 && inputs.rf4`, runtime outputs `B + X` and still applies RF4 flipper.
-- If `layer_active && inputs.rf4` and no other X/Tilt modifier is active, runtime uses layer RF4 flipper behavior.
-- If `layer_active && inputs.rf4 && Y1` and no other X/Tilt modifier is active, runtime uses Y1+layer RF4 table behavior.
-- If `layer_active && (inputs.rf3 || inputs.rf4)` with extra X1/X2/Tilt modifier activity, runtime falls back to ordinary multi-modifier policy:
+- Layer RF3 normal-x is active only in pure LF7/LF8 layer without LF4.
+- LF4 sub-mode disables RF3 layer normal-x and replaces RF3 role with forced Up.
+- If both layer RF3 normal-x and layer RF4 flipper are active in pure layer, RF4 flipper wins for x-modifier selection while RF3 contributes B.
+- `layer_direction_active + RF3 + RF4` (without LF4) resolves to `B + RF4 flipper` and not Tilt3.
+- `lf4_submode_active + RF3 + RF4` resolves to `B + forced Up + RF4 flipper` and not Tilt3.
+- `lf4_submode_active + RF2 + RF4` resolves to `B + X + RF4 flipper`.
+- If `layer_direction_active && !inputs.lf4 && inputs.rf3` with no RF4 and no extra X/Tilt modifier activity, runtime uses layer RF3 normal-x behavior.
+- If `layer_direction_active && !inputs.lf4 && inputs.rf3 && y1_active` with no RF4 and no extra X/Tilt modifier activity, runtime uses Y1+layer RF3 normal-x behavior.
+- If `layer_transform_active && inputs.rf4` and no other X/Tilt modifier is active, runtime uses layer RF4 flipper behavior.
+- If `layer_direction_active && !inputs.lf4 && inputs.rf4 && y1_active` and no other X/Tilt modifier is active, runtime uses Y1+layer RF4 table behavior.
+- If `layer_transform_active && inputs.rf4` with extra X1/X2/Tilt modifier activity, runtime falls back to ordinary multi-modifier policy:
   - Mode inactive -> Default table
   - Mode active -> Mode default table
 - `Y1+Tilt1` special composite remains tied to actual Tilt1 and does not consume layered RF4 flipper state.
+- `LF4+LT2` suppresses Y1; LF4-submode RF4 rows use Default/Mode-default y values instead of Y1/MY1 rows.
 - Layer RF4 does not restore `Y2/MY2`.
 - Layer RF4 does not affect LT1/LT4/LT5 relocated roles.
 
-Layer RF2 forced-Up policy:
+Forced-Up policy:
 
 - Existing forced-Up sources remain `RF6`, `RF12`, `RF15`.
-- Layered RF2 contributes forced Up only when `layer_active && inputs.rf2`.
+- Pure LF7/LF8 layer RF2 forced-Up source:
+  - `const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2;`
+- LF4 sub-mode RF3 forced-Up source:
+  - `const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;`
+- Shared forced-Up aggregation:
+  - `const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;`
 - Forced-Up sources override Down for runtime direction resolution.
-- Under LS->DPad, layer RF2 forced-Up routes to D-pad Up.
+- Under LS->DPad:
+  - pure-layer RF2 forced-Up routes to D-pad Up,
+  - LF4-submode RF3 forced-Up routes to D-pad Up.
 
 RF9/LT5/RF11 priority interactions with layer behavior:
 
-- Layer LF7/LF8 direction and layer RF2 forced-Up feed LT5/RF11 low-magnitude direction resolution.
+- Layer LF7/LF8 direction plus shared forced-Up (`RF6/RF12/RF15`, pure-layer RF2, LF4-submode RF3) feed LT5/RF11 low-magnitude direction resolution.
 - LT5/RF11 low-magnitude override remains after ordinary table selection and direction-plus-A override.
 - RF9 null modifier remains final analog override to `(128,128)` after LT5/RF11 low-magnitude override.
-- Under LS->DPad, LF7/LF8 and layer RF2 drive D-pad left/right/up while analog centering/null policy remains intact.
+- Under LS->DPad, LF7/LF8 and shared forced-Up sources drive D-pad left/right/up while analog centering/null policy remains intact.
 
 ## Canonical Table Source
 
@@ -277,11 +295,19 @@ Tilt family compression:
   - `RF3` alone => effective Tilt1
   - `RF4` alone => effective Tilt2
 - While LF7/LF8 layer is active:
+  - `RF2` is forced Up when `LF4` is not held
   - `RF3` is B + layer normal-x when `LF4` is not held
-  - `RF3` is X (and not layer normal-x) when `LF4` is held
+  - `RF2` is X when `LF4` is held
+  - `RF3` is forced Up (and not layer normal-x) when `LF4` is held
   - `RF4` is layer flipper (not Tilt2)
   - `RF3+RF4` with no `LF4` is B + layer flipper (RF4 wins x-modifier selection; not Tilt3)
-  - `LF4+RF3+RF4` is B + X + layer flipper (still not Tilt3)
+  - `LF4+RF3+RF4` is B + forced Up + layer flipper (still not Tilt3)
+  - `LF4+RF2+RF4` is B + X + layer flipper (still not Tilt3)
+- LF4 sub-mode also activates without LF7/LF8 when `LF4+LT2` is held:
+  - `RF2` is X,
+  - `RF3` is forced Up,
+  - `RF4` is layer flipper,
+  - Y1 is suppressed while LF4 is held.
 - Ordinary non-Mode Tilt1 y offset is `81` from neutral center `128`, yielding Tilt1 y values `47/128/209`.
 
 Active effective non-mode modifiers counted:
@@ -476,7 +502,12 @@ Manual hardware validation is required for:
 - converted MX1/MX2, MY1, MTilt1/MTilt2/MTilt3 table rows,
 - RF6 forced-Up direction resolution rows (`RF6` with no direction, Down, Left/Right, and Down+Left/Right),
 - LF8/LF7 layer-direction rows (LF8=Left, LF7=Right, LF8+LF7 horizontal cancel unless other source resolves),
-- layer RF2 forced-Up rows (`layer_active + RF2` forces Up and suppresses RF2->X),
+- pure-layer RF2 forced-Up rows (`layer_direction_active + RF2` with LF4 released forces Up and suppresses RF2->X),
+- LF4 sub-mode rows (`LF4 + (LF7/LF8 or LT2)`):
+  - RF2 -> X,
+  - RF3 -> forced Up,
+  - RF4 -> flipper,
+  - LT2/Y1 suppressed while LF4 is held,
 - `RF3+RF4 => Tilt3`,
 - `LT3 => L`,
 - `LT5 => Z` plus low-magnitude table override behavior,
@@ -484,16 +515,18 @@ Manual hardware validation is required for:
 - `Y2/MY2` scratched (inactive/unreachable) in runtime selection,
 - `RT1 => Z`,
 - `RF16 => R`,
-- `RF1 => A`, `RF5/LF4 => B`, `RF2 => X` only when layer inactive, and `RF10 => Y`,
+- `RF1 => A`, `RF5/LF4 => B`, `RF2 => X` when layer inactive or LF4 sub-mode, and `RF10 => Y`,
 - `RF6` forced-Up path does not press game Y,
 - Tilt1 non-Mode table rows use y-values `47/128/209` (81-pixel y offset from center),
 - `RF4` behaves as Tilt2 only when layer inactive and does not act as Up direction source,
 - `RF4` under layer behaves as flipper x-only modifier and not Tilt2/Tilt3,
 - `RF3` is Tilt1 only when layer inactive and does not press R,
 - `RF3` under layer without LF4 asserts B + layer normal-x and does not act as Tilt1,
-- `RF3` under layer with LF4 asserts X and does not activate layer normal-x,
+- `RF3` under LF4 sub-mode asserts forced Up and does not activate layer normal-x or B-from-RF3,
 - `RF3+RF4` under layer resolves to B + flipper (RF4 flipper wins over RF3 normal-x) and not Tilt3,
-- `LF4+RF3+RF4` under layer resolves to B + X + flipper,
+- `LF4+RF3+RF4` under layer resolves to B + forced Up + flipper,
+- `LF4+RF2+RF4` under layer resolves to B + X + flipper,
+- `LF4+LT2` suppresses Y1, so LF4-submode RF4 uses non-Y1 flipper y rows,
 - `Y1 + layer RF3` uses layer normal-x with Y1 y values (Mode/non-Mode variants),
 - `Y1 + layer RF4` uses the layer-flipper x behavior with Y1 y values (Mode/non-Mode variants),
 - `Y1+Tilt1` special composite rows (Mode and non-Mode),
@@ -511,7 +544,8 @@ Manual hardware validation is required for:
 - RF11 low-table hard final override rows match LT5 low-table behavior and supersede LT6/RF12/RF15 analog override output while preserving A press,
 - LS->DPad behavior and orthogonality,
 - LS->DPad + LF8/LF7 routes layer-left/layer-right to D-pad left/right,
-- LS->DPad + layered RF2 routes forced-Up to D-pad Up,
+- LS->DPad + pure-layer RF2 routes forced-Up to D-pad Up,
+- LS->DPad + LF4-submode RF3 routes forced-Up to D-pad Up,
 - LS->DPad + LT5 rows produce Z plus D-pad with analog left-stick centered,
 - LS->DPad + RF11 rows produce Z plus D-pad with analog left-stick centered,
 - RF9 null modifier rows:

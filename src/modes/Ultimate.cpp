@@ -341,10 +341,11 @@ Ultimate::Ultimate() : ControllerMode() {}
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     const bool layer_left_active = inputs.lf8;
     const bool layer_right_active = inputs.lf7;
-    const bool layer_active = layer_left_active || layer_right_active;
-    const bool layer_b_submode_active = layer_active && inputs.lf4;
-    const bool layer_rf2_force_up_active = layer_active && inputs.rf2;
-    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || layer_rf2_force_up_active;
+    const bool layer_direction_active = layer_left_active || layer_right_active;
+    const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
+    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2;
+    const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
+    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
     const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
     const bool effective_ls_up = inputs.lf2 || force_up_active;
     const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
@@ -353,8 +354,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     const bool ls_to_dpad_active = inputs.rf7;
 
     outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
-    outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && !inputs.lf4 && inputs.rf3);
-    outputs.x = (inputs.rf2 && !layer_active) || (layer_b_submode_active && inputs.rf3);
+    outputs.b = inputs.rf5 || inputs.lf4 || (layer_direction_active && !inputs.lf4 && inputs.rf3);
+    outputs.x = inputs.rf2 && (!layer_direction_active || inputs.lf4);
     outputs.y = inputs.rf10;
     outputs.buttonL = inputs.lt3;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
@@ -405,10 +406,12 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     (void)backend_id;
     const bool layer_left_active = inputs.lf8;
     const bool layer_right_active = inputs.lf7;
-    const bool layer_active = layer_left_active || layer_right_active;
-    const bool layer_b_submode_active = layer_active && inputs.lf4;
-    const bool layer_rf2_force_up_active = layer_active && inputs.rf2;
-    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || layer_rf2_force_up_active;
+    const bool layer_direction_active = layer_left_active || layer_right_active;
+    const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
+    const bool layer_transform_active = layer_direction_active || lf4_submode_active;
+    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2;
+    const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
+    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
     const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
     const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
@@ -420,7 +423,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         effective_ls_left, // Left (LF3 + LF8 layer-left contribution with cancellation)
         effective_ls_right, // Right (LF1 + LF7 layer-right contribution with cancellation)
         effective_ls_down, // Down (LT6/LF5, suppressed by forced-Up)
-        effective_ls_up, // Up (RF6/RF12/RF15 and layer RF2 forced-Up)
+        effective_ls_up, // Up (RF6/RF12/RF15, pure-layer RF2, and LF4-submode RF3 forced-Up)
         inputs.rt3, // C-Left
         inputs.rt4, // C-Right
         inputs.rt2, // C-Down
@@ -435,7 +438,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool mode_active = inputs.rf8;
     const bool x1_active = inputs.lt4;
     const bool x2_active = inputs.lt1;
-    const bool y1_active = inputs.lt2;
+    const bool y1_active = inputs.lt2 && !inputs.lf4;
     const bool z_airdodge_override_active = inputs.lt5 || inputs.rf11;
     const bool null_modifier_active = inputs.rf9;
     const bool ls_to_dpad_active = inputs.rf7;
@@ -444,10 +447,10 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool direction_plus_a_active = down_a_active || up_a_active;
     const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || force_up_active);
 
-    const bool layer_rf3_normal_x_active = layer_active && inputs.rf3 && !layer_b_submode_active;
-    const bool rf4_layer_flipper_active = layer_active && inputs.rf4;
-    const bool tilt1_pressed = inputs.rf3 && !layer_active;
-    const bool tilt2_pressed = inputs.rf4 && !layer_active;
+    const bool layer_rf3_normal_x_active = layer_direction_active && !inputs.lf4 && inputs.rf3;
+    const bool rf4_layer_flipper_active = layer_transform_active && inputs.rf4;
+    const bool tilt1_pressed = inputs.rf3 && !layer_transform_active;
+    const bool tilt2_pressed = inputs.rf4 && !layer_transform_active;
 
     const bool tilt3_effective = tilt1_pressed && tilt2_pressed;
     const bool tilt1_effective = tilt1_pressed && !tilt2_pressed;

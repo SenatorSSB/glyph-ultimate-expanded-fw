@@ -361,10 +361,16 @@ def require_runtime_doc() -> str:
         fail("runtime doc must document RF4 layered precedence over RF3 normal-x")
     if re.search(r"LF4.*layer sub-?mode|layer sub-?mode.*LF4", text, flags=re.IGNORECASE) is None:
         fail("runtime doc must document LF4 layer sub-mode behavior")
-    if re.search(r"LF4.*RF3.*X|RF3.*LF4.*X", text, flags=re.IGNORECASE) is None:
-        fail("runtime doc must document LF4+layer RF3 -> X behavior")
+    if re.search(r"LF4.*LT2.*suppres|suppres.*LT2.*LF4", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4-held LT2/Y1 suppression")
+    if re.search(r"LF4.*LT2.*sub-?mode|sub-?mode.*LF4.*LT2", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4+LT2 LF4 sub-mode activation")
     if re.search(r"RF2.*forced Up|forced Up.*RF2", text, flags=re.IGNORECASE) is None:
-        fail("runtime doc must document RF2 layered forced-Up behavior")
+        fail("runtime doc must document RF2 pure-layer forced-Up behavior")
+    if re.search(r"LF4.*RF2.*X|RF2.*LF4.*X", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4 sub-mode RF2 -> X behavior")
+    if re.search(r"LF4.*RF3.*forced Up|RF3.*LF4.*forced Up", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4 sub-mode RF3 forced-Up behavior")
     if re.search(r"RT4\s*=\s*C-Right", text) is None or re.search(r"RT5\s*=\s*C-Up", text) is None:
         fail("runtime doc must document RT4/RT5 C-stick swap")
     if "RT1 remains runtime-owned `Z`" not in text and "RT1 remains" not in text and "`RT1` remains" not in text:
@@ -394,12 +400,12 @@ def require_runtime_source() -> str:
             "runtime source must assign A from RF1 or LT6 or RF12 or RF15",
         ),
         (
-            "outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && !inputs.lf4 && inputs.rf3);",
-            "runtime source must assign layered RF3 to B only when layer_active and LF4 is not held",
+            "outputs.b = inputs.rf5 || inputs.lf4 || (layer_direction_active && !inputs.lf4 && inputs.rf3);",
+            "runtime source must assign layered RF3 to B only in pure LF7/LF8 layer with LF4 released",
         ),
         (
-            "outputs.x = (inputs.rf2 && !layer_active) || (layer_b_submode_active && inputs.rf3);",
-            "runtime source must map layered LF4+RF3 to X while preserving RF2->X only outside layer",
+            "outputs.x = inputs.rf2 && (!layer_direction_active || inputs.lf4);",
+            "runtime source must map RF2->X outside pure layer and inside LF4 sub-mode",
         ),
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
         ("outputs.buttonL = inputs.lt3;", "runtime source must assign LT3 to L button"),
@@ -416,9 +422,12 @@ def require_runtime_source() -> str:
         ("const bool x2_active = inputs.lt1;", "runtime source must assign LT1 to X2"),
         ("const bool layer_left_active = inputs.lf8;", "runtime source must read LF8 layer-left input"),
         ("const bool layer_right_active = inputs.lf7;", "runtime source must read LF7 layer-right input"),
-        ("const bool layer_active = layer_left_active || layer_right_active;", "runtime source must define layer_active from LF8/LF7"),
-        ("const bool layer_b_submode_active = layer_active && inputs.lf4;", "runtime source must define LF4 layer sub-mode flag"),
-        ("const bool layer_rf2_force_up_active = layer_active && inputs.rf2;", "runtime source must define layered RF2 forced-Up"),
+        ("const bool layer_direction_active = layer_left_active || layer_right_active;", "runtime source must define layer_direction_active from LF8/LF7"),
+        ("const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);", "runtime source must define LF4 sub-mode activation from LF4 and (layer direction or LT2)"),
+        ("const bool layer_transform_active = layer_direction_active || lf4_submode_active;", "runtime source must define layer_transform_active"),
+        ("const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2;", "runtime source must define pure-layer RF2 forced-Up"),
+        ("const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;", "runtime source must define LF4-submode RF3 forced-Up"),
+        ("const bool y1_active = inputs.lt2 && !inputs.lf4;", "runtime source must suppress Y1 while LF4 is held"),
     )
     for line, message in expected_source_lines:
         if line not in text:
@@ -488,10 +497,10 @@ def require_runtime_source() -> str:
         fail("runtime source must select Y1+Tilt1 special composite tables")
 
     if re.search(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*layer_rf2_force_up_active\s*;",
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
         text,
     ) is None:
-        fail("runtime source must include layered RF2 in forced-up logic")
+        fail("runtime source must include pure-layer RF2 and LF4-submode RF3 in forced-up logic")
     if re.search(
         r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
         text,
@@ -569,14 +578,14 @@ def require_runtime_source() -> str:
     ) is None:
         fail("runtime source must include LF8/LF7 in effective horizontal direction resolution")
 
-    if re.search(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_active\s*;", text) is None:
-        fail("runtime source must gate RF3 Tilt1 by !layer_active")
-    if re.search(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_active\s*;", text) is None:
-        fail("runtime source must gate RF4 Tilt2 by !layer_active")
-    if re.search(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", text) is None:
-        fail("runtime source must define layered RF4 flipper activation")
-    if re.search(r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*&&\s*!layer_b_submode_active\s*;", text) is None:
-        fail("runtime source must define layered RF3 normal-x activation gated off by LF4 layer sub-mode")
+    if re.search(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_transform_active\s*;", text) is None:
+        fail("runtime source must gate RF3 Tilt1 by !layer_transform_active")
+    if re.search(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_transform_active\s*;", text) is None:
+        fail("runtime source must gate RF4 Tilt2 by !layer_transform_active")
+    if re.search(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_transform_active\s*&&\s*inputs\.rf4\s*;", text) is None:
+        fail("runtime source must define layered RF4 flipper activation for pure layer and LF4 sub-mode")
+    if re.search(r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;", text) is None:
+        fail("runtime source must define layered RF3 normal-x activation for pure layer only")
     if re.search(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", text) is None:
         fail("runtime source must enforce RF4-over-RF3 layered modifier precedence")
     if re.search(r"EffectiveModifier::LayerNormalX", text) is None:
@@ -680,7 +689,7 @@ def main() -> int:
     print("identity_representation=explicit_self_activates")
     print("identity_semantic_remaps=0")
     print("runtime_required_inputs_explicit_self_activated=true")
-    print("forced_up_role=RF6_or_RF12_or_RF15_or_layered_RF2")
+    print("forced_up_role=RF6_or_RF12_or_RF15_or_pure_layer_RF2_or_lf4_submode_RF3")
     print("rf4_up_conflict=absent")
     print("lt3_role=L")
     print("tilt3_role=RF3+RF4_when_layer_inactive")
@@ -688,7 +697,7 @@ def main() -> int:
     print("z_role=RT1_or_LT5_or_RF11")
     print("r_role=RF16")
     print("y_role=RF10")
-    print("b_role=RF5_or_LF4_or_layered_RF3")
+    print("b_role=RF5_or_LF4_or_pure_layer_RF3")
     print("l_role=LT3")
     print("rf15_role=Up+A_alias_of_RF12")
     print("rf9_role=null_modifier_final_analog_override")

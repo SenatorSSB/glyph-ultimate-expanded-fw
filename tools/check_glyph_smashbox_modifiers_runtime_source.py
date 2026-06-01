@@ -339,8 +339,11 @@ def read_runtime_doc() -> str:
     require(r"RF3.*normal[\s-]*x", text, "runtime doc RF3 layered normal-x role", flags=re.IGNORECASE)
     require(r"RF4.*wins.*RF3|RF3.*RF4.*wins", text, "runtime doc RF4 layered precedence over RF3 normal-x", flags=re.IGNORECASE)
     require(r"LF4.*layer sub-?mode|layer sub-?mode.*LF4", text, "runtime doc LF4 layer sub-mode", flags=re.IGNORECASE)
-    require(r"LF4.*RF3.*X|RF3.*LF4.*X", text, "runtime doc LF4+layer RF3 -> X", flags=re.IGNORECASE)
-    require(r"RF2.*forced Up|forced Up.*RF2", text, "runtime doc RF2 layered forced-Up role", flags=re.IGNORECASE)
+    require(r"LF4.*LT2.*suppres|suppres.*LT2.*LF4", text, "runtime doc LF4-held LT2/Y1 suppression", flags=re.IGNORECASE)
+    require(r"LF4.*LT2.*sub-?mode|sub-?mode.*LF4.*LT2", text, "runtime doc LF4+LT2 sub-mode activation", flags=re.IGNORECASE)
+    require(r"RF2.*forced Up|forced Up.*RF2", text, "runtime doc RF2 pure-layer forced-Up role", flags=re.IGNORECASE)
+    require(r"LF4.*RF2.*X|RF2.*LF4.*X", text, "runtime doc LF4 sub-mode RF2 -> X", flags=re.IGNORECASE)
+    require(r"LF4.*RF3.*forced Up|RF3.*LF4.*forced Up", text, "runtime doc LF4 sub-mode RF3 forced-Up", flags=re.IGNORECASE)
     require(r"RT4\s*=\s*C-Right", text, "runtime doc RT4 C-right")
     require(r"RT5\s*=\s*C-Up", text, "runtime doc RT5 C-up")
     require(r"`?RT1`?\s*remains", text, "runtime doc RT1 remains Z")
@@ -374,8 +377,15 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     require(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt1\s*;", block, "X2 input is LT1")
     require(r"const\s+bool\s+layer_left_active\s*=\s*inputs\.lf8\s*;", source, "LF8 layer-left source")
     require(r"const\s+bool\s+layer_right_active\s*=\s*inputs\.lf7\s*;", source, "LF7 layer-right source")
-    require(r"const\s+bool\s+layer_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer_active aggregation")
-    require(r"const\s+bool\s+layer_rf2_force_up_active\s*=\s*layer_active\s*&&\s*inputs\.rf2\s*;", source, "layered RF2 forced-Up source")
+    require(r"const\s+bool\s+layer_direction_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer_direction_active aggregation")
+    require(
+        r"const\s+bool\s+lf4_submode_active\s*=\s*inputs\.lf4\s*&&\s*\(\s*layer_direction_active\s*\|\|\s*inputs\.lt2\s*\)\s*;",
+        source,
+        "LF4 sub-mode activation from LF4 and (layer direction or LT2)",
+    )
+    require(r"const\s+bool\s+layer_transform_active\s*=\s*layer_direction_active\s*\|\|\s*lf4_submode_active\s*;", source, "layer_transform_active aggregation")
+    require(r"const\s+bool\s+pure_layer_rf2_force_up_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf2\s*;", source, "pure-layer RF2 forced-Up source")
+    require(r"const\s+bool\s+lf4_submode_rf3_force_up_active\s*=\s*lf4_submode_active\s*&&\s*inputs\.rf3\s*;", source, "LF4 sub-mode RF3 forced-Up source")
     if re.search(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt5\s*;", block):
         fail("stale x1_active=inputs.lt5 runtime shape must be removed")
     if re.search(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt4\s*;", block):
@@ -400,35 +410,34 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         fail("Y2/MY2 runtime table constants should not remain in source")
 
     # Modifier composition excludes Y2.
-    require(r"const\s+bool\s+y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 modifier input")
+    require(r"const\s+bool\s+y1_active\s*=\s*inputs\.lt2\s*&&\s*!inputs\.lf4\s*;", block, "Y1 modifier input with LF4 suppression")
     if re.search(r"inputs\.lt3[^\n]*Y2|Y2[^\n]*inputs\.lt3", block, flags=re.IGNORECASE):
         fail("LT3 must not be consumed as Y2 modifier input")
 
     require(
-        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
+        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
         source,
-        "layered RF3 contributes to B only when LF4 is not held in layer",
+        "layered RF3 contributes to B only when LF4 is not held in pure layer",
     )
     require(
-        r"outputs\.x\s*=\s*\(\s*inputs\.rf2\s*&&\s*!layer_active\s*\)\s*\|\|\s*\(\s*layer_b_submode_active\s*&&\s*inputs\.rf3\s*\)\s*;",
+        r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*\(\s*!layer_direction_active\s*\|\|\s*inputs\.lf4\s*\)\s*;",
         source,
-        "X output includes LF4 layer sub-mode RF3 path and RF2 non-layer path",
+        "X output includes RF2 non-layer path and LF4 sub-mode path",
     )
-    require(r"const\s+bool\s+layer_b_submode_active\s*=\s*layer_active\s*&&\s*inputs\.lf4\s*;", source, "LF4 layer sub-mode flag")
 
     require(
         r"const\s+int8_t\s+horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer_left_active,\s*layer_right_active\)\s*;",
         source,
         "effective horizontal direction includes LF8/LF7",
     )
-    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_active\s*;", block, "RF3 Tilt1 gated by !layer_active")
-    require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_active\s*;", block, "RF4 Tilt2 gated by !layer_active")
+    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_transform_active\s*;", block, "RF3 Tilt1 gated by !layer_transform_active")
+    require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_transform_active\s*;", block, "RF4 Tilt2 gated by !layer_transform_active")
     require(
-        r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*&&\s*!layer_b_submode_active\s*;",
+        r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;",
         block,
-        "layered RF3 normal-x active is gated off by LF4 sub-mode",
+        "layered RF3 normal-x active is limited to pure layer",
     )
-    require(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", block, "layered RF4 flipper active")
+    require(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_transform_active\s*&&\s*inputs\.rf4\s*;", block, "layered RF4 flipper active in pure layer and LF4 sub-mode")
     require(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", source, "RF4 layered precedence over RF3 normal-x")
     require(r"EffectiveModifier::LayerNormalX", source, "effective modifier includes layer RF3 normal-x")
     require(
@@ -570,9 +579,9 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
 
     # RF15 aliases RF12 across forced-up/direction-plus-A and LT5 direction resolution.
     require(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*layer_rf2_force_up_active\s*;",
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
         source,
-        "forced-up includes layered RF2",
+        "forced-up includes pure-layer RF2 and LF4 sub-mode RF3",
     )
     require(
         r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
@@ -620,7 +629,7 @@ def main() -> int:
     print(f"source={SOURCE_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print("markers=present")
-    print("forced_up_role=rf6_or_rf12_or_rf15_or_layered_rf2")
+    print("forced_up_role=rf6_or_rf12_or_rf15_or_pure_layer_rf2_or_lf4_submode_rf3")
     print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
     print("lt3_role=L")
     print("lt5_rf11_role=Z_plus_low_magnitude_override_alias")

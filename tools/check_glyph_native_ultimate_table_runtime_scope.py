@@ -298,16 +298,24 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"mode_active\s*=\s*inputs\.rf8\s*;", block, "Mode anchor rf8")
     require(r"x1_active\s*=\s*inputs\.lt4\s*;", block, "X1 anchor lt4")
     require(r"x2_active\s*=\s*inputs\.lt1\s*;", block, "X2 anchor lt1")
-    require(r"y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 anchor lt2")
+    require(r"y1_active\s*=\s*inputs\.lt2\s*&&\s*!inputs\.lf4\s*;", block, "Y1 anchor lt2 with LF4 suppression")
     require(r"ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", block, "LS->DPad anchor rf7")
     require(r"null_modifier_active\s*=\s*inputs\.rf9\s*;", block, "RF9 null-modifier anchor")
     require(r"layer_left_active\s*=\s*inputs\.lf8\s*;", source, "layer-left anchor lf8")
     require(r"layer_right_active\s*=\s*inputs\.lf7\s*;", source, "layer-right anchor lf7")
-    require(r"layer_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer active aggregation")
-    require(r"layer_b_submode_active\s*=\s*layer_active\s*&&\s*inputs\.lf4\s*;", source, "LF4 layer sub-mode anchor")
-    require(r"layer_rf2_force_up_active\s*=\s*layer_active\s*&&\s*inputs\.rf2\s*;", source, "layered RF2 forced-Up anchor")
-    require(r"layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*&&\s*!layer_b_submode_active\s*;", source, "layered RF3 normal-x anchor")
-    require(r"rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", source, "layered RF4 flipper anchor")
+    require(r"layer_direction_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer direction active aggregation")
+    require(
+        r"lf4_submode_active\s*=\s*inputs\.lf4\s*&&\s*\(\s*layer_direction_active\s*\|\|\s*inputs\.lt2\s*\)\s*;",
+        source,
+        "LF4 sub-mode activation anchor",
+    )
+    require(r"layer_transform_active\s*=\s*layer_direction_active\s*\|\|\s*lf4_submode_active\s*;", source, "layer transform active aggregation")
+    require(r"pure_layer_rf2_force_up_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf2\s*;", source, "pure-layer RF2 forced-Up anchor")
+    require(r"lf4_submode_rf3_force_up_active\s*=\s*lf4_submode_active\s*&&\s*inputs\.rf3\s*;", source, "LF4 sub-mode RF3 forced-Up anchor")
+    require(r"layer_rf3_normal_x_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;", source, "layered RF3 normal-x anchor")
+    require(r"rf4_layer_flipper_active\s*=\s*layer_transform_active\s*&&\s*inputs\.rf4\s*;", source, "layered RF4 flipper anchor")
+    require(r"tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_transform_active\s*;", source, "RF3 tilt1 gate outside layer transform")
+    require(r"tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_transform_active\s*;", source, "RF4 tilt2 gate outside layer transform")
     require(
         r"layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;",
         source,
@@ -329,14 +337,14 @@ def ensure_required_shapes(source: str, block: str) -> None:
         "RF1/LT6/RF12/RF15 mapped to A",
     )
     require(
-        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
+        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
         source,
         "layered RF3 contributes to B only when LF4 sub-mode is inactive",
     )
     require(
-        r"outputs\.x\s*=\s*\(\s*inputs\.rf2\s*&&\s*!layer_active\s*\)\s*\|\|\s*\(\s*layer_b_submode_active\s*&&\s*inputs\.rf3\s*\)\s*;",
+        r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*\(\s*!layer_direction_active\s*\|\|\s*inputs\.lf4\s*\)\s*;",
         source,
-        "X output includes RF2 non-layer and LF4+layer+RF3 path",
+        "X output includes RF2 non-layer and LF4 sub-mode path",
     )
     require(
         r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
@@ -373,9 +381,9 @@ def ensure_required_shapes(source: str, block: str) -> None:
         "hard direction-plus-A Up override (RF12/RF15 or shared forced-up sources)",
     )
     require(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*layer_rf2_force_up_active\s*;",
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
         source,
-        "forced-up includes layered RF2",
+        "forced-up includes pure-layer RF2 and LF4 sub-mode RF3",
     )
     require(
         r"const\s+bool\s+lt1_force_up_active\s*=\s*force_up_active\s*;",
@@ -516,7 +524,7 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"outputs\.dpadUp\s*=\s*inputs\.rt5\s*;", source, "nunchuk-C Up uses RT5")
     require(r"outputs\.dpadRight\s*=\s*inputs\.rt4\s*;", source, "nunchuk-C Right uses RT4")
     require(
-        r"UpdateDirections\(\s*effective_ls_left,\s*//\s*Left\s*\(LF3 \+ LF8 layer-left contribution with cancellation\)\s*effective_ls_right,\s*//\s*Right\s*\(LF1 \+ LF7 layer-right contribution with cancellation\)\s*effective_ls_down,\s*//\s*Down\s*\(LT6/LF5, suppressed by forced-Up\)\s*effective_ls_up,\s*//\s*Up\s*\(RF6/RF12/RF15 and layer RF2 forced-Up\)\s*inputs\.rt3,\s*//\s*C-Left\s*inputs\.rt4,\s*//\s*C-Right\s*inputs\.rt2,\s*//\s*C-Down\s*inputs\.rt5,\s*//\s*C-Up",
+        r"UpdateDirections\(\s*effective_ls_left,\s*//\s*Left\s*\(LF3 \+ LF8 layer-left contribution with cancellation\)\s*effective_ls_right,\s*//\s*Right\s*\(LF1 \+ LF7 layer-right contribution with cancellation\)\s*effective_ls_down,\s*//\s*Down\s*\(LT6/LF5, suppressed by forced-Up\)\s*effective_ls_up,\s*//\s*Up\s*\(RF6/RF12/RF15, pure-layer RF2, and LF4-submode RF3 forced-Up\)\s*inputs\.rt3,\s*//\s*C-Left\s*inputs\.rt4,\s*//\s*C-Right\s*inputs\.rt2,\s*//\s*C-Down\s*inputs\.rt5,\s*//\s*C-Up",
         source,
         "UpdateDirections uses layer-aware effective LS directions and RT4/RT5 C-stick mapping",
         flags=re.DOTALL,
@@ -560,7 +568,7 @@ def main() -> int:
     print("z_role=rt1_or_lt5_or_rf11")
     print("r_role=rf16")
     print("y_role=rf10")
-    print("forced_up_role=rf6_or_rf12_or_rf15_or_layered_rf2")
+    print("forced_up_role=rf6_or_rf12_or_rf15_or_pure_layer_rf2_or_lf4_submode_rf3")
     print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
     print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_lt5_low_override")
     print("y1_tilt1_special_composite=enabled")
