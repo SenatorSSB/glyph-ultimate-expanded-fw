@@ -338,6 +338,8 @@ def read_runtime_doc() -> str:
     require(r"RF3.*B", text, "runtime doc RF3 layered B role")
     require(r"RF3.*normal[\s-]*x", text, "runtime doc RF3 layered normal-x role", flags=re.IGNORECASE)
     require(r"RF4.*wins.*RF3|RF3.*RF4.*wins", text, "runtime doc RF4 layered precedence over RF3 normal-x", flags=re.IGNORECASE)
+    require(r"LF4.*layer sub-?mode|layer sub-?mode.*LF4", text, "runtime doc LF4 layer sub-mode", flags=re.IGNORECASE)
+    require(r"LF4.*RF3.*X|RF3.*LF4.*X", text, "runtime doc LF4+layer RF3 -> X", flags=re.IGNORECASE)
     require(r"RF2.*forced Up|forced Up.*RF2", text, "runtime doc RF2 layered forced-Up role", flags=re.IGNORECASE)
     require(r"RT4\s*=\s*C-Right", text, "runtime doc RT4 C-right")
     require(r"RT5\s*=\s*C-Up", text, "runtime doc RT5 C-up")
@@ -403,11 +405,16 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         fail("LT3 must not be consumed as Y2 modifier input")
 
     require(
-        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_active\s*&&\s*inputs\.rf3\s*\)\s*;",
+        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
         source,
-        "layered RF3 contributes to B only under layer_active",
+        "layered RF3 contributes to B only when LF4 is not held in layer",
     )
-    require(r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*!layer_active\s*;", source, "RF2->X gated by !layer_active")
+    require(
+        r"outputs\.x\s*=\s*\(\s*inputs\.rf2\s*&&\s*!layer_active\s*\)\s*\|\|\s*\(\s*layer_b_submode_active\s*&&\s*inputs\.rf3\s*\)\s*;",
+        source,
+        "X output includes LF4 layer sub-mode RF3 path and RF2 non-layer path",
+    )
+    require(r"const\s+bool\s+layer_b_submode_active\s*=\s*layer_active\s*&&\s*inputs\.lf4\s*;", source, "LF4 layer sub-mode flag")
 
     require(
         r"const\s+int8_t\s+horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer_left_active,\s*layer_right_active\)\s*;",
@@ -416,7 +423,11 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     )
     require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_active\s*;", block, "RF3 Tilt1 gated by !layer_active")
     require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_active\s*;", block, "RF4 Tilt2 gated by !layer_active")
-    require(r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*;", block, "layered RF3 normal-x active")
+    require(
+        r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*&&\s*!layer_b_submode_active\s*;",
+        block,
+        "layered RF3 normal-x active is gated off by LF4 sub-mode",
+    )
     require(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", block, "layered RF4 flipper active")
     require(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", source, "RF4 layered precedence over RF3 normal-x")
     require(r"EffectiveModifier::LayerNormalX", source, "effective modifier includes layer RF3 normal-x")

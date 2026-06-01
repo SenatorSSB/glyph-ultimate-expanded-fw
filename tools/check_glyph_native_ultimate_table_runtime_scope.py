@@ -304,8 +304,9 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"layer_left_active\s*=\s*inputs\.lf8\s*;", source, "layer-left anchor lf8")
     require(r"layer_right_active\s*=\s*inputs\.lf7\s*;", source, "layer-right anchor lf7")
     require(r"layer_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer active aggregation")
+    require(r"layer_b_submode_active\s*=\s*layer_active\s*&&\s*inputs\.lf4\s*;", source, "LF4 layer sub-mode anchor")
     require(r"layer_rf2_force_up_active\s*=\s*layer_active\s*&&\s*inputs\.rf2\s*;", source, "layered RF2 forced-Up anchor")
-    require(r"layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*;", source, "layered RF3 normal-x anchor")
+    require(r"layer_rf3_normal_x_active\s*=\s*layer_active\s*&&\s*inputs\.rf3\s*&&\s*!layer_b_submode_active\s*;", source, "layered RF3 normal-x anchor")
     require(r"rf4_layer_flipper_active\s*=\s*layer_active\s*&&\s*inputs\.rf4\s*;", source, "layered RF4 flipper anchor")
     require(
         r"layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;",
@@ -328,14 +329,14 @@ def ensure_required_shapes(source: str, block: str) -> None:
         "RF1/LT6/RF12/RF15 mapped to A",
     )
     require(
-        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_active\s*&&\s*inputs\.rf3\s*\)\s*;",
+        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*\(\s*layer_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
         source,
-        "layered RF3 contributes to B",
+        "layered RF3 contributes to B only when LF4 sub-mode is inactive",
     )
     require(
-        r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*!layer_active\s*;",
+        r"outputs\.x\s*=\s*\(\s*inputs\.rf2\s*&&\s*!layer_active\s*\)\s*\|\|\s*\(\s*layer_b_submode_active\s*&&\s*inputs\.rf3\s*\)\s*;",
         source,
-        "RF2->X is gated by !layer_active",
+        "X output includes RF2 non-layer and LF4+layer+RF3 path",
     )
     require(
         r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",

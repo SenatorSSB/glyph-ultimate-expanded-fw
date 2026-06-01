@@ -342,6 +342,7 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     const bool layer_left_active = inputs.lf8;
     const bool layer_right_active = inputs.lf7;
     const bool layer_active = layer_left_active || layer_right_active;
+    const bool layer_b_submode_active = layer_active && inputs.lf4;
     const bool layer_rf2_force_up_active = layer_active && inputs.rf2;
     const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || layer_rf2_force_up_active;
     const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
@@ -352,8 +353,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     const bool ls_to_dpad_active = inputs.rf7;
 
     outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
-    outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && inputs.rf3);
-    outputs.x = inputs.rf2 && !layer_active;
+    outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && !inputs.lf4 && inputs.rf3);
+    outputs.x = (inputs.rf2 && !layer_active) || (layer_b_submode_active && inputs.rf3);
     outputs.y = inputs.rf10;
     outputs.buttonL = inputs.lt3;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
@@ -405,6 +406,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool layer_left_active = inputs.lf8;
     const bool layer_right_active = inputs.lf7;
     const bool layer_active = layer_left_active || layer_right_active;
+    const bool layer_b_submode_active = layer_active && inputs.lf4;
     const bool layer_rf2_force_up_active = layer_active && inputs.rf2;
     const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || layer_rf2_force_up_active;
     const bool effective_ls_up = inputs.lf2 || force_up_active;
@@ -442,7 +444,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool direction_plus_a_active = down_a_active || up_a_active;
     const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || force_up_active);
 
-    const bool layer_rf3_normal_x_active = layer_active && inputs.rf3;
+    const bool layer_rf3_normal_x_active = layer_active && inputs.rf3 && !layer_b_submode_active;
     const bool rf4_layer_flipper_active = layer_active && inputs.rf4;
     const bool tilt1_pressed = inputs.rf3 && !layer_active;
     const bool tilt2_pressed = inputs.rf4 && !layer_active;

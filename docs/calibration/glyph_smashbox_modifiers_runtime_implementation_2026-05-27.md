@@ -165,8 +165,11 @@ Layer direction behavior:
 Layer role changes while `layer_active`:
 
 - `RF4` changes from Tilt2 to a flipper x-only modifier.
-- `RF3` changes from Tilt1 to B plus a normal x-only 41px modifier.
+- `RF3` changes from Tilt1 to a layer-dependent role:
+  - without `LF4`: `B + normal x-only 41px modifier`
+  - with `LF4`: `X` (RF3 normal-x disabled)
 - `RF2` changes from X to forced Up.
+- `LF4` is a layer sub-mode trigger and always keeps B asserted.
 
 Inactive-layer behavior (preserved):
 
@@ -177,10 +180,13 @@ Inactive-layer behavior (preserved):
 
 Digital output policy:
 
-- `outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && inputs.rf3);`
-- `RF3` does not produce B when layer is inactive except existing B sources (`RF5`, `LF4`), but under layer it still contributes B while also selecting the layer normal-x modifier path.
-- `outputs.x = inputs.rf2 && !layer_active;`
+- `const bool layer_b_submode_active = layer_active && inputs.lf4;`
+- `outputs.b = inputs.rf5 || inputs.lf4 || (layer_active && !inputs.lf4 && inputs.rf3);`
+- `LF4` keeps B active regardless of layer state.
+- `RF3` contributes B only when layer is active and `LF4` is not held.
+- `outputs.x = (inputs.rf2 && !layer_active) || (layer_b_submode_active && inputs.rf3);`
 - `RF2` does not output X while layer is active.
+- `RF3` outputs X only for `layer_active && LF4 && RF3`.
 - `RF4` does not directly output a game button in either mode.
 
 RF3 layer normal-x tables:
@@ -225,10 +231,14 @@ Layer RF3/RF4 composition policy:
 
 - Layer RF4 is a special x-only modifier and does not count as Tilt2/Tilt3.
 - Layer RF3 is a normal x-only modifier and does not count as Tilt1 when layer is active.
-- If both layer RF3 and layer RF4 are active, RF4 flipper wins for x-modifier selection while RF3 still contributes B.
+- `LF4` activates a layer sub-mode (`layer_b_submode_active`) that changes RF3 behavior from B+normal-x to X.
+- When `LF4` layer sub-mode is active, RF3 normal-x is disabled.
+- If both layer RF3 and layer RF4 are active without LF4 sub-mode, RF4 flipper wins for x-modifier selection while RF3 contributes B.
 - `layer_active + RF3 + RF4` resolves to `B + RF4 flipper` and not Tilt3.
 - If `layer_active && inputs.rf3` with no RF4 and no extra X/Tilt modifier activity, runtime uses layer RF3 normal-x behavior.
 - If `layer_active && inputs.rf3 && Y1` with no RF4 and no extra X/Tilt modifier activity, runtime uses Y1+layer RF3 normal-x behavior.
+- If `layer_active && inputs.lf4 && inputs.rf3`, runtime outputs X from RF3 and does not enable layer RF3 normal-x.
+- If `layer_active && inputs.lf4 && inputs.rf3 && inputs.rf4`, runtime outputs `B + X` and still applies RF4 flipper.
 - If `layer_active && inputs.rf4` and no other X/Tilt modifier is active, runtime uses layer RF4 flipper behavior.
 - If `layer_active && inputs.rf4 && Y1` and no other X/Tilt modifier is active, runtime uses Y1+layer RF4 table behavior.
 - If `layer_active && (inputs.rf3 || inputs.rf4)` with extra X1/X2/Tilt modifier activity, runtime falls back to ordinary multi-modifier policy:
@@ -267,9 +277,11 @@ Tilt family compression:
   - `RF3` alone => effective Tilt1
   - `RF4` alone => effective Tilt2
 - While LF7/LF8 layer is active:
-  - `RF3` is B + layer normal-x (not Tilt1)
+  - `RF3` is B + layer normal-x when `LF4` is not held
+  - `RF3` is X (and not layer normal-x) when `LF4` is held
   - `RF4` is layer flipper (not Tilt2)
-  - `RF3+RF4` is B + layer flipper (RF4 wins x-modifier selection; not Tilt3)
+  - `RF3+RF4` with no `LF4` is B + layer flipper (RF4 wins x-modifier selection; not Tilt3)
+  - `LF4+RF3+RF4` is B + X + layer flipper (still not Tilt3)
 - Ordinary non-Mode Tilt1 y offset is `81` from neutral center `128`, yielding Tilt1 y values `47/128/209`.
 
 Active effective non-mode modifiers counted:
@@ -478,8 +490,10 @@ Manual hardware validation is required for:
 - `RF4` behaves as Tilt2 only when layer inactive and does not act as Up direction source,
 - `RF4` under layer behaves as flipper x-only modifier and not Tilt2/Tilt3,
 - `RF3` is Tilt1 only when layer inactive and does not press R,
-- `RF3` under layer asserts B + layer normal-x and does not act as Tilt1,
+- `RF3` under layer without LF4 asserts B + layer normal-x and does not act as Tilt1,
+- `RF3` under layer with LF4 asserts X and does not activate layer normal-x,
 - `RF3+RF4` under layer resolves to B + flipper (RF4 flipper wins over RF3 normal-x) and not Tilt3,
+- `LF4+RF3+RF4` under layer resolves to B + X + flipper,
 - `Y1 + layer RF3` uses layer normal-x with Y1 y values (Mode/non-Mode variants),
 - `Y1 + layer RF4` uses the layer-flipper x behavior with Y1 y values (Mode/non-Mode variants),
 - `Y1+Tilt1` special composite rows (Mode and non-Mode),

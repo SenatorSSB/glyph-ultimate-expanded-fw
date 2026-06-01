@@ -36,6 +36,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | LF8 layer-left direction | Press `LF8` with no other horizontal source | N/A | Effective direction includes Left from LF8 layer behavior | NOT_TESTED |
 | LF7 layer-right direction | Press `LF7` with no other horizontal source | N/A | Effective direction includes Right from LF7 layer behavior | NOT_TESTED |
 | LF8+LF7 layer horizontal cancel | Press `LF8 + LF7` with no other horizontal source | N/A | Horizontal layer contribution cancels to neutral | NOT_TESTED |
+| Layer LF4 direction hold | `LF8/LF7 + LF4` | N/A | B remains asserted from LF4 while LF8/LF7 still provide layer left/right direction contribution | NOT_TESTED |
 | RF6 forced-Up restore check | Press RF6 in `MODE_ULTIMATE` runtime path | N/A | RF6 forced-Up is restored and visible as runtime input | NOT_TESTED |
 | Modifier visibility check | Press X1/X2/Y1/Tilt1/Tilt2 inputs | N/A | `LT4/LT1/LT2/RF3/RF4` are visible to runtime; LT5 is reserved for Z-airdodge | NOT_TESTED |
 | LT4 X1 role check | Press `LT4` with and without Mode | 1..9 spot checks | LT4 selects X1 (and MX1 when Mode is on) | NOT_TESTED |
@@ -78,6 +79,7 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF6 forced-Up with Down+Right | `RF6 + Down + Right` | N/A | Effective direction `9` table output | NOT_TESTED |
 | Layer RF2 forced-Up with LF8 | `LF8 + RF2` while LF7/LF8 layer is active | N/A | Effective Up-left direction; RF2 does not output X | NOT_TESTED |
 | Layer RF2 forced-Up with LF7 | `LF7 + RF2` while LF7/LF8 layer is active | N/A | Effective Up-right direction; RF2 does not output X | NOT_TESTED |
+| Layer RF2 forced-Up with LF4 | `LF8/LF7 + LF4 + RF2` while layer is active | N/A | B asserted from LF4; effective Up-left/Up-right direction; RF2 does not output X | NOT_TESTED |
 | RF2 non-layer X baseline | `RF2` with LF7/LF8 layer inactive | N/A | X output asserted; no forced-Up contribution from RF2 | NOT_TESTED |
 | RF6 game Y guard | `RF6` only | N/A | Forced-Up behavior is present and game Y is not pressed | NOT_TESTED |
 | RF6 Down override guard | `RF6 + LF5` | N/A | Up remains effective and Down is suppressed in runtime table direction | NOT_TESTED |
@@ -85,14 +87,17 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 | RF15 + LT6 override guard | `RF15 + LT6` | N/A | Up remains effective and A is asserted | NOT_TESTED |
 | RF6 + LT6 override guard | `RF6 + LT6` | N/A | Up remains effective and A is asserted | NOT_TESTED |
 | Tilt3 chord source | `RF3 + RF4` | 1..9 | Effective Tilt3 table (or MTilt3 when Mode on) | NOT_TESTED |
-| Layer RF3 normal-x baseline | `LF8/LF7 + RF3` | 1..9 | B asserted; RF3 uses layer normal-x table (non-Mode) and does not act as Tilt1 | NOT_TESTED |
-| Layer RF3 normal-x Mode baseline | `Mode + LF8/LF7 + RF3` | 1..9 | B asserted; RF3 uses layer normal-x Mode table | NOT_TESTED |
-| Layer RF3 + Y1 normal-x composite | `LF8/LF7 + RF3 + LT2` | 1..9 | B asserted; RF3 uses Y1 + layer normal-x table | NOT_TESTED |
-| Layer RF3 + Y1 normal-x Mode composite | `Mode + LF8/LF7 + RF3 + LT2` | 1..9 | B asserted; RF3 uses Mode + Y1 + layer normal-x table | NOT_TESTED |
+| Layer RF3 normal-x baseline (no LF4) | `LF8/LF7 + RF3` with `LF4` released | 1..9 | B asserted; RF3 uses layer normal-x table (non-Mode) and does not act as Tilt1 | NOT_TESTED |
+| Layer RF3 normal-x Mode baseline (no LF4) | `Mode + LF8/LF7 + RF3` with `LF4` released | 1..9 | B asserted; RF3 uses layer normal-x Mode table | NOT_TESTED |
+| Layer RF3 + Y1 normal-x composite (no LF4) | `LF8/LF7 + RF3 + LT2` with `LF4` released | 1..9 | B asserted; RF3 uses Y1 + layer normal-x table | NOT_TESTED |
+| Layer RF3 + Y1 normal-x Mode composite (no LF4) | `Mode + LF8/LF7 + RF3 + LT2` with `LF4` released | 1..9 | B asserted; RF3 uses Mode + Y1 + layer normal-x table | NOT_TESTED |
+| Layer LF4+RF3 sub-mode | `LF8/LF7 + LF4 + RF3` | 1..9 | B asserted from LF4; RF3 outputs X; RF3 normal-x table is disabled | NOT_TESTED |
 | RF3 non-layer Tilt1 baseline | `RF3` with LF7/LF8 layer inactive | 1..9 | RF3 acts as Tilt1 and does not add B beyond RF5/LF4 | NOT_TESTED |
 | Layer RF4 flipper baseline | `LF8 + RF4` and `LF7 + RF4` | 1..9 | RF4 uses layer flipper table (x-only flipper behavior) | NOT_TESTED |
+| Layer LF4+RF4 flipper | `LF8/LF7 + LF4 + RF4` | 1..9 | B asserted from LF4; RF4 uses layer flipper table unchanged | NOT_TESTED |
 | RF4 non-layer Tilt2 baseline | `RF4` with LF7/LF8 layer inactive | 1..9 | RF4 acts as Tilt2 | NOT_TESTED |
 | Layer RF3+RF4 composition | `LF8/LF7 + RF3 + RF4` | 1..9 | Resolves to B + layer flipper; RF4 flipper wins over RF3 normal-x; does not resolve to Tilt3 | NOT_TESTED |
+| Layer LF4+RF3+RF4 composition | `LF8/LF7 + LF4 + RF3 + RF4` | 1..9 | Resolves to B + X + layer flipper; RF3 normal-x remains disabled; not Tilt3 | NOT_TESTED |
 | Layer RF3+RF4+Y1 composition | `LF8/LF7 + RF3 + RF4 + LT2` | 1..9 | Resolves to B + Y1 layer RF4 flipper table; RF4 precedence preserved | NOT_TESTED |
 | Non-layer RF3+RF4 Tilt3 baseline | `RF3 + RF4` with LF7/LF8 layer inactive | 1..9 | Resolves to Tilt3 | NOT_TESTED |
 | LT3 role | `LT3` only | N/A | L output asserted; LT3 is not a Y2 modifier role | NOT_TESTED |

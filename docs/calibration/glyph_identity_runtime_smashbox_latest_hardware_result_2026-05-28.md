@@ -92,3 +92,5 @@
 - A new hardware validation run is required before claiming PASS for the LF7/LF8 layer-direction runtime update.
 - The previous LF7/LF8 layer amendment also predates the RF3 layer normal-x modifier addition and RF4-over-RF3 layered precedence update.
 - RF3 layer normal-x behavior and RF4 layered precedence require a fresh hardware validation run before any PASS claim for this revision.
+- The previous LF7/LF8 layer amendment also predates LF4 layer sub-mode behavior (`layer + LF4 + RF3 => X` with LF4 still asserting B).
+- LF4 layer sub-mode behavior requires fresh hardware validation before any PASS claim for this revision.
