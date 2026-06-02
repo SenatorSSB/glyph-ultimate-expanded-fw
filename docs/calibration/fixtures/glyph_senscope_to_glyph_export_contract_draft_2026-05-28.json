@@ -1,0 +1,58 @@
+{
+  "schema_name": "glyph_senscope_to_glyph_export_contract_draft",
+  "contract_version": 1,
+  "status": "draft_docs_only_not_implemented",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "target_generated_config_contract": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+  "required_export_payloads": [
+    "neutral_senscope_profile",
+    "glyph_generated_config_prototype",
+    "table_source_metadata",
+    "role_binding_metadata",
+    "validation_report",
+    "hardware_status_caveat",
+    "nunchuk_status_caveat"
+  ],
+  "validation_report_required_sections": [
+    "source_authority",
+    "table_count",
+    "role_binding_summary",
+    "priority_model_summary",
+    "hard_override_summary",
+    "behavior_case_coverage_summary",
+    "no_forbidden_behavior_confirmation",
+    "not_hardware_validation_caveat",
+    "open_questions"
+  ],
+  "senscope_owns": [
+    "app_owned_neutral_profile_data",
+    "raw_coordinate_modifier_profile_semantics",
+    "ssbu_mapping_datasets",
+    "user_facing_optimization_report_ux",
+    "export_package_generation"
+  ],
+  "glyph_repo_owns": [
+    "primitive_evaluator",
+    "priority_model",
+    "supported_role_classes",
+    "source_backed_firmware_behavior",
+    "generated_artifact_checkers_against_firmware_source_assumptions"
+  ],
+  "forbidden_scope": [
+    "device_write",
+    "serial_transport",
+    "runtime_loaded_config",
+    "firmware_behavior_change",
+    "profile_schema_change",
+    "macro_or_turbo_logic",
+    "hardware_validation_claim"
+  ],
+  "open_questions": [
+    "exact_senscope_export_schema",
+    "app_owned_neutral_profile_field_mapping",
+    "runtime_loaded_config_design",
+    "device_write_transport_policy",
+    "nunchuk_hardware_validation"
+  ]
+}
