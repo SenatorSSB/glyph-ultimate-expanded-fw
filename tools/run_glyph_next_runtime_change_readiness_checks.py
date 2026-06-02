@@ -88,6 +88,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_smashbox_identity_runtime_bindings.py",
             optional=True,
         ),
+        step(
+            "identity runtime behavior cases",
+            "tools/check_glyph_identity_runtime_behavior_cases.py",
+        ),
     ]
 
 

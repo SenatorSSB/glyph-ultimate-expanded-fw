@@ -1,0 +1,1998 @@
+{
+  "behavior_case_contract_version": 1,
+  "schema_name": "glyph_identity_runtime_behavior_cases",
+  "mode_scope": "MODE_ULTIMATE",
+  "source_status": "source_backed_expected_behavior_cases",
+  "hardware_status": "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results",
+  "source_authority": {
+    "runtime": "src/modes/Ultimate.cpp",
+    "role_map_doc": "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
+    "role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
+    "hardware_result": "docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md"
+  },
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "direction_convention": "numpad",
+  "cases": [
+    {
+      "case_id": "digital_rf1_a_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["RF1"],
+      "expected": {
+        "digital_buttons": ["A"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "digital_rf5_b_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["RF5"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "digital_lf4_b_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["LF4"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LF4 is a B carrier even when LF4 sub-mode is not active."]
+    },
+    {
+      "case_id": "digital_rf10_y_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["RF10"],
+      "expected": {
+        "digital_buttons": ["Y"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "digital_rf2_x_non_layer_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["RF2"],
+      "expected": {
+        "digital_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Pure layer and LF4 sub-mode RF2 variants are covered separately."]
+    },
+    {
+      "case_id": "digital_rt1_z_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["RT1"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_smashbox_modifiers_runtime_implementation_2026-05-27.md"],
+      "notes": ["Z is source-confirmed through the shared buttonR carrier."]
+    },
+    {
+      "case_id": "digital_lt5_z_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["LT5"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["The LT5 low-magnitude analog override is covered in z_airdodge_low_magnitude_override cases."]
+    },
+    {
+      "case_id": "digital_rf11_z_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["RF11"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["The RF11 low-magnitude analog override is covered in z_airdodge_low_magnitude_override cases."]
+    },
+    {
+      "case_id": "digital_lt3_l_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["LT3"],
+      "expected": {
+        "digital_buttons": ["L"],
+        "trigger_analog": {"L": 140},
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LT3 drives both buttonL and triggerLDigital in source."]
+    },
+    {
+      "case_id": "digital_rf16_r_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["RF16"],
+      "expected": {
+        "digital_buttons": ["R"],
+        "trigger_analog": {"R": 140},
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF16 drives triggerRDigital in source."]
+    },
+    {
+      "case_id": "digital_mb4_capture_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["MB4"],
+      "expected": {
+        "digital_buttons": ["Capture"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "digital_mb5_home_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["MB5"],
+      "expected": {
+        "digital_buttons": ["Home"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "digital_mb6_select_minus_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["MB6"],
+      "expected": {
+        "digital_buttons": ["Select/Minus"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "digital_mb7_start_plus_carrier",
+      "category": "digital_button_carrier",
+      "input_buttons": ["MB7"],
+      "expected": {
+        "digital_buttons": ["Start/Plus"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "base_lf3_effective_left",
+      "category": "base_direction",
+      "input_buttons": ["LF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 4,
+        "left_stick": [61, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "base_lf1_effective_right",
+      "category": "base_direction",
+      "input_buttons": ["LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 6,
+        "left_stick": [195, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "base_lf2_effective_up",
+      "category": "base_direction",
+      "input_buttons": ["LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "base_lf5_effective_down",
+      "category": "base_direction",
+      "input_buttons": ["LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": true},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 2,
+        "left_stick": [128, 51],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "base_lf3_lf1_horizontal_cancel",
+      "category": "base_direction",
+      "input_buttons": ["LF3", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Horizontal cancellation follows ResolveHorizontalAxis score resolution."]
+    },
+    {
+      "case_id": "base_lf2_lf5_up_down_both_source_present",
+      "category": "base_direction",
+      "input_buttons": ["LF2", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": true},
+        "analog_source": null,
+        "left_stick": null,
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": ["Source directly sets up from LF2 and down from LF5 when no forced-up source is active; no analog coordinate is asserted here."]
+    },
+    {
+      "case_id": "base_rf6_forced_up",
+      "category": "base_direction",
+      "input_buttons": ["RF6"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "base_rf6_lf5_forced_up_suppresses_down",
+      "category": "base_direction",
+      "input_buttons": ["RF6", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "suppressed_directions": ["Down"],
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["state.down is suppressed when force_up_active is true."]
+    },
+    {
+      "case_id": "default_direction_5_neutral",
+      "category": "default_analog_table",
+      "input_buttons": [],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_4_left",
+      "category": "default_analog_table",
+      "input_buttons": ["LF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 4,
+        "left_stick": [61, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_6_right",
+      "category": "default_analog_table",
+      "input_buttons": ["LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 6,
+        "left_stick": [195, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_2_down",
+      "category": "default_analog_table",
+      "input_buttons": ["LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": true},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 2,
+        "left_stick": [128, 51],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_8_up",
+      "category": "default_analog_table",
+      "input_buttons": ["LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_1_left_down",
+      "category": "default_analog_table",
+      "input_buttons": ["LF3", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": true},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 1,
+        "left_stick": [61, 51],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_3_right_down",
+      "category": "default_analog_table",
+      "input_buttons": ["LF1", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": true},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 3,
+        "left_stick": [195, 51],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_7_left_up",
+      "category": "default_analog_table",
+      "input_buttons": ["LF3", "LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 7,
+        "left_stick": [61, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "default_direction_9_right_up",
+      "category": "default_analog_table",
+      "input_buttons": ["LF1", "LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 9,
+        "left_stick": [195, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_5_neutral",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_4_left",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 4,
+        "left_stick": [14, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_6_right",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 6,
+        "left_stick": [242, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_2_down",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": true},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 2,
+        "left_stick": [128, 87],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_8_up",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 8,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": ["Mode default directions 5 and 8 share the same source coordinate."]
+    },
+    {
+      "case_id": "mode_default_direction_1_left_down",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF3", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": true},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 1,
+        "left_stick": [14, 87],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_3_right_down",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF1", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": true},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 3,
+        "left_stick": [242, 87],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_7_left_up",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF3", "LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": true, "down": false},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 7,
+        "left_stick": [14, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_default_direction_9_right_up",
+      "category": "mode_default_analog_table",
+      "input_buttons": ["RF8", "LF1", "LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": true, "down": false},
+        "analog_source": "mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 9,
+        "left_stick": [242, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": []
+    },
+    {
+      "case_id": "single_x1_neutral",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["LT4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "x1_table",
+        "table_id": "X1",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_x1_right",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["LT4", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "x1_table",
+        "table_id": "X1",
+        "direction_index": 6,
+        "left_stick": [163, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_x2_neutral",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["LT1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "x2_table",
+        "table_id": "X2",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_x2_right",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["LT1", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "x2_table",
+        "table_id": "X2",
+        "direction_index": 6,
+        "left_stick": [174, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_y1_neutral",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["LT2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "y1_table",
+        "table_id": "Y1",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_y1_up",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["LT2", "LF2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "y1_table",
+        "table_id": "Y1",
+        "direction_index": 8,
+        "left_stick": [128, 157],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_y1_down",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["LT2", "LF5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": true},
+        "analog_source": "y1_table",
+        "table_id": "Y1",
+        "direction_index": 2,
+        "left_stick": [128, 99],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_tilt1_neutral",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["RF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "tilt1_table",
+        "table_id": "Tilt1",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF3 is Tilt1 only outside layer/sub-mode."]
+    },
+    {
+      "case_id": "single_tilt1_right",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["RF3", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "tilt1_table",
+        "table_id": "Tilt1",
+        "direction_index": 6,
+        "left_stick": [69, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_tilt2_neutral",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["RF4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "tilt2_table",
+        "table_id": "Tilt2",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF4 is Tilt2 only outside layer/sub-mode."]
+    },
+    {
+      "case_id": "single_tilt2_right",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["RF4", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "tilt2_table",
+        "table_id": "Tilt2",
+        "direction_index": 6,
+        "left_stick": [168, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "single_tilt3_neutral",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["RF3", "RF4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "tilt3_table",
+        "table_id": "Tilt3",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF3+RF4 becomes Tilt3 only outside layer/sub-mode."]
+    },
+    {
+      "case_id": "single_tilt3_right",
+      "category": "single_modifier_table_selection",
+      "input_buttons": ["RF3", "RF4", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "tilt3_table",
+        "table_id": "Tilt3",
+        "direction_index": 6,
+        "left_stick": [181, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_modifier_mx1_neutral",
+      "category": "mode_modifier_table_selection",
+      "input_buttons": ["RF8", "LT4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mx1_table",
+        "table_id": "MX1",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_modifier_mx2_neutral",
+      "category": "mode_modifier_table_selection",
+      "input_buttons": ["RF8", "LT1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mx2_table",
+        "table_id": "MX2",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_modifier_my1_neutral",
+      "category": "mode_modifier_table_selection",
+      "input_buttons": ["RF8", "LT2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "my1_table",
+        "table_id": "MY1",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_modifier_mtilt1_neutral",
+      "category": "mode_modifier_table_selection",
+      "input_buttons": ["RF8", "RF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mtilt1_table",
+        "table_id": "MTilt1",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_modifier_mtilt2_neutral",
+      "category": "mode_modifier_table_selection",
+      "input_buttons": ["RF8", "RF4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mtilt2_table",
+        "table_id": "MTilt2",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "mode_modifier_mtilt3_neutral",
+      "category": "mode_modifier_table_selection",
+      "input_buttons": ["RF8", "RF3", "RF4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mtilt3_table",
+        "table_id": "MTilt3",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "fallback_x1_x2_default_neutral",
+      "category": "multi_modifier_fallback",
+      "input_buttons": ["LT4", "LT1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table_multi_modifier_fallback",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["SelectStickTable returns Default when active_modifier_count is not exactly one and no special composite matches."]
+    },
+    {
+      "case_id": "fallback_mode_x1_x2_mode_default_neutral",
+      "category": "multi_modifier_fallback",
+      "input_buttons": ["RF8", "LT4", "LT1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mode_default_table_multi_modifier_fallback",
+        "table_id": "ModeDefault",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "fallback_y1_tilt2_default_right",
+      "category": "multi_modifier_fallback",
+      "input_buttons": ["LT2", "RF4", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "default_table_multi_modifier_fallback",
+        "table_id": "Default",
+        "direction_index": 6,
+        "left_stick": [195, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Y1+Tilt2 has no special composite in source."]
+    },
+    {
+      "case_id": "fallback_guard_tilt3_not_fallback_right",
+      "category": "multi_modifier_fallback",
+      "input_buttons": ["RF3", "RF4", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "tilt3_table",
+        "table_id": "Tilt3",
+        "direction_index": 6,
+        "left_stick": [181, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Outside layer/sub-mode, RF3+RF4 is one effective Tilt3 modifier."]
+    },
+    {
+      "case_id": "composite_y1_tilt1_neutral",
+      "category": "composite_table",
+      "input_buttons": ["LT2", "RF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "y1_tilt1_composite_table",
+        "table_id": "Y1Tilt1",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "composite_y1_tilt1_right",
+      "category": "composite_table",
+      "input_buttons": ["LT2", "RF3", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "y1_tilt1_composite_table",
+        "table_id": "Y1Tilt1",
+        "direction_index": 6,
+        "left_stick": [87, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "composite_mode_y1_tilt1_neutral",
+      "category": "composite_table",
+      "input_buttons": ["RF8", "LT2", "RF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "mode_y1_tilt1_composite_table",
+        "table_id": "MY1Tilt1",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "composite_mode_y1_tilt1_right",
+      "category": "composite_table",
+      "input_buttons": ["RF8", "LT2", "RF3", "LF1"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "mode_y1_tilt1_composite_table",
+        "table_id": "MY1Tilt1",
+        "direction_index": 6,
+        "left_stick": [87, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "composite_y1_layer_normal_x_left",
+      "category": "composite_table",
+      "input_buttons": ["LT2", "LF8", "RF3"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "y1_layer_normal_x_composite_table",
+        "table_id": "Y1LayerNormalX",
+        "direction_index": 4,
+        "left_stick": [87, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Pure-layer RF3 also contributes B."]
+    },
+    {
+      "case_id": "composite_y1_layer_flipper_left",
+      "category": "composite_table",
+      "input_buttons": ["LT2", "LF8", "RF4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "y1_layer_flipper_composite_table",
+        "table_id": "Y1LayerFlipper",
+        "direction_index": 4,
+        "left_stick": [169, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "composite_mode_y1_layer_normal_x_left",
+      "category": "composite_table",
+      "input_buttons": ["RF8", "LT2", "LF8", "RF3"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "mode_y1_layer_normal_x_composite_table",
+        "table_id": "MY1LayerNormalX",
+        "direction_index": 4,
+        "left_stick": [87, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "composite_mode_y1_layer_flipper_left",
+      "category": "composite_table",
+      "input_buttons": ["RF8", "LT2", "LF8", "RF4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "mode_y1_layer_flipper_composite_table",
+        "table_id": "MY1LayerFlipper",
+        "direction_index": 4,
+        "left_stick": [169, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "composite_layer_rf4_flipper_wins_over_rf3_normal_x",
+      "category": "composite_table",
+      "input_buttons": ["LT2", "LF8", "RF3", "RF4"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "y1_layer_flipper_composite_table",
+        "table_id": "Y1LayerFlipper",
+        "direction_index": 4,
+        "left_stick": [169, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF4 layer flipper wins over RF3 normal-x table selection while RF3 still contributes B."]
+    },
+    {
+      "case_id": "pure_layer_lf8_layer_left",
+      "category": "pure_layer",
+      "input_buttons": ["LF8"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 4,
+        "left_stick": [61, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LF8 contributes layer-left."]
+    },
+    {
+      "case_id": "pure_layer_lf7_layer_right",
+      "category": "pure_layer",
+      "input_buttons": ["LF7"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 6,
+        "left_stick": [195, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LF7 contributes layer-right."]
+    },
+    {
+      "case_id": "pure_layer_lf8_rf2_forced_up_no_x",
+      "category": "pure_layer",
+      "input_buttons": ["LF8", "RF2"],
+      "expected": {
+        "digital_buttons": [],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": true, "right": false, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 7,
+        "left_stick": [61, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Pure-layer RF2 is forced Up and does not output X."]
+    },
+    {
+      "case_id": "pure_layer_lf7_rf2_forced_up_no_x",
+      "category": "pure_layer",
+      "input_buttons": ["LF7", "RF2"],
+      "expected": {
+        "digital_buttons": [],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": true, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 9,
+        "left_stick": [195, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Pure-layer RF2 is forced Up and does not output X."]
+    },
+    {
+      "case_id": "pure_layer_lf8_rf3_b_layer_normal_x",
+      "category": "pure_layer",
+      "input_buttons": ["LF8", "RF3"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "layer_normal_x_table",
+        "table_id": "LayerNormalX",
+        "direction_index": 4,
+        "left_stick": [87, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Pure-layer RF3 contributes B plus layer normal-x."]
+    },
+    {
+      "case_id": "pure_layer_lf8_rf4_layer_flipper",
+      "category": "pure_layer",
+      "input_buttons": ["LF8", "RF4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "layer_flipper_table",
+        "table_id": "LayerFlipper",
+        "direction_index": 4,
+        "left_stick": [169, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Pure-layer RF4 selects the layer flipper table."]
+    },
+    {
+      "case_id": "pure_layer_lf8_rf3_rf4_flipper_wins",
+      "category": "pure_layer",
+      "input_buttons": ["LF8", "RF3", "RF4"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "layer_flipper_table",
+        "table_id": "LayerFlipper",
+        "direction_index": 4,
+        "left_stick": [169, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF4 flipper wins table selection over RF3 normal-x in layer."]
+    },
+    {
+      "case_id": "lf4_submode_lf4_lt2_y1_suppressed_default_neutral",
+      "category": "lf4_sub_mode",
+      "input_buttons": ["LF4", "LT2"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_modifiers": ["Y1"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LF4 activates sub-mode with LT2 and suppresses LT2/Y1."]
+    },
+    {
+      "case_id": "lf4_submode_lf4_lt2_rf2_x_no_forced_up",
+      "category": "lf4_sub_mode",
+      "input_buttons": ["LF4", "LT2", "RF2"],
+      "expected": {
+        "digital_buttons": ["B", "X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["In LF4 sub-mode, RF2 outputs X and does not provide pure-layer forced Up."]
+    },
+    {
+      "case_id": "lf4_submode_lf4_lt2_rf3_forced_up",
+      "category": "lf4_sub_mode",
+      "input_buttons": ["LF4", "LT2", "RF3"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["In LF4 sub-mode, RF3 becomes forced Up and does not contribute layer normal-x."]
+    },
+    {
+      "case_id": "lf4_submode_lf4_lf8_rf4_layer_flipper",
+      "category": "lf4_sub_mode",
+      "input_buttons": ["LF4", "LF8", "RF4"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "layer_flipper_table",
+        "table_id": "LayerFlipper",
+        "direction_index": 4,
+        "left_stick": [169, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LF4 sub-mode keeps RF4 as layer flipper."]
+    },
+    {
+      "case_id": "lf4_submode_lf4_lf8_rf3_rf4_flipper_forced_up",
+      "category": "lf4_sub_mode",
+      "input_buttons": ["LF4", "LF8", "RF3", "RF4"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": true, "down": false},
+        "analog_source": "layer_flipper_table",
+        "table_id": "LayerFlipper",
+        "direction_index": 7,
+        "left_stick": [169, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF3 forced Up combines with layer-left; RF4 remains flipper."]
+    },
+    {
+      "case_id": "cstick_suppression_lf4_lt2_rf2_rt2_no_x",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LT2", "RF2", "RT2"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": false, "up": false, "down": true},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF2 is fully suppressed by RT2 in LF4 sub-mode."]
+    },
+    {
+      "case_id": "cstick_suppression_lf4_lt2_rf2_rt3_no_x",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LT2", "RF2", "RT3"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": true, "right": false, "up": false, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF2 is fully suppressed by RT3 in LF4 sub-mode."]
+    },
+    {
+      "case_id": "cstick_suppression_lf4_lt2_rf2_rt4_no_x",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LT2", "RF2", "RT4"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": true, "up": false, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF2 is fully suppressed by RT4 in LF4 sub-mode."]
+    },
+    {
+      "case_id": "cstick_suppression_lf4_lt2_rf2_rt5_no_x",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LT2", "RF2", "RT5"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": false, "up": true, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF2 is fully suppressed by RT5 in LF4 sub-mode."]
+    },
+    {
+      "case_id": "cstick_suppression_lf4_lf8_rf2_rt5_no_x_no_rf2_forced_up",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LF8", "RF2", "RT5"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 4,
+        "left_stick": [61, 128],
+        "right_stick_digital": {"left": false, "right": false, "up": true, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Layer-left remains active; the RF2-owned X/forced-Up behavior is suppressed by C-stick in LF4 sub-mode."]
+    },
+    {
+      "case_id": "direction_plus_a_lt6_down_a_default",
+      "category": "direction_plus_a_override",
+      "input_buttons": ["LT6"],
+      "expected": {
+        "digital_buttons": ["A"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": true},
+        "analog_source": "direction_plus_a_default_table",
+        "table_id": "Default",
+        "direction_index": 2,
+        "left_stick": [128, 51],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "direction_plus_a_rf12_up_a_default",
+      "category": "direction_plus_a_override",
+      "input_buttons": ["RF12"],
+      "expected": {
+        "digital_buttons": ["A"],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "direction_plus_a_default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "direction_plus_a_rf15_up_a_default",
+      "category": "direction_plus_a_override",
+      "input_buttons": ["RF15"],
+      "expected": {
+        "digital_buttons": ["A"],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "direction_plus_a_default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF15 aliases RF12 for Up+A in source."]
+    },
+    {
+      "case_id": "direction_plus_a_mode_lt6_down_a",
+      "category": "direction_plus_a_override",
+      "input_buttons": ["RF8", "LT6"],
+      "expected": {
+        "digital_buttons": ["A"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": true},
+        "analog_source": "direction_plus_a_mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 2,
+        "left_stick": [128, 87],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "direction_plus_a_mode_rf12_up_a",
+      "category": "direction_plus_a_override",
+      "input_buttons": ["RF8", "RF12"],
+      "expected": {
+        "digital_buttons": ["A"],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "direction_plus_a_mode_default_table",
+        "table_id": "ModeDefault",
+        "direction_index": 8,
+        "left_stick": [128, 169],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "direction_plus_a_rf12_lt6_forced_up_wins",
+      "category": "direction_plus_a_override",
+      "input_buttons": ["RF12", "LT6"],
+      "expected": {
+        "digital_buttons": ["A"],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "suppressed_directions": ["Down"],
+        "analog_source": "direction_plus_a_default_table",
+        "table_id": "Default",
+        "direction_index": 8,
+        "left_stick": [128, 205],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Forced-up state selects direction 8 for Direction+A."]
+    },
+    {
+      "case_id": "z_airdodge_lt5_neutral_low_magnitude",
+      "category": "z_airdodge_low_magnitude_override",
+      "input_buttons": ["LT5"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "lt5_rf11_low_magnitude_table",
+        "table_id": "Lt1LowMagnitude",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "z_airdodge_lt5_left_low_magnitude",
+      "category": "z_airdodge_low_magnitude_override",
+      "input_buttons": ["LT5", "LF3"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "lt5_rf11_low_magnitude_table",
+        "table_id": "Lt1LowMagnitude",
+        "direction_index": 4,
+        "left_stick": [79, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "z_airdodge_rf11_right_up_low_magnitude",
+      "category": "z_airdodge_low_magnitude_override",
+      "input_buttons": ["RF11", "LF1", "LF2"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": false, "right": true, "up": true, "down": false},
+        "analog_source": "lt5_rf11_low_magnitude_table",
+        "table_id": "Lt1LowMagnitude",
+        "direction_index": 9,
+        "left_stick": [167, 167],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF11 shares the LT5 low-magnitude override table."]
+    },
+    {
+      "case_id": "z_airdodge_lt5_rf12_forced_up_low_magnitude",
+      "category": "z_airdodge_low_magnitude_override",
+      "input_buttons": ["LT5", "RF12"],
+      "expected": {
+        "digital_buttons": ["Z", "A"],
+        "effective_direction": {"left": false, "right": false, "up": true, "down": false},
+        "analog_source": "lt5_rf11_low_magnitude_table",
+        "table_id": "Lt1LowMagnitude",
+        "direction_index": 8,
+        "left_stick": [128, 177],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LT5/RF11 low-magnitude override runs after Direction+A when LS->DPad is inactive."]
+    },
+    {
+      "case_id": "rf7_hard_up_b_neutral",
+      "category": "rf7_hard_up_b",
+      "input_buttons": ["RF7"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "rf7_hard_up_b_override",
+        "left_stick": [128, 172],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF7 is not part of forced-up direction aggregation."]
+    },
+    {
+      "case_id": "rf7_hard_up_b_left",
+      "category": "rf7_hard_up_b",
+      "input_buttons": ["RF7", "LF3"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "rf7_hard_up_b_override",
+        "left_stick": [77, 172],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "rf7_hard_up_b_right",
+      "category": "rf7_hard_up_b",
+      "input_buttons": ["RF7", "LF1"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": false, "right": true, "up": false, "down": false},
+        "analog_source": "rf7_hard_up_b_override",
+        "left_stick": [179, 172],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": []
+    },
+    {
+      "case_id": "rf9_null_neutral",
+      "category": "rf9_null_override",
+      "input_buttons": ["RF9"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "rf9_null_override",
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF9 does not directly emit a game button."]
+    },
+    {
+      "case_id": "rf9_null_overrides_rf7_hard_up_b",
+      "category": "rf9_null_override",
+      "input_buttons": ["RF9", "RF7"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "rf9_null_override",
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF9 null runs after RF7 hard Up+B in source order."]
+    },
+    {
+      "case_id": "rf9_null_overrides_lt5_low_magnitude",
+      "category": "rf9_null_override",
+      "input_buttons": ["RF9", "LT5", "LF3"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "rf9_null_override",
+        "left_stick": [128, 128],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF9 null runs after LT5/RF11 low-magnitude override in source order."]
+    },
+    {
+      "case_id": "rf9_null_with_rf13_keeps_dpad_left",
+      "category": "rf9_null_override",
+      "input_buttons": ["RF9", "RF13", "LF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "rf9_null_override_after_ls_to_dpad",
+        "left_stick": [128, 128],
+        "left_stick_digital": {"left": false, "right": false, "up": false, "down": false},
+        "dpad": {"left": true, "right": false, "up": false, "down": false},
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF9 null affects analog left stick, not RF13 D-pad routing."]
+    },
+    {
+      "case_id": "rf13_left_to_dpad_center_left_stick",
+      "category": "rf13_ls_to_dpad",
+      "input_buttons": ["RF13", "LF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "ls_to_dpad_center_default",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "left_stick_digital": {"left": false, "right": false, "up": false, "down": false},
+        "dpad": {"left": true, "right": false, "up": false, "down": false},
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF13 suppresses digital left-stick directions and ORs effective directions into D-pad."]
+    },
+    {
+      "case_id": "rf13_mode_left_to_dpad_mode_center",
+      "category": "rf13_ls_to_dpad",
+      "input_buttons": ["RF13", "RF8", "LF3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "ls_to_dpad_center_mode_default",
+        "table_id": "ModeDefault",
+        "direction_index": 5,
+        "left_stick": [128, 169],
+        "left_stick_digital": {"left": false, "right": false, "up": false, "down": false},
+        "dpad": {"left": true, "right": false, "up": false, "down": false},
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF13 analog centering uses ModeDefault direction 5 while Mode is active."]
+    },
+    {
+      "case_id": "rf13_lf8_rf2_dpad_up_left_no_x",
+      "category": "rf13_ls_to_dpad",
+      "input_buttons": ["RF13", "LF8", "RF2"],
+      "expected": {
+        "digital_buttons": [],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": true, "right": false, "up": true, "down": false},
+        "analog_source": "ls_to_dpad_center_default",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "left_stick_digital": {"left": false, "right": false, "up": false, "down": false},
+        "dpad": {"left": true, "right": false, "up": true, "down": false},
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Pure-layer RF2 forced Up routes to D-pad under RF13."]
+    },
+    {
+      "case_id": "rf13_rf7_left_dpad_center_b",
+      "category": "rf13_ls_to_dpad",
+      "input_buttons": ["RF13", "RF7", "LF3"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "ls_to_dpad_center_default",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "left_stick_digital": {"left": false, "right": false, "up": false, "down": false},
+        "dpad": {"left": true, "right": false, "up": false, "down": false},
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF7 hard Up+B analog override is bypassed while RF13 LS->DPad is active."]
+    },
+    {
+      "case_id": "rf13_lt5_left_dpad_center_z",
+      "category": "rf13_ls_to_dpad",
+      "input_buttons": ["RF13", "LT5", "LF3"],
+      "expected": {
+        "digital_buttons": ["Z"],
+        "effective_direction": {"left": true, "right": false, "up": false, "down": false},
+        "analog_source": "ls_to_dpad_center_default",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "left_stick_digital": {"left": false, "right": false, "up": false, "down": false},
+        "dpad": {"left": true, "right": false, "up": false, "down": false},
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["LT5/RF11 low-magnitude override is bypassed while RF13 LS->DPad is active."]
+    },
+    {
+      "case_id": "right_stick_rt3_c_left",
+      "category": "right_stick_c_stick",
+      "input_buttons": ["RT3"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": true, "right": false, "up": false, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RT3 drives C-left."]
+    },
+    {
+      "case_id": "right_stick_rt4_c_right",
+      "category": "right_stick_c_stick",
+      "input_buttons": ["RT4"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": true, "up": false, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RT4 drives C-right."]
+    },
+    {
+      "case_id": "right_stick_rt5_c_up",
+      "category": "right_stick_c_stick",
+      "input_buttons": ["RT5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": false, "up": true, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RT5 drives C-up."]
+    },
+    {
+      "case_id": "right_stick_rt2_c_down",
+      "category": "right_stick_c_stick",
+      "input_buttons": ["RT2"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": false, "up": false, "down": true},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RT2 drives C-down."]
+    },
+    {
+      "case_id": "right_stick_rt3_rt5_diagonal_angle",
+      "category": "right_stick_c_stick",
+      "input_buttons": ["RT3", "RT5"],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": true, "right": false, "up": true, "down": false},
+        "right_stick": [86, 196],
+        "dpad": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp"],
+      "notes": ["Diagonal C-stick source applies 42/68 slideoff angle override."]
+    },
+    {
+      "case_id": "nunchuk_c_rt5_dpad_up_right_stick_neutral",
+      "category": "nunchuk_source_preservation",
+      "input_buttons": ["RT5"],
+      "input_state": {"nunchuk_c": true},
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "left_stick": [128, 128],
+        "dpad": {"left": false, "right": false, "up": true, "down": false},
+        "right_stick": [128, 128],
+        "hardware_status": "not_hardware_validated"
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Nunchuk C behavior is source-present and preserved, but not hardware-tested in the cited result."]
+    },
+    {
+      "case_id": "nunchuk_connected_left_stick_override",
+      "category": "nunchuk_source_preservation",
+      "input_buttons": [],
+      "input_state": {"nunchuk_connected": true, "nunchuk_x": 200, "nunchuk_y": 42},
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "nunchuk_left_stick_override",
+        "left_stick": [200, 42],
+        "dpad": null,
+        "right_stick": null,
+        "hardware_status": "not_hardware_validated"
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["Nunchuk connected left-stick analog override runs after software modifier output in source."]
+    }
+  ]
+}
