@@ -1,0 +1,96 @@
+{
+  "schema_name": "glyph_runtime_loaded_config_design",
+  "design_version": 1,
+  "status": "design_only_not_implemented",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "source_authority": {
+    "runtime_source": "src/modes/Ultimate.cpp",
+    "role_map_doc": "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
+    "role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
+    "behavior_cases_doc": "docs/calibration/glyph_identity_runtime_behavior_cases_2026-05-28.md",
+    "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
+    "generated_config_prototype_doc": "docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md",
+    "generated_config_prototype_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "generated_config_contract_doc": "docs/calibration/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.md",
+    "generated_config_contract_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+    "senscope_export_draft_doc": "docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md",
+    "senscope_export_draft_fixture": "docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json"
+  },
+  "firmware_owns": [
+    "primitive_evaluator",
+    "priority_model_semantics",
+    "allowed_role_classes",
+    "validation_assumptions",
+    "deterministic_current_input_resolver",
+    "bounds_checks",
+    "unsupported_role_rejection",
+    "arbitrary_scripting_rejection",
+    "history_dependent_behavior_rejection",
+    "source_backed_loaded_config_interpreter"
+  ],
+  "future_config_may_own": [
+    "physical_button_role_bindings",
+    "table_ids_and_table_data",
+    "layer_definitions",
+    "submode_definitions",
+    "hard_override_constants",
+    "low_magnitude_override_table_reference",
+    "null_override_coordinate",
+    "limited_priority_class_references",
+    "metadata_and_source_authority"
+  ],
+  "forbidden_config_capabilities": [
+    "arbitrary_scripting",
+    "macros",
+    "turbo",
+    "timing_automation",
+    "one_shot_behavior",
+    "toggles",
+    "history_dependent_input_logic",
+    "unbounded_user_defined_predicates",
+    "dynamic_code_execution",
+    "evaluator_phase_order_mutation",
+    "hidden_device_write_behavior",
+    "hardware_validation_claims"
+  ],
+  "determinism_requirements": [
+    "current_input_state_only",
+    "no_frame_history",
+    "no_temporal_state_for_current_identity_runtime_model",
+    "firmware_owned_priority_order",
+    "approved_priority_class_references_only",
+    "raw_coordinates_are_integer_0_255",
+    "no_latency_claim_without_measurement"
+  ],
+  "storage_transport_boundaries": [
+    "no_storage_implementation",
+    "no_eeprom_flash_or_persistent_storage_layout",
+    "no_serial_write_protocol",
+    "no_usb_configurator_transport",
+    "no_limit_labs_configurator_dependency_assumed",
+    "no_device_push_path"
+  ],
+  "migration_path": [
+    "current_hardcoded_runtime",
+    "generated_config_as_docs_tools_review_artifact",
+    "generated_config_can_drive_tools_evaluator",
+    "generated_cpp_review_text_can_be_diffed_against_source",
+    "firmware_generated_constants_refactor_requires_explicit_approval",
+    "runtime_loaded_config_interpreter_storage_design_requires_separate_approval",
+    "device_write_transport_workflow_requires_separate_source_authority_policy_validation"
+  ],
+  "open_questions": [
+    "exact_runtime_loaded_config_storage_location",
+    "binary_vs_json_protobuf_on_device_representation",
+    "boot_time_validation_strategy",
+    "failure_fallback_strategy",
+    "version_migration_policy",
+    "maximum_table_config_size",
+    "profile_bound_or_global_config",
+    "official_configurator_profile_storage_source_authority",
+    "hardware_validation_plan",
+    "nunchuk_validation_status"
+  ]
+}

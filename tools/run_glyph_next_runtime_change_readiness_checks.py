@@ -113,6 +113,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_identity_runtime_config_contracts.py",
         ),
         step(
+            "runtime-loaded config design",
+            "tools/check_glyph_runtime_loaded_config_design.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),
