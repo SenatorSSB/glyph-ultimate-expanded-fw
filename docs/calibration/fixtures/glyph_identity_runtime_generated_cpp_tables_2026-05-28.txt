@@ -1,0 +1,349 @@
+// generated prototype only
+// do not include in firmware
+// not firmware source
+// not runtime-loaded config
+// not hardware validation
+// schema_name=glyph_identity_runtime_generated_config_prototype
+// source_status=source_backed_prototype_not_runtime_loaded
+// hardware_status=not_new_hardware_result
+
+constexpr StickPoint kDefaultTable[9] = {
+    {61, 51},
+    {128, 51},
+    {195, 51},
+    {61, 128},
+    {128, 128},
+    {195, 128},
+    {61, 205},
+    {128, 205},
+    {195, 205},
+};
+
+constexpr StickPoint kModeDefaultTable[9] = {
+    {14, 87},
+    {128, 87},
+    {242, 87},
+    {14, 169},
+    {128, 169},
+    {242, 169},
+    {14, 169},
+    {128, 169},
+    {242, 169},
+};
+
+constexpr StickPoint kX1Table[9] = {
+    {93, 51},
+    {128, 51},
+    {163, 51},
+    {93, 128},
+    {128, 128},
+    {163, 128},
+    {93, 205},
+    {128, 205},
+    {163, 205},
+};
+
+constexpr StickPoint kX2Table[9] = {
+    {82, 51},
+    {128, 51},
+    {174, 51},
+    {82, 128},
+    {128, 128},
+    {174, 128},
+    {82, 205},
+    {128, 205},
+    {174, 205},
+};
+
+constexpr StickPoint kMX1Table[9] = {
+    {78, 87},
+    {128, 87},
+    {178, 87},
+    {78, 169},
+    {128, 169},
+    {178, 169},
+    {78, 169},
+    {128, 169},
+    {178, 169},
+};
+
+constexpr StickPoint kMX2Table[9] = {
+    {65, 87},
+    {128, 87},
+    {191, 87},
+    {65, 169},
+    {128, 169},
+    {191, 169},
+    {65, 169},
+    {128, 169},
+    {191, 169},
+};
+
+constexpr StickPoint kY1Table[9] = {
+    {61, 99},
+    {128, 99},
+    {195, 99},
+    {61, 128},
+    {128, 128},
+    {195, 128},
+    {61, 157},
+    {128, 157},
+    {195, 157},
+};
+
+constexpr StickPoint kMY1Table[9] = {
+    {14, 179},
+    {128, 179},
+    {242, 179},
+    {14, 169},
+    {128, 169},
+    {242, 169},
+    {14, 77},
+    {128, 77},
+    {242, 77},
+};
+
+constexpr StickPoint kLayerNormalXTable[9] = {
+    {87, 51},
+    {128, 51},
+    {169, 51},
+    {87, 128},
+    {128, 128},
+    {169, 128},
+    {87, 205},
+    {128, 205},
+    {169, 205},
+};
+
+constexpr StickPoint kMLayerNormalXTable[9] = {
+    {87, 87},
+    {128, 87},
+    {169, 87},
+    {87, 169},
+    {128, 169},
+    {169, 169},
+    {87, 169},
+    {128, 169},
+    {169, 169},
+};
+
+constexpr StickPoint kLayerFlipperTable[9] = {
+    {169, 51},
+    {128, 51},
+    {87, 51},
+    {169, 128},
+    {128, 128},
+    {87, 128},
+    {169, 205},
+    {128, 205},
+    {87, 205},
+};
+
+constexpr StickPoint kMLayerFlipperTable[9] = {
+    {169, 87},
+    {128, 87},
+    {87, 87},
+    {169, 169},
+    {128, 169},
+    {87, 169},
+    {169, 169},
+    {128, 169},
+    {87, 169},
+};
+
+constexpr StickPoint kY1Tilt1Table[9] = {
+    {169, 99},
+    {128, 99},
+    {87, 99},
+    {169, 128},
+    {128, 128},
+    {87, 128},
+    {169, 157},
+    {128, 157},
+    {87, 157},
+};
+
+constexpr StickPoint kMY1Tilt1Table[9] = {
+    {169, 179},
+    {128, 179},
+    {87, 179},
+    {169, 169},
+    {128, 169},
+    {87, 169},
+    {169, 77},
+    {128, 77},
+    {87, 77},
+};
+
+constexpr StickPoint kY1LayerFlipperTable[9] = {
+    {169, 99},
+    {128, 99},
+    {87, 99},
+    {169, 128},
+    {128, 128},
+    {87, 128},
+    {169, 157},
+    {128, 157},
+    {87, 157},
+};
+
+constexpr StickPoint kMY1LayerFlipperTable[9] = {
+    {169, 179},
+    {128, 179},
+    {87, 179},
+    {169, 169},
+    {128, 169},
+    {87, 169},
+    {169, 77},
+    {128, 77},
+    {87, 77},
+};
+
+constexpr StickPoint kY1LayerNormalXTable[9] = {
+    {87, 99},
+    {128, 99},
+    {169, 99},
+    {87, 128},
+    {128, 128},
+    {169, 128},
+    {87, 157},
+    {128, 157},
+    {169, 157},
+};
+
+constexpr StickPoint kMY1LayerNormalXTable[9] = {
+    {87, 179},
+    {128, 179},
+    {169, 179},
+    {87, 169},
+    {128, 169},
+    {169, 169},
+    {87, 77},
+    {128, 77},
+    {169, 77},
+};
+
+constexpr StickPoint kTilt1Table[9] = {
+    {187, 47},
+    {128, 47},
+    {69, 47},
+    {187, 128},
+    {128, 128},
+    {69, 128},
+    {187, 209},
+    {128, 209},
+    {69, 209},
+};
+
+constexpr StickPoint kTilt2Table[9] = {
+    {88, 79},
+    {128, 79},
+    {168, 79},
+    {88, 128},
+    {128, 128},
+    {168, 128},
+    {88, 177},
+    {128, 177},
+    {168, 177},
+};
+
+constexpr StickPoint kTilt3Table[9] = {
+    {75, 86},
+    {128, 86},
+    {181, 86},
+    {75, 128},
+    {128, 128},
+    {181, 128},
+    {75, 170},
+    {128, 170},
+    {181, 170},
+};
+
+constexpr StickPoint kMTilt1Table[9] = {
+    {169, 88},
+    {128, 88},
+    {87, 88},
+    {169, 169},
+    {128, 169},
+    {87, 169},
+    {169, 168},
+    {128, 168},
+    {87, 168},
+};
+
+constexpr StickPoint kMTilt2Table[9] = {
+    {96, 82},
+    {128, 82},
+    {160, 82},
+    {96, 169},
+    {128, 169},
+    {160, 169},
+    {96, 174},
+    {128, 174},
+    {160, 174},
+};
+
+constexpr StickPoint kMTilt3Table[9] = {
+    {96, 86},
+    {128, 86},
+    {160, 86},
+    {96, 169},
+    {128, 169},
+    {160, 169},
+    {96, 170},
+    {128, 170},
+    {160, 170},
+};
+
+constexpr StickPoint kLt1LowMagnitudeTable[9] = {
+    {89, 89},
+    {128, 79},
+    {167, 89},
+    {79, 128},
+    {128, 128},
+    {177, 128},
+    {89, 167},
+    {128, 177},
+    {167, 167},
+};
+
+// role metadata from role-map fixture
+// role_binding.buttons.LT3 = L
+// role_binding.buttons.LT5 = Z
+// role_binding.buttons.MB4 = Capture
+// role_binding.buttons.MB5 = Home
+// role_binding.buttons.MB6 = Select/Minus
+// role_binding.buttons.MB7 = Start/Plus
+// role_binding.buttons.RF1 = A
+// role_binding.buttons.RF10 = Y
+// role_binding.buttons.RF11 = Z
+// role_binding.buttons.RF16 = R
+// role_binding.buttons.RF2 = X
+// role_binding.buttons.RF5 = B
+// role_binding.buttons.RT1 = Z
+// role_binding.c_stick.RT2 = C-Down
+// role_binding.c_stick.RT3 = C-Left
+// role_binding.c_stick.RT4 = C-Right
+// role_binding.c_stick.RT5 = C-Up
+// role_binding.directional.LF1 = Right
+// role_binding.directional.LF2 = Up
+// role_binding.directional.LF3 = Left
+// role_binding.directional.LF5 = Down
+// role_binding.directional.RF12 = DirectionPlusA
+// role_binding.directional.RF15 = DirectionPlusA
+// role_binding.directional.RF6 = ForcedUp
+// role_binding.modifiers.LT1 = X2
+// role_binding.modifiers.LT2 = Y1
+// role_binding.modifiers.LT4 = X1
+// role_binding.modifiers.RF13 = LS->DPad
+// role_binding.modifiers.RF3 = Tilt1
+// role_binding.modifiers.RF4 = Tilt2
+// role_binding.modifiers.RF7 = HardUpB
+// role_binding.modifiers.RF8 = Mode
+// role_binding.modifiers.RF9 = Null
+// role_binding.special_functions.LF4 = BAndLayerSubMode
+// role_binding.special_functions.LT6 = DownA
+// role_binding.special_functions.RF13+RF7 = DPadRoutingAndHardUpBAllowed
+
+// priority.digital_effective_direction = physical_inputs -> layer_left_right -> lf4_submode_active -> forced_up_resolution -> button_carriers -> ls_to_dpad_routing
+// priority.analog = table_output -> direction_plus_a -> lt5_or_rf11_low_magnitude_za -> rf7_hard_up_b -> rf9_null -> nunchuk_override
