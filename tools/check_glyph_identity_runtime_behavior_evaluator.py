@@ -19,6 +19,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_PATH = REPO_ROOT / "docs" / "calibration" / "fixtures" / "glyph_identity_runtime_behavior_cases_2026-05-28.json"
 SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 STRUCTURAL_CHECKER_PATH = REPO_ROOT / "tools" / "check_glyph_identity_runtime_behavior_cases.py"
+TABLE_SOURCE_SYNC_CHECKER_PATH = REPO_ROOT / "tools" / "check_glyph_identity_runtime_table_source_sync.py"
 
 ANALOG_STICK_MIN = 28
 ANALOG_STICK_NEUTRAL = 128
@@ -391,6 +392,16 @@ ROLE_MODIFIER_FIELDS = {
 def run_structural_checker() -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, str(STRUCTURAL_CHECKER_PATH.relative_to(REPO_ROOT))],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+def run_table_source_sync_checker() -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, str(TABLE_SOURCE_SYNC_CHECKER_PATH.relative_to(REPO_ROOT))],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
@@ -1043,6 +1054,7 @@ def main() -> int:
         print("status=FAIL")
         print("cases_evaluated=0")
         print("fixture_checker_status=FAIL")
+        print("table_source_sync_status=NOT_RUN")
         print("hardware_status=not_new_hardware_result")
         print("nunchuk_status=preserved_but_not_hardware_validated")
         if checker_output:
@@ -1050,11 +1062,26 @@ def main() -> int:
             print(checker_output)
         return checker_result.returncode
 
+    table_sync_result = run_table_source_sync_checker()
+    table_sync_output = "\n".join(part for part in (table_sync_result.stdout.strip(), table_sync_result.stderr.strip()) if part)
+    if table_sync_result.returncode != 0:
+        print("status=FAIL")
+        print("cases_evaluated=0")
+        print("fixture_checker_status=PASS")
+        print("table_source_sync_status=FAIL")
+        print("hardware_status=not_new_hardware_result")
+        print("nunchuk_status=preserved_but_not_hardware_validated")
+        if table_sync_output:
+            print("table_source_sync_output:")
+            print(table_sync_output)
+        return table_sync_result.returncode
+
     missing_anchors = validate_source_anchors()
     if missing_anchors:
         print("status=FAIL")
         print("cases_evaluated=0")
         print("fixture_checker_status=PASS")
+        print("table_source_sync_status=PASS")
         print("source_anchor_status=FAIL")
         print("hardware_status=not_new_hardware_result")
         print("nunchuk_status=preserved_but_not_hardware_validated")
@@ -1080,6 +1107,7 @@ def main() -> int:
     print(f"status={'FAIL' if mismatches else 'PASS'}")
     print(f"cases_evaluated={len(cases)}")
     print("fixture_checker_status=PASS")
+    print("table_source_sync_status=PASS")
     print("source_anchor_status=PASS")
     print("hardware_status=not_new_hardware_result")
     print("nunchuk_status=preserved_but_not_hardware_validated")

@@ -93,6 +93,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_identity_runtime_behavior_cases.py",
         ),
         step(
+            "identity runtime table source sync",
+            "tools/check_glyph_identity_runtime_table_source_sync.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),
