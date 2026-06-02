@@ -111,6 +111,14 @@
 
 - Final disposition remains: `PASS_IDENTITY_RUNTIME_SMASHBOX_LATEST_PROFILE`
 
+## 2026-05-28 Architecture Hardening Amendment
+
+- Architecture hardening branch `glyph/gfw2-runtime-architecture-hardening` is behavior-preserving by intent.
+- This hardening does not supersede the recorded hardware PASS if runtime source-shape checks, behavior-preservation checks, build verification, artifact inspection, and serial dry-run verification pass.
+- No new hardware validation is required for this branch when behavior-preserving verification passes.
+- If any runtime behavior, raw table value, role binding, profile artifact, schema/proto/configurator structure, SOCD behavior, or priority order changes are detected, fresh hardware validation is required before carrying forward the PASS claim.
+- Nunchuk remains not hardware-validated.
+
 ## 2026-06-01 Amendment: LF7/LF8 Layer-Direction Behavior
 
 - The PASS result in this file predates LF7/LF8 layer-direction runtime behavior (`LF8=layer-left`, `LF7=layer-right`, layered `RF2/RF3/RF4` behavior).

@@ -357,6 +357,24 @@ def read_runtime_doc() -> str:
 
 
 def ensure_runtime_shapes(source: str, block: str) -> None:
+    for helper_name in (
+        "struct LayerState",
+        "struct EffectiveDirectionState",
+        "struct RoleState",
+        "ResolveLayerState",
+        "ResolveEffectiveDirections",
+        "ResolveRoleState",
+        "ApplyDigitalButtonOutputs",
+        "ApplyDpadOutputs",
+        "ApplyTableAnalogOutput",
+        "ApplyDirectionPlusAOverride",
+        "ApplyZAirdodgeOverride",
+        "ApplyHardUpBOverride",
+        "ApplyNullOverride",
+    ):
+        if helper_name not in source:
+            fail(f"missing hardened runtime helper shape: {helper_name}")
+
     # Core game output roles.
     require(
         r"outputs\.a\s*=\s*inputs\.rf1\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
@@ -371,28 +389,24 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         "RT1/LT5/RF11 shared Z carrier",
     )
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*;", source, "RF16 remains R carrier")
-    require(r"const\s+bool\s+null_modifier_active\s*=\s*inputs\.rf9\s*;", block, "RF9 null modifier input")
+    require(r"state\.null_modifier_active\s*=\s*inputs\.rf9\s*;", source, "RF9 null modifier input")
+    require(r"state\.z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;", source, "LT5/RF11 shared low-magnitude override alias")
+    require(r"state\.x1_active\s*=\s*inputs\.lt4\s*;", source, "X1 input is LT4")
+    require(r"state\.x2_active\s*=\s*inputs\.lt1\s*;", source, "X2 input is LT1")
+    require(r"state\.ls_to_dpad_active\s*=\s*inputs\.rf13\s*;", source, "LS->DPad source is RF13")
+    require(r"state\.layer_left_active\s*=\s*inputs\.lf8\s*;", source, "LF8 layer-left source")
+    require(r"state\.layer_right_active\s*=\s*inputs\.lf7\s*;", source, "LF7 layer-right source")
+    require(r"state\.layer_direction_active\s*=\s*state\.layer_left_active\s*\|\|\s*state\.layer_right_active\s*;", source, "layer_direction_active aggregation")
     require(
-        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
-        block,
-        "LT5/RF11 shared low-magnitude override alias",
-    )
-    require(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt4\s*;", block, "X1 input is LT4")
-    require(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt1\s*;", block, "X2 input is LT1")
-    require(r"const\s+bool\s+ls_to_dpad_active\s*=\s*inputs\.rf13\s*;", source, "LS->DPad source is RF13")
-    require(r"const\s+bool\s+layer_left_active\s*=\s*inputs\.lf8\s*;", source, "LF8 layer-left source")
-    require(r"const\s+bool\s+layer_right_active\s*=\s*inputs\.lf7\s*;", source, "LF7 layer-right source")
-    require(r"const\s+bool\s+layer_direction_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer_direction_active aggregation")
-    require(
-        r"const\s+bool\s+lf4_submode_active\s*=\s*inputs\.lf4\s*&&\s*\(\s*layer_direction_active\s*\|\|\s*inputs\.lt2\s*\)\s*;",
+        r"state\.lf4_submode_active\s*=\s*inputs\.lf4\s*&&\s*\(\s*state\.layer_direction_active\s*\|\|\s*inputs\.lt2\s*\)\s*;",
         source,
         "LF4 sub-mode activation from LF4 and (layer direction or LT2)",
     )
-    require(r"const\s+bool\s+c_stick_any_active\s*=\s*inputs\.rt2\s*\|\|\s*inputs\.rt3\s*\|\|\s*inputs\.rt4\s*\|\|\s*inputs\.rt5\s*;", source, "C-stick aggregation for LF4-submode RF2 suppression")
-    require(r"const\s+bool\s+rf2_suppressed_by_lf4_submode_cstick\s*=\s*lf4_submode_active\s*&&\s*c_stick_any_active\s*;", source, "LF4-submode RF2 C-stick suppression flag")
-    require(r"const\s+bool\s+layer_transform_active\s*=\s*layer_direction_active\s*\|\|\s*lf4_submode_active\s*;", source, "layer_transform_active aggregation")
-    require(r"const\s+bool\s+pure_layer_rf2_force_up_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf2\s*&&\s*!rf2_suppressed_by_lf4_submode_cstick\s*;", source, "pure-layer RF2 forced-Up source")
-    require(r"const\s+bool\s+lf4_submode_rf3_force_up_active\s*=\s*lf4_submode_active\s*&&\s*inputs\.rf3\s*;", source, "LF4 sub-mode RF3 forced-Up source")
+    require(r"state\.c_stick_any_active\s*=\s*inputs\.rt2\s*\|\|\s*inputs\.rt3\s*\|\|\s*inputs\.rt4\s*\|\|\s*inputs\.rt5\s*;", source, "C-stick aggregation for LF4-submode RF2 suppression")
+    require(r"state\.rf2_suppressed_by_lf4_submode_cstick\s*=\s*state\.lf4_submode_active\s*&&\s*state\.c_stick_any_active\s*;", source, "LF4-submode RF2 C-stick suppression flag")
+    require(r"state\.layer_transform_active\s*=\s*state\.layer_direction_active\s*\|\|\s*state\.lf4_submode_active\s*;", source, "layer_transform_active aggregation")
+    require(r"const\s+bool\s+pure_layer_rf2_force_up_active\s*=\s*layer\.layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf2\s*&&\s*!layer\.rf2_suppressed_by_lf4_submode_cstick\s*;", source, "pure-layer RF2 forced-Up source")
+    require(r"const\s+bool\s+lf4_submode_rf3_force_up_active\s*=\s*layer\.lf4_submode_active\s*&&\s*inputs\.rf3\s*;", source, "LF4 sub-mode RF3 forced-Up source")
     if re.search(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt5\s*;", block):
         fail("stale x1_active=inputs.lt5 runtime shape must be removed")
     if re.search(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt4\s*;", block):
@@ -417,38 +431,38 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         fail("Y2/MY2 runtime table constants should not remain in source")
 
     # Modifier composition excludes Y2.
-    require(r"const\s+bool\s+y1_active\s*=\s*inputs\.lt2\s*&&\s*!inputs\.lf4\s*;", block, "Y1 modifier input with LF4 suppression")
+    require(r"state\.y1_active\s*=\s*inputs\.lt2\s*&&\s*!inputs\.lf4\s*;", source, "Y1 modifier input with LF4 suppression")
     if re.search(r"inputs\.lt3[^\n]*Y2|Y2[^\n]*inputs\.lt3", block, flags=re.IGNORECASE):
         fail("LT3 must not be consumed as Y2 modifier input")
 
     require(
-        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*inputs\.rf7\s*\|\|\s*\(\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
+        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*inputs\.rf7\s*\|\|\s*\(\s*layer\.layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
         source,
         "B output includes RF7 hard Up+B carrier and layered RF3 in pure layer",
     )
     require(
-        r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*!rf2_suppressed_by_lf4_submode_cstick\s*&&\s*\(\s*!layer_direction_active\s*\|\|\s*inputs\.lf4\s*\)\s*;",
+        r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*!layer\.rf2_suppressed_by_lf4_submode_cstick\s*&&\s*\(\s*!layer\.layer_direction_active\s*\|\|\s*inputs\.lf4\s*\)\s*;",
         source,
         "X output includes RF2 non-layer/LF4-submode path with C-stick suppression",
     )
 
     require(
-        r"const\s+int8_t\s+horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer_left_active,\s*layer_right_active\)\s*;",
+        r"state\.horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer\.layer_left_active,\s*layer\.layer_right_active\)\s*;",
         source,
         "effective horizontal direction includes LF8/LF7",
     )
-    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_transform_active\s*;", block, "RF3 Tilt1 gated by !layer_transform_active")
-    require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_transform_active\s*;", block, "RF4 Tilt2 gated by !layer_transform_active")
+    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer\.layer_transform_active\s*;", source, "RF3 Tilt1 gated by !layer_transform_active")
+    require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer\.layer_transform_active\s*;", source, "RF4 Tilt2 gated by !layer_transform_active")
     require(
-        r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;",
-        block,
+        r"state\.layer_rf3_normal_x_active\s*=\s*layer\.layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;",
+        source,
         "layered RF3 normal-x active is limited to pure layer",
     )
-    require(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_transform_active\s*&&\s*inputs\.rf4\s*;", block, "layered RF4 flipper active in pure layer and LF4 sub-mode")
+    require(r"state\.rf4_layer_flipper_active\s*=\s*layer\.layer_transform_active\s*&&\s*inputs\.rf4\s*;", source, "layered RF4 flipper active in pure layer and LF4 sub-mode")
     require(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", source, "RF4 layered precedence over RF3 normal-x")
     require(r"EffectiveModifier::LayerNormalX", source, "effective modifier includes layer RF3 normal-x")
     require(
-        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        r"SelectStickTable\(\s*roles\.mode_active,\s*roles\.x1_active,\s*roles\.x2_active,\s*roles\.y1_active,\s*roles\.layer_rf3_normal_x_active,\s*roles\.rf4_layer_flipper_active,\s*roles\.tilt1_effective,\s*roles\.tilt2_effective,\s*roles\.tilt3_effective",
         source,
         "table selection includes layered RF3 normal-x and RF4 flipper modifiers",
         flags=re.DOTALL,
@@ -550,30 +564,29 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
             fail(f"missing LT1 low-magnitude point: {point}")
 
     # LT5 hard final override ordering.
-    require(r"if\s*\(\s*direction_plus_a_active\s*\)", block, "direction-plus-A override block")
-    require(r"if\s*\(\s*z_airdodge_override_active\s*\)", block, "LT5/RF11 hard override block")
-    require(r"if\s*\(\s*inputs\.rf7\s*\)", block, "RF7 hard Up+B override block")
-    require(r"if\s*\(\s*null_modifier_active\s*\)", block, "RF9 null override block")
+    require(r"ApplyDirectionPlusAOverride\(roles,\s*outputs\)", block, "direction-plus-A override helper")
+    require(r"if\s*\(\s*roles\.z_airdodge_override_active\s*\)", block, "LT5/RF11 hard override block")
+    require(r"if\s*\(\s*roles\.hard_up_b_active\s*\)", block, "RF7 hard Up+B override block")
+    require(r"if\s*\(\s*roles\.null_modifier_active\s*\)", block, "RF9 null override block")
     require(
-        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*if\s*\(\s*inputs\.rf7\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
+        r"ApplyDirectionPlusAOverride\(roles,\s*outputs\).*?if\s*\(\s*roles\.z_airdodge_override_active\s*\)\s*\{.*?ApplyZAirdodgeOverride\(effective_directions,\s*outputs\);.*?if\s*\(\s*roles\.hard_up_b_active\s*\)\s*\{.*?ApplyHardUpBOverride\(effective_directions,\s*outputs\);.*?\}\s*if\s*\(\s*roles\.null_modifier_active\s*\)",
         block,
         "RF9 override occurs after LT5/RF11, direction-plus-A, and RF7 hard override",
         flags=re.DOTALL,
     )
     require(
-        r"if\s*\(\s*inputs\.rf7\s*\)\s*\{\s*//\s*RF7\s+is\s+a\s+hard\s+Up\+B\s+analog\s+override.*?effective_ls_left\s*==\s*effective_ls_right\s*\?\s*128\s*:\s*\(effective_ls_left\s*\?\s*77\s*:\s*179\).*?outputs\.leftStickY\s*=\s*172\s*;",
-        block,
+        r"void\s+ApplyHardUpBOverride\(const\s+EffectiveDirectionState\s+&directions,\s*OutputState\s+&outputs\)\s*\{.*?directions\.left\s*==\s*directions\.right\s*\?\s*128\s*:\s*\(directions\.left\s*\?\s*77\s*:\s*179\).*?outputs\.leftStickY\s*=\s*172\s*;",
+        source,
         "RF7 hard Up+B constants and horizontal policy",
         flags=re.DOTALL,
     )
-    require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X override")
-    require(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", block, "LT1 final Y override")
-    require(r"outputs\.leftStickX\s*=\s*128\s*;", block, "RF9 final X override")
-    require(r"outputs\.leftStickY\s*=\s*128\s*;", block, "RF9 final Y override")
+    require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", source, "LT1 final X override")
+    require(r"outputs\.leftStickY\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.y\s*;", source, "LT1 final Y override")
+    require(r"void\s+ApplyNullOverride\(OutputState\s+&outputs\)\s*\{\s*outputs\.leftStickX\s*=\s*128\s*;\s*outputs\.leftStickY\s*=\s*128\s*;\s*\}", source, "RF9 final analog override helper", flags=re.DOTALL)
 
     # LS->DPad keeps analog centering and suppresses LT5 low-table override in that branch.
     require(
-        r"if\s*\(\s*ls_to_dpad_active\s*\)\s*\{\s*const\s+StickPoint\s+center\s*=\s*mode_active\s*\?\s*kModeDefaultTable\[kDirectionFiveIndex\]\s*:\s*kDefaultTable\[kDirectionFiveIndex\]\s*;\s*outputs\.leftStickX\s*=\s*center\.x\s*;\s*outputs\.leftStickY\s*=\s*center\.y\s*;\s*\}\s*else\s*\{",
+        r"if\s*\(\s*roles\.ls_to_dpad_active\s*\)\s*\{\s*const\s+StickPoint\s+center\s*=\s*roles\.mode_active\s*\?\s*kModeDefaultTable\[kDirectionFiveIndex\]\s*:\s*kDefaultTable\[kDirectionFiveIndex\]\s*;\s*outputs\.leftStickX\s*=\s*center\.x\s*;\s*outputs\.leftStickY\s*=\s*center\.y\s*;\s*\}\s*else\s*\{",
         block,
         "LS->DPad center branch with else-path override",
         flags=re.DOTALL,
@@ -597,18 +610,18 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
 
     # RF15 aliases RF12 across forced-up/direction-plus-A and LT5 direction resolution.
     require(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
+        r"state\.force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
         source,
         "forced-up includes pure-layer RF2 and LF4 sub-mode RF3",
     )
     require(
         r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
-        block,
+        source,
         "direction-plus-A up input includes RF15",
     )
     require(
-        r"const\s+bool\s+lt1_force_up_active\s*=\s*force_up_active\s*;",
-        block,
+        r"void\s+ApplyZAirdodgeOverride\(const\s+EffectiveDirectionState\s+&directions,\s*OutputState\s+&outputs\)",
+        source,
         "LT5 low-table forced-up includes shared layered forced-up sources",
     )
 
