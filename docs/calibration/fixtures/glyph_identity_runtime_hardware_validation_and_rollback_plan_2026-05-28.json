@@ -1,0 +1,74 @@
+{
+  "schema_name": "glyph_identity_runtime_hardware_validation_and_rollback_plan",
+  "plan_version": 1,
+  "status": "planning_only_not_executed",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "required_for_change_classes": [
+    "behavior_preserving_source_refactor",
+    "generated_constants_refactor",
+    "runtime_behavior_change",
+    "runtime_loaded_config_interpreter",
+    "storage_transport_device_write_behavior",
+    "nunchuk_behavior"
+  ],
+  "minimum_behavior_preserving_refactor_validation": [
+    "prehardware_checks_pass",
+    "build_passes",
+    "behavior_evaluator_passes",
+    "source_table_sync_checks_pass",
+    "generated_config_checks_pass",
+    "limited_hardware_smoke_test_unless_user_waived",
+    "no_profile_artifacts_changed_unless_intentionally_in_scope"
+  ],
+  "minimum_runtime_behavior_change_validation": [
+    "full_hardware_test_plan",
+    "explicit_expected_behavior_matrix",
+    "latest_hardware_result_doc",
+    "rollback_commit_path",
+    "no_unsupported_hardware_claims",
+    "hardware_result_recorded_before_merge"
+  ],
+  "minimum_runtime_loaded_config_validation": [
+    "valid_config_path_test",
+    "invalid_config_fallback_test",
+    "version_mismatch_test",
+    "missing_table_rejection_test",
+    "forbidden_role_rejection_test",
+    "transport_storage_failure_test_if_implemented",
+    "latency_performance_measurement_if_runtime_path_changes"
+  ],
+  "required_evidence_format": [
+    "artifact_provenance",
+    "branch_name_and_commit_under_test",
+    "build_artifact_identity_if_produced",
+    "hardware_setup_and_operator_notes",
+    "test_matrix_with_pass_fail_rows",
+    "failure_notes_and_scope",
+    "rollback_branch_or_commit"
+  ],
+  "required_rollback_plan": [
+    "rollback_branch_or_commit",
+    "restore_previous_firmware_artifact_if_applicable",
+    "restore_previous_profile_artifact_if_applicable",
+    "document_failure_and_scope"
+  ],
+  "no_regression_areas": [
+    "source_parsed_table_values",
+    "current_role_bindings",
+    "current_evaluator_phase_order",
+    "current_hard_override_constants",
+    "behavior_case_evaluator_results",
+    "generated_config_and_generated_cpp_artifact_checks",
+    "profile_artifacts_unless_intentionally_in_scope",
+    "device_transport_and_serial_writer_behavior_unless_separately_approved"
+  ],
+  "merge_gate_policy": [
+    "hardware_result_required_before_behavior_change_merge",
+    "no_unsupported_hardware_claims",
+    "rollback_plan_required",
+    "checkers_must_pass",
+    "explicit_user_approval_required_for_firmware_behavior_changes",
+    "source_backed_plan_required_for_generated_constants_or_runtime_loaded_config"
+  ]
+}
