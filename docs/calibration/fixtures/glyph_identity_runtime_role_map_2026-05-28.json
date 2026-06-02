@@ -1,0 +1,198 @@
+{
+  "role_map_contract_version": 1,
+  "schema_name": "glyph_identity_runtime_role_map",
+  "source_status": "source_confirmed_hardware_observed",
+  "mode_scope": "MODE_ULTIMATE",
+  "source_authority": {
+    "runtime": "src/modes/Ultimate.cpp",
+    "tables": "src/modes/Ultimate.cpp",
+    "hardware_result": "docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md"
+  },
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "direction_convention": "numpad",
+  "physical_inputs": {
+    "game_buttons": [
+      "BTN_RF1",
+      "BTN_RF2",
+      "BTN_RF3",
+      "BTN_RF4",
+      "BTN_RF5",
+      "BTN_RF6",
+      "BTN_RF7",
+      "BTN_RF8",
+      "BTN_RF9",
+      "BTN_RF10",
+      "BTN_RF11",
+      "BTN_RF12",
+      "BTN_RF13",
+      "BTN_RF14",
+      "BTN_RF15",
+      "BTN_RF16",
+      "BTN_LT1",
+      "BTN_LT2",
+      "BTN_LT3",
+      "BTN_LT4",
+      "BTN_LT5",
+      "BTN_LT6",
+      "BTN_LF1",
+      "BTN_LF2",
+      "BTN_LF3",
+      "BTN_LF4",
+      "BTN_LF5",
+      "BTN_LF6",
+      "BTN_LF7",
+      "BTN_LF8",
+      "BTN_RT1",
+      "BTN_RT2",
+      "BTN_RT3",
+      "BTN_RT4",
+      "BTN_RT5",
+      "BTN_MB4",
+      "BTN_MB5",
+      "BTN_MB6",
+      "BTN_MB7"
+    ],
+    "non_output_in_runtime_scope": [
+      "BTN_LF6",
+      "BTN_RF14",
+      "BTN_MB1",
+      "BTN_MB2",
+      "BTN_MB3"
+    ]
+  },
+  "bindings": {
+    "buttons": {
+      "RF1": "A",
+      "RF5": "B",
+      "RF10": "Y",
+      "LT3": "L",
+      "RF16": "R",
+      "RT1": "Z",
+      "LT5": "Z",
+      "RF11": "Z",
+      "RF2": "X",
+      "MB4": "Capture",
+      "MB5": "Home",
+      "MB6": "Select/Minus",
+      "MB7": "Start/Plus"
+    },
+    "directional": {
+      "LF3": "Left",
+      "LF1": "Right",
+      "LF2": "Up",
+      "LF5": "Down",
+      "RF6": "ForcedUp",
+      "RF12": "DirectionPlusA",
+      "RF15": "DirectionPlusA"
+    },
+    "c_stick": {
+      "RT3": "C-Left",
+      "RT4": "C-Right",
+      "RT2": "C-Down",
+      "RT5": "C-Up"
+    },
+    "modifiers": {
+      "LT4": "X1",
+      "LT1": "X2",
+      "LT2": "Y1",
+      "RF3": "Tilt1",
+      "RF4": "Tilt2",
+      "RF8": "Mode",
+      "RF9": "Null",
+      "RF13": "LS->DPad",
+      "RF7": "HardUpB"
+    },
+    "special_functions": {
+      "LT6": "DownA",
+      "LF4": "BAndLayerSubMode",
+      "RF13+RF7": "DPadRoutingAndHardUpBAllowed"
+    }
+  },
+  "layering": {
+    "layer_direction": ["LF7", "LF8"],
+    "lf4_submode": [
+      "LF4",
+      "(LT2 OR LF7 OR LF8)"
+    ],
+    "priority": {
+      "digital_effective_direction": [
+        "physical_inputs",
+        "layer_left_right",
+        "lf4_submode_active",
+        "forced_up_resolution",
+        "button_carriers",
+        "ls_to_dpad_routing"
+      ],
+      "analog": [
+        "table_output",
+        "direction_plus_a",
+        "lt5_or_rf11_low_magnitude_za",
+        "rf7_hard_up_b",
+        "rf9_null",
+        "nunchuk_override"
+      ]
+    }
+  },
+  "suppression_rules": [
+    "LT2 suppressed by LF4",
+    "RF2_x suppressed in LF4 submode when any C-stick active (RT2/3/4/5)",
+    "RF2 forced-up in pure layer does not apply when LF4 submode active",
+    "RF4 flipper active with layered role checks",
+    "RF3 and RF4 become Tilt3 only outside layer/submode"
+  ],
+  "table_ids_and_selection": {
+    "active_tables": [
+      "Default",
+      "ModeDefault",
+      "X1",
+      "X2",
+      "MX1",
+      "MX2",
+      "Y1",
+      "MY1",
+      "Tilt1",
+      "Tilt2",
+      "Tilt3",
+      "MTilt1",
+      "MTilt2",
+      "MTilt3",
+      "LayerNormalX",
+      "LayerFlipper",
+      "MLayerNormalX",
+      "MLayerFlipper",
+      "Y1Tilt1",
+      "Y1LayerNormalX",
+      "Y1LayerFlipper"
+    ],
+    "inference": "one_modifier_only -> chosen_table_else_default",
+    "special_composite_priority": [
+      "Y1+Tilt1",
+      "Y1+LayerNormalX",
+      "Y1+LayerFlipper"
+    ]
+  },
+  "analog_constants": {
+    "hard_A_override_table": {
+      "ModeDefaultIndex8": [128, 169],
+      "DefaultIndex2": [128, 51]
+    },
+    "lt1_low_magnitude_table": {
+      "1": [89, 89],
+      "2": [128, 79],
+      "3": [167, 89],
+      "4": [79, 128],
+      "5": [128, 128],
+      "6": [177, 128],
+      "7": [89, 167],
+      "8": [128, 177],
+      "9": [167, 167]
+    },
+    "rf7_hard_up_b": {
+      "left": 77,
+      "center": 128,
+      "right": 179,
+      "y": 172
+    },
+    "rf9_null": [128, 128]
+  }
+}

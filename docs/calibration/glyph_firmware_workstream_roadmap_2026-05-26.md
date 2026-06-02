@@ -48,6 +48,8 @@
 - `MODE_ULTIMATE` runtime exists and is active in source (`src/modes/Ultimate.cpp`).
 - Tilt1/Tilt2 are native Ultimate left-stick-only behavior in the current patch scope.
 - Tilt1/Tilt2 consume post-remap logical `inputs.lt1` and `inputs.lt2`.
+- The canonical identity runtime role map for Smash Box has been documented in
+  `docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md`.
 - Current MVP profile evidence records `RF3 -> LT1 -> inputs.lt1 -> Tilt1/TILT`.
 - Current MVP profile evidence records `RF4 -> LT2 -> inputs.lt2 -> Tilt2`.
 - RF5 printed/base location is now transcribed in layout docs, while the earlier RF5 negative smoke row remains `NOT_TESTED_AMBIGUOUS`.
@@ -141,6 +143,8 @@
 
 | Document | Ownership |
 | --- | --- |
+| `docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md` | Canonical source-backed role-map for Smash Box identity runtime behavior in `MODE_ULTIMATE`. |
+| `docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json` | Declarative fixture candidate for current identity runtime role map (docs-only, no runtime parser changes in this branch). |
 | `docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md` | Current native Tilt/Tilt2 runtime behavior scope and formulas. |
 | `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` | Current Tilt/Tilt2 hardware smoke evidence and caveats. |
 | `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md` | Baseline readiness classification for current Tilt package. |
