@@ -21,6 +21,7 @@
 | Adapter policy and prewrite validation | PARTIAL | `docs/calibration/glyph_profile_config_adapter_policy_decisions_2026-05-26.md`, `docs/calibration/glyph_profile_adapter_prewrite_validation_2026-05-26.md`, `tools/check_glyph_profile_adapter_prewrite.py` | Read-only policy/checking is present; no approved write-capable adapter. |
 | Physical/logical mapping and RF5 transcription | PARTIAL | `docs/calibration/glyph_physical_logical_layout_map_2026-05-26.md`, `docs/calibration/glyph_merged_state_consistency_audit_2026-05-26.md` | Printed/base RF5 location is recorded; old RF5 negative smoke row remains ambiguous. |
 | Identity runtime table source sync | COMPLETE | `docs/calibration/glyph_identity_runtime_table_source_sync_2026-05-28.md`, `tools/extract_glyph_identity_runtime_tables.py`, `tools/check_glyph_identity_runtime_table_source_sync.py` | Source-parsed table extraction now guards the evaluator's mirrored table constants against drift from `src/modes/Ultimate.cpp`. |
+| Identity runtime generated-config prototype | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md`, `tools/generate_glyph_identity_runtime_config_prototype.py`, `tools/check_glyph_identity_runtime_generated_config_prototype.py` | Docs/tools-only prototype generates declarative intermediate config and C++-shaped review text from source-parsed tables and role metadata; not firmware input. |
 | Native Ultimate arbitrary table runtime design | DESIGN_ONLY | `docs/calibration/glyph_native_ultimate_table_runtime_design_2026-05-26.md` | Design path documented; runtime patch not approved/implemented here. |
 | Fixture contract and source-scope guardrails | COMPLETE | `docs/calibration/glyph_native_ultimate_table_fixture_contract_2026-05-26.md`, `docs/calibration/glyph_native_ultimate_table_source_checker_2026-05-26.md` | Template and read-only checkers are present. |
 | Full layout requirements and runtime readiness | PARTIAL | `docs/calibration/glyph_full_layout_requirements_spec_2026-05-26.md`, `docs/calibration/glyph_full_layout_requirements_questions_2026-05-26.md`, `docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md` | Requirements questions and readiness blockers are still open. |
@@ -46,6 +47,7 @@
 | Merged-state consistency audit | COMPLETE | `docs/calibration/glyph_merged_state_consistency_audit_2026-05-26.md` |
 | Identity runtime behavior case matrix and evaluator | COMPLETE | `docs/calibration/glyph_identity_runtime_behavior_cases_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json`, `docs/calibration/glyph_identity_runtime_behavior_evaluator_harness_2026-05-28.md`, `tools/check_glyph_identity_runtime_behavior_cases.py`, `tools/check_glyph_identity_runtime_behavior_evaluator.py` |
 | Identity runtime table source-sync guardrail | COMPLETE | `docs/calibration/glyph_identity_runtime_table_source_sync_2026-05-28.md`, `tools/extract_glyph_identity_runtime_tables.py`, `tools/check_glyph_identity_runtime_table_source_sync.py` |
+| Identity runtime generated-config prototype | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json`, `tools/generate_glyph_identity_runtime_config_prototype.py`, `tools/check_glyph_identity_runtime_generated_config_prototype.py` |
 
 ## Current Source-Confirmed Facts
 
@@ -58,6 +60,7 @@
   `docs/calibration/glyph_identity_runtime_behavior_cases_2026-05-28.md`.
 - A bounded source-backed Python evaluator now mechanically checks the representative behavior-case fixture with the current `src/modes/Ultimate.cpp` phase order.
 - Source-parsed table extraction now verifies that the evaluator's mirrored identity runtime table constants match the current `constexpr StickPoint` tables in `src/modes/Ultimate.cpp`.
+- A docs/tools-only generated-config prototype now emits deterministic declarative intermediate config and C++-shaped review text from source-parsed identity runtime tables and role-map metadata.
 - Current MVP profile evidence records `RF3 -> LT1 -> inputs.lt1 -> Tilt1/TILT`.
 - Current MVP profile evidence records `RF4 -> LT2 -> inputs.lt2 -> Tilt2`.
 - RF5 printed/base location is now transcribed in layout docs, while the earlier RF5 negative smoke row remains `NOT_TESTED_AMBIGUOUS`.
@@ -157,6 +160,8 @@
 | `docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json` | Machine-readable expected-behavior case fixture keyed by the identity runtime role map. |
 | `docs/calibration/glyph_identity_runtime_behavior_evaluator_harness_2026-05-28.md` | Bounded Python mirror evaluator scope, caveats, and future migration path for the current representative identity runtime behavior cases. |
 | `docs/calibration/glyph_identity_runtime_table_source_sync_2026-05-28.md` | Source-parsed identity runtime table extraction and evaluator table-sync guardrail. |
+| `docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md` | Docs/tools-only generated-config prototype scope, caveats, and migration path for current source-backed identity runtime data. |
+| `docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json` | Declarative intermediate config prototype generated from source-parsed tables and role-map metadata; not firmware input. |
 | `docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md` | Current native Tilt/Tilt2 runtime behavior scope and formulas. |
 | `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` | Current Tilt/Tilt2 hardware smoke evidence and caveats. |
 | `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md` | Baseline readiness classification for current Tilt package. |
@@ -200,6 +205,8 @@
 | `tools/check_glyph_identity_runtime_behavior_cases.py` | Behavior-case fixture/doc/source checker for the current identity runtime case matrix. |
 | `tools/extract_glyph_identity_runtime_tables.py` | Source-parsed extraction of required `constexpr StickPoint` tables from `src/modes/Ultimate.cpp`. |
 | `tools/check_glyph_identity_runtime_table_source_sync.py` | Exact comparison of source-parsed identity runtime tables against the behavior evaluator's mirrored table constants. |
+| `tools/generate_glyph_identity_runtime_config_prototype.py` | Generates docs-only JSON intermediate config and C++-shaped review text from source-parsed identity runtime tables and role-map metadata. |
+| `tools/check_glyph_identity_runtime_generated_config_prototype.py` | Validates the generated-config prototype shape, caveats, hard overrides, and exact source-table match. |
 | `tools/check_glyph_identity_runtime_behavior_evaluator.py` | Bounded Python mirror evaluator for the current representative identity runtime behavior cases; not hardware validation. |
 | `tools/run_glyph_next_runtime_change_readiness_checks.py` | Aggregated readiness checks for next runtime change planning. |
 | `tools/check_glyph_merged_state_consistency.py` | Merged-state required-file and stale-phrase consistency checks. |
