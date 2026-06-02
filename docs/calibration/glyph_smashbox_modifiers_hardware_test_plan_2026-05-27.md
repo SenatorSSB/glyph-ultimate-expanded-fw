@@ -222,3 +222,10 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 - RF13/RF7/LF4 RF2-suppression rows are satisfied by:
   - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
 - Nunchuk remains unavailable/not tested.
+
+## 2026-05-28 Architecture Hardening Note
+
+- The architecture hardening branch should not add new hardware rows unless behavior changes are detected.
+- Existing hardware result coverage remains applicable when behavior-preserving runtime checks, build verification, artifact inspection, and serial dry-run verification pass.
+- If behavior changes are detected, add targeted hardware rows for the changed behavior and require fresh hardware validation before carrying forward PASS status.
+- Nunchuk remains unavailable/not tested unless new hardware evidence is provided.

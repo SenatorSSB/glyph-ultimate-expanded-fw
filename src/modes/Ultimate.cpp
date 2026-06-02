@@ -181,6 +181,43 @@ enum class EffectiveModifier {
     Tilt3,
 };
 
+struct LayerState {
+    bool layer_left_active;
+    bool layer_right_active;
+    bool layer_direction_active;
+    bool lf4_submode_active;
+    bool layer_transform_active;
+    bool c_stick_any_active;
+    bool rf2_suppressed_by_lf4_submode_cstick;
+};
+
+struct EffectiveDirectionState {
+    bool left;
+    bool right;
+    bool up;
+    bool down;
+    bool force_up_active;
+    int8_t horizontal_axis;
+};
+
+struct RoleState {
+    bool mode_active;
+    bool x1_active;
+    bool x2_active;
+    bool y1_active;
+    bool layer_rf3_normal_x_active;
+    bool rf4_layer_flipper_active;
+    bool tilt1_effective;
+    bool tilt2_effective;
+    bool tilt3_effective;
+    bool z_airdodge_override_active;
+    bool null_modifier_active;
+    bool hard_up_b_active;
+    bool ls_to_dpad_active;
+    bool direction_plus_a_active;
+    bool direction_plus_a_force_up;
+};
+
 int8_t ResolveHorizontalAxis(
     bool base_left_active,
     bool base_right_active,
@@ -197,6 +234,116 @@ int8_t ResolveHorizontalAxis(
         return 1;
     }
     return 0;
+}
+
+LayerState ResolveLayerState(const InputState &inputs) {
+    LayerState state;
+    state.layer_left_active = inputs.lf8;
+    state.layer_right_active = inputs.lf7;
+    state.layer_direction_active = state.layer_left_active || state.layer_right_active;
+    state.lf4_submode_active = inputs.lf4 && (state.layer_direction_active || inputs.lt2);
+    state.layer_transform_active = state.layer_direction_active || state.lf4_submode_active;
+    state.c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
+    state.rf2_suppressed_by_lf4_submode_cstick = state.lf4_submode_active && state.c_stick_any_active;
+    return state;
+}
+
+EffectiveDirectionState ResolveEffectiveDirections(const InputState &inputs, const LayerState &layer) {
+    const bool pure_layer_rf2_force_up_active = layer.layer_direction_active
+        && !inputs.lf4
+        && inputs.rf2
+        && !layer.rf2_suppressed_by_lf4_submode_cstick;
+    const bool lf4_submode_rf3_force_up_active = layer.lf4_submode_active && inputs.rf3;
+
+    EffectiveDirectionState state;
+    state.force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
+    state.horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer.layer_left_active, layer.layer_right_active);
+    state.up = inputs.lf2 || state.force_up_active;
+    state.down = (inputs.lf5 || inputs.lt6) && !state.force_up_active;
+    state.left = state.horizontal_axis < 0;
+    state.right = state.horizontal_axis > 0;
+    return state;
+}
+
+RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, const EffectiveDirectionState &directions) {
+    const bool down_a_active = inputs.lt6;
+    const bool up_a_active = inputs.rf12 || inputs.rf15;
+    const bool tilt1_pressed = inputs.rf3 && !layer.layer_transform_active;
+    const bool tilt2_pressed = inputs.rf4 && !layer.layer_transform_active;
+
+    RoleState state;
+    state.mode_active = inputs.rf8;
+    state.x1_active = inputs.lt4;
+    state.x2_active = inputs.lt1;
+    state.y1_active = inputs.lt2 && !inputs.lf4;
+    state.layer_rf3_normal_x_active = layer.layer_direction_active && !inputs.lf4 && inputs.rf3;
+    state.rf4_layer_flipper_active = layer.layer_transform_active && inputs.rf4;
+    state.tilt3_effective = tilt1_pressed && tilt2_pressed;
+    state.tilt1_effective = tilt1_pressed && !tilt2_pressed;
+    state.tilt2_effective = tilt2_pressed && !tilt1_pressed;
+    state.z_airdodge_override_active = inputs.lt5 || inputs.rf11;
+    state.null_modifier_active = inputs.rf9;
+    state.hard_up_b_active = inputs.rf7;
+    state.ls_to_dpad_active = inputs.rf13;
+    state.direction_plus_a_active = down_a_active || up_a_active;
+    state.direction_plus_a_force_up = state.direction_plus_a_active && (up_a_active || directions.force_up_active);
+    return state;
+}
+
+void ApplyDigitalButtonOutputs(const InputState &inputs, const LayerState &layer, OutputState &outputs) {
+    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
+    outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer.layer_direction_active && !inputs.lf4 && inputs.rf3);
+    outputs.x = inputs.rf2 && !layer.rf2_suppressed_by_lf4_submode_cstick && (!layer.layer_direction_active || inputs.lf4);
+    outputs.y = inputs.rf10;
+    outputs.buttonL = inputs.lt3;
+    // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
+    outputs.buttonR = inputs.rt1 || inputs.lt5 || inputs.rf11;
+    outputs.triggerLDigital = inputs.lt3;
+    outputs.triggerRDigital = inputs.rf16;
+
+    outputs.start = inputs.mb7;
+    outputs.select = inputs.mb6;
+    outputs.home = inputs.mb5;
+    outputs.capture = inputs.mb4;
+}
+
+void ApplyDpadOutputs(const InputState &inputs, const EffectiveDirectionState &directions, const RoleState &roles, OutputState &outputs) {
+    outputs.dpadUp = 0;
+    outputs.dpadDown = 0;
+    outputs.dpadLeft = 0;
+    outputs.dpadRight = 0;
+
+    // Preserve source-backed nunchuk C D-pad layer behavior.
+    if (inputs.nunchuk_c) {
+        outputs.dpadUp = inputs.rt5;
+        outputs.dpadDown = inputs.rt2;
+        outputs.dpadLeft = inputs.rt3;
+        outputs.dpadRight = inputs.rt4;
+    }
+
+    if (roles.ls_to_dpad_active) {
+        outputs.dpadUp |= directions.up;
+        outputs.dpadDown |= directions.down;
+        outputs.dpadLeft |= directions.left;
+        outputs.dpadRight |= directions.right;
+    }
+}
+
+void ApplyDigitalDirectionOutputs(const EffectiveDirectionState &directions, const RoleState &roles, OutputState &outputs) {
+    outputs.leftStickLeft = roles.ls_to_dpad_active ? false : directions.left;
+    outputs.leftStickRight = roles.ls_to_dpad_active ? false : directions.right;
+    outputs.leftStickDown = roles.ls_to_dpad_active ? false : directions.down;
+    outputs.leftStickUp = roles.ls_to_dpad_active ? false : directions.up;
+}
+
+void ApplyRightStickDigitalOutputs(const InputState &inputs, OutputState &outputs) {
+    outputs.rightStickLeft = inputs.rt3;
+    outputs.rightStickRight = inputs.rt4;
+    outputs.rightStickDown = inputs.rt2;
+    outputs.rightStickUp = inputs.rt5;
+
+    outputs.modX = false;
+    outputs.modY = false;
 }
 
 const StickPoint *SelectStickTable(
@@ -334,100 +481,72 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
     return static_cast<size_t>(index);
 }
 
+void ApplyTableAnalogOutput(const StickPoint *active_table, int8_t x_axis, int8_t y_axis, OutputState &outputs) {
+    const size_t direction_index = DirectionIndexFromAxes(x_axis, y_axis);
+    outputs.leftStickX = active_table[direction_index].x;
+    outputs.leftStickY = active_table[direction_index].y;
+}
+
+void ApplyDirectionPlusAOverride(const RoleState &roles, OutputState &outputs) {
+    if (!roles.direction_plus_a_active) {
+        return;
+    }
+
+    const StickPoint *direction_plus_a_table = roles.mode_active ? kModeDefaultTable : kDefaultTable;
+    const size_t direction_plus_a_index = roles.direction_plus_a_force_up ? kDirectionEightIndex : kDirectionTwoIndex;
+    outputs.leftStickX = direction_plus_a_table[direction_plus_a_index].x;
+    outputs.leftStickY = direction_plus_a_table[direction_plus_a_index].y;
+}
+
+void ApplyZAirdodgeOverride(const EffectiveDirectionState &directions, OutputState &outputs) {
+    const int8_t lt1_x = directions.left == directions.right ? 0 : (directions.left ? -1 : 1);
+    const int8_t lt1_y = directions.down == directions.up ? 0 : (directions.down ? -1 : 1);
+    const size_t lt1_direction_index = DirectionIndexFromAxes(lt1_x, lt1_y);
+    outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
+    outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
+}
+
+void ApplyHardUpBOverride(const EffectiveDirectionState &directions, OutputState &outputs) {
+    // RF7 is a hard Up+B analog override with horizontal from effective direction.
+    const uint8_t rf7_horizontal = directions.left == directions.right ? 128 : (directions.left ? 77 : 179);
+    outputs.leftStickX = rf7_horizontal;
+    outputs.leftStickY = 172;
+}
+
+void ApplyNullOverride(OutputState &outputs) {
+    outputs.leftStickX = 128;
+    outputs.leftStickY = 128;
+}
+
 } // namespace
 
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
-    const bool layer_left_active = inputs.lf8;
-    const bool layer_right_active = inputs.lf7;
-    const bool layer_direction_active = layer_left_active || layer_right_active;
-    const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
-    const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
-    const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;
-    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;
-    const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
-    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
-    const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
-    const bool effective_ls_up = inputs.lf2 || force_up_active;
-    const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
-    const bool effective_ls_left = horizontal_axis < 0;
-    const bool effective_ls_right = horizontal_axis > 0;
-    const bool ls_to_dpad_active = inputs.rf13;
+    // Digital priority: physical inputs, LF8/LF7 layer direction, LF4 sub-mode,
+    // forced-Up resolution, button carriers, then optional LS->DPad routing.
+    const LayerState layer = ResolveLayerState(inputs);
+    const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
+    const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
 
-    outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
-    outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer_direction_active && !inputs.lf4 && inputs.rf3);
-    outputs.x = inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick && (!layer_direction_active || inputs.lf4);
-    outputs.y = inputs.rf10;
-    outputs.buttonL = inputs.lt3;
-    // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
-    outputs.buttonR = inputs.rt1 || inputs.lt5 || inputs.rf11;
-    outputs.triggerLDigital = inputs.lt3;
-    outputs.triggerRDigital = inputs.rf16;
-
-    outputs.start = inputs.mb7;
-    outputs.select = inputs.mb6;
-    outputs.home = inputs.mb5;
-    outputs.capture = inputs.mb4;
-
-    outputs.dpadUp = 0;
-    outputs.dpadDown = 0;
-    outputs.dpadLeft = 0;
-    outputs.dpadRight = 0;
-
-    // Preserve source-backed nunchuk C D-pad layer behavior.
-    if (inputs.nunchuk_c) {
-        outputs.dpadUp = inputs.rt5;
-        outputs.dpadDown = inputs.rt2;
-        outputs.dpadLeft = inputs.rt3;
-        outputs.dpadRight = inputs.rt4;
-    }
-
-    if (ls_to_dpad_active) {
-        outputs.dpadUp |= effective_ls_up;
-        outputs.dpadDown |= effective_ls_down;
-        outputs.dpadLeft |= effective_ls_left;
-        outputs.dpadRight |= effective_ls_right;
-    }
-
-    outputs.leftStickLeft = ls_to_dpad_active ? false : effective_ls_left;
-    outputs.leftStickRight = ls_to_dpad_active ? false : effective_ls_right;
-    outputs.leftStickDown = ls_to_dpad_active ? false : effective_ls_down;
-    outputs.leftStickUp = ls_to_dpad_active ? false : effective_ls_up;
-
-    outputs.rightStickLeft = inputs.rt3;
-    outputs.rightStickRight = inputs.rt4;
-    outputs.rightStickDown = inputs.rt2;
-    outputs.rightStickUp = inputs.rt5;
-
-    outputs.modX = false;
-    outputs.modY = false;
+    ApplyDigitalButtonOutputs(inputs, layer, outputs);
+    ApplyDpadOutputs(inputs, effective_directions, roles, outputs);
+    ApplyDigitalDirectionOutputs(effective_directions, roles, outputs);
+    ApplyRightStickDigitalOutputs(inputs, outputs);
 }
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
-    const bool layer_left_active = inputs.lf8;
-    const bool layer_right_active = inputs.lf7;
-    const bool layer_direction_active = layer_left_active || layer_right_active;
-    const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
-    const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
-    const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;
-    const bool layer_transform_active = layer_direction_active || lf4_submode_active;
-    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;
-    const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
-    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
-    const bool effective_ls_up = inputs.lf2 || force_up_active;
-    const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
-    const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
-    const bool effective_ls_left = horizontal_axis < 0;
-    const bool effective_ls_right = horizontal_axis > 0;
+    const LayerState layer = ResolveLayerState(inputs);
+    const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
+    const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
-        effective_ls_left, // Left (LF3 + LF8 layer-left contribution with cancellation)
-        effective_ls_right, // Right (LF1 + LF7 layer-right contribution with cancellation)
-        effective_ls_down, // Down (LT6/LF5, suppressed by forced-Up)
-        effective_ls_up, // Up (RF6/RF12/RF15, pure-layer RF2, and LF4-submode RF3 forced-Up)
+        effective_directions.left, // Left (LF3 + LF8 layer-left contribution with cancellation)
+        effective_directions.right, // Right (LF1 + LF7 layer-right contribution with cancellation)
+        effective_directions.down, // Down (LT6/LF5, suppressed by forced-Up)
+        effective_directions.up, // Up (RF6/RF12/RF15, pure-layer RF2, and LF4-submode RF3 forced-Up)
         inputs.rt3, // C-Left
         inputs.rt4, // C-Right
         inputs.rt2, // C-Down
@@ -439,79 +558,39 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     );
 
     // Senscope Glyph Smash Box runtime begin
-    const bool mode_active = inputs.rf8;
-    const bool x1_active = inputs.lt4;
-    const bool x2_active = inputs.lt1;
-    const bool y1_active = inputs.lt2 && !inputs.lf4;
-    const bool z_airdodge_override_active = inputs.lt5 || inputs.rf11;
-    const bool null_modifier_active = inputs.rf9;
-    const bool ls_to_dpad_active = inputs.rf13;
-    const bool down_a_active = inputs.lt6;
-    const bool up_a_active = inputs.rf12 || inputs.rf15;
-    const bool direction_plus_a_active = down_a_active || up_a_active;
-    const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || force_up_active);
-
-    const bool layer_rf3_normal_x_active = layer_direction_active && !inputs.lf4 && inputs.rf3;
-    const bool rf4_layer_flipper_active = layer_transform_active && inputs.rf4;
-    const bool tilt1_pressed = inputs.rf3 && !layer_transform_active;
-    const bool tilt2_pressed = inputs.rf4 && !layer_transform_active;
-
-    const bool tilt3_effective = tilt1_pressed && tilt2_pressed;
-    const bool tilt1_effective = tilt1_pressed && !tilt2_pressed;
-    const bool tilt2_effective = tilt2_pressed && !tilt1_pressed;
-
+    // Analog priority: table output, direction-plus-A, LT5/RF11 low magnitude,
+    // RF7 hard Up+B, RF9 null, then the pre-existing nunchuk override below.
     const StickPoint *active_table = SelectStickTable(
-        mode_active,
-        x1_active,
-        x2_active,
-        y1_active,
-        layer_rf3_normal_x_active,
-        rf4_layer_flipper_active,
-        tilt1_effective,
-        tilt2_effective,
-        tilt3_effective
+        roles.mode_active,
+        roles.x1_active,
+        roles.x2_active,
+        roles.y1_active,
+        roles.layer_rf3_normal_x_active,
+        roles.rf4_layer_flipper_active,
+        roles.tilt1_effective,
+        roles.tilt2_effective,
+        roles.tilt3_effective
     );
 
-    if (ls_to_dpad_active) {
-        const StickPoint center = mode_active ? kModeDefaultTable[kDirectionFiveIndex] : kDefaultTable[kDirectionFiveIndex];
+    if (roles.ls_to_dpad_active) {
+        const StickPoint center = roles.mode_active ? kModeDefaultTable[kDirectionFiveIndex] : kDefaultTable[kDirectionFiveIndex];
         outputs.leftStickX = center.x;
         outputs.leftStickY = center.y;
     } else {
-        const size_t direction_index = DirectionIndexFromAxes(directions.x, directions.y);
-        outputs.leftStickX = active_table[direction_index].x;
-        outputs.leftStickY = active_table[direction_index].y;
+        ApplyTableAnalogOutput(active_table, directions.x, directions.y, outputs);
+        ApplyDirectionPlusAOverride(roles, outputs);
 
-        if (direction_plus_a_active) {
-            const StickPoint *direction_plus_a_table = mode_active ? kModeDefaultTable : kDefaultTable;
-            const size_t direction_plus_a_index = direction_plus_a_force_up ? kDirectionEightIndex : kDirectionTwoIndex;
-            outputs.leftStickX = direction_plus_a_table[direction_plus_a_index].x;
-            outputs.leftStickY = direction_plus_a_table[direction_plus_a_index].y;
+        if (roles.z_airdodge_override_active) {
+            ApplyZAirdodgeOverride(effective_directions, outputs);
         }
 
-        if (z_airdodge_override_active) {
-            const bool lt1_force_up_active = force_up_active;
-            const bool lt1_effective_left = effective_ls_left;
-            const bool lt1_effective_right = effective_ls_right;
-            const bool lt1_effective_up = inputs.lf2 || lt1_force_up_active;
-            const bool lt1_effective_down = (inputs.lf5 || inputs.lt6) && !lt1_force_up_active;
-            const int8_t lt1_x = lt1_effective_left == lt1_effective_right ? 0 : (lt1_effective_left ? -1 : 1);
-            const int8_t lt1_y = lt1_effective_down == lt1_effective_up ? 0 : (lt1_effective_down ? -1 : 1);
-            const size_t lt1_direction_index = DirectionIndexFromAxes(lt1_x, lt1_y);
-            outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
-            outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
-        }
-
-        if (inputs.rf7) {
-            // RF7 is a hard Up+B analog override with horizontal from effective direction.
-            const uint8_t rf7_horizontal = effective_ls_left == effective_ls_right ? 128 : (effective_ls_left ? 77 : 179);
-            outputs.leftStickX = rf7_horizontal;
-            outputs.leftStickY = 172;
+        if (roles.hard_up_b_active) {
+            ApplyHardUpBOverride(effective_directions, outputs);
         }
     }
 
-    if (null_modifier_active) {
-        outputs.leftStickX = 128;
-        outputs.leftStickY = 128;
+    if (roles.null_modifier_active) {
+        ApplyNullOverride(outputs);
     }
     // Senscope Glyph Smash Box runtime end
 

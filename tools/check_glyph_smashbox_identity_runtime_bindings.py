@@ -400,6 +400,24 @@ def require_runtime_source() -> str:
         fail(f"missing runtime source: {SOURCE_PATH.relative_to(REPO_ROOT)}")
     text = SOURCE_PATH.read_text(encoding="utf-8")
 
+    for helper_name in (
+        "struct LayerState",
+        "struct EffectiveDirectionState",
+        "struct RoleState",
+        "ResolveLayerState",
+        "ResolveEffectiveDirections",
+        "ResolveRoleState",
+        "ApplyDigitalButtonOutputs",
+        "ApplyDpadOutputs",
+        "ApplyTableAnalogOutput",
+        "ApplyDirectionPlusAOverride",
+        "ApplyZAirdodgeOverride",
+        "ApplyHardUpBOverride",
+        "ApplyNullOverride",
+    ):
+        if helper_name not in text:
+            fail(f"runtime source missing hardened helper shape: {helper_name}")
+
     for anchor in SOURCE_ANCHORS:
         if anchor not in text:
             fail(f"missing runtime source anchor: {anchor}")
@@ -410,11 +428,11 @@ def require_runtime_source() -> str:
             "runtime source must assign A from RF1 or LT6 or RF12 or RF15",
         ),
         (
-            "outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer_direction_active && !inputs.lf4 && inputs.rf3);",
+            "outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer.layer_direction_active && !inputs.lf4 && inputs.rf3);",
             "runtime source must include RF7 in B output while preserving layered RF3 B role",
         ),
         (
-            "outputs.x = inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick && (!layer_direction_active || inputs.lf4);",
+            "outputs.x = inputs.rf2 && !layer.rf2_suppressed_by_lf4_submode_cstick && (!layer.layer_direction_active || inputs.lf4);",
             "runtime source must gate RF2 X output by LF4-submode C-stick suppression",
         ),
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
@@ -427,20 +445,20 @@ def require_runtime_source() -> str:
         ("outputs.triggerRDigital = inputs.rf16;", "runtime source must assign RF16 to GameCube R carrier"),
         ("outputs.rightStickRight = inputs.rt4;", "runtime source must map RT4 to C-right"),
         ("outputs.rightStickUp = inputs.rt5;", "runtime source must map RT5 to C-up"),
-        ("const bool null_modifier_active = inputs.rf9;", "runtime source must read RF9 null modifier input"),
-        ("const bool x1_active = inputs.lt4;", "runtime source must assign LT4 to X1"),
-        ("const bool x2_active = inputs.lt1;", "runtime source must assign LT1 to X2"),
-        ("const bool ls_to_dpad_active = inputs.rf13;", "runtime source must map LS->DPad to RF13"),
-        ("const bool layer_left_active = inputs.lf8;", "runtime source must read LF8 layer-left input"),
-        ("const bool layer_right_active = inputs.lf7;", "runtime source must read LF7 layer-right input"),
-        ("const bool layer_direction_active = layer_left_active || layer_right_active;", "runtime source must define layer_direction_active from LF8/LF7"),
-        ("const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);", "runtime source must define LF4 sub-mode activation from LF4 and (layer direction or LT2)"),
-        ("const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;", "runtime source must define C-stick-active aggregation"),
-        ("const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;", "runtime source must define LF4-submode RF2 C-stick suppression"),
-        ("const bool layer_transform_active = layer_direction_active || lf4_submode_active;", "runtime source must define layer_transform_active"),
-        ("const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;", "runtime source must define pure-layer RF2 forced-Up"),
-        ("const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;", "runtime source must define LF4-submode RF3 forced-Up"),
-        ("const bool y1_active = inputs.lt2 && !inputs.lf4;", "runtime source must suppress Y1 while LF4 is held"),
+        ("state.null_modifier_active = inputs.rf9;", "runtime source must read RF9 null modifier input"),
+        ("state.x1_active = inputs.lt4;", "runtime source must assign LT4 to X1"),
+        ("state.x2_active = inputs.lt1;", "runtime source must assign LT1 to X2"),
+        ("state.ls_to_dpad_active = inputs.rf13;", "runtime source must map LS->DPad to RF13"),
+        ("state.layer_left_active = inputs.lf8;", "runtime source must read LF8 layer-left input"),
+        ("state.layer_right_active = inputs.lf7;", "runtime source must read LF7 layer-right input"),
+        ("state.layer_direction_active = state.layer_left_active || state.layer_right_active;", "runtime source must define layer_direction_active from LF8/LF7"),
+        ("state.lf4_submode_active = inputs.lf4 && (state.layer_direction_active || inputs.lt2);", "runtime source must define LF4 sub-mode activation from LF4 and (layer direction or LT2)"),
+        ("state.c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;", "runtime source must define C-stick-active aggregation"),
+        ("state.rf2_suppressed_by_lf4_submode_cstick = state.lf4_submode_active && state.c_stick_any_active;", "runtime source must define LF4-submode RF2 C-stick suppression"),
+        ("state.layer_transform_active = state.layer_direction_active || state.lf4_submode_active;", "runtime source must define layer_transform_active"),
+        ("const bool pure_layer_rf2_force_up_active = layer.layer_direction_active", "runtime source must define pure-layer RF2 forced-Up"),
+        ("const bool lf4_submode_rf3_force_up_active = layer.lf4_submode_active && inputs.rf3;", "runtime source must define LF4-submode RF3 forced-Up"),
+        ("state.y1_active = inputs.lt2 && !inputs.lf4;", "runtime source must suppress Y1 while LF4 is held"),
     )
     for line, message in expected_source_lines:
         if line not in text:
@@ -510,7 +528,7 @@ def require_runtime_source() -> str:
         fail("runtime source must select Y1+Tilt1 special composite tables")
 
     if re.search(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
+        r"state\.force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
         text,
     ) is None:
         fail("runtime source must include pure-layer RF2 and LF4-submode RF3 in forced-up logic")
@@ -520,12 +538,12 @@ def require_runtime_source() -> str:
     ) is None:
         fail("runtime source must include RF15 in Up+A logic")
     if re.search(
-        r"const\s+bool\s+lt1_force_up_active\s*=\s*force_up_active\s*;",
+        r"void\s+ApplyZAirdodgeOverride\(const\s+EffectiveDirectionState\s+&directions,\s*OutputState\s+&outputs\)",
         text,
     ) is None:
         fail("runtime source must feed LT5/RF11 low-table forced-up from shared forced-up sources")
     if re.search(
-        r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
+        r"state\.z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         text,
     ) is None:
         fail("runtime source must alias LT5/RF11 for shared low-magnitude Z-airdodge override")
@@ -541,21 +559,21 @@ def require_runtime_source() -> str:
         fail("runtime source must map nunchuk-C D-pad Right to RT4")
 
     if re.search(
-        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{",
+        r"ApplyDirectionPlusAOverride\(roles,\s*outputs\).*?if\s*\(\s*roles\.z_airdodge_override_active\s*\)",
         text,
         flags=re.DOTALL,
     ) is None:
         fail("runtime source must apply LT5/RF11 hard override after direction-plus-A override")
 
     if re.search(
-        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*if\s*\(\s*inputs\.rf7\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
+        r"ApplyDirectionPlusAOverride\(roles,\s*outputs\).*?if\s*\(\s*roles\.z_airdodge_override_active\s*\).*?ApplyZAirdodgeOverride\(effective_directions,\s*outputs\);.*?if\s*\(\s*roles\.hard_up_b_active\s*\).*?ApplyHardUpBOverride\(effective_directions,\s*outputs\);.*?if\s*\(\s*roles\.null_modifier_active\s*\)",
         text,
         flags=re.DOTALL,
     ) is None:
         fail("runtime source must apply RF7 hard Up+B before RF9 null override")
 
     if re.search(
-        r"if\s*\(\s*inputs\.rf7\s*\)\s*\{\s*//\s*RF7\s+is\s+a\s+hard\s+Up\+B\s+analog\s+override.*?effective_ls_left\s*==\s*effective_ls_right\s*\?\s*128\s*:\s*\(effective_ls_left\s*\?\s*77\s*:\s*179\).*?outputs\.leftStickY\s*=\s*172\s*;",
+        r"void\s+ApplyHardUpBOverride\(const\s+EffectiveDirectionState\s+&directions,\s*OutputState\s+&outputs\)\s*\{.*?directions\.left\s*==\s*directions\.right\s*\?\s*128\s*:\s*\(directions\.left\s*\?\s*77\s*:\s*179\).*?outputs\.leftStickY\s*=\s*172\s*;",
         text,
         flags=re.DOTALL,
     ) is None:
@@ -572,22 +590,22 @@ def require_runtime_source() -> str:
         fail("runtime source must assign LT1 low-magnitude leftStickY")
 
     if re.search(
-        r"outputs\.leftStickLeft\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_left\s*;",
+        r"outputs\.leftStickLeft\s*=\s*roles\.ls_to_dpad_active\s*\?\s*false\s*:\s*directions\.left\s*;",
         text,
     ) is None:
         fail("runtime source must suppress digital left-stick left during LS->DPad")
     if re.search(
-        r"outputs\.leftStickRight\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_right\s*;",
+        r"outputs\.leftStickRight\s*=\s*roles\.ls_to_dpad_active\s*\?\s*false\s*:\s*directions\.right\s*;",
         text,
     ) is None:
         fail("runtime source must suppress digital left-stick right during LS->DPad")
     if re.search(
-        r"outputs\.leftStickDown\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_down\s*;",
+        r"outputs\.leftStickDown\s*=\s*roles\.ls_to_dpad_active\s*\?\s*false\s*:\s*directions\.down\s*;",
         text,
     ) is None:
         fail("runtime source must suppress digital left-stick down during LS->DPad")
     if re.search(
-        r"outputs\.leftStickUp\s*=\s*ls_to_dpad_active\s*\?\s*false\s*:\s*effective_ls_up\s*;",
+        r"outputs\.leftStickUp\s*=\s*roles\.ls_to_dpad_active\s*\?\s*false\s*:\s*directions\.up\s*;",
         text,
     ) is None:
         fail("runtime source must suppress digital left-stick up during LS->DPad")
@@ -596,25 +614,25 @@ def require_runtime_source() -> str:
         fail("runtime source must not keep stale RF7 LS->DPad activation")
 
     if re.search(
-        r"const\s+int8_t\s+horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer_left_active,\s*layer_right_active\)\s*;",
+        r"state\.horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer\.layer_left_active,\s*layer\.layer_right_active\)\s*;",
         text,
     ) is None:
         fail("runtime source must include LF8/LF7 in effective horizontal direction resolution")
 
-    if re.search(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_transform_active\s*;", text) is None:
+    if re.search(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer\.layer_transform_active\s*;", text) is None:
         fail("runtime source must gate RF3 Tilt1 by !layer_transform_active")
-    if re.search(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_transform_active\s*;", text) is None:
+    if re.search(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer\.layer_transform_active\s*;", text) is None:
         fail("runtime source must gate RF4 Tilt2 by !layer_transform_active")
-    if re.search(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_transform_active\s*&&\s*inputs\.rf4\s*;", text) is None:
+    if re.search(r"state\.rf4_layer_flipper_active\s*=\s*layer\.layer_transform_active\s*&&\s*inputs\.rf4\s*;", text) is None:
         fail("runtime source must define layered RF4 flipper activation for pure layer and LF4 sub-mode")
-    if re.search(r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;", text) is None:
+    if re.search(r"state\.layer_rf3_normal_x_active\s*=\s*layer\.layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;", text) is None:
         fail("runtime source must define layered RF3 normal-x activation for pure layer only")
     if re.search(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", text) is None:
         fail("runtime source must enforce RF4-over-RF3 layered modifier precedence")
     if re.search(r"EffectiveModifier::LayerNormalX", text) is None:
         fail("runtime source must define layered RF3 normal-x effective modifier")
     if re.search(
-        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        r"SelectStickTable\(\s*roles\.mode_active,\s*roles\.x1_active,\s*roles\.x2_active,\s*roles\.y1_active,\s*roles\.layer_rf3_normal_x_active,\s*roles\.rf4_layer_flipper_active,\s*roles\.tilt1_effective,\s*roles\.tilt2_effective,\s*roles\.tilt3_effective",
         text,
         flags=re.DOTALL,
     ) is None:

@@ -519,6 +519,13 @@ LT5/RF11 Z-airdodge low-magnitude hard final override policy:
 
 ## Preservation Boundaries
 
+## 2026-05-28 Architecture Hardening Amendment
+
+- Behavior-preserving architecture hardening is documented in `docs/calibration/glyph_identity_runtime_architecture_hardening_2026-05-28.md`.
+- The current native `MODE_ULTIMATE` runtime behavior is now described as an evaluator with explicit phases and primitive role categories.
+- The documented categories are digital button output, direction contribution, table modifier, composite table modifier, layer override, sub-mode override, hard analog override, null analog override, and LS->DPad.
+- This amendment does not change runtime behavior, table values, role bindings, profile artifacts, schema/proto/configurator structure, SOCD behavior, or hardware result status.
+
 Preserved:
 
 - No schema/proto/configurator structure change.
