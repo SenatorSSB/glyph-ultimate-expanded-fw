@@ -105,6 +105,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
         ),
         step(
+            "identity runtime generated cpp diff artifact",
+            "tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),
