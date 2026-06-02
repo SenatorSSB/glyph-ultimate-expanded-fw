@@ -28,6 +28,9 @@
 | Senscope-to-Glyph export contract draft | DESIGN_ONLY | `docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md`, `docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json`, `tools/check_glyph_identity_runtime_config_contracts.py` | Draft package boundary for future Senscope exports targeting the generated-config contract; no Senscope app changes, runtime-loaded config, device writing, or schema changes. |
 | Runtime-loaded config design | DESIGN_ONLY | `docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md`, `docs/calibration/fixtures/glyph_runtime_loaded_config_design_v0_2026-05-28.json`, `tools/check_glyph_runtime_loaded_config_design.py` | Future architecture boundary for runtime-loaded config ownership and non-goals; no runtime-loaded config, serial/device write behavior, firmware behavior change, or hardware validation. |
 | Runtime-loaded config validation contract | DESIGN_ONLY | `docs/calibration/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.md`, `docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json`, `tools/check_glyph_runtime_loaded_config_design.py` | Future validator requirements/rejections for bounded data classes; design-only and not implemented as firmware validator or device transport. |
+| Preimplementation go/no-go index | DOCS_TOOLS_GATE_INDEX | `docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md`, `docs/calibration/fixtures/glyph_preimplementation_go_nogo_index_2026-05-28.json`, `tools/check_glyph_preimplementation_go_nogo_index.py` | Consolidates generated constants, runtime-loaded config, device write/transport, hardware-validation, nunchuk-validation, and Senscope export gates; no firmware behavior change or hardware validation. |
+| Generated constants refactor readiness packet | BLOCKED_EXPLICIT_APPROVAL | `docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md`, `docs/calibration/fixtures/glyph_generated_constants_refactor_readiness_packet_2026-05-28.json`, `tools/check_glyph_preimplementation_go_nogo_index.py` | Defines required invariants and approvals before any future generated constants firmware refactor; not approval to edit firmware source. |
+| Runtime-loaded config implementation readiness packet | BLOCKED_EXPLICIT_APPROVAL_AND_DESIGN_RESOLUTION | `docs/calibration/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.md`, `docs/calibration/fixtures/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.json`, `tools/check_glyph_preimplementation_go_nogo_index.py` | Defines design, validator, storage/transport, fallback, performance, and hardware-validation blockers before runtime-loaded config implementation. |
 | Native Ultimate arbitrary table runtime design | DESIGN_ONLY | `docs/calibration/glyph_native_ultimate_table_runtime_design_2026-05-26.md` | Design path documented; runtime patch not approved/implemented here. |
 | Fixture contract and source-scope guardrails | COMPLETE | `docs/calibration/glyph_native_ultimate_table_fixture_contract_2026-05-26.md`, `docs/calibration/glyph_native_ultimate_table_source_checker_2026-05-26.md` | Template and read-only checkers are present. |
 | Full layout requirements and runtime readiness | PARTIAL | `docs/calibration/glyph_full_layout_requirements_spec_2026-05-26.md`, `docs/calibration/glyph_full_layout_requirements_questions_2026-05-26.md`, `docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md` | Requirements questions and readiness blockers are still open. |
@@ -59,6 +62,7 @@
 | Identity runtime generated-config contract | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json`, `tools/check_glyph_identity_runtime_config_contracts.py` |
 | Senscope-to-Glyph export contract draft | COMPLETE | `docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md`, `docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json`, `tools/check_glyph_identity_runtime_config_contracts.py` |
 | Runtime-loaded config design and validation contract | COMPLETE | `docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md`, `docs/calibration/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.md`, `tools/check_glyph_runtime_loaded_config_design.py` |
+| Preimplementation gate index and readiness packets | COMPLETE | `docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md`, `docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md`, `docs/calibration/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.md`, `tools/check_glyph_preimplementation_go_nogo_index.py` |
 
 ## Current Source-Confirmed Facts
 
@@ -77,6 +81,7 @@
 - A docs/tools-only generated-config contract now pins the current prototype shape, hard overrides, table list, and boundary caveats.
 - A docs/tools-only Senscope export draft now records a possible future package boundary targeting the generated-config contract without implementing app schema, runtime-loaded config, or device writing.
 - A docs/tools-only runtime-loaded config design and validation contract now record future ownership, rejection, storage/transport, and implementation blocker boundaries without implementing runtime-loaded config.
+- A docs/tools-only preimplementation go/no-go index and readiness packets now consolidate generated constants, runtime-loaded config, device write/transport, hardware-validation, nunchuk-validation, and Senscope export gates without changing firmware runtime behavior.
 - Current MVP profile evidence records `RF3 -> LT1 -> inputs.lt1 -> Tilt1/TILT`.
 - Current MVP profile evidence records `RF4 -> LT2 -> inputs.lt2 -> Tilt2`.
 - RF5 printed/base location is now transcribed in layout docs, while the earlier RF5 negative smoke row remains `NOT_TESTED_AMBIGUOUS`.
@@ -99,6 +104,8 @@
 - Outbound disabled-remap policy (`omitted activates` vs explicit `BTN_UNSPECIFIED`) is unresolved.
 - Next runtime patch requires explicit user approval before implementation.
 - Hardware testing is required after any runtime patch before preservation claims.
+- Generated constants firmware refactor is blocked until explicit user approval and a source-backed implementation plan.
+- Runtime-loaded config implementation is blocked until explicit user approval, design resolution, validator design, fallback policy, storage/transport source authority, and hardware validation planning.
 
 ## Next Recommended Roadmap Steps
 
@@ -109,6 +116,7 @@
 | `glyph/gfw2-runtime-implementation-plan-v0` | Produce a bounded implementation plan for a potential native Ultimate patch, scoped by existing checkers and stop conditions. | NOT_STARTED | Converts design docs into an explicit reviewable implementation path, still no code changes. | Stop unless explicit user approval authorizes runtime implementation work. |
 | `glyph/gfw2-user-requirements-input-packet` | Collect missing user/domain decisions for full layout roles, chord policy, default behavior, and disabled-remap policy. | BLOCKED_USER_INPUT | Unblocks Phase C decisions that design/readiness docs currently mark unresolved. | Stop if user requirements are incomplete or ambiguous for core behavior fields. |
 | `glyph/gfw2-preimplementation-blocker-index` | Publish a single blocker ledger combining user-input, corpus, hardware, and approval gates. | NOT_STARTED | Keeps go/no-go state explicit before any runtime patch branch is attempted. | Stop if blocker status cannot be source-backed or is contradicted by current docs/checkers. |
+| `glyph/gfw2-preimplementation-go-nogo-index` | Publish docs/tools-only go/no-go gates and readiness packets for generated constants, runtime-loaded config, device transport, and hardware-validation boundaries. | COMPLETE | Consolidates current implementation blockers before any future firmware-source branch. | Stop if gate status cannot be source-backed or would approve implementation work. |
 
 ## Roadmap Phases
 
@@ -189,6 +197,12 @@
 | `docs/calibration/fixtures/glyph_runtime_loaded_config_design_v0_2026-05-28.json` | Machine-readable design/checker target for runtime-loaded config ownership, non-goals, and storage/transport boundaries; not runtime config. |
 | `docs/calibration/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.md` | Docs/tools-only future validator requirements and rejection contract; not a firmware validator implementation. |
 | `docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json` | Machine-readable validation-contract checker target for accepted data classes, rejection rules, and forbidden payload content. |
+| `docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md` | Docs/tools-only preimplementation gate index for generated constants, runtime-loaded config, device write/transport, hardware-validation, nunchuk-validation, and Senscope export boundaries. |
+| `docs/calibration/fixtures/glyph_preimplementation_go_nogo_index_2026-05-28.json` | Machine-readable go/no-go gate fixture for required statuses and preconditions. |
+| `docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md` | Docs/tools-only blocker/readiness packet for a future generated constants firmware refactor; not approval to edit firmware source. |
+| `docs/calibration/fixtures/glyph_generated_constants_refactor_readiness_packet_2026-05-28.json` | Machine-readable generated constants readiness packet fixture for invariants, forbidden changes, approvals, and blockers. |
+| `docs/calibration/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.md` | Docs/tools-only blocker/readiness packet for a future runtime-loaded config implementation; not implementation, storage, transport, or hardware validation. |
+| `docs/calibration/fixtures/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.json` | Machine-readable runtime-loaded config implementation readiness packet fixture for unresolved design, validator, storage/transport, fallback, performance, and hardware gates. |
 | `docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md` | Current native Tilt/Tilt2 runtime behavior scope and formulas. |
 | `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` | Current Tilt/Tilt2 hardware smoke evidence and caveats. |
 | `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md` | Baseline readiness classification for current Tilt package. |
@@ -238,6 +252,7 @@
 | `tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py` | Parses generated C++-shaped table declarations and validates exact source-table parity plus artifact caveats. |
 | `tools/check_glyph_identity_runtime_config_contracts.py` | Validates generated-config contract and Senscope export draft fixtures, required caveats, and generated-config prototype alignment. |
 | `tools/check_glyph_runtime_loaded_config_design.py` | Validates runtime-loaded config design and validation-contract fixtures, required caveats, generated-config contract compatibility, and Senscope export draft non-goals. |
+| `tools/check_glyph_preimplementation_go_nogo_index.py` | Validates preimplementation go/no-go index and readiness packet fixtures, required blocker statuses, cross-checks runtime-loaded design-only status, and required caveat phrases. |
 | `tools/check_glyph_identity_runtime_behavior_evaluator.py` | Bounded Python mirror evaluator for the current representative identity runtime behavior cases; not hardware validation. |
 | `tools/run_glyph_next_runtime_change_readiness_checks.py` | Aggregated readiness checks for next runtime change planning. |
 | `tools/check_glyph_merged_state_consistency.py` | Merged-state required-file and stale-phrase consistency checks. |

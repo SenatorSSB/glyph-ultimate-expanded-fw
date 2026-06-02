@@ -138,6 +138,8 @@ The docs/tools-only generated-config contract and Senscope export draft are reco
 
 The docs/tools-only runtime-loaded config design and validation contract are recorded in `docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md` and `docs/calibration/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.md`; they remain design-only and do not implement runtime-loaded config, serial/device write behavior, firmware runtime changes, or hardware validation.
 
+Preimplementation gates for generated constants, runtime-loaded config, device write/transport, and hardware-validation boundaries are explicitly tracked in `docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md`.
+
 Each stage must preserve source-backed controller/backend behavior and must not promote game-semantic claims into firmware without separate source authority.
 
 ## Behavior Preservation

@@ -1,0 +1,54 @@
+{
+  "schema_name": "glyph_generated_constants_refactor_readiness_packet",
+  "packet_version": 1,
+  "status": "blocked_until_explicit_approval",
+  "hardware_status": "not_new_hardware_result",
+  "candidate_scope": [
+    "move_current_table_constants_into_generated_or_generated_like_constants",
+    "preserve_exact_table_values",
+    "preserve_exact_evaluator_behavior",
+    "preserve_current_priority_order",
+    "preserve_current_role_bindings",
+    "no_behavior_changes",
+    "no_profile_changes",
+    "no_runtime_loaded_config"
+  ],
+  "required_invariants": [
+    "all_25_tables_match_source",
+    "behavior_evaluator_passes_118_cases",
+    "generated_config_checker_passes",
+    "generated_cpp_diff_checker_passes",
+    "no_forbidden_artifacts",
+    "no_source_shape_guardrails_fail"
+  ],
+  "required_checker_coverage": [
+    "identity_runtime_table_source_sync_checker",
+    "generated_config_prototype_checker",
+    "generated_config_evaluator_input_checker",
+    "generated_cpp_diff_checker",
+    "generated_config_contract_checker",
+    "runtime_loaded_config_design_checker",
+    "preimplementation_go_nogo_checker",
+    "identity_runtime_behavior_evaluator"
+  ],
+  "forbidden_changes": [
+    "behavior_change",
+    "table_value_change",
+    "profile_artifact_change",
+    "runtime_loaded_config",
+    "serial_device_write_behavior",
+    "hardware_validation_claim",
+    "macro_turbo_timing_or_scripting_behavior"
+  ],
+  "required_approval": [
+    "explicit_user_approval"
+  ],
+  "open_blockers": [
+    "explicit_user_approval",
+    "source_backed_implementation_plan",
+    "current_checkers_passing",
+    "hardware_test_plan",
+    "rollback_plan",
+    "no_unsupported_behavior_claims"
+  ]
+}
