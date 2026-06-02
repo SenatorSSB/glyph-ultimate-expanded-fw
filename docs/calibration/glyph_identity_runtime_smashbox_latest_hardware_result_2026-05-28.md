@@ -97,3 +97,34 @@
 - LF4 sub-mode RF2/RF3 interchange plus LF4+LT2 Y1 suppression require fresh hardware validation before any PASS claim for this revision.
 - The previous LF7/LF8 layer amendment also predates RF13 LS->DPad source migration, RF7 hard Up+B behavior, and LF4-submode RF2 suppression when any C-stick button is held.
 - RF13 LS->DPad migration, RF7 hard Up+B behavior, and LF4-submode RF2 C-stick suppression require fresh hardware validation before any PASS claim for this revision.
+
+## LF7/LF8/LF4 Layer Behavior Hardware Result
+
+- Date: `2026-05-28`
+- User confirmation quote: "all works."
+- Result: `PASS_USER_REPORTED`
+- This amendment supersedes the pending-validation note above for this behavior set.
+
+| Row | Result |
+| --- | --- |
+| LF8 layer-left | PASS_USER_REPORTED |
+| LF7 layer-right | PASS_USER_REPORTED |
+| Pure layer RF2 forced-Up | PASS_USER_REPORTED |
+| Pure layer RF3 B + normal-x | PASS_USER_REPORTED |
+| Layer RF4 flipper | PASS_USER_REPORTED |
+| RF4 flipper precedence over RF3 normal-x | PASS_USER_REPORTED |
+| LF4 sub-mode | PASS_USER_REPORTED |
+| LF4+LT2 Y1 suppression | PASS_USER_REPORTED |
+| LF4 sub-mode RF2=X | PASS_USER_REPORTED |
+| LF4 sub-mode RF3=forced-Up | PASS_USER_REPORTED |
+| RF2 suppressed by C-stick in all LF4 sub-mode cases | PASS_USER_REPORTED |
+| RF13 LS->DPad | PASS_USER_REPORTED |
+| RF7 hard Up+B | PASS_USER_REPORTED |
+| RF13+RF7 interaction | PASS_USER_REPORTED |
+| RF9 null priority preserved | PASS_USER_REPORTED |
+| LT5/RF11 Z-airdodge preserved | PASS_USER_REPORTED |
+| existing latest table/modifier behavior preserved | PASS_USER_REPORTED |
+| explicit self-activated identity profile compatibility | PASS_USER_REPORTED |
+| nunchuk | NOT_TESTED_UNAVAILABLE |
+
+- Final disposition remains: `PASS_IDENTITY_RUNTIME_SMASHBOX_LATEST_PROFILE`

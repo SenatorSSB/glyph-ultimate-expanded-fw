@@ -638,3 +638,10 @@ Manual hardware validation is required for:
 
 - LT1/LT4/LT5 relocation has now been hardware-confirmed.
 - Latest hardware result doc: `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`.
+
+## 2026-05-28 Amendment: LF7/LF8/LF4 Layer Behavior Hardware Confirmation
+
+- LF7/LF8/LF4 layer behavior branch is hardware-confirmed by user report.
+- RF13 LS->DPad and RF7 hard Up+B are hardware-confirmed.
+- Latest hardware result doc:
+  - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`

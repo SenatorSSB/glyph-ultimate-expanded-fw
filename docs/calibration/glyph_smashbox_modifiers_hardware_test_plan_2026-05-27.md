@@ -210,3 +210,9 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 
 - LT1/LT4/LT5 relocation rows are satisfied by latest hardware result doc:
   - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
+
+## 2026-05-28 LF7/LF8/LF4 Hardware Result Note
+
+- LF7/LF8/LF4 layer behavior rows are satisfied by:
+  - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
+- Nunchuk remains unavailable/not tested.
