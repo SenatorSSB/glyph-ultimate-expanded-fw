@@ -140,6 +140,8 @@ The docs/tools-only runtime-loaded config design and validation contract are rec
 
 Preimplementation gates for generated constants, runtime-loaded config, device write/transport, and hardware-validation boundaries are explicitly tracked in `docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md`.
 
+Docs/tools-only implementation planning packets for generated constants, runtime-loaded config, and hardware validation/rollback are recorded in `docs/calibration/glyph_generated_constants_refactor_implementation_plan_v0_2026-05-28.md`, `docs/calibration/glyph_runtime_loaded_config_implementation_plan_v0_2026-05-28.md`, and `docs/calibration/glyph_identity_runtime_hardware_validation_and_rollback_plan_2026-05-28.md`; they are design-only gates and do not approve firmware source edits.
+
 Each stage must preserve source-backed controller/backend behavior and must not promote game-semantic claims into firmware without separate source authority.
 
 ## Behavior Preservation

@@ -1,0 +1,86 @@
+{
+  "schema_name": "glyph_generated_constants_refactor_implementation_plan",
+  "plan_version": 1,
+  "status": "plan_only_blocked_until_explicit_approval",
+  "hardware_status": "not_new_hardware_result",
+  "required_preconditions": [
+    "explicit_user_approval",
+    "source_backed_implementation_plan_reviewed",
+    "current_checkers_passing_before_edits",
+    "no_forbidden_artifacts",
+    "hardware_test_plan_before_merge",
+    "rollback_plan_before_source_edits",
+    "no_unsupported_behavior_claims"
+  ],
+  "candidate_implementation_boundary": [
+    "move_or_replace_current_table_constants_with_generated_or_generated_like_constants",
+    "preserve_exact_25_source_parsed_table_values",
+    "preserve_current_evaluator_phase_order",
+    "preserve_current_role_bindings",
+    "preserve_current_hard_override_constants",
+    "preserve_behavior_case_evaluator_results",
+    "preserve_generated_config_and_generated_cpp_artifact_checks",
+    "no_runtime_loaded_config",
+    "no_device_write_path",
+    "no_profile_schema_changes"
+  ],
+  "may_touch_if_approved": [
+    "src/modes/Ultimate.cpp",
+    "approved_generated_constants_header_or_source_file",
+    "relevant_tools_docs_checkers"
+  ],
+  "must_not_touch_without_separate_approval": [
+    "profile_artifacts",
+    "protobuf_config_schema_files",
+    "serial_writer_behavior",
+    "hal_device_transport_paths",
+    "build_artifacts",
+    ".pio",
+    ".uf2_bin_elf_map_artifacts"
+  ],
+  "required_invariants": [
+    "all_25_tables_match_source",
+    "behavior_evaluator_passes_current_cases",
+    "generated_config_checker_passes",
+    "generated_cpp_diff_checker_passes",
+    "runtime_source_checker_passes",
+    "no_forbidden_artifacts_checker_passes",
+    "build_passes_only_if_later_source_changes_approved",
+    "hardware_test_plan_exists_before_later_firmware_merge"
+  ],
+  "required_checker_sequence": [
+    "check_glyph_identity_runtime_table_source_sync",
+    "check_glyph_identity_runtime_generated_config_prototype",
+    "check_glyph_identity_runtime_generated_config_evaluator_input",
+    "check_glyph_identity_runtime_generated_cpp_diff_artifact",
+    "check_glyph_identity_runtime_config_contracts",
+    "check_glyph_runtime_loaded_config_design",
+    "check_glyph_preimplementation_go_nogo_index",
+    "check_glyph_implementation_planning_packets",
+    "check_glyph_identity_runtime_behavior_evaluator"
+  ],
+  "required_hardware_validation": [
+    "hardware_test_plan_before_merge_of_later_firmware_source_branch",
+    "no_hardware_claim_without_result_artifact",
+    "planning_packet_is_not_hardware_result"
+  ],
+  "rollback_plan": [
+    "rollback_branch_or_commit",
+    "restore_current_hardcoded_constants_through_git_history",
+    "restore_previous_firmware_artifact_if_applicable",
+    "restore_previous_profile_artifact_if_applicable",
+    "document_failure_and_scope"
+  ],
+  "forbidden_changes": [
+    "behavior_change",
+    "table_value_change",
+    "profile_artifact_change",
+    "runtime_loaded_config",
+    "serial_device_write_behavior",
+    "hardware_validation_claim",
+    "macro_turbo_timing_or_scripting_behavior"
+  ],
+  "required_approval": [
+    "explicit_user_approval"
+  ]
+}
