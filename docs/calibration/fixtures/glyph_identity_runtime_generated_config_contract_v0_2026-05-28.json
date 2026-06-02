@@ -1,0 +1,121 @@
+{
+  "schema_name": "glyph_identity_runtime_generated_config_contract",
+  "contract_version": 1,
+  "target_schema_name": "glyph_identity_runtime_generated_config_prototype",
+  "target_contract_version": 1,
+  "mode_scope": "MODE_ULTIMATE",
+  "status": "docs_tools_contract_not_runtime_loaded",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "target_source_status": "source_backed_prototype_not_runtime_loaded",
+  "target_direction_convention": "numpad",
+  "required_top_level_fields": [
+    "schema_name",
+    "contract_version",
+    "mode_scope",
+    "source_status",
+    "hardware_status",
+    "nunchuk_status",
+    "direction_convention",
+    "source_authority",
+    "tables",
+    "table_source_symbols",
+    "role_bindings",
+    "priority_model",
+    "hard_overrides",
+    "suppression_rules",
+    "coverage_metadata",
+    "non_goals"
+  ],
+  "required_tables": [
+    "Default",
+    "ModeDefault",
+    "X1",
+    "X2",
+    "MX1",
+    "MX2",
+    "Y1",
+    "MY1",
+    "LayerNormalX",
+    "MLayerNormalX",
+    "LayerFlipper",
+    "MLayerFlipper",
+    "Y1Tilt1",
+    "MY1Tilt1",
+    "Y1LayerFlipper",
+    "MY1LayerFlipper",
+    "Y1LayerNormalX",
+    "MY1LayerNormalX",
+    "Tilt1",
+    "Tilt2",
+    "Tilt3",
+    "MTilt1",
+    "MTilt2",
+    "MTilt3",
+    "Lt1LowMagnitude"
+  ],
+  "required_priority_keys": [
+    "digital_effective_direction",
+    "analog",
+    "physical_inputs",
+    "layer_left_right",
+    "lf4_submode_active",
+    "forced_up_resolution",
+    "button_carriers",
+    "ls_to_dpad_routing",
+    "table_output",
+    "direction_plus_a",
+    "lt5_or_rf11_low_magnitude_za",
+    "rf7_hard_up_b",
+    "rf9_null",
+    "nunchuk_override"
+  ],
+  "required_role_binding_sections": [
+    "buttons",
+    "directional",
+    "c_stick",
+    "modifiers",
+    "special_functions"
+  ],
+  "required_hard_overrides": {
+    "rf7_hard_up_b": {
+      "left": [
+        77,
+        172
+      ],
+      "center": [
+        128,
+        172
+      ],
+      "right": [
+        179,
+        172
+      ]
+    },
+    "rf9_null": [
+      128,
+      128
+    ],
+    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude"
+  },
+  "forbidden_interpretations": [
+    "firmware_source",
+    "runtime_loaded_config",
+    "serial_device_write_path",
+    "hardware_validation",
+    "senscope_game_semantics",
+    "macro_or_turbo_logic"
+  ],
+  "source_authority": {
+    "runtime": "src/modes/Ultimate.cpp",
+    "table_extractor": "tools/extract_glyph_identity_runtime_tables.py",
+    "role_map_doc": "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
+    "role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
+    "behavior_cases_doc": "docs/calibration/glyph_identity_runtime_behavior_cases_2026-05-28.md",
+    "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
+    "generated_config_doc": "docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md",
+    "generated_config_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "generated_config_evaluator_input_doc": "docs/calibration/glyph_identity_runtime_generated_config_evaluator_input_2026-05-28.md",
+    "generated_cpp_diff_artifact_doc": "docs/calibration/glyph_identity_runtime_generated_cpp_diff_artifact_2026-05-28.md"
+  }
+}

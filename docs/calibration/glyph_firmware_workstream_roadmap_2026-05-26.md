@@ -24,6 +24,8 @@
 | Identity runtime generated-config prototype | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md`, `tools/generate_glyph_identity_runtime_config_prototype.py`, `tools/check_glyph_identity_runtime_generated_config_prototype.py` | Docs/tools-only prototype generates declarative intermediate config and C++-shaped review text from source-parsed tables and role metadata; not firmware input. |
 | Identity runtime generated-config evaluator input | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_evaluator_input_2026-05-28.md`, `tools/check_glyph_identity_runtime_generated_config_evaluator_input.py` | Docs/tools-only checker proves the generated-config prototype can supply evaluator table input for all current behavior cases; not runtime-loaded config or hardware validation. |
 | Identity runtime generated C++ diff artifact | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_cpp_diff_artifact_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt`, `tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py` | Docs/tools-only checker parses generated C++-shaped table constants and confirms all 25 declarations exactly match source-parsed `src/modes/Ultimate.cpp` tables; not firmware source. |
+| Identity runtime generated-config contract | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json`, `tools/check_glyph_identity_runtime_config_contracts.py` | Docs/tools-only contract pins the generated-config prototype review shape and caveats; not firmware source, runtime-loaded config, serial/device write behavior, or hardware validation. |
+| Senscope-to-Glyph export contract draft | DESIGN_ONLY | `docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md`, `docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json`, `tools/check_glyph_identity_runtime_config_contracts.py` | Draft package boundary for future Senscope exports targeting the generated-config contract; no Senscope app changes, runtime-loaded config, device writing, or schema changes. |
 | Native Ultimate arbitrary table runtime design | DESIGN_ONLY | `docs/calibration/glyph_native_ultimate_table_runtime_design_2026-05-26.md` | Design path documented; runtime patch not approved/implemented here. |
 | Fixture contract and source-scope guardrails | COMPLETE | `docs/calibration/glyph_native_ultimate_table_fixture_contract_2026-05-26.md`, `docs/calibration/glyph_native_ultimate_table_source_checker_2026-05-26.md` | Template and read-only checkers are present. |
 | Full layout requirements and runtime readiness | PARTIAL | `docs/calibration/glyph_full_layout_requirements_spec_2026-05-26.md`, `docs/calibration/glyph_full_layout_requirements_questions_2026-05-26.md`, `docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md` | Requirements questions and readiness blockers are still open. |
@@ -52,6 +54,8 @@
 | Identity runtime generated-config prototype | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json`, `tools/generate_glyph_identity_runtime_config_prototype.py`, `tools/check_glyph_identity_runtime_generated_config_prototype.py` |
 | Identity runtime generated-config evaluator input | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_evaluator_input_2026-05-28.md`, `tools/check_glyph_identity_runtime_generated_config_evaluator_input.py` |
 | Identity runtime generated C++ diff artifact | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_cpp_diff_artifact_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt`, `tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py` |
+| Identity runtime generated-config contract | COMPLETE | `docs/calibration/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.md`, `docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json`, `tools/check_glyph_identity_runtime_config_contracts.py` |
+| Senscope-to-Glyph export contract draft | COMPLETE | `docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md`, `docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json`, `tools/check_glyph_identity_runtime_config_contracts.py` |
 
 ## Current Source-Confirmed Facts
 
@@ -67,6 +71,8 @@
 - A docs/tools-only generated-config prototype now emits deterministic declarative intermediate config and C++-shaped review text from source-parsed identity runtime tables and role-map metadata.
 - A docs/tools-only generated-config evaluator-input checker now proves that generated-config tables can drive the current evaluator for all representative behavior cases without changing firmware runtime source.
 - A docs/tools-only generated C++ diff artifact checker now parses generated C++-shaped table declarations and confirms all 25 generated declarations exactly match source-parsed `src/modes/Ultimate.cpp` tables.
+- A docs/tools-only generated-config contract now pins the current prototype shape, hard overrides, table list, and boundary caveats.
+- A docs/tools-only Senscope export draft now records a possible future package boundary targeting the generated-config contract without implementing app schema, runtime-loaded config, or device writing.
 - Current MVP profile evidence records `RF3 -> LT1 -> inputs.lt1 -> Tilt1/TILT`.
 - Current MVP profile evidence records `RF4 -> LT2 -> inputs.lt2 -> Tilt2`.
 - RF5 printed/base location is now transcribed in layout docs, while the earlier RF5 negative smoke row remains `NOT_TESTED_AMBIGUOUS`.
@@ -171,6 +177,10 @@
 | `docs/calibration/glyph_identity_runtime_generated_config_evaluator_input_2026-05-28.md` | Docs/tools-only generated-config evaluator-input checker scope, caveats, and migration path; not firmware input or hardware validation. |
 | `docs/calibration/glyph_identity_runtime_generated_cpp_diff_artifact_2026-05-28.md` | Docs/tools-only generated C++-shaped constants diff artifact scope, caveats, and migration path; not firmware source or hardware validation. |
 | `docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt` | Plain-text generated C++-shaped constants review artifact; not included by firmware and not placed in a build path. |
+| `docs/calibration/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.md` | Docs/tools-only generated-config contract scope, required fields, table contract, hard overrides, caveats, and migration path. |
+| `docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json` | Machine-readable generated-config contract target for aggregate checker validation; not runtime config. |
+| `docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md` | Docs/tools-only draft package boundary for future Senscope exports targeting Glyph generated config; not implementation. |
+| `docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json` | Machine-readable Senscope export draft contract target for aggregate checker validation. |
 | `docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md` | Current native Tilt/Tilt2 runtime behavior scope and formulas. |
 | `docs/calibration/glyph_ultimate_tilt_hardware_test_result.md` | Current Tilt/Tilt2 hardware smoke evidence and caveats. |
 | `docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md` | Baseline readiness classification for current Tilt package. |
@@ -218,6 +228,7 @@
 | `tools/check_glyph_identity_runtime_generated_config_prototype.py` | Validates the generated-config prototype shape, caveats, hard overrides, and exact source-table match. |
 | `tools/check_glyph_identity_runtime_generated_config_evaluator_input.py` | Validates that generated-config tables can be consumed as evaluator input for all current behavior cases with exact parity. |
 | `tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py` | Parses generated C++-shaped table declarations and validates exact source-table parity plus artifact caveats. |
+| `tools/check_glyph_identity_runtime_config_contracts.py` | Validates generated-config contract and Senscope export draft fixtures, required caveats, and generated-config prototype alignment. |
 | `tools/check_glyph_identity_runtime_behavior_evaluator.py` | Bounded Python mirror evaluator for the current representative identity runtime behavior cases; not hardware validation. |
 | `tools/run_glyph_next_runtime_change_readiness_checks.py` | Aggregated readiness checks for next runtime change planning. |
 | `tools/check_glyph_merged_state_consistency.py` | Merged-state required-file and stale-phrase consistency checks. |

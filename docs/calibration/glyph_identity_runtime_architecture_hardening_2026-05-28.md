@@ -134,6 +134,8 @@ Stage 3: runtime-loaded config.
 
 Stage 4: Senscope export.
 
+The docs/tools-only generated-config contract and Senscope export draft are recorded in `docs/calibration/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.md` and `docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md`; they do not implement runtime-loaded config or device writing.
+
 Each stage must preserve source-backed controller/backend behavior and must not promote game-semantic claims into firmware without separate source authority.
 
 ## Behavior Preservation
