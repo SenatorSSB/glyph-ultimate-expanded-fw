@@ -126,7 +126,7 @@
       "analog": [
         "table_output",
         "direction_plus_a",
-        "lt1_or_rf11_za",
+        "lt5_or_rf11_low_magnitude_za",
         "rf7_hard_up_b",
         "rf9_null",
         "nunchuk_override"

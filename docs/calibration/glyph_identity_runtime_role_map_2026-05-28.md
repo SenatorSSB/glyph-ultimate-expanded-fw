@@ -103,7 +103,10 @@ Layer variants:
 - `RF9 = null modifier`
 - `RF13 = LS->DPad`
 - `RF7 = hard Up+B` (analog override role):
-  - `RF7 + LF3/LF7?` contributes fixed x from effective layer/right-left axis (`77/128/179`)
+  - `RF7` applies the resolved effective horizontal direction after base left/right and LF8/LF7 layer contributions:
+    - `resolved left => x = 77`
+    - `resolved neutral => x = 128`
+    - `resolved right => x = 179`
   - `y = 172`
   - does not select mode/modifier tables
 - `LF4 = B` always, and activates LF4 sub-mode under rules below.
@@ -203,7 +206,7 @@ Down source:
 ## Hard analog override
 
 - `LT6`, `RF12`, `RF15` force final analog direction to index `2` or `8` (depending on forced-up state) from base/default table (`hard Down+A` / `hard Up+A`).
-- `LT1`/`RF11` low-magnitude override uses `kLt1LowMagnitudeTable`:
+- `LT5`/`RF11` low-magnitude override uses `kLt1LowMagnitudeTable`:
   - `1=(89,89), 2=(128,79), 3=(167,89), 4=(79,128), 5=(128,128), 6=(177,128), 7=(89,167), 8=(128,177), 9=(167,167)`
 - `RF7` hard Up+B override:
   - horizontal = `77` when effective left
