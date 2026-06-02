@@ -1,0 +1,111 @@
+{
+  "schema_name": "glyph_generated_constants_refactor_execution_packet",
+  "packet_version": 1,
+  "status": "blocked_until_explicit_user_approval",
+  "hardware_status": "not_new_hardware_result",
+  "implementation_class": "generated_constants_firmware_refactor",
+  "required_approval": [
+    "explicit_user_approval_for_firmware_source_touch",
+    "approval_limited_to_generated_constants_refactor"
+  ],
+  "candidate_objective": [
+    "replace_or_isolate_current_25_identity_runtime_constexpr_stickpoint_table_constants",
+    "preserve_exact_current_table_values",
+    "preserve_current_evaluator_phase_order_and_behavior",
+    "preserve_current_role_bindings_and_hard_overrides",
+    "preserve_current_generated_config_and_generated_cpp_review_artifacts",
+    "do_not_introduce_runtime_loaded_config"
+  ],
+  "allowed_file_touch_set_if_approved": [
+    "src/modes/Ultimate.cpp",
+    "approved_generated_constants_file_under_include_or_src_if_future_prompt_permits",
+    "relevant_tools_checkers_docs",
+    "profile_artifacts_only_if_future_prompt_explicitly_approves"
+  ],
+  "forbidden_file_touch_set": [
+    ".pio",
+    ".uf2",
+    ".bin",
+    ".elf",
+    ".map",
+    "local_backups",
+    "__pycache__",
+    ".pyc",
+    "profile_artifacts_without_explicit_approval",
+    "serial_writer_behavior",
+    "profile_config_protobuf_schema_files",
+    "hal_device_transport_paths",
+    "generated_files_under_build_output_directories"
+  ],
+  "required_invariants": [
+    "all_25_source_parsed_tables_unchanged",
+    "generated_cpp_review_artifact_matches_generated_output",
+    "generated_config_prototype_matches_source_tables",
+    "behavior_evaluator_passes_current_cases",
+    "identity_runtime_source_checker_passes",
+    "no_forbidden_artifacts_checker_passes",
+    "no_profile_artifacts_changed",
+    "no_serial_device_write_behavior_changed",
+    "no_runtime_loaded_config_added",
+    "no_hardware_validation_claim_without_result_doc"
+  ],
+  "required_pre_edit_checks": [
+    "confirm_explicit_user_approval_for_generated_constants_firmware_source_touch",
+    "confirm_branch_starts_from_origin_configurator",
+    "confirm_target_implementation_branch_absent_locally_and_remotely",
+    "check_glyph_identity_runtime_table_source_sync",
+    "check_glyph_identity_runtime_generated_config_prototype",
+    "check_glyph_identity_runtime_generated_cpp_diff_artifact",
+    "check_glyph_identity_runtime_behavior_cases",
+    "check_glyph_identity_runtime_behavior_evaluator",
+    "check_glyph_preimplementation_go_nogo_index",
+    "check_glyph_implementation_planning_packets",
+    "check_glyph_no_forbidden_artifacts"
+  ],
+  "required_post_edit_checks": [
+    "generate_glyph_identity_runtime_config_prototype",
+    "generate_glyph_identity_runtime_config_prototype_json",
+    "generate_glyph_identity_runtime_config_prototype_cpp",
+    "check_glyph_identity_runtime_generated_config_prototype",
+    "check_glyph_identity_runtime_generated_config_evaluator_input",
+    "check_glyph_identity_runtime_generated_cpp_diff_artifact",
+    "check_glyph_identity_runtime_table_source_sync",
+    "check_glyph_identity_runtime_behavior_cases",
+    "check_glyph_identity_runtime_behavior_evaluator",
+    "check_glyph_smashbox_modifiers_runtime_source",
+    "check_glyph_smashbox_identity_runtime_bindings",
+    "check_glyph_no_forbidden_artifacts"
+  ],
+  "required_build_checks_if_source_changed": [
+    "build_glyph_mk6_quiet_after_later_approved_firmware_source_change",
+    "do_not_commit_build_artifacts",
+    "do_not_claim_build_as_hardware_validation"
+  ],
+  "required_hardware_gate": [
+    "hardware_test_matrix_must_be_executed_before_merge",
+    "hardware_result_doc_required_before_merge",
+    "rollback_required_on_failure"
+  ],
+  "required_rollback_plan": [
+    "rollback_branch_or_commit",
+    "restore_current_hardcoded_constants_through_git_history",
+    "restore_previous_firmware_artifact_if_applicable",
+    "restore_previous_profile_artifact_if_applicable",
+    "document_checker_build_or_hardware_failure_and_scope"
+  ],
+  "stop_conditions": [
+    "explicit_user_approval_missing",
+    "approval_does_not_authorize_generated_constants_firmware_source_touch",
+    "source_authority_missing_or_ambiguous",
+    "implementation_depends_on_inferred_behavior",
+    "table_value_would_change",
+    "runtime_behavior_would_change",
+    "profile_artifact_change_required_without_explicit_approval",
+    "profile_config_protobuf_schema_change_required",
+    "runtime_loaded_config_required",
+    "serial_device_write_behavior_required",
+    "hal_device_transport_path_change_required",
+    "hardware_validation_claim_without_result_doc",
+    "execution_packet_text_interpreted_as_implementation_approval"
+  ]
+}

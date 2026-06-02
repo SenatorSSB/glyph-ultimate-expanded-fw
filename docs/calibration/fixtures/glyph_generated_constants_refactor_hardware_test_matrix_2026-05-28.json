@@ -1,0 +1,153 @@
+{
+  "schema_name": "glyph_generated_constants_refactor_hardware_test_matrix",
+  "matrix_version": 1,
+  "status": "template_not_executed",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "required_prerequisites": [
+    "explicit_user_approval_for_future_generated_constants_refactor",
+    "future_implementation_branch_exists",
+    "future_firmware_artifact_identity_recorded",
+    "pre_edit_and_post_edit_checkers_pass",
+    "future_source_branch_build_verification_passes",
+    "rollback_branch_or_commit_recorded",
+    "operator_has_required_hardware_available"
+  ],
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "description": "Device boots with future firmware artifact.",
+      "expected_result": "Device reaches normal operating state.",
+      "evidence_required": "Operator note with branch, commit, and artifact identity."
+    },
+    {
+      "row_id": "PROFILE-001",
+      "category": "identity_profile",
+      "description": "Current identity profile remains active/compatible.",
+      "expected_result": "Existing identity runtime profile path remains usable.",
+      "evidence_required": "Operator note showing current identity profile compatibility."
+    },
+    {
+      "row_id": "DEFAULT-001",
+      "category": "default_table",
+      "description": "Default table neutral and cardinal sanity checks.",
+      "expected_result": "Neutral and cardinal outputs match current expected source-backed behavior.",
+      "evidence_required": "Recorded neutral/cardinal observations."
+    },
+    {
+      "row_id": "MODE-001",
+      "category": "mode_default",
+      "description": "Mode default center sanity check.",
+      "expected_result": "Mode/default center remains centered as expected.",
+      "evidence_required": "Recorded mode/default observation."
+    },
+    {
+      "row_id": "XMOD-001",
+      "category": "x_modifiers",
+      "description": "X1/X2 representative modifier checks.",
+      "expected_result": "Representative X1/X2 outputs match current expected behavior.",
+      "evidence_required": "Recorded X1/X2 observations."
+    },
+    {
+      "row_id": "YMOD-001",
+      "category": "y_modifiers",
+      "description": "Y1/MY1 representative modifier checks.",
+      "expected_result": "Representative Y1/MY1 outputs match current expected behavior.",
+      "evidence_required": "Recorded Y1/MY1 observations."
+    },
+    {
+      "row_id": "TILT-001",
+      "category": "tilt_modifiers",
+      "description": "Tilt1/Tilt2/Tilt3 representative modifier checks.",
+      "expected_result": "Representative Tilt1/Tilt2/Tilt3 outputs match current expected behavior.",
+      "evidence_required": "Recorded Tilt observations."
+    },
+    {
+      "row_id": "ZAIR-001",
+      "category": "z_airdodge_low_magnitude",
+      "description": "LT5/RF11 Z-airdodge low-magnitude representative checks.",
+      "expected_result": "Low-magnitude override remains source-backed and unchanged.",
+      "evidence_required": "Recorded LT5/RF11 observations."
+    },
+    {
+      "row_id": "UPB-001",
+      "category": "hard_up_b",
+      "description": "RF7 hard Up+B left/neutral/right checks.",
+      "expected_result": "RF7 hard Up+B outputs match current expected behavior.",
+      "evidence_required": "Recorded left/neutral/right observations."
+    },
+    {
+      "row_id": "NULL-001",
+      "category": "null_override",
+      "description": "RF9 null override check.",
+      "expected_result": "RF9 final null override centers left stick as expected.",
+      "evidence_required": "Recorded RF9 observation."
+    },
+    {
+      "row_id": "DPA-001",
+      "category": "ls_to_dpad",
+      "description": "RF13 LS->DPad representative checks.",
+      "expected_result": "Effective left-stick directions route to D-pad as expected.",
+      "evidence_required": "Recorded RF13 observations."
+    },
+    {
+      "row_id": "LAYER-001",
+      "category": "pure_layer",
+      "description": "LF8/LF7 pure layer representative checks.",
+      "expected_result": "Pure layer direction/table behavior matches current expected behavior.",
+      "evidence_required": "Recorded LF8/LF7 observations."
+    },
+    {
+      "row_id": "LF4-001",
+      "category": "lf4_submode",
+      "description": "LF4 sub-mode representative checks.",
+      "expected_result": "LF4 sub-mode behavior matches current expected behavior.",
+      "evidence_required": "Recorded LF4 observations."
+    },
+    {
+      "row_id": "CSUP-001",
+      "category": "cstick_suppression",
+      "description": "C-stick suppression representative checks.",
+      "expected_result": "C-stick suppression behavior in LF4 sub-mode matches current expected behavior.",
+      "evidence_required": "Recorded suppression observations."
+    },
+    {
+      "row_id": "DA-001",
+      "category": "direction_plus_a",
+      "description": "Direction+A representative checks.",
+      "expected_result": "Direction+A hard analog overrides match current expected behavior.",
+      "evidence_required": "Recorded Direction+A observations."
+    },
+    {
+      "row_id": "RS-001",
+      "category": "right_stick",
+      "description": "C-stick/right-stick representative checks.",
+      "expected_result": "Right-stick outputs remain representative and unchanged.",
+      "evidence_required": "Recorded right-stick observations."
+    },
+    {
+      "row_id": "SYS-001",
+      "category": "system_buttons",
+      "description": "Menu/system button smoke checks.",
+      "expected_result": "Menu/system button outputs remain usable.",
+      "evidence_required": "Recorded menu/system observations."
+    },
+    {
+      "row_id": "PROFREG-001",
+      "category": "profile_regression",
+      "description": "No profile artifact regression check.",
+      "expected_result": "No profile artifact regression is observed or introduced.",
+      "evidence_required": "Git diff/status plus operator note."
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "description": "Nunchuk remains not claimed unless separately tested.",
+      "expected_result": "No nunchuk hardware validation claim is made without separate test evidence.",
+      "evidence_required": "Explicit nunchuk caveat in result."
+    }
+  ],
+  "result_recording_required": true,
+  "rollback_required_on_failure": true
+}
