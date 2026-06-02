@@ -1418,6 +1418,25 @@
       "notes": ["RF3 forced Up combines with layer-left; RF4 remains flipper."]
     },
     {
+      "case_id": "cstick_suppression_lf4_lt2_rf2_rt2_no_x",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LT2", "RF2", "RT2"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": false, "up": false, "down": true},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF2 is fully suppressed by RT2 in LF4 sub-mode."]
+    },
+    {
       "case_id": "cstick_suppression_lf4_lt2_rf2_rt3_no_x",
       "category": "c_stick_suppression",
       "input_buttons": ["LF4", "LT2", "RF2", "RT3"],
@@ -1434,7 +1453,45 @@
         "right_stick": null
       },
       "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
-      "notes": ["Any C-stick input suppresses RF2 completely in LF4 sub-mode."]
+      "notes": ["RF2 is fully suppressed by RT3 in LF4 sub-mode."]
+    },
+    {
+      "case_id": "cstick_suppression_lf4_lt2_rf2_rt4_no_x",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LT2", "RF2", "RT4"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": true, "up": false, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF2 is fully suppressed by RT4 in LF4 sub-mode."]
+    },
+    {
+      "case_id": "cstick_suppression_lf4_lt2_rf2_rt5_no_x",
+      "category": "c_stick_suppression",
+      "input_buttons": ["LF4", "LT2", "RF2", "RT5"],
+      "expected": {
+        "digital_buttons": ["B"],
+        "suppressed_buttons": ["X"],
+        "effective_direction": {"left": false, "right": false, "up": false, "down": false},
+        "analog_source": "default_table",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [128, 128],
+        "right_stick_digital": {"left": false, "right": false, "up": true, "down": false},
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": ["src/modes/Ultimate.cpp", "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md"],
+      "notes": ["RF2 is fully suppressed by RT5 in LF4 sub-mode."]
     },
     {
       "case_id": "cstick_suppression_lf4_lf8_rf2_rt5_no_x_no_rf2_forced_up",

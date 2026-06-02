@@ -208,10 +208,15 @@ C-stick suppression cases document the LF4 sub-mode RF2 suppression rule.
 
 Fixture case IDs:
 
+- `cstick_suppression_lf4_lt2_rf2_rt2_no_x`
 - `cstick_suppression_lf4_lt2_rf2_rt3_no_x`
+- `cstick_suppression_lf4_lt2_rf2_rt4_no_x`
+- `cstick_suppression_lf4_lt2_rf2_rt5_no_x`
 - `cstick_suppression_lf4_lf8_rf2_rt5_no_x_no_rf2_forced_up`
 
 Any `RT2`/`RT3`/`RT4`/`RT5` C-stick input suppresses RF2 completely in LF4 sub-mode: no X, no RF2 forced-Up contribution, and no RF2-owned D-pad Up contribution under RF13.
+
+The `LF4+LF8+RF2+RT5` case is retained separately to cover the layer/sub-mode variant where layer-left remains active while RF2-owned X and forced-Up behavior are suppressed.
 
 ## Direction-plus-A override cases
 

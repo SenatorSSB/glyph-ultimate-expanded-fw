@@ -131,7 +131,10 @@ REQUIRED_CASE_IDS = {
     "lf4_submode_lf4_lt2_y1_suppressed_default_neutral",
     "lf4_submode_lf4_lt2_rf2_x_no_forced_up",
     "lf4_submode_lf4_lt2_rf3_forced_up",
+    "cstick_suppression_lf4_lt2_rf2_rt2_no_x",
     "cstick_suppression_lf4_lt2_rf2_rt3_no_x",
+    "cstick_suppression_lf4_lt2_rf2_rt4_no_x",
+    "cstick_suppression_lf4_lt2_rf2_rt5_no_x",
     "direction_plus_a_lt6_down_a_default",
     "direction_plus_a_rf12_up_a_default",
     "direction_plus_a_rf15_up_a_default",
@@ -155,6 +158,13 @@ REQUIRED_CASE_IDS = {
     "right_stick_rt2_c_down",
     "nunchuk_c_rt5_dpad_up_right_stick_neutral",
     "nunchuk_connected_left_stick_override",
+}
+
+C_STICK_SUPPRESSION_DIRECT_CASES = {
+    "cstick_suppression_lf4_lt2_rf2_rt2_no_x": ("RT2", "down"),
+    "cstick_suppression_lf4_lt2_rf2_rt3_no_x": ("RT3", "left"),
+    "cstick_suppression_lf4_lt2_rf2_rt4_no_x": ("RT4", "right"),
+    "cstick_suppression_lf4_lt2_rf2_rt5_no_x": ("RT5", "up"),
 }
 
 REQUIRED_DOC_HEADINGS = (
@@ -375,6 +385,59 @@ def validate_case(case: Any, index: int, source: str) -> tuple[str, str]:
     return case_id, category
 
 
+def validate_direct_cstick_suppression_cases(cases_by_id: dict[str, dict[str, Any]]) -> None:
+    c_stick_buttons = {"RT2", "RT3", "RT4", "RT5"}
+    for case_id, (c_stick_button, right_stick_direction) in C_STICK_SUPPRESSION_DIRECT_CASES.items():
+        case = cases_by_id.get(case_id)
+        if case is None:
+            fail(f"missing direct LF4 sub-mode C-stick suppression case: {case_id}")
+        if case.get("category") != "c_stick_suppression":
+            fail(f"{case_id}.category must be c_stick_suppression")
+
+        input_buttons = set(require_string_list(case.get("input_buttons"), f"{case_id}.input_buttons"))
+        expected_input_buttons = {"LF4", "LT2", "RF2", c_stick_button}
+        if input_buttons != expected_input_buttons:
+            fail(
+                f"{case_id}.input_buttons must be exactly "
+                + ", ".join(sorted(expected_input_buttons))
+                + f"; got {', '.join(sorted(input_buttons))}"
+            )
+        if len(input_buttons & c_stick_buttons) != 1:
+            fail(f"{case_id}.input_buttons must include exactly one C-stick input")
+
+        expected = case.get("expected")
+        if not isinstance(expected, dict):
+            fail(f"{case_id}.expected must be object")
+        digital_buttons = require_string_list(expected.get("digital_buttons"), f"{case_id}.expected.digital_buttons")
+        suppressed_buttons = require_string_list(expected.get("suppressed_buttons"), f"{case_id}.expected.suppressed_buttons")
+        if "B" not in digital_buttons:
+            fail(f"{case_id}.expected.digital_buttons must include B")
+        if "X" in digital_buttons:
+            fail(f"{case_id}.expected.digital_buttons must not include X")
+        if "X" not in suppressed_buttons:
+            fail(f"{case_id}.expected.suppressed_buttons must include X")
+
+        effective_direction = expected.get("effective_direction")
+        if not isinstance(effective_direction, dict):
+            fail(f"{case_id}.expected.effective_direction must be object")
+        if effective_direction.get("up") is True:
+            fail(f"{case_id}.expected.effective_direction.up must not be true from RF2")
+        if any(effective_direction.get(direction) is True for direction in ("left", "right", "up", "down")):
+            fail(f"{case_id}.expected.effective_direction must not include RF2-owned directional LS phase")
+
+        right_stick = expected.get("right_stick_digital")
+        if not isinstance(right_stick, dict):
+            fail(f"{case_id}.expected.right_stick_digital must be object")
+        for direction in ("left", "right", "up", "down"):
+            expected_value = direction == right_stick_direction
+            if right_stick.get(direction) is not expected_value:
+                fail(f"{case_id}.expected.right_stick_digital.{direction} must be {expected_value}")
+
+        source_refs = require_string_list(case.get("source_refs"), f"{case_id}.source_refs")
+        if "src/modes/Ultimate.cpp" not in source_refs:
+            fail(f"{case_id}.source_refs must include src/modes/Ultimate.cpp")
+
+
 def validate_doc(doc: str) -> None:
     for heading in REQUIRED_DOC_HEADINGS:
         if heading not in doc:
@@ -421,12 +484,15 @@ def validate_payload(payload: dict[str, Any], duplicate_keys: list[str], source:
 
     seen_case_ids: set[str] = set()
     categories: set[str] = set()
+    cases_by_id: dict[str, dict[str, Any]] = {}
     for index, case in enumerate(cases):
         case_id, category = validate_case(case, index, source)
         if case_id in seen_case_ids:
             fail(f"duplicate case_id: {case_id}")
         seen_case_ids.add(case_id)
         categories.add(category)
+        if isinstance(case, dict):
+            cases_by_id[case_id] = case
 
     missing_categories = sorted(REQUIRED_CATEGORIES - categories)
     if missing_categories:
@@ -435,6 +501,8 @@ def validate_payload(payload: dict[str, Any], duplicate_keys: list[str], source:
     missing_cases = sorted(REQUIRED_CASE_IDS - seen_case_ids)
     if missing_cases:
         fail("missing required behavior case IDs: " + ", ".join(missing_cases))
+
+    validate_direct_cstick_suppression_cases(cases_by_id)
 
     return len(cases), len(categories)
 
