@@ -216,3 +216,9 @@ Manual hardware plan for identity-runtime Smash Box modifiers in native `MODE_UL
 - LF7/LF8/LF4 layer behavior rows are satisfied by:
   - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
 - Nunchuk remains unavailable/not tested.
+
+## 2026-05-28 RF13/RF7/LF4 RF2-Suppression Hardware Result Note
+
+- RF13/RF7/LF4 RF2-suppression rows are satisfied by:
+  - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
+- Nunchuk remains unavailable/not tested.

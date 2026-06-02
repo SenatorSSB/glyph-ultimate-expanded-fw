@@ -645,3 +645,4 @@ Manual hardware validation is required for:
 - RF13 LS->DPad and RF7 hard Up+B are hardware-confirmed.
 - Latest hardware result doc:
   - `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`
+- RF13 LS->DPad / RF7 hard Up+B / LF4 RF2-suppression behavior is hardware-confirmed by user report.

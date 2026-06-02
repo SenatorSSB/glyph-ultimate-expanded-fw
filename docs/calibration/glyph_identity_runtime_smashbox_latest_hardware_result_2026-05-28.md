@@ -85,6 +85,32 @@
 
 - Final disposition remains: `PASS_IDENTITY_RUNTIME_SMASHBOX_LATEST_PROFILE`
 
+## RF13 LS->DPad / RF7 Up+B / LF4 RF2-Suppression Hardware Result
+
+- Date: `2026-05-28`
+- User confirmation quote: "all works."
+- Result: `PASS_USER_REPORTED`
+
+| Row | Result |
+| --- | --- |
+| RF13 LS->DPad | PASS_USER_REPORTED |
+| RF7 hard Up+B | PASS_USER_REPORTED |
+| RF7 no longer LS->DPad | PASS_USER_REPORTED |
+| RF13+RF7 interaction | PASS_USER_REPORTED |
+| LF4 sub-mode RF2 suppression by C-stick | PASS_USER_REPORTED |
+| LF4+LT2 RF2 suppression | PASS_USER_REPORTED |
+| LF4+LF8/LF7 RF2 suppression | PASS_USER_REPORTED |
+| LF4+LT2+LF8/LF7 RF2 suppression | PASS_USER_REPORTED |
+| Pure-layer RF2 forced-Up without LF4 | PASS_USER_REPORTED |
+| LF4 sub-mode RF3 forced-Up | PASS_USER_REPORTED |
+| RF4 flipper preserved | PASS_USER_REPORTED |
+| RF9 null priority preserved | PASS_USER_REPORTED |
+| LT5/RF11 Z-airdodge preserved | PASS_USER_REPORTED |
+| explicit self-activated identity profile compatibility | PASS_USER_REPORTED |
+| nunchuk | NOT_TESTED_UNAVAILABLE |
+
+- Final disposition remains: `PASS_IDENTITY_RUNTIME_SMASHBOX_LATEST_PROFILE`
+
 ## 2026-06-01 Amendment: LF7/LF8 Layer-Direction Behavior
 
 - The PASS result in this file predates LF7/LF8 layer-direction runtime behavior (`LF8=layer-left`, `LF7=layer-right`, layered `RF2/RF3/RF4` behavior).
