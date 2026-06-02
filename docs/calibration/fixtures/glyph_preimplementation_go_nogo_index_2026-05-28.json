@@ -1,0 +1,65 @@
+{
+  "schema_name": "glyph_preimplementation_go_nogo_index",
+  "index_version": 1,
+  "status": "docs_tools_gate_index",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "gates": {
+    "docs_checkers_source_backed_artifacts": "GO",
+    "generated_config_prototype_maintenance": "GO",
+    "behavior_case_evaluator_tooling_maintenance": "GO",
+    "generated_cpp_review_artifact_maintenance": "GO",
+    "generated_constants_firmware_refactor": "BLOCKED_EXPLICIT_APPROVAL",
+    "runtime_loaded_config_interpreter_storage": "BLOCKED_EXPLICIT_APPROVAL",
+    "device_write_serial_transport": "BLOCKED_SOURCE_AUTHORITY_AND_APPROVAL",
+    "official_configurator_integration": "BLOCKED_SOURCE_AUTHORITY",
+    "nunchuk_hardware_validation_claims": "BLOCKED_HARDWARE",
+    "new_runtime_behavior_change": "BLOCKED_EXPLICIT_APPROVAL_AND_HARDWARE_TEST",
+    "senscope_browser_app_export_implementation": "OUT_OF_SCOPE_FOR_REPO",
+    "senscope_export_contract_drafting_checkers": "GO_DOCS_ONLY"
+  },
+  "required_preconditions_before_firmware_source_changes": [
+    "explicit_user_approval",
+    "source_backed_implementation_plan",
+    "current_checkers_passing",
+    "no_forbidden_artifacts",
+    "hardware_test_plan",
+    "rollback_plan",
+    "no_unsupported_behavior_claims"
+  ],
+  "required_preconditions_before_runtime_loaded_config_implementation": [
+    "explicit_user_approval",
+    "storage_representation_design",
+    "validator_design",
+    "fallback_policy",
+    "version_migration_policy",
+    "latency_performance_measurement_plan",
+    "hardware_validation_plan",
+    "source_authority_for_transport_storage_assumptions"
+  ],
+  "required_preconditions_before_device_write_transport": [
+    "explicit_user_approval",
+    "source_authority_for_transport_storage",
+    "write_path_threat_and_rollback_plan",
+    "validator_boundary_before_write",
+    "no_push_to_device_assumptions_without_source_support",
+    "no_hardware_validation_claim_without_hardware_evidence"
+  ],
+  "source_authority": {
+    "runtime_source": "src/modes/Ultimate.cpp",
+    "role_map_doc": "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
+    "role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
+    "behavior_cases_doc": "docs/calibration/glyph_identity_runtime_behavior_cases_2026-05-28.md",
+    "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
+    "generated_config_prototype_doc": "docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md",
+    "generated_config_prototype_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "generated_config_contract_doc": "docs/calibration/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.md",
+    "generated_config_contract_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+    "senscope_export_draft_doc": "docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md",
+    "senscope_export_draft_fixture": "docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json",
+    "runtime_loaded_config_design_doc": "docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md",
+    "runtime_loaded_config_design_fixture": "docs/calibration/fixtures/glyph_runtime_loaded_config_design_v0_2026-05-28.json",
+    "runtime_loaded_config_validation_contract_doc": "docs/calibration/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.md",
+    "runtime_loaded_config_validation_contract_fixture": "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json"
+  }
+}

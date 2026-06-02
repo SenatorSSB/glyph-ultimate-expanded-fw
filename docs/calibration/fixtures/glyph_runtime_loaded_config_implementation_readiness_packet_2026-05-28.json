@@ -1,0 +1,93 @@
+{
+  "schema_name": "glyph_runtime_loaded_config_implementation_readiness_packet",
+  "packet_version": 1,
+  "status": "blocked_until_explicit_approval_and_design_resolution",
+  "hardware_status": "not_new_hardware_result",
+  "required_design_decisions": [
+    "storage_location",
+    "representation",
+    "boot_time_validation",
+    "fallback_behavior_if_config_invalid",
+    "version_migration",
+    "maximum_config_size",
+    "profile_bound_vs_global_config",
+    "official_configurator_integration_source_authority",
+    "transport_policy",
+    "hardware_validation_plan"
+  ],
+  "required_validator_guarantees": [
+    "reject_unknown_schema_version",
+    "reject_unknown_mode_scope",
+    "reject_missing_required_tables",
+    "reject_malformed_table_point",
+    "reject_coordinate_outside_0_255",
+    "reject_boolean_coordinate_values",
+    "reject_unknown_role_class",
+    "reject_unknown_priority_class",
+    "reject_phase_order_mutation",
+    "reject_arbitrary_script_code_text",
+    "reject_macro_turbo_timing_automation",
+    "reject_one_shot_toggle_history_dependent_behavior",
+    "reject_missing_source_authority",
+    "reject_hardware_validation_claim_without_hardware_result_source",
+    "reject_device_write_instructions",
+    "reject_serial_transport_payloads",
+    "reject_firmware_source_patches_embedded_in_config"
+  ],
+  "required_storage_transport_decisions": [
+    "storage_location",
+    "representation",
+    "write_read_lifecycle",
+    "transport_policy",
+    "official_configurator_authority",
+    "provenance",
+    "validation_timing",
+    "rollback_behavior"
+  ],
+  "required_failure_fallback_policy": [
+    "invalid_config_handling",
+    "missing_config_behavior",
+    "version_mismatch_behavior",
+    "partial_write_handling",
+    "safe_fallback_behavior"
+  ],
+  "required_performance_latency_evidence": [
+    "measurement_scope",
+    "measurement_thresholds",
+    "no_latency_claim_without_measurement"
+  ],
+  "required_hardware_validation_plan": [
+    "hardware_test_scope",
+    "artifact_provenance",
+    "operator_steps",
+    "pass_fail_criteria",
+    "post_failure_rollback_expectations"
+  ],
+  "forbidden_implementation_shortcuts": [
+    "skip_validator",
+    "skip_fallback_policy",
+    "accept_unknown_role_classes",
+    "allow_scripts_macros_turbo",
+    "mutate_phase_order_from_config",
+    "claim_hardware_validation_without_test",
+    "implement_device_write_transport_without_source_authority_and_approval"
+  ],
+  "required_approval": [
+    "explicit_user_approval"
+  ],
+  "open_blockers": [
+    "explicit_user_approval",
+    "storage_location_decision",
+    "representation_decision",
+    "validator_design",
+    "failure_fallback_policy",
+    "version_migration_policy",
+    "maximum_config_size",
+    "profile_bound_vs_global_config_decision",
+    "official_configurator_integration_source_authority",
+    "transport_policy",
+    "performance_latency_measurement_plan",
+    "hardware_validation_plan",
+    "nunchuk_validation_decision"
+  ]
+}
