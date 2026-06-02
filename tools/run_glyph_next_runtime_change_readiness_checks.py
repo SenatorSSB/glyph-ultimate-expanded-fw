@@ -97,6 +97,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_identity_runtime_table_source_sync.py",
         ),
         step(
+            "identity runtime generated config prototype",
+            "tools/check_glyph_identity_runtime_generated_config_prototype.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),
