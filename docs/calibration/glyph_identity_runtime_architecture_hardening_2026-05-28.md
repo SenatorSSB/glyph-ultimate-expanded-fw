@@ -142,6 +142,8 @@ Preimplementation gates for generated constants, runtime-loaded config, device w
 
 Docs/tools-only implementation planning packets for generated constants, runtime-loaded config, and hardware validation/rollback are recorded in `docs/calibration/glyph_generated_constants_refactor_implementation_plan_v0_2026-05-28.md`, `docs/calibration/glyph_runtime_loaded_config_implementation_plan_v0_2026-05-28.md`, and `docs/calibration/glyph_identity_runtime_hardware_validation_and_rollback_plan_2026-05-28.md`; they are design-only gates and do not approve firmware source edits.
 
+The generated constants refactor remains blocked until explicit approval, but the docs/tools-only execution packet, future prompt template, and hardware matrix now record the bounded future scope in `docs/calibration/glyph_generated_constants_refactor_execution_packet_2026-05-28.md`.
+
 Each stage must preserve source-backed controller/backend behavior and must not promote game-semantic claims into firmware without separate source authority.
 
 ## Behavior Preservation
