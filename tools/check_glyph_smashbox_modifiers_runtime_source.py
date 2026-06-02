@@ -149,6 +149,78 @@ MTILT3_POINTS = (
     "{160, 170}",
 )
 
+LAYER_FLIPPER_POINTS = (
+    "{169, 51}",
+    "{128, 51}",
+    "{87, 51}",
+    "{169, 128}",
+    "{128, 128}",
+    "{87, 128}",
+    "{169, 205}",
+    "{128, 205}",
+    "{87, 205}",
+)
+
+MLAYER_FLIPPER_POINTS = (
+    "{169, 87}",
+    "{128, 87}",
+    "{87, 87}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+)
+
+LAYER_NORMAL_X_POINTS = (
+    "{87, 51}",
+    "{128, 51}",
+    "{169, 51}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 205}",
+    "{128, 205}",
+    "{169, 205}",
+)
+
+MLAYER_NORMAL_X_POINTS = (
+    "{87, 87}",
+    "{128, 87}",
+    "{169, 87}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+)
+
+Y1_LAYER_NORMAL_X_POINTS = (
+    "{87, 99}",
+    "{128, 99}",
+    "{169, 99}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 157}",
+    "{128, 157}",
+    "{169, 157}",
+)
+
+MY1_LAYER_NORMAL_X_POINTS = (
+    "{87, 179}",
+    "{128, 179}",
+    "{169, 179}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 77}",
+    "{128, 77}",
+    "{169, 77}",
+)
+
 
 def fail(message: str) -> None:
     raise AssertionError(message)
@@ -200,7 +272,7 @@ def ensure_identity_profile_contract(path: Path) -> None:
     if not isinstance(remaps, list):
         fail(f"MODE_ULTIMATE.buttonRemapping must be a list in {path.relative_to(REPO_ROOT)}")
 
-    required_self_activates = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11"}
+    required_self_activates = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11", "BTN_LF7", "BTN_LF8", "BTN_RF2", "BTN_RF3", "BTN_RF4"}
     observed_self_activates: set[str] = set()
     for index, remap in enumerate(remaps):
         if not isinstance(remap, dict):
@@ -226,7 +298,7 @@ def ensure_identity_profile_contract(path: Path) -> None:
     socd_pairs = mode.get("socdPairs")
     if not isinstance(socd_pairs, list):
         fail(f"MODE_ULTIMATE.socdPairs must be a list in {path.relative_to(REPO_ROOT)}")
-    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11"}
+    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11", "BTN_LF7", "BTN_LF8", "BTN_RF2", "BTN_RF3", "BTN_RF4"}
     for index, pair in enumerate(socd_pairs):
         if not isinstance(pair, dict):
             fail(f"socdPairs[{index}] must be object in {path.relative_to(REPO_ROOT)}")
@@ -260,6 +332,22 @@ def read_runtime_doc() -> str:
     require(r"RF9.*final analog.*128,128", text, "runtime doc RF9 final analog override", flags=re.IGNORECASE)
     require(r"Y2/MY2.*scratched|scratched.*Y2/MY2", text, "runtime doc marks Y2/MY2 scratched", flags=re.IGNORECASE)
     require(r"Y1\+Tilt1.*special", text, "runtime doc Y1+Tilt1 special composite", flags=re.IGNORECASE)
+    require(r"LF8\s*=\s*layer-left button", text, "runtime doc LF8 layer-left role")
+    require(r"LF7\s*=\s*layer-right button", text, "runtime doc LF7 layer-right role")
+    require(r"RF13\s*=\s*LS->DPad", text, "runtime doc RF13 LS->DPad role")
+    require(r"RF7\s*=\s*hard Up\+B|hard Up\+B.*RF7", text, "runtime doc RF7 hard Up+B role", flags=re.IGNORECASE)
+    require(r"RF4.*flipper", text, "runtime doc RF4 layered flipper role", flags=re.IGNORECASE)
+    require(r"RF3.*B", text, "runtime doc RF3 layered B role")
+    require(r"RF3.*normal[\s-]*x", text, "runtime doc RF3 layered normal-x role", flags=re.IGNORECASE)
+    require(r"RF4.*wins.*RF3|RF3.*RF4.*wins", text, "runtime doc RF4 layered precedence over RF3 normal-x", flags=re.IGNORECASE)
+    require(r"LF4.*layer sub-?mode|layer sub-?mode.*LF4", text, "runtime doc LF4 layer sub-mode", flags=re.IGNORECASE)
+    require(r"LF4.*LT2.*suppres|suppres.*LT2.*LF4", text, "runtime doc LF4-held LT2/Y1 suppression", flags=re.IGNORECASE)
+    require(r"LF4.*LT2.*sub-?mode|sub-?mode.*LF4.*LT2", text, "runtime doc LF4+LT2 sub-mode activation", flags=re.IGNORECASE)
+    require(r"RF2.*forced Up|forced Up.*RF2", text, "runtime doc RF2 pure-layer forced-Up role", flags=re.IGNORECASE)
+    require(r"LF4.*RF2.*X|RF2.*LF4.*X", text, "runtime doc LF4 sub-mode RF2 -> X", flags=re.IGNORECASE)
+    require(r"LF4.*RF3.*forced Up|RF3.*LF4.*forced Up", text, "runtime doc LF4 sub-mode RF3 forced-Up", flags=re.IGNORECASE)
+    require(r"RT2/RT3/RT4/RT5.*suppress.*RF2|RF2.*suppres.*RT2/RT3/RT4/RT5", text, "runtime doc LF4-submode RF2 C-stick suppression", flags=re.IGNORECASE)
+    require(r"RF13\+RF7|RF7\+RF13", text, "runtime doc RF13+RF7 interaction policy", flags=re.IGNORECASE)
     require(r"RT4\s*=\s*C-Right", text, "runtime doc RT4 C-right")
     require(r"RT5\s*=\s*C-Up", text, "runtime doc RT5 C-up")
     require(r"`?RT1`?\s*remains", text, "runtime doc RT1 remains Z")
@@ -291,6 +379,20 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     )
     require(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt4\s*;", block, "X1 input is LT4")
     require(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt1\s*;", block, "X2 input is LT1")
+    require(r"const\s+bool\s+ls_to_dpad_active\s*=\s*inputs\.rf13\s*;", source, "LS->DPad source is RF13")
+    require(r"const\s+bool\s+layer_left_active\s*=\s*inputs\.lf8\s*;", source, "LF8 layer-left source")
+    require(r"const\s+bool\s+layer_right_active\s*=\s*inputs\.lf7\s*;", source, "LF7 layer-right source")
+    require(r"const\s+bool\s+layer_direction_active\s*=\s*layer_left_active\s*\|\|\s*layer_right_active\s*;", source, "layer_direction_active aggregation")
+    require(
+        r"const\s+bool\s+lf4_submode_active\s*=\s*inputs\.lf4\s*&&\s*\(\s*layer_direction_active\s*\|\|\s*inputs\.lt2\s*\)\s*;",
+        source,
+        "LF4 sub-mode activation from LF4 and (layer direction or LT2)",
+    )
+    require(r"const\s+bool\s+c_stick_any_active\s*=\s*inputs\.rt2\s*\|\|\s*inputs\.rt3\s*\|\|\s*inputs\.rt4\s*\|\|\s*inputs\.rt5\s*;", source, "C-stick aggregation for LF4-submode RF2 suppression")
+    require(r"const\s+bool\s+rf2_suppressed_by_lf4_submode_cstick\s*=\s*lf4_submode_active\s*&&\s*c_stick_any_active\s*;", source, "LF4-submode RF2 C-stick suppression flag")
+    require(r"const\s+bool\s+layer_transform_active\s*=\s*layer_direction_active\s*\|\|\s*lf4_submode_active\s*;", source, "layer_transform_active aggregation")
+    require(r"const\s+bool\s+pure_layer_rf2_force_up_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf2\s*&&\s*!rf2_suppressed_by_lf4_submode_cstick\s*;", source, "pure-layer RF2 forced-Up source")
+    require(r"const\s+bool\s+lf4_submode_rf3_force_up_active\s*=\s*lf4_submode_active\s*&&\s*inputs\.rf3\s*;", source, "LF4 sub-mode RF3 forced-Up source")
     if re.search(r"const\s+bool\s+x1_active\s*=\s*inputs\.lt5\s*;", block):
         fail("stale x1_active=inputs.lt5 runtime shape must be removed")
     if re.search(r"const\s+bool\s+x2_active\s*=\s*inputs\.lt4\s*;", block):
@@ -315,9 +417,68 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         fail("Y2/MY2 runtime table constants should not remain in source")
 
     # Modifier composition excludes Y2.
-    require(r"const\s+bool\s+y1_active\s*=\s*inputs\.lt2\s*;", block, "Y1 modifier input")
+    require(r"const\s+bool\s+y1_active\s*=\s*inputs\.lt2\s*&&\s*!inputs\.lf4\s*;", block, "Y1 modifier input with LF4 suppression")
     if re.search(r"inputs\.lt3[^\n]*Y2|Y2[^\n]*inputs\.lt3", block, flags=re.IGNORECASE):
         fail("LT3 must not be consumed as Y2 modifier input")
+
+    require(
+        r"outputs\.b\s*=\s*inputs\.rf5\s*\|\|\s*inputs\.lf4\s*\|\|\s*inputs\.rf7\s*\|\|\s*\(\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;",
+        source,
+        "B output includes RF7 hard Up+B carrier and layered RF3 in pure layer",
+    )
+    require(
+        r"outputs\.x\s*=\s*inputs\.rf2\s*&&\s*!rf2_suppressed_by_lf4_submode_cstick\s*&&\s*\(\s*!layer_direction_active\s*\|\|\s*inputs\.lf4\s*\)\s*;",
+        source,
+        "X output includes RF2 non-layer/LF4-submode path with C-stick suppression",
+    )
+
+    require(
+        r"const\s+int8_t\s+horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer_left_active,\s*layer_right_active\)\s*;",
+        source,
+        "effective horizontal direction includes LF8/LF7",
+    )
+    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_transform_active\s*;", block, "RF3 Tilt1 gated by !layer_transform_active")
+    require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_transform_active\s*;", block, "RF4 Tilt2 gated by !layer_transform_active")
+    require(
+        r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;",
+        block,
+        "layered RF3 normal-x active is limited to pure layer",
+    )
+    require(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_transform_active\s*&&\s*inputs\.rf4\s*;", block, "layered RF4 flipper active in pure layer and LF4 sub-mode")
+    require(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", source, "RF4 layered precedence over RF3 normal-x")
+    require(r"EffectiveModifier::LayerNormalX", source, "effective modifier includes layer RF3 normal-x")
+    require(
+        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        source,
+        "table selection includes layered RF3 normal-x and RF4 flipper modifiers",
+        flags=re.DOTALL,
+    )
+
+    require(r"constexpr\s+StickPoint\s+kLayerNormalXTable\[9\]", source, "layer normal-x table declaration")
+    for point in LAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing layer RF3 normal-x point: {point}")
+    require(r"constexpr\s+StickPoint\s+kMLayerNormalXTable\[9\]", source, "mode layer normal-x table declaration")
+    for point in MLAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing mode layer RF3 normal-x point: {point}")
+    require(r"constexpr\s+StickPoint\s+kY1LayerNormalXTable\[9\]", source, "Y1 layer normal-x table declaration")
+    for point in Y1_LAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing Y1 layer RF3 normal-x point: {point}")
+    require(r"constexpr\s+StickPoint\s+kMY1LayerNormalXTable\[9\]", source, "mode Y1 layer normal-x table declaration")
+    for point in MY1_LAYER_NORMAL_X_POINTS:
+        if point not in source:
+            fail(f"missing mode Y1 layer RF3 normal-x point: {point}")
+
+    require(r"constexpr\s+StickPoint\s+kLayerFlipperTable\[9\]", source, "layer flipper table declaration")
+    for point in LAYER_FLIPPER_POINTS:
+        if point not in source:
+            fail(f"missing layer RF4 flipper point: {point}")
+    require(r"constexpr\s+StickPoint\s+kMLayerFlipperTable\[9\]", source, "mode layer flipper table declaration")
+    for point in MLAYER_FLIPPER_POINTS:
+        if point not in source:
+            fail(f"missing mode layer RF4 flipper point: {point}")
 
     # Tilt1 table update and Y1+Tilt1 special composite tables.
     require(r"constexpr\s+StickPoint\s+kTilt1Table\[9\]", source, "Tilt1 table declaration")
@@ -391,11 +552,18 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
     # LT5 hard final override ordering.
     require(r"if\s*\(\s*direction_plus_a_active\s*\)", block, "direction-plus-A override block")
     require(r"if\s*\(\s*z_airdodge_override_active\s*\)", block, "LT5/RF11 hard override block")
+    require(r"if\s*\(\s*inputs\.rf7\s*\)", block, "RF7 hard Up+B override block")
     require(r"if\s*\(\s*null_modifier_active\s*\)", block, "RF9 null override block")
     require(
-        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*if\s*\(\s*inputs\.rf7\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
         block,
-        "RF9 override occurs after LT5/RF11 and direction-plus-A overrides",
+        "RF9 override occurs after LT5/RF11, direction-plus-A, and RF7 hard override",
+        flags=re.DOTALL,
+    )
+    require(
+        r"if\s*\(\s*inputs\.rf7\s*\)\s*\{\s*//\s*RF7\s+is\s+a\s+hard\s+Up\+B\s+analog\s+override.*?effective_ls_left\s*==\s*effective_ls_right\s*\?\s*128\s*:\s*\(effective_ls_left\s*\?\s*77\s*:\s*179\).*?outputs\.leftStickY\s*=\s*172\s*;",
+        block,
+        "RF7 hard Up+B constants and horizontal policy",
         flags=re.DOTALL,
     )
     require(r"outputs\.leftStickX\s*=\s*kLt1LowMagnitudeTable\[lt1_direction_index\]\.x\s*;", block, "LT1 final X override")
@@ -416,6 +584,10 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         fail("RF9 must not affect table selection")
     if re.search(r"outputs\.(?!leftStickX|leftStickY)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf9", source):
         fail("RF9 must not directly drive game/dpad/right-stick outputs")
+    if re.search(r"const\s+bool\s+ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", source):
+        fail("RF7 must not activate LS->DPad")
+    if re.search(r"force_up_active\s*=.*inputs\.rf7", source):
+        fail("RF7 must not be included in forced-up aggregation")
     if re.search(r"active_modifier_count\s*\+\+[^;]*inputs\.rf11", source):
         fail("RF11 must not be counted as modifier")
     if re.search(r"SelectStickTable\s*\([^)]*inputs\.rf11", source, flags=re.DOTALL):
@@ -425,9 +597,9 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
 
     # RF15 aliases RF12 across forced-up/direction-plus-A and LT5 direction resolution.
     require(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
         source,
-        "digital forced-up includes RF15",
+        "forced-up includes pure-layer RF2 and LF4 sub-mode RF3",
     )
     require(
         r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
@@ -435,9 +607,9 @@ def ensure_runtime_shapes(source: str, block: str) -> None:
         "direction-plus-A up input includes RF15",
     )
     require(
-        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*force_up_active\s*;",
         block,
-        "LT5 low-table forced-up includes RF15",
+        "LT5 low-table forced-up includes shared layered forced-up sources",
     )
 
     # C-stick right/up swap and nunchuk-C passthrough consistency.
@@ -475,7 +647,7 @@ def main() -> int:
     print(f"source={SOURCE_PATH.relative_to(REPO_ROOT)}")
     print(f"runtime_doc={RUNTIME_DOC_PATH.relative_to(REPO_ROOT)}")
     print("markers=present")
-    print("forced_up_role=rf6_or_rf12_or_rf15")
+    print("forced_up_role=rf6_or_rf12_or_rf15_or_pure_layer_rf2_or_lf4_submode_rf3")
     print("direction_plus_a_role=lt6_down_a_rf12_or_rf15_up_a")
     print("lt3_role=L")
     print("lt5_rf11_role=Z_plus_low_magnitude_override_alias")
@@ -486,7 +658,8 @@ def main() -> int:
     print("rf9_null_modifier=enabled")
     print("lt1_lt4_lt5_rf11_profile_socd_semantic_remap_conflicts=absent")
     print("y2_my2_runtime_role=scratched_inactive")
-    print("ls_to_dpad_role=rf7")
+    print("ls_to_dpad_role=rf13")
+    print("rf7_role=hard_up_b")
     return 0
 
 

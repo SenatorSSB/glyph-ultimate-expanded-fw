@@ -33,11 +33,14 @@ ROLE_LINES = (
     "`LT4 = X1`",
     "`LT1 = X2`",
     "`LT2 = Y1`",
-    "`RF7 = LS->DPad`",
+    "`RF7 = hard Up+B`",
+    "`RF13 = LS->DPad`",
     "`RF6 = forced Up`",
     "`RF3 = Tilt1`",
     "`RF4 = Tilt2`",
     "`RF3 + RF4 = Tilt3`",
+    "`LF8 = layer-left button`",
+    "`LF7 = layer-right button`",
 )
 
 SOURCE_ANCHORS = (
@@ -47,6 +50,7 @@ SOURCE_ANCHORS = (
     "inputs.lt4",
     "inputs.lt2",
     "inputs.rf7",
+    "inputs.rf13",
     "inputs.rf6",
     "inputs.rf12",
     "inputs.rf15",
@@ -80,8 +84,11 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
     "BTN_LF1",
     "BTN_LF2",
     "BTN_RF7",
+    "BTN_RF13",
     "BTN_RF8",
     "BTN_RF9",
+    "BTN_LF7",
+    "BTN_LF8",
     "BTN_LT5",
     "BTN_LT4",
     "BTN_LT2",
@@ -100,9 +107,6 @@ RUNTIME_REQUIRED_SELF_ACTIVATES = (
 
 EMPTY_NO_OUTPUT_INPUTS = (
     "inputs.lf6",
-    "inputs.lf7",
-    "inputs.lf8",
-    "inputs.rf13",
     "inputs.rf14",
     "inputs.mb1",
     "inputs.mb2",
@@ -155,6 +159,78 @@ MY1_TILT1_POINTS = (
     "{169, 77}",
     "{128, 77}",
     "{87, 77}",
+)
+
+LAYER_FLIPPER_POINTS = (
+    "{169, 51}",
+    "{128, 51}",
+    "{87, 51}",
+    "{169, 128}",
+    "{128, 128}",
+    "{87, 128}",
+    "{169, 205}",
+    "{128, 205}",
+    "{87, 205}",
+)
+
+MLAYER_FLIPPER_POINTS = (
+    "{169, 87}",
+    "{128, 87}",
+    "{87, 87}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+    "{169, 169}",
+    "{128, 169}",
+    "{87, 169}",
+)
+
+LAYER_NORMAL_X_POINTS = (
+    "{87, 51}",
+    "{128, 51}",
+    "{169, 51}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 205}",
+    "{128, 205}",
+    "{169, 205}",
+)
+
+MLAYER_NORMAL_X_POINTS = (
+    "{87, 87}",
+    "{128, 87}",
+    "{169, 87}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+)
+
+Y1_LAYER_NORMAL_X_POINTS = (
+    "{87, 99}",
+    "{128, 99}",
+    "{169, 99}",
+    "{87, 128}",
+    "{128, 128}",
+    "{169, 128}",
+    "{87, 157}",
+    "{128, 157}",
+    "{169, 157}",
+)
+
+MY1_LAYER_NORMAL_X_POINTS = (
+    "{87, 179}",
+    "{128, 179}",
+    "{169, 179}",
+    "{87, 169}",
+    "{128, 169}",
+    "{169, 169}",
+    "{87, 77}",
+    "{128, 77}",
+    "{169, 77}",
 )
 
 
@@ -231,7 +307,7 @@ def ensure_role_inputs_not_in_socd_pairs(mode_config: dict[str, object], path: P
     if not isinstance(socd_pairs, list):
         fail(f"MODE_ULTIMATE.socdPairs must be a list in {path.relative_to(REPO_ROOT)}")
 
-    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11"}
+    forbidden_socd_inputs = {"BTN_LT1", "BTN_LT4", "BTN_LT5", "BTN_RF11", "BTN_LF7", "BTN_LF8", "BTN_RF2", "BTN_RF3", "BTN_RF4"}
     for index, pair in enumerate(socd_pairs):
         if not isinstance(pair, dict):
             fail(f"socdPairs[{index}] must be an object in {path.relative_to(REPO_ROOT)}")
@@ -239,7 +315,7 @@ def ensure_role_inputs_not_in_socd_pairs(mode_config: dict[str, object], path: P
         right = pair.get("buttonDir2")
         if left in forbidden_socd_inputs or right in forbidden_socd_inputs:
             fail(
-                "LT1/LT4/LT5/RF11 must not appear in MODE_ULTIMATE.socdPairs in "
+                "LT1/LT4/LT5/RF11/LF7/LF8/RF2/RF3/RF4 must not appear in MODE_ULTIMATE.socdPairs in "
                 f"{path.relative_to(REPO_ROOT)}"
             )
 
@@ -273,6 +349,38 @@ def require_runtime_doc() -> str:
         fail("runtime doc must state RF9 final analog override to (128,128)")
     if re.search(r"Y1\+Tilt1.*special", text, flags=re.IGNORECASE) is None:
         fail("runtime doc must document Y1+Tilt1 special composite")
+    if re.search(r"LF8\s*=\s*layer-left button", text) is None:
+        fail("runtime doc must document LF8 as layer-left button")
+    if re.search(r"LF7\s*=\s*layer-right button", text) is None:
+        fail("runtime doc must document LF7 as layer-right button")
+    if re.search(r"RF13\s*=\s*LS->DPad", text) is None:
+        fail("runtime doc must document RF13 as LS->DPad")
+    if re.search(r"RF7\s*=\s*hard Up\+B|hard Up\+B.*RF7", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF7 as hard Up+B")
+    if re.search(r"RF4.*flipper", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF4 layered flipper behavior")
+    if re.search(r"RF3.*B", text) is None:
+        fail("runtime doc must document RF3 layered B behavior")
+    if re.search(r"RF3.*normal[\s-]*x", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF3 layered normal-x behavior")
+    if re.search(r"RF4.*wins.*RF3|RF3.*RF4.*wins", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF4 layered precedence over RF3 normal-x")
+    if re.search(r"LF4.*layer sub-?mode|layer sub-?mode.*LF4", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4 layer sub-mode behavior")
+    if re.search(r"LF4.*LT2.*suppres|suppres.*LT2.*LF4", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4-held LT2/Y1 suppression")
+    if re.search(r"LF4.*LT2.*sub-?mode|sub-?mode.*LF4.*LT2", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4+LT2 LF4 sub-mode activation")
+    if re.search(r"RF2.*forced Up|forced Up.*RF2", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF2 pure-layer forced-Up behavior")
+    if re.search(r"LF4.*RF2.*X|RF2.*LF4.*X", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4 sub-mode RF2 -> X behavior")
+    if re.search(r"LF4.*RF3.*forced Up|RF3.*LF4.*forced Up", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4 sub-mode RF3 forced-Up behavior")
+    if re.search(r"RT2/RT3/RT4/RT5.*suppress.*RF2|RF2.*suppres.*RT2/RT3/RT4/RT5", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document LF4-submode RF2 C-stick suppression")
+    if re.search(r"RF13\+RF7|RF7\+RF13", text, flags=re.IGNORECASE) is None:
+        fail("runtime doc must document RF13+RF7 interaction policy")
     if re.search(r"RT4\s*=\s*C-Right", text) is None or re.search(r"RT5\s*=\s*C-Up", text) is None:
         fail("runtime doc must document RT4/RT5 C-stick swap")
     if "RT1 remains runtime-owned `Z`" not in text and "RT1 remains" not in text and "`RT1` remains" not in text:
@@ -301,8 +409,14 @@ def require_runtime_source() -> str:
             "outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;",
             "runtime source must assign A from RF1 or LT6 or RF12 or RF15",
         ),
-        ("outputs.b = inputs.rf5 || inputs.lf4;", "runtime source must assign RF5 or LF4 to B"),
-        ("outputs.x = inputs.rf2;", "runtime source must assign RF2 to X"),
+        (
+            "outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer_direction_active && !inputs.lf4 && inputs.rf3);",
+            "runtime source must include RF7 in B output while preserving layered RF3 B role",
+        ),
+        (
+            "outputs.x = inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick && (!layer_direction_active || inputs.lf4);",
+            "runtime source must gate RF2 X output by LF4-submode C-stick suppression",
+        ),
         ("outputs.y = inputs.rf10;", "runtime source must assign RF10 to Y"),
         ("outputs.buttonL = inputs.lt3;", "runtime source must assign LT3 to L button"),
         (
@@ -316,6 +430,17 @@ def require_runtime_source() -> str:
         ("const bool null_modifier_active = inputs.rf9;", "runtime source must read RF9 null modifier input"),
         ("const bool x1_active = inputs.lt4;", "runtime source must assign LT4 to X1"),
         ("const bool x2_active = inputs.lt1;", "runtime source must assign LT1 to X2"),
+        ("const bool ls_to_dpad_active = inputs.rf13;", "runtime source must map LS->DPad to RF13"),
+        ("const bool layer_left_active = inputs.lf8;", "runtime source must read LF8 layer-left input"),
+        ("const bool layer_right_active = inputs.lf7;", "runtime source must read LF7 layer-right input"),
+        ("const bool layer_direction_active = layer_left_active || layer_right_active;", "runtime source must define layer_direction_active from LF8/LF7"),
+        ("const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);", "runtime source must define LF4 sub-mode activation from LF4 and (layer direction or LT2)"),
+        ("const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;", "runtime source must define C-stick-active aggregation"),
+        ("const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;", "runtime source must define LF4-submode RF2 C-stick suppression"),
+        ("const bool layer_transform_active = layer_direction_active || lf4_submode_active;", "runtime source must define layer_transform_active"),
+        ("const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;", "runtime source must define pure-layer RF2 forced-Up"),
+        ("const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;", "runtime source must define LF4-submode RF3 forced-Up"),
+        ("const bool y1_active = inputs.lt2 && !inputs.lf4;", "runtime source must suppress Y1 while LF4 is held"),
     )
     for line, message in expected_source_lines:
         if line not in text:
@@ -385,20 +510,20 @@ def require_runtime_source() -> str:
         fail("runtime source must select Y1+Tilt1 special composite tables")
 
     if re.search(
-        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*\|\|\s*pure_layer_rf2_force_up_active\s*\|\|\s*lf4_submode_rf3_force_up_active\s*;",
         text,
     ) is None:
-        fail("runtime source must include RF15 in digital forced-up logic")
+        fail("runtime source must include pure-layer RF2 and LF4-submode RF3 in forced-up logic")
     if re.search(
         r"const\s+bool\s+up_a_active\s*=\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
         text,
     ) is None:
         fail("runtime source must include RF15 in Up+A logic")
     if re.search(
-        r"const\s+bool\s+lt1_force_up_active\s*=\s*inputs\.rf6\s*\|\|\s*inputs\.rf12\s*\|\|\s*inputs\.rf15\s*;",
+        r"const\s+bool\s+lt1_force_up_active\s*=\s*force_up_active\s*;",
         text,
     ) is None:
-        fail("runtime source must include RF15 in LT1 low-table forced-up logic")
+        fail("runtime source must feed LT5/RF11 low-table forced-up from shared forced-up sources")
     if re.search(
         r"const\s+bool\s+z_airdodge_override_active\s*=\s*inputs\.lt5\s*\|\|\s*inputs\.rf11\s*;",
         text,
@@ -423,11 +548,18 @@ def require_runtime_source() -> str:
         fail("runtime source must apply LT5/RF11 hard override after direction-plus-A override")
 
     if re.search(
-        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
+        r"if\s*\(\s*direction_plus_a_active\s*\)\s*\{.*?\}\s*if\s*\(\s*z_airdodge_override_active\s*\)\s*\{.*?\}\s*if\s*\(\s*inputs\.rf7\s*\)\s*\{.*?\}\s*\}\s*if\s*\(\s*null_modifier_active\s*\)\s*\{",
         text,
         flags=re.DOTALL,
     ) is None:
-        fail("runtime source must apply RF9 override after LT5/RF11 and direction-plus-A overrides")
+        fail("runtime source must apply RF7 hard Up+B before RF9 null override")
+
+    if re.search(
+        r"if\s*\(\s*inputs\.rf7\s*\)\s*\{\s*//\s*RF7\s+is\s+a\s+hard\s+Up\+B\s+analog\s+override.*?effective_ls_left\s*==\s*effective_ls_right\s*\?\s*128\s*:\s*\(effective_ls_left\s*\?\s*77\s*:\s*179\).*?outputs\.leftStickY\s*=\s*172\s*;",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must implement RF7 hard Up+B analog override constants (77/128/179,172)")
 
     if re.search(r"outputs\.leftStickX\s*=\s*128\s*;", text) is None:
         fail("runtime source must assign RF9 final leftStickX override to 128")
@@ -460,6 +592,66 @@ def require_runtime_source() -> str:
     ) is None:
         fail("runtime source must suppress digital left-stick up during LS->DPad")
 
+    if re.search(r"const\s+bool\s+ls_to_dpad_active\s*=\s*inputs\.rf7\s*;", text):
+        fail("runtime source must not keep stale RF7 LS->DPad activation")
+
+    if re.search(
+        r"const\s+int8_t\s+horizontal_axis\s*=\s*ResolveHorizontalAxis\(inputs\.lf3,\s*inputs\.lf1,\s*layer_left_active,\s*layer_right_active\)\s*;",
+        text,
+    ) is None:
+        fail("runtime source must include LF8/LF7 in effective horizontal direction resolution")
+
+    if re.search(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf3\s*&&\s*!layer_transform_active\s*;", text) is None:
+        fail("runtime source must gate RF3 Tilt1 by !layer_transform_active")
+    if re.search(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rf4\s*&&\s*!layer_transform_active\s*;", text) is None:
+        fail("runtime source must gate RF4 Tilt2 by !layer_transform_active")
+    if re.search(r"const\s+bool\s+rf4_layer_flipper_active\s*=\s*layer_transform_active\s*&&\s*inputs\.rf4\s*;", text) is None:
+        fail("runtime source must define layered RF4 flipper activation for pure layer and LF4 sub-mode")
+    if re.search(r"const\s+bool\s+layer_rf3_normal_x_active\s*=\s*layer_direction_active\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*;", text) is None:
+        fail("runtime source must define layered RF3 normal-x activation for pure layer only")
+    if re.search(r"const\s+bool\s+layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;", text) is None:
+        fail("runtime source must enforce RF4-over-RF3 layered modifier precedence")
+    if re.search(r"EffectiveModifier::LayerNormalX", text) is None:
+        fail("runtime source must define layered RF3 normal-x effective modifier")
+    if re.search(
+        r"SelectStickTable\(\s*mode_active,\s*x1_active,\s*x2_active,\s*y1_active,\s*layer_rf3_normal_x_active,\s*rf4_layer_flipper_active,\s*tilt1_effective,\s*tilt2_effective,\s*tilt3_effective",
+        text,
+        flags=re.DOTALL,
+    ) is None:
+        fail("runtime source must pass layer RF3 normal-x and RF4 flipper into table selection")
+
+    if re.search(r"constexpr\s+StickPoint\s+kLayerFlipperTable\[9\]", text) is None:
+        fail("runtime source must define non-Mode layer RF4 flipper table")
+    for point in LAYER_FLIPPER_POINTS:
+        if point not in text:
+            fail(f"runtime source missing layer RF4 flipper point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kMLayerFlipperTable\[9\]", text) is None:
+        fail("runtime source must define Mode layer RF4 flipper table")
+    for point in MLAYER_FLIPPER_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode layer RF4 flipper point: {point}")
+
+    if re.search(r"constexpr\s+StickPoint\s+kLayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define non-Mode layer RF3 normal-x table")
+    for point in LAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing layer RF3 normal-x point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kMLayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define Mode layer RF3 normal-x table")
+    for point in MLAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode layer RF3 normal-x point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kY1LayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define Y1 layer RF3 normal-x table")
+    for point in Y1_LAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Y1 layer RF3 normal-x point: {point}")
+    if re.search(r"constexpr\s+StickPoint\s+kMY1LayerNormalXTable\[9\]", text) is None:
+        fail("runtime source must define Mode Y1 layer RF3 normal-x table")
+    for point in MY1_LAYER_NORMAL_X_POINTS:
+        if point not in text:
+            fail(f"runtime source missing Mode Y1 layer RF3 normal-x point: {point}")
+
     if "outputs.dpadLeft |= inputs.lf8;" in text or "outputs.dpadRight |= inputs.lf6;" in text:
         fail("runtime source must not preserve old standalone D-pad direct inputs")
 
@@ -474,6 +666,8 @@ def require_runtime_source() -> str:
         fail("RF11 must not alter modifier table selection")
     if re.search(r"outputs\.(?!leftStickX|leftStickY)[A-Za-z0-9_]+\s*(?:=|\|=)\s*inputs\.rf9", text):
         fail("RF9 must not drive game-button/dpad/right-stick/menu outputs")
+    if re.search(r"force_up_active\s*=.*inputs\.rf7", text):
+        fail("RF7 must not be included in forced-up aggregation")
 
     if re.search(r"tilt3_effective\s*=\s*tilt1_pressed\s*&&\s*tilt2_pressed\s*;", text) is None:
         fail("runtime source must define Tilt3 as rf3&&rf4 chord")
@@ -520,15 +714,17 @@ def main() -> int:
     print("identity_representation=explicit_self_activates")
     print("identity_semantic_remaps=0")
     print("runtime_required_inputs_explicit_self_activated=true")
-    print("forced_up_role=RF6_or_RF12_or_RF15")
+    print("forced_up_role=RF6_or_RF12_or_RF15_or_pure_layer_RF2_or_lf4_submode_RF3")
     print("rf4_up_conflict=absent")
     print("lt3_role=L")
-    print("tilt3_role=RF3+RF4")
+    print("tilt3_role=RF3+RF4_when_layer_inactive")
     print("lt5_rf11_role=Z_plus_low_magnitude_override_alias")
     print("z_role=RT1_or_LT5_or_RF11")
     print("r_role=RF16")
     print("y_role=RF10")
-    print("b_role=RF5_or_LF4")
+    print("b_role=RF5_or_LF4_or_RF7_or_pure_layer_RF3")
+    print("ls_to_dpad_role=RF13")
+    print("rf7_role=hard_up_b")
     print("l_role=LT3")
     print("rf15_role=Up+A_alias_of_RF12")
     print("rf9_role=null_modifier_final_analog_override")

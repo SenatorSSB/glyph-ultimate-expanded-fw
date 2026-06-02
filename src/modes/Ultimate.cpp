@@ -60,6 +60,32 @@ constexpr StickPoint kMY1Table[9] = {
     {14, 77}, {128, 77}, {242, 77},
 };
 
+// RF3 under LF7/LF8 layer is a normal x-only 41px modifier over default y rows.
+constexpr StickPoint kLayerNormalXTable[9] = {
+    {87, 51}, {128, 51}, {169, 51},
+    {87, 128}, {128, 128}, {169, 128},
+    {87, 205}, {128, 205}, {169, 205},
+};
+
+constexpr StickPoint kMLayerNormalXTable[9] = {
+    {87, 87}, {128, 87}, {169, 87},
+    {87, 169}, {128, 169}, {169, 169},
+    {87, 169}, {128, 169}, {169, 169},
+};
+
+// RF4 under LF7/LF8 layer is an x-only flipper modifier over default y rows.
+constexpr StickPoint kLayerFlipperTable[9] = {
+    {169, 51}, {128, 51}, {87, 51},
+    {169, 128}, {128, 128}, {87, 128},
+    {169, 205}, {128, 205}, {87, 205},
+};
+
+constexpr StickPoint kMLayerFlipperTable[9] = {
+    {169, 87}, {128, 87}, {87, 87},
+    {169, 169}, {128, 169}, {87, 169},
+    {169, 169}, {128, 169}, {87, 169},
+};
+
 constexpr StickPoint kY1Tilt1Table[9] = {
     {169, 99}, {128, 99}, {87, 99},
     {169, 128}, {128, 128}, {87, 128},
@@ -70,6 +96,30 @@ constexpr StickPoint kMY1Tilt1Table[9] = {
     {169, 179}, {128, 179}, {87, 179},
     {169, 169}, {128, 169}, {87, 169},
     {169, 77}, {128, 77}, {87, 77},
+};
+
+constexpr StickPoint kY1LayerFlipperTable[9] = {
+    {169, 99}, {128, 99}, {87, 99},
+    {169, 128}, {128, 128}, {87, 128},
+    {169, 157}, {128, 157}, {87, 157},
+};
+
+constexpr StickPoint kMY1LayerFlipperTable[9] = {
+    {169, 179}, {128, 179}, {87, 179},
+    {169, 169}, {128, 169}, {87, 169},
+    {169, 77}, {128, 77}, {87, 77},
+};
+
+constexpr StickPoint kY1LayerNormalXTable[9] = {
+    {87, 99}, {128, 99}, {169, 99},
+    {87, 128}, {128, 128}, {169, 128},
+    {87, 157}, {128, 157}, {169, 157},
+};
+
+constexpr StickPoint kMY1LayerNormalXTable[9] = {
+    {87, 179}, {128, 179}, {169, 179},
+    {87, 169}, {128, 169}, {169, 169},
+    {87, 77}, {128, 77}, {169, 77},
 };
 
 constexpr StickPoint kTilt1Table[9] = {
@@ -124,16 +174,38 @@ enum class EffectiveModifier {
     X1,
     X2,
     Y1,
+    LayerNormalX,
+    LayerFlipper,
     Tilt1,
     Tilt2,
     Tilt3,
 };
+
+int8_t ResolveHorizontalAxis(
+    bool base_left_active,
+    bool base_right_active,
+    bool layer_left_active,
+    bool layer_right_active
+) {
+    const int horizontal_score = static_cast<int>(base_right_active) - static_cast<int>(base_left_active)
+        + static_cast<int>(layer_right_active) - static_cast<int>(layer_left_active);
+
+    if (horizontal_score < 0) {
+        return -1;
+    }
+    if (horizontal_score > 0) {
+        return 1;
+    }
+    return 0;
+}
 
 const StickPoint *SelectStickTable(
     bool mode_active,
     bool x1_active,
     bool x2_active,
     bool y1_active,
+    bool layer_normal_x_active,
+    bool layer_flipper_active,
     bool tilt1_effective,
     bool tilt2_effective,
     bool tilt3_effective
@@ -141,6 +213,21 @@ const StickPoint *SelectStickTable(
     const bool y1_tilt1_special_active = y1_active && tilt1_effective && !x1_active && !x2_active && !tilt2_effective && !tilt3_effective;
     if (y1_tilt1_special_active) {
         return mode_active ? kMY1Tilt1Table : kY1Tilt1Table;
+    }
+
+    const bool layer_flipper_effective = layer_flipper_active;
+    const bool layer_normal_x_effective = layer_normal_x_active && !layer_flipper_effective;
+
+    const bool y1_layer_normal_x_special_active = y1_active && layer_normal_x_effective
+        && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
+    if (y1_layer_normal_x_special_active) {
+        return mode_active ? kMY1LayerNormalXTable : kY1LayerNormalXTable;
+    }
+
+    const bool y1_layer_flipper_special_active = y1_active && layer_flipper_effective
+        && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
+    if (y1_layer_flipper_special_active) {
+        return mode_active ? kMY1LayerFlipperTable : kY1LayerFlipperTable;
     }
 
     int active_modifier_count = 0;
@@ -157,6 +244,14 @@ const StickPoint *SelectStickTable(
     if (y1_active) {
         active_modifier_count++;
         single_modifier = EffectiveModifier::Y1;
+    }
+    if (layer_normal_x_effective) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::LayerNormalX;
+    }
+    if (layer_flipper_effective) {
+        active_modifier_count++;
+        single_modifier = EffectiveModifier::LayerFlipper;
     }
 
     if (tilt3_effective) {
@@ -182,6 +277,10 @@ const StickPoint *SelectStickTable(
                 return kX2Table;
             case EffectiveModifier::Y1:
                 return kY1Table;
+            case EffectiveModifier::LayerNormalX:
+                return kLayerNormalXTable;
+            case EffectiveModifier::LayerFlipper:
+                return kLayerFlipperTable;
             case EffectiveModifier::Tilt1:
                 return kTilt1Table;
             case EffectiveModifier::Tilt2:
@@ -200,6 +299,10 @@ const StickPoint *SelectStickTable(
             return kMX2Table;
         case EffectiveModifier::Y1:
             return kMY1Table;
+        case EffectiveModifier::LayerNormalX:
+            return kMLayerNormalXTable;
+        case EffectiveModifier::LayerFlipper:
+            return kMLayerFlipperTable;
         case EffectiveModifier::Tilt1:
             return kMTilt1Table;
         case EffectiveModifier::Tilt2:
@@ -236,16 +339,25 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
 Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
-    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15;
+    const bool layer_left_active = inputs.lf8;
+    const bool layer_right_active = inputs.lf7;
+    const bool layer_direction_active = layer_left_active || layer_right_active;
+    const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
+    const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
+    const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;
+    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;
+    const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
+    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
+    const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
     const bool effective_ls_up = inputs.lf2 || force_up_active;
     const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
-    const bool effective_ls_left = inputs.lf3;
-    const bool effective_ls_right = inputs.lf1;
-    const bool ls_to_dpad_active = inputs.rf7;
+    const bool effective_ls_left = horizontal_axis < 0;
+    const bool effective_ls_right = horizontal_axis > 0;
+    const bool ls_to_dpad_active = inputs.rf13;
 
     outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;
-    outputs.b = inputs.rf5 || inputs.lf4;
-    outputs.x = inputs.rf2;
+    outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer_direction_active && !inputs.lf4 && inputs.rf3);
+    outputs.x = inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick && (!layer_direction_active || inputs.lf4);
     outputs.y = inputs.rf10;
     outputs.buttonL = inputs.lt3;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
@@ -294,16 +406,28 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
-    const bool normal_force_up_active = inputs.rf6;
-    const bool normal_effective_ls_up = inputs.lf2 || normal_force_up_active;
-    const bool normal_effective_ls_down = inputs.lf5 && !normal_force_up_active;
+    const bool layer_left_active = inputs.lf8;
+    const bool layer_right_active = inputs.lf7;
+    const bool layer_direction_active = layer_left_active || layer_right_active;
+    const bool lf4_submode_active = inputs.lf4 && (layer_direction_active || inputs.lt2);
+    const bool c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
+    const bool rf2_suppressed_by_lf4_submode_cstick = lf4_submode_active && c_stick_any_active;
+    const bool layer_transform_active = layer_direction_active || lf4_submode_active;
+    const bool pure_layer_rf2_force_up_active = layer_direction_active && !inputs.lf4 && inputs.rf2 && !rf2_suppressed_by_lf4_submode_cstick;
+    const bool lf4_submode_rf3_force_up_active = lf4_submode_active && inputs.rf3;
+    const bool force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;
+    const bool effective_ls_up = inputs.lf2 || force_up_active;
+    const bool effective_ls_down = (inputs.lf5 || inputs.lt6) && !force_up_active;
+    const int8_t horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer_left_active, layer_right_active);
+    const bool effective_ls_left = horizontal_axis < 0;
+    const bool effective_ls_right = horizontal_axis > 0;
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
-        inputs.lf3, // Left
-        inputs.lf1, // Right
-        normal_effective_ls_down, // Down
-        normal_effective_ls_up, // Up (RF6 forced-Up)
+        effective_ls_left, // Left (LF3 + LF8 layer-left contribution with cancellation)
+        effective_ls_right, // Right (LF1 + LF7 layer-right contribution with cancellation)
+        effective_ls_down, // Down (LT6/LF5, suppressed by forced-Up)
+        effective_ls_up, // Up (RF6/RF12/RF15, pure-layer RF2, and LF4-submode RF3 forced-Up)
         inputs.rt3, // C-Left
         inputs.rt4, // C-Right
         inputs.rt2, // C-Down
@@ -318,17 +442,19 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const bool mode_active = inputs.rf8;
     const bool x1_active = inputs.lt4;
     const bool x2_active = inputs.lt1;
-    const bool y1_active = inputs.lt2;
+    const bool y1_active = inputs.lt2 && !inputs.lf4;
     const bool z_airdodge_override_active = inputs.lt5 || inputs.rf11;
     const bool null_modifier_active = inputs.rf9;
-    const bool ls_to_dpad_active = inputs.rf7;
+    const bool ls_to_dpad_active = inputs.rf13;
     const bool down_a_active = inputs.lt6;
     const bool up_a_active = inputs.rf12 || inputs.rf15;
     const bool direction_plus_a_active = down_a_active || up_a_active;
-    const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || inputs.rf6);
+    const bool direction_plus_a_force_up = direction_plus_a_active && (up_a_active || force_up_active);
 
-    const bool tilt1_pressed = inputs.rf3;
-    const bool tilt2_pressed = inputs.rf4;
+    const bool layer_rf3_normal_x_active = layer_direction_active && !inputs.lf4 && inputs.rf3;
+    const bool rf4_layer_flipper_active = layer_transform_active && inputs.rf4;
+    const bool tilt1_pressed = inputs.rf3 && !layer_transform_active;
+    const bool tilt2_pressed = inputs.rf4 && !layer_transform_active;
 
     const bool tilt3_effective = tilt1_pressed && tilt2_pressed;
     const bool tilt1_effective = tilt1_pressed && !tilt2_pressed;
@@ -339,6 +465,8 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         x1_active,
         x2_active,
         y1_active,
+        layer_rf3_normal_x_active,
+        rf4_layer_flipper_active,
         tilt1_effective,
         tilt2_effective,
         tilt3_effective
@@ -361,9 +489,9 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         }
 
         if (z_airdodge_override_active) {
-            const bool lt1_force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15;
-            const bool lt1_effective_left = inputs.lf3;
-            const bool lt1_effective_right = inputs.lf1;
+            const bool lt1_force_up_active = force_up_active;
+            const bool lt1_effective_left = effective_ls_left;
+            const bool lt1_effective_right = effective_ls_right;
             const bool lt1_effective_up = inputs.lf2 || lt1_force_up_active;
             const bool lt1_effective_down = (inputs.lf5 || inputs.lt6) && !lt1_force_up_active;
             const int8_t lt1_x = lt1_effective_left == lt1_effective_right ? 0 : (lt1_effective_left ? -1 : 1);
@@ -371,6 +499,13 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
             const size_t lt1_direction_index = DirectionIndexFromAxes(lt1_x, lt1_y);
             outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
             outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
+        }
+
+        if (inputs.rf7) {
+            // RF7 is a hard Up+B analog override with horizontal from effective direction.
+            const uint8_t rf7_horizontal = effective_ls_left == effective_ls_right ? 128 : (effective_ls_left ? 77 : 179);
+            outputs.leftStickX = rf7_horizontal;
+            outputs.leftStickY = 172;
         }
     }
 
