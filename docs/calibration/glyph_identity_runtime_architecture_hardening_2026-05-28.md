@@ -11,6 +11,7 @@ No runtime behavior, raw coordinate table value, button role, profile artifact, 
 The current runtime behavior is documented as hardware-verified in `docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md`.
 The canonical declarative role-map artifact for this scope is `docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md`.
 The representative source-backed behavior-case matrix for this scope is `docs/calibration/glyph_identity_runtime_behavior_cases_2026-05-28.md`; it is docs/fixture/checker-only and is not a new hardware result.
+The bounded evaluator harness for the representative matrix is documented in `docs/calibration/glyph_identity_runtime_behavior_evaluator_harness_2026-05-28.md`; it is source-backed but not hardware validation.
 
 The verified scope includes the explicit self-activated identity profile compatibility, current raw table values, Mode/default tables, X1/X2, Y1/MY1, Tilt1/Tilt2/Tilt3, Mode tilt tables, scratched Y2/MY2 runtime policy, Y1+Tilt1 composite, LT5/RF11 Z-airdodge low-magnitude override, LT4=X1, LT1=X2, LT3=L, RF9 null modifier, LT6 hard Down+A, RF12/RF15 hard Up+A, RF13 LS->DPad, RF7 hard Up+B, LF8/LF7 layer-left/layer-right, LF4 sub-mode, LF4+LT2 Y1 suppression, LF4 sub-mode RF2/RF3 behavior, RF2 suppression by C-stick in LF4 sub-mode, RF4 flipper, RF3 pure-layer B + normal-x behavior, RT4=C-right, RT5=C-up, no profile semantic remaps, and no SOCD changes for the custom layer behavior.
 

@@ -92,6 +92,10 @@ def steps() -> list[Step]:
             "identity runtime behavior cases",
             "tools/check_glyph_identity_runtime_behavior_cases.py",
         ),
+        step(
+            "identity runtime behavior evaluator",
+            "tools/check_glyph_identity_runtime_behavior_evaluator.py",
+        ),
     ]
 
 

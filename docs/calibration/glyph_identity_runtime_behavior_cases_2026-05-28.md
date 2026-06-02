@@ -8,6 +8,7 @@ Status:
 
 - Docs/fixture/checker-only canonicalization of representative runtime behavior cases.
 - Primary machine-readable fixture: `docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json`.
+- Executable checker: `tools/check_glyph_identity_runtime_behavior_evaluator.py` mechanically evaluates the representative fixture with a bounded source-backed Python mirror; it is not hardware validation.
 - The cases are intended to help future mirror evaluators, C++ unit-style harnesses, generated-config regression checks, Senscope export validation reports, and manual hardware checklist generation.
 
 Non-goals:
