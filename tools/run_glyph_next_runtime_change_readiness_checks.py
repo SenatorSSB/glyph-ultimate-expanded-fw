@@ -129,6 +129,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_generated_constants_refactor_execution_packet.py",
         ),
         step(
+            "generated constants refactor hardware result",
+            "tools/check_glyph_generated_constants_refactor_hardware_result.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),
