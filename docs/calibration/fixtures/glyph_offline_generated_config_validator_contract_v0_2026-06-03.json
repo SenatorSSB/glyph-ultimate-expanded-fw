@@ -71,6 +71,28 @@
     "rf9_null",
     "nunchuk_override"
   ],
+  "required_digital_effective_direction_priority_classes": [
+    "physical_inputs",
+    "layer_left_right",
+    "lf4_submode_active",
+    "forced_up_resolution",
+    "button_carriers",
+    "ls_to_dpad_routing"
+  ],
+  "required_analog_priority_classes": [
+    "table_output",
+    "direction_plus_a",
+    "lt5_or_rf11_low_magnitude_za",
+    "rf7_hard_up_b",
+    "rf9_null",
+    "nunchuk_override"
+  ],
+  "required_rejection_rules": [
+    "unknown_priority_classes"
+  ],
+  "expected_error_codes": [
+    "E_UNKNOWN_PRIORITY_CLASS"
+  ],
   "required_role_binding_sections": [
     "buttons",
     "directional",

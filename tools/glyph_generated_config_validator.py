@@ -92,6 +92,22 @@ REQUIRED_PRIORITY_KEYS = (
     "rf9_null",
     "nunchuk_override",
 )
+ALLOWED_DIGITAL_EFFECTIVE_DIRECTION_PRIORITY = (
+    "physical_inputs",
+    "layer_left_right",
+    "lf4_submode_active",
+    "forced_up_resolution",
+    "button_carriers",
+    "ls_to_dpad_routing",
+)
+ALLOWED_ANALOG_PRIORITY = (
+    "table_output",
+    "direction_plus_a",
+    "lt5_or_rf11_low_magnitude_za",
+    "rf7_hard_up_b",
+    "rf9_null",
+    "nunchuk_override",
+)
 REQUIRED_ROLE_BINDING_SECTIONS = (
     "buttons",
     "directional",
@@ -328,10 +344,24 @@ def _validate_priority_model(payload: dict[str, Any], issues: list[ValidationIss
     for key in REQUIRED_PRIORITY_KEYS:
         if key not in priority_model:
             _add(issues, "E_MISSING_PRIORITY_KEY", f"$.priority_model.{key}", "missing required priority key")
-    for key in ("digital_effective_direction", "analog"):
+    priority_lists = {
+        "digital_effective_direction": ALLOWED_DIGITAL_EFFECTIVE_DIRECTION_PRIORITY,
+        "analog": ALLOWED_ANALOG_PRIORITY,
+    }
+    for key, allowed_values in priority_lists.items():
         value = priority_model.get(key)
         if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
             _add(issues, "E_INVALID_PRIORITY_ORDER", f"$.priority_model.{key}", "must be a string list")
+            continue
+        allowed = set(allowed_values)
+        for index, item in enumerate(value):
+            if item not in allowed:
+                _add(
+                    issues,
+                    "E_UNKNOWN_PRIORITY_CLASS",
+                    f"$.priority_model.{key}[{index}]",
+                    f"unknown priority class {item!r}",
+                )
 
 
 def _validate_role_bindings(payload: dict[str, Any], issues: list[ValidationIssue]) -> None:
