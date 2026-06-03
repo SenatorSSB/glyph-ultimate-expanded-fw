@@ -165,14 +165,6 @@ def main() -> int:
             if not all(isinstance(op, dict) for op in mutation_ops):
                 fail(f"{case_id}.payload must be a list of mutation objects")
 
-            if case_id == "unknown_priority_class":
-                fail(
-                    "unknown_priority_class is a source-contract mismatch: "
-                    "the current validator only exposes malformed priority order rejection "
-                    "through E_INVALID_PRIORITY_ORDER and does not provide a distinct "
-                    "unknown priority-class issue code"
-                )
-
             mutated = apply_mutation(baseline, mutation_ops)
             issues = validate_generated_config(mutated)
             if not issues:

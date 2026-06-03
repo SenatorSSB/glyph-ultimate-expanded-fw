@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Any
 
 from glyph_generated_config_validator import (
+    ALLOWED_ANALOG_PRIORITY,
+    ALLOWED_DIGITAL_EFFECTIVE_DIRECTION_PRIORITY,
     CONTRACT_VERSION,
     DIRECTION_CONVENTION,
     HARDWARE_STATUS,
@@ -181,6 +183,22 @@ def validate_offline_validator_contract(contract: dict[str, Any]) -> None:
         fail("offline validator contract required_tables drifted from validator")
     if contract.get("required_priority_keys") != list(REQUIRED_PRIORITY_KEYS):
         fail("offline validator contract required_priority_keys drifted from validator")
+    if contract.get("required_digital_effective_direction_priority_classes") != list(
+        ALLOWED_DIGITAL_EFFECTIVE_DIRECTION_PRIORITY
+    ):
+        fail("offline validator contract required_digital_effective_direction_priority_classes drifted")
+    if contract.get("required_analog_priority_classes") != list(ALLOWED_ANALOG_PRIORITY):
+        fail("offline validator contract required_analog_priority_classes drifted")
+    require_superset(
+        require_string_list(contract, "required_rejection_rules"),
+        {"unknown_priority_classes"},
+        "offline validator contract required_rejection_rules",
+    )
+    require_superset(
+        require_string_list(contract, "expected_error_codes"),
+        {"E_UNKNOWN_PRIORITY_CLASS"},
+        "offline validator contract expected_error_codes",
+    )
     if contract.get("required_role_binding_sections") != list(REQUIRED_ROLE_BINDING_SECTIONS):
         fail("offline validator contract required_role_binding_sections drifted from validator")
     if contract.get("required_hard_overrides") != REQUIRED_HARD_OVERRIDES:

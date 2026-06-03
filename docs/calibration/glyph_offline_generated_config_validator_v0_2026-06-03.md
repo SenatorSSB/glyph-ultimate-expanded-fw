@@ -30,7 +30,9 @@ The reusable module exposes:
 - `validate_generated_config(payload: dict) -> list[ValidationIssue]`
 - `validate_generated_config_or_raise(payload: dict) -> None`
 
-The validator rejects malformed generated-config payloads with explicit issue codes. It checks the schema name, contract version, mode scope, source status, hardware status, nunchuk status, direction convention, source authority, exactly 25 required tables, nine points per table, non-boolean integer coordinates in `[0,255]`, required hard overrides, required priority keys, and bounded role binding metadata.
+The validator rejects malformed generated-config payloads with explicit issue codes. It checks the schema name, contract version, mode scope, source status, hardware status, nunchuk status, direction convention, source authority, exactly 25 required tables, nine points per table, non-boolean integer coordinates in `[0,255]`, required hard overrides, required priority keys, priority-list entries, and bounded role binding metadata.
+
+Priority lists must contain only the approved firmware-owned priority classes already represented by the committed generated-config prototype. Unknown priority classes are rejected with `E_UNKNOWN_PRIORITY_CLASS`. This is an offline tooling check only; it is not firmware source, not runtime-loaded config, not serial/device write behavior, and not hardware validation.
 
 Forbidden payload content includes firmware source patches, serial transport payloads, device write instructions, macro or turbo logic, timing or history logic, arbitrary script/code strings, phase-order mutation claims, hardware validation claims without an explicit result source, and nunchuk hardware validation claims without an explicit result source.
 

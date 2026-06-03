@@ -229,13 +229,13 @@
     },
     {
       "case_id": "unknown_priority_class",
-      "mutation": "replace a priority order list with a non-list value",
-      "expected_error_codes": ["E_INVALID_PRIORITY_ORDER"],
+      "mutation": "replace one priority order entry with an unknown priority class",
+      "expected_error_codes": ["E_UNKNOWN_PRIORITY_CLASS"],
       "payload": [
         {
           "op": "set",
-          "path": ["priority_model", "digital_effective_direction"],
-          "value": "priority_class_unknown"
+          "path": ["priority_model", "analog", 2],
+          "value": "unknown_priority_class"
         }
       ]
     },
