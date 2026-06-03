@@ -27,7 +27,7 @@
       "id": "lyseste_glyph_remapper_app",
       "kind": "external_app",
       "url": "https://lyseste.com/glyph-remapper/",
-      "inspection_status": "observed_hosted_shell_only",
+      "inspection_status": "live_hosted_app_not_required_by_checker",
       "authority_status": "non_authoritative_observation",
       "promoted_to_authority": false
     }
@@ -44,28 +44,28 @@
       "id": "profile_editing",
       "scope": "profile editing",
       "status": "observed_from_external_repo_docs",
-      "evidence": "public README and hosted shell expose profile editing labels",
+      "evidence": "public README and repo static UI files expose profile editing labels",
       "authority_status": "non_authoritative_observation"
     },
     {
       "id": "json_import_export",
       "scope": "JSON import/export",
       "status": "observed_from_external_repo_docs",
-      "evidence": "public README and hosted shell expose JSON config file import/export",
+      "evidence": "public README and repo static UI files expose JSON config file import/export",
       "authority_status": "non_authoritative_observation"
     },
     {
       "id": "rgb_color_palette",
       "scope": "RGB/color palette",
       "status": "observed_from_external_code",
-      "evidence": "hosted shell exposes button lighting, color swatch, saved color, and palette UI labels",
+      "evidence": "repo static UI files expose button lighting, color swatch, saved color, and palette UI labels",
       "authority_status": "non_authoritative_observation"
     },
     {
       "id": "socd_profile_management",
       "scope": "SOCD/profile management",
       "status": "observed_from_external_code",
-      "evidence": "hosted shell exposes profiles and SOCD pairs UI labels",
+      "evidence": "repo static UI files expose profiles and SOCD pairs UI labels",
       "authority_status": "non_authoritative_observation"
     },
     {

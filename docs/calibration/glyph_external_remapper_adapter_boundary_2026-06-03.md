@@ -20,11 +20,14 @@ does not validate hardware.
 - External repo URL: `https://github.com/lyseste/glyph-remapper`
 - External app URL: `https://lyseste.com/glyph-remapper/`
 
-The public repo was reachable through a non-copying Git ref probe and the
-GitHub metadata API during this branch. The hosted app shell was reachable by
-read-only fetch. These observations remain compatibility research notes only.
+The public repo was reachable through a non-copying Git ref probe and a
+temporary shallow read-only clone outside this repo during supervisor
+inspection. The hosted app URL is recorded as an external reference, but the
+checker does not require live app access and this branch does not treat the
+hosted app as source authority. These observations remain compatibility
+research notes only.
 
-Observed root file names from the GitHub metadata API:
+Observed root file names from the temporary shallow read-only clone:
 
 - `LICENSE`
 - `README.md`
@@ -38,10 +41,10 @@ Observed root file names from the GitHub metadata API:
 | Observation | Status | Notes |
 | --- | --- | --- |
 | browser configurator | observed_from_external_repo_docs | Public README describes a browser-based configurator. |
-| profile editing | observed_from_external_repo_docs | Public README and hosted shell expose profile editing labels. |
-| JSON import/export | observed_from_external_repo_docs | Public README and hosted shell expose JSON config file import/export. |
-| RGB/color palette | observed_from_external_code | Hosted shell exposes button lighting, color swatch, saved color, and palette UI labels. |
-| SOCD/profile management | observed_from_external_code | Hosted shell exposes profiles and SOCD pairs UI labels. |
+| profile editing | observed_from_external_repo_docs | Public README and repo static UI files expose profile editing labels. |
+| JSON import/export | observed_from_external_repo_docs | Public README and repo static UI files expose JSON config file import/export. |
+| RGB/color palette | observed_from_external_code | Repo static UI files expose button lighting, color swatch, saved color, and palette UI labels. |
+| SOCD/profile management | observed_from_external_code | Repo static UI files expose profiles and SOCD pairs UI labels. |
 | keyboard capture | observed_from_external_repo_docs | Public README describes keyboard capture behavior. |
 | WebSerial load/save claim | observed_from_external_repo_docs | Public README claims device load/save over WebSerial. This repo does not implement that behavior. |
 | custom profile/modifier support claim from public post | observed_from_public_post | User-provided task statement records the public-post claim; no public-post URL was supplied in this branch. |
