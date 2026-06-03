@@ -1,0 +1,136 @@
+{
+  "branch_under_test": "glyph/gfw2-generated-constants-refactor",
+  "cstick_suppression_status": "not_tested_user_accepted_risk",
+  "hardware_status": "hardware_result_with_user_accepted_risk",
+  "implementation_class": "generated_constants_firmware_refactor",
+  "merge_gate_interpretation": {
+    "future_cstick_behavior_changes_require_csup_test": true,
+    "generated_constants_refactor_hardware_gate": "satisfied_with_user_accepted_risk_for_csup_001",
+    "must_not_claim_full_cstick_suppression_validation": true,
+    "must_not_claim_nunchuk_hardware_validation": true
+  },
+  "nunchuk_status": "not_hardware_validated",
+  "profile_artifact_status": "no_regression_reported",
+  "result_date": "2026-06-03",
+  "result_version": 1,
+  "rows": [
+    {
+      "category": "boot",
+      "notes": "Reported pass.",
+      "row_id": "BOOT-001",
+      "status": "PASS"
+    },
+    {
+      "category": "identity_profile",
+      "notes": "Reported pass.",
+      "row_id": "PROFILE-001",
+      "status": "PASS"
+    },
+    {
+      "category": "default_table",
+      "notes": "Reported pass.",
+      "row_id": "DEFAULT-001",
+      "status": "PASS"
+    },
+    {
+      "category": "mode_default",
+      "notes": "Reported pass.",
+      "row_id": "MODE-001",
+      "status": "PASS"
+    },
+    {
+      "category": "x_modifiers",
+      "notes": "Reported pass.",
+      "row_id": "XMOD-001",
+      "status": "PASS"
+    },
+    {
+      "category": "y_modifiers",
+      "notes": "Reported pass.",
+      "row_id": "YMOD-001",
+      "status": "PASS"
+    },
+    {
+      "category": "tilt_modifiers",
+      "notes": "Reported pass.",
+      "row_id": "TILT-001",
+      "status": "PASS"
+    },
+    {
+      "category": "z_airdodge_low_magnitude",
+      "notes": "Reported pass.",
+      "row_id": "ZAIR-001",
+      "status": "PASS"
+    },
+    {
+      "category": "hard_up_b",
+      "notes": "Reported pass.",
+      "row_id": "UPB-001",
+      "status": "PASS"
+    },
+    {
+      "category": "null_override",
+      "notes": "Reported pass.",
+      "row_id": "NULL-001",
+      "status": "PASS"
+    },
+    {
+      "category": "ls_to_dpad",
+      "notes": "Reported pass.",
+      "row_id": "DPA-001",
+      "status": "PASS"
+    },
+    {
+      "category": "pure_layer",
+      "notes": "Reported pass.",
+      "row_id": "LAYER-001",
+      "status": "PASS"
+    },
+    {
+      "category": "lf4_submode",
+      "notes": "Reported pass.",
+      "row_id": "LF4-001",
+      "status": "PASS"
+    },
+    {
+      "category": "cstick_suppression",
+      "notes": "Not independently hardware-tested in this run. User accepted risk for this behavior-preserving generated constants refactor; this is not hardware evidence.",
+      "row_id": "CSUP-001",
+      "status": "NOT_TESTED_USER_ACCEPTED_RISK"
+    },
+    {
+      "category": "direction_plus_a",
+      "notes": "Reported pass.",
+      "row_id": "DA-001",
+      "status": "PASS"
+    },
+    {
+      "category": "right_stick",
+      "notes": "Reported pass.",
+      "row_id": "RS-001",
+      "status": "PASS"
+    },
+    {
+      "category": "system_buttons",
+      "notes": "Reported pass.",
+      "row_id": "SYS-001",
+      "status": "PASS"
+    },
+    {
+      "category": "profile_regression",
+      "notes": "Reported pass; no profile artifact regression reported.",
+      "row_id": "PROFREG-001",
+      "status": "PASS"
+    },
+    {
+      "category": "nunchuk_scope",
+      "notes": "Not tested. No nunchuk hardware validation is claimed.",
+      "row_id": "NUNCHUK-001",
+      "status": "NOT_TESTED"
+    }
+  ],
+  "runtime_loaded_config_status": "not_implemented_not_validated",
+  "schema_name": "glyph_generated_constants_refactor_hardware_result",
+  "serial_device_write_status": "not_implemented_not_validated",
+  "source_matrix": "docs/calibration/glyph_generated_constants_refactor_hardware_test_matrix_2026-05-28.md"
+}

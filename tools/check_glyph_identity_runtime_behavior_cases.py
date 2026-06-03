@@ -8,6 +8,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from extract_glyph_identity_runtime_tables import load_source_text_with_generated_tables
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOC_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_identity_runtime_behavior_cases_2026-05-28.md"
@@ -271,6 +273,8 @@ def fail(message: str) -> None:
 def read_text(path: Path) -> str:
     if not path.exists():
         fail(f"missing file: {display(path)}")
+    if path.resolve() == SOURCE_PATH.resolve():
+        return load_source_text_with_generated_tables(path)
     return path.read_text(encoding="utf-8")
 
 

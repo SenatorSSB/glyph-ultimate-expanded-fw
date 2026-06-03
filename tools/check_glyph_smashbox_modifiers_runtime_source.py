@@ -7,6 +7,8 @@ import json
 import re
 from pathlib import Path
 
+from extract_glyph_identity_runtime_tables import load_source_text_with_generated_tables
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
@@ -642,7 +644,7 @@ def main() -> int:
         print(f"failure=missing_source:{SOURCE_PATH.relative_to(REPO_ROOT)}")
         return 1
 
-    source = SOURCE_PATH.read_text(encoding="utf-8")
+    source = load_source_text_with_generated_tables(SOURCE_PATH)
 
     try:
         block = extract_marker_block(source)

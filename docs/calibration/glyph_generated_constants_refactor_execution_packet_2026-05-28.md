@@ -161,6 +161,12 @@ A future generated constants firmware refactor must not be merged until:
 
 This packet does not execute the hardware matrix and is not a hardware result.
 
+For branch `glyph/gfw2-generated-constants-refactor`, a later branch-specific
+result is recorded in
+`docs/calibration/glyph_generated_constants_refactor_hardware_result_2026-06-03.md`.
+This execution packet remains the template/source boundary and is not itself a
+hardware result.
+
 ## Required rollback plan
 
 Before future firmware source edits:

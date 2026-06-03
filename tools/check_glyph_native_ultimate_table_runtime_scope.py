@@ -6,6 +6,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from extract_glyph_identity_runtime_tables import load_source_text_with_generated_tables
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ULTIMATE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
@@ -567,7 +569,7 @@ def ensure_no_forbidden_tokens(source: str) -> None:
 
 def main() -> int:
     try:
-        source = ULTIMATE_PATH.read_text(encoding="utf-8")
+        source = load_source_text_with_generated_tables(ULTIMATE_PATH)
         block = extract_marker_block(source)
 
         ensure_required_shapes(source, block)

@@ -7,6 +7,8 @@ import json
 import re
 from pathlib import Path
 
+from extract_glyph_identity_runtime_tables import load_source_text_with_generated_tables
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ARTIFACT_PATH = REPO_ROOT / "docs" / "calibration" / "artifacts" / "glyph_ultimate_mvp_lt3_active_config_PROFILE.json"
@@ -398,7 +400,7 @@ def require_runtime_doc() -> str:
 def require_runtime_source() -> str:
     if not SOURCE_PATH.exists():
         fail(f"missing runtime source: {SOURCE_PATH.relative_to(REPO_ROOT)}")
-    text = SOURCE_PATH.read_text(encoding="utf-8")
+    text = load_source_text_with_generated_tables(SOURCE_PATH)
 
     for helper_name in (
         "struct LayerState",

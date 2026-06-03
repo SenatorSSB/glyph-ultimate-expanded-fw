@@ -16,6 +16,14 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
+GENERATED_LIKE_TABLES_INCLUDE = '#include "modes/UltimateIdentityRuntimeTables.hpp"'
+GENERATED_LIKE_TABLES_PATH = REPO_ROOT / "src" / "modes" / "UltimateIdentityRuntimeTables.hpp"
+REQUIRED_GENERATED_LIKE_TABLES_CAVEATS = (
+    "Generated-like identity runtime table constants.",
+    "Source-owned firmware constants, not runtime-loaded config.",
+    "Do not treat this as serial/device write behavior.",
+    "Values must remain source-synced with the generated-config/tooling checks.",
+)
 
 TABLE_SYMBOL_TO_NAME: tuple[tuple[str, str], ...] = (
     ("kDefaultTable", "Default"),
@@ -130,8 +138,32 @@ def extract_tables_from_source(source_text: str) -> dict[str, tuple[tuple[int, i
     return {name: parsed_symbols[symbol] for symbol, name in TABLE_SYMBOL_TO_NAME}
 
 
+def _validate_generated_like_tables_caveats(include_text: str) -> None:
+    for caveat in REQUIRED_GENERATED_LIKE_TABLES_CAVEATS:
+        if caveat not in include_text:
+            raise TableExtractionError(f"generated-like tables include missing caveat: {caveat}")
+
+
+def load_source_text_with_generated_tables(path: Path = DEFAULT_SOURCE_PATH) -> str:
+    source_text = path.read_text(encoding="utf-8")
+    if path.resolve() != DEFAULT_SOURCE_PATH.resolve():
+        return source_text
+
+    include_count = source_text.count(GENERATED_LIKE_TABLES_INCLUDE)
+    if include_count > 1:
+        raise TableExtractionError(
+            f"generated-like tables include appears {include_count} times in {_relative_path(path)}"
+        )
+    if include_count == 0:
+        return source_text
+
+    include_text = GENERATED_LIKE_TABLES_PATH.read_text(encoding="utf-8")
+    _validate_generated_like_tables_caveats(include_text)
+    return source_text.replace(GENERATED_LIKE_TABLES_INCLUDE, include_text, 1)
+
+
 def load_source_tables(path: Path = DEFAULT_SOURCE_PATH) -> dict[str, tuple[tuple[int, int], ...]]:
-    return extract_tables_from_source(path.read_text(encoding="utf-8"))
+    return extract_tables_from_source(load_source_text_with_generated_tables(path))
 
 
 def build_json_payload(path: Path, tables: dict[str, tuple[tuple[int, int], ...]]) -> dict[str, object]:
