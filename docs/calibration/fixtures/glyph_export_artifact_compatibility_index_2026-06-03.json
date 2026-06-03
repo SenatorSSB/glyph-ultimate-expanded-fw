@@ -1,0 +1,99 @@
+{
+  "schema_name": "glyph_export_artifact_compatibility_index",
+  "index_version": 1,
+  "status": "docs_tools_compatibility_index",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "artifact_nodes": {
+    "generated_config_prototype": {
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_identity_runtime_generated_config_prototype",
+      "status": "source_backed_prototype_not_runtime_loaded"
+    },
+    "generated_config_contract": {
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_identity_runtime_generated_config_contract",
+      "status": "docs_tools_contract_not_runtime_loaded"
+    },
+    "runtime_config_candidate_sample": {
+      "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_runtime_config_candidate",
+      "status": "candidate_docs_only_not_runtime_loaded"
+    },
+    "runtime_config_candidate_validator_contract": {
+      "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_validator_contract_v0_2026-06-03.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_runtime_config_candidate_validator_contract",
+      "status": "offline_validator_contract_not_runtime_loaded"
+    },
+    "senscope_export_package_sample": {
+      "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_senscope_export_package",
+      "status": "sample_docs_only_not_implemented"
+    },
+    "senscope_export_contract": {
+      "path": "docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_senscope_to_glyph_export_contract_draft",
+      "status": "draft_docs_only_not_implemented"
+    },
+    "runtime_config_validation_report": {
+      "path": "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_runtime_config_validation_report",
+      "status": "docs_tools_validation_report"
+    },
+    "behavior_cases": {
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
+      "kind": "json_fixture",
+      "schema_name": "glyph_identity_runtime_behavior_cases",
+      "status": "representative_cases_docs_tools_only"
+    },
+    "behavior_evaluator": {
+      "path": "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
+      "kind": "checker",
+      "status": "tools_docs_only_validation_path"
+    },
+    "generated_cpp_review_artifact": {
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt",
+      "kind": "review_artifact",
+      "status": "docs_tools_review_only_not_firmware_source"
+    }
+  },
+  "required_invariants": [
+    "generated-config tables equal runtime-candidate tables",
+    "generated-config role bindings equal runtime-candidate role bindings",
+    "generated-config hard overrides equal runtime-candidate hard overrides",
+    "generated-config priority lists equal runtime-candidate priority references",
+    "generated-config suppression rules equal runtime-candidate suppression rules",
+    "Senscope export nested generated config equals committed generated-config prototype",
+    "validation report summarizes the committed runtime-candidate sample",
+    "runtime-candidate validation report table count equals generated-config table count",
+    "generated-config-backed evaluator path still validates behavior cases",
+    "all artifacts preserve hardware and nunchuk caveats"
+  ],
+  "doc_caveats": [
+    "not firmware source",
+    "not runtime-loaded config",
+    "not serial/device write behavior",
+    "not hardware validation",
+    "not nunchuk hardware validation"
+  ],
+  "source_authority": {
+    "index_doc": "docs/calibration/glyph_export_artifact_compatibility_index_2026-06-03.md",
+    "generated_config_evaluator_input_doc": "docs/calibration/glyph_identity_runtime_generated_config_evaluator_input_2026-05-28.md",
+    "generated_cpp_diff_artifact_doc": "docs/calibration/glyph_identity_runtime_generated_cpp_diff_artifact_2026-05-28.md",
+    "runtime_config_candidate_validator_doc": "docs/calibration/glyph_runtime_config_candidate_validator_v0_2026-06-03.md",
+    "senscope_export_package_validator_doc": "docs/calibration/glyph_senscope_export_package_validator_draft_2026-06-03.md",
+    "runtime_config_validation_report_doc": "docs/calibration/glyph_runtime_config_validation_report_2026-06-03.md",
+    "generated_cpp_diff_artifact_checker": "tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py",
+    "runtime_config_validation_report_checker": "tools/check_glyph_runtime_config_validation_report.py",
+    "runtime_config_candidate_validator_checker": "tools/check_glyph_runtime_config_candidate_validator.py",
+    "senscope_export_package_validator_checker": "tools/check_glyph_senscope_export_package_validator.py"
+  }
+}
