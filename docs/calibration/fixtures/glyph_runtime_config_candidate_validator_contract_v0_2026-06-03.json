@@ -1,0 +1,165 @@
+{
+  "schema_name": "glyph_runtime_config_candidate_validator_contract",
+  "contract_version": 1,
+  "target_schema_name": "glyph_runtime_config_candidate",
+  "target_candidate_version": 1,
+  "status": "offline_validator_contract_not_runtime_loaded",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "validator_tool": "tools/glyph_runtime_config_candidate_validator.py",
+  "checker_tool": "tools/check_glyph_runtime_config_candidate_validator.py",
+  "sample_candidate": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+  "generated_config_contract": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+  "runtime_validation_contract": "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json",
+  "required_top_level_fields": [
+    "schema_name",
+    "candidate_version",
+    "status",
+    "mode_scope",
+    "hardware_status",
+    "nunchuk_status",
+    "source_authority",
+    "generated_config_contract",
+    "runtime_validation_contract",
+    "tables",
+    "role_bindings",
+    "priority_references",
+    "hard_overrides",
+    "suppression_rules",
+    "metadata",
+    "non_goals"
+  ],
+  "required_tables": [
+    "Default",
+    "ModeDefault",
+    "X1",
+    "X2",
+    "MX1",
+    "MX2",
+    "Y1",
+    "MY1",
+    "LayerNormalX",
+    "MLayerNormalX",
+    "LayerFlipper",
+    "MLayerFlipper",
+    "Y1Tilt1",
+    "MY1Tilt1",
+    "Y1LayerFlipper",
+    "MY1LayerFlipper",
+    "Y1LayerNormalX",
+    "MY1LayerNormalX",
+    "Tilt1",
+    "Tilt2",
+    "Tilt3",
+    "MTilt1",
+    "MTilt2",
+    "MTilt3",
+    "Lt1LowMagnitude"
+  ],
+  "required_role_binding_sections": [
+    "buttons",
+    "directional",
+    "c_stick",
+    "modifiers",
+    "special_functions"
+  ],
+  "approved_priority_classes": {
+    "digital": [
+      "physical_inputs",
+      "layer_left_right",
+      "lf4_submode_active",
+      "forced_up_resolution",
+      "button_carriers",
+      "ls_to_dpad_routing"
+    ],
+    "analog": [
+      "table_output",
+      "direction_plus_a",
+      "lt5_or_rf11_low_magnitude_za",
+      "rf7_hard_up_b",
+      "rf9_null",
+      "nunchuk_override"
+    ]
+  },
+  "accepted_data_classes": [
+    "ButtonOutput",
+    "DirectionContribution",
+    "CStickContribution",
+    "TableModifier",
+    "CompositeModifier",
+    "LayerOverride",
+    "SubmodeOverride",
+    "HardAnalogOverride",
+    "LowMagnitudeOverride",
+    "NullAnalogOverride",
+    "LsToDpad",
+    "SuppressionRule",
+    "ForcedDirection",
+    "RoleOverride"
+  ],
+  "required_hard_overrides": {
+    "rf7_hard_up_b": {
+      "left": [
+        77,
+        172
+      ],
+      "center": [
+        128,
+        172
+      ],
+      "right": [
+        179,
+        172
+      ]
+    },
+    "rf9_null": [
+      128,
+      128
+    ],
+    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude"
+  },
+  "required_non_goals": [
+    "not_firmware_source",
+    "not_runtime_loaded",
+    "not_serial_device_write",
+    "not_hardware_validation",
+    "not_nunchuk_hardware_validation",
+    "not_senscope_game_semantics",
+    "does_not_change_table_values_or_behavior"
+  ],
+  "forbidden_payload_content": [
+    "firmware_source_patches",
+    "serial_transport_payloads",
+    "device_write_instructions",
+    "macros",
+    "turbo",
+    "timing_automation",
+    "one_shot_toggle_history_dependent_logic",
+    "runtime_loaded_config_implementation_claims",
+    "phase_order_mutation",
+    "hardware_validation_claims_without_hardware_result_source",
+    "nunchuk_hardware_validation_claims_without_hardware_result_source"
+  ],
+  "checker_output_required_lines": [
+    "glyph_runtime_config_candidate_validator",
+    "status=PASS",
+    "validated_schema=glyph_runtime_config_candidate",
+    "table_count=25",
+    "hardware_status=not_new_hardware_result"
+  ],
+  "source_authority": {
+    "generated_config_prototype_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "generated_config_contract_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+    "runtime_validation_contract_fixture": "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json"
+  },
+  "non_goals": [
+    "not_firmware_source",
+    "not_runtime_loaded",
+    "not_serial_device_write",
+    "not_hardware_validation",
+    "not_nunchuk_hardware_validation",
+    "not_senscope_game_semantics",
+    "does_not_change_table_values_or_behavior"
+  ]
+}

@@ -1,0 +1,1144 @@
+{
+  "schema_name": "glyph_runtime_config_candidate",
+  "candidate_version": 1,
+  "status": "candidate_docs_only_not_runtime_loaded",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "source_authority": {
+    "generated_config_prototype_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "generated_config_contract_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+    "runtime_validation_contract_fixture": "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json"
+  },
+  "generated_config_contract": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+  "runtime_validation_contract": "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json",
+  "tables": {
+    "Default": [
+      [
+        61,
+        51
+      ],
+      [
+        128,
+        51
+      ],
+      [
+        195,
+        51
+      ],
+      [
+        61,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        195,
+        128
+      ],
+      [
+        61,
+        205
+      ],
+      [
+        128,
+        205
+      ],
+      [
+        195,
+        205
+      ]
+    ],
+    "LayerFlipper": [
+      [
+        169,
+        51
+      ],
+      [
+        128,
+        51
+      ],
+      [
+        87,
+        51
+      ],
+      [
+        169,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        169,
+        205
+      ],
+      [
+        128,
+        205
+      ],
+      [
+        87,
+        205
+      ]
+    ],
+    "LayerNormalX": [
+      [
+        87,
+        51
+      ],
+      [
+        128,
+        51
+      ],
+      [
+        169,
+        51
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        169,
+        128
+      ],
+      [
+        87,
+        205
+      ],
+      [
+        128,
+        205
+      ],
+      [
+        169,
+        205
+      ]
+    ],
+    "Lt1LowMagnitude": [
+      [
+        89,
+        89
+      ],
+      [
+        128,
+        79
+      ],
+      [
+        167,
+        89
+      ],
+      [
+        79,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        177,
+        128
+      ],
+      [
+        89,
+        167
+      ],
+      [
+        128,
+        177
+      ],
+      [
+        167,
+        167
+      ]
+    ],
+    "MLayerFlipper": [
+      [
+        169,
+        87
+      ],
+      [
+        128,
+        87
+      ],
+      [
+        87,
+        87
+      ],
+      [
+        169,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        87,
+        169
+      ],
+      [
+        169,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        87,
+        169
+      ]
+    ],
+    "MLayerNormalX": [
+      [
+        87,
+        87
+      ],
+      [
+        128,
+        87
+      ],
+      [
+        169,
+        87
+      ],
+      [
+        87,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        169,
+        169
+      ],
+      [
+        87,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        169,
+        169
+      ]
+    ],
+    "MTilt1": [
+      [
+        169,
+        88
+      ],
+      [
+        128,
+        88
+      ],
+      [
+        87,
+        88
+      ],
+      [
+        169,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        87,
+        169
+      ],
+      [
+        169,
+        168
+      ],
+      [
+        128,
+        168
+      ],
+      [
+        87,
+        168
+      ]
+    ],
+    "MTilt2": [
+      [
+        96,
+        82
+      ],
+      [
+        128,
+        82
+      ],
+      [
+        160,
+        82
+      ],
+      [
+        96,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        160,
+        169
+      ],
+      [
+        96,
+        174
+      ],
+      [
+        128,
+        174
+      ],
+      [
+        160,
+        174
+      ]
+    ],
+    "MTilt3": [
+      [
+        96,
+        86
+      ],
+      [
+        128,
+        86
+      ],
+      [
+        160,
+        86
+      ],
+      [
+        96,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        160,
+        169
+      ],
+      [
+        96,
+        170
+      ],
+      [
+        128,
+        170
+      ],
+      [
+        160,
+        170
+      ]
+    ],
+    "MX1": [
+      [
+        78,
+        87
+      ],
+      [
+        128,
+        87
+      ],
+      [
+        178,
+        87
+      ],
+      [
+        78,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        178,
+        169
+      ],
+      [
+        78,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        178,
+        169
+      ]
+    ],
+    "MX2": [
+      [
+        65,
+        87
+      ],
+      [
+        128,
+        87
+      ],
+      [
+        191,
+        87
+      ],
+      [
+        65,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        191,
+        169
+      ],
+      [
+        65,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        191,
+        169
+      ]
+    ],
+    "MY1": [
+      [
+        14,
+        179
+      ],
+      [
+        128,
+        179
+      ],
+      [
+        242,
+        179
+      ],
+      [
+        14,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        242,
+        169
+      ],
+      [
+        14,
+        77
+      ],
+      [
+        128,
+        77
+      ],
+      [
+        242,
+        77
+      ]
+    ],
+    "MY1LayerFlipper": [
+      [
+        169,
+        179
+      ],
+      [
+        128,
+        179
+      ],
+      [
+        87,
+        179
+      ],
+      [
+        169,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        87,
+        169
+      ],
+      [
+        169,
+        77
+      ],
+      [
+        128,
+        77
+      ],
+      [
+        87,
+        77
+      ]
+    ],
+    "MY1LayerNormalX": [
+      [
+        87,
+        179
+      ],
+      [
+        128,
+        179
+      ],
+      [
+        169,
+        179
+      ],
+      [
+        87,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        169,
+        169
+      ],
+      [
+        87,
+        77
+      ],
+      [
+        128,
+        77
+      ],
+      [
+        169,
+        77
+      ]
+    ],
+    "MY1Tilt1": [
+      [
+        169,
+        179
+      ],
+      [
+        128,
+        179
+      ],
+      [
+        87,
+        179
+      ],
+      [
+        169,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        87,
+        169
+      ],
+      [
+        169,
+        77
+      ],
+      [
+        128,
+        77
+      ],
+      [
+        87,
+        77
+      ]
+    ],
+    "ModeDefault": [
+      [
+        14,
+        87
+      ],
+      [
+        128,
+        87
+      ],
+      [
+        242,
+        87
+      ],
+      [
+        14,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        242,
+        169
+      ],
+      [
+        14,
+        169
+      ],
+      [
+        128,
+        169
+      ],
+      [
+        242,
+        169
+      ]
+    ],
+    "Tilt1": [
+      [
+        187,
+        47
+      ],
+      [
+        128,
+        47
+      ],
+      [
+        69,
+        47
+      ],
+      [
+        187,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        69,
+        128
+      ],
+      [
+        187,
+        209
+      ],
+      [
+        128,
+        209
+      ],
+      [
+        69,
+        209
+      ]
+    ],
+    "Tilt2": [
+      [
+        88,
+        79
+      ],
+      [
+        128,
+        79
+      ],
+      [
+        168,
+        79
+      ],
+      [
+        88,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        168,
+        128
+      ],
+      [
+        88,
+        177
+      ],
+      [
+        128,
+        177
+      ],
+      [
+        168,
+        177
+      ]
+    ],
+    "Tilt3": [
+      [
+        75,
+        86
+      ],
+      [
+        128,
+        86
+      ],
+      [
+        181,
+        86
+      ],
+      [
+        75,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        181,
+        128
+      ],
+      [
+        75,
+        170
+      ],
+      [
+        128,
+        170
+      ],
+      [
+        181,
+        170
+      ]
+    ],
+    "X1": [
+      [
+        93,
+        51
+      ],
+      [
+        128,
+        51
+      ],
+      [
+        163,
+        51
+      ],
+      [
+        93,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        163,
+        128
+      ],
+      [
+        93,
+        205
+      ],
+      [
+        128,
+        205
+      ],
+      [
+        163,
+        205
+      ]
+    ],
+    "X2": [
+      [
+        82,
+        51
+      ],
+      [
+        128,
+        51
+      ],
+      [
+        174,
+        51
+      ],
+      [
+        82,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        174,
+        128
+      ],
+      [
+        82,
+        205
+      ],
+      [
+        128,
+        205
+      ],
+      [
+        174,
+        205
+      ]
+    ],
+    "Y1": [
+      [
+        61,
+        99
+      ],
+      [
+        128,
+        99
+      ],
+      [
+        195,
+        99
+      ],
+      [
+        61,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        195,
+        128
+      ],
+      [
+        61,
+        157
+      ],
+      [
+        128,
+        157
+      ],
+      [
+        195,
+        157
+      ]
+    ],
+    "Y1LayerFlipper": [
+      [
+        169,
+        99
+      ],
+      [
+        128,
+        99
+      ],
+      [
+        87,
+        99
+      ],
+      [
+        169,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        169,
+        157
+      ],
+      [
+        128,
+        157
+      ],
+      [
+        87,
+        157
+      ]
+    ],
+    "Y1LayerNormalX": [
+      [
+        87,
+        99
+      ],
+      [
+        128,
+        99
+      ],
+      [
+        169,
+        99
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        169,
+        128
+      ],
+      [
+        87,
+        157
+      ],
+      [
+        128,
+        157
+      ],
+      [
+        169,
+        157
+      ]
+    ],
+    "Y1Tilt1": [
+      [
+        169,
+        99
+      ],
+      [
+        128,
+        99
+      ],
+      [
+        87,
+        99
+      ],
+      [
+        169,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        169,
+        157
+      ],
+      [
+        128,
+        157
+      ],
+      [
+        87,
+        157
+      ]
+    ]
+  },
+  "role_bindings": {
+    "buttons": {
+      "LT3": "L",
+      "LT5": "Z",
+      "MB4": "Capture",
+      "MB5": "Home",
+      "MB6": "Select/Minus",
+      "MB7": "Start/Plus",
+      "RF1": "A",
+      "RF10": "Y",
+      "RF11": "Z",
+      "RF16": "R",
+      "RF2": "X",
+      "RF5": "B",
+      "RT1": "Z"
+    },
+    "c_stick": {
+      "RT2": "C-Down",
+      "RT3": "C-Left",
+      "RT4": "C-Right",
+      "RT5": "C-Up"
+    },
+    "directional": {
+      "LF1": "Right",
+      "LF2": "Up",
+      "LF3": "Left",
+      "LF5": "Down",
+      "RF12": "DirectionPlusA",
+      "RF15": "DirectionPlusA",
+      "RF6": "ForcedUp"
+    },
+    "modifiers": {
+      "LT1": "X2",
+      "LT2": "Y1",
+      "LT4": "X1",
+      "RF13": "LS->DPad",
+      "RF3": "Tilt1",
+      "RF4": "Tilt2",
+      "RF7": "HardUpB",
+      "RF8": "Mode",
+      "RF9": "Null"
+    },
+    "special_functions": {
+      "LF4": "BAndLayerSubMode",
+      "LT6": "DownA",
+      "RF13+RF7": "DPadRoutingAndHardUpBAllowed"
+    }
+  },
+  "priority_references": {
+    "digital": [
+      "physical_inputs",
+      "layer_left_right",
+      "lf4_submode_active",
+      "forced_up_resolution",
+      "button_carriers",
+      "ls_to_dpad_routing"
+    ],
+    "analog": [
+      "table_output",
+      "direction_plus_a",
+      "lt5_or_rf11_low_magnitude_za",
+      "rf7_hard_up_b",
+      "rf9_null",
+      "nunchuk_override"
+    ]
+  },
+  "hard_overrides": {
+    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude",
+    "rf7_hard_up_b": {
+      "center": [
+        128,
+        172
+      ],
+      "left": [
+        77,
+        172
+      ],
+      "right": [
+        179,
+        172
+      ]
+    },
+    "rf9_null": [
+      128,
+      128
+    ]
+  },
+  "suppression_rules": [
+    "LT2 suppressed by LF4",
+    "RF2_x suppressed in LF4 submode when any C-stick active (RT2/3/4/5)",
+    "RF2 forced-up in pure layer does not apply when LF4 submode active",
+    "RF4 flipper active with layered role checks",
+    "RF3 and RF4 become Tilt3 only outside layer/submode"
+  ],
+  "metadata": {
+    "derivation": "derived_from_committed_generated_config_prototype_fixture",
+    "direction_convention": "numpad",
+    "table_source_symbols": {
+      "Default": "kDefaultTable",
+      "LayerFlipper": "kLayerFlipperTable",
+      "LayerNormalX": "kLayerNormalXTable",
+      "Lt1LowMagnitude": "kLt1LowMagnitudeTable",
+      "MLayerFlipper": "kMLayerFlipperTable",
+      "MLayerNormalX": "kMLayerNormalXTable",
+      "MTilt1": "kMTilt1Table",
+      "MTilt2": "kMTilt2Table",
+      "MTilt3": "kMTilt3Table",
+      "MX1": "kMX1Table",
+      "MX2": "kMX2Table",
+      "MY1": "kMY1Table",
+      "MY1LayerFlipper": "kMY1LayerFlipperTable",
+      "MY1LayerNormalX": "kMY1LayerNormalXTable",
+      "MY1Tilt1": "kMY1Tilt1Table",
+      "ModeDefault": "kModeDefaultTable",
+      "Tilt1": "kTilt1Table",
+      "Tilt2": "kTilt2Table",
+      "Tilt3": "kTilt3Table",
+      "X1": "kX1Table",
+      "X2": "kX2Table",
+      "Y1": "kY1Table",
+      "Y1LayerFlipper": "kY1LayerFlipperTable",
+      "Y1LayerNormalX": "kY1LayerNormalXTable",
+      "Y1Tilt1": "kY1Tilt1Table"
+    },
+    "coverage_metadata": {
+      "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
+      "case_count": 118,
+      "categories": [
+        "base_direction",
+        "c_stick_suppression",
+        "composite_table",
+        "default_analog_table",
+        "digital_button_carrier",
+        "direction_plus_a_override",
+        "lf4_sub_mode",
+        "mode_default_analog_table",
+        "mode_modifier_table_selection",
+        "multi_modifier_fallback",
+        "nunchuk_source_preservation",
+        "pure_layer",
+        "rf13_ls_to_dpad",
+        "rf7_hard_up_b",
+        "rf9_null_override",
+        "right_stick_c_stick",
+        "single_modifier_table_selection",
+        "z_airdodge_low_magnitude_override"
+      ],
+      "category_count": 18,
+      "hardware_status": "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results"
+    },
+    "accepted_data_classes": [
+      "ButtonOutput",
+      "DirectionContribution",
+      "CStickContribution",
+      "TableModifier",
+      "CompositeModifier",
+      "LayerOverride",
+      "SubmodeOverride",
+      "HardAnalogOverride",
+      "LowMagnitudeOverride",
+      "NullAnalogOverride",
+      "LsToDpad",
+      "SuppressionRule",
+      "ForcedDirection",
+      "RoleOverride"
+    ],
+    "role_bindings_status": "bounded_metadata_only"
+  },
+  "non_goals": [
+    "not_firmware_source",
+    "not_runtime_loaded",
+    "not_serial_device_write",
+    "not_hardware_validation",
+    "not_nunchuk_hardware_validation",
+    "not_senscope_game_semantics",
+    "does_not_change_table_values_or_behavior"
+  ]
+}
