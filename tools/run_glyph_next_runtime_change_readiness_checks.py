@@ -145,6 +145,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_export_artifact_round_trip.py",
         ),
         step(
+            "export artifact canonical snapshots",
+            "tools/check_glyph_export_artifact_snapshots.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),

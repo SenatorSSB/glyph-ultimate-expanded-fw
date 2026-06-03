@@ -1,0 +1,82 @@
+{
+  "artifacts": {
+    "behavior_cases_fixture": {
+      "hardware_status": "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results",
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
+      "sha256": "206971b6ef0caa90bd74e5f90e678f1d4acfee699ae1900b227bb3f38ce0a32a",
+      "status": "source_backed_expected_behavior_cases",
+      "summary": {
+        "case_count": 118,
+        "category_count": 18
+      }
+    },
+    "generated_config_prototype": {
+      "hardware_status": "not_new_hardware_result",
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+      "sha256": "658588f0ad5a572e8c69949cfbcdfb9fd1e04e73a191d0e03615211c015033b9",
+      "status": "source_backed_prototype_not_runtime_loaded",
+      "summary": {
+        "coverage_case_count": 118,
+        "coverage_category_count": 18,
+        "table_count": 25
+      }
+    },
+    "generated_cpp_table_artifact": {
+      "hardware_status": "not_new_hardware_result",
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt",
+      "sha256": "c604b86e61c1277ba47c9270534877a3e6a3ca343d1abcb1c847e4dd836f4431",
+      "status": "docs_tools_review_only_not_firmware_source",
+      "summary": {
+        "line_count": 349,
+        "table_declaration_count": 25
+      }
+    },
+    "runtime_config_candidate_sample": {
+      "hardware_status": "not_new_hardware_result",
+      "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "sha256": "4b224f15c93e3db6917ed226e2ae3013ddd2edfdec8582ff9a0a137c6b6ab1d0",
+      "status": "candidate_docs_only_not_runtime_loaded",
+      "summary": {
+        "non_goal_count": 7,
+        "priority_reference_count": 2,
+        "table_count": 25
+      }
+    },
+    "runtime_config_validation_report": {
+      "hardware_status": "not_new_hardware_result",
+      "path": "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json",
+      "sha256": "11c60de98075490d11089967a9820555952e83945f53c19efdf801e8ea8055f2",
+      "status": "docs_tools_validation_report",
+      "summary": {
+        "generated_config_invalid_corpus_case_count": 24,
+        "regenerated_report_sha256": "11c60de98075490d11089967a9820555952e83945f53c19efdf801e8ea8055f2",
+        "reported_invalid_corpus_case_count": 26,
+        "required_non_goal_count": 7,
+        "runtime_candidate_invalid_corpus_case_count": 26,
+        "table_count": 25
+      }
+    },
+    "senscope_export_package_sample": {
+      "hardware_status": "not_new_hardware_result",
+      "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+      "sha256": "2f7d8550ea2cc489b315a26ac4e73ca61505b133032bb0eaa59840e49d40c0c6",
+      "status": "sample_docs_only_not_implemented",
+      "summary": {
+        "nested_behavior_case_count": 118,
+        "nested_generated_config_table_count": 25,
+        "neutral_profile_field_count": 4
+      }
+    }
+  },
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "schema_name": "glyph_export_artifact_snapshots",
+  "snapshot_version": 1,
+  "source_authority": {
+    "generated_cpp_artifact_checker": "tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py",
+    "round_trip_checker": "tools/check_glyph_export_artifact_round_trip.py",
+    "snapshot_doc": "docs/calibration/glyph_export_artifact_canonical_snapshots_2026-06-03.md",
+    "validation_report_generator": "tools/generate_glyph_runtime_config_validation_report.py"
+  },
+  "status": "docs_tools_canonical_snapshots"
+}
