@@ -349,19 +349,29 @@ def _validate_priority_model(payload: dict[str, Any], issues: list[ValidationIss
         "analog": ALLOWED_ANALOG_PRIORITY,
     }
     for key, allowed_values in priority_lists.items():
-        value = priority_model.get(key)
-        if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
-            _add(issues, "E_INVALID_PRIORITY_ORDER", f"$.priority_model.{key}", "must be a string list")
-            continue
-        allowed = set(allowed_values)
-        for index, item in enumerate(value):
-            if item not in allowed:
-                _add(
-                    issues,
-                    "E_UNKNOWN_PRIORITY_CLASS",
-                    f"$.priority_model.{key}[{index}]",
-                    f"unknown priority class {item!r}",
-                )
+        _validate_priority_order_entries(priority_model, key, allowed_values, issues)
+
+
+def _validate_priority_order_entries(
+    priority_model: dict[str, Any],
+    key: str,
+    allowed_values: tuple[str, ...],
+    issues: list[ValidationIssue],
+) -> None:
+    value = priority_model.get(key)
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        _add(issues, "E_INVALID_PRIORITY_ORDER", f"$.priority_model.{key}", "must be a string list")
+        return
+
+    allowed = set(allowed_values)
+    for index, item in enumerate(value):
+        if item not in allowed:
+            _add(
+                issues,
+                "E_UNKNOWN_PRIORITY_CLASS",
+                f"$.priority_model.{key}[{index}]",
+                f"unknown priority class {item!r}",
+            )
 
 
 def _validate_role_bindings(payload: dict[str, Any], issues: list[ValidationIssue]) -> None:
