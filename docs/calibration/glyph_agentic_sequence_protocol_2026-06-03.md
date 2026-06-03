@@ -60,6 +60,29 @@ The subagent:
 3. Do not continue past a failed check without a source-backed correction path.
 4. Do not treat a failed checker/build as automatically correctable.
 
+## Merge Safety Clauses
+
+The workflow must enforce these protocol clauses:
+
+- `no_merge_known_failing_branch`
+- `no_dependent_branch_from_known_failing_state`
+- `correction_required_before_merge`
+- `supervisor_diff_inspection_before_merge`
+- `post_merge_checks_before_next_branch`
+- `no_failing_test_first_without_explicit_request`
+
+The supervisor must not merge a branch that is a known failing checker branch.
+The supervisor must not start a dependent branch from a known-failing state.
+If a branch exposes a contract mismatch, the supervisor must choose one of:
+
+- correction on the same branch before merge;
+- a correction branch from current `origin/configurator`;
+- stop and ask the user or chat if source authority is ambiguous.
+
+The supervisor must inspect the branch diff before merge and run checks after merge before starting the next branch.
+The supervisor must not treat "expected fail" as mergeable unless the branch explicitly exists to add a failing test and another branch in the same atomic sequence is guaranteed to fix it before merge.
+Prefer not to use failing-test-first branches in this repo unless explicitly requested.
+
 ## User Intervention Gates
 
 User intervention is required only for:
@@ -72,6 +95,8 @@ User intervention is required only for:
 - serial/device write approval;
 - unsupported behavior claims;
 - checker or build failures that are not automatically correctable.
+
+These gates do not authorize bypassing user review, merging known-failing branches, or changing the workflow protocol into implementation behavior.
 
 ## Forbidden Autonomous Actions
 
