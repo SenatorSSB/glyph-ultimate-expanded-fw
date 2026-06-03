@@ -169,6 +169,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_external_remapper_adapter_boundary.py",
         ),
         step(
+            "external remapper source snapshot index",
+            "tools/check_glyph_external_remapper_source_snapshot_index.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),

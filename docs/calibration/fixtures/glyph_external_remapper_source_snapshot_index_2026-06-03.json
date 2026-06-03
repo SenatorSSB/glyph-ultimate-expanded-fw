@@ -1,0 +1,196 @@
+{
+  "schema_name": "glyph_external_remapper_source_snapshot_index",
+  "snapshot_version": 1,
+  "status": "external_non_authoritative_snapshot_index",
+  "hardware_status": "not_new_hardware_result",
+  "snapshot_date": "2026-06-03",
+  "inspected_date": "2026-06-03",
+  "access_method": [
+    "GitHub contents API root inventory",
+    "public README raw fetch",
+    "hosted app HTML fetch",
+    "bounded raw app.js excerpt fetch"
+  ],
+  "external_source_promoted_to_authority": false,
+  "code_copied_into_repo": false,
+  "device_write_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "external_references": [
+    {
+      "id": "lyseste_glyph_remapper_repo",
+      "kind": "external_repo",
+      "url": "https://github.com/lyseste/glyph-remapper",
+      "authority_status": "non_authoritative_observation",
+      "promoted_to_authority": false
+    },
+    {
+      "id": "lyseste_glyph_remapper_app",
+      "kind": "external_app",
+      "url": "https://lyseste.com/glyph-remapper/",
+      "authority_status": "non_authoritative_observation",
+      "promoted_to_authority": false
+    }
+  ],
+  "observed_files": [
+    {
+      "path": "README.md",
+      "kind": "readme_docs",
+      "sha": "5916bf4877ee621fb96683799a918fddd3423dad",
+      "size_bytes": 26483,
+      "provenance": "observed_from_external_repo_docs",
+      "notes": "README describes project layout, data model, WebSerial flow, protobuf, mode system, keyboard mode, custom mode, and JSON import/export."
+    },
+    {
+      "path": "app.js",
+      "kind": "app_script_js",
+      "sha": "8f0b3f88536f5182cebedcf57602486e764b76fb",
+      "size_bytes": 306238,
+      "provenance": "observed_from_external_code_excerpt",
+      "notes": "Root inventory lists the file; a bounded excerpt showed an inline PROTO_DEF string and button layout constants. No source was copied into this repo."
+    },
+    {
+      "path": "index.html",
+      "kind": "index_html",
+      "sha": "2083dd6d9688c95a54182809712105cf6a0a78af",
+      "size_bytes": 17073,
+      "provenance": "observed_from_external_code_excerpt",
+      "notes": "Root inventory lists the file; hosted HTML showed toolbar, profile sidebar, controller SVG, settings panel, SOCD, RGB, remap, custom mode, import/export, and script include labels."
+    },
+    {
+      "path": "styles.css",
+      "kind": "css",
+      "sha": "0514de204f4b5330deba95a806b364c7786bfb07",
+      "size_bytes": 49344,
+      "provenance": "not_verified",
+      "notes": "Root inventory lists the CSS file, but CSS contents were not audited for this snapshot."
+    },
+    {
+      "path": "glyph-config.json",
+      "kind": "default_config_payload",
+      "sha": "ec5bff30c73894eeedd106811502783a4960802e",
+      "size_bytes": 54263,
+      "provenance": "observed_from_external_repo_docs",
+      "notes": "Root inventory lists a default config payload; README also describes DEFAULT_CONFIG_JSON with an embedded Load Defaults payload. Payload contents were not imported into this repo."
+    },
+    {
+      "path": "app.js::PROTO_DEF",
+      "kind": "protobuf_schema_inline",
+      "sha": "8f0b3f88536f5182cebedcf57602486e764b76fb",
+      "size_bytes": null,
+      "provenance": "observed_from_external_code_excerpt",
+      "notes": "A bounded app.js excerpt showed an inline PROTO_DEF string. No separate .proto file was observed in the root inventory."
+    },
+    {
+      "path": "LICENSE",
+      "kind": "license",
+      "sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "size_bytes": 35149,
+      "provenance": "not_verified",
+      "notes": "Root inventory lists the file, but license terms were not audited in this snapshot."
+    }
+  ],
+  "observed_features": [
+    {
+      "category": "browser configurator",
+      "provenance": "observed_from_external_repo_docs",
+      "evidence": "README describes a browser-based configurator and hosted app URL.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "visual layout",
+      "provenance": "observed_from_external_code_excerpt",
+      "evidence": "Hosted HTML includes a controller SVG area and platform display tabs; bounded app.js excerpt showed button layout constants.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "per-button remap",
+      "provenance": "observed_from_external_repo_docs",
+      "evidence": "README describes popup remap behavior and physical-to-physical remapping.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "profile management",
+      "provenance": "observed_from_external_code_excerpt",
+      "evidence": "Hosted HTML includes profile list, profile count, new profile, rename, and duplicate UI labels.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "RGB/color palette",
+      "provenance": "observed_from_external_code_excerpt",
+      "evidence": "Hosted HTML includes Button Lighting, RGB animation, color swatch, hex input, saved color, and clear/apply labels.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "SOCD",
+      "provenance": "observed_from_external_code_excerpt",
+      "evidence": "Hosted HTML includes SOCD Pairs and add SOCD pair UI labels; README data model describes socdPairs.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "keyboard capture",
+      "provenance": "observed_from_external_repo_docs",
+      "evidence": "README describes keyboard mode capture and HID keycode behavior.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "JSON import/export",
+      "provenance": "observed_from_external_repo_docs",
+      "evidence": "README describes offline JSON export/import; hosted HTML includes Config File import/export controls.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "protobuf encode/decode",
+      "provenance": "observed_from_external_repo_docs",
+      "evidence": "README describes configToBinary, binaryToConfig, protobuf.js, and an inline PROTO_DEF schema.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "WebSerial load/save",
+      "provenance": "observed_from_external_repo_docs",
+      "evidence": "README describes Connect, Load Config, Save to Device, and WebSerial load/save flow. This repo does not implement device write behavior.",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "category": "custom profile/modifier support claim",
+      "provenance": "observed_from_external_repo_docs",
+      "evidence": "README describes MODE_CUSTOM, CustomModeConfig, modifier groups, analog trigger mappings, and custom-mode UI sections.",
+      "authority_status": "non_authoritative_observation"
+    }
+  ],
+  "access_gaps": [
+    {
+      "id": "no_full_source_audit",
+      "provenance": "not_verified",
+      "notes": "Only root inventory, README, hosted HTML, and a bounded app.js excerpt were inspected."
+    },
+    {
+      "id": "no_external_dependency_import",
+      "provenance": "not_verified",
+      "notes": "The external repo was not cloned into this repository and no dependency was added."
+    },
+    {
+      "id": "no_device_or_hardware_access",
+      "provenance": "not_verified",
+      "notes": "No Glyph device, WebSerial session, serial write, or hardware validation was performed."
+    },
+    {
+      "id": "official_authority_not_verified",
+      "provenance": "not_verified",
+      "notes": "External compatibility claims were not promoted to firmware source authority or official configurator authority."
+    },
+    {
+      "id": "public_post_url_not_supplied",
+      "provenance": "not_verified",
+      "notes": "No separate public-post URL was supplied for this snapshot; custom mode and modifier support were observed from external repo README docs only."
+    }
+  ],
+  "forbidden_interpretations": [
+    "firmware_source_authority",
+    "official_configurator_authority",
+    "copied_source",
+    "imported_dependency",
+    "device_write_implementation",
+    "runtime_loaded_config_implementation",
+    "hardware_validation"
+  ]
+}
