@@ -1,0 +1,103 @@
+{
+  "caveats": [
+    "offline_docs_tools_report_only",
+    "not_runtime_loaded_config",
+    "not_serial_device_write_behavior",
+    "not_hardware_validation",
+    "not_nunchuk_hardware_validation",
+    "does_not_change_table_values_or_behavior"
+  ],
+  "generated_config_context": {
+    "generated_config_contract_status": "docs_tools_contract_not_runtime_loaded",
+    "generated_config_validator_contract_status": "tooling_validator_only_not_runtime_loaded",
+    "generated_config_validator_target_schema_name": "glyph_identity_runtime_generated_config_prototype"
+  },
+  "hardware_status": "not_new_hardware_result",
+  "invalid_corpus_case_count": 26,
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "rejected_capability_summary": {
+    "candidate_validator_forbidden_payload_content": [
+      "firmware_source_patches",
+      "serial_transport_payloads",
+      "device_write_instructions",
+      "macros",
+      "turbo",
+      "timing_automation",
+      "one_shot_toggle_history_dependent_logic",
+      "runtime_loaded_config_implementation_claims",
+      "phase_order_mutation",
+      "hardware_validation_claims_without_hardware_result_source",
+      "nunchuk_hardware_validation_claims_without_hardware_result_source"
+    ],
+    "generated_config_forbidden_interpretations": [
+      "firmware_source",
+      "runtime_loaded_config",
+      "serial_device_write_path",
+      "hardware_validation",
+      "senscope_game_semantics",
+      "macro_or_turbo_logic"
+    ],
+    "generated_config_validator_forbidden_payload_content": [
+      "firmware_source_patch",
+      "serial_transport_payload",
+      "device_write_instruction",
+      "macro_or_turbo_logic",
+      "timing_or_history_logic",
+      "arbitrary_script_code_strings",
+      "phase_order_mutation_claims",
+      "hardware_validation_claim_without_result_source",
+      "nunchuk_hardware_validation_claim_without_result_source"
+    ],
+    "runtime_loaded_validation_forbidden_payload_content": [
+      "firmware_source_patch",
+      "serial_transport_payload",
+      "device_write_instruction",
+      "macro_or_turbo_logic",
+      "timing_or_history_logic"
+    ],
+    "runtime_loaded_validation_required_rejection_rules": [
+      "unknown_schema_version",
+      "unknown_mode_scope",
+      "missing_required_tables",
+      "malformed_table_point",
+      "coordinate_outside_0_255",
+      "boolean_coordinate_values",
+      "unknown_role_class",
+      "unknown_priority_class",
+      "unsupported_phase_order_mutation",
+      "arbitrary_script_code_text",
+      "macro_turbo_timing_automation",
+      "one_shot_toggle_history_dependent_behavior",
+      "missing_source_authority",
+      "hardware_validation_claim_without_hardware_result_source",
+      "nunchuk_hardware_validation_claim_without_hardware_result_source",
+      "device_write_instructions",
+      "serial_transport_payloads",
+      "firmware_source_patches_embedded_in_config"
+    ]
+  },
+  "report_version": 1,
+  "required_non_goals": [
+    "does_not_change_table_values_or_behavior",
+    "not_firmware_source",
+    "not_hardware_validation",
+    "not_nunchuk_hardware_validation",
+    "not_runtime_loaded",
+    "not_senscope_game_semantics",
+    "not_serial_device_write"
+  ],
+  "sample_candidate_validation_status": "PASS",
+  "schema_name": "glyph_runtime_config_validation_report",
+  "source_authority": {
+    "generated_config_contract": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+    "generated_config_validator_contract": "docs/calibration/fixtures/glyph_offline_generated_config_validator_contract_v0_2026-06-03.json",
+    "invalid_corpus": "docs/calibration/fixtures/glyph_runtime_config_candidate_invalid_corpus_2026-06-03.json",
+    "runtime_loaded_validation_contract": "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json",
+    "sample_candidate": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+    "validator_contract": "docs/calibration/fixtures/glyph_runtime_config_candidate_validator_contract_v0_2026-06-03.json"
+  },
+  "status": "docs_tools_validation_report",
+  "table_count": 25,
+  "validated_candidate_schema_name": "glyph_runtime_config_candidate",
+  "validator_contract_status": "offline_validator_contract_not_runtime_loaded"
+}
