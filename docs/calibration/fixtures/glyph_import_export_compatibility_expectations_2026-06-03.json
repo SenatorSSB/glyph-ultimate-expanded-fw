@@ -1,0 +1,81 @@
+{
+  "schema_name": "glyph_import_export_compatibility_expectations",
+  "expectation_version": 1,
+  "status": "offline_import_export_compatibility_expectations",
+  "hardware_status": "not_new_hardware_result",
+  "official_configurator_compatibility_claimed": false,
+  "device_write_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "default_export_package": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+  "runtime_candidate_sample": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+  "active_profile_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+  "config_json_compatibility_fixture": "docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+  "doc_caveats": [
+    "offline import/export compatibility boundary only",
+    "not official configurator source authority",
+    "not webserial implementation",
+    "not device write behavior",
+    "not runtime-loaded config",
+    "not hardware validation"
+  ],
+  "expected_checks": [
+    {
+      "id": "configurator_compatibility_source_registry_passes",
+      "expectation": "configurator compatibility source registry passes"
+    },
+    {
+      "id": "config_json_compatibility_fixtures_pass",
+      "expectation": "config JSON compatibility fixtures pass"
+    },
+    {
+      "id": "generated_export_artifact_round_trip_passes",
+      "expectation": "generated export artifact round-trip passes"
+    },
+    {
+      "id": "candidate_export_package_validates",
+      "expectation": "candidate export package validates against the committed docs/tools-only export boundary"
+    },
+    {
+      "id": "runtime_candidate_sample_validates",
+      "expectation": "runtime candidate sample validates"
+    },
+    {
+      "id": "active_profile_artifact_json_compatibility_cases_pass",
+      "expectation": "active profile artifact JSON compatibility cases pass"
+    },
+    {
+      "id": "serial_dry_run_accepts_active_profile_artifact",
+      "expectation": "serial dry-run still passes for the active profile artifact"
+    },
+    {
+      "id": "no_device_write_claim_in_export_package",
+      "expectation": "no device-write claim appears in the candidate export package"
+    },
+    {
+      "id": "no_device_write_claim_in_compatibility_expectations",
+      "expectation": "no device-write claim appears in the compatibility expectations"
+    },
+    {
+      "id": "no_official_configurator_claim_beyond_repo_fixtures",
+      "expectation": "no official configurator compatibility claim is made beyond repo-committed fixtures"
+    },
+    {
+      "id": "no_runtime_loaded_config_claim",
+      "expectation": "no runtime-loaded config claim is made"
+    },
+    {
+      "id": "no_hardware_or_nunchuk_validation_claim",
+      "expectation": "no hardware or nunchuk validation claim is made"
+    }
+  ],
+  "source_authority": {
+    "compatibility_doc": "docs/calibration/glyph_import_export_compatibility_validator_2026-06-03.md",
+    "compatibility_tool": "tools/check_glyph_import_export_compatibility.py",
+    "configurator_source_registry_tool": "tools/check_glyph_configurator_compatibility_source_registry.py",
+    "config_json_compatibility_tool": "tools/check_glyph_config_json_compatibility_fixtures.py",
+    "export_round_trip_tool": "tools/check_glyph_export_artifact_round_trip.py",
+    "export_package_validator_tool": "tools/check_glyph_senscope_export_package_validator.py",
+    "runtime_candidate_validator_tool": "tools/check_glyph_runtime_config_candidate_validator.py",
+    "serial_dry_run_tool": "tools/glyph_serial_config_tool.py"
+  }
+}

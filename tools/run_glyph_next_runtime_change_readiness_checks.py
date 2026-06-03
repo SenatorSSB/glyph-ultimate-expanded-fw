@@ -161,6 +161,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_config_json_compatibility_fixtures.py",
         ),
         step(
+            "import export compatibility",
+            "tools/check_glyph_import_export_compatibility.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
