@@ -1,0 +1,305 @@
+{
+  "schema_name": "glyph_export_artifact_compatibility_invalid_corpus",
+  "corpus_version": 1,
+  "status": "negative_compatibility_corpus",
+  "hardware_status": "not_new_hardware_result",
+  "validator_tool": "tools/check_glyph_export_artifact_compatibility_invalid_corpus.py",
+  "baseline_artifacts": [
+    "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
+    "docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt",
+    "docs/calibration/fixtures/glyph_export_artifact_snapshots_2026-06-03.json"
+  ],
+  "cases": [
+    {
+      "case_id": "generated_config_table_drift",
+      "mutation": "change one generated-config table coordinate while leaving the runtime-candidate table unchanged",
+      "target_artifact": "generated_config_prototype",
+      "expected_error_codes": [
+        "E_GENERATED_CONFIG_TABLE_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "generated_config_prototype",
+          "path": [
+            "tables",
+            "Default",
+            0,
+            0
+          ],
+          "value": 62
+        }
+      ]
+    },
+    {
+      "case_id": "runtime_candidate_table_drift",
+      "mutation": "change one runtime-candidate table coordinate while leaving the generated-config table unchanged",
+      "target_artifact": "runtime_config_candidate_sample",
+      "expected_error_codes": [
+        "E_RUNTIME_CANDIDATE_TABLE_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "runtime_config_candidate_sample",
+          "path": [
+            "tables",
+            "Default",
+            0,
+            0
+          ],
+          "value": 62
+        }
+      ]
+    },
+    {
+      "case_id": "runtime_candidate_role_binding_drift",
+      "mutation": "change one runtime-candidate role binding while leaving the generated-config role bindings unchanged",
+      "target_artifact": "runtime_config_candidate_sample",
+      "expected_error_codes": [
+        "E_RUNTIME_CANDIDATE_ROLE_BINDING_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "runtime_config_candidate_sample",
+          "path": [
+            "role_bindings",
+            "modifiers",
+            "RF3"
+          ],
+          "value": "Tilt2"
+        }
+      ]
+    },
+    {
+      "case_id": "runtime_candidate_hard_override_drift",
+      "mutation": "change one runtime-candidate hard override while leaving the generated-config hard overrides unchanged",
+      "target_artifact": "runtime_config_candidate_sample",
+      "expected_error_codes": [
+        "E_RUNTIME_CANDIDATE_HARD_OVERRIDE_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "runtime_config_candidate_sample",
+          "path": [
+            "hard_overrides",
+            "rf9_null",
+            0
+          ],
+          "value": 127
+        }
+      ]
+    },
+    {
+      "case_id": "runtime_candidate_priority_reference_drift",
+      "mutation": "change one runtime-candidate priority reference entry so it no longer matches the generated-config priority model",
+      "target_artifact": "runtime_config_candidate_sample",
+      "expected_error_codes": [
+        "E_RUNTIME_CANDIDATE_PRIORITY_REFERENCE_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "runtime_config_candidate_sample",
+          "path": [
+            "priority_references",
+            "analog",
+            0
+          ],
+          "value": "rf7_hard_up_b"
+        }
+      ]
+    },
+    {
+      "case_id": "runtime_candidate_suppression_rule_drift",
+      "mutation": "change one runtime-candidate suppression rule string so it no longer matches the generated-config suppression rules",
+      "target_artifact": "runtime_config_candidate_sample",
+      "expected_error_codes": [
+        "E_RUNTIME_CANDIDATE_SUPPRESSION_RULE_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "runtime_config_candidate_sample",
+          "path": [
+            "suppression_rules",
+            0
+          ],
+          "value": "LT2 suppression removed"
+        }
+      ]
+    },
+    {
+      "case_id": "senscope_export_nested_generated_config_drift",
+      "mutation": "change one nested generated-config table coordinate inside the sample export package while leaving the committed generated-config prototype unchanged",
+      "target_artifact": "senscope_export_package_sample",
+      "expected_error_codes": [
+        "E_SENSCOPE_EXPORT_NESTED_GENERATED_CONFIG_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "senscope_export_package_sample",
+          "path": [
+            "glyph_generated_config_prototype",
+            "tables",
+            "Default",
+            0,
+            0
+          ],
+          "value": 62
+        }
+      ]
+    },
+    {
+      "case_id": "validation_report_table_count_drift",
+      "mutation": "change the validation report table count so it no longer matches the generated-config and runtime-candidate table counts",
+      "target_artifact": "runtime_config_validation_report",
+      "expected_error_codes": [
+        "E_VALIDATION_REPORT_TABLE_COUNT_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "runtime_config_validation_report",
+          "path": [
+            "table_count"
+          ],
+          "value": 24
+        }
+      ]
+    },
+    {
+      "case_id": "validation_report_missing_caveat",
+      "mutation": "delete one required docs-tools caveat from the validation report caveats list",
+      "target_artifact": "runtime_config_validation_report",
+      "expected_error_codes": [
+        "E_VALIDATION_REPORT_MISSING_CAVEAT"
+      ],
+      "payload": [
+        {
+          "op": "delete",
+          "artifact": "runtime_config_validation_report",
+          "path": [
+            "caveats",
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "generated_cpp_table_hash_drift",
+      "mutation": "change one generated C++ table coordinate in the review artifact text so the committed snapshot hash no longer matches",
+      "target_artifact": "generated_cpp_table_artifact",
+      "expected_error_codes": [
+        "E_GENERATED_CPP_TABLE_HASH_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "replace_text",
+          "artifact": "generated_cpp_table_artifact",
+          "old": "{61, 51}",
+          "new": "{62, 51}"
+        }
+      ]
+    },
+    {
+      "case_id": "behavior_cases_count_drift",
+      "mutation": "delete one committed behavior case so the canonical snapshot case count no longer matches",
+      "target_artifact": "behavior_cases_fixture",
+      "expected_error_codes": [
+        "E_BEHAVIOR_CASE_COUNT_DRIFT"
+      ],
+      "payload": [
+        {
+          "op": "delete",
+          "artifact": "behavior_cases_fixture",
+          "path": [
+            "cases",
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "hardware_status_validation_claim",
+      "mutation": "change the sample export package hardware status from a not-new-hardware caveat to a hardware validation claim",
+      "target_artifact": "senscope_export_package_sample",
+      "expected_error_codes": [
+        "E_HARDWARE_STATUS_VALIDATION_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "senscope_export_package_sample",
+          "path": [
+            "hardware_status"
+          ],
+          "value": "hardware_validation_result"
+        }
+      ]
+    },
+    {
+      "case_id": "nunchuk_status_hardware_validated_claim",
+      "mutation": "change the sample export package nunchuk status from preserved-but-not-validated to hardware validated",
+      "target_artifact": "senscope_export_package_sample",
+      "expected_error_codes": [
+        "E_NUNCHUK_STATUS_VALIDATION_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "senscope_export_package_sample",
+          "path": [
+            "nunchuk_status"
+          ],
+          "value": "hardware_validated"
+        }
+      ]
+    },
+    {
+      "case_id": "runtime_loaded_config_status_claim",
+      "mutation": "change the sample export package status so it claims runtime-loaded config implementation",
+      "target_artifact": "senscope_export_package_sample",
+      "expected_error_codes": [
+        "E_RUNTIME_LOADED_CONFIG_STATUS_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "senscope_export_package_sample",
+          "path": [
+            "status"
+          ],
+          "value": "runtime_loaded_config_implemented"
+        }
+      ]
+    },
+    {
+      "case_id": "serial_device_write_claim",
+      "mutation": "change the sample export package validation report so it claims device-write scope",
+      "target_artifact": "senscope_export_package_sample",
+      "expected_error_codes": [
+        "E_SERIAL_DEVICE_WRITE_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "artifact": "senscope_export_package_sample",
+          "path": [
+            "validation_report",
+            "no_forbidden_behavior_confirmation",
+            "device_write_absent"
+          ],
+          "value": false
+        }
+      ]
+    }
+  ]
+}

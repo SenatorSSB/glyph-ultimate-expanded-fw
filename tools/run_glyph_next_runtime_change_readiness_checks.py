@@ -149,6 +149,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_export_artifact_snapshots.py",
         ),
         step(
+            "export artifact compatibility invalid corpus",
+            "tools/check_glyph_export_artifact_compatibility_invalid_corpus.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
