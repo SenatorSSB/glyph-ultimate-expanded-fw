@@ -1,0 +1,177 @@
+{
+  "schema_name": "glyph_configurator_compatibility_source_registry",
+  "registry_version": 1,
+  "status": "docs_tools_source_registry",
+  "hardware_status": "not_new_hardware_result",
+  "external_sources_promoted_to_authority": false,
+  "device_write_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "source_classes": {
+    "repo_committed_source_authority": [
+      {
+        "id": "current_firmware_identity_runtime_tables",
+        "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "authority_scope": "current repo firmware source reference only"
+      },
+      {
+        "id": "generated_config_contract",
+        "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+        "authority_scope": "current generated-config contract fixture"
+      },
+      {
+        "id": "generated_config_contract_checker",
+        "path": "tools/check_glyph_identity_runtime_config_contracts.py",
+        "authority_scope": "current generated-config contract checker"
+      },
+      {
+        "id": "offline_generated_config_validator",
+        "path": "tools/check_glyph_generated_config_validator.py",
+        "authority_scope": "current generated-config validator checker"
+      },
+      {
+        "id": "runtime_config_candidate_validator_contract",
+        "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_validator_contract_v0_2026-06-03.json",
+        "authority_scope": "current runtime candidate validator contract fixture"
+      },
+      {
+        "id": "runtime_config_candidate_validator",
+        "path": "tools/check_glyph_runtime_config_candidate_validator.py",
+        "authority_scope": "current runtime candidate validator checker"
+      },
+      {
+        "id": "senscope_export_contract",
+        "path": "docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json",
+        "authority_scope": "current draft export package contract fixture"
+      },
+      {
+        "id": "senscope_export_package_validator",
+        "path": "tools/check_glyph_senscope_export_package_validator.py",
+        "authority_scope": "current export package validator checker"
+      },
+      {
+        "id": "export_artifact_compatibility_index_checker",
+        "path": "tools/check_glyph_export_artifact_compatibility_index.py",
+        "authority_scope": "current compatibility index checker"
+      },
+      {
+        "id": "export_artifact_round_trip_checker",
+        "path": "tools/check_glyph_export_artifact_round_trip.py",
+        "authority_scope": "current round-trip checker"
+      },
+      {
+        "id": "export_artifact_snapshot_generator",
+        "path": "tools/generate_glyph_export_artifact_snapshots.py",
+        "authority_scope": "current canonical snapshot generator"
+      },
+      {
+        "id": "export_artifact_snapshot_checker",
+        "path": "tools/check_glyph_export_artifact_snapshots.py",
+        "authority_scope": "current canonical snapshot checker"
+      },
+      {
+        "id": "export_artifact_compatibility_invalid_corpus_checker",
+        "path": "tools/check_glyph_export_artifact_compatibility_invalid_corpus.py",
+        "authority_scope": "current compatibility invalid corpus checker"
+      },
+      {
+        "id": "agentic_sequence_protocol_checker",
+        "path": "tools/check_glyph_agentic_sequence_protocol.py",
+        "authority_scope": "current workflow protocol checker"
+      }
+    ],
+    "repo_committed_compatibility_fixtures": [
+      {
+        "id": "active_profile_artifact",
+        "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+        "fixture_scope": "active profile artifact compatibility reference"
+      },
+      {
+        "id": "generated_config_prototype",
+        "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+        "fixture_scope": "generated config prototype"
+      },
+      {
+        "id": "runtime_config_candidate_sample",
+        "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+        "fixture_scope": "runtime config candidate sample"
+      },
+      {
+        "id": "senscope_export_package_sample",
+        "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+        "fixture_scope": "Senscope export package sample"
+      },
+      {
+        "id": "canonical_snapshots",
+        "path": "docs/calibration/fixtures/glyph_export_artifact_snapshots_2026-06-03.json",
+        "fixture_scope": "canonical export artifact snapshots"
+      }
+    ],
+    "external_observed_non_authoritative": [
+      {
+        "id": "lyseste_glyph_remapper_repository",
+        "url": "https://github.com/lyseste/glyph-remapper",
+        "authority_status": "non_authoritative_observation",
+        "observed_scope": [
+          "browser-based Glyph configurator",
+          "JSON import/export",
+          "WebSerial load/save",
+          "protobuf encode/decode",
+          "RGB/profile/SOCD/profile-management UI"
+        ],
+        "promoted_to_authority": false
+      },
+      {
+        "id": "lyseste_glyph_remapper_app",
+        "url": "https://lyseste.com/glyph-remapper/",
+        "authority_status": "non_authoritative_observation",
+        "observed_scope": [
+          "browser-based Glyph configurator",
+          "JSON import/export",
+          "WebSerial load/save",
+          "protobuf encode/decode",
+          "RGB/profile/SOCD/profile-management UI"
+        ],
+        "promoted_to_authority": false
+      },
+      {
+        "id": "public_post_custom_profile_modifier_claim",
+        "observation_source": "user-provided task statement",
+        "authority_status": "non_authoritative_observation",
+        "observed_scope": [
+          "custom profile/modifier claim from public post"
+        ],
+        "promoted_to_authority": false
+      }
+    ],
+    "deferred_source_authority": [
+      {
+        "id": "official_limit_labs_configurator_behavior",
+        "deferred_scope": "official Limit Labs configurator behavior"
+      },
+      {
+        "id": "official_protobuf_schema_source",
+        "deferred_scope": "official protobuf/schema source"
+      },
+      {
+        "id": "official_webserial_packet_framing",
+        "deferred_scope": "official WebSerial packet framing"
+      },
+      {
+        "id": "device_write_transport",
+        "deferred_scope": "device-write transport"
+      },
+      {
+        "id": "runtime_loaded_config_storage",
+        "deferred_scope": "runtime-loaded config storage"
+      }
+    ]
+  },
+  "doc_caveats": [
+    "external observations are non-authoritative",
+    "not firmware source",
+    "not runtime-loaded config",
+    "not serial/device write behavior",
+    "not hardware validation",
+    "not nunchuk hardware validation"
+  ]
+}

@@ -153,6 +153,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_export_artifact_compatibility_invalid_corpus.py",
         ),
         step(
+            "configurator compatibility source registry",
+            "tools/check_glyph_configurator_compatibility_source_registry.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
