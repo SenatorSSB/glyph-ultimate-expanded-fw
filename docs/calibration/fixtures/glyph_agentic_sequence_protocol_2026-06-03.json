@@ -63,6 +63,14 @@
     "no_continuation_after_failed_checks",
     "do_not_treat_failed_checks_as_automatically_correctable"
   ],
+  "required_merge_safety_clauses": [
+    "no_merge_known_failing_branch",
+    "no_dependent_branch_from_known_failing_state",
+    "correction_required_before_merge",
+    "supervisor_diff_inspection_before_merge",
+    "post_merge_checks_before_next_branch",
+    "no_failing_test_first_without_explicit_request"
+  ],
   "final_summary_requirements": [
     "branch_name",
     "commit_sha",
