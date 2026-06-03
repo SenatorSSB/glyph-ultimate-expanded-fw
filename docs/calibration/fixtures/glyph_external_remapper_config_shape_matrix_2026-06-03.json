@@ -1,0 +1,175 @@
+{
+  "schema_name": "glyph_external_remapper_config_shape_matrix",
+  "matrix_version": 1,
+  "status": "external_non_authoritative_config_shape_matrix",
+  "hardware_status": "not_new_hardware_result",
+  "external_source_promoted_to_authority": false,
+  "official_configurator_compatibility_claimed": false,
+  "device_write_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "external_observation_source": {
+    "doc": "docs/calibration/glyph_external_remapper_source_snapshot_index_2026-06-03.md",
+    "fixture": "docs/calibration/fixtures/glyph_external_remapper_source_snapshot_index_2026-06-03.json",
+    "authority_status": "non_authoritative_external_comparison"
+  },
+  "repo_comparison_inputs": [
+    "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_configurator_compatibility_source_registry_2026-06-03.json",
+    "docs/calibration/glyph_config_json_compatibility_fixtures_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+    "docs/calibration/glyph_import_export_compatibility_validator_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_import_export_compatibility_expectations_2026-06-03.json",
+    "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_adapter_boundary_2026-06-03.json",
+    "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+    "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json"
+  ],
+  "comparison_categories": [
+    {
+      "category_id": "profile_list_profile_configs",
+      "external_observation_status": "observed_from_external_code_excerpt",
+      "external_notes": "Hosted HTML snapshot shows profile list, profile count, new profile, rename, and duplicate UI labels.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json; docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+      "compatibility_status": "partial_gap",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Audit whether the external payload stores a top-level multi-profile list or profile-config collection shape that can be compared without promoting the external source to authority."
+    },
+    {
+      "category_id": "game_mode_config",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations describe game or mode configuration concepts.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json; docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "compatibility_status": "compatible_observed",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "If future comparison needs exact field names, audit the external default payload and bounded app.js config parsing without copying source."
+    },
+    {
+      "category_id": "button_remapping_entries",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations describe per-button remap behavior and physical-to-physical remapping.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json; docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+      "compatibility_status": "compatible_observed",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Keep future comparison bounded to committed profile JSON fixtures unless an approved source audit expands the field-by-field scope."
+    },
+    {
+      "category_id": "explicit_disable_entries",
+      "external_observation_status": "not_verified",
+      "external_notes": "The Branch 1 snapshot did not audit disable-entry serialization in the external payload or app.js remap handling.",
+      "our_artifact_reference": "docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json; tools/check_glyph_config_json_compatibility_fixtures.py",
+      "compatibility_status": "unknown_needs_source_audit",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Source-audit the external remap payload shape for disabled bindings and compare it against the repo's physicalButton-only disable-entry guardrail."
+    },
+    {
+      "category_id": "button_activation_output_semantics",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations describe remapping behavior, but the snapshot does not prove whether outputs are encoded as physical buttons, logical outputs, or mode-specific carriers.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json; docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json; docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "compatibility_status": "partial_gap",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Compare the external remap output encoding against committed `activates`, role-binding, and hard-override artifacts before any adapter claim."
+    },
+    {
+      "category_id": "socd_pairs",
+      "external_observation_status": "observed_from_external_code_excerpt",
+      "external_notes": "Hosted HTML and README/data-model observations identify SOCD pairs and add-pair UI concepts.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json; docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+      "compatibility_status": "compatible_observed",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Limit any future comparison to list shape and pair fields unless official SOCD semantics are separately sourced."
+    },
+    {
+      "category_id": "rgb_configs",
+      "external_observation_status": "observed_from_external_code_excerpt",
+      "external_notes": "Hosted HTML observations show button-lighting, RGB animation, saved color, and palette UI concepts.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "compatibility_status": "compatible_observed",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "If a future adapter comparison needs exact color payload structure, inspect the external default config payload under a non-copying source audit."
+    },
+    {
+      "category_id": "rgb_config_1_based_indexing",
+      "external_observation_status": "not_verified",
+      "external_notes": "The Branch 1 snapshot observed the presence of a default config payload but did not audit whether RGB config references are zero-based or one-based externally.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "compatibility_status": "compatible_internal_only",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Audit external `glyph-config.json` or bounded app.js indexing logic before making any index-base compatibility claim."
+    },
+    {
+      "category_id": "keyboard_mode_configs",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations describe keyboard mode capture behavior.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "compatibility_status": "compatible_observed",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Keep follow-up limited to config shape and keycode references rather than claiming runtime keyboard behavior."
+    },
+    {
+      "category_id": "keyboard_scancodes",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations mention HID keycode behavior for keyboard mode.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "compatibility_status": "compatible_observed",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Only a bounded source audit should extend this comparison into exact external scancode numbering or unsupported-key handling."
+    },
+    {
+      "category_id": "menu_button_icon_display_metadata",
+      "external_observation_status": "observed_from_external_code_excerpt",
+      "external_notes": "Hosted HTML observations prove controller/menu display labels, but not an audited external config field for icon or display metadata.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "compatibility_status": "partial_gap",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Audit whether the external payload stores icon/display metadata comparable to the repo's `menuButtonIcon` and dashboard-option fields."
+    },
+    {
+      "category_id": "default_config_payload",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "Root inventory and README/docs observations identify a default `glyph-config.json` payload and `DEFAULT_CONFIG_JSON` usage.",
+      "our_artifact_reference": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json; docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json; docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "compatibility_status": "partial_gap",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Compare exact payload sections only after an approved source audit of the external default config shape."
+    },
+    {
+      "category_id": "protobuf_encode_decode_path",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations describe `configToBinary`, `binaryToConfig`, protobuf.js, and an inline `PROTO_DEF` schema.",
+      "our_artifact_reference": "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md; docs/calibration/fixtures/glyph_configurator_compatibility_source_registry_2026-06-03.json; docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
+      "compatibility_status": "out_of_scope",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Do not compare or implement protobuf/schema behavior until official source authority is inspected and explicit approval exists."
+    },
+    {
+      "category_id": "json_import_export_path",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs and hosted HTML observations show config-file import/export concepts.",
+      "our_artifact_reference": "docs/calibration/glyph_import_export_compatibility_validator_2026-06-03.md; docs/calibration/fixtures/glyph_import_export_compatibility_expectations_2026-06-03.json; docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+      "compatibility_status": "compatible_observed",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Any future field-level comparison should stay offline and repo-committed, not a claim of official configurator compatibility."
+    },
+    {
+      "category_id": "webserial_load_save_path",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations describe Connect, Load Config, and Save to Device WebSerial flows.",
+      "our_artifact_reference": "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md; docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md; docs/calibration/glyph_import_export_compatibility_validator_2026-06-03.md",
+      "compatibility_status": "out_of_scope",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Keep WebSerial and serial/device write behavior non-implemented in this repo unless a future branch is explicitly authorized for transport work."
+    },
+    {
+      "category_id": "custom_profile_modifier_support",
+      "external_observation_status": "observed_from_external_repo_docs",
+      "external_notes": "README/docs observations describe custom mode and modifier support claims, including modifier groups and analog-trigger-related mappings.",
+      "our_artifact_reference": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json; docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json; docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
+      "compatibility_status": "partial_gap",
+      "authority_status": "non_authoritative_external_comparison",
+      "required_follow_up": "Treat external custom profile/modifier claims as non-authoritative until a full source audit compares representation details against committed repo artifacts."
+    }
+  ]
+}
