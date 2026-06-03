@@ -1,0 +1,350 @@
+{
+  "schema_name": "glyph_runtime_config_candidate_invalid_corpus",
+  "corpus_version": 1,
+  "status": "negative_validator_corpus",
+  "hardware_status": "not_new_hardware_result",
+  "validator_tool": "tools/glyph_runtime_config_candidate_validator.py",
+  "baseline_fixture": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+  "cases": [
+    {
+      "case_id": "unknown_schema_name",
+      "mutation": "replace the schema name with an unknown value",
+      "expected_error_codes": ["E_INVALID_SCHEMA_NAME"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["schema_name"],
+          "value": "glyph_runtime_config_candidate_unknown"
+        }
+      ]
+    },
+    {
+      "case_id": "wrong_candidate_version",
+      "mutation": "replace the candidate version with a non-matching value",
+      "expected_error_codes": ["E_INVALID_CANDIDATE_VERSION"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["candidate_version"],
+          "value": 2
+        }
+      ]
+    },
+    {
+      "case_id": "unknown_mode_scope",
+      "mutation": "replace the mode scope with an unsupported scope",
+      "expected_error_codes": ["E_INVALID_MODE_SCOPE"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["mode_scope"],
+          "value": "MODE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "case_id": "status_claims_runtime_loaded_config",
+      "mutation": "replace the docs-only status with a runtime-loaded config claim",
+      "expected_error_codes": ["E_INVALID_STATUS"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["status"],
+          "value": "runtime_loaded_config_candidate"
+        }
+      ]
+    },
+    {
+      "case_id": "missing_tables",
+      "mutation": "remove the tables object entirely",
+      "expected_error_codes": ["E_MISSING_REQUIRED_FIELD", "E_TABLES_NOT_OBJECT"],
+      "payload": [
+        {
+          "op": "delete",
+          "path": ["tables"]
+        }
+      ]
+    },
+    {
+      "case_id": "missing_required_table",
+      "mutation": "delete one required table from the tables object",
+      "expected_error_codes": ["E_MISSING_REQUIRED_TABLE", "E_INVALID_TABLE_COUNT"],
+      "payload": [
+        {
+          "op": "delete",
+          "path": ["tables", "Default"]
+        }
+      ]
+    },
+    {
+      "case_id": "extra_unexpected_table",
+      "mutation": "add one unexpected table to the tables object",
+      "expected_error_codes": ["E_UNKNOWN_TABLE", "E_INVALID_TABLE_COUNT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["tables", "ExtraTable"],
+          "value": [
+            [61, 51],
+            [128, 51],
+            [195, 51],
+            [61, 128],
+            [128, 128],
+            [195, 128],
+            [61, 205],
+            [128, 205],
+            [195, 205]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "table_with_8_points",
+      "mutation": "replace one table with only eight points",
+      "expected_error_codes": ["E_INVALID_TABLE_POINT_COUNT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["tables", "Default"],
+          "value": [
+            [61, 51],
+            [128, 51],
+            [195, 51],
+            [61, 128],
+            [128, 128],
+            [195, 128],
+            [61, 205],
+            [128, 205]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "table_with_10_points",
+      "mutation": "replace one table with ten points",
+      "expected_error_codes": ["E_INVALID_TABLE_POINT_COUNT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["tables", "Default"],
+          "value": [
+            [61, 51],
+            [128, 51],
+            [195, 51],
+            [61, 128],
+            [128, 128],
+            [195, 128],
+            [61, 205],
+            [128, 205],
+            [195, 205],
+            [128, 128]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "table_coordinate_boolean",
+      "mutation": "set one table coordinate to a boolean",
+      "expected_error_codes": ["E_INVALID_POINT_COORDINATE_TYPE"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["tables", "Default", 0, 0],
+          "value": true
+        }
+      ]
+    },
+    {
+      "case_id": "coordinate_below_0",
+      "mutation": "set one table coordinate below the valid range",
+      "expected_error_codes": ["E_COORDINATE_OUT_OF_RANGE"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["tables", "Default", 0, 0],
+          "value": -1
+        }
+      ]
+    },
+    {
+      "case_id": "coordinate_above_255",
+      "mutation": "set one table coordinate above the valid range",
+      "expected_error_codes": ["E_COORDINATE_OUT_OF_RANGE"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["tables", "Default", 0, 0],
+          "value": 256
+        }
+      ]
+    },
+    {
+      "case_id": "coordinate_string",
+      "mutation": "set one table coordinate to a string",
+      "expected_error_codes": ["E_INVALID_POINT_COORDINATE_TYPE"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["tables", "Default", 0, 0],
+          "value": "128"
+        }
+      ]
+    },
+    {
+      "case_id": "missing_source_authority",
+      "mutation": "remove the source authority object entirely",
+      "expected_error_codes": ["E_MISSING_REQUIRED_FIELD", "E_SOURCE_AUTHORITY_NOT_OBJECT"],
+      "payload": [
+        {
+          "op": "delete",
+          "path": ["source_authority"]
+        }
+      ]
+    },
+    {
+      "case_id": "missing_generated_config_contract_reference",
+      "mutation": "remove the generated-config contract reference",
+      "expected_error_codes": ["E_MISSING_REQUIRED_FIELD", "E_INVALID_GENERATED_CONFIG_CONTRACT"],
+      "payload": [
+        {
+          "op": "delete",
+          "path": ["generated_config_contract"]
+        }
+      ]
+    },
+    {
+      "case_id": "missing_runtime_validation_contract_reference",
+      "mutation": "remove the runtime validation contract reference",
+      "expected_error_codes": ["E_MISSING_REQUIRED_FIELD", "E_INVALID_RUNTIME_VALIDATION_CONTRACT"],
+      "payload": [
+        {
+          "op": "delete",
+          "path": ["runtime_validation_contract"]
+        }
+      ]
+    },
+    {
+      "case_id": "unknown_role_class",
+      "mutation": "add a bounded role_class field with an unknown class value",
+      "expected_error_codes": ["E_UNKNOWN_ACCEPTED_DATA_CLASS"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["metadata", "role_class"],
+          "value": "UnknownRoleClass"
+        }
+      ]
+    },
+    {
+      "case_id": "unknown_priority_class",
+      "mutation": "replace one priority order entry with an unknown priority class",
+      "expected_error_codes": ["E_UNKNOWN_PRIORITY_CLASS"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["priority_references", "analog", 2],
+          "value": "unknown_priority_class"
+        }
+      ]
+    },
+    {
+      "case_id": "phase_order_mutation",
+      "mutation": "add a phase-order mutation claim",
+      "expected_error_codes": ["E_FORBIDDEN_PAYLOAD_CONTENT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["metadata", "note"],
+          "value": "phase-order mutation"
+        }
+      ]
+    },
+    {
+      "case_id": "firmware_source_patch",
+      "mutation": "embed a firmware source patch key in the payload",
+      "expected_error_codes": ["E_FORBIDDEN_PAYLOAD_CONTENT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["firmware_source_patch"],
+          "value": "diff --git a/src/modes/Ultimate.cpp b/src/modes/Ultimate.cpp"
+        }
+      ]
+    },
+    {
+      "case_id": "serial_transport_payload",
+      "mutation": "embed a serial transport payload key in the payload",
+      "expected_error_codes": ["E_FORBIDDEN_PAYLOAD_CONTENT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["serial_transport_payload"],
+          "value": {
+            "port": "ttyACM0",
+            "payload": "010203"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "device_write_instruction",
+      "mutation": "embed a device write instruction key in the payload",
+      "expected_error_codes": ["E_FORBIDDEN_PAYLOAD_CONTENT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["device_write_instruction"],
+          "value": "write to device"
+        }
+      ]
+    },
+    {
+      "case_id": "macro_turbo_logic",
+      "mutation": "add macro/turbo logic text",
+      "expected_error_codes": ["E_FORBIDDEN_PAYLOAD_CONTENT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["metadata", "note"],
+          "value": "macro/turbo logic"
+        }
+      ]
+    },
+    {
+      "case_id": "timing_history_logic",
+      "mutation": "add timing/history-dependent logic text",
+      "expected_error_codes": ["E_FORBIDDEN_PAYLOAD_CONTENT"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["metadata", "note"],
+          "value": "timing automation with history-dependent logic"
+        }
+      ]
+    },
+    {
+      "case_id": "hardware_validation_claim_without_result_source",
+      "mutation": "add a hardware validation claim without a result source",
+      "expected_error_codes": ["E_HARDWARE_VALIDATION_CLAIM_WITHOUT_RESULT_SOURCE"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["metadata", "note"],
+          "value": "hardware validation claim without result source"
+        }
+      ]
+    },
+    {
+      "case_id": "nunchuk_hardware_validation_claim",
+      "mutation": "add a nunchuk hardware validation claim without a result source",
+      "expected_error_codes": ["E_NUNCHUK_HARDWARE_VALIDATION_CLAIM_WITHOUT_RESULT_SOURCE"],
+      "payload": [
+        {
+          "op": "set",
+          "path": ["metadata", "note"],
+          "value": "nunchuk hardware validation claim without result source"
+        }
+      ]
+    }
+  ]
+}
