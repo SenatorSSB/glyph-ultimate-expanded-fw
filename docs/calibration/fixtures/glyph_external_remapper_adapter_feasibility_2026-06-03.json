@@ -1,0 +1,71 @@
+{
+  "schema_name": "glyph_external_remapper_adapter_feasibility",
+  "feasibility_version": 1,
+  "status": "future_adapter_feasibility_report",
+  "hardware_status": "not_new_hardware_result",
+  "external_source_promoted_to_authority": false,
+  "adapter_implemented": false,
+  "device_write_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "feasibility_status": "feasible_for_future_offline_json_adapter_after_source_audit",
+  "possible_future_inputs": [
+    "Senscope export package sample",
+    "runtime config candidate",
+    "generated config prototype",
+    "validation report"
+  ],
+  "possible_future_outputs": [
+    "external-remapper-compatible JSON candidate, not device-writeable",
+    "compatibility report"
+  ],
+  "not_feasible_yet": [
+    "WebSerial/device write",
+    "protobuf binary generation",
+    "runtime-loaded config",
+    "custom modifier representation",
+    "official configurator compatibility claims"
+  ],
+  "blocked_decisions": [
+    "full source audit",
+    "license review",
+    "JSON schema comparison",
+    "protobuf schema comparison",
+    "custom profile/modifier representation comparison",
+    "manual import/export experiment",
+    "user approval before integration"
+  ],
+  "required_approvals": [
+    "user approval before integration",
+    "user approval before external dependency or source reuse",
+    "user approval before device transport or WebSerial work",
+    "user approval before runtime-loaded config implementation",
+    "user approval before protobuf/config/schema behavior changes"
+  ],
+  "forbidden_interpretations": [
+    "external source authority",
+    "firmware source authority from external observations",
+    "official configurator compatibility claim",
+    "adapter implemented",
+    "device write behavior implemented",
+    "WebSerial implemented",
+    "runtime-loaded config implemented",
+    "protobuf binary generation implemented",
+    "custom modifier representation implemented",
+    "hardware validation claimed",
+    "Senscope game-semantic source authority changed"
+  ],
+  "source_inputs": [
+    "docs/calibration/glyph_external_remapper_source_snapshot_index_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_source_snapshot_index_2026-06-03.json",
+    "docs/calibration/glyph_external_remapper_config_shape_matrix_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_config_shape_matrix_2026-06-03.json",
+    "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_adapter_boundary_2026-06-03.json",
+    "docs/calibration/glyph_import_export_compatibility_validator_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_import_export_compatibility_expectations_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json"
+  ]
+}

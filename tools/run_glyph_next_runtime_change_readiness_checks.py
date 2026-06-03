@@ -177,6 +177,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_external_remapper_config_shape_matrix.py",
         ),
         step(
+            "external remapper adapter feasibility",
+            "tools/check_glyph_external_remapper_adapter_feasibility.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
