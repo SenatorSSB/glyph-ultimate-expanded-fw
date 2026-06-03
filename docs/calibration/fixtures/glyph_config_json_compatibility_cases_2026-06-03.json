@@ -1,0 +1,93 @@
+{
+  "schema_name": "glyph_config_json_compatibility_cases",
+  "case_version": 1,
+  "status": "repo_committed_fixture_compatibility_only",
+  "hardware_status": "not_new_hardware_result",
+  "official_configurator_compatibility_claimed": false,
+  "device_write_implemented": false,
+  "cases": [
+    {
+      "id": "active_profile_artifact_json_parse",
+      "artifact_path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "expectation": "repo-committed active profile artifact exists and parses as a JSON object"
+    },
+    {
+      "id": "active_profile_mode_ultimate_structure",
+      "artifact_path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "expectation": "active profile artifact contains MODE_ULTIMATE and MODE_ULTIMATE preserves list-shaped buttonRemapping and socdPairs plus list-shaped gameModeConfigs when present"
+    },
+    {
+      "id": "fixture_profile_artifact_json_parse",
+      "artifact_path": "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
+      "expectation": "repo-committed fixture profile artifact exists and parses as a JSON object"
+    },
+    {
+      "id": "fixture_profile_mode_ultimate_structure",
+      "artifact_path": "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
+      "expectation": "fixture profile artifact contains MODE_ULTIMATE and MODE_ULTIMATE preserves list-shaped buttonRemapping and socdPairs plus list-shaped gameModeConfigs when present"
+    },
+    {
+      "id": "explicit_identity_bindings_preserved",
+      "checker_paths": [
+        "tools/check_glyph_ultimate_identity_profile_baseline.py",
+        "tools/check_glyph_smashbox_identity_runtime_bindings.py",
+        "tools/check_glyph_active_profile_binding_path.py"
+      ],
+      "expectation": "current repo checkers still accept explicit self-activated identity bindings and active-profile binding-path conclusions"
+    },
+    {
+      "id": "explicit_disable_entries_shape_if_present",
+      "artifact_paths": [
+        "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+        "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json"
+      ],
+      "expectation": "entries without activates, if present in committed profile JSON, preserve physicalButton-only disable shape"
+    },
+    {
+      "id": "serial_dry_run_tooling_guard_present",
+      "checker_paths": [
+        "tools/check_glyph_serial_config_writer.py"
+      ],
+      "expectation": "current serial config tooling checker passes with dry-run/device-write guardrails intact"
+    },
+    {
+      "id": "serial_dry_run_accepts_active_profile_artifact",
+      "artifact_path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "tool_path": "tools/glyph_serial_config_tool.py",
+      "tool_args": [
+        "--dry-run",
+        "--artifact",
+        "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json"
+      ],
+      "expectation": "current serial dry-run tooling accepts the committed active profile artifact"
+    },
+    {
+      "id": "serial_dry_run_accepts_fixture_profile_artifact",
+      "artifact_path": "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
+      "tool_path": "tools/glyph_serial_config_tool.py",
+      "tool_args": [
+        "--dry-run",
+        "--artifact",
+        "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json"
+      ],
+      "expectation": "current serial dry-run tooling accepts the committed fixture profile artifact"
+    },
+    {
+      "id": "no_profile_artifact_change_introduced_by_branch",
+      "artifact_paths": [
+        "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+        "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json"
+      ],
+      "git_base_ref": "origin/configurator",
+      "expectation": "this branch does not change the committed active profile artifact or committed fixture profile artifact relative to origin/configurator"
+    }
+  ],
+  "doc_caveats": [
+    "repo-committed fixture compatibility only",
+    "not official configurator source authority",
+    "not firmware source",
+    "not runtime-loaded config",
+    "not serial/device write behavior",
+    "not hardware validation"
+  ]
+}
