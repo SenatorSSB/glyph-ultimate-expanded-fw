@@ -313,13 +313,13 @@
     },
     {
       "case_id": "runtime_loaded_config_claim",
-      "mutation": "embed a runtime-loaded config claim in the payload",
-      "expected_error_codes": ["E_FORBIDDEN_PAYLOAD_CONTENT"],
+      "mutation": "set source_status to a runtime-loaded config claim value",
+      "expected_error_codes": ["E_INVALID_SOURCE_STATUS"],
       "payload": [
         {
           "op": "set",
-          "path": ["coverage_metadata", "note"],
-          "value": "runtime-loaded config claim; firmware source patch"
+          "path": ["source_status"],
+          "value": "runtime_loaded_config_claim"
         }
       ]
     }

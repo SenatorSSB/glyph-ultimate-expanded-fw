@@ -45,6 +45,8 @@ The corpus checks that the baseline generated-config fixture still passes the cu
 2. at least one expected validator issue code is produced;
 3. unsafe or malformed payload content is rejected.
 
+The current validator exposes no distinct unknown-priority-class rejection path. That case is retained as a source-contract mismatch stop signal rather than being disguised as a different failure class.
+
 ## Non-Goals
 
 - No firmware source changes.
