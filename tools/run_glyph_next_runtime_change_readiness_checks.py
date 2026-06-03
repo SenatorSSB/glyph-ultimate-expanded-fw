@@ -101,6 +101,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_identity_runtime_generated_config_prototype.py",
         ),
         step(
+            "offline generated config validator",
+            "tools/check_glyph_generated_config_validator.py",
+        ),
+        step(
             "identity runtime generated config evaluator input",
             "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
         ),
