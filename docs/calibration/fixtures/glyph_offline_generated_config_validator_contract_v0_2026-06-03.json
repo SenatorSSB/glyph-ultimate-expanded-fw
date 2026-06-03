@@ -1,0 +1,127 @@
+{
+  "schema_name": "glyph_offline_generated_config_validator_contract",
+  "contract_version": 1,
+  "status": "tooling_validator_only_not_runtime_loaded",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "target_schema_name": "glyph_identity_runtime_generated_config_prototype",
+  "target_contract_version": 1,
+  "validator_tool": "tools/glyph_generated_config_validator.py",
+  "checker_tool": "tools/check_glyph_generated_config_validator.py",
+  "validated_fixtures": [
+    "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+    "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json"
+  ],
+  "required_cli_lines": [
+    "glyph_generated_config_validator",
+    "status=PASS",
+    "status=FAIL",
+    "validated_schema=<schema>",
+    "table_count=<N>",
+    "hardware_status=not_new_hardware_result"
+  ],
+  "required_tables": [
+    "Default",
+    "ModeDefault",
+    "X1",
+    "X2",
+    "MX1",
+    "MX2",
+    "Y1",
+    "MY1",
+    "LayerNormalX",
+    "MLayerNormalX",
+    "LayerFlipper",
+    "MLayerFlipper",
+    "Y1Tilt1",
+    "MY1Tilt1",
+    "Y1LayerFlipper",
+    "MY1LayerFlipper",
+    "Y1LayerNormalX",
+    "MY1LayerNormalX",
+    "Tilt1",
+    "Tilt2",
+    "Tilt3",
+    "MTilt1",
+    "MTilt2",
+    "MTilt3",
+    "Lt1LowMagnitude"
+  ],
+  "table_validation_rules": [
+    "exactly_25_required_tables",
+    "nine_points_per_table",
+    "point_is_two_non_boolean_ints",
+    "coordinates_in_0_255"
+  ],
+  "required_priority_keys": [
+    "digital_effective_direction",
+    "analog",
+    "physical_inputs",
+    "layer_left_right",
+    "lf4_submode_active",
+    "forced_up_resolution",
+    "button_carriers",
+    "ls_to_dpad_routing",
+    "table_output",
+    "direction_plus_a",
+    "lt5_or_rf11_low_magnitude_za",
+    "rf7_hard_up_b",
+    "rf9_null",
+    "nunchuk_override"
+  ],
+  "required_role_binding_sections": [
+    "buttons",
+    "directional",
+    "c_stick",
+    "modifiers",
+    "special_functions"
+  ],
+  "required_hard_overrides": {
+    "rf7_hard_up_b": {
+      "left": [
+        77,
+        172
+      ],
+      "center": [
+        128,
+        172
+      ],
+      "right": [
+        179,
+        172
+      ]
+    },
+    "rf9_null": [
+      128,
+      128
+    ],
+    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude"
+  },
+  "forbidden_payload_content": [
+    "firmware_source_patch",
+    "serial_transport_payload",
+    "device_write_instruction",
+    "macro_or_turbo_logic",
+    "timing_or_history_logic",
+    "arbitrary_script_code_strings",
+    "phase_order_mutation_claims",
+    "hardware_validation_claim_without_result_source",
+    "nunchuk_hardware_validation_claim_without_result_source"
+  ],
+  "non_goals": [
+    "not_firmware_source",
+    "not_runtime_loaded_config",
+    "not_serial_device_write_behavior",
+    "not_hardware_validation",
+    "not_nunchuk_hardware_validation",
+    "does_not_change_firmware_runtime_behavior",
+    "does_not_change_profile_artifacts"
+  ],
+  "source_authority": {
+    "generated_config_contract_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+    "generated_config_prototype_fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "runtime_loaded_validation_contract_fixture": "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json"
+  }
+}
