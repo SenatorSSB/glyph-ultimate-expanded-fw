@@ -1,0 +1,200 @@
+{
+  "schema_name": "glyph_senscope_export_package_invalid_corpus",
+  "corpus_version": 1,
+  "status": "negative_validator_corpus",
+  "hardware_status": "not_new_hardware_result",
+  "validator_tool": "tools/check_glyph_senscope_export_package_validator.py",
+  "baseline_fixture": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+  "cases": [
+    {
+      "case_id": "missing_generated_config",
+      "mutation": "delete nested glyph_generated_config_prototype payload",
+      "expected_error_codes": [
+        "E_MISSING_EXPORT_PAYLOAD"
+      ],
+      "payload": [
+        {
+          "op": "delete",
+          "path": [
+            "glyph_generated_config_prototype"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "generated_config_invalid",
+      "mutation": "change nested generated-config contract version",
+      "expected_error_codes": [
+        "E_GENERATED_CONFIG_CONTRACT_MISMATCH",
+        "E_INVALID_GENERATED_CONFIG"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "glyph_generated_config_prototype",
+            "contract_version"
+          ],
+          "value": 999
+        }
+      ]
+    },
+    {
+      "case_id": "missing_validation_report",
+      "mutation": "delete validation report payload",
+      "expected_error_codes": [
+        "E_MISSING_EXPORT_PAYLOAD"
+      ],
+      "payload": [
+        {
+          "op": "delete",
+          "path": [
+            "validation_report"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "device_write_instruction_included",
+      "mutation": "add forbidden device write instruction key",
+      "expected_error_codes": [
+        "E_DEVICE_WRITE_SCOPE"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "device_write_instruction"
+          ],
+          "value": {
+            "action": "write_to_device"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "serial_transport_payload_included",
+      "mutation": "add forbidden serial transport payload key",
+      "expected_error_codes": [
+        "E_SERIAL_TRANSPORT_SCOPE"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "serial_transport_payload"
+          ],
+          "value": "opaque serial transport payload"
+        }
+      ]
+    },
+    {
+      "case_id": "runtime_loaded_config_implementation_claim",
+      "mutation": "add runtime-loaded config implementation claim",
+      "expected_error_codes": [
+        "E_RUNTIME_LOADED_CONFIG_IMPLEMENTATION_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "validation_report",
+            "open_questions"
+          ],
+          "value": [
+            "runtime-loaded config implemented in this package"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "firmware_behavior_change_claim",
+      "mutation": "add firmware behavior change implementation claim",
+      "expected_error_codes": [
+        "E_FIRMWARE_BEHAVIOR_CHANGE_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "validation_report",
+            "open_questions"
+          ],
+          "value": [
+            "firmware behavior change implemented in this package"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "profile_schema_change_claim",
+      "mutation": "add profile schema change implementation claim",
+      "expected_error_codes": [
+        "E_PROFILE_SCHEMA_CHANGE_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "validation_report",
+            "open_questions"
+          ],
+          "value": [
+            "profile schema change implemented in this package"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "macro_turbo_logic_included",
+      "mutation": "add forbidden macro/turbo key",
+      "expected_error_codes": [
+        "E_MACRO_TURBO_TIMING_SCOPE"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "macro_or_turbo_logic"
+          ],
+          "value": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "hardware_validation_claim_without_result",
+      "mutation": "add hardware validation claim without result source",
+      "expected_error_codes": [
+        "E_HARDWARE_VALIDATION_CLAIM_WITHOUT_RESULT"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "validation_report",
+            "not_hardware_validation_caveat"
+          ],
+          "value": "hardware validation pass recorded by this package"
+        }
+      ]
+    },
+    {
+      "case_id": "nunchuk_hardware_validation_claim",
+      "mutation": "add nunchuk hardware validation claim",
+      "expected_error_codes": [
+        "E_NUNCHUK_HARDWARE_VALIDATION_CLAIM"
+      ],
+      "payload": [
+        {
+          "op": "set",
+          "path": [
+            "nunchuk_status_caveat"
+          ],
+          "value": "nunchuk hardware validation pass recorded by this package"
+        }
+      ]
+    }
+  ]
+}
