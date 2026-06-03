@@ -1,0 +1,135 @@
+{
+  "schema_name": "glyph_external_remapper_adapter_boundary",
+  "boundary_version": 1,
+  "status": "external_non_authoritative_gap_report",
+  "hardware_status": "not_new_hardware_result",
+  "external_source_promoted_to_authority": false,
+  "device_write_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "external_references": [
+    {
+      "id": "lyseste_glyph_remapper_repo",
+      "kind": "external_repo",
+      "url": "https://github.com/lyseste/glyph-remapper",
+      "inspection_status": "observed_refs_and_metadata_only",
+      "authority_status": "non_authoritative_observation",
+      "observed_root_files": [
+        "LICENSE",
+        "README.md",
+        "app.js",
+        "glyph-config.json",
+        "index.html",
+        "styles.css"
+      ],
+      "promoted_to_authority": false
+    },
+    {
+      "id": "lyseste_glyph_remapper_app",
+      "kind": "external_app",
+      "url": "https://lyseste.com/glyph-remapper/",
+      "inspection_status": "observed_hosted_shell_only",
+      "authority_status": "non_authoritative_observation",
+      "promoted_to_authority": false
+    }
+  ],
+  "observations": [
+    {
+      "id": "browser_configurator",
+      "scope": "browser configurator",
+      "status": "observed_from_external_repo_docs",
+      "evidence": "public README describes a browser-based configurator",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "profile_editing",
+      "scope": "profile editing",
+      "status": "observed_from_external_repo_docs",
+      "evidence": "public README and hosted shell expose profile editing labels",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "json_import_export",
+      "scope": "JSON import/export",
+      "status": "observed_from_external_repo_docs",
+      "evidence": "public README and hosted shell expose JSON config file import/export",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "rgb_color_palette",
+      "scope": "RGB/color palette",
+      "status": "observed_from_external_code",
+      "evidence": "hosted shell exposes button lighting, color swatch, saved color, and palette UI labels",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "socd_profile_management",
+      "scope": "SOCD/profile management",
+      "status": "observed_from_external_code",
+      "evidence": "hosted shell exposes profiles and SOCD pairs UI labels",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "keyboard_capture",
+      "scope": "keyboard capture",
+      "status": "observed_from_external_repo_docs",
+      "evidence": "public README describes keyboard capture behavior",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "webserial_load_save_claim",
+      "scope": "WebSerial load/save claim",
+      "status": "observed_from_external_repo_docs",
+      "evidence": "public README claims device load/save over WebSerial",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "custom_profile_modifier_support_claim_public_post",
+      "scope": "custom profile/modifier support claim from public post",
+      "status": "observed_from_public_post",
+      "evidence": "user-provided task statement records the public-post claim; no public-post URL was supplied in this branch",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "full_external_source_audit",
+      "scope": "full external source audit",
+      "status": "not_verified",
+      "evidence": "root files and public docs/UI labels were inspected only at a high level",
+      "authority_status": "non_authoritative_observation"
+    },
+    {
+      "id": "official_configurator_compatibility",
+      "scope": "official configurator compatibility",
+      "status": "not_verified",
+      "evidence": "external claims were not promoted to official configurator authority",
+      "authority_status": "non_authoritative_observation"
+    }
+  ],
+  "required_future_comparisons": [
+    "need full source audit before adapter assumptions",
+    "need profile JSON compatibility comparison",
+    "need protobuf schema comparison",
+    "need WebSerial packet-framing comparison",
+    "need custom modifier representation comparison",
+    "need import/export package compatibility experiment",
+    "need license review before code reuse",
+    "need user approval before depending on or integrating"
+  ],
+  "forbidden_interpretations": [
+    "firmware_authority",
+    "official_configurator_authority",
+    "imported_dependency",
+    "device_write_implementation",
+    "runtime_loaded_config_implementation",
+    "hardware_validation"
+  ],
+  "boundary_statement": [
+    "not source authority",
+    "not firmware authority",
+    "not official configurator authority",
+    "not imported dependency",
+    "no device-write implementation in this repo",
+    "no runtime-loaded config implementation in this repo",
+    "no WebSerial implementation in this repo",
+    "not hardware validation"
+  ]
+}
