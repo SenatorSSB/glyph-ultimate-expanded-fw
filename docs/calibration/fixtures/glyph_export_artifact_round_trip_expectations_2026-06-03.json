@@ -1,0 +1,106 @@
+{
+  "checked_artifacts": [
+    {
+      "kind": "json_fixture",
+      "name": "generated_config_prototype",
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json"
+    },
+    {
+      "kind": "json_fixture",
+      "name": "runtime_config_candidate_sample",
+      "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json"
+    },
+    {
+      "kind": "json_fixture",
+      "name": "senscope_export_package_sample",
+      "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json"
+    },
+    {
+      "kind": "json_fixture",
+      "name": "runtime_config_validation_report",
+      "path": "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json"
+    },
+    {
+      "kind": "checker",
+      "name": "generated_config_evaluator_input_checker",
+      "path": "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py"
+    },
+    {
+      "kind": "checker",
+      "name": "generated_cpp_diff_checker",
+      "path": "tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py"
+    }
+  ],
+  "contract_version": 1,
+  "expected_priority_reference_mapping": {
+    "analog": "analog",
+    "digital": "digital_effective_direction"
+  },
+  "expected_report_summary": {
+    "hardware_status": "not_new_hardware_result",
+    "invalid_corpus_case_count": 26,
+    "nunchuk_status": "preserved_but_not_hardware_validated",
+    "report_version": 1,
+    "sample_candidate_validation_status": "PASS",
+    "schema_name": "glyph_runtime_config_validation_report",
+    "status": "docs_tools_validation_report",
+    "table_count": 25,
+    "validated_candidate_schema_name": "glyph_runtime_config_candidate"
+  },
+  "hardware_status": "not_new_hardware_result",
+  "mode_scope": "MODE_ULTIMATE",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "required_doc_caveats": [
+    "offline round-trip only",
+    "not firmware source",
+    "not runtime-loaded config",
+    "not serial/device write behavior",
+    "not hardware validation",
+    "not nunchuk hardware validation"
+  ],
+  "required_export_caveats": {
+    "hardware_status_caveat": "Sample package only; not hardware validation.",
+    "nunchuk_status_caveat": "Nunchuk behavior is preserved but not hardware validated by this package."
+  },
+  "required_non_goal_markers": {
+    "generated_config_prototype": [
+      "not_runtime_loaded",
+      "not_serial_device_write_path"
+    ],
+    "runtime_config_candidate_sample": [
+      "not_runtime_loaded",
+      "not_serial_device_write"
+    ],
+    "runtime_config_validation_report": [
+      "not_runtime_loaded_config",
+      "not_serial_device_write_behavior"
+    ]
+  },
+  "round_trip_invariants": [
+    "generated-config prototype validates with glyph_generated_config_validator",
+    "runtime-candidate sample validates with glyph_runtime_config_candidate_validator",
+    "runtime-candidate tables equal generated-config tables",
+    "runtime-candidate role bindings equal generated-config role bindings",
+    "runtime-candidate hard overrides equal generated-config hard overrides",
+    "runtime-candidate priority references equal generated-config priority lists",
+    "runtime-candidate suppression rules equal generated-config suppression rules",
+    "Senscope export package sample validates with the committed validator contract",
+    "Senscope export package nested generated config equals the committed prototype",
+    "runtime config validation report fixture exactly matches regenerated output",
+    "runtime config validation report summarizes the committed runtime-candidate sample",
+    "generated-config-backed evaluator input checker still passes",
+    "generated C++ diff artifact checker still passes",
+    "all artifacts preserve hardware_status=not_new_hardware_result",
+    "all artifacts preserve the nunchuk non-validation caveat",
+    "all artifacts preserve not runtime-loaded caveats",
+    "all artifacts preserve not serial/device write behavior caveats"
+  ],
+  "schema_name": "glyph_export_artifact_round_trip_expectations",
+  "source_authority": {
+    "round_trip_doc": "docs/calibration/glyph_export_artifact_round_trip_2026-06-03.md",
+    "round_trip_tool": "tools/check_glyph_export_artifact_round_trip.py",
+    "runtime_report_generator": "tools/generate_glyph_runtime_config_validation_report.py",
+    "senscope_export_package_validator": "tools/check_glyph_senscope_export_package_validator.py"
+  },
+  "status": "docs_tools_round_trip_expectations"
+}
