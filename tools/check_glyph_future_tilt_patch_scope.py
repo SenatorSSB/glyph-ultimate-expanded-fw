@@ -13,11 +13,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BASE = "configurator"
 
 DEFAULT_ALLOW_PREFIXES = ("docs/calibration/", "tools/")
-DEFAULT_ALLOW_EXACT = ("src/modes/Ultimate.cpp",)
+DEFAULT_ALLOW_EXACT = ("src/modes/Ultimate.cpp", "src/modes/UltimateIdentityRuntimeTables.hpp")
 
 DOCS_ONLY_ALLOW_PREFIXES = ("docs/", "tools/")
 RUNTIME_IMPLEMENTATION_ALLOW_PREFIXES = ("docs/", "tools/")
-RUNTIME_IMPLEMENTATION_ALLOW_EXACT = ("src/modes/Ultimate.cpp",)
+RUNTIME_IMPLEMENTATION_ALLOW_EXACT = ("src/modes/Ultimate.cpp", "src/modes/UltimateIdentityRuntimeTables.hpp")
 
 SOCD_RE = re.compile(r"(^|/|_)(socd)(/|_|\.|$)", re.IGNORECASE)
 

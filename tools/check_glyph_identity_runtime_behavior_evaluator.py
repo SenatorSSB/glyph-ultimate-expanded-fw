@@ -14,6 +14,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from extract_glyph_identity_runtime_tables import load_source_text_with_generated_tables
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_PATH = REPO_ROOT / "docs" / "calibration" / "fixtures" / "glyph_identity_runtime_behavior_cases_2026-05-28.json"
@@ -415,7 +417,7 @@ def load_fixture() -> dict[str, Any]:
 
 
 def validate_source_anchors() -> list[str]:
-    source_text = SOURCE_PATH.read_text(encoding="utf-8")
+    source_text = load_source_text_with_generated_tables(SOURCE_PATH)
     return [anchor for anchor in SOURCE_ANCHORS if anchor not in source_text]
 
 
