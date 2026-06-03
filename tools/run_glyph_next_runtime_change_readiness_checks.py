@@ -129,6 +129,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
         step(
+            "agentic sequence protocol",
+            "tools/check_glyph_agentic_sequence_protocol.py",
+        ),
+        step(
             "preimplementation go/no-go index",
             "tools/check_glyph_preimplementation_go_nogo_index.py",
         ),
