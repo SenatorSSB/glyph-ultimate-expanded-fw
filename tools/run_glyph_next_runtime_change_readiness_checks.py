@@ -181,6 +181,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_external_remapper_adapter_feasibility.py",
         ),
         step(
+            "external remapper compatibility experiment plan",
+            "tools/check_glyph_external_remapper_compatibility_experiment_plan.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
