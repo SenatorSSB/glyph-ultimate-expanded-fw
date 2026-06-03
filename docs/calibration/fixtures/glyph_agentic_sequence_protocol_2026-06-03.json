@@ -1,0 +1,80 @@
+{
+  "schema_name": "glyph_agentic_sequence_protocol",
+  "protocol_version": 1,
+  "status": "workflow_protocol_only",
+  "hardware_status": "not_new_hardware_result",
+  "supervisor_responsibilities": [
+    "define_branch_objective_and_scope",
+    "confirm_start_from_current_origin_configurator",
+    "confirm_target_branch_absent_locally_and_remotely",
+    "review_checker_output_before_continuation",
+    "require_user_intervention_when_a_stop_gate_is_hit",
+    "keep_branch_history_separate_and_bounded"
+  ],
+  "subagent_responsibilities": [
+    "work_exactly_one_branch_at_a_time",
+    "make_one_conceptual_change_per_branch",
+    "stay_within_docs_tools_fixtures_scope",
+    "run_required_checks_after_each_branch_and_merge",
+    "stop_immediately_on_failed_checks",
+    "report_final_summary_in_required_format"
+  ],
+  "required_stop_conditions": [
+    "source_authority_ambiguity",
+    "target_branch_exists_locally_or_remotely",
+    "failed_checks",
+    "unsupported_behavior_claims",
+    "firmware_source_approval_required",
+    "hardware_testing_required",
+    "profile_artifact_approval_required",
+    "runtime_loaded_config_approval_required",
+    "serial_device_write_approval_required"
+  ],
+  "user_intervention_required_for": [
+    "source_authority_ambiguity",
+    "firmware_source_approval",
+    "hardware_testing",
+    "profile_artifact_approval",
+    "runtime_loaded_config_approval",
+    "serial_device_write_approval",
+    "unsupported_behavior_claims",
+    "checker_or_build_failures_not_automatically_correctable"
+  ],
+  "forbidden_autonomous_actions": [
+    "firmware_source_changes_without_approval",
+    "hardware_validation_claims",
+    "serial_device_write_behavior",
+    "runtime_loaded_config_implementation",
+    "profile_artifact_changes",
+    "schema_protobuf_changes",
+    "unsupported_behavior_claims"
+  ],
+  "required_branch_lifecycle": [
+    "start_from_current_origin_configurator",
+    "one_branch_per_issue",
+    "stop_if_target_branch_exists_locally_or_remotely",
+    "one_conceptual_change_per_branch",
+    "merge_after_each_successful_branch",
+    "do_not_merge_to_configurator_from_subagent"
+  ],
+  "required_verification_lifecycle": [
+    "run_standard_checks_after_each_branch_and_merge",
+    "stop_on_failed_checks",
+    "no_continuation_after_failed_checks",
+    "do_not_treat_failed_checks_as_automatically_correctable"
+  ],
+  "final_summary_requirements": [
+    "branch_name",
+    "commit_sha",
+    "files_changed",
+    "checks_run_and_pass_fail_result",
+    "skipped_checks_and_why",
+    "runtime_source_changed",
+    "profile_artifacts_changed",
+    "runtime_loaded_config_implemented",
+    "serial_device_write_behavior_implemented",
+    "hardware_validation_claimed",
+    "stop_conditions_hit",
+    "ready_for_supervisor_inspection"
+  ]
+}
