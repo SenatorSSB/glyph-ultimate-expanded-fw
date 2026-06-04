@@ -121,6 +121,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_offline_remapper_manual_procedure_2026-06-03.md",
     "docs/calibration/fixtures/glyph_offline_remapper_manual_procedure_2026-06-03.json",
     "tools/check_glyph_offline_remapper_manual_procedure.py",
+    "docs/calibration/glyph_offline_remapper_result_template_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_result_TEMPLATE_2026-06-03.json",
+    "tools/check_glyph_offline_remapper_result_template.py",
     "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
     "docs/calibration/fixtures/glyph_storage_transport_source_authority_registry_2026-06-03.json",
     "tools/check_glyph_storage_transport_source_authority_registry.py",
@@ -301,6 +304,16 @@ REQUIRED_ROADMAP_PHRASES = [
     "compare exported JSON only in later result-recording branch",
     "do not change repo fixtures to fit external app",
     "not official compatibility",
+    "Offline remapper result template",
+    "glyph/gfw2-offline-remapper-result-template",
+    "template_not_executed",
+    "result template only",
+    "no device connected",
+    "no WebSerial access",
+    "no Save to Device",
+    "no device write attempted",
+    "not official compatibility",
+    "not hardware validation",
 ]
 
 

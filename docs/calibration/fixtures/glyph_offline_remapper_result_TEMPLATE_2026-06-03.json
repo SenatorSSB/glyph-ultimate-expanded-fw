@@ -1,0 +1,90 @@
+{
+  "schema_name": "glyph_offline_remapper_result_template",
+  "template_version": 1,
+  "status": "template_not_executed",
+  "hardware_status": "not_new_hardware_result",
+  "experiment_executed": false,
+  "device_connected": false,
+  "webserial_access_granted": false,
+  "save_to_device_clicked": false,
+  "device_write_attempted": false,
+  "firmware_flashing_attempted": false,
+  "adapter_implemented": false,
+  "official_compatibility_claimed": false,
+  "hardware_validation_claimed": false,
+  "external_source_promoted_to_authority": false,
+  "required_result_fields": [
+    "browser/environment",
+    "external app URL/version/commit if available",
+    "input artifact hash",
+    "import attempt result",
+    "export attempt result",
+    "JSON diff result",
+    "accepted/rejected field list",
+    "no-device confirmation",
+    "no WebSerial access confirmation",
+    "no Save to Device confirmation",
+    "no source-authority promotion confirmation",
+    "no official/hardware compatibility claims confirmation"
+  ],
+  "result_rows_template": [
+    {
+      "row_id": "ENV-001",
+      "prompt": "browser/environment recorded"
+    },
+    {
+      "row_id": "SRC-001",
+      "prompt": "external app URL/version/commit recorded if available"
+    },
+    {
+      "row_id": "INPUT-001",
+      "prompt": "active profile artifact hash confirmed"
+    },
+    {
+      "row_id": "IMPORT-001",
+      "prompt": "active profile import attempt"
+    },
+    {
+      "row_id": "EXPORT-001",
+      "prompt": "export attempt if import succeeds"
+    },
+    {
+      "row_id": "DIFF-001",
+      "prompt": "JSON diff result"
+    },
+    {
+      "row_id": "FIELDS-001",
+      "prompt": "accepted/rejected field list"
+    },
+    {
+      "row_id": "DEVICE-001",
+      "prompt": "no live device confirmation"
+    },
+    {
+      "row_id": "WS-001",
+      "prompt": "no WebSerial access confirmation"
+    },
+    {
+      "row_id": "SAVE-001",
+      "prompt": "no Save to Device confirmation"
+    },
+    {
+      "row_id": "AUTH-001",
+      "prompt": "no source authority promotion"
+    },
+    {
+      "row_id": "CLAIM-001",
+      "prompt": "no official/hardware compatibility claims"
+    }
+  ],
+  "required_caveats": [
+    "result template only",
+    "not executed",
+    "no device connected",
+    "no WebSerial access",
+    "no Save to Device",
+    "no device write attempted",
+    "not official compatibility",
+    "not hardware validation"
+  ]
+}
