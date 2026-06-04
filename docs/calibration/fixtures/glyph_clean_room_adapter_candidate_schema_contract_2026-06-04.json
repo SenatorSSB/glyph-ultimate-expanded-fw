@@ -1,0 +1,177 @@
+{
+  "forbidden_capabilities": {
+    "adapter_implementation_blocked": true,
+    "adapter_implemented": false,
+    "device_write_implemented": false,
+    "external_code_copied": false,
+    "external_dependency_added": false,
+    "external_json_generation_allowed": false,
+    "external_json_generation_blocked": true,
+    "external_remapper_compatible_json_generated": false,
+    "hardware_validation_claimed": false,
+    "official_compatibility_claimed": false,
+    "protobuf_binary_generation_implemented": false,
+    "runtime_loaded_config_implemented": false,
+    "serial_device_write_behavior_implemented": false,
+    "webserial_transport_implemented": false
+  },
+  "loss_warnings": [
+    "active profile round-trip is currently unsafe",
+    "external remapper export is not canonical",
+    "binding-loss classification is adapter-blocking",
+    "SOCD drift classification is adapter-blocking",
+    "target output is not generated",
+    "target output is not round-trip safe by default"
+  ],
+  "non_round_trip_caveats": [
+    "active profile round-trip is currently unsafe",
+    "target output is not generated",
+    "target output is not round-trip safe by default",
+    "external remapper export is not canonical",
+    "adapter implementation remains blocked",
+    "external JSON generation remains blocked",
+    "official compatibility remains unclaimed"
+  ],
+  "profile_level_bindings": {
+    "binding_loss_classification": "adapter_blocking_loss",
+    "binding_loss_summary": {
+      "all_input_activates_entries_missing_or_stripped_in_exported_profile": true,
+      "button_remapping_exact_value_equality": false,
+      "exported_button_remapping_count": 17,
+      "exported_entries_with_activates": 0,
+      "exported_profile_retains_profile_level_structure": true,
+      "input_button_remapping_count": 42,
+      "input_entries_missing_or_stripped_in_exported_profile": 42,
+      "input_entries_with_activates": 42
+    },
+    "external_remapper_export_canonical": false,
+    "round_trip_safe_for_active_profile": false,
+    "source_artifact_key": "active_profile_artifact",
+    "target_output_generated": false
+  },
+  "runtime_owned_behavior_sidecar": {
+    "required_for_future_candidate": true,
+    "runtime_owned_behavior_represented_by_external_profile_json": false,
+    "sidecar_only": true,
+    "target_output_generated": false
+  },
+  "schema_name": "glyph_clean_room_adapter_candidate_schema_contract",
+  "schema_version": 1,
+  "socd_policy_sidecar": {
+    "drift_classification": "adapter_blocking_drift",
+    "socd_drift_summary": {
+      "added_exported_pairs": [
+        {
+          "buttonDir1": "BTN_LF2",
+          "buttonDir2": "BTN_RF4",
+          "socdType": "SOCD_2IP"
+        },
+        {
+          "buttonDir1": "BTN_LF8",
+          "buttonDir2": "BTN_LF6"
+        },
+        {
+          "buttonDir1": "BTN_RF7",
+          "buttonDir2": "BTN_RF8"
+        }
+      ],
+      "exported_socd_count": 6,
+      "input_socd_count": 4,
+      "missing_from_exported_pairs": [
+        {
+          "buttonDir1": "BTN_LF5",
+          "buttonDir2": "BTN_LF2",
+          "socdType": "SOCD_2IP"
+        }
+      ],
+      "socd_pairs_exact_value_equality": false
+    },
+    "source_artifact_key": "socd_drift_classification",
+    "target_output_generated": false
+  },
+  "source_artifacts": {
+    "active_profile_artifact": {
+      "evidence_role": "active profile artifact used in the no-device remapper experiment",
+      "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "schema_name": "active_profile_artifact",
+      "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707",
+      "status": "repo_artifact"
+    },
+    "binding_loss_classification": {
+      "checker_path": "tools/check_glyph_offline_remapper_binding_loss_classification.py",
+      "evidence_role": "adapter-blocking binding-loss classification",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_binding_loss_classification_2026-06-04.json",
+      "fixture_sha256": "775d8b5fa4f6a713a723b809e9883f5e4cd013ea49ef7417c422f4e11bbd44de",
+      "schema_name": "glyph_offline_remapper_binding_loss_classification",
+      "status": "docs_tools_binding_loss_classification"
+    },
+    "export_loss_gate": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_loss_gate.py",
+      "evidence_role": "aggregate export-loss gate blocking adapter implementation",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_loss_gate_2026-06-04.json",
+      "fixture_sha256": "9a3bdb392f1af66e8dea449acdf69caef1b0dc92b8fbc3dd061702c6eb06325c",
+      "schema_name": "glyph_offline_remapper_export_loss_gate",
+      "status": "external_remapper_round_trip_not_safe_adapter_blocked"
+    },
+    "exported_experiment_artifact": {
+      "evidence_role": "exported experiment artifact, not canonical source authority",
+      "path": "docs/calibration/fixtures/glyph_offline_remapper_exported_GlyphUserProfiles_2026-06-04.json",
+      "schema_name": "external_remapper_exported_GlyphUserProfiles",
+      "sha256": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b",
+      "status": "manual_no_device_export_artifact_with_warnings"
+    },
+    "socd_drift_classification": {
+      "checker_path": "tools/check_glyph_offline_remapper_socd_drift_classification.py",
+      "evidence_role": "adapter-blocking SOCD drift classification",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_socd_drift_classification_2026-06-04.json",
+      "fixture_sha256": "6cb334d59b5546f83b6806cbcee32678221de817b196eaf42e71fac82ad2bef0",
+      "schema_name": "glyph_offline_remapper_socd_drift_classification",
+      "status": "docs_tools_socd_drift_classification"
+    }
+  },
+  "source_authority": {
+    "external_remapper_export_authority": false,
+    "external_source_promoted_to_authority": false,
+    "no_external_code_reuse": true,
+    "no_external_dependency": true,
+    "repo_source_artifacts_are_contract_inputs": true,
+    "source_behavior_claim_basis": "repo docs, fixtures, and checker outputs only"
+  },
+  "status": "schema_contract_only_adapter_not_implemented",
+  "target_profile_metadata": {
+    "active_profile_round_trip_currently_safe": false,
+    "adapter_implemented": false,
+    "external_json_generation_allowed": false,
+    "external_remapper_export_canonical": false,
+    "hardware_status": "not_new_hardware_result",
+    "official_compatibility_claimed": false,
+    "target": "future clean-room adapter candidate schema",
+    "target_output_generated": false,
+    "target_output_round_trip_safe_by_default": false
+  },
+  "validation_report": {
+    "adapter_implemented": false,
+    "checker_path": "tools/check_glyph_clean_room_adapter_candidate_schema_contract.py",
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_candidate_schema_contract_2026-06-04.md",
+    "external_json_generation_allowed": false,
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_candidate_schema_contract_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "required_sections": [
+      "schema_name",
+      "schema_version",
+      "status",
+      "source_artifacts",
+      "target_profile_metadata",
+      "profile_level_bindings",
+      "runtime_owned_behavior_sidecar",
+      "socd_policy_sidecar",
+      "loss_warnings",
+      "non_round_trip_caveats",
+      "source_authority",
+      "forbidden_capabilities",
+      "validation_report"
+    ],
+    "source_artifacts_validated": true,
+    "validation_scope": "docs_tools_fixtures_only"
+  }
+}
