@@ -1,0 +1,334 @@
+{
+  "adapter_implemented": false,
+  "cases": [
+    {
+      "case_id": "reject_missing_sidecar",
+      "category": "missing_sidecar",
+      "expected_error_codes": [
+        "clean_room_candidate.sidecar.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Remove the required sidecar content from a future clean-room adapter candidate payload.",
+      "required_rejection_basis": "sidecar is required"
+    },
+    {
+      "case_id": "reject_missing_runtime_owned_behavior_warning",
+      "category": "missing_runtime_owned_behavior_warning",
+      "expected_error_codes": [
+        "clean_room_candidate.runtime_owned_behavior_warning.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Omit the required runtime-owned behavior warning from a future candidate sidecar/report.",
+      "required_rejection_basis": "runtime-owned behavior warning is required"
+    },
+    {
+      "case_id": "reject_missing_non_round_trip_warning",
+      "category": "missing_non_round_trip_warning",
+      "expected_error_codes": [
+        "clean_room_candidate.non_round_trip_warning.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Omit the required non-round-trip warning from a future candidate sidecar/report.",
+      "required_rejection_basis": "non-round-trip warning is required"
+    },
+    {
+      "case_id": "reject_claimed_round_trip_safe",
+      "category": "claims_round_trip_safe",
+      "expected_error_codes": [
+        "clean_room_candidate.round_trip_safe.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Set a future candidate payload to claim round-trip safety even though the contract keeps it unsafe by default.",
+      "required_rejection_basis": "future candidate must not claim round-trip safe"
+    },
+    {
+      "case_id": "reject_claimed_active_profile_round_trip_safe",
+      "category": "claims_active_profile_round_trip_safe",
+      "expected_error_codes": [
+        "clean_room_candidate.active_profile_round_trip_safe.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Set a future candidate payload to claim the active profile artifact is round-trip safe.",
+      "required_rejection_basis": "active profile round-trip remains unsafe"
+    },
+    {
+      "case_id": "reject_runtime_owned_behavior_claimed_in_external_profile_json",
+      "category": "claims_runtime_owned_behavior_represented_by_external_profile_json",
+      "expected_error_codes": [
+        "clean_room_candidate.runtime_owned_behavior_external_profile_json.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim that runtime-owned behavior is represented directly by external profile JSON instead of sidecar-only warnings.",
+      "required_rejection_basis": "runtime-owned behavior must not be represented directly by external profile JSON"
+    },
+    {
+      "case_id": "reject_adapter_implemented_true",
+      "category": "adapter_implemented",
+      "expected_error_codes": [
+        "clean_room_candidate.adapter_implemented.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Flip a future candidate payload to claim adapter implementation exists.",
+      "required_rejection_basis": "no adapter output exists"
+    },
+    {
+      "case_id": "reject_external_json_generated_true",
+      "category": "external_json_generated",
+      "expected_error_codes": [
+        "clean_room_candidate.external_json_generated.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Flip a future candidate payload to claim external JSON generation exists.",
+      "required_rejection_basis": "no external JSON generation exists"
+    },
+    {
+      "case_id": "reject_generated_external_json_output_path_present",
+      "category": "generated_external_json_output_path_present",
+      "expected_error_codes": [
+        "clean_room_candidate.external_json_output_path.forbidden"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Add a generated external JSON output path reference to a future candidate payload or validation report.",
+      "required_rejection_basis": "generated external JSON output path present"
+    },
+    {
+      "case_id": "reject_device_write_allowed_true",
+      "category": "device_write_allowed",
+      "expected_error_codes": [
+        "clean_room_candidate.device_write_allowed.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim that device write behavior is allowed for the future candidate payload.",
+      "required_rejection_basis": "device write allowed"
+    },
+    {
+      "case_id": "reject_webserial_allowed_true",
+      "category": "webserial_allowed",
+      "expected_error_codes": [
+        "clean_room_candidate.webserial_allowed.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim that WebSerial transport is allowed for the future candidate payload.",
+      "required_rejection_basis": "WebSerial allowed"
+    },
+    {
+      "case_id": "reject_protobuf_binary_generation_allowed_true",
+      "category": "protobuf_binary_generation_allowed",
+      "expected_error_codes": [
+        "clean_room_candidate.protobuf_binary_generation_allowed.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim that protobuf binary generation is allowed for the future candidate payload.",
+      "required_rejection_basis": "protobuf binary generation allowed"
+    },
+    {
+      "case_id": "reject_runtime_loaded_config_allowed_true",
+      "category": "runtime_loaded_config_allowed",
+      "expected_error_codes": [
+        "clean_room_candidate.runtime_loaded_config_allowed.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim that runtime-loaded config is allowed for the future candidate payload.",
+      "required_rejection_basis": "runtime-loaded config allowed"
+    },
+    {
+      "case_id": "reject_official_compatibility_claimed_true",
+      "category": "official_compatibility_claimed",
+      "expected_error_codes": [
+        "clean_room_candidate.official_compatibility_claimed.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim official configurator compatibility for the future candidate payload.",
+      "required_rejection_basis": "official compatibility claimed"
+    },
+    {
+      "case_id": "reject_hardware_validation_claimed_true",
+      "category": "hardware_validation_claimed",
+      "expected_error_codes": [
+        "clean_room_candidate.hardware_validation_claimed.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim hardware validation for the future candidate payload.",
+      "required_rejection_basis": "hardware validation claimed"
+    },
+    {
+      "case_id": "reject_external_source_promoted_to_authority_true",
+      "category": "external_source_promoted_to_authority",
+      "expected_error_codes": [
+        "clean_room_candidate.external_source_promoted_to_authority.false_required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Promote external remapper output or external notes to source authority for the future candidate payload.",
+      "required_rejection_basis": "external source promoted to authority"
+    },
+    {
+      "case_id": "reject_copied_external_source_code_true",
+      "category": "copied_external_source_code",
+      "expected_error_codes": [
+        "clean_room_candidate.external_code_reuse.forbidden"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim copied external source code as part of the future candidate payload or validator context.",
+      "required_rejection_basis": "copied external source code"
+    },
+    {
+      "case_id": "reject_external_dependency_added_true",
+      "category": "external_dependency_added",
+      "expected_error_codes": [
+        "clean_room_candidate.external_dependency_added.forbidden"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Claim that an external dependency was added for the future candidate payload or validator context.",
+      "required_rejection_basis": "external dependency added"
+    },
+    {
+      "case_id": "reject_missing_source_authority_classification",
+      "category": "missing_source_authority_classification",
+      "expected_error_codes": [
+        "clean_room_candidate.source_authority_classification.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Remove the required source-authority classification from a future candidate payload or report.",
+      "required_rejection_basis": "source-authority classification is required"
+    },
+    {
+      "case_id": "reject_missing_validation_report",
+      "category": "missing_validation_report",
+      "expected_error_codes": [
+        "clean_room_candidate.validation_report.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Remove the required validation report from a future candidate payload.",
+      "required_rejection_basis": "validation report is required"
+    },
+    {
+      "case_id": "reject_missing_loss_warnings",
+      "category": "missing_loss_warnings",
+      "expected_error_codes": [
+        "clean_room_candidate.loss_warnings.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Remove the required loss warnings from a future candidate payload or report.",
+      "required_rejection_basis": "loss warnings are required"
+    },
+    {
+      "case_id": "reject_binding_loss_warning_suppressed",
+      "category": "binding_loss_warning_suppressed",
+      "expected_error_codes": [
+        "clean_room_candidate.binding_loss_warning.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Suppress the binding-loss warning that the sidecar contract requires for future candidates.",
+      "required_rejection_basis": "binding loss warning suppressed"
+    },
+    {
+      "case_id": "reject_socd_drift_warning_suppressed",
+      "category": "socd_drift_warning_suppressed",
+      "expected_error_codes": [
+        "clean_room_candidate.socd_drift_warning.required"
+      ],
+      "must_fail": true,
+      "must_not_claim_hardware_validation": true,
+      "must_not_claim_official_compatibility": true,
+      "must_not_generate_external_json": true,
+      "mutation_description": "Suppress the SOCD-drift warning that the sidecar contract requires for future candidates.",
+      "required_rejection_basis": "SOCD drift warning suppressed"
+    }
+  ],
+  "contract_source": {
+    "checker_path": "tools/check_glyph_clean_room_adapter_negative_corpus_contract.py",
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_negative_corpus_contract_2026-06-04.json",
+    "invalid_category_count": 23,
+    "schema_name": "glyph_clean_room_adapter_negative_corpus_contract",
+    "status": "negative_corpus_contract_only"
+  },
+  "corpus_version": 1,
+  "external_json_generated": false,
+  "hardware_status": "not_new_hardware_result",
+  "schema_name": "glyph_clean_room_adapter_invalid_corpus",
+  "source_authority": {
+    "external_source_promoted_to_authority": false,
+    "no_external_code_reuse": true,
+    "no_external_dependency": true,
+    "source_basis": "repo docs, fixtures, and checker outputs only"
+  },
+  "status": "docs_tools_invalid_corpus",
+  "validation_report": {
+    "checker_path": "tools/check_glyph_clean_room_adapter_invalid_corpus_fixture.py",
+    "contract_categories_covered": true,
+    "contract_checker_required_to_pass": true,
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_invalid_corpus_2026-06-04.md",
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_invalid_corpus_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "invalid_case_count": 23,
+    "no_adapter_candidate_generation": true,
+    "no_mutation_application": true,
+    "validation_scope": "docs_tools_fixtures_only"
+  }
+}
