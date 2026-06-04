@@ -201,6 +201,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_storage_interpreter_blocker_packet.py",
         ),
         step(
+            "storage transport research index",
+            "tools/check_glyph_storage_transport_research_index.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),

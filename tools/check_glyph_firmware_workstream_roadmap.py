@@ -115,6 +115,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md",
     "docs/calibration/fixtures/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.json",
     "tools/check_glyph_runtime_storage_interpreter_blocker_packet.py",
+    "docs/calibration/glyph_storage_transport_research_index_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_storage_transport_research_index_2026-06-03.json",
+    "tools/check_glyph_storage_transport_research_index.py",
     "docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md",
     "docs/calibration/fixtures/glyph_preimplementation_go_nogo_index_2026-05-28.json",
     "docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md",
@@ -221,6 +224,10 @@ REQUIRED_ROADMAP_PHRASES = [
     "firmware owns evaluator phase order and allowed role classes",
     "config must not own scripts/macros/turbo/timing/history or phase-order mutation",
     "the packet is not hardware validation",
+    "storage/transport research index",
+    "glyph/gfw2-storage-transport-research-index",
+    "all implementation classes blocked remain protobuf binary generation, WebSerial transport, device write, runtime-loaded storage, runtime-loaded interpreter, and official configurator compatibility claims",
+    "allowed next work stays limited to docs/tools validators, offline JSON adapter planning, manual no-device import/export experiment planning, and source audits",
 ]
 
 

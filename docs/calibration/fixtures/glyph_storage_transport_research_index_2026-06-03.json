@@ -1,0 +1,76 @@
+{
+  "schema_name": "glyph_storage_transport_research_index",
+  "index_version": 1,
+  "status": "docs_tools_research_index",
+  "hardware_status": "not_new_hardware_result",
+  "all_implementation_classes_blocked": true,
+  "protobuf_binary_generation_implemented": false,
+  "device_write_implemented": false,
+  "webserial_transport_implemented": false,
+  "runtime_loaded_storage_implemented": false,
+  "runtime_loaded_interpreter_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "official_configurator_compatibility_claimed": false,
+  "external_source_promoted_to_authority": false,
+  "required_component_packets": [
+    {
+      "packet_id": "storage_transport_source_authority_registry",
+      "doc_path": "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_storage_transport_source_authority_registry_2026-06-03.json",
+      "checker_path": "tools/check_glyph_storage_transport_source_authority_registry.py",
+      "status_summary": "docs_tools_source_authority_registry_complete_but_not_implementation"
+    },
+    {
+      "packet_id": "protobuf_config_schema_research_packet",
+      "doc_path": "docs/calibration/glyph_protobuf_config_schema_research_packet_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json",
+      "checker_path": "tools/check_glyph_protobuf_config_schema_research_packet.py",
+      "status_summary": "docs_tools_research_packet_complete_but_authority_missing"
+    },
+    {
+      "packet_id": "webserial_transport_blocker_packet",
+      "doc_path": "docs/calibration/glyph_webserial_transport_blocker_packet_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_webserial_transport_blocker_packet_2026-06-03.json",
+      "checker_path": "tools/check_glyph_webserial_transport_blocker_packet.py",
+      "status_summary": "docs_tools_blocker_packet_complete_but_transport_blocked"
+    },
+    {
+      "packet_id": "runtime_storage_interpreter_blocker_packet",
+      "doc_path": "docs/calibration/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.json",
+      "checker_path": "tools/check_glyph_runtime_storage_interpreter_blocker_packet.py",
+      "status_summary": "docs_tools_blocker_packet_complete_but_runtime_loaded_work_blocked"
+    }
+  ],
+  "blocked_implementation_classes": [
+    "protobuf binary generation",
+    "WebSerial transport",
+    "device write",
+    "runtime-loaded storage",
+    "runtime-loaded interpreter",
+    "official configurator compatibility claims"
+  ],
+  "allowed_next_work": [
+    "docs/tools validators",
+    "offline JSON adapter planning",
+    "manual no-device import/export experiment planning",
+    "source audits"
+  ],
+  "disallowed_without_approval": [
+    "firmware source changes",
+    "device write",
+    "WebSerial",
+    "runtime-loaded config",
+    "profile artifact changes",
+    "hardware validation claims"
+  ],
+  "doc_caveats": [
+    "docs/tools research index",
+    "all implementation classes blocked",
+    "not device write behavior",
+    "not WebSerial implementation",
+    "not runtime-loaded config",
+    "external observations non-authoritative",
+    "not hardware validation"
+  ]
+}
