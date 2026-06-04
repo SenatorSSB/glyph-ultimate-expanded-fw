@@ -1,0 +1,216 @@
+{
+  "allowed_dispositions": [
+    "candidate_direct_profile_field",
+    "sidecar_only",
+    "blocked_requires_source_authority",
+    "blocked_round_trip_unsafe",
+    "out_of_scope"
+  ],
+  "external_json_generated": false,
+  "hardware_status": "not_new_hardware_result",
+  "matrix_version": 1,
+  "rules": [
+    {
+      "category": "profile name/identity metadata",
+      "disposition": "blocked_requires_source_authority",
+      "evidence_keys": [
+        "mapping_plan"
+      ],
+      "planning_note": "Top-level profile identity/name derivation is still blocked pending reviewed source authority for a future clean-room candidate."
+    },
+    {
+      "category": "mode/backend metadata",
+      "disposition": "candidate_direct_profile_field",
+      "evidence_keys": [
+        "mapping_plan"
+      ],
+      "planning_note": "Committed profile JSON already carries mode IDs, mode names, applicable backends, and backend defaults."
+    },
+    {
+      "category": "profile-level button remapping",
+      "disposition": "candidate_direct_profile_field",
+      "evidence_keys": [
+        "mapping_plan"
+      ],
+      "planning_note": "Committed profile JSON already carries list-shaped button remapping entries keyed by physicalButton."
+    },
+    {
+      "category": "activates-bearing bindings",
+      "disposition": "blocked_round_trip_unsafe",
+      "evidence_keys": [
+        "transform_design_contract"
+      ],
+      "planning_note": "Exported profile JSON stripped activates-bearing bindings, so active profile round-trip remains unsafe."
+    },
+    {
+      "category": "disabled/visibility entries",
+      "disposition": "blocked_round_trip_unsafe",
+      "evidence_keys": [
+        "mapping_plan"
+      ],
+      "planning_note": "Explicit disable serialization still needs review and must not be treated as round-trip safe transform output."
+    },
+    {
+      "category": "SOCD policy",
+      "disposition": "sidecar_only",
+      "evidence_keys": [
+        "transform_design_contract",
+        "sidecar_contract"
+      ],
+      "planning_note": "SOCD drift remains warning/sidecar scope instead of a direct clean-room profile-field claim."
+    },
+    {
+      "category": "RGB metadata",
+      "disposition": "blocked_round_trip_unsafe",
+      "evidence_keys": [
+        "gap_matrix"
+      ],
+      "planning_note": "RGB shared-index behavior remains review-only, so RGB metadata stays blocked from round-trip-safe transform treatment."
+    },
+    {
+      "category": "menu icon metadata",
+      "disposition": "blocked_requires_source_authority",
+      "evidence_keys": [
+        "mapping_plan"
+      ],
+      "planning_note": "Menu icon and display wiring are not source-audited as stable clean-room target authority."
+    },
+    {
+      "category": "keyboard mode metadata",
+      "disposition": "candidate_direct_profile_field",
+      "evidence_keys": [
+        "mapping_plan"
+      ],
+      "planning_note": "Committed profile JSON exposes keyboard mode references and button-to-keycode mappings directly."
+    },
+    {
+      "category": "runtime-owned behavior",
+      "disposition": "sidecar_only",
+      "evidence_keys": [
+        "transform_design_contract",
+        "sidecar_contract"
+      ],
+      "planning_note": "Runtime-owned behavior remains outside external profile JSON and must stay in sidecar/report scope."
+    },
+    {
+      "category": "validation report",
+      "disposition": "sidecar_only",
+      "evidence_keys": [
+        "mapping_plan",
+        "sidecar_contract"
+      ],
+      "planning_note": "Validation report content belongs in sidecar/report scope, not a transformed profile payload."
+    },
+    {
+      "category": "source-authority caveats",
+      "disposition": "sidecar_only",
+      "evidence_keys": [
+        "mapping_plan",
+        "sidecar_contract",
+        "storage_transport_source_authority_registry"
+      ],
+      "planning_note": "Source-authority caveats belong in sidecar/report scope so authority boundaries stay explicit."
+    },
+    {
+      "category": "loss warnings",
+      "disposition": "sidecar_only",
+      "evidence_keys": [
+        "transform_design_contract",
+        "sidecar_contract"
+      ],
+      "planning_note": "Binding-loss and SOCD-drift warnings belong in sidecar/report scope before any future transform review."
+    },
+    {
+      "category": "external JSON output path",
+      "disposition": "out_of_scope",
+      "evidence_keys": [
+        "transform_design_contract"
+      ],
+      "planning_note": "No generated external JSON output path exists on this branch, and transform planning does not add one."
+    },
+    {
+      "category": "WebSerial/device write fields",
+      "disposition": "out_of_scope",
+      "evidence_keys": [
+        "webserial_transport_blocker_packet"
+      ],
+      "planning_note": "Transport/write fields remain out of scope for this planning-only matrix."
+    },
+    {
+      "category": "protobuf binary payload",
+      "disposition": "out_of_scope",
+      "evidence_keys": [
+        "protobuf_config_schema_research_packet"
+      ],
+      "planning_note": "Protobuf binary generation is blocked and is not part of transform-rule planning."
+    },
+    {
+      "category": "runtime-loaded config payload",
+      "disposition": "out_of_scope",
+      "evidence_keys": [
+        "runtime_storage_interpreter_blocker_packet"
+      ],
+      "planning_note": "Runtime-loaded config remains blocked and is not part of transform-rule planning."
+    }
+  ],
+  "schema_name": "glyph_clean_room_adapter_transform_rule_matrix",
+  "source_packets": {
+    "gap_matrix": {
+      "checker_path": "tools/check_glyph_offline_remapper_adapter_gap_matrix.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.md",
+      "evidence_role": "source for blocked round-trip categories such as RGB shared-index behavior",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.json"
+    },
+    "mapping_plan": {
+      "checker_path": "tools/check_glyph_offline_remapper_adapter_mapping_plan.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.md",
+      "evidence_role": "source for direct-candidate and manual-review category boundaries",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.json"
+    },
+    "protobuf_config_schema_research_packet": {
+      "checker_path": "tools/check_glyph_protobuf_config_schema_research_packet.py",
+      "doc_path": "docs/calibration/glyph_protobuf_config_schema_research_packet_2026-06-03.md",
+      "evidence_role": "source for protobuf payload staying outside transform-rule scope",
+      "fixture_path": "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json"
+    },
+    "runtime_storage_interpreter_blocker_packet": {
+      "checker_path": "tools/check_glyph_runtime_storage_interpreter_blocker_packet.py",
+      "doc_path": "docs/calibration/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md",
+      "evidence_role": "source for runtime-loaded config staying blocked and out of scope",
+      "fixture_path": "docs/calibration/fixtures/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.json"
+    },
+    "sidecar_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_sidecar_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_sidecar_contract_2026-06-04.md",
+      "evidence_role": "source for runtime-owned behavior, loss warnings, and validation report staying sidecar-only",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_sidecar_contract_2026-06-04.json"
+    },
+    "storage_transport_source_authority_registry": {
+      "checker_path": "tools/check_glyph_storage_transport_source_authority_registry.py",
+      "doc_path": "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
+      "evidence_role": "source for source-authority caveats staying explicit and non-transport",
+      "fixture_path": "docs/calibration/fixtures/glyph_storage_transport_source_authority_registry_2026-06-03.json"
+    },
+    "transform_design_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_transform_design_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_design_contract_2026-06-04.md",
+      "evidence_role": "source for transform-planning-only, sidecar-required, and forbidden-output boundaries",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_design_contract_2026-06-04.json"
+    },
+    "webserial_transport_blocker_packet": {
+      "checker_path": "tools/check_glyph_webserial_transport_blocker_packet.py",
+      "doc_path": "docs/calibration/glyph_webserial_transport_blocker_packet_2026-06-03.md",
+      "evidence_role": "source for WebSerial/device write fields staying out of scope",
+      "fixture_path": "docs/calibration/fixtures/glyph_webserial_transport_blocker_packet_2026-06-03.json"
+    }
+  },
+  "status": "transform_rule_matrix_only",
+  "transform_implemented": false,
+  "validation_report": {
+    "checker_path": "tools/check_glyph_clean_room_adapter_transform_rule_matrix.py",
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_rule_matrix_2026-06-04.md",
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_rule_matrix_2026-06-04.json",
+    "source_checkers_required_to_pass": true,
+    "validation_scope": "docs_tools_fixtures_only"
+  }
+}
