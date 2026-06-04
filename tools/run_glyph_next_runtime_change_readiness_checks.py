@@ -289,6 +289,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_clean_room_adapter_transform_design_contract.py",
         ),
         step(
+            "clean-room adapter transform rule matrix",
+            "tools/check_glyph_clean_room_adapter_transform_rule_matrix.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
