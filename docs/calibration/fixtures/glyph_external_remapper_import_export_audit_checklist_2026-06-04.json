@@ -1,0 +1,173 @@
+{
+  "schema_name": "glyph_external_remapper_import_export_audit_checklist",
+  "checklist_version": 1,
+  "status": "planned_not_executed",
+  "audit_executed": false,
+  "hardware_status": "not_new_hardware_result",
+  "external_source_promoted_to_authority": false,
+  "code_copied_into_repo": false,
+  "official_configurator_compatibility_claimed": false,
+  "hardware_validation_claimed": false,
+  "checklist_items": [
+    {
+      "item_id": "locate_import_handler",
+      "category": "locate import handler",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record the exact import entrypoint file(s), function(s), and unresolved gaps after source inspection.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "locate_export_handler",
+      "category": "locate export handler",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record the exact export entrypoint file(s), function(s), and unresolved gaps after source inspection.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "identify_json_parse_serialize_behavior",
+      "category": "identify JSON parse/serialize behavior",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record parse/serialize library usage, strictness, defaults, and unknowns from inspected source.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "identify_normalization_sanitization_behavior",
+      "category": "identify normalization/sanitization behavior",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record normalization, sanitization, coercion, and validation behavior from inspected source.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_button_remapping_import_export",
+      "category": "trace buttonRemapping import/export",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record how buttonRemapping is parsed, normalized, serialized, preserved, or dropped.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_activates_preservation_or_stripping",
+      "category": "trace activates preservation or stripping",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record whether activates data is preserved, transformed, stripped, or unsupported.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_socd_pair_import_export",
+      "category": "trace SOCD pair import/export",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record how SOCD pair structures are parsed, normalized, serialized, and whether drift occurs.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_rgb_config_import_export",
+      "category": "trace RGB config import/export",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record how RGB config data is parsed, normalized, serialized, preserved, or stripped.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_menu_icon_default_metadata_handling",
+      "category": "trace menu icon/default metadata handling",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record how menu icon and default metadata are imported, serialized, preserved, or stripped.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_protobuf_encode_decode_boundaries",
+      "category": "trace protobuf encode/decode boundaries",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record protobuf-related source boundaries, message names, and unknowns without copying code.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_webserial_load_save_boundaries",
+      "category": "trace WebSerial load/save boundaries",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record WebSerial load/save entrypoints, transport boundaries, and unresolved gaps.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "trace_custom_profile_modifier_representation",
+      "category": "trace custom profile/modifier representation",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record how custom profile or modifier structures are represented and where fidelity limits appear.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "identify_tests_if_any",
+      "category": "identify tests, if any",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record exact test files, test scopes, or note that no relevant tests were found.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "record_exact_commit_audited",
+      "category": "record exact commit audited",
+      "status": "planned_not_executed",
+      "requires_source_file": false,
+      "result_placeholder": "Record the exact external commit, tag, or immutable revision audited, or state unknown.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "record_files_inspected",
+      "category": "record files inspected",
+      "status": "planned_not_executed",
+      "requires_source_file": true,
+      "result_placeholder": "Record the exact file paths, URLs, or UI surfaces inspected during the audit.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "record_non_authority_caveat",
+      "category": "record non-authority caveat",
+      "status": "planned_not_executed",
+      "requires_source_file": false,
+      "result_placeholder": "Record that external observations remain non-authoritative unless explicitly promoted later.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    },
+    {
+      "item_id": "record_no_code_copy_caveat",
+      "category": "record no-code-copy caveat",
+      "status": "planned_not_executed",
+      "requires_source_file": false,
+      "result_placeholder": "Record that no external source code is copied into this repository as audit evidence.",
+      "must_not_copy_code": true,
+      "must_not_promote_authority": true
+    }
+  ],
+  "validation_report": {
+    "checker_path": "tools/check_glyph_external_remapper_import_export_audit_checklist.py",
+    "doc_path": "docs/calibration/glyph_external_remapper_import_export_audit_checklist_2026-06-04.md",
+    "fixture_path": "docs/calibration/fixtures/glyph_external_remapper_import_export_audit_checklist_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "validation_scope": "docs_tools_fixtures_only_import_export_audit_checklist"
+  }
+}

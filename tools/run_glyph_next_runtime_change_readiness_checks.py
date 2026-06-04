@@ -305,6 +305,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_external_remapper_import_export_audit_scope.py",
         ),
         step(
+            "external remapper import/export audit checklist",
+            "tools/check_glyph_external_remapper_import_export_audit_checklist.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
