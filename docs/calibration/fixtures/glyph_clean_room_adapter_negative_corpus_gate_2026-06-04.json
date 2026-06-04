@@ -1,0 +1,118 @@
+{
+  "active_profile_round_trip_safe": false,
+  "adapter_implementation_blocked": true,
+  "adapter_implemented": false,
+  "allowed_next_work": [
+    "docs/tools-only adapter transform design",
+    "future validator mutation engine after a candidate schema exists",
+    "repeated no-device experiment with browser/version recorded"
+  ],
+  "component_packets": {
+    "invalid_corpus_checker": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_invalid_corpus.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_invalid_corpus_2026-06-04.md",
+      "doc_sha256": "6e10c560210c47eb6cd55c12b656cae29e9f5bd4d4e6ebc651fccfb844374195",
+      "evidence_role": "planning-only invalid corpus checker guarding against unsafe candidate interpretation",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_invalid_corpus_2026-06-04.json",
+      "fixture_sha256": "e5bccbe9951bb1dd137c5113c5176c7a5d54cad7342c63cda0e536a54e8e86ba",
+      "schema_name": "glyph_clean_room_adapter_invalid_corpus",
+      "status": "docs_tools_invalid_corpus"
+    },
+    "invalid_corpus_fixture": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_invalid_corpus_fixture.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_invalid_corpus_2026-06-04.md",
+      "doc_sha256": "6e10c560210c47eb6cd55c12b656cae29e9f5bd4d4e6ebc651fccfb844374195",
+      "evidence_role": "invalid corpus fixture covering every negative contract category",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_invalid_corpus_2026-06-04.json",
+      "fixture_sha256": "e5bccbe9951bb1dd137c5113c5176c7a5d54cad7342c63cda0e536a54e8e86ba",
+      "schema_name": "glyph_clean_room_adapter_invalid_corpus",
+      "status": "docs_tools_invalid_corpus"
+    },
+    "negative_corpus_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_negative_corpus_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_negative_corpus_contract_2026-06-04.md",
+      "doc_sha256": "0f58e90b25dd7b7211ed81c33bd28d4318a876bfa91b901e1b9ddfac0329cce8",
+      "evidence_role": "negative corpus contract defining unsafe claims and required rejections",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_negative_corpus_contract_2026-06-04.json",
+      "fixture_sha256": "903c87475af1b900f9bacbc520e4a730625c8361ffbb58c5fe39162ed48d12da",
+      "schema_name": "glyph_clean_room_adapter_negative_corpus_contract",
+      "status": "negative_corpus_contract_only"
+    },
+    "schema_readiness_gate": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_schema_readiness_gate.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.md",
+      "doc_sha256": "6a298e07cd62a17256e5c417ce7f013cb70c7418ef536ded9bc850e77e92ada4",
+      "evidence_role": "schema readiness gate proving planning is complete while implementation stays blocked",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.json",
+      "fixture_sha256": "e0ed0ce59900323e872104433e75cc521ddc4fb30186c7518edafe187378b240",
+      "schema_name": "glyph_clean_room_adapter_schema_readiness_gate",
+      "status": "schema_planning_complete_adapter_implementation_blocked"
+    }
+  },
+  "disallowed_without_approval": [
+    "adapter implementation",
+    "external JSON generation",
+    "WebSerial/device write",
+    "protobuf binary generation",
+    "runtime-loaded config",
+    "official compatibility claim",
+    "hardware validation"
+  ],
+  "external_json_generated": false,
+  "external_json_generation_blocked": true,
+  "gate_interpretation": [
+    "negative corpus ready",
+    "schema planning complete",
+    "adapter implementation blocked",
+    "external JSON generation blocked",
+    "invalid cases cover unsafe claims and missing sidecars",
+    "active profile round-trip unsafe",
+    "sidecar required",
+    "runtime-owned behavior not represented by external profile JSON"
+  ],
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "negative_corpus_ready": true,
+  "official_compatibility_claimed": false,
+  "report_version": 1,
+  "runtime_owned_behavior_represented_by_external_profile_json": false,
+  "schema_name": "glyph_clean_room_adapter_negative_corpus_gate",
+  "schema_planning_complete": true,
+  "sidecar_required": true,
+  "status": "negative_corpus_ready_adapter_implementation_blocked",
+  "supporting_findings": {
+    "invalid_corpus_summary": {
+      "case_count": 23,
+      "covers_missing_sidecar": true,
+      "covers_unsafe_claim_categories": true,
+      "must_fail_all_cases": true,
+      "status": "docs_tools_invalid_corpus"
+    },
+    "negative_corpus_contract_summary": {
+      "adapter_output_exists": false,
+      "external_json_generation_exists": false,
+      "rejects_unsafe_candidate_payloads": true,
+      "runtime_owned_behavior_represented_by_external_profile_json": false,
+      "sidecar_required": true,
+      "status": "negative_corpus_contract_only"
+    },
+    "schema_readiness_gate_summary": {
+      "adapter_implementation_blocked": true,
+      "external_json_generation_blocked": true,
+      "schema_planning_complete": true,
+      "sidecar_required": true,
+      "status": "schema_planning_complete_adapter_implementation_blocked"
+    }
+  },
+  "validation_report": {
+    "adapter_implementation_blocked": true,
+    "checker_path": "tools/check_glyph_clean_room_adapter_negative_corpus_gate.py",
+    "component_checkers_required_to_pass": true,
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_negative_corpus_gate_2026-06-04.md",
+    "external_json_generation_blocked": true,
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_negative_corpus_gate_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "negative_corpus_ready": true,
+    "validation_scope": "docs_tools_fixtures_only"
+  }
+}

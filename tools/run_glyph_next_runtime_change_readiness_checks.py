@@ -281,6 +281,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_clean_room_adapter_invalid_corpus.py",
         ),
         step(
+            "clean-room adapter negative corpus gate",
+            "tools/check_glyph_clean_room_adapter_negative_corpus_gate.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
