@@ -1,0 +1,49 @@
+{
+  "adapter_implemented": false,
+  "drift_severity": "adapter_blocking_drift",
+  "external_source_promoted_to_authority": false,
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "interpretation": [
+    "external remapper export changes profile-level socd structure",
+    "no gameplay/runtime correctness can be inferred",
+    "no official compatibility claim"
+  ],
+  "official_compatibility_claimed": false,
+  "report_version": 1,
+  "schema_name": "glyph_offline_remapper_socd_drift_classification",
+  "socd_drift_summary": {
+    "added_exported_pairs": [
+      {
+        "buttonDir1": "BTN_LF2",
+        "buttonDir2": "BTN_RF4",
+        "socdType": "SOCD_2IP"
+      },
+      {
+        "buttonDir1": "BTN_LF8",
+        "buttonDir2": "BTN_LF6"
+      },
+      {
+        "buttonDir1": "BTN_RF7",
+        "buttonDir2": "BTN_RF8"
+      }
+    ],
+    "exported_socd_count": 6,
+    "input_socd_count": 4,
+    "missing_from_exported_pairs": [
+      {
+        "buttonDir1": "BTN_LF5",
+        "buttonDir2": "BTN_LF2",
+        "socdType": "SOCD_2IP"
+      }
+    ],
+    "socd_pairs_exact_value_equality": false
+  },
+  "source_report": {
+    "path": "docs/calibration/fixtures/glyph_offline_remapper_ultimate_diff_report_2026-06-04.json",
+    "schema_name": "glyph_offline_remapper_ultimate_diff_report",
+    "sha256": "04ed010cb49becca57f7da2424451488f9a9dc20a8d6e629e455d9a8963e061a",
+    "status": "docs_tools_ultimate_profile_diff"
+  },
+  "status": "docs_tools_socd_drift_classification"
+}
