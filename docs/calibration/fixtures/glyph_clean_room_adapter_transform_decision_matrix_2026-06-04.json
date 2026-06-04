@@ -1,0 +1,142 @@
+{
+  "adapter_implementation_added": false,
+  "adapter_implementation_allowed": false,
+  "active_profile_artifact_changed": false,
+  "decisions": [
+    {
+      "blocker": "Active profile round-trip is unsafe through the external remapper export, so target direction must be explicitly decided before implementation.",
+      "decision_id": "adapter_target_import_only_not_round_trip",
+      "question": "Whether the adapter target is import-only, not round-trip.",
+      "required_before_implementation": "Document explicit approval for an import-only target, or document a different reviewed target with new source evidence.",
+      "status": "unresolved"
+    },
+    {
+      "blocker": "The external remapper export is not canonical for the active identity-runtime profile, so visual-editor use must be bounded before implementation.",
+      "decision_id": "external_remapper_visual_editor_allowed",
+      "question": "Whether the external remapper is allowed to be used as a visual editor.",
+      "required_before_implementation": "Decide whether visual editing is allowed only with sidecar warnings, or is disallowed for identity-runtime profiles.",
+      "status": "unresolved"
+    },
+    {
+      "blocker": "Runtime-owned behavior is not represented by external profile JSON in the current checked packets.",
+      "decision_id": "runtime_owned_behavior_sidecar_only",
+      "question": "Whether runtime-owned behavior is represented only in sidecar.",
+      "required_before_implementation": "Approve a sidecar-only representation policy, or provide source authority for another representation.",
+      "status": "blocked"
+    },
+    {
+      "blocker": "SOCD drift is adapter-blocking and the transform rule matrix currently keeps SOCD policy sidecar-only.",
+      "decision_id": "socd_policy_sidecar_or_profile_candidate",
+      "question": "Whether SOCD policy should remain sidecar-only or become a profile-level candidate.",
+      "required_before_implementation": "Resolve SOCD policy placement with source-backed evidence and explicit approval.",
+      "status": "unresolved"
+    },
+    {
+      "blocker": "Exported profile JSON stripped activates-bearing bindings, and active profile round-trip is unsafe.",
+      "decision_id": "activates_bearing_bindings_regeneration_allowed",
+      "question": "Whether activates-bearing bindings can ever be regenerated.",
+      "required_before_implementation": "Provide source authority and review for any regeneration strategy, or keep regeneration disallowed.",
+      "status": "blocked"
+    },
+    {
+      "blocker": "No official configurator compatibility claim is made by the current packets.",
+      "decision_id": "official_configurator_compatibility_scope",
+      "question": "Whether official configurator compatibility is in scope.",
+      "required_before_implementation": "Provide official source authority and explicit approval before any compatibility claim.",
+      "status": "blocked"
+    },
+    {
+      "blocker": "Protobuf binary generation, WebSerial transport, serial/device write behavior, and runtime-loaded config remain unimplemented and blocked.",
+      "decision_id": "protobuf_device_write_out_of_scope",
+      "question": "Whether protobuf/device-write remains fully out of scope.",
+      "required_before_implementation": "Keep the scope fully out of implementation, or open a separate approved design with official source authority.",
+      "status": "blocked"
+    },
+    {
+      "blocker": "Prior packets list repeated no-device experiment evidence with browser/version recorded as required future evidence.",
+      "decision_id": "repeat_no_device_experiment_required",
+      "question": "Whether a repeated no-device experiment is required with browser/version recorded.",
+      "required_before_implementation": "Decide whether repeat experiment evidence is mandatory and define its required recording fields.",
+      "status": "unresolved"
+    },
+    {
+      "blocker": "External source is not promoted to authority and transform rules remain planning-only.",
+      "decision_id": "source_audit_required_before_implementation",
+      "question": "Whether source audit is required before implementation.",
+      "required_before_implementation": "Complete and review a source audit before any transform implementation or external JSON generation.",
+      "status": "blocked"
+    },
+    {
+      "blocker": "No external code has been copied and no external dependency has been added.",
+      "decision_id": "license_review_required_before_code_reuse",
+      "question": "Whether license review is required before any code reuse.",
+      "required_before_implementation": "Complete license review before any external code reuse, dependency addition, or copied implementation detail.",
+      "status": "blocked"
+    },
+    {
+      "blocker": "Adapter implementation, transform implementation, and external JSON generation are not approved.",
+      "decision_id": "user_approval_required_before_implementation",
+      "question": "Whether user approval is required before implementation.",
+      "required_before_implementation": "Obtain explicit user approval before adapter implementation, transform code, or external JSON generation.",
+      "status": "blocked"
+    }
+  ],
+  "external_code_copied": false,
+  "external_dependency_added": false,
+  "external_json_generated": false,
+  "external_json_generation_allowed": false,
+  "external_source_promoted_to_authority": false,
+  "exported_experiment_artifact_changed": false,
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "implementation_decisions_approved": false,
+  "official_configurator_compatibility_claimed": false,
+  "protobuf_binary_generation_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "runtime_source_changed": false,
+  "schema_name": "glyph_clean_room_adapter_transform_decision_matrix",
+  "serial_device_write_implemented": false,
+  "source_packets": {
+    "adapter_blocker_escalation": {
+      "checker_path": "tools/check_glyph_offline_remapper_adapter_blocker_escalation.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_adapter_blocker_escalation_2026-06-04.md",
+      "evidence_role": "source for adapter implementation and external JSON generation remaining blocked",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_adapter_blocker_escalation_2026-06-04.json"
+    },
+    "export_loss_gate": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_loss_gate.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_export_loss_gate_2026-06-04.md",
+      "evidence_role": "source for active profile round-trip remaining unsafe",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_loss_gate_2026-06-04.json"
+    },
+    "storage_transport_research_index": {
+      "checker_path": "tools/check_glyph_storage_transport_research_index.py",
+      "doc_path": "docs/calibration/glyph_storage_transport_research_index_2026-06-03.md",
+      "evidence_role": "source for protobuf, WebSerial, device write, and runtime-loaded config blockers",
+      "fixture_path": "docs/calibration/fixtures/glyph_storage_transport_research_index_2026-06-03.json"
+    },
+    "transform_design_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_transform_design_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_design_contract_2026-06-04.md",
+      "evidence_role": "source for no transform implementation and forbidden output boundaries",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_design_contract_2026-06-04.json"
+    },
+    "transform_rule_matrix": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_transform_rule_matrix.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_rule_matrix_2026-06-04.md",
+      "evidence_role": "source for sidecar-only/out-of-scope transform planning categories",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_rule_matrix_2026-06-04.json"
+    }
+  },
+  "status": "decision_matrix_only_implementation_blocked",
+  "transform_code_added": false,
+  "transform_implementation_added": false,
+  "validation_report": {
+    "checker_path": "tools/check_glyph_clean_room_adapter_transform_decision_matrix.py",
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_decision_matrix_2026-06-04.md",
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_decision_matrix_2026-06-04.json",
+    "validation_scope": "docs_tools_fixtures_only"
+  },
+  "version": 1,
+  "webserial_transport_implemented": false
+}
