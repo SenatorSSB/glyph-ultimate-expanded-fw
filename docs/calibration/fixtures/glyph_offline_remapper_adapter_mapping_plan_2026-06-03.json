@@ -1,0 +1,220 @@
+{
+  "schema_name": "glyph_offline_remapper_adapter_mapping_plan",
+  "plan_version": 1,
+  "status": "offline_adapter_plan_only",
+  "hardware_status": "not_new_hardware_result",
+  "adapter_implemented": false,
+  "external_source_promoted_to_authority": false,
+  "official_configurator_compatibility_claimed": false,
+  "device_write_implemented": false,
+  "webserial_transport_implemented": false,
+  "protobuf_binary_generation_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "source_inputs": [
+    "docs/calibration/glyph_offline_remapper_adapter_target_contract_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_adapter_target_contract_2026-06-03.json",
+    "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+    "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+    "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json",
+    "docs/calibration/fixtures/glyph_webserial_transport_blocker_packet_2026-06-03.json"
+  ],
+  "mappings": [
+    {
+      "category_id": "profile_identity_name_metadata",
+      "source_artifact": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+      "source_path_or_field": "neutral_senscope_profile.placeholder_profile_id",
+      "future_target_field": "profiles[].profileIdentity",
+      "mapping_status": "manual_review_required",
+      "authority_class": "source_backed_repo_artifact_with_inferred_target_field",
+      "notes": "The repo commits a placeholder neutral profile ID, but the active profile artifact does not expose a source-backed top-level profile display name. A future candidate profileIdentity object needs reviewed derivation and must not rely on external authority."
+    },
+    {
+      "category_id": "mode_backend_metadata",
+      "source_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "source_path_or_field": "gameModeConfigs[].modeId; gameModeConfigs[].name; gameModeConfigs[].applicableBackends[]; communicationBackendConfigs[].backendId; communicationBackendConfigs[].defaultModeConfig",
+      "future_target_field": "profiles[].modes[]",
+      "mapping_status": "direct_candidate",
+      "authority_class": "source_backed_repo_artifact",
+      "notes": "Mode IDs, mode names, backend applicability, and backend defaults are source-backed in the committed active profile artifact."
+    },
+    {
+      "category_id": "button_remapping_entries",
+      "source_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "source_path_or_field": "gameModeConfigs[].buttonRemapping[].physicalButton; gameModeConfigs[].buttonRemapping[].activates",
+      "future_target_field": "profiles[].modes[].buttonRemapping[]",
+      "mapping_status": "direct_candidate",
+      "authority_class": "source_backed_repo_artifact",
+      "notes": "Committed profile JSON already uses list-shaped remap entries with explicit physical-button sources and optional activates targets."
+    },
+    {
+      "category_id": "explicit_disabled_button_entries",
+      "source_artifact": "docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+      "source_path_or_field": "cases[id=explicit_disable_entries_shape_if_present]; active profile gameModeConfigs[].buttonRemapping[] entries without activates",
+      "future_target_field": "profiles[].modes[].disabledButtons[]",
+      "mapping_status": "derived_candidate",
+      "authority_class": "source_backed_repo_checker_guardrail",
+      "notes": "Repo checkers guard physicalButton-only disable-entry shape when present, but the committed active profile artifact does not provide a fully audited target-side disable field contract."
+    },
+    {
+      "category_id": "socd_pairs",
+      "source_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "source_path_or_field": "gameModeConfigs[].socdPairs[].buttonDir1; gameModeConfigs[].socdPairs[].buttonDir2; gameModeConfigs[].socdPairs[].socdType",
+      "future_target_field": "profiles[].modes[].socdPairs[]",
+      "mapping_status": "direct_candidate",
+      "authority_class": "source_backed_repo_artifact",
+      "notes": "Committed profile JSON exposes per-mode SOCD pair/button/type triples directly."
+    },
+    {
+      "category_id": "rgb_config_references",
+      "source_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "source_path_or_field": "gameModeConfigs[].rgbConfig; defaultBackendConfig; defaultUsbBackendConfig; rgbBrightness",
+      "future_target_field": "profiles[].modes[].rgbConfigRef",
+      "mapping_status": "derived_candidate",
+      "authority_class": "source_backed_repo_artifact_with_inferred_target_field",
+      "notes": "Internal RGB references and brightness are source-backed, but future target index semantics and whether backend defaults travel with mode metadata still require review."
+    },
+    {
+      "category_id": "rgb_button_colors",
+      "source_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "source_path_or_field": "rgbConfigs[].buttonColors[].button; rgbConfigs[].buttonColors[].color; rgbConfigs[].animation",
+      "future_target_field": "profiles[].rgbConfigs[]",
+      "mapping_status": "direct_candidate",
+      "authority_class": "source_backed_repo_artifact",
+      "notes": "Committed profile JSON exposes per-config button color assignments and animation values directly."
+    },
+    {
+      "category_id": "menu_button_icon_display_metadata",
+      "source_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "source_path_or_field": "gameModeConfigs[].menuButtonIcon[]; defaultDashboardOption",
+      "future_target_field": "profiles[].modes[].displayMetadata",
+      "mapping_status": "manual_review_required",
+      "authority_class": "source_backed_repo_artifact_with_inferred_target_field",
+      "notes": "The repo has internal icon/display metadata, but a future target displayMetadata section is not source-audited and must stay review-only."
+    },
+    {
+      "category_id": "keyboard_mode_metadata",
+      "source_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "source_path_or_field": "gameModeConfigs[].keyboardModeConfig; keyboardModes[].buttonsToKeycodes[].button; keyboardModes[].buttonsToKeycodes[].keycode",
+      "future_target_field": "profiles[].keyboardModes[]",
+      "mapping_status": "direct_candidate",
+      "authority_class": "source_backed_repo_artifact",
+      "notes": "Committed profile JSON exposes keyboard mode references and button-to-keycode mappings directly."
+    },
+    {
+      "category_id": "custom_modifier_metadata",
+      "source_artifact": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+      "source_path_or_field": "role_bindings.modifiers; priority_model; hard_overrides",
+      "future_target_field": "profiles[].modes[].customModifiers[]",
+      "mapping_status": "blocked_missing_source_authority",
+      "authority_class": "source_backed_repo_artifact_but_target_representation_blocked",
+      "notes": "The repo has source-backed modifier-like metadata for current runtime analysis, but custom modifier representation requires source audit before any external-remapper-compatible target shape can be treated as stable."
+    },
+    {
+      "category_id": "generated_config_tables",
+      "source_artifact": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "source_path_or_field": "tables",
+      "future_target_field": "profiles[].modes[].generatedConfigTables",
+      "mapping_status": "manual_review_required",
+      "authority_class": "source_backed_repo_artifact_with_inferred_target_field",
+      "notes": "Generated config tables are source-backed as docs/tools artifacts only. They are not direct to an external remapper candidate unless custom modifier representation is source-audited."
+    },
+    {
+      "category_id": "validation_report",
+      "source_artifact": "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json",
+      "source_path_or_field": "sample_candidate_validation_status; invalid_corpus_case_count; rejected_capability_summary; required_non_goals",
+      "future_target_field": "sidecar.validationReport",
+      "mapping_status": "derived_candidate",
+      "authority_class": "source_backed_repo_artifact_with_sidecar_target",
+      "notes": "Validation data belongs in a sidecar/report only. It is not a device config field."
+    },
+    {
+      "category_id": "source_authority_and_caveats",
+      "source_artifact": "docs/calibration/fixtures/glyph_offline_remapper_adapter_target_contract_2026-06-03.json",
+      "source_path_or_field": "target_authority; required_approvals; forbidden_interpretations",
+      "future_target_field": "sidecar.sourceAuthority",
+      "mapping_status": "derived_candidate",
+      "authority_class": "source_backed_repo_boundary_documentation",
+      "notes": "Authority boundaries and caveats belong in a sidecar/report. The validation report caveats and boundary docs should remain separate from any device config field."
+    },
+    {
+      "category_id": "non_goals",
+      "source_artifact": "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json",
+      "source_path_or_field": "required_non_goals; caveats",
+      "future_target_field": "sidecar.nonGoals",
+      "mapping_status": "derived_candidate",
+      "authority_class": "source_backed_repo_boundary_documentation",
+      "notes": "Non-goals are sidecar/report metadata only and must continue to state no runtime-loaded config, no serial/device write behavior, and no hardware validation."
+    },
+    {
+      "category_id": "protobuf_binary_payload",
+      "source_artifact": "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json",
+      "source_path_or_field": "missing_authority; blocked_implementation_classes",
+      "future_target_field": "transport.protobufBinary",
+      "mapping_status": "blocked_missing_source_authority",
+      "authority_class": "source_backed_repo_blocker_packet",
+      "notes": "Official protobuf/schema source authority is missing, so protobuf binary payload mapping stays blocked."
+    },
+    {
+      "category_id": "webserial_device_write_fields",
+      "source_artifact": "docs/calibration/fixtures/glyph_webserial_transport_blocker_packet_2026-06-03.json",
+      "source_path_or_field": "forbidden_current_claims; required_missing_authority; required_future_evidence",
+      "future_target_field": "transport.webserialDeviceWrite",
+      "mapping_status": "out_of_scope",
+      "authority_class": "source_backed_repo_blocker_packet",
+      "notes": "WebSerial transport, Save to Device, and device write fields stay out of scope in this mapping plan."
+    }
+  ],
+  "blocked_mappings": [
+    {
+      "category_id": "custom_modifier_metadata",
+      "reason": "target representation blocked until custom modifier representation is source-audited",
+      "blocking_source": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json"
+    },
+    {
+      "category_id": "protobuf_binary_payload",
+      "reason": "official protobuf/schema source authority is still missing",
+      "blocking_source": "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json"
+    }
+  ],
+  "sidecar_outputs": [
+    {
+      "output_id": "validation_report_sidecar",
+      "future_target_field": "sidecar.validationReport",
+      "source_category_id": "validation_report",
+      "notes": "Offline report-only output; not a device config field."
+    },
+    {
+      "output_id": "source_authority_sidecar",
+      "future_target_field": "sidecar.sourceAuthority",
+      "source_category_id": "source_authority_and_caveats",
+      "notes": "Carries authority class, caveats, approvals, and forbidden interpretations outside the candidate config payload."
+    },
+    {
+      "output_id": "non_goals_sidecar",
+      "future_target_field": "sidecar.nonGoals",
+      "source_category_id": "non_goals",
+      "notes": "Carries rejected capability and non-goal statements outside the candidate config payload."
+    }
+  ],
+  "out_of_scope_targets": [
+    {
+      "target_id": "webserial_transport",
+      "future_target_field": "transport.webserial",
+      "reason": "out_of_scope_in_offline_adapter_plan_only"
+    },
+    {
+      "target_id": "device_write_fields",
+      "future_target_field": "transport.deviceWrite",
+      "reason": "out_of_scope_in_offline_adapter_plan_only"
+    },
+    {
+      "target_id": "save_to_device_flow",
+      "future_target_field": "transport.saveToDevice",
+      "reason": "out_of_scope_in_offline_adapter_plan_only"
+    }
+  ]
+}

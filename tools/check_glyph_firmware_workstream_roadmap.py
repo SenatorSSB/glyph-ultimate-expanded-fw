@@ -106,6 +106,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_offline_remapper_adapter_target_contract_2026-06-03.md",
     "docs/calibration/fixtures/glyph_offline_remapper_adapter_target_contract_2026-06-03.json",
     "tools/check_glyph_offline_remapper_adapter_target_contract.py",
+    "docs/calibration/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.json",
+    "tools/check_glyph_offline_remapper_adapter_mapping_plan.py",
     "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
     "docs/calibration/fixtures/glyph_storage_transport_source_authority_registry_2026-06-03.json",
     "tools/check_glyph_storage_transport_source_authority_registry.py",
@@ -235,6 +238,13 @@ REQUIRED_ROADMAP_PHRASES = [
     "glyph/gfw2-offline-remapper-adapter-target-contract",
     "offline adapter plan only",
     "adapter not implemented, external source not authority, not official configurator compatibility, not device write behavior, not WebSerial transport, not protobuf binary generation, not runtime-loaded config, and not hardware validation",
+    "Offline remapper adapter mapping plan",
+    "glyph/gfw2-offline-remapper-adapter-mapping-plan",
+    "mapping plan only",
+    "generated config tables not direct until custom modifier representation is source-audited",
+    "custom modifier representation requires source audit",
+    "protobuf binary payload mapping remains `blocked_missing_source_authority`",
+    "WebSerial/device write fields remain out of scope",
 ]
 
 
