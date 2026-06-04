@@ -1,0 +1,89 @@
+{
+  "contract_inputs": {
+    "branch_1_schema_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_candidate_schema_contract.py",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_candidate_schema_contract_2026-06-04.json",
+      "fixture_sha256": "9d91df67fe562d4b24c04801f53a5b311d102aba5fe14dfac8e672066df3f023",
+      "schema_name": "glyph_clean_room_adapter_candidate_schema_contract",
+      "status": "schema_contract_only_adapter_not_implemented"
+    },
+    "branch_2_schema_validator": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_candidate_schema_validator.py",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_candidate_SCHEMA_PLACEHOLDER_2026-06-04.json",
+      "fixture_sha256": "11a52b000ac981bc7f97e92b071da040487529564379745a9744b2626fc61e60",
+      "schema_name": "glyph_clean_room_adapter_candidate_schema_validator",
+      "status": "placeholder_only_no_adapter_output"
+    }
+  },
+  "forbidden_capabilities": {
+    "active_profile_artifact_changed": false,
+    "adapter_implemented": false,
+    "device_write_implemented": false,
+    "exported_experiment_artifact_changed": false,
+    "external_code_copied": false,
+    "external_dependency_added": false,
+    "external_json_generated": false,
+    "external_remapper_compatible_json_generated": false,
+    "hardware_validation_claimed": false,
+    "official_compatibility_claimed": false,
+    "protobuf_binary_generation_implemented": false,
+    "runtime_firmware_source_changed": false,
+    "runtime_loaded_config_implemented": false,
+    "serial_device_write_behavior_implemented": false,
+    "webserial_transport_implemented": false
+  },
+  "required_flags": {
+    "adapter_implemented": false,
+    "external_json_generated": false,
+    "hardware_status": "not_new_hardware_result",
+    "non_round_trip_warning_required": true,
+    "runtime_owned_behavior_warning_required": true,
+    "sidecar_required": true
+  },
+  "required_sidecar_sections": [
+    "runtime-owned behavior warning",
+    "non-round-trip warning",
+    "binding-loss warning",
+    "SOCD-drift warning",
+    "profile-level-only warning",
+    "no official compatibility claim",
+    "no device-write/WebSerial claim",
+    "no hardware validation claim",
+    "source-authority classification",
+    "validation report"
+  ],
+  "schema_name": "glyph_clean_room_adapter_sidecar_contract",
+  "schema_version": 1,
+  "source_authority_classification": {
+    "classification_required_for_future_candidate": true,
+    "external_remapper_export_authority": false,
+    "external_source_promoted_to_authority": false,
+    "no_external_code_reuse": true,
+    "no_external_dependency": true,
+    "source_basis": "repo docs, fixtures, and checker outputs only"
+  },
+  "status": "sidecar_contract_only_adapter_not_implemented",
+  "validation_report": {
+    "adapter_implemented": false,
+    "checker_path": "tools/check_glyph_clean_room_adapter_sidecar_contract.py",
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_sidecar_contract_2026-06-04.md",
+    "external_json_generated": false,
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_sidecar_contract_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "prior_clean_room_checkers_required_to_pass": true,
+    "required_sidecar_sections_validated": true,
+    "validation_scope": "docs_tools_fixtures_only"
+  },
+  "warning_requirements": {
+    "binding_loss_warning_required": true,
+    "device_write_webserial_claim_warning_required": true,
+    "hardware_validation_claim_warning_required": true,
+    "non_round_trip_warning_required": true,
+    "official_compatibility_claim_warning_required": true,
+    "profile_level_only_warning_required": true,
+    "runtime_owned_behavior_warning_required": true,
+    "socd_drift_warning_required": true,
+    "source_authority_classification_required": true,
+    "validation_report_required": true
+  }
+}
