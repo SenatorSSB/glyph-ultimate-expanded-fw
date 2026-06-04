@@ -1,0 +1,249 @@
+{
+  "schema_name": "glyph_storage_transport_source_authority_registry",
+  "registry_version": 1,
+  "status": "docs_tools_source_authority_registry",
+  "hardware_status": "not_new_hardware_result",
+  "device_write_implemented": false,
+  "webserial_transport_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "external_source_promoted_to_authority": false,
+  "categories": {
+    "config_json_shape": {
+      "authority_class": "repo_fixture_evidence",
+      "current_status": "Repo-committed profile/config JSON fixtures and compatibility checkers exist for offline docs/tools validation only.",
+      "known_sources": [
+        "docs/calibration/glyph_config_json_compatibility_fixtures_2026-06-03.md",
+        "docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+        "tools/check_glyph_config_json_compatibility_fixtures.py",
+        "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json"
+      ],
+      "missing_sources": [
+        "official source authority for exact configurator JSON compatibility",
+        "reviewed export corpus covering official configurator import/export"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official source authority for the exact supported JSON shape",
+        "user approval for any adapter or schema-affecting work"
+      ],
+      "notes": "Repo fixtures are useful evidence for offline compatibility checks, but they are not official configurator compatibility."
+    },
+    "protobuf_schema": {
+      "authority_class": "official_source_authority_missing",
+      "current_status": "No repo-authoritative official protobuf/schema source has been inspected for implementation.",
+      "known_sources": [
+        "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md",
+        "docs/calibration/fixtures/glyph_configurator_compatibility_source_registry_2026-06-03.json"
+      ],
+      "missing_sources": [
+        "official source authority for protobuf schema",
+        "legal/source-review approval for using any external schema observation"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official protobuf/schema source authority",
+        "explicit user approval"
+      ],
+      "notes": "External protobuf observations remain non-authoritative."
+    },
+    "protobuf_encode_decode": {
+      "authority_class": "official_source_authority_missing",
+      "current_status": "No repo-authoritative encode/decode implementation source is approved for implementation.",
+      "known_sources": [
+        "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md",
+        "docs/calibration/glyph_external_remapper_config_shape_matrix_2026-06-03.md"
+      ],
+      "missing_sources": [
+        "official source authority for protobuf encode/decode behavior",
+        "source-audited compatibility evidence"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official encode/decode source authority",
+        "explicit user approval"
+      ],
+      "notes": "This registry does not generate protobuf binaries."
+    },
+    "webserial_packet_framing": {
+      "authority_class": "official_source_authority_missing",
+      "current_status": "No repo-authoritative WebSerial packet-framing source has been inspected.",
+      "known_sources": [
+        "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md",
+        "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
+        "docs/calibration/glyph_external_remapper_compatibility_experiment_plan_2026-06-03.md"
+      ],
+      "missing_sources": [
+        "official source authority for WebSerial packet framing",
+        "device transport protocol source authority"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official packet-framing source authority",
+        "explicit user approval for transport work"
+      ],
+      "notes": "This is not WebSerial implementation."
+    },
+    "device_write_path": {
+      "authority_class": "official_source_authority_missing",
+      "current_status": "Serial/device write remains outside approved implementation scope.",
+      "known_sources": [
+        "docs/calibration/glyph_import_export_compatibility_validator_2026-06-03.md",
+        "docs/calibration/glyph_serial_active_config_writer_trace_2026-05-27.md",
+        "tools/check_glyph_serial_config_writer.py"
+      ],
+      "missing_sources": [
+        "official source authority for device-write transport",
+        "explicit approval for any write-capable path",
+        "hardware validation plan and result requirements"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official device-write source authority",
+        "explicit user approval",
+        "hardware validation plan"
+      ],
+      "notes": "This registry does not add Save to Device, push-to-device, flashing, or any write behavior."
+    },
+    "active_profile_artifact_path": {
+      "authority_class": "repo_fixture_evidence",
+      "current_status": "Committed active profile artifact paths are fixture evidence for offline checks.",
+      "known_sources": [
+        "docs/calibration/glyph_active_ultimate_lt3_config_artifact_2026-05-27.md",
+        "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+        "tools/check_glyph_active_ultimate_lt3_config_artifact.py"
+      ],
+      "missing_sources": [
+        "official source authority for how active profile artifacts are selected, persisted, or loaded by an official configurator/device workflow"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official source authority for active-profile artifact handling",
+        "explicit user approval for any adapter behavior"
+      ],
+      "notes": "The active profile artifact is not runtime-loaded config."
+    },
+    "runtime_loaded_config_storage": {
+      "authority_class": "official_source_authority_missing",
+      "current_status": "Runtime-loaded config storage remains design-only and unimplemented.",
+      "known_sources": [
+        "docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md",
+        "docs/calibration/fixtures/glyph_runtime_loaded_config_design_v0_2026-05-28.json",
+        "tools/check_glyph_runtime_loaded_config_design.py"
+      ],
+      "missing_sources": [
+        "official source authority for runtime-loaded config storage",
+        "explicit implementation approval",
+        "fallback and migration policy authority"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official storage source authority",
+        "approved design resolution",
+        "explicit user approval"
+      ],
+      "notes": "This is not runtime-loaded config."
+    },
+    "runtime_loaded_config_interpreter": {
+      "authority_class": "official_source_authority_missing",
+      "current_status": "Runtime-loaded config interpreter behavior remains unapproved and unimplemented.",
+      "known_sources": [
+        "docs/calibration/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.md",
+        "docs/calibration/fixtures/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.json",
+        "docs/calibration/glyph_runtime_config_candidate_validator_v0_2026-06-03.md"
+      ],
+      "missing_sources": [
+        "official source authority for runtime-loaded config interpreter behavior",
+        "explicit implementation approval",
+        "hardware validation plan"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official interpreter source authority",
+        "approved validator/interpreter design",
+        "explicit user approval"
+      ],
+      "notes": "Offline candidate validation is not firmware interpretation."
+    },
+    "fallback_policy": {
+      "authority_class": "blocked_pending_approval",
+      "current_status": "Fallback policy for invalid, missing, incompatible, or failed runtime-loaded config is unresolved.",
+      "known_sources": [
+        "docs/calibration/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.md",
+        "docs/calibration/fixtures/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.json",
+        "docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md"
+      ],
+      "missing_sources": [
+        "official source authority for fallback behavior",
+        "user-approved fallback decision",
+        "test and hardware-validation plan"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "source-backed fallback policy",
+        "explicit user approval",
+        "validation and rollback plan"
+      ],
+      "notes": "This registry does not choose a fallback behavior."
+    },
+    "version_migration_policy": {
+      "authority_class": "official_source_authority_missing",
+      "current_status": "Version migration policy is unresolved for runtime-loaded config or transport payloads.",
+      "known_sources": [
+        "docs/calibration/glyph_runtime_loaded_config_implementation_plan_v0_2026-05-28.md",
+        "docs/calibration/fixtures/glyph_runtime_loaded_config_implementation_plan_v0_2026-05-28.json"
+      ],
+      "missing_sources": [
+        "official source authority for version migration behavior",
+        "approved schema/version compatibility policy",
+        "rollback and rejection requirements"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "source-backed migration policy",
+        "explicit user approval",
+        "invalid-corpus coverage for migration/rejection cases"
+      ],
+      "notes": "This registry does not change any schema or migration behavior."
+    },
+    "latency_performance_evidence": {
+      "authority_class": "user_hardware_result",
+      "current_status": "No new hardware result or latency/performance evidence is recorded by this branch.",
+      "known_sources": [
+        "docs/calibration/glyph_identity_runtime_hardware_validation_and_rollback_plan_2026-05-28.md",
+        "docs/calibration/fixtures/glyph_identity_runtime_hardware_validation_and_rollback_plan_2026-05-28.json"
+      ],
+      "missing_sources": [
+        "official source authority for latency/performance requirements",
+        "user hardware result for any implementation branch",
+        "benchmark/test protocol for storage, transport, and runtime-loaded config"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "accepted performance requirements",
+        "approved measurement protocol",
+        "user hardware result after implementation"
+      ],
+      "notes": "This registry is not hardware validation and records no latency claim."
+    },
+    "external_remapper_observations": {
+      "authority_class": "external_non_authoritative_observation",
+      "current_status": "External Open Glyph Remapper observations exist only as non-authoritative comparison inputs.",
+      "known_sources": [
+        "docs/calibration/glyph_external_remapper_source_snapshot_index_2026-06-03.md",
+        "docs/calibration/fixtures/glyph_external_remapper_source_snapshot_index_2026-06-03.json",
+        "docs/calibration/glyph_external_remapper_config_shape_matrix_2026-06-03.md",
+        "docs/calibration/fixtures/glyph_external_remapper_config_shape_matrix_2026-06-03.json"
+      ],
+      "missing_sources": [
+        "official source authority for configurator compatibility",
+        "approved source audit and license review before any adapter work"
+      ],
+      "implementation_allowed": false,
+      "required_before_implementation": [
+        "official source authority or explicit approved source-audit scope",
+        "user approval for any integration path"
+      ],
+      "notes": "External observations non-authoritative and not promoted to authority."
+    }
+  }
+}
