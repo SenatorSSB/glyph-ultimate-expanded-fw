@@ -1,0 +1,92 @@
+{
+  "adapter_generation_allowed_without_approval": false,
+  "adapter_implemented": false,
+  "allowed_next_work": [
+    "docs/tools-only adapter candidate schema planning",
+    "no-device adapter prototype planning, not implementation",
+    "further structural diff improvements",
+    "manual repeated experiment with browser/OS/version recorded"
+  ],
+  "component_reports": {
+    "experiment_result": {
+      "checker_path": "tools/check_glyph_offline_remapper_experiment_result.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_experiment_result_2026-06-04.md",
+      "doc_sha256": "d03d953b479fbb00a701e0dcd13f4540dc23284e95f55fdbd7d127ac45d0aade",
+      "evidence_role": "import/export succeeded with warnings and no-device boundary",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_experiment_result_2026-06-04.json",
+      "fixture_sha256": "e6f25498cb0ccf902f4e62706b09d93d2eff527b017693c27e796cd3c6096f2b",
+      "status": "manual_no_device_experiment_completed_with_warnings"
+    },
+    "metadata_diff_report": {
+      "checker_path": "tools/check_glyph_offline_remapper_metadata_diff_report.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_metadata_diff_report_2026-06-04.md",
+      "doc_sha256": "64464b80137983045bf5f78ad9aff8e6e32f2e11556409a32b83ca3c3c51b017",
+      "evidence_role": "metadata diff exists",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_metadata_diff_report_2026-06-04.json",
+      "fixture_sha256": "537c102d0ff561621eace2fbe5a9fbc8f557ddee888df195676ac49c47b6721e",
+      "status": "docs_tools_metadata_diff"
+    },
+    "structural_diff": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_structural_diff.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_export_structural_diff_2026-06-04.md",
+      "doc_sha256": "6e960e41b2e222d6e7ec5ba91115d1c89832225b3a2e823f01d31dd408e85eec",
+      "evidence_role": "structural diff exists",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_structural_diff_2026-06-04.json",
+      "fixture_sha256": "d56ba2fea95879eca2362a5f23f98eb86631eb53d606073e3b806f5369fee5af",
+      "status": "docs_tools_structural_diff"
+    },
+    "ultimate_diff_report": {
+      "checker_path": "tools/check_glyph_offline_remapper_ultimate_diff_report.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_ultimate_diff_report_2026-06-04.md",
+      "doc_sha256": "3c197ea36bd3d5b378f476c8a0f5d3c81851ba3fca6919638a91aa32d99da910",
+      "evidence_role": "Ultimate profile diff exists",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_ultimate_diff_report_2026-06-04.json",
+      "fixture_sha256": "04ed010cb49becca57f7da2424451488f9a9dc20a8d6e629e455d9a8963e061a",
+      "status": "docs_tools_ultimate_profile_diff"
+    }
+  },
+  "device_write_allowed": false,
+  "disallowed_without_approval": [
+    "adapter implementation",
+    "external-remapper-compatible JSON generation",
+    "device write/WebSerial",
+    "protobuf binary generation",
+    "runtime-loaded config",
+    "official compatibility claim",
+    "hardware validation claim"
+  ],
+  "exported_artifact": {
+    "path": "docs/calibration/fixtures/glyph_offline_remapper_exported_GlyphUserProfiles_2026-06-04.json",
+    "sha256": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "gate_interpretation": [
+    "import/export succeeded with warnings",
+    "no-device boundary preserved",
+    "exported artifact recorded",
+    "structural diff exists",
+    "Ultimate profile diff exists",
+    "metadata diff exists",
+    "runtime-owned identity behavior is not represented by external remapper profile-level JSON",
+    "adapter implementation remains blocked",
+    "official configurator compatibility remains unclaimed",
+    "device write/WebSerial remains blocked",
+    "protobuf binary generation remains blocked",
+    "runtime-loaded config remains blocked"
+  ],
+  "gate_version": 1,
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "import_export_succeeded": true,
+  "metadata_diff_exists": true,
+  "no_device_boundary_preserved": true,
+  "official_configurator_compatibility_claimed": false,
+  "protobuf_binary_generation_allowed": false,
+  "runtime_loaded_config_allowed": false,
+  "runtime_owned_behavior_represented": false,
+  "schema_name": "glyph_offline_remapper_export_diff_gate",
+  "status": "import_export_succeeded_with_warnings_adapter_blocked",
+  "structural_diff_exists": true,
+  "ultimate_profile_diff_exists": true,
+  "warnings_present": true,
+  "webserial_allowed": false
+}
