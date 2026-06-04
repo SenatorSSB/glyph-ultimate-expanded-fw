@@ -1,0 +1,104 @@
+{
+  "schema_name": "glyph_offline_remapper_experiment_result",
+  "result_version": 1,
+  "result_date": "2026-06-04",
+  "status": "manual_no_device_experiment_completed_with_warnings",
+  "hardware_status": "not_new_hardware_result",
+  "external_app_url": "https://lyseste.com/glyph-remapper/",
+  "external_app_version_or_commit": "not_reported",
+  "browser_environment": "not_reported",
+  "input_artifact": {
+    "label": "active_profile_artifact",
+    "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+    "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707"
+  },
+  "exported_artifact": {
+    "label": "external_remapper_exported_GlyphUserProfiles",
+    "path": "docs/calibration/fixtures/glyph_offline_remapper_exported_GlyphUserProfiles_2026-06-04.json",
+    "sha256": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "experiment_flags": {
+    "experiment_executed": true,
+    "adapter_implemented": false,
+    "device_connected": false,
+    "connect_clicked": false,
+    "webserial_access_granted": false,
+    "save_to_device_clicked": false,
+    "device_write_attempted": false,
+    "firmware_flashing_attempted": false,
+    "official_compatibility_claimed": false,
+    "hardware_validation_claimed": false,
+    "external_source_promoted_to_authority": false
+  },
+  "result_rows": [
+    {
+      "row_id": "ENV-001",
+      "status": "PARTIAL",
+      "notes": "Browser/OS not recorded in the chat report."
+    },
+    {
+      "row_id": "SRC-001",
+      "status": "PARTIAL",
+      "notes": "External app URL recorded; visible version/commit not reported."
+    },
+    {
+      "row_id": "INPUT-001",
+      "status": "PASS",
+      "notes": "Active profile artifact used as primary candidate."
+    },
+    {
+      "row_id": "IMPORT-001",
+      "status": "PASS_WITH_WARNINGS",
+      "notes": "Import succeeded, but representation warning observed."
+    },
+    {
+      "row_id": "EXPORT-001",
+      "status": "PASS",
+      "notes": "Exported JSON received and committed as fixture."
+    },
+    {
+      "row_id": "DIFF-001",
+      "status": "PENDING",
+      "notes": "Structural/semantic diff to be expanded in future branch."
+    },
+    {
+      "row_id": "FIELDS-001",
+      "status": "PENDING",
+      "notes": "Accepted/rejected field list to be expanded in future branch."
+    },
+    {
+      "row_id": "DEVICE-001",
+      "status": "PASS",
+      "notes": "No live Glyph connected."
+    },
+    {
+      "row_id": "WS-001",
+      "status": "PASS",
+      "notes": "Connect/WebSerial access not used."
+    },
+    {
+      "row_id": "SAVE-001",
+      "status": "PASS",
+      "notes": "Save to Device not clicked."
+    },
+    {
+      "row_id": "AUTH-001",
+      "status": "PASS",
+      "notes": "No source-authority promotion and no official compatibility claim."
+    },
+    {
+      "row_id": "CLAIM-001",
+      "status": "PASS",
+      "notes": "No hardware validation claim."
+    }
+  ],
+  "functional_representation_warning": {
+    "status": "warning_not_faithful_to_firmware_owned_runtime_behavior",
+    "notes": "External remapper rendered/imported/exported the profile, but the visual/function representation did not faithfully represent firmware-owned identity-runtime custom behavior."
+  },
+  "follow_up": [
+    "Add structural diff checker for exported JSON vs committed active profile artifact.",
+    "Record browser/OS and external app version/commit in any future repeated experiment.",
+    "Do not implement adapter generation from this result alone."
+  ]
+}
