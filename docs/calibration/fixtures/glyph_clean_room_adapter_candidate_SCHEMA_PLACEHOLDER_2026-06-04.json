@@ -1,0 +1,21 @@
+{
+  "active_profile_round_trip_safe": false,
+  "adapter_implemented": false,
+  "device_write_allowed": false,
+  "external_json_generated": false,
+  "hardware_status": "not_new_hardware_result",
+  "loss_warnings_required": true,
+  "official_compatibility_claimed": false,
+  "placeholder_only": true,
+  "protobuf_binary_generation_allowed": false,
+  "round_trip_safe": false,
+  "runtime_loaded_config_allowed": false,
+  "runtime_owned_behavior_represented_in_external_profile": false,
+  "runtime_owned_behavior_sidecar_required": true,
+  "schema_name": "glyph_clean_room_adapter_candidate_placeholder",
+  "schema_version": 1,
+  "socd_policy_sidecar_required": true,
+  "source_authority_promoted": false,
+  "status": "placeholder_only_no_adapter_output",
+  "webserial_allowed": false
+}
