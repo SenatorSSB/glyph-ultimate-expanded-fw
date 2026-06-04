@@ -1,0 +1,58 @@
+{
+  "schema_name": "glyph_offline_remapper_experiment_input_manifest",
+  "manifest_version": 1,
+  "status": "input_manifest_only_experiment_not_executed",
+  "hardware_status": "not_new_hardware_result",
+  "experiment_executed": false,
+  "adapter_implemented": false,
+  "external_source_promoted_to_authority": false,
+  "device_write_allowed": false,
+  "webserial_write_allowed": false,
+  "inputs": [
+    {
+      "label": "active_profile_artifact",
+      "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707",
+      "expected_import_role": "import_candidate",
+      "use_in_experiment": "primary import candidate for external remapper no-device import test",
+      "authority_class": "repo_fixture_evidence",
+      "caveats": "Current committed active profile artifact only; no device write, no WebSerial write, not hardware validation, and not official compatibility."
+    },
+    {
+      "label": "tilt_button_probe_fixture",
+      "path": "docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json",
+      "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707",
+      "expected_import_role": "possible_import_candidate_if_compatible",
+      "use_in_experiment": "secondary repo fixture reference",
+      "authority_class": "repo_fixture_evidence",
+      "caveats": "Secondary reference only; same current hash as the active profile artifact in this repo snapshot does not imply separate authority or proven compatibility."
+    },
+    {
+      "label": "senscope_export_package_sample",
+      "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+      "sha256": "a63cfce1e209d5a4110b666a9c4adf6362c1467d1a5d4496a45b71ba0853933b",
+      "expected_import_role": "reference_only",
+      "use_in_experiment": "reference-only package, not expected external remapper import unless future adapter exists",
+      "authority_class": "repo_fixture_evidence",
+      "caveats": "Reference-only package; do not treat as direct import candidate, runtime-loaded config, device write payload, or official compatibility evidence."
+    },
+    {
+      "label": "runtime_config_candidate_sample",
+      "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "sha256": "4c85b13f37b8e4b7fafc6b4f515dee4352c0f8fe8ce4f13a60634d8091a9c42c",
+      "expected_import_role": "reference_only",
+      "use_in_experiment": "reference-only runtime candidate, not expected external remapper import unless future adapter exists",
+      "authority_class": "repo_fixture_evidence",
+      "caveats": "Reference-only runtime candidate; not firmware input, not runtime-loaded config implementation, no device write, and not hardware validation."
+    },
+    {
+      "label": "generated_config_prototype",
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+      "sha256": "658588f0ad5a572e8c69949cfbcdfb9fd1e04e73a191d0e03615211c015033b9",
+      "expected_import_role": "reference_only",
+      "use_in_experiment": "reference-only generated config source",
+      "authority_class": "repo_fixture_evidence",
+      "caveats": "Reference-only generated config source; docs/tools-only artifact, not external remapper import candidate, not runtime-loaded config, and not hardware validation."
+    }
+  ]
+}
