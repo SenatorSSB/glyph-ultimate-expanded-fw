@@ -1,0 +1,117 @@
+{
+  "active_profile_round_trip_safe": false,
+  "adapter_implementation_blocked": true,
+  "allowed_next_work": [
+    "docs/tools-only adapter transform design",
+    "negative corpus for future adapter candidate schema",
+    "repeated no-device experiment with browser/version recorded"
+  ],
+  "component_packets": {
+    "candidate_schema_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_candidate_schema_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_candidate_schema_contract_2026-06-04.md",
+      "doc_sha256": "ca6746cc6601639413b7085325e27f4a12b14ec4a552e7afb06e4eea28e9fb50",
+      "evidence_role": "schema planning contract for a future clean-room adapter candidate",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_candidate_schema_contract_2026-06-04.json",
+      "fixture_sha256": "9d91df67fe562d4b24c04801f53a5b311d102aba5fe14dfac8e672066df3f023",
+      "schema_name": "glyph_clean_room_adapter_candidate_schema_contract",
+      "status": "schema_contract_only_adapter_not_implemented"
+    },
+    "candidate_schema_validator": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_candidate_schema_validator.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_candidate_schema_validator_2026-06-04.md",
+      "doc_sha256": "f83cb9383ba7ca242b7132eb1f84f24a994817eb0f9afedbfc0c641875f9ced2",
+      "evidence_role": "placeholder validator showing no adapter output exists",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_candidate_SCHEMA_PLACEHOLDER_2026-06-04.json",
+      "fixture_sha256": "11a52b000ac981bc7f97e92b071da040487529564379745a9744b2626fc61e60",
+      "schema_name": "glyph_clean_room_adapter_candidate_placeholder",
+      "status": "placeholder_only_no_adapter_output"
+    },
+    "sidecar_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_sidecar_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_sidecar_contract_2026-06-04.md",
+      "doc_sha256": "601afe9edf479d40477257c96403b67d84664d85c78ea1bf275689a65f674563",
+      "evidence_role": "sidecar requirements proving runtime-owned behavior stays outside external profile JSON",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_sidecar_contract_2026-06-04.json",
+      "fixture_sha256": "398c1e2899576d76eebcbb0992725aeee0edb28856ef4147f014c01603e84c01",
+      "schema_name": "glyph_clean_room_adapter_sidecar_contract",
+      "status": "sidecar_contract_only_adapter_not_implemented"
+    },
+    "upstream_export_loss_gate": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_loss_gate.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_export_loss_gate_2026-06-04.md",
+      "doc_sha256": "85fd2fc16585026a836404187b42922eebaf3546ce9861e027710cda162310cd",
+      "evidence_role": "upstream export-loss gate keeping active profile round-trip unsafe",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_loss_gate_2026-06-04.json",
+      "fixture_sha256": "9a3bdb392f1af66e8dea449acdf69caef1b0dc92b8fbc3dd061702c6eb06325c",
+      "schema_name": "glyph_offline_remapper_export_loss_gate",
+      "status": "external_remapper_round_trip_not_safe_adapter_blocked"
+    }
+  },
+  "disallowed_without_approval": [
+    "adapter implementation",
+    "external JSON generation",
+    "WebSerial/device write",
+    "protobuf binary generation",
+    "runtime-loaded config",
+    "official compatibility claim",
+    "hardware validation"
+  ],
+  "external_json_generation_blocked": true,
+  "gate_interpretation": [
+    "schema planning complete",
+    "adapter implementation blocked",
+    "external JSON generation blocked",
+    "active profile round-trip unsafe",
+    "sidecar required",
+    "runtime-owned behavior not represented by external profile JSON"
+  ],
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "official_compatibility_claimed": false,
+  "report_version": 1,
+  "runtime_owned_behavior_represented_by_external_profile_json": false,
+  "schema_name": "glyph_clean_room_adapter_schema_readiness_gate",
+  "schema_planning_complete": true,
+  "sidecar_required": true,
+  "status": "schema_planning_complete_adapter_implementation_blocked",
+  "supporting_findings": {
+    "candidate_schema_contract_summary": {
+      "active_profile_round_trip_safe": false,
+      "adapter_implemented": false,
+      "external_json_generation_allowed": false,
+      "runtime_owned_behavior_represented_by_external_profile_json": false,
+      "sidecar_required_for_future_candidate": true,
+      "status": "schema_contract_only_adapter_not_implemented"
+    },
+    "candidate_schema_validator_summary": {
+      "external_json_generated": false,
+      "placeholder_only": true,
+      "round_trip_safe": false,
+      "runtime_owned_behavior_sidecar_required": true,
+      "status": "placeholder_only_no_adapter_output"
+    },
+    "export_loss_gate_summary": {
+      "active_profile_round_trip_safe": false,
+      "external_json_generation_allowed": false,
+      "runtime_owned_behavior_represented": false,
+      "status": "external_remapper_round_trip_not_safe_adapter_blocked"
+    },
+    "sidecar_contract_summary": {
+      "non_round_trip_warning_required": true,
+      "runtime_owned_behavior_warning_required": true,
+      "sidecar_required": true,
+      "status": "sidecar_contract_only_adapter_not_implemented"
+    }
+  },
+  "validation_report": {
+    "adapter_implementation_blocked": true,
+    "checker_path": "tools/check_glyph_clean_room_adapter_schema_readiness_gate.py",
+    "component_checkers_required_to_pass": true,
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.md",
+    "external_json_generation_blocked": true,
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "validation_scope": "docs_tools_fixtures_only"
+  }
+}
