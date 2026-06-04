@@ -1,0 +1,140 @@
+{
+  "active_profile_round_trip_safe": false,
+  "allowed_next_work": [
+    "repeated no-device experiment with browser/version recorded",
+    "source audit plan for external remapper import/export behavior",
+    "future implementation proposal requiring user approval"
+  ],
+  "component_packets": {
+    "negative_corpus_gate": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_negative_corpus_gate.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_negative_corpus_gate_2026-06-04.md",
+      "doc_sha256": "15dc186cbfe149b8d811cb2a8c565322aa9c28fc792ac8041e21b9915cd1aee9",
+      "evidence_role": "source for negative corpus readiness and unsafe-claim rejection coverage",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_negative_corpus_gate_2026-06-04.json",
+      "fixture_sha256": "3f1b4f378e98e171986b024c6b4879043e6ce4255b6b064e5d08ac02b766c5c1",
+      "schema_name": "glyph_clean_room_adapter_negative_corpus_gate",
+      "status": "negative_corpus_ready_adapter_implementation_blocked"
+    },
+    "schema_readiness_gate": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_schema_readiness_gate.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.md",
+      "doc_sha256": "6a298e07cd62a17256e5c417ce7f013cb70c7418ef536ded9bc850e77e92ada4",
+      "evidence_role": "source for schema readiness and sidecar requirements",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.json",
+      "fixture_sha256": "e0ed0ce59900323e872104433e75cc521ddc4fb30186c7518edafe187378b240",
+      "schema_name": "glyph_clean_room_adapter_schema_readiness_gate",
+      "status": "schema_planning_complete_adapter_implementation_blocked"
+    },
+    "transform_decision_matrix": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_transform_decision_matrix.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_decision_matrix_2026-06-04.md",
+      "doc_sha256": "6ba423e17121d09f894074c01e1a283735bb560d2f6a2e7c46187b4394e14dca",
+      "evidence_role": "source for unresolved or blocked implementation decisions",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_decision_matrix_2026-06-04.json",
+      "fixture_sha256": "519544dcbd5124b6cfc1636f04c160d741b3636ce4d61dfc190bc037ec207b1d",
+      "schema_name": "glyph_clean_room_adapter_transform_decision_matrix",
+      "status": "decision_matrix_only_implementation_blocked"
+    },
+    "transform_design_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_transform_design_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_design_contract_2026-06-04.md",
+      "doc_sha256": "7ff486eeb1088e50a5d0c4b977e1496e8b7256f634d159de36a3c9ffdc166de2",
+      "evidence_role": "source for the transform design contract boundary",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_design_contract_2026-06-04.json",
+      "fixture_sha256": "f9fe888d2c93deb323367e0ede40e85c6ae8301644b5cf43166adec1ed580647",
+      "schema_name": "glyph_clean_room_adapter_transform_design_contract",
+      "status": "transform_design_contract_only"
+    },
+    "transform_rule_matrix": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_transform_rule_matrix.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_rule_matrix_2026-06-04.md",
+      "doc_sha256": "22d1468c465cbfb5e022b617befe566a25676f079e92c2d09b30a0b8cb153691",
+      "evidence_role": "source for profile-field, sidecar-only, and out-of-scope transform rules",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_rule_matrix_2026-06-04.json",
+      "fixture_sha256": "7fd0775e75dafd7319402c10f338063697616c3fa027b73f2381c2661df14df9",
+      "schema_name": "glyph_clean_room_adapter_transform_rule_matrix",
+      "status": "transform_rule_matrix_only"
+    }
+  },
+  "disallowed_without_approval": [
+    "transform implementation",
+    "adapter implementation",
+    "external JSON generation",
+    "WebSerial/device write",
+    "protobuf binary generation",
+    "runtime-loaded config",
+    "official compatibility claim",
+    "hardware validation"
+  ],
+  "external_json_generated": false,
+  "external_json_generation_blocked": true,
+  "gate_interpretation": [
+    "transform design ready",
+    "transform implementation blocked",
+    "external JSON generation blocked",
+    "active profile round-trip unsafe",
+    "sidecar required",
+    "runtime-owned behavior not represented by external profile JSON",
+    "implementation decisions not approved",
+    "no device/protobuf/runtime-loaded behavior"
+  ],
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "implementation_decisions_approved": false,
+  "official_compatibility_claimed": false,
+  "report_version": 1,
+  "runtime_owned_behavior_represented_by_external_profile_json": false,
+  "schema_name": "glyph_clean_room_adapter_transform_design_gate",
+  "sidecar_required": true,
+  "status": "transform_design_ready_implementation_blocked",
+  "supporting_findings": {
+    "negative_corpus_gate_summary": {
+      "adapter_implementation_blocked": true,
+      "external_json_generation_blocked": true,
+      "negative_corpus_ready": true,
+      "sidecar_required": true,
+      "status": "negative_corpus_ready_adapter_implementation_blocked"
+    },
+    "schema_readiness_gate_summary": {
+      "adapter_implementation_blocked": true,
+      "external_json_generation_blocked": true,
+      "schema_planning_complete": true,
+      "sidecar_required": true,
+      "status": "schema_planning_complete_adapter_implementation_blocked"
+    },
+    "transform_decision_matrix_summary": {
+      "adapter_implementation_allowed": false,
+      "decision_count": 11,
+      "external_json_generation_allowed": false,
+      "implementation_decisions_approved": false,
+      "status": "decision_matrix_only_implementation_blocked"
+    },
+    "transform_design_contract_summary": {
+      "active_profile_round_trip_safe": false,
+      "external_json_generated": false,
+      "sidecar_required": true,
+      "status": "transform_design_contract_only",
+      "transform_implemented": false
+    },
+    "transform_rule_matrix_summary": {
+      "external_json_generated": false,
+      "rule_count": 17,
+      "sidecar_only_rules_present": true,
+      "status": "transform_rule_matrix_only",
+      "transform_implemented": false
+    }
+  },
+  "transform_design_ready": true,
+  "transform_implementation_blocked": true,
+  "validation_report": {
+    "checker_path": "tools/check_glyph_clean_room_adapter_transform_design_gate.py",
+    "component_checkers_required_to_pass": true,
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_transform_design_gate_2026-06-04.md",
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_transform_design_gate_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "transform_design_ready": true,
+    "transform_implementation_blocked": true,
+    "validation_scope": "docs_tools_fixtures_only"
+  }
+}
