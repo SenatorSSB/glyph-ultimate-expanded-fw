@@ -313,6 +313,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_external_remapper_license_code_reuse_blocker.py",
         ),
         step(
+            "external remapper source audit readiness gate",
+            "tools/check_glyph_external_remapper_source_audit_readiness_gate.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
