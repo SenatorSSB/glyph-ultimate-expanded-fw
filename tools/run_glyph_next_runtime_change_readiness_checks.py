@@ -265,6 +265,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_clean_room_adapter_sidecar_contract.py",
         ),
         step(
+            "clean-room adapter schema readiness gate",
+            "tools/check_glyph_clean_room_adapter_schema_readiness_gate.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
