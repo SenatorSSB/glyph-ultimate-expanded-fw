@@ -249,6 +249,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_offline_remapper_adapter_blocker_escalation.py",
         ),
         step(
+            "offline remapper export loss gate",
+            "tools/check_glyph_offline_remapper_export_loss_gate.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),

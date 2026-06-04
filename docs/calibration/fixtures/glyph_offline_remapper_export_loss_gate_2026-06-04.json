@@ -1,0 +1,149 @@
+{
+  "active_profile_round_trip_safe": false,
+  "adapter_implementation_allowed": false,
+  "allowed_next_work": [
+    "docs/tools-only adapter candidate schema planning with explicit non-round-trip caveat",
+    "manual repeat experiment with browser/version recorded",
+    "source audit of external remapper import/export code",
+    "clean-room transform design, not implementation"
+  ],
+  "disallowed_without_approval": [
+    "adapter implementation",
+    "external-remapper-compatible JSON generation",
+    "device write/WebSerial",
+    "protobuf binary generation",
+    "runtime-loaded config",
+    "official compatibility claim",
+    "hardware validation claim"
+  ],
+  "export_diff_gate_summary": {
+    "import_export_succeeded": true,
+    "runtime_owned_behavior_represented": false,
+    "status": "import_export_succeeded_with_warnings_adapter_blocked",
+    "warnings_present": true
+  },
+  "external_json_generation_allowed": false,
+  "gate_interpretation": [
+    "manual no-device import/export experiment completed",
+    "binding-loss classification is adapter-blocking",
+    "SOCD drift classification is adapter-blocking",
+    "metadata diff report remains metadata-only evidence",
+    "export diff gate keeps runtime-owned behavior unrepresented",
+    "active profile round-trip is not safe",
+    "adapter implementation remains blocked",
+    "external JSON generation remains blocked"
+  ],
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "manual_export_round_trip_has_blocking_loss": true,
+  "manual_import_experiment_completed": true,
+  "metadata_diff_summary": {
+    "comparison_summary_text": "Metadata diff only: the top-level metadata and the RGB/menu/back-end settings stay equal, while a small set of game-mode metadata fields change in the exported artifact.",
+    "firmware_behavior_validated": false,
+    "metadata_only": true,
+    "status": "docs_tools_metadata_diff"
+  },
+  "official_compatibility_claimed": false,
+  "report_version": 1,
+  "runtime_owned_behavior_represented": false,
+  "schema_name": "glyph_offline_remapper_export_loss_gate",
+  "source_packets": {
+    "binding_loss_classification": {
+      "checker_path": "tools/check_glyph_offline_remapper_binding_loss_classification.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_binding_loss_classification_2026-06-04.md",
+      "doc_sha256": "009d75a21694d56943e09495ccef6241a6217c7694e74453dd861c74c7daaa10",
+      "evidence_role": "binding-loss classification for active-profile round-trip safety",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_binding_loss_classification_2026-06-04.json",
+      "fixture_sha256": "775d8b5fa4f6a713a723b809e9883f5e4cd013ea49ef7417c422f4e11bbd44de",
+      "schema_name": "glyph_offline_remapper_binding_loss_classification",
+      "status": "docs_tools_binding_loss_classification"
+    },
+    "experiment_result": {
+      "checker_path": "tools/check_glyph_offline_remapper_experiment_result.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_experiment_result_2026-06-04.md",
+      "doc_sha256": "d03d953b479fbb00a701e0dcd13f4540dc23284e95f55fdbd7d127ac45d0aade",
+      "evidence_role": "manual no-device import/export experiment completed",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_experiment_result_2026-06-04.json",
+      "fixture_sha256": "e6f25498cb0ccf902f4e62706b09d93d2eff527b017693c27e796cd3c6096f2b",
+      "schema_name": "glyph_offline_remapper_experiment_result",
+      "status": "manual_no_device_experiment_completed_with_warnings"
+    },
+    "export_diff_gate": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_diff_gate.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_export_diff_gate_2026-06-04.md",
+      "doc_sha256": "0432e24cde1683e6c8ebfc1a835ffba7e28b8ec86829696430edb1a90363b46b",
+      "evidence_role": "aggregate export diff gate for blocked adapter interpretation",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_diff_gate_2026-06-04.json",
+      "fixture_sha256": "d7588aeffe7139cda6081f08fa387c7e7ac66682ecbce1432d4d0507344d3961",
+      "schema_name": "glyph_offline_remapper_export_diff_gate",
+      "status": "import_export_succeeded_with_warnings_adapter_blocked"
+    },
+    "metadata_diff_report": {
+      "checker_path": "tools/check_glyph_offline_remapper_metadata_diff_report.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_metadata_diff_report_2026-06-04.md",
+      "doc_sha256": "64464b80137983045bf5f78ad9aff8e6e32f2e11556409a32b83ca3c3c51b017",
+      "evidence_role": "metadata diff report for non-runtime evidence only",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_metadata_diff_report_2026-06-04.json",
+      "fixture_sha256": "537c102d0ff561621eace2fbe5a9fbc8f557ddee888df195676ac49c47b6721e",
+      "schema_name": "glyph_offline_remapper_metadata_diff_report",
+      "status": "docs_tools_metadata_diff"
+    },
+    "socd_drift_classification": {
+      "checker_path": "tools/check_glyph_offline_remapper_socd_drift_classification.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_socd_drift_classification_2026-06-04.md",
+      "doc_sha256": "a8e377476be52eb882808ef05e5e142f41abce09c930b4c57c79904a5ee04057",
+      "evidence_role": "SOCD drift classification for external export drift",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_socd_drift_classification_2026-06-04.json",
+      "fixture_sha256": "6cb334d59b5546f83b6806cbcee32678221de817b196eaf42e71fac82ad2bef0",
+      "schema_name": "glyph_offline_remapper_socd_drift_classification",
+      "status": "docs_tools_socd_drift_classification"
+    }
+  },
+  "status": "external_remapper_round_trip_not_safe_adapter_blocked",
+  "supporting_classifications": {
+    "binding_loss": {
+      "loss_severity": "adapter_blocking_loss",
+      "round_trip_safe_for_active_profile": false,
+      "summary": {
+        "all_input_activates_entries_missing_or_stripped_in_exported_profile": true,
+        "button_remapping_exact_value_equality": false,
+        "exported_button_remapping_count": 17,
+        "exported_entries_with_activates": 0,
+        "exported_profile_retains_profile_level_structure": true,
+        "input_button_remapping_count": 42,
+        "input_entries_missing_or_stripped_in_exported_profile": 42,
+        "input_entries_with_activates": 42
+      }
+    },
+    "socd_drift": {
+      "drift_severity": "adapter_blocking_drift",
+      "summary": {
+        "added_exported_pairs": [
+          {
+            "buttonDir1": "BTN_LF2",
+            "buttonDir2": "BTN_RF4",
+            "socdType": "SOCD_2IP"
+          },
+          {
+            "buttonDir1": "BTN_LF8",
+            "buttonDir2": "BTN_LF6"
+          },
+          {
+            "buttonDir1": "BTN_RF7",
+            "buttonDir2": "BTN_RF8"
+          }
+        ],
+        "exported_socd_count": 6,
+        "input_socd_count": 4,
+        "missing_from_exported_pairs": [
+          {
+            "buttonDir1": "BTN_LF5",
+            "buttonDir2": "BTN_LF2",
+            "socdType": "SOCD_2IP"
+          }
+        ],
+        "socd_pairs_exact_value_equality": false
+      }
+    }
+  }
+}
