@@ -229,6 +229,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_offline_remapper_ultimate_diff_report.py",
         ),
         step(
+            "offline remapper metadata diff report",
+            "tools/check_glyph_offline_remapper_metadata_diff_report.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),

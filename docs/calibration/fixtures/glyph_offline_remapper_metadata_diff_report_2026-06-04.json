@@ -1,0 +1,286 @@
+{
+  "comparison_summary": {
+    "buttonColors_missing_color_entries": {
+      "exact_value_equality": true,
+      "exported": [
+        {
+          "buttonColors_index": 20,
+          "entry": {
+            "button": "BTN_LF5"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 21,
+          "entry": {
+            "button": "BTN_LT5"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 22,
+          "entry": {
+            "button": "BTN_LT6"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 23,
+          "entry": {
+            "button": "BTN_RF13"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 24,
+          "entry": {
+            "button": "BTN_LF6"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 25,
+          "entry": {
+            "button": "BTN_RF11"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 26,
+          "entry": {
+            "button": "BTN_RF10"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 27,
+          "entry": {
+            "button": "BTN_LT3"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 11,
+          "entry": {},
+          "rgbConfig_index": 10
+        },
+        {
+          "buttonColors_index": 11,
+          "entry": {},
+          "rgbConfig_index": 12
+        }
+      ],
+      "exported_count": 10,
+      "input": [
+        {
+          "buttonColors_index": 20,
+          "entry": {
+            "button": "BTN_LF5"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 21,
+          "entry": {
+            "button": "BTN_LT5"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 22,
+          "entry": {
+            "button": "BTN_LT6"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 23,
+          "entry": {
+            "button": "BTN_RF13"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 24,
+          "entry": {
+            "button": "BTN_LF6"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 25,
+          "entry": {
+            "button": "BTN_RF11"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 26,
+          "entry": {
+            "button": "BTN_RF10"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 27,
+          "entry": {
+            "button": "BTN_LT3"
+          },
+          "rgbConfig_index": 2
+        },
+        {
+          "buttonColors_index": 11,
+          "entry": {},
+          "rgbConfig_index": 10
+        },
+        {
+          "buttonColors_index": 11,
+          "entry": {},
+          "rgbConfig_index": 12
+        }
+      ],
+      "input_count": 10
+    },
+    "communicationBackendConfigs_differences": {
+      "differences": [],
+      "exact_value_equality": true,
+      "exported_count": 8,
+      "input_count": 8
+    },
+    "defaultBackendConfig_defaultUsbBackendConfig": {
+      "defaultBackendConfig": {
+        "exact_value_equality": true,
+        "exported": 1,
+        "input": 1
+      },
+      "defaultUsbBackendConfig": {
+        "exact_value_equality": true,
+        "exported": 1,
+        "input": 1
+      }
+    },
+    "defaultDashboardOption": {
+      "exact_value_equality": true,
+      "exported": "DASHBOARD_MENU_BUTTON_HINTS",
+      "input": "DASHBOARD_MENU_BUTTON_HINTS"
+    },
+    "fields_changed_by_external_app": [
+      {
+        "changed_fields": [
+          "socdPairs"
+        ],
+        "exported_field_sha256": {
+          "socdPairs": "5fba8e0df31e4ec8223180d8ac4e4ea43f4733ef9b8a464bfcd846e945614774"
+        },
+        "exported_sha256": "8ba92b966a0398fa80de0e1175531ff2db6981cf5b690e8ac6a6703b2e4e6ed1",
+        "index": 1,
+        "input_field_sha256": {
+          "socdPairs": "0172a335054f534e2accb6c9e5e05c6a6a5cfcbf015ac8d2040746b7fe66d256"
+        },
+        "input_sha256": "e4b712bb2d89cc2ee25f7993f6c801c36d9164ec868bd54e72b72f28bfce189f",
+        "modeId": "MODE_PROJECT_M",
+        "name": "Brawl"
+      },
+      {
+        "changed_fields": [
+          "socdPairs",
+          "buttonRemapping"
+        ],
+        "exported_field_sha256": {
+          "buttonRemapping": "a0f1ee144ef050c020435179191970d682c19ef4d8c775d7ae93656e3f11f20a",
+          "socdPairs": "2583f8959d2e969a4ff124fc6cb52b486db5eff974676f9ed4db22365b11c198"
+        },
+        "exported_sha256": "ed6b0ea7077c28bb7cdf5458dcd07b76a757b65eb65fe2d718f09f127ade70e8",
+        "index": 2,
+        "input_field_sha256": {
+          "buttonRemapping": "98d74c62792d0e23efff495a5845271ec21fd9a1f79d7566147bff9df486cfff",
+          "socdPairs": "39e535b2ebacf71e509629b7c977a36859d19176a7ef16945243c04928581c6b"
+        },
+        "input_sha256": "9a9d268252a2a968783c49fc675210ef673e80119e6fa34e6710757923f305bf",
+        "modeId": "MODE_ULTIMATE",
+        "name": "Ultimate"
+      },
+      {
+        "changed_fields": [
+          "socdPairs"
+        ],
+        "exported_field_sha256": {
+          "socdPairs": "762c2f7aaed6ce3a75e14003d30ccb79b28799ab7a3ac2c40ce8b88546d5e863"
+        },
+        "exported_sha256": "1d1373e81c47a842a49212db3e1a8aee5ebd0d4b82a2bede1e13189f38c27ce7",
+        "index": 12,
+        "input_field_sha256": {
+          "socdPairs": "5d1c721c1eee0fdebff23301202c95dae9a143c5720ff9f5119227ccac268c75"
+        },
+        "input_sha256": "02323b2c375865f5a1808d266e424a9e6cb94d82d2d7c805fafbc3817e9a215a",
+        "modeId": "MODE_KEYBOARD",
+        "name": "Keyboard"
+      }
+    ],
+    "fields_preserved_exactly": {
+      "game_mode_fields": [
+        "applicableBackends",
+        "layoutPlate",
+        "menuButtonIcon",
+        "modeId",
+        "name",
+        "rgbConfig"
+      ],
+      "top_level": [
+        "communicationBackendConfigs",
+        "defaultBackendConfig",
+        "defaultDashboardOption",
+        "defaultUsbBackendConfig",
+        "keyboardModes",
+        "rgbBrightness",
+        "rgbConfigs"
+      ]
+    },
+    "keyboardModes": {
+      "exact_value_equality": true,
+      "exported_count": 1,
+      "exported_sha256": "fb8da4607f335b70ac0a3e35288aba5a9cc45097c224b7199b6c477167cd6ee5",
+      "input_count": 1,
+      "input_sha256": "fb8da4607f335b70ac0a3e35288aba5a9cc45097c224b7199b6c477167cd6ee5"
+    },
+    "menuButtonIcon_differences_by_game_mode": {
+      "difference_count": 0,
+      "differences": [],
+      "exact_value_equality": true,
+      "modes_compared": 13
+    },
+    "rgbBrightness": {
+      "exact_value_equality": true,
+      "exported": 255,
+      "input": 255
+    },
+    "rgbConfigs": {
+      "exact_value_equality": true,
+      "exported_count": 13,
+      "exported_sha256": "d29b2c956f335dfa233e175029046796e6ac4923847cba75acefec22494e8733",
+      "input_count": 13,
+      "input_sha256": "d29b2c956f335dfa233e175029046796e6ac4923847cba75acefec22494e8733"
+    },
+    "rgbConfigs_empty_object_entries": {
+      "exact_value_equality": true,
+      "exported": [],
+      "input": []
+    },
+    "summary": "Metadata diff only: the top-level metadata and the RGB/menu/back-end settings stay equal, while a small set of game-mode metadata fields change in the exported artifact."
+  },
+  "exported_artifact": {
+    "path": "docs/calibration/fixtures/glyph_offline_remapper_exported_GlyphUserProfiles_2026-06-04.json",
+    "sha256": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "firmware_behavior_validated": false,
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "input_artifact": {
+    "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+    "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707"
+  },
+  "metadata_only": true,
+  "report_version": 1,
+  "schema_name": "glyph_offline_remapper_metadata_diff_report",
+  "status": "docs_tools_metadata_diff"
+}
