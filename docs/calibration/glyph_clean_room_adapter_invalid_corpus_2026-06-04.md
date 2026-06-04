@@ -31,11 +31,17 @@ Invalid corpus fixture:
 Checker:
 
 - `tools/check_glyph_clean_room_adapter_invalid_corpus_fixture.py`
+- `tools/check_glyph_clean_room_adapter_invalid_corpus.py`
 
 Contract source:
 
 - `tools/check_glyph_clean_room_adapter_negative_corpus_contract.py`
 - `docs/calibration/fixtures/glyph_clean_room_adapter_negative_corpus_contract_2026-06-04.json`
+
+Candidate placeholder source:
+
+- `tools/check_glyph_clean_room_adapter_candidate_schema_validator.py`
+- `docs/calibration/fixtures/glyph_clean_room_adapter_candidate_SCHEMA_PLACEHOLDER_2026-06-04.json`
 
 ## Required top-level flags
 
@@ -84,6 +90,7 @@ Each metadata-only case maps directly to one committed contract category and req
 
 - no mutation application
 - no adapter candidate generation
+- does not execute an adapter
 - no adapter implementation
 - no external JSON generation
 - no generated external JSON output path
@@ -98,6 +105,7 @@ Each metadata-only case maps directly to one committed contract category and req
 - no active profile artifact change
 - no exported experiment artifact change
 - no runtime firmware source change
+- no case can be interpreted as a valid adapter output
 
 ## Validation report
 
@@ -106,5 +114,10 @@ The checker validates that:
 - The committed fixture exactly matches regenerated canonical JSON.
 - The committed category list stays aligned with the negative corpus contract category set and order.
 - Every case has the required metadata-only failure flags and expected error code list.
+- Every case category is known and every required contract category is present.
+- No case includes a generated external JSON path.
+- No case can be interpreted as a valid adapter output relative to the committed placeholder/contract invariants.
+- The corpus remains planning fixture validation only and does not execute an adapter.
+- The corpus does not claim official compatibility or hardware validation.
 - The Markdown includes the required invalid corpus phrases.
 - The contract checker still passes before the invalid corpus fixture is accepted.
