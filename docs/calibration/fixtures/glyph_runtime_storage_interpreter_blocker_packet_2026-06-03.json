@@ -1,0 +1,65 @@
+{
+  "schema_name": "glyph_runtime_storage_interpreter_blocker_packet",
+  "packet_version": 1,
+  "status": "blocked_pending_design_source_authority_and_user_approval",
+  "hardware_status": "not_new_hardware_result",
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "interpreter_implemented": false,
+  "external_source_promoted_to_authority": false,
+  "required_unresolved_design_decisions": [
+    "storage location",
+    "representation",
+    "boot-time validation",
+    "fallback policy",
+    "version migration",
+    "maximum config size",
+    "profile-bound vs global scope",
+    "latency/performance evidence",
+    "hardware validation plan",
+    "nunchuk decision"
+  ],
+  "required_missing_evidence": [
+    "source-backed storage/interpreter authority",
+    "latency/performance evidence",
+    "hardware validation plan",
+    "explicit user approval"
+  ],
+  "firmware_owned_semantics": [
+    "evaluator phase order",
+    "allowed role classes",
+    "priority/evaluator semantics",
+    "unsupported role-class rejection"
+  ],
+  "forbidden_config_capabilities": [
+    "scripts",
+    "macros",
+    "turbo",
+    "timing",
+    "history-dependent logic",
+    "phase-order mutation"
+  ],
+  "required_approval": [
+    "explicit user approval for any runtime-loaded config storage/interpreter implementation path",
+    "source-authority review approval for storage, representation, validation, fallback, migration, and performance claims",
+    "hardware-test-plan approval before any implementation branch can claim hardware results"
+  ],
+  "source_backed_inputs": [
+    "docs/calibration/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.md",
+    "docs/calibration/fixtures/glyph_runtime_loaded_config_implementation_readiness_packet_2026-05-28.json",
+    "docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md",
+    "docs/calibration/glyph_runtime_loaded_config_validation_contract_v0_2026-05-28.md",
+    "tools/check_glyph_runtime_loaded_config_design.py",
+    "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
+    "docs/calibration/glyph_protobuf_config_schema_research_packet_2026-06-03.md",
+    "docs/calibration/glyph_webserial_transport_blocker_packet_2026-06-03.md"
+  ],
+  "doc_caveats": [
+    "runtime-loaded config not implemented",
+    "storage not implemented",
+    "interpreter not implemented",
+    "firmware owns evaluator phase order",
+    "config must not own scripts/macros/turbo/timing/history",
+    "not hardware validation"
+  ]
+}
