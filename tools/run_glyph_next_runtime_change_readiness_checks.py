@@ -193,6 +193,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_offline_remapper_adapter_mapping_plan.py",
         ),
         step(
+            "offline remapper adapter gap matrix",
+            "tools/check_glyph_offline_remapper_adapter_gap_matrix.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),

@@ -1,0 +1,240 @@
+{
+  "schema_name": "glyph_offline_remapper_adapter_gap_matrix",
+  "matrix_version": 1,
+  "status": "offline_adapter_gap_matrix_only",
+  "hardware_status": "not_new_hardware_result",
+  "adapter_implemented": false,
+  "external_source_promoted_to_authority": false,
+  "external_source_code_copied": false,
+  "official_configurator_compatibility_claimed": false,
+  "device_write_implemented": false,
+  "webserial_transport_implemented": false,
+  "protobuf_binary_generation_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "hardware_validation_claimed": false,
+  "source_inputs": [
+    "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_adapter_boundary_2026-06-03.json",
+    "docs/calibration/glyph_external_remapper_source_snapshot_index_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_source_snapshot_index_2026-06-03.json",
+    "docs/calibration/glyph_external_remapper_config_shape_matrix_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_config_shape_matrix_2026-06-03.json",
+    "docs/calibration/glyph_external_remapper_adapter_feasibility_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_adapter_feasibility_2026-06-03.json",
+    "docs/calibration/glyph_external_remapper_compatibility_experiment_plan_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_external_remapper_compatibility_experiment_plan_2026-06-03.json",
+    "docs/calibration/glyph_offline_remapper_adapter_target_contract_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_adapter_target_contract_2026-06-03.json",
+    "docs/calibration/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.json",
+    "docs/calibration/glyph_protobuf_config_schema_research_packet_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json",
+    "docs/calibration/glyph_webserial_transport_blocker_packet_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_webserial_transport_blocker_packet_2026-06-03.json",
+    "docs/calibration/glyph_config_json_compatibility_fixtures_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_config_json_compatibility_cases_2026-06-03.json",
+    "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json"
+  ],
+  "gaps": [
+    {
+      "gap_id": "external_custom_modifier_representation",
+      "status": "blocked_missing_source_authority",
+      "risk": "Generating external custom modifier fields would treat a blocked target representation as stable without the required source audit.",
+      "required_evidence": [
+        "official source-backed custom modifier representation authority",
+        "completed representation source audit"
+      ],
+      "must_not_generate": [
+        "profiles[].modes[].customModifiers[]",
+        "external custom modifier payloads"
+      ],
+      "notes": "The offline remapper adapter mapping plan keeps custom_modifier_metadata blocked_missing_source_authority until source audit."
+    },
+    {
+      "gap_id": "official_protobuf_schema",
+      "status": "blocked_missing_source_authority",
+      "risk": "Generating protobuf-backed adapter outputs would rely on missing official protobuf/schema authority.",
+      "required_evidence": [
+        "official protobuf/schema source authority",
+        "reviewed configurator schema ownership notes"
+      ],
+      "must_not_generate": [
+        "transport.protobufBinary",
+        "protobuf-backed adapter exports"
+      ],
+      "notes": "The protobuf/config schema research packet records official protobuf/schema source authority missing."
+    },
+    {
+      "gap_id": "external_protobuf_encode_decode_assumptions",
+      "status": "blocked_missing_source_authority",
+      "risk": "Using external encode/decode observations as adapter truth would promote non-authoritative notes into behavior claims.",
+      "required_evidence": [
+        "official protobuf encode/decode source authority",
+        "reviewed comparison against repo-owned artifacts"
+      ],
+      "must_not_generate": [
+        "external encode/decode compatibility claims",
+        "adapter logic based on external protobuf assumptions"
+      ],
+      "notes": "The research packet records external configToBinary/binaryToConfig observations as non-authoritative comparison inputs only."
+    },
+    {
+      "gap_id": "webserial_packet_framing",
+      "status": "blocked_missing_source_authority",
+      "risk": "Generating WebSerial framing fields would imply transport authority and write behavior the repo does not have.",
+      "required_evidence": [
+        "official packet framing authority",
+        "safe no-device dry-run evidence",
+        "readback strategy and rollback plan"
+      ],
+      "must_not_generate": [
+        "transport.webserial",
+        "packet framing bytes",
+        "WebSerial transport metadata"
+      ],
+      "notes": "The WebSerial transport blocker packet records official packet framing authority missing and WebSerial write not implemented."
+    },
+    {
+      "gap_id": "save_to_device_behavior",
+      "status": "out_of_scope",
+      "risk": "Treating Save to Device as an adapter target would cross from offline docs/tools planning into device-write behavior.",
+      "required_evidence": [
+        "explicit user approval for any Save to Device path",
+        "official device-write transport authority"
+      ],
+      "must_not_generate": [
+        "transport.saveToDevice",
+        "Save to Device actions",
+        "device-write workflow metadata"
+      ],
+      "notes": "The WebSerial blocker packet treats Save to Device as forbidden current claim and the mapping plan keeps transport.saveToDevice out of scope."
+    },
+    {
+      "gap_id": "official_configurator_json_edge_cases",
+      "status": "blocked_missing_source_authority",
+      "risk": "Adapter generation could silently depend on edge-case JSON behavior the repo only checks as bounded compatibility fixtures, not official authority.",
+      "required_evidence": [
+        "official configurator compatibility source authority",
+        "official JSON edge-case documentation or source audit"
+      ],
+      "must_not_generate": [
+        "official configurator compatibility claims",
+        "edge-case-specific adapter rewrites"
+      ],
+      "notes": "The config JSON compatibility fixtures are repo-local guardrails only and the source registry defers official configurator authority."
+    },
+    {
+      "gap_id": "rgb_shared_index_behavior",
+      "status": "blocked_pending_manual_experiment",
+      "risk": "RGB config references may be structurally present while any shared-index import/export behavior stays unproven.",
+      "required_evidence": [
+        "offline/manual import-export experiment with no live device",
+        "documented accepted/rejected RGB reference behavior"
+      ],
+      "must_not_generate": [
+        "shared RGB index assumptions",
+        "adapter-generated RGB index rewrites"
+      ],
+      "notes": "The mapping plan treats rgbConfig references as derived_candidate because target index semantics still need review."
+    },
+    {
+      "gap_id": "menu_button_display_vs_runtime_behavior",
+      "status": "blocked_pending_manual_experiment",
+      "risk": "Display metadata could be mistaken for runtime behavior without evidence that an external candidate preserves the distinction safely.",
+      "required_evidence": [
+        "offline/manual import-export experiment with menu button display fields",
+        "documented display-only versus runtime behavior notes"
+      ],
+      "must_not_generate": [
+        "adapter-generated menu runtime semantics",
+        "display metadata treated as runtime authority"
+      ],
+      "notes": "The mapping plan keeps menu button icon/display metadata at manual_review_required because future target wiring is not source-audited."
+    },
+    {
+      "gap_id": "keyboard_scancode_mapping",
+      "status": "blocked_pending_manual_experiment",
+      "risk": "Internal keycode fields do not prove external scancode acceptance or stable import/export behavior.",
+      "required_evidence": [
+        "offline/manual import-export experiment for keyboard mappings",
+        "documented accepted/rejected keyboard mapping notes"
+      ],
+      "must_not_generate": [
+        "adapter-generated scancode translations",
+        "keyboard compatibility claims"
+      ],
+      "notes": "The active profile artifact contains keyboardModes keycodes, but no external import/export evidence establishes scancode equivalence."
+    },
+    {
+      "gap_id": "socd_semantic_equivalence",
+      "status": "blocked_pending_manual_experiment",
+      "risk": "Shape-level SOCD pair overlap does not prove semantic equivalence across an external adapter candidate.",
+      "required_evidence": [
+        "offline/manual import-export experiment for representative SOCD pairs",
+        "documented semantic differences or acceptance limits"
+      ],
+      "must_not_generate": [
+        "SOCD equivalence claims",
+        "adapter-generated SOCD normalization logic"
+      ],
+      "notes": "The active profile artifact exposes socdPairs, but the external config-shape matrix classifies only shape overlap and keeps semantics non-authoritative."
+    },
+    {
+      "gap_id": "profile_count_limits",
+      "status": "blocked_pending_manual_experiment",
+      "risk": "Profile-count assumptions could create unsupported candidate files without evidence about accepted limits.",
+      "required_evidence": [
+        "offline/manual import-export experiment for profile-count boundaries",
+        "documented accepted profile-count notes or official limit authority"
+      ],
+      "must_not_generate": [
+        "profile-count compatibility claims",
+        "adapter-generated profile expansion assumptions"
+      ],
+      "notes": "The repo commits active profile/config examples, but no current source-backed authority proves external profile count or limit behavior."
+    },
+    {
+      "gap_id": "external_default_config_provenance",
+      "status": "allowed_as_sidecar_only",
+      "risk": "Treating external default config provenance as adapter config data would promote non-authoritative provenance notes into generated behavior.",
+      "required_evidence": [
+        "documented provenance notes recorded in a later sidecar result",
+        "no-device comparison evidence or official source authority before stronger claims"
+      ],
+      "must_not_generate": [
+        "default config provenance fields inside candidate config",
+        "external defaults treated as adapter authority"
+      ],
+      "notes": "The target contract and source snapshot index allow non-authoritative comparison notes, but provenance must remain outside adapter-generated config."
+    },
+    {
+      "gap_id": "external_license_code_reuse",
+      "status": "blocked_pending_license_review",
+      "risk": "Any reuse or copy assumption without review would cross repo policy and legal boundaries.",
+      "required_evidence": [
+        "completed license review",
+        "explicit approval before any code reuse decision"
+      ],
+      "must_not_generate": [
+        "external code copy",
+        "source-derived adapter implementation",
+        "external code reuse claims"
+      ],
+      "notes": "The external remapper boundary and feasibility artifacts both require license review before code reuse."
+    },
+    {
+      "gap_id": "import_export_no_device_experiment_evidence",
+      "status": "allowed_as_sidecar_only",
+      "risk": "Experiment evidence belongs in a result packet; treating it as adapter config would blur compatibility notes and generated behavior.",
+      "required_evidence": [
+        "separate offline/manual no-device experiment result doc/fixture",
+        "artifact hashes and accepted/rejected field notes"
+      ],
+      "must_not_generate": [
+        "experiment result fields inside candidate config",
+        "adapter-generated compatibility verdicts"
+      ],
+      "notes": "The experiment plan keeps the work planned_not_executed and requires any future results to live in a separate result doc/fixture pair."
+    }
+  ]
+}

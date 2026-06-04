@@ -109,6 +109,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.md",
     "docs/calibration/fixtures/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.json",
     "tools/check_glyph_offline_remapper_adapter_mapping_plan.py",
+    "docs/calibration/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.json",
+    "tools/check_glyph_offline_remapper_adapter_gap_matrix.py",
     "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
     "docs/calibration/fixtures/glyph_storage_transport_source_authority_registry_2026-06-03.json",
     "tools/check_glyph_storage_transport_source_authority_registry.py",
@@ -245,6 +248,14 @@ REQUIRED_ROADMAP_PHRASES = [
     "custom modifier representation requires source audit",
     "protobuf binary payload mapping remains `blocked_missing_source_authority`",
     "WebSerial/device write fields remain out of scope",
+    "Offline remapper adapter gap matrix",
+    "glyph/gfw2-offline-remapper-adapter-gap-matrix",
+    "blocked-field gap matrix",
+    "no adapter generation",
+    "no external code reuse",
+    "no device write behavior",
+    "no WebSerial transport",
+    "not hardware validation",
 ]
 
 
