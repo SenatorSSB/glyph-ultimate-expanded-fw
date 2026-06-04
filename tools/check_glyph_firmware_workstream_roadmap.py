@@ -109,6 +109,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_protobuf_config_schema_research_packet_2026-06-03.md",
     "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json",
     "tools/check_glyph_protobuf_config_schema_research_packet.py",
+    "docs/calibration/glyph_webserial_transport_blocker_packet_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_webserial_transport_blocker_packet_2026-06-03.json",
+    "tools/check_glyph_webserial_transport_blocker_packet.py",
     "docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md",
     "docs/calibration/fixtures/glyph_preimplementation_go_nogo_index_2026-05-28.json",
     "docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md",
@@ -203,6 +206,14 @@ OPTIONAL_FUTURE_FILES = [
     "docs/calibration/export_corpus",
 ]
 
+REQUIRED_ROADMAP_PHRASES = [
+    "WebSerial transport blocker packet",
+    "glyph/gfw2-webserial-transport-blocker-packet",
+    "serial dry-run is not live device access",
+    "WebSerial write, device write, and firmware flashing are not implemented",
+    "external WebSerial observations are non-authoritative",
+]
+
 
 def check_exists(repo_root: Path, rel_path: str) -> bool:
     return (repo_root / rel_path).exists()
@@ -229,11 +240,26 @@ def main() -> int:
             print(f"[roadmap-check] WARNING optional_missing={rel}")
             missing_optional.append(rel)
 
-    if missing_required:
+    print("[roadmap-check] verifying required roadmap phrases")
+    roadmap_text = (repo_root / REQUIRED_FILES[0]).read_text(encoding="utf-8")
+    missing_phrases: list[str] = []
+    for phrase in REQUIRED_ROADMAP_PHRASES:
+        if phrase in roadmap_text:
+            print(f"[roadmap-check] OK phrase={phrase}")
+        else:
+            print(f"[roadmap-check] MISSING phrase={phrase}")
+            missing_phrases.append(phrase)
+
+    if missing_required or missing_phrases:
         print(
             "[roadmap-check] FAIL missing_required_count="
             f"{len(missing_required)}"
         )
+        if missing_phrases:
+            print(
+                "[roadmap-check] FAIL missing_phrase_count="
+                f"{len(missing_phrases)}"
+            )
         return 1
 
     print(

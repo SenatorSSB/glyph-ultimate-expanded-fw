@@ -193,6 +193,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_protobuf_config_schema_research_packet.py",
         ),
         step(
+            "webserial transport blocker packet",
+            "tools/check_glyph_webserial_transport_blocker_packet.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
