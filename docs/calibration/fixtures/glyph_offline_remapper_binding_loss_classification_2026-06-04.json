@@ -1,0 +1,33 @@
+{
+  "adapter_implemented": false,
+  "binding_loss_summary": {
+    "all_input_activates_entries_missing_or_stripped_in_exported_profile": true,
+    "button_remapping_exact_value_equality": false,
+    "exported_button_remapping_count": 17,
+    "exported_entries_with_activates": 0,
+    "exported_profile_retains_profile_level_structure": true,
+    "input_button_remapping_count": 42,
+    "input_entries_missing_or_stripped_in_exported_profile": 42,
+    "input_entries_with_activates": 42
+  },
+  "external_source_promoted_to_authority": false,
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "interpretation": [
+    "external remapper export cannot currently preserve active profile artifact identity/activation binding semantics",
+    "profile-level export is not round-trip safe for our active profile artifact",
+    "not evidence of firmware/runtime behavior"
+  ],
+  "loss_severity": "adapter_blocking_loss",
+  "official_compatibility_claimed": false,
+  "report_version": 1,
+  "round_trip_safe_for_active_profile": false,
+  "schema_name": "glyph_offline_remapper_binding_loss_classification",
+  "source_report": {
+    "path": "docs/calibration/fixtures/glyph_offline_remapper_ultimate_diff_report_2026-06-04.json",
+    "schema_name": "glyph_offline_remapper_ultimate_diff_report",
+    "sha256": "04ed010cb49becca57f7da2424451488f9a9dc20a8d6e629e455d9a8963e061a",
+    "status": "docs_tools_ultimate_profile_diff"
+  },
+  "status": "docs_tools_binding_loss_classification"
+}
