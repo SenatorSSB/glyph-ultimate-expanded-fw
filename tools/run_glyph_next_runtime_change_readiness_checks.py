@@ -189,6 +189,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
         step(
+            "protobuf config schema research packet",
+            "tools/check_glyph_protobuf_config_schema_research_packet.py",
+        ),
+        step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),

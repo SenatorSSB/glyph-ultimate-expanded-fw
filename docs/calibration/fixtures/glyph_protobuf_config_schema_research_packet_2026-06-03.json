@@ -1,0 +1,117 @@
+{
+  "schema_name": "glyph_protobuf_config_schema_research_packet",
+  "packet_version": 1,
+  "status": "docs_tools_research_packet",
+  "hardware_status": "not_new_hardware_result",
+  "official_protobuf_schema_authority_present": false,
+  "protobuf_binary_generation_implemented": false,
+  "official_configurator_compatibility_claimed": false,
+  "device_write_implemented": false,
+  "external_source_promoted_to_authority": false,
+  "known_repo_internal_shapes": [
+    {
+      "shape_id": "active_profile_artifact_json_shape",
+      "authority_status": "repo_fixture_evidence",
+      "repo_paths": [
+        "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+        "docs/calibration/glyph_config_json_compatibility_fixtures_2026-06-03.md",
+        "tools/check_glyph_config_json_compatibility_fixtures.py"
+      ],
+      "observed_shape": "Repo-committed active profile/config JSON shape is bounded by offline fixtures and checkers only. The artifact exposes top-level gameModeConfigs, communicationBackendConfigs, keyboardModes, rgbConfigs, defaultBackendConfig, defaultUsbBackendConfig, rgbBrightness, and defaultDashboardOption fields. This is not official configurator compatibility."
+    },
+    {
+      "shape_id": "generated_config_runtime_candidate_shape",
+      "authority_status": "repo_fixture_evidence",
+      "repo_paths": [
+        "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+        "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+        "docs/calibration/glyph_runtime_config_candidate_validator_v0_2026-06-03.md"
+      ],
+      "observed_shape": "Repo fixtures define docs/tools-only generated-config and runtime-candidate shapes with coverage metadata, tables, priority_model, hard_overrides, source_authority references, and non-goal caveats. These are not runtime-loaded config."
+    },
+    {
+      "shape_id": "senscope_export_package_shape",
+      "authority_status": "repo_fixture_evidence",
+      "repo_paths": [
+        "docs/calibration/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.md",
+        "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+        "tools/check_glyph_senscope_export_package_validator.py"
+      ],
+      "observed_shape": "Repo draft/sample define a future Senscope export package shape carrying a placeholder neutral profile, generated-config payload, source metadata, validation report, and caveats. This is docs/tools-only and not official configurator compatibility."
+    },
+    {
+      "shape_id": "serial_dry_run_behavior",
+      "authority_status": "repo_docs_tools_boundary",
+      "repo_paths": [
+        "docs/calibration/glyph_serial_active_config_writer_trace_2026-05-27.md",
+        "tools/check_glyph_serial_config_writer.py",
+        "tools/glyph_serial_config_tool.py"
+      ],
+      "observed_shape": "Repo-local serial tooling is documented as dry-run/read-only by default, with explicit flags required for live read/write, explicit port/artifact requirements, and no firmware flashing. The JSON artifact is not the wire format."
+    },
+    {
+      "shape_id": "repo_internal_protobuf_config_assumptions",
+      "authority_status": "repo_docs_tools_boundary",
+      "repo_paths": [
+        "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
+        "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md",
+        "docs/calibration/glyph_serial_active_config_writer_trace_2026-05-27.md"
+      ],
+      "observed_shape": "Repo docs record bounded assumptions that future config transfer work would need protobuf-shaped Config bytes while official protobuf/schema authority and official configurator compatibility authority remain missing. This is not protobuf binary generation support."
+    }
+  ],
+  "external_observations": [
+    {
+      "observation_id": "external_remapper_protobuf_encode_decode_claim",
+      "authority_status": "non_authoritative_external_observation",
+      "promoted_to_authority": false,
+      "repo_paths": [
+        "docs/calibration/glyph_external_remapper_source_snapshot_index_2026-06-03.md",
+        "docs/calibration/glyph_external_remapper_config_shape_matrix_2026-06-03.md"
+      ],
+      "summary": "External snapshot docs describe configToBinary, binaryToConfig, protobuf.js, and an inline PROTO_DEF claim. This remains a non-authoritative comparison input only."
+    },
+    {
+      "observation_id": "external_remapper_webserial_load_save_claim",
+      "authority_status": "non_authoritative_external_observation",
+      "promoted_to_authority": false,
+      "repo_paths": [
+        "docs/calibration/glyph_external_remapper_source_snapshot_index_2026-06-03.md",
+        "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md"
+      ],
+      "summary": "External snapshot docs describe Connect, Load Config, Save to Device, and WebSerial load/save claims. This remains a non-authoritative comparison input only."
+    },
+    {
+      "observation_id": "external_remapper_configurator_compatibility_claim",
+      "authority_status": "non_authoritative_external_observation",
+      "promoted_to_authority": false,
+      "repo_paths": [
+        "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
+        "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md"
+      ],
+      "summary": "External compatibility/configurator claims were observed in comparison docs, but this repo keeps them non-authoritative and does not treat them as official configurator compatibility."
+    }
+  ],
+  "missing_authority": [
+    "official protobuf/schema source",
+    "official configurator compatibility source",
+    "official WebSerial packet-framing source",
+    "official device-write transport source",
+    "official runtime-loaded config storage/interpreter source"
+  ],
+  "blocked_implementation_classes": [
+    "protobuf binary generation",
+    "device write",
+    "WebSerial transport",
+    "runtime-loaded config",
+    "official configurator compatibility claims"
+  ],
+  "doc_caveats": [
+    "official protobuf/schema source authority missing",
+    "not protobuf binary generation",
+    "not official configurator compatibility",
+    "not device write behavior",
+    "external observations non-authoritative",
+    "not hardware validation"
+  ]
+}
