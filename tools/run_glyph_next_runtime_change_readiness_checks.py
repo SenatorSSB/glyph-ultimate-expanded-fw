@@ -213,6 +213,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_offline_remapper_result_template.py",
         ),
         step(
+            "offline remapper experiment readiness index",
+            "tools/check_glyph_offline_remapper_experiment_readiness_index.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),

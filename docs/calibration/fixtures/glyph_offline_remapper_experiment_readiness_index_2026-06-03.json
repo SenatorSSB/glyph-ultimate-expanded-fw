@@ -1,0 +1,84 @@
+{
+  "schema_name": "glyph_offline_remapper_experiment_readiness_index",
+  "index_version": 1,
+  "status": "ready_for_manual_no_device_experiment",
+  "hardware_status": "not_new_hardware_result",
+  "ready_for_manual_no_device_experiment": true,
+  "experiment_executed": false,
+  "adapter_implemented": false,
+  "device_write_allowed": false,
+  "webserial_access_allowed": false,
+  "save_to_device_allowed": false,
+  "hardware_validation_claimed": false,
+  "component_packets": [
+    {
+      "component": "input_manifest",
+      "status": "COMPLETE",
+      "doc": "docs/calibration/glyph_offline_remapper_experiment_input_manifest_2026-06-03.md",
+      "fixture": "docs/calibration/fixtures/glyph_offline_remapper_experiment_input_manifest_2026-06-03.json",
+      "checker": "tools/check_glyph_offline_remapper_experiment_input_manifest.py"
+    },
+    {
+      "component": "manual_procedure",
+      "status": "COMPLETE",
+      "doc": "docs/calibration/glyph_offline_remapper_manual_procedure_2026-06-03.md",
+      "fixture": "docs/calibration/fixtures/glyph_offline_remapper_manual_procedure_2026-06-03.json",
+      "checker": "tools/check_glyph_offline_remapper_manual_procedure.py"
+    },
+    {
+      "component": "result_template",
+      "status": "COMPLETE",
+      "doc": "docs/calibration/glyph_offline_remapper_result_template_2026-06-03.md",
+      "fixture": "docs/calibration/fixtures/glyph_offline_remapper_result_TEMPLATE_2026-06-03.json",
+      "checker": "tools/check_glyph_offline_remapper_result_template.py"
+    },
+    {
+      "component": "adapter_target_contract",
+      "status": "COMPLETE",
+      "doc": "docs/calibration/glyph_offline_remapper_adapter_target_contract_2026-06-03.md",
+      "fixture": "docs/calibration/fixtures/glyph_offline_remapper_adapter_target_contract_2026-06-03.json",
+      "checker": "tools/check_glyph_offline_remapper_adapter_target_contract.py"
+    },
+    {
+      "component": "adapter_mapping_plan",
+      "status": "COMPLETE",
+      "doc": "docs/calibration/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.md",
+      "fixture": "docs/calibration/fixtures/glyph_offline_remapper_adapter_mapping_plan_2026-06-03.json",
+      "checker": "tools/check_glyph_offline_remapper_adapter_mapping_plan.py"
+    },
+    {
+      "component": "adapter_gap_matrix",
+      "status": "COMPLETE",
+      "doc": "docs/calibration/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.md",
+      "fixture": "docs/calibration/fixtures/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.json",
+      "checker": "tools/check_glyph_offline_remapper_adapter_gap_matrix.py"
+    },
+    {
+      "component": "manual_experiment_packet",
+      "status": "COMPLETE",
+      "doc": "docs/calibration/glyph_offline_remapper_manual_experiment_packet_2026-06-03.md",
+      "fixture": "docs/calibration/fixtures/glyph_offline_remapper_manual_experiment_packet_2026-06-03.json",
+      "checker": "tools/check_glyph_offline_remapper_manual_experiment_packet.py"
+    }
+  ],
+  "required_manual_gate": [
+    "manual no-device operator run must be performed later and recorded in a separate result packet",
+    "experiment not executed",
+    "adapter not implemented",
+    "no live device",
+    "no WebSerial access",
+    "no Save to Device",
+    "not hardware validation"
+  ],
+  "forbidden_actions": [
+    "live device connection",
+    "clicking Connect",
+    "granting WebSerial access",
+    "clicking Save to Device",
+    "firmware flashing",
+    "official compatibility claim",
+    "hardware validation claim",
+    "adapter implementation",
+    "external-remapper-compatible JSON generation"
+  ]
+}
