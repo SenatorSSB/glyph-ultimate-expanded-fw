@@ -1,0 +1,72 @@
+{
+  "analysis_version": 1,
+  "byte_hashes_equal": false,
+  "caveats": [
+    "structural diff only",
+    "not official configurator compatibility",
+    "not adapter implementation",
+    "not hardware validation",
+    "not firmware behavior validation",
+    "not device write behavior"
+  ],
+  "collection_counts": {
+    "communicationBackendConfigs": {
+      "exported": 8,
+      "input": 8
+    },
+    "gameModeConfigs": {
+      "exported": 13,
+      "input": 13
+    },
+    "keyboardModes": {
+      "exported": 1,
+      "input": 1
+    },
+    "rgbConfigs": {
+      "exported": 13,
+      "input": 13
+    }
+  },
+  "exported_artifact": {
+    "path": "docs/calibration/fixtures/glyph_offline_remapper_exported_GlyphUserProfiles_2026-06-04.json",
+    "sha256": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "hardware_status": "not_new_hardware_result",
+  "input_artifact": {
+    "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+    "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707"
+  },
+  "mode_ultimate": {
+    "exported": {
+      "communication_backend_id": null,
+      "index": 2,
+      "name": "Ultimate",
+      "present": true
+    },
+    "input": {
+      "communication_backend_id": null,
+      "index": 2,
+      "name": "Ultimate",
+      "present": true
+    },
+    "present_in_exported": true,
+    "present_in_input": true
+  },
+  "objects_equal": false,
+  "schema_name": "glyph_offline_remapper_export_structural_diff",
+  "status": "docs_tools_structural_diff",
+  "top_level_keys": {
+    "added": [],
+    "common": [
+      "communicationBackendConfigs",
+      "defaultBackendConfig",
+      "defaultDashboardOption",
+      "defaultUsbBackendConfig",
+      "gameModeConfigs",
+      "keyboardModes",
+      "rgbBrightness",
+      "rgbConfigs"
+    ],
+    "removed": []
+  }
+}
