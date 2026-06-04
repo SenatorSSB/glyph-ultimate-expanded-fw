@@ -1,0 +1,51 @@
+{
+  "adapter_implementation_blocked": true,
+  "adapter_implemented": false,
+  "binding_loss_adapter_blocking": true,
+  "blocker_interpretation": [
+    "adapter implementation remains blocked",
+    "external-remapper-compatible JSON generation remains blocked",
+    "active profile artifact is not round-trip safe through external remapper export",
+    "binding-loss and SOCD drift are adapter-blocking until source audit and transformation strategy exist",
+    "no external source authority promotion"
+  ],
+  "external_json_generation_blocked": true,
+  "external_remapper_compatible_json_generated": false,
+  "external_source_promoted_to_authority": false,
+  "future_adapter_decisions": [
+    "target external remapper import only, not export round-trip",
+    "use sidecar reports for runtime-owned behavior",
+    "avoid using external remapper as a canonical editor for identity-runtime profiles"
+  ],
+  "hardware_status": "not_new_hardware_result",
+  "hardware_validation_claimed": false,
+  "official_compatibility_claimed": false,
+  "report_version": 1,
+  "round_trip_safe_for_active_profile": false,
+  "schema_name": "glyph_offline_remapper_adapter_blocker_escalation",
+  "socd_drift_adapter_blocking": true,
+  "source_packets": {
+    "binding_loss_classification": {
+      "checker_path": "tools/check_glyph_offline_remapper_binding_loss_classification.py",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_binding_loss_classification_2026-06-04.json",
+      "fixture_sha256": "775d8b5fa4f6a713a723b809e9883f5e4cd013ea49ef7417c422f4e11bbd44de",
+      "schema_name": "glyph_offline_remapper_binding_loss_classification",
+      "status": "docs_tools_binding_loss_classification"
+    },
+    "export_diff_gate": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_diff_gate.py",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_diff_gate_2026-06-04.json",
+      "fixture_sha256": "d7588aeffe7139cda6081f08fa387c7e7ac66682ecbce1432d4d0507344d3961",
+      "schema_name": "glyph_offline_remapper_export_diff_gate",
+      "status": "import_export_succeeded_with_warnings_adapter_blocked"
+    },
+    "socd_drift_classification": {
+      "checker_path": "tools/check_glyph_offline_remapper_socd_drift_classification.py",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_socd_drift_classification_2026-06-04.json",
+      "fixture_sha256": "6cb334d59b5546f83b6806cbcee32678221de817b196eaf42e71fac82ad2bef0",
+      "schema_name": "glyph_offline_remapper_socd_drift_classification",
+      "status": "docs_tools_socd_drift_classification"
+    }
+  },
+  "status": "docs_tools_adapter_blocker_escalation"
+}
