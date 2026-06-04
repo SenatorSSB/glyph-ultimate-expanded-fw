@@ -1,0 +1,367 @@
+{
+  "exported_artifact": {
+    "path": "docs/calibration/fixtures/glyph_offline_remapper_exported_GlyphUserProfiles_2026-06-04.json",
+    "sha256": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "firmware_behavior_validated": false,
+  "hardware_status": "not_new_hardware_result",
+  "input_artifact": {
+    "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+    "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707"
+  },
+  "mode_ultimate_profile_diff": {
+    "applicableBackends": {
+      "exact_value_equality": true,
+      "exported": [
+        "COMMS_BACKEND_DINPUT",
+        "COMMS_BACKEND_XINPUT",
+        "COMMS_BACKEND_NINTENDO_SWITCH",
+        "COMMS_BACKEND_GAMECUBE"
+      ],
+      "input": [
+        "COMMS_BACKEND_DINPUT",
+        "COMMS_BACKEND_XINPUT",
+        "COMMS_BACKEND_NINTENDO_SWITCH",
+        "COMMS_BACKEND_GAMECUBE"
+      ]
+    },
+    "buttonRemapping": {
+      "added_in_exported": [
+        {
+          "physicalButton": "BTN_LF5"
+        },
+        {
+          "physicalButton": "BTN_LF7"
+        },
+        {
+          "physicalButton": "BTN_LT3"
+        },
+        {
+          "physicalButton": "BTN_LT4"
+        },
+        {
+          "physicalButton": "BTN_LT5"
+        },
+        {
+          "physicalButton": "BTN_LT6"
+        },
+        {
+          "physicalButton": "BTN_RF9"
+        },
+        {
+          "physicalButton": "BTN_RF10"
+        },
+        {
+          "physicalButton": "BTN_RF11"
+        },
+        {
+          "physicalButton": "BTN_RF12"
+        },
+        {
+          "physicalButton": "BTN_RF13"
+        },
+        {
+          "physicalButton": "BTN_RF14"
+        },
+        {
+          "physicalButton": "BTN_RF15"
+        },
+        {
+          "physicalButton": "BTN_RF16"
+        },
+        {
+          "physicalButton": "BTN_MB1"
+        },
+        {
+          "physicalButton": "BTN_MB2"
+        },
+        {
+          "physicalButton": "BTN_MB3"
+        }
+      ],
+      "exact_value_equality": false,
+      "exported_count": 17,
+      "input_count": 42,
+      "missing_from_exported": [
+        {
+          "activates": "BTN_LF2",
+          "physicalButton": "BTN_LF2"
+        },
+        {
+          "activates": "BTN_LF4",
+          "physicalButton": "BTN_LF4"
+        },
+        {
+          "activates": "BTN_LT1",
+          "physicalButton": "BTN_LT1"
+        },
+        {
+          "activates": "BTN_RF1",
+          "physicalButton": "BTN_RF1"
+        },
+        {
+          "activates": "BTN_RF3",
+          "physicalButton": "BTN_RF3"
+        },
+        {
+          "activates": "BTN_RF4",
+          "physicalButton": "BTN_RF4"
+        },
+        {
+          "activates": "BTN_RF5",
+          "physicalButton": "BTN_RF5"
+        },
+        {
+          "activates": "BTN_RF6",
+          "physicalButton": "BTN_RF6"
+        },
+        {
+          "activates": "BTN_RT1",
+          "physicalButton": "BTN_RT1"
+        },
+        {
+          "activates": "BTN_LF5",
+          "physicalButton": "BTN_LF5"
+        },
+        {
+          "activates": "BTN_LT6",
+          "physicalButton": "BTN_LT6"
+        },
+        {
+          "activates": "BTN_RF13",
+          "physicalButton": "BTN_RF13"
+        },
+        {
+          "activates": "BTN_LF6",
+          "physicalButton": "BTN_LF6"
+        },
+        {
+          "activates": "BTN_RF11",
+          "physicalButton": "BTN_RF11"
+        },
+        {
+          "activates": "BTN_RF10",
+          "physicalButton": "BTN_RF10"
+        },
+        {
+          "activates": "BTN_LT3",
+          "physicalButton": "BTN_LT3"
+        },
+        {
+          "activates": "BTN_LF7",
+          "physicalButton": "BTN_LF7"
+        },
+        {
+          "activates": "BTN_LF8",
+          "physicalButton": "BTN_LF8"
+        },
+        {
+          "activates": "BTN_LT2",
+          "physicalButton": "BTN_LT2"
+        },
+        {
+          "activates": "BTN_LT4",
+          "physicalButton": "BTN_LT4"
+        },
+        {
+          "activates": "BTN_LT5",
+          "physicalButton": "BTN_LT5"
+        },
+        {
+          "activates": "BTN_RF9",
+          "physicalButton": "BTN_RF9"
+        },
+        {
+          "activates": "BTN_RF12",
+          "physicalButton": "BTN_RF12"
+        },
+        {
+          "activates": "BTN_RF14",
+          "physicalButton": "BTN_RF14"
+        },
+        {
+          "activates": "BTN_RF15",
+          "physicalButton": "BTN_RF15"
+        },
+        {
+          "activates": "BTN_RF16",
+          "physicalButton": "BTN_RF16"
+        },
+        {
+          "activates": "BTN_MB1",
+          "physicalButton": "BTN_MB1"
+        },
+        {
+          "activates": "BTN_MB2",
+          "physicalButton": "BTN_MB2"
+        },
+        {
+          "activates": "BTN_MB3",
+          "physicalButton": "BTN_MB3"
+        },
+        {
+          "activates": "BTN_MB4",
+          "physicalButton": "BTN_MB4"
+        },
+        {
+          "activates": "BTN_MB5",
+          "physicalButton": "BTN_MB5"
+        },
+        {
+          "activates": "BTN_MB6",
+          "physicalButton": "BTN_MB6"
+        },
+        {
+          "activates": "BTN_MB7",
+          "physicalButton": "BTN_MB7"
+        },
+        {
+          "activates": "BTN_RF2",
+          "physicalButton": "BTN_RF2"
+        },
+        {
+          "activates": "BTN_LF3",
+          "physicalButton": "BTN_LF3"
+        },
+        {
+          "activates": "BTN_LF1",
+          "physicalButton": "BTN_LF1"
+        },
+        {
+          "activates": "BTN_RF7",
+          "physicalButton": "BTN_RF7"
+        },
+        {
+          "activates": "BTN_RF8",
+          "physicalButton": "BTN_RF8"
+        },
+        {
+          "activates": "BTN_RT3",
+          "physicalButton": "BTN_RT3"
+        },
+        {
+          "activates": "BTN_RT5",
+          "physicalButton": "BTN_RT5"
+        },
+        {
+          "activates": "BTN_RT2",
+          "physicalButton": "BTN_RT2"
+        },
+        {
+          "activates": "BTN_RT4",
+          "physicalButton": "BTN_RT4"
+        }
+      ]
+    },
+    "comparison_summary": {
+      "differing_profile_level_fields": [
+        "socdPairs",
+        "buttonRemapping",
+        "entries_with_activates"
+      ],
+      "matching_profile_level_fields": [
+        "name",
+        "rgbConfig",
+        "layoutPlate",
+        "applicableBackends",
+        "menuButtonIcon",
+        "extra_missing_fields"
+      ],
+      "notes": [
+        "MODE_ULTIMATE is present in both artifacts.",
+        "The exported profile retains profile-level structure.",
+        "Profile-level representation only.",
+        "Runtime-owned behavior not represented.",
+        "Not gameplay correctness."
+      ]
+    },
+    "disabled_entries": {
+      "exported": 0,
+      "input": 0
+    },
+    "entries_with_activates": {
+      "exported": 0,
+      "input": 42
+    },
+    "exported_profile_can_represent_firmware_owned_runtime_behavior": false,
+    "exported_profile_retains_profile_level_structure": true,
+    "extra_missing_fields": {
+      "exact_value_equality": true,
+      "exported_only_fields": [],
+      "input_only_fields": []
+    },
+    "layoutPlate": {
+      "exact_value_equality": true,
+      "exported": "LAYOUT_PLATE_EVERYTHING",
+      "input": "LAYOUT_PLATE_EVERYTHING"
+    },
+    "menuButtonIcon": {
+      "exact_value_equality": true,
+      "exported": [
+        "OUT_UNSPECIFIED",
+        "OUT_UNSPECIFIED",
+        "OUT_UNSPECIFIED",
+        "OUT_UNSPECIFIED",
+        "OUT_HOME",
+        "OUT_XB_BACK",
+        "OUT_START"
+      ],
+      "input": [
+        "OUT_UNSPECIFIED",
+        "OUT_UNSPECIFIED",
+        "OUT_UNSPECIFIED",
+        "OUT_UNSPECIFIED",
+        "OUT_HOME",
+        "OUT_XB_BACK",
+        "OUT_START"
+      ]
+    },
+    "name": {
+      "exact_value_equality": true,
+      "exported": "Ultimate",
+      "input": "Ultimate"
+    },
+    "profile_presence": {
+      "exported": true,
+      "input": true
+    },
+    "rgbConfig": {
+      "exact_value_equality": true,
+      "exported": 3,
+      "input": 3
+    },
+    "socdPairs": {
+      "added_in_exported": [
+        {
+          "buttonDir1": "BTN_LF2",
+          "buttonDir2": "BTN_RF4",
+          "socdType": "SOCD_2IP"
+        },
+        {
+          "buttonDir1": "BTN_LF8",
+          "buttonDir2": "BTN_LF6"
+        },
+        {
+          "buttonDir1": "BTN_RF7",
+          "buttonDir2": "BTN_RF8"
+        }
+      ],
+      "exact_value_equality": false,
+      "exported_count": 6,
+      "input_count": 4,
+      "missing_from_exported": [
+        {
+          "buttonDir1": "BTN_LF5",
+          "buttonDir2": "BTN_LF2",
+          "socdType": "SOCD_2IP"
+        }
+      ]
+    }
+  },
+  "official_configurator_compatibility_claimed": false,
+  "profile_level_representation_only": true,
+  "report_version": 1,
+  "runtime_owned_behavior_represented": false,
+  "schema_name": "glyph_offline_remapper_ultimate_diff_report",
+  "status": "docs_tools_ultimate_profile_diff"
+}
