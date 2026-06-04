@@ -1,0 +1,206 @@
+{
+  "contract_scope": {
+    "adapter_output_exists": false,
+    "corpus_rejects_unsafe_candidate_payloads": true,
+    "external_json_generation_exists": false,
+    "runtime_source_changed": false,
+    "target": "future clean-room adapter candidate schema",
+    "validation_scope": "docs_tools_fixtures_only"
+  },
+  "forbidden_capabilities": {
+    "adapter_implemented": false,
+    "copied_external_source_code": false,
+    "device_write_allowed": false,
+    "external_dependency_added": false,
+    "external_json_generated": false,
+    "hardware_validation_claimed": false,
+    "official_compatibility_claimed": false,
+    "protobuf_binary_generation_allowed": false,
+    "runtime_loaded_config_allowed": false,
+    "serial_device_write_behavior_implemented": false,
+    "webserial_allowed": false
+  },
+  "hardware_status": "not_new_hardware_result",
+  "invalid_case_categories": [
+    {
+      "category": "missing_sidecar",
+      "required_rejection": "sidecar is required"
+    },
+    {
+      "category": "missing_runtime_owned_behavior_warning",
+      "required_rejection": "runtime-owned behavior warning is required"
+    },
+    {
+      "category": "missing_non_round_trip_warning",
+      "required_rejection": "non-round-trip warning is required"
+    },
+    {
+      "category": "claims_round_trip_safe",
+      "required_rejection": "future candidate must not claim round-trip safe"
+    },
+    {
+      "category": "claims_active_profile_round_trip_safe",
+      "required_rejection": "active profile round-trip remains unsafe"
+    },
+    {
+      "category": "claims_runtime_owned_behavior_represented_by_external_profile_json",
+      "required_rejection": "runtime-owned behavior must not be represented directly by external profile JSON"
+    },
+    {
+      "category": "adapter_implemented",
+      "required_rejection": "no adapter output exists"
+    },
+    {
+      "category": "external_json_generated",
+      "required_rejection": "no external JSON generation exists"
+    },
+    {
+      "category": "generated_external_json_output_path_present",
+      "required_rejection": "generated external JSON output path present"
+    },
+    {
+      "category": "device_write_allowed",
+      "required_rejection": "device write allowed"
+    },
+    {
+      "category": "webserial_allowed",
+      "required_rejection": "WebSerial allowed"
+    },
+    {
+      "category": "protobuf_binary_generation_allowed",
+      "required_rejection": "protobuf binary generation allowed"
+    },
+    {
+      "category": "runtime_loaded_config_allowed",
+      "required_rejection": "runtime-loaded config allowed"
+    },
+    {
+      "category": "official_compatibility_claimed",
+      "required_rejection": "official compatibility claimed"
+    },
+    {
+      "category": "hardware_validation_claimed",
+      "required_rejection": "hardware validation claimed"
+    },
+    {
+      "category": "external_source_promoted_to_authority",
+      "required_rejection": "external source promoted to authority"
+    },
+    {
+      "category": "copied_external_source_code",
+      "required_rejection": "copied external source code"
+    },
+    {
+      "category": "external_dependency_added",
+      "required_rejection": "external dependency added"
+    },
+    {
+      "category": "missing_source_authority_classification",
+      "required_rejection": "source-authority classification is required"
+    },
+    {
+      "category": "missing_validation_report",
+      "required_rejection": "validation report is required"
+    },
+    {
+      "category": "missing_loss_warnings",
+      "required_rejection": "loss warnings are required"
+    },
+    {
+      "category": "binding_loss_warning_suppressed",
+      "required_rejection": "binding loss warning suppressed"
+    },
+    {
+      "category": "socd_drift_warning_suppressed",
+      "required_rejection": "SOCD drift warning suppressed"
+    }
+  ],
+  "negative_corpus_rules": {
+    "active_profile_round_trip_remains_unsafe": true,
+    "loss_warnings_required": true,
+    "runtime_owned_behavior_must_not_be_represented_directly_by_external_profile_json": true,
+    "runtime_owned_behavior_warning_required": true,
+    "sidecar_required": true,
+    "source_authority_classification_required": true,
+    "validation_report_required": true
+  },
+  "schema_name": "glyph_clean_room_adapter_negative_corpus_contract",
+  "schema_version": 1,
+  "source_authority": {
+    "external_remapper_export_authority": false,
+    "external_source_promoted_to_authority": false,
+    "no_external_code_reuse": true,
+    "no_external_dependency": true,
+    "source_basis": "repo docs, fixtures, and checker outputs only"
+  },
+  "status": "negative_corpus_contract_only",
+  "supporting_findings": {
+    "active_profile_round_trip_safe": false,
+    "adapter_implemented": false,
+    "binding_loss_warning_required": true,
+    "external_json_generated": false,
+    "external_json_generation_allowed": false,
+    "non_round_trip_warning_required": true,
+    "runtime_owned_behavior_represented_by_external_profile_json": false,
+    "runtime_owned_behavior_warning_required": true,
+    "sidecar_required": true,
+    "socd_drift_warning_required": true
+  },
+  "upstream_packets": {
+    "candidate_schema_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_candidate_schema_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_candidate_schema_contract_2026-06-04.md",
+      "doc_sha256": "ca6746cc6601639413b7085325e27f4a12b14ec4a552e7afb06e4eea28e9fb50",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_candidate_schema_contract_2026-06-04.json",
+      "fixture_sha256": "9d91df67fe562d4b24c04801f53a5b311d102aba5fe14dfac8e672066df3f023",
+      "schema_name": "glyph_clean_room_adapter_candidate_schema_contract",
+      "status": "schema_contract_only_adapter_not_implemented"
+    },
+    "candidate_schema_validator": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_candidate_schema_validator.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_candidate_schema_validator_2026-06-04.md",
+      "doc_sha256": "f83cb9383ba7ca242b7132eb1f84f24a994817eb0f9afedbfc0c641875f9ced2",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_candidate_SCHEMA_PLACEHOLDER_2026-06-04.json",
+      "fixture_sha256": "11a52b000ac981bc7f97e92b071da040487529564379745a9744b2626fc61e60",
+      "schema_name": "glyph_clean_room_adapter_candidate_placeholder",
+      "status": "placeholder_only_no_adapter_output"
+    },
+    "export_loss_gate": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_loss_gate.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_export_loss_gate_2026-06-04.md",
+      "doc_sha256": "85fd2fc16585026a836404187b42922eebaf3546ce9861e027710cda162310cd",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_loss_gate_2026-06-04.json",
+      "fixture_sha256": "9a3bdb392f1af66e8dea449acdf69caef1b0dc92b8fbc3dd061702c6eb06325c",
+      "schema_name": "glyph_offline_remapper_export_loss_gate",
+      "status": "external_remapper_round_trip_not_safe_adapter_blocked"
+    },
+    "schema_readiness_gate": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_schema_readiness_gate.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.md",
+      "doc_sha256": "6a298e07cd62a17256e5c417ce7f013cb70c7418ef536ded9bc850e77e92ada4",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.json",
+      "fixture_sha256": "e0ed0ce59900323e872104433e75cc521ddc4fb30186c7518edafe187378b240",
+      "schema_name": "glyph_clean_room_adapter_schema_readiness_gate",
+      "status": "schema_planning_complete_adapter_implementation_blocked"
+    },
+    "sidecar_contract": {
+      "checker_path": "tools/check_glyph_clean_room_adapter_sidecar_contract.py",
+      "doc_path": "docs/calibration/glyph_clean_room_adapter_sidecar_contract_2026-06-04.md",
+      "doc_sha256": "601afe9edf479d40477257c96403b67d84664d85c78ea1bf275689a65f674563",
+      "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_sidecar_contract_2026-06-04.json",
+      "fixture_sha256": "398c1e2899576d76eebcbb0992725aeee0edb28856ef4147f014c01603e84c01",
+      "schema_name": "glyph_clean_room_adapter_sidecar_contract",
+      "status": "sidecar_contract_only_adapter_not_implemented"
+    }
+  },
+  "validation_report": {
+    "adapter_implemented": false,
+    "checker_path": "tools/check_glyph_clean_room_adapter_negative_corpus_contract.py",
+    "doc_path": "docs/calibration/glyph_clean_room_adapter_negative_corpus_contract_2026-06-04.md",
+    "external_json_generated": false,
+    "fixture_path": "docs/calibration/fixtures/glyph_clean_room_adapter_negative_corpus_contract_2026-06-04.json",
+    "hardware_status": "not_new_hardware_result",
+    "invalid_case_categories": 23,
+    "upstream_checkers_required_to_pass": true
+  }
+}
