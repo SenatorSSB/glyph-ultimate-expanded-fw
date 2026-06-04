@@ -1,0 +1,67 @@
+{
+  "schema_name": "glyph_offline_remapper_manual_experiment_packet",
+  "packet_version": 1,
+  "status": "planned_not_executed",
+  "hardware_status": "not_new_hardware_result",
+  "experiment_executed": false,
+  "adapter_implemented": false,
+  "device_write_allowed": false,
+  "webserial_write_allowed": false,
+  "external_source_promoted_to_authority": false,
+  "experiment_scope": [
+    "no-device import/export compatibility check",
+    "external remapper app/repo version recording",
+    "sample input artifact hashes",
+    "import attempt",
+    "export attempt",
+    "JSON diff report",
+    "accepted/rejected field list",
+    "screenshots/notes optional"
+  ],
+  "required_prerequisites": [
+    "source audit snapshot current",
+    "gap matrix current",
+    "license review status recorded",
+    "no live device connected",
+    "browser/environment noted",
+    "input artifacts checksummed"
+  ],
+  "candidate_inputs": [
+    {
+      "label": "Senscope export package sample",
+      "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
+      "sha256": "a63cfce1e209d5a4110b666a9c4adf6362c1467d1a5d4496a45b71ba0853933b"
+    },
+    {
+      "label": "Runtime config candidate sample",
+      "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
+      "sha256": "4c85b13f37b8e4b7fafc6b4f515dee4352c0f8fe8ce4f13a60634d8091a9c42c"
+    },
+    {
+      "label": "Active profile artifact",
+      "path": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json",
+      "sha256": "0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707"
+    }
+  ],
+  "forbidden_actions": [
+    "connecting live Glyph",
+    "WebSerial write",
+    "Save to Device",
+    "firmware flashing",
+    "claiming official compatibility",
+    "claiming hardware validation",
+    "copying external source code",
+    "changing repo fixtures to fit external app"
+  ],
+  "result_recording_requirements": [
+    "separate result doc/fixture",
+    "external app URL/version/commit if available",
+    "browser/environment",
+    "input artifact hash",
+    "exported artifact hash",
+    "pass/fail/blocked rows",
+    "no-device confirmation",
+    "no hardware validation caveat",
+    "no source-authority promotion caveat"
+  ]
+}

@@ -112,6 +112,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.md",
     "docs/calibration/fixtures/glyph_offline_remapper_adapter_gap_matrix_2026-06-03.json",
     "tools/check_glyph_offline_remapper_adapter_gap_matrix.py",
+    "docs/calibration/glyph_offline_remapper_manual_experiment_packet_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_manual_experiment_packet_2026-06-03.json",
+    "tools/check_glyph_offline_remapper_manual_experiment_packet.py",
     "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
     "docs/calibration/fixtures/glyph_storage_transport_source_authority_registry_2026-06-03.json",
     "tools/check_glyph_storage_transport_source_authority_registry.py",
@@ -256,6 +259,17 @@ REQUIRED_ROADMAP_PHRASES = [
     "no device write behavior",
     "no WebSerial transport",
     "not hardware validation",
+    "Offline remapper manual experiment packet",
+    "glyph/gfw2-offline-remapper-manual-experiment-packet",
+    "planned_not_executed",
+    "no live device",
+    "no WebSerial write",
+    "no Save to Device",
+    "adapter not implemented",
+    "not official compatibility",
+    "external app URL/version/commit if available",
+    "input/exported artifact hashes",
+    "no source-authority promotion caveat",
 ]
 
 
