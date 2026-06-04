@@ -261,6 +261,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_clean_room_adapter_candidate_schema_validator.py",
         ),
         step(
+            "clean-room adapter sidecar contract",
+            "tools/check_glyph_clean_room_adapter_sidecar_contract.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
