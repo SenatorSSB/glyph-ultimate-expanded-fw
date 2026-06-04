@@ -103,6 +103,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_external_remapper_compatibility_experiment_plan_2026-06-03.md",
     "docs/calibration/fixtures/glyph_external_remapper_compatibility_experiment_plan_2026-06-03.json",
     "tools/check_glyph_external_remapper_compatibility_experiment_plan.py",
+    "docs/calibration/glyph_offline_remapper_adapter_target_contract_2026-06-03.md",
+    "docs/calibration/fixtures/glyph_offline_remapper_adapter_target_contract_2026-06-03.json",
+    "tools/check_glyph_offline_remapper_adapter_target_contract.py",
     "docs/calibration/glyph_storage_transport_source_authority_registry_2026-06-03.md",
     "docs/calibration/fixtures/glyph_storage_transport_source_authority_registry_2026-06-03.json",
     "tools/check_glyph_storage_transport_source_authority_registry.py",
@@ -228,6 +231,10 @@ REQUIRED_ROADMAP_PHRASES = [
     "glyph/gfw2-storage-transport-research-index",
     "all implementation classes blocked remain protobuf binary generation, WebSerial transport, device write, runtime-loaded storage, runtime-loaded interpreter, and official configurator compatibility claims",
     "allowed next work stays limited to docs/tools validators, offline JSON adapter planning, manual no-device import/export experiment planning, and source audits",
+    "Offline remapper adapter target contract",
+    "glyph/gfw2-offline-remapper-adapter-target-contract",
+    "offline adapter plan only",
+    "adapter not implemented, external source not authority, not official configurator compatibility, not device write behavior, not WebSerial transport, not protobuf binary generation, not runtime-loaded config, and not hardware validation",
 ]
 
 

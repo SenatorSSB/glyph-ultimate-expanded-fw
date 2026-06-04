@@ -1,0 +1,76 @@
+{
+  "schema_name": "glyph_offline_remapper_adapter_target_contract",
+  "contract_version": 1,
+  "status": "offline_adapter_plan_only",
+  "hardware_status": "not_new_hardware_result",
+  "external_source_promoted_to_authority": false,
+  "adapter_implemented": false,
+  "official_configurator_compatibility_claimed": false,
+  "device_write_implemented": false,
+  "webserial_transport_implemented": false,
+  "protobuf_binary_generation_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "future_target_artifact": "external-remapper-compatible JSON candidate",
+  "target_authority": [
+    "non-authoritative external comparison",
+    "repo fixtures"
+  ],
+  "required_future_inputs": [
+    {
+      "name": "Senscope export package sample",
+      "repo_artifact": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json"
+    },
+    {
+      "name": "runtime config candidate sample",
+      "repo_artifact": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json"
+    },
+    {
+      "name": "generated config prototype",
+      "repo_artifact": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json"
+    },
+    {
+      "name": "validation report",
+      "repo_artifact": "docs/calibration/fixtures/glyph_runtime_config_validation_report_2026-06-03.json"
+    },
+    {
+      "name": "active profile artifact",
+      "repo_artifact": "docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json"
+    }
+  ],
+  "future_outputs": [
+    {
+      "name": "JSON candidate intended for no-device import/export experiment only",
+      "status": "plan_only_not_generated",
+      "generated": false
+    },
+    {
+      "name": "compatibility report",
+      "status": "plan_only_not_generated",
+      "generated": false
+    }
+  ],
+  "forbidden_interpretations": [
+    "adapter implemented",
+    "official configurator compatibility claimed",
+    "external source authority",
+    "device write behavior",
+    "WebSerial transport",
+    "protobuf binary generation",
+    "runtime-loaded config",
+    "hardware validation",
+    "firmware source change",
+    "profile artifact change",
+    "external source code copied",
+    "external dependency added",
+    "Senscope game-semantic source authority changed"
+  ],
+  "required_approvals": [
+    "user approval before generating an external-remapper-compatible JSON candidate",
+    "user approval before running any no-device import/export experiment",
+    "user approval before external dependency or source reuse",
+    "user approval before adapter implementation",
+    "user approval before device transport or WebSerial work",
+    "user approval before protobuf/config/schema behavior changes",
+    "user approval before runtime-loaded config implementation"
+  ]
+}

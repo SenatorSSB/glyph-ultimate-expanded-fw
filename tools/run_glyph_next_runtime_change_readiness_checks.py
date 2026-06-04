@@ -185,6 +185,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_external_remapper_compatibility_experiment_plan.py",
         ),
         step(
+            "offline remapper adapter target contract",
+            "tools/check_glyph_offline_remapper_adapter_target_contract.py",
+        ),
+        step(
             "storage transport source-authority registry",
             "tools/check_glyph_storage_transport_source_authority_registry.py",
         ),
