@@ -48,6 +48,8 @@ REQUIRED_TABLES = (
     "MTilt2",
     "MTilt3",
     "Lt1LowMagnitude",
+    "Tilt1Minus41",
+    "RT1RF4Custom",
 )
 REQUIRED_TOP_LEVEL_FIELDS = (
     "schema_name",
@@ -80,22 +82,24 @@ REQUIRED_PRIORITY_KEYS = (
     "digital_effective_direction",
     "analog",
     "physical_inputs",
-    "layer_left_right",
+    "lf8_lf7_removed",
     "lf4_submode_active",
+    "lt2_sublayer_active",
     "forced_up_resolution",
     "button_carriers",
     "ls_to_dpad_routing",
     "table_output",
     "direction_plus_a",
-    "lt5_or_rf11_low_magnitude_za",
+    "rf6_low_magnitude_za",
     "rf7_hard_up_b",
+    "c_stick_asdi",
     "rf9_null",
     "nunchuk_override",
 )
 ALLOWED_DIGITAL_EFFECTIVE_DIRECTION_PRIORITY = (
     "physical_inputs",
-    "layer_left_right",
     "lf4_submode_active",
+    "lt2_sublayer_active",
     "forced_up_resolution",
     "button_carriers",
     "ls_to_dpad_routing",
@@ -103,8 +107,9 @@ ALLOWED_DIGITAL_EFFECTIVE_DIRECTION_PRIORITY = (
 ALLOWED_ANALOG_PRIORITY = (
     "table_output",
     "direction_plus_a",
-    "lt5_or_rf11_low_magnitude_za",
+    "rf6_low_magnitude_za",
     "rf7_hard_up_b",
+    "c_stick_asdi",
     "rf9_null",
     "nunchuk_override",
 )
@@ -122,7 +127,7 @@ REQUIRED_HARD_OVERRIDES = {
         "right": [179, 172],
     },
     "rf9_null": [128, 128],
-    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude",
+    "rf6_low_magnitude_table": "Lt1LowMagnitude",
 }
 REQUIRED_NON_GOALS = {
     "not_runtime_loaded",

@@ -20,11 +20,6 @@ from extract_glyph_identity_runtime_tables import (
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVALUATOR_PATH = REPO_ROOT / "tools" / "check_glyph_identity_runtime_behavior_evaluator.py"
 
-PENDING_GFW3_EVALUATOR_ONLY_TABLES = {
-    "RT1RF4Custom",
-    "Tilt1Minus41",
-}
-
 
 @dataclass(frozen=True)
 class TableMismatch:
@@ -84,7 +79,7 @@ def compare_tables(
 
     for unexpected in sorted(source_names - expected_names):
         mismatches.append(TableMismatch(unexpected, "unexpected_source_table", "unexpected", "not expected"))
-    for unexpected in sorted(evaluator_names - expected_names - PENDING_GFW3_EVALUATOR_ONLY_TABLES):
+    for unexpected in sorted(evaluator_names - expected_names):
         mismatches.append(TableMismatch(unexpected, "unexpected_evaluator_table", "not expected", "unexpected"))
 
     for name in normalized_table_names():
@@ -141,8 +136,6 @@ def main() -> int:
     mismatches = compare_tables(source_tables, evaluator_tables)
     print(f"status={'FAIL' if mismatches else 'PASS'}")
     print(f"compared_table_count={len(normalized_table_names())}")
-    if PENDING_GFW3_EVALUATOR_ONLY_TABLES:
-        print("pending_gfw3_evaluator_only_tables=" + ",".join(sorted(PENDING_GFW3_EVALUATOR_ONLY_TABLES)))
     print("hardware_status=not_new_hardware_result")
     print_mismatches(mismatches)
     return 1 if mismatches else 0

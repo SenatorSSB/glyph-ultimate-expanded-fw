@@ -621,6 +621,44 @@
         169
       ]
     ],
+    "RT1RF4Custom": [
+      [
+        69,
+        78
+      ],
+      [
+        128,
+        78
+      ],
+      [
+        187,
+        78
+      ],
+      [
+        69,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        187,
+        128
+      ],
+      [
+        72,
+        172
+      ],
+      [
+        128,
+        179
+      ],
+      [
+        184,
+        172
+      ]
+    ],
     "Tilt1": [
       [
         187,
@@ -656,6 +694,44 @@
       ],
       [
         69,
+        209
+      ]
+    ],
+    "Tilt1Minus41": [
+      [
+        87,
+        47
+      ],
+      [
+        87,
+        47
+      ],
+      [
+        87,
+        47
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        87,
+        209
+      ],
+      [
+        87,
+        209
+      ],
+      [
+        87,
         209
       ]
     ],
@@ -1015,8 +1091,8 @@
   "priority_references": {
     "digital": [
       "physical_inputs",
-      "layer_left_right",
       "lf4_submode_active",
+      "lt2_sublayer_active",
       "forced_up_resolution",
       "button_carriers",
       "ls_to_dpad_routing"
@@ -1024,14 +1100,15 @@
     "analog": [
       "table_output",
       "direction_plus_a",
-      "lt5_or_rf11_low_magnitude_za",
+      "rf6_low_magnitude_za",
       "rf7_hard_up_b",
+      "c_stick_asdi",
       "rf9_null",
       "nunchuk_override"
     ]
   },
   "hard_overrides": {
-    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude",
+    "rf6_low_magnitude_table": "Lt1LowMagnitude",
     "rf7_hard_up_b": {
       "center": [
         128,
@@ -1130,7 +1207,9 @@
       "ForcedDirection",
       "RoleOverride"
     ],
-    "role_bindings_status": "bounded_metadata_only"
+    "role_bindings_status": "bounded_metadata_only",
+    "table_count": 27,
+    "source_generated_config_sha256": "updated_by_branch3_regeneration"
   },
   "non_goals": [
     "not_firmware_source",

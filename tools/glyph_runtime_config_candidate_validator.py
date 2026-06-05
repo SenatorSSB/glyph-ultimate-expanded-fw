@@ -71,6 +71,8 @@ REQUIRED_TABLES = (
     "MTilt2",
     "MTilt3",
     "Lt1LowMagnitude",
+    "Tilt1Minus41",
+    "RT1RF4Custom",
 )
 REQUIRED_ROLE_BINDING_SECTIONS = (
     "buttons",
@@ -82,8 +84,8 @@ REQUIRED_ROLE_BINDING_SECTIONS = (
 APPROVED_PRIORITY_CLASSES = {
     "digital": (
         "physical_inputs",
-        "layer_left_right",
         "lf4_submode_active",
+        "lt2_sublayer_active",
         "forced_up_resolution",
         "button_carriers",
         "ls_to_dpad_routing",
@@ -91,8 +93,9 @@ APPROVED_PRIORITY_CLASSES = {
     "analog": (
         "table_output",
         "direction_plus_a",
-        "lt5_or_rf11_low_magnitude_za",
+        "rf6_low_magnitude_za",
         "rf7_hard_up_b",
+        "c_stick_asdi",
         "rf9_null",
         "nunchuk_override",
     ),
@@ -120,7 +123,7 @@ REQUIRED_HARD_OVERRIDES = {
         "right": [179, 172],
     },
     "rf9_null": [128, 128],
-    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude",
+    "rf6_low_magnitude_table": "Lt1LowMagnitude",
 }
 REQUIRED_NON_GOALS = {
     "not_firmware_source",

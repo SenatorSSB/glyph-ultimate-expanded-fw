@@ -36,15 +36,17 @@ PROTOTYPE_FIXTURE_PATH = (
 )
 REQUIRED_PRIORITY_KEYS = {
     "physical_inputs",
-    "layer_left_right",
+    "lf8_lf7_removed",
     "lf4_submode_active",
+    "lt2_sublayer_active",
     "forced_up_resolution",
     "button_carriers",
     "ls_to_dpad_routing",
     "table_output",
     "direction_plus_a",
-    "lt5_or_rf11_low_magnitude_za",
+    "rf6_low_magnitude_za",
     "rf7_hard_up_b",
+    "c_stick_asdi",
     "rf9_null",
     "nunchuk_override",
 }
@@ -149,8 +151,8 @@ def _validate_hard_overrides(config: dict[str, Any]) -> None:
         fail("hard_overrides.rf7_hard_up_b does not match source-backed role-map values")
     if hard_overrides.get("rf9_null") != [128, 128]:
         fail("hard_overrides.rf9_null must be [128, 128]")
-    if hard_overrides.get("lt5_rf11_low_magnitude_table") != "Lt1LowMagnitude":
-        fail("hard_overrides.lt5_rf11_low_magnitude_table must reference Lt1LowMagnitude")
+    if hard_overrides.get("rf6_low_magnitude_table") != "Lt1LowMagnitude":
+        fail("hard_overrides.rf6_low_magnitude_table must reference Lt1LowMagnitude")
 
 
 def _validate_cpp_text(text: str) -> None:

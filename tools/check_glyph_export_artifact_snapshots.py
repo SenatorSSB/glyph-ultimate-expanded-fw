@@ -105,14 +105,14 @@ def validate_summary_counts(artifacts: dict[str, dict[str, Any]]) -> None:
     cpp_summary = artifacts["generated_cpp_table_artifact"]["summary"]
     behavior_summary = artifacts["behavior_cases_fixture"]["summary"]
 
-    if generated_summary.get("table_count") != 25:
-        fail("generated_config_prototype.summary.table_count must be 25")
-    if runtime_summary.get("table_count") != 25:
-        fail("runtime_config_candidate_sample.summary.table_count must be 25")
-    if export_summary.get("nested_generated_config_table_count") != 25:
-        fail("senscope_export_package_sample.summary.nested_generated_config_table_count must be 25")
-    if cpp_summary.get("table_declaration_count") != 25:
-        fail("generated_cpp_table_artifact.summary.table_declaration_count must be 25")
+    if generated_summary.get("table_count") != 27:
+        fail("generated_config_prototype.summary.table_count must be 27")
+    if runtime_summary.get("table_count") != 27:
+        fail("runtime_config_candidate_sample.summary.table_count must be 27")
+    if export_summary.get("nested_generated_config_table_count") != 27:
+        fail("senscope_export_package_sample.summary.nested_generated_config_table_count must be 27")
+    if cpp_summary.get("table_declaration_count") != 27:
+        fail("generated_cpp_table_artifact.summary.table_declaration_count must be 27")
 
     behavior_cases_fixture, _ = load_canonical_json_artifact(REPO_ROOT / artifacts["behavior_cases_fixture"]["path"])
     behavior_cases = behavior_cases_fixture.get("cases")

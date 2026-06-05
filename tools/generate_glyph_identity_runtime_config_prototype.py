@@ -169,7 +169,7 @@ def _hard_overrides(role_map: dict[str, Any]) -> dict[str, Any]:
             "right": [right, y],
         },
         "rf9_null": list(rf9_null),
-        "lt5_rf11_low_magnitude_table": LOW_MAGNITUDE_TABLE_NAME,
+        "rf6_low_magnitude_table": LOW_MAGNITUDE_TABLE_NAME,
     }
 
 
@@ -204,19 +204,58 @@ def _priority_model(role_map: dict[str, Any], hard_overrides: dict[str, Any]) ->
         raise ConfigPrototypeError("role-map bindings must include buttons, directional, and modifiers objects")
 
     return {
-        "digital_effective_direction": list(digital_priority),
-        "analog": list(analog_priority),
+        "digital_effective_direction": [
+            "physical_inputs",
+            "lf4_submode_active",
+            "lt2_sublayer_active",
+            "forced_up_resolution",
+            "button_carriers",
+            "ls_to_dpad_routing",
+        ],
+        "analog": [
+            "table_output",
+            "direction_plus_a",
+            "rf6_low_magnitude_za",
+            "rf7_hard_up_b",
+            "c_stick_asdi",
+            "rf9_null",
+            "nunchuk_override",
+        ],
         "physical_inputs": role_map.get("physical_inputs"),
-        "layer_left_right": {
-            "layer_direction": layering.get("layer_direction"),
-            "source": "role_map_fixture.layering.layer_direction",
+        "lf8_lf7_removed": {
+            "layer_direction": [],
+            "scratched_inputs": ["LF8", "LF7"],
+            "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md",
         },
         "lf4_submode_active": {
-            "condition": layering.get("lf4_submode"),
-            "source": "role_map_fixture.layering.lf4_submode",
+            "condition": ["LF4"],
+            "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md",
+        },
+        "lt2_sublayer_active": {
+            "condition": ["LT2", "RF1 OR RF2 OR RF3 OR RF4", "not LF4"],
+            "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md",
         },
         "forced_up_resolution": _priority_stage("forced_up_resolution", digital_priority),
-        "button_carriers": dict(buttons),
+        "button_carriers": {
+            "LT1": "L",
+            "LT3": "L+R",
+            "LT4": "X2/MX2",
+            "LT5": "X1/MX1",
+            "LT6": "A",
+            "LF4": "B",
+            "MB4": buttons.get("MB4"),
+            "MB5": buttons.get("MB5"),
+            "MB6": buttons.get("MB6"),
+            "MB7": buttons.get("MB7"),
+            "RF1": "A",
+            "RF2": "B",
+            "RF3": "X",
+            "RF5": "A",
+            "RF6": "Z",
+            "RF7": "B",
+            "RF10": buttons.get("RF10"),
+            "RF16": buttons.get("RF16"),
+        },
         "ls_to_dpad_routing": {
             "binding": modifiers.get("RF13"),
             "source": "role_map_fixture.bindings.modifiers.RF13",
@@ -226,13 +265,17 @@ def _priority_model(role_map: dict[str, Any], hard_overrides: dict[str, Any]) ->
             "table_ids_and_selection": role_map.get("table_ids_and_selection"),
         },
         "direction_plus_a": {
-            "bindings": {key: directional.get(key) for key in ("RF12", "RF15")},
+            "bindings": {"RF5": "DirectionPlusA"},
             "down_binding": {"LT6": bindings.get("special_functions", {}).get("LT6")},
-            "source": "role_map_fixture.bindings",
+            "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md",
         },
-        "lt5_or_rf11_low_magnitude_za": {
-            "bindings": {key: buttons.get(key) for key in ("LT5", "RF11")},
-            "table": hard_overrides["lt5_rf11_low_magnitude_table"],
+        "rf6_low_magnitude_za": {
+            "bindings": {"RF6": "Z"},
+            "table": hard_overrides["rf6_low_magnitude_table"],
+        },
+        "c_stick_asdi": {
+            "condition": ["RT2/RT3/RT4/RT5 diagonal C-stick"],
+            "source": "src/modes/Ultimate.cpp",
         },
         "rf7_hard_up_b": hard_overrides["rf7_hard_up_b"],
         "rf9_null": hard_overrides["rf9_null"],

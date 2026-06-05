@@ -97,7 +97,7 @@
     "validator_contract": "docs/calibration/fixtures/glyph_runtime_config_candidate_validator_contract_v0_2026-06-03.json"
   },
   "status": "docs_tools_validation_report",
-  "table_count": 25,
+  "table_count": 27,
   "validated_candidate_schema_name": "glyph_runtime_config_candidate",
   "validator_contract_status": "offline_validator_contract_not_runtime_loaded"
 }

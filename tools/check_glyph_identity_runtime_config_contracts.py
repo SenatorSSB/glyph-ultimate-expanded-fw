@@ -179,8 +179,8 @@ def validate_generated_config_contract(contract: dict[str, Any], prototype: dict
         missing = sorted(set(tables) - set(required_tables))
         unexpected = sorted(set(required_tables) - set(tables))
         fail(f"required_tables mismatch missing_from_contract={missing} unexpected_in_contract={unexpected}")
-    if len(required_tables) != 25:
-        fail("required_tables must contain exactly 25 table names")
+    if len(required_tables) != len(tables):
+        fail(f"required_tables must contain exactly {len(tables)} table names")
 
     for name in required_tables:
         validate_table_shape(name, tables.get(name))

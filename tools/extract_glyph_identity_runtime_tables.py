@@ -47,6 +47,8 @@ TABLE_SYMBOL_TO_NAME: tuple[tuple[str, str], ...] = (
     ("kTilt1Table", "Tilt1"),
     ("kTilt2Table", "Tilt2"),
     ("kTilt3Table", "Tilt3"),
+    ("kTilt1Minus41Table", "Tilt1Minus41"),
+    ("kRT1RF4CustomTable", "RT1RF4Custom"),
     ("kMTilt1Table", "MTilt1"),
     ("kMTilt2Table", "MTilt2"),
     ("kMTilt3Table", "MTilt3"),

@@ -44,7 +44,7 @@
     "sample_candidate_validation_status": "PASS",
     "schema_name": "glyph_runtime_config_validation_report",
     "status": "docs_tools_validation_report",
-    "table_count": 25,
+    "table_count": 27,
     "validated_candidate_schema_name": "glyph_runtime_config_candidate"
   },
   "hardware_status": "not_new_hardware_result",

@@ -47,7 +47,9 @@
     "MTilt1",
     "MTilt2",
     "MTilt3",
-    "Lt1LowMagnitude"
+    "Lt1LowMagnitude",
+    "Tilt1Minus41",
+    "RT1RF4Custom"
   ],
   "table_validation_rules": [
     "exactly_25_required_tables",
@@ -59,22 +61,24 @@
     "digital_effective_direction",
     "analog",
     "physical_inputs",
-    "layer_left_right",
+    "lf8_lf7_removed",
     "lf4_submode_active",
+    "lt2_sublayer_active",
     "forced_up_resolution",
     "button_carriers",
     "ls_to_dpad_routing",
     "table_output",
     "direction_plus_a",
-    "lt5_or_rf11_low_magnitude_za",
+    "rf6_low_magnitude_za",
     "rf7_hard_up_b",
+    "c_stick_asdi",
     "rf9_null",
     "nunchuk_override"
   ],
   "required_digital_effective_direction_priority_classes": [
     "physical_inputs",
-    "layer_left_right",
     "lf4_submode_active",
+    "lt2_sublayer_active",
     "forced_up_resolution",
     "button_carriers",
     "ls_to_dpad_routing"
@@ -82,8 +86,9 @@
   "required_analog_priority_classes": [
     "table_output",
     "direction_plus_a",
-    "lt5_or_rf11_low_magnitude_za",
+    "rf6_low_magnitude_za",
     "rf7_hard_up_b",
+    "c_stick_asdi",
     "rf9_null",
     "nunchuk_override"
   ],
@@ -91,7 +96,8 @@
     "unknown_priority_classes"
   ],
   "expected_error_codes": [
-    "E_UNKNOWN_PRIORITY_CLASS"
+    "E_UNKNOWN_PRIORITY_CLASS",
+    "E_INVALID_TABLE_COUNT"
   ],
   "required_role_binding_sections": [
     "buttons",
@@ -119,7 +125,7 @@
       128,
       128
     ],
-    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude"
+    "rf6_low_magnitude_table": "Lt1LowMagnitude"
   },
   "forbidden_payload_content": [
     "firmware_source_patch",
