@@ -739,6 +739,176 @@
       "notes": []
     },
     {
+      "case_id": "gfw3_rf4_rf2_base_minus41_left",
+      "category": "custom_modifier",
+      "input_buttons": [
+        "RF4",
+        "RF2",
+        "LF3"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
+        "effective_direction": {
+          "left": true,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "table_selection",
+        "table_id": "Tilt1Minus41",
+        "direction_index": 4,
+        "left_stick": [
+          169,
+          128
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": []
+    },
+    {
+      "case_id": "gfw3_rf4_rf2_base_minus41_down",
+      "category": "custom_modifier",
+      "input_buttons": [
+        "RF4",
+        "RF2",
+        "LF5"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": true
+        },
+        "analog_source": "table_selection",
+        "table_id": "Tilt1Minus41",
+        "direction_index": 2,
+        "left_stick": [
+          128,
+          47
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": []
+    },
+    {
+      "case_id": "gfw3_rf4_rf2_base_minus41_neutral",
+      "category": "custom_modifier",
+      "input_buttons": [
+        "RF4",
+        "RF2"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "table_selection",
+        "table_id": "Tilt1Minus41",
+        "direction_index": 5,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": []
+    },
+    {
+      "case_id": "gfw3_rf4_rf2_base_minus41_up",
+      "category": "custom_modifier",
+      "input_buttons": [
+        "RF4",
+        "RF2",
+        "LF2"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": true,
+          "down": false
+        },
+        "analog_source": "table_selection",
+        "table_id": "Tilt1Minus41",
+        "direction_index": 8,
+        "left_stick": [
+          128,
+          209
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": []
+    },
+    {
+      "case_id": "gfw3_rf4_rf2_base_minus41_diag1",
+      "category": "custom_modifier",
+      "input_buttons": [
+        "RF4",
+        "RF2",
+        "LF3",
+        "LF5"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
+        "effective_direction": {
+          "left": true,
+          "right": false,
+          "up": false,
+          "down": true
+        },
+        "analog_source": "table_selection",
+        "table_id": "Tilt1Minus41",
+        "direction_index": 1,
+        "left_stick": [
+          169,
+          47
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": []
+    },
+    {
       "case_id": "gfw3_rf9_nulls_left_and_right_stick",
       "category": "rf9_null",
       "input_buttons": [

@@ -99,6 +99,11 @@ Fixture case IDs:
 - `gfw3_rt1_rf4_custom_8`
 - `gfw3_rt1_rf4_custom_9`
 - `gfw3_rf4_rf2_base_minus41`
+- `gfw3_rf4_rf2_base_minus41_left`
+- `gfw3_rf4_rf2_base_minus41_down`
+- `gfw3_rf4_rf2_base_minus41_neutral`
+- `gfw3_rf4_rf2_base_minus41_up`
+- `gfw3_rf4_rf2_base_minus41_diag1`
 
 ## RF9 null cases
 

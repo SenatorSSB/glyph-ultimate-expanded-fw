@@ -16,9 +16,9 @@ struct StickPoint {
 #include "modes/UltimateIdentityRuntimeTables.hpp"
 
 constexpr StickPoint kTilt1Minus41Table[9] = {
-    {87, 47}, {87, 47}, {87, 47},
-    {87, 128}, {87, 128}, {87, 128},
-    {87, 209}, {87, 209}, {87, 209},
+    {169, 47}, {128, 47}, {87, 47},
+    {169, 128}, {128, 128}, {87, 128},
+    {169, 209}, {128, 209}, {87, 209},
 };
 
 // RT1+RF4 custom modifier. Direction 5 is source-encoded center because table

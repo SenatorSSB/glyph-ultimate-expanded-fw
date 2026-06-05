@@ -30,7 +30,7 @@
     {
       "label": "senscope_export_package_sample",
       "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-      "sha256": "ec5f33640be0375c1a3ba5b175c39ce3f78c459891ba724d3519d16b939609a0",
+      "sha256": "c5f1a687315571ca1a7d634ba1c50d52f4d1a035d8c538d7920133173d622d27",
       "expected_import_role": "reference_only",
       "use_in_experiment": "reference-only package, not expected external remapper import unless future adapter exists",
       "authority_class": "repo_fixture_evidence",
@@ -39,7 +39,7 @@
     {
       "label": "runtime_config_candidate_sample",
       "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
-      "sha256": "8993601e85d49a456ea01a14c5c4d01c183406f8a477ea11f4eeb73c8706feb4",
+      "sha256": "e4e9b0e47b36f9f8585b37ac0e9f3cba2b6ae2833d79121e99af602c9d48543f",
       "expected_import_role": "reference_only",
       "use_in_experiment": "reference-only runtime candidate, not expected external remapper import unless future adapter exists",
       "authority_class": "repo_fixture_evidence",
@@ -48,7 +48,7 @@
     {
       "label": "generated_config_prototype",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-      "sha256": "38d66312589aff60cd22d49153add52b4dad37097a8999b0f3d5e76d626c6cd2",
+      "sha256": "6ce5a6296edb4becfce08eb31b2e2dbbd6750d5b2af962c2c5631baded18032d",
       "expected_import_role": "reference_only",
       "use_in_experiment": "reference-only generated config source",
       "authority_class": "repo_fixture_evidence",
