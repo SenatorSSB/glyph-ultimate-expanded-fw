@@ -30,12 +30,12 @@
     {
       "label": "Senscope export package sample",
       "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-      "sha256": "ef50b7113ad902c4173aa965f1dc3c0bc361dafd6db5f92fa097716dc87881bd"
+      "sha256": "c5f1a687315571ca1a7d634ba1c50d52f4d1a035d8c538d7920133173d622d27"
     },
     {
       "label": "Runtime config candidate sample",
       "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
-      "sha256": "8993601e85d49a456ea01a14c5c4d01c183406f8a477ea11f4eeb73c8706feb4"
+      "sha256": "e4e9b0e47b36f9f8585b37ac0e9f3cba2b6ae2833d79121e99af602c9d48543f"
     },
     {
       "label": "Active profile artifact",

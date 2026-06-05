@@ -1,20 +1,9 @@
 {
-  "schema_name": "glyph_senscope_export_package",
-  "package_version": 1,
-  "status": "sample_docs_only_not_implemented",
-  "hardware_status": "not_new_hardware_result",
-  "nunchuk_status": "preserved_but_not_hardware_validated",
-  "neutral_senscope_profile": {
-    "schema_status": "placeholder_deferred_to_senscope",
-    "senscope_schema_authority": "deferred_to_senscope",
-    "placeholder_profile_id": "SENSCOPE_SCHEMA_DEFERRED_SAMPLE",
-    "note": "Minimal placeholder only; actual Senscope neutral profile schema is deferred to Senscope."
-  },
   "glyph_generated_config_prototype": {
     "contract_version": 1,
     "coverage_metadata": {
       "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-      "case_count": 45,
+      "case_count": 55,
       "categories": [
         "base_role",
         "c_stick_suppression",
@@ -1040,7 +1029,11 @@
       ],
       "Tilt1Minus41": [
         [
-          87,
+          169,
+          47
+        ],
+        [
+          128,
           47
         ],
         [
@@ -1048,11 +1041,11 @@
           47
         ],
         [
-          87,
-          47
+          169,
+          128
         ],
         [
-          87,
+          128,
           128
         ],
         [
@@ -1060,15 +1053,11 @@
           128
         ],
         [
-          87,
-          128
-        ],
-        [
-          87,
+          169,
           209
         ],
         [
-          87,
+          128,
           209
         ],
         [
@@ -1382,14 +1371,40 @@
       ]
     }
   },
+  "hardware_status": "not_new_hardware_result",
+  "hardware_status_caveat": "Sample package only; not hardware validation.",
+  "neutral_senscope_profile": {
+    "note": "Minimal placeholder only; actual Senscope neutral profile schema is deferred to Senscope.",
+    "placeholder_profile_id": "SENSCOPE_SCHEMA_DEFERRED_SAMPLE",
+    "schema_status": "placeholder_deferred_to_senscope",
+    "senscope_schema_authority": "deferred_to_senscope"
+  },
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "nunchuk_status_caveat": "Nunchuk behavior is preserved but not hardware validated by this package.",
+  "package_version": 1,
+  "role_binding_metadata": {
+    "generated_config_role_sections": [
+      "buttons",
+      "c_stick",
+      "directional",
+      "modifiers",
+      "special_functions"
+    ],
+    "nunchuk_status": "preserved_but_not_hardware_validated",
+    "role_map_doc": "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
+    "role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
+    "status": "source_backed_metadata_only"
+  },
+  "schema_name": "glyph_senscope_export_package",
+  "status": "sample_docs_only_not_implemented",
   "table_source_metadata": {
-    "status": "docs_tools_metadata_only",
     "export_contract": "docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json",
     "generated_config_contract": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
     "generated_config_fixture_source": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-    "table_extractor": "tools/extract_glyph_identity_runtime_tables.py",
     "runtime_source": "src/modes/Ultimate.cpp",
+    "status": "docs_tools_metadata_only",
     "table_count": 27,
+    "table_extractor": "tools/extract_glyph_identity_runtime_tables.py",
     "table_names": [
       "Default",
       "LayerFlipper",
@@ -1418,75 +1433,7 @@
       "Y1Tilt1"
     ]
   },
-  "role_binding_metadata": {
-    "status": "source_backed_metadata_only",
-    "role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
-    "role_map_doc": "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
-    "generated_config_role_sections": [
-      "buttons",
-      "c_stick",
-      "directional",
-      "modifiers",
-      "special_functions"
-    ],
-    "nunchuk_status": "preserved_but_not_hardware_validated"
-  },
   "validation_report": {
-    "source_authority": {
-      "export_contract": "docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json",
-      "generated_config_contract": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
-      "offline_generated_config_validator": "tools/glyph_generated_config_validator.py"
-    },
-    "table_count": 25,
-    "role_binding_summary": {
-      "sections": [
-        "buttons",
-        "c_stick",
-        "directional",
-        "modifiers",
-        "special_functions"
-      ],
-      "status": "metadata_only"
-    },
-    "priority_model_summary": {
-      "digital_effective_direction_order": [
-        "physical_inputs",
-        "layer_left_right",
-        "lf4_submode_active",
-        "forced_up_resolution",
-        "button_carriers",
-        "ls_to_dpad_routing"
-      ],
-      "analog_order": [
-        "table_output",
-        "direction_plus_a",
-        "lt5_or_rf11_low_magnitude_za",
-        "rf7_hard_up_b",
-        "rf9_null",
-        "nunchuk_override"
-      ]
-    },
-    "hard_override_summary": {
-      "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude",
-      "rf7_hard_up_b": {
-        "center": [
-          128,
-          172
-        ],
-        "left": [
-          77,
-          172
-        ],
-        "right": [
-          179,
-          172
-        ]
-      },
-      "rf9_null": [
-        128,
-        128
-      ]
-    },
     "behavior_case_coverage_summary": {
       "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
       "case_count": 118,
@@ -1513,16 +1460,37 @@
       "category_count": 18,
       "hardware_status": "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results"
     },
+    "hard_override_summary": {
+      "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude",
+      "rf7_hard_up_b": {
+        "center": [
+          128,
+          172
+        ],
+        "left": [
+          77,
+          172
+        ],
+        "right": [
+          179,
+          172
+        ]
+      },
+      "rf9_null": [
+        128,
+        128
+      ]
+    },
     "no_forbidden_behavior_confirmation": {
       "device_write_absent": true,
-      "serial_transport_absent": true,
-      "runtime_loaded_config_absent": true,
-      "firmware_source_patch_absent": true,
       "firmware_behavior_change_absent": true,
-      "profile_schema_change_absent": true,
-      "macro_turbo_timing_absent": true,
+      "firmware_source_patch_absent": true,
       "hardware_validation_claim_absent": true,
-      "nunchuk_hardware_validation_claim_absent": true
+      "macro_turbo_timing_absent": true,
+      "nunchuk_hardware_validation_claim_absent": true,
+      "profile_schema_change_absent": true,
+      "runtime_loaded_config_absent": true,
+      "serial_transport_absent": true
     },
     "not_hardware_validation_caveat": "Sample package only; not hardware validation.",
     "open_questions": [
@@ -1531,8 +1499,40 @@
       "runtime_loaded_config_design",
       "device_write_transport_policy",
       "nunchuk_hardware_validation"
-    ]
-  },
-  "hardware_status_caveat": "Sample package only; not hardware validation.",
-  "nunchuk_status_caveat": "Nunchuk behavior is preserved but not hardware validated by this package."
+    ],
+    "priority_model_summary": {
+      "analog_order": [
+        "table_output",
+        "direction_plus_a",
+        "lt5_or_rf11_low_magnitude_za",
+        "rf7_hard_up_b",
+        "rf9_null",
+        "nunchuk_override"
+      ],
+      "digital_effective_direction_order": [
+        "physical_inputs",
+        "layer_left_right",
+        "lf4_submode_active",
+        "forced_up_resolution",
+        "button_carriers",
+        "ls_to_dpad_routing"
+      ]
+    },
+    "role_binding_summary": {
+      "sections": [
+        "buttons",
+        "c_stick",
+        "directional",
+        "modifiers",
+        "special_functions"
+      ],
+      "status": "metadata_only"
+    },
+    "source_authority": {
+      "export_contract": "docs/calibration/fixtures/glyph_senscope_to_glyph_export_contract_draft_2026-05-28.json",
+      "generated_config_contract": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json",
+      "offline_generated_config_validator": "tools/glyph_generated_config_validator.py"
+    },
+    "table_count": 25
+  }
 }

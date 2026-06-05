@@ -2,7 +2,7 @@
   "contract_version": 1,
   "coverage_metadata": {
     "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-    "case_count": 45,
+    "case_count": 55,
     "categories": [
       "base_role",
       "c_stick_suppression",
@@ -1028,7 +1028,11 @@
     ],
     "Tilt1Minus41": [
       [
-        87,
+        169,
+        47
+      ],
+      [
+        128,
         47
       ],
       [
@@ -1036,11 +1040,11 @@
         47
       ],
       [
-        87,
-        47
+        169,
+        128
       ],
       [
-        87,
+        128,
         128
       ],
       [
@@ -1048,15 +1052,11 @@
         128
       ],
       [
-        87,
-        128
-      ],
-      [
-        87,
+        169,
         209
       ],
       [
-        87,
+        128,
         209
       ],
       [

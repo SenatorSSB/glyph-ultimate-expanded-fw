@@ -3,20 +3,20 @@
     "behavior_cases_fixture": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-      "sha256": "66e30591170219908060130e640d16790a42bf361929271ff20016e09f1f06a1",
+      "sha256": "292f97c2201b6ba981547e5f16e924b5daab3ed04f84ecdddd8f5182f1b7cd22",
       "status": "gfw3_requested_expected_behavior_cases",
       "summary": {
-        "case_count": 45,
+        "case_count": 55,
         "category_count": 9
       }
     },
     "generated_config_prototype": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-      "sha256": "6b8d9ec3d980ab40eeb90931c7b2a702954a053ac739df47d59552993c1c4bef",
+      "sha256": "6ce5a6296edb4becfce08eb31b2e2dbbd6750d5b2af962c2c5631baded18032d",
       "status": "source_backed_prototype_not_runtime_loaded",
       "summary": {
-        "coverage_case_count": 45,
+        "coverage_case_count": 55,
         "coverage_category_count": 9,
         "table_count": 27
       }
@@ -24,7 +24,7 @@
     "generated_cpp_table_artifact": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt",
-      "sha256": "d8bd6c1b8d7d4ad26ba221c1e470a991f523fa1182d729d55cd4b1c276c8eb70",
+      "sha256": "3d8ac50a5dfcff3ff529fb3cb1888e4c62afaeebd04b82977e8653adab99d9b9",
       "status": "docs_tools_review_only_not_firmware_source",
       "summary": {
         "line_count": 373,
@@ -34,7 +34,7 @@
     "runtime_config_candidate_sample": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
-      "sha256": "6a970a7687fe1fa132e919cfb1b5724ba0b6443d1957b984689c03c55c791db3",
+      "sha256": "ec986fc3615fc0280b5e525f141bcd976d1f603f47b19802ef0045f5578a13cb",
       "status": "candidate_docs_only_not_runtime_loaded",
       "summary": {
         "non_goal_count": 7,
@@ -59,10 +59,10 @@
     "senscope_export_package_sample": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-      "sha256": "5acedd594bd4891f5c58a1c142055d87cab3bf6d5b1ccd0f3aa6b45f700eac9b",
+      "sha256": "c5f1a687315571ca1a7d634ba1c50d52f4d1a035d8c538d7920133173d622d27",
       "status": "sample_docs_only_not_implemented",
       "summary": {
-        "nested_behavior_case_count": 45,
+        "nested_behavior_case_count": 55,
         "nested_generated_config_table_count": 27,
         "neutral_profile_field_count": 4
       }

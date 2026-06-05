@@ -188,9 +188,9 @@ TABLES: dict[str, tuple[tuple[int, int], ...]] = {
         (75, 170), (128, 170), (181, 170),
     ),
     "Tilt1Minus41": (
-        (87, 47), (87, 47), (87, 47),
-        (87, 128), (87, 128), (87, 128),
-        (87, 209), (87, 209), (87, 209),
+        (169, 47), (128, 47), (87, 47),
+        (169, 128), (128, 128), (87, 128),
+        (169, 209), (128, 209), (87, 209),
     ),
     "RT1RF4Custom": (
         (69, 78), (128, 78), (187, 78),
@@ -522,7 +522,7 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
     lt2_rf3_active = inputs.lt2 and not inputs.lf4 and inputs.rf3
     lt2_rf4_active = inputs.lt2 and not inputs.lf4 and inputs.rf4
     lf4_rf2_deactivates_rf4 = inputs.lf4 and inputs.rf2
-    tilt1_pressed = inputs.rf4 and not inputs.lt2 and not inputs.rt1 and not lf4_rf2_deactivates_rf4
+    tilt1_pressed = inputs.rf4 and (not inputs.lt2 or inputs.lf4) and not inputs.rt1 and not lf4_rf2_deactivates_rf4
     tilt2_pressed = inputs.rt1 and not inputs.rf4
     direction_plus_a_active = down_a_active or up_a_active
 
@@ -698,7 +698,7 @@ def select_stick_table(
         "Y1": "MY1",
         "LayerNormalX": "MLayerNormalX",
         "LayerFlipper": "MLayerFlipper",
-        "Tilt1": "MTilt1",
+        "Tilt1": "ModeDefault",
         "Tilt2": "MTilt2",
         "Tilt3": "MTilt3",
     }.get(single_modifier, "ModeDefault")

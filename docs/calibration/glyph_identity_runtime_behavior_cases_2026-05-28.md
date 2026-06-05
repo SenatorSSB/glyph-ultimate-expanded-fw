@@ -81,7 +81,9 @@ Fixture case IDs:
 - `gfw3_rf2_base_b`
 - `gfw3_rf4_base_tilt1`
 - `gfw3_rt1_base_tilt2`
+- `gfw3_mode_rf4_mode_default`
 - `gfw3_mode_rt1_mtilt2`
+- `gfw3_mode_rt1_rf4_custom`
 - `gfw3_rf3_rf4_no_tilt3`
 
 ## Custom modifier cases
@@ -97,6 +99,11 @@ Fixture case IDs:
 - `gfw3_rt1_rf4_custom_8`
 - `gfw3_rt1_rf4_custom_9`
 - `gfw3_rf4_rf2_base_minus41`
+- `gfw3_rf4_rf2_base_minus41_left`
+- `gfw3_rf4_rf2_base_minus41_down`
+- `gfw3_rf4_rf2_base_minus41_neutral`
+- `gfw3_rf4_rf2_base_minus41_up`
+- `gfw3_rf4_rf2_base_minus41_diag1`
 
 ## RF9 null cases
 
@@ -143,6 +150,9 @@ Fixture case IDs:
 - `gfw3_lf4_rf2_rf4_deactivates_rf4`
 - `gfw3_lf4_rf2_rt2_suppresses_x_deactivates_rf4`
 - `gfw3_lf4_lt2_uses_lf4_behavior`
+- `gfw3_lf4_lt2_rf4_tilt1`
+- `gfw3_lf4_lt2_rf2_rf4_deactivates_rf4`
+- `gfw3_lf4_lt2_rf2_rf4_rt2_suppresses_x_deactivates_rf4`
 
 ## Preservation cases
 

@@ -16,9 +16,9 @@ struct StickPoint {
 #include "modes/UltimateIdentityRuntimeTables.hpp"
 
 constexpr StickPoint kTilt1Minus41Table[9] = {
-    {87, 47}, {87, 47}, {87, 47},
-    {87, 128}, {87, 128}, {87, 128},
-    {87, 209}, {87, 209}, {87, 209},
+    {169, 47}, {128, 47}, {87, 47},
+    {169, 128}, {128, 128}, {87, 128},
+    {169, 209}, {128, 209}, {87, 209},
 };
 
 // RT1+RF4 custom modifier. Direction 5 is source-encoded center because table
@@ -134,7 +134,7 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     const bool lt2_rf3_active = inputs.lt2 && !inputs.lf4 && inputs.rf3;
     const bool lt2_rf4_active = inputs.lt2 && !inputs.lf4 && inputs.rf4;
     const bool lf4_rf2_deactivates_rf4 = inputs.lf4 && inputs.rf2;
-    const bool tilt1_pressed = inputs.rf4 && !inputs.lt2 && !inputs.rt1 && !lf4_rf2_deactivates_rf4;
+    const bool tilt1_pressed = inputs.rf4 && (!inputs.lt2 || inputs.lf4) && !inputs.rt1 && !lf4_rf2_deactivates_rf4;
     const bool tilt2_pressed = inputs.rt1 && !inputs.rf4;
 
     RoleState state;
@@ -328,7 +328,7 @@ const StickPoint *SelectStickTable(
         case EffectiveModifier::LayerFlipper:
             return kMLayerFlipperTable;
         case EffectiveModifier::Tilt1:
-            return kMTilt1Table;
+            return kModeDefaultTable;
         case EffectiveModifier::Tilt2:
             return kMTilt2Table;
         case EffectiveModifier::Tilt3:
