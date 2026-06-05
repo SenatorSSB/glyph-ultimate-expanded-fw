@@ -47,7 +47,7 @@ REQUIRED_INPUTS = (
     {
         "label": "senscope_export_package_sample",
         "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-        "sha256": "29bd4e601b8762d068b7fb809707b57537859ba647cb48e578900d9c9111d4b7",
+        "sha256": "3497ce3150620a60838c50f58438250f472c121b3ce9623d3223ea5f780717a1",
         "expected_import_role": "reference_only",
         "use_in_experiment": "reference-only package, not expected external remapper import unless future adapter exists",
         "authority_class": "repo_fixture_evidence",
@@ -65,7 +65,7 @@ REQUIRED_INPUTS = (
     {
         "label": "generated_config_prototype",
         "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-        "sha256": "a482b38864a7a927efd5a32b351acff14bc6daea60e6164678a2cab4bc337b0d",
+        "sha256": "d66efa458cc28921d3a1ccb0682e8486d880c3d3fe77260a19cc3e0afa63006f",
         "expected_import_role": "reference_only",
         "use_in_experiment": "reference-only generated config source",
         "authority_class": "repo_fixture_evidence",

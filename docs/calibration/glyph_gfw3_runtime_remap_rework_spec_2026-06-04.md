@@ -68,14 +68,20 @@ Required base-role changes:
 - Mode + RT1 uses MTilt2.
 - RT1 + RF4 uses the custom table in this spec and has priority over RF4-alone
   and RT1-alone modifiers.
-- RF9 nulls both left stick and right stick inputs.
+- RF9 full-null mode nulls both left stick and right stick inputs.
 - RF9 + RF4 disables all RF9 nullification only while RF4 behavior is available
   and does not press any extra button.
 - RF9 + RF4 + C-stick suppresses RF4 behavior, so RF9 nullification becomes
   active again and nulls both sticks.
-- RF9 + RF3 suppresses base RF3 X while no C-stick button is held.
+- RF9 + RF3 enters a base-RF3-X suppression mode when RF3 would otherwise
+  produce base X (`RF3`, not `LT2`, not `LF4`).
+- RF9 base-RF3-X suppression mode suppresses base RF3 X while no C-stick button
+  is held, but it does not full-null left stick or right stick/C-stick output.
 - RF9 + RF3 + C-stick restores base RF3 X; this restoration applies only to the
-  base RF3 X role and does not convert LT2+RF3 or LF4+RF3 into X.
+  base RF3 X role, keeps C-stick output active, and does not convert LT2+RF3 or
+  LF4+RF3 into X.
+- RF4 behavior is suppressed/nullified while RF9 base-RF3-X suppression mode is
+  active, including RT1+RF4 custom behavior.
 - RF7 hard Up+B remains unchanged.
 - RF13 LS->DPad remains unchanged.
 
@@ -203,8 +209,9 @@ Expected high-level priority:
   sublayer overrides are active.
 - Existing C-stick two-axis diagonal/ASDI behavior is preserved outside the RF3
   vertical-special case.
-- RF9 null remains last among analog overrides except RF9+RF4 disables RF9
-  nulling while RF4 behavior is available.
+- RF9 full null remains last among analog overrides except RF9+RF4 disables RF9
+  nulling while RF4 behavior is available, and except RF9 base-RF3-X suppression
+  mode disables full left-stick/right-stick null.
 - RF9 null also nulls right stick when active.
 - Nunchuk behavior remains preserved and untested; do not alter it.
 

@@ -54,8 +54,15 @@ native `MODE_ULTIMATE`.
 | rf9_null_both_sticks | RF9 null both sticks | `RF9` with LS and C-stick activity | Representative | Left stick and right stick are both centered/nullified; RF9 does not assert extra game output | NOT_EXECUTED |
 | rf9_rf4_null_disabled | RF9+RF4 exception | `RF9 + RF4` with no C-stick button held | 1..9 | RF9 performs no left-stick null, no right-stick null, and does not replace RF4 modifier behavior | NOT_EXECUTED |
 | rf9_rf4_cstick_reenables_null | RF9+RF4 C-stick priority | `RF9 + RF4 + any RT2/RT3/RT4/RT5` | Representative | C-stick suppresses RF4 behavior, so RF9 null is active again and centers both sticks | NOT_EXECUTED |
-| rf9_rf3_suppresses_x | RF9+RF3 X suppression | `RF9 + RF3` with no C-stick button held | N/A | RF9 suppresses base RF3 X | NOT_EXECUTED |
-| rf9_rf3_cstick_restores_x | RF9+RF3 X restoration | `RF9 + RF3 + any RT2/RT3/RT4/RT5` | Representative | C-stick restores base RF3 X; RF9 analog null behavior remains late | NOT_EXECUTED |
+| rf9_rf3_suppresses_x | RF9+RF3 X suppression | `RF9 + RF3` with no C-stick button held | N/A | RF9 suppresses base RF3 X; left stick and right stick/C-stick are not full-nulled by RF9 base-RF3-X mode | NOT_EXECUTED |
+| rf9_rf3_cstick_restores_x | RF9+RF3 X restoration | `RF9 + RF3 + any RT2/RT3/RT4/RT5` | Representative | C-stick restores base RF3 X; C-stick output remains active and RF9 base-RF3-X mode does not full-null either stick | NOT_EXECUTED |
+| rf9_rf3_rt5_restores_x_cstick_active | RF9+RF3 C-up restoration | `RF9 + RF3 + RT5` | Neutral horizontal | X is restored; C-up remains active; left stick and right stick are not full-nulled | NOT_EXECUTED |
+| rf9_rf3_rt5_left_special_no_full_null | RF9+RF3 vertical C-stick special | `RF9 + RF3 + RT5 + resolved Left` | Left | X is restored and RF3 vertical C-stick special gives right stick (95,165); left stick is not full-nulled | NOT_EXECUTED |
+| rf9_rf3_rt2_left_special_no_full_null | RF9+RF3 vertical C-stick special | `RF9 + RF3 + RT2 + resolved Left` | Left | X is restored and RF3 vertical C-stick special gives right stick (95,91); left stick is not full-nulled | NOT_EXECUTED |
+| rf9_rf3_rf4_suppresses_rf4_no_full_null | RF9+RF3 RF4 suppression | `RF9 + RF3 + RF4` | Representative | RF4 modifier behavior is suppressed/nullified; RF9 suppresses/restores RF3 X according to C-stick state; full stick null does not apply | NOT_EXECUTED |
+| rf9_rf3_rt1_rf4_suppresses_custom_no_full_null | RF9+RF3 RT1+RF4 suppression | `RF9 + RF3 + RT1 + RF4` | Representative | RT1+RF4 custom behavior is suppressed/nullified; RF9 suppresses/restores RF3 X according to C-stick state; full stick null does not apply | NOT_EXECUTED |
+| rf9_alone_full_null_preserved | RF9 full-null preservation | `RF9` alone with LS and C-stick activity | Representative | RF9 full-null mode centers both left stick and right stick | NOT_EXECUTED |
+| rf9_rf4_cstick_without_rf3_full_null_preserved | RF9+RF4+C-stick full null preservation | `RF9 + RF4 + C-stick` with no RF3 held | Representative | C-stick suppresses RF4 behavior, so RF9 full-null mode still centers both sticks | NOT_EXECUTED |
 | lt1_l | LT physical move cycle | `LT1` only | N/A | L asserted | NOT_EXECUTED |
 | lt3_l_r | LT physical move cycle | `LT3` only | N/A | L and R asserted | NOT_EXECUTED |
 | lt4_x2_mx2 | LT physical move cycle | `LT4` with/without Mode | 1..9 | X2 table selected, or MX2 when Mode is held | NOT_EXECUTED |

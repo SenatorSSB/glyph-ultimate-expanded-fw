@@ -3,7 +3,7 @@
     "contract_version": 1,
     "coverage_metadata": {
       "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-      "case_count": 75,
+      "case_count": 84,
       "categories": [
         "base_role",
         "c_stick_suppression",

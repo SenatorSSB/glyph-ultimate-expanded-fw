@@ -51,7 +51,7 @@ SOURCE_ANCHORS = (
     "state.x1_active = inputs.lt5;",
     "state.x2_active = inputs.lt4;",
     "state.z_airdodge_override_active = inputs.rf6;",
-    "state.null_modifier_active = inputs.rf9 && !state.rf4_behavior_available;",
+    "state.null_modifier_active = inputs.rf9 && !state.rf9_base_rf3_x_mode_active && !state.rf4_behavior_available;",
     "outputs.buttonR = inputs.rf6;",
     "outputs.triggerRDigital = inputs.rf16 || inputs.lt3;",
     "kRT1RF4CustomTable",
@@ -303,6 +303,8 @@ class RoleState:
     rf4_modifier_suppressed_by_cstick: bool
     rf4_behavior_available: bool
     base_rf3_x_active: bool
+    rf9_base_rf3_x_mode_active: bool
+    rf4_suppressed_by_rf9_rf3_mode: bool
     rf3_x_suppressed_by_rf9: bool
     rf3_x_restored_by_cstick: bool
     tilt1_effective: bool
@@ -410,6 +412,7 @@ ROLE_MODIFIER_FIELDS = {
     "Y1": "y1_active",
     "LayerNormalX": "layer_rf3_normal_x_active",
     "LayerFlipper": "rf4_layer_flipper_active",
+    "RT1RF4Custom": "rt1_rf4_custom_active",
     "Tilt1": "tilt1_effective",
     "Tilt2": "tilt2_effective",
     "Tilt3": "tilt3_effective",
@@ -526,16 +529,18 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
     up_a_active = inputs.rf5
     lt2_sublayer_active = inputs.lt2 and not inputs.lf4 and (inputs.rf1 or inputs.rf2 or inputs.rf3 or inputs.rf4)
     lt2_rf3_active = inputs.lt2 and not inputs.lf4 and inputs.rf3
-    rt1_rf4_custom_active = inputs.rt1 and inputs.rf4
+    base_rf3_x_active = inputs.rf3 and not inputs.lt2 and not inputs.lf4
+    rf9_base_rf3_x_mode_active = inputs.rf9 and base_rf3_x_active
+    rf4_suppressed_by_rf9_rf3_mode = rf9_base_rf3_x_mode_active and inputs.rf4
+    rt1_rf4_custom_active = inputs.rt1 and inputs.rf4 and not rf4_suppressed_by_rf9_rf3_mode
     rf4_modifier_suppressed_by_cstick = inputs.rf4 and layer.c_stick_any_active and not rt1_rf4_custom_active
-    rf4_behavior_available = inputs.rf4 and not rf4_modifier_suppressed_by_cstick
+    rf4_behavior_available = inputs.rf4 and not rf4_modifier_suppressed_by_cstick and not rf4_suppressed_by_rf9_rf3_mode
     lt2_rf4_active = inputs.lt2 and not inputs.lf4 and rf4_behavior_available
     lf4_rf2_deactivates_rf4 = inputs.lf4 and inputs.rf2
     tilt1_pressed = rf4_behavior_available and (not inputs.lt2 or inputs.lf4) and not inputs.rt1 and not lf4_rf2_deactivates_rf4
     tilt2_pressed = inputs.rt1 and not inputs.rf4
-    base_rf3_x_active = inputs.rf3 and not inputs.lt2 and not inputs.lf4
-    rf3_x_suppressed_by_rf9 = base_rf3_x_active and inputs.rf9 and not layer.c_stick_any_active
-    rf3_x_restored_by_cstick = base_rf3_x_active and inputs.rf9 and layer.c_stick_any_active
+    rf3_x_suppressed_by_rf9 = rf9_base_rf3_x_mode_active and not layer.c_stick_any_active
+    rf3_x_restored_by_cstick = rf9_base_rf3_x_mode_active and layer.c_stick_any_active
     direction_plus_a_active = down_a_active or up_a_active
 
     return RoleState(
@@ -549,13 +554,15 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
         rf4_modifier_suppressed_by_cstick=rf4_modifier_suppressed_by_cstick,
         rf4_behavior_available=rf4_behavior_available,
         base_rf3_x_active=base_rf3_x_active,
+        rf9_base_rf3_x_mode_active=rf9_base_rf3_x_mode_active,
+        rf4_suppressed_by_rf9_rf3_mode=rf4_suppressed_by_rf9_rf3_mode,
         rf3_x_suppressed_by_rf9=rf3_x_suppressed_by_rf9,
         rf3_x_restored_by_cstick=rf3_x_restored_by_cstick,
         tilt3_effective=False,
         tilt1_effective=tilt1_pressed,
         tilt2_effective=tilt2_pressed,
         z_airdodge_override_active=inputs.rf6,
-        null_modifier_active=inputs.rf9 and not rf4_behavior_available,
+        null_modifier_active=inputs.rf9 and not rf9_base_rf3_x_mode_active and not rf4_behavior_available,
         hard_up_b_active=inputs.rf7,
         ls_to_dpad_active=inputs.rf13,
         direction_plus_a_active=direction_plus_a_active,

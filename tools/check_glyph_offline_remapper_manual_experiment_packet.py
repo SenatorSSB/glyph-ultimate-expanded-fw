@@ -68,7 +68,7 @@ REQUIRED_CANDIDATE_INPUTS = (
     (
         "Senscope export package sample",
         "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-        "29bd4e601b8762d068b7fb809707b57537859ba647cb48e578900d9c9111d4b7",
+        "3497ce3150620a60838c50f58438250f472c121b3ce9623d3223ea5f780717a1",
     ),
     (
         "Runtime config candidate sample",

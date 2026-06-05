@@ -354,7 +354,11 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"state\.rf4_modifier_suppressed_by_cstick\s*=\s*rf4_modifier_suppressed_by_cstick\s*;", source, "RF4 C-stick suppression anchor")
     require(r"state\.rf4_behavior_available\s*=\s*rf4_behavior_available\s*;", source, "RF4 behavioral availability anchor")
     require(r"state\.rf3_x_suppressed_by_rf9\s*=\s*rf3_x_suppressed_by_rf9\s*;", source, "RF9 RF3 X suppression anchor")
-    require(r"state\.null_modifier_active\s*=\s*inputs\.rf9\s*&&\s*!state\.rf4_behavior_available\s*;", source, "RF9 null disabled by behaviorally available RF4")
+    require(
+        r"state\.null_modifier_active\s*=\s*inputs\.rf9\s*&&\s*!state\.rf9_base_rf3_x_mode_active\s*&&\s*!state\.rf4_behavior_available\s*;",
+        source,
+        "RF9 full null disabled by RF9 base RF3 X mode or behaviorally available RF4",
+    )
     require(r"state\.layer_left_active\s*=\s*false\s*;", source, "LF8 layer-left scratched")
     require(r"state\.layer_right_active\s*=\s*false\s*;", source, "LF7 layer-right scratched")
     require(r"state\.lf4_submode_active\s*=\s*inputs\.lf4\s*;", source, "LF4 sub-mode activation")
@@ -449,7 +453,7 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(
         r"void\s+ApplyNullOverride\(OutputState\s+&outputs\)\s*\{\s*outputs\.leftStickX\s*=\s*128\s*;\s*outputs\.leftStickY\s*=\s*128\s*;\s*outputs\.rightStickX\s*=\s*128\s*;\s*outputs\.rightStickY\s*=\s*128\s*;\s*\}",
         source,
-        "RF9 nulls both sticks",
+        "RF9 full-null mode nulls both sticks",
         flags=re.DOTALL,
     )
     if re.search(r"active_modifier_count\s*\+\+[^;]*null_modifier_active", source):
@@ -527,7 +531,7 @@ def main() -> int:
     print("direction_plus_a_override_policy=hard_final_default_or_mode_default_then_rf6_low_override")
     print("y1_tilt1_special_composite=enabled")
     print("rt4_rt5_cstick_swap=enabled")
-    print("rf9_null_modifier=left_and_right_sticks_with_rf4_exception")
+    print("rf9_null_modifier=full_null_except_rf9_base_rf3_x_mode_or_behaviorally_available_rf4")
     print("rt1_rf4_custom_modifier=enabled")
     print("rf4_rf2_minus41_modifier=enabled")
     print("y2_my2_runtime_role=scratched_inactive")
