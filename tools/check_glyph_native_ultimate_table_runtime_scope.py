@@ -365,7 +365,7 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"state\.rf4_layer_flipper_active\s*=\s*lt2_rf4_active\s*;", source, "LT2 RF4 flipper anchor")
     require(r"state\.tilt3_effective\s*=\s*false\s*;", source, "RF3+RF4 Tilt3 fusion scratched")
     require(r"state\.z_airdodge_override_active\s*=\s*inputs\.rf6\s*;", source, "RF6 Z-airdodge anchor")
-    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf4\s*&&\s*!inputs\.lt2\s*&&\s*!inputs\.rt1\s*&&\s*!lf4_rf2_deactivates_rf4\s*;", source, "RF4 base Tilt1 gate")
+    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf4\s*&&\s*\(\s*!inputs\.lt2\s*\|\|\s*inputs\.lf4\s*\)\s*&&\s*!inputs\.rt1\s*&&\s*!lf4_rf2_deactivates_rf4\s*;", source, "RF4 base/LF4-over-LT2 Tilt1 gate")
     require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rt1\s*&&\s*!inputs\.rf4\s*;", source, "RT1 base Tilt2 gate")
     require(
         r"layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;",

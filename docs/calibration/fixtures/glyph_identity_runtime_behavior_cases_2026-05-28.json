@@ -311,6 +311,39 @@
       "notes": []
     },
     {
+      "case_id": "gfw3_mode_rf4_mode_default",
+      "category": "base_role",
+      "input_buttons": [
+        "RF8",
+        "RF4"
+      ],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "table_selection",
+        "table_id": "ModeDefault",
+        "direction_index": 5,
+        "left_stick": [
+          128,
+          169
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "Mode wins over RF4/Tilt1 per mode_can_win_over_RF4_Tilt1."
+      ]
+    },
+    {
       "case_id": "gfw3_mode_rt1_mtilt2",
       "category": "base_role",
       "input_buttons": [
@@ -340,6 +373,40 @@
         "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
       ],
       "notes": []
+    },
+    {
+      "case_id": "gfw3_mode_rt1_rf4_custom",
+      "category": "base_role",
+      "input_buttons": [
+        "RF8",
+        "RT1",
+        "RF4"
+      ],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "table_selection",
+        "table_id": "RT1RF4Custom",
+        "direction_index": 5,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RT1+RF4 custom table remains selected under Mode."
+      ]
     },
     {
       "case_id": "gfw3_rf3_rf4_no_tilt3",
@@ -1425,6 +1492,142 @@
         "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
       ],
       "notes": []
+    },
+    {
+      "case_id": "gfw3_lf4_lt2_rf4_tilt1",
+      "category": "lf4_submode",
+      "input_buttons": [
+        "LF4",
+        "LT2",
+        "RF4"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "table_selection",
+        "table_id": "Tilt1",
+        "direction_index": 5,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": null
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "LF4 overrides LT2 so RF4 resolves as LF4+RF4 Tilt1."
+      ]
+    },
+    {
+      "case_id": "gfw3_lf4_lt2_rf2_rf4_deactivates_rf4",
+      "category": "lf4_submode",
+      "input_buttons": [
+        "LF4",
+        "LT2",
+        "RF2",
+        "RF4"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B",
+          "X"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": null,
+        "table_id": null,
+        "direction_index": null,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": null,
+        "suppressed_directions": [
+          "Up"
+        ],
+        "suppressed_modifiers": [
+          "Tilt1"
+        ]
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RF2 still deactivates RF4 under LF4 even when LT2 is held."
+      ]
+    },
+    {
+      "case_id": "gfw3_lf4_lt2_rf2_rf4_rt2_suppresses_x_deactivates_rf4",
+      "category": "c_stick_suppression",
+      "input_buttons": [
+        "LF4",
+        "LT2",
+        "RF2",
+        "RF4",
+        "RT2"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": null,
+        "table_id": null,
+        "direction_index": null,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          28
+        ],
+        "suppressed_buttons": [
+          "X"
+        ],
+        "right_stick_digital": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": true
+        },
+        "suppressed_directions": [
+          "Up"
+        ],
+        "suppressed_modifiers": [
+          "Tilt1"
+        ]
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "C-stick suppresses RF2's X but RF2 still deactivates RF4."
+      ]
     },
     {
       "case_id": "gfw3_rf7_hard_up_b_preserved",

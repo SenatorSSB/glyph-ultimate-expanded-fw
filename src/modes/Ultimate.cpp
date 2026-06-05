@@ -134,7 +134,7 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     const bool lt2_rf3_active = inputs.lt2 && !inputs.lf4 && inputs.rf3;
     const bool lt2_rf4_active = inputs.lt2 && !inputs.lf4 && inputs.rf4;
     const bool lf4_rf2_deactivates_rf4 = inputs.lf4 && inputs.rf2;
-    const bool tilt1_pressed = inputs.rf4 && !inputs.lt2 && !inputs.rt1 && !lf4_rf2_deactivates_rf4;
+    const bool tilt1_pressed = inputs.rf4 && (!inputs.lt2 || inputs.lf4) && !inputs.rt1 && !lf4_rf2_deactivates_rf4;
     const bool tilt2_pressed = inputs.rt1 && !inputs.rf4;
 
     RoleState state;
@@ -328,7 +328,7 @@ const StickPoint *SelectStickTable(
         case EffectiveModifier::LayerFlipper:
             return kMLayerFlipperTable;
         case EffectiveModifier::Tilt1:
-            return kMTilt1Table;
+            return kModeDefaultTable;
         case EffectiveModifier::Tilt2:
             return kMTilt2Table;
         case EffectiveModifier::Tilt3:
