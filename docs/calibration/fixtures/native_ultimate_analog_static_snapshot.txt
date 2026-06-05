@@ -5,137 +5,143 @@ missing_optional_files=1
 functions_found:
 - src/core/ControllerMode.cpp:8: void ControllerMode::UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
 - src/core/ControllerMode.cpp:30: void ControllerMode::UpdateDirections(
-- src/modes/Ultimate.cpp:404: void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
-- src/modes/Ultimate.cpp:417: void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
+- src/modes/Ultimate.cpp:439: void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
+- src/modes/Ultimate.cpp:452: void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
 
 analog_assignments:
 leftStickX: count=10
 - src/core/ControllerMode.cpp:46: outputs.leftStickX = analogStickNeutral;
 - src/core/ControllerMode.cpp:56: outputs.leftStickX = analogStickMin;
 - src/core/ControllerMode.cpp:59: outputs.leftStickX = analogStickMax;
-- src/modes/Ultimate.cpp:363: outputs.leftStickX = active_table[direction_index].x;
-- src/modes/Ultimate.cpp:374: outputs.leftStickX = direction_plus_a_table[direction_plus_a_index].x;
-- src/modes/Ultimate.cpp:382: outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
-- src/modes/Ultimate.cpp:389: outputs.leftStickX = rf7_horizontal;
-- src/modes/Ultimate.cpp:394: outputs.leftStickX = 128;
-- src/modes/Ultimate.cpp:461: outputs.leftStickX = center.x;
-- src/modes/Ultimate.cpp:509: outputs.leftStickX = inputs.nunchuk_x;
+- src/modes/Ultimate.cpp:380: outputs.leftStickX = active_table[direction_index].x;
+- src/modes/Ultimate.cpp:391: outputs.leftStickX = direction_plus_a_table[direction_plus_a_index].x;
+- src/modes/Ultimate.cpp:399: outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
+- src/modes/Ultimate.cpp:406: outputs.leftStickX = rf7_horizontal;
+- src/modes/Ultimate.cpp:429: outputs.leftStickX = 128;
+- src/modes/Ultimate.cpp:495: outputs.leftStickX = center.x;
+- src/modes/Ultimate.cpp:545: outputs.leftStickX = inputs.nunchuk_x;
 leftStickY: count=10
 - src/core/ControllerMode.cpp:47: outputs.leftStickY = analogStickNeutral;
 - src/core/ControllerMode.cpp:66: outputs.leftStickY = analogStickMin;
 - src/core/ControllerMode.cpp:69: outputs.leftStickY = analogStickMax;
-- src/modes/Ultimate.cpp:364: outputs.leftStickY = active_table[direction_index].y;
-- src/modes/Ultimate.cpp:375: outputs.leftStickY = direction_plus_a_table[direction_plus_a_index].y;
-- src/modes/Ultimate.cpp:383: outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
-- src/modes/Ultimate.cpp:390: outputs.leftStickY = 172;
-- src/modes/Ultimate.cpp:395: outputs.leftStickY = 128;
-- src/modes/Ultimate.cpp:462: outputs.leftStickY = center.y;
-- src/modes/Ultimate.cpp:510: outputs.leftStickY = inputs.nunchuk_y;
-rightStickX: count=6
+- src/modes/Ultimate.cpp:381: outputs.leftStickY = active_table[direction_index].y;
+- src/modes/Ultimate.cpp:392: outputs.leftStickY = direction_plus_a_table[direction_plus_a_index].y;
+- src/modes/Ultimate.cpp:400: outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
+- src/modes/Ultimate.cpp:407: outputs.leftStickY = 172;
+- src/modes/Ultimate.cpp:430: outputs.leftStickY = 128;
+- src/modes/Ultimate.cpp:496: outputs.leftStickY = center.y;
+- src/modes/Ultimate.cpp:546: outputs.leftStickY = inputs.nunchuk_y;
+rightStickX: count=7
 - src/core/ControllerMode.cpp:48: outputs.rightStickX = analogStickNeutral;
 - src/core/ControllerMode.cpp:78: outputs.rightStickX = analogStickMin;
 - src/core/ControllerMode.cpp:81: outputs.rightStickX = analogStickMax;
-- src/modes/Ultimate.cpp:396: outputs.rightStickX = 128;
-- src/modes/Ultimate.cpp:480: outputs.rightStickX = 128 + (directions.cx * 42);
-- src/modes/Ultimate.cpp:503: outputs.rightStickX = 128;
-rightStickY: count=6
+- src/modes/Ultimate.cpp:424: outputs.rightStickX = directions.left ? 95 : 161;
+- src/modes/Ultimate.cpp:431: outputs.rightStickX = 128;
+- src/modes/Ultimate.cpp:514: outputs.rightStickX = 128 + (directions.cx * 42);
+- src/modes/Ultimate.cpp:539: outputs.rightStickX = 128;
+rightStickY: count=7
 - src/core/ControllerMode.cpp:49: outputs.rightStickY = analogStickNeutral;
 - src/core/ControllerMode.cpp:87: outputs.rightStickY = analogStickMin;
 - src/core/ControllerMode.cpp:90: outputs.rightStickY = analogStickMax;
-- src/modes/Ultimate.cpp:397: outputs.rightStickY = 128;
-- src/modes/Ultimate.cpp:481: outputs.rightStickY = 128 + (directions.cy * 68);
-- src/modes/Ultimate.cpp:504: outputs.rightStickY = 128;
+- src/modes/Ultimate.cpp:425: outputs.rightStickY = stick_directions.cy > 0 ? 165 : 91;
+- src/modes/Ultimate.cpp:432: outputs.rightStickY = 128;
+- src/modes/Ultimate.cpp:515: outputs.rightStickY = 128 + (directions.cy * 68);
+- src/modes/Ultimate.cpp:540: outputs.rightStickY = 128;
 triggerLAnalog: count=2
-- src/modes/Ultimate.cpp:490: outputs.triggerLAnalog = 140;
-- src/modes/Ultimate.cpp:492: outputs.triggerLAnalog = 0;
+- src/modes/Ultimate.cpp:526: outputs.triggerLAnalog = 140;
+- src/modes/Ultimate.cpp:528: outputs.triggerLAnalog = 0;
 triggerRAnalog: count=2
-- src/modes/Ultimate.cpp:496: outputs.triggerRAnalog = 140;
-- src/modes/Ultimate.cpp:498: outputs.triggerRAnalog = 0;
+- src/modes/Ultimate.cpp:532: outputs.triggerRAnalog = 140;
+- src/modes/Ultimate.cpp:534: outputs.triggerRAnalog = 0;
 
 numeric_constants_near_assignments:
 leftStickX:
 - src/core/ControllerMode.cpp:46: constants=none
 - src/core/ControllerMode.cpp:56: constants=1
 - src/core/ControllerMode.cpp:59: constants=1
-- src/modes/Ultimate.cpp:363: constants=none
-- src/modes/Ultimate.cpp:374: constants=none
-- src/modes/Ultimate.cpp:382: constants=0, 1
-- src/modes/Ultimate.cpp:389: constants=128, 172, 179, 77
-- src/modes/Ultimate.cpp:394: constants=128
-- src/modes/Ultimate.cpp:461: constants=none
-- src/modes/Ultimate.cpp:509: constants=none
+- src/modes/Ultimate.cpp:380: constants=none
+- src/modes/Ultimate.cpp:391: constants=none
+- src/modes/Ultimate.cpp:399: constants=0, 1
+- src/modes/Ultimate.cpp:406: constants=128, 172, 179, 77
+- src/modes/Ultimate.cpp:429: constants=128
+- src/modes/Ultimate.cpp:495: constants=none
+- src/modes/Ultimate.cpp:545: constants=none
 leftStickY:
 - src/core/ControllerMode.cpp:47: constants=none
 - src/core/ControllerMode.cpp:66: constants=1
 - src/core/ControllerMode.cpp:69: constants=1
-- src/modes/Ultimate.cpp:364: constants=none
-- src/modes/Ultimate.cpp:375: constants=none
-- src/modes/Ultimate.cpp:383: constants=0, 1
-- src/modes/Ultimate.cpp:390: constants=128, 172, 179, 77
-- src/modes/Ultimate.cpp:395: constants=128
-- src/modes/Ultimate.cpp:462: constants=none
-- src/modes/Ultimate.cpp:510: constants=none
+- src/modes/Ultimate.cpp:381: constants=none
+- src/modes/Ultimate.cpp:392: constants=none
+- src/modes/Ultimate.cpp:400: constants=0, 1
+- src/modes/Ultimate.cpp:407: constants=128, 172, 179, 77
+- src/modes/Ultimate.cpp:430: constants=128
+- src/modes/Ultimate.cpp:496: constants=none
+- src/modes/Ultimate.cpp:546: constants=none
 rightStickX:
 - src/core/ControllerMode.cpp:48: constants=none
 - src/core/ControllerMode.cpp:78: constants=1
 - src/core/ControllerMode.cpp:81: constants=1
-- src/modes/Ultimate.cpp:396: constants=128
-- src/modes/Ultimate.cpp:480: constants=0, 128, 42, 5250, 68, 8500
-- src/modes/Ultimate.cpp:503: constants=128
+- src/modes/Ultimate.cpp:424: constants=0, 161, 165, 91, 95
+- src/modes/Ultimate.cpp:431: constants=128
+- src/modes/Ultimate.cpp:514: constants=0, 128, 42, 5250, 68, 8500
+- src/modes/Ultimate.cpp:539: constants=128
 rightStickY:
 - src/core/ControllerMode.cpp:49: constants=none
 - src/core/ControllerMode.cpp:87: constants=1
 - src/core/ControllerMode.cpp:90: constants=1
-- src/modes/Ultimate.cpp:397: constants=128
-- src/modes/Ultimate.cpp:481: constants=0, 128, 42, 5250, 68, 8500
-- src/modes/Ultimate.cpp:504: constants=128
+- src/modes/Ultimate.cpp:425: constants=0, 161, 165, 91, 95
+- src/modes/Ultimate.cpp:432: constants=128
+- src/modes/Ultimate.cpp:515: constants=0, 128, 42, 5250, 68, 8500
+- src/modes/Ultimate.cpp:540: constants=128
 triggerLAnalog:
-- src/modes/Ultimate.cpp:490: constants=0, 140
-- src/modes/Ultimate.cpp:492: constants=0, 140
+- src/modes/Ultimate.cpp:526: constants=0, 140
+- src/modes/Ultimate.cpp:528: constants=0, 140
 triggerRAnalog:
-- src/modes/Ultimate.cpp:496: constants=0, 140
-- src/modes/Ultimate.cpp:498: constants=0, 140
+- src/modes/Ultimate.cpp:532: constants=0, 140
+- src/modes/Ultimate.cpp:534: constants=0, 140
 
 button_modifier_tokens_near_assignments:
 leftStickX:
 - src/core/ControllerMode.cpp:46: tokens=none
 - src/core/ControllerMode.cpp:56: tokens=directions.horizontal, directions.x
 - src/core/ControllerMode.cpp:59: tokens=directions.x
-- src/modes/Ultimate.cpp:363: tokens=none
-- src/modes/Ultimate.cpp:374: tokens=none
-- src/modes/Ultimate.cpp:382: tokens=none
-- src/modes/Ultimate.cpp:389: tokens=none
-- src/modes/Ultimate.cpp:394: tokens=none
-- src/modes/Ultimate.cpp:461: tokens=directions.x, directions.y
-- src/modes/Ultimate.cpp:509: tokens=inputs.nunchuk_connected, inputs.nunchuk_x, inputs.nunchuk_y
+- src/modes/Ultimate.cpp:380: tokens=none
+- src/modes/Ultimate.cpp:391: tokens=none
+- src/modes/Ultimate.cpp:399: tokens=none
+- src/modes/Ultimate.cpp:406: tokens=none
+- src/modes/Ultimate.cpp:429: tokens=none
+- src/modes/Ultimate.cpp:495: tokens=directions.x, directions.y
+- src/modes/Ultimate.cpp:545: tokens=inputs.nunchuk_connected, inputs.nunchuk_x, inputs.nunchuk_y
 leftStickY:
 - src/core/ControllerMode.cpp:47: tokens=none
 - src/core/ControllerMode.cpp:66: tokens=directions.vertical, directions.y
 - src/core/ControllerMode.cpp:69: tokens=directions.horizontal, directions.vertical, directions.y
-- src/modes/Ultimate.cpp:364: tokens=none
-- src/modes/Ultimate.cpp:375: tokens=none
-- src/modes/Ultimate.cpp:383: tokens=none
-- src/modes/Ultimate.cpp:390: tokens=none
-- src/modes/Ultimate.cpp:395: tokens=none
-- src/modes/Ultimate.cpp:462: tokens=directions.x, directions.y
-- src/modes/Ultimate.cpp:510: tokens=inputs.nunchuk_connected, inputs.nunchuk_x, inputs.nunchuk_y
+- src/modes/Ultimate.cpp:381: tokens=none
+- src/modes/Ultimate.cpp:392: tokens=none
+- src/modes/Ultimate.cpp:400: tokens=none
+- src/modes/Ultimate.cpp:407: tokens=none
+- src/modes/Ultimate.cpp:430: tokens=none
+- src/modes/Ultimate.cpp:496: tokens=directions.x, directions.y
+- src/modes/Ultimate.cpp:546: tokens=inputs.nunchuk_connected, inputs.nunchuk_x, inputs.nunchuk_y
 rightStickX:
 - src/core/ControllerMode.cpp:48: tokens=none
 - src/core/ControllerMode.cpp:78: tokens=directions.cx
 - src/core/ControllerMode.cpp:81: tokens=directions.cx
-- src/modes/Ultimate.cpp:396: tokens=none
-- src/modes/Ultimate.cpp:480: tokens=directions.cx, directions.cy
-- src/modes/Ultimate.cpp:503: tokens=inputs.nunchuk_c
+- src/modes/Ultimate.cpp:424: tokens=none
+- src/modes/Ultimate.cpp:431: tokens=none
+- src/modes/Ultimate.cpp:514: tokens=directions.cx, directions.cy
+- src/modes/Ultimate.cpp:539: tokens=inputs.nunchuk_c
 rightStickY:
 - src/core/ControllerMode.cpp:49: tokens=none
 - src/core/ControllerMode.cpp:87: tokens=directions.cy
 - src/core/ControllerMode.cpp:90: tokens=directions.cy
-- src/modes/Ultimate.cpp:397: tokens=none
-- src/modes/Ultimate.cpp:481: tokens=directions.cx, directions.cy
-- src/modes/Ultimate.cpp:504: tokens=inputs.nunchuk_c
+- src/modes/Ultimate.cpp:425: tokens=none
+- src/modes/Ultimate.cpp:432: tokens=none
+- src/modes/Ultimate.cpp:515: tokens=directions.cx, directions.cy
+- src/modes/Ultimate.cpp:540: tokens=inputs.nunchuk_c
 triggerLAnalog:
-- src/modes/Ultimate.cpp:490: tokens=none
-- src/modes/Ultimate.cpp:492: tokens=none
+- src/modes/Ultimate.cpp:526: tokens=none
+- src/modes/Ultimate.cpp:528: tokens=none
 triggerRAnalog:
-- src/modes/Ultimate.cpp:496: tokens=none
-- src/modes/Ultimate.cpp:498: tokens=none
+- src/modes/Ultimate.cpp:532: tokens=none
+- src/modes/Ultimate.cpp:534: tokens=none

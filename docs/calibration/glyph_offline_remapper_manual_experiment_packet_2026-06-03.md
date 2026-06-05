@@ -54,7 +54,7 @@ and their current SHA-256 hashes:
 
 | Input | Path | SHA-256 |
 | --- | --- | --- |
-| Senscope export package sample | `docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json` | `c5f1a687315571ca1a7d634ba1c50d52f4d1a035d8c538d7920133173d622d27` |
+| Senscope export package sample | `docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json` | `29bd4e601b8762d068b7fb809707b57537859ba647cb48e578900d9c9111d4b7` |
 | Runtime config candidate sample | `docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json` | `e4e9b0e47b36f9f8585b37ac0e9f3cba2b6ae2833d79121e99af602c9d48543f` |
 | Active profile artifact | `docs/calibration/artifacts/glyph_ultimate_mvp_lt3_active_config_PROFILE.json` | `0a9c70f6a0c1bb8c347a811df2ec327c176482dc9c35f433c45bd3454e704707` |
 

@@ -37,10 +37,18 @@ REQUIRED_DOC_PHRASES = (
     "RF5 becomes forced Up plus A",
     "RF3 + RF4 must not activate Tilt3",
     "RF4 + RF2 changes only the RF4 modifier X offset to -41",
+    "RF4 mirrored/flipper/modifier behavior is suppressed while any C-stick button",
+    "RT1 + RF4 custom table is exempt from RF4 C-stick suppression",
     "RT1 base role becomes the current Tilt2 table",
     "Mode + RT1 uses MTilt2",
     "RF9 nulls both left stick and right stick inputs",
     "RF9 + RF4 disables all RF9 nullification",
+    "RF9 + RF4 + C-stick suppresses RF4 behavior",
+    "RF9 + RF3 suppresses base RF3 X",
+    "RF9 + RF3 + C-stick restores base RF3 X",
+    "direction source is the resolved digital left/right state",
+    "RF3 + RT5 + resolved left: right stick `(95,165)`",
+    "existing C-stick horizontal or two-axis diagonal/ASDI behavior is preserved",
     "LT1 = old LT3 = L",
     "LT4 = old LT1 = X2 / MX2",
     "LT5 = old LT4 = X1 / MX1",
@@ -134,7 +142,11 @@ REQUIRED_PRIORITY = {
     "LF4_submode_overrides_LT2_sublayer",
     "RT1_RF4_custom_overrides_RF4_Tilt1_and_RT1_Tilt2",
     "RF4_RF2_base_minus_41_inactive_under_LF4_or_LT2",
-    "RF9_null_last_except_RF9_RF4_disables_null",
+    "RF9_null_last_except_behaviorally_available_RF9_RF4_disables_null",
+    "RT1_RF4_custom_exempt_from_RF4_cstick_suppression",
+    "RF4_modifier_behavior_suppressed_by_cstick_outside_custom_exception",
+    "existing_cstick_two_axis_asdi_preserved_outside_RF3_vertical_special",
+    "RF3_vertical_cstick_special_before_RF9_null",
     "nunchuk_preserved_after_runtime_overrides",
 }
 
@@ -237,10 +249,63 @@ def validate_fixture(payload: dict[str, Any]) -> None:
     rf9 = require_object(payload, "rf9_null_behavior")
     if rf9.get("nulls_left_stick") is not True or rf9.get("nulls_right_stick") is not True:
         fail("RF9 must null both sticks")
-    if rf9.get("exception") != "RF9_plus_RF4_disables_all_RF9_nullification":
-        fail("RF9 exception must be RF9_plus_RF4_disables_all_RF9_nullification")
+    if rf9.get("exception") != "RF9_plus_behaviorally_available_RF4_disables_all_RF9_nullification":
+        fail("RF9 exception must be behaviorally available RF4")
     if rf9.get("exception_presses_extra_button") is not False:
         fail("RF9+RF4 exception must not press an extra button")
+    if rf9.get("rf4_cstick_suppressed_exception") != "RF9_plus_RF4_plus_Cstick_reenables_RF9_nullification":
+        fail("RF9+RF4+C-stick must re-enable RF9 nullification")
+
+    rf4_cstick = require_object(payload, "rf4_cstick_suppression")
+    if rf4_cstick.get("cstick_buttons") != ["RT2", "RT3", "RT4", "RT5"]:
+        fail("RF4 C-stick suppression button set drifted")
+    require_superset(
+        rf4_cstick.get("suppresses", []),
+        {
+            "base_RF4_Tilt1",
+            "base_RF4_RF2_Tilt1_minus_41",
+            "LT2_RF4_flipper",
+            "LF4_RF4_Tilt1",
+        },
+        "rf4_cstick_suppression.suppresses",
+    )
+    if rf4_cstick.get("rt1_rf4_custom_exception") is not True:
+        fail("RT1+RF4 custom must be exempt from RF4 C-stick suppression")
+    if rf4_cstick.get("lt2_rf3_rf4_cstick_fallback") != "LT2_RF3_B_plus_normal_x":
+        fail("LT2+RF3+RF4+C-stick fallback drifted")
+    if rf4_cstick.get("rf9_rf4_cstick_reenables_null") is not True:
+        fail("RF9+RF4+C-stick must re-enable null")
+
+    rf9_rf3 = require_object(payload, "rf9_rf3_x_behavior")
+    if rf9_rf3.get("base_rf3_x_active_when") != ["RF3", "not_LT2", "not_LF4"]:
+        fail("base RF3 X scope drifted")
+    if rf9_rf3.get("rf9_suppresses_base_rf3_x_without_cstick") is not True:
+        fail("RF9 must suppress base RF3 X without C-stick")
+    if rf9_rf3.get("cstick_restores_base_rf3_x_under_rf9") is not True:
+        fail("C-stick must restore base RF3 X under RF9")
+    if rf9_rf3.get("restoration_scope") != "base_RF3_X_only":
+        fail("RF9+RF3 X restoration scope drifted")
+    require_superset(
+        rf9_rf3.get("does_not_convert", []),
+        {"LT2_RF3_B_normal_x", "LF4_RF3_forced_up"},
+        "rf9_rf3_x_behavior.does_not_convert",
+    )
+
+    rf3_cstick = require_object(payload, "rf3_vertical_cstick_special")
+    if rf3_cstick.get("direction_source") != "EffectiveDirectionState.left_right":
+        fail("RF3 vertical C-stick direction source must be resolved digital left/right")
+    expected_coordinates = {
+        "RF3_RT5_resolved_left": [95, 165],
+        "RF3_RT5_resolved_right": [161, 165],
+        "RF3_RT2_resolved_left": [95, 91],
+        "RF3_RT2_resolved_right": [161, 91],
+    }
+    if rf3_cstick.get("coordinates") != expected_coordinates:
+        fail("RF3 vertical C-stick coordinates drifted")
+    if rf3_cstick.get("neutral_horizontal") != "preserve_normal_cstick_vertical":
+        fail("RF3 vertical C-stick neutral-horizontal behavior drifted")
+    if rf3_cstick.get("rt3_rt4_active") != "preserve_existing_cstick_horizontal_or_two_axis_asdi":
+        fail("RF3 vertical C-stick RT3/RT4 preservation drifted")
 
     lt2 = require_object(payload, "lt2_sublayer")
     if lt2.get("base_without_sublayer") != "Y1_MY1" or lt2.get("LF4_overrides_LT2") is not True:

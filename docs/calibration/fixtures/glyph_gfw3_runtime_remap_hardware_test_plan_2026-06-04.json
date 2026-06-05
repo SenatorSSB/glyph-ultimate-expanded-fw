@@ -106,6 +106,14 @@
       "status": "not_executed"
     },
     {
+      "row_id": "rf4_cstick_suppresses_base_tilt1",
+      "category": "cstick_suppression",
+      "input_condition": "RF4 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "RF4 base Tilt1 modifier behavior is suppressed while normal C-stick output remains active.",
+      "status": "not_executed"
+    },
+    {
       "row_id": "base_rt1_tilt2",
       "category": "base_button_role_changes",
       "input_condition": "RT1 plus LS directions.",
@@ -130,11 +138,27 @@
       "status": "not_executed"
     },
     {
+      "row_id": "rt1_rf4_cstick_custom_preserved",
+      "category": "custom_modifier",
+      "input_condition": "RT1 + RF4 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "RT1+RF4 custom table remains active and is not suppressed by C-stick.",
+      "status": "not_executed"
+    },
+    {
       "row_id": "rf4_rf2_minus41",
       "category": "priority",
       "input_condition": "RF4 + RF2 plus LS directions.",
       "directions": "1..9",
       "expected_result": "RF4 keeps Tilt1 behavior except X offset changes to -41.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf4_rf2_cstick_suppresses_minus41",
+      "category": "cstick_suppression",
+      "input_condition": "RF4 + RF2 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "RF4+RF2 Tilt1-minus-41 modifier behavior is suppressed while RF2 still asserts B.",
       "status": "not_executed"
     },
     {
@@ -148,9 +172,33 @@
     {
       "row_id": "rf9_rf4_null_disabled",
       "category": "null_modifier",
-      "input_condition": "RF9 + RF4 plus LS/C-stick directions.",
-      "directions": "1..9 plus C-stick smoke",
+      "input_condition": "RF9 + RF4 with no C-stick button held.",
+      "directions": "1..9",
       "expected_result": "RF9 performs no left-stick null, no right-stick null, and does not replace RF4 modifier behavior.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf4_cstick_reenables_null",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF4 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "C-stick suppresses RF4 behavior, so RF9 null is active again and centers both sticks.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf3_suppresses_x",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF3 with no C-stick button held.",
+      "directions": "N/A",
+      "expected_result": "RF9 suppresses base RF3 X.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf3_cstick_restores_x",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF3 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "C-stick restores base RF3 X; RF9 analog null behavior remains late.",
       "status": "not_executed"
     },
     {
@@ -202,6 +250,14 @@
       "status": "not_executed"
     },
     {
+      "row_id": "lt2_rf4_cstick_suppresses_flipper",
+      "category": "cstick_suppression",
+      "input_condition": "LT2 + RF4 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "C-stick suppresses LT2+RF4 flipper behavior.",
+      "status": "not_executed"
+    },
+    {
       "row_id": "lt2_rf3_b_normal_x",
       "category": "lt2_sublayer",
       "input_condition": "LT2 + RF3.",
@@ -215,6 +271,14 @@
       "input_condition": "LT2 + RF3 + RF4.",
       "directions": "1..9",
       "expected_result": "B asserted and RF4 -41 flipper wins over RF3 normal-x.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "lt2_rf3_rf4_cstick_fallback_rf3",
+      "category": "cstick_suppression",
+      "input_condition": "LT2 + RF3 + RF4 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "C-stick suppresses RF4 flipper, so behavior falls back to LT2+RF3 B plus normal-x.",
       "status": "not_executed"
     },
     {
@@ -239,6 +303,14 @@
       "input_condition": "LF4 + RF4.",
       "directions": "1..9",
       "expected_result": "LF4 asserts B and RF4 selects Tilt1.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "lf4_rf4_cstick_suppresses_tilt1",
+      "category": "cstick_suppression",
+      "input_condition": "LF4 + RF4 plus any RT2/RT3/RT4/RT5 C-stick button.",
+      "directions": "representative",
+      "expected_result": "C-stick suppresses LF4+RF4 Tilt1 while LF4 still asserts B.",
       "status": "not_executed"
     },
     {
@@ -279,6 +351,62 @@
       "input_condition": "LF4 + LT2 with RF2/RF3/RF4 spot checks.",
       "directions": "representative",
       "expected_result": "LF4 submode behavior wins over LT2 sublayer behavior.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf3_rt5_left_special",
+      "category": "rf3_vertical_cstick_special",
+      "input_condition": "RF3 + RT5 + resolved digital Left.",
+      "directions": "left",
+      "expected_result": "Right stick raw output is (95,165).",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf3_rt5_right_special",
+      "category": "rf3_vertical_cstick_special",
+      "input_condition": "RF3 + RT5 + resolved digital Right.",
+      "directions": "right",
+      "expected_result": "Right stick raw output is (161,165).",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf3_rt2_left_special",
+      "category": "rf3_vertical_cstick_special",
+      "input_condition": "RF3 + RT2 + resolved digital Left.",
+      "directions": "left",
+      "expected_result": "Right stick raw output is (95,91).",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf3_rt2_right_special",
+      "category": "rf3_vertical_cstick_special",
+      "input_condition": "RF3 + RT2 + resolved digital Right.",
+      "directions": "right",
+      "expected_result": "Right stick raw output is (161,91).",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf3_vertical_no_horizontal_preserves_normal",
+      "category": "rf3_vertical_cstick_special",
+      "input_condition": "RF3 + RT2 or RT5 with no resolved digital left/right.",
+      "directions": "neutral horizontal",
+      "expected_result": "Normal C-stick vertical behavior is preserved; no special diagonal applies.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf3_horizontal_unaffected",
+      "category": "rf3_vertical_cstick_special",
+      "input_condition": "RF3 + RT3 or RT4.",
+      "directions": "horizontal C-stick",
+      "expected_result": "Normal C-left/C-right behavior is preserved; no special coordinate applies.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf3_two_axis_cstick_preserved",
+      "category": "rf3_vertical_cstick_special",
+      "input_condition": "RF3 + vertical C-stick plus RT3 or RT4.",
+      "directions": "two-axis C-stick",
+      "expected_result": "Existing two-axis C-stick diagonal/ASDI behavior is preserved, not replaced by the RF3 vertical-special rule.",
       "status": "not_executed"
     },
     {
