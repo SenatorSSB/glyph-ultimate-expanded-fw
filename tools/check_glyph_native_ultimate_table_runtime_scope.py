@@ -351,7 +351,10 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"state\.x2_active\s*=\s*inputs\.lt4\s*;", source, "X2 moved to LT4")
     require(r"state\.y1_active\s*=\s*inputs\.lt2\s*&&\s*!inputs\.lf4\s*&&\s*!lt2_sublayer_active\s*;", source, "LT2 Y1 suppressed by LF4 or LT2 sublayer")
     require(r"state\.ls_to_dpad_active\s*=\s*inputs\.rf13\s*;", source, "LS->DPad anchor rf13")
-    require(r"state\.null_modifier_active\s*=\s*inputs\.rf9\s*&&\s*!inputs\.rf4\s*;", source, "RF9 null disabled by RF4")
+    require(r"state\.rf4_modifier_suppressed_by_cstick\s*=\s*rf4_modifier_suppressed_by_cstick\s*;", source, "RF4 C-stick suppression anchor")
+    require(r"state\.rf4_behavior_available\s*=\s*rf4_behavior_available\s*;", source, "RF4 behavioral availability anchor")
+    require(r"state\.rf3_x_suppressed_by_rf9\s*=\s*rf3_x_suppressed_by_rf9\s*;", source, "RF9 RF3 X suppression anchor")
+    require(r"state\.null_modifier_active\s*=\s*inputs\.rf9\s*&&\s*!state\.rf4_behavior_available\s*;", source, "RF9 null disabled by behaviorally available RF4")
     require(r"state\.layer_left_active\s*=\s*false\s*;", source, "LF8 layer-left scratched")
     require(r"state\.layer_right_active\s*=\s*false\s*;", source, "LF7 layer-right scratched")
     require(r"state\.lf4_submode_active\s*=\s*inputs\.lf4\s*;", source, "LF4 sub-mode activation")
@@ -365,7 +368,7 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"state\.rf4_layer_flipper_active\s*=\s*lt2_rf4_active\s*;", source, "LT2 RF4 flipper anchor")
     require(r"state\.tilt3_effective\s*=\s*false\s*;", source, "RF3+RF4 Tilt3 fusion scratched")
     require(r"state\.z_airdodge_override_active\s*=\s*inputs\.rf6\s*;", source, "RF6 Z-airdodge anchor")
-    require(r"const\s+bool\s+tilt1_pressed\s*=\s*inputs\.rf4\s*&&\s*\(\s*!inputs\.lt2\s*\|\|\s*inputs\.lf4\s*\)\s*&&\s*!inputs\.rt1\s*&&\s*!lf4_rf2_deactivates_rf4\s*;", source, "RF4 base/LF4-over-LT2 Tilt1 gate")
+    require(r"const\s+bool\s+tilt1_pressed\s*=\s*rf4_behavior_available\s*&&\s*\(\s*!inputs\.lt2\s*\|\|\s*inputs\.lf4\s*\)\s*&&\s*!inputs\.rt1\s*&&\s*!lf4_rf2_deactivates_rf4\s*;", source, "RF4 base/LF4-over-LT2 Tilt1 gate")
     require(r"const\s+bool\s+tilt2_pressed\s*=\s*inputs\.rt1\s*&&\s*!inputs\.rf4\s*;", source, "RT1 base Tilt2 gate")
     require(
         r"layer_normal_x_effective\s*=\s*layer_normal_x_active\s*&&\s*!layer_flipper_effective\s*;",
@@ -379,9 +382,9 @@ def ensure_required_shapes(source: str, block: str) -> None:
     require(r"outputs\.triggerRDigital\s*=\s*inputs\.rf16\s*\|\|\s*inputs\.lt3\s*;", source, "LT3 mapped to R with RF16")
     require(r"outputs\.a\s*=\s*base_rf1_a_active\s*\|\|\s*inputs\.lt6\s*\|\|\s*inputs\.rf5\s*;", source, "RF5 Up+A carrier")
     require(r"outputs\.b\s*=\s*base_rf2_b_active\s*\|\|\s*inputs\.lf4\s*\|\|\s*inputs\.rf7\s*\|\|\s*\(\s*inputs\.lt2\s*&&\s*!inputs\.lf4\s*&&\s*inputs\.rf3\s*\)\s*;", source, "RF2/LF4/RF7/LT2 RF3 B paths")
-    require(r"outputs\.x\s*=\s*base_rf3_x_active\s*\|\|\s*lt2_rf1_x_active\s*\|\|\s*lf4_rf2_x_active\s*;", source, "RF3/LT2 RF1/LF4 RF2 X paths")
+    require(r"outputs\.x\s*=\s*\(roles\.base_rf3_x_active\s*&&\s*!roles\.rf3_x_suppressed_by_rf9\)\s*\|\|\s*lt2_rf1_x_active\s*\|\|\s*lf4_rf2_x_active\s*;", source, "RF3/LT2 RF1/LF4 RF2 X paths")
     require(
-        r"SelectStickTable\(\s*roles\.mode_active,\s*roles\.x1_active,\s*roles\.x2_active,\s*roles\.y1_active,\s*roles\.layer_rf3_normal_x_active,\s*roles\.rf4_layer_flipper_active,\s*rt1_rf4_custom_active\s*\|\|\s*\(roles\.tilt1_effective\s*&&\s*!rf4_rf2_minus41_active\),\s*rt1_rf4_custom_active\s*\|\|\s*roles\.tilt2_effective,\s*roles\.tilt3_effective",
+        r"SelectStickTable\(\s*roles\.mode_active,\s*roles\.x1_active,\s*roles\.x2_active,\s*roles\.y1_active,\s*roles\.layer_rf3_normal_x_active,\s*roles\.rf4_layer_flipper_active,\s*roles\.rt1_rf4_custom_active\s*\|\|\s*\(roles\.tilt1_effective\s*&&\s*!rf4_rf2_minus41_active\),\s*roles\.rt1_rf4_custom_active\s*\|\|\s*roles\.tilt2_effective,\s*roles\.tilt3_effective",
         source,
         "table selection includes GFW3 RT1+RF4 and RF4+RF2 policy",
         flags=re.DOTALL,
@@ -430,9 +433,9 @@ def ensure_required_shapes(source: str, block: str) -> None:
         flags=re.DOTALL,
     )
     require(
-        r"ApplyDirectionPlusAOverride\(roles,\s*outputs\).*?if\s*\(\s*roles\.z_airdodge_override_active\s*\).*?ApplyZAirdodgeOverride\(effective_directions,\s*outputs\);.*?if\s*\(\s*roles\.hard_up_b_active\s*\).*?ApplyHardUpBOverride\(effective_directions,\s*outputs\);.*?if\s*\(\s*directions\.cx\s*!=\s*0\s*&&\s*directions\.cy\s*!=\s*0\s*\).*?if\s*\(\s*roles\.null_modifier_active\s*\).*?ApplyNullOverride\(outputs\);",
+        r"ApplyDirectionPlusAOverride\(roles,\s*outputs\).*?if\s*\(\s*roles\.z_airdodge_override_active\s*\).*?ApplyZAirdodgeOverride\(effective_directions,\s*outputs\);.*?if\s*\(\s*roles\.hard_up_b_active\s*\).*?ApplyHardUpBOverride\(effective_directions,\s*outputs\);.*?if\s*\(\s*directions\.cx\s*!=\s*0\s*&&\s*directions\.cy\s*!=\s*0\s*\).*?ApplyRF3VerticalCStickDiagonalOverride\(inputs,\s*effective_directions,\s*directions,\s*outputs\);.*?if\s*\(\s*roles\.null_modifier_active\s*\).*?ApplyNullOverride\(outputs\);",
         block,
-        "RF9 null remains final after table, direction-plus-A, RF6, RF7, and C-stick ASDI",
+        "RF9 null remains final after table, direction-plus-A, RF6, RF7, C-stick ASDI, and RF3 vertical C-stick special",
         flags=re.DOTALL,
     )
     require(

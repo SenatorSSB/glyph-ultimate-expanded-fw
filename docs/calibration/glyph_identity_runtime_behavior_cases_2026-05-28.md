@@ -80,8 +80,10 @@ Fixture case IDs:
 - `gfw3_rf3_base_x`
 - `gfw3_rf2_base_b`
 - `gfw3_rf4_base_tilt1`
+- `gfw3_rf4_rt2_suppresses_tilt1`
 - `gfw3_rt1_base_tilt2`
 - `gfw3_mode_rf4_mode_default`
+- `gfw3_mode_rf4_rt2_suppressed_mode_default`
 - `gfw3_mode_rt1_mtilt2`
 - `gfw3_mode_rt1_rf4_custom`
 - `gfw3_rf3_rf4_no_tilt3`
@@ -90,6 +92,7 @@ Fixture case IDs:
 
 Fixture case IDs:
 
+- `gfw3_rt1_rf4_rt2_custom_preserved`
 - `gfw3_rt1_rf4_custom_1`
 - `gfw3_rt1_rf4_custom_2`
 - `gfw3_rt1_rf4_custom_3`
@@ -104,6 +107,7 @@ Fixture case IDs:
 - `gfw3_rf4_rf2_base_minus41_neutral`
 - `gfw3_rf4_rf2_base_minus41_up`
 - `gfw3_rf4_rf2_base_minus41_diag1`
+- `gfw3_rf4_rf2_rt2_suppresses_minus41`
 
 ## RF9 null cases
 
@@ -111,6 +115,11 @@ Fixture case IDs:
 
 - `gfw3_rf9_nulls_left_and_right_stick`
 - `gfw3_rf9_rf4_disables_null`
+- `gfw3_rf9_rf4_rt4_null_reenabled`
+- `gfw3_rf9_rf3_suppresses_x`
+- `gfw3_rf9_rf3_rt2_restores_x`
+- `gfw3_lt2_rf9_rf3_rt2_remains_b_not_x`
+- `gfw3_lf4_rf9_rf3_rt2_remains_forced_up_not_x`
 
 ## LT physical move cycle cases
 
@@ -134,8 +143,10 @@ Fixture case IDs:
 
 - `gfw3_lt2_base_y1`
 - `gfw3_lt2_rf4_flipper`
+- `gfw3_lt2_rf4_rt2_suppresses_flipper`
 - `gfw3_lt2_rf3_b_normal_x`
 - `gfw3_lt2_rf3_rf4_b_flipper`
+- `gfw3_lt2_rf3_rf4_rt2_falls_back_to_rf3`
 - `gfw3_lt2_rf2_forced_up`
 - `gfw3_lt2_rf1_x`
 - `gfw3_lt2_rf1_rt2_suppresses_x`
@@ -145,6 +156,7 @@ Fixture case IDs:
 Fixture case IDs:
 
 - `gfw3_lf4_rf4_tilt1`
+- `gfw3_lf4_rf4_rt2_suppresses_tilt1`
 - `gfw3_lf4_rf3_forced_up`
 - `gfw3_lf4_rf2_x`
 - `gfw3_lf4_rf2_rf4_deactivates_rf4`
@@ -153,6 +165,19 @@ Fixture case IDs:
 - `gfw3_lf4_lt2_rf4_tilt1`
 - `gfw3_lf4_lt2_rf2_rf4_deactivates_rf4`
 - `gfw3_lf4_lt2_rf2_rf4_rt2_suppresses_x_deactivates_rf4`
+
+## RF3 vertical C-stick cases
+
+Fixture case IDs:
+
+- `gfw3_rf3_lf3_rt5_cstick_up_left_special`
+- `gfw3_rf3_lf1_rt5_cstick_up_right_special`
+- `gfw3_rf3_lf3_rt2_cstick_down_left_special`
+- `gfw3_rf3_lf1_rt2_cstick_down_right_special`
+- `gfw3_rf3_rt5_no_horizontal_normal_cup`
+- `gfw3_rf3_rt2_no_horizontal_normal_cdown`
+- `gfw3_rf3_lf1_rt4_normal_cright`
+- `gfw3_rf3_lf1_rt5_rt4_preserves_two_axis_cstick`
 
 ## Preservation cases
 

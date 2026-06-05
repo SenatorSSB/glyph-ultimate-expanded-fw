@@ -93,12 +93,45 @@
     "only_x_offset_changes": true,
     "inactive_under": ["LF4_submode", "LT2_sublayer"]
   },
+  "rf4_cstick_suppression": {
+    "cstick_buttons": ["RT2", "RT3", "RT4", "RT5"],
+    "suppresses": [
+      "base_RF4_Tilt1",
+      "base_RF4_RF2_Tilt1_minus_41",
+      "LT2_RF4_flipper",
+      "LF4_RF4_Tilt1"
+    ],
+    "rt1_rf4_custom_exception": true,
+    "lt2_rf3_rf4_cstick_fallback": "LT2_RF3_B_plus_normal_x",
+    "rf9_rf4_cstick_reenables_null": true
+  },
   "rf9_null_behavior": {
     "active": "RF9",
     "nulls_left_stick": true,
     "nulls_right_stick": true,
-    "exception": "RF9_plus_RF4_disables_all_RF9_nullification",
-    "exception_presses_extra_button": false
+    "exception": "RF9_plus_behaviorally_available_RF4_disables_all_RF9_nullification",
+    "exception_presses_extra_button": false,
+    "rf4_cstick_suppressed_exception": "RF9_plus_RF4_plus_Cstick_reenables_RF9_nullification"
+  },
+  "rf9_rf3_x_behavior": {
+    "base_rf3_x_active_when": ["RF3", "not_LT2", "not_LF4"],
+    "rf9_suppresses_base_rf3_x_without_cstick": true,
+    "cstick_restores_base_rf3_x_under_rf9": true,
+    "restoration_scope": "base_RF3_X_only",
+    "does_not_convert": ["LT2_RF3_B_normal_x", "LF4_RF3_forced_up"]
+  },
+  "rf3_vertical_cstick_special": {
+    "trigger": ["physical_RF3", "RT2_or_RT5", "resolved_digital_left_or_right", "not_RT3", "not_RT4"],
+    "direction_source": "EffectiveDirectionState.left_right",
+    "not_direction_sources": ["selected_modifier_table", "final_leftStickX", "RF7", "RF6", "RF9", "RT1_RF4", "Tilt1", "Tilt2", "analog_modifier"],
+    "coordinates": {
+      "RF3_RT5_resolved_left": [95, 165],
+      "RF3_RT5_resolved_right": [161, 165],
+      "RF3_RT2_resolved_left": [95, 91],
+      "RF3_RT2_resolved_right": [161, 91]
+    },
+    "neutral_horizontal": "preserve_normal_cstick_vertical",
+    "rt3_rt4_active": "preserve_existing_cstick_horizontal_or_two_axis_asdi"
   },
   "lt2_sublayer": {
     "base_without_sublayer": "Y1_MY1",
@@ -124,8 +157,12 @@
   "priority": [
     "LF4_submode_overrides_LT2_sublayer",
     "RT1_RF4_custom_overrides_RF4_Tilt1_and_RT1_Tilt2",
+    "RT1_RF4_custom_exempt_from_RF4_cstick_suppression",
+    "RF4_modifier_behavior_suppressed_by_cstick_outside_custom_exception",
     "RF4_RF2_base_minus_41_inactive_under_LF4_or_LT2",
-    "RF9_null_last_except_RF9_RF4_disables_null",
+    "existing_cstick_two_axis_asdi_preserved_outside_RF3_vertical_special",
+    "RF3_vertical_cstick_special_before_RF9_null",
+    "RF9_null_last_except_behaviorally_available_RF9_RF4_disables_null",
     "nunchuk_preserved_after_runtime_overrides"
   ],
   "forbidden_claims": [

@@ -59,13 +59,23 @@ Required base-role changes:
 - RF4 base role becomes the current Tilt1 table.
 - RF4 + RF2 changes only the RF4 modifier X offset to -41 while preserving the
   rest of Tilt1.
+- RF4 mirrored/flipper/modifier behavior is suppressed while any C-stick button
+  `RT2`, `RT3`, `RT4`, or `RT5` is held.
+- RT1 + RF4 custom table is exempt from RF4 C-stick suppression and remains
+  active even with a C-stick button held.
 - RT1 no longer carries Z.
 - RT1 base role becomes the current Tilt2 table.
 - Mode + RT1 uses MTilt2.
 - RT1 + RF4 uses the custom table in this spec and has priority over RF4-alone
   and RT1-alone modifiers.
 - RF9 nulls both left stick and right stick inputs.
-- RF9 + RF4 disables all RF9 nullification and does not press any extra button.
+- RF9 + RF4 disables all RF9 nullification only while RF4 behavior is available
+  and does not press any extra button.
+- RF9 + RF4 + C-stick suppresses RF4 behavior, so RF9 nullification becomes
+  active again and nulls both sticks.
+- RF9 + RF3 suppresses base RF3 X while no C-stick button is held.
+- RF9 + RF3 + C-stick restores base RF3 X; this restoration applies only to the
+  base RF3 X role and does not convert LT2+RF3 or LF4+RF3 into X.
 - RF7 hard Up+B remains unchanged.
 - RF13 LS->DPad remains unchanged.
 
@@ -135,6 +145,10 @@ flipper tables:
 - normal-x: `[(87,51), (128,51), (169,51), (87,128), (128,128), (169,128), (87,205), (128,205), (169,205)]`;
 - flipper: `[(169,51), (128,51), (87,51), (169,128), (128,128), (87,128), (169,205), (128,205), (87,205)]`.
 
+If any C-stick button is held, LT2+RF4 flipper behavior is suppressed. For
+LT2+RF3+RF4 with C-stick held, RF4 no longer wins; the result falls back to
+LT2+RF3 B plus normal-x behavior.
+
 ## LF4 submode
 
 LF4 overrides LT2 behavior when both are held.
@@ -149,6 +163,32 @@ While LF4 is held:
 - If RT2, RT3, RT4, or RT5 is pressed, RF2's X is suppressed.
 - RF2 still deactivates RF4 when RF2's X is suppressed by C-stick.
 - RT2/RT3/RT4/RT5 retain normal C-stick behavior.
+- LF4+RF4 Tilt1 behavior is suppressed while any C-stick button is held.
+
+## RF3 vertical C-stick special
+
+When physical RF3 is held and C-stick Up/Down is active, C-stick output becomes
+a diagonal only if resolved digital left/right direction is nonzero.
+
+The direction source is the resolved digital left/right state represented by
+`EffectiveDirectionState.left/right`. It does not come from the selected
+modifier table, final left-stick analog output, RF7, RF6, RF9, RT1+RF4, Tilt1,
+Tilt2, or any analog modifier.
+
+Coordinates:
+
+- RF3 + RT5 + resolved left: right stick `(95,165)`.
+- RF3 + RT5 + resolved right: right stick `(161,165)`.
+- RF3 + RT2 + resolved left: right stick `(95,91)`.
+- RF3 + RT2 + resolved right: right stick `(161,91)`.
+
+If resolved left/right is neutral, normal C-stick vertical behavior is
+preserved. If RT3 or RT4 is pressed, this RF3 vertical-special rule does not
+apply and existing C-stick horizontal or two-axis diagonal/ASDI behavior is
+preserved.
+
+Existing C-stick horizontal or two-axis diagonal/ASDI behavior is preserved
+outside this RF3 vertical-special case.
 
 ## Priority expectations
 
@@ -156,10 +196,15 @@ Expected high-level priority:
 
 - LF4 submode overrides LT2 sublayer.
 - RT1+RF4 custom table overrides RF4-alone Tilt1 and RT1-alone Tilt2.
+- RT1+RF4 custom table remains active under C-stick.
+- RF4 modifier behavior is suppressed by C-stick outside the RT1+RF4 custom
+  exception.
 - RF4+RF2 base interaction changes RF4's X offset to -41 unless LF4 or LT2
   sublayer overrides are active.
+- Existing C-stick two-axis diagonal/ASDI behavior is preserved outside the RF3
+  vertical-special case.
 - RF9 null remains last among analog overrides except RF9+RF4 disables RF9
-  nulling entirely.
+  nulling while RF4 behavior is available.
 - RF9 null also nulls right stick when active.
 - Nunchuk behavior remains preserved and untested; do not alter it.
 
