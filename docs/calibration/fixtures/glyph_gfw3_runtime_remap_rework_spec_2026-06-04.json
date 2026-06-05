@@ -107,6 +107,7 @@
   },
   "rf9_null_behavior": {
     "active": "RF9",
+    "full_null_mode_when": "RF9_and_not_RF9_base_RF3_X_mode",
     "nulls_left_stick": true,
     "nulls_right_stick": true,
     "exception": "RF9_plus_behaviorally_available_RF4_disables_all_RF9_nullification",
@@ -115,8 +116,14 @@
   },
   "rf9_rf3_x_behavior": {
     "base_rf3_x_active_when": ["RF3", "not_LT2", "not_LF4"],
+    "rf9_base_rf3_x_mode_active_when": ["RF9", "RF3", "not_LT2", "not_LF4"],
     "rf9_suppresses_base_rf3_x_without_cstick": true,
     "cstick_restores_base_rf3_x_under_rf9": true,
+    "full_nulls_left_stick": false,
+    "full_nulls_right_stick": false,
+    "cstick_output_remains_active": true,
+    "rf4_behavior_available_in_mode": false,
+    "rt1_rf4_custom_available_in_mode": false,
     "restoration_scope": "base_RF3_X_only",
     "does_not_convert": ["LT2_RF3_B_normal_x", "LF4_RF3_forced_up"]
   },
@@ -162,7 +169,7 @@
     "RF4_RF2_base_minus_41_inactive_under_LF4_or_LT2",
     "existing_cstick_two_axis_asdi_preserved_outside_RF3_vertical_special",
     "RF3_vertical_cstick_special_before_RF9_null",
-    "RF9_null_last_except_behaviorally_available_RF9_RF4_disables_null",
+    "RF9_full_null_last_except_behaviorally_available_RF9_RF4_disables_null_and_RF9_base_RF3_X_mode",
     "nunchuk_preserved_after_runtime_overrides"
   ],
   "forbidden_claims": [

@@ -1254,10 +1254,422 @@
       "category": "rf9_null",
       "input_buttons": [
         "RF9",
-        "RF3"
+        "RF3",
+        "LF1"
       ],
       "expected": {
         "digital_buttons": [],
+        "effective_direction": {
+          "left": false,
+          "right": true,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf9_base_rf3_x_mode_table_output",
+        "table_id": "Default",
+        "direction_index": 6,
+        "left_stick": [
+          195,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          128
+        ],
+        "suppressed_buttons": [
+          "X"
+        ]
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RF9 suppresses the base RF3 X role when no C-stick button is held.",
+        "RF9 base-RF3-X suppression mode does not full-null the left stick."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf3_rt2_restores_x",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF3",
+        "RT2"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "X"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf9_base_rf3_x_mode_cstick_active",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          28
+        ],
+        "right_stick_digital": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": true
+        }
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "C-stick restores base RF3 X under RF9.",
+        "RF9 base-RF3-X suppression mode does not full-null C-stick output."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf3_rt5_restores_x_cstick_active",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF3",
+        "RT5"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "X"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf9_base_rf3_x_mode_cstick_active",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          228
+        ],
+        "right_stick_digital": {
+          "left": false,
+          "right": false,
+          "up": true,
+          "down": false
+        }
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "C-stick restores base RF3 X under RF9 while C-up remains active."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf3_lf3_rt5_cstick_up_left_special",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF3",
+        "LF3",
+        "RT5"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "X"
+        ],
+        "effective_direction": {
+          "left": true,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf3_vertical_cstick_diagonal_override",
+        "table_id": "Default",
+        "direction_index": 4,
+        "left_stick": [
+          61,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          95,
+          165
+        ],
+        "right_stick_digital": {
+          "left": false,
+          "right": false,
+          "up": true,
+          "down": false
+        }
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RF9 base-RF3-X mode keeps the RF3 vertical C-stick special available; LF3 is resolved digital left in source."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf3_lf3_rt2_cstick_down_left_special",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF3",
+        "LF3",
+        "RT2"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "X"
+        ],
+        "effective_direction": {
+          "left": true,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf3_vertical_cstick_diagonal_override",
+        "table_id": "Default",
+        "direction_index": 4,
+        "left_stick": [
+          61,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          95,
+          91
+        ],
+        "right_stick_digital": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": true
+        }
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RF9 base-RF3-X mode keeps the RF3 vertical C-stick special available for C-down."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf3_rf4_suppresses_rf4_no_full_null",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF3",
+        "RF4",
+        "LF1"
+      ],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {
+          "left": false,
+          "right": true,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf9_base_rf3_x_mode_table_output",
+        "table_id": "Default",
+        "direction_index": 6,
+        "left_stick": [
+          195,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          128
+        ],
+        "suppressed_buttons": [
+          "X"
+        ],
+        "suppressed_modifiers": [
+          "Tilt1"
+        ]
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RF4 modifier behavior is suppressed under RF9 base-RF3-X mode while full stick null stays off."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf3_rf4_rt5_restores_x_cstick_active",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF3",
+        "RF4",
+        "RT5"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "X"
+        ],
+        "effective_direction": {
+          "left": false,
+          "right": false,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf9_base_rf3_x_mode_cstick_active",
+        "table_id": "Default",
+        "direction_index": 5,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          228
+        ],
+        "right_stick_digital": {
+          "left": false,
+          "right": false,
+          "up": true,
+          "down": false
+        },
+        "suppressed_modifiers": [
+          "Tilt1"
+        ]
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RF4 remains suppressed under RF9 base-RF3-X mode even when C-stick restores X."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf3_rt1_rf4_suppresses_custom_no_full_null",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF3",
+        "RT1",
+        "RF4",
+        "LF1"
+      ],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {
+          "left": false,
+          "right": true,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf9_base_rf3_x_mode_table_output",
+        "table_id": "Default",
+        "direction_index": 6,
+        "left_stick": [
+          195,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          128
+        ],
+        "suppressed_buttons": [
+          "X"
+        ],
+        "suppressed_modifiers": [
+          "RT1RF4Custom"
+        ]
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "RT1+RF4 custom is suppressed under RF9 base-RF3-X mode; full stick null stays off."
+      ]
+    },
+    {
+      "case_id": "gfw3_rf9_rf4_rt5_without_rf3_full_null_preserved",
+      "category": "rf9_null",
+      "input_buttons": [
+        "RF9",
+        "RF4",
+        "LF1",
+        "RT5"
+      ],
+      "expected": {
+        "digital_buttons": [],
+        "effective_direction": {
+          "left": false,
+          "right": true,
+          "up": false,
+          "down": false
+        },
+        "analog_source": "rf9_null_override",
+        "table_id": null,
+        "direction_index": null,
+        "left_stick": [
+          128,
+          128
+        ],
+        "dpad": null,
+        "right_stick": [
+          128,
+          128
+        ],
+        "right_stick_digital": {
+          "left": false,
+          "right": false,
+          "up": true,
+          "down": false
+        },
+        "suppressed_modifiers": [
+          "Tilt1"
+        ]
+      },
+      "source_refs": [
+        "src/modes/Ultimate.cpp",
+        "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+      ],
+      "notes": [
+        "Without base RF3 X mode, RF9+RF4+C-stick still full-nulls because C-stick suppresses RF4 behavior."
+      ]
+    },
+    {
+      "case_id": "gfw3_lt2_rf9_rf3_remains_b_not_x_full_null",
+      "category": "rf9_null",
+      "input_buttons": [
+        "LT2",
+        "RF9",
+        "RF3"
+      ],
+      "expected": {
+        "digital_buttons": [
+          "B"
+        ],
         "effective_direction": {
           "left": false,
           "right": false,
@@ -1285,25 +1697,25 @@
         "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
       ],
       "notes": [
-        "RF9 suppresses the base RF3 X role when no C-stick button is held."
+        "LT2+RF3 is not base RF3 X mode; RF9 full null behavior is preserved for this non-base-X case."
       ]
     },
     {
-      "case_id": "gfw3_rf9_rf3_rt2_restores_x",
+      "case_id": "gfw3_lf4_rf9_rf3_remains_forced_up_not_x_full_null",
       "category": "rf9_null",
       "input_buttons": [
+        "LF4",
         "RF9",
-        "RF3",
-        "RT2"
+        "RF3"
       ],
       "expected": {
         "digital_buttons": [
-          "X"
+          "B"
         ],
         "effective_direction": {
           "left": false,
           "right": false,
-          "up": false,
+          "up": true,
           "down": false
         },
         "analog_source": "rf9_null_override",
@@ -1318,19 +1730,16 @@
           128,
           128
         ],
-        "right_stick_digital": {
-          "left": false,
-          "right": false,
-          "up": false,
-          "down": true
-        }
+        "suppressed_buttons": [
+          "X"
+        ]
       },
       "source_refs": [
         "src/modes/Ultimate.cpp",
         "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
       ],
       "notes": [
-        "C-stick restores base RF3 X under RF9; RF9 still nulls analog sticks late."
+        "LF4+RF3 is forced Up, not base RF3 X mode; RF9 full null behavior is preserved for this non-base-X case."
       ]
     },
     {

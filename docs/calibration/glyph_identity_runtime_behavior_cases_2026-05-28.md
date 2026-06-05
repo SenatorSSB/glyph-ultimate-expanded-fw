@@ -118,7 +118,16 @@ Fixture case IDs:
 - `gfw3_rf9_rf4_rt4_null_reenabled`
 - `gfw3_rf9_rf3_suppresses_x`
 - `gfw3_rf9_rf3_rt2_restores_x`
+- `gfw3_rf9_rf3_rt5_restores_x_cstick_active`
+- `gfw3_rf9_rf3_lf3_rt5_cstick_up_left_special`
+- `gfw3_rf9_rf3_lf3_rt2_cstick_down_left_special`
+- `gfw3_rf9_rf3_rf4_suppresses_rf4_no_full_null`
+- `gfw3_rf9_rf3_rf4_rt5_restores_x_cstick_active`
+- `gfw3_rf9_rf3_rt1_rf4_suppresses_custom_no_full_null`
+- `gfw3_rf9_rf4_rt5_without_rf3_full_null_preserved`
+- `gfw3_lt2_rf9_rf3_remains_b_not_x_full_null`
 - `gfw3_lt2_rf9_rf3_rt2_remains_b_not_x`
+- `gfw3_lf4_rf9_rf3_remains_forced_up_not_x_full_null`
 - `gfw3_lf4_rf9_rf3_rt2_remains_forced_up_not_x`
 
 ## LT physical move cycle cases

@@ -22,15 +22,39 @@
     "mirrored_evaluator": "tools/check_glyph_identity_runtime_behavior_evaluator.py"
   },
   "rt1_rf4_custom_table_raw": {
-    "1": [69, 78],
-    "2": [128, 78],
-    "3": [187, 78],
-    "4": [69, 128],
+    "1": [
+      69,
+      78
+    ],
+    "2": [
+      128,
+      78
+    ],
+    "3": [
+      187,
+      78
+    ],
+    "4": [
+      69,
+      128
+    ],
     "5": "unchanged_or_unset",
-    "6": [187, 128],
-    "7": [72, 172],
-    "8": [128, 179],
-    "9": [184, 172]
+    "6": [
+      187,
+      128
+    ],
+    "7": [
+      72,
+      172
+    ],
+    "8": [
+      128,
+      179
+    ],
+    "9": [
+      184,
+      172
+    ]
   },
   "test_rows": [
     {
@@ -190,7 +214,7 @@
       "category": "null_modifier",
       "input_condition": "RF9 + RF3 with no C-stick button held.",
       "directions": "N/A",
-      "expected_result": "RF9 suppresses base RF3 X.",
+      "expected_result": "RF9 suppresses base RF3 X; left stick and right stick/C-stick are not full-nulled by RF9 base-RF3-X mode.",
       "status": "not_executed"
     },
     {
@@ -198,7 +222,63 @@
       "category": "null_modifier",
       "input_condition": "RF9 + RF3 plus any RT2/RT3/RT4/RT5 C-stick button.",
       "directions": "representative",
-      "expected_result": "C-stick restores base RF3 X; RF9 analog null behavior remains late.",
+      "expected_result": "C-stick restores base RF3 X; C-stick output remains active and RF9 base-RF3-X mode does not full-null either stick.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf3_rt5_restores_x_cstick_active",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF3 + RT5.",
+      "directions": "neutral horizontal",
+      "expected_result": "X is restored; C-up remains active; left stick and right stick are not full-nulled.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf3_rt5_left_special_no_full_null",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF3 + RT5 + resolved digital Left (LF3 in source fixture).",
+      "directions": "resolved left",
+      "expected_result": "X is restored and RF3 vertical C-stick special gives right stick (95,165); left stick is not full-nulled.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf3_rt2_left_special_no_full_null",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF3 + RT2 + resolved digital Left (LF3 in source fixture).",
+      "directions": "resolved left",
+      "expected_result": "X is restored and RF3 vertical C-stick special gives right stick (95,91); left stick is not full-nulled.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf3_rf4_suppresses_rf4_no_full_null",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF3 + RF4.",
+      "directions": "representative",
+      "expected_result": "RF4 modifier behavior is suppressed/nullified; RF9 suppresses/restores RF3 X according to C-stick state; full stick null does not apply.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf3_rt1_rf4_suppresses_custom_no_full_null",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF3 + RT1 + RF4.",
+      "directions": "representative",
+      "expected_result": "RT1+RF4 custom behavior is suppressed/nullified; RF9 suppresses/restores RF3 X according to C-stick state; full stick null does not apply.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_alone_full_null_preserved",
+      "category": "null_modifier",
+      "input_condition": "RF9 alone with LS and C-stick activity.",
+      "directions": "representative",
+      "expected_result": "RF9 full-null mode centers both left stick and right stick.",
+      "status": "not_executed"
+    },
+    {
+      "row_id": "rf9_rf4_cstick_without_rf3_full_null_preserved",
+      "category": "null_modifier",
+      "input_condition": "RF9 + RF4 + C-stick with no RF3 held.",
+      "directions": "representative",
+      "expected_result": "C-stick suppresses RF4 behavior, so RF9 full-null mode still centers both sticks.",
       "status": "not_executed"
     },
     {

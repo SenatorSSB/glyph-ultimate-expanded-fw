@@ -41,11 +41,13 @@ REQUIRED_DOC_PHRASES = (
     "RT1 + RF4 custom table is exempt from RF4 C-stick suppression",
     "RT1 base role becomes the current Tilt2 table",
     "Mode + RT1 uses MTilt2",
-    "RF9 nulls both left stick and right stick inputs",
+    "RF9 full-null mode nulls both left stick and right stick inputs",
     "RF9 + RF4 disables all RF9 nullification",
     "RF9 + RF4 + C-stick suppresses RF4 behavior",
-    "RF9 + RF3 suppresses base RF3 X",
+    "RF9 + RF3 enters a base-RF3-X suppression mode",
+    "does not full-null left stick or right stick/C-stick output",
     "RF9 + RF3 + C-stick restores base RF3 X",
+    "RF4 behavior is suppressed/nullified while RF9 base-RF3-X suppression mode is",
     "direction source is the resolved digital left/right state",
     "RF3 + RT5 + resolved left: right stick `(95,165)`",
     "existing C-stick horizontal or two-axis diagonal/ASDI behavior is preserved",
@@ -142,7 +144,7 @@ REQUIRED_PRIORITY = {
     "LF4_submode_overrides_LT2_sublayer",
     "RT1_RF4_custom_overrides_RF4_Tilt1_and_RT1_Tilt2",
     "RF4_RF2_base_minus_41_inactive_under_LF4_or_LT2",
-    "RF9_null_last_except_behaviorally_available_RF9_RF4_disables_null",
+    "RF9_full_null_last_except_behaviorally_available_RF9_RF4_disables_null_and_RF9_base_RF3_X_mode",
     "RT1_RF4_custom_exempt_from_RF4_cstick_suppression",
     "RF4_modifier_behavior_suppressed_by_cstick_outside_custom_exception",
     "existing_cstick_two_axis_asdi_preserved_outside_RF3_vertical_special",
@@ -247,8 +249,10 @@ def validate_fixture(payload: dict[str, Any]) -> None:
     require_table(payload, "LT2_RF4_flipper", EXPECTED_LT2_FLIPPER)
 
     rf9 = require_object(payload, "rf9_null_behavior")
+    if rf9.get("full_null_mode_when") != "RF9_and_not_RF9_base_RF3_X_mode":
+        fail("RF9 full-null mode predicate drifted")
     if rf9.get("nulls_left_stick") is not True or rf9.get("nulls_right_stick") is not True:
-        fail("RF9 must null both sticks")
+        fail("RF9 full-null mode must null both sticks")
     if rf9.get("exception") != "RF9_plus_behaviorally_available_RF4_disables_all_RF9_nullification":
         fail("RF9 exception must be behaviorally available RF4")
     if rf9.get("exception_presses_extra_button") is not False:
@@ -279,10 +283,22 @@ def validate_fixture(payload: dict[str, Any]) -> None:
     rf9_rf3 = require_object(payload, "rf9_rf3_x_behavior")
     if rf9_rf3.get("base_rf3_x_active_when") != ["RF3", "not_LT2", "not_LF4"]:
         fail("base RF3 X scope drifted")
+    if rf9_rf3.get("rf9_base_rf3_x_mode_active_when") != ["RF9", "RF3", "not_LT2", "not_LF4"]:
+        fail("RF9 base RF3 X mode predicate drifted")
     if rf9_rf3.get("rf9_suppresses_base_rf3_x_without_cstick") is not True:
         fail("RF9 must suppress base RF3 X without C-stick")
     if rf9_rf3.get("cstick_restores_base_rf3_x_under_rf9") is not True:
         fail("C-stick must restore base RF3 X under RF9")
+    if rf9_rf3.get("full_nulls_left_stick") is not False:
+        fail("RF9 base RF3 X mode must not full-null left stick")
+    if rf9_rf3.get("full_nulls_right_stick") is not False:
+        fail("RF9 base RF3 X mode must not full-null right stick")
+    if rf9_rf3.get("cstick_output_remains_active") is not True:
+        fail("RF9 base RF3 X mode must keep C-stick output active")
+    if rf9_rf3.get("rf4_behavior_available_in_mode") is not False:
+        fail("RF4 behavior must be unavailable in RF9 base RF3 X mode")
+    if rf9_rf3.get("rt1_rf4_custom_available_in_mode") is not False:
+        fail("RT1+RF4 custom must be unavailable in RF9 base RF3 X mode")
     if rf9_rf3.get("restoration_scope") != "base_RF3_X_only":
         fail("RF9+RF3 X restoration scope drifted")
     require_superset(

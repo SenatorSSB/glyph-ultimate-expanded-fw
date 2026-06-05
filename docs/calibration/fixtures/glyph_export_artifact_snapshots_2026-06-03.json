@@ -3,20 +3,20 @@
     "behavior_cases_fixture": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-      "sha256": "da8b2dfc7d3e1f3f8f8b5d2bc8747296c76c47ff2f21af2f0e18699695540985",
+      "sha256": "5f888b9766390b75965cb90cb90650cc20db28e90e05e8f8ec4dd7bfc4643aa6",
       "status": "gfw3_requested_expected_behavior_cases",
       "summary": {
-        "case_count": 75,
+        "case_count": 84,
         "category_count": 9
       }
     },
     "generated_config_prototype": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-      "sha256": "a482b38864a7a927efd5a32b351acff14bc6daea60e6164678a2cab4bc337b0d",
+      "sha256": "d66efa458cc28921d3a1ccb0682e8486d880c3d3fe77260a19cc3e0afa63006f",
       "status": "source_backed_prototype_not_runtime_loaded",
       "summary": {
-        "coverage_case_count": 75,
+        "coverage_case_count": 84,
         "coverage_category_count": 9,
         "table_count": 27
       }
@@ -59,10 +59,10 @@
     "senscope_export_package_sample": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-      "sha256": "29bd4e601b8762d068b7fb809707b57537859ba647cb48e578900d9c9111d4b7",
+      "sha256": "3497ce3150620a60838c50f58438250f472c121b3ce9623d3223ea5f780717a1",
       "status": "sample_docs_only_not_implemented",
       "summary": {
-        "nested_behavior_case_count": 75,
+        "nested_behavior_case_count": 84,
         "nested_generated_config_table_count": 27,
         "neutral_profile_field_count": 4
       }
