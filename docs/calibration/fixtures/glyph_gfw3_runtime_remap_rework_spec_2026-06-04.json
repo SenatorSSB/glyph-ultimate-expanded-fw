@@ -1,0 +1,140 @@
+{
+  "schema_name": "glyph_gfw3_runtime_remap_rework_spec",
+  "spec_version": 1,
+  "status": "firmware_behavior_change_spec_only",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_hardware_validated",
+  "firmware_implementation_status": "not_yet_claimed",
+  "profile_artifact_change": "forbidden",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "runtime_loaded_config": "not_implemented",
+  "webserial_device_write": "not_implemented",
+  "source_authority": {
+    "user_requirements": "2026-06-04 Glyph GFW3 runtime remap rework task",
+    "runtime_source": "src/modes/Ultimate.cpp",
+    "runtime_tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "architecture_hardening": "docs/calibration/glyph_identity_runtime_architecture_hardening_2026-05-28.md"
+  },
+  "base_role_changes": {
+    "RF6": ["Z", "low_magnitude_z_airdodge_override"],
+    "RF5": ["A", "forced_up"],
+    "RF15": ["scratched_hard_up_a"],
+    "RF12": ["scratched_hard_up_a"],
+    "RF11": ["scratched_z_airdodge"],
+    "RF3": ["X"],
+    "RF2": ["B"],
+    "RF4": ["Tilt1"],
+    "RT1": ["Tilt2"],
+    "RT1_RF4": ["CustomRT1RF4"],
+    "RF7": ["preserve_hard_up_b"],
+    "RF13": ["preserve_ls_to_dpad"]
+  },
+  "scratched_roles": [
+    "RF3_RF4_Tilt3_fusion",
+    "RF15_hard_up_a",
+    "RF12_hard_up_a",
+    "RF11_z_airdodge",
+    "RT1_z_carrier",
+    "LT5_z_airdodge",
+    "LF8_layer_left",
+    "LF7_layer_right",
+    "pure_layer_RF2_RF3_RF4_behavior"
+  ],
+  "lt_physical_move_cycle": {
+    "LT1": "L",
+    "LT4": "X2_MX2",
+    "LT5": "X1_MX1",
+    "LT3": "L_plus_R"
+  },
+  "mode_behavior": {
+    "mode_exists": true,
+    "Mode_RT1": "MTilt2",
+    "MTilt1": "may_be_scratched",
+    "mode_can_win_over_RF4_Tilt1": true,
+    "RT1_RF4_mode_table": "same_as_non_mode"
+  },
+  "custom_tables": {
+    "RT1_RF4": {
+      "1": [69, 78],
+      "2": [128, 78],
+      "3": [187, 78],
+      "4": [69, 128],
+      "5": null,
+      "6": [187, 128],
+      "7": [72, 172],
+      "8": [128, 179],
+      "9": [184, 172]
+    },
+    "LT2_RF3_normal_x": {
+      "1": [87, 51],
+      "2": [128, 51],
+      "3": [169, 51],
+      "4": [87, 128],
+      "5": [128, 128],
+      "6": [169, 128],
+      "7": [87, 205],
+      "8": [128, 205],
+      "9": [169, 205]
+    },
+    "LT2_RF4_flipper": {
+      "1": [169, 51],
+      "2": [128, 51],
+      "3": [87, 51],
+      "4": [169, 128],
+      "5": [128, 128],
+      "6": [87, 128],
+      "7": [169, 205],
+      "8": [128, 205],
+      "9": [87, 205]
+    }
+  },
+  "rf4_rf2_base_interaction": {
+    "table": "Tilt1_except_x_offset_minus_41",
+    "only_x_offset_changes": true,
+    "inactive_under": ["LF4_submode", "LT2_sublayer"]
+  },
+  "rf9_null_behavior": {
+    "active": "RF9",
+    "nulls_left_stick": true,
+    "nulls_right_stick": true,
+    "exception": "RF9_plus_RF4_disables_all_RF9_nullification",
+    "exception_presses_extra_button": false
+  },
+  "lt2_sublayer": {
+    "base_without_sublayer": "Y1_MY1",
+    "LF4_overrides_LT2": true,
+    "RF4": "minus_41_flipper_modifier",
+    "RF3": ["B", "plus_41_normal_x_modifier"],
+    "RF3_RF4": ["B", "minus_41_flipper_modifier"],
+    "RF2": "forced_up",
+    "RF1": "X",
+    "RF1_cstick": "suppress_X_only",
+    "cstick_buttons": ["RT2", "RT3", "RT4", "RT5"]
+  },
+  "lf4_submode": {
+    "LF4": "B",
+    "overrides_LT2": true,
+    "RF4": "Tilt1",
+    "RF3": "forced_up",
+    "RF2": "X",
+    "RF2_RF4": "RF2_deactivates_RF4_modifier",
+    "RF2_cstick": "suppress_X_but_still_deactivate_RF4",
+    "cstick_buttons": ["RT2", "RT3", "RT4", "RT5"]
+  },
+  "priority": [
+    "LF4_submode_overrides_LT2_sublayer",
+    "RT1_RF4_custom_overrides_RF4_Tilt1_and_RT1_Tilt2",
+    "RF4_RF2_base_minus_41_inactive_under_LF4_or_LT2",
+    "RF9_null_last_except_RF9_RF4_disables_null",
+    "nunchuk_preserved_after_runtime_overrides"
+  ],
+  "forbidden_claims": [
+    "hardware_validation",
+    "firmware_implementation_complete",
+    "runtime_loaded_config",
+    "WebSerial_device_write",
+    "active_profile_artifact_change",
+    "nunchuk_behavior_change",
+    "macro_turbo_timing_automation"
+  ]
+}
