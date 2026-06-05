@@ -132,6 +132,11 @@ REQUIRED_NON_GOALS = {
     "not_senscope_game_semantics",
     "does_not_alter_table_values_or_behavior",
 }
+
+ALLOWED_COVERAGE_HARDWARE_STATUS = {
+    "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results",
+    "not_new_hardware_result",
+}
 FORBIDDEN_PAYLOAD_KEYS = {
     "firmware_source_patch",
     "serial_transport_payload",
@@ -419,9 +424,7 @@ def _validate_bounded_metadata(payload: dict[str, Any], issues: list[ValidationI
     if not isinstance(coverage_metadata, dict):
         _add(issues, "E_COVERAGE_METADATA_NOT_OBJECT", "$.coverage_metadata", "must be an object")
         return
-    if coverage_metadata.get("hardware_status") != (
-        "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results"
-    ):
+    if coverage_metadata.get("hardware_status") not in ALLOWED_COVERAGE_HARDWARE_STATUS:
         _add(
             issues,
             "E_INVALID_COVERAGE_HARDWARE_STATUS",

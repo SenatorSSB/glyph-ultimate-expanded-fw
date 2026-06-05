@@ -2,29 +2,20 @@
   "contract_version": 1,
   "coverage_metadata": {
     "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-    "case_count": 118,
+    "case_count": 45,
     "categories": [
-      "base_direction",
+      "base_role",
       "c_stick_suppression",
-      "composite_table",
-      "default_analog_table",
-      "digital_button_carrier",
-      "direction_plus_a_override",
-      "lf4_sub_mode",
-      "mode_default_analog_table",
-      "mode_modifier_table_selection",
-      "multi_modifier_fallback",
-      "nunchuk_source_preservation",
-      "pure_layer",
-      "rf13_ls_to_dpad",
-      "rf7_hard_up_b",
-      "rf9_null_override",
-      "right_stick_c_stick",
-      "single_modifier_table_selection",
-      "z_airdodge_low_magnitude_override"
+      "custom_modifier",
+      "lf4_submode",
+      "lf8_lf7_removed",
+      "lt2_sublayer",
+      "lt_physical_move_cycle",
+      "preservation",
+      "rf9_null"
     ],
-    "category_count": 18,
-    "hardware_status": "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results"
+    "category_count": 9,
+    "hardware_status": "not_new_hardware_result"
   },
   "direction_convention": "numpad",
   "hard_overrides": {

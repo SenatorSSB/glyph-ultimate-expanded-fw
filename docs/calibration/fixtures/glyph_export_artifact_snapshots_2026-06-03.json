@@ -1,23 +1,23 @@
 {
   "artifacts": {
     "behavior_cases_fixture": {
-      "hardware_status": "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results",
+      "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-      "sha256": "206971b6ef0caa90bd74e5f90e678f1d4acfee699ae1900b227bb3f38ce0a32a",
-      "status": "source_backed_expected_behavior_cases",
+      "sha256": "66e30591170219908060130e640d16790a42bf361929271ff20016e09f1f06a1",
+      "status": "gfw3_requested_expected_behavior_cases",
       "summary": {
-        "case_count": 118,
-        "category_count": 18
+        "case_count": 45,
+        "category_count": 9
       }
     },
     "generated_config_prototype": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-      "sha256": "658588f0ad5a572e8c69949cfbcdfb9fd1e04e73a191d0e03615211c015033b9",
+      "sha256": "1c2f672123452b0fb721a27bf7ca0ec739f9e271c28afcd45143a8c264d27b34",
       "status": "source_backed_prototype_not_runtime_loaded",
       "summary": {
-        "coverage_case_count": 118,
-        "coverage_category_count": 18,
+        "coverage_case_count": 45,
+        "coverage_category_count": 9,
         "table_count": 25
       }
     },
@@ -59,10 +59,10 @@
     "senscope_export_package_sample": {
       "hardware_status": "not_new_hardware_result",
       "path": "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-      "sha256": "2f7d8550ea2cc489b315a26ac4e73ca61505b133032bb0eaa59840e49d40c0c6",
+      "sha256": "8408ee8adc01b74a66d0102a355604559765ac781291d4511a6e62a4874aa2fe",
       "status": "sample_docs_only_not_implemented",
       "summary": {
-        "nested_behavior_case_count": 118,
+        "nested_behavior_case_count": 45,
         "nested_generated_config_table_count": 25,
         "neutral_profile_field_count": 4
       }
