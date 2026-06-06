@@ -169,7 +169,10 @@
       "evidence_paths": [
         "docs/calibration/glyph_profile_config_export_corpus_protocol_2026-05-26.md",
         "docs/calibration/glyph_profile_config_export_corpus_manifest_TEMPLATE.json",
-        "tools/check_glyph_profile_config_export_corpus.py"
+        "tools/check_glyph_profile_config_export_corpus.py",
+        "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
+        "tools/check_glyph_export_corpus_readiness_status.py"
       ],
       "allowed_next_action": "capture_real_matched_version_export_corpus_if_artifacts_are_available",
       "blocked_by": [
@@ -182,7 +185,7 @@
       "requires_corpus": true,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Protocol/framework exists; completion requires real captured corpus artifacts."
+      "notes": "Protocol/framework exists; readiness status records blocked_missing_real_corpus_artifacts with corpus_present=false and completion_allowed=false. Completion requires real captured corpus artifacts."
     },
     {
       "item_id": "adapter_policy_prewrite_validation",

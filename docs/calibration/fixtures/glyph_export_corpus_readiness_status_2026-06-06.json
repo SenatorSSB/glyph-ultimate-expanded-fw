@@ -1,0 +1,50 @@
+{
+  "schema_name": "glyph_export_corpus_readiness_status",
+  "schema_version": 1,
+  "packet_date": "2026-06-06",
+  "status": "blocked_missing_real_corpus_artifacts",
+  "source_protocol_paths": [
+    "docs/calibration/glyph_profile_config_export_corpus_protocol_2026-05-26.md",
+    "docs/calibration/glyph_profile_config_export_corpus_manifest_TEMPLATE.json",
+    "tools/check_glyph_profile_config_export_corpus.py",
+    "docs/calibration/export_corpus/README.md"
+  ],
+  "roadmap_next_work_index_path": "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
+  "export_corpus_root": "docs/calibration/export_corpus",
+  "required_future_artifact_classes": [
+    "filled_manifest_json",
+    "captured_export_json_fixtures",
+    "fixture_sha256_hashes",
+    "configurator_source_or_version_reference",
+    "firmware_source_commit_reference",
+    "glyph_repo_commit_reference",
+    "device_model_or_capture_context",
+    "expected_semantic_feature_labels",
+    "known_unknowns"
+  ],
+  "corpus_present": false,
+  "completion_allowed": false,
+  "real_corpus_manifest_count": 0,
+  "real_corpus_fixture_count": 0,
+  "captured_corpus_definition": {
+    "requires_filled_manifest": true,
+    "requires_listed_fixture_files": true,
+    "requires_hashes": true,
+    "requires_matched_version_provenance": true,
+    "templates_or_readmes_count_as_corpus": false,
+    "repo_example_fixtures_count_as_corpus": false,
+    "external_remapper_observations_count_as_corpus": false,
+    "generated_candidate_payloads_count_as_corpus": false
+  },
+  "non_claims": {
+    "official_configurator_authority_claimed": false,
+    "device_write_claimed": false,
+    "webserial_write_claimed": false,
+    "hardware_validation_claimed": false,
+    "adapter_implemented": false,
+    "external_remapper_adapter_output_generated": false,
+    "runtime_loaded_config_implemented": false,
+    "firmware_behavior_changed": false,
+    "active_profile_artifact_changed": false
+  }
+}

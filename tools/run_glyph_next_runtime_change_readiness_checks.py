@@ -50,6 +50,7 @@ def steps() -> list[Step]:
         step("ultimate tilt rc manifest", "tools/check_glyph_ultimate_tilt_rc_manifest.py"),
         step("profile config semantics", "tools/check_glyph_profile_config_semantics.py"),
         step("profile config export corpus", "tools/check_glyph_profile_config_export_corpus.py"),
+        step("export corpus readiness status", "tools/check_glyph_export_corpus_readiness_status.py"),
         step(
             "profile adapter prewrite",
             "tools/check_glyph_profile_adapter_prewrite.py",
