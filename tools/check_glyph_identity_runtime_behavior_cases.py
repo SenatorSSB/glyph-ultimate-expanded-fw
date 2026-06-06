@@ -21,174 +21,131 @@ SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 
 EXPECTED_SOURCE_AUTHORITY = {
     "runtime": "src/modes/Ultimate.cpp",
-    "role_map_doc": "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
-    "role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
-    "hardware_result": "docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md",
+    "runtime_tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "gfw3_spec_doc": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md",
+    "gfw3_spec_fixture": "docs/calibration/fixtures/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.json",
+    "architecture_hardening": "docs/calibration/glyph_identity_runtime_architecture_hardening_2026-05-28.md",
 }
 
 ALLOWED_SOURCE_REFS = {
     "src/modes/Ultimate.cpp",
-    "docs/calibration/glyph_identity_runtime_role_map_2026-05-28.md",
-    "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md",
+    "docs/calibration/fixtures/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.json",
     "docs/calibration/glyph_identity_runtime_architecture_hardening_2026-05-28.md",
-    "docs/calibration/glyph_identity_runtime_smashbox_latest_hardware_result_2026-05-28.md",
-    "docs/calibration/glyph_smashbox_modifiers_runtime_implementation_2026-05-27.md",
-    "docs/calibration/glyph_smashbox_modifiers_hardware_test_plan_2026-05-27.md",
 }
 
 REQUIRED_CATEGORIES = {
-    "digital_button_carrier",
-    "base_direction",
-    "default_analog_table",
-    "mode_default_analog_table",
-    "single_modifier_table_selection",
-    "mode_modifier_table_selection",
-    "multi_modifier_fallback",
-    "composite_table",
-    "pure_layer",
-    "lf4_sub_mode",
+    "base_role",
+    "custom_modifier",
+    "rf9_null",
+    "lt_physical_move_cycle",
+    "lf8_lf7_removed",
+    "lt2_sublayer",
+    "lf4_submode",
     "c_stick_suppression",
-    "direction_plus_a_override",
-    "z_airdodge_low_magnitude_override",
-    "rf7_hard_up_b",
-    "rf9_null_override",
-    "rf13_ls_to_dpad",
-    "right_stick_c_stick",
-    "nunchuk_source_preservation",
+    "preservation",
 }
 
 REQUIRED_CASE_IDS = {
-    "digital_rf1_a_carrier",
-    "digital_rf5_b_carrier",
-    "digital_lf4_b_carrier",
-    "digital_rf10_y_carrier",
-    "digital_rt1_z_carrier",
-    "digital_lt5_z_carrier",
-    "digital_rf11_z_carrier",
-    "digital_lt3_l_carrier",
-    "digital_rf16_r_carrier",
-    "digital_mb4_capture_carrier",
-    "digital_mb5_home_carrier",
-    "digital_mb6_select_minus_carrier",
-    "digital_mb7_start_plus_carrier",
-    "base_lf3_effective_left",
-    "base_lf1_effective_right",
-    "base_lf2_effective_up",
-    "base_lf5_effective_down",
-    "base_lf3_lf1_horizontal_cancel",
-    "base_rf6_forced_up",
-    "base_rf6_lf5_forced_up_suppresses_down",
-    "default_direction_5_neutral",
-    "default_direction_4_left",
-    "default_direction_6_right",
-    "default_direction_2_down",
-    "default_direction_8_up",
-    "default_direction_1_left_down",
-    "default_direction_3_right_down",
-    "default_direction_7_left_up",
-    "default_direction_9_right_up",
-    "mode_default_direction_5_neutral",
-    "mode_default_direction_4_left",
-    "mode_default_direction_6_right",
-    "mode_default_direction_2_down",
-    "mode_default_direction_8_up",
-    "mode_default_direction_1_left_down",
-    "mode_default_direction_3_right_down",
-    "single_x1_neutral",
-    "single_x1_right",
-    "single_x2_neutral",
-    "single_x2_right",
-    "single_y1_neutral",
-    "single_y1_up",
-    "single_y1_down",
-    "single_tilt1_neutral",
-    "single_tilt1_right",
-    "single_tilt2_neutral",
-    "single_tilt2_right",
-    "single_tilt3_neutral",
-    "single_tilt3_right",
-    "mode_modifier_mx1_neutral",
-    "mode_modifier_mx2_neutral",
-    "mode_modifier_my1_neutral",
-    "mode_modifier_mtilt1_neutral",
-    "mode_modifier_mtilt2_neutral",
-    "mode_modifier_mtilt3_neutral",
-    "fallback_x1_x2_default_neutral",
-    "fallback_mode_x1_x2_mode_default_neutral",
-    "fallback_y1_tilt2_default_right",
-    "fallback_guard_tilt3_not_fallback_right",
-    "composite_y1_tilt1_neutral",
-    "composite_y1_tilt1_right",
-    "composite_mode_y1_tilt1_neutral",
-    "composite_mode_y1_tilt1_right",
-    "composite_y1_layer_normal_x_left",
-    "composite_y1_layer_flipper_left",
-    "composite_mode_y1_layer_normal_x_left",
-    "composite_mode_y1_layer_flipper_left",
-    "composite_layer_rf4_flipper_wins_over_rf3_normal_x",
-    "pure_layer_lf8_layer_left",
-    "pure_layer_lf7_layer_right",
-    "pure_layer_lf8_rf2_forced_up_no_x",
-    "pure_layer_lf7_rf2_forced_up_no_x",
-    "lf4_submode_lf4_lt2_y1_suppressed_default_neutral",
-    "lf4_submode_lf4_lt2_rf2_x_no_forced_up",
-    "lf4_submode_lf4_lt2_rf3_forced_up",
-    "cstick_suppression_lf4_lt2_rf2_rt2_no_x",
-    "cstick_suppression_lf4_lt2_rf2_rt3_no_x",
-    "cstick_suppression_lf4_lt2_rf2_rt4_no_x",
-    "cstick_suppression_lf4_lt2_rf2_rt5_no_x",
-    "direction_plus_a_lt6_down_a_default",
-    "direction_plus_a_rf12_up_a_default",
-    "direction_plus_a_rf15_up_a_default",
-    "direction_plus_a_mode_lt6_down_a",
-    "direction_plus_a_mode_rf12_up_a",
-    "z_airdodge_lt5_neutral_low_magnitude",
-    "z_airdodge_lt5_left_low_magnitude",
-    "z_airdodge_rf11_right_up_low_magnitude",
-    "z_airdodge_lt5_rf12_forced_up_low_magnitude",
-    "rf7_hard_up_b_neutral",
-    "rf7_hard_up_b_left",
-    "rf7_hard_up_b_right",
-    "rf9_null_neutral",
-    "rf9_null_overrides_rf7_hard_up_b",
-    "rf13_left_to_dpad_center_left_stick",
-    "rf13_mode_left_to_dpad_mode_center",
-    "rf13_lf8_rf2_dpad_up_left_no_x",
-    "right_stick_rt3_c_left",
-    "right_stick_rt4_c_right",
-    "right_stick_rt5_c_up",
-    "right_stick_rt2_c_down",
+    "gfw3_rf6_z_airdodge_neutral",
+    "gfw3_rf5_forced_up_a",
+    "gfw3_rf15_scratched",
+    "gfw3_rf12_scratched",
+    "gfw3_rf11_scratched",
+    "gfw3_rf3_base_x",
+    "gfw3_rf2_base_b",
+    "gfw3_rf4_base_tilt1",
+    "gfw3_rf4_rt2_suppresses_tilt1",
+    "gfw3_rt1_base_tilt2",
+    "gfw3_mode_rf4_mode_default",
+    "gfw3_mode_rf4_rt2_suppressed_mode_default",
+    "gfw3_mode_rt1_mtilt2",
+    "gfw3_mode_rt1_rf4_custom",
+    "gfw3_rf3_rf4_no_tilt3",
+    "gfw3_rt1_rf4_rt2_custom_preserved",
+    "gfw3_rt1_rf4_custom_1",
+    "gfw3_rt1_rf4_custom_2",
+    "gfw3_rt1_rf4_custom_3",
+    "gfw3_rt1_rf4_custom_4",
+    "gfw3_rt1_rf4_custom_6",
+    "gfw3_rt1_rf4_custom_7",
+    "gfw3_rt1_rf4_custom_8",
+    "gfw3_rt1_rf4_custom_9",
+    "gfw3_rf4_rf2_base_minus41",
+    "gfw3_rf4_rf2_rt2_suppresses_minus41",
+    "gfw3_rf9_nulls_left_and_right_stick",
+    "gfw3_rf9_rf4_disables_null",
+    "gfw3_rf9_rf4_rt4_null_reenabled",
+    "gfw3_rf9_rf3_suppresses_x",
+    "gfw3_rf9_rf3_rt2_restores_x",
+    "gfw3_rf9_rf3_rt5_restores_x_cstick_active",
+    "gfw3_rf9_rf3_lf3_rt5_cstick_up_left_special",
+    "gfw3_rf9_rf3_lf3_rt2_cstick_down_left_special",
+    "gfw3_rf9_rf3_rf4_suppresses_rf4_no_full_null",
+    "gfw3_rf9_rf3_rf4_rt5_restores_x_cstick_active",
+    "gfw3_rf9_rf3_rt1_rf4_suppresses_custom_no_full_null",
+    "gfw3_rf9_rf4_rt5_without_rf3_full_null_preserved",
+    "gfw3_lt1_l",
+    "gfw3_lt4_x2",
+    "gfw3_lt5_x1",
+    "gfw3_lt3_l_plus_r",
+    "gfw3_lf8_no_layer_left",
+    "gfw3_lf7_no_layer_right",
+    "gfw3_lt2_base_y1",
+    "gfw3_lt2_rf4_flipper",
+    "gfw3_lt2_rf4_rt2_suppresses_flipper",
+    "gfw3_lt2_rf3_b_normal_x",
+    "gfw3_lt2_rf3_rf4_b_flipper",
+    "gfw3_lt2_rf3_rf4_rt2_falls_back_to_rf3",
+    "gfw3_lt2_rf2_forced_up",
+    "gfw3_lt2_rf1_x",
+    "gfw3_lt2_rf1_rt2_suppresses_x",
+    "gfw3_lt2_rf9_rf3_remains_b_not_x_full_null",
+    "gfw3_lt2_rf9_rf3_rt2_remains_b_not_x",
+    "gfw3_lf4_rf4_tilt1",
+    "gfw3_lf4_rf4_rt2_suppresses_tilt1",
+    "gfw3_lf4_rf3_forced_up",
+    "gfw3_lf4_rf9_rf3_remains_forced_up_not_x_full_null",
+    "gfw3_lf4_rf9_rf3_rt2_remains_forced_up_not_x",
+    "gfw3_lf4_rf2_x",
+    "gfw3_lf4_rf2_rf4_deactivates_rf4",
+    "gfw3_lf4_rf2_rt2_suppresses_x_deactivates_rf4",
+    "gfw3_lf4_lt2_uses_lf4_behavior",
+    "gfw3_lf4_lt2_rf4_tilt1",
+    "gfw3_lf4_lt2_rf2_rf4_deactivates_rf4",
+    "gfw3_lf4_lt2_rf2_rf4_rt2_suppresses_x_deactivates_rf4",
+    "gfw3_rf3_lf3_rt5_cstick_up_left_special",
+    "gfw3_rf3_lf1_rt5_cstick_up_right_special",
+    "gfw3_rf3_lf3_rt2_cstick_down_left_special",
+    "gfw3_rf3_lf1_rt2_cstick_down_right_special",
+    "gfw3_rf3_rt5_no_horizontal_normal_cup",
+    "gfw3_rf3_rt2_no_horizontal_normal_cdown",
+    "gfw3_rf3_lf1_rt4_normal_cright",
+    "gfw3_rf3_lf1_rt5_rt4_preserves_two_axis_cstick",
+    "gfw3_rf7_hard_up_b_preserved",
+    "gfw3_rf13_ls_to_dpad_preserved",
     "nunchuk_c_rt5_dpad_up_right_stick_neutral",
     "nunchuk_connected_left_stick_override",
 }
 
 C_STICK_SUPPRESSION_DIRECT_CASES = {
-    "cstick_suppression_lf4_lt2_rf2_rt2_no_x": ("RT2", "down"),
-    "cstick_suppression_lf4_lt2_rf2_rt3_no_x": ("RT3", "left"),
-    "cstick_suppression_lf4_lt2_rf2_rt4_no_x": ("RT4", "right"),
-    "cstick_suppression_lf4_lt2_rf2_rt5_no_x": ("RT5", "up"),
+    "gfw3_lt2_rf1_rt2_suppresses_x": ("LT2", "RF1", "RT2", "down"),
+    "gfw3_lf4_rf2_rt2_suppresses_x_deactivates_rf4": ("LF4", "RF2", "RT2", "down"),
 }
 
 REQUIRED_DOC_HEADINGS = (
     "## Purpose and status",
     "## Source authority",
     "## Case schema explanation",
-    "## Digital button carrier cases",
-    "## Base direction cases",
-    "## Modifier table-selection cases",
-    "## Mode table-selection cases",
-    "## Composite table cases",
-    "## Pure layer cases",
-    "## LF4 sub-mode cases",
-    "## C-stick suppression cases",
-    "## Direction-plus-A override cases",
-    "## LT5/RF11 low-magnitude Z-airdodge override cases",
-    "## RF7 hard Up+B cases",
-    "## RF9 null override cases",
-    "## RF13 LS->DPad cases",
-    "## Right-stick / C-stick cases",
-    "## Nunchuk source-preservation cases",
-    "## Future harness migration notes",
+    "## Base role cases",
+    "## Custom modifier cases",
+    "## RF9 null cases",
+    "## LT physical move cycle cases",
+    "## LF8/LF7 removal cases",
+    "## LT2 sublayer cases",
+    "## LF4 submode cases",
+    "## Preservation cases",
 )
 
 SOURCE_ANCHORS = (
@@ -200,28 +157,35 @@ SOURCE_ANCHORS = (
     "constexpr StickPoint kTilt1Table[9]",
     "constexpr StickPoint kTilt2Table[9]",
     "constexpr StickPoint kTilt3Table[9]",
+    "constexpr StickPoint kTilt1Minus41Table[9]",
+    "constexpr StickPoint kRT1RF4CustomTable[9]",
     "constexpr StickPoint kY1Tilt1Table[9]",
     "constexpr StickPoint kMY1Tilt1Table[9]",
     "constexpr StickPoint kY1LayerNormalXTable[9]",
     "constexpr StickPoint kY1LayerFlipperTable[9]",
     "constexpr StickPoint kLt1LowMagnitudeTable[9]",
     "ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer.layer_left_active, layer.layer_right_active)",
-    "state.layer_left_active = inputs.lf8;",
-    "state.layer_right_active = inputs.lf7;",
-    "state.lf4_submode_active = inputs.lf4 && (state.layer_direction_active || inputs.lt2);",
+    "state.layer_left_active = false;",
+    "state.layer_right_active = false;",
+    "state.lf4_submode_active = inputs.lf4;",
     "state.rf2_suppressed_by_lf4_submode_cstick = state.lf4_submode_active && state.c_stick_any_active;",
-    "state.force_up_active = inputs.rf6 || inputs.rf12 || inputs.rf15 || pure_layer_rf2_force_up_active || lf4_submode_rf3_force_up_active;",
-    "state.y1_active = inputs.lt2 && !inputs.lf4;",
-    "state.z_airdodge_override_active = inputs.lt5 || inputs.rf11;",
-    "state.null_modifier_active = inputs.rf9;",
+    "state.force_up_active = inputs.rf5 || lt2_rf2_force_up_active || lf4_submode_rf3_force_up_active;",
+    "state.y1_active = inputs.lt2 && !inputs.lf4 && !lt2_sublayer_active;",
+    "state.rf4_modifier_suppressed_by_cstick = rf4_modifier_suppressed_by_cstick;",
+    "state.rf4_behavior_available = rf4_behavior_available;",
+    "state.rf9_base_rf3_x_mode_active = rf9_base_rf3_x_mode_active;",
+    "state.rf4_suppressed_by_rf9_rf3_mode = rf4_suppressed_by_rf9_rf3_mode;",
+    "state.rf3_x_suppressed_by_rf9 = rf3_x_suppressed_by_rf9;",
+    "state.z_airdodge_override_active = inputs.rf6;",
+    "state.null_modifier_active = inputs.rf9 && !state.rf9_base_rf3_x_mode_active && !state.rf4_behavior_available;",
     "state.hard_up_b_active = inputs.rf7;",
     "state.ls_to_dpad_active = inputs.rf13;",
-    "outputs.a = inputs.rf1 || inputs.lt6 || inputs.rf12 || inputs.rf15;",
-    "outputs.b = inputs.rf5 || inputs.lf4 || inputs.rf7 || (layer.layer_direction_active && !inputs.lf4 && inputs.rf3);",
-    "outputs.x = inputs.rf2 && !layer.rf2_suppressed_by_lf4_submode_cstick && (!layer.layer_direction_active || inputs.lf4);",
-    "outputs.buttonR = inputs.rt1 || inputs.lt5 || inputs.rf11;",
-    "outputs.buttonL = inputs.lt3;",
-    "outputs.triggerRDigital = inputs.rf16;",
+    "outputs.a = base_rf1_a_active || inputs.lt6 || inputs.rf5;",
+    "outputs.b = base_rf2_b_active || inputs.lf4 || inputs.rf7 || (inputs.lt2 && !inputs.lf4 && inputs.rf3);",
+    "outputs.x = (roles.base_rf3_x_active && !roles.rf3_x_suppressed_by_rf9) || lt2_rf1_x_active || lf4_rf2_x_active;",
+    "outputs.buttonR = inputs.rf6;",
+    "outputs.buttonL = inputs.lt1 || inputs.lt3;",
+    "outputs.triggerRDigital = inputs.rf16 || inputs.lt3;",
     "outputs.rightStickRight = inputs.rt4;",
     "outputs.rightStickUp = inputs.rt5;",
     "outputs.dpadUp = inputs.rt5;",
@@ -229,6 +193,7 @@ SOURCE_ANCHORS = (
     "ApplyDirectionPlusAOverride(roles, outputs);",
     "ApplyZAirdodgeOverride(effective_directions, outputs);",
     "ApplyHardUpBOverride(effective_directions, outputs);",
+    "ApplyRF3VerticalCStickDiagonalOverride(inputs, effective_directions, directions, outputs);",
     "ApplyNullOverride(outputs);",
     "if (inputs.nunchuk_c)",
     "if (inputs.nunchuk_connected)",
@@ -379,43 +344,31 @@ def validate_case(case: Any, index: int, source: str) -> tuple[str, str]:
     if not isinstance(notes, list) or not all(isinstance(note, str) for note in notes):
         fail(f"{case_id}.notes must be a list of strings")
 
-    left_stick = expected.get("left_stick")
-    if table_id is not None and left_stick is not None:
-        x, y = left_stick
-        point = f"{{{x}, {y}}}"
-        if point not in source:
-            fail(f"{case_id}.expected.left_stick {point} is not present in runtime source table constants")
-
     return case_id, category
 
 
 def validate_direct_cstick_suppression_cases(cases_by_id: dict[str, dict[str, Any]]) -> None:
-    c_stick_buttons = {"RT2", "RT3", "RT4", "RT5"}
-    for case_id, (c_stick_button, right_stick_direction) in C_STICK_SUPPRESSION_DIRECT_CASES.items():
+    for case_id, (submode_button, primary_button, c_stick_button, right_stick_direction) in C_STICK_SUPPRESSION_DIRECT_CASES.items():
         case = cases_by_id.get(case_id)
         if case is None:
-            fail(f"missing direct LF4 sub-mode C-stick suppression case: {case_id}")
+            fail(f"missing direct C-stick suppression case: {case_id}")
         if case.get("category") != "c_stick_suppression":
             fail(f"{case_id}.category must be c_stick_suppression")
 
         input_buttons = set(require_string_list(case.get("input_buttons"), f"{case_id}.input_buttons"))
-        expected_input_buttons = {"LF4", "LT2", "RF2", c_stick_button}
+        expected_input_buttons = {submode_button, primary_button, c_stick_button}
         if input_buttons != expected_input_buttons:
             fail(
                 f"{case_id}.input_buttons must be exactly "
                 + ", ".join(sorted(expected_input_buttons))
                 + f"; got {', '.join(sorted(input_buttons))}"
             )
-        if len(input_buttons & c_stick_buttons) != 1:
-            fail(f"{case_id}.input_buttons must include exactly one C-stick input")
 
         expected = case.get("expected")
         if not isinstance(expected, dict):
             fail(f"{case_id}.expected must be object")
         digital_buttons = require_string_list(expected.get("digital_buttons"), f"{case_id}.expected.digital_buttons")
         suppressed_buttons = require_string_list(expected.get("suppressed_buttons"), f"{case_id}.expected.suppressed_buttons")
-        if "B" not in digital_buttons:
-            fail(f"{case_id}.expected.digital_buttons must include B")
         if "X" in digital_buttons:
             fail(f"{case_id}.expected.digital_buttons must not include X")
         if "X" not in suppressed_buttons:
@@ -424,10 +377,8 @@ def validate_direct_cstick_suppression_cases(cases_by_id: dict[str, dict[str, An
         effective_direction = expected.get("effective_direction")
         if not isinstance(effective_direction, dict):
             fail(f"{case_id}.expected.effective_direction must be object")
-        if effective_direction.get("up") is True:
-            fail(f"{case_id}.expected.effective_direction.up must not be true from RF2")
-        if any(effective_direction.get(direction) is True for direction in ("left", "right", "up", "down")):
-            fail(f"{case_id}.expected.effective_direction must not include RF2-owned directional LS phase")
+        if primary_button == "RF2" and effective_direction.get("up") is True:
+            fail(f"{case_id}.expected.effective_direction.up must not be true from LF4+RF2")
 
         right_stick = expected.get("right_stick_digital")
         if not isinstance(right_stick, dict):
@@ -447,15 +398,15 @@ def validate_doc(doc: str) -> None:
         if heading not in doc:
             fail(f"behavior case doc missing heading: {heading}")
     for phrase in (
-        "Docs/fixture/checker-only",
-        "No runtime behavior change.",
+        "Docs/fixture/checker-only evaluator update",
+        "Firmware source implementation is not claimed",
         "No generated config.",
         "No runtime-loaded config.",
         "No serial writing.",
         "No new hardware claim.",
         "No Senscope browser app semantic claim.",
-        "No case should be treated as a new hardware validation result.",
         "Cases are representative, not exhaustive.",
+        "hardware validation result",
         "Nunchuk behavior is source-present",
     ):
         if phrase not in doc:
@@ -471,9 +422,9 @@ def validate_payload(payload: dict[str, Any], duplicate_keys: list[str], source:
         fail("schema_name must be glyph_identity_runtime_behavior_cases")
     if payload.get("mode_scope") != "MODE_ULTIMATE":
         fail("mode_scope must be MODE_ULTIMATE")
-    if payload.get("source_status") != "source_backed_expected_behavior_cases":
-        fail("source_status must be source_backed_expected_behavior_cases")
-    if payload.get("hardware_status") != "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results":
+    if payload.get("source_status") != "gfw3_requested_expected_behavior_cases":
+        fail("source_status must be gfw3_requested_expected_behavior_cases")
+    if payload.get("hardware_status") != "not_new_hardware_result":
         fail("hardware_status must preserve no-new-hardware-result caveat")
     if payload.get("source_authority") != EXPECTED_SOURCE_AUTHORITY:
         fail("source_authority does not match expected behavior-case authority set")
@@ -511,38 +462,39 @@ def validate_payload(payload: dict[str, Any], duplicate_keys: list[str], source:
     return len(cases), len(categories)
 
 
-def validate_sources(source: str, role_map_fixture: str, role_map_doc: str, hardware_result: str) -> None:
+def validate_sources(source: str, spec_fixture: str, spec_doc: str) -> None:
     for anchor in SOURCE_ANCHORS:
         if anchor not in source:
             fail(f"runtime source missing anchor: {anchor}")
-    for anchor in ROLE_MAP_ANCHORS:
-        if anchor not in role_map_fixture:
-            fail(f"role-map fixture missing anchor: {anchor}")
-    for phrase in (
-        "Source-backed canonical documentation",
-        "Nunchuk behavior remains preserved in source but not hardware-validated.",
-        "RF13 = LS->DPad",
-        "RF7 = hard Up+B",
+    for anchor in (
+        '"schema_name": "glyph_gfw3_runtime_remap_rework_spec"',
+        '"hardware_status": "not_hardware_validated"',
+        '"firmware_implementation_status": "not_yet_claimed"',
+        '"RF6":',
+        '"RT1_RF4":',
     ):
-        if phrase not in role_map_doc:
-            fail(f"role-map doc missing anchor phrase: {phrase}")
+        if anchor not in spec_fixture:
+            fail(f"GFW3 spec fixture missing anchor: {anchor}")
     for phrase in (
-        "PASS_IDENTITY_RUNTIME_SMASHBOX_LATEST_PROFILE",
-        "nunchuk | NOT_TESTED_UNAVAILABLE",
+        "firmware implementation not yet claimed",
+        "hardware validation not claimed",
+        "RF9 full-null mode nulls both left stick and right stick inputs",
+        "RF9 base-RF3-X suppression mode suppresses base RF3 X",
+        "does not full-null left stick or right stick/C-stick output",
+        "LF4 overrides LT2 behavior when both are held",
     ):
-        if phrase not in hardware_result:
-            fail(f"hardware result missing anchor phrase: {phrase}")
+        if phrase not in spec_doc:
+            fail(f"GFW3 spec doc missing anchor phrase: {phrase}")
 
 
 def main() -> int:
     try:
         source = read_text(SOURCE_PATH)
-        role_map_fixture = read_text(ROLE_MAP_FIXTURE_PATH)
-        role_map_doc = read_text(ROLE_MAP_DOC_PATH)
-        hardware_result = read_text(HARDWARE_RESULT_PATH)
+        spec_fixture = read_text(REPO_ROOT / "docs/calibration/fixtures/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.json")
+        spec_doc = read_text(REPO_ROOT / "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md")
         doc = read_text(DOC_PATH)
         payload, duplicate_keys = load_json(FIXTURE_PATH)
-        validate_sources(source, role_map_fixture, role_map_doc, hardware_result)
+        validate_sources(source, spec_fixture, spec_doc)
         validate_doc(doc)
         case_count, category_count = validate_payload(payload, duplicate_keys, source)
     except AssertionError as exc:

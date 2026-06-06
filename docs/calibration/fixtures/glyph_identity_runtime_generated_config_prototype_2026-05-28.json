@@ -2,33 +2,24 @@
   "contract_version": 1,
   "coverage_metadata": {
     "behavior_cases_fixture": "docs/calibration/fixtures/glyph_identity_runtime_behavior_cases_2026-05-28.json",
-    "case_count": 118,
+    "case_count": 84,
     "categories": [
-      "base_direction",
+      "base_role",
       "c_stick_suppression",
-      "composite_table",
-      "default_analog_table",
-      "digital_button_carrier",
-      "direction_plus_a_override",
-      "lf4_sub_mode",
-      "mode_default_analog_table",
-      "mode_modifier_table_selection",
-      "multi_modifier_fallback",
-      "nunchuk_source_preservation",
-      "pure_layer",
-      "rf13_ls_to_dpad",
-      "rf7_hard_up_b",
-      "rf9_null_override",
-      "right_stick_c_stick",
-      "single_modifier_table_selection",
-      "z_airdodge_low_magnitude_override"
+      "custom_modifier",
+      "lf4_submode",
+      "lf8_lf7_removed",
+      "lt2_sublayer",
+      "lt_physical_move_cycle",
+      "preservation",
+      "rf9_null"
     ],
-    "category_count": 18,
-    "hardware_status": "cases_derive_from_hardware_verified_role_map_but_are_not_new_hardware_results"
+    "category_count": 9,
+    "hardware_status": "not_new_hardware_result"
   },
   "direction_convention": "numpad",
   "hard_overrides": {
-    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude",
+    "rf6_low_magnitude_table": "Lt1LowMagnitude",
     "rf7_hard_up_b": {
       "center": [
         128,
@@ -63,72 +54,84 @@
     "analog": [
       "table_output",
       "direction_plus_a",
-      "lt5_or_rf11_low_magnitude_za",
+      "rf6_low_magnitude_za",
       "rf7_hard_up_b",
+      "c_stick_asdi",
       "rf9_null",
       "nunchuk_override"
     ],
     "button_carriers": {
-      "LT3": "L",
-      "LT5": "Z",
+      "LF4": "B",
+      "LT1": "L",
+      "LT3": "L+R",
+      "LT4": "X2/MX2",
+      "LT5": "X1/MX1",
+      "LT6": "A",
       "MB4": "Capture",
       "MB5": "Home",
       "MB6": "Select/Minus",
       "MB7": "Start/Plus",
       "RF1": "A",
       "RF10": "Y",
-      "RF11": "Z",
       "RF16": "R",
-      "RF2": "X",
-      "RF5": "B",
-      "RT1": "Z"
+      "RF2": "B",
+      "RF3": "X",
+      "RF5": "A",
+      "RF6": "Z",
+      "RF7": "B"
+    },
+    "c_stick_asdi": {
+      "condition": [
+        "RT2/RT3/RT4/RT5 diagonal C-stick"
+      ],
+      "source": "src/modes/Ultimate.cpp"
     },
     "digital_effective_direction": [
       "physical_inputs",
-      "layer_left_right",
       "lf4_submode_active",
+      "lt2_sublayer_active",
       "forced_up_resolution",
       "button_carriers",
       "ls_to_dpad_routing"
     ],
     "direction_plus_a": {
       "bindings": {
-        "RF12": "DirectionPlusA",
-        "RF15": "DirectionPlusA"
+        "RF5": "DirectionPlusA"
       },
       "down_binding": {
         "LT6": "DownA"
       },
-      "source": "role_map_fixture.bindings"
+      "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
     },
     "forced_up_resolution": {
       "source": "role_map_fixture.layering.priority",
       "stage": "forced_up_resolution"
     },
-    "layer_left_right": {
-      "layer_direction": [
-        "LF7",
-        "LF8"
-      ],
-      "source": "role_map_fixture.layering.layer_direction"
-    },
     "lf4_submode_active": {
       "condition": [
-        "LF4",
-        "(LT2 OR LF7 OR LF8)"
+        "LF4"
       ],
-      "source": "role_map_fixture.layering.lf4_submode"
+      "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
+    },
+    "lf8_lf7_removed": {
+      "layer_direction": [],
+      "scratched_inputs": [
+        "LF8",
+        "LF7"
+      ],
+      "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
     },
     "ls_to_dpad_routing": {
       "binding": "LS->DPad",
       "source": "role_map_fixture.bindings.modifiers.RF13"
     },
-    "lt5_or_rf11_low_magnitude_za": {
-      "bindings": {
-        "LT5": "Z",
-        "RF11": "Z"
-      },
-      "table": "Lt1LowMagnitude"
+    "lt2_sublayer_active": {
+      "condition": [
+        "LT2",
+        "RF1 OR RF2 OR RF3 OR RF4",
+        "not LF4"
+      ],
+      "source": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md"
     },
     "nunchuk_override": {
       "source": "role_map_fixture.nunchuk_status",
@@ -183,6 +186,12 @@
         "BTN_MB2",
         "BTN_MB3"
       ]
+    },
+    "rf6_low_magnitude_za": {
+      "bindings": {
+        "RF6": "Z"
+      },
+      "table": "Lt1LowMagnitude"
     },
     "rf7_hard_up_b": {
       "center": [
@@ -320,7 +329,9 @@
     "MY1LayerNormalX": "kMY1LayerNormalXTable",
     "MY1Tilt1": "kMY1Tilt1Table",
     "ModeDefault": "kModeDefaultTable",
+    "RT1RF4Custom": "kRT1RF4CustomTable",
     "Tilt1": "kTilt1Table",
+    "Tilt1Minus41": "kTilt1Minus41Table",
     "Tilt2": "kTilt2Table",
     "Tilt3": "kTilt3Table",
     "X1": "kX1Table",
@@ -939,6 +950,44 @@
         169
       ]
     ],
+    "RT1RF4Custom": [
+      [
+        69,
+        78
+      ],
+      [
+        128,
+        78
+      ],
+      [
+        187,
+        78
+      ],
+      [
+        69,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        187,
+        128
+      ],
+      [
+        72,
+        172
+      ],
+      [
+        128,
+        179
+      ],
+      [
+        184,
+        172
+      ]
+    ],
     "Tilt1": [
       [
         187,
@@ -974,6 +1023,44 @@
       ],
       [
         69,
+        209
+      ]
+    ],
+    "Tilt1Minus41": [
+      [
+        169,
+        47
+      ],
+      [
+        128,
+        47
+      ],
+      [
+        87,
+        47
+      ],
+      [
+        169,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        87,
+        128
+      ],
+      [
+        169,
+        209
+      ],
+      [
+        128,
+        209
+      ],
+      [
+        87,
         209
       ]
     ],

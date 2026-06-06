@@ -361,6 +361,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_generated_constants_refactor_hardware_result.py",
         ),
         step(
+            "gfw3 runtime remap hardware result",
+            "tools/check_glyph_gfw3_runtime_remap_hardware_result.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),

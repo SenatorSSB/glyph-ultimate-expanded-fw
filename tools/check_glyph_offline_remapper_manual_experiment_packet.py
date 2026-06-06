@@ -68,12 +68,12 @@ REQUIRED_CANDIDATE_INPUTS = (
     (
         "Senscope export package sample",
         "docs/calibration/fixtures/glyph_senscope_export_package_SAMPLE_2026-06-03.json",
-        "a63cfce1e209d5a4110b666a9c4adf6362c1467d1a5d4496a45b71ba0853933b",
+        "3497ce3150620a60838c50f58438250f472c121b3ce9623d3223ea5f780717a1",
     ),
     (
         "Runtime config candidate sample",
         "docs/calibration/fixtures/glyph_runtime_config_candidate_SAMPLE_2026-06-03.json",
-        "4c85b13f37b8e4b7fafc6b4f515dee4352c0f8fe8ce4f13a60634d8091a9c42c",
+        "e4e9b0e47b36f9f8585b37ac0e9f3cba2b6ae2833d79121e99af602c9d48543f",
     ),
     (
         "Active profile artifact",

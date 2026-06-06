@@ -45,7 +45,6 @@ EXPECTED_TOP_LEVEL = {
 }
 REQUIRED_CONFIG_OBJECTS = ("tables", "role_bindings", "priority_model", "hard_overrides")
 
-
 def display(path: Path) -> str:
     try:
         return str(path.resolve().relative_to(REPO_ROOT))

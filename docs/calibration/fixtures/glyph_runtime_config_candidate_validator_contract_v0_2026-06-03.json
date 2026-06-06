@@ -55,7 +55,9 @@
     "MTilt1",
     "MTilt2",
     "MTilt3",
-    "Lt1LowMagnitude"
+    "Lt1LowMagnitude",
+    "Tilt1Minus41",
+    "RT1RF4Custom"
   ],
   "required_role_binding_sections": [
     "buttons",
@@ -67,8 +69,8 @@
   "approved_priority_classes": {
     "digital": [
       "physical_inputs",
-      "layer_left_right",
       "lf4_submode_active",
+      "lt2_sublayer_active",
       "forced_up_resolution",
       "button_carriers",
       "ls_to_dpad_routing"
@@ -76,8 +78,9 @@
     "analog": [
       "table_output",
       "direction_plus_a",
-      "lt5_or_rf11_low_magnitude_za",
+      "rf6_low_magnitude_za",
       "rf7_hard_up_b",
+      "c_stick_asdi",
       "rf9_null",
       "nunchuk_override"
     ]
@@ -117,7 +120,7 @@
       128,
       128
     ],
-    "lt5_rf11_low_magnitude_table": "Lt1LowMagnitude"
+    "rf6_low_magnitude_table": "Lt1LowMagnitude"
   },
   "required_non_goals": [
     "not_firmware_source",

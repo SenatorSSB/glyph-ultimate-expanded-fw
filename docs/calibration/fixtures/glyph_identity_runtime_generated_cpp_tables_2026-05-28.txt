@@ -259,6 +259,30 @@ constexpr StickPoint kTilt3Table[9] = {
     {181, 170},
 };
 
+constexpr StickPoint kTilt1Minus41Table[9] = {
+    {169, 47},
+    {128, 47},
+    {87, 47},
+    {169, 128},
+    {128, 128},
+    {87, 128},
+    {169, 209},
+    {128, 209},
+    {87, 209},
+};
+
+constexpr StickPoint kRT1RF4CustomTable[9] = {
+    {69, 78},
+    {128, 78},
+    {187, 78},
+    {69, 128},
+    {128, 128},
+    {187, 128},
+    {72, 172},
+    {128, 179},
+    {184, 172},
+};
+
 constexpr StickPoint kMTilt1Table[9] = {
     {169, 88},
     {128, 88},
@@ -345,5 +369,5 @@ constexpr StickPoint kLt1LowMagnitudeTable[9] = {
 // role_binding.special_functions.LT6 = DownA
 // role_binding.special_functions.RF13+RF7 = DPadRoutingAndHardUpBAllowed
 
-// priority.digital_effective_direction = physical_inputs -> layer_left_right -> lf4_submode_active -> forced_up_resolution -> button_carriers -> ls_to_dpad_routing
-// priority.analog = table_output -> direction_plus_a -> lt5_or_rf11_low_magnitude_za -> rf7_hard_up_b -> rf9_null -> nunchuk_override
+// priority.digital_effective_direction = physical_inputs -> lf4_submode_active -> lt2_sublayer_active -> forced_up_resolution -> button_carriers -> ls_to_dpad_routing
+// priority.analog = table_output -> direction_plus_a -> rf6_low_magnitude_za -> rf7_hard_up_b -> c_stick_asdi -> rf9_null -> nunchuk_override
