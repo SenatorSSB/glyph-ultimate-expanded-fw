@@ -1,0 +1,200 @@
+{
+  "schema_name": "glyph_ultimate_preservation_hardware_result",
+  "schema_version": 1,
+  "result_status": "user_reported_preservation_pass",
+  "result_date": "2026-06-06",
+  "branch_tested": "configurator",
+  "commit_sha_tested": "UNKNOWN_NOT_PROVIDED",
+  "firmware_created_at_local": "2026-06-06T03:24:23+03:00",
+  "firmware_created_at_source": "local_artifact_mtime",
+  "firmware_artifact_path": ".pio/build/glyph_mk6/firmware.bin",
+  "firmware_artifact_sha256": "24f73bdff416bb7aa6ecd1d1147723dfcbd37edbd5a16664299453159e8c93ee",
+  "profile_config_used": "Current tested profile per user report; exact artifact not recorded from user report",
+  "controller_model_or_hardware_id": "Glyph MK6",
+  "flash_method": "UNKNOWN_NOT_PROVIDED",
+  "glyph_mini_screen_offsets_used": "not_recorded_from_user_report",
+  "switch_controller_visualization_used": "not_recorded_from_user_report",
+  "ultimate_training_mode_used": "not_recorded_from_user_report",
+  "observation_method": "user_playtesting_actual_use",
+  "overall_user_report": [
+    "works_as_expected",
+    "all_modifiers_all_functionalities_all_directions"
+  ],
+  "hardware_validation_claimed": true,
+  "nunchuk_hardware_validated": false,
+  "nunchuk_status": "not_tested_unavailable_no_port",
+  "runtime_loaded_config_implemented": false,
+  "webserial_write_implemented": false,
+  "device_write_implemented": false,
+  "external_remapper_adapter_implemented": false,
+  "active_profile_artifact_changed": false,
+  "exact_measured_outputs_claimed": false,
+  "result_scope": "preservation_hardware_scope_for_applicable_non_nunchuk_rows",
+  "final_disposition": "PASS_WITH_NUNCHUK_NOT_TESTED",
+  "row_results": {
+    "BNM-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-04": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-05": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-06": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-07": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-08": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-09": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-10": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BNM-11": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "TLT-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "TLT-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "TLT-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "CST-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "CST-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "CST-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "CST-04": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "TRG-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "TRG-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "TRG-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "SCD-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "SCD-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "SCD-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "SCD-04": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "SCD-05": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "SCD-06": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "RF5-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "RF5-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "RF5-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "RF5-04": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "PRF-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "PRF-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "PRF-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "PRF-04": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "NCK-01": {
+      "status": "NOT_TESTED",
+      "notes": "Controller has no nunchuk port available out of the box; user did not test nunchuk; no nunchuk validation claimed."
+    },
+    "NCK-02": {
+      "status": "NOT_TESTED",
+      "notes": "Controller has no nunchuk port available out of the box; user did not test nunchuk; no nunchuk validation claimed."
+    },
+    "BTN-01": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BTN-02": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BTN-03": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    },
+    "BTN-04": {
+      "status": "PASS",
+      "notes": "User reported all applicable modifiers/functionality/directions working as expected; no row-specific measured output claimed."
+    }
+  }
+}

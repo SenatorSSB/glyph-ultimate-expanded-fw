@@ -27,6 +27,7 @@ Scope boundaries:
 
 - `configurator` has post-GFW3 baseline recorded.
 - The GFW3 result is user-reported pass.
+- The preservation hardware result is user-reported pass for applicable non-nunchuk scope.
 - Nunchuk hardware validation not claimed.
 - Runtime-loaded config not implemented.
 - WebSerial/device write not implemented.
@@ -44,6 +45,10 @@ Primary baseline evidence:
 
 - `COMPLETE`: current repo evidence records the docs/tools item or user-reported
   result as complete for its stated scope.
+- `COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED`: user-reported pass is
+  recorded for all applicable non-nunchuk preservation rows, while nunchuk
+  remains NOT_TESTED/unvalidated because the controller has no nunchuk port
+  available out of the box.
 - `READY_DOCS_TOOLS`: safe next work is limited to docs, fixtures, checkers,
   indexes, read-only validators, and source-auditable packets.
 - `READY_CORPUS_CAPTURE`: protocol/checker exists; future work needs real
@@ -64,13 +69,13 @@ Primary baseline evidence:
 | --- | --- | --- | --- |
 | Native Ultimate Tilt/Tilt2 runtime baseline | `COMPLETE` | Preserve with docs/checkers only. | Source and prior docs record current native `MODE_ULTIMATE` baseline. |
 | Tilt/Tilt2 hardware smoke evidence | `COMPLETE` | Preserve evidence; do not expand claims. | Current smoke result is not nunchuk validation. |
-| Preservation hardware matrix execution | `BLOCKED_HARDWARE` | Use the readiness packet, refine result template/checker only, or execute hardware separately. | Filled `docs/calibration/glyph_ultimate_preservation_hardware_result.md` is absent. Result checker validates the template fixture and reports `template_contract=true` before accepting the no-result state. Readiness packet `glyph/gfw4-preservation-hardware-readiness` records `readiness_packet_only` and `blocked_pending_user_hardware_execution`; suggested future result branch is `glyph/gfw4-preservation-hardware-result`. |
+| Preservation hardware matrix execution | `COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED` | Preserve the recorded result scope only. | User-reported pass is recorded for all applicable non-nunchuk preservation rows in `docs/calibration/glyph_ultimate_preservation_hardware_result.md` and `docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result.json`; nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box. No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed. |
 | Capability and source-authority mapping | `COMPLETE` | Maintain docs/checkers if source paths drift. | Do not promote unknown behavior to fact. |
 | Identity runtime role/case canonicalization | `COMPLETE` | Maintain evaluator/table sync only. | Future firmware behavior changes still require their own gate. |
 | Export corpus capture | `READY_CORPUS_CAPTURE` | Capture real matched-version corpus artifacts if available. | No real corpus manifest or fixture set is present under `docs/calibration/export_corpus/`. Export corpus readiness status records `blocked_missing_real_corpus_artifacts`, `corpus_present=false`, and `completion_allowed=false`. |
 | Adapter policy and prewrite validation | `READY_DOCS_TOOLS` | Maintain the blocker matrix and read-only policy/checkers. | Write-capable adapter remains blocked by missing corpus, missing official configurator source authority, non-authoritative external observations, unsafe active-profile round-trip, WebSerial/device write blockers, runtime-loaded config blockers, protobuf binary write blockers, license/code-reuse blockers, and implementation approval. |
 | Physical/logical mapping and RF5 transcription | `READY_DOCS_TOOLS` | Maintain the RF5 gap index only, without changing mappings. | Printed RF5 transcription exists; old RF5 smoke row remains `NOT_TESTED_AMBIGUOUS` and must not be retconned. Later GFW3 RF5 evidence is scope-limited and does not rewrite the historical row. |
-| Next user action handoff | `BLOCKED_USER_INPUT` | Stop autonomous docs/tools sequence and wait for user action. | `glyph/gfw4-next-user-action-handoff` records `next_user_action_required`: execute preservation hardware matrix, provide real export corpus artifacts, provide source-authority approval or domain input as needed, and provide explicit implementation approval before behavior-changing work. No firmware implementation should start from this handoff alone. |
+| Next user action handoff | `BLOCKED_USER_INPUT` | Stop autonomous docs/tools sequence and wait for user action. | `glyph/gfw4-next-user-action-handoff` records `next_user_action_required`: provide real export corpus artifacts, provide source-authority approval or domain input as needed, and provide explicit implementation approval before behavior-changing work. The preservation hardware result is already recorded for applicable non-nunchuk scope; nunchuk remains NOT_TESTED/unvalidated. No firmware implementation should start from this handoff alone. |
 | Identity runtime generated-config prototype | `COMPLETE` | Maintain generated review artifacts/checkers only. | Prototype is not firmware input and not runtime-loaded config. |
 | Runtime config candidate validator | `COMPLETE` | Maintain offline validator/corpus only. | Candidate validator is not runtime-loaded config implementation. |
 | Runtime-loaded config design and validation contract | `READY_DOCS_TOOLS` | Continue docs/tools design validation only. | Implementation remains blocked by user approval, source authority, storage/interpreter decisions, and hardware plan. |
@@ -101,14 +106,14 @@ Primary baseline evidence:
 
 ### Queue 2 - Requires user/corpus/hardware
 
-- Preservation hardware execution.
 - Export corpus capture if source artifacts are not present.
-- Next user action handoff follow-up: execute preservation hardware matrix,
-  provide real export corpus artifacts, provide source-authority approval or
-  domain input where needed, and provide explicit implementation approval before
-  any behavior-changing branch.
+- Next user action handoff follow-up: provide real export corpus artifacts,
+  provide source-authority approval or domain input where needed, and provide
+  explicit implementation approval before any behavior-changing branch. The
+  preservation hardware result is already recorded for applicable non-nunchuk
+  scope.
 - Any behavior-changing runtime branch.
-- Any nunchuk validation.
+- Any nunchuk validation if a future scope explicitly needs it.
 - Any physical/logical role or chord-priority decision that depends on
   user/domain intent.
 

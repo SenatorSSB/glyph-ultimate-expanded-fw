@@ -16,6 +16,8 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
     "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
     "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json",
+    "docs/calibration/glyph_ultimate_preservation_hardware_result.md",
+    "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result.json",
     "docs/calibration/glyph_preservation_hardware_readiness_packet_2026-06-06.md",
     "docs/calibration/fixtures/glyph_preservation_hardware_readiness_packet_2026-06-06.json",
     "tools/check_glyph_preservation_hardware_readiness_packet.py",
@@ -338,7 +340,6 @@ REQUIRED_FILES = [
 ]
 
 OPTIONAL_FUTURE_FILES = [
-    "docs/calibration/glyph_ultimate_preservation_hardware_result.md",
     "docs/calibration/export_corpus",
 ]
 
@@ -347,10 +348,11 @@ REQUIRED_ROADMAP_PHRASES = [
     "Preservation hardware readiness packet",
     "glyph/gfw4-preservation-hardware-readiness",
     "readiness_packet_only",
-    "blocked_pending_user_hardware_execution",
-    "No preservation hardware result is recorded by the readiness packet",
-    "template_contract=true",
+    "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED",
+    "User-reported pass is recorded for all applicable non-nunchuk preservation rows",
+    "Nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box",
     "glyph/gfw4-preservation-hardware-result",
+    "The preservation hardware result is now recorded separately for applicable non-nunchuk scope",
     "Export corpus readiness status",
     "glyph/gfw4-export-corpus-readiness-status",
     "blocked_missing_real_corpus_artifacts",
@@ -360,11 +362,12 @@ REQUIRED_ROADMAP_PHRASES = [
     "Next user action handoff",
     "glyph/gfw4-next-user-action-handoff",
     "next_user_action_required",
-    "execute preservation hardware matrix",
     "provide real export corpus artifacts",
     "source-authority approval",
     "explicit implementation approval",
     "No firmware implementation should start from this handoff alone",
+    "The preservation hardware result is already recorded for applicable non-nunchuk scope",
+    "preserve the recorded preservation hardware result",
     "glyph/gfw2-webserial-transport-blocker-packet",
     "serial dry-run is not live device access",
     "WebSerial write, device write, and firmware flashing are not implemented",

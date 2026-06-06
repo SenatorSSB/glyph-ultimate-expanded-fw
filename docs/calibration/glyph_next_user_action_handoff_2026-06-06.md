@@ -28,13 +28,15 @@ sequence:
 
 The post-GFW3 baseline remains the current source-backed configurator baseline.
 The GFW3 runtime remap result is user-reported pass for its stated scope.
+The preservation hardware result is recorded for applicable non-nunchuk scope;
+nunchuk remains NOT_TESTED / unvalidated / unavailable because the controller
+has no nunchuk port available out of the box.
 Nunchuk hardware validation is not claimed.
 
 ## Remaining blocked items
 
 | Item | Current state | Required next input |
 | --- | --- | --- |
-| Preservation hardware matrix | `blocked_pending_user_hardware_execution` | User execution of the preservation hardware matrix and a future result packet. |
 | Export corpus capture | `blocked_missing_real_corpus_artifacts` | Real matched-version export corpus artifacts, manifest, hashes, and provenance. |
 | Write-capable adapter / prewrite behavior | `adapter_prewrite_blocked` | Corpus, source authority, license/code-reuse review, transport/runtime decisions, and explicit implementation approval. |
 | Physical/logical/RF5 ambiguity | `requires_source_authority_hardware_result_or_user_domain_input` | Source authority, user-reported hardware result, or explicit user/domain input if the historical RF5 row must be resolved. |
@@ -42,16 +44,14 @@ Nunchuk hardware validation is not claimed.
 
 ## Exact next user-required actions
 
-1. Execute the preservation hardware matrix and report per-row results, or decide
-   to leave preservation blocked.
-2. Provide real export corpus artifacts with a filled manifest, fixture hashes,
+1. Provide real export corpus artifacts with a filled manifest, fixture hashes,
    and matched-version provenance, or leave export corpus capture blocked.
-3. Provide source-authority approval before any write-capable adapter,
+2. Provide source-authority approval before any write-capable adapter,
    runtime-loaded config, WebSerial/device write, protobuf binary write, or
    external adapter output work is considered.
-4. Provide domain input or hardware/source evidence if the historical
+3. Provide domain input or hardware/source evidence if the historical
    physical/logical/RF5 ambiguity must be resolved.
-5. Provide explicit implementation approval before any firmware behavior change
+4. Provide explicit implementation approval before any firmware behavior change
    branch is started.
 
 Recommended future preservation result branch:
@@ -78,6 +78,8 @@ Recommended future preservation result branch:
 - `docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md`
 - `docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md`
 - `docs/calibration/glyph_preservation_hardware_readiness_packet_2026-06-06.md`
+- `docs/calibration/glyph_ultimate_preservation_hardware_result.md`
+- `docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result.json`
 - `docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md`
 - `docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json`
 - `docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md`

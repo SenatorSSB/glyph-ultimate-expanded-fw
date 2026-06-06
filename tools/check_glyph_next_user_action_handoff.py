@@ -29,7 +29,6 @@ REQUIRED_BRANCHES = {
 }
 
 REQUIRED_BLOCKED_ITEMS = {
-    "preservation_hardware_execution",
     "export_corpus_provision",
     "adapter_prewrite_source_authority",
     "physical_logical_rf5_resolution",
@@ -37,7 +36,6 @@ REQUIRED_BLOCKED_ITEMS = {
 }
 
 REQUIRED_ACTIONS = {
-    "execute_preservation_hardware_matrix_or_leave_blocked",
     "provide_export_corpus_artifacts_or_leave_blocked",
     "provide_source_authority_approval_before_write_capable_work",
     "provide_domain_input_or_hardware_source_evidence_for_rf5_if_resolution_is_needed",
@@ -65,8 +63,9 @@ REQUIRED_FALSE_NON_CLAIMS = {
 
 REQUIRED_DOC_PHRASES = (
     "next_user_action_required",
-    "Preservation hardware matrix",
-    "blocked_pending_user_hardware_execution",
+    "preservation hardware result is recorded for applicable non-nunchuk scope",
+    "nunchuk remains NOT_TESTED / unvalidated / unavailable",
+    "has no nunchuk port available out of the box",
     "Export corpus capture",
     "blocked_missing_real_corpus_artifacts",
     "Write-capable adapter / prewrite behavior",
@@ -209,8 +208,6 @@ def validate_remaining_blocked_items(payload: dict[str, Any]) -> None:
     missing = sorted(REQUIRED_BLOCKED_ITEMS - set(items))
     if missing:
         fail("remaining_blocked_items missing: " + ", ".join(missing))
-    if items["preservation_hardware_execution"]["requires_user_hardware"] is not True:
-        fail("preservation hardware execution must require user hardware")
     if items["export_corpus_provision"]["requires_user_artifacts"] is not True:
         fail("export corpus provision must require user artifacts")
     if items["adapter_prewrite_source_authority"]["requires_source_authority_approval"] is not True:
