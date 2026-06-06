@@ -1,0 +1,51 @@
+{
+  "schema_name": "glyph_post_gfw3_configurator_baseline",
+  "schema_version": 1,
+  "baseline_date": "2026-06-06",
+  "status": "post_gfw3_configurator_baseline_recorded",
+  "configurator_baseline_status": "gfw3_merged_and_ready_for_next_docs_tools_gate",
+  "merged_integration_branch": "glyph/gfw3-runtime-remap-rework",
+  "source_result_doc_path": "docs/calibration/glyph_gfw3_runtime_remap_hardware_result_2026-06-06.md",
+  "source_result_fixture_path": "docs/calibration/fixtures/glyph_gfw3_runtime_remap_hardware_result_2026-06-06.json",
+  "source_result_checker_path": "tools/check_glyph_gfw3_runtime_remap_hardware_result.py",
+  "source_result_status": "user_reported_hardware_pass",
+  "user_report": "everything passing as expected",
+  "non_claims": {
+    "nunchuk_hardware_validated": false,
+    "runtime_loaded_config_implemented": false,
+    "webserial_write_implemented": false,
+    "device_write_implemented": false,
+    "external_remapper_adapter_implemented": false,
+    "external_remapper_json_generated": false,
+    "active_profile_artifact_changed": false,
+    "senscope_game_semantics_changed": false
+  },
+  "required_future_behavior_changing_workflow_gates": [
+    "own_behavior_change_branch",
+    "source_backed_spec",
+    "deterministic_checker_or_fixture",
+    "firmware_build",
+    "build_artifact_inspection",
+    "hardware_test_plan",
+    "user_hardware_result_recording",
+    "post_result_inspection",
+    "rollback_plan",
+    "merge_gate_before_configurator_merge"
+  ],
+  "blocked_without_future_source_authority_and_approval": [
+    "runtime_loaded_config",
+    "WebSerial/device write",
+    "protobuf binary write",
+    "firmware flashing automation",
+    "external remapper adapter output"
+  ],
+  "key_checks_expected_to_pass": [
+    "tools/check_glyph_gfw3_runtime_remap_hardware_result.py",
+    "tools/check_glyph_identity_runtime_behavior_evaluator.py",
+    "tools/check_glyph_firmware_workstream_roadmap.py",
+    "tools/run_glyph_next_runtime_change_readiness_checks.py",
+    "tools/check_glyph_no_forbidden_artifacts.py",
+    ".venv/bin/python -m platformio run -e glyph_mk6",
+    "tools/inspect_glyph_mk6_build_artifact.py"
+  ]
+}
