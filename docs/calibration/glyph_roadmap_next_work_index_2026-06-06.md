@@ -68,7 +68,7 @@ Primary baseline evidence:
 | Capability and source-authority mapping | `COMPLETE` | Maintain docs/checkers if source paths drift. | Do not promote unknown behavior to fact. |
 | Identity runtime role/case canonicalization | `COMPLETE` | Maintain evaluator/table sync only. | Future firmware behavior changes still require their own gate. |
 | Export corpus capture | `READY_CORPUS_CAPTURE` | Capture real matched-version corpus artifacts if available. | No real corpus manifest or fixture set is present under `docs/calibration/export_corpus/`. Export corpus readiness status records `blocked_missing_real_corpus_artifacts`, `corpus_present=false`, and `completion_allowed=false`. |
-| Adapter policy and prewrite validation | `READY_DOCS_TOOLS` | Harden read-only policy/checkers. | Write-capable adapter remains blocked by corpus, source authority, and approval. |
+| Adapter policy and prewrite validation | `READY_DOCS_TOOLS` | Maintain the blocker matrix and read-only policy/checkers. | Write-capable adapter remains blocked by missing corpus, missing official configurator source authority, non-authoritative external observations, unsafe active-profile round-trip, WebSerial/device write blockers, runtime-loaded config blockers, protobuf binary write blockers, license/code-reuse blockers, and implementation approval. |
 | Physical/logical mapping and RF5 transcription | `READY_DOCS_TOOLS` | Refine gap/index packets only. | Printed RF5 transcription exists; old RF5 smoke row remains ambiguous and must not be retconned. |
 | Identity runtime generated-config prototype | `COMPLETE` | Maintain generated review artifacts/checkers only. | Prototype is not firmware input and not runtime-loaded config. |
 | Runtime config candidate validator | `COMPLETE` | Maintain offline validator/corpus only. | Candidate validator is not runtime-loaded config implementation. |
@@ -93,6 +93,7 @@ Primary baseline evidence:
 - Roadmap/index/checker hardening.
 - Export corpus readiness/capture packet if corpus files are available.
 - Preservation hardware packet refinement if no hardware result is claimed.
+- Adapter prewrite blocker matrix maintenance if upstream blocker packets drift.
 - Source-authority blocker packets.
 - External remapper source-audit result packet that records non-authoritative
   findings without copying source or adding dependencies.

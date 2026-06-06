@@ -195,13 +195,21 @@
       "evidence_paths": [
         "docs/calibration/glyph_profile_config_adapter_policy_decisions_2026-05-26.md",
         "docs/calibration/glyph_profile_adapter_prewrite_validation_2026-05-26.md",
+        "docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_adapter_prewrite_blocker_matrix_2026-06-06.json",
+        "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
         "tools/check_glyph_profile_adapter_prewrite.py"
       ],
-      "allowed_next_action": "harden_read_only_policy_and_prewrite_checker",
+      "allowed_next_action": "maintain_blocker_matrix_and_read_only_policy_checkers",
       "blocked_by": [
         "write_capable_adapter_not_approved",
         "missing_export_corpus",
-        "missing_source_authority"
+        "missing_source_authority",
+        "active_profile_round_trip_unsafe",
+        "webserial_device_write_blocked",
+        "runtime_loaded_config_blocked",
+        "protobuf_binary_write_blocked",
+        "license_code_reuse_blocked"
       ],
       "requires_user_input": false,
       "requires_hardware": false,
@@ -209,7 +217,7 @@
       "requires_corpus": true,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Read-only policy/checking is present; write behavior remains blocked."
+      "notes": "Read-only policy/checking is present; blocker matrix records write_capable_adapter_blocked_docs_tools_matrix and does not authorize adapter output generation."
     },
     {
       "item_id": "physical_logical_mapping_rf5_transcription",

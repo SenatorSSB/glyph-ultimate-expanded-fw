@@ -58,6 +58,10 @@ def steps() -> list[Step]:
             optional=True,
         ),
         step(
+            "adapter prewrite blocker matrix",
+            "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
+        ),
+        step(
             "ultimate preservation hardware result",
             "tools/check_glyph_ultimate_preservation_hardware_result.py",
             optional=True,

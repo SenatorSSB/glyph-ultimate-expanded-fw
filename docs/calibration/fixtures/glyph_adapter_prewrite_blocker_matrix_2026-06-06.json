@@ -1,0 +1,257 @@
+{
+  "schema_name": "glyph_adapter_prewrite_blocker_matrix",
+  "schema_version": 1,
+  "packet_date": "2026-06-06",
+  "status": "write_capable_adapter_blocked_docs_tools_matrix",
+  "hardware_status": "not_new_hardware_result",
+  "matrix_status": "adapter_prewrite_blocked",
+  "source_packets": {
+    "configurator_source_registry": {
+      "checker_path": "tools/check_glyph_configurator_compatibility_source_registry.py",
+      "doc_path": "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_configurator_compatibility_source_registry_2026-06-03.json",
+      "required_status": "docs_tools_source_registry",
+      "schema_name": "glyph_configurator_compatibility_source_registry"
+    },
+    "export_corpus_readiness": {
+      "checker_path": "tools/check_glyph_export_corpus_readiness_status.py",
+      "doc_path": "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
+      "required_status": "blocked_missing_real_corpus_artifacts",
+      "schema_name": "glyph_export_corpus_readiness_status"
+    },
+    "external_remapper_license_code_reuse_blocker": {
+      "checker_path": "tools/check_glyph_external_remapper_license_code_reuse_blocker.py",
+      "doc_path": "docs/calibration/glyph_external_remapper_license_code_reuse_blocker_2026-06-04.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_external_remapper_license_code_reuse_blocker_2026-06-04.json",
+      "required_status": "code_reuse_blocked_pending_license_review_and_user_approval",
+      "schema_name": "glyph_external_remapper_license_code_reuse_blocker"
+    },
+    "offline_remapper_adapter_blocker_escalation": {
+      "checker_path": "tools/check_glyph_offline_remapper_adapter_blocker_escalation.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_adapter_blocker_escalation_2026-06-04.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_adapter_blocker_escalation_2026-06-04.json",
+      "required_status": "docs_tools_adapter_blocker_escalation",
+      "schema_name": "glyph_offline_remapper_adapter_blocker_escalation"
+    },
+    "offline_remapper_export_loss_gate": {
+      "checker_path": "tools/check_glyph_offline_remapper_export_loss_gate.py",
+      "doc_path": "docs/calibration/glyph_offline_remapper_export_loss_gate_2026-06-04.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_offline_remapper_export_loss_gate_2026-06-04.json",
+      "required_status": "external_remapper_round_trip_not_safe_adapter_blocked",
+      "schema_name": "glyph_offline_remapper_export_loss_gate"
+    },
+    "protobuf_config_schema_research_packet": {
+      "checker_path": "tools/check_glyph_protobuf_config_schema_research_packet.py",
+      "doc_path": "docs/calibration/glyph_protobuf_config_schema_research_packet_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_protobuf_config_schema_research_packet_2026-06-03.json",
+      "required_status": "docs_tools_research_packet",
+      "schema_name": "glyph_protobuf_config_schema_research_packet"
+    },
+    "roadmap_next_work_index": {
+      "checker_path": "tools/check_glyph_roadmap_next_work_index.py",
+      "doc_path": "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_roadmap_next_work_index_2026-06-06.json",
+      "required_status": "index_packet",
+      "schema_name": "glyph_roadmap_next_work_index"
+    },
+    "runtime_storage_interpreter_blocker": {
+      "checker_path": "tools/check_glyph_runtime_storage_interpreter_blocker_packet.py",
+      "doc_path": "docs/calibration/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.json",
+      "required_status": "blocked_pending_design_source_authority_and_user_approval",
+      "schema_name": "glyph_runtime_storage_interpreter_blocker_packet"
+    },
+    "webserial_transport_blocker": {
+      "checker_path": "tools/check_glyph_webserial_transport_blocker_packet.py",
+      "doc_path": "docs/calibration/glyph_webserial_transport_blocker_packet_2026-06-03.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_webserial_transport_blocker_packet_2026-06-03.json",
+      "required_status": "blocked_pending_source_authority_and_user_approval",
+      "schema_name": "glyph_webserial_transport_blocker_packet"
+    }
+  },
+  "blockers": [
+    {
+      "blocker_id": "missing_export_corpus",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "export_corpus_readiness"
+      ],
+      "prevents": [
+        "official compatibility claim",
+        "write-capable adapter approval"
+      ],
+      "required_future_resolution": "provide real matched-version export corpus artifacts with manifest, fixture hashes, and provenance"
+    },
+    {
+      "blocker_id": "missing_official_configurator_source_authority",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "configurator_source_registry",
+        "protobuf_config_schema_research_packet"
+      ],
+      "prevents": [
+        "official configurator compatibility claim",
+        "protobuf binary write",
+        "device write"
+      ],
+      "required_future_resolution": "source-authority approval and explicit official source references"
+    },
+    {
+      "blocker_id": "external_observations_non_authoritative",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "configurator_source_registry",
+        "offline_remapper_adapter_blocker_escalation"
+      ],
+      "prevents": [
+        "external source authority promotion"
+      ],
+      "required_future_resolution": "source audit may record observations, but promotion requires explicit approval"
+    },
+    {
+      "blocker_id": "runtime_owned_behavior_not_safely_represented_in_external_json",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "offline_remapper_export_loss_gate"
+      ],
+      "prevents": [
+        "external-remapper-compatible JSON generation",
+        "active profile adapter output"
+      ],
+      "required_future_resolution": "approved clean-room transform design plus sidecar and non-round-trip caveats"
+    },
+    {
+      "blocker_id": "active_profile_round_trip_unsafe",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "offline_remapper_adapter_blocker_escalation",
+        "offline_remapper_export_loss_gate"
+      ],
+      "prevents": [
+        "active profile round-trip claim",
+        "active profile adapter output"
+      ],
+      "required_future_resolution": "source-backed strategy, corpus evidence, and explicit approval"
+    },
+    {
+      "blocker_id": "webserial_device_write_blocked",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "webserial_transport_blocker"
+      ],
+      "prevents": [
+        "WebSerial write",
+        "device write",
+        "Save to Device"
+      ],
+      "required_future_resolution": "explicit approval, packet-framing authority, no-device dry-run/readback, rollback, and hardware plan"
+    },
+    {
+      "blocker_id": "runtime_loaded_config_blocked",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "runtime_storage_interpreter_blocker"
+      ],
+      "prevents": [
+        "runtime-loaded config",
+        "storage interpreter"
+      ],
+      "required_future_resolution": "explicit approval, design resolution, source authority, validator policy, and hardware plan"
+    },
+    {
+      "blocker_id": "protobuf_binary_write_blocked",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "protobuf_config_schema_research_packet"
+      ],
+      "prevents": [
+        "protobuf binary generation",
+        "protobuf binary write"
+      ],
+      "required_future_resolution": "official protobuf/schema authority and explicit approval"
+    },
+    {
+      "blocker_id": "external_source_code_reuse_blocked",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "external_remapper_license_code_reuse_blocker"
+      ],
+      "prevents": [
+        "external source code reuse",
+        "external dependency addition"
+      ],
+      "required_future_resolution": "license/source review and explicit user approval"
+    },
+    {
+      "blocker_id": "adapter_output_generation_blocked",
+      "status": "BLOCKED",
+      "source_packet_ids": [
+        "offline_remapper_adapter_blocker_escalation",
+        "roadmap_next_work_index"
+      ],
+      "prevents": [
+        "adapter implementation",
+        "external-remapper-compatible JSON generation"
+      ],
+      "required_future_resolution": "implementation approval after corpus, source-authority, license, transport, runtime-loaded config, and round-trip blockers are reviewed"
+    }
+  ],
+  "allowed_next_work": [
+    "maintain docs/tools blocker matrix if upstream source packet status changes",
+    "capture real export corpus when artifacts are provided and protocol is clear",
+    "perform non-authoritative external source audit without copying code",
+    "refine clean-room design packets without generating adapter output",
+    "prepare user-facing handoff packets"
+  ],
+  "forbidden_actions": [
+    "adapter implementation",
+    "external-remapper-compatible JSON generation",
+    "WebSerial write",
+    "device write",
+    "Save to Device",
+    "protobuf binary generation",
+    "protobuf binary write",
+    "runtime-loaded config implementation",
+    "storage interpreter implementation",
+    "firmware flashing automation",
+    "external source code reuse without approval",
+    "external dependency addition without approval",
+    "official configurator compatibility claim",
+    "hardware validation claim",
+    "nunchuk hardware validation claim",
+    "Senscope browser-app change"
+  ],
+  "non_claims": {
+    "adapter_implemented": false,
+    "external_remapper_compatible_json_generated": false,
+    "webserial_write_implemented": false,
+    "device_write_implemented": false,
+    "save_to_device_implemented": false,
+    "protobuf_binary_generation_implemented": false,
+    "protobuf_binary_write_implemented": false,
+    "runtime_loaded_config_implemented": false,
+    "storage_interpreter_implemented": false,
+    "firmware_flashing_automation_implemented": false,
+    "external_source_code_copied": false,
+    "external_dependency_added": false,
+    "official_configurator_compatibility_claimed": false,
+    "hardware_validation_claimed": false,
+    "nunchuk_hardware_validated": false,
+    "firmware_behavior_changed": false,
+    "active_profile_artifact_changed": false,
+    "senscope_browser_app_changed": false
+  },
+  "future_unblock_requirements": [
+    "real export corpus artifacts",
+    "official configurator/source-authority approval",
+    "external source audit without authority promotion unless approved",
+    "license and code-reuse approval",
+    "runtime-owned behavior representation strategy",
+    "active profile round-trip strategy",
+    "WebSerial/device-write source authority and explicit approval",
+    "runtime-loaded config design/source-authority approval",
+    "protobuf schema authority and explicit approval",
+    "implementation approval"
+  ]
+}
