@@ -26,6 +26,7 @@ REQUIRED_BRANCHES = {
     "glyph/gfw4-export-corpus-readiness-status",
     "glyph/gfw5-export-corpus-final-blocker-status",
     "glyph/gfw4-adapter-prewrite-blocker-matrix",
+    "glyph/gfw5-adapter-prewrite-implementation-gate",
     "glyph/gfw4-physical-logical-rf5-gap-index",
 }
 

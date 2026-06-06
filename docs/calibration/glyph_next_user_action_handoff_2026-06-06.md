@@ -25,6 +25,7 @@ sequence:
 | `glyph/gfw4-export-corpus-readiness-status` | `0f5d488d6272` | Export corpus readiness/status packet. |
 | `glyph/gfw5-export-corpus-final-blocker-status` | `26b4c5858ff8` | Export corpus final blocker/status packet. |
 | `glyph/gfw4-adapter-prewrite-blocker-matrix` | `b593ef9ca0b3` | Adapter/prewrite blocker matrix. |
+| `glyph/gfw5-adapter-prewrite-implementation-gate` | `cd41cfe16d1e` | Adapter prewrite implementation gate. |
 | `glyph/gfw4-physical-logical-rf5-gap-index` | `19ff86c074e0` | Physical/logical/RF5 ambiguity gap index. |
 
 The post-GFW3 baseline remains the current source-backed configurator baseline.
@@ -90,6 +91,9 @@ Recommended future preservation result branch:
 - `docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json`
 - `tools/check_glyph_export_corpus_final_blocker_status.py`
 - `docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md`
+- `docs/calibration/glyph_adapter_prewrite_implementation_gate_2026-06-06.md`
+- `docs/calibration/fixtures/glyph_adapter_prewrite_implementation_gate_2026-06-06.json`
+- `tools/check_glyph_adapter_prewrite_implementation_gate.py`
 - `docs/calibration/glyph_physical_logical_rf5_gap_index_2026-06-06.md`
 
 ## Stop boundary

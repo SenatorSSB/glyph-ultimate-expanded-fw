@@ -48,6 +48,14 @@
       "checker_path": "tools/check_glyph_adapter_prewrite_blocker_matrix.py"
     },
     {
+      "branch": "glyph/gfw5-adapter-prewrite-implementation-gate",
+      "commit": "cd41cfe16d1e",
+      "packet": "adapter_prewrite_implementation_gate",
+      "doc_path": "docs/calibration/glyph_adapter_prewrite_implementation_gate_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_adapter_prewrite_implementation_gate_2026-06-06.json",
+      "checker_path": "tools/check_glyph_adapter_prewrite_implementation_gate.py"
+    },
+    {
       "branch": "glyph/gfw4-physical-logical-rf5-gap-index",
       "commit": "19ff86c074e0",
       "packet": "physical_logical_rf5_gap_index",
