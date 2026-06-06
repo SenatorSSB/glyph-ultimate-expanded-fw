@@ -62,6 +62,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
         ),
         step(
+            "physical logical RF5 gap index",
+            "tools/check_glyph_physical_logical_rf5_gap_index.py",
+        ),
+        step(
             "ultimate preservation hardware result",
             "tools/check_glyph_ultimate_preservation_hardware_result.py",
             optional=True,

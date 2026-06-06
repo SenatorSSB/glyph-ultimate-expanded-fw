@@ -226,10 +226,13 @@
       "category": "layout_mapping",
       "evidence_paths": [
         "docs/calibration/glyph_physical_logical_layout_map_2026-05-26.md",
+        "docs/calibration/glyph_physical_logical_rf5_gap_index_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_physical_logical_rf5_gap_index_2026-06-06.json",
+        "tools/check_glyph_physical_logical_rf5_gap_index.py",
         "docs/calibration/glyph_full_layout_requirements_questions_2026-05-26.md",
         "docs/calibration/glyph_merged_state_consistency_audit_2026-05-26.md"
       ],
-      "allowed_next_action": "create_or_refine_gap_index_without_changing_physical_ids",
+      "allowed_next_action": "maintain_rf5_gap_index_without_changing_physical_ids",
       "blocked_by": [
         "some_source_backed_runtime_mappings_unknown",
         "old_rf5_smoke_row_ambiguous"
@@ -240,7 +243,7 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Printed RF5 transcription exists; old RF5 negative smoke check remains NOT_TESTED_AMBIGUOUS."
+      "notes": "Printed RF5 transcription exists; old RF5 negative smoke check remains NOT_TESTED_AMBIGUOUS. RF5 gap index separates the historical row from later GFW3 scope-limited RF5 evidence and future source-authority/hardware/user-domain input requirements."
     },
     {
       "item_id": "identity_runtime_generated_config_prototype",

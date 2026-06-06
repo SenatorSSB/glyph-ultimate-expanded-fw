@@ -1,0 +1,76 @@
+{
+  "schema_name": "glyph_physical_logical_rf5_gap_index",
+  "schema_version": 1,
+  "packet_date": "2026-06-06",
+  "status": "physical_logical_rf5_gap_index_docs_tools_only",
+  "historical_rf5_row_status": "UNRESOLVED_HISTORICAL_ROW",
+  "old_rf5_smoke_result": "NOT_TESTED_AMBIGUOUS",
+  "future_resolution_status": "requires_source_authority_hardware_result_or_user_domain_input",
+  "source_paths": {
+    "gfw3_hardware_result_doc": "docs/calibration/glyph_gfw3_runtime_remap_hardware_result_2026-06-06.md",
+    "gfw3_hardware_result_fixture": "docs/calibration/fixtures/glyph_gfw3_runtime_remap_hardware_result_2026-06-06.json",
+    "historical_tilt_hardware_result": "docs/calibration/glyph_ultimate_tilt_hardware_test_result.md",
+    "identity_runtime_role_map_fixture": "docs/calibration/fixtures/glyph_identity_runtime_role_map_2026-05-28.json",
+    "merged_state_consistency_audit": "docs/calibration/glyph_merged_state_consistency_audit_2026-05-26.md",
+    "physical_logical_layout_map": "docs/calibration/glyph_physical_logical_layout_map_2026-05-26.md",
+    "roadmap_next_work_index": "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md"
+  },
+  "layer_findings": [
+    {
+      "layer": "printed_base_physical_marking",
+      "finding": "RF5 is transcribed as center-right / RF cluster, far-right upper button.",
+      "status": "RECORDED_TRANSCRIPTION",
+      "caveat": "Repo text records user-provided transcription; this does not rewrite old smoke rows."
+    },
+    {
+      "layer": "matrix_display_source_facts",
+      "finding": "BTN_RF5 matrix and input-viewer coordinates are recorded in the physical/logical map.",
+      "status": "SOURCE_RECORDED",
+      "caveat": "Display coordinates are rendering positions, not physical matrix coordinates."
+    },
+    {
+      "layer": "historical_rf5_negative_smoke_row",
+      "finding": "The old RF5 negative check remains NOT_TESTED_AMBIGUOUS.",
+      "status": "UNRESOLVED_HISTORICAL_ROW",
+      "caveat": "Do not retroactively convert the old row to PASS."
+    },
+    {
+      "layer": "current_mvp_rf3_rf4_tilt_path",
+      "finding": "RF3/RF4 were confirmed for the earlier Tilt1/Tilt2 MVP mapping.",
+      "status": "SOURCE_AND_HARDWARE_RECORDED",
+      "caveat": "Profile-specific; not universal physical/logical authority."
+    },
+    {
+      "layer": "later_gfw3_rf5_hardware_scope",
+      "finding": "GFW3 result includes base_rf5_up_a as PASS in the GFW3 runtime remap scope.",
+      "status": "LATER_SCOPE_LIMITED_RESULT",
+      "caveat": "Validates the GFW3 row scope only; it does not retcon the historical ambiguous RF5 row."
+    },
+    {
+      "layer": "identity_runtime_role_map_fixture",
+      "finding": "The identity runtime role-map fixture records RF5 in its own source-confirmed hardware-observed scope.",
+      "status": "SOURCE_RECORDED_SCOPE",
+      "caveat": "Future use must cite exact scope and avoid merging old/new role assumptions."
+    }
+  ],
+  "future_resolution_requirements": [
+    "source authority for any promoted physical/logical mapping claim",
+    "user-reported hardware retest or result packet for the historical RF5 negative row",
+    "explicit user/domain input for desired mapping or role interpretation",
+    "deterministic fixture/checker coverage for any resolved claim",
+    "scope language separating old Tilt/Tilt2, identity runtime, and GFW3 evidence"
+  ],
+  "non_claims": {
+    "physical_id_mapping_changed": false,
+    "firmware_behavior_changed": false,
+    "active_profile_artifact_changed": false,
+    "new_hardware_validation_claimed": false,
+    "nunchuk_hardware_validated": false,
+    "runtime_loaded_config_implemented": false,
+    "webserial_write_implemented": false,
+    "device_write_implemented": false,
+    "external_remapper_adapter_output_generated": false,
+    "smash_ultimate_game_semantics_changed": false,
+    "old_rf5_ambiguity_resolved_by_inference": false
+  }
+}
