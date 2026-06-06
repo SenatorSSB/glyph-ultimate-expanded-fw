@@ -365,6 +365,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_gfw3_runtime_remap_hardware_result.py",
         ),
         step(
+            "post-gfw3 configurator baseline",
+            "tools/check_glyph_post_gfw3_configurator_baseline.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),

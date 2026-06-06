@@ -226,6 +226,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_gfw3_runtime_remap_hardware_result_2026-06-06.md",
     "docs/calibration/fixtures/glyph_gfw3_runtime_remap_hardware_result_2026-06-06.json",
     "tools/check_glyph_gfw3_runtime_remap_hardware_result.py",
+    "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_post_gfw3_configurator_baseline_2026-06-06.json",
+    "tools/check_glyph_post_gfw3_configurator_baseline.py",
     "docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md",
     "docs/calibration/fixtures/glyph_preimplementation_go_nogo_index_2026-05-28.json",
     "docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md",
@@ -735,6 +738,13 @@ REQUIRED_ROADMAP_PHRASES = [
     "no device write attempted",
     "not official compatibility",
     "not hardware validation",
+    "Post-GFW3 configurator baseline/readiness",
+    "GFW3 is merged to `configurator`",
+    "the hardware result exists and is user-reported",
+    "no nunchuk hardware validation is claimed",
+    "runtime-loaded config/WebSerial/device write/external-remapper adapter implementation remain unimplemented",
+    "active profile artifact change is not required",
+    "next behavior-changing work still needs its own branch, build, hardware test, result recording, inspection, and merge gate",
 ]
 
 
