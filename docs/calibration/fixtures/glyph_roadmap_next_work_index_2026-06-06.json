@@ -104,9 +104,12 @@
       "evidence_paths": [
         "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
         "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
-        "tools/check_glyph_ultimate_preservation_hardware_result.py"
+        "tools/check_glyph_ultimate_preservation_hardware_result.py",
+        "docs/calibration/glyph_preservation_hardware_readiness_packet_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_preservation_hardware_readiness_packet_2026-06-06.json",
+        "tools/check_glyph_preservation_hardware_readiness_packet.py"
       ],
-      "allowed_next_action": "refine_template_or_execute_manual_hardware_and_record_result",
+      "allowed_next_action": "use_readiness_packet_refine_template_or_execute_manual_hardware_and_record_result",
       "blocked_by": [
         "missing_filled_preservation_hardware_result"
       ],
@@ -116,7 +119,7 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Not complete unless docs/calibration/glyph_ultimate_preservation_hardware_result.md exists as a filled result."
+      "notes": "Readiness packet exists as readiness_packet_only with blocked_pending_user_hardware_execution; not complete unless docs/calibration/glyph_ultimate_preservation_hardware_result.md exists as a filled result."
     },
     {
       "item_id": "capability_source_authority_mapping",

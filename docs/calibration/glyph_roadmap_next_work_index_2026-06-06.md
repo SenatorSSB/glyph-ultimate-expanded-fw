@@ -64,7 +64,7 @@ Primary baseline evidence:
 | --- | --- | --- | --- |
 | Native Ultimate Tilt/Tilt2 runtime baseline | `COMPLETE` | Preserve with docs/checkers only. | Source and prior docs record current native `MODE_ULTIMATE` baseline. |
 | Tilt/Tilt2 hardware smoke evidence | `COMPLETE` | Preserve evidence; do not expand claims. | Current smoke result is not nunchuk validation. |
-| Preservation hardware matrix execution | `BLOCKED_HARDWARE` | Refine result template/checker only; execute hardware separately. | Filled `docs/calibration/glyph_ultimate_preservation_hardware_result.md` is absent. |
+| Preservation hardware matrix execution | `BLOCKED_HARDWARE` | Use the readiness packet, refine result template/checker only, or execute hardware separately. | Filled `docs/calibration/glyph_ultimate_preservation_hardware_result.md` is absent. Readiness packet `glyph/gfw4-preservation-hardware-readiness` records `readiness_packet_only` and `blocked_pending_user_hardware_execution`; suggested future result branch is `glyph/gfw4-preservation-hardware-result`. |
 | Capability and source-authority mapping | `COMPLETE` | Maintain docs/checkers if source paths drift. | Do not promote unknown behavior to fact. |
 | Identity runtime role/case canonicalization | `COMPLETE` | Maintain evaluator/table sync only. | Future firmware behavior changes still require their own gate. |
 | Export corpus capture | `READY_CORPUS_CAPTURE` | Capture real matched-version corpus artifacts if available. | No real corpus manifest or fixture set is present under `docs/calibration/export_corpus/`. |

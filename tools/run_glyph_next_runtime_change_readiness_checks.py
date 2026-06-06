@@ -63,6 +63,10 @@ def steps() -> list[Step]:
             accept_no_result_file=True,
         ),
         step(
+            "preservation hardware readiness packet",
+            "tools/check_glyph_preservation_hardware_readiness_packet.py",
+        ),
+        step(
             "native ultimate table fixture",
             "tools/check_glyph_native_ultimate_table_fixture.py",
             "docs/calibration/fixtures/glyph_native_ultimate_table_contract_TEMPLATE.json",

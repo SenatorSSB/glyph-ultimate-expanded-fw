@@ -1,0 +1,50 @@
+{
+  "schema_name": "glyph_preservation_hardware_readiness_packet",
+  "schema_version": 1,
+  "packet_date": "2026-06-06",
+  "status": "readiness_packet_only",
+  "preservation_hardware_status": "blocked_pending_user_hardware_execution",
+  "source_matrix_path": "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
+  "source_template_path": "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
+  "source_checker_path": "tools/check_glyph_ultimate_preservation_hardware_result.py",
+  "identity_runtime_hardware_validation_and_rollback_path": "docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md",
+  "post_gfw3_baseline_path": "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
+  "roadmap_next_work_index_path": "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
+  "future_result_branch": "glyph/gfw4-preservation-hardware-result",
+  "result_recorded": false,
+  "hardware_validation_claimed": false,
+  "explicit_non_claims": {
+    "firmware_behavior_changed": false,
+    "active_profile_artifact_changed": false,
+    "runtime_loaded_config_implemented": false,
+    "webserial_write_implemented": false,
+    "device_write_implemented": false,
+    "external_remapper_adapter_implemented": false,
+    "nunchuk_hardware_validated": false
+  },
+  "required_future_result_packet": {
+    "result_doc": "docs/calibration/glyph_ultimate_preservation_hardware_result.md",
+    "result_fixture": "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_2026-06-06.json",
+    "result_checker": "tools/check_glyph_ultimate_preservation_hardware_result.py",
+    "user_report_source": "required",
+    "per_row_statuses": "required",
+    "not_tested_handling": "required",
+    "failure_notes": "required_if_any_fail_or_blocked",
+    "rollback_notes_if_needed": "required_if_rollback_or_user_accepted_risk"
+  },
+  "allowed_statuses": [
+    "PASS",
+    "FAIL",
+    "NOT_TESTED",
+    "BLOCKED",
+    "USER_ACCEPTED_RISK"
+  ],
+  "forbidden_result_inferences": [
+    "do_not_infer_untested_rows",
+    "do_not_claim_nunchuk_if_not_executed",
+    "do_not_claim_external_remapper",
+    "do_not_claim_runtime_loaded_config",
+    "do_not_claim_webserial_or_device_write",
+    "do_not_claim_active_profile_artifact_change"
+  ]
+}

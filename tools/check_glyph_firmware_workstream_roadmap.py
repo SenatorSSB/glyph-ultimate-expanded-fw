@@ -15,6 +15,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_ultimate_tilt_prehardware_readiness_index_2026-05-24.md",
     "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
     "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
+    "docs/calibration/glyph_preservation_hardware_readiness_packet_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_preservation_hardware_readiness_packet_2026-06-06.json",
+    "tools/check_glyph_preservation_hardware_readiness_packet.py",
     "docs/calibration/glyph_full_capability_inventory_2026-05-26.md",
     "docs/calibration/glyph_remaining_functionality_gap_map_2026-05-26.md",
     "docs/calibration/glyph_profile_config_source_authority_2026-05-26.md",
@@ -328,6 +331,12 @@ OPTIONAL_FUTURE_FILES = [
 
 REQUIRED_ROADMAP_PHRASES = [
     "WebSerial transport blocker packet",
+    "Preservation hardware readiness packet",
+    "glyph/gfw4-preservation-hardware-readiness",
+    "readiness_packet_only",
+    "blocked_pending_user_hardware_execution",
+    "No preservation hardware result is recorded by the readiness packet",
+    "glyph/gfw4-preservation-hardware-result",
     "glyph/gfw2-webserial-transport-blocker-packet",
     "serial dry-run is not live device access",
     "WebSerial write, device write, and firmware flashing are not implemented",
