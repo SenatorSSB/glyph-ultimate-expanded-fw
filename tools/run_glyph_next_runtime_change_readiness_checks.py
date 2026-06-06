@@ -66,6 +66,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_physical_logical_rf5_gap_index.py",
         ),
         step(
+            "next user action handoff",
+            "tools/check_glyph_next_user_action_handoff.py",
+        ),
+        step(
             "ultimate preservation hardware result",
             "tools/check_glyph_ultimate_preservation_hardware_result.py",
             optional=True,

@@ -1,0 +1,127 @@
+{
+  "schema_name": "glyph_next_user_action_handoff",
+  "schema_version": 1,
+  "packet_date": "2026-06-06",
+  "status": "next_user_action_required",
+  "configurator_status": "docs_tools_sequence_merged_to_configurator",
+  "post_gfw3_baseline_path": "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
+  "roadmap_next_work_index_path": "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
+  "sequence_branches_completed": [
+    {
+      "branch": "glyph/gfw4-preservation-hardware-readiness",
+      "commit": "12d13347d2ca",
+      "packet": "preservation_hardware_readiness",
+      "doc_path": "docs/calibration/glyph_preservation_hardware_readiness_packet_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_preservation_hardware_readiness_packet_2026-06-06.json",
+      "checker_path": "tools/check_glyph_preservation_hardware_readiness_packet.py"
+    },
+    {
+      "branch": "glyph/gfw4-preservation-result-template-hardening",
+      "commit": "695370cf1403",
+      "packet": "preservation_result_template_hardening",
+      "doc_path": "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json",
+      "checker_path": "tools/check_glyph_ultimate_preservation_hardware_result.py"
+    },
+    {
+      "branch": "glyph/gfw4-export-corpus-readiness-status",
+      "commit": "0f5d488d6272",
+      "packet": "export_corpus_readiness_status",
+      "doc_path": "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
+      "checker_path": "tools/check_glyph_export_corpus_readiness_status.py"
+    },
+    {
+      "branch": "glyph/gfw4-adapter-prewrite-blocker-matrix",
+      "commit": "b593ef9ca0b3",
+      "packet": "adapter_prewrite_blocker_matrix",
+      "doc_path": "docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_adapter_prewrite_blocker_matrix_2026-06-06.json",
+      "checker_path": "tools/check_glyph_adapter_prewrite_blocker_matrix.py"
+    },
+    {
+      "branch": "glyph/gfw4-physical-logical-rf5-gap-index",
+      "commit": "19ff86c074e0",
+      "packet": "physical_logical_rf5_gap_index",
+      "doc_path": "docs/calibration/glyph_physical_logical_rf5_gap_index_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_physical_logical_rf5_gap_index_2026-06-06.json",
+      "checker_path": "tools/check_glyph_physical_logical_rf5_gap_index.py"
+    }
+  ],
+  "remaining_blocked_items": [
+    {
+      "item_id": "preservation_hardware_execution",
+      "status": "BLOCKED_HARDWARE",
+      "requires_user_hardware": true,
+      "requires_user_artifacts": false,
+      "requires_source_authority_approval": false,
+      "requires_domain_input": false,
+      "required_next_action": "user executes preservation hardware matrix and reports per-row result data"
+    },
+    {
+      "item_id": "export_corpus_provision",
+      "status": "BLOCKED_CORPUS",
+      "requires_user_hardware": false,
+      "requires_user_artifacts": true,
+      "requires_source_authority_approval": false,
+      "requires_domain_input": false,
+      "required_next_action": "user provides real matched-version export corpus artifacts, manifest, hashes, and provenance"
+    },
+    {
+      "item_id": "adapter_prewrite_source_authority",
+      "status": "BLOCKED_SOURCE_AUTHORITY",
+      "requires_user_hardware": false,
+      "requires_user_artifacts": true,
+      "requires_source_authority_approval": true,
+      "requires_domain_input": false,
+      "required_next_action": "source-authority approval and explicit implementation approval before write-capable adapter or output generation"
+    },
+    {
+      "item_id": "physical_logical_rf5_resolution",
+      "status": "BLOCKED_USER_INPUT_OR_HARDWARE_OR_SOURCE_AUTHORITY",
+      "requires_user_hardware": true,
+      "requires_user_artifacts": false,
+      "requires_source_authority_approval": true,
+      "requires_domain_input": true,
+      "required_next_action": "provide source authority, user-reported hardware result, or explicit user/domain input if the historical RF5 row must be resolved"
+    },
+    {
+      "item_id": "implementation_approval",
+      "status": "BLOCKED_IMPLEMENTATION_APPROVAL",
+      "requires_user_hardware": false,
+      "requires_user_artifacts": false,
+      "requires_source_authority_approval": true,
+      "requires_domain_input": true,
+      "required_next_action": "explicit approval before any firmware behavior change, runtime-loaded config, WebSerial/device write, protobuf binary write, or external adapter output branch"
+    }
+  ],
+  "next_user_required_actions": [
+    "execute_preservation_hardware_matrix_or_leave_blocked",
+    "provide_export_corpus_artifacts_or_leave_blocked",
+    "provide_source_authority_approval_before_write_capable_work",
+    "provide_domain_input_or_hardware_source_evidence_for_rf5_if_resolution_is_needed",
+    "provide_explicit_implementation_approval_before_firmware_behavior_change"
+  ],
+  "future_result_branch": "glyph/gfw4-preservation-hardware-result",
+  "hardware_testing_now_required": true,
+  "corpus_artifacts_needed": true,
+  "source_authority_or_domain_input_needed": true,
+  "non_claims": {
+    "hardware_result_recorded_by_handoff": false,
+    "preservation_hardware_pass_fail_claimed": false,
+    "nunchuk_hardware_validated": false,
+    "firmware_behavior_changed": false,
+    "active_profile_artifact_changed": false,
+    "runtime_loaded_config_implemented": false,
+    "webserial_write_implemented": false,
+    "device_write_implemented": false,
+    "protobuf_binary_write_implemented": false,
+    "firmware_flashing_automation_implemented": false,
+    "external_remapper_adapter_output_generated": false,
+    "external_source_code_copied": false,
+    "external_dependency_added": false,
+    "official_configurator_compatibility_claimed": false,
+    "senscope_browser_app_changed": false,
+    "smash_ultimate_game_semantics_changed": false
+  }
+}

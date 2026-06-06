@@ -367,7 +367,10 @@
       "evidence_paths": [
         "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
         "docs/calibration/fixtures/glyph_post_gfw3_configurator_baseline_2026-06-06.json",
-        "tools/check_glyph_post_gfw3_configurator_baseline.py"
+        "tools/check_glyph_post_gfw3_configurator_baseline.py",
+        "docs/calibration/glyph_next_user_action_handoff_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_next_user_action_handoff_2026-06-06.json",
+        "tools/check_glyph_next_user_action_handoff.py"
       ],
       "allowed_next_action": "use_as_current_configurator_baseline_for_docs_tools_routing",
       "blocked_by": [],
@@ -377,7 +380,7 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Future behavior-changing firmware work still needs the full gated workflow."
+      "notes": "Future behavior-changing firmware work still needs the full gated workflow; the next-user-action handoff records that hardware, corpus, source-authority/domain input, or implementation approval is now required."
     },
     {
       "item_id": "runtime_patch_implementation_branch",
@@ -387,6 +390,7 @@
       "evidence_paths": [
         "docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md",
         "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
+        "docs/calibration/glyph_next_user_action_handoff_2026-06-06.md",
         "docs/calibration/glyph_identity_runtime_hardware_validation_and_rollback_plan_2026-05-28.md"
       ],
       "allowed_next_action": "draft_source_backed_spec_only_after_approval_scope_is_explicit",
@@ -404,7 +408,7 @@
       "requires_corpus": false,
       "requires_firmware_change": true,
       "forbidden_without_future_approval": true,
-      "notes": "No runtime patch implementation is allowed in this branch."
+      "notes": "No runtime patch implementation is allowed in this branch. The handoff records next_user_action_required and requires explicit implementation approval before behavior-changing work."
     },
     {
       "item_id": "senscope_browser_app_implementation_work",

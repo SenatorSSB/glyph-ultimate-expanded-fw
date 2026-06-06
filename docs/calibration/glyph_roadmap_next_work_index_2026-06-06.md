@@ -70,6 +70,7 @@ Primary baseline evidence:
 | Export corpus capture | `READY_CORPUS_CAPTURE` | Capture real matched-version corpus artifacts if available. | No real corpus manifest or fixture set is present under `docs/calibration/export_corpus/`. Export corpus readiness status records `blocked_missing_real_corpus_artifacts`, `corpus_present=false`, and `completion_allowed=false`. |
 | Adapter policy and prewrite validation | `READY_DOCS_TOOLS` | Maintain the blocker matrix and read-only policy/checkers. | Write-capable adapter remains blocked by missing corpus, missing official configurator source authority, non-authoritative external observations, unsafe active-profile round-trip, WebSerial/device write blockers, runtime-loaded config blockers, protobuf binary write blockers, license/code-reuse blockers, and implementation approval. |
 | Physical/logical mapping and RF5 transcription | `READY_DOCS_TOOLS` | Maintain the RF5 gap index only, without changing mappings. | Printed RF5 transcription exists; old RF5 smoke row remains `NOT_TESTED_AMBIGUOUS` and must not be retconned. Later GFW3 RF5 evidence is scope-limited and does not rewrite the historical row. |
+| Next user action handoff | `BLOCKED_USER_INPUT` | Stop autonomous docs/tools sequence and wait for user action. | `glyph/gfw4-next-user-action-handoff` records `next_user_action_required`: execute preservation hardware matrix, provide real export corpus artifacts, provide source-authority approval or domain input as needed, and provide explicit implementation approval before behavior-changing work. No firmware implementation should start from this handoff alone. |
 | Identity runtime generated-config prototype | `COMPLETE` | Maintain generated review artifacts/checkers only. | Prototype is not firmware input and not runtime-loaded config. |
 | Runtime config candidate validator | `COMPLETE` | Maintain offline validator/corpus only. | Candidate validator is not runtime-loaded config implementation. |
 | Runtime-loaded config design and validation contract | `READY_DOCS_TOOLS` | Continue docs/tools design validation only. | Implementation remains blocked by user approval, source authority, storage/interpreter decisions, and hardware plan. |
@@ -102,6 +103,10 @@ Primary baseline evidence:
 
 - Preservation hardware execution.
 - Export corpus capture if source artifacts are not present.
+- Next user action handoff follow-up: execute preservation hardware matrix,
+  provide real export corpus artifacts, provide source-authority approval or
+  domain input where needed, and provide explicit implementation approval before
+  any behavior-changing branch.
 - Any behavior-changing runtime branch.
 - Any nunchuk validation.
 - Any physical/logical role or chord-priority decision that depends on
