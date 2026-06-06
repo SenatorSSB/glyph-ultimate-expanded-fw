@@ -4,7 +4,7 @@
 
 This packet closes the GFW4 docs/tools supervisor sequence and identifies the
 next meaningful actions that require the user, corpus artifacts, source
-authority, domain input, or implementation approval.
+authority, domain input, or implementation approval. It also records the export corpus final blocker/status consolidation, which records that export corpus capture remains blocked by missing real corpus artifacts, so the current corpus blocker state is visible in the handoff.
 
 Status: `next_user_action_required`.
 
@@ -23,6 +23,7 @@ sequence:
 | `glyph/gfw4-preservation-hardware-readiness` | `12d13347d2ca` | Preservation hardware readiness packet. |
 | `glyph/gfw4-preservation-result-template-hardening` | `695370cf1403` | Preservation result template/checker hardening. |
 | `glyph/gfw4-export-corpus-readiness-status` | `0f5d488d6272` | Export corpus readiness/status packet. |
+| `glyph/gfw5-export-corpus-final-blocker-status` | `26b4c5858ff8` | Export corpus final blocker/status packet. |
 | `glyph/gfw4-adapter-prewrite-blocker-matrix` | `b593ef9ca0b3` | Adapter/prewrite blocker matrix. |
 | `glyph/gfw4-physical-logical-rf5-gap-index` | `19ff86c074e0` | Physical/logical/RF5 ambiguity gap index. |
 
@@ -32,6 +33,8 @@ The preservation hardware result is recorded for applicable non-nunchuk scope;
 nunchuk remains NOT_TESTED / unvalidated / unavailable because the controller
 has no nunchuk port available out of the box.
 Nunchuk hardware validation is not claimed.
+Export corpus final blocker/status consolidation records that export corpus
+capture remains blocked by missing real corpus artifacts.
 
 ## Remaining blocked items
 
@@ -83,6 +86,9 @@ Recommended future preservation result branch:
 - `docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md`
 - `docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json`
 - `docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md`
+- `docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md`
+- `docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json`
+- `tools/check_glyph_export_corpus_final_blocker_status.py`
 - `docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md`
 - `docs/calibration/glyph_physical_logical_rf5_gap_index_2026-06-06.md`
 
