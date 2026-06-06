@@ -33,6 +33,7 @@ EXPECTED_TOP_LEVEL = {
 
 ALLOWED_STATUSES = {
     "COMPLETE",
+    "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED",
     "READY_DOCS_TOOLS",
     "READY_CORPUS_CAPTURE",
     "BLOCKED_HARDWARE",
@@ -107,6 +108,10 @@ REQUIRED_DOC_PHRASES = (
     "Runtime-loaded config, WebSerial/device write, protobuf binary write, firmware flashing automation, and external-remapper adapter output remain blocked",
     "Senscope browser-app implementation work",
     "Forbidden until future source authority and explicit approval",
+    "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED",
+    "User-reported pass is recorded for all applicable non-nunchuk preservation rows",
+    "nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box",
+    "No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed",
 )
 
 
@@ -215,8 +220,12 @@ def has_real_export_corpus() -> bool:
 
 def require_not_complete_without_artifacts(items: dict[str, dict[str, Any]]) -> None:
     preservation = items["preservation_hardware_matrix_execution"]
-    if preservation["current_status"] == "COMPLETE" and not PRESERVATION_RESULT.exists():
-        fail("preservation hardware execution cannot be COMPLETE without a filled result file")
+    preservation_complete_statuses = {
+        "COMPLETE",
+        "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED",
+    }
+    if preservation["current_status"] in preservation_complete_statuses and not PRESERVATION_RESULT.exists():
+        fail("preservation hardware execution cannot be marked complete without a filled result file")
 
     export_corpus = items["export_corpus_capture"]
     if export_corpus["current_status"] == "COMPLETE" and not has_real_export_corpus():
@@ -261,6 +270,32 @@ def validate_evidence_paths(items: dict[str, dict[str, Any]]) -> None:
                 fail(f"roadmap item {item['item_id']} references missing evidence path: {rel_path}")
 
 
+def validate_preservation_item(items: dict[str, dict[str, Any]]) -> None:
+    preservation = items["preservation_hardware_matrix_execution"]
+    if preservation["current_status"] != "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED":
+        fail("preservation hardware execution must record the user-reported completion status")
+    if preservation["allowed_next_action"] != "preserve_result_scope_only":
+        fail("preservation hardware execution must preserve result scope only")
+    if preservation["requires_hardware"] is not False:
+        fail("preservation hardware execution must not require hardware after the result is recorded")
+    if preservation["blocked_by"]:
+        fail("preservation hardware execution must not remain blocked")
+    for rel_path in (
+        "docs/calibration/glyph_ultimate_preservation_hardware_result.md",
+        "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result.json",
+    ):
+        if rel_path not in preservation["evidence_paths"]:
+            fail(f"preservation hardware execution evidence must include {rel_path}")
+    notes = preservation["notes"].lower()
+    for phrase in (
+        "user-reported pass is recorded for all applicable non-nunchuk preservation rows",
+        "nunchuk remains not_tested/unvalidated because the controller has no nunchuk port available out of the box",
+        "no runtime-loaded config, webserial/device write, external remapper adapter, or active profile artifact change is claimed",
+    ):
+        if phrase not in notes:
+            fail(f"preservation hardware execution notes missing phrase: {phrase}")
+
+
 def validate_post_gfw3_fixture() -> None:
     baseline = load_json_object(POST_GFW3_FIXTURE)
     non_claims = baseline.get("non_claims")
@@ -296,6 +331,7 @@ def main() -> int:
         validate_global_forbidden_classes(payload)
         items = as_items_by_id(payload)
         validate_evidence_paths(items)
+        validate_preservation_item(items)
         validate_post_gfw3_fixture()
         require_not_complete_without_artifacts(items)
         require_blocked_nonclaims(items)

@@ -50,15 +50,6 @@
   ],
   "remaining_blocked_items": [
     {
-      "item_id": "preservation_hardware_execution",
-      "status": "BLOCKED_HARDWARE",
-      "requires_user_hardware": true,
-      "requires_user_artifacts": false,
-      "requires_source_authority_approval": false,
-      "requires_domain_input": false,
-      "required_next_action": "user executes preservation hardware matrix and reports per-row result data"
-    },
-    {
       "item_id": "export_corpus_provision",
       "status": "BLOCKED_CORPUS",
       "requires_user_hardware": false,
@@ -96,7 +87,6 @@
     }
   ],
   "next_user_required_actions": [
-    "execute_preservation_hardware_matrix_or_leave_blocked",
     "provide_export_corpus_artifacts_or_leave_blocked",
     "provide_source_authority_approval_before_write_capable_work",
     "provide_domain_input_or_hardware_source_evidence_for_rf5_if_resolution_is_needed",

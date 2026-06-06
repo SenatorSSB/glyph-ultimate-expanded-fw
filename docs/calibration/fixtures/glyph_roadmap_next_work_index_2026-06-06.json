@@ -99,28 +99,28 @@
     {
       "item_id": "preservation_hardware_matrix_execution",
       "label": "Preservation hardware matrix execution",
-      "current_status": "BLOCKED_HARDWARE",
+      "current_status": "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED",
       "category": "hardware_result",
       "evidence_paths": [
         "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
         "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
         "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json",
+        "docs/calibration/glyph_ultimate_preservation_hardware_result.md",
+        "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result.json",
         "tools/check_glyph_ultimate_preservation_hardware_result.py",
         "docs/calibration/glyph_preservation_hardware_readiness_packet_2026-06-06.md",
         "docs/calibration/fixtures/glyph_preservation_hardware_readiness_packet_2026-06-06.json",
         "tools/check_glyph_preservation_hardware_readiness_packet.py"
       ],
-      "allowed_next_action": "use_readiness_packet_refine_template_or_execute_manual_hardware_and_record_result",
-      "blocked_by": [
-        "missing_filled_preservation_hardware_result"
-      ],
+      "allowed_next_action": "preserve_result_scope_only",
+      "blocked_by": [],
       "requires_user_input": false,
-      "requires_hardware": true,
+      "requires_hardware": false,
       "requires_source_audit": false,
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Result checker validates the template fixture and reports template_contract=true while no result file exists. Readiness packet exists as readiness_packet_only with blocked_pending_user_hardware_execution; not complete unless docs/calibration/glyph_ultimate_preservation_hardware_result.md exists as a filled result."
+      "notes": "User-reported pass is recorded for all applicable non-nunchuk preservation rows; nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box. No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed."
     },
     {
       "item_id": "capability_source_authority_mapping",
