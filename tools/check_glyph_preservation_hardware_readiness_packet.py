@@ -23,6 +23,7 @@ EXPECTED_TOP_LEVEL = {
     "preservation_hardware_status": "blocked_pending_user_hardware_execution",
     "source_matrix_path": "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
     "source_template_path": "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
+    "source_template_fixture_path": "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json",
     "source_checker_path": "tools/check_glyph_ultimate_preservation_hardware_result.py",
     "post_gfw3_baseline_path": "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
     "roadmap_next_work_index_path": "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
@@ -83,6 +84,7 @@ REQUIRED_DOC_PHRASES = (
     "No hardware pass/fail result recorded here",
     "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
     "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
+    "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json",
     "tools/check_glyph_ultimate_preservation_hardware_result.py",
     "docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md",
     "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
@@ -128,6 +130,7 @@ def require_paths(payload: dict[str, Any]) -> None:
     for key in (
         "source_matrix_path",
         "source_template_path",
+        "source_template_fixture_path",
         "source_checker_path",
         "post_gfw3_baseline_path",
         "roadmap_next_work_index_path",

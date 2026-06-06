@@ -21,9 +21,21 @@ Warning: do not fabricate hardware results. This template is not hardware eviden
 | Switch controller visualization used (yes/no) | |
 | Ultimate Training Mode used (yes/no) | |
 
+Allowed row statuses:
+
+- `PASS`
+- `FAIL`
+- `NOT_TESTED`
+- `BLOCKED`
+- `USER_ACCEPTED_RISK`
+
+Rows marked `NOT_TESTED` are not validated. Do not infer them from related
+rows. `USER_ACCEPTED_RISK` requires a note that identifies the risk and the
+user report source.
+
 ## 2. Baseline No-Modifier Checks
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | BNM-01 | No-modifier direction 1 | NOT_TESTED | |
 | BNM-02 | No-modifier direction 2 | NOT_TESTED | |
@@ -39,7 +51,7 @@ Warning: do not fabricate hardware results. This template is not hardware eviden
 
 ## 3. Existing Tilt/Tilt2 Preservation
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | TLT-01 | Tilt1 spot-check or full table | NOT_TESTED | |
 | TLT-02 | Tilt2 spot-check or full table | NOT_TESTED | |
@@ -47,7 +59,7 @@ Warning: do not fabricate hardware results. This template is not hardware eviden
 
 ## 4. C-Stick/Right-Stick Preservation
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | CST-01 | Neutral | NOT_TESTED | |
 | CST-02 | Cardinal directions | NOT_TESTED | |
@@ -56,7 +68,7 @@ Warning: do not fabricate hardware results. This template is not hardware eviden
 
 ## 5. Trigger Preservation
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | TRG-01 | L/R/Z or profile-relevant trigger buttons | NOT_TESTED | |
 | TRG-02 | Analog trigger observation (if available) | NOT_TESTED | |
@@ -64,7 +76,7 @@ Warning: do not fabricate hardware results. This template is not hardware eviden
 
 ## 6. SOCD/Opposite Direction Behavior
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | SCD-01 | Left + Right | NOT_TESTED | |
 | SCD-02 | Up + Down | NOT_TESTED | |
@@ -78,7 +90,7 @@ Warning: do not fabricate hardware results. This template is not hardware eviden
 RF5 location used for this test:
 - center-right / RF cluster, far-right upper button = RF5
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | RF5-01 | RF5 alone with neutral and selected directions | NOT_TESTED | |
 | RF5-02 | RF5 + Tilt1 | NOT_TESTED | |
@@ -92,7 +104,7 @@ Expected interpretation notes:
 
 ## 8. Profile Preservation / Readback
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | PRF-01 | Profile list appears as expected | NOT_TESTED | |
 | PRF-02 | Default profile behavior | NOT_TESTED | |
@@ -101,14 +113,14 @@ Expected interpretation notes:
 
 ## 9. Optional Nunchuk
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | NCK-01 | Nunchuk availability check | NOT_TESTED | If unavailable, keep NOT_TESTED. |
 | NCK-02 | If tested, nunchuk behavior remains source-consistent | NOT_TESTED | |
 
 ## 10. Basic Button Regression
 
-| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`PASS_SMOKE_OBSERVED`) | Observation Notes |
+| Row | Test | Result (`PASS`/`FAIL`/`NOT_TESTED`/`BLOCKED`/`USER_ACCEPTED_RISK`) | Observation Notes |
 | --- | --- | --- | --- |
 | BTN-01 | A/B/jump/shield/grab equivalents as mapped in current profile | NOT_TESTED | |
 | BTN-02 | Menu buttons (if relevant) | NOT_TESTED | |
@@ -119,12 +131,22 @@ Expected interpretation notes:
 
 Select one final disposition:
 - [ ] PASS
-- [ ] FAIL_ROLLBACK
-- [ ] BLOCKED_NOT_TESTED
-- [ ] NEEDS_FIRMWARE_FIX
+- [ ] FAIL
+- [ ] BLOCKED
+- [ ] USER_ACCEPTED_RISK
 
 final_disposition:
 
 ## Notes And Anomalies
 
 - None recorded.
+
+## Required result-recording caveats
+
+- No nunchuk hardware validation is claimed unless nunchuk rows are executed and
+  recorded.
+- No external remapper adapter, runtime-loaded config, WebSerial write, or
+  device write behavior is claimed by this result.
+- No active profile artifact change is claimed by this result.
+- Failure, blocked, or user-accepted-risk rows require notes.
+- Rollback notes are required if a failure indicates rollback is needed.

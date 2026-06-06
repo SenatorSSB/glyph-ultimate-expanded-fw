@@ -4,17 +4,30 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 from pathlib import Path
+from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RESULT_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_ultimate_preservation_hardware_result.md"
+TEMPLATE_PATH = REPO_ROOT / "docs" / "calibration" / "glyph_ultimate_preservation_hardware_result_TEMPLATE.md"
+TEMPLATE_FIXTURE_PATH = (
+    REPO_ROOT / "docs" / "calibration" / "fixtures" / "glyph_ultimate_preservation_hardware_result_TEMPLATE.json"
+)
 ALLOWED_FINAL_DISPOSITIONS = {
     "PASS",
-    "FAIL_ROLLBACK",
-    "BLOCKED_NOT_TESTED",
-    "NEEDS_FIRMWARE_FIX",
+    "FAIL",
+    "BLOCKED",
+    "USER_ACCEPTED_RISK",
+}
+ALLOWED_ROW_STATUSES = {
+    "PASS",
+    "FAIL",
+    "NOT_TESTED",
+    "BLOCKED",
+    "USER_ACCEPTED_RISK",
 }
 
 REQUIRED_HEADINGS = [
@@ -32,9 +45,15 @@ REQUIRED_HEADINGS = [
 ]
 
 REQUIRED_IDENTITY_FIELDS = [
+    "Tester",
+    "Test date (YYYY-MM-DD)",
     "Branch tested",
     "Commit SHA tested",
     "Firmware artifact path",
+    "Firmware artifact hash (SHA-256)",
+    "Profile/config used",
+    "Controller model / hardware ID",
+    "Flash method",
 ]
 
 
@@ -80,6 +99,142 @@ def _is_template_only(text: str) -> bool:
     return "TEMPLATE_ONLY" in text
 
 
+def _display(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def _load_json_object(path: Path, errors: list[str]) -> dict[str, Any]:
+    if not path.exists():
+        errors.append(f"missing JSON fixture: {_display(path)}")
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        errors.append(f"invalid JSON in {_display(path)}: {exc}")
+        return {}
+    if not isinstance(payload, dict):
+        errors.append(f"{_display(path)} must contain a JSON object")
+        return {}
+    return payload
+
+
+def _extract_row_statuses(text: str) -> dict[str, str]:
+    rows: dict[str, str] = {}
+    pattern = re.compile(r"^\|\s*([A-Z0-9]+-\d{2})\s*\|[^|]*\|\s*([A-Z_]+)\s*\|", re.MULTILINE)
+    for row_id, status in pattern.findall(text):
+        rows[row_id] = status
+    return rows
+
+
+def _validate_template_fixture(payload: dict[str, Any], errors: list[str]) -> None:
+    expected = {
+        "schema_name": "glyph_ultimate_preservation_hardware_result_template",
+        "schema_version": 1,
+        "template_date": "2026-06-06",
+        "status": "template_only_not_executed",
+        "result_recorded": False,
+        "hardware_validation_claimed": False,
+        "nunchuk_hardware_validated": False,
+        "template_doc_path": "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
+        "future_result_doc_path": "docs/calibration/glyph_ultimate_preservation_hardware_result.md",
+        "checker_path": "tools/check_glyph_ultimate_preservation_hardware_result.py",
+        "readiness_packet_path": "docs/calibration/glyph_preservation_hardware_readiness_packet_2026-06-06.md",
+    }
+    for key, expected_value in expected.items():
+        if payload.get(key) != expected_value:
+            errors.append(f"template fixture {key} must be {expected_value!r}")
+
+    if payload.get("allowed_row_statuses") != sorted(ALLOWED_ROW_STATUSES):
+        # Keep fixture order aligned with the readiness packet, not alphabetical.
+        if payload.get("allowed_row_statuses") != ["PASS", "FAIL", "NOT_TESTED", "BLOCKED", "USER_ACCEPTED_RISK"]:
+            errors.append("template fixture allowed_row_statuses drifted")
+    if set(payload.get("allowed_final_dispositions", [])) != ALLOWED_FINAL_DISPOSITIONS:
+        errors.append("template fixture allowed_final_dispositions drifted")
+
+    required_row_ids = payload.get("required_row_ids")
+    if not isinstance(required_row_ids, list) or not required_row_ids:
+        errors.append("template fixture required_row_ids must be a non-empty list")
+    elif not all(isinstance(row_id, str) and row_id.strip() for row_id in required_row_ids):
+        errors.append("template fixture required_row_ids must contain non-empty strings")
+
+    rules = payload.get("result_recording_rules")
+    if not isinstance(rules, dict):
+        errors.append("template fixture result_recording_rules must be an object")
+    else:
+        for key in (
+            "not_tested_rows_do_not_validate_behavior",
+            "failure_rows_require_notes",
+            "blocked_rows_require_notes",
+            "user_accepted_risk_rows_require_notes",
+            "rollback_notes_required_if_needed",
+            "user_report_source_required",
+        ):
+            if rules.get(key) is not True:
+                errors.append(f"template fixture result_recording_rules.{key} must be true")
+
+    non_claims = payload.get("explicit_non_claims")
+    if not isinstance(non_claims, dict):
+        errors.append("template fixture explicit_non_claims must be an object")
+    else:
+        for key in (
+            "firmware_behavior_changed",
+            "active_profile_artifact_changed",
+            "runtime_loaded_config_implemented",
+            "webserial_write_implemented",
+            "device_write_implemented",
+            "external_remapper_adapter_implemented",
+            "nunchuk_hardware_validated",
+        ):
+            if non_claims.get(key) is not False:
+                errors.append(f"template fixture explicit_non_claims.{key} must be false")
+
+
+def _validate_template_doc(template_text: str, payload: dict[str, Any], errors: list[str]) -> None:
+    if "TEMPLATE_ONLY" not in template_text:
+        errors.append("template doc must remain TEMPLATE_ONLY")
+    if "PASS_SMOKE_OBSERVED" in template_text:
+        errors.append("template doc must not use PASS_SMOKE_OBSERVED")
+    for status in ALLOWED_ROW_STATUSES:
+        if status not in template_text:
+            errors.append(f"template doc missing allowed row status: {status}")
+    for disposition in ALLOWED_FINAL_DISPOSITIONS:
+        if f"- [ ] {disposition}" not in template_text:
+            errors.append(f"template doc missing final disposition: {disposition}")
+    for phrase in (
+        "Rows marked `NOT_TESTED` are not validated",
+        "No nunchuk hardware validation is claimed unless nunchuk rows are executed and",
+        "No external remapper adapter, runtime-loaded config, WebSerial write, or",
+        "No active profile artifact change is claimed by this result",
+        "Failure, blocked, or user-accepted-risk rows require notes",
+        "Rollback notes are required if a failure indicates rollback is needed",
+    ):
+        if phrase not in template_text:
+            errors.append(f"template doc missing required phrase: {phrase}")
+
+    required_row_ids = payload.get("required_row_ids", [])
+    if isinstance(required_row_ids, list):
+        row_statuses = _extract_row_statuses(template_text)
+        missing = sorted(set(required_row_ids) - set(row_statuses))
+        if missing:
+            errors.append("template doc missing row IDs: " + ", ".join(missing))
+        for row_id in required_row_ids:
+            if row_statuses.get(row_id) != "NOT_TESTED":
+                errors.append(f"template row {row_id} must default to NOT_TESTED")
+
+
+def _validate_template_contract(errors: list[str]) -> None:
+    payload = _load_json_object(TEMPLATE_FIXTURE_PATH, errors)
+    if not TEMPLATE_PATH.exists():
+        errors.append(f"missing template doc: {_display(TEMPLATE_PATH)}")
+        return
+    template_text = TEMPLATE_PATH.read_text(encoding="utf-8")
+    _validate_template_fixture(payload, errors)
+    _validate_template_doc(template_text, payload, errors)
+
+
 def _validate_section_presence(text: str, errors: list[str]) -> None:
     for heading in REQUIRED_HEADINGS:
         if heading not in text:
@@ -120,23 +275,49 @@ def _validate_final_disposition(text: str, errors: list[str]) -> str | None:
     return disposition
 
 
+def _validate_row_statuses(text: str, errors: list[str]) -> None:
+    row_statuses = _extract_row_statuses(text)
+    if not row_statuses:
+        errors.append("no result rows found")
+        return
+    invalid = sorted(
+        f"{row_id}={status}"
+        for row_id, status in row_statuses.items()
+        if status not in ALLOWED_ROW_STATUSES
+    )
+    if invalid:
+        errors.append("invalid row statuses: " + ", ".join(invalid))
+
+
 def main() -> int:
     args = parse_args()
     path = Path(args.path)
     if not path.is_absolute():
         path = REPO_ROOT / path
 
+    errors: list[str] = []
+    _validate_template_contract(errors)
+
+    if errors:
+        print("status=FAIL")
+        print(f"path={path}")
+        print("template_contract=false")
+        for error in errors:
+            print(f"error={error}")
+        return 1
+
     if not path.exists():
         print("status=NO_RESULT_FILE")
         print(f"path={path}")
+        print("template_contract=true")
         return 0
 
     text = path.read_text(encoding="utf-8")
     template_only = _is_template_only(text)
 
-    errors: list[str] = []
     _validate_section_presence(text, errors)
     _validate_required_sections(text, errors)
+    _validate_row_statuses(text, errors)
 
     disposition: str | None = None
     if not template_only:

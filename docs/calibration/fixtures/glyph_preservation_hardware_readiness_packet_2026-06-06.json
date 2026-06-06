@@ -6,6 +6,7 @@
   "preservation_hardware_status": "blocked_pending_user_hardware_execution",
   "source_matrix_path": "docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md",
   "source_template_path": "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
+  "source_template_fixture_path": "docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json",
   "source_checker_path": "tools/check_glyph_ultimate_preservation_hardware_result.py",
   "identity_runtime_hardware_validation_and_rollback_path": "docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md",
   "post_gfw3_baseline_path": "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",

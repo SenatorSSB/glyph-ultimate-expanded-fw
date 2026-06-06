@@ -43,6 +43,8 @@ This packet references existing repo source authority and packet infrastructure:
   `docs/calibration/glyph_ultimate_preservation_hardware_matrix_2026-05-26.md`
 - Existing preservation result template:
   `docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md`
+- Existing preservation result template fixture:
+  `docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json`
 - Existing preservation result checker:
   `tools/check_glyph_ultimate_preservation_hardware_result.py`
 - Identity runtime hardware validation and rollback plan:
