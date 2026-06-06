@@ -229,6 +229,9 @@ REQUIRED_FILES = [
     "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
     "docs/calibration/fixtures/glyph_post_gfw3_configurator_baseline_2026-06-06.json",
     "tools/check_glyph_post_gfw3_configurator_baseline.py",
+    "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_roadmap_next_work_index_2026-06-06.json",
+    "tools/check_glyph_roadmap_next_work_index.py",
     "docs/calibration/glyph_preimplementation_go_nogo_index_2026-05-28.md",
     "docs/calibration/fixtures/glyph_preimplementation_go_nogo_index_2026-05-28.json",
     "docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md",
@@ -745,6 +748,17 @@ REQUIRED_ROADMAP_PHRASES = [
     "runtime-loaded config/WebSerial/device write/external-remapper adapter implementation remain unimplemented",
     "active profile artifact change is not required",
     "next behavior-changing work still needs its own branch, build, hardware test, result recording, inspection, and merge gate",
+    "Roadmap next-work triage/index",
+    "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
+    "tools/check_glyph_roadmap_next_work_index.py",
+    "ready for docs/tools-only work",
+    "blocked by hardware",
+    "blocked by missing corpus/artifacts",
+    "blocked by source authority",
+    "blocked by explicit user/domain input",
+    "blocked by implementation approval",
+    "forbidden without future source authority and approval",
+    "Runtime-loaded config, WebSerial/device write, protobuf binary write, firmware flashing automation, external-remapper adapter output, external source code reuse, nunchuk hardware validation claims, and Senscope browser-app implementation remain blocked or out of scope as applicable",
 ]
 
 

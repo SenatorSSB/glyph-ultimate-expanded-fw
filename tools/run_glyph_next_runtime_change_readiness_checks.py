@@ -369,6 +369,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_post_gfw3_configurator_baseline.py",
         ),
         step(
+            "roadmap next-work index",
+            "tools/check_glyph_roadmap_next_work_index.py",
+        ),
+        step(
             "identity runtime behavior evaluator",
             "tools/check_glyph_identity_runtime_behavior_evaluator.py",
         ),
