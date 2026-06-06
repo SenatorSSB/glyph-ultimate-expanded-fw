@@ -75,6 +75,7 @@ Primary baseline evidence:
 | Export corpus capture | `READY_CORPUS_CAPTURE` | Capture real matched-version corpus artifacts if available. | No real corpus manifest or fixture set is present under `docs/calibration/export_corpus/`. Export corpus readiness status records `blocked_missing_real_corpus_artifacts`, `corpus_present=false`, and `completion_allowed=false`. |
 | Export corpus final blocker/status consolidation | `COMPLETE` | Preserve the blocker packet and its checker only. | Final blocker packet records that export corpus capture remains blocked by missing real corpus artifacts; the corpus root still contains only README guidance and no real manifest or fixture set. |
 | Adapter policy and prewrite validation | `READY_DOCS_TOOLS` | Maintain the blocker matrix and read-only policy/checkers. | Write-capable adapter remains blocked by missing corpus, missing official configurator source authority, non-authoritative external observations, unsafe active-profile round-trip, WebSerial/device write blockers, runtime-loaded config blockers, protobuf binary write blockers, license/code-reuse blockers, and implementation approval. |
+| Adapter prewrite implementation gate | `BLOCKED_IMPLEMENTATION_APPROVAL` | `docs_tools_only_source_audit_or_corpus_provision` | Write-capable adapter implementation is not approved unless all blockers are cleared. `implementation_allowed=false`. Current blockers are missing export corpus, missing official configurator source authority, non-authoritative external observations, unsafe active-profile round-trip, runtime-owned behavior not safely represented in external JSON, WebSerial/device write blocked, runtime-loaded config blocked, protobuf binary write blocked, external source code reuse blocked, adapter output generation blocked, and implementation approval missing. |
 | Physical/logical mapping and RF5 transcription | `READY_DOCS_TOOLS` | Maintain the RF5 gap index only, without changing mappings. | Printed RF5 transcription exists; old RF5 smoke row remains `NOT_TESTED_AMBIGUOUS` and must not be retconned. Later GFW3 RF5 evidence is scope-limited and does not rewrite the historical row. |
 | Next user action handoff | `BLOCKED_USER_INPUT` | Stop autonomous docs/tools sequence and wait for user action. | `glyph/gfw4-next-user-action-handoff` records `next_user_action_required`: provide real export corpus artifacts, provide source-authority approval or domain input as needed, and provide explicit implementation approval before behavior-changing work. The preservation hardware result is already recorded for applicable non-nunchuk scope; nunchuk remains NOT_TESTED/unvalidated. No firmware implementation should start from this handoff alone. |
 | Identity runtime generated-config prototype | `COMPLETE` | Maintain generated review artifacts/checkers only. | Prototype is not firmware input and not runtime-loaded config. |
@@ -92,6 +93,14 @@ Primary baseline evidence:
 | Firmware flashing automation | `FORBIDDEN_WITHOUT_FUTURE_APPROVAL` | None in this branch. | Push/flashing automation remains disallowed without future approval. |
 | External remapper adapter output | `FORBIDDEN_WITHOUT_FUTURE_APPROVAL` | None in this branch. | Source audit, license/code-reuse review, clean-room implementation approval, and non-round-trip caveats are required first. |
 | External source code reuse | `FORBIDDEN_WITHOUT_FUTURE_APPROVAL` | None in this branch. | License review and explicit user approval are required before any reuse/dependency. |
+
+## Gate keywords
+
+- `adapter_implementation_blocked`
+- `implementation_allowed=false`
+- `docs_tools_only_source_audit_or_corpus_provision`
+- `write-capable adapter implementation is not approved unless all blockers are cleared`
+- `explicit user approval after source authority exists`
 
 ## Recommended next queues
 

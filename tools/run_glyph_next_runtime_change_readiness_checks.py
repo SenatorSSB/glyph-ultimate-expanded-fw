@@ -66,6 +66,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
         ),
         step(
+            "adapter prewrite implementation gate",
+            "tools/check_glyph_adapter_prewrite_implementation_gate.py",
+        ),
+        step(
             "physical logical RF5 gap index",
             "tools/check_glyph_physical_logical_rf5_gap_index.py",
         ),

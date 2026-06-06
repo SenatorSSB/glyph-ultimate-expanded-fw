@@ -71,6 +71,7 @@ REQUIRED_ITEMS = {
     "export_corpus_capture",
     "export_corpus_final_blocker_status",
     "adapter_policy_prewrite_validation",
+    "adapter_prewrite_implementation_gate",
     "physical_logical_mapping_rf5_transcription",
     "identity_runtime_generated_config_prototype",
     "runtime_config_candidate_validator",
@@ -115,6 +116,12 @@ REQUIRED_DOC_PHRASES = (
     "No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed",
     "Export corpus final blocker/status consolidation",
     "Final blocker packet records that export corpus capture remains blocked by missing real corpus artifacts",
+    "Adapter prewrite implementation gate",
+    "adapter_implementation_blocked",
+    "implementation_allowed=false",
+    "docs_tools_only_source_audit_or_corpus_provision",
+    "write-capable adapter implementation is not approved unless all blockers are cleared",
+    "explicit user approval after source authority exists",
 )
 
 
@@ -320,6 +327,59 @@ def validate_preservation_item(items: dict[str, dict[str, Any]]) -> None:
             fail(f"preservation hardware execution notes missing phrase: {phrase}")
 
 
+def validate_adapter_prewrite_implementation_gate(items: dict[str, dict[str, Any]]) -> None:
+    gate = items["adapter_prewrite_implementation_gate"]
+    if gate["current_status"] != "BLOCKED_IMPLEMENTATION_APPROVAL":
+        fail("adapter prewrite implementation gate must remain BLOCKED_IMPLEMENTATION_APPROVAL")
+    if gate["category"] != "adapter_implementation_gate":
+        fail("adapter prewrite implementation gate category drifted")
+    if gate["allowed_next_action"] != "docs_tools_only_source_audit_or_corpus_provision":
+        fail("adapter prewrite implementation gate allowed_next_action drifted")
+    for rel_path in (
+        "docs/calibration/glyph_adapter_prewrite_implementation_gate_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_adapter_prewrite_implementation_gate_2026-06-06.json",
+        "tools/check_glyph_adapter_prewrite_implementation_gate.py",
+    ):
+        if rel_path not in gate["evidence_paths"]:
+            fail(f"adapter prewrite implementation gate evidence must include {rel_path}")
+    expected_blockers = {
+        "missing_export_corpus",
+        "missing_official_configurator_source_authority",
+        "external_observations_non_authoritative",
+        "active_profile_round_trip_unsafe",
+        "runtime_owned_behavior_not_safely_represented_in_external_json",
+        "webserial_device_write_blocked",
+        "runtime_loaded_config_blocked",
+        "protobuf_binary_write_blocked",
+        "external_source_code_reuse_blocked",
+        "adapter_output_generation_blocked",
+        "implementation_approval_missing",
+    }
+    if set(gate["blocked_by"]) != expected_blockers:
+        fail("adapter prewrite implementation gate blocked_by drifted")
+    if gate["requires_user_input"] is not True:
+        fail("adapter prewrite implementation gate must require user input")
+    if gate["requires_hardware"] is not False:
+        fail("adapter prewrite implementation gate must not require hardware")
+    if gate["requires_source_audit"] is not True:
+        fail("adapter prewrite implementation gate must require source audit")
+    if gate["requires_corpus"] is not True:
+        fail("adapter prewrite implementation gate must require corpus")
+    if gate["requires_firmware_change"] is not False:
+        fail("adapter prewrite implementation gate must not require firmware change")
+    if gate["forbidden_without_future_approval"] is not False:
+        fail("adapter prewrite implementation gate must remain docs/tools-only")
+    notes = gate["notes"].lower()
+    for phrase in (
+        "write-capable adapter implementation is not approved unless all blockers are cleared",
+        "implementation_allowed=false",
+        "docs/tools-only source audit and corpus provision remain allowed",
+        "explicit user approval after source authority exists is still required",
+    ):
+        if phrase not in notes:
+            fail(f"adapter prewrite implementation gate notes missing phrase: {phrase}")
+
+
 def validate_post_gfw3_fixture() -> None:
     baseline = load_json_object(POST_GFW3_FIXTURE)
     non_claims = baseline.get("non_claims")
@@ -356,6 +416,7 @@ def main() -> int:
         items = as_items_by_id(payload)
         validate_evidence_paths(items)
         validate_preservation_item(items)
+        validate_adapter_prewrite_implementation_gate(items)
         validate_post_gfw3_fixture()
         require_not_complete_without_artifacts(items)
         require_blocked_nonclaims(items)
