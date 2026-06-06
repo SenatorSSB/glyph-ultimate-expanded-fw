@@ -188,6 +188,33 @@
       "notes": "Protocol/framework exists; readiness status records blocked_missing_real_corpus_artifacts with corpus_present=false and completion_allowed=false. Completion requires real captured corpus artifacts."
     },
     {
+      "item_id": "export_corpus_final_blocker_status",
+      "label": "Export corpus final blocker/status consolidation",
+      "current_status": "COMPLETE",
+      "category": "corpus_status_packet",
+      "evidence_paths": [
+        "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
+        "tools/check_glyph_export_corpus_final_blocker_status.py",
+        "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
+        "tools/check_glyph_export_corpus_readiness_status.py",
+        "docs/calibration/glyph_profile_config_export_corpus_protocol_2026-05-26.md",
+        "docs/calibration/glyph_profile_config_export_corpus_manifest_TEMPLATE.json",
+        "tools/check_glyph_profile_config_export_corpus.py",
+        "docs/calibration/export_corpus/README.md"
+      ],
+      "allowed_next_action": "preserve_with_docs_tools_only",
+      "blocked_by": [],
+      "requires_user_input": false,
+      "requires_hardware": false,
+      "requires_source_audit": false,
+      "requires_corpus": false,
+      "requires_firmware_change": false,
+      "forbidden_without_future_approval": false,
+      "notes": "Final blocker packet records that export corpus capture remains blocked by missing real corpus artifacts; the corpus root still contains only README guidance and no real manifest or fixture set. Corpus capture itself stays READY_CORPUS_CAPTURE until real matched-version artifacts are provided."
+    },
+    {
       "item_id": "adapter_policy_prewrite_validation",
       "label": "Adapter policy and prewrite validation",
       "current_status": "READY_DOCS_TOOLS",

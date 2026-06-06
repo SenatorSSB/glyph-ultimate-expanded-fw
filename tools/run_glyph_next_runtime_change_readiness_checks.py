@@ -52,6 +52,10 @@ def steps() -> list[Step]:
         step("profile config export corpus", "tools/check_glyph_profile_config_export_corpus.py"),
         step("export corpus readiness status", "tools/check_glyph_export_corpus_readiness_status.py"),
         step(
+            "export corpus final blocker/status",
+            "tools/check_glyph_export_corpus_final_blocker_status.py",
+        ),
+        step(
             "profile adapter prewrite",
             "tools/check_glyph_profile_adapter_prewrite.py",
             "docs/sources/raw/GlyphUserProfiles.json",

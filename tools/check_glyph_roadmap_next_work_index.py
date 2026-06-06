@@ -69,6 +69,7 @@ REQUIRED_ITEMS = {
     "capability_source_authority_mapping",
     "identity_runtime_role_case_canonicalization",
     "export_corpus_capture",
+    "export_corpus_final_blocker_status",
     "adapter_policy_prewrite_validation",
     "physical_logical_mapping_rf5_transcription",
     "identity_runtime_generated_config_prototype",
@@ -112,6 +113,8 @@ REQUIRED_DOC_PHRASES = (
     "User-reported pass is recorded for all applicable non-nunchuk preservation rows",
     "nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box",
     "No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed",
+    "Export corpus final blocker/status consolidation",
+    "Final blocker packet records that export corpus capture remains blocked by missing real corpus artifacts",
 )
 
 
@@ -230,6 +233,27 @@ def require_not_complete_without_artifacts(items: dict[str, dict[str, Any]]) -> 
     export_corpus = items["export_corpus_capture"]
     if export_corpus["current_status"] == "COMPLETE" and not has_real_export_corpus():
         fail("export corpus capture cannot be COMPLETE without real corpus manifests")
+
+    export_corpus_blocker = items["export_corpus_final_blocker_status"]
+    if export_corpus_blocker["current_status"] != "COMPLETE":
+        fail("export corpus final blocker/status consolidation must remain COMPLETE")
+    if export_corpus_blocker["allowed_next_action"] != "preserve_with_docs_tools_only":
+        fail("export corpus final blocker/status consolidation must preserve docs/tools-only scope")
+    for rel_path in (
+        "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
+        "tools/check_glyph_export_corpus_final_blocker_status.py",
+    ):
+        if rel_path not in export_corpus_blocker["evidence_paths"]:
+            fail(f"export corpus final blocker/status consolidation evidence must include {rel_path}")
+    notes = export_corpus_blocker["notes"].lower()
+    for phrase in (
+        "blocked by missing real corpus artifacts",
+        "readme guidance",
+        "no real manifest or fixture set",
+    ):
+        if phrase not in notes:
+            fail(f"export corpus final blocker/status consolidation notes missing phrase: {phrase}")
 
 
 def require_blocked_nonclaims(items: dict[str, dict[str, Any]]) -> None:
