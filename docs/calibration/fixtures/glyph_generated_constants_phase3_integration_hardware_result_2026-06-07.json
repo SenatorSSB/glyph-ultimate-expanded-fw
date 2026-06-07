@@ -1,0 +1,88 @@
+{
+  "schema_name": "glyph_generated_constants_phase3_integration_hardware_result",
+  "status": "user_reported_pass",
+  "result_source": "user_reported",
+  "source_report_text": "all test doable work as expected",
+  "tested_branch": "phase3-generated-constants-firmware-integration",
+  "result_branch": "phase3-generated-constants-hardware-result",
+  "commit_sha_under_test": "76e4f6c234b88a12ba311f2c8076fa3303ffd711",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "hardware_result_recorded": true,
+  "nunchuk_status": "not_tested",
+  "result_date": "2026-06-07",
+  "caveats": [
+    "user-reported result",
+    "no nunchuk validation",
+    "no runtime-loaded config",
+    "no WebSerial/device write",
+    "no protobuf binary write",
+    "no firmware flashing automation",
+    "no universal official configurator compatibility claim",
+    "no intentional firmware behavior change claim",
+    "no Senscope/game-semantic change"
+  ],
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "PROFILE-001",
+      "category": "identity_profile",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "DEFAULT-001",
+      "category": "default_table",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "MODES-001",
+      "category": "mode_default",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "MODS-001",
+      "category": "modifier_tables",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "RT1RF4-001",
+      "category": "custom_modifier_table",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "LT5-001",
+      "category": "low_magnitude",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "NULL-001",
+      "category": "null_override",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "PROFILE-REG-001",
+      "category": "profile_regression",
+      "result": "PASS",
+      "notes": "User-reported pass; no regression observed."
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "result": "NOT_TESTED",
+      "notes": "No nunchuk validation claim."
+    }
+  ]
+}

@@ -368,6 +368,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_generated_constants_refactor_hardware_result.py",
         ),
         step(
+            "phase 3 generated constants integration hardware result",
+            "tools/check_glyph_generated_constants_phase3_integration_hardware_result.py",
+        ),
+        step(
             "gfw3 runtime remap hardware result",
             "tools/check_glyph_gfw3_runtime_remap_hardware_result.py",
         ),
