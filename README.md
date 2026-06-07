@@ -25,6 +25,8 @@ not change Senscope game-semantic source authority.
 ## Current Status
 
 - GFW3 runtime remap work is merged, user hardware-tested, and recorded.
+- Phase 3 generated-like C++ constants path is merged, build-gated, user
+  hardware-tested for applicable non-nunchuk scope, and recorded.
 - Preservation hardware pass is recorded for applicable non-nunchuk scope.
 - Official Glyph configurator corpus records user-provided default and
   back-and-forth JSON fixtures when the correction packet is present.

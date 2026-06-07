@@ -117,30 +117,39 @@ validation, and not device transport.
 
 ## Phase 3 - Generated C++ Constants / Firmware Build Path
 
-Goal: Convert reviewed generated constants into a source-backed firmware build
-path only when approved.
+Goal: Keep the current source-owned generated-like constants firmware path
+stable for the merged 27-table `StickPoint[9]` baseline and keep future deltas
+source-backed.
 
-Status: `READY_FOR_ENGINEERING_DESIGN`.
+Status: `CURRENT_BASELINE` / `COMPLETE` for the current baseline behavior-preserving firmware path.
+
+Note: before the approved merge, this work sat at `READY_FOR_ENGINEERING_DESIGN`.
 
 Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=true` before firmware source implementation;
-`requires_firmware_change=true` only for the implementation branch.
+`requires_user_product_approval=false` for the merged baseline itself.
 
-Engineering/source research can proceed: yes, for design, generated constants
-target definition, and source-diff checker work.
+Future generated constants changes remain allowed only through source-backed
+review, build, hardware plan/result, explicit product approval when behavior/
+build-path risk exists, and no runtime-loaded config/device-write expansion.
 
-Next concrete action: define the generated constants target and source-diff
-checker; stop before firmware source changes until product approval exists.
+Engineering/source research can proceed: yes, for source-sync checker
+maintenance, source-backed diff review, and docs/tools validation of the current
+baseline.
+
+Next concrete action: maintain the source-sync checker and keep future
+generated constants deltas behind source-backed review, build, hardware
+plan/result, and approval gates.
 
 Required evidence: exact source diff, build output, artifact inspection,
-behavior-preserving checker coverage, and hardware plan/result for runtime
-impact.
+behavior-preserving checker coverage, and hardware plan/result for any future
+delta.
 
-Stop conditions: generated constants drift from source, build fails, or the
-change would alter behavior without approval and test plan.
+Stop conditions: generated constants drift from source, build fails, or a
+future delta would alter behavior without approval and test plan.
 
 Explicit non-goals: no broad refactor, no runtime-loaded config interpreter, no
-device write, and no nunchuk validation claim.
+device write, no profile artifact change, no firmware flashing automation, no
+nunchuk validation claim, and no intentional controller behavior change.
 
 ## Phase 4 - Offline Official Configurator Export Candidate
 
