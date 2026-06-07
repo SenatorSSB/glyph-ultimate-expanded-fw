@@ -1,0 +1,68 @@
+{
+  "schema_name": "glyph_generated_constants_phase3_integration_hardware_plan",
+  "plan_version": 1,
+  "status": "template_not_executed",
+  "branch": "phase3-generated-constants-firmware-integration",
+  "intended_behavior": "behavior_preserving_refactor_only",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "hardware_result_recorded": false,
+  "nunchuk_status": "not_tested",
+  "caveats": [
+    "no_runtime_loaded_config",
+    "no_webserial_or_device_write",
+    "no_profile_artifact_change",
+    "no_firmware_behavior_change_claim"
+  ],
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PROFILE-001",
+      "category": "identity_profile",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "DEFAULT-001",
+      "category": "default_table",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "MODES-001",
+      "category": "mode_default",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "MODS-001",
+      "category": "modifier_tables",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "RT1RF4-001",
+      "category": "rt1_rf4_custom_table",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "LT5-001",
+      "category": "low_magnitude",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NULL-001",
+      "category": "null_override",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PROFILE-REG-001",
+      "category": "profile_regression",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "result": "NOT_TESTED"
+    }
+  ]
+}

@@ -21,6 +21,9 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   runtime remap hardware pass.
 - `glyph_ultimate_preservation_hardware_result.md` - user-reported preservation
   pass for applicable non-nunchuk scope.
+- `glyph_generated_constants_phase3_integration_hardware_result_2026-06-07.md`
+  - user-reported Phase 3 generated constants firmware-integration hardware
+    result.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
@@ -96,6 +99,8 @@ source-backed.
   preservation hardware fixture template.
 - `glyph_offline_remapper_result_template_2026-06-03.md` - historical external
   remapper result template.
+- `glyph_generated_constants_phase3_integration_hardware_plan_2026-06-07.md` -
+  phase 3 generated-constants integration hardware plan template.
 
 ## Old Roadmap / Readiness Packets
 

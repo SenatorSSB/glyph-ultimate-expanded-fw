@@ -1,5 +1,6 @@
 // Generated-like identity runtime table constants.
 // Source-owned firmware constants, not runtime-loaded config.
+// Values are source-authored, not generated at runtime.
 // Do not treat this as serial/device write behavior.
 // Values must remain source-synced with the generated-config/tooling checks.
 
@@ -129,6 +130,20 @@ constexpr StickPoint kTilt3Table[9] = {
     {75, 86}, {128, 86}, {181, 86},
     {75, 128}, {128, 128}, {181, 128},
     {75, 170}, {128, 170}, {181, 170},
+};
+
+constexpr StickPoint kTilt1Minus41Table[9] = {
+    {169, 47}, {128, 47}, {87, 47},
+    {169, 128}, {128, 128}, {87, 128},
+    {169, 209}, {128, 209}, {87, 209},
+};
+
+// RT1+RF4 custom modifier. Direction 5 is source-encoded center because table
+// selection requires a 9-point table and the requested neutral behavior is unchanged.
+constexpr StickPoint kRT1RF4CustomTable[9] = {
+    {69, 78}, {128, 78}, {187, 78},
+    {69, 128}, {128, 128}, {187, 128},
+    {72, 172}, {128, 179}, {184, 172},
 };
 
 constexpr StickPoint kMTilt1Table[9] = {
