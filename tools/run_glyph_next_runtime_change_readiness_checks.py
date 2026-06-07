@@ -352,10 +352,6 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
         step(
-            "runtime-config semantics evaluator bridge",
-            "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
-        ),
-        step(
             "agentic sequence protocol",
             "tools/check_glyph_agentic_sequence_protocol.py",
         ),

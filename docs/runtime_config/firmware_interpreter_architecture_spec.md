@@ -126,4 +126,3 @@ This branch does not implement the interpreter.
 
 It does not change firmware source, does not change table values, does not add
 runtime-loaded config consumption, and does not claim hardware validation.
-
