@@ -53,6 +53,9 @@ Primary baseline evidence:
   indexes, read-only validators, and source-auditable packets.
 - `READY_CORPUS_CAPTURE`: protocol/checker exists; future work needs real
   captured corpus artifacts before completion claims.
+- `OFFICIAL_CORPUS_PRESENT_INITIAL`: official configurator export-shape corpus
+  exists, but exact configurator metadata and write-behavior authority remain
+  unresolved.
 - `BLOCKED_HARDWARE`: a hardware result is required before the claim can advance.
 - `BLOCKED_USER_INPUT`: explicit user/domain input is required.
 - `BLOCKED_SOURCE_AUTHORITY`: current source authority is insufficient.
@@ -72,12 +75,12 @@ Primary baseline evidence:
 | Preservation hardware matrix execution | `COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED` | Preserve the recorded result scope only. | User-reported pass is recorded for all applicable non-nunchuk preservation rows in `docs/calibration/glyph_ultimate_preservation_hardware_result.md` and `docs/calibration/fixtures/glyph_ultimate_preservation_hardware_result.json`; nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box. No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed. |
 | Capability and source-authority mapping | `COMPLETE` | Maintain docs/checkers if source paths drift. | Do not promote unknown behavior to fact. |
 | Identity runtime role/case canonicalization | `COMPLETE` | Maintain evaluator/table sync only. | Future firmware behavior changes still require their own gate. |
-| Export corpus capture | `READY_CORPUS_CAPTURE` | Capture real matched-version corpus artifacts if available. | No real corpus manifest or fixture set is present under `docs/calibration/export_corpus/`. Export corpus readiness status records `blocked_missing_real_corpus_artifacts`, `corpus_present=false`, and `completion_allowed=false`. |
-| Export corpus final blocker/status consolidation | `COMPLETE` | Preserve the blocker packet and its checker only. | Final blocker packet records that export corpus capture remains blocked by missing real corpus artifacts; the corpus root still contains only README guidance and no real manifest or fixture set. |
+| Export corpus capture | `OFFICIAL_CORPUS_PRESENT_INITIAL` | Provide missing official configurator metadata if available. | Official configurator corpus exists with two user-provided fixture files under `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/`. Exact configurator version/source reference, exact capture timestamp, and exact push/download route details remain unknown. |
+| Export corpus final blocker/status consolidation | `COMPLETE` | Preserve the blocker packet and its checker only. | Final blocker packet records `official_configurator_corpus_present_initial`, `corpus_present=true`, and `completion_allowed=false`; write-capable implementation remains blocked. |
 | Adapter policy and prewrite validation | `READY_DOCS_TOOLS` | Maintain the blocker matrix and read-only policy/checkers. | Write-capable adapter remains blocked by missing corpus, missing official configurator source authority, non-authoritative external observations, unsafe active-profile round-trip, WebSerial/device write blockers, runtime-loaded config blockers, protobuf binary write blockers, license/code-reuse blockers, and implementation approval. |
-| Adapter prewrite implementation gate | `BLOCKED_IMPLEMENTATION_APPROVAL` | `docs_tools_only_source_audit_or_corpus_provision` | Write-capable adapter implementation is not approved unless all blockers are cleared. `implementation_allowed=false`. Current blockers are missing export corpus, missing official configurator source authority, non-authoritative external observations, unsafe active-profile round-trip, runtime-owned behavior not safely represented in external JSON, WebSerial/device write blocked, runtime-loaded config blocked, protobuf binary write blocked, external source code reuse blocked, adapter output generation blocked, and implementation approval missing. |
+| Adapter prewrite implementation gate | `BLOCKED_IMPLEMENTATION_APPROVAL` | `docs_tools_only_source_audit_or_official_corpus_metadata` | Write-capable adapter implementation is not approved unless all blockers are cleared. `implementation_allowed=false`. Current blockers are official corpus metadata still missing, missing official configurator/source authority for write behavior, quarantined non-authoritative external observations, unsafe active-profile round-trip, runtime-owned behavior not safely represented in external JSON, WebSerial/device write blocked, runtime-loaded config blocked, protobuf binary write blocked, external source code reuse blocked, adapter output generation blocked, and implementation approval missing. |
 | Physical/logical mapping and RF5 transcription | `READY_DOCS_TOOLS` | Maintain the RF5 gap index only, without changing mappings. | Printed RF5 transcription exists; old RF5 smoke row remains `NOT_TESTED_AMBIGUOUS` and must not be retconned. Later GFW3 RF5 evidence is scope-limited and does not rewrite the historical row. |
-| Next user action handoff | `BLOCKED_USER_INPUT` | Stop autonomous docs/tools sequence and wait for user action. | `glyph/gfw4-next-user-action-handoff` records `next_user_action_required`: provide real export corpus artifacts, provide source-authority approval or domain input as needed, and provide explicit implementation approval before behavior-changing work. The preservation hardware result is already recorded for applicable non-nunchuk scope; nunchuk remains NOT_TESTED/unvalidated. No firmware implementation should start from this handoff alone. |
+| Next user action handoff | `BLOCKED_USER_INPUT` | Stop autonomous docs/tools sequence and wait for user action. | `glyph_next_user_action_handoff_2026-06-06` records `next_user_action_required`: provide exact official configurator app version/source reference and capture route metadata if desired, provide source-authority approval or domain input as needed, and provide explicit implementation approval before behavior-changing work. The preservation hardware result is already recorded for applicable non-nunchuk scope; nunchuk remains NOT_TESTED/unvalidated. No firmware implementation should start from this handoff alone. |
 | Identity runtime generated-config prototype | `COMPLETE` | Maintain generated review artifacts/checkers only. | Prototype is not firmware input and not runtime-loaded config. |
 | Runtime config candidate validator | `COMPLETE` | Maintain offline validator/corpus only. | Candidate validator is not runtime-loaded config implementation. |
 | Runtime-loaded config design and validation contract | `READY_DOCS_TOOLS` | Continue docs/tools design validation only. | Implementation remains blocked by user approval, source authority, storage/interpreter decisions, and hardware plan. |
@@ -98,7 +101,7 @@ Primary baseline evidence:
 
 - `adapter_implementation_blocked`
 - `implementation_allowed=false`
-- `docs_tools_only_source_audit_or_corpus_provision`
+- `docs_tools_only_source_audit_or_official_corpus_metadata`
 - `write-capable adapter implementation is not approved unless all blockers are cleared`
 - `explicit user approval after source authority exists`
 
@@ -107,7 +110,8 @@ Primary baseline evidence:
 ### Queue 1 - Safe docs/tools-only next work
 
 - Roadmap/index/checker hardening.
-- Export corpus readiness/capture packet if corpus files are available.
+- Official configurator corpus metadata packet if app version/source reference
+  or exact capture route details become available.
 - Preservation hardware packet refinement if no hardware result is claimed.
 - Adapter prewrite blocker matrix maintenance if upstream blocker packets drift.
 - Source-authority blocker packets.
@@ -116,12 +120,11 @@ Primary baseline evidence:
 
 ### Queue 2 - Requires user/corpus/hardware
 
-- Export corpus capture if source artifacts are not present.
-- Next user action handoff follow-up: provide real export corpus artifacts,
-  provide source-authority approval or domain input where needed, and provide
-  explicit implementation approval before any behavior-changing branch. The
-  preservation hardware result is already recorded for applicable non-nunchuk
-  scope.
+- Next user action handoff follow-up: provide exact official configurator app
+  version/source reference and capture route metadata if desired, provide
+  source-authority approval or domain input where needed, and provide explicit
+  implementation approval before any behavior-changing branch. The preservation
+  hardware result is already recorded for applicable non-nunchuk scope.
 - Any behavior-changing runtime branch.
 - Any nunchuk validation if a future scope explicitly needs it.
 - Any physical/logical role or chord-priority decision that depends on

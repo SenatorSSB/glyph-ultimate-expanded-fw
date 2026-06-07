@@ -591,6 +591,39 @@
 | `tools/check_glyph_preservation_execution_packet.py` | Structure/presence checks for preservation execution packet constraints and required references. |
 | `tools/check_glyph_no_forbidden_artifacts.py` | Read-only git-state hygiene check for forbidden tracked artifacts and visible untracked artifact warnings. |
 
+## 2026-06-06 Source Attribution Correction
+
+The user clarified that `GlyphUserProfilesDefault.json` and
+`GlyphUserProfilesBackAndForth.json` were official Glyph configurator app
+artifacts. They were not produced by user execution of the custom external
+remapper repo/app.
+
+official Glyph configurator app artifacts
+
+The official configurator corpus is now the primary source for export-shape
+analysis:
+
+official configurator corpus is now the primary source for export-shape analysis
+
+- `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json`
+- `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md`
+- `tools/check_glyph_official_configurator_export_corpus.py`
+- `docs/calibration/glyph_official_configurator_corpus_diff_2026-06-06.md`
+- `tools/check_glyph_official_configurator_corpus_diff.py`
+
+The external/offline remapper result packets are quarantined as
+non-authoritative historical packets pending independent source support:
+
+external/offline remapper result packets are quarantined as non-authoritative historical packets
+
+- `docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md`
+- `tools/check_glyph_external_remapper_misattribution_correction.py`
+
+This correction does not approve adapter output, WebSerial/device write,
+runtime-loaded config, protobuf binary write, firmware flashing automation,
+firmware behavior changes, active profile artifact changes, nunchuk validation,
+or gameplay semantic changes.
+
 ## Non-Goals
 
 - No macros/turbo/timing automation.

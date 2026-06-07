@@ -1,0 +1,48 @@
+{
+  "schema_name": "glyph_external_remapper_misattribution_correction",
+  "schema_version": 1,
+  "packet_date": "2026-06-06",
+  "status": "external_remapper_user_execution_evidence_quarantined",
+  "correction_reason": "user clarified source attribution",
+  "user_clarification": {
+    "did_not_use_external_remapper_repo_or_app": true,
+    "GlyphUserProfilesDefault_json_source": "official Glyph configurator app default profiles JSON",
+    "GlyphUserProfilesBackAndForth_json_source": "official Glyph configurator app custom profile pushed through and downloaded/exported back"
+  },
+  "official_configurator_corpus": {
+    "corpus_id": "official_glyph_configurator_2026-06-06",
+    "source_classification": "primary_official_configurator_corpus",
+    "manifest": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "diff_fixture": "docs/calibration/fixtures/glyph_official_configurator_corpus_diff_2026-06-06.json"
+  },
+  "quarantined_external_remapper_packets": [
+    "docs/calibration/glyph_offline_remapper_experiment_result_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_export_structural_diff_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_ultimate_diff_report_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_metadata_diff_report_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_export_diff_gate_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_binding_loss_classification_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_socd_drift_classification_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_adapter_blocker_escalation_2026-06-04.md",
+    "docs/calibration/glyph_offline_remapper_export_loss_gate_2026-06-04.md"
+  ],
+  "required_correction_notice_title": "CORRECTION / SOURCE MISATTRIBUTION",
+  "external_remapper_evidence_policy": {
+    "must_not_be_used_as_primary_corpus_evidence": true,
+    "must_not_be_treated_as_user_executed_evidence_without_independent_support": true,
+    "existing_external_remapper_docs_are_non_authoritative_historical_pending_correction": true,
+    "official_configurator_corpus_is_primary_export_shape_source": true
+  },
+  "explicit_non_claims": {
+    "not_external_remapper_primary_source": true,
+    "not_external_remapper_user_execution_evidence": true,
+    "not_device_write_approval": true,
+    "not_adapter_implementation_approval": true,
+    "not_runtime_loaded_config_implementation": true,
+    "not_protobuf_binary_write": true,
+    "not_firmware_behavior_change": true,
+    "not_active_profile_artifact_change": true,
+    "not_nunchuk_validation": true,
+    "not_gameplay_semantics": true
+  }
+}

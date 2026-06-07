@@ -36,6 +36,7 @@ ALLOWED_STATUSES = {
     "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED",
     "READY_DOCS_TOOLS",
     "READY_CORPUS_CAPTURE",
+    "OFFICIAL_CORPUS_PRESENT_INITIAL",
     "BLOCKED_HARDWARE",
     "BLOCKED_USER_INPUT",
     "BLOCKED_SOURCE_AUTHORITY",
@@ -115,11 +116,11 @@ REQUIRED_DOC_PHRASES = (
     "nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box",
     "No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed",
     "Export corpus final blocker/status consolidation",
-    "Final blocker packet records that export corpus capture remains blocked by missing real corpus artifacts",
+    "Final blocker packet records `official_configurator_corpus_present_initial`",
     "Adapter prewrite implementation gate",
     "adapter_implementation_blocked",
     "implementation_allowed=false",
-    "docs_tools_only_source_audit_or_corpus_provision",
+    "docs_tools_only_source_audit_or_official_corpus_metadata",
     "write-capable adapter implementation is not approved unless all blockers are cleared",
     "explicit user approval after source authority exists",
 )
@@ -240,6 +241,10 @@ def require_not_complete_without_artifacts(items: dict[str, dict[str, Any]]) -> 
     export_corpus = items["export_corpus_capture"]
     if export_corpus["current_status"] == "COMPLETE" and not has_real_export_corpus():
         fail("export corpus capture cannot be COMPLETE without real corpus manifests")
+    if export_corpus["current_status"] != "OFFICIAL_CORPUS_PRESENT_INITIAL":
+        fail("export corpus capture must record OFFICIAL_CORPUS_PRESENT_INITIAL")
+    if export_corpus["requires_corpus"] is not False:
+        fail("export corpus capture must not require new corpus artifacts after ingestion")
 
     export_corpus_blocker = items["export_corpus_final_blocker_status"]
     if export_corpus_blocker["current_status"] != "COMPLETE":
@@ -255,9 +260,9 @@ def require_not_complete_without_artifacts(items: dict[str, dict[str, Any]]) -> 
             fail(f"export corpus final blocker/status consolidation evidence must include {rel_path}")
     notes = export_corpus_blocker["notes"].lower()
     for phrase in (
-        "blocked by missing real corpus artifacts",
-        "readme guidance",
-        "no real manifest or fixture set",
+        "official_configurator_corpus_present_initial",
+        "corpus_present=true",
+        "completion_allowed=false",
     ):
         if phrase not in notes:
             fail(f"export corpus final blocker/status consolidation notes missing phrase: {phrase}")
@@ -333,7 +338,7 @@ def validate_adapter_prewrite_implementation_gate(items: dict[str, dict[str, Any
         fail("adapter prewrite implementation gate must remain BLOCKED_IMPLEMENTATION_APPROVAL")
     if gate["category"] != "adapter_implementation_gate":
         fail("adapter prewrite implementation gate category drifted")
-    if gate["allowed_next_action"] != "docs_tools_only_source_audit_or_corpus_provision":
+    if gate["allowed_next_action"] != "docs_tools_only_source_audit_or_official_corpus_metadata":
         fail("adapter prewrite implementation gate allowed_next_action drifted")
     for rel_path in (
         "docs/calibration/glyph_adapter_prewrite_implementation_gate_2026-06-06.md",
@@ -343,9 +348,9 @@ def validate_adapter_prewrite_implementation_gate(items: dict[str, dict[str, Any
         if rel_path not in gate["evidence_paths"]:
             fail(f"adapter prewrite implementation gate evidence must include {rel_path}")
     expected_blockers = {
-        "missing_export_corpus",
+        "official_corpus_present_metadata_missing",
         "missing_official_configurator_source_authority",
-        "external_observations_non_authoritative",
+        "external_observations_quarantined_non_authoritative",
         "active_profile_round_trip_unsafe",
         "runtime_owned_behavior_not_safely_represented_in_external_json",
         "webserial_device_write_blocked",
@@ -364,7 +369,7 @@ def validate_adapter_prewrite_implementation_gate(items: dict[str, dict[str, Any
     if gate["requires_source_audit"] is not True:
         fail("adapter prewrite implementation gate must require source audit")
     if gate["requires_corpus"] is not True:
-        fail("adapter prewrite implementation gate must require corpus")
+        fail("adapter prewrite implementation gate must still require corpus/source review context")
     if gate["requires_firmware_change"] is not False:
         fail("adapter prewrite implementation gate must not require firmware change")
     if gate["forbidden_without_future_approval"] is not False:
@@ -373,7 +378,7 @@ def validate_adapter_prewrite_implementation_gate(items: dict[str, dict[str, Any
     for phrase in (
         "write-capable adapter implementation is not approved unless all blockers are cleared",
         "implementation_allowed=false",
-        "docs/tools-only source audit and corpus provision remain allowed",
+        "official corpus exists",
         "explicit user approval after source authority exists is still required",
     ):
         if phrase not in notes:

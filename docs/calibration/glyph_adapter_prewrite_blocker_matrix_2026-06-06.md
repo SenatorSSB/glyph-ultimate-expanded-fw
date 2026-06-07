@@ -15,8 +15,8 @@ implementation and not a write path.
 
 The matrix is grounded in existing repository packets:
 
-- Export corpus readiness:
-  `docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md`
+- Export corpus final blocker/status:
+  `docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md`
 - Configurator compatibility source registry:
   `docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md`
 - Offline remapper adapter blocker escalation:
@@ -38,7 +38,7 @@ The matrix is grounded in existing repository packets:
 
 | Blocker | Current status | Source-backed reason | Required future resolution |
 | --- | --- | --- | --- |
-| Missing export corpus | `BLOCKED` | The readiness packet records `blocked_missing_real_corpus_artifacts`, `corpus_present=false`, and `completion_allowed=false`. | Provide real matched-version corpus artifacts under `docs/calibration/export_corpus/` with a filled manifest and hashes. |
+| Official corpus present, metadata missing | `BLOCKED` | The final blocker/status packet records `official_configurator_corpus_present_initial`, `corpus_present=true`, and `completion_allowed=false`. | Provide exact configurator version/source reference and capture route metadata before broader compatibility claims. |
 | Missing official configurator source authority | `BLOCKED` | The source registry keeps official configurator behavior and official packet/schema sources deferred. External observations are non-authoritative. | Source-authority approval and explicit source references for any official compatibility claim. |
 | External observations non-authoritative | `BLOCKED` | External remapper observations are comparison inputs only and are not promoted to authority. | Source audit may record observations, but promotion requires explicit approval. |
 | Runtime-owned behavior not safely represented in external JSON | `BLOCKED` | The export-loss gate records `runtime_owned_behavior_represented=false`. | Approved transform design plus sidecar/non-round-trip caveats; still not implementation by itself. |
@@ -54,7 +54,7 @@ The matrix is grounded in existing repository packets:
 Allowed next work is limited to docs/tools-only refinement:
 
 - maintain this blocker matrix if upstream packet status changes;
-- capture a real export corpus when artifacts are provided and the protocol is clear;
+- provide official configurator corpus metadata if available;
 - perform a non-authoritative external source audit without copying code;
 - refine clean-room design packets without generating adapter output;
 - prepare user-facing handoff packets.

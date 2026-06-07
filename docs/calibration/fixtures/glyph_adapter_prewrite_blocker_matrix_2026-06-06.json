@@ -14,11 +14,11 @@
       "schema_name": "glyph_configurator_compatibility_source_registry"
     },
     "export_corpus_readiness": {
-      "checker_path": "tools/check_glyph_export_corpus_readiness_status.py",
-      "doc_path": "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
-      "fixture_path": "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
-      "required_status": "blocked_missing_real_corpus_artifacts",
-      "schema_name": "glyph_export_corpus_readiness_status"
+      "checker_path": "tools/check_glyph_export_corpus_final_blocker_status.py",
+      "doc_path": "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
+      "fixture_path": "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
+      "required_status": "official_configurator_corpus_present_initial",
+      "schema_name": "glyph_export_corpus_final_blocker_status"
     },
     "external_remapper_license_code_reuse_blocker": {
       "checker_path": "tools/check_glyph_external_remapper_license_code_reuse_blocker.py",
@@ -72,7 +72,7 @@
   },
   "blockers": [
     {
-      "blocker_id": "missing_export_corpus",
+      "blocker_id": "official_corpus_present_metadata_missing",
       "status": "BLOCKED",
       "source_packet_ids": [
         "export_corpus_readiness"
@@ -81,7 +81,7 @@
         "official compatibility claim",
         "write-capable adapter approval"
       ],
-      "required_future_resolution": "provide real matched-version export corpus artifacts with manifest, fixture hashes, and provenance"
+      "required_future_resolution": "official corpus exists; provide exact configurator version/source reference and capture route metadata before broader compatibility claims"
     },
     {
       "blocker_id": "missing_official_configurator_source_authority",
@@ -199,7 +199,7 @@
   ],
   "allowed_next_work": [
     "maintain docs/tools blocker matrix if upstream source packet status changes",
-    "capture real export corpus when artifacts are provided and protocol is clear",
+    "provide official configurator corpus metadata if available",
     "perform non-authoritative external source audit without copying code",
     "refine clean-room design packets without generating adapter output",
     "prepare user-facing handoff packets"

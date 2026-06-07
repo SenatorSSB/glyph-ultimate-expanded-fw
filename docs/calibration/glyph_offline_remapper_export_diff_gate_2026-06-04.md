@@ -1,5 +1,14 @@
 # Glyph Offline Remapper Export Diff Gate - 2026-06-04
 
+## CORRECTION / SOURCE MISATTRIBUTION
+
+User clarification on 2026-06-06 supersedes external-remapper attribution for
+the `GlyphUserProfilesDefault.json` and `GlyphUserProfilesBackAndForth.json`
+files. They are official Glyph configurator app artifacts, not user-executed
+external remapper artifacts. This historical packet is quarantined as
+non-authoritative pending independent source support and must not be used as
+primary corpus evidence.
+
 ## Purpose and scope
 
 This records a docs/tools-only gate over the no-device external remapper import/export result and the committed diff reports.

@@ -31,25 +31,30 @@ REQUIRED_SOURCE_PROTOCOL_PATHS = {
     "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
     "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
     "tools/check_glyph_export_corpus_readiness_status.py",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md",
+    "tools/check_glyph_official_configurator_export_corpus.py",
+    "docs/calibration/glyph_official_configurator_corpus_diff_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_official_configurator_corpus_diff_2026-06-06.json",
+    "tools/check_glyph_official_configurator_corpus_diff.py",
+    "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_external_remapper_misattribution_correction_2026-06-06.json",
+    "tools/check_glyph_external_remapper_misattribution_correction.py",
 }
 
 REQUIRED_MISSING_ARTIFACT_CLASSES = {
-    "filled_manifest_json",
-    "captured_export_json_fixtures",
-    "fixture_sha256_hashes",
-    "glyph_repo_commit_reference",
-    "firmware_source_commit_reference",
     "configurator_source_reference",
     "configurator_version_label",
-    "device_model_or_capture_context",
-    "expected_semantic_feature_labels",
-    "known_unknowns",
+    "exact_capture_timestamp",
+    "exact_push_download_route_details",
+    "write_behavior_source_authority",
+    "implementation_approval",
 }
 
 REQUIRED_FUTURE_ARTIFACTS = REQUIRED_MISSING_ARTIFACT_CLASSES
 
 REQUIRED_NON_CLAIMS = {
-    "official_configurator_authority_claimed",
+    "official_configurator_export_shape_evidence_claimed",
     "webserial_write_implemented",
     "device_write_implemented",
     "runtime_loaded_config_implemented",
@@ -61,13 +66,14 @@ REQUIRED_NON_CLAIMS = {
 }
 
 BLOCKED_DOC_PHRASES = (
-    "blocked_missing_real_corpus_artifacts",
-    "Corpus present: false",
+    "official_configurator_corpus_present_initial",
+    "Corpus present: true",
     "Completion allowed: false",
-    "real `manifest.json` corpus capture",
-    "real corpus means matched-version export captures",
-    "Template files, README guidance, repo examples, generated candidate payloads, and external observations do not count as captured corpus",
-    "No official configurator authority claim is made here unless source-backed",
+    "official configurator corpus exists with two user-provided fixture files",
+    "configurator_source_reference",
+    "configurator_version_label",
+    "write-behavior source authority",
+    "The official configurator corpus is source-backed as user-provided official",
     "No device write or WebSerial claim is made here",
     "No runtime-loaded config is implemented here",
     "No adapter implementation is made here",
@@ -140,8 +146,12 @@ def validate_top_level(payload: dict[str, Any]) -> None:
     for key, expected in EXPECTED_TOP_LEVEL.items():
         if payload.get(key) != expected:
             fail(f"{key} must be {expected!r}")
-    if payload.get("status") not in {"blocked_missing_real_corpus_artifacts", "complete_corpus_present"}:
-        fail("status must be blocked_missing_real_corpus_artifacts or complete_corpus_present")
+    if payload.get("status") not in {
+        "official_configurator_corpus_present_initial",
+        "partial_official_configurator_corpus_present",
+        "complete_corpus_present",
+    }:
+        fail("status must be an official configurator corpus status")
     if not isinstance(payload.get("corpus_present"), bool):
         fail("corpus_present must be a boolean")
     if not isinstance(payload.get("completion_allowed"), bool):
@@ -183,8 +193,9 @@ def validate_non_claims(payload: dict[str, Any]) -> None:
     if missing:
         fail("non_claims missing: " + ", ".join(missing))
     for key in sorted(REQUIRED_NON_CLAIMS):
-        if non_claims.get(key) is not False:
-            fail(f"non_claims.{key} must be false")
+        expected = True if key == "official_configurator_export_shape_evidence_claimed" else False
+        if non_claims.get(key) is not expected:
+            fail(f"non_claims.{key} must be {expected!r}")
 
 
 def validate_doc(payload: dict[str, Any]) -> None:
@@ -202,14 +213,33 @@ def validate_doc(payload: dict[str, Any]) -> None:
 def validate_blocked_state(payload: dict[str, Any]) -> None:
     manifest_count = len(real_manifests())
     fixture_count = len(real_fixtures())
-    if manifest_count != 0:
-        fail("blocked state cannot coexist with real corpus manifests")
-    if fixture_count != 0:
-        fail("blocked state cannot coexist with real corpus fixtures")
-    if payload.get("corpus_present") is not False:
-        fail("corpus_present must be false while the corpus is blocked")
+    if manifest_count == 0:
+        fail("official configurator corpus state requires real corpus manifests")
+    if fixture_count < 2:
+        fail("official configurator corpus state requires two real corpus fixtures")
+    if payload.get("corpus_present") is not True:
+        fail("corpus_present must be true when official corpus is present")
     if payload.get("completion_allowed") is not False:
-        fail("completion_allowed must be false while the corpus is blocked")
+        fail("completion_allowed must remain false while implementation blockers remain")
+    official = payload.get("official_configurator_corpus")
+    if not isinstance(official, dict):
+        fail("official_configurator_corpus must be an object")
+    if official.get("corpus_id") != "official_glyph_configurator_2026-06-06":
+        fail("official_configurator_corpus.corpus_id drifted")
+    if official.get("fixture_count") != 2:
+        fail("official_configurator_corpus.fixture_count must be 2")
+    if official.get("not_external_remapper") is not True:
+        fail("official_configurator_corpus.not_external_remapper must be true")
+    completed = subprocess.run(
+        [sys.executable, "tools/check_glyph_official_configurator_export_corpus.py"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        detail = completed.stdout.strip() or completed.stderr.strip() or "official corpus checker failed"
+        fail(detail)
 
 
 def validate_complete_state(payload: dict[str, Any]) -> None:

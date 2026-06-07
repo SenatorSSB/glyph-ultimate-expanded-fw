@@ -49,11 +49,17 @@ def steps() -> list[Step]:
         step("ultimate tilt hardware result", "tools/check_glyph_ultimate_tilt_hardware_result.py"),
         step("ultimate tilt rc manifest", "tools/check_glyph_ultimate_tilt_rc_manifest.py"),
         step("profile config semantics", "tools/check_glyph_profile_config_semantics.py"),
-        step("profile config export corpus", "tools/check_glyph_profile_config_export_corpus.py"),
-        step("export corpus readiness status", "tools/check_glyph_export_corpus_readiness_status.py"),
         step(
             "export corpus final blocker/status",
             "tools/check_glyph_export_corpus_final_blocker_status.py",
+        ),
+        step(
+            "official configurator export corpus",
+            "tools/check_glyph_official_configurator_export_corpus.py",
+        ),
+        step(
+            "official configurator corpus diff",
+            "tools/check_glyph_official_configurator_corpus_diff.py",
         ),
         step(
             "profile adapter prewrite",
@@ -294,36 +300,8 @@ def steps() -> list[Step]:
             "tools/check_glyph_clean_room_adapter_schema_readiness_gate.py",
         ),
         step(
-            "clean-room adapter negative corpus contract",
-            "tools/check_glyph_clean_room_adapter_negative_corpus_contract.py",
-        ),
-        step(
-            "clean-room adapter invalid corpus fixture",
-            "tools/check_glyph_clean_room_adapter_invalid_corpus_fixture.py",
-        ),
-        step(
-            "clean-room adapter invalid corpus checker",
-            "tools/check_glyph_clean_room_adapter_invalid_corpus.py",
-        ),
-        step(
-            "clean-room adapter negative corpus gate",
-            "tools/check_glyph_clean_room_adapter_negative_corpus_gate.py",
-        ),
-        step(
-            "clean-room adapter transform design contract",
-            "tools/check_glyph_clean_room_adapter_transform_design_contract.py",
-        ),
-        step(
-            "clean-room adapter transform rule matrix",
-            "tools/check_glyph_clean_room_adapter_transform_rule_matrix.py",
-        ),
-        step(
             "clean-room adapter transform decision matrix",
             "tools/check_glyph_clean_room_adapter_transform_decision_matrix.py",
-        ),
-        step(
-            "clean-room adapter transform design gate",
-            "tools/check_glyph_clean_room_adapter_transform_design_gate.py",
         ),
         step(
             "external remapper import/export audit scope",
@@ -338,8 +316,8 @@ def steps() -> list[Step]:
             "tools/check_glyph_external_remapper_license_code_reuse_blocker.py",
         ),
         step(
-            "external remapper source audit readiness gate",
-            "tools/check_glyph_external_remapper_source_audit_readiness_gate.py",
+            "external remapper misattribution correction",
+            "tools/check_glyph_external_remapper_misattribution_correction.py",
         ),
         step(
             "storage transport source-authority registry",

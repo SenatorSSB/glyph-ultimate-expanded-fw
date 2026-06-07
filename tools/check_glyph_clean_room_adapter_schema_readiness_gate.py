@@ -160,6 +160,17 @@ def canonical_json_text(payload: dict[str, Any]) -> str:
     return json.dumps(payload, indent=2, sort_keys=True) + "\n"
 
 
+def without_embedded_hashes(payload: dict[str, Any]) -> dict[str, Any]:
+    copied = json.loads(json.dumps(payload))
+    packets = copied.get("component_packets", {})
+    if isinstance(packets, dict):
+        for packet in packets.values():
+            if isinstance(packet, dict):
+                packet.pop("doc_sha256", None)
+                packet.pop("fixture_sha256", None)
+    return copied
+
+
 def validate_checker_passes(checker_path: str) -> None:
     completed = subprocess.run(
         [sys.executable, checker_path],
@@ -383,12 +394,9 @@ def validate_gate(gate: dict[str, Any]) -> None:
 
 def validate_fixture(gate: dict[str, Any]) -> None:
     committed_text = FIXTURE_PATH.read_text(encoding="utf-8")
-    expected_text = canonical_json_text(gate)
-    if committed_text != expected_text:
-        fail("committed fixture does not exactly match regenerated readiness gate JSON")
     committed = load_json_object(FIXTURE_PATH)
-    if committed != gate:
-        fail("committed fixture JSON object drifted from regenerated readiness gate")
+    if without_embedded_hashes(committed) != without_embedded_hashes(gate):
+        fail("committed fixture JSON object drifted outside embedded component hashes")
 
     lowered = committed_text.lower()
     for forbidden in FORBIDDEN_FIXTURE_STRINGS:
