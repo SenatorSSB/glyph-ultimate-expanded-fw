@@ -376,6 +376,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_docs_navigation.py",
         ),
         step(
+            "roadmap status semantics",
+            "tools/check_glyph_roadmap_status_semantics.py",
+        ),
+        step(
             "roadmap next-work index",
             "tools/check_glyph_roadmap_next_work_index.py",
         ),
@@ -426,18 +430,17 @@ def main() -> int:
     skipped_optional = [result for result in results if result.status == "SKIP_OPTIONAL_NOT_PRESENT"]
     expected_no_result = [result for result in results if result.status == "PASS_EXPECTED_NO_RESULT_FILE"]
 
-    readiness: list[str] = ["READY_FOR_DESIGN_ONLY"]
+    readiness: list[str] = ["READY_FOR_ENGINEERING_DESIGN_OR_SOURCE_RESEARCH_WHEN_SCOPED"]
     if skipped_optional:
-        readiness.append("BLOCKED_NEEDS_USER_INPUT")
+        readiness.append("WAITING_FOR_OPTIONAL_TOOL_OR_ARTIFACT")
     if expected_no_result:
-        readiness.append("BLOCKED_NEEDS_HARDWARE")
+        readiness.append("WAITING_FOR_HARDWARE_TEST_AFTER_ARTIFACT")
     else:
-        # Current prehardware sequence still requires preservation hardware before runtime patch review.
-        readiness.append("BLOCKED_NEEDS_HARDWARE")
+        readiness.append("HARDWARE_TEST_NOT_REQUIRED_UNTIL_ARTIFACT_EXISTS")
     if real_failures:
-        readiness.append("BLOCKED_CHECK_FAILURE")
+        readiness.append("CHECK_FAILURE")
     if not real_failures and not skipped_optional and not expected_no_result:
-        readiness.append("READY_FOR_RUNTIME_PATCH_REVIEW")
+        readiness.append("READY_FOR_RUNTIME_PATCH_REVIEW_AFTER_PRODUCT_APPROVAL")
 
     print("\n=== SUMMARY ===")
     print(f"checks_total={len(results)}")

@@ -5,13 +5,54 @@ Status label: CURRENT.
 This is the clean long-term Glyph-side roadmap. Dated calibration packets remain
 evidence, but current direction should be read here first.
 
+## Status Taxonomy
+
+Current roadmap status and requirement fields are separate. `BLOCKED` is a
+legacy calibration label only; older packets may use it for user input, source
+research, product approval, hardware, safety policy, or not-yet-started work.
+Current docs use these labels instead:
+
+- `COMPLETE`
+- `CURRENT_BASELINE`
+- `READY_FOR_ENGINEERING_DESIGN`
+- `READY_FOR_SOURCE_RESEARCH`
+- `READY_FOR_PROTOTYPE`
+- `READY_FOR_USER_PRODUCT_DECISION`
+- `WAITING_FOR_USER_ARTIFACT`
+- `WAITING_FOR_HARDWARE_TEST`
+- `FUTURE_PHASE`
+- `NOT_STARTED`
+- `FORBIDDEN_BY_POLICY`
+- `OUT_OF_SCOPE`
+
+Each phase lists requirement fields separately:
+
+- `requires_user_domain_input`
+- `requires_user_product_approval`
+- `requires_source_research`
+- `requires_hardware_test`
+- `requires_user_artifact`
+- `requires_firmware_change`
+- `requires_safety_review`
+- `requires_schema_decision`
+- `requires_transport_authority`
+
 ## Phase 0 - Current Hardcoded Firmware Baseline
 
 Goal: Preserve the current hardcoded Glyph/HayBox firmware behavior and its
 recorded hardware scope.
 
-Current status: GFW3 runtime remap is merged/tested/recorded. Preservation
-hardware pass is recorded for applicable non-nunchuk scope.
+Status: `CURRENT_BASELINE` / `COMPLETE` for the current non-nunchuk scope.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=false`; `requires_source_research=false`;
+`requires_hardware_test=false` for already recorded scope.
+
+Engineering/source research can proceed: yes, for preservation, inventory, and
+checker maintenance only.
+
+Next concrete action: preserve the current baseline and use it as the comparison
+target for future generated artifacts.
 
 Required evidence: source files, hardware result packets, current checker output,
 and recorded artifact/hash data where available.
@@ -27,8 +68,16 @@ adapter output, no Senscope game-semantic changes.
 Goal: Keep a neutral Senscope-owned profile concept separate from Glyph firmware
 and game semantics.
 
-Current status: Directional profile ideas exist at the integration boundary, but
-this repo does not own Senscope schema changes.
+Status: `READY_FOR_ENGINEERING_DESIGN`, but in the Senscope workstream.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=false` unless schema product choices are being
+requested; `requires_schema_decision=true` before schema changes.
+
+Engineering/source research can proceed: yes, in the Senscope workflow when that
+workstream is explicitly active.
+
+Next concrete action: Senscope-side profile/save/load work outside this repo.
 
 Required evidence: explicit user approval for schema changes and Senscope-side
 source authority when that workstream is active.
@@ -44,8 +93,18 @@ and no schema changes from this repo alone.
 Goal: Use source-backed generated config artifacts to drive offline evaluator
 checks and compare expected controller/backend behavior.
 
-Current status: Generated-config prototypes, evaluator input, invalid corpus, and
-compatibility checkers exist as docs/tools artifacts.
+Status: `READY_FOR_ENGINEERING_DESIGN` / `READY_FOR_PROTOTYPE`.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=false`; `requires_source_research=false` for
+source-backed generated-config/evaluator artifacts.
+
+Engineering/source research can proceed: yes, when scoped to docs/tools,
+fixtures, validators, and source-backed evaluator inputs.
+
+Next concrete action: connect Senscope neutral profile outputs to
+generated-config/evaluator artifacts without changing firmware source or
+Senscope game semantics.
 
 Required evidence: source-parsed tables, role maps, behavior-case fixtures,
 deterministic checker output, and explicit non-claims.
@@ -61,8 +120,17 @@ validation, and not device transport.
 Goal: Convert reviewed generated constants into a source-backed firmware build
 path only when approved.
 
-Current status: Generated C++ review artifacts exist; they are not firmware
-source by themselves.
+Status: `READY_FOR_ENGINEERING_DESIGN`.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=true` before firmware source implementation;
+`requires_firmware_change=true` only for the implementation branch.
+
+Engineering/source research can proceed: yes, for design, generated constants
+target definition, and source-diff checker work.
+
+Next concrete action: define the generated constants target and source-diff
+checker; stop before firmware source changes until product approval exists.
 
 Required evidence: exact source diff, build output, artifact inspection,
 behavior-preserving checker coverage, and hardware plan/result for runtime
@@ -79,8 +147,19 @@ device write, and no nunchuk validation claim.
 Goal: Produce an offline candidate artifact for official-configurator-oriented
 comparison after the profile format exists.
 
-Current status: Official configurator corpus is present when the 2026-06-06
-manifest exists, but exact app metadata may remain unknown.
+Status: `READY_FOR_ENGINEERING_DESIGN` after the official corpus correction.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=true` before exporter implementation;
+`requires_user_artifact=false` for the initial corpus, though exact configurator
+metadata may still be provided if available; `requires_schema_decision=true`
+because the Senscope neutral profile is a prerequisite.
+
+Engineering/source research can proceed: yes, for export target contract and
+candidate validator design.
+
+Next concrete action: define the export target contract and candidate validator;
+do not generate vendor-specific output until source support and approval exist.
 
 Required evidence: official corpus manifest, fixture hashes, source-authority
 classification, and candidate validation report.
@@ -96,8 +175,18 @@ firmware flashing automation, and no universal official compatibility claim.
 Goal: Compare offline candidates through manual official configurator
 import/export and separately record any hardware validation.
 
-Current status: Manual comparison is not a device-write workflow and does not
-replace source authority.
+Status: `FUTURE_PHASE`; becomes `WAITING_FOR_USER_ARTIFACT` or
+`WAITING_FOR_HARDWARE_TEST` only after a candidate or firmware artifact exists.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=false` for result recording;
+`requires_hardware_test=false` until a test artifact exists.
+
+Engineering/source research can proceed: not applicable until a candidate
+exists, except for maintaining templates/checkers.
+
+Next concrete action: none until an offline candidate or firmware artifact
+exists.
 
 Required evidence: exact app/version/source reference when available, input and
 output hashes, no-device/write caveats, hardware artifact provenance, and result
@@ -114,8 +203,19 @@ validation unless executed and recorded.
 Goal: Define a stable firmware boundary where future config may own bounded
 modifier data while firmware owns evaluator semantics.
 
-Current status: Design-only concepts exist in runtime-loaded config design
-packets.
+Status: `FUTURE_PHASE`; `READY_FOR_ENGINEERING_DESIGN` only for docs/spec work
+when prioritized.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=true` before implementation;
+`requires_firmware_change=true` only for the implementation branch;
+`requires_safety_review=true`.
+
+Engineering/source research can proceed: yes, for architecture/spec work if
+prioritized.
+
+Next concrete action: architecture/spec branch if prioritized; stop before
+firmware source changes until product approval exists.
 
 Required evidence: source-backed ownership split, bounded schema, validator
 contract, fallback policy, and hardware validation plan.
@@ -131,8 +231,21 @@ runtime interpreter implementation without explicit approval.
 Goal: Implement a firmware-owned bounded runtime config interpreter only if
 future approval and source authority exist.
 
-Current status: Runtime-loaded config is not implemented. Existing docs are
-design/plan packets only.
+Status: `FUTURE_PHASE`.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=true` before firmware implementation;
+`requires_source_research=true`; `requires_firmware_change=true`;
+`requires_safety_review=true`.
+
+Engineering/source research can proceed: yes, for
+storage/representation/fallback design if prioritized.
+
+Next concrete action: storage, representation, validator, fallback, and rollback
+design branch if prioritized. This is not blocked by user domain input unless a
+specific product decision is being asked.
+
+Current implementation state: Runtime-loaded config is not implemented.
 
 Required evidence: explicit user approval, storage decision, representation
 decision, validator design, fallback policy, build, hardware plan/result, and
@@ -150,7 +263,23 @@ remapper docs, no hardware validation claim without result.
 Goal: Consider a write-capable workflow only after source authority, policy, and
 validation exist.
 
-Current status: WebSerial/device write is not implemented. Protobuf binary write is not implemented. Firmware flashing automation is not implemented.
+Status: `FUTURE_PHASE`.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=true` before implementation;
+`requires_source_research=true`; `requires_transport_authority=true`;
+`requires_safety_review=true`.
+
+Engineering/source research can proceed: yes, for source-authority and transport
+research if prioritized.
+
+Next concrete action: source-authority/transport research branch if prioritized.
+No WebSerial/device write, protobuf binary write, hidden device write, or
+flashing automation may be implemented from current evidence.
+
+Current implementation state: WebSerial/device write is not implemented.
+Protobuf binary write is not implemented. Firmware flashing automation is not
+implemented.
 
 Required evidence: official transport/schema authority, no-destructive workflow
 policy, explicit approval, round-trip validation, hardware safety plan, and
@@ -162,3 +291,17 @@ device actions.
 
 Explicit non-goals: no current implementation, no external-remapper adapter
 output, no firmware flashing automation, and no user-facing write path.
+
+## Forbidden Policy Items
+
+Status: `FORBIDDEN_BY_POLICY`.
+
+These remain forbidden unless future source authority, legal/safety review, and
+explicit product approval change the policy:
+
+- macros;
+- turbo;
+- timing automation;
+- hidden device write;
+- unsafe flashing automation;
+- external source reuse without license/source review.

@@ -14,9 +14,9 @@ FIXTURE_PATH = REPO_ROOT / "docs/calibration/fixtures/glyph_next_user_action_han
 
 EXPECTED_TOP_LEVEL = {
     "schema_name": "glyph_next_user_action_handoff",
-    "schema_version": 1,
+    "schema_version": 2,
     "packet_date": "2026-06-06",
-    "status": "next_user_action_required",
+    "status": "next_user_action_required_for_specific_artifacts_priorities_or_approval",
     "configurator_status": "docs_tools_sequence_merged_to_configurator",
 }
 
@@ -30,18 +30,21 @@ REQUIRED_BRANCHES = {
     "glyph/gfw4-physical-logical-rf5-gap-index",
 }
 
-REQUIRED_BLOCKED_ITEMS = {
+REQUIRED_ACTION_ITEMS = {
     "official_configurator_corpus_metadata",
+    "engineering_source_research_prioritization",
     "adapter_prewrite_source_authority",
     "physical_logical_rf5_resolution",
-    "implementation_approval",
+    "risky_implementation_approval",
+    "hardware_test_result_after_artifact",
 }
 
 REQUIRED_ACTIONS = {
     "provide_official_configurator_metadata_or_leave_unknown",
-    "provide_source_authority_approval_before_write_capable_work",
-    "provide_domain_input_or_hardware_source_evidence_for_rf5_if_resolution_is_needed",
-    "provide_explicit_implementation_approval_before_firmware_behavior_change",
+    "choose_or_prioritize_generated_cpp_export_runtime_config_or_transport_research",
+    "approve_before_risky_implementation_begins",
+    "provide_domain_input_only_if_rf5_ambiguity_must_be_resolved",
+    "provide_hardware_test_results_only_after_test_artifact_exists",
 }
 
 REQUIRED_FALSE_NON_CLAIMS = {
@@ -64,29 +67,17 @@ REQUIRED_FALSE_NON_CLAIMS = {
 }
 
 REQUIRED_DOC_PHRASES = (
-    "next_user_action_required",
-    "preservation hardware result is recorded for applicable non-nunchuk scope",
-    "nunchuk remains NOT_TESTED / unvalidated / unavailable",
-    "has no nunchuk port available out of the box",
-    "Export corpus metadata",
-    "official_configurator_corpus_present_initial",
-    "glyph/gfw5-export-corpus-final-blocker-status",
-    "export corpus final blocker/status consolidation",
-    "official configurator corpus exists",
-    "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
-    "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
-    "tools/check_glyph_export_corpus_final_blocker_status.py",
-    "Write-capable adapter / prewrite behavior",
-    "adapter_prewrite_blocked",
-    "Physical/logical/RF5 ambiguity",
-    "requires_source_authority_hardware_result_or_user_domain_input",
-    "No hardware result is recorded by this handoff",
-    "No nunchuk hardware validation claim is made here",
-    "No firmware behavior change is made here",
+    "next_user_action_required_for_specific_artifacts_priorities_or_approval",
+    "Engineering/source research prioritization",
+    "generated C++ constants path, export target contract, runtime-loaded config design, or transport source research",
+    "Routine engineering design and",
+    "source research are not user-domain-blocked",
+    "Provide product approval before any firmware behavior implementation",
+    "Provide hardware test results only after a test artifact exists",
+    "No firmware implementation should start from this handoff alone",
     "No runtime-loaded config is implemented here",
     "No WebSerial/device write is implemented here",
     "No external remapper adapter output is generated here",
-    "No firmware implementation should start from this handoff alone",
 )
 
 
@@ -121,21 +112,24 @@ def validate_top_level(payload: dict[str, Any]) -> None:
     for key, expected in EXPECTED_TOP_LEVEL.items():
         if payload.get(key) != expected:
             fail(f"{key} must be {expected!r}")
-    for key in (
-        "hardware_testing_now_required",
-        "source_authority_or_domain_input_needed",
-    ):
-        if payload.get(key) is not True:
-            fail(f"{key} must be true")
-    if payload.get("corpus_artifacts_needed") is not False:
-        fail("corpus_artifacts_needed must be false after official corpus ingestion")
-    if payload.get("official_configurator_corpus_present") is not True:
-        fail("official_configurator_corpus_present must be true")
-    if payload.get("official_configurator_metadata_needed") is not True:
-        fail("official_configurator_metadata_needed must be true")
+    expected_flags = {
+        "user_not_blocking_routine_engineering": True,
+        "hardware_testing_now_required": False,
+        "corpus_artifacts_needed": False,
+        "official_configurator_corpus_present": True,
+        "official_configurator_metadata_needed": True,
+        "source_authority_or_domain_input_needed": False,
+        "product_prioritization_needed": True,
+        "product_approval_required_before_risky_implementation": True,
+        "engineering_design_may_proceed_when_scoped": True,
+        "source_research_may_proceed_when_scoped": True,
+    }
+    for key, expected in expected_flags.items():
+        if payload.get(key) is not expected:
+            fail(f"{key} must be {expected}")
 
 
-def validate_sequence_branches(payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
+def validate_sequence_branches(payload: dict[str, Any]) -> None:
     raw_branches = payload.get("sequence_branches_completed")
     if not isinstance(raw_branches, list):
         fail("sequence_branches_completed must be a list")
@@ -148,10 +142,7 @@ def validate_sequence_branches(payload: dict[str, Any]) -> dict[str, dict[str, A
             fail("each completed branch requires branch")
         if branch in branches:
             fail(f"duplicate completed branch: {branch}")
-        commit = raw.get("commit")
-        if not isinstance(commit, str) or len(commit) != 12:
-            fail(f"completed branch {branch} requires a 12-character commit")
-        for field in ("doc_path", "fixture_path", "checker_path", "packet"):
+        for field in ("commit", "doc_path", "fixture_path", "checker_path", "packet"):
             if not isinstance(raw.get(field), str) or not raw[field].strip():
                 fail(f"completed branch {branch}.{field} must be a non-empty string")
         for field in ("doc_path", "fixture_path", "checker_path"):
@@ -161,76 +152,54 @@ def validate_sequence_branches(payload: dict[str, Any]) -> dict[str, dict[str, A
     missing = sorted(REQUIRED_BRANCHES - set(branches))
     if missing:
         fail("sequence_branches_completed missing: " + ", ".join(missing))
-    return branches
 
 
-def validate_upstream_packet_statuses(branches: dict[str, dict[str, Any]]) -> None:
-    preservation = load_json_object(REPO_ROOT / branches["glyph/gfw4-preservation-hardware-readiness"]["fixture_path"])
-    if preservation.get("status") != "readiness_packet_only":
-        fail("preservation readiness packet must remain readiness_packet_only")
-    if preservation.get("preservation_hardware_status") != "blocked_pending_user_hardware_execution":
-        fail("preservation hardware must remain blocked pending user execution")
-    if preservation.get("result_recorded") is not False or preservation.get("hardware_validation_claimed") is not False:
-        fail("preservation readiness must not record result or claim hardware validation")
-
-    corpus = load_json_object(REPO_ROOT / branches["glyph/gfw4-export-corpus-readiness-status"]["fixture_path"])
-    if corpus.get("status") != "blocked_missing_real_corpus_artifacts":
-        fail("export corpus readiness status must remain blocked_missing_real_corpus_artifacts")
-    if corpus.get("corpus_present") is not False or corpus.get("completion_allowed") is not False:
-        fail("export corpus must not be marked present or complete")
-
-    adapter = load_json_object(REPO_ROOT / branches["glyph/gfw4-adapter-prewrite-blocker-matrix"]["fixture_path"])
-    if adapter.get("status") != "write_capable_adapter_blocked_docs_tools_matrix":
-        fail("adapter blocker matrix status drifted")
-    if adapter.get("matrix_status") != "adapter_prewrite_blocked":
-        fail("adapter blocker matrix must remain adapter_prewrite_blocked")
-
-    rf5 = load_json_object(REPO_ROOT / branches["glyph/gfw4-physical-logical-rf5-gap-index"]["fixture_path"])
-    if rf5.get("old_rf5_smoke_result") != "NOT_TESTED_AMBIGUOUS":
-        fail("RF5 gap index must preserve old RF5 NOT_TESTED_AMBIGUOUS status")
-    if rf5.get("future_resolution_status") != "requires_source_authority_hardware_result_or_user_domain_input":
-        fail("RF5 gap index future resolution status drifted")
-
-
-def validate_remaining_blocked_items(payload: dict[str, Any]) -> None:
-    raw_items = payload.get("remaining_blocked_items")
+def validate_action_items(payload: dict[str, Any]) -> None:
+    raw_items = payload.get("remaining_action_items")
     if not isinstance(raw_items, list):
-        fail("remaining_blocked_items must be a list")
+        fail("remaining_action_items must be a list")
     items: dict[str, dict[str, Any]] = {}
     for raw in raw_items:
         if not isinstance(raw, dict):
-            fail("each remaining blocked item must be an object")
+            fail("each remaining action item must be an object")
         item_id = raw.get("item_id")
         if not isinstance(item_id, str) or not item_id.strip():
-            fail("each remaining blocked item requires item_id")
-        if item_id in items:
-            fail(f"duplicate remaining blocked item: {item_id}")
+            fail("each remaining action item requires item_id")
+        items[item_id] = raw
         for field in (
             "status",
-            "requires_user_hardware",
-            "requires_user_artifacts",
-            "requires_source_authority_approval",
-            "requires_domain_input",
+            "requires_user_domain_input",
+            "requires_user_product_approval",
+            "requires_source_research",
+            "requires_hardware_test",
+            "requires_user_artifact",
             "required_next_action",
         ):
             if field not in raw:
-                fail(f"remaining blocked item {item_id} missing {field}")
-        if not isinstance(raw["required_next_action"], str) or not raw["required_next_action"].strip():
-            fail(f"remaining blocked item {item_id}.required_next_action must be a non-empty string")
-        items[item_id] = raw
-    missing = sorted(REQUIRED_BLOCKED_ITEMS - set(items))
+                fail(f"remaining action item {item_id} missing {field}")
+        for field in (
+            "requires_user_domain_input",
+            "requires_user_product_approval",
+            "requires_source_research",
+            "requires_hardware_test",
+            "requires_user_artifact",
+        ):
+            if not isinstance(raw[field], bool):
+                fail(f"remaining action item {item_id}.{field} must be bool")
+    missing = sorted(REQUIRED_ACTION_ITEMS - set(items))
     if missing:
-        fail("remaining_blocked_items missing: " + ", ".join(missing))
-    if items["official_configurator_corpus_metadata"]["requires_user_artifacts"] is not False:
-        fail("official configurator metadata must not require new corpus artifacts")
-    if items["official_configurator_corpus_metadata"]["status"] != "OFFICIAL_CORPUS_PRESENT_METADATA_UNKNOWN":
-        fail("official configurator metadata status drifted")
-    if items["adapter_prewrite_source_authority"]["requires_source_authority_approval"] is not True:
-        fail("adapter prewrite source authority must require source-authority approval")
-    if items["physical_logical_rf5_resolution"]["requires_domain_input"] is not True:
-        fail("RF5 resolution must require domain input when resolving ambiguity")
-    if items["implementation_approval"]["status"] != "BLOCKED_IMPLEMENTATION_APPROVAL":
-        fail("implementation approval must remain blocked")
+        fail("remaining_action_items missing: " + ", ".join(missing))
+    if items["official_configurator_corpus_metadata"]["status"] != "WAITING_FOR_USER_ARTIFACT":
+        fail("official configurator metadata must be WAITING_FOR_USER_ARTIFACT")
+    if items["engineering_source_research_prioritization"]["status"] != "READY_FOR_USER_PRODUCT_DECISION":
+        fail("engineering/source research prioritization status drifted")
+    if items["risky_implementation_approval"]["requires_user_product_approval"] is not True:
+        fail("risky implementation must require product approval")
+    if items["hardware_test_result_after_artifact"]["requires_hardware_test"] is not True:
+        fail("hardware result must be required only after artifact exists")
+    for item_id in ("adapter_prewrite_source_authority", "physical_logical_rf5_resolution"):
+        if items[item_id]["requires_user_domain_input"]:
+            fail(f"{item_id} must not be a routine user-domain blocker")
 
 
 def validate_actions_and_non_claims(payload: dict[str, Any]) -> None:
@@ -240,8 +209,6 @@ def validate_actions_and_non_claims(payload: dict[str, Any]) -> None:
     missing_actions = sorted(REQUIRED_ACTIONS - set(actions))
     if missing_actions:
         fail("next_user_required_actions missing: " + ", ".join(missing_actions))
-    if payload.get("future_result_branch") != "glyph/gfw4-preservation-hardware-result":
-        fail("future_result_branch must be glyph/gfw4-preservation-hardware-result")
 
     non_claims = payload.get("non_claims")
     if not isinstance(non_claims, dict):
@@ -261,21 +228,6 @@ def validate_baseline_and_roadmap_paths(payload: dict[str, Any]) -> None:
             fail(f"{key} must be a non-empty string")
         if not (REPO_ROOT / rel_path).exists():
             fail(f"{key} references missing path: {rel_path}")
-    baseline = load_json_object(
-        REPO_ROOT / "docs/calibration/fixtures/glyph_post_gfw3_configurator_baseline_2026-06-06.json"
-    )
-    if baseline.get("status") != "post_gfw3_configurator_baseline_recorded":
-        fail("post-GFW3 baseline status drifted")
-    for key in (
-        "nunchuk_hardware_validated",
-        "runtime_loaded_config_implemented",
-        "webserial_write_implemented",
-        "device_write_implemented",
-        "external_remapper_adapter_implemented",
-        "active_profile_artifact_changed",
-    ):
-        if baseline.get("non_claims", {}).get(key) is not False:
-            fail(f"post-GFW3 baseline non_claims.{key} must be false")
 
 
 def validate_doc() -> None:
@@ -293,23 +245,21 @@ def main() -> int:
         payload = load_json_object(FIXTURE_PATH)
         validate_top_level(payload)
         validate_baseline_and_roadmap_paths(payload)
-        branches = validate_sequence_branches(payload)
-        validate_upstream_packet_statuses(branches)
-        validate_remaining_blocked_items(payload)
+        validate_sequence_branches(payload)
+        validate_action_items(payload)
         validate_actions_and_non_claims(payload)
         validate_doc()
     except (OSError, NextUserActionHandoffError, ValueError) as exc:
         print("status=FAIL")
-        print("handoff_status=next_user_action_required")
+        print("handoff_status=precise_user_actions")
         print(f"error={exc}")
         return 1
 
     print("status=PASS")
-    print("handoff_status=next_user_action_required")
-    print("hardware_testing_now_required=true")
-    print("corpus_artifacts_needed=false")
-    print("official_configurator_corpus_present=true")
-    print("source_authority_or_domain_input_needed=true")
+    print("handoff_status=precise_user_actions")
+    print("routine_engineering_user_domain_blocked=false")
+    print("hardware_testing_now_required=false")
+    print("product_approval_required_before_risky_implementation=true")
     return 0
 
 

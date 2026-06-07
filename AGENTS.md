@@ -8,14 +8,17 @@ Agents must treat this file as the standing operating contract for this reposito
 
 Before using dated calibration packets as roadmap input:
 
-- Read `docs/CURRENT_STATE.md` first for the current baseline, blockers, and
-  non-claims.
+- Read `docs/CURRENT_STATE.md` first for the current baseline, readiness
+  categories, approval gates, and non-claims.
 - Read `docs/ROADMAP.md` for product direction.
 - Read `docs/WORKFLOW.md` for branch, test, inspection, merge, and result
   recording procedure.
 - Treat `docs/calibration/` as evidence and historical packets.
 - Do not infer the current roadmap from every calibration file.
 - Prefer canonical current docs over old blocker packets when they conflict.
+- Do not treat every legacy `blocked` packet as requiring user input. Current
+  status semantics live in `docs/CURRENT_STATE.md`, `docs/ROADMAP.md`, and
+  `docs/WORKFLOW.md`.
 - Treat external-remapper docs as quarantined unless independently
   source-backed.
 - Official Glyph configurator corpus is the primary corpus when the
@@ -101,6 +104,15 @@ Default branch policy:
 - do not merge into the default/protected branch unless instructed.
 
 If branch policy is unclear, stop and report.
+
+## Status semantics
+
+Distinguish user domain input, user product approval, source research,
+engineering design, hardware validation, and forbidden policy. If the next step
+is engineering design or source research and branch scope is clear, proceed. If
+the next step is risky implementation, device write, firmware behavior change,
+runtime-loaded config implementation, exporter output, or schema change, stop
+for explicit product approval.
 
 ## Command policy
 
