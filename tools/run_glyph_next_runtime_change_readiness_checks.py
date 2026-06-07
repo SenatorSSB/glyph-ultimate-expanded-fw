@@ -160,6 +160,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
         ),
         step(
+            "runtime config firmware binary parser plan",
+            "tools/check_glyph_runtime_config_firmware_binary_parser_plan.py",
+        ),
+        step(
             "identity runtime generated config evaluator input",
             "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
         ),

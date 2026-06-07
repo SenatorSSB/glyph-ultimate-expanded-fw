@@ -98,6 +98,14 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   docs/tools guardrail checker.
 - `tools/check_glyph_runtime_config_binary_offline_roundtrip.py` - Step 12
   offline binary round-trip and invalid-corpus checker.
+- `docs/runtime_config/runtime_config_firmware_binary_parser_source_authority.md`
+  - Step 13 firmware binary/protobuf parser source-authority packet.
+- `docs/runtime_config/runtime_config_firmware_binary_parser_integration_plan.md`
+  - Step 13 firmware binary/protobuf parser integration plan and stop line.
+- `docs/calibration/glyph_runtime_config_firmware_binary_parser_hardware_plan_TEMPLATE.md`
+  - future Step 13 hardware plan template; not a result.
+- `tools/check_glyph_runtime_config_firmware_binary_parser_plan.py` - Step 13
+  firmware binary/protobuf parser plan guardrail checker.
 
 ## Adapter / Prewrite Gates
 
@@ -138,6 +146,8 @@ source-backed.
   phase 3 generated-constants integration hardware plan template.
 - `glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.md`
   - Step 9 source-owned runtime-config interpreter hardware plan template.
+- `glyph_runtime_config_firmware_binary_parser_hardware_plan_TEMPLATE.md` -
+  future Step 13 firmware binary/protobuf parser hardware plan template.
 - `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.json`
   - Step 9 hardware plan fixture template.
 - `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.json`
