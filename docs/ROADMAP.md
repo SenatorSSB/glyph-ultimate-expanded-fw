@@ -301,6 +301,24 @@ device actions.
 Explicit non-goals: no current implementation, no external-remapper adapter
 output, no firmware flashing automation, and no user-facing write path.
 
+## Runtime-Config Step Sequence
+
+This docs-only sequence is the next hardware-gated workflow prep and does not
+declare a release.
+
+- Step 14 manual firmware-consuming runtime-config load is blocked before implementation.
+- Step 15 source-authority research complete.
+- Step 16 WebSerial/device-write implementation is blocked before implementation.
+- Step 17 flashing automation is forbidden/not approved; safety boundary complete.
+- Step 18 public/manual workflow release candidate is next hardware-gated workflow.
+- Public/manual workflow release-candidate plan and checklist live in `docs/release/public_manual_workflow_release_candidate_plan.md` and `docs/release/public_manual_workflow_release_candidate_checklist.md`.
+- Runtime-loaded config remains not implemented.
+- Runtime-config storage remains not implemented.
+- Firmware binary/protobuf parser integration remains not implemented.
+- WebSerial/device write remains not implemented.
+- Firmware flashing automation remains not implemented.
+- Nunchuk remains NOT_TESTED unless explicitly validated.
+
 ## Forbidden Policy Items
 
 Status: `FORBIDDEN_BY_POLICY`.

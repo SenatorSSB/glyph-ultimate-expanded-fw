@@ -181,6 +181,10 @@ def steps() -> list[Step]:
             optional=True,
         ),
         step(
+            "public manual workflow release candidate",
+            "tools/check_glyph_public_manual_workflow_release_candidate.py",
+        ),
+        step(
             "identity runtime generated config evaluator input",
             "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
         ),

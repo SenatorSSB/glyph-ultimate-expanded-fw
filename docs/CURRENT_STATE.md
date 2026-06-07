@@ -17,9 +17,15 @@ packets remain under `docs/calibration/`.
   `docs/calibration/glyph_generated_constants_phase3_integration_hardware_result_2026-06-07.md`.
   The user-reported hardware pass is recorded for applicable doable non-nunchuk
   scope.
+- Step 14 manual firmware-consuming runtime-config load is blocked before implementation.
+- Step 15 source-authority research complete.
+- Step 16 WebSerial/device-write implementation is blocked before implementation.
+- Step 17 flashing automation is forbidden/not approved; safety boundary complete.
+- Step 18 public/manual workflow release candidate is next hardware-gated workflow.
 - Nunchuk remains NOT_TESTED / unvalidated / unavailable because the controller
   has no nunchuk port available out of the box.
-- Runtime-loaded config, WebSerial/device write, protobuf binary write, and
+- Runtime-loaded config, runtime-config storage, firmware binary/protobuf
+  parser integration, WebSerial/device write, protobuf binary write, and
   firmware flashing automation remain not implemented.
 
 ## Official Configurator Corpus
@@ -52,7 +58,8 @@ packets remain under `docs/calibration/`.
   candidate or firmware artifact exists for that test scope. Nunchuk remains
   unvalidated for current hardware.
 - Future phase requiring product approval before implementation:
-  runtime-loaded config, WebSerial/device write, protobuf binary write,
+  runtime-loaded config, runtime-config storage, firmware binary/protobuf
+  parser integration, WebSerial/device write, protobuf binary write,
   firmware flashing automation, future generated constants source deltas,
   external adapter output, and Senscope neutral profile schema changes.
 - Forbidden by policy: macros, turbo, timing automation, hidden device write,
@@ -75,6 +82,8 @@ engineering decisions.
 ## Implementation State
 
 - Runtime-loaded config is not implemented.
+- Runtime-config storage is not implemented.
+- Firmware binary/protobuf parser integration is not implemented.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.
@@ -88,6 +97,8 @@ engineering decisions.
 - No runtime-loaded config, WebSerial/device write, protobuf binary write,
   firmware flashing automation, or external-remapper adapter output is
   implemented.
+- No public release claim is made.
+- Nunchuk remains NOT_TESTED unless explicitly validated.
 - No Super Smash Bros. Ultimate game semantics are changed here.
 
 ## Practical Next Steps
@@ -101,5 +112,11 @@ engineering decisions.
   plan/result, and approval gates.
 - Consider an offline official-configurator export candidate only after the
   profile format exists and the source-authority gates are satisfied.
+- Prepare `docs/release/public_manual_workflow_release_candidate_plan.md`,
+  `docs/release/public_manual_workflow_release_candidate_checklist.md`, and the
+  calibration hardware template before the next hardware run.
+- Keep any later hardware result in a separate result branch and do not claim
+  public release, official compatibility, or nunchuk validation until that
+  result exists.
 - Continue runtime-loaded config/transport research only as design/source
   research when explicitly prioritized.
