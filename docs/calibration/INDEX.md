@@ -96,6 +96,8 @@ source-backed.
   preservation hardware fixture template.
 - `glyph_offline_remapper_result_template_2026-06-03.md` - historical external
   remapper result template.
+- `glyph_generated_constants_phase3_integration_hardware_plan_2026-06-07.md` -
+  phase 3 generated-constants integration hardware plan template.
 
 ## Old Roadmap / Readiness Packets
 

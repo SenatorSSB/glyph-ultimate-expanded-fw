@@ -12,22 +12,8 @@ struct StickPoint {
     uint8_t y;
 };
 
-// Keep the generated-like table constants local to this translation unit.
+// Keep the generated-like table constants in the shared generated-like source.
 #include "modes/UltimateIdentityRuntimeTables.hpp"
-
-constexpr StickPoint kTilt1Minus41Table[9] = {
-    {169, 47}, {128, 47}, {87, 47},
-    {169, 128}, {128, 128}, {87, 128},
-    {169, 209}, {128, 209}, {87, 209},
-};
-
-// RT1+RF4 custom modifier. Direction 5 is source-encoded center because table
-// selection requires a 9-point table and the requested neutral behavior is unchanged.
-constexpr StickPoint kRT1RF4CustomTable[9] = {
-    {69, 78}, {128, 78}, {187, 78},
-    {69, 128}, {128, 128}, {187, 128},
-    {72, 172}, {128, 179}, {184, 172},
-};
 
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;

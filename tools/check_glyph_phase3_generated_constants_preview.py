@@ -46,11 +46,11 @@ EXPECTED_SOURCE_AUTHORITY_CLASSIFICATION = "source_backed_current_baseline_previ
 EXPECTED_SOURCE_REFERENCES = {
     "src/modes/Ultimate.cpp": {
         "role": "current_baseline_source",
-        "sha256": "67e8fc8f0231ddcfbb50e321558cb586ad130465686e55d4c787b92ad0a4fd6a",
+        "sha256": "7911d4460428df789a43ff77e3180046bfee39321dc8aea4f997a517b8362fec",
     },
     "tools/extract_glyph_identity_runtime_tables.py": {
         "role": "source_table_extractor",
-        "sha256": "445c04471a2176c95a26577b79e785619c9c12ed63e073a6de9508884a46a2a0",
+        "sha256": "bb7abee75f597dec9e6380f3e68e1bca1b4c026f0b407f51408277f6ace80dc2",
     },
     "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json": {
         "role": "generated_config_baseline",

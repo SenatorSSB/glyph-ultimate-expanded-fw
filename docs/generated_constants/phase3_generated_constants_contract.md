@@ -93,6 +93,14 @@ must re-author and review those files separately.
 The current source-backed target shape is the current 27-table
 `StickPoint[9]` family used in `src/modes/Ultimate.cpp`.
 
+For this integration branch, the firmware-facing generated-like source path is:
+
+- `src/modes/UltimateIdentityRuntimeTables.hpp`
+
+The above path is an existing generated-like table include convention used by the
+firmware runtime, and the phase3 preview artifact path candidates below remain
+future-oriented.
+
 Target shape requirements:
 
 - preserve the current source-backed table names and ordering;

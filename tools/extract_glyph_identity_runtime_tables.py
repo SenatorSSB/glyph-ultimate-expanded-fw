@@ -21,6 +21,7 @@ GENERATED_LIKE_TABLES_PATH = REPO_ROOT / "src" / "modes" / "UltimateIdentityRunt
 REQUIRED_GENERATED_LIKE_TABLES_CAVEATS = (
     "Generated-like identity runtime table constants.",
     "Source-owned firmware constants, not runtime-loaded config.",
+    "Values are source-authored, not generated at runtime.",
     "Do not treat this as serial/device write behavior.",
     "Values must remain source-synced with the generated-config/tooling checks.",
 )
