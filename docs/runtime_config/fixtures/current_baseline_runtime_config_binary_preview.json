@@ -1,0 +1,129 @@
+{
+  "artifact_id": "current_baseline_runtime_config_binary_preview_v1",
+  "schema_name": "glyph_runtime_config_binary_preview",
+  "schema_version": 1,
+  "status": "offline_preview_not_runtime_loaded",
+  "mode_scope": "MODE_ULTIMATE",
+  "runtime_loaded_config": false,
+  "consumed_by_firmware": false,
+  "transport_authority": "none",
+  "source_authority": {
+    "classification": "source_backed_current_baseline_preview_only",
+    "references": [
+      {
+        "path": "src/modes/Ultimate.cpp",
+        "sha256": "d54f082601697d6c47925b56dbb81e1bcb3636829266bf61b7f2dc8856372706",
+        "role": "current_baseline_source"
+      },
+      {
+        "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400",
+        "role": "generated_like_table_constants"
+      },
+      {
+        "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+        "sha256": "ce694ab1f656145742b2e657c2960a813bfa115a0d787a11f43df438eefe1a2f",
+        "role": "runtime_config_interpreter_boundary"
+      },
+      {
+        "path": "tools/extract_glyph_identity_runtime_tables.py",
+        "sha256": "e7d9bfd18cfd469d5f030d53628bfb9dd74d3c14b5f04ef533f6c7f8b8aa7bad",
+        "role": "source_table_extractor"
+      }
+    ],
+    "unknowns": [
+      "future firmware-path details beyond step 6",
+      "future product approval decision",
+      "future firmware result policy",
+      "future migration policy",
+      "official configurator binary contract"
+    ]
+  },
+  "source_baseline_references": {
+    "source_preview": "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
+    "interpreter_baseline": "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json"
+  },
+  "binary_artifact": {
+    "path": "docs/runtime_config/fixtures/current_baseline_runtime_config_binary_preview.bin",
+    "size_bytes": 530,
+    "sha256": "0f668127c270fb7be382677f68a528d1e1d18829254bb7f16fa901e30414bc32",
+    "format": "raw_binary_glyph_runtime_config",
+    "format_version": 1,
+    "magic": "GCFG",
+    "mode_scope": "MODE_ULTIMATE",
+    "table_count": 27,
+    "point_count_per_table": 9,
+    "table_order": [
+      "Default",
+      "ModeDefault",
+      "X1",
+      "X2",
+      "MX1",
+      "MX2",
+      "Y1",
+      "MY1",
+      "LayerNormalX",
+      "MLayerNormalX",
+      "LayerFlipper",
+      "MLayerFlipper",
+      "Y1Tilt1",
+      "MY1Tilt1",
+      "Y1LayerFlipper",
+      "MY1LayerFlipper",
+      "Y1LayerNormalX",
+      "MY1LayerNormalX",
+      "Tilt1",
+      "Tilt2",
+      "Tilt3",
+      "Tilt1Minus41",
+      "RT1RF4Custom",
+      "MTilt1",
+      "MTilt2",
+      "MTilt3",
+      "Lt1LowMagnitude"
+    ]
+  },
+  "binary_layout": {
+    "crc32_algorithm": "crc32",
+    "header": {
+      "magic": "4 bytes ASCII",
+      "version": "u8",
+      "mode_scope_hash": "crc32(\"MODE_ULTIMATE\")",
+      "table_count": "u8",
+      "point_count_per_table": "u8",
+      "reserved": "u8",
+      "table_order_count": "u8",
+      "table_order": "u8[table_count]"
+    },
+    "payload": {
+      "type": "raw uint8 x/y pairs",
+      "entry": "x,y",
+      "entries_per_table": 9,
+      "bytes_per_table": 18
+    },
+    "tail": {
+      "type": "crc32",
+      "endianness": "little"
+    }
+  },
+  "caveats": [
+    "not_runtime_loaded_config",
+    "no_firmware_consumer_claim",
+    "not_device_write",
+    "not_webserial",
+    "not_firmware_consumption",
+    "no_official_protobuf_binary_compatibility_claim"
+  ],
+  "non_goals": [
+    "No firmware source modification",
+    "No firmware runtime-config consumption",
+    "No WebSerial/device write",
+    "No firmware-flashing automation",
+    "No protobuf compatibility claim"
+  ],
+  "notes": [
+    "This file is an offline-only deterministic preview fixture.",
+    "Binary payload must not be treated as firmware input in this branch.",
+    "Explicit stop line before Step 13 firmware binary/protobuf parser integration."
+  ]
+}

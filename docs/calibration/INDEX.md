@@ -80,6 +80,24 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - dedicated source-owned interpreter baseline fixture.
 - `docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json` -
   offline negative corpus for bridge semantics.
+- `docs/runtime_config/runtime_config_storage_fallback_source_authority.md` - Step 10
+  source-authority audit packet.
+- `docs/runtime_config/runtime_config_storage_fallback_architecture.md` - Step 10
+  storage/fallback architecture design boundary.
+- `docs/runtime_config/runtime_config_binary_representation_design.md` - Step 11
+  offline-only binary representation design.
+- `docs/runtime_config/fixtures/current_baseline_runtime_config_binary_preview.json` -
+  offline baseline binary preview fixture.
+- `docs/runtime_config/fixtures/invalid_runtime_config_binary_cases.json` - offline
+  binary invalid-corpus fixture.
+- `docs/runtime_config/fixtures/current_baseline_runtime_config_binary_preview.bin` -
+  offline baseline binary artifact.
+- `tools/glyph_runtime_config_binary_roundtrip.py` - Step 12 offline-only binary
+  parser/serializer prototype.
+- `tools/check_glyph_runtime_config_storage_fallback.py` - Step 10 fallback
+  docs/tools guardrail checker.
+- `tools/check_glyph_runtime_config_binary_offline_roundtrip.py` - Step 12
+  offline binary round-trip and invalid-corpus checker.
 
 ## Adapter / Prewrite Gates
 
