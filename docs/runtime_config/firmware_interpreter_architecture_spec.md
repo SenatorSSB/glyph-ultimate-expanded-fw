@@ -40,6 +40,18 @@ config-owned, such as:
 
 Anything outside those classes remains firmware-owned or out of scope.
 
+## Source-Owned Current Baseline
+
+The current implementation branch uses `src/modes/UltimateRuntimeConfigInterpreter.hpp`
+as a source-owned runtime config interpreter boundary and source-owned current
+baseline view for the 27-table StickPoint[9] corpus.
+
+That baseline keeps stable table ids complete and unique, validates before use,
+and falls back to the known-good source-owned baseline if validation fails.
+
+This branch does not add runtime-loaded config behavior, device write behavior,
+protobuf binary write behavior, or firmware flashing automation.
+
 ## Interpreter Phase Order
 
 The phase order in this spec is design-only and is not a firmware

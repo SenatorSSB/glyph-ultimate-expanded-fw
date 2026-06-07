@@ -10,23 +10,28 @@
       {
         "path": "src/modes/Ultimate.cpp",
         "role": "current_baseline_source",
-        "sha256": "7911d4460428df789a43ff77e3180046bfee39321dc8aea4f997a517b8362fec"
+        "sha256": "d54f082601697d6c47925b56dbb81e1bcb3636829266bf61b7f2dc8856372706"
+      },
+      {
+        "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "role": "approved_step6_firmware_integration_target",
+        "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400"
+      },
+      {
+        "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+        "role": "runtime_config_interpreter_boundary",
+        "sha256": "bde465c39eebb7a1d6b0272923fc6773dd1d3a67001d4c722258c25a99d26d03"
       },
       {
         "path": "tools/extract_glyph_identity_runtime_tables.py",
         "role": "source_table_extractor",
-        "sha256": "bb7abee75f597dec9e6380f3e68e1bca1b4c026f0b407f51408277f6ace80dc2"
-    },
-    {
-      "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
-      "role": "approved_step6_firmware_integration_target",
-      "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400"
-    },
-    {
-      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-      "role": "generated_config_baseline",
-      "sha256": "d66efa458cc28921d3a1ccb0682e8486d880c3d3fe77260a19cc3e0afa63006f"
-    },
+        "sha256": "4472aa9e868e247d06aa17a54cd37aa68a3cf3e15f8e1f4f64b01d7e11478ef0"
+      },
+      {
+        "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+        "role": "generated_config_baseline",
+        "sha256": "d66efa458cc28921d3a1ccb0682e8486d880c3d3fe77260a19cc3e0afa63006f"
+      },
       {
         "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt",
         "role": "generated_cpp_baseline",

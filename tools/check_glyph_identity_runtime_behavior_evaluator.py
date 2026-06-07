@@ -32,6 +32,7 @@ K_DIRECTION_FIVE_INDEX = 4
 K_DIRECTION_EIGHT_INDEX = 7
 
 SOURCE_ANCHORS = (
+    '#include "modes/UltimateRuntimeConfigInterpreter.hpp"',
     "ResolveLayerState",
     "ResolveEffectiveDirections",
     "ResolveRoleState",
@@ -39,7 +40,12 @@ SOURCE_ANCHORS = (
     "ApplyDpadOutputs",
     "ApplyDigitalDirectionOutputs",
     "ApplyRightStickDigitalOutputs",
-    "SelectStickTable",
+    "SelectRuntimeTableId",
+    "ValidateRuntimeConfigView",
+    "LookupRuntimeTable",
+    "LookupRuntimeStickPoint",
+    "kKnownGoodRuntimeConfig",
+    "kSourceOwnedCurrentBaselineRuntimeConfig",
     "ApplyTableAnalogOutput",
     "ApplyDirectionPlusAOverride",
     "ApplyZAirdodgeOverride",
@@ -369,6 +375,7 @@ class Evaluation:
     effective_directions: EffectiveDirectionState
     roles: RoleState
     outputs: OutputState
+    table_id: str
     table_name: str
 
 
@@ -634,7 +641,7 @@ def apply_right_stick_digital_outputs(inputs: InputState, outputs: OutputState) 
     outputs.rightStickUp = inputs.rt5
 
 
-def select_stick_table(
+def select_runtime_table_id(
     mode_active: bool,
     x1_active: bool,
     x2_active: bool,
@@ -734,9 +741,9 @@ def direction_index_from_axes(x_axis: int, y_axis: int) -> int:
     return ((y + 1) * 3) + (x + 1)
 
 
-def apply_table_analog_output(table_name: str, x_axis: int, y_axis: int, outputs: OutputState) -> None:
+def apply_table_analog_output(table_id: str, x_axis: int, y_axis: int, outputs: OutputState) -> None:
     direction_index = direction_index_from_axes(x_axis, y_axis)
-    outputs.leftStickX, outputs.leftStickY = TABLES[table_name][direction_index]
+    outputs.leftStickX, outputs.leftStickY = TABLES[table_id][direction_index]
 
 
 def apply_direction_plus_a_override(roles: RoleState, outputs: OutputState) -> None:
@@ -870,7 +877,7 @@ def evaluate_case(case: dict[str, Any]) -> Evaluation:
         and not inputs.lf4
         and not analog_roles.rt1_rf4_custom_active
     )
-    table_name = select_stick_table(
+    table_id = select_runtime_table_id(
         analog_roles.mode_active,
         analog_roles.x1_active,
         analog_roles.x2_active,
@@ -882,13 +889,13 @@ def evaluate_case(case: dict[str, Any]) -> Evaluation:
         analog_roles.tilt3_effective,
     )
     if rf4_rf2_minus41_active:
-        table_name = "Tilt1Minus41"
+        table_id = "Tilt1Minus41"
 
     if analog_roles.ls_to_dpad_active:
         center_table = "ModeDefault" if analog_roles.mode_active else "Default"
         outputs.leftStickX, outputs.leftStickY = TABLES[center_table][K_DIRECTION_FIVE_INDEX]
     else:
-        apply_table_analog_output(table_name, directions.x, directions.y, outputs)
+        apply_table_analog_output(table_id, directions.x, directions.y, outputs)
         apply_direction_plus_a_override(analog_roles, outputs)
 
         if analog_roles.z_airdodge_override_active:
@@ -924,7 +931,8 @@ def evaluate_case(case: dict[str, Any]) -> Evaluation:
         effective_directions=analog_effective_directions,
         roles=analog_roles,
         outputs=outputs,
-        table_name=table_name,
+        table_id=table_id,
+        table_name=table_id,
     )
 
 

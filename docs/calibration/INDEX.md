@@ -74,6 +74,8 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - metadata fixture for the bridge.
 - `docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json`
   - source-backed preview fixture for the current baseline.
+- `docs/runtime_config/fixtures/current_baseline_runtime_config_interpreter_source_baseline.json`
+  - dedicated source-owned interpreter baseline fixture.
 - `docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json` -
   offline negative corpus for bridge semantics.
 
@@ -114,6 +116,10 @@ source-backed.
   remapper result template.
 - `glyph_generated_constants_phase3_integration_hardware_plan_2026-06-07.md` -
   phase 3 generated-constants integration hardware plan template.
+- `glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.md`
+  - Step 9 source-owned runtime-config interpreter hardware plan template.
+- `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.json`
+  - Step 9 hardware plan fixture template.
 
 ## Old Roadmap / Readiness Packets
 

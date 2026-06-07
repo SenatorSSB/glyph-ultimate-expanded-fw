@@ -32,6 +32,7 @@ Primary source authority for this case matrix:
 - `docs/calibration/fixtures/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.json`
 - `src/modes/Ultimate.cpp`
 - `src/modes/UltimateIdentityRuntimeTables.hpp`
+- `src/modes/UltimateRuntimeConfigInterpreter.hpp`
 - `docs/calibration/glyph_identity_runtime_architecture_hardening_2026-05-28.md`
 
 The GFW3 spec records the requested behavior. Current firmware source remains

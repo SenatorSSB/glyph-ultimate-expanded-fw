@@ -14,6 +14,7 @@ struct StickPoint {
 
 // Keep the generated-like table constants in the shared generated-like source.
 #include "modes/UltimateIdentityRuntimeTables.hpp"
+#include "modes/UltimateRuntimeConfigInterpreter.hpp"
 
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
@@ -228,7 +229,7 @@ void ApplyRightStickDigitalOutputs(const InputState &inputs, OutputState &output
     outputs.modY = false;
 }
 
-const StickPoint *SelectStickTable(
+RuntimeTableId SelectRuntimeTableId(
     bool mode_active,
     bool x1_active,
     bool x2_active,
@@ -240,12 +241,12 @@ const StickPoint *SelectStickTable(
     bool tilt3_effective
 ) {
     if (tilt1_effective && tilt2_effective) {
-        return kRT1RF4CustomTable;
+        return RuntimeTableId::RT1RF4Custom;
     }
 
     const bool y1_tilt1_special_active = y1_active && tilt1_effective && !x1_active && !x2_active && !tilt2_effective && !tilt3_effective;
     if (y1_tilt1_special_active) {
-        return mode_active ? kMY1Tilt1Table : kY1Tilt1Table;
+        return mode_active ? RuntimeTableId::MY1Tilt1 : RuntimeTableId::Y1Tilt1;
     }
 
     const bool layer_flipper_effective = layer_flipper_active;
@@ -254,13 +255,13 @@ const StickPoint *SelectStickTable(
     const bool y1_layer_normal_x_special_active = y1_active && layer_normal_x_effective
         && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
     if (y1_layer_normal_x_special_active) {
-        return mode_active ? kMY1LayerNormalXTable : kY1LayerNormalXTable;
+        return mode_active ? RuntimeTableId::MY1LayerNormalX : RuntimeTableId::Y1LayerNormalX;
     }
 
     const bool y1_layer_flipper_special_active = y1_active && layer_flipper_effective
         && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
     if (y1_layer_flipper_special_active) {
-        return mode_active ? kMY1LayerFlipperTable : kY1LayerFlipperTable;
+        return mode_active ? RuntimeTableId::MY1LayerFlipper : RuntimeTableId::Y1LayerFlipper;
     }
 
     int active_modifier_count = 0;
@@ -299,51 +300,51 @@ const StickPoint *SelectStickTable(
     }
 
     if (active_modifier_count != 1) {
-        return mode_active ? kModeDefaultTable : kDefaultTable;
+        return mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
     }
 
     if (!mode_active) {
         switch (single_modifier) {
             case EffectiveModifier::X1:
-                return kX1Table;
+                return RuntimeTableId::X1;
             case EffectiveModifier::X2:
-                return kX2Table;
+                return RuntimeTableId::X2;
             case EffectiveModifier::Y1:
-                return kY1Table;
+                return RuntimeTableId::Y1;
             case EffectiveModifier::LayerNormalX:
-                return kLayerNormalXTable;
+                return RuntimeTableId::LayerNormalX;
             case EffectiveModifier::LayerFlipper:
-                return kLayerFlipperTable;
+                return RuntimeTableId::LayerFlipper;
             case EffectiveModifier::Tilt1:
-                return kTilt1Table;
+                return RuntimeTableId::Tilt1;
             case EffectiveModifier::Tilt2:
-                return kTilt2Table;
+                return RuntimeTableId::Tilt2;
             case EffectiveModifier::Tilt3:
-                return kTilt3Table;
+                return RuntimeTableId::Tilt3;
             default:
-                return kDefaultTable;
+                return RuntimeTableId::Default;
         }
     }
 
     switch (single_modifier) {
         case EffectiveModifier::X1:
-            return kMX1Table;
+            return RuntimeTableId::MX1;
         case EffectiveModifier::X2:
-            return kMX2Table;
+            return RuntimeTableId::MX2;
         case EffectiveModifier::Y1:
-            return kMY1Table;
+            return RuntimeTableId::MY1;
         case EffectiveModifier::LayerNormalX:
-            return kMLayerNormalXTable;
+            return RuntimeTableId::MLayerNormalX;
         case EffectiveModifier::LayerFlipper:
-            return kMLayerFlipperTable;
+            return RuntimeTableId::MLayerFlipper;
         case EffectiveModifier::Tilt1:
-            return kModeDefaultTable;
+            return RuntimeTableId::ModeDefault;
         case EffectiveModifier::Tilt2:
-            return kMTilt2Table;
+            return RuntimeTableId::MTilt2;
         case EffectiveModifier::Tilt3:
-            return kMTilt3Table;
+            return RuntimeTableId::MTilt3;
         default:
-            return kModeDefaultTable;
+            return RuntimeTableId::ModeDefault;
     }
 }
 
@@ -367,29 +368,38 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
     return static_cast<size_t>(index);
 }
 
-void ApplyTableAnalogOutput(const StickPoint *active_table, int8_t x_axis, int8_t y_axis, OutputState &outputs) {
+void ApplyTableAnalogOutput(
+    const RuntimeConfigView &runtime_config,
+    RuntimeTableId active_table_id,
+    int8_t x_axis,
+    int8_t y_axis,
+    OutputState &outputs
+) {
     const size_t direction_index = DirectionIndexFromAxes(x_axis, y_axis);
+    const StickPoint *active_table = LookupRuntimeTable(runtime_config, active_table_id);
     outputs.leftStickX = active_table[direction_index].x;
     outputs.leftStickY = active_table[direction_index].y;
 }
 
-void ApplyDirectionPlusAOverride(const RoleState &roles, OutputState &outputs) {
+void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const RoleState &roles, OutputState &outputs) {
     if (!roles.direction_plus_a_active) {
         return;
     }
 
-    const StickPoint *direction_plus_a_table = roles.mode_active ? kModeDefaultTable : kDefaultTable;
+    const RuntimeTableId direction_plus_a_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
     const size_t direction_plus_a_index = roles.direction_plus_a_force_up ? kDirectionEightIndex : kDirectionTwoIndex;
-    outputs.leftStickX = direction_plus_a_table[direction_plus_a_index].x;
-    outputs.leftStickY = direction_plus_a_table[direction_plus_a_index].y;
+    const StickPoint direction_plus_a_point = LookupRuntimeStickPoint(runtime_config, direction_plus_a_table_id, direction_plus_a_index);
+    outputs.leftStickX = direction_plus_a_point.x;
+    outputs.leftStickY = direction_plus_a_point.y;
 }
 
-void ApplyZAirdodgeOverride(const EffectiveDirectionState &directions, OutputState &outputs) {
+void ApplyZAirdodgeOverride(const RuntimeConfigView &runtime_config, const EffectiveDirectionState &directions, OutputState &outputs) {
     const int8_t lt1_x = directions.left == directions.right ? 0 : (directions.left ? -1 : 1);
     const int8_t lt1_y = directions.down == directions.up ? 0 : (directions.down ? -1 : 1);
     const size_t lt1_direction_index = DirectionIndexFromAxes(lt1_x, lt1_y);
-    outputs.leftStickX = kLt1LowMagnitudeTable[lt1_direction_index].x;
-    outputs.leftStickY = kLt1LowMagnitudeTable[lt1_direction_index].y;
+    const StickPoint lt1_point = LookupRuntimeStickPoint(runtime_config, RuntimeTableId::Lt1LowMagnitude, lt1_direction_index);
+    outputs.leftStickX = lt1_point.x;
+    outputs.leftStickY = lt1_point.y;
 }
 
 void ApplyHardUpBOverride(const EffectiveDirectionState &directions, OutputState &outputs) {
@@ -446,6 +456,9 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
+    const RuntimeConfigView &runtime_config = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
+        ? kSourceOwnedCurrentBaselineRuntimeConfig
+        : kKnownGoodRuntimeConfig;
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
@@ -467,7 +480,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     // Analog priority: table output, direction-plus-A, RF6 low magnitude,
     // RF7 hard Up+B, C-stick ASDI, RF9 null, then the pre-existing nunchuk override below.
     const bool rf4_rf2_minus41_active = roles.rf4_behavior_available && inputs.rf2 && !inputs.lt2 && !inputs.lf4 && !roles.rt1_rf4_custom_active;
-    const StickPoint *active_table = SelectStickTable(
+    RuntimeTableId active_table_id = SelectRuntimeTableId(
         roles.mode_active,
         roles.x1_active,
         roles.x2_active,
@@ -479,19 +492,20 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         roles.tilt3_effective
     );
     if (rf4_rf2_minus41_active) {
-        active_table = kTilt1Minus41Table;
+        active_table_id = RuntimeTableId::Tilt1Minus41;
     }
 
     if (roles.ls_to_dpad_active) {
-        const StickPoint center = roles.mode_active ? kModeDefaultTable[kDirectionFiveIndex] : kDefaultTable[kDirectionFiveIndex];
+        const RuntimeTableId center_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
+        const StickPoint center = LookupRuntimeStickPoint(runtime_config, center_table_id, kDirectionFiveIndex);
         outputs.leftStickX = center.x;
         outputs.leftStickY = center.y;
     } else {
-        ApplyTableAnalogOutput(active_table, directions.x, directions.y, outputs);
-        ApplyDirectionPlusAOverride(roles, outputs);
+        ApplyTableAnalogOutput(runtime_config, active_table_id, directions.x, directions.y, outputs);
+        ApplyDirectionPlusAOverride(runtime_config, roles, outputs);
 
         if (roles.z_airdodge_override_active) {
-            ApplyZAirdodgeOverride(effective_directions, outputs);
+            ApplyZAirdodgeOverride(runtime_config, effective_directions, outputs);
         }
 
         if (roles.hard_up_b_active) {

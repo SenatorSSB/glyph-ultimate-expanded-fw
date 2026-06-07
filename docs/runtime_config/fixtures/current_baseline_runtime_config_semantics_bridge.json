@@ -14,7 +14,7 @@
     {
       "path": "src/modes/Ultimate.cpp",
       "role": "current_baseline_source",
-      "sha256": "7911d4460428df789a43ff77e3180046bfee39321dc8aea4f997a517b8362fec"
+      "sha256": "d54f082601697d6c47925b56dbb81e1bcb3636829266bf61b7f2dc8856372706"
     },
     {
       "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
@@ -22,15 +22,270 @@
       "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400"
     },
     {
+      "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+      "role": "runtime_config_interpreter_boundary",
+      "sha256": "bde465c39eebb7a1d6b0272923fc6773dd1d3a67001d4c722258c25a99d26d03"
+    },
+    {
       "path": "tools/extract_glyph_identity_runtime_tables.py",
       "role": "source_table_extractor",
-      "sha256": "bb7abee75f597dec9e6380f3e68e1bca1b4c026f0b407f51408277f6ace80dc2"
+      "sha256": "4472aa9e868e247d06aa17a54cd37aa68a3cf3e15f8e1f4f64b01d7e11478ef0"
     }
   ],
   "source_baseline_preview": {
     "path": "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
     "role": "design_preview_snapshot",
-    "sha256": "e5e1f1274ae3984d79981fd31624e3648cfb003ffc1864a48fe5c79b5157593e"
+    "sha256": "70ba1c858330e45c3eaf0ede987a0da8871beeb4f9c38ca7c5f031a293e63768"
+  },
+  "interpreter_source_baseline": {
+    "caveats": [
+      "not_runtime_loaded_config",
+      "not_device_write",
+      "not_protobuf_binary_write",
+      "not_flashing_automation",
+      "not_transport_payload",
+      "not_storage_behavior",
+      "source_owned_current_baseline_only",
+      "validate_before_use",
+      "fallback_to_known_good_if_validation_fails"
+    ],
+    "consumed_by_firmware": false,
+    "expected_point_count_per_table": 9,
+    "expected_table_count": 27,
+    "fallback_policy": "known_good_source_owned_baseline",
+    "fallback_table_id": "Default",
+    "interpreter_source_path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "mode_scope": "MODE_ULTIMATE",
+    "point_count_per_table": 9,
+    "runtime_loaded_config": false,
+    "runtime_table_ids": [
+      "Default",
+      "ModeDefault",
+      "X1",
+      "X2",
+      "MX1",
+      "MX2",
+      "Y1",
+      "MY1",
+      "LayerNormalX",
+      "MLayerNormalX",
+      "LayerFlipper",
+      "MLayerFlipper",
+      "Y1Tilt1",
+      "MY1Tilt1",
+      "Y1LayerFlipper",
+      "MY1LayerFlipper",
+      "Y1LayerNormalX",
+      "MY1LayerNormalX",
+      "Tilt1",
+      "Tilt2",
+      "Tilt3",
+      "Tilt1Minus41",
+      "RT1RF4Custom",
+      "MTilt1",
+      "MTilt2",
+      "MTilt3",
+      "Lt1LowMagnitude"
+    ],
+    "schema_name": "glyph_runtime_config_interpreter_source_baseline",
+    "schema_version": 1,
+    "source_owned": true,
+    "source_path": "src/modes/Ultimate.cpp",
+    "status": "source_owned_current_baseline_not_runtime_loaded",
+    "table_count": 27,
+    "table_family": "StickPoint",
+    "table_references": [
+      {
+        "point_count": 9,
+        "runtime_table_id": "Default",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kDefaultTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "ModeDefault",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kModeDefaultTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "X1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kX1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "X2",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kX2Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MX1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMX1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MX2",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMX2Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Y1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kY1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MY1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMY1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "LayerNormalX",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kLayerNormalXTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MLayerNormalX",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMLayerNormalXTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "LayerFlipper",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kLayerFlipperTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MLayerFlipper",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMLayerFlipperTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Y1Tilt1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kY1Tilt1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MY1Tilt1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMY1Tilt1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Y1LayerFlipper",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kY1LayerFlipperTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MY1LayerFlipper",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMY1LayerFlipperTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Y1LayerNormalX",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kY1LayerNormalXTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MY1LayerNormalX",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMY1LayerNormalXTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Tilt1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kTilt1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Tilt2",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kTilt2Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Tilt3",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kTilt3Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Tilt1Minus41",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kTilt1Minus41Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "RT1RF4Custom",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kRT1RF4CustomTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MTilt1",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMTilt1Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MTilt2",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMTilt2Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "MTilt3",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kMTilt3Table",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "point_count": 9,
+        "runtime_table_id": "Lt1LowMagnitude",
+        "shape": "StickPoint[9]",
+        "source_symbol": "kLt1LowMagnitudeTable",
+        "value_source": "src/modes/Ultimate.cpp"
+      }
+    ],
+    "validation_before_use": true
   },
   "table_summary": [
     {

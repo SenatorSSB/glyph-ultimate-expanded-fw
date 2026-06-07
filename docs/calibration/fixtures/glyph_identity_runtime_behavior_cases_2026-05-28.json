@@ -7,6 +7,7 @@
   "source_authority": {
     "runtime": "src/modes/Ultimate.cpp",
     "runtime_tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "runtime_config_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
     "gfw3_spec_doc": "docs/calibration/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.md",
     "gfw3_spec_fixture": "docs/calibration/fixtures/glyph_gfw3_runtime_remap_rework_spec_2026-06-04.json",
     "architecture_hardening": "docs/calibration/glyph_identity_runtime_architecture_hardening_2026-05-28.md"

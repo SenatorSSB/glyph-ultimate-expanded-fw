@@ -11,11 +11,13 @@ import argparse
 import json
 import re
 import sys
+from enum import Enum
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
+INTERPRETER_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "UltimateRuntimeConfigInterpreter.hpp"
 GENERATED_LIKE_TABLES_INCLUDE = '#include "modes/UltimateIdentityRuntimeTables.hpp"'
 GENERATED_LIKE_TABLES_PATH = REPO_ROOT / "src" / "modes" / "UltimateIdentityRuntimeTables.hpp"
 REQUIRED_GENERATED_LIKE_TABLES_CAVEATS = (
@@ -25,6 +27,44 @@ REQUIRED_GENERATED_LIKE_TABLES_CAVEATS = (
     "Do not treat this as serial/device write behavior.",
     "Values must remain source-synced with the generated-config/tooling checks.",
 )
+
+
+class RuntimeTableId(str, Enum):
+    Default = "Default"
+    ModeDefault = "ModeDefault"
+    X1 = "X1"
+    X2 = "X2"
+    MX1 = "MX1"
+    MX2 = "MX2"
+    Y1 = "Y1"
+    MY1 = "MY1"
+    LayerNormalX = "LayerNormalX"
+    MLayerNormalX = "MLayerNormalX"
+    LayerFlipper = "LayerFlipper"
+    MLayerFlipper = "MLayerFlipper"
+    Y1Tilt1 = "Y1Tilt1"
+    MY1Tilt1 = "MY1Tilt1"
+    Y1LayerFlipper = "Y1LayerFlipper"
+    MY1LayerFlipper = "MY1LayerFlipper"
+    Y1LayerNormalX = "Y1LayerNormalX"
+    MY1LayerNormalX = "MY1LayerNormalX"
+    Tilt1 = "Tilt1"
+    Tilt2 = "Tilt2"
+    Tilt3 = "Tilt3"
+    Tilt1Minus41 = "Tilt1Minus41"
+    RT1RF4Custom = "RT1RF4Custom"
+    MTilt1 = "MTilt1"
+    MTilt2 = "MTilt2"
+    MTilt3 = "MTilt3"
+    Lt1LowMagnitude = "Lt1LowMagnitude"
+
+
+CURRENT_BASELINE_CONFIG_SCHEMA_NAME = "glyph_runtime_config_interpreter_source_baseline"
+CURRENT_BASELINE_CONFIG_SCHEMA_VERSION = 1
+CURRENT_BASELINE_CONFIG_STATUS = "source_owned_current_baseline_not_runtime_loaded"
+CURRENT_BASELINE_CONFIG_MODE_SCOPE = "MODE_ULTIMATE"
+CURRENT_BASELINE_CONFIG_TABLE_FAMILY = "StickPoint"
+CURRENT_BASELINE_CONFIG_FALLBACK_TABLE_ID = RuntimeTableId.Default.value
 
 TABLE_SYMBOL_TO_NAME: tuple[tuple[str, str], ...] = (
     ("kDefaultTable", "Default"),
@@ -57,6 +97,8 @@ TABLE_SYMBOL_TO_NAME: tuple[tuple[str, str], ...] = (
 )
 
 EXPECTED_POINT_COUNT = 9
+CURRENT_BASELINE_CONFIG_EXPECTED_TABLE_COUNT = len(RuntimeTableId)
+CURRENT_BASELINE_CONFIG_EXPECTED_POINT_COUNT = EXPECTED_POINT_COUNT
 
 _TABLE_PATTERN = re.compile(
     r"constexpr\s+StickPoint\s+"
@@ -81,8 +123,81 @@ def normalized_table_names() -> tuple[str, ...]:
     return tuple(name for _symbol, name in TABLE_SYMBOL_TO_NAME)
 
 
+def runtime_table_ids() -> tuple[RuntimeTableId, ...]:
+    return tuple(RuntimeTableId)
+
+
+def runtime_table_id_names() -> tuple[str, ...]:
+    return tuple(runtime_table_id.value for runtime_table_id in runtime_table_ids())
+
+
 def source_symbol_by_normalized_name() -> dict[str, str]:
     return {name: symbol for symbol, name in TABLE_SYMBOL_TO_NAME}
+
+
+def source_symbol_by_runtime_table_id() -> dict[RuntimeTableId, str]:
+    source_symbols = source_symbol_by_normalized_name()
+    return {
+        runtime_table_id: source_symbols[runtime_table_id.value]
+        for runtime_table_id in runtime_table_ids()
+    }
+
+
+def runtime_table_id_by_normalized_name() -> dict[str, RuntimeTableId]:
+    return {runtime_table_id.value: runtime_table_id for runtime_table_id in runtime_table_ids()}
+
+
+def build_runtime_config_interpreter_source_baseline(
+    tables: dict[str, tuple[tuple[int, int], ...]],
+    *,
+    source_path: Path = DEFAULT_SOURCE_PATH,
+) -> dict[str, object]:
+    """Build the source-owned config-shaped baseline for the interpreter boundary."""
+
+    table_references = []
+    for runtime_table_id, normalized_name in zip(runtime_table_ids(), normalized_table_names()):
+        table_references.append(
+            {
+                "runtime_table_id": runtime_table_id.value,
+                "source_symbol": source_symbol_by_normalized_name()[normalized_name],
+                "point_count": len(tables[normalized_name]),
+                "shape": f"{CURRENT_BASELINE_CONFIG_TABLE_FAMILY}[{CURRENT_BASELINE_CONFIG_EXPECTED_POINT_COUNT}]",
+                "value_source": _relative_path(source_path),
+            }
+        )
+
+    return {
+        "schema_name": CURRENT_BASELINE_CONFIG_SCHEMA_NAME,
+        "schema_version": CURRENT_BASELINE_CONFIG_SCHEMA_VERSION,
+        "status": CURRENT_BASELINE_CONFIG_STATUS,
+        "mode_scope": CURRENT_BASELINE_CONFIG_MODE_SCOPE,
+        "source_path": _relative_path(source_path),
+        "interpreter_source_path": _relative_path(INTERPRETER_SOURCE_PATH),
+        "source_owned": True,
+        "runtime_loaded_config": False,
+        "consumed_by_firmware": False,
+        "validation_before_use": True,
+        "fallback_policy": "known_good_source_owned_baseline",
+        "fallback_table_id": CURRENT_BASELINE_CONFIG_FALLBACK_TABLE_ID,
+        "table_family": CURRENT_BASELINE_CONFIG_TABLE_FAMILY,
+        "table_count": len(tables),
+        "expected_table_count": CURRENT_BASELINE_CONFIG_EXPECTED_TABLE_COUNT,
+        "point_count_per_table": CURRENT_BASELINE_CONFIG_EXPECTED_POINT_COUNT,
+        "expected_point_count_per_table": CURRENT_BASELINE_CONFIG_EXPECTED_POINT_COUNT,
+        "runtime_table_ids": list(runtime_table_id_names()),
+        "table_references": table_references,
+        "caveats": [
+            "not_runtime_loaded_config",
+            "not_device_write",
+            "not_protobuf_binary_write",
+            "not_flashing_automation",
+            "not_transport_payload",
+            "not_storage_behavior",
+            "source_owned_current_baseline_only",
+            "validate_before_use",
+            "fallback_to_known_good_if_validation_fails",
+        ],
+    }
 
 
 def _relative_path(path: Path) -> str:

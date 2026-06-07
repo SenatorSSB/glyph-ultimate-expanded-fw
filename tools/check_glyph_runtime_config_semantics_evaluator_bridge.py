@@ -20,6 +20,7 @@ DOC_PATH = REPO_ROOT / "docs/runtime_config/runtime_config_semantics_evaluator_b
 SCHEMA_DOC_PATH = REPO_ROOT / "docs/runtime_config/runtime_loaded_config_schema_design.md"
 ARCH_DOC_PATH = REPO_ROOT / "docs/runtime_config/firmware_interpreter_architecture_spec.md"
 BASELINE_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json"
+INTERPRETER_BASELINE_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/current_baseline_runtime_config_interpreter_source_baseline.json"
 PREVIEW_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json"
 INVALID_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json"
 
@@ -41,11 +42,21 @@ REQUIRED_INVALID_CLASSES = {
     "runtime_config_claiming_webserial_device_write_authority",
 }
 
+EXPECTED_SOURCE_REFERENCE_ROLES = {
+    "src/modes/Ultimate.cpp": "current_baseline_source",
+    "src/modes/UltimateIdentityRuntimeTables.hpp": "generated_like_table_constants",
+    "src/modes/UltimateRuntimeConfigInterpreter.hpp": "runtime_config_interpreter_boundary",
+    "tools/extract_glyph_identity_runtime_tables.py": "source_table_extractor",
+}
+
 DOC_REQUIRED_PHRASES = {
     DOC_PATH: (
         "current baseline oracle",
         "baseline equivalence invariant",
         "runtime-loaded config boundary",
+        "source-owned current baseline",
+        "validate-before-use",
+        "fallback-to-known-good",
         "manual hardware-test trigger points",
         "non-claims",
     ),
@@ -55,8 +66,11 @@ DOC_REQUIRED_PHRASES = {
         "forbidden semantics",
         "does not implement runtime-loaded config",
         "future schema",
+        "stable table ids",
     ),
     ARCH_DOC_PATH: (
+        "ultimateruntimeconfiginterpreter.hpp",
+        "source-owned runtime config interpreter boundary",
         "validation-before-use",
         "fallback-to-known-good",
         "known-good",
@@ -143,13 +157,30 @@ def validate_file_reference(entry: dict[str, Any], label: str) -> None:
         fail(f"{label}.sha256 mismatch for {path}")
 
 
-def validate_reference_list(entries: list[Any], label: str) -> None:
+def validate_reference_list(entries: list[Any], label: str, expected_roles: dict[str, str]) -> None:
     if not entries:
         fail(f"{label} must not be empty")
+    if len(entries) != len(expected_roles):
+        fail(f"{label} must contain exactly {len(expected_roles)} references")
+
+    seen_paths: set[str] = set()
     for index, entry in enumerate(entries):
         if not isinstance(entry, dict):
             fail(f"{label}[{index}] must be an object")
         validate_file_reference(entry, f"{label}[{index}]")
+
+        path = require_string(entry.get("path"), f"{label}[{index}].path")
+        role = require_string(entry.get("role"), f"{label}[{index}].role")
+        expected_role = expected_roles.get(path)
+        if expected_role is None:
+            fail(f"{label}[{index}] references unexpected path: {path}")
+        if role != expected_role:
+            fail(f"{label}[{index}].role must be {expected_role!r}")
+        seen_paths.add(path)
+
+    missing = sorted(set(expected_roles) - seen_paths)
+    if missing:
+        fail(f"{label} missing required path(s): " + ", ".join(missing))
 
 
 def expected_symbol_for(name: str) -> str:
@@ -237,6 +268,7 @@ def validate_baseline(fixture: dict[str, Any], source_tables: dict[str, tuple[tu
         "forbidden_config_semantics",
         "future_gates",
         "caveats",
+        "interpreter_source_baseline",
     }
     missing = required_fields - set(fixture)
     if missing:
@@ -260,11 +292,19 @@ def validate_baseline(fixture: dict[str, Any], source_tables: dict[str, tuple[tu
     ) != EXPECTED_POINTS_PER_TABLE:
         fail("baseline.expected_point_count_per_table must be 9")
 
-    validate_reference_list(require_list(fixture.get("source_baseline"), "baseline.source_baseline"), "baseline.source_baseline")
+    validate_reference_list(
+        require_list(fixture.get("source_baseline"), "baseline.source_baseline"),
+        "baseline.source_baseline",
+        EXPECTED_SOURCE_REFERENCE_ROLES,
+    )
 
     preview_ref = fixture.get("source_baseline_preview")
     if preview_ref is not None:
         validate_file_reference(require_object(preview_ref, "baseline.source_baseline_preview"), "baseline.source_baseline_preview")
+
+    interpreter_baseline = load_json_object(INTERPRETER_BASELINE_FIXTURE_PATH)
+    if fixture.get("interpreter_source_baseline") != interpreter_baseline:
+        fail("baseline.interpreter_source_baseline must match the dedicated interpreter baseline fixture")
 
     validate_table_set(
         require_list(fixture.get("table_summary"), "baseline.table_summary"),
@@ -324,7 +364,11 @@ def validate_preview(fixture: dict[str, Any], source_tables: dict[str, tuple[tup
         fail("preview.source_baseline_fixture must reference the bridge baseline fixture")
 
     authority = require_object(fixture.get("source_authority"), "preview.source_authority")
-    validate_reference_list(require_list(authority.get("references"), "preview.source_authority.references"), "preview.source_authority.references")
+    validate_reference_list(
+        require_list(authority.get("references"), "preview.source_authority.references"),
+        "preview.source_authority.references",
+        EXPECTED_SOURCE_REFERENCE_ROLES,
+    )
 
     validate_table_set(
         require_list(fixture.get("table_metadata"), "preview.table_metadata"),
@@ -402,7 +446,15 @@ def validate_invalid_corpus(corpus: dict[str, Any], baseline_path: Path, preview
 
 
 def ensure_artifacts_exist() -> None:
-    for path in (DOC_PATH, SCHEMA_DOC_PATH, ARCH_DOC_PATH, BASELINE_FIXTURE_PATH, PREVIEW_FIXTURE_PATH, INVALID_FIXTURE_PATH):
+    for path in (
+        DOC_PATH,
+        SCHEMA_DOC_PATH,
+        ARCH_DOC_PATH,
+        BASELINE_FIXTURE_PATH,
+        INTERPRETER_BASELINE_FIXTURE_PATH,
+        PREVIEW_FIXTURE_PATH,
+        INVALID_FIXTURE_PATH,
+    ):
         if not path.exists():
             fail(f"missing required artifact: {path}")
 

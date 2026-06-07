@@ -1,0 +1,108 @@
+{
+  "schema_name": "glyph_runtime_config_interpreter_source_baseline_hardware_plan",
+  "plan_version": 1,
+  "status": "TEMPLATE_ONLY",
+  "branch": "runtime-config-interpreter-source-baseline",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "hardware_result_recorded": false,
+  "commit_sha_under_test": "unknown",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "tester": "unknown",
+  "test_date": "unknown",
+  "intent": {
+    "description": "Behavior-preserving firmware-owned runtime-config interpreter boundary for the current source-owned baseline.",
+    "scope": [
+      "source-owned config-shaped baseline only",
+      "validate-before-use",
+      "explicit fallback to known-good source-owned baseline",
+      "table lookup through interpreter path",
+      "no runtime-loaded storage"
+    ],
+    "non_claims": [
+      "no nunchuk validation claim"
+    ]
+  },
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PROFILE-001",
+      "category": "identity_profile",
+      "planned_check": "Current identity/default profile remains usable",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "DEFAULT-001",
+      "category": "default_table",
+      "planned_check": "Default table outputs preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "MODE-001",
+      "category": "mode_default",
+      "planned_check": "Mode default/center behavior preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "XY-001",
+      "category": "xy_modifiers",
+      "planned_check": "Representative X/Y modifier outputs preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "TILT-001",
+      "category": "tilt_tables",
+      "planned_check": "Tilt1/Tilt2/Tilt3 representative outputs preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "LAYER-001",
+      "category": "layer_tables",
+      "planned_check": "Layer Normal-X / Flipper representative outputs preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "SPECIAL-TABLE-001",
+      "category": "special_tables",
+      "planned_check": "Tilt1Minus41 / RT1RF4Custom / Lt1LowMagnitude preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "OVERRIDE-001",
+      "category": "override_paths",
+      "planned_check": "RF9 null / RF6 low magnitude / hard Up-B if applicable",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "CSTICK-001",
+      "category": "cstick_interaction",
+      "planned_check": "Existing C-stick interaction not regressed where doable",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PROFILE-REG-001",
+      "category": "profile_regression",
+      "planned_check": "No profile regression observed",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Explicitly mark nunchuk as not tested in this branch",
+      "result": "NOT_TESTED"
+    }
+  ],
+  "caveats": [
+    "no_runtime_loaded_storage",
+    "no_webserial_or_device_write",
+    "no_protobuf_binary_config_parser",
+    "no_firmware_flashing_automation",
+    "no_nunchuk_validation",
+    "no_intentional_behavior_change"
+  ]
+}

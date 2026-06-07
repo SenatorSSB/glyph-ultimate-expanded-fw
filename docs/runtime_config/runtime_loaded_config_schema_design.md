@@ -23,6 +23,7 @@ The future schema may own only bounded data that is already source-backed or
 can be source-backed later:
 
 - the 27 `StickPoint[9]` table values;
+- stable table ids for the 27-table corpus;
 - table names;
 - source-backed role metadata;
 - source-backed provenance;

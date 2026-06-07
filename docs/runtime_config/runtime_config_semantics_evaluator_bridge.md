@@ -7,7 +7,7 @@ source-backed table/role/evaluator baseline to a deterministic offline checker s
 It is not firmware source, not runtime-loaded configuration, and not a device
 I/O implementation.
 
-The bridge is the current baseline oracle for semantics parity review.
+The bridge is the source-owned current baseline oracle for semantics parity review.
 Its role is to keep evaluator behavior checks anchored to a source-backed
 contract while avoiding any runtime-loaded implementation.
 
@@ -38,6 +38,9 @@ Current baseline evidence is sourced from:
 
 `table_family=StickPoint` and the baseline contains `27` tables with `9` points
 per table in the source-backed extractor output.
+
+This is the validate-before-use / fallback-to-known-good path for the source-owned
+current baseline.
 
 ## Baseline Equivalence Invariant
 
