@@ -1,0 +1,113 @@
+{
+  "schema_name": "glyph_public_manual_workflow_release_candidate_hardware_plan",
+  "plan_version": 1,
+  "status": "TEMPLATE_ONLY_NOT_A_RESULT",
+  "branch": "runtime-config-public-workflow-release-candidate-plan",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "hardware_result_recorded": false,
+  "commit_sha_under_test": "unknown",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "tester": "unknown",
+  "test_date": "unknown",
+  "intent": {
+    "description": "Manual/operator-run firmware update path only for the public/manual workflow release-candidate preparation.",
+    "scope": [
+      "manual/operator-run only",
+      "no runtime-loaded config",
+      "no WebSerial/device write",
+      "no flashing automation",
+      "no hidden writes",
+      "hardware result must be recorded in a separate result branch after the test"
+    ]
+  },
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after the manual workflow update path reaches expected boot state",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PROFILE-001",
+      "category": "profile",
+      "planned_check": "Current profile remains usable after the workflow preparation",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Source-backed baseline outputs remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "planned_check": "Representative modifier tables remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "SPECIAL-001",
+      "category": "special_tables",
+      "planned_check": "Special tables remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "OVERRIDE-001",
+      "category": "override_paths",
+      "planned_check": "Representative override paths remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "CSTICK-001",
+      "category": "cstick_interaction",
+      "planned_check": "C-stick interaction is not regressed where doable",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "DOCS-001",
+      "category": "docs_navigation",
+      "planned_check": "Docs/navigation/checklist links remain synchronized",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "no_write",
+      "planned_check": "No hidden write, runtime-loaded config, or WebSerial/device write occurs",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-FLASH-AUTO-001",
+      "category": "no_flash_automation",
+      "planned_check": "No flashing automation, UF2 copy automation, or bootloader automation occurs",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "RECOVERY-001",
+      "category": "recovery",
+      "planned_check": "Manual recovery/rollback path remains operator-run only",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PROFILE-REG-001",
+      "category": "profile_regression",
+      "planned_check": "No profile regression observed",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Explicitly mark nunchuk as not tested in this branch",
+      "result": "NOT_TESTED"
+    }
+  ],
+  "caveats": [
+    "no_runtime_loaded_config",
+    "no_webserial_or_device_write",
+    "no_firmware_flashing_automation",
+    "no_hidden_writes",
+    "no_public_release_claim",
+    "no_nunchuk_validation_claim"
+  ]
+}
+

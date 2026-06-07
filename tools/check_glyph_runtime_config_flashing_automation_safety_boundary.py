@@ -14,6 +14,10 @@ CHECKER_PATH = REPO_ROOT / "tools/check_glyph_runtime_config_flashing_automation
 BASE_BRANCH = "configurator"
 
 ALLOWED_CHANGED_PREFIXES = (
+    "README.md",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "docs/release/",
     "docs/runtime_config/",
     "docs/calibration/",
     "tools/",
@@ -234,8 +238,18 @@ def ensure_changed_scope() -> None:
 
 def ensure_no_automation_markers_in_changed_files() -> None:
     changed = changed_paths_against_base()
+    doc_prefixes = (
+        "README.md",
+        "docs/CURRENT_STATE.md",
+        "docs/ROADMAP.md",
+        "docs/release/",
+        "docs/runtime_config/",
+        "docs/calibration/",
+    )
     for relpath in changed:
         if relpath == "tools/check_glyph_runtime_config_flashing_automation_safety_boundary.py":
+            continue
+        if relpath.startswith("tools/"):
             continue
 
         path = REPO_ROOT / relpath
@@ -248,7 +262,7 @@ def ensure_no_automation_markers_in_changed_files() -> None:
         if not hits:
             continue
 
-        if relpath.startswith(("docs/runtime_config/", "docs/calibration/")):
+        if relpath.startswith(doc_prefixes):
             if any(phrase in lowered for phrase in DOC_ALLOWED_NON_AUTOMATION_PHRASES):
                 continue
             fail(

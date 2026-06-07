@@ -15,6 +15,17 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `glyph_next_user_action_handoff_2026-06-06.md` - user/source-authority/action
   handoff after the docs/tools sequence.
 
+## Public/Manual Workflow Release-Candidate Prep
+
+- `docs/release/public_manual_workflow_release_candidate_plan.md` - plan-only
+  public/manual workflow release-candidate boundary and non-claims.
+- `docs/release/public_manual_workflow_release_candidate_checklist.md` - release-
+  readiness checklist for the manual RC workflow.
+- `glyph_public_manual_workflow_release_candidate_hardware_plan_2026-06-07.md`
+  - manual RC hardware-test template; not a result.
+- `fixtures/glyph_public_manual_workflow_release_candidate_hardware_plan_2026-06-07.json`
+  - matching hardware-test template fixture.
+
 ## Hardware Result Packets
 
 - `glyph_gfw3_runtime_remap_hardware_result_2026-06-06.md` - user-reported GFW3

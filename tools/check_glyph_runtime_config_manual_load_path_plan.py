@@ -13,6 +13,10 @@ DOC = REPO_ROOT / "docs/runtime_config/runtime_config_manual_load_path_plan.md"
 BASE_BRANCH = "configurator"
 
 ALLOWED_CHANGED_PREFIXES = (
+    "README.md",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "docs/release/",
     "docs/runtime_config/",
     "docs/calibration/",
     "tools/",

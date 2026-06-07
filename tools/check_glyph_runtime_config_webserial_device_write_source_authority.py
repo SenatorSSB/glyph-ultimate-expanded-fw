@@ -13,6 +13,10 @@ DOC = REPO_ROOT / "docs/runtime_config/runtime_config_webserial_device_write_sou
 BASE_BRANCH = "configurator"
 
 ALLOWED_CHANGED_PREFIXES = (
+    "README.md",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "docs/release/",
     "docs/runtime_config/",
     "docs/calibration/",
     "tools/",

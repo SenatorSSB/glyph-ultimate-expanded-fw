@@ -18,6 +18,10 @@ HARDWARE_PLAN = (
 BASE_BRANCH = "configurator"
 
 ALLOWED_CHANGED_PREFIXES = (
+    "README.md",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "docs/release/",
     "docs/runtime_config/",
     "docs/calibration/",
     "tools/",

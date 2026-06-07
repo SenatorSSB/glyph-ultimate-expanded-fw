@@ -28,6 +28,11 @@ not change Senscope game-semantic source authority.
 - Phase 3 generated-like C++ constants path is merged, build-gated, user
   hardware-tested for applicable non-nunchuk scope, and recorded.
 - Preservation hardware pass is recorded for applicable non-nunchuk scope.
+- Step 14 manual firmware-consuming runtime-config load is blocked before implementation.
+- Step 15 source-authority research complete.
+- Step 16 WebSerial/device-write implementation is blocked before implementation.
+- Step 17 flashing automation is forbidden/not approved; safety boundary complete.
+- Public/manual workflow release-candidate planning is next hardware-gated workflow.
 - Official Glyph configurator corpus records user-provided default and
   back-and-forth JSON fixtures when the correction packet is present.
 - Calibration docs remain useful evidence, but the current roadmap should be
@@ -37,12 +42,14 @@ not change Senscope game-semantic source authority.
 ## Explicit Non-Claims
 
 - Runtime-loaded config is not implemented.
-- No WebSerial/device write is implemented.
-- No protobuf binary write is implemented.
-- No firmware flashing automation is implemented.
+- Runtime-config storage is not implemented.
+- Firmware binary/protobuf parser integration is not implemented.
+- WebSerial/device write is not implemented.
+- Protobuf binary write is not implemented.
+- Firmware flashing automation is not implemented.
 - No external-remapper adapter output is implemented.
-- No nunchuk validation is claimed unless explicitly recorded by a future
-  hardware result.
+- No public release claim is made.
+- No nunchuk validation claim is made.
 
 `docs/calibration/` contains detailed evidence packets, dated blocker records,
 historical branch notes, templates, and correction packets. Treat it as an
