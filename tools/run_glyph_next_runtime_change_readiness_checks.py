@@ -164,6 +164,18 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_config_firmware_binary_parser_plan.py",
         ),
         step(
+            "runtime config webserial/device-write source authority",
+            "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+        ),
+        step(
+            "runtime config manual load path plan",
+            "tools/check_glyph_runtime_config_manual_load_path_plan.py",
+        ),
+        step(
+            "runtime config device-write safety plan",
+            "tools/check_glyph_runtime_config_device_write_safety_plan.py",
+        ),
+        step(
             "identity runtime generated config evaluator input",
             "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
         ),
