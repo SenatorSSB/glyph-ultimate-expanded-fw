@@ -114,6 +114,8 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   line.
 - `docs/runtime_config/runtime_config_device_write_safety_plan.md` - Step 16
   device-write safety plan and implementation stop line.
+- `docs/runtime_config/runtime_config_flashing_automation_safety_boundary.md` - Step 17
+  flashing safety boundary and implementation stop line.
 - `tools/check_glyph_runtime_config_webserial_device_write_source_authority.py`
   - Step 15 WebSerial/device-write source-authority guardrail checker.
 - `tools/check_glyph_runtime_config_manual_load_path_plan.py` - Step 14
