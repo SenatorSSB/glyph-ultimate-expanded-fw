@@ -1,0 +1,91 @@
+{
+  "schema_name": "glyph_runtime_config_interpreter_source_baseline_hardware_result",
+  "status": "user_reported_pass",
+  "result_source": "user_reported",
+  "source_report_text": "rebuilt the fw and all worked still",
+  "prior_report_text": "Everything still works as expected",
+  "tested_branch": "runtime-config-interpreter-source-baseline",
+  "result_branch": "runtime-config-interpreter-source-baseline-hardware-result",
+  "commit_sha_under_test": "269e32a710b917cdaa033ff28f3b24e1b721e53f",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "hardware_result_recorded": true,
+  "scope": "applicable doable non-nunchuk planned checks",
+  "nunchuk_status": "not_tested",
+  "caveats": [
+    "user-reported result",
+    "no nunchuk validation",
+    "no runtime-loaded storage",
+    "no runtime-loaded config consumed from storage",
+    "no WebSerial/device write",
+    "no protobuf binary config parser",
+    "no firmware flashing automation",
+    "no profile import/export",
+    "no universal official configurator compatibility claim",
+    "no intentional firmware behavior change claim",
+    "no Senscope/game-semantic change"
+  ],
+  "test_rows": [
+    {
+      "id": "BOOT-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "PROFILE-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "DEFAULT-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "MODE-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "XY-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "TILT-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "LAYER-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "SPECIAL-TABLE-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "OVERRIDE-001",
+      "result": "PASS",
+      "notes": "Applied doable non-nunchuk scope."
+    },
+    {
+      "id": "CSTICK-001",
+      "result": "PASS",
+      "notes": "PASS where doable / no regression observed."
+    },
+    {
+      "id": "PROFILE-REG-001",
+      "result": "PASS",
+      "notes": "PASS / no regression observed."
+    },
+    {
+      "id": "NUNCHUK-001",
+      "result": "NOT_TESTED",
+      "notes": "No nunchuk validation."
+    }
+  ]
+}

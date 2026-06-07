@@ -24,6 +24,8 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `glyph_generated_constants_phase3_integration_hardware_result_2026-06-07.md`
   - user-reported Phase 3 generated constants firmware-integration hardware
     result.
+- `glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.md`
+  - user-reported runtime-config interpreter source-baseline hardware result.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
@@ -120,6 +122,8 @@ source-backed.
   - Step 9 source-owned runtime-config interpreter hardware plan template.
 - `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.json`
   - Step 9 hardware plan fixture template.
+- `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.json`
+  - user-reported runtime-config interpreter hardware result fixture.
 
 ## Old Roadmap / Readiness Packets
 
