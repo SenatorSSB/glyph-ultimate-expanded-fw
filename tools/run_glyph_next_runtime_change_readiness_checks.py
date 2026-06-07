@@ -164,6 +164,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py",
         ),
         step(
+            "phase3 generated constants preview",
+            "tools/check_glyph_phase3_generated_constants_preview.py",
+        ),
+        step(
             "identity runtime config contracts",
             "tools/check_glyph_identity_runtime_config_contracts.py",
         ),
