@@ -31,7 +31,7 @@ REQUIRED_DOC_PHRASES = (
     "product approval gate before firmware source integration",
     "build gate for any later firmware-integration branch",
     "hardware test gate for any later firmware-integration branch",
-    "Phase 3 steps 1-4 are not runtime-loaded config and not device write",
+    "Phase 3 steps 1-4",
 )
 
 EXPECTED_PREVIEW_TOP_LEVEL = {
@@ -48,6 +48,10 @@ EXPECTED_SOURCE_REFERENCES = {
         "role": "current_baseline_source",
         "sha256": "7911d4460428df789a43ff77e3180046bfee39321dc8aea4f997a517b8362fec",
     },
+    "src/modes/UltimateIdentityRuntimeTables.hpp": {
+        "role": "approved_step6_firmware_integration_target",
+        "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400",
+    },
     "tools/extract_glyph_identity_runtime_tables.py": {
         "role": "source_table_extractor",
         "sha256": "bb7abee75f597dec9e6380f3e68e1bca1b4c026f0b407f51408277f6ace80dc2",
@@ -62,9 +66,9 @@ EXPECTED_SOURCE_REFERENCES = {
     },
 }
 EXPECTED_SOURCE_UNKNOWNS = {
-    "exact future approved firmware file paths",
+    "future firmware-path details beyond step 6",
     "future product approval decision",
-    "future build and hardware gate outcome",
+    "future build and hardware result outcome",
 }
 EXPECTED_TARGET_FILE_CLASSES = {
     "docs/generated_constants/phase3_generated_constants_contract.md": (
@@ -78,6 +82,10 @@ EXPECTED_TARGET_FILE_CLASSES = {
     "tools/check_glyph_phase3_generated_constants_preview.py": (
         "phase3_checker",
         "docs_only",
+    ),
+    "src/modes/UltimateIdentityRuntimeTables.hpp": (
+        "current_firmware_integration_target",
+        "approved_step6_reference_only",
     ),
     "include/generated/glyph_generated_constants.hpp": (
         "future_generated_constants_header",

@@ -16,12 +16,17 @@
         "path": "tools/extract_glyph_identity_runtime_tables.py",
         "role": "source_table_extractor",
         "sha256": "bb7abee75f597dec9e6380f3e68e1bca1b4c026f0b407f51408277f6ace80dc2"
-      },
-      {
-        "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
-        "role": "generated_config_baseline",
-        "sha256": "d66efa458cc28921d3a1ccb0682e8486d880c3d3fe77260a19cc3e0afa63006f"
-      },
+    },
+    {
+      "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "role": "approved_step6_firmware_integration_target",
+      "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400"
+    },
+    {
+      "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+      "role": "generated_config_baseline",
+      "sha256": "d66efa458cc28921d3a1ccb0682e8486d880c3d3fe77260a19cc3e0afa63006f"
+    },
       {
         "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt",
         "role": "generated_cpp_baseline",
@@ -29,9 +34,9 @@
       }
     ],
     "unknowns": [
-      "exact future approved firmware file paths",
+      "future firmware-path details beyond step 6",
       "future product approval decision",
-      "future build and hardware gate outcome"
+      "future build and hardware result outcome"
     ]
   },
   "target_file_classes": [
@@ -49,6 +54,11 @@
       "class": "phase3_checker",
       "path": "tools/check_glyph_phase3_generated_constants_preview.py",
       "state": "docs_only"
+    },
+    {
+      "class": "current_firmware_integration_target",
+      "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "state": "approved_step6_reference_only"
     },
     {
       "class": "future_generated_constants_header",

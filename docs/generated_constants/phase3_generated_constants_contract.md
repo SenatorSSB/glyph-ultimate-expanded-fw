@@ -1,11 +1,39 @@
 # Phase 3 Generated C++ Constants Contract
 
-Status: docs/tools-only, preview-only, not firmware input.
+Status: mixed-phase document with historical docs/tools contract and a current firmware-integration branch.
+
+## Branch split and contract ownership
+
+This document is authoritative for two explicit stages:
+
+- **Phase 3 steps 1-4 branch**: `phase3-generated-constants-contract`
+  - docs/tools-only scope
+  - preview-only contract and checker preparation
+  - no firmware source integration
+  - no firmware runtime behavior claims
+  - no profile artifact changes
+
+- **Phase 3 Step 6 firmware-integration branch**: `phase3-generated-constants-firmware-integration`
+  - behavior-preserving source refactor only
+  - firmware source/build-path integration path established for this branch
+  - same source-backed values, names, and ordering preserved
+  - no runtime-loaded config
+  - no WebSerial/device write
+  - no protobuf binary write
+  - no firmware flashing automation
+  - no Senscope schema change
+  - no game-semantic source promotion
+
+The preview artifact remains docs-only and is not the active firmware input.
 
 ## Purpose and scope
 
-This document defines the Phase 3 contract for the Glyph / HayBox-side
-generated C++ constants path. Phase 3 steps 1-4 are covered here:
+This document defines the Phase 3 generated C++ constants contract for Glyph / HayBox
+backend sources.
+
+### Phase 3 steps 1-4
+
+These steps are covered by this contract and are docs/tools-only:
 
 1. define the generated C++ constants target contract;
 2. define the source-diff checker contract;
@@ -13,35 +41,36 @@ generated C++ constants path. Phase 3 steps 1-4 are covered here:
 4. emit or define a dry-run generated constants preview artifact that is not
    consumed by firmware.
 
-This branch prepares the review and tooling path for a future product-approval
-gate. It does not integrate generated constants into firmware and it does not
-change controller/runtime behavior.
+### Phase 3 Step 6 (current branch)
 
-Scope boundaries:
+The current approved integration branch:
 
-- docs/tools-only;
-- no firmware source integration;
-- no PlatformIO or build-input wiring;
+- does the behavior-preserving firmware refactor from hardcoded table literals to
+  generated-like source constants;
+- keeps table behavior unchanged;
+- requires firmware build and hardware-result gate before merge.
+
+Scope boundaries (current branch):
+
+- behavior-preserving source refactor only;
+- no behavior/semantics changes;
 - no runtime-loaded config;
 - no device write;
 - no protobuf binary write;
 - no firmware flashing automation;
-- no hardware validation claim;
-- no Senscope schema change;
+- no profile artifact changes;
+- no Senscope schema changes;
 - no game-semantic source authority promotion.
 
 ## Non-goals
 
 This contract does not:
 
-- implement firmware behavior;
-- choose a final firmware file path or include path for the future approved
-  branch;
+- produce profile artifacts;
+- add runtime-loaded config;
+- add macros, turbo, timing automation, one-shots, or history-dependent logic;
 - claim universal official configurator compatibility;
-- claim nunchuk validation;
-- introduce macros, turbo, timing automation, one-shots, or history-dependent
-  logic;
-- produce an artifact that firmware consumes in this branch.
+- claim nunchuk validation.
 
 ## Source authority requirements
 
@@ -53,40 +82,39 @@ A Phase 3 claim must be backed by one of the following:
 - an explicit user/domain statement;
 - a source-backed hash recorded in the preview artifact.
 
-Primary source authority for this contract is limited to:
+Primary source authority for this document is limited to:
 
 - `src/modes/Ultimate.cpp`
+- `src/modes/UltimateIdentityRuntimeTables.hpp`
 - `tools/extract_glyph_identity_runtime_tables.py`
 - `docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json`
 - `docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt`
 - `docs/CURRENT_STATE.md`
 - `docs/ROADMAP.md`
 - `docs/WORKFLOW.md`
+- `docs/calibration/glyph_identity_runtime_hardware_validation_and_rollback_plan_2026-05-28.md`
+- `docs/calibration/glyph_identity_runtime_smashbox_hardware_result_2026-05-28.md`
 
 Unknowns must be labeled `unknown`. Inferred behavior must be labeled
 `inferred`.
 
-External-remapper material remains quarantined unless independently
-source-backed.
+External-remapper material remains quarantined unless independently source-backed.
 
 ## Generated artifact ownership boundaries
 
-The following are owned by this branch only as docs/tools/preview artifacts:
+The following are the preview/docs artifacts for this contract:
 
 - the Phase 3 contract document;
 - the dry-run preview artifact under `docs/generated_constants/preview/`;
 - the read-only checker under `tools/`.
 
-The following are future-branch artifacts only and must not be wired into this
-branch's firmware build:
+The following were historical preview targets only and are not active inputs in the
+current branch by themselves:
 
-- any generated C++ constants header class;
-- any generated C++ constants implementation class;
-- any generated C++ constants manifest class;
-- any firmware include/build-path wiring for generated constants.
-
-If a later approved branch creates firmware-facing generated files, that branch
-must re-author and review those files separately.
+- `docs/generated_constants/phase3_generated_constants_contract.md` as contract text;
+- `docs/generated_constants/preview/gfw3_generated_constants_preview.json`;
+- `tools/check_glyph_phase3_generated_constants_preview.py`;
+- any future candidate generated files.
 
 ## Generated C++ constants target shape
 
@@ -97,9 +125,9 @@ For this integration branch, the firmware-facing generated-like source path is:
 
 - `src/modes/UltimateIdentityRuntimeTables.hpp`
 
-The above path is an existing generated-like table include convention used by the
-firmware runtime, and the phase3 preview artifact path candidates below remain
-future-oriented.
+The above path is used as a generated-like firmware include, while the preview
+artifact stays docs-only. `Ultimate.cpp` includes this header after the
+`StickPoint` definition.
 
 Target shape requirements:
 
@@ -107,12 +135,23 @@ Target shape requirements:
 - preserve the current `StickPoint[9]` table cardinality;
 - preserve current source-backed point counts and current baseline values;
 - keep the target as pure data, not runtime logic;
-- keep the target out of firmware wiring in this branch;
-- keep the target free of runtime-loaded config semantics and device-write
-  semantics.
+- keep the generated-like target free of runtime-loaded config and device-write semantics.
 
-This branch only defines the target contract and the review path. It does not
-approve firmware source edits.
+### Current branch integration record
+
+- branch: `phase3-generated-constants-firmware-integration`
+- approved scope: behavior-preserving source refactor only
+- actual firmware-facing generated-like path: `src/modes/UltimateIdentityRuntimeTables.hpp`
+- `Ultimate.cpp` includes this generated-like header after `StickPoint` is defined
+- no runtime-loaded config
+- no WebSerial/device write
+- no protobuf binary write
+- no firmware flashing automation
+- no profile artifact change
+- no intentional controller behavior change
+- build gate required
+- hardware test/result gate required before merge
+- nunchuk status: `NOT_TESTED` unless separately tested and recorded
 
 ## Required metadata and provenance fields
 
@@ -155,7 +194,6 @@ but it must state that choice explicitly.
 - device-write claims;
 - protobuf binary write claims;
 - firmware flashing claims;
-- firmware source integration claims in this branch;
 - active profile artifact changes;
 - Senscope schema changes;
 - universal compatibility claims;
@@ -165,6 +203,18 @@ but it must state that choice explicitly.
 
 ## Review gates
 
+### Step 6 (current branch)
+
+- product approval gate before firmware source integration;
+- source-authority review gate;
+- source-diff checker review gate;
+- build gate;
+- hardware test gate;
+- hardware result gating;
+- rollback gate before merge.
+
+### Phase 3 steps 1-4 (preview)
+
 - docs/tools review gate;
 - source-authority review gate;
 - preview artifact review gate;
@@ -173,10 +223,6 @@ but it must state that choice explicitly.
 - build gate for any later firmware-integration branch;
 - hardware test gate for any later firmware-integration branch;
 - rollback gate before merge of any later firmware-integration branch.
-
-The build gate and hardware test gate do not apply to this docs/tools-only
-branch. They apply only to a future approved branch that changes firmware
-source.
 
 ## Source-diff checker contract
 
@@ -188,6 +234,7 @@ The checker must read:
 - this contract document;
 - the current source-backed table extractor;
 - the current `src/modes/Ultimate.cpp` table source;
+- `src/modes/UltimateIdentityRuntimeTables.hpp` (current branch reference);
 - the current committed baseline fixtures named in the preview artifact.
 
 ### Outputs
@@ -230,7 +277,7 @@ The checker must pass only when all of the following are true:
 
 The checker must fail on any preview claim or diff that implies:
 
-- firmware source integration in this branch;
+- firmware source integration in this docs/tools-only phase;
 - runtime-loaded config;
 - device write;
 - protobuf binary write;
@@ -253,10 +300,10 @@ The checker may accept:
 
 ### Source-backed comparison requirements
 
-The checker must compare the preview artifact against source-backed
-expectations, not against guessed behavior. If the preview artifact omits raw
-table values, the omission must be explicit and the checker must still verify
-the source-backed table names, point counts, and provenance hashes.
+The checker must compare the preview artifact against source-backed expectations, not
+against guessed behavior. If the preview artifact omits raw table values, the
+omission must be explicit and the checker must still verify the source-backed table
+names, point counts, and provenance hashes.
 
 ### Metadata and hash requirements
 
@@ -271,8 +318,8 @@ marked as inferred, the checker must fail.
 
 ### Future firmware-integration branch proof before merge
 
-Any later firmware-integration branch that turns this preview into build inputs
-must prove all of the following before merge:
+Any later firmware-integration branch that turns this preview into build inputs must
+prove all of the following before merge:
 
 - explicit product approval for firmware source edits;
 - an exact source diff that preserves the source-backed baseline or otherwise
@@ -291,4 +338,4 @@ must prove all of the following before merge:
   history to the current hardcoded baseline.
 - Preserve unknowns as unknowns and inferred items as inferred items.
 - Do not promote preview-only review text into firmware authority.
-- Phase 3 steps 1-4 are not runtime-loaded config and not device write.
+- nunchuk remains `NOT_TESTED` unless specifically validated.
