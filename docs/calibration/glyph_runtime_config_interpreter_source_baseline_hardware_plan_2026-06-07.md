@@ -18,6 +18,9 @@ This is the required hardware test template for this branch. It is not a hardwar
 
 ## 2) Intent
 
+- A user-reported hardware pass existed before this coordinate-validation correction.
+  The final merge-gating hardware result must be recorded after this corrected commit is
+  built and hardware-tested.
 - Intended change: behavior-preserving firmware-owned runtime-config interpreter boundary for the current source-owned baseline.
 - Scope: source-owned config-shaped baseline only, validate-before-use, explicit fallback-to-known-good source-owned baseline, table lookup through interpreter path, no runtime-loaded storage.
 - Non-claims: this plan does not assert nunchuk validation (`no_nunchuk_validation`).

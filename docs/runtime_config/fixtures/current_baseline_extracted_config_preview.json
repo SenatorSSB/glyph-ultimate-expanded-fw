@@ -29,12 +29,12 @@
       {
         "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
         "role": "runtime_config_interpreter_boundary",
-        "sha256": "bde465c39eebb7a1d6b0272923fc6773dd1d3a67001d4c722258c25a99d26d03"
+        "sha256": "ce694ab1f656145742b2e657c2960a813bfa115a0d787a11f43df438eefe1a2f"
       },
       {
         "path": "tools/extract_glyph_identity_runtime_tables.py",
         "role": "source_table_extractor",
-        "sha256": "4472aa9e868e247d06aa17a54cd37aa68a3cf3e15f8e1f4f64b01d7e11478ef0"
+        "sha256": "e7d9bfd18cfd469d5f030d53628bfb9dd74d3c14b5f04ef533f6c7f8b8aa7bad"
       }
     ],
     "unknowns": [

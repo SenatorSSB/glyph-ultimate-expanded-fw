@@ -24,18 +24,18 @@
     {
       "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
       "role": "runtime_config_interpreter_boundary",
-      "sha256": "bde465c39eebb7a1d6b0272923fc6773dd1d3a67001d4c722258c25a99d26d03"
+      "sha256": "ce694ab1f656145742b2e657c2960a813bfa115a0d787a11f43df438eefe1a2f"
     },
     {
       "path": "tools/extract_glyph_identity_runtime_tables.py",
       "role": "source_table_extractor",
-      "sha256": "4472aa9e868e247d06aa17a54cd37aa68a3cf3e15f8e1f4f64b01d7e11478ef0"
+      "sha256": "e7d9bfd18cfd469d5f030d53628bfb9dd74d3c14b5f04ef533f6c7f8b8aa7bad"
     }
   ],
   "source_baseline_preview": {
     "path": "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
     "role": "design_preview_snapshot",
-    "sha256": "70ba1c858330e45c3eaf0ede987a0da8871beeb4f9c38ca7c5f031a293e63768"
+    "sha256": "42c03902d67be2b94d159d71bacc0b860c9a581ae99de273c350ce8b3a8cabd1"
   },
   "interpreter_source_baseline": {
     "caveats": [

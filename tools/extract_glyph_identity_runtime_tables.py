@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Extract Glyph identity runtime stick tables from Ultimate.cpp.
 
+This extractor is the source-literal boundary for StickPoint[9] tables. It enforces
+literal parseability and byte-range for coordinates so malformed source tables fail fast
+before they can reach firmware merge or checker comparison.
+
 This is a source-sync guardrail for the bounded Python behavior evaluator. It
 does not compile firmware, generate artifacts, or validate hardware behavior.
 """
@@ -218,6 +222,7 @@ def _parse_table_points(symbol: str, declared_size: str, body: str) -> tuple[tup
 
     points: list[tuple[int, int]] = []
     for match in _POINT_PATTERN.finditer(body):
+        # Source boundary: StickPoint values are expected to be byte literals.
         x = int(match.group("x"))
         y = int(match.group("y"))
         if not 0 <= x <= 255 or not 0 <= y <= 255:

@@ -317,12 +317,12 @@ constexpr bool ValidateRuntimeConfigView(const RuntimeConfigView &config) {
             return false;
         }
 
-        for (size_t point_index = 0; point_index < table_view.point_count; ++point_index) {
-            const StickPoint point = table_view.table[point_index];
-            if (point.x > 255 || point.y > 255) {
-                return false;
-            }
-        }
+        // StickPoint coordinates are byte-typed (uint8_t) in firmware.
+        // Source-parsed table literals are byte-range checked (0..255) by
+        // tools/extract_glyph_identity_runtime_tables.py and
+        // tools/check_glyph_identity_runtime_table_source_sync.py before firmware merge.
+        // Future runtime-loaded config parsing must validate raw values before narrowing
+        // to uint8_t before invoking this boundary.
     }
 
     if (!seen[fallback_index]) {

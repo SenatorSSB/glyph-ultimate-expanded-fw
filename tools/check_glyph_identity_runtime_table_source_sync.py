@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Check source-parsed Glyph identity runtime tables against evaluator mirrors."""
+"""Check source-parsed Glyph identity runtime tables against evaluator mirrors.
+
+The extracted source literal tables must already satisfy byte-range checks (0..255)
+for StickPoint coordinates; this checker relies on the extractor path for that
+boundary and fails fast if out-of-range literals are present in source tables.
+"""
 
 from __future__ import annotations
 
@@ -337,6 +342,7 @@ def main() -> int:
     print(f"baseline_fixture={_relative_path(BASELINE_FIXTURE_PATH)}")
 
     try:
+        # load_source_tables() is the enforced byte-range gate for source literals.
         source_tables = load_source_tables(DEFAULT_SOURCE_PATH)
         evaluator_tables = load_evaluator_tables(EVALUATOR_PATH)
         source_text = Path(DEFAULT_SOURCE_PATH).read_text(encoding="utf-8")
