@@ -32,12 +32,34 @@ explicitly instructed.
 - Do not infer current roadmap from every calibration file. Prefer
   `docs/CURRENT_STATE.md`, `docs/ROADMAP.md`, and this workflow when old blocker
   packets conflict with current canonical docs.
+- Avoid `blocked` for current status unless the task is actually waiting on a
+  specific external item. Prefer precise labels such as ready for engineering
+  design, ready for source research, waiting for user artifact, waiting for
+  hardware test, future phase, product approval required, or forbidden by
+  policy.
+
+## Autonomy And Approval Policy
+
+- Docs/tools, source research, and engineering design can proceed autonomously
+  when branch scope is clear and source-authority caveats are preserved.
+- User domain input is not required for routine engineering design.
+- User product approval is required before firmware behavior implementation,
+  runtime-loaded config implementation, WebSerial/device write, protobuf binary
+  write, firmware flashing automation, external adapter output, or Senscope
+  neutral profile schema changes.
+- Product approval gates are not the same as user-domain blockers. A future
+  phase may be ready for design or source research while still requiring
+  approval before implementation.
+- Safety/policy-forbidden work remains forbidden even if adjacent design or
+  source research is allowed.
 
 ## Hardware Test Policy
 
 - Hardware validation must be recorded in a result packet with scope,
   artifact/build identity when available, operator/user report, pass/fail rows,
   caveats, and rollback notes if needed.
+- Hardware tests are required only after a firmware/candidate artifact exists
+  for the stated test scope.
 - Nunchuk validation must not be claimed unless nunchuk rows are actually
   executed and recorded.
 - User-reported results are allowed when clearly labeled as user-reported and

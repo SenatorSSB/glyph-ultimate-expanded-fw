@@ -3,13 +3,15 @@
 ## Purpose and scope
 
 This packet closes the GFW4 docs/tools supervisor sequence and identifies the
-next meaningful actions that require the user, source authority, domain input,
-official configurator metadata, or implementation approval. It also records the
+next meaningful actions that require user artifacts, product prioritization,
+source authority, domain input for a specific ambiguity, official configurator
+metadata, implementation approval, or hardware results after a test artifact
+exists. It also records the
 export corpus final blocker/status consolidation, which now records that the
 official configurator corpus exists while write-capable implementation remains
 blocked.
 
-Status: `next_user_action_required`.
+Status: `next_user_action_required_for_specific_artifacts_priorities_or_approval`.
 
 This is docs/tools-only. It does not implement firmware behavior, change active
 profile artifacts, record a hardware result, claim nunchuk validation, implement
@@ -42,27 +44,31 @@ capture now has two user-provided official configurator JSON fixtures. Exact
 configurator version/source reference, exact capture timestamp, and exact
 push/download route details remain unknown.
 
-## Remaining blocked items
+## Current action categories
 
 | Item | Current state | Required next input |
 | --- | --- | --- |
-| Export corpus metadata | `official_configurator_corpus_present_initial` | Exact official configurator app version/source reference, exact capture timestamp, and exact push/download route details if desired. |
-| Write-capable adapter / prewrite behavior | `adapter_prewrite_blocked` | Official corpus exists; source authority for write behavior, license/code-reuse review, transport/runtime decisions, and explicit implementation approval remain required. |
-| Physical/logical/RF5 ambiguity | `requires_source_authority_hardware_result_or_user_domain_input` | Source authority, user-reported hardware result, or explicit user/domain input if the historical RF5 row must be resolved. |
-| Runtime-loaded config / WebSerial / device write / protobuf binary write / external adapter output | Forbidden without future approval | Source authority and explicit implementation approval before any branch may begin. |
+| Export corpus metadata | `WAITING_FOR_USER_ARTIFACT` | Exact official configurator app version/source reference, exact capture timestamp, and exact push/download route details if available. This is optional metadata, not a general engineering blocker. |
+| Engineering/source research prioritization | `READY_FOR_USER_PRODUCT_DECISION` | Choose/prioritize whether to start generated C++ constants path, export target contract, runtime-loaded config design, or transport source research. |
+| Write-capable adapter / prewrite behavior | `READY_FOR_SOURCE_RESEARCH` / `READY_FOR_USER_PRODUCT_DECISION` | Official corpus exists; source authority for write behavior, license/code-reuse review, transport/runtime decisions, and explicit product approval remain required before implementation. |
+| Physical/logical/RF5 ambiguity | `READY_FOR_SOURCE_RESEARCH` | Source authority, user-reported hardware result, or explicit user/domain input only if the historical RF5 row must be resolved. |
+| Runtime-loaded config / WebSerial / device write / protobuf binary write / external adapter output | `FUTURE_PHASE` | Engineering design or source research may proceed when prioritized and scoped. Explicit product approval is required before implementation. |
+| Hardware testing | `WAITING_FOR_HARDWARE_TEST` only after artifact exists | Provide hardware test results only after a firmware/candidate artifact exists for the stated test scope. |
 
 ## Exact next user-required actions
 
 1. Provide exact official configurator app version/source reference and exact
    capture timestamp/route metadata if desired, or leave those metadata fields
    unknown.
-2. Provide source-authority approval before any write-capable adapter,
-   runtime-loaded config, WebSerial/device write, protobuf binary write, or
-   external adapter output work is considered.
-3. Provide domain input or hardware/source evidence if the historical
+2. Choose/prioritize whether to start generated C++ constants path, export target
+   contract, runtime-loaded config design, or transport source research.
+3. Provide product approval before any firmware behavior implementation,
+   runtime-loaded config implementation, WebSerial/device write, protobuf binary
+   write, external adapter output, firmware flashing automation, or schema
+   change begins.
+4. Provide domain input or hardware/source evidence only if the historical
    physical/logical/RF5 ambiguity must be resolved.
-4. Provide explicit implementation approval before any firmware behavior change
-   branch is started.
+5. Provide hardware test results only after a test artifact exists.
 
 Recommended future preservation result branch:
 `glyph/gfw4-preservation-hardware-result`.
@@ -108,9 +114,9 @@ Recommended future preservation result branch:
 
 ## Stop boundary
 
-The autonomous sequence stops here because the next meaningful work requires at
-least one of: official configurator metadata, source-authority approval,
-explicit domain input, or explicit implementation approval. No firmware
-implementation should start from this handoff alone.
+The autonomous docs/tools sequence stops here only for specific user artifacts,
+prioritization choices, product approvals, domain ambiguity resolution, or
+hardware results after a test artifact exists. Routine engineering design and
+source research are not user-domain-blocked when scope is clear.
 
 No firmware implementation should start from this handoff alone.

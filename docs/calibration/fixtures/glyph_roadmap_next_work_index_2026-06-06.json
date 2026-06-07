@@ -1,67 +1,137 @@
 {
   "schema_name": "glyph_roadmap_next_work_index",
-  "schema_version": 1,
+  "schema_version": 2,
   "index_date": "2026-06-06",
   "baseline_source": "post_gfw3_configurator_baseline",
   "post_gfw3_baseline_path": "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
   "roadmap_source_path": "docs/calibration/glyph_firmware_workstream_roadmap_2026-05-26.md",
   "global_forbidden_classes": {
     "runtime_loaded_config_implementation": {
-      "forbidden_without_future_approval": true,
+      "forbidden_without_future_approval": false,
       "allowed_now": false,
       "implemented": false,
       "requires_source_authority": true,
-      "requires_user_approval": true
+      "requires_user_approval": true,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_firmware_change": true,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false,
+      "status": "FUTURE_PHASE"
     },
     "webserial_device_write": {
-      "forbidden_without_future_approval": true,
+      "forbidden_without_future_approval": false,
       "allowed_now": false,
       "implemented": false,
       "requires_source_authority": true,
-      "requires_user_approval": true
+      "requires_user_approval": true,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_firmware_change": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": true,
+      "status": "FUTURE_PHASE"
     },
     "protobuf_binary_write": {
-      "forbidden_without_future_approval": true,
+      "forbidden_without_future_approval": false,
       "allowed_now": false,
       "implemented": false,
       "requires_source_authority": true,
-      "requires_user_approval": true
+      "requires_user_approval": true,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_firmware_change": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": true,
+      "status": "FUTURE_PHASE"
     },
     "firmware_flashing_automation": {
       "forbidden_without_future_approval": true,
       "allowed_now": false,
       "implemented": false,
       "requires_source_authority": true,
-      "requires_user_approval": true
+      "requires_user_approval": true,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_firmware_change": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": true,
+      "status": "FORBIDDEN_BY_POLICY"
     },
     "external_remapper_adapter_output": {
-      "forbidden_without_future_approval": true,
+      "forbidden_without_future_approval": false,
       "allowed_now": false,
       "implemented": false,
       "requires_source_authority": true,
-      "requires_user_approval": true
+      "requires_user_approval": true,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_firmware_change": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false,
+      "status": "FUTURE_PHASE"
     },
     "external_source_code_reuse": {
       "forbidden_without_future_approval": true,
       "allowed_now": false,
       "implemented": false,
       "requires_source_authority": true,
-      "requires_user_approval": true
+      "requires_user_approval": true,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_firmware_change": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false,
+      "status": "FORBIDDEN_BY_POLICY"
     },
     "nunchuk_hardware_validation_claim": {
-      "forbidden_without_future_approval": true,
+      "forbidden_without_future_approval": false,
       "allowed_now": false,
       "implemented": false,
       "requires_source_authority": false,
       "requires_user_approval": false,
-      "requires_hardware_result": true
+      "requires_hardware_result": true,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": true,
+      "requires_user_artifact": false,
+      "requires_firmware_change": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false,
+      "status": "OUT_OF_SCOPE_FOR_CURRENT_HARDWARE"
     }
   },
   "roadmap_items": [
     {
       "item_id": "native_ultimate_tilt_runtime_baseline",
       "label": "Native Ultimate Tilt/Tilt2 runtime baseline",
-      "current_status": "COMPLETE",
+      "current_status": "CURRENT_BASELINE",
       "category": "runtime_baseline",
       "evidence_paths": [
         "docs/calibration/glyph_ultimate_tilt_runtime_implementation_2026-05-24.md",
@@ -75,7 +145,15 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Current native MODE_ULTIMATE baseline exists for the documented scope."
+      "notes": "Current native MODE_ULTIMATE baseline exists for the documented scope.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "tilt_tilt2_hardware_smoke_evidence",
@@ -94,7 +172,15 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Does not claim nunchuk hardware validation."
+      "notes": "Does not claim nunchuk hardware validation.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "preservation_hardware_matrix_execution",
@@ -120,7 +206,15 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "User-reported pass is recorded for all applicable non-nunchuk preservation rows; nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box. No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed."
+      "notes": "User-reported pass is recorded for all applicable non-nunchuk preservation rows; nunchuk remains NOT_TESTED/unvalidated because the controller has no nunchuk port available out of the box. No runtime-loaded config, WebSerial/device write, external remapper adapter, or active profile artifact change is claimed.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "capability_source_authority_mapping",
@@ -139,7 +233,15 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Unknown backend behavior remains unknown unless source-backed."
+      "notes": "Unknown backend behavior remains unknown unless source-backed.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "identity_runtime_role_case_canonicalization",
@@ -159,12 +261,20 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Does not approve future firmware behavior changes."
+      "notes": "Does not approve future firmware behavior changes.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "export_corpus_capture",
       "label": "Export corpus capture",
-      "current_status": "OFFICIAL_CORPUS_PRESENT_INITIAL",
+      "current_status": "WAITING_FOR_USER_ARTIFACT",
       "category": "corpus",
       "evidence_paths": [
         "docs/calibration/glyph_profile_config_export_corpus_protocol_2026-05-26.md",
@@ -181,10 +291,10 @@
       ],
       "allowed_next_action": "provide_missing_official_configurator_metadata_if_available",
       "blocked_by": [
-        "missing_configurator_version_label",
-        "missing_configurator_source_reference",
-        "missing_exact_capture_timestamp",
-        "missing_exact_push_download_route_details"
+        "missing_configurator_version_label_if_available",
+        "missing_configurator_source_reference_if_available",
+        "missing_exact_capture_timestamp_if_available",
+        "missing_exact_push_download_route_details_if_available"
       ],
       "requires_user_input": false,
       "requires_hardware": false,
@@ -192,7 +302,15 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Official configurator corpus exists with two user-provided fixture files. Exact configurator version/source reference, exact capture timestamp, and exact push/download route details remain unknown."
+      "notes": "Official configurator corpus exists with two user-provided fixture files. Exact configurator version/source reference, exact capture timestamp, and exact push/download route details remain unknown if unavailable. This is not a blocker for routine engineering design.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": true,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "export_corpus_final_blocker_status",
@@ -223,12 +341,20 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Final blocker packet records official_configurator_corpus_present_initial with corpus_present=true and completion_allowed=false. Implementation remains blocked."
+      "notes": "Final blocker packet records official_configurator_corpus_present_initial with corpus_present=true and completion_allowed=false. Implementation remains blocked.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "adapter_policy_prewrite_validation",
       "label": "Adapter policy and prewrite validation",
-      "current_status": "READY_DOCS_TOOLS",
+      "current_status": "READY_FOR_SOURCE_RESEARCH",
       "category": "adapter_policy",
       "evidence_paths": [
         "docs/calibration/glyph_profile_config_adapter_policy_decisions_2026-05-26.md",
@@ -255,12 +381,20 @@
       "requires_corpus": true,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Read-only policy/checking is present; blocker matrix records write_capable_adapter_blocked_docs_tools_matrix and does not authorize adapter output generation."
+      "notes": "Read-only policy/checking is present; source audit planning may proceed. Adapter output generation still requires source authority, license/code-reuse review, and product approval.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "adapter_prewrite_implementation_gate",
       "label": "Adapter prewrite implementation gate",
-      "current_status": "BLOCKED_IMPLEMENTATION_APPROVAL",
+      "current_status": "READY_FOR_USER_PRODUCT_DECISION",
       "category": "adapter_implementation_gate",
       "evidence_paths": [
         "docs/calibration/glyph_adapter_prewrite_implementation_gate_2026-06-06.md",
@@ -308,18 +442,26 @@
         "adapter_output_generation_blocked",
         "implementation_approval_missing"
       ],
-      "requires_user_input": true,
+      "requires_user_input": false,
       "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": true,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Write-capable adapter implementation is not approved unless all blockers are cleared. implementation_allowed=false. Official corpus exists, but exact metadata and write-behavior source authority remain missing. Explicit user approval after source authority exists is still required."
+      "notes": "Write-capable adapter implementation is not approved unless all blockers are cleared. implementation_allowed=false. Official corpus exists, but exact metadata and write-behavior source authority remain missing. Explicit user product approval after source authority exists is still required.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "physical_logical_mapping_rf5_transcription",
       "label": "Physical/logical mapping and RF5 transcription",
-      "current_status": "READY_DOCS_TOOLS",
+      "current_status": "READY_FOR_SOURCE_RESEARCH",
       "category": "layout_mapping",
       "evidence_paths": [
         "docs/calibration/glyph_physical_logical_layout_map_2026-05-26.md",
@@ -334,13 +476,21 @@
         "some_source_backed_runtime_mappings_unknown",
         "old_rf5_smoke_row_ambiguous"
       ],
-      "requires_user_input": true,
-      "requires_hardware": true,
+      "requires_user_input": false,
+      "requires_hardware": false,
       "requires_source_audit": false,
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Printed RF5 transcription exists; old RF5 negative smoke check remains NOT_TESTED_AMBIGUOUS. RF5 gap index separates the historical row from later GFW3 scope-limited RF5 evidence and future source-authority/hardware/user-domain input requirements."
+      "notes": "Printed RF5 transcription exists; old RF5 negative smoke check remains NOT_TESTED_AMBIGUOUS. RF5 gap index separates the historical row from later GFW3 scope-limited RF5 evidence. Domain input is needed only if the historical ambiguity must be resolved by user/domain statement.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "identity_runtime_generated_config_prototype",
@@ -360,7 +510,99 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Prototype is not firmware input and not runtime-loaded config."
+      "notes": "Prototype is not firmware input and not runtime-loaded config.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
+    },
+    {
+      "evidence_paths": [
+        "docs/calibration/glyph_identity_runtime_generated_config_evaluator_input_2026-05-28.md",
+        "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
+        "docs/calibration/glyph_identity_runtime_generated_config_prototype_2026-05-28.md"
+      ],
+      "blocked_by": [],
+      "requires_user_input": false,
+      "requires_hardware": false,
+      "requires_source_audit": false,
+      "requires_corpus": false,
+      "requires_firmware_change": false,
+      "forbidden_without_future_approval": false,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false,
+      "item_id": "generated_config_evaluator_bridge",
+      "label": "Generated-config/evaluator bridge",
+      "current_status": "READY_FOR_PROTOTYPE",
+      "category": "generated_config_evaluator_bridge",
+      "allowed_next_action": "connect_senscope_neutral_profile_outputs_to_generated_config_evaluator_artifacts",
+      "notes": "Engineering prototype work may proceed when scoped to docs/tools and source-backed artifacts. requires_user_domain_input=false."
+    },
+    {
+      "evidence_paths": [
+        "docs/calibration/glyph_identity_runtime_generated_cpp_diff_artifact_2026-05-28.md",
+        "docs/calibration/glyph_generated_constants_refactor_readiness_packet_2026-05-28.md",
+        "tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py"
+      ],
+      "blocked_by": [],
+      "requires_user_input": false,
+      "requires_hardware": false,
+      "requires_source_audit": false,
+      "requires_corpus": false,
+      "requires_firmware_change": false,
+      "forbidden_without_future_approval": false,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false,
+      "item_id": "generated_cpp_constants_firmware_build_path",
+      "label": "Generated C++ constants / firmware build path",
+      "current_status": "READY_FOR_ENGINEERING_DESIGN",
+      "category": "generated_cpp_constants",
+      "allowed_next_action": "define_generated_constants_target_and_source_diff_checker",
+      "notes": "Generated C++ constants path is ready for engineering design. requires_user_domain_input=false; requires_user_product_approval=true before firmware implementation."
+    },
+    {
+      "evidence_paths": [
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+        "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+        "tools/check_glyph_official_configurator_export_corpus.py"
+      ],
+      "blocked_by": [],
+      "requires_user_input": false,
+      "requires_hardware": false,
+      "requires_source_audit": false,
+      "requires_corpus": false,
+      "requires_firmware_change": false,
+      "forbidden_without_future_approval": false,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": true,
+      "requires_transport_authority": false,
+      "item_id": "offline_official_configurator_export_candidate",
+      "label": "Offline official configurator export candidate",
+      "current_status": "READY_FOR_ENGINEERING_DESIGN",
+      "category": "offline_official_configurator_export",
+      "allowed_next_action": "define_export_target_contract_and_candidate_validator",
+      "notes": "Ready for export target contract and candidate validator design after official corpus correction. Requires Senscope neutral profile before implementation."
     },
     {
       "item_id": "runtime_config_candidate_validator",
@@ -380,12 +622,48 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Offline candidate validation only; not runtime-loaded config implementation."
+      "notes": "Offline candidate validation only; not runtime-loaded config implementation.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
+    },
+    {
+      "evidence_paths": [
+        "docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md",
+        "docs/calibration/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md",
+        "tools/check_glyph_runtime_loaded_config_design.py"
+      ],
+      "blocked_by": [],
+      "requires_user_input": false,
+      "requires_hardware": false,
+      "requires_source_audit": false,
+      "requires_corpus": false,
+      "requires_firmware_change": false,
+      "forbidden_without_future_approval": false,
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false,
+      "item_id": "stable_firmware_bounded_config_owned_modifier_data",
+      "label": "Stable firmware + bounded config-owned modifier data",
+      "current_status": "FUTURE_PHASE",
+      "category": "runtime_loaded_config_boundary_design",
+      "allowed_next_action": "architecture_spec_branch_if_prioritized",
+      "notes": "Future phase; ready for docs/spec engineering design only if prioritized. requires_user_domain_input=false; product approval required before implementation."
     },
     {
       "item_id": "runtime_loaded_config_design_validation_contract",
       "label": "Runtime-loaded config design and validation contract",
-      "current_status": "READY_DOCS_TOOLS",
+      "current_status": "READY_FOR_ENGINEERING_DESIGN",
       "category": "runtime_loaded_config",
       "evidence_paths": [
         "docs/calibration/glyph_runtime_loaded_config_design_v0_2026-05-28.md",
@@ -393,24 +671,32 @@
         "docs/calibration/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md",
         "tools/check_glyph_runtime_loaded_config_design.py"
       ],
-      "allowed_next_action": "continue_design_contract_or_blocker_packet_work_only",
+      "allowed_next_action": "continue_design_contract_or_storage_representation_fallback_design",
       "blocked_by": [
         "runtime_loaded_config_implementation_not_approved",
         "missing_storage_interpreter_source_authority",
         "missing_hardware_validation_plan"
       ],
-      "requires_user_input": true,
-      "requires_hardware": true,
+      "requires_user_input": false,
+      "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Design/checker work may continue; implementation remains forbidden without future approval."
+      "notes": "Design/checker work may continue; implementation requires product approval, source authority, storage/interpreter decisions, and hardware plan. Runtime-loaded config is not user-domain-blocked.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "external_remapper_boundary_snapshot_shape_feasibility_mapping_gap_experiment",
       "label": "External remapper boundary/source snapshot/config-shape/feasibility/mapping/gap/experiment items",
-      "current_status": "BLOCKED_EXTERNAL_AUDIT",
+      "current_status": "READY_FOR_SOURCE_RESEARCH",
       "category": "external_remapper",
       "evidence_paths": [
         "docs/calibration/glyph_external_remapper_adapter_boundary_2026-06-03.md",
@@ -428,13 +714,21 @@
         "implementation_decisions_not_approved",
         "active_profile_round_trip_unsafe"
       ],
-      "requires_user_input": true,
+      "requires_user_input": false,
       "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Adapter output and external JSON generation remain blocked."
+      "notes": "Source audit and no-device provenance work may proceed. Adapter output and external JSON generation require source authority, license/code-reuse review, and product approval.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "gfw3_runtime_remap_hardware_result",
@@ -454,7 +748,15 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "User-reported pass for GFW3 runtime remap behavior; not nunchuk validation."
+      "notes": "User-reported pass for GFW3 runtime remap behavior; not nunchuk validation.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "post_gfw3_configurator_baseline_readiness",
@@ -477,12 +779,20 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Future behavior-changing firmware work still needs the full gated workflow; the next-user-action handoff records that hardware, corpus, source-authority/domain input, or implementation approval is now required."
+      "notes": "Future behavior-changing firmware work still needs the full gated workflow. Routine engineering design and source research are not user-domain-blocked.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "runtime_patch_implementation_branch",
       "label": "Runtime patch implementation branch",
-      "current_status": "BLOCKED_IMPLEMENTATION_APPROVAL",
+      "current_status": "READY_FOR_USER_PRODUCT_DECISION",
       "category": "firmware_implementation",
       "evidence_paths": [
         "docs/calibration/glyph_next_runtime_change_readiness_index_2026-05-26.md",
@@ -499,13 +809,21 @@
         "hardware_test_plan_and_result_required",
         "rollback_plan_required"
       ],
-      "requires_user_input": true,
+      "requires_user_input": false,
       "requires_hardware": true,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": true,
       "forbidden_without_future_approval": true,
-      "notes": "No runtime patch implementation is allowed in this branch. The handoff records next_user_action_required and requires explicit implementation approval before behavior-changing work."
+      "notes": "No runtime patch implementation is allowed in this branch. Explicit product approval is required before behavior-changing work.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": true,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "senscope_browser_app_implementation_work",
@@ -519,149 +837,206 @@
       "blocked_by": [
         "outside_glyph_firmware_backend_workstream"
       ],
-      "requires_user_input": true,
+      "requires_user_input": false,
       "requires_hardware": false,
       "requires_source_audit": false,
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": true,
-      "notes": "Do not touch the Senscope browser app workflow from this repo unless explicitly instructed."
+      "notes": "Do not touch the Senscope browser app workflow from this repo unless explicitly instructed.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "nunchuk_hardware_validation_claim",
       "label": "Nunchuk hardware validation claim",
-      "current_status": "BLOCKED_HARDWARE",
+      "current_status": "OUT_OF_SCOPE",
       "category": "hardware_result",
       "evidence_paths": [
         "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
         "docs/calibration/glyph_identity_runtime_hardware_validation_and_rollback_plan_2026-05-28.md"
       ],
-      "allowed_next_action": "create_test_plan_or_result_template_only_if_requested",
+      "allowed_next_action": "create_test_plan_or_result_template_only_if_future_hardware_supports_it_and_scope_requests_it",
       "blocked_by": [
+        "current_hardware_has_no_nunchuk_port_available_out_of_the_box",
         "missing_nunchuk_hardware_result"
       ],
-      "requires_user_input": true,
-      "requires_hardware": true,
+      "requires_user_input": false,
+      "requires_hardware": false,
       "requires_source_audit": false,
       "requires_corpus": false,
       "requires_firmware_change": false,
-      "forbidden_without_future_approval": true,
-      "notes": "Nunchuk hardware validation is not claimed."
+      "forbidden_without_future_approval": false,
+      "notes": "Nunchuk is out of scope for current hardware and no nunchuk hardware validation is claimed. It is not a general implementation blocker.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "runtime_loaded_config_implementation",
       "label": "Runtime-loaded config implementation",
-      "current_status": "FORBIDDEN_WITHOUT_FUTURE_APPROVAL",
+      "current_status": "FUTURE_PHASE",
       "category": "forbidden_class",
       "evidence_paths": [
         "docs/calibration/glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md",
         "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md"
       ],
-      "allowed_next_action": "none_in_this_branch",
+      "allowed_next_action": "storage_representation_fallback_design_branch_if_prioritized",
       "blocked_by": [
-        "future_source_authority_required",
-        "explicit_user_approval_required"
+        "future_product_approval_required_before_implementation",
+        "source_research_and_design_required"
       ],
-      "requires_user_input": true,
-      "requires_hardware": true,
+      "requires_user_input": false,
+      "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": true,
-      "forbidden_without_future_approval": true,
-      "notes": "Runtime-loaded config is not implemented and not allowed now."
+      "forbidden_without_future_approval": false,
+      "notes": "Runtime-loaded config is not implemented. It is a future engineering/design phase, not user-domain-blocked.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "webserial_device_write",
       "label": "WebSerial/device write",
-      "current_status": "FORBIDDEN_WITHOUT_FUTURE_APPROVAL",
+      "current_status": "FUTURE_PHASE",
       "category": "forbidden_class",
       "evidence_paths": [
         "docs/calibration/glyph_webserial_transport_blocker_packet_2026-06-03.md",
         "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md"
       ],
-      "allowed_next_action": "none_in_this_branch",
+      "allowed_next_action": "source_authority_transport_research_branch_if_prioritized",
       "blocked_by": [
-        "future_source_authority_required",
-        "explicit_user_approval_required"
+        "future_product_approval_required_before_implementation",
+        "transport_authority_required"
       ],
-      "requires_user_input": true,
-      "requires_hardware": true,
+      "requires_user_input": false,
+      "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": false,
-      "forbidden_without_future_approval": true,
-      "notes": "WebSerial/device write is not implemented and not allowed now."
+      "forbidden_without_future_approval": false,
+      "notes": "WebSerial/device write is not implemented. It is a future source-research/product phase, not user-domain-blocked.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": true
     },
     {
       "item_id": "protobuf_binary_write",
       "label": "Protobuf binary write",
-      "current_status": "FORBIDDEN_WITHOUT_FUTURE_APPROVAL",
+      "current_status": "FUTURE_PHASE",
       "category": "forbidden_class",
       "evidence_paths": [
         "docs/calibration/glyph_protobuf_config_schema_research_packet_2026-06-03.md",
         "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md"
       ],
-      "allowed_next_action": "none_in_this_branch",
+      "allowed_next_action": "official_schema_transport_research_if_prioritized",
       "blocked_by": [
         "official_schema_authority_required",
-        "explicit_user_approval_required"
+        "future_product_approval_required_before_implementation"
       ],
-      "requires_user_input": true,
-      "requires_hardware": true,
+      "requires_user_input": false,
+      "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": false,
-      "forbidden_without_future_approval": true,
-      "notes": "Protobuf binary write is not implemented and not allowed now."
+      "forbidden_without_future_approval": false,
+      "notes": "Protobuf binary write is not implemented. It is a future source-research/product phase, not user-domain-blocked.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": true
     },
     {
       "item_id": "firmware_flashing_automation",
       "label": "Firmware flashing automation",
-      "current_status": "FORBIDDEN_WITHOUT_FUTURE_APPROVAL",
+      "current_status": "FORBIDDEN_BY_POLICY",
       "category": "forbidden_class",
       "evidence_paths": [
         "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md"
       ],
       "allowed_next_action": "none_in_this_branch",
       "blocked_by": [
-        "explicit_user_approval_required",
-        "push_to_device_workflow_not_approved"
+        "unsafe_flashing_automation_forbidden",
+        "hidden_device_write_forbidden"
       ],
-      "requires_user_input": true,
-      "requires_hardware": true,
+      "requires_user_input": false,
+      "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": true,
-      "notes": "Firmware flashing automation is not implemented and not allowed now."
+      "notes": "Firmware flashing automation is not implemented and remains forbidden by policy.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": true
     },
     {
       "item_id": "external_remapper_adapter_output",
       "label": "External remapper adapter output",
-      "current_status": "FORBIDDEN_WITHOUT_FUTURE_APPROVAL",
+      "current_status": "FUTURE_PHASE",
       "category": "forbidden_class",
       "evidence_paths": [
         "docs/calibration/glyph_external_remapper_source_audit_readiness_gate_2026-06-04.md",
         "docs/calibration/glyph_external_remapper_license_code_reuse_blocker_2026-06-04.md"
       ],
-      "allowed_next_action": "none_in_this_branch",
+      "allowed_next_action": "source_audit_license_review_and_clean_room_target_contract_if_prioritized",
       "blocked_by": [
         "source_audit_not_executed",
         "license_review_not_completed",
-        "explicit_user_approval_required"
+        "future_product_approval_required_before_implementation"
       ],
-      "requires_user_input": true,
+      "requires_user_input": false,
       "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": false,
-      "forbidden_without_future_approval": true,
-      "notes": "External-remapper-compatible JSON generation is not implemented and not allowed now."
+      "forbidden_without_future_approval": false,
+      "notes": "External-remapper-compatible JSON generation is not implemented. It is a future source-research/product phase, not user-domain-blocked.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": false,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     },
     {
       "item_id": "external_source_code_reuse",
       "label": "External source code reuse",
-      "current_status": "FORBIDDEN_WITHOUT_FUTURE_APPROVAL",
+      "current_status": "FORBIDDEN_BY_POLICY",
       "category": "forbidden_class",
       "evidence_paths": [
         "docs/calibration/glyph_external_remapper_license_code_reuse_blocker_2026-06-04.md"
@@ -671,13 +1046,49 @@
         "license_review_not_completed",
         "explicit_user_approval_required"
       ],
-      "requires_user_input": true,
+      "requires_user_input": false,
       "requires_hardware": false,
       "requires_source_audit": true,
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": true,
-      "notes": "No external source code is copied and no external dependency is added."
+      "notes": "No external source code is copied and no external dependency is added. Reuse remains forbidden without license/source review and explicit product approval.",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "requires_safety_review": true,
+      "requires_schema_decision": false,
+      "requires_transport_authority": false
     }
+  ],
+  "status_taxonomy": [
+    "COMPLETE",
+    "CURRENT_BASELINE",
+    "READY_FOR_ENGINEERING_DESIGN",
+    "READY_FOR_SOURCE_RESEARCH",
+    "READY_FOR_PROTOTYPE",
+    "READY_FOR_USER_PRODUCT_DECISION",
+    "WAITING_FOR_USER_ARTIFACT",
+    "WAITING_FOR_HARDWARE_TEST",
+    "FUTURE_PHASE",
+    "NOT_STARTED",
+    "FORBIDDEN_BY_POLICY",
+    "OUT_OF_SCOPE",
+    "OFFICIAL_CORPUS_PRESENT_INITIAL",
+    "COMPLETE_USER_REPORTED_PASS_WITH_NUNCHUK_NOT_TESTED"
+  ],
+  "legacy_status_note": "Legacy BLOCKED_* labels in historical calibration packets may represent user input, product approval, source research, user artifacts, hardware testing, implementation deferral, or policy restriction. Current entries separate status from requirement booleans.",
+  "requirement_fields": [
+    "requires_user_domain_input",
+    "requires_user_product_approval",
+    "requires_source_research",
+    "requires_hardware_test",
+    "requires_user_artifact",
+    "requires_firmware_change",
+    "requires_safety_review",
+    "requires_schema_decision",
+    "requires_transport_authority"
   ]
 }

@@ -13,8 +13,8 @@ not change Senscope game-semantic source authority.
 
 ## Start Here
 
-- [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) - current baseline, blockers,
-  and non-claims.
+- [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) - current baseline, readiness
+  categories, approval gates, and non-claims.
 - [docs/ROADMAP.md](docs/ROADMAP.md) - clean long-term Glyph-side roadmap.
 - [docs/WORKFLOW.md](docs/WORKFLOW.md) - branch, inspection, test, merge, and
   result-recording workflow.

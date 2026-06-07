@@ -1,8 +1,8 @@
 {
   "schema_name": "glyph_next_user_action_handoff",
-  "schema_version": 1,
+  "schema_version": 2,
   "packet_date": "2026-06-06",
-  "status": "next_user_action_required",
+  "status": "next_user_action_required_for_specific_artifacts_priorities_or_approval",
   "configurator_status": "docs_tools_sequence_merged_to_configurator",
   "post_gfw3_baseline_path": "docs/calibration/glyph_post_gfw3_configurator_baseline_2026-06-06.md",
   "roadmap_next_work_index_path": "docs/calibration/glyph_roadmap_next_work_index_2026-06-06.md",
@@ -67,53 +67,71 @@
   "remaining_blocked_items": [
     {
       "item_id": "official_configurator_corpus_metadata",
-      "status": "OFFICIAL_CORPUS_PRESENT_METADATA_UNKNOWN",
+      "status": "WAITING_FOR_USER_ARTIFACT",
+      "requires_user_hardware": false,
+      "requires_user_artifacts": true,
+      "requires_source_authority_approval": false,
+      "requires_domain_input": false,
+      "required_next_action": "provide exact official configurator app version/source reference, exact capture timestamp, and exact push/download route metadata if available, or leave unknown"
+    },
+    {
+      "item_id": "engineering_source_research_prioritization",
+      "status": "READY_FOR_USER_PRODUCT_DECISION",
       "requires_user_hardware": false,
       "requires_user_artifacts": false,
       "requires_source_authority_approval": false,
       "requires_domain_input": false,
-      "required_next_action": "provide exact official configurator app version/source reference, exact capture timestamp, and exact push/download route metadata if desired"
+      "required_next_action": "choose or prioritize whether to start generated C++ constants path, export target contract, runtime-loaded config design, or transport source research"
     },
     {
       "item_id": "adapter_prewrite_source_authority",
-      "status": "BLOCKED_SOURCE_AUTHORITY",
+      "status": "READY_FOR_SOURCE_RESEARCH",
       "requires_user_hardware": false,
-      "requires_user_artifacts": true,
+      "requires_user_artifacts": false,
       "requires_source_authority_approval": true,
       "requires_domain_input": false,
-      "required_next_action": "official corpus exists; provide source-authority approval and explicit implementation approval before write-capable adapter or output generation"
+      "required_next_action": "source-authority research may proceed; product approval remains required before write-capable adapter or output generation implementation"
     },
     {
       "item_id": "physical_logical_rf5_resolution",
-      "status": "BLOCKED_USER_INPUT_OR_HARDWARE_OR_SOURCE_AUTHORITY",
-      "requires_user_hardware": true,
+      "status": "READY_FOR_SOURCE_RESEARCH",
+      "requires_user_hardware": false,
       "requires_user_artifacts": false,
-      "requires_source_authority_approval": true,
-      "requires_domain_input": true,
-      "required_next_action": "provide source authority, user-reported hardware result, or explicit user/domain input if the historical RF5 row must be resolved"
+      "requires_source_authority_approval": false,
+      "requires_domain_input": false,
+      "required_next_action": "provide source authority, user-reported hardware result, or explicit user/domain input only if the historical RF5 row must be resolved"
     },
     {
-      "item_id": "implementation_approval",
-      "status": "BLOCKED_IMPLEMENTATION_APPROVAL",
+      "item_id": "risky_implementation_approval",
+      "status": "READY_FOR_USER_PRODUCT_DECISION",
       "requires_user_hardware": false,
       "requires_user_artifacts": false,
       "requires_source_authority_approval": true,
-      "requires_domain_input": true,
-      "required_next_action": "explicit approval before any firmware behavior change, runtime-loaded config, WebSerial/device write, protobuf binary write, or external adapter output branch"
+      "requires_domain_input": false,
+      "required_next_action": "explicit product approval before firmware behavior implementation, runtime-loaded config implementation, WebSerial/device write, protobuf binary write, firmware flashing automation, external adapter output, or schema change"
+    },
+    {
+      "item_id": "hardware_test_result_after_artifact",
+      "status": "WAITING_FOR_HARDWARE_TEST",
+      "requires_user_hardware": true,
+      "requires_user_artifacts": false,
+      "requires_source_authority_approval": false,
+      "requires_domain_input": false,
+      "required_next_action": "provide hardware test results only after a firmware or candidate artifact exists"
     }
   ],
   "next_user_required_actions": [
     "provide_official_configurator_metadata_or_leave_unknown",
-    "provide_source_authority_approval_before_write_capable_work",
-    "provide_domain_input_or_hardware_source_evidence_for_rf5_if_resolution_is_needed",
-    "provide_explicit_implementation_approval_before_firmware_behavior_change"
+    "choose_or_prioritize_generated_cpp_export_runtime_config_or_transport_research",
+    "approve_before_risky_implementation_begins",
+    "provide_domain_input_only_if_rf5_ambiguity_must_be_resolved",
+    "provide_hardware_test_results_only_after_test_artifact_exists"
   ],
-  "future_result_branch": "glyph/gfw4-preservation-hardware-result",
-  "hardware_testing_now_required": true,
+  "hardware_testing_now_required": false,
   "corpus_artifacts_needed": false,
   "official_configurator_corpus_present": true,
   "official_configurator_metadata_needed": true,
-  "source_authority_or_domain_input_needed": true,
+  "source_authority_or_domain_input_needed": false,
   "non_claims": {
     "hardware_result_recorded_by_handoff": false,
     "preservation_hardware_pass_fail_claimed": false,
@@ -131,5 +149,83 @@
     "official_configurator_compatibility_claimed": false,
     "senscope_browser_app_changed": false,
     "smash_ultimate_game_semantics_changed": false
-  }
+  },
+  "user_not_blocking_routine_engineering": true,
+  "product_prioritization_needed": true,
+  "product_approval_required_before_risky_implementation": true,
+  "engineering_design_may_proceed_when_scoped": true,
+  "source_research_may_proceed_when_scoped": true,
+  "requirement_fields": [
+    "requires_user_domain_input",
+    "requires_user_product_approval",
+    "requires_source_research",
+    "requires_hardware_test",
+    "requires_user_artifact",
+    "requires_firmware_change",
+    "requires_safety_review",
+    "requires_schema_decision",
+    "requires_transport_authority"
+  ],
+  "remaining_action_items": [
+    {
+      "item_id": "official_configurator_corpus_metadata",
+      "status": "WAITING_FOR_USER_ARTIFACT",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": true,
+      "required_next_action": "provide exact official configurator app version/source reference, exact capture timestamp, and exact push/download route metadata if available, or leave unknown"
+    },
+    {
+      "item_id": "engineering_source_research_prioritization",
+      "status": "READY_FOR_USER_PRODUCT_DECISION",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "required_next_action": "choose or prioritize whether to start generated C++ constants path, export target contract, runtime-loaded config design, or transport source research"
+    },
+    {
+      "item_id": "adapter_prewrite_source_authority",
+      "status": "READY_FOR_SOURCE_RESEARCH",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "required_next_action": "source-authority research may proceed; product approval remains required before write-capable adapter or output generation implementation"
+    },
+    {
+      "item_id": "physical_logical_rf5_resolution",
+      "status": "READY_FOR_SOURCE_RESEARCH",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "required_next_action": "provide source authority, user-reported hardware result, or explicit user/domain input only if the historical RF5 row must be resolved"
+    },
+    {
+      "item_id": "risky_implementation_approval",
+      "status": "READY_FOR_USER_PRODUCT_DECISION",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": true,
+      "requires_source_research": true,
+      "requires_hardware_test": false,
+      "requires_user_artifact": false,
+      "required_next_action": "explicit product approval before firmware behavior implementation, runtime-loaded config implementation, WebSerial/device write, protobuf binary write, firmware flashing automation, external adapter output, or schema change"
+    },
+    {
+      "item_id": "hardware_test_result_after_artifact",
+      "status": "WAITING_FOR_HARDWARE_TEST",
+      "requires_user_domain_input": false,
+      "requires_user_product_approval": false,
+      "requires_source_research": false,
+      "requires_hardware_test": true,
+      "requires_user_artifact": false,
+      "required_next_action": "provide hardware test results only after a firmware or candidate artifact exists"
+    }
+  ]
 }
