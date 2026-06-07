@@ -156,6 +156,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_config_validation_report.py",
         ),
         step(
+            "runtime config semantics evaluator bridge",
+            "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
+        ),
+        step(
             "identity runtime generated config evaluator input",
             "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
         ),
@@ -346,6 +350,10 @@ def steps() -> list[Step]:
         step(
             "runtime-loaded config design",
             "tools/check_glyph_runtime_loaded_config_design.py",
+        ),
+        step(
+            "runtime-config semantics evaluator bridge",
+            "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
         ),
         step(
             "agentic sequence protocol",

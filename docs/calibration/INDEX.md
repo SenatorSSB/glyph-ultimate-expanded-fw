@@ -63,6 +63,19 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   transport blocker packet.
 - `glyph_protobuf_config_schema_research_packet_2026-06-03.md` - protobuf
   schema research packet.
+- `docs/runtime_config/runtime_config_semantics_evaluator_bridge.md` -
+  evaluator bridge design-only baseline oracle and negative corpus boundary for
+  source-backed docs/tools checks.
+- `docs/runtime_config/runtime_loaded_config_schema_design.md` - design-only
+  runtime-loaded config schema candidate.
+- `docs/runtime_config/firmware_interpreter_architecture_spec.md` - future
+  firmware interpreter architecture/spec boundary.
+- `docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json`
+  - metadata fixture for the bridge.
+- `docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json`
+  - source-backed preview fixture for the current baseline.
+- `docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json` -
+  offline negative corpus for bridge semantics.
 
 ## Adapter / Prewrite Gates
 

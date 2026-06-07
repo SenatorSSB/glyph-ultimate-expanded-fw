@@ -1,0 +1,125 @@
+{
+  "artifact_id": "runtime_config_semantics_evaluator_bridge_invalid_runtime_corpus_v1",
+  "schema_name": "glyph_runtime_config_semantics_invalid_corpus",
+  "corpus_version": 1,
+  "status": "docs_tools_negative_corpus",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "baseline_fixture": "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json",
+  "baseline_preview": "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
+  "required_invalid_classes": [
+    "macro_timing_automation_attempt",
+    "turbo_rapid_fire_attempt",
+    "arbitrary_script_attempt",
+    "hidden_device_write_behavior",
+    "missing_fallback_policy",
+    "out_of_range_coordinate",
+    "missing_table",
+    "unknown_role_without_source_authority",
+    "runtime_config_claiming_nunchuk_validation",
+    "runtime_config_claiming_webserial_device_write_authority"
+  ],
+  "cases": [
+    {
+      "case_id": "macro_timing_automation_attempt",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "macro_timing_automation_attempt",
+      "description": "A candidate config expresses macro execution or timing automation.",
+      "expected_error_codes": [
+        "forbidden:macro_timing_automation"
+      ]
+    },
+    {
+      "case_id": "turbo_rapid_fire_attempt",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "turbo_rapid_fire_attempt",
+      "description": "A candidate config expresses rapid-fire or press-hold automation.",
+      "expected_error_codes": [
+        "forbidden:turbo_rapid_fire"
+      ]
+    },
+    {
+      "case_id": "arbitrary_script_attempt",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "arbitrary_script_attempt",
+      "description": "A candidate config attempts to embed script-like directives.",
+      "expected_error_codes": [
+        "forbidden:arbitrary_script"
+      ]
+    },
+    {
+      "case_id": "hidden_device_write_behavior",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "hidden_device_write_behavior",
+      "description": "A candidate config hides transport or side-effect behavior.",
+      "expected_error_codes": [
+        "forbidden:hidden_device_write"
+      ]
+    },
+    {
+      "case_id": "missing_fallback_policy",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "missing_fallback_policy",
+      "description": "A candidate config omits fallback-to-known-good policy.",
+      "expected_error_codes": [
+        "invalid:missing_fallback_policy"
+      ]
+    },
+    {
+      "case_id": "out_of_range_coordinate",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "out_of_range_coordinate",
+      "description": "A table point uses a coordinate outside 0..255.",
+      "expected_error_codes": [
+        "invalid:out_of_range_coordinate"
+      ]
+    },
+    {
+      "case_id": "missing_table",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "missing_table",
+      "description": "A required table is absent.",
+      "expected_error_codes": [
+        "invalid:missing_table"
+      ]
+    },
+    {
+      "case_id": "unknown_role_without_source_authority",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "unknown_role_without_source_authority",
+      "description": "A role is introduced without source authority.",
+      "expected_error_codes": [
+        "invalid:unknown_role"
+      ]
+    },
+    {
+      "case_id": "runtime_config_claiming_nunchuk_validation",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "runtime_config_claiming_nunchuk_validation",
+      "description": "A candidate claims nunchuk validation authority without source support.",
+      "expected_error_codes": [
+        "forbidden:nunchuk_validation"
+      ]
+    },
+    {
+      "case_id": "runtime_config_claiming_webserial_device_write_authority",
+      "status": "invalid",
+      "declared_invalid": true,
+      "invalid_class": "runtime_config_claiming_webserial_device_write_authority",
+      "description": "A candidate claims WebSerial/device-write authority.",
+      "expected_error_codes": [
+        "forbidden:webserial_device_write"
+      ]
+    }
+  ]
+}

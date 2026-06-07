@@ -1,0 +1,223 @@
+{
+  "artifact_id": "runtime_config_semantics_bridge_current_baseline_v1",
+  "schema_name": "glyph_runtime_config_semantics_evaluator_bridge_baseline",
+  "status": "design_fixture_not_runtime_config",
+  "mode_scope": "MODE_ULTIMATE",
+  "hardware_status": "not_new_hardware_result",
+  "nunchuk_status": "preserved_but_not_hardware_validated",
+  "runtime_loaded_config": false,
+  "consumed_by_firmware": false,
+  "table_family": "StickPoint",
+  "expected_table_count": 27,
+  "expected_point_count_per_table": 9,
+  "source_baseline": [
+    {
+      "path": "src/modes/Ultimate.cpp",
+      "role": "current_baseline_source",
+      "sha256": "7911d4460428df789a43ff77e3180046bfee39321dc8aea4f997a517b8362fec"
+    },
+    {
+      "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "role": "generated_like_table_constants",
+      "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400"
+    },
+    {
+      "path": "tools/extract_glyph_identity_runtime_tables.py",
+      "role": "source_table_extractor",
+      "sha256": "bb7abee75f597dec9e6380f3e68e1bca1b4c026f0b407f51408277f6ace80dc2"
+    }
+  ],
+  "source_baseline_preview": {
+    "path": "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
+    "role": "design_preview_snapshot",
+    "sha256": "e5e1f1274ae3984d79981fd31624e3648cfb003ffc1864a48fe5c79b5157593e"
+  },
+  "table_summary": [
+    {
+      "name": "Default",
+      "source_symbol": "kDefaultTable",
+      "point_count": 9
+    },
+    {
+      "name": "ModeDefault",
+      "source_symbol": "kModeDefaultTable",
+      "point_count": 9
+    },
+    {
+      "name": "X1",
+      "source_symbol": "kX1Table",
+      "point_count": 9
+    },
+    {
+      "name": "X2",
+      "source_symbol": "kX2Table",
+      "point_count": 9
+    },
+    {
+      "name": "MX1",
+      "source_symbol": "kMX1Table",
+      "point_count": 9
+    },
+    {
+      "name": "MX2",
+      "source_symbol": "kMX2Table",
+      "point_count": 9
+    },
+    {
+      "name": "Y1",
+      "source_symbol": "kY1Table",
+      "point_count": 9
+    },
+    {
+      "name": "MY1",
+      "source_symbol": "kMY1Table",
+      "point_count": 9
+    },
+    {
+      "name": "LayerNormalX",
+      "source_symbol": "kLayerNormalXTable",
+      "point_count": 9
+    },
+    {
+      "name": "MLayerNormalX",
+      "source_symbol": "kMLayerNormalXTable",
+      "point_count": 9
+    },
+    {
+      "name": "LayerFlipper",
+      "source_symbol": "kLayerFlipperTable",
+      "point_count": 9
+    },
+    {
+      "name": "MLayerFlipper",
+      "source_symbol": "kMLayerFlipperTable",
+      "point_count": 9
+    },
+    {
+      "name": "Y1Tilt1",
+      "source_symbol": "kY1Tilt1Table",
+      "point_count": 9
+    },
+    {
+      "name": "MY1Tilt1",
+      "source_symbol": "kMY1Tilt1Table",
+      "point_count": 9
+    },
+    {
+      "name": "Y1LayerFlipper",
+      "source_symbol": "kY1LayerFlipperTable",
+      "point_count": 9
+    },
+    {
+      "name": "MY1LayerFlipper",
+      "source_symbol": "kMY1LayerFlipperTable",
+      "point_count": 9
+    },
+    {
+      "name": "Y1LayerNormalX",
+      "source_symbol": "kY1LayerNormalXTable",
+      "point_count": 9
+    },
+    {
+      "name": "MY1LayerNormalX",
+      "source_symbol": "kMY1LayerNormalXTable",
+      "point_count": 9
+    },
+    {
+      "name": "Tilt1",
+      "source_symbol": "kTilt1Table",
+      "point_count": 9
+    },
+    {
+      "name": "Tilt2",
+      "source_symbol": "kTilt2Table",
+      "point_count": 9
+    },
+    {
+      "name": "Tilt3",
+      "source_symbol": "kTilt3Table",
+      "point_count": 9
+    },
+    {
+      "name": "Tilt1Minus41",
+      "source_symbol": "kTilt1Minus41Table",
+      "point_count": 9
+    },
+    {
+      "name": "RT1RF4Custom",
+      "source_symbol": "kRT1RF4CustomTable",
+      "point_count": 9
+    },
+    {
+      "name": "MTilt1",
+      "source_symbol": "kMTilt1Table",
+      "point_count": 9
+    },
+    {
+      "name": "MTilt2",
+      "source_symbol": "kMTilt2Table",
+      "point_count": 9
+    },
+    {
+      "name": "MTilt3",
+      "source_symbol": "kMTilt3Table",
+      "point_count": 9
+    },
+    {
+      "name": "Lt1LowMagnitude",
+      "source_symbol": "kLt1LowMagnitudeTable",
+      "point_count": 9
+    }
+  ],
+  "config_owned_candidate_data": [
+    "table_values",
+    "table_names",
+    "role_metadata_if_source_backed",
+    "provenance",
+    "versioning",
+    "checksums",
+    "future_allowed_constants_only_if_source_backed"
+  ],
+  "firmware_owned_semantics": [
+    "evaluator_phase_order",
+    "priority_rules",
+    "role_resolution",
+    "table_selection_logic",
+    "overrides",
+    "fallback_behavior",
+    "validation_policy",
+    "safety_constraints"
+  ],
+  "forbidden_config_semantics": [
+    "macros",
+    "turbo",
+    "timing_automation",
+    "arbitrary_scripting",
+    "one_shot_behavior",
+    "toggles",
+    "history_dependent_logic",
+    "hidden_device_write",
+    "transport_authority"
+  ],
+  "future_gates": [
+    "source_authority_gate",
+    "product_approval_gate",
+    "schema_decision_gate",
+    "firmware_implementation_gate",
+    "build_gate",
+    "hardware_plan_result_gate",
+    "transport_authority_gate",
+    "rollback_recovery_gate",
+    "safety_policy_gate"
+  ],
+  "caveats": [
+    "not_runtime_loaded_config",
+    "not_consumed_by_firmware",
+    "not_firmware_source",
+    "not_device_write",
+    "not_protobuf_binary_write",
+    "not_flashing_automation",
+    "not_nunchuk_validation",
+    "no_hardware_test_required_for_steps_1_through_8"
+  ]
+}
