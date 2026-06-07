@@ -32,9 +32,9 @@ external source code reuse.
 
 ## Current blockers
 
-- missing export corpus artifacts
-- missing official configurator/source authority
-- non-authoritative external observations
+- official corpus exists, but exact official configurator metadata is still missing
+- missing official configurator/source authority for write behavior
+- non-authoritative external observations remain quarantined
 - active-profile round-trip unsafe
 - runtime-owned behavior not safely represented in external JSON
 - WebSerial/device write blocked
@@ -47,7 +47,7 @@ external source code reuse.
 ## Allowed next actions
 
 - docs/tools-only source audit
-- corpus provision
+- official corpus metadata provision
 - explicit user approval after source authority exists
 
 ## Forbidden actions
@@ -78,6 +78,12 @@ external source code reuse.
 - `docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md`
 - `docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json`
 - `tools/check_glyph_export_corpus_final_blocker_status.py`
+- `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json`
+- `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md`
+- `tools/check_glyph_official_configurator_export_corpus.py`
+- `docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md`
+- `docs/calibration/fixtures/glyph_external_remapper_misattribution_correction_2026-06-06.json`
+- `tools/check_glyph_external_remapper_misattribution_correction.py`
 - `docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md`
 - `docs/calibration/fixtures/glyph_adapter_prewrite_blocker_matrix_2026-06-06.json`
 - `tools/check_glyph_adapter_prewrite_blocker_matrix.py`
@@ -124,3 +130,7 @@ external source code reuse.
 - No external source code reuse is approved here.
 - No official configurator compatibility claim is made here.
 - No hardware validation claim is made here.
+
+The official configurator corpus exists and is primary export-shape evidence,
+but exact configurator version/source reference, write-behavior source
+authority, and explicit implementation approval remain missing.

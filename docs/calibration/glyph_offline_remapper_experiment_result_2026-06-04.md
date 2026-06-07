@@ -1,5 +1,19 @@
 # Glyph Offline Remapper Experiment Result - 2026-06-04
 
+## CORRECTION / SOURCE MISATTRIBUTION
+
+User clarification on 2026-06-06 supersedes the source attribution in this
+historical packet. The user did not use or touch the custom external remapper
+repo/app for `GlyphUserProfilesDefault.json` or
+`GlyphUserProfilesBackAndForth.json`. Those files are official Glyph
+configurator app artifacts and are now captured under
+`docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/`.
+
+This historical external/offline remapper packet is quarantined as
+non-authoritative and pending correction unless independently source-backed. It
+must not be used as primary corpus evidence or treated as user-executed external
+remapper evidence for those files.
+
 ## Purpose and scope
 
 This records a manual no-device external-remapper import/export experiment using the external app at `https://lyseste.com/glyph-remapper/`.

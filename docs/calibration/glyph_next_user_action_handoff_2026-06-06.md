@@ -3,8 +3,11 @@
 ## Purpose and scope
 
 This packet closes the GFW4 docs/tools supervisor sequence and identifies the
-next meaningful actions that require the user, corpus artifacts, source
-authority, domain input, or implementation approval. It also records the export corpus final blocker/status consolidation, which records that export corpus capture remains blocked by missing real corpus artifacts, so the current corpus blocker state is visible in the handoff.
+next meaningful actions that require the user, source authority, domain input,
+official configurator metadata, or implementation approval. It also records the
+export corpus final blocker/status consolidation, which now records that the
+official configurator corpus exists while write-capable implementation remains
+blocked.
 
 Status: `next_user_action_required`.
 
@@ -35,21 +38,24 @@ nunchuk remains NOT_TESTED / unvalidated / unavailable because the controller
 has no nunchuk port available out of the box.
 Nunchuk hardware validation is not claimed.
 Export corpus final blocker/status consolidation records that export corpus
-capture remains blocked by missing real corpus artifacts.
+capture now has two user-provided official configurator JSON fixtures. Exact
+configurator version/source reference, exact capture timestamp, and exact
+push/download route details remain unknown.
 
 ## Remaining blocked items
 
 | Item | Current state | Required next input |
 | --- | --- | --- |
-| Export corpus capture | `blocked_missing_real_corpus_artifacts` | Real matched-version export corpus artifacts, manifest, hashes, and provenance. |
-| Write-capable adapter / prewrite behavior | `adapter_prewrite_blocked` | Corpus, source authority, license/code-reuse review, transport/runtime decisions, and explicit implementation approval. |
+| Export corpus metadata | `official_configurator_corpus_present_initial` | Exact official configurator app version/source reference, exact capture timestamp, and exact push/download route details if desired. |
+| Write-capable adapter / prewrite behavior | `adapter_prewrite_blocked` | Official corpus exists; source authority for write behavior, license/code-reuse review, transport/runtime decisions, and explicit implementation approval remain required. |
 | Physical/logical/RF5 ambiguity | `requires_source_authority_hardware_result_or_user_domain_input` | Source authority, user-reported hardware result, or explicit user/domain input if the historical RF5 row must be resolved. |
 | Runtime-loaded config / WebSerial / device write / protobuf binary write / external adapter output | Forbidden without future approval | Source authority and explicit implementation approval before any branch may begin. |
 
 ## Exact next user-required actions
 
-1. Provide real export corpus artifacts with a filled manifest, fixture hashes,
-   and matched-version provenance, or leave export corpus capture blocked.
+1. Provide exact official configurator app version/source reference and exact
+   capture timestamp/route metadata if desired, or leave those metadata fields
+   unknown.
 2. Provide source-authority approval before any write-capable adapter,
    runtime-loaded config, WebSerial/device write, protobuf binary write, or
    external adapter output work is considered.
@@ -90,6 +96,10 @@ Recommended future preservation result branch:
 - `docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md`
 - `docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json`
 - `tools/check_glyph_export_corpus_final_blocker_status.py`
+- `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json`
+- `tools/check_glyph_official_configurator_export_corpus.py`
+- `docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md`
+- `tools/check_glyph_external_remapper_misattribution_correction.py`
 - `docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md`
 - `docs/calibration/glyph_adapter_prewrite_implementation_gate_2026-06-06.md`
 - `docs/calibration/fixtures/glyph_adapter_prewrite_implementation_gate_2026-06-06.json`
@@ -99,6 +109,8 @@ Recommended future preservation result branch:
 ## Stop boundary
 
 The autonomous sequence stops here because the next meaningful work requires at
-least one of: user hardware execution, user-provided corpus artifacts,
-source-authority approval, explicit domain input, or explicit implementation
-approval. No firmware implementation should start from this handoff alone.
+least one of: official configurator metadata, source-authority approval,
+explicit domain input, or explicit implementation approval. No firmware
+implementation should start from this handoff alone.
+
+No firmware implementation should start from this handoff alone.

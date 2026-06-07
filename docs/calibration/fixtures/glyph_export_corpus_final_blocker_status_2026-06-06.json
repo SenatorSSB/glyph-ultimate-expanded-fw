@@ -2,8 +2,8 @@
   "schema_name": "glyph_export_corpus_final_blocker_status",
   "schema_version": 1,
   "packet_date": "2026-06-06",
-  "status": "blocked_missing_real_corpus_artifacts",
-  "corpus_present": false,
+  "status": "official_configurator_corpus_present_initial",
+  "corpus_present": true,
   "completion_allowed": false,
   "source_protocol_paths": [
     "docs/calibration/glyph_profile_config_export_corpus_protocol_2026-05-26.md",
@@ -12,34 +12,43 @@
     "docs/calibration/export_corpus/README.md",
     "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
     "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
-    "tools/check_glyph_export_corpus_readiness_status.py"
+    "tools/check_glyph_export_corpus_readiness_status.py",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md",
+    "tools/check_glyph_official_configurator_export_corpus.py",
+    "docs/calibration/glyph_official_configurator_corpus_diff_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_official_configurator_corpus_diff_2026-06-06.json",
+    "tools/check_glyph_official_configurator_corpus_diff.py",
+    "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_external_remapper_misattribution_correction_2026-06-06.json",
+    "tools/check_glyph_external_remapper_misattribution_correction.py"
   ],
   "missing_artifact_classes": [
-    "filled_manifest_json",
-    "captured_export_json_fixtures",
-    "fixture_sha256_hashes",
-    "glyph_repo_commit_reference",
-    "firmware_source_commit_reference",
     "configurator_source_reference",
     "configurator_version_label",
-    "device_model_or_capture_context",
-    "expected_semantic_feature_labels",
-    "known_unknowns"
+    "exact_capture_timestamp",
+    "exact_push_download_route_details",
+    "write_behavior_source_authority",
+    "implementation_approval"
   ],
   "required_future_artifacts": [
-    "filled_manifest_json",
-    "captured_export_json_fixtures",
-    "fixture_sha256_hashes",
-    "glyph_repo_commit_reference",
-    "firmware_source_commit_reference",
     "configurator_source_reference",
     "configurator_version_label",
-    "device_model_or_capture_context",
-    "expected_semantic_feature_labels",
-    "known_unknowns"
+    "exact_capture_timestamp",
+    "exact_push_download_route_details",
+    "write_behavior_source_authority",
+    "implementation_approval"
   ],
+  "official_configurator_corpus": {
+    "status": "present_initial",
+    "corpus_id": "official_glyph_configurator_2026-06-06",
+    "manifest": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "fixture_count": 2,
+    "source_classification": "primary_official_configurator_corpus",
+    "not_external_remapper": true
+  },
   "non_claims": {
-    "official_configurator_authority_claimed": false,
+    "official_configurator_export_shape_evidence_claimed": true,
     "webserial_write_implemented": false,
     "device_write_implemented": false,
     "runtime_loaded_config_implemented": false,

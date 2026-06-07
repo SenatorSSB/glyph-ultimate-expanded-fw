@@ -164,7 +164,7 @@
     {
       "item_id": "export_corpus_capture",
       "label": "Export corpus capture",
-      "current_status": "READY_CORPUS_CAPTURE",
+      "current_status": "OFFICIAL_CORPUS_PRESENT_INITIAL",
       "category": "corpus",
       "evidence_paths": [
         "docs/calibration/glyph_profile_config_export_corpus_protocol_2026-05-26.md",
@@ -172,20 +172,27 @@
         "tools/check_glyph_profile_config_export_corpus.py",
         "docs/calibration/glyph_export_corpus_readiness_status_2026-06-06.md",
         "docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json",
-        "tools/check_glyph_export_corpus_readiness_status.py"
+        "tools/check_glyph_export_corpus_readiness_status.py",
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md",
+        "tools/check_glyph_official_configurator_export_corpus.py",
+        "docs/calibration/fixtures/glyph_official_configurator_corpus_diff_2026-06-06.json",
+        "tools/check_glyph_official_configurator_corpus_diff.py"
       ],
-      "allowed_next_action": "capture_real_matched_version_export_corpus_if_artifacts_are_available",
+      "allowed_next_action": "provide_missing_official_configurator_metadata_if_available",
       "blocked_by": [
-        "missing_real_corpus_manifest",
-        "missing_real_corpus_fixtures"
+        "missing_configurator_version_label",
+        "missing_configurator_source_reference",
+        "missing_exact_capture_timestamp",
+        "missing_exact_push_download_route_details"
       ],
       "requires_user_input": false,
       "requires_hardware": false,
       "requires_source_audit": false,
-      "requires_corpus": true,
+      "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Protocol/framework exists; readiness status records blocked_missing_real_corpus_artifacts with corpus_present=false and completion_allowed=false. Completion requires real captured corpus artifacts."
+      "notes": "Official configurator corpus exists with two user-provided fixture files. Exact configurator version/source reference, exact capture timestamp, and exact push/download route details remain unknown."
     },
     {
       "item_id": "export_corpus_final_blocker_status",
@@ -202,7 +209,11 @@
         "docs/calibration/glyph_profile_config_export_corpus_protocol_2026-05-26.md",
         "docs/calibration/glyph_profile_config_export_corpus_manifest_TEMPLATE.json",
         "tools/check_glyph_profile_config_export_corpus.py",
-        "docs/calibration/export_corpus/README.md"
+        "docs/calibration/export_corpus/README.md",
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+        "tools/check_glyph_official_configurator_export_corpus.py",
+        "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+        "tools/check_glyph_external_remapper_misattribution_correction.py"
       ],
       "allowed_next_action": "preserve_with_docs_tools_only",
       "blocked_by": [],
@@ -212,7 +223,7 @@
       "requires_corpus": false,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Final blocker packet records that export corpus capture remains blocked by missing real corpus artifacts; the corpus root still contains only README guidance and no real manifest or fixture set. Corpus capture itself stays READY_CORPUS_CAPTURE until real matched-version artifacts are provided."
+      "notes": "Final blocker packet records official_configurator_corpus_present_initial with corpus_present=true and completion_allowed=false. Implementation remains blocked."
     },
     {
       "item_id": "adapter_policy_prewrite_validation",
@@ -230,7 +241,7 @@
       "allowed_next_action": "maintain_blocker_matrix_and_read_only_policy_checkers",
       "blocked_by": [
         "write_capable_adapter_not_approved",
-        "missing_export_corpus",
+        "official_corpus_metadata_missing",
         "missing_source_authority",
         "active_profile_round_trip_unsafe",
         "webserial_device_write_blocked",
@@ -256,6 +267,10 @@
         "docs/calibration/fixtures/glyph_adapter_prewrite_implementation_gate_2026-06-06.json",
         "tools/check_glyph_adapter_prewrite_implementation_gate.py",
         "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+        "tools/check_glyph_official_configurator_export_corpus.py",
+        "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+        "tools/check_glyph_external_remapper_misattribution_correction.py",
         "tools/check_glyph_export_corpus_final_blocker_status.py",
         "docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md",
         "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
@@ -279,11 +294,11 @@
         "docs/calibration/fixtures/glyph_preimplementation_go_nogo_index_2026-05-28.json",
         "tools/check_glyph_preimplementation_go_nogo_index.py"
       ],
-      "allowed_next_action": "docs_tools_only_source_audit_or_corpus_provision",
+      "allowed_next_action": "docs_tools_only_source_audit_or_official_corpus_metadata",
       "blocked_by": [
-        "missing_export_corpus",
+        "official_corpus_present_metadata_missing",
         "missing_official_configurator_source_authority",
-        "external_observations_non_authoritative",
+        "external_observations_quarantined_non_authoritative",
         "active_profile_round_trip_unsafe",
         "runtime_owned_behavior_not_safely_represented_in_external_json",
         "webserial_device_write_blocked",
@@ -299,7 +314,7 @@
       "requires_corpus": true,
       "requires_firmware_change": false,
       "forbidden_without_future_approval": false,
-      "notes": "Write-capable adapter implementation is not approved unless all blockers are cleared. implementation_allowed=false. Docs/tools-only source audit and corpus provision remain allowed, and explicit user approval after source authority exists is still required."
+      "notes": "Write-capable adapter implementation is not approved unless all blockers are cleared. implementation_allowed=false. Official corpus exists, but exact metadata and write-behavior source authority remain missing. Explicit user approval after source authority exists is still required."
     },
     {
       "item_id": "physical_logical_mapping_rf5_transcription",

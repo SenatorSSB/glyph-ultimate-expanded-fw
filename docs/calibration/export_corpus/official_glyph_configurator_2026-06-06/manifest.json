@@ -1,0 +1,45 @@
+{
+  "corpus_id": "official_glyph_configurator_2026-06-06",
+  "captured_at": "2026-06-06",
+  "captured_by": "Rasmus / user-provided",
+  "source_kind": "official_glyph_configurator_user_provided_export",
+  "source_classification": "primary_official_configurator_corpus",
+  "glyph_repo_commit": "4f849a524a6c03d63b47166ae863ec13a76254c2",
+  "firmware_source_commit": "4f849a524a6c03d63b47166ae863ec13a76254c2",
+  "configurator_source_reference": "UNKNOWN_NOT_PROVIDED",
+  "configurator_version_label": "UNKNOWN_NOT_PROVIDED",
+  "device_model": "Glyph MK6",
+  "hardware_required": true,
+  "capture_route": {
+    "default_profiles": "official Glyph configurator app default profiles JSON, user-provided",
+    "back_and_forth_custom_profile": "custom profile pushed through and downloaded/exported back, user-provided",
+    "exact_push_download_route_details": "UNKNOWN_NOT_FULLY_RECORDED"
+  },
+  "fixture_files": [
+    "fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+    "fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json"
+  ],
+  "fixture_roles": [
+    "default_profiles",
+    "back_and_forth_custom_profile"
+  ],
+  "fixture_sha256": {
+    "fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json": "2d24324928f9c0292e3fce74f02083a740272eeb7a271437be10b7b4f6bf025e",
+    "fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "known_unknowns": [
+    "exact official configurator app version",
+    "exact capture timestamp",
+    "exact push/download route details"
+  ],
+  "explicit_non_claims": {
+    "not_external_remapper": true,
+    "not_webserial_device_write_implementation": true,
+    "not_runtime_loaded_config_implementation": true,
+    "not_protobuf_binary_write": true,
+    "not_firmware_behavior_change": true,
+    "not_active_profile_artifact_change": true,
+    "not_nunchuk_validation": true,
+    "not_universal_official_compatibility_claim": true
+  }
+}

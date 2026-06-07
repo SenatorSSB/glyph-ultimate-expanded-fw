@@ -3,16 +3,18 @@
 ## Purpose and scope
 
 This packet consolidates the current export-corpus blocker state for the Glyph
-profile/config export workstream.
+profile/config export workstream after the official configurator corpus source
+correction.
 
-It is docs/tools-only. It does not invent corpus artifacts, does not ingest
-exports, does not implement adapter output, and does not change firmware,
-profile artifacts, or transport behavior.
+It is docs/tools-only. It ingests the two user-provided official Glyph
+configurator JSON exports into the export corpus, but it does not implement
+adapter output and does not change firmware, profile artifacts, or transport
+behavior.
 
 Current status:
 
-- `blocked_missing_real_corpus_artifacts`
-- Corpus present: false
+- `official_configurator_corpus_present_initial`
+- Corpus present: true
 - Completion allowed: false
 
 ## Current source protocol inputs
@@ -34,69 +36,76 @@ boundary:
   `docs/calibration/fixtures/glyph_export_corpus_readiness_status_2026-06-06.json`
 - Export corpus readiness checker:
   `tools/check_glyph_export_corpus_readiness_status.py`
+- Official configurator corpus manifest:
+  `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json`
+- Official configurator corpus notes:
+  `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md`
+- Official configurator corpus checker:
+  `tools/check_glyph_official_configurator_export_corpus.py`
+- Official configurator structural diff:
+  `docs/calibration/glyph_official_configurator_corpus_diff_2026-06-06.md`
+- Official configurator structural diff fixture:
+  `docs/calibration/fixtures/glyph_official_configurator_corpus_diff_2026-06-06.json`
+- External-remapper misattribution correction:
+  `docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md`
 
-The export-corpus directory currently contains only the README guidance and no
-real `manifest.json` corpus capture.
+The export-corpus directory now contains a real official configurator corpus
+manifest and two user-provided official configurator JSON fixture files.
 
 ## What counts as real corpus
 
-Real corpus means matched-version export captures written to
+Real corpus means export captures written to
 `docs/calibration/export_corpus/<corpus_id>/` with a filled `manifest.json` and
 listed fixture files that actually exist on disk.
 
 Template files, README guidance, repo examples, generated candidate payloads,
 and external observations do not count as captured corpus.
-Template files, README guidance, repo examples, generated candidate payloads, and external observations do not count as captured corpus.
+
+The official configurator corpus exists with two user-provided fixture files:
+
+- `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json`
+- `docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json`
 
 ## What is still missing
 
-The current repository state is missing these artifact classes:
+The current repository state is no longer missing real export corpus artifacts.
+The remaining missing or unresolved metadata/blockers are:
 
-- `filled_manifest_json`
-- `captured_export_json_fixtures`
-- `fixture_sha256_hashes`
-- `glyph_repo_commit_reference`
-- `firmware_source_commit_reference`
 - `configurator_source_reference`
 - `configurator_version_label`
-- `device_model_or_capture_context`
-- `expected_semantic_feature_labels`
-- `known_unknowns`
+- exact capture timestamp
+- exact push/download route details
+- write-behavior source authority
+- explicit implementation approval
 
 ## Required future artifacts
 
-Future corpus capture must provide:
+Future work should provide or confirm:
 
-- one or more real corpus subdirectories under
-  `docs/calibration/export_corpus/<corpus_id>/`;
-- a filled `manifest.json` per corpus directory;
-- captured export JSON fixtures under `fixtures/`;
-- SHA-256 hashes for every captured export file;
-- explicit `glyph_repo_commit` provenance;
-- explicit firmware source commit provenance;
 - explicit configurator source reference and version label;
-- explicit device model or capture context;
-- explicit expected semantic feature labels;
-- explicit known unknowns instead of inferred behavior claims.
+- exact capture timestamp and push/download route details if needed;
+- explicit source authority for any write-capable behavior;
+- explicit user approval before adapter implementation.
 
 ## Required hashes and provenance
 
-Any future complete corpus must record:
+The current official configurator corpus records:
 
 - SHA-256 for every captured export fixture;
 - the manifest path and every listed fixture path;
 - `glyph_repo_commit`;
 - `firmware_source_commit`;
-- `configurator_source_reference`;
-- `configurator_version_label`;
 - `device_model`;
 - whether hardware was required for capture;
-- expected semantic feature labels;
 - unresolved unknowns instead of behavior inferences.
+
+The corpus still records `configurator_source_reference` and
+`configurator_version_label` as `UNKNOWN_NOT_PROVIDED`.
 
 ## Explicit non-claims
 
-- No official configurator authority claim is made here unless source-backed.
+- The official configurator corpus is source-backed as user-provided official
+  configurator export-shape evidence.
 - No device write or WebSerial claim is made here.
 - No runtime-loaded config is implemented here.
 - No adapter implementation is made here.
@@ -108,8 +117,9 @@ Any future complete corpus must record:
 
 ## Future branch policy
 
-Future export-corpus capture may proceed only when real corpus artifacts are
-available and the protocol can be followed without inventing provenance.
+Future export-corpus expansion may proceed when additional real corpus artifacts
+or missing metadata are available and the protocol can be followed without
+inventing provenance.
 
 If artifact source, version provenance, or capture interpretation is unclear,
 stop and ask for the missing corpus input instead of recording completion.

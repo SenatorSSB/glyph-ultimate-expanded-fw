@@ -35,7 +35,7 @@ EXPECTED_TOP_LEVEL = {
 }
 
 REQUIRED_BLOCKER_IDS = {
-    "missing_export_corpus",
+    "official_corpus_present_metadata_missing",
     "missing_official_configurator_source_authority",
     "external_observations_non_authoritative",
     "active_profile_round_trip_unsafe",
@@ -50,7 +50,7 @@ REQUIRED_BLOCKER_IDS = {
 
 REQUIRED_UNBLOCK_REQUIREMENTS = {
     "docs/tools-only source audit",
-    "corpus provision",
+    "official corpus exists; missing metadata provision",
     "explicit user approval after source authority exists",
     "official source authority for configurator, packet framing, schema, and transport",
     "active-profile round-trip strategy",
@@ -60,7 +60,7 @@ REQUIRED_UNBLOCK_REQUIREMENTS = {
 
 REQUIRED_ALLOWED_NEXT_ACTIONS = {
     "docs/tools-only source audit",
-    "corpus provision",
+    "official corpus metadata provision",
     "explicit user approval after source authority exists",
 }
 
@@ -80,6 +80,12 @@ REQUIRED_SOURCE_PACKET_PATHS = {
     "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
     "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
     "tools/check_glyph_export_corpus_final_blocker_status.py",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md",
+    "tools/check_glyph_official_configurator_export_corpus.py",
+    "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_external_remapper_misattribution_correction_2026-06-06.json",
+    "tools/check_glyph_external_remapper_misattribution_correction.py",
     "docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md",
     "docs/calibration/fixtures/glyph_adapter_prewrite_blocker_matrix_2026-06-06.json",
     "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
@@ -129,8 +135,9 @@ REQUIRED_DOC_PHRASES = (
     "implementation_allowed: false",
     "write-capable adapter implementation is not approved unless all blockers are cleared",
     "docs/tools-only source audit",
-    "corpus provision",
+    "official corpus metadata provision",
     "explicit user approval after source authority exists",
+    "The official configurator corpus exists and is primary export-shape evidence",
     "external source code reuse",
     "official compatibility claim",
     "No adapter output is generated here",
@@ -139,9 +146,10 @@ REQUIRED_DOC_PHRASES = (
 
 SOURCE_CHECKERS = (
     "tools/check_glyph_export_corpus_final_blocker_status.py",
+    "tools/check_glyph_official_configurator_export_corpus.py",
+    "tools/check_glyph_external_remapper_misattribution_correction.py",
     "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
     "tools/check_glyph_configurator_compatibility_source_registry.py",
-    "tools/check_glyph_external_remapper_source_audit_readiness_gate.py",
     "tools/check_glyph_offline_remapper_adapter_blocker_escalation.py",
     "tools/check_glyph_offline_remapper_export_loss_gate.py",
     "tools/check_glyph_webserial_transport_blocker_packet.py",

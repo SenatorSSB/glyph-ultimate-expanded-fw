@@ -66,13 +66,13 @@
   ],
   "remaining_blocked_items": [
     {
-      "item_id": "export_corpus_provision",
-      "status": "BLOCKED_CORPUS",
+      "item_id": "official_configurator_corpus_metadata",
+      "status": "OFFICIAL_CORPUS_PRESENT_METADATA_UNKNOWN",
       "requires_user_hardware": false,
-      "requires_user_artifacts": true,
+      "requires_user_artifacts": false,
       "requires_source_authority_approval": false,
       "requires_domain_input": false,
-      "required_next_action": "user provides real matched-version export corpus artifacts, manifest, hashes, and provenance"
+      "required_next_action": "provide exact official configurator app version/source reference, exact capture timestamp, and exact push/download route metadata if desired"
     },
     {
       "item_id": "adapter_prewrite_source_authority",
@@ -81,7 +81,7 @@
       "requires_user_artifacts": true,
       "requires_source_authority_approval": true,
       "requires_domain_input": false,
-      "required_next_action": "source-authority approval and explicit implementation approval before write-capable adapter or output generation"
+      "required_next_action": "official corpus exists; provide source-authority approval and explicit implementation approval before write-capable adapter or output generation"
     },
     {
       "item_id": "physical_logical_rf5_resolution",
@@ -103,14 +103,16 @@
     }
   ],
   "next_user_required_actions": [
-    "provide_export_corpus_artifacts_or_leave_blocked",
+    "provide_official_configurator_metadata_or_leave_unknown",
     "provide_source_authority_approval_before_write_capable_work",
     "provide_domain_input_or_hardware_source_evidence_for_rf5_if_resolution_is_needed",
     "provide_explicit_implementation_approval_before_firmware_behavior_change"
   ],
   "future_result_branch": "glyph/gfw4-preservation-hardware-result",
   "hardware_testing_now_required": true,
-  "corpus_artifacts_needed": true,
+  "corpus_artifacts_needed": false,
+  "official_configurator_corpus_present": true,
+  "official_configurator_metadata_needed": true,
   "source_authority_or_domain_input_needed": true,
   "non_claims": {
     "hardware_result_recorded_by_handoff": false,

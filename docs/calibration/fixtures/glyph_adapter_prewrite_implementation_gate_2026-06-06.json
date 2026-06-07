@@ -16,14 +16,16 @@
   "active_profile_round_trip_safe": false,
   "blockers": [
     {
-      "blocker_id": "missing_export_corpus",
+      "blocker_id": "official_corpus_present_metadata_missing",
       "status": "BLOCKED",
       "source_packet_paths": [
         "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
         "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
-        "tools/check_glyph_export_corpus_final_blocker_status.py"
+        "tools/check_glyph_export_corpus_final_blocker_status.py",
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+        "tools/check_glyph_official_configurator_export_corpus.py"
       ],
-      "required_future_resolution": "provide real matched-version corpus artifacts with manifest, fixture hashes, and provenance",
+      "required_future_resolution": "official corpus exists; provide exact configurator version/source reference and capture route details before broader compatibility claims",
       "prevents": [
         "official compatibility claim",
         "write-capable adapter approval"
@@ -39,7 +41,7 @@
         "docs/calibration/glyph_import_export_compatibility_validator_2026-06-03.md",
         "tools/check_glyph_import_export_compatibility.py"
       ],
-      "required_future_resolution": "source-authority approval and explicit official source references",
+      "required_future_resolution": "source-authority approval, exact official configurator version/source reference, and explicit write-behavior source references",
       "prevents": [
         "official configurator compatibility claim",
         "protobuf binary write",
@@ -51,11 +53,14 @@
       "status": "BLOCKED",
       "source_packet_paths": [
         "docs/calibration/glyph_configurator_compatibility_source_registry_2026-06-03.md",
+        "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+        "docs/calibration/fixtures/glyph_external_remapper_misattribution_correction_2026-06-06.json",
+        "tools/check_glyph_external_remapper_misattribution_correction.py",
         "docs/calibration/glyph_external_remapper_source_audit_readiness_gate_2026-06-04.md",
         "docs/calibration/fixtures/glyph_external_remapper_source_audit_readiness_gate_2026-06-04.json",
         "tools/check_glyph_external_remapper_source_audit_readiness_gate.py"
       ],
-      "required_future_resolution": "source audit may record observations, but promotion requires explicit approval",
+      "required_future_resolution": "external-remapper observations remain quarantined/non-authoritative unless independently source-backed and explicitly approved",
       "prevents": [
         "external source authority promotion"
       ]
@@ -188,7 +193,7 @@
   ],
   "unblock_requirements": [
     "docs/tools-only source audit",
-    "corpus provision",
+    "official corpus exists; missing metadata provision",
     "explicit user approval after source authority exists",
     "official source authority for configurator, packet framing, schema, and transport",
     "active-profile round-trip strategy",
@@ -197,7 +202,7 @@
   ],
   "allowed_next_actions": [
     "docs/tools-only source audit",
-    "corpus provision",
+    "official corpus metadata provision",
     "explicit user approval after source authority exists"
   ],
   "forbidden_actions": [
@@ -215,6 +220,12 @@
     "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
     "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
     "tools/check_glyph_export_corpus_final_blocker_status.py",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/notes.md",
+    "tools/check_glyph_official_configurator_export_corpus.py",
+    "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+    "docs/calibration/fixtures/glyph_external_remapper_misattribution_correction_2026-06-06.json",
+    "tools/check_glyph_external_remapper_misattribution_correction.py",
     "docs/calibration/glyph_adapter_prewrite_blocker_matrix_2026-06-06.md",
     "docs/calibration/fixtures/glyph_adapter_prewrite_blocker_matrix_2026-06-06.json",
     "tools/check_glyph_adapter_prewrite_blocker_matrix.py",

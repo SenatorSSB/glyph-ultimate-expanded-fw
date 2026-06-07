@@ -1,0 +1,200 @@
+{
+  "schema_name": "glyph_official_configurator_corpus_diff",
+  "schema_version": 1,
+  "packet_date": "2026-06-06",
+  "corpus_id": "official_glyph_configurator_2026-06-06",
+  "source_classification": "primary_official_configurator_corpus",
+  "evidence_type": "structural_json_evidence",
+  "fixture_hashes": {
+    "default_profiles": "2d24324928f9c0292e3fce74f02083a740272eeb7a271437be10b7b4f6bf025e",
+    "back_and_forth_custom_profile": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "fixture_files": {
+    "default_profiles": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+    "back_and_forth_custom_profile": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json"
+  },
+  "top_level_keys_default": [
+    "gameModeConfigs",
+    "communicationBackendConfigs",
+    "keyboardModes",
+    "rgbConfigs",
+    "defaultBackendConfig",
+    "defaultUsbBackendConfig",
+    "rgbBrightness",
+    "defaultDashboardOption"
+  ],
+  "top_level_keys_back_and_forth": [
+    "gameModeConfigs",
+    "communicationBackendConfigs",
+    "keyboardModes",
+    "rgbConfigs",
+    "defaultBackendConfig",
+    "defaultUsbBackendConfig",
+    "rgbBrightness",
+    "defaultDashboardOption"
+  ],
+  "stable_top_level_key_set": true,
+  "changed_top_level_keys": [
+    "gameModeConfigs",
+    "rgbConfigs"
+  ],
+  "game_mode_names_default": [
+    "Melee",
+    "Brawl",
+    "Ultimate",
+    "Split FGC",
+    "FGC",
+    "Smash64",
+    "RoA",
+    "RoA2",
+    "GameCube",
+    "N64",
+    "SNES",
+    "NES",
+    "Keyboard"
+  ],
+  "game_mode_names_back_and_forth": [
+    "Melee",
+    "Brawl",
+    "Ultimate",
+    "Split FGC",
+    "FGC",
+    "Smash64",
+    "RoA",
+    "RoA2",
+    "GameCube",
+    "N64",
+    "SNES",
+    "NES",
+    "Keyboard"
+  ],
+  "game_mode_ids_default": [
+    "MODE_MELEE",
+    "MODE_PROJECT_M",
+    "MODE_ULTIMATE",
+    "MODE_FGC",
+    "MODE_FGC",
+    "MODE_64",
+    "MODE_RIVALS_OF_AETHER",
+    "MODE_RIVALS2",
+    "MODE_MELEE",
+    "MODE_MELEE",
+    "MODE_FGC",
+    "MODE_FGC",
+    "MODE_KEYBOARD"
+  ],
+  "game_mode_ids_back_and_forth": [
+    "MODE_MELEE",
+    "MODE_PROJECT_M",
+    "MODE_ULTIMATE",
+    "MODE_FGC",
+    "MODE_FGC",
+    "MODE_64",
+    "MODE_RIVALS_OF_AETHER",
+    "MODE_RIVALS2",
+    "MODE_MELEE",
+    "MODE_MELEE",
+    "MODE_FGC",
+    "MODE_FGC",
+    "MODE_KEYBOARD"
+  ],
+  "changed_game_mode_entries": [
+    {
+      "name": "Brawl",
+      "modeId": "MODE_PROJECT_M",
+      "key": "Brawl::MODE_PROJECT_M",
+      "changed_fields": [
+        "socdPairs"
+      ],
+      "socdPairs_count_default": 4,
+      "socdPairs_count_back_and_forth": 5,
+      "buttonRemapping_count_default": 19,
+      "buttonRemapping_count_back_and_forth": 19
+    },
+    {
+      "name": "Keyboard",
+      "modeId": "MODE_KEYBOARD",
+      "key": "Keyboard::MODE_KEYBOARD",
+      "changed_fields": [
+        "socdPairs"
+      ],
+      "socdPairs_count_default": 2,
+      "socdPairs_count_back_and_forth": 2,
+      "buttonRemapping_count_default": 0,
+      "buttonRemapping_count_back_and_forth": 0
+    },
+    {
+      "name": "Ultimate",
+      "modeId": "MODE_ULTIMATE",
+      "key": "Ultimate::MODE_ULTIMATE",
+      "changed_fields": [
+        "buttonRemapping",
+        "socdPairs"
+      ],
+      "socdPairs_count_default": 4,
+      "socdPairs_count_back_and_forth": 6,
+      "buttonRemapping_count_default": 19,
+      "buttonRemapping_count_back_and_forth": 17
+    }
+  ],
+  "ultimate": {
+    "socdPairs_count_default": 4,
+    "socdPairs_count_back_and_forth": 6,
+    "buttonRemapping_count_default": 19,
+    "buttonRemapping_count_back_and_forth": 17,
+    "BTN_LF6_entries_changed_structurally": true,
+    "BTN_LF8_entries_changed_structurally": true,
+    "BTN_LF8_BTN_LF6_socd_pair_added_structurally": true,
+    "BTN_RF7_BTN_RF8_socd_pair_added_structurally": true
+  },
+  "brawl": {
+    "extra_BTN_RF7_BTN_RF8_pair_exists_in_back_and_forth": true
+  },
+  "keyboard": {
+    "socd_pair_ordering_changed_structurally": true
+  },
+  "rgb": {
+    "rgb_config_count_default": 13,
+    "rgb_config_count_back_and_forth": 13,
+    "changed_rgb_config_indexes": [
+      2
+    ],
+    "button_color_counts_default": [
+      20,
+      20,
+      20,
+      16,
+      14,
+      16,
+      20,
+      20,
+      24,
+      20,
+      12,
+      7,
+      12
+    ],
+    "button_color_counts_back_and_forth": [
+      20,
+      20,
+      28,
+      16,
+      14,
+      16,
+      20,
+      20,
+      24,
+      20,
+      12,
+      7,
+      12
+    ],
+    "partial_button_color_entries_detected_structurally": true
+  },
+  "explicit_non_claims": {
+    "not_gameplay_semantics": true,
+    "not_runtime_behavior_claim": true,
+    "not_device_write_approval": true,
+    "not_adapter_implementation_approval": true
+  }
+}

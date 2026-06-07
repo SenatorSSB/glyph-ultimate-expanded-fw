@@ -31,14 +31,14 @@ REQUIRED_BRANCHES = {
 }
 
 REQUIRED_BLOCKED_ITEMS = {
-    "export_corpus_provision",
+    "official_configurator_corpus_metadata",
     "adapter_prewrite_source_authority",
     "physical_logical_rf5_resolution",
     "implementation_approval",
 }
 
 REQUIRED_ACTIONS = {
-    "provide_export_corpus_artifacts_or_leave_blocked",
+    "provide_official_configurator_metadata_or_leave_unknown",
     "provide_source_authority_approval_before_write_capable_work",
     "provide_domain_input_or_hardware_source_evidence_for_rf5_if_resolution_is_needed",
     "provide_explicit_implementation_approval_before_firmware_behavior_change",
@@ -68,11 +68,11 @@ REQUIRED_DOC_PHRASES = (
     "preservation hardware result is recorded for applicable non-nunchuk scope",
     "nunchuk remains NOT_TESTED / unvalidated / unavailable",
     "has no nunchuk port available out of the box",
-    "Export corpus capture",
-    "blocked_missing_real_corpus_artifacts",
+    "Export corpus metadata",
+    "official_configurator_corpus_present_initial",
     "glyph/gfw5-export-corpus-final-blocker-status",
     "export corpus final blocker/status consolidation",
-    "export corpus capture remains blocked by missing real corpus artifacts",
+    "official configurator corpus exists",
     "docs/calibration/glyph_export_corpus_final_blocker_status_2026-06-06.md",
     "docs/calibration/fixtures/glyph_export_corpus_final_blocker_status_2026-06-06.json",
     "tools/check_glyph_export_corpus_final_blocker_status.py",
@@ -123,11 +123,16 @@ def validate_top_level(payload: dict[str, Any]) -> None:
             fail(f"{key} must be {expected!r}")
     for key in (
         "hardware_testing_now_required",
-        "corpus_artifacts_needed",
         "source_authority_or_domain_input_needed",
     ):
         if payload.get(key) is not True:
             fail(f"{key} must be true")
+    if payload.get("corpus_artifacts_needed") is not False:
+        fail("corpus_artifacts_needed must be false after official corpus ingestion")
+    if payload.get("official_configurator_corpus_present") is not True:
+        fail("official_configurator_corpus_present must be true")
+    if payload.get("official_configurator_metadata_needed") is not True:
+        fail("official_configurator_metadata_needed must be true")
 
 
 def validate_sequence_branches(payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -216,8 +221,10 @@ def validate_remaining_blocked_items(payload: dict[str, Any]) -> None:
     missing = sorted(REQUIRED_BLOCKED_ITEMS - set(items))
     if missing:
         fail("remaining_blocked_items missing: " + ", ".join(missing))
-    if items["export_corpus_provision"]["requires_user_artifacts"] is not True:
-        fail("export corpus provision must require user artifacts")
+    if items["official_configurator_corpus_metadata"]["requires_user_artifacts"] is not False:
+        fail("official configurator metadata must not require new corpus artifacts")
+    if items["official_configurator_corpus_metadata"]["status"] != "OFFICIAL_CORPUS_PRESENT_METADATA_UNKNOWN":
+        fail("official configurator metadata status drifted")
     if items["adapter_prewrite_source_authority"]["requires_source_authority_approval"] is not True:
         fail("adapter prewrite source authority must require source-authority approval")
     if items["physical_logical_rf5_resolution"]["requires_domain_input"] is not True:
@@ -300,7 +307,8 @@ def main() -> int:
     print("status=PASS")
     print("handoff_status=next_user_action_required")
     print("hardware_testing_now_required=true")
-    print("corpus_artifacts_needed=true")
+    print("corpus_artifacts_needed=false")
+    print("official_configurator_corpus_present=true")
     print("source_authority_or_domain_input_needed=true")
     return 0
 

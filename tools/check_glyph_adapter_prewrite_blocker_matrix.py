@@ -38,7 +38,7 @@ REQUIRED_SOURCE_PACKETS = {
 }
 
 REQUIRED_BLOCKERS = {
-    "missing_export_corpus",
+    "official_corpus_present_metadata_missing",
     "missing_official_configurator_source_authority",
     "external_observations_non_authoritative",
     "runtime_owned_behavior_not_safely_represented_in_external_json",
@@ -92,7 +92,8 @@ REQUIRED_FORBIDDEN_ACTIONS = {
 
 REQUIRED_DOC_PHRASES = (
     "write_capable_adapter_blocked_docs_tools_matrix",
-    "Missing export corpus",
+    "Official corpus present, metadata missing",
+    "official_configurator_corpus_present_initial",
     "Missing official configurator source authority",
     "External observations non-authoritative",
     "Runtime-owned behavior not safely represented in external JSON",
@@ -174,8 +175,11 @@ def validate_source_packets(payload: dict[str, Any]) -> dict[str, dict[str, Any]
 
 def validate_source_claims(sources: dict[str, dict[str, Any]]) -> None:
     corpus = sources["export_corpus_readiness"]
-    if corpus.get("corpus_present") is not False or corpus.get("completion_allowed") is not False:
-        fail("export corpus source must remain incomplete")
+    if corpus.get("corpus_present") is not True or corpus.get("completion_allowed") is not False:
+        fail("export corpus source must record official corpus present but completion disallowed")
+    official = corpus.get("official_configurator_corpus")
+    if not isinstance(official, dict) or official.get("not_external_remapper") is not True:
+        fail("export corpus source must record official corpus as not external remapper")
 
     registry = sources["configurator_source_registry"]
     if registry.get("external_sources_promoted_to_authority") is not False:

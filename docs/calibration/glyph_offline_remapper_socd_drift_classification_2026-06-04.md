@@ -1,5 +1,14 @@
 # Glyph Offline Remapper SOCD Drift Classification - 2026-06-04
 
+## CORRECTION / SOURCE MISATTRIBUTION
+
+User clarification on 2026-06-06 supersedes external-remapper attribution for
+the `GlyphUserProfilesDefault.json` and `GlyphUserProfilesBackAndForth.json`
+files. They are official Glyph configurator app artifacts, not user-executed
+external remapper artifacts. This historical packet is quarantined as
+non-authoritative pending independent source support and must not be used as
+primary corpus evidence.
+
 ## Purpose and scope
 
 This records a docs/tools-only SOCD drift classification derived from the committed offline remapper `MODE_ULTIMATE` diff report.
