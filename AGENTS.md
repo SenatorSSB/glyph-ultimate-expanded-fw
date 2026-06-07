@@ -4,6 +4,23 @@ This repository is the Glyph-side controller implementation / backend realizatio
 
 Agents must treat this file as the standing operating contract for this repository. Keep changes scoped, test-backed when code is touched, and reversible by normal Git history.
 
+## Start here
+
+Before using dated calibration packets as roadmap input:
+
+- Read `docs/CURRENT_STATE.md` first for the current baseline, blockers, and
+  non-claims.
+- Read `docs/ROADMAP.md` for product direction.
+- Read `docs/WORKFLOW.md` for branch, test, inspection, merge, and result
+  recording procedure.
+- Treat `docs/calibration/` as evidence and historical packets.
+- Do not infer the current roadmap from every calibration file.
+- Prefer canonical current docs over old blocker packets when they conflict.
+- Treat external-remapper docs as quarantined unless independently
+  source-backed.
+- Official Glyph configurator corpus is the primary corpus when the
+  misattribution correction packet and official corpus manifest are present.
+
 ## Repository purpose
 
 This repo is used to inspect, model, document, and potentially implement Glyph / HayBox-style controller-backend behavior relevant to Senscope integration.

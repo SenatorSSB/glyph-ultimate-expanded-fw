@@ -32,17 +32,30 @@ def fail(message: str) -> None:
     raise CorpusError(message)
 
 
-def current_commit() -> str:
+def run_git(*args: str) -> subprocess.CompletedProcess[str]:
     completed = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
+        ["git", *args],
         capture_output=True,
         check=False,
         cwd=MANIFEST_PATH.parents[4],
         text=True,
     )
-    if completed.returncode != 0:
-        fail(completed.stderr.strip() or completed.stdout.strip() or "git rev-parse failed")
-    return completed.stdout.strip()
+    return completed
+
+
+def require_commit_in_current_history(commit: Any) -> str:
+    if not isinstance(commit, str) or not commit.strip():
+        fail("manifest.glyph_repo_commit must be a non-empty string")
+    commit = commit.strip()
+
+    exists = run_git("cat-file", "-e", f"{commit}^{{commit}}")
+    if exists.returncode != 0:
+        fail("manifest.glyph_repo_commit must reference a commit present in this repository")
+
+    ancestor = run_git("merge-base", "--is-ancestor", commit, "HEAD")
+    if ancestor.returncode != 0:
+        fail("manifest.glyph_repo_commit must be reachable from current HEAD")
+    return commit
 
 
 def validate_manifest(manifest: dict[str, Any]) -> None:
@@ -59,9 +72,8 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
         fail("manifest.captured_at must be 2026-06-06 or UNKNOWN_EXACT_TIMESTAMP")
     if manifest.get("captured_by") != "Rasmus / user-provided":
         fail("manifest.captured_by must be Rasmus / user-provided")
-    if manifest.get("glyph_repo_commit") != current_commit():
-        fail("manifest.glyph_repo_commit must match current HEAD")
-    if manifest.get("firmware_source_commit") != manifest.get("glyph_repo_commit"):
+    glyph_repo_commit = require_commit_in_current_history(manifest.get("glyph_repo_commit"))
+    if manifest.get("firmware_source_commit") != glyph_repo_commit:
         fail("manifest.firmware_source_commit must match glyph_repo_commit for this corpus")
     if manifest.get("configurator_source_reference") != "UNKNOWN_NOT_PROVIDED":
         fail("manifest.configurator_source_reference must remain UNKNOWN_NOT_PROVIDED")

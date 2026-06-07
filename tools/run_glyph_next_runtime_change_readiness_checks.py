@@ -372,6 +372,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_post_gfw3_configurator_baseline.py",
         ),
         step(
+            "docs navigation",
+            "tools/check_glyph_docs_navigation.py",
+        ),
+        step(
             "roadmap next-work index",
             "tools/check_glyph_roadmap_next_work_index.py",
         ),
