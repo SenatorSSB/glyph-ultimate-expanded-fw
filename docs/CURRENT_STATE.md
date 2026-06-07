@@ -21,7 +21,11 @@ packets remain under `docs/calibration/`.
 - Step 15 source-authority research complete.
 - Step 16 WebSerial/device-write implementation is blocked before implementation.
 - Step 17 flashing automation is forbidden/not approved; safety boundary complete.
-- Step 18 public/manual workflow release candidate is next hardware-gated workflow.
+- Step 18 public/manual workflow release-candidate hardware result is recorded for
+  applicable doable scope in
+  `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
+  the plan/checklist remain plan-only and no public release or official
+  configurator compatibility claim is made.
 - Nunchuk remains NOT_TESTED / unvalidated / unavailable because the controller
   has no nunchuk port available out of the box.
 - Runtime-loaded config, runtime-config storage, firmware binary/protobuf

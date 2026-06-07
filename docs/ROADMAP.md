@@ -310,7 +310,11 @@ declare a release.
 - Step 15 source-authority research complete.
 - Step 16 WebSerial/device-write implementation is blocked before implementation.
 - Step 17 flashing automation is forbidden/not approved; safety boundary complete.
-- Step 18 public/manual workflow release candidate is next hardware-gated workflow.
+- Step 18 public/manual workflow release-candidate hardware result is recorded for
+  applicable doable scope in
+  `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
+  the plan/checklist remain plan-only and no public release or official
+  configurator compatibility claim is made.
 - Public/manual workflow release-candidate plan and checklist live in `docs/release/public_manual_workflow_release_candidate_plan.md` and `docs/release/public_manual_workflow_release_candidate_checklist.md`.
 - Runtime-loaded config remains not implemented.
 - Runtime-config storage remains not implemented.

@@ -15,6 +15,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+PLAN_BRANCH = "runtime-config-public-workflow-release-candidate-plan"
 PLAN_DOC = REPO_ROOT / "docs/release/public_manual_workflow_release_candidate_plan.md"
 CHECKLIST_DOC = REPO_ROOT / "docs/release/public_manual_workflow_release_candidate_checklist.md"
 HARDWARE_PLAN_DOC = REPO_ROOT / "docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_plan_2026-06-07.md"
@@ -24,6 +25,11 @@ README_DOC = REPO_ROOT / "README.md"
 CURRENT_STATE_DOC = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP_DOC = REPO_ROOT / "docs/ROADMAP.md"
 RUNNER_PATH = REPO_ROOT / "tools/run_glyph_next_runtime_change_readiness_checks.py"
+RESULT_DOC_PHRASE = (
+    "Public/manual workflow release-candidate hardware result is recorded for applicable doable scope in "
+    "`docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`; "
+    "the plan/checklist remain plan-only and no public release or official configurator compatibility claim is made."
+)
 
 BASE_BRANCH = "configurator"
 
@@ -115,6 +121,8 @@ REQUIRED_INDEX_PHRASES = (
     "docs/release/public_manual_workflow_release_candidate_checklist.md",
     "glyph_public_manual_workflow_release_candidate_hardware_plan_2026-06-07.md",
     "glyph_public_manual_workflow_release_candidate_hardware_plan_2026-06-07.json",
+    "glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md",
+    "glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.json",
 )
 
 REQUIRED_DOC_SYNC_PHRASES = {
@@ -123,7 +131,7 @@ REQUIRED_DOC_SYNC_PHRASES = {
         "Step 15 source-authority research complete",
         "Step 16 WebSerial/device-write implementation is blocked before implementation",
         "Step 17 flashing automation is forbidden/not approved",
-        "public/manual workflow release-candidate planning is next hardware-gated workflow",
+        RESULT_DOC_PHRASE,
         "Runtime-loaded config is not implemented",
         "Runtime-config storage is not implemented",
         "Firmware binary/protobuf parser integration is not implemented",
@@ -137,7 +145,7 @@ REQUIRED_DOC_SYNC_PHRASES = {
         "Step 15 source-authority research complete",
         "Step 16 WebSerial/device-write implementation is blocked before implementation",
         "Step 17 flashing automation is forbidden/not approved; safety boundary complete",
-        "Step 18 public/manual workflow release candidate is next hardware-gated workflow",
+        RESULT_DOC_PHRASE,
         "Runtime-loaded config is not implemented",
         "Runtime-config storage is not implemented",
         "Firmware binary/protobuf parser integration is not implemented",
@@ -150,7 +158,7 @@ REQUIRED_DOC_SYNC_PHRASES = {
         "Step 15 source-authority research complete",
         "Step 16 WebSerial/device-write implementation is blocked before implementation",
         "Step 17 flashing automation is forbidden/not approved; safety boundary complete",
-        "Step 18 public/manual workflow release candidate is next hardware-gated workflow",
+        RESULT_DOC_PHRASE,
         "public/manual workflow release-candidate plan and checklist",
         "Runtime-loaded config remains not implemented",
         "Runtime-config storage remains not implemented",
@@ -214,6 +222,22 @@ def changed_paths_against_base() -> list[str]:
             if line:
                 paths.add(line[3:].strip())
     return sorted(paths)
+
+
+def current_branch() -> str:
+    completed = subprocess.run(
+        ["git", "branch", "--show-current"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        fail("unable to determine current branch")
+    branch = completed.stdout.strip()
+    if not branch:
+        fail("unable to determine current branch")
+    return branch
 
 
 def require_phrases(text: str, phrases: tuple[str, ...], *, label: str) -> None:
@@ -384,7 +408,7 @@ def ensure_no_out_of_scope_changes() -> None:
         fail("branch contains out-of-scope changed paths: " + ", ".join(out_of_scope))
 
     result_files = [path for path in changed if "hardware_result" in path.lower()]
-    if result_files:
+    if current_branch() == PLAN_BRANCH and result_files:
         fail("hardware result files are not allowed on the planning branch: " + ", ".join(result_files))
 
 
@@ -392,7 +416,10 @@ def ensure_runner_includes_new_checker() -> None:
     text = read_required(RUNNER_PATH)
     require_phrases(
         text,
-        ("tools/check_glyph_public_manual_workflow_release_candidate.py",),
+        (
+            "tools/check_glyph_public_manual_workflow_release_candidate.py",
+            "tools/check_glyph_public_manual_workflow_release_candidate_hardware_result.py",
+        ),
         label="aggregate runner",
     )
 

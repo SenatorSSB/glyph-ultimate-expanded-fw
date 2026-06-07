@@ -35,6 +35,11 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `glyph_generated_constants_phase3_integration_hardware_result_2026-06-07.md`
   - user-reported Phase 3 generated constants firmware-integration hardware
     result.
+- `glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`
+  - user-reported public/manual workflow release-candidate hardware result for
+    applicable doable scope; nunchuk remains NOT_TESTED.
+- `fixtures/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.json`
+  - matching public/manual workflow RC hardware result fixture.
 - `glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.md`
   - user-reported runtime-config interpreter source-baseline hardware result.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result

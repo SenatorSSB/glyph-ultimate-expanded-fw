@@ -1,0 +1,114 @@
+{
+  "schema_name": "glyph_public_manual_workflow_release_candidate_hardware_result",
+  "status": "user_reported_pass",
+  "result_source": "user_reported",
+  "source_report_text": "everything works as expected",
+  "result_date": "2026-06-07",
+  "tested_branch": "configurator",
+  "result_branch": "public-manual-workflow-release-candidate-hardware-result",
+  "commit_sha_under_test": "d085c0f80ea1578a378bce2ab75f8005727c2dde",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "profile_file": "none",
+  "new_profile_file_used": false,
+  "hardware_result_recorded": true,
+  "nunchuk_status": "not_tested",
+  "scope": "applicable doable public/manual workflow release-candidate rows",
+  "caveats": [
+    "user-reported result",
+    "manual/operator-run firmware update path only",
+    "no new profile file used",
+    "no runtime-loaded config",
+    "no runtime-config storage",
+    "no firmware binary/protobuf parser integration",
+    "no WebSerial/device write",
+    "no push-to-device",
+    "no firmware flashing automation",
+    "no hidden write",
+    "no official configurator compatibility claim",
+    "no public release claim yet",
+    "no nunchuk validation",
+    "no Senscope/game-semantic change"
+  ],
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "result": "PASS",
+      "notes": "User-reported pass under applicable doable public/manual workflow scope."
+    },
+    {
+      "row_id": "PROFILE-001",
+      "category": "profile",
+      "result": "PASS",
+      "notes": "User-reported pass; no new profile file used."
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "result": "PASS",
+      "notes": "User-reported pass; baseline outputs preserved."
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "result": "PASS",
+      "notes": "User-reported pass; representative modifier tables preserved."
+    },
+    {
+      "row_id": "SPECIAL-001",
+      "category": "special_tables",
+      "result": "PASS",
+      "notes": "User-reported pass; special tables preserved."
+    },
+    {
+      "row_id": "OVERRIDE-001",
+      "category": "override_paths",
+      "result": "PASS",
+      "notes": "User-reported pass; representative override paths preserved."
+    },
+    {
+      "row_id": "CSTICK-001",
+      "category": "cstick_interaction",
+      "result": "PASS",
+      "notes": "PASS where doable / no regression observed."
+    },
+    {
+      "row_id": "DOCS-001",
+      "category": "docs_navigation",
+      "result": "PASS",
+      "notes": "Docs/navigation/checklist links remained synchronized."
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "no_write",
+      "result": "PASS",
+      "notes": "No hidden write, runtime-loaded config, push-to-device, or WebSerial/device write was used."
+    },
+    {
+      "row_id": "NO-FLASH-AUTO-001",
+      "category": "no_flash_automation",
+      "result": "PASS",
+      "notes": "No flashing automation, UF2 copy automation, or bootloader automation was used."
+    },
+    {
+      "row_id": "RECOVERY-001",
+      "category": "recovery",
+      "result": "USER_ACCEPTED_RISK",
+      "notes": "Manual recovery/rollback path was not directly exercised; operator-run docs are available, so this row is conservatively marked USER_ACCEPTED_RISK."
+    },
+    {
+      "row_id": "PROFILE-REG-001",
+      "category": "profile_regression",
+      "result": "PASS",
+      "notes": "PASS / no regression observed."
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "result": "NOT_TESTED",
+      "notes": "No nunchuk validation was performed or claimed."
+    }
+  ]
+}
