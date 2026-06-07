@@ -43,6 +43,10 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   generated C++ review artifact.
 - `glyph_generated_constants_refactor_readiness_packet_2026-05-28.md` -
   generated constants readiness packet.
+- `docs/generated_constants/phase3_generated_constants_contract.md` - Phase 3
+  generated C++ constants target and source-diff checker contract.
+- `docs/generated_constants/preview/gfw3_generated_constants_preview.json` -
+  dry-run preview artifact for the current source-backed baseline.
 
 ## Runtime-Loaded Config Design And Blocker Packets
 

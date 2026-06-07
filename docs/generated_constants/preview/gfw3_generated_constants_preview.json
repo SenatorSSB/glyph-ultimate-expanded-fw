@@ -1,0 +1,312 @@
+{
+  "artifact_id": "gfw3_generated_constants_preview_2026-06-07",
+  "artifact_kind": "DRY_RUN_PREVIEW",
+  "generated_for_phase": 3,
+  "consumed_by_firmware": false,
+  "status": "preview_only_not_wired",
+  "source_authority": {
+    "classification": "source_backed_current_baseline_preview_only",
+    "references": [
+      {
+        "path": "src/modes/Ultimate.cpp",
+        "role": "current_baseline_source",
+        "sha256": "67e8fc8f0231ddcfbb50e321558cb586ad130465686e55d4c787b92ad0a4fd6a"
+      },
+      {
+        "path": "tools/extract_glyph_identity_runtime_tables.py",
+        "role": "source_table_extractor",
+        "sha256": "445c04471a2176c95a26577b79e785619c9c12ed63e073a6de9508884a46a2a0"
+      },
+      {
+        "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json",
+        "role": "generated_config_baseline",
+        "sha256": "d66efa458cc28921d3a1ccb0682e8486d880c3d3fe77260a19cc3e0afa63006f"
+      },
+      {
+        "path": "docs/calibration/fixtures/glyph_identity_runtime_generated_cpp_tables_2026-05-28.txt",
+        "role": "generated_cpp_baseline",
+        "sha256": "3d8ac50a5dfcff3ff529fb3cb1888e4c62afaeebd04b82977e8653adab99d9b9"
+      }
+    ],
+    "unknowns": [
+      "exact future approved firmware file paths",
+      "future product approval decision",
+      "future build and hardware gate outcome"
+    ]
+  },
+  "target_file_classes": [
+    {
+      "class": "phase3_contract_doc",
+      "path": "docs/generated_constants/phase3_generated_constants_contract.md",
+      "state": "docs_only"
+    },
+    {
+      "class": "phase3_preview_artifact",
+      "path": "docs/generated_constants/preview/gfw3_generated_constants_preview.json",
+      "state": "docs_only"
+    },
+    {
+      "class": "phase3_checker",
+      "path": "tools/check_glyph_phase3_generated_constants_preview.py",
+      "state": "docs_only"
+    },
+    {
+      "class": "future_generated_constants_header",
+      "path": "include/generated/glyph_generated_constants.hpp",
+      "state": "proposed_future_candidate_only"
+    },
+    {
+      "class": "future_generated_constants_source",
+      "path": "src/generated/glyph_generated_constants.cpp",
+      "state": "proposed_future_candidate_only"
+    }
+  ],
+  "preview_caveats": [
+    "not_runtime_loaded_config",
+    "not_device_write",
+    "not_protobuf_binary_write",
+    "not_firmware_source",
+    "not_consumed_by_firmware",
+    "not_universal_official_compatibility_claim",
+    "not_nunchuk_validation_claim",
+    "not_senscope_game_semantics"
+  ],
+  "constants_preview": {
+    "table_family": "StickPoint",
+    "table_count": 27,
+    "point_count_per_table": 9,
+    "value_representation": "current_baseline_source_summary",
+    "tables": [
+      {
+        "name": "Default",
+        "source_symbol": "kDefaultTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "ModeDefault",
+        "source_symbol": "kModeDefaultTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "X1",
+        "source_symbol": "kX1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "X2",
+        "source_symbol": "kX2Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MX1",
+        "source_symbol": "kMX1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MX2",
+        "source_symbol": "kMX2Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Y1",
+        "source_symbol": "kY1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MY1",
+        "source_symbol": "kMY1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "LayerNormalX",
+        "source_symbol": "kLayerNormalXTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MLayerNormalX",
+        "source_symbol": "kMLayerNormalXTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "LayerFlipper",
+        "source_symbol": "kLayerFlipperTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MLayerFlipper",
+        "source_symbol": "kMLayerFlipperTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Y1Tilt1",
+        "source_symbol": "kY1Tilt1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MY1Tilt1",
+        "source_symbol": "kMY1Tilt1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Y1LayerFlipper",
+        "source_symbol": "kY1LayerFlipperTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MY1LayerFlipper",
+        "source_symbol": "kMY1LayerFlipperTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Y1LayerNormalX",
+        "source_symbol": "kY1LayerNormalXTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MY1LayerNormalX",
+        "source_symbol": "kMY1LayerNormalXTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Tilt1",
+        "source_symbol": "kTilt1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Tilt2",
+        "source_symbol": "kTilt2Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Tilt3",
+        "source_symbol": "kTilt3Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Tilt1Minus41",
+        "source_symbol": "kTilt1Minus41Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "RT1RF4Custom",
+        "source_symbol": "kRT1RF4CustomTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MTilt1",
+        "source_symbol": "kMTilt1Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MTilt2",
+        "source_symbol": "kMTilt2Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "MTilt3",
+        "source_symbol": "kMTilt3Table",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      },
+      {
+        "name": "Lt1LowMagnitude",
+        "source_symbol": "kLt1LowMagnitudeTable",
+        "point_count": 9,
+        "shape": "StickPoint[9]",
+        "value_source": "src/modes/Ultimate.cpp"
+      }
+    ]
+  },
+  "comparison_contract": {
+    "source_diff_mode": "preview_against_source_backed_baseline",
+    "failure_mode": "fail_closed_when_authority_missing_or_inferred",
+    "checker_tool": "tools/check_glyph_phase3_generated_constants_preview.py",
+    "required_pass_conditions": [
+      "source_reference_hashes_match",
+      "table_names_match_source",
+      "table_point_counts_match_source",
+      "source_symbols_match_source",
+      "preview_consumed_by_firmware_false",
+      "no_runtime_loaded_config_claim",
+      "no_device_write_claim"
+    ],
+    "forbidden_diffs": [
+      "src_or_include_wiring_active",
+      "runtime_loaded_config_claim",
+      "device_write_claim",
+      "protobuf_binary_write_claim",
+      "firmware_behavior_change_claim",
+      "profile_schema_change_claim",
+      "nunchuk_validation_claim",
+      "universal_compatibility_claim"
+    ],
+    "allowed_preview_only_diffs": [
+      "docs_only_artifact_paths",
+      "provisional_future_target_file_names",
+      "summary_only_value_representation",
+      "source_backed_hash_provenance"
+    ]
+  },
+  "future_integration_gate": {
+    "product_approval_required": true,
+    "build_gate_required": true,
+    "hardware_test_gate_required": true,
+    "rollback_required": true
+  },
+  "provenance": {
+    "baseline_branch": "configurator",
+    "created_on_branch": "phase3-generated-constants-contract",
+    "source_snapshot": "current_worktree_baseline"
+  }
+}
