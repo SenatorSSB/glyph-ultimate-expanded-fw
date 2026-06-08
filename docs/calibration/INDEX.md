@@ -194,6 +194,12 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `docs/runtime_config/phase7a_compiled_activation_failure_analysis_2026-06-08.md`
   - docs/tools-only failure analysis for the Phase 7A compiled/test payload
     activation hardware failure; no fix implemented.
+- `docs/runtime_config/phase7a_runtime_config_activation_repair_minimal.md` - build-time/source-only
+  repair packet for Option A with explicit abandonment of the failed runtime-active
+  branch; no runtime behavior change and no firmware edits.
+- `docs/runtime_config/phase7a_activation_repair_build_size_report.md` -
+  source-only build-size status artifact for repair-minimal work; no size map
+  artifact captured in this stage.
 - `docs/runtime_config/fixtures/phase7a_compiled_activation_failure_analysis_2026-06-08.json`
   - machine-readable failure-analysis fixture.
 - `tools/check_glyph_phase7a_compiled_activation_failure_analysis.py` -

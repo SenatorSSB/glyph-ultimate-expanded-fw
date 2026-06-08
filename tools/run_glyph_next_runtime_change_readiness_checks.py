@@ -196,6 +196,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_config_firmware_parser_scaffold.py",
         ),
         step(
+            "phase7a activation repair minimal",
+            "tools/check_glyph_phase7a_activation_repair_minimal.py",
+        ),
+        step(
             "runtime config firmware binary parser plan",
             "tools/check_glyph_runtime_config_firmware_binary_parser_plan.py",
         ),
