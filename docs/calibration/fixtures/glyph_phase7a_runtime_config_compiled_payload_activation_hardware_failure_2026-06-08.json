@@ -1,0 +1,123 @@
+{
+  "schema_name": "glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure",
+  "status": "hardware_fail",
+  "result_source": "user_reported",
+  "tested_branch": "phase7a-runtime-config-compiled-payload-activation",
+  "result_branch": "phase7a-runtime-config-compiled-payload-activation-hardware-failure",
+  "source_failure_report_text": "I dont know what happened after tests, but I was wrong. Some inputs completely cut the connection from the controller. At least pressing rf5 or rf6 disconnect it according to the game console",
+  "source_recovery_report_text": "i restored the previous fw, which works fine still",
+  "commit_sha_under_test": "67e575b87147f1a6e2ce6474a59ac5b418bd1147",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "hardware_result_recorded": true,
+  "merge_allowed": false,
+  "nunchuk_status": "not_tested",
+  "observed_failing_inputs": [
+    "RF5",
+    "RF6"
+  ],
+  "observed_failure": [
+    "console_or_game_reports_controller_disconnect"
+  ],
+  "recovery": [
+    "previous_configurator_firmware_restored",
+    "previous_configurator_firmware_works_fine"
+  ],
+  "caveats": [
+    "user-reported failure",
+    "exact low-level disconnect cause unknown",
+    "do not infer firmware crash mechanism without debugging",
+    "previous configurator firmware restored and works fine",
+    "branch must not merge",
+    "no nunchuk validation",
+    "no runtime-loaded config storage",
+    "no config.bin runtime-config use",
+    "no WebSerial/device write",
+    "no runtime-config command IDs",
+    "no firmware flashing automation",
+    "no official configurator compatibility claim",
+    "no Senscope/game-semantic change"
+  ],
+  "test_rows": [
+    {
+      "id": "BOOT-001",
+      "area": "normal boot",
+      "result": "UNKNOWN_OR_NOT_RELIABLY_COMPLETE",
+      "notes": "User report identified disconnect after testing; normal boot completion is not reliable evidence."
+    },
+    {
+      "id": "BASELINE-001",
+      "area": "current baseline preserved",
+      "result": "FAIL",
+      "notes": "User-reported RF5/RF6 disconnect regression means baseline behavior was not preserved."
+    },
+    {
+      "id": "PARSER-001",
+      "area": "compiled valid payload accepted",
+      "result": "INCONCLUSIVE",
+      "notes": "The branch reached testable runtime behavior, but the parser path cannot be isolated from the reported disconnect."
+    },
+    {
+      "id": "FALLBACK-001",
+      "area": "invalid/failure path",
+      "result": "NOT_HARDWARE_EXERCISED",
+      "notes": "No intentionally invalid compiled-payload firmware artifact was reported as tested."
+    },
+    {
+      "id": "MODIFIERS-001",
+      "area": "representative modifiers",
+      "result": "FAIL",
+      "notes": "User-reported input-triggered disconnect is a modifier/profile regression in the tested branch."
+    },
+    {
+      "id": "SPECIAL-001",
+      "area": "special tables",
+      "result": "NOT_RELIABLY_TESTED_AFTER_DISCONNECT",
+      "notes": "Disconnect regression prevents reliable special-table hardware result claims."
+    },
+    {
+      "id": "OVERRIDE-001",
+      "area": "override paths",
+      "result": "FAIL",
+      "notes": "RF5/RF6 path causes disconnect/regression according to the user report."
+    },
+    {
+      "id": "CSTICK-001",
+      "area": "c-stick interaction",
+      "result": "NOT_RELIABLY_TESTED_AFTER_DISCONNECT",
+      "notes": "Disconnect regression prevents reliable c-stick hardware result claims."
+    },
+    {
+      "id": "NO-STORAGE-001",
+      "area": "no storage read/write",
+      "result": "PASS_BY_SOURCE_INSPECTION_ONLY",
+      "notes": "Source inspection shows no runtime-config storage implementation on this branch."
+    },
+    {
+      "id": "NO-WRITE-001",
+      "area": "no device write/WebSerial",
+      "result": "PASS_BY_SOURCE_INSPECTION_ONLY",
+      "notes": "Source inspection shows no WebSerial/device-write runtime-config path on this branch."
+    },
+    {
+      "id": "NO-FLASH-001",
+      "area": "no flashing automation",
+      "result": "PASS_BY_SOURCE_INSPECTION_ONLY",
+      "notes": "Source inspection shows no firmware flashing automation implementation on this branch."
+    },
+    {
+      "id": "PROFILE-REG-001",
+      "area": "profile regression",
+      "result": "FAIL",
+      "notes": "User restored previous configurator firmware and reported it works fine, isolating the regression to this activation branch."
+    },
+    {
+      "id": "NUNCHUK-001",
+      "area": "nunchuk",
+      "result": "NOT_TESTED",
+      "notes": "No nunchuk validation was performed or claimed."
+    }
+  ]
+}
+
