@@ -35,6 +35,12 @@ artifacts unless a specific packet says otherwise.
   repair packet for Option A. This branch uses build-time/source validation only,
   records no runtime behavior changes, and marks the failed activation branch as
   abandoned.
+- `phase7a_build_size_and_map_baseline_2026-06-08.md` - build-size/map/artifact
+  baseline recorded from a known-good `configurator` lineage firmware build.
+- `fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json` - machine-readable
+  artifact table for the build-size baseline.
+- `tools/check_glyph_phase7a_build_size_and_map_baseline.py` - read-only checker
+  for the Phase 7A build-size and map baseline packet/fixture.
 - `phase7a_safer_activation_repair_plan.md` - plan-only next-branch strategy
   for a safer minimal activation repair attempt; not implemented.
 - `runtime_config_semantics_evaluator_bridge.md`
