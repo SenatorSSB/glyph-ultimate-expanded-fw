@@ -200,10 +200,17 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `docs/runtime_config/phase7a_activation_repair_build_size_report.md` -
   source-only build-size status artifact for repair-minimal work; no size map
   artifact captured in this stage.
+- `docs/runtime_config/phase7a_build_size_and_map_baseline_2026-06-08.md` -
+  build-size/map/artifact baseline from known-good configurator lineage; captures
+  artifact sizes and hashes.
+- `docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json` -
+  machine-readable build-size and artifact metadata for the same baseline.
 - `docs/runtime_config/fixtures/phase7a_compiled_activation_failure_analysis_2026-06-08.json`
   - machine-readable failure-analysis fixture.
 - `tools/check_glyph_phase7a_compiled_activation_failure_analysis.py` -
   read-only failure-analysis guardrail checker.
+- `tools/check_glyph_phase7a_build_size_and_map_baseline.py` - read-only checker
+  for the Phase 7A build-size and map baseline packet/fixture.
 - `docs/runtime_config/phase7a_safer_activation_repair_plan.md` - plan-only
   safer next activation repair strategy; not implemented.
 - `docs/runtime_config/runtime_config_firmware_binary_parser_source_authority.md`

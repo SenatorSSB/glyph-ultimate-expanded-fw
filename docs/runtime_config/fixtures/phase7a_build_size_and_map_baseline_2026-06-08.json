@@ -1,0 +1,51 @@
+{
+  "schema_name": "glyph_phase7a_build_size_and_map_baseline",
+  "status": "build_size_baseline_recorded",
+  "branch": "phase7a-build-size-and-map-baseline",
+  "baseline_branch": "configurator",
+  "commit_sha": "25fb7fbf93854bc8cda6b5d1a472e8948dfda3da",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_date_local": "2026-06-08 23:41:49 +0300",
+  "artifacts": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 791552,
+      "sha256": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407148,
+      "sha256": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 395664,
+      "sha256": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+      "available": true
+    }
+  ],
+  "map_file_available": false,
+  "elf_file_available": true,
+  "uf2_file_available": true,
+  "bin_file_available": true,
+  "firmware_source_changed": false,
+  "runtime_behavior_changed": false,
+  "hardware_required": false,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "not_tested",
+  "caveats": [
+    "no firmware source edits",
+    "no runtime behavior change",
+    "no runtime-loaded config",
+    "no runtime-config storage",
+    "no WebSerial/device write",
+    "no firmware flashing automation",
+    "no hardware result claim",
+    "nunchuk NOT_TESTED"
+  ]
+}
