@@ -69,8 +69,14 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   preview metadata; not a real official configurator round-trip result.
 - `docs/export/official_configurator_manual_import_export_test_plan.md` -
   manual official-configurator import/export test plan; not a result.
+- `docs/export/official_configurator_manual_capture_instructions.md` -
+  manual official-configurator capture operator instructions; not a result.
+- `docs/export/official_configurator_manual_capture_artifact_layout.md` -
+  artifact layout for future manual capture drops; not a result.
 - `docs/export/official_configurator_manual_import_export_result_TEMPLATE.md` -
   template-only future result packet scaffold; not a result.
+- `docs/export/manual_captures/README.md` - manual capture drop directory
+  index; no captures recorded on this branch.
 - `docs/export/fixtures/official_configurator_export_candidate_preview.json` -
   offline preview fixture; not production export.
 - `docs/export/fixtures/official_configurator_export_invalid_cases.json` -
@@ -87,6 +93,8 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - machine-readable offline diff/simulation report.
 - `docs/export/fixtures/official_configurator_manual_import_export_test_plan.json`
   - machine-readable manual test-plan fixture; not a result.
+- `docs/export/fixtures/official_configurator_manual_capture_metadata_TEMPLATE.json`
+  - template-only future manual capture metadata fixture; not a result.
 
 ## Generated-Config / Evaluator / Generated C++ Review Artifacts
 

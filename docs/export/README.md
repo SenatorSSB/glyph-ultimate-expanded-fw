@@ -22,7 +22,10 @@ export-target workflow.
 - `official_configurator_export_validation_report.md`
 - `official_configurator_export_candidate_diff_report.md`
 - `official_configurator_manual_import_export_test_plan.md`
+- `official_configurator_manual_capture_instructions.md`
+- `official_configurator_manual_capture_artifact_layout.md`
 - `official_configurator_manual_import_export_result_TEMPLATE.md`
+- `manual_captures/README.md`
 - `fixtures/official_configurator_export_candidate_preview.json`
 - `fixtures/official_configurator_export_invalid_cases.json`
 - `fixtures/official_configurator_export_mutation_cases.json`
@@ -31,6 +34,7 @@ export-target workflow.
 - `fixtures/generated_official_configurator_candidate_preview_report.json`
 - `fixtures/official_configurator_export_candidate_diff_report.json`
 - `fixtures/official_configurator_manual_import_export_test_plan.json`
+- `fixtures/official_configurator_manual_capture_metadata_TEMPLATE.json`
 
 ## Offline Workflow Tools
 
@@ -52,3 +56,6 @@ export-target workflow.
 - `tools/check_glyph_official_configurator_manual_import_export_test_plan.py`
   validates the manual import/export test plan remains plan-only and not a
   result.
+- `tools/check_glyph_official_configurator_manual_capture_result.py` validates
+  manual capture instructions, artifact layout, metadata template, and any
+  future capture folders while passing when no capture result exists.

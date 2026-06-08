@@ -82,6 +82,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_official_configurator_manual_import_export_test_plan.py",
         ),
         step(
+            "official configurator manual capture result scaffold",
+            "tools/check_glyph_official_configurator_manual_capture_result.py",
+        ),
+        step(
             "profile adapter prewrite",
             "tools/check_glyph_profile_adapter_prewrite.py",
             "docs/sources/raw/GlyphUserProfiles.json",
