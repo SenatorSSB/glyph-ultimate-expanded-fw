@@ -21,6 +21,8 @@ not change Senscope game-semantic source authority.
 - [AGENTS.md](AGENTS.md) - standing operating contract for agents.
 - [docs/calibration/README.md](docs/calibration/README.md) - guide to detailed
   evidence packets and historical records.
+- [docs/export/README.md](docs/export/README.md) - offline official
+  configurator export-target contract docs and preview-only fixtures.
 
 ## Current Status
 
@@ -39,6 +41,8 @@ not change Senscope game-semantic source authority.
   configurator compatibility claim is made.
 - Official Glyph configurator corpus records user-provided default and
   back-and-forth JSON fixtures when the correction packet is present.
+- Offline official configurator export target contract work is docs/tools only,
+  preview-only, and not a public release or official compatibility claim.
 - Calibration docs remain useful evidence, but the current roadmap should be
   read from `docs/CURRENT_STATE.md`, `docs/ROADMAP.md`, and
   `docs/WORKFLOW.md`.

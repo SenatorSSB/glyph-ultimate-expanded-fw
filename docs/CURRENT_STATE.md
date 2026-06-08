@@ -41,6 +41,9 @@ packets remain under `docs/calibration/`.
   back-and-forth custom profile.
 - The exact official configurator app version, exact capture timestamp, and
   exact push/download route details may remain unknown.
+- Offline official configurator export target contract work is docs/tools only
+  and preview-only; it is grounded in the manifest and fixtures and does not
+  claim production export or official compatibility.
 - External-remapper docs are quarantined unless independently source-backed.
 
 ## Current Readiness Categories

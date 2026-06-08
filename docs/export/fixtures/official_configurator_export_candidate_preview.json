@@ -1,0 +1,286 @@
+{
+  "schema_name": "official_configurator_export_candidate_preview",
+  "contract_version": 1,
+  "status": "offline_preview_only",
+  "preview_labels": [
+    "offline_preview_only",
+    "not_production_export",
+    "not_device_write",
+    "not_webserial",
+    "not_runtime_loaded_config",
+    "not_official_compatibility_claim"
+  ],
+  "source_authority_doc": "docs/export/official_configurator_export_source_authority.md",
+  "source_authority": {
+    "corpus_id": "official_glyph_configurator_2026-06-06",
+    "source_classification": "primary_official_configurator_corpus",
+    "manifest_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "manifest_sha256": "08c8e43218250ad75f187f3fc5d22dd36fc27b112047f9dfdb612cbb232359a5",
+    "fixture_paths": [
+      "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+      "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json"
+    ],
+    "fixture_hashes": {
+      "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json": "2d24324928f9c0292e3fce74f02083a740272eeb7a271437be10b7b4f6bf025e",
+      "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+    },
+    "known_unknowns": [
+      "exact official configurator app version",
+      "exact capture timestamp",
+      "exact push/download route details"
+    ]
+  },
+  "observed_shape": {
+    "top_level_keys": [
+      "gameModeConfigs",
+      "communicationBackendConfigs",
+      "keyboardModes",
+      "rgbConfigs",
+      "defaultBackendConfig",
+      "defaultUsbBackendConfig",
+      "rgbBrightness",
+      "defaultDashboardOption"
+    ],
+    "counts": {
+      "gameModeConfigs": 13,
+      "communicationBackendConfigs": 8,
+      "keyboardModes": 1,
+      "rgbConfigs": 13
+    },
+    "game_mode_shapes": [
+      {
+        "name": "Melee",
+        "modeId": "MODE_MELEE",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "Brawl",
+        "modeId": "MODE_PROJECT_M",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "Ultimate",
+        "modeId": "MODE_ULTIMATE",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "Split FGC",
+        "modeId": "MODE_FGC",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "FGC",
+        "modeId": "MODE_FGC",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "Smash64",
+        "modeId": "MODE_64",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "RoA",
+        "modeId": "MODE_RIVALS_OF_AETHER",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "RoA2",
+        "modeId": "MODE_RIVALS2",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "GameCube",
+        "modeId": "MODE_MELEE",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "N64",
+        "modeId": "MODE_MELEE",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "SNES",
+        "modeId": "MODE_FGC",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "NES",
+        "modeId": "MODE_FGC",
+        "keys": [
+          "applicableBackends",
+          "buttonRemapping",
+          "layoutPlate",
+          "menuButtonIcon",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "modeId": "MODE_KEYBOARD",
+        "keys": [
+          "applicableBackends",
+          "keyboardModeConfig",
+          "layoutPlate",
+          "modeId",
+          "name",
+          "rgbConfig",
+          "socdPairs"
+        ]
+      }
+    ],
+    "communication_backend_key_sets": [
+      [
+        "activationBinding",
+        "backendId"
+      ],
+      [
+        "backendId",
+        "defaultModeConfig"
+      ]
+    ],
+    "keyboard_mode_key_sets": [
+      [
+        "buttonsToKeycodes"
+      ]
+    ],
+    "rgb_config_key_sets": [
+      [
+        "animation",
+        "buttonColors"
+      ]
+    ],
+    "scalar_defaults": {
+      "defaultBackendConfig": 1,
+      "defaultUsbBackendConfig": 1,
+      "rgbBrightness": 255,
+      "defaultDashboardOption": "DASHBOARD_MENU_BUTTON_HINTS"
+    }
+  },
+  "unknowns": [
+    "exact official configurator app version",
+    "exact capture timestamp",
+    "exact push/download route details",
+    "compatibility of generated output with official configurator versions beyond this corpus",
+    "whether any future export target should be profile-scoped, global, or mixed"
+  ],
+  "blocked_claims": [
+    "production export",
+    "device write",
+    "WebSerial",
+    "runtime-loaded config",
+    "firmware flashing automation",
+    "official configurator compatibility claim",
+    "universal compatibility claim",
+    "nunchuk validation claim"
+  ],
+  "validation_notes": [
+    "offline_preview_only",
+    "not_production_export",
+    "not_device_write",
+    "not_webserial",
+    "not_runtime_loaded_config",
+    "not_official_compatibility_claim"
+  ]
+}

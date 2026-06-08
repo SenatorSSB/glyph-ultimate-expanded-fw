@@ -54,6 +54,18 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `glyph_external_remapper_misattribution_correction_2026-06-06.md` - source
   classification correction and external-remapper quarantine rule.
 
+## Offline Official Configurator Export Target Contract
+
+- `docs/export/README.md` - offline-only export-target docs index.
+- `docs/export/official_configurator_export_source_authority.md` - source
+  authority packet for the official configurator export target.
+- `docs/export/official_configurator_export_target_contract.md` - offline
+  target contract and stop lines.
+- `docs/export/fixtures/official_configurator_export_candidate_preview.json` -
+  offline preview fixture; not production export.
+- `docs/export/fixtures/official_configurator_export_invalid_cases.json` -
+  invalid corpus for the offline target contract.
+
 ## Generated-Config / Evaluator / Generated C++ Review Artifacts
 
 - `glyph_identity_runtime_generated_config_prototype_2026-05-28.md` -

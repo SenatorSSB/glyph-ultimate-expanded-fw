@@ -151,10 +151,10 @@ Explicit non-goals: no broad refactor, no runtime-loaded config interpreter, no
 device write, no profile artifact change, no firmware flashing automation, no
 nunchuk validation claim, and no intentional controller behavior change.
 
-## Phase 4 - Offline Official Configurator Export Candidate
+## Phase 4 - Offline Official Configurator Export Target Contract
 
-Goal: Produce an offline candidate artifact for official-configurator-oriented
-comparison after the profile format exists.
+Goal: Define the offline target-contract boundary for official-configurator-
+oriented comparison after the profile format exists.
 
 Status: `READY_FOR_ENGINEERING_DESIGN` after the official corpus correction.
 
@@ -164,20 +164,22 @@ Requirements now: `requires_user_domain_input=false`;
 metadata may still be provided if available; `requires_schema_decision=true`
 because the Senscope neutral profile is a prerequisite.
 
-Engineering/source research can proceed: yes, for export target contract and
-candidate validator design.
+Engineering/source research can proceed: yes, for export target contract,
+source-authority packet, preview fixture, and candidate validator design.
 
-Next concrete action: define the export target contract and candidate validator;
-do not generate vendor-specific output until source support and approval exist.
+Next concrete action: define the export target contract and offline preview /
+checker; do not generate vendor-specific output until source support and
+approval exist.
 
 Required evidence: official corpus manifest, fixture hashes, source-authority
-classification, and candidate validation report.
+classification, and offline preview validation report or blocker.
 
 Stop conditions: vendor format is undecided, official source authority is
 insufficient, or compatibility would be claimed from incomplete evidence.
 
-Explicit non-goals: no WebSerial/device write, no protobuf binary write, no
-firmware flashing automation, and no universal official compatibility claim.
+Explicit non-goals: no production export, no WebSerial/device write, no
+protobuf binary write, no firmware flashing automation, and no universal
+official compatibility claim.
 
 ## Phase 5 - Manual Import/Export And Hardware Validation Loop
 
@@ -316,6 +318,11 @@ declare a release.
   the plan/checklist remain plan-only and no public release or official
   configurator compatibility claim is made.
 - Public/manual workflow release-candidate plan and checklist live in `docs/release/public_manual_workflow_release_candidate_plan.md` and `docs/release/public_manual_workflow_release_candidate_checklist.md`.
+- Offline official configurator export target contract docs live in
+  `docs/export/official_configurator_export_source_authority.md`,
+  `docs/export/official_configurator_export_target_contract.md`, and the
+  preview/invalid fixtures under `docs/export/fixtures/`; they remain
+  offline-only and do not claim production export or official compatibility.
 - Runtime-loaded config remains not implemented.
 - Runtime-config storage remains not implemented.
 - Firmware binary/protobuf parser integration remains not implemented.

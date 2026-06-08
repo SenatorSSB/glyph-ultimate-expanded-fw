@@ -45,6 +45,7 @@ def main() -> int:
         "docs/calibration/README.md",
         "docs/calibration/INDEX.md",
         "docs/calibration/archive_policy.md",
+        "docs/export/README.md",
     )
     for rel_path in required_paths:
         if not (REPO_ROOT / rel_path).exists():
@@ -59,6 +60,7 @@ def main() -> int:
     )
     require_phrases("README.md", main_docs)
     require_phrases("AGENTS.md", ("docs/CURRENT_STATE.md", "docs/ROADMAP.md", "docs/WORKFLOW.md"))
+    require_phrases("README.md", ("docs/export/README.md",))
 
     require_phrases(
         "docs/CURRENT_STATE.md",
@@ -77,6 +79,7 @@ def main() -> int:
             "No nunchuk validation is claimed",
             "No universal official configurator compatibility claim is made",
             "No direct device write is implemented or claimed",
+            "Offline official configurator export target contract work is docs/tools only",
         ),
     )
 
@@ -87,7 +90,7 @@ def main() -> int:
             "Phase 1 - Senscope Neutral Profile Format",
             "Phase 2 - Generated-Config/Evaluator Bridge",
             "Phase 3 - Generated C++ Constants / Firmware Build Path",
-            "Phase 4 - Offline Official Configurator Export Candidate",
+            "Phase 4 - Offline Official Configurator Export Target Contract",
             "Phase 5 - Manual Import/Export And Hardware Validation Loop",
             "Phase 6 - Stable Firmware + Bounded Config-Owned Modifier Data",
             "Phase 7 - Runtime-Loaded Config Interpreter",
@@ -100,6 +103,7 @@ def main() -> int:
             "Runtime-loaded config is not implemented",
             "WebSerial/device write is not implemented",
             "Protobuf binary write is not implemented",
+            "Offline official configurator export target contract docs live in",
         ),
     )
 
