@@ -205,6 +205,18 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   artifact sizes and hashes.
 - `docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json` -
   machine-readable build-size and artifact metadata for the same baseline.
+- `docs/runtime_config/phase7a_activation_failure_root_cause_analysis_2026-06-09.md` -
+  docs/tools-only root-cause analysis for the Phase 7A compiled-payload
+  activation hardware failure; no fix implemented, root cause not proven, and
+  failed activation branch must remain abandoned.
+- `docs/runtime_config/fixtures/phase7a_activation_failure_root_cause_analysis_2026-06-09.json` -
+  machine-readable root-cause analysis evidence fixture.
+- `docs/runtime_config/phase7a_activation_failure_diagnostic_build_matrix.md` -
+  diagnostic build matrix plan for controlled future hardware-gated isolation;
+  not implemented.
+- `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
+  read-only checker for the root-cause analysis packet, fixture, and diagnostic
+  matrix.
 - `docs/runtime_config/fixtures/phase7a_compiled_activation_failure_analysis_2026-06-08.json`
   - machine-readable failure-analysis fixture.
 - `tools/check_glyph_phase7a_compiled_activation_failure_analysis.py` -

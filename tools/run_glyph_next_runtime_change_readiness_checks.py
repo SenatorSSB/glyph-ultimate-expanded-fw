@@ -200,6 +200,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_phase7a_activation_repair_minimal.py",
         ),
         step(
+            "phase7a activation failure root-cause analysis",
+            "tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py",
+        ),
+        step(
             "runtime config firmware binary parser plan",
             "tools/check_glyph_runtime_config_firmware_binary_parser_plan.py",
         ),
