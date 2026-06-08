@@ -1,0 +1,92 @@
+{
+  "schema_name": "glyph_phase7a_compiled_activation_failure_analysis",
+  "status": "failure_analysis_only_no_fix_implemented",
+  "failed_branch": "phase7a-runtime-config-compiled-payload-activation",
+  "failure_result_branch": "phase7a-runtime-config-compiled-payload-activation-hardware-failure",
+  "baseline_branch": "configurator",
+  "failure_report_text": "I dont know what happened after tests, but I was wrong. Some inputs completely cut the connection from the controller. At least pressing rf5 or rf6 disconnect it according to the game console",
+  "recovery_report_text": "i restored the previous fw, which works fine still",
+  "tested_baseline_status": "configurator_restored_and_works_fine",
+  "merge_allowed": false,
+  "recommended_next_branch": "phase7a-runtime-config-activation-repair-minimal",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "title": "Global/static initialization or const parse result memory/runtime interaction",
+      "classification": "plausible_but_unproven",
+      "confidence": "medium",
+      "evidence": [
+        "Failed activation branch adds namespace-scope kPhase7ACompiledPayloadParseResult initialized by ParseUltimateRuntimeConfigPayload.",
+        "ResolveActiveRuntimeConfig gates runtime view selection on that parse result.",
+        "No debugger, map-file, watchdog, or USB trace evidence proves a low-level cause."
+      ],
+      "proposed_next_check": "Avoid a persistent global runtime ParseResult or prove object placement and initialization before hardware activation."
+    },
+    {
+      "id": "H2",
+      "title": "Static memory/layout pressure from 530-byte compiled payload or parser code",
+      "classification": "plausible_but_unproven",
+      "confidence": "medium",
+      "evidence": [
+        "Failed activation branch adds a 530-byte compiled payload array and active parser gate.",
+        "No inspected artifact proves RAM/flash pressure or report/USB corruption.",
+        "This remains a risk note, not a diagnosis."
+      ],
+      "proposed_next_check": "Compare firmware size/map output between configurator and a minimal activation probe before hardware testing."
+    },
+    {
+      "id": "H3",
+      "title": "Activation boundary changed lifetime/reference behavior",
+      "classification": "plausible_but_unproven",
+      "confidence": "low",
+      "evidence": [
+        "UpdateAnalogOutputs changed from direct ValidateRuntimeConfigView selection to ResolveActiveRuntimeConfig.",
+        "Resolved references still point at source-owned static runtime views.",
+        "No payload-backed table lifetime or pointer ownership was introduced."
+      ],
+      "proposed_next_check": "Keep runtime view selection identical to configurator until validation is proven outside the output path."
+    },
+    {
+      "id": "H4",
+      "title": "Parser validation path triggered unexpected embedded-runtime behavior",
+      "classification": "plausible_but_unproven",
+      "confidence": "low",
+      "evidence": [
+        "Parser path is newly active in firmware and gates active runtime config selection.",
+        "Parser source does not show mutation, storage access, or output-path side effects.",
+        "The parse result is global rather than recomputed on RF5/RF6 press."
+      ],
+      "proposed_next_check": "Prefer host/build-time equivalence checks or compile-time diagnostics before a runtime parser gate."
+    },
+    {
+      "id": "H5",
+      "title": "Unrelated but activation-branch-specific interaction",
+      "classification": "unknown",
+      "confidence": "low",
+      "evidence": [
+        "Recovery report isolates regression to the activation branch.",
+        "No hardware instrumentation isolates the RF5/RF6 disconnect to a specific low-level mechanism.",
+        "Static analysis alone cannot eliminate all branch-specific interactions."
+      ],
+      "proposed_next_check": "Start a new minimal branch from configurator with one bounded activation change and a hardware gate."
+    }
+  ],
+  "caveats": [
+    "user-reported failure",
+    "exact low-level disconnect cause unknown",
+    "do not infer firmware crash mechanism without debugging",
+    "configurator baseline restored and works fine",
+    "failed activation branch must not merge",
+    "analysis branch implements no fix",
+    "future runtime activation requires hardware gate"
+  ],
+  "non_claims": [
+    "no hardware pass",
+    "no nunchuk validation",
+    "no runtime-loaded config storage",
+    "no WebSerial/device write",
+    "no firmware flashing automation",
+    "no official configurator compatibility claim",
+    "no definite low-level crash cause"
+  ]
+}
