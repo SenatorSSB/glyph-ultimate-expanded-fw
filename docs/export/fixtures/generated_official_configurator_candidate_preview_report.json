@@ -1,0 +1,36 @@
+{
+  "schema_name": "generated_official_configurator_candidate_preview_report",
+  "contract_version": 1,
+  "status": "OFFLINE_DRY_RUN_REPORT_ONLY",
+  "generated_preview": "docs/export/fixtures/generated_official_configurator_candidate_preview.json",
+  "generator": "tools/glyph_official_configurator_export_candidate_dry_run.py",
+  "deterministic": true,
+  "preview_sha256": "7a083bf84bc030e7170739070a9c005527611a457e33db5adaf5342969b3e9ec",
+  "labels": [
+    "offline_preview_only",
+    "not_production_export",
+    "not_device_write",
+    "not_webserial",
+    "not_runtime_loaded_config",
+    "not_official_compatibility_claim"
+  ],
+  "blocked_claims": [
+    "production export",
+    "device write",
+    "WebSerial",
+    "runtime-loaded config",
+    "firmware flashing automation",
+    "official configurator compatibility claim",
+    "universal compatibility claim",
+    "nunchuk validation claim"
+  ],
+  "non_claims": {
+    "production_export_created": false,
+    "device_write_created": false,
+    "webserial_created": false,
+    "runtime_loaded_config_created": false,
+    "official_compatibility_claimed": false,
+    "firmware_flashing_automation_created": false,
+    "nunchuk_validation_claimed": false
+  }
+}

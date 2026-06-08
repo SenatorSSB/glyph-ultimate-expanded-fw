@@ -61,10 +61,32 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   authority packet for the official configurator export target.
 - `docs/export/official_configurator_export_target_contract.md` - offline
   target contract and stop lines.
+- `docs/export/official_configurator_export_validation_report.md` - offline
+  validation report for the target contract, preview fixture, invalid corpus,
+  and mutation cases; not production export.
+- `docs/export/official_configurator_export_candidate_diff_report.md` -
+  offline diff/simulation report between official fixtures and generated
+  preview metadata; not a real official configurator round-trip result.
+- `docs/export/official_configurator_manual_import_export_test_plan.md` -
+  manual official-configurator import/export test plan; not a result.
+- `docs/export/official_configurator_manual_import_export_result_TEMPLATE.md` -
+  template-only future result packet scaffold; not a result.
 - `docs/export/fixtures/official_configurator_export_candidate_preview.json` -
   offline preview fixture; not production export.
 - `docs/export/fixtures/official_configurator_export_invalid_cases.json` -
   invalid corpus for the offline target contract.
+- `docs/export/fixtures/official_configurator_export_mutation_cases.json` -
+  mutation/negative cases for the offline validation report.
+- `docs/export/fixtures/official_configurator_export_validation_report.json` -
+  machine-readable offline validation report.
+- `docs/export/fixtures/generated_official_configurator_candidate_preview.json`
+  - deterministic offline dry-run preview metadata; not production export.
+- `docs/export/fixtures/generated_official_configurator_candidate_preview_report.json`
+  - machine-readable report for the dry-run preview metadata.
+- `docs/export/fixtures/official_configurator_export_candidate_diff_report.json`
+  - machine-readable offline diff/simulation report.
+- `docs/export/fixtures/official_configurator_manual_import_export_test_plan.json`
+  - machine-readable manual test-plan fixture; not a result.
 
 ## Generated-Config / Evaluator / Generated C++ Review Artifacts
 

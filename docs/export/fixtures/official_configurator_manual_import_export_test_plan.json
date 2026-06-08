@@ -1,0 +1,63 @@
+{
+  "schema_name": "official_configurator_manual_import_export_test_plan",
+  "contract_version": 1,
+  "status": "MANUAL_TEST_PLAN_ONLY_NOT_A_RESULT",
+  "candidate_preview_artifact": "docs/export/fixtures/generated_official_configurator_candidate_preview.json",
+  "candidate_preview_sha256": "UNKNOWN_TO_BE_FILLED_AFTER_OPERATOR_SELECTS_ARTIFACT",
+  "operator_fields": {
+    "official_configurator_app_version": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "operator": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "import_route": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "export_back_and_forth_route": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "input_artifact_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "input_artifact_sha256": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "output_artifact_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "output_artifact_sha256": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR"
+  },
+  "comparison_tool_after_capture": "tools/check_glyph_official_configurator_export_candidate_diff.py",
+  "future_result_rows": [
+    {
+      "row_id": "official_configurator_import",
+      "status": "UNKNOWN_NOT_EXECUTED",
+      "pass": false
+    },
+    {
+      "row_id": "official_configurator_export_back_and_forth",
+      "status": "UNKNOWN_NOT_EXECUTED",
+      "pass": false
+    },
+    {
+      "row_id": "post_capture_diff_review",
+      "status": "UNKNOWN_NOT_EXECUTED",
+      "pass": false
+    }
+  ],
+  "pass_fail_criteria": {
+    "pass_requires": [
+      "operator fields recorded",
+      "input and output artifact paths recorded",
+      "input and output hashes recorded",
+      "captured output inspected by a result-specific review"
+    ],
+    "fail_if": [
+      "import rejected",
+      "export unavailable",
+      "hashes missing",
+      "output cannot be parsed as JSON",
+      "unsupported claims would be required"
+    ],
+    "inconclusive_if": [
+      "any required operator field remains unknown"
+    ]
+  },
+  "non_claims": {
+    "no_device_write": true,
+    "no_webserial": true,
+    "no_runtime_loaded_config": true,
+    "no_firmware_flashing_automation": true,
+    "no_hardware_behavior_validation": true,
+    "no_official_compatibility_claim_until_result_recorded_and_inspected": true,
+    "no_nunchuk_validation": true,
+    "not_a_result_packet": true
+  }
+}
