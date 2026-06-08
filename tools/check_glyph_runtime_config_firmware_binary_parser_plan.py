@@ -26,6 +26,7 @@ ALLOWED_CHANGED_PREFIXES = (
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
     "docs/release/",
+    "docs/export/",
     "docs/runtime_config/",
     "docs/calibration/",
     "tools/",

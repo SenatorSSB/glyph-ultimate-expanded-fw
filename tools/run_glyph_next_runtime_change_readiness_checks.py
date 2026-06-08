@@ -62,6 +62,10 @@ def steps() -> list[Step]:
             "tools/check_glyph_official_configurator_corpus_diff.py",
         ),
         step(
+            "official configurator export target contract",
+            "tools/check_glyph_official_configurator_export_target_contract.py",
+        ),
+        step(
             "profile adapter prewrite",
             "tools/check_glyph_profile_adapter_prewrite.py",
             "docs/sources/raw/GlyphUserProfiles.json",
