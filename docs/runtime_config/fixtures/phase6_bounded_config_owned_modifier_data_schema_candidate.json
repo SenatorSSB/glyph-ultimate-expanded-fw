@@ -1,0 +1,95 @@
+{
+  "caveats": [
+    "schema and metadata only",
+    "not a runtime-loaded config payload",
+    "not consumed by firmware",
+    "not a storage layout",
+    "not a WebSerial/device-write payload",
+    "not an official configurator export"
+  ],
+  "config_owned_candidate_data": {
+    "checksums": {
+      "allowed": true,
+      "description": "Integrity metadata for future validation-before-use only."
+    },
+    "coordinate_bounds": {
+      "allowed": true,
+      "description": "Bounded raw integer coordinate limits for candidate table points.",
+      "x": {
+        "max": 255,
+        "min": 0,
+        "type": "integer"
+      },
+      "y": {
+        "max": 255,
+        "min": 0,
+        "type": "integer"
+      }
+    },
+    "metadata": {
+      "allowed": true,
+      "description": "Non-executable descriptive metadata."
+    },
+    "point_count": {
+      "allowed": true,
+      "expected": 9
+    },
+    "provenance": {
+      "allowed": true,
+      "description": "Source-authority and fixture provenance metadata."
+    },
+    "table_ids": {
+      "allowed": true,
+      "description": "Stable bounded identifiers for the approved MODE_ULTIMATE table corpus."
+    },
+    "table_order": {
+      "allowed": true,
+      "description": "Complete deterministic table order; duplicate or missing IDs are invalid."
+    },
+    "table_values": {
+      "allowed": true,
+      "description": "Bounded StickPoint coordinate values only."
+    }
+  },
+  "consumed_by_firmware": false,
+  "firmware_owned_semantics": {
+    "device_write_policy": true,
+    "evaluator_phase_order": true,
+    "fallback": true,
+    "migration": true,
+    "priority_logic": true,
+    "role_resolution": true,
+    "storage_policy": true,
+    "table_selection": true,
+    "validation": true
+  },
+  "forbidden_config_semantics": {
+    "arbitrary_scripting": true,
+    "firmware_patches": true,
+    "hidden_device_write": true,
+    "history_dependent_logic": true,
+    "macros": true,
+    "timing_automation": true,
+    "transport_commands": true,
+    "turbo": true
+  },
+  "mode_scope": "MODE_ULTIMATE",
+  "proposed_boot_load": {
+    "fallback_to_source_owned_baseline": true,
+    "not_implemented": true,
+    "validate_before_use": true
+  },
+  "proposed_format": {
+    "gcfg_like_binary_candidate": true,
+    "not_implemented": true
+  },
+  "proposed_storage": {
+    "not_current_config_bin": true,
+    "not_implemented": true,
+    "separate_mode_scoped_runtime_config_artifact": true
+  },
+  "runtime_loaded_config": false,
+  "schema_name": "phase6_bounded_config_owned_modifier_data_schema_candidate",
+  "schema_version": 1,
+  "status": "SCHEMA_CANDIDATE_NOT_RUNTIME_CONFIG"
+}

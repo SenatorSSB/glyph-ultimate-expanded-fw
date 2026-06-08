@@ -214,19 +214,20 @@ validation unless executed and recorded.
 Goal: Define a stable firmware boundary where future config may own bounded
 modifier data while firmware owns evaluator semantics.
 
-Status: `FUTURE_PHASE`; `READY_FOR_ENGINEERING_DESIGN` only for docs/spec work
-when prioritized.
+Status: `PHASE6_DESIGN_COMPLETE_NOT_IMPLEMENTED` for docs/spec/tooling;
+runtime-loaded config implementation remains `FUTURE_PHASE`.
 
 Requirements now: `requires_user_domain_input=false`;
 `requires_user_product_approval=true` before implementation;
 `requires_firmware_change=true` only for the implementation branch;
 `requires_safety_review=true`.
 
-Engineering/source research can proceed: yes, for architecture/spec work if
-prioritized.
+Engineering/source research can proceed: yes, for checker maintenance and
+future implementation-slice design if scoped to docs/tools.
 
-Next concrete action: architecture/spec branch if prioritized; stop before
-firmware source changes until product approval exists.
+Next concrete action: inspect the Phase 6 design artifacts and keep future
+implementation slices behind product approval, source authority, build, and
+hardware gates.
 
 Required evidence: source-backed ownership split, bounded schema, validator
 contract, fallback policy, and hardware validation plan.

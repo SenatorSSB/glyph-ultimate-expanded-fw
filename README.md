@@ -34,6 +34,9 @@ not change Senscope game-semantic source authority.
 - Step 15 source-authority research complete.
 - Step 16 WebSerial/device-write implementation is blocked before implementation.
 - Step 17 flashing automation is forbidden/not approved; safety boundary complete.
+- Phase 6 bounded config-owned modifier-data architecture is complete as
+  docs/spec/tooling only; runtime-loaded config, storage, parser integration,
+  WebSerial/device write, and flashing remain not implemented.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;

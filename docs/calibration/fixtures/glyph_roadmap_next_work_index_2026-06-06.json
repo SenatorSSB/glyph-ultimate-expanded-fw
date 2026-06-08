@@ -657,8 +657,18 @@
       "label": "Stable firmware + bounded config-owned modifier data",
       "current_status": "FUTURE_PHASE",
       "category": "runtime_loaded_config_boundary_design",
+      "evidence_paths": [
+        "docs/runtime_config/phase6_bounded_config_owned_data_architecture.md",
+        "docs/runtime_config/phase6_bounded_config_source_authority.md",
+        "docs/runtime_config/runtime_config_blockers_1_to_5_decision_packet.md",
+        "docs/runtime_config/phase6_to_phase7_implementation_slice_plan.md",
+        "docs/runtime_config/fixtures/phase6_bounded_config_owned_modifier_data_schema_candidate.json",
+        "docs/runtime_config/fixtures/phase6_bounded_config_invalid_cases.json",
+        "tools/check_glyph_phase6_bounded_config_architecture.py",
+        "tools/check_glyph_phase6_bounded_config_schema_candidate.py"
+      ],
       "allowed_next_action": "architecture_spec_branch_if_prioritized",
-      "notes": "Future phase; ready for docs/spec engineering design only if prioritized. requires_user_domain_input=false; product approval required before implementation."
+      "notes": "Design/docs/tools complete; implementation remains pending product approval, source authority, build, and hardware gates. No runtime-loaded config, storage, parser integration, WebSerial/device write, or flashing is implemented."
     },
     {
       "item_id": "runtime_loaded_config_design_validation_contract",
