@@ -42,6 +42,13 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - matching public/manual workflow RC hardware result fixture.
 - `glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.md`
   - user-reported runtime-config interpreter source-baseline hardware result.
+- `glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.md`
+  - user-reported Phase 7A compiled/test payload activation hardware failure;
+    RF5/RF6 implicated in console/game disconnect, branch must not merge, and
+    nunchuk remains NOT_TESTED.
+- `fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
+  - matching Phase 7A compiled/test payload activation hardware failure
+    fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
@@ -167,6 +174,13 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
     `NOT_TESTED` and not a result.
 - `docs/calibration/fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_plan_2026-06-08.json`
   - matching plan-only hardware fixture; not a result.
+- `docs/calibration/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.md`
+  - user-reported hardware failure for the Phase 7A compiled/test payload
+    activation branch; RF5/RF6 implicated in console/game disconnect, previous
+    configurator firmware restored and works fine, and the branch must not
+    merge.
+- `docs/calibration/fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
+  - matching machine-readable hardware failure fixture.
 - `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin`
   - deterministic valid baseline `GCFG` payload fixture; not runtime-loaded
     config.
