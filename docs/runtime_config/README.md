@@ -31,6 +31,10 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_compiled_activation_failure_analysis_2026-06-08.md` - failure
   analysis only for the Phase 7A compiled/test payload activation hardware
   failure; no fix implemented and failed activation branch must not merge.
+- `phase7a_runtime_config_activation_repair_minimal.md` - minimal source-level
+  repair packet for Option A. This branch uses build-time/source validation only,
+  records no runtime behavior changes, and marks the failed activation branch as
+  abandoned.
 - `phase7a_safer_activation_repair_plan.md` - plan-only next-branch strategy
   for a safer minimal activation repair attempt; not implemented.
 - `runtime_config_semantics_evaluator_bridge.md`
