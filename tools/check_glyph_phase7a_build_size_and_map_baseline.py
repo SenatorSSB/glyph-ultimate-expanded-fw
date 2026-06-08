@@ -27,6 +27,8 @@ FIXTURE_PATH = (
 EXPECTED_STATUS_DOC = "BUILD_SIZE_BASELINE_RECORDED"
 EXPECTED_STATUS_JSON = "build_size_baseline_recorded"
 EXPECTED_BRANCH = "phase7a-build-size-and-map-baseline"
+POST_MERGE_BRANCH = "configurator"
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, POST_MERGE_BRANCH}
 EXPECTED_BASELINE_BRANCH = "configurator"
 EXPECTED_BUILD_COMMAND = "./scripts/build-glyph-mk6-quiet.sh"
 EXPECTED_CAVEATS = (
@@ -104,8 +106,11 @@ def validate_report() -> None:
     require_match(r"^status:\s*`" + re.escape(EXPECTED_STATUS_DOC) + r"`\s*$", text, "report status")
     require_match(r"^branch:\s*`([^`]+)`\s*$", text, "report branch")
     branch = require_match(r"^branch:\s*`([^`]+)`\s*$", text, "report branch")
-    if branch != EXPECTED_BRANCH:
-        fail(f"report branch mismatch: {branch!r} != {EXPECTED_BRANCH!r}")
+    if branch not in ALLOWED_BRANCHES:
+        fail(
+            f"report branch mismatch: {branch!r} (allowed: "
+            f"{', '.join(sorted(ALLOWED_BRANCHES))!r})"
+        )
 
     baseline_branch = require_match(
         r"^baseline branch:\s*`([^`]+)`\s*$",
@@ -144,10 +149,10 @@ def validate_fixture() -> None:
             f"{EXPECTED_STATUS_JSON!r}"
         )
 
-    if payload.get("branch") != EXPECTED_BRANCH:
+    if payload.get("branch") not in ALLOWED_BRANCHES:
         fail(
-            f'fixture branch mismatch: {payload.get("branch")!r} != '
-            f"{EXPECTED_BRANCH!r}"
+            f'fixture branch mismatch: {payload.get("branch")!r} (allowed: '
+            f'{", ".join(sorted(ALLOWED_BRANCHES))!r})'
         )
 
     if payload.get("baseline_branch") != EXPECTED_BASELINE_BRANCH:
@@ -259,8 +264,10 @@ def validate_git_context() -> None:
     if completed.returncode != 0:
         fail("unable to determine current branch")
     current = completed.stdout.strip()
-    if current != EXPECTED_BRANCH:
-        fail(f"checker must run on {EXPECTED_BRANCH}, got {current!r}")
+    if current not in ALLOWED_BRANCHES:
+        fail(
+            f"checker must run on {', '.join(sorted(ALLOWED_BRANCHES))}, got {current!r}"
+        )
 
 
 def main() -> int:
