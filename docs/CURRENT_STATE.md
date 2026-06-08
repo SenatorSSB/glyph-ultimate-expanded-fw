@@ -21,6 +21,11 @@ packets remain under `docs/calibration/`.
 - Step 15 source-authority research complete.
 - Step 16 WebSerial/device-write implementation is blocked before implementation.
 - Step 17 flashing automation is forbidden/not approved; safety boundary complete.
+- Phase 6 bounded config-owned modifier-data architecture is complete as
+  docs/spec/tooling only in
+  `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md`;
+  runtime-loaded config, storage, firmware parser integration, WebSerial/device
+  write, and flashing remain not implemented.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -91,6 +96,8 @@ engineering decisions.
 - Runtime-loaded config is not implemented.
 - Runtime-config storage is not implemented.
 - Firmware binary/protobuf parser integration is not implemented.
+- Phase 6 bounded config-owned modifier-data docs, fixtures, and checkers are
+  complete for design review only.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

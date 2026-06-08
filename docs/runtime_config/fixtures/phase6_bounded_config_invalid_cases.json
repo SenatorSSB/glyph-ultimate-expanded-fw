@@ -1,0 +1,287 @@
+{
+  "baseline_fixture": "docs/runtime_config/fixtures/phase6_bounded_config_owned_modifier_data_schema_candidate.json",
+  "cases": [
+    {
+      "case_id": "macro_attempt",
+      "invalid_class": "macro attempt",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "forbidden_config_semantics",
+            "macros"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "turbo_attempt",
+      "invalid_class": "turbo attempt",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "forbidden_config_semantics",
+            "turbo"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "timing_automation",
+      "invalid_class": "timing automation",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "forbidden_config_semantics",
+            "timing_automation"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "arbitrary_script",
+      "invalid_class": "arbitrary script",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "forbidden_config_semantics",
+            "arbitrary_scripting"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "hidden_device_write_command",
+      "invalid_class": "hidden device-write command",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "forbidden_config_semantics",
+            "hidden_device_write"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "transport_command_embedded_in_config",
+      "invalid_class": "transport command embedded in config",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "forbidden_config_semantics",
+            "transport_commands"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "firmware_patch_payload",
+      "invalid_class": "firmware patch payload",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "forbidden_config_semantics",
+            "firmware_patches"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "unknown_mode_scope",
+      "invalid_class": "unknown mode scope",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "mode_scope"
+          ],
+          "value": "MODE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "case_id": "cross_mode_table_injection",
+      "invalid_class": "cross-mode table injection",
+      "patch": [
+        {
+          "op": "add",
+          "path": [
+            "config_owned_candidate_data",
+            "cross_mode_tables"
+          ],
+          "value": {
+            "mode_scope": "MODE_MELEE"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "wrong_table_count",
+      "invalid_class": "wrong table count",
+      "patch": [
+        {
+          "op": "add",
+          "path": [
+            "config_owned_candidate_data",
+            "table_count"
+          ],
+          "value": {
+            "expected": 26
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "wrong_point_count",
+      "invalid_class": "wrong point count",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "config_owned_candidate_data",
+            "point_count",
+            "expected"
+          ],
+          "value": 8
+        }
+      ]
+    },
+    {
+      "case_id": "out_of_range_coordinate",
+      "invalid_class": "out-of-range coordinate",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "config_owned_candidate_data",
+            "coordinate_bounds",
+            "x",
+            "max"
+          ],
+          "value": 300
+        }
+      ]
+    },
+    {
+      "case_id": "missing_fallback",
+      "invalid_class": "missing fallback",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "firmware_owned_semantics",
+            "fallback"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "duplicate_table_id",
+      "invalid_class": "duplicate table id",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "config_owned_candidate_data",
+            "table_ids",
+            "allowed"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "unknown_table_id",
+      "invalid_class": "unknown table id",
+      "patch": [
+        {
+          "op": "set",
+          "path": [
+            "config_owned_candidate_data",
+            "table_ids",
+            "allowed"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "case_id": "config_claims_evaluator_priority_ownership",
+      "invalid_class": "config claims evaluator priority ownership",
+      "patch": [
+        {
+          "op": "add",
+          "path": [
+            "config_owned_candidate_data",
+            "priority_logic"
+          ],
+          "value": {
+            "allowed": true
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "config_claims_storage_write_policy",
+      "invalid_class": "config claims storage write policy",
+      "patch": [
+        {
+          "op": "add",
+          "path": [
+            "config_owned_candidate_data",
+            "storage_policy"
+          ],
+          "value": {
+            "allowed": true
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "config_claims_webserial_authority",
+      "invalid_class": "config claims WebSerial authority",
+      "patch": [
+        {
+          "op": "add",
+          "path": [
+            "config_owned_candidate_data",
+            "webserial_authority"
+          ],
+          "value": {
+            "allowed": true
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "config_claims_nunchuk_validation",
+      "invalid_class": "config claims nunchuk validation",
+      "patch": [
+        {
+          "op": "add",
+          "path": [
+            "config_owned_candidate_data",
+            "nunchuk_validation"
+          ],
+          "value": "claimed"
+        }
+      ]
+    }
+  ],
+  "schema_name": "phase6_bounded_config_invalid_cases",
+  "status": "INVALID_CORPUS_NOT_RUNTIME_CONFIG"
+}

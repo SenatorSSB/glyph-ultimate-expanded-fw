@@ -174,6 +174,28 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   device-write safety plan and implementation stop line.
 - `docs/runtime_config/runtime_config_flashing_automation_safety_boundary.md` - Step 17
   flashing safety boundary and implementation stop line.
+- `docs/runtime_config/README.md` - runtime-config docs index and current
+  Phase 6 design-only boundary.
+- `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md` -
+  Phase 6 bounded config-owned modifier-data architecture; design-only and not
+  implemented.
+- `docs/runtime_config/phase6_bounded_config_source_authority.md` - Phase 6
+  source-authority packet; no runtime-loaded config implementation claim.
+- `docs/runtime_config/runtime_config_blockers_1_to_5_decision_packet.md` -
+  proposed decisions for runtime-config blockers 1-5; all not implemented.
+- `docs/runtime_config/phase6_to_phase7_implementation_slice_plan.md` -
+  future implementation-slice plan with hardware gates; not an implementation
+  approval.
+- `docs/runtime_config/fixtures/phase6_bounded_config_owned_modifier_data_schema_candidate.json`
+  - schema/metadata candidate only; not runtime-loaded config.
+- `docs/runtime_config/fixtures/phase6_bounded_config_invalid_cases.json` -
+  Phase 6 invalid corpus for forbidden config-owned behavior.
+- `docs/calibration/glyph_runtime_config_phase6_phase7_hardware_matrix_TEMPLATE.md`
+  - future hardware matrix template; not a result.
+- `tools/check_glyph_phase6_bounded_config_architecture.py` - Phase 6
+  architecture/source/blocker/scope guardrail checker.
+- `tools/check_glyph_phase6_bounded_config_schema_candidate.py` - Phase 6
+  schema-candidate and invalid-corpus checker.
 - `tools/check_glyph_runtime_config_webserial_device_write_source_authority.py`
   - Step 15 WebSerial/device-write source-authority guardrail checker.
 - `tools/check_glyph_runtime_config_manual_load_path_plan.py` - Step 14

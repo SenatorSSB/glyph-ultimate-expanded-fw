@@ -405,6 +405,14 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_loaded_config_design.py",
         ),
         step(
+            "phase6 bounded config architecture",
+            "tools/check_glyph_phase6_bounded_config_architecture.py",
+        ),
+        step(
+            "phase6 bounded config schema candidate",
+            "tools/check_glyph_phase6_bounded_config_schema_candidate.py",
+        ),
+        step(
             "agentic sequence protocol",
             "tools/check_glyph_agentic_sequence_protocol.py",
         ),
