@@ -1,0 +1,83 @@
+{
+  "schema_name": "official_configurator_export_mutation_cases",
+  "contract_version": 1,
+  "status": "OFFLINE_MUTATION_CASES_ONLY",
+  "validator_tool": "tools/check_glyph_official_configurator_export_validation_report.py",
+  "cases": [
+    {
+      "case_id": "missing_manifest_path",
+      "mutation": "manifest path omitted from validation metadata",
+      "expected_rejection": "manifest path must be present and source-backed"
+    },
+    {
+      "case_id": "wrong_manifest_hash",
+      "mutation": "manifest hash differs from committed manifest",
+      "expected_rejection": "manifest hash must match the committed manifest"
+    },
+    {
+      "case_id": "wrong_default_fixture_hash",
+      "mutation": "default fixture hash differs from committed fixture",
+      "expected_rejection": "default fixture hash must match the committed fixture"
+    },
+    {
+      "case_id": "wrong_back_and_forth_fixture_hash",
+      "mutation": "back-and-forth fixture hash differs from committed fixture",
+      "expected_rejection": "back-and-forth fixture hash must match the committed fixture"
+    },
+    {
+      "case_id": "missing_preview_labels",
+      "mutation": "offline preview labels are missing",
+      "expected_rejection": "preview labels must preserve offline-only non-claims"
+    },
+    {
+      "case_id": "unknown_field_claimed_source_backed",
+      "mutation": "unobserved field is marked source-backed",
+      "expected_rejection": "unknown fields must remain unknown or unsupported"
+    },
+    {
+      "case_id": "external_remapper_evidence_promoted_as_official",
+      "mutation": "external-remapper evidence is promoted as official source authority",
+      "expected_rejection": "external-remapper evidence must remain quarantined"
+    },
+    {
+      "case_id": "official_compatibility_claim",
+      "mutation": "official configurator compatibility is claimed",
+      "expected_rejection": "official configurator compatibility must not be claimed"
+    },
+    {
+      "case_id": "universal_compatibility_claim",
+      "mutation": "universal official configurator compatibility is claimed",
+      "expected_rejection": "universal compatibility must not be claimed"
+    },
+    {
+      "case_id": "production_export_claim",
+      "mutation": "candidate is presented as production export output",
+      "expected_rejection": "production export must not be claimed"
+    },
+    {
+      "case_id": "device_write_flag",
+      "mutation": "device-write flag is enabled",
+      "expected_rejection": "device write must remain unimplemented"
+    },
+    {
+      "case_id": "webserial_flag",
+      "mutation": "WebSerial flag is enabled",
+      "expected_rejection": "WebSerial must remain unimplemented"
+    },
+    {
+      "case_id": "runtime_loaded_config_claim",
+      "mutation": "runtime-loaded config is claimed",
+      "expected_rejection": "runtime-loaded config must remain unimplemented"
+    },
+    {
+      "case_id": "firmware_flashing_automation_claim",
+      "mutation": "firmware flashing automation is claimed",
+      "expected_rejection": "firmware flashing automation must remain unimplemented"
+    },
+    {
+      "case_id": "nunchuk_validation_claim",
+      "mutation": "nunchuk validation is claimed",
+      "expected_rejection": "nunchuk validation must remain unclaimed"
+    }
+  ]
+}

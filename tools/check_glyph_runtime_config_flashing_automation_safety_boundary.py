@@ -122,6 +122,7 @@ REQUIRED_NON_CLAIMS = (
 
 DOC_ALLOWED_NON_AUTOMATION_PHRASES = (
     "not implemented",
+    "unimplemented",
     "not approved",
     "forbidden",
     "does not implement",
@@ -132,6 +133,9 @@ DOC_ALLOWED_NON_AUTOMATION_PHRASES = (
     "implementation stop line",
     "not an automation path",
     "no automation",
+    "no firmware flashing automation",
+    '"firmware_flashing_automation_created": false',
+    '"no_firmware_flashing_automation": true',
     "read-only",
     "analysis and recovery planning",
 )
@@ -244,6 +248,7 @@ def ensure_no_automation_markers_in_changed_files() -> None:
         "docs/CURRENT_STATE.md",
         "docs/ROADMAP.md",
         "docs/release/",
+        "docs/export/",
         "docs/runtime_config/",
         "docs/calibration/",
     )

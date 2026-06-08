@@ -1,0 +1,105 @@
+{
+  "schema_name": "official_configurator_export_candidate_diff_report",
+  "contract_version": 1,
+  "status": "OFFLINE_DIFF_SIMULATION_ONLY",
+  "inputs": {
+    "official_default_fixture": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+    "official_default_fixture_sha256": "2d24324928f9c0292e3fce74f02083a740272eeb7a271437be10b7b4f6bf025e",
+    "official_back_and_forth_fixture": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json",
+    "official_back_and_forth_fixture_sha256": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b",
+    "generated_candidate_preview": "docs/export/fixtures/generated_official_configurator_candidate_preview.json",
+    "generated_candidate_preview_sha256": "7a083bf84bc030e7170739070a9c005527611a457e33db5adaf5342969b3e9ec"
+  },
+  "classification": {
+    "stable_top_level_keys": [
+      "gameModeConfigs",
+      "communicationBackendConfigs",
+      "keyboardModes",
+      "rgbConfigs",
+      "defaultBackendConfig",
+      "defaultUsbBackendConfig",
+      "rgbBrightness",
+      "defaultDashboardOption"
+    ],
+    "stable_counts": {
+      "gameModeConfigs": 13,
+      "communicationBackendConfigs": 8,
+      "keyboardModes": 1,
+      "rgbConfigs": 13
+    },
+    "changed_gameModeConfigs_entries": [
+      {
+        "name": "Brawl",
+        "modeId": "MODE_PROJECT_M",
+        "key": "Brawl::MODE_PROJECT_M",
+        "changed_fields": [
+          "socdPairs"
+        ],
+        "socdPairs_count_default": 4,
+        "socdPairs_count_back_and_forth": 5,
+        "buttonRemapping_count_default": 19,
+        "buttonRemapping_count_back_and_forth": 19
+      },
+      {
+        "name": "Keyboard",
+        "modeId": "MODE_KEYBOARD",
+        "key": "Keyboard::MODE_KEYBOARD",
+        "changed_fields": [
+          "socdPairs"
+        ],
+        "socdPairs_count_default": 2,
+        "socdPairs_count_back_and_forth": 2,
+        "buttonRemapping_count_default": 0,
+        "buttonRemapping_count_back_and_forth": 0
+      },
+      {
+        "name": "Ultimate",
+        "modeId": "MODE_ULTIMATE",
+        "key": "Ultimate::MODE_ULTIMATE",
+        "changed_fields": [
+          "buttonRemapping",
+          "socdPairs"
+        ],
+        "socdPairs_count_default": 4,
+        "socdPairs_count_back_and_forth": 6,
+        "buttonRemapping_count_default": 19,
+        "buttonRemapping_count_back_and_forth": 17
+      }
+    ],
+    "changed_rgbConfigs_entries": [
+      2
+    ],
+    "changed_scalar_defaults": [],
+    "fields_unknown": [
+      "exact official configurator app version",
+      "exact capture timestamp",
+      "exact push/download route details",
+      "whether generated metadata is importable by the official configurator",
+      "whether any future export target should be profile-scoped, global, or mixed"
+    ],
+    "fields_unsupported": [
+      "fields not observed in the official corpus fixtures",
+      "gameplay semantics for nested values",
+      "device transport behavior",
+      "runtime-loaded config behavior"
+    ],
+    "fields_unsafe_to_model": [
+      "official configurator import acceptance",
+      "official configurator export/back-and-forth success",
+      "device write behavior",
+      "runtime-loaded config behavior",
+      "firmware flashing behavior",
+      "gameplay semantics"
+    ]
+  },
+  "non_claims": {
+    "manual_official_configurator_app_interaction_occurred": false,
+    "no_compatibility_claim": true,
+    "no_production_export": true,
+    "no_device_write": true,
+    "no_runtime_loaded_config": true,
+    "no_webserial": true,
+    "no_firmware_flashing_automation": true,
+    "no_nunchuk_validation": true
+  }
+}

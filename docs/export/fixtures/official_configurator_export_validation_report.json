@@ -1,0 +1,33 @@
+{
+  "schema_name": "official_configurator_export_validation_report",
+  "contract_version": 1,
+  "status": "OFFLINE_VALIDATION_REPORT_ONLY",
+  "source_authority_docs_used": [
+    "docs/export/official_configurator_export_source_authority.md",
+    "docs/calibration/glyph_external_remapper_misattribution_correction_2026-06-06.md",
+    "docs/calibration/glyph_official_configurator_corpus_diff_2026-06-06.md"
+  ],
+  "contract_doc_used": "docs/export/official_configurator_export_target_contract.md",
+  "manifest": {
+    "path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "sha256": "08c8e43218250ad75f187f3fc5d22dd36fc27b112047f9dfdb612cbb232359a5"
+  },
+  "fixture_hashes": {
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json": "2d24324928f9c0292e3fce74f02083a740272eeb7a271437be10b7b4f6bf025e",
+    "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b"
+  },
+  "preview_fixture_checked": "docs/export/fixtures/official_configurator_export_candidate_preview.json",
+  "invalid_corpus_checked": "docs/export/fixtures/official_configurator_export_invalid_cases.json",
+  "mutation_cases_checked": "docs/export/fixtures/official_configurator_export_mutation_cases.json",
+  "contract_checker_reused": "tools/check_glyph_official_configurator_export_target_contract.py",
+  "non_claims": {
+    "no_production_export": true,
+    "no_official_compatibility_claim": true,
+    "no_device_write": true,
+    "no_webserial": true,
+    "no_runtime_loaded_config": true,
+    "no_firmware_flashing_automation": true,
+    "no_nunchuk_validation": true,
+    "external_remapper_evidence_quarantined": true
+  }
+}
