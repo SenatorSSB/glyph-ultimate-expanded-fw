@@ -414,7 +414,7 @@ def validate_result_doc(folder: Path, capture_id: str) -> None:
     if not result_doc.exists():
         fail(f"{display(folder)} missing required result markdown {result_doc.name}")
     text = read_text(result_doc)
-    status_match = re.search(r"(?im)^\\s*status\\s*[:=]\\s*`?([A-Za-z0-9_\\- ]+)`?", text)
+    status_match = re.search(r"(?im)^\s*status\s*[:=]\s*`?([A-Za-z0-9_ -]+)`?", text)
     if not status_match:
         fail(f"{display(folder)} result markdown must include a Status marker")
     status = status_match.group(1).strip().upper().replace(" ", "_")

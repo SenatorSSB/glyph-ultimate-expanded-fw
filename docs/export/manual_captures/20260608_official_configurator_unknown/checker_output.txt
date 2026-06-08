@@ -1,0 +1,7 @@
+glyph_official_configurator_manual_capture_result
+manual_capture_folder_count=1
+manual_capture_folder_ok=docs/export/manual_captures/20260608_official_configurator_unknown
+status=PASS
+manual_capture_scaffold_valid=True
+forbidden_claims_blocked=True
+reviewed_capture_result_packet_found=True

@@ -1,0 +1,91 @@
+{
+  "schema_name": "official_configurator_manual_capture_metadata",
+  "contract_version": 1,
+  "status": "INCONCLUSIVE",
+  "packet_type": "official_configurator_manual_capture",
+  "official_configurator_app_version": "UNRECORDED_BY_OPERATOR",
+  "operating_system": "macOS",
+  "operator": "Rasmus",
+  "capture_datetime": "2026-06-08T12:05:58Z",
+  "input_candidate_path": "docs/export/manual_captures/20260608_official_configurator_unknown/input_candidate.json",
+  "input_candidate_sha256": "7a083bf84bc030e7170739070a9c005527611a457e33db5adaf5342969b3e9ec",
+  "output_export_path": "docs/export/manual_captures/20260608_official_configurator_unknown/output_export.json",
+  "output_export_sha256": "d81d2db36ea3e7cb4879536663c2a8be5ca21f14068ffe4e98c5a71ba4c44b46",
+  "app_acceptance_status": "INCONCLUSIVE",
+  "import_route": "manual official configurator app import/load route; exact UI route not recorded",
+  "export_route": "manual official configurator app download/export route; exact UI route not recorded",
+  "result_status": "INCONCLUSIVE",
+  "capture_performed": true,
+  "result_recorded": true,
+  "preconditions": {
+    "official_corpus_manifest_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "official_corpus_default_profiles_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+    "official_corpus_back_and_forth_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json",
+    "candidate_preview_artifact": "docs/export/fixtures/generated_official_configurator_candidate_preview.json",
+    "capture_id": "20260608_official_configurator_unknown",
+    "precondition_status": "SATISFIED_FOR_MANUAL_CAPTURE"
+  },
+  "operator_fields": {
+    "operator": "Rasmus",
+    "official_configurator_app_version": "UNRECORDED_BY_OPERATOR",
+    "operator_started_utc": "UNRECORDED_BY_OPERATOR",
+    "operator_finished_utc": "2026-06-08T12:05:58Z"
+  },
+  "routes": {
+    "import_route": "manual official configurator app import/load route; exact UI route not recorded",
+    "export_back_and_forth_route": "manual official configurator app download/export route; exact UI route not recorded",
+    "browser_environment": "macOS; exact browser/app wrapper not recorded"
+  },
+  "artifacts": {
+    "input_artifact_path": "docs/export/manual_captures/20260608_official_configurator_unknown/input_candidate.json",
+    "input_artifact_sha256": "7a083bf84bc030e7170739070a9c005527611a457e33db5adaf5342969b3e9ec",
+    "output_artifact_path": "docs/export/manual_captures/20260608_official_configurator_unknown/output_export.json",
+    "output_artifact_sha256": "d81d2db36ea3e7cb4879536663c2a8be5ca21f14068ffe4e98c5a71ba4c44b46",
+    "metadata_path": "docs/export/manual_captures/20260608_official_configurator_unknown/metadata.json",
+    "notes_path": "docs/export/manual_captures/20260608_official_configurator_unknown/notes.md",
+    "checker_output_path": "docs/export/manual_captures/20260608_official_configurator_unknown/checker_output.txt"
+  },
+  "comparison": {
+    "comparison_tool": "tools/check_glyph_official_configurator_export_candidate_diff.py",
+    "checker_output_status": "INCONCLUSIVE"
+  },
+  "result_rows": [
+    {
+      "row_id": "official_configurator_import_route",
+      "status": "INCONCLUSIVE",
+      "pass": false
+    },
+    {
+      "row_id": "official_configurator_export_route",
+      "status": "INCONCLUSIVE",
+      "pass": false
+    },
+    {
+      "row_id": "post_capture_json_diff_review",
+      "status": "INCONCLUSIVE",
+      "pass": false
+    }
+  ],
+  "non_claims": {
+    "capture_not_performed": false,
+    "result_not_recorded": false,
+    "production_export_not_claimed": true,
+    "official_configurator_compatibility_not_claimed": true,
+    "device_write_not_claimed": true,
+    "webserial_not_claimed": true,
+    "runtime_loaded_config_not_claimed": true,
+    "firmware_flashing_automation_not_claimed": true,
+    "hardware_behavior_validation_not_claimed": true,
+    "nunchuk_validation_not_claimed": true,
+    "no_store_imported_external_assertions": true
+  },
+  "non_claims_list": [
+    "no_device_write",
+    "no_webserial",
+    "no_runtime_loaded_config",
+    "no_firmware_flashing_automation",
+    "no_hardware_behavior_validation",
+    "no_official_compatibility_claim_until_reviewed",
+    "no_nunchuk_validation"
+  ]
+}
