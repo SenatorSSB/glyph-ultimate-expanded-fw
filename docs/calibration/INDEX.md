@@ -42,6 +42,11 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - matching public/manual workflow RC hardware result fixture.
 - `glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.md`
   - user-reported runtime-config interpreter source-baseline hardware result.
+- `glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.md`
+  - user-reported Phase 7A compiled/test runtime-config payload activation
+    hardware failure; failed activation branch must not merge.
+- `fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
+  - matching machine-readable Phase 7A activation hardware failure fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
@@ -186,6 +191,15 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   simulator checker.
 - `tools/check_glyph_runtime_config_firmware_parser_scaffold.py` - compiled
   scaffold guardrail checker.
+- `docs/runtime_config/phase7a_compiled_activation_failure_analysis_2026-06-08.md`
+  - docs/tools-only failure analysis for the Phase 7A compiled/test payload
+    activation hardware failure; no fix implemented.
+- `docs/runtime_config/fixtures/phase7a_compiled_activation_failure_analysis_2026-06-08.json`
+  - machine-readable failure-analysis fixture.
+- `tools/check_glyph_phase7a_compiled_activation_failure_analysis.py` -
+  read-only failure-analysis guardrail checker.
+- `docs/runtime_config/phase7a_safer_activation_repair_plan.md` - plan-only
+  safer next activation repair strategy; not implemented.
 - `docs/runtime_config/runtime_config_firmware_binary_parser_source_authority.md`
   - Step 13 firmware binary/protobuf parser source-authority packet.
 - `docs/runtime_config/runtime_config_firmware_binary_parser_integration_plan.md`
