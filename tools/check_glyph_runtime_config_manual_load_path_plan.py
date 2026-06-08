@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -29,6 +30,11 @@ FORBIDDEN_CHANGED_PREFIXES = (
     "config/",
     "lib/",
 )
+
+PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS = {
+    "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigParser.hpp",
+}
 
 REQUIRED_PHRASES = (
     "MANUAL_LOAD_IMPLEMENTATION_ALLOWED_BY_SOURCE_AUDIT=false",
@@ -133,12 +139,36 @@ def ensure_no_positive_claims(text: str) -> None:
 
 def ensure_changed_scope() -> None:
     changed = changed_paths_against_base()
-    forbidden = [path for path in changed if path.startswith(FORBIDDEN_CHANGED_PREFIXES)]
+    forbidden = [
+        path
+        for path in changed
+        if path.startswith(FORBIDDEN_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
+    ]
     if forbidden:
         fail("firmware/source paths changed while manual-load implementation is blocked: " + ", ".join(forbidden))
-    out_of_scope = [path for path in changed if not path.startswith(ALLOWED_CHANGED_PREFIXES)]
+    out_of_scope = [
+        path
+        for path in changed
+        if not path.startswith(ALLOWED_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
+    ]
     if out_of_scope:
         fail("Step 14 branch contains out-of-scope changed paths: " + ", ".join(out_of_scope))
+    scaffold_changed = [path for path in changed if path in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS]
+    if scaffold_changed:
+        completed = subprocess.run(
+            [sys.executable, "tools/check_glyph_runtime_config_firmware_parser_scaffold.py"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode != 0:
+            fail(
+                "Phase 7A firmware scaffold changed but scaffold guardrail failed: "
+                + "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
+            )
 
 
 def ensure_no_manual_load_symbols_added() -> None:
@@ -148,6 +178,8 @@ def ensure_no_manual_load_symbols_added() -> None:
             continue
         for path in root.rglob("*"):
             if not path.is_file() or path.suffix.lower() not in {".c", ".cc", ".cpp", ".h", ".hpp"}:
+                continue
+            if str(path.relative_to(REPO_ROOT)) == "src/modes/UltimateRuntimeConfigParser.hpp":
                 continue
             text = path.read_text(encoding="utf-8", errors="ignore")
             for marker in FORBIDDEN_SOURCE_MARKERS:

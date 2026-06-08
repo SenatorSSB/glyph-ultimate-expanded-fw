@@ -1,0 +1,19 @@
+{
+  "device_write": false,
+  "firmware_flashing": false,
+  "mode_scope": "MODE_ULTIMATE",
+  "oracle_accepts_baseline": true,
+  "payload_json_path": "docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.json",
+  "payload_path": "docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin",
+  "payload_sha256": "0f668127c270fb7be382677f68a528d1e1d18829254bb7f16fa901e30414bc32",
+  "payload_size_bytes": 530,
+  "point_count_per_table": 9,
+  "runtime_activation": false,
+  "schema_name": "glyph_phase7a_runtime_config_candidate_generation_report",
+  "schema_version": 1,
+  "status": "offline_parser_foundation_not_runtime_active",
+  "storage": false,
+  "table_count": 27,
+  "test_vectors_path": "docs/runtime_config/fixtures/phase7a_runtime_config_parser_test_vectors.json",
+  "webserial": false
+}

@@ -53,7 +53,7 @@ EXPECTED_PREVIEW_FIELDS = {
 }
 EXPECTED_SOURCE_AUTHORITY_CLASSIFICATION = "source_backed_current_baseline_preview_only"
 EXPECTED_SOURCE_REFERENCES = {
-    "src/modes/Ultimate.cpp": "d54f082601697d6c47925b56dbb81e1bcb3636829266bf61b7f2dc8856372706",
+    "src/modes/Ultimate.cpp": "4b1151a1c2150728ef4be9db1c3e17c458e7991d42c330c2a03cf06862ecf034",
     "src/modes/UltimateIdentityRuntimeTables.hpp": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400",
     "src/modes/UltimateRuntimeConfigInterpreter.hpp": "ce694ab1f656145742b2e657c2960a813bfa115a0d787a11f43df438eefe1a2f",
     "tools/extract_glyph_identity_runtime_tables.py": "e7d9bfd18cfd469d5f030d53628bfb9dd74d3c14b5f04ef533f6c7f8b8aa7bad",

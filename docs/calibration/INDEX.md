@@ -156,6 +156,36 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   docs/tools guardrail checker.
 - `tools/check_glyph_runtime_config_binary_offline_roundtrip.py` - Step 12
   offline binary round-trip and invalid-corpus checker.
+- `docs/runtime_config/phase7a_runtime_config_parser_offline_and_compiled_scaffold.md`
+  - Phase 7A offline parser/generator/oracle/checker/storage-simulator
+    foundation with a compiled but not runtime-active firmware parser scaffold.
+- `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin`
+  - deterministic valid baseline `GCFG` payload fixture; not runtime-loaded
+    config.
+- `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.json`
+  - JSON sidecar for the Phase 7A valid baseline payload.
+- `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload_report.json`
+  - deterministic generation report for the Phase 7A valid baseline payload.
+- `docs/runtime_config/fixtures/phase7a_runtime_config_parser_test_vectors.json`
+  - parser vector corpus for valid and invalid offline payloads.
+- `docs/runtime_config/fixtures/phase7b_storage_simulation_report.json` -
+  design-time storage simulation report; not firmware storage and not
+  `config.bin`.
+- `docs/calibration/glyph_phase7a_runtime_config_parser_compiled_scaffold_hardware_plan_TEMPLATE.md`
+  - future hardware plan template for any later runtime-active parser work; not
+    a result.
+- `tools/glyph_runtime_config_candidate_generator.py` - deterministic Phase 7A
+  offline payload and vector generator.
+- `tools/glyph_runtime_config_parser_oracle.py` - host-side offline parser
+  oracle; not firmware behavior.
+- `tools/check_glyph_runtime_config_parser_equivalence.py` - static equivalence
+  checker for generated/decoded/source-owned table parity.
+- `tools/glyph_runtime_config_storage_simulator.py` - design-time storage
+  simulator; not firmware storage or device write.
+- `tools/check_glyph_runtime_config_storage_simulator.py` - design-time storage
+  simulator checker.
+- `tools/check_glyph_runtime_config_firmware_parser_scaffold.py` - compiled
+  scaffold guardrail checker.
 - `docs/runtime_config/runtime_config_firmware_binary_parser_source_authority.md`
   - Step 13 firmware binary/protobuf parser source-authority packet.
 - `docs/runtime_config/runtime_config_firmware_binary_parser_integration_plan.md`

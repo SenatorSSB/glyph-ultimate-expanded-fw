@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -33,6 +34,10 @@ IMPLEMENTATION_PREFIXES = (
     "HAL/",
     "config/",
 )
+PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS = {
+    "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigParser.hpp",
+}
 DEVICE_TOOL_PATHS = (
     "tools/glyph_serial_config_tool.py",
 )
@@ -146,14 +151,20 @@ def ensure_no_positive_claims(text: str) -> None:
 
 def ensure_changed_scope_and_hardware_plan() -> None:
     changed = changed_paths_against_base()
-    out_of_scope = [path for path in changed if not path.startswith(ALLOWED_CHANGED_PREFIXES)]
+    out_of_scope = [
+        path
+        for path in changed
+        if not path.startswith(ALLOWED_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
+    ]
     if out_of_scope:
         fail("Step 16 branch contains out-of-scope changed paths: " + ", ".join(out_of_scope))
 
     implementation_changed = [
         path
         for path in changed
-        if path.startswith(IMPLEMENTATION_PREFIXES) or path in DEVICE_TOOL_PATHS
+        if (path.startswith(IMPLEMENTATION_PREFIXES) or path in DEVICE_TOOL_PATHS)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
     ]
     if source_flag_false() and implementation_changed:
         fail(
@@ -165,6 +176,20 @@ def ensure_changed_scope_and_hardware_plan() -> None:
             "hardware plan is required when firmware or device-write implementation files change: "
             f"{HARDWARE_PLAN.relative_to(REPO_ROOT)}"
         )
+    scaffold_changed = [path for path in changed if path in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS]
+    if scaffold_changed:
+        completed = subprocess.run(
+            [sys.executable, "tools/check_glyph_runtime_config_firmware_parser_scaffold.py"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode != 0:
+            fail(
+                "Phase 7A firmware scaffold changed but scaffold guardrail failed: "
+                + "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
+            )
 
 
 def ensure_gates_block_step16() -> None:

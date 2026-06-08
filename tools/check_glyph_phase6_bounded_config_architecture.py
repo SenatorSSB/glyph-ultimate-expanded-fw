@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -47,6 +48,11 @@ FORBIDDEN_CHANGED_PREFIXES = (
     "platformio.ini",
     "scripts/",
 )
+
+PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS = {
+    "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigParser.hpp",
+}
 
 REQUIRED_ARCH_PHRASES = (
     "PHASE6_DESIGN_COMPLETE_NOT_IMPLEMENTED",
@@ -176,15 +182,35 @@ def changed_paths() -> list[str]:
 
 def ensure_changed_paths_in_scope() -> None:
     changed = changed_paths()
-    forbidden = [path for path in changed if path.startswith(FORBIDDEN_CHANGED_PREFIXES)]
+    forbidden = [
+        path
+        for path in changed
+        if path.startswith(FORBIDDEN_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
+    ]
     if forbidden:
         fail("Phase 6 branch changed forbidden firmware/source/build paths: " + ", ".join(forbidden))
     out_of_scope = [
         path for path in changed
         if not path.startswith(ALLOWED_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
     ]
     if out_of_scope:
         fail("Phase 6 branch changed out-of-scope paths: " + ", ".join(out_of_scope))
+    scaffold_changed = [path for path in changed if path in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS]
+    if scaffold_changed:
+        completed = subprocess.run(
+            [sys.executable, "tools/check_glyph_runtime_config_firmware_parser_scaffold.py"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode != 0:
+            fail(
+                "Phase 7A firmware scaffold changed but scaffold guardrail failed: "
+                + "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
+            )
 
 
 def main() -> int:

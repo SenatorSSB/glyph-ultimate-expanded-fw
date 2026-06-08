@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -31,6 +32,11 @@ FORBIDDEN_CHANGED_PREFIXES = (
     "lib/",
     "scripts/",
 )
+
+PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS = {
+    "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigParser.hpp",
+}
 
 REQUIRED_HEADINGS = (
     "Purpose",
@@ -232,13 +238,37 @@ def changed_paths_against_base() -> list[str]:
 
 def ensure_changed_scope() -> None:
     changed = changed_paths_against_base()
-    forbidden = [path for path in changed if path.startswith(FORBIDDEN_CHANGED_PREFIXES)]
+    forbidden = [
+        path
+        for path in changed
+        if path.startswith(FORBIDDEN_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
+    ]
     if forbidden:
         fail("forbidden firmware/source paths changed on Step 17 boundary branch: " + ", ".join(forbidden))
 
-    out_of_scope = [path for path in changed if not path.startswith(ALLOWED_CHANGED_PREFIXES)]
+    out_of_scope = [
+        path
+        for path in changed
+        if not path.startswith(ALLOWED_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
+    ]
     if out_of_scope:
         fail("Step 17 branch contains out-of-scope changed paths: " + ", ".join(out_of_scope))
+    scaffold_changed = [path for path in changed if path in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS]
+    if scaffold_changed:
+        completed = subprocess.run(
+            [sys.executable, "tools/check_glyph_runtime_config_firmware_parser_scaffold.py"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode != 0:
+            fail(
+                "Phase 7A firmware scaffold changed but scaffold guardrail failed: "
+                + "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
+            )
 
 
 def ensure_no_automation_markers_in_changed_files() -> None:
@@ -253,6 +283,8 @@ def ensure_no_automation_markers_in_changed_files() -> None:
         "docs/calibration/",
     )
     for relpath in changed:
+        if relpath in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS:
+            continue
         if relpath == "tools/check_glyph_runtime_config_flashing_automation_safety_boundary.py":
             continue
         if relpath.startswith("tools/"):

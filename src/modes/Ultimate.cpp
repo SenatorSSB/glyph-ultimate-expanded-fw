@@ -15,6 +15,12 @@ struct StickPoint {
 // Keep the generated-like table constants in the shared generated-like source.
 #include "modes/UltimateIdentityRuntimeTables.hpp"
 #include "modes/UltimateRuntimeConfigInterpreter.hpp"
+#include "modes/UltimateRuntimeConfigParser.hpp"
+
+static_assert(
+    UltimateRuntimeConfigParser::kPayloadSize == 530,
+    "Phase 7A parser scaffold must stay aligned with the offline GCFG-like payload size"
+);
 
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
