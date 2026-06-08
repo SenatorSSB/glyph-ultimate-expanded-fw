@@ -1,0 +1,180 @@
+{
+  "schema_name": "glyph_phase7a_activation_failure_root_cause_analysis",
+  "status": "root_cause_analysis_only_no_fix_implemented",
+  "failed_branch": "phase7a-runtime-config-compiled-payload-activation",
+  "failure_result_branch": "phase7a-runtime-config-compiled-payload-activation-hardware-failure",
+  "known_good_branch": "configurator",
+  "known_good_baseline_branch": "phase7a-build-size-and-map-baseline",
+  "failure_report_text": "I dont know what happened after tests, but I was wrong. Some inputs completely cut the connection from the controller. At least pressing rf5 or rf6 disconnect it according to the game console",
+  "recovery_report_text": "i restored the previous fw, which works fine still",
+  "refs_inspected": [
+    {
+      "name": "configurator",
+      "ref": "origin/configurator",
+      "short_sha": "39cd246",
+      "available": true
+    },
+    {
+      "name": "phase7a-runtime-config-parser-offline-and-compiled-scaffold",
+      "ref": "origin/phase7a-runtime-config-parser-offline-and-compiled-scaffold",
+      "short_sha": "9993d07",
+      "available": true
+    },
+    {
+      "name": "phase7a-runtime-config-compiled-payload-activation",
+      "ref": "origin/phase7a-runtime-config-compiled-payload-activation",
+      "short_sha": "94b4295",
+      "available": true
+    },
+    {
+      "name": "phase7a-runtime-config-compiled-payload-activation-hardware-failure",
+      "ref": "origin/phase7a-runtime-config-compiled-payload-activation-hardware-failure",
+      "short_sha": "4a4bb59",
+      "available": true
+    },
+    {
+      "name": "phase7a-runtime-config-activation-repair-minimal",
+      "ref": "origin/phase7a-runtime-config-activation-repair-minimal",
+      "short_sha": "cb9df4c",
+      "available": true
+    },
+    {
+      "name": "phase7a-build-size-and-map-baseline",
+      "ref": "origin/phase7a-build-size-and-map-baseline",
+      "short_sha": "2ed1a55",
+      "available": true
+    }
+  ],
+  "changed_files_in_failed_branch": [
+    "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigCompiledPayload.hpp",
+    "src/modes/UltimateRuntimeConfigParser.hpp"
+  ],
+  "suspected_risk_patterns": [
+    "compiled payload header added",
+    "530-byte compiled payload bytes added to source-visible firmware image",
+    "global non-constexpr parse result added",
+    "parser call during namespace-scope static initialization",
+    "ResolveActiveRuntimeConfig wrapper added",
+    "analog path now depends on compiled payload parse status",
+    "failed activation artifact metadata unavailable",
+    "RF5 and RF6 both exercise analog runtime-config lookup paths"
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "title": "Global/static initialization risk",
+      "confidence": "source-backed-medium",
+      "evidence_for": [
+        "failed branch introduced kPhase7ACompiledPayloadParseResult",
+        "initializer calls ParseUltimateRuntimeConfigPayload at namespace scope",
+        "pattern absent from known-good configurator and inert scaffold"
+      ],
+      "evidence_against": [
+        "parser input is fixed payload bytes and fixed size",
+        "parser source shows no storage, WebSerial, device write, flashing, or backend access",
+        "failure report names RF5/RF6-triggered disconnect rather than proven boot failure"
+      ],
+      "next_diagnostic": "D3 global parse result only"
+    },
+    {
+      "id": "H2",
+      "title": "Static image/layout/size risk",
+      "confidence": "source-backed-medium",
+      "evidence_for": [
+        "failed branch added 530-byte compiled payload array",
+        "failed branch added payload metadata strings and made parser/resolver code reachable",
+        "known-good configurator artifact baseline exists"
+      ],
+      "evidence_against": [
+        "failed branch artifact size/hash metadata is unavailable",
+        "source diff alone cannot prove image layout or memory section failure"
+      ],
+      "next_diagnostic": "D2 compiled payload header only"
+    },
+    {
+      "id": "H3",
+      "title": "Runtime resolver/reference path risk",
+      "confidence": "source-backed-medium",
+      "evidence_for": [
+        "failed branch introduced ResolveActiveRuntimeConfig",
+        "UpdateAnalogOutputs changed from local conditional reference binding to function-returned reference",
+        "RF5/RF6 paths use runtime-config lookup in analog processing"
+      ],
+      "evidence_against": [
+        "resolver returns existing static runtime-config views",
+        "backend report packing and OutputState shape did not change",
+        "resolver does not parse per frame"
+      ],
+      "next_diagnostic": "D4 runtime resolver only"
+    },
+    {
+      "id": "H4",
+      "title": "Parser CRC/loop risk",
+      "confidence": "plausible-low",
+      "evidence_for": [
+        "failed branch calls parser logic on compiled payload",
+        "parser includes CRC and validation loops",
+        "parser call was absent from known-good configurator"
+      ],
+      "evidence_against": [
+        "parser call is source-visible as global initialization rather than direct RF5/RF6 per-frame handling",
+        "parser source shows no hardware, transport, storage, or backend access",
+        "no watchdog, stack, heap, USB, or panic evidence is recorded"
+      ],
+      "next_diagnostic": "D5 local explicit parse at controlled startup or cold path"
+    },
+    {
+      "id": "H5",
+      "title": "RF5/RF6-specific output path interaction",
+      "confidence": "source-backed-medium",
+      "evidence_for": [
+        "user report names RF5/RF6",
+        "RF5 source path includes forced-Up, A, direction-plus-A, and analog lookup",
+        "RF6 source path includes buttonR/Z and low-magnitude Z-airdodge analog lookup",
+        "both paths use active runtime-config reference"
+      ],
+      "evidence_against": [
+        "failed branch did not directly change RF5/RF6 expressions",
+        "backend report packing did not change",
+        "source does not prove an RF5/RF6-specific crash mechanism"
+      ],
+      "next_diagnostic": "D4 plus hardware matrix rows for RF5, RF6, neutral, ordinary directions, and unrelated buttons"
+    },
+    {
+      "id": "H6",
+      "title": "Latent unrelated interaction",
+      "confidence": "plausible-low",
+      "evidence_for": [
+        "activation branch changed static data and code reachability",
+        "embedded behavior can expose latent layout or timing sensitivity"
+      ],
+      "evidence_against": [
+        "no specific latent memory, timing, USB, watchdog, stack, heap, or backend failure evidence is recorded",
+        "current configurator firmware works after restore"
+      ],
+      "next_diagnostic": "record artifact sizes and map sections for each D0-D6 build before hardware testing"
+    }
+  ],
+  "root_cause_proven": false,
+  "failed_branch_merge_allowed": false,
+  "future_runtime_activation_requires_hardware": true,
+  "caveats": [
+    "exact low-level disconnect mechanism unknown",
+    "failure is isolated to failed activation branch by user-reported restore result",
+    "failed activation artifact metadata unavailable",
+    "hypotheses are ranked by source evidence but not proven as root cause",
+    "next step is diagnostic builds, not direct repair"
+  ],
+  "non_claims": [
+    "no fix implemented",
+    "no firmware source changed",
+    "no hardware pass claimed",
+    "no nunchuk validation claimed",
+    "no runtime-loaded config implemented",
+    "no runtime-config storage implemented",
+    "no WebSerial/device write implemented",
+    "no firmware flashing automation implemented",
+    "no definite low-level crash cause claimed"
+  ]
+}

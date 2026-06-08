@@ -41,6 +41,18 @@ artifacts unless a specific packet says otherwise.
   artifact table for the build-size baseline.
 - `tools/check_glyph_phase7a_build_size_and_map_baseline.py` - read-only checker
   for the Phase 7A build-size and map baseline packet/fixture.
+- `phase7a_activation_failure_root_cause_analysis_2026-06-09.md` - root-cause
+  analysis packet for the failed Phase 7A compiled-payload activation branch;
+  analysis-only, no fix implemented, root cause not proven.
+- `fixtures/phase7a_activation_failure_root_cause_analysis_2026-06-09.json` -
+  machine-readable evidence fixture for the Phase 7A activation failure
+  root-cause analysis.
+- `phase7a_activation_failure_diagnostic_build_matrix.md` - diagnostic build
+  matrix plan for isolating the activation failure cause; plan-only and not
+  implemented.
+- `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
+  read-only checker for the root-cause analysis packet, fixture, diagnostic
+  matrix, and no-firmware-source-change guardrail.
 - `phase7a_safer_activation_repair_plan.md` - plan-only next-branch strategy
   for a safer minimal activation repair attempt; not implemented.
 - `runtime_config_semantics_evaluator_bridge.md`
@@ -64,6 +76,9 @@ artifacts unless a specific packet says otherwise.
   adds only a compiled inert parser scaffold.
 - Phase 7A compiled/test payload activation failed hardware testing on its
   activation branch and is recorded as failure analysis only here.
+- Phase 7A activation root cause is not proven; the failed activation branch
+  must remain abandoned and future runtime activation requires hardware-gated
+  diagnostic builds.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.
