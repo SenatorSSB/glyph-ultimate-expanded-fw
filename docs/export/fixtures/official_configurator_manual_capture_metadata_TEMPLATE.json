@@ -1,0 +1,91 @@
+{
+  "schema_name": "official_configurator_manual_capture_metadata",
+  "contract_version": 1,
+  "status": "TEMPLATE_ONLY_NOT_A_RESULT",
+  "packet_type": "official_configurator_manual_capture",
+  "official_configurator_app_version": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "operating_system": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "operator": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "capture_datetime": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "input_candidate_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "input_candidate_sha256": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "output_export_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "output_export_sha256": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "app_acceptance_status": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "import_route": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "export_route": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+  "result_status": "UNKNOWN_TO_BE_FILLED_BY_REVIEWER",
+  "capture_performed": false,
+  "result_recorded": false,
+  "preconditions": {
+    "official_corpus_manifest_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "official_corpus_default_profiles_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+    "official_corpus_back_and_forth_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json",
+    "candidate_preview_artifact": "docs/export/fixtures/generated_official_configurator_candidate_preview.json",
+    "capture_id": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "precondition_status": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR"
+  },
+  "operator_fields": {
+    "operator": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "official_configurator_app_version": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "operator_started_utc": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "operator_finished_utc": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR"
+  },
+  "routes": {
+    "import_route": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "export_back_and_forth_route": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "browser_environment": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR"
+  },
+  "artifacts": {
+    "input_artifact_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "input_artifact_sha256": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "output_artifact_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "output_artifact_sha256": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "metadata_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "notes_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR",
+    "checker_output_path": "UNKNOWN_TO_BE_FILLED_BY_OPERATOR"
+  },
+  "comparison": {
+    "comparison_tool": "tools/check_glyph_official_configurator_export_candidate_diff.py",
+    "checker_output_status": "UNKNOWN_NOT_EXECUTED"
+  },
+  "result_rows": [
+    {
+      "row_id": "official_configurator_import_route",
+      "status": "UNKNOWN_NOT_EXECUTED",
+      "pass": false
+    },
+    {
+      "row_id": "official_configurator_export_route",
+      "status": "UNKNOWN_NOT_EXECUTED",
+      "pass": false
+    },
+    {
+      "row_id": "post_capture_json_diff_review",
+      "status": "UNKNOWN_NOT_EXECUTED",
+      "pass": false
+    }
+  ],
+  "non_claims": {
+    "capture_not_performed": true,
+    "result_not_recorded": true,
+    "production_export_not_claimed": true,
+    "official_configurator_compatibility_not_claimed": true,
+    "device_write_not_claimed": true,
+    "webserial_not_claimed": true,
+    "runtime_loaded_config_not_claimed": true,
+    "firmware_flashing_automation_not_claimed": true,
+    "hardware_behavior_validation_not_claimed": true,
+    "nunchuk_validation_not_claimed": true,
+    "no_store_imported_external_assertions": true
+  },
+  "non_claims_list": [
+    "no_device_write",
+    "no_webserial",
+    "no_runtime_loaded_config",
+    "no_firmware_flashing_automation",
+    "no_hardware_behavior_validation",
+    "no_official_compatibility_claim_until_reviewed",
+    "no_nunchuk_validation"
+  ]
+}
