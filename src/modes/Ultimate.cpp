@@ -14,6 +14,7 @@ struct StickPoint {
 
 // Keep the generated-like table constants in the shared generated-like source.
 #include "modes/UltimateIdentityRuntimeTables.hpp"
+#include "modes/UltimateRuntimeConfigCompiledPayload.hpp"
 #include "modes/UltimateRuntimeConfigInterpreter.hpp"
 #include "modes/UltimateRuntimeConfigParser.hpp"
 
@@ -21,6 +22,16 @@ static_assert(
     UltimateRuntimeConfigParser::kPayloadSize == 530,
     "Phase 7A parser scaffold must stay aligned with the offline GCFG-like payload size"
 );
+static_assert(
+    UltimateRuntimeConfigCompiledPayload::kPhase7ACompiledPayloadSize == UltimateRuntimeConfigParser::kPayloadSize,
+    "Phase 7A compiled payload must stay aligned with the firmware parser"
+);
+
+const UltimateRuntimeConfigParser::ParseResult kPhase7ACompiledPayloadParseResult =
+    UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload(
+        UltimateRuntimeConfigCompiledPayload::kPhase7ACompiledPayload,
+        UltimateRuntimeConfigCompiledPayload::kPhase7ACompiledPayloadSize
+    );
 
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
@@ -233,6 +244,17 @@ void ApplyRightStickDigitalOutputs(const InputState &inputs, OutputState &output
 
     outputs.modX = false;
     outputs.modY = false;
+}
+
+const RuntimeConfigView &ResolveActiveRuntimeConfig() {
+    if (
+        kPhase7ACompiledPayloadParseResult.status == UltimateRuntimeConfigParser::ParseStatus::Ok &&
+        ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
+    ) {
+        return kSourceOwnedCurrentBaselineRuntimeConfig;
+    }
+
+    return kKnownGoodRuntimeConfig;
 }
 
 RuntimeTableId SelectRuntimeTableId(
@@ -462,9 +484,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
-    const RuntimeConfigView &runtime_config = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
-        ? kSourceOwnedCurrentBaselineRuntimeConfig
-        : kKnownGoodRuntimeConfig;
+    const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(

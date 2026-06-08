@@ -51,6 +51,7 @@ FORBIDDEN_CHANGED_PREFIXES = (
 
 PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS = {
     "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigCompiledPayload.hpp",
     "src/modes/UltimateRuntimeConfigParser.hpp",
 }
 
@@ -239,7 +240,7 @@ def main() -> int:
     print("storage_implemented=false")
     print("parser_implemented=false")
     print("device_write_implemented=false")
-    print("firmware_source_changed=false")
+    print("firmware_source_changed=phase7a_compiled_payload_activation_only")
     return 0
 
 

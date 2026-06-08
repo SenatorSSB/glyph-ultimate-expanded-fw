@@ -4,9 +4,10 @@
 #include <cstdint>
 
 // Phase 7A compiled scaffold only.
-// Not runtime-active; no storage; no device write; no WebSerial; no flashing automation.
+// Source-owned compiled/test payload activation only.
+// no storage; no device write; no WebSerial; no flashing automation.
 // This parser validates the offline GCFG-like candidate shape without mutating
-// RuntimeConfigView, reading storage, writing storage, or changing controller outputs.
+// RuntimeConfigView, reading storage, or writing storage.
 
 namespace UltimateRuntimeConfigParser {
 

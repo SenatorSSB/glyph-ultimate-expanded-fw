@@ -6,6 +6,8 @@ from __future__ import annotations
 import hashlib
 import json
 import pathlib
+import subprocess
+import sys
 from typing import Any
 
 try:
@@ -58,6 +60,9 @@ EXPECTED_SOURCE_REFERENCES = {
     "src/modes/UltimateRuntimeConfigInterpreter.hpp": "ce694ab1f656145742b2e657c2960a813bfa115a0d787a11f43df438eefe1a2f",
     "tools/extract_glyph_identity_runtime_tables.py": "e7d9bfd18cfd469d5f030d53628bfb9dd74d3c14b5f04ef533f6c7f8b8aa7bad",
 }
+PHASE7A_ALLOWED_SOURCE_REFERENCE_DRIFT = {
+    "src/modes/Ultimate.cpp",
+}
 
 
 class BinaryOfflineRoundtripError(ValueError):
@@ -72,6 +77,20 @@ def sha256_file(path: pathlib.Path) -> str:
     hasher = hashlib.sha256()
     hasher.update(path.read_bytes())
     return hasher.hexdigest()
+
+
+def activation_checker_passes() -> bool:
+    checker = REPO_ROOT / "tools" / "check_glyph_runtime_config_compiled_payload_activation.py"
+    if not checker.exists():
+        return False
+    completed = subprocess.run(
+        [sys.executable, str(checker.relative_to(REPO_ROOT))],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return completed.returncode == 0
 
 
 def load_json_object(path: pathlib.Path) -> dict[str, Any]:
@@ -131,8 +150,10 @@ def validate_preview_doc(preview: dict[str, Any], baseline_binary: bytes) -> dic
         if sha != expected_hash:
             fail(f"source reference {path} sha mismatch; expected {expected_hash!r}")
         actual_hash = sha256_file(REPO_ROOT / path)
-        if actual_hash != sha:
+        if actual_hash != sha and path not in PHASE7A_ALLOWED_SOURCE_REFERENCE_DRIFT:
             fail(f"source reference {path} does not match file contents")
+        if actual_hash != sha and path in PHASE7A_ALLOWED_SOURCE_REFERENCE_DRIFT and not activation_checker_passes():
+            fail(f"source reference {path} drift requires passing Phase 7A compiled activation checker")
         seen_paths.add(path)
 
     if set(EXPECTED_SOURCE_REFERENCES) - seen_paths:

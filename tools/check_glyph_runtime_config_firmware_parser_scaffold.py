@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Phase 7A compiled-but-inert firmware parser scaffold."""
+"""Validate the Phase 7A bounded firmware parser scaffold."""
 
 from __future__ import annotations
 
@@ -13,9 +13,8 @@ ULTIMATE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 
 REQUIRED_PHRASES = (
     "Phase 7A compiled scaffold only.",
-    "Not runtime-active; no storage; no device write; no WebSerial; no flashing automation.",
+    "no storage; no device write; no WebSerial; no flashing automation.",
     "without mutating",
-    "or changing controller outputs",
     "enum class ParseStatus",
     "ParseUltimateRuntimeConfigPayload",
 )
@@ -59,8 +58,10 @@ def main() -> int:
     if '#include "modes/UltimateRuntimeConfigParser.hpp"' not in ultimate:
         fail("Ultimate.cpp must include parser header so the scaffold compiles")
     call_count = ultimate.count("ParseUltimateRuntimeConfigPayload")
-    if call_count != 0:
-        fail("Ultimate.cpp active source must not call ParseUltimateRuntimeConfigPayload")
+    if call_count != 1:
+        fail("Ultimate.cpp active source must validate exactly one compiled/test payload")
+    if "ResolveActiveRuntimeConfig" not in ultimate:
+        fail("Ultimate.cpp must isolate parser activation behind ResolveActiveRuntimeConfig")
     forbidden_ultimate_symbols = (
         "LoadRuntimeConfig",
         "SaveRuntimeConfig",
@@ -73,7 +74,7 @@ def main() -> int:
 
     print("status=PASS")
     print(f"parser={PARSER_PATH.relative_to(REPO_ROOT)}")
-    print("runtime_active=false")
+    print("runtime_active=compiled_test_payload_only")
     return 0
 
 

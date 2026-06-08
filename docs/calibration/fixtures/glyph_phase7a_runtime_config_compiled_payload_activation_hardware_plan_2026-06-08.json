@@ -1,0 +1,33 @@
+{
+  "schema_name": "glyph_phase7a_runtime_config_compiled_payload_activation_hardware_plan",
+  "schema_version": 1,
+  "status": "PLAN_ONLY_NOT_TESTED",
+  "branch": "phase7a-runtime-config-compiled-payload-activation",
+  "is_hardware_result": false,
+  "hardware_result_recorded": false,
+  "nunchuk_validation_claimed": false,
+  "rows": [
+    {"id": "BOOT-001", "area": "normal boot", "status": "NOT_TESTED"},
+    {"id": "BASELINE-001", "area": "current baseline preserved", "status": "NOT_TESTED"},
+    {"id": "PARSER-001", "area": "compiled valid payload accepted", "status": "NOT_TESTED"},
+    {"id": "FALLBACK-001", "area": "invalid/failure path", "status": "NOT_TESTED"},
+    {"id": "MODIFIERS-001", "area": "representative modifiers", "status": "NOT_TESTED"},
+    {"id": "SPECIAL-001", "area": "special tables", "status": "NOT_TESTED"},
+    {"id": "OVERRIDE-001", "area": "override paths", "status": "NOT_TESTED"},
+    {"id": "CSTICK-001", "area": "c-stick interaction", "status": "NOT_TESTED"},
+    {"id": "NO-STORAGE-001", "area": "no storage read/write", "status": "NOT_TESTED"},
+    {"id": "NO-WRITE-001", "area": "no device write/WebSerial", "status": "NOT_TESTED"},
+    {"id": "NO-FLASH-001", "area": "no flashing automation", "status": "NOT_TESTED"},
+    {"id": "PROFILE-REG-001", "area": "profile regression", "status": "NOT_TESTED"},
+    {"id": "NUNCHUK-001", "area": "nunchuk", "status": "NOT_TESTED"}
+  ],
+  "caveats": [
+    "not_a_hardware_result",
+    "runtime_loaded_config_not_implemented",
+    "runtime_config_storage_not_implemented",
+    "device_write_not_implemented",
+    "webserial_not_implemented",
+    "firmware_flashing_automation_not_implemented",
+    "nunchuk_not_tested"
+  ]
+}

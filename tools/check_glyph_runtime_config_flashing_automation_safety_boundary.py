@@ -35,6 +35,7 @@ FORBIDDEN_CHANGED_PREFIXES = (
 
 PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS = {
     "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigCompiledPayload.hpp",
     "src/modes/UltimateRuntimeConfigParser.hpp",
 }
 

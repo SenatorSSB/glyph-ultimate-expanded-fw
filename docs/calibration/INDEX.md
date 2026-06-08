@@ -159,6 +159,14 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `docs/runtime_config/phase7a_runtime_config_parser_offline_and_compiled_scaffold.md`
   - Phase 7A offline parser/generator/oracle/checker/storage-simulator
     foundation with a compiled but not runtime-active firmware parser scaffold.
+- `docs/runtime_config/phase7a_runtime_config_compiled_payload_activation.md`
+  - Phase 7A source-owned compiled/test payload runtime activation packet;
+    pending hardware result and not payload-backed table ownership.
+- `docs/calibration/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_plan_2026-06-08.md`
+  - hardware plan for Phase 7A compiled/test payload activation; all rows
+    `NOT_TESTED` and not a result.
+- `docs/calibration/fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_plan_2026-06-08.json`
+  - matching plan-only hardware fixture; not a result.
 - `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin`
   - deterministic valid baseline `GCFG` payload fixture; not runtime-loaded
     config.
@@ -186,6 +194,8 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   simulator checker.
 - `tools/check_glyph_runtime_config_firmware_parser_scaffold.py` - compiled
   scaffold guardrail checker.
+- `tools/check_glyph_runtime_config_compiled_payload_activation.py` - Phase 7A
+  compiled/test payload activation guardrail checker.
 - `docs/runtime_config/runtime_config_firmware_binary_parser_source_authority.md`
   - Step 13 firmware binary/protobuf parser source-authority packet.
 - `docs/runtime_config/runtime_config_firmware_binary_parser_integration_plan.md`
