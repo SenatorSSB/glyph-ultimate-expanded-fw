@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -39,6 +40,11 @@ FORBIDDEN_CHANGED_PREFIXES = (
     "config/",
     "lib/",
 )
+
+PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS = {
+    "src/modes/Ultimate.cpp",
+    "src/modes/UltimateRuntimeConfigParser.hpp",
+}
 
 REQUIRED_SOURCE_PHRASES = (
     "IMPLEMENTATION_ALLOWED_BY_SOURCE_AUDIT=false",
@@ -210,6 +216,7 @@ def ensure_no_firmware_source_changed() -> None:
         path
         for path in changed
         if path.startswith(FORBIDDEN_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
     ]
     if forbidden:
         fail("firmware/source paths changed on Step 13 design branch: " + ", ".join(forbidden))
@@ -218,9 +225,25 @@ def ensure_no_firmware_source_changed() -> None:
         path
         for path in changed
         if not path.startswith(ALLOWED_CHANGED_PREFIXES)
+        and path not in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS
     ]
     if out_of_scope:
         fail("Step 13 branch contains out-of-scope changed paths: " + ", ".join(out_of_scope))
+
+    scaffold_changed = [path for path in changed if path in PHASE7A_ALLOWED_FIRMWARE_SCAFFOLD_PATHS]
+    if scaffold_changed:
+        completed = subprocess.run(
+            [sys.executable, "tools/check_glyph_runtime_config_firmware_parser_scaffold.py"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode != 0:
+            fail(
+                "Phase 7A firmware scaffold changed but scaffold guardrail failed: "
+                + "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
+            )
 
 
 def ensure_no_runtime_parser_symbols_added() -> None:
@@ -245,6 +268,8 @@ def ensure_no_runtime_parser_symbols_added() -> None:
             if not path.is_file():
                 continue
             if path.suffix.lower() not in {".cpp", ".hpp", ".h", ".c", ".cc"}:
+                continue
+            if str(path.relative_to(REPO_ROOT)) == "src/modes/UltimateRuntimeConfigParser.hpp":
                 continue
             text = path.read_text(encoding="utf-8", errors="ignore")
             for marker in suspicious_patterns:

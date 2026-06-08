@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "accepted_candidate": false,
+      "case_id": "missing_storage",
+      "error_code": "storage:missing",
+      "fallback_to_source_owned_baseline": true,
+      "storage_present": false
+    },
+    {
+      "accepted_candidate": true,
+      "case_id": "valid_storage",
+      "error_code": "ok",
+      "fallback_to_source_owned_baseline": false,
+      "storage_present": true
+    },
+    {
+      "accepted_candidate": false,
+      "case_id": "corrupt_storage",
+      "error_code": "invalid:checksum",
+      "fallback_to_source_owned_baseline": true,
+      "storage_present": true
+    },
+    {
+      "accepted_candidate": false,
+      "case_id": "wrong_version",
+      "error_code": "invalid:version",
+      "fallback_to_source_owned_baseline": true,
+      "storage_present": true
+    },
+    {
+      "accepted_candidate": false,
+      "case_id": "wrong_checksum",
+      "error_code": "invalid:checksum",
+      "fallback_to_source_owned_baseline": true,
+      "storage_present": true
+    },
+    {
+      "accepted_candidate": false,
+      "case_id": "invalid_payload",
+      "error_code": "invalid:magic",
+      "fallback_to_source_owned_baseline": true,
+      "storage_present": true
+    }
+  ],
+  "fallback_policy_simulated": "fallback_to_source_owned_baseline",
+  "not_config_bin": true,
+  "not_device_write": true,
+  "not_firmware_storage": true,
+  "not_runtime_loaded_firmware_behavior": true,
+  "schema_name": "glyph_phase7b_design_time_storage_simulation_report",
+  "schema_version": 1,
+  "status": "design_time_simulation_only_not_firmware_storage"
+}

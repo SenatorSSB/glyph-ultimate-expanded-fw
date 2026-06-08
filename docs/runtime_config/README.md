@@ -25,6 +25,9 @@ artifacts unless a specific packet says otherwise.
 
 ## Existing Runtime-Config Packets
 
+- `phase7a_runtime_config_parser_offline_and_compiled_scaffold.md` - Phase 7A
+  offline parser/generator/oracle/checker/storage-simulator foundation with a
+  compiled but not runtime-active firmware parser scaffold.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -42,7 +45,8 @@ artifacts unless a specific packet says otherwise.
 
 - Runtime-loaded config is not implemented.
 - Runtime-config storage is not implemented.
-- Firmware parser integration is not implemented.
+- Firmware parser integration/runtime activation is not implemented; Phase 7A
+  adds only a compiled inert parser scaffold.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

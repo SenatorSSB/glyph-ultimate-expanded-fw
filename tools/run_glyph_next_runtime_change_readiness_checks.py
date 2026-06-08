@@ -184,6 +184,18 @@ def steps() -> list[Step]:
             "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
         ),
         step(
+            "runtime config parser equivalence",
+            "tools/check_glyph_runtime_config_parser_equivalence.py",
+        ),
+        step(
+            "runtime config storage simulator",
+            "tools/check_glyph_runtime_config_storage_simulator.py",
+        ),
+        step(
+            "runtime config firmware parser scaffold",
+            "tools/check_glyph_runtime_config_firmware_parser_scaffold.py",
+        ),
+        step(
             "runtime config firmware binary parser plan",
             "tools/check_glyph_runtime_config_firmware_binary_parser_plan.py",
         ),
