@@ -38,7 +38,8 @@ RUNTIME_CONFIG_README_PATH = REPO_ROOT / "docs" / "runtime_config" / "README.md"
 
 EXPECTED_STATUS_MD = "USER_REPORTED_PASS"
 EXPECTED_STATUS_JSON = "user_reported_pass"
-EXPECTED_RESULT_SOURCE = "user-reported"
+EXPECTED_RESULT_SOURCE_MD = "user-reported"
+EXPECTED_RESULT_SOURCE_JSON = "user_reported"
 EXPECTED_USER_REPORT_TEXT = "tested, everything works without issues"
 EXPECTED_DATE = "2026-06-09"
 EXPECTED_DIAGNOSTIC_BRANCH = "phase7a-diagnostic-d4-runtime-resolver-only-clean"
@@ -83,7 +84,7 @@ ALLOWED_CHANGED_PREFIXES = (
 REQUIRED_MD_PHRASES = (
     "Phase 7A Diagnostic D4 Runtime Resolver Only Hardware Result - 2026-06-09",
     "status: USER_REPORTED_PASS",
-    "result source: user-reported",
+    f"result source: {EXPECTED_RESULT_SOURCE_MD}",
     "exact user report text: `tested, everything works without issues`",
     "date: 2026-06-09",
     "diagnostic branch tested: `phase7a-diagnostic-d4-runtime-resolver-only-clean`",
@@ -282,7 +283,7 @@ def validate_result_json(result: dict[str, Any]) -> None:
         "diagnostic_branch": EXPECTED_DIAGNOSTIC_BRANCH,
         "result_branch": EXPECTED_RESULT_BRANCH,
         "exact_user_report_text": EXPECTED_USER_REPORT_TEXT,
-        "result_source": EXPECTED_RESULT_SOURCE,
+        "result_source": EXPECTED_RESULT_SOURCE_JSON,
         "result_date_local": EXPECTED_DATE,
         "hardware_result_recorded": True,
         "d4_passed": True,
