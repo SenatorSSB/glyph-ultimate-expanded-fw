@@ -57,6 +57,10 @@ artifacts unless a specific packet says otherwise.
   D4 build report (diagnostic-only, no parser/compile-payload changes).
 - `fixtures/phase7a_diagnostic_d4_runtime_resolver_only_build_report_2026-06-09.json` -
   machine-readable D4 build report metadata.
+- [`../calibration/glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_result_2026-06-09.md`](../calibration/glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_result_2026-06-09.md) -
+  D4 user-reported hardware result for the runtime-resolver-only branch.
+- `../../tools/check_glyph_phase7a_diagnostic_d4_hardware_result.py` - D4
+  hardware-result checker for branch/result/documentation scope.
 - `tools/check_glyph_phase7a_diagnostic_d4_runtime_resolver_only.py` - D4
   diagnostic checker for resolver-only source/doc/build constraints.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -

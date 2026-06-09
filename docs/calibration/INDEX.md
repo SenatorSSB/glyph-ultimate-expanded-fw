@@ -51,6 +51,13 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - Phase 7A D4 hardware plan template with D4-only rows (not tested).
 - `fixtures/glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_plan_2026-06-09.json`
   - matching machine-readable D4 hardware plan artifact.
+- [`glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_result_2026-06-09.md`](glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_result_2026-06-09.md)
+  - Phase 7A D4 user-reported hardware result for the runtime-resolver-only
+    branch.
+- [`fixtures/glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_result_2026-06-09.json`](fixtures/glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_result_2026-06-09.json)
+  - matching machine-readable D4 hardware result fixture.
+- `tools/check_glyph_phase7a_diagnostic_d4_hardware_result.py`
+  - D4 hardware-result checker for the result branch and navigation links.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
