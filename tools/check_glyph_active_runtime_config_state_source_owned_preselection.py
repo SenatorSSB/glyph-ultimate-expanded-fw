@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Validate source-owned active runtime-config preselection branch.
+"""Validate source-owned active runtime-config preselection branches.
 
-Read-only checker for the source-owned active runtime config scaffold branch.
+Read-only checker for the implementation branch and its recorded hardware-result
+branch.
 """
 
 from __future__ import annotations
@@ -13,8 +14,10 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_BRANCH = "runtime-active-config-state-source-owned-preselection"
+IMPLEMENTATION_BRANCH = "runtime-active-config-state-source-owned-preselection"
+RESULT_BRANCH = "runtime-active-config-state-source-owned-preselection-hardware-result"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCHES = {IMPLEMENTATION_BRANCH, RESULT_BRANCH}
 
 DOC_PATH = REPO_ROOT / "docs/runtime_config/active_runtime_config_state_source_owned_preselection.md"
 DOC_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json"
@@ -27,7 +30,6 @@ ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
 CHECKER_PATH = REPO_ROOT / "tools/check_glyph_active_runtime_config_state_source_owned_preselection.py"
 
 ALLOWED_CHANGED_PATHS = {
-    "src/modes/Ultimate.cpp",
     "docs/runtime_config/active_runtime_config_state_source_owned_preselection.md",
     "docs/runtime_config/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md",
     "docs/runtime_config/fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json",
@@ -116,24 +118,36 @@ def current_branch() -> str:
     return branch[0]
 
 
-def validate_branch() -> None:
+def base_branch_for(branch: str) -> str:
+    if branch == IMPLEMENTATION_BRANCH:
+        return BASE_BRANCH
+    if branch == RESULT_BRANCH:
+        return IMPLEMENTATION_BRANCH
+    fail(f"checker must run on {IMPLEMENTATION_BRANCH} or {RESULT_BRANCH}, got {branch}")
+
+
+def validate_branch() -> tuple[str, str]:
     branch = current_branch()
-    if branch != EXPECTED_BRANCH:
-        fail(f"checker must run on {EXPECTED_BRANCH}, got {branch}")
+    if branch not in ALLOWED_BRANCHES:
+        fail(f"checker must run on {IMPLEMENTATION_BRANCH} or {RESULT_BRANCH}, got {branch}")
+
+    base_branch = base_branch_for(branch)
 
     result = subprocess.run(
-        ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
+        ["git", "merge-base", "--is-ancestor", base_branch, "HEAD"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=False,
     )
     if result.returncode != 0:
-        fail(f"{BASE_BRANCH} must be an ancestor of HEAD on this branch")
+        fail(f"{base_branch} must be an ancestor of HEAD on this branch")
+
+    return branch, base_branch
 
 
-def changed_paths() -> set[str]:
-    paths = set(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
+def changed_paths(base_branch: str) -> set[str]:
+    paths = set(git_lines(["diff", "--name-only", f"{base_branch}...HEAD"]))
     for status_line in git_lines(["status", "--short"]):
         path = status_line[3:].strip()
         if " -> " in path:
@@ -142,20 +156,26 @@ def changed_paths() -> set[str]:
     return paths
 
 
-def validate_changed_paths(paths: set[str]) -> None:
+def validate_changed_paths(paths: set[str], branch: str) -> None:
+    allowed_changed_paths = set(ALLOWED_CHANGED_PATHS)
+    if branch == IMPLEMENTATION_BRANCH:
+        allowed_changed_paths.add("src/modes/Ultimate.cpp")
+
     for path in sorted(paths):
-        if path in ALLOWED_CHANGED_PATHS:
+        if path in allowed_changed_paths:
             continue
         if path.startswith("docs/runtime_config/") or path.startswith("docs/calibration/"):
             continue
         if path.startswith("src/"):
+            if branch == RESULT_BRANCH:
+                fail(f"result branch may not change firmware source relative to {IMPLEMENTATION_BRANCH}: {path}")
             fail(f"unexpected source path changed for this branch: {path}")
         if path.startswith("tools/"):
             continue
         fail(f"preselection branch changed out-of-scope path: {path}")
 
     for path in sorted(paths):
-        if path in ALLOWED_CHANGED_PATHS:
+        if path in allowed_changed_paths:
             continue
         if path.startswith("src/"):
             continue
@@ -337,36 +357,183 @@ def validate_hot_path_and_digital_comparison(current: str, baseline: str) -> Non
         fail("UpdateDigitalOutputs changed in this branch; should remain unchanged")
 
 
-def validate_plan_payload(payload: dict[str, object], expected_status: str) -> None:
-    if payload.get("status") != expected_status:
-        fail(f"hardware plan fixture status mismatch: expected {expected_status!r}, got {payload.get('status')!r}")
-    if payload.get("build_command") != "pio run -e glyph_mk6":
-        fail("hardware plan fixture must use canonical build command")
-
-    rows = payload.get("test_rows")
+def validate_rows(rows: object, expected_results: dict[str, str], result_label: str) -> None:
     if not isinstance(rows, list):
-        fail("hardware plan fixture test_rows must be an array")
+        fail(f"{result_label} rows must be an array")
 
     seen: dict[str, dict[str, object]] = {}
     for row in rows:
         if not isinstance(row, dict):
-            fail("hardware plan row must be an object")
+            fail(f"{result_label} row must be an object")
         row_id = row.get("row_id")
         if not isinstance(row_id, str):
-            fail("hardware row_id must be a string")
+            fail(f"{result_label} row_id must be a string")
         seen[row_id] = row
 
     if set(seen.keys()) != REQUIRED_HARDWARE_ROWS:
         missing = REQUIRED_HARDWARE_ROWS - seen.keys()
         extra = seen.keys() - REQUIRED_HARDWARE_ROWS
         if missing:
-            fail(f"hardware plan fixture missing row ids: {sorted(missing)!r}")
+            fail(f"{result_label} missing row ids: {sorted(missing)!r}")
         if extra:
-            fail(f"hardware plan fixture has unexpected row ids: {sorted(extra)!r}")
+            fail(f"{result_label} has unexpected row ids: {sorted(extra)!r}")
 
-    for row_id, row in seen.items():
-        if row.get("result") != "NOT_TESTED":
-            fail(f"hardware plan row {row_id} must be NOT_TESTED in this branch")
+    for row_id, expected_result in expected_results.items():
+        row = seen[row_id]
+        if row.get("result") != expected_result:
+            fail(f"{result_label} row {row_id} must be {expected_result}, got {row.get('result')!r}")
+
+
+def validate_implementation_hardware_plan(payload: dict[str, object]) -> None:
+    if payload.get("schema_name") != "glyph_active_runtime_config_state_source_owned_preselection_hardware_plan":
+        fail("implementation hardware fixture schema_name mismatch")
+    if payload.get("plan_version") != 1:
+        fail("implementation hardware fixture plan_version must be 1")
+    if payload.get("status") != "plan_only":
+        fail(f"implementation hardware fixture status mismatch: expected 'plan_only', got {payload.get('status')!r}")
+    if payload.get("branch") != IMPLEMENTATION_BRANCH:
+        fail("implementation hardware fixture branch mismatch")
+    if payload.get("build_command") != "pio run -e glyph_mk6":
+        fail("implementation hardware fixture must use canonical build command")
+    if payload.get("hardware_result_recorded") is not False:
+        fail("implementation hardware fixture hardware_result_recorded must be false")
+    if payload.get("commit_sha_under_test") != "unknown":
+        fail("implementation hardware fixture commit_sha_under_test must be unknown")
+    if payload.get("firmware_artifact_path") != "unknown":
+        fail("implementation hardware fixture firmware_artifact_path must be unknown")
+    if payload.get("firmware_artifact_sha256") != "unknown":
+        fail("implementation hardware fixture firmware_artifact_sha256 must be unknown")
+    if payload.get("tester") != "unknown":
+        fail("implementation hardware fixture tester must be unknown")
+    if payload.get("test_date") != "unknown":
+        fail("implementation hardware fixture test_date must be unknown")
+    if payload.get("result_branch") is not None:
+        fail("implementation hardware fixture must not record a result_branch")
+    if payload.get("build_source") is not None:
+        fail("implementation hardware fixture must not record build_source")
+    if payload.get("build_report_path") is not None:
+        fail("implementation hardware fixture must not record build_report_path")
+    if payload.get("build_report_status") is not None:
+        fail("implementation hardware fixture must not record build_report_status")
+    if payload.get("result_source") is not None:
+        fail("implementation hardware fixture must not record result_source")
+    if payload.get("source_report_text") is not None:
+        fail("implementation hardware fixture must not record source_report_text")
+    if payload.get("result_date") is not None:
+        fail("implementation hardware fixture must not record result_date")
+    if payload.get("overall_result") is not None:
+        fail("implementation hardware fixture must not record overall_result")
+    if payload.get("firmware_source_changed_in_implementation_branch") is not None:
+        fail("implementation hardware fixture must not record firmware_source_changed flags")
+    if payload.get("parser_status_read_in_analog_hot_path") is not None:
+        fail("implementation hardware fixture must not record parser hot-path flags")
+    if payload.get("parser_call_added") is not None:
+        fail("implementation hardware fixture must not record parser_call_added")
+    if payload.get("parsed_table_materialization_added") is not None:
+        fail("implementation hardware fixture must not record parsed_table_materialization_added")
+    if payload.get("storage_write_webserial_flashing_added") is not None:
+        fail("implementation hardware fixture must not record storage_write_webserial_flashing_added")
+    if payload.get("nunchuk_status") is not None:
+        fail("implementation hardware fixture must not record nunchuk_status")
+
+    intent = payload.get("intent")
+    if not isinstance(intent, dict):
+        fail("implementation hardware fixture intent must be an object")
+    if intent.get("description") != "Scaffold verification for source-owned active runtime config preselection.":
+        fail("implementation hardware fixture intent description mismatch")
+    if intent.get("scope") != [
+        "source-owned preselection state",
+        "active_view-only analog hot-path consumption",
+        "no parsed table materialization",
+        "no runtime-loaded parser/transport/storage integration",
+    ]:
+        fail("implementation hardware fixture intent scope mismatch")
+    if intent.get("non_claims") != ["no nunchuk validation claim"]:
+        fail("implementation hardware fixture intent non_claims mismatch")
+
+    expected_results = {row_id: "NOT_TESTED" for row_id in REQUIRED_HARDWARE_ROWS}
+    validate_rows(payload.get("test_rows"), expected_results, "implementation hardware fixture")
+
+
+def validate_result_hardware_record(payload: dict[str, object]) -> None:
+    if payload.get("schema_name") != "glyph_active_runtime_config_state_source_owned_preselection_hardware_result":
+        fail("result hardware fixture schema_name mismatch")
+    if payload.get("plan_version") != 1:
+        fail("result hardware fixture plan_version must be 1")
+    if payload.get("status") != "HARDWARE_PASS":
+        fail(f"result hardware fixture status mismatch: expected 'HARDWARE_PASS', got {payload.get('status')!r}")
+    if payload.get("branch") != IMPLEMENTATION_BRANCH:
+        fail("result hardware fixture branch mismatch")
+    if payload.get("result_branch") != RESULT_BRANCH:
+        fail("result hardware fixture result_branch mismatch")
+    if payload.get("build_command") != "pio run -e glyph_mk6":
+        fail("result hardware fixture must use canonical build command")
+    if payload.get("build_source") != "local build artifact already recorded in the build report":
+        fail("result hardware fixture build_source mismatch")
+    if payload.get("build_report_path") != "docs/runtime_config/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md":
+        fail("result hardware fixture build_report_path mismatch")
+    if payload.get("build_report_status") != "build_completed":
+        fail("result hardware fixture build_report_status must be build_completed")
+    if payload.get("hardware_result_recorded") is not True:
+        fail("result hardware fixture hardware_result_recorded must be true")
+    if payload.get("result_source") != "operator-recorded":
+        fail("result hardware fixture result_source mismatch")
+    if payload.get("source_report_text") != "All worked on branch runtime-active-config-state-source-owned-preselection when I built and flashed.":
+        fail("result hardware fixture source_report_text mismatch")
+    if payload.get("result_date") != "2026-06-10":
+        fail("result hardware fixture result_date mismatch")
+    if payload.get("commit_sha_under_test") != "unknown":
+        fail("result hardware fixture commit_sha_under_test must be unknown")
+    if payload.get("firmware_artifact_path") != "unknown":
+        fail("result hardware fixture firmware_artifact_path must be unknown")
+    if payload.get("firmware_artifact_sha256") != "unknown":
+        fail("result hardware fixture firmware_artifact_sha256 must be unknown")
+    if payload.get("tester") != "operator-recorded":
+        fail("result hardware fixture tester mismatch")
+    if payload.get("test_date") != "2026-06-10":
+        fail("result hardware fixture test_date mismatch")
+    if payload.get("overall_result") != "HARDWARE_PASS":
+        fail("result hardware fixture overall_result must be HARDWARE_PASS")
+    if payload.get("firmware_source_changed_in_implementation_branch") is not True:
+        fail("result hardware fixture must record implementation-branch source changes as true")
+    if payload.get("firmware_source_changed_in_result_branch") is not False:
+        fail("result hardware fixture must record result-branch source changes as false")
+    if payload.get("parser_status_read_in_analog_hot_path") is not False:
+        fail("result hardware fixture parser_status_read_in_analog_hot_path must be false")
+    if payload.get("parser_call_added") is not False:
+        fail("result hardware fixture parser_call_added must be false")
+    if payload.get("parsed_table_materialization_added") is not False:
+        fail("result hardware fixture parsed_table_materialization_added must be false")
+    if payload.get("storage_write_webserial_flashing_added") is not False:
+        fail("result hardware fixture storage_write_webserial_flashing_added must be false")
+    if payload.get("nunchuk_status") != "NOT_TESTED":
+        fail("result hardware fixture nunchuk_status must be NOT_TESTED")
+
+    intent = payload.get("intent")
+    if not isinstance(intent, dict):
+        fail("result hardware fixture intent must be an object")
+    if intent.get("description") != "Hardware result record for source-owned active runtime config preselection.":
+        fail("result hardware fixture intent description mismatch")
+    if intent.get("scope") != [
+        "source-owned preselection state",
+        "active_view-only analog hot-path consumption",
+        "no parsed table materialization",
+        "no runtime-loaded parser/transport/storage integration",
+    ]:
+        fail("result hardware fixture intent scope mismatch")
+    if intent.get("non_claims") != [
+        "no runtime-loaded config implemented",
+        "no parsed table materialization implemented",
+        "no storage implemented",
+        "no WebSerial/device write implemented",
+        "no flashing automation implemented",
+        "no nunchuk validation claim",
+    ]:
+        fail("result hardware fixture intent non_claims mismatch")
+
+    expected_results = {row_id: "PASS" for row_id in REQUIRED_HARDWARE_ROWS if row_id != "NUNCHUK-001"}
+    expected_results["NUNCHUK-001"] = "NOT_TESTED"
+    validate_rows(payload.get("test_rows"), expected_results, "result hardware fixture")
 
 
 def validate_build_fixture(payload: dict[str, object], build_report: str) -> None:
@@ -376,7 +543,7 @@ def validate_build_fixture(payload: dict[str, object], build_report: str) -> Non
         fail("build report fixture must use canonical build command")
     if payload.get("build_command") != "pio run -e glyph_mk6":
         fail("build report fixture legacy build_command must match canonical build command")
-    if payload.get("branch") != EXPECTED_BRANCH:
+    if payload.get("branch") != IMPLEMENTATION_BRANCH:
         fail("build report fixture branch mismatch")
     if payload.get("baseline_branch") != BASE_BRANCH:
         fail("build report fixture baseline branch mismatch")
@@ -433,44 +600,75 @@ def validate_build_fixture(payload: dict[str, object], build_report: str) -> Non
     if payload.get("status") not in ("build_completed", "scaffold_ready", "scaffold_verified", "scaffold_with_build"):
         fail("build report fixture status is missing/invalid")
 
-def validate_doc_contents(text: str, build_report: str) -> None:
+def validate_doc_contents(text: str, branch: str) -> None:
     required_phrases = (
         "runtime-active-config-state-source-owned-preselection",
         "GetActiveRuntimeConfigState",
         "ResolveActiveRuntimeConfig",
         "pio run -e glyph_mk6",
+        "active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md",
     )
     for phrase in required_phrases:
         if phrase not in text:
             fail(f"runtime preselection doc missing phrase: {phrase}")
 
-    if build_report not in text:
-        fail("runtime doc should mention build report file")
+    if branch == RESULT_BRANCH:
+        for phrase in (
+            "runtime-active-config-state-source-owned-preselection-hardware-result",
+            "HARDWARE_PASS",
+            "RF5 did not disconnect",
+            "RF6 did not disconnect",
+            "LT6 did not disconnect",
+            "safe enough to become the repair architecture basis",
+            "Nunchuk remains NOT_TESTED",
+        ):
+            if phrase not in text:
+                fail(f"runtime result doc missing phrase: {phrase}")
 
 
-def validate_main_docs() -> None:
+def validate_main_docs(branch: str) -> None:
     doc_text = read_required(DOC_PATH)
     readme_text = read_required(DOC_FIXTURE_PATH)
+    build_report_text = read_required(DOC_BUILD_REPORT_PATH)
     plan_text = read_required(HARDWARE_PLAN_MD)
     current_text = read_required(CURRENT_STATE_PATH)
     roadmap_text = read_required(ROADMAP_PATH)
     fixture = load_json_object(DOC_FIXTURE_PATH)
     plan = load_json_object(HARDWARE_PLAN_JSON)
 
-    validate_doc_contents(doc_text, "active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md")
-    if "Active Runtime Config State Source-Owned Preselection" not in plan_text:
-        fail("hardware plan md missing title text")
-    if "NOT_TESTED" not in plan_text:
-        fail("hardware plan md must contain NOT_TESTED entries")
-    if EXPECTED_BRANCH not in roadmap_text:
-        fail("ROADMAP.md must reference the current preselection branch")
-    if EXPECTED_BRANCH not in current_text:
-        fail("CURRENT_STATE.md must reference the current preselection branch")
-    validate_plan_payload(plan, "plan_only")
+    validate_doc_contents(doc_text, branch)
+    if branch == IMPLEMENTATION_BRANCH:
+        if "Hardware Plan" not in plan_text:
+            fail("implementation hardware packet should still identify as a hardware plan")
+        if "NOT_TESTED" not in plan_text:
+            fail("implementation hardware packet must contain NOT_TESTED entries")
+        if IMPLEMENTATION_BRANCH not in roadmap_text:
+            fail("ROADMAP.md must reference the implementation branch")
+        if IMPLEMENTATION_BRANCH not in current_text:
+            fail("CURRENT_STATE.md must reference the implementation branch")
+        validate_implementation_hardware_plan(plan)
+    else:
+        if "Hardware Result" not in plan_text:
+            fail("result hardware packet must identify as a hardware result")
+        if "HARDWARE_PASS" not in plan_text:
+            fail("result hardware packet must record HARDWARE_PASS")
+        if RESULT_BRANCH not in roadmap_text:
+            fail("ROADMAP.md must reference the result branch")
+        if RESULT_BRANCH not in current_text:
+            fail("CURRENT_STATE.md must reference the result branch")
+        if "safe enough to serve as the repair-architecture basis" not in current_text:
+            fail("CURRENT_STATE.md must record the repair-architecture basis conclusion")
+        if "HARDWARE_PASS" not in current_text:
+            fail("CURRENT_STATE.md must mention HARDWARE_PASS")
+        validate_result_hardware_record(plan)
+    if "status: build_completed" not in build_report_text:
+        fail("build report markdown must remain completed")
+    if "`hardware_result_claimed`: `false`" not in build_report_text:
+        fail("build report markdown must keep hardware_result_claimed false")
     validate_build_fixture(fixture, "")
 
 
-def validate_no_forbidden_files_and_paths() -> None:
+def validate_no_forbidden_files_and_paths(base_branch: str) -> None:
     # enforce parser call not present in Ultimate.cpp
     ultimate_source = read_required(ULTIMATE_PATH)
     active_source = strip_cpp_comments(ultimate_source)
@@ -484,7 +682,7 @@ def validate_no_forbidden_files_and_paths() -> None:
     validate_hot_path_and_digital_comparison(
         read_required(ULTIMATE_PATH),
         subprocess.run(
-            ["git", "show", f"{BASE_BRANCH}:src/modes/Ultimate.cpp"],
+            ["git", "show", f"{base_branch}:src/modes/Ultimate.cpp"],
             cwd=REPO_ROOT,
             capture_output=True,
             text=True,
@@ -494,18 +692,19 @@ def validate_no_forbidden_files_and_paths() -> None:
 
 
 def main() -> int:
-    validate_branch()
-    paths = changed_paths()
-    validate_changed_paths(paths)
+    branch, base_branch = validate_branch()
+    paths = changed_paths(base_branch)
+    validate_changed_paths(paths, branch)
 
-    validate_no_forbidden_files_and_paths()
-    validate_main_docs()
+    validate_no_forbidden_files_and_paths(base_branch)
+    validate_main_docs(branch)
 
     print("glyph_active_runtime_config_state_source_owned_preselection: PASS")
-    print(f"- branch: {EXPECTED_BRANCH}")
+    print(f"- branch: {branch}")
+    print(f"- base_branch: {base_branch}")
     print(f"- ultimate_cpp: {rel(ULTIMATE_PATH)}")
     print(f"- changed_paths: {len(paths)}")
-    print("firmware_source_changed=true")
+    print(f"firmware_source_changed={'true' if branch == IMPLEMENTATION_BRANCH else 'false'}")
     print("runtime_behavior_change=equivalent")
     print("parser_call_present=false")
     print("parsed_table_materialization=false")
