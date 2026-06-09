@@ -1,20 +1,44 @@
-# Phase 7A Diagnostic D5: Parsed-Result Runtime Routing
+# Phase 7A Diagnostic D5A: Parse-Status-Gated Source-Owned Runtime Routing
 
-status: DIAGNOSTIC_D5_IMPLEMENTED_PENDING_HARDWARE_RESULT
+status: DIAGNOSTIC_D5A_IMPLEMENTED_PENDING_HARDWARE_RESULT
 
 diagnostic branch: `phase7a-diagnostic-d5-parsed-result-runtime-routing`
 
 base branch: `phase7a-diagnostic-d3-global-parse-result-only`
 
 diagnostic target:
-route analog runtime-config lookup through the parsed-result resolver-selected
-view with no storage, write, flashing, or user/device runtime-loaded config.
+route analog runtime-config lookup through a resolver path gated by the global
+parse status, while still returning source-owned current-baseline equivalent
+runtime-config data.
+
+## Truthful Scope Correction
+
+D5A is not true parsed-result data routing.
+
+The parser result shape in `src/modes/UltimateRuntimeConfigParser.hpp` is:
+
+```cpp
+struct ParseResult {
+    ParseStatus status;
+    size_t table_count;
+    size_t point_count_per_table;
+};
+```
+
+`ParseResult` supplies status/count metadata only. It does not expose or
+materialize a parsed `RuntimeConfigView`, parsed runtime tables, or parsed table
+data. The `RuntimeConfigView` returned by the D5A resolver is a source-owned
+current-baseline equivalent alias, selected only when the retained payload parse
+status is `Ok` and the alias view validates.
+
+True parsed table materialization/routing is deferred to a possible D5B.
 
 ## Target Question
 
-Does using the parsed result as the active runtime-config view in
-`UpdateAnalogOutputs(...)`, with no storage/write/flashing behavior, reproduce
-the RF5/RF6 disconnect?
+Does the combination of D2B retained payload bytes, D3 global/static parser
+initialization, a resolver/reference path, and parse-status-gated runtime
+analog routing through source-owned baseline-equivalent data reproduce the
+RF5/RF6 disconnect?
 
 ## Prior Evidence
 
@@ -31,36 +55,33 @@ the RF5/RF6 disconnect?
 
 ## Source Delta
 
-- D5 keeps the D2B retained payload symbol:
+- D5A keeps the D2B retained payload symbol:
   `kPhase7AD2BRetainedPayloadAnchor`.
-- D5 keeps the D3 global/static parse result:
+- D5A keeps the D3 global/static parse result:
   `kPhase7AD3GlobalParseResult`.
 - Exact parser call remains:
   `UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload(kPhase7AD2BRetainedPayloadAnchor, UltimateRuntimeConfigParser::kPayloadSize)`.
-- D5 adds the source-local parsed-equivalent runtime view:
-  `kPhase7AD5ParsedRuntimeConfigView`.
-- D5 adds the source-local resolver:
+- D5A adds the source-local source-owned alias view:
+  `kPhase7AD5AParseStatusGatedRuntimeConfigView`.
+- D5A adds the source-local resolver:
   `ResolveActiveRuntimeConfig()`.
 - `UpdateAnalogOutputs(...)` changes only the local runtime-config binding from
   the direct source-owned current-baseline selection to:
   `const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();`
 
-The existing parser result shape records status and counts; it does not
-materialize a separate table array. D5 therefore does not change parser
-semantics. The resolver uses the D3 parse status as the selection gate and
-routes to a source-local parsed-equivalent view that references the existing
-source-owned baseline tables. No table values are changed.
+D5A does not change parser semantics, does not materialize parsed tables, and
+does not change table values.
 
 ## Resolver Logic
 
-Exact parsed-result selection rule:
+Exact parse-status-gated source-owned selection rule:
 
 ```cpp
 if (
     kPhase7AD3GlobalParseResult.status == UltimateRuntimeConfigParser::ParseStatus::Ok &&
-    ValidateRuntimeConfigView(kPhase7AD5ParsedRuntimeConfigView)
+    ValidateRuntimeConfigView(kPhase7AD5AParseStatusGatedRuntimeConfigView)
 ) {
-    return kPhase7AD5ParsedRuntimeConfigView;
+    return kPhase7AD5AParseStatusGatedRuntimeConfigView;
 }
 ```
 
@@ -72,11 +93,14 @@ return ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
     : kKnownGoodRuntimeConfig;
 ```
 
-The parsed-result route is selected only when the retained payload parses
-successfully and the selected runtime-config view validates.
+The source-owned alias view is selected only when the retained payload parses
+successfully and the alias runtime-config view validates.
 
 ## Guardrails
 
+- no parsed `RuntimeConfigView` in `ParseResult`;
+- no parsed table materialization;
+- no true parsed-result data routing;
 - no storage/config.bin/Persistence;
 - no runtime-loaded config from device/user storage;
 - no WebSerial/device write;
@@ -92,7 +116,7 @@ successfully and the selected runtime-config view validates.
 
 Artifact hashes are local observations only and are not a checker gate.
 Firmware build artifacts are not byte-stable across rebuilds in this workflow,
-so a later `.uf2`, `.elf`, or `.bin` hash drift must not fail the D5 checker.
+so a later `.uf2`, `.elf`, or `.bin` hash drift must not fail the D5A checker.
 
 ## Build And Hardware Evidence
 
@@ -117,10 +141,13 @@ Hardware plan JSON:
 
 ## Diagnostic Interpretation
 
-- If D5 passes, the failed branch likely depended on something more specific
-  than parsed-result routing alone.
-- If D5 fails, parsed-result runtime routing becomes a strong suspect and
-  should be narrowed further before any repair.
+- If D5A passes, the failed branch likely depended on something more specific
+  than parse-status-gated source-owned runtime routing alone.
+- If D5A fails, the combination of global parser initialization,
+  parse-status gate, resolver path, and runtime analog routing becomes a strong
+  suspect and should be narrowed further before any repair.
+- True parsed-result table-data routing remains untested and is deferred to a
+  possible D5B if needed.
 
 This branch is evidence-producing only and is not a merge candidate. Hardware
 result must be recorded separately before drawing any activation conclusion.

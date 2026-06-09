@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Phase 7A Diagnostic D5 parsed-result runtime-routing guardrails."""
+"""Validate Phase 7A Diagnostic D5A parse-status-gated routing guardrails."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ BASE_BRANCH = "phase7a-diagnostic-d3-global-parse-result-only"
 BUILD_COMMAND = "./scripts/build-glyph-mk6-quiet.sh"
 
 ULTIMATE_CPP = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
+PARSER_HPP = REPO_ROOT / "src" / "modes" / "UltimateRuntimeConfigParser.hpp"
 DOC_MD = REPO_ROOT / "docs" / "runtime_config" / "phase7a_diagnostic_d5_parsed_result_runtime_routing.md"
 REPORT_MD = REPO_ROOT / "docs" / "runtime_config" / "phase7a_diagnostic_d5_parsed_result_runtime_routing_build_report_2026-06-09.md"
 REPORT_JSON = REPO_ROOT / "docs" / "runtime_config" / "fixtures" / "phase7a_diagnostic_d5_parsed_result_runtime_routing_build_report_2026-06-09.json"
@@ -50,7 +51,9 @@ REQUIRED_ROWS = {
     "GLOBAL-PARSE-001",
     "PARSER-CALL-001",
     "RESOLVER-001",
-    "PARSED-ROUTING-001",
+    "PARSE-STATUS-GATE-001",
+    "SOURCE-OWNED-ROUTING-001",
+    "NO-PARSED-TABLES-001",
     "FALLBACK-001",
     "NO-STORAGE-001",
     "NO-WRITE-001",
@@ -72,12 +75,12 @@ FORBIDDEN_SOURCE_PATTERNS = (
 )
 
 
-class Phase7AD5Error(ValueError):
-    """Raised when D5 guardrails drift."""
+class Phase7AD5AError(ValueError):
+    """Raised when D5A guardrails drift."""
 
 
 def fail(message: str) -> None:
-    raise Phase7AD5Error(message)
+    raise Phase7AD5AError(message)
 
 
 def rel(path: Path) -> str:
@@ -190,12 +193,31 @@ def validate_changed_paths() -> None:
         fail("missing expected changed paths: " + ", ".join(sorted(missing)))
     extra = paths - EXPECTED_CHANGED_PATHS
     if extra:
-        fail("changed paths outside D5 scope: " + ", ".join(sorted(extra)))
+        fail("changed paths outside D5A scope: " + ", ".join(sorted(extra)))
+
+
+def extract_struct(text: str, name: str) -> str:
+    match = re.search(rf"\bstruct\s+{re.escape(name)}\s*\{{", text)
+    if not match:
+        fail(f"missing struct: {name}")
+    start = match.start()
+    brace = text.find("{", match.end() - 1)
+    depth = 0
+    for index in range(brace, len(text)):
+        if text[index] == "{":
+            depth += 1
+        elif text[index] == "}":
+            depth -= 1
+            if depth == 0:
+                semicolon = text.find(";", index)
+                return text[start:semicolon + 1]
+    fail(f"could not parse struct: {name}")
 
 
 def validate_source() -> None:
     ultimate = read_required(ULTIMATE_CPP)
     base_ultimate = git_show_text(BASE_BRANCH, ULTIMATE_CPP)
+    parser = read_required(PARSER_HPP)
     impl = implementation_text(ultimate)
 
     for pattern in FORBIDDEN_SOURCE_PATTERNS:
@@ -204,7 +226,24 @@ def validate_source() -> None:
 
     require_phrase(ultimate, "kPhase7AD2BRetainedPayloadAnchor", "Ultimate.cpp")
     require_phrase(ultimate, "kPhase7AD3GlobalParseResult", "Ultimate.cpp")
-    require_phrase(ultimate, "kPhase7AD5ParsedRuntimeConfigView", "Ultimate.cpp")
+    require_phrase(ultimate, "kPhase7AD5AParseStatusGatedRuntimeConfigView", "Ultimate.cpp")
+    require_phrase(ultimate, "D5A does not materialize parsed tables", "Ultimate.cpp")
+    require_phrase(ultimate, "ParseResult currently exposes status/counts only", "Ultimate.cpp")
+    require_phrase(ultimate, "aliases the source-owned baseline", "Ultimate.cpp")
+
+    parse_result = extract_struct(parser, "ParseResult")
+    for phrase in ("ParseStatus status;", "size_t table_count;", "size_t point_count_per_table;"):
+        require_phrase(parse_result, phrase, "ParseResult")
+    for forbidden in ("RuntimeConfigView", "RuntimeTableView", "StickPoint"):
+        if forbidden in parse_result:
+            fail(f"ParseResult must not expose parsed runtime-config data: {forbidden}")
+    if re.search(r"\b(?:tables?|runtime_config|view)\b\s*[;=]", parse_result):
+        fail("ParseResult must expose only status/count metadata, not parsed data fields")
+
+    if re.search(r"\bkPhase7AD5A.*Table", impl):
+        fail("D5A must not add parsed table materialization")
+    if "kPhase7AD5ParsedRuntimeConfigView" in ultimate:
+        fail("old parsed-runtime-config-view symbol must not remain")
 
     parser_calls = re.findall(r"ParseUltimateRuntimeConfigPayload\s*\(", impl)
     if len(parser_calls) != 1:
@@ -224,13 +263,13 @@ def validate_source() -> None:
         "kPhase7AD3GlobalParseResult.status == UltimateRuntimeConfigParser::ParseStatus::Ok",
         "resolver",
     )
-    require_phrase(resolver, "ValidateRuntimeConfigView(kPhase7AD5ParsedRuntimeConfigView)", "resolver")
-    require_phrase(resolver, "return kPhase7AD5ParsedRuntimeConfigView;", "resolver")
+    require_phrase(resolver, "ValidateRuntimeConfigView(kPhase7AD5AParseStatusGatedRuntimeConfigView)", "resolver")
+    require_phrase(resolver, "return kPhase7AD5AParseStatusGatedRuntimeConfigView;", "resolver")
     require_phrase(resolver, "ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)", "resolver")
     require_phrase(resolver, "? kSourceOwnedCurrentBaselineRuntimeConfig", "resolver")
     require_phrase(resolver, ": kKnownGoodRuntimeConfig", "resolver")
     if resolver.find("kPhase7AD3GlobalParseResult.status") > resolver.find("kSourceOwnedCurrentBaselineRuntimeConfig"):
-        fail("resolver must attempt parsed result before source-owned fallback")
+        fail("resolver must attempt parse-status-gated source-owned view before fallback")
 
     analog = extract_function(ultimate, "Ultimate::UpdateAnalogOutputs")
     require_phrase(
@@ -271,12 +310,17 @@ def validate_docs_and_reports() -> None:
             fail(f"{label} does not link {path_text}")
 
     required_doc_phrases = (
-        "DIAGNOSTIC_D5_IMPLEMENTED_PENDING_HARDWARE_RESULT",
-        "Does using the parsed result as the active runtime-config view",
+        "DIAGNOSTIC_D5A_IMPLEMENTED_PENDING_HARDWARE_RESULT",
+        "D5A is not true parsed-result data routing",
+        "`ParseResult` supplies status/count metadata only",
+        "source-owned current-baseline equivalent alias",
+        "True parsed table materialization/routing is deferred to a possible D5B",
+        "Does the combination of D2B retained payload bytes",
         "phase7a-diagnostic-d3-global-parse-result-only",
         "D2B passed",
         "D3 passed",
         "D4 passed",
+        "kPhase7AD5AParseStatusGatedRuntimeConfigView",
         "ResolveActiveRuntimeConfig()",
         "const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();",
         "Artifact hashes are local observations only and are not a checker gate",
@@ -286,10 +330,24 @@ def validate_docs_and_reports() -> None:
         "hardware-result claim: none",
     )
     for phrase in required_doc_phrases:
-        require_phrase(doc, phrase, "D5 diagnostic doc")
+        require_phrase(doc, phrase, "D5A diagnostic doc")
+
+    forbidden_claims = (
+        "parsed_result_routed_to_runtime_output_lookup: `true`",
+        '"parsed_result_routed_to_runtime_output_lookup": true',
+        "parsed result selected: yes",
+        "parsed table data used: yes",
+        "true parsed-result data routing",
+    )
+    for claim in forbidden_claims:
+        if normalize(claim) in normalize(doc) and claim != "true parsed-result data routing":
+            fail(f"D5A diagnostic doc contains forbidden parsed-data claim: {claim}")
+    for container, label in ((doc, "D5A diagnostic doc"), (report_md, "build report")):
+        if "parsed-result resolver-selected equivalent view" in container:
+            fail(f"{label} contains misleading parsed-result selected-view wording")
 
     for key, expected in {
-        "diagnostic_mode": "D5",
+        "diagnostic_mode": "D5A",
         "branch": BRANCH,
         "base_branch": BASE_BRANCH,
         "build_command": BUILD_COMMAND,
@@ -297,7 +355,12 @@ def validate_docs_and_reports() -> None:
         "global_parse_result_added": True,
         "parser_called_by_global_static_initialization": True,
         "resolver_added": True,
-        "parsed_result_routed_to_runtime_output_lookup": True,
+        "parsed_result_routed_to_runtime_output_lookup": False,
+        "parsed_table_materialization_added": False,
+        "parse_status_gated_routing_added": True,
+        "source_owned_runtime_view_routed_after_parse_ok": True,
+        "true_parsed_result_routing_deferred": True,
+        "d5b_required_for_true_parsed_data_routing": True,
         "storage_added": False,
         "write_path_added": False,
         "flashing_automation_added": False,
@@ -315,6 +378,11 @@ def validate_docs_and_reports() -> None:
     require_phrase(report_md, "artifact_hashes_are_rebuild_stable: `false`", "build report")
     require_phrase(report_md, "artifact_hashes_are_checker_gate: `false`", "build report")
     require_phrase(report_md, "Artifact observations are local build observations only", "build report")
+    require_phrase(report_md, "diagnostic_mode: `D5A`", "build report")
+    require_phrase(report_md, "parsed_result_routed_to_runtime_output_lookup: `false`", "build report")
+    require_phrase(report_md, "parsed_table_materialization_added: `false`", "build report")
+    require_phrase(report_md, "parse_status_gated_routing_added: `true`", "build report")
+    require_phrase(report_md, "source_owned_runtime_view_routed_after_parse_ok: `true`", "build report")
 
     artifacts = report.get("artifacts")
     if not isinstance(artifacts, list) or not artifacts:
@@ -345,6 +413,8 @@ def validate_docs_and_reports() -> None:
         fail("hardware plan base_branch mismatch")
     if plan.get("hardware_result_recorded") is not False:
         fail("hardware plan must not record a hardware result")
+    require_phrase(json.dumps(plan), "not true parsed-result data routing", "hardware plan JSON")
+    require_phrase(json.dumps(plan), "no parsed table materialization", "hardware plan JSON")
     rows = plan.get("test_rows")
     if not isinstance(rows, list):
         fail("hardware plan test_rows must be a list")
@@ -360,6 +430,8 @@ def validate_docs_and_reports() -> None:
     require_phrase(plan_md, "Status: TEMPLATE_ONLY", "hardware plan")
     require_phrase(plan_md, "Nunchuk scope for this branch: `NOT_TESTED`", "hardware plan")
     require_phrase(plan_md, "no hardware-result claim", "hardware plan")
+    require_phrase(plan_md, "not true parsed-result data routing", "hardware plan")
+    require_phrase(plan_md, "no parsed table materialization", "hardware plan")
 
 
 def main() -> None:
@@ -367,7 +439,7 @@ def main() -> None:
     validate_changed_paths()
     validate_source()
     validate_docs_and_reports()
-    print("glyph_phase7a_diagnostic_d5_parsed_result_runtime_routing: ok")
+    print("glyph_phase7a_diagnostic_d5a_parse_status_gated_source_owned_runtime_routing: ok")
 
 
 if __name__ == "__main__":

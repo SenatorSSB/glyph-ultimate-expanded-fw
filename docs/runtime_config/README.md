@@ -59,10 +59,10 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_diagnostic_d3_global_parse_result_only.md` - diagnostic D3 packet
   for global/static parser initialization using the retained D2B payload symbol,
   with no resolver and no runtime output routing to the parsed result.
-- `phase7a_diagnostic_d5_parsed_result_runtime_routing.md` - diagnostic D5
-  packet for routing analog runtime-config lookup through the parsed-result
-  resolver-selected view, pending hardware result and with artifact hashes
-  recorded only as local observations.
+- `phase7a_diagnostic_d5_parsed_result_runtime_routing.md` - diagnostic D5A
+  packet for parse-status-gated source-owned runtime routing. This is not true
+  parsed-result table-data routing; D5B is required if true parsed data routing
+  needs to be tested.
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md`
   - user-reported D2B hardware result pass; D2B retained full payload bytes
     and user reported pass, which reduces payload-only/static rodata
@@ -82,8 +82,9 @@ artifacts unless a specific packet says otherwise.
   D3 build report with local artifact observations, retained payload scan, and
   guardrails for global/static parser initialization only.
 - `phase7a_diagnostic_d5_parsed_result_runtime_routing_build_report_2026-06-09.md` -
-  D5 build report with local artifact observations, parsed-result runtime
-  routing guardrails, and explicit non-stable artifact-hash caveat.
+  D5A build report with local artifact observations, parse-status-gated
+  source-owned runtime-routing guardrails, and explicit non-stable
+  artifact-hash caveat.
 - `phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.md` -
   D2 diagnostic hardware plan template for required rows (all `NOT_TESTED`).
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.md` -
@@ -93,8 +94,8 @@ artifacts unless a specific packet says otherwise.
   D3 hardware plan template (all `NOT_TESTED`) for RF5/RF6 disconnect isolation
   with global/static parser initialization only.
 - `glyph_phase7a_diagnostic_d5_parsed_result_runtime_routing_hardware_plan_2026-06-09.md` -
-  D5 hardware plan template (all `NOT_TESTED`) for parsed-result runtime
-  routing isolation after D2B, D3, and D4 passed in isolation.
+  D5A hardware plan template (all `NOT_TESTED`) for parse-status-gated
+  source-owned runtime routing after D2B, D3, and D4 passed in isolation.
 - `fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json` -
   machine-readable D2 build report metadata and artifact deltas.
 - `fixtures/phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.json` -
@@ -102,7 +103,7 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/phase7a_diagnostic_d3_global_parse_result_only_build_report_2026-06-09.json` -
   machine-readable D3 build report metadata and artifact deltas.
 - `fixtures/phase7a_diagnostic_d5_parsed_result_runtime_routing_build_report_2026-06-09.json` -
-  machine-readable D5 build report metadata with artifact hashes as local
+  machine-readable D5A build report metadata with artifact hashes as local
   observations only.
 - `tools/check_glyph_phase7a_diagnostic_d2_compiled_payload_header_only.py` - read-only
   checker for D2 packet/report/plan/header retention guardrails.
@@ -112,8 +113,8 @@ artifacts unless a specific packet says otherwise.
   checker for D3 global/static parser initialization scope and no-runtime-routing
   guardrails.
 - `tools/check_glyph_phase7a_diagnostic_d5_parsed_result_runtime_routing.py` -
-  read-only checker for D5 parsed-result runtime-routing source, docs, report,
-  hardware-plan, and no storage/write/flashing guardrails.
+  read-only checker for D5A parse-status-gated source-owned routing source,
+  docs, report, hardware-plan, and no storage/write/flashing guardrails.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, diagnostic
   matrix, and no-firmware-source-change guardrail.

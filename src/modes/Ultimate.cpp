@@ -31,14 +31,17 @@ const UltimateRuntimeConfigParser::ParseResult kPhase7AD3GlobalParseResult __att
         UltimateRuntimeConfigParser::kPayloadSize
     );
 
-constexpr RuntimeConfigView kPhase7AD5ParsedRuntimeConfigView = kSourceOwnedCurrentBaselineRuntimeConfig;
+// D5A does not materialize parsed tables. ParseResult currently exposes status/counts only.
+// This view intentionally aliases the source-owned baseline to test parse-status-gated
+// resolver/runtime routing without changing table data.
+constexpr RuntimeConfigView kPhase7AD5AParseStatusGatedRuntimeConfigView = kSourceOwnedCurrentBaselineRuntimeConfig;
 
 const RuntimeConfigView& ResolveActiveRuntimeConfig() {
     if (
         kPhase7AD3GlobalParseResult.status == UltimateRuntimeConfigParser::ParseStatus::Ok &&
-        ValidateRuntimeConfigView(kPhase7AD5ParsedRuntimeConfigView)
+        ValidateRuntimeConfigView(kPhase7AD5AParseStatusGatedRuntimeConfigView)
     ) {
-        return kPhase7AD5ParsedRuntimeConfigView;
+        return kPhase7AD5AParseStatusGatedRuntimeConfigView;
     }
 
     return ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
