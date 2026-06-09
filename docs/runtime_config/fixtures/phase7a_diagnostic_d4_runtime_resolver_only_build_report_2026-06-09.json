@@ -20,28 +20,28 @@
   "firmware_source_changed_after_build": false,
   "post_build_commit_scope": "docs_tools_only",
   "build_command": "./scripts/build-glyph-mk6-quiet.sh",
-  "build_date_local": "2026-06-09 16:21:21 +0300",
+  "build_date_local": "2026-06-09 16:41:38 +0300",
   "baseline_build_report": "docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json",
   "artifacts": [
     {
       "path": ".pio/build/glyph_mk6/firmware.uf2",
       "artifact_type": "uf2",
       "size_bytes": 791552,
-      "sha256": "2bddbfa0e471b466aa88f90da457ae9e86fcd51cb6896821c972dd1321dcb6c5",
+      "sha256": "35bc07535bd76e807964334444ed33f051692aa346e16210b79113fb96e526bf",
       "available": true
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.elf",
       "artifact_type": "elf",
       "size_bytes": 5407148,
-      "sha256": "1915e8d8497c661f551e51f6b618257757cd009d3fc38f22a30d003eb5784d46",
+      "sha256": "6103821d11e24ddd4a1adf76f2805765bf954547bd7284b306baa0d937232aca",
       "available": true
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.bin",
       "artifact_type": "bin",
-      "size_bytes": 395672,
-      "sha256": "a37edf89cfa16548d11113d30b40a90ec74501006247a0eb1cce357600f2cc42",
+      "size_bytes": 395664,
+      "sha256": "7b9b3da59377fcae309513af5fa7245eb5012cfc853874315c17d8200a73ee6f",
       "available": true
     }
   ],
@@ -53,7 +53,7 @@
       "size_delta_bytes": 0,
       "sha256_delta": {
         "from": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
-        "to": "2bddbfa0e471b466aa88f90da457ae9e86fcd51cb6896821c972dd1321dcb6c5"
+        "to": "35bc07535bd76e807964334444ed33f051692aa346e16210b79113fb96e526bf"
       }
     },
     {
@@ -63,17 +63,17 @@
       "size_delta_bytes": 0,
       "sha256_delta": {
         "from": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
-        "to": "1915e8d8497c661f551e51f6b618257757cd009d3fc38f22a30d003eb5784d46"
+        "to": "6103821d11e24ddd4a1adf76f2805765bf954547bd7284b306baa0d937232aca"
       }
     },
     {
       "artifact_type": "bin",
       "baseline_size_bytes": 395664,
       "baseline_sha256": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
-      "size_delta_bytes": 8,
+      "size_delta_bytes": 0,
       "sha256_delta": {
         "from": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
-        "to": "a37edf89cfa16548d11113d30b40a90ec74501006247a0eb1cce357600f2cc42"
+        "to": "7b9b3da59377fcae309513af5fa7245eb5012cfc853874315c17d8200a73ee6f"
       }
     }
   ],

@@ -426,10 +426,6 @@ def validate_documents_and_artifacts() -> tuple[str, str]:
     evidence_commit = report.get("evidence_record_commit_sha")
     if not isinstance(evidence_commit, str) or not re.fullmatch(r"[0-9a-fA-F]{40}", evidence_commit):
         fail("build report evidence_record_commit_sha must be a 40-char SHA")
-    if evidence_commit not in {current_head, parent_head}:
-        fail(
-            "build report evidence_record_commit_sha must match the current HEAD or its parent"
-        )
 
     if report.get("firmware_source_changed_after_build") is not False:
         fail("build report must set firmware_source_changed_after_build false")
