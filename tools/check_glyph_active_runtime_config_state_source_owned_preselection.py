@@ -635,18 +635,32 @@ def validate_main_docs(branch: str) -> None:
     roadmap_text = read_required(ROADMAP_PATH)
     fixture = load_json_object(DOC_FIXTURE_PATH)
     plan = load_json_object(HARDWARE_PLAN_JSON)
+    status = plan.get("status")
 
     validate_doc_contents(doc_text, branch)
     if branch == IMPLEMENTATION_BRANCH:
-        if "Hardware Plan" not in plan_text:
-            fail("implementation hardware packet should still identify as a hardware plan")
-        if "NOT_TESTED" not in plan_text:
-            fail("implementation hardware packet must contain NOT_TESTED entries")
+        if status == "plan_only":
+            if "Hardware Plan" not in plan_text:
+                fail("implementation hardware packet should still identify as a hardware plan")
+            if "NOT_TESTED" not in plan_text:
+                fail("implementation hardware packet must contain NOT_TESTED entries")
+            validate_implementation_hardware_plan(plan)
+        elif status == "HARDWARE_PASS":
+            if "Hardware Result" not in plan_text:
+                fail("implementation hardware packet should identify as a hardware result after preservation")
+            if "HARDWARE_PASS" not in plan_text:
+                fail("implementation hardware packet must record HARDWARE_PASS after preservation")
+            if "safe enough to serve as the repair-architecture basis" not in current_text:
+                fail("CURRENT_STATE.md must record the repair-architecture basis conclusion")
+            if "HARDWARE_PASS" not in current_text:
+                fail("CURRENT_STATE.md must mention HARDWARE_PASS")
+            validate_result_hardware_record(plan)
+        else:
+            fail(f"unsupported implementation hardware fixture status: {status!r}")
         if IMPLEMENTATION_BRANCH not in roadmap_text:
             fail("ROADMAP.md must reference the implementation branch")
         if IMPLEMENTATION_BRANCH not in current_text:
             fail("CURRENT_STATE.md must reference the implementation branch")
-        validate_implementation_hardware_plan(plan)
     else:
         if "Hardware Result" not in plan_text:
             fail("result hardware packet must identify as a hardware result")
