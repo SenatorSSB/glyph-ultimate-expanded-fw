@@ -33,6 +33,13 @@ packets remain under `docs/calibration/`.
   The low-level failure mechanism is not proven, parsed table materialization
   remains deferred, and runtime-loaded config/storage/write/flashing remain not
   implemented.
+- Active runtime config state contract is accepted in
+  `docs/runtime_config/active_runtime_config_state_contract.md` as docs/tools
+  design only. Future activation/selection may validate
+  parser/materialization/load status before publishing a stable selected
+  `RuntimeConfigView`; analog output generation may consume only
+  ActiveRuntimeConfigState.active_view. Analog output generation must not branch
+  on ActiveRuntimeConfigState.source or ActiveRuntimeConfigState.status.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -108,6 +115,10 @@ engineering decisions.
 - Phase 7A runtime hot-path parse-status guardrail is accepted as docs/tools
   guidance only; it implements no runtime-loaded config and changes no firmware
   behavior.
+- Active runtime config state contract is accepted as docs/tools guidance only;
+  it implements no runtime-loaded config, no parsed table materialization, no
+  storage, no WebSerial/device write, and no flashing automation, and changes
+  no firmware behavior.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

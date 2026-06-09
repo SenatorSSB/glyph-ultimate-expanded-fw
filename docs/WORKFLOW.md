@@ -53,6 +53,10 @@ explicitly instructed.
   by the analog output hot path. Activation/selection may validate and select
   stable state outside the hot path; output generation may consume only that
   stable selected view.
+- Activation/selection may validate parser/materialization/load status before
+  active-state publication. After publication, analog output generation may
+  consume only `ActiveRuntimeConfigState.active_view` and must not branch on
+  `ActiveRuntimeConfigState.source` or `ActiveRuntimeConfigState.status`.
 - Product approval gates are not the same as user-domain blockers. A future
   phase may be ready for design or source research while still requiring
   approval before implementation.

@@ -259,6 +259,40 @@ specific product decision is being asked.
 
 Current implementation state: Runtime-loaded config is not implemented.
 
+### Phase 7A - Active Runtime Config State Contract
+
+Goal: Preserve the accepted hot-path parse-status guardrail while defining the
+future active-state boundary for runtime config activation.
+
+Status: `READY_FOR_ENGINEERING_DESIGN` / `DESIGN_ACCEPTED` for docs/tools only.
+
+Requirements now: `requires_user_domain_input=false`;
+`requires_user_product_approval=true` before firmware behavior implementation;
+`requires_firmware_change=false` for this contract branch.
+
+Engineering/source research can proceed: yes, for docs/tools checkers and
+future implementation-slice design only.
+
+Next concrete action: use the Active Runtime Config State Contract before any
+runtime activation source changes. Activation/selection may validate parser,
+payload, CRC, materialization, and load state before publishing stable active
+state. Output generation may consume only the published active view.
+
+Required evidence: `docs/runtime_config/active_runtime_config_state_contract.md`,
+`docs/runtime_config/fixtures/active_runtime_config_state_contract.json`, the
+accepted hot-path parse-status guardrail, and checker output.
+
+Stop conditions: any implementation path that reads parser result state from
+`UpdateAnalogOutputs`, an analog hot-path resolver, or
+`ResolveActiveRuntimeConfig`; any output path that branches on activation
+source or activation status; any runtime-loaded config, storage, WebSerial,
+device-write, flashing, or nunchuk validation claim.
+
+Explicit non-goals: no firmware source changes, no build requirement, no
+runtime-loaded config, no parsed table materialization, no storage, no
+WebSerial/device write, no flashing automation, and no nunchuk validation
+claim.
+
 Accepted guardrail: the Phase 7A D5A/D5A-N1/D5A-N2 finding is recorded in
 `docs/runtime_config/hot_path_parse_status_guardrail.md`. Future activation
 work must compute stable active runtime config state outside the analog output
