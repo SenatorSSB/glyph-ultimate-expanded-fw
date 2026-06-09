@@ -259,6 +259,12 @@ specific product decision is being asked.
 
 Current implementation state: Runtime-loaded config is not implemented.
 
+Accepted guardrail: the Phase 7A D5A/D5A-N1/D5A-N2 finding is recorded in
+`docs/runtime_config/hot_path_parse_status_guardrail.md`. Future activation
+work must compute stable active runtime config state outside the analog output
+hot path; `UpdateAnalogOutputs` and any analog hot-path resolver must not read
+or branch on parser result status or config-load status.
+
 Required evidence: explicit user approval, storage decision, representation
 decision, validator design, fallback policy, build, hardware plan/result, and
 rollback plan.

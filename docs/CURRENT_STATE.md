@@ -26,6 +26,13 @@ packets remain under `docs/calibration/`.
   `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md`;
   runtime-loaded config, storage, firmware parser integration, WebSerial/device
   write, and flashing remain not implemented.
+- Phase 7A hot-path parse-status guardrail is accepted in
+  `docs/runtime_config/hot_path_parse_status_guardrail.md`: parser result state
+  must not be read from `UpdateAnalogOutputs` or any analog hot-path resolver.
+  Do not read parser result state from UpdateAnalogOutputs or analog hot-path resolver.
+  The low-level failure mechanism is not proven, parsed table materialization
+  remains deferred, and runtime-loaded config/storage/write/flashing remain not
+  implemented.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -98,6 +105,9 @@ engineering decisions.
 - Firmware binary/protobuf parser integration is not implemented.
 - Phase 6 bounded config-owned modifier-data docs, fixtures, and checkers are
   complete for design review only.
+- Phase 7A runtime hot-path parse-status guardrail is accepted as docs/tools
+  guidance only; it implements no runtime-loaded config and changes no firmware
+  behavior.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

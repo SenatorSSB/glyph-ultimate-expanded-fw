@@ -47,6 +47,12 @@ explicitly instructed.
   runtime-loaded config implementation, WebSerial/device write, protobuf binary
   write, firmware flashing automation, external adapter output, or Senscope
   neutral profile schema changes.
+- Runtime-config activation design must keep parser result status, parser
+  result fields, payload validation state, CRC state, storage load state, and
+  activation decision state out of `UpdateAnalogOutputs` and any resolver used
+  by the analog output hot path. Activation/selection may validate and select
+  stable state outside the hot path; output generation may consume only that
+  stable selected view.
 - Product approval gates are not the same as user-domain blockers. A future
   phase may be ready for design or source research while still requiring
   approval before implementation.

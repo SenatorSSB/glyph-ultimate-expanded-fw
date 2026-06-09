@@ -1,0 +1,33 @@
+{
+  "schema_name": "glyph_runtime_hot_path_parse_status_guardrail",
+  "status": "accepted_guardrail",
+  "guardrail_id": "runtime_hot_path_no_parser_result_state_read",
+  "unsafe_pattern": "UpdateAnalogOutputs -> ResolveActiveRuntimeConfig -> kPhase7AD3GlobalParseResult.status",
+  "required_invariant": "Do not read parser result state from UpdateAnalogOutputs or analog hot-path resolver.",
+  "evidence": {
+    "D2B_retained_payload_bytes_only": "pass",
+    "D3_global_static_parse_result_only": "pass",
+    "D4_resolver_only": "pass",
+    "D5A_parse_status_gated_source_owned_routing": "fail",
+    "D5A_N1_direct_source_view_after_parse_gate": "fail",
+    "D5A_N2_resolver_without_parse_status_read": "pass"
+  },
+  "likely_trigger": "runtime hot-path read/branch on parser result status",
+  "root_cause_mechanism_proven": false,
+  "production_constraints": [
+    "Do not read parser result state from UpdateAnalogOutputs.",
+    "Do not read parser result state from any resolver used by UpdateAnalogOutputs.",
+    "Resolve active runtime config outside the analog output hot path.",
+    "Analog output generation may consume only a stable already-selected RuntimeConfigView."
+  ],
+  "non_goals": [
+    "no firmware behavior change",
+    "no parsed table materialization",
+    "no runtime-loaded config",
+    "no storage",
+    "no WebSerial or device write",
+    "no flashing automation",
+    "no nunchuk validation claim"
+  ],
+  "failed_activation_branch_merge_allowed": false
+}
