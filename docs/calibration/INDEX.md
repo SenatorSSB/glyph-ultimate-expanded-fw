@@ -44,9 +44,14 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - user-reported runtime-config interpreter source-baseline hardware result.
 - `glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.md`
   - user-reported Phase 7A compiled/test runtime-config payload activation
-    hardware failure; failed activation branch must not merge.
+  hardware failure; failed activation branch must not merge.
 - `fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
   - matching machine-readable Phase 7A activation hardware failure fixture.
+- `glyph_phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.md` -
+  diagnostic D2 hardware plan (template-style evidence scaffold); all rows are
+  `NOT_TESTED` in this branch.
+- `fixtures/glyph_phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.json` -
+  matching diagnostic D2 hardware plan fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 

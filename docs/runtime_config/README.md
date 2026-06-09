@@ -50,6 +50,17 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_activation_failure_diagnostic_build_matrix.md` - diagnostic build
   matrix plan for isolating the activation failure cause; plan-only and not
   implemented.
+- `phase7a_diagnostic_d2_compiled_payload_header_only.md` - diagnostic D2 packet for
+  compiled payload header-only branch (`D2A`) isolation; no parser/parse-result/
+  resolver/runtime behavior changes.
+- `phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.md` -
+  D2 build report with artifact and size/hash delta metadata.
+- `phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.md` -
+  D2 diagnostic hardware plan template for required rows (all `NOT_TESTED`).
+- `fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json` -
+  machine-readable D2 build report metadata and artifact deltas.
+- `tools/check_glyph_phase7a_diagnostic_d2_compiled_payload_header_only.py` - read-only
+  checker for D2 packet/report/plan/header retention guardrails.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, diagnostic
   matrix, and no-firmware-source-change guardrail.

@@ -1,0 +1,87 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d2_compiled_payload_header_only_build_report",
+  "status": "diagnostic_d2_build_report_pending_hardware_result",
+  "branch": "phase7a-diagnostic-d2-compiled-payload-header-only",
+  "baseline_branch": "configurator",
+  "diagnostic_mode": "D2A",
+  "payload_bytes_retained_in_firmware_image": false,
+  "commit_sha": "c82cfda5d5b36713025453e7e43e48c116c82faf",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_date_local": "2026-06-09 11:24:17 +0300",
+  "baseline_build_report": "docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json",
+  "artifacts": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 791552,
+      "sha256": "e48baa2dbcf1f2fec1607bbce8508b0fd6d678963df4b7e5fb2c345ab3a49ae8",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407148,
+      "sha256": "d03eefe3161aa222276fb735a1905e204f90d473de9a96879b89dc34d7ee820c",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 395672,
+      "sha256": "cd0880780c15977179fa0f455fe2f53db6535159214c0deca59301da267e0229",
+      "available": true
+    }
+  ],
+  "artifacts_deltas_vs_baseline": [
+    {
+      "artifact_type": "uf2",
+      "baseline_size_bytes": 791552,
+      "baseline_sha256": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+        "to": "e48baa2dbcf1f2fec1607bbce8508b0fd6d678963df4b7e5fb2c345ab3a49ae8"
+      }
+    },
+    {
+      "artifact_type": "elf",
+      "baseline_size_bytes": 5407148,
+      "baseline_sha256": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+        "to": "d03eefe3161aa222276fb735a1905e204f90d473de9a96879b89dc34d7ee820c"
+      }
+    },
+    {
+      "artifact_type": "bin",
+      "baseline_size_bytes": 395664,
+      "baseline_sha256": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+      "size_delta_bytes": 8,
+      "sha256_delta": {
+        "from": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+        "to": "cd0880780c15977179fa0f455fe2f53db6535159214c0deca59301da267e0229"
+      }
+    }
+  ],
+  "map_file_available": false,
+  "elf_file_available": true,
+  "uf2_file_available": true,
+  "bin_file_available": true,
+  "firmware_source_changed": true,
+  "runtime_behavior_changed": false,
+  "hardware_required": true,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "not_tested",
+  "caveats": [
+    "header-only source presence",
+    "no parser call",
+    "no runtime resolver",
+    "no runtime behavior change intended",
+    "no runtime-loaded storage",
+    "no WebSerial/device write",
+    "no firmware flashing automation",
+    "no hardware result recorded",
+    "nunchuk NOT_TESTED"
+  ]
+}
