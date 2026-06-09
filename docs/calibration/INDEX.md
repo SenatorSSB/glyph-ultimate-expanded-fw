@@ -52,6 +52,11 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   `NOT_TESTED` in this branch.
 - `fixtures/glyph_phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.json` -
   matching diagnostic D2 hardware plan fixture.
+- `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.md` -
+  diagnostic D2B hardware plan (template-style evidence scaffold); all rows are
+  `NOT_TESTED` in this branch.
+- `fixtures/glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.json` -
+  matching diagnostic D2B hardware plan fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 

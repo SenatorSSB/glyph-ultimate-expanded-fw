@@ -1,0 +1,125 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d2b_retained_payload_bytes_build_report",
+  "status": "diagnostic_d2b_build_report_pending_hardware_result",
+  "branch": "phase7a-diagnostic-d2b-retained-payload-bytes",
+  "baseline_branch": "configurator",
+  "d2a_branch": "phase7a-diagnostic-d2-compiled-payload-header-only",
+  "d2a_report": "docs/runtime_config/fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json",
+  "diagnostic_mode": "D2B",
+  "payload_bytes_retained_in_firmware_image": true,
+  "retained_payload_size_bytes": 530,
+  "commit_sha": "a732fcd0e5bdb59a3bfeb93c5feb70b7cfbe9693",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_date_local": "2026-06-09 14:35:24 +0300",
+  "baseline_build_report": "docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json",
+  "d2a_build_report": "docs/runtime_config/fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json",
+  "artifacts": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 791552,
+      "sha256": "df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407148,
+      "sha256": "515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 395672,
+      "sha256": "815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134",
+      "available": true
+    }
+  ],
+  "artifacts_deltas_vs_baseline": [
+    {
+      "artifact_type": "uf2",
+      "baseline_size_bytes": 791552,
+      "baseline_sha256": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+        "to": "df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30"
+      }
+    },
+    {
+      "artifact_type": "elf",
+      "baseline_size_bytes": 5407148,
+      "baseline_sha256": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+        "to": "515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b"
+      }
+    },
+    {
+      "artifact_type": "bin",
+      "baseline_size_bytes": 395664,
+      "baseline_sha256": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+      "size_delta_bytes": 8,
+      "sha256_delta": {
+        "from": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+        "to": "815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134"
+      }
+    }
+  ],
+  "artifacts_deltas_vs_d2a": [
+    {
+      "artifact_type": "uf2",
+      "d2a_size_bytes": 791552,
+      "d2a_sha256": "1cda3368a76d0b048317f9738e25480e7318f65955cc595a24923422c255a0c4",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "1cda3368a76d0b048317f9738e25480e7318f65955cc595a24923422c255a0c4",
+        "to": "df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30"
+      }
+    },
+    {
+      "artifact_type": "elf",
+      "d2a_size_bytes": 5407148,
+      "d2a_sha256": "5d55679d7b46172b40f0c33dd44f7b36277b097a86d457da146befffe5415f86",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "5d55679d7b46172b40f0c33dd44f7b36277b097a86d457da146befffe5415f86",
+        "to": "515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b"
+      }
+    },
+    {
+      "artifact_type": "bin",
+      "d2a_size_bytes": 395664,
+      "d2a_sha256": "dd371038cffc1c94b2586808abc1ca9ddc9bf901e3d4434a2742225926a14abc",
+      "size_delta_bytes": 8,
+      "sha256_delta": {
+        "from": "dd371038cffc1c94b2586808abc1ca9ddc9bf901e3d4434a2742225926a14abc",
+        "to": "815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134"
+      }
+    }
+  ],
+  "map_file_available": false,
+  "elf_file_available": true,
+  "uf2_file_available": true,
+  "bin_file_available": true,
+  "firmware_source_changed": true,
+  "runtime_behavior_changed": false,
+  "hardware_required": true,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "not_tested",
+  "retention_mechanism": "UltimateRuntimeConfigCompiledPayloadAnchor.cpp used symbol retention anchor",
+  "retention_verification_basis": "size/hash delta vs baseline and D2A plus retained symbol anchor in firmware TU",
+  "caveats": [
+    "no runtime parser use",
+    "no runtime resolver",
+    "no global parse result",
+    "no runtime-config storage",
+    "no WebSerial/device write",
+    "no firmware flashing automation",
+    "payload retained in firmware image",
+    "no hardware result recorded",
+    "nunchuk NOT_TESTED"
+  ]
+}

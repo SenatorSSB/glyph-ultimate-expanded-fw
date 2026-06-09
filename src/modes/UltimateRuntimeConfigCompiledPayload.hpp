@@ -11,6 +11,8 @@
 //
 // Caveats:
 // - Diagnostic D2 only.
+// - D2B only.
+// - Diagnostic D2B retained in firmware image via anchor translation unit.
 // - No parser call.
 // - No runtime resolver.
 // - No runtime behavior change.
