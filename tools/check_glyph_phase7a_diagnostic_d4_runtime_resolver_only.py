@@ -70,6 +70,8 @@ EXPECTED_REPORT_MODE = "D4"
 EXPECTED_BASELINE_BRANCH = "configurator"
 EXPECTED_BUILD_COMMAND = "./scripts/build-glyph-mk6-quiet.sh"
 EXPECTED_HARDWARE_STATUS = "not_tested"
+EXPECTED_POST_BUILD_SCOPE = "docs_tools_only"
+EXPECTED_POST_BUILD_SCOPE_MD = "docs/tools-only"
 
 ALLOWED_CHANGED_PREFIXES = (
     "docs/runtime_config/",
@@ -184,6 +186,29 @@ def git_lines(args: list[str], *, accept_failure: bool = False) -> list[str]:
     if completed.returncode != 0 and not accept_failure:
         fail(f"git {' '.join(args)} failed: {completed.stderr.strip()}")
     return [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+
+
+def git_rev_parse(revision: str) -> str:
+    return git_lines(["rev-parse", revision])[0]
+
+
+def git_merge_base_is_ancestor(ancestor: str, descendant: str) -> None:
+    completed = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", ancestor, descendant],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        fail(f"git merge-base --is-ancestor {ancestor} {descendant} failed")
+
+
+def git_name_only_diff(base: str, head: str, extra_args: list[str] | None = None) -> list[str]:
+    args = ["diff", "--name-only", f"{base}..{head}"]
+    if extra_args:
+        args.extend(extra_args)
+    return git_lines(args, accept_failure=True)
 
 
 def git_changed_paths(branch: str) -> set[str]:
@@ -381,8 +406,49 @@ def validate_analog_digital_path_guardrails() -> None:
                 fail("Update changed rf5/rf6 source lines; they must stay unchanged")
 
 
-def validate_documents_and_artifacts() -> None:
-    current_head = git_lines(["rev-parse", "HEAD"])[0]
+def validate_documents_and_artifacts() -> tuple[str, str]:
+    current_head = git_rev_parse("HEAD")
+    parent_head = git_rev_parse("HEAD^")
+
+    report = load_json(REPORT_JSON_PATH)
+
+    build_commit = report.get("firmware_source_commit_under_build")
+    alt_build_commit = report.get("build_commit_sha")
+    if build_commit is None and alt_build_commit is None:
+        fail("build report must record firmware source commit under build")
+    if build_commit is not None and alt_build_commit is not None and build_commit != alt_build_commit:
+        fail("build_commit_sha and firmware_source_commit_under_build must match when both are present")
+    if build_commit is None:
+        build_commit = alt_build_commit
+    if not isinstance(build_commit, str) or not re.fullmatch(r"[0-9a-fA-F]{40}", build_commit):
+        fail("build report firmware source commit under build must be a 40-char SHA")
+
+    evidence_commit = report.get("evidence_record_commit_sha")
+    if not isinstance(evidence_commit, str) or not re.fullmatch(r"[0-9a-fA-F]{40}", evidence_commit):
+        fail("build report evidence_record_commit_sha must be a 40-char SHA")
+    if evidence_commit not in {current_head, parent_head}:
+        fail(
+            "build report evidence_record_commit_sha must match the current HEAD or its parent"
+        )
+
+    if report.get("firmware_source_changed_after_build") is not False:
+        fail("build report must set firmware_source_changed_after_build false")
+    if report.get("post_build_commit_scope") != EXPECTED_POST_BUILD_SCOPE:
+        fail("build report post_build_commit_scope mismatch")
+
+    git_merge_base_is_ancestor(build_commit, current_head)
+    git_merge_base_is_ancestor(build_commit, evidence_commit)
+    git_merge_base_is_ancestor(evidence_commit, current_head)
+
+    post_build_paths = git_name_only_diff(build_commit, "HEAD")
+    for path in post_build_paths:
+        if path.startswith("docs/") or path.startswith("tools/"):
+            continue
+        fail(f"post-build diff contains unexpected path outside docs/tools: {path}")
+
+    src_post_build_paths = git_name_only_diff(build_commit, "HEAD", ["--", "src"])
+    if src_post_build_paths:
+        fail(f"post-build diff must not touch src/: {src_post_build_paths}")
 
     doc_text = read_required(DOC_PATH)
     require_phrase(doc_text, f"status: {EXPECTED_STATUS_DOC}", "diagnostic document")
@@ -399,12 +465,27 @@ def validate_documents_and_artifacts() -> None:
     require_phrase(report_md, "diagnostic mode: `D4`", "build report markdown")
     require_phrase(report_md, "payload-retained-in-image: `false`", "build report markdown")
     require_phrase(report_md, f"build command: `{EXPECTED_BUILD_COMMAND}`", "build report markdown")
-    require_phrase(report_md, "hardware result required before conclusions", "build report markdown")
     require_phrase(
         report_md,
-        f"git commit SHA under build: `{current_head}`",
+        f"firmware source commit under build: `{build_commit}`",
         "build report markdown",
     )
+    require_phrase(
+        report_md,
+        f"evidence/report commit: `{evidence_commit}`",
+        "build report markdown",
+    )
+    require_phrase(
+        report_md,
+        f"post-build commits scope: `{EXPECTED_POST_BUILD_SCOPE_MD}`",
+        "build report markdown",
+    )
+    require_phrase(
+        report_md,
+        "firmware source changed after build: `false`",
+        "build report markdown",
+    )
+    require_phrase(report_md, "hardware result required before conclusions", "build report markdown")
 
     hardware_plan_text = read_required(HARDWARE_PLAN_MD_PATH)
     require_phrase(hardware_plan_text, f"Branch: `{BRANCH}`", "hardware plan markdown")
@@ -439,7 +520,6 @@ def validate_documents_and_artifacts() -> None:
     if hardware_plan.get("intent", {}).get("non_claims") is None:
         fail("hardware plan intent non_claims missing")
 
-    report = load_json(REPORT_JSON_PATH)
     if report.get("schema_name") != EXPECTED_REPORT_SCHEMA:
         fail("build report schema_name mismatch")
     if report.get("status") != EXPECTED_JSON_STATUS:
@@ -472,10 +552,19 @@ def validate_documents_and_artifacts() -> None:
         fail("nunchuk_status must be not_tested")
     if report.get("build_command") != EXPECTED_BUILD_COMMAND:
         fail("build report build command mismatch")
-    if report.get("commit_sha") != current_head:
-        fail("build report commit_sha must match current HEAD")
     if report.get("runtime_behavior_changed") is not False:
         fail("build report runtime_behavior_changed must be false")
+    if report.get("firmware_source_commit_under_build") not in (build_commit, None):
+        if report.get("firmware_source_commit_under_build") != build_commit:
+            fail("firmware_source_commit_under_build mismatch")
+    if report.get("build_commit_sha") not in (None, build_commit):
+        fail("build_commit_sha mismatch")
+    if report.get("evidence_record_commit_sha") != evidence_commit:
+        fail("evidence_record_commit_sha mismatch")
+    if report.get("firmware_source_changed_after_build") is not False:
+        fail("firmware_source_changed_after_build must be false")
+    if report.get("post_build_commit_scope") != EXPECTED_POST_BUILD_SCOPE:
+        fail("post_build_commit_scope must be docs_tools_only")
 
     artifacts = report.get("artifacts")
     if not isinstance(artifacts, list):
@@ -559,6 +648,8 @@ def validate_documents_and_artifacts() -> None:
     if report.get("bin_file_available") is not True:
         fail("bin_file_available must be true")
 
+    return build_commit, evidence_commit
+
 def validate_no_hardware_claims() -> None:
     for path in (DOC_PATH, REPORT_MD_PATH, HARDWARE_PLAN_MD_PATH):
         text = read_required(path).lower()
@@ -575,7 +666,7 @@ def main() -> int:
         validate_no_forbidden_source_symbols()
         validate_source_parser_symbol_scope()
         validate_analog_digital_path_guardrails()
-        validate_documents_and_artifacts()
+        build_commit, evidence_commit = validate_documents_and_artifacts()
         validate_no_hardware_claims()
     except (
         FileNotFoundError,
@@ -593,6 +684,9 @@ def main() -> int:
     print(f"build_report_md={rel(REPORT_MD_PATH)}")
     print(f"build_report_json={rel(REPORT_JSON_PATH)}")
     print(f"hardware_plan={rel(HARDWARE_PLAN_JSON_PATH)}")
+    print(f"firmware_source_commit_under_build={build_commit}")
+    print(f"evidence_record_commit_sha={evidence_commit}")
+    print(f"post_build_commit_scope={EXPECTED_POST_BUILD_SCOPE}")
     print("resolver_added=true")
     print("parser_called=false")
     print("global_parse_result=false")

@@ -12,7 +12,10 @@ payload-retained-in-image: `false`
 
 build command: `./scripts/build-glyph-mk6-quiet.sh`
 
-git commit SHA under build: `5846a3c9a14eadb8d51f7866a148dc614823a60f`
+firmware source commit under build: `5846a3c9a14eadb8d51f7866a148dc614823a60f`
+evidence/report commit: `1de8e0da54f33d08a78a2e4a563648e633975be4`
+post-build commits scope: `docs/tools-only`
+firmware source changed after build: `false`
 build date (local): `2026-06-09 16:21:21 +0300`
 
 ## Artifact Table
