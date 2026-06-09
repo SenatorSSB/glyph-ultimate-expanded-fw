@@ -21,21 +21,21 @@
       "path": ".pio/build/glyph_mk6/firmware.uf2",
       "artifact_type": "uf2",
       "size_bytes": 791552,
-      "sha256": "53719bb3d58659e071793ef4102f16f40b4f823066d2bcd5f71f9db5082d842a",
+      "sha256": "ba64e1120b21c5a93fa3fcafbfa149cfa89c86ebbd75aa83a03f119555795a02",
       "available": true
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.elf",
       "artifact_type": "elf",
       "size_bytes": 5407148,
-      "sha256": "f1b92b9db343e42ea9fbddffccb0896c2273d6d80667f7469f262012253f9395",
+      "sha256": "953022722a3ed73eae250fc9ad5ac86e8c6817def512a60c5fd0a237d6b84b91",
       "available": true
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.bin",
       "artifact_type": "bin",
       "size_bytes": 395664,
-      "sha256": "ffa5c4f54e94bea7aad8e26b059ee38d297a52442469caa71e27da6738b45ce6",
+      "sha256": "57a72145aa368220f233a88791477283dbbd06f64b51de4e298fde6ca55469e3",
       "available": true
     }
   ],

@@ -23,9 +23,9 @@ baseline branch: `configurator`
 
 | artifact | path | size_bytes | sha256 |
 | --- | --- | ---: | --- |
-| `uf2` | `.pio/build/glyph_mk6/firmware.uf2` | `791552` | `53719bb3d58659e071793ef4102f16f40b4f823066d2bcd5f71f9db5082d842a` |
-| `elf` | `.pio/build/glyph_mk6/firmware.elf` | `5407148` | `f1b92b9db343e42ea9fbddffccb0896c2273d6d80667f7469f262012253f9395` |
-| `bin` | `.pio/build/glyph_mk6/firmware.bin` | `395664` | `ffa5c4f54e94bea7aad8e26b059ee38d297a52442469caa71e27da6738b45ce6` |
+| `uf2` | `.pio/build/glyph_mk6/firmware.uf2` | `791552` | `ba64e1120b21c5a93fa3fcafbfa149cfa89c86ebbd75aa83a03f119555795a02` |
+| `elf` | `.pio/build/glyph_mk6/firmware.elf` | `5407148` | `953022722a3ed73eae250fc9ad5ac86e8c6817def512a60c5fd0a237d6b84b91` |
+| `bin` | `.pio/build/glyph_mk6/firmware.bin` | `395664` | `57a72145aa368220f233a88791477283dbbd06f64b51de4e298fde6ca55469e3` |
 
 ## Build constraints
 
