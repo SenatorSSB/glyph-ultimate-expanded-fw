@@ -223,8 +223,6 @@ def validate_docs_and_reports() -> None:
     plan = load_json(PLAN_JSON)
     readme = read_required(RUNTIME_README)
     index = read_required(CALIBRATION_INDEX)
-    result_md = read_required(RESULT_MD)
-    result = load_json(RESULT_JSON)
 
     # docs index links
     for required_path, container, label in (
@@ -233,14 +231,26 @@ def validate_docs_and_reports() -> None:
         ("phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate.md", readme, "runtime_config/README.md"),
         ("fixtures/phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_build_report_2026-06-09.json", readme, "runtime_config/README.md"),
         ("glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_plan_2026-06-09.md", readme, "runtime_config/README.md"),
-        ("glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_result_2026-06-09.md", readme, "runtime_config/README.md"),
         ("glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_plan_2026-06-09.md", index, "calibration/INDEX.md"),
         ("fixtures/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_plan_2026-06-09.json", index, "calibration/INDEX.md"),
-        ("glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_result_2026-06-09.md", index, "calibration/INDEX.md"),
-        ("fixtures/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_result_2026-06-09.json", index, "calibration/INDEX.md"),
     ):
         if required_path not in container:
             fail(f"{label} missing link/reference: {required_path}")
+
+    result_doc = str(RESULT_MD.relative_to(REPO_ROOT))
+    result_fixture = str(RESULT_JSON.relative_to(REPO_ROOT))
+    if result_doc in readme:
+        fail("runtime_config/README.md must not link D5A-N1 hardware-result markdown")
+    if result_doc in index:
+        fail("calibration/INDEX.md must not link D5A-N1 hardware-result markdown")
+    if result_fixture in readme:
+        fail("runtime_config/README.md must not link D5A-N1 hardware-result JSON")
+    if result_fixture in index:
+        fail("calibration/INDEX.md must not link D5A-N1 hardware-result JSON")
+    if RESULT_MD.exists():
+        fail("D5A-N1 hardware-result markdown must be removed before hardware testing")
+    if RESULT_JSON.exists():
+        fail("D5A-N1 hardware-result JSON must be removed before hardware testing")
 
     # D5A-N1 scope and non-claims in doc/report/plan
     require_phrase(doc, "D5A-N1", "D5A-N1 document")
@@ -265,11 +275,6 @@ def validate_docs_and_reports() -> None:
     require_phrase(plan_md, "RF5-001", "hardware plan markdown")
     require_phrase(plan_md, "RF6-001", "hardware plan markdown")
     require_phrase(plan_md, "LT6-001", "hardware plan markdown")
-
-    require_phrase(result_md, "USER_REPORTED_FAILURE", "hardware result markdown")
-    require_phrase(result_md, "RF5", "hardware result markdown")
-    require_phrase(result_md, "RF6", "hardware result markdown")
-    require_phrase(result_md, "LT6", "hardware result markdown")
 
     if report.get("build_command") != "pio run -e glyph_mk6":
         fail("build report JSON must use pio run -e glyph_mk6")
@@ -304,6 +309,10 @@ def validate_docs_and_reports() -> None:
         fail("artifact_hashes_are_rebuild_stable must be false")
     if not isinstance(report.get("artifacts"), list) or not report["artifacts"]:
         fail("report JSON must include a non-empty artifacts list")
+    if report.get("hardware_result_claimed") is not False:
+        fail("hardware_result_claimed must remain false")
+    if report.get("nunchuk_status") != "not_tested":
+        fail("nunchuk_status must remain not_tested")
 
     for artifact in report["artifacts"]:
         if artifact.get("artifact_type") not in {"uf2", "elf", "bin"}:
@@ -328,31 +337,14 @@ def validate_docs_and_reports() -> None:
     if found_rows != REQUIRED_PLAN_ROWS:
         fail(f"plan row IDs mismatch: expected {sorted(REQUIRED_PLAN_ROWS)}, found {sorted(found_rows)}")
 
-    if not result.get("hardware_result_recorded"):
-        fail("failure result must be recorded")
-    if result.get("diagnostic_branch") != BRANCH:
-        fail("hardware result branch mismatch")
-    if result.get("rf5_disconnect_observed") is not True:
-        fail("failure result must report rf5_disconnect_observed=true")
-    if result.get("rf6_disconnect_observed") is not True:
-        fail("failure result must report rf6_disconnect_observed=true")
-    if result.get("lt6_disconnect_observed") is not True:
-        fail("failure result must report lt6_disconnect_observed=true")
-    if result.get("nunchuk_status") != "not_tested":
-        fail("hardware result must remain nunchuk NOT_TESTED")
-
-    failure_rows = {
+    row_by_id = {
         row.get("row_id"): row.get("result")
-        for row in result.get("result_rows", [])
+        for row in plan_rows
         if isinstance(row, dict)
     }
-    for required_row, required_result in (
-        ("RF5-001", "FAIL"),
-        ("RF6-001", "FAIL"),
-        ("LT6-001", "FAIL"),
-    ):
-        if failure_rows.get(required_row) != required_result:
-            fail(f"failure result row {required_row} must be {required_result}")
+    for required_row in REQUIRED_PLAN_ROWS:
+        if row_by_id.get(required_row) != "NOT_TESTED":
+            fail(f"plan row {required_row} must be NOT_TESTED")
 
 
 def main() -> None:
