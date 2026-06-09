@@ -15,7 +15,9 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "phase7a-runtime-hot-path-parse-status-guardrail"
+MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH}
 
 DOC_PATH = REPO_ROOT / "docs/runtime_config/hot_path_parse_status_guardrail.md"
 FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/hot_path_parse_status_guardrail.json"
@@ -121,19 +123,22 @@ def git_lines(args: list[str], *, preserve_status: bool = False) -> list[str]:
 
 def validate_branch() -> None:
     branch = git_lines(["branch", "--show-current"])
-    if not branch or branch[0] != EXPECTED_BRANCH:
-        actual = branch[0] if branch else "<detached>"
-        fail(f"checker must run on {EXPECTED_BRANCH}, got {actual}")
+    if not branch:
+        fail("checker could not determine current branch")
+    if branch[0] not in ALLOWED_BRANCHES:
+        actual = branch[0]
+        fail(f"checker must run on {', '.join(sorted(ALLOWED_BRANCHES))}, got {actual}")
 
-    completed = subprocess.run(
-        ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
-        cwd=REPO_ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if completed.returncode != 0:
-        fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
+    if branch[0] == EXPECTED_BRANCH:
+        completed = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode != 0:
+            fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
 
 
 def changed_paths() -> set[str]:
@@ -283,8 +288,10 @@ def validate_no_forbidden_doc_claims() -> None:
 
 def main() -> int:
     validate_branch()
-    paths = changed_paths()
-    validate_changed_paths(paths)
+    branch = git_lines(["branch", "--show-current"])[0]
+    if branch == EXPECTED_BRANCH:
+        paths = changed_paths()
+        validate_changed_paths(paths)
 
     doc = read_required(DOC_PATH)
     fixture = load_json_object(FIXTURE_PATH)
