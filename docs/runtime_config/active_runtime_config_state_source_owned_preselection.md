@@ -52,6 +52,18 @@ Build command policy:
 - Build artifacts for this branch are recorded in
   `docs/runtime_config/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md`.
 
+Hardware result:
+
+- Recorded hardware result branch:
+  `runtime-active-config-state-source-owned-preselection-hardware-result`.
+- Result status: `HARDWARE_PASS`.
+- RF5 did not disconnect.
+- RF6 did not disconnect.
+- LT6 did not disconnect.
+- General baseline behavior remained intact.
+- Nunchuk remains NOT_TESTED.
+- The source-owned active-state indirection is safe enough to become the repair architecture basis for this scope.
+
 Hardware plan:
 
 - `docs/calibration/glyph_active_runtime_config_state_source_owned_preselection_hardware_plan_2026-06-10.md`
@@ -60,5 +72,6 @@ Hardware plan:
 Backend behavior claims in this branch:
 
 - Source-backed and behavior-preserving from this branch baseline check list.
+- Hardware result recorded on the dedicated result branch as `HARDWARE_PASS`.
 - No claimed runtime-loaded semantics extension.
 - No changed output semantics from the accepted contract baseline.

@@ -151,6 +151,13 @@ Explicit non-goals: no broad refactor, no runtime-loaded config interpreter, no
 device write, no profile artifact change, no firmware flashing automation, no
 nunchuk validation claim, and no intentional controller behavior change.
 
+The source-owned active runtime config preselection scaffold has a recorded
+`HARDWARE_PASS` on
+`runtime-active-config-state-source-owned-preselection-hardware-result`; it is
+behavior-preserving, keeps RF5/RF6/LT6 expressions unchanged, and is safe to
+use as the repair-architecture basis without expanding runtime-loaded config
+or device-write scope.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

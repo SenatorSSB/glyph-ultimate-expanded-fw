@@ -43,6 +43,13 @@ packets remain under `docs/calibration/`.
 - Source-owned active runtime config preselection is implemented in
   `runtime-active-config-state-source-owned-preselection` through
   `GetActiveRuntimeConfigState()` and `ResolveActiveRuntimeConfig()`.
+- Its hardware result is recorded on
+  `runtime-active-config-state-source-owned-preselection-hardware-result` as a
+  `HARDWARE_PASS`; RF5, RF6, LT6, baseline, ordinary-direction, neutral,
+  unrelated-buttons, modifiers, active-state, hot-path, and no-parser/
+  no-parsed-tables/no-storage/no-write/no-flash rows passed, while Nunchuk
+  remains NOT_TESTED.
+- The source-owned active-state indirection is safe enough to serve as the repair-architecture basis for this scope.
 - `runtime-active-config-state-source-owned-preselection` routes analog config
   lookup through the active selected view and remains parser-result and
   parsed-table-materialization free in the hot path.
