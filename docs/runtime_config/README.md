@@ -55,6 +55,11 @@ artifacts unless a specific packet says otherwise.
   matrix, and no-firmware-source-change guardrail.
 - `phase7a_safer_activation_repair_plan.md` - plan-only next-branch strategy
   for a safer minimal activation repair attempt; not implemented.
+- `hot_path_parse_status_guardrail.md` - accepted Phase 7A D5A/D5A-N1/D5A-N2
+  guardrail: analog output hot-path code must not read or branch on parser
+  result status; docs/tools only and no firmware behavior change.
+- `fixtures/hot_path_parse_status_guardrail.json` - machine-readable guardrail
+  fixture for the hot-path parse-status invariant.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -79,6 +84,10 @@ artifacts unless a specific packet says otherwise.
 - Phase 7A activation root cause is not proven; the failed activation branch
   must remain abandoned and future runtime activation requires hardware-gated
   diagnostic builds.
+- The accepted hot-path parse-status guardrail forbids reading parser result
+  state from `UpdateAnalogOutputs` or any analog hot-path resolver. Future
+  activation must compute stable active runtime config state outside the analog
+  output hot path.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.
