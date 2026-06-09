@@ -197,6 +197,16 @@ def scan_payload_sequence() -> dict[str, dict[str, Any]]:
     return scan
 
 
+def expected_offset_entries(
+    sequence_scan: dict[str, dict[str, Any]],
+) -> list[dict[str, int | str]]:
+    entries: list[dict[str, int | str]] = []
+    for artifact_type in ("bin", "elf", "uf2"):
+        for offset in sequence_scan[artifact_type]["offsets"]:
+            entries.append({"artifact_type": artifact_type, "offset": offset})
+    return entries
+
+
 def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip().lower()
 
@@ -489,12 +499,17 @@ def validate_build_report_data() -> None:
         fail("build report nunchuk_status must be not_tested")
 
     offsets = report.get("payload_sequence_found_offsets")
-    if not isinstance(offsets, dict):
-        fail("build report payload_sequence_found_offsets must be an object")
-    for artifact_type in ("bin", "elf", "uf2"):
-        reported = offsets.get(artifact_type)
-        if reported != sequence_scan[artifact_type]["offsets"]:
-            fail(f"payload sequence offset mismatch for {artifact_type}")
+    if not isinstance(offsets, list):
+        fail("build report payload_sequence_found_offsets must be a list")
+    for item in offsets:
+        if not isinstance(item, dict):
+            fail("payload_sequence_found_offsets entries must be objects")
+        if item.get("artifact_type") not in {"bin", "elf", "uf2"}:
+            fail("payload_sequence_found_offsets entry has invalid artifact_type")
+        if not isinstance(item.get("offset"), int) or item["offset"] < 0:
+            fail("payload_sequence_found_offsets entry has invalid offset")
+    if offsets != expected_offset_entries(sequence_scan):
+        fail("payload sequence offset entries do not match scanned artifacts")
 
     artifacts = report.get("artifacts")
     deltas = report.get("artifacts_deltas_vs_baseline")
