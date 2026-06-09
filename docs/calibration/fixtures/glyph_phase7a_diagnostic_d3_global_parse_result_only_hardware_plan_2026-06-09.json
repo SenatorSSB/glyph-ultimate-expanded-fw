@@ -1,0 +1,153 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_plan",
+  "plan_version": 1,
+  "status": "TEMPLATE_ONLY",
+  "branch": "phase7a-diagnostic-d3-global-parse-result-only",
+  "base_branch": "phase7a-diagnostic-d2b-retained-payload-bytes",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "hardware_result_recorded": false,
+  "commit_sha_under_test": "unknown",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "tester": "unknown",
+  "test_date": "unknown",
+  "intent": {
+    "description": "Isolate global/static parser initialization with retained D2B payload bytes and no runtime resolver or output routing.",
+    "scope": [
+      "D2B retained payload bytes remain present",
+      "global parse result added",
+      "parser call in global/static initialization path",
+      "no runtime resolver",
+      "no runtime output routing to parsed result",
+      "no runtime behavior change intended",
+      "no runtime-config storage",
+      "no WebSerial/device write",
+      "no firmware flashing automation"
+    ],
+    "non_claims": [
+      "no hardware-result claim",
+      "no root-cause claim",
+      "no parser safety claim",
+      "nunchuk NOT_TESTED",
+      "no firmware pass claimed",
+      "no nunchuk validation claimed"
+    ]
+  },
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Baseline behavior preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "RF5-001",
+      "category": "rf5_paths",
+      "planned_check": "Representative RF5 behavior does not cause controller disconnect",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "RF6-001",
+      "category": "rf6_paths",
+      "planned_check": "Representative RF6 behavior does not cause controller disconnect",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "ORDINARY-DIR-001",
+      "category": "directions",
+      "planned_check": "Ordinary direction behavior remains preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NEUTRAL-001",
+      "category": "neutral_state",
+      "planned_check": "Neutral behavior remains preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "UNRELATED-BUTTONS-001",
+      "category": "buttons",
+      "planned_check": "Unrelated buttons remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "planned_check": "Representative modifiers remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PAYLOAD-001",
+      "category": "payload_retention",
+      "planned_check": "D2B retained payload bytes remain present",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "GLOBAL-PARSE-001",
+      "category": "global_parse_result",
+      "planned_check": "Global parse result is present in the diagnostic source",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "PARSER-CALL-001",
+      "category": "parser_behavior",
+      "planned_check": "Parser call exists only in global/static initialization path",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-RESOLVER-001",
+      "category": "runtime_resolver",
+      "planned_check": "Runtime resolver not added",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-RUNTIME-ROUTING-001",
+      "category": "runtime_routing",
+      "planned_check": "Parsed result is not routed into runtime output lookup",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-STORAGE-001",
+      "category": "storage",
+      "planned_check": "Runtime-config storage not added",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "webserial_or_write",
+      "planned_check": "No WebSerial/device write added",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-FLASH-001",
+      "category": "flashing_automation",
+      "planned_check": "No firmware flashing automation paths used",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Explicitly mark nunchuk as not tested in this branch",
+      "result": "NOT_TESTED"
+    }
+  ],
+  "caveats": [
+    "not a merge candidate",
+    "no hardware-result claim",
+    "no root-cause claim",
+    "no parser safety claim",
+    "no nunchuk validation claim",
+    "no runtime resolver",
+    "no runtime output routing to parsed result",
+    "no runtime-config storage",
+    "no WebSerial/device write",
+    "no firmware flashing automation",
+    "nunchuk NOT_TESTED"
+  ]
+}

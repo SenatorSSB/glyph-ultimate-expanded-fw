@@ -1,0 +1,120 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d3_global_parse_result_only_build_report",
+  "status": "diagnostic_d3_build_report_pending_hardware_result",
+  "diagnostic_mode": "D3",
+  "branch": "phase7a-diagnostic-d3-global-parse-result-only",
+  "base_branch": "phase7a-diagnostic-d2b-retained-payload-bytes",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "firmware_source_commit_under_build": "1af6c522b8f15f706072ec88315978281af8f4c4",
+  "source_tree_state_at_build": "dirty_with_d3_source_delta_pending_commit",
+  "build_date_local": "2026-06-09 17:23:01 +0300",
+  "payload_bytes_retained": true,
+  "payload_source": "kPhase7AD2BRetainedPayloadAnchor from src/modes/UltimateRuntimeConfigCompiledPayloadAnchor.cpp",
+  "payload_fixture": "docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin",
+  "payload_size_bytes": 530,
+  "payload_sequence_scan_performed": true,
+  "payload_sequence_found_in_bin": true,
+  "payload_sequence_found_in_elf": true,
+  "payload_sequence_found_in_uf2": false,
+  "payload_sequence_found_offsets": [
+    {
+      "artifact_type": "bin",
+      "offset": 370188
+    },
+    {
+      "artifact_type": "elf",
+      "offset": 435724
+    }
+  ],
+  "parser_called_by_global_static_initialization": true,
+  "global_parse_result_added": true,
+  "global_parse_result_symbol": "kPhase7AD3GlobalParseResult",
+  "parser_call_location": "src/modes/Ultimate.cpp",
+  "parser_call": "UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload(kPhase7AD2BRetainedPayloadAnchor, UltimateRuntimeConfigParser::kPayloadSize)",
+  "resolver_added": false,
+  "runtime_behavior_changed_intended": false,
+  "update_analog_outputs_changed": false,
+  "update_digital_outputs_changed": false,
+  "rf5_rf6_source_expressions_changed": false,
+  "storage_write_flashing": false,
+  "hardware_required": true,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "not_tested",
+  "artifact_observations_are_local_not_rebuild_gate": true,
+  "artifacts": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 793088,
+      "sha256": "ee428514a0f00873ab900cc5649b7cec5f3f5a83867e05b613b50fb063cf0a19",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407436,
+      "sha256": "23f06368ece84c171c1e3c3ce94f1fefdac236d6fba4d55c4b2b4941eef37d32",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 396532,
+      "sha256": "ded8da7b3e91fa4252f13cf32b8eae4a122987471d7cc77bcc88f9c0ee748a2f",
+      "available": true
+    }
+  ],
+  "artifact_deltas_vs_d2b": [
+    {
+      "artifact_type": "uf2",
+      "d2b_size_bytes": 792576,
+      "d2b_sha256": "c3196352f508e999e9c4f1d5a8a5de96409e9591f4f71c64817cdc06a4b985b4",
+      "size_delta_bytes": 512
+    },
+    {
+      "artifact_type": "elf",
+      "d2b_size_bytes": 5407276,
+      "d2b_sha256": "b7aa9b045c1b55e2674e880afc801d2e1cbf23af7f8026d95a4b0519e8b92118",
+      "size_delta_bytes": 160
+    },
+    {
+      "artifact_type": "bin",
+      "d2b_size_bytes": 396208,
+      "d2b_sha256": "ee3c37855e6d53ce18b32a5c32c3f9faa6525014f7bea93d99ddd6756655e37d",
+      "size_delta_bytes": 324
+    }
+  ],
+  "artifact_deltas_vs_baseline": [
+    {
+      "artifact_type": "uf2",
+      "baseline_size_bytes": 791552,
+      "baseline_sha256": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+      "size_delta_bytes": 1536
+    },
+    {
+      "artifact_type": "elf",
+      "baseline_size_bytes": 5407148,
+      "baseline_sha256": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+      "size_delta_bytes": 288
+    },
+    {
+      "artifact_type": "bin",
+      "baseline_size_bytes": 395664,
+      "baseline_sha256": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+      "size_delta_bytes": 868
+    }
+  ],
+  "caveats": [
+    "payload bytes retained",
+    "parser called by global/static initialization only",
+    "global parse result added",
+    "no runtime resolver",
+    "no runtime output routing to parsed result",
+    "no runtime behavior change intended",
+    "no storage/config.bin/Persistence",
+    "no WebSerial/device write",
+    "no firmware flashing automation",
+    "no hardware result recorded",
+    "nunchuk NOT_TESTED"
+  ]
+}

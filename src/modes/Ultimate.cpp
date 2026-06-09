@@ -1,10 +1,14 @@
 /* Ultimate profile by Taker */
 #include "modes/Ultimate.hpp"
+#include "modes/UltimateRuntimeConfigParser.hpp"
 #include <config.pb.h>
 
 #define ANALOG_STICK_MIN 28
 #define ANALOG_STICK_NEUTRAL 128
 #define ANALOG_STICK_MAX 228
+
+extern "C" const uint8_t
+    kPhase7AD2BRetainedPayloadAnchor[UltimateRuntimeConfigParser::kPayloadSize];
 
 namespace {
 struct StickPoint {
@@ -15,12 +19,17 @@ struct StickPoint {
 // Keep the generated-like table constants in the shared generated-like source.
 #include "modes/UltimateIdentityRuntimeTables.hpp"
 #include "modes/UltimateRuntimeConfigInterpreter.hpp"
-#include "modes/UltimateRuntimeConfigParser.hpp"
 
 static_assert(
     UltimateRuntimeConfigParser::kPayloadSize == 530,
     "Phase 7A parser scaffold must stay aligned with the offline GCFG-like payload size"
 );
+
+const UltimateRuntimeConfigParser::ParseResult kPhase7AD3GlobalParseResult __attribute__((used)) =
+    UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload(
+        kPhase7AD2BRetainedPayloadAnchor,
+        UltimateRuntimeConfigParser::kPayloadSize
+    );
 
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;

@@ -57,6 +57,11 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   `NOT_TESTED` in this branch.
 - `fixtures/glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.json` -
   matching diagnostic D2B hardware plan fixture.
+- `glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_plan_2026-06-09.md` -
+  diagnostic D3 hardware plan (template-style evidence scaffold); all rows are
+  `NOT_TESTED` in this branch and the branch is not a merge candidate.
+- `fixtures/glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_plan_2026-06-09.json` -
+  matching diagnostic D3 hardware plan fixture.
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md` -
   user-reported D2B hardware result pass; retained payload bytes alone did not
   reproduce the RF5/RF6 disconnect.
