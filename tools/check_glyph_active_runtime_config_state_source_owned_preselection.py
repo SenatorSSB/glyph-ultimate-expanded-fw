@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Validate source-owned active runtime-config preselection branches.
 
-Read-only checker for the implementation branch and its recorded hardware-result
-branch.
+Read-only checker for the implementation branch, its recorded hardware-result
+branch, and the merged configurator state.
 """
 
 from __future__ import annotations
@@ -16,8 +16,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IMPLEMENTATION_BRANCH = "runtime-active-config-state-source-owned-preselection"
 RESULT_BRANCH = "runtime-active-config-state-source-owned-preselection-hardware-result"
-BASE_BRANCH = "configurator"
-ALLOWED_BRANCHES = {IMPLEMENTATION_BRANCH, RESULT_BRANCH}
+MERGED_BRANCH = "configurator"
+BASE_BRANCH = MERGED_BRANCH
+ALLOWED_BRANCHES = {IMPLEMENTATION_BRANCH, RESULT_BRANCH, MERGED_BRANCH}
 
 DOC_PATH = REPO_ROOT / "docs/runtime_config/active_runtime_config_state_source_owned_preselection.md"
 DOC_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json"
@@ -123,13 +124,15 @@ def base_branch_for(branch: str) -> str:
         return BASE_BRANCH
     if branch == RESULT_BRANCH:
         return IMPLEMENTATION_BRANCH
-    fail(f"checker must run on {IMPLEMENTATION_BRANCH} or {RESULT_BRANCH}, got {branch}")
+    if branch == MERGED_BRANCH:
+        return MERGED_BRANCH
+    fail(f"checker must run on {IMPLEMENTATION_BRANCH}, {RESULT_BRANCH}, or {MERGED_BRANCH}, got {branch}")
 
 
 def validate_branch() -> tuple[str, str]:
     branch = current_branch()
     if branch not in ALLOWED_BRANCHES:
-        fail(f"checker must run on {IMPLEMENTATION_BRANCH} or {RESULT_BRANCH}, got {branch}")
+        fail(f"checker must run on {IMPLEMENTATION_BRANCH}, {RESULT_BRANCH}, or {MERGED_BRANCH}, got {branch}")
 
     base_branch = base_branch_for(branch)
 
@@ -331,7 +334,7 @@ def validate_active_state_functions(source: str, active_source: str) -> None:
         fail("ResolveActiveRuntimeConfig must dereference GetActiveRuntimeConfigState().active_view")
 
 
-def validate_hot_path_and_digital_comparison(current: str, baseline: str) -> None:
+def validate_hot_path_and_digital_comparison(current: str, baseline: str | None) -> None:
     if "const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();" not in current:
         fail("hot path binding in UpdateAnalogOutputs must use ResolveActiveRuntimeConfig")
 
@@ -343,8 +346,11 @@ def validate_hot_path_and_digital_comparison(current: str, baseline: str) -> Non
     ):
         if expr not in current:
             fail(f"expected runtime expression missing in Ultimate.cpp: {expr}")
-        if expr not in baseline:
+        if baseline is not None and expr not in baseline:
             fail(f"expected baseline runtime expression missing in configurator source: {expr}")
+
+    if baseline is None:
+        return
 
     block_pattern = re.compile(r"void\s+Ultimate::UpdateDigitalOutputs\([^\)]*\)\s*\{.*?\n\}\n", re.S)
     current_block_match = block_pattern.search(current)
@@ -612,7 +618,7 @@ def validate_doc_contents(text: str, branch: str) -> None:
         if phrase not in text:
             fail(f"runtime preselection doc missing phrase: {phrase}")
 
-    if branch == RESULT_BRANCH:
+    if branch in (RESULT_BRANCH, MERGED_BRANCH):
         for phrase in (
             "runtime-active-config-state-source-owned-preselection-hardware-result",
             "HARDWARE_PASS",
@@ -682,7 +688,7 @@ def validate_main_docs(branch: str) -> None:
     validate_build_fixture(fixture, "")
 
 
-def validate_no_forbidden_files_and_paths(base_branch: str) -> None:
+def validate_no_forbidden_files_and_paths(base_branch: str, branch: str) -> None:
     # enforce parser call not present in Ultimate.cpp
     ultimate_source = read_required(ULTIMATE_PATH)
     active_source = strip_cpp_comments(ultimate_source)
@@ -693,24 +699,30 @@ def validate_no_forbidden_files_and_paths(base_branch: str) -> None:
     assert_line_binding(ultimate_source)
     validate_active_state_functions(ultimate_source, active_source)
     validate_no_forbidden_source_patterns(ultimate_source, active_source)
-    validate_hot_path_and_digital_comparison(
-        read_required(ULTIMATE_PATH),
-        subprocess.run(
-            ["git", "show", f"{base_branch}:src/modes/Ultimate.cpp"],
-            cwd=REPO_ROOT,
-            capture_output=True,
-            text=True,
-            check=False,
-        ).stdout,
-    )
+    if branch != MERGED_BRANCH:
+        validate_hot_path_and_digital_comparison(
+            read_required(ULTIMATE_PATH),
+            subprocess.run(
+                ["git", "show", f"{base_branch}:src/modes/Ultimate.cpp"],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            ).stdout,
+        )
+    else:
+        validate_hot_path_and_digital_comparison(read_required(ULTIMATE_PATH), None)
 
 
 def main() -> int:
     branch, base_branch = validate_branch()
-    paths = changed_paths(base_branch)
-    validate_changed_paths(paths, branch)
+    if branch != MERGED_BRANCH:
+        paths = changed_paths(base_branch)
+        validate_changed_paths(paths, branch)
+    else:
+        paths = set()
 
-    validate_no_forbidden_files_and_paths(base_branch)
+    validate_no_forbidden_files_and_paths(base_branch, branch)
     validate_main_docs(branch)
 
     print("glyph_active_runtime_config_state_source_owned_preselection: PASS")
