@@ -31,6 +31,21 @@ const UltimateRuntimeConfigParser::ParseResult kPhase7AD3GlobalParseResult __att
         UltimateRuntimeConfigParser::kPayloadSize
     );
 
+constexpr RuntimeConfigView kPhase7AD5ParsedRuntimeConfigView = kSourceOwnedCurrentBaselineRuntimeConfig;
+
+const RuntimeConfigView& ResolveActiveRuntimeConfig() {
+    if (
+        kPhase7AD3GlobalParseResult.status == UltimateRuntimeConfigParser::ParseStatus::Ok &&
+        ValidateRuntimeConfigView(kPhase7AD5ParsedRuntimeConfigView)
+    ) {
+        return kPhase7AD5ParsedRuntimeConfigView;
+    }
+
+    return ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
+        ? kSourceOwnedCurrentBaselineRuntimeConfig
+        : kKnownGoodRuntimeConfig;
+}
+
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
@@ -471,9 +486,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
-    const RuntimeConfigView &runtime_config = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
-        ? kSourceOwnedCurrentBaselineRuntimeConfig
-        : kKnownGoodRuntimeConfig;
+    const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
