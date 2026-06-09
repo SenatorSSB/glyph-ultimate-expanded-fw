@@ -1,0 +1,35 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_result",
+  "status": "user_reported_pass",
+  "diagnostic_branch": "phase7a-diagnostic-d4-runtime-resolver-only-clean",
+  "result_branch": "phase7a-diagnostic-d4-runtime-resolver-only-hardware-result",
+  "exact_user_report_text": "tested, everything works without issues",
+  "result_source": "user_reported",
+  "result_date_local": "2026-06-09",
+  "hardware_result_recorded": true,
+  "d4_passed": true,
+  "rf5_disconnect_observed": false,
+  "rf6_disconnect_observed": false,
+  "resolver_added": true,
+  "parser_called": false,
+  "global_parse_result_added": false,
+  "compiled_payload_added": false,
+  "payload_bytes_retained_in_firmware_image": false,
+  "storage_added": false,
+  "write_path_added": false,
+  "flashing_automation_added": false,
+  "runtime_behavior_changed_intended": false,
+  "nunchuk_status": "not_tested",
+  "root_cause_proven": false,
+  "failed_activation_branch_merge_allowed": false,
+  "hypothesis_updates": [
+    "H3: reduced_likelihood",
+    "H1: still_open",
+    "H4: still_open",
+    "H5: still_open_in_combination",
+    "H6: still_open"
+  ],
+  "next_recommended_diagnostic": [
+    "D3 global parse result only"
+  ]
+}
