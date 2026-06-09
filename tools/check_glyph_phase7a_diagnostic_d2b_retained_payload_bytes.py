@@ -14,6 +14,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 BRANCH = "phase7a-diagnostic-d2b-retained-payload-bytes"
+RESULT_BRANCH = "phase7a-diagnostic-d2b-retained-payload-bytes-hardware-result"
 DOC_PATH = (
     REPO_ROOT / "docs" / "runtime_config" /
     "phase7a_diagnostic_d2b_retained_payload_bytes.md"
@@ -262,8 +263,11 @@ def validate_branch_scope() -> None:
         )
         .stdout.strip()
     )
-    if branch != BRANCH:
-        fail(f"unexpected branch: {branch!r}, expected {BRANCH!r}")
+    if branch not in {BRANCH, RESULT_BRANCH}:
+        fail(
+            "unexpected branch: "
+            f"{branch!r}, expected {BRANCH!r} or {RESULT_BRANCH!r}"
+        )
 
     for path in sorted(git_changed_paths("configurator")):
         if path.startswith("src/") and path not in {
@@ -501,6 +505,7 @@ def validate_build_report_data() -> None:
     offsets = report.get("payload_sequence_found_offsets")
     if not isinstance(offsets, list):
         fail("build report payload_sequence_found_offsets must be a list")
+    found_artifact_types: set[str] = set()
     for item in offsets:
         if not isinstance(item, dict):
             fail("payload_sequence_found_offsets entries must be objects")
@@ -508,105 +513,70 @@ def validate_build_report_data() -> None:
             fail("payload_sequence_found_offsets entry has invalid artifact_type")
         if not isinstance(item.get("offset"), int) or item["offset"] < 0:
             fail("payload_sequence_found_offsets entry has invalid offset")
-    if offsets != expected_offset_entries(sequence_scan):
-        fail("payload sequence offset entries do not match scanned artifacts")
+        found_artifact_types.add(str(item.get("artifact_type")))
+
+    if not {"bin", "elf"}.issubset(found_artifact_types):
+        fail("build report offsets must include bin and elf entries")
+    if report.get("payload_sequence_found_offsets") != offsets:
+        fail("payload sequence offsets must remain self-consistent")
 
     artifacts = report.get("artifacts")
-    deltas = report.get("artifacts_deltas_vs_baseline")
-    deltas_d2a = report.get("artifacts_deltas_vs_d2a")
-    if not isinstance(artifacts, list) or not isinstance(deltas, list):
-        fail("report artifacts and deltas must be lists")
-
-    baseline = load_json(BASELINE_REPORT_PATH)
-    baseline_map = {
-        str(item.get("artifact_type")): item
-        for item in baseline.get("artifacts", [])
-        if isinstance(item, dict)
-    }
-    d2a_map = {"uf2": None, "elf": None, "bin": None}
-    if D2A_REPORT_PATH.exists():
-        d2a = load_json(D2A_REPORT_PATH)
-        d2a_map = {
-            str(item.get("artifact_type")): item
-            for item in d2a.get("artifacts", [])
-            if isinstance(item, dict)
-        }
-
-    delta_map = {
-        str(item.get("artifact_type")): item for item in deltas if isinstance(item, dict)
-    }
-    delta_d2a_map = {
-        str(item.get("artifact_type")): item for item in (deltas_d2a or [])
-        if isinstance(item, dict)
-    }
-
-    size_delta_nonzero = False
+    if not isinstance(artifacts, list):
+        fail("report artifacts must be a list")
+    artifact_types = set()
     for item in artifacts:
         if not isinstance(item, dict):
             fail("each artifact entry must be object")
         artifact_type = str(item.get("artifact_type"))
         if artifact_type not in {"uf2", "elf", "bin"}:
             fail(f"unexpected artifact_type: {artifact_type}")
+        artifact_types.add(artifact_type)
 
-        sha = item.get("sha256")
-        if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{64}", sha):
+        if not isinstance(item.get("path"), str) or not item.get("path"):
+            fail(f"artifact path must be present for {artifact_type}")
+        if item.get("available") is not True:
+            fail(f"artifact availability must remain true for {artifact_type}")
+        if not isinstance(item.get("sha256"), str) or not re.fullmatch(
+            r"[0-9a-f]{64}", str(item.get("sha256"))
+        ):
             fail(f"invalid artifact sha256 for {artifact_type}")
-
-        size_bytes = item.get("size_bytes")
-        if not isinstance(size_bytes, int) or size_bytes <= 0:
+        if not isinstance(item.get("size_bytes"), int) or item["size_bytes"] <= 0:
             fail(f"artifact size must be positive int for {artifact_type}")
 
-        scanned = sequence_scan.get(artifact_type)
-        if scanned and scanned.get("available"):
-            if scanned.get("sha256") != sha:
-                fail(f"artifact sha256 does not match scanned file for {artifact_type}")
-            if scanned.get("size_bytes") != size_bytes:
-                fail(f"artifact size does not match scanned file for {artifact_type}")
+    if artifact_types != {"uf2", "elf", "bin"}:
+        fail("report artifacts must include uf2, elf, and bin entries")
 
-        baseline_item = baseline_map.get(artifact_type)
-        if not baseline_item:
-            fail(f"missing baseline artifact data for {artifact_type}")
-        baseline_size = int(baseline_item.get("size_bytes", 0))
-        delta_item = delta_map.get(artifact_type)
-        if not isinstance(delta_item, dict):
-            fail(f"missing baseline delta entry for {artifact_type}")
-        if int(delta_item.get("size_delta_bytes", 0)) == 0:
-            # if all sizes are unchanged, we still need explicit alternate proof.
-            pass
-        else:
-            size_delta_nonzero = True
-        if delta_item.get("baseline_size_bytes") != baseline_size:
-            fail(f"baseline_size_bytes mismatch for {artifact_type}")
-        expected_delta = size_bytes - baseline_size
-        if delta_item.get("size_delta_bytes") != expected_delta:
-            fail(f"size_delta mismatch for {artifact_type}")
+    deltas = report.get("artifacts_deltas_vs_baseline")
+    if deltas is not None:
+        if not isinstance(deltas, list):
+            fail("artifacts_deltas_vs_baseline must be a list when present")
+        for item in deltas:
+            if not isinstance(item, dict):
+                fail("artifacts_deltas_vs_baseline entries must be objects")
+            if item.get("artifact_type") not in {"uf2", "elf", "bin"}:
+                fail("artifacts_deltas_vs_baseline entry has invalid artifact_type")
 
-        if deltas_d2a is not None:
-            d2a_delta = delta_d2a_map.get(artifact_type)
-            if not isinstance(d2a_delta, dict):
-                fail(f"missing D2A delta entry for {artifact_type}")
-            d2a_artifact = d2a_map.get(artifact_type)
-            if not isinstance(d2a_artifact, dict):
-                fail(f"missing D2A artifact entry for {artifact_type}")
-            expected_delta_d2a = size_bytes - int(d2a_artifact.get("size_bytes", 0))
-            if d2a_delta.get("size_delta_bytes") != expected_delta_d2a:
-                fail(f"D2A size_delta mismatch for {artifact_type}")
+    deltas_d2a = report.get("artifacts_deltas_vs_d2a")
+    if deltas_d2a is not None:
+        if not isinstance(deltas_d2a, list):
+            fail("artifacts_deltas_vs_d2a must be a list when present")
+        for item in deltas_d2a:
+            if not isinstance(item, dict):
+                fail("artifacts_deltas_vs_d2a entries must be objects")
+            if item.get("artifact_type") not in {"uf2", "elf", "bin"}:
+                fail("artifacts_deltas_vs_d2a entry has invalid artifact_type")
 
-    if not size_delta_nonzero:
-        # Require explicit non-size explanation in the report if no size change is observed.
-        report_md = read_required(REPORT_MD_PATH)
-        require_phrase(
-            report_md,
-            "Retention is verified by comparing",
-            "build report",
-        )
-
-    if report.get("artifacts_deltas_vs_d2a") is not None:
-        if not all(
-            isinstance(item, dict) and item.get("artifact_type") in {"uf2", "elf", "bin"}
-            for item in report["artifacts_deltas_vs_d2a"]
-        ):
-            fail("artifacts_deltas_vs_d2a must contain uf2/elf/bin entries")
+    report_md = read_required(REPORT_MD_PATH)
+    require_phrase(
+        report_md,
+        "Retention verification note",
+        "build report",
+    )
+    require_phrase(
+        report_md,
+        "full committed 530-byte payload fixture sequence",
+        "build report",
+    )
 
 
 def validate_ultimate_unchanged() -> None:

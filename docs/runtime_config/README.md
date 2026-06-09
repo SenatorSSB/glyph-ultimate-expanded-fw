@@ -56,6 +56,11 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_diagnostic_d2b_retained_payload_bytes.md` - diagnostic D2B packet for
   payload retention verification in firmware image with no runtime parser or
   resolver usage.
+- `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md`
+  - user-reported D2B hardware result pass; D2B retained full payload bytes
+    and user reported pass, which reduces payload-only/static rodata
+    suspicion. Next diagnostics should isolate parser static initialization and
+    resolver path.
 - `phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.md` -
   D2 build report with artifact and size/hash delta metadata.
 - `phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.md` -
