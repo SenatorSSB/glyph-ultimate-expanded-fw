@@ -372,33 +372,66 @@ def validate_plan_payload(payload: dict[str, object], expected_status: str) -> N
 def validate_build_fixture(payload: dict[str, object], build_report: str) -> None:
     if payload.get("schema_name") != "glyph_active_runtime_config_state_source_owned_preselection_build_report":
         fail("unexpected build fixture schema_name")
-    if payload.get("build_command") != "pio run -e glyph_mk6":
+    if payload.get("canonical_build_command") != "pio run -e glyph_mk6":
         fail("build report fixture must use canonical build command")
+    if payload.get("build_command") != "pio run -e glyph_mk6":
+        fail("build report fixture legacy build_command must match canonical build command")
     if payload.get("branch") != EXPECTED_BRANCH:
         fail("build report fixture branch mismatch")
     if payload.get("baseline_branch") != BASE_BRANCH:
         fail("build report fixture baseline branch mismatch")
-    if payload.get("build_completed") not in (True, False):
-        fail("build report fixture build_completed must be boolean")
+    if payload.get("build_completed") is not True:
+        fail("build report fixture build_completed must be true")
+    if payload.get("build_exit_code") != 0:
+        fail("build report fixture build_exit_code must be 0")
+    if payload.get("canonical_build_available_in_agent_environment") is not False:
+        fail("build report fixture must record canonical build unavailable as False")
+    if payload.get("actual_local_build_command") != "./scripts/build-glyph-mk6-quiet.sh":
+        fail("build report fixture must record actual fallback build command")
+    if payload.get("actual_local_build_completed") is not True:
+        fail("build report fixture actual_local_build_completed must be true")
+    if payload.get("artifact_hashes_are_rebuild_stable") is not False:
+        fail("artifact_hashes_are_rebuild_stable must be false")
+    if payload.get("artifact_hashes_are_checker_gate") is not False:
+        fail("artifact_hashes_are_checker_gate must be false")
+    if payload.get("hardware_result_claimed") is not False:
+        fail("hardware_result_claimed must be false")
 
+    if payload.get("build_artifacts") is None:
+        fail("build_artifacts must be present")
     rows = payload.get("build_artifacts")
     if not isinstance(rows, list):
         fail("build_artifacts must be a list")
+    if len(rows) != 3:
+        fail("build_artifacts must include uf2, elf, and bin observations")
 
-    for status in (payload.get("nunchuk_status"), "NOT_TESTED"):
-        pass
+    seen_types = set()
+    for idx, row in enumerate(rows):
+        if not isinstance(row, dict):
+            fail(f"build_artifacts[{idx}] must be an object")
+        artifact_type = row.get("artifact_type")
+        if artifact_type not in ("uf2", "elf", "bin"):
+            fail(f"unexpected artifact_type {artifact_type!r} in build_artifacts")
+        path = row.get("path")
+        if not isinstance(path, str) or not path:
+            fail("artifact observation must include non-empty path")
+        if row.get("available") is not True:
+            fail(f"{artifact_type} artifact must be available: {path}")
+        size = row.get("size_bytes")
+        if not isinstance(size, int) or size <= 0:
+            fail(f"{artifact_type} artifact size_bytes must be positive")
+        sha = row.get("sha256")
+        if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{64}", sha):
+            fail(f"{artifact_type} artifact sha256 must be 64-lowercase hex")
+        seen_types.add(artifact_type)
+
+    if seen_types != {"uf2", "elf", "bin"}:
+        fail("build_artifacts must include exactly uf2, elf, and bin")
 
     if payload.get("nunchuk_status") != "NOT_TESTED":
         fail("build report fixture must leave nunchuk_status as NOT_TESTED")
-
-    # Confirm this branch's fixture intentionally keeps build hashes as local observations.
-    artifact_map = payload.get("artifact_map")
-    if not isinstance(artifact_map, dict):
-        fail("build report artifact_map must be an object")
-    for key in ("uf2", "elf", "bin"):
-        if key not in artifact_map:
-            fail(f"build report artifact_map missing key: {key}")
-
+    if payload.get("status") not in ("build_completed", "scaffold_ready", "scaffold_verified", "scaffold_with_build"):
+        fail("build report fixture status is missing/invalid")
 
 def validate_doc_contents(text: str, build_report: str) -> None:
     required_phrases = (
