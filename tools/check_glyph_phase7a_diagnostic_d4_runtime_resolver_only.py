@@ -265,6 +265,16 @@ def validate_no_payload_artifacts() -> None:
         fail("payload anchor file must be removed")
 
 
+def validate_duplicate_json_key_rejection() -> None:
+    try:
+        json.loads('{"dup": 1, "dup": 2}', object_pairs_hook=reject_duplicate_keys)
+    except ValueError as exc:
+        if "duplicate JSON key" not in str(exc):
+            fail(f"duplicate JSON key rejection produced unexpected error: {exc}")
+        return
+    fail("duplicate JSON keys must be rejected")
+
+
 def validate_resolver_pattern() -> None:
     ultimate_text = read_required(ULTIMATE_CPP_PATH)
     if "#include \"modes/UltimateRuntimeConfigCompiledPayload.hpp\"" in ultimate_text:
@@ -372,6 +382,8 @@ def validate_analog_digital_path_guardrails() -> None:
 
 
 def validate_documents_and_artifacts() -> None:
+    current_head = git_lines(["rev-parse", "HEAD"])[0]
+
     doc_text = read_required(DOC_PATH)
     require_phrase(doc_text, f"status: {EXPECTED_STATUS_DOC}", "diagnostic document")
     require_phrase(doc_text, f"diagnostic branch: `{BRANCH}`", "diagnostic document")
@@ -388,6 +400,11 @@ def validate_documents_and_artifacts() -> None:
     require_phrase(report_md, "payload-retained-in-image: `false`", "build report markdown")
     require_phrase(report_md, f"build command: `{EXPECTED_BUILD_COMMAND}`", "build report markdown")
     require_phrase(report_md, "hardware result required before conclusions", "build report markdown")
+    require_phrase(
+        report_md,
+        f"git commit SHA under build: `{current_head}`",
+        "build report markdown",
+    )
 
     hardware_plan_text = read_required(HARDWARE_PLAN_MD_PATH)
     require_phrase(hardware_plan_text, f"Branch: `{BRANCH}`", "hardware plan markdown")
@@ -455,8 +472,8 @@ def validate_documents_and_artifacts() -> None:
         fail("nunchuk_status must be not_tested")
     if report.get("build_command") != EXPECTED_BUILD_COMMAND:
         fail("build report build command mismatch")
-    if not isinstance(report.get("commit_sha"), str) or not re.fullmatch(r"[0-9a-fA-F]{40}", report["commit_sha"]):
-        fail("build report commit_sha invalid")
+    if report.get("commit_sha") != current_head:
+        fail("build report commit_sha must match current HEAD")
     if report.get("runtime_behavior_changed") is not False:
         fail("build report runtime_behavior_changed must be false")
 
@@ -553,6 +570,7 @@ def main() -> int:
     try:
         validate_branch_scope()
         validate_no_payload_artifacts()
+        validate_duplicate_json_key_rejection()
         validate_resolver_pattern()
         validate_no_forbidden_source_symbols()
         validate_source_parser_symbol_scope()

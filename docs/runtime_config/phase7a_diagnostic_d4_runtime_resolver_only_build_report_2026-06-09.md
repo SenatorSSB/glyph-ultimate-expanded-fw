@@ -12,22 +12,22 @@ payload-retained-in-image: `false`
 
 build command: `./scripts/build-glyph-mk6-quiet.sh`
 
-git commit SHA under build: `c82cfda5d5b36713025453e7e43e48c116c82faf`
-build date (local): `2026-06-09 16:14:21 +0300`
+git commit SHA under build: `5846a3c9a14eadb8d51f7866a148dc614823a60f`
+build date (local): `2026-06-09 16:21:21 +0300`
 
 ## Artifact Table
 
 | path | artifact_type | size_bytes | sha256 | availability |
 | --- | --- | ---: | --- | --- |
-| `.pio/build/glyph_mk6/firmware.uf2` | uf2 | 791552 | e48baa2dbcf1f2fec1607bbce8508b0fd6d678963df4b7e5fb2c345ab3a49ae8 | available |
-| `.pio/build/glyph_mk6/firmware.elf` | elf | 5407148 | d03eefe3161aa222276fb735a1905e204f90d473de9a96879b89dc34d7ee820c | available |
-| `.pio/build/glyph_mk6/firmware.bin` | bin | 395672 | cd0880780c15977179fa0f455fe2f53db6535159214c0deca59301da267e0229 | available |
+| `.pio/build/glyph_mk6/firmware.uf2` | uf2 | 791552 | 2bddbfa0e471b466aa88f90da457ae9e86fcd51cb6896821c972dd1321dcb6c5 | available |
+| `.pio/build/glyph_mk6/firmware.elf` | elf | 5407148 | 1915e8d8497c661f551e51f6b618257757cd009d3fc38f22a30d003eb5784d46 | available |
+| `.pio/build/glyph_mk6/firmware.bin` | bin | 395672 | a37edf89cfa16548d11113d30b40a90ec74501006247a0eb1cce357600f2cc42 | available |
 
 | artifact_type | baseline size_bytes | baseline sha256 | current size_bytes | current sha256 | size delta bytes |
 | --- | ---: | --- | ---: | --- | ---: |
-| uf2 | 791552 | bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085 | 791552 | e48baa2dbcf1f2fec1607bbce8508b0fd6d678963df4b7e5fb2c345ab3a49ae8 | 0 |
-| elf | 5407148 | dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83 | 5407148 | d03eefe3161aa222276fb735a1905e204f90d473de9a96879b89dc34d7ee820c | 0 |
-| bin | 395664 | 4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45 | 395672 | cd0880780c15977179fa0f455fe2f53db6535159214c0deca59301da267e0229 | 8 |
+| uf2 | 791552 | bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085 | 791552 | 2bddbfa0e471b466aa88f90da457ae9e86fcd51cb6896821c972dd1321dcb6c5 | 0 |
+| elf | 5407148 | dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83 | 5407148 | 1915e8d8497c661f551e51f6b618257757cd009d3fc38f22a30d003eb5784d46 | 0 |
+| bin | 395664 | 4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45 | 395672 | a37edf89cfa16548d11113d30b40a90ec74501006247a0eb1cce357600f2cc42 | 8 |
 
 ## Map / Artifact Availability
 
