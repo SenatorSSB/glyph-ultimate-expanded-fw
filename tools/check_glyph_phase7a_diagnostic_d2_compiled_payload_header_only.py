@@ -118,10 +118,20 @@ def read_required(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    # Standard JSON parsing keeps the last duplicate key silently; fixtures must reject ambiguous metadata.
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
 def load_json(path: Path) -> dict[str, Any]:
     try:
-        payload = json.loads(read_required(path))
-    except json.JSONDecodeError as exc:
+        payload = json.loads(read_required(path), object_pairs_hook=reject_duplicate_keys)
+    except (json.JSONDecodeError, ValueError) as exc:
         fail(f"invalid JSON in {rel(path)}: {exc}")
     if not isinstance(payload, dict):
         fail(f"{rel(path)} must contain a JSON object")

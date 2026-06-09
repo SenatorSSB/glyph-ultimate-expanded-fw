@@ -27,7 +27,6 @@
     {
       "path": ".pio/build/glyph_mk6/firmware.bin",
       "artifact_type": "bin",
-      "size_bytes": 395672,
       "size_bytes": 395664,
       "sha256": "dd371038cffc1c94b2586808abc1ca9ddc9bf901e3d4434a2742225926a14abc",
       "available": true
