@@ -13,6 +13,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 BASE_BRANCH = "phase7a-diagnostic-d2b-retained-payload-bytes"
 RESULT_BRANCH = "phase7a-diagnostic-d2b-retained-payload-bytes-hardware-result"
+ALLOWED_BRANCHES = {BASE_BRANCH, RESULT_BRANCH}
 
 RESULT_MD_PATH = (
     REPO_ROOT
@@ -165,42 +166,57 @@ def require_table_row(text: str, row_id: str, result: str, note_phrase: str) -> 
         fail(f"result table row for {row_id} missing note phrase: {note_phrase}")
 
 
+def parse_git_status_path(line: str) -> str:
+    parts = line.split(None, 1)
+    if len(parts) != 2:
+        return ""
+    path = parts[1]
+    if " -> " in path:
+        path = path.split(" -> ", 1)[1]
+    return path.strip()
+
+
 def git_changed_paths(base_branch: str) -> set[str]:
     changed = set(git_lines(["diff", "--name-only", f"{base_branch}...HEAD"]))
     for status_line in git_lines(["status", "--short"], keep_whitespace=True):
-        parts = status_line.split(None, 1)
-        if len(parts) != 2:
-            continue
-        path = parts[1]
-        if " -> " in path:
-            path = path.split(" -> ", 1)[1]
-        changed.add(path)
+        path = parse_git_status_path(status_line)
+        if path:
+            changed.add(path)
     return {path for path in changed if path}
 
 
 def validate_branch_scope() -> None:
     branch = git_lines(["branch", "--show-current"])[0]
-    if branch != RESULT_BRANCH:
-        fail(f"unexpected branch: {branch!r}, expected {RESULT_BRANCH!r}")
+    if branch not in ALLOWED_BRANCHES:
+        fail(f"unexpected branch: {branch!r}, expected one of {sorted(ALLOWED_BRANCHES)!r}")
 
-    changed_paths = git_changed_paths(BASE_BRANCH)
-    if not changed_paths:
-        fail("no changed paths detected for hardware result branch")
+    if branch == RESULT_BRANCH:
+        changed_paths = git_changed_paths(BASE_BRANCH)
+        if not changed_paths:
+            fail("no changed paths detected for hardware result branch")
 
-    required_paths = {
-        rel(RESULT_MD_PATH),
-        rel(RESULT_JSON_PATH),
-        rel(INDEX_PATH),
-        rel(README_PATH),
-        rel(REPO_ROOT / "tools" / "check_glyph_phase7a_diagnostic_d2b_hardware_result.py"),
-    }
-    missing_required = required_paths - changed_paths
-    if missing_required:
-        fail("missing expected changed paths: " + ", ".join(sorted(missing_required)))
+        required_paths = {
+            rel(RESULT_MD_PATH),
+            rel(RESULT_JSON_PATH),
+            rel(INDEX_PATH),
+            rel(README_PATH),
+            rel(REPO_ROOT / "tools" / "check_glyph_phase7a_diagnostic_d2b_hardware_result.py"),
+        }
+        missing_required = required_paths - changed_paths
+        if missing_required:
+            fail("missing expected changed paths: " + ", ".join(sorted(missing_required)))
 
-    for path in sorted(changed_paths):
+        for path in sorted(changed_paths):
+            if not any(path.startswith(prefix) for prefix in EXPECTED_ALLOWED_PREFIXES):
+                fail(f"changed path outside allowed hardware-result scope: {path}")
+        return
+
+    status_paths = set(
+        filter(None, (parse_git_status_path(line) for line in git_lines(["status", "--short"], keep_whitespace=True)))
+    )
+    for path in sorted(status_paths):
         if not any(path.startswith(prefix) for prefix in EXPECTED_ALLOWED_PREFIXES):
-            fail(f"changed path outside allowed hardware-result scope: {path}")
+            fail(f"uncommitted path outside allowed post-merge scope: {path}")
 
 
 def validate_markdown() -> None:
