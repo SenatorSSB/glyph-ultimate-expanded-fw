@@ -60,6 +60,13 @@ artifacts unless a specific packet says otherwise.
   result status; docs/tools only and no firmware behavior change.
 - `fixtures/hot_path_parse_status_guardrail.json` - machine-readable guardrail
   fixture for the hot-path parse-status invariant.
+- `active_runtime_config_state_contract.md` - accepted active runtime config
+  state contract: activation/selection may use parser/materialization/load
+  status before publication, while analog output generation may consume only
+  `ActiveRuntimeConfigState.active_view`; docs/tools only and no firmware
+  behavior change.
+- `fixtures/active_runtime_config_state_contract.json` - machine-readable
+  fixture for the active runtime config state contract.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -88,6 +95,11 @@ artifacts unless a specific packet says otherwise.
   state from `UpdateAnalogOutputs` or any analog hot-path resolver. Future
   activation must compute stable active runtime config state outside the analog
   output hot path.
+- The accepted active runtime config state contract requires future activation
+  to publish a stable selected `RuntimeConfigView` before analog output
+  generation. Analog output generation may consume only
+  `ActiveRuntimeConfigState.active_view` and must not branch on activation
+  source or activation status.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

@@ -1,0 +1,48 @@
+{
+  "schema_name": "glyph_active_runtime_config_state_contract",
+  "status": "design_accepted",
+  "contract_id": "active_runtime_config_state",
+  "depends_on_guardrail_id": "runtime_hot_path_no_parser_result_state_read",
+  "required_hot_path_invariant": "Do not read parser result state from UpdateAnalogOutputs or analog hot-path resolver.",
+  "active_state_shape": {
+    "active_view": "const RuntimeConfigView*",
+    "source": "RuntimeConfigSource",
+    "status": "RuntimeConfigActivationStatus"
+  },
+  "allowed_activation_phase_inputs": [
+    "parser result state",
+    "payload validation state",
+    "CRC state",
+    "source-owned baseline availability",
+    "fallback availability"
+  ],
+  "forbidden_output_phase_inputs": [
+    "parser result state",
+    "payload validation state",
+    "CRC state",
+    "storage load state",
+    "write status",
+    "activation source",
+    "activation status"
+  ],
+  "output_phase_allowed_runtime_config_access": [
+    "stable selected RuntimeConfigView via active_view"
+  ],
+  "future_implementation_constraints": [
+    "ResolveActiveRuntimeConfig may return a stable preselected view.",
+    "ResolveActiveRuntimeConfig must not inspect parser result state.",
+    "UpdateAnalogOutputs must not branch on activation status.",
+    "Parser/materialization/load status may be used only before active-state publication."
+  ],
+  "deferred": [
+    "true parsed table materialization",
+    "runtime-loaded config",
+    "storage",
+    "WebSerial or device write",
+    "flashing automation"
+  ],
+  "firmware_behavior_changed": false,
+  "build_required": false,
+  "nunchuk_status": "not_tested",
+  "failed_activation_branch_merge_allowed": false
+}
