@@ -68,6 +68,10 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   combination diagnostic.
 - `fixtures/glyph_phase7a_diagnostic_d5_parsed_result_runtime_routing_hardware_plan_2026-06-09.json` -
   matching diagnostic D5A hardware plan fixture.
+- `glyph_phase7a_diagnostic_d5a_parse_status_gated_routing_hardware_failure_2026-06-09.md` -
+  user-reported D5A hardware failure; RF5, RF6, and LT6 disconnect observed.
+- `fixtures/glyph_phase7a_diagnostic_d5a_parse_status_gated_routing_hardware_failure_2026-06-09.json` -
+  matching machine-readable D5A hardware failure fixture.
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md` -
   user-reported D2B hardware result pass; retained payload bytes alone did not
   reproduce the RF5/RF6 disconnect.

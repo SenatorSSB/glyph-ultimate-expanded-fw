@@ -1,0 +1,42 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d5a_parse_status_gated_routing_hardware_failure",
+  "status": "user_reported_fail",
+  "diagnostic_branch": "phase7a-diagnostic-d5-parsed-result-runtime-routing",
+  "result_branch": "phase7a-diagnostic-d5a-parse-status-gated-routing-hardware-failure",
+  "exact_user_report_text": "tested, failed. RF5 and RF6 caused disconnect. Because LT6 had been similarly coded I tested that too, and same disconnect happened. Likely was an issue already at the same time.",
+  "result_source": "user_reported",
+  "result_date_local": "2026-06-09",
+  "hardware_result_recorded": true,
+  "d5a_failed": true,
+  "rf5_disconnect_observed": true,
+  "rf6_disconnect_observed": true,
+  "lt6_disconnect_observed": true,
+  "ordinary_direction_status": "unknown",
+  "neutral_status": "unknown",
+  "unrelated_buttons_status": "unknown",
+  "nunchuk_status": "not_tested",
+  "payload_bytes_retained": true,
+  "global_parse_result_added": true,
+  "parser_called_by_global_static_initialization": true,
+  "resolver_added": true,
+  "parse_status_gated_routing_added": true,
+  "source_owned_runtime_view_routed_after_parse_ok": true,
+  "parsed_table_materialization_added": false,
+  "true_parsed_result_routing_deferred": true,
+  "storage_added": false,
+  "write_path_added": false,
+  "flashing_automation_added": false,
+  "root_cause_proven": false,
+  "failed_activation_branch_merge_allowed": false,
+  "hypothesis_updates": [
+    "H5: elevated_combination_suspect",
+    "H1: previously_reduced_by_D3",
+    "H2: previously_reduced_by_D2B",
+    "H3: previously_reduced_by_D4",
+    "H4: previously_reduced_by_D3",
+    "H6: still_open"
+  ],
+  "next_recommended_diagnostic": [
+    "D5A-N1 direct canonical source-owned view after parse-status gate"
+  ]
+}

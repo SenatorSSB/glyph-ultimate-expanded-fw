@@ -85,6 +85,11 @@ artifacts unless a specific packet says otherwise.
   D5A build report with local artifact observations, parse-status-gated
   source-owned runtime-routing guardrails, and explicit non-stable
   artifact-hash caveat.
+- `glyph_phase7a_diagnostic_d5a_parse_status_gated_routing_hardware_failure_2026-06-09.md` -
+  user-reported D5A hardware failure result; RF5, RF6, and LT6 disconnect
+  observed, and the failed activation branch remains abandoned.
+- `fixtures/glyph_phase7a_diagnostic_d5a_parse_status_gated_routing_hardware_failure_2026-06-09.json` -
+  matching machine-readable D5A hardware failure fixture.
 - `phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.md` -
   D2 diagnostic hardware plan template for required rows (all `NOT_TESTED`).
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.md` -
@@ -115,6 +120,8 @@ artifacts unless a specific packet says otherwise.
 - `tools/check_glyph_phase7a_diagnostic_d5_parsed_result_runtime_routing.py` -
   read-only checker for D5A parse-status-gated source-owned routing source,
   docs, report, hardware-plan, and no storage/write/flashing guardrails.
+- `tools/check_glyph_phase7a_diagnostic_d5a_hardware_failure.py` - read-only
+  checker for the D5A user-reported hardware failure result packet/fixture.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, diagnostic
   matrix, and no-firmware-source-change guardrail.
