@@ -64,6 +64,11 @@ artifacts unless a specific packet says otherwise.
     and user reported pass, which reduces payload-only/static rodata
     suspicion. Next diagnostics should isolate parser static initialization and
     resolver path.
+- `glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result_2026-06-09.md`
+  - user-reported D3 hardware result pass; global/static parser initialization
+    alone did not reproduce the RF5/RF6 disconnect. D2B, D3, and D4 each
+    passed in isolation, so the next diagnostic should focus on controlled
+    combinations rather than a single isolated component.
 - `phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.md` -
   D2 build report with artifact and size/hash delta metadata.
 - `phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.md` -

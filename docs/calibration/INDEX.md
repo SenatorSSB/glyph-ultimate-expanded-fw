@@ -67,6 +67,11 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   reproduce the RF5/RF6 disconnect.
 - `fixtures/glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.json` -
   matching machine-readable D2B hardware result fixture.
+- `glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result_2026-06-09.md` -
+  user-reported D3 hardware result pass; global/static parser initialization
+  alone did not reproduce the RF5/RF6 disconnect.
+- `fixtures/glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result_2026-06-09.json` -
+  matching machine-readable D3 hardware result fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 

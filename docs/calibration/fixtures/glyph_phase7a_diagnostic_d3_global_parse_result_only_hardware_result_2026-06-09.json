@@ -1,0 +1,186 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result",
+  "status": "user_reported_pass",
+  "diagnostic_branch": "phase7a-diagnostic-d3-global-parse-result-only",
+  "result_branch": "phase7a-diagnostic-d3-global-parse-result-only-hardware-result",
+  "exact_user_report_text": "tested, everything works without issues",
+  "result_source": "user_reported",
+  "result_date_local": "2026-06-09",
+  "hardware_result_recorded": true,
+  "d3_passed": true,
+  "rf5_disconnect_observed": false,
+  "rf6_disconnect_observed": false,
+  "payload_bytes_retained": true,
+  "global_parse_result_added": true,
+  "parser_called_by_global_static_initialization": true,
+  "resolver_added": false,
+  "runtime_output_routing_to_parsed_result": false,
+  "update_analog_outputs_changed": false,
+  "update_digital_outputs_changed": false,
+  "rf5_rf6_source_expressions_changed": false,
+  "storage_added": false,
+  "write_path_added": false,
+  "flashing_automation_added": false,
+  "runtime_behavior_changed_intended": false,
+  "nunchuk_status": "not_tested",
+  "root_cause_proven": false,
+  "failed_activation_branch_merge_allowed": false,
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_report_reference": "docs/runtime_config/phase7a_diagnostic_d3_global_parse_result_only_build_report_2026-06-09.md",
+  "install_method": "manual Glyph firmware update",
+  "source_build_provenance": "local D3 branch and build process only",
+  "result_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Baseline behavior preserved",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "RF5-001",
+      "category": "rf5_paths",
+      "planned_check": "Representative RF5 behavior does not cause controller disconnect",
+      "result": "PASS",
+      "notes": "No disconnect reported."
+    },
+    {
+      "row_id": "RF6-001",
+      "category": "rf6_paths",
+      "planned_check": "Representative RF6 behavior does not cause controller disconnect",
+      "result": "PASS",
+      "notes": "No disconnect reported."
+    },
+    {
+      "row_id": "ORDINARY-DIR-001",
+      "category": "directions",
+      "planned_check": "Ordinary direction behavior remains preserved",
+      "result": "PASS",
+      "notes": "Covered by \"everything works\"."
+    },
+    {
+      "row_id": "NEUTRAL-001",
+      "category": "neutral_state",
+      "planned_check": "Neutral behavior remains preserved",
+      "result": "PASS",
+      "notes": "Covered by \"everything works\"."
+    },
+    {
+      "row_id": "UNRELATED-BUTTONS-001",
+      "category": "buttons",
+      "planned_check": "Unrelated buttons remain preserved",
+      "result": "PASS",
+      "notes": "Covered by \"everything works\"."
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "planned_check": "Representative modifiers remain preserved",
+      "result": "PASS",
+      "notes": "Covered by \"everything works\"."
+    },
+    {
+      "row_id": "PAYLOAD-001",
+      "category": "payload_retention",
+      "planned_check": "D2B retained payload bytes remain present",
+      "result": "PRESENT",
+      "notes": "D2B retained payload bytes present."
+    },
+    {
+      "row_id": "GLOBAL-PARSE-001",
+      "category": "global_parse_result",
+      "planned_check": "Global parse result is present in the diagnostic source",
+      "result": "PRESENT",
+      "notes": "Global/static parse result present."
+    },
+    {
+      "row_id": "PARSER-CALL-001",
+      "category": "parser_behavior",
+      "planned_check": "Parser call exists only in global/static initialization path",
+      "result": "PRESENT",
+      "notes": "Parser called by global/static initialization."
+    },
+    {
+      "row_id": "NO-RESOLVER-001",
+      "category": "runtime_resolver",
+      "planned_check": "Runtime resolver not added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No runtime resolver added."
+    },
+    {
+      "row_id": "NO-RUNTIME-ROUTING-001",
+      "category": "runtime_routing",
+      "planned_check": "Parsed result is not routed into runtime output lookup",
+      "result": "SOURCE_CHECKED",
+      "notes": "Parsed result not routed into output lookup."
+    },
+    {
+      "row_id": "NO-STORAGE-001",
+      "category": "storage",
+      "planned_check": "Runtime-config storage not added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No runtime storage."
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "webserial_or_write",
+      "planned_check": "WebSerial/device write not added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No WebSerial/device write."
+    },
+    {
+      "row_id": "NO-FLASH-001",
+      "category": "flashing_automation",
+      "planned_check": "No firmware flashing automation paths used",
+      "result": "SOURCE_CHECKED",
+      "notes": "No flashing automation."
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Explicitly mark nunchuk as not tested in this branch",
+      "result": "NOT_TESTED",
+      "notes": "Not tested."
+    }
+  ],
+  "hypothesis_updates": [
+    "H1: reduced_likelihood",
+    "H4: reduced_likelihood",
+    "H2: previously_reduced_by_D2B",
+    "H3: previously_reduced_by_D4",
+    "H5: still_open_in_combination",
+    "H6: still_open"
+  ],
+  "diagnostic_interpretation": [
+    "D3 passed.",
+    "Global/static parser initialization alone did not reproduce the RF5/RF6 disconnect.",
+    "H1 global/static parser initialization is reduced in likelihood.",
+    "H4 parser loop/static-init is reduced in likelihood.",
+    "D2B, D3, and D4 each passed in isolation.",
+    "H5 remains open only in combination.",
+    "H6 remains open.",
+    "Root cause remains unproven.",
+    "Failed activation branch remains abandoned and must not merge.",
+    "Next recommended diagnostic should focus on controlled combinations rather than a single isolated component."
+  ],
+  "next_recommended_diagnostic": [
+    "controlled combination diagnostic"
+  ],
+  "non_claims": [
+    "result is user-reported",
+    "no automated device telemetry",
+    "no nunchuk validation",
+    "no public release claim",
+    "no release compatibility claim",
+    "no proof of root cause",
+    "no claim that parser is generally safe in every activation design",
+    "no claim that the failed branch is recoverable"
+  ]
+}
