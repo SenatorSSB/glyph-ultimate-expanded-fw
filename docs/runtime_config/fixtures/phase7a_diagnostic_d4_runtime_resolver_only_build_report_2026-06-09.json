@@ -1,0 +1,84 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d4_runtime_resolver_only_build_report",
+  "status": "diagnostic_d4_build_report_pending_hardware_result",
+  "branch": "phase7a-diagnostic-d4-runtime-resolver-only",
+  "baseline_branch": "configurator",
+  "build_report_category": "runtime-resolver-only",
+  "diagnostic_mode": "D4",
+  "resolver_added": true,
+  "parser_called": false,
+  "global_parse_result_added": false,
+  "compiled_payload_added": false,
+  "payload_bytes_retained_in_firmware_image": false,
+  "ultimate_cpp_changed": true,
+  "runtime_behavior_changed_intended": false,
+  "hardware_required": true,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "not_tested",
+  "commit_sha": "1af6c522b8f15f706072ec88315978281af8f4c4",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_date_local": "2026-06-09 16:04:15 +0300",
+  "baseline_build_report": "docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json",
+  "artifacts": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 791552,
+      "sha256": "22f7b0df2ca6bf599cc041ef409450787078324fb9d26d559bc9ed0ca70ddfc8",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407148,
+      "sha256": "fda64557e404b6e8779df4968ad05cad458eaa8700111af7775c5da2704e3054",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 395672,
+      "sha256": "3db10cc529beed3d2ca2b77bd6e9f474238b9217621df57d2e7fb9e8e2931c1b",
+      "available": true
+    }
+  ],
+  "artifacts_deltas_vs_baseline": [
+    {
+      "artifact_type": "uf2",
+      "baseline_size_bytes": 791552,
+      "baseline_sha256": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
+        "to": "22f7b0df2ca6bf599cc041ef409450787078324fb9d26d559bc9ed0ca70ddfc8"
+      }
+    },
+    {
+      "artifact_type": "elf",
+      "baseline_size_bytes": 5407148,
+      "baseline_sha256": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+      "size_delta_bytes": 0,
+      "sha256_delta": {
+        "from": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
+        "to": "fda64557e404b6e8779df4968ad05cad458eaa8700111af7775c5da2704e3054"
+      }
+    },
+    {
+      "artifact_type": "bin",
+      "baseline_size_bytes": 395664,
+      "baseline_sha256": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+      "size_delta_bytes": 8,
+      "sha256_delta": {
+        "from": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
+        "to": "3db10cc529beed3d2ca2b77bd6e9f474238b9217621df57d2e7fb9e8e2931c1b"
+      }
+    }
+  ],
+  "map_file_available": false,
+  "elf_file_available": true,
+  "uf2_file_available": true,
+  "bin_file_available": true,
+  "firmware_source_changed": true,
+  "runtime_behavior_changed": false,
+  "artifact_scan_performed": false
+}

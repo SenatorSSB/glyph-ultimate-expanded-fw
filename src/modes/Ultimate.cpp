@@ -22,6 +22,12 @@ static_assert(
     "Phase 7A parser scaffold must stay aligned with the offline GCFG-like payload size"
 );
 
+const RuntimeConfigView& ResolveActiveRuntimeConfig() {
+    return ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
+        ? kSourceOwnedCurrentBaselineRuntimeConfig
+        : kKnownGoodRuntimeConfig;
+}
+
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
@@ -462,9 +468,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
-    const RuntimeConfigView &runtime_config = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
-        ? kSourceOwnedCurrentBaselineRuntimeConfig
-        : kKnownGoodRuntimeConfig;
+    const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(

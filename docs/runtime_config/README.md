@@ -56,6 +56,9 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_diagnostic_d2b_retained_payload_bytes.md` - diagnostic D2B packet for
   payload retention verification in firmware image with no runtime parser or
   resolver usage.
+- `phase7a_diagnostic_d4_runtime_resolver_only.md` - diagnostic D4 packet for
+  runtime resolver/reference path isolation; no parser, payload, or activation
+  behavior changes.
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md`
   - user-reported D2B hardware result pass; D2B retained full payload bytes
     and user reported pass, which reduces payload-only/static rodata
@@ -66,11 +69,15 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.md` -
   D2B build report with retention verification metadata and size/hash deltas vs
   baseline and D2A.
+- `phase7a_diagnostic_d4_runtime_resolver_only_build_report_2026-06-09.md` -
+  D4 build report with artifact and size/hash delta metadata.
 - `phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.md` -
   D2 diagnostic hardware plan template for required rows (all `NOT_TESTED`).
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.md` -
   D2B hardware plan template (all `NOT_TESTED`) with payload-retention evidence
   intent.
+- `glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_plan_2026-06-09.md` -
+  D4 hardware plan template (all rows initially `NOT_TESTED`).
 - `fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json` -
   machine-readable D2 build report metadata and artifact deltas.
 - `fixtures/phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.json` -
@@ -79,6 +86,8 @@ artifacts unless a specific packet says otherwise.
   checker for D2 packet/report/plan/header retention guardrails.
 - `tools/check_glyph_phase7a_diagnostic_d2b_retained_payload_bytes.py` - read-only
   checker for D2B retention-in-firmware validation.
+- `tools/check_glyph_phase7a_diagnostic_d4_runtime_resolver_only.py` - read-only
+  checker for D4 resolver/reference isolation constraints.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, diagnostic
   matrix, and no-firmware-source-change guardrail.
