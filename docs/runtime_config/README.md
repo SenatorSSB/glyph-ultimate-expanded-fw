@@ -63,6 +63,8 @@ artifacts unless a specific packet says otherwise.
   packet for parse-status-gated source-owned runtime routing. This is not true
   parsed-result table-data routing; D5B is required if true parsed data routing
   needs to be tested.
+- `phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate.md` - diagnostic
+  D5A-N1 packet for direct source-owned baseline view return after parse gate.
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md`
   - user-reported D2B hardware result pass; D2B retained full payload bytes
     and user reported pass, which reduces payload-only/static rodata
@@ -85,6 +87,9 @@ artifacts unless a specific packet says otherwise.
   D5A build report with local artifact observations, parse-status-gated
   source-owned runtime-routing guardrails, and explicit non-stable
   artifact-hash caveat.
+- `phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_build_report_2026-06-09.md` -
+  D5A-N1 build report with local artifact observations for direct
+  source-owned baseline view routing after parse status gate.
 - `phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.md` -
   D2 diagnostic hardware plan template for required rows (all `NOT_TESTED`).
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.md` -
@@ -96,6 +101,12 @@ artifacts unless a specific packet says otherwise.
 - `glyph_phase7a_diagnostic_d5_parsed_result_runtime_routing_hardware_plan_2026-06-09.md` -
   D5A hardware plan template (all `NOT_TESTED`) for parse-status-gated
   source-owned runtime routing after D2B, D3, and D4 passed in isolation.
+- `glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_plan_2026-06-09.md` -
+  D5A-N1 hardware plan template (all `NOT_TESTED`) for direct source-owned
+  view selection after parse-status gate.
+- `glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_result_2026-06-09.md` -
+  user-reported D5A-N1 hardware failure evidence showing RF5/RF6/LT6 disconnect
+  reproduction.
 - `fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json` -
   machine-readable D2 build report metadata and artifact deltas.
 - `fixtures/phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.json` -
@@ -105,6 +116,12 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/phase7a_diagnostic_d5_parsed_result_runtime_routing_build_report_2026-06-09.json` -
   machine-readable D5A build report metadata with artifact hashes as local
   observations only.
+- `fixtures/phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_build_report_2026-06-09.json` -
+  machine-readable D5A-N1 build report metadata with local artifact observations
+  and non-checker artifact hashes.
+- `fixtures/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_result_2026-06-09.json` -
+  machine-readable D5A-N1 hardware-result failure fixture with RF5/RF6/LT6
+  disconnects recorded.
 - `tools/check_glyph_phase7a_diagnostic_d2_compiled_payload_header_only.py` - read-only
   checker for D2 packet/report/plan/header retention guardrails.
 - `tools/check_glyph_phase7a_diagnostic_d2b_retained_payload_bytes.py` - read-only
@@ -115,6 +132,8 @@ artifacts unless a specific packet says otherwise.
 - `tools/check_glyph_phase7a_diagnostic_d5_parsed_result_runtime_routing.py` -
   read-only checker for D5A parse-status-gated source-owned routing source,
   docs, report, hardware-plan, and no storage/write/flashing guardrails.
+- `tools/check_glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate.py` -
+  read-only checker for D5A-N1 scope, resolver behavior, and guardrails.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, diagnostic
   matrix, and no-firmware-source-change guardrail.

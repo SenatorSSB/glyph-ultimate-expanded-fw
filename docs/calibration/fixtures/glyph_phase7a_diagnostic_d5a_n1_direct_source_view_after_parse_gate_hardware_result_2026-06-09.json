@@ -1,0 +1,187 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_result",
+  "status": "user_reported_failure",
+  "diagnostic_branch": "phase7a-diagnostic-d5a-n1-direct-source-view-after-parse-gate",
+  "result_branch": "phase7a-diagnostic-d5a-n1-direct-source-view-after-parse-gate-hardware-result",
+  "user_report_text": "retest: RF5/RF6/LT6 disconnects reproduced",
+  "result_source": "user-reported",
+  "result_date_local": "2026-06-09",
+  "build_command": "pio run -e glyph_mk6",
+  "build_report_reference": "docs/runtime_config/phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_build_report_2026-06-09.md",
+  "commit_sha_under_test": "unknown",
+  "hardware_result_recorded": true,
+  "rf5_disconnect_observed": true,
+  "rf6_disconnect_observed": true,
+  "lt6_disconnect_observed": true,
+  "payload_bytes_retained": true,
+  "global_parse_result_added": true,
+  "parser_called_by_global_static_initialization": true,
+  "resolver_added": true,
+  "runtime_output_routing_to_parsed_result": false,
+  "update_analog_outputs_changed": true,
+  "update_digital_outputs_changed": false,
+  "rf5_rf6_source_expressions_changed": false,
+  "lt6_source_expression_changed": false,
+  "storage_added": false,
+  "write_path_added": false,
+  "flashing_automation_added": false,
+  "runtime_behavior_changed_intended": true,
+  "nunchuk_status": "not_tested",
+  "root_cause_proven": false,
+  "failed_activation_branch_merge_allowed": false,
+  "result_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "NOT_TESTED",
+      "notes": "Not re-recorded in this result packet."
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Baseline behavior preserved",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "RF5-001",
+      "category": "rf5_paths",
+      "planned_check": "Representative RF5 behavior does not cause controller disconnect",
+      "result": "FAIL",
+      "notes": "Disconnect reproduced."
+    },
+    {
+      "row_id": "RF6-001",
+      "category": "rf6_paths",
+      "planned_check": "Representative RF6 behavior does not cause controller disconnect",
+      "result": "FAIL",
+      "notes": "Disconnect reproduced."
+    },
+    {
+      "row_id": "LT6-001",
+      "category": "lt6_paths",
+      "planned_check": "Representative LT6 behavior does not cause controller disconnect",
+      "result": "FAIL",
+      "notes": "Disconnect reproduced."
+    },
+    {
+      "row_id": "ORDINARY-DIR-001",
+      "category": "directions",
+      "planned_check": "Ordinary direction behavior remains preserved",
+      "result": "PASS",
+      "notes": "covered by broader user report."
+    },
+    {
+      "row_id": "NEUTRAL-001",
+      "category": "neutral_state",
+      "planned_check": "Neutral behavior remains preserved",
+      "result": "PASS",
+      "notes": "covered by broader user report."
+    },
+    {
+      "row_id": "UNRELATED-BUTTONS-001",
+      "category": "buttons",
+      "planned_check": "Unrelated buttons remain preserved",
+      "result": "PASS",
+      "notes": "covered by broader user report."
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "planned_check": "Representative modifiers remain preserved",
+      "result": "PASS",
+      "notes": "covered by broader user report."
+    },
+    {
+      "row_id": "PAYLOAD-001",
+      "category": "payload_retention",
+      "planned_check": "D2B retained payload bytes remain present",
+      "result": "SOURCE_CHECKED",
+      "notes": "D2B retained payload bytes remain present in source."
+    },
+    {
+      "row_id": "GLOBAL-PARSE-001",
+      "category": "global_parse_result",
+      "planned_check": "Global parse result is present in the diagnostic source",
+      "result": "SOURCE_CHECKED",
+      "notes": "Global parse result symbol present."
+    },
+    {
+      "row_id": "PARSER-CALL-001",
+      "category": "parser_behavior",
+      "planned_check": "Parser call exists in global/static initialization path",
+      "result": "SOURCE_CHECKED",
+      "notes": "Parser call remains in global/static initialization."
+    },
+    {
+      "row_id": "RESOLVER-001",
+      "category": "runtime_resolver",
+      "planned_check": "Resolver is present",
+      "result": "SOURCE_CHECKED",
+      "notes": "Resolver present in source."
+    },
+    {
+      "row_id": "PARSE-STATUS-GATE-001",
+      "category": "parse_status_gate",
+      "planned_check": "Runtime routing is gated by parse status Ok",
+      "result": "SOURCE_CHECKED",
+      "notes": "Parse-status gate remains."
+    },
+    {
+      "row_id": "SOURCE-OWNED-ROUTING-001",
+      "category": "runtime_routing",
+      "planned_check": "Analog runtime output lookup routed through resolver-selected source-owned view",
+      "result": "SOURCE_CHECKED",
+      "notes": "Resolver returns source-owned view when parse status OK."
+    },
+    {
+      "row_id": "FALLBACK-001",
+      "category": "fallback",
+      "planned_check": "Fallback remains known-good runtime config",
+      "result": "SOURCE_CHECKED",
+      "notes": "Fallback path unchanged."
+    },
+    {
+      "row_id": "NO-STORAGE-001",
+      "category": "storage",
+      "planned_check": "Runtime-config storage not added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No storage path added."
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "webserial_or_write",
+      "planned_check": "No WebSerial/device write added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No write path added."
+    },
+    {
+      "row_id": "NO-FLASH-001",
+      "category": "flashing_automation",
+      "planned_check": "No firmware flashing automation paths used",
+      "result": "SOURCE_CHECKED",
+      "notes": "No flashing automation."
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Explicitly mark nunchuk as not tested in this branch",
+      "result": "NOT_TESTED",
+      "notes": "Nunchuk not tested."
+    }
+  ],
+  "diagnostic_interpretation": [
+    "RF5/RF6/LT6 disconnects reproduced.",
+    "D5A-N1 branch still reproduces the disconnect condition.",
+    "No hardware result claim beyond this branch-specific report."
+  ],
+  "non_claims": [
+    "result is user-reported",
+    "no automated device telemetry",
+    "no nunchuk validation",
+    "no parser safety claim",
+    "no storage/write/flashing support",
+    "no root cause proven"
+  ]
+}
