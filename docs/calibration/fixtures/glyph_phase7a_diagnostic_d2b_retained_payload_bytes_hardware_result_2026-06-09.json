@@ -1,0 +1,103 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result",
+  "status": "user_reported_pass",
+  "diagnostic_branch": "phase7a-diagnostic-d2b-retained-payload-bytes",
+  "result_branch": "phase7a-diagnostic-d2b-retained-payload-bytes-hardware-result",
+  "user_report_text": "tested, everything works. Especially RF5-6 do not cause a disconnect.",
+  "result_source": "user-reported",
+  "result_date_local": "2026-06-09",
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_report_reference": "docs/runtime_config/phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.md",
+  "commit_sha_under_test": "bc0525dba8ecbdc62251a3b9d4bb2fc54a9a1a35",
+  "hardware_result_recorded": true,
+  "rf5_disconnect_observed": false,
+  "rf6_disconnect_observed": false,
+  "retained_payload_bytes_tested": true,
+  "parser_called": false,
+  "global_parse_result_added": false,
+  "runtime_resolver_added": false,
+  "ultimate_cpp_changed": false,
+  "runtime_behavior_changed_intended": false,
+  "nunchuk_status": "not_tested",
+  "root_cause_proven": false,
+  "failed_activation_branch_merge_allowed": false,
+  "result_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Baseline behavior preserved",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "RF5-001",
+      "category": "rf5_paths",
+      "planned_check": "Representative RF5 behaviors remain preserved",
+      "result": "PASS",
+      "notes": "No disconnect observed."
+    },
+    {
+      "row_id": "RF6-001",
+      "category": "rf6_paths",
+      "planned_check": "Representative RF6 behaviors remain preserved",
+      "result": "PASS",
+      "notes": "No disconnect observed."
+    },
+    {
+      "row_id": "ORDINARY-DIR-001",
+      "category": "directions",
+      "planned_check": "Ordinary direction behavior remains preserved",
+      "result": "PASS",
+      "notes": "Covered by \"everything works\"."
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Explicitly mark nunchuk as not tested in this branch",
+      "result": "NOT_TESTED",
+      "notes": "No nunchuk validation claim."
+    }
+  ],
+  "source_build_checks_retained": [
+    "no parser call claim remains source/build-checked, not hardware-observed",
+    "no resolver claim remains source/build-checked, not hardware-observed",
+    "no storage/write/flashing claim remains source/build-checked, not hardware-observed"
+  ],
+  "diagnostic_interpretation": [
+    "Retained payload bytes alone did not reproduce the RF5/RF6 disconnect.",
+    "H2 static payload/rodata-only hypothesis is reduced in likelihood.",
+    "H1 global/static parser initialization remains open.",
+    "H3 runtime resolver/reference path remains open.",
+    "H4 parser loop/static-init remains open.",
+    "H5 RF5/RF6 path interaction remains open only in combination with parser/resolver changes.",
+    "H6 latent/unrelated interaction remains open.",
+    "Failed activation branch remains abandoned and must not merge."
+  ],
+  "hypotheses_updated": {
+    "H2": "reduced_likelihood",
+    "H1": "still_open",
+    "H3": "still_open",
+    "H4": "still_open",
+    "H5": "still_open_in_combination",
+    "H6": "still_open"
+  },
+  "next_recommended_diagnostic": [
+    "D3 global parse result only",
+    "D4 runtime resolver only"
+  ],
+  "non_claims": [
+    "no root cause proven",
+    "no parser safety proven",
+    "no resolver safety proven",
+    "no nunchuk validation",
+    "no public release claim",
+    "no release compatibility claim"
+  ]
+}
