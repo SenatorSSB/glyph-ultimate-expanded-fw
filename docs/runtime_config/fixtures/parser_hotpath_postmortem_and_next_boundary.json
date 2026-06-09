@@ -1,0 +1,70 @@
+{
+  "schema_name": "glyph_parser_hotpath_postmortem_and_next_boundary",
+  "status": "design_accepted",
+  "postmortem_id": "phase7a_parser_hotpath_failure",
+  "accepted_guardrail_id": "runtime_hot_path_no_parser_result_state_read",
+  "accepted_guardrail": "Do not read parser result state from UpdateAnalogOutputs or analog hot-path resolver.",
+  "repair_architecture_baseline": "source_owned_active_state_preselection",
+  "repair_architecture_hardware_status": "HARDWARE_PASS",
+  "diagnostic_matrix": {
+    "D2B_retained_payload_bytes_only": "PASS",
+    "D3_global_static_parse_result_only": "PASS",
+    "D4_resolver_only": "PASS",
+    "D5A_parse_status_gated_source_owned_routing": "FAIL",
+    "D5A_N1_direct_source_view_after_parse_gate": "FAIL",
+    "D5A_N2_resolver_without_parse_status_read": "PASS",
+    "source_owned_active_state_preselection": "HARDWARE_PASS"
+  },
+  "critical_rows": {
+    "RF5": "PASS_NO_DISCONNECT",
+    "RF6": "PASS_NO_DISCONNECT",
+    "LT6": "PASS_NO_DISCONNECT",
+    "baseline_behavior": "PASS",
+    "nunchuk": "NOT_TESTED"
+  },
+  "next_boundary": {
+    "activation_phase_allowed": [
+      "parser result state",
+      "candidate parsed payload state",
+      "CRC state",
+      "load status",
+      "source-owned baseline availability",
+      "known-good fallback availability"
+    ],
+    "output_phase_allowed": [
+      "stable selected RuntimeConfigView via active_view"
+    ],
+    "output_phase_forbidden": [
+      "parser result state",
+      "candidate parsed payload state",
+      "CRC state",
+      "load status",
+      "storage status",
+      "write status",
+      "activation source",
+      "activation status"
+    ]
+  },
+  "next_allowed_implementation_family": [
+    "pre-hot-path active-state publication scaffold",
+    "parsed-payload materialization into candidate state only",
+    "activation validation outside analog hot path"
+  ],
+  "deferred": [
+    "true parsed table materialization",
+    "runtime-loaded config",
+    "storage",
+    "WebSerial or device write",
+    "flashing automation",
+    "nunchuk validation"
+  ],
+  "forbidden_shortcuts": [
+    "do not read kPhase7AD3GlobalParseResult.status from ResolveActiveRuntimeConfig",
+    "do not branch on parser status from UpdateAnalogOutputs",
+    "do not materialize parsed tables directly in analog hot path",
+    "do not add storage/write/flashing/WebSerial paths under parser/materialization work"
+  ],
+  "root_cause_mechanism_proven": false,
+  "firmware_behavior_changed": false,
+  "build_required": false
+}

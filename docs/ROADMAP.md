@@ -289,6 +289,14 @@ Required evidence: `docs/runtime_config/active_runtime_config_state_contract.md`
 `docs/runtime_config/fixtures/active_runtime_config_state_contract.json`, the
 accepted hot-path parse-status guardrail, and checker output.
 
+Accepted next boundary:
+`docs/runtime_config/parser_hotpath_postmortem_and_next_boundary.md` records the
+Phase 7A diagnostic matrix, the accepted guardrail, and the source-owned
+active-state preselection `HARDWARE_PASS`. Source-owned active-state
+preselection is the repair architecture baseline. Parser/materialization/load
+may happen only before active-state publication; output generation may consume
+only the already-selected `RuntimeConfigView`.
+
 Stop conditions: any implementation path that reads parser result state from
 `UpdateAnalogOutputs`, an analog hot-path resolver, or
 `ResolveActiveRuntimeConfig`; any output path that branches on activation

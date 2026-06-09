@@ -16,8 +16,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-active-config-state-contract"
 MERGED_BRANCH = "configurator"
+CONSOLIDATION_BRANCH = "runtime-config-parser-hotpath-postmortem-and-next-boundary"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH}
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH, CONSOLIDATION_BRANCH}
 
 DOC_PATH = REPO_ROOT / "docs/runtime_config/active_runtime_config_state_contract.md"
 FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/active_runtime_config_state_contract.json"

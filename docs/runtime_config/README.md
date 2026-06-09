@@ -73,6 +73,12 @@ artifacts unless a specific packet says otherwise.
   build report for this scaffold branch.
 - `fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json` -
   machine-readable build report metadata for this branch.
+- `parser_hotpath_postmortem_and_next_boundary.md` - accepted parser hot-path
+  postmortem and next-boundary packet consolidating the diagnostic matrix,
+  guardrail, source-owned preselection hardware pass, and next implementation
+  boundary; docs/tools only and no firmware behavior change.
+- `fixtures/parser_hotpath_postmortem_and_next_boundary.json` - machine-readable
+  fixture for the parser hot-path postmortem and next-boundary state.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -110,6 +116,10 @@ artifacts unless a specific packet says otherwise.
   generation. Analog output generation may consume only
   `ActiveRuntimeConfigState.active_view` and must not branch on activation
   source or activation status.
+- The accepted parser hot-path postmortem and next boundary records
+  source-owned active-state preselection as the repair architecture baseline.
+  Parser/materialization/load may happen only before active-state publication;
+  output generation may consume only the already-selected `RuntimeConfigView`.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.
