@@ -65,6 +65,12 @@ artifacts unless a specific packet says otherwise.
   needs to be tested.
 - `phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate.md` - diagnostic
   D5A-N1 packet for direct source-owned baseline view return after parse gate.
+- `docs/calibration/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_failure_2026-06-09.md`
+  - user-reported D5A-N1 hardware failure result; same disconnects as D5A,
+    RF5/RF6/LT6 disconnect class reproduced, and parse-status hot-path read
+    remains the primary suspect.
+- `docs/calibration/fixtures/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_failure_2026-06-09.json`
+  - machine-readable D5A-N1 hardware failure fixture.
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md`
   - user-reported D2B hardware result pass; D2B retained full payload bytes
     and user reported pass, which reduces payload-only/static rodata
@@ -128,6 +134,8 @@ artifacts unless a specific packet says otherwise.
   docs, report, hardware-plan, and no storage/write/flashing guardrails.
 - `tools/check_glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate.py` -
   read-only checker for D5A-N1 scope, resolver behavior, and guardrails.
+- `tools/check_glyph_phase7a_diagnostic_d5a_n1_hardware_failure.py` - read-only
+  checker for D5A-N1 hardware-failure result guardrails.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, diagnostic
   matrix, and no-firmware-source-change guardrail.
