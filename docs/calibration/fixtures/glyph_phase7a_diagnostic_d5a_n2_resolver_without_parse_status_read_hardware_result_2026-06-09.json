@@ -1,0 +1,191 @@
+{
+  "schema_name": "glyph_phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_hardware_result",
+  "status": "user_reported_pass",
+  "diagnostic_branch": "phase7a-diagnostic-d5a-n2-resolver-without-parse-status-read",
+  "result_branch": "phase7a-diagnostic-d5a-n2-resolver-without-parse-status-read-hardware-result",
+  "exact_user_report_text": "flashed n2. It works. No disconnects anymore.",
+  "result_source": "user_reported",
+  "result_date_local": "2026-06-09",
+  "hardware_result_recorded": true,
+  "d5a_n2_passed": true,
+  "rf5_disconnect_observed": false,
+  "rf6_disconnect_observed": false,
+  "lt6_disconnect_observed": false,
+  "parse_status_hot_path_read_removed": true,
+  "global_parse_result_added": true,
+  "resolver_added": true,
+  "resolver_called_from_update_analog_outputs": true,
+  "runtime_output_routing_to_parsed_result": false,
+  "parsed_table_materialization_added": false,
+  "storage_added": false,
+  "write_path_added": false,
+  "flashing_automation_added": false,
+  "nunchuk_status": "not_tested",
+  "root_cause_mechanism_proven": false,
+  "likely_trigger": "runtime hot-path read/branch on kPhase7AD3GlobalParseResult.status",
+  "failed_activation_branch_merge_allowed": false,
+  "hypothesis_updates": [
+    "parse_status_hot_path_read: elevated_likely_trigger",
+    "separate_runtime_config_alias: reduced_likelihood",
+    "global_parse_result_alone: previously_reduced_by_D3",
+    "resolver_alone: previously_reduced_by_D4",
+    "resolver_without_parse_status_read: passed_by_D5A_N2",
+    "H5: narrowed_to_parse_status_hot_path_read",
+    "H6: still_open_for_low_level_mechanism"
+  ],
+  "future_design_constraints": [
+    "Do not read parser result state from UpdateAnalogOutputs or analog hot-path resolver.",
+    "Resolve active runtime config outside analog hot path before using it in output generation.",
+    "Keep failed activation branch abandoned.",
+    "Do not merge diagnostic implementation branches into configurator as production code."
+  ],
+  "result_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Baseline behavior preserved",
+      "result": "PASS",
+      "notes": "User-reported pass."
+    },
+    {
+      "row_id": "RF5-001",
+      "category": "rf5_paths",
+      "planned_check": "Representative RF5 behavior does not cause controller disconnect",
+      "result": "PASS",
+      "notes": "No disconnect reported."
+    },
+    {
+      "row_id": "RF6-001",
+      "category": "rf6_paths",
+      "planned_check": "Representative RF6 behavior does not cause controller disconnect",
+      "result": "PASS",
+      "notes": "No disconnect reported."
+    },
+    {
+      "row_id": "LT6-001",
+      "category": "lt6_paths",
+      "planned_check": "Representative LT6 behavior does not cause controller disconnect",
+      "result": "PASS",
+      "notes": "No disconnect reported."
+    },
+    {
+      "row_id": "ORDINARY-DIR-001",
+      "category": "directions",
+      "planned_check": "Ordinary direction behavior remains preserved",
+      "result": "UNKNOWN",
+      "notes": "Not separately reported."
+    },
+    {
+      "row_id": "NEUTRAL-001",
+      "category": "neutral_state",
+      "planned_check": "Neutral behavior remains preserved",
+      "result": "UNKNOWN",
+      "notes": "Not separately reported."
+    },
+    {
+      "row_id": "UNRELATED-BUTTONS-001",
+      "category": "buttons",
+      "planned_check": "Unrelated buttons remain preserved",
+      "result": "UNKNOWN",
+      "notes": "Not separately reported."
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "planned_check": "Representative modifiers remain preserved",
+      "result": "UNKNOWN",
+      "notes": "Not separately reported."
+    },
+    {
+      "row_id": "PAYLOAD-001",
+      "category": "payload_retention",
+      "planned_check": "D2B retained payload bytes remain present",
+      "result": "SOURCE_CHECKED",
+      "notes": "D2B retained payload bytes remain present."
+    },
+    {
+      "row_id": "GLOBAL-PARSE-001",
+      "category": "global_parse_result",
+      "planned_check": "Global parse result is present in the diagnostic source",
+      "result": "SOURCE_CHECKED",
+      "notes": "Global/static parse result present."
+    },
+    {
+      "row_id": "PARSER-CALL-001",
+      "category": "parser_behavior",
+      "planned_check": "Parser call exists only in global/static initialization path",
+      "result": "SOURCE_CHECKED",
+      "notes": "Parser called by global/static initialization."
+    },
+    {
+      "row_id": "RESOLVER-001",
+      "category": "runtime_resolver",
+      "planned_check": "Resolver is present",
+      "result": "SOURCE_CHECKED",
+      "notes": "Resolver call remains in `UpdateAnalogOutputs(...)`."
+    },
+    {
+      "row_id": "PARSE-STATUS-READ-001",
+      "category": "parse_status_read",
+      "planned_check": "Runtime hot-path read on parse status is removed",
+      "result": "SOURCE_CHECKED",
+      "notes": "Parse-status hot-path read removed from runtime hot path."
+    },
+    {
+      "row_id": "SOURCE-OWNED-ROUTING-001",
+      "category": "runtime_routing",
+      "planned_check": "Canonical source-owned runtime config return remains in place",
+      "result": "SOURCE_CHECKED",
+      "notes": "Canonical source-owned runtime config return remains in place."
+    },
+    {
+      "row_id": "FALLBACK-001",
+      "category": "fallback",
+      "planned_check": "Fallback remains source-owned current baseline or known-good runtime config",
+      "result": "SOURCE_CHECKED",
+      "notes": "Fallback remains source-owned current baseline or known-good runtime config."
+    },
+    {
+      "row_id": "NO-PARSED-TABLES-001",
+      "category": "parsed_table_scope",
+      "planned_check": "Parsed table materialization is not added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No parsed table materialization added."
+    },
+    {
+      "row_id": "NO-STORAGE-001",
+      "category": "storage",
+      "planned_check": "Runtime-config storage not added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No runtime-config storage."
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "webserial_or_write",
+      "planned_check": "WebSerial/device write not added",
+      "result": "SOURCE_CHECKED",
+      "notes": "No WebSerial/device write."
+    },
+    {
+      "row_id": "NO-FLASH-001",
+      "category": "flashing_automation",
+      "planned_check": "No firmware flashing automation paths used",
+      "result": "SOURCE_CHECKED",
+      "notes": "No firmware flashing automation."
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Explicitly mark nunchuk as not tested in this branch",
+      "result": "NOT_TESTED",
+      "notes": "Not tested."
+    }
+  ]
+}

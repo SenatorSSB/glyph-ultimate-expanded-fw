@@ -214,3 +214,22 @@ Nunchuk:
 - No runtime-config storage is implemented.
 - No WebSerial/device write is implemented.
 - No firmware flashing automation is implemented.
+
+## D5A-N2 Result Update
+
+- D5A-N2 hardware result recorded.
+- Result source: user-reported
+- Exact user report text: `flashed n2. It works. No disconnects anymore.`
+- Diagnostic branch tested:
+  `phase7a-diagnostic-d5a-n2-resolver-without-parse-status-read`
+- Result branch:
+  `phase7a-diagnostic-d5a-n2-resolver-without-parse-status-read-hardware-result`
+- RF5/RF6/LT6 disconnects were not observed.
+- D5A-N2 passed.
+- The parse-status hot-path read/branch on
+  `kPhase7AD3GlobalParseResult.status` is the likely trigger.
+- The low-level root cause mechanism is not proven.
+- Failed activation branch must not merge.
+- Future runtime activation must not read parser result state from
+  UpdateAnalogOutputs(...) or analog hot-path resolver.
+- Nunchuk: NOT_TESTED

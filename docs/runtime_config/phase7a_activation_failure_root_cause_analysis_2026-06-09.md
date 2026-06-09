@@ -33,6 +33,26 @@ configurator firmware and reported that it still works fine. The evidence does
 not prove a precise crash, watchdog, USB, stack, heap, timing, or report-level
 cause.
 
+## D5A-N2 Hardware Result Update
+
+- Result source: user-reported
+- Exact user report text: `flashed n2. It works. No disconnects anymore.`
+- Diagnostic branch tested:
+  `phase7a-diagnostic-d5a-n2-resolver-without-parse-status-read`
+- Result branch:
+  `phase7a-diagnostic-d5a-n2-resolver-without-parse-status-read-hardware-result`
+- Install method: manual Glyph firmware update
+- D5A-N2 hardware result recorded.
+- D5A-N2 passed.
+- RF5/RF6/LT6 disconnects were not observed.
+- The parse-status hot-path read/branch on
+  `kPhase7AD3GlobalParseResult.status` is the likely trigger.
+- The low-level root cause mechanism is not proven.
+- Failed activation branch must not merge.
+- Future runtime activation must not read parser result state from
+  UpdateAnalogOutputs(...) or analog hot-path resolver.
+- Nunchuk: NOT_TESTED
+
 ## Refs Inspected
 
 | Ref | Status | Short SHA |

@@ -74,6 +74,12 @@ artifacts unless a specific packet says otherwise.
     remains the primary suspect.
 - `docs/calibration/fixtures/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_failure_2026-06-09.json`
   - machine-readable D5A-N1 hardware failure fixture.
+- `docs/calibration/glyph_phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_hardware_result_2026-06-09.md`
+  - user-reported D5A-N2 hardware result pass; RF5/RF6/LT6 disconnects were
+    not observed and parse-status hot-path read/branch on
+    `kPhase7AD3GlobalParseResult.status` is the likely trigger.
+- `docs/calibration/fixtures/glyph_phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_hardware_result_2026-06-09.json`
+  - machine-readable D5A-N2 hardware result fixture.
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md`
   - user-reported D2B hardware result pass; D2B retained full payload bytes
     and user reported pass, which reduces payload-only/static rodata
