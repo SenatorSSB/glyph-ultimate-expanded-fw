@@ -14,6 +14,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 BRANCH = "phase7a-diagnostic-d3-global-parse-result-only"
+RESULT_BRANCH = "phase7a-diagnostic-d3-global-parse-result-only-hardware-result"
 BASE_BRANCH = "phase7a-diagnostic-d2b-retained-payload-bytes"
 BUILD_COMMAND = "./scripts/build-glyph-mk6-quiet.sh"
 EXPECTED_PAYLOAD_SHA = "0f668127c270fb7be382677f68a528d1e1d18829254bb7f16fa901e30414bc32"
@@ -34,6 +35,9 @@ PLAN_JSON = REPO_ROOT / "docs" / "calibration" / "fixtures" / "glyph_phase7a_dia
 RUNTIME_README = REPO_ROOT / "docs" / "runtime_config" / "README.md"
 CALIBRATION_INDEX = REPO_ROOT / "docs" / "calibration" / "INDEX.md"
 D2B_RESULT_MD = REPO_ROOT / "docs" / "calibration" / "glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_result_2026-06-09.md"
+D3_RESULT_MD = REPO_ROOT / "docs" / "calibration" / "glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result_2026-06-09.md"
+D3_RESULT_JSON = REPO_ROOT / "docs" / "calibration" / "fixtures" / "glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result_2026-06-09.json"
+D3_RESULT_CHECKER = REPO_ROOT / "tools" / "check_glyph_phase7a_diagnostic_d3_hardware_result.py"
 
 PAYLOAD_FIXTURE = REPO_ROOT / "docs" / "runtime_config" / "fixtures" / "phase7a_valid_baseline_runtime_config_payload.bin"
 
@@ -47,6 +51,11 @@ EXPECTED_CHANGED_PATHS = {
     "docs/calibration/glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_plan_2026-06-09.md",
     "docs/calibration/fixtures/glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_plan_2026-06-09.json",
     "tools/check_glyph_phase7a_diagnostic_d3_global_parse_result_only.py",
+}
+EXPECTED_RESULT_BRANCH_EXTRA_PATHS = {
+    "docs/calibration/glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result_2026-06-09.md",
+    "docs/calibration/fixtures/glyph_phase7a_diagnostic_d3_global_parse_result_only_hardware_result_2026-06-09.json",
+    "tools/check_glyph_phase7a_diagnostic_d3_hardware_result.py",
 }
 
 REQUIRED_ROWS = {
@@ -190,18 +199,22 @@ def extract_function(text: str, name: str) -> str:
 
 def validate_branch() -> None:
     branch = run_git(["branch", "--show-current"]).stdout.strip()
-    if branch != BRANCH:
-        fail(f"unexpected branch: {branch!r}, expected {BRANCH!r}")
+    if branch not in {BRANCH, RESULT_BRANCH}:
+        fail(f"unexpected branch: {branch!r}, expected {BRANCH!r} or {RESULT_BRANCH!r}")
     if run_git(["merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"], check=False).returncode != 0:
         fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
 
 
 def validate_changed_paths() -> None:
+    branch = run_git(["branch", "--show-current"]).stdout.strip()
     paths = changed_paths()
-    missing = EXPECTED_CHANGED_PATHS - paths
+    expected_paths = set(EXPECTED_CHANGED_PATHS)
+    if branch == RESULT_BRANCH:
+        expected_paths |= EXPECTED_RESULT_BRANCH_EXTRA_PATHS
+    missing = expected_paths - paths
     if missing:
         fail("missing expected changed paths: " + ", ".join(sorted(missing)))
-    extra = paths - EXPECTED_CHANGED_PATHS
+    extra = paths - expected_paths
     if extra:
         fail("changed paths outside D3 scope: " + ", ".join(sorted(extra)))
 
