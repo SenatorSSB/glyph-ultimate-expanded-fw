@@ -7,12 +7,29 @@
 #define ANALOG_STICK_MAX 228
 
 namespace {
+struct RuntimeConfigView;
+
 struct StickPoint {
     uint8_t x;
     uint8_t y;
 };
 
-// Keep the generated-like table constants in the shared generated-like source.
+enum class RuntimeConfigSource {
+    KnownGoodFallback,
+    SourceOwnedBaseline,
+};
+
+enum class RuntimeConfigActivationStatus {
+    SourceOwnedSelected,
+    FallbackSelected,
+};
+
+struct ActiveRuntimeConfigState {
+    const RuntimeConfigView* active_view;
+    RuntimeConfigSource source;
+    RuntimeConfigActivationStatus status;
+};
+
 #include "modes/UltimateIdentityRuntimeTables.hpp"
 #include "modes/UltimateRuntimeConfigInterpreter.hpp"
 #include "modes/UltimateRuntimeConfigParser.hpp"
@@ -399,6 +416,25 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
     outputs.leftStickY = direction_plus_a_point.y;
 }
 
+const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
+    static const ActiveRuntimeConfigState state = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
+        ? ActiveRuntimeConfigState{
+            &kSourceOwnedCurrentBaselineRuntimeConfig,
+            RuntimeConfigSource::SourceOwnedBaseline,
+            RuntimeConfigActivationStatus::SourceOwnedSelected,
+        }
+        : ActiveRuntimeConfigState{
+            &kKnownGoodRuntimeConfig,
+            RuntimeConfigSource::KnownGoodFallback,
+            RuntimeConfigActivationStatus::FallbackSelected,
+        };
+    return state;
+}
+
+const RuntimeConfigView& ResolveActiveRuntimeConfig() {
+    return *GetActiveRuntimeConfigState().active_view;
+}
+
 void ApplyZAirdodgeOverride(const RuntimeConfigView &runtime_config, const EffectiveDirectionState &directions, OutputState &outputs) {
     const int8_t lt1_x = directions.left == directions.right ? 0 : (directions.left ? -1 : 1);
     const int8_t lt1_y = directions.down == directions.up ? 0 : (directions.down ? -1 : 1);
@@ -462,9 +498,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
-    const RuntimeConfigView &runtime_config = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
-        ? kSourceOwnedCurrentBaselineRuntimeConfig
-        : kKnownGoodRuntimeConfig;
+    const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(

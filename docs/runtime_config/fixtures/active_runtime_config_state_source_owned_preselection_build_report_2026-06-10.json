@@ -1,0 +1,28 @@
+{
+  "schema_name": "glyph_active_runtime_config_state_source_owned_preselection_build_report",
+  "status": "scaffold_not_hardware_run",
+  "branch": "runtime-active-config-state-source-owned-preselection",
+  "baseline_branch": "configurator",
+  "build_command": "pio run -e glyph_mk6",
+  "build_completed": false,
+  "build_exit_code": null,
+  "build_date_local": "2026-06-10",
+  "firmware_source_changed": true,
+  "runtime_behavior_changed": true,
+  "build_artifacts": [],
+  "artifact_map": {
+    "uf2": "unknown",
+    "elf": "unknown",
+    "bin": "unknown"
+  },
+  "nunchuk_status": "NOT_TESTED",
+  "caveats": [
+    "active_state_source_owned_preselection_scaffold",
+    "no_parser_status_reads_in_hot_path",
+    "no_parser_calls",
+    "no_parsed_table_materialization",
+    "no_storage",
+    "no_webserial_or_device_write",
+    "no_flashing_automation"
+  ]
+}

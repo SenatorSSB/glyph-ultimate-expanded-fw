@@ -1,0 +1,129 @@
+{
+  "schema_name": "glyph_active_runtime_config_state_source_owned_preselection_hardware_plan",
+  "plan_version": 1,
+  "status": "plan_only",
+  "branch": "runtime-active-config-state-source-owned-preselection",
+  "build_command": "pio run -e glyph_mk6",
+  "hardware_result_recorded": false,
+  "commit_sha_under_test": "unknown",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "tester": "unknown",
+  "test_date": "unknown",
+  "intent": {
+    "description": "Scaffold verification for source-owned active runtime config preselection.",
+    "scope": [
+      "source-owned preselection state",
+      "active_view-only analog hot-path consumption",
+      "no parsed table materialization",
+      "no runtime-loaded parser/transport/storage integration"
+    ],
+    "non_claims": [
+      "no nunchuk validation claim"
+    ]
+  },
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Baseline analog/digital routing remains stable",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "RF5-001",
+      "category": "rf5_routing",
+      "planned_check": "RF5 path behavior remains as baseline",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "RF6-001",
+      "category": "rf6_routing",
+      "planned_check": "RF6 path behavior remains as baseline",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "LT6-001",
+      "category": "lt6_routing",
+      "planned_check": "LT6 path behavior remains as baseline",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "ORDINARY-DIR-001",
+      "category": "ordinary_direction",
+      "planned_check": "Ordinary direction outputs remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NEUTRAL-001",
+      "category": "neutral",
+      "planned_check": "Neutral output behavior remains preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "UNRELATED-BUTTONS-001",
+      "category": "unrelated_buttons",
+      "planned_check": "Unrelated button paths remain preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "planned_check": "Modifier table routing remains preserved",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "ACTIVE-STATE-001",
+      "category": "active_state",
+      "planned_check": "Active state selector binds to active_view only in hot path",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "HOT-PATH-001",
+      "category": "hot_path",
+      "planned_check": "Analog hot-path has no parser-status read",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-PARSER-STATUS-READ-001",
+      "category": "invariant",
+      "planned_check": "No runtime parser status reads in UpdateAnalogOutputs",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-PARSED-TABLES-001",
+      "category": "invariant",
+      "planned_check": "No parsed table materialization introduced",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-STORAGE-001",
+      "category": "invariant",
+      "planned_check": "No storage path introduced",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "invariant",
+      "planned_check": "No firmware write path introduced",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NO-FLASH-001",
+      "category": "invariant",
+      "planned_check": "No flashing automation introduced",
+      "result": "NOT_TESTED"
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Nunchuk remains NOT_TESTED",
+      "result": "NOT_TESTED"
+    }
+  ]
+}

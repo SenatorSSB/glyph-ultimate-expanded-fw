@@ -243,6 +243,9 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   device-write safety plan and implementation stop line.
 - `docs/runtime_config/runtime_config_flashing_automation_safety_boundary.md` - Step 17
   flashing safety boundary and implementation stop line.
+- `docs/runtime_config/active_runtime_config_state_source_owned_preselection.md` - source-owned active runtime config preselection scaffold.
+- `docs/runtime_config/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md` - build report for source-owned active-state preselection scaffold.
+- `docs/runtime_config/fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json` - build-report fixture metadata for the preselection scaffold.
 - `docs/runtime_config/README.md` - runtime-config docs index and current
   Phase 6 design-only boundary.
 - `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md` -
@@ -311,12 +314,16 @@ source-backed.
   phase 3 generated-constants integration hardware plan template.
 - `glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.md`
   - Step 9 source-owned runtime-config interpreter hardware plan template.
+- `glyph_active_runtime_config_state_source_owned_preselection_hardware_plan_2026-06-10.md`
+  - source-owned active-state preselection hardware plan template.
 - `glyph_runtime_config_firmware_binary_parser_hardware_plan_TEMPLATE.md` -
   future Step 13 firmware binary/protobuf parser hardware plan template.
 - `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.json`
   - Step 9 hardware plan fixture template.
 - `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.json`
   - user-reported runtime-config interpreter hardware result fixture.
+- `fixtures/glyph_active_runtime_config_state_source_owned_preselection_hardware_plan_2026-06-10.json`
+  - source-owned active-state preselection hardware plan fixture.
 
 ## Old Roadmap / Readiness Packets
 
