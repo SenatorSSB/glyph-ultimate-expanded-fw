@@ -53,6 +53,15 @@ packets remain under `docs/calibration/`.
 - `runtime-active-config-state-source-owned-preselection` routes analog config
   lookup through the active selected view and remains parser-result and
   parsed-table-materialization free in the hot path.
+- Parser hot-path postmortem / next-boundary state is accepted in
+  `docs/runtime_config/parser_hotpath_postmortem_and_next_boundary.md` with
+  `docs/runtime_config/fixtures/parser_hotpath_postmortem_and_next_boundary.json`.
+  The accepted repair-basis conclusion is: Source-owned active-state
+  preselection is the repair architecture baseline. Parser/materialization/load
+  may happen only before active-state publication; output generation may
+  consume only the already-selected `RuntimeConfigView`, with no parser status,
+  CRC status, load status, storage status, write status, source, or activation
+  status read by `UpdateAnalogOutputs`.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -132,6 +141,10 @@ engineering decisions.
   it implements no runtime-loaded config, no parsed table materialization, no
   storage, no WebSerial/device write, and no flashing automation, and changes
   no firmware behavior.
+- Parser hot-path postmortem and next-boundary consolidation is accepted as
+  docs/tools guidance only; it implements no runtime-loaded config, no parsed
+  table materialization, no storage, no WebSerial/device write, and no flashing
+  automation, and changes no firmware behavior.
 - Source-owned active runtime config state preselection scaffold is now implemented
   in firmware source in `runtime-active-config-state-source-owned-preselection`;
   it does not alter RF5/RF6/LT6 expressions and keeps `UpdateDigitalOutputs`

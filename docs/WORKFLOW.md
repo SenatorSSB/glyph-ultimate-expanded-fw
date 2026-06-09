@@ -57,6 +57,8 @@ explicitly instructed.
   active-state publication. After publication, analog output generation may
   consume only `ActiveRuntimeConfigState.active_view` and must not branch on
   `ActiveRuntimeConfigState.source` or `ActiveRuntimeConfigState.status`.
+- Parser/materialization/load work belongs before active-state publication;
+  output generation may consume only the already-selected `RuntimeConfigView`.
 - Product approval gates are not the same as user-domain blockers. A future
   phase may be ready for design or source research while still requiring
   approval before implementation.

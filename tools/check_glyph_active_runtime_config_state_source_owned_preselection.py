@@ -17,8 +17,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 IMPLEMENTATION_BRANCH = "runtime-active-config-state-source-owned-preselection"
 RESULT_BRANCH = "runtime-active-config-state-source-owned-preselection-hardware-result"
 MERGED_BRANCH = "configurator"
+CONSOLIDATION_BRANCH = "runtime-config-parser-hotpath-postmortem-and-next-boundary"
 BASE_BRANCH = MERGED_BRANCH
-ALLOWED_BRANCHES = {IMPLEMENTATION_BRANCH, RESULT_BRANCH, MERGED_BRANCH}
+ALLOWED_BRANCHES = {IMPLEMENTATION_BRANCH, RESULT_BRANCH, MERGED_BRANCH, CONSOLIDATION_BRANCH}
 
 DOC_PATH = REPO_ROOT / "docs/runtime_config/active_runtime_config_state_source_owned_preselection.md"
 DOC_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json"
@@ -126,13 +127,21 @@ def base_branch_for(branch: str) -> str:
         return IMPLEMENTATION_BRANCH
     if branch == MERGED_BRANCH:
         return MERGED_BRANCH
-    fail(f"checker must run on {IMPLEMENTATION_BRANCH}, {RESULT_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+    if branch == CONSOLIDATION_BRANCH:
+        return MERGED_BRANCH
+    fail(
+        f"checker must run on {IMPLEMENTATION_BRANCH}, {RESULT_BRANCH}, "
+        f"{CONSOLIDATION_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+    )
 
 
 def validate_branch() -> tuple[str, str]:
     branch = current_branch()
     if branch not in ALLOWED_BRANCHES:
-        fail(f"checker must run on {IMPLEMENTATION_BRANCH}, {RESULT_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+        fail(
+            f"checker must run on {IMPLEMENTATION_BRANCH}, {RESULT_BRANCH}, "
+            f"{CONSOLIDATION_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+        )
 
     base_branch = base_branch_for(branch)
 
@@ -716,7 +725,7 @@ def validate_no_forbidden_files_and_paths(base_branch: str, branch: str) -> None
 
 def main() -> int:
     branch, base_branch = validate_branch()
-    if branch != MERGED_BRANCH:
+    if branch not in (MERGED_BRANCH, CONSOLIDATION_BRANCH):
         paths = changed_paths(base_branch)
         validate_changed_paths(paths, branch)
     else:

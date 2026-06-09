@@ -16,8 +16,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "phase7a-runtime-hot-path-parse-status-guardrail"
 MERGED_BRANCH = "configurator"
+CONSOLIDATION_BRANCH = "runtime-config-parser-hotpath-postmortem-and-next-boundary"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH}
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH, CONSOLIDATION_BRANCH}
 
 DOC_PATH = REPO_ROOT / "docs/runtime_config/hot_path_parse_status_guardrail.md"
 FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/hot_path_parse_status_guardrail.json"
