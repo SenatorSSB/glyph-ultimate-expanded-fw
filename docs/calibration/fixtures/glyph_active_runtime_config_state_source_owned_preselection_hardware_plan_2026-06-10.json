@@ -1,0 +1,149 @@
+{
+  "schema_name": "glyph_active_runtime_config_state_source_owned_preselection_hardware_result",
+  "plan_version": 1,
+  "status": "HARDWARE_PASS",
+  "branch": "runtime-active-config-state-source-owned-preselection",
+  "result_branch": "runtime-active-config-state-source-owned-preselection-hardware-result",
+  "build_command": "pio run -e glyph_mk6",
+  "build_source": "local build artifact already recorded in the build report",
+  "build_report_path": "docs/runtime_config/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md",
+  "build_report_status": "build_completed",
+  "hardware_result_recorded": true,
+  "result_source": "operator-recorded",
+  "source_report_text": "All worked on branch runtime-active-config-state-source-owned-preselection when I built and flashed.",
+  "result_date": "2026-06-10",
+  "commit_sha_under_test": "unknown",
+  "firmware_artifact_path": "unknown",
+  "firmware_artifact_sha256": "unknown",
+  "tester": "operator-recorded",
+  "test_date": "2026-06-10",
+  "overall_result": "HARDWARE_PASS",
+  "firmware_source_changed_in_implementation_branch": true,
+  "firmware_source_changed_in_result_branch": false,
+  "parser_status_read_in_analog_hot_path": false,
+  "parser_call_added": false,
+  "parsed_table_materialization_added": false,
+  "storage_write_webserial_flashing_added": false,
+  "nunchuk_status": "NOT_TESTED",
+  "intent": {
+    "description": "Hardware result record for source-owned active runtime config preselection.",
+    "scope": [
+      "source-owned preselection state",
+      "active_view-only analog hot-path consumption",
+      "no parsed table materialization",
+      "no runtime-loaded parser/transport/storage integration"
+    ],
+    "non_claims": [
+      "no runtime-loaded config implemented",
+      "no parsed table materialization implemented",
+      "no storage implemented",
+      "no WebSerial/device write implemented",
+      "no flashing automation implemented",
+      "no nunchuk validation claim"
+    ]
+  },
+  "test_rows": [
+    {
+      "row_id": "BOOT-001",
+      "category": "boot",
+      "planned_check": "Normal boot after build reaches expected boot state",
+      "result": "PASS"
+    },
+    {
+      "row_id": "BASELINE-001",
+      "category": "baseline",
+      "planned_check": "Baseline analog/digital routing remains stable",
+      "result": "PASS"
+    },
+    {
+      "row_id": "RF5-001",
+      "category": "rf5_routing",
+      "planned_check": "RF5 path behavior remains as baseline",
+      "result": "PASS"
+    },
+    {
+      "row_id": "RF6-001",
+      "category": "rf6_routing",
+      "planned_check": "RF6 path behavior remains as baseline",
+      "result": "PASS"
+    },
+    {
+      "row_id": "LT6-001",
+      "category": "lt6_routing",
+      "planned_check": "LT6 path behavior remains as baseline",
+      "result": "PASS"
+    },
+    {
+      "row_id": "ORDINARY-DIR-001",
+      "category": "ordinary_direction",
+      "planned_check": "Ordinary direction outputs remain preserved",
+      "result": "PASS"
+    },
+    {
+      "row_id": "NEUTRAL-001",
+      "category": "neutral",
+      "planned_check": "Neutral output behavior remains preserved",
+      "result": "PASS"
+    },
+    {
+      "row_id": "UNRELATED-BUTTONS-001",
+      "category": "unrelated_buttons",
+      "planned_check": "Unrelated button paths remain preserved",
+      "result": "PASS"
+    },
+    {
+      "row_id": "MODIFIERS-001",
+      "category": "modifiers",
+      "planned_check": "Modifier table routing remains preserved",
+      "result": "PASS"
+    },
+    {
+      "row_id": "ACTIVE-STATE-001",
+      "category": "active_state",
+      "planned_check": "Active state selector binds to active_view only in hot path",
+      "result": "PASS"
+    },
+    {
+      "row_id": "HOT-PATH-001",
+      "category": "hot_path",
+      "planned_check": "Analog hot-path has no parser-status read",
+      "result": "PASS"
+    },
+    {
+      "row_id": "NO-PARSER-STATUS-READ-001",
+      "category": "invariant",
+      "planned_check": "No runtime parser status reads in UpdateAnalogOutputs",
+      "result": "PASS"
+    },
+    {
+      "row_id": "NO-PARSED-TABLES-001",
+      "category": "invariant",
+      "planned_check": "No parsed table materialization introduced",
+      "result": "PASS"
+    },
+    {
+      "row_id": "NO-STORAGE-001",
+      "category": "invariant",
+      "planned_check": "No storage path introduced",
+      "result": "PASS"
+    },
+    {
+      "row_id": "NO-WRITE-001",
+      "category": "invariant",
+      "planned_check": "No firmware write path introduced",
+      "result": "PASS"
+    },
+    {
+      "row_id": "NO-FLASH-001",
+      "category": "invariant",
+      "planned_check": "No flashing automation introduced",
+      "result": "PASS"
+    },
+    {
+      "row_id": "NUNCHUK-001",
+      "category": "nunchuk_scope",
+      "planned_check": "Nunchuk remains NOT_TESTED",
+      "result": "NOT_TESTED"
+    }
+  ]
+}

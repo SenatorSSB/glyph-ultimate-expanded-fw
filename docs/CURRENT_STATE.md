@@ -40,6 +40,19 @@ packets remain under `docs/calibration/`.
   `RuntimeConfigView`; analog output generation may consume only
   ActiveRuntimeConfigState.active_view. Analog output generation must not branch
   on ActiveRuntimeConfigState.source or ActiveRuntimeConfigState.status.
+- Source-owned active runtime config preselection is implemented in
+  `runtime-active-config-state-source-owned-preselection` through
+  `GetActiveRuntimeConfigState()` and `ResolveActiveRuntimeConfig()`.
+- Its hardware result is recorded on
+  `runtime-active-config-state-source-owned-preselection-hardware-result` as a
+  `HARDWARE_PASS`; RF5, RF6, LT6, baseline, ordinary-direction, neutral,
+  unrelated-buttons, modifiers, active-state, hot-path, and no-parser/
+  no-parsed-tables/no-storage/no-write/no-flash rows passed, while Nunchuk
+  remains NOT_TESTED.
+- The source-owned active-state indirection is safe enough to serve as the repair-architecture basis for this scope.
+- `runtime-active-config-state-source-owned-preselection` routes analog config
+  lookup through the active selected view and remains parser-result and
+  parsed-table-materialization free in the hot path.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -119,6 +132,10 @@ engineering decisions.
   it implements no runtime-loaded config, no parsed table materialization, no
   storage, no WebSerial/device write, and no flashing automation, and changes
   no firmware behavior.
+- Source-owned active runtime config state preselection scaffold is now implemented
+  in firmware source in `runtime-active-config-state-source-owned-preselection`;
+  it does not alter RF5/RF6/LT6 expressions and keeps `UpdateDigitalOutputs`
+  unchanged.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

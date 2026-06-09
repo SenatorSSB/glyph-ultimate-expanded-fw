@@ -67,6 +67,12 @@ artifacts unless a specific packet says otherwise.
   behavior change.
 - `fixtures/active_runtime_config_state_contract.json` - machine-readable
   fixture for the active runtime config state contract.
+- `active_runtime_config_state_source_owned_preselection.md` - source-owned active
+  state scaffold implemented in firmware source for stable preselection routing.
+- `active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md` -
+  build report for this scaffold branch.
+- `fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json` -
+  machine-readable build report metadata for this branch.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -95,6 +101,10 @@ artifacts unless a specific packet says otherwise.
   state from `UpdateAnalogOutputs` or any analog hot-path resolver. Future
   activation must compute stable active runtime config state outside the analog
   output hot path.
+- Source-owned active runtime config preselection scaffolding is implemented in
+  `runtime-active-config-state-source-owned-preselection`; hot-path analog
+  generation consumes `ResolveActiveRuntimeConfig()` output via
+  `ActiveRuntimeConfigState.active_view`.
 - The accepted active runtime config state contract requires future activation
   to publish a stable selected `RuntimeConfigView` before analog output
   generation. Analog output generation may consume only

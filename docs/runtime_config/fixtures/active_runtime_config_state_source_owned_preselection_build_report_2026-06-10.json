@@ -1,0 +1,52 @@
+{
+  "schema_name": "glyph_active_runtime_config_state_source_owned_preselection_build_report",
+  "status": "build_completed",
+  "branch": "runtime-active-config-state-source-owned-preselection",
+  "baseline_branch": "configurator",
+  "build_command": "pio run -e glyph_mk6",
+  "canonical_build_command": "pio run -e glyph_mk6",
+  "canonical_build_available_in_agent_environment": false,
+  "actual_local_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "actual_local_build_completed": true,
+  "build_completed": true,
+  "build_exit_code": 0,
+  "build_date_local": "2026-06-10",
+  "firmware_source_changed": true,
+  "runtime_behavior_changed": true,
+  "artifact_hashes_are_rebuild_stable": false,
+  "artifact_hashes_are_checker_gate": false,
+  "hardware_result_claimed": false,
+  "build_artifacts": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 791552,
+      "sha256": "5d3cdfb267edd9e1c3bcfac4cd77d4c058270bfa1b8071bf108da8ec52683a73",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407148,
+      "sha256": "a7c7ec8a4f9bd70343e76aad5f666049187c4a724b32ae3bc84814b6b583a800",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 395664,
+      "sha256": "ee09db320725d4d17b4d915ed3c86bd251eb32383cd3a06dd21445e5562a158b",
+      "available": true
+    }
+  ],
+  "nunchuk_status": "NOT_TESTED",
+  "caveats": [
+    "active_state_source_owned_preselection_scaffold",
+    "no_parser_status_reads_in_hot_path",
+    "no_parser_calls",
+    "no_parsed_table_materialization",
+    "no_storage",
+    "no_webserial_or_device_write",
+    "no_flashing_automation"
+  ]
+}

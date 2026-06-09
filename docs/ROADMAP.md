@@ -151,6 +151,13 @@ Explicit non-goals: no broad refactor, no runtime-loaded config interpreter, no
 device write, no profile artifact change, no firmware flashing automation, no
 nunchuk validation claim, and no intentional controller behavior change.
 
+The source-owned active runtime config preselection scaffold has a recorded
+`HARDWARE_PASS` on
+`runtime-active-config-state-source-owned-preselection-hardware-result`; it is
+behavior-preserving, keeps RF5/RF6/LT6 expressions unchanged, and is safe to
+use as the repair-architecture basis without expanding runtime-loaded config
+or device-write scope.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-
@@ -288,10 +295,18 @@ Stop conditions: any implementation path that reads parser result state from
 source or activation status; any runtime-loaded config, storage, WebSerial,
 device-write, flashing, or nunchuk validation claim.
 
-Explicit non-goals: no firmware source changes, no build requirement, no
-runtime-loaded config, no parsed table materialization, no storage, no
-WebSerial/device write, no flashing automation, and no nunchuk validation
-claim.
+Implementation note:
+
+- `runtime-active-config-state-source-owned-preselection` applies the accepted
+  contract as a source-authored scaffold: stable active-state selection in
+  `GetActiveRuntimeConfigState()`, hot-path selection through
+  `ResolveActiveRuntimeConfig()`, and source-owned preselection behavior. This
+  branch remains parser-call free in firmware source and adds no storage,
+  write, parser payload, transport, or flashing behavior.
+
+Explicit non-goals: no runtime-loaded config, no parsed table materialization,
+no storage, no WebSerial/device write, no flashing automation, and no
+nunchuk validation claim.
 
 Accepted guardrail: the Phase 7A D5A/D5A-N1/D5A-N2 finding is recorded in
 `docs/runtime_config/hot_path_parse_status_guardrail.md`. Future activation
