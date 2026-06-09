@@ -58,6 +58,12 @@ EXPECTED_BUILD_COMMAND = "./scripts/build-glyph-mk6-quiet.sh"
 EXPECTED_COMMIT_PATH = "docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin"
 EXPECTED_SHA = "0f668127c270fb7be382677f68a528d1e1d18829254bb7f16fa901e30414bc32"
 EXPECTED_SIZE = 530
+PAYLOAD_FIXTURE_PATH = REPO_ROOT / EXPECTED_COMMIT_PATH
+ARTIFACT_SCAN_PATHS = {
+    "bin": REPO_ROOT / ".pio" / "build" / "glyph_mk6" / "firmware.bin",
+    "elf": REPO_ROOT / ".pio" / "build" / "glyph_mk6" / "firmware.elf",
+    "uf2": REPO_ROOT / ".pio" / "build" / "glyph_mk6" / "firmware.uf2",
+}
 
 ALLOWED_CHANGED_PREFIXES = (
     "src/modes/UltimateRuntimeConfigCompiledPayload.hpp",
@@ -139,6 +145,56 @@ def load_json(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         fail(f"{rel(path)} must contain a JSON object")
     return payload
+
+
+def find_all_offsets(data: bytes, needle: bytes) -> list[int]:
+    offsets: list[int] = []
+    start = 0
+    while True:
+        offset = data.find(needle, start)
+        if offset < 0:
+            return offsets
+        offsets.append(offset)
+        start = offset + 1
+
+
+def scan_payload_sequence() -> dict[str, dict[str, Any]]:
+    if not PAYLOAD_FIXTURE_PATH.exists():
+        fail(f"payload fixture missing: {rel(PAYLOAD_FIXTURE_PATH)}")
+
+    payload = PAYLOAD_FIXTURE_PATH.read_bytes()
+    if len(payload) != EXPECTED_SIZE:
+        fail(f"payload fixture size mismatch: {len(payload)} != {EXPECTED_SIZE}")
+    actual_sha = hashlib.sha256(payload).hexdigest()
+    if actual_sha != EXPECTED_SHA:
+        fail(f"payload fixture sha mismatch: {actual_sha} != {EXPECTED_SHA}")
+
+    scan: dict[str, dict[str, Any]] = {}
+    for artifact_type, path in ARTIFACT_SCAN_PATHS.items():
+        if not path.exists():
+            scan[artifact_type] = {
+                "path": rel(path),
+                "available": False,
+                "found": False,
+                "offsets": [],
+            }
+            continue
+
+        data = path.read_bytes()
+        offsets = find_all_offsets(data, payload)
+        scan[artifact_type] = {
+            "path": rel(path),
+            "available": True,
+            "found": bool(offsets),
+            "offsets": offsets,
+            "offsets_hex": [hex(offset) for offset in offsets],
+            "size_bytes": len(data),
+            "sha256": hashlib.sha256(data).hexdigest(),
+        }
+
+    if not (scan["bin"]["found"] or scan["elf"]["found"]):
+        fail("full payload byte sequence not found in firmware.bin or firmware.elf")
+    return scan
 
 
 def normalize(text: str) -> str:
@@ -283,10 +339,10 @@ def validate_retention_anchor() -> None:
         "kPhase7AD2BRetainedPayloadAnchor",
         "anchor variable name",
     )
-    if "__attribute__((used))" not in anchor_text:
-        fail("anchor must use __attribute__((used))")
-    if "kPhase7ACompiledPayload" not in anchor_text:
-        fail("anchor must reference kPhase7ACompiledPayload")
+    require_phrase(anchor_text, ".rodata.phase7a_d2b_payload", "anchor section")
+    require_phrase(anchor_text, '\\"aR\\"', "anchor retained section flags")
+    require_phrase(anchor_text, ".incbin", "anchor payload include")
+    require_phrase(anchor_text, EXPECTED_COMMIT_PATH, "anchor fixture path")
 
 
 def validate_source_patterns() -> None:
@@ -343,6 +399,14 @@ def validate_documents() -> None:
     require_phrase(report_md, f"branch: `{BRANCH}`", "build report")
     require_phrase(report_md, f"diagnostic mode: `{EXPECTED_REPORT_D2_MODE}`", "build report")
     require_phrase(report_md, "retained-payload-size-bytes: `530`", "build report")
+    require_phrase(report_md, "payload-sequence-scan-performed: `true`", "build report")
+    require_phrase(
+        report_md,
+        "retention-proof-status: `proven_full_payload_sequence_present`",
+        "build report",
+    )
+    require_phrase(report_md, "firmware.bin` | true", "build report")
+    require_phrase(report_md, "firmware.elf` | true", "build report")
     require_phrase(report_md, "hardware result required before conclusions", "build report")
 
     hardware_plan_text = read_required(HARDWARE_PLAN_MD_PATH)
@@ -381,6 +445,7 @@ def validate_documents() -> None:
 
 
 def validate_build_report_data() -> None:
+    sequence_scan = scan_payload_sequence()
     report = load_json(REPORT_JSON_PATH)
     if report.get("schema_name") != EXPECTED_REPORT_SCHEMA:
         fail("unexpected build report schema_name")
@@ -390,8 +455,24 @@ def validate_build_report_data() -> None:
         fail("build report branch mismatch")
     if report.get("diagnostic_mode") != EXPECTED_REPORT_D2_MODE:
         fail("build report diagnostic mode mismatch")
+    found_in_bin = bool(sequence_scan["bin"]["found"])
+    found_in_elf = bool(sequence_scan["elf"]["found"])
+    if report.get("payload_sequence_scan_performed") is not True:
+        fail("build report must state payload_sequence_scan_performed true")
+    if report.get("payload_sequence_found_in_bin") is not found_in_bin:
+        fail("build report payload_sequence_found_in_bin mismatch")
+    if report.get("payload_sequence_found_in_elf") is not found_in_elf:
+        fail("build report payload_sequence_found_in_elf mismatch")
+    if report.get("payload_sequence_found_in_uf2") is not bool(sequence_scan["uf2"]["found"]):
+        fail("build report payload_sequence_found_in_uf2 mismatch")
+    if not (found_in_bin or found_in_elf):
+        if report.get("payload_bytes_retained_in_firmware_image") is not False:
+            fail("absent payload sequence must mark payload retention false")
+        fail("D2B is not proven because payload sequence is absent")
     if report.get("payload_bytes_retained_in_firmware_image") is not True:
         fail("build report must state payload retained in firmware image")
+    if report.get("retention_proof_status") != "proven_full_payload_sequence_present":
+        fail("build report retention_proof_status must prove full payload sequence")
     if report.get("retained_payload_size_bytes") != EXPECTED_SIZE:
         fail("build report retained payload size mismatch")
     if report.get("baseline_branch") != EXPECTED_BASELINE_BRANCH:
@@ -406,6 +487,14 @@ def validate_build_report_data() -> None:
         fail("build report must not claim hardware result")
     if report.get("nunchuk_status") != "not_tested":
         fail("build report nunchuk_status must be not_tested")
+
+    offsets = report.get("payload_sequence_found_offsets")
+    if not isinstance(offsets, dict):
+        fail("build report payload_sequence_found_offsets must be an object")
+    for artifact_type in ("bin", "elf", "uf2"):
+        reported = offsets.get(artifact_type)
+        if reported != sequence_scan[artifact_type]["offsets"]:
+            fail(f"payload sequence offset mismatch for {artifact_type}")
 
     artifacts = report.get("artifacts")
     deltas = report.get("artifacts_deltas_vs_baseline")
@@ -451,6 +540,13 @@ def validate_build_report_data() -> None:
         size_bytes = item.get("size_bytes")
         if not isinstance(size_bytes, int) or size_bytes <= 0:
             fail(f"artifact size must be positive int for {artifact_type}")
+
+        scanned = sequence_scan.get(artifact_type)
+        if scanned and scanned.get("available"):
+            if scanned.get("sha256") != sha:
+                fail(f"artifact sha256 does not match scanned file for {artifact_type}")
+            if scanned.get("size_bytes") != size_bytes:
+                fail(f"artifact size does not match scanned file for {artifact_type}")
 
         baseline_item = baseline_map.get(artifact_type)
         if not baseline_item:

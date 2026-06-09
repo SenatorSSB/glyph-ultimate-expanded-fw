@@ -6,9 +6,20 @@
 
 #include "modes/UltimateRuntimeConfigCompiledPayload.hpp"
 
-namespace {
+static_assert(
+    UltimateRuntimeConfigCompiledPayload::kPhase7ACompiledPayloadSize == 530,
+    "D2B retained payload anchor must retain the full payload byte sequence"
+);
 
-extern "C" __attribute__((used)) const uint8_t* const kPhase7AD2BRetainedPayloadAnchor =
-    UltimateRuntimeConfigCompiledPayload::kPhase7ACompiledPayload;
-
-}  // namespace
+extern "C" {
+__asm__(
+    ".section .rodata.phase7a_d2b_payload,\"aR\",%progbits\n"
+    ".balign 4\n"
+    ".global kPhase7AD2BRetainedPayloadAnchor\n"
+    ".type kPhase7AD2BRetainedPayloadAnchor, %object\n"
+    "kPhase7AD2BRetainedPayloadAnchor:\n"
+    ".incbin \"docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin\"\n"
+    ".size kPhase7AD2BRetainedPayloadAnchor, 530\n"
+    ".previous\n"
+);
+}

@@ -8,31 +8,45 @@
   "diagnostic_mode": "D2B",
   "payload_bytes_retained_in_firmware_image": true,
   "retained_payload_size_bytes": 530,
-  "commit_sha": "a732fcd0e5bdb59a3bfeb93c5feb70b7cfbe9693",
+  "payload_sequence_scan_performed": true,
+  "payload_sequence_found_in_bin": true,
+  "payload_sequence_found_in_elf": true,
+  "payload_sequence_found_in_uf2": false,
+  "payload_sequence_found_offsets": {
+    "bin": [
+      369868
+    ],
+    "elf": [
+      435404
+    ],
+    "uf2": []
+  },
+  "retention_proof_status": "proven_full_payload_sequence_present",
+  "commit_sha": "7b9ecb9d352939b06e3e31117ee49e8a09337ee7",
   "build_command": "./scripts/build-glyph-mk6-quiet.sh",
-  "build_date_local": "2026-06-09 14:35:24 +0300",
+  "build_date_local": "2026-06-09 14:49:04 +0300",
   "baseline_build_report": "docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json",
   "d2a_build_report": "docs/runtime_config/fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json",
   "artifacts": [
     {
       "path": ".pio/build/glyph_mk6/firmware.uf2",
       "artifact_type": "uf2",
-      "size_bytes": 791552,
-      "sha256": "df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30",
+      "size_bytes": 792576,
+      "sha256": "fd04c6937071d75cf7ebc4479a310eab6ff8da26e2b6961f907aa8fe737f443a",
       "available": true
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.elf",
       "artifact_type": "elf",
-      "size_bytes": 5407148,
-      "sha256": "515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b",
+      "size_bytes": 5407276,
+      "sha256": "432e6707fda911aad1972153bbd9a4cf18bfcce3d3a530f9e3d47e057708b301",
       "available": true
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.bin",
       "artifact_type": "bin",
-      "size_bytes": 395672,
-      "sha256": "815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134",
+      "size_bytes": 396208,
+      "sha256": "faea30bcca6c2df700deacf8e2355f0e1921ce38fca0ba1f93d00a113900db4c",
       "available": true
     }
   ],
@@ -41,30 +55,30 @@
       "artifact_type": "uf2",
       "baseline_size_bytes": 791552,
       "baseline_sha256": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
-      "size_delta_bytes": 0,
+      "size_delta_bytes": 1024,
       "sha256_delta": {
         "from": "bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085",
-        "to": "df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30"
+        "to": "fd04c6937071d75cf7ebc4479a310eab6ff8da26e2b6961f907aa8fe737f443a"
       }
     },
     {
       "artifact_type": "elf",
       "baseline_size_bytes": 5407148,
       "baseline_sha256": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
-      "size_delta_bytes": 0,
+      "size_delta_bytes": 128,
       "sha256_delta": {
         "from": "dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83",
-        "to": "515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b"
+        "to": "432e6707fda911aad1972153bbd9a4cf18bfcce3d3a530f9e3d47e057708b301"
       }
     },
     {
       "artifact_type": "bin",
       "baseline_size_bytes": 395664,
       "baseline_sha256": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
-      "size_delta_bytes": 8,
+      "size_delta_bytes": 544,
       "sha256_delta": {
         "from": "4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45",
-        "to": "815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134"
+        "to": "faea30bcca6c2df700deacf8e2355f0e1921ce38fca0ba1f93d00a113900db4c"
       }
     }
   ],
@@ -73,30 +87,30 @@
       "artifact_type": "uf2",
       "d2a_size_bytes": 791552,
       "d2a_sha256": "1cda3368a76d0b048317f9738e25480e7318f65955cc595a24923422c255a0c4",
-      "size_delta_bytes": 0,
+      "size_delta_bytes": 1024,
       "sha256_delta": {
         "from": "1cda3368a76d0b048317f9738e25480e7318f65955cc595a24923422c255a0c4",
-        "to": "df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30"
+        "to": "fd04c6937071d75cf7ebc4479a310eab6ff8da26e2b6961f907aa8fe737f443a"
       }
     },
     {
       "artifact_type": "elf",
       "d2a_size_bytes": 5407148,
       "d2a_sha256": "5d55679d7b46172b40f0c33dd44f7b36277b097a86d457da146befffe5415f86",
-      "size_delta_bytes": 0,
+      "size_delta_bytes": 128,
       "sha256_delta": {
         "from": "5d55679d7b46172b40f0c33dd44f7b36277b097a86d457da146befffe5415f86",
-        "to": "515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b"
+        "to": "432e6707fda911aad1972153bbd9a4cf18bfcce3d3a530f9e3d47e057708b301"
       }
     },
     {
       "artifact_type": "bin",
       "d2a_size_bytes": 395664,
       "d2a_sha256": "dd371038cffc1c94b2586808abc1ca9ddc9bf901e3d4434a2742225926a14abc",
-      "size_delta_bytes": 8,
+      "size_delta_bytes": 544,
       "sha256_delta": {
         "from": "dd371038cffc1c94b2586808abc1ca9ddc9bf901e3d4434a2742225926a14abc",
-        "to": "815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134"
+        "to": "faea30bcca6c2df700deacf8e2355f0e1921ce38fca0ba1f93d00a113900db4c"
       }
     }
   ],
@@ -109,8 +123,8 @@
   "hardware_required": true,
   "hardware_result_claimed": false,
   "nunchuk_status": "not_tested",
-  "retention_mechanism": "UltimateRuntimeConfigCompiledPayloadAnchor.cpp used symbol retention anchor",
-  "retention_verification_basis": "size/hash delta vs baseline and D2A plus retained symbol anchor in firmware TU",
+  "retention_mechanism": "UltimateRuntimeConfigCompiledPayloadAnchor.cpp retained rodata payload sequence anchor",
+  "retention_verification_basis": "full payload byte sequence scan found the committed 530-byte fixture sequence in firmware.bin and firmware.elf",
   "caveats": [
     "no runtime parser use",
     "no runtime resolver",

@@ -24,11 +24,16 @@ source delta summary:
 retention mechanism:
 - compile-time retention anchor:
   `src/modes/UltimateRuntimeConfigCompiledPayloadAnchor.cpp` defines
-  `kPhase7AD2BRetainedPayloadAnchor` with `__attribute__((used))` and references
-  `kPhase7ACompiledPayload` from the payload header.
+  `kPhase7AD2BRetainedPayloadAnchor` in a retained read-only section containing
+  the committed payload fixture bytes.
 
 retained payload verification basis:
 - build report confirms `payload_bytes_retained_in_firmware_image: true`;
+- build report confirms `payload_sequence_scan_performed: true`;
+- full committed 530-byte payload sequence is present in
+  `.pio/build/glyph_mk6/firmware.bin` and `.pio/build/glyph_mk6/firmware.elf`;
+- sequence offsets are recorded in
+  `phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.md`;
 - artifact size deltas vs baseline and D2A are recorded in
   `phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.md`;
 - retained size is reported as 530 bytes.

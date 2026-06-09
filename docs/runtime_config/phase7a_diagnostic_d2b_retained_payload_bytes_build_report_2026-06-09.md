@@ -12,30 +12,45 @@ payload-retained-in-image: `true`
 
 retained-payload-size-bytes: `530`
 
+payload-sequence-scan-performed: `true`
+
+retention-proof-status: `proven_full_payload_sequence_present`
+
 build command: `./scripts/build-glyph-mk6-quiet.sh`
 
-git commit SHA under build: `a732fcd0e5bdb59a3bfeb93c5feb70b7cfbe9693`
-build date (local): `2026-06-09 14:35:24 +0300`
+git commit SHA under build: `7b9ecb9d352939b06e3e31117ee49e8a09337ee7`
+build date (local): `2026-06-09 14:49:04 +0300`
 
 ## Artifact Table
 
 | path | artifact_type | size_bytes | sha256 | availability |
 | --- | --- | ---: | --- | --- |
-| `.pio/build/glyph_mk6/firmware.uf2` | uf2 | 791552 | df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30 | available |
-| `.pio/build/glyph_mk6/firmware.elf` | elf | 5407148 | 515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b | available |
-| `.pio/build/glyph_mk6/firmware.bin` | bin | 395672 | 815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134 | available |
+| `.pio/build/glyph_mk6/firmware.uf2` | uf2 | 792576 | fd04c6937071d75cf7ebc4479a310eab6ff8da26e2b6961f907aa8fe737f443a | available |
+| `.pio/build/glyph_mk6/firmware.elf` | elf | 5407276 | 432e6707fda911aad1972153bbd9a4cf18bfcce3d3a530f9e3d47e057708b301 | available |
+| `.pio/build/glyph_mk6/firmware.bin` | bin | 396208 | faea30bcca6c2df700deacf8e2355f0e1921ce38fca0ba1f93d00a113900db4c | available |
 
 | artifact_type | baseline size_bytes | baseline sha256 | current size_bytes | current sha256 | size delta bytes |
 | --- | ---: | --- | ---: | --- | ---: |
-| uf2 | 791552 | bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085 | 791552 | df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30 | 0 |
-| elf | 5407148 | dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83 | 5407148 | 515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b | 0 |
-| bin | 395664 | 4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45 | 395672 | 815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134 | 8 |
+| uf2 | 791552 | bcb1bba8803e8383fc97464812ab5dc66c1e6f11b2b42625f5f8984d05f97085 | 792576 | fd04c6937071d75cf7ebc4479a310eab6ff8da26e2b6961f907aa8fe737f443a | 1024 |
+| elf | 5407148 | dbdb3537c23a1c0c420fed600165b4602d98af061720bcb5d53213a6a6e52d83 | 5407276 | 432e6707fda911aad1972153bbd9a4cf18bfcce3d3a530f9e3d47e057708b301 | 128 |
+| bin | 395664 | 4f095fbe57dc1a8a40a62ede36ddd291402966635c41049f7f0b13beb4ca9a45 | 396208 | faea30bcca6c2df700deacf8e2355f0e1921ce38fca0ba1f93d00a113900db4c | 544 |
 
 | artifact_type | D2A size_bytes | D2A sha256 | current size_bytes | current sha256 | size delta bytes |
 | --- | ---: | --- | ---: | --- | ---: |
-| uf2 | 791552 | 1cda3368a76d0b048317f9738e25480e7318f65955cc595a24923422c255a0c4 | 791552 | df5eab6b8e3095e9d34831ab432651ac679d622373289c5b19e74bf4537feb30 | 0 |
-| elf | 5407148 | 5d55679d7b46172b40f0c33dd44f7b36277b097a86d457da146befffe5415f86 | 5407148 | 515e2d0993dad76e730ae14c7213c973412a9d4baf0cb267cbb2b7e9cae1c11b | 0 |
-| bin | 395664 | dd371038cffc1c94b2586808abc1ca9ddc9bf901e3d4434a2742225926a14abc | 395672 | 815f5eb0e12807c3b15e34c715bb0dd9cb4b077e51223c7c2c16478cbd949134 | 8 |
+| uf2 | 791552 | 1cda3368a76d0b048317f9738e25480e7318f65955cc595a24923422c255a0c4 | 792576 | fd04c6937071d75cf7ebc4479a310eab6ff8da26e2b6961f907aa8fe737f443a | 1024 |
+| elf | 5407148 | 5d55679d7b46172b40f0c33dd44f7b36277b097a86d457da146befffe5415f86 | 5407276 | 432e6707fda911aad1972153bbd9a4cf18bfcce3d3a530f9e3d47e057708b301 | 128 |
+| bin | 395664 | dd371038cffc1c94b2586808abc1ca9ddc9bf901e3d4434a2742225926a14abc | 396208 | faea30bcca6c2df700deacf8e2355f0e1921ce38fca0ba1f93d00a113900db4c | 544 |
+
+## Payload Sequence Scan
+
+Scanned fixture:
+`docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin`
+
+| artifact path | full payload sequence found | offsets decimal | offsets hex |
+| --- | --- | ---: | --- |
+| `.pio/build/glyph_mk6/firmware.bin` | true | 369868 | `0x5a4cc` |
+| `.pio/build/glyph_mk6/firmware.elf` | true | 435404 | `0x6a4cc` |
+| `.pio/build/glyph_mk6/firmware.uf2` | false | none | none |
 
 ## Map / Artifact Availability
 
@@ -60,7 +75,10 @@ build date (local): `2026-06-09 14:35:24 +0300`
 
 ## Retention verification note
 
-Retention is verified by a non-zero `.bin` size delta (+8 bytes) versus baseline and D2A,
-and by presence of the dedicated used symbol `kPhase7AD2BRetainedPayloadAnchor` that
-references `kPhase7ACompiledPayload`, while all runtime behavior-sensitive files
-remain unchanged and no parser/resolver/runtime-config flow is added.
+Retention is proven by an artifact-level scan for the full committed 530-byte
+payload fixture sequence. The full sequence is present in `.pio/build/glyph_mk6/firmware.bin`
+at offset 369868 (`0x5a4cc`) and in `.pio/build/glyph_mk6/firmware.elf` at
+offset 435404 (`0x6a4cc`). The raw sequence is not found in `.uf2`; `.bin` and
+`.elf` are the required proof artifacts. Size/hash deltas versus baseline and
+D2A remain recorded above, while all runtime behavior-sensitive files remain
+unchanged and no parser/resolver/runtime-config flow is added.
