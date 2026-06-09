@@ -73,6 +73,11 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   source-owned baseline view selection after parse-status gate.
 - `fixtures/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_plan_2026-06-09.json` -
   matching diagnostic D5A-N1 hardware plan fixture.
+- `glyph_phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_hardware_plan_2026-06-09.md` -
+  diagnostic D5A-N2 hardware plan (template-style evidence scaffold) for resolver
+  runtime path with parse-status hot-path reads removed.
+- `fixtures/glyph_phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_hardware_plan_2026-06-09.json` -
+  matching diagnostic D5A-N2 hardware plan fixture.
 - `glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_failure_2026-06-09.md`
   - user-reported D5A-N1 hardware failure; same disconnects as D5A and
     RF5/RF6/LT6 disconnect class reproduced.

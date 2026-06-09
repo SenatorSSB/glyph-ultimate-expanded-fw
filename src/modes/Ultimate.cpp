@@ -31,14 +31,11 @@ const UltimateRuntimeConfigParser::ParseResult kPhase7AD3GlobalParseResult __att
         UltimateRuntimeConfigParser::kPayloadSize
     );
 
-// D5A-N1 keeps parse-status-gated source-owned selection direct and avoids
-// any separate RuntimeConfigView alias/copy.
+// D5A-N2 removes parse-status hot-path branching in runtime resolver and keeps
+// canonical source-owned config selection with validation/fallback.
 
 const RuntimeConfigView& ResolveActiveRuntimeConfig() {
-    if (
-        kPhase7AD3GlobalParseResult.status == UltimateRuntimeConfigParser::ParseStatus::Ok &&
-        ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
-    ) {
+    if (ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)) {
         return kSourceOwnedCurrentBaselineRuntimeConfig;
     }
 

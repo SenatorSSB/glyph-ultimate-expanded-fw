@@ -65,6 +65,9 @@ artifacts unless a specific packet says otherwise.
   needs to be tested.
 - `phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate.md` - diagnostic
   D5A-N1 packet for direct source-owned baseline view return after parse gate.
+- `phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read.md` - diagnostic
+  D5A-N2 packet for direct source-owned baseline view return after removing parse-status
+  hot-path reads from runtime resolver.
 - `docs/calibration/glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_failure_2026-06-09.md`
   - user-reported D5A-N1 hardware failure result; same disconnects as D5A,
     RF5/RF6/LT6 disconnect class reproduced, and parse-status hot-path read
@@ -96,6 +99,9 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_build_report_2026-06-09.md` -
   D5A-N1 build report with local artifact observations for direct
   source-owned baseline view routing after parse status gate.
+- `phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_build_report_2026-06-09.md` -
+  D5A-N2 build report with local artifact observations for direct
+  source-owned baseline view routing after removing parse-status hot-path reads.
 - `phase7a_diagnostic_d2_compiled_payload_header_only_hardware_plan_2026-06-09.md` -
   D2 diagnostic hardware plan template for required rows (all `NOT_TESTED`).
 - `glyph_phase7a_diagnostic_d2b_retained_payload_bytes_hardware_plan_2026-06-09.md` -
@@ -110,6 +116,9 @@ artifacts unless a specific packet says otherwise.
 - `glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_hardware_plan_2026-06-09.md` -
   D5A-N1 hardware plan template (all `NOT_TESTED`) for direct source-owned
   view selection after parse-status gate.
+- `glyph_phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_hardware_plan_2026-06-09.md` -
+  D5A-N2 hardware plan template (all `NOT_TESTED`) for removing parse-status
+  hot-path read from resolver path.
 - `fixtures/phase7a_diagnostic_d2_compiled_payload_header_only_build_report_2026-06-09.json` -
   machine-readable D2 build report metadata and artifact deltas.
 - `fixtures/phase7a_diagnostic_d2b_retained_payload_bytes_build_report_2026-06-09.json` -
@@ -121,6 +130,9 @@ artifacts unless a specific packet says otherwise.
   observations only.
 - `fixtures/phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate_build_report_2026-06-09.json` -
   machine-readable D5A-N1 build report metadata with local artifact observations
+  and non-checker artifact hashes.
+- `fixtures/phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read_build_report_2026-06-09.json` -
+  machine-readable D5A-N2 build report metadata with local artifact observations
   and non-checker artifact hashes.
 - `tools/check_glyph_phase7a_diagnostic_d2_compiled_payload_header_only.py` - read-only
   checker for D2 packet/report/plan/header retention guardrails.
@@ -134,6 +146,8 @@ artifacts unless a specific packet says otherwise.
   docs, report, hardware-plan, and no storage/write/flashing guardrails.
 - `tools/check_glyph_phase7a_diagnostic_d5a_n1_direct_source_view_after_parse_gate.py` -
   read-only checker for D5A-N1 scope, resolver behavior, and guardrails.
+- `tools/check_glyph_phase7a_diagnostic_d5a_n2_resolver_without_parse_status_read.py` -
+  read-only checker for D5A-N2 scope, resolver behavior, and guardrails.
 - `tools/check_glyph_phase7a_diagnostic_d5a_n1_hardware_failure.py` - read-only
   checker for D5A-N1 hardware-failure result guardrails.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
