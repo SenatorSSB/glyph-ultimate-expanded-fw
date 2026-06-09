@@ -440,6 +440,12 @@ void ApplyNullOverride(OutputState &outputs) {
     outputs.rightStickY = 128;
 }
 
+const RuntimeConfigView& ResolveActiveRuntimeConfig() {
+    return ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
+        ? kSourceOwnedCurrentBaselineRuntimeConfig
+        : kKnownGoodRuntimeConfig;
+}
+
 } // namespace
 
 Ultimate::Ultimate() : ControllerMode() {}
@@ -462,9 +468,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
-    const RuntimeConfigView &runtime_config = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
-        ? kSourceOwnedCurrentBaselineRuntimeConfig
-        : kKnownGoodRuntimeConfig;
+    const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(

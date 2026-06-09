@@ -47,6 +47,10 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
     hardware failure; failed activation branch must not merge.
 - `fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
   - matching machine-readable Phase 7A activation hardware failure fixture.
+- `glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_plan_2026-06-09.md`
+  - Phase 7A D4 hardware plan template with D4-only rows (not tested).
+- `fixtures/glyph_phase7a_diagnostic_d4_runtime_resolver_only_hardware_plan_2026-06-09.json`
+  - matching machine-readable D4 hardware plan artifact.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 

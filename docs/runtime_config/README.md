@@ -50,6 +50,15 @@ artifacts unless a specific packet says otherwise.
 - `phase7a_activation_failure_diagnostic_build_matrix.md` - diagnostic build
   matrix plan for isolating the activation failure cause; plan-only and not
   implemented.
+- `phase7a_diagnostic_d4_runtime_resolver_only.md` - runtime-resolver-only
+  diagnostic packet for RF5/RF6 disconnect isolation; no parser call or
+  compiled payload usage.
+- `phase7a_diagnostic_d4_runtime_resolver_only_build_report_2026-06-09.md` -
+  D4 build report (diagnostic-only, no parser/compile-payload changes).
+- `fixtures/phase7a_diagnostic_d4_runtime_resolver_only_build_report_2026-06-09.json` -
+  machine-readable D4 build report metadata.
+- `tools/check_glyph_phase7a_diagnostic_d4_runtime_resolver_only.py` - D4
+  diagnostic checker for resolver-only source/doc/build constraints.
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, diagnostic
   matrix, and no-firmware-source-change guardrail.
