@@ -504,6 +504,10 @@ def validate_docs_and_fixtures() -> None:
 
     for phrase in (
         "status: HARDWARE_PASS",
+        "overall_result: HARDWARE_PASS",
+        "branch_under_test:",
+        "result_branch:",
+        "operator_report:",
         "parsed candidate machinery",
         "published active runtime view is forced to kSourceOwnedCurrentBaselineRuntimeConfig",
         "candidate.view is not published as the active runtime view",
@@ -528,6 +532,20 @@ def validate_docs_and_fixtures() -> None:
     validate_build_report_fixture(build_fixture, build_report)
     validate_hardware_result_fixture(hardware_fixture, hardware_plan, "calibration hardware result")
     validate_hardware_result_fixture(hardware_result_fixture, hardware_result, "runtime config hardware result")
+
+    for text, label in (
+        (doc, "diagnostic doc"),
+        (hardware_plan, "calibration hardware result"),
+        (hardware_result, "runtime config hardware result"),
+    ):
+        for phrase in (
+            "overall_result: HARDWARE_PASS",
+            "branch_under_test:",
+            "result_branch:",
+            "operator_report:",
+            "tested, everything works",
+        ):
+            require_phrase(text, phrase, label)
 
     for text, label in (
         (readme, "runtime config README"),

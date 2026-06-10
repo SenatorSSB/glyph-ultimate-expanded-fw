@@ -169,7 +169,8 @@ an activation repair. It keeps parser bridge, candidate materialization, and
 equivalence validation present while forcing active publication to
 `kSourceOwnedCurrentBaselineRuntimeConfig`. The result branch
 `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
-records `HARDWARE_PASS` by operator report: "tested, everything works". Parsed
+records `overall_result: HARDWARE_PASS` and
+`operator_report: "tested, everything works"`. Parsed
 candidate/parser/materialization presence is hardware-safe when source-owned
 baseline remains the published active view. Candidate active publication remains
 unsafe after the `runtime-config-parsed-candidate-opt-in-diagnostic-batch`

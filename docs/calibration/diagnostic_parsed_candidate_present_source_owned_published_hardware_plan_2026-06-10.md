@@ -1,9 +1,10 @@
 # Diagnostic Parsed Candidate Present, Source-Owned Published Hardware Result
 
 status: HARDWARE_PASS
+overall_result: HARDWARE_PASS
 
-branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
-result branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
+branch_under_test: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
+result_branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
 
 baseline branch: `configurator`
 
@@ -13,7 +14,7 @@ Test whether parsed-candidate source presence, parser bridge execution,
 candidate materialization, and equivalence validation cause hardware disconnects
 when the published active runtime view is still source-owned baseline.
 
-Operator report: `tested, everything works`
+operator_report: `tested, everything works`
 
 This is a recorded hardware result for the diagnostic branch. It does not claim
 that parsed candidate activation is safe. It records that parsed

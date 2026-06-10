@@ -79,7 +79,8 @@ packets remain under `docs/calibration/`.
   view is forced to `kSourceOwnedCurrentBaselineRuntimeConfig`; candidate view is
   not active. Its hardware result is recorded on
   `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
-  as `HARDWARE_PASS` by operator report: "tested, everything works". Parsed
+  as `overall_result: HARDWARE_PASS` and
+  `operator_report: "tested, everything works"`. Parsed
   candidate/parser/materialization presence is hardware-safe when source-owned
   baseline remains the published active view. Active publication of
   `candidate.view` remains the main suspect for the parsed-candidate opt-in

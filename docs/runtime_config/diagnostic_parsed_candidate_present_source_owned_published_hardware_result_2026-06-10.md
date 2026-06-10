@@ -1,12 +1,12 @@
 # Diagnostic Parsed Candidate Present, Source-Owned Published Hardware Result - 2026-06-10
 
 status: HARDWARE_PASS
+overall_result: HARDWARE_PASS
 
-branch under test: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
+branch_under_test: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
+result_branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
 
-result branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
-
-Operator report: `tested, everything works`
+operator_report: `tested, everything works`
 
 ## Result Scope
 

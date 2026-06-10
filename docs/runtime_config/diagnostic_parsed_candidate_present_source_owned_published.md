@@ -1,10 +1,10 @@
 # Diagnostic Parsed Candidate Present, Source-Owned Published
 
 status: HARDWARE_PASS
+overall_result: HARDWARE_PASS
 
-branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
-
-result branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
+branch_under_test: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
+result_branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
 
 baseline branch: `configurator`
 
@@ -22,7 +22,8 @@ The previous branch
 candidate opt-in activation is unsafe for merge and must not be merged into
 `configurator`.
 
-The hardware result branch records operator report: "tested, everything works".
+The hardware result branch records `overall_result: HARDWARE_PASS` with
+`operator_report: "tested, everything works"`.
 Parsed candidate/parser/materialization presence is hardware-safe when
 source-owned baseline remains the published active view. Active publication of
 `candidate.view` remains the main suspect for the parsed-candidate opt-in
