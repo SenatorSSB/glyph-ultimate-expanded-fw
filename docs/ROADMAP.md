@@ -163,14 +163,25 @@ architecture step after that baseline. Candidate state remains pre-publication
 scaffolding only; `ResolveActiveRuntimeConfig()` and `UpdateAnalogOutputs(...)`
 continue to consume only the stable selected `RuntimeConfigView`.
 
-The parsed candidate opt-in diagnostic batch is the next bounded firmware
-diagnostic step. It enables a source-owned static parsed/candidate path before
-publication, accepts only a candidate proven equivalent to the source-owned
-baseline, and publishes only the selected `RuntimeConfigView` to output
-generation. Status: `WAITING_FOR_HARDWARE_TEST` before merge because the opt-in
-candidate can affect active output behavior. It is not runtime-loaded config,
-storage, WebSerial/device write, backend/config.pb write behavior, or flashing
-automation. Nunchuk remains NOT_TESTED.
+The parsed candidate opt-in diagnostic batch enabled a source-owned static
+parsed/candidate path before publication, accepted only a candidate proven
+equivalent to the source-owned baseline, and published only the selected
+`RuntimeConfigView` to output generation. Hardware testing failed on
+`runtime-config-parsed-candidate-opt-in-diagnostic-batch-hardware-failure` with
+operator report: "tested, fails. disconnects happen". Status:
+`HARDWARE_FAIL`; the implementation branch
+`runtime-config-parsed-candidate-opt-in-diagnostic-batch` must not merge into
+`configurator`.
+
+Parsed candidate publication/activation still triggers the disconnect class
+even when publication is namespace-scope and the active output path consumes
+only published `active_view`. The low-level failure mechanism is not proven.
+Do not claim parser status hot-path reads as the root cause. Source-owned
+active-state preselection remains the repair baseline, inactive candidate
+materialization remains the next safe baseline, and a new root-cause analysis is
+required before any new active candidate publication attempt. It is not
+runtime-loaded config, storage, WebSerial/device write, backend/config.pb write
+behavior, or flashing automation. Nunchuk remains NOT_TESTED.
 
 ## Phase 4 - Offline Official Configurator Export Target Contract
 

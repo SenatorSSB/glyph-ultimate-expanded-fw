@@ -72,9 +72,17 @@ packets remain under `docs/calibration/`.
   static diagnostic path. It parses/materializes the compiled candidate fixture
   before active-state publication, proves equivalence to the source-owned
   baseline before accepting the candidate, and publishes only an active
-  `RuntimeConfigView` for output generation. Because this opt-in path can affect
-  active output behavior, it is `WAITING_FOR_HARDWARE_TEST` before merge. No
-  hardware result is recorded in this branch.
+  `RuntimeConfigView` for output generation. Hardware testing failed on
+  `runtime-config-parsed-candidate-opt-in-diagnostic-batch-hardware-failure`
+  with operator report: "tested, fails. disconnects happen". The implementation
+  branch must not be merged into `configurator`.
+- Parsed candidate publication/activation still triggers the disconnect class
+  even when publication is namespace-scope and the active output path consumes
+  only published `active_view`. The low-level failure mechanism is not proven;
+  do not claim parser status hot-path reads as the root cause for this result.
+- Source-owned active-state preselection remains the repair baseline, and
+  inactive candidate materialization remains the next safe baseline for future
+  root-cause analysis.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -116,8 +124,9 @@ packets remain under `docs/calibration/`.
   be supplied if available, but the user is not currently blocking routine
   engineering design.
 - Waiting for hardware artifacts: hardware tests are required only after a
-  candidate or firmware artifact exists for that test scope. Nunchuk remains
-  unvalidated for current hardware.
+  candidate or firmware artifact exists for that test scope. The parsed
+  candidate opt-in diagnostic branch has failed hardware testing and is not
+  mergeable. Nunchuk remains unvalidated for current hardware.
 - Future phase requiring product approval before implementation:
   runtime-loaded config, runtime-config storage, firmware binary/protobuf
   parser integration, WebSerial/device write, protobuf binary write,
@@ -167,7 +176,8 @@ engineering decisions.
   consumes only the selected active `RuntimeConfigView`.
 - Parsed candidate opt-in diagnostic activation is implemented in firmware
   source as source-owned/static pre-publication candidate activation. It is not
-  runtime-loaded config and requires hardware test before merge.
+  runtime-loaded config. Hardware testing failed, so the implementation branch
+  must not merge.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.
@@ -204,3 +214,6 @@ engineering decisions.
   result exists.
 - Continue runtime-loaded config/transport research only as design/source
   research when explicitly prioritized.
+- Start a new root-cause analysis for the parsed candidate opt-in activation
+  disconnect class before attempting any new active candidate publication
+  branch.

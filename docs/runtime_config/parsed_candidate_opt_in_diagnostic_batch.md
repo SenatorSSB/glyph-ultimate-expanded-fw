@@ -1,6 +1,6 @@
 # Parsed Candidate Opt-In Diagnostic Batch
 
-status: HARDWARE_TEST_READY
+status: HARDWARE_FAIL_RECORDED
 
 branch: `runtime-config-parsed-candidate-opt-in-diagnostic-batch`
 
@@ -59,7 +59,8 @@ constexpr bool kEnableParsedCandidateActivationDiagnostic = true;
 ```
 
 Because the accepted candidate can become the published active view, this branch
-requires hardware testing before merge. No hardware result is recorded here.
+required hardware testing before merge. Hardware testing failed on result branch
+`runtime-config-parsed-candidate-opt-in-diagnostic-batch-hardware-failure`.
 
 ## Guardrails
 
@@ -83,12 +84,26 @@ requires hardware testing before merge. No hardware result is recorded here.
 - WebSerial/device write is not implemented.
 - Backend/config.pb write behavior is not implemented.
 - Firmware flashing automation is not implemented.
-- No hardware result is recorded by this branch.
+- Hardware testing failed on the result branch with operator report: "tested,
+  fails. disconnects happen".
+- The implementation branch must not be merged into `configurator`.
+- The low-level failure mechanism is not proven.
 - Nunchuk remains NOT_TESTED.
 
 ## Hardware
 
-Hardware test is required before merge because parsed candidate opt-in
-activation can affect active output behavior. The hardware plan is
-`docs/calibration/parsed_candidate_opt_in_diagnostic_batch_hardware_plan_2026-06-10.md`;
-all rows remain `NOT_TESTED` on this branch.
+Hardware test failed because parsed candidate opt-in activation still triggered
+the disconnect class after flashing branch firmware.
+
+The correct conclusion is narrow: parsed candidate publication/activation still
+triggers the disconnect class even when publication is namespace-scope and the
+active output path consumes only published `active_view`.
+
+Do not claim the root cause is parser status hot-path reads. The direct
+parser-status hot-path read was avoided here, and the failure mechanism remains
+unproven.
+
+The hardware plan/result rows are recorded in
+`docs/calibration/parsed_candidate_opt_in_diagnostic_batch_hardware_plan_2026-06-10.md`.
+The dedicated failure packet is
+`docs/runtime_config/parsed_candidate_opt_in_diagnostic_batch_hardware_failure_2026-06-10.md`.

@@ -1,8 +1,9 @@
 {
   "schema_name": "glyph_parsed_candidate_opt_in_diagnostic_batch",
   "schema_version": 1,
-  "status": "hardware_test_ready",
+  "status": "hardware_fail_recorded",
   "branch": "runtime-config-parsed-candidate-opt-in-diagnostic-batch",
+  "result_branch": "runtime-config-parsed-candidate-opt-in-diagnostic-batch-hardware-failure",
   "baseline_branch": "configurator",
   "candidate_parser_bridge": "MaterializeRuntimeConfigCandidateFromParsedPayload",
   "candidate_fixture": "kParsedCandidateOptInDiagnosticPayload",
@@ -16,7 +17,11 @@
   "flashing_automation_implemented": false,
   "candidate_activation_can_affect_active_output": true,
   "hardware_test_required_before_merge": true,
-  "hardware_result_recorded": false,
+  "hardware_result_recorded": true,
+  "overall_result": "HARDWARE_FAIL",
+  "operator_report": "tested, fails. disconnects happen",
+  "implementation_branch_merge_allowed": false,
+  "parsed_candidate_opt_in_activation_safe_for_merge": false,
   "candidate_equivalence_to_source_owned_baseline": "proven_by_firmware_helper_and_checker_presence",
   "equivalence_requirements": [
     "every runtime table",
@@ -37,6 +42,10 @@
   "active_output_path_consumes_only_published_active_view": true,
   "update_analog_outputs_reads_parser_candidate_decision_state": false,
   "resolve_active_runtime_config_reads_parser_candidate_decision_state": false,
+  "source_owned_active_state_preselection_remains_repair_baseline": true,
+  "candidate_materialization_inactive_path_remains_next_safe_baseline": true,
+  "low_level_failure_mechanism_proven": false,
+  "requires_new_root_cause_analysis": true,
   "nunchuk_status": "NOT_TESTED",
   "nunchuk_scope": "Nunchuk remains NOT_TESTED"
 }

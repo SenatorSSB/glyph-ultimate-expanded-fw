@@ -1,24 +1,32 @@
 # Parsed Candidate Opt-In Diagnostic Batch Hardware Plan - 2026-06-10
 
-status: HARDWARE_PLAN_NOT_TESTED
+status: HARDWARE_FAIL_RECORDED
 
 branch: `runtime-config-parsed-candidate-opt-in-diagnostic-batch`
 
-This is a hardware-test plan only. It records no hardware result. Hardware test
-is required before merge because parsed candidate opt-in activation can affect
-active output behavior. Runtime-loaded config, storage, WebSerial/device write,
-backend/config.pb write behavior, and flashing automation remain not
-implemented. Nunchuk remains NOT_TESTED.
+This began as a hardware-test plan. A hardware failure is now recorded on result
+branch
+`runtime-config-parsed-candidate-opt-in-diagnostic-batch-hardware-failure`.
+Hardware testing failed with operator report: "tested, fails. disconnects
+happen".
+
+The implementation branch
+`runtime-config-parsed-candidate-opt-in-diagnostic-batch` must not be merged
+into `configurator`.
+
+Runtime-loaded config, storage, WebSerial/device write, backend/config.pb write
+behavior, and flashing automation remain not implemented. Nunchuk remains
+NOT_TESTED.
 
 ## Hardware Plan Rows
 
 | Row ID | Category | Planned check | Result |
 | --- | --- | --- | --- |
-| BOOT-001 | boot | Normal boot after build reaches expected boot state | NOT_TESTED |
-| BASELINE-001 | baseline | Baseline analog/digital routing remains stable | NOT_TESTED |
-| RF5-001 | rf5_routing | RF5 path behavior remains as baseline | NOT_TESTED |
-| RF6-001 | rf6_routing | RF6 path behavior remains as baseline | NOT_TESTED |
-| LT6-001 | lt6_routing | LT6 path behavior remains as baseline | NOT_TESTED |
+| BOOT-001 | boot | Normal boot after build reaches expected boot state | UNKNOWN |
+| BASELINE-001 | baseline | Baseline analog/digital routing remains stable | FAIL |
+| RF5-001 | rf5_routing | RF5 path behavior remains as baseline | UNKNOWN |
+| RF6-001 | rf6_routing | RF6 path behavior remains as baseline | UNKNOWN |
+| LT6-001 | lt6_routing | LT6 path behavior remains as baseline | UNKNOWN |
 | ORDINARY-DIR-001 | ordinary_direction | Ordinary direction outputs remain preserved | NOT_TESTED |
 | NEUTRAL-001 | neutral | Neutral output behavior remains preserved | NOT_TESTED |
 | UNRELATED-BUTTONS-001 | unrelated_buttons | Unrelated button paths remain preserved | NOT_TESTED |
@@ -27,18 +35,24 @@ implemented. Nunchuk remains NOT_TESTED.
 | PUBLICATION-001 | publication | Namespace-scope published active view is selected before output generation | NOT_TESTED |
 | CANDIDATE-BRIDGE-001 | candidate_bridge | Source-owned compiled parser fixture materializes candidate state before publication | NOT_TESTED |
 | CANDIDATE-EQUIVALENCE-001 | candidate_equivalence | Candidate state is equivalent to source-owned baseline | NOT_TESTED |
-| OPT-IN-ACTIVATION-001 | opt_in_activation | Diagnostic opt-in candidate activation behaves as baseline-equivalent published view | NOT_TESTED |
-| HOT-PATH-001 | hot_path | Analog hot path consumes only published active view | NOT_TESTED |
-| NO-PARSER-STATUS-READ-001 | invariant | No runtime parser status reads in `UpdateAnalogOutputs` | NOT_TESTED |
-| NO-STORAGE-001 | invariant | No storage path introduced | NOT_TESTED |
-| NO-WRITE-001 | invariant | No firmware write path introduced | NOT_TESTED |
-| NO-FLASH-001 | invariant | No flashing automation introduced | NOT_TESTED |
+| OPT-IN-ACTIVATION-001 | opt_in_activation | Diagnostic opt-in candidate activation behaves as baseline-equivalent published view | FAIL |
+| HOT-PATH-001 | hot_path | Analog hot path consumes only published active view | INVESTIGATE |
+| NO-PARSER-STATUS-READ-001 | invariant | No runtime parser status reads in `UpdateAnalogOutputs` | PASS |
+| NO-STORAGE-001 | invariant | No storage path introduced | PASS |
+| NO-WRITE-001 | invariant | No firmware write path introduced | PASS |
+| NO-FLASH-001 | invariant | No flashing automation introduced | PASS |
 | NUNCHUK-001 | nunchuk_scope | Nunchuk remains NOT_TESTED | NOT_TESTED |
 
 ## Scope Notes
 
 - Build evidence is recorded in
   `docs/runtime_config/parsed_candidate_opt_in_diagnostic_batch_build_report_2026-06-10.md`.
-- This plan must not be promoted to a hardware result without an explicit
-  operator result packet.
+- Hardware failure details are recorded in
+  `docs/runtime_config/parsed_candidate_opt_in_diagnostic_batch_hardware_failure_2026-06-10.md`.
 - The diagnostic candidate is source-owned/static and not runtime-loaded.
+- Parsed candidate publication/activation still triggers the disconnect class
+  even when publication is namespace-scope and the active output path consumes
+  only published `active_view`.
+- The low-level failure mechanism is not proven. Do not claim the root cause is
+  parser status hot-path reads; that direct hot-path parser-status read was
+  avoided here.
