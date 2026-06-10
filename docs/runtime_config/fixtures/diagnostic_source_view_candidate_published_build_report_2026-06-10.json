@@ -1,0 +1,38 @@
+{
+  "schema_name": "glyph_diagnostic_source_view_candidate_published_build_report",
+  "status": "local_build_report",
+  "branch": "runtime-config-diagnostic-source-view-candidate-published",
+  "baseline_branch": "configurator",
+  "canonical_build_command": "pio run -e glyph_mk6",
+  "fallback_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "local_build_command_used": "./scripts/build-glyph-mk6-quiet.sh",
+  "local_build_result": "PASS",
+  "parser_payload_path_enabled": false,
+  "parse_ultimate_runtime_config_payload_called": false,
+  "source_owned_static_diagnostic_parsed_payload_present": false,
+  "candidate_materialization_source": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "candidate_materialization_present": true,
+  "candidate_state_validation_present": true,
+  "candidate_equivalence_validation_present": true,
+  "candidate_active_publication_enabled": true,
+  "published_active_view_when_equivalent": "candidate.view",
+  "fallback_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "artifact_hashes": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "sha256": "ba519464a14f11909c8f85c7964e3a2b55db1747e8f53d05da1735979f13685f"
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "sha256": "f93d212caa80a4c40d17ce0b3f0bf06e8d2b766ffc32b73ff56461ab9314d00b"
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "sha256": "d9105e4137e848ce25c2e286ecf73851dc2db3355ae720f7b8f20f2afb67cb29"
+    }
+  ],
+  "artifact_hashes_are_checker_gate": false,
+  "hardware_result_claimed": false,
+  "hardware_test_required": true,
+  "nunchuk_status": "NOT_TESTED"
+}

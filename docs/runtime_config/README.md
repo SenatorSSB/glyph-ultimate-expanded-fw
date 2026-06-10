@@ -104,6 +104,20 @@ artifacts unless a specific packet says otherwise.
   baseline remains published active view.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.json` -
   machine-readable hardware result metadata for the diagnostic branch.
+- `diagnostic_source_view_candidate_published.md` -
+  `WAITING_FOR_HARDWARE_TEST` diagnostic branch packet: parser payload path is
+  disabled/absent, a RAM-backed candidate is materialized from
+  `kSourceOwnedCurrentBaselineRuntimeConfig`, and `candidate.view` is published
+  active only after validation/equivalence, with source-owned fallback.
+- `fixtures/diagnostic_source_view_candidate_published.json` -
+  machine-readable source-boundary fixture for the source-view candidate
+  publication diagnostic branch.
+- `diagnostic_source_view_candidate_published_build_report_2026-06-10.md` -
+  local build report for the source-view candidate publication diagnostic
+  branch.
+- `fixtures/diagnostic_source_view_candidate_published_build_report_2026-06-10.json` -
+  machine-readable build report metadata for the source-view candidate
+  publication diagnostic branch.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -153,6 +167,11 @@ artifacts unless a specific packet says otherwise.
   parsed candidate machinery present and materialized, but publishes only
   `kSourceOwnedCurrentBaselineRuntimeConfig` as the active view. It records no
   hardware result; Nunchuk remains NOT_TESTED.
+- The diagnostic_source_view_candidate_published branch disables the parser
+  payload path and publishes `candidate.view` only after source-owned
+  materialization, candidate validation, and source-owned equivalence pass. It
+  is `WAITING_FOR_HARDWARE_TEST`; no hardware result is claimed and Nunchuk
+  remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

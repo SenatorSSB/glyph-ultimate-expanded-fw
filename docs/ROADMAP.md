@@ -178,6 +178,17 @@ hardware failure and must not merge without a separate source-backed,
 hardware-gated repair. Active publication of `candidate.view` remains the main
 suspect, while the low-level failure mechanism remains unproven.
 
+The source-view-candidate-published diagnostic
+(`diagnostic_source_view_candidate_published`) is `WAITING_FOR_HARDWARE_TEST`.
+It disables the parser payload path entirely, materializes a RAM-backed
+candidate from `kSourceOwnedCurrentBaselineRuntimeConfig`, validates candidate
+state and source-owned equivalence, publishes `candidate.view` only after that
+validation/equivalence succeeds, and falls back to source-owned baseline
+otherwise. It is a hardware diagnostic for candidate active publication only;
+runtime-loaded config, storage, WebSerial/device write, backend/config.pb write,
+firmware flashing automation, parser payload activation, and nunchuk validation
+remain out of scope.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

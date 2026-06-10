@@ -86,6 +86,15 @@ packets remain under `docs/calibration/`.
   `candidate.view` remains the main suspect for the parsed-candidate opt-in
   failure. Parsed candidate opt-in activation remains unsafe for merge, the
   low-level failure mechanism remains unproven, and Nunchuk remains NOT_TESTED.
+- The diagnostic branch
+  `runtime-config-diagnostic-source-view-candidate-published`
+  (`diagnostic_source_view_candidate_published`) is `WAITING_FOR_HARDWARE_TEST`:
+  parser payload activation is disabled/absent, candidate state is materialized
+  from `kSourceOwnedCurrentBaselineRuntimeConfig`, candidate validation and
+  source-owned equivalence are required, `candidate.view` is published active
+  only after validation/equivalence success, and source-owned baseline fallback
+  remains present. This branch has no hardware result yet and Nunchuk remains
+  NOT_TESTED.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -183,6 +192,14 @@ engineering decisions.
   active view. It does not implement runtime-loaded config, storage,
   WebSerial/device write, backend/config.pb write, firmware flashing automation,
   parsed candidate activation, or nunchuk validation.
+- Source-view-candidate-published diagnostic source is intended only to isolate
+  RAM-backed candidate active publication when the candidate is materialized
+  from the already-safe source-owned baseline. It disables the parser payload
+  path entirely, publishes `candidate.view` only after validation/equivalence,
+  falls back to source-owned baseline otherwise, and is
+  `WAITING_FOR_HARDWARE_TEST`. It does not implement runtime-loaded config,
+  storage, WebSerial/device write, backend/config.pb write, firmware flashing
+  automation, parser payload activation, or nunchuk validation.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

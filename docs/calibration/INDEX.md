@@ -57,6 +57,12 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
     diagnostic branch; non-nunchuk rows PASS and Nunchuk remains NOT_TESTED.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json`
   - matching machine-readable hardware result fixture.
+- `diagnostic_source_view_candidate_published_hardware_plan_2026-06-10.md`
+  - `WAITING_FOR_HARDWARE_TEST` / `HARDWARE_PLAN` for the source-view candidate
+    publication diagnostic branch; all rows are NOT_TESTED and Nunchuk remains
+    NOT_TESTED.
+- `fixtures/diagnostic_source_view_candidate_published_hardware_plan_2026-06-10.json`
+  - matching machine-readable hardware plan fixture.
 
 ## Official Configurator Corpus And Source Correction
 

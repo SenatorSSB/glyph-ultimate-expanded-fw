@@ -1,0 +1,40 @@
+{
+  "schema_name": "glyph_diagnostic_source_view_candidate_published",
+  "status": "hardware_test_diagnostic_build",
+  "branch": "runtime-config-diagnostic-source-view-candidate-published",
+  "baseline_branch": "configurator",
+  "previous_source_owned_preselection_result": "HARDWARE_PASS",
+  "previous_parsed_candidate_present_source_owned_published_result": "HARDWARE_PASS",
+  "previous_parsed_candidate_opt_in_activation_result": "HARDWARE_FAIL",
+  "candidate_materialization_source": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "source_owned_static_diagnostic_parsed_payload_present": false,
+  "parser_payload_path_enabled": false,
+  "parse_ultimate_runtime_config_payload_called": false,
+  "parsed_payload_bytes_used": false,
+  "candidate_materialization_present": true,
+  "candidate_state_validation_present": true,
+  "candidate_equivalence_validation_present": true,
+  "candidate_active_publication_enabled": true,
+  "published_active_view_when_equivalent": "candidate.view",
+  "fallback_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "resolve_active_runtime_config_allowed_inputs": [
+    "ActiveRuntimeConfigState.active_view"
+  ],
+  "update_analog_outputs_forbidden_inputs": [
+    "candidate",
+    "parser",
+    "decision",
+    "status",
+    "load",
+    "storage",
+    "write",
+    "flash"
+  ],
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "NOT_TESTED"
+}
