@@ -28,6 +28,7 @@ WORKFLOW_PATH = REPO_ROOT / "docs/WORKFLOW.md"
 ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
 
 EXPECTED_GUARDRAIL = "Do not read parser result state from UpdateAnalogOutputs or analog hot-path resolver."
+HOT_PATH_RESOLVER_CHAIN_GUARDRAIL = "No parser calls in hot path / resolver chain."
 REPAIR_BASIS = "Source-owned active-state preselection is the repair architecture baseline."
 
 EXPECTED_DIAGNOSTIC_MATRIX = {
@@ -72,8 +73,6 @@ ALLOWED_CHANGED_PREFIXES = ("docs/runtime_config/",)
 FIRMWARE_SOURCE_PREFIXES = ("src/", "include/", "HAL/", "lib/", "config/")
 
 FORBIDDEN_ULTIMATE_TOKENS = (
-    "kPhase7AD3GlobalParseResult.status",
-    "ParseUltimateRuntimeConfigPayload(",
     "D2BRetained",
     "RetainedD2B",
     "kPhase7AD2B",
@@ -251,8 +250,107 @@ def strip_cpp_comments(text: str) -> str:
     return "".join(result)
 
 
+def extract_function(text: str, name: str) -> str:
+    pattern = rf"\b{re.escape(name)}\b\s*\([^\)]*\)\s*\{{"
+    match = re.search(pattern, text)
+    if not match:
+        fail(f"missing function: {name}()")
+
+    pos = text.find("{", match.end() - 1)
+    if pos == -1:
+        fail(f"could not locate opening brace for {name}()")
+
+    pos += 1
+    brace = 1
+    while pos < len(text):
+        if text.startswith("//", pos):
+            pos = text.find("\n", pos)
+            if pos == -1:
+                break
+            pos += 1
+            continue
+        if text.startswith("/*", pos):
+            end = text.find("*/", pos + 2)
+            if end == -1:
+                fail(f"unterminated block comment in {name}()")
+            pos = end + 2
+            continue
+        if text[pos] == "{":
+            brace += 1
+        elif text[pos] == "}":
+            brace -= 1
+            if brace == 0:
+                return text[match.start() : pos + 1]
+        pos += 1
+
+    fail(f"unterminated function body for {name}()")
+
+
+def reject_patterns_in_body(function_name: str, body: str, patterns: tuple[tuple[str, str], ...]) -> None:
+    for pattern, description in patterns:
+        if re.search(pattern, body):
+            fail(f"{function_name} violates {HOT_PATH_RESOLVER_CHAIN_GUARDRAIL}: {description}")
+
+
+def validate_function_scope(source: str, function_name: str, patterns: tuple[tuple[str, str], ...]) -> str:
+    body = strip_cpp_comments(extract_function(source, function_name))
+    reject_patterns_in_body(function_name, body, patterns)
+    return body
+
+
+HOT_PATH_RESOLVER_CHAIN_FORBIDDEN_PATTERNS = (
+    (r"\bParseUltimateRuntimeConfigPayload\s*\(", "ParseUltimateRuntimeConfigPayload"),
+    (r"\bMaterializeRuntimeConfigCandidateFromParsedPayload\b", "MaterializeRuntimeConfigCandidateFromParsedPayload"),
+    (r"\bInitializePublishedRuntimeConfigState\b", "InitializePublishedRuntimeConfigState"),
+    (r"\bDecideRuntimeConfigActivation\b", "DecideRuntimeConfigActivation"),
+    (r"\bPublishRuntimeConfigState\b", "PublishRuntimeConfigState"),
+    (r"\bRuntimeConfigCandidateState\b", "RuntimeConfigCandidateState"),
+    (r"\bRuntimeConfigCandidateStatus\b", "RuntimeConfigCandidateStatus"),
+    (r"\bkPhase7AD3GlobalParseResult\.status\b", "kPhase7AD3GlobalParseResult.status"),
+    (r"\bParseStatus\b", "ParseStatus"),
+    (r"\bParse\b", "Parse"),
+    (r"\bCandidate\b", "Candidate"),
+    (r"\bcandidate\b", "candidate"),
+    (r"\bdecision\b", "decision"),
+    (r"\bstatus\b", "status"),
+    (r"\bload\b", "load"),
+    (r"\bstorage\b", "storage"),
+    (r"\bwrite\b", "write"),
+    (r"\bWebSerial\b", "WebSerial"),
+    (r"\bflash\b", "flash"),
+    (r"\bsource\b", "source"),
+)
+
+GET_ACTIVE_RUNTIME_CONFIG_STATE_FORBIDDEN_PATTERNS = (
+    (r"\bParseUltimateRuntimeConfigPayload\s*\(", "ParseUltimateRuntimeConfigPayload"),
+    (r"\bMaterializeRuntimeConfigCandidateFromParsedPayload\b", "MaterializeRuntimeConfigCandidateFromParsedPayload"),
+    (r"\bInitializePublishedRuntimeConfigState\b", "InitializePublishedRuntimeConfigState"),
+    (r"\bDecideRuntimeConfigActivation\b", "DecideRuntimeConfigActivation"),
+    (r"\bPublishRuntimeConfigState\b", "PublishRuntimeConfigState"),
+    (r"\bRuntimeConfigCandidateState\b", "RuntimeConfigCandidateState"),
+    (r"\bRuntimeConfigCandidateStatus\b", "RuntimeConfigCandidateStatus"),
+    (r"\bkPhase7AD3GlobalParseResult\.status\b", "kPhase7AD3GlobalParseResult.status"),
+    (r"\bParseStatus\b", "ParseStatus"),
+    (r"\bParse\b", "Parse"),
+    (r"\bCandidate\b", "Candidate"),
+    (r"\bcandidate\b", "candidate"),
+    (r"\bdecision\b", "decision"),
+    (r"\bload\b", "load"),
+    (r"\bstorage\b", "storage"),
+    (r"\bwrite\b", "write"),
+    (r"\bWebSerial\b", "WebSerial"),
+    (r"\bflash\b", "flash"),
+)
+
+
 def validate_ultimate_source_guardrail() -> None:
-    active_source = strip_cpp_comments(read_required(ULTIMATE_PATH))
+    source = read_required(ULTIMATE_PATH)
+    active_source = strip_cpp_comments(source)
+
+    validate_function_scope(source, "UpdateAnalogOutputs", HOT_PATH_RESOLVER_CHAIN_FORBIDDEN_PATTERNS)
+    validate_function_scope(source, "ResolveActiveRuntimeConfig", HOT_PATH_RESOLVER_CHAIN_FORBIDDEN_PATTERNS)
+    validate_function_scope(source, "GetActiveRuntimeConfigState", GET_ACTIVE_RUNTIME_CONFIG_STATE_FORBIDDEN_PATTERNS)
+
     for token in FORBIDDEN_ULTIMATE_TOKENS:
         if token in active_source:
             fail(f"Ultimate.cpp active source contains forbidden hot-path/transport token: {token}")

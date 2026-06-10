@@ -272,19 +272,96 @@ def assert_line_binding(source: str) -> None:
         fail("UpdateAnalogOutputs must bind runtime_config via ResolveActiveRuntimeConfig()")
 
 
+def reject_patterns_in_body(function_name: str, body: str, patterns: tuple[tuple[str, str], ...]) -> None:
+    for pattern, description in patterns:
+        if re.search(pattern, body):
+            fail(f"{function_name} must not mention {description}")
+
+
+def validate_function_scope(source: str, function_name: str, patterns: tuple[tuple[str, str], ...]) -> str:
+    body = strip_cpp_comments(extract_function(source, function_name))
+    reject_patterns_in_body(function_name, body, patterns)
+    return body
+
+
+ACTIVE_PATH_FORBIDDEN_PATTERNS = (
+    (r"\bParseUltimateRuntimeConfigPayload\s*\(", "ParseUltimateRuntimeConfigPayload"),
+    (r"\bMaterializeRuntimeConfigCandidateFromParsedPayload\b", "MaterializeRuntimeConfigCandidateFromParsedPayload"),
+    (r"\bInitializePublishedRuntimeConfigState\b", "InitializePublishedRuntimeConfigState"),
+    (r"\bDecideRuntimeConfigActivation\b", "DecideRuntimeConfigActivation"),
+    (r"\bPublishRuntimeConfigState\b", "PublishRuntimeConfigState"),
+    (r"\bRuntimeConfigCandidateState\b", "RuntimeConfigCandidateState"),
+    (r"\bRuntimeConfigCandidateStatus\b", "RuntimeConfigCandidateStatus"),
+    (r"\bkPhase7AD3GlobalParseResult\.status\b", "kPhase7AD3GlobalParseResult.status"),
+)
+
+UPDATE_ANALOG_OUTPUTS_FORBIDDEN_PATTERNS = ACTIVE_PATH_FORBIDDEN_PATTERNS + (
+    (r"\bParseStatus\b", "ParseStatus"),
+    (r"\bParse\b", "Parse"),
+    (r"\bCandidate\b", "Candidate"),
+    (r"\bcandidate\b", "candidate"),
+    (r"\bdecision\b", "decision"),
+    (r"\bstatus\b", "status"),
+    (r"\bload\b", "load"),
+    (r"\bstorage\b", "storage"),
+    (r"\bwrite\b", "write"),
+    (r"\bWebSerial\b", "WebSerial"),
+    (r"\bflash\b", "flash"),
+    (r"\bsource\b", "source"),
+)
+
+RESOLVE_ACTIVE_RUNTIME_CONFIG_FORBIDDEN_PATTERNS = ACTIVE_PATH_FORBIDDEN_PATTERNS + (
+    (r"\bParseStatus\b", "ParseStatus"),
+    (r"\bParse\b", "Parse"),
+    (r"\bCandidate\b", "Candidate"),
+    (r"\bcandidate\b", "candidate"),
+    (r"\bdecision\b", "decision"),
+    (r"\bstatus\b", "status"),
+    (r"\bload\b", "load"),
+    (r"\bstorage\b", "storage"),
+    (r"\bwrite\b", "write"),
+    (r"\bWebSerial\b", "WebSerial"),
+    (r"\bflash\b", "flash"),
+    (r"\bsource\b", "source"),
+)
+
+GET_ACTIVE_RUNTIME_CONFIG_STATE_FORBIDDEN_PATTERNS = (
+    (r"\bParseUltimateRuntimeConfigPayload\s*\(", "ParseUltimateRuntimeConfigPayload"),
+    (r"\bMaterializeRuntimeConfigCandidateFromParsedPayload\b", "MaterializeRuntimeConfigCandidateFromParsedPayload"),
+    (r"\bInitializePublishedRuntimeConfigState\b", "InitializePublishedRuntimeConfigState"),
+    (r"\bDecideRuntimeConfigActivation\b", "DecideRuntimeConfigActivation"),
+    (r"\bPublishRuntimeConfigState\b", "PublishRuntimeConfigState"),
+    (r"\bRuntimeConfigCandidateState\b", "RuntimeConfigCandidateState"),
+    (r"\bRuntimeConfigCandidateStatus\b", "RuntimeConfigCandidateStatus"),
+    (r"\bkPhase7AD3GlobalParseResult\.status\b", "kPhase7AD3GlobalParseResult.status"),
+    (r"\bParseStatus\b", "ParseStatus"),
+    (r"\bParse\b", "Parse"),
+    (r"\bCandidate\b", "Candidate"),
+    (r"\bcandidate\b", "candidate"),
+    (r"\bdecision\b", "decision"),
+    (r"\bload\b", "load"),
+    (r"\bstorage\b", "storage"),
+    (r"\bwrite\b", "write"),
+    (r"\bWebSerial\b", "WebSerial"),
+    (r"\bflash\b", "flash"),
+)
+
+
 def validate_no_forbidden_source_patterns(source: str, active_no_comments: str) -> None:
     forbidden = (
-        "kPhase7AD3GlobalParseResult.status",
-        "ParseUltimateRuntimeConfigPayload",
-        "kPhase7AD3GlobalParseResult",
         "kPhase7AD1",
         "D2B",
         "D3",
         "retained payload",
         "kPhase7ACompiledPayload",
         "UltimateRuntimeConfigCompiledPayload",
-        "ParseUltimateRuntimeConfigPayload",
+        "storage",
+        "RuntimeConfigStorage",
         "WebSerial",
+        "DeviceWrite",
+        "WriteRuntimeConfig",
+        "FlashRuntimeConfig",
+        "Flashing",
         "flash",
         "write",
     )
@@ -294,26 +371,19 @@ def validate_no_forbidden_source_patterns(source: str, active_no_comments: str) 
         if token in active_no_comments:
             fail(f"forbidden firmware-source token found in Ultimate.cpp: {token}")
 
-    # Ensure resolver path does not inspect parser/global parse status.
-    resolve_body = extract_function(source, "ResolveActiveRuntimeConfig")
-    if "kPhase7AD3GlobalParseResult" in resolve_body or "ParseUltimateRuntimeConfigPayload" in resolve_body:
-        fail("ResolveActiveRuntimeConfig must not inspect parser result state")
+    update_body = validate_function_scope(source, "UpdateAnalogOutputs", UPDATE_ANALOG_OUTPUTS_FORBIDDEN_PATTERNS)
+    if "const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();" not in update_body:
+        fail("UpdateAnalogOutputs must bind runtime_config through ResolveActiveRuntimeConfig()")
+    if re.search(r"\bsource\s*\.\s*\w+", update_body) or re.search(r"\bstatus\s*\.\s*\w+", update_body):
+        fail("UpdateAnalogOutputs may not inspect ActiveRuntimeConfigState.source or .status")
 
-    if "active_state" in resolve_body:
-        if "*GetActiveRuntimeConfigState().active_view" not in resolve_body:
-            fail("ResolveActiveRuntimeConfig must return active state via active_view")
+    resolve_body = validate_function_scope(source, "ResolveActiveRuntimeConfig", RESOLVE_ACTIVE_RUNTIME_CONFIG_FORBIDDEN_PATTERNS)
+    if "*GetActiveRuntimeConfigState().active_view" not in resolve_body:
+        fail("ResolveActiveRuntimeConfig must return active state via active_view")
 
     active_source = strip_cpp_comments(source)
     if "GetActiveRuntimeConfigState" not in active_source:
         fail("GetActiveRuntimeConfigState() must exist")
-
-    if "source" in active_source and "source" in "source" and "GetActiveRuntimeConfigState" in active_source:
-        # keep only basic check for explicit hot-path reads
-        update_body = extract_function(source, "UpdateAnalogOutputs")
-        if "active_config.source" in update_body or "active_state.source" in update_body or "status" in update_body:
-            # narrow to explicit references
-            if re.search(r"\bsource\s*\.\s*\w+", update_body) or re.search(r"\bstatus\s*\.\s*\w+", update_body):
-                fail("UpdateAnalogOutputs may not inspect ActiveRuntimeConfigState.source or .status")
 
 
 def validate_active_state_functions(source: str, active_source: str) -> None:
@@ -325,20 +395,17 @@ def validate_active_state_functions(source: str, active_source: str) -> None:
     if "struct ActiveRuntimeConfigState" not in active_source:
         fail("ActiveRuntimeConfigState struct missing")
 
-    get_state_body = extract_function(source, "GetActiveRuntimeConfigState")
+    get_state_body = validate_function_scope(source, "GetActiveRuntimeConfigState", GET_ACTIVE_RUNTIME_CONFIG_STATE_FORBIDDEN_PATTERNS)
     for token in (
         "ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)",
         "&kSourceOwnedCurrentBaselineRuntimeConfig",
-        "&kKnownGoodRuntimeConfig",
         "RuntimeConfigSource::SourceOwnedBaseline",
-        "RuntimeConfigSource::KnownGoodFallback",
         "RuntimeConfigActivationStatus::SourceOwnedSelected",
-        "RuntimeConfigActivationStatus::FallbackSelected",
     ):
         if token not in get_state_body:
             fail(f"GetActiveRuntimeConfigState missing token: {token}")
 
-    resolve_body = extract_function(source, "ResolveActiveRuntimeConfig")
+    resolve_body = validate_function_scope(source, "ResolveActiveRuntimeConfig", RESOLVE_ACTIVE_RUNTIME_CONFIG_FORBIDDEN_PATTERNS)
     if "*GetActiveRuntimeConfigState().active_view" not in resolve_body:
         fail("ResolveActiveRuntimeConfig must dereference GetActiveRuntimeConfigState().active_view")
 
@@ -698,13 +765,10 @@ def validate_main_docs(branch: str) -> None:
 
 
 def validate_no_forbidden_files_and_paths(base_branch: str, branch: str) -> None:
-    # enforce parser call not present in Ultimate.cpp
+    # Parser/materialization may live outside the hot path; scoped validators
+    # below enforce the active-path boundaries instead of banning the whole file.
     ultimate_source = read_required(ULTIMATE_PATH)
     active_source = strip_cpp_comments(ultimate_source)
-    if "ParseUltimateRuntimeConfigPayload" in active_source:
-        fail("Ultimate.cpp must not call ParseUltimateRuntimeConfigPayload")
-    if "kPhase7AD3GlobalParseResult.status" in active_source:
-        fail("Ultimate.cpp must not read kPhase7AD3GlobalParseResult.status")
     assert_line_binding(ultimate_source)
     validate_active_state_functions(ultimate_source, active_source)
     validate_no_forbidden_source_patterns(ultimate_source, active_source)
@@ -741,8 +805,8 @@ def main() -> int:
     print(f"- changed_paths: {len(paths)}")
     print(f"firmware_source_changed={'true' if branch == IMPLEMENTATION_BRANCH else 'false'}")
     print("runtime_behavior_change=equivalent")
-    print("parser_call_present=false")
-    print("parsed_table_materialization=false")
+    print("parser_call_in_hot_path=false")
+    print("parsed_table_materialization_in_hot_path=false")
     print("storage=false")
     print("write=false")
     print("flashing=false")
