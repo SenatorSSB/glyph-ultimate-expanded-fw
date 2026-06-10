@@ -88,6 +88,22 @@ artifacts unless a specific packet says otherwise.
   report for the candidate-state scaffold branch.
 - `fixtures/candidate_state_materialization_scaffold_build_report_2026-06-10.json` -
   machine-readable build report metadata for this branch.
+- `diagnostic_parsed_candidate_present_source_owned_published.md` - hardware-test
+  diagnostic branch packet: parsed candidate machinery is present/materialized,
+  but active publication is forced to source-owned baseline.
+- `fixtures/diagnostic_parsed_candidate_present_source_owned_published.json` -
+  machine-readable diagnostic source-boundary fixture.
+- `diagnostic_parsed_candidate_present_source_owned_published_build_report_2026-06-10.md` -
+  build report packet for the parsed-candidate-present/source-owned-published
+  diagnostic branch.
+- `fixtures/diagnostic_parsed_candidate_present_source_owned_published_build_report_2026-06-10.json` -
+  machine-readable build report metadata for the diagnostic branch.
+- `diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.md` -
+  `HARDWARE_PASS` result for the parsed-candidate-present/source-owned-published
+  diagnostic branch; parsed candidate presence is safe only when source-owned
+  baseline remains published active view.
+- `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.json` -
+  machine-readable hardware result metadata for the diagnostic branch.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -133,6 +149,10 @@ artifacts unless a specific packet says otherwise.
   Candidate state is not consumed by `ResolveActiveRuntimeConfig()` or
   `UpdateAnalogOutputs(...)`; output generation remains limited to the stable
   selected `RuntimeConfigView`.
+- The parsed-candidate-present/source-owned-published diagnostic branch keeps
+  parsed candidate machinery present and materialized, but publishes only
+  `kSourceOwnedCurrentBaselineRuntimeConfig` as the active view. It records no
+  hardware result; Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

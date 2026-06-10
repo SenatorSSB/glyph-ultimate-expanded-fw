@@ -1,0 +1,37 @@
+{
+  "schema_name": "glyph_diagnostic_parsed_candidate_present_source_owned_published",
+  "status": "hardware_test_diagnostic_build",
+  "branch": "runtime-config-diagnostic-parsed-candidate-present-source-owned-published",
+  "baseline_branch": "configurator",
+  "previous_failing_branch": "runtime-config-parsed-candidate-opt-in-diagnostic-batch",
+  "previous_hardware_result": "HARDWARE_FAIL",
+  "previous_operator_report": "tested, fails. disconnects happen",
+  "parsed_candidate_opt_in_activation_safe_for_merge": false,
+  "source_owned_static_diagnostic_parsed_payload_present": true,
+  "candidate_parser_bridge_present": true,
+  "candidate_materialization_present": true,
+  "candidate_equivalence_validation_present": true,
+  "candidate_view_published_active": false,
+  "published_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "resolve_active_runtime_config_allowed_inputs": [
+    "ActiveRuntimeConfigState.active_view"
+  ],
+  "update_analog_outputs_forbidden_inputs": [
+    "candidate",
+    "parser",
+    "decision",
+    "status",
+    "load",
+    "storage",
+    "write",
+    "flash"
+  ],
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "NOT_TESTED"
+}
+
