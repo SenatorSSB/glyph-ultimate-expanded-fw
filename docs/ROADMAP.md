@@ -163,6 +163,15 @@ architecture step after that baseline. Candidate state remains pre-publication
 scaffolding only; `ResolveActiveRuntimeConfig()` and `UpdateAnalogOutputs(...)`
 continue to consume only the stable selected `RuntimeConfigView`.
 
+The parsed-candidate-present/source-owned-published diagnostic is a hardware
+test branch (`diagnostic_parsed_candidate_present_source_owned_published`), not
+an activation repair. It keeps parser bridge, candidate
+materialization, and equivalence validation present while forcing active
+publication to `kSourceOwnedCurrentBaselineRuntimeConfig`. Candidate active
+publication remains unsafe after the
+`runtime-config-parsed-candidate-opt-in-diagnostic-batch` hardware failure and
+must not merge without a separate source-backed, hardware-gated repair.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

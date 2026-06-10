@@ -67,6 +67,18 @@ packets remain under `docs/calibration/`.
   bounded candidate state and helper scaffolding. Candidate state is not active,
   is not consumed by `ResolveActiveRuntimeConfig()` or
   `UpdateAnalogOutputs(...)`, and does not change active output behavior.
+- Parsed candidate opt-in activation on
+  `runtime-config-parsed-candidate-opt-in-diagnostic-batch` is unsafe for merge:
+  operator hardware report was `HARDWARE_FAIL` with "tested, fails. disconnects
+  happen". Do not merge that implementation branch into `configurator`.
+- The diagnostic branch
+  `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
+  (`diagnostic_parsed_candidate_present_source_owned_published`)
+  is a hardware-test diagnostic: parsed candidate machinery is present,
+  initialized, materialized, and equivalence-validated, but the published active
+  view is forced to `kSourceOwnedCurrentBaselineRuntimeConfig`; candidate view is
+  not active. This branch records no hardware result yet, and Nunchuk remains
+  NOT_TESTED.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -157,6 +169,11 @@ engineering decisions.
 - Candidate runtime config state materialization scaffold is implemented in
   firmware source as inactive pre-publication scaffolding; output generation
   consumes only the selected active `RuntimeConfigView`.
+- Parsed-candidate-present/source-owned-published diagnostic source is intended
+  only to isolate parser/materialization/static candidate presence from active
+  candidate publication. It does not implement runtime-loaded config, storage,
+  WebSerial/device write, backend/config.pb write, firmware flashing automation,
+  or nunchuk validation.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

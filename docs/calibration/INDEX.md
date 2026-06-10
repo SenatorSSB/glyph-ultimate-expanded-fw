@@ -50,6 +50,14 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
+## Runtime Config Diagnostic Hardware Plans
+
+- `diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.md`
+  - hardware-test plan for the parsed-candidate-present/source-owned-published
+    diagnostic branch; all rows remain NOT_TESTED.
+- `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json`
+  - matching machine-readable hardware plan fixture; not a result.
+
 ## Official Configurator Corpus And Source Correction
 
 - `export_corpus/official_glyph_configurator_2026-06-06/manifest.json` -
