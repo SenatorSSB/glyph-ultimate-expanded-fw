@@ -174,12 +174,6 @@ DiagnosticSourceViewCandidatePublicationState InitializeDiagnosticSourceViewCand
     return state;
 }
 
-const DiagnosticSourceViewCandidatePublicationState& GetDiagnosticSourceViewCandidatePublicationState() {
-    static const DiagnosticSourceViewCandidatePublicationState state =
-        InitializeDiagnosticSourceViewCandidatePublicationState();
-    return state;
-}
-
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
@@ -557,25 +551,35 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
     outputs.leftStickY = direction_plus_a_point.y;
 }
 
+static_assert(
+    ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig),
+    "source-owned baseline runtime config must remain a valid fallback"
+);
+
+DiagnosticSourceViewCandidatePublicationState gDiagnosticSourceViewCandidatePublicationState =
+    InitializeDiagnosticSourceViewCandidatePublicationState();
+
+const ActiveRuntimeConfigState gActiveRuntimeConfigState = {
+    gDiagnosticSourceViewCandidatePublicationState.validated &&
+            gDiagnosticSourceViewCandidatePublicationState.equivalent_to_source_owned_baseline
+        ? &gDiagnosticSourceViewCandidatePublicationState.candidate.view
+        : &kSourceOwnedCurrentBaselineRuntimeConfig,
+    gDiagnosticSourceViewCandidatePublicationState.validated &&
+            gDiagnosticSourceViewCandidatePublicationState.equivalent_to_source_owned_baseline
+        ? RuntimeConfigSource::SourceViewCandidate
+        : RuntimeConfigSource::SourceOwnedBaseline,
+    gDiagnosticSourceViewCandidatePublicationState.validated &&
+            gDiagnosticSourceViewCandidatePublicationState.equivalent_to_source_owned_baseline
+        ? RuntimeConfigActivationStatus::CandidateViewSelected
+        : RuntimeConfigActivationStatus::FallbackSelected,
+};
+
+const DiagnosticSourceViewCandidatePublicationState& GetDiagnosticSourceViewCandidatePublicationState() {
+    return gDiagnosticSourceViewCandidatePublicationState;
+}
+
 const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
-    static_assert(
-        ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig),
-        "source-owned baseline runtime config must remain a valid fallback"
-    );
-    const DiagnosticSourceViewCandidatePublicationState &candidate_publication =
-        GetDiagnosticSourceViewCandidatePublicationState();
-    static const ActiveRuntimeConfigState state = {
-        candidate_publication.validated && candidate_publication.equivalent_to_source_owned_baseline
-            ? &candidate_publication.candidate.view
-            : &kSourceOwnedCurrentBaselineRuntimeConfig,
-        candidate_publication.validated && candidate_publication.equivalent_to_source_owned_baseline
-            ? RuntimeConfigSource::SourceViewCandidate
-            : RuntimeConfigSource::SourceOwnedBaseline,
-        candidate_publication.validated && candidate_publication.equivalent_to_source_owned_baseline
-            ? RuntimeConfigActivationStatus::CandidateViewSelected
-            : RuntimeConfigActivationStatus::FallbackSelected,
-    };
-    return state;
+    return gActiveRuntimeConfigState;
 }
 
 const RuntimeConfigView& ResolveActiveRuntimeConfig() {

@@ -35,6 +35,8 @@ Result: PASS.
 - Source-owned parsed diagnostic payload bytes are not present.
 - Candidate state is materialized from
   `kSourceOwnedCurrentBaselineRuntimeConfig`.
+- Source-view candidate materialization/publication is namespace-scope
+  initialized before active resolver use.
 - Candidate validation and source-owned equivalence validation are present.
 - Candidate active publication is enabled only after validation/equivalence
   success.
@@ -44,6 +46,9 @@ Result: PASS.
   `ResolveActiveRuntimeConfig()`.
 - `ResolveActiveRuntimeConfig()` dereferences only
   `GetActiveRuntimeConfigState().active_view`.
+- Active resolver chain:
+  `UpdateAnalogOutputs -> ResolveActiveRuntimeConfig -> GetActiveRuntimeConfigState -> gActiveRuntimeConfigState.active_view`.
+- Active resolver chain does not first-trigger candidate materialization.
 
 ## Artifact Notes
 
@@ -55,9 +60,9 @@ Local artifact observations:
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `.pio/build/glyph_mk6/firmware.uf2` | `ba519464a14f11909c8f85c7964e3a2b55db1747e8f53d05da1735979f13685f` |
-| `.pio/build/glyph_mk6/firmware.elf` | `f93d212caa80a4c40d17ce0b3f0bf06e8d2b766ffc32b73ff56461ab9314d00b` |
-| `.pio/build/glyph_mk6/firmware.bin` | `d9105e4137e848ce25c2e286ecf73851dc2db3355ae720f7b8f20f2afb67cb29` |
+| `.pio/build/glyph_mk6/firmware.uf2` | `0be16e660e3fa9b180201eb2630d77eb9a065b1c3312f8e1943e9bb8f5fef229` |
+| `.pio/build/glyph_mk6/firmware.elf` | `9f3124c17807ce5f383ef26d87005b9a373fc1844d421ee9cbee020590d90596` |
+| `.pio/build/glyph_mk6/firmware.bin` | `d761894b49e085dab6ff88cbd34b52ae1751dd4182d4ee3af80e09f9206caa28` |
 
 ## Hardware
 

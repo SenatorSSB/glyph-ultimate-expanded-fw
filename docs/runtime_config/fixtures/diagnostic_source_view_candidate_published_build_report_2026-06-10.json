@@ -12,23 +12,31 @@
   "source_owned_static_diagnostic_parsed_payload_present": false,
   "candidate_materialization_source": "kSourceOwnedCurrentBaselineRuntimeConfig",
   "candidate_materialization_present": true,
+  "candidate_materialization_namespace_scope_initialized": true,
+  "active_resolver_first_triggers_candidate_materialization": false,
   "candidate_state_validation_present": true,
   "candidate_equivalence_validation_present": true,
   "candidate_active_publication_enabled": true,
   "published_active_view_when_equivalent": "candidate.view",
   "fallback_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "active_resolver_chain": [
+    "UpdateAnalogOutputs",
+    "ResolveActiveRuntimeConfig",
+    "GetActiveRuntimeConfigState",
+    "gActiveRuntimeConfigState.active_view"
+  ],
   "artifact_hashes": [
     {
       "path": ".pio/build/glyph_mk6/firmware.uf2",
-      "sha256": "ba519464a14f11909c8f85c7964e3a2b55db1747e8f53d05da1735979f13685f"
+      "sha256": "0be16e660e3fa9b180201eb2630d77eb9a065b1c3312f8e1943e9bb8f5fef229"
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.elf",
-      "sha256": "f93d212caa80a4c40d17ce0b3f0bf06e8d2b766ffc32b73ff56461ab9314d00b"
+      "sha256": "9f3124c17807ce5f383ef26d87005b9a373fc1844d421ee9cbee020590d90596"
     },
     {
       "path": ".pio/build/glyph_mk6/firmware.bin",
-      "sha256": "d9105e4137e848ce25c2e286ecf73851dc2db3355ae720f7b8f20f2afb67cb29"
+      "sha256": "d761894b49e085dab6ff88cbd34b52ae1751dd4182d4ee3af80e09f9206caa28"
     }
   ],
   "artifact_hashes_are_checker_gate": false,

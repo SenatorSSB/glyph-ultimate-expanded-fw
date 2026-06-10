@@ -12,6 +12,8 @@
   "parse_ultimate_runtime_config_payload_called": false,
   "parsed_payload_bytes_used": false,
   "candidate_materialization_present": true,
+  "candidate_materialization_namespace_scope_initialized": true,
+  "active_resolver_first_triggers_candidate_materialization": false,
   "candidate_state_validation_present": true,
   "candidate_equivalence_validation_present": true,
   "candidate_active_publication_enabled": true,
@@ -19,6 +21,12 @@
   "fallback_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
   "resolve_active_runtime_config_allowed_inputs": [
     "ActiveRuntimeConfigState.active_view"
+  ],
+  "active_resolver_chain": [
+    "UpdateAnalogOutputs",
+    "ResolveActiveRuntimeConfig",
+    "GetActiveRuntimeConfigState",
+    "gActiveRuntimeConfigState.active_view"
   ],
   "update_analog_outputs_forbidden_inputs": [
     "candidate",

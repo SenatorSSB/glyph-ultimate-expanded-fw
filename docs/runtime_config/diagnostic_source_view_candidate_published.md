@@ -32,12 +32,15 @@ Prior evidence:
 - Parsed payload bytes are not present or used.
 - Source-owned parsed diagnostic payload bytes are not present or used.
 - Candidate state is materialized from kSourceOwnedCurrentBaselineRuntimeConfig.
+- Source-view candidate materialization/publication is namespace-scope
+  initialized before active resolver use.
 - Candidate state is validated with `ValidateRuntimeConfigCandidateState(...)`.
 - Candidate points/tables are validated equivalent to
   `kSourceOwnedCurrentBaselineRuntimeConfig`.
 - Candidate active publication is enabled only after materialization, validation, and source-owned equivalence pass.
 - Published active view is candidate.view when the candidate is equivalent.
 - Published active view falls back to kSourceOwnedCurrentBaselineRuntimeConfig when validation or equivalence fails.
+- Active resolver chain does not first-trigger candidate materialization.
 - ResolveActiveRuntimeConfig() dereferences only the stable published ActiveRuntimeConfigState.active_view.
 - UpdateAnalogOutputs(...) binds runtime config through
   ResolveActiveRuntimeConfig() and does not read candidate, parser, decision,
@@ -45,10 +48,10 @@ Prior evidence:
 - `UpdateDigitalOutputs(...)` remains unchanged relative to `configurator`.
 - RF5/RF6/LT6 expressions remain preserved.
 
-Expected runtime chain:
+Expected active resolver chain:
 
 ```text
-source-owned baseline -> RAM candidate materialization -> validation/equivalence -> active_view publication -> UpdateAnalogOutputs
+UpdateAnalogOutputs -> ResolveActiveRuntimeConfig -> GetActiveRuntimeConfigState -> gActiveRuntimeConfigState.active_view
 ```
 
 ## Expected Diagnostic State

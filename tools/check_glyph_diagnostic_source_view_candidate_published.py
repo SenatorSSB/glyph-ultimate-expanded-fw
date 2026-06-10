@@ -259,6 +259,30 @@ def forbid_token(text: str, token: str, label: str) -> None:
         fail(f"{label} contains forbidden token: {token}")
 
 
+def called_function_names(function_body: str, function_names: set[str]) -> set[str]:
+    body = strip_cpp_comments(function_body)
+    return {
+        name
+        for name in function_names
+        if re.search(rf"\b{re.escape(name)}\s*\(", body)
+    }
+
+
+def reachable_functions(functions: dict[str, str], start: str) -> set[str]:
+    seen: set[str] = set()
+    pending = [start]
+    function_names = set(functions)
+    while pending:
+        name = pending.pop()
+        if name in seen:
+            continue
+        seen.add(name)
+        for called in called_function_names(functions[name], function_names):
+            if called != name and called not in seen:
+                pending.append(called)
+    return seen
+
+
 def validate_source(source: str, branch: str) -> None:
     active_source = strip_cpp_comments(source)
     for token in (
@@ -280,6 +304,8 @@ def validate_source(source: str, branch: str) -> None:
         "ValidateRuntimeConfigCandidateState",
         "RuntimeConfigViewsHaveEquivalentPoints",
         "GetDiagnosticSourceViewCandidatePublicationState",
+        "gDiagnosticSourceViewCandidatePublicationState",
+        "gActiveRuntimeConfigState",
     ):
         require_token(active_source, token, "Ultimate.cpp diagnostic source")
 
@@ -294,22 +320,100 @@ def validate_source(source: str, branch: str) -> None:
     ):
         require_token(materialize_body, token, "candidate materialization")
 
+    get_diagnostic_body = strip_cpp_comments(extract_function(source, "GetDiagnosticSourceViewCandidatePublicationState"))
+    if "return gDiagnosticSourceViewCandidatePublicationState;" not in get_diagnostic_body:
+        fail("GetDiagnosticSourceViewCandidatePublicationState must return namespace-scope diagnostic state only")
+    if "static" in get_diagnostic_body:
+        fail("GetDiagnosticSourceViewCandidatePublicationState must not use function-local static initialization")
+    for forbidden in (
+        "InitializeDiagnosticSourceViewCandidatePublicationState",
+        "MaterializeRuntimeConfigCandidateFromSourceView",
+        "RuntimeConfigViewsHaveEquivalentPoints",
+        "ValidateRuntimeConfigCandidateState",
+    ):
+        forbid_token(get_diagnostic_body, forbidden, "GetDiagnosticSourceViewCandidatePublicationState")
+
     get_state_body = strip_cpp_comments(extract_function(source, "GetActiveRuntimeConfigState"))
+    if "return gActiveRuntimeConfigState;" not in get_state_body:
+        fail("GetActiveRuntimeConfigState must return namespace-scope active state only")
+    if "static" in get_state_body:
+        fail("GetActiveRuntimeConfigState must not use function-local static initialization")
+    for forbidden in (
+        "GetDiagnosticSourceViewCandidatePublicationState",
+        "InitializeDiagnosticSourceViewCandidatePublicationState",
+        "MaterializeRuntimeConfigCandidateFromSourceView",
+        "RuntimeConfigViewsHaveEquivalentPoints",
+        "ValidateRuntimeConfigCandidateState",
+        "gDiagnosticSourceViewCandidatePublicationState",
+        "candidate",
+        "Candidate",
+        "validated",
+        "equivalent_to_source_owned_baseline",
+    ):
+        forbid_token(get_state_body, forbidden, "GetActiveRuntimeConfigState")
+
     for token in (
-        "candidate_publication.validated && candidate_publication.equivalent_to_source_owned_baseline",
-        "? &candidate_publication.candidate.view",
+        "DiagnosticSourceViewCandidatePublicationState gDiagnosticSourceViewCandidatePublicationState =",
+        "InitializeDiagnosticSourceViewCandidatePublicationState();",
+        "const ActiveRuntimeConfigState gActiveRuntimeConfigState =",
+        "gDiagnosticSourceViewCandidatePublicationState.validated &&",
+        "gDiagnosticSourceViewCandidatePublicationState.equivalent_to_source_owned_baseline",
+        "? &gDiagnosticSourceViewCandidatePublicationState.candidate.view",
         ": &kSourceOwnedCurrentBaselineRuntimeConfig",
         "? RuntimeConfigSource::SourceViewCandidate",
         ": RuntimeConfigSource::SourceOwnedBaseline",
         "? RuntimeConfigActivationStatus::CandidateViewSelected",
         ": RuntimeConfigActivationStatus::FallbackSelected",
     ):
-        require_token(get_state_body, token, "GetActiveRuntimeConfigState")
+        require_token(active_source, token, "namespace-scope active publication")
 
     resolve_body = strip_cpp_comments(extract_function(source, "ResolveActiveRuntimeConfig"))
     resolve_compact = re.sub(r"\s+", "", strip_cpp_comments(resolve_body))
     if resolve_compact != "ResolveActiveRuntimeConfig(){return*GetActiveRuntimeConfigState().active_view;}":
         fail("ResolveActiveRuntimeConfig must only dereference GetActiveRuntimeConfigState().active_view")
+
+    functions = {
+        name: strip_cpp_comments(extract_function(source, name))
+        for name in (
+            "ResolveActiveRuntimeConfig",
+            "GetActiveRuntimeConfigState",
+            "GetDiagnosticSourceViewCandidatePublicationState",
+            "InitializeDiagnosticSourceViewCandidatePublicationState",
+            "MaterializeRuntimeConfigCandidateFromSourceView",
+            "RuntimeConfigViewsHaveEquivalentPoints",
+            "ValidateRuntimeConfigCandidateState",
+        )
+    }
+    reachable_from_resolver = reachable_functions(functions, "ResolveActiveRuntimeConfig")
+    expected_chain = {"ResolveActiveRuntimeConfig", "GetActiveRuntimeConfigState"}
+    if reachable_from_resolver != expected_chain:
+        fail(
+            "ResolveActiveRuntimeConfig reachable chain must be "
+            "ResolveActiveRuntimeConfig -> GetActiveRuntimeConfigState only; got "
+            + ", ".join(sorted(reachable_from_resolver))
+        )
+    for forbidden in (
+        "InitializeDiagnosticSourceViewCandidatePublicationState",
+        "MaterializeRuntimeConfigCandidateFromSourceView",
+        "RuntimeConfigViewsHaveEquivalentPoints",
+        "ValidateRuntimeConfigCandidateState",
+    ):
+        if forbidden in reachable_from_resolver:
+            fail(f"ResolveActiveRuntimeConfig must not reach {forbidden}")
+    for name in reachable_from_resolver:
+        body = functions[name]
+        if "static" in body and any(
+            token in body
+            for token in (
+                "candidate",
+                "Candidate",
+                "DiagnosticSourceViewCandidatePublicationState",
+                "InitializeDiagnosticSourceViewCandidatePublicationState",
+                "MaterializeRuntimeConfigCandidateFromSourceView",
+                "RuntimeConfigViewsHaveEquivalentPoints",
+            )
+        ):
+            fail(f"{name} has function-local static candidate/materialization/publication state")
 
     update_body = strip_cpp_comments(extract_function(source, "UpdateAnalogOutputs"))
     if "const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();" not in update_body:
@@ -369,6 +473,8 @@ def validate_diagnostic_fixture(payload: dict[str, Any]) -> None:
         "parse_ultimate_runtime_config_payload_called": False,
         "parsed_payload_bytes_used": False,
         "candidate_materialization_present": True,
+        "candidate_materialization_namespace_scope_initialized": True,
+        "active_resolver_first_triggers_candidate_materialization": False,
         "candidate_state_validation_present": True,
         "candidate_equivalence_validation_present": True,
         "candidate_active_publication_enabled": True,
@@ -385,6 +491,14 @@ def validate_diagnostic_fixture(payload: dict[str, Any]) -> None:
     for key, value in expected.items():
         if payload.get(key) != value:
             fail(f"diagnostic fixture {key!r} mismatch: expected {value!r}, got {payload.get(key)!r}")
+    expected_chain = [
+        "UpdateAnalogOutputs",
+        "ResolveActiveRuntimeConfig",
+        "GetActiveRuntimeConfigState",
+        "gActiveRuntimeConfigState.active_view",
+    ]
+    if payload.get("active_resolver_chain") != expected_chain:
+        fail(f"diagnostic fixture active_resolver_chain mismatch: {payload.get('active_resolver_chain')!r}")
 
 
 def validate_build_report_fixture(payload: dict[str, Any], report_text: str) -> None:
@@ -398,6 +512,8 @@ def validate_build_report_fixture(payload: dict[str, Any], report_text: str) -> 
         "source_owned_static_diagnostic_parsed_payload_present": False,
         "candidate_materialization_source": "kSourceOwnedCurrentBaselineRuntimeConfig",
         "candidate_materialization_present": True,
+        "candidate_materialization_namespace_scope_initialized": True,
+        "active_resolver_first_triggers_candidate_materialization": False,
         "candidate_state_validation_present": True,
         "candidate_equivalence_validation_present": True,
         "candidate_active_publication_enabled": True,
@@ -411,11 +527,21 @@ def validate_build_report_fixture(payload: dict[str, Any], report_text: str) -> 
     for key, value in expected.items():
         if payload.get(key) != value:
             fail(f"build report fixture {key!r} mismatch: expected {value!r}, got {payload.get(key)!r}")
+    expected_chain = [
+        "UpdateAnalogOutputs",
+        "ResolveActiveRuntimeConfig",
+        "GetActiveRuntimeConfigState",
+        "gActiveRuntimeConfigState.active_view",
+    ]
+    if payload.get("active_resolver_chain") != expected_chain:
+        fail(f"build report fixture active_resolver_chain mismatch: {payload.get('active_resolver_chain')!r}")
     if not isinstance(payload.get("artifact_hashes"), list):
         fail("build report fixture artifact_hashes must be a list")
     require_phrase(report_text, "Canonical command: pio run -e glyph_mk6", "build report")
     require_phrase(report_text, "Artifact hashes are local observations only, not checker gates.", "build report")
     require_phrase(report_text, "`artifact_hashes_are_checker_gate`: `false`", "build report")
+    require_phrase(report_text, "Source-view candidate materialization/publication is namespace-scope initialized", "build report")
+    require_phrase(report_text, "Active resolver chain does not first-trigger candidate materialization", "build report")
     require_phrase(report_text, "No hardware result is claimed", "build report")
     require_phrase(report_text, "Nunchuk remains NOT_TESTED", "build report")
 
@@ -485,9 +611,11 @@ def validate_docs_and_fixtures() -> None:
         "Parser payload activation is disabled and absent.",
         "ParseUltimateRuntimeConfigPayload(...) is not called.",
         "Candidate state is materialized from kSourceOwnedCurrentBaselineRuntimeConfig.",
+        "Source-view candidate materialization/publication is namespace-scope initialized",
         "Candidate active publication is enabled only after materialization, validation, and source-owned equivalence pass.",
         "Published active view is candidate.view when the candidate is equivalent.",
         "Published active view falls back to kSourceOwnedCurrentBaselineRuntimeConfig",
+        "Active resolver chain does not first-trigger candidate materialization.",
         "ResolveActiveRuntimeConfig() dereferences only the stable published ActiveRuntimeConfigState.active_view.",
         "UpdateAnalogOutputs(...) binds runtime config through ResolveActiveRuntimeConfig()",
         "No hardware result is claimed by this packet.",
