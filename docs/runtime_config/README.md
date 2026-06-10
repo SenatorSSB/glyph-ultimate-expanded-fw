@@ -88,6 +88,16 @@ artifacts unless a specific packet says otherwise.
   report for the candidate-state scaffold branch.
 - `fixtures/candidate_state_materialization_scaffold_build_report_2026-06-10.json` -
   machine-readable build report metadata for this branch.
+- `parsed_candidate_opt_in_diagnostic_batch.md` - source-owned parsed/candidate
+  opt-in diagnostic batch; parsed candidate activation is enabled only through
+  the pre-publication decision/publication boundary and requires hardware test
+  before merge.
+- `fixtures/parsed_candidate_opt_in_diagnostic_batch.json` - machine-readable
+  fixture for the parsed candidate opt-in diagnostic batch.
+- `parsed_candidate_opt_in_diagnostic_batch_build_report_2026-06-10.md` - build
+  report for the parsed candidate opt-in diagnostic batch.
+- `fixtures/parsed_candidate_opt_in_diagnostic_batch_build_report_2026-06-10.json` -
+  machine-readable build report metadata for this branch.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -133,7 +143,12 @@ artifacts unless a specific packet says otherwise.
   Candidate state is not consumed by `ResolveActiveRuntimeConfig()` or
   `UpdateAnalogOutputs(...)`; output generation remains limited to the stable
   selected `RuntimeConfigView`.
+- Parsed candidate opt-in diagnostic activation is source-owned/static and
+  hardware-test-ready only on
+  `runtime-config-parsed-candidate-opt-in-diagnostic-batch`; it is not
+  runtime-loaded config and no hardware result is recorded in this packet.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.
 - Nunchuk validation is not claimed.
+- Nunchuk remains NOT_TESTED.

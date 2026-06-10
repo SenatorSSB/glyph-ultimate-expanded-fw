@@ -49,6 +49,12 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   - matching machine-readable Phase 7A activation hardware failure fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
+- `parsed_candidate_opt_in_diagnostic_batch_hardware_plan_2026-06-10.md` -
+  hardware-test plan for the parsed candidate opt-in diagnostic batch; all rows
+  are NOT_TESTED and no hardware result is recorded.
+- `fixtures/parsed_candidate_opt_in_diagnostic_batch_hardware_plan_2026-06-10.json`
+  - matching hardware-plan fixture with all rows NOT_TESTED.
+  Nunchuk remains NOT_TESTED.
 
 ## Official Configurator Corpus And Source Correction
 
@@ -217,6 +223,16 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
   read-only checker for the root-cause analysis packet, fixture, and diagnostic
   matrix.
+- `docs/runtime_config/parsed_candidate_opt_in_diagnostic_batch.md` -
+  source-owned parsed/candidate opt-in activation diagnostic packet; activation
+  goes through the decision/publication boundary and requires hardware test
+  before merge.
+- `docs/runtime_config/fixtures/parsed_candidate_opt_in_diagnostic_batch.json` -
+  machine-readable parsed candidate opt-in diagnostic fixture.
+- `docs/runtime_config/parsed_candidate_opt_in_diagnostic_batch_build_report_2026-06-10.md` -
+  build report for the parsed candidate opt-in diagnostic batch.
+- `docs/runtime_config/fixtures/parsed_candidate_opt_in_diagnostic_batch_build_report_2026-06-10.json` -
+  matching build-report fixture.
 - `docs/runtime_config/fixtures/phase7a_compiled_activation_failure_analysis_2026-06-08.json`
   - machine-readable failure-analysis fixture.
 - `tools/check_glyph_phase7a_compiled_activation_failure_analysis.py` -

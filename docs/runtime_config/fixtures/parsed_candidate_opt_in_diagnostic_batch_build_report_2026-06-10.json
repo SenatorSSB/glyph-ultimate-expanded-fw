@@ -1,0 +1,43 @@
+{
+  "schema_name": "glyph_parsed_candidate_opt_in_diagnostic_batch_build_report",
+  "schema_version": 1,
+  "status": "build_pass",
+  "branch": "runtime-config-parsed-candidate-opt-in-diagnostic-batch",
+  "baseline_branch": "configurator",
+  "canonical_build_command": "pio run -e glyph_mk6",
+  "canonical_command_available": false,
+  "canonical_command_result": "pio command not found",
+  "actual_local_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_exit_code": 0,
+  "build_result": "PASS",
+  "hardware_result_recorded": false,
+  "hardware_test_required_before_merge": true,
+  "artifact_hashes_are_checker_gate": false,
+  "artifacts": [
+    {
+      "kind": "uf2",
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "size_bytes": 801280,
+      "sha256": "181dc011693c639e8b544fa3e9ecea51719d60ad6f683096de3d52419478472f"
+    },
+    {
+      "kind": "elf",
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "size_bytes": 5408396,
+      "sha256": "65ab332948499c75a433098643fa89e105f7b454f6bec7f5ffde035a89b3b2e7"
+    },
+    {
+      "kind": "bin",
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "size_bytes": 400440,
+      "sha256": "87847b911fd1eaebce7bcabed0678fdb7fec855627b53ff21fd8da4fa0e8efcf"
+    }
+  ],
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "nunchuk_scope": "Nunchuk remains NOT_TESTED"
+}

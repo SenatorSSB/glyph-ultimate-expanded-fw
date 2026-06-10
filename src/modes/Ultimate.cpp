@@ -17,14 +17,22 @@ struct StickPoint {
 enum class RuntimeConfigSource {
     KnownGoodFallback,
     SourceOwnedBaseline,
+    ParsedCandidateDiagnostic,
 };
 
 enum class RuntimeConfigActivationStatus {
     SourceOwnedSelected,
+    ParsedCandidateSelected,
     FallbackSelected,
 };
 
 struct ActiveRuntimeConfigState {
+    const RuntimeConfigView* active_view;
+    RuntimeConfigSource source;
+    RuntimeConfigActivationStatus status;
+};
+
+struct PublishedRuntimeConfigState {
     const RuntimeConfigView* active_view;
     RuntimeConfigSource source;
     RuntimeConfigActivationStatus status;
@@ -45,11 +53,74 @@ enum class RuntimeConfigCandidateStatus {
     InvalidPayload,
 };
 
+enum class RuntimeConfigActivationDecisionStatus {
+    CandidateUnavailable,
+    CandidateAccepted,
+    CandidateRejected,
+    SourceOwnedFallback,
+};
+
 struct RuntimeConfigCandidateState {
     RuntimeConfigCandidateStatus status;
     StickPoint points[kRuntimeTableCount][kRuntimeTablePointCount];
     RuntimeTableView tables[kRuntimeTableCount];
     RuntimeConfigView view;
+};
+
+struct RuntimeConfigActivationDecision {
+    RuntimeConfigActivationDecisionStatus status;
+    const RuntimeConfigView* selected_view;
+    RuntimeConfigSource source;
+};
+
+constexpr bool kEnableParsedCandidateActivationDiagnostic = true;
+
+constexpr uint8_t kParsedCandidateOptInDiagnosticPayload[UltimateRuntimeConfigParser::kPayloadSize] = {
+    0x47, 0x43, 0x46, 0x47, 0x01, 0xd6, 0x6f, 0x1d, 0x98, 0x1b, 0x09, 0x00,
+    0x1b, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16,
+    0x17, 0x18, 0x19, 0x1a, 0x3d, 0x33, 0x80, 0x33, 0xc3, 0x33, 0x3d, 0x80,
+    0x80, 0x80, 0xc3, 0x80, 0x3d, 0xcd, 0x80, 0xcd, 0xc3, 0xcd, 0x0e, 0x57,
+    0x80, 0x57, 0xf2, 0x57, 0x0e, 0xa9, 0x80, 0xa9, 0xf2, 0xa9, 0x0e, 0xa9,
+    0x80, 0xa9, 0xf2, 0xa9, 0x5d, 0x33, 0x80, 0x33, 0xa3, 0x33, 0x5d, 0x80,
+    0x80, 0x80, 0xa3, 0x80, 0x5d, 0xcd, 0x80, 0xcd, 0xa3, 0xcd, 0x52, 0x33,
+    0x80, 0x33, 0xae, 0x33, 0x52, 0x80, 0x80, 0x80, 0xae, 0x80, 0x52, 0xcd,
+    0x80, 0xcd, 0xae, 0xcd, 0x4e, 0x57, 0x80, 0x57, 0xb2, 0x57, 0x4e, 0xa9,
+    0x80, 0xa9, 0xb2, 0xa9, 0x4e, 0xa9, 0x80, 0xa9, 0xb2, 0xa9, 0x41, 0x57,
+    0x80, 0x57, 0xbf, 0x57, 0x41, 0xa9, 0x80, 0xa9, 0xbf, 0xa9, 0x41, 0xa9,
+    0x80, 0xa9, 0xbf, 0xa9, 0x3d, 0x63, 0x80, 0x63, 0xc3, 0x63, 0x3d, 0x80,
+    0x80, 0x80, 0xc3, 0x80, 0x3d, 0x9d, 0x80, 0x9d, 0xc3, 0x9d, 0x0e, 0xb3,
+    0x80, 0xb3, 0xf2, 0xb3, 0x0e, 0xa9, 0x80, 0xa9, 0xf2, 0xa9, 0x0e, 0x4d,
+    0x80, 0x4d, 0xf2, 0x4d, 0x57, 0x33, 0x80, 0x33, 0xa9, 0x33, 0x57, 0x80,
+    0x80, 0x80, 0xa9, 0x80, 0x57, 0xcd, 0x80, 0xcd, 0xa9, 0xcd, 0x57, 0x57,
+    0x80, 0x57, 0xa9, 0x57, 0x57, 0xa9, 0x80, 0xa9, 0xa9, 0xa9, 0x57, 0xa9,
+    0x80, 0xa9, 0xa9, 0xa9, 0xa9, 0x33, 0x80, 0x33, 0x57, 0x33, 0xa9, 0x80,
+    0x80, 0x80, 0x57, 0x80, 0xa9, 0xcd, 0x80, 0xcd, 0x57, 0xcd, 0xa9, 0x57,
+    0x80, 0x57, 0x57, 0x57, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0xa9,
+    0x80, 0xa9, 0x57, 0xa9, 0xa9, 0x63, 0x80, 0x63, 0x57, 0x63, 0xa9, 0x80,
+    0x80, 0x80, 0x57, 0x80, 0xa9, 0x9d, 0x80, 0x9d, 0x57, 0x9d, 0xa9, 0xb3,
+    0x80, 0xb3, 0x57, 0xb3, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0x4d,
+    0x80, 0x4d, 0x57, 0x4d, 0xa9, 0x63, 0x80, 0x63, 0x57, 0x63, 0xa9, 0x80,
+    0x80, 0x80, 0x57, 0x80, 0xa9, 0x9d, 0x80, 0x9d, 0x57, 0x9d, 0xa9, 0xb3,
+    0x80, 0xb3, 0x57, 0xb3, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0x4d,
+    0x80, 0x4d, 0x57, 0x4d, 0x57, 0x63, 0x80, 0x63, 0xa9, 0x63, 0x57, 0x80,
+    0x80, 0x80, 0xa9, 0x80, 0x57, 0x9d, 0x80, 0x9d, 0xa9, 0x9d, 0x57, 0xb3,
+    0x80, 0xb3, 0xa9, 0xb3, 0x57, 0xa9, 0x80, 0xa9, 0xa9, 0xa9, 0x57, 0x4d,
+    0x80, 0x4d, 0xa9, 0x4d, 0xbb, 0x2f, 0x80, 0x2f, 0x45, 0x2f, 0xbb, 0x80,
+    0x80, 0x80, 0x45, 0x80, 0xbb, 0xd1, 0x80, 0xd1, 0x45, 0xd1, 0x58, 0x4f,
+    0x80, 0x4f, 0xa8, 0x4f, 0x58, 0x80, 0x80, 0x80, 0xa8, 0x80, 0x58, 0xb1,
+    0x80, 0xb1, 0xa8, 0xb1, 0x4b, 0x56, 0x80, 0x56, 0xb5, 0x56, 0x4b, 0x80,
+    0x80, 0x80, 0xb5, 0x80, 0x4b, 0xaa, 0x80, 0xaa, 0xb5, 0xaa, 0xa9, 0x2f,
+    0x80, 0x2f, 0x57, 0x2f, 0xa9, 0x80, 0x80, 0x80, 0x57, 0x80, 0xa9, 0xd1,
+    0x80, 0xd1, 0x57, 0xd1, 0x45, 0x4e, 0x80, 0x4e, 0xbb, 0x4e, 0x45, 0x80,
+    0x80, 0x80, 0xbb, 0x80, 0x48, 0xac, 0x80, 0xb3, 0xb8, 0xac, 0xa9, 0x58,
+    0x80, 0x58, 0x57, 0x58, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0xa8,
+    0x80, 0xa8, 0x57, 0xa8, 0x60, 0x52, 0x80, 0x52, 0xa0, 0x52, 0x60, 0xa9,
+    0x80, 0xa9, 0xa0, 0xa9, 0x60, 0xae, 0x80, 0xae, 0xa0, 0xae, 0x60, 0x56,
+    0x80, 0x56, 0xa0, 0x56, 0x60, 0xa9, 0x80, 0xa9, 0xa0, 0xa9, 0x60, 0xaa,
+    0x80, 0xaa, 0xa0, 0xaa, 0x59, 0x59, 0x80, 0x4f, 0xa7, 0x59, 0x4f, 0x80,
+    0x80, 0x80, 0xb1, 0x80, 0x59, 0xa7, 0x80, 0xb1, 0xa7, 0xa7, 0x97, 0xcd,
+    0x6c, 0x3c,
 };
 
 void ResetRuntimeConfigCandidateState(RuntimeConfigCandidateState &candidate) {
@@ -115,6 +186,164 @@ bool MaterializeRuntimeConfigCandidateFromSourceView(
         ? RuntimeConfigCandidateStatus::ParsedPayloadValid
         : RuntimeConfigCandidateStatus::InvalidPayload;
     return candidate.status == RuntimeConfigCandidateStatus::ParsedPayloadValid;
+}
+
+bool MaterializeRuntimeConfigCandidateFromParsedPayload(
+    const uint8_t *payload,
+    size_t length,
+    RuntimeConfigCandidateState &candidate
+) {
+    ResetRuntimeConfigCandidateState(candidate);
+    const UltimateRuntimeConfigParser::ParseResult parse_result =
+        UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload(payload, length);
+    if (parse_result.status != UltimateRuntimeConfigParser::ParseStatus::Ok) {
+        candidate.status = RuntimeConfigCandidateStatus::InvalidPayload;
+        return false;
+    }
+    if (
+        parse_result.table_count != kRuntimeTableCount ||
+        parse_result.point_count_per_table != kRuntimeTablePointCount
+    ) {
+        candidate.status = RuntimeConfigCandidateStatus::InvalidPayload;
+        return false;
+    }
+
+    constexpr size_t order_offset = UltimateRuntimeConfigParser::kHeaderSize;
+    constexpr size_t point_offset = order_offset + UltimateRuntimeConfigParser::kOrderSize;
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        const RuntimeTableId table_id = static_cast<RuntimeTableId>(payload[order_offset + table_index]);
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            const size_t payload_index = point_offset + ((table_index * kRuntimeTablePointCount + point_index) * 2);
+            candidate.points[table_index][point_index] = {
+                payload[payload_index],
+                payload[payload_index + 1],
+            };
+        }
+        candidate.tables[table_index] = {
+            table_id,
+            RuntimeTableIdSymbolName(table_id),
+            candidate.points[table_index],
+            kRuntimeTablePointCount,
+        };
+    }
+    candidate.view = {
+        kRuntimeConfigSchemaName,
+        kRuntimeConfigSchemaVersion,
+        candidate.tables,
+        kRuntimeTableCount,
+        RuntimeTableId::Default,
+    };
+
+    candidate.status = ValidateRuntimeConfigView(candidate.view)
+        ? RuntimeConfigCandidateStatus::ParsedPayloadValid
+        : RuntimeConfigCandidateStatus::InvalidPayload;
+    return candidate.status == RuntimeConfigCandidateStatus::ParsedPayloadValid;
+}
+
+bool RuntimeConfigViewsEquivalentEveryPoint(const RuntimeConfigView &candidate, const RuntimeConfigView &source) {
+    if (!ValidateRuntimeConfigView(candidate) || !ValidateRuntimeConfigView(source)) {
+        return false;
+    }
+    if (candidate.table_count != source.table_count) {
+        return false;
+    }
+    if (candidate.fallback_table_id != source.fallback_table_id) {
+        return false;
+    }
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        const RuntimeTableView &candidate_table = candidate.tables[table_index];
+        const RuntimeTableView &source_table = source.tables[table_index];
+        if (candidate_table.id != source_table.id || candidate_table.point_count != source_table.point_count) {
+            return false;
+        }
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            const StickPoint candidate_point = candidate_table.table[point_index];
+            const StickPoint source_point = source_table.table[point_index];
+            if (candidate_point.x != source_point.x || candidate_point.y != source_point.y) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+RuntimeConfigActivationDecision DecideRuntimeConfigActivation(
+    const RuntimeConfigCandidateState &candidate,
+    const RuntimeConfigView &source_view
+) {
+    if (!ValidateRuntimeConfigView(source_view)) {
+        return {
+            RuntimeConfigActivationDecisionStatus::SourceOwnedFallback,
+            &kKnownGoodRuntimeConfig,
+            RuntimeConfigSource::KnownGoodFallback,
+        };
+    }
+    if (!kEnableParsedCandidateActivationDiagnostic) {
+        return {
+            RuntimeConfigActivationDecisionStatus::SourceOwnedFallback,
+            &source_view,
+            RuntimeConfigSource::SourceOwnedBaseline,
+        };
+    }
+    if (!ValidateRuntimeConfigCandidateState(candidate)) {
+        return {
+            RuntimeConfigActivationDecisionStatus::CandidateUnavailable,
+            &source_view,
+            RuntimeConfigSource::SourceOwnedBaseline,
+        };
+    }
+    if (!RuntimeConfigViewsEquivalentEveryPoint(candidate.view, source_view)) {
+        return {
+            RuntimeConfigActivationDecisionStatus::CandidateRejected,
+            &source_view,
+            RuntimeConfigSource::SourceOwnedBaseline,
+        };
+    }
+    return {
+        RuntimeConfigActivationDecisionStatus::CandidateAccepted,
+        &candidate.view,
+        RuntimeConfigSource::ParsedCandidateDiagnostic,
+    };
+}
+
+PublishedRuntimeConfigState PublishRuntimeConfigState(const RuntimeConfigActivationDecision &decision) {
+    if (decision.selected_view == nullptr) {
+        return {
+            &kKnownGoodRuntimeConfig,
+            RuntimeConfigSource::KnownGoodFallback,
+            RuntimeConfigActivationStatus::FallbackSelected,
+        };
+    }
+    if (decision.source == RuntimeConfigSource::ParsedCandidateDiagnostic) {
+        return {
+            decision.selected_view,
+            RuntimeConfigSource::ParsedCandidateDiagnostic,
+            RuntimeConfigActivationStatus::ParsedCandidateSelected,
+        };
+    }
+    if (decision.source == RuntimeConfigSource::SourceOwnedBaseline) {
+        return {
+            decision.selected_view,
+            RuntimeConfigSource::SourceOwnedBaseline,
+            RuntimeConfigActivationStatus::SourceOwnedSelected,
+        };
+    }
+    return {
+        decision.selected_view,
+        RuntimeConfigSource::KnownGoodFallback,
+        RuntimeConfigActivationStatus::FallbackSelected,
+    };
+}
+
+PublishedRuntimeConfigState InitializePublishedRuntimeConfigState(RuntimeConfigCandidateState &candidate) {
+    (void)MaterializeRuntimeConfigCandidateFromParsedPayload(
+        kParsedCandidateOptInDiagnosticPayload,
+        sizeof(kParsedCandidateOptInDiagnosticPayload),
+        candidate
+    );
+    const RuntimeConfigActivationDecision decision =
+        DecideRuntimeConfigActivation(candidate, kSourceOwnedCurrentBaselineRuntimeConfig);
+    return PublishRuntimeConfigState(decision);
 }
 
 constexpr size_t kDirectionTwoIndex = 1;
@@ -494,18 +723,18 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
     outputs.leftStickY = direction_plus_a_point.y;
 }
 
+const PublishedRuntimeConfigState& GetPublishedRuntimeConfigState() {
+    static RuntimeConfigCandidateState candidate;
+    static const PublishedRuntimeConfigState state = InitializePublishedRuntimeConfigState(candidate);
+    return state;
+}
+
 const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
-    static const ActiveRuntimeConfigState state = ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig)
-        ? ActiveRuntimeConfigState{
-            &kSourceOwnedCurrentBaselineRuntimeConfig,
-            RuntimeConfigSource::SourceOwnedBaseline,
-            RuntimeConfigActivationStatus::SourceOwnedSelected,
-        }
-        : ActiveRuntimeConfigState{
-            &kKnownGoodRuntimeConfig,
-            RuntimeConfigSource::KnownGoodFallback,
-            RuntimeConfigActivationStatus::FallbackSelected,
-        };
+    static const ActiveRuntimeConfigState state = {
+        GetPublishedRuntimeConfigState().active_view,
+        GetPublishedRuntimeConfigState().source,
+        GetPublishedRuntimeConfigState().status,
+    };
     return state;
 }
 

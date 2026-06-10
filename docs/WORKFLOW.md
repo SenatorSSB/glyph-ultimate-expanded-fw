@@ -59,6 +59,12 @@ explicitly instructed.
   `ActiveRuntimeConfigState.source` or `ActiveRuntimeConfigState.status`.
 - Parser/materialization/load work belongs before active-state publication;
   output generation may consume only the already-selected `RuntimeConfigView`.
+- Parsed/candidate opt-in diagnostics must use source-owned static diagnostic
+  data unless a later product-approved runtime-loaded-config phase explicitly
+  changes that boundary. Candidate acceptance must pass through a
+  decision/publication boundary before output generation, and such branches stop
+  at hardware-test readiness until a separate hardware result is recorded.
+  Nunchuk remains NOT_TESTED unless explicitly validated in a hardware result.
 - Product approval gates are not the same as user-domain blockers. A future
   phase may be ready for design or source research while still requiring
   approval before implementation.

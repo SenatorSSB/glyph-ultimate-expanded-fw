@@ -67,6 +67,14 @@ packets remain under `docs/calibration/`.
   bounded candidate state and helper scaffolding. Candidate state is not active,
   is not consumed by `ResolveActiveRuntimeConfig()` or
   `UpdateAnalogOutputs(...)`, and does not change active output behavior.
+- Parsed candidate opt-in diagnostic activation is implemented on
+  `runtime-config-parsed-candidate-opt-in-diagnostic-batch` as a source-owned
+  static diagnostic path. It parses/materializes the compiled candidate fixture
+  before active-state publication, proves equivalence to the source-owned
+  baseline before accepting the candidate, and publishes only an active
+  `RuntimeConfigView` for output generation. Because this opt-in path can affect
+  active output behavior, it is `WAITING_FOR_HARDWARE_TEST` before merge. No
+  hardware result is recorded in this branch.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -157,6 +165,9 @@ engineering decisions.
 - Candidate runtime config state materialization scaffold is implemented in
   firmware source as inactive pre-publication scaffolding; output generation
   consumes only the selected active `RuntimeConfigView`.
+- Parsed candidate opt-in diagnostic activation is implemented in firmware
+  source as source-owned/static pre-publication candidate activation. It is not
+  runtime-loaded config and requires hardware test before merge.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

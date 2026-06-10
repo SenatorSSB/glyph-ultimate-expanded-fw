@@ -163,6 +163,15 @@ architecture step after that baseline. Candidate state remains pre-publication
 scaffolding only; `ResolveActiveRuntimeConfig()` and `UpdateAnalogOutputs(...)`
 continue to consume only the stable selected `RuntimeConfigView`.
 
+The parsed candidate opt-in diagnostic batch is the next bounded firmware
+diagnostic step. It enables a source-owned static parsed/candidate path before
+publication, accepts only a candidate proven equivalent to the source-owned
+baseline, and publishes only the selected `RuntimeConfigView` to output
+generation. Status: `WAITING_FOR_HARDWARE_TEST` before merge because the opt-in
+candidate can affect active output behavior. It is not runtime-loaded config,
+storage, WebSerial/device write, backend/config.pb write behavior, or flashing
+automation. Nunchuk remains NOT_TESTED.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-
