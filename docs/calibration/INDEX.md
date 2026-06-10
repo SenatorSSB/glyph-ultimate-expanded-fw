@@ -53,10 +53,10 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 ## Runtime Config Diagnostic Hardware Plans
 
 - `diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.md`
-  - hardware-test plan for the parsed-candidate-present/source-owned-published
-    diagnostic branch; all rows remain NOT_TESTED.
+  - `HARDWARE_PASS` result for the parsed-candidate-present/source-owned-published
+    diagnostic branch; non-nunchuk rows PASS and Nunchuk remains NOT_TESTED.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json`
-  - matching machine-readable hardware plan fixture; not a result.
+  - matching machine-readable hardware result fixture.
 
 ## Official Configurator Corpus And Source Correction
 

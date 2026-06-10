@@ -1,8 +1,10 @@
 # Diagnostic Parsed Candidate Present, Source-Owned Published
 
-status: HARDWARE_TEST_DIAGNOSTIC_BUILD
+status: HARDWARE_PASS
+overall_result: HARDWARE_PASS
 
-branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
+branch_under_test: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published`
+result_branch: `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
 
 baseline branch: `configurator`
 
@@ -19,6 +21,13 @@ The previous branch
 `HARDWARE_FAIL` by operator report: "tested, fails. disconnects happen". Parsed
 candidate opt-in activation is unsafe for merge and must not be merged into
 `configurator`.
+
+The hardware result branch records `overall_result: HARDWARE_PASS` with
+`operator_report: "tested, everything works"`.
+Parsed candidate/parser/materialization presence is hardware-safe when
+source-owned baseline remains the published active view. Active publication of
+`candidate.view` remains the main suspect for the parsed-candidate opt-in
+failure.
 
 ## Source Boundary
 
@@ -54,11 +63,23 @@ UpdateAnalogOutputs -> ResolveActiveRuntimeConfig -> GetActiveRuntimeConfigState
 - Candidate active publication is not implemented.
 - No `kPhase7AD3GlobalParseResult.status` read is introduced.
 - No parser status read is introduced in the resolver or analog hot path.
-- No hardware result is claimed by this packet.
+- Parsed candidate activation is not claimed safe.
+- The low-level failure mechanism is not proven.
 - Nunchuk remains NOT_TESTED.
 
-## Hardware Requirement
+## Hardware Result
 
-Hardware testing is required before this diagnostic branch can answer the
-disconnect question. The plan is recorded in
+Hardware result is recorded in
+`docs/runtime_config/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.md`
+and
 `docs/calibration/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.md`.
+
+Recorded conclusions:
+
+- `parsed_candidate_presence_safe_when_source_owned_published`: `true`
+- `candidate_view_active_publication_remains_suspect`: `true`
+- `parsed_candidate_opt_in_activation_safe_for_merge`: `false`
+- `source_owned_active_state_preselection_remains_repair_baseline`: `true`
+- `implementation_branch_merge_allowed`: `true` for this diagnostic branch only
+- `failed_opt_in_activation_branch_merge_allowed`: `false`
+- `low_level_failure_mechanism_proven`: `false`

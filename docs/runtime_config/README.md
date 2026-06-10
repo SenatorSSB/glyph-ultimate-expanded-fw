@@ -98,6 +98,12 @@ artifacts unless a specific packet says otherwise.
   diagnostic branch.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_build_report_2026-06-10.json` -
   machine-readable build report metadata for the diagnostic branch.
+- `diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.md` -
+  `HARDWARE_PASS` result for the parsed-candidate-present/source-owned-published
+  diagnostic branch; parsed candidate presence is safe only when source-owned
+  baseline remains published active view.
+- `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.json` -
+  machine-readable hardware result metadata for the diagnostic branch.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
