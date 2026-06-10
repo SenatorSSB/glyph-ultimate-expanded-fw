@@ -158,6 +158,11 @@ behavior-preserving, keeps RF5/RF6/LT6 expressions unchanged, and is safe to
 use as the repair-architecture basis without expanding runtime-loaded config
 or device-write scope.
 
+The candidate-state materialization scaffold is the next safe source-level
+architecture step after that baseline. Candidate state remains pre-publication
+scaffolding only; `ResolveActiveRuntimeConfig()` and `UpdateAnalogOutputs(...)`
+continue to consume only the stable selected `RuntimeConfigView`.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

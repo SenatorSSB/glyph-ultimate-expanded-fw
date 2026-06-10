@@ -79,6 +79,15 @@ artifacts unless a specific packet says otherwise.
   boundary; docs/tools only and no firmware behavior change.
 - `fixtures/parser_hotpath_postmortem_and_next_boundary.json` - machine-readable
   fixture for the parser hot-path postmortem and next-boundary state.
+- `candidate_state_materialization_scaffold.md` - source-level candidate-state
+  materialization scaffold; candidate state is not active and output generation
+  remains limited to the already-selected `RuntimeConfigView`.
+- `fixtures/candidate_state_materialization_scaffold.json` - machine-readable
+  fixture for the candidate-state scaffold boundary.
+- `candidate_state_materialization_scaffold_build_report_2026-06-10.md` - build
+  report for the candidate-state scaffold branch.
+- `fixtures/candidate_state_materialization_scaffold_build_report_2026-06-10.json` -
+  machine-readable build report metadata for this branch.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -120,6 +129,10 @@ artifacts unless a specific packet says otherwise.
   source-owned active-state preselection as the repair architecture baseline.
   Parser/materialization/load may happen only before active-state publication;
   output generation may consume only the already-selected `RuntimeConfigView`.
+- Candidate state materialization scaffolding is compile-present but not active.
+  Candidate state is not consumed by `ResolveActiveRuntimeConfig()` or
+  `UpdateAnalogOutputs(...)`; output generation remains limited to the stable
+  selected `RuntimeConfigView`.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

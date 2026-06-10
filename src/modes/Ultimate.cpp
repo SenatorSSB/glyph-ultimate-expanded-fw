@@ -39,6 +39,84 @@ static_assert(
     "Phase 7A parser scaffold must stay aligned with the offline GCFG-like payload size"
 );
 
+enum class RuntimeConfigCandidateStatus {
+    Empty,
+    ParsedPayloadValid,
+    InvalidPayload,
+};
+
+struct RuntimeConfigCandidateState {
+    RuntimeConfigCandidateStatus status;
+    StickPoint points[kRuntimeTableCount][kRuntimeTablePointCount];
+    RuntimeTableView tables[kRuntimeTableCount];
+    RuntimeConfigView view;
+};
+
+void ResetRuntimeConfigCandidateState(RuntimeConfigCandidateState &candidate) {
+    candidate.status = RuntimeConfigCandidateStatus::Empty;
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            candidate.points[table_index][point_index] = {ANALOG_STICK_NEUTRAL, ANALOG_STICK_NEUTRAL};
+        }
+        candidate.tables[table_index] = {
+            kRuntimeTableIdOrder[table_index],
+            kRuntimeTableSymbolNames[table_index],
+            candidate.points[table_index],
+            kRuntimeTablePointCount,
+        };
+    }
+    candidate.view = {
+        kRuntimeConfigSchemaName,
+        kRuntimeConfigSchemaVersion,
+        candidate.tables,
+        0,
+        RuntimeTableId::Default,
+    };
+}
+
+bool ValidateRuntimeConfigCandidateState(const RuntimeConfigCandidateState &candidate) {
+    if (candidate.status != RuntimeConfigCandidateStatus::ParsedPayloadValid) {
+        return false;
+    }
+    return ValidateRuntimeConfigView(candidate.view);
+}
+
+bool MaterializeRuntimeConfigCandidateFromSourceView(
+    const RuntimeConfigView &source_view,
+    RuntimeConfigCandidateState &candidate
+) {
+    ResetRuntimeConfigCandidateState(candidate);
+    if (!ValidateRuntimeConfigView(source_view)) {
+        candidate.status = RuntimeConfigCandidateStatus::InvalidPayload;
+        return false;
+    }
+
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        const RuntimeTableView &source_table = source_view.tables[table_index];
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            candidate.points[table_index][point_index] = source_table.table[point_index];
+        }
+        candidate.tables[table_index] = {
+            source_table.id,
+            source_table.symbol_name,
+            candidate.points[table_index],
+            source_table.point_count,
+        };
+    }
+    candidate.view = {
+        source_view.schema_name,
+        source_view.schema_version,
+        candidate.tables,
+        kRuntimeTableCount,
+        source_view.fallback_table_id,
+    };
+
+    candidate.status = ValidateRuntimeConfigView(candidate.view)
+        ? RuntimeConfigCandidateStatus::ParsedPayloadValid
+        : RuntimeConfigCandidateStatus::InvalidPayload;
+    return candidate.status == RuntimeConfigCandidateStatus::ParsedPayloadValid;
+}
+
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;

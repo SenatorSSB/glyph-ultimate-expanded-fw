@@ -1,0 +1,62 @@
+{
+  "schema_name": "glyph_candidate_state_materialization_scaffold_build_report",
+  "status": "build_completed",
+  "branch": "runtime-config-candidate-state-materialization-scaffold",
+  "baseline_branch": "configurator",
+  "build_command": "pio run -e glyph_mk6",
+  "canonical_build_command": "pio run -e glyph_mk6",
+  "canonical_build_available_in_agent_environment": false,
+  "canonical_build_failure": "zsh:1: command not found: pio",
+  "actual_local_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "actual_local_build_completed": true,
+  "build_completed": true,
+  "build_exit_code": 0,
+  "build_date_local": "2026-06-10",
+  "firmware_source_changed": true,
+  "active_output_behavior_changed": false,
+  "candidate_state_active": false,
+  "active_runtime_output_path_consumes_candidate_state": false,
+  "parser_status_read_in_analog_hot_path": false,
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "flashing_automation_implemented": false,
+  "artifact_hashes_are_rebuild_stable": false,
+  "artifact_hashes_are_checker_gate": false,
+  "hardware_result_claimed": false,
+  "build_artifacts": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 791552,
+      "sha256": "29bb24db025aedab287536ff7af8ffb6acaaa2b03f50015cc53df35afc245486",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407148,
+      "sha256": "a855ede80d8316cb1b699698951e7f55278bec7f1aa5e681317d4d0cc06abc98",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 395672,
+      "sha256": "984904dee96d7823248c751a44cf79f9a6a270a9cd2e206458ba997a959159a4",
+      "available": true
+    }
+  ],
+  "nunchuk_status": "NOT_TESTED",
+  "nunchuk_note": "Nunchuk remains NOT_TESTED.",
+  "caveats": [
+    "candidate_state_not_active",
+    "no_candidate_state_consumed_by_active_output_path",
+    "no_parser_status_reads_in_hot_path",
+    "no_runtime_loaded_config",
+    "no_storage",
+    "no_webserial_or_device_write",
+    "no_flashing_automation",
+    "nunchuk_remains_not_tested"
+  ]
+}
