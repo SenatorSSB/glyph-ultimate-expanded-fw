@@ -77,8 +77,14 @@ packets remain under `docs/calibration/`.
   is a hardware-test diagnostic: parsed candidate machinery is present,
   initialized, materialized, and equivalence-validated, but the published active
   view is forced to `kSourceOwnedCurrentBaselineRuntimeConfig`; candidate view is
-  not active. This branch records no hardware result yet, and Nunchuk remains
-  NOT_TESTED.
+  not active. Its hardware result is recorded on
+  `runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
+  as `HARDWARE_PASS` by operator report: "tested, everything works". Parsed
+  candidate/parser/materialization presence is hardware-safe when source-owned
+  baseline remains the published active view. Active publication of
+  `candidate.view` remains the main suspect for the parsed-candidate opt-in
+  failure. Parsed candidate opt-in activation remains unsafe for merge, the
+  low-level failure mechanism remains unproven, and Nunchuk remains NOT_TESTED.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -171,9 +177,11 @@ engineering decisions.
   consumes only the selected active `RuntimeConfigView`.
 - Parsed-candidate-present/source-owned-published diagnostic source is intended
   only to isolate parser/materialization/static candidate presence from active
-  candidate publication. It does not implement runtime-loaded config, storage,
+  candidate publication. Its hardware result records `HARDWARE_PASS` for the
+  applicable non-nunchuk scope when source-owned baseline remains the published
+  active view. It does not implement runtime-loaded config, storage,
   WebSerial/device write, backend/config.pb write, firmware flashing automation,
-  or nunchuk validation.
+  parsed candidate activation, or nunchuk validation.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

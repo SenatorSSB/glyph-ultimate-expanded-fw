@@ -1,14 +1,10 @@
 {
   "schema_name": "glyph_diagnostic_parsed_candidate_present_source_owned_published_hardware_result",
   "status": "HARDWARE_PASS",
-  "branch": "runtime-config-diagnostic-parsed-candidate-present-source-owned-published",
+  "overall_result": "HARDWARE_PASS",
   "branch_under_test": "runtime-config-diagnostic-parsed-candidate-present-source-owned-published",
   "result_branch": "runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result",
-  "baseline_branch": "configurator",
-  "hardware_result_claimed": true,
-  "overall_result": "HARDWARE_PASS",
   "operator_report": "tested, everything works",
-  "nunchuk_status": "NOT_TESTED",
   "parsed_candidate_presence_safe_when_source_owned_published": true,
   "candidate_view_active_publication_remains_suspect": true,
   "parsed_candidate_opt_in_activation_safe_for_merge": false,
@@ -22,6 +18,7 @@
   "backend_config_pb_write_path_implemented": false,
   "flashing_automation_implemented": false,
   "candidate_view_published_active": false,
+  "nunchuk_status": "NOT_TESTED",
   "rows": [
     {"id": "BOOT-001", "scope": "Boot and USB stability", "status": "PASS"},
     {"id": "BASELINE-001", "scope": "Baseline source-owned behavior", "status": "PASS"},

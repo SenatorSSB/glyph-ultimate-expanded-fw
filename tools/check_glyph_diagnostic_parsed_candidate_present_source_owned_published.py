@@ -12,9 +12,10 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-diagnostic-parsed-candidate-present-source-owned-published"
+RESULT_BRANCH = "runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH}
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, RESULT_BRANCH, MERGED_BRANCH}
 
 ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
 DOC_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_parsed_candidate_present_source_owned_published.md"
@@ -23,6 +24,8 @@ BUILD_REPORT_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_parsed_candidate
 BUILD_REPORT_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/diagnostic_parsed_candidate_present_source_owned_published_build_report_2026-06-10.json"
 HARDWARE_PLAN_PATH = REPO_ROOT / "docs/calibration/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.md"
 HARDWARE_PLAN_FIXTURE_PATH = REPO_ROOT / "docs/calibration/fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json"
+HARDWARE_RESULT_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.md"
+HARDWARE_RESULT_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.json"
 README_PATH = REPO_ROOT / "docs/runtime_config/README.md"
 CALIBRATION_INDEX_PATH = REPO_ROOT / "docs/calibration/INDEX.md"
 CURRENT_STATE_PATH = REPO_ROOT / "docs/CURRENT_STATE.md"
@@ -124,7 +127,7 @@ def current_branch() -> str:
 def validate_branch() -> str:
     branch = current_branch()
     if branch not in ALLOWED_BRANCHES:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+        fail(f"checker must run on {EXPECTED_BRANCH}, {RESULT_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     if branch == EXPECTED_BRANCH:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -135,11 +138,27 @@ def validate_branch() -> str:
         )
         if result.returncode != 0:
             fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
+    if branch == RESULT_BRANCH:
+        result = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", EXPECTED_BRANCH, "HEAD"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            fail(f"{EXPECTED_BRANCH} must be an ancestor of HEAD")
     return branch
 
 
-def changed_paths() -> set[str]:
-    paths = set(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
+def comparison_branch(branch: str) -> str:
+    if branch == RESULT_BRANCH:
+        return EXPECTED_BRANCH
+    return BASE_BRANCH
+
+
+def changed_paths(branch: str) -> set[str]:
+    paths = set(git_lines(["diff", "--name-only", f"{comparison_branch(branch)}...HEAD"]))
     for status_line in git_lines(["status", "--short"], preserve_status=True):
         path = status_line[3:].strip()
         if not path:
@@ -154,6 +173,8 @@ def validate_changed_paths(paths: set[str], branch: str) -> None:
     for path in sorted(paths):
         if FORBIDDEN_CHANGED_RE.search(path):
             fail(f"forbidden HAL/backend/config.pb/storage/write/WebSerial/flashing path changed: {path}")
+        if branch == RESULT_BRANCH and path.startswith("src/"):
+            fail(f"result branch must not change firmware source relative to {EXPECTED_BRANCH}: {path}")
         if branch == MERGED_BRANCH:
             continue
         if path in ALLOWED_EXACT_CHANGED_PATHS:
@@ -396,32 +417,75 @@ def validate_build_report_fixture(payload: dict[str, Any], report_text: str) -> 
     require_phrase(report_text, "Nunchuk remains NOT_TESTED", "build report")
 
 
-def validate_hardware_plan_fixture(payload: dict[str, Any], plan_text: str) -> None:
-    if payload.get("schema_name") != "glyph_diagnostic_parsed_candidate_present_source_owned_published_hardware_plan":
-        fail("hardware plan fixture schema_name mismatch")
+def validate_hardware_result_fixture(payload: dict[str, Any], result_text: str, label: str) -> None:
+    if payload.get("schema_name") != "glyph_diagnostic_parsed_candidate_present_source_owned_published_hardware_result":
+        fail(f"{label} fixture schema_name mismatch")
+    if payload.get("status") != "HARDWARE_PASS":
+        fail(f"{label} fixture status must be HARDWARE_PASS")
+    if payload.get("overall_result") != "HARDWARE_PASS":
+        fail(f"{label} fixture overall_result must be HARDWARE_PASS")
     if payload.get("branch") != EXPECTED_BRANCH:
-        fail("hardware plan fixture branch mismatch")
-    if payload.get("hardware_result_claimed") is not False:
-        fail("hardware plan must not claim a hardware result")
+        if payload.get("branch_under_test") != EXPECTED_BRANCH:
+            fail(f"{label} fixture branch_under_test mismatch")
+    if payload.get("branch_under_test", EXPECTED_BRANCH) != EXPECTED_BRANCH:
+        fail(f"{label} fixture branch_under_test mismatch")
+    if payload.get("result_branch") != RESULT_BRANCH:
+        fail(f"{label} fixture result_branch mismatch")
+    if payload.get("hardware_result_claimed", True) is not True:
+        fail(f"{label} fixture must claim recorded hardware result")
+    if payload.get("operator_report") != "tested, everything works":
+        fail(f"{label} fixture must preserve operator report text")
     if payload.get("nunchuk_status") != "NOT_TESTED":
-        fail("hardware plan fixture nunchuk_status must be NOT_TESTED")
+        fail(f"{label} fixture nunchuk_status must be NOT_TESTED")
+    expected_booleans = {
+        "parsed_candidate_presence_safe_when_source_owned_published": True,
+        "candidate_view_active_publication_remains_suspect": True,
+        "parsed_candidate_opt_in_activation_safe_for_merge": False,
+        "source_owned_active_state_preselection_remains_repair_baseline": True,
+        "implementation_branch_merge_allowed": True,
+        "failed_opt_in_activation_branch_merge_allowed": False,
+        "low_level_failure_mechanism_proven": False,
+        "runtime_loaded_config_implemented": False,
+        "storage_implemented": False,
+        "webserial_device_write_implemented": False,
+        "backend_config_pb_write_path_implemented": False,
+        "flashing_automation_implemented": False,
+        "candidate_view_published_active": False,
+    }
+    for key, value in expected_booleans.items():
+        if payload.get(key) != value:
+            fail(f"{label} fixture {key!r} mismatch: expected {value!r}, got {payload.get(key)!r}")
     rows = payload.get("rows")
     if not isinstance(rows, list):
-        fail("hardware plan fixture rows must be a list")
+        fail(f"{label} fixture rows must be a list")
     row_ids = [row.get("id") for row in rows if isinstance(row, dict)]
     if row_ids != EXPECTED_HARDWARE_ROWS:
-        fail(f"hardware plan rows mismatch: expected {EXPECTED_HARDWARE_ROWS!r}, got {row_ids!r}")
+        fail(f"{label} rows mismatch: expected {EXPECTED_HARDWARE_ROWS!r}, got {row_ids!r}")
     for row in rows:
         if not isinstance(row, dict):
-            fail("hardware plan row must be an object")
-        if row.get("status") != "NOT_TESTED":
-            fail(f"hardware plan row {row.get('id')} must be NOT_TESTED")
-        require_phrase(plan_text, f"| {row['id']} ", "hardware plan")
-        require_phrase(plan_text, f"| {row['id']} |", "hardware plan")
-    if "HARDWARE_PASS" in plan_text or "HARDWARE_FAIL" in plan_text:
-        fail("hardware plan must not claim a hardware result")
-    require_phrase(plan_text, "This is a plan only. It records no hardware result.", "hardware plan")
-    require_phrase(plan_text, "Nunchuk remains NOT_TESTED.", "hardware plan")
+            fail(f"{label} row must be an object")
+        expected_status = "NOT_TESTED" if row.get("id") == "NUNCHUK-001" else "PASS"
+        if row.get("status") != expected_status:
+            fail(f"{label} row {row.get('id')} must be {expected_status}")
+        require_phrase(result_text, f"| {row['id']} ", label)
+        require_phrase(result_text, f"| {row['id']} |", label)
+    for phrase in (
+        "status: HARDWARE_PASS",
+        "tested, everything works",
+        "parsed_candidate_presence_safe_when_source_owned_published",
+        "candidate_view_active_publication_remains_suspect",
+        "parsed_candidate_opt_in_activation_safe_for_merge",
+        "low_level_failure_mechanism_proven",
+        "Runtime-loaded config is not implemented.",
+        "Runtime-config storage is not implemented.",
+        "WebSerial/device write is not implemented.",
+        "backend/config.pb write path is not implemented.",
+        "Firmware flashing automation is not implemented.",
+        "Parsed candidate activation is not claimed safe.",
+        "The low-level failure mechanism is not proven.",
+        "Nunchuk remains NOT_TESTED.",
+    ):
+        require_phrase(result_text, phrase, label)
 
 
 def validate_docs_and_fixtures() -> None:
@@ -431,19 +495,23 @@ def validate_docs_and_fixtures() -> None:
     build_fixture = load_json_object(BUILD_REPORT_FIXTURE_PATH)
     hardware_plan = read_required(HARDWARE_PLAN_PATH)
     hardware_fixture = load_json_object(HARDWARE_PLAN_FIXTURE_PATH)
+    hardware_result = read_required(HARDWARE_RESULT_PATH)
+    hardware_result_fixture = load_json_object(HARDWARE_RESULT_FIXTURE_PATH)
     readme = read_required(README_PATH)
     calibration_index = read_required(CALIBRATION_INDEX_PATH)
     current_state = read_required(CURRENT_STATE_PATH)
     roadmap = read_required(ROADMAP_PATH)
 
     for phrase in (
-        "status: HARDWARE_TEST_DIAGNOSTIC_BUILD",
+        "status: HARDWARE_PASS",
         "parsed candidate machinery",
         "published active runtime view is forced to kSourceOwnedCurrentBaselineRuntimeConfig",
         "candidate.view is not published as the active runtime view",
         "ResolveActiveRuntimeConfig() returns only the stable published active view",
         "UpdateAnalogOutputs(...) does not read parser, candidate, decision, source, status, load, storage, write, or flash state",
-        "No hardware result is claimed by this packet.",
+        "tested, everything works",
+        "Parsed candidate activation is not claimed safe.",
+        "The low-level failure mechanism is not proven.",
         "Nunchuk remains NOT_TESTED.",
     ):
         require_phrase(doc, phrase, "diagnostic doc")
@@ -458,12 +526,21 @@ def validate_docs_and_fixtures() -> None:
 
     validate_diagnostic_fixture(fixture)
     validate_build_report_fixture(build_fixture, build_report)
-    validate_hardware_plan_fixture(hardware_fixture, hardware_plan)
+    validate_hardware_result_fixture(hardware_fixture, hardware_plan, "calibration hardware result")
+    validate_hardware_result_fixture(hardware_result_fixture, hardware_result, "runtime config hardware result")
+
+    for text, label in (
+        (readme, "runtime config README"),
+        (calibration_index, "calibration index"),
+        (current_state, "current state"),
+        (roadmap, "roadmap"),
+    ):
+        require_phrase(text, "HARDWARE_PASS", label)
 
 
 def main() -> None:
     branch = validate_branch()
-    validate_changed_paths(changed_paths(), branch)
+    validate_changed_paths(changed_paths(branch), branch)
     validate_source(read_required(ULTIMATE_PATH))
     validate_docs_and_fixtures()
     print("diagnostic parsed candidate present/source-owned published checks passed")
