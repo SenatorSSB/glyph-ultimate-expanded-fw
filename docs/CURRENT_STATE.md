@@ -62,6 +62,11 @@ packets remain under `docs/calibration/`.
   consume only the already-selected `RuntimeConfigView`, with no parser status,
   CRC status, load status, storage status, write status, source, or activation
   status read by `UpdateAnalogOutputs`.
+- Candidate runtime config state materialization scaffold is implemented on
+  `runtime-config-candidate-state-materialization-scaffold` as source-level
+  bounded candidate state and helper scaffolding. Candidate state is not active,
+  is not consumed by `ResolveActiveRuntimeConfig()` or
+  `UpdateAnalogOutputs(...)`, and does not change active output behavior.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -149,6 +154,9 @@ engineering decisions.
   in firmware source in `runtime-active-config-state-source-owned-preselection`;
   it does not alter RF5/RF6/LT6 expressions and keeps `UpdateDigitalOutputs`
   unchanged.
+- Candidate runtime config state materialization scaffold is implemented in
+  firmware source as inactive pre-publication scaffolding; output generation
+  consumes only the selected active `RuntimeConfigView`.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

@@ -1,0 +1,48 @@
+{
+  "schema_name": "glyph_candidate_state_materialization_scaffold",
+  "status": "scaffold_ready",
+  "branch": "runtime-config-candidate-state-materialization-scaffold",
+  "baseline_branch": "configurator",
+  "source_owned_active_state_preselection_baseline": "HARDWARE_PASS",
+  "candidate_state_active": false,
+  "candidate_materialization_changes_active_runtime_config": false,
+  "active_runtime_output_path_consumes_candidate_state": false,
+  "resolve_active_runtime_config_consumes_candidate_state": false,
+  "update_analog_outputs_consumes_candidate_state": false,
+  "parser_status_read_in_analog_hot_path": false,
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "flashing_automation_implemented": false,
+  "backend_config_pb_write_path_added": false,
+  "hardware_test_required": false,
+  "nunchuk_status": "NOT_TESTED",
+  "nunchuk_note": "Nunchuk remains NOT_TESTED.",
+  "output_generation_allowed_inputs": [
+    "already-selected RuntimeConfigView"
+  ],
+  "output_generation_forbidden_inputs": [
+    "candidate state",
+    "parser status",
+    "CRC status",
+    "load status",
+    "storage status",
+    "write status",
+    "source",
+    "activation status"
+  ],
+  "source_shape": {
+    "candidate_status_enum": "RuntimeConfigCandidateStatus",
+    "candidate_state_struct": "RuntimeConfigCandidateState",
+    "materialization_helper": "MaterializeRuntimeConfigCandidateFromSourceView",
+    "validation_helper": "ValidateRuntimeConfigCandidateState",
+    "storage_model": "fixed-size source-local arrays"
+  },
+  "critical_rows": {
+    "RF5": "PASS_NO_DISCONNECT_BASELINE",
+    "RF6": "PASS_NO_DISCONNECT_BASELINE",
+    "LT6": "PASS_NO_DISCONNECT_BASELINE",
+    "baseline_behavior": "PASS_BASELINE",
+    "nunchuk": "NOT_TESTED"
+  }
+}
