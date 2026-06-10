@@ -24,7 +24,7 @@ implemented. Nunchuk remains NOT_TESTED.
 | UNRELATED-BUTTONS-001 | unrelated_buttons | Unrelated button paths remain preserved | NOT_TESTED |
 | MODIFIERS-001 | modifiers | Modifier table routing remains preserved | NOT_TESTED |
 | ACTIVE-STATE-001 | active_state | Active state selector binds to published active view only | NOT_TESTED |
-| PUBLICATION-001 | publication | Published active view is selected before output generation | NOT_TESTED |
+| PUBLICATION-001 | publication | Namespace-scope published active view is selected before output generation | NOT_TESTED |
 | CANDIDATE-BRIDGE-001 | candidate_bridge | Source-owned compiled parser fixture materializes candidate state before publication | NOT_TESTED |
 | CANDIDATE-EQUIVALENCE-001 | candidate_equivalence | Candidate state is equivalent to source-owned baseline | NOT_TESTED |
 | OPT-IN-ACTIVATION-001 | opt_in_activation | Diagnostic opt-in candidate activation behaves as baseline-equivalent published view | NOT_TESTED |

@@ -24,7 +24,7 @@
     {"row_id": "UNRELATED-BUTTONS-001", "category": "unrelated_buttons", "planned_check": "Unrelated button paths remain preserved", "result": "NOT_TESTED"},
     {"row_id": "MODIFIERS-001", "category": "modifiers", "planned_check": "Modifier table routing remains preserved", "result": "NOT_TESTED"},
     {"row_id": "ACTIVE-STATE-001", "category": "active_state", "planned_check": "Active state selector binds to published active view only", "result": "NOT_TESTED"},
-    {"row_id": "PUBLICATION-001", "category": "publication", "planned_check": "Published active view is selected before output generation", "result": "NOT_TESTED"},
+    {"row_id": "PUBLICATION-001", "category": "publication", "planned_check": "Namespace-scope published active view is selected before output generation", "result": "NOT_TESTED"},
     {"row_id": "CANDIDATE-BRIDGE-001", "category": "candidate_bridge", "planned_check": "Source-owned compiled parser fixture materializes candidate state before publication", "result": "NOT_TESTED"},
     {"row_id": "CANDIDATE-EQUIVALENCE-001", "category": "candidate_equivalence", "planned_check": "Candidate state is equivalent to source-owned baseline", "result": "NOT_TESTED"},
     {"row_id": "OPT-IN-ACTIVATION-001", "category": "opt_in_activation", "planned_check": "Diagnostic opt-in candidate activation behaves as baseline-equivalent published view", "result": "NOT_TESTED"},

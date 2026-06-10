@@ -310,6 +310,9 @@ def validate_source(source: str) -> None:
         "PublishedRuntimeConfigState",
         "PublishRuntimeConfigState",
         "InitializePublishedRuntimeConfigState",
+        "gParsedCandidateOptInDiagnosticCandidate",
+        "gPublishedRuntimeConfigState",
+        "gActiveRuntimeConfigState",
         "constexpr bool kEnableParsedCandidateActivationDiagnostic = true;",
     )
     for token in required_tokens:
@@ -346,10 +349,49 @@ def validate_source(source: str) -> None:
         fail("publication initializer must materialize through parser bridge")
     if "DecideRuntimeConfigActivation" not in init_body or "PublishRuntimeConfigState" not in init_body:
         fail("candidate activation must go through decision/publication boundary")
+    if (
+        "const PublishedRuntimeConfigState gPublishedRuntimeConfigState =\n"
+        "    InitializePublishedRuntimeConfigState(gParsedCandidateOptInDiagnosticCandidate);"
+    ) not in active_source:
+        fail("publication must be initialized at namespace scope, outside the hot-path resolver chain")
+    if (
+        "const ActiveRuntimeConfigState gActiveRuntimeConfigState = {\n"
+        "    gPublishedRuntimeConfigState.active_view,"
+    ) not in active_source:
+        fail("active runtime config state must be namespace-scope state derived from published state")
 
     publish_body = strip_cpp_comments(extract_function(source, "PublishRuntimeConfigState"))
     if "RuntimeConfigActivationStatus::ParsedCandidateSelected" not in publish_body:
         fail("publication scaffold must publish parsed candidate diagnostic status")
+
+    published_accessor_body = strip_cpp_comments(extract_function(source, "GetPublishedRuntimeConfigState"))
+    if "return gPublishedRuntimeConfigState;" not in published_accessor_body:
+        fail("GetPublishedRuntimeConfigState must return already-initialized namespace-scope state")
+    for token in (
+        "static",
+        "InitializePublishedRuntimeConfigState",
+        "MaterializeRuntimeConfigCandidateFromParsedPayload",
+        "ParseUltimateRuntimeConfigPayload",
+        "DecideRuntimeConfigActivation",
+        "PublishRuntimeConfigState",
+    ):
+        if token in published_accessor_body:
+            fail(f"GetPublishedRuntimeConfigState must not first-trigger publication work: {token}")
+
+    active_accessor_body = strip_cpp_comments(extract_function(source, "GetActiveRuntimeConfigState"))
+    if "return gActiveRuntimeConfigState;" not in active_accessor_body:
+        fail("GetActiveRuntimeConfigState must return already-initialized namespace-scope active state")
+    for token in (
+        "static",
+        "GetPublishedRuntimeConfigState",
+        "InitializePublishedRuntimeConfigState",
+        "MaterializeRuntimeConfigCandidateFromParsedPayload",
+        "ParseUltimateRuntimeConfigPayload",
+        "DecideRuntimeConfigActivation",
+        "PublishRuntimeConfigState",
+    ):
+        if token in active_accessor_body:
+            fail(f"GetActiveRuntimeConfigState must not first-trigger publication work: {token}")
 
     resolve_body = strip_cpp_comments(extract_function(source, "ResolveActiveRuntimeConfig"))
     if "return *GetActiveRuntimeConfigState().active_view;" not in resolve_body:
@@ -371,6 +413,17 @@ def validate_source(source: str) -> None:
     ):
         if token in resolve_body:
             fail(f"ResolveActiveRuntimeConfig must not inspect parser/candidate/decision state: {token}")
+
+    hot_path_lazy_init_re = re.compile(
+        r"static\s+(?:const\s+)?[A-Za-z0-9_:<>&*\s]+\s+[A-Za-z0-9_]+\s*=\s*"
+        r"(?:InitializePublishedRuntimeConfigState|MaterializeRuntimeConfigCandidateFromParsedPayload|"
+        r"ParseUltimateRuntimeConfigPayload|DecideRuntimeConfigActivation|PublishRuntimeConfigState)\b",
+        flags=re.S,
+    )
+    for function_name in ("GetPublishedRuntimeConfigState", "GetActiveRuntimeConfigState", "ResolveActiveRuntimeConfig"):
+        function_body = strip_cpp_comments(extract_function(source, function_name))
+        if hot_path_lazy_init_re.search(function_body):
+            fail(f"{function_name} has function-local static initialization that can first-trigger publication work")
 
     update_body = strip_cpp_comments(extract_function(source, "UpdateAnalogOutputs"))
     if "const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();" not in update_body:
@@ -460,6 +513,8 @@ def validate_main_fixture(payload: dict[str, Any]) -> None:
         "hardware_test_required_before_merge": True,
         "hardware_result_recorded": False,
         "publication_boundary": "PublishedRuntimeConfigState",
+        "publication_initialization": "namespace_scope_before_output_generation",
+        "function_local_static_publication_in_hot_path_chain": False,
         "active_output_path_consumes_only_published_active_view": True,
         "update_analog_outputs_reads_parser_candidate_decision_state": False,
         "resolve_active_runtime_config_reads_parser_candidate_decision_state": False,
@@ -480,6 +535,14 @@ def validate_main_fixture(payload: dict[str, Any]) -> None:
     ):
         if required not in requirements:
             fail(f"fixture equivalence_requirements missing {required!r}")
+    expected_chain = [
+        "UpdateAnalogOutputs",
+        "ResolveActiveRuntimeConfig",
+        "GetActiveRuntimeConfigState",
+        "gActiveRuntimeConfigState.active_view",
+    ]
+    if payload.get("hot_path_resolver_chain_after_fix") != expected_chain:
+        fail("fixture hot_path_resolver_chain_after_fix does not match the fixed resolver chain")
 
 
 def validate_build_fixture(payload: dict[str, Any], report_text: str) -> None:
@@ -495,6 +558,8 @@ def validate_build_fixture(payload: dict[str, Any], report_text: str) -> None:
         "build_result": "PASS",
         "hardware_result_recorded": False,
         "hardware_test_required_before_merge": True,
+        "publication_initialization": "namespace_scope_before_output_generation",
+        "function_local_static_publication_in_hot_path_chain": False,
         "artifact_hashes_are_checker_gate": False,
         "runtime_loaded_config_implemented": False,
         "storage_implemented": False,
@@ -581,6 +646,10 @@ def validate_docs_and_fixtures() -> None:
         "MaterializeRuntimeConfigCandidateFromParsedPayload",
         "RuntimeConfigActivationDecision",
         "PublishedRuntimeConfigState",
+        "gPublishedRuntimeConfigState",
+        "gActiveRuntimeConfigState",
+        "Parser/materialization/decision/publication work is not first-triggered by the analog hot-path resolver chain.",
+        "UpdateAnalogOutputs -> ResolveActiveRuntimeConfig -> GetActiveRuntimeConfigState -> gActiveRuntimeConfigState.active_view",
         "constexpr bool kEnableParsedCandidateActivationDiagnostic = true;",
         "Hardware test is required before merge because parsed candidate opt-in activation can affect active output behavior.",
         "Nunchuk remains NOT_TESTED.",

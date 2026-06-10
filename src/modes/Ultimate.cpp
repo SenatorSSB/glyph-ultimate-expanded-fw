@@ -346,6 +346,15 @@ PublishedRuntimeConfigState InitializePublishedRuntimeConfigState(RuntimeConfigC
     return PublishRuntimeConfigState(decision);
 }
 
+RuntimeConfigCandidateState gParsedCandidateOptInDiagnosticCandidate;
+const PublishedRuntimeConfigState gPublishedRuntimeConfigState =
+    InitializePublishedRuntimeConfigState(gParsedCandidateOptInDiagnosticCandidate);
+const ActiveRuntimeConfigState gActiveRuntimeConfigState = {
+    gPublishedRuntimeConfigState.active_view,
+    gPublishedRuntimeConfigState.source,
+    gPublishedRuntimeConfigState.status,
+};
+
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
@@ -724,18 +733,11 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
 }
 
 const PublishedRuntimeConfigState& GetPublishedRuntimeConfigState() {
-    static RuntimeConfigCandidateState candidate;
-    static const PublishedRuntimeConfigState state = InitializePublishedRuntimeConfigState(candidate);
-    return state;
+    return gPublishedRuntimeConfigState;
 }
 
 const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
-    static const ActiveRuntimeConfigState state = {
-        GetPublishedRuntimeConfigState().active_view,
-        GetPublishedRuntimeConfigState().source,
-        GetPublishedRuntimeConfigState().status,
-    };
-    return state;
+    return gActiveRuntimeConfigState;
 }
 
 const RuntimeConfigView& ResolveActiveRuntimeConfig() {

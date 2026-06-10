@@ -26,6 +26,14 @@
     "fallback table id matches"
   ],
   "publication_boundary": "PublishedRuntimeConfigState",
+  "publication_initialization": "namespace_scope_before_output_generation",
+  "hot_path_resolver_chain_after_fix": [
+    "UpdateAnalogOutputs",
+    "ResolveActiveRuntimeConfig",
+    "GetActiveRuntimeConfigState",
+    "gActiveRuntimeConfigState.active_view"
+  ],
+  "function_local_static_publication_in_hot_path_chain": false,
   "active_output_path_consumes_only_published_active_view": true,
   "update_analog_outputs_reads_parser_candidate_decision_state": false,
   "resolve_active_runtime_config_reads_parser_candidate_decision_state": false,

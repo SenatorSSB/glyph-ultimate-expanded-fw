@@ -26,9 +26,14 @@ write input, or flashing automation input.
 - `RuntimeConfigActivationDecision` records whether the candidate is accepted,
   rejected, unavailable, or whether the source-owned fallback path is selected.
 - `PublishedRuntimeConfigState` is the explicit publication boundary.
+- `gPublishedRuntimeConfigState` and `gActiveRuntimeConfigState` are
+  namespace-scope initialized before output generation can call the active
+  resolver.
 - `ResolveActiveRuntimeConfig()` returns only `GetActiveRuntimeConfigState().active_view`.
 - `UpdateAnalogOutputs(...)` binds `const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();`
   and does not read parser, candidate, decision, source, or activation state.
+- The hot-path resolver chain after publication is
+  `UpdateAnalogOutputs -> ResolveActiveRuntimeConfig -> GetActiveRuntimeConfigState -> gActiveRuntimeConfigState.active_view`.
 
 ## Equivalence Validation
 
@@ -59,6 +64,8 @@ requires hardware testing before merge. No hardware result is recorded here.
 ## Guardrails
 
 - Parser/materialization/decision state is used only before active-state publication.
+- Parser/materialization/decision/publication work is not first-triggered by the
+  analog hot-path resolver chain.
 - Output generation consumes only the already-selected `RuntimeConfigView`.
 - `ResolveActiveRuntimeConfig()` does not inspect parser, candidate, activation,
   or decision state directly.
