@@ -1,11 +1,14 @@
 # Diagnostic Source-View Candidate Published
 
-status: WAITING_FOR_HARDWARE_TEST
-overall_result: NOT_TESTED
+status: HARDWARE_FAIL
+overall_result: HARDWARE_FAIL
 
 branch_under_test: `runtime-config-diagnostic-source-view-candidate-published`
+result_branch: `runtime-config-diagnostic-source-view-candidate-published-hardware-failure`
 
 baseline branch: `configurator`
+
+operator_report: `tested, failed. same disconnects happen. I reflashed an older working version for use.`
 
 ## Purpose
 
@@ -24,6 +27,9 @@ Prior evidence:
 - `runtime-config-parsed-candidate-opt-in-diagnostic-batch` recorded
   `HARDWARE_FAIL`; active publication of `candidate.view` remains the main
   suspect.
+- `runtime-config-diagnostic-source-view-candidate-published-hardware-failure`
+  records `HARDWARE_FAIL`; publishing candidate-backed active runtime view/table
+  pointers reproduces the disconnect class without parser payload parsing.
 
 ## Source Boundary
 
@@ -75,12 +81,31 @@ published active view: candidate.view if candidate is equivalent, otherwise sour
 - No D2B retained payload anchor symbols are introduced.
 - No parser, candidate, status, decision, load, storage, write, or flash state
   is read by `UpdateAnalogOutputs(...)`.
-- No hardware result is claimed by this packet.
+- Candidate materialization presence alone is not sufficient to reproduce the
+  disconnect based on the prior parsed-candidate-present/source-owned-published
+  diagnostic hardware pass.
 - The low-level failure mechanism is not proven.
 - Nunchuk remains NOT_TESTED.
 
-## Hardware Test
+## Hardware Result
 
-Hardware testing is required before this diagnostic can be considered safe.
-The hardware plan is recorded in
+Hardware testing failed with the operator report:
+`tested, failed. same disconnects happen. I reflashed an older working version for use.`
+
+The result is recorded in
+`docs/runtime_config/diagnostic_source_view_candidate_published_hardware_failure_2026-06-10.md`
+and
 `docs/calibration/diagnostic_source_view_candidate_published_hardware_plan_2026-06-10.md`.
+
+## Conclusions
+
+- `source_view_candidate_publication_safe_for_merge`: `false`
+- `candidate_backed_active_runtime_view_safe`: `false`
+- `candidate_view_active_publication_reproduces_disconnect`: `true`
+- `parser_payload_required_to_reproduce_disconnect`: `false`
+- `candidate_materialization_presence_alone_sufficient_to_reproduce_disconnect`: `false`
+- `source_owned_active_state_preselection_remains_repair_baseline`: `true`
+- `parsed_candidate_presence_source_owned_published_remains_hardware_pass`: `true`
+- `low_level_failure_mechanism_proven`: `false`
+- `implementation_branch_merge_allowed`: `false`
+- `requires_new_publication_model`: `true`

@@ -105,10 +105,10 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.json` -
   machine-readable hardware result metadata for the diagnostic branch.
 - `diagnostic_source_view_candidate_published.md` -
-  `WAITING_FOR_HARDWARE_TEST` diagnostic branch packet: parser payload path is
+  `HARDWARE_FAIL` diagnostic branch packet: parser payload path is
   disabled/absent, a RAM-backed candidate is materialized from
-  `kSourceOwnedCurrentBaselineRuntimeConfig`, and `candidate.view` is published
-  active only after validation/equivalence, with source-owned fallback.
+  `kSourceOwnedCurrentBaselineRuntimeConfig`, and `candidate.view` publication
+  as active reproduces the disconnect class after validation/equivalence.
 - `fixtures/diagnostic_source_view_candidate_published.json` -
   machine-readable source-boundary fixture for the source-view candidate
   publication diagnostic branch.
@@ -117,6 +117,13 @@ artifacts unless a specific packet says otherwise.
   branch.
 - `fixtures/diagnostic_source_view_candidate_published_build_report_2026-06-10.json` -
   machine-readable build report metadata for the source-view candidate
+  publication diagnostic branch.
+- `diagnostic_source_view_candidate_published_hardware_failure_2026-06-10.md` -
+  `HARDWARE_FAIL` result for the source-view candidate publication diagnostic
+  branch; candidate-backed active runtime view/table pointers reproduce the
+  disconnect class and parser payload parsing is not required.
+- `fixtures/diagnostic_source_view_candidate_published_hardware_failure_2026-06-10.json` -
+  machine-readable hardware failure metadata for the source-view candidate
   publication diagnostic branch.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
@@ -165,13 +172,15 @@ artifacts unless a specific packet says otherwise.
   selected `RuntimeConfigView`.
 - The parsed-candidate-present/source-owned-published diagnostic branch keeps
   parsed candidate machinery present and materialized, but publishes only
-  `kSourceOwnedCurrentBaselineRuntimeConfig` as the active view. It records no
-  hardware result; Nunchuk remains NOT_TESTED.
+  `kSourceOwnedCurrentBaselineRuntimeConfig` as the active view. It records
+  `HARDWARE_PASS` for applicable non-nunchuk scope; Nunchuk remains NOT_TESTED.
 - The diagnostic_source_view_candidate_published branch disables the parser
   payload path and publishes `candidate.view` only after source-owned
   materialization, candidate validation, and source-owned equivalence pass. It
-  is `WAITING_FOR_HARDWARE_TEST`; no hardware result is claimed and Nunchuk
-  remains NOT_TESTED.
+  records `HARDWARE_FAIL`: candidate-backed active runtime view/table pointer
+  publication reproduces the disconnect class, parser payload parsing is not
+  required, candidate-backed active runtime view is unsafe, and Nunchuk remains
+  NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

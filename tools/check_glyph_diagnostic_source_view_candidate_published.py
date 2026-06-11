@@ -12,9 +12,10 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-diagnostic-source-view-candidate-published"
+RESULT_BRANCH = "runtime-config-diagnostic-source-view-candidate-published-hardware-failure"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH}
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, RESULT_BRANCH, MERGED_BRANCH}
 
 ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
 DOC_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_source_view_candidate_published.md"
@@ -23,19 +24,27 @@ BUILD_REPORT_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_source_view_cand
 BUILD_REPORT_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/diagnostic_source_view_candidate_published_build_report_2026-06-10.json"
 HARDWARE_PLAN_PATH = REPO_ROOT / "docs/calibration/diagnostic_source_view_candidate_published_hardware_plan_2026-06-10.md"
 HARDWARE_PLAN_FIXTURE_PATH = REPO_ROOT / "docs/calibration/fixtures/diagnostic_source_view_candidate_published_hardware_plan_2026-06-10.json"
+HARDWARE_FAILURE_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_source_view_candidate_published_hardware_failure_2026-06-10.md"
+HARDWARE_FAILURE_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/diagnostic_source_view_candidate_published_hardware_failure_2026-06-10.json"
 README_PATH = REPO_ROOT / "docs/runtime_config/README.md"
 CALIBRATION_INDEX_PATH = REPO_ROOT / "docs/calibration/INDEX.md"
 CURRENT_STATE_PATH = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP_PATH = REPO_ROOT / "docs/ROADMAP.md"
 
-ALLOWED_EXACT_CHANGED_PATHS = {
+IMPLEMENTATION_ALLOWED_EXACT_CHANGED_PATHS = {
     "src/modes/Ultimate.cpp",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "tools/check_glyph_diagnostic_source_view_candidate_published.py",
+}
+RESULT_ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
     "tools/check_glyph_diagnostic_source_view_candidate_published.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
 OPTIONAL_HELPER_RE = re.compile(r"^src/modes/[^/]+\.(?:hpp|cpp|h)$")
+FIRMWARE_SOURCE_PREFIXES = ("src/", "include/")
 FORBIDDEN_CHANGED_RE = re.compile(
     r"(^|/)(?:hal|backend|config\.pb|storage|write|webserial|flash|flashing)(?:/|$)",
     re.I,
@@ -62,6 +71,28 @@ EXPECTED_HARDWARE_ROWS = [
     "NO-FLASH-001",
     "NUNCHUK-001",
 ]
+
+EXPECTED_FAILURE_ROW_STATUSES = {
+    "BOOT-001": "UNKNOWN",
+    "BASELINE-001": "FAIL",
+    "RF5-001": "UNKNOWN",
+    "RF6-001": "UNKNOWN",
+    "LT6-001": "UNKNOWN",
+    "ORDINARY-DIR-001": "UNKNOWN",
+    "NEUTRAL-001": "UNKNOWN",
+    "UNRELATED-BUTTONS-001": "UNKNOWN",
+    "MODIFIERS-001": "UNKNOWN",
+    "SOURCE-VIEW-CANDIDATE-MATERIALIZED-001": "PASS",
+    "CANDIDATE-EQUIVALENCE-001": "PASS",
+    "CANDIDATE-ACTIVE-PUBLICATION-001": "FAIL",
+    "SOURCE-OWNED-FALLBACK-001": "UNKNOWN",
+    "HOT-PATH-001": "INVESTIGATE",
+    "NO-PARSER-001": "PASS",
+    "NO-STORAGE-001": "PASS",
+    "NO-WRITE-001": "PASS",
+    "NO-FLASH-001": "PASS",
+    "NUNCHUK-001": "NOT_TESTED",
+}
 
 
 class DiagnosticCheckError(AssertionError):
@@ -126,7 +157,10 @@ def current_branch() -> str:
 def validate_branch() -> str:
     branch = current_branch()
     if branch not in ALLOWED_BRANCHES:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+        fail(
+            f"checker must run on {EXPECTED_BRANCH}, {RESULT_BRANCH}, "
+            f"or {MERGED_BRANCH}, got {branch}"
+        )
     if branch == EXPECTED_BRANCH:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -137,6 +171,16 @@ def validate_branch() -> str:
         )
         if result.returncode != 0:
             fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
+    if branch == RESULT_BRANCH:
+        result = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", EXPECTED_BRANCH, "HEAD"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            fail(f"{EXPECTED_BRANCH} must be an ancestor of HEAD")
     return branch
 
 
@@ -144,6 +188,8 @@ def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
     if branch == EXPECTED_BRANCH:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
+    elif branch == RESULT_BRANCH:
+        paths.update(git_lines(["diff", "--name-only", f"{EXPECTED_BRANCH}...HEAD"]))
     for status_line in git_lines(["status", "--short"], preserve_status=True):
         path = status_line[3:].strip()
         if not path:
@@ -155,14 +201,21 @@ def changed_paths(branch: str) -> set[str]:
 
 
 def validate_changed_paths(paths: set[str], branch: str) -> None:
+    allowed_exact = (
+        RESULT_ALLOWED_EXACT_CHANGED_PATHS
+        if branch == RESULT_BRANCH
+        else IMPLEMENTATION_ALLOWED_EXACT_CHANGED_PATHS
+    )
     for path in sorted(paths):
         if FORBIDDEN_CHANGED_RE.search(path):
             fail(f"forbidden HAL/backend/config.pb/storage/write/WebSerial/flashing path changed: {path}")
         if branch == MERGED_BRANCH:
             continue
-        if path in ALLOWED_EXACT_CHANGED_PATHS:
+        if branch == RESULT_BRANCH and path.startswith(FIRMWARE_SOURCE_PREFIXES):
+            fail(f"firmware source changed on hardware result branch: {path}")
+        if path in allowed_exact:
             continue
-        if OPTIONAL_HELPER_RE.match(path):
+        if branch == EXPECTED_BRANCH and OPTIONAL_HELPER_RE.match(path):
             continue
         if any(path.startswith(prefix) for prefix in ALLOWED_PREFIXES):
             continue
@@ -593,7 +646,87 @@ def validate_hardware_plan_fixture(payload: dict[str, Any], plan_text: str) -> N
         require_phrase(plan_text, phrase, "hardware plan")
 
 
-def validate_docs_and_fixtures() -> None:
+def validate_hardware_failure_fixture(payload: dict[str, Any], result_text: str, label: str) -> None:
+    expected = {
+        "schema_name": "glyph_diagnostic_source_view_candidate_published_hardware_failure",
+        "status": "HARDWARE_FAIL",
+        "overall_result": "HARDWARE_FAIL",
+        "branch_under_test": EXPECTED_BRANCH,
+        "result_branch": RESULT_BRANCH,
+        "operator_report": "tested, failed. same disconnects happen. I reflashed an older working version for use.",
+        "parser_payload_path_enabled": False,
+        "parse_ultimate_runtime_config_payload_called": False,
+        "ultimate_runtime_config_parser_included_or_used": False,
+        "candidate_materialization_source": "kSourceOwnedCurrentBaselineRuntimeConfig",
+        "candidate_active_publication_enabled": True,
+        "published_active_view_when_equivalent": "candidate.view",
+        "fallback_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+        "source_view_candidate_publication_safe_for_merge": False,
+        "candidate_backed_active_runtime_view_safe": False,
+        "candidate_view_active_publication_reproduces_disconnect": True,
+        "parser_payload_required_to_reproduce_disconnect": False,
+        "candidate_materialization_presence_alone_sufficient_to_reproduce_disconnect": False,
+        "source_owned_active_state_preselection_remains_repair_baseline": True,
+        "parsed_candidate_presence_source_owned_published_remains_hardware_pass": True,
+        "low_level_failure_mechanism_proven": False,
+        "implementation_branch_merge_allowed": False,
+        "requires_new_publication_model": True,
+        "runtime_loaded_config_implemented": False,
+        "storage_implemented": False,
+        "webserial_device_write_implemented": False,
+        "backend_config_pb_write_path_implemented": False,
+        "flashing_automation_implemented": False,
+        "nunchuk_status": "NOT_TESTED",
+    }
+    for key, value in expected.items():
+        if payload.get(key) != value:
+            fail(f"{label} fixture {key!r} mismatch: expected {value!r}, got {payload.get(key)!r}")
+    rows = payload.get("rows")
+    if not isinstance(rows, list):
+        fail(f"{label} fixture rows must be a list")
+    row_ids = [row.get("id") for row in rows if isinstance(row, dict)]
+    if row_ids != EXPECTED_HARDWARE_ROWS:
+        fail(f"{label} rows mismatch: expected {EXPECTED_HARDWARE_ROWS!r}, got {row_ids!r}")
+    for row in rows:
+        if not isinstance(row, dict):
+            fail(f"{label} row must be an object")
+        row_id = row.get("id")
+        expected_status = EXPECTED_FAILURE_ROW_STATUSES.get(row_id)
+        if row.get("status") != expected_status:
+            fail(f"{label} row {row_id} must be {expected_status}, got {row.get('status')}")
+        require_phrase(result_text, f"| {row_id} |", label)
+        require_phrase(result_text, f"| {row_id} | {row['scope']} | {expected_status} |", label)
+
+    for phrase in (
+        "status: HARDWARE_FAIL",
+        "overall_result: HARDWARE_FAIL",
+        f"result_branch: `{RESULT_BRANCH}`",
+        "tested, failed. same disconnects happen. I reflashed an older working version for use.",
+        "candidate-backed active runtime view",
+        "reproduces the disconnect class",
+        "Parser payload parsing is not required to reproduce the failure.",
+        "Candidate materialization presence alone is not sufficient",
+        "prior parsed-candidate-present/source-owned-published",
+        "`source_view_candidate_publication_safe_for_merge`: `false`",
+        "`candidate_backed_active_runtime_view_safe`: `false`",
+        "`parser_payload_required_to_reproduce_disconnect`: `false`",
+        "`source_owned_active_state_preselection_remains_repair_baseline`: `true`",
+        "`parsed_candidate_presence_source_owned_published_remains_hardware_pass`: `true`",
+        "`implementation_branch_merge_allowed`: `false`",
+        "`requires_new_publication_model`: `true`",
+        "`low_level_failure_mechanism_proven`: `false`",
+        "Runtime-loaded config is not implemented.",
+        "Runtime-config storage is not implemented.",
+        "WebSerial/device write is not implemented.",
+        "backend/config.pb write path is not implemented.",
+        "Firmware flashing automation is not implemented.",
+        "The low-level failure mechanism is not proven.",
+        "Nunchuk remains NOT_TESTED.",
+    ):
+        require_phrase(result_text, phrase, label)
+
+
+def validate_docs_and_fixtures(branch: str) -> None:
     doc = read_required(DOC_PATH)
     fixture = load_json_object(FIXTURE_PATH)
     build_report = read_required(BUILD_REPORT_PATH)
@@ -605,9 +738,8 @@ def validate_docs_and_fixtures() -> None:
     current_state = read_required(CURRENT_STATE_PATH)
     roadmap = read_required(ROADMAP_PATH)
 
-    for phrase in (
-        "status: WAITING_FOR_HARDWARE_TEST",
-        "overall_result: NOT_TESTED",
+    result_mode = branch == RESULT_BRANCH or "status: HARDWARE_FAIL" in doc
+    expected_doc_phrases = [
         "Parser payload activation is disabled and absent.",
         "ParseUltimateRuntimeConfigPayload(...) is not called.",
         "Candidate state is materialized from kSourceOwnedCurrentBaselineRuntimeConfig.",
@@ -618,9 +750,31 @@ def validate_docs_and_fixtures() -> None:
         "Active resolver chain does not first-trigger candidate materialization.",
         "ResolveActiveRuntimeConfig() dereferences only the stable published ActiveRuntimeConfigState.active_view.",
         "UpdateAnalogOutputs(...) binds runtime config through ResolveActiveRuntimeConfig()",
-        "No hardware result is claimed by this packet.",
         "Nunchuk remains NOT_TESTED.",
-    ):
+    ]
+    if result_mode:
+        expected_doc_phrases.extend(
+            [
+                "status: HARDWARE_FAIL",
+                "overall_result: HARDWARE_FAIL",
+                f"result_branch: `{RESULT_BRANCH}`",
+                "tested, failed. same disconnects happen. I reflashed an older working version for use.",
+                "publishing candidate-backed active runtime view/table pointers reproduces the disconnect class",
+                "`parser_payload_required_to_reproduce_disconnect`: `false`",
+                "`candidate_backed_active_runtime_view_safe`: `false`",
+                "`implementation_branch_merge_allowed`: `false`",
+                "`requires_new_publication_model`: `true`",
+            ]
+        )
+    else:
+        expected_doc_phrases.extend(
+            [
+                "status: WAITING_FOR_HARDWARE_TEST",
+                "overall_result: NOT_TESTED",
+                "No hardware result is claimed by this packet.",
+            ]
+        )
+    for phrase in expected_doc_phrases:
         require_phrase(doc, phrase, "diagnostic doc")
 
     for text, label in (
@@ -630,18 +784,29 @@ def validate_docs_and_fixtures() -> None:
         (roadmap, "roadmap"),
     ):
         require_phrase(text, "diagnostic_source_view_candidate_published", label)
-        require_phrase(text, "WAITING_FOR_HARDWARE_TEST", label)
+        if result_mode:
+            require_phrase(text, "HARDWARE_FAIL", label)
+            require_phrase(text, "parser payload parsing is not required", label)
+            require_phrase(text, "candidate-backed active runtime view", label)
+        else:
+            require_phrase(text, "WAITING_FOR_HARDWARE_TEST", label)
 
     validate_diagnostic_fixture(fixture)
     validate_build_report_fixture(build_fixture, build_report)
-    validate_hardware_plan_fixture(hardware_fixture, hardware_plan)
+    if result_mode:
+        hardware_failure = read_required(HARDWARE_FAILURE_PATH)
+        hardware_failure_fixture = load_json_object(HARDWARE_FAILURE_FIXTURE_PATH)
+        validate_hardware_failure_fixture(hardware_fixture, hardware_plan, "calibration hardware failure")
+        validate_hardware_failure_fixture(hardware_failure_fixture, hardware_failure, "runtime config hardware failure")
+    else:
+        validate_hardware_plan_fixture(hardware_fixture, hardware_plan)
 
 
 def main() -> None:
     branch = validate_branch()
     validate_changed_paths(changed_paths(branch), branch)
     validate_source(read_required(ULTIMATE_PATH), branch)
-    validate_docs_and_fixtures()
+    validate_docs_and_fixtures(branch)
     print("diagnostic source-view candidate published checks passed")
 
 

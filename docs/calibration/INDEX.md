@@ -50,7 +50,7 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
-## Runtime Config Diagnostic Hardware Plans
+## Runtime Config Diagnostic Hardware Plans And Results
 
 - `diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.md`
   - `HARDWARE_PASS` result for the parsed-candidate-present/source-owned-published
@@ -58,11 +58,17 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json`
   - matching machine-readable hardware result fixture.
 - `diagnostic_source_view_candidate_published_hardware_plan_2026-06-10.md`
-  - `WAITING_FOR_HARDWARE_TEST` / `HARDWARE_PLAN` for the source-view candidate
-    publication diagnostic branch; all rows are NOT_TESTED and Nunchuk remains
-    NOT_TESTED.
+  - `HARDWARE_FAIL` result for the source-view candidate publication diagnostic
+    branch; candidate-backed active runtime view/table pointer publication
+    reproduces the disconnect class, parser payload parsing is not required,
+    and Nunchuk remains NOT_TESTED.
 - `fixtures/diagnostic_source_view_candidate_published_hardware_plan_2026-06-10.json`
-  - matching machine-readable hardware plan fixture.
+  - matching machine-readable hardware failure fixture.
+- `docs/runtime_config/diagnostic_source_view_candidate_published_hardware_failure_2026-06-10.md`
+  - runtime-config hardware failure packet for the source-view candidate
+    publication diagnostic branch.
+- `docs/runtime_config/fixtures/diagnostic_source_view_candidate_published_hardware_failure_2026-06-10.json`
+  - matching runtime-config hardware failure fixture.
 
 ## Official Configurator Corpus And Source Correction
 

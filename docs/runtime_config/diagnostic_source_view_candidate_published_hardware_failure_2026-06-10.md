@@ -1,4 +1,4 @@
-# Diagnostic Source-View Candidate Published Hardware Failure
+# Diagnostic Source-View Candidate Published Hardware Failure - 2026-06-10
 
 status: HARDWARE_FAIL
 overall_result: HARDWARE_FAIL
@@ -6,22 +6,29 @@ overall_result: HARDWARE_FAIL
 branch_under_test: `runtime-config-diagnostic-source-view-candidate-published`
 result_branch: `runtime-config-diagnostic-source-view-candidate-published-hardware-failure`
 
-baseline branch: `configurator`
-
 operator_report: `tested, failed. same disconnects happen. I reflashed an older working version for use.`
 
-## Purpose
+## Result Scope
 
-Record the hardware result for the diagnostic branch that materializes a
-RAM-backed candidate `RuntimeConfigView` from the already-safe source-owned
-baseline and publishes `candidate.view` as the active runtime view only after
-validation and equivalence.
+This result records that publishing a candidate-backed `RuntimeConfigView` /
+candidate-backed runtime table pointers as the active runtime view reproduces
+the disconnect class, even when the candidate is materialized from
+`kSourceOwnedCurrentBaselineRuntimeConfig`, validated, and checked equivalent to
+the source-owned baseline before publication.
 
-This is a recorded hardware failure. Publishing candidate-backed
-`RuntimeConfigView` / candidate-backed runtime table pointers as the active view
-reproduces the disconnect class. Candidate-backed active runtime view
-publication is unsafe. Parser payload parsing is not required to reproduce the
-failure.
+Candidate-backed active runtime view publication is unsafe.
+
+Parser payload parsing is not required to reproduce the failure. No parser
+payload path is used, no `ParseUltimateRuntimeConfigPayload(...)` call exists,
+and no `UltimateRuntimeConfigParser` include/use exists on the implementation
+branch under test.
+
+Candidate materialization presence alone is not sufficient to reproduce the
+disconnect based on the prior parsed-candidate-present/source-owned-published
+diagnostic hardware pass on
+`runtime-config-diagnostic-parsed-candidate-present-source-owned-published`,
+where parsed candidate machinery was present but the source-owned baseline
+remained the published active view.
 
 The low-level failure mechanism is not proven.
 
@@ -70,8 +77,6 @@ The low-level failure mechanism is not proven.
 - backend/config.pb write path is not implemented.
 - Firmware flashing automation is not implemented.
 - Parser payload activation is not implemented.
-- Candidate materialization presence alone is not sufficient to reproduce the
-  disconnect based on the prior parsed-candidate-present/source-owned-published
-  diagnostic hardware pass.
+- No runtime-loaded, storage, write, WebSerial, or flashing behavior is claimed.
 - The low-level failure mechanism is not proven.
 - Nunchuk remains NOT_TESTED.

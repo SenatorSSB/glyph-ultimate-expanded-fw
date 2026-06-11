@@ -179,15 +179,23 @@ hardware-gated repair. Active publication of `candidate.view` remains the main
 suspect, while the low-level failure mechanism remains unproven.
 
 The source-view-candidate-published diagnostic
-(`diagnostic_source_view_candidate_published`) is `WAITING_FOR_HARDWARE_TEST`.
+(`diagnostic_source_view_candidate_published`) has a recorded `HARDWARE_FAIL`
+on
+`runtime-config-diagnostic-source-view-candidate-published-hardware-failure`.
 It disables the parser payload path entirely, materializes a RAM-backed
 candidate from `kSourceOwnedCurrentBaselineRuntimeConfig`, validates candidate
 state and source-owned equivalence, publishes `candidate.view` only after that
 validation/equivalence succeeds, and falls back to source-owned baseline
-otherwise. It is a hardware diagnostic for candidate active publication only;
-runtime-loaded config, storage, WebSerial/device write, backend/config.pb write,
-firmware flashing automation, parser payload activation, and nunchuk validation
-remain out of scope.
+otherwise. Publishing candidate-backed active runtime view/table pointers
+reproduces the disconnect class; parser payload parsing is not required.
+Candidate materialization presence alone is not sufficient to reproduce the
+disconnect based on the prior parsed-candidate-present/source-owned-published
+`HARDWARE_PASS`. Candidate-backed active runtime view publication is unsafe for
+merge, a new publication model is required, source-owned active-state
+preselection remains the repair baseline, and the low-level failure mechanism
+remains unproven. Runtime-loaded config, storage, WebSerial/device write,
+backend/config.pb write, firmware flashing automation, parser payload
+activation, and nunchuk validation remain out of scope.
 
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
