@@ -318,11 +318,5 @@ Validated branch artifact from the local build:
 .pio/build/glyph_mk6/firmware.uf2
 ```
 
-UF2 whole-file SHA-256 from `tools/uf2/inspect_uf2.py`:
-
-```text
-4b7512d0578dbf94cde7c39ae173dfcac316289b1717789624d269d6a8e9e709
-```
-
 Use the generated `.uf2` for the manual hardware validation flow. Do not add
 automated flashing or device-write steps on this branch.
