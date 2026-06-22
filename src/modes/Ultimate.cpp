@@ -320,22 +320,24 @@ LayerState ResolveLayerState(const InputState &inputs) {
     state.layer_left_active = false;
     state.layer_right_active = false;
     state.layer_direction_active = state.layer_left_active || state.layer_right_active;
-    state.lf4_submode_active = inputs.lf4;
-    state.layer_transform_active = (inputs.lt2 && !inputs.lf4) || state.lf4_submode_active;
+    state.lf4_submode_active = false;
+    state.layer_transform_active = false;
     state.c_stick_any_active = inputs.rt2 || inputs.rt3 || inputs.rt4 || inputs.rt5;
-    state.rf2_suppressed_by_lf4_submode_cstick = state.lf4_submode_active && state.c_stick_any_active;
+    state.rf2_suppressed_by_lf4_submode_cstick = false;
     return state;
 }
 
 EffectiveDirectionState ResolveEffectiveDirections(const InputState &inputs, const LayerState &layer) {
-    const bool lt2_rf2_force_up_active = inputs.lt2 && !inputs.lf4 && inputs.rf2;
-    const bool lf4_submode_rf3_force_up_active = inputs.lf4 && inputs.rf3;
-
     EffectiveDirectionState state;
-    state.force_up_active = inputs.rf5 || lt2_rf2_force_up_active || lf4_submode_rf3_force_up_active;
-    state.horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer.layer_left_active, layer.layer_right_active);
-    state.up = inputs.lf2 || state.force_up_active;
-    state.down = (inputs.lf5 || inputs.lt6) && !state.force_up_active;
+    state.force_up_active = inputs.lf5 || inputs.lt5 || inputs.rf6;
+    state.horizontal_axis = ResolveHorizontalAxis(
+        inputs.lf3 || inputs.rf8,
+        inputs.lf1,
+        layer.layer_left_active,
+        layer.layer_right_active
+    );
+    state.up = state.force_up_active;
+    state.down = inputs.lf2 && !state.force_up_active;
     state.left = state.horizontal_axis < 0;
     state.right = state.horizontal_axis > 0;
     return state;
@@ -343,68 +345,50 @@ EffectiveDirectionState ResolveEffectiveDirections(const InputState &inputs, con
 
 RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, const EffectiveDirectionState &directions) {
     (void)layer;
-    const bool down_a_active = inputs.lt6;
-    const bool up_a_active = inputs.rf5;
-    const bool lt2_sublayer_active = inputs.lt2 && !inputs.lf4 && (inputs.rf1 || inputs.rf2 || inputs.rf3 || inputs.rf4);
-    const bool lt2_rf3_active = inputs.lt2 && !inputs.lf4 && inputs.rf3;
-    const bool base_rf3_x_active = inputs.rf3 && !inputs.lt2 && !inputs.lf4;
-    const bool rf9_base_rf3_x_mode_active = inputs.rf9 && base_rf3_x_active;
-    const bool rf4_suppressed_by_rf9_rf3_mode = rf9_base_rf3_x_mode_active && inputs.rf4;
-    const bool rt1_rf4_custom_active = inputs.rt1 && inputs.rf4 && !rf4_suppressed_by_rf9_rf3_mode;
-    const bool rf4_modifier_suppressed_by_cstick = inputs.rf4 && layer.c_stick_any_active && !rt1_rf4_custom_active;
-    const bool rf4_behavior_available = inputs.rf4 && !rf4_modifier_suppressed_by_cstick && !rf4_suppressed_by_rf9_rf3_mode;
-    const bool lt2_rf4_active = inputs.lt2 && !inputs.lf4 && rf4_behavior_available;
-    const bool lf4_rf2_deactivates_rf4 = inputs.lf4 && inputs.rf2;
-    const bool tilt1_pressed = rf4_behavior_available && (!inputs.lt2 || inputs.lf4) && !inputs.rt1 && !lf4_rf2_deactivates_rf4;
-    const bool tilt2_pressed = inputs.rt1 && !inputs.rf4;
-    const bool rf3_x_suppressed_by_rf9 = rf9_base_rf3_x_mode_active && !layer.c_stick_any_active;
-    const bool rf3_x_restored_by_cstick = rf9_base_rf3_x_mode_active && layer.c_stick_any_active;
+    (void)directions;
 
     RoleState state;
-    state.mode_active = inputs.rf8;
-    state.x1_active = inputs.lt5;
-    state.x2_active = inputs.lt4;
-    state.y1_active = inputs.lt2 && !inputs.lf4 && !lt2_sublayer_active;
-    state.layer_rf3_normal_x_active = lt2_rf3_active;
-    state.rf4_layer_flipper_active = lt2_rf4_active;
-    state.rt1_rf4_custom_active = rt1_rf4_custom_active;
-    state.rf4_modifier_suppressed_by_cstick = rf4_modifier_suppressed_by_cstick;
-    state.rf4_behavior_available = rf4_behavior_available;
-    state.base_rf3_x_active = base_rf3_x_active;
-    state.rf9_base_rf3_x_mode_active = rf9_base_rf3_x_mode_active;
-    state.rf4_suppressed_by_rf9_rf3_mode = rf4_suppressed_by_rf9_rf3_mode;
-    state.rf3_x_suppressed_by_rf9 = rf3_x_suppressed_by_rf9;
-    state.rf3_x_restored_by_cstick = rf3_x_restored_by_cstick;
+    state.mode_active = inputs.rf5 || inputs.rf9;
+    state.x1_active = inputs.lt4;
+    state.x2_active = inputs.rf15 || inputs.rf12;
+    state.y1_active = inputs.lt3;
+    state.layer_rf3_normal_x_active = false;
+    state.rf4_layer_flipper_active = false;
+    state.rt1_rf4_custom_active = false;
+    state.rf4_modifier_suppressed_by_cstick = false;
+    state.rf4_behavior_available = inputs.rf4;
+    state.base_rf3_x_active = false;
+    state.rf9_base_rf3_x_mode_active = false;
+    state.rf4_suppressed_by_rf9_rf3_mode = false;
+    state.rf3_x_suppressed_by_rf9 = false;
+    state.rf3_x_restored_by_cstick = false;
     state.tilt3_effective = false;
-    state.tilt1_effective = tilt1_pressed;
-    state.tilt2_effective = tilt2_pressed;
-    state.z_airdodge_override_active = inputs.rf6;
-    state.null_modifier_active = inputs.rf9 && !state.rf9_base_rf3_x_mode_active && !state.rf4_behavior_available;
-    state.hard_up_b_active = inputs.rf7;
-    state.ls_to_dpad_active = inputs.rf13;
-    state.direction_plus_a_active = down_a_active || up_a_active;
-    state.direction_plus_a_force_up = state.direction_plus_a_active && (up_a_active || directions.force_up_active);
+    state.tilt1_effective = inputs.rf4;
+    state.tilt2_effective = inputs.rf3;
+    state.z_airdodge_override_active = false;
+    state.null_modifier_active = false;
+    state.hard_up_b_active = false;
+    state.ls_to_dpad_active = false;
+    state.direction_plus_a_active = false;
+    state.direction_plus_a_force_up = false;
     return state;
 }
 
 void ApplyDigitalButtonOutputs(const InputState &inputs, const LayerState &layer, const RoleState &roles, OutputState &outputs) {
-    const bool lt2_sublayer_active = inputs.lt2 && !inputs.lf4 && (inputs.rf1 || inputs.rf2 || inputs.rf3 || inputs.rf4);
-    const bool lt2_rf1_x_active = inputs.lt2 && !inputs.lf4 && inputs.rf1 && !layer.c_stick_any_active;
-    const bool lf4_rf2_x_active = inputs.lf4 && inputs.rf2 && !layer.c_stick_any_active;
-    const bool base_rf1_a_active = inputs.rf1 && !lt2_sublayer_active;
-    const bool base_rf2_b_active = inputs.rf2 && !inputs.lt2 && !inputs.lf4;
+    (void)layer;
+    (void)roles;
 
-    outputs.a = base_rf1_a_active || inputs.lt6 || inputs.rf5;
-    outputs.b = base_rf2_b_active || inputs.lf4 || inputs.rf7 || (inputs.lt2 && !inputs.lf4 && inputs.rf3);
-    outputs.x = (roles.base_rf3_x_active && !roles.rf3_x_suppressed_by_rf9) || lt2_rf1_x_active || lf4_rf2_x_active;
-    outputs.y = inputs.rf10;
-    outputs.buttonL = inputs.lt1 || inputs.lt3;
+    outputs.a = inputs.rt1 || inputs.lt2 || inputs.rf10;
+    outputs.b = inputs.rf1 || inputs.lt2;
+    outputs.x = inputs.rf7;
+    outputs.y = inputs.rf2;
+    outputs.buttonL = inputs.lf4 || inputs.rf10;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
-    outputs.buttonR = inputs.rf6;
-    outputs.triggerLDigital = inputs.lt1 || inputs.lt3;
-    outputs.triggerRDigital = inputs.rf16 || inputs.lt3;
+    outputs.buttonR = inputs.lt1;
+    outputs.triggerLDigital = inputs.lf4 || inputs.rf10;
+    outputs.triggerRDigital = inputs.rf10;
 
-    outputs.start = inputs.mb7;
+    outputs.start = inputs.rf16;
     outputs.select = inputs.mb6;
     outputs.home = inputs.mb5;
     outputs.capture = inputs.mb4;
@@ -416,12 +400,17 @@ void ApplyDpadOutputs(const InputState &inputs, const EffectiveDirectionState &d
     outputs.dpadLeft = 0;
     outputs.dpadRight = 0;
 
+    outputs.dpadUp = inputs.rf13;
+    outputs.dpadDown = inputs.rf11;
+    outputs.dpadLeft = inputs.lf7;
+    outputs.dpadRight = inputs.lf6;
+
     // Preserve source-backed nunchuk C D-pad layer behavior.
     if (inputs.nunchuk_c) {
-        outputs.dpadUp = inputs.rt5;
-        outputs.dpadDown = inputs.rt2;
-        outputs.dpadLeft = inputs.rt3;
-        outputs.dpadRight = inputs.rt4;
+        outputs.dpadUp |= inputs.rt4;
+        outputs.dpadDown |= inputs.rt2;
+        outputs.dpadLeft |= inputs.rt3;
+        outputs.dpadRight |= inputs.rt5;
     }
 
     if (roles.ls_to_dpad_active) {
@@ -441,9 +430,9 @@ void ApplyDigitalDirectionOutputs(const EffectiveDirectionState &directions, con
 
 void ApplyRightStickDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     outputs.rightStickLeft = inputs.rt3;
-    outputs.rightStickRight = inputs.rt4;
+    outputs.rightStickRight = inputs.rt5;
     outputs.rightStickDown = inputs.rt2;
-    outputs.rightStickUp = inputs.rt5;
+    outputs.rightStickUp = inputs.rt4;
 
     outputs.modX = false;
     outputs.modY = false;
@@ -460,29 +449,10 @@ RuntimeTableId SelectRuntimeTableId(
     bool tilt2_effective,
     bool tilt3_effective
 ) {
-    if (tilt1_effective && tilt2_effective) {
-        return RuntimeTableId::RT1RF4Custom;
-    }
-
-    const bool y1_tilt1_special_active = y1_active && tilt1_effective && !x1_active && !x2_active && !tilt2_effective && !tilt3_effective;
-    if (y1_tilt1_special_active) {
-        return mode_active ? RuntimeTableId::MY1Tilt1 : RuntimeTableId::Y1Tilt1;
-    }
-
-    const bool layer_flipper_effective = layer_flipper_active;
-    const bool layer_normal_x_effective = layer_normal_x_active && !layer_flipper_effective;
-
-    const bool y1_layer_normal_x_special_active = y1_active && layer_normal_x_effective
-        && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
-    if (y1_layer_normal_x_special_active) {
-        return mode_active ? RuntimeTableId::MY1LayerNormalX : RuntimeTableId::Y1LayerNormalX;
-    }
-
-    const bool y1_layer_flipper_special_active = y1_active && layer_flipper_effective
-        && !x1_active && !x2_active && !tilt1_effective && !tilt2_effective && !tilt3_effective;
-    if (y1_layer_flipper_special_active) {
-        return mode_active ? RuntimeTableId::MY1LayerFlipper : RuntimeTableId::Y1LayerFlipper;
-    }
+    const bool layer_flipper_effective = false;
+    const bool layer_normal_x_effective = false;
+    (void)layer_normal_x_active;
+    (void)layer_flipper_active;
 
     int active_modifier_count = 0;
     EffectiveModifier single_modifier = EffectiveModifier::None;
@@ -558,7 +528,7 @@ RuntimeTableId SelectRuntimeTableId(
         case EffectiveModifier::LayerFlipper:
             return RuntimeTableId::MLayerFlipper;
         case EffectiveModifier::Tilt1:
-            return RuntimeTableId::ModeDefault;
+            return RuntimeTableId::MTilt1;
         case EffectiveModifier::Tilt2:
             return RuntimeTableId::MTilt2;
         case EffectiveModifier::Tilt3:
@@ -613,6 +583,24 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
     outputs.leftStickY = direction_plus_a_point.y;
 }
 
+void ApplyFriendProfileCStickRawOutputs(bool mode_active, const StickDirections &stick_directions, OutputState &outputs) {
+    if (stick_directions.cx < 0) {
+        outputs.rightStickX = mode_active ? 1 : 39;
+    } else if (stick_directions.cx > 0) {
+        outputs.rightStickX = mode_active ? 255 : 217;
+    } else {
+        outputs.rightStickX = 128;
+    }
+
+    if (stick_directions.cy < 0) {
+        outputs.rightStickY = 1;
+    } else if (stick_directions.cy > 0) {
+        outputs.rightStickY = 255;
+    } else {
+        outputs.rightStickY = 128;
+    }
+}
+
 const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
     static_assert(
         ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig),
@@ -652,16 +640,10 @@ void ApplyRF3VerticalCStickDiagonalOverride(
     const StickDirections &stick_directions,
     OutputState &outputs
 ) {
-    if (!inputs.rf3 || inputs.rt3 || inputs.rt4 || stick_directions.cy == 0) {
-        return;
-    }
-
-    if (directions.left == directions.right) {
-        return;
-    }
-
-    outputs.rightStickX = directions.left ? 95 : 161;
-    outputs.rightStickY = stick_directions.cy > 0 ? 165 : 91;
+    (void)inputs;
+    (void)directions;
+    (void)stick_directions;
+    (void)outputs;
 }
 
 void ApplyNullOverride(OutputState &outputs) {
@@ -699,12 +681,12 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     UpdateDirections(
         effective_directions.left, // Left (LF3 with cancellation)
         effective_directions.right, // Right (LF1 with cancellation)
-        effective_directions.down, // Down (LT6/LF5, suppressed by forced-Up)
-        effective_directions.up, // Up (RF5, LT2+RF2, and LF4+RF3 forced-Up)
+        effective_directions.down, // Down (LF2, suppressed by forced-Up)
+        effective_directions.up, // Up (LF5/LT5/RF6)
         inputs.rt3, // C-Left
-        inputs.rt4, // C-Right
+        inputs.rt5, // C-Right
         inputs.rt2, // C-Down
-        inputs.rt5, // C-Up
+        inputs.rt4, // C-Up
         ANALOG_STICK_MIN,
         ANALOG_STICK_NEUTRAL,
         ANALOG_STICK_MAX,
@@ -712,9 +694,9 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     );
 
     // Senscope Glyph Smash Box runtime begin
-    // Analog priority: table output, direction-plus-A, RF6 low magnitude,
-    // RF7 hard Up+B, C-stick ASDI, RF9 null, then the pre-existing nunchuk override below.
-    const bool rf4_rf2_minus41_active = roles.rf4_behavior_available && inputs.rf2 && !inputs.lt2 && !inputs.lf4 && !roles.rt1_rf4_custom_active;
+    // Friend profile3 WIP priority: source-owned left-stick table output,
+    // exact C-stick raw output, then the pre-existing nunchuk override below.
+    const bool rf4_rf2_minus41_active = false;
     RuntimeTableId active_table_id = SelectRuntimeTableId(
         roles.mode_active,
         roles.x1_active,
@@ -748,14 +730,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         }
     }
 
-    // C-stick ASDI Slideoff angle overrides any other C-stick modifiers (such as
-    // angled fsmash).
-    if (directions.cx != 0 && directions.cy != 0) {
-        // 5250 8500 = 42 68
-        outputs.rightStickX = 128 + (directions.cx * 42);
-        outputs.rightStickY = 128 + (directions.cy * 68);
-    }
-
+    ApplyFriendProfileCStickRawOutputs(roles.mode_active, directions, outputs);
     ApplyRF3VerticalCStickDiagonalOverride(inputs, effective_directions, directions, outputs);
 
     if (roles.null_modifier_active) {
