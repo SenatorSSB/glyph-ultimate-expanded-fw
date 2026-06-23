@@ -32,8 +32,8 @@ existing repo build workflow.
 | lf3 | left |
 | lf2 | down |
 | lf1 | right |
-| lf5 | up |
-| lt5 | up |
+| lf5 | auxiliary up-like direction |
+| lt5 | proper left-stick up |
 | lt1 | z |
 | lt4 | x1 |
 | lt3 | y1 |
@@ -62,7 +62,11 @@ existing repo build workflow.
 | lf7 | dpad left |
 | lf6 | dpad right |
 
-Duplicate bindings are intentional: `lf5`, `lt5`, and `rf6` all provide Up;
+Duplicate Up-like bindings are intentional, but their runtime semantics differ
+on the friend firmware branch: `lt5` is the proper left-stick Up source and is
+SOCD-governed against `lf2`/Down by the source-owned 2IP helper, while `lf5`
+and `rf6` are auxiliary Up-like direction sources for modifier coordinate
+selection only when Down is not active. `lf5` no longer force-suppresses Down.
 `lf3` and `rf8` both provide Left; `rf5` and `rf9` both provide Mode.
 Composite bindings are intentional: `lt2` is A+B and `rf10` is L+R+A.
 Standalone R is `rf16`; Start is `mb7`, matching the confirmed working runtime

@@ -333,15 +333,17 @@ LayerState ResolveLayerState(const InputState &inputs) {
 
 EffectiveDirectionState ResolveEffectiveDirections(const InputState &inputs, const LayerState &layer) {
     EffectiveDirectionState state;
-    state.force_up_active = inputs.lf5 || inputs.lt5 || inputs.rf6;
+    const bool proper_up_active = inputs.lt5;
+    const bool auxiliary_up_active = inputs.lf5 || inputs.rf6;
+    state.force_up_active = false;
     state.horizontal_axis = ResolveHorizontalAxis(
         inputs.lf3 || inputs.rf8,
         inputs.lf1,
         layer.layer_left_active,
         layer.layer_right_active
     );
-    state.up = state.force_up_active;
-    state.down = inputs.lf2 && !state.force_up_active;
+    state.up = proper_up_active || (auxiliary_up_active && !inputs.lf2);
+    state.down = inputs.lf2;
     state.left = state.horizontal_axis < 0;
     state.right = state.horizontal_axis > 0;
     return state;
@@ -745,9 +747,62 @@ void ApplyNullOverride(OutputState &outputs) {
 
 Ultimate::Ultimate() : ControllerMode() {}
 
+void Ultimate::HandleSocd(InputState &inputs) {
+    if (_config == nullptr) {
+        return;
+    }
+
+    for (size_t i = 0; i < _config->socd_pairs_count; i++) {
+        const SocdPair &pair = _config->socd_pairs[i];
+        Button button_dir1 = pair.button_dir1;
+        Button button_dir2 = pair.button_dir2;
+
+        // Friend-only runtime swap: keep the baked profile fixture unchanged
+        // while applying the source-owned SOCD_2IP helper to LT5/LF2.
+        if (
+            pair.button_dir1 == BTN_LF5 &&
+            pair.button_dir2 == BTN_LF2 &&
+            pair.socd_type == SOCD_2IP
+        ) {
+            button_dir1 = BTN_LT5;
+        }
+
+        switch (pair.socd_type) {
+            case SOCD_NEUTRAL:
+                socd::neutral(inputs, button_dir1, button_dir2);
+                break;
+            case SOCD_2IP:
+                socd::second_input_priority(
+                    inputs,
+                    button_dir1,
+                    button_dir2,
+                    _friend_ultimate_socd_states[i]
+                );
+                break;
+            case SOCD_2IP_NO_REAC:
+                socd::second_input_priority_no_reactivation(
+                    inputs,
+                    button_dir1,
+                    button_dir2,
+                    _friend_ultimate_socd_states[i]
+                );
+                break;
+            case SOCD_DIR1_PRIORITY:
+                socd::dir1_priority(inputs, button_dir1, button_dir2);
+                break;
+            case SOCD_DIR2_PRIORITY:
+                socd::dir1_priority(inputs, button_dir2, button_dir1);
+                break;
+            case SOCD_UNSPECIFIED:
+            default:
+                break;
+        }
+    }
+}
+
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     // Digital priority: physical inputs, LF4 sub-mode,
-    // forced-Up resolution, button carriers, then optional LS->DPad routing.
+    // source-owned SOCD resolution, button carriers, then optional LS->DPad routing.
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
@@ -769,8 +824,8 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     UpdateDirections(
         effective_directions.left, // Left (LF3 with cancellation)
         effective_directions.right, // Right (LF1 with cancellation)
-        effective_directions.down, // Down (LF2, suppressed by forced-Up)
-        effective_directions.up, // Up (LF5/LT5/RF6)
+        effective_directions.down, // Down (LF2, SOCD-governed against LT5)
+        effective_directions.up, // Up (LT5 proper, LF5/RF6 auxiliary)
         inputs.rt3, // C-Left
         inputs.rt5, // C-Right
         inputs.rt2, // C-Down

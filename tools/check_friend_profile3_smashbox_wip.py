@@ -99,7 +99,14 @@ EXPECTED_TABLES: dict[str, tuple[tuple[int, int], ...]] = {
 }
 
 REQUIRED_SOURCE_SNIPPETS = (
-    "state.force_up_active = inputs.lf5 || inputs.lt5 || inputs.rf6;",
+    "void Ultimate::HandleSocd(InputState &inputs)",
+    "button_dir1 = BTN_LT5;",
+    "socd::second_input_priority(",
+    "const bool proper_up_active = inputs.lt5;",
+    "const bool auxiliary_up_active = inputs.lf5 || inputs.rf6;",
+    "state.force_up_active = false;",
+    "state.up = proper_up_active || (auxiliary_up_active && !inputs.lf2);",
+    "state.down = inputs.lf2;",
     "inputs.lf3 || inputs.rf8",
     "state.mode_active = inputs.rf5 || inputs.rf9;",
     "state.x1_active = inputs.lt4;",
