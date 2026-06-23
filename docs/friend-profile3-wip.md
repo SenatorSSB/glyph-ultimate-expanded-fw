@@ -52,7 +52,7 @@ existing repo build workflow.
 | rf7 | x |
 | rf8 | left |
 | rf9 | mode |
-| rf12 | y2 |
+| rf12 | forced Up Smash (Up + A) |
 | rf15 | x2 |
 | rf10 | l+r+a |
 | rf16 | r |
@@ -71,7 +71,9 @@ selection only when Down is not active. `lf5` no longer force-suppresses Down.
 Composite bindings are intentional: `lt2` is A+B and `rf10` is L+R+A.
 Standalone R is `rf16`; Start is `mb7`, matching the confirmed working runtime
 role map. `rf10` also drives R only as part of the explicitly instructed
-L+R+A composite.
+L+R+A composite. RF12 is forced Up Smash in this friend firmware: it presses A
+and forces/selects the left-stick Default-table Up point for the action. RF15
+remains X2; RF12 no longer participates in X2/Y2 modifier selection.
 
 ## Raw Coordinate Tables
 

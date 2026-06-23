@@ -280,6 +280,7 @@ struct RoleState {
     bool x1_active;
     bool x2_active;
     bool y1_active;
+    bool rf12_force_up_smash_active;
     bool layer_rf3_normal_x_active;
     bool rf4_layer_flipper_active;
     bool rt1_rf4_custom_active;
@@ -356,8 +357,9 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     RoleState state;
     state.mode_active = inputs.rf5 || inputs.rf9;
     state.x1_active = inputs.lt4;
-    state.x2_active = inputs.rf15 || inputs.rf12;
+    state.x2_active = inputs.rf15;
     state.y1_active = inputs.lt3;
+    state.rf12_force_up_smash_active = inputs.rf12;
     state.layer_rf3_normal_x_active = false;
     state.rf4_layer_flipper_active = false;
     state.rt1_rf4_custom_active = false;
@@ -375,16 +377,15 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     state.null_modifier_active = false;
     state.hard_up_b_active = false;
     state.ls_to_dpad_active = false;
-    state.direction_plus_a_active = false;
-    state.direction_plus_a_force_up = false;
+    state.direction_plus_a_active = state.rf12_force_up_smash_active;
+    state.direction_plus_a_force_up = state.rf12_force_up_smash_active;
     return state;
 }
 
 void ApplyDigitalButtonOutputs(const InputState &inputs, const LayerState &layer, const RoleState &roles, OutputState &outputs) {
     (void)layer;
-    (void)roles;
 
-    outputs.a = inputs.rt1 || inputs.lt2 || inputs.rf10;
+    outputs.a = inputs.rt1 || inputs.lt2 || inputs.rf10 || roles.rf12_force_up_smash_active;
     outputs.b = inputs.rf1 || inputs.lt2;
     outputs.x = inputs.rf7;
     outputs.y = inputs.rf2;
@@ -428,6 +429,14 @@ void ApplyDpadOutputs(const InputState &inputs, const EffectiveDirectionState &d
 }
 
 void ApplyDigitalDirectionOutputs(const EffectiveDirectionState &directions, const RoleState &roles, OutputState &outputs) {
+    if (roles.rf12_force_up_smash_active) {
+        outputs.leftStickLeft = false;
+        outputs.leftStickRight = false;
+        outputs.leftStickDown = false;
+        outputs.leftStickUp = true;
+        return;
+    }
+
     outputs.leftStickLeft = roles.ls_to_dpad_active ? false : directions.left;
     outputs.leftStickRight = roles.ls_to_dpad_active ? false : directions.right;
     outputs.leftStickDown = roles.ls_to_dpad_active ? false : directions.down;
@@ -666,7 +675,9 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
         return;
     }
 
-    const RuntimeTableId direction_plus_a_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
+    const RuntimeTableId direction_plus_a_table_id = roles.direction_plus_a_force_up
+        ? RuntimeTableId::Default
+        : (roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default);
     const size_t direction_plus_a_index = roles.direction_plus_a_force_up ? kDirectionEightIndex : kDirectionTwoIndex;
     const StickPoint direction_plus_a_point = LookupRuntimeStickPoint(runtime_config, direction_plus_a_table_id, direction_plus_a_index);
     outputs.leftStickX = direction_plus_a_point.x;
