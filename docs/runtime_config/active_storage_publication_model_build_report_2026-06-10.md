@@ -39,7 +39,8 @@ Result: PASS.
 - Candidate view is not active.
 - Dedicated active storage is not active.
 - Published active view remains `kSourceOwnedCurrentBaselineRuntimeConfig`.
-- Active output behavior changed: `false`.
+- Active behavior changed: `false`.
+- Parser payload path implemented: `false`.
 - `UpdateAnalogOutputs(...)` binds runtime config through
   `ResolveActiveRuntimeConfig()`.
 - `ResolveActiveRuntimeConfig()` dereferences only

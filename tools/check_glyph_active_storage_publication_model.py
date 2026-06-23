@@ -55,7 +55,7 @@ EXPECTED_HARDWARE_ROWS = [
     "CANDIDATE-NOT-ACTIVE-001",
     "SOURCE-OWNED-FALLBACK-001",
     "HOT-PATH-001",
-    "NO-PARSER-ACTIVE-PUBLICATION-001",
+    "NO-PARSER-PAYLOAD-PATH-001",
     "NO-STORAGE-001",
     "NO-WRITE-001",
     "NO-FLASH-001",
@@ -64,7 +64,7 @@ EXPECTED_HARDWARE_ROWS = [
 
 EVIDENCE_MATRIX = {
     "source_owned_active_state_preselection": "HARDWARE_PASS",
-    "parsed_candidate_present_source_owned_active_view": "HARDWARE_PASS",
+    "prior_diagnostic_parsed_candidate_present_source_owned_active_view": "HARDWARE_PASS",
     "parsed_candidate_view_active": "HARDWARE_FAIL",
     "source_owned_materialized_candidate_view_active": "HARDWARE_FAIL",
 }
@@ -74,6 +74,11 @@ CONCLUSIONS = {
     "candidate_buffer_may_validate_values": True,
     "candidate_buffer_must_not_be_active": True,
     "dedicated_active_storage_required": True,
+    "dedicated_active_storage_scaffolded": True,
+    "dedicated_active_storage_active": False,
+    "active_behavior_changed": False,
+    "hardware_test_required_before_merge": False,
+    "parser_payload_path_implemented": False,
     "low_level_failure_mechanism_proven": False,
     "runtime_loaded_config_implemented": False,
     "storage_implemented": False,
@@ -277,29 +282,27 @@ def forbid_tokens(text: str, tokens: tuple[str, ...], label: str) -> None:
             fail(f"{label} must not mention {token}")
 
 
-def validate_parse_call_boundary(source: str, doc: str) -> None:
+def validate_no_parser_payload_path(source: str) -> None:
     active_source = strip_cpp_comments(source)
-    if "ParseUltimateRuntimeConfigPayload(" not in active_source:
-        return
-    require_phrase(
-        doc,
-        "ParseUltimateRuntimeConfigPayload(...) remains inactive and outside active publication path.",
-        "active-storage doc",
+    forbid_tokens(
+        active_source,
+        (
+            "UltimateRuntimeConfigParser",
+            "ParseUltimateRuntimeConfigPayload",
+            "DiagnosticParsedCandidateState",
+            "InitializeDiagnosticParsedCandidateState",
+            "kDiagnosticParsedCandidateState",
+            "kDiagnosticSourceOwnedParsedPayload",
+            "ParsedPayloadValid",
+            "ParsedPayloadEquivalent",
+        ),
+        "Ultimate.cpp",
     )
-    for function_name in (
-        "GetActiveRuntimeConfigState",
-        "ResolveActiveRuntimeConfig",
-        "UpdateAnalogOutputs",
-        "CopyRuntimeConfigViewIntoActiveStorage",
-        "ValidateRuntimeConfigActiveStorage",
-    ):
-        body = strip_cpp_comments(extract_function(source, function_name))
-        if "ParseUltimateRuntimeConfigPayload(" in body:
-            fail(f"{function_name}() must not call ParseUltimateRuntimeConfigPayload")
 
 
 def validate_source(source: str, doc: str) -> None:
     active_source = strip_cpp_comments(source)
+    validate_no_parser_payload_path(source)
     for token in (
         "enum class RuntimeConfigActiveStorageStatus",
         "RuntimeConfigActiveStorageStatus::Empty",
@@ -333,7 +336,6 @@ def validate_source(source: str, doc: str) -> None:
             "Storage",
             "Materialize",
             "CopyRuntimeConfigViewIntoActiveStorage",
-            "kDiagnosticParsedCandidateState",
         ),
         "GetActiveRuntimeConfigState",
     )
@@ -393,13 +395,19 @@ def validate_source(source: str, doc: str) -> None:
     ):
         require_token(source, expr, "RF5/RF6/LT6 source")
 
+    if "RuntimeConfigActiveStorage" in get_state_body:
+        fail("GetActiveRuntimeConfigState must not publish dedicated active storage on this branch")
+    if "CopyRuntimeConfigViewIntoActiveStorage(" in active_source:
+        for function_name in ("GetActiveRuntimeConfigState", "ResolveActiveRuntimeConfig", "UpdateAnalogOutputs"):
+            body = strip_cpp_comments(extract_function(source, function_name))
+            if "CopyRuntimeConfigViewIntoActiveStorage(" in body:
+                fail(f"{function_name}() must not activate dedicated active storage")
+
     baseline = baseline_ultimate_source()
     if normalize_block(extract_function(source, "UpdateDigitalOutputs")) != normalize_block(
         extract_function(baseline, "UpdateDigitalOutputs")
     ):
         fail("UpdateDigitalOutputs changed relative to configurator")
-
-    validate_parse_call_boundary(source, doc)
 
 
 def require_phrase(text: str, phrase: str, label: str) -> None:
@@ -431,11 +439,13 @@ def validate_model_fixture(payload: dict[str, Any]) -> None:
         "candidate_view_published_active": False,
         "candidate_owned_table_pointer_published_active": False,
         "dedicated_active_storage_scaffolded": True,
+        "dedicated_active_storage_active": False,
         "dedicated_active_storage_published_active": False,
         "published_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+        "active_behavior_changed": False,
         "active_output_behavior_changed": False,
         "hardware_test_required_before_merge": False,
-        "parser_payload_activation_implemented": False,
+        "parser_payload_path_implemented": False,
         "runtime_loaded_config_implemented": False,
         "storage_implemented": False,
         "webserial_device_write_implemented": False,
@@ -459,8 +469,10 @@ def validate_build_fixture(payload: dict[str, Any], report_text: str) -> None:
         "fallback_build_command": "./scripts/build-glyph-mk6-quiet.sh",
         "local_build_result": "PASS",
         "candidate_view_published_active": False,
+        "dedicated_active_storage_active": False,
         "dedicated_active_storage_published_active": False,
         "published_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+        "active_behavior_changed": False,
         "active_output_behavior_changed": False,
         "artifact_hashes_are_rebuild_stable": False,
         "artifact_hashes_are_checker_gate": False,
@@ -478,6 +490,8 @@ def validate_build_fixture(payload: dict[str, Any], report_text: str) -> None:
         "Artifact hashes are local observations only, not checker gates.",
         "`artifact_hashes_are_rebuild_stable`: `false`",
         "`artifact_hashes_are_checker_gate`: `false`",
+        "Active behavior changed: `false`",
+        "Parser payload path implemented: `false`",
         "No hardware result is claimed",
         "hardware_test_required_before_merge: false",
         "Nunchuk remains NOT_TESTED",
@@ -494,7 +508,9 @@ def validate_hardware_fixture(payload: dict[str, Any], plan_text: str) -> None:
         "hardware_result_claimed": False,
         "hardware_test_required_before_merge": False,
         "candidate_view_published_active": False,
+        "dedicated_active_storage_active": False,
         "dedicated_active_storage_published_active": False,
+        "parser_payload_path_implemented": False,
         "runtime_loaded_config_implemented": False,
         "storage_implemented": False,
         "webserial_device_write_implemented": False,
@@ -544,7 +560,12 @@ def validate_docs_and_fixtures() -> None:
         "Dedicated active storage is scaffolded but not activated.",
         "Candidate-backed active RuntimeConfigView publication is forbidden.",
         "Candidate-owned runtime table pointers must not be published active.",
-        "ParseUltimateRuntimeConfigPayload(...) remains inactive and outside active publication path.",
+        "Parser payload path is not implemented on this branch.",
+        "Do not include UltimateRuntimeConfigParser.hpp.",
+        "Do not call ParseUltimateRuntimeConfigPayload.",
+        "`parser_payload_path_implemented`: `false`",
+        "`dedicated_active_storage_active`: `false`",
+        "`active_behavior_changed`: `false`",
         "hardware_test_required_before_merge: false",
         "The low-level failure mechanism is not proven.",
         "Runtime-loaded config is not implemented.",
@@ -558,7 +579,7 @@ def validate_docs_and_fixtures() -> None:
 
     for phrase in (
         "source-owned active-state preselection: HARDWARE_PASS",
-        "parsed/candidate present, source-owned active view: HARDWARE_PASS",
+        "prior diagnostic: parsed/candidate machinery present, source-owned active view: HARDWARE_PASS",
         "parsed candidate.view active: HARDWARE_FAIL",
         "source-owned-materialized candidate.view active: HARDWARE_FAIL",
     ):

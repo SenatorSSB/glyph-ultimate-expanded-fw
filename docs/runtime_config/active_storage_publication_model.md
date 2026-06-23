@@ -20,14 +20,14 @@ the safe currently published source-owned view.
 | Case | Result |
 | --- | --- |
 | source-owned active-state preselection | HARDWARE_PASS |
-| parsed/candidate present, source-owned active view | HARDWARE_PASS |
+| prior diagnostic: parsed/candidate machinery present, source-owned active view | HARDWARE_PASS |
 | parsed candidate.view active | HARDWARE_FAIL |
 | source-owned-materialized candidate.view active | HARDWARE_FAIL |
 
 Machine-readable summary:
 
 - source-owned active-state preselection: HARDWARE_PASS
-- parsed/candidate present, source-owned active view: HARDWARE_PASS
+- prior diagnostic: parsed/candidate machinery present, source-owned active view: HARDWARE_PASS
 - parsed candidate.view active: HARDWARE_FAIL
 - source-owned-materialized candidate.view active: HARDWARE_FAIL
 
@@ -57,6 +57,9 @@ Candidate-owned runtime table pointers must not be published active.
 - Dedicated active storage can copy a validated/equivalent source view into
   active-owned arrays.
 - Candidate storage is not assigned to active publication state.
+- Parser/payload machinery is not part of this branch.
+- Do not include UltimateRuntimeConfigParser.hpp.
+- Do not call ParseUltimateRuntimeConfigPayload.
 - `GetActiveRuntimeConfigState()` continues publishing
   `kSourceOwnedCurrentBaselineRuntimeConfig`.
 - `ResolveActiveRuntimeConfig()` dereferences only the active view.
@@ -66,8 +69,7 @@ Candidate-owned runtime table pointers must not be published active.
   status, storage, write, WebSerial, flash, or load state.
 - `UpdateDigitalOutputs(...)` remains unchanged relative to `configurator`.
 - RF5/RF6/LT6 expressions remain present.
-- ParseUltimateRuntimeConfigPayload(...) remains inactive and outside active
-  publication path.
+- Parser payload path is not implemented on this branch.
 
 ## Conclusions
 
@@ -75,6 +77,11 @@ Candidate-owned runtime table pointers must not be published active.
 - `candidate_buffer_may_validate_values`: `true`
 - `candidate_buffer_must_not_be_active`: `true`
 - `dedicated_active_storage_required`: `true`
+- `dedicated_active_storage_scaffolded`: `true`
+- `dedicated_active_storage_active`: `false`
+- `active_behavior_changed`: `false`
+- `hardware_test_required_before_merge`: `false`
+- `parser_payload_path_implemented`: `false`
 - `low_level_failure_mechanism_proven`: `false`
 - `runtime_loaded_config_implemented`: `false`
 - `storage_implemented`: `false`
@@ -101,7 +108,7 @@ hardware diagnostic before merge.
 - WebSerial/device write is not implemented.
 - backend/config.pb write path is not implemented.
 - Firmware flashing automation is not implemented.
-- Parser payload activation is not implemented.
+- Parser payload path is not implemented.
 - Candidate active publication is not implemented.
 - Dedicated active storage active publication is not implemented.
 - The low-level failure mechanism is not proven.

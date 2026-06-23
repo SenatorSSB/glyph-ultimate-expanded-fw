@@ -22,7 +22,7 @@ dedicated active storage is not active.
 | Case | Result |
 | --- | --- |
 | source-owned active-state preselection | HARDWARE_PASS |
-| parsed/candidate present, source-owned active view | HARDWARE_PASS |
+| prior diagnostic: parsed/candidate machinery present, source-owned active view | HARDWARE_PASS |
 | parsed candidate.view active | HARDWARE_FAIL |
 | source-owned-materialized candidate.view active | HARDWARE_FAIL |
 
@@ -42,7 +42,7 @@ dedicated active storage is not active.
 | CANDIDATE-NOT-ACTIVE-001 | Candidate buffer remains non-active | NOT_TESTED |
 | SOURCE-OWNED-FALLBACK-001 | Source-owned fallback behavior | NOT_TESTED |
 | HOT-PATH-001 | Hot path remains stable active-view only | NOT_TESTED |
-| NO-PARSER-ACTIVE-PUBLICATION-001 | No parser/candidate active publication | NOT_TESTED |
+| NO-PARSER-PAYLOAD-PATH-001 | Parser/payload path absent from this branch | NOT_TESTED |
 | NO-STORAGE-001 | No runtime-config storage | NOT_TESTED |
 | NO-WRITE-001 | No WebSerial/device/backend write path | NOT_TESTED |
 | NO-FLASH-001 | No flashing automation | NOT_TESTED |
@@ -54,6 +54,11 @@ dedicated active storage is not active.
 - `candidate_buffer_may_validate_values`: `true`
 - `candidate_buffer_must_not_be_active`: `true`
 - `dedicated_active_storage_required`: `true`
+- `dedicated_active_storage_scaffolded`: `true`
+- `dedicated_active_storage_active`: `false`
+- `active_behavior_changed`: `false`
+- `hardware_test_required_before_merge`: `false`
+- `parser_payload_path_implemented`: `false`
 - `low_level_failure_mechanism_proven`: `false`
 - `runtime_loaded_config_implemented`: `false`
 - `storage_implemented`: `false`
@@ -68,6 +73,7 @@ dedicated active storage is not active.
 - WebSerial/device write is not implemented.
 - backend/config.pb write path is not implemented.
 - Firmware flashing automation is not implemented.
+- Parser payload path is not implemented.
 - Candidate active publication is not implemented.
 - Dedicated active storage active publication is not implemented on this
   branch.
