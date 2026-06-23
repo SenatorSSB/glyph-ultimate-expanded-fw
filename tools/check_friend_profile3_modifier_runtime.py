@@ -14,6 +14,7 @@ ULTIMATE_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 TABLE_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 CONFIG_SOURCE_PATH = REPO_ROOT / "config" / "glyph" / "common" / "src" / "config.cpp"
 HANDOFF_PATH = REPO_ROOT / "docs" / "calibration" / "friend_profile3_modifier_runtime_fix_handoff.md"
+WIP_DOC_PATH = REPO_ROOT / "docs" / "friend-profile3-wip.md"
 
 BEGIN_MARKER = "// Senscope Glyph Smash Box runtime begin"
 END_MARKER = "// Senscope Glyph Smash Box runtime end"
@@ -179,19 +180,50 @@ def validate_handoff_doc() -> None:
     text = HANDOFF_PATH.read_text(encoding="utf-8")
     for snippet in (
         "no modifier: 67 67",
+        "Faifra's observed miniscreen/calibration values are center-relative/origo",
+        "offsets, not raw absolute bytes",
+        "miniscreen/display_x = raw_x - 128",
+        "miniscreen/display_y = raw_y - 128",
+        "raw (187, 167) | 59 39",
+        "raw (158, 195) | 30 67",
+        "raw (195, 156) | 67 28",
+        "raw (158, 156) | 30 28",
         "LT4 -> X1",
         "LT3 -> Y1",
         "RF4 -> Tilt",
         "RF3 -> Tilt2",
-        "X1 + up/right: raw (158, 195)",
-        "Y1 + up/right: raw (195, 156)",
-        "X1+Y1 + up/right: raw (158, 156)",
+        "| no modifier + up/right | raw (195, 195) | 67 67 |",
+        "| X1 + up/right | raw (158, 195) | 30 67 |",
+        "| Y1 + up/right | raw (195, 156) | 67 28 |",
+        "| X1+Y1 + up/right | raw (158, 156) | 30 28 |",
+        "| Tilt + up/right | raw (187, 167) | 59 39 |",
+        "The raw values are the firmware output expectations",
+        "values are the hardware retest expectations",
         "Flipper remains unresolved",
         "hardware retest is required",
         "must not be merged into configurator",
     ):
         if snippet not in text:
             raise AssertionError(f"handoff_missing:{snippet}")
+
+
+def validate_wip_doc_display_note() -> None:
+    text = WIP_DOC_PATH.read_text(encoding="utf-8")
+    for snippet in (
+        "absolute raw coordinates with center `(128, 128)`",
+        "not Faifra's miniscreen/calibration display",
+        "values. The observed miniscreen convention",
+        "center-relative/origo display",
+        "display_x = raw_x - 128",
+        "display_y = raw_y - 128",
+        "raw `(187, 167)` displays as `59 39`",
+        "raw `(158, 195)` displays as `30 67`",
+        "raw `(195, 156)` displays as `67 28`",
+        "raw `(158, 156)` displays as",
+        "`30 28`",
+    ):
+        if snippet not in text:
+            raise AssertionError(f"wip_doc_missing:{snippet}")
 
 
 def main() -> int:
@@ -201,6 +233,7 @@ def main() -> int:
         validate_runtime_source(source)
         validate_one_shot_default_profile()
         validate_handoff_doc()
+        validate_wip_doc_display_note()
     except (OSError, ValueError, AssertionError, TableExtractionError) as exc:
         return fail(str(exc))
 

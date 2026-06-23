@@ -12,6 +12,13 @@ reconvert them. The active source-of-truth for this branch is the source-owned
 Ultimate firmware path in `src/modes/Ultimate.cpp` and
 `src/modes/UltimateIdentityRuntimeTables.hpp`.
 
+These raw coordinate tables are not Faifra's miniscreen/calibration display
+values. The observed miniscreen convention is center-relative/origo display:
+`display_x = raw_x - 128` and `display_y = raw_y - 128`. For example,
+raw `(187, 167)` displays as `59 39`, raw `(158, 195)` displays as `30 67`,
+raw `(195, 156)` displays as `67 28`, and raw `(158, 156)` displays as
+`30 28`.
+
 This branch replaces the active Ultimate WIP behavior because this repo path is
 hardcoded firmware source, not a runtime profile loader. It preserves the
 existing repo build workflow.

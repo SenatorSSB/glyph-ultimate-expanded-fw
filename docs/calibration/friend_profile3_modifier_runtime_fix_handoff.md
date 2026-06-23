@@ -2,7 +2,10 @@
 
 Status: firmware candidate pending hardware retest.
 
-Branch: `glyph/friend-fw-fix-profile3-modifiers`
+Runtime fix branch: `glyph/friend-fw-fix-profile3-modifiers`
+
+Display convention clarification branch:
+`glyph/friend-fw-modifier-display-convention-fix`
 
 Base branch: `glyph/friend-fw-force-default-profile-once`
 
@@ -61,6 +64,26 @@ physical-to-logical remaps for these buttons. The friend-specific behavior is
 therefore owned by the Ultimate runtime path rather than by a non-identity
 profile remap.
 
+## Coordinate Conventions
+
+The firmware/source tables below use raw absolute byte output coordinates with
+center `(128, 128)`.
+
+Faifra's observed miniscreen/calibration values are center-relative/origo
+offsets, not raw absolute bytes:
+
+- `miniscreen/display_x = raw_x - 128`
+- `miniscreen/display_y = raw_y - 128`
+
+Examples:
+
+| Raw absolute byte output | Miniscreen/origo display output |
+| --- | --- |
+| raw (187, 167) | 59 39 |
+| raw (158, 195) | 30 67 |
+| raw (195, 156) | 67 28 |
+| raw (158, 156) | 30 28 |
+
 ## Implemented X1/Y1 Behavior
 
 The source-owned X1 and Y1 tables were split so a single modifier changes only
@@ -68,13 +91,16 @@ its intended axis while the other axis remains on the Profile 3 default table.
 
 Expected up+right raw outputs after this fix:
 
-| Case | Raw output |
-| --- | --- |
-| no modifier + up/right | raw (195, 195) |
-| X1 + up/right: raw (158, 195) | horizontal magnitude 30, vertical default magnitude 67 |
-| Y1 + up/right: raw (195, 156) | horizontal default magnitude 67, vertical magnitude 28 |
-| X1+Y1 + up/right: raw (158, 156) | horizontal magnitude 30, vertical magnitude 28 |
-| Tilt + up/right | raw (187, 167), preserving the hardware-visible 59 39 display convention |
+| Case | Raw absolute byte output | Miniscreen/origo display output |
+| --- | --- | --- |
+| no modifier + up/right | raw (195, 195) | 67 67 |
+| X1 + up/right | raw (158, 195) | 30 67 |
+| Y1 + up/right | raw (195, 156) | 67 28 |
+| X1+Y1 + up/right | raw (158, 156) | 30 28 |
+| Tilt + up/right | raw (187, 167) | 59 39 |
+
+The raw values are the firmware output expectations. The miniscreen/origo
+values are the hardware retest expectations as displayed by the controller.
 
 The combined X1+Y1 path is handled by
 `ApplyFriendProfile3XYModifierOverrides(...)` using signed `int` math before
@@ -122,11 +148,10 @@ A hardware retest is required. Suggested focused retest:
 - Buttons/functions remain correct.
 - A/B remains correct.
 - L+R+A remains correct.
-- no modifier + up/right remains the existing base output.
-- X1 + up/right is distinct from Y1 + up/right.
-- X1 + up/right preserves the normal vertical component.
-- Y1 + up/right preserves the normal horizontal component.
-- X1+Y1 + up/right produces the combined low X/Y magnitudes.
-- Tilt + up/right remains the currently passing 59 39 display convention.
+- no modifier + up/right displays `67 67`.
+- X1 + up/right displays `30 67`.
+- Y1 + up/right displays `67 28`.
+- X1+Y1 + up/right displays `30 28`.
+- Tilt + up/right displays `59 39`.
 - Flipper remains documented unresolved unless a source-grounded intended
   behavior is supplied.
