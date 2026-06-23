@@ -239,6 +239,8 @@ const DiagnosticParsedCandidateState kDiagnosticParsedCandidateState =
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
+constexpr uint8_t kFriendProfile3X1Magnitude = 30;
+constexpr uint8_t kFriendProfile3Y1Magnitude = 28;
 
 enum class EffectiveModifier {
     None,
@@ -558,6 +560,24 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
     return static_cast<size_t>(index);
 }
 
+uint8_t ApplyFriendProfile3AxisMagnitude(int8_t axis, uint8_t magnitude) {
+    int signed_axis = static_cast<int>(axis);
+    if (signed_axis < -1) {
+        signed_axis = -1;
+    } else if (signed_axis > 1) {
+        signed_axis = 1;
+    }
+
+    const int raw_value = ANALOG_STICK_NEUTRAL + (signed_axis * static_cast<int>(magnitude));
+    if (raw_value < 0) {
+        return 0;
+    }
+    if (raw_value > 255) {
+        return 255;
+    }
+    return static_cast<uint8_t>(raw_value);
+}
+
 void ApplyTableAnalogOutput(
     const RuntimeConfigView &runtime_config,
     RuntimeTableId active_table_id,
@@ -569,6 +589,33 @@ void ApplyTableAnalogOutput(
     const StickPoint *active_table = LookupRuntimeTable(runtime_config, active_table_id);
     outputs.leftStickX = active_table[direction_index].x;
     outputs.leftStickY = active_table[direction_index].y;
+}
+
+void ApplyFriendProfile3XYModifierOverrides(const RoleState &roles, int8_t x_axis, int8_t y_axis, OutputState &outputs) {
+    // Source note for the friend baked profile: LT4 is X1 and LT3 is Y1 in
+    // ResolveRoleState(); RF4 is Tilt and RF3 is Tilt2. The only flipper role
+    // here is rf4_layer_flipper_active, which is initialized false in this
+    // friend branch because no source-grounded flipper binding was provided.
+    const bool friend_profile3_xy_modifiers_available =
+        !roles.mode_active &&
+        !roles.x2_active &&
+        !roles.layer_rf3_normal_x_active &&
+        !roles.rf4_layer_flipper_active &&
+        !roles.rt1_rf4_custom_active &&
+        !roles.tilt1_effective &&
+        !roles.tilt2_effective &&
+        !roles.tilt3_effective;
+
+    if (!friend_profile3_xy_modifiers_available) {
+        return;
+    }
+
+    if (roles.x1_active) {
+        outputs.leftStickX = ApplyFriendProfile3AxisMagnitude(x_axis, kFriendProfile3X1Magnitude);
+    }
+    if (roles.y1_active) {
+        outputs.leftStickY = ApplyFriendProfile3AxisMagnitude(y_axis, kFriendProfile3Y1Magnitude);
+    }
 }
 
 void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const RoleState &roles, OutputState &outputs) {
@@ -720,6 +767,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     } else {
         ApplyTableAnalogOutput(runtime_config, active_table_id, directions.x, directions.y, outputs);
         ApplyDirectionPlusAOverride(runtime_config, roles, outputs);
+        ApplyFriendProfile3XYModifierOverrides(roles, directions.x, directions.y, outputs);
 
         if (roles.z_airdodge_override_active) {
             ApplyZAirdodgeOverride(runtime_config, effective_directions, outputs);

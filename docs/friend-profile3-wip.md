@@ -92,19 +92,37 @@ Profile 3 mode center panel:
 | 8 | (128, 128) |
 | 9 | (128, 128) |
 
-Normal X1/Y1:
+Normal X1:
 
 | Dir | Raw |
 | --- | --- |
-| 1 | (98, 100) |
-| 2 | (128, 100) |
-| 3 | (158, 100) |
+| 1 | (98, 51) |
+| 2 | (128, 51) |
+| 3 | (158, 51) |
 | 4 | (98, 128) |
 | 5 | (128, 128) |
 | 6 | (158, 128) |
-| 7 | (98, 156) |
+| 7 | (98, 195) |
+| 8 | (128, 195) |
+| 9 | (158, 195) |
+
+Normal Y1:
+
+| Dir | Raw |
+| --- | --- |
+| 1 | (61, 100) |
+| 2 | (128, 100) |
+| 3 | (195, 100) |
+| 4 | (61, 128) |
+| 5 | (128, 128) |
+| 6 | (195, 128) |
+| 7 | (61, 156) |
 | 8 | (128, 156) |
-| 9 | (158, 156) |
+| 9 | (195, 156) |
+
+X1+Y1 together is handled by a friend-specific runtime overlay using the same
+signed magnitudes, so direction 9 resolves to `(158, 156)`. X1 and Y1 alone do
+not collapse to the same two-axis output.
 
 Normal X2/Y2:
 

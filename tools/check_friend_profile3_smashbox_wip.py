@@ -37,14 +37,14 @@ EXPECTED_TABLES: dict[str, tuple[tuple[int, int], ...]] = {
         (128, 128), (128, 128), (128, 128),
     ),
     "X1": (
-        (98, 100), (128, 100), (158, 100),
+        (98, 51), (128, 51), (158, 51),
         (98, 128), (128, 128), (158, 128),
-        (98, 156), (128, 156), (158, 156),
+        (98, 195), (128, 195), (158, 195),
     ),
     "Y1": (
-        (98, 100), (128, 100), (158, 100),
-        (98, 128), (128, 128), (158, 128),
-        (98, 156), (128, 156), (158, 156),
+        (61, 100), (128, 100), (195, 100),
+        (61, 128), (128, 128), (195, 128),
+        (61, 156), (128, 156), (195, 156),
     ),
     "X2": (
         (81, 81), (128, 81), (175, 81),
@@ -107,6 +107,7 @@ REQUIRED_SOURCE_SNIPPETS = (
     "state.y1_active = inputs.lt3;",
     "state.tilt1_effective = inputs.rf4;",
     "state.tilt2_effective = inputs.rf3;",
+    "ApplyFriendProfile3XYModifierOverrides(roles, directions.x, directions.y, outputs);",
     "outputs.a = inputs.rt1 || inputs.lt2 || inputs.rf10;",
     "outputs.b = inputs.rf1 || inputs.lt2;",
     "outputs.x = inputs.rf7;",
@@ -134,6 +135,7 @@ REQUIRED_DOC_SNIPPETS = (
     "Smash Box Designer",
     "Tilt2 X: 197",
     "59/197",
+    "X1 and Y1 alone do",
     "Light Shield L/R copied from Smash Box Designer values was not applied",
     "friend-profile3-smashbox-import-wip",
 )
