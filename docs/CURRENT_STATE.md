@@ -86,6 +86,19 @@ packets remain under `docs/calibration/`.
   `candidate.view` remains the main suspect for the parsed-candidate opt-in
   failure. Parsed candidate opt-in activation remains unsafe for merge, the
   low-level failure mechanism remains unproven, and Nunchuk remains NOT_TESTED.
+- Active-storage publication model scaffolding is implemented on
+  `runtime-config-active-storage-publication-model` as inactive source
+  scaffolding and recorded in
+  `docs/runtime_config/active_storage_publication_model.md`. The safe
+  publication rule is candidate buffer != active buffer: candidate values may
+  validate proposed values, accepted values must be copied into dedicated active
+  storage before any future active publication, and `candidate.view` must never
+  be active.
+- This active-storage publication model keeps the published active view
+  source-owned baseline, does not activate dedicated active storage, does not
+  change active output behavior, and requires no hardware test before merge for
+  this scaffold-only branch. A later branch that publishes dedicated active
+  storage as active view must be hardware-test-required before merge.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -183,6 +196,12 @@ engineering decisions.
   active view. It does not implement runtime-loaded config, storage,
   WebSerial/device write, backend/config.pb write, firmware flashing automation,
   parsed candidate activation, or nunchuk validation.
+- Active-storage publication model source is inactive scaffolding only. It
+  records candidate buffer != active buffer, adds dedicated active storage
+  copy/validation helpers, keeps source-owned baseline as the active published
+  view, and does not implement runtime-loaded config, storage, WebSerial/device
+  write, backend/config.pb write, firmware flashing automation, dedicated active
+  storage activation, parsed candidate activation, or nunchuk validation.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

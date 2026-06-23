@@ -1,0 +1,47 @@
+{
+  "schema_name": "glyph_active_storage_publication_model",
+  "status": "inactive_scaffold",
+  "branch": "runtime-config-active-storage-publication-model",
+  "baseline_branch": "configurator",
+  "candidate_buffer_is_active_buffer": false,
+  "candidate_view_published_active": false,
+  "candidate_owned_table_pointer_published_active": false,
+  "dedicated_active_storage_scaffolded": true,
+  "dedicated_active_storage_published_active": false,
+  "published_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "active_output_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "parser_payload_activation_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "evidence_matrix": {
+    "source_owned_active_state_preselection": "HARDWARE_PASS",
+    "parsed_candidate_present_source_owned_active_view": "HARDWARE_PASS",
+    "parsed_candidate_view_active": "HARDWARE_FAIL",
+    "source_owned_materialized_candidate_view_active": "HARDWARE_FAIL"
+  },
+  "conclusions": {
+    "candidate_backed_active_runtime_view_safe": false,
+    "candidate_buffer_may_validate_values": true,
+    "candidate_buffer_must_not_be_active": true,
+    "dedicated_active_storage_required": true,
+    "low_level_failure_mechanism_proven": false,
+    "runtime_loaded_config_implemented": false,
+    "storage_implemented": false,
+    "webserial_device_write_implemented": false,
+    "flashing_automation_implemented": false,
+    "nunchuk_status": "NOT_TESTED"
+  },
+  "source_shape": {
+    "active_storage_status_enum": "RuntimeConfigActiveStorageStatus",
+    "active_storage_struct": "RuntimeConfigActiveStorage",
+    "copy_helper": "CopyRuntimeConfigViewIntoActiveStorage",
+    "validation_helper": "ValidateRuntimeConfigActiveStorage",
+    "published_active_state": "source-owned baseline"
+  },
+  "next_recommended_diagnostic": "hardware-gated source-owned-equivalent dedicated active storage active publication"
+}

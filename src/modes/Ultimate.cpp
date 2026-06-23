@@ -53,6 +53,19 @@ struct RuntimeConfigCandidateState {
     RuntimeConfigView view;
 };
 
+enum class RuntimeConfigActiveStorageStatus {
+    Empty,
+    SourceOwnedEquivalent,
+    InvalidSourceView,
+};
+
+struct RuntimeConfigActiveStorage {
+    RuntimeConfigActiveStorageStatus status;
+    StickPoint points[kRuntimeTableCount][kRuntimeTablePointCount];
+    RuntimeTableView tables[kRuntimeTableCount];
+    RuntimeConfigView view;
+};
+
 struct DiagnosticParsedCandidateState {
     UltimateRuntimeConfigParser::ParseResult parse_result;
     RuntimeConfigCandidateState candidate;
@@ -140,6 +153,28 @@ bool ValidateRuntimeConfigCandidateState(const RuntimeConfigCandidateState &cand
     return ValidateRuntimeConfigView(candidate.view);
 }
 
+void ResetRuntimeConfigActiveStorage(RuntimeConfigActiveStorage &active_storage) {
+    active_storage.status = RuntimeConfigActiveStorageStatus::Empty;
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            active_storage.points[table_index][point_index] = {ANALOG_STICK_NEUTRAL, ANALOG_STICK_NEUTRAL};
+        }
+        active_storage.tables[table_index] = {
+            kRuntimeTableIdOrder[table_index],
+            kRuntimeTableSymbolNames[table_index],
+            active_storage.points[table_index],
+            kRuntimeTablePointCount,
+        };
+    }
+    active_storage.view = {
+        kRuntimeConfigSchemaName,
+        kRuntimeConfigSchemaVersion,
+        active_storage.tables,
+        0,
+        RuntimeTableId::Default,
+    };
+}
+
 bool RuntimeConfigViewsHaveEquivalentPoints(const RuntimeConfigView &lhs, const RuntimeConfigView &rhs) {
     if (!ValidateRuntimeConfigView(lhs) || !ValidateRuntimeConfigView(rhs)) {
         return false;
@@ -163,6 +198,52 @@ bool RuntimeConfigViewsHaveEquivalentPoints(const RuntimeConfigView &lhs, const 
     }
 
     return true;
+}
+
+bool ValidateRuntimeConfigActiveStorage(const RuntimeConfigActiveStorage &active_storage) {
+    if (active_storage.status != RuntimeConfigActiveStorageStatus::SourceOwnedEquivalent) {
+        return false;
+    }
+    return ValidateRuntimeConfigView(active_storage.view) &&
+        RuntimeConfigViewsHaveEquivalentPoints(active_storage.view, kSourceOwnedCurrentBaselineRuntimeConfig);
+}
+
+bool CopyRuntimeConfigViewIntoActiveStorage(
+    const RuntimeConfigView &source_view,
+    RuntimeConfigActiveStorage &active_storage
+) {
+    ResetRuntimeConfigActiveStorage(active_storage);
+    if (!ValidateRuntimeConfigView(source_view)) {
+        active_storage.status = RuntimeConfigActiveStorageStatus::InvalidSourceView;
+        return false;
+    }
+
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        const RuntimeTableView &source_table = source_view.tables[table_index];
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            active_storage.points[table_index][point_index] = source_table.table[point_index];
+        }
+        active_storage.tables[table_index] = {
+            source_table.id,
+            source_table.symbol_name,
+            active_storage.points[table_index],
+            source_table.point_count,
+        };
+    }
+    active_storage.view = {
+        source_view.schema_name,
+        source_view.schema_version,
+        active_storage.tables,
+        kRuntimeTableCount,
+        source_view.fallback_table_id,
+    };
+    active_storage.status = RuntimeConfigViewsHaveEquivalentPoints(
+        active_storage.view,
+        kSourceOwnedCurrentBaselineRuntimeConfig
+    )
+        ? RuntimeConfigActiveStorageStatus::SourceOwnedEquivalent
+        : RuntimeConfigActiveStorageStatus::InvalidSourceView;
+    return ValidateRuntimeConfigActiveStorage(active_storage);
 }
 
 bool MaterializeRuntimeConfigCandidateFromSourceView(
