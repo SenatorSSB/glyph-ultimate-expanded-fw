@@ -104,6 +104,17 @@ artifacts unless a specific packet says otherwise.
   baseline remains published active view.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.json` -
   machine-readable hardware result metadata for the diagnostic branch.
+- `active_storage_publication_model.md` - inactive scaffold for the next safe
+  publication model: candidate buffer != active buffer; candidate values may be
+  validated, but accepted values must be copied into dedicated active storage
+  before any future active publication.
+- `fixtures/active_storage_publication_model.json` - machine-readable evidence
+  matrix and guardrail fixture for the active-storage publication model.
+- `active_storage_publication_model_build_report_2026-06-10.md` - build report
+  for the inactive active-storage publication model scaffold.
+- `fixtures/active_storage_publication_model_build_report_2026-06-10.json` -
+  machine-readable build report metadata for the inactive active-storage
+  publication model scaffold.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -153,6 +164,11 @@ artifacts unless a specific packet says otherwise.
   parsed candidate machinery present and materialized, but publishes only
   `kSourceOwnedCurrentBaselineRuntimeConfig` as the active view. It records no
   hardware result; Nunchuk remains NOT_TESTED.
+- The active-storage publication model records the current safe rule:
+  candidate buffer != active buffer. Dedicated active storage is scaffolded but
+  not active; candidate.view is never active; active behavior remains
+  source-owned baseline and no hardware test is required before merge for that
+  scaffold-only branch.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

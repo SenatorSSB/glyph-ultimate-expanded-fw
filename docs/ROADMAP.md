@@ -178,6 +178,17 @@ hardware failure and must not merge without a separate source-backed,
 hardware-gated repair. Active publication of `candidate.view` remains the main
 suspect, while the low-level failure mechanism remains unproven.
 
+The active-storage publication model scaffold in
+`docs/runtime_config/active_storage_publication_model.md` is the next safe
+engineering boundary after candidate-backed active publication failures. The
+rule is candidate buffer != active buffer: candidate data may validate proposed
+values, but accepted values must be copied into dedicated active storage before
+any future active publication. The current scaffold keeps the source-owned
+baseline published active view, does not activate dedicated active storage, and
+requires no hardware test before merge. A future source-owned-equivalent
+dedicated-active-storage publication diagnostic is hardware-test-required before
+merge.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-
@@ -331,6 +342,11 @@ Implementation note:
   `ResolveActiveRuntimeConfig()`, and source-owned preselection behavior. This
   branch remains parser-call free in firmware source and adds no storage,
   write, parser payload, transport, or flashing behavior.
+- `runtime-config-active-storage-publication-model` records the safe publication
+  rule after candidate-backed active publication failures: candidate buffer !=
+  active buffer. The branch adds inactive dedicated active storage
+  copy/validation helpers, keeps the source-owned baseline published active
+  view, and leaves active output behavior unchanged.
 
 Explicit non-goals: no runtime-loaded config, no parsed table materialization,
 no storage, no WebSerial/device write, no flashing automation, and no

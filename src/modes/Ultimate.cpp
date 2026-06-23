@@ -32,18 +32,12 @@ struct ActiveRuntimeConfigState {
 
 #include "modes/UltimateIdentityRuntimeTables.hpp"
 #include "modes/UltimateRuntimeConfigInterpreter.hpp"
-#include "modes/UltimateRuntimeConfigParser.hpp"
-
-static_assert(
-    UltimateRuntimeConfigParser::kPayloadSize == 530,
-    "Phase 7A parser scaffold must stay aligned with the offline GCFG-like payload size"
-);
 
 enum class RuntimeConfigCandidateStatus {
     Empty,
-    ParsedPayloadValid,
-    ParsedPayloadEquivalent,
-    InvalidPayload,
+    CandidateViewValid,
+    SourceOwnedEquivalent,
+    InvalidCandidateView,
 };
 
 struct RuntimeConfigCandidateState {
@@ -53,59 +47,17 @@ struct RuntimeConfigCandidateState {
     RuntimeConfigView view;
 };
 
-struct DiagnosticParsedCandidateState {
-    UltimateRuntimeConfigParser::ParseResult parse_result;
-    RuntimeConfigCandidateState candidate;
-    bool materialized;
-    bool equivalent_to_source_owned_baseline;
+enum class RuntimeConfigActiveStorageStatus {
+    Empty,
+    SourceOwnedEquivalent,
+    InvalidSourceView,
 };
 
-constexpr uint8_t kDiagnosticSourceOwnedParsedPayload[UltimateRuntimeConfigParser::kPayloadSize] = {
-    0x47, 0x43, 0x46, 0x47, 0x01, 0xd6, 0x6f, 0x1d, 0x98, 0x1b, 0x09, 0x00,
-    0x1b, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
-    0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16,
-    0x17, 0x18, 0x19, 0x1a, 0x3d, 0x33, 0x80, 0x33, 0xc3, 0x33, 0x3d, 0x80,
-    0x80, 0x80, 0xc3, 0x80, 0x3d, 0xcd, 0x80, 0xcd, 0xc3, 0xcd, 0x0e, 0x57,
-    0x80, 0x57, 0xf2, 0x57, 0x0e, 0xa9, 0x80, 0xa9, 0xf2, 0xa9, 0x0e, 0xa9,
-    0x80, 0xa9, 0xf2, 0xa9, 0x5d, 0x33, 0x80, 0x33, 0xa3, 0x33, 0x5d, 0x80,
-    0x80, 0x80, 0xa3, 0x80, 0x5d, 0xcd, 0x80, 0xcd, 0xa3, 0xcd, 0x52, 0x33,
-    0x80, 0x33, 0xae, 0x33, 0x52, 0x80, 0x80, 0x80, 0xae, 0x80, 0x52, 0xcd,
-    0x80, 0xcd, 0xae, 0xcd, 0x4e, 0x57, 0x80, 0x57, 0xb2, 0x57, 0x4e, 0xa9,
-    0x80, 0xa9, 0xb2, 0xa9, 0x4e, 0xa9, 0x80, 0xa9, 0xb2, 0xa9, 0x41, 0x57,
-    0x80, 0x57, 0xbf, 0x57, 0x41, 0xa9, 0x80, 0xa9, 0xbf, 0xa9, 0x41, 0xa9,
-    0x80, 0xa9, 0xbf, 0xa9, 0x3d, 0x63, 0x80, 0x63, 0xc3, 0x63, 0x3d, 0x80,
-    0x80, 0x80, 0xc3, 0x80, 0x3d, 0x9d, 0x80, 0x9d, 0xc3, 0x9d, 0x0e, 0xb3,
-    0x80, 0xb3, 0xf2, 0xb3, 0x0e, 0xa9, 0x80, 0xa9, 0xf2, 0xa9, 0x0e, 0x4d,
-    0x80, 0x4d, 0xf2, 0x4d, 0x57, 0x33, 0x80, 0x33, 0xa9, 0x33, 0x57, 0x80,
-    0x80, 0x80, 0xa9, 0x80, 0x57, 0xcd, 0x80, 0xcd, 0xa9, 0xcd, 0x57, 0x57,
-    0x80, 0x57, 0xa9, 0x57, 0x57, 0xa9, 0x80, 0xa9, 0xa9, 0xa9, 0x57, 0xa9,
-    0x80, 0xa9, 0xa9, 0xa9, 0xa9, 0x33, 0x80, 0x33, 0x57, 0x33, 0xa9, 0x80,
-    0x80, 0x80, 0x57, 0x80, 0xa9, 0xcd, 0x80, 0xcd, 0x57, 0xcd, 0xa9, 0x57,
-    0x80, 0x57, 0x57, 0x57, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0xa9,
-    0x80, 0xa9, 0x57, 0xa9, 0xa9, 0x63, 0x80, 0x63, 0x57, 0x63, 0xa9, 0x80,
-    0x80, 0x80, 0x57, 0x80, 0xa9, 0x9d, 0x80, 0x9d, 0x57, 0x9d, 0xa9, 0xb3,
-    0x80, 0xb3, 0x57, 0xb3, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0x4d,
-    0x80, 0x4d, 0x57, 0x4d, 0xa9, 0x63, 0x80, 0x63, 0x57, 0x63, 0xa9, 0x80,
-    0x80, 0x80, 0x57, 0x80, 0xa9, 0x9d, 0x80, 0x9d, 0x57, 0x9d, 0xa9, 0xb3,
-    0x80, 0xb3, 0x57, 0xb3, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0x4d,
-    0x80, 0x4d, 0x57, 0x4d, 0x57, 0x63, 0x80, 0x63, 0xa9, 0x63, 0x57, 0x80,
-    0x80, 0x80, 0xa9, 0x80, 0x57, 0x9d, 0x80, 0x9d, 0xa9, 0x9d, 0x57, 0xb3,
-    0x80, 0xb3, 0xa9, 0xb3, 0x57, 0xa9, 0x80, 0xa9, 0xa9, 0xa9, 0x57, 0x4d,
-    0x80, 0x4d, 0xa9, 0x4d, 0xbb, 0x2f, 0x80, 0x2f, 0x45, 0x2f, 0xbb, 0x80,
-    0x80, 0x80, 0x45, 0x80, 0xbb, 0xd1, 0x80, 0xd1, 0x45, 0xd1, 0x58, 0x4f,
-    0x80, 0x4f, 0xa8, 0x4f, 0x58, 0x80, 0x80, 0x80, 0xa8, 0x80, 0x58, 0xb1,
-    0x80, 0xb1, 0xa8, 0xb1, 0x4b, 0x56, 0x80, 0x56, 0xb5, 0x56, 0x4b, 0x80,
-    0x80, 0x80, 0xb5, 0x80, 0x4b, 0xaa, 0x80, 0xaa, 0xb5, 0xaa, 0xa9, 0x2f,
-    0x80, 0x2f, 0x57, 0x2f, 0xa9, 0x80, 0x80, 0x80, 0x57, 0x80, 0xa9, 0xd1,
-    0x80, 0xd1, 0x57, 0xd1, 0x45, 0x4e, 0x80, 0x4e, 0xbb, 0x4e, 0x45, 0x80,
-    0x80, 0x80, 0xbb, 0x80, 0x48, 0xac, 0x80, 0xb3, 0xb8, 0xac, 0xa9, 0x58,
-    0x80, 0x58, 0x57, 0x58, 0xa9, 0xa9, 0x80, 0xa9, 0x57, 0xa9, 0xa9, 0xa8,
-    0x80, 0xa8, 0x57, 0xa8, 0x60, 0x52, 0x80, 0x52, 0xa0, 0x52, 0x60, 0xa9,
-    0x80, 0xa9, 0xa0, 0xa9, 0x60, 0xae, 0x80, 0xae, 0xa0, 0xae, 0x60, 0x56,
-    0x80, 0x56, 0xa0, 0x56, 0x60, 0xa9, 0x80, 0xa9, 0xa0, 0xa9, 0x60, 0xaa,
-    0x80, 0xaa, 0xa0, 0xaa, 0x59, 0x59, 0x80, 0x4f, 0xa7, 0x59, 0x4f, 0x80,
-    0x80, 0x80, 0xb1, 0x80, 0x59, 0xa7, 0x80, 0xb1, 0xa7, 0xa7, 0x97, 0xcd,
-    0x6c, 0x3c
+struct RuntimeConfigActiveStorage {
+    RuntimeConfigActiveStorageStatus status;
+    StickPoint points[kRuntimeTableCount][kRuntimeTablePointCount];
+    RuntimeTableView tables[kRuntimeTableCount];
+    RuntimeConfigView view;
 };
 
 void ResetRuntimeConfigCandidateState(RuntimeConfigCandidateState &candidate) {
@@ -132,12 +84,34 @@ void ResetRuntimeConfigCandidateState(RuntimeConfigCandidateState &candidate) {
 
 bool ValidateRuntimeConfigCandidateState(const RuntimeConfigCandidateState &candidate) {
     if (
-        candidate.status != RuntimeConfigCandidateStatus::ParsedPayloadValid &&
-        candidate.status != RuntimeConfigCandidateStatus::ParsedPayloadEquivalent
+        candidate.status != RuntimeConfigCandidateStatus::CandidateViewValid &&
+        candidate.status != RuntimeConfigCandidateStatus::SourceOwnedEquivalent
     ) {
         return false;
     }
     return ValidateRuntimeConfigView(candidate.view);
+}
+
+void ResetRuntimeConfigActiveStorage(RuntimeConfigActiveStorage &active_storage) {
+    active_storage.status = RuntimeConfigActiveStorageStatus::Empty;
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            active_storage.points[table_index][point_index] = {ANALOG_STICK_NEUTRAL, ANALOG_STICK_NEUTRAL};
+        }
+        active_storage.tables[table_index] = {
+            kRuntimeTableIdOrder[table_index],
+            kRuntimeTableSymbolNames[table_index],
+            active_storage.points[table_index],
+            kRuntimeTablePointCount,
+        };
+    }
+    active_storage.view = {
+        kRuntimeConfigSchemaName,
+        kRuntimeConfigSchemaVersion,
+        active_storage.tables,
+        0,
+        RuntimeTableId::Default,
+    };
 }
 
 bool RuntimeConfigViewsHaveEquivalentPoints(const RuntimeConfigView &lhs, const RuntimeConfigView &rhs) {
@@ -165,13 +139,59 @@ bool RuntimeConfigViewsHaveEquivalentPoints(const RuntimeConfigView &lhs, const 
     return true;
 }
 
+bool ValidateRuntimeConfigActiveStorage(const RuntimeConfigActiveStorage &active_storage) {
+    if (active_storage.status != RuntimeConfigActiveStorageStatus::SourceOwnedEquivalent) {
+        return false;
+    }
+    return ValidateRuntimeConfigView(active_storage.view) &&
+        RuntimeConfigViewsHaveEquivalentPoints(active_storage.view, kSourceOwnedCurrentBaselineRuntimeConfig);
+}
+
+bool CopyRuntimeConfigViewIntoActiveStorage(
+    const RuntimeConfigView &source_view,
+    RuntimeConfigActiveStorage &active_storage
+) {
+    ResetRuntimeConfigActiveStorage(active_storage);
+    if (!ValidateRuntimeConfigView(source_view)) {
+        active_storage.status = RuntimeConfigActiveStorageStatus::InvalidSourceView;
+        return false;
+    }
+
+    for (size_t table_index = 0; table_index < kRuntimeTableCount; ++table_index) {
+        const RuntimeTableView &source_table = source_view.tables[table_index];
+        for (size_t point_index = 0; point_index < kRuntimeTablePointCount; ++point_index) {
+            active_storage.points[table_index][point_index] = source_table.table[point_index];
+        }
+        active_storage.tables[table_index] = {
+            source_table.id,
+            source_table.symbol_name,
+            active_storage.points[table_index],
+            source_table.point_count,
+        };
+    }
+    active_storage.view = {
+        source_view.schema_name,
+        source_view.schema_version,
+        active_storage.tables,
+        kRuntimeTableCount,
+        source_view.fallback_table_id,
+    };
+    active_storage.status = RuntimeConfigViewsHaveEquivalentPoints(
+        active_storage.view,
+        kSourceOwnedCurrentBaselineRuntimeConfig
+    )
+        ? RuntimeConfigActiveStorageStatus::SourceOwnedEquivalent
+        : RuntimeConfigActiveStorageStatus::InvalidSourceView;
+    return ValidateRuntimeConfigActiveStorage(active_storage);
+}
+
 bool MaterializeRuntimeConfigCandidateFromSourceView(
     const RuntimeConfigView &source_view,
     RuntimeConfigCandidateState &candidate
 ) {
     ResetRuntimeConfigCandidateState(candidate);
     if (!ValidateRuntimeConfigView(source_view)) {
-        candidate.status = RuntimeConfigCandidateStatus::InvalidPayload;
+        candidate.status = RuntimeConfigCandidateStatus::InvalidCandidateView;
         return false;
     }
 
@@ -196,45 +216,10 @@ bool MaterializeRuntimeConfigCandidateFromSourceView(
     };
 
     candidate.status = ValidateRuntimeConfigView(candidate.view)
-        ? RuntimeConfigCandidateStatus::ParsedPayloadValid
-        : RuntimeConfigCandidateStatus::InvalidPayload;
-    return candidate.status == RuntimeConfigCandidateStatus::ParsedPayloadValid;
+        ? RuntimeConfigCandidateStatus::CandidateViewValid
+        : RuntimeConfigCandidateStatus::InvalidCandidateView;
+    return candidate.status == RuntimeConfigCandidateStatus::CandidateViewValid;
 }
-
-DiagnosticParsedCandidateState InitializeDiagnosticParsedCandidateState() {
-    DiagnosticParsedCandidateState state = {
-        UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload(
-            kDiagnosticSourceOwnedParsedPayload,
-            UltimateRuntimeConfigParser::kPayloadSize
-        ),
-        {},
-        false,
-        false,
-    };
-
-    ResetRuntimeConfigCandidateState(state.candidate);
-    if (state.parse_result.status != UltimateRuntimeConfigParser::ParseStatus::Ok) {
-        state.candidate.status = RuntimeConfigCandidateStatus::InvalidPayload;
-        return state;
-    }
-
-    state.materialized = MaterializeRuntimeConfigCandidateFromSourceView(
-        kSourceOwnedCurrentBaselineRuntimeConfig,
-        state.candidate
-    );
-    state.equivalent_to_source_owned_baseline = state.materialized &&
-        RuntimeConfigViewsHaveEquivalentPoints(
-            state.candidate.view,
-            kSourceOwnedCurrentBaselineRuntimeConfig
-        );
-    if (state.equivalent_to_source_owned_baseline) {
-        state.candidate.status = RuntimeConfigCandidateStatus::ParsedPayloadEquivalent;
-    }
-    return state;
-}
-
-const DiagnosticParsedCandidateState kDiagnosticParsedCandidateState =
-    InitializeDiagnosticParsedCandidateState();
 
 constexpr size_t kDirectionTwoIndex = 1;
 constexpr size_t kDirectionFiveIndex = 4;
@@ -616,7 +601,7 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
 const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
     static_assert(
         ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig),
-        "diagnostic branch publishes only the source-owned baseline runtime config"
+        "source-owned scaffold publishes only the baseline runtime config"
     );
     static const ActiveRuntimeConfigState state = {
         &kSourceOwnedCurrentBaselineRuntimeConfig,

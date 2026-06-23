@@ -52,6 +52,12 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 
 ## Runtime Config Diagnostic Hardware Plans
 
+- `active_storage_publication_model_hardware_plan_2026-06-10.md` - plan-only
+  hardware row set for a future dedicated-active-storage activation diagnostic;
+  current branch is source-scaffold-only, records candidate buffer != active
+  buffer, and requires no hardware test before merge.
+- `fixtures/active_storage_publication_model_hardware_plan_2026-06-10.json` -
+  matching machine-readable active-storage publication model plan fixture.
 - `diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.md`
   - `HARDWARE_PASS` result for the parsed-candidate-present/source-owned-published
     diagnostic branch; non-nunchuk rows PASS and Nunchuk remains NOT_TESTED.
@@ -254,6 +260,15 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `docs/runtime_config/active_runtime_config_state_source_owned_preselection.md` - source-owned active runtime config preselection scaffold.
 - `docs/runtime_config/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md` - build report for source-owned active-state preselection scaffold.
 - `docs/runtime_config/fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json` - build-report fixture metadata for the preselection scaffold.
+- `docs/runtime_config/active_storage_publication_model.md` - inactive
+  active-storage publication model scaffold; candidate buffer != active buffer.
+- `docs/runtime_config/fixtures/active_storage_publication_model.json` -
+  machine-readable active-storage publication model fixture.
+- `docs/runtime_config/active_storage_publication_model_build_report_2026-06-10.md` -
+  build report for the inactive active-storage publication model scaffold.
+- `docs/runtime_config/fixtures/active_storage_publication_model_build_report_2026-06-10.json` -
+  machine-readable build report fixture for the inactive active-storage
+  publication model scaffold.
 - `docs/runtime_config/README.md` - runtime-config docs index and current
   Phase 6 design-only boundary.
 - `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md` -

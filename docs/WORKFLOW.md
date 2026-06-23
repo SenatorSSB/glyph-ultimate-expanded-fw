@@ -53,6 +53,12 @@ explicitly instructed.
   by the analog output hot path. Activation/selection may validate and select
   stable state outside the hot path; output generation may consume only that
   stable selected view.
+- Runtime-config publication must keep candidate buffer != active buffer. The
+  `active_storage_publication_model` packet records that candidate state may
+  validate proposed values before publication, but candidate.view and
+  candidate-owned runtime table pointers must not become the active runtime
+  view. Accepted values must be copied into dedicated active storage before any
+  future dedicated-active-storage publication diagnostic.
 - Activation/selection may validate parser/materialization/load status before
   active-state publication. After publication, analog output generation may
   consume only `ActiveRuntimeConfigState.active_view` and must not branch on

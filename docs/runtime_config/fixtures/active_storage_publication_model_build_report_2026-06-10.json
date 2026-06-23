@@ -1,0 +1,55 @@
+{
+  "schema_name": "glyph_active_storage_publication_model_build_report",
+  "status": "local_build_report",
+  "branch": "runtime-config-active-storage-publication-model",
+  "baseline_branch": "configurator",
+  "canonical_build_command": "pio run -e glyph_mk6",
+  "canonical_build_available_in_agent_environment": false,
+  "canonical_build_failure": "zsh:1: command not found: pio",
+  "fallback_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "local_build_command_used": "./scripts/build-glyph-mk6-quiet.sh",
+  "local_build_result": "PASS",
+  "build_completed": true,
+  "build_exit_code": 0,
+  "build_date_local": "2026-06-10",
+  "candidate_view_published_active": false,
+  "dedicated_active_storage_active": false,
+  "dedicated_active_storage_published_active": false,
+  "published_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "active_behavior_changed": false,
+  "active_output_behavior_changed": false,
+  "parser_payload_path_implemented": false,
+  "artifact_hashes_are_rebuild_stable": false,
+  "artifact_hashes_are_checker_gate": false,
+  "hardware_result_claimed": false,
+  "hardware_test_required_before_merge": false,
+  "runtime_loaded_config_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "artifact_hashes": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 792576,
+      "sha256": "5e16f0b68a4ff3af901fba6822b0c28f80fd79ccbadaaf84cc25ee66e11693e1",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5407708,
+      "sha256": "d73daf419209ac14c1f7dfe4eaae3ffe19e507abfad8bb5811d0326c27496468",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 396068,
+      "sha256": "d2587f8d5e0c90ec2241fe2c624e12300c088905b0668d9c97617c2527016aee",
+      "available": true
+    }
+  ]
+}
