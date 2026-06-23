@@ -26,6 +26,7 @@
 #include <Adafruit_SSD1306.h>
 #include <config.pb.h>
 #include "hardware/sync.h"
+#include <LittleFS.h>
 #include "pico/lock_core.h"
 
 extern bool LED_OK;
@@ -53,6 +54,30 @@ Adafruit_SSD1306 display(128, 64, &OLED_WIRE_INSTANCE);
 
 bool failed_detection = false;
 bool main_setup_done = false;
+
+namespace {
+
+constexpr char kFriendDefaultProfileAppliedMarker[] =
+    "/friend_profile3_default_applied.flag";
+
+void ApplyFriendDefaultProfileOnce(Config &config) {
+    if (LittleFS.exists(kFriendDefaultProfileAppliedMarker)) {
+        return;
+    }
+
+    if (!persistence.SaveConfig(config)) {
+        return;
+    }
+
+    File marker = LittleFS.open(kFriendDefaultProfileAppliedMarker, "w");
+    if (!marker) {
+        return;
+    }
+    marker.print("friend_profile3_default_applied\n");
+    marker.close();
+}
+
+}  // namespace
 
 
 void setup() {
@@ -86,6 +111,8 @@ void setup() {
         display.drawBitmap(0, 0, Bitmap_Glyph_Splashscreen, 128, 64, 1);
         display.display();
     }
+
+    ApplyFriendDefaultProfileOnce(config);
 
     // Attempt to load config, or write default config to flash if failed to load config.
     if (!persistence.LoadConfig(config)) {
