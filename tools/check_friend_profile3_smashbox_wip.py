@@ -72,9 +72,9 @@ EXPECTED_TABLES: dict[str, tuple[tuple[int, int], ...]] = {
         (69, 167), (128, 167), (187, 167),
     ),
     "Tilt2": (
-        (59, 88), (128, 88), (197, 88),
-        (59, 128), (128, 128), (197, 128),
-        (59, 168), (128, 168), (197, 168),
+        (187, 88), (128, 88), (69, 88),
+        (187, 128), (128, 128), (69, 128),
+        (187, 168), (128, 168), (69, 168),
     ),
     "Tilt3": (
         (92, 83), (128, 83), (164, 83),
@@ -107,6 +107,10 @@ REQUIRED_SOURCE_SNIPPETS = (
     "state.y1_active = inputs.lt3;",
     "state.tilt1_effective = inputs.rf4;",
     "state.tilt2_effective = inputs.rf3;",
+    "state.tilt3_effective = inputs.rf4 && inputs.rf3;",
+    "kFriendProfile3Tilt2FlipperXOffsetForRight = -59",
+    "kFriendProfile3Tilt2FlipperYMagnitude = 40",
+    "ApplyFriendProfile3Tilt2FlipperOverride(roles, directions.x, directions.y, outputs);",
     "ApplyFriendProfile3XYModifierOverrides(roles, directions.x, directions.y, outputs);",
     "outputs.a = inputs.rt1 || inputs.lt2 || inputs.rf10;",
     "outputs.b = inputs.rf1 || inputs.lt2;",
@@ -133,8 +137,10 @@ REQUIRED_SOURCE_SNIPPETS = (
 REQUIRED_DOC_SNIPPETS = (
     "throwaway hardware-test branch",
     "Smash Box Designer",
-    "Tilt2 X: 197",
-    "59/197",
+    "Tilt2 X `197`",
+    "signed offset `-59`",
+    "raw `(69, 168)` displays as `-59 40`",
+    "displays as `59 40`",
     "X1 and Y1 alone do",
     "Light Shield L/R copied from Smash Box Designer values was not applied",
     "friend-profile3-smashbox-import-wip",
@@ -180,7 +186,8 @@ def main() -> int:
     print("branch=friend-profile3-smashbox-import-wip")
     print("coordinate_storage=absolute_raw_StickPoint_uint8")
     print("physical_buttons_validated=true")
-    print("tilt2_raw_x=59/197")
+    print("tilt2_flipper_raw_x=187/69")
+    print("tilt2_source_x=197_signed_minus_59")
     print("light_shield_values=preserved_existing_wip_behavior")
     return 0
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate friend Profile 3 X1/Y1 modifier runtime wiring."""
+"""Validate friend Profile 3 modifier runtime wiring."""
 
 from __future__ import annotations
 
@@ -14,6 +14,7 @@ ULTIMATE_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 TABLE_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 CONFIG_SOURCE_PATH = REPO_ROOT / "config" / "glyph" / "common" / "src" / "config.cpp"
 HANDOFF_PATH = REPO_ROOT / "docs" / "calibration" / "friend_profile3_modifier_runtime_fix_handoff.md"
+TILT2_HANDOFF_PATH = REPO_ROOT / "docs" / "calibration" / "friend_profile3_tilt2_flipper_fix_handoff.md"
 WIP_DOC_PATH = REPO_ROOT / "docs" / "friend-profile3-wip.md"
 
 BEGIN_MARKER = "// Senscope Glyph Smash Box runtime begin"
@@ -35,9 +36,9 @@ EXPECTED_TILT1_TABLE = (
     (69, 167), (128, 167), (187, 167),
 )
 EXPECTED_TILT2_TABLE = (
-    (59, 88), (128, 88), (197, 88),
-    (59, 128), (128, 128), (197, 128),
-    (59, 168), (128, 168), (197, 168),
+    (187, 88), (128, 88), (69, 88),
+    (187, 128), (128, 128), (69, 128),
+    (187, 168), (128, 168), (69, 168),
 )
 
 
@@ -115,15 +116,21 @@ def validate_runtime_source(source: str) -> None:
         "state.rf4_layer_flipper_active = false;",
         "state.tilt1_effective = inputs.rf4;",
         "state.tilt2_effective = inputs.rf3;",
+        "state.tilt3_effective = inputs.rf4 && inputs.rf3;",
         "constexpr uint8_t kFriendProfile3X1Magnitude = 30;",
         "constexpr uint8_t kFriendProfile3Y1Magnitude = 28;",
+        "constexpr int8_t kFriendProfile3Tilt2FlipperXOffsetForRight = -59;",
+        "constexpr uint8_t kFriendProfile3Tilt2FlipperYMagnitude = 40;",
         "ApplyFriendProfile3XYModifierOverrides(roles, directions.x, directions.y, outputs);",
-        "no source-grounded flipper binding was provided",
+        "ApplyFriendProfile3Tilt2FlipperOverride(roles, directions.x, directions.y, outputs);",
+        "RF4 is Tilt1, RF3 is Tilt2/flipper, and RF4+RF3 is",
         "&kSourceOwnedCurrentBaselineRuntimeConfig",
     )
     for snippet in required_snippets:
         if snippet not in source:
             raise AssertionError(f"missing_runtime_snippet:{snippet}")
+    if "no source-grounded flipper binding was provided" in source:
+        raise AssertionError("stale_unresolved_flipper_runtime_comment")
 
     helper_body = find_function_body(source, "ApplyFriendProfile3XYModifierOverrides")
     if "if (roles.x1_active)" not in helper_body or "outputs.leftStickX" not in helper_body:
@@ -137,16 +144,39 @@ def validate_runtime_source(source: str) -> None:
     if "outputs.leftStickX" in y1_branch:
         raise AssertionError("y1_branch_must_not_assign_x")
 
-    axis_body = find_function_body(source, "ApplyFriendProfile3AxisMagnitude")
+    raw_offset_body = find_function_body(source, "ApplyFriendProfile3RawOffset")
     for snippet in (
-        "int signed_axis = static_cast<int>(axis);",
-        "const int raw_value = ANALOG_STICK_NEUTRAL + (signed_axis * static_cast<int>(magnitude));",
+        "const int raw_value = ANALOG_STICK_NEUTRAL + offset;",
         "return static_cast<uint8_t>(raw_value);",
     ):
-        if snippet not in axis_body:
-            raise AssertionError(f"axis_math_not_explicit:{snippet}")
-    if re.search(r"uint8_t\s+raw_value\s*=", axis_body):
+        if snippet not in raw_offset_body:
+            raise AssertionError(f"raw_offset_math_not_explicit:{snippet}")
+    if re.search(r"uint8_t\s+raw_value\s*=", raw_offset_body):
         raise AssertionError("axis_math_must_not_accumulate_in_uint8")
+
+    signed_axis_body = find_function_body(source, "ApplyFriendProfile3SignedAxisOffset")
+    for snippet in (
+        "const int signed_axis = ClampFriendProfile3Axis(axis);",
+        "return ApplyFriendProfile3RawOffset(signed_axis * static_cast<int>(offset_for_positive_axis));",
+    ):
+        if snippet not in signed_axis_body:
+            raise AssertionError(f"signed_axis_math_not_explicit:{snippet}")
+
+    tilt2_body = find_function_body(source, "ApplyFriendProfile3Tilt2FlipperOverride")
+    for snippet in (
+        "!roles.mode_active",
+        "!roles.x1_active",
+        "!roles.y1_active",
+        "!roles.tilt1_effective",
+        "roles.tilt2_effective",
+        "!roles.tilt3_effective",
+        "outputs.leftStickX = ApplyFriendProfile3SignedAxisOffset(",
+        "kFriendProfile3Tilt2FlipperXOffsetForRight",
+        "outputs.leftStickY = ApplyFriendProfile3AxisMagnitude(",
+        "kFriendProfile3Tilt2FlipperYMagnitude",
+    ):
+        if snippet not in tilt2_body:
+            raise AssertionError(f"tilt2_flipper_runtime_missing:{snippet}")
 
     runtime_block = marker_block(source)
     if re.search(r"outputs\.leftStick[XY]\s*=\s*[^;\n]*inputs\.rf[34]", runtime_block):
@@ -192,19 +222,50 @@ def validate_handoff_doc() -> None:
         "LT3 -> Y1",
         "RF4 -> Tilt",
         "RF3 -> Tilt2",
+        "RF4+RF3 -> Tilt3",
         "| no modifier + up/right | raw (195, 195) | 67 67 |",
         "| X1 + up/right | raw (158, 195) | 30 67 |",
         "| Y1 + up/right | raw (195, 156) | 67 28 |",
         "| X1+Y1 + up/right | raw (158, 156) | 30 28 |",
-        "| Tilt + up/right | raw (187, 167) | 59 39 |",
+        "| RF4/Tilt1 + up/right | raw (187, 167) | 59 39 |",
+        "| RF3/Tilt2/flipper + up/right | raw (69, 168) | -59 40 |",
+        "| RF3/Tilt2/flipper + left/up | raw (187, 168) | 59 40 |",
         "The raw values are the firmware output expectations",
         "values are the hardware retest expectations",
-        "Flipper remains unresolved",
+        "Tilt2 X: `197`",
+        "signed offset `-59`",
+        "Tilt2 Y Up: `40`",
+        "Tilt2 Y Down: `40`",
+        "The previous unresolved status was wrong",
+        "RF4+RF3 selects",
+        "R remains pending",
         "hardware retest is required",
         "must not be merged into configurator",
     ):
         if snippet not in text:
             raise AssertionError(f"handoff_missing:{snippet}")
+    if "Flipper remains unresolved" in text:
+        raise AssertionError("handoff_still_marks_flipper_unresolved")
+    if "-69 40" in text and "should not recur" not in text:
+        raise AssertionError("handoff_allows_bad_tilt2_flipper_output")
+
+    tilt2_text = TILT2_HANDOFF_PATH.read_text(encoding="utf-8")
+    for snippet in (
+        "previous unresolved flipper status was wrong",
+        "RF3 | Tilt2/flipper",
+        "Tilt2 X: `197`",
+        "`197` is `-59`",
+        "RF3/Tilt2/flipper + up/right | raw (69, 168) | -59 40",
+        "RF3/Tilt2/flipper + left/up | raw (187, 168) | 59 40",
+        "RF4+RF3/Tilt3 + up/right | raw (164, 172) | 36 44",
+        "The prior bad field result `left+up with flipper -> -69 40` should not recur",
+        "R Status",
+        "Pending",
+        "must not be merged into",
+        "Hardware retest is required",
+    ):
+        if snippet not in tilt2_text:
+            raise AssertionError(f"tilt2_handoff_missing:{snippet}")
 
 
 def validate_wip_doc_display_note() -> None:
@@ -221,9 +282,17 @@ def validate_wip_doc_display_note() -> None:
         "raw `(195, 156)` displays as `67 28`",
         "raw `(158, 156)` displays as",
         "`30 28`",
+        "Tilt2 X `197`",
+        "signed offset `-59`",
+        "RF3/Tilt2",
+        "raw `(69, 168)` displays as `-59 40`",
+        "left/up raw",
+        "displays as `59 40`",
     ):
         if snippet not in text:
             raise AssertionError(f"wip_doc_missing:{snippet}")
+    if "Tilt2 X: 197 was resolved as absolute right-side raw X" in text:
+        raise AssertionError("wip_doc_still_uses_bad_tilt2_absolute_interpretation")
 
 
 def main() -> int:
@@ -243,11 +312,15 @@ def main() -> int:
     print("y1_input=LT3")
     print("tilt_input=RF4")
     print("tilt2_input=RF3")
-    print("flipper_status=unresolved_no_source_grounded_friend_binding")
+    print("flipper_status=implemented_source_grounded_tilt2")
     print("x1_up_right_raw=158,195")
     print("y1_up_right_raw=195,156")
     print("x1_y1_up_right_raw=158,156")
-    print("tilt_constants_preserved=true")
+    print("tilt2_flipper_up_right_raw=69,168")
+    print("tilt2_flipper_left_up_raw=187,168")
+    print("tilt3_rf4_rf3_up_right_raw=164,172")
+    print("tilt1_constants_preserved=true")
+    print("tilt2_flipper_corrected=true")
     print("one_shot_default_profile_preserved=true")
     return 0
 

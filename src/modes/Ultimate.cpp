@@ -241,6 +241,8 @@ constexpr size_t kDirectionFiveIndex = 4;
 constexpr size_t kDirectionEightIndex = 7;
 constexpr uint8_t kFriendProfile3X1Magnitude = 30;
 constexpr uint8_t kFriendProfile3Y1Magnitude = 28;
+constexpr int8_t kFriendProfile3Tilt2FlipperXOffsetForRight = -59;
+constexpr uint8_t kFriendProfile3Tilt2FlipperYMagnitude = 40;
 
 enum class EffectiveModifier {
     None,
@@ -364,7 +366,7 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     state.rf4_suppressed_by_rf9_rf3_mode = false;
     state.rf3_x_suppressed_by_rf9 = false;
     state.rf3_x_restored_by_cstick = false;
-    state.tilt3_effective = false;
+    state.tilt3_effective = inputs.rf4 && inputs.rf3;
     state.tilt1_effective = inputs.rf4;
     state.tilt2_effective = inputs.rf3;
     state.z_airdodge_override_active = false;
@@ -560,15 +562,18 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
     return static_cast<size_t>(index);
 }
 
-uint8_t ApplyFriendProfile3AxisMagnitude(int8_t axis, uint8_t magnitude) {
+int ClampFriendProfile3Axis(int8_t axis) {
     int signed_axis = static_cast<int>(axis);
     if (signed_axis < -1) {
-        signed_axis = -1;
+        return -1;
     } else if (signed_axis > 1) {
-        signed_axis = 1;
+        return 1;
     }
+    return signed_axis;
+}
 
-    const int raw_value = ANALOG_STICK_NEUTRAL + (signed_axis * static_cast<int>(magnitude));
+uint8_t ApplyFriendProfile3RawOffset(int offset) {
+    const int raw_value = ANALOG_STICK_NEUTRAL + offset;
     if (raw_value < 0) {
         return 0;
     }
@@ -576,6 +581,16 @@ uint8_t ApplyFriendProfile3AxisMagnitude(int8_t axis, uint8_t magnitude) {
         return 255;
     }
     return static_cast<uint8_t>(raw_value);
+}
+
+uint8_t ApplyFriendProfile3AxisMagnitude(int8_t axis, uint8_t magnitude) {
+    const int signed_axis = ClampFriendProfile3Axis(axis);
+    return ApplyFriendProfile3RawOffset(signed_axis * static_cast<int>(magnitude));
+}
+
+uint8_t ApplyFriendProfile3SignedAxisOffset(int8_t axis, int8_t offset_for_positive_axis) {
+    const int signed_axis = ClampFriendProfile3Axis(axis);
+    return ApplyFriendProfile3RawOffset(signed_axis * static_cast<int>(offset_for_positive_axis));
 }
 
 void ApplyTableAnalogOutput(
@@ -593,9 +608,8 @@ void ApplyTableAnalogOutput(
 
 void ApplyFriendProfile3XYModifierOverrides(const RoleState &roles, int8_t x_axis, int8_t y_axis, OutputState &outputs) {
     // Source note for the friend baked profile: LT4 is X1 and LT3 is Y1 in
-    // ResolveRoleState(); RF4 is Tilt and RF3 is Tilt2. The only flipper role
-    // here is rf4_layer_flipper_active, which is initialized false in this
-    // friend branch because no source-grounded flipper binding was provided.
+    // ResolveRoleState(); RF4 is Tilt1, RF3 is Tilt2/flipper, and RF4+RF3 is
+    // Tilt3 from the source-owned friend tables.
     const bool friend_profile3_xy_modifiers_available =
         !roles.mode_active &&
         !roles.x2_active &&
@@ -616,6 +630,33 @@ void ApplyFriendProfile3XYModifierOverrides(const RoleState &roles, int8_t x_axi
     if (roles.y1_active) {
         outputs.leftStickY = ApplyFriendProfile3AxisMagnitude(y_axis, kFriendProfile3Y1Magnitude);
     }
+}
+
+void ApplyFriendProfile3Tilt2FlipperOverride(const RoleState &roles, int8_t x_axis, int8_t y_axis, OutputState &outputs) {
+    const bool friend_profile3_tilt2_flipper_available =
+        !roles.mode_active &&
+        !roles.x1_active &&
+        !roles.x2_active &&
+        !roles.y1_active &&
+        !roles.layer_rf3_normal_x_active &&
+        !roles.rf4_layer_flipper_active &&
+        !roles.rt1_rf4_custom_active &&
+        !roles.tilt1_effective &&
+        roles.tilt2_effective &&
+        !roles.tilt3_effective;
+
+    if (!friend_profile3_tilt2_flipper_available) {
+        return;
+    }
+
+    outputs.leftStickX = ApplyFriendProfile3SignedAxisOffset(
+        x_axis,
+        kFriendProfile3Tilt2FlipperXOffsetForRight
+    );
+    outputs.leftStickY = ApplyFriendProfile3AxisMagnitude(
+        y_axis,
+        kFriendProfile3Tilt2FlipperYMagnitude
+    );
 }
 
 void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const RoleState &roles, OutputState &outputs) {
@@ -767,6 +808,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     } else {
         ApplyTableAnalogOutput(runtime_config, active_table_id, directions.x, directions.y, outputs);
         ApplyDirectionPlusAOverride(runtime_config, roles, outputs);
+        ApplyFriendProfile3Tilt2FlipperOverride(roles, directions.x, directions.y, outputs);
         ApplyFriendProfile3XYModifierOverrides(roles, directions.x, directions.y, outputs);
 
         if (roles.z_airdodge_override_active) {

@@ -7,9 +7,10 @@ validation. This is a throwaway hardware-test branch and is not intended to
 merge back into `configurator` or mainline.
 
 Source values were copied from Smash Box Designer. Modifier values below are
-already converted to absolute raw coordinates with center `(128, 128)`. Do not
-reconvert them. The active source-of-truth for this branch is the source-owned
-Ultimate firmware path in `src/modes/Ultimate.cpp` and
+absolute raw coordinates with center `(128, 128)` except where a source field is
+explicitly called out as signed Smash Box-style input, such as Tilt2 X `197`
+encoding signed offset `-59`. The active source-of-truth for this branch is the
+source-owned Ultimate firmware path in `src/modes/Ultimate.cpp` and
 `src/modes/UltimateIdentityRuntimeTables.hpp`.
 
 These raw coordinate tables are not Faifra's miniscreen/calibration display
@@ -177,15 +178,15 @@ Normal Tilt2:
 
 | Dir | Raw |
 | --- | --- |
-| 1 | (59, 88) |
+| 1 | (187, 88) |
 | 2 | (128, 88) |
-| 3 | (197, 88) |
-| 4 | (59, 128) |
+| 3 | (69, 88) |
+| 4 | (187, 128) |
 | 5 | (128, 128) |
-| 6 | (197, 128) |
-| 7 | (59, 168) |
+| 6 | (69, 128) |
+| 7 | (187, 168) |
 | 8 | (128, 168) |
-| 9 | (197, 168) |
+| 9 | (69, 168) |
 
 Normal Tilt3:
 
@@ -285,8 +286,12 @@ Mode Tilt3:
 | 8 | (128, 155) |
 | 9 | (155, 155) |
 
-Tilt2 X: 197 was resolved as absolute right-side raw X, not as a
-center-relative offset. This branch encodes Tilt2 left/right raw X as 59/197.
+Original Tilt2 X `197` is source-grounded as a signed Smash Box-style byte:
+`197` interpreted as signed int8 is `-59`. RF3/Tilt2 therefore flips the
+horizontal sign relative to RF4/Tilt1 while preserving Tilt2 Y up/down magnitude
+`40`: up/right raw `(69, 168)` displays as `-59 40`, and left/up raw
+`(187, 168)` displays as `59 40`. The previous absolute raw `59/197`
+interpretation was wrong for flipper behavior.
 
 ## C-Stick Values
 

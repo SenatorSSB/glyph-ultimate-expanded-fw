@@ -7,6 +7,9 @@ Runtime fix branch: `glyph/friend-fw-fix-profile3-modifiers`
 Display convention clarification branch:
 `glyph/friend-fw-modifier-display-convention-fix`
 
+Tilt2/flipper correction branch:
+`glyph/friend-fw-fix-tilt2-flipper`
+
 Base branch: `glyph/friend-fw-force-default-profile-once`
 
 This is friend-specific firmware work only. It must not be merged into
@@ -56,8 +59,9 @@ Confirmed friend runtime inputs:
 | --- | --- |
 | LT4 -> X1 | `state.x1_active = inputs.lt4;` |
 | LT3 -> Y1 | `state.y1_active = inputs.lt3;` |
-| RF4 -> Tilt | `state.tilt1_effective = inputs.rf4;` |
-| RF3 -> Tilt2 | `state.tilt2_effective = inputs.rf3;` |
+| RF4 -> Tilt1 | `state.tilt1_effective = inputs.rf4;` |
+| RF3 -> Tilt2/flipper | `state.tilt2_effective = inputs.rf3;` |
+| RF4+RF3 -> Tilt3 | `state.tilt3_effective = inputs.rf4 && inputs.rf3;` |
 
 The baked Ultimate profile in `glyph_overrides.hpp` preserves identity
 physical-to-logical remaps for these buttons. The friend-specific behavior is
@@ -97,7 +101,10 @@ Expected up+right raw outputs after this fix:
 | X1 + up/right | raw (158, 195) | 30 67 |
 | Y1 + up/right | raw (195, 156) | 67 28 |
 | X1+Y1 + up/right | raw (158, 156) | 30 28 |
-| Tilt + up/right | raw (187, 167) | 59 39 |
+| RF4/Tilt1 + up/right | raw (187, 167) | 59 39 |
+| RF3/Tilt2/flipper + up/right | raw (69, 168) | -59 40 |
+| RF3/Tilt2/flipper + left/up | raw (187, 168) | 59 40 |
+| RF4+RF3/Tilt3 + up/right | raw (164, 172) | 36 44 |
 
 The raw values are the firmware output expectations. The miniscreen/origo
 values are the hardware retest expectations as displayed by the controller.
@@ -106,19 +113,58 @@ The combined X1+Y1 path is handled by
 `ApplyFriendProfile3XYModifierOverrides(...)` using signed `int` math before
 narrowing back to `uint8_t`. This avoids unsigned overflow or wraparound tricks.
 
-Tilt and Tilt2 constants were intentionally preserved:
+Tilt1 constants were intentionally preserved:
 
 - Tilt remains `{69/128/187, 87/128/167}`.
-- Tilt2 remains `{59/128/197, 88/128/168}`.
 
-## Flipper Status
+## Tilt2 / Flipper Correction
 
-Flipper remains unresolved. The current friend WIP source confirms RF4 as Tilt,
-RF3 as Tilt2, LT4 as X1, and LT3 as Y1. The only flipper-named runtime field is
-`rf4_layer_flipper_active`, but it is initialized false in this friend branch
-and no source-grounded friend binding or intended flipper table was found.
+The previous unresolved status was wrong for this friend branch. The current
+friend WIP source confirms RF3 as Tilt2, and the original Smash Box Profile 3
+modifier values include source-grounded Tilt2 fields:
 
-No flipper behavior was invented in this fix.
+- Tilt2 X: `197`
+- Tilt2 Y Up: `40`
+- Tilt2 Y Down: `40`
+
+For this source format, Tilt2 X `197` is interpreted as a signed byte value,
+which is signed offset `-59`. RF3/Tilt2 therefore flips the horizontal sign
+relative to RF4/Tilt1:
+
+| Case | Raw absolute byte output | Miniscreen/origo display output |
+| --- | --- | --- |
+| RF4/Tilt1 + up/right | raw (187, 167) | 59 39 |
+| RF3/Tilt2/flipper + up/right | raw (69, 168) | -59 40 |
+| RF3/Tilt2/flipper + left/up | raw (187, 168) | 59 40 |
+
+The prior bad hardware result `left+up with flipper -> -69 40` came from the
+wrong absolute raw `59/197` X interpretation. The corrected implementation uses
+signed, byte-safe runtime math and the source-owned Tilt2 table now reflects
+the corrected raw outputs. The `-69 40` result should not recur.
+
+## Tilt1+Tilt2 / Tilt3 Status
+
+Implemented on this branch because exact source-owned Tilt3 values already
+exist in `docs/friend-profile3-wip.md` and
+`src/modes/UltimateIdentityRuntimeTables.hpp`. RF4+RF3 selects
+`RuntimeTableId::Tilt3` before the generic multi-modifier fallback.
+
+Expected Tilt3 up/right output:
+
+| Case | Raw absolute byte output | Miniscreen/origo display output |
+| --- | --- | --- |
+| RF4+RF3/Tilt3 + up/right | raw (164, 172) | 36 44 |
+
+## R Status
+
+R remains pending. The current source-grounded friend binding is:
+
+- `inputs.lt1` -> GameCube/N64 serialized Z path (`outputs.buttonR`);
+- `inputs.rf10` -> `L+R+A`, including `outputs.triggerRDigital`;
+- no standalone R binding was found for an otherwise empty physical button.
+
+No R binding was invented and no confirmed input was stolen from another
+function.
 
 ## Verification Commands
 
@@ -152,6 +198,8 @@ A hardware retest is required. Suggested focused retest:
 - X1 + up/right displays `30 67`.
 - Y1 + up/right displays `67 28`.
 - X1+Y1 + up/right displays `30 28`.
-- Tilt + up/right displays `59 39`.
-- Flipper remains documented unresolved unless a source-grounded intended
-  behavior is supplied.
+- RF4/Tilt1 + up/right displays `59 39`.
+- RF3/Tilt2/flipper + up/right displays `-59 40`.
+- RF3/Tilt2/flipper + left/up displays `59 40`.
+- RF4+RF3/Tilt3 + up/right displays `36 44`.
+- R remains pending unless a source-grounded standalone binding is supplied.
