@@ -118,8 +118,8 @@ REQUIRED_SOURCE_SNIPPETS = (
     "outputs.y = inputs.rf2;",
     "outputs.buttonL = inputs.lf4 || inputs.rf10;",
     "outputs.buttonR = inputs.lt1;",
-    "outputs.triggerRDigital = inputs.rf10;",
-    "outputs.start = inputs.rf16;",
+    "outputs.triggerRDigital = inputs.rf10 || inputs.rf16;",
+    "outputs.start = inputs.mb7;",
     "outputs.dpadUp = inputs.rf13;",
     "outputs.dpadDown = inputs.rf11;",
     "outputs.dpadLeft = inputs.lf7;",
@@ -141,6 +141,10 @@ REQUIRED_DOC_SNIPPETS = (
     "signed offset `-59`",
     "raw `(69, 168)` displays as `-59 40`",
     "displays as `59 40`",
+    "| rf16 | r |",
+    "| mb7 | start |",
+    "Standalone R is `rf16`; Start is `mb7`",
+    "`rf10` also drives R only as part of the explicitly instructed",
     "X1 and Y1 alone do",
     "Light Shield L/R copied from Smash Box Designer values was not applied",
     "friend-profile3-smashbox-import-wip",
@@ -172,6 +176,8 @@ def main() -> int:
     for snippet in REQUIRED_SOURCE_SNIPPETS:
         if snippet not in source_text:
             return fail(f"missing_source_snippet:{snippet}")
+    if "outputs.start = inputs.rf16;" in source_text:
+        return fail("rf16_must_not_be_double_bound_to_start")
 
     if re.search(r"triggerLAnalog\s*=\s*108|triggerRAnalog\s*=\s*108|triggerLAnalog\s*=\s*255|triggerRAnalog\s*=\s*255", source_text):
         return fail("light_shield_values_applied_without_confirmed_profile_fields")

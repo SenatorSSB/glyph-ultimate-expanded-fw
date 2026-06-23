@@ -390,9 +390,9 @@ void ApplyDigitalButtonOutputs(const InputState &inputs, const LayerState &layer
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
     outputs.buttonR = inputs.lt1;
     outputs.triggerLDigital = inputs.lf4 || inputs.rf10;
-    outputs.triggerRDigital = inputs.rf10;
+    outputs.triggerRDigital = inputs.rf10 || inputs.rf16;
 
-    outputs.start = inputs.rf16;
+    outputs.start = inputs.mb7;
     outputs.select = inputs.mb6;
     outputs.home = inputs.mb5;
     outputs.capture = inputs.mb4;

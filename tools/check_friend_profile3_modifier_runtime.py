@@ -124,6 +124,8 @@ def validate_runtime_source(source: str) -> None:
         "ApplyFriendProfile3XYModifierOverrides(roles, directions.x, directions.y, outputs);",
         "ApplyFriendProfile3Tilt2FlipperOverride(roles, directions.x, directions.y, outputs);",
         "RF4 is Tilt1, RF3 is Tilt2/flipper, and RF4+RF3 is",
+        "outputs.triggerRDigital = inputs.rf10 || inputs.rf16;",
+        "outputs.start = inputs.mb7;",
         "&kSourceOwnedCurrentBaselineRuntimeConfig",
     )
     for snippet in required_snippets:
@@ -131,6 +133,8 @@ def validate_runtime_source(source: str) -> None:
             raise AssertionError(f"missing_runtime_snippet:{snippet}")
     if "no source-grounded flipper binding was provided" in source:
         raise AssertionError("stale_unresolved_flipper_runtime_comment")
+    if "outputs.start = inputs.rf16;" in source:
+        raise AssertionError("rf16_must_not_be_double_bound_to_start")
 
     helper_body = find_function_body(source, "ApplyFriendProfile3XYModifierOverrides")
     if "if (roles.x1_active)" not in helper_body or "outputs.leftStickX" not in helper_body:
@@ -238,7 +242,13 @@ def validate_handoff_doc() -> None:
         "Tilt2 Y Down: `40`",
         "The previous unresolved status was wrong",
         "RF4+RF3 selects",
-        "R remains pending",
+        "Implemented on this branch. The current source-grounded standalone R binding is",
+        "`inputs.rf16` -> standalone R digital path (`outputs.triggerRDigital`)",
+        "`inputs.mb7` -> Start",
+        "RF14 was inspected but was not assigned to R",
+        "RF16 produces standalone R",
+        "MB7 produces Start",
+        "RF16 should not also produce Start",
         "hardware retest is required",
         "must not be merged into configurator",
     ):
@@ -260,7 +270,13 @@ def validate_handoff_doc() -> None:
         "RF4+RF3/Tilt3 + up/right | raw (164, 172) | 36 44",
         "The prior bad field result `left+up with flipper -> -69 40` should not recur",
         "R Status",
-        "Pending",
+        "Implemented on this branch after inspecting the current confirmed working",
+        "RF16 is standalone R",
+        "MB7 is Start",
+        "RF14 was inspected but not assigned to R",
+        "RF16 produces standalone R",
+        "MB7 produces Start",
+        "RF16 should not also produce Start",
         "must not be merged into",
         "Hardware retest is required",
     ):
@@ -288,6 +304,10 @@ def validate_wip_doc_display_note() -> None:
         "raw `(69, 168)` displays as `-59 40`",
         "left/up raw",
         "displays as `59 40`",
+        "| rf16 | r |",
+        "| mb7 | start |",
+        "Standalone R is `rf16`; Start is `mb7`",
+        "`rf10` also drives R only as part of the explicitly instructed",
     ):
         if snippet not in text:
             raise AssertionError(f"wip_doc_missing:{snippet}")
@@ -319,6 +339,8 @@ def main() -> int:
     print("tilt2_flipper_up_right_raw=69,168")
     print("tilt2_flipper_left_up_raw=187,168")
     print("tilt3_rf4_rf3_up_right_raw=164,172")
+    print("standalone_r_input=RF16")
+    print("start_input=MB7")
     print("tilt1_constants_preserved=true")
     print("tilt2_flipper_corrected=true")
     print("one_shot_default_profile_preserved=true")

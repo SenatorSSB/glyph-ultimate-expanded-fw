@@ -84,10 +84,17 @@ Expected RF4+RF3/Tilt3 up/right:
 
 ## R Status
 
-Pending. Current source-grounded friend bindings show `inputs.lt1` on the
-GameCube/N64 serialized Z path and `inputs.rf10` as L+R+A with R digital. No
-standalone R binding was found for an empty physical button, so no R binding was
-invented.
+Implemented on this branch after inspecting the current confirmed working
+runtime role map:
+
+- RF16 is standalone R (`outputs.triggerRDigital`);
+- MB7 is Start;
+- RF10 remains the explicitly instructed L+R+A composite, including R digital;
+- LT1 remains Z on the GameCube/N64 serialized `buttonR` path.
+
+RF14 was inspected but not assigned to R. The friend binding table did not
+source-ground RF14 as R, and historical runtime notes record RF14 as
+empty/no-output in the native Ultimate role map.
 
 ## Hardware Retest Checklist
 
@@ -101,7 +108,8 @@ invented.
 - RF3/Tilt2/flipper + up/right displays `-59 40`.
 - RF3/Tilt2/flipper + left/up displays `59 40`.
 - RF4+RF3/Tilt3 + up/right displays `36 44`.
-- R remains pending unless a source-grounded standalone binding is supplied.
+- RF16 produces standalone R.
+- MB7 produces Start.
+- RF16 should not also produce Start.
 
 Hardware retest is required before claiming acceptance.
-

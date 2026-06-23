@@ -55,7 +55,8 @@ existing repo build workflow.
 | rf12 | y2 |
 | rf15 | x2 |
 | rf10 | l+r+a |
-| rf16 | start |
+| rf16 | r |
+| mb7 | start |
 | rf13 | dpad up |
 | rf11 | dpad down |
 | lf7 | dpad left |
@@ -64,6 +65,9 @@ existing repo build workflow.
 Duplicate bindings are intentional: `lf5`, `lt5`, and `rf6` all provide Up;
 `lf3` and `rf8` both provide Left; `rf5` and `rf9` both provide Mode.
 Composite bindings are intentional: `lt2` is A+B and `rf10` is L+R+A.
+Standalone R is `rf16`; Start is `mb7`, matching the confirmed working runtime
+role map. `rf10` also drives R only as part of the explicitly instructed
+L+R+A composite.
 
 ## Raw Coordinate Tables
 
