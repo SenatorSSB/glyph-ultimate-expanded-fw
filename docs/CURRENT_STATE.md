@@ -99,6 +99,15 @@ packets remain under `docs/calibration/`.
   change active output behavior, and requires no hardware test before merge for
   this scaffold-only branch. A later branch that publishes dedicated active
   storage as active view must be hardware-test-required before merge.
+- The diagnostic branch `runtime-config-diagnostic-active-storage-published`
+  (`diagnostic_active_storage_published`)
+  publishes source-owned-equivalent dedicated active storage as the active view
+  only after copy, validation, and point/table-equivalence success; otherwise it
+  falls back to `kSourceOwnedCurrentBaselineRuntimeConfig`. Candidate view and
+  candidate-owned table pointers remain non-active. This diagnostic changes
+  active behavior, requires hardware PASS before merge, and records no runtime-
+  loaded config, storage, WebSerial/device write, backend/config.pb write path,
+  firmware flashing automation, or nunchuk validation claim.
 - Step 18 public/manual workflow release-candidate hardware result is recorded for
   applicable doable scope in
   `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
@@ -202,6 +211,14 @@ engineering decisions.
   view, and does not implement runtime-loaded config, storage, WebSerial/device
   write, backend/config.pb write, firmware flashing automation, dedicated active
   storage activation, parsed candidate activation, or nunchuk validation.
+- Diagnostic active-storage publication source is hardware-gated firmware
+  behavior work (`diagnostic_active_storage_published`). It copies
+  `kSourceOwnedCurrentBaselineRuntimeConfig` into
+  dedicated active storage, validates that storage, validates equivalence
+  against the source-owned baseline, publishes the dedicated active-storage view
+  only on success, and uses the source-owned baseline fallback on failure.
+  Candidate storage remains non-active and `UpdateAnalogOutputs(...)` consumes
+  only the resolved active runtime config view.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

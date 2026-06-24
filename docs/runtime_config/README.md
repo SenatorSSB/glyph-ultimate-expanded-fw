@@ -115,6 +115,17 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/active_storage_publication_model_build_report_2026-06-10.json` -
   machine-readable build report metadata for the inactive active-storage
   publication model scaffold.
+- `diagnostic_active_storage_published.md` - hardware-gated diagnostic branch
+  packet for publishing source-owned-equivalent dedicated active storage as the
+  active runtime config view while keeping candidate storage non-active.
+- `fixtures/diagnostic_active_storage_published.json` - machine-readable source
+  boundary and diagnostic-state fixture for the dedicated active-storage
+  publication branch.
+- `diagnostic_active_storage_published_build_report_2026-06-10.md` - build
+  report for the dedicated active-storage publication diagnostic branch.
+- `fixtures/diagnostic_active_storage_published_build_report_2026-06-10.json` -
+  machine-readable build report metadata for the dedicated active-storage
+  publication diagnostic.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -169,6 +180,13 @@ artifacts unless a specific packet says otherwise.
   not active; candidate.view is never active; active behavior remains
   source-owned baseline and no hardware test is required before merge for that
   scaffold-only branch.
+- The diagnostic active-storage-published branch changes active behavior by
+  publishing source-owned-equivalent dedicated active storage as the active view
+  only after validation and equivalence succeed. It keeps candidate.view
+  non-active, has a source-owned fallback, requires hardware PASS before merge,
+  and claims no runtime-loaded config, storage, WebSerial/device write,
+  backend/config.pb write path, firmware flashing automation, or nunchuk
+  validation.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

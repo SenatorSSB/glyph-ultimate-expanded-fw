@@ -17,10 +17,12 @@ struct StickPoint {
 enum class RuntimeConfigSource {
     KnownGoodFallback,
     SourceOwnedBaseline,
+    DedicatedActiveStorage,
 };
 
 enum class RuntimeConfigActivationStatus {
     SourceOwnedSelected,
+    DedicatedActiveStorageSelected,
     FallbackSelected,
 };
 
@@ -184,6 +186,38 @@ bool CopyRuntimeConfigViewIntoActiveStorage(
         : RuntimeConfigActiveStorageStatus::InvalidSourceView;
     return ValidateRuntimeConfigActiveStorage(active_storage);
 }
+
+ActiveRuntimeConfigState PublishDedicatedActiveStorageOrFallback(
+    RuntimeConfigActiveStorage &active_storage
+) {
+    static_assert(
+        ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig),
+        "dedicated active storage diagnostic starts from the source-owned baseline"
+    );
+
+    const bool active_storage_ready =
+        CopyRuntimeConfigViewIntoActiveStorage(kSourceOwnedCurrentBaselineRuntimeConfig, active_storage) &&
+        ValidateRuntimeConfigActiveStorage(active_storage) &&
+        RuntimeConfigViewsHaveEquivalentPoints(active_storage.view, kSourceOwnedCurrentBaselineRuntimeConfig);
+
+    if (active_storage_ready) {
+        return {
+            &active_storage.view,
+            RuntimeConfigSource::DedicatedActiveStorage,
+            RuntimeConfigActivationStatus::DedicatedActiveStorageSelected,
+        };
+    }
+
+    return {
+        &kSourceOwnedCurrentBaselineRuntimeConfig,
+        RuntimeConfigSource::KnownGoodFallback,
+        RuntimeConfigActivationStatus::FallbackSelected,
+    };
+}
+
+RuntimeConfigActiveStorage gDedicatedActiveRuntimeConfigStorage;
+const ActiveRuntimeConfigState gActiveRuntimeConfigState =
+    PublishDedicatedActiveStorageOrFallback(gDedicatedActiveRuntimeConfigStorage);
 
 bool MaterializeRuntimeConfigCandidateFromSourceView(
     const RuntimeConfigView &source_view,
@@ -599,16 +633,7 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
 }
 
 const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
-    static_assert(
-        ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig),
-        "source-owned scaffold publishes only the baseline runtime config"
-    );
-    static const ActiveRuntimeConfigState state = {
-        &kSourceOwnedCurrentBaselineRuntimeConfig,
-        RuntimeConfigSource::SourceOwnedBaseline,
-        RuntimeConfigActivationStatus::SourceOwnedSelected,
-    };
-    return state;
+    return gActiveRuntimeConfigState;
 }
 
 const RuntimeConfigView& ResolveActiveRuntimeConfig() {

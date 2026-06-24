@@ -189,6 +189,17 @@ requires no hardware test before merge. A future source-owned-equivalent
 dedicated-active-storage publication diagnostic is hardware-test-required before
 merge.
 
+The diagnostic branch `runtime-config-diagnostic-active-storage-published`
+(`diagnostic_active_storage_published`) is that hardware-gated diagnostic. It
+publishes only source-owned-equivalent dedicated active storage as the active
+view after copy, validation, and point/table-equivalence success, keeps
+candidate.view and candidate-owned table pointers non-active, and falls back to
+`kSourceOwnedCurrentBaselineRuntimeConfig` on validation/equivalence failure.
+This branch changes active behavior and must not merge until a hardware PASS
+result is preserved. It does not implement runtime-loaded config, storage,
+WebSerial/device write, backend/config.pb write path, firmware flashing
+automation, or nunchuk validation.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

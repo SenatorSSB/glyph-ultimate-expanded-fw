@@ -63,6 +63,13 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
     diagnostic branch; non-nunchuk rows PASS and Nunchuk remains NOT_TESTED.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json`
   - matching machine-readable hardware result fixture.
+- `diagnostic_active_storage_published_hardware_plan_2026-06-10.md` -
+  plan-only hardware row set for the dedicated active-storage publication
+  diagnostic; all rows are NOT_TESTED and hardware PASS is required before
+  merge.
+- `fixtures/diagnostic_active_storage_published_hardware_plan_2026-06-10.json`
+  - matching machine-readable dedicated active-storage publication diagnostic
+    hardware plan fixture.
 
 ## Official Configurator Corpus And Source Correction
 
@@ -269,6 +276,16 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `docs/runtime_config/fixtures/active_storage_publication_model_build_report_2026-06-10.json` -
   machine-readable build report fixture for the inactive active-storage
   publication model scaffold.
+- `docs/runtime_config/diagnostic_active_storage_published.md` -
+  hardware-gated diagnostic packet for publishing source-owned-equivalent
+  dedicated active storage while keeping candidate.view non-active.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published.json` -
+  machine-readable diagnostic active-storage publication fixture.
+- `docs/runtime_config/diagnostic_active_storage_published_build_report_2026-06-10.md` -
+  build report for the dedicated active-storage publication diagnostic.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published_build_report_2026-06-10.json` -
+  machine-readable build report fixture for the dedicated active-storage
+  publication diagnostic.
 - `docs/runtime_config/README.md` - runtime-config docs index and current
   Phase 6 design-only boundary.
 - `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md` -
