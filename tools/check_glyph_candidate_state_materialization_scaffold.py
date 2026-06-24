@@ -53,6 +53,11 @@ FORBIDDEN_SOURCE_TOKENS = (
     "Flashing",
 )
 
+ARCHIVED_SOURCE_TOKENS = (
+    "RuntimeConfigCandidateStatus::ParsedPayloadValid",
+    "RuntimeConfigCandidateStatus::InvalidPayload",
+)
+
 FORBIDDEN_DOC_CLAIMS = (
     r"\bruntime-loaded config (?:is |was |has been )?implemented\b",
     r"\bruntime config storage (?:is |was |has been )?implemented\b",
@@ -260,35 +265,20 @@ def baseline_ultimate_source() -> str:
     return completed.stdout
 
 
-def validate_source(source: str) -> None:
-    active_source = strip_cpp_comments(source)
-    for token in FORBIDDEN_SOURCE_TOKENS:
-        if token in active_source:
-            fail(f"forbidden source token found in Ultimate.cpp: {token}")
+def validate_candidate_not_published(source: str, active_source: str) -> None:
+    if re.search(r"active_view\s*=\s*&?[^;\n]*(?:candidate|Candidate)", active_source):
+        fail("candidate-backed active publication is forbidden")
+    get_state_body = strip_cpp_comments(extract_function(source, "GetActiveRuntimeConfigState"))
+    for token in ("candidate", "Candidate", "RuntimeConfigCandidateState", "RuntimeConfigCandidateStatus"):
+        if token in get_state_body:
+            fail(f"GetActiveRuntimeConfigState must not publish candidate state: {token}")
 
-    for token in (
-        "enum class RuntimeConfigCandidateStatus",
-        "RuntimeConfigCandidateStatus::Empty",
-        "RuntimeConfigCandidateStatus::ParsedPayloadValid",
-        "RuntimeConfigCandidateStatus::InvalidPayload",
-        "struct RuntimeConfigCandidateState",
-        "RuntimeConfigView view",
-        "ResetRuntimeConfigCandidateState",
-        "ValidateRuntimeConfigCandidateState",
-        "MaterializeRuntimeConfigCandidateFromSourceView",
-    ):
-        if token not in active_source:
-            fail(f"candidate-state scaffold source missing token: {token}")
 
-    if "ParseUltimateRuntimeConfigPayload(" in active_source:
-        update_body = strip_cpp_comments(extract_function(source, "UpdateAnalogOutputs"))
-        if "ParseUltimateRuntimeConfigPayload(" in update_body:
-            fail("UpdateAnalogOutputs must not call ParseUltimateRuntimeConfigPayload")
-
+def validate_active_view_hot_path(source: str) -> None:
     resolve_body = strip_cpp_comments(extract_function(source, "ResolveActiveRuntimeConfig"))
     if "return *GetActiveRuntimeConfigState().active_view;" not in resolve_body:
         fail("ResolveActiveRuntimeConfig must return only the stable active view")
-    for token in ("Candidate", "Parse", "status", "source", "activation", "load", "storage", "write"):
+    for token in ("Candidate", "candidate", "Parse", "parser", "status", "source", "activation", "load", "storage", "write"):
         if token in resolve_body:
             fail(f"ResolveActiveRuntimeConfig must not inspect {token} state")
 
@@ -311,6 +301,47 @@ def validate_source(source: str) -> None:
     ):
         if token in update_body:
             fail(f"UpdateAnalogOutputs must not mention candidate/parser/load/storage/write/activation status: {token}")
+
+
+def validate_current_source(source: str, active_source: str) -> None:
+    for token in ARCHIVED_SOURCE_TOKENS:
+        if token in active_source:
+            fail(f"archived parser/payload candidate token should not be required in current source: {token}")
+    validate_candidate_not_published(source, active_source)
+    validate_active_view_hot_path(source)
+
+
+def validate_source(source: str, branch: str) -> None:
+    active_source = strip_cpp_comments(source)
+    for token in FORBIDDEN_SOURCE_TOKENS:
+        if token in active_source:
+            fail(f"forbidden source token found in Ultimate.cpp: {token}")
+
+    if branch == MERGED_BRANCH:
+        validate_current_source(source, active_source)
+    else:
+        for token in (
+            "enum class RuntimeConfigCandidateStatus",
+            "RuntimeConfigCandidateStatus::Empty",
+            "RuntimeConfigCandidateStatus::ParsedPayloadValid",
+            "RuntimeConfigCandidateStatus::InvalidPayload",
+            "struct RuntimeConfigCandidateState",
+            "RuntimeConfigView view",
+            "ResetRuntimeConfigCandidateState",
+            "ValidateRuntimeConfigCandidateState",
+            "MaterializeRuntimeConfigCandidateFromSourceView",
+        ):
+            if token not in active_source:
+                fail(f"candidate-state scaffold source missing token: {token}")
+
+    if "ParseUltimateRuntimeConfigPayload(" in active_source:
+        update_body = strip_cpp_comments(extract_function(source, "UpdateAnalogOutputs"))
+        if "ParseUltimateRuntimeConfigPayload(" in update_body:
+            fail("UpdateAnalogOutputs must not call ParseUltimateRuntimeConfigPayload")
+
+    if branch != MERGED_BRANCH:
+        validate_candidate_not_published(source, active_source)
+        validate_active_view_hot_path(source)
 
     for expr in (
         "state.force_up_active = inputs.rf5 || lt2_rf2_force_up_active || lf4_submode_rf3_force_up_active;",
@@ -438,9 +469,14 @@ def main() -> None:
     branch = validate_branch()
     paths = changed_paths()
     validate_changed_paths(paths, branch)
-    validate_source(read_required(ULTIMATE_PATH))
+    validate_source(read_required(ULTIMATE_PATH), branch)
     validate_docs_and_fixtures()
-    print("candidate-state materialization scaffold checks passed")
+    print(
+        "candidate-state materialization scaffold evidence archived; "
+        "current source uses active-storage publication model without parser payload path"
+        if branch == MERGED_BRANCH
+        else "candidate-state materialization scaffold checks passed"
+    )
 
 
 if __name__ == "__main__":

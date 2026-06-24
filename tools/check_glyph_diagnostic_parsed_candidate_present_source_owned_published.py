@@ -271,38 +271,18 @@ def require_token(text: str, token: str, label: str) -> None:
         fail(f"{label} missing token: {token}")
 
 
-def validate_source(source: str) -> None:
-    active_source = strip_cpp_comments(source)
-    if "kPhase7AD3GlobalParseResult.status" in active_source:
-        fail("forbidden parser status token found: kPhase7AD3GlobalParseResult.status")
-
-    for token in (
-        "kDiagnosticSourceOwnedParsedPayload",
-        "UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload",
-        "RuntimeConfigCandidateStatus::ParsedPayloadValid",
-        "RuntimeConfigCandidateStatus::ParsedPayloadEquivalent",
-        "struct RuntimeConfigCandidateState",
-        "struct DiagnosticParsedCandidateState",
-        "MaterializeRuntimeConfigCandidateFromSourceView",
-        "RuntimeConfigViewsHaveEquivalentPoints",
-        "InitializeDiagnosticParsedCandidateState",
-        "kDiagnosticParsedCandidateState",
-    ):
-        require_token(active_source, token, "Ultimate.cpp diagnostic source")
-
+def validate_no_active_candidate_publication(source: str, active_source: str) -> None:
+    if re.search(r"active_view\s*=\s*&?[^;\n]*(?:candidate|Candidate)", active_source):
+        fail("candidate.view active publication remains unsafe and must not be published")
     get_state_body = strip_cpp_comments(extract_function(source, "GetActiveRuntimeConfigState"))
-    for token in (
-        "&kSourceOwnedCurrentBaselineRuntimeConfig",
-        "RuntimeConfigSource::SourceOwnedBaseline",
-        "RuntimeConfigActivationStatus::SourceOwnedSelected",
-    ):
-        require_token(get_state_body, token, "GetActiveRuntimeConfigState")
     for forbidden in ("candidate", "Candidate", "ParsedPayload", "ParseStatus", "kDiagnosticParsedCandidateState"):
         if forbidden in get_state_body:
-            fail(f"GetActiveRuntimeConfigState must not publish parsed candidate state: {forbidden}")
+            fail(f"GetActiveRuntimeConfigState must not publish parsed/candidate state: {forbidden}")
     if "&kKnownGoodRuntimeConfig" in get_state_body:
         fail("GetActiveRuntimeConfigState must force source-owned baseline publication on this diagnostic branch")
 
+
+def validate_active_view_hot_path(source: str) -> None:
     resolve_body = strip_cpp_comments(extract_function(source, "ResolveActiveRuntimeConfig"))
     if "return *GetActiveRuntimeConfigState().active_view;" not in resolve_body:
         fail("ResolveActiveRuntimeConfig must return only GetActiveRuntimeConfigState().active_view")
@@ -343,6 +323,61 @@ def validate_source(source: str) -> None:
     ):
         if forbidden in update_body:
             fail(f"UpdateAnalogOutputs must not mention {forbidden}")
+
+
+def validate_current_source(source: str, active_source: str) -> None:
+    for token in (
+        "kDiagnosticSourceOwnedParsedPayload",
+        "UltimateRuntimeConfigParser",
+        "RuntimeConfigCandidateStatus::ParsedPayloadValid",
+        "RuntimeConfigCandidateStatus::ParsedPayloadEquivalent",
+        "struct DiagnosticParsedCandidateState",
+        "InitializeDiagnosticParsedCandidateState",
+        "kDiagnosticParsedCandidateState",
+    ):
+        if token in active_source:
+            fail(f"archived diagnostic parser/payload source token should not be required in current source: {token}")
+    validate_no_active_candidate_publication(source, active_source)
+    validate_active_view_hot_path(source)
+
+
+def validate_source(source: str, branch: str) -> None:
+    active_source = strip_cpp_comments(source)
+    if "kPhase7AD3GlobalParseResult.status" in active_source:
+        fail("forbidden parser status token found: kPhase7AD3GlobalParseResult.status")
+
+    if branch == MERGED_BRANCH:
+        validate_current_source(source, active_source)
+    else:
+        for token in (
+            "kDiagnosticSourceOwnedParsedPayload",
+            "UltimateRuntimeConfigParser::ParseUltimateRuntimeConfigPayload",
+            "RuntimeConfigCandidateStatus::ParsedPayloadValid",
+            "RuntimeConfigCandidateStatus::ParsedPayloadEquivalent",
+            "struct RuntimeConfigCandidateState",
+            "struct DiagnosticParsedCandidateState",
+            "MaterializeRuntimeConfigCandidateFromSourceView",
+            "RuntimeConfigViewsHaveEquivalentPoints",
+            "InitializeDiagnosticParsedCandidateState",
+            "kDiagnosticParsedCandidateState",
+        ):
+            require_token(active_source, token, "Ultimate.cpp diagnostic source")
+
+    get_state_body = strip_cpp_comments(extract_function(source, "GetActiveRuntimeConfigState"))
+    for token in (
+        "&kSourceOwnedCurrentBaselineRuntimeConfig",
+        "RuntimeConfigSource::SourceOwnedBaseline",
+        "RuntimeConfigActivationStatus::SourceOwnedSelected",
+    ):
+        require_token(get_state_body, token, "GetActiveRuntimeConfigState")
+    for forbidden in ("candidate", "Candidate", "ParsedPayload", "ParseStatus", "kDiagnosticParsedCandidateState"):
+        if forbidden in get_state_body:
+            fail(f"GetActiveRuntimeConfigState must not publish parsed candidate state: {forbidden}")
+    if "&kKnownGoodRuntimeConfig" in get_state_body:
+        fail("GetActiveRuntimeConfigState must force source-owned baseline publication on this diagnostic branch")
+
+    if branch != MERGED_BRANCH:
+        validate_active_view_hot_path(source)
 
     for expr in (
         "state.force_up_active = inputs.rf5 || lt2_rf2_force_up_active || lf4_submode_rf3_force_up_active;",
@@ -559,9 +594,14 @@ def validate_docs_and_fixtures() -> None:
 def main() -> None:
     branch = validate_branch()
     validate_changed_paths(changed_paths(branch), branch)
-    validate_source(read_required(ULTIMATE_PATH))
+    validate_source(read_required(ULTIMATE_PATH), branch)
     validate_docs_and_fixtures()
-    print("diagnostic parsed candidate present/source-owned published checks passed")
+    print(
+        "parsed-candidate-present diagnostic evidence archived; "
+        "current source uses active-storage publication model without parser payload path"
+        if branch == MERGED_BRANCH
+        else "diagnostic parsed candidate present/source-owned published checks passed"
+    )
 
 
 if __name__ == "__main__":

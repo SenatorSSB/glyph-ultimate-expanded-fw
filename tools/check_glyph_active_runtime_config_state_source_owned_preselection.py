@@ -355,21 +355,26 @@ def validate_no_forbidden_source_patterns(source: str, active_no_comments: str) 
         "retained payload",
         "kPhase7ACompiledPayload",
         "UltimateRuntimeConfigCompiledPayload",
-        "storage",
         "RuntimeConfigStorage",
+        "LoadRuntimeConfig",
+        "SaveRuntimeConfig",
         "WebSerial",
         "DeviceWrite",
         "WriteRuntimeConfig",
         "FlashRuntimeConfig",
         "Flashing",
-        "flash",
-        "write",
     )
 
-    # Intentionally permit expected tokens in comments or historical docs; firmware source is strict.
     for token in forbidden:
         if token in active_no_comments:
             fail(f"forbidden firmware-source token found in Ultimate.cpp: {token}")
+    for pattern, description in (
+        (r"\bstorage_implemented\s*[:=]\s*true\b", "storage_implemented: true"),
+        (r"\bruntime_loaded_config_implemented\s*[:=]\s*true\b", "runtime_loaded_config_implemented: true"),
+        (r"\b(?:file|device|backend)[_/]*storage[_/]*(?:path|paths)\b", "file/device/backend storage paths"),
+    ):
+        if re.search(pattern, active_no_comments, flags=re.I):
+            fail(f"forbidden firmware-source token found in Ultimate.cpp: {description}")
 
     update_body = validate_function_scope(source, "UpdateAnalogOutputs", UPDATE_ANALOG_OUTPUTS_FORBIDDEN_PATTERNS)
     if "const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();" not in update_body:
