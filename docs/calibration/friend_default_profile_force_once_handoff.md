@@ -2,6 +2,12 @@
 
 Status: friend-specific/custom firmware branch handoff.
 
+Superseded for the final Faifra layout by
+`docs/calibration/friend_profile3_final_faifra_layout_handoff.md`. This packet
+records the original one-shot marker. The current final friend branch bumps the
+marker to `/friend_profile3_final_faifra_layout_applied.flag` so an existing
+valid LittleFS `config.bin` adopts the new baked profile once.
+
 Base branch: `glyph/friend-fw-bake-correct-profile`.
 Implementation branch: `glyph/friend-fw-force-default-profile-once`.
 

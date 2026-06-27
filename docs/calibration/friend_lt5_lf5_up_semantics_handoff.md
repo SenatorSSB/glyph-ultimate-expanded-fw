@@ -2,6 +2,13 @@
 
 Status: firmware candidate pending hardware retest.
 
+Superseded for the final Faifra layout by
+`docs/calibration/friend_profile3_final_faifra_layout_handoff.md`. This packet
+records the earlier branch where RF6 followed the auxiliary Up-like runtime
+path. The current final friend branch intentionally makes RF6 duplicate LT5
+proper SOCD Up through the baked profile/default config, and RF6 is no longer
+auxiliary runtime Up.
+
 Branch: `glyph/friend-fw-swap-lt5-lf5-up-semantics`
 
 Base branch: `glyph/friend-fw-fix-tilt2-flipper`

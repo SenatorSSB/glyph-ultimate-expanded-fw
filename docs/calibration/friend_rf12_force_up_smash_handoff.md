@@ -2,6 +2,12 @@
 
 Status: firmware candidate pending hardware retest.
 
+Superseded for the final Faifra layout by
+`docs/calibration/friend_profile3_final_faifra_layout_handoff.md`. This packet
+records the previous `glyph/friend-fw-rf12-force-up-smash` branch where RF12
+was Up+A. The current final friend branch intentionally swaps that behavior:
+LT2 is Up+A and RF12 is AB.
+
 Branch: `glyph/friend-fw-rf12-force-up-smash`
 
 Base branch: `glyph/friend-fw-swap-lt5-lf5-up-semantics`

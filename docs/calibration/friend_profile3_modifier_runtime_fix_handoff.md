@@ -2,6 +2,12 @@
 
 Status: firmware candidate pending hardware retest.
 
+Superseded for the final Faifra layout by
+`docs/calibration/friend_profile3_final_faifra_layout_handoff.md`. This packet
+records an earlier branch where standalone R was RF16. The current final friend
+branch intentionally moves standalone R to LF8; RF16 no longer produces R or
+Start.
+
 Runtime fix branch: `glyph/friend-fw-fix-profile3-modifiers`
 
 Display convention clarification branch:

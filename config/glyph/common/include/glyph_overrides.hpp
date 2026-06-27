@@ -17,86 +17,6 @@ const Config default_config = {
     .game_mode_configs_count = 13,
     .game_mode_configs = {
         GameModeConfig {
-            .mode_id = MODE_MELEE,
-            .name = "Melee",
-            .socd_pairs_count = 4,
-            .socd_pairs = {
-                SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_2IP_NO_REAC },
-            },
-            .button_remapping_count = 5,
-            .button_remapping = {
-                ButtonRemap { .physical_button = BTN_MB1,  .activates = BTN_UNSPECIFIED }, // Menu
-            
-                ButtonRemap { .physical_button = BTN_LF8, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LF7, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LF6, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LT6, .activates = BTN_UNSPECIFIED },
-            },
-            .rgb_config = 1,
-            .layout_plate = LAYOUT_PLATE_EVERYTHING,
-            .applicable_backends_count = 4,
-            .applicable_backends = {
-                COMMS_BACKEND_XINPUT,
-                COMMS_BACKEND_DINPUT,
-                COMMS_BACKEND_NINTENDO_SWITCH,
-                COMMS_BACKEND_GAMECUBE,
-            },
-            .menu_button_icon_count = 7,
-            .menu_button_icon = {
-                OUT_UNSPECIFIED,
-                OUT_UNSPECIFIED,
-                OUT_UNSPECIFIED,
-                OUT_UNSPECIFIED,
-                OUT_HOME,
-                OUT_XB_BACK,
-                OUT_START,
-            }
-        },
-        GameModeConfig {
-            .mode_id = MODE_PROJECT_M,
-            .name = "Brawl",
-            .socd_pairs_count = 4,
-            .socd_pairs = {
-                SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_2IP_NO_REAC },
-            },
-            .button_remapping_count = 6,
-            .button_remapping = {
-                ButtonRemap { .physical_button = BTN_MB1,  .activates = BTN_UNSPECIFIED }, // Menu
-            
-                ButtonRemap { .physical_button = BTN_LF8, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LF7, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LF6, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LT6, .activates = BTN_UNSPECIFIED },
-
-                ButtonRemap { .physical_button = BTN_RF9, .activates = BTN_UNSPECIFIED },
-            },
-            .rgb_config = 2,
-            .layout_plate = LAYOUT_PLATE_EVERYTHING,
-            .applicable_backends_count = 4,
-            .applicable_backends = {
-                COMMS_BACKEND_XINPUT,
-                COMMS_BACKEND_DINPUT,
-                COMMS_BACKEND_NINTENDO_SWITCH,
-                COMMS_BACKEND_GAMECUBE,
-            },
-            .menu_button_icon_count = 7,
-            .menu_button_icon = {
-                OUT_UNSPECIFIED,
-                OUT_UNSPECIFIED,
-                OUT_UNSPECIFIED,
-                OUT_UNSPECIFIED,
-                OUT_HOME,
-                OUT_XB_BACK,
-                OUT_START,
-            }
-        },
-        GameModeConfig {
             .mode_id = MODE_ULTIMATE,
             .name = "Ultimate",
             .socd_pairs_count = 4,
@@ -115,7 +35,7 @@ const Config default_config = {
                 ButtonRemap { .physical_button = BTN_RF3, .activates = BTN_RF3 },
                 ButtonRemap { .physical_button = BTN_RF4, .activates = BTN_RF4 },
                 ButtonRemap { .physical_button = BTN_RF5, .activates = BTN_RF5 },
-                ButtonRemap { .physical_button = BTN_RF6, .activates = BTN_RF6 },
+                ButtonRemap { .physical_button = BTN_RF6, .activates = BTN_LT5 },
                 ButtonRemap { .physical_button = BTN_RT1, .activates = BTN_RT1 },
                 ButtonRemap { .physical_button = BTN_LF5, .activates = BTN_LF5 },
                 ButtonRemap { .physical_button = BTN_LT6, .activates = BTN_LT6 },
@@ -157,6 +77,87 @@ const Config default_config = {
             .applicable_backends = {
                 COMMS_BACKEND_DINPUT,
                 COMMS_BACKEND_XINPUT,
+                COMMS_BACKEND_NINTENDO_SWITCH,
+                COMMS_BACKEND_GAMECUBE,
+            },
+            .menu_button_icon_count = 7,
+            .menu_button_icon = {
+                OUT_UNSPECIFIED,
+                OUT_UNSPECIFIED,
+                OUT_UNSPECIFIED,
+                OUT_UNSPECIFIED,
+                OUT_HOME,
+                OUT_XB_BACK,
+                OUT_START,
+            }
+        },
+
+        GameModeConfig {
+            .mode_id = MODE_MELEE,
+            .name = "Melee",
+            .socd_pairs_count = 4,
+            .socd_pairs = {
+                SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_2IP_NO_REAC },
+                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_2IP_NO_REAC },
+                SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_2IP_NO_REAC },
+                SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_2IP_NO_REAC },
+            },
+            .button_remapping_count = 5,
+            .button_remapping = {
+                ButtonRemap { .physical_button = BTN_MB1,  .activates = BTN_UNSPECIFIED }, // Menu
+
+                ButtonRemap { .physical_button = BTN_LF8, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_LF7, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_LF6, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_LT6, .activates = BTN_UNSPECIFIED },
+            },
+            .rgb_config = 1,
+            .layout_plate = LAYOUT_PLATE_EVERYTHING,
+            .applicable_backends_count = 4,
+            .applicable_backends = {
+                COMMS_BACKEND_XINPUT,
+                COMMS_BACKEND_DINPUT,
+                COMMS_BACKEND_NINTENDO_SWITCH,
+                COMMS_BACKEND_GAMECUBE,
+            },
+            .menu_button_icon_count = 7,
+            .menu_button_icon = {
+                OUT_UNSPECIFIED,
+                OUT_UNSPECIFIED,
+                OUT_UNSPECIFIED,
+                OUT_UNSPECIFIED,
+                OUT_HOME,
+                OUT_XB_BACK,
+                OUT_START,
+            }
+        },
+        GameModeConfig {
+            .mode_id = MODE_PROJECT_M,
+            .name = "Brawl",
+            .socd_pairs_count = 4,
+            .socd_pairs = {
+                SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_2IP_NO_REAC },
+                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_2IP_NO_REAC },
+                SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_2IP_NO_REAC },
+                SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_2IP_NO_REAC },
+            },
+            .button_remapping_count = 6,
+            .button_remapping = {
+                ButtonRemap { .physical_button = BTN_MB1,  .activates = BTN_UNSPECIFIED }, // Menu
+
+                ButtonRemap { .physical_button = BTN_LF8, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_LF7, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_LF6, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_LT6, .activates = BTN_UNSPECIFIED },
+
+                ButtonRemap { .physical_button = BTN_RF9, .activates = BTN_UNSPECIFIED },
+            },
+            .rgb_config = 2,
+            .layout_plate = LAYOUT_PLATE_EVERYTHING,
+            .applicable_backends_count = 4,
+            .applicable_backends = {
+                COMMS_BACKEND_XINPUT,
+                COMMS_BACKEND_DINPUT,
                 COMMS_BACKEND_NINTENDO_SWITCH,
                 COMMS_BACKEND_GAMECUBE,
             },

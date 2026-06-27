@@ -2,6 +2,12 @@
 
 Status: friend-specific/custom firmware branch handoff.
 
+Superseded for the final Faifra layout by
+`docs/calibration/friend_profile3_final_faifra_layout_handoff.md`. This packet
+records the earlier exact fixture-bake branch. The current final friend branch
+intentionally deviates from the old physical/logical identity fixture and makes
+Ultimate first/default.
+
 Base branch used: `friend-profile3-smashbox-import-wip`.
 
 Implementation branch: `glyph/friend-fw-bake-correct-profile`.

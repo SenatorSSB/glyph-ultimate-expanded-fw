@@ -1,10 +1,9 @@
 # Friend Profile3 Smash Box WIP
 
-Branch: `friend-profile3-smashbox-import-wip`
+Branch: `glyph/friend-fw-final-faifra-layout`
 
-Purpose: temporary friend-specific Glyph firmware/profile fork for hardware
-validation. This is a throwaway hardware-test branch and is not intended to
-merge back into `configurator` or mainline.
+Purpose: friend-specific Glyph firmware/profile fork for Faifra hardware
+validation. This is not intended to merge back into `configurator` or mainline.
 
 Source values were copied from Smash Box Designer. Modifier values below are
 absolute raw coordinates with center `(128, 128)` except where a source field is
@@ -37,7 +36,7 @@ existing repo build workflow.
 | lt1 | z |
 | lt4 | x1 |
 | lt3 | y1 |
-| lt2 | a+b |
+| lt2 | forced Up Smash (Up + A) |
 | rt1 | a |
 | rt5 | c right |
 | rt4 | c up |
@@ -48,14 +47,15 @@ existing repo build workflow.
 | rf3 | tilt 2 |
 | rf4 | tilt |
 | rf5 | mode |
-| rf6 | up |
+| rf6 | duplicate LT5 proper SOCD Up through profile remap |
 | rf7 | x |
 | rf8 | left |
 | rf9 | mode |
-| rf12 | forced Up Smash (Up + A) |
+| rf12 | a+b |
 | rf15 | x2 |
 | rf10 | l+r+a |
-| rf16 | r |
+| lf8 | r |
+| rf16 | unassigned / no standalone runtime role |
 | mb7 | start |
 | rf13 | dpad up |
 | rf11 | dpad down |
@@ -64,16 +64,25 @@ existing repo build workflow.
 
 Duplicate Up-like bindings are intentional, but their runtime semantics differ
 on the friend firmware branch: `lt5` is the proper left-stick Up source and is
-SOCD-governed against `lf2`/Down by the source-owned 2IP helper, while `lf5`
-and `rf6` are auxiliary Up-like direction sources for modifier coordinate
-selection only when Down is not active. `lf5` no longer force-suppresses Down.
-`lf3` and `rf8` both provide Left; `rf5` and `rf9` both provide Mode.
-Composite bindings are intentional: `lt2` is A+B and `rf10` is L+R+A.
-Standalone R is `rf16`; Start is `mb7`, matching the confirmed working runtime
-role map. `rf10` also drives R only as part of the explicitly instructed
-L+R+A composite. RF12 is forced Up Smash in this friend firmware: it presses A
-and forces/selects the left-stick Default-table Up point for the action. RF15
-remains X2; RF12 no longer participates in X2/Y2 modifier selection.
+SOCD-governed against `lf2`/Down by the source-owned 2IP helper. RF6 duplicates LT5 proper SOCD Up
+through the baked profile/default config by activating
+logical `BTN_LT5`; it is not an auxiliary runtime Up bypass. `lf5` remains the
+only auxiliary Up-like direction source for modifier coordinate selection when
+Down is not active, and `lf5` no longer force-suppresses Down. `lf3` and `rf8`
+both provide Left; `rf5` and `rf9` both provide Mode.
+Composite bindings are intentional: `rf12` is A+B and `rf10` is L+R+A.
+Standalone R is `lf8`; Start is `mb7`, matching Faifra's final requested role
+move. `rf10` also drives R only as part of the explicitly instructed L+R+A
+composite. LT2 is forced Up Smash in this friend firmware: it presses A and
+forces/selects the left-stick Default-table Up point for the action. RF15
+remains X2; RF12 no longer participates in X2/Y2 modifier selection and is not
+forced Up Smash. RF16 is empty/unassigned unless future source documents
+another function.
+
+Ultimate is first/default profile in the baked config for this final friend
+branch. This branch intentionally deviates from the previous physical/logical identity fixture;
+`docs/calibration/fixtures/tilt_button_id_probe/GlyphUserProfilesUltimateMVP01.json`
+is historical evidence, not the exact final layout target.
 
 ## Raw Coordinate Tables
 

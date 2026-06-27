@@ -58,7 +58,7 @@ bool main_setup_done = false;
 namespace {
 
 constexpr char kFriendDefaultProfileAppliedMarker[] =
-    "/friend_profile3_default_applied.flag";
+    "/friend_profile3_final_faifra_layout_applied.flag";
 
 void ApplyFriendDefaultProfileOnce(Config &config) {
     if (LittleFS.exists(kFriendDefaultProfileAppliedMarker)) {
@@ -73,7 +73,7 @@ void ApplyFriendDefaultProfileOnce(Config &config) {
     if (!marker) {
         return;
     }
-    marker.print("friend_profile3_default_applied\n");
+    marker.print("friend_profile3_final_faifra_layout_applied\n");
     marker.close();
 }
 

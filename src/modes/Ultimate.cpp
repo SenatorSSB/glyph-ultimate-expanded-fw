@@ -280,7 +280,7 @@ struct RoleState {
     bool x1_active;
     bool x2_active;
     bool y1_active;
-    bool rf12_force_up_smash_active;
+    bool lt2_force_up_smash_active;
     bool layer_rf3_normal_x_active;
     bool rf4_layer_flipper_active;
     bool rt1_rf4_custom_active;
@@ -335,7 +335,7 @@ LayerState ResolveLayerState(const InputState &inputs) {
 EffectiveDirectionState ResolveEffectiveDirections(const InputState &inputs, const LayerState &layer) {
     EffectiveDirectionState state;
     const bool proper_up_active = inputs.lt5;
-    const bool auxiliary_up_active = inputs.lf5 || inputs.rf6;
+    const bool auxiliary_up_active = inputs.lf5;
     state.force_up_active = false;
     state.horizontal_axis = ResolveHorizontalAxis(
         inputs.lf3 || inputs.rf8,
@@ -359,7 +359,7 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     state.x1_active = inputs.lt4;
     state.x2_active = inputs.rf15;
     state.y1_active = inputs.lt3;
-    state.rf12_force_up_smash_active = inputs.rf12;
+    state.lt2_force_up_smash_active = inputs.lt2;
     state.layer_rf3_normal_x_active = false;
     state.rf4_layer_flipper_active = false;
     state.rt1_rf4_custom_active = false;
@@ -377,23 +377,23 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     state.null_modifier_active = false;
     state.hard_up_b_active = false;
     state.ls_to_dpad_active = false;
-    state.direction_plus_a_active = state.rf12_force_up_smash_active;
-    state.direction_plus_a_force_up = state.rf12_force_up_smash_active;
+    state.direction_plus_a_active = state.lt2_force_up_smash_active;
+    state.direction_plus_a_force_up = state.lt2_force_up_smash_active;
     return state;
 }
 
 void ApplyDigitalButtonOutputs(const InputState &inputs, const LayerState &layer, const RoleState &roles, OutputState &outputs) {
     (void)layer;
 
-    outputs.a = inputs.rt1 || inputs.lt2 || inputs.rf10 || roles.rf12_force_up_smash_active;
-    outputs.b = inputs.rf1 || inputs.lt2;
+    outputs.a = inputs.rt1 || inputs.rf12 || inputs.rf10 || roles.lt2_force_up_smash_active;
+    outputs.b = inputs.rf1 || inputs.rf12;
     outputs.x = inputs.rf7;
     outputs.y = inputs.rf2;
     outputs.buttonL = inputs.lf4 || inputs.rf10;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
     outputs.buttonR = inputs.lt1;
     outputs.triggerLDigital = inputs.lf4 || inputs.rf10;
-    outputs.triggerRDigital = inputs.rf10 || inputs.rf16;
+    outputs.triggerRDigital = inputs.rf10 || inputs.lf8;
 
     outputs.start = inputs.mb7;
     outputs.select = inputs.mb6;
@@ -429,7 +429,7 @@ void ApplyDpadOutputs(const InputState &inputs, const EffectiveDirectionState &d
 }
 
 void ApplyDigitalDirectionOutputs(const EffectiveDirectionState &directions, const RoleState &roles, OutputState &outputs) {
-    if (roles.rf12_force_up_smash_active) {
+    if (roles.lt2_force_up_smash_active) {
         outputs.leftStickLeft = false;
         outputs.leftStickRight = false;
         outputs.leftStickDown = false;
@@ -836,7 +836,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         effective_directions.left, // Left (LF3 with cancellation)
         effective_directions.right, // Right (LF1 with cancellation)
         effective_directions.down, // Down (LF2, SOCD-governed against LT5)
-        effective_directions.up, // Up (LT5 proper, LF5/RF6 auxiliary)
+        effective_directions.up, // Up (LT5 proper, LF5 auxiliary)
         inputs.rt3, // C-Left
         inputs.rt5, // C-Right
         inputs.rt2, // C-Down
