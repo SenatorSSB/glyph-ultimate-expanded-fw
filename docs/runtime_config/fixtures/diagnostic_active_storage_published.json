@@ -1,0 +1,48 @@
+{
+  "schema_name": "glyph_diagnostic_active_storage_published",
+  "status": "hardware_gated_diagnostic",
+  "branch": "runtime-config-diagnostic-active-storage-published",
+  "baseline_branch": "configurator",
+  "active_behavior_changed": true,
+  "hardware_test_required_before_merge": true,
+  "source_view_copied_into_dedicated_active_storage": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "dedicated_active_storage_scaffolded": true,
+  "dedicated_active_storage_active": true,
+  "dedicated_active_storage_validated": true,
+  "dedicated_active_storage_equivalence_validated": true,
+  "published_active_view_when_equivalent": "dedicated active storage view",
+  "fallback_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "candidate_view_published_active": false,
+  "candidate_owned_table_pointer_published_active": false,
+  "parser_payload_path_implemented": false,
+  "parse_ultimate_runtime_config_payload_called": false,
+  "ultimate_runtime_config_parser_included": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "hardware_result_claimed": false,
+  "nunchuk_status": "NOT_TESTED",
+  "evidence_matrix": {
+    "source_owned_active_state_preselection": "HARDWARE_PASS",
+    "parsed_candidate_machinery_present_source_owned_active_view": "HARDWARE_PASS",
+    "parsed_candidate_view_active": "HARDWARE_FAIL",
+    "source_owned_materialized_candidate_view_active": "HARDWARE_FAIL"
+  },
+  "resolver_chain": [
+    "UpdateAnalogOutputs",
+    "ResolveActiveRuntimeConfig",
+    "GetActiveRuntimeConfigState",
+    "gActiveRuntimeConfigState.active_view"
+  ],
+  "source_shape": {
+    "active_storage_status_enum": "RuntimeConfigActiveStorageStatus",
+    "active_storage_struct": "RuntimeConfigActiveStorage",
+    "copy_helper": "CopyRuntimeConfigViewIntoActiveStorage",
+    "validation_helper": "ValidateRuntimeConfigActiveStorage",
+    "equivalence_helper": "RuntimeConfigViewsHaveEquivalentPoints",
+    "publication_helper": "PublishDedicatedActiveStorageOrFallback"
+  }
+}

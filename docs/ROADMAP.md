@@ -189,6 +189,37 @@ requires no hardware test before merge. A future source-owned-equivalent
 dedicated-active-storage publication diagnostic is hardware-test-required before
 merge.
 
+The diagnostic branch `runtime-config-diagnostic-active-storage-published`
+(`diagnostic_active_storage_published`) is that hardware-gated diagnostic. It
+publishes only source-owned-equivalent dedicated active storage as the active
+view after copy, validation, and point/table-equivalence success, keeps
+candidate.view and candidate-owned table pointers non-active, and falls back to
+`kSourceOwnedCurrentBaselineRuntimeConfig` on validation/equivalence failure.
+This branch changes active behavior and has a recorded `HARDWARE_FAIL` result
+on
+`runtime-config-diagnostic-active-storage-published-hardware-failure`,
+documented in
+`docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`.
+Controller disconnect still happens during forced A + Up and forced A + Down.
+Dedicated active storage published as the active `RuntimeConfigView` is not safe
+in this diagnostic, and the implementation branch must not merge into
+`configurator`. Do not merge the failed implementation branch. Dedicated active
+storage published active is unsafe under this diagnostic. It does not implement
+runtime-loaded config, storage, WebSerial/device write, backend/config.pb write
+path, firmware flashing automation, or nunchuk validation.
+
+Future strategy should pivot away from RAM-backed active table pointer
+publication. RAM-backed active table storage is unsafe as an active publication
+target under this test. RAM-backed active runtime table storage appears unsafe
+as an active publication target under this diagnostic, even when
+source-owned-equivalent, validated, equivalence-checked, parser-free, and not
+candidate-owned. The low-level mechanism remains unproven, candidate-backed
+active view remains forbidden, and dedicated active storage may remain as
+archived diagnostic evidence only. Preferred next strategies to document are
+compile-time/generated immutable source-owned tables, source-owned table
+replacement / generated firmware artifacts, or no runtime-loaded publication
+until a safer active-storage model is proven.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

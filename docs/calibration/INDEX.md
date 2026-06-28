@@ -47,6 +47,13 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
     hardware failure; failed activation branch must not merge.
 - `fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
   - matching machine-readable Phase 7A activation hardware failure fixture.
+- `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`
+  - user-reported dedicated active-storage publication diagnostic hardware
+    failure; forced A + Up and forced A + Down still disconnect, nunchuk remains
+    NOT_TESTED, and the implementation branch must not merge.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json`
+  - matching machine-readable dedicated active-storage publication hardware
+    failure fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
@@ -63,6 +70,13 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
     diagnostic branch; non-nunchuk rows PASS and Nunchuk remains NOT_TESTED.
 - `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json`
   - matching machine-readable hardware result fixture.
+- `diagnostic_active_storage_published_hardware_plan_2026-06-10.md` -
+  plan-only hardware row set for the dedicated active-storage publication
+  diagnostic; all rows are NOT_TESTED and hardware PASS is required before
+  merge.
+- `fixtures/diagnostic_active_storage_published_hardware_plan_2026-06-10.json`
+  - matching machine-readable dedicated active-storage publication diagnostic
+    hardware plan fixture.
 
 ## Official Configurator Corpus And Source Correction
 
@@ -269,6 +283,26 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `docs/runtime_config/fixtures/active_storage_publication_model_build_report_2026-06-10.json` -
   machine-readable build report fixture for the inactive active-storage
   publication model scaffold.
+- `docs/runtime_config/diagnostic_active_storage_published.md` -
+  hardware-gated diagnostic packet for publishing source-owned-equivalent
+  dedicated active storage while keeping candidate.view non-active.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published.json` -
+  machine-readable diagnostic active-storage publication fixture.
+- `docs/runtime_config/diagnostic_active_storage_published_build_report_2026-06-10.md` -
+  build report for the dedicated active-storage publication diagnostic.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published_build_report_2026-06-10.json` -
+  machine-readable build report fixture for the dedicated active-storage
+  publication diagnostic.
+- `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md` -
+  HARDWARE_FAIL result for the dedicated active-storage publication diagnostic;
+  RAM-backed active runtime table storage appears unsafe as an active
+  publication target under this test, and the low-level mechanism remains
+  unproven. Do not merge the failed implementation branch. Nunchuk remains
+  NOT_TESTED. Future strategy should pivot away from RAM-backed active table
+  pointer publication.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json` -
+  machine-readable HARDWARE_FAIL result fixture for the dedicated active-storage
+  publication diagnostic.
 - `docs/runtime_config/README.md` - runtime-config docs index and current
   Phase 6 design-only boundary.
 - `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md` -

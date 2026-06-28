@@ -115,6 +115,24 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/active_storage_publication_model_build_report_2026-06-10.json` -
   machine-readable build report metadata for the inactive active-storage
   publication model scaffold.
+- `diagnostic_active_storage_published.md` - hardware-gated diagnostic branch
+  packet for publishing source-owned-equivalent dedicated active storage as the
+  active runtime config view while keeping candidate storage non-active.
+- `fixtures/diagnostic_active_storage_published.json` - machine-readable source
+  boundary and diagnostic-state fixture for the dedicated active-storage
+  publication branch.
+- `diagnostic_active_storage_published_build_report_2026-06-10.md` - build
+  report for the dedicated active-storage publication diagnostic branch.
+- `fixtures/diagnostic_active_storage_published_build_report_2026-06-10.json` -
+  machine-readable build report metadata for the dedicated active-storage
+  publication diagnostic.
+- `diagnostic_active_storage_published_hardware_failure_2026-06-28.md` -
+  `HARDWARE_FAIL` result for the dedicated active-storage publication
+  diagnostic; controller disconnect still happens during forced A + Up and
+  forced A + Down, and the implementation branch must not merge.
+- `fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json` -
+  machine-readable hardware failure result fixture for the dedicated
+  active-storage publication diagnostic.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -169,6 +187,18 @@ artifacts unless a specific packet says otherwise.
   not active; candidate.view is never active; active behavior remains
   source-owned baseline and no hardware test is required before merge for that
   scaffold-only branch.
+- The diagnostic active-storage-published branch changes active behavior by
+  publishing source-owned-equivalent dedicated active storage as the active view
+  only after validation and equivalence succeed. It keeps candidate.view
+  non-active and has a source-owned fallback. Its recorded hardware result is
+  HARDWARE_FAIL: controller disconnect still happens during forced A + Up and
+  forced A + Down. RAM-backed active runtime table storage appears unsafe as an
+  active publication target under this diagnostic, the low-level mechanism
+  remains unproven, and the implementation branch must not merge. Do not merge
+  the failed implementation branch. Dedicated active storage published active is
+  unsafe under this diagnostic. RAM-backed active table storage is unsafe as an
+  active publication target under this test. Future strategy should pivot away
+  from RAM-backed active table pointer publication.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

@@ -1,0 +1,39 @@
+{
+  "schema_name": "glyph_diagnostic_active_storage_published_hardware_failure",
+  "branch_under_test": "runtime-config-diagnostic-active-storage-published",
+  "result_branch": "runtime-config-diagnostic-active-storage-published-hardware-failure",
+  "baseline_branch": "configurator",
+  "overall_result": "HARDWARE_FAIL",
+  "active_behavior_changed": true,
+  "hardware_test_required_before_merge": true,
+  "merge_approved": false,
+  "implementation_branch_merge_allowed": false,
+  "dedicated_active_storage_active": true,
+  "dedicated_active_storage_published_active": true,
+  "candidate_view_published_active": false,
+  "candidate_owned_table_pointer_published_active": false,
+  "parser_payload_path_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "failure_symptoms": [
+    "forced A + Up disconnect",
+    "forced A + Down disconnect"
+  ],
+  "conclusion": [
+    "dedicated active storage published active is unsafe under this diagnostic",
+    "RAM-backed active table storage is unsafe as an active publication target under this test",
+    "low-level mechanism remains unproven",
+    "implementation branch must not merge"
+  ],
+  "future_realization_strategy": [
+    "compile-time/generated immutable source-owned tables",
+    "source-owned table replacement / generated firmware artifacts",
+    "no runtime-loaded publication until a safer active-storage model is proven"
+  ]
+}
