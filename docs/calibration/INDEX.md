@@ -47,6 +47,13 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
     hardware failure; failed activation branch must not merge.
 - `fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
   - matching machine-readable Phase 7A activation hardware failure fixture.
+- `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`
+  - user-reported dedicated active-storage publication diagnostic hardware
+    failure; forced A + Up and forced A + Down still disconnect, nunchuk remains
+    NOT_TESTED, and the implementation branch must not merge.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json`
+  - matching machine-readable dedicated active-storage publication hardware
+    failure fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 
@@ -285,6 +292,14 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
   build report for the dedicated active-storage publication diagnostic.
 - `docs/runtime_config/fixtures/diagnostic_active_storage_published_build_report_2026-06-10.json` -
   machine-readable build report fixture for the dedicated active-storage
+  publication diagnostic.
+- `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md` -
+  HARDWARE_FAIL result for the dedicated active-storage publication diagnostic;
+  RAM-backed active runtime table storage appears unsafe as an active
+  publication target under this test, and the low-level mechanism remains
+  unproven.
+- `docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json` -
+  machine-readable HARDWARE_FAIL result fixture for the dedicated active-storage
   publication diagnostic.
 - `docs/runtime_config/README.md` - runtime-config docs index and current
   Phase 6 design-only boundary.

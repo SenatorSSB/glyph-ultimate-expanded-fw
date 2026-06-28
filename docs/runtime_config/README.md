@@ -126,6 +126,13 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/diagnostic_active_storage_published_build_report_2026-06-10.json` -
   machine-readable build report metadata for the dedicated active-storage
   publication diagnostic.
+- `diagnostic_active_storage_published_hardware_failure_2026-06-28.md` -
+  `HARDWARE_FAIL` result for the dedicated active-storage publication
+  diagnostic; controller disconnect still happens during forced A + Up and
+  forced A + Down, and the implementation branch must not merge.
+- `fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json` -
+  machine-readable hardware failure result fixture for the dedicated
+  active-storage publication diagnostic.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -183,10 +190,11 @@ artifacts unless a specific packet says otherwise.
 - The diagnostic active-storage-published branch changes active behavior by
   publishing source-owned-equivalent dedicated active storage as the active view
   only after validation and equivalence succeed. It keeps candidate.view
-  non-active, has a source-owned fallback, requires hardware PASS before merge,
-  and claims no runtime-loaded config, storage, WebSerial/device write,
-  backend/config.pb write path, firmware flashing automation, or nunchuk
-  validation.
+  non-active and has a source-owned fallback. Its recorded hardware result is
+  HARDWARE_FAIL: controller disconnect still happens during forced A + Up and
+  forced A + Down. RAM-backed active runtime table storage appears unsafe as an
+  active publication target under this diagnostic, the low-level mechanism
+  remains unproven, and the implementation branch must not merge.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

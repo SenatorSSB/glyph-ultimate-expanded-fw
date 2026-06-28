@@ -79,10 +79,14 @@ decision, status, load, storage, write, WebSerial, or flash state.
 
 ## Hardware
 
-No hardware result is claimed by this diagnostic packet.
+The hardware result is recorded in
+`diagnostic_active_storage_published_hardware_failure_2026-06-28.md` as
+`HARDWARE_FAIL`.
 
-This branch must not merge until the diagnostic hardware plan is executed and a
-hardware PASS result is recorded for the applicable non-nunchuk scope.
+The result branch
+`runtime-config-diagnostic-active-storage-published-hardware-failure` records
+that controller disconnect still happens during forced A + Up and forced A +
+Down. The implementation branch must not merge into `configurator`.
 
 Nunchuk remains NOT_TESTED.
 

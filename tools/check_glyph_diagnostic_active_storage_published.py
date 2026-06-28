@@ -12,9 +12,11 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-diagnostic-active-storage-published"
+RESULT_BRANCH = "runtime-config-diagnostic-active-storage-published-hardware-failure"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCHES = {EXPECTED_BRANCH, MERGED_BRANCH}
+RESULT_BRANCH_BASE = EXPECTED_BRANCH
+ALLOWED_BRANCHES = {EXPECTED_BRANCH, RESULT_BRANCH, MERGED_BRANCH}
 
 ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
 DOC_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_active_storage_published.md"
@@ -25,6 +27,8 @@ HARDWARE_PLAN_PATH = REPO_ROOT / "docs/calibration/diagnostic_active_storage_pub
 HARDWARE_PLAN_FIXTURE_PATH = REPO_ROOT / "docs/calibration/fixtures/diagnostic_active_storage_published_hardware_plan_2026-06-10.json"
 HARDWARE_RESULT_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_active_storage_published_hardware_result_2026-06-10.md"
 HARDWARE_RESULT_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_result_2026-06-10.json"
+HARDWARE_FAILURE_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md"
+HARDWARE_FAILURE_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json"
 README_PATH = REPO_ROOT / "docs/runtime_config/README.md"
 CALIBRATION_INDEX_PATH = REPO_ROOT / "docs/calibration/INDEX.md"
 CURRENT_STATE_PATH = REPO_ROOT / "docs/CURRENT_STATE.md"
@@ -37,10 +41,21 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_diagnostic_active_storage_published.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
+RESULT_BRANCH_ALLOWED_EXACT_CHANGED_PATHS = {
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "docs/calibration/INDEX.md",
+    "docs/runtime_config/README.md",
+    "docs/runtime_config/diagnostic_active_storage_published.md",
+    "docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md",
+    "docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json",
+    "tools/check_glyph_diagnostic_active_storage_published.py",
+}
 OPTIONAL_MODE_HELPER_RE = re.compile(r"^src/modes/[^/]+\.(?:cpp|hpp|h)$")
 FORBIDDEN_CHANGED_RE = re.compile(
     r"(^|/)(?:HAL|hal|backend|config\.pb|storage|write|WebSerial|webserial|flash|flashing)(?:/|$)"
 )
+FORBIDDEN_SOURCE_CHANGED_RE = re.compile(r"^(?:src|HAL|hal|backend|config\.pb)(?:/|$)")
 
 EXPECTED_EVIDENCE_MATRIX = {
     "source_owned_active_state_preselection": "HARDWARE_PASS",
@@ -163,7 +178,7 @@ def current_branch() -> str:
 def validate_branch() -> str:
     branch = current_branch()
     if branch not in ALLOWED_BRANCHES:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+        fail(f"checker must run on {EXPECTED_BRANCH}, {RESULT_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     if branch == EXPECTED_BRANCH:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -174,11 +189,21 @@ def validate_branch() -> str:
         )
         if result.returncode != 0:
             fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
+    if branch == RESULT_BRANCH:
+        result = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", RESULT_BRANCH_BASE, "HEAD"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            fail(f"{RESULT_BRANCH_BASE} must be an ancestor of HEAD")
     return branch
 
 
-def changed_paths() -> set[str]:
-    paths = set(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
+def changed_paths(diff_base: str) -> set[str]:
+    paths = set(git_lines(["diff", "--name-only", f"{diff_base}...HEAD"]))
     for status_line in git_lines(["status", "--short"], preserve_status=True):
         path = status_line[3:].strip()
         if not path:
@@ -190,6 +215,15 @@ def changed_paths() -> set[str]:
 
 
 def validate_changed_paths(paths: set[str], branch: str) -> None:
+    if branch == RESULT_BRANCH:
+        for path in sorted(paths):
+            if FORBIDDEN_SOURCE_CHANGED_RE.search(path):
+                fail(f"source path changed on failure-result branch: {path}")
+            if FORBIDDEN_CHANGED_RE.search(path):
+                fail(f"unsupported storage/write/WebSerial/flashing path changed on failure-result branch: {path}")
+            if path not in RESULT_BRANCH_ALLOWED_EXACT_CHANGED_PATHS:
+                fail(f"failure-result branch may change only docs/checker paths, got: {path}")
+        return
     for path in sorted(paths):
         if FORBIDDEN_CHANGED_RE.search(path):
             fail(f"forbidden HAL/backend/config.pb/persistent-storage/write/WebSerial/flashing path changed: {path}")
@@ -555,6 +589,152 @@ def validate_hardware_fixture(payload: dict[str, Any], plan_text: str) -> None:
         require_phrase(plan_text, f"| {row['id']} |", "hardware plan")
 
 
+def require_false(payload: dict[str, Any], key: str, label: str) -> None:
+    if payload.get(key) is not False:
+        fail(f"{label} {key!r} must be false, got {payload.get(key)!r}")
+
+
+def forbid_unsupported_claims(text: str, label: str) -> None:
+    compact = re.sub(r"\s+", " ", text).strip().lower()
+    forbidden_phrases = (
+        "`runtime_loaded_config_implemented`: `true`",
+        '"runtime_loaded_config_implemented": true',
+        "runtime-loaded config is implemented",
+        "`persistent_storage_implemented`: `true`",
+        '"persistent_storage_implemented": true',
+        "persistent storage is implemented",
+        "`storage_implemented`: `true`",
+        '"storage_implemented": true',
+        "runtime-config storage is implemented",
+        "`webserial_device_write_implemented`: `true`",
+        '"webserial_device_write_implemented": true',
+        "webserial/device write is implemented",
+        "`backend_config_pb_write_path_implemented`: `true`",
+        '"backend_config_pb_write_path_implemented": true',
+        "backend/config.pb write path is implemented",
+        "`flashing_automation_implemented`: `true`",
+        '"flashing_automation_implemented": true',
+        "firmware flashing automation is implemented",
+        "`root_cause_proven`: `true`",
+        '"root_cause_proven": true',
+        "root cause is proven",
+        "nunchuk: pass",
+    )
+    for phrase in forbidden_phrases:
+        if phrase in compact:
+            fail(f"{label} contains unsupported claim: {phrase}")
+
+
+def validate_failure_fixture(payload: dict[str, Any], result_text: str) -> None:
+    expected = {
+        "schema_name": "glyph_diagnostic_active_storage_published_hardware_failure",
+        "branch_under_test": EXPECTED_BRANCH,
+        "result_branch": RESULT_BRANCH,
+        "baseline_branch": BASE_BRANCH,
+        "overall_result": "HARDWARE_FAIL",
+        "active_behavior_changed": True,
+        "hardware_test_required_before_merge": True,
+        "merge_approved": False,
+        "implementation_branch_merge_allowed": False,
+        "dedicated_active_storage_active": True,
+        "dedicated_active_storage_published_active": True,
+        "candidate_view_published_active": False,
+        "candidate_owned_table_pointer_published_active": False,
+        "parser_payload_path_implemented": False,
+        "runtime_loaded_config_implemented": False,
+        "persistent_storage_implemented": False,
+        "storage_implemented": False,
+        "webserial_device_write_implemented": False,
+        "backend_config_pb_write_path_implemented": False,
+        "flashing_automation_implemented": False,
+        "nunchuk_status": "NOT_TESTED",
+        "root_cause_proven": False,
+    }
+    for key, expected_value in expected.items():
+        if payload.get(key) != expected_value:
+            fail(f"failure fixture {key!r} mismatch: expected {expected_value!r}, got {payload.get(key)!r}")
+    for key in (
+        "runtime_loaded_config_implemented",
+        "persistent_storage_implemented",
+        "storage_implemented",
+        "webserial_device_write_implemented",
+        "backend_config_pb_write_path_implemented",
+        "flashing_automation_implemented",
+        "root_cause_proven",
+    ):
+        require_false(payload, key, "failure fixture")
+    if payload.get("failure_symptoms") != [
+        "forced A + Up disconnect",
+        "forced A + Down disconnect",
+    ]:
+        fail("failure fixture failure_symptoms mismatch")
+    if payload.get("conclusion") != [
+        "dedicated active storage publication failed hardware test",
+        "RAM-backed active table storage is unsafe under this diagnostic",
+        "low-level mechanism remains unproven",
+        "implementation branch must not merge",
+    ]:
+        fail("failure fixture conclusion mismatch")
+    for phrase in (
+        "status: HARDWARE_FAIL",
+        "overall_result: HARDWARE_FAIL",
+        f"branch_under_test: `{EXPECTED_BRANCH}`",
+        f"result_branch: `{RESULT_BRANCH}`",
+        "forced A + Up",
+        "forced A + Down",
+        "controller disconnect still happens",
+        "`merge_approved`: `false`",
+        "`nunchuk_status`: `NOT_TESTED`",
+        "`root_cause_proven`: `false`",
+        "Dedicated active storage publication failed hardware testing.",
+        "Dedicated active storage published as the active `RuntimeConfigView` is not safe",
+        "RAM-backed active runtime table storage appears unsafe",
+        "The low-level mechanism remains unproven.",
+        "Candidate-backed active view remains forbidden.",
+        "Dedicated active storage may remain as archived diagnostic evidence only",
+        "The implementation branch must not merge into `configurator`.",
+        "compile-time/generated immutable source-owned tables",
+        "source-owned table replacement / generated firmware artifacts",
+        "no runtime-loaded publication until a safer active-storage model is proven",
+        "Nunchuk remains NOT_TESTED.",
+    ):
+        require_phrase(result_text, phrase, "failure result")
+    forbid_unsupported_claims(result_text, "failure result")
+
+
+def validate_failure_result_branch_docs() -> None:
+    result_text = read_required(HARDWARE_FAILURE_PATH)
+    result_fixture = load_json_object(HARDWARE_FAILURE_FIXTURE_PATH)
+    readme = read_required(README_PATH)
+    calibration_index = read_required(CALIBRATION_INDEX_PATH)
+    current_state = read_required(CURRENT_STATE_PATH)
+    roadmap = read_required(ROADMAP_PATH)
+    diagnostic_doc = read_required(DOC_PATH)
+
+    validate_failure_fixture(result_fixture, result_text)
+    for text, label in (
+        (readme, "runtime config README"),
+        (calibration_index, "calibration index"),
+        (current_state, "current state"),
+        (roadmap, "roadmap"),
+        (diagnostic_doc, "diagnostic doc"),
+    ):
+        require_phrase(text, "diagnostic_active_storage_published_hardware_failure_2026-06-28", label)
+        require_phrase(text, "HARDWARE_FAIL", label)
+        require_phrase(text, "forced A + Up", label)
+        require_phrase(text, "forced A + Down", label)
+        require_phrase(text, "must not merge", label)
+        require_phrase(text, "Nunchuk remains NOT_TESTED", label)
+        forbid_unsupported_claims(text, label)
+    for phrase in (
+        "RAM-backed active runtime table storage appears unsafe",
+        "low-level mechanism remains unproven",
+        "candidate-backed active view remains forbidden",
+        "pivot away from RAM-backed active table pointer publication",
+    ):
+        require_phrase(current_state + "\n" + roadmap + "\n" + readme + "\n" + result_text, phrase, "failure conclusion docs")
+
+
 def validate_docs_and_fixtures() -> None:
     doc = read_required(DOC_PATH)
     fixture = load_json_object(FIXTURE_PATH)
@@ -627,11 +807,17 @@ def validate_merged_hardware_result_if_needed(branch: str) -> None:
 
 def main() -> None:
     branch = validate_branch()
-    validate_changed_paths(changed_paths(), branch)
+    diff_base = RESULT_BRANCH_BASE if branch == RESULT_BRANCH else BASE_BRANCH
+    validate_changed_paths(changed_paths(diff_base), branch)
     validate_active_storage_publication_source(read_required(ULTIMATE_PATH))
     validate_docs_and_fixtures()
+    if branch == RESULT_BRANCH:
+        validate_failure_result_branch_docs()
     validate_merged_hardware_result_if_needed(branch)
     print("glyph_diagnostic_active_storage_published: PASS")
+    if branch == RESULT_BRANCH:
+        print("hardware_failure_result=HARDWARE_FAIL")
+        print(f"result_branch={RESULT_BRANCH}")
     print("dedicated_active_storage_active=true")
     print("candidate_view_published_active=false")
     print("candidate_owned_table_pointer_published_active=false")
