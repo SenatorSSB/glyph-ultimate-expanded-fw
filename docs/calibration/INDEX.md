@@ -54,6 +54,17 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json`
   - matching machine-readable dedicated active-storage publication hardware
     failure fixture.
+- `docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md`
+  - user-reported generated source-owned baseline active diagnostic hardware
+    failure; forced A + Up and forced A + Down still disconnect, initial two
+    Up+A presses did not immediately disconnect before later reproduction,
+    reconnect sometimes leaves left stick fully down or fully up across failed
+    diagnostics, result branch
+    `runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`,
+    nunchuk remains NOT_TESTED, and the implementation branch must not merge.
+- `docs/runtime_config/fixtures/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.json`
+  - matching machine-readable generated source-owned baseline active hardware
+    failure fixture.
 - `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
   template.
 

@@ -208,6 +208,15 @@ artifacts unless a specific packet says otherwise.
   artifact hashes recorded only as local observations.
 - `fixtures/diagnostic_generated_source_owned_baseline_active_build_report_2026-06-29.json` -
   machine-readable build report metadata for the diagnostic branch.
+- `diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md` -
+  `HARDWARE_FAIL` result for the generated source-owned baseline active
+  diagnostic; forced A + Up and forced A + Down still disconnect, initial two
+  Up+A presses did not immediately disconnect before later reproduction,
+  reconnect sometimes leaves left stick fully down or fully up across failed
+  diagnostics, and the implementation branch must not merge.
+- `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.json` -
+  machine-readable hardware failure result fixture for the generated
+  source-owned baseline active diagnostic.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -309,6 +318,14 @@ artifacts unless a specific packet says otherwise.
   config, storage, WebSerial/device write, backend/config.pb write path, or
   flashing automation, and has `hardware_test_required_before_merge: true`.
   Nunchuk remains NOT_TESTED.
+- The generated source-owned baseline active diagnostic has a recorded
+  `HARDWARE_FAIL` result on
+  `runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`.
+  Generated/source-owned/baseline-equivalent table data was not sufficient for
+  safe active publication. Failure is no longer isolated to RAM-backed active
+  table storage; changing the active `RuntimeConfigView`/table publication path
+  remains unsafe under this diagnostic. The implementation branch must not
+  merge, root cause is not proven, and Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

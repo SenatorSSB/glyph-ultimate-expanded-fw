@@ -313,6 +313,26 @@ payload/runtime-loaded/storage/write/WebSerial/backend config.pb/flashing
 paths, and keeps Nunchuk NOT_TESTED. A preserved hardware PASS is required
 before this active diagnostic source can remain merged into `configurator`.
 
+The generated source-owned baseline active diagnostic has a recorded
+`HARDWARE_FAIL` result on
+`runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`,
+documented in
+`docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md`.
+Forced A + Up still disconnects and forced A + Down still disconnects. Initial
+two Up+A presses did not immediately disconnect, but subsequent presses
+reproduced the same disconnect behavior. Across failed firmware diagnostics,
+after reconnect the controller has often been stuck with left stick fully down
+or fully up. Generated/source-owned/baseline-equivalent table data was not
+sufficient for safe active publication. Failure is not isolated to RAM-backed
+active table storage; changing active `RuntimeConfigView`/table publication path
+remains unsafe under this diagnostic. The low-level mechanism remains unproven.
+Source-owned active-state preselection remains the last known passing
+active-runtime boundary. The implementation branch must not merge into
+`configurator`, and Nunchuk remains NOT_TESTED. Future realization strategy
+should pivot away from `RuntimeConfigView` replacement as the active
+customization mechanism unless a narrower source-backed diagnostic proves
+otherwise.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

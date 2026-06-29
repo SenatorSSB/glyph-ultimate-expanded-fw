@@ -5,6 +5,11 @@ Status: HARDWARE_GATED_DIAGNOSTIC.
 Branch:
 `runtime-config-diagnostic-generated-source-owned-baseline-active`
 
+Hardware result branch:
+`runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`
+
+Hardware result: `HARDWARE_FAIL`
+
 ## Diagnostic Question
 
 Can a generated source-owned baseline-equivalent artifact be selected active
@@ -92,3 +97,27 @@ UpdateAnalogOutputs
 This branch changes active firmware behavior and must not merge until the
 hardware plan records a preserved non-nunchuk `HARDWARE_PASS`. Nunchuk remains
 NOT_TESTED unless explicitly exercised and recorded.
+
+The 2026-06-29 hardware result recorded on
+`runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`
+is `HARDWARE_FAIL`. Forced A + Up still disconnects and forced A + Down still
+disconnects. Initial two Up+A presses did not immediately disconnect, but
+subsequent presses reproduced the same disconnect behavior. Across failed
+firmware diagnostics, after reconnect the controller has often been stuck with
+left stick fully down or fully up.
+
+Generated source-owned baseline active publication failed hardware testing.
+Source-owned generated table data equivalence to baseline was not sufficient to
+make this active publication model safe. The failure is no longer isolated to
+RAM-backed active table storage. The unsafe boundary appears to include changing
+the active `RuntimeConfigView`/table publication path, even with generated
+source-owned immutable baseline-equivalent data. The low-level mechanism remains
+unproven. Source-owned active-state preselection remains the last known passing
+active-runtime boundary.
+
+Do not merge the implementation branch into `configurator`. Future realization
+strategy should pivot away from `RuntimeConfigView` replacement as the active
+customization mechanism unless a narrower source-backed diagnostic proves
+otherwise. Runtime-loaded config, persistent storage, storage, WebSerial/device
+write, backend/config.pb write path, and firmware flashing automation remain not
+implemented. Nunchuk remains NOT_TESTED. Root cause is not proven.

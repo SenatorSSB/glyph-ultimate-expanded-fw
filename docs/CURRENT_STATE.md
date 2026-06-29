@@ -337,6 +337,23 @@ engineering decisions.
   backend/config.pb write path, firmware flashing automation, or nunchuk
   validation is implemented. The low-level failure mechanism remains unproven
   and Nunchuk remains NOT_TESTED.
+- This generated source-owned baseline active diagnostic has a recorded
+  `HARDWARE_FAIL` result in
+  `docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md`.
+  The result branch is
+  `runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`.
+  Forced A + Up still disconnects and forced A + Down still disconnects.
+  Initial two Up+A presses did not immediately disconnect, but subsequent
+  presses reproduced the same disconnect behavior. Across failed firmware
+  diagnostics, after reconnect the controller has often been stuck with left
+  stick fully down or fully up. Generated/source-owned/baseline-equivalent table
+  data was not sufficient for safe active publication. The failure is no longer
+  isolated to RAM-backed active table storage; changing the active
+  `RuntimeConfigView`/table publication path remains unsafe under this
+  diagnostic. The low-level mechanism remains unproven, source-owned
+  active-state preselection remains the last known passing active-runtime
+  boundary, the implementation branch must not merge into `configurator`, and
+  Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

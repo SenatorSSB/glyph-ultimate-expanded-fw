@@ -12,8 +12,10 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-diagnostic-generated-source-owned-baseline-active"
+RESULT_BRANCH = "runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+RESULT_BRANCH_BASE = EXPECTED_BRANCH
 
 ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
 WRAPPER_PATH = (
@@ -36,6 +38,14 @@ BUILD_REPORT_PATH = (
 BUILD_REPORT_FIXTURE_PATH = (
     REPO_ROOT
     / "docs/runtime_config/fixtures/diagnostic_generated_source_owned_baseline_active_build_report_2026-06-29.json"
+)
+HARDWARE_FAILURE_PATH = (
+    REPO_ROOT
+    / "docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md"
+)
+HARDWARE_FAILURE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "docs/runtime_config/fixtures/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.json"
 )
 HARDWARE_PLAN_PATH = (
     REPO_ROOT
@@ -68,8 +78,21 @@ ALLOWED_PREFIXES = (
     "docs/calibration/",
     "src/modes/runtime_config/generated_source_owned/",
 )
+RESULT_BRANCH_ALLOWED_EXACT_CHANGED_PATHS = {
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "docs/calibration/INDEX.md",
+    "docs/runtime_config/README.md",
+    "docs/runtime_config/diagnostic_generated_source_owned_baseline_active.md",
+    "docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md",
+    "docs/runtime_config/fixtures/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.json",
+    "tools/check_glyph_diagnostic_generated_source_owned_baseline_active.py",
+}
 FORBIDDEN_CHANGED_RE = re.compile(
     r"(^|/)(?:HAL|hal|backend|config\.pb|storage|write|WebSerial|webserial|flash|flashing)(?:/|$)"
+)
+FORBIDDEN_SOURCE_CHANGED_RE = re.compile(
+    r"^(?:src|lib|include|HAL|hal|backend)(?:/|$)|(?:^|/)config\.pb(?:/|$)"
 )
 GENERATED_SOURCE_RE = re.compile(
     r"^src/modes/runtime_config/generated_source_owned/[A-Za-z0-9_.-]+\.(?:h|hpp|hh|cc|cpp)$"
@@ -205,17 +228,18 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {EXPECTED_BRANCH, RESULT_BRANCH, MERGED_BRANCH}:
+        fail(f"checker must run on {EXPECTED_BRANCH}, {RESULT_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+    ancestor = RESULT_BRANCH_BASE if branch == RESULT_BRANCH else BASE_BRANCH
     result = subprocess.run(
-        ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
+        ["git", "merge-base", "--is-ancestor", ancestor, "HEAD"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=False,
     )
     if result.returncode != 0:
-        fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
+        fail(f"{ancestor} must be an ancestor of HEAD")
     return branch
 
 
@@ -227,7 +251,8 @@ def status_path(status_line: str) -> str:
 
 
 def changed_paths(branch: str) -> set[str]:
-    paths = set(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
+    diff_base = RESULT_BRANCH_BASE if branch == RESULT_BRANCH else BASE_BRANCH
+    paths = set(git_lines(["diff", "--name-only", f"{diff_base}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
         if path:
@@ -238,6 +263,15 @@ def changed_paths(branch: str) -> set[str]:
 
 
 def validate_changed_paths(paths: set[str]) -> None:
+    if current_branch() == RESULT_BRANCH:
+        for path in sorted(paths):
+            if FORBIDDEN_SOURCE_CHANGED_RE.search(path):
+                fail(f"source path changed on failure-result branch: {path}")
+            if FORBIDDEN_CHANGED_RE.search(path):
+                fail(f"unsupported storage/write/WebSerial/flashing path changed on failure-result branch: {path}")
+            if path not in RESULT_BRANCH_ALLOWED_EXACT_CHANGED_PATHS:
+                fail(f"failure-result branch may change only docs/checker paths, got: {path}")
+        return
     for path in sorted(paths):
         if FORBIDDEN_CHANGED_RE.search(path):
             fail(f"forbidden HAL/backend/config.pb/storage/write/WebSerial/flashing path changed: {path}")
@@ -556,6 +590,108 @@ def validate_hardware_fixture(payload: dict[str, Any], plan_text: str) -> None:
         require_phrase(plan_text, f"| {row['id']} |", "hardware plan")
 
 
+def validate_failure_fixture(payload: dict[str, Any], failure_text: str) -> None:
+    expected = {
+        "schema_name": "glyph_diagnostic_generated_source_owned_baseline_active_hardware_failure",
+        "branch_under_test": EXPECTED_BRANCH,
+        "result_branch": RESULT_BRANCH,
+        "baseline_branch": BASE_BRANCH,
+        "overall_result": "HARDWARE_FAIL",
+        "active_behavior_changed": True,
+        "hardware_test_required_before_merge": True,
+        "merge_approved": False,
+        "implementation_branch_merge_allowed": False,
+        "generated_source_owned_baseline_active": True,
+        "generated_baseline_equivalent_to_source_owned_baseline": True,
+        "ram_backed_active_table_publication": False,
+        "candidate_view_published_active": False,
+        "candidate_owned_table_pointer_published_active": False,
+        "parser_payload_path_implemented": False,
+        "runtime_loaded_config_implemented": False,
+        "persistent_storage_implemented": False,
+        "storage_implemented": False,
+        "webserial_device_write_implemented": False,
+        "backend_config_pb_write_path_implemented": False,
+        "flashing_automation_implemented": False,
+        "nunchuk_status": "NOT_TESTED",
+        "root_cause_proven": False,
+    }
+    for key, expected_value in expected.items():
+        if payload.get(key) != expected_value:
+            fail(f"hardware failure fixture {key!r} mismatch: expected {expected_value!r}, got {payload.get(key)!r}")
+
+    expected_symptoms = [
+        "forced A + Up disconnect",
+        "forced A + Down disconnect",
+        "initial two Up+A presses did not immediately disconnect",
+        "reconnect sometimes stuck left stick fully down or fully up across failed diagnostics",
+    ]
+    if payload.get("failure_symptoms") != expected_symptoms:
+        fail("hardware failure fixture failure_symptoms mismatch")
+
+    expected_conclusions = [
+        "generated source-owned baseline active diagnostic failed hardware test",
+        "generated/source-owned/baseline-equivalent table data was not sufficient for safe active publication",
+        "failure is not isolated to RAM-backed active table storage",
+        "changing active RuntimeConfigView/table publication path remains unsafe under this diagnostic",
+        "implementation branch must not merge",
+    ]
+    if payload.get("conclusion") != expected_conclusions:
+        fail("hardware failure fixture conclusion mismatch")
+
+    for phrase in (
+        "status: HARDWARE_FAIL",
+        "overall_result: HARDWARE_FAIL",
+        EXPECTED_BRANCH,
+        RESULT_BRANCH,
+        "Forced A + Up still disconnects.",
+        "Forced A + Down still disconnects.",
+        "Initial two Up+A presses did not immediately disconnect",
+        "left stick fully down or fully up",
+        "`merge_approved`: `false`",
+        "`nunchuk_status`: `NOT_TESTED`",
+        "`root_cause_proven`: `false`",
+        "Generated/source-owned/baseline-equivalent table data was not sufficient",
+        "Failure is not isolated to RAM-backed active table storage.",
+        "Changing active `RuntimeConfigView`/table publication path remains unsafe",
+        "Source-owned active-state preselection remains the last known passing active-runtime boundary.",
+        "Do not merge the failed implementation branch into `configurator`.",
+        "Runtime-loaded config is not implemented.",
+        "Runtime-config storage is not implemented.",
+        "Persistent storage is not implemented.",
+        "WebSerial/device write is not implemented.",
+        "backend/config.pb write path is not implemented.",
+        "Firmware flashing automation is not implemented.",
+        "No push-to-device behavior is implemented or claimed.",
+        "No nunchuk validation is claimed.",
+        "Nunchuk remains NOT_TESTED.",
+        "Root cause is not proven.",
+    ):
+        require_phrase(failure_text, phrase, "hardware failure doc")
+
+
+def validate_failure_result_docs() -> None:
+    failure_text = read_required(HARDWARE_FAILURE_PATH)
+    failure_fixture = load_json_object(HARDWARE_FAILURE_FIXTURE_PATH)
+    readme = read_required(README_PATH)
+    calibration_index = read_required(CALIBRATION_INDEX_PATH)
+    current_state = read_required(CURRENT_STATE_PATH)
+    roadmap = read_required(ROADMAP_PATH)
+
+    validate_failure_fixture(failure_fixture, failure_text)
+    for text, label in (
+        (readme, "runtime config README"),
+        (calibration_index, "calibration index"),
+        (current_state, "current state"),
+        (roadmap, "roadmap"),
+    ):
+        require_phrase(text, "diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29", label)
+        require_phrase(text, RESULT_BRANCH, label)
+        require_phrase(text, "HARDWARE_FAIL", label)
+        require_phrase(text, "Nunchuk remains NOT_TESTED", label)
+        require_phrase(text, "implementation branch must not merge", label)
+
+
 def validate_docs() -> None:
     doc = read_required(DOC_PATH)
     fixture = load_json_object(FIXTURE_PATH)
@@ -595,6 +731,8 @@ def validate_docs() -> None:
     validate_fixture(fixture)
     validate_build_fixture(build_fixture, build_report)
     validate_hardware_fixture(hardware_fixture, hardware_plan)
+    if current_branch() == RESULT_BRANCH:
+        validate_failure_result_docs()
 
     for text, label in (
         (readme, "runtime config README"),
@@ -628,6 +766,8 @@ def validate_merged_branch_hardware_gate(branch: str) -> None:
 
 
 def validate_baseline_equivalence_checker() -> None:
+    if current_branch() == RESULT_BRANCH:
+        return
     completed = subprocess.run(
         ["python3", str(BASELINE_CHECKER)],
         cwd=REPO_ROOT,
