@@ -1,0 +1,57 @@
+{
+  "schema_name": "glyph_diagnostic_active_storage_published_build_report",
+  "status": "local_build_report",
+  "branch": "runtime-config-diagnostic-active-storage-published",
+  "baseline_branch": "configurator",
+  "canonical_build_command": "pio run -e glyph_mk6",
+  "canonical_build_available_in_agent_environment": false,
+  "canonical_build_failure": "zsh:1: command not found: pio",
+  "fallback_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "local_build_command_used": "./scripts/build-glyph-mk6-quiet.sh",
+  "local_build_result": "PASS",
+  "build_completed": true,
+  "build_exit_code": 0,
+  "build_date_local": "2026-06-10",
+  "dedicated_active_storage_active": true,
+  "dedicated_active_storage_published_active": true,
+  "candidate_view_published_active": false,
+  "candidate_owned_table_pointer_published_active": false,
+  "published_active_view_when_equivalent": "dedicated active storage view",
+  "fallback_active_view": "kSourceOwnedCurrentBaselineRuntimeConfig",
+  "active_behavior_changed": true,
+  "parser_payload_path_implemented": false,
+  "artifact_hashes_are_rebuild_stable": false,
+  "artifact_hashes_are_checker_gate": false,
+  "hardware_result_claimed": false,
+  "hardware_test_required_before_merge": true,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "artifact_hashes": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "artifact_type": "uf2",
+      "size_bytes": 798208,
+      "sha256": "bb8d97e965ec7b36d6bd0acdfd63124be1351bb3f303fa6f2085957056fb07e4",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "artifact_type": "elf",
+      "size_bytes": 5408124,
+      "sha256": "4eb28572af7c47203d80a7546fda14e6bdeea0dd53fbcb10cfd237d7d07f973a",
+      "available": true
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "artifact_type": "bin",
+      "size_bytes": 398852,
+      "sha256": "8b7b017a061d16ab69c74c2c147935287cc671c82b419f6e1190b9636501e7a3",
+      "available": true
+    }
+  ]
+}
