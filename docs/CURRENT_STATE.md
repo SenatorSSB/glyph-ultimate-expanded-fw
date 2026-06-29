@@ -261,6 +261,18 @@ engineering decisions.
   flashing automation, candidate.view active publication, RAM-backed active
   table publication, or nunchuk validation claim. Future implementation must be
   hardware-gated if active source selection behavior changes.
+- Generated source-owned schema scaffold is recorded in
+  `docs/runtime_config/generated_source_owned_schema_scaffold.md` with
+  `docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json`.
+  It follows `generated_source_owned_realization_design.md` and adds inert
+  generated-source-owned schema metadata headers only. It accepts the
+  source-owned active-state preselection `HARDWARE_PASS`, parsed/candidate
+  machinery present with source-owned active view `HARDWARE_PASS`, and
+  active-storage `HARDWARE_FAIL` evidence. Generated tables are not wired
+  active, active behavior is unchanged, no runtime-loaded config/storage/write/
+  flashing path is implemented, and future hardware gate required before
+  generated source-owned tables are selected active. Nunchuk remains
+  NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

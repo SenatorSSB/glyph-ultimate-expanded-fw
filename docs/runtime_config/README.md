@@ -143,6 +143,16 @@ artifacts unless a specific packet says otherwise.
   source-owned active-state preselection `HARDWARE_PASS`, active-storage
   publication `HARDWARE_FAIL`, active behavior unchanged, hardware test not
   required for this docs/checker branch, and nunchuk `NOT_TESTED`.
+- `generated_source_owned_schema_scaffold.md` - inert source/schema scaffold
+  packet for generated-source-owned immutable table artifacts; follows
+  `generated_source_owned_realization_design.md`, records source-owned
+  active-state preselection `HARDWARE_PASS` and active-storage `HARDWARE_FAIL`
+  evidence, and states that future hardware gate required before generated
+  source-owned tables are selected active.
+- `fixtures/generated_source_owned_schema_scaffold.json` - machine-readable
+  fixture for the generated source-owned schema scaffold; active behavior
+  unchanged, generated tables not wired active, runtime-loaded/storage/write/
+  flashing paths not implemented, and nunchuk `NOT_TESTED`.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -217,6 +227,12 @@ artifacts unless a specific packet says otherwise.
   publication, RAM-backed active table publication, or nunchuk validation
   claim. Future implementation must be hardware-gated if active source
   selection behavior changes.
+- Generated source-owned schema scaffold is inert source/docs/tools only. It
+  follows `generated_source_owned_realization_design.md`, adds isolated
+  generated-source-owned schema metadata headers, records source-owned
+  active-state preselection `HARDWARE_PASS` and active-storage `HARDWARE_FAIL`
+  evidence, and keeps generated tables unwired active. A future hardware gate
+  required before generated source-owned tables are selected active.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

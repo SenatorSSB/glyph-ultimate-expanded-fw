@@ -15,6 +15,7 @@ EXPECTED_BRANCH = "runtime-config-diagnostic-active-storage-published"
 RESULT_BRANCH = "runtime-config-diagnostic-active-storage-published-hardware-failure"
 EVIDENCE_BRANCH = "runtime-config-active-storage-failure-evidence"
 GENERATED_SOURCE_OWNED_DESIGN_BRANCH = "runtime-config-generated-source-owned-realization-design"
+GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 RESULT_BRANCH_BASE = EXPECTED_BRANCH
@@ -23,6 +24,7 @@ ALLOWED_BRANCHES = {
     RESULT_BRANCH,
     EVIDENCE_BRANCH,
     GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
+    GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
     MERGED_BRANCH,
 }
 
@@ -48,8 +50,13 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/ROADMAP.md",
     "tools/check_glyph_diagnostic_active_storage_published.py",
     "tools/check_glyph_generated_source_owned_realization_design.py",
+    "tools/check_glyph_generated_source_owned_schema_scaffold.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
+ALLOWED_ARCHIVED_EVIDENCE_SOURCE_SCAFFOLD_PATHS = {
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp",
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp",
+}
 RESULT_BRANCH_ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
@@ -125,6 +132,19 @@ HOT_PATH_FORBIDDEN_TOKENS = (
     "Flash",
 )
 
+FORBIDDEN_INERT_SCAFFOLD_TOKENS = (
+    "GetActiveRuntimeConfigState",
+    "ResolveActiveRuntimeConfig",
+    "UpdateAnalogOutputs",
+    "active_view =",
+    "candidate.view",
+    "RuntimeConfigStorage",
+    "WebSerial",
+    "config.pb",
+    "flash",
+    "flashing",
+)
+
 
 class DiagnosticActiveStoragePublishedError(AssertionError):
     """Raised when the diagnostic active-storage publication contract drifts."""
@@ -191,9 +211,15 @@ def validate_branch() -> str:
         fail(
             "checker must run on "
             f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, "
-            f"{GENERATED_SOURCE_OWNED_DESIGN_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{GENERATED_SOURCE_OWNED_DESIGN_BRANCH}, "
+            f"{GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
-    if branch in {EXPECTED_BRANCH, EVIDENCE_BRANCH, GENERATED_SOURCE_OWNED_DESIGN_BRANCH}:
+    if branch in {
+        EXPECTED_BRANCH,
+        EVIDENCE_BRANCH,
+        GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
+        GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
+    }:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
             cwd=REPO_ROOT,
@@ -221,7 +247,12 @@ def branch_mode(branch: str) -> str:
         return "implementation"
     if branch == RESULT_BRANCH:
         return "failure_result"
-    if branch in {EVIDENCE_BRANCH, GENERATED_SOURCE_OWNED_DESIGN_BRANCH, MERGED_BRANCH}:
+    if branch in {
+        EVIDENCE_BRANCH,
+        GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
+        GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
+        MERGED_BRANCH,
+    }:
         return "archived_evidence"
     fail(f"unsupported branch mode for {branch}")
 
@@ -234,8 +265,22 @@ def changed_paths(diff_base: str) -> set[str]:
             continue
         if " -> " in path:
             path = path.split(" -> ", 1)[1]
-        paths.add(path)
+        if path.endswith("/"):
+            directory = REPO_ROOT / path
+            if directory.is_dir():
+                paths.update(rel(file_path) for file_path in directory.rglob("*") if file_path.is_file())
+        else:
+            paths.add(path)
     return paths
+
+
+def validate_inert_source_scaffold(path: str) -> None:
+    text = read_required(REPO_ROOT / path)
+    if "inert generated-table placeholder" not in text:
+        fail(f"inert source scaffold missing explicit marker: {path}")
+    for token in FORBIDDEN_INERT_SCAFFOLD_TOKENS:
+        if token in text:
+            fail(f"inert source scaffold contains active wiring token {token!r}: {path}")
 
 
 def validate_changed_paths(paths: set[str], mode: str) -> None:
@@ -252,6 +297,9 @@ def validate_changed_paths(paths: set[str], mode: str) -> None:
         if FORBIDDEN_CHANGED_RE.search(path):
             fail(f"forbidden HAL/backend/config.pb/persistent-storage/write/WebSerial/flashing path changed: {path}")
         if mode == "archived_evidence" and SOURCE_CHANGED_RE.search(path):
+            if path in ALLOWED_ARCHIVED_EVIDENCE_SOURCE_SCAFFOLD_PATHS:
+                validate_inert_source_scaffold(path)
+                continue
             fail(f"source path changed in archived-evidence mode: {path}")
         if path in ALLOWED_EXACT_CHANGED_PATHS:
             if mode == "archived_evidence" and path == "src/modes/Ultimate.cpp":
