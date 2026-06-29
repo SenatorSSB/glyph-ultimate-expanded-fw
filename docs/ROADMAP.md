@@ -238,6 +238,22 @@ publication, RAM-backed active table publication, or nunchuk validation claim.
 Future implementation must be hardware-gated if active source selection
 behavior changes.
 
+The generated source-owned schema scaffold in
+`docs/runtime_config/generated_source_owned_schema_scaffold.md` with
+`docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json`
+is the first inert source/schema scaffold for the generated source-owned
+realization strategy. It follows `generated_source_owned_realization_design.md`,
+adds isolated generated-source-owned schema metadata headers, records
+source-owned active-state preselection `HARDWARE_PASS`, parsed/candidate
+machinery present with source-owned active view `HARDWARE_PASS`, and
+active-storage `HARDWARE_FAIL` evidence. It changes no active firmware
+behavior, does not wire generated tables active, implements no parser payload
+path, runtime-loaded config, persistent storage, WebSerial/device write,
+backend/config.pb write path, flashing automation, candidate.view active
+publication, RAM-backed active table publication, or nunchuk validation claim.
+Future hardware gate required before generated source-owned tables are selected
+active.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-
