@@ -282,6 +282,24 @@ WebSerial/device write, backend/config.pb write path, firmware flashing
 automation, or nunchuk validation claim. Future hardware gate required before
 generated source-owned tables are selected active.
 
+The generated source-owned baseline artifact in
+`docs/runtime_config/generated_source_owned_baseline_artifact.md` with
+`docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json` and
+`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
+is an inert generated source-owned artifact for the current source-owned
+baseline. It follows `generated_source_owned_artifact_install.md` and
+`generated_source_owned_generator_contract.md`, references active-storage
+`HARDWARE_FAIL` evidence and source-owned active-state `HARDWARE_PASS`
+evidence, and proves equivalence to the current source-owned baseline by
+source/artifact comparison of table count, table names/order, point count, and
+every x/y point. It is not included by `src/modes/Ultimate.cpp`, generated
+tables are not wired active, active behavior remains unchanged, and future
+hardware gate required before generated source-owned baseline artifact is
+selected active. No runtime-loaded config, persistent storage, WebSerial/device
+write, backend/config.pb write path, firmware flashing automation, or nunchuk
+validation claim is introduced. The low-level failure mechanism remains
+unproven.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

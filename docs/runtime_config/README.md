@@ -179,6 +179,19 @@ artifacts unless a specific packet says otherwise.
   fixture for the inert artifact install workflow; active behavior unchanged,
   generated tables not wired active, runtime-loaded/storage/write/flashing
   paths not implemented, and nunchuk `NOT_TESTED`.
+- `generated_source_owned_baseline_artifact.md` - inert generated source-owned
+  current-baseline artifact packet for
+  `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`;
+  follows `generated_source_owned_artifact_install.md` and
+  `generated_source_owned_generator_contract.md`, references active-storage
+  `HARDWARE_FAIL` evidence and source-owned active-state `HARDWARE_PASS`
+  evidence, proves baseline equivalence by source/artifact table comparison,
+  and states that future hardware gate required before generated source-owned
+  baseline artifact is selected active.
+- `fixtures/generated_source_owned_baseline_artifact.json` - machine-readable
+  fixture for the inert generated source-owned baseline artifact; active
+  behavior unchanged, generated tables not wired active, runtime-loaded/
+  storage/write/flashing paths not implemented, and nunchuk `NOT_TESTED`.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`

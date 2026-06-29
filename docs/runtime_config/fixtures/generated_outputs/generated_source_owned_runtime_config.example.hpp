@@ -7,6 +7,7 @@ namespace glyph::runtime_config::generated_source_owned::fixtures {
 // generated source-owned runtime config artifact
 // inert generated-table placeholder
 // not wired into runtime selection
+// generated baseline equivalent to kSourceOwnedCurrentBaselineRuntimeConfig when checker-proven
 static constexpr std::uint32_t kGeneratedSourceOwnedRuntimeConfigSchemaVersion = 1u;
 static constexpr char kGeneratedSourceOwnedRuntimeConfigArtifactKind[] = "generated_source_owned_runtime_config_table";
 static constexpr char kGeneratedSourceOwnedRuntimeConfigControllerFamily[] = "glyph_mk6";
