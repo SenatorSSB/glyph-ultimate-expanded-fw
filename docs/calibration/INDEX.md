@@ -77,6 +77,14 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `fixtures/diagnostic_active_storage_published_hardware_plan_2026-06-10.json`
   - matching machine-readable dedicated active-storage publication diagnostic
     hardware plan fixture.
+- `diagnostic_generated_source_owned_baseline_active_hardware_plan_2026-06-29.md`
+  - plan-only hardware row set for the generated source-owned baseline active
+    diagnostic on
+    `runtime-config-diagnostic-generated-source-owned-baseline-active`; all
+    rows are NOT_TESTED and hardware_test_required_before_merge is true.
+- `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_plan_2026-06-29.json`
+  - matching machine-readable generated source-owned baseline active diagnostic
+    hardware plan fixture. Nunchuk remains NOT_TESTED.
 
 ## Official Configurator Corpus And Source Correction
 

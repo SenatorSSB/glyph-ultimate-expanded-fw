@@ -319,6 +319,24 @@ engineering decisions.
   runtime-loaded config, persistent storage, WebSerial/device write,
   backend/config.pb write path, or flashing automation is implemented; root
   cause is not proven and nunchuk `NOT_TESTED` remains unchanged.
+- The diagnostic branch
+  `runtime-config-diagnostic-generated-source-owned-baseline-active`
+  (`diagnostic_generated_source_owned_baseline_active`)
+  selects the generated source-owned baseline-equivalent
+  `RuntimeConfigView` as active using
+  `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaselineActiveView.current.hpp`.
+  This is hardware-gated firmware behavior work with
+  `active_behavior_changed: true`,
+  `generated_source_owned_baseline_active: true`, and
+  `hardware_test_required_before_merge: true`. The active view points to
+  generated source-owned immutable table data, not RAM-backed active storage or
+  `candidate.view`; the generated baseline equivalence checker remains the
+  source/artifact proof for equivalence to
+  `kSourceOwnedCurrentBaselineRuntimeConfig`. No parser payload path,
+  runtime-loaded config, persistent storage, WebSerial/device write,
+  backend/config.pb write path, firmware flashing automation, or nunchuk
+  validation is implemented. The low-level failure mechanism remains unproven
+  and Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

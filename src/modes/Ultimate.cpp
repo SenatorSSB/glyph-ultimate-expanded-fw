@@ -32,6 +32,7 @@ struct ActiveRuntimeConfigState {
 
 #include "modes/UltimateIdentityRuntimeTables.hpp"
 #include "modes/UltimateRuntimeConfigInterpreter.hpp"
+#include "modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaselineActiveView.current.hpp"
 
 enum class RuntimeConfigCandidateStatus {
     Empty,
@@ -600,11 +601,11 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
 
 const ActiveRuntimeConfigState& GetActiveRuntimeConfigState() {
     static_assert(
-        ValidateRuntimeConfigView(kSourceOwnedCurrentBaselineRuntimeConfig),
-        "source-owned scaffold publishes only the baseline runtime config"
+        ValidateRuntimeConfigView(kGeneratedSourceOwnedBaselineRuntimeConfig),
+        "diagnostic publishes only the generated source-owned baseline runtime config"
     );
     static const ActiveRuntimeConfigState state = {
-        &kSourceOwnedCurrentBaselineRuntimeConfig,
+        &kGeneratedSourceOwnedBaselineRuntimeConfig,
         RuntimeConfigSource::SourceOwnedBaseline,
         RuntimeConfigActivationStatus::SourceOwnedSelected,
     };

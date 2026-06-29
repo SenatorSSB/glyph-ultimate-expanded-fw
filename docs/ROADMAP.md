@@ -300,6 +300,19 @@ write, backend/config.pb write path, firmware flashing automation, or nunchuk
 validation claim is introduced. The low-level failure mechanism remains
 unproven.
 
+The diagnostic branch
+`runtime-config-diagnostic-generated-source-owned-baseline-active` is the
+(`diagnostic_generated_source_owned_baseline_active`) is the hardware-gated
+next step for the generated source-owned path. It selects the
+generated source-owned baseline-equivalent `RuntimeConfigView` as active while
+keeping active table pointers source-owned and immutable. It intentionally
+changes active behavior, records `hardware_test_required_before_merge: true`,
+does not publish `candidate.view`, does not assign candidate-owned or
+RAM-backed table pointers to the active view, does not implement parser
+payload/runtime-loaded/storage/write/WebSerial/backend config.pb/flashing
+paths, and keeps Nunchuk NOT_TESTED. A preserved hardware PASS is required
+before this active diagnostic source can remain merged into `configurator`.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

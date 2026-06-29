@@ -14,6 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
 DOWNSTREAM_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-artifact-install"
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
+DOWNSTREAM_ACTIVE_DIAGNOSTIC_BRANCH = "runtime-config-diagnostic-generated-source-owned-baseline-active"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -194,12 +195,14 @@ def validate_branch() -> str:
         EXPECTED_BRANCH,
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
+        DOWNSTREAM_ACTIVE_DIAGNOSTIC_BRANCH,
         MERGED_BRANCH,
     }:
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
             f"{DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}, "
-            f"{DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}, "
+            f"{DOWNSTREAM_ACTIVE_DIAGNOSTIC_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -222,6 +225,8 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
+    if branch == DOWNSTREAM_ACTIVE_DIAGNOSTIC_BRANCH:
+        return set()
     if branch in {EXPECTED_BRANCH, DOWNSTREAM_ARTIFACT_INSTALL_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):

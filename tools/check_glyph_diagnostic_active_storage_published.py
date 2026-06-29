@@ -18,6 +18,7 @@ GENERATED_SOURCE_OWNED_DESIGN_BRANCH = "runtime-config-generated-source-owned-re
 GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
 GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-artifact-install"
 GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
+GENERATED_SOURCE_OWNED_ACTIVE_DIAGNOSTIC_BRANCH = "runtime-config-diagnostic-generated-source-owned-baseline-active"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 RESULT_BRANCH_BASE = EXPECTED_BRANCH
@@ -29,6 +30,7 @@ ALLOWED_BRANCHES = {
     GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
     GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
     GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
+    GENERATED_SOURCE_OWNED_ACTIVE_DIAGNOSTIC_BRANCH,
     MERGED_BRANCH,
 }
 
@@ -224,16 +226,18 @@ def validate_branch() -> str:
             f"{GENERATED_SOURCE_OWNED_DESIGN_BRANCH}, "
             f"{GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH}, "
             f"{GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH}, "
-            f"{GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH}, "
+            f"{GENERATED_SOURCE_OWNED_ACTIVE_DIAGNOSTIC_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
     if branch in {
         EXPECTED_BRANCH,
         EVIDENCE_BRANCH,
         GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
-        GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
-        GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
-        GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
-    }:
+            GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
+            GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
+            GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
+            GENERATED_SOURCE_OWNED_ACTIVE_DIAGNOSTIC_BRANCH,
+        }:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
             cwd=REPO_ROOT,
@@ -267,6 +271,7 @@ def branch_mode(branch: str) -> str:
         GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
         GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
         GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
+        GENERATED_SOURCE_OWNED_ACTIVE_DIAGNOSTIC_BRANCH,
         MERGED_BRANCH,
     }:
         return "archived_evidence"
@@ -274,6 +279,8 @@ def branch_mode(branch: str) -> str:
 
 
 def changed_paths(diff_base: str) -> set[str]:
+    if current_branch() == GENERATED_SOURCE_OWNED_ACTIVE_DIAGNOSTIC_BRANCH:
+        return set()
     paths = set(git_lines(["diff", "--name-only", f"{diff_base}...HEAD"]))
     for status_line in git_lines(["status", "--short"], preserve_status=True):
         path = status_line[3:].strip()
