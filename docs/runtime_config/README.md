@@ -153,6 +153,32 @@ artifacts unless a specific packet says otherwise.
   fixture for the generated source-owned schema scaffold; active behavior
   unchanged, generated tables not wired active, runtime-loaded/storage/write/
   flashing paths not implemented, and nunchuk `NOT_TESTED`.
+- `generated_source_owned_generator_contract.md` - docs/tools-only contract for
+  the first offline generator that turns neutral JSON into generated
+  source-owned runtime table C++ text fixtures; generated tables not wired
+  active, no active firmware behavior change, and nunchuk `NOT_TESTED`.
+- `fixtures/generated_source_owned_generator_contract.json` - machine-readable
+  fixture for the generator contract and non-claims.
+- `fixtures/generated_source_owned_generator_input.example.json` - neutral JSON
+  input fixture with the current 27-table, 9-point, 2-axis shape.
+- `fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp` -
+  generated source-owned runtime table output fixture emitted under docs, not
+  active source paths.
+- `tools/generate_source_owned_runtime_config.py` - Python stdlib-only offline
+  generator for the docs fixture contract; validates duplicate keys, required
+  keys, byte ranges, exact table shape, and deterministic output.
+- `generated_source_owned_artifact_install.md` - checker-guarded inert install
+  workflow for a generated source-owned runtime table artifact under
+  `src/modes/runtime_config/generated_source_owned/`; references
+  `generated_source_owned_generator_contract.md`,
+  `generated_source_owned_schema_scaffold.md`, active-storage `HARDWARE_FAIL`
+  evidence, source-owned active-state preselection `HARDWARE_PASS` evidence,
+  and states that future hardware gate required before generated source-owned
+  tables are selected active.
+- `fixtures/generated_source_owned_artifact_install.json` - machine-readable
+  fixture for the inert artifact install workflow; active behavior unchanged,
+  generated tables not wired active, runtime-loaded/storage/write/flashing
+  paths not implemented, and nunchuk `NOT_TESTED`.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -233,6 +259,18 @@ artifacts unless a specific packet says otherwise.
   active-state preselection `HARDWARE_PASS` and active-storage `HARDWARE_FAIL`
   evidence, and keeps generated tables unwired active. A future hardware gate
   required before generated source-owned tables are selected active.
+- Generated source-owned generator contract is docs/tools only. It defines a
+  neutral JSON input contract and an offline C++ text output contract for
+  generated source-owned immutable runtime table artifacts. Generated tables
+  remain not wired active, generated fixture output lives under docs fixture
+  paths by default, runtime-loaded config/storage/write/flashing paths are not
+  implemented, and nunchuk `NOT_TESTED` remains unchanged.
+- Generated source-owned artifact install is inert source/docs/tools only. It
+  installs a deterministic generated source-owned runtime table artifact under
+  `src/modes/runtime_config/generated_source_owned/`, but the artifact is not
+  included by `src/modes/Ultimate.cpp`, is not wired into runtime selection,
+  and active behavior remains unchanged. Future hardware gate required before
+  generated source-owned tables are selected active.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

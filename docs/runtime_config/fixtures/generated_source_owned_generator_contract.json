@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "packet": "generated_source_owned_generator_contract",
+  "branch": "runtime-config-generated-source-owned-generator-contract",
+  "generator_contract_only": true,
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "active_view_model": "source_owned_generated_tables",
+  "generated_tables_wired_active": false,
+  "generated_artifacts_written_to_active_source_path_by_default": false,
+  "ram_backed_active_table_publication_allowed": false,
+  "candidate_view_published_active": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "generator": {
+    "script": "tools/generate_source_owned_runtime_config.py",
+    "stdlib_only": true,
+    "input_fixture": "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json",
+    "sample_output_fixture": "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
+    "default_output_target": "caller_supplied_non_active_path",
+    "active_source_output_by_default": false
+  },
+  "input_contract": {
+    "required_top_level_keys": [
+      "schema_version",
+      "artifact_kind",
+      "controller_family",
+      "profile_name",
+      "revision",
+      "table_shape",
+      "tables"
+    ],
+    "table_shape": {
+      "table_count": 27,
+      "points_per_table": 9,
+      "axes_per_point": 2
+    },
+    "point_axes": [
+      "x",
+      "y"
+    ],
+    "byte_value_range": [
+      0,
+      255
+    ],
+    "duplicate_json_keys_rejected": true
+  },
+  "output_contract": {
+    "required_marker": "generated source-owned runtime config artifact",
+    "style": "static constexpr source-owned immutable table text fixture",
+    "forbidden_active_wiring_tokens": [
+      "GetActiveRuntimeConfigState",
+      "ResolveActiveRuntimeConfig",
+      "UpdateAnalogOutputs",
+      "active_view =",
+      "candidate.view",
+      "RuntimeConfigStorage",
+      "WebSerial",
+      "config.pb",
+      "flash",
+      "flashing"
+    ]
+  },
+  "evidence": {
+    "source_owned_active_state_preselection": "HARDWARE_PASS",
+    "parsed_candidate_machinery_present_source_owned_active_view": "HARDWARE_PASS",
+    "dedicated_active_storage_published_active": "HARDWARE_FAIL"
+  },
+  "docs_references": [
+    "docs/runtime_config/generated_source_owned_realization_design.md",
+    "docs/runtime_config/generated_source_owned_schema_scaffold.md",
+    "docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md"
+  ]
+}

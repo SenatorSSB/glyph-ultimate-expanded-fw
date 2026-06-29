@@ -273,6 +273,35 @@ engineering decisions.
   flashing path is implemented, and future hardware gate required before
   generated source-owned tables are selected active. Nunchuk remains
   NOT_TESTED.
+- Generated source-owned generator contract is recorded in
+  `docs/runtime_config/generated_source_owned_generator_contract.md` with
+  `docs/runtime_config/fixtures/generated_source_owned_generator_contract.json`,
+  `docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`,
+  `docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`,
+  and `tools/generate_source_owned_runtime_config.py`. This docs/tools-only
+  branch defines a neutral JSON input contract and offline C++ text output
+  contract for generated source-owned immutable runtime table artifacts.
+  Generated tables not wired active; generated output is written under docs
+  fixture paths by default, not active source paths. Active firmware behavior is
+  unchanged, no runtime-loaded config, persistent storage, WebSerial/device
+  write, backend/config.pb write path, or flashing automation is implemented,
+  and nunchuk `NOT_TESTED` remains unchanged.
+- Generated source-owned artifact install is recorded in
+  `docs/runtime_config/generated_source_owned_artifact_install.md` with
+  `docs/runtime_config/fixtures/generated_source_owned_artifact_install.json`
+  and
+  `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`.
+  It follows `generated_source_owned_generator_contract.md` and
+  `generated_source_owned_schema_scaffold.md`, installs only an inert generated
+  source-owned runtime table artifact under the generated-source-owned source
+  path, references active-storage `HARDWARE_FAIL` evidence and source-owned
+  active-state preselection `HARDWARE_PASS` evidence, and does not include the
+  artifact from `src/modes/Ultimate.cpp`. Active behavior remains unchanged,
+  generated tables remain not wired active, no runtime-loaded config,
+  persistent storage, WebSerial/device write, backend/config.pb write path, or
+  flashing automation is implemented, future hardware gate required before
+  generated source-owned tables are selected active, and nunchuk `NOT_TESTED`
+  remains unchanged.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

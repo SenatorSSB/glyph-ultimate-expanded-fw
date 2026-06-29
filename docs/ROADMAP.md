@@ -254,6 +254,34 @@ publication, RAM-backed active table publication, or nunchuk validation claim.
 Future hardware gate required before generated source-owned tables are selected
 active.
 
+The generated source-owned generator contract in
+`docs/runtime_config/generated_source_owned_generator_contract.md` with
+`docs/runtime_config/fixtures/generated_source_owned_generator_contract.json`,
+`docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`,
+`docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`,
+and `tools/generate_source_owned_runtime_config.py` is the first offline
+generator contract for generated source-owned immutable runtime table artifacts.
+It defines a neutral JSON input contract, exact 27-table / 9-point / 2-axis
+validation, deterministic C++ text output, and docs-fixture-only output by
+default. Generated tables not wired active, no active firmware behavior change
+is introduced, no runtime-loaded config/storage/write/flashing path is
+implemented, and nunchuk `NOT_TESTED` remains unchanged.
+
+The generated source-owned artifact install workflow in
+`docs/runtime_config/generated_source_owned_artifact_install.md` with
+`docs/runtime_config/fixtures/generated_source_owned_artifact_install.json` and
+`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`
+is an inert, checker-guarded install path for source-owned generated runtime
+table artifacts. It follows `generated_source_owned_generator_contract.md` and
+`generated_source_owned_schema_scaffold.md`, references active-storage
+`HARDWARE_FAIL` evidence and source-owned active-state preselection
+`HARDWARE_PASS` evidence, keeps generated tables not wired active, does not
+include the artifact from `src/modes/Ultimate.cpp`, changes no active firmware
+behavior, and implements no runtime-loaded config, persistent storage,
+WebSerial/device write, backend/config.pb write path, firmware flashing
+automation, or nunchuk validation claim. Future hardware gate required before
+generated source-owned tables are selected active.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-
