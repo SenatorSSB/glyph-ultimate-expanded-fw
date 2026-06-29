@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
+DOWNSTREAM_GENERATOR_CONTRACT_BRANCH = "runtime-config-generated-source-owned-generator-contract"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -24,9 +25,15 @@ ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 CHECKER_REL = "tools/check_glyph_generated_source_owned_schema_scaffold.py"
 ACTIVE_STORAGE_CHECKER_REL = "tools/check_glyph_diagnostic_active_storage_published.py"
 REALIZATION_DESIGN_CHECKER_REL = "tools/check_glyph_generated_source_owned_realization_design.py"
+GENERATOR_CONTRACT_CHECKER_REL = "tools/check_glyph_generated_source_owned_generator_contract.py"
+GENERATOR_REL = "tools/generate_source_owned_runtime_config.py"
 ALLOWED_DOC_PATHS = {
     "docs/runtime_config/generated_source_owned_schema_scaffold.md",
     "docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json",
+    "docs/runtime_config/generated_source_owned_generator_contract.md",
+    "docs/runtime_config/fixtures/generated_source_owned_generator_contract.json",
+    "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json",
+    "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
     "docs/runtime_config/README.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
@@ -35,6 +42,8 @@ ALLOWED_CHECKER_PATHS = {
     CHECKER_REL,
     ACTIVE_STORAGE_CHECKER_REL,
     REALIZATION_DESIGN_CHECKER_REL,
+    GENERATOR_CONTRACT_CHECKER_REL,
+    GENERATOR_REL,
 }
 SOURCE_SCAFFOLD_PREFIX = "src/modes/runtime_config/generated_source_owned/"
 SOURCE_SCAFFOLD_RE = re.compile(
@@ -176,8 +185,11 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {EXPECTED_BRANCH, DOWNSTREAM_GENERATOR_CONTRACT_BRANCH, MERGED_BRANCH}:
+        fail(
+            f"checker must run on {EXPECTED_BRANCH}, "
+            f"{DOWNSTREAM_GENERATOR_CONTRACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+        )
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,
@@ -199,7 +211,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH:
+    if branch in {EXPECTED_BRANCH, DOWNSTREAM_GENERATOR_CONTRACT_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

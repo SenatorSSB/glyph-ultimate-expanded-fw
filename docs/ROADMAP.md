@@ -254,6 +254,19 @@ publication, RAM-backed active table publication, or nunchuk validation claim.
 Future hardware gate required before generated source-owned tables are selected
 active.
 
+The generated source-owned generator contract in
+`docs/runtime_config/generated_source_owned_generator_contract.md` with
+`docs/runtime_config/fixtures/generated_source_owned_generator_contract.json`,
+`docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`,
+`docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`,
+and `tools/generate_source_owned_runtime_config.py` is the first offline
+generator contract for generated source-owned immutable runtime table artifacts.
+It defines a neutral JSON input contract, exact 27-table / 9-point / 2-axis
+validation, deterministic C++ text output, and docs-fixture-only output by
+default. Generated tables not wired active, no active firmware behavior change
+is introduced, no runtime-loaded config/storage/write/flashing path is
+implemented, and nunchuk `NOT_TESTED` remains unchanged.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

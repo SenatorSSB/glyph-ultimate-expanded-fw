@@ -273,6 +273,19 @@ engineering decisions.
   flashing path is implemented, and future hardware gate required before
   generated source-owned tables are selected active. Nunchuk remains
   NOT_TESTED.
+- Generated source-owned generator contract is recorded in
+  `docs/runtime_config/generated_source_owned_generator_contract.md` with
+  `docs/runtime_config/fixtures/generated_source_owned_generator_contract.json`,
+  `docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`,
+  `docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`,
+  and `tools/generate_source_owned_runtime_config.py`. This docs/tools-only
+  branch defines a neutral JSON input contract and offline C++ text output
+  contract for generated source-owned immutable runtime table artifacts.
+  Generated tables not wired active; generated output is written under docs
+  fixture paths by default, not active source paths. Active firmware behavior is
+  unchanged, no runtime-loaded config, persistent storage, WebSerial/device
+  write, backend/config.pb write path, or flashing automation is implemented,
+  and nunchuk `NOT_TESTED` remains unchanged.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

@@ -16,6 +16,7 @@ RESULT_BRANCH = "runtime-config-diagnostic-active-storage-published-hardware-fai
 EVIDENCE_BRANCH = "runtime-config-active-storage-failure-evidence"
 GENERATED_SOURCE_OWNED_DESIGN_BRANCH = "runtime-config-generated-source-owned-realization-design"
 GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
+GENERATED_SOURCE_OWNED_GENERATOR_CONTRACT_BRANCH = "runtime-config-generated-source-owned-generator-contract"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 RESULT_BRANCH_BASE = EXPECTED_BRANCH
@@ -25,6 +26,7 @@ ALLOWED_BRANCHES = {
     EVIDENCE_BRANCH,
     GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
     GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
+    GENERATED_SOURCE_OWNED_GENERATOR_CONTRACT_BRANCH,
     MERGED_BRANCH,
 }
 
@@ -51,6 +53,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_diagnostic_active_storage_published.py",
     "tools/check_glyph_generated_source_owned_realization_design.py",
     "tools/check_glyph_generated_source_owned_schema_scaffold.py",
+    "tools/check_glyph_generated_source_owned_generator_contract.py",
+    "tools/generate_source_owned_runtime_config.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
 ALLOWED_ARCHIVED_EVIDENCE_SOURCE_SCAFFOLD_PATHS = {
@@ -212,13 +216,15 @@ def validate_branch() -> str:
             "checker must run on "
             f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, "
             f"{GENERATED_SOURCE_OWNED_DESIGN_BRANCH}, "
-            f"{GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH}, "
+            f"{GENERATED_SOURCE_OWNED_GENERATOR_CONTRACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
     if branch in {
         EXPECTED_BRANCH,
         EVIDENCE_BRANCH,
         GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
         GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
+        GENERATED_SOURCE_OWNED_GENERATOR_CONTRACT_BRANCH,
     }:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -251,6 +257,7 @@ def branch_mode(branch: str) -> str:
         EVIDENCE_BRANCH,
         GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
         GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
+        GENERATED_SOURCE_OWNED_GENERATOR_CONTRACT_BRANCH,
         MERGED_BRANCH,
     }:
         return "archived_evidence"
