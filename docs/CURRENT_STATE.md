@@ -244,6 +244,23 @@ engineering decisions.
   only the resolved active runtime config view. Its hardware result is
   `HARDWARE_FAIL`, so this remains archived diagnostic evidence only and must
   not become an active firmware path.
+- Generated source-owned realization design is recorded in
+  `docs/runtime_config/generated_source_owned_realization_design.md` with
+  `docs/runtime_config/fixtures/generated_source_owned_realization_design.json`.
+  This docs/tools-only branch changes no active firmware behavior and requires
+  no hardware test before merge. It accepts the source-owned active-state
+  preselection `HARDWARE_PASS`, the parsed/candidate machinery present with
+  source-owned active view `HARDWARE_PASS`, and the active-storage
+  `HARDWARE_FAIL` evidence recorded in
+  `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`.
+  The next safe realization strategy is generated C++ immutable source-owned
+  runtime tables built into firmware, with active `RuntimeConfigView` pointing
+  to source-owned generated tables rather than RAM-backed materialized storage.
+  This design introduces no parser payload path, runtime-loaded config,
+  persistent storage, WebSerial/device write, backend/config.pb write path,
+  flashing automation, candidate.view active publication, RAM-backed active
+  table publication, or nunchuk validation claim. Future implementation must be
+  hardware-gated if active source selection behavior changes.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.
