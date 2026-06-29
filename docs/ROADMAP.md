@@ -220,6 +220,24 @@ compile-time/generated immutable source-owned tables, source-owned table
 replacement / generated firmware artifacts, or no runtime-loaded publication
 until a safer active-storage model is proven.
 
+The generated source-owned realization design in
+`docs/runtime_config/generated_source_owned_realization_design.md` with
+`docs/runtime_config/fixtures/generated_source_owned_realization_design.json`
+is the next docs/tools-only strategy packet after the active-storage
+`HARDWARE_FAIL`. It records the source-owned active-state preselection
+`HARDWARE_PASS`, the parsed/candidate machinery present with source-owned
+active view `HARDWARE_PASS`, and the active-storage `HARDWARE_FAIL` evidence in
+`docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`.
+The target model is generated C++ immutable source-owned runtime tables built
+into firmware; active `RuntimeConfigView` points to source-owned generated
+tables, not RAM-backed materialized storage. This design changes no active
+firmware behavior, requires no hardware test before merge, implements no
+parser payload path, runtime-loaded config, persistent storage, WebSerial/device
+write, backend/config.pb write path, flashing automation, candidate.view active
+publication, RAM-backed active table publication, or nunchuk validation claim.
+Future implementation must be hardware-gated if active source selection
+behavior changes.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

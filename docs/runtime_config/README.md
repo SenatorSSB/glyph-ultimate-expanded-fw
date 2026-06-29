@@ -133,6 +133,16 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json` -
   machine-readable hardware failure result fixture for the dedicated
   active-storage publication diagnostic.
+- `generated_source_owned_realization_design.md` - docs/tools-only design for
+  the next safe realization strategy after active-storage `HARDWARE_FAIL`:
+  future generated C++ immutable source-owned runtime tables may be built into
+  firmware, while active `RuntimeConfigView` remains source-owned and no
+  parser/runtime-loaded/storage/write/flashing path is introduced.
+- `fixtures/generated_source_owned_realization_design.json` - machine-readable
+  fixture for the generated source-owned realization design; records
+  source-owned active-state preselection `HARDWARE_PASS`, active-storage
+  publication `HARDWARE_FAIL`, active behavior unchanged, hardware test not
+  required for this docs/checker branch, and nunchuk `NOT_TESTED`.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -199,6 +209,14 @@ artifacts unless a specific packet says otherwise.
   unsafe under this diagnostic. RAM-backed active table storage is unsafe as an
   active publication target under this test. Future strategy should pivot away
   from RAM-backed active table pointer publication.
+- Generated source-owned realization design is docs/tools only. It pivots the
+  next strategy toward generated C++ immutable source-owned runtime tables built
+  into firmware, keeps active `RuntimeConfigView` source-owned, and introduces
+  no runtime-loaded config, persistent storage, WebSerial/device write,
+  backend/config.pb write path, flashing automation, candidate.view active
+  publication, RAM-backed active table publication, or nunchuk validation
+  claim. Future implementation must be hardware-gated if active source
+  selection behavior changes.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

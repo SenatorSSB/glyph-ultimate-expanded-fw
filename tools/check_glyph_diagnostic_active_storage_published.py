@@ -14,10 +14,17 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-diagnostic-active-storage-published"
 RESULT_BRANCH = "runtime-config-diagnostic-active-storage-published-hardware-failure"
 EVIDENCE_BRANCH = "runtime-config-active-storage-failure-evidence"
+GENERATED_SOURCE_OWNED_DESIGN_BRANCH = "runtime-config-generated-source-owned-realization-design"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 RESULT_BRANCH_BASE = EXPECTED_BRANCH
-ALLOWED_BRANCHES = {EXPECTED_BRANCH, RESULT_BRANCH, EVIDENCE_BRANCH, MERGED_BRANCH}
+ALLOWED_BRANCHES = {
+    EXPECTED_BRANCH,
+    RESULT_BRANCH,
+    EVIDENCE_BRANCH,
+    GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
+    MERGED_BRANCH,
+}
 
 ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
 DOC_PATH = REPO_ROOT / "docs/runtime_config/diagnostic_active_storage_published.md"
@@ -40,6 +47,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
     "tools/check_glyph_diagnostic_active_storage_published.py",
+    "tools/check_glyph_generated_source_owned_realization_design.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
 RESULT_BRANCH_ALLOWED_EXACT_CHANGED_PATHS = {
@@ -182,9 +190,10 @@ def validate_branch() -> str:
     if branch not in ALLOWED_BRANCHES:
         fail(
             "checker must run on "
-            f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, "
+            f"{GENERATED_SOURCE_OWNED_DESIGN_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
-    if branch in {EXPECTED_BRANCH, EVIDENCE_BRANCH}:
+    if branch in {EXPECTED_BRANCH, EVIDENCE_BRANCH, GENERATED_SOURCE_OWNED_DESIGN_BRANCH}:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
             cwd=REPO_ROOT,
@@ -212,7 +221,7 @@ def branch_mode(branch: str) -> str:
         return "implementation"
     if branch == RESULT_BRANCH:
         return "failure_result"
-    if branch in {EVIDENCE_BRANCH, MERGED_BRANCH}:
+    if branch in {EVIDENCE_BRANCH, GENERATED_SOURCE_OWNED_DESIGN_BRANCH, MERGED_BRANCH}:
         return "archived_evidence"
     fail(f"unsupported branch mode for {branch}")
 
