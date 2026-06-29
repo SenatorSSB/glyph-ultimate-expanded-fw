@@ -13,6 +13,7 @@ runtime selection by this generator.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -25,6 +26,8 @@ EXPECTED_POINTS_PER_TABLE = 9
 EXPECTED_AXES_PER_POINT = 2
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INERT_SOURCE_INSTALL_DIR = REPO_ROOT / "src/modes/runtime_config/generated_source_owned"
+SOURCE_TABLES = REPO_ROOT / "src/modes/UltimateIdentityRuntimeTables.hpp"
+SOURCE_INTERPRETER = REPO_ROOT / "src/modes/UltimateRuntimeConfigInterpreter.hpp"
 
 REQUIRED_TOP_LEVEL_KEYS = {
     "schema_version",
@@ -252,6 +255,7 @@ def emit_cpp_header(contract: dict[str, Any]) -> str:
         "// generated source-owned runtime config artifact",
         "// inert generated-table placeholder",
         "// not wired into runtime selection",
+        "// generated baseline equivalent to kSourceOwnedCurrentBaselineRuntimeConfig when checker-proven",
         "static constexpr std::uint32_t kGeneratedSourceOwnedRuntimeConfigSchemaVersion = "
         f"{contract['schema_version']}u;",
         "static constexpr char kGeneratedSourceOwnedRuntimeConfigArtifactKind[] = "
@@ -288,6 +292,82 @@ def emit_cpp_header(contract: dict[str, Any]) -> str:
         ]
     )
     return "\n".join(lines)
+
+
+def parse_source_owned_baseline_contract() -> dict[str, Any]:
+    table_text = SOURCE_TABLES.read_text(encoding="utf-8")
+    interpreter_text = SOURCE_INTERPRETER.read_text(encoding="utf-8")
+    source_tables = parse_source_stick_tables(table_text)
+    ordered_symbols = parse_source_baseline_table_order(interpreter_text)
+    tables: list[dict[str, Any]] = []
+    for table_id, symbol_name in enumerate(ordered_symbols):
+        points = source_tables.get(symbol_name)
+        if points is None:
+            fail(f"baseline table {symbol_name} is missing from {SOURCE_TABLES}")
+        tables.append(
+            {
+                "table_id": table_id,
+                "table_name": symbol_name,
+                "points": [{"x": x, "y": y} for x, y in points],
+            }
+        )
+    return validate_payload(
+        {
+            "schema_version": EXPECTED_SCHEMA_VERSION,
+            "artifact_kind": EXPECTED_ARTIFACT_KIND,
+            "controller_family": "glyph_mk6",
+            "profile_name": "current_source_owned_baseline_runtime_config",
+            "revision": 1,
+            "table_shape": {
+                "table_count": EXPECTED_TABLE_COUNT,
+                "points_per_table": EXPECTED_POINTS_PER_TABLE,
+                "axes_per_point": EXPECTED_AXES_PER_POINT,
+            },
+            "tables": tables,
+        }
+    )
+
+
+def parse_source_stick_tables(text: str) -> dict[str, list[tuple[int, int]]]:
+    table_re = re.compile(
+        r"constexpr\s+StickPoint\s+(k[A-Za-z0-9_]+Table)\s*\[\s*9\s*\]\s*=\s*\{(?P<body>.*?)\};",
+        re.DOTALL,
+    )
+    point_re = re.compile(r"\{\s*(\d+)\s*,\s*(\d+)\s*\}")
+    tables: dict[str, list[tuple[int, int]]] = {}
+    for match in table_re.finditer(text):
+        symbol_name = match.group(1)
+        points = [(int(x), int(y)) for x, y in point_re.findall(match.group("body"))]
+        if len(points) != EXPECTED_POINTS_PER_TABLE:
+            fail(f"{symbol_name} must contain {EXPECTED_POINTS_PER_TABLE} points")
+        for x, y in points:
+            if not (0 <= x <= 255 and 0 <= y <= 255):
+                fail(f"{symbol_name} contains out-of-byte-range point ({x}, {y})")
+        if symbol_name in tables:
+            fail(f"duplicate source table symbol: {symbol_name}")
+        tables[symbol_name] = points
+    if len(tables) < EXPECTED_TABLE_COUNT:
+        fail(f"expected at least {EXPECTED_TABLE_COUNT} source tables, found {len(tables)}")
+    return tables
+
+
+def parse_source_baseline_table_order(text: str) -> list[str]:
+    block_match = re.search(
+        r"kSourceOwnedCurrentBaselineRuntimeTables\s*\[\s*27\s*\]\s*=\s*\{(?P<body>.*?)\};",
+        text,
+        re.DOTALL,
+    )
+    if block_match is None:
+        fail("could not find kSourceOwnedCurrentBaselineRuntimeTables")
+    row_re = re.compile(
+        r"\{\s*RuntimeTableId::[A-Za-z0-9_]+\s*,\s*\"(?P<symbol>k[A-Za-z0-9_]+Table)\"\s*,\s*(?P=symbol)\s*,"
+    )
+    symbols = [match.group("symbol") for match in row_re.finditer(block_match.group("body"))]
+    if len(symbols) != EXPECTED_TABLE_COUNT:
+        fail(f"baseline table order must contain {EXPECTED_TABLE_COUNT} tables, found {len(symbols)}")
+    if len(set(symbols)) != len(symbols):
+        fail("baseline table order contains duplicate symbols")
+    return symbols
 
 
 def assert_safe_output_path(output_path: Path) -> None:
@@ -332,9 +412,22 @@ def generate(
     return output
 
 
+def generate_current_source_owned_baseline(output_path: Path | None = None) -> str:
+    output = emit_cpp_header(parse_source_owned_baseline_contract())
+    if output_path is not None:
+        assert_inert_source_install_path(output_path)
+        normalized_output_path = normalize_repo_path(output_path)
+        normalized_output_path.parent.mkdir(parents=True, exist_ok=True)
+        normalized_output_path.write_text(output, encoding="utf-8")
+    return output
+
+
 def main(argv: list[str]) -> int:
+    baseline_mode = len(argv) in {2, 3} and argv[1] == "--emit-current-source-owned-baseline"
     install_mode = len(argv) == 4 and argv[1] == "--install-inert-source-artifact"
-    if install_mode:
+    if baseline_mode:
+        output_path = Path(argv[2]) if len(argv) == 3 else None
+    elif install_mode:
         input_path = Path(argv[2])
         output_path = Path(argv[3])
     elif len(argv) in {2, 3}:
@@ -344,16 +437,21 @@ def main(argv: list[str]) -> int:
         print(
             "usage: generate_source_owned_runtime_config.py INPUT_JSON [OUTPUT_HPP]\n"
             "       generate_source_owned_runtime_config.py "
-            "--install-inert-source-artifact INPUT_JSON OUTPUT_HPP",
+            "--install-inert-source-artifact INPUT_JSON OUTPUT_HPP\n"
+            "       generate_source_owned_runtime_config.py "
+            "--emit-current-source-owned-baseline [OUTPUT_HPP]",
             file=sys.stderr,
         )
         return 2
     try:
-        output = generate(
-            input_path,
-            output_path,
-            allow_inert_source_install=install_mode,
-        )
+        if baseline_mode:
+            output = generate_current_source_owned_baseline(output_path)
+        else:
+            output = generate(
+                input_path,
+                output_path,
+                allow_inert_source_install=install_mode,
+            )
     except GeneratorContractError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1

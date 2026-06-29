@@ -302,6 +302,23 @@ engineering decisions.
   flashing automation is implemented, future hardware gate required before
   generated source-owned tables are selected active, and nunchuk `NOT_TESTED`
   remains unchanged.
+- Generated source-owned baseline artifact is recorded in
+  `docs/runtime_config/generated_source_owned_baseline_artifact.md` with
+  `docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json`
+  and
+  `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`.
+  It follows `generated_source_owned_artifact_install.md` and
+  `generated_source_owned_generator_contract.md`, references active-storage
+  `HARDWARE_FAIL` evidence and source-owned active-state `HARDWARE_PASS`
+  evidence, and is an inert generated source-owned artifact equivalent to the
+  current source-owned baseline only when the checker proves table count, table
+  names/order, point count, and every x/y point. It is not included by
+  `src/modes/Ultimate.cpp`, generated tables are not wired active, active
+  behavior remains unchanged, and future hardware gate required before
+  generated source-owned baseline artifact is selected active. No
+  runtime-loaded config, persistent storage, WebSerial/device write,
+  backend/config.pb write path, or flashing automation is implemented; root
+  cause is not proven and nunchuk `NOT_TESTED` remains unchanged.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

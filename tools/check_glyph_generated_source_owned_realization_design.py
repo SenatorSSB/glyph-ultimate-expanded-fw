@@ -14,6 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-realization-design"
 DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
 DOWNSTREAM_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-artifact-install"
+DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -38,6 +39,8 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
     "docs/runtime_config/generated_source_owned_artifact_install.md",
     "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json",
+    "docs/runtime_config/generated_source_owned_baseline_artifact.md",
+    "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json",
     "docs/runtime_config/README.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
@@ -48,6 +51,7 @@ ALLOWED_CHECKER_PATHS = {
     SCHEMA_SCAFFOLD_CHECKER_REL,
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
+    "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/generate_source_owned_runtime_config.py",
 }
 
@@ -193,14 +197,21 @@ def validate_branch() -> str:
         EXPECTED_BRANCH,
         DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH,
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
+        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
     }:
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
             f"{DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH}, "
-            f"{DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}, "
+            f"{DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
-    if branch in {EXPECTED_BRANCH, DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH, DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}:
+    if branch in {
+        EXPECTED_BRANCH,
+        DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH,
+        DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
+        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
+    }:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
             cwd=REPO_ROOT,
@@ -247,7 +258,7 @@ def validate_inert_source_scaffold(path: str, fixture: dict[str, Any], branch: s
     if branch == DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH and path not in scaffold_files:
         schema_fixture = load_json_object(SCHEMA_SCAFFOLD_FIXTURE)
         scaffold_files = source_scaffold_files(schema_fixture)
-    if branch != DOWNSTREAM_ARTIFACT_INSTALL_BRANCH and path not in scaffold_files:
+    if branch not in {DOWNSTREAM_ARTIFACT_INSTALL_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH} and path not in scaffold_files:
         fail(f"source path changed but is not declared as inert source scaffold: {path}")
     if not INERT_SOURCE_SCAFFOLD_RE.match(path):
         fail(f"inert source scaffold path is outside allowed generated-source-owned area: {path}")

@@ -17,6 +17,7 @@ EVIDENCE_BRANCH = "runtime-config-active-storage-failure-evidence"
 GENERATED_SOURCE_OWNED_DESIGN_BRANCH = "runtime-config-generated-source-owned-realization-design"
 GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
 GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-artifact-install"
+GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 RESULT_BRANCH_BASE = EXPECTED_BRANCH
@@ -27,6 +28,7 @@ ALLOWED_BRANCHES = {
     GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
     GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
     GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
+    GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
     MERGED_BRANCH,
 }
 
@@ -55,6 +57,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_schema_scaffold.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
+    "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/generate_source_owned_runtime_config.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
@@ -62,6 +65,7 @@ ALLOWED_ARCHIVED_EVIDENCE_SOURCE_SCAFFOLD_PATHS = {
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp",
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp",
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
 }
 RESULT_BRANCH_ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/CURRENT_STATE.md",
@@ -219,7 +223,8 @@ def validate_branch() -> str:
             f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, "
             f"{GENERATED_SOURCE_OWNED_DESIGN_BRANCH}, "
             f"{GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH}, "
-            f"{GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH}, "
+            f"{GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
     if branch in {
         EXPECTED_BRANCH,
@@ -227,6 +232,7 @@ def validate_branch() -> str:
         GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
         GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
         GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
+        GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
     }:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -260,6 +266,7 @@ def branch_mode(branch: str) -> str:
         GENERATED_SOURCE_OWNED_DESIGN_BRANCH,
         GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
         GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
+        GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
     }:
         return "archived_evidence"

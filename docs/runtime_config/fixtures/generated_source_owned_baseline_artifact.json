@@ -1,0 +1,35 @@
+{
+  "status_label": "CURRENT",
+  "branch": "runtime-config-generated-source-owned-baseline-artifact",
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "baseline_artifact_only": true,
+  "baseline_artifact": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+  "generated_baseline_artifact_equivalent_to_current_source_owned_baseline": true,
+  "generated_tables_wired_active": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "equivalence_comparison": {
+    "method": "source-inspection",
+    "source_tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "source_runtime_view": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "artifact_tables": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+    "table_count": 27,
+    "points_per_table": 9,
+    "axes_per_point": 2
+  },
+  "guardrails": {
+    "ultimate_cpp_modified": false,
+    "artifact_included_by_ultimate_cpp": false,
+    "active_selection_modified": false,
+    "runtime_loaded_config_added": false,
+    "device_write_added": false,
+    "backend_config_pb_write_added": false
+  },
+  "required_checker": "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+}
