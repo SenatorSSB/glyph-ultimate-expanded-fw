@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "packet": "generated_source_owned_artifact_install",
+  "branch": "runtime-config-generated-source-owned-artifact-install",
+  "artifact_install_only": true,
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "generated_artifact_installed_under_inert_source_path": true,
+  "generated_tables_wired_active": false,
+  "generated_artifacts_written_to_active_source_path_by_default": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "generator": {
+    "script": "tools/generate_source_owned_runtime_config.py",
+    "stdlib_only": true,
+    "input_fixture": "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json",
+    "installed_artifact": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
+    "explicit_install_mode": "--install-inert-source-artifact",
+    "default_output_to_active_source_path": false
+  },
+  "installed_artifacts": [
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
+  ],
+  "required_artifact_markers": [
+    "generated source-owned runtime config artifact",
+    "inert generated-table placeholder",
+    "not wired into runtime selection"
+  ],
+  "evidence": {
+    "source_owned_active_state_preselection": "HARDWARE_PASS",
+    "parsed_candidate_machinery_present_source_owned_active_view": "HARDWARE_PASS",
+    "dedicated_active_storage_published_active": "HARDWARE_FAIL"
+  },
+  "docs_references": [
+    "docs/runtime_config/generated_source_owned_generator_contract.md",
+    "docs/runtime_config/generated_source_owned_schema_scaffold.md",
+    "docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md"
+  ]
+}
