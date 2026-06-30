@@ -235,6 +235,33 @@ artifacts unless a specific packet says otherwise.
   unchanged, `RuntimeConfigView` replacement not allowed, table-content
   replacement design-only, candidate/generated-baseline/RAM active publication
   not allowed, root cause not proven, and Nunchuk `NOT_TESTED`.
+- `source_owned_table_replacement_generator_contract.md` - docs/tools-only
+  generator contract following `source_owned_table_replacement_design.md`. It
+  defines a stdlib-only replacement generator for
+  `src/modes/UltimateIdentityRuntimeTables.hpp` that emits patched text under
+  docs fixtures or stdout, preserves existing table symbols/order/shape and
+  non-table source text, makes no RuntimeConfigView selection change, and does
+  not modify active source files on this branch.
+- `fixtures/source_owned_table_replacement_generator_contract.json` -
+  machine-readable non-claim fixture for the generator contract; active
+  behavior unchanged, hardware test not required before merge,
+  source-owned active-state preselection `HARDWARE_PASS`, dedicated active
+  storage `HARDWARE_FAIL`, generated source-owned baseline active
+  `HARDWARE_FAIL`, root cause not proven, and Nunchuk `NOT_TESTED`.
+- `fixtures/source_owned_table_replacement_input.example.json` - neutral
+  replacement input fixture with `replacement_kind:
+  source_owned_table_content_replacement`, target file
+  `src/modes/UltimateIdentityRuntimeTables.hpp`, and the current 27-table,
+  9-point, 2-axis shape.
+- `fixtures/generated_outputs/UltimateIdentityRuntimeTables.replacement.example.hpp` -
+  deterministic generated output fixture for replacing only numeric `x`/`y`
+  table contents in existing source-owned `StickPoint` table initializers; it
+  is an output fixture only, not active source.
+- `tools/generate_source_owned_table_replacement.py` - Python stdlib-only
+  offline generator for the source-owned table replacement contract; rejects
+  duplicate JSON keys, validates exact table shape and byte ranges, verifies
+  every table symbol exists exactly once, and refuses to write active source
+  paths.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -353,6 +380,13 @@ artifacts unless a specific packet says otherwise.
   table replacement does not change RuntimeConfigView selection. Future
   implementation changing table contents must be hardware-gated before merge if
   active behavior changes.
+- Source-owned table replacement generator contract is docs/tools only. It
+  follows `source_owned_table_replacement_design.md`, adds a stdlib-only
+  generator, contract fixture, replacement input fixture, and deterministic
+  generated output fixture under docs. It preserves the existing source-owned
+  table symbols/order/shape and non-table source text, makes no
+  RuntimeConfigView selection change, does not modify active source files, and
+  requires no hardware test before merge for this contract-only branch.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

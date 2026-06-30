@@ -373,6 +373,23 @@ engineering decisions.
   future implementation changing table contents must be hardware-gated before
   merge if active behavior changes, the low-level root cause remains unproven,
   and Nunchuk remains NOT_TESTED.
+- Source-owned table replacement generator contract is recorded in
+  `docs/runtime_config/source_owned_table_replacement_generator_contract.md`
+  with
+  `docs/runtime_config/fixtures/source_owned_table_replacement_generator_contract.json`,
+  `docs/runtime_config/fixtures/source_owned_table_replacement_input.example.json`,
+  `docs/runtime_config/fixtures/generated_outputs/UltimateIdentityRuntimeTables.replacement.example.hpp`,
+  and `tools/generate_source_owned_table_replacement.py`. It follows
+  `source_owned_table_replacement_design.md`, accepts generated source-owned
+  baseline active HARDWARE_FAIL, dedicated active storage HARDWARE_FAIL, and
+  source-owned active-state preselection HARDWARE_PASS evidence, and defines a
+  docs/tools-only generator for replacing only numeric `x`/`y` contents inside
+  existing source-owned `StickPoint` tables. It makes no RuntimeConfigView
+  selection change, does not modify active source files, leaves active behavior
+  unchanged, requires no hardware test before merge, implements no
+  runtime-loaded config, persistent storage, WebSerial/device write,
+  backend/config.pb write path, or flashing automation, and nunchuk
+  `NOT_TESTED` remains unchanged.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

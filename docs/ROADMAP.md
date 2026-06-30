@@ -352,6 +352,21 @@ implemented under current evidence. Future implementation changing table
 contents must be hardware-gated before merge if active behavior changes. Root
 cause remains unproven and Nunchuk remains NOT_TESTED.
 
+The source-owned table replacement generator contract in
+`docs/runtime_config/source_owned_table_replacement_generator_contract.md` with
+`docs/runtime_config/fixtures/source_owned_table_replacement_generator_contract.json`,
+`docs/runtime_config/fixtures/source_owned_table_replacement_input.example.json`,
+`docs/runtime_config/fixtures/generated_outputs/UltimateIdentityRuntimeTables.replacement.example.hpp`,
+and `tools/generate_source_owned_table_replacement.py` is docs/tools only. It
+follows `source_owned_table_replacement_design.md`, accepts generated
+source-owned baseline active HARDWARE_FAIL, dedicated active storage
+HARDWARE_FAIL, and source-owned active-state preselection HARDWARE_PASS
+evidence, and defines a deterministic stdlib-only generator for replacing
+numeric `x`/`y` contents inside existing source-owned `StickPoint` tables. It
+makes no RuntimeConfigView selection change, does not modify active source
+files, changes no active behavior, and requires no hardware test before merge
+for this contract-only branch.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-
