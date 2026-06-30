@@ -1,0 +1,40 @@
+{
+  "schema_name": "glyph_diagnostic_generated_source_owned_baseline_active_hardware_failure",
+  "branch_under_test": "runtime-config-diagnostic-generated-source-owned-baseline-active",
+  "result_branch": "runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure",
+  "baseline_branch": "configurator",
+  "overall_result": "HARDWARE_FAIL",
+  "active_behavior_changed": true,
+  "hardware_test_required_before_merge": true,
+  "merge_approved": false,
+  "implementation_branch_merge_allowed": false,
+  "generated_source_owned_baseline_active": true,
+  "generated_baseline_equivalent_to_source_owned_baseline": true,
+  "ram_backed_active_table_publication": false,
+  "candidate_view_published_active": false,
+  "candidate_owned_table_pointer_published_active": false,
+  "parser_payload_path_implemented": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "failure_symptoms": [
+    "forced A + Up disconnect",
+    "forced A + Down disconnect",
+    "initial two Up+A presses did not immediately disconnect",
+    "reconnect sometimes stuck left stick fully down or fully up across failed diagnostics"
+  ],
+  "conclusion": [
+    "generated source-owned baseline active diagnostic failed hardware test",
+    "generated/source-owned/baseline-equivalent table data was not sufficient for safe active publication",
+    "failure is not isolated to RAM-backed active table storage",
+    "changing active RuntimeConfigView/table publication path remains unsafe under this diagnostic",
+    "source-owned active-state preselection remains the last known passing active-runtime boundary",
+    "future realization should avoid RuntimeConfigView replacement as active customization mechanism unless a narrower hardware-validated diagnostic proves otherwise",
+    "implementation branch must not merge"
+  ]
+}

@@ -192,6 +192,33 @@ artifacts unless a specific packet says otherwise.
   fixture for the inert generated source-owned baseline artifact; active
   behavior unchanged, generated tables not wired active, runtime-loaded/
   storage/write/flashing paths not implemented, and nunchuk `NOT_TESTED`.
+- `diagnostic_generated_source_owned_baseline_active.md` - hardware-gated
+  diagnostic branch packet for selecting the generated source-owned
+  baseline-equivalent `RuntimeConfigView` as active without RAM-backed active
+  table publication.
+- `fixtures/diagnostic_generated_source_owned_baseline_active.json` -
+  machine-readable diagnostic fixture; `active_behavior_changed: true`,
+  `generated_source_owned_baseline_active: true`,
+  `hardware_test_required_before_merge: true`, candidate view not active,
+  runtime-loaded/storage/write/flashing paths not implemented, and Nunchuk
+  remains NOT_TESTED.
+- `diagnostic_generated_source_owned_baseline_active_build_report_2026-06-29.md` -
+  local build report for the generated source-owned baseline active diagnostic;
+  canonical command `pio run -e glyph_mk6`, fallback wrapper used locally, and
+  artifact hashes recorded only as local observations.
+- `fixtures/diagnostic_generated_source_owned_baseline_active_build_report_2026-06-29.json` -
+  machine-readable build report metadata for the diagnostic branch.
+- `diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md` -
+  `HARDWARE_FAIL` result for the generated source-owned baseline active
+  diagnostic; forced A + Up and forced A + Down still disconnect, initial two
+  Up+A presses did not immediately disconnect before later reproduction,
+  reconnect sometimes leaves left stick fully down or fully up across failed
+  diagnostics, low-level mechanism remains unproven, source-owned active-state
+  preselection remains the last known passing active-runtime boundary, and the
+  implementation branch must not merge.
+- `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.json` -
+  machine-readable hardware failure result fixture for the generated
+  source-owned baseline active diagnostic.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -284,6 +311,23 @@ artifacts unless a specific packet says otherwise.
   included by `src/modes/Ultimate.cpp`, is not wired into runtime selection,
   and active behavior remains unchanged. Future hardware gate required before
   generated source-owned tables are selected active.
+- The diagnostic generated source-owned baseline active branch
+  `runtime-config-diagnostic-generated-source-owned-baseline-active` changes
+  active behavior by selecting the generated source-owned baseline-equivalent
+  `RuntimeConfigView` as active. It uses source-owned immutable generated table
+  data, does not use RAM-backed active table publication, does not publish
+  `candidate.view`, does not implement a parser payload path, runtime-loaded
+  config, storage, WebSerial/device write, backend/config.pb write path, or
+  flashing automation, and has `hardware_test_required_before_merge: true`.
+  Nunchuk remains NOT_TESTED.
+- The generated source-owned baseline active diagnostic has a recorded
+  `HARDWARE_FAIL` result on
+  `runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`.
+  Generated/source-owned/baseline-equivalent table data was not sufficient for
+  safe active publication. Failure is no longer isolated to RAM-backed active
+  table storage; changing the active `RuntimeConfigView`/table publication path
+  remains unsafe under this diagnostic. The implementation branch must not
+  merge, root cause is not proven, and Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.
