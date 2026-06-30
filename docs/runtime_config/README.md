@@ -219,6 +219,22 @@ artifacts unless a specific packet says otherwise.
 - `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.json` -
   machine-readable hardware failure result fixture for the generated
   source-owned baseline active diagnostic.
+- `source_owned_table_replacement_design.md` - docs/checker-only next
+  realization strategy after generated source-owned baseline active
+  `HARDWARE_FAIL`: a future generator may replace compile-time contents of the
+  existing source-owned `StickPoint` tables used by the already-active
+  `kSourceOwnedCurrentBaselineRuntimeConfig`, while source-owned table
+  replacement does not change RuntimeConfigView selection. It records
+  dedicated active storage `HARDWARE_FAIL`, source-owned active-state
+  preselection `HARDWARE_PASS`, active behavior unchanged, no runtime-loaded
+  config/storage/write/flashing paths implemented, and Nunchuk `NOT_TESTED`.
+  Future implementation changing table contents must be hardware-gated before
+  merge if active behavior changes.
+- `fixtures/source_owned_table_replacement_design.json` - machine-readable
+  fixture for the source-owned table replacement design; active view selection
+  unchanged, `RuntimeConfigView` replacement not allowed, table-content
+  replacement design-only, candidate/generated-baseline/RAM active publication
+  not allowed, root cause not proven, and Nunchuk `NOT_TESTED`.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -328,6 +344,15 @@ artifacts unless a specific packet says otherwise.
   table storage; changing the active `RuntimeConfigView`/table publication path
   remains unsafe under this diagnostic. The implementation branch must not
   merge, root cause is not proven, and Nunchuk remains NOT_TESTED.
+- Source-owned table replacement design is docs/checker only. Generated
+  source-owned baseline active HARDWARE_FAIL, dedicated active storage
+  HARDWARE_FAIL, and source-owned active-state preselection HARDWARE_PASS are
+  the accepted evidence. The future strategy is to replace only the
+  compile-time contents of the existing source-owned `StickPoint` tables used
+  by the already-active `kSourceOwnedCurrentBaselineRuntimeConfig`; source-owned
+  table replacement does not change RuntimeConfigView selection. Future
+  implementation changing table contents must be hardware-gated before merge if
+  active behavior changes.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

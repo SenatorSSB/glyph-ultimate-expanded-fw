@@ -14,6 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-diagnostic-generated-source-owned-baseline-active"
 RESULT_BRANCH = "runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure"
 EVIDENCE_BRANCH = "runtime-config-generated-source-owned-baseline-active-failure-evidence"
+SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH = "runtime-config-source-owned-table-replacement-design"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 RESULT_BRANCH_BASE = EXPECTED_BRANCH
@@ -73,6 +74,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_source_owned_table_replacement_design.py",
 }
 ALLOWED_PREFIXES = (
     "docs/runtime_config/",
@@ -235,10 +237,17 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, RESULT_BRANCH, EVIDENCE_BRANCH, MERGED_BRANCH}:
+    if branch not in {
+        EXPECTED_BRANCH,
+        RESULT_BRANCH,
+        EVIDENCE_BRANCH,
+        SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH,
+        MERGED_BRANCH,
+    }:
         fail(
             "checker must run on "
-            f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+            f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, "
+            f"{SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
     ancestor = RESULT_BRANCH_BASE if branch == RESULT_BRANCH else BASE_BRANCH
     result = subprocess.run(
@@ -782,7 +791,12 @@ def validate_merged_branch_hardware_gate(branch: str) -> None:
 
 
 def validate_baseline_equivalence_checker() -> None:
-    if current_branch() in {RESULT_BRANCH, EVIDENCE_BRANCH, MERGED_BRANCH}:
+    if current_branch() in {
+        RESULT_BRANCH,
+        EVIDENCE_BRANCH,
+        SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH,
+        MERGED_BRANCH,
+    }:
         return
     completed = subprocess.run(
         ["python3", str(BASELINE_CHECKER)],

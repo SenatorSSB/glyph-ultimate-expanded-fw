@@ -354,6 +354,25 @@ engineering decisions.
   active-state preselection remains the last known passing active-runtime
   boundary, the implementation branch must not merge into `configurator`, and
   Nunchuk remains NOT_TESTED.
+- Source-owned table replacement design is recorded in
+  `docs/runtime_config/source_owned_table_replacement_design.md` with
+  `docs/runtime_config/fixtures/source_owned_table_replacement_design.json`.
+  This docs/checker-only branch accepts generated source-owned baseline active
+  HARDWARE_FAIL, dedicated active storage HARDWARE_FAIL, and source-owned
+  active-state preselection HARDWARE_PASS evidence. The next safe realization
+  strategy is to patch or regenerate only the compile-time contents of the
+  existing source-owned `StickPoint` tables already consumed by the active
+  `kSourceOwnedCurrentBaselineRuntimeConfig`; source-owned table replacement
+  does not change RuntimeConfigView selection. RuntimeConfigView replacement,
+  active-view selection changes, `candidate.view` active publication,
+  RAM-backed active table publication, generated baseline-active publication,
+  runtime-loaded config, persistent storage, WebSerial/device write,
+  backend/config.pb write path, and flashing automation remain not
+  implemented/not allowed under current evidence. Active behavior is unchanged,
+  hardware test is not required before merge for this docs/checker branch,
+  future implementation changing table contents must be hardware-gated before
+  merge if active behavior changes, the low-level root cause remains unproven,
+  and Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.
