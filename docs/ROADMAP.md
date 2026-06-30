@@ -333,6 +333,25 @@ should pivot away from `RuntimeConfigView` replacement as the active
 customization mechanism unless a narrower source-backed diagnostic proves
 otherwise.
 
+The source-owned table replacement design in
+`docs/runtime_config/source_owned_table_replacement_design.md` with
+`docs/runtime_config/fixtures/source_owned_table_replacement_design.json` is the
+next docs/checker-only strategy after generated source-owned baseline active
+HARDWARE_FAIL. It records dedicated active storage HARDWARE_FAIL and
+source-owned active-state preselection HARDWARE_PASS evidence, keeps active
+behavior unchanged, and requires no hardware test before merge for this design
+branch. The future strategy is to patch or regenerate only the compile-time
+contents of the existing source-owned `StickPoint` tables already consumed by
+the active `kSourceOwnedCurrentBaselineRuntimeConfig`; source-owned table
+replacement does not change RuntimeConfigView selection. RuntimeConfigView
+replacement, active-view selection changes, candidate.view active publication,
+RAM-backed active table publication, generated baseline-active publication,
+runtime-loaded config, persistent storage, WebSerial/device write,
+backend/config.pb write path, and flashing automation remain disallowed or not
+implemented under current evidence. Future implementation changing table
+contents must be hardware-gated before merge if active behavior changes. Root
+cause remains unproven and Nunchuk remains NOT_TESTED.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-
