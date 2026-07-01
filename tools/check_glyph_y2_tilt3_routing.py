@@ -110,6 +110,23 @@ def validate_lt3_y2_only() -> None:
     assert_equal("LT3 L button", evaluation.outputs.buttonL, False)
 
 
+def validate_tilt3_table_runtime_points() -> None:
+    directions = {
+        1: ["RT1", "RF4", "LF3", "LF5"],
+        2: ["RT1", "RF4", "LF5"],
+        3: ["RT1", "RF4", "LF1", "LF5"],
+        4: ["RT1", "RF4", "LF3"],
+        5: ["RT1", "RF4"],
+        6: ["RT1", "RF4", "LF1"],
+        7: ["RT1", "RF4", "LF3", "LF2"],
+        8: ["RT1", "RF4", "LF2"],
+        9: ["RT1", "RF4", "LF1", "LF2"],
+    }
+    for direction, buttons in directions.items():
+        assert_equal(f"Tilt3 runtime dir {direction}", left_stick(buttons), EXPECTED_TILT3[direction])
+        assert_equal(f"Tilt3 runtime table dir {direction}", table_id(buttons), "Tilt3")
+
+
 def validate_y2_table_runtime_points() -> None:
     directions = {
         1: ["LT3", "LF3", "LF5"],
@@ -154,7 +171,7 @@ def validate_y2_priority() -> None:
     assert_equal("Y2+RF4 table", table_id(["LT3", "RF4", "LF1"]), "LayerFlipper")
     assert_equal("Y2+RF4 point", left_stick(["LT3", "RF4", "LF1"]), (87, 128))
 
-    assert_equal("Y2+RT1+RF4 table", table_id(["LT3", "RT1", "RF4", "LF1"]), "RT1RF4Custom")
+    assert_equal("Y2+RT1+RF4 table", table_id(["LT3", "RT1", "RF4", "LF1"]), "Tilt3")
     assert_equal("Y2+RT1+RF4 point", left_stick(["LT3", "RT1", "RF4", "LF1"]), (187, 128))
 
     assert_equal("Y2+RF2+RF4 table", table_id(["LT3", "RF2", "RF4", "LF1"]), "LayerFlipper")
@@ -166,6 +183,7 @@ def main() -> int:
     try:
         validate_source_tables()
         validate_lt3_y2_only()
+        validate_tilt3_table_runtime_points()
         validate_y2_table_runtime_points()
         validate_sublayer_migration()
         validate_y2_priority()

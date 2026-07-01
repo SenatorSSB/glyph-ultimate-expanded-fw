@@ -340,7 +340,7 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     const bool rt1_rf4_custom_active = inputs.rt1 && inputs.rf4 && !rf4_suppressed_by_rf9_rf3_mode;
     const bool rf4_modifier_suppressed_by_cstick = inputs.rf4 && layer.c_stick_any_active && !rt1_rf4_custom_active;
     const bool rf4_behavior_available = inputs.rf4 && !rf4_modifier_suppressed_by_cstick && !rf4_suppressed_by_rf9_rf3_mode;
-    const bool y2_rf4_active = inputs.lt3 && !inputs.lf4 && rf4_behavior_available;
+    const bool y2_rf4_active = inputs.lt3 && !inputs.lf4 && rf4_behavior_available && !rt1_rf4_custom_active;
     const bool lf4_rf2_deactivates_rf4 = inputs.lf4 && inputs.rf2;
     const bool tilt1_pressed = rf4_behavior_available && (!inputs.lt3 || inputs.lf4) && !inputs.rt1 && !lf4_rf2_deactivates_rf4;
     const bool tilt2_pressed = inputs.rt1 && !inputs.rf4;
@@ -363,7 +363,7 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     state.rf4_suppressed_by_rf9_rf3_mode = rf4_suppressed_by_rf9_rf3_mode;
     state.rf3_x_suppressed_by_rf9 = rf3_x_suppressed_by_rf9;
     state.rf3_x_restored_by_cstick = rf3_x_restored_by_cstick;
-    state.tilt3_effective = false;
+    state.tilt3_effective = rt1_rf4_custom_active;
     state.tilt1_effective = tilt1_pressed;
     state.tilt2_effective = tilt2_pressed;
     state.z_airdodge_override_active = inputs.rf6;
@@ -706,8 +706,8 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         roles.y2_active,
         roles.layer_rf3_normal_x_active,
         roles.rf4_layer_flipper_active,
-        roles.rt1_rf4_custom_active || (roles.tilt1_effective && !rf4_rf2_minus41_active),
-        roles.rt1_rf4_custom_active || roles.tilt2_effective,
+        roles.tilt1_effective && !rf4_rf2_minus41_active,
+        roles.tilt2_effective,
         roles.tilt3_effective
     );
     if (rf4_rf2_minus41_active) {

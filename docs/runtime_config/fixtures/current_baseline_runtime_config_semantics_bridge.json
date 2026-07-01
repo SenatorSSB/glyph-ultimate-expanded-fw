@@ -14,7 +14,7 @@
     {
       "path": "src/modes/Ultimate.cpp",
       "role": "current_baseline_source",
-      "sha256": "42ccd92644264c24e8a3b53b06c606767fed44ff42c35a89f95b2455a235d1d6"
+      "sha256": "15052e5536c8bcea648670a1035f08d53a947d149ff4185411d8737c39ece404"
     },
     {
       "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
@@ -35,7 +35,7 @@
   "source_baseline_preview": {
     "path": "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
     "role": "design_preview_snapshot",
-    "sha256": "b15244a9c381eb4a9e909528f2cfaab04c171937f1304313e46013da8d7b9583"
+    "sha256": "b22d717e0b69c0def8496d6b0c52f7d0042159016609e8c63d78bb98e8466435"
   },
   "interpreter_source_baseline": {
     "schema_name": "glyph_runtime_config_interpreter_source_baseline",

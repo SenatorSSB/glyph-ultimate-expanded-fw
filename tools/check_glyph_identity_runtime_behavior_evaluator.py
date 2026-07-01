@@ -58,6 +58,7 @@ SOURCE_ANCHORS = (
     "state.x2_active = inputs.lt4;",
     "state.y1_active = inputs.lt2 && !inputs.lf4;",
     "state.y2_active = inputs.lt3 && !inputs.lf4 && !y2_sublayer_active;",
+    "state.tilt3_effective = rt1_rf4_custom_active;",
     "state.z_airdodge_override_active = inputs.rf6;",
     "state.null_modifier_active = inputs.rf9 && !state.rf9_base_rf3_x_mode_active && !state.rf4_behavior_available;",
     "outputs.buttonR = inputs.rf6;",
@@ -551,7 +552,7 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
     rt1_rf4_custom_active = inputs.rt1 and inputs.rf4 and not rf4_suppressed_by_rf9_rf3_mode
     rf4_modifier_suppressed_by_cstick = inputs.rf4 and layer.c_stick_any_active and not rt1_rf4_custom_active
     rf4_behavior_available = inputs.rf4 and not rf4_modifier_suppressed_by_cstick and not rf4_suppressed_by_rf9_rf3_mode
-    y2_rf4_active = inputs.lt3 and not inputs.lf4 and rf4_behavior_available
+    y2_rf4_active = inputs.lt3 and not inputs.lf4 and rf4_behavior_available and not rt1_rf4_custom_active
     lf4_rf2_deactivates_rf4 = inputs.lf4 and inputs.rf2
     tilt1_pressed = rf4_behavior_available and (not inputs.lt3 or inputs.lf4) and not inputs.rt1 and not lf4_rf2_deactivates_rf4
     tilt2_pressed = inputs.rt1 and not inputs.rf4
@@ -575,7 +576,7 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
         rf4_suppressed_by_rf9_rf3_mode=rf4_suppressed_by_rf9_rf3_mode,
         rf3_x_suppressed_by_rf9=rf3_x_suppressed_by_rf9,
         rf3_x_restored_by_cstick=rf3_x_restored_by_cstick,
-        tilt3_effective=False,
+        tilt3_effective=rt1_rf4_custom_active,
         tilt1_effective=tilt1_pressed,
         tilt2_effective=tilt2_pressed,
         z_airdodge_override_active=inputs.rf6,
@@ -871,8 +872,8 @@ def evaluate_case(case: dict[str, Any]) -> Evaluation:
         analog_roles.y2_active,
         analog_roles.layer_rf3_normal_x_active,
         analog_roles.rf4_layer_flipper_active,
-        analog_roles.rt1_rf4_custom_active or (analog_roles.tilt1_effective and not rf4_rf2_minus41_active),
-        analog_roles.rt1_rf4_custom_active or analog_roles.tilt2_effective,
+        analog_roles.tilt1_effective and not rf4_rf2_minus41_active,
+        analog_roles.tilt2_effective,
         analog_roles.tilt3_effective,
     )
     if rf4_rf2_minus41_active:
