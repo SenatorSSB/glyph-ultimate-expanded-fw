@@ -12,8 +12,8 @@
   "fallback_policy": "known_good_source_owned_baseline",
   "fallback_table_id": "Default",
   "table_family": "StickPoint",
-  "table_count": 27,
-  "expected_table_count": 27,
+  "table_count": 28,
+  "expected_table_count": 28,
   "point_count_per_table": 9,
   "expected_point_count_per_table": 9,
   "runtime_table_ids": [
@@ -24,6 +24,7 @@
     "MX1",
     "MX2",
     "Y1",
+    "Y2",
     "MY1",
     "LayerNormalX",
     "MLayerNormalX",
@@ -91,6 +92,13 @@
     {
       "runtime_table_id": "Y1",
       "source_symbol": "kY1Table",
+      "point_count": 9,
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
+    },
+    {
+      "runtime_table_id": "Y2",
+      "source_symbol": "kY2Table",
       "point_count": 9,
       "shape": "StickPoint[9]",
       "value_source": "src/modes/Ultimate.cpp"

@@ -24,7 +24,7 @@ INTERPRETER_BASELINE_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/cu
 PREVIEW_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json"
 INVALID_FIXTURE_PATH = REPO_ROOT / "docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json"
 
-EXPECTED_TABLE_COUNT = 27
+EXPECTED_TABLE_COUNT = 28
 EXPECTED_POINTS_PER_TABLE = 9
 EXPECTED_TABLE_FAMILY = "StickPoint"
 EXPECTED_TABLE_SHAPE = "StickPoint[9]"
@@ -285,7 +285,7 @@ def validate_baseline(fixture: dict[str, Any], source_tables: dict[str, tuple[tu
     if require_string(fixture.get("table_family"), "baseline.table_family") != EXPECTED_TABLE_FAMILY:
         fail("baseline.table_family must be StickPoint")
     if require_int(fixture.get("expected_table_count"), "baseline.expected_table_count") != EXPECTED_TABLE_COUNT:
-        fail("baseline.expected_table_count must be 27")
+        fail(f"baseline.expected_table_count must be {EXPECTED_TABLE_COUNT}")
     if require_int(
         fixture.get("expected_point_count_per_table"),
         "baseline.expected_point_count_per_table",
@@ -353,7 +353,7 @@ def validate_preview(fixture: dict[str, Any], source_tables: dict[str, tuple[tup
     if require_string(fixture.get("table_family"), "preview.table_family") != EXPECTED_TABLE_FAMILY:
         fail("preview.table_family must be StickPoint")
     if require_int(fixture.get("expected_table_count"), "preview.expected_table_count") != EXPECTED_TABLE_COUNT:
-        fail("preview.expected_table_count must be 27")
+        fail(f"preview.expected_table_count must be {EXPECTED_TABLE_COUNT}")
     if require_int(fixture.get("expected_point_count_per_table"), "preview.expected_point_count_per_table") != EXPECTED_POINTS_PER_TABLE:
         fail("preview.expected_point_count_per_table must be 9")
 

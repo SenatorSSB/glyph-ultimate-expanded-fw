@@ -40,12 +40,12 @@ required top-level keys are:
 
 `table_shape` must contain:
 
-- `table_count: 27`
+- `table_count: 28`
 - `points_per_table: 9`
 - `axes_per_point: 2`
 
 Each table must include `table_id` or `table_name`. For the current scaffold
-sample, `table_id` values are expected to cover the 27 current table slots.
+sample, `table_id` values are expected to cover the 28 current table slots.
 Each table must contain exactly 9 points. Each point must contain integer byte
 values `x` and `y` in the inclusive range `[0, 255]`.
 

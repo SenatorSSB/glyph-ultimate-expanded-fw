@@ -53,13 +53,15 @@ SOURCE_ANCHORS = (
     "ApplyNullOverride",
     "state.layer_left_active = false;",
     "state.layer_right_active = false;",
-    "state.force_up_active = inputs.rf5 || lt2_rf2_force_up_active || lf4_submode_rf3_force_up_active;",
+    "state.force_up_active = inputs.rf5 || y2_rf2_force_up_active || lf4_submode_rf3_force_up_active;",
     "state.x1_active = inputs.lt5;",
     "state.x2_active = inputs.lt4;",
+    "state.y1_active = inputs.lt2 && !inputs.lf4;",
+    "state.y2_active = inputs.lt3 && !inputs.lf4 && !y2_sublayer_active;",
     "state.z_airdodge_override_active = inputs.rf6;",
     "state.null_modifier_active = inputs.rf9 && !state.rf9_base_rf3_x_mode_active && !state.rf4_behavior_available;",
     "outputs.buttonR = inputs.rf6;",
-    "outputs.triggerRDigital = inputs.rf16 || inputs.lt3;",
+    "outputs.triggerRDigital = inputs.rf16;",
     "kRT1RF4CustomTable",
     "kTilt1Minus41Table",
     "state.hard_up_b_active = inputs.rf7;",
@@ -122,6 +124,11 @@ TABLES: dict[str, tuple[tuple[int, int], ...]] = {
         (61, 99), (128, 99), (195, 99),
         (61, 128), (128, 128), (195, 128),
         (61, 157), (128, 157), (195, 157),
+    ),
+    "Y2": (
+        (69, 78), (128, 78), (187, 78),
+        (61, 128), (128, 128), (195, 128),
+        (61, 164), (128, 174), (195, 164),
     ),
     "MY1": (
         (14, 179), (128, 179), (242, 179),
@@ -189,9 +196,9 @@ TABLES: dict[str, tuple[tuple[int, int], ...]] = {
         (88, 177), (128, 177), (168, 177),
     ),
     "Tilt3": (
-        (75, 86), (128, 86), (181, 86),
-        (75, 128), (128, 128), (181, 128),
-        (75, 170), (128, 170), (181, 170),
+        (69, 82), (128, 83), (187, 82),
+        (69, 128), (128, 128), (187, 128),
+        (76, 169), (128, 179), (180, 169),
     ),
     "Tilt1Minus41": (
         (169, 47), (128, 47), (87, 47),
@@ -303,6 +310,7 @@ class RoleState:
     x1_active: bool
     x2_active: bool
     y1_active: bool
+    y2_active: bool
     layer_rf3_normal_x_active: bool
     rf4_layer_flipper_active: bool
     rt1_rf4_custom_active: bool
@@ -417,6 +425,7 @@ ROLE_MODIFIER_FIELDS = {
     "X1": "x1_active",
     "X2": "x2_active",
     "Y1": "y1_active",
+    "Y2": "y2_active",
     "LayerNormalX": "layer_rf3_normal_x_active",
     "LayerFlipper": "rf4_layer_flipper_active",
     "RT1RF4Custom": "rt1_rf4_custom_active",
@@ -508,11 +517,11 @@ def resolve_layer_state(inputs: InputState) -> LayerState:
 
 
 def resolve_effective_directions(inputs: InputState, layer: LayerState) -> EffectiveDirectionState:
-    lt2_rf2_force_up_active = inputs.lt2 and not inputs.lf4 and inputs.rf2
+    y2_rf2_force_up_active = inputs.lt3 and not inputs.lf4 and inputs.rf2
     lf4_submode_rf3_force_up_active = inputs.lf4 and inputs.rf3
     force_up_active = (
         inputs.rf5
-        or lt2_rf2_force_up_active
+        or y2_rf2_force_up_active
         or lf4_submode_rf3_force_up_active
     )
     horizontal_axis = resolve_horizontal_axis(
@@ -534,17 +543,17 @@ def resolve_effective_directions(inputs: InputState, layer: LayerState) -> Effec
 def resolve_role_state(inputs: InputState, layer: LayerState, directions: EffectiveDirectionState) -> RoleState:
     down_a_active = inputs.lt6
     up_a_active = inputs.rf5
-    lt2_sublayer_active = inputs.lt2 and not inputs.lf4 and (inputs.rf1 or inputs.rf2 or inputs.rf3 or inputs.rf4)
-    lt2_rf3_active = inputs.lt2 and not inputs.lf4 and inputs.rf3
-    base_rf3_x_active = inputs.rf3 and not inputs.lt2 and not inputs.lf4
+    y2_sublayer_active = inputs.lt3 and not inputs.lf4 and (inputs.rf1 or inputs.rf2 or inputs.rf3 or inputs.rf4)
+    y2_rf3_active = inputs.lt3 and not inputs.lf4 and inputs.rf3
+    base_rf3_x_active = inputs.rf3 and not inputs.lt3 and not inputs.lf4
     rf9_base_rf3_x_mode_active = inputs.rf9 and base_rf3_x_active
     rf4_suppressed_by_rf9_rf3_mode = rf9_base_rf3_x_mode_active and inputs.rf4
     rt1_rf4_custom_active = inputs.rt1 and inputs.rf4 and not rf4_suppressed_by_rf9_rf3_mode
     rf4_modifier_suppressed_by_cstick = inputs.rf4 and layer.c_stick_any_active and not rt1_rf4_custom_active
     rf4_behavior_available = inputs.rf4 and not rf4_modifier_suppressed_by_cstick and not rf4_suppressed_by_rf9_rf3_mode
-    lt2_rf4_active = inputs.lt2 and not inputs.lf4 and rf4_behavior_available
+    y2_rf4_active = inputs.lt3 and not inputs.lf4 and rf4_behavior_available
     lf4_rf2_deactivates_rf4 = inputs.lf4 and inputs.rf2
-    tilt1_pressed = rf4_behavior_available and (not inputs.lt2 or inputs.lf4) and not inputs.rt1 and not lf4_rf2_deactivates_rf4
+    tilt1_pressed = rf4_behavior_available and (not inputs.lt3 or inputs.lf4) and not inputs.rt1 and not lf4_rf2_deactivates_rf4
     tilt2_pressed = inputs.rt1 and not inputs.rf4
     rf3_x_suppressed_by_rf9 = rf9_base_rf3_x_mode_active and not layer.c_stick_any_active
     rf3_x_restored_by_cstick = rf9_base_rf3_x_mode_active and layer.c_stick_any_active
@@ -554,9 +563,10 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
         mode_active=inputs.rf8,
         x1_active=inputs.lt5,
         x2_active=inputs.lt4,
-        y1_active=inputs.lt2 and not inputs.lf4 and not lt2_sublayer_active,
-        layer_rf3_normal_x_active=lt2_rf3_active,
-        rf4_layer_flipper_active=lt2_rf4_active,
+        y1_active=inputs.lt2 and not inputs.lf4,
+        y2_active=inputs.lt3 and not inputs.lf4 and not y2_sublayer_active,
+        layer_rf3_normal_x_active=y2_rf3_active,
+        rf4_layer_flipper_active=y2_rf4_active,
         rt1_rf4_custom_active=rt1_rf4_custom_active,
         rf4_modifier_suppressed_by_cstick=rf4_modifier_suppressed_by_cstick,
         rf4_behavior_available=rf4_behavior_available,
@@ -579,20 +589,20 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
 
 def apply_digital_button_outputs(inputs: InputState, layer: LayerState, roles: RoleState, outputs: OutputState) -> None:
     c_stick_any_active = inputs.rt2 or inputs.rt3 or inputs.rt4 or inputs.rt5
-    lt2_sublayer_active = inputs.lt2 and not inputs.lf4 and (inputs.rf1 or inputs.rf2 or inputs.rf3 or inputs.rf4)
-    lt2_rf1_x_active = inputs.lt2 and not inputs.lf4 and inputs.rf1 and not c_stick_any_active
+    y2_sublayer_active = inputs.lt3 and not inputs.lf4 and (inputs.rf1 or inputs.rf2 or inputs.rf3 or inputs.rf4)
+    y2_rf1_x_active = inputs.lt3 and not inputs.lf4 and inputs.rf1 and not c_stick_any_active
     lf4_rf2_x_active = inputs.lf4 and inputs.rf2 and not c_stick_any_active
-    base_rf1_a_active = inputs.rf1 and not lt2_sublayer_active
-    base_rf2_b_active = inputs.rf2 and not inputs.lt2 and not inputs.lf4
+    base_rf1_a_active = inputs.rf1 and not y2_sublayer_active
+    base_rf2_b_active = inputs.rf2 and not inputs.lt3 and not inputs.lf4
 
     outputs.a = base_rf1_a_active or inputs.lt6 or inputs.rf5
-    outputs.b = base_rf2_b_active or inputs.lf4 or inputs.rf7 or (inputs.lt2 and not inputs.lf4 and inputs.rf3)
-    outputs.x = (roles.base_rf3_x_active and not roles.rf3_x_suppressed_by_rf9) or lt2_rf1_x_active or lf4_rf2_x_active
+    outputs.b = base_rf2_b_active or inputs.lf4 or inputs.rf7 or (inputs.lt3 and not inputs.lf4 and inputs.rf3)
+    outputs.x = (roles.base_rf3_x_active and not roles.rf3_x_suppressed_by_rf9) or y2_rf1_x_active or lf4_rf2_x_active
     outputs.y = inputs.rf10
-    outputs.buttonL = inputs.lt1 or inputs.lt3
+    outputs.buttonL = inputs.lt1
     outputs.buttonR = inputs.rf6
-    outputs.triggerLDigital = inputs.lt1 or inputs.lt3
-    outputs.triggerRDigital = inputs.rf16 or inputs.lt3
+    outputs.triggerLDigital = inputs.lt1
+    outputs.triggerRDigital = inputs.rf16
     outputs.start = inputs.mb7
     outputs.select = inputs.mb6
     outputs.home = inputs.mb5
@@ -646,6 +656,7 @@ def select_runtime_table_id(
     x1_active: bool,
     x2_active: bool,
     y1_active: bool,
+    y2_active: bool,
     layer_normal_x_active: bool,
     layer_flipper_active: bool,
     tilt1_effective: bool,
@@ -655,43 +666,16 @@ def select_runtime_table_id(
     if tilt1_effective and tilt2_effective:
         return "RT1RF4Custom"
 
-    y1_tilt1_special_active = (
-        y1_active
-        and tilt1_effective
-        and not x1_active
-        and not x2_active
-        and not tilt2_effective
-        and not tilt3_effective
-    )
-    if y1_tilt1_special_active:
-        return "MY1Tilt1" if mode_active else "Y1Tilt1"
-
     layer_flipper_effective = layer_flipper_active
     layer_normal_x_effective = layer_normal_x_active and not layer_flipper_effective
-
-    y1_layer_normal_x_special_active = (
-        y1_active
-        and layer_normal_x_effective
-        and not x1_active
-        and not x2_active
-        and not tilt1_effective
-        and not tilt2_effective
-        and not tilt3_effective
+    rt_rf_modifier_effective = (
+        layer_normal_x_effective
+        or layer_flipper_effective
+        or tilt1_effective
+        or tilt2_effective
+        or tilt3_effective
     )
-    if y1_layer_normal_x_special_active:
-        return "MY1LayerNormalX" if mode_active else "Y1LayerNormalX"
-
-    y1_layer_flipper_special_active = (
-        y1_active
-        and layer_flipper_effective
-        and not x1_active
-        and not x2_active
-        and not tilt1_effective
-        and not tilt2_effective
-        and not tilt3_effective
-    )
-    if y1_layer_flipper_special_active:
-        return "MY1LayerFlipper" if mode_active else "Y1LayerFlipper"
+    y2_effective = y2_active and not rt_rf_modifier_effective
 
     active_modifier_count = 0
     single_modifier = "None"
@@ -700,6 +684,7 @@ def select_runtime_table_id(
         (x1_active, "X1"),
         (x2_active, "X2"),
         (y1_active, "Y1"),
+        (y2_effective, "Y2"),
         (layer_normal_x_effective, "LayerNormalX"),
         (layer_flipper_effective, "LayerFlipper"),
     ):
@@ -727,6 +712,7 @@ def select_runtime_table_id(
         "X1": "MX1",
         "X2": "MX2",
         "Y1": "MY1",
+        "Y2": "Y2",
         "LayerNormalX": "MLayerNormalX",
         "LayerFlipper": "MLayerFlipper",
         "Tilt1": "ModeDefault",
@@ -873,7 +859,7 @@ def evaluate_case(case: dict[str, Any]) -> Evaluation:
     rf4_rf2_minus41_active = (
         analog_roles.rf4_behavior_available
         and inputs.rf2
-        and not inputs.lt2
+        and not inputs.lt3
         and not inputs.lf4
         and not analog_roles.rt1_rf4_custom_active
     )
@@ -882,6 +868,7 @@ def evaluate_case(case: dict[str, Any]) -> Evaluation:
         analog_roles.x1_active,
         analog_roles.x2_active,
         analog_roles.y1_active,
+        analog_roles.y2_active,
         analog_roles.layer_rf3_normal_x_active,
         analog_roles.rf4_layer_flipper_active,
         analog_roles.rt1_rf4_custom_active or (analog_roles.tilt1_effective and not rf4_rf2_minus41_active),

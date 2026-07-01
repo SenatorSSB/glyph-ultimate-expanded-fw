@@ -10,7 +10,7 @@
   "hardware_status": "not_new_hardware_result",
   "nunchuk_status": "preserved_but_not_hardware_validated",
   "table_family": "StickPoint",
-  "expected_table_count": 27,
+  "expected_table_count": 28,
   "expected_point_count_per_table": 9,
   "source_baseline_fixture": "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json",
   "source_authority": {
@@ -19,22 +19,22 @@
       {
         "path": "src/modes/Ultimate.cpp",
         "role": "current_baseline_source",
-        "sha256": "d54f082601697d6c47925b56dbb81e1bcb3636829266bf61b7f2dc8856372706"
+        "sha256": "42ccd92644264c24e8a3b53b06c606767fed44ff42c35a89f95b2455a235d1d6"
       },
       {
         "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
         "role": "generated_like_table_constants",
-        "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400"
+        "sha256": "a8ed79742b682a155a6a6ed75bd65a76e476a00383d42b361d0a684a66dbdbf3"
       },
       {
         "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
         "role": "runtime_config_interpreter_boundary",
-        "sha256": "ce694ab1f656145742b2e657c2960a813bfa115a0d787a11f43df438eefe1a2f"
+        "sha256": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108"
       },
       {
         "path": "tools/extract_glyph_identity_runtime_tables.py",
         "role": "source_table_extractor",
-        "sha256": "e7d9bfd18cfd469d5f030d53628bfb9dd74d3c14b5f04ef533f6c7f8b8aa7bad"
+        "sha256": "46d33c20e125ccae582c2530af109a1b6809ef0be8c971dbfdb83fa1d093b04c"
       }
     ],
     "unknowns": [
@@ -50,8 +50,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [61, 195],
-      "y_range": [51, 205]
+      "x_range": [
+        61,
+        195
+      ],
+      "y_range": [
+        51,
+        205
+      ]
     },
     {
       "name": "ModeDefault",
@@ -59,8 +65,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [14, 242],
-      "y_range": [87, 169]
+      "x_range": [
+        14,
+        242
+      ],
+      "y_range": [
+        87,
+        169
+      ]
     },
     {
       "name": "X1",
@@ -68,8 +80,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [93, 163],
-      "y_range": [51, 205]
+      "x_range": [
+        93,
+        163
+      ],
+      "y_range": [
+        51,
+        205
+      ]
     },
     {
       "name": "X2",
@@ -77,8 +95,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [82, 174],
-      "y_range": [51, 205]
+      "x_range": [
+        82,
+        174
+      ],
+      "y_range": [
+        51,
+        205
+      ]
     },
     {
       "name": "MX1",
@@ -86,8 +110,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [78, 178],
-      "y_range": [87, 169]
+      "x_range": [
+        78,
+        178
+      ],
+      "y_range": [
+        87,
+        169
+      ]
     },
     {
       "name": "MX2",
@@ -95,8 +125,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [65, 191],
-      "y_range": [87, 169]
+      "x_range": [
+        65,
+        191
+      ],
+      "y_range": [
+        87,
+        169
+      ]
     },
     {
       "name": "Y1",
@@ -104,8 +140,29 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [61, 195],
-      "y_range": [99, 157]
+      "x_range": [
+        61,
+        195
+      ],
+      "y_range": [
+        99,
+        157
+      ]
+    },
+    {
+      "name": "Y2",
+      "source_symbol": "kY2Table",
+      "shape": "StickPoint[9]",
+      "point_count": 9,
+      "value_source": "src/modes/Ultimate.cpp",
+      "x_range": [
+        61,
+        195
+      ],
+      "y_range": [
+        78,
+        174
+      ]
     },
     {
       "name": "MY1",
@@ -113,8 +170,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [14, 242],
-      "y_range": [77, 179]
+      "x_range": [
+        14,
+        242
+      ],
+      "y_range": [
+        77,
+        179
+      ]
     },
     {
       "name": "LayerNormalX",
@@ -122,8 +185,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [51, 205]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        51,
+        205
+      ]
     },
     {
       "name": "MLayerNormalX",
@@ -131,8 +200,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [87, 169]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        87,
+        169
+      ]
     },
     {
       "name": "LayerFlipper",
@@ -140,8 +215,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [51, 205]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        51,
+        205
+      ]
     },
     {
       "name": "MLayerFlipper",
@@ -149,8 +230,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [87, 169]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        87,
+        169
+      ]
     },
     {
       "name": "Y1Tilt1",
@@ -158,8 +245,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [99, 157]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        99,
+        157
+      ]
     },
     {
       "name": "MY1Tilt1",
@@ -167,8 +260,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [77, 179]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        77,
+        179
+      ]
     },
     {
       "name": "Y1LayerFlipper",
@@ -176,8 +275,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [99, 157]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        99,
+        157
+      ]
     },
     {
       "name": "MY1LayerFlipper",
@@ -185,8 +290,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [77, 179]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        77,
+        179
+      ]
     },
     {
       "name": "Y1LayerNormalX",
@@ -194,8 +305,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [99, 157]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        99,
+        157
+      ]
     },
     {
       "name": "MY1LayerNormalX",
@@ -203,8 +320,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [77, 179]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        77,
+        179
+      ]
     },
     {
       "name": "Tilt1",
@@ -212,8 +335,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [69, 187],
-      "y_range": [47, 209]
+      "x_range": [
+        69,
+        187
+      ],
+      "y_range": [
+        47,
+        209
+      ]
     },
     {
       "name": "Tilt2",
@@ -221,8 +350,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [88, 168],
-      "y_range": [79, 177]
+      "x_range": [
+        88,
+        168
+      ],
+      "y_range": [
+        79,
+        177
+      ]
     },
     {
       "name": "Tilt3",
@@ -230,8 +365,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [75, 181],
-      "y_range": [86, 170]
+      "x_range": [
+        69,
+        187
+      ],
+      "y_range": [
+        82,
+        179
+      ]
     },
     {
       "name": "Tilt1Minus41",
@@ -239,8 +380,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [47, 209]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        47,
+        209
+      ]
     },
     {
       "name": "RT1RF4Custom",
@@ -248,8 +395,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [69, 187],
-      "y_range": [78, 179]
+      "x_range": [
+        69,
+        187
+      ],
+      "y_range": [
+        78,
+        179
+      ]
     },
     {
       "name": "MTilt1",
@@ -257,8 +410,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [88, 169]
+      "x_range": [
+        87,
+        169
+      ],
+      "y_range": [
+        88,
+        169
+      ]
     },
     {
       "name": "MTilt2",
@@ -266,8 +425,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [96, 160],
-      "y_range": [82, 174]
+      "x_range": [
+        96,
+        160
+      ],
+      "y_range": [
+        82,
+        174
+      ]
     },
     {
       "name": "MTilt3",
@@ -275,8 +440,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [96, 160],
-      "y_range": [86, 170]
+      "x_range": [
+        96,
+        160
+      ],
+      "y_range": [
+        86,
+        170
+      ]
     },
     {
       "name": "Lt1LowMagnitude",
@@ -284,8 +455,14 @@
       "shape": "StickPoint[9]",
       "point_count": 9,
       "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [79, 177],
-      "y_range": [79, 177]
+      "x_range": [
+        79,
+        177
+      ],
+      "y_range": [
+        79,
+        177
+      ]
     }
   ],
   "preview_caveats": [

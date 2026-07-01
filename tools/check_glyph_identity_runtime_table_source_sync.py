@@ -239,7 +239,7 @@ def validate_interpreter_header(
         raise RuntimeError("interpreter RuntimeConfigView baseline missing token: RuntimeTableId::Default")
     if "kRuntimeConfigSchemaVersion" not in config_block and "1" not in config_block:
         raise RuntimeError("interpreter RuntimeConfigView baseline missing schema version")
-    if "kRuntimeTableCount" not in config_block and "27" not in config_block:
+    if "kRuntimeTableCount" not in config_block and str(CURRENT_BASELINE_CONFIG_EXPECTED_TABLE_COUNT) not in config_block:
         raise RuntimeError("interpreter RuntimeConfigView baseline missing table count")
     if "constexpr RuntimeConfigView kSourceOwnedCurrentBaselineRuntimeConfig = kKnownGoodRuntimeConfig;" not in interpreter_text:
         raise RuntimeError("interpreter source-owned baseline alias missing")
@@ -257,7 +257,10 @@ def validate_interpreter_header(
 
     table_references = fixture_baseline.get("table_references") if isinstance(fixture_baseline, dict) else None
     if not isinstance(table_references, list) or len(table_references) != CURRENT_BASELINE_CONFIG_EXPECTED_TABLE_COUNT:
-        raise RuntimeError("interpreter baseline table_references must contain 27 entries")
+        raise RuntimeError(
+            "interpreter baseline table_references must contain "
+            f"{CURRENT_BASELINE_CONFIG_EXPECTED_TABLE_COUNT} entries"
+        )
     for index, entry in enumerate(table_references):
         if not isinstance(entry, dict):
             raise RuntimeError(f"interpreter baseline table_references[{index}] must be an object")

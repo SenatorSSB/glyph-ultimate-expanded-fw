@@ -83,7 +83,7 @@ EXPECTED_INPUT_VALUES: dict[str, Any] = {
 }
 
 EXPECTED_SHAPE = {
-    "table_count": 27,
+    "table_count": 28,
     "points_per_table": 9,
     "axes_per_point": 2,
 }
@@ -93,7 +93,7 @@ REQUIRED_DOC_PHRASES = (
     "generated_source_owned_realization_design.md",
     "generated_source_owned_schema_scaffold.md",
     "duplicate keys rejected",
-    "`table_count: 27`",
+    "`table_count: 28`",
     "`points_per_table: 9`",
     "`axes_per_point: 2`",
     "integer byte values `x` and `y`",
@@ -315,7 +315,7 @@ def validate_input_fixture(payload: dict[str, Any]) -> None:
         fail(f"input fixture table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
     tables = payload.get("tables")
     if not isinstance(tables, list) or len(tables) != EXPECTED_SHAPE["table_count"]:
-        fail("input fixture tables must contain exactly 27 tables")
+        fail(f"input fixture tables must contain exactly {EXPECTED_SHAPE['table_count']} tables")
     seen_ids: set[int] = set()
     for table_index, table in enumerate(tables):
         if not isinstance(table, dict):
@@ -340,7 +340,7 @@ def validate_input_fixture(payload: dict[str, Any]) -> None:
                         "must be an integer byte"
                     )
     if seen_ids != set(range(EXPECTED_SHAPE["table_count"])):
-        fail("input fixture table_id values must cover 0..26")
+        fail(f"input fixture table_id values must cover 0..{EXPECTED_SHAPE['table_count'] - 1}")
 
 
 def validate_output_fixture(text: str) -> None:

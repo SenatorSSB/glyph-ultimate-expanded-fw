@@ -41,6 +41,7 @@ class RuntimeTableId(str, Enum):
     MX1 = "MX1"
     MX2 = "MX2"
     Y1 = "Y1"
+    Y2 = "Y2"
     MY1 = "MY1"
     LayerNormalX = "LayerNormalX"
     MLayerNormalX = "MLayerNormalX"
@@ -78,6 +79,7 @@ TABLE_SYMBOL_TO_NAME: tuple[tuple[str, str], ...] = (
     ("kMX1Table", "MX1"),
     ("kMX2Table", "MX2"),
     ("kY1Table", "Y1"),
+    ("kY2Table", "Y2"),
     ("kMY1Table", "MY1"),
     ("kLayerNormalXTable", "LayerNormalX"),
     ("kMLayerNormalXTable", "MLayerNormalX"),

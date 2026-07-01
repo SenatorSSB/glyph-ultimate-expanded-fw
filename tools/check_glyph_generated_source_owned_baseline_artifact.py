@@ -26,7 +26,7 @@ CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 GENERATOR = REPO_ROOT / "tools/generate_source_owned_runtime_config.py"
 
-EXPECTED_TABLE_COUNT = 27
+EXPECTED_TABLE_COUNT = 28
 EXPECTED_POINT_COUNT = 9
 EXPECTED_AXES_PER_POINT = 2
 
@@ -231,7 +231,7 @@ def parse_source_stick_tables(text: str) -> dict[str, list[tuple[int, int]]]:
 
 def parse_source_baseline_order(text: str) -> list[str]:
     block_match = re.search(
-        r"kSourceOwnedCurrentBaselineRuntimeTables\s*\[\s*27\s*\]\s*=\s*\{(?P<body>.*?)\};",
+        r"kSourceOwnedCurrentBaselineRuntimeTables\s*\[\s*(?:kRuntimeTableCount|28)\s*\]\s*=\s*\{(?P<body>.*?)\};",
         text,
         re.DOTALL,
     )
@@ -301,7 +301,7 @@ def parse_generated_artifact(text: str) -> list[tuple[str, list[tuple[int, int]]
     if len(tables) != EXPECTED_TABLE_COUNT:
         fail(f"generated artifact must contain {EXPECTED_TABLE_COUNT} tables, found {len(tables)}")
     if sorted(seen_indexes) != list(range(EXPECTED_TABLE_COUNT)):
-        fail("generated artifact table indexes must be contiguous from 0 to 26")
+        fail(f"generated artifact table indexes must be contiguous from 0 to {EXPECTED_TABLE_COUNT - 1}")
     return tables
 
 

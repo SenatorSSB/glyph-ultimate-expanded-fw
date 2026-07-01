@@ -21,7 +21,7 @@ from typing import Any
 
 EXPECTED_SCHEMA_VERSION = 1
 EXPECTED_ARTIFACT_KIND = "generated_source_owned_runtime_config_table"
-EXPECTED_TABLE_COUNT = 27
+EXPECTED_TABLE_COUNT = 28
 EXPECTED_POINTS_PER_TABLE = 9
 EXPECTED_AXES_PER_POINT = 2
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -273,7 +273,7 @@ def emit_cpp_header(contract: dict[str, Any]) -> str:
         "static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigAxesPerPoint = "
         f"{shape['axes_per_point']}u;",
         "",
-        "static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2] = {",
+        f"static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[{EXPECTED_TABLE_COUNT}][9][2] = {{",
     ]
     for table in contract["tables"]:
         table_label = table["table_name"]
@@ -353,7 +353,7 @@ def parse_source_stick_tables(text: str) -> dict[str, list[tuple[int, int]]]:
 
 def parse_source_baseline_table_order(text: str) -> list[str]:
     block_match = re.search(
-        r"kSourceOwnedCurrentBaselineRuntimeTables\s*\[\s*27\s*\]\s*=\s*\{(?P<body>.*?)\};",
+        r"kSourceOwnedCurrentBaselineRuntimeTables\s*\[\s*(?:kRuntimeTableCount|28)\s*\]\s*=\s*\{(?P<body>.*?)\};",
         text,
         re.DOTALL,
     )

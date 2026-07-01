@@ -13,11 +13,11 @@ static constexpr char kGeneratedSourceOwnedRuntimeConfigArtifactKind[] = "genera
 static constexpr char kGeneratedSourceOwnedRuntimeConfigControllerFamily[] = "glyph_mk6";
 static constexpr char kGeneratedSourceOwnedRuntimeConfigProfileName[] = "example_source_owned_runtime_config";
 static constexpr std::uint32_t kGeneratedSourceOwnedRuntimeConfigRevision = 1u;
-static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTableCount = 27u;
+static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTableCount = 28u;
 static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigPointsPerTable = 9u;
 static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigAxesPerPoint = 2u;
 
-static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2] = {
+static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[28][9][2] = {
     {  // 0 Default
         {0u, 0u},
         {128u, 0u},
@@ -95,7 +95,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 7 MY1
+    {  // 7 Y2
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -106,7 +106,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 8 LayerNormalX
+    {  // 8 MY1
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -117,7 +117,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 9 MLayerNormalX
+    {  // 9 LayerNormalX
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -128,7 +128,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 10 LayerFlipper
+    {  // 10 MLayerNormalX
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -139,7 +139,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 11 MLayerFlipper
+    {  // 11 LayerFlipper
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -150,7 +150,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 12 Y1Tilt1
+    {  // 12 MLayerFlipper
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -161,7 +161,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 13 MY1Tilt1
+    {  // 13 Y1Tilt1
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -172,7 +172,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 14 Y1LayerFlipper
+    {  // 14 MY1Tilt1
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -183,7 +183,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 15 MY1LayerFlipper
+    {  // 15 Y1LayerFlipper
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -194,7 +194,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 16 Y1LayerNormalX
+    {  // 16 MY1LayerFlipper
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -205,7 +205,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 17 MY1LayerNormalX
+    {  // 17 Y1LayerNormalX
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -216,7 +216,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 18 Tilt1
+    {  // 18 MY1LayerNormalX
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -227,7 +227,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 19 Tilt2
+    {  // 19 Tilt1
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -238,7 +238,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 20 Tilt3
+    {  // 20 Tilt2
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -249,7 +249,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 21 Tilt1Minus41
+    {  // 21 Tilt3
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -260,7 +260,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 22 RT1RF4Custom
+    {  // 22 Tilt1Minus41
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -271,7 +271,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 23 MTilt1
+    {  // 23 RT1RF4Custom
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -282,7 +282,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 24 MTilt2
+    {  // 24 MTilt1
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -293,7 +293,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 25 MTilt3
+    {  // 25 MTilt2
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
@@ -304,7 +304,18 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2]
         {128u, 255u},
         {255u, 255u},
     },
-    {  // 26 Lt1LowMagnitude
+    {  // 26 MTilt3
+        {0u, 0u},
+        {128u, 0u},
+        {255u, 0u},
+        {0u, 128u},
+        {128u, 128u},
+        {255u, 128u},
+        {0u, 255u},
+        {128u, 255u},
+        {255u, 255u},
+    },
+    {  // 27 Lt1LowMagnitude
         {0u, 0u},
         {128u, 0u},
         {255u, 0u},
