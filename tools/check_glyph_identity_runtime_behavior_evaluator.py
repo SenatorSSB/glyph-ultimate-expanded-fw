@@ -518,7 +518,8 @@ def resolve_layer_state(inputs: InputState) -> LayerState:
 
 
 def resolve_effective_directions(inputs: InputState, layer: LayerState) -> EffectiveDirectionState:
-    y2_rf2_force_up_active = inputs.lt3 and not inputs.lf4 and inputs.rf2
+    y2_rf34_sublayer_anchor_active = inputs.lt3 and not inputs.lf4 and (inputs.rf3 or inputs.rf4)
+    y2_rf2_force_up_active = y2_rf34_sublayer_anchor_active and inputs.rf2
     lf4_submode_rf3_force_up_active = inputs.lf4 and inputs.rf3
     force_up_active = (
         inputs.rf5
@@ -544,8 +545,8 @@ def resolve_effective_directions(inputs: InputState, layer: LayerState) -> Effec
 def resolve_role_state(inputs: InputState, layer: LayerState, directions: EffectiveDirectionState) -> RoleState:
     down_a_active = inputs.lt6
     up_a_active = inputs.rf5
-    y2_sublayer_active = inputs.lt3 and not inputs.lf4 and (inputs.rf1 or inputs.rf2 or inputs.rf3 or inputs.rf4)
-    y2_rf3_active = inputs.lt3 and not inputs.lf4 and inputs.rf3
+    y2_sublayer_active = inputs.lt3 and not inputs.lf4 and (inputs.rf3 or inputs.rf4)
+    y2_rf3_active = y2_sublayer_active and inputs.rf3
     base_rf3_x_active = inputs.rf3 and not inputs.lt3 and not inputs.lf4
     rf9_base_rf3_x_mode_active = inputs.rf9 and base_rf3_x_active
     rf4_suppressed_by_rf9_rf3_mode = rf9_base_rf3_x_mode_active and inputs.rf4
@@ -590,11 +591,11 @@ def resolve_role_state(inputs: InputState, layer: LayerState, directions: Effect
 
 def apply_digital_button_outputs(inputs: InputState, layer: LayerState, roles: RoleState, outputs: OutputState) -> None:
     c_stick_any_active = inputs.rt2 or inputs.rt3 or inputs.rt4 or inputs.rt5
-    y2_sublayer_active = inputs.lt3 and not inputs.lf4 and (inputs.rf1 or inputs.rf2 or inputs.rf3 or inputs.rf4)
-    y2_rf1_x_active = inputs.lt3 and not inputs.lf4 and inputs.rf1 and not c_stick_any_active
+    y2_sublayer_active = inputs.lt3 and not inputs.lf4 and (inputs.rf3 or inputs.rf4)
+    y2_rf1_x_active = y2_sublayer_active and inputs.rf1 and not c_stick_any_active
     lf4_rf2_x_active = inputs.lf4 and inputs.rf2 and not c_stick_any_active
     base_rf1_a_active = inputs.rf1 and not y2_sublayer_active
-    base_rf2_b_active = inputs.rf2 and not inputs.lt3 and not inputs.lf4
+    base_rf2_b_active = inputs.rf2 and not inputs.lf4 and not y2_sublayer_active
 
     outputs.a = base_rf1_a_active or inputs.lt6 or inputs.rf5
     outputs.b = base_rf2_b_active or inputs.lf4 or inputs.rf7 or (inputs.lt3 and not inputs.lf4 and inputs.rf3)

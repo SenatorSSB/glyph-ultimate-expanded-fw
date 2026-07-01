@@ -315,7 +315,8 @@ LayerState ResolveLayerState(const InputState &inputs) {
 }
 
 EffectiveDirectionState ResolveEffectiveDirections(const InputState &inputs, const LayerState &layer) {
-    const bool y2_rf2_force_up_active = inputs.lt3 && !inputs.lf4 && inputs.rf2;
+    const bool y2_rf34_sublayer_anchor_active = inputs.lt3 && !inputs.lf4 && (inputs.rf3 || inputs.rf4);
+    const bool y2_rf2_force_up_active = y2_rf34_sublayer_anchor_active && inputs.rf2;
     const bool lf4_submode_rf3_force_up_active = inputs.lf4 && inputs.rf3;
 
     EffectiveDirectionState state;
@@ -332,8 +333,8 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     (void)layer;
     const bool down_a_active = inputs.lt6;
     const bool up_a_active = inputs.rf5;
-    const bool y2_sublayer_active = inputs.lt3 && !inputs.lf4 && (inputs.rf1 || inputs.rf2 || inputs.rf3 || inputs.rf4);
-    const bool y2_rf3_active = inputs.lt3 && !inputs.lf4 && inputs.rf3;
+    const bool y2_sublayer_active = inputs.lt3 && !inputs.lf4 && (inputs.rf3 || inputs.rf4);
+    const bool y2_rf3_active = y2_sublayer_active && inputs.rf3;
     const bool base_rf3_x_active = inputs.rf3 && !inputs.lt3 && !inputs.lf4;
     const bool rf9_base_rf3_x_mode_active = inputs.rf9 && base_rf3_x_active;
     const bool rf4_suppressed_by_rf9_rf3_mode = rf9_base_rf3_x_mode_active && inputs.rf4;
@@ -376,11 +377,11 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
 }
 
 void ApplyDigitalButtonOutputs(const InputState &inputs, const LayerState &layer, const RoleState &roles, OutputState &outputs) {
-    const bool y2_sublayer_active = inputs.lt3 && !inputs.lf4 && (inputs.rf1 || inputs.rf2 || inputs.rf3 || inputs.rf4);
-    const bool y2_rf1_x_active = inputs.lt3 && !inputs.lf4 && inputs.rf1 && !layer.c_stick_any_active;
+    const bool y2_sublayer_active = inputs.lt3 && !inputs.lf4 && (inputs.rf3 || inputs.rf4);
+    const bool y2_rf1_x_active = y2_sublayer_active && inputs.rf1 && !layer.c_stick_any_active;
     const bool lf4_rf2_x_active = inputs.lf4 && inputs.rf2 && !layer.c_stick_any_active;
     const bool base_rf1_a_active = inputs.rf1 && !y2_sublayer_active;
-    const bool base_rf2_b_active = inputs.rf2 && !inputs.lt3 && !inputs.lf4;
+    const bool base_rf2_b_active = inputs.rf2 && !inputs.lf4 && !y2_sublayer_active;
 
     outputs.a = base_rf1_a_active || inputs.lt6 || inputs.rf5;
     outputs.b = base_rf2_b_active || inputs.lf4 || inputs.rf7 || (inputs.lt3 && !inputs.lf4 && inputs.rf3);

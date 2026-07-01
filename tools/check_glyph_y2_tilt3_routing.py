@@ -145,11 +145,16 @@ def validate_y2_table_runtime_points() -> None:
 
 
 def validate_sublayer_migration() -> None:
-    assert_equal("Y2+RF1 emits X", digital_buttons(["LT3", "RF1"]), {"X"})
+    assert_equal("Y2+RF1 alone keeps base A", digital_buttons(["LT3", "RF1"]), {"A"})
+    assert_equal("Y2+RF1 alone keeps Y2 table", table_id(["LT3", "RF1"]), "Y2")
+    assert_equal("Y2+RF1+RF4 emits X", digital_buttons(["LT3", "RF1", "RF4"]), {"X"})
     assert_equal("Y1+RF1 no longer emits X sublayer", digital_buttons(["LT2", "RF1"]), {"A"})
 
-    assert_equal("Y2+RF2 forces up without base B", digital_buttons(["LT3", "RF2"]), set())
-    assert_equal("Y2+RF2 forced-up point", left_stick(["LT3", "RF2"]), (128, 205))
+    assert_equal("Y2+RF2 alone keeps base B", digital_buttons(["LT3", "RF2"]), {"B"})
+    assert_equal("Y2+RF2 alone keeps Y2 table", table_id(["LT3", "RF2"]), "Y2")
+    assert_equal("Y2+RF2 alone does not force up", left_stick(["LT3", "RF2"]), (128, 128))
+    assert_equal("Y2+RF2+RF4 forces up without base B", digital_buttons(["LT3", "RF2", "RF4"]), set())
+    assert_equal("Y2+RF2+RF4 forced-up point", left_stick(["LT3", "RF2", "RF4"]), (128, 205))
     assert_equal("Y1+RF2 no longer forces up", digital_buttons(["LT2", "RF2"]), {"B"})
     assert_equal("Y1+RF2 keeps Y1 neutral", left_stick(["LT2", "RF2"]), (128, 128))
 
