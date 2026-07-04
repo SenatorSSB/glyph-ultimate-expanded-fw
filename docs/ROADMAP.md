@@ -367,6 +367,23 @@ makes no RuntimeConfigView selection change, does not modify active source
 files, changes no active behavior, and requires no hardware test before merge
 for this contract-only branch.
 
+The latest layout Y2 port plan in
+`docs/runtime_config/latest_layout_y2_port_plan.md` with
+`docs/runtime_config/fixtures/latest_layout_y2_port_plan.json` and
+`tools/check_glyph_latest_layout_y2_port_plan.py` is docs/checker only. This
+branch does not implement the latest layout, does not validate hardware for the
+latest layout, and only defines the port plan for reapplying
+`codex/update-custom-modifier-tables-y2` onto current `configurator`. The plan
+uses source-owned table-content replacement where possible by classifying the
+existing `kTilt3Table` x/y change as the table-content-only candidate. It
+separates Y2 table identity, LT3/Y2 routing, `Ultimate.cpp` behavior,
+`UltimateRuntimeConfigInterpreter.hpp` table-order/schema changes, evaluator
+behavior, and checker expectations into routing/role work requiring a separate
+hardware gate if implemented. Do not port generated active-view or
+RuntimeConfigView replacement artifacts. Active behavior is unchanged, hardware
+test is not required before merge for this docs/checker branch, root cause is
+not proven, and Nunchuk remains NOT_TESTED.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

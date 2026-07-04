@@ -262,6 +262,28 @@ artifacts unless a specific packet says otherwise.
   duplicate JSON keys, validates exact table shape and byte ranges, verifies
   every table symbol exists exactly once, and refuses to write active source
   paths.
+- `latest_layout_y2_port_plan.md` - docs/checker-only port plan for reapplying
+  the latest intended Y2/Tilt3 layout from
+  `codex/update-custom-modifier-tables-y2` onto current `configurator` using
+  source-owned table-content replacement where possible. This branch does not
+  implement the latest layout, does not validate hardware for the latest
+  layout, and only defines the port plan. It records `kTilt3Table` as the
+  table-content-only candidate, records the intended Y2 values and routing
+  facts as separate routing/role work, and forbids direct merge of generated
+  active wrappers, RuntimeConfigView replacement, and active-view selection
+  changes. Nunchuk remains NOT_TESTED.
+- `fixtures/latest_layout_y2_port_plan.json` - machine-readable fixture for the
+  latest layout Y2 port plan; `docs_checker_only: true`,
+  `active_behavior_changed: false`,
+  `hardware_test_required_before_merge: false`,
+  `direct_merge_reference_branch_allowed: false`, runtime view replacement
+  disallowed, generated active wrapper disallowed, root cause not proven, and
+  Nunchuk remains NOT_TESTED.
+- `tools/check_glyph_latest_layout_y2_port_plan.py` - Python stdlib-only
+  checker for the latest layout Y2 port plan; rejects duplicate JSON keys,
+  accepts `runtime-config-latest-layout-y2-port-plan` and `configurator` after
+  merge, validates the branch is based on `configurator`, and enforces the
+  docs/checker-only changed-path allowlist.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`
@@ -387,6 +409,14 @@ artifacts unless a specific packet says otherwise.
   table symbols/order/shape and non-table source text, makes no
   RuntimeConfigView selection change, does not modify active source files, and
   requires no hardware test before merge for this contract-only branch.
+- Latest layout Y2 port plan is docs/checker only. This branch does not
+  implement the latest layout, does not validate hardware for the latest
+  layout, and only defines the port plan. It records `kTilt3Table` as the
+  table-content-only source-owned replacement candidate, records Y2 table
+  values and LT3/Y2 routing facts as separate routing/role work, and requires
+  any routing/role update to be hardware-gated because it changes
+  `Ultimate.cpp` and interpreter behavior. Do not port generated active-view or
+  RuntimeConfigView replacement artifacts. Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.
