@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-source-owned-table-replacement-design"
+GENERATOR_CONTRACT_BRANCH = "runtime-config-source-owned-table-replacement-generator-contract"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -21,11 +22,15 @@ README = REPO_ROOT / "docs/runtime_config/README.md"
 CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 CHECKER_REL = "tools/check_glyph_source_owned_table_replacement_design.py"
+GENERATOR_CONTRACT_CHECKER_REL = "tools/check_glyph_source_owned_table_replacement_generator_contract.py"
+GENERATOR_CONTRACT_TOOL_REL = "tools/generate_source_owned_table_replacement.py"
 
 ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
     CHECKER_REL,
+    GENERATOR_CONTRACT_CHECKER_REL,
+    GENERATOR_CONTRACT_TOOL_REL,
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/",)
 ALLOWED_EXISTING_CHECKERS = {
@@ -157,8 +162,11 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {EXPECTED_BRANCH, GENERATOR_CONTRACT_BRANCH, MERGED_BRANCH}:
+        fail(
+            f"checker must run on {EXPECTED_BRANCH}, {GENERATOR_CONTRACT_BRANCH}, "
+            f"or {MERGED_BRANCH}, got {branch}"
+        )
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,
@@ -180,7 +188,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH:
+    if branch in {EXPECTED_BRANCH, GENERATOR_CONTRACT_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

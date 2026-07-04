@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "packet": "source_owned_table_replacement_generator_contract",
+  "branch": "runtime-config-source-owned-table-replacement-generator-contract",
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "generator_contract_only": true,
+  "active_view_selection_changed": false,
+  "runtime_config_view_replacement_allowed": false,
+  "source_owned_table_content_replacement_wired": false,
+  "active_source_file_modified": false,
+  "output_fixture_only": true,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "generator": {
+    "path": "tools/generate_source_owned_table_replacement.py",
+    "stdlib_only": true,
+    "reads_current_source_table_file": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "active_source_output_by_default": false,
+    "preserves_table_symbol_names": true,
+    "preserves_table_symbol_order": true,
+    "preserves_table_shape": true,
+    "only_modifies_x_y_numeric_table_contents": true
+  },
+  "evidence": {
+    "source_owned_active_state_preselection": "HARDWARE_PASS",
+    "parsed_candidate_machinery_present_source_owned_active_view": "HARDWARE_PASS",
+    "parsed_candidate_view_active": "HARDWARE_FAIL",
+    "source_owned_materialized_candidate_view_active": "HARDWARE_FAIL",
+    "dedicated_active_storage_published_active": "HARDWARE_FAIL",
+    "generated_source_owned_baseline_active": "HARDWARE_FAIL"
+  },
+  "input_contract": {
+    "replacement_kind": "source_owned_table_content_replacement",
+    "target_file": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "table_shape": {
+      "table_count": 27,
+      "points_per_table": 9,
+      "axes_per_point": 2
+    }
+  },
+  "output_fixture": "docs/runtime_config/fixtures/generated_outputs/UltimateIdentityRuntimeTables.replacement.example.hpp",
+  "non_claims": [
+    "runtime_config_view_replacement",
+    "active_view_selection_change",
+    "active_source_file_modification",
+    "runtime_loaded_config",
+    "persistent_storage",
+    "webserial_device_write",
+    "backend_config_pb_write_path",
+    "flashing_automation",
+    "nunchuk_validation_claim"
+  ]
+}
