@@ -262,6 +262,34 @@ artifacts unless a specific packet says otherwise.
   duplicate JSON keys, validates exact table shape and byte ranges, verifies
   every table symbol exists exactly once, and refuses to write active source
   paths.
+- `diagnostic_source_owned_table_content_replacement.md` - hardware-gated
+  firmware diagnostic for replacing one existing source-owned `StickPoint`
+  table value while preserving the active
+  `kSourceOwnedCurrentBaselineRuntimeConfig` path and making no
+  `RuntimeConfigView` replacement. The exact source delta is
+  `kRT1RF4CustomTable[4]` from `(128, 128)` to `(129, 128)`.
+  `active_behavior_changed: true`, hardware test is required before merge,
+  runtime-loaded config/storage/write/WebSerial/flashing/backend config.pb
+  behavior remains not implemented, and Nunchuk remains NOT_TESTED.
+- `fixtures/diagnostic_source_owned_table_content_replacement.json` -
+  machine-readable diagnostic fixture with changed-point evidence,
+  `active_view_selection_changed: false`,
+  `runtime_config_view_replacement: false`, and
+  `source_owned_table_content_replacement_wired: true`.
+- `fixtures/source_owned_table_content_replacement_diagnostic_input.json` -
+  generator input fixture for the diagnostic table contents, preserving the
+  27-table, 9-point, 2-axis source-owned table shape.
+- `diagnostic_source_owned_table_content_replacement_build_report_2026-06-29.md` -
+  local build report for the source-owned table-content replacement
+  diagnostic; canonical command `pio run -e glyph_mk6`, artifact hashes local
+  observations only.
+- `fixtures/diagnostic_source_owned_table_content_replacement_build_report_2026-06-29.json` -
+  machine-readable build report metadata for the diagnostic branch.
+- `docs/calibration/diagnostic_source_owned_table_content_replacement_hardware_plan_2026-06-29.md`
+  - hardware-gated plan for the diagnostic branch; all rows are NOT_TESTED and
+    hardware PASS is required before merge.
+- `docs/calibration/fixtures/diagnostic_source_owned_table_content_replacement_hardware_plan_2026-06-29.json`
+  - matching machine-readable hardware plan fixture.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`

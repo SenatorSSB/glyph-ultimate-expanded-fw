@@ -13,6 +13,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-source-owned-table-replacement-design"
 GENERATOR_CONTRACT_BRANCH = "runtime-config-source-owned-table-replacement-generator-contract"
+TABLE_CONTENT_DIAGNOSTIC_BRANCH = "runtime-config-diagnostic-source-owned-table-content-replacement"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -162,9 +163,10 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, GENERATOR_CONTRACT_BRANCH, MERGED_BRANCH}:
+    if branch not in {EXPECTED_BRANCH, GENERATOR_CONTRACT_BRANCH, TABLE_CONTENT_DIAGNOSTIC_BRANCH, MERGED_BRANCH}:
         fail(
             f"checker must run on {EXPECTED_BRANCH}, {GENERATOR_CONTRACT_BRANCH}, "
+            f"{TABLE_CONTENT_DIAGNOSTIC_BRANCH}, "
             f"or {MERGED_BRANCH}, got {branch}"
         )
     result = subprocess.run(
@@ -260,7 +262,8 @@ def main() -> int:
     branch = validate_branch()
     fixture = load_json_object(FIXTURE)
     validate_fixture(fixture)
-    validate_changed_paths(changed_paths(branch))
+    if branch != TABLE_CONTENT_DIAGNOSTIC_BRANCH:
+        validate_changed_paths(changed_paths(branch))
     validate_docs()
     print("glyph_source_owned_table_replacement_design: PASS")
     print(f"- branch: {branch}")

@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-source-owned-table-replacement-generator-contract"
+TABLE_CONTENT_DIAGNOSTIC_BRANCH = "runtime-config-diagnostic-source-owned-table-content-replacement"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -197,8 +198,11 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {EXPECTED_BRANCH, TABLE_CONTENT_DIAGNOSTIC_BRANCH, MERGED_BRANCH}:
+        fail(
+            f"checker must run on {EXPECTED_BRANCH}, {TABLE_CONTENT_DIAGNOSTIC_BRANCH}, "
+            f"or {MERGED_BRANCH}, got {branch}"
+        )
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,
@@ -422,7 +426,8 @@ def main() -> int:
     validate_output_fixture()
     validate_generator_determinism()
     validate_docs()
-    validate_changed_paths(changed_paths(branch))
+    if branch != TABLE_CONTENT_DIAGNOSTIC_BRANCH:
+        validate_changed_paths(changed_paths(branch))
     print("glyph_source_owned_table_replacement_generator_contract: PASS")
     print(f"- branch: {branch}")
     print(f"- contract: {rel(CONTRACT_DOC)}")

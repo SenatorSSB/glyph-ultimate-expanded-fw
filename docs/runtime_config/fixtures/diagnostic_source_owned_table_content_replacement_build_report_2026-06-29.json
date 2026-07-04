@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "schema_name": "glyph_diagnostic_source_owned_table_content_replacement_build_report",
+  "packet": "diagnostic_source_owned_table_content_replacement_build_report_2026-06-29",
+  "branch": "runtime-config-diagnostic-source-owned-table-content-replacement",
+  "canonical_command": "pio run -e glyph_mk6",
+  "fallback_used": true,
+  "fallback_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "fallback_reason": "pio was unavailable in PATH",
+  "build_result": "PASS",
+  "artifact_hashes": [
+    {
+      "path": ".pio/build/glyph_mk6/firmware.elf",
+      "sha256": "e39397163c4c42f8097e3ee5236ecbf8f1cc5d45201b20808b17a5820d05b73f"
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.uf2",
+      "sha256": "94b4767097577c6e7ea6cb6fdcd8f94d6d2eda1eb7e940451cf1afca297a9d67"
+    },
+    {
+      "path": ".pio/build/glyph_mk6/firmware.bin",
+      "sha256": "f3d52b99e7feff20d42d562f42caca71d7bf976c20f2a1779dcb2d3b2287b7b9"
+    }
+  ],
+  "artifact_hashes_are_rebuild_stable": false,
+  "artifact_hashes_are_checker_gate": false,
+  "changed_source_file": "src/modes/UltimateIdentityRuntimeTables.hpp",
+  "changed_points": [
+    {
+      "table_symbol": "kRT1RF4CustomTable",
+      "point_index": 4,
+      "old_x": 128,
+      "old_y": 128,
+      "new_x": 129,
+      "new_y": 128,
+      "expected_scope": "Source-documented RT1+RF4 custom-table direction-5/center entry only."
+    }
+  ],
+  "active_behavior_changed": true,
+  "active_view_selection_changed": false,
+  "runtime_config_view_replacement": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED"
+}

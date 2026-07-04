@@ -367,6 +367,30 @@ makes no RuntimeConfigView selection change, does not modify active source
 files, changes no active behavior, and requires no hardware test before merge
 for this contract-only branch.
 
+The diagnostic branch
+`runtime-config-diagnostic-source-owned-table-content-replacement` is the first
+hardware-gated table-content replacement diagnostic. It uses
+`docs/runtime_config/fixtures/source_owned_table_content_replacement_diagnostic_input.json`
+and records
+`docs/runtime_config/diagnostic_source_owned_table_content_replacement.md` with
+`docs/runtime_config/fixtures/diagnostic_source_owned_table_content_replacement.json`.
+It changes only `src/modes/UltimateIdentityRuntimeTables.hpp` among firmware
+source files: `kRT1RF4CustomTable[4]` changes from `(128, 128)` to
+`(129, 128)`. The active `RuntimeConfigView` path remains
+`GetActiveRuntimeConfigState().active_view` to
+`kSourceOwnedCurrentBaselineRuntimeConfig` and the existing
+`kSourceOwnedCurrentBaselineRuntimeTables`; `active_view_selection_changed:
+false`, `runtime_config_view_replacement: false`, and
+`source_owned_table_content_replacement_wired: true` are required. The local
+build report is
+`docs/runtime_config/diagnostic_source_owned_table_content_replacement_build_report_2026-06-29.md`.
+The hardware plan is
+`docs/calibration/diagnostic_source_owned_table_content_replacement_hardware_plan_2026-06-29.md`.
+Because active behavior changed, hardware PASS is required before merge.
+Runtime-loaded config, storage, WebSerial/device write, backend/config.pb write
+path, and flashing automation remain not implemented. Nunchuk remains
+NOT_TESTED.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

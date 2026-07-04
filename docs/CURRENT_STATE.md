@@ -390,6 +390,28 @@ engineering decisions.
   runtime-loaded config, persistent storage, WebSerial/device write,
   backend/config.pb write path, or flashing automation, and nunchuk
   `NOT_TESTED` remains unchanged.
+- The diagnostic branch
+  `runtime-config-diagnostic-source-owned-table-content-replacement` is
+  hardware-gated firmware behavior work for replacing contents of an existing
+  source-owned `StickPoint` table while preserving the active
+  `kSourceOwnedCurrentBaselineRuntimeConfig` publication path. It changes only
+  `src/modes/UltimateIdentityRuntimeTables.hpp` among firmware source files:
+  `kRT1RF4CustomTable[4]` changes from `(128, 128)` to `(129, 128)`.
+  `active_behavior_changed: true`, `active_view_selection_changed: false`,
+  `runtime_config_view_replacement: false`, and
+  `source_owned_table_content_replacement_wired: true` are recorded in
+  `docs/runtime_config/diagnostic_source_owned_table_content_replacement.md`
+  and
+  `docs/runtime_config/fixtures/diagnostic_source_owned_table_content_replacement.json`.
+  The generator input fixture is
+  `docs/runtime_config/fixtures/source_owned_table_content_replacement_diagnostic_input.json`;
+  the build report is
+  `docs/runtime_config/diagnostic_source_owned_table_content_replacement_build_report_2026-06-29.md`;
+  the hardware plan is
+  `docs/calibration/diagnostic_source_owned_table_content_replacement_hardware_plan_2026-06-29.md`.
+  Runtime-loaded config, persistent storage, WebSerial/device write,
+  backend/config.pb write path, and flashing automation remain not implemented.
+  Nunchuk remains NOT_TESTED, and hardware PASS is required before merge.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

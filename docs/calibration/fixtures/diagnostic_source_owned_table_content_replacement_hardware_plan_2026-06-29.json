@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "schema_name": "glyph_diagnostic_source_owned_table_content_replacement_hardware_plan",
+  "packet": "diagnostic_source_owned_table_content_replacement_hardware_plan_2026-06-29",
+  "branch": "runtime-config-diagnostic-source-owned-table-content-replacement",
+  "hardware_test_required_before_merge": true,
+  "active_behavior_changed": true,
+  "nunchuk_status": "NOT_TESTED",
+  "rows": [
+    {
+      "id": "BOOT-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "BASELINE-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "RF5-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "LT6-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "ORDINARY-DIR-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "NEUTRAL-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "TABLE-CONTENT-REPLACEMENT-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "ACTIVE-VIEW-SELECTION-UNCHANGED-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "RUNTIMECONFIGVIEW-UNCHANGED-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "NO-PARSER-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "NO-STORAGE-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "NO-WRITE-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "NO-FLASH-001",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "NUNCHUK-001",
+      "status": "NOT_TESTED"
+    }
+  ]
+}

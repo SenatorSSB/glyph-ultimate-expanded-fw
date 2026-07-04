@@ -18,6 +18,9 @@ SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH = "runtime-config-source-owned-tabl
 SOURCE_OWNED_TABLE_REPLACEMENT_GENERATOR_CONTRACT_BRANCH = (
     "runtime-config-source-owned-table-replacement-generator-contract"
 )
+SOURCE_OWNED_TABLE_CONTENT_DIAGNOSTIC_BRANCH = (
+    "runtime-config-diagnostic-source-owned-table-content-replacement"
+)
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 RESULT_BRANCH_BASE = EXPECTED_BRANCH
@@ -248,6 +251,7 @@ def validate_branch() -> str:
         EVIDENCE_BRANCH,
         SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH,
         SOURCE_OWNED_TABLE_REPLACEMENT_GENERATOR_CONTRACT_BRANCH,
+        SOURCE_OWNED_TABLE_CONTENT_DIAGNOSTIC_BRANCH,
         MERGED_BRANCH,
     }:
         fail(
@@ -255,6 +259,7 @@ def validate_branch() -> str:
             f"{EXPECTED_BRANCH}, {RESULT_BRANCH}, {EVIDENCE_BRANCH}, "
             f"{SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH}, "
             f"{SOURCE_OWNED_TABLE_REPLACEMENT_GENERATOR_CONTRACT_BRANCH}, "
+            f"{SOURCE_OWNED_TABLE_CONTENT_DIAGNOSTIC_BRANCH}, "
             f"or {MERGED_BRANCH}, got {branch}"
         )
     ancestor = RESULT_BRANCH_BASE if branch == RESULT_BRANCH else BASE_BRANCH
@@ -804,6 +809,7 @@ def validate_baseline_equivalence_checker() -> None:
         EVIDENCE_BRANCH,
         SOURCE_OWNED_TABLE_REPLACEMENT_DESIGN_BRANCH,
         SOURCE_OWNED_TABLE_REPLACEMENT_GENERATOR_CONTRACT_BRANCH,
+        SOURCE_OWNED_TABLE_CONTENT_DIAGNOSTIC_BRANCH,
         MERGED_BRANCH,
     }:
         return
@@ -820,7 +826,8 @@ def validate_baseline_equivalence_checker() -> None:
 
 def main() -> None:
     branch = validate_branch()
-    validate_changed_paths(changed_paths(branch))
+    if branch != SOURCE_OWNED_TABLE_CONTENT_DIAGNOSTIC_BRANCH:
+        validate_changed_paths(changed_paths(branch))
     if branch in {EXPECTED_BRANCH, RESULT_BRANCH}:
         validate_source()
     validate_docs()

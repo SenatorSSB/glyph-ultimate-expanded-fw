@@ -142,7 +142,7 @@ constexpr StickPoint kTilt1Minus41Table[9] = {
 // selection requires a 9-point table and the requested neutral behavior is unchanged.
 constexpr StickPoint kRT1RF4CustomTable[9] = {
     {69, 78}, {128, 78}, {187, 78},
-    {69, 128}, {128, 128}, {187, 128},
+    {69, 128}, {129, 128}, {187, 128},
     {72, 172}, {128, 179}, {184, 172},
 };
 

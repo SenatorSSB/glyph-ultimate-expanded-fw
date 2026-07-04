@@ -98,6 +98,15 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_plan_2026-06-29.json`
   - matching machine-readable generated source-owned baseline active diagnostic
     hardware plan fixture. Nunchuk remains NOT_TESTED.
+- `diagnostic_source_owned_table_content_replacement_hardware_plan_2026-06-29.md`
+  - hardware-gated plan for
+    `runtime-config-diagnostic-source-owned-table-content-replacement`; the
+    source delta is `kRT1RF4CustomTable[4]` from `(128, 128)` to `(129, 128)`,
+    active `RuntimeConfigView` selection remains unchanged, and all rows are
+    NOT_TESTED pending hardware. Nunchuk remains NOT_TESTED.
+- `fixtures/diagnostic_source_owned_table_content_replacement_hardware_plan_2026-06-29.json`
+  - matching machine-readable hardware plan fixture for the source-owned
+    table-content replacement diagnostic.
 
 ## Official Configurator Corpus And Source Correction
 

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "schema_name": "glyph_diagnostic_source_owned_table_content_replacement",
+  "packet": "diagnostic_source_owned_table_content_replacement",
+  "branch": "runtime-config-diagnostic-source-owned-table-content-replacement",
+  "base_branch": "configurator",
+  "active_behavior_changed": true,
+  "hardware_test_required_before_merge": true,
+  "active_view_selection_changed": false,
+  "runtime_config_view_replacement": false,
+  "source_owned_table_content_replacement_wired": true,
+  "changed_source_file": "src/modes/UltimateIdentityRuntimeTables.hpp",
+  "changed_points": [
+    {
+      "table_symbol": "kRT1RF4CustomTable",
+      "point_index": 4,
+      "old_x": 128,
+      "old_y": 128,
+      "new_x": 129,
+      "new_y": 128,
+      "expected_scope": "Source-documented RT1+RF4 custom-table direction-5/center entry only; user-visible behavior is expected only when that existing source path selects kRT1RF4CustomTable point index 4."
+    }
+  ],
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "active_runtime_config_view_path": "GetActiveRuntimeConfigState().active_view -> kSourceOwnedCurrentBaselineRuntimeConfig -> kSourceOwnedCurrentBaselineRuntimeTables -> existing StickPoint symbols",
+  "runtime_config_view_symbols_changed": false,
+  "runtime_table_view_array_identity_changed": false,
+  "candidate_view_published_active": false,
+  "accepted_evidence": {
+    "source_owned_active_state_preselection": "HARDWARE_PASS",
+    "parsed_candidate_machinery_present_source_owned_active_view": "HARDWARE_PASS",
+    "parsed_candidate_view_active": "HARDWARE_FAIL",
+    "source_owned_materialized_candidate_view_active": "HARDWARE_FAIL",
+    "dedicated_active_storage_published_active": "HARDWARE_FAIL",
+    "generated_source_owned_baseline_active": "HARDWARE_FAIL"
+  }
+}
