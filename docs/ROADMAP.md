@@ -403,6 +403,29 @@ RuntimeConfigView replacement artifacts. Active behavior is unchanged, hardware
 test is not required before merge for this docs/checker branch, root cause is
 not proven, and Nunchuk remains NOT_TESTED.
 
+The Glyph coordinate-native runtime plan in
+`docs/runtime_config/glyph_coordinate_native_runtime_plan.md` with
+`docs/runtime_config/fixtures/glyph_coordinate_native_runtime_plan.json`
+records the forward architecture after the source-owned Y2 layout
+HARDWARE_PASS. It accepts prior active-publication HARDWARE_FAIL evidence and
+keeps current v0 production on source-owned firmware generation as v0:
+neutral/profile intent becomes generated source-owned tables/routing source,
+then a firmware build uses the existing active `RuntimeConfigView` path. The
+long-term target remains a coordinate-native runtime profile, not the existing
+generic scalar analog modifier/custom-mode abstraction as canonical model. The
+required runtime primitive is active role/modifier state plus resolved
+direction key 1..9 to exact raw coordinate, including neutral 5, full 9-way
+asymmetry, and explicit routing/sublayers/priorities. Y1/Y2/Tilt/Layer-style
+behavior requires profile-level routing primitives. Browser/protobuf/persistence
+as future infrastructure is likely solvable, but the neutral app-owned profile
+remains canonical and firmware-independent. Glyph firmware should become a
+deterministic coordinate-output backend; firmware should not own game
+semantics, and Senscope/dataset/solver owns game semantics. Active behavior is
+unchanged, hardware test is not required before merge for this docs/checker
+branch, RuntimeConfigView replacement and RAM-backed/candidate active
+publication remain disallowed, root cause remains unproven, and Nunchuk
+remains NOT_TESTED.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

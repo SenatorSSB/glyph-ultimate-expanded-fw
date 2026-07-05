@@ -446,6 +446,16 @@ artifacts unless a specific packet says otherwise.
   any routing/role update to be hardware-gated because it changes
   `Ultimate.cpp` and interpreter behavior. Do not port generated active-view or
   RuntimeConfigView replacement artifacts. Nunchuk remains NOT_TESTED.
+- Glyph coordinate-native runtime plan is docs/checker only. It follows the
+  source-owned Y2 layout HARDWARE_PASS, records prior active-publication
+  HARDWARE_FAIL evidence, and keeps source-owned firmware generation as v0
+  through generated source-owned tables/routing source, firmware build, and the
+  existing active `RuntimeConfigView` path. The future target is a
+  coordinate-native runtime profile. Browser/protobuf/persistence as future
+  infrastructure is likely solvable, but the neutral app-owned profile remains
+  canonical. RuntimeConfigView replacement, generated active wrappers,
+  `candidate.view` active publication, and RAM-backed active table publication
+  remain disallowed. Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.

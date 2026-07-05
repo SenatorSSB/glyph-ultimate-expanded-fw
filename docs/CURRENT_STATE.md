@@ -153,6 +153,25 @@ packets remain under `docs/calibration/`.
   active, RAM-backed active table publication is not used, the source-owned
   table/routing source path passed hardware for this layout, root cause remains
   unproven, and Nunchuk remains NOT_TESTED.
+- Glyph coordinate-native runtime plan is recorded in
+  `docs/runtime_config/glyph_coordinate_native_runtime_plan.md` with
+  `docs/runtime_config/fixtures/glyph_coordinate_native_runtime_plan.json`.
+  This docs/checker-only branch follows the source-owned Y2 layout
+  HARDWARE_PASS, records prior active-publication HARDWARE_FAIL evidence, and
+  changes no active firmware behavior. Current v0 production remains
+  source-owned firmware generation as v0: neutral/profile intent becomes
+  generated source-owned tables/routing source, then a firmware build uses the
+  existing active `RuntimeConfigView` path. The future target is a
+  coordinate-native runtime profile where active role/modifier state plus
+  resolved direction key 1..9 maps to exact raw coordinates, including neutral
+  5, full 9-way asymmetry, and explicit routing/sublayers/priorities.
+  Browser/protobuf/persistence as future infrastructure is likely solvable, but
+  the neutral app-owned profile remains canonical. Firmware should not own game
+  semantics; Senscope/dataset/solver owns game semantics. RuntimeConfigView
+  replacement, generated active wrappers, `candidate.view` active publication,
+  and RAM-backed active table publication remain disallowed for current v0.
+  Root cause remains unproven, hardware test is not required for this
+  docs/checker branch, and Nunchuk remains NOT_TESTED.
 
 ## Official Configurator Corpus
 
@@ -429,6 +448,24 @@ engineering decisions.
   RuntimeConfigView replacement artifacts. Active behavior is unchanged,
   hardware test is not required before merge for this docs/checker branch,
   root cause is not proven, and Nunchuk remains NOT_TESTED.
+- Glyph coordinate-native runtime plan is recorded in
+  `docs/runtime_config/glyph_coordinate_native_runtime_plan.md` with
+  `docs/runtime_config/fixtures/glyph_coordinate_native_runtime_plan.json`.
+  It is docs/checker only and follows the source-owned Y2 layout
+  HARDWARE_PASS. It records prior active-publication HARDWARE_FAIL evidence,
+  keeps active behavior unchanged, and requires no hardware test before merge.
+  Current v0 production remains source-owned firmware generation as v0 through
+  generated source-owned tables/routing source, firmware build, and the
+  existing active `RuntimeConfigView` path. The future target is a
+  coordinate-native runtime profile whose primitive is active role/modifier
+  state plus resolved direction key 1..9 to exact raw coordinate, with neutral
+  5, full 9-way asymmetry, and explicit routing/sublayers/priorities.
+  Browser/protobuf/persistence as future infrastructure is likely solvable, but
+  the neutral app-owned profile remains canonical. Firmware should not own game
+  semantics; Senscope/dataset/solver owns game semantics. RuntimeConfigView
+  replacement, generated active wrappers, `candidate.view` active publication,
+  and RAM-backed active table publication remain disallowed under current v0.
+  Root cause remains unproven and Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.
