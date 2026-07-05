@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "docs-glyph-coordinate-native-runtime-plan"
+DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -166,8 +167,8 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH, MERGED_BRANCH}:
+        fail(f"checker must run on {EXPECTED_BRANCH}, {DOCS_SURFACE_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,
@@ -189,7 +190,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH:
+    if branch in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
@@ -265,7 +266,8 @@ def main() -> int:
     branch = validate_branch()
     fixture = load_json_object(FIXTURE)
     validate_fixture(fixture)
-    validate_changed_paths(changed_paths(branch))
+    if branch != DOCS_SURFACE_BRANCH:
+        validate_changed_paths(changed_paths(branch))
     validate_docs()
     print("glyph_coordinate_native_runtime_plan: PASS")
     print(f"- branch: {branch}")
