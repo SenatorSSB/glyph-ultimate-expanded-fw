@@ -14,6 +14,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IMPLEMENTATION_BRANCH = "runtime-config-latest-y2-layout-source-owned-port"
 RESULT_BRANCH = "runtime-config-latest-y2-layout-source-owned-port-hardware-result"
+RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
@@ -243,7 +244,7 @@ def current_branch() -> str:
 def base_branch_for(branch: str) -> str:
     if branch == RESULT_BRANCH:
         return IMPLEMENTATION_BRANCH
-    if branch in {DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH}:
+    if branch in {DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH}:
         return BASE_BRANCH
     if branch == MERGED_BRANCH:
         return MERGED_BRANCH
@@ -252,7 +253,7 @@ def base_branch_for(branch: str) -> str:
 
 def validate_branch() -> tuple[str, str]:
     branch = current_branch()
-    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH}:
+    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH}:
         fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     base_branch = base_branch_for(branch)
     result = subprocess.run(
@@ -276,7 +277,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str, base_branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == RESULT_BRANCH:
+    if branch in {RESULT_BRANCH, RECOVERY_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{base_branch}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

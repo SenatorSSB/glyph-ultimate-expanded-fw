@@ -6,7 +6,8 @@ Runner prompt and runner implementation are intentionally deferred. These are
 Codex/OpenAI operator-facing templates for bounded supervisor cycles and
 explicit subagent handoffs. They do not authorize browser/device write,
 WebSerial/device write, runtime-loaded profiles, daemon work, or scheduled
-automation.
+automation. They assume the supervisor will execute the bounded workflow
+itself and report results only after the requested operations have completed.
 
 ## Supervisor Cycle Prompt
 
@@ -48,6 +49,7 @@ Final report:
 - build requirement
 - hardware requirement
 - behavior classification
+- branch / validation / commit / push / merge outcomes if applicable
 - preserved facts
 ```
 

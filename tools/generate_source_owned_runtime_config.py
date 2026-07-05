@@ -100,7 +100,7 @@ def require_string(label: str, value: Any) -> str:
     return value
 
 
-def validate_shape(payload: dict[str, Any]) -> dict[str, int]:
+def validate_shape(payload: dict[str, Any], *, expected_table_count: int = EXPECTED_TABLE_COUNT) -> dict[str, int]:
     shape = payload.get("table_shape")
     if not isinstance(shape, dict):
         fail("table_shape must be an object")
@@ -113,8 +113,8 @@ def validate_shape(payload: dict[str, Any]) -> dict[str, int]:
         maximum=255,
     )
     axes_per_point = require_int("table_shape.axes_per_point", shape["axes_per_point"], minimum=0, maximum=255)
-    if table_count != EXPECTED_TABLE_COUNT:
-        fail(f"table_shape.table_count must be {EXPECTED_TABLE_COUNT}")
+    if table_count != expected_table_count:
+        fail(f"table_shape.table_count must be {expected_table_count}")
     if points_per_table != EXPECTED_POINTS_PER_TABLE:
         fail(f"table_shape.points_per_table must be {EXPECTED_POINTS_PER_TABLE}")
     if axes_per_point != EXPECTED_AXES_PER_POINT:
@@ -126,9 +126,9 @@ def validate_shape(payload: dict[str, Any]) -> dict[str, int]:
     }
 
 
-def table_sort_key(table: dict[str, Any]) -> tuple[int, int | str]:
+def table_sort_key(table: dict[str, Any], *, max_table_id: int) -> tuple[int, int | str]:
     if "table_id" in table:
-        return (0, require_int("tables[].table_id", table["table_id"], minimum=0, maximum=EXPECTED_TABLE_COUNT - 1))
+        return (0, require_int("tables[].table_id", table["table_id"], minimum=0, maximum=max_table_id))
     return (1, require_string("tables[].table_name", table.get("table_name")))
 
 
@@ -211,10 +211,10 @@ def validate_tables(payload: dict[str, Any], shape: dict[str, int]) -> list[dict
 
     if saw_table_id and saw_table_name_only:
         fail("tables must use table_id for all tables or table_name-only for all tables")
-    return sorted(normalized_tables, key=table_sort_key)
+    return sorted(normalized_tables, key=lambda table: table_sort_key(table, max_table_id=shape["table_count"] - 1))
 
 
-def validate_payload(payload: dict[str, Any]) -> dict[str, Any]:
+def validate_payload(payload: dict[str, Any], *, expected_table_count: int = EXPECTED_TABLE_COUNT) -> dict[str, Any]:
     require_keys("generator input", payload, REQUIRED_TOP_LEVEL_KEYS)
     schema_version = require_int("schema_version", payload["schema_version"], minimum=1, maximum=255)
     if schema_version != EXPECTED_SCHEMA_VERSION:
@@ -225,7 +225,7 @@ def validate_payload(payload: dict[str, Any]) -> dict[str, Any]:
     controller_family = require_string("controller_family", payload["controller_family"])
     profile_name = require_string("profile_name", payload["profile_name"])
     revision = require_int("revision", payload["revision"], minimum=0)
-    shape = validate_shape(payload)
+    shape = validate_shape(payload, expected_table_count=expected_table_count)
     tables = validate_tables(payload, shape)
     return {
         "schema_version": schema_version,
@@ -273,7 +273,8 @@ def emit_cpp_header(contract: dict[str, Any]) -> str:
         "static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigAxesPerPoint = "
         f"{shape['axes_per_point']}u;",
         "",
-        "static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[27][9][2] = {",
+        "static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables["
+        f"{shape['table_count']}][{shape['points_per_table']}][{shape['axes_per_point']}] = {{",
     ]
     for table in contract["tables"]:
         table_label = table["table_name"]
@@ -311,6 +312,7 @@ def parse_source_owned_baseline_contract() -> dict[str, Any]:
                 "points": [{"x": x, "y": y} for x, y in points],
             }
         )
+    table_count = len(ordered_symbols)
     return validate_payload(
         {
             "schema_version": EXPECTED_SCHEMA_VERSION,
@@ -319,12 +321,13 @@ def parse_source_owned_baseline_contract() -> dict[str, Any]:
             "profile_name": "current_source_owned_baseline_runtime_config",
             "revision": 1,
             "table_shape": {
-                "table_count": EXPECTED_TABLE_COUNT,
+                "table_count": table_count,
                 "points_per_table": EXPECTED_POINTS_PER_TABLE,
                 "axes_per_point": EXPECTED_AXES_PER_POINT,
             },
             "tables": tables,
-        }
+        },
+        expected_table_count=table_count,
     )
 
 
@@ -353,7 +356,7 @@ def parse_source_stick_tables(text: str) -> dict[str, list[tuple[int, int]]]:
 
 def parse_source_baseline_table_order(text: str) -> list[str]:
     block_match = re.search(
-        r"kSourceOwnedCurrentBaselineRuntimeTables\s*\[\s*27\s*\]\s*=\s*\{(?P<body>.*?)\};",
+        r"kSourceOwnedCurrentBaselineRuntimeTables\s*\[\s*[^\]]+\s*\]\s*=\s*\{(?P<body>.*?)\};",
         text,
         re.DOTALL,
     )
@@ -363,8 +366,8 @@ def parse_source_baseline_table_order(text: str) -> list[str]:
         r"\{\s*RuntimeTableId::[A-Za-z0-9_]+\s*,\s*\"(?P<symbol>k[A-Za-z0-9_]+Table)\"\s*,\s*(?P=symbol)\s*,"
     )
     symbols = [match.group("symbol") for match in row_re.finditer(block_match.group("body"))]
-    if len(symbols) != EXPECTED_TABLE_COUNT:
-        fail(f"baseline table order must contain {EXPECTED_TABLE_COUNT} tables, found {len(symbols)}")
+    if len(symbols) < EXPECTED_TABLE_COUNT:
+        fail(f"baseline table order must contain at least {EXPECTED_TABLE_COUNT} tables, found {len(symbols)}")
     if len(set(symbols)) != len(symbols):
         fail("baseline table order contains duplicate symbols")
     return symbols

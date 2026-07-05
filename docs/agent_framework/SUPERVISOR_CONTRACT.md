@@ -3,7 +3,8 @@
 Status label: CURRENT.
 
 The supervisor is thin. It coordinates bounded work, enforces gates, and
-produces the final branch recommendation.
+executes the bounded workflow end-to-end, then produces the final branch
+recommendation.
 
 ## Owns
 
@@ -12,7 +13,9 @@ produces the final branch recommendation.
 - Explicit subagent instantiation and bounded handoffs.
 - Branch classification before merge recommendation.
 - Build, checker, hardware, and source-authority gates.
-- Final report.
+- Branch creation, validation, bounded fix loops, commit, push, safe merge, and
+  post-merge validation when those actions are in scope.
+- Final report after the requested actions have actually completed.
 - Status doc updates.
 - Queue reseeding for the next bounded cycle.
 - Codex/OpenAI model routing decisions for the cycle.
@@ -25,6 +28,7 @@ produces the final branch recommendation.
 - Hardware requests for docs/checker-only branches with active behavior
   unchanged.
 - Bypassing build or hardware gates.
+- Reporting commands instead of executing the requested workflow.
 
 ## Required Behavior
 
@@ -38,6 +42,8 @@ produces the final branch recommendation.
   `candidate.view`, active `active_storage.view`, generated active
   RuntimeConfigView wrapper publication, RAM-backed active table publication,
   device write, protobuf binary write, persistence, or flashing automation.
+- Do the work before reporting completion: branch creation, validation,
+  bounded fix loops, commit, push, and safe merge only when gates pass.
 - Preserve current facts: Nunchuk remains NOT_TESTED, root cause remains
   unproven, runtime-loaded config is not implemented.
 

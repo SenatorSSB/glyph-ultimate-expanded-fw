@@ -3,6 +3,9 @@
 Status label: CURRENT.
 
 Every branch needs a behavior classification before merge recommendation.
+The supervisor must execute the required branch, validation, commit, push, and
+merge operations when they are in scope; it must not stop at reporting the
+commands.
 
 ## Classifications
 

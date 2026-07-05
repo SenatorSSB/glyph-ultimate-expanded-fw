@@ -6,7 +6,9 @@ This directory installs durable supervisor/subagent contracts for Glyph
 firmware-backend work. It is documentation, schemas, examples, and checkers
 only. It does not implement a runner, daemon, scheduled automation, browser or
 device write path, runtime-loaded profile, or active firmware routing change.
-Current operations are Codex/OpenAI-only.
+Current operations are Codex/OpenAI-only, and the supervisor is expected to
+execute the bounded workflow itself rather than merely report shell commands
+for a human to run.
 
 ## Scope
 
@@ -37,7 +39,8 @@ Out of scope:
 Use a thin supervisor with bounded specialist subagents:
 
 - The supervisor owns prioritization, branch classification, gates, handoffs,
-  merge recommendation, status updates, and queue reseeding.
+  branch creation, validation, bounded fix loops, commit, push, safe merge
+  recommendation, status updates, and queue reseeding.
 - Subagents inspect or edit within explicit scope and return compact evidence.
 - The judge/watchdog reviews loop risk and merge readiness.
 - Long work is many bounded cycles, not one unbounded monolithic conversation.
