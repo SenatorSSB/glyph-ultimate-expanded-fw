@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Glyph Subagent Handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "role",
+    "branch_worktree",
+    "objective",
+    "scope",
+    "excluded_scope",
+    "allowed_files",
+    "forbidden_files",
+    "active_behavior_constraints",
+    "verification_required",
+    "stop_conditions",
+    "return_format",
+    "tool_budget"
+  ],
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "planner",
+        "architecture_specialist",
+        "implementer",
+        "validator_reviewer",
+        "docs_status_clerk",
+        "judge_watchdog"
+      ]
+    },
+    "branch_worktree": { "type": "string", "minLength": 1 },
+    "objective": { "type": "string", "minLength": 1 },
+    "scope": { "type": "string", "minLength": 1 },
+    "excluded_scope": { "type": "string", "minLength": 1 },
+    "allowed_files": { "type": "array", "items": { "type": "string" } },
+    "forbidden_files": { "type": "array", "items": { "type": "string" } },
+    "active_behavior_constraints": { "type": "array", "items": { "type": "string" } },
+    "verification_required": { "type": "array", "items": { "type": "string" } },
+    "stop_conditions": { "type": "array", "items": { "type": "string" } },
+    "return_format": { "type": "string", "minLength": 1 },
+    "tool_budget": { "type": "string", "minLength": 1 }
+  }
+}

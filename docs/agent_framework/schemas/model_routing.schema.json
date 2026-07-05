@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Glyph Agent Model Routing",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "roles"],
+  "properties": {
+    "version": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "minLength": 1 },
+    "roles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "default_model",
+          "default_reasoning_effort",
+          "escalation_model",
+          "escalation_reasoning_effort",
+          "escalation_triggers",
+          "deescalation_triggers",
+          "output_contract",
+          "tool_permission_posture"
+        ],
+        "properties": {
+          "role": { "type": "string" },
+          "default_model": { "type": "string" },
+          "default_reasoning_effort": { "type": "string" },
+          "escalation_model": { "type": "string" },
+          "escalation_reasoning_effort": { "type": "string" },
+          "escalation_triggers": { "type": "string" },
+          "deescalation_triggers": { "type": "string" },
+          "output_contract": { "type": "string" },
+          "tool_permission_posture": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -58,5 +58,6 @@ automation from this context document.
 - Implementation boundary:
   `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`.
 - Runtime-config surface: `docs/runtime_config/README.md`.
+- Agent framework: `docs/agent_framework/README.md`.
 - Archive index: `docs/archive/README.md`.
 - Calibration evidence index: `docs/calibration/INDEX.md`.
