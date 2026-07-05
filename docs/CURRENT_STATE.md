@@ -132,18 +132,27 @@ packets remain under `docs/calibration/`.
   parser integration, WebSerial/device write, protobuf binary write, and
   firmware flashing automation remain not implemented.
 - The latest Y2 layout source-owned port is implemented on
-  `runtime-config-latest-y2-layout-source-owned-port` as firmware behavior work
-  and is `WAITING_FOR_HARDWARE_TEST` before merge. It restores the full latest
-  layout from `codex/update-custom-modifier-tables-y2`: LT3 selects Y2 and no
-  longer emits L/R digital, Y1 is a simple modifier, former Y1 RF sublayers are
-  migrated to Y2, Tilt3 and Y2 tables use the latest required values, and
-  Y2+RT1+RF4 selects Tilt3. It preserves the source-owned active publication
-  boundary: `GetActiveRuntimeConfigState()` still publishes
+  `runtime-config-latest-y2-layout-source-owned-port` as firmware behavior work.
+  Its hardware result is recorded on
+  `runtime-config-latest-y2-layout-source-owned-port-hardware-result` as a
+  `HARDWARE_PASS`; the user report is "everything works, all usual tests pass,
+  including Up+A and Down+A", RF5 forced A + Up and LT6 forced A + Down pass
+  without disconnect, the full latest Y2 layout behavior is accepted by
+  hardware testing, and Y1 simple / Y2 sublayer migration is accepted by
+  hardware testing. The full latest Y2 layout source-owned port is
+  merge-approved after hardware PASS. It restores the full latest layout from
+  `codex/update-custom-modifier-tables-y2`: LT3 selects Y2 and no longer emits
+  L/R digital, Y1 is a simple modifier, former Y1 RF sublayers are migrated to
+  Y2, Tilt3 and Y2 tables use the latest required values, and Y2+RT1+RF4
+  selects Tilt3. It preserves the source-owned active publication boundary:
+  `GetActiveRuntimeConfigState()` still publishes
   `&kSourceOwnedCurrentBaselineRuntimeConfig`, `ResolveActiveRuntimeConfig()`
-  still dereferences `GetActiveRuntimeConfigState().active_view`,
-  RuntimeConfigView replacement is not used, `candidate.view` is not active,
-  RAM-backed active table publication is not used, root cause remains unproven,
-  and Nunchuk remains NOT_TESTED.
+  still dereferences `GetActiveRuntimeConfigState().active_view`, active
+  RuntimeConfigView selection remains unchanged, RuntimeConfigView replacement
+  is not used, generated active wrapper is not used, `candidate.view` is not
+  active, RAM-backed active table publication is not used, the source-owned
+  table/routing source path passed hardware for this layout, root cause remains
+  unproven, and Nunchuk remains NOT_TESTED.
 
 ## Official Configurator Corpus
 

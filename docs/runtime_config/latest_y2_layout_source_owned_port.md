@@ -1,9 +1,12 @@
 # Latest Y2 Layout Source-Owned Port
 
-Status: FIRMWARE_BEHAVIOR / WAITING_FOR_HARDWARE_TEST.
+Status: FIRMWARE_BEHAVIOR / HARDWARE_PASS_RECORDED.
 
 Branch:
 `runtime-config-latest-y2-layout-source-owned-port`
+
+Result branch:
+`runtime-config-latest-y2-layout-source-owned-port-hardware-result`
 
 Base branch: `configurator`.
 
@@ -13,6 +16,27 @@ This branch restores the full required latest Y2 layout onto current
 `configurator` while preserving the source-owned active runtime config
 publication boundary. It does not split Tilt3-only for hardware testing. The
 next hardware run is for the full restored layout.
+
+## Hardware Result
+
+- Recorded hardware result packet:
+  `docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md`
+- Overall result: `HARDWARE_PASS`
+- Merge approved: `true`
+- User report:
+  `everything works, all usual tests pass, including Up+A and Down+A`
+- RF5 forced A + Up: PASS, no disconnect.
+- LT6 forced A + Down: PASS, no disconnect.
+- Full latest Y2 layout behavior is accepted by hardware testing.
+- Y1 simple / Y2 sublayer migration is accepted by hardware testing.
+- Active RuntimeConfigView selection remains unchanged.
+- RuntimeConfigView replacement is not used.
+- Generated active wrapper is not used.
+- `candidate.view` is not active.
+- RAM-backed active table publication is not used.
+- Source-owned table/routing source path passed hardware for this layout.
+- Low-level root cause remains unproven.
+- Nunchuk remains NOT_TESTED.
 
 ## Active Publication Boundary
 
@@ -117,7 +141,9 @@ Y2:
 
 ## Explicit Non-Claims
 
-- This is not a hardware result.
+- The implementation packet is not the hardware result packet; the recorded
+  hardware result lives in
+  `docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md`.
 - Nunchuk remains NOT_TESTED.
 - Root cause remains unproven.
 - Runtime-loaded config is not implemented.

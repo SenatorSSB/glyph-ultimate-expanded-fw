@@ -224,13 +224,20 @@ The latest Y2 layout source-owned port on
 `runtime-config-latest-y2-layout-source-owned-port` is firmware behavior work
 that restores the full required latest layout while preserving the accepted
 source-owned active publication boundary. It is not a Tilt3-only split. It
-changes active behavior, so hardware test required before merge remains the
-current gate. The branch keeps active view selection unchanged, does not use
-RuntimeConfigView replacement, does not publish `candidate.view`, does not use
-RAM-backed active table publication, does not implement runtime-loaded config,
-storage, WebSerial/device write, backend/config.pb write path, or flashing
-automation, and does not prove the low-level root cause. Nunchuk remains
-NOT_TESTED.
+changes active behavior, so hardware test required before merge was the gate
+and is now satisfied by the recorded `HARDWARE_PASS` result on
+`runtime-config-latest-y2-layout-source-owned-port-hardware-result`. The full
+latest Y2 layout source-owned port is merge-approved after hardware PASS. The
+user report is "everything works, all usual tests pass, including Up+A and
+Down+A"; RF5 forced A + Up and LT6 forced A + Down pass without disconnect,
+the full latest Y2 layout behavior is accepted by hardware testing, and Y1
+simple / Y2 sublayer migration is accepted by hardware testing. The branch
+keeps active view selection unchanged, does not use RuntimeConfigView
+replacement, does not use a generated active wrapper, does not publish
+`candidate.view`, does not use RAM-backed active table publication, does not
+implement runtime-loaded config, storage, WebSerial/device write,
+backend/config.pb write path, or flashing automation, and does not prove the
+low-level root cause. Nunchuk remains NOT_TESTED.
 
 The generated source-owned realization design in
 `docs/runtime_config/generated_source_owned_realization_design.md` with

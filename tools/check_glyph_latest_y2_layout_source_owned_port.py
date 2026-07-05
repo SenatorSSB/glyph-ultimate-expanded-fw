@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the latest Y2 layout port on the source-owned active path."""
+"""Validate the latest Y2 layout source-owned port result and merged state."""
 
 from __future__ import annotations
 
@@ -12,7 +12,8 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_BRANCH = "runtime-config-latest-y2-layout-source-owned-port"
+IMPLEMENTATION_BRANCH = "runtime-config-latest-y2-layout-source-owned-port"
+RESULT_BRANCH = "runtime-config-latest-y2-layout-source-owned-port-hardware-result"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 REFERENCE_BRANCH = "codex/update-custom-modifier-tables-y2"
@@ -36,12 +37,14 @@ HARDWARE_RESULT = REPO_ROOT / "docs/calibration/latest_y2_layout_source_owned_po
 HARDWARE_RESULT_FIXTURE = REPO_ROOT / "docs/calibration/fixtures/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.json"
 
 ALLOWED_EXACT_CHANGED_PATHS = {
-    "src/modes/UltimateIdentityRuntimeTables.hpp",
-    "src/modes/UltimateRuntimeConfigInterpreter.hpp",
-    "src/modes/Ultimate.cpp",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
     CHECKER_REL,
+}
+IMPLEMENTATION_SOURCE_PATHS = {
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "src/modes/Ultimate.cpp",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
 ALLOWED_EXISTING_CHECKERS = {
@@ -98,6 +101,38 @@ EXPECTED_FIXTURE_VALUES: dict[str, Any] = {
     "y2_sublayer_modifier": True,
     "y1_sublayers_migrated_to_y2": True,
 }
+EXPECTED_HARDWARE_RESULT_VALUES: dict[str, Any] = {
+    "schema_version": 1,
+    "packet": "latest_y2_layout_source_owned_port_hardware_result",
+    "status": "HARDWARE_PASS",
+    "branch_under_test": IMPLEMENTATION_BRANCH,
+    "result_branch": RESULT_BRANCH,
+    "baseline_branch": BASE_BRANCH,
+    "overall_result": "HARDWARE_PASS",
+    "merge_approved": True,
+    "user_report": "everything works, all usual tests pass, including Up+A and Down+A",
+    "active_behavior_changed": True,
+    "hardware_test_required_before_merge": True,
+    "full_latest_layout_port": True,
+    "rf5_forced_a_up_disconnect": False,
+    "lt6_forced_a_down_disconnect": False,
+    "usual_layout_tests_passed": True,
+    "full_latest_y2_layout_passed": True,
+    "y1_simple_y2_sublayer_migration_passed": True,
+    "active_view_selection_changed": False,
+    "runtime_config_view_replacement": False,
+    "generated_active_wrapper_used": False,
+    "candidate_view_published_active": False,
+    "ram_backed_active_table_publication": False,
+    "source_owned_table_content_replacement_wired": True,
+    "runtime_loaded_config_implemented": False,
+    "persistent_storage_implemented": False,
+    "webserial_device_write_implemented": False,
+    "backend_config_pb_write_path_implemented": False,
+    "flashing_automation_implemented": False,
+    "nunchuk_status": "NOT_TESTED",
+    "root_cause_proven": False,
+}
 EXPECTED_CHANGED_SOURCE_FILES = [
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "src/modes/UltimateRuntimeConfigInterpreter.hpp",
@@ -131,6 +166,10 @@ HARDWARE_ROWS = [
     "Y1-RF-SUBLAYER-REMOVED-001",
     "Y2-SUBLAYER-MIGRATION-001",
 ]
+EXPECTED_HARDWARE_RESULT_ROWS = {
+    row_id: ("NOT_TESTED" if row_id == "NUNCHUK-001" else "PASS")
+    for row_id in HARDWARE_ROWS
+}
 
 
 class CheckFailure(AssertionError):
@@ -192,20 +231,29 @@ def current_branch() -> str:
     return branch[0]
 
 
-def validate_branch() -> str:
+def base_branch_for(branch: str) -> str:
+    if branch == RESULT_BRANCH:
+        return IMPLEMENTATION_BRANCH
+    if branch == MERGED_BRANCH:
+        return MERGED_BRANCH
+    fail(f"checker must run on {RESULT_BRANCH} or {MERGED_BRANCH}, got {branch}")
+
+
+def validate_branch() -> tuple[str, str]:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {RESULT_BRANCH, MERGED_BRANCH}:
+        fail(f"checker must run on {RESULT_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    base_branch = base_branch_for(branch)
     result = subprocess.run(
-        ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
+        ["git", "merge-base", "--is-ancestor", base_branch, "HEAD"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=False,
     )
     if result.returncode != 0:
-        fail(f"{BASE_BRANCH} must be an ancestor of HEAD")
-    return branch
+        fail(f"{base_branch} must be an ancestor of HEAD")
+    return branch, base_branch
 
 
 def status_path(status_line: str) -> str:
@@ -215,10 +263,10 @@ def status_path(status_line: str) -> str:
     return path
 
 
-def changed_paths(branch: str) -> set[str]:
+def changed_paths(branch: str, base_branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH:
-        paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
+    if branch == RESULT_BRANCH:
+        paths.update(git_lines(["diff", "--name-only", f"{base_branch}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
         if path:
@@ -226,10 +274,16 @@ def changed_paths(branch: str) -> set[str]:
     return paths
 
 
-def validate_changed_paths(paths: set[str]) -> None:
+def validate_changed_paths(paths: set[str], branch: str) -> None:
     for path in sorted(paths):
         if FORBIDDEN_CHANGED_PATH_RE.search(path):
             fail(f"forbidden HAL/backend/config.pb/storage/write/WebSerial/flashing path changed: {path}")
+        if path in IMPLEMENTATION_SOURCE_PATHS:
+            if branch == RESULT_BRANCH:
+                fail(f"result branch may not change firmware source relative to {IMPLEMENTATION_BRANCH}: {path}")
+            continue
+        if path.startswith("src/"):
+            fail(f"out-of-scope source path changed: {path}")
         if path in ALLOWED_EXACT_CHANGED_PATHS:
             continue
         if path in ALLOWED_EXISTING_CHECKERS:
@@ -552,8 +606,8 @@ def require_phrases(label: str, text: str, phrases: list[str] | tuple[str, ...])
 def validate_fixture(payload: dict[str, Any]) -> None:
     if payload.get("packet") != "latest_y2_layout_source_owned_port":
         fail("fixture packet must be latest_y2_layout_source_owned_port")
-    if payload.get("branch") != EXPECTED_BRANCH:
-        fail(f"fixture branch must be {EXPECTED_BRANCH}")
+    if payload.get("branch") != IMPLEMENTATION_BRANCH:
+        fail(f"fixture branch must be {IMPLEMENTATION_BRANCH}")
     if payload.get("base_branch") != BASE_BRANCH:
         fail(f"fixture base_branch must be {BASE_BRANCH}")
     for key, expected in EXPECTED_FIXTURE_VALUES.items():
@@ -603,19 +657,34 @@ def validate_hardware_plan(payload: dict[str, Any]) -> None:
             fail(f"hardware plan row {row_id} must be NOT_TESTED")
 
 
-def validate_docs() -> None:
+def validate_hardware_result(payload: dict[str, Any]) -> None:
+    for key, expected in EXPECTED_HARDWARE_RESULT_VALUES.items():
+        if payload.get(key) != expected:
+            fail(f"hardware result fixture {key} must be {expected!r}, got {payload.get(key)!r}")
+    rows = payload.get("rows")
+    if not isinstance(rows, list):
+        fail("hardware result fixture rows must be a list")
+    row_by_id = {row.get("id"): row for row in rows if isinstance(row, dict)}
+    if set(row_by_id) != set(EXPECTED_HARDWARE_RESULT_ROWS):
+        fail("hardware result fixture row IDs do not match the required row set")
+    for row_id, expected_status in EXPECTED_HARDWARE_RESULT_ROWS.items():
+        if row_by_id[row_id].get("status") != expected_status:
+            fail(f"hardware result row {row_id} must be {expected_status}")
+
+
+def validate_docs(branch: str) -> None:
     doc_text = read_required(DOC)
     build_text = read_required(BUILD_REPORT)
     hardware_text = read_required(HARDWARE_PLAN)
+    hardware_result_text = read_required(HARDWARE_RESULT)
     readme_text = read_required(README)
     index_text = read_required(CALIBRATION_INDEX)
     current_text = read_required(CURRENT_STATE)
     roadmap_text = read_required(ROADMAP)
 
     common_phrases = (
-        EXPECTED_BRANCH,
+        IMPLEMENTATION_BRANCH,
         REFERENCE_BRANCH,
-        "hardware test required before merge",
         "RuntimeConfigView replacement is not used",
         "active view selection unchanged",
         "candidate.view is not active",
@@ -624,45 +693,101 @@ def validate_docs() -> None:
         "root cause remains unproven",
     )
     require_phrases(rel(DOC), doc_text, common_phrases)
+    require_phrases(
+        rel(DOC),
+        doc_text,
+        (
+            RESULT_BRANCH,
+            "HARDWARE_PASS",
+            "merge approved",
+            "everything works, all usual tests pass, including Up+A and Down+A",
+            "Source-owned table/routing source path passed hardware for this layout",
+        ),
+    )
     require_phrases(rel(BUILD_REPORT), build_text, ("pio run -e glyph_mk6", "artifact hashes are local observations only"))
     require_phrases(rel(HARDWARE_PLAN), hardware_text, HARDWARE_ROWS)
-    require_phrases(rel(README), readme_text, ("latest_y2_layout_source_owned_port.md", "latest_y2_layout_source_owned_port_build_report_2026-06-29.md"))
-    require_phrases(rel(CALIBRATION_INDEX), index_text, ("latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.md", "Nunchuk remains NOT_TESTED"))
-    require_phrases(rel(CURRENT_STATE), current_text, ("runtime-config-latest-y2-layout-source-owned-port", "WAITING_FOR_HARDWARE_TEST"))
-    require_phrases(rel(ROADMAP), roadmap_text, ("latest Y2 layout", "hardware test required before merge"))
+    require_phrases(
+        rel(HARDWARE_RESULT),
+        hardware_result_text,
+        (
+            "HARDWARE_PASS",
+            IMPLEMENTATION_BRANCH,
+            RESULT_BRANCH,
+            "merge-approved after HARDWARE_PASS",
+            "RuntimeConfigView replacement is not used",
+            "Source-owned table/routing source path passed hardware for this layout",
+            "Nunchuk remains NOT_TESTED",
+        ),
+    )
+    require_phrases(
+        rel(README),
+        readme_text,
+        (
+            "latest_y2_layout_source_owned_port.md",
+            "latest_y2_layout_source_owned_port_build_report_2026-06-29.md",
+            "latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md",
+            "accepts the hardware-result branch and configurator after merge",
+        ),
+    )
+    require_phrases(
+        rel(CALIBRATION_INDEX),
+        index_text,
+        (
+            "latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.md",
+            "latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md",
+            "merge-approved",
+            "Nunchuk remains NOT_TESTED",
+        ),
+    )
+    require_phrases(
+        rel(CURRENT_STATE),
+        current_text,
+        (
+            IMPLEMENTATION_BRANCH,
+            RESULT_BRANCH,
+            "merge-approved after hardware PASS",
+            "generated active wrapper is not used",
+            "source-owned table/routing source path passed hardware for this layout",
+        ),
+    )
+    require_phrases(
+        rel(ROADMAP),
+        roadmap_text,
+        (
+            RESULT_BRANCH,
+            "merge-approved after hardware PASS",
+            "generated active wrapper",
+            "everything works, all usual tests pass, including Up+A and Down+A",
+        ),
+    )
 
     validate_fixture(load_json_object(FIXTURE))
     validate_build_fixture(load_json_object(BUILD_FIXTURE))
     validate_hardware_plan(load_json_object(HARDWARE_PLAN_FIXTURE))
-
-
-def validate_merged_hardware_gate(branch: str) -> None:
-    if branch != MERGED_BRANCH:
-        return
-    if not HARDWARE_RESULT.exists() or not HARDWARE_RESULT_FIXTURE.exists():
+    validate_hardware_result(load_json_object(HARDWARE_RESULT_FIXTURE))
+    if branch == MERGED_BRANCH and (not HARDWARE_RESULT.exists() or not HARDWARE_RESULT_FIXTURE.exists()):
         fail("configurator merge requires preserved HARDWARE_PASS result for this active behavior change")
-    result = load_json_object(HARDWARE_RESULT_FIXTURE)
-    if result.get("overall_result") != "HARDWARE_PASS":
-        fail("configurator merge requires latest Y2 source-owned port overall_result HARDWARE_PASS")
-    require_phrases(rel(HARDWARE_RESULT), read_required(HARDWARE_RESULT), ("HARDWARE_PASS", "Nunchuk remains NOT_TESTED"))
 
 
 def main() -> int:
     print("glyph_latest_y2_layout_source_owned_port")
     try:
-        branch = validate_branch()
-        validate_changed_paths(changed_paths(branch))
+        branch, base_branch = validate_branch()
+        if branch == RESULT_BRANCH:
+            validate_changed_paths(changed_paths(branch, base_branch), branch)
         validate_source()
-        validate_docs()
-        validate_merged_hardware_gate(branch)
+        validate_docs(branch)
     except CheckFailure as exc:
         print("status=FAIL")
         print(f"failure={exc}")
         return 1
 
     print("status=PASS")
+    print(f"branch={branch}")
+    print(f"base_branch={base_branch}")
     print("active_behavior_changed=true")
     print("hardware_test_required_before_merge=true")
+    print("merge_approved=true")
     print("active_view_selection_changed=false")
     print("runtime_config_view_replacement=false")
     print("nunchuk_status=NOT_TESTED")
