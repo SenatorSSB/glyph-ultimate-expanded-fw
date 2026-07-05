@@ -284,6 +284,35 @@ artifacts unless a specific packet says otherwise.
   accepts `runtime-config-latest-layout-y2-port-plan` and `configurator` after
   merge, validates the branch is based on `configurator`, and enforces the
   docs/checker-only changed-path allowlist.
+- `latest_y2_layout_source_owned_port.md` - firmware-behavior packet for
+  restoring the full required latest Y2 layout from
+  `codex/update-custom-modifier-tables-y2` onto current `configurator` while
+  preserving source-owned active publication. It records active behavior
+  changed, the preserved source-owned active publication boundary, and the
+  recorded `HARDWARE_PASS` result on
+  `docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md`;
+  LT3 selects Y2 with no L/R digital, Y1 is simplified, Y2 RF sublayer
+  behavior is migrated, active view selection remains unchanged,
+  RuntimeConfigView replacement is not used, `candidate.view` is not active,
+  RAM-backed active table publication is not used, merge is approved after the
+  hardware pass, root cause is not proven, and Nunchuk remains NOT_TESTED.
+- `fixtures/latest_y2_layout_source_owned_port.json` - machine-readable fixture
+  for the latest Y2 layout source-owned port; records exact Tilt3/Y2 table
+  values and required routing facts.
+- `latest_y2_layout_source_owned_port_build_report_2026-06-29.md` - local build
+  report for the latest Y2 source-owned port; canonical command
+  `pio run -e glyph_mk6`, artifact hashes are local observations only, and
+  hardware result is not claimed.
+- `fixtures/latest_y2_layout_source_owned_port_build_report_2026-06-29.json` -
+  machine-readable build report metadata for the latest Y2 source-owned port.
+- `tools/check_glyph_latest_y2_layout_source_owned_port.py` - Python
+  stdlib-only checker for the source-owned latest Y2 port; rejects duplicate
+  JSON keys, accepts the hardware-result branch and `configurator` after merge,
+  validates the docs/checker-only result-branch allowlist, confirms the active
+  source-owned `RuntimeConfigView` path remains unchanged, checks Tilt3/Y2
+  table values, evaluates the required Y1/Y2 routing facts, and requires the
+  preserved latest Y2 `HARDWARE_PASS` fixture before merged active behavior is
+  accepted.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`

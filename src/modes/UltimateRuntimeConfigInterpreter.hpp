@@ -12,7 +12,7 @@
 
 constexpr const char kRuntimeConfigSchemaName[] = "glyph_runtime_config_interpreter_source_baseline";
 constexpr size_t kRuntimeConfigSchemaVersion = 1;
-constexpr size_t kRuntimeTableCount = 27;
+constexpr size_t kRuntimeTableCount = 28;
 constexpr size_t kRuntimeTablePointCount = 9;
 constexpr size_t kRuntimeTableCenterIndex = 4;
 
@@ -24,6 +24,7 @@ enum class RuntimeTableId : uint8_t {
     MX1,
     MX2,
     Y1,
+    Y2,
     MY1,
     LayerNormalX,
     MLayerNormalX,
@@ -54,6 +55,7 @@ constexpr const char *kRuntimeTableSymbolNames[kRuntimeTableCount] = {
     "kMX1Table",
     "kMX2Table",
     "kY1Table",
+    "kY2Table",
     "kMY1Table",
     "kLayerNormalXTable",
     "kMLayerNormalXTable",
@@ -91,7 +93,7 @@ struct RuntimeConfigView {
     RuntimeTableId fallback_table_id;
 };
 
-constexpr RuntimeTableView kSourceOwnedCurrentBaselineRuntimeTables[27] = {
+constexpr RuntimeTableView kSourceOwnedCurrentBaselineRuntimeTables[kRuntimeTableCount] = {
     {RuntimeTableId::Default, "kDefaultTable", kDefaultTable, kRuntimeTablePointCount},
     {RuntimeTableId::ModeDefault, "kModeDefaultTable", kModeDefaultTable, kRuntimeTablePointCount},
     {RuntimeTableId::X1, "kX1Table", kX1Table, kRuntimeTablePointCount},
@@ -99,6 +101,7 @@ constexpr RuntimeTableView kSourceOwnedCurrentBaselineRuntimeTables[27] = {
     {RuntimeTableId::MX1, "kMX1Table", kMX1Table, kRuntimeTablePointCount},
     {RuntimeTableId::MX2, "kMX2Table", kMX2Table, kRuntimeTablePointCount},
     {RuntimeTableId::Y1, "kY1Table", kY1Table, kRuntimeTablePointCount},
+    {RuntimeTableId::Y2, "kY2Table", kY2Table, kRuntimeTablePointCount},
     {RuntimeTableId::MY1, "kMY1Table", kMY1Table, kRuntimeTablePointCount},
     {RuntimeTableId::LayerNormalX, "kLayerNormalXTable", kLayerNormalXTable, kRuntimeTablePointCount},
     {RuntimeTableId::MLayerNormalX, "kMLayerNormalXTable", kMLayerNormalXTable, kRuntimeTablePointCount},
@@ -125,7 +128,7 @@ constexpr RuntimeConfigView kKnownGoodRuntimeConfig = {
     kRuntimeConfigSchemaName,
     1,
     kSourceOwnedCurrentBaselineRuntimeTables,
-    27,
+    kRuntimeTableCount,
     RuntimeTableId::Default
 };
 
@@ -143,6 +146,7 @@ constexpr RuntimeTableId kRuntimeTableIdOrder[kRuntimeTableCount] = {
     RuntimeTableId::MX1,
     RuntimeTableId::MX2,
     RuntimeTableId::Y1,
+    RuntimeTableId::Y2,
     RuntimeTableId::MY1,
     RuntimeTableId::LayerNormalX,
     RuntimeTableId::MLayerNormalX,
@@ -181,6 +185,8 @@ constexpr const char *RuntimeTableIdSymbolName(RuntimeTableId table_id) {
             return "kMX2Table";
         case RuntimeTableId::Y1:
             return "kY1Table";
+        case RuntimeTableId::Y2:
+            return "kY2Table";
         case RuntimeTableId::MY1:
             return "kMY1Table";
         case RuntimeTableId::LayerNormalX:
