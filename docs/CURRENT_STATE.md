@@ -390,6 +390,23 @@ engineering decisions.
   runtime-loaded config, persistent storage, WebSerial/device write,
   backend/config.pb write path, or flashing automation, and nunchuk
   `NOT_TESTED` remains unchanged.
+- Latest layout Y2 port plan is recorded in
+  `docs/runtime_config/latest_layout_y2_port_plan.md` with
+  `docs/runtime_config/fixtures/latest_layout_y2_port_plan.json` and
+  `tools/check_glyph_latest_layout_y2_port_plan.py`. This branch does not
+  implement the latest layout, does not validate hardware for the latest
+  layout, and only defines the port plan for reapplying
+  `codex/update-custom-modifier-tables-y2` onto current `configurator`.
+  The plan classifies the existing `kTilt3Table` x/y change as the direct
+  table-content-only source-owned replacement candidate. It records the Y2
+  table values and LT3/Y2 routing facts as separate routing/role work because
+  current `configurator` has no existing active Y2 table symbol and the
+  reference branch changes `Ultimate.cpp` and
+  `UltimateRuntimeConfigInterpreter.hpp`. Any routing/role update must be
+  hardware-gated separately. Do not port generated active-view or
+  RuntimeConfigView replacement artifacts. Active behavior is unchanged,
+  hardware test is not required before merge for this docs/checker branch,
+  root cause is not proven, and Nunchuk remains NOT_TESTED.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "packet": "latest_layout_y2_port_plan",
+  "branch": "runtime-config-latest-layout-y2-port-plan",
+  "base_branch": "configurator",
+  "reference_branch": "codex/update-custom-modifier-tables-y2",
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "docs_checker_only": true,
+  "direct_merge_reference_branch_allowed": false,
+  "table_content_replacement_path_supported_by_hardware_pass": true,
+  "routing_role_changes_require_separate_hardware_gate": true,
+  "runtime_config_view_replacement_allowed": false,
+  "active_view_selection_change_allowed": false,
+  "generated_active_wrapper_allowed": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "latest_intended_table_values": {
+    "Tilt3": {
+      "1": [69, 82],
+      "2": [128, 83],
+      "3": [187, 82],
+      "4": [69, 128],
+      "5": [128, 128],
+      "6": [187, 128],
+      "7": [76, 169],
+      "8": [128, 179],
+      "9": [180, 169]
+    },
+    "Y2": {
+      "1": [69, 78],
+      "2": [128, 78],
+      "3": [187, 78],
+      "4": [61, 128],
+      "5": [128, 128],
+      "6": [195, 128],
+      "7": [61, 164],
+      "8": [128, 174],
+      "9": [195, 164]
+    }
+  },
+  "classification": {
+    "table_content_only_changes": [
+      {
+        "symbol": "kTilt3Table",
+        "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "candidate_for_source_owned_table_content_replacement": true,
+        "reason": "Existing source-owned StickPoint table x/y values changed in the reference branch."
+      }
+    ],
+    "routing_role_evaluator_changes": [
+      "src/modes/Ultimate.cpp",
+      "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+      "tools/check_glyph_y2_tilt3_routing.py",
+      "evaluator behavior and source-derived fixtures"
+    ],
+    "generated_artifact_fixture_tool_drift": [
+      "generated source-owned artifacts",
+      "generated output fixtures",
+      "current-baseline extracted/interpreter/semantics fixtures",
+      "old source-owned table replacement generator contract/tool drift"
+    ]
+  },
+  "intended_routing_role_facts": [
+    "LT3 selects Y2 and emits no L/R digital.",
+    "Y2+RF1 alone keeps base A.",
+    "Y2+RF1+RF4 emits X.",
+    "Y1+RF1 no longer emits X sublayer.",
+    "Y2+RF2 alone keeps base B.",
+    "Y2+RF2 alone does not force up.",
+    "Y2+RF2+RF4 forces up without base B.",
+    "Y1+RF2 no longer forces up.",
+    "Y2+RF3 emits B and uses LayerNormalX where applicable.",
+    "Y1+RF3 no longer emits B sublayer.",
+    "Y2+RF4 uses LayerFlipper where applicable.",
+    "Y1+RF4 no longer flipper sublayer.",
+    "Y2+RT1 selects Tilt2.",
+    "Y2+RT1+RF4 selects Tilt3.",
+    "Y2 priority remains below RT/RF modifiers."
+  ],
+  "next_implementation_split": [
+    "A. table-content-only update to current configurator",
+    "B. routing/role update if required"
+  ],
+  "forbidden_ports": [
+    "RuntimeConfigView replacement",
+    "active-view selection change",
+    "generated active wrapper",
+    "runtime-loaded config",
+    "persistent storage",
+    "WebSerial/device write",
+    "backend/config.pb write path",
+    "flashing automation"
+  ]
+}
