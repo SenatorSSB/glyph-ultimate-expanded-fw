@@ -42,6 +42,30 @@ implementation work. Detailed historical evidence remains indexed from
 - Current v0 production work remains source-owned firmware generation as v0:
   neutral/profile intent becomes generated source-owned tables/routing source,
   then a firmware build uses the existing active `RuntimeConfigView` path.
+- Generated-source-owned packets currently in scope:
+  `generated_source_owned_realization_design.md`,
+  `generated_source_owned_schema_scaffold.md`,
+  `generated_source_owned_generator_contract.md`,
+  `generated_source_owned_artifact_install.md`, and
+  `generated_source_owned_baseline_artifact.md`,
+  `GeneratedRuntimeConfigBaseline.current.hpp`.
+- Related fixtures currently in scope:
+  `fixtures/generated_source_owned_schema_scaffold.json`,
+  `fixtures/generated_source_owned_generator_contract.json`,
+  `fixtures/generated_source_owned_artifact_install.json`, and
+  `fixtures/generated_source_owned_baseline_artifact.json`.
+- `generated_source_owned_generator_input.example.json`,
+  `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
+  `tools/generate_source_owned_runtime_config.py` remain the generator lane
+  references.
+- The generated tables not wired active boundary remains intact; source-owned
+  active-state preselection `HARDWARE_PASS` evidence and active-storage
+  `HARDWARE_FAIL` evidence remain distinct. source-owned active-state
+  `HARDWARE_PASS` evidence and future hardware gate required before generated
+  source-owned baseline artifact is selected active remain part of this lane.
+- future hardware gate required before generated source-owned tables are
+  selected active.
+- nunchuk `NOT_TESTED`.
 - Forbidden current active-publication paths are documented in
   `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`.
 - Runtime-loaded config is not implemented.

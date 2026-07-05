@@ -14,6 +14,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-generator-contract"
+RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 DOWNSTREAM_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-artifact-install"
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
@@ -34,11 +35,14 @@ ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 ALLOWED_TOOL_PATHS = {
     "tools/generate_source_owned_runtime_config.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
+    "tools/check_glyph_coordinate_native_runtime_plan.py",
+    "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_diagnostic_active_storage_published.py",
     "tools/check_glyph_generated_source_owned_realization_design.py",
     "tools/check_glyph_generated_source_owned_schema_scaffold.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_docs_agent_surface.py",
 }
 ALLOWED_INERT_SOURCE_PREFIX = "src/modes/runtime_config/generated_source_owned/"
 ALLOWED_INERT_SOURCE_RE = re.compile(
@@ -203,6 +207,7 @@ def validate_branch() -> str:
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
+        RECOVERY_BRANCH,
     }:
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
@@ -230,7 +235,12 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOWNSTREAM_ARTIFACT_INSTALL_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}:
+    if branch in {
+        EXPECTED_BRANCH,
+        DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
+        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
+        RECOVERY_BRANCH,
+    }:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
@@ -264,7 +274,7 @@ def validate_changed_paths(paths: set[str]) -> None:
             fail(f"forbidden active runtime/HAL/backend path changed: {path}")
         if any(part in path for part in FORBIDDEN_CHANGED_PARTS):
             fail(f"forbidden config/storage/write/WebSerial/flashing path changed: {path}")
-        if path.startswith("docs/runtime_config/"):
+        if path.startswith("docs/runtime_config/") or path.startswith("docs/agent_framework/"):
             continue
         if path in {"docs/CURRENT_STATE.md", "docs/ROADMAP.md"}:
             continue

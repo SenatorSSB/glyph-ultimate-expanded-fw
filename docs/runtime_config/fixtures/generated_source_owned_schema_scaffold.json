@@ -29,6 +29,7 @@
   ],
   "inert_source_scaffold_files": [
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp",
-    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp"
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp",
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
   ]
 }

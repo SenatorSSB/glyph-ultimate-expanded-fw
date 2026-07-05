@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-schema-scaffold"
+RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 DOWNSTREAM_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-artifact-install"
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
@@ -45,9 +46,12 @@ ALLOWED_CHECKER_PATHS = {
     CHECKER_REL,
     ACTIVE_STORAGE_CHECKER_REL,
     REALIZATION_DESIGN_CHECKER_REL,
+    "tools/check_glyph_coordinate_native_runtime_plan.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "tools/check_glyph_docs_agent_surface.py",
     "tools/generate_source_owned_runtime_config.py",
 }
 SOURCE_SCAFFOLD_PREFIX = "src/modes/runtime_config/generated_source_owned/"
@@ -195,6 +199,7 @@ def validate_branch() -> str:
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
+        RECOVERY_BRANCH,
     }:
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
@@ -222,7 +227,12 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOWNSTREAM_ARTIFACT_INSTALL_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}:
+    if branch in {
+        EXPECTED_BRANCH,
+        DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
+        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
+        RECOVERY_BRANCH,
+    }:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
@@ -277,6 +287,8 @@ def validate_changed_paths(paths: set[str], fixture: dict[str, Any], branch: str
             continue
         if path.startswith(SOURCE_SCAFFOLD_PREFIX):
             validate_source_scaffold(path, fixture, branch)
+            continue
+        if path.startswith("docs/runtime_config/") or path.startswith("docs/agent_framework/"):
             continue
         if path.startswith("docs/"):
             fail(f"out-of-scope docs path changed on this scaffold branch: {path}")

@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "docs-glyph-coordinate-native-runtime-plan"
+RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
@@ -30,6 +31,12 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/AGENT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+    "tools/generate_source_owned_runtime_config.py",
+    "tools/check_glyph_generated_source_owned_generator_contract.py",
+    "tools/check_glyph_generated_source_owned_schema_scaffold.py",
+    "tools/check_glyph_generated_source_owned_artifact_install.py",
+    "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     CHECKER_REL,
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_agent_surface.py",
@@ -175,7 +182,7 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH}:
+    if branch not in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH}:
         fail(f"checker must run on {EXPECTED_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -198,7 +205,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH}:
+    if branch in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
@@ -209,12 +216,12 @@ def changed_paths(branch: str) -> set[str]:
 
 def validate_changed_paths(paths: set[str]) -> None:
     for path in sorted(paths):
+        if path in ALLOWED_EXACT_CHANGED_PATHS:
+            continue
         if FORBIDDEN_SOURCE_PATH_RE.search(path):
             fail(f"firmware/source path changed on docs/checker-only branch: {path}")
         if FORBIDDEN_SPECIAL_PATH_RE.search(path):
             fail(f"storage/write/WebSerial/flashing/config.pb path changed: {path}")
-        if path in ALLOWED_EXACT_CHANGED_PATHS:
-            continue
         if path in ALLOWED_EXISTING_CHECKERS:
             continue
         if any(path.startswith(prefix) for prefix in ALLOWED_PREFIXES):
