@@ -51,6 +51,11 @@ def main() -> int:
         "docs/export/README.md",
         "docs/runtime_config/README.md",
         "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+        "docs/agent_framework/README.md",
+        "docs/agent_framework/MODEL_ROUTING.md",
+        "docs/agent_framework/SUPERVISOR_CONTRACT.md",
+        "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+        "docs/agent_framework/VALIDATION_AND_GATES.md",
     )
     for rel_path in required_paths:
         read_required(rel_path)
@@ -66,7 +71,16 @@ def main() -> int:
             "docs/export/README.md",
         ),
     )
-    require_phrases("AGENTS.md", ("docs/CURRENT_STATE.md", "docs/ROADMAP.md", "docs/WORKFLOW.md"))
+    require_phrases(
+        "AGENTS.md",
+        (
+            "docs/AGENT_CONTEXT.md",
+            "docs/CURRENT_STATE.md",
+            "docs/ROADMAP.md",
+            "docs/WORKFLOW.md",
+            "docs/agent_framework/README.md",
+        ),
+    )
 
     require_phrases(
         "docs/AGENT_CONTEXT.md",
@@ -80,6 +94,21 @@ def main() -> int:
             "coordinate-native runtime profile",
             "Nunchuk remains NOT_TESTED",
             "root cause remains unproven",
+            "docs/agent_framework/README.md",
+        ),
+    )
+
+    require_phrases(
+        "docs/agent_framework/README.md",
+        (
+            "supervisor",
+            "subagents",
+            "DOCS_CHECKER_ONLY",
+            "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
+            "FORBIDDEN_OR_UNSAFE",
+            "runtime-loaded config is not implemented",
+            "Nunchuk remains NOT_TESTED",
+            "Root cause remains unproven",
         ),
     )
 

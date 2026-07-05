@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Glyph Agent Cycle Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "cycle_id",
+    "branch",
+    "objective",
+    "classification",
+    "summary",
+    "files_changed",
+    "verification",
+    "build_requirement",
+    "hardware_requirement",
+    "behavior_changes",
+    "semantic_changes",
+    "backend_behavior_claims",
+    "stop_conditions_hit",
+    "verdict"
+  ],
+  "properties": {
+    "cycle_id": { "type": "string", "minLength": 1 },
+    "branch": { "type": "string", "minLength": 1 },
+    "objective": { "type": "string", "minLength": 1 },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "DOCS_CHECKER_ONLY",
+        "INACTIVE_GENERATOR_OR_FIXTURE",
+        "FIRMWARE_SOURCE_NON_ACTIVE",
+        "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
+        "FORBIDDEN_OR_UNSAFE"
+      ]
+    },
+    "summary": { "type": "array", "items": { "type": "string" } },
+    "files_changed": { "type": "array", "items": { "type": "string" } },
+    "verification": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["command", "result"],
+        "properties": {
+          "command": { "type": "string" },
+          "result": { "type": "string" }
+        }
+      }
+    },
+    "build_requirement": { "type": "string" },
+    "hardware_requirement": { "type": "string" },
+    "behavior_changes": { "type": "string" },
+    "semantic_changes": { "type": "string" },
+    "backend_behavior_claims": { "type": "string" },
+    "stop_conditions_hit": { "type": "string" },
+    "verdict": {
+      "type": "string",
+      "enum": ["DONE", "CONTINUE", "BLOCKED", "NEEDS_HARDWARE", "UNSAFE", "LOOPING"]
+    }
+  }
+}

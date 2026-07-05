@@ -15,6 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 IMPLEMENTATION_BRANCH = "runtime-config-latest-y2-layout-source-owned-port"
 RESULT_BRANCH = "runtime-config-latest-y2-layout-source-owned-port-hardware-result"
 DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
+AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 REFERENCE_BRANCH = "codex/update-custom-modifier-tables-y2"
@@ -38,16 +39,23 @@ HARDWARE_RESULT = REPO_ROOT / "docs/calibration/latest_y2_layout_source_owned_po
 HARDWARE_RESULT_FIXTURE = REPO_ROOT / "docs/calibration/fixtures/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.json"
 
 ALLOWED_EXACT_CHANGED_PATHS = {
+    "AGENTS.md",
+    "CLAUDE.md",
+    "docs/AGENT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
     CHECKER_REL,
+    "tools/check_glyph_agent_framework_docs.py",
+    "tools/check_glyph_coordinate_native_runtime_plan.py",
+    "tools/check_glyph_docs_agent_surface.py",
+    "tools/check_glyph_docs_navigation.py",
 }
 IMPLEMENTATION_SOURCE_PATHS = {
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "src/modes/UltimateRuntimeConfigInterpreter.hpp",
     "src/modes/Ultimate.cpp",
 }
-ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
+ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/", "docs/agent_framework/")
 ALLOWED_EXISTING_CHECKERS = {
     "tools/check_glyph_latest_layout_y2_port_plan.py",
     "tools/check_glyph_source_owned_table_replacement_design.py",
@@ -235,17 +243,17 @@ def current_branch() -> str:
 def base_branch_for(branch: str) -> str:
     if branch == RESULT_BRANCH:
         return IMPLEMENTATION_BRANCH
-    if branch == DOCS_SURFACE_BRANCH:
+    if branch in {DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH}:
         return BASE_BRANCH
     if branch == MERGED_BRANCH:
         return MERGED_BRANCH
-    fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+    fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
 
 
 def validate_branch() -> tuple[str, str]:
     branch = current_branch()
-    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH}:
+        fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     base_branch = base_branch_for(branch)
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", base_branch, "HEAD"],

@@ -10,6 +10,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "docs-agent-surface-cleanup"
+AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -23,7 +24,10 @@ ARCHIVE_INDEX = REPO_ROOT / "docs/archive/README.md"
 
 CHECKER_REL = "tools/check_glyph_docs_agent_surface.py"
 ALLOWED_EXACT_CHANGED_PATHS = {
+    "AGENTS.md",
+    "CLAUDE.md",
     CHECKER_REL,
+    "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
@@ -108,9 +112,9 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
-    if branch == EXPECTED_BRANCH:
+    if branch not in {EXPECTED_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH}:
+        fail(f"checker must run on {EXPECTED_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+    if branch in {EXPECTED_BRANCH, AGENT_FRAMEWORK_BRANCH}:
         completed = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
             cwd=REPO_ROOT,
@@ -132,7 +136,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH:
+    if branch in {EXPECTED_BRANCH, AGENT_FRAMEWORK_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
