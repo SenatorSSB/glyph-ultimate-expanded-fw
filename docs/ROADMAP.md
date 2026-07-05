@@ -220,6 +220,18 @@ compile-time/generated immutable source-owned tables, source-owned table
 replacement / generated firmware artifacts, or no runtime-loaded publication
 until a safer active-storage model is proven.
 
+The latest Y2 layout source-owned port on
+`runtime-config-latest-y2-layout-source-owned-port` is firmware behavior work
+that restores the full required latest layout while preserving the accepted
+source-owned active publication boundary. It is not a Tilt3-only split. It
+changes active behavior, so hardware test required before merge remains the
+current gate. The branch keeps active view selection unchanged, does not use
+RuntimeConfigView replacement, does not publish `candidate.view`, does not use
+RAM-backed active table publication, does not implement runtime-loaded config,
+storage, WebSerial/device write, backend/config.pb write path, or flashing
+automation, and does not prove the low-level root cause. Nunchuk remains
+NOT_TESTED.
+
 The generated source-owned realization design in
 `docs/runtime_config/generated_source_owned_realization_design.md` with
 `docs/runtime_config/fixtures/generated_source_owned_realization_design.json`

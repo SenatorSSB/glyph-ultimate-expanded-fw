@@ -98,6 +98,15 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_plan_2026-06-29.json`
   - matching machine-readable generated source-owned baseline active diagnostic
     hardware plan fixture. Nunchuk remains NOT_TESTED.
+- `latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.md` - plan-only
+  full-layout hardware row set for
+  `runtime-config-latest-y2-layout-source-owned-port`; all rows are NOT_TESTED,
+  hardware_test_required_before_merge is true, active view selection remains
+  unchanged, RuntimeConfigView replacement is not used, and Nunchuk remains
+  NOT_TESTED.
+- `fixtures/latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.json`
+  - matching machine-readable latest Y2 layout source-owned port hardware plan
+    fixture. Nunchuk remains NOT_TESTED.
 
 ## Official Configurator Corpus And Source Correction
 
