@@ -14,6 +14,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IMPLEMENTATION_BRANCH = "runtime-config-latest-y2-layout-source-owned-port"
 RESULT_BRANCH = "runtime-config-latest-y2-layout-source-owned-port-hardware-result"
+DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 REFERENCE_BRANCH = "codex/update-custom-modifier-tables-y2"
@@ -234,15 +235,17 @@ def current_branch() -> str:
 def base_branch_for(branch: str) -> str:
     if branch == RESULT_BRANCH:
         return IMPLEMENTATION_BRANCH
+    if branch == DOCS_SURFACE_BRANCH:
+        return BASE_BRANCH
     if branch == MERGED_BRANCH:
         return MERGED_BRANCH
-    fail(f"checker must run on {RESULT_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, or {MERGED_BRANCH}, got {branch}")
 
 
 def validate_branch() -> tuple[str, str]:
     branch = current_branch()
-    if branch not in {RESULT_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {RESULT_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, MERGED_BRANCH}:
+        fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     base_branch = base_branch_for(branch)
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", base_branch, "HEAD"],

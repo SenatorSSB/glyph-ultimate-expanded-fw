@@ -2,681 +2,94 @@
 
 Status label: CURRENT.
 
-This is the clean long-term Glyph-side roadmap. Dated calibration packets remain
-evidence, but current direction should be read here first.
+Read this as the current forward plan, not as a full history. Historical
+diagnostics and failed branches are preserved through `docs/archive/README.md`
+and `docs/calibration/INDEX.md`.
 
-## Status Taxonomy
+## Current Baseline
 
-Current roadmap status and requirement fields are separate. `BLOCKED` is a
-legacy calibration label only; older packets may use it for user input, source
-research, product approval, hardware, safety policy, or not-yet-started work.
-Current docs use these labels instead:
+The current known-good firmware state is the latest Y2 layout source-owned port
+merged into `configurator` after HARDWARE_PASS. The implementation lineage is
+`runtime-config-latest-y2-layout-source-owned-port`, and the preserved hardware
+result branch is
+`runtime-config-latest-y2-layout-source-owned-port-hardware-result`.
 
-- `COMPLETE`
-- `CURRENT_BASELINE`
-- `READY_FOR_ENGINEERING_DESIGN`
-- `READY_FOR_SOURCE_RESEARCH`
-- `READY_FOR_PROTOTYPE`
-- `READY_FOR_USER_PRODUCT_DECISION`
-- `WAITING_FOR_USER_ARTIFACT`
-- `WAITING_FOR_HARDWARE_TEST`
-- `FUTURE_PHASE`
-- `NOT_STARTED`
-- `FORBIDDEN_BY_POLICY`
-- `OUT_OF_SCOPE`
+The result is merge-approved after hardware PASS. The accepted user report is
+"everything works, all usual tests pass, including Up+A and Down+A". Active
+RuntimeConfigView selection remains unchanged, RuntimeConfigView replacement is
+not used, generated active wrapper is not used, `candidate.view` is not active,
+RAM-backed active table publication is not used, root cause remains unproven,
+and Nunchuk remains NOT_TESTED.
 
-Each phase lists requirement fields separately:
+## Phase 0 - Preserve Current Source-Owned Firmware Baseline
 
-- `requires_user_domain_input`
-- `requires_user_product_approval`
-- `requires_source_research`
-- `requires_hardware_test`
-- `requires_user_artifact`
-- `requires_firmware_change`
-- `requires_safety_review`
-- `requires_schema_decision`
-- `requires_transport_authority`
+Status: `CURRENT_BASELINE`.
 
-## Phase 0 - Current Hardcoded Firmware Baseline
+Goal: preserve the known-good source-owned table/routing path and keep current
+checkers aligned with the latest Y2 layout HARDWARE_PASS.
 
-Goal: Preserve the current hardcoded Glyph/HayBox firmware behavior and its
-recorded hardware scope.
+Next concrete action: keep `docs/AGENT_CONTEXT.md`,
+`docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`, and the latest Y2 layout
+checker current when evidence changes.
 
-Status: `CURRENT_BASELINE` / `COMPLETE` for the current non-nunchuk scope.
+Stop conditions: unclear hardware scope, any new nunchuk claim, any root-cause
+claim, or any behavior-changing firmware edit without hardware gate.
 
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=false`; `requires_source_research=false`;
-`requires_hardware_test=false` for already recorded scope.
+## Phase 1 - Source-Owned Realization Generator
 
-Engineering/source research can proceed: yes, for preservation, inventory, and
-checker maintenance only.
+Status: `READY_FOR_ENGINEERING_DESIGN`.
 
-Next concrete action: preserve the current baseline and use it as the comparison
-target for future generated artifacts.
+Goal: turn neutral/profile intent into generated source-owned tables/routing
+source that can be reviewed, built, and hardware-tested through the existing
+source-owned active path.
 
-Required evidence: source files, hardware result packets, current checker output,
-and recorded artifact/hash data where available.
+Next concrete action: harden the source-owned realization generator and its
+fixtures/checkers while keeping output as reviewable source artifacts.
 
-Stop conditions: unexpected firmware behavior, unclear hardware scope, missing
-result provenance, or any attempt to expand nunchuk claims.
+Boundary: this phase may generate source text or docs fixtures, but it must not
+replace the active RuntimeConfigView, publish `candidate.view`, publish
+RAM-backed active table storage, introduce runtime-loaded config, or add
+storage/write/flashing paths.
 
-Explicit non-goals: no runtime-loaded config, no device write, no external
-adapter output, no Senscope game-semantic changes.
+## Phase 2 - Coordinate-Native Runtime Profile Design
 
-## Phase 1 - Senscope Neutral Profile Format
+Status: `READY_FOR_ENGINEERING_DESIGN`, implementation deferred.
 
-Goal: Keep a neutral Senscope-owned profile concept separate from Glyph firmware
-and game semantics.
+Goal: design coordinate-native runtime profile support around the primitive
+`active role/modifier state + resolved direction key 1..9 -> exact raw
+coordinate`, including neutral 5, full 9-way asymmetry, and explicit
+routing/sublayers/priorities.
 
-Status: `READY_FOR_ENGINEERING_DESIGN`, but in the Senscope workstream.
+Current v0 production remains source-owned firmware generation as v0 until a
+coordinate-native runtime profile has separate design, source authority, build
+proof, and hardware proof.
 
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=false` unless schema product choices are being
-requested; `requires_schema_decision=true` before schema changes.
+The source-owned Y2 layout HARDWARE_PASS and prior active-publication
+HARDWARE_FAIL evidence are the evidence base for this plan. The future target
+is a coordinate-native runtime profile. Browser/protobuf/persistence as future
+infrastructure is likely solvable, but the neutral app-owned profile remains
+canonical and firmware-independent. Firmware should not own game semantics.
 
-Engineering/source research can proceed: yes, in the Senscope workflow when that
-workstream is explicitly active.
+Stop conditions: runtime-loaded profile claims, active publication changes,
+neutral profile schema changes, or game-semantic claims without explicit
+approval and source authority.
 
-Next concrete action: Senscope-side profile/save/load work outside this repo.
-
-Required evidence: explicit user approval for schema changes and Senscope-side
-source authority when that workstream is active.
-
-Stop conditions: task requires changing neutral profile schema or coupling
-controller constraints into game-semantic solving.
-
-Explicit non-goals: no Glyph firmware edits, no game-semantic source promotion,
-and no schema changes from this repo alone.
-
-## Phase 2 - Generated-Config/Evaluator Bridge
-
-Goal: Use source-backed generated config artifacts to drive offline evaluator
-checks and compare expected controller/backend behavior.
-
-Status: `READY_FOR_ENGINEERING_DESIGN` / `READY_FOR_PROTOTYPE`.
-
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=false`; `requires_source_research=false` for
-source-backed generated-config/evaluator artifacts.
-
-Engineering/source research can proceed: yes, when scoped to docs/tools,
-fixtures, validators, and source-backed evaluator inputs.
-
-Next concrete action: connect Senscope neutral profile outputs to
-generated-config/evaluator artifacts without changing firmware source or
-Senscope game semantics.
-
-Required evidence: source-parsed tables, role maps, behavior-case fixtures,
-deterministic checker output, and explicit non-claims.
-
-Stop conditions: generated data depends on inferred behavior, unsupported roles,
-or undocumented backend behavior.
-
-Explicit non-goals: not firmware input, not runtime-loaded config, not hardware
-validation, and not device transport.
-
-## Phase 3 - Generated C++ Constants / Firmware Build Path
-
-Goal: Keep the current source-owned generated-like constants firmware path
-stable for the merged 27-table `StickPoint[9]` baseline and keep future deltas
-source-backed.
-
-Status: `CURRENT_BASELINE` / `COMPLETE` for the current baseline behavior-preserving firmware path.
-
-Note: before the approved merge, this work sat at `READY_FOR_ENGINEERING_DESIGN`.
-
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=false` for the merged baseline itself.
-
-Future generated constants changes remain allowed only through source-backed
-review, build, hardware plan/result, explicit product approval when behavior/
-build-path risk exists, and no runtime-loaded config/device-write expansion.
-
-Engineering/source research can proceed: yes, for source-sync checker
-maintenance, source-backed diff review, and docs/tools validation of the current
-baseline.
-
-Next concrete action: maintain the source-sync checker and keep future
-generated constants deltas behind source-backed review, build, hardware
-plan/result, and approval gates.
-
-Required evidence: exact source diff, build output, artifact inspection,
-behavior-preserving checker coverage, and hardware plan/result for any future
-delta.
-
-Stop conditions: generated constants drift from source, build fails, or a
-future delta would alter behavior without approval and test plan.
-
-Explicit non-goals: no broad refactor, no runtime-loaded config interpreter, no
-device write, no profile artifact change, no firmware flashing automation, no
-nunchuk validation claim, and no intentional controller behavior change.
-
-The source-owned active runtime config preselection scaffold has a recorded
-`HARDWARE_PASS` on
-`runtime-active-config-state-source-owned-preselection-hardware-result`; it is
-behavior-preserving, keeps RF5/RF6/LT6 expressions unchanged, and is safe to
-use as the repair-architecture basis without expanding runtime-loaded config
-or device-write scope.
-
-The candidate-state materialization scaffold is the next safe source-level
-architecture step after that baseline. Candidate state remains pre-publication
-scaffolding only; `ResolveActiveRuntimeConfig()` and `UpdateAnalogOutputs(...)`
-continue to consume only the stable selected `RuntimeConfigView`.
-
-The parsed-candidate-present/source-owned-published diagnostic is a hardware
-result branch (`diagnostic_parsed_candidate_present_source_owned_published`), not
-an activation repair. It keeps parser bridge, candidate materialization, and
-equivalence validation present while forcing active publication to
-`kSourceOwnedCurrentBaselineRuntimeConfig`. The result branch
-`runtime-config-diagnostic-parsed-candidate-present-source-owned-published-hardware-result`
-records `overall_result: HARDWARE_PASS` and
-`operator_report: "tested, everything works"`. Parsed
-candidate/parser/materialization presence is hardware-safe when source-owned
-baseline remains the published active view. Candidate active publication remains
-unsafe after the `runtime-config-parsed-candidate-opt-in-diagnostic-batch`
-hardware failure and must not merge without a separate source-backed,
-hardware-gated repair. Active publication of `candidate.view` remains the main
-suspect, while the low-level failure mechanism remains unproven.
-
-The active-storage publication model scaffold in
-`docs/runtime_config/active_storage_publication_model.md` is the next safe
-engineering boundary after candidate-backed active publication failures. The
-rule is candidate buffer != active buffer: candidate data may validate proposed
-values, but accepted values must be copied into dedicated active storage before
-any future active publication. The current scaffold keeps the source-owned
-baseline published active view, does not activate dedicated active storage, and
-requires no hardware test before merge. A future source-owned-equivalent
-dedicated-active-storage publication diagnostic is hardware-test-required before
-merge.
-
-The diagnostic branch `runtime-config-diagnostic-active-storage-published`
-(`diagnostic_active_storage_published`) is that hardware-gated diagnostic. It
-publishes only source-owned-equivalent dedicated active storage as the active
-view after copy, validation, and point/table-equivalence success, keeps
-candidate.view and candidate-owned table pointers non-active, and falls back to
-`kSourceOwnedCurrentBaselineRuntimeConfig` on validation/equivalence failure.
-This branch changes active behavior and has a recorded `HARDWARE_FAIL` result
-on
-`runtime-config-diagnostic-active-storage-published-hardware-failure`,
-documented in
-`docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`.
-Controller disconnect still happens during forced A + Up and forced A + Down.
-Dedicated active storage published as the active `RuntimeConfigView` is not safe
-in this diagnostic, and the implementation branch must not merge into
-`configurator`. Do not merge the failed implementation branch. Dedicated active
-storage published active is unsafe under this diagnostic. It does not implement
-runtime-loaded config, storage, WebSerial/device write, backend/config.pb write
-path, firmware flashing automation, or nunchuk validation.
-
-Future strategy should pivot away from RAM-backed active table pointer
-publication. RAM-backed active table storage is unsafe as an active publication
-target under this test. RAM-backed active runtime table storage appears unsafe
-as an active publication target under this diagnostic, even when
-source-owned-equivalent, validated, equivalence-checked, parser-free, and not
-candidate-owned. The low-level mechanism remains unproven, candidate-backed
-active view remains forbidden, and dedicated active storage may remain as
-archived diagnostic evidence only. Preferred next strategies to document are
-compile-time/generated immutable source-owned tables, source-owned table
-replacement / generated firmware artifacts, or no runtime-loaded publication
-until a safer active-storage model is proven.
-
-The latest Y2 layout source-owned port on
-`runtime-config-latest-y2-layout-source-owned-port` is firmware behavior work
-that restores the full required latest layout while preserving the accepted
-source-owned active publication boundary. It is not a Tilt3-only split. It
-changes active behavior, so hardware test required before merge was the gate
-and is now satisfied by the recorded `HARDWARE_PASS` result on
-`runtime-config-latest-y2-layout-source-owned-port-hardware-result`. The full
-latest Y2 layout source-owned port is merge-approved after hardware PASS. The
-user report is "everything works, all usual tests pass, including Up+A and
-Down+A"; RF5 forced A + Up and LT6 forced A + Down pass without disconnect,
-the full latest Y2 layout behavior is accepted by hardware testing, and Y1
-simple / Y2 sublayer migration is accepted by hardware testing. The branch
-keeps active view selection unchanged, does not use RuntimeConfigView
-replacement, does not use a generated active wrapper, does not publish
-`candidate.view`, does not use RAM-backed active table publication, does not
-implement runtime-loaded config, storage, WebSerial/device write,
-backend/config.pb write path, or flashing automation, and does not prove the
-low-level root cause. Nunchuk remains NOT_TESTED.
-
-The generated source-owned realization design in
-`docs/runtime_config/generated_source_owned_realization_design.md` with
-`docs/runtime_config/fixtures/generated_source_owned_realization_design.json`
-is the next docs/tools-only strategy packet after the active-storage
-`HARDWARE_FAIL`. It records the source-owned active-state preselection
-`HARDWARE_PASS`, the parsed/candidate machinery present with source-owned
-active view `HARDWARE_PASS`, and the active-storage `HARDWARE_FAIL` evidence in
-`docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`.
-The target model is generated C++ immutable source-owned runtime tables built
-into firmware; active `RuntimeConfigView` points to source-owned generated
-tables, not RAM-backed materialized storage. This design changes no active
-firmware behavior, requires no hardware test before merge, implements no
-parser payload path, runtime-loaded config, persistent storage, WebSerial/device
-write, backend/config.pb write path, flashing automation, candidate.view active
-publication, RAM-backed active table publication, or nunchuk validation claim.
-Future implementation must be hardware-gated if active source selection
-behavior changes.
-
-The generated source-owned schema scaffold in
-`docs/runtime_config/generated_source_owned_schema_scaffold.md` with
-`docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json`
-is the first inert source/schema scaffold for the generated source-owned
-realization strategy. It follows `generated_source_owned_realization_design.md`,
-adds isolated generated-source-owned schema metadata headers, records
-source-owned active-state preselection `HARDWARE_PASS`, parsed/candidate
-machinery present with source-owned active view `HARDWARE_PASS`, and
-active-storage `HARDWARE_FAIL` evidence. It changes no active firmware
-behavior, does not wire generated tables active, implements no parser payload
-path, runtime-loaded config, persistent storage, WebSerial/device write,
-backend/config.pb write path, flashing automation, candidate.view active
-publication, RAM-backed active table publication, or nunchuk validation claim.
-Future hardware gate required before generated source-owned tables are selected
-active.
-
-The generated source-owned generator contract in
-`docs/runtime_config/generated_source_owned_generator_contract.md` with
-`docs/runtime_config/fixtures/generated_source_owned_generator_contract.json`,
-`docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`,
-`docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`,
-and `tools/generate_source_owned_runtime_config.py` is the first offline
-generator contract for generated source-owned immutable runtime table artifacts.
-It defines a neutral JSON input contract, exact 27-table / 9-point / 2-axis
-validation, deterministic C++ text output, and docs-fixture-only output by
-default. Generated tables not wired active, no active firmware behavior change
-is introduced, no runtime-loaded config/storage/write/flashing path is
-implemented, and nunchuk `NOT_TESTED` remains unchanged.
-
-The generated source-owned artifact install workflow in
-`docs/runtime_config/generated_source_owned_artifact_install.md` with
-`docs/runtime_config/fixtures/generated_source_owned_artifact_install.json` and
-`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`
-is an inert, checker-guarded install path for source-owned generated runtime
-table artifacts. It follows `generated_source_owned_generator_contract.md` and
-`generated_source_owned_schema_scaffold.md`, references active-storage
-`HARDWARE_FAIL` evidence and source-owned active-state preselection
-`HARDWARE_PASS` evidence, keeps generated tables not wired active, does not
-include the artifact from `src/modes/Ultimate.cpp`, changes no active firmware
-behavior, and implements no runtime-loaded config, persistent storage,
-WebSerial/device write, backend/config.pb write path, firmware flashing
-automation, or nunchuk validation claim. Future hardware gate required before
-generated source-owned tables are selected active.
-
-The generated source-owned baseline artifact in
-`docs/runtime_config/generated_source_owned_baseline_artifact.md` with
-`docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json` and
-`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
-is an inert generated source-owned artifact for the current source-owned
-baseline. It follows `generated_source_owned_artifact_install.md` and
-`generated_source_owned_generator_contract.md`, references active-storage
-`HARDWARE_FAIL` evidence and source-owned active-state `HARDWARE_PASS`
-evidence, and proves equivalence to the current source-owned baseline by
-source/artifact comparison of table count, table names/order, point count, and
-every x/y point. It is not included by `src/modes/Ultimate.cpp`, generated
-tables are not wired active, active behavior remains unchanged, and future
-hardware gate required before generated source-owned baseline artifact is
-selected active. No runtime-loaded config, persistent storage, WebSerial/device
-write, backend/config.pb write path, firmware flashing automation, or nunchuk
-validation claim is introduced. The low-level failure mechanism remains
-unproven.
-
-The diagnostic branch
-`runtime-config-diagnostic-generated-source-owned-baseline-active` is the
-(`diagnostic_generated_source_owned_baseline_active`) is the hardware-gated
-next step for the generated source-owned path. It selects the
-generated source-owned baseline-equivalent `RuntimeConfigView` as active while
-keeping active table pointers source-owned and immutable. It intentionally
-changes active behavior, records `hardware_test_required_before_merge: true`,
-does not publish `candidate.view`, does not assign candidate-owned or
-RAM-backed table pointers to the active view, does not implement parser
-payload/runtime-loaded/storage/write/WebSerial/backend config.pb/flashing
-paths, and keeps Nunchuk NOT_TESTED. A preserved hardware PASS is required
-before this active diagnostic source can remain merged into `configurator`.
-
-The generated source-owned baseline active diagnostic has a recorded
-`HARDWARE_FAIL` result on
-`runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`,
-documented in
-`docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md`.
-Forced A + Up still disconnects and forced A + Down still disconnects. Initial
-two Up+A presses did not immediately disconnect, but subsequent presses
-reproduced the same disconnect behavior. Across failed firmware diagnostics,
-after reconnect the controller has often been stuck with left stick fully down
-or fully up. Generated/source-owned/baseline-equivalent table data was not
-sufficient for safe active publication. Failure is not isolated to RAM-backed
-active table storage; changing active `RuntimeConfigView`/table publication path
-remains unsafe under this diagnostic. The low-level mechanism remains unproven.
-Source-owned active-state preselection remains the last known passing
-active-runtime boundary. The implementation branch must not merge into
-`configurator`, and Nunchuk remains NOT_TESTED. Future realization strategy
-should pivot away from `RuntimeConfigView` replacement as the active
-customization mechanism unless a narrower source-backed diagnostic proves
-otherwise.
-
-The source-owned table replacement design in
-`docs/runtime_config/source_owned_table_replacement_design.md` with
-`docs/runtime_config/fixtures/source_owned_table_replacement_design.json` is the
-next docs/checker-only strategy after generated source-owned baseline active
-HARDWARE_FAIL. It records dedicated active storage HARDWARE_FAIL and
-source-owned active-state preselection HARDWARE_PASS evidence, keeps active
-behavior unchanged, and requires no hardware test before merge for this design
-branch. The future strategy is to patch or regenerate only the compile-time
-contents of the existing source-owned `StickPoint` tables already consumed by
-the active `kSourceOwnedCurrentBaselineRuntimeConfig`; source-owned table
-replacement does not change RuntimeConfigView selection. RuntimeConfigView
-replacement, active-view selection changes, candidate.view active publication,
-RAM-backed active table publication, generated baseline-active publication,
-runtime-loaded config, persistent storage, WebSerial/device write,
-backend/config.pb write path, and flashing automation remain disallowed or not
-implemented under current evidence. Future implementation changing table
-contents must be hardware-gated before merge if active behavior changes. Root
-cause remains unproven and Nunchuk remains NOT_TESTED.
-
-The source-owned table replacement generator contract in
-`docs/runtime_config/source_owned_table_replacement_generator_contract.md` with
-`docs/runtime_config/fixtures/source_owned_table_replacement_generator_contract.json`,
-`docs/runtime_config/fixtures/source_owned_table_replacement_input.example.json`,
-`docs/runtime_config/fixtures/generated_outputs/UltimateIdentityRuntimeTables.replacement.example.hpp`,
-and `tools/generate_source_owned_table_replacement.py` is docs/tools only. It
-follows `source_owned_table_replacement_design.md`, accepts generated
-source-owned baseline active HARDWARE_FAIL, dedicated active storage
-HARDWARE_FAIL, and source-owned active-state preselection HARDWARE_PASS
-evidence, and defines a deterministic stdlib-only generator for replacing
-numeric `x`/`y` contents inside existing source-owned `StickPoint` tables. It
-makes no RuntimeConfigView selection change, does not modify active source
-files, changes no active behavior, and requires no hardware test before merge
-for this contract-only branch.
-
-The latest layout Y2 port plan in
-`docs/runtime_config/latest_layout_y2_port_plan.md` with
-`docs/runtime_config/fixtures/latest_layout_y2_port_plan.json` and
-`tools/check_glyph_latest_layout_y2_port_plan.py` is docs/checker only. This
-branch does not implement the latest layout, does not validate hardware for the
-latest layout, and only defines the port plan for reapplying
-`codex/update-custom-modifier-tables-y2` onto current `configurator`. The plan
-uses source-owned table-content replacement where possible by classifying the
-existing `kTilt3Table` x/y change as the table-content-only candidate. It
-separates Y2 table identity, LT3/Y2 routing, `Ultimate.cpp` behavior,
-`UltimateRuntimeConfigInterpreter.hpp` table-order/schema changes, evaluator
-behavior, and checker expectations into routing/role work requiring a separate
-hardware gate if implemented. Do not port generated active-view or
-RuntimeConfigView replacement artifacts. Active behavior is unchanged, hardware
-test is not required before merge for this docs/checker branch, root cause is
-not proven, and Nunchuk remains NOT_TESTED.
-
-The Glyph coordinate-native runtime plan in
-`docs/runtime_config/glyph_coordinate_native_runtime_plan.md` with
-`docs/runtime_config/fixtures/glyph_coordinate_native_runtime_plan.json`
-records the forward architecture after the source-owned Y2 layout
-HARDWARE_PASS. It accepts prior active-publication HARDWARE_FAIL evidence and
-keeps current v0 production on source-owned firmware generation as v0:
-neutral/profile intent becomes generated source-owned tables/routing source,
-then a firmware build uses the existing active `RuntimeConfigView` path. The
-long-term target remains a coordinate-native runtime profile, not the existing
-generic scalar analog modifier/custom-mode abstraction as canonical model. The
-required runtime primitive is active role/modifier state plus resolved
-direction key 1..9 to exact raw coordinate, including neutral 5, full 9-way
-asymmetry, and explicit routing/sublayers/priorities. Y1/Y2/Tilt/Layer-style
-behavior requires profile-level routing primitives. Browser/protobuf/persistence
-as future infrastructure is likely solvable, but the neutral app-owned profile
-remains canonical and firmware-independent. Glyph firmware should become a
-deterministic coordinate-output backend; firmware should not own game
-semantics, and Senscope/dataset/solver owns game semantics. Active behavior is
-unchanged, hardware test is not required before merge for this docs/checker
-branch, RuntimeConfigView replacement and RAM-backed/candidate active
-publication remain disallowed, root cause remains unproven, and Nunchuk
-remains NOT_TESTED.
-
-## Phase 4 - Offline Official Configurator Export Target Contract
-
-Goal: Define the offline target-contract boundary for official-configurator-
-oriented comparison after the profile format exists.
-
-Status: `READY_FOR_ENGINEERING_DESIGN` after the official corpus correction.
-
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=true` before exporter implementation;
-`requires_user_artifact=false` for the initial corpus, though exact configurator
-metadata may still be provided if available; `requires_schema_decision=true`
-because the Senscope neutral profile is a prerequisite.
-
-Engineering/source research can proceed: yes, for export target contract,
-source-authority packet, preview fixture, and candidate validator design.
-
-Next concrete action: define the export target contract and offline preview /
-checker; do not generate vendor-specific output until source support and
-approval exist.
-
-Required evidence: official corpus manifest, fixture hashes, source-authority
-classification, and offline preview validation report or blocker.
-
-Stop conditions: vendor format is undecided, official source authority is
-insufficient, or compatibility would be claimed from incomplete evidence.
-
-Explicit non-goals: no production export, no WebSerial/device write, no
-protobuf binary write, no firmware flashing automation, and no universal
-official compatibility claim.
-
-## Phase 5 - Manual Import/Export And Hardware Validation Loop
-
-Goal: Compare offline candidates through manual official configurator
-import/export and separately record any hardware validation.
-
-Status: `FUTURE_PHASE`; becomes `WAITING_FOR_USER_ARTIFACT` or
-`WAITING_FOR_HARDWARE_TEST` only after a candidate or firmware artifact exists.
-
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=false` for result recording;
-`requires_hardware_test=false` until a test artifact exists.
-
-Engineering/source research can proceed: not applicable until a candidate
-exists, except for maintaining templates/checkers.
-
-Next concrete action: none until an offline candidate or firmware artifact
-exists.
-
-Required evidence: exact app/version/source reference when available, input and
-output hashes, no-device/write caveats, hardware artifact provenance, and result
-packet.
-
-Stop conditions: test route requires push-to-device behavior, WebSerial write,
-firmware flashing automation, or undocumented compatibility claims.
-
-Explicit non-goals: no automated flashing, no direct device write, no nunchuk
-validation unless executed and recorded.
-
-## Phase 6 - Stable Firmware + Bounded Config-Owned Modifier Data
-
-Goal: Define a stable firmware boundary where future config may own bounded
-modifier data while firmware owns evaluator semantics.
-
-Status: `PHASE6_DESIGN_COMPLETE_NOT_IMPLEMENTED` for docs/spec/tooling;
-runtime-loaded config implementation remains `FUTURE_PHASE`.
-
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=true` before implementation;
-`requires_firmware_change=true` only for the implementation branch;
-`requires_safety_review=true`.
-
-Engineering/source research can proceed: yes, for checker maintenance and
-future implementation-slice design if scoped to docs/tools.
-
-Next concrete action: inspect the Phase 6 design artifacts and keep future
-implementation slices behind product approval, source authority, build, and
-hardware gates.
-
-Required evidence: source-backed ownership split, bounded schema, validator
-contract, fallback policy, and hardware validation plan.
-
-Stop conditions: config attempts to own evaluator phase order, scripts, macros,
-turbo, timing automation, or history-dependent logic.
-
-Explicit non-goals: no arbitrary scripting, no hidden transport behavior, no
-runtime interpreter implementation without explicit approval.
-
-## Phase 7 - Runtime-Loaded Config Interpreter
-
-Goal: Implement a firmware-owned bounded runtime config interpreter only if
-future approval and source authority exist.
+## Phase 3 - Future Browser/Protobuf/Persistence Backend
 
 Status: `FUTURE_PHASE`.
 
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=true` before firmware implementation;
-`requires_source_research=true`; `requires_firmware_change=true`;
-`requires_safety_review=true`.
+Goal: after the runtime model exists, design browser/protobuf/persistence
+backend infrastructure for moving a bounded runtime profile safely.
 
-Engineering/source research can proceed: yes, for
-storage/representation/fallback design if prioritized.
+Next concrete action: none until the coordinate-native runtime profile design is
+reviewed and a hardware-proof strategy exists.
 
-Next concrete action: storage, representation, validator, fallback, and rollback
-design branch if prioritized. This is not blocked by user domain input unless a
-specific product decision is being asked.
+Boundary: no WebSerial/device write, protobuf binary write, persistent
+runtime-config storage, backend/config.pb write path, or firmware flashing
+automation is implemented or approved by this roadmap.
 
-Current implementation state: Runtime-loaded config is not implemented.
+## Archived Diagnostics
 
-### Phase 7A - Active Runtime Config State Contract
-
-Goal: Preserve the accepted hot-path parse-status guardrail while defining the
-future active-state boundary for runtime config activation.
-
-Status: `READY_FOR_ENGINEERING_DESIGN` / `DESIGN_ACCEPTED` for docs/tools only.
-
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=true` before firmware behavior implementation;
-`requires_firmware_change=false` for this contract branch.
-
-Engineering/source research can proceed: yes, for docs/tools checkers and
-future implementation-slice design only.
-
-Next concrete action: use the Active Runtime Config State Contract before any
-runtime activation source changes. Activation/selection may validate parser,
-payload, CRC, materialization, and load state before publishing stable active
-state. Output generation may consume only the published active view.
-
-Required evidence: `docs/runtime_config/active_runtime_config_state_contract.md`,
-`docs/runtime_config/fixtures/active_runtime_config_state_contract.json`, the
-accepted hot-path parse-status guardrail, and checker output.
-
-Accepted next boundary:
-`docs/runtime_config/parser_hotpath_postmortem_and_next_boundary.md` records the
-Phase 7A diagnostic matrix, the accepted guardrail, and the source-owned
-active-state preselection `HARDWARE_PASS`. Source-owned active-state
-preselection is the repair architecture baseline. Parser/materialization/load
-may happen only before active-state publication; output generation may consume
-only the already-selected `RuntimeConfigView`.
-
-Stop conditions: any implementation path that reads parser result state from
-`UpdateAnalogOutputs`, an analog hot-path resolver, or
-`ResolveActiveRuntimeConfig`; any output path that branches on activation
-source or activation status; any runtime-loaded config, storage, WebSerial,
-device-write, flashing, or nunchuk validation claim.
-
-Implementation note:
-
-- `runtime-active-config-state-source-owned-preselection` applies the accepted
-  contract as a source-authored scaffold: stable active-state selection in
-  `GetActiveRuntimeConfigState()`, hot-path selection through
-  `ResolveActiveRuntimeConfig()`, and source-owned preselection behavior. This
-  branch remains parser-call free in firmware source and adds no storage,
-  write, parser payload, transport, or flashing behavior.
-- `runtime-config-active-storage-publication-model` records the safe publication
-  rule after candidate-backed active publication failures: candidate buffer !=
-  active buffer. The branch adds inactive dedicated active storage
-  copy/validation helpers, keeps the source-owned baseline published active
-  view, and leaves active output behavior unchanged.
-
-Explicit non-goals: no runtime-loaded config, no parsed table materialization,
-no storage, no WebSerial/device write, no flashing automation, and no
-nunchuk validation claim.
-
-Accepted guardrail: the Phase 7A D5A/D5A-N1/D5A-N2 finding is recorded in
-`docs/runtime_config/hot_path_parse_status_guardrail.md`. Future activation
-work must compute stable active runtime config state outside the analog output
-hot path; `UpdateAnalogOutputs` and any analog hot-path resolver must not read
-or branch on parser result status or config-load status.
-
-Required evidence: explicit user approval, storage decision, representation
-decision, validator design, fallback policy, build, hardware plan/result, and
-rollback plan.
-
-Stop conditions: implementation approval missing, storage/transport source
-authority missing, fallback ambiguous, or implementation depends on inferred
-behavior.
-
-Explicit non-goals: no device write transport, no schema authority from external
-remapper docs, no hardware validation claim without result.
-
-## Phase 8 - WebSerial/Device-Write / Push-To-Device Workflow
-
-Goal: Consider a write-capable workflow only after source authority, policy, and
-validation exist.
-
-Status: `FUTURE_PHASE`.
-
-Requirements now: `requires_user_domain_input=false`;
-`requires_user_product_approval=true` before implementation;
-`requires_source_research=true`; `requires_transport_authority=true`;
-`requires_safety_review=true`.
-
-Engineering/source research can proceed: yes, for source-authority and transport
-research if prioritized.
-
-Next concrete action: source-authority/transport research branch if prioritized.
-No WebSerial/device write, protobuf binary write, hidden device write, or
-flashing automation may be implemented from current evidence.
-
-Current implementation state: WebSerial/device write is not implemented.
-Protobuf binary write is not implemented. Firmware flashing automation is not
-implemented.
-
-Required evidence: official transport/schema authority, no-destructive workflow
-policy, explicit approval, round-trip validation, hardware safety plan, and
-rollback/recovery plan.
-
-Stop conditions: task requires push-to-device behavior without explicit source
-support, reverse-engineering private/encrypted formats, or unsafe/destructive
-device actions.
-
-Explicit non-goals: no current implementation, no external-remapper adapter
-output, no firmware flashing automation, and no user-facing write path.
-
-## Runtime-Config Step Sequence
-
-This docs-only sequence is the next hardware-gated workflow prep and does not
-declare a release.
-
-- Step 14 manual firmware-consuming runtime-config load is blocked before implementation.
-- Step 15 source-authority research complete.
-- Step 16 WebSerial/device-write implementation is blocked before implementation.
-- Step 17 flashing automation is forbidden/not approved; safety boundary complete.
-- Step 18 public/manual workflow release-candidate hardware result is recorded for
-  applicable doable scope in
-  `docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`;
-  the plan/checklist remain plan-only and no public release or official
-  configurator compatibility claim is made.
-- Public/manual workflow release-candidate plan and checklist live in `docs/release/public_manual_workflow_release_candidate_plan.md` and `docs/release/public_manual_workflow_release_candidate_checklist.md`.
-- Offline official configurator export target contract docs live in
-  `docs/export/official_configurator_export_source_authority.md`,
-  `docs/export/official_configurator_export_target_contract.md`, and the
-  preview/invalid fixtures under `docs/export/fixtures/`; they remain
-  offline-only and do not claim production export or official compatibility.
-- Runtime-loaded config remains not implemented.
-- Runtime-config storage remains not implemented.
-- Firmware binary/protobuf parser integration remains not implemented.
-- WebSerial/device write remains not implemented.
-- Firmware flashing automation remains not implemented.
-- Nunchuk remains NOT_TESTED unless explicitly validated.
-
-## Forbidden Policy Items
-
-Status: `FORBIDDEN_BY_POLICY`.
-
-These remain forbidden unless future source authority, legal/safety review, and
-explicit product approval change the policy:
-
-- macros;
-- turbo;
-- timing automation;
-- hidden device write;
-- unsafe flashing automation;
-- external source reuse without license/source review.
+Archived failed implementation diagnostics remain important evidence, but they
+are not current work. Start from `docs/archive/README.md` for the concise map,
+then open the original packets only when needed.

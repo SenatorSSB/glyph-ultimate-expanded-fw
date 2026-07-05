@@ -17,10 +17,6 @@ def fail(message: str) -> None:
     raise DocsNavigationError(message)
 
 
-def rel(path: Path) -> str:
-    return str(path.relative_to(REPO_ROOT))
-
-
 def read_required(rel_path: str) -> str:
     path = REPO_ROOT / rel_path
     if not path.exists():
@@ -28,9 +24,14 @@ def read_required(rel_path: str) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def normalize(text: str) -> str:
+    return " ".join(text.replace("`", "").split()).lower()
+
+
 def require_phrases(rel_path: str, phrases: tuple[str, ...]) -> None:
     text = read_required(rel_path)
-    missing = [phrase for phrase in phrases if phrase not in text]
+    normalized = normalize(text)
+    missing = [phrase for phrase in phrases if normalize(phrase) not in normalized]
     if missing:
         fail(f"{rel_path} missing required phrases: " + ", ".join(missing))
 
@@ -39,91 +40,114 @@ def main() -> int:
     required_paths = (
         "README.md",
         "AGENTS.md",
+        "docs/AGENT_CONTEXT.md",
         "docs/CURRENT_STATE.md",
         "docs/ROADMAP.md",
         "docs/WORKFLOW.md",
+        "docs/archive/README.md",
         "docs/calibration/README.md",
         "docs/calibration/INDEX.md",
         "docs/calibration/archive_policy.md",
         "docs/export/README.md",
+        "docs/runtime_config/README.md",
+        "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
     )
     for rel_path in required_paths:
-        if not (REPO_ROOT / rel_path).exists():
-            fail(f"missing required path: {rel_path}")
+        read_required(rel_path)
 
-    main_docs = (
-        "docs/CURRENT_STATE.md",
-        "docs/ROADMAP.md",
-        "docs/WORKFLOW.md",
-        "AGENTS.md",
-        "docs/calibration/README.md",
+    require_phrases(
+        "README.md",
+        (
+            "docs/CURRENT_STATE.md",
+            "docs/ROADMAP.md",
+            "docs/WORKFLOW.md",
+            "AGENTS.md",
+            "docs/calibration/README.md",
+            "docs/export/README.md",
+        ),
     )
-    require_phrases("README.md", main_docs)
     require_phrases("AGENTS.md", ("docs/CURRENT_STATE.md", "docs/ROADMAP.md", "docs/WORKFLOW.md"))
-    require_phrases("README.md", ("docs/export/README.md",))
+
+    require_phrases(
+        "docs/AGENT_CONTEXT.md",
+        (
+            "current known-good branch state",
+            "latest Y2 layout source-owned port",
+            "source-owned table/routing source",
+            "Active RuntimeConfigView selection is unchanged",
+            "candidate.view is not active",
+            "RAM-backed active table publication is not used",
+            "coordinate-native runtime profile",
+            "Nunchuk remains NOT_TESTED",
+            "root cause remains unproven",
+        ),
+    )
 
     require_phrases(
         "docs/CURRENT_STATE.md",
         (
-            "GFW3 runtime remap work is merged, user hardware-tested, and recorded",
-            "Preservation hardware pass is recorded for applicable non-nunchuk scope",
-            "Official Glyph configurator corpus is present",
+            "docs/AGENT_CONTEXT.md",
+            "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+            "source-owned Y2 layout HARDWARE_PASS",
+            "Active RuntimeConfigView selection remains unchanged",
             "Runtime-loaded config is not implemented",
             "WebSerial/device write is not implemented",
             "Protobuf binary write is not implemented",
             "Firmware flashing automation is not implemented",
-            "External adapter output is not implemented",
-            "Current Readiness Categories",
-            "The user is not currently blocking runtime-loaded config",
-            "User domain input is required only for product/domain choices",
             "No nunchuk validation is claimed",
-            "No universal official configurator compatibility claim is made",
-            "No direct device write is implemented or claimed",
-            "Offline official configurator export target contract work is docs/tools only",
+            "No root-cause claim is made",
         ),
     )
 
     require_phrases(
         "docs/ROADMAP.md",
         (
-            "Phase 0 - Current Hardcoded Firmware Baseline",
-            "Phase 1 - Senscope Neutral Profile Format",
-            "Phase 2 - Generated-Config/Evaluator Bridge",
-            "Phase 3 - Generated C++ Constants / Firmware Build Path",
-            "Phase 4 - Offline Official Configurator Export Target Contract",
-            "Phase 5 - Manual Import/Export And Hardware Validation Loop",
-            "Phase 6 - Stable Firmware + Bounded Config-Owned Modifier Data",
-            "Phase 7 - Runtime-Loaded Config Interpreter",
-            "Phase 8 - WebSerial/Device-Write / Push-To-Device Workflow",
-            "Status Taxonomy",
-            "READY_FOR_ENGINEERING_DESIGN",
-            "READY_FOR_SOURCE_RESEARCH",
-            "requires_user_domain_input",
-            "requires_user_product_approval",
-            "Runtime-loaded config is not implemented",
-            "WebSerial/device write is not implemented",
-            "Protobuf binary write is not implemented",
-            "Offline official configurator export target contract docs live in",
+            "Phase 0 - Preserve Current Source-Owned Firmware Baseline",
+            "Phase 1 - Source-Owned Realization Generator",
+            "Phase 2 - Coordinate-Native Runtime Profile Design",
+            "Phase 3 - Future Browser/Protobuf/Persistence Backend",
+            "source-owned realization generator",
+            "coordinate-native runtime profile",
+            "browser/protobuf/persistence",
+            "generated active wrapper",
+            "runtime-config-latest-y2-layout-source-owned-port-hardware-result",
         ),
     )
 
     require_phrases(
-        "docs/WORKFLOW.md",
+        "docs/runtime_config/README.md",
         (
-            "Branch Categories",
-            "Docs/tools",
-            "Corpus/evidence",
-            "Firmware behavior",
-            "Hardware result",
-            "Exporter/adapter",
-            "Runtime-loaded config/device write",
-            "Inspection Policy",
-            "Post-merge inspection is required",
-            "Hardware Test Policy",
-            "Source Authority Policy",
-            "Autonomy And Approval Policy",
-            "Docs/tools, source research, and engineering design can proceed autonomously",
-            "User product approval is required before",
+            "Current Known-Good State",
+            "Safe Source-Owned Realization Path",
+            "Forbidden Active Publication Paths",
+            "Future Coordinate-Native Runtime Profile Plan",
+            "Archived Diagnostics",
+            "latest_y2_layout_source_owned_port.md",
+            "RuntimeConfigView replacement is not used",
+            "candidate.view is not active",
+            "RAM-backed active table publication is not used",
+        ),
+    )
+
+    require_phrases(
+        "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+        (
+            "candidate.view active publication is forbidden",
+            "active_storage.view active publication is forbidden",
+            "Generated active RuntimeConfigView wrapper publication is forbidden",
+            "RuntimeConfigView replacement as the customization mechanism is forbidden",
+            "Runtime-loaded profile claims are forbidden",
+        ),
+    )
+
+    require_phrases(
+        "docs/archive/README.md",
+        (
+            "historical diagnostics",
+            "Do not delete historical failure evidence",
+            "Do not present archived failed implementation branches as current work",
+            "Do not claim the root cause is proven",
+            "Do not claim nunchuk was tested",
         ),
     )
 
@@ -131,24 +155,12 @@ def main() -> int:
     if correction_packet.exists():
         for rel_path in (
             "AGENTS.md",
-            "docs/CURRENT_STATE.md",
             "docs/calibration/README.md",
             "docs/calibration/INDEX.md",
             "docs/calibration/archive_policy.md",
         ):
             require_phrases(rel_path, ("quarantined",))
         require_phrases("AGENTS.md", ("Official Glyph configurator corpus is the primary corpus",))
-
-    for rel_path in ("README.md", "docs/CURRENT_STATE.md", "docs/ROADMAP.md"):
-        require_phrases(
-            rel_path,
-            (
-                "Runtime-loaded config",
-                "WebSerial/device write",
-                "protobuf",
-                "device write",
-            ),
-        )
 
     print("glyph_docs_navigation: PASS")
     for rel_path in required_paths:

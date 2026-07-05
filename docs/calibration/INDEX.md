@@ -2,432 +2,61 @@
 
 Status label: CURRENT.
 
-This grouped index lists key evidence packets. It is not an exhaustive manifest.
-Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
-`tools/` for full discovery.
+This is a concise evidence map. It is not an exhaustive manifest. Use
+`find docs/calibration -maxdepth 3 -type f` or the checker scripts in `tools/`
+for full discovery.
 
-## Current Authoritative State Packets
+## Current Merge-Gating Hardware PASS
 
-- `glyph_post_gfw3_configurator_baseline_2026-06-06.md` - post-GFW3
-  `configurator` baseline and non-claims.
-- `glyph_roadmap_next_work_index_2026-06-06.md` - machine-checkable next-work
-  triage index.
-- `glyph_next_user_action_handoff_2026-06-06.md` - user/source-authority/action
-  handoff after the docs/tools sequence.
-
-## Public/Manual Workflow Release-Candidate Prep
-
-- `docs/release/public_manual_workflow_release_candidate_plan.md` - plan-only
-  public/manual workflow release-candidate boundary and non-claims.
-- `docs/release/public_manual_workflow_release_candidate_checklist.md` - release-
-  readiness checklist for the manual RC workflow.
-- `glyph_public_manual_workflow_release_candidate_hardware_plan_2026-06-07.md`
-  - manual RC hardware-test template; not a result.
-- `fixtures/glyph_public_manual_workflow_release_candidate_hardware_plan_2026-06-07.json`
-  - matching hardware-test template fixture.
-
-## Hardware Result Packets
-
-- `glyph_gfw3_runtime_remap_hardware_result_2026-06-06.md` - user-reported GFW3
-  runtime remap hardware pass.
-- `glyph_ultimate_preservation_hardware_result.md` - user-reported preservation
-  pass for applicable non-nunchuk scope.
-- `glyph_generated_constants_phase3_integration_hardware_result_2026-06-07.md`
-  - user-reported Phase 3 generated constants firmware-integration hardware
-    result.
-- `glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`
-  - user-reported public/manual workflow release-candidate hardware result for
-    applicable doable scope; nunchuk remains NOT_TESTED.
-- `fixtures/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.json`
-  - matching public/manual workflow RC hardware result fixture.
-- `glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.md`
-  - user-reported runtime-config interpreter source-baseline hardware result.
-- `glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.md`
-  - user-reported Phase 7A compiled/test runtime-config payload activation
-    hardware failure; failed activation branch must not merge.
-- `fixtures/glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.json`
-  - matching machine-readable Phase 7A activation hardware failure fixture.
-- `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`
-  - user-reported dedicated active-storage publication diagnostic hardware
-    failure; forced A + Up and forced A + Down still disconnect, nunchuk remains
-    NOT_TESTED, and the implementation branch must not merge.
-- `docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json`
-  - matching machine-readable dedicated active-storage publication hardware
-    failure fixture.
-- `docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md`
-  - user-reported generated source-owned baseline active diagnostic hardware
-    failure; forced A + Up and forced A + Down still disconnect, initial two
-    Up+A presses did not immediately disconnect before later reproduction,
-    reconnect sometimes leaves left stick fully down or fully up across failed
-    diagnostics, result branch
-    `runtime-config-diagnostic-generated-source-owned-baseline-active-hardware-failure`,
-    low-level mechanism remains unproven, source-owned active-state
-    preselection remains the last known passing active-runtime boundary,
-    nunchuk remains NOT_TESTED, and the implementation branch must not merge.
-- `docs/runtime_config/fixtures/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.json`
-  - matching machine-readable generated source-owned baseline active hardware
-    failure fixture.
-- `latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md`
-  - user-reported latest Y2 layout source-owned port hardware pass; all usual
-    tests pass including Up+A and Down+A, RF5 forced A + Up and LT6 forced A +
-    Down pass without disconnect, the full latest Y2 layout source-owned port
-    is merge-approved, root cause remains unproven, and Nunchuk remains
-    NOT_TESTED.
+- `latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md` - current
+  merge-gating latest Y2 layout source-owned port HARDWARE_PASS. It records all
+  usual tests passing including Up+A and Down+A, RF5 forced A + Up and LT6
+  forced A + Down passing without disconnect, merge-approved status, root cause
+  unproven, and Nunchuk remains NOT_TESTED.
 - `fixtures/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.json`
-  - matching machine-readable latest Y2 layout source-owned port hardware pass
-    fixture. Nunchuk remains NOT_TESTED.
-- `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - future result
-  template.
-
-## Runtime Config Diagnostic Hardware Plans
-
-- `active_storage_publication_model_hardware_plan_2026-06-10.md` - plan-only
-  hardware row set for a future dedicated-active-storage activation diagnostic;
-  current branch is source-scaffold-only, records candidate buffer != active
-  buffer, and requires no hardware test before merge.
-- `fixtures/active_storage_publication_model_hardware_plan_2026-06-10.json` -
-  matching machine-readable active-storage publication model plan fixture.
-- `diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.md`
-  - `HARDWARE_PASS` result for the parsed-candidate-present/source-owned-published
-    diagnostic branch; non-nunchuk rows PASS and Nunchuk remains NOT_TESTED.
-- `fixtures/diagnostic_parsed_candidate_present_source_owned_published_hardware_plan_2026-06-10.json`
-  - matching machine-readable hardware result fixture.
-- `diagnostic_active_storage_published_hardware_plan_2026-06-10.md` -
-  plan-only hardware row set for the dedicated active-storage publication
-  diagnostic; all rows are NOT_TESTED and hardware PASS is required before
-  merge.
-- `fixtures/diagnostic_active_storage_published_hardware_plan_2026-06-10.json`
-  - matching machine-readable dedicated active-storage publication diagnostic
-    hardware plan fixture.
-- `diagnostic_generated_source_owned_baseline_active_hardware_plan_2026-06-29.md`
-  - plan-only hardware row set for the generated source-owned baseline active
-    diagnostic on
-    `runtime-config-diagnostic-generated-source-owned-baseline-active`; all
-    rows are NOT_TESTED and hardware_test_required_before_merge is true.
-- `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_plan_2026-06-29.json`
-  - matching machine-readable generated source-owned baseline active diagnostic
-    hardware plan fixture. Nunchuk remains NOT_TESTED.
+  - machine-readable fixture for the current merge-gating hardware PASS.
 - `latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.md` - plan-only
-  full-layout hardware row set for
-  `runtime-config-latest-y2-layout-source-owned-port`; all rows are NOT_TESTED,
-  hardware_test_required_before_merge is true, active view selection remains
-  unchanged, RuntimeConfigView replacement is not used, and Nunchuk remains
-  NOT_TESTED.
-- `fixtures/latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.json`
-  - matching machine-readable latest Y2 layout source-owned port hardware plan
-    fixture. Nunchuk remains NOT_TESTED.
+  row set that preceded the current result.
+- `fixtures/latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.json` -
+  machine-readable plan fixture.
 
-## Official Configurator Corpus And Source Correction
+## Current Baseline Evidence
+
+- `glyph_gfw3_runtime_remap_hardware_result_2026-06-06.md` - preserved
+  user-reported runtime remap hardware pass.
+- `glyph_ultimate_preservation_hardware_result.md` - preserved applicable
+  non-nunchuk preservation pass.
+- `glyph_generated_constants_phase3_integration_hardware_result_2026-06-07.md`
+  - preserved generated-like constants integration result.
+- `glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md`
+  - preserved manual workflow release-candidate result for its stated scope.
+
+## Archived Failed Diagnostics
+
+These packets remain important historical evidence. They are not current work
+and must not be reintroduced as active publication paths.
+
+- `glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.md`
+  - archived runtime-active compiled payload activation failure.
+- `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`
+  - archived dedicated active-storage publication HARDWARE_FAIL.
+- `docs/runtime_config/diagnostic_generated_source_owned_baseline_active_hardware_failure_2026-06-29.md`
+  - archived generated baseline active publication HARDWARE_FAIL.
+- `docs/runtime_config/diagnostic_parsed_candidate_present_source_owned_published_hardware_result_2026-06-10.md`
+  - archived diagnostic HARDWARE_PASS where parsed candidate machinery is
+  present but active publication remains source-owned.
+- `docs/archive/README.md` - archive-oriented index for diagnostic evidence.
+
+## Untested Nunchuk Scope
+
+Nunchuk remains NOT_TESTED across the current known-good state and archived
+diagnostics unless a future result packet explicitly records executed nunchuk
+rows. No current doc claims nunchuk validation.
+
+## Source And Corpus Notes
 
 - `export_corpus/official_glyph_configurator_2026-06-06/manifest.json` -
-  official configurator corpus manifest for user-provided JSON fixtures.
-- `glyph_official_configurator_corpus_diff_2026-06-06.md` - official corpus
-  diff packet.
-- `glyph_external_remapper_misattribution_correction_2026-06-06.md` - source
-  classification correction and external-remapper quarantine rule.
-
-## Offline Official Configurator Export Target Contract
-
-- `docs/export/README.md` - offline-only export-target docs index.
-- `docs/export/official_configurator_export_source_authority.md` - source
-  authority packet for the official configurator export target.
-- `docs/export/official_configurator_export_target_contract.md` - offline
-  target contract and stop lines.
-- `docs/export/official_configurator_export_validation_report.md` - offline
-  validation report for the target contract, preview fixture, invalid corpus,
-  and mutation cases; not production export.
-- `docs/export/official_configurator_export_candidate_diff_report.md` -
-  offline diff/simulation report between official fixtures and generated
-  preview metadata; not a real official configurator round-trip result.
-- `docs/export/official_configurator_manual_import_export_test_plan.md` -
-  manual official-configurator import/export test plan; not a result.
-- `docs/export/official_configurator_manual_capture_instructions.md` -
-  manual official-configurator capture operator instructions; not a result.
-- `docs/export/official_configurator_manual_capture_artifact_layout.md` -
-  artifact layout for future manual capture drops; not a result.
-- `docs/export/official_configurator_manual_import_export_result_TEMPLATE.md` -
-  template-only future result packet scaffold; not a result.
-- `docs/export/manual_captures/README.md` - manual capture drop directory
-  index; no captures recorded on this branch.
-- `docs/export/fixtures/official_configurator_export_candidate_preview.json` -
-  offline preview fixture; not production export.
-- `docs/export/fixtures/official_configurator_export_invalid_cases.json` -
-  invalid corpus for the offline target contract.
-- `docs/export/fixtures/official_configurator_export_mutation_cases.json` -
-  mutation/negative cases for the offline validation report.
-- `docs/export/fixtures/official_configurator_export_validation_report.json` -
-  machine-readable offline validation report.
-- `docs/export/fixtures/generated_official_configurator_candidate_preview.json`
-  - deterministic offline dry-run preview metadata; not production export.
-- `docs/export/fixtures/generated_official_configurator_candidate_preview_report.json`
-  - machine-readable report for the dry-run preview metadata.
-- `docs/export/fixtures/official_configurator_export_candidate_diff_report.json`
-  - machine-readable offline diff/simulation report.
-- `docs/export/fixtures/official_configurator_manual_import_export_test_plan.json`
-  - machine-readable manual test-plan fixture; not a result.
-- `docs/export/fixtures/official_configurator_manual_capture_metadata_TEMPLATE.json`
-  - template-only future manual capture metadata fixture; not a result.
-
-## Generated-Config / Evaluator / Generated C++ Review Artifacts
-
-- `glyph_identity_runtime_generated_config_prototype_2026-05-28.md` -
-  generated-config prototype packet.
-- `glyph_identity_runtime_generated_config_evaluator_input_2026-05-28.md` -
-  evaluator input validation packet.
-- `glyph_identity_runtime_generated_cpp_diff_artifact_2026-05-28.md` -
-  generated C++ review artifact.
-- `glyph_generated_constants_refactor_readiness_packet_2026-05-28.md` -
-  generated constants readiness packet.
-- `docs/generated_constants/phase3_generated_constants_contract.md` - Phase 3
-  generated C++ constants target and source-diff checker contract.
-- `docs/generated_constants/preview/gfw3_generated_constants_preview.json` -
-  dry-run preview artifact for the current source-backed baseline.
-
-## Runtime-Loaded Config Design And Blocker Packets
-
-- `glyph_runtime_loaded_config_design_v0_2026-05-28.md` - design-only runtime
-  config boundary.
-- `glyph_runtime_loaded_config_implementation_plan_v0_2026-05-28.md` - blocked
-  implementation plan.
-- `glyph_runtime_storage_interpreter_blocker_packet_2026-06-03.md` - storage
-  and interpreter blocker packet.
-- `glyph_webserial_transport_blocker_packet_2026-06-03.md` - WebSerial
-  transport blocker packet.
-- `glyph_protobuf_config_schema_research_packet_2026-06-03.md` - protobuf
-  schema research packet.
-- `docs/runtime_config/runtime_config_semantics_evaluator_bridge.md` -
-  evaluator bridge design-only baseline oracle and negative corpus boundary for
-  source-backed docs/tools checks.
-- `docs/runtime_config/runtime_loaded_config_schema_design.md` - design-only
-  runtime-loaded config schema candidate.
-- `docs/runtime_config/firmware_interpreter_architecture_spec.md` - future
-  firmware interpreter architecture/spec boundary.
-- `docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json`
-  - metadata fixture for the bridge.
-- `docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json`
-  - source-backed preview fixture for the current baseline.
-- `docs/runtime_config/fixtures/current_baseline_runtime_config_interpreter_source_baseline.json`
-  - dedicated source-owned interpreter baseline fixture.
-- `docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json` -
-  offline negative corpus for bridge semantics.
-- `docs/runtime_config/runtime_config_storage_fallback_source_authority.md` - Step 10
-  source-authority audit packet.
-- `docs/runtime_config/runtime_config_storage_fallback_architecture.md` - Step 10
-  storage/fallback architecture design boundary.
-- `docs/runtime_config/runtime_config_binary_representation_design.md` - Step 11
-  offline-only binary representation design.
-- `docs/runtime_config/fixtures/current_baseline_runtime_config_binary_preview.json` -
-  offline baseline binary preview fixture.
-- `docs/runtime_config/fixtures/invalid_runtime_config_binary_cases.json` - offline
-  binary invalid-corpus fixture.
-- `docs/runtime_config/fixtures/current_baseline_runtime_config_binary_preview.bin` -
-  offline baseline binary artifact.
-- `tools/glyph_runtime_config_binary_roundtrip.py` - Step 12 offline-only binary
-  parser/serializer prototype.
-- `tools/check_glyph_runtime_config_storage_fallback.py` - Step 10 fallback
-  docs/tools guardrail checker.
-- `tools/check_glyph_runtime_config_binary_offline_roundtrip.py` - Step 12
-  offline binary round-trip and invalid-corpus checker.
-- `docs/runtime_config/phase7a_runtime_config_parser_offline_and_compiled_scaffold.md`
-  - Phase 7A offline parser/generator/oracle/checker/storage-simulator
-    foundation with a compiled but not runtime-active firmware parser scaffold.
-- `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.bin`
-  - deterministic valid baseline `GCFG` payload fixture; not runtime-loaded
-    config.
-- `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload.json`
-  - JSON sidecar for the Phase 7A valid baseline payload.
-- `docs/runtime_config/fixtures/phase7a_valid_baseline_runtime_config_payload_report.json`
-  - deterministic generation report for the Phase 7A valid baseline payload.
-- `docs/runtime_config/fixtures/phase7a_runtime_config_parser_test_vectors.json`
-  - parser vector corpus for valid and invalid offline payloads.
-- `docs/runtime_config/fixtures/phase7b_storage_simulation_report.json` -
-  design-time storage simulation report; not firmware storage and not
-  `config.bin`.
-- `docs/calibration/glyph_phase7a_runtime_config_parser_compiled_scaffold_hardware_plan_TEMPLATE.md`
-  - future hardware plan template for any later runtime-active parser work; not
-    a result.
-- `tools/glyph_runtime_config_candidate_generator.py` - deterministic Phase 7A
-  offline payload and vector generator.
-- `tools/glyph_runtime_config_parser_oracle.py` - host-side offline parser
-  oracle; not firmware behavior.
-- `tools/check_glyph_runtime_config_parser_equivalence.py` - static equivalence
-  checker for generated/decoded/source-owned table parity.
-- `tools/glyph_runtime_config_storage_simulator.py` - design-time storage
-  simulator; not firmware storage or device write.
-- `tools/check_glyph_runtime_config_storage_simulator.py` - design-time storage
-  simulator checker.
-- `tools/check_glyph_runtime_config_firmware_parser_scaffold.py` - compiled
-  scaffold guardrail checker.
-- `docs/runtime_config/phase7a_compiled_activation_failure_analysis_2026-06-08.md`
-  - docs/tools-only failure analysis for the Phase 7A compiled/test payload
-    activation hardware failure; no fix implemented.
-- `docs/runtime_config/phase7a_runtime_config_activation_repair_minimal.md` - build-time/source-only
-  repair packet for Option A with explicit abandonment of the failed runtime-active
-  branch; no runtime behavior change and no firmware edits.
-- `docs/runtime_config/phase7a_activation_repair_build_size_report.md` -
-  source-only build-size status artifact for repair-minimal work; no size map
-  artifact captured in this stage.
-- `docs/runtime_config/phase7a_build_size_and_map_baseline_2026-06-08.md` -
-  build-size/map/artifact baseline from known-good configurator lineage; captures
-  artifact sizes and hashes.
-- `docs/runtime_config/fixtures/phase7a_build_size_and_map_baseline_2026-06-08.json` -
-  machine-readable build-size and artifact metadata for the same baseline.
-- `docs/runtime_config/phase7a_activation_failure_root_cause_analysis_2026-06-09.md` -
-  docs/tools-only root-cause analysis for the Phase 7A compiled-payload
-  activation hardware failure; no fix implemented, root cause not proven, and
-  failed activation branch must remain abandoned.
-- `docs/runtime_config/fixtures/phase7a_activation_failure_root_cause_analysis_2026-06-09.json` -
-  machine-readable root-cause analysis evidence fixture.
-- `docs/runtime_config/phase7a_activation_failure_diagnostic_build_matrix.md` -
-  diagnostic build matrix plan for controlled future hardware-gated isolation;
-  not implemented.
-- `tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py` -
-  read-only checker for the root-cause analysis packet, fixture, and diagnostic
-  matrix.
-- `docs/runtime_config/fixtures/phase7a_compiled_activation_failure_analysis_2026-06-08.json`
-  - machine-readable failure-analysis fixture.
-- `tools/check_glyph_phase7a_compiled_activation_failure_analysis.py` -
-  read-only failure-analysis guardrail checker.
-- `tools/check_glyph_phase7a_build_size_and_map_baseline.py` - read-only checker
-  for the Phase 7A build-size and map baseline packet/fixture.
-- `docs/runtime_config/phase7a_safer_activation_repair_plan.md` - plan-only
-  safer next activation repair strategy; not implemented.
-- `docs/runtime_config/runtime_config_firmware_binary_parser_source_authority.md`
-  - Step 13 firmware binary/protobuf parser source-authority packet.
-- `docs/runtime_config/runtime_config_firmware_binary_parser_integration_plan.md`
-  - Step 13 firmware binary/protobuf parser integration plan and stop line.
-- `docs/calibration/glyph_runtime_config_firmware_binary_parser_hardware_plan_TEMPLATE.md`
-  - future Step 13 hardware plan template; not a result.
-- `tools/check_glyph_runtime_config_firmware_binary_parser_plan.py` - Step 13
-  firmware binary/protobuf parser plan guardrail checker.
-- `docs/runtime_config/runtime_config_webserial_device_write_source_authority.md`
-  - Step 15 WebSerial/device-write source-authority packet and implementation
-    stop line.
-- `docs/runtime_config/runtime_config_manual_load_path_plan.md` - Step 14
-  manual config-load source-authority/design packet and implementation stop
-  line.
-- `docs/runtime_config/runtime_config_device_write_safety_plan.md` - Step 16
-  device-write safety plan and implementation stop line.
-- `docs/runtime_config/runtime_config_flashing_automation_safety_boundary.md` - Step 17
-  flashing safety boundary and implementation stop line.
-- `docs/runtime_config/active_runtime_config_state_source_owned_preselection.md` - source-owned active runtime config preselection scaffold.
-- `docs/runtime_config/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.md` - build report for source-owned active-state preselection scaffold.
-- `docs/runtime_config/fixtures/active_runtime_config_state_source_owned_preselection_build_report_2026-06-10.json` - build-report fixture metadata for the preselection scaffold.
-- `docs/runtime_config/active_storage_publication_model.md` - inactive
-  active-storage publication model scaffold; candidate buffer != active buffer.
-- `docs/runtime_config/fixtures/active_storage_publication_model.json` -
-  machine-readable active-storage publication model fixture.
-- `docs/runtime_config/active_storage_publication_model_build_report_2026-06-10.md` -
-  build report for the inactive active-storage publication model scaffold.
-- `docs/runtime_config/fixtures/active_storage_publication_model_build_report_2026-06-10.json` -
-  machine-readable build report fixture for the inactive active-storage
-  publication model scaffold.
-- `docs/runtime_config/diagnostic_active_storage_published.md` -
-  hardware-gated diagnostic packet for publishing source-owned-equivalent
-  dedicated active storage while keeping candidate.view non-active.
-- `docs/runtime_config/fixtures/diagnostic_active_storage_published.json` -
-  machine-readable diagnostic active-storage publication fixture.
-- `docs/runtime_config/diagnostic_active_storage_published_build_report_2026-06-10.md` -
-  build report for the dedicated active-storage publication diagnostic.
-- `docs/runtime_config/fixtures/diagnostic_active_storage_published_build_report_2026-06-10.json` -
-  machine-readable build report fixture for the dedicated active-storage
-  publication diagnostic.
-- `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md` -
-  HARDWARE_FAIL result for the dedicated active-storage publication diagnostic;
-  RAM-backed active runtime table storage appears unsafe as an active
-  publication target under this test, and the low-level mechanism remains
-  unproven. Do not merge the failed implementation branch. Nunchuk remains
-  NOT_TESTED. Future strategy should pivot away from RAM-backed active table
-  pointer publication.
-- `docs/runtime_config/fixtures/diagnostic_active_storage_published_hardware_failure_2026-06-28.json` -
-  machine-readable HARDWARE_FAIL result fixture for the dedicated active-storage
-  publication diagnostic.
-- `docs/runtime_config/README.md` - runtime-config docs index and current
-  Phase 6 design-only boundary.
-- `docs/runtime_config/phase6_bounded_config_owned_data_architecture.md` -
-  Phase 6 bounded config-owned modifier-data architecture; design-only and not
-  implemented.
-- `docs/runtime_config/phase6_bounded_config_source_authority.md` - Phase 6
-  source-authority packet; no runtime-loaded config implementation claim.
-- `docs/runtime_config/runtime_config_blockers_1_to_5_decision_packet.md` -
-  proposed decisions for runtime-config blockers 1-5; all not implemented.
-- `docs/runtime_config/phase6_to_phase7_implementation_slice_plan.md` -
-  future implementation-slice plan with hardware gates; not an implementation
-  approval.
-- `docs/runtime_config/fixtures/phase6_bounded_config_owned_modifier_data_schema_candidate.json`
-  - schema/metadata candidate only; not runtime-loaded config.
-- `docs/runtime_config/fixtures/phase6_bounded_config_invalid_cases.json` -
-  Phase 6 invalid corpus for forbidden config-owned behavior.
-- `docs/calibration/glyph_runtime_config_phase6_phase7_hardware_matrix_TEMPLATE.md`
-  - future hardware matrix template; not a result.
-- `tools/check_glyph_phase6_bounded_config_architecture.py` - Phase 6
-  architecture/source/blocker/scope guardrail checker.
-- `tools/check_glyph_phase6_bounded_config_schema_candidate.py` - Phase 6
-  schema-candidate and invalid-corpus checker.
-- `tools/check_glyph_runtime_config_webserial_device_write_source_authority.py`
-  - Step 15 WebSerial/device-write source-authority guardrail checker.
-- `tools/check_glyph_runtime_config_manual_load_path_plan.py` - Step 14
-  manual-load plan guardrail checker.
-- `tools/check_glyph_runtime_config_device_write_safety_plan.py` - Step 16
-  device-write safety-plan guardrail checker.
-
-## Adapter / Prewrite Gates
-
-- `glyph_adapter_prewrite_blocker_matrix_2026-06-06.md` - write-capable adapter
-  blocker matrix.
-- `glyph_adapter_prewrite_implementation_gate_2026-06-06.md` - implementation
-  gate for adapter/prewrite work.
-- `glyph_profile_adapter_prewrite_validation_2026-05-26.md` - read-only
-  prewrite validation.
-
-## External-Remapper Quarantined / Historical Docs
-
-These records are quarantined historical evidence unless independently
-source-backed.
-
-- `glyph_external_remapper_misattribution_correction_2026-06-06.md` - current
-  quarantine rule.
-- `glyph_external_remapper_adapter_boundary_2026-06-03.md` - historical
-  boundary snapshot.
-- `glyph_offline_remapper_experiment_result_2026-06-04.md` - historical
-  no-device experiment result, now non-authoritative for official corpus.
-- `glyph_offline_remapper_export_loss_gate_2026-06-04.md` - historical
-  adapter-blocking export-loss gate.
-- `glyph_clean_room_adapter_schema_readiness_gate_2026-06-04.md` - clean-room
-  planning gate, not implementation.
-
-## Templates
-
-- `glyph_profile_config_export_corpus_manifest_TEMPLATE.json` - export corpus
-  manifest template.
-- `glyph_ultimate_preservation_hardware_result_TEMPLATE.md` - preservation
-  hardware result template.
-- `fixtures/glyph_ultimate_preservation_hardware_result_TEMPLATE.json` -
-  preservation hardware fixture template.
-- `glyph_offline_remapper_result_template_2026-06-03.md` - historical external
-  remapper result template.
-- `glyph_generated_constants_phase3_integration_hardware_plan_2026-06-07.md` -
-  phase 3 generated-constants integration hardware plan template.
-- `glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.md`
-  - Step 9 source-owned runtime-config interpreter hardware plan template.
-- `glyph_active_runtime_config_state_source_owned_preselection_hardware_plan_2026-06-10.md`
-  - source-owned active-state preselection hardware plan template.
-- `glyph_runtime_config_firmware_binary_parser_hardware_plan_TEMPLATE.md` -
-  future Step 13 firmware binary/protobuf parser hardware plan template.
-- `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_plan_2026-06-07.json`
-  - Step 9 hardware plan fixture template.
-- `fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.json`
-  - user-reported runtime-config interpreter hardware result fixture.
-- `fixtures/glyph_active_runtime_config_state_source_owned_preselection_hardware_plan_2026-06-10.json`
-  - source-owned active-state preselection hardware plan fixture.
-
-## Old Roadmap / Readiness Packets
-
-- `glyph_firmware_workstream_roadmap_2026-05-26.md` - dated roadmap index with
-  accumulated evidence rows.
-- `glyph_next_runtime_change_readiness_index_2026-05-26.md` - older readiness
-  index.
-- `glyph_preimplementation_go_nogo_index_2026-05-28.md` - preimplementation
-  go/no-go packet.
-- `glyph_preservation_hardware_readiness_packet_2026-06-06.md` - preservation
-  readiness packet.
+  preserved official configurator corpus manifest for user-provided JSON
+  fixtures.
+- Historical external adapter/source-audit packets are quarantined evidence
+  unless independently source-backed.
