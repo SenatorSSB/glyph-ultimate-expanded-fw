@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-source-owned-table-replacement-generator-contract"
+IMPLEMENTATION_BRANCH = "runtime-config-latest-tilt3-table-content-replacement"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
@@ -46,7 +47,18 @@ ALLOWED_PREFIXES = ("docs/runtime_config/",)
 ALLOWED_EXISTING_CHECKERS = {
     "tools/check_glyph_diagnostic_generated_source_owned_baseline_active.py",
     "tools/check_glyph_source_owned_table_replacement_design.py",
+    "tools/check_glyph_latest_layout_y2_port_plan.py",
+    "tools/check_glyph_latest_tilt3_table_content_replacement.py",
 }
+IMPLEMENTATION_ALLOWED_EXACT_CHANGED_PATHS = {
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    CHECKER_REL,
+    "tools/check_glyph_latest_layout_y2_port_plan.py",
+    "tools/check_glyph_latest_tilt3_table_content_replacement.py",
+}
+IMPLEMENTATION_ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
 
 FORBIDDEN_SOURCE_PATH_RE = re.compile(r"^(?:src|include|lib|HAL|hal|backend)(?:/|$)")
 FORBIDDEN_SPECIAL_PATH_RE = re.compile(
@@ -197,8 +209,8 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH}:
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+    if branch not in {EXPECTED_BRANCH, IMPLEMENTATION_BRANCH, MERGED_BRANCH}:
+        fail(f"checker must run on {EXPECTED_BRANCH}, {IMPLEMENTATION_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,
@@ -220,7 +232,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH:
+    if branch in {EXPECTED_BRANCH, IMPLEMENTATION_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
@@ -233,8 +245,16 @@ def changed_paths(branch: str) -> set[str]:
     return paths
 
 
-def validate_changed_paths(paths: set[str]) -> None:
+def validate_changed_paths(paths: set[str], branch: str) -> None:
     for path in sorted(paths):
+        if branch == IMPLEMENTATION_BRANCH:
+            if FORBIDDEN_SPECIAL_PATH_RE.search(path):
+                fail(f"storage/write/WebSerial/flashing/config.pb path changed: {path}")
+            if path in IMPLEMENTATION_ALLOWED_EXACT_CHANGED_PATHS:
+                continue
+            if any(path.startswith(prefix) for prefix in IMPLEMENTATION_ALLOWED_PREFIXES):
+                continue
+            fail(f"out-of-scope changed path for implementation branch: {path}")
         if FORBIDDEN_SOURCE_PATH_RE.search(path):
             fail(f"firmware/source path changed on docs/tools branch: {path}")
         if FORBIDDEN_SPECIAL_PATH_RE.search(path):
@@ -422,7 +442,7 @@ def main() -> int:
     validate_output_fixture()
     validate_generator_determinism()
     validate_docs()
-    validate_changed_paths(changed_paths(branch))
+    validate_changed_paths(changed_paths(branch), branch)
     print("glyph_source_owned_table_replacement_generator_contract: PASS")
     print(f"- branch: {branch}")
     print(f"- contract: {rel(CONTRACT_DOC)}")

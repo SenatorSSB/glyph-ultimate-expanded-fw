@@ -98,6 +98,16 @@ Use `find docs/calibration -maxdepth 3 -type f` or the checker scripts in
 - `fixtures/diagnostic_generated_source_owned_baseline_active_hardware_plan_2026-06-29.json`
   - matching machine-readable generated source-owned baseline active diagnostic
     hardware plan fixture. Nunchuk remains NOT_TESTED.
+- `latest_tilt3_table_content_replacement_hardware_plan_2026-06-29.md` -
+  plan-only hardware row set for
+  `runtime-config-latest-tilt3-table-content-replacement`; all rows are
+  NOT_TESTED, the branch changes only `kTilt3Table` source-owned x/y table
+  contents, Y2 routing remains not implemented, active view selection remains
+  unchanged, hardware_test_required_before_merge is true, and Nunchuk remains
+  NOT_TESTED.
+- `fixtures/latest_tilt3_table_content_replacement_hardware_plan_2026-06-29.json`
+  - matching machine-readable latest Tilt3 table-content replacement hardware
+    plan fixture.
 
 ## Official Configurator Corpus And Source Correction
 

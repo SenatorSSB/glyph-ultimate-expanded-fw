@@ -284,6 +284,50 @@ artifacts unless a specific packet says otherwise.
   accepts `runtime-config-latest-layout-y2-port-plan` and `configurator` after
   merge, validates the branch is based on `configurator`, and enforces the
   docs/checker-only changed-path allowlist.
+- `latest_tilt3_table_content_replacement.md` - firmware behavior packet for
+  applying only the latest intended `kTilt3Table` x/y values from
+  `codex/update-custom-modifier-tables-y2` using the source-owned table-content
+  replacement path. It changes
+  `src/modes/UltimateIdentityRuntimeTables.hpp` only, keeps Y2 routing, Y2
+  table identity, LT3 Y2 role, RuntimeConfigView replacement, active view
+  selection, generated active wrappers, runtime-loaded config, storage,
+  WebSerial/device write, backend/config.pb write paths, and flashing
+  automation out of scope. Hardware PASS is required before merge; Nunchuk
+  remains NOT_TESTED.
+- `fixtures/latest_tilt3_table_content_replacement.json` - machine-readable
+  fixture for the latest Tilt3 table-content replacement; records
+  `active_behavior_changed: true`,
+  `hardware_test_required_before_merge: true`,
+  `source_owned_table_content_replacement_wired: true`, changed table
+  `kTilt3Table`, the exact latest Tilt3 values, no Y2 routing, no active view
+  selection change, no runtime-loaded/storage/write/flashing path, root cause
+  not proven, and Nunchuk remains NOT_TESTED.
+- `fixtures/latest_tilt3_table_content_replacement_input.json` - checked-in
+  source-owned table replacement input for
+  `tools/generate_source_owned_table_replacement.py`; it preserves the current
+  27-table, 9-point, 2-axis shape and changes only `kTilt3Table` values.
+- `latest_tilt3_table_content_replacement_build_report_2026-06-29.md` - local
+  build report for the latest Tilt3 table-content replacement; canonical
+  command `pio run -e glyph_mk6`, fallback recorded if used, artifact hashes as
+  local observations only, and no hardware result claimed.
+- `fixtures/latest_tilt3_table_content_replacement_build_report_2026-06-29.json` -
+  machine-readable build report metadata for the latest Tilt3 table-content
+  replacement branch.
+- `docs/calibration/latest_tilt3_table_content_replacement_hardware_plan_2026-06-29.md` -
+  plan-only hardware row set for the latest Tilt3 table-content replacement;
+  all rows are NOT_TESTED, Y2 routing remains not implemented, active view
+  selection remains unchanged, hardware PASS is required before merge, and
+  Nunchuk remains NOT_TESTED.
+- `tools/check_glyph_latest_tilt3_table_content_replacement.py` - Python
+  stdlib-only checker for the latest Tilt3 source-owned table-content
+  replacement; rejects duplicate JSON keys, accepts
+  `runtime-config-latest-tilt3-table-content-replacement` and `configurator`
+  after merge, validates the branch is based on `configurator`, proves only
+  `kTilt3Table` x/y initializer contents changed, proves `Ultimate.cpp` and
+  `UltimateRuntimeConfigInterpreter.hpp` are unchanged, rejects Y2 routing,
+  RuntimeConfigView selection changes, generated active wrappers, storage/write/
+  WebSerial/flashing paths, and requires a preserved HARDWARE_PASS result in
+  `configurator` mode before this active behavior change may remain merged.
 - `runtime_config_semantics_evaluator_bridge.md`
 - `runtime_loaded_config_schema_design.md`
 - `firmware_interpreter_architecture_spec.md`

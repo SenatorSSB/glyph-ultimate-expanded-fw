@@ -407,6 +407,26 @@ engineering decisions.
   RuntimeConfigView replacement artifacts. Active behavior is unchanged,
   hardware test is not required before merge for this docs/checker branch,
   root cause is not proven, and Nunchuk remains NOT_TESTED.
+- Latest Tilt3 table-content replacement is implemented on
+  `runtime-config-latest-tilt3-table-content-replacement` and recorded in
+  `docs/runtime_config/latest_tilt3_table_content_replacement.md` with
+  `docs/runtime_config/fixtures/latest_tilt3_table_content_replacement.json`,
+  `docs/runtime_config/fixtures/latest_tilt3_table_content_replacement_input.json`,
+  `docs/runtime_config/latest_tilt3_table_content_replacement_build_report_2026-06-29.md`,
+  `docs/calibration/latest_tilt3_table_content_replacement_hardware_plan_2026-06-29.md`,
+  and `tools/check_glyph_latest_tilt3_table_content_replacement.py`. It applies
+  only the latest intended `kTilt3Table` x/y values through the source-owned
+  table-content replacement path in
+  `src/modes/UltimateIdentityRuntimeTables.hpp`. It does not modify
+  `src/modes/Ultimate.cpp` or
+  `src/modes/UltimateRuntimeConfigInterpreter.hpp`, does not implement Y2
+  routing, Y2 table identity, or an LT3 Y2 role, and does not modify
+  RuntimeConfigView symbols, active view selection, candidate view publication,
+  generated active wrappers, runtime-loaded config, persistent storage,
+  WebSerial/device write, backend/config.pb write paths, or flashing
+  automation. This is an active behavior change and requires a preserved
+  HARDWARE_PASS before merge into `configurator`; Nunchuk remains NOT_TESTED
+  and root cause is not proven.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

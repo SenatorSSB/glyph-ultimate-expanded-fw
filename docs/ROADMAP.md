@@ -384,6 +384,27 @@ RuntimeConfigView replacement artifacts. Active behavior is unchanged, hardware
 test is not required before merge for this docs/checker branch, root cause is
 not proven, and Nunchuk remains NOT_TESTED.
 
+The latest Tilt3 source-owned table-content replacement in
+`docs/runtime_config/latest_tilt3_table_content_replacement.md` with
+`docs/runtime_config/fixtures/latest_tilt3_table_content_replacement.json`,
+`docs/runtime_config/fixtures/latest_tilt3_table_content_replacement_input.json`,
+`docs/runtime_config/latest_tilt3_table_content_replacement_build_report_2026-06-29.md`,
+`docs/calibration/latest_tilt3_table_content_replacement_hardware_plan_2026-06-29.md`,
+and `tools/check_glyph_latest_tilt3_table_content_replacement.py` is firmware
+behavior work on
+`runtime-config-latest-tilt3-table-content-replacement`. It applies only the
+latest intended `kTilt3Table` x/y values from
+`codex/update-custom-modifier-tables-y2` using the source-owned table-content
+replacement path in `src/modes/UltimateIdentityRuntimeTables.hpp`. It does not
+modify `Ultimate.cpp` or `UltimateRuntimeConfigInterpreter.hpp`, does not
+implement Y2 routing, Y2 table identity, or an LT3 Y2 role, and does not modify
+RuntimeConfigView selection, active view selection, candidate view publication,
+generated active wrappers, parser/runtime-loaded config, storage, WebSerial/
+device write, backend/config.pb write paths, or flashing automation. Because it
+changes active output coordinates, a preserved HARDWARE_PASS is required before
+merge into `configurator`; Nunchuk remains NOT_TESTED and root cause is not
+proven.
+
 ## Phase 4 - Offline Official Configurator Export Target Contract
 
 Goal: Define the offline target-contract boundary for official-configurator-

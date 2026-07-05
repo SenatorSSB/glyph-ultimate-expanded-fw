@@ -1,0 +1,39 @@
+{
+  "schema_name": "glyph_latest_tilt3_table_content_replacement",
+  "status": "FIRMWARE_BEHAVIOR_PENDING_HARDWARE",
+  "branch": "runtime-config-latest-tilt3-table-content-replacement",
+  "base_branch": "configurator",
+  "reference_branch": "codex/update-custom-modifier-tables-y2",
+  "port_plan": "docs/runtime_config/latest_layout_y2_port_plan.md",
+  "active_behavior_changed": true,
+  "hardware_test_required_before_merge": true,
+  "latest_layout_partial_port": true,
+  "implements_y2_routing": false,
+  "implements_y2_table_identity": false,
+  "implements_lt3_y2_role": false,
+  "active_view_selection_changed": false,
+  "runtime_config_view_replacement": false,
+  "source_owned_table_content_replacement_wired": true,
+  "changed_source_file": "src/modes/UltimateIdentityRuntimeTables.hpp",
+  "changed_tables": [
+    "kTilt3Table"
+  ],
+  "latest_tilt3_values": [
+    [69, 82],
+    [128, 83],
+    [187, 82],
+    [69, 128],
+    [128, 128],
+    [187, 128],
+    [76, 169],
+    [128, 179],
+    [180, 169]
+  ],
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false
+}
