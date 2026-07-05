@@ -3,9 +3,10 @@
 Status label: CURRENT.
 
 Runner prompt and runner implementation are intentionally deferred. These are
-operator-facing templates for bounded supervisor cycles and explicit subagent
-handoffs. They do not authorize browser/device write, WebSerial/device write,
-runtime-loaded profiles, daemon work, or scheduled automation.
+Codex/OpenAI operator-facing templates for bounded supervisor cycles and
+explicit subagent handoffs. They do not authorize browser/device write,
+WebSerial/device write, runtime-loaded profiles, daemon work, or scheduled
+automation.
 
 ## Supervisor Cycle Prompt
 

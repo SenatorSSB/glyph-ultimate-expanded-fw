@@ -6,6 +6,7 @@ This directory installs durable supervisor/subagent contracts for Glyph
 firmware-backend work. It is documentation, schemas, examples, and checkers
 only. It does not implement a runner, daemon, scheduled automation, browser or
 device write path, runtime-loaded profile, or active firmware routing change.
+Current operations are Codex/OpenAI-only.
 
 ## Scope
 
@@ -29,6 +30,7 @@ Out of scope:
 - Persistent runtime-config storage.
 - Flashing automation.
 - Runtime-loaded profile/config activation.
+- Non-Codex agent surfaces without a separate approved docs branch.
 
 ## Topology
 

@@ -2,26 +2,29 @@
 
 Status label: CURRENT.
 
-These are current recommended defaults, not permanent mandates. Review them
-when provider docs, available tool surfaces, organization allowlists, or repo
-evals change. Do not infer provider behavior beyond provider documentation.
+This framework is Codex/OpenAI-only for current repository operations. These
+are current recommended defaults, not permanent model mandates. Provider/model
+availability may change and should be reviewed separately before changing this
+routing table.
 
-For Claude Code, subagent model and effort availability depends on Claude Code
-version and organization allowlists. For OpenAI/Codex, role routing is
-currently an operator/runner responsibility unless a tool supports per-subagent
-model selection.
+Role routing is currently an operator/runner responsibility unless a tool
+supports per-subagent model selection. Runner prompt and runner implementation
+remain deferred.
+
+Non-Codex agent surfaces are intentionally out of scope for the current repo
+workflow and require a separate approved docs branch before use.
 
 ## Role Matrix
 
-| Role | OpenAI/Codex default | OpenAI effort | Claude default | Claude effort | Escalate when | De-escalate when | Output contract | Tool posture |
+| Role | Default model | Default reasoning effort | Escalation model | Escalation effort | Escalation triggers | De-escalation triggers | Output contract | Tool posture |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| supervisor | GPT-5.4 mini | medium | Sonnet 5 | medium | gates conflict, branch risk changes, merge decision unclear | docs/checker-only scope is stable | cycle report and final merge recommendation | orchestrates, limited direct edits |
-| planner | GPT-5.4 mini | medium | Sonnet 5 | medium | roadmap ambiguity or branch decomposition risk | task is single-file or checker-only | ready batch with dependencies and stop rules | read-oriented |
-| architecture_specialist | GPT-5.5 | high | Opus 4.8 | high | active firmware, runtime model, or source authority is involved | docs-only pointer work | architecture note with evidence and unknowns | read-oriented unless explicitly assigned |
-| implementer | GPT-5.4 mini | low or medium | Sonnet 5 | low/medium | edits cross ownership boundaries or firmware source | bounded docs/checker edit | patch summary and verification | bounded editing |
-| validator_reviewer | GPT-5.5 | medium/high for firmware risk; GPT-5.4 mini medium for docs/checker-only | Sonnet 5 or Opus 4.8 depending firmware risk | medium/high | active behavior, generated artifacts, or merge gate is involved | docs/checker-only branch validates cleanly | findings first, commands run, classification | read/check oriented |
-| docs_status_clerk | GPT-5.4 nano or GPT-5.4 mini | low | Haiku 4.5 or Sonnet 5 | low | status docs contradict current boundary | only navigation text changed | status doc delta and consistency checks | docs-only |
-| judge_watchdog | GPT-5.4 mini or GPT-5.4 nano | low/medium | Haiku 4.5 or Sonnet 5 | low | loop, unsafe path, or hardware gate appears | branch is clearly done or blocked | one verdict plus evidence | read-only |
+| supervisor | GPT-5.4 mini | medium | GPT-5.5 | high | ambiguous architecture, unsafe merge risk, tricky firmware source review, conflicting evidence | docs/checker-only scope is stable | cycle report and final merge recommendation | orchestrates, limited direct edits |
+| planner | GPT-5.4 mini | medium | GPT-5.5 | medium/high | complex branch decomposition or source-authority ambiguity | task is single-file or checker-only | ready batch with dependencies and stop rules | read-oriented |
+| architecture_specialist | GPT-5.5 | high | GPT-5.5 | high | active firmware, runtime model, or source authority is involved | GPT-5.4 mini medium for simple docs/checker architecture | architecture note with evidence and unknowns | read-oriented unless explicitly assigned |
+| implementer | GPT-5.4 mini | low or medium | GPT-5.5 | medium/high | firmware behavior risk or difficult compiler/generator logic is involved | bounded docs/checker edit | patch summary and verification | bounded editing |
+| validator_reviewer | GPT-5.4 mini for docs/checker-only; GPT-5.5 for firmware source risk | medium for docs/checker-only; medium/high for firmware source risk | GPT-5.5 | medium/high | active behavior, generated artifacts, or merge gate is involved | docs/checker-only branch validates cleanly | PASS / FAIL / NEEDS_HARDWARE / UNSAFE / BLOCKED | read/check oriented |
+| docs_status_clerk | GPT-5.4 nano or GPT-5.4 mini | low | GPT-5.4 mini | medium | status docs contradict current boundary | only navigation text changed | status doc delta and consistency checks | docs-only |
+| judge_watchdog | GPT-5.4 nano or GPT-5.4 mini | low/medium | GPT-5.4 mini | medium | loop, unsafe path, or hardware gate appears | branch is clearly done or blocked | DONE / CONTINUE / BLOCKED / NEEDS_HARDWARE / UNSAFE / LOOPING | read-only |
 
 ## Escalation Policy
 

@@ -5,7 +5,7 @@ Status label: CURRENT.
 Subagents are bounded specialists. Each handoff must name role, scope,
 excluded scope, allowed files, forbidden files, active behavior constraints,
 verification, stop conditions, return format, and tool budget. Default
-model/effort recommendations live in `MODEL_ROUTING.md`.
+Codex/OpenAI model/effort recommendations live in `MODEL_ROUTING.md`.
 
 ## Planner
 

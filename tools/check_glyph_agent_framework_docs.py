@@ -12,7 +12,6 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_DOCS = (
     "AGENTS.md",
-    "CLAUDE.md",
     "docs/agent_framework/README.md",
     "docs/agent_framework/MODEL_ROUTING.md",
     "docs/agent_framework/SUPERVISOR_CONTRACT.md",
@@ -46,6 +45,18 @@ REQUIRED_ROLES = (
     "judge_watchdog",
 )
 
+MODEL_ROUTING_FIELDS = (
+    "role",
+    "default_model",
+    "default_reasoning_effort",
+    "escalation_model",
+    "escalation_reasoning_effort",
+    "escalation_triggers",
+    "deescalation_triggers",
+    "output_contract",
+    "tool_permission_posture",
+)
+
 BRANCH_CLASSIFICATIONS = (
     "DOCS_CHECKER_ONLY",
     "INACTIVE_GENERATOR_OR_FIXTURE",
@@ -61,6 +72,17 @@ JUDGE_VERDICTS = (
     "NEEDS_HARDWARE",
     "UNSAFE",
     "LOOPING",
+)
+
+NON_CODEX_TERMS = (
+    "CLAUDE.md",
+    ".claude",
+    "Claude Code",
+    "Claude",
+    "Anthropic",
+    "Opus",
+    "Sonnet",
+    "Haiku",
 )
 
 BAD_ACTIVE_CLAIMS = (
@@ -132,13 +154,17 @@ def require_phrase(rel_path: str, phrase: str) -> None:
         fail(f"{rel_path} missing required phrase: {phrase}")
 
 
-def all_framework_text() -> str:
-    parts: list[str] = []
-    for path in (REPO_ROOT / "docs/agent_framework").rglob("*"):
-        if path.is_file() and path.suffix in {".md", ".json"}:
-            parts.append(path.read_text(encoding="utf-8"))
+def framework_paths() -> list[Path]:
+    return [
+        path
+        for path in (REPO_ROOT / "docs/agent_framework").rglob("*")
+        if path.is_file() and path.suffix in {".md", ".json"}
+    ]
+
+
+def active_framework_text() -> str:
+    parts = [path.read_text(encoding="utf-8") for path in framework_paths()]
     parts.append(read_required("AGENTS.md"))
-    parts.append(read_required("CLAUDE.md"))
     return "\n".join(parts)
 
 
@@ -148,6 +174,22 @@ def check_required_paths() -> None:
     for rel_path in REQUIRED_SCHEMAS:
         load_json(rel_path)
     pass_line("required docs and JSON schemas exist and parse")
+
+
+def check_codex_only_surface() -> None:
+    if (REPO_ROOT / "CLAUDE.md").exists():
+        fail("CLAUDE.md must not exist for current Codex/OpenAI-only workflow")
+    if (REPO_ROOT / ".claude" / "agents").exists():
+        fail(".claude/agents must not exist for current Codex/OpenAI-only workflow")
+    bad: list[str] = []
+    for path in framework_paths() + [REPO_ROOT / "AGENTS.md"]:
+        text = path.read_text(encoding="utf-8")
+        for term in NON_CODEX_TERMS:
+            if term in text:
+                bad.append(f"{path.relative_to(REPO_ROOT)} contains {term}")
+    if bad:
+        fail("non-Codex active workflow references found: " + "; ".join(bad))
+    pass_line("current framework surface is Codex/OpenAI-only")
 
 
 def check_model_routing() -> None:
@@ -160,28 +202,23 @@ def check_model_routing() -> None:
     missing = [role for role in REQUIRED_ROLES if role not in roles]
     if missing:
         fail("model_routing.v0.json missing roles: " + ", ".join(missing))
-    required_fields = (
-        "openai_codex_default",
-        "openai_reasoning_effort",
-        "claude_default",
-        "claude_effort",
-        "escalation_trigger",
-        "de_escalation_trigger",
-        "output_contract",
-        "tool_permission_posture",
-    )
     for role in REQUIRED_ROLES:
         role_entry = roles[role]
         if not isinstance(role_entry, dict):
             fail(f"model_routing role {role} must be an object")
-        missing_fields = [field for field in required_fields if field not in role_entry]
+        missing_fields = [field for field in MODEL_ROUTING_FIELDS if field not in role_entry]
         if missing_fields:
             fail(f"model_routing role {role} missing fields: {', '.join(missing_fields)}")
-    pass_line("model routing includes all required roles and fields")
+        if role_entry.get("role") != role:
+            fail(f"model_routing role field mismatch for {role}")
+        for forbidden_field in ("claude_default", "claude_effort", "anthropic_default"):
+            if forbidden_field in role_entry:
+                fail(f"model_routing role {role} contains non-Codex field: {forbidden_field}")
+    pass_line("model routing includes all required Codex/OpenAI roles and fields")
 
 
 def check_contract_phrases() -> None:
-    framework_text = normalize(all_framework_text())
+    framework_text = normalize(active_framework_text())
     missing_classifications = [
         classification
         for classification in BRANCH_CLASSIFICATIONS
@@ -200,13 +237,12 @@ def check_contract_phrases() -> None:
 def check_navigation_pointers() -> None:
     require_phrase("AGENTS.md", "docs/AGENT_CONTEXT.md")
     require_phrase("AGENTS.md", "docs/agent_framework/README.md")
-    require_phrase("CLAUDE.md", "docs/agent_framework/README.md")
-    pass_line("AGENTS.md and CLAUDE.md point to framework entrypoints")
+    pass_line("AGENTS.md points to framework entrypoints")
 
 
 def check_forbidden_claims() -> None:
     bad: list[str] = []
-    for raw_line in all_framework_text().splitlines():
+    for raw_line in active_framework_text().splitlines():
         line = normalize(raw_line)
         for claim in BAD_ACTIVE_CLAIMS:
             if claim not in line:
@@ -216,7 +252,7 @@ def check_forbidden_claims() -> None:
             bad.append(f"{claim} [{raw_line.strip()}]")
     if bad:
         fail("forbidden active/supported claims found: " + ", ".join(bad))
-    framework_text = normalize(all_framework_text())
+    framework_text = normalize(active_framework_text())
     for phrase in (
         "nunchuk remains not_tested",
         "root cause remains unproven",
@@ -243,6 +279,7 @@ def check_runner_boundary() -> None:
 def main() -> int:
     try:
         check_required_paths()
+        check_codex_only_surface()
         check_model_routing()
         check_contract_phrases()
         check_navigation_pointers()

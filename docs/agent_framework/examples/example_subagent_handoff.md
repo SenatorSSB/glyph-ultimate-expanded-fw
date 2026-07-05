@@ -9,7 +9,6 @@ excluded_scope: Firmware implementation, runner prompt, device write,
   runtime-loaded config, hardware claims.
 allowed_files:
   - AGENTS.md
-  - CLAUDE.md
   - docs/agent_framework/**
   - docs/AGENT_CONTEXT.md
   - tools/check_glyph_agent_framework_docs.py

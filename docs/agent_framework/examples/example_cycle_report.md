@@ -12,7 +12,6 @@
   ],
   "files_changed": [
     "AGENTS.md",
-    "CLAUDE.md",
     "docs/agent_framework/**",
     "docs/AGENT_CONTEXT.md",
     "tools/check_glyph_agent_framework_docs.py",

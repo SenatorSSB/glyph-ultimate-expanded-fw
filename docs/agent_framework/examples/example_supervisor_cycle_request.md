@@ -9,7 +9,6 @@ Classification target: `DOCS_CHECKER_ONLY`.
 Allowed files:
 
 - `AGENTS.md`
-- `CLAUDE.md`
 - `docs/agent_framework/**`
 - `docs/AGENT_CONTEXT.md`
 - `tools/check_glyph_agent_framework_docs.py`

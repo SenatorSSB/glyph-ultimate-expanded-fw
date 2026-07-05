@@ -15,6 +15,7 @@ produces the final branch recommendation.
 - Final report.
 - Status doc updates.
 - Queue reseeding for the next bounded cycle.
+- Codex/OpenAI model routing decisions for the cycle.
 
 ## Does Not Own
 
