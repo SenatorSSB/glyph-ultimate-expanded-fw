@@ -11,6 +11,11 @@ This branch follows `generated_source_owned_artifact_install.md` and
 example artifact as a deterministic fixture only and does not select either
 generated artifact active.
 
+The source-inspection baseline CLI remains `--emit-current-source-owned-baseline`.
+The explicit `--emit-from-layout-spec` packet mode remains inert and reproduces
+the same baseline-shaped generated artifact when run against
+`generated_source_owned_layout_spec.json`.
+
 ## Scope
 
 - Add one generated source-owned runtime config artifact for the current

@@ -19,6 +19,8 @@
     "script": "tools/generate_source_owned_runtime_config.py",
     "stdlib_only": true,
     "input_fixture": "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json",
+    "spec_input_mode": "--emit-from-layout-spec",
+    "spec_input_fixture": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
     "installed_artifact": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
     "explicit_install_mode": "--install-inert-source-artifact",
     "default_output_to_active_source_path": false

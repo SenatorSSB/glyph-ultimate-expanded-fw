@@ -43,7 +43,9 @@ The generator may use the spec as a validation and ordering mirror, but it does
 not use the spec to activate runtime behavior, replace `RuntimeConfigView`, or
 publish any active source path. It is not wired into runtime selection and
 does not change active firmware behavior. The layout spec is inert and
-docs-tools only.
+docs-tools only. The normal generator input path now requires `layout_spec`,
+and the explicit `--emit-from-layout-spec` generator mode consumes the packet
+deterministically and still emits the same source-owned fixture.
 Future hardware gate required before generated source-owned tables are
 selected active.
 

@@ -59,6 +59,9 @@ implementation work. Detailed historical evidence remains indexed from
   `fixtures/generated_source_owned_baseline_artifact.json`.
 - `generated_source_owned_generator_input.example.json`,
   `fixtures/generated_source_owned_layout_spec.example.json`,
+  `generated_source_owned_layout_spec.json`,
+  `--emit-current-source-owned-baseline`,
+  the explicit `--emit-from-layout-spec` packet-input mode,
   `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
   `tools/generate_source_owned_runtime_config.py` remain the generator lane
   references.
@@ -68,8 +71,10 @@ implementation work. Detailed historical evidence remains indexed from
   `HARDWARE_PASS` evidence and future hardware gate required before generated
   source-owned baseline artifact is selected active remain part of this lane.
   The declarative layout spec mirror stays inert and only validates the current
-  source-owned baseline shape. Future implementation must be hardware-gated if
-  active source selection behavior changes.
+  source-owned baseline shape. The normal generator input now requires
+  `layout_spec`, and the explicit `--emit-from-layout-spec` mode stays inert.
+  Future implementation must be hardware-gated if active source selection
+  behavior changes.
 - future hardware gate required before generated source-owned tables are
   selected active.
 - nunchuk `NOT_TESTED`.

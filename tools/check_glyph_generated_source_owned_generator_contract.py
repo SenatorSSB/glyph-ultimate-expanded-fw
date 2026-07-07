@@ -34,6 +34,7 @@ GENERATOR = REPO_ROOT / "tools/generate_source_owned_runtime_config.py"
 README = REPO_ROOT / "docs/runtime_config/README.md"
 CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
+SPEC_INPUT_MODE = "--emit-from-layout-spec"
 
 ALLOWED_TOOL_PATHS = {
     "tools/generate_source_owned_runtime_config.py",
@@ -113,6 +114,7 @@ REQUIRED_DOC_PHRASES = (
     "generated_source_owned_layout_spec.md",
     "declarative layout spec",
     "layout_spec",
+    "--emit-from-layout-spec",
     "duplicate keys rejected",
     "`table_count: 27`",
     "`points_per_table: 9`",
@@ -138,6 +140,7 @@ REQUIRED_INDEX_PHRASES = (
     "fixtures/generated_source_owned_layout_spec.example.json",
     "generated_outputs/generated_source_owned_runtime_config.example.hpp",
     "tools/generate_source_owned_runtime_config.py",
+    "--emit-from-layout-spec",
     "generated tables not wired active",
     "nunchuk `NOT_TESTED`",
 )
@@ -330,6 +333,10 @@ def validate_contract_fixture(fixture: dict[str, Any]) -> None:
         fail("contract fixture generator.stdlib_only must be true")
     if generator.get("active_source_output_by_default") is not False:
         fail("contract fixture generator.active_source_output_by_default must be false")
+    if generator.get("spec_input_mode") != SPEC_INPUT_MODE:
+        fail(f"contract fixture generator.spec_input_mode must be {SPEC_INPUT_MODE!r}")
+    if generator.get("spec_input_requires_layout_spec") is not True:
+        fail("contract fixture generator.spec_input_requires_layout_spec must be true")
     input_contract = fixture.get("input_contract")
     if not isinstance(input_contract, dict):
         fail("contract fixture input_contract must be an object")
@@ -510,9 +517,9 @@ def validate_output_fixture(text: str) -> None:
             fail(f"generated output fixture contains forbidden token {token!r}")
 
 
-def run_generator(input_path: Path, output_path: Path) -> subprocess.CompletedProcess[str]:
+def run_generator(*args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        ["python3", str(GENERATOR), str(input_path), str(output_path)],
+        ["python3", str(GENERATOR), *args],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
@@ -538,26 +545,47 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
     with tempfile.TemporaryDirectory() as temp_name:
         temp_dir = Path(temp_name)
         generated_one = temp_dir / "generated_one.hpp"
+        generated_spec_one = temp_dir / "generated_spec_one.hpp"
+        generated_spec_two = temp_dir / "generated_spec_two.hpp"
         generated_two = temp_dir / "generated_two.hpp"
         first = run_generator(INPUT_FIXTURE, generated_one)
         if first.returncode != 0:
             fail("generator failed on sample input: " + first.stderr.strip())
-        layout_spec_output = temp_dir / "generated_layout_spec.hpp"
-        layout_spec_run = run_generator(LAYOUT_SPEC_EXAMPLE, layout_spec_output)
+        layout_spec_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_FIXTURE, generated_spec_one)
         if layout_spec_run.returncode != 0:
             fail("generator failed on layout spec example: " + layout_spec_run.stderr.strip())
+        layout_spec_second_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_FIXTURE, generated_spec_two)
+        if layout_spec_second_run.returncode != 0:
+            fail("generator failed on second layout spec run: " + layout_spec_second_run.stderr.strip())
         second = run_generator(INPUT_FIXTURE, generated_two)
         if second.returncode != 0:
             fail("generator failed on second deterministic run: " + second.stderr.strip())
         first_text = generated_one.read_text(encoding="utf-8")
         second_text = generated_two.read_text(encoding="utf-8")
-        layout_spec_text = layout_spec_output.read_text(encoding="utf-8")
+        layout_spec_text = generated_spec_one.read_text(encoding="utf-8")
+        layout_spec_second_text = generated_spec_two.read_text(encoding="utf-8")
         if first_text != second_text:
             fail("generator output is not deterministic across repeated runs")
         if first_text != fixture_output:
             fail("generator output does not match checked-in generated output fixture")
         if layout_spec_text != fixture_output:
             fail("layout spec example does not match checked-in generated output fixture")
+        if layout_spec_text != layout_spec_second_text:
+            fail("layout spec mode output is not deterministic across repeated runs")
+        layout_spec_example_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_EXAMPLE, temp_dir / "generated_layout_spec_example.hpp")
+        if layout_spec_example_run.returncode != 0:
+            fail("generator failed on layout spec example fixture: " + layout_spec_example_run.stderr.strip())
+        layout_spec_example_text = (temp_dir / "generated_layout_spec_example.hpp").read_text(encoding="utf-8")
+        if layout_spec_example_text != fixture_output:
+            fail("layout spec example fixture does not match checked-in generated output fixture")
+
+        missing_layout_spec = copy.deepcopy(layout_spec_payload)
+        missing_layout_spec.pop("layout_spec")
+        write_json(temp_dir / "missing_layout_spec.json", missing_layout_spec)
+        if run_generator(str(temp_dir / "missing_layout_spec.json"), str(temp_dir / "missing_layout_spec_generic.hpp")).returncode == 0:
+            fail("generator accepted input without layout_spec")
+        if run_generator(SPEC_INPUT_MODE, str(temp_dir / "missing_layout_spec.json"), str(temp_dir / "missing_layout_spec.hpp")).returncode == 0:
+            fail("spec-input mode accepted input without layout_spec")
 
         duplicate_key = '{"schema_version": 1, "schema_version": 1}'
         expect_generator_failure(duplicate_key, temp_dir, "duplicate_key")
@@ -583,35 +611,35 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
         wrong_layout_spec_fixture = copy.deepcopy(layout_spec_payload)
         wrong_layout_spec_fixture["layout_spec"]["tables"][0]["table_symbol"] = "kWrongTable"
         write_json(temp_dir / "wrong_layout_spec_fixture.json", wrong_layout_spec_fixture)
-        if run_generator(temp_dir / "wrong_layout_spec_fixture.json", temp_dir / "wrong_layout_spec_fixture.hpp").returncode == 0:
+        if run_generator(str(temp_dir / "wrong_layout_spec_fixture.json"), str(temp_dir / "wrong_layout_spec_fixture.hpp")).returncode == 0:
             fail("generator accepted wrong layout_spec table_symbol")
 
         out_of_range = copy.deepcopy(input_payload)
         out_of_range["tables"][0]["points"][0]["x"] = 256
         write_json(temp_dir / "out_of_range.json", out_of_range)
-        if run_generator(temp_dir / "out_of_range.json", temp_dir / "out_of_range.hpp").returncode == 0:
+        if run_generator(str(temp_dir / "out_of_range.json"), str(temp_dir / "out_of_range.hpp")).returncode == 0:
             fail("generator accepted byte value outside 0..255")
 
         wrong_count = copy.deepcopy(input_payload)
         wrong_count["table_shape"]["table_count"] = 26
         write_json(temp_dir / "wrong_table_count.json", wrong_count)
-        if run_generator(temp_dir / "wrong_table_count.json", temp_dir / "wrong_table_count.hpp").returncode == 0:
+        if run_generator(str(temp_dir / "wrong_table_count.json"), str(temp_dir / "wrong_table_count.hpp")).returncode == 0:
             fail("generator accepted wrong table_count")
 
         wrong_points = copy.deepcopy(input_payload)
         wrong_points["tables"][0]["points"] = wrong_points["tables"][0]["points"][:-1]
         write_json(temp_dir / "wrong_points.json", wrong_points)
-        if run_generator(temp_dir / "wrong_points.json", temp_dir / "wrong_points.hpp").returncode == 0:
+        if run_generator(str(temp_dir / "wrong_points.json"), str(temp_dir / "wrong_points.hpp")).returncode == 0:
             fail("generator accepted a table without exactly 9 points")
 
         wrong_axes = copy.deepcopy(input_payload)
         wrong_axes["table_shape"]["axes_per_point"] = 3
         write_json(temp_dir / "wrong_axes.json", wrong_axes)
-        if run_generator(temp_dir / "wrong_axes.json", temp_dir / "wrong_axes.hpp").returncode == 0:
+        if run_generator(str(temp_dir / "wrong_axes.json"), str(temp_dir / "wrong_axes.hpp")).returncode == 0:
             fail("generator accepted axes_per_point other than 2")
 
         active_output = temp_dir / "src" / "generated.hpp"
-        completed = run_generator(INPUT_FIXTURE, active_output)
+        completed = run_generator(str(INPUT_FIXTURE), str(active_output))
         if completed.returncode == 0:
             fail("generator accepted an active source-like output path")
 

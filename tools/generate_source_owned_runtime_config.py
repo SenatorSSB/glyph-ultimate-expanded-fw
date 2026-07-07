@@ -26,6 +26,7 @@ EXPECTED_LAYOUT_SPEC_KIND = "generated_source_owned_layout_spec"
 EXPECTED_TABLE_COUNT = 27
 EXPECTED_POINTS_PER_TABLE = 9
 EXPECTED_AXES_PER_POINT = 2
+SPEC_INPUT_MODE = "--emit-from-layout-spec"
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INERT_SOURCE_INSTALL_DIR = REPO_ROOT / "src/modes/runtime_config/generated_source_owned"
 SOURCE_TABLES = REPO_ROOT / "src/modes/UltimateIdentityRuntimeTables.hpp"
@@ -137,7 +138,11 @@ def validate_shape(payload: dict[str, Any], *, expected_table_count: int = EXPEC
     }
 
 
-def validate_layout_spec(payload: dict[str, Any]) -> dict[str, Any]:
+def validate_layout_spec(
+    payload: dict[str, Any],
+    *,
+    expected_table_count: int = EXPECTED_TABLE_COUNT,
+) -> dict[str, Any]:
     layout_spec = payload.get("layout_spec")
     if layout_spec is None:
         return {}
@@ -154,7 +159,7 @@ def validate_layout_spec(payload: dict[str, Any]) -> dict[str, Any]:
     require_string("layout_spec.controller_family", layout_spec["controller_family"])
     require_string("layout_spec.profile_name", layout_spec["profile_name"])
     require_int("layout_spec.revision", layout_spec["revision"], minimum=0)
-    shape = validate_shape(layout_spec, expected_table_count=EXPECTED_TABLE_COUNT)
+    shape = validate_shape(layout_spec, expected_table_count=expected_table_count)
     tables = layout_spec.get("tables")
     if not isinstance(tables, list):
         fail("layout_spec.tables must be a list")
@@ -216,6 +221,12 @@ def table_sort_key(table: dict[str, Any], *, max_table_id: int) -> tuple[int, in
     if "table_id" in table:
         return (0, require_int("tables[].table_id", table["table_id"], minimum=0, maximum=max_table_id))
     return (1, require_string("tables[].table_name", table.get("table_name")))
+
+
+def canonical_table_name(value: str) -> str:
+    if value.startswith("k") and value.endswith("Table") and len(value) > len("kTable"):
+        return value[1:-5]
+    return value
 
 
 def validate_tables(
@@ -298,12 +309,14 @@ def validate_tables(
             {
                 "table_id": table_id,
                 "table_name": table_name,
+                "table_symbol": table.get("table_symbol"),
                 "points": normalized_points,
             }
         )
         if table_id is not None:
             table_lookup_by_id[table_id] = normalized_tables[-1]
         table_lookup_by_name[table_name] = normalized_tables[-1]
+        table_lookup_by_name.setdefault(canonical_table_name(table_name), normalized_tables[-1])
 
     if saw_table_id and saw_table_name_only:
         fail("tables must use table_id for all tables or table_name-only for all tables")
@@ -320,7 +333,7 @@ def validate_tables(
                 )
             if table["table_id"] is not None and table["table_id"] != spec_table_id:
                 fail(f"layout_spec table_id mismatch at entry {spec_index}")
-            if table["table_name"] != spec_table_name:
+            if canonical_table_name(table["table_name"]) != spec_table_name:
                 fail(f"layout_spec table_name mismatch at entry {spec_index}")
             ordered_tables.append(table)
         return ordered_tables
@@ -338,20 +351,17 @@ def validate_payload(payload: dict[str, Any], *, expected_table_count: int = EXP
     controller_family = require_string("controller_family", payload["controller_family"])
     profile_name = require_string("profile_name", payload["profile_name"])
     revision = require_int("revision", payload["revision"], minimum=0)
-    layout_spec = validate_layout_spec(payload)
-    if layout_spec:
-        if layout_spec["controller_family"] != controller_family:
-            fail("layout_spec.controller_family must match generator input controller_family")
-        if layout_spec["profile_name"] != profile_name:
-            fail("layout_spec.profile_name must match generator input profile_name")
-        if layout_spec["revision"] != revision:
-            fail("layout_spec.revision must match generator input revision")
-        shape = validate_shape(payload, expected_table_count=expected_table_count)
-        tables = validate_tables(payload, shape, layout_spec_tables=layout_spec["tables"])
-    else:
-        require_keys("generator input", payload, {"table_shape", "tables"})
-        shape = validate_shape(payload, expected_table_count=expected_table_count)
-        tables = validate_tables(payload, shape)
+    layout_spec = validate_layout_spec(payload, expected_table_count=expected_table_count)
+    if not layout_spec:
+        fail("generator input requires layout_spec")
+    if layout_spec["controller_family"] != controller_family:
+        fail("layout_spec.controller_family must match generator input controller_family")
+    if layout_spec["profile_name"] != profile_name:
+        fail("layout_spec.profile_name must match generator input profile_name")
+    if layout_spec["revision"] != revision:
+        fail("layout_spec.revision must match generator input revision")
+    shape = validate_shape(payload, expected_table_count=expected_table_count)
+    tables = validate_tables(payload, shape, layout_spec_tables=layout_spec["tables"])
     return {
         "schema_version": schema_version,
         "artifact_kind": artifact_kind,
@@ -403,7 +413,7 @@ def emit_cpp_header(contract: dict[str, Any]) -> str:
         f"{shape['table_count']}][{shape['points_per_table']}][{shape['axes_per_point']}] = {{",
     ]
     for table in contract["tables"]:
-        table_label = table["table_name"]
+        table_label = table.get("table_symbol") or table["table_name"]
         if table["table_id"] is not None:
             table_label = f"{table['table_id']} {table_label}"
         lines.append(f"    {{  // {table_label}")
@@ -434,11 +444,20 @@ def parse_source_owned_baseline_contract() -> dict[str, Any]:
         tables.append(
             {
                 "table_id": table_id,
-                "table_name": symbol_name,
+                "table_name": symbol_name.removeprefix("k").removesuffix("Table"),
+                "table_symbol": symbol_name,
                 "points": [{"x": x, "y": y} for x, y in points],
             }
         )
     table_count = len(ordered_symbols)
+    layout_spec_tables = [
+        {
+            "table_id": table_id,
+            "table_name": symbol_name.removeprefix("k").removesuffix("Table"),
+            "table_symbol": symbol_name,
+        }
+        for table_id, symbol_name in enumerate(ordered_symbols)
+    ]
     return validate_payload(
         {
             "schema_version": EXPECTED_SCHEMA_VERSION,
@@ -446,6 +465,20 @@ def parse_source_owned_baseline_contract() -> dict[str, Any]:
             "controller_family": "glyph_mk6",
             "profile_name": "current_source_owned_baseline_runtime_config",
             "revision": 1,
+            "layout_spec": {
+                "schema_version": EXPECTED_LAYOUT_SPEC_SCHEMA_VERSION,
+                "layout_spec_kind": EXPECTED_LAYOUT_SPEC_KIND,
+                "layout_name": "current_source_owned_baseline_layout",
+                "controller_family": "glyph_mk6",
+                "profile_name": "current_source_owned_baseline_runtime_config",
+                "revision": 1,
+                "table_shape": {
+                    "table_count": table_count,
+                    "points_per_table": EXPECTED_POINTS_PER_TABLE,
+                    "axes_per_point": EXPECTED_AXES_PER_POINT,
+                },
+                "tables": layout_spec_tables,
+            },
             "table_shape": {
                 "table_count": table_count,
                 "points_per_table": EXPECTED_POINTS_PER_TABLE,
@@ -541,6 +574,22 @@ def generate(
     return output
 
 
+def generate_from_layout_spec(
+    input_path: Path,
+    output_path: Path | None = None,
+) -> str:
+    contract = validate_payload(load_json_object(input_path))
+    if contract["layout_spec"] is None:
+        fail(f"{SPEC_INPUT_MODE} requires layout_spec")
+    output = emit_cpp_header(contract)
+    if output_path is not None:
+        assert_safe_output_path(output_path)
+        normalized_output_path = normalize_repo_path(output_path)
+        normalized_output_path.parent.mkdir(parents=True, exist_ok=True)
+        normalized_output_path.write_text(output, encoding="utf-8")
+    return output
+
+
 def generate_current_source_owned_baseline(output_path: Path | None = None) -> str:
     output = emit_cpp_header(parse_source_owned_baseline_contract())
     if output_path is not None:
@@ -553,9 +602,13 @@ def generate_current_source_owned_baseline(output_path: Path | None = None) -> s
 
 def main(argv: list[str]) -> int:
     baseline_mode = len(argv) in {2, 3} and argv[1] == "--emit-current-source-owned-baseline"
+    spec_input_mode = len(argv) in {3, 4} and argv[1] == SPEC_INPUT_MODE
     install_mode = len(argv) == 4 and argv[1] == "--install-inert-source-artifact"
     if baseline_mode:
         output_path = Path(argv[2]) if len(argv) == 3 else None
+    elif spec_input_mode:
+        input_path = Path(argv[2])
+        output_path = Path(argv[3]) if len(argv) == 4 else None
     elif install_mode:
         input_path = Path(argv[2])
         output_path = Path(argv[3])
@@ -566,6 +619,8 @@ def main(argv: list[str]) -> int:
         print(
             "usage: generate_source_owned_runtime_config.py INPUT_JSON [OUTPUT_HPP]\n"
             "       generate_source_owned_runtime_config.py "
+            f"{SPEC_INPUT_MODE} INPUT_JSON [OUTPUT_HPP]\n"
+            "       generate_source_owned_runtime_config.py "
             "--install-inert-source-artifact INPUT_JSON OUTPUT_HPP\n"
             "       generate_source_owned_runtime_config.py "
             "--emit-current-source-owned-baseline [OUTPUT_HPP]",
@@ -575,6 +630,8 @@ def main(argv: list[str]) -> int:
     try:
         if baseline_mode:
             output = generate_current_source_owned_baseline(output_path)
+        elif spec_input_mode:
+            output = generate_from_layout_spec(input_path, output_path)
         else:
             output = generate(
                 input_path,

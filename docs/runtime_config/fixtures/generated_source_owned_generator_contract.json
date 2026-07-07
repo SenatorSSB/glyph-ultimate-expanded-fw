@@ -24,7 +24,9 @@
     "input_fixture": "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json",
     "sample_output_fixture": "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
     "default_output_target": "caller_supplied_non_active_path",
-    "active_source_output_by_default": false
+    "active_source_output_by_default": false,
+    "spec_input_mode": "--emit-from-layout-spec",
+    "spec_input_requires_layout_spec": true
   },
   "input_contract": {
     "required_top_level_keys": [
