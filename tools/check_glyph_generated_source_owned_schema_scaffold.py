@@ -196,6 +196,7 @@ def validate_branch() -> str:
     branch = current_branch()
     if branch not in {
         EXPECTED_BRANCH,
+        "generator-source-owned-layout-spec-contract",
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,

@@ -6,6 +6,7 @@
   "active_behavior_changed": false,
   "hardware_test_required_before_merge": false,
   "active_view_model": "source_owned_generated_tables",
+  "layout_spec_contract_inert": true,
   "generated_tables_wired_active": false,
   "generated_artifacts_written_to_active_source_path_by_default": false,
   "ram_backed_active_table_publication_allowed": false,
@@ -32,6 +33,7 @@
       "controller_family",
       "profile_name",
       "revision",
+      "layout_spec",
       "table_shape",
       "tables"
     ],
@@ -74,6 +76,7 @@
   "docs_references": [
     "docs/runtime_config/generated_source_owned_realization_design.md",
     "docs/runtime_config/generated_source_owned_schema_scaffold.md",
+    "docs/runtime_config/generated_source_owned_layout_spec.md",
     "docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md"
   ]
 }

@@ -21,7 +21,10 @@ MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 
 CONTRACT_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_generator_contract.md"
+LAYOUT_SPEC_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_layout_spec.md"
 CONTRACT_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_generator_contract.json"
+LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
+LAYOUT_SPEC_EXAMPLE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.example.json"
 INPUT_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json"
 OUTPUT_FIXTURE = (
     REPO_ROOT
@@ -68,6 +71,7 @@ EXPECTED_FIXTURE_VALUES: dict[str, Any] = {
     "active_behavior_changed": False,
     "hardware_test_required_before_merge": False,
     "generator_contract_only": True,
+    "layout_spec_contract_inert": True,
     "generated_tables_wired_active": False,
     "generated_artifacts_written_to_active_source_path_by_default": False,
     "runtime_loaded_config_implemented": False,
@@ -83,6 +87,16 @@ EXPECTED_INPUT_VALUES: dict[str, Any] = {
     "schema_version": 1,
     "artifact_kind": "generated_source_owned_runtime_config_table",
     "controller_family": "glyph_mk6",
+    "profile_name": "example_source_owned_runtime_config",
+    "revision": 1,
+}
+
+EXPECTED_LAYOUT_SPEC_VALUES: dict[str, Any] = {
+    "schema_version": 1,
+    "layout_spec_kind": "generated_source_owned_layout_spec",
+    "layout_name": "current_source_owned_baseline_layout",
+    "controller_family": "glyph_mk6",
+    "profile_name": "example_source_owned_runtime_config",
     "revision": 1,
 }
 
@@ -96,6 +110,9 @@ REQUIRED_DOC_PHRASES = (
     "GENERATOR CONTRACT / DOCS-TOOLS ONLY",
     "generated_source_owned_realization_design.md",
     "generated_source_owned_schema_scaffold.md",
+    "generated_source_owned_layout_spec.md",
+    "declarative layout spec",
+    "layout_spec",
     "duplicate keys rejected",
     "`table_count: 27`",
     "`points_per_table: 9`",
@@ -116,6 +133,9 @@ REQUIRED_INDEX_PHRASES = (
     "generated_source_owned_generator_contract.md",
     "fixtures/generated_source_owned_generator_contract.json",
     "generated_source_owned_generator_input.example.json",
+    "generated_source_owned_layout_spec.md",
+    "fixtures/generated_source_owned_layout_spec.json",
+    "fixtures/generated_source_owned_layout_spec.example.json",
     "generated_outputs/generated_source_owned_runtime_config.example.hpp",
     "tools/generate_source_owned_runtime_config.py",
     "generated tables not wired active",
@@ -204,6 +224,7 @@ def validate_branch() -> str:
     branch = current_branch()
     if branch not in {
         EXPECTED_BRANCH,
+        "generator-source-owned-layout-spec-contract",
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
@@ -211,6 +232,7 @@ def validate_branch() -> str:
     }:
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
+            f"generator-source-owned-layout-spec-contract, "
             f"{DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}, "
             f"{DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
         )
@@ -308,6 +330,24 @@ def validate_contract_fixture(fixture: dict[str, Any]) -> None:
         fail("contract fixture generator.stdlib_only must be true")
     if generator.get("active_source_output_by_default") is not False:
         fail("contract fixture generator.active_source_output_by_default must be false")
+    input_contract = fixture.get("input_contract")
+    if not isinstance(input_contract, dict):
+        fail("contract fixture input_contract must be an object")
+    required_top_level_keys = input_contract.get("required_top_level_keys")
+    if not isinstance(required_top_level_keys, list):
+        fail("contract fixture input_contract.required_top_level_keys must be a list")
+    for required_key in (
+        "schema_version",
+        "artifact_kind",
+        "controller_family",
+        "profile_name",
+        "revision",
+        "layout_spec",
+        "table_shape",
+        "tables",
+    ):
+        if required_key not in required_top_level_keys:
+            fail(f"contract fixture input_contract.required_top_level_keys missing {required_key}")
     output_contract = fixture.get("output_contract")
     if not isinstance(output_contract, dict):
         fail("contract fixture output_contract must be an object")
@@ -315,11 +355,114 @@ def validate_contract_fixture(fixture: dict[str, Any]) -> None:
         fail("contract fixture output_contract.required_marker is wrong")
 
 
+def validate_layout_spec_packet(packet: dict[str, Any]) -> None:
+    if packet.get("schema_version") != 1:
+        fail("layout spec packet schema_version must be 1")
+    if packet.get("packet") != "generated_source_owned_layout_spec":
+        fail("layout spec packet name is wrong")
+    for key, expected in {
+        "active_behavior_changed": False,
+        "hardware_test_required_before_merge": False,
+        "generator_contract_only": True,
+        "layout_spec_contract_inert": True,
+        "generated_tables_wired_active": False,
+        "generated_artifacts_written_to_active_source_path_by_default": False,
+        "runtime_loaded_config_implemented": False,
+        "persistent_storage_implemented": False,
+        "webserial_device_write_implemented": False,
+        "backend_config_pb_write_path_implemented": False,
+        "flashing_automation_implemented": False,
+        "nunchuk_status": "NOT_TESTED",
+        "root_cause_proven": False,
+    }.items():
+        actual = packet.get(key)
+        if actual != expected:
+            fail(f"layout spec packet {key} must be {expected!r}, got {actual!r}")
+    spec = packet.get("layout_spec")
+    if not isinstance(spec, dict):
+        fail("layout spec packet layout_spec must be an object")
+    for key, expected in EXPECTED_LAYOUT_SPEC_VALUES.items():
+        actual = spec.get(key)
+        if actual != expected:
+            fail(f"layout spec packet layout_spec {key} must be {expected!r}, got {actual!r}")
+    shape = spec.get("table_shape")
+    if shape != EXPECTED_SHAPE:
+        fail(f"layout spec packet layout_spec.table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
+    tables = spec.get("tables")
+    if not isinstance(tables, list) or len(tables) != EXPECTED_SHAPE["table_count"]:
+        fail("layout spec packet layout_spec.tables must contain exactly 27 entries")
+    seen_ids: set[int] = set()
+    seen_names: set[str] = set()
+    seen_symbols: set[str] = set()
+    for table_index, table in enumerate(tables):
+        if not isinstance(table, dict):
+            fail(f"layout spec packet layout_spec.tables[{table_index}] must be an object")
+        table_id = table.get("table_id")
+        if not isinstance(table_id, int) or isinstance(table_id, bool):
+            fail(f"layout spec packet layout_spec.tables[{table_index}].table_id must be an integer")
+        if table_id in seen_ids:
+            fail(f"layout spec packet duplicate table_id: {table_id}")
+        seen_ids.add(table_id)
+        table_name = table.get("table_name")
+        if not isinstance(table_name, str) or not table_name:
+            fail(f"layout spec packet layout_spec.tables[{table_index}].table_name must be a string")
+        if table_name in seen_names:
+            fail(f"layout spec packet duplicate table_name: {table_name}")
+        seen_names.add(table_name)
+        table_symbol = table.get("table_symbol")
+        if not isinstance(table_symbol, str) or not table_symbol:
+            fail(f"layout spec packet layout_spec.tables[{table_index}].table_symbol must be a string")
+        if table_symbol in seen_symbols:
+            fail(f"layout spec packet duplicate table_symbol: {table_symbol}")
+        seen_symbols.add(table_symbol)
+        expected_symbol = f"k{table_name}Table"
+        if table_symbol != expected_symbol:
+            fail(
+                f"layout spec packet layout_spec.tables[{table_index}].table_symbol must be {expected_symbol!r}"
+            )
+    if seen_ids != set(range(EXPECTED_SHAPE["table_count"])):
+        fail("layout spec packet table_id values must cover 0..26")
+
+
 def validate_input_fixture(payload: dict[str, Any]) -> None:
     for key, expected in EXPECTED_INPUT_VALUES.items():
         actual = payload.get(key)
         if actual != expected:
             fail(f"input fixture {key} must be {expected!r}, got {actual!r}")
+    layout_spec = payload.get("layout_spec")
+    if layout_spec is not None:
+        if not isinstance(layout_spec, dict):
+            fail("input fixture layout_spec must be an object when present")
+        for key, expected in EXPECTED_LAYOUT_SPEC_VALUES.items():
+            actual = layout_spec.get(key)
+            if actual != expected:
+                fail(f"input fixture layout_spec {key} must be {expected!r}, got {actual!r}")
+        shape = layout_spec.get("table_shape")
+        if shape != EXPECTED_SHAPE:
+            fail(f"input fixture layout_spec table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
+        tables = layout_spec.get("tables")
+        if not isinstance(tables, list) or len(tables) != EXPECTED_SHAPE["table_count"]:
+            fail("input fixture layout_spec.tables must contain exactly 27 entries")
+        seen_layout_ids: set[int] = set()
+        for table_index, table in enumerate(tables):
+            if not isinstance(table, dict):
+                fail(f"input fixture layout_spec.tables[{table_index}] must be an object")
+            table_id = table.get("table_id")
+            if not isinstance(table_id, int) or isinstance(table_id, bool):
+                fail(f"input fixture layout_spec.tables[{table_index}].table_id must be an integer")
+            if table_id in seen_layout_ids:
+                fail(f"input fixture duplicate layout_spec table_id: {table_id}")
+            seen_layout_ids.add(table_id)
+            for key in ("table_name", "table_symbol"):
+                value = table.get(key)
+                if not isinstance(value, str) or not value:
+                    fail(f"input fixture layout_spec.tables[{table_index}].{key} must be a string")
+            if table["table_symbol"] != f"k{table['table_name']}Table":
+                fail(
+                    "input fixture layout_spec tables must use matching source-owned table_symbol names"
+                )
+        if seen_layout_ids != set(range(EXPECTED_SHAPE["table_count"])):
+            fail("input fixture layout_spec table_id values must cover 0..26")
     shape = payload.get("table_shape")
     if shape != EXPECTED_SHAPE:
         fail(f"input fixture table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
@@ -351,6 +494,10 @@ def validate_input_fixture(payload: dict[str, Any]) -> None:
                     )
     if seen_ids != set(range(EXPECTED_SHAPE["table_count"])):
         fail("input fixture table_id values must cover 0..26")
+
+
+def validate_layout_spec_example(payload: dict[str, Any]) -> None:
+    validate_input_fixture(payload)
 
 
 def validate_output_fixture(text: str) -> None:
@@ -386,7 +533,7 @@ def expect_generator_failure(input_text: str, directory: Path, label: str) -> No
         fail(f"generator accepted malformed input case: {label}")
 
 
-def validate_generator_behavior(input_payload: dict[str, Any]) -> None:
+def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_payload: dict[str, Any]) -> None:
     fixture_output = read_required(OUTPUT_FIXTURE)
     with tempfile.TemporaryDirectory() as temp_name:
         temp_dir = Path(temp_name)
@@ -395,24 +542,49 @@ def validate_generator_behavior(input_payload: dict[str, Any]) -> None:
         first = run_generator(INPUT_FIXTURE, generated_one)
         if first.returncode != 0:
             fail("generator failed on sample input: " + first.stderr.strip())
+        layout_spec_output = temp_dir / "generated_layout_spec.hpp"
+        layout_spec_run = run_generator(LAYOUT_SPEC_EXAMPLE, layout_spec_output)
+        if layout_spec_run.returncode != 0:
+            fail("generator failed on layout spec example: " + layout_spec_run.stderr.strip())
         second = run_generator(INPUT_FIXTURE, generated_two)
         if second.returncode != 0:
             fail("generator failed on second deterministic run: " + second.stderr.strip())
         first_text = generated_one.read_text(encoding="utf-8")
         second_text = generated_two.read_text(encoding="utf-8")
+        layout_spec_text = layout_spec_output.read_text(encoding="utf-8")
         if first_text != second_text:
             fail("generator output is not deterministic across repeated runs")
         if first_text != fixture_output:
             fail("generator output does not match checked-in generated output fixture")
+        if layout_spec_text != fixture_output:
+            fail("layout spec example does not match checked-in generated output fixture")
 
         duplicate_key = '{"schema_version": 1, "schema_version": 1}'
         expect_generator_failure(duplicate_key, temp_dir, "duplicate_key")
 
-        missing_required = copy.deepcopy(input_payload)
+        missing_required = copy.deepcopy(layout_spec_payload)
         missing_required.pop("tables")
         write_json(temp_dir / "missing_required.json", missing_required)
         if run_generator(temp_dir / "missing_required.json", temp_dir / "missing_required.hpp").returncode == 0:
             fail("generator accepted input missing required tables key")
+
+        wrong_layout_spec_kind = copy.deepcopy(layout_spec_payload)
+        wrong_layout_spec_kind["layout_spec"]["layout_spec_kind"] = "wrong"
+        write_json(temp_dir / "wrong_layout_spec_kind.json", wrong_layout_spec_kind)
+        if run_generator(temp_dir / "wrong_layout_spec_kind.json", temp_dir / "wrong_layout_spec_kind.hpp").returncode == 0:
+            fail("generator accepted wrong layout_spec_kind")
+
+        wrong_layout_spec_shape = copy.deepcopy(layout_spec_payload)
+        wrong_layout_spec_shape["layout_spec"]["table_shape"]["table_count"] = 26
+        write_json(temp_dir / "wrong_layout_spec_shape.json", wrong_layout_spec_shape)
+        if run_generator(temp_dir / "wrong_layout_spec_shape.json", temp_dir / "wrong_layout_spec_shape.hpp").returncode == 0:
+            fail("generator accepted wrong layout_spec table_count")
+
+        wrong_layout_spec_fixture = copy.deepcopy(layout_spec_payload)
+        wrong_layout_spec_fixture["layout_spec"]["tables"][0]["table_symbol"] = "kWrongTable"
+        write_json(temp_dir / "wrong_layout_spec_fixture.json", wrong_layout_spec_fixture)
+        if run_generator(temp_dir / "wrong_layout_spec_fixture.json", temp_dir / "wrong_layout_spec_fixture.hpp").returncode == 0:
+            fail("generator accepted wrong layout_spec table_symbol")
 
         out_of_range = copy.deepcopy(input_payload)
         out_of_range["tables"][0]["points"][0]["x"] = 256
@@ -446,10 +618,25 @@ def validate_generator_behavior(input_payload: dict[str, Any]) -> None:
 
 def validate_docs() -> None:
     contract_doc = read_required(CONTRACT_DOC)
+    layout_spec_doc = read_required(LAYOUT_SPEC_DOC)
     readme = read_required(README)
     current_state = read_required(CURRENT_STATE)
     roadmap = read_required(ROADMAP)
     require_phrases(rel(CONTRACT_DOC), contract_doc, REQUIRED_DOC_PHRASES)
+    require_phrases(
+        rel(LAYOUT_SPEC_DOC),
+        layout_spec_doc,
+        (
+            "INERT LAYOUT SPEC / DOCS-TOOLS ONLY",
+            "generated_source_owned_generator_contract.md",
+            "declarative layout spec",
+            "layout_spec",
+            "not wired into runtime selection",
+            "does not change active firmware behavior",
+            "future hardware gate required before generated source-owned tables are selected active",
+            "Nunchuk remains `NOT_TESTED`",
+        ),
+    )
     for path, text in (
         (README, readme),
         (CURRENT_STATE, current_state),
@@ -462,15 +649,20 @@ def main() -> int:
     branch = validate_branch()
     validate_changed_paths(changed_paths(branch))
     contract_fixture = load_json_object(CONTRACT_FIXTURE)
+    layout_spec_fixture = load_json_object(LAYOUT_SPEC_FIXTURE)
+    layout_spec_example = load_json_object(LAYOUT_SPEC_EXAMPLE)
     input_fixture = load_json_object(INPUT_FIXTURE)
     validate_contract_fixture(contract_fixture)
+    validate_layout_spec_packet(layout_spec_fixture)
+    validate_layout_spec_example(layout_spec_example)
     validate_input_fixture(input_fixture)
     validate_output_fixture(read_required(OUTPUT_FIXTURE))
-    validate_generator_behavior(input_fixture)
+    validate_generator_behavior(input_fixture, layout_spec_example)
     validate_docs()
     print("glyph_generated_source_owned_generator_contract: PASS")
     print(f"- branch: {branch}")
     print(f"- contract: {rel(CONTRACT_DOC)}")
+    print(f"- layout spec: {rel(LAYOUT_SPEC_DOC)}")
     print(f"- generator: {rel(GENERATOR)}")
     print(f"- sample output: {rel(OUTPUT_FIXTURE)}")
     return 0

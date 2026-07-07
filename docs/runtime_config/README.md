@@ -33,17 +33,21 @@ you need the supporting evidence.
 The generated-source-owned realization lane is documented by these packets and
 fixtures:
 
-- `generated_source_owned_realization_design.md`
+- `generated_source_owned_realization_design.md` and
+  `fixtures/generated_source_owned_realization_design.json`
 - `generated_source_owned_schema_scaffold.md` and
   `fixtures/generated_source_owned_schema_scaffold.json`
 - `generated_source_owned_generator_contract.md` and
   `fixtures/generated_source_owned_generator_contract.json`
+- `generated_source_owned_layout_spec.md` and
+  `fixtures/generated_source_owned_layout_spec.json`
 - `generated_source_owned_artifact_install.md` and
   `fixtures/generated_source_owned_artifact_install.json`
 - `generated_source_owned_baseline_artifact.md` and
   `fixtures/generated_source_owned_baseline_artifact.json`
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
 - `fixtures/generated_source_owned_generator_input.example.json`
+- `fixtures/generated_source_owned_layout_spec.example.json`
 - `fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`
 - `tools/generate_source_owned_runtime_config.py`
 
@@ -52,7 +56,10 @@ RuntimeConfigView selection boundary, and keep the source-owned active-state
 preselection `HARDWARE_PASS` evidence and active-storage `HARDWARE_FAIL`
 evidence separate. source-owned active-state `HARDWARE_PASS` evidence and
 future hardware gate required before generated source-owned baseline artifact
-is selected active remain part of this lane. Future hardware gate required
+is selected active remain part of this lane. The declarative
+`generated_source_owned_layout_spec.md` mirror stays inert and only helps
+validate the baseline shape. Future implementation must be hardware-gated if
+active source selection behavior changes. Future hardware gate required
 before generated source-owned tables are selected active. nunchuk `NOT_TESTED`.
 
 ## Safe Source-Owned Realization Path

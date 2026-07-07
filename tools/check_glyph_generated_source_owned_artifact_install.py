@@ -173,7 +173,13 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH}:
+    if branch not in {
+        EXPECTED_BRANCH,
+        "generator-source-owned-layout-spec-contract",
+        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
+        MERGED_BRANCH,
+        RECOVERY_BRANCH,
+    }:
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
             f"{DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"

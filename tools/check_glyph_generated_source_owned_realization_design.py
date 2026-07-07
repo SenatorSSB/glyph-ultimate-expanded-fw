@@ -35,6 +35,9 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json",
     "docs/runtime_config/generated_source_owned_generator_contract.md",
     "docs/runtime_config/fixtures/generated_source_owned_generator_contract.json",
+    "docs/runtime_config/generated_source_owned_layout_spec.md",
+    "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+    "docs/runtime_config/fixtures/generated_source_owned_layout_spec.example.json",
     "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json",
     "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
     "docs/runtime_config/generated_source_owned_artifact_install.md",
@@ -49,9 +52,11 @@ ALLOWED_CHECKER_PATHS = {
     CHECKER_REL,
     ACTIVE_STORAGE_CHECKER_REL,
     SCHEMA_SCAFFOLD_CHECKER_REL,
+    "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_coordinate_native_runtime_plan.py",
     "tools/generate_source_owned_runtime_config.py",
 }
 
@@ -195,6 +200,7 @@ def validate_branch() -> str:
     branch = current_branch()
     if branch not in {
         EXPECTED_BRANCH,
+        "generator-source-owned-layout-spec-contract",
         DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH,
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
