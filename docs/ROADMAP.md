@@ -57,8 +57,13 @@ Current generated-source-owned packets in scope:
 Generator lane references in scope:
 `generated_source_owned_generator_input.example.json`,
 `fixtures/generated_source_owned_layout_spec.example.json`,
+`fixtures/generated_source_owned_layout_spec.json`,
+`--emit-current-source-owned-baseline`,
+the explicit `--emit-from-layout-spec` packet-input mode,
 `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
 `tools/generate_source_owned_runtime_config.py`.
+The normal generator input now requires `layout_spec`, so spec-less JSON is
+rejected.
 Related fixtures in scope:
 `fixtures/generated_source_owned_schema_scaffold.json`,
 `fixtures/generated_source_owned_generator_contract.json`,

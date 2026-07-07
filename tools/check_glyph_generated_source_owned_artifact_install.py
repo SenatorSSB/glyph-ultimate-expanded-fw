@@ -20,10 +20,12 @@ BASE_BRANCH = "configurator"
 INSTALL_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_artifact_install.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json"
 INPUT_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json"
+LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
 GENERATOR = REPO_ROOT / "tools/generate_source_owned_runtime_config.py"
 README = REPO_ROOT / "docs/runtime_config/README.md"
 CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
+SPEC_INPUT_MODE = "--emit-from-layout-spec"
 
 INERT_SOURCE_PREFIX = "src/modes/runtime_config/generated_source_owned/"
 INERT_SOURCE_RE = re.compile(
@@ -91,6 +93,8 @@ EXPECTED_FIXTURE_VALUES: dict[str, Any] = {
 REQUIRED_DOC_PHRASES = (
     "generated_source_owned_generator_contract.md",
     "generated_source_owned_schema_scaffold.md",
+    "--emit-from-layout-spec",
+    "generated_source_owned_layout_spec.json",
     "active-storage `HARDWARE_FAIL` evidence",
     "Source-owned active-state preselection has recorded `HARDWARE_PASS` evidence",
     "Future hardware gate required before generated source-owned tables are selected active",
@@ -106,6 +110,8 @@ REQUIRED_INDEX_PHRASES = (
     "fixtures/generated_source_owned_artifact_install.json",
     "generated_source_owned_generator_contract.md",
     "generated_source_owned_schema_scaffold.md",
+    "--emit-from-layout-spec",
+    "generated_source_owned_layout_spec.json",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state preselection `HARDWARE_PASS`",
     "future hardware gate required before generated source-owned tables are selected active",
@@ -277,6 +283,10 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
         fail("fixture generator.default_output_to_active_source_path must be false")
     if generator.get("explicit_install_mode") != "--install-inert-source-artifact":
         fail("fixture generator.explicit_install_mode must document install mode")
+    if generator.get("spec_input_mode") != SPEC_INPUT_MODE:
+        fail(f"fixture generator.spec_input_mode must be {SPEC_INPUT_MODE!r}")
+    if generator.get("spec_input_fixture") != rel(LAYOUT_SPEC_FIXTURE):
+        fail(f"fixture generator.spec_input_fixture must be {rel(LAYOUT_SPEC_FIXTURE)!r}")
 
     installed_artifacts = fixture.get("installed_artifacts")
     if not isinstance(installed_artifacts, list) or not all(isinstance(item, str) for item in installed_artifacts):
@@ -303,6 +313,17 @@ def validate_deterministic_generation(installed_artifacts: list[str]) -> None:
     installed_text = read_required(REPO_ROOT / installed_artifacts[0])
     if completed.stdout != installed_text:
         fail("installed generated source artifact does not match deterministic generator output")
+    spec_completed = subprocess.run(
+        ["python3", str(GENERATOR), SPEC_INPUT_MODE, str(LAYOUT_SPEC_FIXTURE)],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if spec_completed.returncode != 0:
+        fail("spec-input generator failed on layout spec packet: " + spec_completed.stderr.strip())
+    if spec_completed.stdout != installed_text:
+        fail("spec-input generator output does not match installed generated source artifact")
 
 
 def validate_docs() -> None:

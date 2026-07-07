@@ -7,12 +7,15 @@ source-owned runtime table artifacts. It follows
 `generated_source_owned_realization_design.md` and
 `generated_source_owned_schema_scaffold.md`, and it now accepts the declarative
 `generated_source_owned_layout_spec.md` mirror for the current baseline shape.
+The generator input now requires `layout_spec`; spec-less JSON is rejected.
 
 This branch adds a neutral JSON input contract, a Python stdlib-only offline
 generator, an inert declarative layout spec, and docs fixtures for the
-generated C++ text output. It does not write generated artifacts into active
-source paths by default, does not wire generated tables active, and does not
-change active firmware behavior.
+generated C++ text output. It also exposes an explicit `--emit-from-layout-spec`
+packet-input mode so the declarative layout-spec packet can be consumed
+deterministically. It does not write generated artifacts into active source
+paths by default, does not wire generated tables active, and does not change
+active firmware behavior.
 
 ## Accepted Evidence
 
@@ -44,6 +47,11 @@ required top-level keys are:
 `layout_spec` must be a declarative mirror of the current baseline layout. It
 must match the generator input metadata and table shape, and it must describe
 the current baseline order without changing the active runtime path.
+
+The explicit `--emit-from-layout-spec` mode consumes the declarative
+`generated_source_owned_layout_spec.json` packet, validates that the embedded
+layout spec remains inert, and emits the same deterministic source-owned C++
+fixture as the standard generator input path.
 
 `table_shape` must contain:
 
@@ -97,7 +105,9 @@ Generated output must not contain:
 `tools/generate_source_owned_runtime_config.py` is stdlib-only. It validates the
 contract shape, layout spec mirror, and byte ranges, rejects duplicate JSON
 keys, emits deterministic C++ text, and rejects default writes into active
-source, HAL, or backend paths.
+source, HAL, or backend paths. The explicit spec-input mode is
+`--emit-from-layout-spec`, and the baseline/source-inspection mode remains
+`--emit-current-source-owned-baseline`.
 
 The generator may align with inert generated-source-owned schema names for
 documentation consistency, but it does not depend on firmware build behavior.

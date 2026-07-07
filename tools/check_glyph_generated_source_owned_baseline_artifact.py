@@ -80,6 +80,7 @@ EXPECTED_FIXTURE_VALUES: dict[str, Any] = {
 REQUIRED_DOC_PHRASES = (
     "generated_source_owned_artifact_install.md",
     "generated_source_owned_generator_contract.md",
+    "--emit-current-source-owned-baseline",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state `HARDWARE_PASS` evidence",
     "future hardware gate required before generated source-owned baseline artifact is selected active",
@@ -96,6 +97,7 @@ REQUIRED_INDEX_PHRASES = (
     "GeneratedRuntimeConfigBaseline.current.hpp",
     "generated_source_owned_artifact_install.md",
     "generated_source_owned_generator_contract.md",
+    "--emit-current-source-owned-baseline",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state `HARDWARE_PASS` evidence",
     "future hardware gate required before generated source-owned baseline artifact is selected active",

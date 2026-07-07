@@ -38,6 +38,12 @@ python3 tools/generate_source_owned_runtime_config.py \
   src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp
 ```
 
+The same generator also exposes an explicit `--emit-from-layout-spec` packet
+mode for `docs/runtime_config/fixtures/generated_source_owned_layout_spec.json`.
+That mode is still inert: it validates the declarative layout-spec packet and
+produces the same deterministic source-owned C++ text without changing active
+runtime selection.
+
 The installed source artifact must contain these markers:
 
 - `generated source-owned runtime config artifact`
