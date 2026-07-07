@@ -102,7 +102,7 @@ EXPECTED_LAYOUT_SPEC_VALUES: dict[str, Any] = {
 }
 
 EXPECTED_SHAPE = {
-    "table_count": 27,
+    "table_count": 28,
     "points_per_table": 9,
     "axes_per_point": 2,
 }
@@ -116,7 +116,7 @@ REQUIRED_DOC_PHRASES = (
     "layout_spec",
     "--emit-from-layout-spec",
     "duplicate keys rejected",
-    "`table_count: 27`",
+    "`table_count: 28`",
     "`points_per_table: 9`",
     "`axes_per_point: 2`",
     "integer byte values `x` and `y`",
@@ -162,6 +162,8 @@ REQUIRED_INERT_SOURCE_MARKERS = (
     "inert generated-table placeholder",
     "not wired into runtime selection",
 )
+GENERATED_OUTPUT_TABLE_START_RE = re.compile(r"^\s*\{\s*//\s*(?P<label>.+?)\s*$")
+GENERATED_OUTPUT_POINT_RE = re.compile(r"^\s*\{\s*(\d+)u,\s*(\d+)u\},\s*$")
 
 
 class GeneratedSourceOwnedGeneratorContractError(AssertionError):
@@ -228,6 +230,7 @@ def validate_branch() -> str:
     if branch not in {
         EXPECTED_BRANCH,
         "generator-source-owned-layout-spec-contract",
+        "generator-source-owned-y2-layout-spec-coverage",
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
@@ -475,7 +478,7 @@ def validate_input_fixture(payload: dict[str, Any]) -> None:
         fail(f"input fixture table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
     tables = payload.get("tables")
     if not isinstance(tables, list) or len(tables) != EXPECTED_SHAPE["table_count"]:
-        fail("input fixture tables must contain exactly 27 tables")
+        fail("input fixture tables must contain exactly 28 tables")
     seen_ids: set[int] = set()
     for table_index, table in enumerate(tables):
         if not isinstance(table, dict):
@@ -517,6 +520,42 @@ def validate_output_fixture(text: str) -> None:
             fail(f"generated output fixture contains forbidden token {token!r}")
 
 
+def canonicalize_output_label(label: str) -> str:
+    label = label.strip()
+    if " " in label:
+        prefix, rest = label.split(" ", 1)
+        if prefix.isdigit():
+            label = rest.strip()
+    if label.startswith("k") and label.endswith("Table") and len(label) > len("kTable"):
+        return label[1:-5]
+    return label
+
+
+def parse_generated_output_tables(text: str) -> list[tuple[str, list[tuple[int, int]]]]:
+    lines = text.splitlines()
+    tables: list[tuple[str, list[tuple[int, int]]]] = []
+    index = 0
+    while index < len(lines):
+        match = GENERATED_OUTPUT_TABLE_START_RE.match(lines[index])
+        if match is None:
+            index += 1
+            continue
+        label = canonicalize_output_label(match.group("label"))
+        points: list[tuple[int, int]] = []
+        for point_offset in range(1, 10):
+            if index + point_offset >= len(lines):
+                fail(f"generated output table {label} is truncated")
+            point_match = GENERATED_OUTPUT_POINT_RE.match(lines[index + point_offset])
+            if point_match is None:
+                fail(f"generated output table {label} has malformed point data")
+            points.append((int(point_match.group(1)), int(point_match.group(2))))
+        if index + 10 >= len(lines) or lines[index + 10].strip() != "},":
+            fail(f"generated output table {label} is missing its closing brace")
+        tables.append((label, points))
+        index += 11
+    return tables
+
+
 def run_generator(*args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         ["python3", str(GENERATOR), *args],
@@ -525,6 +564,13 @@ def run_generator(*args: str) -> subprocess.CompletedProcess[str]:
         text=True,
         check=False,
     )
+
+
+def generate_current_source_owned_baseline() -> str:
+    completed = run_generator("--emit-current-source-owned-baseline")
+    if completed.returncode != 0:
+        fail("generator failed on current source-owned baseline: " + completed.stderr.strip())
+    return completed.stdout
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
@@ -578,6 +624,21 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
         layout_spec_example_text = (temp_dir / "generated_layout_spec_example.hpp").read_text(encoding="utf-8")
         if layout_spec_example_text != fixture_output:
             fail("layout spec example fixture does not match checked-in generated output fixture")
+
+        baseline = generate_current_source_owned_baseline()
+        fixture_tables = parse_generated_output_tables(fixture_output)
+        baseline_tables = parse_generated_output_tables(baseline)
+        if len(fixture_tables) != len(baseline_tables):
+            fail("generated output fixture table count does not match current source-owned baseline output")
+        fixture_names = [label for label, _ in fixture_tables]
+        baseline_names = [label for label, _ in baseline_tables]
+        if fixture_names != baseline_names:
+            fail("generated output fixture table order does not match current source-owned baseline output")
+        for target_name in ("Y2", "Tilt3"):
+            fixture_points = dict(fixture_tables)[target_name]
+            baseline_points = dict(baseline_tables)[target_name]
+            if fixture_points != baseline_points:
+                fail(f"generated output fixture {target_name} table does not match current source-owned baseline output")
 
         missing_layout_spec = copy.deepcopy(layout_spec_payload)
         missing_layout_spec.pop("layout_spec")
