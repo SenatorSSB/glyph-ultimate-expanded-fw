@@ -46,7 +46,7 @@ required top-level keys are:
 
 `layout_spec` must be a declarative mirror of the current baseline layout. It
 must match the generator input metadata and table shape, and it must describe
-the current baseline order without changing the active runtime path.
+the current 28-table baseline order without changing the active runtime path.
 
 The explicit `--emit-from-layout-spec` mode consumes the declarative
 `generated_source_owned_layout_spec.json` packet, validates that the embedded
@@ -55,12 +55,12 @@ fixture as the standard generator input path.
 
 `table_shape` must contain:
 
-- `table_count: 27`
+- `table_count: 28`
 - `points_per_table: 9`
 - `axes_per_point: 2`
 
 Each table must include `table_id` or `table_name`. For the current scaffold
-sample, `table_id` values are expected to cover the 27 current table slots.
+sample, `table_id` values are expected to cover the 28 current table slots.
 Each table must contain exactly 9 points. Each point must contain integer byte
 values `x` and `y` in the inclusive range `[0, 255]`.
 

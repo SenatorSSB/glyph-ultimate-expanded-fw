@@ -28,11 +28,11 @@ baseline generator input. It must describe:
 - `controller_family: glyph_mk6`
 - `profile_name: example_source_owned_runtime_config`
 - `revision: 1`
-- `table_shape.table_count: 27`
+- `table_shape.table_count: 28`
 - `table_shape.points_per_table: 9`
 - `table_shape.axes_per_point: 2`
 
-The `tables` array is an ordered declarative mirror of the 27 current source
+The `tables` array is an ordered declarative mirror of the 28 current source
 tables. Each entry names the source table slot with:
 
 - `table_id`
@@ -43,9 +43,11 @@ The generator may use the spec as a validation and ordering mirror, but it does
 not use the spec to activate runtime behavior, replace `RuntimeConfigView`, or
 publish any active source path. It is not wired into runtime selection and
 does not change active firmware behavior. The layout spec is inert and
-docs-tools only. The normal generator input path now requires `layout_spec`,
-and the explicit `--emit-from-layout-spec` generator mode consumes the packet
-deterministically and still emits the same source-owned fixture.
+docs-tools only. The Y2 routing facts remain documented in
+`latest_y2_layout_source_owned_port.md` and its fixture. The normal generator
+input path now requires `layout_spec`, and the explicit
+`--emit-from-layout-spec` generator mode consumes the packet deterministically
+and still emits the same source-owned fixture.
 Future hardware gate required before generated source-owned tables are
 selected active.
 

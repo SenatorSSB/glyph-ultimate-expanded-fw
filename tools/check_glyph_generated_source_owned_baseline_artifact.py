@@ -27,7 +27,7 @@ CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 GENERATOR = REPO_ROOT / "tools/generate_source_owned_runtime_config.py"
 
-EXPECTED_TABLE_COUNT = 27
+EXPECTED_TABLE_COUNT = 28
 EXPECTED_POINT_COUNT = 9
 EXPECTED_AXES_PER_POINT = 2
 
@@ -165,7 +165,13 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, "generator-source-owned-layout-spec-contract", MERGED_BRANCH, RECOVERY_BRANCH}:
+    if branch not in {
+        EXPECTED_BRANCH,
+        "generator-source-owned-layout-spec-contract",
+        "generator-source-owned-y2-layout-spec-coverage",
+        MERGED_BRANCH,
+        RECOVERY_BRANCH,
+    }:
         fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
