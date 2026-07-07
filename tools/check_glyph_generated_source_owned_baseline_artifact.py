@@ -163,7 +163,7 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH}:
+    if branch not in {EXPECTED_BRANCH, "generator-source-owned-layout-spec-contract", MERGED_BRANCH, RECOVERY_BRANCH}:
         fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],

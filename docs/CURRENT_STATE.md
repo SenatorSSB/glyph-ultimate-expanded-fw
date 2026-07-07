@@ -46,15 +46,19 @@ implementation work. Detailed historical evidence remains indexed from
   `generated_source_owned_realization_design.md`,
   `generated_source_owned_schema_scaffold.md`,
   `generated_source_owned_generator_contract.md`,
+  `generated_source_owned_layout_spec.md`,
   `generated_source_owned_artifact_install.md`, and
   `generated_source_owned_baseline_artifact.md`,
   `GeneratedRuntimeConfigBaseline.current.hpp`.
 - Related fixtures currently in scope:
+  `fixtures/generated_source_owned_realization_design.json`,
   `fixtures/generated_source_owned_schema_scaffold.json`,
   `fixtures/generated_source_owned_generator_contract.json`,
+  `fixtures/generated_source_owned_layout_spec.json`,
   `fixtures/generated_source_owned_artifact_install.json`, and
   `fixtures/generated_source_owned_baseline_artifact.json`.
 - `generated_source_owned_generator_input.example.json`,
+  `fixtures/generated_source_owned_layout_spec.example.json`,
   `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
   `tools/generate_source_owned_runtime_config.py` remain the generator lane
   references.
@@ -63,6 +67,9 @@ implementation work. Detailed historical evidence remains indexed from
   `HARDWARE_FAIL` evidence remain distinct. source-owned active-state
   `HARDWARE_PASS` evidence and future hardware gate required before generated
   source-owned baseline artifact is selected active remain part of this lane.
+  The declarative layout spec mirror stays inert and only validates the current
+  source-owned baseline shape. Future implementation must be hardware-gated if
+  active source selection behavior changes.
 - future hardware gate required before generated source-owned tables are
   selected active.
 - nunchuk `NOT_TESTED`.

@@ -33,6 +33,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_schema_scaffold.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_generated_source_owned_realization_design.py",
     "tools/generate_source_owned_runtime_config.py",
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_navigation.py",
@@ -119,7 +120,13 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH}:
+    if branch not in {
+        EXPECTED_BRANCH,
+        "generator-source-owned-layout-spec-contract",
+        AGENT_FRAMEWORK_BRANCH,
+        MERGED_BRANCH,
+        RECOVERY_BRANCH,
+    }:
         fail(f"checker must run on {EXPECTED_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     if branch in {EXPECTED_BRANCH, AGENT_FRAMEWORK_BRANCH}:
         completed = subprocess.run(

@@ -48,24 +48,31 @@ fixtures/checkers while keeping output as reviewable source artifacts.
 
 Current generated-source-owned packets in scope:
 `generated_source_owned_realization_design.md`,
+`fixtures/generated_source_owned_realization_design.json`,
 `generated_source_owned_schema_scaffold.md`,
 `generated_source_owned_generator_contract.md`,
+`generated_source_owned_layout_spec.md`,
 `generated_source_owned_artifact_install.md`, and
 `generated_source_owned_baseline_artifact.md`.
 Generator lane references in scope:
 `generated_source_owned_generator_input.example.json`,
+`fixtures/generated_source_owned_layout_spec.example.json`,
 `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
 `tools/generate_source_owned_runtime_config.py`.
 Related fixtures in scope:
 `fixtures/generated_source_owned_schema_scaffold.json`,
 `fixtures/generated_source_owned_generator_contract.json`,
+`fixtures/generated_source_owned_layout_spec.json`,
 `fixtures/generated_source_owned_artifact_install.json`, and
 `fixtures/generated_source_owned_baseline_artifact.json`.
 
 Boundary: this phase may generate source text or docs fixtures, but it must not
 replace the active RuntimeConfigView, publish `candidate.view`, publish
 RAM-backed active table storage, introduce runtime-loaded config, or add
-storage/write/flashing paths.
+storage/write/flashing paths. The declarative layout spec mirror stays inert
+and only validates the current source-owned baseline shape. Future
+implementation must be hardware-gated if active source selection behavior
+changes.
 
 The generated tables not wired active boundary remains intact, the source-owned
 active-state preselection `HARDWARE_PASS` evidence and active-storage

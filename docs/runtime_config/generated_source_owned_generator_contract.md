@@ -5,12 +5,14 @@ Status label: GENERATOR CONTRACT / DOCS-TOOLS ONLY.
 This packet defines the first offline generator contract for generated
 source-owned runtime table artifacts. It follows
 `generated_source_owned_realization_design.md` and
-`generated_source_owned_schema_scaffold.md`.
+`generated_source_owned_schema_scaffold.md`, and it now accepts the declarative
+`generated_source_owned_layout_spec.md` mirror for the current baseline shape.
 
 This branch adds a neutral JSON input contract, a Python stdlib-only offline
-generator, and docs fixtures for the generated C++ text output. It does not
-write generated artifacts into active source paths by default, does not wire
-generated tables active, and does not change active firmware behavior.
+generator, an inert declarative layout spec, and docs fixtures for the
+generated C++ text output. It does not write generated artifacts into active
+source paths by default, does not wire generated tables active, and does not
+change active firmware behavior.
 
 ## Accepted Evidence
 
@@ -35,8 +37,13 @@ required top-level keys are:
 - `controller_family`
 - `profile_name`
 - `revision`
+- `layout_spec`
 - `table_shape`
 - `tables`
+
+`layout_spec` must be a declarative mirror of the current baseline layout. It
+must match the generator input metadata and table shape, and it must describe
+the current baseline order without changing the active runtime path.
 
 `table_shape` must contain:
 
@@ -49,9 +56,14 @@ sample, `table_id` values are expected to cover the 27 current table slots.
 Each table must contain exactly 9 points. Each point must contain integer byte
 values `x` and `y` in the inclusive range `[0, 255]`.
 
-The generator emits tables in deterministic order. Integer `table_id` ordering
-is preferred when present; table-name ordering is the fallback for name-only
-inputs.
+The generator emits tables in deterministic order. The declarative
+`layout_spec.tables` order is authoritative when present, otherwise integer
+`table_id` ordering is preferred when present and table-name ordering is the
+fallback for name-only inputs.
+
+`generated_source_owned_layout_spec.md` describes the inert spec packet and
+its fixture pair in more detail. The spec is validation-only and does not alter
+active runtime selection.
 
 ## Output Contract
 
@@ -83,8 +95,9 @@ Generated output must not contain:
 ## Generator Boundary
 
 `tools/generate_source_owned_runtime_config.py` is stdlib-only. It validates the
-contract shape and byte ranges, rejects duplicate JSON keys, emits deterministic
-C++ text, and rejects default writes into active source, HAL, or backend paths.
+contract shape, layout spec mirror, and byte ranges, rejects duplicate JSON
+keys, emits deterministic C++ text, and rejects default writes into active
+source, HAL, or backend paths.
 
 The generator may align with inert generated-source-owned schema names for
 documentation consistency, but it does not depend on firmware build behavior.
@@ -95,6 +108,7 @@ The generated fixture is not selected active in this branch.
 - This packet does not change active behavior.
 - This packet does not prove the low-level failure mechanism.
 - This packet does not wire generated tables into active runtime selection.
+- This packet does not make `layout_spec` an active publication path.
 - This packet does not implement a parser payload path.
 - This packet does not implement runtime-loaded config.
 - This packet does not implement persistent storage.
