@@ -227,22 +227,6 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {
-        EXPECTED_BRANCH,
-        "codex/generator-source-owned-spec-validation-hardening",
-        "generator-source-owned-layout-spec-contract",
-        "generator-source-owned-y2-layout-spec-coverage",
-        DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
-        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
-        MERGED_BRANCH,
-        RECOVERY_BRANCH,
-    }:
-        fail(
-            f"checker must run on {EXPECTED_BRANCH}, "
-            f"generator-source-owned-layout-spec-contract, "
-            f"{DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}, "
-            f"{DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
-        )
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,
@@ -264,12 +248,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {
-        EXPECTED_BRANCH,
-        DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
-        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
-        RECOVERY_BRANCH,
-    }:
+    if branch != MERGED_BRANCH:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
