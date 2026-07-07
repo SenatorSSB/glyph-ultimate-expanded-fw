@@ -19,7 +19,7 @@
     "source_tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
     "source_runtime_view": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
     "artifact_tables": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
-      "table_count": 28,
+    "table_count": 28,
     "points_per_table": 9,
     "axes_per_point": 2
   },
