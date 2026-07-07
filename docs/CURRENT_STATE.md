@@ -91,6 +91,10 @@ implementation work. Detailed historical evidence remains indexed from
 ## Forward Direction
 
 - Next docs/tools direction: source-owned realization generator hardening.
+- Next safe queue: keep the offline generator smoke command documented and
+  maintain branch-independent checker coverage; consider an inert
+  generated-source-owned artifact index only if it helps future generator
+  outputs.
 - Next design direction: coordinate-native runtime profile support, with
   separate design and hardware proof before any runtime-active implementation.
 - Browser/protobuf/persistence as future infrastructure is likely solvable, but
