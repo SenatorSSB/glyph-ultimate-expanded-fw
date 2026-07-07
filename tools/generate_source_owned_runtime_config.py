@@ -96,6 +96,13 @@ def require_keys(label: str, value: dict[str, Any], required: set[str]) -> None:
         fail(f"{label} missing required keys: {', '.join(missing)}")
 
 
+def require_exact_keys(label: str, value: dict[str, Any], required: set[str]) -> None:
+    require_keys(label, value, required)
+    extra = sorted(set(value) - required)
+    if extra:
+        fail(f"{label} has unexpected keys: {', '.join(extra)}")
+
+
 def require_int(label: str, value: Any, *, minimum: int | None = None, maximum: int | None = None) -> int:
     if not isinstance(value, int) or isinstance(value, bool):
         fail(f"{label} must be an integer")
@@ -116,7 +123,7 @@ def validate_shape(payload: dict[str, Any], *, expected_table_count: int = EXPEC
     shape = payload.get("table_shape")
     if not isinstance(shape, dict):
         fail("table_shape must be an object")
-    require_keys("table_shape", shape, REQUIRED_SHAPE_KEYS)
+    require_exact_keys("table_shape", shape, REQUIRED_SHAPE_KEYS)
     table_count = require_int("table_shape.table_count", shape["table_count"], minimum=0, maximum=255)
     points_per_table = require_int(
         "table_shape.points_per_table",
@@ -145,10 +152,10 @@ def validate_layout_spec(
 ) -> dict[str, Any]:
     layout_spec = payload.get("layout_spec")
     if layout_spec is None:
-        return {}
+        fail("generator input requires layout_spec")
     if not isinstance(layout_spec, dict):
         fail("layout_spec must be an object")
-    require_keys("layout_spec", layout_spec, REQUIRED_LAYOUT_SPEC_KEYS)
+    require_exact_keys("layout_spec", layout_spec, REQUIRED_LAYOUT_SPEC_KEYS)
     schema_version = require_int("layout_spec.schema_version", layout_spec["schema_version"], minimum=1, maximum=255)
     if schema_version != EXPECTED_LAYOUT_SPEC_SCHEMA_VERSION:
         fail(f"layout_spec.schema_version must be {EXPECTED_LAYOUT_SPEC_SCHEMA_VERSION}")
@@ -160,37 +167,35 @@ def validate_layout_spec(
     require_string("layout_spec.profile_name", layout_spec["profile_name"])
     require_int("layout_spec.revision", layout_spec["revision"], minimum=0)
     shape = validate_shape(layout_spec, expected_table_count=expected_table_count)
+    expected_symbols = parse_source_baseline_table_order(SOURCE_INTERPRETER.read_text(encoding="utf-8"))
+    if len(expected_symbols) != shape["table_count"]:
+        fail(
+            "layout_spec must mirror the current source-owned baseline table count"
+        )
     tables = layout_spec.get("tables")
     if not isinstance(tables, list):
         fail("layout_spec.tables must be a list")
     if len(tables) != shape["table_count"]:
         fail(f"layout_spec.tables must contain exactly {shape['table_count']} entries")
-    seen_ids: set[int] = set()
-    seen_names: set[str] = set()
-    seen_symbols: set[str] = set()
     normalized_tables: list[dict[str, Any]] = []
     for table_index, table in enumerate(tables):
         if not isinstance(table, dict):
             fail(f"layout_spec.tables[{table_index}] must be an object")
-        require_keys(f"layout_spec.tables[{table_index}]", table, REQUIRED_LAYOUT_SPEC_TABLE_KEYS)
+        require_exact_keys(f"layout_spec.tables[{table_index}]", table, REQUIRED_LAYOUT_SPEC_TABLE_KEYS)
         table_id = require_int(
             f"layout_spec.tables[{table_index}].table_id",
             table["table_id"],
             minimum=0,
             maximum=shape["table_count"] - 1,
         )
-        if table_id in seen_ids:
-            fail(f"duplicate layout_spec table_id: {table_id}")
-        seen_ids.add(table_id)
         table_name = require_string(f"layout_spec.tables[{table_index}].table_name", table["table_name"])
-        if table_name in seen_names:
-            fail(f"duplicate layout_spec table_name: {table_name}")
-        seen_names.add(table_name)
         table_symbol = require_string(f"layout_spec.tables[{table_index}].table_symbol", table["table_symbol"])
-        if table_symbol in seen_symbols:
-            fail(f"duplicate layout_spec table_symbol: {table_symbol}")
-        seen_symbols.add(table_symbol)
-        expected_symbol = f"k{table_name}Table"
+        expected_symbol = expected_symbols[table_index]
+        expected_name = canonical_table_name(expected_symbol)
+        if table_id != table_index:
+            fail(f"layout_spec.tables[{table_index}].table_id must be {table_index}")
+        if table_name != expected_name:
+            fail(f"layout_spec.tables[{table_index}].table_name must be {expected_name!r}")
         if table_symbol != expected_symbol:
             fail(
                 f"layout_spec.tables[{table_index}].table_symbol must be {expected_symbol!r}"
@@ -202,8 +207,6 @@ def validate_layout_spec(
                 "table_symbol": table_symbol,
             }
         )
-    if seen_ids != set(range(shape["table_count"])):
-        fail("layout_spec table_id values must cover the full table range")
     normalized = {
         "schema_version": schema_version,
         "layout_spec_kind": layout_spec_kind,
@@ -212,7 +215,7 @@ def validate_layout_spec(
         "profile_name": require_string("layout_spec.profile_name", layout_spec["profile_name"]),
         "revision": require_int("layout_spec.revision", layout_spec["revision"], minimum=0),
         "table_shape": shape,
-        "tables": sorted(normalized_tables, key=lambda table: table["table_id"]),
+        "tables": normalized_tables,
     }
     return normalized
 
@@ -321,22 +324,21 @@ def validate_tables(
     if saw_table_id and saw_table_name_only:
         fail("tables must use table_id for all tables or table_name-only for all tables")
     if layout_spec_tables is not None:
-        ordered_tables: list[dict[str, Any]] = []
-        for spec_index, spec_table in enumerate(layout_spec_tables):
+        if len(layout_spec_tables) != len(normalized_tables):
+            fail("layout_spec table order must match the generator table count")
+        for table_index, (table, spec_table) in enumerate(zip(normalized_tables, layout_spec_tables)):
             spec_table_id = spec_table["table_id"]
             spec_table_name = spec_table["table_name"]
-            table = table_lookup_by_id.get(spec_table_id) or table_lookup_by_name.get(spec_table_name)
-            if table is None:
-                fail(
-                    "layout_spec table entry "
-                    f"{spec_index} does not match any generator table"
-                )
-            if table["table_id"] is not None and table["table_id"] != spec_table_id:
-                fail(f"layout_spec table_id mismatch at entry {spec_index}")
-            if canonical_table_name(table["table_name"]) != spec_table_name:
-                fail(f"layout_spec table_name mismatch at entry {spec_index}")
-            ordered_tables.append(table)
-        return ordered_tables
+            spec_table_symbol = spec_table["table_symbol"]
+            if table["table_id"] is None:
+                fail(f"tables[{table_index}] must include table_id when layout_spec is present")
+            if table["table_id"] != spec_table_id:
+                fail(f"layout_spec table_id mismatch at entry {table_index}")
+            if table["table_name"] != spec_table_name:
+                fail(f"layout_spec table_name mismatch at entry {table_index}")
+            if table["table_symbol"] is not None and table["table_symbol"] != spec_table_symbol:
+                fail(f"layout_spec table_symbol mismatch at entry {table_index}")
+        return normalized_tables
     return sorted(normalized_tables, key=lambda table: table_sort_key(table, max_table_id=shape["table_count"] - 1))
 
 
@@ -352,8 +354,6 @@ def validate_payload(payload: dict[str, Any], *, expected_table_count: int = EXP
     profile_name = require_string("profile_name", payload["profile_name"])
     revision = require_int("revision", payload["revision"], minimum=0)
     layout_spec = validate_layout_spec(payload, expected_table_count=expected_table_count)
-    if not layout_spec:
-        fail("generator input requires layout_spec")
     if layout_spec["controller_family"] != controller_family:
         fail("layout_spec.controller_family must match generator input controller_family")
     if layout_spec["profile_name"] != profile_name:
@@ -368,7 +368,7 @@ def validate_payload(payload: dict[str, Any], *, expected_table_count: int = EXP
         "controller_family": controller_family,
         "profile_name": profile_name,
         "revision": revision,
-        "layout_spec": layout_spec or None,
+        "layout_spec": layout_spec,
         "table_shape": shape,
         "tables": tables,
     }
