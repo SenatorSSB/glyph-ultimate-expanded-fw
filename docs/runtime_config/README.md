@@ -57,6 +57,18 @@ for `fixtures/generated_source_owned_layout_spec.json`, while
 mode. The normal generator input now requires `layout_spec`, so spec-less JSON
 is rejected.
 
+Quick smoke command:
+
+```bash
+python3 tools/generate_source_owned_runtime_config.py \
+  --emit-from-layout-spec \
+  docs/runtime_config/fixtures/generated_source_owned_layout_spec.json
+```
+
+This is the fastest offline check that the inert layout-spec packet still emits
+the deterministic source-owned fixture. For the full generator-contract proof,
+run `python3 tools/check_glyph_generated_source_owned_generator_contract.py`.
+
 These packets keep the generated tables not wired active, preserve the active
 RuntimeConfigView selection boundary, and keep the source-owned active-state
 preselection `HARDWARE_PASS` evidence and active-storage `HARDWARE_FAIL`

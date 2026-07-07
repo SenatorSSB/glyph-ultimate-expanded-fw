@@ -45,6 +45,12 @@ source-owned active path.
 
 Next concrete action: harden the source-owned realization generator and its
 fixtures/checkers while keeping output as reviewable source artifacts.
+Current safe queue after the generator/checker hardening:
+- keep the offline `--emit-from-layout-spec` smoke command documented;
+- preserve branch-independent checker coverage for the generated-source-owned
+  lane;
+- add an inert generated-source-owned artifact index only if future generator
+  outputs need a stable catalog.
 
 Current generated-source-owned packets in scope:
 `generated_source_owned_realization_design.md`,
