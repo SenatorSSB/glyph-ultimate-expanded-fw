@@ -229,6 +229,7 @@ def validate_branch() -> str:
     branch = current_branch()
     if branch not in {
         EXPECTED_BRANCH,
+        "codex/generator-source-owned-spec-validation-hardening",
         "generator-source-owned-layout-spec-contract",
         "generator-source-owned-y2-layout-spec-coverage",
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
@@ -324,6 +325,15 @@ def require_phrases(label: str, text: str, phrases: tuple[str, ...]) -> None:
         fail(f"{label} missing required phrases: " + ", ".join(missing))
 
 
+def require_exact_keys(label: str, value: dict[str, Any], required: set[str]) -> None:
+    missing = sorted(required - set(value))
+    if missing:
+        fail(f"{label} missing required keys: {', '.join(missing)}")
+    extra = sorted(set(value) - required)
+    if extra:
+        fail(f"{label} has unexpected keys: {', '.join(extra)}")
+
+
 def validate_contract_fixture(fixture: dict[str, Any]) -> None:
     for key, expected in EXPECTED_FIXTURE_VALUES.items():
         actual = fixture.get(key)
@@ -391,6 +401,11 @@ def validate_layout_spec_packet(packet: dict[str, Any]) -> None:
     spec = packet.get("layout_spec")
     if not isinstance(spec, dict):
         fail("layout spec packet layout_spec must be an object")
+    require_exact_keys(
+        "layout spec packet layout_spec",
+        spec,
+        set(EXPECTED_LAYOUT_SPEC_VALUES) | {"table_shape", "tables"},
+    )
     for key, expected in EXPECTED_LAYOUT_SPEC_VALUES.items():
         actual = spec.get(key)
         if actual != expected:
@@ -400,38 +415,33 @@ def validate_layout_spec_packet(packet: dict[str, Any]) -> None:
         fail(f"layout spec packet layout_spec.table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
     tables = spec.get("tables")
     if not isinstance(tables, list) or len(tables) != EXPECTED_SHAPE["table_count"]:
-        fail("layout spec packet layout_spec.tables must contain exactly 27 entries")
-    seen_ids: set[int] = set()
-    seen_names: set[str] = set()
-    seen_symbols: set[str] = set()
+        fail("layout spec packet layout_spec.tables must contain exactly 28 entries")
     for table_index, table in enumerate(tables):
         if not isinstance(table, dict):
             fail(f"layout spec packet layout_spec.tables[{table_index}] must be an object")
+        require_exact_keys(
+            f"layout spec packet layout_spec.tables[{table_index}]",
+            table,
+            {"table_id", "table_name", "table_symbol"},
+        )
         table_id = table.get("table_id")
         if not isinstance(table_id, int) or isinstance(table_id, bool):
             fail(f"layout spec packet layout_spec.tables[{table_index}].table_id must be an integer")
-        if table_id in seen_ids:
-            fail(f"layout spec packet duplicate table_id: {table_id}")
-        seen_ids.add(table_id)
+        if table_id != table_index:
+            fail(f"layout spec packet layout_spec.tables[{table_index}].table_id must be {table_index}")
         table_name = table.get("table_name")
         if not isinstance(table_name, str) or not table_name:
             fail(f"layout spec packet layout_spec.tables[{table_index}].table_name must be a string")
-        if table_name in seen_names:
-            fail(f"layout spec packet duplicate table_name: {table_name}")
-        seen_names.add(table_name)
         table_symbol = table.get("table_symbol")
         if not isinstance(table_symbol, str) or not table_symbol:
             fail(f"layout spec packet layout_spec.tables[{table_index}].table_symbol must be a string")
-        if table_symbol in seen_symbols:
-            fail(f"layout spec packet duplicate table_symbol: {table_symbol}")
-        seen_symbols.add(table_symbol)
         expected_symbol = f"k{table_name}Table"
         if table_symbol != expected_symbol:
             fail(
                 f"layout spec packet layout_spec.tables[{table_index}].table_symbol must be {expected_symbol!r}"
             )
-    if seen_ids != set(range(EXPECTED_SHAPE["table_count"])):
-        fail("layout spec packet table_id values must cover 0..26")
+    if {table["table_id"] for table in tables} != set(range(EXPECTED_SHAPE["table_count"])):
+        fail("layout spec packet table_id values must cover 0..27")
 
 
 def validate_input_fixture(payload: dict[str, Any]) -> None:
@@ -440,39 +450,44 @@ def validate_input_fixture(payload: dict[str, Any]) -> None:
         if actual != expected:
             fail(f"input fixture {key} must be {expected!r}, got {actual!r}")
     layout_spec = payload.get("layout_spec")
-    if layout_spec is not None:
-        if not isinstance(layout_spec, dict):
-            fail("input fixture layout_spec must be an object when present")
-        for key, expected in EXPECTED_LAYOUT_SPEC_VALUES.items():
-            actual = layout_spec.get(key)
-            if actual != expected:
-                fail(f"input fixture layout_spec {key} must be {expected!r}, got {actual!r}")
-        shape = layout_spec.get("table_shape")
-        if shape != EXPECTED_SHAPE:
-            fail(f"input fixture layout_spec table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
-        tables = layout_spec.get("tables")
-        if not isinstance(tables, list) or len(tables) != EXPECTED_SHAPE["table_count"]:
-            fail("input fixture layout_spec.tables must contain exactly 27 entries")
-        seen_layout_ids: set[int] = set()
-        for table_index, table in enumerate(tables):
-            if not isinstance(table, dict):
-                fail(f"input fixture layout_spec.tables[{table_index}] must be an object")
-            table_id = table.get("table_id")
-            if not isinstance(table_id, int) or isinstance(table_id, bool):
-                fail(f"input fixture layout_spec.tables[{table_index}].table_id must be an integer")
-            if table_id in seen_layout_ids:
-                fail(f"input fixture duplicate layout_spec table_id: {table_id}")
-            seen_layout_ids.add(table_id)
-            for key in ("table_name", "table_symbol"):
-                value = table.get(key)
-                if not isinstance(value, str) or not value:
-                    fail(f"input fixture layout_spec.tables[{table_index}].{key} must be a string")
-            if table["table_symbol"] != f"k{table['table_name']}Table":
-                fail(
-                    "input fixture layout_spec tables must use matching source-owned table_symbol names"
-                )
-        if seen_layout_ids != set(range(EXPECTED_SHAPE["table_count"])):
-            fail("input fixture layout_spec table_id values must cover 0..26")
+    if not isinstance(layout_spec, dict):
+        fail("input fixture layout_spec must be an object")
+    require_exact_keys(
+        "input fixture layout_spec",
+        layout_spec,
+        set(EXPECTED_LAYOUT_SPEC_VALUES) | {"table_shape", "tables"},
+    )
+    for key, expected in EXPECTED_LAYOUT_SPEC_VALUES.items():
+        actual = layout_spec.get(key)
+        if actual != expected:
+            fail(f"input fixture layout_spec {key} must be {expected!r}, got {actual!r}")
+    shape = layout_spec.get("table_shape")
+    if shape != EXPECTED_SHAPE:
+        fail(f"input fixture layout_spec table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
+    tables = layout_spec.get("tables")
+    if not isinstance(tables, list) or len(tables) != EXPECTED_SHAPE["table_count"]:
+        fail("input fixture layout_spec.tables must contain exactly 28 entries")
+    for table_index, table in enumerate(tables):
+        if not isinstance(table, dict):
+            fail(f"input fixture layout_spec.tables[{table_index}] must be an object")
+        require_exact_keys(
+            f"input fixture layout_spec.tables[{table_index}]",
+            table,
+            {"table_id", "table_name", "table_symbol"},
+        )
+        table_id = table.get("table_id")
+        if not isinstance(table_id, int) or isinstance(table_id, bool):
+            fail(f"input fixture layout_spec.tables[{table_index}].table_id must be an integer")
+        if table_id != table_index:
+            fail(f"input fixture layout_spec.tables[{table_index}].table_id must be {table_index}")
+        for key in ("table_name", "table_symbol"):
+            value = table.get(key)
+            if not isinstance(value, str) or not value:
+                fail(f"input fixture layout_spec.tables[{table_index}].{key} must be a string")
+        if table["table_symbol"] != f"k{table['table_name']}Table":
+            fail(
+                "input fixture layout_spec tables must use matching source-owned table_symbol names"
+            )
     shape = payload.get("table_shape")
     if shape != EXPECTED_SHAPE:
         fail(f"input fixture table_shape must be {EXPECTED_SHAPE!r}, got {shape!r}")
@@ -503,7 +518,7 @@ def validate_input_fixture(payload: dict[str, Any]) -> None:
                         "must be an integer byte"
                     )
     if seen_ids != set(range(EXPECTED_SHAPE["table_count"])):
-        fail("input fixture table_id values must cover 0..26")
+        fail("input fixture table_id values must cover 0..27")
 
 
 def validate_layout_spec_example(payload: dict[str, Any]) -> None:
@@ -640,6 +655,15 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
             if fixture_points != baseline_points:
                 fail(f"generated output fixture {target_name} table does not match current source-owned baseline output")
 
+        def expect_layout_spec_rejection(payload: dict[str, Any], label: str) -> None:
+            candidate_path = temp_dir / f"{label}.json"
+            candidate_output = temp_dir / f"{label}.hpp"
+            write_json(candidate_path, payload)
+            if run_generator(candidate_path, candidate_output).returncode == 0:
+                fail(f"generator accepted malformed layout spec case: {label}")
+            if run_generator(SPEC_INPUT_MODE, candidate_path, candidate_output).returncode == 0:
+                fail(f"spec-input mode accepted malformed layout spec case: {label}")
+
         missing_layout_spec = copy.deepcopy(layout_spec_payload)
         missing_layout_spec.pop("layout_spec")
         write_json(temp_dir / "missing_layout_spec.json", missing_layout_spec)
@@ -657,23 +681,48 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
         if run_generator(temp_dir / "missing_required.json", temp_dir / "missing_required.hpp").returncode == 0:
             fail("generator accepted input missing required tables key")
 
+        missing_layout_spec_tables = copy.deepcopy(layout_spec_payload)
+        missing_layout_spec_tables["layout_spec"].pop("tables")
+        expect_layout_spec_rejection(missing_layout_spec_tables, "missing_layout_spec_tables")
+
         wrong_layout_spec_kind = copy.deepcopy(layout_spec_payload)
         wrong_layout_spec_kind["layout_spec"]["layout_spec_kind"] = "wrong"
-        write_json(temp_dir / "wrong_layout_spec_kind.json", wrong_layout_spec_kind)
-        if run_generator(temp_dir / "wrong_layout_spec_kind.json", temp_dir / "wrong_layout_spec_kind.hpp").returncode == 0:
-            fail("generator accepted wrong layout_spec_kind")
+        expect_layout_spec_rejection(wrong_layout_spec_kind, "wrong_layout_spec_kind")
 
         wrong_layout_spec_shape = copy.deepcopy(layout_spec_payload)
         wrong_layout_spec_shape["layout_spec"]["table_shape"]["table_count"] = 26
-        write_json(temp_dir / "wrong_layout_spec_shape.json", wrong_layout_spec_shape)
-        if run_generator(temp_dir / "wrong_layout_spec_shape.json", temp_dir / "wrong_layout_spec_shape.hpp").returncode == 0:
-            fail("generator accepted wrong layout_spec table_count")
+        expect_layout_spec_rejection(wrong_layout_spec_shape, "wrong_layout_spec_shape")
+
+        wrong_layout_spec_axes = copy.deepcopy(layout_spec_payload)
+        wrong_layout_spec_axes["layout_spec"]["table_shape"]["axes_per_point"] = 3
+        expect_layout_spec_rejection(wrong_layout_spec_axes, "wrong_layout_spec_axes")
+
+        reordered_layout_spec = copy.deepcopy(layout_spec_payload)
+        reordered_layout_spec["layout_spec"]["tables"][0], reordered_layout_spec["layout_spec"]["tables"][1] = (
+            reordered_layout_spec["layout_spec"]["tables"][1],
+            reordered_layout_spec["layout_spec"]["tables"][0],
+        )
+        expect_layout_spec_rejection(reordered_layout_spec, "reordered_layout_spec")
+
+        truncated_layout_spec = copy.deepcopy(layout_spec_payload)
+        truncated_layout_spec["layout_spec"]["tables"] = truncated_layout_spec["layout_spec"]["tables"][:-1]
+        expect_layout_spec_rejection(truncated_layout_spec, "truncated_layout_spec")
 
         wrong_layout_spec_fixture = copy.deepcopy(layout_spec_payload)
         wrong_layout_spec_fixture["layout_spec"]["tables"][0]["table_symbol"] = "kWrongTable"
-        write_json(temp_dir / "wrong_layout_spec_fixture.json", wrong_layout_spec_fixture)
-        if run_generator(str(temp_dir / "wrong_layout_spec_fixture.json"), str(temp_dir / "wrong_layout_spec_fixture.hpp")).returncode == 0:
-            fail("generator accepted wrong layout_spec table_symbol")
+        expect_layout_spec_rejection(wrong_layout_spec_fixture, "wrong_layout_spec_fixture")
+
+        extra_key_layout_spec = copy.deepcopy(layout_spec_payload)
+        extra_key_layout_spec["layout_spec"]["tables"][0]["extra"] = "unexpected"
+        expect_layout_spec_rejection(extra_key_layout_spec, "extra_key_layout_spec")
+
+        missing_layout_spec_table_symbol = copy.deepcopy(layout_spec_payload)
+        missing_layout_spec_table_symbol["layout_spec"]["tables"][0].pop("table_symbol")
+        expect_layout_spec_rejection(missing_layout_spec_table_symbol, "missing_layout_spec_table_symbol")
+
+        wrong_layout_spec_table_id = copy.deepcopy(layout_spec_payload)
+        wrong_layout_spec_table_id["layout_spec"]["tables"][0]["table_id"] = 99
+        expect_layout_spec_rejection(wrong_layout_spec_table_id, "wrong_layout_spec_table_id")
 
         out_of_range = copy.deepcopy(input_payload)
         out_of_range["tables"][0]["points"][0]["x"] = 256

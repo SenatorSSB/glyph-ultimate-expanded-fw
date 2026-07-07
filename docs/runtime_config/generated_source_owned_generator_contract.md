@@ -8,6 +8,8 @@ source-owned runtime table artifacts. It follows
 `generated_source_owned_schema_scaffold.md`, and it now accepts the declarative
 `generated_source_owned_layout_spec.md` mirror for the current baseline shape.
 The generator input now requires `layout_spec`; spec-less JSON is rejected.
+The 28-entry layout-spec mirror is strict and ordered: the generator rejects
+reordered, truncated, or extra-key entries instead of normalizing them.
 
 This branch adds a neutral JSON input contract, a Python stdlib-only offline
 generator, an inert declarative layout spec, and docs fixtures for the
@@ -47,6 +49,9 @@ required top-level keys are:
 `layout_spec` must be a declarative mirror of the current baseline layout. It
 must match the generator input metadata and table shape, and it must describe
 the current 28-table baseline order without changing the active runtime path.
+The mirror is canonical and ordered; each slot must already match the declared
+table id, name, and symbol, and the generator does not sort or repair the
+array.
 
 The explicit `--emit-from-layout-spec` mode consumes the declarative
 `generated_source_owned_layout_spec.json` packet, validates that the embedded
@@ -65,9 +70,9 @@ Each table must contain exactly 9 points. Each point must contain integer byte
 values `x` and `y` in the inclusive range `[0, 255]`.
 
 The generator emits tables in deterministic order. The declarative
-`layout_spec.tables` order is authoritative when present, otherwise integer
-`table_id` ordering is preferred when present and table-name ordering is the
-fallback for name-only inputs.
+`layout_spec.tables` order is authoritative only when it already matches the
+canonical baseline order. The generator rejects reordered or incomplete
+layout-spec tables and does not silently normalize them.
 
 `generated_source_owned_layout_spec.md` describes the inert spec packet and
 its fixture pair in more detail. The spec is validation-only and does not alter
