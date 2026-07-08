@@ -93,17 +93,26 @@ beyond the existing source-owned baseline alias and active `RuntimeConfigView`
 path. The generated source-owned artifact remains inert, and the forbidden
 active publication paths remain forbidden.
 
+The activation-alternatives note classifies A as currently hardware-passed, B
+as plausible but requiring source design + build + hardware, C-E as explicitly
+forbidden under current evidence, and F as future architecture only.
+
 Current v0 production remains source-owned firmware generation as v0. Neutral
 or profile intent may become generated source-owned tables/routing source, then
 a firmware build uses the existing active `RuntimeConfigView` path.
 
 Relevant current design packets:
 
+- `runtime_config_activation_alternatives_a_f.md`
 - `source_owned_table_replacement_design.md`
 - `source_owned_table_replacement_generator_contract.md`
 - `glyph_coordinate_native_runtime_plan.md`
 - `coordinate_native_runtime_profile_contract.md`
 - `IMPLEMENTATION_BOUNDARY.md`
+
+The activation-alternatives note compares A-F activation ideas and hardens the
+claim language around source-backed, inferred, and unknown statements before
+any implementation discussion advances.
 
 ## Forbidden Active Publication Paths
 
