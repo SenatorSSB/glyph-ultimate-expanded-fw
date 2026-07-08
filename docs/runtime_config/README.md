@@ -87,6 +87,12 @@ The safe current path is source-owned realization: generate or patch
 source-owned tables/routing source, review the source diff, build firmware, and
 hardware-test any active behavior change before merge.
 
+Activation-readiness finding for the current batch:
+the blocker is that no new safe generated-source-owned activation path exists
+beyond the existing source-owned baseline alias and active `RuntimeConfigView`
+path. The generated source-owned artifact remains inert, and the forbidden
+active publication paths remain forbidden.
+
 Current v0 production remains source-owned firmware generation as v0. Neutral
 or profile intent may become generated source-owned tables/routing source, then
 a firmware build uses the existing active `RuntimeConfigView` path.
