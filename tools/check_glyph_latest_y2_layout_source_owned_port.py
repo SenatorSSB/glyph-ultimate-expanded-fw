@@ -19,6 +19,7 @@ DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
 REFERENCE_BRANCH = "codex/update-custom-modifier-tables-y2"
 
 ULTIMATE = REPO_ROOT / "src/modes/Ultimate.cpp"
@@ -245,17 +246,34 @@ def current_branch() -> str:
 def base_branch_for(branch: str) -> str:
     if branch == RESULT_BRANCH:
         return IMPLEMENTATION_BRANCH
-    if branch in {DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH, "runtime-config-coordinate-native-profile-contract"}:
+    if branch in {
+        DOCS_SURFACE_BRANCH,
+        AGENT_FRAMEWORK_BRANCH,
+        RECOVERY_BRANCH,
+        "runtime-config-coordinate-native-profile-contract",
+    } or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         return BASE_BRANCH
     if branch == MERGED_BRANCH:
         return MERGED_BRANCH
-    fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, {MERGED_BRANCH}, or runtime-config-coordinate-native-profile-contract, got {branch}")
+    fail(
+        f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, {MERGED_BRANCH}, "
+        f"or a coordinate-native codex branch, got {branch}"
+    )
 
 
 def validate_branch() -> tuple[str, str]:
     branch = current_branch()
-    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH, "runtime-config-coordinate-native-profile-contract"}:
-        fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+    if branch not in {
+        RESULT_BRANCH,
+        DOCS_SURFACE_BRANCH,
+        AGENT_FRAMEWORK_BRANCH,
+        MERGED_BRANCH,
+        RECOVERY_BRANCH,
+        "runtime-config-coordinate-native-profile-contract",
+    } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
+        fail(
+            f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+        )
     base_branch = base_branch_for(branch)
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", base_branch, "HEAD"],

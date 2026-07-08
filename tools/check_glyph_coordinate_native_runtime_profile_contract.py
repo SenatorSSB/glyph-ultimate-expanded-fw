@@ -42,6 +42,7 @@ DRY_RUN_Y2_NEUTRAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinat
 DRY_RUN_Y2_CARDINAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json"
 DRY_RUN_Y2_DIAGONAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json"
 DRY_RUN_Y2_TILT3_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json"
+OFFLINE_PIPELINE_PROFILE_FIXTURE = Y2_FIXTURE
 CONVERTER_TOOL = REPO_ROOT / "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
 BRIDGE_POSITIVE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json"
 BRIDGE_NEGATIVE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json"
@@ -1225,6 +1226,13 @@ def validate_layout_spec_bridge() -> None:
             fail(f"converter rejection for {rel(profile_path)} did not include an error message")
 
 
+def validate_offline_pipeline() -> None:
+    profile = load_json_object(OFFLINE_PIPELINE_PROFILE_FIXTURE)
+    validate_profile_fixture(profile, label=rel(OFFLINE_PIPELINE_PROFILE_FIXTURE), require_selection_semantics=True)
+    validate_dry_run_fixtures()
+    validate_layout_spec_bridge()
+
+
 def validate_contract_schema() -> None:
     validate_schema(load_json_object(SCHEMA))
 
@@ -1267,6 +1275,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
             "against the canonical inert source-owned layout-spec fixture"
         ),
     )
+    group.add_argument(
+        "--check-offline-pipeline",
+        action="store_true",
+        help=(
+            "Run the end-to-end offline coordinate-native profile -> dry-run -> bridge -> "
+            "generated-artifact pipeline"
+        ),
+    )
     return parser
 
 
@@ -1302,6 +1318,22 @@ def main() -> int:
             print(f"- {rel(path)}")
         print(f"- layout spec fixture: {rel(LAYOUT_SPEC_FIXTURE)}")
         print(f"- generated output fixture: {rel(GENERATED_OUTPUT_FIXTURE)}")
+        return 0
+    if args.check_offline_pipeline:
+        validate_offline_pipeline()
+        print("glyph_coordinate_native_runtime_profile_contract: OFFLINE PIPELINE PASS")
+        print(f"- profile fixture: {rel(OFFLINE_PIPELINE_PROFILE_FIXTURE)}")
+        for path in (
+            DRY_RUN_Y2_NEUTRAL_FIXTURE,
+            DRY_RUN_Y2_CARDINAL_FIXTURE,
+            DRY_RUN_Y2_DIAGONAL_FIXTURE,
+            DRY_RUN_Y2_TILT3_FIXTURE,
+            BRIDGE_POSITIVE_FIXTURE,
+            BRIDGE_NEGATIVE_FIXTURE,
+            LAYOUT_SPEC_FIXTURE,
+            GENERATED_OUTPUT_FIXTURE,
+        ):
+            print(f"- {rel(path)}")
         return 0
     branch = validate_branch()
     validate_contract_schema()
