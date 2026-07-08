@@ -96,6 +96,7 @@ Relevant current design packets:
 - `source_owned_table_replacement_design.md`
 - `source_owned_table_replacement_generator_contract.md`
 - `glyph_coordinate_native_runtime_plan.md`
+- `coordinate_native_runtime_profile_contract.md`
 - `IMPLEMENTATION_BOUNDARY.md`
 
 ## Forbidden Active Publication Paths
@@ -113,21 +114,34 @@ Do not reintroduce these as current active publication mechanisms:
 
 The full boundary lives in `IMPLEMENTATION_BOUNDARY.md`.
 
-## Future Coordinate-Native Runtime Profile Plan
+## Coordinate-Native Runtime Profile Contract
 
-The Glyph coordinate-native runtime plan in
-`docs/runtime_config/glyph_coordinate_native_runtime_plan.md` with
-`docs/runtime_config/fixtures/glyph_coordinate_native_runtime_plan.json`
-records the forward architecture after the source-owned Y2 layout HARDWARE_PASS.
-It accepts prior active-publication HARDWARE_FAIL evidence and keeps current v0
-production on source-owned firmware generation as v0.
+The coordinate-native runtime profile contract scaffold in
+`docs/runtime_config/coordinate_native_runtime_profile_contract.md` with
+`docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`
+records the inert future profile contract after the source-owned Y2 layout
+HARDWARE_PASS. It accepts prior active-publication HARDWARE_FAIL evidence and
+keeps current v0 production on source-owned firmware generation as v0.
 
-The future target is a coordinate-native runtime profile where active
-role/modifier state plus resolved direction key 1..9 maps to exact raw
-coordinates, including neutral 5, full 9-way asymmetry, and explicit
-routing/sublayers/priorities. Browser/protobuf/persistence as future
-infrastructure is likely solvable, but the neutral app-owned profile remains
-canonical and firmware-independent.
+The contract bundle also includes:
+
+- `docs/runtime_config/schemas/coordinate_native_runtime_profile.schema.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json`
+
+This packet is design-only and inactive. It describes the future target as a
+coordinate-native runtime profile where active role/modifier state plus
+resolved direction key 1..9 maps to exact raw coordinates, including neutral
+5, full 9-way asymmetry, and explicit routing/sublayers/priorities.
+Browser/protobuf/persistence as future infrastructure is likely solvable, but
+the neutral app-owned profile remains canonical and firmware-independent.
+
+The earlier coordinate-native runtime plan remains historical background for
+this lane.
+
+Validate the contract scaffold with
+`python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py`.
 
 ## Archived Diagnostics
 

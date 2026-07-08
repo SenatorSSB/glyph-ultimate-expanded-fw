@@ -3,7 +3,8 @@
 Status label: CURRENT.
 
 This document defines the current safe implementation boundary after the latest
-Y2 layout source-owned HARDWARE_PASS and the coordinate-native runtime plan.
+Y2 layout source-owned HARDWARE_PASS and the coordinate-native runtime profile
+contract scaffold.
 
 ## Approved Current Active Path
 
@@ -30,10 +31,11 @@ Y2 layout source-owned HARDWARE_PASS and the coordinate-native runtime plan.
 ## Future Coordinate-Native Boundary
 
 The future target is coordinate-native runtime profile support, but it remains a
-separate design and hardware-proof phase. The runtime primitive should map
-active role/modifier state plus resolved direction key 1..9 to exact raw
-coordinates, including neutral 5, full 9-way asymmetry, and explicit
-routing/sublayers/priorities.
+separate design and hardware-proof phase. The current contract scaffold is
+design-only and inactive. The runtime primitive should map active
+role/modifier state plus resolved direction key 1..9 to exact raw coordinates,
+including neutral 5, full 9-way asymmetry, and explicit routing/sublayers/
+priorities.
 
 Browser/protobuf/persistence work may be future infrastructure after the runtime
 model exists. It is not approval for device write, persistent runtime-config

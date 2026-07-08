@@ -38,6 +38,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_generated_source_owned_realization_design.py",
+    "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
     CHECKER_REL,
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_agent_surface.py",
@@ -186,6 +187,7 @@ def validate_branch() -> str:
     if branch not in {
         EXPECTED_BRANCH,
         "generator-source-owned-layout-spec-contract",
+        "runtime-config-coordinate-native-profile-contract",
         DOCS_SURFACE_BRANCH,
         AGENT_FRAMEWORK_BRANCH,
         MERGED_BRANCH,

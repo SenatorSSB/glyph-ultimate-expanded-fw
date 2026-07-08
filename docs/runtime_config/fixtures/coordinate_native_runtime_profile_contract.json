@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "packet": "coordinate_native_runtime_profile_contract",
+  "branch": "runtime-config-coordinate-native-profile-contract",
+  "docs_checker_only": true,
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "current_known_good_backend": "source_owned_firmware_realization",
+  "future_target_backend": "coordinate_native_runtime_profile",
+  "existing_scalar_custom_mode_is_canonical_model": false,
+  "runtime_transport_persistence_considered_solvable_future_infrastructure": true,
+  "canonical_profile_is_neutral_app_owned": true,
+  "firmware_owns_game_semantics": false,
+  "senscope_owns_game_semantics": true,
+  "requires_direction_key_1_to_9": true,
+  "requires_neutral_5": true,
+  "requires_exact_raw_coordinates": true,
+  "requires_explicit_routing_sublayers_priorities": true,
+  "active_runtime_config_replacement_allowed": false,
+  "runtime_config_view_replacement_allowed": false,
+  "generated_active_wrapper_allowed": false,
+  "candidate_view_active_allowed": false,
+  "ram_backed_active_publication_allowed": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "profile_variant": "contract_manifest",
+  "contract_status": "inactive_design_only",
+  "design_only_contract": true,
+  "version_metadata": {
+    "schema_version": 1,
+    "contract_revision": 1,
+    "profile_model_version": "v0",
+    "capability_revision": "v0"
+  },
+  "capability_metadata": {
+    "physical_input_ids": true,
+    "roles": true,
+    "direction_resolver": true,
+    "direction_keys_1_to_9": true,
+    "neutral_5": true,
+    "exact_raw_coordinates": true,
+    "nine_way_modifier_tables": true,
+    "sublayers": true,
+    "priorities": true,
+    "digital_side_effects": true
+  },
+  "physical_input_ids": [
+    {
+      "input_id": "phys_input_a",
+      "kind": "button",
+      "role": "primary"
+    },
+    {
+      "input_id": "phys_input_b",
+      "kind": "button",
+      "role": "modifier"
+    },
+    {
+      "input_id": "phys_input_c",
+      "kind": "stick",
+      "role": "directional"
+    }
+  ],
+  "roles": [
+    {
+      "role_id": "primary",
+      "purpose": "base action role"
+    },
+    {
+      "role_id": "modifier",
+      "purpose": "modifier role for routing"
+    },
+    {
+      "role_id": "directional",
+      "purpose": "direction resolver role"
+    }
+  ],
+  "direction_resolver": {
+    "resolver_id": "resolver_primary_9way",
+    "direction_keys": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "neutral_direction_key": 5,
+    "resolved_direction_key_range": [1, 9],
+    "mapping_rule": "resolved direction key selects exact raw coordinate"
+  },
+  "exact_raw_coordinates": [
+    { "direction_key": 1, "x": 0, "y": 0 },
+    { "direction_key": 2, "x": 128, "y": 0 },
+    { "direction_key": 3, "x": 255, "y": 0 },
+    { "direction_key": 4, "x": 0, "y": 128 },
+    { "direction_key": 5, "x": 128, "y": 128 },
+    { "direction_key": 6, "x": 255, "y": 128 },
+    { "direction_key": 7, "x": 0, "y": 255 },
+    { "direction_key": 8, "x": 128, "y": 255 },
+    { "direction_key": 9, "x": 255, "y": 255 }
+  ],
+  "modifier_tables": [
+    {
+      "table_id": "primary_9way",
+      "table_name": "Primary 9-way",
+      "priority": 10,
+      "sublayer": "primary",
+      "direction_points": [
+        { "direction_key": 1, "x": 0, "y": 0 },
+        { "direction_key": 2, "x": 128, "y": 0 },
+        { "direction_key": 3, "x": 255, "y": 0 },
+        { "direction_key": 4, "x": 0, "y": 128 },
+        { "direction_key": 5, "x": 128, "y": 128 },
+        { "direction_key": 6, "x": 255, "y": 128 },
+        { "direction_key": 7, "x": 0, "y": 255 },
+        { "direction_key": 8, "x": 128, "y": 255 },
+        { "direction_key": 9, "x": 255, "y": 255 }
+      ],
+      "digital_side_effect_refs": [
+        "digital_side_effect_primary"
+      ]
+    }
+  ],
+  "routing_rules": [
+    {
+      "rule_id": "primary_rule",
+      "priority": 10,
+      "sublayer": "primary",
+      "modifier_table_ref": "primary_9way",
+      "condition": "primary role routes through the 9-way table"
+    }
+  ],
+  "digital_side_effects": [
+    {
+      "effect_id": "digital_side_effect_primary",
+      "priority": 10,
+      "trigger": "primary role active",
+      "side_effect": "digital side effect is described but not implemented",
+      "design_only": true
+    }
+  ],
+  "source_inspiration": "contract manifest only",
+  "notes": "Design-only contract manifest. No runtime interpretation or active wiring.",
+  "accepted_evidence": {
+    "source_owned_y2_layout": "HARDWARE_PASS",
+    "active_runtime_config_view_selection_unchanged": true,
+    "source_owned_current_baseline_published": true,
+    "candidate_view_active_publication": "HARDWARE_FAIL",
+    "source_owned_materialized_candidate_view_active_publication": "HARDWARE_FAIL",
+    "dedicated_ram_backed_active_storage_publication": "HARDWARE_FAIL",
+    "generated_source_owned_baseline_runtime_config_view_active_publication": "HARDWARE_FAIL"
+  },
+  "required_runtime_primitive": "active_role_modifier_state_plus_resolved_direction_key_1_to_9_to_exact_raw_coordinate",
+  "v0_production_path": [
+    "source_owned_firmware_realization",
+    "coordinate_native_runtime_profile_contract",
+    "future runtime-active implementation requires separate design and hardware proof"
+  ],
+  "docs_references": [
+    "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+    "docs/runtime_config/glyph_coordinate_native_runtime_plan.md",
+    "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md"
+  ]
+}

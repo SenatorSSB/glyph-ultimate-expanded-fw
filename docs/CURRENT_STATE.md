@@ -91,14 +91,10 @@ implementation work. Detailed historical evidence remains indexed from
 ## Forward Direction
 
 - Next docs/tools direction: source-owned realization generator hardening.
-- Next safe queue: keep the offline generator smoke command documented and
-  maintain branch-independent checker coverage; consider an inert
-  generated-source-owned artifact index only if it helps future generator
-  outputs.
-- Next design direction: coordinate-native runtime profile support, with
-  separate design and hardware proof before any runtime-active implementation.
-- Browser/protobuf/persistence as future infrastructure is likely solvable, but
-  it follows the runtime model and does not define the canonical profile.
+- Next safe queue: keep the offline generator smoke command documented and maintain branch-independent checker coverage; consider an inert generated-source-owned artifact index only if it helps future generator outputs.
+- Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
+- Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
+- Browser/protobuf/persistence as future infrastructure is likely solvable, but it follows the runtime model and does not define the canonical profile.
 - The neutral app-owned profile remains canonical; firmware remains a
   deterministic coordinate-output backend and must not own game semantics.
 
@@ -110,9 +106,7 @@ implementation work. Detailed historical evidence remains indexed from
 - Hardware test required for this docs/checker cleanup: no.
 - Hardware test required for future behavior-changing firmware source deltas:
   yes, before merge.
-- Product approval required before runtime-loaded config, storage, device write,
-  protobuf binary write, flashing automation, external adapter output, or
-  neutral profile schema changes.
+- Product approval required before runtime-loaded config, storage, device write, protobuf binary write, flashing automation, external adapter output, or neutral profile schema changes.
 
 ## Non-Claims
 

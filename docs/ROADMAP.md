@@ -96,18 +96,22 @@ future hardware gate required before generated source-owned baseline artifact
 is selected active.
 Nunchuk `NOT_TESTED`.
 
-## Phase 2 - Coordinate-Native Runtime Profile Design
+## Phase 2 - Coordinate-Native Runtime Profile Contract Scaffolding
 
 Status: `READY_FOR_ENGINEERING_DESIGN`, implementation deferred.
 
-Goal: design coordinate-native runtime profile support around the primitive
-`active role/modifier state + resolved direction key 1..9 -> exact raw
-coordinate`, including neutral 5, full 9-way asymmetry, and explicit
+Goal: design coordinate-native runtime profile contract scaffolding around the
+primitive `active role/modifier state + resolved direction key 1..9 -> exact
+raw coordinate`, including neutral 5, full 9-way asymmetry, and explicit
 routing/sublayers/priorities.
 
 Current v0 production remains source-owned firmware generation as v0 until a
 coordinate-native runtime profile has separate design, source authority, build
 proof, and hardware proof.
+
+Current contract scaffold packet:
+`docs/runtime_config/coordinate_native_runtime_profile_contract.md` with
+`docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 
 The source-owned Y2 layout HARDWARE_PASS and prior active-publication
 HARDWARE_FAIL evidence are the evidence base for this plan. The future target
