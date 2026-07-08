@@ -126,6 +126,15 @@ The contract fixture and positive example fixtures carry annotated
 machine-readable examples that show the future input shape, the expected
 selection result, and the trace markers a later offline resolver should emit.
 
+An offline bridge converter may also transform a validated strict subset of
+this profile into the inert source-owned layout-spec packet used by the
+generator lane. That bridge is docs/tools only and does not change active
+firmware behavior.
+
+The source-owned layout-spec bridge lives in
+`tools/convert_coordinate_native_profile_to_source_owned_spec.py`, and the
+repo checker exercises it with `--check-layout-spec-bridge`.
+
 ## Accepted Evidence
 
 - The source-owned Y2 layout `HARDWARE_PASS` remains the current known-good

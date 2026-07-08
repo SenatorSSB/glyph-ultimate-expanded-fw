@@ -160,6 +160,34 @@ runtime-loaded config remains not implemented, and there is no WebSerial/device
 write, no persistence/storage, no flashing automation, and no active
 RuntimeConfigView publication.
 
+The coordinate-native bridge converter
+`tools/convert_coordinate_native_profile_to_source_owned_spec.py` is also
+offline tooling only. It validates a supported fixture-backed coordinate-native
+profile and emits the canonical inert layout-spec packet consumed by
+`--emit-from-layout-spec`. The emitted layout spec is not loaded by firmware,
+runtime-loaded config remains not implemented, and there is no WebSerial/device
+write, no persistence/storage, no flashing automation, and no active
+RuntimeConfigView publication.
+
+The bridge converter is exercised by the repo checker with the new bridge
+fixtures
+`docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json`
+and
+`docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json`.
+Validate the converter and the existing generator path together with:
+
+```bash
+python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
+  --check-layout-spec-bridge
+```
+
+To inspect the bridge output directly:
+
+```bash
+python3 tools/convert_coordinate_native_profile_to_source_owned_spec.py \
+  --profile docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json
+```
+
 Offline tooling only: run `python3 tools/dry_run_coordinate_native_runtime_profile.py --profile`
 with a fixture-backed case file to exercise the evaluator without any firmware
 load path.

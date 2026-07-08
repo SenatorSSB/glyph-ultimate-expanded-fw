@@ -41,6 +41,13 @@ merge policy, dry-run output shape, and future dry-run annotations in
 `future_dry_run_examples`. Those annotations are documentation only and do not
 implement an evaluator.
 
+An offline coordinate-native-to-source-owned layout-spec bridge converter may
+validate a strict profile subset and emit the inert source-owned layout-spec
+packet consumed by `--emit-from-layout-spec`. That bridge is docs/tools only,
+stays offline-only, and is not an approval for runtime-loaded config,
+WebSerial/device write, persistent runtime-config storage, backend config
+write, or flashing automation.
+
 Browser/protobuf/persistence work may be future infrastructure after the runtime
 model exists. It is not approval for device write, persistent runtime-config
 storage, backend config write paths, or flashing automation.

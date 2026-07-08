@@ -49,6 +49,8 @@ Current safe queue after the generator/checker hardening:
 - keep the offline `--emit-from-layout-spec` smoke command documented;
 - preserve branch-independent checker coverage for the generated-source-owned
   lane;
+- keep the offline coordinate-native-to-source-owned layout-spec bridge
+  converter checked and explicitly offline-only;
 - add an inert generated-source-owned artifact index only if future generator
   outputs need a stable catalog.
 

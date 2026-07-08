@@ -71,6 +71,8 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_capability_metadata.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
     "docs/runtime_config/README.md",
     "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
     "docs/CURRENT_STATE.md",
@@ -90,6 +92,7 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_coordinate_native_runtime_plan.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/generate_source_owned_runtime_config.py",
+    "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
 }
 
 SOURCE_PATH_RE = re.compile(r"^(?:src|include|lib)(?:/|$)")

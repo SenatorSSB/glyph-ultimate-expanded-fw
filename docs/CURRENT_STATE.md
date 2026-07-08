@@ -38,6 +38,10 @@ implementation work. Detailed historical evidence remains indexed from
 - Safe current path: source-owned realization generator work that produces
   source-owned tables/routing source for review, build, and hardware-gated
   firmware behavior changes.
+- Safe offline source-owned layout-spec bridge path: `tools/convert_coordinate_native_profile_to_source_owned_spec.py`
+  validates a supported coordinate-native profile fixture and emits the inert
+  source-owned layout-spec packet consumed by `--emit-from-layout-spec`; the
+  emitted layout spec stays offline-only and does not load into firmware.
 - Current v0 production work remains source-owned firmware generation as v0:
   neutral/profile intent becomes generated source-owned tables/routing source,
   then a firmware build uses the existing active `RuntimeConfigView` path.
@@ -79,13 +83,7 @@ implementation work. Detailed historical evidence remains indexed from
 - nunchuk `NOT_TESTED`.
 - Forbidden current active-publication paths are documented in
   `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`.
-- Runtime-loaded config is not implemented.
-- Runtime-config storage is not implemented.
-- Firmware binary/protobuf parser integration is not implemented.
-- WebSerial/device write is not implemented.
-- Protobuf binary write is not implemented.
-- Firmware flashing automation is not implemented.
-- External adapter output is not implemented.
+- Runtime-loaded config is not implemented; runtime-config storage is not implemented; firmware binary/protobuf parser integration is not implemented; WebSerial/device write is not implemented; Protobuf binary write is not implemented; Firmware flashing automation is not implemented; external adapter output is not implemented.
 
 ## Forward Direction
 

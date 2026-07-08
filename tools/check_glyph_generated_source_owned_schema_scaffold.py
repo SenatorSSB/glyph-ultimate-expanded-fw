@@ -48,6 +48,8 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_unresolved_role_state.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
     "docs/runtime_config/README.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
@@ -66,6 +68,7 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_docs_agent_surface.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/generate_source_owned_runtime_config.py",
+    "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
 }
 SOURCE_SCAFFOLD_PREFIX = "src/modes/runtime_config/generated_source_owned/"
 SOURCE_SCAFFOLD_RE = re.compile(

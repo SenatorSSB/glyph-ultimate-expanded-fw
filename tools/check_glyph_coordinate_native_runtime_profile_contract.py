@@ -15,6 +15,7 @@ import json
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -41,6 +42,23 @@ DRY_RUN_Y2_NEUTRAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinat
 DRY_RUN_Y2_CARDINAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json"
 DRY_RUN_Y2_DIAGONAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json"
 DRY_RUN_Y2_TILT3_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json"
+CONVERTER_TOOL = REPO_ROOT / "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
+BRIDGE_POSITIVE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json"
+BRIDGE_NEGATIVE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json"
+CONVERTER_POSITIVE_FIXTURES: tuple[Path, ...] = (
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
+    BRIDGE_POSITIVE_FIXTURE,
+)
+CONVERTER_NEGATIVE_FIXTURES: tuple[Path, ...] = (
+    BRIDGE_NEGATIVE_FIXTURE,
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json",
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json",
+)
+LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
+GENERATED_OUTPUT_FIXTURE = (
+    REPO_ROOT / "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp"
+)
 DRY_RUN_NEGATIVE_FIXTURES: tuple[Path, ...] = (
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
@@ -104,6 +122,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
@@ -125,6 +145,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_agent_framework_docs.py",
+    "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
 }
 ALLOWED_PREFIXES = ("docs/",)
 
@@ -214,6 +235,9 @@ REQUIRED_DOC_PHRASES = (
     "future dry-run contract",
     "selection_result",
     "future_dry_run_examples",
+    "source-owned layout-spec bridge",
+    "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "--check-layout-spec-bridge",
     "does not implement runtime interpretation",
     "runtime-loaded config",
     "WebSerial/device write path",
@@ -243,6 +267,8 @@ REQUIRED_CURRENT_STATE_PHRASES = (
     "deterministic selection semantics",
     "offline dry-run evaluator",
     "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+    "source-owned layout-spec bridge",
+    "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
     "Nunchuk remains NOT_TESTED",
     "root cause remains unproven",
 )
@@ -254,6 +280,7 @@ REQUIRED_ROADMAP_PHRASES = (
     "deterministic selection semantics",
     "future_dry_run_examples",
     "offline dry-run evaluator",
+    "source-owned layout-spec bridge",
     "future browser/protobuf/persistence backend",
     "after the runtime model exists",
 )
@@ -266,6 +293,8 @@ REQUIRED_README_PHRASES = (
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
     "future_dry_run_examples",
     "selection_result",
     "design-only",
@@ -286,6 +315,7 @@ REQUIRED_BOUNDARY_PHRASES = (
     "coordinate-native runtime profile contract scaffold",
     "design-only and inactive",
     "deterministic selection semantics",
+    "source-owned layout-spec bridge",
     "future dry-run annotations",
     "browser/protobuf/persistence work may be future infrastructure",
 )
@@ -1139,6 +1169,62 @@ def validate_dry_run_fixtures() -> None:
         validate_dry_run_case_fixture(path, expect_failure=True)
 
 
+def run_converter(profile_path: Path) -> tuple[int, str, str]:
+    completed = subprocess.run(
+        [sys.executable, str(CONVERTER_TOOL), "--profile", str(profile_path)],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return completed.returncode, completed.stdout, completed.stderr
+
+
+def validate_layout_spec_bridge() -> None:
+    expected_layout_spec = load_json_object(LAYOUT_SPEC_FIXTURE)
+    expected_generated_output = GENERATED_OUTPUT_FIXTURE.read_text(encoding="utf-8").rstrip("\n")
+    for profile_path in CONVERTER_POSITIVE_FIXTURES:
+        profile = load_json_object(profile_path)
+        validate_profile_fixture(profile, label=rel(profile_path))
+        exit_code, stdout, stderr = run_converter(profile_path)
+        if exit_code != 0:
+            fail(f"converter rejected supported fixture {rel(profile_path)}: {stderr.strip() or stdout.strip()}")
+        try:
+            emitted_layout_spec = json.loads(stdout)
+        except json.JSONDecodeError as exc:
+            fail(f"converter output for {rel(profile_path)} was not valid JSON: {exc}")
+        if emitted_layout_spec != expected_layout_spec:
+            fail(f"converter output for {rel(profile_path)} drifted from the inert layout-spec fixture")
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json", delete=False) as temp_file:
+            temp_path = Path(temp_file.name)
+            temp_file.write(json.dumps(emitted_layout_spec, indent=2))
+            temp_file.write("\n")
+        try:
+            generated = subprocess.run(
+                [sys.executable, str(REPO_ROOT / "tools/generate_source_owned_runtime_config.py"), "--emit-from-layout-spec", str(temp_path)],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        finally:
+            temp_path.unlink(missing_ok=True)
+        if generated.returncode != 0:
+            fail(
+                f"generator rejected converter output for {rel(profile_path)}: "
+                f"{generated.stderr.strip() or generated.stdout.strip()}"
+            )
+        if generated.stdout.rstrip("\n") != expected_generated_output:
+            fail(f"generator output for {rel(profile_path)} drifted from the inert C++ fixture")
+
+    for profile_path in CONVERTER_NEGATIVE_FIXTURES:
+        exit_code, stdout, stderr = run_converter(profile_path)
+        if exit_code == 0:
+            fail(f"converter unexpectedly accepted unsupported fixture {rel(profile_path)}")
+        if not stderr.strip() and not stdout.strip():
+            fail(f"converter rejection for {rel(profile_path)} did not include an error message")
+
+
 def validate_contract_schema() -> None:
     validate_schema(load_json_object(SCHEMA))
 
@@ -1173,6 +1259,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
             "offline tooling only and the generated result is not loaded by firmware"
         ),
     )
+    group.add_argument(
+        "--check-layout-spec-bridge",
+        action="store_true",
+        help=(
+            "Run the offline coordinate-native bridge converter and the existing generator "
+            "against the canonical inert source-owned layout-spec fixture"
+        ),
+    )
     return parser
 
 
@@ -1201,11 +1295,20 @@ def main() -> int:
         ):
             print(f"- {rel(path)}")
         return 0
+    if args.check_layout_spec_bridge:
+        validate_layout_spec_bridge()
+        print("glyph_coordinate_native_runtime_profile_contract: LAYOUT-SPEC BRIDGE PASS")
+        for path in CONVERTER_POSITIVE_FIXTURES + CONVERTER_NEGATIVE_FIXTURES:
+            print(f"- {rel(path)}")
+        print(f"- layout spec fixture: {rel(LAYOUT_SPEC_FIXTURE)}")
+        print(f"- generated output fixture: {rel(GENERATED_OUTPUT_FIXTURE)}")
+        return 0
     branch = validate_branch()
     validate_contract_schema()
     validate_contract_fixture()
     validate_example_fixtures()
     validate_dry_run_fixtures()
+    validate_layout_spec_bridge()
     if branch != MERGED_BRANCH:
         validate_changed_paths(changed_paths(branch))
     validate_contract_fixture_and_docs()
