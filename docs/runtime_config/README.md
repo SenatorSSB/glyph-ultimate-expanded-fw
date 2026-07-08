@@ -188,6 +188,27 @@ python3 tools/convert_coordinate_native_profile_to_source_owned_spec.py \
   --profile docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json
 ```
 
+Offline provenance/index fixtures now cover the offline pipeline bundle and
+export package layers too:
+
+- `docs/runtime_config/fixtures/coordinate_native_offline_artifact_bundle_manifest.json`
+- `docs/runtime_config/fixtures/coordinate_native_offline_export_package.json`
+
+Validate them with:
+
+```bash
+python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
+  --check-offline-pipeline
+python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
+  --check-offline-artifact-bundle-manifest
+python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
+  --check-offline-export-package
+```
+
+These fixtures are offline-only provenance records. They do not imply
+runtime-loaded config, WebSerial/device write, persistent storage, or
+flashing automation.
+
 Offline tooling only: run `python3 tools/dry_run_coordinate_native_runtime_profile.py --profile`
 with a fixture-backed case file to exercise the evaluator without any firmware
 load path.

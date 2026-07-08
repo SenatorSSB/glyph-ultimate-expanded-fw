@@ -51,6 +51,9 @@ Current safe queue after the generator/checker hardening:
   lane;
 - keep the offline coordinate-native-to-source-owned layout-spec bridge
   converter checked and explicitly offline-only;
+- keep the offline coordinate-native pipeline packaging commands
+  (`--check-offline-pipeline`, `--check-offline-artifact-bundle-manifest`, and
+  `--check-offline-export-package`) aligned with their fixtures;
 - add an inert generated-source-owned artifact index only if future generator
   outputs need a stable catalog.
 
