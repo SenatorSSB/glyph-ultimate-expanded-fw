@@ -127,6 +127,9 @@ HARDWARE_FAIL evidence are the evidence base for this plan. The future target
 is a coordinate-native runtime profile. Browser/protobuf/persistence as future
 infrastructure is likely solvable, but the neutral app-owned profile remains
 canonical and firmware-independent. Firmware should not own game semantics.
+The Y2-inspired sketch now has fixture-backed offline dry-run coverage for the
+neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths, tied to the
+current source-backed Y2/Tilt3 evidence and still kept offline-only.
 
 The offline dry-run evaluator for this lane is now implemented as tooling only:
 `tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed

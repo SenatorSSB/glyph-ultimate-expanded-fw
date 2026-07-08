@@ -137,6 +137,10 @@ The contract bundle also includes:
 - `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json`
 - `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json`
 - `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_neutral_5.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json`
 - `tools/dry_run_coordinate_native_runtime_profile.py`
 
 This packet is design-only and inactive. It describes the future target as a
@@ -159,6 +163,11 @@ RuntimeConfigView publication.
 Offline tooling only: run `python3 tools/dry_run_coordinate_native_runtime_profile.py --profile`
 with a fixture-backed case file to exercise the evaluator without any firmware
 load path.
+
+The Y2-inspired sketch now has fixture-backed positive dry-run cases for the
+neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths. Those cases
+stay offline-only and are compared by the repo checker before any status docs
+are updated.
 
 The earlier coordinate-native runtime plan remains historical background for
 this lane.
