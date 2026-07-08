@@ -60,6 +60,9 @@ LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source
 GENERATED_OUTPUT_FIXTURE = (
     REPO_ROOT / "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp"
 )
+OFFLINE_ARTIFACT_BUNDLE_MANIFEST_FIXTURE = (
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_offline_artifact_bundle_manifest.json"
+)
 DRY_RUN_NEGATIVE_FIXTURES: tuple[Path, ...] = (
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
@@ -1233,6 +1236,104 @@ def validate_offline_pipeline() -> None:
     validate_layout_spec_bridge()
 
 
+def validate_offline_artifact_bundle_manifest() -> None:
+    validate_offline_pipeline()
+    manifest = load_json_object(OFFLINE_ARTIFACT_BUNDLE_MANIFEST_FIXTURE)
+    if manifest.get("schema_version") != 1:
+        fail("offline artifact bundle manifest schema_version must be 1")
+    if manifest.get("packet") != "coordinate_native_offline_artifact_bundle_manifest":
+        fail("offline artifact bundle manifest packet name is wrong")
+    if manifest.get("branch") != "codex/runtime-config-coordinate-native-offline-artifact-bundle-manifest":
+        fail("offline artifact bundle manifest branch must match the manifest branch")
+    if manifest.get("bundle_kind") != "offline_artifact_bundle_index":
+        fail("offline artifact bundle manifest bundle_kind must be offline_artifact_bundle_index")
+    if manifest.get("bundle_status") != "offline_only":
+        fail("offline artifact bundle manifest bundle_status must be offline_only")
+    for key, expected in {
+        "active_behavior_changed": False,
+        "hardware_test_required_before_merge": False,
+        "runtime_loaded_config_implemented": False,
+        "persistent_storage_implemented": False,
+        "webserial_device_write_implemented": False,
+        "backend_config_pb_write_path_implemented": False,
+        "flashing_automation_implemented": False,
+        "no_device_write_claim": True,
+        "no_persistence_claim": True,
+        "no_flashing_claim": True,
+        "no_runtime_loaded_config_claim": True,
+        "no_active_publication_claim": True,
+    }.items():
+        if manifest.get(key) != expected:
+            fail(f"offline artifact bundle manifest {key} must be {expected!r}")
+
+    def require_fixture_ref(label: str, value: Any, *, expected_id: str, expected_path: Path) -> None:
+        if not isinstance(value, dict):
+            fail(f"{label} must be an object")
+        if value.get("fixture_id") != expected_id:
+            fail(f"{label}.fixture_id must be {expected_id!r}")
+        if value.get("fixture_path") != rel(expected_path):
+            fail(f"{label}.fixture_path must be {rel(expected_path)!r}")
+        if not expected_path.exists():
+            fail(f"{label}.fixture_path does not exist: {rel(expected_path)}")
+
+    require_fixture_ref(
+        "source_profile_fixture",
+        manifest.get("source_profile_fixture"),
+        expected_id="coordinate_native_runtime_profile_y2_inspired_sketch",
+        expected_path=OFFLINE_PIPELINE_PROFILE_FIXTURE,
+    )
+    require_fixture_ref(
+        "bridge_output_layout_spec_fixture",
+        manifest.get("bridge_output_layout_spec_fixture"),
+        expected_id="generated_source_owned_layout_spec",
+        expected_path=LAYOUT_SPEC_FIXTURE,
+    )
+    require_fixture_ref(
+        "generated_artifact_fixture",
+        manifest.get("generated_artifact_fixture"),
+        expected_id="generated_source_owned_runtime_config_example",
+        expected_path=GENERATED_OUTPUT_FIXTURE,
+    )
+
+    dry_run_cases = manifest.get("dry_run_case_fixtures")
+    if not isinstance(dry_run_cases, list) or len(dry_run_cases) != 4:
+        fail("offline artifact bundle manifest dry_run_case_fixtures must contain 4 entries")
+    expected_case_refs = (
+        ("y2_primary_direction_5", DRY_RUN_Y2_NEUTRAL_FIXTURE),
+        ("y2_primary_direction_2", DRY_RUN_Y2_CARDINAL_FIXTURE),
+        ("y2_primary_direction_7", DRY_RUN_Y2_DIAGONAL_FIXTURE),
+        ("y2_tilt_direction_8", DRY_RUN_Y2_TILT3_FIXTURE),
+    )
+    for index, ((expected_case_id, expected_path), entry) in enumerate(zip(expected_case_refs, dry_run_cases)):
+        if not isinstance(entry, dict):
+            fail(f"dry_run_case_fixtures[{index}] must be an object")
+        if entry.get("fixture_id") != expected_case_id:
+            fail(f"dry_run_case_fixtures[{index}].fixture_id must be {expected_case_id!r}")
+        if entry.get("fixture_path") != rel(expected_path):
+            fail(f"dry_run_case_fixtures[{index}].fixture_path must be {rel(expected_path)!r}")
+        if not expected_path.exists():
+            fail(f"dry_run_case_fixtures[{index}].fixture_path does not exist: {rel(expected_path)}")
+
+    checker_commands = manifest.get("checker_commands")
+    if checker_commands != [
+        "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-offline-pipeline",
+        "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-dry-run-fixtures",
+        "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-layout-spec-bridge",
+    ]:
+        fail("offline artifact bundle manifest checker_commands must stay in the documented stable order")
+    notes = manifest.get("notes")
+    if not isinstance(notes, str) or not notes:
+        fail("offline artifact bundle manifest notes must be a non-empty string")
+    for phrase in (
+        "offline provenance/index manifest only",
+        "not a device-write manifest",
+        "not a flashing manifest",
+        "manual build/hardware gate required before active firmware behavior",
+    ):
+        if phrase not in notes:
+            fail(f"offline artifact bundle manifest notes missing phrase: {phrase}")
+
+
 def validate_contract_schema() -> None:
     validate_schema(load_json_object(SCHEMA))
 
@@ -1282,6 +1383,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
             "Run the end-to-end offline coordinate-native profile -> dry-run -> bridge -> "
             "generated-artifact pipeline"
         ),
+    )
+    group.add_argument(
+        "--check-offline-artifact-bundle-manifest",
+        action="store_true",
+        help="Validate the offline coordinate-native artifact-bundle provenance manifest",
     )
     return parser
 
@@ -1334,6 +1440,11 @@ def main() -> int:
             GENERATED_OUTPUT_FIXTURE,
         ):
             print(f"- {rel(path)}")
+        return 0
+    if args.check_offline_artifact_bundle_manifest:
+        validate_offline_artifact_bundle_manifest()
+        print("glyph_coordinate_native_runtime_profile_contract: OFFLINE ARTIFACT BUNDLE MANIFEST PASS")
+        print(f"- manifest: {rel(OFFLINE_ARTIFACT_BUNDLE_MANIFEST_FIXTURE)}")
         return 0
     branch = validate_branch()
     validate_contract_schema()

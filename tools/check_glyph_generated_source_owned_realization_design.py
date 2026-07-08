@@ -45,6 +45,7 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json",
     "docs/runtime_config/generated_source_owned_baseline_artifact.md",
     "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json",
+    "docs/runtime_config/fixtures/coordinate_native_offline_artifact_bundle_manifest.json",
     "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
     "docs/runtime_config/schemas/coordinate_native_runtime_profile.schema.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json",
