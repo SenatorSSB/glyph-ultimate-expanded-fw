@@ -35,16 +35,10 @@ implementation work. Detailed historical evidence remains indexed from
 
 ## Current Implementation Boundary
 
-- Safe current path: source-owned realization generator work that produces
-  source-owned tables/routing source for review, build, and hardware-gated
-  firmware behavior changes.
-- Safe offline source-owned layout-spec bridge path: `tools/convert_coordinate_native_profile_to_source_owned_spec.py`
-  validates a supported coordinate-native profile fixture and emits the inert
-  source-owned layout-spec packet consumed by `--emit-from-layout-spec`; the
-  emitted layout spec stays offline-only and does not load into firmware.
-- Current v0 production work remains source-owned firmware generation as v0:
-  neutral/profile intent becomes generated source-owned tables/routing source,
-  then a firmware build uses the existing active `RuntimeConfigView` path.
+- Safe current path: source-owned realization generator work that produces source-owned tables/routing source for review, build, and hardware-gated firmware behavior changes.
+- Safe offline source-owned layout-spec bridge path: `tools/convert_coordinate_native_profile_to_source_owned_spec.py` validates a supported coordinate-native profile fixture and emits the inert source-owned layout-spec packet consumed by `--emit-from-layout-spec`; the emitted layout spec stays offline-only and does not load into firmware.
+- Safe offline coordinate-native pipeline packaging path: `tools/check_glyph_coordinate_native_runtime_profile_contract.py` now exposes `--check-offline-pipeline`, `--check-offline-artifact-bundle-manifest`, and `--check-offline-export-package` for the y2 fixture, offline bundle manifest, and offline export package. The fixtures stay provenance-only and do not imply runtime-loaded config, WebSerial/device write, persistent storage, or flashing automation.
+- Current v0 production work remains source-owned firmware generation as v0: neutral/profile intent becomes generated source-owned tables/routing source, then a firmware build uses the existing active `RuntimeConfigView` path.
 - Generated-source-owned packets currently in scope:
   `generated_source_owned_realization_design.md`,
   `generated_source_owned_schema_scaffold.md`,
@@ -60,24 +54,8 @@ implementation work. Detailed historical evidence remains indexed from
   `fixtures/generated_source_owned_layout_spec.json`,
   `fixtures/generated_source_owned_artifact_install.json`, and
   `fixtures/generated_source_owned_baseline_artifact.json`.
-- `generated_source_owned_generator_input.example.json`,
-  `fixtures/generated_source_owned_layout_spec.example.json`,
-  `generated_source_owned_layout_spec.json`,
-  `--emit-current-source-owned-baseline`,
-  the explicit `--emit-from-layout-spec` packet-input mode,
-  `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
-  `tools/generate_source_owned_runtime_config.py` remain the generator lane
-  references.
-- The generated tables not wired active boundary remains intact; source-owned
-  active-state preselection `HARDWARE_PASS` evidence and active-storage
-  `HARDWARE_FAIL` evidence remain distinct. source-owned active-state
-  `HARDWARE_PASS` evidence and future hardware gate required before generated
-  source-owned baseline artifact is selected active remain part of this lane.
-  The declarative layout spec mirror stays inert and only validates the current
-  source-owned baseline shape. The normal generator input now requires
-  `layout_spec`, and the explicit `--emit-from-layout-spec` mode stays inert.
-  Future implementation must be hardware-gated if active source selection
-  behavior changes.
+- `generated_source_owned_generator_input.example.json`, `fixtures/generated_source_owned_layout_spec.example.json`, `generated_source_owned_layout_spec.json`, `--emit-current-source-owned-baseline`, the explicit `--emit-from-layout-spec` packet-input mode, `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and `tools/generate_source_owned_runtime_config.py` remain the generator lane references.
+- The generated tables not wired active boundary remains intact; source-owned active-state preselection `HARDWARE_PASS` evidence and active-storage `HARDWARE_FAIL` evidence remain distinct. source-owned active-state `HARDWARE_PASS` evidence and future hardware gate required before generated source-owned baseline artifact is selected active remain part of this lane. The declarative layout spec mirror stays inert and only validates the current source-owned baseline shape. The normal generator input now requires `layout_spec`, and the explicit `--emit-from-layout-spec` mode stays inert. Future implementation must be hardware-gated if active source selection behavior changes.
 - future hardware gate required before generated source-owned tables are
   selected active.
 - nunchuk `NOT_TESTED`.
@@ -88,7 +66,7 @@ implementation work. Detailed historical evidence remains indexed from
 ## Forward Direction
 
 - Next docs/tools direction: source-owned realization generator hardening.
-- Next safe queue: keep the offline generator smoke command documented and maintain branch-independent checker coverage; consider an inert generated-source-owned artifact index only if it helps future generator outputs.
+- Next safe queue: keep `--check-offline-pipeline`, `--check-offline-artifact-bundle-manifest`, and `--check-offline-export-package` aligned with their fixtures and existing bridge/generator outputs; consider an inert generated-source-owned artifact index only if it helps future generator outputs.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 - Offline dry-run evaluator: `tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed positive and negative cases under `docs/runtime_config/fixtures/`.
