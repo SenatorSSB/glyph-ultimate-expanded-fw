@@ -48,9 +48,9 @@
   "direction_resolver": {
     "resolver_id": "minimal_resolver",
     "direction_keys": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    "neutral_direction_key": 4,
+    "neutral_direction_key": 5,
     "resolved_direction_key_range": [1, 9],
-    "mapping_rule": "neutral 5 should anchor the minimal profile"
+    "mapping_rule": "missing modifier_table_ref should be rejected"
   },
   "exact_raw_coordinates": [
     { "direction_key": 1, "x": 0, "y": 0 },
@@ -90,8 +90,8 @@
       "rule_id": "minimal_rule",
       "priority": 1,
       "sublayer": "primary",
-      "modifier_table_ref": "minimal_9way",
-      "condition": "single primary path"
+      "modifier_table_ref": "missing_9way",
+      "condition": "single primary path with missing table ref"
     }
   ],
   "digital_side_effects": [
@@ -103,6 +103,6 @@
       "design_only": true
     }
   ],
-  "source_inspiration": "minimal contract example",
-  "notes": "Inactive design-only minimal profile example."
+  "source_inspiration": "missing modifier table ref negative fixture",
+  "notes": "Negative fixture that intentionally references a missing modifier table."
 }

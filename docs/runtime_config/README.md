@@ -121,7 +121,10 @@ The coordinate-native runtime profile contract scaffold in
 `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`
 records the inert future profile contract after the source-owned Y2 layout
 HARDWARE_PASS. It accepts prior active-publication HARDWARE_FAIL evidence and
-keeps current v0 production on source-owned firmware generation as v0.
+keeps current v0 production on source-owned firmware generation as v0. The
+contract now includes deterministic selection semantics and annotated future
+dry-run examples so a later offline resolver can be specified without inventing
+behavior.
 
 The contract bundle also includes:
 
@@ -133,7 +136,11 @@ The contract bundle also includes:
 This packet is design-only and inactive. It describes the future target as a
 coordinate-native runtime profile where active role/modifier state plus
 resolved direction key 1..9 maps to exact raw coordinates, including neutral
-5, full 9-way asymmetry, and explicit routing/sublayers/priorities.
+5, full 9-way asymmetry, and explicit routing/sublayers/priorities. The
+contract also includes deterministic selection semantics for future offline
+dry-runs: explicit `input_state` activation records, `selection_result`
+trace/explanation metadata, deterministic tie behavior, missing-table behavior,
+and `future_dry_run_examples` annotations that stay design-only.
 Browser/protobuf/persistence as future infrastructure is likely solvable, but
 the neutral app-owned profile remains canonical and firmware-independent.
 
@@ -162,8 +169,9 @@ python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
 
 The invalid fixture corpus covers missing neutral `5`, out-of-range direction
 keys, out-of-range raw coordinates, malformed 9-way tables, duplicate priority
-ordering, missing capability metadata, and design-only fixtures that
-incorrectly claim runtime-loaded or device-write behavior.
+ordering, missing capability metadata, missing modifier-table references, and
+design-only fixtures that incorrectly claim runtime-loaded or device-write
+behavior.
 
 ## Archived Diagnostics
 

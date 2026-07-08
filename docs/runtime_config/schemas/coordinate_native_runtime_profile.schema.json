@@ -27,7 +27,8 @@
     "exact_raw_coordinates",
     "modifier_tables",
     "routing_rules",
-    "digital_side_effects"
+    "digital_side_effects",
+    "selection_semantics"
   ],
   "properties": {
     "schema_version": { "const": 1 },
@@ -223,6 +224,228 @@
           "trigger": { "type": "string", "minLength": 1 },
           "side_effect": { "type": "string", "minLength": 1 },
           "design_only": { "const": true }
+        }
+      }
+    },
+    "selection_semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_state_shape",
+        "activation_representation",
+        "direction_key_source",
+        "routing_order",
+        "tie_behavior",
+        "sublayer_selection",
+        "missing_table_behavior",
+        "digital_side_effect_merge_behavior",
+        "output_shape",
+        "future_dry_run_examples"
+      ],
+      "properties": {
+        "input_state_shape": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "state_object_name",
+            "activation_array_field",
+            "required_activation_fields",
+            "direction_key_field",
+            "direction_key_domain",
+            "neutral_direction_key"
+          ],
+          "properties": {
+            "state_object_name": { "const": "input_state" },
+            "activation_array_field": { "const": "activations" },
+            "required_activation_fields": {
+              "type": "array",
+              "minItems": 3,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "direction_key_field": { "const": "resolved_direction_key" },
+            "direction_key_domain": {
+              "type": "array",
+              "minItems": 9,
+              "maxItems": 9,
+              "items": { "type": "integer", "minimum": 1, "maximum": 9 }
+            },
+            "neutral_direction_key": { "const": 5 }
+          }
+        },
+        "activation_representation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "active_record_field",
+            "inactive_record_field",
+            "activation_mode"
+          ],
+          "properties": {
+            "active_record_field": { "const": "activations" },
+            "inactive_record_field": { "const": "inactive_inputs" },
+            "activation_mode": {
+              "const": "explicit per-input activation records"
+            }
+          }
+        },
+        "direction_key_source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "resolver_field",
+            "output_field",
+            "direction_key_domain",
+            "neutral_direction_key"
+          ],
+          "properties": {
+            "resolver_field": { "const": "direction_resolver" },
+            "output_field": { "const": "resolved_direction_key" },
+            "direction_key_domain": {
+              "type": "array",
+              "minItems": 9,
+              "maxItems": 9,
+              "items": { "type": "integer", "minimum": 1, "maximum": 9 }
+            },
+            "neutral_direction_key": { "const": 5 }
+          }
+        },
+        "routing_order": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "tie_behavior": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "routing_rule_tie_breakers",
+            "table_tie_breakers",
+            "side_effect_tie_breakers",
+            "ambiguous_result_policy"
+          ],
+          "properties": {
+            "routing_rule_tie_breakers": {
+              "type": "array",
+              "minItems": 3,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "table_tie_breakers": {
+              "type": "array",
+              "minItems": 3,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "side_effect_tie_breakers": {
+              "type": "array",
+              "minItems": 3,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "ambiguous_result_policy": {
+              "const": "reject_profile"
+            }
+          }
+        },
+        "sublayer_selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "selection_field",
+            "selection_rule",
+            "missing_sublayer_behavior"
+          ],
+          "properties": {
+            "selection_field": { "const": "sublayer" },
+            "selection_rule": { "type": "string", "minLength": 1 },
+            "missing_sublayer_behavior": {
+              "const": "reject_profile"
+            }
+          }
+        },
+        "missing_table_behavior": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "missing_modifier_table_ref",
+            "missing_direction_point",
+            "unmapped_direction_key",
+            "output_coordinate"
+          ],
+          "properties": {
+            "missing_modifier_table_ref": { "const": "reject_profile" },
+            "missing_direction_point": { "const": "emit_missing_table_result" },
+            "unmapped_direction_key": { "const": "emit_missing_table_result" },
+            "output_coordinate": { "type": ["null", "object"] }
+          }
+        },
+        "digital_side_effect_merge_behavior": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "merge_order",
+            "dedupe_key",
+            "conflict_resolution",
+            "suppression_trace"
+          ],
+          "properties": {
+            "merge_order": { "type": "string", "minLength": 1 },
+            "dedupe_key": { "const": "effect_id" },
+            "conflict_resolution": { "type": "string", "minLength": 1 },
+            "suppression_trace": { "const": true }
+          }
+        },
+        "output_shape": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "result_field",
+            "required_result_fields",
+            "selection_status_values",
+            "trace_item_fields",
+            "explanation_field"
+          ],
+          "properties": {
+            "result_field": { "const": "selection_result" },
+            "required_result_fields": {
+              "type": "array",
+              "minItems": 8,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "selection_status_values": {
+              "type": "array",
+              "minItems": 4,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "trace_item_fields": {
+              "type": "array",
+              "minItems": 4,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "explanation_field": { "const": "explanation" }
+          }
+        },
+        "future_dry_run_examples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "case_id",
+              "input_state",
+              "expected_result",
+              "trace_markers"
+            ],
+            "properties": {
+              "case_id": { "type": "string", "minLength": 1 },
+              "input_state": { "type": "object" },
+              "expected_result": { "type": "object" },
+              "trace_markers": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
         }
       }
     },

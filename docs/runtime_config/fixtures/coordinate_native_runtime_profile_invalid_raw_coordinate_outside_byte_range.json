@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "packet": "coordinate_native_runtime_profile_contract",
-  "branch": "runtime-config-coordinate-native-profile-contract",
+  "branch": "runtime-config-coordinate-native-selection-semantics",
   "profile_variant": "minimal_profile",
   "contract_status": "inactive_design_only",
   "design_only_contract": true,

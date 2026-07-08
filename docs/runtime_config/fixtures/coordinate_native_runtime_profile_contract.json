@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "packet": "coordinate_native_runtime_profile_contract",
-  "branch": "runtime-config-coordinate-native-profile-contract",
+  "branch": "runtime-config-coordinate-native-selection-semantics",
   "docs_checker_only": true,
   "active_behavior_changed": false,
   "hardware_test_required_before_merge": false,
@@ -138,6 +138,156 @@
       "design_only": true
     }
   ],
+  "selection_semantics": {
+    "input_state_shape": {
+      "state_object_name": "input_state",
+      "activation_array_field": "activations",
+      "required_activation_fields": ["input_id", "role_id", "pressed"],
+      "direction_key_field": "resolved_direction_key",
+      "direction_key_domain": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "neutral_direction_key": 5
+    },
+    "activation_representation": {
+      "active_record_field": "activations",
+      "inactive_record_field": "inactive_inputs",
+      "activation_mode": "explicit per-input activation records"
+    },
+    "direction_key_source": {
+      "resolver_field": "direction_resolver",
+      "output_field": "resolved_direction_key",
+      "direction_key_domain": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "neutral_direction_key": 5
+    },
+    "routing_order": [
+      "normalize input_state into activation records",
+      "read resolved_direction_key from the direction resolver output",
+      "rank routing rules by priority, then by sublayer name, then by stable table or rule identifier",
+      "select the first rule whose referenced modifier table exists",
+      "resolve the exact raw coordinate for the selected table and direction key",
+      "merge digital side effects deterministically",
+      "emit trace and explanation metadata with the result"
+    ],
+    "tie_behavior": {
+      "routing_rule_tie_breakers": [
+        "priority",
+        "sublayer",
+        "stable identifier",
+        "document order"
+      ],
+      "table_tie_breakers": [
+        "priority",
+        "table_id",
+        "document order"
+      ],
+      "side_effect_tie_breakers": [
+        "priority",
+        "effect_id",
+        "document order"
+      ],
+      "ambiguous_result_policy": "reject_profile"
+    },
+    "sublayer_selection": {
+      "selection_field": "sublayer",
+      "selection_rule": "first matching routing rule selects the sublayer table",
+      "missing_sublayer_behavior": "reject_profile"
+    },
+    "missing_table_behavior": {
+      "missing_modifier_table_ref": "reject_profile",
+      "missing_direction_point": "emit_missing_table_result",
+      "unmapped_direction_key": "emit_missing_table_result",
+      "output_coordinate": null
+    },
+    "digital_side_effect_merge_behavior": {
+      "merge_order": "routing_rule_order then side-effect priority",
+      "dedupe_key": "effect_id",
+      "conflict_resolution": "deduplicate identical effect_id and fail on conflicting duplicates",
+      "suppression_trace": true
+    },
+    "output_shape": {
+      "result_field": "selection_result",
+      "required_result_fields": [
+        "selection_status",
+        "resolved_direction_key",
+        "selected_rule_id",
+        "selected_table_id",
+        "selected_coordinate",
+        "selected_side_effect_ids",
+        "trace",
+        "explanation"
+      ],
+      "selection_status_values": [
+        "selected",
+        "missing_table",
+        "ambiguous_tie",
+        "invalid_input"
+      ],
+      "trace_item_fields": [
+        "step",
+        "decision",
+        "reason",
+        "inputs"
+      ],
+      "explanation_field": "explanation"
+    },
+    "future_dry_run_examples": [
+      {
+        "case_id": "contract_primary_neutral_5",
+        "input_state": {
+          "state_id": "contract_primary_neutral_5",
+          "activations": [
+            {
+              "input_id": "phys_input_a",
+              "role_id": "primary",
+              "pressed": true
+            }
+          ],
+          "inactive_inputs": [],
+          "resolved_direction_key": 5
+        },
+        "expected_result": {
+          "selection_status": "selected",
+          "resolved_direction_key": 5,
+          "selected_rule_id": "primary_rule",
+          "selected_table_id": "primary_9way",
+          "selected_coordinate": {
+            "x": 128,
+            "y": 128
+          },
+          "selected_side_effect_ids": [
+            "digital_side_effect_primary"
+          ],
+          "trace": [
+            {
+              "step": "resolve_direction_key",
+              "decision": "use resolver output",
+              "reason": "resolved_direction_key is the only direction source",
+              "inputs": [
+                "resolved_direction_key=5"
+              ]
+            },
+            {
+              "step": "select_table",
+              "decision": "use primary_9way",
+              "reason": "primary_rule selects the only available table",
+              "inputs": [
+                "table_id=primary_9way"
+              ]
+            }
+          ],
+          "explanation": {
+            "selection_summary": "Primary route selected deterministically",
+            "priority_summary": "No tie or fallback was needed",
+            "fallback_summary": "Neutral key 5 mapped to the center coordinate without fallback"
+          }
+        },
+        "trace_markers": [
+          "resolved_direction_key=5",
+          "selected_table_id=primary_9way",
+          "selected_coordinate=128,128"
+        ]
+      }
+    ]
+  },
   "source_inspiration": "contract manifest only",
   "notes": "Design-only contract manifest. No runtime interpretation or active wiring.",
   "accepted_evidence": {
