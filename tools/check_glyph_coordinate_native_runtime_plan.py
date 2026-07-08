@@ -17,6 +17,7 @@ DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
 
 PLAN_DOC = REPO_ROOT / "docs/runtime_config/glyph_coordinate_native_runtime_plan.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/glyph_coordinate_native_runtime_plan.json"
@@ -192,7 +193,7 @@ def validate_branch() -> str:
         AGENT_FRAMEWORK_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
-    }:
+    } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(f"checker must run on {EXPECTED_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -215,7 +216,9 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH}:
+    if branch in {EXPECTED_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH} or any(
+        branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
+    ):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

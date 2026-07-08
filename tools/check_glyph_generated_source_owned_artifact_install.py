@@ -16,6 +16,7 @@ RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
 
 INSTALL_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_artifact_install.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json"
@@ -188,7 +189,7 @@ def validate_branch() -> str:
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
-    }:
+    } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
             f"{DOWNSTREAM_BASELINE_ARTIFACT_BRANCH}, or {MERGED_BRANCH}, got {branch}"
@@ -214,7 +215,9 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH, RECOVERY_BRANCH}:
+    if branch in {EXPECTED_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH, RECOVERY_BRANCH} or any(
+        branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
+    ):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

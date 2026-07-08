@@ -17,6 +17,7 @@ DOWNSTREAM_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-arti
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
 
 SCAFFOLD_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_schema_scaffold.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json"
@@ -204,7 +205,7 @@ def validate_branch() -> str:
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
-    }:
+    } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
             f"{DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}, "
@@ -236,7 +237,7 @@ def changed_paths(branch: str) -> set[str]:
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         RECOVERY_BRANCH,
-    }:
+    } or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

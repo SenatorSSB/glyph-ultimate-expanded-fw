@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "packet": "coordinate_native_runtime_profile_contract",
+  "branch": "runtime-config-coordinate-native-profile-contract",
+  "profile_variant": "9way_modifier_table_profile",
+  "contract_status": "inactive_design_only",
+  "design_only_contract": true,
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "version_metadata": {
+    "schema_version": 1,
+    "contract_revision": 1,
+    "profile_model_version": "v0",
+    "capability_revision": "v0"
+  },
+  "capability_metadata": {
+    "physical_input_ids": true,
+    "roles": true,
+    "direction_resolver": true,
+    "direction_keys_1_to_9": true,
+    "neutral_5": true,
+    "exact_raw_coordinates": true,
+    "nine_way_modifier_tables": true,
+    "sublayers": true,
+    "priorities": true,
+    "digital_side_effects": true
+  },
+  "physical_input_ids": [
+    {
+      "input_id": "phys_input_9way_a",
+      "kind": "button",
+      "role": "primary"
+    },
+    {
+      "input_id": "phys_input_9way_b",
+      "kind": "button",
+      "role": "modifier"
+    }
+  ],
+  "roles": [
+    {
+      "role_id": "primary",
+      "purpose": "primary action role"
+    },
+    {
+      "role_id": "modifier",
+      "purpose": "modifier role"
+    }
+  ],
+  "direction_resolver": {
+    "resolver_id": "nine_way_resolver",
+    "direction_keys": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "neutral_direction_key": 5,
+    "resolved_direction_key_range": [1, 9],
+    "mapping_rule": "malformed table should be rejected"
+  },
+  "exact_raw_coordinates": [
+    { "direction_key": 1, "x": 24, "y": 40 },
+    { "direction_key": 2, "x": 128, "y": 32 },
+    { "direction_key": 3, "x": 232, "y": 40 },
+    { "direction_key": 4, "x": 16, "y": 128 },
+    { "direction_key": 5, "x": 128, "y": 128 },
+    { "direction_key": 6, "x": 240, "y": 128 },
+    { "direction_key": 7, "x": 24, "y": 216 },
+    { "direction_key": 8, "x": 128, "y": 224 },
+    { "direction_key": 9, "x": 232, "y": 216 }
+  ],
+  "modifier_tables": [
+    {
+      "table_id": "primary_9way",
+      "table_name": "Primary 9-way",
+      "priority": 10,
+      "sublayer": "primary",
+      "direction_points": [
+        { "direction_key": 1, "x": 24, "y": 40 },
+        { "direction_key": 2, "x": 128, "y": 32 },
+        { "direction_key": 3, "x": 232, "y": 40 },
+        { "direction_key": 4, "x": 16, "y": 128 },
+        { "direction_key": 5, "x": 128, "y": 128 },
+        { "direction_key": 6, "x": 240, "y": 128 },
+        { "direction_key": 7, "x": 24, "y": 216 },
+        { "direction_key": 8, "x": 128, "y": 224 }
+      ],
+      "digital_side_effect_refs": [
+        "digital_side_effect_9way_primary"
+      ]
+    },
+    {
+      "table_id": "modifier_9way",
+      "table_name": "Modifier 9-way",
+      "priority": 20,
+      "sublayer": "modifier",
+      "direction_points": [
+        { "direction_key": 1, "x": 32, "y": 48 },
+        { "direction_key": 2, "x": 128, "y": 40 },
+        { "direction_key": 3, "x": 224, "y": 48 },
+        { "direction_key": 4, "x": 24, "y": 128 },
+        { "direction_key": 5, "x": 128, "y": 128 },
+        { "direction_key": 6, "x": 232, "y": 128 },
+        { "direction_key": 7, "x": 32, "y": 208 },
+        { "direction_key": 8, "x": 128, "y": 216 },
+        { "direction_key": 9, "x": 224, "y": 208 }
+      ],
+      "digital_side_effect_refs": [
+        "digital_side_effect_9way_modifier"
+      ]
+    }
+  ],
+  "routing_rules": [
+    {
+      "rule_id": "primary_rule",
+      "priority": 10,
+      "sublayer": "primary",
+      "modifier_table_ref": "primary_9way",
+      "condition": "primary role uses the primary 9-way table"
+    },
+    {
+      "rule_id": "modifier_rule",
+      "priority": 20,
+      "sublayer": "modifier",
+      "modifier_table_ref": "modifier_9way",
+      "condition": "modifier role uses the modifier 9-way table"
+    }
+  ],
+  "digital_side_effects": [
+    {
+      "effect_id": "digital_side_effect_9way_primary",
+      "priority": 10,
+      "trigger": "primary role active",
+      "side_effect": "primary digital side effect is design-only",
+      "design_only": true
+    },
+    {
+      "effect_id": "digital_side_effect_9way_modifier",
+      "priority": 20,
+      "trigger": "modifier role active",
+      "side_effect": "modifier digital side effect is design-only",
+      "design_only": true
+    }
+  ],
+  "source_inspiration": "9-way modifier table example",
+  "notes": "Inactive design-only 9-way modifier table profile example."
+}
