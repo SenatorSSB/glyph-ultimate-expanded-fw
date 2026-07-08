@@ -35,7 +35,11 @@ separate design and hardware-proof phase. The current contract scaffold is
 design-only and inactive. The runtime primitive should map active
 role/modifier state plus resolved direction key 1..9 to exact raw coordinates,
 including neutral 5, full 9-way asymmetry, and explicit routing/sublayers/
-priorities.
+priorities. The contract now also spells out deterministic selection semantics,
+including input-state shape, tie handling, missing-table behavior, side-effect
+merge policy, dry-run output shape, and future dry-run annotations in
+`future_dry_run_examples`. Those annotations are documentation only and do not
+implement an evaluator.
 
 Browser/protobuf/persistence work may be future infrastructure after the runtime
 model exists. It is not approval for device write, persistent runtime-config

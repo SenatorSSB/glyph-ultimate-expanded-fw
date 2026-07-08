@@ -102,8 +102,8 @@ Status: `READY_FOR_ENGINEERING_DESIGN`, implementation deferred.
 
 Goal: design coordinate-native runtime profile contract scaffolding around the
 primitive `active role/modifier state + resolved direction key 1..9 -> exact
-raw coordinate`, including neutral 5, full 9-way asymmetry, and explicit
-routing/sublayers/priorities.
+raw coordinate`, including neutral 5, full 9-way asymmetry, explicit
+routing/sublayers/priorities, and deterministic selection semantics.
 
 Current v0 production remains source-owned firmware generation as v0 until a
 coordinate-native runtime profile has separate design, source authority, build
@@ -112,6 +112,9 @@ proof, and hardware proof.
 Current contract scaffold packet:
 `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with
 `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
+The packet now includes machine-readable input-state, tie, missing-table, side-
+effect merge, and trace/explanation rules plus annotated future dry-run
+examples.
 
 Current repo-enforced tooling for this lane includes:
 
@@ -130,8 +133,10 @@ neutral profile schema changes, or game-semantic claims without explicit
 approval and source authority.
 
 Next safe queue: keep the invalid corpus and standalone validator aligned with
-the contract text; consider an offline resolver dry-run only after a
-deterministic selection model is written down in the contract.
+the contract text; keep the deterministic selection semantics and
+`future_dry_run_examples` annotations aligned; the offline resolver dry-run
+remains a future implementation task, but its selection contract is now
+documented and checker-enforced.
 
 ## Phase 3 - Future Browser/Protobuf/Persistence Backend
 

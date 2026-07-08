@@ -12,7 +12,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_BRANCH = "runtime-config-coordinate-native-profile-contract"
+EXPECTED_BRANCH = "runtime-config-coordinate-native-selection-semantics"
 RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
@@ -53,6 +53,10 @@ NEGATIVE_FIXTURE_REASON_PAIRS: tuple[tuple[Path, str], ...] = (
         REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json",
         "runtime_loaded_config_implemented must be False",
     ),
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json",
+        "references unknown modifier_table_ref",
+    ),
 )
 README = REPO_ROOT / "docs/runtime_config/README.md"
 BOUNDARY = REPO_ROOT / "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md"
@@ -67,6 +71,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json",
     "docs/runtime_config/README.md",
     "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
     "docs/CURRENT_STATE.md",
@@ -135,6 +140,19 @@ CONTRACT_STRING_FIELDS = {
     "nunchuk_status": "NOT_TESTED",
 }
 
+SELECTION_SEMANTICS_REQUIRED_FIELDS = (
+    "input_state_shape",
+    "activation_representation",
+    "direction_key_source",
+    "routing_order",
+    "tie_behavior",
+    "sublayer_selection",
+    "missing_table_behavior",
+    "digital_side_effect_merge_behavior",
+    "output_shape",
+    "future_dry_run_examples",
+)
+
 CONTRACT_MIN_COUNTS = {
     "contract_manifest": {"inputs": 3, "roles": 3, "tables": 1},
     "minimal_profile": {"inputs": 1, "roles": 1, "tables": 1},
@@ -154,6 +172,10 @@ REQUIRED_DOC_PHRASES = (
     "priorities",
     "digital side effects",
     "version and capability metadata",
+    "Deterministic Selection Semantics",
+    "future dry-run contract",
+    "selection_result",
+    "future_dry_run_examples",
     "does not implement runtime interpretation",
     "runtime-loaded config",
     "WebSerial/device write path",
@@ -170,6 +192,8 @@ REQUIRED_SCHEMA_PHRASES = (
     "\"neutral_direction_key\": { \"const\": 5 }",
     "\"x\": { \"type\": \"integer\", \"minimum\": 0, \"maximum\": 255 }",
     "\"y\": { \"type\": \"integer\", \"minimum\": 0, \"maximum\": 255 }",
+    "\"selection_semantics\"",
+    "\"future_dry_run_examples\"",
 )
 
 REQUIRED_CURRENT_STATE_PHRASES = (
@@ -178,6 +202,7 @@ REQUIRED_CURRENT_STATE_PHRASES = (
     "source-owned Y2 layout HARDWARE_PASS",
     "Active RuntimeConfigView selection remains unchanged",
     "coordinate-native runtime profile contract scaffolding",
+    "deterministic selection semantics",
     "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
     "Nunchuk remains NOT_TESTED",
     "root cause remains unproven",
@@ -187,6 +212,8 @@ REQUIRED_ROADMAP_PHRASES = (
     "Phase 2 - Coordinate-Native Runtime Profile Contract Scaffolding",
     "coordinate-native runtime profile contract scaffolding",
     "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+    "deterministic selection semantics",
+    "future_dry_run_examples",
     "future browser/protobuf/persistence backend",
     "after the runtime model exists",
 )
@@ -199,6 +226,8 @@ REQUIRED_README_PHRASES = (
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+    "future_dry_run_examples",
+    "selection_result",
     "design-only",
     "inactive",
 )
@@ -207,6 +236,8 @@ REQUIRED_BOUNDARY_PHRASES = (
     "coordinate-native runtime profile support",
     "coordinate-native runtime profile contract scaffold",
     "design-only and inactive",
+    "deterministic selection semantics",
+    "future dry-run annotations",
     "browser/protobuf/persistence work may be future infrastructure",
 )
 
@@ -341,6 +372,8 @@ def validate_schema(schema: dict[str, Any]) -> None:
     for key in CONTRACT_REQUIRED_FIELDS:
         if key not in required:
             fail(f"schema required missing {key}")
+    if "selection_semantics" not in required:
+        fail("schema required missing selection_semantics")
     properties = schema.get("properties")
     if not isinstance(properties, dict):
         fail("schema properties must be an object")
@@ -377,6 +410,28 @@ def validate_schema(schema: dict[str, Any]) -> None:
         fail("schema exact_raw_coordinates x range must be 0..255")
     if exact_props.get("y", {}).get("minimum") != 0 or exact_props.get("y", {}).get("maximum") != 255:
         fail("schema exact_raw_coordinates y range must be 0..255")
+    selection_semantics = properties.get("selection_semantics")
+    if not isinstance(selection_semantics, dict):
+        fail("schema selection_semantics must be an object")
+    if selection_semantics.get("type") != "object":
+        fail("schema selection_semantics type must be object")
+    semantics_props = selection_semantics.get("properties")
+    if not isinstance(semantics_props, dict):
+        fail("schema selection_semantics.properties must be an object")
+    for key in (
+        "input_state_shape",
+        "activation_representation",
+        "direction_key_source",
+        "routing_order",
+        "tie_behavior",
+        "sublayer_selection",
+        "missing_table_behavior",
+        "digital_side_effect_merge_behavior",
+        "output_shape",
+        "future_dry_run_examples",
+    ):
+        if key not in semantics_props:
+            fail(f"schema selection_semantics missing {key}")
 
 
 def validate_points(points: list[dict[str, Any]], label: str) -> None:
@@ -418,6 +473,272 @@ def validate_profile_variant_rules(profile_variant: Any) -> tuple[int, int, int,
         raise AssertionError("unreachable") from exc
 
 
+def validate_selection_semantics(semantics: Any, *, label: str) -> None:
+    if not isinstance(semantics, dict):
+        fail(f"{label} selection_semantics must be an object")
+    for key in SELECTION_SEMANTICS_REQUIRED_FIELDS:
+        if key not in semantics:
+            fail(f"{label} selection_semantics missing required field {key}")
+
+    input_state_shape = semantics.get("input_state_shape")
+    if not isinstance(input_state_shape, dict):
+        fail(f"{label} selection_semantics.input_state_shape must be an object")
+    for field in (
+        "state_object_name",
+        "activation_array_field",
+        "required_activation_fields",
+        "direction_key_field",
+        "direction_key_domain",
+        "neutral_direction_key",
+    ):
+        if field not in input_state_shape:
+            fail(f"{label} selection_semantics.input_state_shape missing {field}")
+    if input_state_shape.get("state_object_name") != "input_state":
+        fail(f"{label} selection_semantics.input_state_shape.state_object_name must be 'input_state'")
+    if input_state_shape.get("activation_array_field") != "activations":
+        fail(f"{label} selection_semantics.input_state_shape.activation_array_field must be 'activations'")
+    if input_state_shape.get("direction_key_field") != "resolved_direction_key":
+        fail(
+            f"{label} selection_semantics.input_state_shape.direction_key_field must be 'resolved_direction_key'"
+        )
+    if input_state_shape.get("neutral_direction_key") != 5:
+        fail(f"{label} selection_semantics.input_state_shape.neutral_direction_key must be 5")
+    required_activation_fields = input_state_shape.get("required_activation_fields")
+    if not isinstance(required_activation_fields, list) or not required_activation_fields:
+        fail(f"{label} selection_semantics.input_state_shape.required_activation_fields must be a non-empty list")
+    for field in ("input_id", "role_id", "pressed"):
+        if field not in required_activation_fields:
+            fail(
+                f"{label} selection_semantics.input_state_shape.required_activation_fields missing {field}"
+            )
+    direction_key_domain = input_state_shape.get("direction_key_domain")
+    if direction_key_domain != [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+        fail(f"{label} selection_semantics.input_state_shape.direction_key_domain must be 1..9")
+
+    activation_representation = semantics.get("activation_representation")
+    if not isinstance(activation_representation, dict):
+        fail(f"{label} selection_semantics.activation_representation must be an object")
+    if activation_representation.get("active_record_field") != "activations":
+        fail(f"{label} selection_semantics.activation_representation.active_record_field must be 'activations'")
+    if activation_representation.get("inactive_record_field") != "inactive_inputs":
+        fail(
+            f"{label} selection_semantics.activation_representation.inactive_record_field must be 'inactive_inputs'"
+        )
+    if activation_representation.get("activation_mode") != "explicit per-input activation records":
+        fail(
+            f"{label} selection_semantics.activation_representation.activation_mode must be 'explicit per-input activation records'"
+        )
+
+    direction_key_source = semantics.get("direction_key_source")
+    if not isinstance(direction_key_source, dict):
+        fail(f"{label} selection_semantics.direction_key_source must be an object")
+    if direction_key_source.get("resolver_field") != "direction_resolver":
+        fail(f"{label} selection_semantics.direction_key_source.resolver_field must be 'direction_resolver'")
+    if direction_key_source.get("output_field") != "resolved_direction_key":
+        fail(f"{label} selection_semantics.direction_key_source.output_field must be 'resolved_direction_key'")
+    if direction_key_source.get("neutral_direction_key") != 5:
+        fail(f"{label} selection_semantics.direction_key_source.neutral_direction_key must be 5")
+    if direction_key_source.get("direction_key_domain") != [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+        fail(f"{label} selection_semantics.direction_key_source.direction_key_domain must be 1..9")
+
+    routing_order = semantics.get("routing_order")
+    if routing_order != [
+        "normalize input_state into activation records",
+        "read resolved_direction_key from the direction resolver output",
+        "rank routing rules by priority, then by sublayer name, then by stable table or rule identifier",
+        "select the first rule whose referenced modifier table exists",
+        "resolve the exact raw coordinate for the selected table and direction key",
+        "merge digital side effects deterministically",
+        "emit trace and explanation metadata with the result",
+    ]:
+        fail(f"{label} selection_semantics.routing_order must match the documented deterministic order")
+
+    tie_behavior = semantics.get("tie_behavior")
+    if not isinstance(tie_behavior, dict):
+        fail(f"{label} selection_semantics.tie_behavior must be an object")
+    for field in ("routing_rule_tie_breakers", "table_tie_breakers", "side_effect_tie_breakers"):
+        values = tie_behavior.get(field)
+        if not isinstance(values, list) or len(values) < 3:
+            fail(f"{label} selection_semantics.tie_behavior.{field} must be a list with at least 3 entries")
+    if tie_behavior.get("ambiguous_result_policy") != "reject_profile":
+        fail(
+            f"{label} selection_semantics.tie_behavior.ambiguous_result_policy must be 'reject_profile'"
+        )
+
+    sublayer_selection = semantics.get("sublayer_selection")
+    if not isinstance(sublayer_selection, dict):
+        fail(f"{label} selection_semantics.sublayer_selection must be an object")
+    if sublayer_selection.get("selection_field") != "sublayer":
+        fail(f"{label} selection_semantics.sublayer_selection.selection_field must be 'sublayer'")
+    if not isinstance(sublayer_selection.get("selection_rule"), str) or not sublayer_selection.get("selection_rule"):
+        fail(f"{label} selection_semantics.sublayer_selection.selection_rule must be a non-empty string")
+    if sublayer_selection.get("missing_sublayer_behavior") != "reject_profile":
+        fail(f"{label} selection_semantics.sublayer_selection.missing_sublayer_behavior must be 'reject_profile'")
+
+    missing_table_behavior = semantics.get("missing_table_behavior")
+    if not isinstance(missing_table_behavior, dict):
+        fail(f"{label} selection_semantics.missing_table_behavior must be an object")
+    for field, expected in {
+        "missing_modifier_table_ref": "reject_profile",
+        "missing_direction_point": "emit_missing_table_result",
+        "unmapped_direction_key": "emit_missing_table_result",
+    }.items():
+        if missing_table_behavior.get(field) != expected:
+            fail(f"{label} selection_semantics.missing_table_behavior.{field} must be {expected!r}")
+    if missing_table_behavior.get("output_coordinate") not in (None, {}):
+        fail(f"{label} selection_semantics.missing_table_behavior.output_coordinate must be null or an object")
+
+    merge_behavior = semantics.get("digital_side_effect_merge_behavior")
+    if not isinstance(merge_behavior, dict):
+        fail(f"{label} selection_semantics.digital_side_effect_merge_behavior must be an object")
+    if merge_behavior.get("merge_order") != "routing_rule_order then side-effect priority":
+        fail(
+            f"{label} selection_semantics.digital_side_effect_merge_behavior.merge_order must be 'routing_rule_order then side-effect priority'"
+        )
+    if merge_behavior.get("dedupe_key") != "effect_id":
+        fail(f"{label} selection_semantics.digital_side_effect_merge_behavior.dedupe_key must be 'effect_id'")
+    if merge_behavior.get("conflict_resolution") != "deduplicate identical effect_id and fail on conflicting duplicates":
+        fail(
+            f"{label} selection_semantics.digital_side_effect_merge_behavior.conflict_resolution must be 'deduplicate identical effect_id and fail on conflicting duplicates'"
+        )
+    if merge_behavior.get("suppression_trace") is not True:
+        fail(f"{label} selection_semantics.digital_side_effect_merge_behavior.suppression_trace must be True")
+
+    output_shape = semantics.get("output_shape")
+    if not isinstance(output_shape, dict):
+        fail(f"{label} selection_semantics.output_shape must be an object")
+    if output_shape.get("result_field") != "selection_result":
+        fail(f"{label} selection_semantics.output_shape.result_field must be 'selection_result'")
+    required_result_fields = output_shape.get("required_result_fields")
+    if not isinstance(required_result_fields, list) or not required_result_fields:
+        fail(f"{label} selection_semantics.output_shape.required_result_fields must be a non-empty list")
+    for field in (
+        "selection_status",
+        "resolved_direction_key",
+        "selected_rule_id",
+        "selected_table_id",
+        "selected_coordinate",
+        "selected_side_effect_ids",
+        "trace",
+        "explanation",
+    ):
+        if field not in required_result_fields:
+            fail(f"{label} selection_semantics.output_shape.required_result_fields missing {field}")
+    status_values = output_shape.get("selection_status_values")
+    if not isinstance(status_values, list) or len(status_values) < 4:
+        fail(f"{label} selection_semantics.output_shape.selection_status_values must contain at least 4 values")
+    for value in ("selected", "missing_table", "ambiguous_tie", "invalid_input"):
+        if value not in status_values:
+            fail(f"{label} selection_semantics.output_shape.selection_status_values missing {value}")
+    trace_item_fields = output_shape.get("trace_item_fields")
+    if not isinstance(trace_item_fields, list) or len(trace_item_fields) < 4:
+        fail(f"{label} selection_semantics.output_shape.trace_item_fields must contain at least 4 values")
+    for field in ("step", "decision", "reason", "inputs"):
+        if field not in trace_item_fields:
+            fail(f"{label} selection_semantics.output_shape.trace_item_fields missing {field}")
+    if output_shape.get("explanation_field") != "explanation":
+        fail(f"{label} selection_semantics.output_shape.explanation_field must be 'explanation'")
+
+    examples = semantics.get("future_dry_run_examples")
+    if not isinstance(examples, list) or not examples:
+        fail(f"{label} selection_semantics.future_dry_run_examples must be a non-empty list")
+    for example in examples:
+        if not isinstance(example, dict):
+            fail(f"{label} selection_semantics.future_dry_run_examples entries must be objects")
+        for field in ("case_id", "input_state", "expected_result", "trace_markers"):
+            if field not in example:
+                fail(f"{label} selection_semantics.future_dry_run_examples entries missing {field}")
+        if not isinstance(example.get("case_id"), str) or not example.get("case_id"):
+            fail(f"{label} selection_semantics.future_dry_run_examples.case_id must be a non-empty string")
+        input_state = example.get("input_state")
+        if not isinstance(input_state, dict):
+            fail(f"{label} selection_semantics.future_dry_run_examples.input_state must be an object")
+        for field in ("state_id", "activations", "inactive_inputs", "resolved_direction_key"):
+            if field not in input_state:
+                fail(f"{label} selection_semantics.future_dry_run_examples.input_state missing {field}")
+        if not isinstance(input_state.get("state_id"), str) or not input_state.get("state_id"):
+            fail(f"{label} selection_semantics.future_dry_run_examples.input_state.state_id must be a non-empty string")
+        activations = input_state.get("activations")
+        if not isinstance(activations, list) or not activations:
+            fail(f"{label} selection_semantics.future_dry_run_examples.input_state.activations must be a non-empty list")
+        for activation in activations:
+            if not isinstance(activation, dict):
+                fail(
+                    f"{label} selection_semantics.future_dry_run_examples.input_state.activations entries must be objects"
+                )
+            for field in ("input_id", "role_id", "pressed"):
+                if field not in activation:
+                    fail(
+                        f"{label} selection_semantics.future_dry_run_examples.input_state.activations entries missing {field}"
+                    )
+        if not isinstance(input_state.get("inactive_inputs"), list):
+            fail(f"{label} selection_semantics.future_dry_run_examples.input_state.inactive_inputs must be a list")
+        if not isinstance(input_state.get("resolved_direction_key"), int) or not 1 <= input_state.get("resolved_direction_key") <= 9:
+            fail(
+                f"{label} selection_semantics.future_dry_run_examples.input_state.resolved_direction_key must be 1..9"
+            )
+        expected_result = example.get("expected_result")
+        if not isinstance(expected_result, dict):
+            fail(f"{label} selection_semantics.future_dry_run_examples.expected_result must be an object")
+        for field in (
+            "selection_status",
+            "resolved_direction_key",
+            "selected_rule_id",
+            "selected_table_id",
+            "selected_coordinate",
+            "selected_side_effect_ids",
+            "trace",
+            "explanation",
+        ):
+            if field not in expected_result:
+                fail(
+                    f"{label} selection_semantics.future_dry_run_examples.expected_result missing {field}"
+                )
+        if expected_result.get("selection_status") not in {"selected", "missing_table", "ambiguous_tie", "invalid_input"}:
+            fail(
+                f"{label} selection_semantics.future_dry_run_examples.expected_result.selection_status must be a supported status"
+            )
+        selected_coordinate = expected_result.get("selected_coordinate")
+        if selected_coordinate is not None:
+            if not isinstance(selected_coordinate, dict):
+                fail(
+                    f"{label} selection_semantics.future_dry_run_examples.expected_result.selected_coordinate must be null or an object"
+                )
+            for field in ("x", "y"):
+                if field not in selected_coordinate:
+                    fail(
+                        f"{label} selection_semantics.future_dry_run_examples.expected_result.selected_coordinate missing {field}"
+                    )
+                if not isinstance(selected_coordinate.get(field), int):
+                    fail(
+                        f"{label} selection_semantics.future_dry_run_examples.expected_result.selected_coordinate.{field} must be an integer"
+                    )
+        if not isinstance(expected_result.get("selected_side_effect_ids"), list):
+            fail(
+                f"{label} selection_semantics.future_dry_run_examples.expected_result.selected_side_effect_ids must be a list"
+            )
+        for side_effect_id in expected_result.get("selected_side_effect_ids", []):
+            if not isinstance(side_effect_id, str) or not side_effect_id:
+                fail(
+                    f"{label} selection_semantics.future_dry_run_examples.expected_result.selected_side_effect_ids entries must be non-empty strings"
+                )
+        trace = expected_result.get("trace")
+        if not isinstance(trace, list) or not trace:
+            fail(f"{label} selection_semantics.future_dry_run_examples.expected_result.trace must be a non-empty list")
+        for item in trace:
+            if not isinstance(item, dict):
+                fail(
+                    f"{label} selection_semantics.future_dry_run_examples.expected_result.trace entries must be objects"
+                )
+            for field in ("step", "decision", "reason", "inputs"):
+                if field not in item:
+                    fail(
+                        f"{label} selection_semantics.future_dry_run_examples.expected_result.trace entries missing {field}"
+                    )
+        if not isinstance(example.get("trace_markers"), list) or not example.get("trace_markers"):
+            fail(f"{label} selection_semantics.future_dry_run_examples.trace_markers must be a non-empty list")
+
+
 def validate_profile_fixture(
     fixture: dict[str, Any],
     *,
@@ -427,6 +748,7 @@ def validate_profile_fixture(
     min_roles: int | None = None,
     min_tables: int | None = None,
     allow_legacy_evidence: bool = False,
+    require_selection_semantics: bool = True,
 ) -> None:
     for key, expected in CONTRACT_STRING_FIELDS.items():
         if fixture.get(key) != expected:
@@ -480,6 +802,21 @@ def validate_profile_fixture(
     roles = fixture.get("roles")
     if not isinstance(roles, list) or len(roles) < min_roles:
         fail(f"{label} roles must contain at least {min_roles} entries")
+    role_ids: set[str] = set()
+    for role in roles:
+        if not isinstance(role, dict):
+            fail(f"{label} roles entries must be objects")
+        role_id = role.get("role_id")
+        if not isinstance(role_id, str) or not role_id:
+            fail(f"{label} roles entries must contain role_id")
+        if role_id in role_ids:
+            fail(f"{label} roles must have unique role_id values")
+        role_ids.add(role_id)
+    for physical_input in physical_inputs:
+        if not isinstance(physical_input, dict):
+            fail(f"{label} physical_input_ids entries must be objects")
+        if physical_input.get("role") not in role_ids:
+            fail(f"{label} physical_input_ids.role must reference a defined role")
     resolver = fixture.get("direction_resolver")
     if not isinstance(resolver, dict):
         fail(f"{label} direction_resolver must be an object")
@@ -496,12 +833,17 @@ def validate_profile_fixture(
     tables = fixture.get("modifier_tables")
     if not isinstance(tables, list) or len(tables) < min_tables:
         fail(f"{label} modifier_tables must contain at least {min_tables} entries")
+    table_ids: set[str] = set()
     for table in tables:
         if not isinstance(table, dict):
             fail(f"{label} modifier_tables entries must be objects")
         for field in ("table_id", "table_name", "sublayer"):
             if not isinstance(table.get(field), str) or not table.get(field):
                 fail(f"{label} modifier_tables entries must contain {field}")
+        table_id = table["table_id"]
+        if table_id in table_ids:
+            fail(f"{label} modifier_tables must have unique table_id values")
+        table_ids.add(table_id)
         if not isinstance(table.get("priority"), int) or table["priority"] < 0:
             fail(f"{label} modifier_tables priority must be a non-negative integer")
         direction_points = table.get("direction_points")
@@ -515,20 +857,35 @@ def validate_profile_fixture(
     if not isinstance(routing_rules, list) or not routing_rules:
         fail(f"{label} routing_rules must be a non-empty list")
     priorities: list[int] = []
+    rule_ids: set[str] = set()
+    sublayers: set[str] = set()
     for rule in routing_rules:
         if not isinstance(rule, dict):
             fail(f"{label} routing_rules entries must be objects")
         for field in ("rule_id", "sublayer", "modifier_table_ref"):
             if not isinstance(rule.get(field), str) or not rule.get(field):
                 fail(f"{label} routing_rules entries must contain {field}")
+        if rule["rule_id"] in rule_ids:
+            fail(f"{label} routing_rules must have unique rule_id values")
+        rule_ids.add(rule["rule_id"])
+        if rule["sublayer"] in sublayers:
+            fail(f"{label} routing_rules must have unique sublayer values")
+        sublayers.add(rule["sublayer"])
         if not isinstance(rule.get("priority"), int) or rule["priority"] < 0:
             fail(f"{label} routing_rules priority must be a non-negative integer")
         priorities.append(rule["priority"])
     if priorities != sorted(priorities) or len(set(priorities)) != len(priorities):
         fail(f"{label} routing_rules priorities must be strictly increasing")
+    existing_table_ids = {
+        table.get("table_id")
+        for table in tables
+        if isinstance(table, dict) and isinstance(table.get("table_id"), str)
+    }
     side_effects = fixture.get("digital_side_effects")
     if not isinstance(side_effects, list) or not side_effects:
         fail(f"{label} digital_side_effects must be a non-empty list")
+    effect_ids: set[str] = set()
+    effect_priorities: list[int] = []
     for effect in side_effects:
         if not isinstance(effect, dict):
             fail(f"{label} digital_side_effects entries must be objects")
@@ -539,8 +896,25 @@ def validate_profile_fixture(
             fail(f"{label} digital_side_effects priority must be a non-negative integer")
         if effect.get("design_only") is not True:
             fail(f"{label} digital_side_effects entries must be design-only")
+        effect_ids.add(effect["effect_id"])
+        effect_priorities.append(effect["priority"])
+    if effect_priorities != sorted(effect_priorities) or len(set(effect_priorities)) != len(effect_priorities):
+        fail(f"{label} digital_side_effects priorities must be strictly increasing")
+    for table in tables:
+        refs = table.get("digital_side_effect_refs")
+        if not isinstance(refs, list):
+            fail(f"{label} digital_side_effect_refs must be a list")
+        for ref in refs:
+            if ref not in effect_ids:
+                fail(f"{label} digital_side_effect_refs references unknown effect_id {ref}")
+    for rule in routing_rules:
+        ref = rule["modifier_table_ref"]
+        if ref not in existing_table_ids:
+            fail(f"{label} routing_rules references unknown modifier_table_ref {ref}")
     if fixture.get("notes") and "runtime semantics" in normalize(str(fixture.get("notes"))):
         fail(f"{label} notes must not claim runtime semantics")
+    if require_selection_semantics:
+        validate_selection_semantics(fixture.get("selection_semantics"), label=label)
     if allow_legacy_evidence:
         evidence = fixture.get("accepted_evidence")
         if not isinstance(evidence, dict):
@@ -567,13 +941,13 @@ def validate_profile_fixture(
 def validate_profile_file(path: Path) -> None:
     path = path.resolve()
     fixture = load_json_object(path)
-    validate_profile_fixture(fixture, label=rel(path))
+    validate_profile_fixture(fixture, label=rel(path), require_selection_semantics=True)
 
 
 def run_negative_fixture_checks() -> None:
     for path, expected_reason in NEGATIVE_FIXTURE_REASON_PAIRS:
         try:
-            validate_profile_file(path)
+            validate_profile_fixture(load_json_object(path), label=rel(path), require_selection_semantics=False)
         except CoordinateNativeRuntimeProfileContractError as exc:
             message = str(exc)
             if expected_reason not in message:
