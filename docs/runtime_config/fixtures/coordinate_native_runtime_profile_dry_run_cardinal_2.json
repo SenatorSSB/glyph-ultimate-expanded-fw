@@ -1,0 +1,94 @@
+{
+  "case_id": "dry_run_cardinal_2",
+  "profile_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
+  "input_state": {
+    "state_id": "dry_run_cardinal_2",
+    "activations": [
+      {
+        "input_id": "phys_input_9way_a",
+        "role_id": "primary",
+        "pressed": true
+      }
+    ],
+    "inactive_inputs": [],
+    "resolved_direction_key": 2,
+    "active_role_ids": [
+      "primary"
+    ],
+    "active_modifier_ids": [],
+    "routing_sublayer": "primary"
+  },
+  "expected_result": {
+    "selection_status": "selected",
+    "resolved_direction_key": 2,
+    "selected_rule_id": "primary_rule",
+    "selected_table_id": "primary_9way",
+    "selected_coordinate": {
+      "x": 128,
+      "y": 32
+    },
+    "selected_side_effect_ids": [
+      "digital_side_effect_9way_primary"
+    ],
+    "trace": [
+      {
+        "step": "normalize_input_state",
+        "decision": "use explicit activations",
+        "reason": "offline tooling only and input_state is fixture-backed",
+        "inputs": [
+          "state_id=dry_run_cardinal_2",
+          "active_role_ids=primary",
+          "active_modifier_ids="
+        ]
+      },
+      {
+        "step": "resolve_direction_key",
+        "decision": "use resolver output",
+        "reason": "resolved_direction_key is the only direction source",
+        "inputs": [
+          "resolved_direction_key=2"
+        ]
+      },
+      {
+        "step": "select_rule",
+        "decision": "select first eligible rule",
+        "reason": "ascending priority with deterministic tie rejection",
+        "inputs": [
+          "selected_rule_id=primary_rule",
+          "selected_table_ref=primary_9way"
+        ]
+      },
+      {
+        "step": "select_table",
+        "decision": "use referenced modifier table",
+        "reason": "table reference resolved successfully",
+        "inputs": [
+          "table_id=primary_9way"
+        ]
+      },
+      {
+        "step": "resolve_coordinate",
+        "decision": "use exact raw coordinate from selected table",
+        "reason": "direction key is resolved deterministically",
+        "inputs": [
+          "direction_key=2",
+          "coordinate=128,32"
+        ]
+      },
+      {
+        "step": "merge_digital_side_effects",
+        "decision": "merge by side-effect priority",
+        "reason": "offline evaluation only; side effects are not executed",
+        "inputs": [
+          "selected_side_effect_ids=digital_side_effect_9way_primary"
+        ]
+      }
+    ],
+    "explanation": {
+      "selection_summary": "primary_rule selected deterministically from primary_9way",
+      "priority_summary": "No tie or fallback was needed",
+      "boundary_summary": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication"
+    }
+  },
+  "notes": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication."
+}

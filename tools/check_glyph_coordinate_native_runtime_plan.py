@@ -40,6 +40,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_generated_source_owned_realization_design.py",
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+    "tools/dry_run_coordinate_native_runtime_profile.py",
     CHECKER_REL,
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_agent_surface.py",

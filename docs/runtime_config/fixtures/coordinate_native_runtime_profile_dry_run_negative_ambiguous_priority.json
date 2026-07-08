@@ -1,0 +1,51 @@
+{
+  "case_id": "dry_run_negative_ambiguous_priority",
+  "profile_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json",
+  "input_state": {
+    "state_id": "dry_run_negative_ambiguous_priority",
+    "activations": [
+      {
+        "input_id": "phys_input_9way_a",
+        "role_id": "primary",
+        "pressed": true
+      },
+      {
+        "input_id": "phys_input_9way_b",
+        "role_id": "modifier",
+        "pressed": true
+      }
+    ],
+    "inactive_inputs": [],
+    "resolved_direction_key": 7,
+    "active_role_ids": [
+      "primary"
+    ],
+    "active_modifier_ids": [
+      "modifier"
+    ]
+  },
+  "expected_failure": {
+    "selection_status": "ambiguous_tie",
+    "resolved_direction_key": null,
+    "selected_rule_id": null,
+    "selected_table_id": null,
+    "selected_coordinate": null,
+    "selected_side_effect_ids": [],
+    "trace": [
+      {
+        "step": "validate_profile",
+        "decision": "reject_profile",
+        "reason": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json routing_rules priorities must be strictly increasing",
+        "inputs": [
+          "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json"
+        ]
+      }
+    ],
+    "explanation": {
+      "selection_summary": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json routing_rules priorities must be strictly increasing",
+      "priority_summary": "Selection failed before a deterministic winner could be emitted",
+      "boundary_summary": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication"
+    }
+  },
+  "notes": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication."
+}

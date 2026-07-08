@@ -128,15 +128,23 @@ is a coordinate-native runtime profile. Browser/protobuf/persistence as future
 infrastructure is likely solvable, but the neutral app-owned profile remains
 canonical and firmware-independent. Firmware should not own game semantics.
 
+The offline dry-run evaluator for this lane is now implemented as tooling only:
+`tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed
+positive and negative cases under `docs/runtime_config/fixtures/`. The
+generated result is not loaded by firmware, runtime-loaded config remains not
+implemented, and there is no WebSerial/device write, no persistence/storage,
+no flashing automation, and no active RuntimeConfigView publication.
+
 Stop conditions: runtime-loaded profile claims, active publication changes,
 neutral profile schema changes, or game-semantic claims without explicit
 approval and source authority.
 
 Next safe queue: keep the invalid corpus and standalone validator aligned with
 the contract text; keep the deterministic selection semantics and
-`future_dry_run_examples` annotations aligned; the offline resolver dry-run
-remains a future implementation task, but its selection contract is now
-documented and checker-enforced.
+`future_dry_run_examples` annotations aligned; keep the offline dry-run
+evaluator and checker-driven fixture corpus aligned. The offline resolver
+runtime path remains a future implementation task, but its selection contract
+is now documented and checker-enforced.
 
 ## Phase 3 - Future Browser/Protobuf/Persistence Backend
 

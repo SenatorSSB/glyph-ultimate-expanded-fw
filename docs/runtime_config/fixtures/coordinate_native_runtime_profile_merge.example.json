@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "packet": "coordinate_native_runtime_profile_contract",
+  "branch": "runtime-config-coordinate-native-selection-semantics",
+  "profile_variant": "minimal_profile",
+  "contract_status": "inactive_design_only",
+  "design_only_contract": true,
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "version_metadata": {
+    "schema_version": 1,
+    "contract_revision": 1,
+    "profile_model_version": "v0",
+    "capability_revision": "v0"
+  },
+  "capability_metadata": {
+    "physical_input_ids": true,
+    "roles": true,
+    "direction_resolver": true,
+    "direction_keys_1_to_9": true,
+    "neutral_5": true,
+    "exact_raw_coordinates": true,
+    "nine_way_modifier_tables": true,
+    "sublayers": true,
+    "priorities": true,
+    "digital_side_effects": true
+  },
+  "physical_input_ids": [
+    {
+      "input_id": "phys_input_merge_a",
+      "kind": "button",
+      "role": "primary"
+    }
+  ],
+  "roles": [
+    {
+      "role_id": "primary",
+      "purpose": "primary role with merged side effects"
+    }
+  ],
+  "direction_resolver": {
+    "resolver_id": "merge_resolver",
+    "direction_keys": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "neutral_direction_key": 5,
+    "resolved_direction_key_range": [1, 9],
+    "mapping_rule": "merge profile keeps neutral 5 as an ordinary coordinate"
+  },
+  "exact_raw_coordinates": [
+    { "direction_key": 1, "x": 0, "y": 0 },
+    { "direction_key": 2, "x": 128, "y": 0 },
+    { "direction_key": 3, "x": 255, "y": 0 },
+    { "direction_key": 4, "x": 0, "y": 128 },
+    { "direction_key": 5, "x": 128, "y": 128 },
+    { "direction_key": 6, "x": 255, "y": 128 },
+    { "direction_key": 7, "x": 0, "y": 255 },
+    { "direction_key": 8, "x": 128, "y": 255 },
+    { "direction_key": 9, "x": 255, "y": 255 }
+  ],
+  "modifier_tables": [
+    {
+      "table_id": "merge_primary_9way",
+      "table_name": "Merge Primary 9-way",
+      "priority": 1,
+      "sublayer": "primary",
+      "direction_points": [
+        { "direction_key": 1, "x": 0, "y": 0 },
+        { "direction_key": 2, "x": 128, "y": 0 },
+        { "direction_key": 3, "x": 255, "y": 0 },
+        { "direction_key": 4, "x": 0, "y": 128 },
+        { "direction_key": 5, "x": 128, "y": 128 },
+        { "direction_key": 6, "x": 255, "y": 128 },
+        { "direction_key": 7, "x": 0, "y": 255 },
+        { "direction_key": 8, "x": 128, "y": 255 },
+        { "direction_key": 9, "x": 255, "y": 255 }
+      ],
+      "digital_side_effect_refs": [
+        "digital_side_effect_merge_primary",
+        "digital_side_effect_merge_secondary"
+      ]
+    }
+  ],
+  "routing_rules": [
+    {
+      "rule_id": "merge_rule",
+      "priority": 1,
+      "sublayer": "primary",
+      "modifier_table_ref": "merge_primary_9way",
+      "condition": "primary role resolves through the merge table"
+    }
+  ],
+  "digital_side_effects": [
+    {
+      "effect_id": "digital_side_effect_merge_primary",
+      "priority": 10,
+      "trigger": "primary role active",
+      "side_effect": "primary merge-side effect is design-only",
+      "design_only": true
+    },
+    {
+      "effect_id": "digital_side_effect_merge_secondary",
+      "priority": 20,
+      "trigger": "primary role active",
+      "side_effect": "secondary merge-side effect is design-only",
+      "design_only": true
+    }
+  ],
+  "selection_semantics": {
+    "input_state_shape": {
+      "state_object_name": "input_state",
+      "activation_array_field": "activations",
+      "required_activation_fields": ["input_id", "role_id", "pressed"],
+      "direction_key_field": "resolved_direction_key",
+      "direction_key_domain": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "neutral_direction_key": 5
+    },
+    "activation_representation": {
+      "active_record_field": "activations",
+      "inactive_record_field": "inactive_inputs",
+      "activation_mode": "explicit per-input activation records"
+    },
+    "direction_key_source": {
+      "resolver_field": "direction_resolver",
+      "output_field": "resolved_direction_key",
+      "direction_key_domain": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "neutral_direction_key": 5
+    },
+    "routing_order": [
+      "normalize input_state into activation records",
+      "read resolved_direction_key from the direction resolver output",
+      "rank routing rules by priority, then by sublayer name, then by stable table or rule identifier",
+      "select the first rule whose referenced modifier table exists",
+      "resolve the exact raw coordinate for the selected table and direction key",
+      "merge digital side effects deterministically",
+      "emit trace and explanation metadata with the result"
+    ],
+    "tie_behavior": {
+      "routing_rule_tie_breakers": [
+        "priority",
+        "sublayer",
+        "stable identifier",
+        "document order"
+      ],
+      "table_tie_breakers": [
+        "priority",
+        "table_id",
+        "document order"
+      ],
+      "side_effect_tie_breakers": [
+        "priority",
+        "effect_id",
+        "document order"
+      ],
+      "ambiguous_result_policy": "reject_profile"
+    },
+    "sublayer_selection": {
+      "selection_field": "sublayer",
+      "selection_rule": "first matching routing rule selects the sublayer table",
+      "missing_sublayer_behavior": "reject_profile"
+    },
+    "missing_table_behavior": {
+      "missing_modifier_table_ref": "reject_profile",
+      "missing_direction_point": "emit_missing_table_result",
+      "unmapped_direction_key": "emit_missing_table_result",
+      "output_coordinate": null
+    },
+    "digital_side_effect_merge_behavior": {
+      "merge_order": "routing_rule_order then side-effect priority",
+      "dedupe_key": "effect_id",
+      "conflict_resolution": "deduplicate identical effect_id and fail on conflicting duplicates",
+      "suppression_trace": true
+    },
+    "output_shape": {
+      "result_field": "selection_result",
+      "required_result_fields": [
+        "selection_status",
+        "resolved_direction_key",
+        "selected_rule_id",
+        "selected_table_id",
+        "selected_coordinate",
+        "selected_side_effect_ids",
+        "trace",
+        "explanation"
+      ],
+      "selection_status_values": [
+        "selected",
+        "missing_table",
+        "ambiguous_tie",
+        "invalid_input"
+      ],
+      "trace_item_fields": [
+        "step",
+        "decision",
+        "reason",
+        "inputs"
+      ],
+      "explanation_field": "explanation"
+    },
+    "future_dry_run_examples": [
+      {
+        "case_id": "merge_primary_neutral_5",
+        "input_state": {
+          "state_id": "merge_primary_neutral_5",
+          "activations": [
+            {
+              "input_id": "phys_input_merge_a",
+              "role_id": "primary",
+              "pressed": true
+            }
+          ],
+          "inactive_inputs": [],
+          "resolved_direction_key": 5
+        },
+        "expected_result": {
+          "selection_status": "selected",
+          "resolved_direction_key": 5,
+          "selected_rule_id": "merge_rule",
+          "selected_table_id": "merge_primary_9way",
+          "selected_coordinate": {
+            "x": 128,
+            "y": 128
+          },
+          "selected_side_effect_ids": [
+            "digital_side_effect_merge_primary",
+            "digital_side_effect_merge_secondary"
+          ],
+          "trace": [
+            {
+              "step": "resolve_direction_key",
+              "decision": "use resolver output",
+              "reason": "resolved_direction_key is the only direction source",
+              "inputs": [
+                "resolved_direction_key=5"
+              ]
+            },
+            {
+              "step": "select_rule",
+              "decision": "select first eligible rule",
+              "reason": "ascending priority with deterministic tie rejection",
+              "inputs": [
+                "selected_rule_id=merge_rule",
+                "selected_table_ref=merge_primary_9way"
+              ]
+            },
+            {
+              "step": "select_table",
+              "decision": "use referenced modifier table",
+              "reason": "table reference resolved successfully",
+              "inputs": [
+                "table_id=merge_primary_9way"
+              ]
+            },
+            {
+              "step": "resolve_coordinate",
+              "decision": "use exact raw coordinate from selected table",
+              "reason": "direction key is resolved deterministically",
+              "inputs": [
+                "direction_key=5",
+                "coordinate=128,128"
+              ]
+            },
+            {
+              "step": "merge_digital_side_effects",
+              "decision": "merge by side-effect priority",
+              "reason": "offline evaluation only; side effects are not executed",
+              "inputs": [
+                "selected_side_effect_ids=digital_side_effect_merge_primary,digital_side_effect_merge_secondary"
+              ]
+            }
+          ],
+          "explanation": {
+            "selection_summary": "merge_rule selected deterministically from merge_primary_9way",
+            "priority_summary": "No tie or fallback was needed",
+            "boundary_summary": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication"
+          }
+        },
+        "trace_markers": [
+          "selected_table_id=merge_primary_9way",
+          "selected_side_effect_ids=digital_side_effect_merge_primary,digital_side_effect_merge_secondary",
+          "selected_coordinate=128,128"
+        ]
+      }
+    ]
+  },
+  "source_inspiration": "merge-side-effect dry-run profile",
+  "notes": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication."
+}

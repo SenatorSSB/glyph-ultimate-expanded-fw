@@ -48,6 +48,7 @@ ALLOWED_EXACT_PATHS = {
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "tools/dry_run_coordinate_native_runtime_profile.py",
 }
 
 FORBIDDEN_CHANGED_PATH_RE = re.compile(

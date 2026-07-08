@@ -1,0 +1,44 @@
+{
+  "case_id": "dry_run_negative_missing_table",
+  "profile_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json",
+  "input_state": {
+    "state_id": "dry_run_negative_missing_table",
+    "activations": [
+      {
+        "input_id": "phys_input_min_a",
+        "role_id": "primary",
+        "pressed": true
+      }
+    ],
+    "inactive_inputs": [],
+    "resolved_direction_key": 5,
+    "active_role_ids": [
+      "primary"
+    ],
+    "active_modifier_ids": []
+  },
+  "expected_failure": {
+    "selection_status": "missing_table",
+    "resolved_direction_key": null,
+    "selected_rule_id": null,
+    "selected_table_id": null,
+    "selected_coordinate": null,
+    "selected_side_effect_ids": [],
+    "trace": [
+      {
+        "step": "validate_profile",
+        "decision": "reject_profile",
+        "reason": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json routing_rules references unknown modifier_table_ref missing_9way",
+        "inputs": [
+          "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json"
+        ]
+      }
+    ],
+    "explanation": {
+      "selection_summary": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json routing_rules references unknown modifier_table_ref missing_9way",
+      "priority_summary": "Selection failed before a deterministic winner could be emitted",
+      "boundary_summary": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication"
+    }
+  },
+  "notes": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication."
+}

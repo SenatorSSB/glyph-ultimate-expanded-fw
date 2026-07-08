@@ -1,0 +1,35 @@
+{
+  "case_id": "dry_run_negative_invalid_direction_key",
+  "profile_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
+  "input_state": {
+    "state_id": "dry_run_negative_invalid_direction_key",
+    "activations": [
+      {
+        "input_id": "phys_input_min_a",
+        "role_id": "primary",
+        "pressed": true
+      }
+    ],
+    "inactive_inputs": [],
+    "resolved_direction_key": 10,
+    "active_role_ids": [
+      "primary"
+    ],
+    "active_modifier_ids": []
+  },
+  "expected_failure": {
+    "selection_status": "invalid_input",
+    "resolved_direction_key": null,
+    "selected_rule_id": null,
+    "selected_table_id": null,
+    "selected_coordinate": null,
+    "selected_side_effect_ids": [],
+    "trace": [],
+    "explanation": {
+      "selection_summary": "resolved_direction_key must be 1..9",
+      "priority_summary": "Selection failed before a deterministic winner could be emitted",
+      "boundary_summary": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication"
+    }
+  },
+  "notes": "offline tooling only; generated result is not loaded by firmware; runtime-loaded config remains not implemented; no WebSerial/device write; no persistence/storage; no flashing automation; no active RuntimeConfigView publication."
+}
