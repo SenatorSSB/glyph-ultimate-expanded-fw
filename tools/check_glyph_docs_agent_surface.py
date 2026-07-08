@@ -10,6 +10,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "docs-agent-surface-cleanup"
+CONTRACT_BRANCH = "runtime-config-coordinate-native-profile-contract"
 RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
@@ -37,6 +38,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/generate_source_owned_runtime_config.py",
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_navigation.py",
+    "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
 }
@@ -122,13 +124,14 @@ def validate_branch() -> str:
     branch = current_branch()
     if branch not in {
         EXPECTED_BRANCH,
+        CONTRACT_BRANCH,
         "generator-source-owned-layout-spec-contract",
         AGENT_FRAMEWORK_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
     }:
         fail(f"checker must run on {EXPECTED_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
-    if branch in {EXPECTED_BRANCH, AGENT_FRAMEWORK_BRANCH}:
+    if branch in {EXPECTED_BRANCH, CONTRACT_BRANCH, AGENT_FRAMEWORK_BRANCH}:
         completed = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
             cwd=REPO_ROOT,
@@ -150,7 +153,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH}:
+    if branch in {EXPECTED_BRANCH, CONTRACT_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH}:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
@@ -200,6 +203,9 @@ def validate_boundary(text: str) -> None:
             "Generated active RuntimeConfigView wrapper publication is forbidden",
             "RuntimeConfigView replacement as the customization mechanism is forbidden",
             "Runtime-loaded profile claims are forbidden without separate design",
+            "coordinate-native runtime profile contract scaffold",
+            "design-only and inactive",
+            "browser/protobuf/persistence work may be future infrastructure",
             "hardware proof",
         ),
     )
@@ -215,7 +221,8 @@ def validate_current_state(text: str) -> None:
             "source-owned Y2 layout HARDWARE_PASS",
             "Active RuntimeConfigView selection remains unchanged",
             "Forbidden current active-publication paths",
-            "coordinate-native runtime profile",
+            "coordinate-native runtime profile contract scaffolding",
+            "coordinate_native_runtime_profile_contract.json",
             "Nunchuk remains NOT_TESTED",
             "root cause remains unproven",
         ),
@@ -230,7 +237,7 @@ def validate_roadmap(text: str) -> None:
         text,
         (
             "source-owned realization generator",
-            "coordinate-native runtime profile design",
+            "coordinate-native runtime profile contract scaffolding",
             "future browser/protobuf/persistence backend",
             "after the runtime model exists",
         ),
@@ -245,8 +252,11 @@ def validate_runtime_readme(text: str) -> None:
             "Current Known-Good State",
             "Safe Source-Owned Realization Path",
             "Forbidden Active Publication Paths",
-            "Future Coordinate-Native Runtime Profile Plan",
+            "Coordinate-Native Runtime Profile Contract",
             "Archived Diagnostics",
+            "coordinate_native_runtime_profile_contract.md",
+            "coordinate_native_runtime_profile_contract.json",
+            "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py",
         ),
     )
     before_archive = text.split("## Archived Diagnostics", 1)[0]

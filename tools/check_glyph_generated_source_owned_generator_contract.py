@@ -39,6 +39,8 @@ SPEC_INPUT_MODE = "--emit-from-layout-spec"
 ALLOWED_TOOL_PATHS = {
     "tools/generate_source_owned_runtime_config.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
+    "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+    "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_diagnostic_active_storage_published.py",

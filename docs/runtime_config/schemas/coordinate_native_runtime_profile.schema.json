@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Glyph Coordinate-Native Runtime Profile Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet",
+    "branch",
+    "profile_variant",
+    "contract_status",
+    "design_only_contract",
+    "active_behavior_changed",
+    "hardware_test_required_before_merge",
+    "runtime_loaded_config_implemented",
+    "persistent_storage_implemented",
+    "webserial_device_write_implemented",
+    "backend_config_pb_write_path_implemented",
+    "flashing_automation_implemented",
+    "nunchuk_status",
+    "root_cause_proven",
+    "version_metadata",
+    "capability_metadata",
+    "physical_input_ids",
+    "roles",
+    "direction_resolver",
+    "exact_raw_coordinates",
+    "modifier_tables",
+    "routing_rules",
+    "digital_side_effects"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "packet": { "const": "coordinate_native_runtime_profile_contract" },
+    "branch": { "type": "string", "minLength": 1 },
+    "profile_variant": { "type": "string", "minLength": 1 },
+    "contract_status": { "const": "inactive_design_only" },
+    "design_only_contract": { "const": true },
+    "active_behavior_changed": { "const": false },
+    "hardware_test_required_before_merge": { "const": false },
+    "runtime_loaded_config_implemented": { "const": false },
+    "persistent_storage_implemented": { "const": false },
+    "webserial_device_write_implemented": { "const": false },
+    "backend_config_pb_write_path_implemented": { "const": false },
+    "flashing_automation_implemented": { "const": false },
+    "nunchuk_status": { "const": "NOT_TESTED" },
+    "root_cause_proven": { "const": false },
+    "version_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "contract_revision",
+        "profile_model_version",
+        "capability_revision"
+      ],
+      "properties": {
+        "schema_version": { "const": 1 },
+        "contract_revision": { "type": "integer", "minimum": 1 },
+        "profile_model_version": { "type": "string", "minLength": 1 },
+        "capability_revision": { "type": "string", "minLength": 1 }
+      }
+    },
+    "capability_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physical_input_ids",
+        "roles",
+        "direction_resolver",
+        "direction_keys_1_to_9",
+        "neutral_5",
+        "exact_raw_coordinates",
+        "nine_way_modifier_tables",
+        "sublayers",
+        "priorities",
+        "digital_side_effects"
+      ],
+      "properties": {
+        "physical_input_ids": { "const": true },
+        "roles": { "const": true },
+        "direction_resolver": { "const": true },
+        "direction_keys_1_to_9": { "const": true },
+        "neutral_5": { "const": true },
+        "exact_raw_coordinates": { "const": true },
+        "nine_way_modifier_tables": { "const": true },
+        "sublayers": { "const": true },
+        "priorities": { "const": true },
+        "digital_side_effects": { "const": true }
+      }
+    },
+    "physical_input_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["input_id", "kind", "role"],
+        "properties": {
+          "input_id": { "type": "string", "minLength": 1 },
+          "kind": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role_id", "purpose"],
+        "properties": {
+          "role_id": { "type": "string", "minLength": 1 },
+          "purpose": { "type": "string", "minLength": 1 },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "direction_resolver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolver_id",
+        "direction_keys",
+        "neutral_direction_key",
+        "resolved_direction_key_range",
+        "mapping_rule"
+      ],
+      "properties": {
+        "resolver_id": { "type": "string", "minLength": 1 },
+        "direction_keys": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": { "type": "integer", "minimum": 1, "maximum": 9 }
+        },
+        "neutral_direction_key": { "const": 5 },
+        "resolved_direction_key_range": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "integer", "minimum": 1, "maximum": 9 }
+        },
+        "mapping_rule": { "type": "string", "minLength": 1 }
+      }
+    },
+    "exact_raw_coordinates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["direction_key", "x", "y"],
+        "properties": {
+          "direction_key": { "type": "integer", "minimum": 1, "maximum": 9 },
+          "x": { "type": "integer", "minimum": 0, "maximum": 255 },
+          "y": { "type": "integer", "minimum": 0, "maximum": 255 }
+        }
+      }
+    },
+    "modifier_tables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["table_id", "table_name", "priority", "sublayer", "direction_points"],
+        "properties": {
+          "table_id": { "type": "string", "minLength": 1 },
+          "table_name": { "type": "string", "minLength": 1 },
+          "priority": { "type": "integer", "minimum": 0 },
+          "sublayer": { "type": "string", "minLength": 1 },
+          "direction_points": {
+            "type": "array",
+            "minItems": 9,
+            "maxItems": 9,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["direction_key", "x", "y"],
+              "properties": {
+                "direction_key": { "type": "integer", "minimum": 1, "maximum": 9 },
+                "x": { "type": "integer", "minimum": 0, "maximum": 255 },
+                "y": { "type": "integer", "minimum": 0, "maximum": 255 }
+              }
+            }
+          },
+          "digital_side_effect_refs": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "routing_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_id", "priority", "sublayer", "modifier_table_ref"],
+        "properties": {
+          "rule_id": { "type": "string", "minLength": 1 },
+          "priority": { "type": "integer", "minimum": 0 },
+          "sublayer": { "type": "string", "minLength": 1 },
+          "modifier_table_ref": { "type": "string", "minLength": 1 },
+          "condition": { "type": "string" }
+        }
+      }
+    },
+    "digital_side_effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["effect_id", "priority", "trigger", "side_effect"],
+        "properties": {
+          "effect_id": { "type": "string", "minLength": 1 },
+          "priority": { "type": "integer", "minimum": 0 },
+          "trigger": { "type": "string", "minLength": 1 },
+          "side_effect": { "type": "string", "minLength": 1 },
+          "design_only": { "const": true }
+        }
+      }
+    },
+    "source_inspiration": { "type": "string" },
+    "notes": { "type": "string" }
+  }
+}

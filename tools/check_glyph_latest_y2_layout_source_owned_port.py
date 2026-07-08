@@ -48,6 +48,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     CHECKER_REL,
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
+    "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_docs_navigation.py",
 }
@@ -244,16 +245,16 @@ def current_branch() -> str:
 def base_branch_for(branch: str) -> str:
     if branch == RESULT_BRANCH:
         return IMPLEMENTATION_BRANCH
-    if branch in {DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH}:
+    if branch in {DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH, "runtime-config-coordinate-native-profile-contract"}:
         return BASE_BRANCH
     if branch == MERGED_BRANCH:
         return MERGED_BRANCH
-    fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
+    fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, {MERGED_BRANCH}, or runtime-config-coordinate-native-profile-contract, got {branch}")
 
 
 def validate_branch() -> tuple[str, str]:
     branch = current_branch()
-    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH}:
+    if branch not in {RESULT_BRANCH, DOCS_SURFACE_BRANCH, AGENT_FRAMEWORK_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH, "runtime-config-coordinate-native-profile-contract"}:
         fail(f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     base_branch = base_branch_for(branch)
     result = subprocess.run(

@@ -51,6 +51,8 @@ def main() -> int:
         "docs/export/README.md",
         "docs/runtime_config/README.md",
         "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+        "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json",
         "docs/agent_framework/README.md",
         "docs/agent_framework/MODEL_ROUTING.md",
         "docs/agent_framework/SUPERVISOR_CONTRACT.md",
@@ -125,6 +127,8 @@ def main() -> int:
             "Firmware flashing automation is not implemented",
             "No nunchuk validation is claimed",
             "No root-cause claim is made",
+            "coordinate-native runtime profile contract scaffolding",
+            "coordinate_native_runtime_profile_contract.json",
         ),
     )
 
@@ -133,10 +137,10 @@ def main() -> int:
         (
             "Phase 0 - Preserve Current Source-Owned Firmware Baseline",
             "Phase 1 - Source-Owned Realization Generator",
-            "Phase 2 - Coordinate-Native Runtime Profile Design",
+            "Phase 2 - Coordinate-Native Runtime Profile Contract Scaffolding",
             "Phase 3 - Future Browser/Protobuf/Persistence Backend",
             "source-owned realization generator",
-            "coordinate-native runtime profile",
+            "coordinate-native runtime profile contract scaffolding",
             "browser/protobuf/persistence",
             "generated active wrapper",
             "runtime-config-latest-y2-layout-source-owned-port-hardware-result",
@@ -149,9 +153,11 @@ def main() -> int:
             "Current Known-Good State",
             "Safe Source-Owned Realization Path",
             "Forbidden Active Publication Paths",
-            "Future Coordinate-Native Runtime Profile Plan",
+            "Coordinate-Native Runtime Profile Contract",
             "Archived Diagnostics",
-            "latest_y2_layout_source_owned_port.md",
+            "coordinate_native_runtime_profile_contract.md",
+            "coordinate_native_runtime_profile_contract.json",
+            "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py",
             "RuntimeConfigView replacement is not used",
             "candidate.view is not active",
             "RAM-backed active table publication is not used",
@@ -166,6 +172,8 @@ def main() -> int:
             "Generated active RuntimeConfigView wrapper publication is forbidden",
             "RuntimeConfigView replacement as the customization mechanism is forbidden",
             "Runtime-loaded profile claims are forbidden",
+            "design-only and inactive",
+            "browser/protobuf/persistence work may be future infrastructure",
         ),
     )
 

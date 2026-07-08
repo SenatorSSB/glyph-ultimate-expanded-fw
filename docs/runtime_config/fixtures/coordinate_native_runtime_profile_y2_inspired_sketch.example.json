@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "packet": "coordinate_native_runtime_profile_contract",
+  "branch": "runtime-config-coordinate-native-profile-contract",
+  "profile_variant": "y2_inspired_sketch",
+  "contract_status": "inactive_design_only",
+  "design_only_contract": true,
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false,
+  "version_metadata": {
+    "schema_version": 1,
+    "contract_revision": 1,
+    "profile_model_version": "v0",
+    "capability_revision": "v0"
+  },
+  "capability_metadata": {
+    "physical_input_ids": true,
+    "roles": true,
+    "direction_resolver": true,
+    "direction_keys_1_to_9": true,
+    "neutral_5": true,
+    "exact_raw_coordinates": true,
+    "nine_way_modifier_tables": true,
+    "sublayers": true,
+    "priorities": true,
+    "digital_side_effects": true
+  },
+  "physical_input_ids": [
+    {
+      "input_id": "phys_input_y2_a",
+      "kind": "button",
+      "role": "y2_primary"
+    },
+    {
+      "input_id": "phys_input_y2_b",
+      "kind": "button",
+      "role": "y2_modifier"
+    },
+    {
+      "input_id": "phys_input_y2_c",
+      "kind": "stick",
+      "role": "y2_directional"
+    }
+  ],
+  "roles": [
+    {
+      "role_id": "y2_primary",
+      "purpose": "Y2-inspired primary role sketch"
+    },
+    {
+      "role_id": "y2_modifier",
+      "purpose": "Y2-inspired modifier role sketch"
+    },
+    {
+      "role_id": "y2_directional",
+      "purpose": "Y2-inspired directional resolver sketch"
+    }
+  ],
+  "direction_resolver": {
+    "resolver_id": "y2_inspired_resolver",
+    "direction_keys": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "neutral_direction_key": 5,
+    "resolved_direction_key_range": [1, 9],
+    "mapping_rule": "Y2-inspired sketch only; active behavior is not claimed"
+  },
+  "exact_raw_coordinates": [
+    { "direction_key": 1, "x": 69, "y": 78 },
+    { "direction_key": 2, "x": 128, "y": 78 },
+    { "direction_key": 3, "x": 187, "y": 78 },
+    { "direction_key": 4, "x": 61, "y": 128 },
+    { "direction_key": 5, "x": 128, "y": 128 },
+    { "direction_key": 6, "x": 195, "y": 128 },
+    { "direction_key": 7, "x": 61, "y": 164 },
+    { "direction_key": 8, "x": 128, "y": 174 },
+    { "direction_key": 9, "x": 195, "y": 164 }
+  ],
+  "modifier_tables": [
+    {
+      "table_id": "y2_primary",
+      "table_name": "Y2-inspired primary sketch",
+      "priority": 10,
+      "sublayer": "y2_primary",
+      "direction_points": [
+        { "direction_key": 1, "x": 69, "y": 78 },
+        { "direction_key": 2, "x": 128, "y": 78 },
+        { "direction_key": 3, "x": 187, "y": 78 },
+        { "direction_key": 4, "x": 61, "y": 128 },
+        { "direction_key": 5, "x": 128, "y": 128 },
+        { "direction_key": 6, "x": 195, "y": 128 },
+        { "direction_key": 7, "x": 61, "y": 164 },
+        { "direction_key": 8, "x": 128, "y": 174 },
+        { "direction_key": 9, "x": 195, "y": 164 }
+      ],
+      "digital_side_effect_refs": [
+        "digital_side_effect_y2_primary"
+      ]
+    },
+    {
+      "table_id": "y2_tilt",
+      "table_name": "Y2-inspired tilt sketch",
+      "priority": 20,
+      "sublayer": "y2_tilt",
+      "direction_points": [
+        { "direction_key": 1, "x": 72, "y": 84 },
+        { "direction_key": 2, "x": 128, "y": 84 },
+        { "direction_key": 3, "x": 184, "y": 84 },
+        { "direction_key": 4, "x": 64, "y": 128 },
+        { "direction_key": 5, "x": 128, "y": 128 },
+        { "direction_key": 6, "x": 192, "y": 128 },
+        { "direction_key": 7, "x": 64, "y": 168 },
+        { "direction_key": 8, "x": 128, "y": 176 },
+        { "direction_key": 9, "x": 192, "y": 168 }
+      ],
+      "digital_side_effect_refs": [
+        "digital_side_effect_y2_tilt"
+      ]
+    }
+  ],
+  "routing_rules": [
+    {
+      "rule_id": "y2_primary_rule",
+      "priority": 10,
+      "sublayer": "y2_primary",
+      "modifier_table_ref": "y2_primary",
+      "condition": "Y2-inspired primary sketch only"
+    },
+    {
+      "rule_id": "y2_tilt_rule",
+      "priority": 20,
+      "sublayer": "y2_tilt",
+      "modifier_table_ref": "y2_tilt",
+      "condition": "Y2-inspired tilt sketch only"
+    }
+  ],
+  "digital_side_effects": [
+    {
+      "effect_id": "digital_side_effect_y2_primary",
+      "priority": 10,
+      "trigger": "y2_primary role active",
+      "side_effect": "Y2-inspired digital side effect is design-only",
+      "design_only": true
+    },
+    {
+      "effect_id": "digital_side_effect_y2_tilt",
+      "priority": 20,
+      "trigger": "y2_tilt role active",
+      "side_effect": "Y2-inspired tilt side effect is design-only",
+      "design_only": true
+    }
+  ],
+  "source_inspiration": "current_y2_layout_source_owned_port",
+  "notes": "Y2-inspired sketch only. Active behavior is not claimed."
+}

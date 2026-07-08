@@ -44,7 +44,14 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json",
     "docs/runtime_config/generated_source_owned_baseline_artifact.md",
     "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json",
+    "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+    "docs/runtime_config/schemas/coordinate_native_runtime_profile.schema.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
     "docs/runtime_config/README.md",
+    "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
 }
@@ -53,10 +60,13 @@ ALLOWED_CHECKER_PATHS = {
     ACTIVE_STORAGE_CHECKER_REL,
     SCHEMA_SCAFFOLD_CHECKER_REL,
     "tools/check_glyph_docs_agent_surface.py",
+    "tools/check_glyph_docs_navigation.py",
+    "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
+    "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/generate_source_owned_runtime_config.py",
 }
 
@@ -201,6 +211,7 @@ def validate_branch() -> str:
     if branch not in {
         EXPECTED_BRANCH,
         "generator-source-owned-layout-spec-contract",
+        "runtime-config-coordinate-native-profile-contract",
         DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH,
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
