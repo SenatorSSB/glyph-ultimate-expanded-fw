@@ -17,6 +17,7 @@ DOWNSTREAM_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-arti
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
 
 DESIGN_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_realization_design.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_realization_design.json"
@@ -50,6 +51,13 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_neutral_5.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_direction_key_outside_range.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_raw_coordinate_outside_byte_range.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_malformed_9way_table.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_capability_metadata.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json",
     "docs/runtime_config/README.md",
     "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
     "docs/CURRENT_STATE.md",
@@ -216,7 +224,7 @@ def validate_branch() -> str:
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
-    }:
+    } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
             f"{DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH}, "
@@ -250,7 +258,9 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH, DOWNSTREAM_ARTIFACT_INSTALL_BRANCH}:
+    if branch in {EXPECTED_BRANCH, DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH, DOWNSTREAM_ARTIFACT_INSTALL_BRANCH} or any(
+        branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
+    ):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import subprocess
@@ -15,6 +16,7 @@ EXPECTED_BRANCH = "runtime-config-coordinate-native-profile-contract"
 RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
 
 CONTRACT_DOC = REPO_ROOT / "docs/runtime_config/coordinate_native_runtime_profile_contract.md"
 SCHEMA = REPO_ROOT / "docs/runtime_config/schemas/coordinate_native_runtime_profile.schema.json"
@@ -22,6 +24,36 @@ FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_pr
 MINIMAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json"
 NINE_WAY_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json"
 Y2_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json"
+NEGATIVE_FIXTURE_REASON_PAIRS: tuple[tuple[Path, str], ...] = (
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_neutral_5.json",
+        "neutral_direction_key must be 5",
+    ),
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_direction_key_outside_range.json",
+        "direction_key must be 1..9",
+    ),
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_raw_coordinate_outside_byte_range.json",
+        "coordinates must stay in the byte range",
+    ),
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_malformed_9way_table.json",
+        "must contain exactly 9 points",
+    ),
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json",
+        "routing_rules priorities must be strictly increasing",
+    ),
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_capability_metadata.json",
+        "missing required field capability_metadata",
+    ),
+    (
+        REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json",
+        "runtime_loaded_config_implemented must be False",
+    ),
+)
 README = REPO_ROOT / "docs/runtime_config/README.md"
 BOUNDARY = REPO_ROOT / "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md"
 CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
@@ -240,7 +272,9 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH}:
+    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH} and not any(
+        branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
+    ):
         fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -263,7 +297,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH:
+    if branch == EXPECTED_BRANCH or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
@@ -368,14 +402,30 @@ def validate_points(points: list[dict[str, Any]], label: str) -> None:
         fail(f"{label} must cover direction keys 1..9")
 
 
+def validate_profile_variant_rules(profile_variant: Any) -> tuple[int, int, int, bool]:
+    if not isinstance(profile_variant, str):
+        fail("profile_variant must be a string")
+    variant_rules = {
+        "contract_manifest": (3, 3, 1, True),
+        "minimal_profile": (1, 1, 1, False),
+        "9way_modifier_table_profile": (2, 2, 2, False),
+        "y2_inspired_sketch": (3, 3, 2, False),
+    }
+    try:
+        return variant_rules[profile_variant]
+    except KeyError as exc:
+        fail(f"unknown profile_variant: {profile_variant}")
+        raise AssertionError("unreachable") from exc
+
+
 def validate_profile_fixture(
     fixture: dict[str, Any],
     *,
     label: str,
-    expect_variant: str,
-    min_inputs: int,
-    min_roles: int,
-    min_tables: int,
+    expect_variant: str | None = None,
+    min_inputs: int | None = None,
+    min_roles: int | None = None,
+    min_tables: int | None = None,
     allow_legacy_evidence: bool = False,
 ) -> None:
     for key, expected in CONTRACT_STRING_FIELDS.items():
@@ -391,8 +441,17 @@ def validate_profile_fixture(
         fail(f"{label} schema_version must be 1")
     if fixture.get("branch") != EXPECTED_BRANCH:
         fail(f"{label} branch must be {EXPECTED_BRANCH}")
-    if fixture.get("profile_variant") != expect_variant:
+    profile_variant = fixture.get("profile_variant")
+    if expect_variant is not None and profile_variant != expect_variant:
         fail(f"{label} profile_variant must be {expect_variant!r}")
+    variant_min_inputs, variant_min_roles, variant_min_tables, variant_allow_legacy = validate_profile_variant_rules(profile_variant)
+    if min_inputs is None:
+        min_inputs = variant_min_inputs
+    if min_roles is None:
+        min_roles = variant_min_roles
+    if min_tables is None:
+        min_tables = variant_min_tables
+    allow_legacy_evidence = allow_legacy_evidence or variant_allow_legacy
     version_metadata = fixture.get("version_metadata")
     if not isinstance(version_metadata, dict):
         fail(f"{label} version_metadata must be an object")
@@ -465,8 +524,8 @@ def validate_profile_fixture(
         if not isinstance(rule.get("priority"), int) or rule["priority"] < 0:
             fail(f"{label} routing_rules priority must be a non-negative integer")
         priorities.append(rule["priority"])
-    if priorities != sorted(priorities):
-        fail(f"{label} routing_rules priorities must be sorted")
+    if priorities != sorted(priorities) or len(set(priorities)) != len(priorities):
+        fail(f"{label} routing_rules priorities must be strictly increasing")
     side_effects = fixture.get("digital_side_effects")
     if not isinstance(side_effects, list) or not side_effects:
         fail(f"{label} digital_side_effects must be a non-empty list")
@@ -503,6 +562,27 @@ def validate_profile_fixture(
         v0_path = fixture.get("v0_production_path")
         if not isinstance(v0_path, list) or len(v0_path) != 3:
             fail(f"{label} v0_production_path must be a 3-item list")
+
+
+def validate_profile_file(path: Path) -> None:
+    path = path.resolve()
+    fixture = load_json_object(path)
+    validate_profile_fixture(fixture, label=rel(path))
+
+
+def run_negative_fixture_checks() -> None:
+    for path, expected_reason in NEGATIVE_FIXTURE_REASON_PAIRS:
+        try:
+            validate_profile_file(path)
+        except CoordinateNativeRuntimeProfileContractError as exc:
+            message = str(exc)
+            if expected_reason not in message:
+                fail(
+                    f"{rel(path)} failed with unexpected reason: {message!r} "
+                    f"(expected substring {expected_reason!r})"
+                )
+        else:
+            fail(f"{rel(path)} unexpectedly validated successfully")
 
 
 def validate_docs() -> None:
@@ -566,7 +646,35 @@ def validate_contract_fixture_and_docs() -> None:
     require_phrases(rel(BOUNDARY), read_required(BOUNDARY), REQUIRED_BOUNDARY_PHRASES)
 
 
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument(
+        "--validate-profile",
+        type=Path,
+        help="Validate one coordinate-native runtime profile JSON file",
+    )
+    group.add_argument(
+        "--check-negative-fixtures",
+        action="store_true",
+        help="Validate the invalid fixture corpus and assert each expected failure reason",
+    )
+    return parser
+
+
 def main() -> int:
+    args = build_arg_parser().parse_args()
+    if args.validate_profile is not None:
+        validate_profile_file(args.validate_profile)
+        print("glyph_coordinate_native_runtime_profile_contract: PROFILE PASS")
+        print(f"- fixture: {rel(args.validate_profile.resolve())}")
+        return 0
+    if args.check_negative_fixtures:
+        run_negative_fixture_checks()
+        print("glyph_coordinate_native_runtime_profile_contract: NEGATIVE FIXTURES PASS")
+        for path, _ in NEGATIVE_FIXTURE_REASON_PAIRS:
+            print(f"- {rel(path)}")
+        return 0
     branch = validate_branch()
     validate_contract_schema()
     validate_contract_fixture()
