@@ -140,8 +140,30 @@ the neutral app-owned profile remains canonical and firmware-independent.
 The earlier coordinate-native runtime plan remains historical background for
 this lane.
 
-Validate the contract scaffold with
-`python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py`.
+Validate the contract scaffold with:
+
+```bash
+python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py
+```
+
+Validate one profile JSON file with:
+
+```bash
+python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
+  --validate-profile docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json
+```
+
+Assert the invalid fixture corpus still fails for the expected reasons with:
+
+```bash
+python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
+  --check-negative-fixtures
+```
+
+The invalid fixture corpus covers missing neutral `5`, out-of-range direction
+keys, out-of-range raw coordinates, malformed 9-way tables, duplicate priority
+ordering, missing capability metadata, and design-only fixtures that
+incorrectly claim runtime-loaded or device-write behavior.
 
 ## Archived Diagnostics
 

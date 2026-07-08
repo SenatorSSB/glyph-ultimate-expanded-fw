@@ -31,8 +31,10 @@ implementation work. Detailed historical evidence remains indexed from
 - Source-owned table/routing source path passed hardware for this layout.
 - Prior active-publication HARDWARE_FAIL evidence remains archived evidence,
   not current work.
-- Nunchuk remains NOT_TESTED.
-- The low-level root cause remains unproven.
+- Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the
+  coordinate-native runtime profile contract now has a standalone
+  repo-enforced profile validator and an invalid-fixture corpus with expected
+  failure reasons.
 
 ## Current Implementation Boundary
 
@@ -101,6 +103,7 @@ implementation work. Detailed historical evidence remains indexed from
 ## Readiness
 
 - Ready for docs/tools and checker work: yes.
+- Ready for coordinate-native negative-corpus and validator follow-up work: yes.
 - Ready for source-owned generator/evaluator design: yes, when source-backed and
   scoped outside active firmware behavior.
 - Hardware test required for this docs/checker cleanup: no.

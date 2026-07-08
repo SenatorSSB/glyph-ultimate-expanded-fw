@@ -113,6 +113,12 @@ Current contract scaffold packet:
 `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with
 `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 
+Current repo-enforced tooling for this lane includes:
+
+- `python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py`
+- `python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --validate-profile <path>`
+- `python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-negative-fixtures`
+
 The source-owned Y2 layout HARDWARE_PASS and prior active-publication
 HARDWARE_FAIL evidence are the evidence base for this plan. The future target
 is a coordinate-native runtime profile. Browser/protobuf/persistence as future
@@ -122,6 +128,10 @@ canonical and firmware-independent. Firmware should not own game semantics.
 Stop conditions: runtime-loaded profile claims, active publication changes,
 neutral profile schema changes, or game-semantic claims without explicit
 approval and source authority.
+
+Next safe queue: keep the invalid corpus and standalone validator aligned with
+the contract text; consider an offline resolver dry-run only after a
+deterministic selection model is written down in the contract.
 
 ## Phase 3 - Future Browser/Protobuf/Persistence Backend
 
