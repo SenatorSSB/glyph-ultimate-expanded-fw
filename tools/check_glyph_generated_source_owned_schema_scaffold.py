@@ -17,7 +17,7 @@ DOWNSTREAM_ARTIFACT_INSTALL_BRANCH = "runtime-config-generated-source-owned-arti
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-", "docs-runtime-config-")
 
 SCAFFOLD_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_schema_scaffold.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json"
@@ -53,6 +53,7 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/README.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
+    "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
 }
 ALLOWED_CHECKER_PATHS = {
     CHECKER_REL,
@@ -66,6 +67,7 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_docs_agent_surface.py",
+    "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/generate_source_owned_runtime_config.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",

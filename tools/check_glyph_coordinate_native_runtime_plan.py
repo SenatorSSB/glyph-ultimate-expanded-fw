@@ -17,7 +17,7 @@ DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-", "docs-runtime-config-")
 
 PLAN_DOC = REPO_ROOT / "docs/runtime_config/glyph_coordinate_native_runtime_plan.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/glyph_coordinate_native_runtime_plan.json"
@@ -32,6 +32,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/AGENT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
+    "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
     "tools/generate_source_owned_runtime_config.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
@@ -46,6 +47,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_docs_navigation.py",
+    "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/agent_framework/")

@@ -15,7 +15,7 @@ RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-", "docs-runtime-config-")
 
 AGENT_CONTEXT = REPO_ROOT / "docs/AGENT_CONTEXT.md"
 BOUNDARY = REPO_ROOT / "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md"
@@ -42,6 +42,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
+    "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
 }
@@ -55,6 +56,13 @@ FORBIDDEN_ATTRIBUTION_TERMS = (
     "glyph-remapper",
     "HayBox Remapper",
     "github.com/",
+)
+
+FORBIDDEN_ACTIVE_CLAIMS = (
+    "generated artifact is active",
+    "generated runtimeconfigview wrapper is safe",
+    "generated runtimeconfigview wrapper safe",
+    "generated source-owned tables are active",
 )
 
 
@@ -318,6 +326,7 @@ def validate_docs() -> None:
     }
     for path in (AGENT_CONTEXT, BOUNDARY, CURRENT_STATE, ROADMAP, RUNTIME_README, ARCHIVE_INDEX):
         reject_forbidden_attribution(rel(path), docs[path])
+        reject_phrases(rel(path), docs[path], FORBIDDEN_ACTIVE_CLAIMS)
 
     validate_agent_context(docs[AGENT_CONTEXT])
     validate_boundary(docs[BOUNDARY])

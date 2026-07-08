@@ -16,7 +16,7 @@ RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 DOWNSTREAM_BASELINE_ARTIFACT_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-", "docs-runtime-config-")
 
 INSTALL_DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_artifact_install.md"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json"
@@ -48,10 +48,12 @@ ALLOWED_EXACT_PATHS = {
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
+    "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
 }
 
 FORBIDDEN_CHANGED_PATH_RE = re.compile(

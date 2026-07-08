@@ -32,6 +32,7 @@ implementation work. Detailed historical evidence remains indexed from
 - Prior active-publication HARDWARE_FAIL evidence remains archived evidence,
   not current work.
 - Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, invalid/positive fixture corpora with expected results and failure reasons, and fixture-backed offline dry-run coverage for neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths tied to current source-backed Y2/Tilt3 evidence.
+- The current docs/checker queue also includes `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and `tools/check_glyph_runtime_config_activation_alternatives.py`, which classify A as currently hardware-passed, B as plausible but requiring source design + build + hardware, C-E as explicitly forbidden under current evidence, and F as future architecture only.
 
 ## Current Implementation Boundary
 
@@ -66,6 +67,10 @@ implementation work. Detailed historical evidence remains indexed from
 ## Forward Direction
 
 - Next docs/tools direction: source-owned realization generator hardening.
+- Current docs/checker queue also includes
+  `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and
+  `tools/check_glyph_runtime_config_activation_alternatives.py` for A-F
+  activation comparison and claim-invariant hardening.
 - Next safe queue: keep `--check-offline-pipeline`, `--check-offline-artifact-bundle-manifest`, and `--check-offline-export-package` aligned with their fixtures and existing bridge/generator outputs; consider an inert generated-source-owned artifact index only if it helps future generator outputs.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
@@ -81,6 +86,8 @@ implementation work. Detailed historical evidence remains indexed from
   including deterministic selection semantics and offline dry-run fixtures.
 - Ready for source-owned generator/evaluator design: yes, when source-backed and
   scoped outside active firmware behavior.
+- Current lane before active behavior: blocked until a selected activation
+  strategy is implemented and hardware-gated.
 - Hardware test required for this docs/checker cleanup: no.
 - Hardware test required for future behavior-changing firmware source deltas:
   yes, before merge.

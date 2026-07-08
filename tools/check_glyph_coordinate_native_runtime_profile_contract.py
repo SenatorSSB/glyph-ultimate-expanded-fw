@@ -25,7 +25,7 @@ EXPECTED_BRANCH = "runtime-config-coordinate-native-selection-semantics"
 RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-", "docs-runtime-config-")
 
 CONTRACT_DOC = REPO_ROOT / "docs/runtime_config/coordinate_native_runtime_profile_contract.md"
 SCHEMA = REPO_ROOT / "docs/runtime_config/schemas/coordinate_native_runtime_profile.schema.json"
@@ -131,6 +131,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
+    "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
@@ -145,6 +146,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
+    "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_schema_scaffold.py",

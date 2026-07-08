@@ -65,6 +65,12 @@ Current generated-source-owned packets in scope:
 `generated_source_owned_layout_spec.md`,
 `generated_source_owned_artifact_install.md`, and
 `generated_source_owned_baseline_artifact.md`.
+Current docs/checker addendum:
+`docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and
+`tools/check_glyph_runtime_config_activation_alternatives.py` harden claim
+language across A-F activation comparisons without approving any runtime path.
+The same addendum keeps the current lane blocked before active behavior until a
+selected activation strategy is implemented and hardware-gated.
 Generator lane references in scope:
 `generated_source_owned_generator_input.example.json`,
 `fixtures/generated_source_owned_layout_spec.example.json`,

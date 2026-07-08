@@ -52,6 +52,7 @@ def main() -> int:
         "docs/runtime_config/README.md",
         "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
         "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+        "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
         "docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json",
         "docs/agent_framework/README.md",
         "docs/agent_framework/MODEL_ROUTING.md",
