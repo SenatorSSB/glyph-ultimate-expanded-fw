@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "packet": "coordinate_native_offline_artifact_bundle_manifest",
+  "branch": "codex/runtime-config-coordinate-native-offline-artifact-bundle-manifest",
+  "bundle_kind": "offline_artifact_bundle_index",
+  "bundle_status": "offline_only",
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "no_device_write_claim": true,
+  "no_persistence_claim": true,
+  "no_flashing_claim": true,
+  "no_runtime_loaded_config_claim": true,
+  "no_active_publication_claim": true,
+  "source_profile_fixture": {
+    "fixture_id": "coordinate_native_runtime_profile_y2_inspired_sketch",
+    "fixture_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json"
+  },
+  "bridge_output_layout_spec_fixture": {
+    "fixture_id": "generated_source_owned_layout_spec",
+    "fixture_path": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
+  },
+  "generated_artifact_fixture": {
+    "fixture_id": "generated_source_owned_runtime_config_example",
+    "fixture_path": "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp"
+  },
+  "dry_run_case_fixtures": [
+    {
+      "fixture_id": "y2_primary_direction_5",
+      "fixture_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_neutral_5.json"
+    },
+    {
+      "fixture_id": "y2_primary_direction_2",
+      "fixture_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json"
+    },
+    {
+      "fixture_id": "y2_primary_direction_7",
+      "fixture_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json"
+    },
+    {
+      "fixture_id": "y2_tilt_direction_8",
+      "fixture_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json"
+    }
+  ],
+  "checker_commands": [
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-offline-pipeline",
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-dry-run-fixtures",
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-layout-spec-bridge"
+  ],
+  "notes": "offline provenance/index manifest only; not a device-write manifest; not a flashing manifest; manual build/hardware gate required before active firmware behavior."
+}
