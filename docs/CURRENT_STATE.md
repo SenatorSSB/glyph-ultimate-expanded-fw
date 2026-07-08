@@ -31,10 +31,7 @@ implementation work. Detailed historical evidence remains indexed from
 - Source-owned table/routing source path passed hardware for this layout.
 - Prior active-publication HARDWARE_FAIL evidence remains archived evidence,
   not current work.
-- Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the
-  coordinate-native runtime profile contract now has a standalone
-  repo-enforced profile validator, deterministic selection semantics, and an
-  invalid-fixture corpus with expected failure reasons.
+- Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, and an invalid-fixture corpus with expected failure reasons.
 
 ## Current Implementation Boundary
 
@@ -96,7 +93,6 @@ implementation work. Detailed historical evidence remains indexed from
 - Next safe queue: keep the offline generator smoke command documented and maintain branch-independent checker coverage; consider an inert generated-source-owned artifact index only if it helps future generator outputs.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
-- The contract scaffold now includes deterministic selection semantics and annotated future dry-run examples.
 - Browser/protobuf/persistence as future infrastructure is likely solvable, but it follows the runtime model and does not define the canonical profile.
 - The neutral app-owned profile remains canonical; firmware remains a
   deterministic coordinate-output backend and must not own game semantics.
