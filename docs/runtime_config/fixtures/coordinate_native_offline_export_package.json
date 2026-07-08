@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "packet": "coordinate_native_offline_export_package",
+  "branch": "codex/runtime-config-coordinate-native-offline-export-package-fixtures",
+  "package_kind": "offline_export_package_index",
+  "package_status": "offline_only",
+  "active_behavior_changed": false,
+  "hardware_test_required_before_merge": false,
+  "runtime_loaded_config_implemented": false,
+  "persistent_storage_implemented": false,
+  "webserial_device_write_implemented": false,
+  "backend_config_pb_write_path_implemented": false,
+  "flashing_automation_implemented": false,
+  "manual_build_hardware_gate_required_before_active_firmware_behavior": true,
+  "no_device_write_claim": true,
+  "no_persistence_claim": true,
+  "no_flashing_claim": true,
+  "no_runtime_loaded_config_claim": true,
+  "no_active_publication_claim": true,
+  "package_metadata": {
+    "package_id": "coordinate_native_offline_export_package_v1",
+    "package_name": "coordinate_native_offline_export_package",
+    "package_version": 1,
+    "package_scope": "offline_provenance_index_only"
+  },
+  "artifact_bundle_manifest_reference": {
+    "fixture_id": "coordinate_native_offline_artifact_bundle_manifest",
+    "fixture_path": "docs/runtime_config/fixtures/coordinate_native_offline_artifact_bundle_manifest.json"
+  },
+  "profile_input_reference": {
+    "fixture_id": "coordinate_native_runtime_profile_y2_inspired_sketch",
+    "fixture_path": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json"
+  },
+  "generated_layout_spec_reference": {
+    "fixture_id": "generated_source_owned_layout_spec",
+    "fixture_path": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
+  },
+  "generated_header_reference": {
+    "fixture_id": "generated_source_owned_runtime_config_example",
+    "fixture_path": "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp"
+  },
+  "validation_commands": [
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-offline-artifact-bundle-manifest",
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-offline-pipeline",
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-dry-run-fixtures",
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-layout-spec-bridge",
+    "python3 tools/check_glyph_generated_source_owned_generator_contract.py",
+    "python3 tools/check_glyph_generated_source_owned_artifact_install.py",
+    "python3 tools/check_glyph_generated_source_owned_baseline_artifact.py"
+  ],
+  "notes": "offline export package fixture only; not a device-write package; not a flashing package; manual build/hardware gate required before active firmware behavior."
+}

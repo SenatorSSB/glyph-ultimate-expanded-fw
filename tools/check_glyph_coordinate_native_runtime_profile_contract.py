@@ -63,6 +63,9 @@ GENERATED_OUTPUT_FIXTURE = (
 OFFLINE_ARTIFACT_BUNDLE_MANIFEST_FIXTURE = (
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_offline_artifact_bundle_manifest.json"
 )
+OFFLINE_EXPORT_PACKAGE_FIXTURE = (
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_offline_export_package.json"
+)
 DRY_RUN_NEGATIVE_FIXTURES: tuple[Path, ...] = (
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
@@ -1334,6 +1337,107 @@ def validate_offline_artifact_bundle_manifest() -> None:
             fail(f"offline artifact bundle manifest notes missing phrase: {phrase}")
 
 
+def validate_offline_export_package() -> None:
+    validate_offline_artifact_bundle_manifest()
+    export_package = load_json_object(OFFLINE_EXPORT_PACKAGE_FIXTURE)
+    if export_package.get("schema_version") != 1:
+        fail("offline export package schema_version must be 1")
+    if export_package.get("packet") != "coordinate_native_offline_export_package":
+        fail("offline export package packet name is wrong")
+    if export_package.get("branch") != "codex/runtime-config-coordinate-native-offline-export-package-fixtures":
+        fail("offline export package branch must match the export-package branch")
+    if export_package.get("package_kind") != "offline_export_package_index":
+        fail("offline export package package_kind must be offline_export_package_index")
+    if export_package.get("package_status") != "offline_only":
+        fail("offline export package package_status must be offline_only")
+    for key, expected in {
+        "active_behavior_changed": False,
+        "hardware_test_required_before_merge": False,
+        "runtime_loaded_config_implemented": False,
+        "persistent_storage_implemented": False,
+        "webserial_device_write_implemented": False,
+        "backend_config_pb_write_path_implemented": False,
+        "flashing_automation_implemented": False,
+        "manual_build_hardware_gate_required_before_active_firmware_behavior": True,
+        "no_device_write_claim": True,
+        "no_persistence_claim": True,
+        "no_flashing_claim": True,
+        "no_runtime_loaded_config_claim": True,
+        "no_active_publication_claim": True,
+    }.items():
+        if export_package.get(key) != expected:
+            fail(f"offline export package {key} must be {expected!r}")
+
+    package_metadata = export_package.get("package_metadata")
+    if not isinstance(package_metadata, dict):
+        fail("offline export package package_metadata must be an object")
+    for key, expected in {
+        "package_id": "coordinate_native_offline_export_package_v1",
+        "package_name": "coordinate_native_offline_export_package",
+        "package_version": 1,
+        "package_scope": "offline_provenance_index_only",
+    }.items():
+        if package_metadata.get(key) != expected:
+            fail(f"offline export package package_metadata.{key} must be {expected!r}")
+
+    def require_fixture_ref(label: str, value: Any, *, expected_id: str, expected_path: Path) -> None:
+        if not isinstance(value, dict):
+            fail(f"{label} must be an object")
+        if value.get("fixture_id") != expected_id:
+            fail(f"{label}.fixture_id must be {expected_id!r}")
+        if value.get("fixture_path") != rel(expected_path):
+            fail(f"{label}.fixture_path must be {rel(expected_path)!r}")
+        if not expected_path.exists():
+            fail(f"{label}.fixture_path does not exist: {rel(expected_path)}")
+
+    require_fixture_ref(
+        "artifact_bundle_manifest_reference",
+        export_package.get("artifact_bundle_manifest_reference"),
+        expected_id="coordinate_native_offline_artifact_bundle_manifest",
+        expected_path=OFFLINE_ARTIFACT_BUNDLE_MANIFEST_FIXTURE,
+    )
+    require_fixture_ref(
+        "profile_input_reference",
+        export_package.get("profile_input_reference"),
+        expected_id="coordinate_native_runtime_profile_y2_inspired_sketch",
+        expected_path=OFFLINE_PIPELINE_PROFILE_FIXTURE,
+    )
+    require_fixture_ref(
+        "generated_layout_spec_reference",
+        export_package.get("generated_layout_spec_reference"),
+        expected_id="generated_source_owned_layout_spec",
+        expected_path=LAYOUT_SPEC_FIXTURE,
+    )
+    require_fixture_ref(
+        "generated_header_reference",
+        export_package.get("generated_header_reference"),
+        expected_id="generated_source_owned_runtime_config_example",
+        expected_path=GENERATED_OUTPUT_FIXTURE,
+    )
+    validation_commands = export_package.get("validation_commands")
+    if validation_commands != [
+        "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-offline-artifact-bundle-manifest",
+        "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-offline-pipeline",
+        "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-dry-run-fixtures",
+        "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-layout-spec-bridge",
+        "python3 tools/check_glyph_generated_source_owned_generator_contract.py",
+        "python3 tools/check_glyph_generated_source_owned_artifact_install.py",
+        "python3 tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    ]:
+        fail("offline export package validation_commands must stay in the documented stable order")
+    notes = export_package.get("notes")
+    if not isinstance(notes, str) or not notes:
+        fail("offline export package notes must be a non-empty string")
+    for phrase in (
+        "offline export package fixture only",
+        "not a device-write package",
+        "not a flashing package",
+        "manual build/hardware gate required before active firmware behavior",
+    ):
+        if phrase not in notes:
+            fail(f"offline export package notes missing phrase: {phrase}")
+
+
 def validate_contract_schema() -> None:
     validate_schema(load_json_object(SCHEMA))
 
@@ -1388,6 +1492,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
         "--check-offline-artifact-bundle-manifest",
         action="store_true",
         help="Validate the offline coordinate-native artifact-bundle provenance manifest",
+    )
+    group.add_argument(
+        "--check-offline-export-package",
+        action="store_true",
+        help="Validate the offline coordinate-native export package fixture",
     )
     return parser
 
@@ -1445,6 +1554,11 @@ def main() -> int:
         validate_offline_artifact_bundle_manifest()
         print("glyph_coordinate_native_runtime_profile_contract: OFFLINE ARTIFACT BUNDLE MANIFEST PASS")
         print(f"- manifest: {rel(OFFLINE_ARTIFACT_BUNDLE_MANIFEST_FIXTURE)}")
+        return 0
+    if args.check_offline_export_package:
+        validate_offline_export_package()
+        print("glyph_coordinate_native_runtime_profile_contract: OFFLINE EXPORT PACKAGE PASS")
+        print(f"- export package: {rel(OFFLINE_EXPORT_PACKAGE_FIXTURE)}")
         return 0
     branch = validate_branch()
     validate_contract_schema()
