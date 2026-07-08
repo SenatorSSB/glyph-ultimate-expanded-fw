@@ -39,6 +39,15 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json",
     "docs/runtime_config/generated_source_owned_baseline_artifact.md",
     "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_unresolved_role_state.json",
     "docs/runtime_config/README.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
@@ -55,6 +64,7 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_docs_agent_surface.py",
+    "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/generate_source_owned_runtime_config.py",
 }
 SOURCE_SCAFFOLD_PREFIX = "src/modes/runtime_config/generated_source_owned/"

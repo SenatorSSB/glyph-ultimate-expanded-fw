@@ -129,6 +129,7 @@ def main() -> int:
             "No root-cause claim is made",
             "coordinate-native runtime profile contract scaffolding",
             "coordinate_native_runtime_profile_contract.json",
+            "offline dry-run evaluator",
         ),
     )
 
@@ -144,6 +145,7 @@ def main() -> int:
             "browser/protobuf/persistence",
             "generated active wrapper",
             "runtime-config-latest-y2-layout-source-owned-port-hardware-result",
+            "offline dry-run evaluator",
         ),
     )
 
@@ -158,9 +160,11 @@ def main() -> int:
             "coordinate_native_runtime_profile_contract.md",
             "coordinate_native_runtime_profile_contract.json",
             "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+            "python3 tools/dry_run_coordinate_native_runtime_profile.py --profile",
             "RuntimeConfigView replacement is not used",
             "candidate.view is not active",
             "RAM-backed active table publication is not used",
+            "offline dry-run evaluator",
         ),
     )
 

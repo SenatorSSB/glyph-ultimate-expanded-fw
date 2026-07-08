@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Validate the coordinate-native runtime profile contract packet."""
+"""Validate the coordinate-native runtime profile contract packet.
+
+Offline tooling only. The checker exercises fixture-backed dry-run evaluation
+but the generated result is not loaded by firmware, runtime-loaded config
+remains not implemented, and there is no WebSerial/device write, no
+persistence/storage, no flashing automation, and no active RuntimeConfigView
+publication.
+"""
 
 from __future__ import annotations
 
@@ -7,6 +14,7 @@ import argparse
 import json
 import re
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +32,18 @@ FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_pr
 MINIMAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json"
 NINE_WAY_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json"
 Y2_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json"
+MERGE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json"
+DRY_RUN_NEUTRAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json"
+DRY_RUN_CARDINAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json"
+DRY_RUN_DIAGONAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json"
+DRY_RUN_MERGE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json"
+DRY_RUN_NEGATIVE_FIXTURES: tuple[Path, ...] = (
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
+    REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_unresolved_role_state.json",
+)
+DRY_RUN_TOOL = REPO_ROOT / "tools/dry_run_coordinate_native_runtime_profile.py"
 NEGATIVE_FIXTURE_REASON_PAIRS: tuple[tuple[Path, str], ...] = (
     (
         REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_neutral_5.json",
@@ -71,12 +91,22 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_unresolved_role_state.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json",
     "docs/runtime_config/README.md",
     "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
     CHECKER_REL,
+    "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
@@ -203,6 +233,7 @@ REQUIRED_CURRENT_STATE_PHRASES = (
     "Active RuntimeConfigView selection remains unchanged",
     "coordinate-native runtime profile contract scaffolding",
     "deterministic selection semantics",
+    "offline dry-run evaluator",
     "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
     "Nunchuk remains NOT_TESTED",
     "root cause remains unproven",
@@ -214,6 +245,7 @@ REQUIRED_ROADMAP_PHRASES = (
     "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
     "deterministic selection semantics",
     "future_dry_run_examples",
+    "offline dry-run evaluator",
     "future browser/protobuf/persistence backend",
     "after the runtime model exists",
 )
@@ -230,6 +262,15 @@ REQUIRED_README_PHRASES = (
     "selection_result",
     "design-only",
     "inactive",
+    "offline dry-run evaluator",
+    "python3 tools/dry_run_coordinate_native_runtime_profile.py --profile",
+    "offline tooling only",
+    "generated result is not loaded by firmware",
+    "runtime-loaded config remains not implemented",
+    "no WebSerial/device write",
+    "no persistence/storage",
+    "no flashing automation",
+    "no active RuntimeConfigView publication",
 )
 
 REQUIRED_BOUNDARY_PHRASES = (
@@ -1005,6 +1046,85 @@ def validate_example_fixtures() -> None:
         min_roles=3,
         min_tables=2,
     )
+    validate_profile_fixture(
+        load_json_object(MERGE_FIXTURE),
+        label="merge example",
+        expect_variant="minimal_profile",
+        min_inputs=1,
+        min_roles=1,
+        min_tables=1,
+    )
+
+
+def load_case_fixture(path: Path) -> dict[str, Any]:
+    payload = load_json_object(path)
+    return payload
+
+
+def parse_tool_json(output: str) -> dict[str, Any]:
+    start = output.find("{")
+    if start == -1:
+        fail("dry-run tool output did not include JSON")
+    try:
+        payload = json.loads(output[start:])
+    except json.JSONDecodeError as exc:
+        fail(f"dry-run tool output was not valid JSON: {exc}")
+    if not isinstance(payload, dict):
+        fail("dry-run tool output must be a JSON object")
+    return payload
+
+
+def run_dry_run_tool(profile_path: Path, case_path: Path) -> tuple[int, dict[str, Any]]:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(DRY_RUN_TOOL.relative_to(REPO_ROOT)),
+            "--profile",
+            str(profile_path.relative_to(REPO_ROOT)),
+            "--case",
+            str(case_path.relative_to(REPO_ROOT)),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    output = "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
+    return completed.returncode, parse_tool_json(output)
+
+
+def validate_dry_run_case_fixture(path: Path, *, expect_failure: bool) -> None:
+    case = load_case_fixture(path)
+    profile_path = REPO_ROOT / case.get("profile_path", "")
+    if not profile_path.exists():
+        fail(f"{rel(path)} references missing profile_path {case.get('profile_path')}")
+    exit_code, payload = run_dry_run_tool(profile_path, path)
+    if payload.get("offline_only") is not True:
+        fail(f"{rel(path)} tool output must stay offline_only")
+    if payload.get("case_id") != case.get("case_id"):
+        fail(f"{rel(path)} tool output case_id drifted")
+    selection_result = payload.get("selection_result")
+    if not isinstance(selection_result, dict):
+        fail(f"{rel(path)} tool output missing selection_result object")
+    expected_key = "expected_failure" if expect_failure else "expected_result"
+    expected = case.get(expected_key)
+    if not isinstance(expected, dict):
+        fail(f"{rel(path)} missing {expected_key}")
+    if selection_result != expected:
+        fail(f"{rel(path)} dry-run selection_result drifted from {expected_key}")
+    if expect_failure and exit_code == 0:
+        fail(f"{rel(path)} dry-run tool unexpectedly succeeded")
+    if not expect_failure and exit_code != 0:
+        fail(f"{rel(path)} dry-run tool unexpectedly failed")
+
+
+def validate_dry_run_fixtures() -> None:
+    validate_dry_run_case_fixture(DRY_RUN_NEUTRAL_FIXTURE, expect_failure=False)
+    validate_dry_run_case_fixture(DRY_RUN_CARDINAL_FIXTURE, expect_failure=False)
+    validate_dry_run_case_fixture(DRY_RUN_DIAGONAL_FIXTURE, expect_failure=False)
+    validate_dry_run_case_fixture(DRY_RUN_MERGE_FIXTURE, expect_failure=False)
+    for path in DRY_RUN_NEGATIVE_FIXTURES:
+        validate_dry_run_case_fixture(path, expect_failure=True)
 
 
 def validate_contract_schema() -> None:
@@ -1033,6 +1153,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Validate the invalid fixture corpus and assert each expected failure reason",
     )
+    group.add_argument(
+        "--check-dry-run-fixtures",
+        action="store_true",
+        help=(
+            "Run the offline dry-run evaluator against the positive and negative fixture corpus; "
+            "offline tooling only and the generated result is not loaded by firmware"
+        ),
+    )
     return parser
 
 
@@ -1049,10 +1177,23 @@ def main() -> int:
         for path, _ in NEGATIVE_FIXTURE_REASON_PAIRS:
             print(f"- {rel(path)}")
         return 0
+    if args.check_dry_run_fixtures:
+        validate_dry_run_fixtures()
+        print("glyph_coordinate_native_runtime_profile_contract: DRY-RUN FIXTURES PASS")
+        for path in (
+            DRY_RUN_NEUTRAL_FIXTURE,
+            DRY_RUN_CARDINAL_FIXTURE,
+            DRY_RUN_DIAGONAL_FIXTURE,
+            DRY_RUN_MERGE_FIXTURE,
+            *DRY_RUN_NEGATIVE_FIXTURES,
+        ):
+            print(f"- {rel(path)}")
+        return 0
     branch = validate_branch()
     validate_contract_schema()
     validate_contract_fixture()
     validate_example_fixtures()
+    validate_dry_run_fixtures()
     if branch != MERGED_BRANCH:
         validate_changed_paths(changed_paths(branch))
     validate_contract_fixture_and_docs()
@@ -1060,6 +1201,7 @@ def main() -> int:
     print(f"- branch: {branch}")
     print(f"- fixture: {rel(FIXTURE)}")
     print(f"- contract: {rel(CONTRACT_DOC)}")
+    print(f"- dry-run tool: {rel(DRY_RUN_TOOL)}")
     return 0
 
 

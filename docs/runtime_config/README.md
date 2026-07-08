@@ -132,6 +132,12 @@ The contract bundle also includes:
 - `docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json`
 - `docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json`
 - `docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json`
+- `docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json`
+- `tools/dry_run_coordinate_native_runtime_profile.py`
 
 This packet is design-only and inactive. It describes the future target as a
 coordinate-native runtime profile where active role/modifier state plus
@@ -143,6 +149,16 @@ trace/explanation metadata, deterministic tie behavior, missing-table behavior,
 and `future_dry_run_examples` annotations that stay design-only.
 Browser/protobuf/persistence as future infrastructure is likely solvable, but
 the neutral app-owned profile remains canonical and firmware-independent.
+
+The offline dry-run evaluator is tooling only. It produces deterministic JSON
+for fixture-backed cases, but the generated result is not loaded by firmware,
+runtime-loaded config remains not implemented, and there is no WebSerial/device
+write, no persistence/storage, no flashing automation, and no active
+RuntimeConfigView publication.
+
+Offline tooling only: run `python3 tools/dry_run_coordinate_native_runtime_profile.py --profile`
+with a fixture-backed case file to exercise the evaluator without any firmware
+load path.
 
 The earlier coordinate-native runtime plan remains historical background for
 this lane.
@@ -166,6 +182,17 @@ Assert the invalid fixture corpus still fails for the expected reasons with:
 python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py \
   --check-negative-fixtures
 ```
+
+Run the offline dry-run evaluator directly with:
+
+```bash
+python3 tools/dry_run_coordinate_native_runtime_profile.py \
+  --profile docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json \
+  --case docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json
+```
+
+The checker also exercises the offline dry-run path in CI-style validation via
+`python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-dry-run-fixtures`.
 
 The invalid fixture corpus covers missing neutral `5`, out-of-range direction
 keys, out-of-range raw coordinates, malformed 9-way tables, duplicate priority
