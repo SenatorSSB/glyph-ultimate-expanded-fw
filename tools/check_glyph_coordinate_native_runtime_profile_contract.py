@@ -37,6 +37,10 @@ DRY_RUN_NEUTRAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_n
 DRY_RUN_CARDINAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json"
 DRY_RUN_DIAGONAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json"
 DRY_RUN_MERGE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json"
+DRY_RUN_Y2_NEUTRAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_neutral_5.json"
+DRY_RUN_Y2_CARDINAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json"
+DRY_RUN_Y2_DIAGONAL_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json"
+DRY_RUN_Y2_TILT3_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json"
 DRY_RUN_NEGATIVE_FIXTURES: tuple[Path, ...] = (
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
@@ -96,6 +100,10 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_neutral_5.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json",
+    "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
@@ -1123,6 +1131,10 @@ def validate_dry_run_fixtures() -> None:
     validate_dry_run_case_fixture(DRY_RUN_CARDINAL_FIXTURE, expect_failure=False)
     validate_dry_run_case_fixture(DRY_RUN_DIAGONAL_FIXTURE, expect_failure=False)
     validate_dry_run_case_fixture(DRY_RUN_MERGE_FIXTURE, expect_failure=False)
+    validate_dry_run_case_fixture(DRY_RUN_Y2_NEUTRAL_FIXTURE, expect_failure=False)
+    validate_dry_run_case_fixture(DRY_RUN_Y2_CARDINAL_FIXTURE, expect_failure=False)
+    validate_dry_run_case_fixture(DRY_RUN_Y2_DIAGONAL_FIXTURE, expect_failure=False)
+    validate_dry_run_case_fixture(DRY_RUN_Y2_TILT3_FIXTURE, expect_failure=False)
     for path in DRY_RUN_NEGATIVE_FIXTURES:
         validate_dry_run_case_fixture(path, expect_failure=True)
 

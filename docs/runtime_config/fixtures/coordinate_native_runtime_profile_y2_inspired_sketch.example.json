@@ -61,6 +61,10 @@
     {
       "role_id": "y2_directional",
       "purpose": "Y2-inspired directional resolver sketch"
+    },
+    {
+      "role_id": "y2_tilt",
+      "purpose": "Y2-inspired Tilt3-aligned sketch role"
     }
   ],
   "direction_resolver": {
@@ -104,19 +108,19 @@
     },
     {
       "table_id": "y2_tilt",
-      "table_name": "Y2-inspired tilt sketch",
+      "table_name": "Y2-inspired Tilt3-aligned tilt sketch",
       "priority": 20,
       "sublayer": "y2_tilt",
       "direction_points": [
-        { "direction_key": 1, "x": 72, "y": 84 },
-        { "direction_key": 2, "x": 128, "y": 84 },
-        { "direction_key": 3, "x": 184, "y": 84 },
-        { "direction_key": 4, "x": 64, "y": 128 },
+        { "direction_key": 1, "x": 69, "y": 82 },
+        { "direction_key": 2, "x": 128, "y": 83 },
+        { "direction_key": 3, "x": 187, "y": 82 },
+        { "direction_key": 4, "x": 69, "y": 128 },
         { "direction_key": 5, "x": 128, "y": 128 },
-        { "direction_key": 6, "x": 192, "y": 128 },
-        { "direction_key": 7, "x": 64, "y": 168 },
-        { "direction_key": 8, "x": 128, "y": 176 },
-        { "direction_key": 9, "x": 192, "y": 168 }
+        { "direction_key": 6, "x": 187, "y": 128 },
+        { "direction_key": 7, "x": 76, "y": 169 },
+        { "direction_key": 8, "x": 128, "y": 179 },
+        { "direction_key": 9, "x": 180, "y": 169 }
       ],
       "digital_side_effect_refs": [
         "digital_side_effect_y2_tilt"
@@ -136,10 +140,10 @@
       "priority": 20,
       "sublayer": "y2_tilt",
       "modifier_table_ref": "y2_tilt",
-      "condition": "Y2-inspired tilt sketch only"
+      "condition": "Y2-inspired Tilt3-aligned tilt sketch only"
     }
   ],
-  "digital_side_effects": [
+    "digital_side_effects": [
     {
       "effect_id": "digital_side_effect_y2_primary",
       "priority": 10,
@@ -248,23 +252,181 @@
     },
     "future_dry_run_examples": [
       {
+        "case_id": "y2_primary_direction_5",
+        "input_state": {
+          "state_id": "y2_primary_direction_5",
+          "activations": [
+            {
+              "input_id": "phys_input_y2_primary",
+              "role_id": "y2_primary",
+              "pressed": true
+            }
+          ],
+          "inactive_inputs": [],
+          "resolved_direction_key": 5
+        },
+        "expected_result": {
+          "selection_status": "selected",
+          "resolved_direction_key": 5,
+          "selected_rule_id": "y2_primary_rule",
+          "selected_table_id": "y2_primary",
+          "selected_coordinate": {
+            "x": 128,
+            "y": 128
+          },
+          "selected_side_effect_ids": [
+            "digital_side_effect_y2_primary"
+          ],
+          "trace": [
+            {
+              "step": "resolve_direction_key",
+              "decision": "use resolver output",
+              "reason": "resolved_direction_key is the only direction source",
+              "inputs": [
+                "resolved_direction_key=5"
+              ]
+            },
+            {
+              "step": "select_table",
+              "decision": "use y2_primary",
+              "reason": "y2_primary_rule deterministically wins for this sketch example",
+              "inputs": [
+                "table_id=y2_primary"
+              ]
+            }
+          ],
+          "explanation": {
+            "selection_summary": "The Y2-inspired primary sketch selects the neutral coordinate",
+            "priority_summary": "No tie or fallback was needed",
+            "fallback_summary": "Direction key 5 resolved to the stored exact coordinate without fallback"
+          }
+        },
+        "trace_markers": [
+          "resolved_direction_key=5",
+          "selected_table_id=y2_primary",
+          "selected_coordinate=128,128"
+        ]
+      },
+      {
+        "case_id": "y2_primary_direction_2",
+        "input_state": {
+          "state_id": "y2_primary_direction_2",
+          "activations": [
+            {
+              "input_id": "phys_input_y2_primary",
+              "role_id": "y2_primary",
+              "pressed": true
+            }
+          ],
+          "inactive_inputs": [],
+          "resolved_direction_key": 2
+        },
+        "expected_result": {
+          "selection_status": "selected",
+          "resolved_direction_key": 2,
+          "selected_rule_id": "y2_primary_rule",
+          "selected_table_id": "y2_primary",
+          "selected_coordinate": {
+            "x": 128,
+            "y": 78
+          },
+          "selected_side_effect_ids": [
+            "digital_side_effect_y2_primary"
+          ],
+          "trace": [
+            {
+              "step": "resolve_direction_key",
+              "decision": "use resolver output",
+              "reason": "resolved_direction_key is the only direction source",
+              "inputs": [
+                "resolved_direction_key=2"
+              ]
+            },
+            {
+              "step": "select_table",
+              "decision": "use y2_primary",
+              "reason": "y2_primary_rule deterministically wins for this sketch example",
+              "inputs": [
+                "table_id=y2_primary"
+              ]
+            }
+          ],
+          "explanation": {
+            "selection_summary": "The Y2-inspired primary sketch selects the cardinal coordinate",
+            "priority_summary": "No tie or fallback was needed",
+            "fallback_summary": "Direction key 2 resolved to the stored exact coordinate without fallback"
+          }
+        },
+        "trace_markers": [
+          "resolved_direction_key=2",
+          "selected_table_id=y2_primary",
+          "selected_coordinate=128,78"
+        ]
+      },
+      {
+        "case_id": "y2_primary_direction_7",
+        "input_state": {
+          "state_id": "y2_primary_direction_7",
+          "activations": [
+            {
+              "input_id": "phys_input_y2_primary",
+              "role_id": "y2_primary",
+              "pressed": true
+            }
+          ],
+          "inactive_inputs": [],
+          "resolved_direction_key": 7
+        },
+        "expected_result": {
+          "selection_status": "selected",
+          "resolved_direction_key": 7,
+          "selected_rule_id": "y2_primary_rule",
+          "selected_table_id": "y2_primary",
+          "selected_coordinate": {
+            "x": 61,
+            "y": 164
+          },
+          "selected_side_effect_ids": [
+            "digital_side_effect_y2_primary"
+          ],
+          "trace": [
+            {
+              "step": "resolve_direction_key",
+              "decision": "use resolver output",
+              "reason": "resolved_direction_key is the only direction source",
+              "inputs": [
+                "resolved_direction_key=7"
+              ]
+            },
+            {
+              "step": "select_table",
+              "decision": "use y2_primary",
+              "reason": "y2_primary_rule deterministically wins for this sketch example",
+              "inputs": [
+                "table_id=y2_primary"
+              ]
+            }
+          ],
+          "explanation": {
+            "selection_summary": "The Y2-inspired primary sketch selects the diagonal coordinate",
+            "priority_summary": "No tie or fallback was needed",
+            "fallback_summary": "Direction key 7 resolved to the stored exact coordinate without fallback"
+          }
+        },
+        "trace_markers": [
+          "resolved_direction_key=7",
+          "selected_table_id=y2_primary",
+          "selected_coordinate=61,164"
+        ]
+      },
+      {
         "case_id": "y2_tilt_direction_8",
         "input_state": {
           "state_id": "y2_tilt_direction_8",
           "activations": [
             {
-              "input_id": "phys_input_y2_a",
-              "role_id": "y2_primary",
-              "pressed": true
-            },
-            {
-              "input_id": "phys_input_y2_b",
-              "role_id": "y2_modifier",
-              "pressed": true
-            },
-            {
-              "input_id": "phys_input_y2_c",
-              "role_id": "y2_directional",
+              "input_id": "phys_input_y2_tilt",
+              "role_id": "y2_tilt",
               "pressed": true
             }
           ],
@@ -278,7 +440,7 @@
           "selected_table_id": "y2_tilt",
           "selected_coordinate": {
             "x": 128,
-            "y": 176
+            "y": 179
           },
           "selected_side_effect_ids": [
             "digital_side_effect_y2_tilt"
@@ -302,7 +464,7 @@
             }
           ],
           "explanation": {
-            "selection_summary": "The Y2-inspired tilt sketch selects a deterministic tilt coordinate",
+            "selection_summary": "The Y2-inspired tilt sketch selects a deterministic Tilt3-aligned coordinate",
             "priority_summary": "No tie or fallback was needed",
             "fallback_summary": "Direction key 8 resolved to the stored exact coordinate without fallback"
           }
@@ -310,11 +472,11 @@
         "trace_markers": [
           "resolved_direction_key=8",
           "selected_table_id=y2_tilt",
-          "selected_coordinate=128,176"
+          "selected_coordinate=128,179"
         ]
       }
     ]
   },
   "source_inspiration": "current_y2_layout_source_owned_port",
-  "notes": "Y2-inspired sketch only. Active behavior is not claimed."
+  "notes": "Y2 primary rows align with the current source-backed Y2 layout evidence; the tilt row aligns with the current source-backed Tilt3 evidence. Active behavior is not claimed."
 }

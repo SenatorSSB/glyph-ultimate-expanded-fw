@@ -31,7 +31,7 @@ implementation work. Detailed historical evidence remains indexed from
 - Source-owned table/routing source path passed hardware for this layout.
 - Prior active-publication HARDWARE_FAIL evidence remains archived evidence,
   not current work.
-- Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, and invalid/positive fixture corpora with expected results and failure reasons.
+- Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, invalid/positive fixture corpora with expected results and failure reasons, and fixture-backed offline dry-run coverage for neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths tied to current source-backed Y2/Tilt3 evidence.
 
 ## Current Implementation Boundary
 
