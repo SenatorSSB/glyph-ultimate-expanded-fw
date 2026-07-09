@@ -33,6 +33,7 @@ implementation work. Detailed historical evidence remains indexed from
   not current work.
 - Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, invalid/positive fixture corpora with expected results and failure reasons, and fixture-backed offline dry-run coverage for neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths tied to current source-backed Y2/Tilt3 evidence.
 - The current docs/checker queue also includes `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and `tools/check_glyph_runtime_config_activation_alternatives.py`, which classify A as currently hardware-passed, B as plausible but requiring source design + build + hardware, C-E as explicitly forbidden under current evidence, and F as future architecture only.
+- The source-owned table symbol-map note and checker now document the current Alternative B alias/replacement boundary without changing the active publication path.
 
 ## Current Implementation Boundary
 
@@ -71,6 +72,9 @@ implementation work. Detailed historical evidence remains indexed from
   `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and
   `tools/check_glyph_runtime_config_activation_alternatives.py` for A-F
   activation comparison and claim-invariant hardening.
+- Next docs/tools note: `docs/runtime_config/source_owned_table_symbol_map.md`
+  with `tools/check_glyph_source_owned_table_symbol_map.py` for the current
+  source-owned table alias/replacement boundary.
 - Next safe queue: keep `--check-offline-pipeline`, `--check-offline-artifact-bundle-manifest`, and `--check-offline-export-package` aligned with their fixtures and existing bridge/generator outputs; consider an inert generated-source-owned artifact index only if it helps future generator outputs.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.

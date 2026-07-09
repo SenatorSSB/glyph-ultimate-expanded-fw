@@ -45,6 +45,8 @@ fixtures:
   `fixtures/generated_source_owned_artifact_install.json`
 - `generated_source_owned_baseline_artifact.md` and
   `fixtures/generated_source_owned_baseline_artifact.json`
+- `source_owned_table_symbol_map.md` and
+  `tools/check_glyph_source_owned_table_symbol_map.py`
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
 - `fixtures/generated_source_owned_generator_input.example.json`
 - `fixtures/generated_source_owned_layout_spec.example.json`
@@ -79,7 +81,9 @@ is selected active remain part of this lane. The declarative
 spec-input mode only helps validate the baseline shape. Future implementation
 must be hardware-gated if active source selection behavior changes. Future
 hardware gate required before generated source-owned tables are selected
-active. nunchuk `NOT_TESTED`.
+active. The source-owned table symbol-map note and checker document the
+current Alternative B alias/replacement boundary without changing the active
+path. nunchuk `NOT_TESTED`.
 
 ## Safe Source-Owned Realization Path
 

@@ -52,6 +52,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_docs_navigation.py",
+    "tools/check_glyph_source_owned_table_symbol_map.py",
 }
 IMPLEMENTATION_SOURCE_PATHS = {
     "src/modes/UltimateIdentityRuntimeTables.hpp",
@@ -63,6 +64,7 @@ ALLOWED_EXISTING_CHECKERS = {
     "tools/check_glyph_latest_layout_y2_port_plan.py",
     "tools/check_glyph_source_owned_table_replacement_design.py",
     "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
+    "tools/check_glyph_source_owned_table_symbol_map.py",
 }
 
 FORBIDDEN_CHANGED_PATH_RE = re.compile(

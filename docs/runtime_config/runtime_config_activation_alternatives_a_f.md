@@ -147,6 +147,11 @@ non-claims around generated artifact activation, root-cause proof, nunchuk
 testing, runtime-loaded config, WebSerial/device write, and generated wrapper
 safe claims.
 
+The Alternative B symbol-map checker
+`tools/check_glyph_source_owned_table_symbol_map.py` keeps the current
+source-owned alias/replacement boundary explicit without approving any new
+active publication path.
+
 ## Non-Claims
 
 - This note does not implement runtime-loaded config.
