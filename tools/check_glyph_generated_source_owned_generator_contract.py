@@ -290,7 +290,13 @@ def validate_changed_paths(paths: set[str]) -> None:
             fail(f"forbidden config/storage/write/WebSerial/flashing path changed: {path}")
         if path.startswith("docs/runtime_config/") or path.startswith("docs/agent_framework/"):
             continue
-        if path in {"docs/CURRENT_STATE.md", "docs/ROADMAP.md"}:
+        if path in {
+            "docs/AGENT_CONTEXT.md",
+            "docs/CURRENT_STATE.md",
+            "docs/ROADMAP.md",
+            "docs/calibration/INDEX.md",
+            "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+        }:
             continue
         if path.startswith("docs/"):
             fail(f"out-of-scope docs path changed: {path}")

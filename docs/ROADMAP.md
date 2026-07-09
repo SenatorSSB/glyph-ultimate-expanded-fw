@@ -21,6 +21,14 @@ not used, generated active wrapper is not used, `candidate.view` is not active,
 RAM-backed active table publication is not used, root cause remains unproven,
 and Nunchuk remains NOT_TESTED.
 
+Alternative B generated-table aliasing is now hardware-passed for candidate
+commit `ee5fd35c4ce00e31d9a00905c771699ad17517b9` when it preserves the
+existing active `RuntimeConfigView` publication path through
+`&kSourceOwnedCurrentBaselineRuntimeConfig`, `GetActiveRuntimeConfigState()`,
+and `ResolveActiveRuntimeConfig()`. This does not validate runtime-loaded
+profiles, device-write flows, C/D/E active-publication paths, Nunchuk, or root
+cause.
+
 ## Phase 0 - Preserve Current Source-Owned Firmware Baseline
 
 Status: `CURRENT_BASELINE`.
@@ -99,10 +107,13 @@ and only validates the current source-owned baseline shape. Future
 implementation must be hardware-gated if active source selection behavior
 changes.
 
-The generated tables not wired active boundary remains intact, the source-owned
+The generated tables not wired active boundary remains intact except for the
+Alternative B generated-table alias candidate shape that preserves the existing
+active publication path and is now hardware-passed. The source-owned
 active-state preselection `HARDWARE_PASS` evidence and active-storage
-`HARDWARE_FAIL` evidence remain distinct, and a future hardware gate is
-required before generated source-owned tables are selected active.
+`HARDWARE_FAIL` evidence remain distinct; any different future generated
+source-owned table selection still needs its own source authority, build proof,
+and hardware gate.
 future hardware gate required before generated source-owned tables are selected
 active. source-owned active-state `HARDWARE_PASS` evidence and
 `GeneratedRuntimeConfigBaseline.current.hpp` remain part of this lane.

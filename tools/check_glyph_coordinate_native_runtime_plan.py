@@ -32,6 +32,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/AGENT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
+    "docs/calibration/INDEX.md",
+    "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
     "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
     "tools/generate_source_owned_runtime_config.py",

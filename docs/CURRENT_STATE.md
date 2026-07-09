@@ -29,10 +29,17 @@ implementation work. Detailed historical evidence remains indexed from
   used, `candidate.view` is not active, and RAM-backed active table publication
   is not used.
 - Source-owned table/routing source path passed hardware for this layout.
+- Alternative B generated-table aliasing is now hardware-passed for candidate
+  commit `ee5fd35c4ce00e31d9a00905c771699ad17517b9` when preserving the
+  existing active `RuntimeConfigView` publication path through
+  `&kSourceOwnedCurrentBaselineRuntimeConfig`,
+  `GetActiveRuntimeConfigState()`, and `ResolveActiveRuntimeConfig()`;
+  evidence is recorded in
+  `docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md`.
 - Prior active-publication HARDWARE_FAIL evidence remains archived evidence,
   not current work.
 - Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, invalid/positive fixture corpora with expected results and failure reasons, and fixture-backed offline dry-run coverage for neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths tied to current source-backed Y2/Tilt3 evidence.
-- The current docs/checker queue also includes `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and `tools/check_glyph_runtime_config_activation_alternatives.py`, which classify A as currently hardware-passed, B as plausible but requiring source design + build + hardware, C-E as explicitly forbidden under current evidence, and F as future architecture only.
+- The current docs/checker queue also includes `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and `tools/check_glyph_runtime_config_activation_alternatives.py`, which classify A as currently hardware-passed, B as hardware-passed only for the source-owned generated-table alias candidate that preserves the active publication path, C-E as explicitly forbidden under current evidence, and F as future architecture only.
 - The source-owned table symbol-map note and checker now document the current Alternative B alias/replacement boundary without changing the active publication path.
 
 ## Current Implementation Boundary

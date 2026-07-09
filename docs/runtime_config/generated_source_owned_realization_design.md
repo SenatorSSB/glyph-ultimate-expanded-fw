@@ -58,6 +58,14 @@ build; it does not introduce a new `RuntimeConfigView`, does not change the
 publication symbols, and does not move the active path off
 `kSourceOwnedCurrentBaselineRuntimeConfig`.
 
+The Alternative B generated-table alias candidate at
+`ee5fd35c4ce00e31d9a00905c771699ad17517b9` is now recorded as
+`HARDWARE_PASS` for that source-owned alias shape. The result preserves active
+publication through `&kSourceOwnedCurrentBaselineRuntimeConfig`,
+`GetActiveRuntimeConfigState()`, and `ResolveActiveRuntimeConfig()`, and it
+does not validate runtime-loaded profiles, device-write flows, or C/D/E
+forbidden active-publication paths.
+
 ## Required Properties
 
 - Active view remains source-owned.

@@ -17,6 +17,10 @@ Read this before using older calibration packets as roadmap input.
 - RAM-backed active table publication is not used.
 - Source-owned table/routing source path passed hardware for the latest Y2
   layout.
+- The Alternative B generated-table alias candidate at
+  `ee5fd35c4ce00e31d9a00905c771699ad17517b9` is now recorded as
+  HARDWARE_PASS when preserving the existing active RuntimeConfigView
+  publication path.
 - Nunchuk remains NOT_TESTED.
 - The low-level root cause remains unproven.
 

@@ -3,9 +3,9 @@
 Status label: DOCS / TOOLS ONLY.
 
 This note records the current source-owned table alias/replacement boundary
-for the Alternative B discussion. It is documentation and checker material
-only. It does not change active firmware behavior, active publication, or the
-runtime-config implementation boundary.
+for Alternative B. It is documentation and checker material only. It does not
+change active firmware behavior, active publication, or the runtime-config
+implementation boundary.
 
 ## Current Source-Owned Map
 
@@ -20,10 +20,14 @@ The current active pointer still comes from
 `ResolveActiveRuntimeConfig()` still dereferences
 `GetActiveRuntimeConfigState().active_view`.
 
+The Alternative B generated-table alias candidate at
+`ee5fd35c4ce00e31d9a00905c771699ad17517b9` is hardware-passed only in this
+source-owned alias shape while preserving the existing active publication path.
+
 ## Alternative B Touchpoints
 
 Alternative B remains the source-owned table-content replacement or aliasing
-path. The future behavior-changing candidate would touch:
+path. The hardware-passed generated-table alias candidate touched:
 
 - `src/modes/UltimateIdentityRuntimeTables.hpp` for compile-time table content
   replacement or generated aliasing.

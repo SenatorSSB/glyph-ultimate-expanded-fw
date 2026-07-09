@@ -14,7 +14,7 @@ REQUIRED_PHRASES = (
     "design / docs-checker only",
     "compares six activation alternatives",
     "currently hardware-passed",
-    "plausible but requires source design + build + hardware",
+    "hardware-passed for the generated-table alias candidate preserving the active publication path",
     "explicitly forbidden under current evidence",
     "future architecture only",
     "claim invariants",
@@ -61,7 +61,7 @@ FORBIDDEN_POSITIVE_PATTERNS = (
     r"\bactive_storage\.view active publication is approved\b",
     r"\bram-backed active table publication is approved\b",
     r"\bnunchuk validation is claimed\b",
-    r"\bhardware validation is claimed\b",
+    r"\bunrecorded hardware validation is claimed\b",
 )
 
 
@@ -126,7 +126,7 @@ def ensure_non_claims(text: str) -> None:
         "this note does not implement webserial/device write",
         "this note does not implement flashing automation",
         "this note does not change firmware runtime behavior",
-        "this note does not claim hardware validation",
+        "this note does not claim unrecorded hardware validation",
         "this note does not claim nunchuk validation",
         "this note does not approve candidate.view active publication",
         "this note does not approve active_storage.view active publication",
@@ -146,6 +146,7 @@ def ensure_alt_b_source_shape(text: str) -> None:
         "keep getactiveruntimeconfigstate()",
         "resolveactiveruntimeconfig()",
         "ksourceownedcurrentbaselineruntimeconfig unchanged at publication time",
+        "ee5fd35c4ce00e31d9a00905c771699ad17517b9",
     )
     for phrase in required_b_shape:
         if phrase not in lowered:

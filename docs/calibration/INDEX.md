@@ -13,6 +13,12 @@ for full discovery.
   usual tests passing including Up+A and Down+A, RF5 forced A + Up and LT6
   forced A + Down passing without disconnect, merge-approved status, root cause
   unproven, and Nunchuk remains NOT_TESTED.
+- `alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md` -
+  Alternative B generated-table alias candidate HARDWARE_PASS for commit
+  `ee5fd35c4ce00e31d9a00905c771699ad17517b9`, preserving the existing active
+  `RuntimeConfigView` publication path. It records the user report "Tested
+  everything, everything worked.", root cause unproven, and Nunchuk remains
+  NOT_TESTED.
 - `fixtures/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.json`
   - machine-readable fixture for the current merge-gating hardware PASS.
 - `latest_y2_layout_source_owned_port_hardware_plan_2026-06-29.md` - plan-only

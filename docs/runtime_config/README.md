@@ -21,6 +21,13 @@ you need the supporting evidence.
   hardware-result branch and configurator after merge.
 - Active RuntimeConfigView selection remains unchanged.
 - Source-owned table/routing source path passed hardware for this layout.
+- Alternative B generated-table aliasing is hardware-passed for candidate
+  commit `ee5fd35c4ce00e31d9a00905c771699ad17517b9` when preserving the
+  existing active `RuntimeConfigView` publication path through
+  `&kSourceOwnedCurrentBaselineRuntimeConfig`,
+  `GetActiveRuntimeConfigState()`, and `ResolveActiveRuntimeConfig()`.
+- Hardware result:
+  `docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md`.
 - RuntimeConfigView replacement is not used.
 - Generated active wrapper is not used.
 - `candidate.view` is not active.
@@ -98,8 +105,9 @@ path. The generated source-owned artifact remains inert, and the forbidden
 active publication paths remain forbidden.
 
 The activation-alternatives note classifies A as currently hardware-passed, B
-as plausible but requiring source design + build + hardware, C-E as explicitly
-forbidden under current evidence, and F as future architecture only.
+as hardware-passed only for the source-owned generated-table alias candidate
+that preserves the active publication path, C-E as explicitly forbidden under
+current evidence, and F as future architecture only.
 
 Current v0 production remains source-owned firmware generation as v0. Neutral
 or profile intent may become generated source-owned tables/routing source, then
@@ -117,6 +125,11 @@ Relevant current design packets:
 The activation-alternatives note compares A-F activation ideas and hardens the
 claim language around source-backed, inferred, and unknown statements before
 any implementation discussion advances.
+
+The generated table alias path is hardware-passed when preserving the existing
+active `RuntimeConfigView` publication path. That result does not validate
+runtime-loaded profiles, device-write flows, or C/D/E forbidden
+active-publication paths.
 
 ## Forbidden Active Publication Paths
 

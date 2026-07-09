@@ -34,8 +34,11 @@ INERT_SOURCE_RE = re.compile(
 )
 
 ALLOWED_EXACT_PATHS = {
+    "docs/AGENT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
+    "docs/calibration/INDEX.md",
+    "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
     "tools/generate_source_owned_runtime_config.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",

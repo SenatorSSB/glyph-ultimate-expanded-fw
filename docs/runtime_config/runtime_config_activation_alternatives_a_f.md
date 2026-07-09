@@ -48,6 +48,8 @@ Additional hardening rules:
 - `unknown` means the repo does not currently support the claim.
 - no claim in this note may silently upgrade a design alternative into an
   implementation decision.
+- recorded hardware validation applies only to the explicitly recorded
+  Alternative B candidate commit and source-owned alias shape.
 
 ## Alternatives
 
@@ -62,8 +64,9 @@ Additional hardening rules:
 
 ### B. Source-Owned Generated Table File Replacing Or Aliasing The Baseline Tables
 
-- Classification: `plausible but requires source design + build + hardware`.
-- Claim status: `inferred`.
+- Classification: `hardware-passed for the generated-table alias candidate
+  preserving the active publication path`.
+- Claim status: `source-backed`.
 - Meaning: a generated source-owned table file could replace or alias the
   current baseline tables while preserving the existing active
   `RuntimeConfigView` publication path.
@@ -74,8 +77,10 @@ Additional hardening rules:
   `&kSourceOwnedCurrentBaselineRuntimeConfig` unchanged at publication time.
 - Boundary: this must keep `GetActiveRuntimeConfigState()`,
   `ResolveActiveRuntimeConfig()`, and `&kSourceOwnedCurrentBaselineRuntimeConfig`
-  unchanged at publication time until source design, build proof, and hardware
-  proof exist.
+  unchanged at publication time. The recorded hardware pass applies to
+  candidate commit `ee5fd35c4ce00e31d9a00905c771699ad17517b9` and does not
+  validate any different runtime-loaded, device-write, generated-wrapper,
+  candidate-backed, or active-storage publication path.
 
 ### C. Generated `RuntimeConfigView` Wrapper Activation
 
@@ -117,8 +122,8 @@ Additional hardening rules:
 The alternatives split cleanly into four buckets:
 
 - A is the currently hardware-passed source-owned baseline.
-- B is the plausible future source-owned table-file candidate that still needs
-  source design, build proof, and hardware proof.
+- B is hardware-passed for the source-owned generated-table alias candidate
+  shape that preserves the active publication path.
 - C, D, and E are explicitly forbidden active-publication paths that remain
   archived evidence.
 - F is future architecture only and remains blocked by source authority and
@@ -159,7 +164,7 @@ active publication path.
 - This note does not implement WebSerial/device write.
 - This note does not implement flashing automation.
 - This note does not change firmware runtime behavior.
-- This note does not claim hardware validation.
+- This note does not claim unrecorded hardware validation.
 - This note does not claim nunchuk validation.
 - This note does not approve generated RuntimeConfigView wrapper activation.
 - This note does not approve `candidate.view` active publication.

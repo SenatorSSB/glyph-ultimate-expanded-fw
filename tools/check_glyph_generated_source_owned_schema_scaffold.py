@@ -29,6 +29,9 @@ CHECKER_REL = "tools/check_glyph_generated_source_owned_schema_scaffold.py"
 ACTIVE_STORAGE_CHECKER_REL = "tools/check_glyph_diagnostic_active_storage_published.py"
 REALIZATION_DESIGN_CHECKER_REL = "tools/check_glyph_generated_source_owned_realization_design.py"
 ALLOWED_DOC_PATHS = {
+    "docs/AGENT_CONTEXT.md",
+    "docs/calibration/INDEX.md",
+    "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
     "docs/runtime_config/generated_source_owned_schema_scaffold.md",
     "docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json",
     "docs/runtime_config/generated_source_owned_generator_contract.md",
