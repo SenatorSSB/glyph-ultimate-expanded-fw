@@ -13,12 +13,15 @@ runtime-config implementation boundary.
 | --- | --- | --- | --- |
 | Active publication | `src/modes/Ultimate.cpp` | `GetActiveRuntimeConfigState()`, `ResolveActiveRuntimeConfig()` | Publishes the stable active pointer and dereferences `active_view`. |
 | Baseline alias | `src/modes/UltimateRuntimeConfigInterpreter.hpp` | `kSourceOwnedCurrentBaselineRuntimeTables`, `kKnownGoodRuntimeConfig`, `kSourceOwnedCurrentBaselineRuntimeConfig` | Defines the current source-owned baseline table array and its alias. |
-| Table content source | `src/modes/UltimateIdentityRuntimeTables.hpp` | `kDefaultTable` through `kLt1LowMagnitudeTable` | Holds the source-owned compile-time table contents consumed by the baseline alias. |
+| Table content source | `src/modes/UltimateIdentityRuntimeTables.hpp` | `kDefaultTable` through `kLt1LowMagnitudeTable` | Holds the source-owned compile-time table contents consumed by the baseline alias, adapted from the generated source-owned baseline include. |
 
 The current active pointer still comes from
 `&kSourceOwnedCurrentBaselineRuntimeConfig`, and
 `ResolveActiveRuntimeConfig()` still dereferences
 `GetActiveRuntimeConfigState().active_view`.
+`src/modes/UltimateIdentityRuntimeTables.hpp` now includes the generated
+source-owned baseline artifact as its compile-time table source while keeping
+the active publication symbols unchanged.
 
 ## Alternative B Touchpoints
 

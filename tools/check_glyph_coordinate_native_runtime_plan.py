@@ -50,6 +50,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "tools/extract_glyph_identity_runtime_tables.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/agent_framework/")
 ALLOWED_EXISTING_CHECKERS: set[str] = set()
@@ -198,6 +200,7 @@ def validate_branch() -> str:
         AGENT_FRAMEWORK_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
+        "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(f"checker must run on {EXPECTED_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(

@@ -99,6 +99,8 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/generate_source_owned_runtime_config.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "tools/extract_glyph_identity_runtime_tables.py",
 }
 
 SOURCE_PATH_RE = re.compile(r"^(?:src|include|lib)(?:/|$)")
@@ -247,6 +249,7 @@ def validate_branch() -> str:
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
+        "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "

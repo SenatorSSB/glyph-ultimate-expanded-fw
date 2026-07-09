@@ -24,6 +24,15 @@ DEFAULT_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "Ultimate.cpp"
 INTERPRETER_SOURCE_PATH = REPO_ROOT / "src" / "modes" / "UltimateRuntimeConfigInterpreter.hpp"
 GENERATED_LIKE_TABLES_INCLUDE = '#include "modes/UltimateIdentityRuntimeTables.hpp"'
 GENERATED_LIKE_TABLES_PATH = REPO_ROOT / "src" / "modes" / "UltimateIdentityRuntimeTables.hpp"
+GENERATED_BASELINE_INCLUDE = '#include "runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"'
+GENERATED_BASELINE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "modes"
+    / "runtime_config"
+    / "generated_source_owned"
+    / "GeneratedRuntimeConfigBaseline.current.hpp"
+)
 REQUIRED_GENERATED_LIKE_TABLES_CAVEATS = (
     "Generated-like identity runtime table constants.",
     "Source-owned firmware constants, not runtime-loaded config.",
@@ -41,6 +50,7 @@ class RuntimeTableId(str, Enum):
     MX1 = "MX1"
     MX2 = "MX2"
     Y1 = "Y1"
+    Y2 = "Y2"
     MY1 = "MY1"
     LayerNormalX = "LayerNormalX"
     MLayerNormalX = "MLayerNormalX"
@@ -78,6 +88,7 @@ TABLE_SYMBOL_TO_NAME: tuple[tuple[str, str], ...] = (
     ("kMX1Table", "MX1"),
     ("kMX2Table", "MX2"),
     ("kY1Table", "Y1"),
+    ("kY2Table", "Y2"),
     ("kMY1Table", "MY1"),
     ("kLayerNormalXTable", "LayerNormalX"),
     ("kMLayerNormalXTable", "MLayerNormalX"),
@@ -113,6 +124,18 @@ _TABLE_PATTERN = re.compile(
     re.DOTALL,
 )
 _POINT_PATTERN = re.compile(r"\{\s*(?P<x>\d+)\s*,\s*(?P<y>\d+)\s*\}")
+_GENERATED_RAW_TABLE_PATTERN = re.compile(
+    r"static\s+constexpr\s+std::uint8_t\s+"
+    r"kGeneratedSourceOwnedRuntimeConfigTables\s*\[\s*\d+\s*\]\s*\[\s*\d+\s*\]\s*\[\s*2\s*\]\s*=\s*\{"
+    r"(?P<body>.*?)"
+    r"\};",
+    re.DOTALL,
+)
+_GENERATED_RAW_ROW_PATTERN = re.compile(
+    r"\{\s*//\s*(?P<index>\d+)\s+(?P<symbol>k[A-Za-z0-9_]+Table)\s*(?P<body>.*?)\n\s*\},",
+    re.DOTALL,
+)
+_GENERATED_RAW_POINT_PATTERN = re.compile(r"\{\s*(?P<x>\d+)u?\s*,\s*(?P<y>\d+)u?\s*\}")
 
 
 class TableExtractionError(ValueError):
@@ -239,6 +262,37 @@ def _parse_table_points(symbol: str, declared_size: str, body: str) -> tuple[tup
     return tuple(points)
 
 
+def _parse_generated_raw_tables(source_text: str) -> dict[str, tuple[tuple[int, int], ...]]:
+    match = _GENERATED_RAW_TABLE_PATTERN.search(source_text)
+    if match is None:
+        return {}
+
+    symbol_to_name = {symbol: name for symbol, name in TABLE_SYMBOL_TO_NAME}
+    parsed: dict[str, tuple[tuple[int, int], ...]] = {}
+    seen_indexes: set[int] = set()
+    for row_match in _GENERATED_RAW_ROW_PATTERN.finditer(match.group("body")):
+        index = int(row_match.group("index"))
+        symbol = row_match.group("symbol")
+        if symbol not in symbol_to_name:
+            continue
+        if index in seen_indexes:
+            raise TableExtractionError(f"generated raw table array contains duplicate index {index}")
+        seen_indexes.add(index)
+        points = [
+            (int(point.group("x")), int(point.group("y")))
+            for point in _GENERATED_RAW_POINT_PATTERN.finditer(row_match.group("body"))
+        ]
+        if len(points) != EXPECTED_POINT_COUNT:
+            raise TableExtractionError(f"{symbol} contains {len(points)} points, expected {EXPECTED_POINT_COUNT}")
+        if any(not 0 <= x <= 255 or not 0 <= y <= 255 for x, y in points):
+            raise TableExtractionError(f"{symbol} contains out-of-range generated table point")
+        parsed[symbol_to_name[symbol]] = tuple(points)
+
+    if len(parsed) != len(TABLE_SYMBOL_TO_NAME):
+        return {}
+    return parsed
+
+
 def extract_tables_from_source(source_text: str) -> dict[str, tuple[tuple[int, int], ...]]:
     """Return normalized table names mapped to parsed source points."""
 
@@ -255,6 +309,13 @@ def extract_tables_from_source(source_text: str) -> dict[str, tuple[tuple[int, i
         parsed_symbols[symbol] = _parse_table_points(symbol, match.group("size"), match.group("body"))
 
     missing = [symbol for symbol in required.values() if symbol not in parsed_symbols]
+    if not missing and len(parsed_symbols) == len(TABLE_SYMBOL_TO_NAME):
+        return {name: parsed_symbols[symbol] for symbol, name in TABLE_SYMBOL_TO_NAME}
+
+    generated_raw_tables = _parse_generated_raw_tables(source_text)
+    if generated_raw_tables:
+        return generated_raw_tables
+
     if missing:
         raise TableExtractionError("missing required source table(s): " + ", ".join(missing))
 
@@ -282,7 +343,10 @@ def load_source_text_with_generated_tables(path: Path = DEFAULT_SOURCE_PATH) -> 
 
     include_text = GENERATED_LIKE_TABLES_PATH.read_text(encoding="utf-8")
     _validate_generated_like_tables_caveats(include_text)
-    return source_text.replace(GENERATED_LIKE_TABLES_INCLUDE, include_text, 1)
+    source_text = source_text.replace(GENERATED_LIKE_TABLES_INCLUDE, include_text, 1)
+    if GENERATED_BASELINE_INCLUDE in source_text:
+        source_text = source_text.replace(GENERATED_BASELINE_INCLUDE, GENERATED_BASELINE_PATH.read_text(encoding="utf-8"), 1)
+    return source_text
 
 
 def load_source_tables(path: Path = DEFAULT_SOURCE_PATH) -> dict[str, tuple[tuple[int, int], ...]]:
