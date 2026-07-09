@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -23,10 +24,16 @@ FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_artif
 INPUT_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json"
 LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
 GENERATOR = REPO_ROOT / "tools/generate_source_owned_runtime_config.py"
+INSTALLER = REPO_ROOT / "tools/install_generated_source_owned_runtime_config.py"
 README = REPO_ROOT / "docs/runtime_config/README.md"
 CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 SPEC_INPUT_MODE = "--emit-from-layout-spec"
+INSTALL_DRY_RUN_MODE = "--dry-run"
+INSTALL_LAYOUT_SPEC_MODE = "--from-layout-spec"
+INSTALL_GENERATED_OUTPUT_MODE = "--from-generated-output"
+BRIDGE_PROFILE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json"
+BRIDGE_CONVERTER = REPO_ROOT / "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
 
 INERT_SOURCE_PREFIX = "src/modes/runtime_config/generated_source_owned/"
 INERT_SOURCE_RE = re.compile(
@@ -55,6 +62,7 @@ ALLOWED_EXACT_PATHS = {
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "tools/install_generated_source_owned_runtime_config.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
@@ -108,7 +116,11 @@ EXPECTED_FIXTURE_VALUES: dict[str, Any] = {
 REQUIRED_DOC_PHRASES = (
     "generated_source_owned_generator_contract.md",
     "generated_source_owned_schema_scaffold.md",
+    "install_generated_source_owned_runtime_config.py",
     "--emit-from-layout-spec",
+    "--from-layout-spec",
+    "--from-generated-output",
+    "--dry-run",
     "generated_source_owned_layout_spec.json",
     "active-storage `HARDWARE_FAIL` evidence",
     "Source-owned active-state preselection has recorded `HARDWARE_PASS` evidence",
@@ -125,7 +137,11 @@ REQUIRED_INDEX_PHRASES = (
     "fixtures/generated_source_owned_artifact_install.json",
     "generated_source_owned_generator_contract.md",
     "generated_source_owned_schema_scaffold.md",
+    "install_generated_source_owned_runtime_config.py",
     "--emit-from-layout-spec",
+    "--from-layout-spec",
+    "--from-generated-output",
+    "--dry-run",
     "generated_source_owned_layout_spec.json",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state preselection `HARDWARE_PASS`",
@@ -201,6 +217,7 @@ def validate_branch() -> str:
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
+        "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
@@ -228,7 +245,12 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOWNSTREAM_BASELINE_ARTIFACT_BRANCH, RECOVERY_BRANCH} or any(
+    if branch in {
+        EXPECTED_BRANCH,
+        DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
+        RECOVERY_BRANCH,
+        "runtime-config-source-owned-install-workflow",
+    } or any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
@@ -306,6 +328,34 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
         fail(f"fixture generator.spec_input_mode must be {SPEC_INPUT_MODE!r}")
     if generator.get("spec_input_fixture") != rel(LAYOUT_SPEC_FIXTURE):
         fail(f"fixture generator.spec_input_fixture must be {rel(LAYOUT_SPEC_FIXTURE)!r}")
+    installer = fixture.get("installer")
+    if not isinstance(installer, dict):
+        fail("fixture installer must be an object")
+    if installer.get("script") != rel(INSTALLER):
+        fail("fixture installer.script must point to the offline install wrapper")
+    if installer.get("dry_run_flag") != INSTALL_DRY_RUN_MODE:
+        fail(f"fixture installer.dry_run_flag must be {INSTALL_DRY_RUN_MODE!r}")
+    if installer.get("layout_spec_input_mode") != INSTALL_LAYOUT_SPEC_MODE:
+        fail(f"fixture installer.layout_spec_input_mode must be {INSTALL_LAYOUT_SPEC_MODE!r}")
+    if installer.get("generated_output_input_mode") != INSTALL_GENERATED_OUTPUT_MODE:
+        fail(f"fixture installer.generated_output_input_mode must be {INSTALL_GENERATED_OUTPUT_MODE!r}")
+    if installer.get("preferred_output_path") != BASELINE_ARTIFACT:
+        fail("fixture installer.preferred_output_path must target the inert alias path")
+    if installer.get("default_output_path") != BASELINE_ARTIFACT:
+        fail("fixture installer.default_output_path must target the inert alias path")
+    workflow = fixture.get("workflow")
+    if not isinstance(workflow, dict):
+        fail("fixture workflow must be an object")
+    if workflow.get("bridge_profile_fixture") != rel(BRIDGE_PROFILE_FIXTURE):
+        fail(f"fixture workflow.bridge_profile_fixture must be {rel(BRIDGE_PROFILE_FIXTURE)!r}")
+    if workflow.get("bridge_converter") != rel(BRIDGE_CONVERTER):
+        fail(f"fixture workflow.bridge_converter must be {rel(BRIDGE_CONVERTER)!r}")
+    if workflow.get("preferred_install_mode") != "dry-run":
+        fail("fixture workflow.preferred_install_mode must be 'dry-run'")
+    if "layout-spec -> source-owned artifact -> dry-run install" not in workflow.get(
+        "expected_install_shape", ""
+    ):
+        fail("fixture workflow.expected_install_shape must describe the offline dry-run flow")
 
     installed_artifacts = fixture.get("installed_artifacts")
     if not isinstance(installed_artifacts, list) or not all(isinstance(item, str) for item in installed_artifacts):
@@ -320,17 +370,17 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
 def validate_deterministic_generation(installed_artifacts: list[str]) -> None:
     if len(installed_artifacts) != 1:
         fail("deterministic install checker currently expects exactly one installed artifact")
-    completed = subprocess.run(
+    installed_text = read_required(REPO_ROOT / installed_artifacts[0])
+    example_completed = subprocess.run(
         ["python3", str(GENERATOR), str(INPUT_FIXTURE)],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=False,
     )
-    if completed.returncode != 0:
-        fail("generator failed on example input: " + completed.stderr.strip())
-    installed_text = read_required(REPO_ROOT / installed_artifacts[0])
-    if completed.stdout != installed_text:
+    if example_completed.returncode != 0:
+        fail("generator failed on example input: " + example_completed.stderr.strip())
+    if example_completed.stdout != installed_text:
         fail("installed generated source artifact does not match deterministic generator output")
     spec_completed = subprocess.run(
         ["python3", str(GENERATOR), SPEC_INPUT_MODE, str(LAYOUT_SPEC_FIXTURE)],
@@ -342,7 +392,87 @@ def validate_deterministic_generation(installed_artifacts: list[str]) -> None:
     if spec_completed.returncode != 0:
         fail("spec-input generator failed on layout spec packet: " + spec_completed.stderr.strip())
     if spec_completed.stdout != installed_text:
-        fail("spec-input generator output does not match installed generated source artifact")
+        fail("spec-input generator output does not match the installed inert source artifact")
+
+
+def validate_bridge_install_workflow(installed_artifacts: list[str]) -> None:
+    bridge_completed = subprocess.run(
+        ["python3", str(BRIDGE_CONVERTER), "--profile", str(BRIDGE_PROFILE_FIXTURE)],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if bridge_completed.returncode != 0:
+        fail("bridge converter failed on source-owned layout-spec fixture: " + bridge_completed.stderr.strip())
+    try:
+        bridge_layout_spec = json.loads(bridge_completed.stdout)
+    except json.JSONDecodeError as exc:
+        fail(f"bridge converter did not emit JSON: {exc}")
+    layout_spec_payload = load_json_object(REPO_ROOT / LAYOUT_SPEC_FIXTURE)
+    if bridge_layout_spec != layout_spec_payload:
+        fail("bridge converter output must match the declarative layout-spec packet")
+    expected_layout_spec = layout_spec_payload.get("layout_spec")
+    if not isinstance(expected_layout_spec, dict):
+        fail("layout spec fixture must contain a nested layout_spec object")
+    if expected_layout_spec.get("layout_spec_kind") != "generated_source_owned_layout_spec":
+        fail("layout spec fixture must carry the generated source-owned layout spec")
+    if expected_layout_spec.get("layout_name") != "current_source_owned_baseline_layout":
+        fail("bridge converter output must target the current source-owned baseline layout")
+
+    with tempfile.TemporaryDirectory() as temp_name:
+        temp_dir = Path(temp_name)
+        generated_output_path = temp_dir / "generated_output.hpp"
+
+        generated_completed = subprocess.run(
+            ["python3", str(GENERATOR), SPEC_INPUT_MODE, str(LAYOUT_SPEC_FIXTURE)],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if generated_completed.returncode != 0:
+            fail("generator failed on bridge-derived layout spec: " + generated_completed.stderr.strip())
+
+        generated_output_path.write_text(generated_completed.stdout, encoding="utf-8")
+        dry_run_layout_spec = subprocess.run(
+            [
+                "python3",
+                str(INSTALLER),
+                INSTALL_LAYOUT_SPEC_MODE,
+                str(LAYOUT_SPEC_FIXTURE),
+                INSTALL_DRY_RUN_MODE,
+            ],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if dry_run_layout_spec.returncode != 0:
+            fail("installer dry-run failed on layout-spec input: " + dry_run_layout_spec.stderr.strip())
+        if dry_run_layout_spec.stdout != generated_completed.stdout:
+            fail("installer dry-run output must match generator output for layout-spec input")
+
+        dry_run_generated_output = subprocess.run(
+            [
+                "python3",
+                str(INSTALLER),
+                INSTALL_GENERATED_OUTPUT_MODE,
+                str(generated_output_path),
+                INSTALL_DRY_RUN_MODE,
+            ],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if dry_run_generated_output.returncode != 0:
+            fail("installer dry-run failed on generated-output input: " + dry_run_generated_output.stderr.strip())
+        if dry_run_generated_output.stdout != generated_completed.stdout:
+            fail("installer dry-run output must match generator output for generated-output input")
+
+        if generated_completed.stdout != read_required(REPO_ROOT / installed_artifacts[0]):
+            fail("bridge workflow output must match the installed inert source artifact")
 
 
 def validate_docs() -> None:
@@ -365,6 +495,7 @@ def main() -> int:
     installed_artifacts = validate_fixture(fixture)
     validate_changed_paths(changed_paths(branch), installed_artifacts)
     validate_deterministic_generation(installed_artifacts)
+    validate_bridge_install_workflow(installed_artifacts)
     validate_docs()
     print("glyph_generated_source_owned_artifact_install: PASS")
     print(f"- branch: {branch}")

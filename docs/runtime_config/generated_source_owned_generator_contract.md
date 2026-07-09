@@ -19,6 +19,13 @@ deterministically. It does not write generated artifacts into active source
 paths by default, does not wire generated tables active, and does not change
 active firmware behavior.
 
+The companion offline installer
+`tools/install_generated_source_owned_runtime_config.py` can take either a
+validated layout-spec packet or already-generated C++ output. It accepts
+`--from-layout-spec`, `--from-generated-output`, and `--dry-run` so the inert
+source-owned alias path can be previewed or written without activating runtime
+selection.
+
 ## Accepted Evidence
 
 - Source-owned active-state preselection has recorded `HARDWARE_PASS` evidence.

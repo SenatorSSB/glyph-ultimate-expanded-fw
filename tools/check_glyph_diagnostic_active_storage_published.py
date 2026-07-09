@@ -30,6 +30,7 @@ ALLOWED_BRANCHES = {
     GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
     GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
     MERGED_BRANCH,
+    "runtime-config-source-owned-install-workflow",
 }
 
 ULTIMATE_PATH = REPO_ROOT / "src/modes/Ultimate.cpp"
@@ -58,6 +59,11 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_coordinate_native_runtime_plan.py",
+    "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+    "tools/check_glyph_docs_agent_surface.py",
+    "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "tools/install_generated_source_owned_runtime_config.py",
     "tools/generate_source_owned_runtime_config.py",
 }
 ALLOWED_PREFIXES = ("docs/runtime_config/", "docs/calibration/")
@@ -233,6 +239,7 @@ def validate_branch() -> str:
         GENERATED_SOURCE_OWNED_SCHEMA_SCAFFOLD_BRANCH,
         GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
         GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
+        "runtime-config-source-owned-install-workflow",
     }:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -268,6 +275,7 @@ def branch_mode(branch: str) -> str:
         GENERATED_SOURCE_OWNED_ARTIFACT_INSTALL_BRANCH,
         GENERATED_SOURCE_OWNED_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
+        "runtime-config-source-owned-install-workflow",
     }:
         return "archived_evidence"
     fail(f"unsupported branch mode for {branch}")

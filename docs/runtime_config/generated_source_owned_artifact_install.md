@@ -7,6 +7,11 @@ source-owned runtime config artifact. It follows
 `generated_source_owned_generator_contract.md` and
 `generated_source_owned_schema_scaffold.md`.
 
+The preferred offline install wrapper is
+`tools/install_generated_source_owned_runtime_config.py`. It can preview or
+write the inert source-owned alias path using either a validated layout-spec
+packet or already-generated C++ output.
+
 The installed example artifact lives under
 `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`.
 It is a source-owned immutable table text artifact, but it is intentionally
@@ -44,6 +49,15 @@ That mode is still inert: it validates the declarative layout-spec packet and
 produces the same deterministic source-owned C++ text without changing active
 runtime selection.
 
+The wrapper can dry-run the alias-path install directly from the same packet:
+it accepts `--from-layout-spec`, `--from-generated-output`, and `--dry-run`.
+
+```bash
+python3 tools/install_generated_source_owned_runtime_config.py \
+  --from-layout-spec docs/runtime_config/fixtures/generated_source_owned_layout_spec.json \
+  --dry-run
+```
+
 The installed source artifact must contain these markers:
 
 - `generated source-owned runtime config artifact`
@@ -54,6 +68,9 @@ The checker regenerates the example output from
 `docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`
 and compares it to the installed inert source artifact. The installed artifact
 is deterministic from the example input.
+The install wrapper checker also exercises the bridge flow:
+coordinate-native profile fixture -> layout-spec converter -> source-owned
+generator -> dry-run install output -> expected source-owned alias text.
 
 ## Active-Behavior Boundary
 

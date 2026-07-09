@@ -90,6 +90,7 @@ Generator lane references in scope:
 the explicit `--emit-from-layout-spec` packet-input mode,
 `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
 `tools/generate_source_owned_runtime_config.py`.
+The offline install wrapper `tools/install_generated_source_owned_runtime_config.py` uses `--from-layout-spec`, `--from-generated-output`, and `--dry-run` to preview or write the inert alias path without changing active behavior.
 The normal generator input now requires `layout_spec`, so spec-less JSON is
 rejected.
 Related fixtures in scope:

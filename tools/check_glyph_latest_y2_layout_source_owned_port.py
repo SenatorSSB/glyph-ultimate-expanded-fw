@@ -48,6 +48,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/AGENT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
     "docs/ROADMAP.md",
+    "tools/check_glyph_diagnostic_active_storage_published.py",
+    "tools/install_generated_source_owned_runtime_config.py",
     CHECKER_REL,
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_coordinate_native_runtime_plan.py",
@@ -257,6 +259,7 @@ def base_branch_for(branch: str) -> str:
         AGENT_FRAMEWORK_BRANCH,
         RECOVERY_BRANCH,
         "runtime-config-coordinate-native-profile-contract",
+        "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
     } or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         return BASE_BRANCH
@@ -277,6 +280,7 @@ def validate_branch() -> tuple[str, str]:
         MERGED_BRANCH,
         RECOVERY_BRANCH,
         "runtime-config-coordinate-native-profile-contract",
+        "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
@@ -304,7 +308,7 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str, base_branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {RESULT_BRANCH, RECOVERY_BRANCH}:
+    if branch in {RESULT_BRANCH, RECOVERY_BRANCH, "runtime-config-source-owned-install-workflow"}:
         paths.update(git_lines(["diff", "--name-only", f"{base_branch}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)

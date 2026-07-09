@@ -102,6 +102,7 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/generate_source_owned_runtime_config.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "tools/install_generated_source_owned_runtime_config.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
 }
@@ -252,6 +253,7 @@ def validate_branch() -> str:
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
+        "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
@@ -265,6 +267,7 @@ def validate_branch() -> str:
         DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH,
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
+        "runtime-config-source-owned-install-workflow",
     }:
         result = subprocess.run(
             ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -287,7 +290,12 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH, DOWNSTREAM_ARTIFACT_INSTALL_BRANCH} or any(
+    if branch in {
+        EXPECTED_BRANCH,
+        DOWNSTREAM_SCHEMA_SCAFFOLD_BRANCH,
+        DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
+        "runtime-config-source-owned-install-workflow",
+    } or any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))

@@ -52,6 +52,7 @@ fixtures:
   `fixtures/generated_source_owned_artifact_install.json`
 - `generated_source_owned_baseline_artifact.md` and
   `fixtures/generated_source_owned_baseline_artifact.json`
+- `tools/install_generated_source_owned_runtime_config.py`
 - `source_owned_table_symbol_map.md` and
   `tools/check_glyph_source_owned_table_symbol_map.py`
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
@@ -66,6 +67,14 @@ for `fixtures/generated_source_owned_layout_spec.json`, while
 mode. The normal generator input now requires `layout_spec`, so spec-less JSON
 is rejected.
 
+The companion installer
+`tools/install_generated_source_owned_runtime_config.py` can either dry-run or
+write the generated source-owned baseline text. Its preferred path is a dry-run
+preview from `--from-layout-spec`, which keeps the install workflow offline and
+non-active while reproducing the already merged source-owned alias text.
+It also accepts `--from-generated-output` for already-generated C++ text and
+`--dry-run` for preview-only operation.
+
 Quick smoke command:
 
 ```bash
@@ -77,6 +86,14 @@ python3 tools/generate_source_owned_runtime_config.py \
 This is the fastest offline check that the inert layout-spec packet still emits
 the deterministic source-owned fixture. For the full generator-contract proof,
 run `python3 tools/check_glyph_generated_source_owned_generator_contract.py`.
+
+For a dry-run install preview of the inert source-owned alias path, run:
+
+```bash
+python3 tools/install_generated_source_owned_runtime_config.py \
+  --from-layout-spec docs/runtime_config/fixtures/generated_source_owned_layout_spec.json \
+  --dry-run
+```
 
 These packets keep the generated tables not wired active, preserve the active
 RuntimeConfigView selection boundary, and keep the source-owned active-state

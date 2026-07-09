@@ -75,6 +75,7 @@ ALLOWED_CHECKER_PATHS = {
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/generate_source_owned_runtime_config.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "tools/install_generated_source_owned_runtime_config.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
 }
@@ -226,6 +227,7 @@ def validate_branch() -> str:
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
+        "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
@@ -259,6 +261,7 @@ def changed_paths(branch: str) -> set[str]:
         DOWNSTREAM_ARTIFACT_INSTALL_BRANCH,
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         RECOVERY_BRANCH,
+        "runtime-config-source-owned-install-workflow",
     } or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):

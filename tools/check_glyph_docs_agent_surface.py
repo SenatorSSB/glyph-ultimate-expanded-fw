@@ -39,8 +39,10 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_generated_source_owned_realization_design.py",
     "tools/check_glyph_source_owned_table_symbol_map.py",
+    "tools/check_glyph_diagnostic_active_storage_published.py",
     "tools/generate_source_owned_runtime_config.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "tools/install_generated_source_owned_runtime_config.py",
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
@@ -143,6 +145,7 @@ def validate_branch() -> str:
         AGENT_FRAMEWORK_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
+        "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(f"checker must run on {EXPECTED_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
@@ -170,7 +173,13 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch in {EXPECTED_BRANCH, CONTRACT_BRANCH, AGENT_FRAMEWORK_BRANCH, RECOVERY_BRANCH} or any(
+    if branch in {
+        EXPECTED_BRANCH,
+        CONTRACT_BRANCH,
+        AGENT_FRAMEWORK_BRANCH,
+        RECOVERY_BRANCH,
+        "runtime-config-source-owned-install-workflow",
+    } or any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))

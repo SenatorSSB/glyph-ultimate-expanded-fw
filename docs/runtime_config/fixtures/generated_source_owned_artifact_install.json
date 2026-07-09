@@ -25,6 +25,22 @@
     "explicit_install_mode": "--install-inert-source-artifact",
     "default_output_to_active_source_path": false
   },
+  "installer": {
+    "script": "tools/install_generated_source_owned_runtime_config.py",
+    "dry_run_flag": "--dry-run",
+    "layout_spec_input_mode": "--from-layout-spec",
+    "generated_output_input_mode": "--from-generated-output",
+    "default_output_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+    "preferred_output_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+  },
+  "workflow": {
+    "bridge_profile_fixture": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
+    "bridge_converter": "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "generated_layout_spec_fixture": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+    "generated_source_artifact_fixture": "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
+    "preferred_install_mode": "dry-run",
+    "expected_install_shape": "coordinate-native-profile -> layout-spec -> source-owned artifact -> dry-run install -> expected alias text"
+  },
   "installed_artifacts": [
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
   ],

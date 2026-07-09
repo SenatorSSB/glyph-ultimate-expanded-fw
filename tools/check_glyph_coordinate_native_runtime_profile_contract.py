@@ -156,6 +156,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_source_owned_table_symbol_map.py",
     "tools/check_glyph_agent_framework_docs.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "tools/install_generated_source_owned_runtime_config.py",
     "tools/generate_source_owned_runtime_config.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
@@ -395,7 +396,12 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
-    if branch not in {EXPECTED_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH} and not any(
+    if branch not in {
+        EXPECTED_BRANCH,
+        MERGED_BRANCH,
+        RECOVERY_BRANCH,
+        "runtime-config-source-owned-install-workflow",
+    } and not any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):
         if branch != "runtime-config-alt-b-generated-table-alias-candidate":
@@ -421,7 +427,9 @@ def status_path(status_line: str) -> str:
 
 def changed_paths(branch: str) -> set[str]:
     paths: set[str] = set()
-    if branch == EXPECTED_BRANCH or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
+    if branch == EXPECTED_BRANCH or branch == "runtime-config-source-owned-install-workflow" or any(
+        branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
+    ):
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))
     for line in git_lines(["status", "--short"], preserve_status=True):
         path = status_path(line)
