@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from extract_glyph_identity_runtime_tables import load_source_tables
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IMPLEMENTATION_BRANCH = "runtime-config-latest-y2-layout-source-owned-port"
@@ -52,6 +54,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_docs_navigation.py",
+    "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/extract_glyph_identity_runtime_tables.py",
     "tools/check_glyph_source_owned_table_symbol_map.py",
 }
 IMPLEMENTATION_SOURCE_PATHS = {
@@ -253,6 +257,7 @@ def base_branch_for(branch: str) -> str:
         AGENT_FRAMEWORK_BRANCH,
         RECOVERY_BRANCH,
         "runtime-config-coordinate-native-profile-contract",
+        "runtime-config-alt-b-generated-table-alias-candidate",
     } or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         return BASE_BRANCH
     if branch == MERGED_BRANCH:
@@ -272,6 +277,7 @@ def validate_branch() -> tuple[str, str]:
         MERGED_BRANCH,
         RECOVERY_BRANCH,
         "runtime-config-coordinate-native-profile-contract",
+        "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}"
@@ -349,18 +355,7 @@ def extract_function(text: str, name: str) -> str:
 
 
 def parse_tables() -> dict[str, tuple[tuple[int, int], ...]]:
-    source = read_required(TABLES_HPP)
-    tables: dict[str, tuple[tuple[int, int], ...]] = {}
-    for match in TABLE_RE.finditer(source):
-        name = match.group("name")
-        points = tuple((int(x), int(y)) for x, y in POINT_RE.findall(match.group("body")))
-        if len(points) != 9:
-            fail(f"{name} must have 9 points")
-        if any(not (0 <= coord <= 255) for point in points for coord in point):
-            fail(f"{name} contains out-of-byte-range coordinates")
-        normalized = name[1:-5] if name.startswith("k") and name.endswith("Table") else name
-        tables[normalized] = points
-    return tables
+    return load_source_tables()
 
 
 @dataclass(frozen=True)

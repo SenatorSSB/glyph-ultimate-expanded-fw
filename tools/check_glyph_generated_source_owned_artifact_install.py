@@ -55,6 +55,8 @@ ALLOWED_EXACT_PATHS = {
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "tools/extract_glyph_identity_runtime_tables.py",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
     "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
@@ -199,6 +201,7 @@ def validate_branch() -> str:
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
+        "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "

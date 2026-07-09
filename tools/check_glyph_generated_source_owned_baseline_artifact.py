@@ -9,6 +9,12 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from extract_glyph_identity_runtime_tables import (
+    load_source_tables,
+    normalized_table_names,
+    source_symbol_by_normalized_name,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
@@ -33,6 +39,7 @@ EXPECTED_AXES_PER_POINT = 2
 
 ALLOWED_PATH_RE = re.compile(
     r"^(?:docs/runtime_config/|docs/agent_framework/|docs/calibration/|docs/AGENT_CONTEXT\.md|docs/CURRENT_STATE\.md|docs/ROADMAP\.md|tools/|"
+    r"src/modes/UltimateIdentityRuntimeTables\.hpp|"
     r"src/modes/runtime_config/generated_source_owned/)"
 )
 FORBIDDEN_CHANGED_PATH_RE = re.compile(
@@ -55,6 +62,10 @@ FORBIDDEN_ARTIFACT_TOKENS = (
     "UpdateAnalogOutputs",
     "active_view =",
     "candidate.view",
+    "active_storage.view",
+    "GeneratedRuntimeConfigBaselineActiveView",
+    "GeneratedRuntimeConfigView",
+    "RuntimeConfigView replacement",
     "RuntimeConfigStorage",
     "WebSerial",
     "config.pb",
@@ -250,13 +261,13 @@ def parse_source_baseline_order(text: str) -> list[str]:
 
 
 def source_baseline_tables() -> list[tuple[str, list[tuple[int, int]]]]:
-    tables = parse_source_stick_tables(read_required(SOURCE_TABLES))
-    ordered_symbols = parse_source_baseline_order(read_required(SOURCE_INTERPRETER))
+    tables = load_source_tables()
     ordered_tables: list[tuple[str, list[tuple[int, int]]]] = []
-    for symbol in ordered_symbols:
-        if symbol not in tables:
+    for name in normalized_table_names():
+        symbol = source_symbol_by_normalized_name()[name]
+        if name not in tables:
             fail(f"source baseline references missing table: {symbol}")
-        ordered_tables.append((symbol, tables[symbol]))
+        ordered_tables.append((symbol, tables[name]))
     return ordered_tables
 
 
@@ -386,6 +397,12 @@ def validate_not_included_by_ultimate() -> None:
         fail(f"{rel(ARTIFACT)} must not be included by src/modes/Ultimate.cpp")
 
 
+def validate_identity_header_includes_generated_baseline() -> None:
+    identity_text = read_required(SOURCE_TABLES)
+    if 'GeneratedRuntimeConfigBaseline.current.hpp' not in identity_text:
+        fail("UltimateIdentityRuntimeTables.hpp must include GeneratedRuntimeConfigBaseline.current.hpp")
+
+
 def validate_deterministic_generation() -> None:
     completed = subprocess.run(
         ["python3", str(GENERATOR), "--emit-current-source-owned-baseline"],
@@ -405,6 +422,7 @@ def main() -> int:
     fixture = load_json_object(FIXTURE)
     validate_fixture(fixture)
     validate_changed_paths(changed_paths(branch))
+    validate_identity_header_includes_generated_baseline()
     validate_not_included_by_ultimate()
     validate_equivalence()
     validate_deterministic_generation()

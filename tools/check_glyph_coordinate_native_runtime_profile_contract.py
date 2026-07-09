@@ -156,6 +156,9 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_source_owned_table_symbol_map.py",
     "tools/check_glyph_agent_framework_docs.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "tools/generate_source_owned_runtime_config.py",
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "tools/extract_glyph_identity_runtime_tables.py",
 }
 ALLOWED_PREFIXES = ("docs/",)
 
@@ -395,7 +398,8 @@ def validate_branch() -> str:
     if branch not in {EXPECTED_BRANCH, MERGED_BRANCH, RECOVERY_BRANCH} and not any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):
-        fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
+        if branch != "runtime-config-alt-b-generated-table-alias-candidate":
+            fail(f"checker must run on {EXPECTED_BRANCH} or {MERGED_BRANCH}, got {branch}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,

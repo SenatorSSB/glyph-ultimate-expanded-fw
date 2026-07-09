@@ -18,6 +18,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from extract_glyph_identity_runtime_tables import load_source_tables
+
 
 EXPECTED_SCHEMA_VERSION = 1
 EXPECTED_ARTIFACT_KIND = "generated_source_owned_runtime_config_table"
@@ -432,19 +434,19 @@ def emit_cpp_header(contract: dict[str, Any]) -> str:
 
 
 def parse_source_owned_baseline_contract() -> dict[str, Any]:
-    table_text = SOURCE_TABLES.read_text(encoding="utf-8")
     interpreter_text = SOURCE_INTERPRETER.read_text(encoding="utf-8")
-    source_tables = parse_source_stick_tables(table_text)
+    source_tables = load_source_tables()
     ordered_symbols = parse_source_baseline_table_order(interpreter_text)
     tables: list[dict[str, Any]] = []
     for table_id, symbol_name in enumerate(ordered_symbols):
-        points = source_tables.get(symbol_name)
+        normalized_name = symbol_name.removeprefix("k").removesuffix("Table")
+        points = source_tables.get(normalized_name)
         if points is None:
             fail(f"baseline table {symbol_name} is missing from {SOURCE_TABLES}")
         tables.append(
             {
                 "table_id": table_id,
-                "table_name": symbol_name.removeprefix("k").removesuffix("Table"),
+                "table_name": normalized_name,
                 "table_symbol": symbol_name,
                 "points": [{"x": x, "y": y} for x, y in points],
             }

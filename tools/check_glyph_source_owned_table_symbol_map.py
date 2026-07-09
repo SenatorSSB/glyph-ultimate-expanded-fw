@@ -12,6 +12,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 ULTIMATE_CPP = REPO_ROOT / "src/modes/Ultimate.cpp"
 INTERPRETER_HPP = REPO_ROOT / "src/modes/UltimateRuntimeConfigInterpreter.hpp"
 TABLES_HPP = REPO_ROOT / "src/modes/UltimateIdentityRuntimeTables.hpp"
+GENERATED_BASELINE_HPP = (
+    REPO_ROOT
+    / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+)
 
 DESIGN_NOTE = REPO_ROOT / "docs/runtime_config/source_owned_table_symbol_map.md"
 RUNTIME_README = REPO_ROOT / "docs/runtime_config/README.md"
@@ -163,10 +167,26 @@ def main() -> int:
         ULTIMATE_CPP,
         '#include "modes/UltimateIdentityRuntimeTables.hpp"',
     )
+    generated_include_line, generated_include_text = line_lookup(
+        TABLES_HPP,
+        '#include "runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"',
+    )
     tables_header_line, tables_header_text = line_lookup(
         TABLES_HPP,
-        "constexpr StickPoint kDefaultTable[9] = {",
+        "SOURCE_OWNED_GENERATED_TABLE(kDefaultTable, 0);",
     )
+
+    ultimate_text = read_required(ULTIMATE_CPP)
+    interpreter_text = read_required(INTERPRETER_HPP)
+    forbidden_source_tokens = (
+        "GeneratedRuntimeConfigBaselineActiveView",
+        "GeneratedRuntimeConfigView",
+        "RuntimeConfigView replacement",
+        "RAM-backed active table publication",
+    )
+    for token in forbidden_source_tokens:
+        if token in ultimate_text or token in interpreter_text:
+            fail(f"forbidden active-publication token present in source path: {token}")
 
     print("- active pointer publication:")
     print(
@@ -184,6 +204,7 @@ def main() -> int:
     print(f"  {INTERPRETER_HPP.relative_to(REPO_ROOT)}:{baseline_config_line} {baseline_config_text}")
     print("- current source-owned table include/alias boundary:")
     print(f"  {ULTIMATE_CPP.relative_to(REPO_ROOT)}:{include_line} {include_text}")
+    print(f"  {TABLES_HPP.relative_to(REPO_ROOT)}:{generated_include_line} {generated_include_text}")
     print(f"  {TABLES_HPP.relative_to(REPO_ROOT)}:{tables_header_line} {tables_header_text}")
 
     inert_artifacts = (

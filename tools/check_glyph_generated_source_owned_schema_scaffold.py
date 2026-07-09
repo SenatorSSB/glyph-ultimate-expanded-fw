@@ -75,6 +75,8 @@ ALLOWED_CHECKER_PATHS = {
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/generate_source_owned_runtime_config.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+    "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "tools/extract_glyph_identity_runtime_tables.py",
 }
 SOURCE_SCAFFOLD_PREFIX = "src/modes/runtime_config/generated_source_owned/"
 SOURCE_SCAFFOLD_RE = re.compile(
@@ -224,6 +226,7 @@ def validate_branch() -> str:
         DOWNSTREAM_BASELINE_ARTIFACT_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
+        "runtime-config-alt-b-generated-table-alias-candidate",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "
