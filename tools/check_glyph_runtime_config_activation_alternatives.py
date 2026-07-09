@@ -21,6 +21,7 @@ REQUIRED_PHRASES = (
     "current lane is blocked before active behavior until a selected activation strategy is implemented and hardware-gated",
     "candidate.view",
     "active_storage.view",
+    "tools/check_glyph_source_owned_table_symbol_map.py",
     "runtime-loaded profile or config interpreter",
     "runtime-loaded config",
     "webserial/device write",

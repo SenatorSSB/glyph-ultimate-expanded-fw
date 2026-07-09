@@ -65,6 +65,7 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_generated_source_owned_generator_contract.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_source_owned_table_symbol_map.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_runtime_config_activation_alternatives.py",
