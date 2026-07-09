@@ -52,6 +52,11 @@ neutral/profile/config input
 The key property is that active runtime table pointers remain source-owned at
 publication time. The generated tables are firmware source artifacts, not
 runtime-loaded payloads, not persistent storage, and not a device-write result.
+For Alternative B, the concrete source shape is a generated source-owned table
+file that replaces or aliases the compile-time baseline table contents before
+build; it does not introduce a new `RuntimeConfigView`, does not change the
+publication symbols, and does not move the active path off
+`kSourceOwnedCurrentBaselineRuntimeConfig`.
 
 ## Required Properties
 

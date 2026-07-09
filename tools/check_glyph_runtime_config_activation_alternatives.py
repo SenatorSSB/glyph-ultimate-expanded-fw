@@ -137,6 +137,20 @@ def ensure_non_claims(text: str) -> None:
             fail(f"missing non-claim phrase: {phrase}")
 
 
+def ensure_alt_b_source_shape(text: str) -> None:
+    lowered = normalize(text)
+    required_b_shape = (
+        "concrete source-change shape",
+        "replace or alias the compile-time contents of src/modes/ultimateidentityruntimetables.hpp before firmware build",
+        "keep getactiveruntimeconfigstate()",
+        "resolveactiveruntimeconfig()",
+        "ksourceownedcurrentbaselineruntimeconfig unchanged at publication time",
+    )
+    for phrase in required_b_shape:
+        if phrase not in lowered:
+            fail(f"missing alternative B source-shape phrase: {phrase}")
+
+
 def main() -> int:
     print("glyph_runtime_config_activation_alternatives")
     try:
@@ -157,6 +171,7 @@ def main() -> int:
         ensure_alternatives(text)
         ensure_claim_invariants(text)
         ensure_non_claims(text)
+        ensure_alt_b_source_shape(text)
         ensure_no_positive_claims(text)
     except (OSError, ValueError, ActivationAlternativesError) as exc:
         print("status=FAIL")

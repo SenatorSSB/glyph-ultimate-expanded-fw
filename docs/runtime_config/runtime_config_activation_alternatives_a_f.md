@@ -67,6 +67,11 @@ Additional hardening rules:
 - Meaning: a generated source-owned table file could replace or alias the
   current baseline tables while preserving the existing active
   `RuntimeConfigView` publication path.
+- Concrete source-change shape: the generated table file may replace or alias
+  the compile-time contents of `src/modes/UltimateIdentityRuntimeTables.hpp`
+  before firmware build, but it must keep
+  `GetActiveRuntimeConfigState()`, `ResolveActiveRuntimeConfig()`, and
+  `&kSourceOwnedCurrentBaselineRuntimeConfig` unchanged at publication time.
 - Boundary: this must keep `GetActiveRuntimeConfigState()`,
   `ResolveActiveRuntimeConfig()`, and `&kSourceOwnedCurrentBaselineRuntimeConfig`
   unchanged at publication time until source design, build proof, and hardware
