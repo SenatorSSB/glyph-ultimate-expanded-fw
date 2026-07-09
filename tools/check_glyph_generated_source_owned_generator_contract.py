@@ -50,12 +50,15 @@ ALLOWED_TOOL_PATHS = {
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_source_owned_table_symbol_map.py",
+    "tools/check_glyph_source_owned_candidate_generation.py",
+    "tools/prepare_source_owned_candidate_branch.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
     "tools/install_generated_source_owned_runtime_config.py",
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
+    "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
 }
 ALLOWED_INERT_SOURCE_PREFIX = "src/modes/runtime_config/generated_source_owned/"
 ALLOWED_INERT_SOURCE_RE = re.compile(

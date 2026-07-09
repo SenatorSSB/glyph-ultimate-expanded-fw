@@ -43,6 +43,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/generate_source_owned_runtime_config.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
     "tools/install_generated_source_owned_runtime_config.py",
+    "tools/check_glyph_source_owned_candidate_generation.py",
+    "tools/prepare_source_owned_candidate_branch.py",
     "tools/check_glyph_agent_framework_docs.py",
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
@@ -50,6 +52,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
 }
 ALLOWED_PREFIXES = ("docs/",)
 
@@ -142,6 +145,7 @@ def validate_branch() -> str:
         EXPECTED_BRANCH,
         CONTRACT_BRANCH,
         "generator-source-owned-layout-spec-contract",
+        "runtime-config-install-workflow-candidate-generation",
         AGENT_FRAMEWORK_BRANCH,
         MERGED_BRANCH,
         RECOVERY_BRANCH,
@@ -176,6 +180,7 @@ def changed_paths(branch: str) -> set[str]:
     if branch in {
         EXPECTED_BRANCH,
         CONTRACT_BRANCH,
+        "runtime-config-install-workflow-candidate-generation",
         AGENT_FRAMEWORK_BRANCH,
         RECOVERY_BRANCH,
         "runtime-config-source-owned-install-workflow",

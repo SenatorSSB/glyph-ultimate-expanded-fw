@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "packet": "source_owned_candidate_generation_workflow",
+  "branch": "runtime-config-install-workflow-candidate-generation",
+  "candidate_branch_name": "runtime-config-install-workflow-candidate-generation",
+  "workflow_mode": "dry_run_only",
+  "input_modes": [
+    "profile",
+    "layout-spec"
+  ],
+  "approved_target_source_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+  "hardware_gate_status": "NOT_REQUIRED_FOR_DRY_RUN",
+  "build_command": "pio run -e glyph_mk6",
+  "validation_commands": [
+    "python3 tools/check_glyph_source_owned_table_symbol_map.py",
+    "python3 tools/check_glyph_docs_navigation.py",
+    "python3 tools/check_glyph_docs_agent_surface.py",
+    "python3 tools/check_glyph_generated_source_owned_generator_contract.py",
+    "python3 tools/check_glyph_generated_source_owned_artifact_install.py",
+    "python3 tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py --check-layout-spec-bridge"
+  ],
+  "source_write_safeguards": [
+    "clean working tree required",
+    "direct writes on configurator refused",
+    "approved inert Alternative B source path only",
+    "no device write",
+    "no persistent storage",
+    "no flashing automation",
+    "no active publication changes"
+  ],
+  "forbidden_claims": [
+    "runtime_loaded_config_implemented",
+    "persistent_storage_implemented",
+    "webserial_device_write_implemented",
+    "backend_config_pb_write_path_implemented",
+    "flashing_automation_implemented"
+  ],
+  "active_publication_path_evidence": {
+    "GetActiveRuntimeConfigState": "&kSourceOwnedCurrentBaselineRuntimeConfig",
+    "ResolveActiveRuntimeConfig": "unchanged",
+    "candidate_view": "not_activated",
+    "active_storage.view": "forbidden",
+    "runtime_loaded_config": "not_implemented"
+  }
+}

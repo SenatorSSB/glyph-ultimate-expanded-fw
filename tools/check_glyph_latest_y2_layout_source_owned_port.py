@@ -59,6 +59,9 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/extract_glyph_identity_runtime_tables.py",
     "tools/check_glyph_source_owned_table_symbol_map.py",
+    "tools/check_glyph_source_owned_candidate_generation.py",
+    "tools/prepare_source_owned_candidate_branch.py",
+    "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
 }
 IMPLEMENTATION_SOURCE_PATHS = {
     "src/modes/UltimateIdentityRuntimeTables.hpp",
@@ -261,6 +264,7 @@ def base_branch_for(branch: str) -> str:
         "runtime-config-coordinate-native-profile-contract",
         "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
+        "runtime-config-install-workflow-candidate-generation",
     } or any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         return BASE_BRANCH
     if branch == MERGED_BRANCH:
@@ -282,6 +286,7 @@ def validate_branch() -> tuple[str, str]:
         "runtime-config-coordinate-native-profile-contract",
         "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
+        "runtime-config-install-workflow-candidate-generation",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {RESULT_BRANCH}, {DOCS_SURFACE_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}"

@@ -64,6 +64,8 @@ Current safe queue after the generator/checker hardening:
   `--check-offline-export-package`) aligned with their fixtures;
 - add an inert generated-source-owned artifact index only if future generator
   outputs need a stable catalog.
+- keep the offline candidate-prep wrapper and checker aligned with the dry-run
+  plan, refusal cases, and approved inert Alternative B source path.
 
 Current generated-source-owned packets in scope:
 `generated_source_owned_realization_design.md`,
@@ -91,6 +93,11 @@ the explicit `--emit-from-layout-spec` packet-input mode,
 `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
 `tools/generate_source_owned_runtime_config.py`.
 The offline install wrapper `tools/install_generated_source_owned_runtime_config.py` uses `--from-layout-spec`, `--from-generated-output`, and `--dry-run` to preview or write the inert alias path without changing active behavior.
+The candidate-prep wrapper `tools/prepare_source_owned_candidate_branch.py`
+adds a dry-run plan for
+`runtime-config-install-workflow-candidate-generation`, keeping the approved
+inert Alternative B source path explicit and refusing direct writes on
+`configurator`.
 The normal generator input now requires `layout_spec`, so spec-less JSON is
 rejected.
 Related fixtures in scope:

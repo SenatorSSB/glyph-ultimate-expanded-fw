@@ -57,6 +57,8 @@ ALLOWED_EXACT_PATHS = {
     "tools/check_glyph_diagnostic_active_storage_published.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_source_owned_table_symbol_map.py",
+    "tools/check_glyph_source_owned_candidate_generation.py",
+    "tools/prepare_source_owned_candidate_branch.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_runtime_config_activation_alternatives.py",
@@ -67,6 +69,7 @@ ALLOWED_EXACT_PATHS = {
     "tools/extract_glyph_identity_runtime_tables.py",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
+    "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
     "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
 }
 
@@ -219,6 +222,7 @@ def validate_branch() -> str:
         RECOVERY_BRANCH,
         "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
+        "runtime-config-install-workflow-candidate-generation",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "

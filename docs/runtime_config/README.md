@@ -75,6 +75,15 @@ non-active while reproducing the already merged source-owned alias text.
 It also accepts `--from-generated-output` for already-generated C++ text and
 `--dry-run` for preview-only operation.
 
+The candidate-prep wrapper
+`tools/prepare_source_owned_candidate_branch.py` sits one layer above the
+installer. It validates a coordinate-native profile or inert layout-spec
+fixture, converts when needed, generates the source-owned artifact into a
+temporary preview location, and emits a dry-run candidate plan for
+`runtime-config-install-workflow-candidate-generation`. The wrapper stays
+offline by default and keeps the approved inert Alternative B source path
+explicit for future hardware-test candidate materialization.
+
 Quick smoke command:
 
 ```bash

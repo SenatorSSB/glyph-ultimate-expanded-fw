@@ -65,6 +65,7 @@ implementation work. Detailed historical evidence remains indexed from
   `fixtures/generated_source_owned_baseline_artifact.json`.
 - `generated_source_owned_generator_input.example.json`, `fixtures/generated_source_owned_layout_spec.example.json`, `generated_source_owned_layout_spec.json`, `--emit-current-source-owned-baseline`, the explicit `--emit-from-layout-spec` packet-input mode, `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and `tools/generate_source_owned_runtime_config.py` remain the generator lane references.
 - The offline install wrapper `tools/install_generated_source_owned_runtime_config.py` now covers the inert alias path with `--from-layout-spec`, `--from-generated-output`, and `--dry-run`; it stays offline-only and non-active.
+- The offline candidate-prep wrapper `tools/prepare_source_owned_candidate_branch.py` now adds a dry-run plan for `runtime-config-install-workflow-candidate-generation` and keeps the approved inert Alternative B source path explicit without activating device-write or runtime-loaded behavior.
 - The generated tables not wired active boundary remains intact; source-owned active-state preselection `HARDWARE_PASS` evidence and active-storage `HARDWARE_FAIL` evidence remain distinct. source-owned active-state `HARDWARE_PASS` evidence and future hardware gate required before generated source-owned baseline artifact is selected active remain part of this lane. The declarative layout spec mirror stays inert and only validates the current source-owned baseline shape. The normal generator input now requires `layout_spec`, and the explicit `--emit-from-layout-spec` mode stays inert. Future implementation must be hardware-gated if active source selection behavior changes.
 - future hardware gate required before generated source-owned tables are
   selected active.
@@ -84,6 +85,7 @@ implementation work. Detailed historical evidence remains indexed from
   with `tools/check_glyph_source_owned_table_symbol_map.py` for the current
   source-owned table alias/replacement boundary.
 - Next safe queue: keep `--check-offline-pipeline`, `--check-offline-artifact-bundle-manifest`, and `--check-offline-export-package` aligned with their fixtures and existing bridge/generator outputs; consider an inert generated-source-owned artifact index only if it helps future generator outputs.
+- Next safe queue: keep `tools/prepare_source_owned_candidate_branch.py` and `tools/check_glyph_source_owned_candidate_generation.py` aligned with the dry-run candidate plan, refusal cases, and approved source-path allow-list.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 - Offline dry-run evaluator: `tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed positive and negative cases under `docs/runtime_config/fixtures/`.

@@ -42,6 +42,7 @@ ALLOWED_DOC_PATHS = {
     "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json",
     "docs/runtime_config/generated_source_owned_baseline_artifact.md",
     "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json",
+    "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json",
     "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json",
@@ -69,6 +70,8 @@ ALLOWED_CHECKER_PATHS = {
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_source_owned_table_symbol_map.py",
+    "tools/check_glyph_source_owned_candidate_generation.py",
+    "tools/prepare_source_owned_candidate_branch.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_docs_agent_surface.py",
     "tools/check_glyph_runtime_config_activation_alternatives.py",
@@ -229,6 +232,7 @@ def validate_branch() -> str:
         RECOVERY_BRANCH,
         "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
+        "runtime-config-install-workflow-candidate-generation",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(
             f"checker must run on {EXPECTED_BRANCH}, "

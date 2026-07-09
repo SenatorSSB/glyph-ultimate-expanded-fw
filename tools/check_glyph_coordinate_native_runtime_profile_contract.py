@@ -154,10 +154,13 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_generated_source_owned_baseline_artifact.py",
     "tools/check_glyph_source_owned_table_symbol_map.py",
+    "tools/check_glyph_source_owned_candidate_generation.py",
+    "tools/prepare_source_owned_candidate_branch.py",
     "tools/check_glyph_agent_framework_docs.py",
     "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
     "tools/install_generated_source_owned_runtime_config.py",
     "tools/generate_source_owned_runtime_config.py",
+    "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
 }
@@ -401,6 +404,7 @@ def validate_branch() -> str:
         MERGED_BRANCH,
         RECOVERY_BRANCH,
         "runtime-config-source-owned-install-workflow",
+        "runtime-config-install-workflow-candidate-generation",
     } and not any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):
