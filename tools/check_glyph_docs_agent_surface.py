@@ -52,6 +52,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "tools/check_glyph_source_owned_candidate_generation_diff.py",
     "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
 }
 ALLOWED_PREFIXES = ("docs/",)

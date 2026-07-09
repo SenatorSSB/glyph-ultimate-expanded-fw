@@ -52,7 +52,10 @@ fixtures:
   `fixtures/generated_source_owned_artifact_install.json`
 - `generated_source_owned_baseline_artifact.md` and
   `fixtures/generated_source_owned_baseline_artifact.json`
+- `source_owned_candidate_generation_diff_diagnosis.md` and
+  `fixtures/source_owned_candidate_generation_diff_diagnosis.json`
 - `tools/install_generated_source_owned_runtime_config.py`
+- `tools/check_glyph_source_owned_candidate_generation_diff.py`
 - `source_owned_table_symbol_map.md` and
   `tools/check_glyph_source_owned_table_symbol_map.py`
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
@@ -117,6 +120,12 @@ hardware gate required before generated source-owned tables are selected
 active. The source-owned table symbol-map note and checker document the
 current Alternative B alias/replacement boundary without changing the active
 path. nunchuk `NOT_TESTED`.
+
+The candidate-generation diff diagnosis currently classifies the inert
+layout-spec candidate as `TABLE_CONTENT_DIFFERENT` against the current
+source-owned baseline. Use
+`python3 tools/check_glyph_source_owned_candidate_generation_diff.py` to
+reproduce the semantic comparison.
 
 ## Safe Source-Owned Realization Path
 
