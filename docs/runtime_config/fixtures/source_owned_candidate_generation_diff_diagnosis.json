@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "packet": "source_owned_candidate_generation_diff_diagnosis",
+  "classification": "TABLE_CONTENT_DIFFERENT",
+  "candidate_layout_spec_fixture": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+  "baseline_artifact": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+  "source_tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
+  "source_runtime_view": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+  "same_table_order": true,
+  "same_table_shape": true,
+  "same_table_count": true,
+  "same_tables": [
+    "kY2Table",
+    "kTilt3Table"
+  ],
+  "different_tables": [
+    "kDefaultTable",
+    "kModeDefaultTable",
+    "kX1Table",
+    "kX2Table",
+    "kMX1Table",
+    "kMX2Table",
+    "kY1Table",
+    "kMY1Table",
+    "kLayerNormalXTable",
+    "kMLayerNormalXTable",
+    "kLayerFlipperTable",
+    "kMLayerFlipperTable",
+    "kY1Tilt1Table",
+    "kMY1Tilt1Table",
+    "kY1LayerFlipperTable",
+    "kMY1LayerFlipperTable",
+    "kY1LayerNormalXTable",
+    "kMY1LayerNormalXTable",
+    "kTilt1Table",
+    "kTilt2Table",
+    "kTilt1Minus41Table",
+    "kRT1RF4CustomTable",
+    "kMTilt1Table",
+    "kMTilt2Table",
+    "kMTilt3Table",
+    "kLt1LowMagnitudeTable"
+  ],
+  "metadata_drift": {
+    "profile_name": {
+      "baseline": "current_source_owned_baseline_runtime_config",
+      "candidate": "example_source_owned_runtime_config"
+    }
+  },
+  "comparison_checker": "tools/check_glyph_source_owned_candidate_generation_diff.py",
+  "notes": [
+    "The candidate is not byte-for-byte equivalent to the current source-owned baseline.",
+    "26 tables collapse to the same canonical 0/128/255 grid pattern.",
+    "This remains offline-only diagnostic evidence.",
+    "Nunchuk remains NOT_TESTED.",
+    "Root cause remains unproven."
+  ]
+}

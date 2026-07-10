@@ -66,6 +66,7 @@ implementation work. Detailed historical evidence remains indexed from
 - `generated_source_owned_generator_input.example.json`, `fixtures/generated_source_owned_layout_spec.example.json`, `generated_source_owned_layout_spec.json`, `--emit-current-source-owned-baseline`, the explicit `--emit-from-layout-spec` packet-input mode, `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and `tools/generate_source_owned_runtime_config.py` remain the generator lane references.
 - The offline install wrapper `tools/install_generated_source_owned_runtime_config.py` now covers the inert alias path with `--from-layout-spec`, `--from-generated-output`, and `--dry-run`; it stays offline-only and non-active.
 - The offline candidate-prep wrapper `tools/prepare_source_owned_candidate_branch.py` now adds a dry-run plan for `runtime-config-install-workflow-candidate-generation` and keeps the approved inert Alternative B source path explicit without activating device-write or runtime-loaded behavior.
+- The candidate-generation diff diagnosis for `docs/runtime_config/fixtures/generated_source_owned_layout_spec.json` is currently classified `TABLE_CONTENT_DIFFERENT`: the candidate is not byte-for-byte equivalent to the source-owned baseline, `profile_name` drifts to `example_source_owned_runtime_config`, 26 tables collapse to the same canonical grid pattern, and `kY2Table` plus `kTilt3Table` remain source-aligned.
 - The generated tables not wired active boundary remains intact; source-owned active-state preselection `HARDWARE_PASS` evidence and active-storage `HARDWARE_FAIL` evidence remain distinct. source-owned active-state `HARDWARE_PASS` evidence and future hardware gate required before generated source-owned baseline artifact is selected active remain part of this lane. The declarative layout spec mirror stays inert and only validates the current source-owned baseline shape. The normal generator input now requires `layout_spec`, and the explicit `--emit-from-layout-spec` mode stays inert. Future implementation must be hardware-gated if active source selection behavior changes.
 - future hardware gate required before generated source-owned tables are
   selected active.
@@ -100,6 +101,9 @@ implementation work. Detailed historical evidence remains indexed from
   including deterministic selection semantics and offline dry-run fixtures.
 - Ready for source-owned generator/evaluator design: yes, when source-backed and
   scoped outside active firmware behavior.
+- Candidate-generation diff diagnosis is documented and executable; the current
+  classification is `TABLE_CONTENT_DIFFERENT`, so this remains hardware-candidate
+  material rather than a canonicalization-only branch.
 - Current lane before active behavior: blocked until a selected activation
   strategy is implemented and hardware-gated.
 - Hardware test required for this docs/checker cleanup: no.

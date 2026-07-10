@@ -54,6 +54,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "tools/check_glyph_source_owned_candidate_generation_diff.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
 }
