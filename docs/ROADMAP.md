@@ -67,9 +67,9 @@ Current safe queue after the generator/checker hardening:
 - keep the offline candidate-prep wrapper and checker aligned with the dry-run
   plan, refusal cases, and approved inert Alternative B source path.
 The candidate-generation diff diagnosis for the inert layout-spec fixture is
-`TABLE_CONTENT_EQUIVALENT` on this branch, because the generated candidate has
-been materialized into the approved inert alias path and all 28 tables now
-match the checked-in baseline artifact.
+`TABLE_CONTENT_EQUIVALENT` on this branch, because the materialized artifact
+matches the generated candidate output fixture and all 28 tables now align
+with the approved inert alias path.
 
 Current generated-source-owned packets in scope:
 `generated_source_owned_realization_design.md`,

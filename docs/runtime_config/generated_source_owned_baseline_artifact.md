@@ -2,9 +2,10 @@
 
 Status label: CURRENT.
 
-This packet records an inert generated source-owned runtime config artifact for
-the current source-owned baseline. The artifact lives at
-`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`.
+This packet records the inert generated source-owned runtime config artifact
+materialized on the current candidate branch. The artifact lives at
+`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`,
+and it matches the generated candidate output fixture on this branch.
 
 This branch follows `generated_source_owned_artifact_install.md` and
 `generated_source_owned_generator_contract.md`. It keeps the earlier generated
@@ -28,31 +29,36 @@ the same baseline-shaped generated artifact when run against
 - Do not add parser, runtime-loaded config, persistent storage, WebSerial/device
   write, backend/config.pb write path, or firmware flashing automation.
 
-## Equivalence Proof
+## Materialization Proof
 
 The checker `tools/check_glyph_generated_source_owned_baseline_artifact.py`
-proves the generated baseline artifact is equivalent to the current
-source-owned baseline by source inspection.
+proves the materialized artifact matches the generated candidate output
+fixture on this branch. In short, the materialized artifact matches the
+generated candidate output fixture, and the generator reproduces the same
+output from `generated_source_owned_layout_spec.json`.
 
-The comparison reads the current source-owned baseline table order from
-`src/modes/UltimateRuntimeConfigInterpreter.hpp`, reads source table point
-values from `src/modes/UltimateIdentityRuntimeTables.hpp`, reads generated
-table values from
+The comparison reads the generated candidate output fixture from
+`docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`,
+reads the materialized artifact from
 `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`,
-and compares:
+regenerates the same output from
+`docs/runtime_config/fixtures/generated_source_owned_layout_spec.json`, and
+compares:
 
 - table count;
 - table names and order;
 - point count per table;
-- every x/y point.
+- every x/y point;
+- deterministic generator output.
 
-The checker does not use artifact hashes as gates. If any source table name,
-table order, point count, or point value drifts, the equivalence check fails.
+The checker does not use artifact hashes as gates. If the generated output
+fixture, the materialized artifact, or the deterministic generator output
+drifts, the materialization check fails.
 The fixture
 `docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json`
 sets
-`generated_baseline_artifact_equivalent_to_current_source_owned_baseline: true`
-only because this source/artifact comparison is required to pass.
+`materialized_candidate_artifact_matches_generated_output: true` only because
+this source-generated/artifact comparison is required to pass.
 
 ## Evidence Boundary
 

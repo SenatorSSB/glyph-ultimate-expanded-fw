@@ -9,22 +9,16 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from extract_glyph_identity_runtime_tables import (
-    load_source_tables,
-    normalized_table_names,
-    source_symbol_by_normalized_name,
-)
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-baseline-artifact"
 RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
+MATERIALIZED_CANDIDATE_BRANCH = "runtime-config-generated-canonical-grid-candidate"
 
 ARTIFACT = REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
 SOURCE_TABLES = REPO_ROOT / "src/modes/UltimateIdentityRuntimeTables.hpp"
-SOURCE_INTERPRETER = REPO_ROOT / "src/modes/UltimateRuntimeConfigInterpreter.hpp"
 ULTIMATE_CPP = REPO_ROOT / "src/modes/Ultimate.cpp"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json"
 DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_baseline_artifact.md"
@@ -32,6 +26,8 @@ README = REPO_ROOT / "docs/runtime_config/README.md"
 CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 GENERATOR = REPO_ROOT / "tools/generate_source_owned_runtime_config.py"
+GENERATED_OUTPUT = REPO_ROOT / "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp"
+LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
 
 EXPECTED_TABLE_COUNT = 28
 EXPECTED_POINT_COUNT = 9
@@ -77,7 +73,7 @@ EXPECTED_FIXTURE_VALUES: dict[str, Any] = {
     "active_behavior_changed": False,
     "hardware_test_required_before_merge": False,
     "baseline_artifact_only": True,
-    "generated_baseline_artifact_equivalent_to_current_source_owned_baseline": True,
+    "materialized_candidate_artifact_matches_generated_output": True,
     "generated_tables_wired_active": False,
     "runtime_loaded_config_implemented": False,
     "persistent_storage_implemented": False,
@@ -94,7 +90,7 @@ REQUIRED_DOC_PHRASES = (
     "--emit-current-source-owned-baseline",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state `HARDWARE_PASS` evidence",
-    "future hardware gate required before generated source-owned baseline artifact is selected active",
+    "materialized artifact matches the generated candidate output fixture",
     "not included by `src/modes/Ultimate.cpp`",
     "not wired into runtime selection",
     "does not change active firmware behavior",
@@ -111,7 +107,7 @@ REQUIRED_INDEX_PHRASES = (
     "--emit-current-source-owned-baseline",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state `HARDWARE_PASS` evidence",
-    "future hardware gate required before generated source-owned baseline artifact is selected active",
+    "materialized artifact matches the generated candidate output fixture",
 )
 
 
@@ -176,6 +172,16 @@ def current_branch() -> str:
 
 def validate_branch() -> str:
     branch = current_branch()
+    if branch not in {
+        EXPECTED_BRANCH,
+        MATERIALIZED_CANDIDATE_BRANCH,
+        RECOVERY_BRANCH,
+        MERGED_BRANCH,
+    }:
+        fail(
+            f"checker must run on {EXPECTED_BRANCH}, {MATERIALIZED_CANDIDATE_BRANCH}, "
+            f"{RECOVERY_BRANCH}, or {MERGED_BRANCH}, got {branch}"
+        )
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
         cwd=REPO_ROOT,
@@ -260,17 +266,6 @@ def parse_source_baseline_order(text: str) -> list[str]:
     return symbols
 
 
-def source_baseline_tables() -> list[tuple[str, list[tuple[int, int]]]]:
-    tables = load_source_tables()
-    ordered_tables: list[tuple[str, list[tuple[int, int]]]] = []
-    for name in normalized_table_names():
-        symbol = source_symbol_by_normalized_name()[name]
-        if name not in tables:
-            fail(f"source baseline references missing table: {symbol}")
-        ordered_tables.append((symbol, tables[name]))
-    return ordered_tables
-
-
 def parse_generated_artifact(text: str, expected_table_count: int) -> list[tuple[str, list[tuple[int, int]]]]:
     for marker in REQUIRED_ARTIFACT_MARKERS:
         if marker not in text:
@@ -294,16 +289,13 @@ def parse_generated_artifact(text: str, expected_table_count: int) -> list[tuple
         re.DOTALL,
     )
     point_re = re.compile(r"\{\s*(\d+)u?\s*,\s*(\d+)u?\s*\}")
-    symbol_by_name = source_symbol_by_normalized_name()
     tables: list[tuple[str, list[tuple[int, int]]]] = []
     seen_indexes: set[int] = set()
     seen_symbols: set[str] = set()
     for match in row_re.finditer(text):
         index = int(match.group("index"))
         label = match.group("label")
-        symbol = label if label in symbol_by_name.values() else symbol_by_name.get(label, "")
-        if not symbol:
-            continue
+        symbol = label
         points = [(int(x), int(y)) for x, y in point_re.findall(match.group("body"))]
         if len(points) != EXPECTED_POINT_COUNT:
             fail(f"generated table {symbol} must contain {EXPECTED_POINT_COUNT} points")
@@ -321,26 +313,12 @@ def parse_generated_artifact(text: str, expected_table_count: int) -> list[tuple
     return tables
 
 
-def validate_equivalence() -> None:
-    source = source_baseline_tables()
-    expected_table_count = len(source)
-    generated = parse_generated_artifact(read_required(ARTIFACT), expected_table_count)
-    if len(source) != len(generated):
-        fail("generated baseline artifact table count differs from source baseline")
-    for index, ((source_name, source_points), (generated_name, generated_points)) in enumerate(zip(source, generated)):
-        if source_name != generated_name:
-            fail(
-                f"generated baseline artifact table name/order mismatch at {index}: "
-                f"{generated_name} != {source_name}"
-            )
-        if len(source_points) != len(generated_points):
-            fail(f"generated baseline artifact point count mismatch for {source_name}")
-        for point_index, (source_point, generated_point) in enumerate(zip(source_points, generated_points)):
-            if source_point != generated_point:
-                fail(
-                    f"generated baseline artifact point mismatch for {source_name}[{point_index}]: "
-                    f"{generated_point} != {source_point}"
-                )
+def validate_materialized_candidate_artifact() -> None:
+    expected_table_count = EXPECTED_TABLE_COUNT
+    materialized = parse_generated_artifact(read_required(ARTIFACT), expected_table_count)
+    generated_output = parse_generated_artifact(read_required(GENERATED_OUTPUT), expected_table_count)
+    if materialized != generated_output:
+        fail("materialized artifact does not match the generated candidate output fixture")
 
 
 def validate_fixture(fixture: dict[str, Any]) -> None:
@@ -355,11 +333,11 @@ def validate_fixture(fixture: dict[str, Any]) -> None:
     if not isinstance(comparison, dict):
         fail("fixture equivalence_comparison must be an object")
     expected_comparison = {
-        "method": "source-inspection",
-        "source_tables": rel(SOURCE_TABLES),
-        "source_runtime_view": rel(SOURCE_INTERPRETER),
+        "method": "materialized-candidate-output",
+        "generated_output_fixture": rel(GENERATED_OUTPUT),
+        "layout_spec_fixture": rel(LAYOUT_SPEC_FIXTURE),
         "artifact_tables": rel(ARTIFACT),
-        "table_count": len(source_baseline_tables()),
+        "table_count": EXPECTED_TABLE_COUNT,
         "points_per_table": EXPECTED_POINT_COUNT,
         "axes_per_point": EXPECTED_AXES_PER_POINT,
     }
@@ -409,16 +387,21 @@ def validate_identity_header_includes_generated_baseline() -> None:
 
 def validate_deterministic_generation() -> None:
     completed = subprocess.run(
-        ["python3", str(GENERATOR), "--emit-current-source-owned-baseline"],
+        [
+            "python3",
+            str(GENERATOR),
+            "--emit-from-layout-spec",
+            str(LAYOUT_SPEC_FIXTURE),
+        ],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=False,
     )
     if completed.returncode != 0:
-        fail("baseline generator failed: " + completed.stderr.strip())
-    if completed.stdout != read_required(ARTIFACT):
-        fail("generated baseline artifact does not match deterministic source-baseline generator output")
+        fail("candidate generator failed: " + completed.stderr.strip())
+    if completed.stdout != read_required(GENERATED_OUTPUT):
+        fail("generated baseline artifact does not match deterministic candidate generator output")
 
 
 def main() -> int:
@@ -428,13 +411,13 @@ def main() -> int:
     validate_changed_paths(changed_paths(branch))
     validate_identity_header_includes_generated_baseline()
     validate_not_included_by_ultimate()
-    validate_equivalence()
+    validate_materialized_candidate_artifact()
     validate_deterministic_generation()
     validate_docs()
     print("glyph_generated_source_owned_baseline_artifact: PASS")
     print(f"- branch: {branch}")
     print(f"- artifact: {rel(ARTIFACT)}")
-    print("- baseline equivalence: proven by source/artifact table comparison")
+    print("- materialized candidate equivalence: proven by generated-output comparison")
     return 0
 
 

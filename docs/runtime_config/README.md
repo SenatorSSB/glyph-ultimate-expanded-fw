@@ -123,7 +123,7 @@ path. nunchuk `NOT_TESTED`.
 
 The candidate-generation diff diagnosis currently classifies the inert
 layout-spec candidate as `TABLE_CONTENT_EQUIVALENT` on this branch, because
-the candidate has been materialized into the approved inert alias path. Use
+the materialized artifact matches the generated candidate output fixture. Use
 `python3 tools/check_glyph_source_owned_candidate_generation_diff.py` to
 reproduce the semantic comparison.
 
