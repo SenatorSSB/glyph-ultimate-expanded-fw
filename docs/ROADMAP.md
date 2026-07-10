@@ -67,9 +67,9 @@ Current safe queue after the generator/checker hardening:
 - keep the offline candidate-prep wrapper and checker aligned with the dry-run
   plan, refusal cases, and approved inert Alternative B source path.
 The candidate-generation diff diagnosis for the inert layout-spec fixture is
-`TABLE_CONTENT_DIFFERENT`, with the candidate profile name and 26 table
-records drifting from the current source-owned baseline while `kY2Table` and
-`kTilt3Table` remain source-aligned.
+`TABLE_CONTENT_EQUIVALENT` on this branch, because the generated candidate has
+been materialized into the approved inert alias path and all 28 tables now
+match the checked-in baseline artifact.
 
 Current generated-source-owned packets in scope:
 `generated_source_owned_realization_design.md`,
@@ -132,8 +132,8 @@ active. source-owned active-state `HARDWARE_PASS` evidence and
 future hardware gate required before generated source-owned baseline artifact
 is selected active.
 Nunchuk `NOT_TESTED`.
-The candidate-generation diff diagnosis remains hardware-candidate material
-because table contents differ rather than formatting alone.
+The candidate-generation diff diagnosis now reflects the materialized inert
+alias-path branch rather than a drift-only diagnostic packet.
 
 ## Phase 2 - Coordinate-Native Runtime Profile Contract Scaffolding
 

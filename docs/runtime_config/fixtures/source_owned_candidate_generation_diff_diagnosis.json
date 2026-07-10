@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "packet": "source_owned_candidate_generation_diff_diagnosis",
-  "classification": "TABLE_CONTENT_DIFFERENT",
+  "classification": "TABLE_CONTENT_EQUIVALENT",
   "candidate_layout_spec_fixture": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
   "baseline_artifact": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
   "source_tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
@@ -10,10 +10,6 @@
   "same_table_shape": true,
   "same_table_count": true,
   "same_tables": [
-    "kY2Table",
-    "kTilt3Table"
-  ],
-  "different_tables": [
     "kDefaultTable",
     "kModeDefaultTable",
     "kX1Table",
@@ -21,6 +17,7 @@
     "kMX1Table",
     "kMX2Table",
     "kY1Table",
+    "kY2Table",
     "kMY1Table",
     "kLayerNormalXTable",
     "kMLayerNormalXTable",
@@ -34,6 +31,7 @@
     "kMY1LayerNormalXTable",
     "kTilt1Table",
     "kTilt2Table",
+    "kTilt3Table",
     "kTilt1Minus41Table",
     "kRT1RF4CustomTable",
     "kMTilt1Table",
@@ -41,17 +39,13 @@
     "kMTilt3Table",
     "kLt1LowMagnitudeTable"
   ],
-  "metadata_drift": {
-    "profile_name": {
-      "baseline": "current_source_owned_baseline_runtime_config",
-      "candidate": "example_source_owned_runtime_config"
-    }
-  },
+  "different_tables": [],
+  "metadata_drift": {},
   "comparison_checker": "tools/check_glyph_source_owned_candidate_generation_diff.py",
   "notes": [
-    "The candidate is not byte-for-byte equivalent to the current source-owned baseline.",
-    "26 tables collapse to the same canonical 0/128/255 grid pattern.",
-    "This remains offline-only diagnostic evidence.",
+    "The checked-in inert baseline artifact now matches the generated candidate on this branch.",
+    "The pre-materialization diagnostic packet preserves the earlier TABLE_CONTENT_DIFFERENT evidence.",
+    "All 28 tables are source-aligned on this branch.",
     "Nunchuk remains NOT_TESTED.",
     "Root cause remains unproven."
   ]

@@ -132,7 +132,7 @@ _GENERATED_RAW_TABLE_PATTERN = re.compile(
     re.DOTALL,
 )
 _GENERATED_RAW_ROW_PATTERN = re.compile(
-    r"\{\s*//\s*(?P<index>\d+)\s+(?P<symbol>k[A-Za-z0-9_]+Table)\s*(?P<body>.*?)\n\s*\},",
+    r"\{\s*//\s*(?P<index>\d+)\s+(?P<label>k[A-Za-z0-9_]+Table|[A-Za-z0-9_]+)\s*(?P<body>.*?)\n\s*\},",
     re.DOTALL,
 )
 _GENERATED_RAW_POINT_PATTERN = re.compile(r"\{\s*(?P<x>\d+)u?\s*,\s*(?P<y>\d+)u?\s*\}")
@@ -268,11 +268,15 @@ def _parse_generated_raw_tables(source_text: str) -> dict[str, tuple[tuple[int, 
         return {}
 
     symbol_to_name = {symbol: name for symbol, name in TABLE_SYMBOL_TO_NAME}
+    name_to_symbol = {name: symbol for symbol, name in TABLE_SYMBOL_TO_NAME}
     parsed: dict[str, tuple[tuple[int, int], ...]] = {}
     seen_indexes: set[int] = set()
     for row_match in _GENERATED_RAW_ROW_PATTERN.finditer(match.group("body")):
         index = int(row_match.group("index"))
-        symbol = row_match.group("symbol")
+        label = row_match.group("label")
+        symbol = label if label in symbol_to_name else name_to_symbol.get(label, "")
+        if not symbol:
+            continue
         if symbol not in symbol_to_name:
             continue
         if index in seen_indexes:

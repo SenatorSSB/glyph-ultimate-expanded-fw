@@ -9,24 +9,20 @@ compares it against the current checked-in source-owned baseline artifact at
 
 ## Classification
 
-- `TABLE_CONTENT_DIFFERENT`
+- `TABLE_CONTENT_EQUIVALENT`
 
 ## Summary
 
-- The candidate output is not byte-for-byte equivalent to the current
-  source-owned baseline.
+- The checked-in inert baseline artifact now matches the generated candidate
+  on this branch.
 - Table shape is unchanged: 28 tables, 9 points per table, 2 axes per point.
 - Table order is unchanged.
-- Metadata drift is present: `profile_name` changes from
-  `current_source_owned_baseline_runtime_config` to
-  `example_source_owned_runtime_config`.
-- Table-content drift is the real mismatch: 26 tables collapse to the same
-  canonical `0/128/255` grid pattern.
-- Two tables remain source-aligned: `kY2Table` and `kTilt3Table`.
+- Metadata drift is absent.
+- All 28 tables are source-aligned on this branch.
 
-## Exact Non-Equivalence
+## Exact Equivalence
 
-The following source-owned tables changed content in the candidate output:
+All source-owned tables are now source-aligned:
 
 - `kDefaultTable`
 - `kModeDefaultTable`
@@ -35,6 +31,7 @@ The following source-owned tables changed content in the candidate output:
 - `kMX1Table`
 - `kMX2Table`
 - `kY1Table`
+- `kY2Table`
 - `kMY1Table`
 - `kLayerNormalXTable`
 - `kMLayerNormalXTable`
@@ -48,6 +45,7 @@ The following source-owned tables changed content in the candidate output:
 - `kMY1LayerNormalXTable`
 - `kTilt1Table`
 - `kTilt2Table`
+- `kTilt3Table`
 - `kTilt1Minus41Table`
 - `kRT1RF4CustomTable`
 - `kMTilt1Table`
@@ -55,17 +53,11 @@ The following source-owned tables changed content in the candidate output:
 - `kMTilt3Table`
 - `kLt1LowMagnitudeTable`
 
-The source-aligned tables were:
-
-- `kY2Table`
-- `kTilt3Table`
-
 ## Interpretation
 
-This is not a formatting-only diff and not a pure canonicalization-only diff.
-It is hardware-candidate material because table contents changed while the
-shape stayed stable.
+This is a materialized source-owned candidate branch on the approved inert
+alias path. The generated candidate output now matches the checked-in alias
+file on this branch, while remaining offline-only and non-active.
 
 The semantic comparison is implemented by
 `tools/check_glyph_source_owned_candidate_generation_diff.py`.
-

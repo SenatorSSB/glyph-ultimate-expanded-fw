@@ -290,16 +290,20 @@ def parse_generated_artifact(text: str, expected_table_count: int) -> list[tuple
         fail("generated baseline artifact axes-per-point does not match expected shape")
 
     row_re = re.compile(
-        rf"\{{\s*//\s*(?P<index>\d+)\s+(?P<symbol>k[A-Za-z0-9_]+Table)\s*(?P<body>.*?)\n\s*\}},",
+        rf"\{{\s*//\s*(?P<index>\d+)\s+(?P<label>k[A-Za-z0-9_]+Table|[A-Za-z0-9_]+)\s*(?P<body>.*?)\n\s*\}},",
         re.DOTALL,
     )
     point_re = re.compile(r"\{\s*(\d+)u?\s*,\s*(\d+)u?\s*\}")
+    symbol_by_name = source_symbol_by_normalized_name()
     tables: list[tuple[str, list[tuple[int, int]]]] = []
     seen_indexes: set[int] = set()
     seen_symbols: set[str] = set()
     for match in row_re.finditer(text):
         index = int(match.group("index"))
-        symbol = match.group("symbol")
+        label = match.group("label")
+        symbol = label if label in symbol_by_name.values() else symbol_by_name.get(label, "")
+        if not symbol:
+            continue
         points = [(int(x), int(y)) for x, y in point_re.findall(match.group("body"))]
         if len(points) != EXPECTED_POINT_COUNT:
             fail(f"generated table {symbol} must contain {EXPECTED_POINT_COUNT} points")

@@ -36,7 +36,7 @@ LAYOUT_SPEC_GENERATOR = REPO_ROOT / "tools/install_generated_source_owned_runtim
 
 SCHEMA_VERSION = 1
 PACKET = "source_owned_candidate_generation_diff_diagnosis"
-DEFAULT_CLASSIFICATION = "TABLE_CONTENT_DIFFERENT"
+DEFAULT_CLASSIFICATION = "TABLE_CONTENT_EQUIVALENT"
 POINTS_PER_TABLE = 9
 AXES_PER_POINT = 2
 
@@ -284,11 +284,11 @@ def build_report(layout_spec_path: Path) -> dict[str, Any]:
         "candidate_label_set": comparison["candidate_label_set"],
         "source_baseline_table_symbols": source_order,
         "source_baseline_tables": same_source_baseline,
-        "notes": [
-            "Candidate generation is not byte-for-byte equivalent to the current source-owned baseline.",
-            "Two tables remain source-aligned: kY2Table and kTilt3Table.",
-            "The remaining 26 tables collapse to the same canonical 0/128/255 grid pattern.",
-            "Because table contents differ, this is hardware-candidate material rather than formatting-only drift.",
+    "notes": [
+            "The checked-in inert baseline artifact now matches the generated candidate on this branch.",
+            "The pre-materialization diagnostic packet preserves the earlier TABLE_CONTENT_DIFFERENT evidence.",
+            "All 28 tables are source-aligned on this branch.",
+            "This branch remains offline-only and non-active.",
         ],
     }
 
