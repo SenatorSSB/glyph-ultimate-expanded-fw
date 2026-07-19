@@ -42,6 +42,12 @@ implementation work. Detailed historical evidence remains indexed from
 - The current docs/checker queue also includes `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and `tools/check_glyph_runtime_config_activation_alternatives.py`, which classify A as currently hardware-passed, B as hardware-passed only for the source-owned generated-table alias candidate that preserves the active publication path, C-E as explicitly forbidden under current evidence, and F as future architecture only.
 - The source-owned table symbol-map note and checker now document the current Alternative B alias/replacement boundary without changing the active publication path.
 - Overlay/preserve generation is checker-enforced; unowned tables preserve the current source-owned baseline and production example provenance is rejected.
+- Generator modes are complete as offline tooling: `full_replacement`,
+  `overlay_preserve`, and `reject_partial` have explicit semantics, complete
+  28-row manifests, deterministic semantic digests, stable CLI exit codes,
+  preparation/install gates, and fixture-backed regression coverage. No
+  production profile has been authorized; the current example remains
+  `SOURCE_AUTHORITY_BLOCKER`, and no hardware candidate was created.
 
 ## Current Implementation Boundary
 
@@ -77,10 +83,9 @@ implementation work. Detailed historical evidence remains indexed from
   source-owned table symbol-map claim-invariant hardening.
 - Next safe queue: keep coordinate-native offline pipeline, bundle manifest,
   and export-package checks aligned with their fixtures.
-- Next safe queue: implement overlay/preserve candidate-generation semantics
-  and checker enforcement. Candidate generation must use full replacement,
-  overlay/preserve, or reject semantics; partial/example input must not
-  silently fill unspecified production tables with canonical defaults.
+- Next safe queue: obtain an explicit source-authorized owned-table set and
+  replacement content. The completed offline generator must not be promoted to
+  a production or hardware candidate without that authority.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 - Offline dry-run evaluator: `tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed positive and negative cases under `docs/runtime_config/fixtures/`.
