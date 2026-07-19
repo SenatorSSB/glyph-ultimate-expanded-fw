@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "packet": "generated_source_owned_generator_modes_fixture_policy",
+  "authority_classes": [
+    "production_authorized",
+    "source_baseline_derived",
+    "synthetic_test",
+    "example_only",
+    "invalid"
+  ],
+  "modes": ["full_replacement", "overlay_preserve", "reject_partial"],
+  "table_shape": {"table_count": 28, "points_per_table": 9, "axes_per_point": 2},
+  "production_profile_authorized": false,
+  "hardware_candidate_created": false,
+  "example_classification": "SOURCE_AUTHORITY_BLOCKER",
+  "canonical_grid_regression": "reject before preparation/install",
+  "runtime_loaded_config_implemented": false,
+  "webserial_device_write_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false
+}

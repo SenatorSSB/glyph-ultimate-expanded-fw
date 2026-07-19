@@ -116,6 +116,15 @@ That contract is now implemented by the standalone overlay generator,
 semantic comparator, and negative-corpus checker. The current example/layout-
 spec input still has no explicit ownership declaration and is therefore a
 `SOURCE_AUTHORITY_BLOCKER`, not a hardware candidate.
+
+The complete generator-mode cycle is now complete as offline tooling in
+`tools/source_owned_generator_modes.py` and its CLI/checker. The three modes,
+explicit provenance, source-derived baseline identity, deterministic artifact
+and manifest digests, preparation/install gates, stable exit codes, migration
+refusal for ambiguous legacy input, and fixture-backed regression matrix are
+implemented. This does not authorize a production profile, create a hardware
+candidate, or change active source. The next blocker is an explicit
+source-authorized owned-table set and replacement content.
 The inert proof report is
 `docs/runtime_config/generated_source_owned_overlay_preserve_proof_2026-07-19.md`.
 The normal generator input now requires `layout_spec`, so spec-less JSON is

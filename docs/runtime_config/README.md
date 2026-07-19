@@ -14,6 +14,17 @@ overlay/preserve, and reject-partial are distinct modes; overlay/preserve
 copies every unowned table from the current source-owned baseline and emits a
 28-row manifest. Example provenance is refused by production preparation and
 installation. A semantic no-op is not hardware-candidate material.
+
+The complete offline generator-mode pipeline is now implemented in
+`tools/source_owned_generator_modes.py` with the thin CLI
+`tools/generate_source_owned_generator_modes.py`. It provides mandatory mode
+selection, explicit provenance and ownership, source-extracted baseline
+identity, deterministic semantic digests, complete artifacts/manifests,
+classification, preparation, atomic inert installation, stable exit codes, and
+fixture-backed positive/negative coverage via
+`tools/check_glyph_source_owned_generator_modes.py`. The current example input
+remains `SOURCE_AUTHORITY_BLOCKER`; no production profile or hardware
+candidate is authorized by this cycle.
 The 2026-07-19 proof report classifies the current example/layout-spec input as
 `SOURCE_AUTHORITY_BLOCKER` because it declares no ownership.
 
@@ -148,6 +159,9 @@ Future candidate generation must use explicit full-replacement,
 overlay/preserve, or reject semantics. Partial/example input must not silently
 fill unspecified production tables with canonical defaults, and generated
 candidates must include a table-by-table change manifest before hardware.
+
+See `generated_source_owned_generator_modes.md` for the mode, provenance,
+versioning, digest, manifest, CLI, preparation/install, and migration contract.
 
 ## Safe Source-Owned Realization Path
 
