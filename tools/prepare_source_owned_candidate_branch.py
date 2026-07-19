@@ -33,6 +33,7 @@ from generate_source_owned_runtime_config import (
     generate_from_layout_spec,
     load_json_object,
 )
+from glyph_source_owned_overlay import OverlayContractError, generate_overlay_payload
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -284,6 +285,13 @@ def main(argv: list[str] | None = None) -> int:
             layout_spec_path, _ = parse_layout_spec(args.layout_spec)
             input_kind = "layout-spec"
             input_path = resolve_input_path(args.layout_spec)
+
+        if args.write_source:
+            try:
+                payload = load_json_object(input_path)
+                generate_overlay_payload(payload, production=True)
+            except (GeneratorContractError, OverlayContractError, OSError) as exc:
+                fail("production source preparation requires explicit safe generation semantics: " + str(exc))
 
         source_artifact_path, generated_text = generate_source_artifact(layout_spec_path)
         plan = build_plan(

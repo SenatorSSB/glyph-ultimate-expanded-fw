@@ -8,6 +8,13 @@ you need the supporting evidence.
 
 ## Current Known-Good State
 
+Overlay/preserve candidate-generation semantics are now checker-enforced in
+`generated_source_owned_overlay_preserve_contract.md`. Full replacement,
+overlay/preserve, and reject-partial are distinct modes; overlay/preserve
+copies every unowned table from the current source-owned baseline and emits a
+28-row manifest. Example provenance is refused by production preparation and
+installation. A semantic no-op is not hardware-candidate material.
+
 - Current active firmware state: latest Y2 layout source-owned port after
   HARDWARE_PASS.
 - Primary packet:

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "packet": "generated_source_owned_overlay_preserve_contract",
+  "generation_modes": [
+    "full_replacement",
+    "overlay_preserve",
+    "reject_partial"
+  ],
+  "active_table_shape": {
+    "table_count": 28,
+    "points_per_table": 9,
+    "axes_per_point": 2
+  },
+  "overlay_requirements": {
+    "explicit_owned_tables": true,
+    "baseline_identity_required": true,
+    "unowned_tables_preserved_semantically": true,
+    "complete_manifest_required": true,
+    "canonical_defaults_may_fill_unowned_tables": false,
+    "example_provenance_allowed_in_production": false,
+    "no_op_is_hardware_candidate": false
+  },
+  "active_installation": "separate_explicit_step",
+  "runtime_loaded_config_implemented": false,
+  "webserial_device_write_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false
+}

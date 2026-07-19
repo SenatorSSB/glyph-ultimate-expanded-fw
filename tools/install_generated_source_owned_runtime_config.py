@@ -25,6 +25,7 @@ from generate_source_owned_runtime_config import (
     assert_inert_source_install_path,
     generate_from_layout_spec,
 )
+from glyph_source_owned_overlay import OverlayContractError, generate_overlay_payload
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -94,14 +95,23 @@ def build_arg_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="print the would-be installed text to stdout without writing files",
     )
+    parser.add_argument(
+        "--production",
+        action="store_true",
+        help="apply production provenance and explicit overlay/full-replacement gates",
+    )
     return parser
 
 
 def generate_install_text(args: argparse.Namespace) -> str:
     if args.from_layout_spec is not None:
         try:
+            if args.production:
+                import json
+                payload = json.loads(args.from_layout_spec.read_text(encoding="utf-8"))
+                generate_overlay_payload(payload, production=True)
             return generate_from_layout_spec(args.from_layout_spec)
-        except GeneratorContractError as exc:
+        except (GeneratorContractError, OverlayContractError, OSError, ValueError) as exc:
             fail(str(exc))
     assert args.from_generated_output is not None
     return read_required(args.from_generated_output)

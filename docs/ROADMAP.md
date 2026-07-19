@@ -112,6 +112,10 @@ candidate-generation semantics and checker enforcement: full replacement must
 specify every active table, overlay/preserve must copy unspecified tables from
 the current source-owned baseline, and partial input without that policy must
 be rejected.
+That contract is now implemented by the standalone overlay generator,
+semantic comparator, and negative-corpus checker. The current example/layout-
+spec input still has no explicit ownership declaration and is therefore a
+`SOURCE_AUTHORITY_BLOCKER`, not a hardware candidate.
 The normal generator input now requires `layout_spec`, so spec-less JSON is
 rejected.
 Related fixtures in scope:
