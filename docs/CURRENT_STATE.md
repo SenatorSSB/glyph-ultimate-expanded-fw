@@ -44,6 +44,14 @@ implementation work. Detailed historical evidence remains indexed from
 
 ## Current Implementation Boundary
 
+The source-owned candidate generator now requires explicit generation policy.
+`overlay_preserve` accepts only explicitly owned table slots and preserves all
+unowned active tables from the current source-owned baseline, with a complete
+deterministic manifest. `full_replacement` requires all 28 slots;
+`reject_partial` refuses incomplete input. Production example/fixture
+provenance is rejected. This is docs/tooling-only and does not change active
+firmware behavior.
+
 - Safe current path: source-owned realization generator work that produces source-owned tables/routing source for review, build, and hardware-gated firmware behavior changes.
 - Safe offline source-owned layout-spec bridge path: `tools/convert_coordinate_native_profile_to_source_owned_spec.py` validates a supported coordinate-native profile fixture and emits the inert source-owned layout-spec packet consumed by `--emit-from-layout-spec`; the emitted layout spec stays offline-only and does not load into firmware.
 - Safe offline coordinate-native pipeline packaging path: `tools/check_glyph_coordinate_native_runtime_profile_contract.py` now exposes `--check-offline-pipeline`, `--check-offline-artifact-bundle-manifest`, and `--check-offline-export-package` for the y2 fixture, offline bundle manifest, and offline export package. The fixtures stay provenance-only and do not imply runtime-loaded config, WebSerial/device write, persistent storage, or flashing automation.
