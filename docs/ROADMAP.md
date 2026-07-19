@@ -70,6 +70,11 @@ The candidate-generation diff diagnosis for the inert layout-spec fixture is
 `TABLE_CONTENT_DIFFERENT`, with the candidate profile name and 26 table
 records drifting from the current source-owned baseline while `kY2Table` and
 `kTilt3Table` remain source-aligned.
+The generated canonical-grid candidate at
+`e643017c1577c9ca2b94581fa6f18c0dfb1bac9b` is now HARDWARE_FAIL and must not
+merge. The failure concerns generated table content, not the already
+hardware-passed Alternative B alias mechanism when source-aligned table
+content preserves the existing active publication path.
 
 Current generated-source-owned packets in scope:
 `generated_source_owned_realization_design.md`,
@@ -102,6 +107,11 @@ adds a dry-run plan for
 `runtime-config-install-workflow-candidate-generation`, keeping the approved
 inert Alternative B source path explicit and refusing direct writes on
 `configurator`.
+Next safe implementation branch should focus on overlay/preserve
+candidate-generation semantics and checker enforcement: full replacement must
+specify every active table, overlay/preserve must copy unspecified tables from
+the current source-owned baseline, and partial input without that policy must
+be rejected.
 The normal generator input now requires `layout_spec`, so spec-less JSON is
 rejected.
 Related fixtures in scope:

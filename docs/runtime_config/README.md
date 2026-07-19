@@ -125,7 +125,20 @@ The candidate-generation diff diagnosis currently classifies the inert
 layout-spec candidate as `TABLE_CONTENT_DIFFERENT` against the current
 source-owned baseline. Use
 `python3 tools/check_glyph_source_owned_candidate_generation_diff.py` to
-reproduce the semantic comparison.
+reproduce the semantic comparison. The generated canonical-grid candidate at
+`e643017c1577c9ca2b94581fa6f18c0dfb1bac9b` is now recorded as HARDWARE_FAIL
+in
+`docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md`.
+The failure concerns generated table content: 26 non-Y2/Tilt3 tables were
+canonical `0/128/255` grids, while `kY2Table` and `kTilt3Table` remained
+source-aligned. It does not invalidate the already hardware-passed Alternative
+B alias mechanism when source-aligned table content preserves the existing
+active `RuntimeConfigView` publication path.
+
+Future candidate generation must use explicit full-replacement,
+overlay/preserve, or reject semantics. Partial/example input must not silently
+fill unspecified production tables with canonical defaults, and generated
+candidates must include a table-by-table change manifest before hardware.
 
 ## Safe Source-Owned Realization Path
 

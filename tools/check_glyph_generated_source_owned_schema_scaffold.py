@@ -32,6 +32,7 @@ ALLOWED_DOC_PATHS = {
     "docs/AGENT_CONTEXT.md",
     "docs/calibration/INDEX.md",
     "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+    "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
     "docs/runtime_config/generated_source_owned_schema_scaffold.md",
     "docs/runtime_config/fixtures/generated_source_owned_schema_scaffold.json",
     "docs/runtime_config/generated_source_owned_generator_contract.md",

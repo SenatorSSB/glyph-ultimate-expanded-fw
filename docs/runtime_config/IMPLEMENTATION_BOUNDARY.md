@@ -48,6 +48,16 @@ stays offline-only, and is not an approval for runtime-loaded config,
 WebSerial/device write, persistent runtime-config storage, backend config
 write, or flashing automation.
 
+Generated production candidates must use explicit full replacement,
+overlay/preserve, or reject semantics. Full replacement must specify and
+validate every active table. Overlay/preserve may change only explicitly owned
+tables and must copy unspecified tables from the current source-owned
+baseline. Partial input without an explicit overlay/preserve policy must fail.
+Do not silently fill unspecified production tables with example/canonical
+defaults. The generated canonical-grid candidate at
+`e643017c1577c9ca2b94581fa6f18c0dfb1bac9b` is HARDWARE_FAIL and must not
+merge.
+
 Browser/protobuf/persistence work may be future infrastructure after the runtime
 model exists. It is not approval for device write, persistent runtime-config
 storage, backend config write paths, or flashing automation.

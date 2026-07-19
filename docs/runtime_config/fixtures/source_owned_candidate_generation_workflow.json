@@ -24,11 +24,33 @@
     "clean working tree required",
     "direct writes on configurator refused",
     "approved inert Alternative B source path only",
+    "table-by-table change manifest required before hardware",
+    "example profile metadata cannot create production candidates without explicit approval",
+    "partial input without overlay/preserve policy rejected",
     "no device write",
     "no persistent storage",
     "no flashing automation",
     "no active publication changes"
   ],
+  "candidate_generation_policy": {
+    "allowed_modes": [
+      "full_replacement",
+      "overlay_preserve",
+      "reject"
+    ],
+    "current_mode": "reject",
+    "full_replacement_requirement": "every active table must be explicitly specified and validated",
+    "overlay_preserve_requirement": "only explicitly owned tables may change; unspecified tables must be copied from the current source-owned baseline",
+    "reject_requirement": "partial input without an explicit overlay/preserve policy must fail",
+    "unspecified_table_policy": "reject_without_explicit_overlay_preserve",
+    "silent_canonical_default_fill_allowed": false,
+    "example_profile_production_candidate_allowed_without_explicit_approval": false,
+    "table_by_table_change_manifest_required": true,
+    "preserved_tables_must_match_current_source_semantically": true
+  },
+  "candidate_generation_without_table_change_manifest": "reject",
+  "explicit_profile_table_ownership_required": true,
+  "current_source_preserve_policy_required_for_unspecified_tables": true,
   "forbidden_claims": [
     "runtime_loaded_config_implemented",
     "persistent_storage_implemented",

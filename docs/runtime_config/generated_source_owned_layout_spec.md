@@ -51,6 +51,15 @@ and still emits the same source-owned fixture.
 Future hardware gate required before generated source-owned tables are
 selected active.
 
+For production candidate generation, the layout-spec lane must not silently
+fill unspecified active tables with example/canonical defaults. A future
+candidate must use full replacement, overlay/preserve, or reject semantics:
+every active table is explicitly specified; or only explicitly owned tables
+change while unspecified tables are copied from the current source-owned
+baseline; or partial input without such policy fails. Example metadata remains
+diagnostic-only without explicit production approval, and every candidate must
+provide a table-by-table change manifest.
+
 ## Non-Claims
 
 - This packet does not change active firmware behavior.

@@ -46,6 +46,7 @@ ALLOWED_EXACT_PATHS = {
     "docs/ROADMAP.md",
     "docs/calibration/INDEX.md",
     "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+    "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
     "tools/generate_source_owned_runtime_config.py",
     "tools/check_glyph_generated_source_owned_artifact_install.py",
     "tools/check_glyph_coordinate_native_runtime_profile_contract.py",

@@ -21,7 +21,7 @@ DOCS_SURFACE_BRANCH = "docs-agent-surface-cleanup"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
-ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-",)
+ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-", "docs-runtime-config-")
 REFERENCE_BRANCH = "codex/update-custom-modifier-tables-y2"
 
 ULTIMATE = REPO_ROOT / "src/modes/Ultimate.cpp"

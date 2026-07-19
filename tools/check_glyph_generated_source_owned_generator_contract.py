@@ -308,6 +308,7 @@ def validate_changed_paths(paths: set[str]) -> None:
             "docs/ROADMAP.md",
             "docs/calibration/INDEX.md",
             "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+            "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
         }:
             continue
         if path.startswith("docs/"):

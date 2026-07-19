@@ -42,6 +42,15 @@ for full discovery.
 These packets remain important historical evidence. They are not current work
 and must not be reintroduced as active publication paths.
 
+- `generated_canonical_grid_candidate_hardware_result_2026-07-19.md` -
+  generated canonical-grid candidate HARDWARE_FAIL for commit
+  `e643017c1577c9ca2b94581fa6f18c0dfb1bac9b`. Forced Up + A, forced Down + A,
+  Up + B, Y2 routing, and Tilt3 left-stick modification passed; most
+  modifier-driven left-stick magnitude changes failed, including Z and Y2
+  sublayer left-stick modification. Root cause remains unproven, runtime-loaded
+  config and WebSerial/device write remain not implemented, and Nunchuk
+  remains NOT_TESTED. The failed candidate and its evidence branch must not be
+  merged into `configurator`.
 - `glyph_phase7a_runtime_config_compiled_payload_activation_hardware_failure_2026-06-08.md`
   - archived runtime-active compiled payload activation failure.
 - `docs/runtime_config/diagnostic_active_storage_published_hardware_failure_2026-06-28.md`

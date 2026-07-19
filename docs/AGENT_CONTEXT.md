@@ -21,6 +21,14 @@ Read this before using older calibration packets as roadmap input.
   `ee5fd35c4ce00e31d9a00905c771699ad17517b9` is now recorded as
   HARDWARE_PASS when preserving the existing active RuntimeConfigView
   publication path.
+- The generated canonical-grid candidate at
+  `e643017c1577c9ca2b94581fa6f18c0dfb1bac9b` is now recorded as
+  HARDWARE_FAIL and must not merge. The failure concerns generated table
+  content, not the already-proven Alternative B alias mechanism when
+  source-aligned table content preserves the existing active publication path.
+- The immediate mechanism supported by source/checker evidence is 26
+  non-Y2/Tilt3 tables being canonical `0/128/255` grids instead of current
+  source-owned contents; root cause remains unproven.
 - Nunchuk remains NOT_TESTED.
 - The low-level root cause remains unproven.
 
@@ -50,7 +58,10 @@ automation from this context document.
 
 - Maintain the source-owned Y2 layout baseline and current checkers.
 - Harden the source-owned realization generator path for source-owned
-  tables/routing source.
+  tables/routing source, starting with overlay/preserve candidate-generation
+  semantics and checker enforcement. Candidate generation must use full
+  replacement, overlay/preserve, or reject semantics and must not silently fill
+  unspecified production tables with example/canonical defaults.
 - Design coordinate-native runtime profile support separately.
 - Treat browser/protobuf/persistence backend work as future infrastructure
   after the runtime model exists.

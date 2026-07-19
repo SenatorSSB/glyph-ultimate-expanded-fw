@@ -85,6 +85,19 @@ layout-spec tables and does not silently normalize them.
 its fixture pair in more detail. The spec is validation-only and does not alter
 active runtime selection.
 
+Production candidate generation must use one explicit policy:
+
+- Full replacement: every active table is explicitly specified and validated.
+- Overlay/preserve: only explicitly owned tables change; unspecified tables
+  are copied from the current source-owned baseline.
+- Reject: partial input without an explicit overlay/preserve policy fails.
+
+Do not silently fill unspecified production tables with example/canonical
+defaults. Example metadata such as `example_source_owned_runtime_config` is
+diagnostic-only and must not produce a production candidate without explicit
+approval. Generated candidates require a table-by-table change manifest, and
+preserved tables must match the current source-owned baseline semantically.
+
 ## Output Contract
 
 The generated C++ text must contain this explicit marker:
@@ -129,6 +142,7 @@ The generated fixture is not selected active in this branch.
 
 - This packet does not change active behavior.
 - This packet does not prove the low-level failure mechanism.
+- Root cause remains unproven.
 - This packet does not wire generated tables into active runtime selection.
 - This packet does not make `layout_spec` an active publication path.
 - This packet does not implement a parser payload path.
@@ -138,3 +152,4 @@ The generated fixture is not selected active in this branch.
 - This packet does not implement backend/config.pb write paths.
 - This packet does not implement firmware flashing automation.
 - This packet does not claim nunchuk validation.
+- Nunchuk remains `NOT_TESTED`.

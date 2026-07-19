@@ -13,7 +13,45 @@
     "kY2Table",
     "kTilt3Table"
   ],
+  "table_by_table_change_manifest_present": true,
+  "table_change_manifest_summary": {
+    "expected_rows": 28,
+    "replace_candidate_points": 26,
+    "preserve_source_owned_baseline": 2,
+    "preserved_tables": [
+      "kY2Table",
+      "kTilt3Table"
+    ]
+  },
   "different_tables": [
+    "kDefaultTable",
+    "kModeDefaultTable",
+    "kX1Table",
+    "kX2Table",
+    "kMX1Table",
+    "kMX2Table",
+    "kY1Table",
+    "kMY1Table",
+    "kLayerNormalXTable",
+    "kMLayerNormalXTable",
+    "kLayerFlipperTable",
+    "kMLayerFlipperTable",
+    "kY1Tilt1Table",
+    "kMY1Tilt1Table",
+    "kY1LayerFlipperTable",
+    "kMY1LayerFlipperTable",
+    "kY1LayerNormalXTable",
+    "kMY1LayerNormalXTable",
+    "kTilt1Table",
+    "kTilt2Table",
+    "kTilt1Minus41Table",
+    "kRT1RF4CustomTable",
+    "kMTilt1Table",
+    "kMTilt2Table",
+    "kMTilt3Table",
+    "kLt1LowMagnitudeTable"
+  ],
+  "canonical_grid_replacement_tables": [
     "kDefaultTable",
     "kModeDefaultTable",
     "kX1Table",
@@ -47,10 +85,37 @@
       "candidate": "example_source_owned_runtime_config"
     }
   },
+  "diagnostic_interpretation": {
+    "changed_values_structurally_valid": true,
+    "changed_values_semantically_unsuitable_for_current_source_owned_profile": true,
+    "immediate_mechanism_supported_by_source_checker_evidence": true,
+    "immediate_mechanism": "example/canonical layout-spec candidate generation produced a complete 28-table artifact whose 26 non-Y2/Tilt3 tables are canonical 0/128/255 grids instead of current source-owned table contents",
+    "firmware_root_cause_proven": false,
+    "routing_side_effects_appear_functional_from_user_report": true,
+    "runtime_loaded_config_implemented": false,
+    "webserial_device_write_implemented": false,
+    "nunchuk_status": "NOT_TESTED"
+  },
+  "candidate_generation_policy": {
+    "required_modes": [
+      "full_replacement",
+      "overlay_preserve",
+      "reject"
+    ],
+    "full_replacement": "every active table is explicitly specified and validated",
+    "overlay_preserve": "only explicitly owned tables change; unspecified tables are copied from the current source-owned baseline",
+    "reject": "partial input without explicit overlay/preserve policy fails",
+    "silent_canonical_default_fill_allowed": false,
+    "example_profile_production_candidate_allowed_without_explicit_approval": false,
+    "table_by_table_change_manifest_required": true,
+    "preserved_tables_must_match_current_source_semantically": true
+  },
   "comparison_checker": "tools/check_glyph_source_owned_candidate_generation_diff.py",
   "notes": [
     "The candidate is not byte-for-byte equivalent to the current source-owned baseline.",
     "26 tables collapse to the same canonical 0/128/255 grid pattern.",
+    "The changed table values are structurally valid bytes and table shapes, but semantically unsuitable for the current source-owned profile.",
+    "The immediate mechanism is supported by source/checker evidence; the low-level firmware root cause remains unproven.",
     "This remains offline-only diagnostic evidence.",
     "Nunchuk remains NOT_TESTED.",
     "Root cause remains unproven."

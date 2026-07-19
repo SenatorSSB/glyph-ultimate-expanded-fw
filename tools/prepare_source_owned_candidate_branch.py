@@ -51,6 +51,22 @@ VALIDATION_COMMANDS = [
 ]
 BUILD_COMMAND = "pio run -e glyph_mk6"
 HARDWARE_GATE_STATUS = "NOT_REQUIRED_FOR_DRY_RUN"
+GENERATION_POLICY = {
+    "allowed_modes": [
+        "full_replacement",
+        "overlay_preserve",
+        "reject",
+    ],
+    "current_mode": "reject",
+    "full_replacement_requirement": "every active table must be explicitly specified and validated",
+    "overlay_preserve_requirement": "only explicitly owned tables may change; unspecified tables must be copied from the current source-owned baseline",
+    "reject_requirement": "partial input without an explicit overlay/preserve policy must fail",
+    "unspecified_table_policy": "reject_without_explicit_overlay_preserve",
+    "silent_canonical_default_fill_allowed": False,
+    "example_profile_production_candidate_allowed_without_explicit_approval": False,
+    "table_by_table_change_manifest_required": True,
+    "preserved_tables_must_match_current_source_semantically": True,
+}
 
 
 class SourceOwnedCandidateBranchPreparationError(RuntimeError):
@@ -203,10 +219,17 @@ def build_plan(
         "build_command": BUILD_COMMAND,
         "hardware_gate_status": HARDWARE_GATE_STATUS,
         "source_write_mode": write_source,
+        "candidate_generation_policy": GENERATION_POLICY,
+        "candidate_generation_without_table_change_manifest": "reject",
+        "explicit_profile_table_ownership_required": True,
+        "current_source_preserve_policy_required_for_unspecified_tables": True,
         "source_write_safeguards": [
             "clean working tree required",
             "direct writes on configurator refused",
             "approved inert Alternative B source path only",
+            "table-by-table change manifest required before hardware",
+            "example profile metadata cannot create production candidates without explicit approval",
+            "partial input without overlay/preserve policy rejected",
             "no device write",
             "no persistent storage",
             "no flashing automation",

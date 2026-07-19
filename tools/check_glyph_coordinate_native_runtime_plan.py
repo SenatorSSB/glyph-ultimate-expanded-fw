@@ -34,6 +34,7 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "docs/ROADMAP.md",
     "docs/calibration/INDEX.md",
     "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+    "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
     "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
     "tools/generate_source_owned_runtime_config.py",
@@ -54,7 +55,9 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_docs_navigation.py",
     "tools/check_glyph_runtime_config_activation_alternatives.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+    "tools/check_glyph_source_owned_candidate_generation.py",
     "tools/check_glyph_source_owned_candidate_generation_diff.py",
+    "tools/prepare_source_owned_candidate_branch.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
 }

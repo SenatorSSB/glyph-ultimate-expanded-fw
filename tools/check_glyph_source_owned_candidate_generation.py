@@ -25,6 +25,22 @@ FORBIDDEN_CLAIMS = (
     "backend_config_pb_write_path_implemented",
     "flashing_automation_implemented",
 )
+EXPECTED_CANDIDATE_GENERATION_POLICY = {
+    "allowed_modes": [
+        "full_replacement",
+        "overlay_preserve",
+        "reject",
+    ],
+    "current_mode": "reject",
+    "full_replacement_requirement": "every active table must be explicitly specified and validated",
+    "overlay_preserve_requirement": "only explicitly owned tables may change; unspecified tables must be copied from the current source-owned baseline",
+    "reject_requirement": "partial input without an explicit overlay/preserve policy must fail",
+    "unspecified_table_policy": "reject_without_explicit_overlay_preserve",
+    "silent_canonical_default_fill_allowed": False,
+    "example_profile_production_candidate_allowed_without_explicit_approval": False,
+    "table_by_table_change_manifest_required": True,
+    "preserved_tables_must_match_current_source_semantically": True,
+}
 
 
 class SourceOwnedCandidateGenerationError(AssertionError):
@@ -97,6 +113,14 @@ def validate_plan_payload(payload: dict[str, Any], fixture: dict[str, Any], *, i
         fail("validation commands drifted")
     if payload.get("source_write_safeguards") != fixture.get("source_write_safeguards"):
         fail("source-write safeguards drifted")
+    if payload.get("candidate_generation_policy") != fixture.get("candidate_generation_policy"):
+        fail("candidate generation policy drifted")
+    if payload.get("candidate_generation_without_table_change_manifest") != "reject":
+        fail("plans must reject candidate generation without a table-by-table change manifest")
+    if payload.get("explicit_profile_table_ownership_required") is not True:
+        fail("plans must require explicit profile table ownership")
+    if payload.get("current_source_preserve_policy_required_for_unspecified_tables") is not True:
+        fail("plans must require current-source preserve policy for unspecified tables")
     for claim in FORBIDDEN_CLAIMS:
         if claim not in payload.get("forbidden_claims", []):
             fail(f"missing forbidden claim marker: {claim}")
@@ -133,12 +157,23 @@ def validate_fixture(fixture: dict[str, Any]) -> None:
         "clean working tree required",
         "direct writes on configurator refused",
         "approved inert Alternative B source path only",
+        "table-by-table change manifest required before hardware",
+        "example profile metadata cannot create production candidates without explicit approval",
+        "partial input without overlay/preserve policy rejected",
         "no device write",
         "no persistent storage",
         "no flashing automation",
         "no active publication changes",
     ]:
         fail("fixture source_write_safeguards drifted")
+    if fixture.get("candidate_generation_policy") != EXPECTED_CANDIDATE_GENERATION_POLICY:
+        fail("fixture candidate_generation_policy drifted")
+    if fixture.get("candidate_generation_without_table_change_manifest") != "reject":
+        fail("fixture must reject candidate generation without a table-by-table change manifest")
+    if fixture.get("explicit_profile_table_ownership_required") is not True:
+        fail("fixture must require explicit profile table ownership")
+    if fixture.get("current_source_preserve_policy_required_for_unspecified_tables") is not True:
+        fail("fixture must require current-source preserve policy for unspecified tables")
     if fixture.get("forbidden_claims") != list(FORBIDDEN_CLAIMS):
         fail("fixture forbidden_claims drifted")
 
