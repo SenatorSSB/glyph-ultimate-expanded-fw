@@ -116,6 +116,8 @@ That contract is now implemented by the standalone overlay generator,
 semantic comparator, and negative-corpus checker. The current example/layout-
 spec input still has no explicit ownership declaration and is therefore a
 `SOURCE_AUTHORITY_BLOCKER`, not a hardware candidate.
+The inert proof report is
+`docs/runtime_config/generated_source_owned_overlay_preserve_proof_2026-07-19.md`.
 The normal generator input now requires `layout_spec`, so spec-less JSON is
 rejected.
 Related fixtures in scope:

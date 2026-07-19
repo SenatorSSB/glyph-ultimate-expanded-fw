@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "proof_input": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+  "input_profile_or_spec_id": "generated_source_owned_layout_spec.json",
+  "generation_mode": null,
+  "baseline": {
+    "baseline_id": "current_source_owned_baseline",
+    "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "source_interpreter_path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "table_count": 28,
+    "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970"
+  },
+  "explicit_owned_tables": [],
+  "changed_tables": [],
+  "preserved_table_count": 0,
+  "manifest_status": "not_generated",
+  "output_semantic_digest": null,
+  "classification": "SOURCE_AUTHORITY_BLOCKER",
+  "candidate_eligibility": "not_a_hardware_candidate",
+  "reason": "The current example/layout-spec input declares neither generation_mode nor explicit table ownership. Ownership must not be inferred from the two source-aligned tables or from canonical intermediate values.",
+  "active_source_installation": "not_attempted",
+  "hardware_required": false,
+  "runtime_loaded_config_implemented": false,
+  "webserial_device_write_implemented": false,
+  "nunchuk_status": "NOT_TESTED",
+  "root_cause_proven": false
+}

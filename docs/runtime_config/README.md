@@ -14,6 +14,8 @@ overlay/preserve, and reject-partial are distinct modes; overlay/preserve
 copies every unowned table from the current source-owned baseline and emits a
 28-row manifest. Example provenance is refused by production preparation and
 installation. A semantic no-op is not hardware-candidate material.
+The 2026-07-19 proof report classifies the current example/layout-spec input as
+`SOURCE_AUTHORITY_BLOCKER` because it declares no ownership.
 
 - Current active firmware state: latest Y2 layout source-owned port after
   HARDWARE_PASS.
