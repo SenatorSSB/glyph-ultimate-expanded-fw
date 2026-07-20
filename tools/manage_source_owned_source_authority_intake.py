@@ -21,7 +21,7 @@ def main(argv: list[str] | None = None) -> int:
             payload=load_json(a.input); report=review_intake(payload)
             if a.command in {"validate", "review"}: result=report; (write_json(a.output, result, input_path=a.input) if a.output else None)
             else:
-                op="production_changeset" if a.command == "emit-generator-input" else "source_equivalence_proof"; value, artifact, manifest=emit_generator_input(payload, operation=op); result={"generator_input":value,"review_report":report,"artifact_semantic_digest":artifact["artifact_semantic_digest"],"manifest_semantic_digest":manifest["manifest_semantic_digest"]}; write_json(a.output, result, input_path=a.input)
+                op="production_changeset" if a.command == "emit-generator-input" else "source_equivalence_proof"; value, artifact, manifest=emit_generator_input(payload, operation=op); result=value; write_json(a.output, result, input_path=a.input)
         print(json.dumps(result, indent=2, sort_keys=True)); return 0
     except IntakeError as exc: print(f"error: {exc}", file=sys.stderr); return EXIT_CODES.get(exc.category, 2)
     except (OSError, json.JSONDecodeError) as exc: print(f"error: {exc}", file=sys.stderr); return EXIT_CODES["integrity"]

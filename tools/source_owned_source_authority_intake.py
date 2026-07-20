@@ -214,7 +214,9 @@ def review_intake(payload: dict[str, Any]) -> dict[str, Any]:
         for i, item in enumerate(declarations):
             if not isinstance(item, dict) or set(item) != {"table_symbol", "rationale", "authorization_reference"}:
                 _block(blockers, "DECLARATION_SHAPE", "invalid_input", f"ownership.declarations[{i}]", "ownership declaration has invalid shape"); continue
-            symbol = item.get("table_symbol"); declared.append(symbol)
+            symbol = item.get("table_symbol")
+            if isinstance(symbol, str):
+                declared.append(symbol)
             if not _nonempty(symbol) or not _nonempty(item.get("rationale")) or not _nonempty(item.get("authorization_reference")):
                 _block(blockers, "DECLARATION_EVIDENCE", "authority", f"ownership.declarations[{i}]", "each explicit ownership declaration needs evidence")
     if set(declared) != set(owned) or len(declared) != len(owned): _block(blockers, "DECLARATION_MISMATCH", "ownership", "ownership.declarations", "ownership declarations must match owned tables exactly")
@@ -226,7 +228,7 @@ def review_intake(payload: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(review, dict) or set(review) != {"unresolved_questions", "acknowledges_build_not_hardware_proof", "acknowledges_separate_hardware_gate"}:
         _block(blockers, "REVIEW_SHAPE", "invalid_input", "review", "review has invalid shape"); review = {}
     questions = review.get("unresolved_questions", [])
-    if not isinstance(questions, list) or any(not isinstance(q, dict) or set(q) != {"question", "blocking"} for q in questions): _block(blockers, "QUESTIONS", "invalid_input", "review.unresolved_questions", "questions must be {question, blocking} records")
+    if not isinstance(questions, list) or any(not isinstance(q, dict) or set(q) != {"question", "blocking"} or not isinstance(q["question"], str) or not isinstance(q["blocking"], bool) for q in questions): _block(blockers, "QUESTIONS", "invalid_input", "review.unresolved_questions", "questions must be {question, blocking: bool} records")
     elif any(q["blocking"] is True for q in questions): _block(blockers, "UNRESOLVED_BLOCKER", "authority", "review.unresolved_questions", "all blocking review questions must be resolved")
     if review.get("acknowledges_build_not_hardware_proof") is not True or review.get("acknowledges_separate_hardware_gate") is not True:
         _block(blockers, "HARDWARE_ACKNOWLEDGEMENT", "authority", "review", "required build/hardware gate acknowledgements are missing")
@@ -238,6 +240,17 @@ def review_intake(payload: dict[str, Any]) -> dict[str, Any]:
     if operation == "source_equivalence_proof":
         if provenance != "source_baseline_derived" or mode != "overlay_preserve" or owned or replacement_symbols:
             _block(blockers, "EQUIVALENCE_SCOPE", "candidate_ineligible", "intent", "source equivalence is only empty source_baseline_derived overlay")
+    if operation == "production_changeset" and isinstance(payload.get("replacements"), list):
+        baseline_by_symbol = {table["table_symbol"]: table for table in _baseline_tables()}
+        changed = any(
+            isinstance(replacement, dict)
+            and replacement.get("table_symbol") in baseline_by_symbol
+            and isinstance(replacement.get("points"), list)
+            and [{"x": point.get("x"), "y": point.get("y")} for point in replacement["points"] if isinstance(point, dict)] != baseline_by_symbol[replacement["table_symbol"]]["points"]
+            for replacement in payload["replacements"]
+        )
+        if not changed:
+            _block(blockers, "SEMANTIC_NO_OP", "candidate_ineligible", "replacements", "production changeset must not be a semantic no-op")
     blockers.sort(key=lambda b: (b["category"], b["path"], b["code"]))
     report = {"schema_version": REPORT_SCHEMA_VERSION, "intake_id": payload.get("intake_id"), "authority_status": status, "provenance_class": provenance, "generation_mode": mode, "requested_operation": operation, "baseline_matches_current": not any(b["category"] == "baseline_mismatch" for b in blockers), "owned_table_count": len(owned), "replacement_table_count": len(replacement_symbols), "blockers": blockers}
     report["production_emission_allowed"] = not blockers and operation == "production_changeset"
@@ -265,9 +278,9 @@ def emit_generator_input(payload: dict[str, Any], *, operation: str) -> tuple[di
     replacements = {r["table_symbol"]: r for r in payload["replacements"]}
     if intent["generation_mode"] == "overlay_preserve":
         tables = [] if operation == "source_equivalence_proof" else [_to_v2(replacements[s], known.index(s)) for s in known if s in replacements]
-        value = {"schema_version": 2, "profile_id": payload["profile_id"], "profile_name": payload["profile_name"], "provenance_class": intent["provenance_class"], "generation_mode": "overlay_preserve", "baseline": baseline, "owned_tables": list(payload["ownership"]["owned_tables"]), "tables": tables}
+        value = {"schema_version": 2, "profile_id": payload["profile_id"], "profile_name": payload["profile_name"], "provenance_class": intent["provenance_class"], "generation_mode": "overlay_preserve", "baseline": baseline, "owned_tables": list(payload["ownership"]["owned_tables"]), "tables": tables, "metadata": {"intake_id": payload["intake_id"], "authorization_reference": payload["authority"]["approval_reference"]}}
     else:
-        value = {"schema_version": 2, "profile_id": payload["profile_id"], "profile_name": payload["profile_name"], "provenance_class": intent["provenance_class"], "generation_mode": "full_replacement", "tables": [_to_v2(replacements[s], known.index(s)) for s in known], "metadata": {"intake_id": payload["intake_id"], "authorization_reference": payload["authority"]["approval_reference"]}}
+        value = {"schema_version": 2, "profile_id": payload["profile_id"], "profile_name": payload["profile_name"], "provenance_class": intent["provenance_class"], "generation_mode": "full_replacement", "baseline": baseline, "tables": [_to_v2(replacements[s], known.index(s)) for s in known], "metadata": {"intake_id": payload["intake_id"], "authorization_reference": payload["authority"]["approval_reference"]}}
     normalized = validate_input(value)
     artifact, manifest = generate(normalized)
     validate_manifest(artifact, manifest)
@@ -288,12 +301,12 @@ def assert_safe_offline_output_path(path: Path, *, input_path: Path | None = Non
     if not path.is_absolute(): _fail("output path must be absolute", "integrity")
     resolved = path.resolve(strict=False)
     root = Path(__file__).resolve().parents[1]
-    try:
-        resolved.relative_to(root / "src")
-    except ValueError:
-        pass
-    else:
-        _fail("output path under protected src/** is forbidden", "source_authority")
+    for protected in ("src", "include", "lib", "HAL", "hal", "backend"):
+        try:
+            resolved.relative_to(root / protected)
+        except ValueError:
+            continue
+        _fail(f"output path under protected {protected}/** is forbidden", "source_authority")
     if input_path and resolved == input_path.resolve(strict=False): _fail("output path must not overwrite intake input", "integrity")
     for forbidden in ("candidate.view", "active_storage.view", "RuntimeConfigView"):
         if forbidden in str(resolved): _fail("forbidden active publication path", "source_authority")
