@@ -38,6 +38,22 @@ PROVENANCE = {"production_authorized", "source_baseline_derived", "synthetic_tes
 MODES = {"full_replacement", "overlay_preserve", "reject_partial"}
 OPERATIONS = {"production_changeset", "source_equivalence_proof"}
 
+# A review can contain several blocker classes.  Validation must select one
+# stable machine exit category without hiding the complete review report.
+VALIDATION_CATEGORY_PRECEDENCE = (
+    "baseline_mismatch",
+    "authority",
+    "ownership",
+    "candidate_ineligible",
+    "integrity",
+    "invalid_input",
+    "invariant",
+)
+BLOCKER_CATEGORY_TO_EXIT_CATEGORY = {
+    "authority": "source_authority",
+    "ownership": "unsafe_unowned_change",
+}
+
 
 class IntakeError(ValueError):
     def __init__(self, message: str, category: str = "invalid_input") -> None:
@@ -109,6 +125,26 @@ def create_template() -> dict[str, Any]:
 
 def _block(blockers: list[dict[str, str]], code: str, category: str, path: str, message: str) -> None:
     blockers.append({"code": code, "category": category, "path": path, "message": message})
+
+
+def select_validation_failure_category(report: dict[str, Any]) -> str | None:
+    """Return the stable validation category for a completed review report.
+
+    The order is an explicit CLI contract, rather than an accident of the
+    human-oriented deterministic blocker ordering used in the report.
+    """
+    categories = {blocker.get("category") for blocker in report.get("blockers", [])}
+    for category in VALIDATION_CATEGORY_PRECEDENCE:
+        if category in categories:
+            return BLOCKER_CATEGORY_TO_EXIT_CATEGORY.get(category, category)
+    # A completed report with an unknown category is an internal contract
+    # violation.  It must never accidentally turn a blocked validation into
+    # success merely because a new category was not added to the precedence.
+    return "invariant" if categories else None
+
+
+# Kept as a readable library alias for callers that use the earlier wording.
+validation_failure_category = select_validation_failure_category
 
 
 def _symbols() -> list[str]:
@@ -265,8 +301,7 @@ def _require_emit(payload: dict[str, Any], operation: str) -> None:
     permitted = report["production_emission_allowed"] if operation == "production_changeset" else report["source_equivalence_emission_allowed"]
     if not permitted:
         first = report["blockers"][0] if report["blockers"] else {"message": "emission is not allowed", "category": "invalid_input"}
-        categories = {"authority": "source_authority", "ownership": "unsafe_unowned_change"}
-        _fail(first["message"], categories.get(first["category"], first["category"]))
+        _fail(first["message"], select_validation_failure_category(report) or "invalid_input")
 
 
 def emit_generator_input(payload: dict[str, Any], *, operation: str) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -278,7 +313,11 @@ def emit_generator_input(payload: dict[str, Any], *, operation: str) -> tuple[di
     replacements = {r["table_symbol"]: r for r in payload["replacements"]}
     if intent["generation_mode"] == "overlay_preserve":
         tables = [] if operation == "source_equivalence_proof" else [_to_v2(replacements[s], known.index(s)) for s in known if s in replacements]
-        value = {"schema_version": 2, "profile_id": payload["profile_id"], "profile_name": payload["profile_name"], "provenance_class": intent["provenance_class"], "generation_mode": "overlay_preserve", "baseline": baseline, "owned_tables": list(payload["ownership"]["owned_tables"]), "tables": tables, "metadata": {"intake_id": payload["intake_id"], "authorization_reference": payload["authority"]["approval_reference"]}}
+        # The intake declares ownership explicitly but may be authored in any
+        # order.  The v2 wire form is canonicalized solely from that declared
+        # set; it never infers additional ownership.
+        owned_tables = [symbol for symbol in known if symbol in payload["ownership"]["owned_tables"]]
+        value = {"schema_version": 2, "profile_id": payload["profile_id"], "profile_name": payload["profile_name"], "provenance_class": intent["provenance_class"], "generation_mode": "overlay_preserve", "baseline": baseline, "owned_tables": owned_tables, "tables": tables, "metadata": {"intake_id": payload["intake_id"], "authorization_reference": payload["authority"]["approval_reference"]}}
     else:
         value = {"schema_version": 2, "profile_id": payload["profile_id"], "profile_name": payload["profile_name"], "provenance_class": intent["provenance_class"], "generation_mode": "full_replacement", "baseline": baseline, "tables": [_to_v2(replacements[s], known.index(s)) for s in known], "metadata": {"intake_id": payload["intake_id"], "authorization_reference": payload["authority"]["approval_reference"]}}
     normalized = validate_input(value)
@@ -301,15 +340,18 @@ def assert_safe_offline_output_path(path: Path, *, input_path: Path | None = Non
     if not path.is_absolute(): _fail("output path must be absolute", "integrity")
     resolved = path.resolve(strict=False)
     root = Path(__file__).resolve().parents[1]
-    for protected in ("src", "include", "lib", "HAL", "hal", "backend"):
-        try:
-            resolved.relative_to(root / protected)
-        except ValueError:
-            continue
-        _fail(f"output path under protected {protected}/** is forbidden", "source_authority")
+    try:
+        relative_parts = resolved.relative_to(root).parts
+    except ValueError:
+        relative_parts = ()
+    protected_components = {"src", "include", "lib", "hal", "backend", ".git"}
+    for component in relative_parts:
+        if component.casefold() in protected_components:
+            _fail(f"output path under protected {component}/** is forbidden", "source_authority")
     if input_path and resolved == input_path.resolve(strict=False): _fail("output path must not overwrite intake input", "integrity")
-    for forbidden in ("candidate.view", "active_storage.view", "RuntimeConfigView"):
-        if forbidden in str(resolved): _fail("forbidden active publication path", "source_authority")
+    resolved_casefolded = str(resolved).casefold()
+    for forbidden in ("candidate.view", "active_storage.view", "runtimeconfigview"):
+        if forbidden in resolved_casefolded: _fail("forbidden active publication path", "source_authority")
     return resolved
 
 
