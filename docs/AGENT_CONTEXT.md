@@ -62,6 +62,9 @@ automation from this context document.
   semantics and checker enforcement. Candidate generation must use full
   replacement, overlay/preserve, or reject semantics and must not silently fill
   unspecified production tables with example/canonical defaults.
+- The source-authority intake workflow is offline-only: it records explicit
+  human approval and ownership before v2 generation, but authorizes no real
+  production table set and creates no hardware candidate.
 - Design coordinate-native runtime profile support separately.
 - Treat browser/protobuf/persistence backend work as future infrastructure
   after the runtime model exists.

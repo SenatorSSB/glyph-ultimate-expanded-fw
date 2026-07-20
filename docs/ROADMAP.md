@@ -93,6 +93,9 @@ selected activation strategy is implemented and hardware-gated.
 - Next docs/tools detail: `docs/runtime_config/source_owned_table_symbol_map.md`
   plus `tools/check_glyph_source_owned_table_symbol_map.py` for the Alternative
   B alias/replacement boundary.
+- The source-authority intake workflow may record explicit human ownership and
+  approval before generator v2 emission, but remains offline-only and cannot
+  create a production candidate or hardware claim.
 Generator lane references in scope:
 `generated_source_owned_generator_input.example.json`,
 `fixtures/generated_source_owned_layout_spec.example.json`,

@@ -144,6 +144,8 @@ def validate_fixture(fixture: dict[str, Any]) -> None:
     if fixture.get("build_command") != "pio run -e glyph_mk6":
         fail("fixture build command drifted")
     if fixture.get("validation_commands") != [
+        "python3 tools/check_glyph_source_owned_generator_modes.py",
+        "python3 tools/check_glyph_source_owned_source_authority_intake.py",
         "python3 tools/check_glyph_source_owned_table_symbol_map.py",
         "python3 tools/check_glyph_docs_navigation.py",
         "python3 tools/check_glyph_docs_agent_surface.py",

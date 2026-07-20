@@ -42,6 +42,8 @@ DEFAULT_TARGET_SOURCE_PATH = (
     REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
 )
 VALIDATION_COMMANDS = [
+    "python3 tools/check_glyph_source_owned_generator_modes.py",
+    "python3 tools/check_glyph_source_owned_source_authority_intake.py",
     "python3 tools/check_glyph_source_owned_table_symbol_map.py",
     "python3 tools/check_glyph_docs_navigation.py",
     "python3 tools/check_glyph_docs_agent_surface.py",

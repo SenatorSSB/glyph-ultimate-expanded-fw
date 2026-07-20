@@ -13,6 +13,7 @@ EXPECTED_BRANCH = "docs-agent-surface-cleanup"
 CONTRACT_BRANCH = "runtime-config-coordinate-native-profile-contract"
 RECOVERY_BRANCH = "generator-source-owned-baseline-artifact-refresh"
 AGENT_FRAMEWORK_BRANCH = "docs-agent-framework-contracts"
+INTAKE_BRANCH = "runtime-config-source-authority-intake-workflow"
 MERGED_BRANCH = "configurator"
 BASE_BRANCH = "configurator"
 ALLOWED_BRANCH_PREFIXES = ("codex/runtime-config-coordinate-native-", "docs-runtime-config-")
@@ -53,6 +54,9 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/dry_run_coordinate_native_runtime_profile.py",
     "tools/check_glyph_latest_y2_layout_source_owned_port.py",
     "tools/check_glyph_source_owned_candidate_generation_diff.py",
+    "tools/source_owned_source_authority_intake.py",
+    "tools/manage_source_owned_source_authority_intake.py",
+    "tools/check_glyph_source_owned_source_authority_intake.py",
     "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
 }
 ALLOWED_PREFIXES = ("docs/",)
@@ -152,6 +156,7 @@ def validate_branch() -> str:
         RECOVERY_BRANCH,
         "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
+        INTAKE_BRANCH,
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(f"checker must run on {EXPECTED_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     if branch in {EXPECTED_BRANCH, CONTRACT_BRANCH, AGENT_FRAMEWORK_BRANCH} or any(
@@ -185,6 +190,7 @@ def changed_paths(branch: str) -> set[str]:
         AGENT_FRAMEWORK_BRANCH,
         RECOVERY_BRANCH,
         "runtime-config-source-owned-install-workflow",
+        INTAKE_BRANCH,
     } or any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):
