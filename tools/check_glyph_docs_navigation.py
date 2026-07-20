@@ -54,6 +54,7 @@ def main() -> int:
         "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
         "docs/runtime_config/source_owned_table_symbol_map.md",
         "docs/runtime_config/runtime_config_activation_alternatives_a_f.md",
+        "docs/runtime_config/source_authority_intake_workflow.md",
         "docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json",
         "docs/agent_framework/README.md",
         "docs/agent_framework/MODEL_ROUTING.md",
@@ -167,6 +168,19 @@ def main() -> int:
             "candidate.view is not active",
             "RAM-backed active table publication is not used",
             "offline dry-run evaluator",
+        ),
+    )
+
+    require_phrases(
+        "docs/runtime_config/source_authority_intake_workflow.md",
+        (
+            "offline tooling only",
+            "does not create authority",
+            "source-authority intake",
+            "emit-generator-input",
+            "prove-source-equivalence",
+            "src/**",
+            "HARDWARE_PASS",
         ),
     )
 

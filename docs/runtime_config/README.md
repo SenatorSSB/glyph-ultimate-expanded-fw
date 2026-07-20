@@ -163,6 +163,11 @@ candidates must include a table-by-table change manifest before hardware.
 See `generated_source_owned_generator_modes.md` for the mode, provenance,
 versioning, digest, manifest, CLI, preparation/install, and migration contract.
 
+The separate `source_authority_intake_workflow.md` records a human-approved
+source-authority intake and deterministically emits generator-input v2 only
+after explicit ownership, replacement, baseline, and approval gates pass. It
+is offline-only, cannot infer authority, and cannot create a hardware candidate.
+
 ## Safe Source-Owned Realization Path
 
 The safe current path is source-owned realization: generate or patch

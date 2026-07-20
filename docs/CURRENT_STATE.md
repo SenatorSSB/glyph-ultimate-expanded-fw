@@ -41,7 +41,7 @@ implementation work. Detailed historical evidence remains indexed from
 - Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, invalid/positive fixture corpora with expected results and failure reasons, and fixture-backed offline dry-run coverage for neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths tied to current source-backed Y2/Tilt3 evidence.
 - The current docs/checker queue also includes `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and `tools/check_glyph_runtime_config_activation_alternatives.py`, which classify A as currently hardware-passed, B as hardware-passed only for the source-owned generated-table alias candidate that preserves the active publication path, C-E as explicitly forbidden under current evidence, and F as future architecture only.
 - The source-owned table symbol-map note and checker now document the current Alternative B alias/replacement boundary without changing the active publication path.
-- Overlay/preserve generation is checker-enforced; unowned tables preserve the current source-owned baseline and production example provenance is rejected.
+- Overlay/preserve generation is checker-enforced; unowned tables preserve the current source-owned baseline and production example provenance is rejected; source-authority intake remains offline-only and records no real production approval.
 - Generator modes are complete as offline tooling: `full_replacement`,
   `overlay_preserve`, and `reject_partial` have explicit semantics, complete
   28-row manifests, deterministic semantic digests, stable CLI exit codes,
