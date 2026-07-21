@@ -3,16 +3,36 @@
     "approver_identifier_present": false,
     "hardware_acceptance_record": "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md",
     "merge_approved_recorded": true,
-    "minimal_missing_decision": "Provide an intake-contract approver identifier and approval reference for the empty source-equivalence proof; for production change, also provide explicit target intent, owned symbols, exact replacements, ownership references, and production-authorized provenance.",
-    "production_authorized_target_present": false
+    "minimal_missing_decision": "A human must explicitly approve or reject the empty source-equivalence proof. Only if approved may authority.status become approved, authority.approver receive the exact human-approved identifier, authority.statement become affirmative, and authority.approval_reference be confirmed or replaced. A production change additionally needs explicit target intent, owned symbols, exact replacements, ownership references, and production-authorized provenance.",
+    "production_authorized_target_present": false,
+    "required_human_action": {
+      "decision": "APPROVE_OR_REJECT_SOURCE_EQUIVALENCE_PROOF",
+      "fields_if_approved": [
+        "authority.status",
+        "authority.approver",
+        "authority.statement",
+        "authority.approval_reference"
+      ]
+    }
   },
   "converter_analysis": {
     "abstract_y2_ids_preserved": false,
     "accepted_input": true,
+    "command": [
+      "python3",
+      "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+      "--profile",
+      "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+      "--output",
+      "<temporary-output>"
+    ],
+    "creates_production_ownership_or_provenance_claims": false,
+    "direct_source_owned_table_symbol_mappings": true,
+    "exit_status": 0,
     "fixture": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
     "output": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
-    "output_is_current_layout_spec": true,
-    "production_mapping_provided": false
+    "output_equals_current_layout_spec": true,
+    "output_semantic_digest": "3cd1c4ac478a3e781f5af5fb2e3b164e3796b4f049b693cec5304aff6441bbee"
   },
   "current_baseline": {
     "baseline_id": "current_source_owned_baseline",
@@ -113,10 +133,11 @@
       "active_status": "current",
       "approval_status": "PARTIAL",
       "blockers": [
-        "merge_approved=true is recorded, but no intake-contract approver identifier is recorded"
+        "the empty source-equivalence proof remains submitted for human approval; it is not approved or emittable"
       ],
       "candidate_id": "current_source_owned_baseline",
       "candidate_kind": "current_baseline",
+      "comparison_status": "COMPLETE_MATCH",
       "differs_from_current_baseline": false,
       "hardware_status": "HARDWARE_PASS",
       "mapping_status": "EXPLICIT",
@@ -140,7 +161,8 @@
       ],
       "candidate_id": "coordinate_native_y2_inspired_sketch",
       "candidate_kind": "coordinate_native_fixture",
-      "differs_from_current_baseline": false,
+      "comparison_status": "SUBSET_MATCH_ONLY",
+      "differs_from_current_baseline": null,
       "hardware_status": "NOT_TESTED",
       "mapping_status": "INFERRED_ONLY",
       "ownership_status": "NONE",
@@ -158,6 +180,7 @@
       ],
       "candidate_id": "alternative_b_source_aligned_alias",
       "candidate_kind": "historical_candidate",
+      "comparison_status": "COMPLETE_MATCH",
       "differs_from_current_baseline": false,
       "hardware_status": "HARDWARE_PASS",
       "mapping_status": "EXPLICIT",
@@ -179,6 +202,7 @@
       "candidate_id": "generated_canonical_grid_candidate",
       "candidate_kind": "failed_candidate",
       "classification": "FORBIDDEN_FAILED_CANDIDATE",
+      "comparison_status": "COMPLETE_DIFFERENCE",
       "differs_from_current_baseline": true,
       "hardware_status": "HARDWARE_FAIL",
       "mapping_status": "EXPLICIT",
@@ -198,7 +222,8 @@
       ],
       "candidate_id": "coordinate_native_design_fixture_corpus",
       "candidate_kind": "coordinate_native_fixture",
-      "differs_from_current_baseline": false,
+      "comparison_status": "NOT_APPLICABLE",
+      "differs_from_current_baseline": null,
       "hardware_status": "NOT_APPLICABLE",
       "mapping_status": "NONE",
       "ownership_status": "NONE",

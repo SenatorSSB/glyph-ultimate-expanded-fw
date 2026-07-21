@@ -10,10 +10,11 @@ installs, or writes active source.
 from __future__ import annotations
 
 import argparse
-import copy
+import hashlib
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +30,14 @@ Y2_PROFILE_PATH = "docs/runtime_config/fixtures/coordinate_native_runtime_profil
 Y2_RESULT_PATH = "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md"
 FAILED_RESULT_PATH = "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md"
 FAILED_COMMIT = "e643017c1577c9ca2b94581fa6f18c0dfb1bac9b"
+CONVERTER_PATH = "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
+LAYOUT_SPEC_PATH = "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
+ALLOWED_FEATURE_PATHS = {
+    "docs/runtime_config/fixtures/reconstructed_source_authority_evidence.json",
+    "docs/runtime_config/reconstructed_source_authority_evidence.md",
+    "docs/runtime_config/intakes/current_source_owned_baseline_equivalence.intake.json",
+    "tools/check_glyph_reconstructed_source_authority_evidence.py",
+}
 
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 from extract_glyph_identity_runtime_tables import load_source_tables  # noqa: E402
@@ -39,11 +48,65 @@ def rel(path: Path) -> str:
     return str(path.resolve().relative_to(REPO_ROOT))
 
 
+def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise AssertionError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
 def read_json(path: str | Path) -> dict[str, Any]:
-    value = json.loads((REPO_ROOT / path if isinstance(path, str) else path).read_text(encoding="utf-8"))
+    resolved = REPO_ROOT / path if isinstance(path, str) else path
+    value = json.loads(resolved.read_text(encoding="utf-8"), object_pairs_hook=reject_duplicate_keys)
     if not isinstance(value, dict):
         raise AssertionError(f"{path} must contain a JSON object")
     return value
+
+
+def canonical_json(matrix: dict[str, Any]) -> str:
+    return json.dumps(matrix, indent=2, sort_keys=True) + "\n"
+
+
+def semantic_digest(value: Any) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
+def contains_value(value: Any, needle: str) -> bool:
+    if isinstance(value, dict):
+        return any(contains_value(key, needle) or contains_value(item, needle) for key, item in value.items())
+    if isinstance(value, list):
+        return any(contains_value(item, needle) for item in value)
+    return value == needle
+
+
+def converter_analysis() -> dict[str, Any]:
+    """Run the real offline converter in a temporary directory on every check."""
+    with tempfile.TemporaryDirectory(prefix="glyph-reconstructed-evidence-") as directory:
+        output = Path(directory) / "converted-layout-spec.json"
+        command = [sys.executable, CONVERTER_PATH, "--profile", Y2_PROFILE_PATH, "--output", str(output)]
+        result = subprocess.run(command, cwd=REPO_ROOT, text=True, capture_output=True)
+        accepted = result.returncode == 0 and output.exists()
+        if not accepted:
+            raise AssertionError(f"converter probe failed: exit={result.returncode}; stderr={result.stderr.strip()}")
+        converted = read_json(output)
+        checked_in = read_json(LAYOUT_SPEC_PATH)
+        output_bytes = output.read_bytes()
+        checked_in_bytes = (REPO_ROOT / LAYOUT_SPEC_PATH).read_bytes()
+    direct_symbols = any(isinstance(table, dict) and "table_symbol" in table for table in converted.get("tables", []))
+    production_claim_keys = {"ownership", "owner", "provenance", "production_authorized", "approval"}
+    claims_production_ownership_or_provenance = any(key in converted for key in production_claim_keys)
+    return {
+        "command": ["python3", CONVERTER_PATH, "--profile", Y2_PROFILE_PATH, "--output", "<temporary-output>"],
+        "exit_status": result.returncode,
+        "accepted_input": accepted,
+        "output_semantic_digest": semantic_digest(converted),
+        "output_equals_current_layout_spec": converted == checked_in and output_bytes == checked_in_bytes,
+        "abstract_y2_ids_preserved": contains_value(converted, "y2_primary") or contains_value(converted, "y2_tilt"),
+        "direct_source_owned_table_symbol_mappings": direct_symbols,
+        "creates_production_ownership_or_provenance_claims": claims_production_ownership_or_provenance,
+    }
 
 
 def line_for(path: str, needle: str) -> int:
@@ -115,12 +178,13 @@ def build_matrix() -> dict[str, Any]:
             "source_paths": [TABLE_SOURCE_PATH, INTERPRETER_PATH, BASELINE_HEADER_PATH, Y2_RESULT_PATH],
             "hardware_status": "HARDWARE_PASS",
             "active_status": "current",
+            "comparison_status": "COMPLETE_MATCH",
             "differs_from_current_baseline": False,
             "mapping_status": "EXPLICIT",
             "ownership_status": "PARTIAL",
             "approval_status": "PARTIAL",
             "production_intake_eligibility": "SOURCE_EQUIVALENCE_ONLY",
-            "blockers": ["merge_approved=true is recorded, but no intake-contract approver identifier is recorded"],
+            "blockers": ["the empty source-equivalence proof remains submitted for human approval; it is not approved or emittable"],
         },
         {
             "candidate_id": "coordinate_native_y2_inspired_sketch",
@@ -128,7 +192,8 @@ def build_matrix() -> dict[str, Any]:
             "source_paths": [Y2_PROFILE_PATH, "tools/convert_coordinate_native_profile_to_source_owned_spec.py"],
             "hardware_status": "NOT_TESTED",
             "active_status": "inactive_design_only",
-            "differs_from_current_baseline": False,
+            "comparison_status": "SUBSET_MATCH_ONLY",
+            "differs_from_current_baseline": None,
             "mapping_status": "INFERRED_ONLY",
             "ownership_status": "NONE",
             "approval_status": "NONE",
@@ -146,6 +211,7 @@ def build_matrix() -> dict[str, Any]:
             "source_paths": ["docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md", "docs/runtime_config/source_owned_table_symbol_map.md"],
             "hardware_status": "HARDWARE_PASS",
             "active_status": "historical",
+            "comparison_status": "COMPLETE_MATCH",
             "differs_from_current_baseline": False,
             "mapping_status": "EXPLICIT",
             "ownership_status": "PARTIAL",
@@ -159,6 +225,7 @@ def build_matrix() -> dict[str, Any]:
             "source_paths": ["docs/runtime_config/fixtures/generated_source_owned_layout_spec.json", FAILED_RESULT_PATH, "docs/runtime_config/generated_source_owned_overlay_preserve_proof_2026-07-19.md"],
             "hardware_status": "HARDWARE_FAIL",
             "active_status": "failed_unmerged",
+            "comparison_status": "COMPLETE_DIFFERENCE",
             "differs_from_current_baseline": True,
             "mapping_status": "EXPLICIT",
             "ownership_status": "NONE",
@@ -177,7 +244,8 @@ def build_matrix() -> dict[str, Any]:
             "source_paths": sorted(str(path.relative_to(REPO_ROOT)) for path in (REPO_ROOT / "docs/runtime_config/fixtures").glob("coordinate_native_runtime_profile*.json")),
             "hardware_status": "NOT_APPLICABLE",
             "active_status": "inactive_design_only",
-            "differs_from_current_baseline": False,
+            "comparison_status": "NOT_APPLICABLE",
+            "differs_from_current_baseline": None,
             "mapping_status": "NONE",
             "ownership_status": "NONE",
             "approval_status": "NONE",
@@ -201,20 +269,17 @@ def build_matrix() -> dict[str, Any]:
         },
         "profile_candidates": candidates,
         "table_evidence": table_evidence,
-        "converter_analysis": {
-            "fixture": Y2_PROFILE_PATH,
-            "accepted_input": True,
-            "output": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
-            "output_is_current_layout_spec": True,
-            "abstract_y2_ids_preserved": False,
-            "production_mapping_provided": False,
-        },
+        "converter_analysis": {"fixture": Y2_PROFILE_PATH, "output": LAYOUT_SPEC_PATH, **converter_analysis()},
         "authority_analysis": {
             "hardware_acceptance_record": Y2_RESULT_PATH,
             "merge_approved_recorded": True,
             "approver_identifier_present": False,
             "production_authorized_target_present": False,
-            "minimal_missing_decision": "Provide an intake-contract approver identifier and approval reference for the empty source-equivalence proof; for production change, also provide explicit target intent, owned symbols, exact replacements, ownership references, and production-authorized provenance.",
+            "required_human_action": {
+                "decision": "APPROVE_OR_REJECT_SOURCE_EQUIVALENCE_PROOF",
+                "fields_if_approved": ["authority.status", "authority.approver", "authority.statement", "authority.approval_reference"],
+            },
+            "minimal_missing_decision": "A human must explicitly approve or reject the empty source-equivalence proof. Only if approved may authority.status become approved, authority.approver receive the exact human-approved identifier, authority.statement become affirmative, and authority.approval_reference be confirmed or replaced. A production change additionally needs explicit target intent, owned symbols, exact replacements, ownership references, and production-authorized provenance.",
         },
         "failed_candidate_exclusion": {
             "commit": FAILED_COMMIT,
@@ -261,9 +326,9 @@ def render_markdown(matrix: dict[str, Any]) -> str:
         "4. `y2_primary -> kY2Table` and `y2_tilt -> kTilt3Table` remain inferred-only from coordinate equality and source inspiration. No direct repository record connects those abstract IDs to symbols.",
         "5. No complete repository-resident target with production intent and an authorized semantic delta was found.",
         "6. No distinct target is production-authorized. The recorded `merge_approved: true` applies to the hardware-passed current source-owned port and is not an intake approver identity.",
-        "7. A source-equivalence packet can be prepared as submitted-for-review; it cannot be emitted until a human supplies an intake-contract approver identifier.",
+        "7. The source-equivalence packet is submitted for review and cannot be emitted. The required action is an explicit human approval-or-rejection decision, not merely supplying an identifier.",
         "8. No production changeset or production generator-input can be emitted.",
-        "9. Smallest user decision: confirm the approver identifier/approval reference for the empty equivalence proof; a production delta additionally needs explicit target intent, owned symbols, exact replacements, ownership references, and production-authorized approval.",
+        "9. If a human approves the empty equivalence proof, they must set `authority.status` to `approved`, provide the exact approved `authority.approver`, replace `authority.statement` with an affirmative statement, and explicitly confirm or replace `authority.approval_reference`. A production delta additionally needs explicit target intent, owned symbols, exact replacements, ownership references, and production-authorized approval.",
         "",
         "## Candidate decisions",
         "",
@@ -278,7 +343,7 @@ def render_markdown(matrix: dict[str, Any]) -> str:
         "",
         "- `y2_primary` exactly matches the current `Y2` table points and therefore has one equality match: `Y2` / `kY2Table`.",
         "- `y2_tilt` exactly matches the current `Tilt3` table points and therefore has one equality match: `Tilt3` / `kTilt3Table`.",
-        "- Equality is supporting evidence only. The sketch contains no `table_symbol`, and the converter returns the existing layout-spec fixture rather than preserving those abstract IDs as source mappings.",
+        "- This is `SUBSET_MATCH_ONLY`, not a complete no-op. Equality is supporting evidence only. The sketch contains no `table_symbol`; the converter emits the current canonical layout-spec fixture with table symbols, but does not derive a source mapping from those abstract IDs.",
         "- The Y2 hardware result is source-owned firmware evidence; it does not prove the coordinate-native fixture’s identity or authorize a production replacement.",
         "",
         "## Failed-candidate exclusion",
@@ -287,7 +352,7 @@ def render_markdown(matrix: dict[str, Any]) -> str:
         "",
         "## Source-equivalence packet",
         "",
-        f"`{rel(INTAKE_PATH)}` is `submitted_for_review`, `overlay_preserve`, `source_equivalence_proof`, `source_baseline_derived`, with empty `owned_tables`, `declarations`, and `replacements`. Validation is expected to block only approval/emission because `authority.approver` remains intentionally unresolved; no generator-input v2 file is produced.",
+        f"`{rel(INTAKE_PATH)}` is `submitted_for_review`, `overlay_preserve`, `source_equivalence_proof`, `source_baseline_derived`, with empty `owned_tables`, `declarations`, and `replacements`. Validation is blocked by `NOT_APPROVED`: a human must explicitly approve or reject before the approval fields can be updated. No generator-input v2 file is produced.",
         "",
         "## Evidence inventory",
         "",
@@ -298,7 +363,86 @@ def render_markdown(matrix: dict[str, Any]) -> str:
         for path in paths:
             lines.append(f"- `{path}`")
         lines.append("")
-    return "\n".join(lines)
+    return "\n".join(lines).rstrip("\n") + "\n"
+
+
+def git_output(*args: str) -> str:
+    return subprocess.run(["git", *args], cwd=REPO_ROOT, text=True, capture_output=True, check=True).stdout.strip()
+
+
+def referenced_paths(matrix: dict[str, Any]) -> list[str]:
+    paths = [path for values in matrix["evidence_inventory"].values() if isinstance(values, list) for path in values if isinstance(path, str) and not len(path) == 40]
+    for candidate in matrix["profile_candidates"]:
+        if candidate["mapping_status"] == "EXPLICIT" and not candidate["source_paths"]:
+            raise AssertionError(f"explicit candidate mapping lacks direct source evidence: {candidate['candidate_id']}")
+        paths.extend(candidate["source_paths"])
+    for item in matrix["table_evidence"]:
+        paths.append(item["exact_points_source"])
+        for record in item["mapping_evidence"]:
+            paths.append(record["path"])
+        for record in item["hardware_evidence"]:
+            paths.append(record if isinstance(record, str) else record["path"])
+    return paths
+
+
+def validate_references(matrix: dict[str, Any]) -> None:
+    for path in referenced_paths(matrix):
+        if not (REPO_ROOT / path).is_file():
+            raise AssertionError(f"missing cited repository path: {path}")
+    for commit in matrix["evidence_inventory"]["lineage_commits"]:
+        if subprocess.run(["git", "cat-file", "-e", f"{commit}^{{commit}}"], cwd=REPO_ROOT).returncode:
+            raise AssertionError(f"missing cited lineage commit: {commit}")
+    for item in matrix["table_evidence"]:
+        for record in item["mapping_evidence"]:
+            lines = (REPO_ROOT / record["path"]).read_text(encoding="utf-8").splitlines()
+            if not 0 < record["line"] <= len(lines) or record["needle"] not in lines[record["line"] - 1]:
+                raise AssertionError(f"stale mapping evidence: {record}")
+        for record in item["hardware_evidence"]:
+            if isinstance(record, dict) and not record.get("claim"):
+                raise AssertionError(f"hardware evidence lacks claim: {item['abstract_table_id']}")
+        if item["mapping_status"] == "EXPLICIT" and not item["mapping_evidence"]:
+            raise AssertionError(f"explicit mapping lacks direct evidence: {item['abstract_table_id']}")
+        if item["abstract_table_id"] in {"y2_primary", "y2_tilt"}:
+            if item["mapping_status"] != "INFERRED_ONLY" or item["ownership_status"] != "NONE":
+                raise AssertionError("coordinate-native Y2 IDs must remain inferred and unowned")
+
+
+def changed_paths(args: list[str]) -> set[str]:
+    return {path for path in git_output(*args).splitlines() if path}
+
+
+def validate_branch_safety() -> None:
+    branch = git_output("branch", "--show-current")
+    protected_prefixes = ("src/", "include/", "HAL/", "hal/", "backend/", "lib/", "active/", "storage/")
+    uncommitted = changed_paths(["diff", "--name-only"])
+    staged = changed_paths(["diff", "--cached", "--name-only"])
+    all_changed = uncommitted | staged
+    if any(path.startswith(protected_prefixes) for path in all_changed):
+        raise AssertionError(f"protected source/publication path changed in worktree: {sorted(all_changed)}")
+    if branch == "runtime-config-reconstruct-source-authority-evidence":
+        if subprocess.run(["git", "merge-base", "--is-ancestor", BASELINE_COMMIT, "HEAD"], cwd=REPO_ROOT).returncode:
+            raise AssertionError("pinned configurator baseline is not an ancestor")
+        merge_base = git_output("merge-base", "HEAD", "origin/configurator")
+        if merge_base != BASELINE_COMMIT:
+            raise AssertionError(f"unexpected feature merge base: {merge_base}")
+        committed = changed_paths(["diff", "--name-only", f"{merge_base}..HEAD"])
+        if any(path.startswith(protected_prefixes) for path in committed):
+            raise AssertionError(f"protected source/publication path committed on feature branch: {sorted(committed)}")
+        unexpected = committed - ALLOWED_FEATURE_PATHS
+        if unexpected:
+            raise AssertionError(f"feature branch changed paths outside explicit allowlist: {sorted(unexpected)}")
+
+
+def probe_intake_cli() -> None:
+    command = [sys.executable, "tools/manage_source_owned_source_authority_intake.py"]
+    validate = subprocess.run(command + ["validate", str(INTAKE_PATH)], cwd=REPO_ROOT, text=True, capture_output=True)
+    if validate.returncode != 3 or "NOT_APPROVED" not in validate.stdout or "source_equivalence_emission_allowed\": false" not in validate.stdout:
+        raise AssertionError(f"intake validate probe drifted: exit={validate.returncode}; output={validate.stdout}{validate.stderr}")
+    with tempfile.TemporaryDirectory(prefix="glyph-intake-probe-") as directory:
+        output = Path(directory) / "must-not-exist.generator-input.json"
+        emit = subprocess.run(command + ["prove-source-equivalence", str(INTAKE_PATH), "--output", str(output)], cwd=REPO_ROOT, text=True, capture_output=True)
+        if emit.returncode != 3 or output.exists() or "Traceback" in emit.stdout + emit.stderr:
+            raise AssertionError(f"intake emission probe drifted: exit={emit.returncode}; output={emit.stdout}{emit.stderr}")
 
 
 def validate_matrix(matrix: dict[str, Any]) -> None:
@@ -309,24 +453,16 @@ def validate_matrix(matrix: dict[str, Any]) -> None:
             raise AssertionError(f"current baseline mismatch for {key}")
     if current["table_count"] != 28 or len(current["table_order"]) != 28:
         raise AssertionError("current baseline must contain exactly 28 ordered tables")
-    for candidate in matrix["profile_candidates"]:
-        for path in candidate["source_paths"]:
-            if path.startswith("docs/") or path.startswith("src/") or path.startswith("tools/"):
-                if not (REPO_ROOT / path).exists():
-                    raise AssertionError(f"missing cited repository path: {path}")
-    for item in matrix["table_evidence"]:
-        for record in item["mapping_evidence"]:
-            if record["kind"] == "direct_runtime_table_view_mapping":
-                line = (REPO_ROOT / record["path"]).read_text(encoding="utf-8").splitlines()[record["line"] - 1]
-                if record["needle"] not in line:
-                    raise AssertionError(f"stale direct mapping evidence: {record}")
-        if item["mapping_status"] == "EXPLICIT" and not item["mapping_evidence"]:
-            raise AssertionError(f"explicit mapping lacks direct evidence: {item['abstract_table_id']}")
-        if item["abstract_table_id"] in {"y2_primary", "y2_tilt"} and item["mapping_status"] != "INFERRED_ONLY":
-            raise AssertionError("coordinate-native Y2 IDs must not be promoted to explicit mappings")
+    validate_references(matrix)
     baseline_candidate = next(item for item in matrix["profile_candidates"] if item["candidate_id"] == "current_source_owned_baseline")
-    if baseline_candidate["production_intake_eligibility"] != "SOURCE_EQUIVALENCE_ONLY" or baseline_candidate["differs_from_current_baseline"]:
+    if baseline_candidate["production_intake_eligibility"] != "SOURCE_EQUIVALENCE_ONLY" or baseline_candidate["comparison_status"] != "COMPLETE_MATCH" or baseline_candidate["differs_from_current_baseline"]:
         raise AssertionError("current baseline is not a production changeset")
+    y2 = next(item for item in matrix["profile_candidates"] if item["candidate_id"] == "coordinate_native_y2_inspired_sketch")
+    if y2["comparison_status"] != "SUBSET_MATCH_ONLY" or y2["differs_from_current_baseline"] is not None:
+        raise AssertionError("incomplete Y2 sketch must not be classified as a complete baseline match")
+    converter = matrix["converter_analysis"]
+    if converter["exit_status"] != 0 or not converter["accepted_input"] or not converter["output_equals_current_layout_spec"] or converter["abstract_y2_ids_preserved"] or not converter["direct_source_owned_table_symbol_mappings"] or converter["creates_production_ownership_or_provenance_claims"]:
+        raise AssertionError("converter evidence drifted")
     failed = matrix["failed_candidate_exclusion"]
     if failed["classification"] != "FORBIDDEN_FAILED_CANDIDATE" or failed["allowed_in_production_artifacts"]:
         raise AssertionError("failed canonical-grid candidate was not excluded")
@@ -340,18 +476,56 @@ def validate_matrix(matrix: dict[str, Any]) -> None:
     report = review_intake(intake)
     if report["source_equivalence_emission_allowed"] or not any(blocker["code"] == "NOT_APPROVED" for blocker in report["blockers"]):
         raise AssertionError("submitted equivalence intake must not emit")
+    if matrix["authority_analysis"]["required_human_action"]["decision"] != "APPROVE_OR_REJECT_SOURCE_EQUIVALENCE_PROOF":
+        raise AssertionError("approval action must require a human decision")
     if FAILED_COMMIT in json.dumps(intake):
         raise AssertionError("failed candidate provenance leaked into the equivalence intake")
     for generated_path in (REPO_ROOT / "docs/runtime_config/intakes").glob("*.generator-input.json"):
         if FAILED_COMMIT in generated_path.read_text(encoding="utf-8"):
             raise AssertionError(f"failed candidate provenance leaked into generated input: {generated_path}")
-    changed = subprocess.run(["git", "diff", "--name-only", "--", "src"], cwd=REPO_ROOT, text=True, capture_output=True, check=True).stdout.strip()
-    if changed:
-        raise AssertionError(f"src changed unexpectedly: {changed}")
+    probe_intake_cli()
+    validate_branch_safety()
     print("glyph_reconstructed_source_authority_evidence: PASS")
     print(f"baseline_semantic_digest={actual['semantic_digest']}")
     print("production_delta=NONE_AUTHORIZED")
     print("source_equivalence=SUBMITTED_FOR_REVIEW_NOT_EMITTED")
+
+
+def validate_committed_artifacts(expected: dict[str, Any], matrix_path: Path = MATRIX_PATH, markdown_path: Path = MARKDOWN_PATH) -> None:
+    """Require both derived artifacts to be exact deterministic reconstructions."""
+    committed = read_json(matrix_path)
+    if committed != expected:
+        raise AssertionError(f"committed matrix drift: {matrix_path} differs from deterministic reconstruction")
+    if matrix_path.read_text(encoding="utf-8") != canonical_json(expected):
+        raise AssertionError(f"committed matrix formatting drift: {matrix_path} is not canonical JSON")
+    expected_markdown = render_markdown(expected)
+    if markdown_path.read_text(encoding="utf-8") != expected_markdown:
+        raise AssertionError(f"committed Markdown drift: {markdown_path} differs from deterministic rendering")
+
+
+def run_drift_self_tests(expected: dict[str, Any]) -> None:
+    """Regression tests: copied JSON or Markdown drift must fail validation."""
+    with tempfile.TemporaryDirectory(prefix="glyph-evidence-drift-") as directory:
+        matrix_copy = Path(directory) / "matrix.json"
+        markdown_copy = Path(directory) / "report.md"
+        matrix_copy.write_text(canonical_json(expected).replace('"schema_version": 1', '"schema_version": 2', 1), encoding="utf-8")
+        markdown_copy.write_text(render_markdown(expected), encoding="utf-8")
+        try:
+            validate_committed_artifacts(expected, matrix_copy, markdown_copy)
+        except AssertionError as exc:
+            if "matrix drift" not in str(exc):
+                raise
+        else:
+            raise AssertionError("matrix drift self-test unexpectedly passed")
+        matrix_copy.write_text(canonical_json(expected), encoding="utf-8")
+        markdown_copy.write_text(render_markdown(expected) + "drift\n", encoding="utf-8")
+        try:
+            validate_committed_artifacts(expected, matrix_copy, markdown_copy)
+        except AssertionError as exc:
+            if "Markdown drift" not in str(exc):
+                raise
+        else:
+            raise AssertionError("Markdown drift self-test unexpectedly passed")
 
 
 def main() -> int:
@@ -359,12 +533,15 @@ def main() -> int:
     parser.add_argument("--write-artifacts", action="store_true")
     args = parser.parse_args()
     matrix = build_matrix()
-    validate_matrix(matrix)
     if args.write_artifacts:
-        MATRIX_PATH.write_text(json.dumps(matrix, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        MATRIX_PATH.write_text(canonical_json(matrix), encoding="utf-8")
         MARKDOWN_PATH.write_text(render_markdown(matrix), encoding="utf-8")
+        validate_committed_artifacts(matrix)
         print(f"wrote={rel(MATRIX_PATH)}")
         print(f"wrote={rel(MARKDOWN_PATH)}")
+    validate_committed_artifacts(matrix)
+    run_drift_self_tests(matrix)
+    validate_matrix(matrix)
     return 0
 
 
