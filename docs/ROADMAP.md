@@ -127,7 +127,11 @@ and manifest digests, preparation/install gates, stable exit codes, migration
 refusal for ambiguous legacy input, and fixture-backed regression matrix are
 implemented. This does not authorize a production profile, create a hardware
 candidate, or change active source. The next blocker is an explicit
-source-authorized owned-table set and replacement content.
+source-authorized owned-table set and replacement content. The former 27-table
+literal-body replacement contract is SUPERSEDED historical evidence; current
+28-table baseline extraction, generator modes, and source-authority intake are
+authoritative. This cleanup creates no candidate and approves no production
+table ownership.
 The inert proof report is
 `docs/runtime_config/generated_source_owned_overlay_preserve_proof_2026-07-19.md`.
 The normal generator input now requires `layout_spec`, so spec-less JSON is

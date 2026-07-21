@@ -65,6 +65,9 @@ automation from this context document.
 - The source-authority intake workflow is offline-only: it records explicit
   human approval and ownership before v2 generation, but authorizes no real
   production table set and creates no hardware candidate.
+- The former 27-table literal-body replacement generator contract is
+  SUPERSEDED historical evidence; current authority is the 28-table baseline
+  extraction, source-owned generator modes, and source-authority intake.
 - Design coordinate-native runtime profile support separately.
 - Treat browser/protobuf/persistence backend work as future infrastructure
   after the runtime model exists.

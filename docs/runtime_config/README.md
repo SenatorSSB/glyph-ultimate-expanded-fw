@@ -193,7 +193,9 @@ Relevant current design packets:
 
 - `runtime_config_activation_alternatives_a_f.md`
 - `source_owned_table_replacement_design.md`
-- `source_owned_table_replacement_generator_contract.md`
+- `source_owned_table_replacement_generator_contract.md` (SUPERSEDED historical
+  27-table literal-body contract; current authority is generator modes and
+  source-authority intake)
 - `glyph_coordinate_native_runtime_plan.md`
 - `coordinate_native_runtime_profile_contract.md`
 - `IMPLEMENTATION_BOUNDARY.md`

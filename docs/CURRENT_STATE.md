@@ -47,7 +47,7 @@ implementation work. Detailed historical evidence remains indexed from
   28-row manifests, deterministic semantic digests, stable CLI exit codes,
   preparation/install gates, and fixture-backed regression coverage. No
   production profile has been authorized; the current example remains
-  `SOURCE_AUTHORITY_BLOCKER`, and no hardware candidate was created.
+  `SOURCE_AUTHORITY_BLOCKER`, and no hardware candidate was created; the old 27-table literal-body replacement contract is SUPERSEDED historical evidence, while the 28-table baseline extraction, generator modes, and source-authority intake are authoritative and this cleanup approves no production table ownership.
 
 ## Current Implementation Boundary
 
