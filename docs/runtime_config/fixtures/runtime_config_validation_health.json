@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "starting_commit": "116d34322837fe1f6f724c820b49ccb0d24d6787",
+  "canonical_baseline": {
+    "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+    "table_count": 28,
+    "final_table": "kLt1LowMagnitudeTable"
+  },
+  "repository_checker_census": {
+    "artifact": "docs/runtime_config/fixtures/glyph_checker_census.json",
+    "discovered_count": 185,
+    "validated": true
+  },
+  "curated_runtime_config_scope": {
+    "manifest_entry_count": 25,
+    "current_load_bearing_count": 20,
+    "historical_or_evidentiary_count": 4,
+    "explicit_exclusion_count": 35
+  },
+  "checker_results": [
+    {"id":"identity_table_source_sync","path":"tools/check_glyph_identity_runtime_table_source_sync.py","classification":"repaired_current_load_bearing_source_sync_checker","starting_configurator":{"exit_code":1,"error":"stale 27-table interpreter bridge fixture"},"feature_branch":{"result":"PASS"}},
+    {"id":"runtime_semantics_evaluator_bridge","path":"tools/check_glyph_runtime_config_semantics_evaluator_bridge.py","classification":"repaired_current_load_bearing_evaluator_bridge_checker","starting_configurator":{"exit_code":1,"error":"stale Ultimate.cpp SHA and 27-table bridge lineage"},"feature_branch":{"result":"PASS"}}
+  ],
+  "strong_signal_exclusions": [
+    {"id":"candidate_generation","path":"tools/check_glyph_source_owned_candidate_generation.py","reason":"UNSAFE_OR_MUTATING","detail":"candidate preparation is excluded from the read-only aggregate"}
+  ],
+  "known_preexisting_failures": [
+    {"id":"identity_table_source_sync","result":"PRE_EXISTING_FIXTURE_DRIFT","starting_configurator_exit_code":1},
+    {"id":"runtime_semantics_evaluator_bridge","result":"PRE_EXISTING_FIXTURE_DRIFT","starting_configurator_exit_code":1}
+  ],
+  "historical_evidence": [
+    {"id":"identity_generated_evaluator_input","path":"tools/check_glyph_identity_runtime_generated_config_evaluator_input.py","fixture":"docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json","classification":"HISTORICAL_BRANCH_EVIDENCE","current_aggregate_pass":false},
+    {"id":"reconstructed_authority","path":"tools/check_glyph_reconstructed_source_authority_evidence.py","classification":"HISTORICAL_BRANCH_EVIDENCE","current_aggregate_pass":false},
+    {"id":"table_replacement_contract","path":"tools/check_glyph_source_owned_table_replacement_generator_contract.py","classification":"SUPERSEDED_CONTRACT","current_aggregate_pass":false},
+    {"id":"latest_y2_hardware_evidence","path":"tools/check_glyph_latest_y2_layout_source_owned_port.py","classification":"HARDWARE_RESULT_EVIDENCE","current_aggregate_pass":false}
+  ]
+}
