@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import subprocess
 import tempfile
+import importlib.util
 from pathlib import Path
 
 from glyph_checker_context import ScopeValidationError, collect_checker_context, validate_feature_scope
@@ -175,9 +176,23 @@ def main() -> int:
         expect_scope_failure(root, "configurator", "out-of-scope changed path: tools/not_allowed.py")
 
     historical = Path(__file__).with_name("check_glyph_source_owned_table_replacement_generator_contract.py")
-    completed = subprocess.run(["python3", str(historical)], capture_output=True, text=True, check=False)
-    if completed.returncode == 0 or "checker must run on" not in completed.stderr:
-        raise AssertionError("historical exact-branch checker unexpectedly lost branch-specific policy")
+    spec = importlib.util.spec_from_file_location("historical_branch_policy", historical)
+    if spec is None or spec.loader is None:
+        raise AssertionError("could not load historical branch-policy checker")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    original_git_lines = module.git_lines
+    try:
+        module.git_lines = lambda args, preserve_status=False: ["unrelated-feature-branch"]
+        try:
+            module.validate_branch()
+        except module.SourceOwnedTableReplacementGeneratorContractError as exc:
+            if "checker must run on" not in str(exc):
+                raise AssertionError(f"unexpected historical-branch result: {exc!s}") from exc
+        else:
+            raise AssertionError("historical exact-branch checker unexpectedly lost branch-specific policy")
+    finally:
+        module.git_lines = original_git_lines
 
     case_ids = (
         "CTX-01-valid-feature-branch",
