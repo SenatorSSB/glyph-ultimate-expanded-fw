@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"id":"validation_health","command":["python3","tools/check_glyph_runtime_config_validation_health.py"],"category":"baseline","applicability":"current","branch_policy":"content_only","source_dependencies":[],"expected_success_exit":0,"load_bearing":true,"historical":false,"arguments_required":false},
+    {"id":"source_sync","command":["python3","tools/check_glyph_runtime_config_source_sync.py"],"category":"source_sync","applicability":"current","branch_policy":"content_only","source_dependencies":["src/modes/UltimateIdentityRuntimeTables.hpp","src/modes/UltimateRuntimeConfigInterpreter.hpp"],"expected_success_exit":0,"load_bearing":true,"historical":false,"arguments_required":false},
+    {"id":"generator_modes","command":["python3","tools/check_glyph_source_owned_generator_modes.py"],"category":"generator","applicability":"current","branch_policy":"content_only","source_dependencies":[],"expected_success_exit":0,"load_bearing":true,"historical":false,"arguments_required":false},
+    {"id":"overlay_preserve","command":["python3","tools/check_glyph_source_owned_overlay_preserve.py"],"category":"generator","applicability":"current","branch_policy":"content_only","source_dependencies":[],"expected_success_exit":0,"load_bearing":true,"historical":false,"arguments_required":false},
+    {"id":"source_authority_intake","command":["python3","tools/check_glyph_source_owned_source_authority_intake.py"],"category":"intake","applicability":"current","branch_policy":"content_only","source_dependencies":[],"expected_success_exit":0,"load_bearing":true,"historical":false,"arguments_required":false},
+    {"id":"docs_navigation","command":["python3","tools/check_glyph_docs_navigation.py"],"category":"docs","applicability":"current","branch_policy":"content_only","source_dependencies":[],"expected_success_exit":0,"load_bearing":true,"historical":false,"arguments_required":false},
+    {"id":"agent_framework","command":["python3","tools/check_glyph_agent_framework_docs.py"],"category":"agent_framework","applicability":"current","branch_policy":"content_only","source_dependencies":[],"expected_success_exit":0,"load_bearing":true,"historical":false,"arguments_required":false},
+    {"id":"latest_y2_hardware_evidence","command":["python3","tools/check_glyph_latest_y2_layout_source_owned_port.py"],"category":"historical_evidence","applicability":"historical_only","branch_policy":"named_evidence_branch","source_dependencies":[],"expected_success_exit":0,"load_bearing":false,"historical":true,"arguments_required":false}
+  ]
+}

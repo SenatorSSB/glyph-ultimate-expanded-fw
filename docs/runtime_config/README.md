@@ -392,3 +392,11 @@ current path:
 - Firmware flashing automation is not implemented.
 - Official configurator compatibility is not claimed.
 - Nunchuk validation is not claimed.
+# Offline validation
+
+Run `python3 tools/run_glyph_runtime_config_validation.py` for the current,
+read-only runtime-config validation lane. `python3 tools/check_glyph_runtime_config_source_sync.py`
+checks the canonical 28-table source baseline (digest
+`9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`).
+Historical and hardware-evidence checkers are explicitly excluded from current
+aggregate PASS; this does not create production authority or a candidate.
