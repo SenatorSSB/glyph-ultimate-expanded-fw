@@ -801,15 +801,20 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 9647,
+      "file_size_bytes": 10280,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
         "CTX-15-historical-exact-branch-remains-specific",
+        "branch-policy",
         "branch-specific",
         "configurator",
         "exact-branch",
-        "renamed-feature-branch"
+        "historical-branch",
+        "historical_branch_policy",
+        "module.validate_branch",
+        "renamed-feature-branch",
+        "unrelated-feature-branch"
       ],
       "imported_local_modules": [
         "glyph_checker_context"
@@ -818,17 +823,22 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 204,
+      "line_count": 219,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
         "CTX-15-historical-exact-branch-remains-specific",
+        "branch-policy",
         "branch-specific",
         "configurator",
         "exact-branch",
-        "renamed-feature-branch"
+        "historical-branch",
+        "historical_branch_policy",
+        "module.validate_branch",
+        "renamed-feature-branch",
+        "unrelated-feature-branch"
       ],
       "potential_mutation_signals": [
         "subprocess.run"
@@ -851,7 +861,7 @@
         "tools/not_allowed.py"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "0052712f9310ebc649eaeed2fe095387957b7795fbe9340713c80554d5318c53",
+      "sha256": "fe8a276e8a8f74a85568370a5ec27f4d8a9b1d1ca4c8bc870235ad7a3d2a1892",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
