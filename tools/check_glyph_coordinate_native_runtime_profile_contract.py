@@ -19,6 +19,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from glyph_checker_context import CheckerContextError, collect_checker_context, validate_feature_scope
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-coordinate-native-selection-semantics"
@@ -1580,14 +1582,20 @@ def main() -> int:
         print("glyph_coordinate_native_runtime_profile_contract: OFFLINE EXPORT PACKAGE PASS")
         print(f"- export package: {rel(OFFLINE_EXPORT_PACKAGE_FIXTURE)}")
         return 0
-    branch = validate_branch()
+    try:
+        context = collect_checker_context(repo_root=REPO_ROOT)
+        validate_feature_scope(
+            context,
+            allowed_paths=("docs/runtime_config/", "docs/agent_framework/", "tools/", "AGENTS.md"),
+        )
+    except CheckerContextError as exc:
+        fail(str(exc))
+    branch = context.branch or "detached HEAD"
     validate_contract_schema()
     validate_contract_fixture()
     validate_example_fixtures()
     validate_dry_run_fixtures()
     validate_layout_spec_bridge()
-    if branch != MERGED_BRANCH:
-        validate_changed_paths(changed_paths(branch))
     validate_contract_fixture_and_docs()
     print("glyph_coordinate_native_runtime_profile_contract: PASS")
     print(f"- branch: {branch}")

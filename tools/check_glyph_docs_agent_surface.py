@@ -7,6 +7,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from glyph_checker_context import CheckerContextError, collect_checker_context, validate_feature_scope
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "docs-agent-surface-cleanup"
@@ -367,8 +369,15 @@ def validate_docs() -> None:
 
 
 def main() -> int:
-    branch = validate_branch()
-    validate_changed_paths(changed_paths(branch))
+    try:
+        context = collect_checker_context(repo_root=REPO_ROOT)
+        validate_feature_scope(
+            context,
+            allowed_paths=("docs/", "tools/", "AGENTS.md", "CLAUDE.md"),
+        )
+    except CheckerContextError as exc:
+        fail(str(exc))
+    branch = context.branch or "detached HEAD"
     validate_docs()
     print("glyph_docs_agent_surface: PASS")
     print(f"- branch: {branch}")

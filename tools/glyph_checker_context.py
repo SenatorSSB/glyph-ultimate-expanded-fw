@@ -158,9 +158,14 @@ def collect_checker_context(
 
     root = Path(repo_root or Path.cwd()).resolve()
     environment = os.environ if environ is None else environ
-    selected_base = base or environment.get(DEFAULT_BASE_ENV)
-    expected = expected_merge_base or environment.get(DEFAULT_EXPECTED_MERGE_BASE_ENV)
     branch = _branch(root)
+    # A normal local feature branch can use the already-fetched remote base.
+    # Detached CI deliberately does not get this convenience: it must state
+    # the comparison base explicitly so scope validation cannot be ambiguous.
+    selected_base = base or environment.get(DEFAULT_BASE_ENV)
+    if selected_base is None and branch not in {None, default_branch}:
+        selected_base = f"origin/{default_branch}"
+    expected = expected_merge_base or environment.get(DEFAULT_EXPECTED_MERGE_BASE_ENV)
     head = _resolve_commit(root, "HEAD")
     base_commit = _resolve_commit(root, selected_base) if selected_base else None
     expected_commit = _resolve_commit(root, expected) if expected else None
@@ -192,10 +197,12 @@ def collect_checker_context(
 
 
 def _matches_allowlist(path: str, allowed_paths: Iterable[str]) -> bool:
+    folded_path = path.casefold()
     for allowed in allowed_paths:
-        if allowed.endswith("/") and path.startswith(allowed):
+        folded_allowed = allowed.replace("\\", "/").casefold()
+        if folded_allowed.endswith("/") and folded_path.startswith(folded_allowed):
             return True
-        if path == allowed:
+        if folded_path == folded_allowed:
             return True
     return False
 
@@ -205,10 +212,11 @@ def _protected_reason(
     protected_prefixes: Iterable[str],
     protected_components: Iterable[str],
 ) -> str | None:
-    if any(path.startswith(prefix) for prefix in protected_prefixes):
+    folded_path = path.casefold()
+    if any(folded_path.startswith(prefix.casefold()) for prefix in protected_prefixes):
         return "protected prefix"
-    components = set(path.split("/"))
-    hit = sorted(components & set(protected_components))
+    components = {component.casefold() for component in path.split("/")}
+    hit = sorted(components & {component.casefold() for component in protected_components})
     if hit:
         return f"protected component {hit[0]!r}"
     return None

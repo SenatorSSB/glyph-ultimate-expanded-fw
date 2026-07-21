@@ -11,6 +11,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from glyph_checker_context import CheckerContextError, collect_checker_context, validate_feature_scope
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-generator-contract"
@@ -793,8 +795,15 @@ def validate_docs() -> None:
 
 
 def main() -> int:
-    branch = validate_branch()
-    validate_changed_paths(changed_paths(branch))
+    try:
+        context = collect_checker_context(repo_root=REPO_ROOT)
+        validate_feature_scope(
+            context,
+            allowed_paths=("docs/runtime_config/", "docs/agent_framework/", "tools/", "AGENTS.md"),
+        )
+    except CheckerContextError as exc:
+        fail(str(exc))
+    branch = context.branch or "detached HEAD"
     contract_fixture = load_json_object(CONTRACT_FIXTURE)
     layout_spec_fixture = load_json_object(LAYOUT_SPEC_FIXTURE)
     layout_spec_example = load_json_object(LAYOUT_SPEC_EXAMPLE)

@@ -10,6 +10,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from glyph_checker_context import CheckerContextError, collect_checker_context, validate_feature_scope
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_BRANCH = "runtime-config-generated-source-owned-artifact-install"
@@ -496,10 +498,17 @@ def validate_docs() -> None:
 
 
 def main() -> int:
-    branch = validate_branch()
+    try:
+        context = collect_checker_context(repo_root=REPO_ROOT)
+        validate_feature_scope(
+            context,
+            allowed_paths=("docs/runtime_config/", "docs/agent_framework/", "tools/", "AGENTS.md"),
+        )
+    except CheckerContextError as exc:
+        fail(str(exc))
+    branch = context.branch or "detached HEAD"
     fixture = load_json_object(FIXTURE)
     installed_artifacts = validate_fixture(fixture)
-    validate_changed_paths(changed_paths(branch), installed_artifacts)
     validate_deterministic_generation(installed_artifacts)
     validate_bridge_install_workflow(installed_artifacts)
     validate_docs()
