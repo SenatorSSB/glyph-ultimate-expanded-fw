@@ -8,6 +8,12 @@ and `docs/calibration/INDEX.md`.
 
 ## Current Baseline
 
+Runtime-config validation stabilization uses a deterministic repository-wide
+checker census together with a curated runtime-config validation manifest. The
+census detects checker-set drift mechanically; the curated manifest retains
+the detailed current validation dependency graph and explicit evidence/unsafe
+exclusions. This creates no production authority or hardware claim.
+
 The current known-good firmware state is the latest Y2 layout source-owned port
 merged into `configurator` after HARDWARE_PASS. The implementation lineage is
 `runtime-config-latest-y2-layout-source-owned-port`, and the preserved hardware

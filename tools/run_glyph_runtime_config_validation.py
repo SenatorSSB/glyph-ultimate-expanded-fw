@@ -11,7 +11,10 @@ from time import monotonic
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
+CENSUS = ROOT / "docs/runtime_config/fixtures/glyph_checker_census.json"
 REQUIRED = {"id", "path", "command", "category", "applicability", "branch_policy", "required_arguments", "mutation_risk", "source_dependencies", "load_bearing", "historical", "reason"}
+EXCLUSION_REQUIRED = {"id", "path", "reason", "detail"}
+EXCLUSION_REASONS = {"HISTORICAL_BRANCH_EVIDENCE", "HARDWARE_RESULT_EVIDENCE", "SUPERSEDED_CONTRACT", "REQUIRES_NONCANONICAL_ARGUMENT", "UNSAFE_OR_MUTATING", "DUPLICATE_COVERAGE", "NOT_CURRENT_RUNTIME_CONFIG_LANE"}
 
 
 def pairs(items: list[tuple[str, object]]) -> dict[str, object]:
@@ -23,9 +26,9 @@ def pairs(items: list[tuple[str, object]]) -> dict[str, object]:
     return result
 
 
-def load() -> tuple[list[dict[str, object]], set[str]]:
+def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     value = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=pairs)
-    if value.get("schema_version") != 2 or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list):
+    if value.get("schema_version") != 3 or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list) or not isinstance(value.get("strong_signal_exclusions"), list):
         raise ValueError("invalid manifest root")
     categories = set(value["categories"])
     ids: set[str] = set()
@@ -48,7 +51,47 @@ def load() -> tuple[list[dict[str, object]], set[str]]:
         if entry["historical"] and entry["applicability"] != "historical_only":
             raise ValueError(f"historical checker incorrectly current: {checker_id}")
         entries.append(entry)
-    return entries, categories
+    exclusions: list[dict[str, object]] = []
+    exclusion_ids: set[str] = set()
+    exclusion_paths: set[str] = set()
+    entry_paths = {str(entry["path"]) for entry in entries}
+    for exclusion in value["strong_signal_exclusions"]:
+        if not isinstance(exclusion, dict) or set(exclusion) != EXCLUSION_REQUIRED:
+            raise ValueError(f"invalid strong-signal exclusion: {exclusion!r}")
+        exclusion_id, exclusion_path = exclusion["id"], exclusion["path"]
+        if not isinstance(exclusion_id, str) or exclusion_id in exclusion_ids:
+            raise ValueError(f"duplicate strong-signal exclusion ID: {exclusion_id}")
+        if not isinstance(exclusion_path, str) or exclusion_path in exclusion_paths:
+            raise ValueError(f"duplicate strong-signal exclusion path: {exclusion_path}")
+        if exclusion_path in entry_paths:
+            raise ValueError(f"checker appears in manifest and exclusions: {exclusion_path}")
+        if exclusion["reason"] not in EXCLUSION_REASONS:
+            raise ValueError(f"invalid strong-signal exclusion reason: {exclusion['reason']}")
+        if not isinstance(exclusion["detail"], str) or not exclusion["detail"]:
+            raise ValueError(f"invalid strong-signal exclusion detail: {exclusion_id}")
+        if not exclusion_path.startswith("tools/check_glyph_") or not exclusion_path.endswith(".py") or not (ROOT / exclusion_path).is_file():
+            raise ValueError(f"invalid strong-signal exclusion path: {exclusion_path}")
+        exclusion_ids.add(exclusion_id)
+        exclusion_paths.add(exclusion_path)
+        exclusions.append(exclusion)
+    census = json.loads(CENSUS.read_text(encoding="utf-8"), object_pairs_hook=pairs)
+    census_entries = census.get("entries")
+    if not isinstance(census_entries, list):
+        raise ValueError("invalid checker census entries")
+    strong_paths: set[str] = set()
+    for census_entry in census_entries:
+        if not isinstance(census_entry, dict) or not isinstance(census_entry.get("path"), str):
+            raise ValueError("invalid checker census entry")
+        signals = census_entry.get("runtime_config_relevance_signals")
+        if not isinstance(signals, list) or not all(isinstance(signal, str) for signal in signals):
+            raise ValueError(f"invalid checker census relevance signals: {census_entry['path']}")
+        if signals:
+            strong_paths.add(census_entry["path"])
+    for path in sorted(strong_paths - entry_paths - exclusion_paths):
+        raise ValueError(f"unclassified strong-signal checker: {path}")
+    for path in sorted(exclusion_paths - strong_paths):
+        raise ValueError(f"strong-signal exclusion lacks census signal: {path}")
+    return entries, exclusions, categories
 
 
 def context() -> dict[str, object]:
@@ -64,14 +107,14 @@ def main() -> int:
     parser.add_argument("--check-manifest", action="store_true")
     args = parser.parse_args()
     try:
-        entries, categories = load()
+        entries, exclusions, categories = load()
         if args.category and any(category not in categories for category in args.category):
             raise ValueError("unknown category: " + ", ".join(sorted(set(args.category) - categories)))
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         print(f"glyph_runtime_config_validation_manifest: FAIL: {exc}")
         return 1
     if args.check_manifest:
-        print(f"glyph_runtime_config_validation_manifest: PASS; entries={len(entries)}")
+        print(f"glyph_runtime_config_validation_manifest: PASS; entries={len(entries)}; strong_signal_exclusions={len(exclusions)}")
         return 0
     selected = [entry for entry in entries if entry["applicability"] == "current" and (not args.category or entry["category"] in args.category)]
     results = []
@@ -83,7 +126,7 @@ def main() -> int:
         if args.fail_fast and not passed:
             break
     passed = all(result["status"] == "PASS" for result in results)
-    output = {"status": "PASS" if passed else "FAIL", "context": context(), "results": results, "excluded": [{"id": entry["id"], "applicability": entry["applicability"], "reason": entry["reason"]} for entry in entries if entry["applicability"] != "current"]}
+    output = {"status": "PASS" if passed else "FAIL", "context": context(), "results": results, "excluded": [{"id": entry["id"], "applicability": entry["applicability"], "reason": entry["reason"]} for entry in entries if entry["applicability"] != "current"] + [{"id": exclusion["id"], "applicability": "excluded", "reason": exclusion["reason"]} for exclusion in exclusions]}
     if args.json:
         print(json.dumps(output, sort_keys=True))
     else:

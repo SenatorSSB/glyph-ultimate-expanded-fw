@@ -56,6 +56,9 @@ automation from this context document.
 
 ## Forward Plan
 
+- Runtime-config validation now uses a full static checker census plus a
+  curated runtime-config manifest. The census count is discovery-derived; the
+  manifest, not a manual audit of every checker, owns current semantic gates.
 - Maintain the source-owned Y2 layout baseline and current checkers.
 - Harden the source-owned realization generator path for source-owned
   tables/routing source, starting with overlay/preserve candidate-generation

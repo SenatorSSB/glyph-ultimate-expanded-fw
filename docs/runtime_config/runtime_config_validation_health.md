@@ -1,21 +1,40 @@
 # Runtime-config validation health
 
-This inventory records the controlled baseline run at
-`116d34322837fe1f6f724c820b49ccb0d24d6787`. Its machine-readable companion is
-`fixtures/runtime_config_validation_health.json`.
+This health record has two explicit layers. The repository-wide layer is the
+mechanical checker census at `fixtures/glyph_checker_census.json`; it discovers
+every `tools/check_glyph_*.py` path without executing or behaviorally auditing
+those checkers. Its count is derived from discovery, not treated as a permanent
+constant. The curated layer is
+`fixtures/runtime_config_validation_manifest.json`, which records only the
+current runtime-config dependency graph and its explicit historical,
+evidentiary, and unsafe exclusions.
+
+This corrects the earlier single-level inventory scope. The prior records are
+preserved as current-result, historical-evidence, and exclusion records below;
+they are not evidence that every repository checker received a manual semantic
+assessment. The controlled starting baseline remains
+`116d34322837fe1f6f724c820b49ccb0d24d6787`.
 
 The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`.
 
-The two load-bearing baseline failures were
+The two repaired load-bearing baseline failures were
 `check_glyph_identity_runtime_table_source_sync.py` and
 `check_glyph_runtime_config_semantics_evaluator_bridge.py`. Both read the
-stale 27-table `current_baseline_runtime_config_semantics_bridge.json` and are
-classified `PRE_EXISTING_FIXTURE_DRIFT`, never PASS. The 27-table generated
-prototype is preserved as historical evaluator evidence, not relabelled as a
-current baseline.
+stale 27-table `current_baseline_runtime_config_semantics_bridge.json` at the
+starting configurator baseline. The first also had the stale 27-table
+interpreter bridge fixture; the second had the stale `Ultimate.cpp` SHA and
+27-table bridge lineage. Both pass with the repaired current fixture. The
+27-table generated-prototype evaluator remains historical evidence, not a
+current aggregate PASS.
 
 Commands that can prepare, install, or emit a candidate are classified unsafe
 for this offline validation lane. Historical and hardware-result checkers are
-explicit inventory entries; they are not counted as current aggregate passes.
+explicit curated records; they are not counted as current aggregate passes.
+
+The curated manifest now has 25 explicit entries, including 20 current
+load-bearing checks. The added behavior evaluator is present as superseded
+historical evidence because this feature branch modified it to consume the
+established source-table extractor while its May-28 behavior-case dependency
+remains historical; it is not a current aggregate PASS.
