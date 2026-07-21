@@ -1,96 +1,69 @@
-# Source-Owned Table Replacement Generator Contract
+# Source-Owned Literal Table Replacement Contract
 
-Status label: GENERATOR CONTRACT / DOCS-TOOLS ONLY.
+Status: SUPERSEDED / HISTORICAL DOCS-TOOLS CONTRACT.
 
-This packet follows `source_owned_table_replacement_design.md`. It defines a
-stdlib-only generator/checker contract for replacing the numeric contents of
-the existing source-owned `StickPoint` tables already consumed by
-`kSourceOwnedCurrentBaselineRuntimeConfig`, without changing active
-`RuntimeConfigView` selection and without writing patched tables into active
-source paths on this branch.
+This packet preserves the former 27-table literal-body replacement contract as
+historical evidence. It is not a current production contract, does not
+authorize a table set, and does not establish hardware validity.
 
-## Accepted Evidence
+## What Was Superseded
 
-- Source-owned active-state preselection has recorded `HARDWARE_PASS` evidence.
-- Parsed/candidate machinery present while the source-owned active view remains
-  published has recorded `HARDWARE_PASS` evidence.
-- Parsed candidate.view published active has recorded `HARDWARE_FAIL` evidence.
-- Source-owned-materialized candidate.view published active has recorded
-  `HARDWARE_FAIL` evidence.
-- Dedicated active storage has recorded `HARDWARE_FAIL` evidence.
-- Generated source-owned baseline active `HARDWARE_FAIL` evidence shows that
-  replacing the active `RuntimeConfigView` with a generated baseline-equivalent
-  view is unsafe under current diagnostics.
-- The low-level failure mechanism remains unproven.
-- Nunchuk remains `NOT_TESTED`.
+The prior generator modeled exactly 27 literal table bodies: `constexpr
+StickPoint ...[9]` definitions in `src/modes/UltimateIdentityRuntimeTables.hpp`.
+It emitted a
+separate patched-header fixture. That representation is no longer current.
 
-## Input Contract
+The active source now includes
+`GeneratedRuntimeConfigBaseline.current.hpp` and declares 28 macro-backed
+source-owned tables. Canonical table values and order are extracted through
+`parse_source_owned_baseline_contract`; the final current table is
+`kLt1LowMagnitudeTable`. Direct literal-body replacement is not the current
+production path.
 
-The neutral replacement JSON input must reject duplicate keys and contain:
+## Historical Evidence Retained
 
-- `schema_version`
-- `replacement_kind: source_owned_table_content_replacement`
-- `target_file: src/modes/UltimateIdentityRuntimeTables.hpp`
-- `table_shape`
-- `tables`
+These files remain in place as historical evidence only:
 
-`table_shape` must contain:
+- `fixtures/source_owned_table_replacement_generator_contract.json`
+- `fixtures/source_owned_table_replacement_input.example.json`
+- `fixtures/generated_outputs/UltimateIdentityRuntimeTables.replacement.example.hpp`
 
-- `table_count: 27`
-- `points_per_table: 9`
-- `axes_per_point: 2`
+They preserve the old 27-table input/output model and are not valid current
+generator inputs. They must not be compared byte-for-byte with the active
+macro-backed source and must not be interpreted as authority, a candidate, or
+a hardware-valid artifact.
 
-Each table must include a `table_symbol` matching an existing source-owned
-table symbol and exactly 9 points. Each point must contain integer byte values
-`x` and `y` in the inclusive range `[0, 255]`. Duplicate `table_symbol` values
-are rejected. The set of replacement symbols must exactly match the current
-source table symbols.
+`tools/generate_source_owned_table_replacement.py` is retained only as a
+fail-closed compatibility entry point. It exits nonzero before reading the
+historical input, patching active source, or writing output, and directs
+callers to the current supported contracts.
 
-Optional `metadata` may record `controller_family`, `profile_name`, `revision`,
-and `notes`; metadata is descriptive only and does not affect emitted source
-text.
+## Current Supported Offline Path
 
-## Output Contract
+The authoritative current workflow is:
 
-`tools/generate_source_owned_table_replacement.py` reads
-`src/modes/UltimateIdentityRuntimeTables.hpp` and emits patched
-`UltimateIdentityRuntimeTables.hpp` text to stdout or an explicit output path.
-It must preserve table symbol names, table order, table count, table shape,
-comments, includes, active-state text, and every non-table source region. It
-must only modify `x`/`y` numeric table contents inside the existing
-`constexpr StickPoint k...Table[9]` initializers.
+```text
+approved source-authority intake
+-> generator-input v2
+-> current generator modes
+-> complete 28-table artifact and manifest
+-> separately gated preparation/install
+-> active-source candidate
+-> build
+-> hardware gate
+```
 
-The fixture output lives at
-`docs/runtime_config/fixtures/generated_outputs/UltimateIdentityRuntimeTables.replacement.example.hpp`.
-It is an output fixture only. It is not written into
-`src/modes/UltimateIdentityRuntimeTables.hpp`, is not compiled by this branch,
-and is not wired into active firmware behavior.
+Current contract pointers:
 
-## Guardrails
+- `generated_source_owned_generator_modes.md`
+- `source_authority_intake_workflow.md`
+- `tools/source_owned_generator_modes.py`
+- `tools/manage_source_owned_source_authority_intake.py`
+- current baseline extraction through `parse_source_owned_baseline_contract`
 
-- no RuntimeConfigView selection change
-- `runtime_config_view_replacement_allowed: false`
-- `active_view_selection_changed: false`
-- `source_owned_table_content_replacement_wired: false`
-- `active_source_file_modified: false`
-- `output_fixture_only: true`
-- runtime-loaded config remains not implemented
-- persistent storage remains not implemented
-- WebSerial/device write remains not implemented
-- backend/config.pb write path remains not implemented
-- flashing automation remains not implemented
-- hardware test is not required before merge for this docs/tools contract
-- Nunchuk remains `NOT_TESTED`
-
-## Non-Claims
-
-- This packet does not prove the low-level failure mechanism.
-- This packet does not modify firmware source.
-- This packet does not replace active table contents in source.
-- This packet does not replace `RuntimeConfigView`.
-- This packet does not change active view/state selection.
-- This packet does not introduce a new active wrapper.
-- This packet does not implement runtime-loaded config, persistent storage,
-  WebSerial/device write, backend/config.pb write paths, or flashing
-  automation.
-- This packet does not claim nunchuk validation.
+No production table ownership has been approved by this supersession cleanup.
+Any future active table change still requires explicit source authority,
+candidate isolation, build, and HARDWARE_PASS before merge. Runtime-loaded
+config, persistent storage, WebSerial/device write, protobuf binary write, and
+flashing automation remain unimplemented. Nunchuk remains `NOT_TESTED`; root
+cause remains unproven.

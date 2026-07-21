@@ -1,4 +1,5 @@
 {
+  "historical_status": "HISTORICAL_SUPERSEDED_NOT_CURRENT_INPUT",
   "schema_version": 1,
   "replacement_kind": "source_owned_table_content_replacement",
   "target_file": "src/modes/UltimateIdentityRuntimeTables.hpp",

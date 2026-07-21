@@ -57,6 +57,8 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/source_owned_source_authority_intake.py",
     "tools/manage_source_owned_source_authority_intake.py",
     "tools/check_glyph_source_owned_source_authority_intake.py",
+    "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
+    "tools/generate_source_owned_table_replacement.py",
     "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
 }
 ALLOWED_PREFIXES = ("docs/",)
@@ -157,6 +159,7 @@ def validate_branch() -> str:
         "runtime-config-source-owned-install-workflow",
         "runtime-config-alt-b-generated-table-alias-candidate",
         INTAKE_BRANCH,
+        "runtime-config-literal-table-contract-supersession",
     } and not any(branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES):
         fail(f"checker must run on {EXPECTED_BRANCH}, {AGENT_FRAMEWORK_BRANCH}, or {MERGED_BRANCH}, got {branch}")
     if branch in {EXPECTED_BRANCH, CONTRACT_BRANCH, AGENT_FRAMEWORK_BRANCH} or any(
@@ -191,6 +194,7 @@ def changed_paths(branch: str) -> set[str]:
         RECOVERY_BRANCH,
         "runtime-config-source-owned-install-workflow",
         INTAKE_BRANCH,
+        "runtime-config-literal-table-contract-supersession",
     } or any(
         branch.startswith(prefix) for prefix in ALLOWED_BRANCH_PREFIXES
     ):

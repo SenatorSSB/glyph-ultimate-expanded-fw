@@ -1,3 +1,4 @@
+// HISTORICAL / SUPERSEDED: 27-table literal-body output evidence only; not current source or generator input.
 // Generated-like identity runtime table constants.
 // Source-owned firmware constants, not runtime-loaded config.
 // Values are source-authored, not generated at runtime.

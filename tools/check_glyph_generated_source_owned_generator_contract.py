@@ -60,6 +60,8 @@ ALLOWED_TOOL_PATHS = {
     "tools/source_owned_source_authority_intake.py",
     "tools/manage_source_owned_source_authority_intake.py",
     "tools/check_glyph_source_owned_source_authority_intake.py",
+    "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
+    "tools/generate_source_owned_table_replacement.py",
     "src/modes/UltimateIdentityRuntimeTables.hpp",
     "tools/extract_glyph_identity_runtime_tables.py",
     "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
