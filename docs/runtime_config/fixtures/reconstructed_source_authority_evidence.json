@@ -1,0 +1,787 @@
+{
+  "authority_analysis": {
+    "approver_identifier_present": false,
+    "hardware_acceptance_record": "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md",
+    "merge_approved_recorded": true,
+    "minimal_missing_decision": "Provide an intake-contract approver identifier and approval reference for the empty source-equivalence proof; for production change, also provide explicit target intent, owned symbols, exact replacements, ownership references, and production-authorized provenance.",
+    "production_authorized_target_present": false
+  },
+  "converter_analysis": {
+    "abstract_y2_ids_preserved": false,
+    "accepted_input": true,
+    "fixture": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+    "output": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+    "output_is_current_layout_spec": true,
+    "production_mapping_provided": false
+  },
+  "current_baseline": {
+    "baseline_id": "current_source_owned_baseline",
+    "commit": "7fde661303dd836918b4c54008a47b89c478fc09",
+    "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+    "source_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "table_count": 28,
+    "table_order": [
+      "kDefaultTable",
+      "kModeDefaultTable",
+      "kX1Table",
+      "kX2Table",
+      "kMX1Table",
+      "kMX2Table",
+      "kY1Table",
+      "kY2Table",
+      "kMY1Table",
+      "kLayerNormalXTable",
+      "kMLayerNormalXTable",
+      "kLayerFlipperTable",
+      "kMLayerFlipperTable",
+      "kY1Tilt1Table",
+      "kMY1Tilt1Table",
+      "kY1LayerFlipperTable",
+      "kMY1LayerFlipperTable",
+      "kY1LayerNormalXTable",
+      "kMY1LayerNormalXTable",
+      "kTilt1Table",
+      "kTilt2Table",
+      "kTilt3Table",
+      "kTilt1Minus41Table",
+      "kRT1RF4CustomTable",
+      "kMTilt1Table",
+      "kMTilt2Table",
+      "kMTilt3Table",
+      "kLt1LowMagnitudeTable"
+    ],
+    "table_order_digest": "dbf84342023124d0ce63414d3efe28db7f8cd3bcf950c7e1a9addcedbcff51cb"
+  },
+  "evidence_inventory": {
+    "active_source": [
+      "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+      "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+    ],
+    "authority_workflow": [
+      "tools/source_owned_source_authority_intake.py",
+      "tools/manage_source_owned_source_authority_intake.py",
+      "tools/check_glyph_source_owned_source_authority_intake.py",
+      "docs/runtime_config/source_authority_intake_workflow.md"
+    ],
+    "canonical_extraction": [
+      "tools/extract_glyph_identity_runtime_tables.py",
+      "tools/generate_source_owned_runtime_config.py",
+      "tools/source_owned_generator_modes.py"
+    ],
+    "current_docs": [
+      "docs/AGENT_CONTEXT.md",
+      "docs/CURRENT_STATE.md",
+      "docs/ROADMAP.md",
+      "docs/runtime_config/README.md",
+      "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+      "docs/runtime_config/source_owned_table_symbol_map.md"
+    ],
+    "generated_and_failed": [
+      "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+      "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
+      "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md"
+    ],
+    "hardware_and_lineage": [
+      "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md",
+      "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+      "docs/runtime_config/latest_y2_layout_source_owned_port.md"
+    ],
+    "lineage_commits": [
+      "9842724b12b92988acfd7ed870512e055d79e3b5",
+      "2fc0ce3d5149565b3b52202cb234e359e8c84b28",
+      "83c8dba989605f7d0cf591858ffa336ab10dea61",
+      "5d6d0f3ca215584915b93dbf9e8836468cc17b94",
+      "4924f7bd6a946d14ff9a68d5cbdc76a550b7b1e2"
+    ],
+    "profile_and_bridge": [
+      "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+      "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+      "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
+      "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
+    ]
+  },
+  "failed_candidate_exclusion": {
+    "allowed_in_production_artifacts": false,
+    "classification": "FORBIDDEN_FAILED_CANDIDATE",
+    "commit": "e643017c1577c9ca2b94581fa6f18c0dfb1bac9b",
+    "hardware_status": "HARDWARE_FAIL"
+  },
+  "profile_candidates": [
+    {
+      "active_status": "current",
+      "approval_status": "PARTIAL",
+      "blockers": [
+        "merge_approved=true is recorded, but no intake-contract approver identifier is recorded"
+      ],
+      "candidate_id": "current_source_owned_baseline",
+      "candidate_kind": "current_baseline",
+      "differs_from_current_baseline": false,
+      "hardware_status": "HARDWARE_PASS",
+      "mapping_status": "EXPLICIT",
+      "ownership_status": "PARTIAL",
+      "production_intake_eligibility": "SOURCE_EQUIVALENCE_ONLY",
+      "source_paths": [
+        "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+        "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+        "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md"
+      ]
+    },
+    {
+      "active_status": "inactive_design_only",
+      "approval_status": "NONE",
+      "blockers": [
+        "y2_primary and y2_tilt are illustrative IDs with no direct source-symbol mapping",
+        "fixture is design_only_contract=true and inactive",
+        "coordinate equality cannot establish ownership or approval",
+        "fixture covers two tables, not a complete production target"
+      ],
+      "candidate_id": "coordinate_native_y2_inspired_sketch",
+      "candidate_kind": "coordinate_native_fixture",
+      "differs_from_current_baseline": false,
+      "hardware_status": "NOT_TESTED",
+      "mapping_status": "INFERRED_ONLY",
+      "ownership_status": "NONE",
+      "production_intake_eligibility": "BLOCKED",
+      "source_paths": [
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+        "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
+      ]
+    },
+    {
+      "active_status": "historical",
+      "approval_status": "PARTIAL",
+      "blockers": [
+        "historical source-aligned alias evidence is not a distinct production target"
+      ],
+      "candidate_id": "alternative_b_source_aligned_alias",
+      "candidate_kind": "historical_candidate",
+      "differs_from_current_baseline": false,
+      "hardware_status": "HARDWARE_PASS",
+      "mapping_status": "EXPLICIT",
+      "ownership_status": "PARTIAL",
+      "production_intake_eligibility": "SOURCE_EQUIVALENCE_ONLY",
+      "source_paths": [
+        "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+        "docs/runtime_config/source_owned_table_symbol_map.md"
+      ]
+    },
+    {
+      "active_status": "failed_unmerged",
+      "approval_status": "NONE",
+      "blockers": [
+        "hardware failure recorded for commit e643017c1577c9ca2b94581fa6f18c0dfb1bac9b",
+        "26 non-aligned tables are canonical 0/128/255 grids",
+        "failed candidate must never be promoted or used as a replacement source"
+      ],
+      "candidate_id": "generated_canonical_grid_candidate",
+      "candidate_kind": "failed_candidate",
+      "classification": "FORBIDDEN_FAILED_CANDIDATE",
+      "differs_from_current_baseline": true,
+      "hardware_status": "HARDWARE_FAIL",
+      "mapping_status": "EXPLICIT",
+      "ownership_status": "NONE",
+      "production_intake_eligibility": "BLOCKED",
+      "source_paths": [
+        "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+        "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
+        "docs/runtime_config/generated_source_owned_overlay_preserve_proof_2026-07-19.md"
+      ]
+    },
+    {
+      "active_status": "inactive_design_only",
+      "approval_status": "NONE",
+      "blockers": [
+        "contract, positive, negative, and dry-run fixtures are design/test corpus, not production-authorized targets"
+      ],
+      "candidate_id": "coordinate_native_design_fixture_corpus",
+      "candidate_kind": "coordinate_native_fixture",
+      "differs_from_current_baseline": false,
+      "hardware_status": "NOT_APPLICABLE",
+      "mapping_status": "NONE",
+      "ownership_status": "NONE",
+      "production_intake_eligibility": "BLOCKED",
+      "source_paths": [
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_cardinal_2.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_diagonal_7.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_merge_5.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_ambiguous_priority.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_invalid_direction_key.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_missing_table.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_negative_unresolved_role_state.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_neutral_5.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_cardinal_2.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_diagonal_7.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_neutral_5.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_dry_run_y2_tilt3_8.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_direction_key_outside_range.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_duplicate_priority.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_malformed_9way_table.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_capability_metadata.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_modifier_table_ref.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_missing_neutral_5.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_raw_coordinate_outside_byte_range.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_merge.example.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json",
+        "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json"
+      ]
+    }
+  ],
+  "reconstruction_status": "NO_DISTINCT_AUTHORIZED_PRODUCTION_DELTA_FOUND",
+  "schema_version": 1,
+  "table_evidence": [
+    {
+      "abstract_table_id": "RuntimeTableId::Default",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 97,
+          "needle": "{RuntimeTableId::Default, \"kDefaultTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kDefaultTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::ModeDefault",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 98,
+          "needle": "{RuntimeTableId::ModeDefault, \"kModeDefaultTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kModeDefaultTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::X1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 99,
+          "needle": "{RuntimeTableId::X1, \"kX1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kX1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::X2",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 100,
+          "needle": "{RuntimeTableId::X2, \"kX2Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kX2Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MX1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 101,
+          "needle": "{RuntimeTableId::MX1, \"kMX1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMX1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MX2",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 102,
+          "needle": "{RuntimeTableId::MX2, \"kMX2Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMX2Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Y1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 103,
+          "needle": "{RuntimeTableId::Y1, \"kY1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kY1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Y2",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [
+        "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md"
+      ],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 104,
+          "needle": "{RuntimeTableId::Y2, \"kY2Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kY2Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MY1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 105,
+          "needle": "{RuntimeTableId::MY1, \"kMY1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMY1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::LayerNormalX",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 106,
+          "needle": "{RuntimeTableId::LayerNormalX, \"kLayerNormalXTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kLayerNormalXTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MLayerNormalX",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 107,
+          "needle": "{RuntimeTableId::MLayerNormalX, \"kMLayerNormalXTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMLayerNormalXTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::LayerFlipper",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 108,
+          "needle": "{RuntimeTableId::LayerFlipper, \"kLayerFlipperTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kLayerFlipperTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MLayerFlipper",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 109,
+          "needle": "{RuntimeTableId::MLayerFlipper, \"kMLayerFlipperTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMLayerFlipperTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Y1Tilt1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 110,
+          "needle": "{RuntimeTableId::Y1Tilt1, \"kY1Tilt1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kY1Tilt1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MY1Tilt1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 111,
+          "needle": "{RuntimeTableId::MY1Tilt1, \"kMY1Tilt1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMY1Tilt1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Y1LayerFlipper",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 112,
+          "needle": "{RuntimeTableId::Y1LayerFlipper, \"kY1LayerFlipperTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kY1LayerFlipperTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MY1LayerFlipper",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 113,
+          "needle": "{RuntimeTableId::MY1LayerFlipper, \"kMY1LayerFlipperTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMY1LayerFlipperTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Y1LayerNormalX",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 114,
+          "needle": "{RuntimeTableId::Y1LayerNormalX, \"kY1LayerNormalXTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kY1LayerNormalXTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MY1LayerNormalX",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 115,
+          "needle": "{RuntimeTableId::MY1LayerNormalX, \"kMY1LayerNormalXTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMY1LayerNormalXTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Tilt1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 116,
+          "needle": "{RuntimeTableId::Tilt1, \"kTilt1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kTilt1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Tilt2",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 117,
+          "needle": "{RuntimeTableId::Tilt2, \"kTilt2Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kTilt2Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Tilt3",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [
+        "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md"
+      ],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 118,
+          "needle": "{RuntimeTableId::Tilt3, \"kTilt3Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kTilt3Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Tilt1Minus41",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 119,
+          "needle": "{RuntimeTableId::Tilt1Minus41, \"kTilt1Minus41Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kTilt1Minus41Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::RT1RF4Custom",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 120,
+          "needle": "{RuntimeTableId::RT1RF4Custom, \"kRT1RF4CustomTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kRT1RF4CustomTable"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MTilt1",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 121,
+          "needle": "{RuntimeTableId::MTilt1, \"kMTilt1Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMTilt1Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MTilt2",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 122,
+          "needle": "{RuntimeTableId::MTilt2, \"kMTilt2Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMTilt2Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::MTilt3",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 123,
+          "needle": "{RuntimeTableId::MTilt3, \"kMTilt3Table\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kMTilt3Table"
+    },
+    {
+      "abstract_table_id": "RuntimeTableId::Lt1LowMagnitude",
+      "exact_points_source": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "hardware_evidence": [],
+      "mapping_evidence": [
+        {
+          "kind": "direct_runtime_table_view_mapping",
+          "line": 124,
+          "needle": "{RuntimeTableId::Lt1LowMagnitude, \"kLt1LowMagnitudeTable\",",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        }
+      ],
+      "mapping_status": "EXPLICIT",
+      "matches_current_baseline": true,
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": "kLt1LowMagnitudeTable"
+    },
+    {
+      "abstract_table_id": "y2_primary",
+      "exact_points_source": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+      "hardware_evidence": [
+        {
+          "claim": "source-inspired hardware result; not proof of coordinate-native fixture identity",
+          "path": "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md"
+        }
+      ],
+      "mapping_evidence": [],
+      "mapping_status": "INFERRED_ONLY",
+      "matches_current_baseline": true,
+      "matching_source_owned_tables": [
+        "Y2"
+      ],
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": null
+    },
+    {
+      "abstract_table_id": "y2_tilt",
+      "exact_points_source": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+      "hardware_evidence": [
+        {
+          "claim": "source-inspired hardware result; not proof of coordinate-native fixture identity",
+          "path": "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md"
+        }
+      ],
+      "mapping_evidence": [],
+      "mapping_status": "INFERRED_ONLY",
+      "matches_current_baseline": true,
+      "matching_source_owned_tables": [
+        "Tilt3"
+      ],
+      "ownership_evidence": [],
+      "ownership_status": "NONE",
+      "source_owned_table_symbol": null
+    }
+  ]
+}
