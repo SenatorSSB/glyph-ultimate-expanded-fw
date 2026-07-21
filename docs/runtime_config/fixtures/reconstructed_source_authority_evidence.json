@@ -16,8 +16,11 @@
     }
   },
   "converter_analysis": {
+    "abstract_id_to_source_symbol_mapping_derived": false,
+    "abstract_profile_ids_preserved": false,
     "abstract_y2_ids_preserved": false,
     "accepted_input": true,
+    "authority_field_paths": [],
     "command": [
       "python3",
       "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
@@ -27,12 +30,29 @@
       "<temporary-output>"
     ],
     "creates_production_ownership_or_provenance_claims": false,
-    "direct_source_owned_table_symbol_mappings": true,
     "exit_status": 0,
+    "explicit_abstract_id_to_source_symbol_mappings": [],
     "fixture": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json",
+    "forbidden_authority_fields": [
+      "approval_reference",
+      "approver",
+      "authority_status",
+      "owned_tables",
+      "ownership",
+      "ownership_declarations",
+      "production_authorized",
+      "provenance_class"
+    ],
+    "layout_spec_table_record_count": 28,
+    "layout_spec_table_records_have_required_fields": true,
     "output": "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json",
+    "output_contains_source_owned_table_symbols": true,
     "output_equals_current_layout_spec": true,
-    "output_semantic_digest": "3cd1c4ac478a3e781f5af5fb2e3b164e3796b4f049b693cec5304aff6441bbee"
+    "output_semantic_digest": "3cd1c4ac478a3e781f5af5fb2e3b164e3796b4f049b693cec5304aff6441bbee",
+    "output_source_symbol_location": "layout_spec.tables[].table_symbol",
+    "output_source_table_symbols_match_current_source_order": true,
+    "production_mapping_provided": false,
+    "top_level_point_tables_require_table_symbols": false
   },
   "current_baseline": {
     "baseline_id": "current_source_owned_baseline",

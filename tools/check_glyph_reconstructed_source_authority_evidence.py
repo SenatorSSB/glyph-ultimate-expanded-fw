@@ -10,6 +10,7 @@ installs, or writes active source.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import subprocess
@@ -38,6 +39,19 @@ ALLOWED_FEATURE_PATHS = {
     "docs/runtime_config/intakes/current_source_owned_baseline_equivalence.intake.json",
     "tools/check_glyph_reconstructed_source_authority_evidence.py",
 }
+FORBIDDEN_AUTHORITY_FIELDS = frozenset(
+    {
+        "owned_tables",
+        "ownership",
+        "ownership_declarations",
+        "provenance_class",
+        "production_authorized",
+        "approver",
+        "approval_reference",
+        "authority_status",
+    }
+)
+ABSTRACT_Y2_TABLE_IDS = frozenset({"y2_primary", "y2_tilt"})
 
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 from extract_glyph_identity_runtime_tables import load_source_tables  # noqa: E402
@@ -81,6 +95,43 @@ def contains_value(value: Any, needle: str) -> bool:
     return value == needle
 
 
+def recursive_field_paths(value: Any, fields: frozenset[str], path: str = "$") -> list[str]:
+    """Return semantic field paths without interpreting arbitrary text values."""
+    paths: list[str] = []
+    if isinstance(value, dict):
+        for key, item in value.items():
+            field_path = f"{path}.{key}"
+            if key in fields:
+                paths.append(field_path)
+            paths.extend(recursive_field_paths(item, fields, field_path))
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            paths.extend(recursive_field_paths(item, fields, f"{path}[{index}]"))
+    return paths
+
+
+def explicit_abstract_id_to_source_symbol_mappings(value: Any, path: str = "$") -> list[dict[str, str]]:
+    """Find emitted records that directly pair a known abstract ID with a table symbol."""
+    mappings: list[dict[str, str]] = []
+    if isinstance(value, dict):
+        abstract_id = value.get("abstract_table_id")
+        table_symbol = value.get("table_symbol")
+        if abstract_id in ABSTRACT_Y2_TABLE_IDS and isinstance(table_symbol, str) and table_symbol:
+            mappings.append(
+                {
+                    "path": path,
+                    "abstract_table_id": abstract_id,
+                    "table_symbol": table_symbol,
+                }
+            )
+        for key, item in value.items():
+            mappings.extend(explicit_abstract_id_to_source_symbol_mappings(item, f"{path}.{key}"))
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            mappings.extend(explicit_abstract_id_to_source_symbol_mappings(item, f"{path}[{index}]"))
+    return mappings
+
+
 def converter_analysis() -> dict[str, Any]:
     """Run the real offline converter in a temporary directory on every check."""
     with tempfile.TemporaryDirectory(prefix="glyph-reconstructed-evidence-") as directory:
@@ -94,18 +145,42 @@ def converter_analysis() -> dict[str, Any]:
         checked_in = read_json(LAYOUT_SPEC_PATH)
         output_bytes = output.read_bytes()
         checked_in_bytes = (REPO_ROOT / LAYOUT_SPEC_PATH).read_bytes()
-    direct_symbols = any(isinstance(table, dict) and "table_symbol" in table for table in converted.get("tables", []))
-    production_claim_keys = {"ownership", "owner", "provenance", "production_authorized", "approval"}
-    claims_production_ownership_or_provenance = any(key in converted for key in production_claim_keys)
+    baseline = inspect_baseline()
+    layout_spec = converted.get("layout_spec")
+    layout_spec_tables = layout_spec.get("tables") if isinstance(layout_spec, dict) else None
+    layout_spec_table_records = layout_spec_tables if isinstance(layout_spec_tables, list) else []
+    layout_spec_table_records_have_required_fields = (
+        isinstance(layout_spec_tables, list)
+        and len(layout_spec_table_records) == 28
+        and all(
+            isinstance(table, dict) and {"table_id", "table_name", "table_symbol"} <= set(table)
+            for table in layout_spec_table_records
+        )
+    )
+    output_symbols = [table["table_symbol"] for table in layout_spec_table_records if isinstance(table, dict) and "table_symbol" in table]
+    output_contains_source_owned_table_symbols = layout_spec_table_records_have_required_fields and output_symbols == baseline["table_order"]
+    explicit_mappings = explicit_abstract_id_to_source_symbol_mappings(converted)
+    authority_field_paths = recursive_field_paths(converted, FORBIDDEN_AUTHORITY_FIELDS)
     return {
         "command": ["python3", CONVERTER_PATH, "--profile", Y2_PROFILE_PATH, "--output", "<temporary-output>"],
         "exit_status": result.returncode,
         "accepted_input": accepted,
         "output_semantic_digest": semantic_digest(converted),
         "output_equals_current_layout_spec": converted == checked_in and output_bytes == checked_in_bytes,
+        "layout_spec_table_record_count": len(layout_spec_table_records),
+        "layout_spec_table_records_have_required_fields": layout_spec_table_records_have_required_fields,
+        "output_contains_source_owned_table_symbols": output_contains_source_owned_table_symbols,
+        "output_source_symbol_location": "layout_spec.tables[].table_symbol",
+        "output_source_table_symbols_match_current_source_order": output_symbols == baseline["table_order"],
+        "top_level_point_tables_require_table_symbols": False,
         "abstract_y2_ids_preserved": contains_value(converted, "y2_primary") or contains_value(converted, "y2_tilt"),
-        "direct_source_owned_table_symbol_mappings": direct_symbols,
-        "creates_production_ownership_or_provenance_claims": claims_production_ownership_or_provenance,
+        "abstract_profile_ids_preserved": contains_value(converted, "y2_primary") or contains_value(converted, "y2_tilt"),
+        "explicit_abstract_id_to_source_symbol_mappings": explicit_mappings,
+        "abstract_id_to_source_symbol_mapping_derived": bool(explicit_mappings),
+        "production_mapping_provided": bool(explicit_mappings),
+        "forbidden_authority_fields": sorted(FORBIDDEN_AUTHORITY_FIELDS),
+        "authority_field_paths": authority_field_paths,
+        "creates_production_ownership_or_provenance_claims": bool(authority_field_paths),
     }
 
 
@@ -346,6 +421,15 @@ def render_markdown(matrix: dict[str, Any]) -> str:
         "- This is `SUBSET_MATCH_ONLY`, not a complete no-op. Equality is supporting evidence only. The sketch contains no `table_symbol`; the converter emits the current canonical layout-spec fixture with table symbols, but does not derive a source mapping from those abstract IDs.",
         "- The Y2 hardware result is source-owned firmware evidence; it does not prove the coordinate-native fixture’s identity or authorize a production replacement.",
         "",
+        "## Converter analysis",
+        "",
+        f"- The converter accepts the Y2-inspired fixture (exit `{matrix['converter_analysis']['exit_status']}`) and its temporary output exactly equals `{matrix['converter_analysis']['output']}`.",
+        f"- `layout_spec.tables` contains exactly `{matrix['converter_analysis']['layout_spec_table_record_count']}` ordered records with `table_id`, `table_name`, and `table_symbol`; their symbols match the current source-owned table order.",
+        "- Those symbols are canonical output metadata at `layout_spec.tables[].table_symbol`. Their presence does not establish a converter-derived abstract-ID mapping and does not make the symbols themselves a production ownership, approval, provenance, or authorization declaration.",
+        "- The top-level point-bearing `tables` records do not need `table_symbol` fields.",
+        "- Neither `y2_primary` nor `y2_tilt` survives in the output, and no output record directly states either abstract-ID-to-source-symbol relationship. The converter returns the checked-in canonical layout-spec fixture rather than deriving `y2_primary -> kY2Table` or `y2_tilt -> kTilt3Table`.",
+        f"- The recursive authority-field scan checks `{', '.join(f'`{field}`' for field in matrix['converter_analysis']['forbidden_authority_fields'])}` and found none. Generic fields such as `profile_name`, `controller_family`, and `table_symbol` are not treated as authority.",
+        "",
         "## Failed-candidate exclusion",
         "",
         f"The canonical-grid candidate at `{FAILED_COMMIT}` remains `FORBIDDEN_FAILED_CANDIDATE` after `HARDWARE_FAIL`. Its canonical 0/128/255 content is not used as ownership, mapping, replacement, or hardware evidence in this packet. No production artifact is emitted.",
@@ -461,7 +545,25 @@ def validate_matrix(matrix: dict[str, Any]) -> None:
     if y2["comparison_status"] != "SUBSET_MATCH_ONLY" or y2["differs_from_current_baseline"] is not None:
         raise AssertionError("incomplete Y2 sketch must not be classified as a complete baseline match")
     converter = matrix["converter_analysis"]
-    if converter["exit_status"] != 0 or not converter["accepted_input"] or not converter["output_equals_current_layout_spec"] or converter["abstract_y2_ids_preserved"] or not converter["direct_source_owned_table_symbol_mappings"] or converter["creates_production_ownership_or_provenance_claims"]:
+    if (
+        converter["exit_status"] != 0
+        or not converter["accepted_input"]
+        or not converter["output_equals_current_layout_spec"]
+        or converter["layout_spec_table_record_count"] != 28
+        or not converter["layout_spec_table_records_have_required_fields"]
+        or not converter["output_contains_source_owned_table_symbols"]
+        or converter["output_source_symbol_location"] != "layout_spec.tables[].table_symbol"
+        or not converter["output_source_table_symbols_match_current_source_order"]
+        or converter["top_level_point_tables_require_table_symbols"]
+        or converter["abstract_y2_ids_preserved"]
+        or converter["abstract_profile_ids_preserved"]
+        or converter["abstract_id_to_source_symbol_mapping_derived"]
+        or converter["production_mapping_provided"]
+        or converter["explicit_abstract_id_to_source_symbol_mappings"]
+        or converter["creates_production_ownership_or_provenance_claims"]
+        or converter["authority_field_paths"]
+        or converter["forbidden_authority_fields"] != sorted(FORBIDDEN_AUTHORITY_FIELDS)
+    ):
         raise AssertionError("converter evidence drifted")
     failed = matrix["failed_candidate_exclusion"]
     if failed["classification"] != "FORBIDDEN_FAILED_CANDIDATE" or failed["allowed_in_production_artifacts"]:
@@ -528,6 +630,30 @@ def run_drift_self_tests(expected: dict[str, Any]) -> None:
             raise AssertionError("Markdown drift self-test unexpectedly passed")
 
 
+def run_converter_analysis_self_tests() -> None:
+    """Prove the recursive scans detect explicit in-memory mapping and authority claims."""
+    converted = read_json(LAYOUT_SPEC_PATH)
+    mapping_copy = copy.deepcopy(converted)
+    mapping_copy["synthetic_mapping"] = {
+        "abstract_table_id": "y2_primary",
+        "table_symbol": "kY2Table",
+    }
+    mappings = explicit_abstract_id_to_source_symbol_mappings(mapping_copy)
+    if mappings != [
+        {
+            "path": "$.synthetic_mapping",
+            "abstract_table_id": "y2_primary",
+            "table_symbol": "kY2Table",
+        }
+    ]:
+        raise AssertionError(f"explicit mapping detector self-test failed: {mappings}")
+    authority_copy = copy.deepcopy(converted)
+    authority_copy["synthetic_authority"] = {"provenance_class": "production_authorized"}
+    authority_paths = recursive_field_paths(authority_copy, FORBIDDEN_AUTHORITY_FIELDS)
+    if authority_paths != ["$.synthetic_authority.provenance_class"]:
+        raise AssertionError(f"recursive authority scan self-test failed: {authority_paths}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write-artifacts", action="store_true")
@@ -541,6 +667,7 @@ def main() -> int:
         print(f"wrote={rel(MARKDOWN_PATH)}")
     validate_committed_artifacts(matrix)
     run_drift_self_tests(matrix)
+    run_converter_analysis_self_tests()
     validate_matrix(matrix)
     return 0
 

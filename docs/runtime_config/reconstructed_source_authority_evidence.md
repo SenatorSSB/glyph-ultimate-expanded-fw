@@ -42,6 +42,15 @@ This packet reconstructs repository evidence only. It does not create source aut
 - This is `SUBSET_MATCH_ONLY`, not a complete no-op. Equality is supporting evidence only. The sketch contains no `table_symbol`; the converter emits the current canonical layout-spec fixture with table symbols, but does not derive a source mapping from those abstract IDs.
 - The Y2 hardware result is source-owned firmware evidence; it does not prove the coordinate-native fixture’s identity or authorize a production replacement.
 
+## Converter analysis
+
+- The converter accepts the Y2-inspired fixture (exit `0`) and its temporary output exactly equals `docs/runtime_config/fixtures/generated_source_owned_layout_spec.json`.
+- `layout_spec.tables` contains exactly `28` ordered records with `table_id`, `table_name`, and `table_symbol`; their symbols match the current source-owned table order.
+- Those symbols are canonical output metadata at `layout_spec.tables[].table_symbol`. Their presence does not establish a converter-derived abstract-ID mapping and does not make the symbols themselves a production ownership, approval, provenance, or authorization declaration.
+- The top-level point-bearing `tables` records do not need `table_symbol` fields.
+- Neither `y2_primary` nor `y2_tilt` survives in the output, and no output record directly states either abstract-ID-to-source-symbol relationship. The converter returns the checked-in canonical layout-spec fixture rather than deriving `y2_primary -> kY2Table` or `y2_tilt -> kTilt3Table`.
+- The recursive authority-field scan checks ``approval_reference`, `approver`, `authority_status`, `owned_tables`, `ownership`, `ownership_declarations`, `production_authorized`, `provenance_class`` and found none. Generic fields such as `profile_name`, `controller_family`, and `table_symbol` are not treated as authority.
+
 ## Failed-candidate exclusion
 
 The canonical-grid candidate at `e643017c1577c9ca2b94581fa6f18c0dfb1bac9b` remains `FORBIDDEN_FAILED_CANDIDATE` after `HARDWARE_FAIL`. Its canonical 0/128/255 content is not used as ownership, mapping, replacement, or hardware evidence in this packet. No production artifact is emitted.
