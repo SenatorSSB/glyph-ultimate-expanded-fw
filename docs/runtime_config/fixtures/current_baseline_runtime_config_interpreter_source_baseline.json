@@ -12,8 +12,8 @@
   "fallback_policy": "known_good_source_owned_baseline",
   "fallback_table_id": "Default",
   "table_family": "StickPoint",
-  "table_count": 27,
-  "expected_table_count": 27,
+  "table_count": 28,
+  "expected_table_count": 28,
   "point_count_per_table": 9,
   "expected_point_count_per_table": 9,
   "runtime_table_ids": [
@@ -24,6 +24,7 @@
     "MX1",
     "MX2",
     "Y1",
+    "Y2",
     "MY1",
     "LayerNormalX",
     "MLayerNormalX",
@@ -91,6 +92,13 @@
     {
       "runtime_table_id": "Y1",
       "source_symbol": "kY1Table",
+      "point_count": 9,
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
+    },
+    {
+      "runtime_table_id": "Y2",
+      "source_symbol": "kY2Table",
       "point_count": 9,
       "shape": "StickPoint[9]",
       "value_source": "src/modes/Ultimate.cpp"
@@ -246,5 +254,9 @@
     "source_owned_current_baseline_only",
     "validate_before_use",
     "fallback_to_known_good_if_validation_fails"
-  ]
+  ],
+  "derived_from_commit": "116d34322837fe1f6f724c820b49ccb0d24d6787",
+  "derived_from_source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+  "canonical_baseline_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+  "current_or_historical": "current"
 }

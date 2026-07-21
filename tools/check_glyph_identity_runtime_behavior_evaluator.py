@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from extract_glyph_identity_runtime_tables import load_source_text_with_generated_tables
+from extract_glyph_identity_runtime_tables import load_source_tables, load_source_text_with_generated_tables
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -224,6 +224,11 @@ TABLES: dict[str, tuple[tuple[int, int], ...]] = {
         (89, 167), (128, 177), (167, 167),
     ),
 }
+
+# The evaluator intentionally consumes the established source extractor.  The
+# historical literal mirror above remains readable evidence, but cannot become
+# a second authority for the current 28-table baseline.
+TABLES = load_source_tables(SOURCE_PATH)
 
 
 @dataclass

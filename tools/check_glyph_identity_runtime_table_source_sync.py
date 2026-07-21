@@ -248,7 +248,18 @@ def validate_interpreter_header(
 
     interpreter_baseline = build_runtime_config_interpreter_source_baseline(source_tables)
     fixture_baseline = baseline_fixture.get("interpreter_source_baseline")
-    if fixture_baseline != interpreter_baseline:
+    # Current derived fixtures carry provenance in addition to the established
+    # parser contract. Compare the contract fields without treating provenance
+    # as a competing source representation.
+    if isinstance(fixture_baseline, dict):
+        fixture_contract = {
+            key: value
+            for key, value in fixture_baseline.items()
+            if key not in {"derived_from_commit", "derived_from_source_path", "canonical_baseline_digest", "current_or_historical"}
+        }
+    else:
+        fixture_contract = fixture_baseline
+    if fixture_contract != interpreter_baseline:
         raise RuntimeError("interpreter baseline fixture does not match extracted baseline")
 
     runtime_table_ids = fixture_baseline.get("runtime_table_ids") if isinstance(fixture_baseline, dict) else None
@@ -257,7 +268,10 @@ def validate_interpreter_header(
 
     table_references = fixture_baseline.get("table_references") if isinstance(fixture_baseline, dict) else None
     if not isinstance(table_references, list) or len(table_references) != CURRENT_BASELINE_CONFIG_EXPECTED_TABLE_COUNT:
-        raise RuntimeError("interpreter baseline table_references must contain 27 entries")
+        raise RuntimeError(
+            "interpreter baseline table_references must contain "
+            f"{CURRENT_BASELINE_CONFIG_EXPECTED_TABLE_COUNT} entries"
+        )
     for index, entry in enumerate(table_references):
         if not isinstance(entry, dict):
             raise RuntimeError(f"interpreter baseline table_references[{index}] must be an object")

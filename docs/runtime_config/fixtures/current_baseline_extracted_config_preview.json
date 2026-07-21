@@ -10,7 +10,7 @@
   "hardware_status": "not_new_hardware_result",
   "nunchuk_status": "preserved_but_not_hardware_validated",
   "table_family": "StickPoint",
-  "expected_table_count": 27,
+  "expected_table_count": 28,
   "expected_point_count_per_table": 9,
   "source_baseline_fixture": "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json",
   "source_authority": {
@@ -19,22 +19,22 @@
       {
         "path": "src/modes/Ultimate.cpp",
         "role": "current_baseline_source",
-        "sha256": "d54f082601697d6c47925b56dbb81e1bcb3636829266bf61b7f2dc8856372706"
+        "sha256": "a40d24db990f0f59ab20ba76257596210e9ccca459415e78235374c2996b2dfd"
       },
       {
         "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
         "role": "generated_like_table_constants",
-        "sha256": "138887f00ea51ac791dbca0e725a3c85f393b8be48bdac2f78dfd88d90819400"
+        "sha256": "a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb"
       },
       {
         "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
         "role": "runtime_config_interpreter_boundary",
-        "sha256": "ce694ab1f656145742b2e657c2960a813bfa115a0d787a11f43df438eefe1a2f"
+        "sha256": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108"
       },
       {
         "path": "tools/extract_glyph_identity_runtime_tables.py",
         "role": "source_table_extractor",
-        "sha256": "e7d9bfd18cfd469d5f030d53628bfb9dd74d3c14b5f04ef533f6c7f8b8aa7bad"
+        "sha256": "c3e2d943954b59171cd87713786052b19aafa8578647a54c5d13df559542c458"
       }
     ],
     "unknowns": [
@@ -47,245 +47,198 @@
     {
       "name": "Default",
       "source_symbol": "kDefaultTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [61, 195],
-      "y_range": [51, 205]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "ModeDefault",
       "source_symbol": "kModeDefaultTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [14, 242],
-      "y_range": [87, 169]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "X1",
       "source_symbol": "kX1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [93, 163],
-      "y_range": [51, 205]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "X2",
       "source_symbol": "kX2Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [82, 174],
-      "y_range": [51, 205]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MX1",
       "source_symbol": "kMX1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [78, 178],
-      "y_range": [87, 169]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MX2",
       "source_symbol": "kMX2Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [65, 191],
-      "y_range": [87, 169]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Y1",
       "source_symbol": "kY1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [61, 195],
-      "y_range": [99, 157]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
+    },
+    {
+      "name": "Y2",
+      "source_symbol": "kY2Table",
+      "point_count": 9,
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MY1",
       "source_symbol": "kMY1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [14, 242],
-      "y_range": [77, 179]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "LayerNormalX",
       "source_symbol": "kLayerNormalXTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [51, 205]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MLayerNormalX",
       "source_symbol": "kMLayerNormalXTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [87, 169]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "LayerFlipper",
       "source_symbol": "kLayerFlipperTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [51, 205]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MLayerFlipper",
       "source_symbol": "kMLayerFlipperTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [87, 169]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Y1Tilt1",
       "source_symbol": "kY1Tilt1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [99, 157]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MY1Tilt1",
       "source_symbol": "kMY1Tilt1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [77, 179]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Y1LayerFlipper",
       "source_symbol": "kY1LayerFlipperTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [99, 157]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MY1LayerFlipper",
       "source_symbol": "kMY1LayerFlipperTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [77, 179]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Y1LayerNormalX",
       "source_symbol": "kY1LayerNormalXTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [99, 157]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MY1LayerNormalX",
       "source_symbol": "kMY1LayerNormalXTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [77, 179]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Tilt1",
       "source_symbol": "kTilt1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [69, 187],
-      "y_range": [47, 209]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Tilt2",
       "source_symbol": "kTilt2Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [88, 168],
-      "y_range": [79, 177]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Tilt3",
       "source_symbol": "kTilt3Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [75, 181],
-      "y_range": [86, 170]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Tilt1Minus41",
       "source_symbol": "kTilt1Minus41Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [47, 209]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "RT1RF4Custom",
       "source_symbol": "kRT1RF4CustomTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [69, 187],
-      "y_range": [78, 179]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MTilt1",
       "source_symbol": "kMTilt1Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [87, 169],
-      "y_range": [88, 169]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MTilt2",
       "source_symbol": "kMTilt2Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [96, 160],
-      "y_range": [82, 174]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "MTilt3",
       "source_symbol": "kMTilt3Table",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [96, 160],
-      "y_range": [86, 170]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     },
     {
       "name": "Lt1LowMagnitude",
       "source_symbol": "kLt1LowMagnitudeTable",
-      "shape": "StickPoint[9]",
       "point_count": 9,
-      "value_source": "src/modes/Ultimate.cpp",
-      "x_range": [79, 177],
-      "y_range": [79, 177]
+      "shape": "StickPoint[9]",
+      "value_source": "src/modes/Ultimate.cpp"
     }
   ],
   "preview_caveats": [
@@ -297,5 +250,9 @@
     "not_nunchuk_validation",
     "not_hardware_validation",
     "source_backed_preview_only"
-  ]
+  ],
+  "derived_from_commit": "116d34322837fe1f6f724c820b49ccb0d24d6787",
+  "derived_from_source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+  "canonical_baseline_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+  "current_or_historical": "current"
 }
