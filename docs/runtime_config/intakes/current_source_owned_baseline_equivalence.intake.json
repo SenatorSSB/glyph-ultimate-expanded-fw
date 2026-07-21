@@ -1,0 +1,215 @@
+{
+  "author": "Codex supervisor / repository-evidence reconstruction",
+  "authority": {
+    "approval_reference": "docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md:merge_approved",
+    "approver": "__REQUIRED_HUMAN_VALUE__",
+    "basis": "The current source-owned baseline is the source state associated with the recorded latest Y2 layout HARDWARE_PASS and merge_approved=true; this record does not contain an intake-contract approver identifier.",
+    "statement": "Human confirmation is required before this source-equivalence proof is approved for emission; no production table replacement is requested.",
+    "status": "submitted_for_review"
+  },
+  "baseline": {
+    "artifact_format_version": 1,
+    "baseline_id": "current_source_owned_baseline",
+    "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
+    "source_interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "table_count": 28,
+    "table_inventory": [
+      {
+        "table_digest": "d452b92bacb79f9c430261aa862ed87df042c99eff174a4a1d5513ff055b4c5a",
+        "table_id": 0,
+        "table_symbol": "kDefaultTable"
+      },
+      {
+        "table_digest": "f89b98222f8cb30c47c86542ec92901bf28d14cbadd6e194b6f01e03926e4f04",
+        "table_id": 1,
+        "table_symbol": "kModeDefaultTable"
+      },
+      {
+        "table_digest": "4119081bd9f4d95d70f644daed3174ecd6746172884c752ffa1544d7b3fe0b75",
+        "table_id": 2,
+        "table_symbol": "kX1Table"
+      },
+      {
+        "table_digest": "f67712f6f81309804bab68b2ed556899a9ba9fc36606ca989235f316ba8fdd64",
+        "table_id": 3,
+        "table_symbol": "kX2Table"
+      },
+      {
+        "table_digest": "6da8c00c71a20d1397f29c23438c80990996914701c177e8c44329c7a8c0e27d",
+        "table_id": 4,
+        "table_symbol": "kMX1Table"
+      },
+      {
+        "table_digest": "dd7beadeb4ad79272bb5ee7f1b22e3db82e3ff9c740de0768877b5b68275cea6",
+        "table_id": 5,
+        "table_symbol": "kMX2Table"
+      },
+      {
+        "table_digest": "e219accacc83d2bdcb15711072c822129f987b0f4efeaf1b2118ab9632d1bd9b",
+        "table_id": 6,
+        "table_symbol": "kY1Table"
+      },
+      {
+        "table_digest": "7a20e58558a206cd7b6cec99661a0e611779b67c29d1fcb0ddef3d9ddda75610",
+        "table_id": 7,
+        "table_symbol": "kY2Table"
+      },
+      {
+        "table_digest": "d343f1b09afcc8bc1300e50a071622d026c54506326d8026c924faddbffcd1ec",
+        "table_id": 8,
+        "table_symbol": "kMY1Table"
+      },
+      {
+        "table_digest": "a58f480cf0a3a2e75698ecfa23ffaae2026dcd9f17284dbbbfbe4f0cb5a26f47",
+        "table_id": 9,
+        "table_symbol": "kLayerNormalXTable"
+      },
+      {
+        "table_digest": "f3d646b0b17d23545f8117bfd61861d5565e5cb7debfdb3f216227b8cadba785",
+        "table_id": 10,
+        "table_symbol": "kMLayerNormalXTable"
+      },
+      {
+        "table_digest": "b20200bc6dd830d92a4db873f159c8f0576822e0f9224977a5da69b67104a960",
+        "table_id": 11,
+        "table_symbol": "kLayerFlipperTable"
+      },
+      {
+        "table_digest": "71c1b7b4a30b6aa34472b7d5a246f04caf625bc1828c5733fe9a836dbe567555",
+        "table_id": 12,
+        "table_symbol": "kMLayerFlipperTable"
+      },
+      {
+        "table_digest": "4c7c61423f285fd12e210740d673bb728254c633109d7d4cd1edbe43e6461eeb",
+        "table_id": 13,
+        "table_symbol": "kY1Tilt1Table"
+      },
+      {
+        "table_digest": "a9a86450acfb5be918aa9124ea091098b39f45de4ef8a9c97629478f59ffb6cf",
+        "table_id": 14,
+        "table_symbol": "kMY1Tilt1Table"
+      },
+      {
+        "table_digest": "4b6932887bc65dafdbe21b0246936d4f2cd08a70656b17edbc6ed57421703989",
+        "table_id": 15,
+        "table_symbol": "kY1LayerFlipperTable"
+      },
+      {
+        "table_digest": "9a7e5d55e78b212b5110cf14ec5e7eb3c8ecc5e9c8a78e37bef38b45542058e5",
+        "table_id": 16,
+        "table_symbol": "kMY1LayerFlipperTable"
+      },
+      {
+        "table_digest": "3760575bd5b0390588e8265fc0bf0a0b68f0fb377519e05bdb5dfe82897cc1c1",
+        "table_id": 17,
+        "table_symbol": "kY1LayerNormalXTable"
+      },
+      {
+        "table_digest": "91b40a0d1e2dc8d1eb7e170f37862d3e785e7b5dc80b43314b14828f66cc3469",
+        "table_id": 18,
+        "table_symbol": "kMY1LayerNormalXTable"
+      },
+      {
+        "table_digest": "db4d2d70f083b35a23d923933122ed7718ba0bb95b6d4f32049f6bcd6840f506",
+        "table_id": 19,
+        "table_symbol": "kTilt1Table"
+      },
+      {
+        "table_digest": "ae2d40b6abfe1c3002f4efa34adcb094d8c42ca748f3ebb279fb2c4362d7411f",
+        "table_id": 20,
+        "table_symbol": "kTilt2Table"
+      },
+      {
+        "table_digest": "61fad165907b1ffe83f71f5ba335f47611cce39a70cc3e1535fa50ecba16fb42",
+        "table_id": 21,
+        "table_symbol": "kTilt3Table"
+      },
+      {
+        "table_digest": "34d6957593df07b42dff98206ec5be231bfc9a2e2a775fe72f460d38d1671110",
+        "table_id": 22,
+        "table_symbol": "kTilt1Minus41Table"
+      },
+      {
+        "table_digest": "67a7aaf00e20274e8305ac725c6a9c6bb36cd926a22983d0818647a30a3937c4",
+        "table_id": 23,
+        "table_symbol": "kRT1RF4CustomTable"
+      },
+      {
+        "table_digest": "a94169be4bf61453a608dcacaba12c88b9ca130fd6b42854ee4c8c228b91be70",
+        "table_id": 24,
+        "table_symbol": "kMTilt1Table"
+      },
+      {
+        "table_digest": "4b0204bac3808090e8c9fdd62cf4cbcc8e83d2b6d2025082d6d005d2d26fb2c1",
+        "table_id": 25,
+        "table_symbol": "kMTilt2Table"
+      },
+      {
+        "table_digest": "ece192ce482a653b93a29ddc5c2513d43217f780ccc195d1e5046398f52cfbee",
+        "table_id": 26,
+        "table_symbol": "kMTilt3Table"
+      },
+      {
+        "table_digest": "144913f07278b00a6a30feda60ec25893bc12d5bba30e019eb18f5ee6e6d6e71",
+        "table_id": 27,
+        "table_symbol": "kLt1LowMagnitudeTable"
+      }
+    ],
+    "table_order": [
+      "kDefaultTable",
+      "kModeDefaultTable",
+      "kX1Table",
+      "kX2Table",
+      "kMX1Table",
+      "kMX2Table",
+      "kY1Table",
+      "kY2Table",
+      "kMY1Table",
+      "kLayerNormalXTable",
+      "kMLayerNormalXTable",
+      "kLayerFlipperTable",
+      "kMLayerFlipperTable",
+      "kY1Tilt1Table",
+      "kMY1Tilt1Table",
+      "kY1LayerFlipperTable",
+      "kMY1LayerFlipperTable",
+      "kY1LayerNormalXTable",
+      "kMY1LayerNormalXTable",
+      "kTilt1Table",
+      "kTilt2Table",
+      "kTilt3Table",
+      "kTilt1Minus41Table",
+      "kRT1RF4CustomTable",
+      "kMTilt1Table",
+      "kMTilt2Table",
+      "kMTilt3Table",
+      "kLt1LowMagnitudeTable"
+    ],
+    "table_order_digest": "dbf84342023124d0ce63414d3efe28db7f8cd3bcf950c7e1a9addcedbcff51cb"
+  },
+  "intake_id": "current-source-owned-baseline-equivalence-2026-07-21",
+  "intent": {
+    "controller_scope": "Glyph Mk6",
+    "generation_mode": "overlay_preserve",
+    "provenance_class": "source_baseline_derived",
+    "requested_operation": "source_equivalence_proof",
+    "source_owned_runtime_tables": true
+  },
+  "notes": "Submitted for review only. The recorded hardware acceptance supplies baseline evidence, not an intake approver identity or production-change authority.",
+  "ownership": {
+    "declarations": [],
+    "owned_tables": [],
+    "unlisted_tables_are_unowned": true
+  },
+  "profile_id": "current_source_owned_baseline",
+  "profile_name": "Current source-owned baseline equivalence",
+  "purpose": "Prove that an empty source-baseline-derived overlay reproduces the current source-owned baseline.",
+  "replacements": [],
+  "review": {
+    "acknowledges_build_not_hardware_proof": true,
+    "acknowledges_separate_hardware_gate": true,
+    "unresolved_questions": []
+  },
+  "schema_version": 1
+}
