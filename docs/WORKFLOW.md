@@ -59,10 +59,19 @@ explicitly instructed.
 - Docs/tools, source research, and engineering design can proceed autonomously
   when branch scope is clear and source-authority caveats are preserved.
 - User domain input is not required for routine engineering design.
-- User product approval is required before firmware behavior implementation,
-  runtime-loaded config implementation, WebSerial/device write, protobuf binary
-  write, firmware flashing automation, external adapter output, or Senscope
-  neutral profile schema changes.
+- A complete `READY` work order may authorize source-grounded firmware/runtime
+  behavior implementation without a fresh user approval solely because the
+  work changes active firmware, when all required behavior, product, domain,
+  source-authority, architecture, scope, and validation decisions are already
+  durably resolved and evidenced.
+- User/domain input is required before implementation when the proposed runtime
+  behavior still contains an unresolved product, domain, source-authority, or
+  unsupported behavior decision that Curator is not authorized to make.
+  Curator may not infer user intent or invent undocumented Glyph behavior to
+  create executable firmware work.
+- Separate explicit approval remains required for runtime-loaded config,
+  WebSerial/device write, protobuf binary write, firmware flashing automation,
+  external adapter output, or Senscope neutral profile schema changes.
 - Runtime-config activation design must keep parser result status, parser
   result fields, payload validation state, CRC state, storage load state, and
   activation decision state out of `UpdateAnalogOutputs` and any resolver used
@@ -81,9 +90,10 @@ explicitly instructed.
   `ActiveRuntimeConfigState.source` or `ActiveRuntimeConfigState.status`.
 - Parser/materialization/load work belongs before active-state publication;
   output generation may consume only the already-selected `RuntimeConfigView`.
-- Product approval gates are not the same as user-domain blockers. A future
-  phase may be ready for design or source research while still requiring
-  approval before implementation.
+- A future phase may be ready for design or source research while still
+  requiring a substantive decision before implementation. Firmware risk alone
+  is not that decision: implementation autonomy is not merge autonomy, and
+  H2/H3 remains physically gated before merge.
 - Safety/policy-forbidden work remains forbidden even if adjacent design or
   source research is allowed.
 

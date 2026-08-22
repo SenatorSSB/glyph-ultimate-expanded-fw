@@ -115,6 +115,22 @@ Stop conditions:
 Risk follows behavioral effect, not file location. A configurator change that
 changes generated firmware behavior is not automatically H1.
 
+## Substantive Authority Invariant
+
+The existing `Behavioral claim`, `Source authority`, `Substantive authorization
+rationale`, `Authorization snapshot / provenance`, scope/exclusions,
+dependencies, validation, and stop-condition fields jointly carry the
+implementation authority decision; no redundant blanket human-approval field
+is required. For a `READY` H2/H3 item they must durably establish that every
+required behavior, product, domain, source-authority, architecture, scope, and
+validation decision is resolved. Hardware risk alone does not require fresh
+human approval before candidate implementation.
+
+If any substantive decision is unknown, inferred without accepted authority,
+or outside Curator's configured authority, the item is not `READY` and cannot
+execute. Physical acceptance remains separate: H2/H3 candidate implementation
+may proceed, but merge remains prohibited until exact-snapshot hardware PASS.
+
 ## Machine-Readable Queue Fields
 
 Each future object in the queue's `items` list uses snake_case equivalents of

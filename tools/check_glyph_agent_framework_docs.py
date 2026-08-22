@@ -963,6 +963,10 @@ def check_revision_two_surface() -> None:
         "planning/portfolio-*",
         "IMPLEMENTATION_DEFERRED_CONCURRENT_WRITER",
         "CURATION_DEFERRED_CONCURRENT_WRITER",
+        "No fresh human approval is required solely because the authorized work changes active firmware behavior",
+        "Implementation autonomy is not merge autonomy",
+        "USER_DECISION_GATED",
+        "EVIDENCE_GATED",
     ):
         require_phrase("docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md", phrase)
 
@@ -989,6 +993,9 @@ def check_revision_two_surface() -> None:
         "Firmware artifact SHA-256:",
         "Hardware evidence record:",
         "Hardware evidence gaps:",
+        "Substantive Authority Invariant",
+        "no redundant blanket human-approval field is required",
+        "Hardware risk alone does not require fresh human approval before candidate implementation",
     ):
         require_phrase("docs/agent_framework/WORK_ORDER_TEMPLATE.md", phrase)
 
@@ -1021,9 +1028,49 @@ def check_revision_two_surface() -> None:
         "Observation",
         "Hypothesis",
         "Agents must not invent entries",
+        "current user-directed governance correction supplied 2026-08-23",
+        "Authorized, source-grounded firmware behavior work may be implemented autonomously through the candidate stage",
     ):
         require_phrase("docs/agent_framework/USER_DIRECTION.md", phrase)
     pass_line("Revision 2 authorization, evidence, and user-direction surfaces validate")
+
+
+def check_firmware_implementation_authority() -> None:
+    required = {
+        "AGENTS.md": (
+            "A complete READY H2/H3 work order with resolved substantive authority may be implemented",
+            "must never merge before its required exact-snapshot hardware PASS",
+            "Do not use H2/H3 authorization to bypass those boundaries",
+        ),
+        "docs/WORKFLOW.md": (
+            "A complete READY work order may authorize source-grounded firmware/runtime behavior implementation without a fresh user approval solely because",
+            "User/domain input is required before implementation when the proposed runtime behavior still contains an unresolved",
+            "Curator may not infer user intent or invent undocumented Glyph behavior",
+            "implementation autonomy is not merge autonomy",
+        ),
+        "docs/AGENT_CONTEXT.md": (
+            "A complete READY H2/H3 work order inside the approved current path may be implemented as a candidate",
+            "exact-snapshot hardware PASS before merge",
+            "Unresolved behavior decisions and forbidden active-publication paths still stop before implementation",
+        ),
+        "docs/agent_framework/SUPERVISOR_CONTRACT.md": (
+            "Do not refuse a complete READY H2/H3 item solely because it changes active firmware",
+            "If behavior, product/domain intent, source authority, architecture, scope, or validation still requires substantive judgment, do not implement",
+            "Never merge H2/H3 before the exact candidate/artifact pair has physical PASS",
+        ),
+    }
+    for rel_path, phrases in required.items():
+        for phrase in phrases:
+            require_phrase(rel_path, phrase)
+
+    stale_blanket_rules = {
+        "AGENTS.md": "Stop before implementing if the task requires firmware behavior changes",
+        "docs/WORKFLOW.md": "User product approval is required before firmware behavior implementation",
+    }
+    for rel_path, stale_phrase in stale_blanket_rules.items():
+        if normalize(stale_phrase) in normalize(read_required(rel_path)):
+            fail(f"{rel_path} retains contradictory blanket firmware stop: {stale_phrase}")
+    pass_line("firmware implementation authority and hardware merge gate are reconciled")
 
 
 def check_legacy_control_plane_supersession() -> None:
@@ -1054,6 +1101,10 @@ def check_task_configurations() -> None:
             "Mechanically activatable Preauthorized runway",
             "HARDWARE_TEST_REQUIRED and REPAIR_REQUIRED are supporting signals",
             "invalidation takes precedence",
+            "Do not refuse an otherwise complete READY H2/H3 item solely because it changes active firmware",
+            "No fresh human approval is required solely because the authorized candidate is H2/H3",
+            "return CURATION_REQUIRED and name the exact user/evidence decision gate",
+            "Implementation autonomy is not merge autonomy",
         ),
         "Glyph Work-Order Curator": (
             "OPTIONAL_SCHEDULE",
@@ -1066,6 +1117,11 @@ def check_task_configurations() -> None:
             "ordinary test-edit surface is exactly",
             "runtime product code changed: NO",
             "invalidation takes precedence over Planner refresh",
+            "You may authorize source-grounded H2/H3 implementation",
+            "Do not require a fresh user approval solely because the authorized work changes active firmware",
+            "do not infer user intent or invent undocumented Glyph behavior",
+            "USER_DECISION_GATED, EVIDENCE_GATED",
+            "physical exact-snapshot PASS remains mandatory before merge",
         ),
         "Glyph Portfolio Planner": (
             "MANUAL",
@@ -1189,6 +1245,7 @@ def main() -> int:
         check_model_routing()
         check_queue_contract()
         check_revision_two_surface()
+        check_firmware_implementation_authority()
         check_legacy_control_plane_supersession()
         check_task_configurations()
         check_contract_phrases()
