@@ -22,6 +22,8 @@
       "type": "string",
       "enum": [
         "planner",
+        "curator",
+        "hardware_evidence_processor",
         "architecture_specialist",
         "implementer",
         "validator_reviewer",
@@ -33,8 +35,16 @@
     "objective": { "type": "string", "minLength": 1 },
     "scope": { "type": "string", "minLength": 1 },
     "excluded_scope": { "type": "string", "minLength": 1 },
-    "allowed_files": { "type": "array", "items": { "type": "string" } },
-    "forbidden_files": { "type": "array", "items": { "type": "string" } },
+    "allowed_files": {
+      "description": "Coordination scope only; not enforced filesystem isolation.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "forbidden_files": {
+      "description": "Coordination scope only; root must inspect shared-worktree deltas.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
     "active_behavior_constraints": { "type": "array", "items": { "type": "string" } },
     "verification_required": { "type": "array", "items": { "type": "string" } },
     "stop_conditions": { "type": "array", "items": { "type": "string" } },

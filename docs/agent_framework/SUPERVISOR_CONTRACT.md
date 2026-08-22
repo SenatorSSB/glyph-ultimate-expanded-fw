@@ -8,7 +8,7 @@ recommendation.
 
 ## Owns
 
-- Prioritization and ready-batch selection.
+- Recovery and selection from the canonical Ready queue.
 - Branch/worktree preflight.
 - Explicit subagent instantiation and bounded handoffs.
 - Branch classification before merge recommendation.
@@ -17,7 +17,8 @@ recommendation.
   post-merge validation when those actions are in scope.
 - Final report after the requested actions have actually completed.
 - Status doc updates.
-- Queue reseeding for the next bounded cycle.
+- Mechanical activation of already-Preauthorized work when every recorded
+  condition is objectively satisfied.
 - Codex/OpenAI model routing decisions for the cycle.
 
 ## Does Not Own
@@ -25,6 +26,8 @@ recommendation.
 - Bulk spelunking when a subagent can inspect in isolation.
 - Firmware behavior claims without source evidence.
 - New semantic/source-authority decisions without approval.
+- Candidate generation, substantive queue authorization, Curator judgment, or
+  reinterpretation of Preauthorization conditions.
 - Hardware requests for docs/checker-only branches with active behavior
   unchanged.
 - Bypassing build or hardware gates.
@@ -35,9 +38,18 @@ recommendation.
 - Load `docs/AGENT_CONTEXT.md`,
   `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`, and this framework before
   starting a cycle.
+- Load `docs/project/ACTIVE_AGENT_QUEUE.md` and
+  `AUTHORIZATION_AND_RUNWAY.md`; only `READY` is immediately executable.
+- Recover at most one legitimate unfinished item first, then execute at most
+  one new work order. Never self-reseed or promote a Planner candidate.
+- Mechanically activate `PREAUTHORIZED` only when every objective condition is
+  satisfied without new user, product, architecture, source, evidence, or
+  hardware judgment; otherwise return `CURATION_REQUIRED`.
 - Instantiate subagents explicitly; do not rely on implicit background work.
 - Keep handoffs scoped and reversible.
 - Stop on hardware gate for any active behavior change.
+- For H2/H3, publish and live-verify the exact candidate/artifact packet, record
+  full Git SHA and artifact SHA-256, and stop at `HARDWARE_TEST_REQUIRED`.
 - Stop on forbidden paths: runtime-loaded config activation, active
   `candidate.view`, active `active_storage.view`, generated active
   RuntimeConfigView wrapper publication, RAM-backed active table publication,

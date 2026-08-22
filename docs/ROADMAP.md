@@ -8,6 +8,13 @@ and `docs/calibration/INDEX.md`.
 
 ## Current Baseline
 
+The executable work runway is owned separately by
+`docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
+implementation. The current effective authorized runway is zero and no current
+Planner packet exists, so the next operational action is a fresh broad Planner
+audit followed by Curator authorization. This candidate-supply shortfall is not
+a portfolio-wide hardware/evidence wait.
+
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The
 census detects checker-set drift mechanically; the curated manifest retains
@@ -26,6 +33,11 @@ RuntimeConfigView selection remains unchanged, RuntimeConfigView replacement is
 not used, generated active wrapper is not used, `candidate.view` is not active,
 RAM-backed active table publication is not used, root cause remains unproven,
 and Nunchuk remains NOT_TESTED.
+
+These pre-Revision-2 hardware reports are preserved operational evidence for
+the already-merged baseline. Any unrecorded candidate Git SHA or artifact
+SHA-256 is `UNKNOWN`; legacy acceptance cannot satisfy, transfer to, or be
+reused for a new/rebuilt candidate under the exact-snapshot gate.
 
 Alternative B generated-table aliasing is now hardware-passed for candidate
 commit `ee5fd35c4ce00e31d9a00905c771699ad17517b9` when it preserves the

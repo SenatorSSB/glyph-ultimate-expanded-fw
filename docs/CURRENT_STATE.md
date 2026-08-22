@@ -7,7 +7,7 @@ This is the short current-state entrypoint. Agents should read
 `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md` before proposing runtime-config
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
-
+**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; Ready, Preauthorized, effective runway, and current hardware-pending counts are all zero; no trustworthy Planner packet exists; liveness is `PLANNING_REQUIRED`, not a global hardware wait; `CUSTOM_RUNNER_NOT_REQUIRED`; exact role configurations are in `docs/agent_framework/SCHEDULED_TASKS.md`.
 ## Current Known-Good State
 
 - `configurator` contains the latest Y2 layout source-owned port after the
@@ -15,6 +15,7 @@ implementation work. Detailed historical evidence remains indexed from
 - Evidence is preserved in
   `docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md`
   and its fixture.
+- Pre-Revision-2 reports remain historical acceptance only for already-merged source; missing candidate/artifact identity is `UNKNOWN` and cannot satisfy a new/rebuilt candidate's exact-snapshot gate.
 - The implementation lineage is
   `runtime-config-latest-y2-layout-source-owned-port`, with the recorded result
   branch `runtime-config-latest-y2-layout-source-owned-port-hardware-result`;
@@ -35,7 +36,7 @@ implementation work. Detailed historical evidence remains indexed from
   `&kSourceOwnedCurrentBaselineRuntimeConfig`,
   `GetActiveRuntimeConfigState()`, and `ResolveActiveRuntimeConfig()`;
   evidence is recorded in
-  `docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md`.
+  `docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md`; its missing artifact SHA-256 prevents reuse as Revision-2 acceptance.
 - Prior active-publication HARDWARE_FAIL evidence remains archived evidence,
   not current work.
 - Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, invalid/positive fixture corpora with expected results and failure reasons, and fixture-backed offline dry-run coverage for neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths tied to current source-backed Y2/Tilt3 evidence.

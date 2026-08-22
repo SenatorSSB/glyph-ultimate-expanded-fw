@@ -2,9 +2,12 @@
 
 Status label: CURRENT.
 
-Runner prompt and runner implementation are intentionally deferred. These are
+Custom-runner prompt and implementation are intentionally deferred. These are
 Codex/OpenAI operator-facing templates for bounded supervisor cycles and
-explicit subagent handoffs. They do not authorize browser/device write,
+explicit subagent handoffs. Exact full task configurations for Implementation,
+Planner, Curator, and Hardware Evidence Processor live in
+`SCHEDULED_TASKS.md`; documenting them does not create schedules. These
+templates do not authorize browser/device write,
 WebSerial/device write, runtime-loaded profiles, daemon work, or scheduled
 automation. They assume the supervisor will execute the bounded workflow
 itself and report results only after the requested operations have completed.
@@ -57,17 +60,53 @@ Final report:
 
 ```text
 Role: planner
-Objective: identify a ready bounded batch for ...
-Scope: read current docs, roadmap, workflow, and relevant checkers.
-Excluded scope: edits, semantic decisions, runtime-loaded config approval.
-Allowed files: docs/**, tools/check_*.py for inspection.
-Forbidden files: src/**, include/**, lib/**, platformio.ini.
+Objective: propose non-authoritative current-configurator candidate supply for ...
+Scope: read current source, tests, docs, roadmap, queue, user direction, evidence, and relevant checkers.
+Excluded scope: product/queue edits, Ready or Preauthorized promotion, semantic decisions, runtime-loaded config approval.
+Allowed files: repository files for inspection; material output only on planning/portfolio-*.
+Forbidden files: all product/runtime files for mutation; source, include, lib,
+and platform files may be inspected read-only.
 Active behavior constraints: active RuntimeConfigView selection remains
 unchanged.
 Verification required: none; propose verification.
 Stop conditions: source authority ambiguity, hardware gate, forbidden path.
-Return format: ready batch, dependencies, classification, stop rules.
+Return format: base SHA, freshness, broad-audit scope, candidates with estimates,
+rejected alternatives, gates, and global-wait/resume-event assessment.
 Tool budget: bounded read-only.
+```
+
+## Curator Handoff
+
+```text
+Role: curator
+Objective: independently authorize complete Ready or narrowly Preauthorized work from ...
+Scope: current live configurator, candidate packet, source/tests, queue, user direction, evidence, and control-plane docs/tests.
+Excluded scope: firmware/configurator product code, runtime/product tests, implementation of newly authorized work.
+Allowed files: canonical queue/status/portfolio/user-direction publication and narrowly coupled control-plane tests.
+Forbidden files: src/**, include/**, config/**, firmware/runtime/configurator product tests.
+Active behavior constraints: runtime product code changed: NO.
+Verification required: agent-framework, navigation, queue/runway, and independent governance review.
+Stop conditions: concurrent canonical writer, source authority ambiguity, new material idea requiring Planner, forbidden path.
+Return format: base, packet/provenance, runway before/after, dispositions,
+authorizations, refresh signal, validation, live publication.
+Tool budget: bounded judgment and control-plane editing.
+```
+
+## Hardware Evidence Processor Handoff
+
+```text
+Role: hardware_evidence_processor
+Objective: validate and record supplied controller observations for candidate ... and artifact SHA-256 ...
+Scope: exact work order, protocol, candidate/ref, artifact identity, observations, evidence/status files.
+Excluded scope: performing/fabricating tests, runtime source edits, source publication.
+Allowed files: evidence record and directly coupled control-plane status.
+Forbidden files: src/**, include/**, config/**, product/runtime tests.
+Active behavior constraints: evidence branch is not source authority.
+Verification required: identity, completeness, drift, framework/evidence checks, independent review.
+Stop conditions: identity mismatch, incomplete protocol, source drift, concurrent writer.
+Return format: match/mismatch, PASS/FAIL/PARTIAL/INCONCLUSIVE, disposition,
+branch/SHA, retest/repair/publication action.
+Tool budget: bounded evidence verification.
 ```
 
 ## Architecture Specialist Handoff

@@ -57,10 +57,16 @@ def main() -> int:
         "docs/runtime_config/source_authority_intake_workflow.md",
         "docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json",
         "docs/agent_framework/README.md",
+        "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
+        "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
+        "docs/agent_framework/HARDWARE_EVIDENCE.md",
+        "docs/agent_framework/USER_DIRECTION.md",
+        "docs/agent_framework/SCHEDULED_TASKS.md",
         "docs/agent_framework/MODEL_ROUTING.md",
         "docs/agent_framework/SUPERVISOR_CONTRACT.md",
         "docs/agent_framework/SUBAGENT_CONTRACTS.md",
         "docs/agent_framework/VALIDATION_AND_GATES.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
     )
     for rel_path in required_paths:
         read_required(rel_path)
@@ -84,6 +90,8 @@ def main() -> int:
             "docs/ROADMAP.md",
             "docs/WORKFLOW.md",
             "docs/agent_framework/README.md",
+            "docs/project/ACTIVE_AGENT_QUEUE.md",
+            "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
         ),
     )
 
@@ -114,6 +122,8 @@ def main() -> int:
             "runtime-loaded config is not implemented",
             "Nunchuk remains NOT_TESTED",
             "Root cause remains unproven",
+            "canonical executable queue",
+            "Only `READY` is immediately executable",
         ),
     )
 
@@ -133,6 +143,9 @@ def main() -> int:
             "coordinate-native runtime profile contract scaffolding",
             "coordinate_native_runtime_profile_contract.json",
             "offline dry-run evaluator",
+            "Current Agentic Operating State",
+            "PLANNING_REQUIRED",
+            "CUSTOM_RUNNER_NOT_REQUIRED",
         ),
     )
 

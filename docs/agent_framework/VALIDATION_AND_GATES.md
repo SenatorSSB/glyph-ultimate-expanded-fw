@@ -7,6 +7,10 @@ The supervisor must execute the required branch, validation, commit, push, and
 merge operations when they are in scope; it must not stop at reporting the
 commands.
 
+Work orders also receive behavioral-effect risk `H0`, `H1`, `H2`, or `H3` as
+defined in `WORK_ORDER_TEMPLATE.md`. Branch classification and hardware risk
+are complementary: risk follows actual effect, not file location.
+
 ## Classifications
 
 `DOCS_CHECKER_ONLY`
@@ -57,12 +61,25 @@ Stop and report.
 ## Glyph Gates
 
 - Active behavior changed -> build proof plus hardware PASS before merge.
+- H2/H3 -> automated validation, canonical build, fresh independent review,
+  exact candidate publication, full Git SHA plus exact artifact SHA-256, and
+  physical controller PASS before merge.
+- A successful build proves build integrity only. It never proves controller
+  acceptance.
+- Relevant source change or a different rebuild invalidates affected hardware
+  evidence unless the exact tested artifact bytes and snapshot remain the
+  candidate being published.
+- Failed candidate source must not enter `configurator`; a result/evidence
+  branch is not source authority.
 - Docs/checker-only with active behavior unchanged -> hardware not required.
 - Failed active-source branches are evidence only; do not present them as
   current work.
 - No destructive Git commands: no reset, clean, stash, revert, or force-push
   unless explicitly approved.
-- Artifact hashes are local observations only and not checker gates.
+- Artifact hashes need not be rebuild-stable, but the exact hash is mandatory
+  evidence identity for H2/H3 testing. Checkers enforce recorded identity and
+  locator invariants; they do not require a separate rebuild to reproduce the
+  digest.
 - Nunchuk remains NOT_TESTED unless the user explicitly reports a test.
 - Root cause remains unproven unless direct evidence is found.
 - Runtime-loaded config remains not implemented.

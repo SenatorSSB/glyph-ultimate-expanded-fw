@@ -16,6 +16,9 @@ Read these files before using older calibration packets:
   implementation boundary.
 - `docs/agent_framework/README.md` - supervisor/subagent contracts,
   classifications, gates, and templates.
+- `docs/project/ACTIVE_AGENT_QUEUE.md` - the only executable Ready queue.
+- `docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md` - Ready,
+  Preauthorized, runway, Planner, and Curator authority.
 
 Treat `docs/calibration/` as evidence and historical packets. Prefer canonical
 current docs over old blocker packets when they conflict. Treat
@@ -52,6 +55,11 @@ relevant repo checkers.
   `git stash`, `git revert`, or force-push unless explicitly approved.
 - Behavior-changing active firmware source requires build proof and hardware
   PASS before merge.
+- Only a complete `READY` work order authorizes immediate new implementation.
+  `PREAUTHORIZED` work may activate only through its recorded objective
+  mechanical conditions; judgment returns `CURATION_REQUIRED`.
+- H2/H3 hardware acceptance requires the exact candidate Git SHA and exact
+  tested artifact SHA-256. A successful build is not controller acceptance.
 - Docs/checker-only changes with active firmware behavior unchanged do not
   require hardware.
 - Nunchuk remains NOT_TESTED unless the user explicitly reports a test.

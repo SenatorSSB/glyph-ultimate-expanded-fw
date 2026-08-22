@@ -1,207 +1,117 @@
 # Active Agent Queue
 
-This file is the current queue for Codex agents in the Glyph-side repository.
+Status label: CURRENT.
 
-## Branch
+This is the only canonical executable work queue for the Glyph repository.
+Roadmap entries, Planner packets, branch names, chat recommendations, and old
+calibration packets do not authorize implementation. Only a complete work
+order recorded here as `READY` authorizes immediate new implementation. A
+complete `PREAUTHORIZED` work order may become Ready only through its already
+authorized objective mechanical activation conditions.
 
-Use the current checked-out branch unless instructed otherwise.
+The former G-series queue in this file is superseded. Its history remains in
+Git, but it is not current candidate supply or implementation authority.
 
-If branch/remote policy is unclear, stop and report.
+## Current Queue State
 
-## Current mode
+<!-- queue-state:start -->
+```json
+{
+  "schema_version": 2,
+  "canonical_branch": "configurator",
+  "audit_base_sha": "0142bf6e26c3a401362fd6102538c9a4c3df70cf",
+  "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
+  "planner_packet": {
+    "state": "ABSENT",
+    "branch": null,
+    "base_configurator_sha": null,
+    "candidate_count": 0,
+    "curator_review_required": false,
+    "global_wait_proposed": false,
+    "material_events_since_packet": []
+  },
+  "runway": {
+    "immediate_ready": 0,
+    "recorded_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 0,
+    "invalidated_preauthorized": 0,
+    "hardware_pending": 0,
+    "effective_authorized_runway": 0,
+    "target_effective_authorized_runway": 4,
+    "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
+  },
+  "signals": [
+    "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+    "PLANNER_REFRESH_REQUIRED",
+    "PLANNING_REQUIRED"
+  ],
+  "global_evidence_wait": {
+    "supported": false,
+    "planner_broad_audit_provenance": null,
+    "curator_acceptance_provenance": null,
+    "required_external_evidence": null,
+    "resume_event": null
+  },
+  "items": []
+}
+```
+<!-- queue-state:end -->
+
+## Interpretation
+
+- Immediate Ready runway: `0`.
+- Recorded Preauthorized runway: `0`.
+- Valid mechanically activatable Preauthorized runway: `0`.
+- Invalidated Preauthorized work: `0`.
+- Hardware-pending work: `0`.
+- Effective authorized runway: `0`.
+- Current liveness result: `PLANNING_REQUIRED`.
+- `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
+
+The zero-runway result is a candidate-supply shortfall, not permission for the
+Implementation Supervisor to invent work and not evidence that the whole
+project is hardware-gated. The next operation is a fresh broad Planner audit of
+current live `configurator`, followed by independent Curator authorization.
+
+## Allowed Statuses
+
+The queue accepts these work-order states:
 
 ```text
-Tier 2 — autonomous with stop conditions
+READY
+PREAUTHORIZED
+IN_PROGRESS
+REVIEW
+HARDWARE_TEST_REQUIRED
+LOCAL_ACCEPTANCE_PENDING
+HARDWARE_VALIDATED
+HARDWARE_FAILED
+BLOCKED_EXTERNAL
+DONE
+INVALIDATED_PREAUTHORIZED
 ```
 
-## Current objective
-
-Prepare Glyph/HayBox-style controller-backend realization architecture without changing Senscope game semantic source authority.
-
-## Current boundaries
-
-Read:
-
-- `AGENTS.md`
-- `docs/project/AGENT_OPERATING_CONTRACT.md`
-- `docs/project/AGENT_STOP_CONDITIONS.md`
-- `docs/project/GLYPH_WORKSTREAM_BOUNDARIES.md`
-
-Do not add gameplay semantics.
-
-Do not change Senscope no-smash/no-strong-input behavior.
-
-Do not add export/push workflows.
-
-Do not claim undocumented firmware behavior.
-
-## Completed sequence
-
-G1, G2, and G3 are complete and pushed.
-
-### G1 - Glyph repo inventory and architecture map
-
-Status: complete and pushed
-
-Deliverable:
-
-```text
-docs/project/G1_GLYPH_REPO_INVENTORY_AND_ARCHITECTURE_MAP.md
-```
-
-### G2 - Controller capability surface extraction
-
-Status: complete and pushed
-
-Deliverable:
-
-```text
-docs/project/G2_CONTROLLER_CAPABILITY_SURFACE_EXTRACTION.md
-```
-
-### G3 - Neutral profile integration boundary design
-
-Status: complete and pushed
-
-Deliverable:
-
-```text
-docs/project/G3_NEUTRAL_PROFILE_INTEGRATION_BOUNDARY_DESIGN.md
-```
-
-## Current status
-
-G5 non-runtime capability model schema draft is complete.
-
-G6 evaluator contract tests with mock capabilities are now complete as a docs-only scaffold.
-
-G7 custom mode / controller logic engine design is complete on `design/glyph-controller-logic-engine-g7`.
-
-G9 config capacity / table storage inventory is complete on `docs/glyph-config-capacity-g9`.
-
-G10 compile-time prototype design is complete on `design/glyph-compile-time-prototype-g10`.
-
-G11g-h isolated shell helper integration and compile/build audit is complete on `proto/glyph-shell-helper-integration-g11g-h`.
-
-G11i-j prototype self-test vectors + mode-selection wiring design docs are complete on `proto/glyph-prototype-selftest-and-wiring-design-g11i-j`.
-
-G11k mode-selection wiring implementation plan (docs-only) is complete on `design/glyph-mode-selection-wiring-g11k`.
-
-G11k-impl minimal mode-selection preparation is complete on `proto/glyph-mode-selection-prep-g11k-impl`.
-
-G11l-n first output behavior design + test strategy docs + isolated output-composition scaffold is complete on `proto/glyph-output-composition-design-g11l-n`.
-
-G11n2 output composition self-test expansion + audit cleanup is complete on `proto/glyph-output-selftest-audit-g11n2`.
-
-G11o validation hardening + runtime-readiness gate is complete on `proto/glyph-validation-readiness-g11o`.
-
-G11m2-n-r runtime debug-path audit + modifier-mask enablement design + selected-path readiness checks is complete on `proto/glyph-runtime-audit-modifier-design-g11m2-n-r`.
-
-G11n-impl1 isolated modifier-mask helper (no runtime wiring) is complete on `proto/glyph-modifier-mask-helper-g11n1`.
-
-G11n-impl2 runtime modifier-mask wiring (selected SenscopePrototype path only) is complete on `proto/glyph-runtime-modifier-mask-g11n2`.
-
-After G11n2, stop for inspection. Do not proceed to Force Up-B, digital outputs, right-stick/C-stick behavior, default activation, or flashing without explicit approval.
-
-## Next candidate batches
-
-### G4 - Review/normalize G1-G3 and active queue
-
-Status: complete and pushed
-
-Scope:
-
-- review the completed G1/G2/G3 docs;
-- normalize queue wording and stop conditions;
-- keep the repo ready for human inspection before any runtime implementation.
-
-### G5 - Non-runtime capability model schema draft
-
-Status: complete
-
-Scope:
-
-- docs/design only unless explicitly approved;
-- keep the model source-refed and conservative;
-- do not introduce runtime code.
-
-### G6 - Evaluator contract tests using mock capabilities
-
-Status: complete (docs-only scaffold)
-
-Scope:
-
-- code/test scaffold only if explicitly approved after G5;
-- use mock capabilities;
-- keep behavior classification conservative.
-
-### G7 - Firmware custom mode design spike
-
-Status: complete
-
-Scope:
-
-- requires explicit approval;
-- design only unless otherwise approved;
-- do not change neutral profile schema.
-
-### G8 - Realization evaluator prototype
-
-Status: candidate
-
-Scope:
-
-- requires explicit approval;
-- prototype only;
-- no runtime adapter, no export/push workflow.
-
-### G10 - Compile-time custom controller logic prototype design
-
-Status: complete (docs/design only)
-
-Scope:
-
-- design-only compile-time prototype path for the G7 stateless controller logic engine;
-- preserve G9 conclusion that existing config-backed structures do not directly fit the desired G7 table/profile model yet;
-- no firmware, schema, runtime adapter, evaluator, export, push, or game-semantic changes.
-
-## Explicit stop condition
-
-After G11n2, stop for inspection. Do not implement Force Up-B, digital outputs, right-stick/C-stick behavior, default activation, or flashing without explicit user approval.
-
-## Verification
-
-Docs/design only unless code is touched:
-
-```bash
-git status
-git diff --stat
-```
-
-If code is touched or build output is relevant, inspect package files and verify wrappers before relying on them.
-
-Use:
-
-```bash
-test -x ./scripts/pio-local.sh
-test -x ./scripts/build-glyph-mk6-quiet.sh
-./scripts/build-glyph-mk6-quiet.sh
-```
-
-Use `./scripts/pio-local.sh run -e glyph_mk6` only when debugging full build output.
-
-Do not paste full successful PlatformIO logs into final reports. On failure, report only the final 80 lines unless the user asks for more.
-
-## Final report
-
-Use:
-
-```text
-docs/project/AGENT_FINAL_REPORT_TEMPLATE.md
-```
-
-Semantic changes must be:
-
-```text
-none
-```
+`READY` is the only immediately executable state. `PREAUTHORIZED` is recorded
+authorization, not necessarily effective runway. A Preauthorized item with
+unsatisfied conditions, new judgment required, invalidation, or pending
+hardware evidence is not mechanically activatable and is excluded from
+effective authorized runway.
+
+Hardware-pending items require the supporting signal
+`HARDWARE_TEST_REQUIRED`. `HARDWARE_FAILED` items require the supporting signal
+`REPAIR_REQUIRED`; with zero effective runway they also derive the primary
+`CURATION_REQUIRED` state. `HARDWARE_TEST_REQUIRED` carries no result yet;
+PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
+
+## Work Orders
+
+No work orders are currently authorized.
+
+Every future item recorded in the machine-readable `items` list must satisfy
+`docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
+authorization and new work-order creation. The Implementation Supervisor may
+update execution and publication state for the one selected item. The Hardware
+Evidence Processor may update only exact identity, evidence-reference, result,
+gap, and hardware lifecycle state for an already-recorded H2/H3 candidate; it
+cannot create, broaden, or authorize work. Array order is canonical priority
+order, highest first.
