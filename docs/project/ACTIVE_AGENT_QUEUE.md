@@ -41,17 +41,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 4,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "RUNWAY_OK"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -64,7 +64,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-001",
       "title": "Reconcile active table-source truth and mutation guardrails",
-      "status": "DONE",
+      "status": "READY",
       "branch": "runtime-config-active-table-source-truth-guardrails",
       "objective": "Make the active compile-time table-content include chain explicit and make every existing write-capable source-owned generator path fail closed around active firmware table content.",
       "why_this_matters": "The current generated baseline header supplies all 28 active table bodies, but multiple docs, markers, and tools call it inert; that mismatch can turn an offline-looking write into unreviewed active firmware source mutation.",
