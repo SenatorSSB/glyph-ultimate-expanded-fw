@@ -94,7 +94,6 @@ REQUIRED_DOC_PHRASES = (
     "--emit-current-source-owned-baseline",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state `HARDWARE_PASS` evidence",
-    "future hardware gate required before generated source-owned baseline artifact is selected active",
     "not included by `src/modes/Ultimate.cpp`",
     "not wired into runtime selection",
     "does not change active firmware behavior",
@@ -392,9 +391,9 @@ def validate_docs() -> None:
 def validate_not_included_by_ultimate() -> None:
     ultimate_text = read_required(ULTIMATE_CPP)
     if ARTIFACT.name in ultimate_text:
-        fail(f"{rel(ARTIFACT)} must not be included by src/modes/Ultimate.cpp")
+        fail(f"{rel(ARTIFACT)} must not be included directly by src/modes/Ultimate.cpp")
     if "runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp" in ultimate_text:
-        fail(f"{rel(ARTIFACT)} must not be included by src/modes/Ultimate.cpp")
+        fail(f"{rel(ARTIFACT)} must not be included directly by src/modes/Ultimate.cpp")
 
 
 def validate_identity_header_includes_generated_baseline() -> None:

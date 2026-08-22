@@ -39,8 +39,11 @@ from glyph_source_owned_overlay import OverlayContractError, generate_overlay_pa
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CANDIDATE_BRANCH = "runtime-config-install-workflow-candidate-generation"
 DEFAULT_TARGET_SOURCE_PATH = (
-    REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+    REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
 )
+ACTIVE_TABLE_SOURCE_PATH = (
+    REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+).resolve()
 VALIDATION_COMMANDS = [
     "python3 tools/check_glyph_source_owned_generator_modes.py",
     "python3 tools/check_glyph_source_owned_source_authority_intake.py",
@@ -136,6 +139,12 @@ def ensure_not_configurator(target_branch: str) -> None:
 
 
 def ensure_allowed_target_path(target_path: Path) -> None:
+    if target_path.resolve() == ACTIVE_TABLE_SOURCE_PATH:
+        fail(
+            "candidate source write refused: GeneratedRuntimeConfigBaseline.current.hpp "
+            "is active compile-time table content; active mutation requires a separately "
+            "authorized candidate workflow"
+        )
     assert_inert_source_install_path(target_path)
 
 
@@ -272,11 +281,12 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        ensure_allowed_target_path(args.target_source_path)
-        current_branch = git_current_branch()
         if args.write_source:
+            current_branch = git_current_branch()
             ensure_not_configurator(args.candidate_branch)
             ensure_not_configurator(current_branch)
+            ensure_allowed_target_path(args.target_source_path)
+        if args.write_source:
             ensure_clean_worktree()
 
         if args.profile is not None:

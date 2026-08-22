@@ -10,7 +10,11 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from glyph_checker_context import CheckerContextError, collect_checker_context, validate_feature_scope
+from glyph_checker_context import (
+    CheckerContextError,
+    collect_checker_context,
+    validate_feature_scope,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -90,6 +94,7 @@ REQUIRED_ARTIFACT_MARKERS = (
 BASELINE_ARTIFACT = (
     "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
 )
+INERT_ARTIFACT = "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
 
 FORBIDDEN_ARTIFACT_TOKENS = (
     "GetActiveRuntimeConfigState",
@@ -294,7 +299,7 @@ def validate_changed_paths(paths: set[str], installed_artifacts: list[str]) -> N
         if path.startswith("docs/runtime_config/") or path.startswith("docs/agent_framework/"):
             continue
         if path.startswith(INERT_SOURCE_PREFIX):
-            if path not in installed_artifacts and path != BASELINE_ARTIFACT:
+            if path not in installed_artifacts and path not in {BASELINE_ARTIFACT, INERT_ARTIFACT}:
                 fail(f"inert source artifact changed but is not declared in fixture: {path}")
             validate_artifact_text(path)
             continue
@@ -347,9 +352,9 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
         fail(f"fixture installer.layout_spec_input_mode must be {INSTALL_LAYOUT_SPEC_MODE!r}")
     if installer.get("generated_output_input_mode") != INSTALL_GENERATED_OUTPUT_MODE:
         fail(f"fixture installer.generated_output_input_mode must be {INSTALL_GENERATED_OUTPUT_MODE!r}")
-    if installer.get("preferred_output_path") != BASELINE_ARTIFACT:
+    if installer.get("preferred_output_path") != INERT_ARTIFACT:
         fail("fixture installer.preferred_output_path must target the inert alias path")
-    if installer.get("default_output_path") != BASELINE_ARTIFACT:
+    if installer.get("default_output_path") != INERT_ARTIFACT:
         fail("fixture installer.default_output_path must target the inert alias path")
     workflow = fixture.get("workflow")
     if not isinstance(workflow, dict):

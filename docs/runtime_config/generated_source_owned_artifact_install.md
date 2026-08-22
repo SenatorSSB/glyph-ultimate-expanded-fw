@@ -15,8 +15,11 @@ packet or already-generated C++ output.
 The installed example artifact lives under
 `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`.
 It is a source-owned immutable table text artifact, but it is intentionally
-inert: it is not included by `src/modes/Ultimate.cpp`, is not wired into
-runtime selection, and does not change active firmware behavior.
+inert: it is not wired into runtime selection and does not change active
+firmware behavior. The similarly named
+`GeneratedRuntimeConfigBaseline.current.hpp` is active compile-time table
+content through `UltimateIdentityRuntimeTables.hpp` and is rejected by this
+installer. The inert example artifact is not included by `src/modes/Ultimate.cpp`.
 
 ## Accepted Evidence
 
@@ -58,7 +61,7 @@ python3 tools/install_generated_source_owned_runtime_config.py \
   --dry-run
 ```
 
-The installed source artifact must contain these markers:
+The installed inert source artifact must contain these markers:
 
 - `generated source-owned runtime config artifact`
 - `inert generated-table placeholder`

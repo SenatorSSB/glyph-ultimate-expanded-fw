@@ -15,7 +15,10 @@ This branch adds a neutral JSON input contract, a Python stdlib-only offline
 generator, an inert declarative layout spec, and docs fixtures for the
 generated C++ text output. It also exposes an explicit `--emit-from-layout-spec`
 packet-input mode so the declarative layout-spec packet can be consumed
-deterministically. It does not write generated artifacts into active source
+deterministically. The normal/layout-spec outputs are inert fixtures; the
+baseline mode reports active compile-time table content but is read-only. No
+generic path writes the active baseline header.
+The normal fixture path does not write generated artifacts into active source
 paths by default, does not wire generated tables active, and does not change
 active firmware behavior.
 
@@ -23,8 +26,8 @@ The companion offline installer
 `tools/install_generated_source_owned_runtime_config.py` can take either a
 validated layout-spec packet or already-generated C++ output. It accepts
 `--from-layout-spec`, `--from-generated-output`, and `--dry-run` so the inert
-source-owned alias path can be previewed or written without activating runtime
-selection.
+source-owned example path can be previewed or written without activating
+runtime selection. The active baseline header is rejected.
 
 ## Accepted Evidence
 

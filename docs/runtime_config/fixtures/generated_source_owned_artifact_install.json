@@ -30,8 +30,8 @@
     "dry_run_flag": "--dry-run",
     "layout_spec_input_mode": "--from-layout-spec",
     "generated_output_input_mode": "--from-generated-output",
-    "default_output_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
-    "preferred_output_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+    "default_output_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
+    "preferred_output_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
   },
   "workflow": {
     "bridge_profile_fixture": "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json",

@@ -2,14 +2,17 @@
 
 Status label: CURRENT.
 
-This packet records an inert generated source-owned runtime config artifact for
-the current source-owned baseline. The artifact lives at
+This packet records the active generated source-owned runtime config table
+content for the current source-owned baseline. The artifact lives at
 `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`.
 
 This branch follows `generated_source_owned_artifact_install.md` and
 `generated_source_owned_generator_contract.md`. It keeps the earlier generated
-example artifact as a deterministic fixture only and does not select either
-generated artifact active.
+example artifact as a deterministic inert fixture only; the current baseline
+header is active compile-time table content through
+`UltimateIdentityRuntimeTables.hpp`.
+The baseline header is not included by `src/modes/Ultimate.cpp` directly, and
+the generated example artifact is not wired into runtime selection.
 
 The source-inspection baseline CLI remains `--emit-current-source-owned-baseline`.
 The explicit `--emit-from-layout-spec` packet mode remains inert and reproduces
@@ -20,9 +23,11 @@ the same baseline-shaped generated artifact when run against
 
 - Add one generated source-owned runtime config artifact for the current
   baseline table data.
-- Keep the artifact as an inert generated-table placeholder.
-- Keep it not wired into runtime selection.
-- Keep it not included by `src/modes/Ultimate.cpp`.
+- Classify the artifact as active compile-time table-content source.
+- Keep the existing active RuntimeConfigView publication path unchanged.
+- Keep it included indirectly through `src/modes/UltimateIdentityRuntimeTables.hpp`;
+  `Ultimate.cpp` retains only the existing wrapper include. The active table
+  content is included by `src/modes/UltimateIdentityRuntimeTables.hpp`.
 - Do not modify `src/modes/Ultimate.cpp`, `ResolveActiveRuntimeConfig`,
   `GetActiveRuntimeConfigState`, or `UpdateAnalogOutputs`.
 - Do not add parser, runtime-loaded config, persistent storage, WebSerial/device
@@ -71,9 +76,10 @@ low-level failure mechanism remains unproven. Nunchuk remains `NOT_TESTED`.
 
 ## Activation Gate
 
-This branch does not change active firmware behavior and does not require a
-hardware test before merge. A future hardware gate required before generated
-source-owned baseline artifact is selected active.
+This correction changes classification and host-side mutation safety only; it
+does not change any table byte, routing decision, or active RuntimeConfigView
+publication; it does not change active firmware behavior. No hardware test is
+required.
 
 Future activation work must happen on a separate hardware-gated branch and must
 continue to avoid runtime-loaded config, persistent storage, WebSerial/device

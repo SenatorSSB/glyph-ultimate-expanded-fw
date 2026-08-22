@@ -92,9 +92,8 @@ is rejected.
 
 The companion installer
 `tools/install_generated_source_owned_runtime_config.py` can either dry-run or
-write the generated source-owned baseline text. Its preferred path is a dry-run
-preview from `--from-layout-spec`, which keeps the install workflow offline and
-non-active while reproducing the already merged source-owned alias text.
+write the inert example artifact. It refuses writes to the active baseline
+header; its preferred path is a dry-run preview from `--from-layout-spec`.
 It also accepts `--from-generated-output` for already-generated C++ text and
 `--dry-run` for preview-only operation.
 
@@ -105,7 +104,8 @@ fixture, converts when needed, generates the source-owned artifact into a
 temporary preview location, and emits a dry-run candidate plan for
 `runtime-config-install-workflow-candidate-generation`. The wrapper stays
 offline by default and keeps the approved inert Alternative B source path
-explicit for future hardware-test candidate materialization.
+explicit for future hardware-test candidate materialization, but active table
+source writes are fail-closed until a separately authorized candidate workflow.
 
 Quick smoke command:
 
@@ -127,19 +127,27 @@ python3 tools/install_generated_source_owned_runtime_config.py \
   --dry-run
 ```
 
-These packets keep the generated tables not wired active, preserve the active
+The generated baseline header is active compile-time table-content source
+through `UltimateIdentityRuntimeTables.hpp`; the example packets remain inert
+and are not wired active. These packets preserve the active
 RuntimeConfigView selection boundary, and keep the source-owned active-state
 preselection `HARDWARE_PASS` evidence and active-storage `HARDWARE_FAIL`
 evidence separate. source-owned active-state `HARDWARE_PASS` evidence and
-future hardware gate required before generated source-owned baseline artifact
-is selected active remain part of this lane. The declarative
+the active baseline header is already compile-time source, not a future
+selection. The declarative
 `generated_source_owned_layout_spec.md` mirror stays inert, and the explicit
 spec-input mode only helps validate the baseline shape. Future implementation
 must be hardware-gated if active source selection behavior changes. Future
-hardware gate required before generated source-owned tables are selected
-active. The source-owned table symbol-map note and checker document the
+active table bytes remain hardware-gated for any behavior change; future
+hardware gate required before generated source-owned tables are selected active
+for a behavior-changing candidate. The source-owned table symbol-map note and checker document the
 current Alternative B alias/replacement boundary without changing the active
 path. nunchuk `NOT_TESTED`.
+The future hardware gate required before generated source-owned baseline
+artifact is selected active applies to any replacement with changed table
+bytes; the current included baseline remains the approved source-owned path.
+The example packets retain the bounded non-claim that generated tables not
+wired active are not selected through the inert fixture lane.
 
 The candidate-generation diff diagnosis currently classifies the inert
 layout-spec candidate as `TABLE_CONTENT_DIFFERENT` against the current

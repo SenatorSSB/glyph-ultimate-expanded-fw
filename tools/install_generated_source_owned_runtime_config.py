@@ -10,8 +10,9 @@ This is an offline source-file workflow only. It can either:
 and then either dry-run the install to stdout or write only to the inert
 source-owned alias path under ``src/modes/runtime_config/generated_source_owned``.
 
-It does not touch device state, firmware flashing, runtime-loaded config, or
-any active RuntimeConfigView publication path.
+The canonical active table-content header is deliberately rejected. It does
+not touch device state, firmware flashing, runtime-loaded config, or any
+active RuntimeConfigView publication path.
 """
 
 from __future__ import annotations
@@ -29,7 +30,7 @@ from glyph_source_owned_overlay import OverlayContractError, generate_overlay_pa
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INSTALL_PATH = REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+DEFAULT_INSTALL_PATH = REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
 FORBIDDEN_OUTPUT_TOKENS = (
     "GetActiveRuntimeConfigState",
     "ResolveActiveRuntimeConfig",

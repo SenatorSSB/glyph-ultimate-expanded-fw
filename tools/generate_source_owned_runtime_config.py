@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Generate a source-owned runtime config C++ fixture from neutral JSON.
+"""Generate source-owned runtime config C++ artifacts from neutral JSON.
 
-The generated text is an offline artifact contract only. The default CLI path
-rejects active source destinations so this tool cannot accidentally write into
-firmware runtime selection paths during docs/fixture use.
+The normal and layout-spec paths emit inert offline fixtures. The current
+source-owned baseline mode emits active compile-time table-content source;
+that path is intentionally read-only here so active source mutation cannot
+occur through a generic generator or installer.
 
 An explicit install mode may write only to the inert generated-source-owned
 source artifact directory. That path is source-owned but not wired into active
@@ -31,6 +32,7 @@ EXPECTED_AXES_PER_POINT = 2
 SPEC_INPUT_MODE = "--emit-from-layout-spec"
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INERT_SOURCE_INSTALL_DIR = REPO_ROOT / "src/modes/runtime_config/generated_source_owned"
+ACTIVE_TABLE_SOURCE_PATH = INERT_SOURCE_INSTALL_DIR / "GeneratedRuntimeConfigBaseline.current.hpp"
 SOURCE_TABLES = REPO_ROOT / "src/modes/UltimateIdentityRuntimeTables.hpp"
 SOURCE_INTERPRETER = REPO_ROOT / "src/modes/UltimateRuntimeConfigInterpreter.hpp"
 
@@ -548,6 +550,11 @@ def normalize_repo_path(path: Path) -> Path:
 
 def assert_inert_source_install_path(output_path: Path) -> None:
     resolved = normalize_repo_path(output_path)
+    if resolved == ACTIVE_TABLE_SOURCE_PATH.resolve():
+        fail(
+            "active table-content source is not writable through the generic "
+            "generator/install path; use a separately authorized candidate workflow"
+        )
     allowed_root = INERT_SOURCE_INSTALL_DIR.resolve()
     try:
         resolved.relative_to(allowed_root)
@@ -595,10 +602,10 @@ def generate_from_layout_spec(
 def generate_current_source_owned_baseline(output_path: Path | None = None) -> str:
     output = emit_cpp_header(parse_source_owned_baseline_contract())
     if output_path is not None:
-        assert_inert_source_install_path(output_path)
-        normalized_output_path = normalize_repo_path(output_path)
-        normalized_output_path.parent.mkdir(parents=True, exist_ok=True)
-        normalized_output_path.write_text(output, encoding="utf-8")
+        fail(
+            "baseline mode is read-only; active table-content source must be "
+            "changed only through a separately authorized candidate workflow"
+        )
     return output
 
 
@@ -625,7 +632,7 @@ def main(argv: list[str]) -> int:
             "       generate_source_owned_runtime_config.py "
             "--install-inert-source-artifact INPUT_JSON OUTPUT_HPP\n"
             "       generate_source_owned_runtime_config.py "
-            "--emit-current-source-owned-baseline [OUTPUT_HPP]",
+            "--emit-current-source-owned-baseline",
             file=sys.stderr,
         )
         return 2

@@ -8,7 +8,7 @@
     "profile",
     "layout-spec"
   ],
-  "approved_target_source_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+  "approved_target_source_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
   "hardware_gate_status": "NOT_REQUIRED_FOR_DRY_RUN",
   "build_command": "pio run -e glyph_mk6",
   "validation_commands": [

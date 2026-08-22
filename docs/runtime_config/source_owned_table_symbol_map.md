@@ -13,15 +13,15 @@ implementation boundary.
 | --- | --- | --- | --- |
 | Active publication | `src/modes/Ultimate.cpp` | `GetActiveRuntimeConfigState()`, `ResolveActiveRuntimeConfig()` | Publishes the stable active pointer and dereferences `active_view`. |
 | Baseline alias | `src/modes/UltimateRuntimeConfigInterpreter.hpp` | `kSourceOwnedCurrentBaselineRuntimeTables`, `kKnownGoodRuntimeConfig`, `kSourceOwnedCurrentBaselineRuntimeConfig` | Defines the current source-owned baseline table array and its alias. |
-| Table content source | `src/modes/UltimateIdentityRuntimeTables.hpp` | `kDefaultTable` through `kLt1LowMagnitudeTable` | Holds the source-owned compile-time table contents consumed by the baseline alias, adapted from the generated source-owned baseline include. |
+| Table content source | `src/modes/UltimateIdentityRuntimeTables.hpp` -> `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp` | `kDefaultTable` through `kLt1LowMagnitudeTable` | Holds the active source-owned compile-time table contents consumed by the baseline alias. |
 
 The current active pointer still comes from
 `&kSourceOwnedCurrentBaselineRuntimeConfig`, and
 `ResolveActiveRuntimeConfig()` still dereferences
 `GetActiveRuntimeConfigState().active_view`.
-`src/modes/UltimateIdentityRuntimeTables.hpp` now includes the generated
-source-owned baseline artifact as its compile-time table source while keeping
-the active publication symbols unchanged.
+`src/modes/UltimateIdentityRuntimeTables.hpp` includes the generated
+source-owned baseline header as active compile-time table content while
+keeping the active publication symbols unchanged.
 
 The Alternative B generated-table alias candidate at
 `ee5fd35c4ce00e31d9a00905c771699ad17517b9` is hardware-passed only in this
@@ -42,10 +42,10 @@ path. The hardware-passed generated-table alias candidate touched:
 
 ## Inert Generated-Source-Owned Artifacts
 
-The source-inspection lane also tracks these inert artifacts:
+The source-inspection lane tracks these inert artifacts (the active baseline
+header is intentionally excluded):
 
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`
-- `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp`
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp`
 - `docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp`
@@ -58,8 +58,9 @@ The source-inspection lane also tracks these inert artifacts:
 - `docs/runtime_config/fixtures/generated_source_owned_artifact_install.json`
 - `docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json`
 
-These files are inert evidence or offline generator fixtures. They are not the
-active publication mechanism and do not introduce runtime-loaded config,
+These files are inert evidence or offline generator fixtures. The baseline
+header above is active table content, but it is not the active publication
+mechanism. None of these paths introduce runtime-loaded config,
 persistent storage, WebSerial/device write, backend/config.pb write paths, or
 flashing automation.
 
@@ -67,7 +68,7 @@ flashing automation.
 
 The repo checker
 `tools/check_glyph_source_owned_table_symbol_map.py` reports the exact source
-symbol locations, inert artifact paths, and Alternative B touchpoints listed
+symbol locations, active table-source path, inert artifact paths, and Alternative B touchpoints listed
 above. It also fails if the checked docs drift into positive claims about
 runtime-loaded config, storage, device write, flashing automation, candidate
 publication, or active-storage publication.

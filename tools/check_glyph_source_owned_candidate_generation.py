@@ -17,7 +17,8 @@ PROFILE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_ru
 LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
 INVALID_PROFILE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json"
 
-ALLOWED_TARGET_PATH = "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+ALLOWED_TARGET_PATH = "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
+ACTIVE_TARGET_PATH = "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
 FORBIDDEN_CLAIMS = (
     "runtime_loaded_config_implemented",
     "persistent_storage_implemented",
@@ -236,6 +237,29 @@ def validate_path_guards() -> None:
         fail("direct configurator source write unexpectedly succeeded")
     if "configurator" not in completed.stderr:
         fail("configurator refusal must mention the branch guard")
+
+    active_path = REPO_ROOT / ACTIVE_TARGET_PATH
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(TOOL.relative_to(REPO_ROOT)),
+            "--layout-spec",
+            str(LAYOUT_SPEC_FIXTURE.relative_to(REPO_ROOT)),
+            "--write-source",
+            "--candidate-branch",
+            "feature-test",
+            "--target-source-path",
+            str(active_path),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode == 0:
+        fail("active table-source write unexpectedly succeeded")
+    if "active compile-time table content" not in completed.stderr:
+        fail("active table-source refusal must identify active compile-time content")
 
     completed = subprocess.run(
         [sys.executable, str(TOOL.relative_to(REPO_ROOT)), "--layout-spec", str(LAYOUT_SPEC_FIXTURE.relative_to(REPO_ROOT)), "--write-source", "--target-source-path", str(forbidden_path)],

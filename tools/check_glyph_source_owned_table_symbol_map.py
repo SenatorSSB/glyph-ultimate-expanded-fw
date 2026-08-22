@@ -207,9 +207,11 @@ def main() -> int:
     print(f"  {TABLES_HPP.relative_to(REPO_ROOT)}:{generated_include_line} {generated_include_text}")
     print(f"  {TABLES_HPP.relative_to(REPO_ROOT)}:{tables_header_line} {tables_header_text}")
 
+    active_table_source = (
+        "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+    )
     inert_artifacts = (
         "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
-        "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
         "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp",
         "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp",
         "docs/runtime_config/fixtures/generated_outputs/generated_source_owned_runtime_config.example.hpp",
@@ -222,6 +224,9 @@ def main() -> int:
         "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json",
         "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json",
     )
+    print("- active compile-time table-content source:")
+    for path in active_table_source:
+        print(f"  {path}")
     print("- generated-source-owned inert artifact paths:")
     for path in inert_artifacts:
         print(f"  {path}")
@@ -230,7 +235,7 @@ def main() -> int:
         "src/modes/UltimateIdentityRuntimeTables.hpp -> replace or alias the compile-time table contents",
         "src/modes/UltimateRuntimeConfigInterpreter.hpp -> preserve kSourceOwnedCurrentBaselineRuntimeTables, kKnownGoodRuntimeConfig, and kSourceOwnedCurrentBaselineRuntimeConfig",
         "src/modes/Ultimate.cpp -> keep GetActiveRuntimeConfigState() and ResolveActiveRuntimeConfig() on the stable source-owned publication path",
-        "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp -> inert baseline artifact stays non-active",
+        "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp -> active compile-time table-content source; generic installers must refuse writes",
     )
     print("- Alternative B candidate touchpoints:")
     for touchpoint in alternative_b_touchpoints:
