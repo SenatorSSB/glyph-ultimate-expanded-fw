@@ -21,6 +21,9 @@ Read this before using older calibration packets as roadmap input.
   `ee5fd35c4ce00e31d9a00905c771699ad17517b9` is now recorded as
   HARDWARE_PASS when preserving the existing active RuntimeConfigView
   publication path.
+- The current accepted baseline predates the Revision-2 exact artifact-identity
+  contract. Missing legacy candidate/artifact identity is `UNKNOWN`; those
+  reports cannot authorize any new or rebuilt candidate.
 - The generated canonical-grid candidate at
   `e643017c1577c9ca2b94581fa6f18c0dfb1bac9b` is now recorded as
   HARDWARE_FAIL and must not merge. The failure concerns generated table
@@ -56,6 +59,11 @@ automation from this context document.
 
 ## Forward Plan
 
+- The canonical executable queue is now
+  `docs/project/ACTIVE_AGENT_QUEUE.md`. Current effective authorized runway is
+  zero, historical candidate supply is not implementation authority, and the
+  next control-plane state is `PLANNING_REQUIRED` followed by independent
+  Curator authorization. This is not a global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
@@ -83,5 +91,7 @@ automation from this context document.
   `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`.
 - Runtime-config surface: `docs/runtime_config/README.md`.
 - Agent framework: `docs/agent_framework/README.md`.
+- Authorization/runway: `docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md`.
+- Executable queue: `docs/project/ACTIVE_AGENT_QUEUE.md`.
 - Archive index: `docs/archive/README.md`.
 - Calibration evidence index: `docs/calibration/INDEX.md`.

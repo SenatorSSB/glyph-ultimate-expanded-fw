@@ -175,6 +175,54 @@ def main() -> int:
         run(root, "commit", "-m", "outside checker allowlist")
         expect_scope_failure(root, "configurator", "out-of-scope changed path: tools/not_allowed.py")
 
+    for path in (
+        "AGENTS.md",
+        "docs/WORKFLOW.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
+    ):
+        with tempfile.TemporaryDirectory(prefix="glyph-checker-context-") as directory:
+            root = fresh_repo(Path(directory))
+            run(root, "switch", "-c", "feature-unauthorized-control-plane")
+            write(root, path, "unauthorized authority change\n")
+            run(root, "add", path)
+            run(root, "commit", "-m", "unauthorized control plane")
+            context = collect_checker_context(repo_root=root, base="configurator")
+            try:
+                validate_feature_scope(context, allowed_paths=("docs/runtime_config/",))
+            except ScopeValidationError as exc:
+                if f"out-of-scope changed path: {path}" not in str(exc):
+                    raise AssertionError(
+                        f"unexpected unauthorized control-plane result: {exc!s}"
+                    ) from exc
+            else:
+                raise AssertionError(f"unauthorized control-plane path was accepted: {path}")
+
+    with tempfile.TemporaryDirectory(prefix="glyph-checker-context-") as directory:
+        root = fresh_repo(Path(directory))
+        run(root, "switch", "-c", "curation-authorized-queue")
+        write(root, "docs/project/ACTIVE_AGENT_QUEUE.md", "queue\n")
+        run(root, "add", "docs/project/ACTIVE_AGENT_QUEUE.md")
+        run(root, "commit", "-m", "authorized queue")
+        context = collect_checker_context(repo_root=root, base="configurator")
+        validate_feature_scope(
+            context, allowed_paths=("docs/project/ACTIVE_AGENT_QUEUE.md",)
+        )
+
+    with tempfile.TemporaryDirectory(prefix="glyph-checker-context-") as directory:
+        root = fresh_repo(Path(directory))
+        run(root, "switch", "-c", "feature-control-plane-near-match")
+        write(root, "docs/project/ACTIVE_AGENT_QUEUE.md.bak", "not canonical\n")
+        run(root, "add", "docs/project/ACTIVE_AGENT_QUEUE.md.bak")
+        run(root, "commit", "-m", "control plane near match")
+        context = collect_checker_context(repo_root=root, base="configurator")
+        try:
+            validate_feature_scope(context, allowed_paths=("docs/runtime_config/",))
+        except ScopeValidationError as exc:
+            if "out-of-scope changed path" not in str(exc):
+                raise AssertionError(f"unexpected control-plane near-match result: {exc!s}") from exc
+        else:
+            raise AssertionError("near-match control-plane path was accepted")
+
     historical = Path(__file__).with_name("check_glyph_source_owned_table_replacement_generator_contract.py")
     spec = importlib.util.spec_from_file_location("historical_branch_policy", historical)
     if spec is None or spec.loader is None:
@@ -209,7 +257,10 @@ def main() -> int:
         "CTX-12-detached-missing-base-rejected",
         "CTX-13-configurator-content-accepted",
         "CTX-14-checker-allowlist-rejected",
-        "CTX-15-historical-exact-branch-remains-specific",
+        "CTX-15-unauthorized-authority-paths-rejected",
+        "CTX-16-exact-role-scoped-queue-path-accepted",
+        "CTX-17-control-plane-near-match-rejected",
+        "CTX-18-historical-exact-branch-remains-specific",
     )
     print("glyph_checker_context: PASS; cases=" + ",".join(case_ids))
     return 0

@@ -8,7 +8,8 @@ only. It does not implement a runner, daemon, scheduled automation, browser or
 device write path, runtime-loaded profile, or active firmware routing change.
 Current operations are Codex/OpenAI-only, and the supervisor is expected to
 execute the bounded workflow itself rather than merely report shell commands
-for a human to run.
+for a human to run. The selected mode is a Minimal Supervisor with on-demand
+consultative Planner/Curator roles and a hard manual H2/H3 hardware lane.
 
 ## Scope
 
@@ -22,9 +23,10 @@ Repo-only scope:
 
 Out of scope:
 
-- Runner prompt.
-- Runner implementation.
+- Custom-runner prompt or implementation.
 - `scripts/agent_runner.py`.
+- External schedule mutation; repository task configurations are documentation
+  only.
 - Browser/device writes.
 - WebSerial/device write.
 - Protobuf binary write.
@@ -36,11 +38,16 @@ Out of scope:
 
 ## Topology
 
-Use a thin supervisor with bounded specialist subagents:
+Use separated generation, judgment, execution, and evidence roles:
 
-- The supervisor owns prioritization, branch classification, gates, handoffs,
-  branch creation, validation, bounded fix loops, commit, push, safe merge
-  recommendation, status updates, and queue reseeding.
+- Portfolio Planner proposes non-authoritative candidate supply.
+- Work-Order Curator independently authorizes complete Ready or narrowly
+  Preauthorized work and owns the canonical queue.
+- The Implementation Supervisor recovers legitimate work, executes at most one
+  new authorized item, owns integrated mutation and publication, and never
+  self-reseeds.
+- The Hardware Evidence Processor validates and records human-supplied results
+  for one exact candidate/artifact pair and never fabricates testing.
 - Subagents inspect or edit within explicit scope and return compact evidence.
 - The judge/watchdog reviews loop risk and merge readiness.
 - Long work is many bounded cycles, not one unbounded monolithic conversation.
@@ -48,6 +55,13 @@ Use a thin supervisor with bounded specialist subagents:
 ## Contracts
 
 - `MODEL_ROUTING.md` - current recommended model and effort routing.
+- `AUTHORIZATION_AND_RUNWAY.md` - authority map, Ready/Preauthorized semantics,
+  packet freshness, runway, liveness, and concurrency.
+- `WORK_ORDER_TEMPLATE.md` - complete executable/Preauthorized contract shape.
+- `HARDWARE_EVIDENCE.md` - H0-H3 risk and exact-snapshot acceptance lane.
+- `USER_DIRECTION.md` - actual human direction only.
+- `SCHEDULED_TASKS.md` - exact copy-paste scheduled/manual role configurations;
+  it does not create schedules.
 - `SUPERVISOR_CONTRACT.md` - supervisor ownership and cycle contract.
 - `SUBAGENT_CONTRACTS.md` - specialist role contracts and handoff template.
 - `CYCLE_STATE_MACHINE.md` - bounded cycle state machine.
@@ -86,3 +100,7 @@ Current evidence boundary: active publication remains source-owned through
 `GetActiveRuntimeConfigState()`, `ResolveActiveRuntimeConfig()`, and
 `&kSourceOwnedCurrentBaselineRuntimeConfig`. Runtime-loaded config is not
 implemented. Nunchuk remains NOT_TESTED. Root cause remains unproven.
+
+The canonical executable queue is
+`docs/project/ACTIVE_AGENT_QUEUE.md`. Only `READY` is immediately executable;
+Planner packets, roadmap prose, and branch names never authorize work.

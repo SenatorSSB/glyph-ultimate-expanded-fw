@@ -15,16 +15,21 @@ implementation is deferred.
    - Read `docs/WORKFLOW.md`.
    - Read `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`.
    - Read `docs/agent_framework/README.md`.
+   - Read `docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md`.
+   - Read `docs/project/ACTIVE_AGENT_QUEUE.md`.
 
 2. Preflight repo
    - Confirm base branch, target branch, and working tree.
    - Confirm required cleanup/current docs exist.
    - Stop on dirty tree unless the task explicitly authorizes working with it.
 
-3. Select ready batch
-   - Choose a small objective with clear allowed files.
-   - Assign initial branch classification.
-   - Name verification and stop rules.
+3. Recover and select authorized work
+   - Recover at most one legitimate contracted unfinished item first.
+   - Select the highest-priority complete `READY` work order.
+   - If none, mechanically activate at most one valid `PREAUTHORIZED` item.
+   - Never reinterpret activation conditions, promote Planner candidates, or
+     self-reseed.
+   - Complete at most one new work order.
 
 4. Spawn bounded subagents
    - Use explicit handoffs.
@@ -44,10 +49,18 @@ implementation is deferred.
    - `FIRMWARE_SOURCE_ACTIVE_BEHAVIOR`
    - `FORBIDDEN_OR_UNSAFE`
 
-7. Merge or stop
+7. Publish candidate, merge, or stop
    - Merge recommendation is allowed only after validation and gate review.
    - Active behavior change requires build proof and hardware PASS before
      merge.
+   - H2/H3 stops after exact candidate/artifact publication with
+     `HARDWARE_TEST_REQUIRED`; record full Git SHA and artifact SHA-256.
+   - A later `HARDWARE_VALIDATED` recovery cycle verifies the pinned candidate
+     ref, preserved artifact hash/locator, exact PASS record, zero evidence
+     gaps, and fresh-configurator drift before merging only that candidate
+     tree and transitioning the queue item to `DONE`.
+   - `HARDWARE_FAILED` never publishes candidate source. PARTIAL/INCONCLUSIVE
+     remains `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
    - Forbidden or unsafe paths stop.
 
 8. Update status docs
@@ -56,10 +69,18 @@ implementation is deferred.
      facts change.
    - Do not convert status docs into run logs.
 
-9. Reseed next queue
-   - Name the next concrete ready item.
-   - Preserve blocked items with explicit blockers.
-   - Avoid process-only churn.
+9. Recompute runway and liveness
+   - Report Ready, recorded/activatable/invalidated Preauthorized,
+     hardware-pending, and effective runway separately.
+   - Return `PLANNING_REQUIRED` for absent/stale/consumed candidate supply.
+   - Return `CURATION_REQUIRED` for substantive authorization,
+     reauthorization, or interpretation.
+   - At zero runway, invalidated Preauthorization or failed hardware takes
+     precedence over absent/stale Planner supply and yields primary
+     `CURATION_REQUIRED`; hardware failure also carries supporting
+     `REPAIR_REQUIRED`.
+   - Treat candidate-local `HARDWARE_TEST_REQUIRED` and `REPAIR_REQUIRED` as
+     supporting signals, not the exclusive portfolio liveness state.
 
 10. Return compact final report
     - Summary.

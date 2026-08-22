@@ -2,14 +2,15 @@
 
 Status label: CURRENT.
 
-This branch is not doing runner work.
+This repository does not need a bespoke orchestration runner for the current
+workflow: `CUSTOM_RUNNER_NOT_REQUIRED`.
 
 ## Not Implemented Here
 
-- Runner prompt.
-- Runner daemon.
+- Custom-runner prompt or daemon.
 - `scripts/agent_runner.py`.
-- Scheduled automation.
+- External scheduled automation creation or mutation. Exact operator-facing
+  task prompts exist in `SCHEDULED_TASKS.md`, but they do not create schedules.
 - Browser/device write.
 - WebSerial/device write.
 - Protobuf binary write.
@@ -20,7 +21,11 @@ This branch is not doing runner work.
 
 ## Future Relationship
 
-The framework docs, schemas, and examples may later be consumed by a runner.
+The framework docs, schemas, queue, and examples may later be consumed by a
+runner only if a concrete unmet requirement justifies it, such as headless CI,
+a machine API, provider-neutral orchestration, strict external budgets,
+regulated audit, special authentication, or hard isolation that native Codex
+cannot provide.
 Any future runner must remain subordinate to repository gates:
 
 - It must not bypass build proof.

@@ -237,7 +237,9 @@ def validate_feature_scope(
     any other branch, including detached HEAD, a base is mandatory when
     `require_scope` is true.  Protected paths are checked before the optional
     checker-specific allowlist, so an allowlist cannot authorize active source
-    changes accidentally.
+    changes accidentally. Authority-defining docs and the canonical queue do
+    not receive a global exception: each role/checker must authorize its exact
+    control-plane paths explicitly.
     """
 
     if not require_scope or context.branch == default_branch:
