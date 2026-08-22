@@ -63,11 +63,14 @@ automation from this context document.
 
 ## Forward Plan
 
-- The canonical executable queue is now
-  `docs/project/ACTIVE_AGENT_QUEUE.md`. Current effective authorized runway is
-  zero, historical candidate supply is not implementation authority, and the
-  next control-plane state is `PLANNING_REQUIRED` followed by independent
-  Curator authorization. This is not a global hardware wait.
+- The canonical executable queue is
+  `docs/project/ACTIVE_AGENT_QUEUE.md`. Curator review of Planner packet
+  `glyph-portfolio-20260823-0152` authorized four independent H0/H1 items as
+  `READY`; no Preauthorization is recorded, and three dependency successors
+  require fresh curation after their predecessors. The
+  effective authorized runway is four, meeting the recorded target; liveness
+  is `RUNWAY_OK`. Historical or unreviewed candidate supply remains
+  non-authoritative, and this is not a global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
