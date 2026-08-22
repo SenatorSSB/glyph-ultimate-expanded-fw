@@ -186,8 +186,14 @@ source-owned include chain while preserving the existing source-owned active
 publication path. The source-aligned Alternative B alias shape has historical
 hardware PASS, but any new table-byte content needs its own source authority,
 canonical build, exact candidate/artifact identity, and hardware PASS. The
-source-owned active-state preselection `HARDWARE_PASS` and active-storage
-`HARDWARE_FAIL` evidence remain distinct.
+source-owned active-state preselection `HARDWARE_PASS` evidence, source-owned
+active-state `HARDWARE_PASS` evidence, and active-storage `HARDWARE_FAIL`
+evidence remain distinct. The phrases "generated tables not wired active",
+"future hardware gate required before generated source-owned tables are
+selected active", and "future hardware gate required before generated
+source-owned baseline artifact is selected active" remain solely as stale
+checker markers pending `GP-SRC-001`; they are not current claims about the
+included active table-content header.
 Nunchuk `NOT_TESTED`.
 The candidate-generation diff diagnosis remains hardware-candidate material
 because table contents differ rather than formatting alone.
