@@ -48,6 +48,22 @@ roadmap authority.
 architecture, scope, user/product decisions, and validation are resolved. Only
 Curator or explicit user work-order authority may place new work in Ready.
 
+Hardware risk does not revoke complete authorization. A source-grounded H2/H3
+item may be Ready and implemented through exact candidate publication when its
+behavioral claim and every required product, domain, source-authority,
+architecture, scope, and validation decision are durably resolved in accepted
+repository authority and the work order. No fresh human approval is required
+solely because the authorized work changes active firmware behavior.
+Implementation autonomy is not merge autonomy: H2/H3 must stop at the hardware
+gate and cannot merge before exact-snapshot physical PASS.
+
+If a proposed behavior still requires user intent, a domain/product choice,
+new source authority, support for an undocumented capability, or any other
+substantive judgment outside Curator's configured authority, it is not Ready.
+Curator must use `USER_DECISION_GATED`, `EVIDENCE_GATED`, another accurate
+non-executable disposition, or decline authorization; it may not invent the
+missing decision merely to create firmware work.
+
 ### Preauthorized
 
 `PREAUTHORIZED` means Curator has already made the substantive decision that

@@ -47,6 +47,18 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   initially manual or low-frequency, so stale candidate supply can recover
   without autonomous idea generation outrunning physical validation.
 
+### GLYPH-UD-005
+
+- Type: `Decision`
+- Status: `Active`
+- Source: current user-directed governance correction supplied 2026-08-23
+- Direction: Authorized, source-grounded firmware behavior work may be
+  implemented autonomously through the candidate stage when substantive
+  behavior, product, domain, source-authority, architecture, scope, and
+  validation decisions are already resolved. H2/H3 remains physically gated
+  before merge. Unresolved behavior or product decisions still require
+  user/domain input.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is

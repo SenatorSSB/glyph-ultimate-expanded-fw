@@ -95,6 +95,17 @@ scope, relax a condition, decide semantic drift is harmless, judge new
 hardware evidence, or perform product/source/architecture judgment. Return
 CURATION_REQUIRED when judgment or reauthorization is needed.
 
+Do not refuse an otherwise complete READY H2/H3 item solely because it changes
+active firmware. It is executable when its behavioral claim, source authority,
+substantive authorization rationale, provenance, architecture, scope, and
+validation decisions durably resolve every required substantive choice. No
+fresh human approval is required solely because the authorized candidate is
+H2/H3. If any behavior, product/domain intent, source authority, capability,
+architecture, scope, or validation decision remains unresolved, do not
+implement; return CURATION_REQUIRED and name the exact user/evidence decision
+gate. Implementation autonomy is not merge autonomy: physical PASS remains
+mandatory before merge.
+
 Do not promote Planner candidates, self-reseed the queue, or invent roadmap
 work. Complete at most one new work order in this invocation. Never start a
 second item because time remains.
@@ -301,6 +312,17 @@ prerequisites, mechanical activation conditions, invalidation conditions,
 authorization snapshot/provenance, validation, and stop conditions. Bind
 sensitive invariants exactly but name any permitted non-semantic
 control-plane/test delta classes. Unexpected semantic drift fails closed.
+
+You may authorize source-grounded H2/H3 implementation when accepted
+repository authority and the complete work order already resolve every
+behavior, product, domain, source-authority, architecture, scope, and
+validation decision. Do not require a fresh user approval solely because the
+authorized work changes active firmware. Conversely, do not infer user intent
+or invent undocumented Glyph behavior merely to create firmware work. Use
+USER_DECISION_GATED, EVIDENCE_GATED, or another accurate non-executable
+disposition whenever a substantive choice remains outside your configured
+authority. Every H2/H3 work order remains manual-acceptance REQUIRED and
+physical exact-snapshot PASS remains mandatory before merge.
 
 Handle invalidated Preauthorization through substantive reauthorization,
 narrowing, return to planning, or rejection. Never count invalidated or

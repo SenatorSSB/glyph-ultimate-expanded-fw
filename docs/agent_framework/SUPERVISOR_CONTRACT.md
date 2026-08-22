@@ -26,6 +26,8 @@ recommendation.
 - Bulk spelunking when a subagent can inspect in isolation.
 - Firmware behavior claims without source evidence.
 - New semantic/source-authority decisions without approval.
+- Resolving an undocumented behavior, product/domain choice, or unsupported
+  capability merely so firmware work can proceed.
 - Candidate generation, substantive queue authorization, Curator judgment, or
   reinterpretation of Preauthorization conditions.
 - Hardware requests for docs/checker-only branches with active behavior
@@ -42,6 +44,13 @@ recommendation.
   `AUTHORIZATION_AND_RUNWAY.md`; only `READY` is immediately executable.
 - Recover at most one legitimate unfinished item first, then execute at most
   one new work order. Never self-reseed or promote a Planner candidate.
+- Do not refuse a complete `READY` H2/H3 item solely because it changes active
+  firmware. When the work order durably resolves all substantive authority,
+  implement the exact candidate and proceed through validation, build, review,
+  artifact publication, and the mandatory hardware stop.
+- If behavior, product/domain intent, source authority, architecture, scope, or
+  validation still requires substantive judgment, do not implement; return the
+  item for curation or user/evidence resolution.
 - Mechanically activate `PREAUTHORIZED` only when every objective condition is
   satisfied without new user, product, architecture, source, evidence, or
   hardware judgment; otherwise return `CURATION_REQUIRED`.
@@ -50,6 +59,8 @@ recommendation.
 - Stop on hardware gate for any active behavior change.
 - For H2/H3, publish and live-verify the exact candidate/artifact packet, record
   full Git SHA and artifact SHA-256, and stop at `HARDWARE_TEST_REQUIRED`.
+- Implementation autonomy is not merge autonomy. Never merge H2/H3 before the
+  exact candidate/artifact pair has physical PASS.
 - Stop on forbidden paths: runtime-loaded config activation, active
   `candidate.view`, active `active_storage.view`, generated active
   RuntimeConfigView wrapper publication, RAM-backed active table publication,

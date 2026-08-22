@@ -73,7 +73,17 @@ inferred, mark it as inferred. If behavior is unknown, say unknown.
 
 ## Stop Conditions
 
-Stop before implementing if the task requires firmware behavior changes,
-runtime-loaded config, device write, protobuf binary write, persistence,
-flashing automation, neutral profile schema changes, game-semantic decisions,
-vendor export format decisions, or any undocumented backend capability claim.
+Stop before firmware-behavior implementation when no complete `READY` work
+order authorizes it, when a required substantive product, domain,
+source-authority, architecture, scope, or validation decision remains
+unresolved, or when the work crosses a forbidden boundary. A complete `READY`
+H2/H3 work order with resolved substantive authority may be implemented as an
+exact candidate, but it must never merge before its required exact-snapshot
+hardware PASS.
+
+Stop before runtime-loaded config, device write, protobuf binary write,
+persistence, flashing automation, neutral profile schema changes,
+game-semantic decisions, vendor export format decisions, or any undocumented
+backend capability claim unless their separate explicit approval and source
+requirements are satisfied. Do not use H2/H3 authorization to bypass those
+boundaries.

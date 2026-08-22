@@ -39,8 +39,12 @@ Read this before using older calibration packets as roadmap input.
 
 Safe current work is docs/tools/checker work and source-owned realization
 generator work that produces reviewable source-owned tables/routing source.
-Behavior-changing firmware source deltas require build proof, source-backed
-review, and hardware PASS before merge.
+A complete `READY` H2/H3 work order inside the approved current path may be
+implemented as a candidate when its substantive behavior and authority are
+already resolved; behavior-changing firmware source deltas still require build
+proof, source-backed review, and exact-snapshot hardware PASS before merge.
+Unresolved behavior decisions and forbidden active-publication paths still stop
+before implementation.
 
 Do not implement runtime-loaded config, runtime-config storage, WebSerial/device
 write, protobuf binary write, backend config write paths, or flashing
