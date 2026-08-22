@@ -10,10 +10,12 @@ and `docs/calibration/INDEX.md`.
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. The current effective authorized runway is zero and no current
-Planner packet exists, so the next operational action is a fresh broad Planner
-audit followed by Curator authorization. This candidate-supply shortfall is not
-a portfolio-wide hardware/evidence wait.
+implementation. Independent Curator review of Planner packet
+`glyph-portfolio-20260823-0152` records four Ready H0/H1 items and no
+Preauthorization; three dependency successors require fresh curation after
+their predecessors. Effective authorized runway is four against target four,
+so liveness is `RUNWAY_OK`; external-gated supply does not establish a
+portfolio-wide wait.
 
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The
@@ -82,8 +84,9 @@ Current safe queue after the generator/checker hardening:
   `--check-offline-export-package`) aligned with their fixtures;
 - add an inert generated-source-owned artifact index only if future generator
   outputs need a stable catalog.
-- keep the offline candidate-prep wrapper and checker aligned with the dry-run
-  plan, refusal cases, and approved inert Alternative B source path.
+- keep the candidate-prep wrapper and checker aligned with non-mutating dry-run
+  plans and fail-closed refusal of unauthorized writes to the active
+  Alternative B table-content header.
 The candidate-generation diff diagnosis for the inert layout-spec fixture is
 `TABLE_CONTENT_DIFFERENT`, with the candidate profile name and 26 table
 records drifting from the current source-owned baseline while `kY2Table` and
@@ -122,12 +125,19 @@ Generator lane references in scope:
 the explicit `--emit-from-layout-spec` packet-input mode,
 `generated_outputs/generated_source_owned_runtime_config.example.hpp`, and
 `tools/generate_source_owned_runtime_config.py`.
-The offline install wrapper `tools/install_generated_source_owned_runtime_config.py` uses `--from-layout-spec`, `--from-generated-output`, and `--dry-run` to preview or write the inert alias path without changing active behavior.
+The install wrapper `tools/install_generated_source_owned_runtime_config.py`
+uses `--from-layout-spec`, `--from-generated-output`, and `--dry-run` to preview
+or write `GeneratedRuntimeConfigBaseline.current.hpp`. The header is active
+compile-time table-content source through `UltimateIdentityRuntimeTables.hpp`;
+writing it can change active behavior even though the source-owned
+`RuntimeConfigView` publication path remains unchanged. `GP-SRC-001` is Ready
+to remove the stale inert classification and fail-close legacy write routes.
 The candidate-prep wrapper `tools/prepare_source_owned_candidate_branch.py`
 adds a dry-run plan for
-`runtime-config-install-workflow-candidate-generation`, keeping the approved
-inert Alternative B source path explicit and refusing direct writes on
-`configurator`.
+`runtime-config-install-workflow-candidate-generation`. Its default plan is
+non-mutating, while explicit `--write-source` can write the same active
+table-content header on a clean non-`configurator` branch; that route is not
+current production authority and is inside `GP-SRC-001` guardrail scope.
 Next safe implementation branch should focus on overlay/preserve
 candidate-generation semantics and checker enforcement: full replacement must
 specify every active table, overlay/preserve must copy unspecified tables from
@@ -169,18 +179,15 @@ and only validates the current source-owned baseline shape. Future
 implementation must be hardware-gated if active source selection behavior
 changes.
 
-The generated tables not wired active boundary remains intact except for the
-Alternative B generated-table alias candidate shape that preserves the existing
-active publication path and is now hardware-passed. The source-owned
-active-state preselection `HARDWARE_PASS` evidence and active-storage
-`HARDWARE_FAIL` evidence remain distinct; any different future generated
-source-owned table selection still needs its own source authority, build proof,
-and hardware gate.
-future hardware gate required before generated source-owned tables are selected
-active. source-owned active-state `HARDWARE_PASS` evidence and
-`GeneratedRuntimeConfigBaseline.current.hpp` remain part of this lane.
-future hardware gate required before generated source-owned baseline artifact
-is selected active.
+Generated `RuntimeConfigView` wrappers, `candidate.view`, and RAM-backed active
+storage remain not wired active. The generated baseline header is different:
+it already supplies the active compile-time table bodies through the
+source-owned include chain while preserving the existing source-owned active
+publication path. The source-aligned Alternative B alias shape has historical
+hardware PASS, but any new table-byte content needs its own source authority,
+canonical build, exact candidate/artifact identity, and hardware PASS. The
+source-owned active-state preselection `HARDWARE_PASS` and active-storage
+`HARDWARE_FAIL` evidence remain distinct.
 Nunchuk `NOT_TESTED`.
 The candidate-generation diff diagnosis remains hardware-candidate material
 because table contents differ rather than formatting alone.
