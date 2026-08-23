@@ -382,25 +382,64 @@ def prepare(artifact: dict[str, Any], manifest: dict[str, Any], *, hardware_cand
         "source_mutation": False,
     }
     packet["prepared_semantic_digest"] = digest(packet)
+    from source_owned_cpp_preview import validate_prepared_packet
+
+    validate_prepared_packet(packet, test_mode=artifact.get("provenance_class") == "synthetic_test")
     return packet
 
 
-def install_prepared(packet: dict[str, Any], target: Path, *, dry_run: bool = False) -> list[str]:
-    if packet.get("schema_version") != PREPARED_SCHEMA_VERSION:
-        _fail("unsupported prepared packet schema_version")
-    artifact, manifest = packet.get("artifact"), packet.get("manifest")
-    if not isinstance(artifact, dict) or not isinstance(manifest, dict):
-        _fail("prepared packet requires artifact and manifest")
-    production_gate(artifact, manifest)
-    if packet.get("target") != "inert_source_owned_artifact_only":
-        _fail("forbidden publication target", "source_authority")
-    if "candidate.view" in str(target) or "active_storage.view" in str(target) or "RuntimeConfigView" in str(target):
-        _fail("forbidden publication path", "source_authority")
+def prepare_offline_packet(artifact: dict[str, Any], manifest: dict[str, Any]) -> dict[str, Any]:
+    """Wrap a non-production artifact in the same exact packet contract."""
+    packet = {
+        "schema_version": PREPARED_SCHEMA_VERSION,
+        "artifact": artifact,
+        "manifest": manifest,
+        "target": "inert_source_owned_artifact_only",
+        "source_mutation": False,
+    }
+    packet["prepared_semantic_digest"] = digest(packet)
+    from source_owned_cpp_preview import validate_prepared_packet
+
+    validate_prepared_packet(packet, test_mode=True)
+    return packet
+
+
+def validate_offline_output_target(target: Path, *, purpose: str) -> Path:
+    """Resolve an output target under the system isolated temporary root."""
     if not target.is_absolute():
-        _fail("install target must be absolute")
-    text = json.dumps(artifact, indent=2, sort_keys=True) + "\n"
-    if dry_run:
-        return [f"would write {target} ({len(text.encode('utf-8'))} bytes)"]
+        _fail(f"{purpose} target must be absolute")
+    temp_root = Path(tempfile.gettempdir()).resolve()
+    raw_temp_root = Path(tempfile.gettempdir())
+    normalized = Path(os.path.abspath(os.fspath(target)))
+    resolved = target.resolve(strict=False)
+    forbidden = ("GeneratedRuntimeConfigBaseline", "candidate.view", "active_storage.view", "RuntimeConfigView")
+    if any(token.casefold() in str(normalized).casefold() for token in forbidden):
+        _fail(f"forbidden publication: {purpose} target is an active-publication-like path", "source_authority")
+    try:
+        if os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(temp_root))]) != os.path.normcase(os.fspath(temp_root)):
+            _fail(f"{purpose} target must be under an isolated temporary directory", "source_authority")
+    except ValueError:
+        _fail(f"{purpose} target is outside the isolated temporary directory", "source_authority")
+    cursor = Path(normalized.anchor)
+    for component in normalized.parts[1:-1]:
+        cursor /= component
+        if cursor.is_symlink():
+            resolved_cursor = cursor.resolve(strict=False)
+            try:
+                within_temp = os.path.commonpath([os.path.normcase(os.fspath(resolved_cursor)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(temp_root))
+                temp_under_alias = os.path.commonpath([os.path.normcase(os.fspath(resolved_cursor)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(resolved_cursor))
+                raw_under_temp = os.path.commonpath([os.path.normcase(os.fspath(cursor)), os.path.normcase(os.fspath(raw_temp_root))]) == os.path.normcase(os.fspath(raw_temp_root))
+            except ValueError:
+                within_temp = temp_under_alias = raw_under_temp = False
+            if raw_under_temp or not temp_under_alias:
+                _fail(f"{purpose} target is not an isolated path: symlink alias", "source_authority")
+    if target.is_symlink():
+        _fail(f"{purpose} target may not be a symlink", "source_authority")
+    return resolved
+
+
+def _atomic_write_text(target: Path, text: str, *, purpose: str) -> None:
+    validate_offline_output_target(target, purpose=purpose)
     target.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=f".{target.name}.", dir=str(target.parent), text=True)
     try:
@@ -414,5 +453,17 @@ def install_prepared(packet: dict[str, Any], target: Path, *, dry_run: bool = Fa
             os.unlink(temp_name)
         except OSError:
             pass
-        _fail(f"atomic install failed: {exc}", "integrity")
+        _fail(f"atomic {purpose} failed: {exc}", "integrity")
+
+
+def install_prepared(packet: dict[str, Any], target: Path, *, dry_run: bool = False) -> list[str]:
+    from source_owned_cpp_preview import validate_prepared_packet
+
+    validate_prepared_packet(packet, test_mode=packet.get("artifact", {}).get("provenance_class") == "synthetic_test")
+    artifact = packet["artifact"]
+    validate_offline_output_target(target, purpose="install")
+    text = json.dumps(artifact, indent=2, sort_keys=True) + "\n"
+    if dry_run:
+        return [f"would write {target} ({len(text.encode('utf-8'))} bytes)"]
+    _atomic_write_text(target, text, purpose="install")
     return [f"wrote {target}", f"artifact digest {artifact['artifact_semantic_digest']}"]

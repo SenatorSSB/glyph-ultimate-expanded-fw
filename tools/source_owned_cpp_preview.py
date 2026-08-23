@@ -4,8 +4,6 @@
 from __future__ import annotations
 
 import json
-import os
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +17,8 @@ from source_owned_generator_modes import (
     digest,
     production_gate,
     tables_digest,
+    _atomic_write_text,
+    validate_offline_output_target,
     validate_manifest,
 )
 
@@ -164,30 +164,5 @@ def render_cpp_preview(packet: dict[str, Any], *, test_mode: bool = False) -> st
 
 
 def write_preview(packet: dict[str, Any], target: Path, *, test_mode: bool = False) -> None:
-    if not target.is_absolute():
-        _fail("preview target must be absolute")
-    root = Path(__file__).resolve().parents[1]
-    target_text = str(target)
-    forbidden = ("GeneratedRuntimeConfigBaseline", "candidate.view", "active_storage.view", "RuntimeConfigView")
-    temp_roots = [Path(tempfile.gettempdir()).resolve(), Path("/private/tmp").resolve()]
-    resolved = target.resolve(strict=False)
-    normalized_target = Path(os.path.abspath(os.fspath(target)))
-    raw_temp_roots = [Path(os.path.abspath(tempfile.gettempdir())), Path(os.path.abspath("/private/tmp"))]
-    raw_allowed = any(os.path.commonpath([os.path.normcase(os.fspath(normalized_target)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(temp_root)) for temp_root in raw_temp_roots)
-    cursor = Path(normalized_target.anchor)
-    unsafe_parent_alias = False
-    for component in normalized_target.parts[1:-1]:
-        cursor /= component
-        if cursor.is_symlink() and not any(cursor == root or cursor in root.parents for root in raw_temp_roots):
-            unsafe_parent_alias = True
-    if unsafe_parent_alias or target.is_symlink() or (resolved != normalized_target and not raw_allowed) or any(token in target_text for token in forbidden):
-        _fail("preview target is not an isolated temporary/offline path", "source_authority")
-    try:
-        if os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(root))]) == os.path.normcase(os.fspath(root)):
-            _fail("preview target is inside the repository", "source_authority")
-    except ValueError:
-        pass
-    if not any(os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(temp_root)) for temp_root in temp_roots):
-        _fail("preview target must be under an isolated temporary directory", "source_authority")
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(render_cpp_preview(packet, test_mode=test_mode), encoding="utf-8")
+    validate_offline_output_target(target, purpose="preview")
+    _atomic_write_text(target, render_cpp_preview(packet, test_mode=test_mode), purpose="preview")

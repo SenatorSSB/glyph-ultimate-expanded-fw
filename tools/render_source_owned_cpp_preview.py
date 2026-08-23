@@ -21,6 +21,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         packet = load_json(args.packet)
         if args.output:
+            if args.output.resolve(strict=False) == args.packet.resolve(strict=False):
+                raise GeneratorModesError("preview output may not overwrite input", "source_authority")
             write_preview(packet, args.output, test_mode=args.test_mode)
         else:
             sys.stdout.write(render_cpp_preview(packet, test_mode=args.test_mode))
@@ -32,4 +34,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

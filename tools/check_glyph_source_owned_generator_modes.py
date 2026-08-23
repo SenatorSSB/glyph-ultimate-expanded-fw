@@ -17,6 +17,7 @@ from source_owned_generator_modes import (
     generate,
     install_prepared,
     prepare,
+    prepare_offline_packet,
     production_gate,
     validate_input,
     validate_manifest,
@@ -116,7 +117,10 @@ def run() -> tuple[int, int]:
     expect_reject(lambda: validate_manifest(artifact, tampered), "preserved manifest row")
 
     with tempfile.TemporaryDirectory() as directory:
-        packet = prepare(synthetic_artifact, synthetic_manifest) if False else {"schema_version": 1, "artifact": artifact, "manifest": manifest, "target": "inert_source_owned_artifact_only"}
+        packet = prepare(artifact, manifest)
+        offline_packet = prepare_offline_packet(synthetic_artifact, synthetic_manifest)
+        assert offline_packet["prepared_semantic_digest"]
+        POSITIVE += 1
         target = Path(directory) / "artifact.json"
         before = target.exists()
         operations = install_prepared(packet, target, dry_run=True)
@@ -126,6 +130,7 @@ def run() -> tuple[int, int]:
         assert target.exists()
         POSITIVE += 1
         expect_reject(lambda: install_prepared(packet, Path(directory) / "candidate.view"), "forbidden publication")
+        expect_reject(lambda: install_prepared(packet, ROOT / "outside.json"), "isolated temporary")
 
     return POSITIVE, NEGATIVE
 
