@@ -482,7 +482,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 70107,
+      "file_size_bytes": 74372,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -512,6 +512,7 @@
         "evidence_root",
         "expect_evidence_rejection",
         "global_evidence_wait",
+        "global_evidence_wait_supported",
         "glyph_hardware_evidence_record",
         "hardware_evidence_contract_reference",
         "hardware_evidence_contract_version",
@@ -531,7 +532,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1574,
+      "line_count": 1685,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -563,6 +564,7 @@
         "evidence_root",
         "expect_evidence_rejection",
         "global_evidence_wait",
+        "global_evidence_wait_supported",
         "glyph_hardware_evidence_record",
         "hardware_evidence_contract_reference",
         "hardware_evidence_contract_version",
@@ -584,6 +586,8 @@
       "referenced_repository_path_prefixes": [
         "docs/../evidence.json",
         "docs/AGENT_CONTEXT.md",
+        "docs/CURRENT_STATE.md",
+        "docs/ROADMAP.md",
         "docs/WORKFLOW.md",
         "docs/agent_framework",
         "docs/agent_framework/",
@@ -625,7 +629,7 @@
         "docs/test_protocol.md"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "8cdf3ca2fbe1dec8f56c79b8810efede27471cb40e9f22202d48d2e1a44d1091",
+      "sha256": "a281f6291560a5ef85ffb389e04022b75aa3a0727bd123fc5aebf8a17cf16306",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

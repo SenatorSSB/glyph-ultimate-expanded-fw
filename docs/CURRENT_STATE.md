@@ -1,13 +1,13 @@
 # Glyph Current State
 
-Status label: CURRENT.
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-VAL-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}<!-- current-runway:end -->
 
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
 `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md` before proposing runtime-config
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
-**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; Curator review of partially consumed Planner packet `glyph-portfolio-20260823-1450` records `GP-HW-001` as Done while `GP-CTL-001` and `GP-VAL-002` remain Ready, and `GP-SRC-003` plus the six earlier items remain Done; zero recorded/mechanically activatable/invalidated Preauthorization, zero hardware-pending work, and effective authorized runway two against target four; liveness is `RUNWAY_LOW`, superseding the prior `CURATION_REQUIRED` state, which had itself superseded `PLANNING_REQUIRED`, and this is not a global hardware wait; the prepared-v2 C++ preview remains inactive and review-only; current official-configurator validation lane: `tools/check_glyph_official_configurator_validation.py`; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; `CUSTOM_RUNNER_NOT_REQUIRED`; exact role configurations are in `docs/agent_framework/SCHEDULED_TASKS.md`.
+**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; Curator review of partially consumed Planner packet `glyph-portfolio-20260823-1450` records `GP-HW-001` as Done while dependency-resolved `GP-VAL-002` remains Ready, and `GP-SRC-003` plus the six earlier items remain Done; the current-runway marker above is authoritative for runway counts and liveness, superseding prior `CURATION_REQUIRED` and `PLANNING_REQUIRED` states; this is not a global hardware wait; the prepared-v2 C++ preview remains inactive and review-only; current official-configurator validation lane: `tools/check_glyph_official_configurator_validation.py`; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; `CUSTOM_RUNNER_NOT_REQUIRED`; exact role configurations are in `docs/agent_framework/SCHEDULED_TASKS.md`.
 ## Current Known-Good State
 
 - `configurator` contains the latest Y2 layout source-owned port after the

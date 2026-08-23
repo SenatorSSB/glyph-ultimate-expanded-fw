@@ -245,6 +245,27 @@ RUNWAY_FIELDS = (
     "target_provenance",
 )
 
+CURRENT_RUNWAY_MARKER_START = "<!-- current-runway:start -->"
+CURRENT_RUNWAY_MARKER_END = "<!-- current-runway:end -->"
+CURRENT_RUNWAY_MARKER_FIELDS = (
+    "ready_ids",
+    "immediate_ready",
+    "recorded_preauthorized",
+    "mechanically_activatable_preauthorized",
+    "invalidated_preauthorized",
+    "hardware_pending",
+    "effective_authorized_runway",
+    "target_effective_authorized_runway",
+    "primary_liveness",
+    "global_evidence_wait_supported",
+)
+CURRENT_RUNWAY_MIRRORS = (
+    "docs/project/ACTIVE_AGENT_QUEUE.md",
+    "docs/AGENT_CONTEXT.md",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+)
+
 PRIMARY_LIVENESS_SIGNALS = {
     "RUNWAY_OK",
     "RUNWAY_LOW",
@@ -689,6 +710,89 @@ def derive_liveness(
     return "PLANNING_REQUIRED"
 
 
+def parse_current_runway_marker(text: str, rel_path: str) -> dict[str, object]:
+    start = text.count(CURRENT_RUNWAY_MARKER_START)
+    end = text.count(CURRENT_RUNWAY_MARKER_END)
+    if start != 1 or end != 1:
+        fail(
+            f"{rel_path} must contain exactly one current-runway marker pair; "
+            f"found {start} start and {end} end markers"
+        )
+    marker_start = text.index(CURRENT_RUNWAY_MARKER_START) + len(CURRENT_RUNWAY_MARKER_START)
+    marker_end = text.index(CURRENT_RUNWAY_MARKER_END, marker_start)
+    raw = text[marker_start:marker_end].strip()
+    try:
+        marker = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        fail(f"{rel_path} current-runway marker is not JSON: {exc.msg}")
+    if not isinstance(marker, dict):
+        fail(f"{rel_path} current-runway marker must be an object")
+    if set(marker) != set(CURRENT_RUNWAY_MARKER_FIELDS):
+        fail(f"{rel_path} current-runway marker fields do not match the contract")
+    return marker
+
+
+def require_current_runway_match(
+    actual: dict[str, object], expected: dict[str, object], rel_path: str
+) -> None:
+    if actual != expected or any(
+        type(actual[field]) is not type(expected[field])
+        for field in expected
+    ):
+        fail(
+            f"{rel_path} current-runway marker disagrees with canonical queue: "
+            f"expected {json.dumps(expected, sort_keys=True)}, "
+            f"found {json.dumps(actual, sort_keys=True)}"
+        )
+
+
+def check_current_runway_mirrors(
+    *,
+    items: list[dict[str, object]],
+    runway: dict[str, object],
+    expected_liveness: str,
+    global_wait_supported: bool,
+) -> None:
+    expected: dict[str, object] = {
+        "ready_ids": [item["id"] for item in items if item["status"] == "READY"],
+        "immediate_ready": runway["immediate_ready"],
+        "recorded_preauthorized": runway["recorded_preauthorized"],
+        "mechanically_activatable_preauthorized": runway[
+            "mechanically_activatable_preauthorized"
+        ],
+        "invalidated_preauthorized": runway["invalidated_preauthorized"],
+        "hardware_pending": runway["hardware_pending"],
+        "effective_authorized_runway": runway["effective_authorized_runway"],
+        "target_effective_authorized_runway": runway[
+            "target_effective_authorized_runway"
+        ],
+        "primary_liveness": expected_liveness,
+        "global_evidence_wait_supported": global_wait_supported,
+    }
+    def validate_mirror_text(text: str, rel_path: str) -> None:
+        actual = parse_current_runway_marker(text, rel_path)
+        require_current_runway_match(actual, expected, rel_path)
+
+    for rel_path in CURRENT_RUNWAY_MIRRORS:
+        validate_mirror_text(read_required(rel_path), rel_path)
+    mirror_path = CURRENT_RUNWAY_MIRRORS[0]
+    immediate_ready_literal = f'"immediate_ready":{expected["immediate_ready"]}'
+    stale_text = read_required(mirror_path).replace(
+        immediate_ready_literal,
+        f'"immediate_ready":{int(expected["immediate_ready"]) + 1}',
+        1,
+    )
+    if stale_text == read_required(mirror_path):
+        fail("current-runway adversarial fixture did not drift")
+    try:
+        validate_mirror_text(stale_text, "synthetic current-runway mirror")
+    except FrameworkDocsError:
+        pass
+    else:
+        fail("stale current-runway marker fixture was accepted")
+    pass_line("current queue/status mirrors match machine-derived runway state")
+
+
 def require_phrase(rel_path: str, phrase: str) -> None:
     text = read_required(rel_path)
     if normalize(phrase) not in normalize(text):
@@ -934,6 +1038,13 @@ def check_queue_contract() -> None:
         fail("hardware-pending work requires HARDWARE_TEST_REQUIRED supporting signal")
     if computed["hardware_failed"] and "REPAIR_REQUIRED" not in signals:
         fail("HARDWARE_FAILED work requires REPAIR_REQUIRED supporting signal")
+
+    check_current_runway_mirrors(
+        items=items,
+        runway=runway,
+        expected_liveness=expected_liveness,
+        global_wait_supported=global_wait["supported"],
+    )
 
     adversarial_cases = (
         (0, 4, "CONSUMED", True, False, False, False, False, "PLANNING_REQUIRED"),
