@@ -43,17 +43,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_OK"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -181,8 +181,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-003",
       "title": "Make manual-capture validation host-metadata safe",
-      "status": "READY",
-      "branch": "official-configurator-manual-capture-host-metadata",
+      "status": "DONE",
+      "branch": "codex/gp-config-003-host-metadata",
       "objective": "Ignore only explicitly enumerated operating-system metadata in the manual-capture tree while retaining strict rejection of unknown evidence entries and malformed captures.",
       "why_this_matters": "The current checker reports a false evidence failure solely because docs/export/manual_captures/.DS_Store exists as ignored host metadata.",
       "hardware_risk": "H0",
@@ -218,7 +218,7 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker/docs branch if an unknown evidence entry can evade rejection.",
       "status_documentation_updates": "Document the exact ignored host-metadata rule without recording a capture or compatibility result.",
-      "done_evidence": "Focused positive and adversarial cases pass, the live .DS_Store no longer creates a false failure, unknown evidence still fails, and independent review confirms no evidence weakening.",
+      "done_evidence": "Canonical implementation commit 38d50a3a3785b6b92ac6bac4fdf98dc5c3d890e5, merged into configurator at d740821ad94d7f9adee4dbeb06ead52f9c76bcc6; focused positive/adversarial cases, manual capture plan, docs navigation, and the clean runtime-config validation lane pass; live .DS_Store no longer creates a false failure; unknown evidence, directories, and symlinks still fail; independent review and repaired-scope re-review pass.",
       "stop_conditions": [
         "The implementation needs a wildcard ignore rule.",
         "Any evidence file or hash field would be skipped.",
@@ -432,13 +432,13 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `4`.
+- Immediate Ready runway: `3`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `4`.
-- Current liveness result: `RUNWAY_OK` at the recorded target of `4`.
+- Effective authorized runway: `3`.
+- Current liveness result: `RUNWAY_LOW` at `3` against the recorded target of `4`; this is a liveness signal, not a quota.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
 The four Ready items are independent current H0/H1 opportunities. No
@@ -499,7 +499,7 @@ surviving dependency candidates against live `configurator`
   inference excluded.
 - `GP-CONFIG-001`: `DONE`; current-vs-historical official-configurator checker
   classification shipped without product behavior change.
-- `GP-CONFIG-003`: `READY`; exact `.DS_Store` regular-file exception only.
+- `GP-CONFIG-003`: `DONE`; exact `.DS_Store` regular-file exception only, merged from `codex/gp-config-003-host-metadata`.
 - `GP-PROV-001`: `READY`; observed-only research and inert provenance schema,
   with CI integration and store selection excluded.
 - `GP-AUTH-001`: `USER_DECISION_GATED`; no production-authorized owned-table
