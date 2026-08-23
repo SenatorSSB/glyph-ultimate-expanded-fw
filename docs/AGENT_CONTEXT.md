@@ -64,20 +64,21 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-003","GP-SRC-004","GP-CONFIG-004","GP-VAL-003"],"immediate_ready":4,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Reviewed Planner packet
-  `glyph-portfolio-20260823-1450` remains partially consumed: `GP-SRC-003` is
-  restored to `READY` because its repaired feature commit is not an ancestor
-  of live `configurator` and the guarded gap remains reproducible there.
-  No Preauthorization, invalidated, or hardware-pending work is recorded; the
-  current-runway marker above is authoritative for counts and liveness.
-  `GP-AUTH-001` remains
-  user/source-authority gated and `GP-CONFIG-002` remains external-evidence
-  gated; historical or unreviewed supply remains non-authoritative, and this
-  is not a global hardware wait.
+  `glyph-portfolio-20260823-2349` is partially consumed after fresh curation.
+  `GP-SRC-003` is Ready only under prepared schema v2 with carried normalized
+  input and deterministic artifact/manifest regeneration; pushed tip
+  `2b734b26439e9028717becf0010e345cb5efce6c` failed independent review and must
+  not merge. `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are also Ready.
+  `GP-SRC-005` is recorded Preauthorized but WAITING and is not effective
+  runway. The current-runway marker above is authoritative; runway meets the
+  target at four. `GP-AUTH-001` remains user/source-authority gated and
+  `GP-CONFIG-002` remains dependent then external-evidence gated; this is not a
+  global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
