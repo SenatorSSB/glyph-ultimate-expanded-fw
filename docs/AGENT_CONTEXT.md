@@ -69,7 +69,7 @@ automation from this context document.
   while `GP-CTL-001` and dependency-resolved `GP-VAL-002` remain `READY`; `GP-SRC-003`
   is `DONE` after implementation commit
   `6cdc25363f1446dea8436cc874992e5adec158ad`. No Preauthorization or
-  hardware-pending work is recorded. Effective authorized runway is three
+  hardware-pending work is recorded. Effective authorized runway is two
   against a target of four, so liveness is `RUNWAY_LOW`. `GP-AUTH-001` remains
   user/source-authority gated and `GP-CONFIG-002` remains external-evidence
   gated; historical or unreviewed supply remains non-authoritative, and this

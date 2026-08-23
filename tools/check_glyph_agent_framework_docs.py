@@ -373,7 +373,11 @@ def _load_evidence_record(reference: object, repo_root: Path = REPO_ROOT) -> dic
 
 def validate_evidence_record(item: dict[str, object], evidence_repo_root: Path = REPO_ROOT) -> None:
     record = _load_evidence_record(item["hardware_evidence_record"], evidence_repo_root)
-    if record["schema_name"] != "glyph_hardware_evidence_record" or record["schema_version"] != 2:
+    if (
+        record["schema_name"] != "glyph_hardware_evidence_record"
+        or type(record["schema_version"]) is not int
+        or record["schema_version"] != 2
+    ):
         fail("hardware evidence record schema identity is invalid")
     string_fields = {
         "work_order_id", "candidate_branch", "candidate_git_sha", "candidate_base_configurator_sha",
@@ -1110,6 +1114,28 @@ def check_queue_contract() -> None:
         subprocess.run(["git", "commit", "-qm", "record"], cwd=evidence_root, check=True)
         validated_hardware["hardware_evidence_record"] = "repo-json:docs/evidence.json"
         validate_work_order(validated_hardware, evidence_root)
+        for schema_version in (2.0, "2", True):
+            typed_variant = dict(record)
+            typed_variant["schema_version"] = schema_version
+            record_path.write_text(json.dumps(typed_variant), encoding="utf-8")
+            subprocess.run(["git", "add", "."], cwd=evidence_root, check=True)
+            subprocess.run(["git", "commit", "-qm", "schema type"], cwd=evidence_root, check=True)
+            typed_sha = subprocess.run(
+                ["git", "rev-parse", "HEAD"], cwd=evidence_root, check=True,
+                capture_output=True, text=True,
+            ).stdout.strip()
+            expect_reference = f"git-json:{typed_sha}:docs/evidence.json"
+            variant = dict(validated_hardware)
+            variant["hardware_evidence_record"] = expect_reference
+            try:
+                validate_work_order(variant, evidence_root)
+            except FrameworkDocsError:
+                pass
+            else:
+                fail(f"non-integer hardware evidence schema_version passed: {schema_version!r}")
+            record_path.write_text(json.dumps(record), encoding="utf-8")
+            subprocess.run(["git", "add", "."], cwd=evidence_root, check=True)
+            subprocess.run(["git", "commit", "-qm", "restore schema"], cwd=evidence_root, check=True)
         initial_sha = subprocess.run(
             ["git", "rev-parse", "HEAD"], cwd=evidence_root, check=True,
             capture_output=True, text=True,
