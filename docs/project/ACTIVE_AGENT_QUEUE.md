@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "b3f8201c49029586748bcfe9c5110a32f864ffbe",
+  "audit_base_sha": "202a4b6a2c37f1702d5cc27f0b9417bcebaaee74",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -45,17 +45,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "RUNWAY_LOW",
+    "CURATION_REQUIRED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
     "RUNWAY_SHORTFALL_USER_DECISION_GATED",
     "RUNWAY_SHORTFALL_EVIDENCE_GATED"
@@ -71,8 +71,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-003",
       "title": "Complete prepared-packet integrity and output guardrails",
-      "status": "READY",
-      "branch": "source-owned-v2-prepared-packet-guardrails",
+      "status": "DONE",
+      "branch": "glyph/gp-src-003-prepared-packet-guardrails-20260823",
       "objective": "Make every reusable generator-v2 preparation and installation path verify exact prepared-packet correspondence and fail closed for active, compiled, protected, aliased, or ambiguous output targets.",
       "why_this_matters": "The current installer accepts the active compile-time table header and accepts artifact or manifest payloads changed after preparation while their declared digests remain stale, contradicting the documented inert and integrity-gated boundary.",
       "hardware_risk": "H1",
@@ -114,7 +114,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host-tool/docs branch if valid offline output or deterministic preparation regresses; do not restore acceptance of unverified packets or protected output targets without renewed curation.",
       "status_documentation_updates": "Correct the generator-v2 integrity and output-boundary docs without creating production authority, a firmware candidate, or a hardware claim.",
-      "done_evidence": "Independent review, complete tamper/path negative corpus, safe-output atomicity and non-mutation proof, shared-validator proof, current aggregate and navigation PASS, exact active-source/table semantic digests unchanged, and live configurator ancestry proving the reviewed implementation is actually canonical. The existing unmerged 6cdc25363f1446dea8436cc874992e5adec158ad branch is recovery input, not Done evidence.",
+      "done_evidence": "Independent repaired-scope review PASS; complete tamper/path/row-correspondence negative corpus, safe-output atomicity and non-mutation proof, current aggregate and navigation PASS, exact active-source/table semantic digests unchanged, and live feature-ref verification at implementation commit 81c91ba31784fa085e5e6f6c21286c2ff28f32f2. The reviewed candidate is tooling/checker-only and introduces no active source, runtime, firmware, artifact, or hardware change.",
       "stop_conditions": [
         "Any semantic value, ownership, mapping, or production authority must be inferred.",
         "Any active/compiled source, table byte, RuntimeConfigView path, workflow, firmware candidate, or hardware artifact would change.",
@@ -708,17 +708,17 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-One Ready item, `GP-SRC-003`, is recorded after correcting its false canonical
-completion; no Preauthorized, invalidated, or hardware-pending work is
-recorded. The remaining external-gated dispositions are not effective runway
-or a global wait:
+`GP-SRC-003` is now `DONE` on the live feature ref after recovery, repaired
+review, and exact validation; no Ready, Preauthorized, invalidated, or
+hardware-pending work is recorded. The remaining external-gated dispositions
+are not effective runway or a global wait:
 `GP-AUTH-001` remains `USER_DECISION_GATED`, and `GP-CONFIG-002` remains
 `EVIDENCE_GATED` after `GP-CONFIG-003`.
 
@@ -764,11 +764,10 @@ candidates remain non-executable. Live `configurator`
 `6cdc25363f1446dea8436cc874992e5adec158ad`; the packet remains partially
 consumed and useful for that reauthorized recovery.
 
-- `GP-SRC-003`: `READY`; the live installer still accepts active-table output
-  and tampered prepared content. The focused implementation commit
-  `6cdc25363f1446dea8436cc874992e5adec158ad` exists remotely but is not an
-  ancestor of `configurator`; Implementation must recover, reconcile, review,
-  validate, and publish it before recording Done.
+- `GP-SRC-003`: `DONE`; recovered and repaired implementation commit
+  `81c91ba31784fa085e5e6f6c21286c2ff28f32f2` is live on the focused feature ref;
+  exact prepared-packet correspondence, output-path, and input-overwrite
+  guardrails are validated without active/runtime source changes.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
   current-tree structured record or immutable full-commit-plus-path record and
   must match the exact queue identity/result fields. The exact flat schema,

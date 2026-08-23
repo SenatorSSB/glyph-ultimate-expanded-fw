@@ -64,14 +64,14 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Reviewed Planner packet
   `glyph-portfolio-20260823-1450` remains partially consumed: `GP-SRC-003` is
-  restored to `READY` because its focused implementation commit is not an
-  ancestor of live `configurator` and the guarded gap remains reproducible.
+  now `DONE` after recovery, repair, independent review, and live feature-ref
+  verification at `81c91ba31784fa085e5e6f6c21286c2ff28f32f2`.
   No Preauthorization, invalidated, or hardware-pending work is recorded; the
   current-runway marker above is authoritative for counts and liveness.
   `GP-AUTH-001` remains
