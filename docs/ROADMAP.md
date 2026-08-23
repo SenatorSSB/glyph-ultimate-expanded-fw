@@ -10,13 +10,13 @@ and `docs/calibration/INDEX.md`.
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Independent Curator review of Planner packet
-`glyph-portfolio-20260823-0152` recorded four Ready H0/H1 items; `GP-CONFIG-001`
-is now complete, leaving two Ready items and no Preauthorization; three
-dependency successors require fresh curation after their predecessors.
-Effective authorized runway is two against target four, so liveness is
-`RUNWAY_LOW`; external-gated supply does not establish a
-portfolio-wide wait.
+implementation. Initial and follow-up Curator review of Planner packet
+`glyph-portfolio-20260823-0152` records `GP-SRC-001` and `GP-CONFIG-001` as
+complete and four independent H0/H1 items as Ready: `GP-CONFIG-003`,
+`GP-PROV-001`, `GP-VAL-001`, and `GP-SRC-002`. No Preauthorization is
+recorded; `GP-VAL-002` still requires fresh curation after `GP-VAL-001`.
+Effective authorized runway is four against target four, so liveness is
+`RUNWAY_OK`; external-gated supply does not establish a portfolio-wide wait.
 
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The
@@ -133,17 +133,16 @@ the explicit `--emit-from-layout-spec` packet-input mode,
 `tools/generate_source_owned_runtime_config.py`.
 The install wrapper `tools/install_generated_source_owned_runtime_config.py`
 uses `--from-layout-spec`, `--from-generated-output`, and `--dry-run` to preview
-or write `GeneratedRuntimeConfigBaseline.current.hpp`. The header is active
-compile-time table-content source through `UltimateIdentityRuntimeTables.hpp`;
-writing it can change active behavior even though the source-owned
-`RuntimeConfigView` publication path remains unchanged. `GP-SRC-001` is Ready
-to remove the stale inert classification and fail-close legacy write routes.
+or write only the inert `GeneratedRuntimeConfigArtifact.example.hpp` path. It
+rejects `GeneratedRuntimeConfigBaseline.current.hpp`, which remains active
+compile-time table-content source through `UltimateIdentityRuntimeTables.hpp`.
+`GP-SRC-001` completed that fail-closed classification and write guardrail.
 The candidate-prep wrapper `tools/prepare_source_owned_candidate_branch.py`
 adds a dry-run plan for
 `runtime-config-install-workflow-candidate-generation`. Its default plan is
-non-mutating, while explicit `--write-source` can write the same active
-table-content header on a clean non-`configurator` branch; that route is not
-current production authority and is inside `GP-SRC-001` guardrail scope.
+non-mutating, while explicit `--write-source` is restricted to the inert
+example artifact path and rejects the active table-content header; that route
+creates no current production authority.
 Next safe implementation branch should focus on overlay/preserve
 candidate-generation semantics and checker enforcement: full replacement must
 specify every active table, overlay/preserve must copy unspecified tables from
@@ -197,9 +196,10 @@ active-state `HARDWARE_PASS` evidence, and active-storage `HARDWARE_FAIL`
 evidence remain distinct. The phrases "generated tables not wired active",
 "future hardware gate required before generated source-owned tables are
 selected active", and "future hardware gate required before generated
-source-owned baseline artifact is selected active" remain solely as stale
-checker markers pending `GP-SRC-001`; they are not current claims about the
-included active table-content header.
+source-owned baseline artifact is selected active" remain only as checker
+navigation markers for inert/example lanes; `GP-SRC-001` completed their
+quarantine, and they are not current claims about the included active
+table-content header.
 Nunchuk `NOT_TESTED`.
 The candidate-generation diff diagnosis remains hardware-candidate material
 because table contents differ rather than formatting alone.
