@@ -67,12 +67,11 @@ automation from this context document.
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Initial and follow-up Curator review of
   Planner packet `glyph-portfolio-20260823-0152` now records `GP-SRC-001` and
   `GP-CONFIG-001` as `DONE`; `GP-CONFIG-003` is now `DONE`, `GP-PROV-001` is
-  now `DONE`, and two independent H0/H1 items remain `READY`: `GP-VAL-001`
-  and `GP-SRC-002`. No
+  now `DONE`; `GP-VAL-001` and `GP-SRC-002` are now `DONE`. No
   Preauthorization is recorded; `GP-VAL-002` still requires fresh curation
-  after `GP-VAL-001`. The effective authorized runway is two against a target
-  of four; liveness is `RUNWAY_LOW`. Historical or unreviewed candidate supply
-  remains non-authoritative, and this is not a global hardware wait.
+  after `GP-VAL-001`. The effective authorized runway is zero against a target
+  of four; liveness is `CURATION_REQUIRED`. Historical or unreviewed candidate
+  supply remains non-authoritative, and this is not a global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
