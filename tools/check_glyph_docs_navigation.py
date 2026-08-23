@@ -80,6 +80,16 @@ def main() -> int:
             "AGENTS.md",
             "docs/calibration/README.md",
             "docs/export/README.md",
+            "current official-configurator validation",
+            "tools/check_glyph_official_configurator_validation.py",
+            "historical compatibility chains are not current evidence",
+        ),
+    )
+    require_phrases(
+        "docs/export/README.md",
+        (
+            "official_configurator_validation_lane.md",
+            "tools/check_glyph_official_configurator_validation.py",
         ),
     )
     require_phrases(
@@ -146,6 +156,19 @@ def main() -> int:
             "Current Agentic Operating State",
             "PLANNING_REQUIRED",
             "CUSTOM_RUNNER_NOT_REQUIRED",
+            "current official-configurator validation lane",
+            "tools/check_glyph_official_configurator_validation.py",
+            "older import/export compatibility chain is historical-only",
+            "external-remapper evidence remains quarantined",
+        ),
+    )
+    require_phrases(
+        "docs/ROADMAP.md",
+        (
+            "official-configurator direction",
+            "tools/check_glyph_official_configurator_validation.py",
+            "older compatibility chain is historical-only",
+            "external-remapper evidence remains quarantined",
         ),
     )
 

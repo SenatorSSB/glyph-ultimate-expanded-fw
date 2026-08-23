@@ -8,6 +8,14 @@ This is the short current-state entrypoint. Agents should read
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
 **Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; Curator review of Planner packet `glyph-portfolio-20260823-0152` records four Ready items, zero recorded/mechanically activatable/invalidated Preauthorization, zero hardware-pending work, and effective authorized runway four against target four; three dependency successors require fresh curation after their predecessors; liveness is `RUNWAY_OK`, superseding the prior `PLANNING_REQUIRED` state and not establishing a global hardware wait; `CUSTOM_RUNNER_NOT_REQUIRED`; exact role configurations are in `docs/agent_framework/SCHEDULED_TASKS.md`.
+
+The current official-configurator validation lane is the bounded offline
+entrypoint `tools/check_glyph_official_configurator_validation.py`, backed by
+the committed primary corpus. The older import/export compatibility chain is
+historical-only, generated-prototype evidence is not current-lane evidence,
+and external-remapper evidence remains quarantined. This lane makes no
+official compatibility, production export, device-write, runtime-loaded
+config, or flashing claim.
 ## Current Known-Good State
 
 - `configurator` contains the latest Y2 layout source-owned port after the

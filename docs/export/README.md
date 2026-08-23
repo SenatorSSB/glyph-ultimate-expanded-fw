@@ -21,6 +21,7 @@ export-target workflow.
 - `official_configurator_export_target_contract.md`
 - `official_configurator_export_validation_report.md`
 - `official_configurator_export_candidate_diff_report.md`
+- `official_configurator_validation_lane.md`
 - `official_configurator_manual_import_export_test_plan.md`
 - `official_configurator_manual_capture_instructions.md`
 - `official_configurator_manual_capture_artifact_layout.md`
@@ -59,3 +60,6 @@ export-target workflow.
 - `tools/check_glyph_official_configurator_manual_capture_result.py` validates
   manual capture instructions, artifact layout, metadata template, and any
   future capture folders while passing when no capture result exists.
+- `tools/check_glyph_official_configurator_validation.py` runs the current
+  five-check offline lane and keeps historical compatibility chains and
+  external-remapper evidence explicitly out of that lane.

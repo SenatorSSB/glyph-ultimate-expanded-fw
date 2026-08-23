@@ -23,6 +23,11 @@ census detects checker-set drift mechanically; the curated manifest retains
 the detailed current validation dependency graph and explicit evidence/unsafe
 exclusions. This creates no production authority or hardware claim.
 
+The official-configurator direction currently has one bounded offline lane at
+`tools/check_glyph_official_configurator_validation.py`. It uses the primary
+official corpus only; the older compatibility chain is historical-only and
+external-remapper evidence remains quarantined.
+
 The current known-good firmware state is the latest Y2 layout source-owned port
 merged into `configurator` after HARDWARE_PASS. The implementation lineage is
 `runtime-config-latest-y2-layout-source-owned-port`, and the preserved hardware
