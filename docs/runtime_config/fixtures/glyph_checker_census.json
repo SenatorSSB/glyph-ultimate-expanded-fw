@@ -10636,6 +10636,49 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "source_owned_cpp_preview",
+      "defines_main": true,
+      "file_size_bytes": 4587,
+      "hard_coded_branch_like_strings": [
+        "hardware_candidate_created"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 72,
+      "parse_error": null,
+      "path": "tools/check_glyph_source_owned_cpp_preview.py",
+      "potential_branch_identity_signals": [
+        "hardware_candidate_created"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_source_owned_cpp_preview",
+      "referenced_repository_path_prefixes": [],
+      "runtime_config_relevance_signals": [
+        "current_y2_layout",
+        "source_owned_generator_modes"
+      ],
+      "sha256": "2216f2d6ce6563a8cde2e8bc3e4c652ade739e36f6c15528436c947f94b0d24c",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": true,
+        "y2_tilt3": true
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "source_owned_generator_modes",
       "defines_main": true,
       "file_size_bytes": 6855,

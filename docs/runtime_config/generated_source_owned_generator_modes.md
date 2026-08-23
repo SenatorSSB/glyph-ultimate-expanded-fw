@@ -76,6 +76,11 @@ canonical-default/unowned-table regression class. Fixtures are synthetic or
 source-baseline-derived only; the current example layout remains
 `SOURCE_AUTHORITY_BLOCKER` and is not a hardware candidate.
 
+The prepared v2 packet can be rendered for review with
+`tools/render_source_owned_cpp_preview.py`. This separate preview path
+revalidates the packet and emits inactive C++ text only; it does not install,
+mutate active source, create a candidate, or establish production authority.
+
 ## Boundary
 
 No production hardware candidate was created. The failed canonical-grid

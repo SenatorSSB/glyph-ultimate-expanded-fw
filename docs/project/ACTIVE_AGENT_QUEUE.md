@@ -43,17 +43,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "CURATION_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -360,7 +360,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-002",
       "title": "Render authorized v2 packets as C++ previews",
-      "status": "READY",
+      "status": "DONE",
       "branch": "source-owned-v2-cpp-preview-bridge",
       "objective": "Add a deterministic, review-only prepared-packet-to-C++ preview seam for the source-authority intake and generator-v2 pipeline without installing or activating source.",
       "why_this_matters": "The completed authority intake and generator-v2 modes preserve explicit ownership and produce a validated 28-table artifact/manifest, but the current prepared-packet install emits JSON and the older C++ generator consumes a separate legacy layout-spec contract. Reviewers therefore lack one authority-preserving v2-to-C++ preview path.",
@@ -432,17 +432,16 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `1`.
+- Immediate Ready runway: `0`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `1`.
-- Current liveness result: `RUNWAY_LOW` at `1` against the recorded target of `4`; this is a liveness signal, not a quota.
+- Effective authorized runway: `0`.
+- Current liveness result: `CURATION_REQUIRED` at `0` against the recorded target of `4`; concrete successor candidates need fresh Curator judgment.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
-The two remaining Ready items are independent current H0/H1 opportunities. No
-Preauthorization is recorded. `GP-VAL-002` still requires fresh Curator
+No Ready items remain. No Preauthorization is recorded. `GP-VAL-002` still requires fresh Curator
 judgment after `GP-VAL-001`; its future workflow and aggregate assumptions
 cannot be activated mechanically. The remaining Planner supply is not a
 global wait: `GP-AUTH-001` remains `USER_DECISION_GATED`, and
@@ -494,9 +493,9 @@ surviving dependency candidates against live `configurator`
 - `GP-VAL-002`: `SUBSTANTIVE_DEPENDENCY_GATED` / `CURATION_REQUIRED` after
   `GP-SRC-001` and `GP-VAL-001`; future aggregate safety and workflow parity
   need fresh judgment.
-- `GP-SRC-002`: `READY`; the authority-preserving prepared-v2-to-C++ preview
-  seam remains absent after `GP-SRC-001`, with active writes and semantic
-  inference excluded.
+- `GP-SRC-002`: `DONE`; the authority-preserving prepared-v2-to-C++ preview
+  seam is implemented as inactive, deterministic host-side review output with
+  fail-closed packet and temporary-path validation.
 - `GP-CONFIG-001`: `DONE`; current-vs-historical official-configurator checker
   classification shipped without product behavior change.
 - `GP-CONFIG-003`: `DONE`; exact `.DS_Store` regular-file exception only, merged from `codex/gp-config-003-host-metadata`.

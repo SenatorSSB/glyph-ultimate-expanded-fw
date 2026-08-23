@@ -40,8 +40,10 @@ Commands that can prepare, install, or emit a candidate are classified unsafe
 for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 25 explicit entries, including 20 current
-load-bearing checks. The added behavior evaluator is present as superseded
-historical evidence because this feature branch modified it to consume the
-established source-table extractor while its May-28 behavior-case dependency
-remains historical; it is not a current aggregate PASS.
+The curated manifest now has 26 explicit entries, including 21 current
+load-bearing checks. The prepared-v2 C++ preview checker is current and
+load-bearing because it validates the inactive authority-preserving preview
+seam; it does not install source, create a candidate, or change firmware
+behavior. The added behavior evaluator remains superseded historical evidence
+because its May-28 behavior-case dependency is historical; it is not a current
+aggregate PASS.
