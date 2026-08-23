@@ -12,10 +12,10 @@ The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Initial and follow-up Curator review of Planner packet
 `glyph-portfolio-20260823-0152` records `GP-SRC-001` and `GP-CONFIG-001` as
-complete, `GP-CONFIG-003` as Done, and three independent H0/H1 items as
-Ready: `GP-PROV-001`, `GP-VAL-001`, and `GP-SRC-002`. No Preauthorization is
+complete, `GP-CONFIG-003` and `GP-PROV-001` as Done, and two independent H0/H1
+items as Ready: `GP-VAL-001` and `GP-SRC-002`. No Preauthorization is
 recorded; `GP-VAL-002` still requires fresh curation after `GP-VAL-001`.
-Effective authorized runway is three against target four, so liveness is
+Effective authorized runway is two against target four, so liveness is
 `RUNWAY_LOW`; external-gated supply does not establish a portfolio-wide wait.
 
 Runtime-config validation stabilization uses a deterministic repository-wide

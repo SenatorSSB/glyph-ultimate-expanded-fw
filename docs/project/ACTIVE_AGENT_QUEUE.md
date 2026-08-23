@@ -43,12 +43,12 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -239,7 +239,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-001",
       "title": "Characterize firmware artifact postprocessing provenance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "docs-artifact-postprocessor-provenance-research",
       "objective": "Statically record what the current CI artifact pipeline and tracked glyph_nuker file identity prove, and define an offline sidecar/verifier contract for full Git and artifact identity without claiming an immutable store exists.",
       "why_this_matters": "CI publishes a short-SHA-named, postprocessed UF2 without a full candidate SHA or final SHA-256 sidecar, while exact-snapshot hardware acceptance requires both identity and a durable candidate/artifact-addressed locator.",
@@ -275,7 +275,7 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
       "rollback_recovery": "Remove the inert research/schema branch if static identities or validation rules are incorrect; leave CI, glyph_nuker, and all artifacts unchanged.",
       "status_documentation_updates": "Record exact observed identities, UNKNOWN purpose where unresolved, and the durable-store blocker; do not update hardware status.",
-      "done_evidence": "Independent review, synthetic schema negative corpus PASS, exact tracked binary hash and workflow commands recorded, UNKNOWN purpose/effect preserved, and git diff shows no workflow, binary, firmware, artifact, or product-code mutation.",
+      "done_evidence": "Independent review, tools/check_glyph_artifact_postprocessor_provenance.py --check, synthetic tamper/locator negative cases, docs navigation, exact tracked binary hash and workflow commands recorded, UNKNOWN purpose/effect preserved, and git diff shows no workflow, binary, firmware, artifact, or product-code mutation.",
       "stop_conditions": [
         "glyph_nuker or any firmware artifact would be executed.",
         "A candidate artifact, upload, release, device write, or flashing action would occur.",
@@ -432,16 +432,16 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `3`.
+- Immediate Ready runway: `2`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `3`.
-- Current liveness result: `RUNWAY_LOW` at `3` against the recorded target of `4`; this is a liveness signal, not a quota.
+- Effective authorized runway: `2`.
+- Current liveness result: `RUNWAY_LOW` at `2` against the recorded target of `4`; this is a liveness signal, not a quota.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
-The four Ready items are independent current H0/H1 opportunities. No
+The two remaining Ready items are independent current H0/H1 opportunities. No
 Preauthorization is recorded. `GP-VAL-002` still requires fresh Curator
 judgment after `GP-VAL-001`; its future workflow and aggregate assumptions
 cannot be activated mechanically. The remaining Planner supply is not a
@@ -500,8 +500,9 @@ surviving dependency candidates against live `configurator`
 - `GP-CONFIG-001`: `DONE`; current-vs-historical official-configurator checker
   classification shipped without product behavior change.
 - `GP-CONFIG-003`: `DONE`; exact `.DS_Store` regular-file exception only, merged from `codex/gp-config-003-host-metadata`.
-- `GP-PROV-001`: `READY`; observed-only research and inert provenance schema,
-  with CI integration and store selection excluded.
+- `GP-PROV-001`: `DONE`; observed-only research and inert provenance schema
+  record the tracked identity and synthetic verifier; CI integration and store
+  selection remain excluded.
 - `GP-AUTH-001`: `USER_DECISION_GATED`; no production-authorized owned-table
   set or replacement content exists, so Curator cannot authorize it.
 - `GP-CONFIG-002`: `EVIDENCE_GATED`; requires an external operator and first
@@ -510,7 +511,7 @@ surviving dependency candidates against live `configurator`
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
-priority order. Only the four `READY` items authorize immediate execution.
+priority order. Only the two remaining `READY` items authorize immediate execution.
 No candidate is Preauthorized.
 
 Every future item recorded in the machine-readable `items` list must satisfy

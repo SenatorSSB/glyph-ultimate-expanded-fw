@@ -1,0 +1,28 @@
+{
+  "schema_name": "glyph_artifact_postprocessor_provenance_fixture",
+  "schema_version": 1,
+  "synthetic_artifact_bytes_base64": "R2x5cGggc3ludGhldGljIFVGMiBmaXh0dXJlCg==",
+  "sidecar": {
+    "schema_name": "glyph_artifact_postprocessor_provenance",
+    "schema_version": 1,
+    "status": "observed_only_no_artifact_acceptance",
+    "candidate_git_sha": "7688ee287491ff05898038045f5c1918be09f675",
+    "final_artifact": {
+      "filename": "Glyph-synthetic.uf2",
+      "size_bytes": 28,
+      "sha256": "9afed4312fa22e806a96d75832bb8b55f9e0fde95cade38e5e098869b63b9f55"
+    },
+    "postprocessor": {
+      "path": "glyph_nuker",
+      "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae",
+      "purpose": "UNKNOWN",
+      "byte_transformation": "UNKNOWN"
+    },
+    "immutable_locator": null,
+    "source_authority": {
+      "classification": "observed_only",
+      "workflow_source": ".github/workflows/build.yml",
+      "artifact_store_established": false
+    }
+  }
+}

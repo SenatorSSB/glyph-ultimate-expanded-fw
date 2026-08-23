@@ -6,6 +6,15 @@ This directory contains runtime-config design, evidence, fixtures, and checker
 contracts. Read the current boundary first; use archived diagnostics only when
 you need the supporting evidence.
 
+The inert artifact-postprocessor provenance packet is documented in
+`artifact_postprocessor_provenance.md`, with its synthetic fixture and
+verifier at
+`fixtures/artifact_postprocessor_provenance.json` and
+`tools/check_glyph_artifact_postprocessor_provenance.py`. It records the
+current CI workflow and tracked `glyph_nuker` identity only; postprocessor
+purpose and byte transformation remain `UNKNOWN`, no real artifact is created
+or executed, and no immutable artifact store is claimed.
+
 ## Current Known-Good State
 
 Overlay/preserve candidate-generation semantics are now checker-enforced in
