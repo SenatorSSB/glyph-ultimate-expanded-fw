@@ -4,7 +4,10 @@
 from __future__ import annotations
 
 import json
+import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -170,6 +173,9 @@ WORK_ORDER_FIELDS = (
     "expected_artifact",
     "manual_acceptance",
     "manual_acceptance_protocol_reference",
+    "manual_acceptance_protocol_version",
+    "hardware_evidence_contract_reference",
+    "hardware_evidence_contract_version",
     "rollback_recovery",
     "status_documentation_updates",
     "done_evidence",
@@ -185,6 +191,47 @@ WORK_ORDER_FIELDS = (
     "hardware_evidence_record",
     "hardware_result",
     "hardware_evidence_gaps",
+)
+
+EVIDENCE_RECORD_FIELDS = {
+    "schema_name",
+    "schema_version",
+    "work_order_id",
+    "candidate_branch",
+    "candidate_git_sha",
+    "candidate_base_configurator_sha",
+    "firmware_artifact_filename",
+    "firmware_artifact_build_path",
+    "firmware_artifact_sha256",
+    "preserved_firmware_artifact_locator",
+    "pre_update_sha256_verified",
+    "controller_model_revision",
+    "firmware_profile_state",
+    "update_method",
+    "host_platform_adapter",
+    "evidence_contract_reference",
+    "evidence_contract_version",
+    "candidate_protocol_reference",
+    "candidate_protocol_version",
+    "preconditions",
+    "steps",
+    "negative_regression_checks",
+    "power_cycle_reconnect_checks",
+    "result",
+    "anomalies",
+    "rollback_recovery",
+    "tester",
+    "tested_at",
+    "evidence_gaps",
+}
+EVIDENCE_REF_RE = re.compile(
+    r"^(?:repo-json:(?P<repo>docs/[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*\.json)|"
+    r"git-json:(?P<sha>[0-9a-f]{40}):(?P<git>docs/[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*\.json))$"
+)
+EVIDENCE_CONTRACT_REFERENCE = "docs/agent_framework/HARDWARE_EVIDENCE.md"
+EVIDENCE_CONTRACT_VERSION = "GLYPH_HARDWARE_EVIDENCE_V2"
+RFC3339_RE = re.compile(
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
 )
 
 RUNWAY_FIELDS = (
@@ -270,7 +317,120 @@ def require_nonempty_string(value: object, field: str) -> None:
         fail(f"queue work order field {field} must be a non-empty string")
 
 
-def validate_work_order(item: object) -> dict[str, object]:
+def _git(repo_root: Path, *args: str) -> str:
+    try:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        fail(f"unable to resolve hardware evidence Git object: {exc}")
+    return result.stdout
+
+
+def _load_evidence_record(reference: object, repo_root: Path = REPO_ROOT) -> dict[str, object]:
+    if not isinstance(reference, str):
+        fail("hardware_evidence_record must be a supported repo-json or git-json reference")
+    match = EVIDENCE_REF_RE.fullmatch(reference)
+    if not match:
+        fail("hardware_evidence_record must use repo-json:<docs/*.json> or git-json:<sha>:<docs/*.json>")
+    commit = "HEAD" if match.group("repo") else match.group("sha")
+    rel_path = match.group("repo") or match.group("git")
+    if any(segment in {".", ".."} for segment in rel_path.split("/")):
+        fail("hardware evidence record path must be normalized and cannot contain dot segments")
+    if _git(repo_root, "cat-file", "-t", f"{commit}^{{commit}}").strip() != "commit":
+        fail("hardware evidence Git reference must resolve to a commit")
+    entries = _git(repo_root, "ls-tree", "-z", commit, "--", rel_path).split("\0")
+    entries = [entry for entry in entries if entry]
+    if len(entries) != 1:
+        fail("hardware evidence record path must resolve to exactly one Git tree entry")
+    header, path = entries[0].split("\t", 1)
+    mode, kind, blob = header.split(" ")
+    if path != rel_path or mode != "100644" or kind != "blob" or not re.fullmatch(r"[0-9a-f]{40}", blob):
+        fail("hardware evidence record must be a regular non-executable 100644 JSON blob")
+    try:
+        raw = _git(repo_root, "show", f"{commit}:{rel_path}")
+        def reject_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+            result: dict[str, object] = {}
+            for key, value in pairs:
+                if key in result:
+                    fail("hardware evidence record contains duplicate JSON keys")
+                result[key] = value
+            return result
+
+        record = json.loads(raw, object_pairs_hook=reject_duplicate_keys)
+    except json.JSONDecodeError as exc:
+        fail(f"hardware evidence record is not valid JSON: {exc}")
+    if not isinstance(record, dict):
+        fail("hardware evidence record must be a flat JSON object")
+    if set(record) != EVIDENCE_RECORD_FIELDS:
+        fail("hardware evidence record has unexpected, missing, or duplicate-schema fields")
+    return record
+
+
+def validate_evidence_record(item: dict[str, object], evidence_repo_root: Path = REPO_ROOT) -> None:
+    record = _load_evidence_record(item["hardware_evidence_record"], evidence_repo_root)
+    if record["schema_name"] != "glyph_hardware_evidence_record" or record["schema_version"] != 2:
+        fail("hardware evidence record schema identity is invalid")
+    string_fields = {
+        "work_order_id", "candidate_branch", "candidate_git_sha", "candidate_base_configurator_sha",
+        "firmware_artifact_filename", "firmware_artifact_build_path", "firmware_artifact_sha256",
+        "preserved_firmware_artifact_locator", "controller_model_revision", "firmware_profile_state",
+        "update_method", "host_platform_adapter", "evidence_contract_reference",
+        "evidence_contract_version", "candidate_protocol_reference", "candidate_protocol_version",
+        "result", "rollback_recovery", "tester", "tested_at",
+    }
+    for field in string_fields:
+        require_nonempty_string(record[field], f"hardware evidence record {field}")
+    if record["pre_update_sha256_verified"] is not True:
+        fail("hardware evidence record requires pre_update_sha256_verified true")
+    if record["result"] not in {"PASS", "FAIL", "PARTIAL", "INCONCLUSIVE"}:
+        fail("hardware evidence record result is invalid")
+    if not RFC3339_RE.fullmatch(str(record["tested_at"])):
+        fail("hardware evidence record tested_at must be RFC3339")
+    for field in (
+        "preconditions", "negative_regression_checks", "power_cycle_reconnect_checks",
+        "anomalies", "evidence_gaps",
+    ):
+        value = record[field]
+        if not isinstance(value, list) or not all(isinstance(entry, str) and entry.strip() for entry in value):
+            fail(f"hardware evidence record {field} must be a list of nonblank strings")
+    if not record["preconditions"] or not record["steps"]:
+        fail("hardware evidence record requires nonempty preconditions and steps")
+    for step in record["steps"]:
+        if not isinstance(step, dict) or set(step) != {"id", "instruction", "expected", "observed"}:
+            fail("hardware evidence record steps must have exact id/instruction/expected/observed fields")
+        for field in ("id", "instruction", "expected", "observed"):
+            require_nonempty_string(step[field], f"hardware evidence step {field}")
+    expected = {
+        "work_order_id": item["id"], "candidate_branch": item["branch"],
+        "candidate_git_sha": item["candidate_git_sha"],
+        "candidate_base_configurator_sha": item["candidate_base_configurator_sha"],
+        "firmware_artifact_filename": Path(str(item["firmware_artifact_build_path"])).name,
+        "firmware_artifact_build_path": item["firmware_artifact_build_path"],
+        "firmware_artifact_sha256": item["firmware_artifact_sha256"],
+        "preserved_firmware_artifact_locator": item["preserved_firmware_artifact_locator"],
+        "evidence_contract_reference": item["hardware_evidence_contract_reference"],
+        "evidence_contract_version": item["hardware_evidence_contract_version"],
+        "candidate_protocol_reference": item["manual_acceptance_protocol_reference"],
+        "candidate_protocol_version": item["manual_acceptance_protocol_version"],
+        "result": item["hardware_result"], "evidence_gaps": item["hardware_evidence_gaps"],
+    }
+    for field, value in expected.items():
+        if record[field] != value:
+            fail(f"hardware evidence record field {field} does not match queue")
+    if record["evidence_contract_reference"] != EVIDENCE_CONTRACT_REFERENCE or record["evidence_contract_version"] != EVIDENCE_CONTRACT_VERSION:
+        fail("hardware evidence record uses the wrong generic evidence contract")
+    if record["result"] == "PASS" and record["evidence_gaps"]:
+        fail("PASS hardware evidence cannot contain evidence gaps")
+    if record["result"] in {"PARTIAL", "INCONCLUSIVE"} and not record["evidence_gaps"]:
+        fail("PARTIAL/INCONCLUSIVE hardware evidence requires evidence gaps")
+
+
+def validate_work_order(item: object, evidence_repo_root: Path = REPO_ROOT) -> dict[str, object]:
     if not isinstance(item, dict):
         fail("queue items must be JSON objects")
     missing = [field for field in WORK_ORDER_FIELDS if field not in item]
@@ -340,6 +500,24 @@ def validate_work_order(item: object) -> dict[str, object]:
             fail(f"queue work order field {field} must be null or a non-empty string")
     if item["hardware_result"] not in {None, "PASS", "FAIL", "PARTIAL", "INCONCLUSIVE"}:
         fail("queue work order hardware_result is invalid")
+    if item["hardware_risk"] in {"H0", "H1"}:
+        for field in (
+            "manual_acceptance_protocol_version",
+            "hardware_evidence_contract_reference",
+            "hardware_evidence_contract_version",
+        ):
+            if item[field] != "NOT_APPLICABLE":
+                fail(f"{field} must be NOT_APPLICABLE for H0/H1 work")
+    else:
+        if item["manual_acceptance_protocol_reference"] == "NOT_APPLICABLE":
+            fail("H2/H3 work must use a candidate-local manual acceptance protocol reference")
+        if item["hardware_evidence_contract_reference"] != EVIDENCE_CONTRACT_REFERENCE:
+            fail("H2/H3 work must use the generic hardware evidence contract reference")
+        if item["hardware_evidence_contract_version"] != EVIDENCE_CONTRACT_VERSION:
+            fail("H2/H3 work must use the generic hardware evidence contract version")
+        if item["manual_acceptance_protocol_version"] == "NOT_APPLICABLE":
+            fail("H2/H3 work must use a candidate-local manual acceptance protocol version")
+        require_nonempty_string(item["manual_acceptance_protocol_version"], "manual_acceptance_protocol_version")
 
     if status in {"READY", "PREAUTHORIZED"}:
         for field in ("touched_planes", "automated_validation", "stop_conditions"):
@@ -435,12 +613,14 @@ def validate_work_order(item: object) -> dict[str, object]:
         if item["hardware_evidence_dependency_satisfied"] is not True:
             fail("HARDWARE_VALIDATED requires satisfied hardware evidence dependency")
         require_nonempty_string(item["hardware_evidence_record"], "hardware_evidence_record")
+        validate_evidence_record(item, evidence_repo_root)
         if evidence_gaps:
             fail("HARDWARE_VALIDATED cannot retain hardware evidence gaps")
     elif status == "HARDWARE_FAILED":
         if item["hardware_result"] != "FAIL":
             fail("HARDWARE_FAILED requires hardware_result FAIL")
         require_nonempty_string(item["hardware_evidence_record"], "hardware_evidence_record")
+        validate_evidence_record(item, evidence_repo_root)
     elif status == "LOCAL_ACCEPTANCE_PENDING":
         if item["hardware_result"] not in {None, "PARTIAL", "INCONCLUSIVE"}:
             fail("LOCAL_ACCEPTANCE_PENDING result must be null, PARTIAL, or INCONCLUSIVE")
@@ -450,6 +630,7 @@ def validate_work_order(item: object) -> dict[str, object]:
             )
             if not evidence_gaps:
                 fail("PARTIAL/INCONCLUSIVE hardware result requires exact evidence gaps")
+            validate_evidence_record(item, evidence_repo_root)
     elif status == "HARDWARE_TEST_REQUIRED" and item["hardware_result"] is not None:
         fail("HARDWARE_TEST_REQUIRED requires hardware_result null before testing")
 
@@ -821,6 +1002,9 @@ def check_queue_contract() -> None:
         "expected_artifact": "NOT_APPLICABLE",
         "manual_acceptance": "NOT_REQUIRED",
         "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+        "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+        "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+        "hardware_evidence_contract_version": "NOT_APPLICABLE",
         "rollback_recovery": "discard fixture",
         "status_documentation_updates": "none",
         "done_evidence": "validator accepts valid shape",
@@ -885,9 +1069,102 @@ def check_queue_contract() -> None:
             "hardware_evidence_record": "docs/evidence/test.md",
             "hardware_result": "PASS",
             "hardware_evidence_dependency_satisfied": True,
+            "manual_acceptance_protocol_reference": "docs/test_protocol.md",
+            "manual_acceptance_protocol_version": "TEST_PROTOCOL_V1",
+            "hardware_evidence_contract_reference": EVIDENCE_CONTRACT_REFERENCE,
+            "hardware_evidence_contract_version": EVIDENCE_CONTRACT_VERSION,
         }
     )
-    validate_work_order(validated_hardware)
+    temp_context = tempfile.TemporaryDirectory(prefix="glyph-hardware-record-")
+    if temp_context:
+        temp_dir = temp_context.name
+        evidence_root = Path(temp_dir)
+        subprocess.run(["git", "init", "-q"], cwd=evidence_root, check=True)
+        subprocess.run(["git", "config", "user.email", "checker@example.invalid"], cwd=evidence_root, check=True)
+        subprocess.run(["git", "config", "user.name", "Glyph checker"], cwd=evidence_root, check=True)
+        record = {
+            "schema_name": "glyph_hardware_evidence_record", "schema_version": 2,
+            "work_order_id": validated_hardware["id"], "candidate_branch": validated_hardware["branch"],
+            "candidate_git_sha": validated_hardware["candidate_git_sha"],
+            "candidate_base_configurator_sha": validated_hardware["candidate_base_configurator_sha"],
+            "firmware_artifact_filename": "firmware.uf2",
+            "firmware_artifact_build_path": validated_hardware["firmware_artifact_build_path"],
+            "firmware_artifact_sha256": validated_hardware["firmware_artifact_sha256"],
+            "preserved_firmware_artifact_locator": validated_hardware["preserved_firmware_artifact_locator"],
+            "pre_update_sha256_verified": True, "controller_model_revision": "synthetic",
+            "firmware_profile_state": "synthetic", "update_method": "synthetic",
+            "host_platform_adapter": "synthetic", "evidence_contract_reference": EVIDENCE_CONTRACT_REFERENCE,
+            "evidence_contract_version": EVIDENCE_CONTRACT_VERSION,
+            "candidate_protocol_reference": validated_hardware["manual_acceptance_protocol_reference"],
+            "candidate_protocol_version": validated_hardware["manual_acceptance_protocol_version"],
+            "preconditions": ["synthetic record"],
+            "steps": [{"id": "S1", "instruction": "observe", "expected": "pass", "observed": "pass"}],
+            "negative_regression_checks": [], "power_cycle_reconnect_checks": [], "result": "PASS",
+            "anomalies": [], "rollback_recovery": "none", "tester": "checker",
+            "tested_at": "2026-01-01T00:00:00Z", "evidence_gaps": [],
+        }
+        record_path = evidence_root / "docs" / "evidence.json"
+        record_path.parent.mkdir(parents=True)
+        record_path.write_text(json.dumps(record), encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=evidence_root, check=True)
+        subprocess.run(["git", "commit", "-qm", "record"], cwd=evidence_root, check=True)
+        validated_hardware["hardware_evidence_record"] = "repo-json:docs/evidence.json"
+        validate_work_order(validated_hardware, evidence_root)
+        initial_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=evidence_root, check=True,
+            capture_output=True, text=True,
+        ).stdout.strip()
+        validated_hardware["hardware_evidence_record"] = f"git-json:{initial_sha}:docs/evidence.json"
+        validate_work_order(validated_hardware, evidence_root)
+
+        def expect_evidence_rejection(reference: str) -> None:
+            variant = dict(validated_hardware)
+            variant["hardware_evidence_record"] = reference
+            try:
+                validate_work_order(variant, evidence_root)
+            except FrameworkDocsError:
+                return
+            fail(f"invalid hardware evidence reference passed: {reference}")
+
+        for reference in (
+            "https://example.invalid/evidence.json",
+            "repo-json:/absolute/evidence.json",
+            "repo-json:docs/../evidence.json",
+            "git-json:refs/heads/configurator:docs/evidence.json",
+        ):
+            expect_evidence_rejection(reference)
+        duplicate_text = record_path.read_text(encoding="utf-8").replace(
+            '"schema_version": 2,', '"schema_version": 2, "schema_version": 2,', 1
+        )
+        record_path.write_text(duplicate_text, encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=evidence_root, check=True)
+        subprocess.run(["git", "commit", "-qm", "duplicate"], cwd=evidence_root, check=True)
+        duplicate_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=evidence_root, check=True,
+            capture_output=True, text=True,
+        ).stdout.strip()
+        expect_evidence_rejection(f"git-json:{duplicate_sha}:docs/evidence.json")
+        record_path.write_text(json.dumps(record), encoding="utf-8")
+        executable_path = evidence_root / "docs" / "executable.json"
+        executable_path.write_text(json.dumps(record), encoding="utf-8")
+        executable_path.chmod(0o755)
+        subprocess.run(["git", "add", "."], cwd=evidence_root, check=True)
+        subprocess.run(["git", "commit", "-qm", "executable"], cwd=evidence_root, check=True)
+        executable_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=evidence_root, check=True,
+            capture_output=True, text=True,
+        ).stdout.strip()
+        expect_evidence_rejection(f"git-json:{executable_sha}:docs/executable.json")
+        symlink_path = evidence_root / "docs" / "symlink.json"
+        symlink_path.symlink_to("evidence.json")
+        subprocess.run(["git", "add", "."], cwd=evidence_root, check=True)
+        subprocess.run(["git", "commit", "-qm", "symlink"], cwd=evidence_root, check=True)
+        symlink_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=evidence_root, check=True,
+            capture_output=True, text=True,
+        ).stdout.strip()
+        expect_evidence_rejection(f"git-json:{symlink_sha}:docs/symlink.json")
+        validated_hardware["hardware_evidence_record"] = "repo-json:docs/evidence.json"
     partial_hardware = dict(validated_hardware)
     partial_hardware.update(
         {
@@ -897,11 +1174,18 @@ def check_queue_contract() -> None:
             "hardware_evidence_gaps": ["repeat reconnect step"],
         }
     )
-    validate_work_order(partial_hardware)
+    partial_hardware["hardware_evidence_record"] = validated_hardware["hardware_evidence_record"]
+    partial_record = dict(record)
+    partial_record["result"] = "PARTIAL"
+    partial_record["evidence_gaps"] = ["repeat reconnect step"]
+    record_path.write_text(json.dumps(partial_record), encoding="utf-8")
+    subprocess.run(["git", "add", "."], cwd=evidence_root, check=True)
+    subprocess.run(["git", "commit", "-qm", "partial"], cwd=evidence_root, check=True)
+    validate_work_order(partial_hardware, evidence_root)
     partial_without_gaps = dict(partial_hardware)
     partial_without_gaps["hardware_evidence_gaps"] = []
     try:
-        validate_work_order(partial_without_gaps)
+        validate_work_order(partial_without_gaps, evidence_root)
     except FrameworkDocsError:
         pass
     else:
@@ -915,11 +1199,11 @@ def check_queue_contract() -> None:
             "hardware_evidence_gaps": [],
         }
     )
-    validate_work_order(pretest_hardware)
+    validate_work_order(pretest_hardware, evidence_root)
     pretest_with_result = dict(pretest_hardware)
     pretest_with_result["hardware_result"] = "PASS"
     try:
-        validate_work_order(pretest_with_result)
+        validate_work_order(pretest_with_result, evidence_root)
     except FrameworkDocsError:
         pass
     else:
@@ -929,7 +1213,7 @@ def check_queue_contract() -> None:
         "firmware_artifact_build_path"
     ]
     try:
-        validate_work_order(mutable_locator)
+        validate_work_order(mutable_locator, evidence_root)
     except FrameworkDocsError:
         pass
     else:
@@ -939,11 +1223,12 @@ def check_queue_contract() -> None:
         "artifact://" + "a" * 40 + "/firmware.uf2"
     )
     try:
-        validate_work_order(incomplete_locator)
+        validate_work_order(incomplete_locator, evidence_root)
     except FrameworkDocsError:
         pass
     else:
         fail("preserved artifact locator without artifact SHA passed validation")
+    temp_context.cleanup()
     pass_line("canonical queue, runway counts, and zero-runway liveness validate")
 
 

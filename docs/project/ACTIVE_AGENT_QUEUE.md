@@ -43,12 +43,12 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -103,6 +103,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host-tool/docs branch if valid offline output or deterministic preparation regresses; do not restore acceptance of unverified packets or protected output targets without renewed curation.",
       "status_documentation_updates": "Correct the generator-v2 integrity and output-boundary docs without creating production authority, a firmware candidate, or a hardware claim.",
       "done_evidence": "Independent review, complete tamper/path negative corpus, safe-output atomicity and non-mutation proof, shared-validator proof, current aggregate and navigation PASS, and exact active-source/table semantic digests unchanged.",
@@ -126,7 +129,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-HW-001",
       "title": "Enforce hardware evidence-record correspondence",
-      "status": "READY",
+      "status": "DONE",
       "branch": "agent-framework-hardware-evidence-correspondence",
       "objective": "Make every Revision-2 H2/H3 result-bearing queue state resolve and validate a structured evidence record for the exact candidate, artifact, locator, protocol, result, and evidence gaps.",
       "why_this_matters": "The current framework accepts HARDWARE_VALIDATED and other result states when hardware_evidence_record is any nonempty string, including a nonexistent path, so exact-snapshot acceptance can fail open despite the manual hardware contract.",
@@ -162,6 +165,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused governance branch if valid immutable evidence cannot be resolved deterministically; never fall back to accepting an arbitrary nonempty string.",
       "status_documentation_updates": "Document the two accepted Revision-2 record-reference forms and the unsupported external-form stop, while preserving legacy UNKNOWN identity and all manual hardware gates.",
       "done_evidence": "Focused independent governance review; structured record and exact cross-reference positive/negative corpus PASS; current framework/navigation gates PASS; no hardware, firmware artifact, workflow, runtime, or product mutation.",
@@ -221,6 +227,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused parity branch if it mistakes historical prose for current state; retain the canonical machine block and do not restore contradictory current guidance.",
       "status_documentation_updates": "Reconcile only current queue/status mirrors and document generic parity ownership; do not change work authorization while performing this item.",
       "done_evidence": "Focused independent governance review, adversarial generic parity corpus PASS, current framework/sequence/navigation/surface gates PASS, and exact queue authorization JSON unchanged by the implementation branch.",
@@ -282,6 +291,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused workflow/checker branch if valid CI contexts cannot run the current aggregate; do not restore artifact publication that bypasses known-failing validation without renewed curation.",
       "status_documentation_updates": "Document validation-before-publication and pull-request coverage without claiming branch protection, release integrity, immutable storage, reproducible postprocessing, or hardware acceptance.",
       "done_evidence": "Independent review; exact static workflow positive/adversarial corpus PASS; local current aggregate and census PASS; workflow diff contains no product/runtime source, postprocessor binary, firmware artifact, upload destination, release, device-write, or hardware-result change.",
@@ -340,6 +352,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert only the focused host-tool/docs branch before merge if guardrails break supported dry-run behavior; do not restore misleading inert classification or active-source write paths without renewed curation.",
       "status_documentation_updates": "Update the current runtime-config docs and fixtures touched by the contradictory classification; do not claim a new production profile, hardware result, or active publication mechanism.",
       "done_evidence": "Independent review plus focused negative corpus and current aggregate PASS; exact 28-table semantic digest unchanged; git diff contains no firmware/runtime behavior source or table-byte delta.",
@@ -397,6 +412,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Remove the new aggregate/classification branch if it obscures a current source-backed failure; preserve all historical evidence files.",
       "status_documentation_updates": "Update the official configurator/export navigation and checker classification only; retain bounded non-claims.",
       "done_evidence": "Independent review PASS, five current checks plus the new aggregate PASS, negative classification coverage PASS, docs navigation PASS, and no product/runtime source change. Canonical implementation commit: 24d18bb666985fedd51d8820971c92ae55db9da7.",
@@ -455,6 +473,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker/docs branch if an unknown evidence entry can evade rejection.",
       "status_documentation_updates": "Document the exact ignored host-metadata rule without recording a capture or compatibility result.",
       "done_evidence": "Canonical implementation commit 38d50a3a3785b6b92ac6bac4fdf98dc5c3d890e5, merged into configurator at d740821ad94d7f9adee4dbeb06ead52f9c76bcc6; focused positive/adversarial cases, manual capture plan, docs navigation, and the clean runtime-config validation lane pass; live .DS_Store no longer creates a false failure; unknown evidence, directories, and symlinks still fail; independent review and repaired-scope re-review pass.",
@@ -512,6 +533,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Remove the inert research/schema branch if static identities or validation rules are incorrect; leave CI, glyph_nuker, and all artifacts unchanged.",
       "status_documentation_updates": "Record exact observed identities, UNKNOWN purpose where unresolved, and the durable-store blocker; do not update hardware status.",
       "done_evidence": "Independent review, tools/check_glyph_artifact_postprocessor_provenance.py --check, synthetic tamper/locator negative cases, docs navigation, exact tracked binary hash and workflow commands recorded, UNKNOWN purpose/effect preserved, and git diff shows no workflow, binary, firmware, artifact, or product-code mutation.",
@@ -575,6 +599,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused validation-control-plane branch if deterministic regeneration or aggregate freshness enforcement is incorrect; do not restore a passing aggregate over a known-stale census without renewed curation.",
       "status_documentation_updates": "Document that checker-census freshness is load-bearing while the curated manifest remains authoritative for applicability; do not claim broader compatibility or runtime evidence.",
       "done_evidence": "Independent review PASS; census freshness, validation-health, aggregate adversarial (including added/removed/renamed/byte-changed checker drift), full runtime-config aggregate, and docs-navigation PASS; git diff contains no firmware/configurator product code or runtime/product semantic change. Canonical implementation commit: b34ed5b31e8140ef9e0484f8e98e0be942d1169c.",
@@ -643,6 +670,9 @@ Git, but it is not current candidate supply or implementation authority.
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Remove the focused renderer/docs branch if validation, determinism, or non-mutation cannot be proved; retain the existing v2 artifact/manifest and authority-intake contracts unchanged.",
       "status_documentation_updates": "Document the prepared-v2 C++ preview as offline, review-only, non-installing, and non-authoritative; retain the absence of a production-owned table set and all runtime/device-write non-claims.",
       "done_evidence": "Independent review plus full synthetic/negative corpus, generator-mode, source-authority-intake, generated-source contract, runtime-config aggregate, and docs-navigation PASS; deterministic digest correspondence is proved; git diff contains no firmware/runtime source, active table bytes, production intake, candidate artifact, workflow, or device-write change.",
@@ -671,16 +701,16 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `3`.
+- Immediate Ready runway: `2`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `3`.
-- Current liveness result: `RUNWAY_LOW` at `3` against the recorded target of `4`.
+- Effective authorized runway: `2`.
+- Current liveness result: `RUNWAY_LOW` at `2` against the recorded target of `4`.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
-Three Ready items are recorded. No Preauthorization or hardware-pending work is
+Two Ready items are recorded. No Preauthorization or hardware-pending work is
 recorded. The remaining external-gated Planner supply is not a global wait:
 `GP-AUTH-001` remains `USER_DECISION_GATED`, and `GP-CONFIG-002` remains
 `EVIDENCE_GATED` after `GP-CONFIG-003`.
@@ -726,9 +756,11 @@ candidates remain non-executable.
 - `GP-SRC-003`: `DONE`; prepared-packet correspondence, shared isolated-output
   guardrails, atomic writes, and adversarial tamper/path coverage shipped in
   `6cdc25363f1446dea8436cc874992e5adec158ad` without active-source change.
-- `GP-HW-001`: `READY`; Revision-2 result references are limited to a
+- `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
   current-tree structured record or immutable full-commit-plus-path record and
-  must match the exact queue identity/result fields.
+  must match the exact queue identity/result fields. The exact flat schema,
+  Git-object resolution, queue correspondence, and adversarial self-tests
+  shipped in this cycle.
 - `GP-CTL-001`: `READY`; generic machine/prose runway parity enforcement is
   authorized on the ordinary Curator governance-checker surface.
 - `GP-VAL-002`: `READY`; `GP-VAL-001` is complete, and current validation must
@@ -758,7 +790,7 @@ candidates remain non-executable.
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
-priority order. Only the four `READY` items authorize immediate execution. No
+priority order. Only the two `READY` items authorize immediate execution. No
 candidate is Preauthorized.
 
 Every future item recorded in the machine-readable `items` list must satisfy

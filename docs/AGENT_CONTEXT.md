@@ -65,8 +65,8 @@ automation from this context document.
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Curator review of partially consumed
-  Planner packet `glyph-portfolio-20260823-1450` records `GP-HW-001`,
-  `GP-CTL-001`, and dependency-resolved `GP-VAL-002` as `READY`; `GP-SRC-003`
+  Planner packet `glyph-portfolio-20260823-1450` records `GP-HW-001` as `DONE`,
+  while `GP-CTL-001` and dependency-resolved `GP-VAL-002` remain `READY`; `GP-SRC-003`
   is `DONE` after implementation commit
   `6cdc25363f1446dea8436cc874992e5adec158ad`. No Preauthorization or
   hardware-pending work is recorded. Effective authorized runway is three

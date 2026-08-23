@@ -77,6 +77,12 @@ NOT_REQUIRED | REQUIRED
 
 Manual acceptance protocol reference:
 
+Manual acceptance protocol version:
+
+Hardware evidence contract reference:
+
+Hardware evidence contract version:
+
 Hardware evidence record:
 [canonical evidence path/ref after processing; otherwise null]
 
@@ -163,6 +169,15 @@ full lowercase SHA-256 | null
 
 hardware_evidence_record:
 non-empty path/ref | null
+
+manual_acceptance_protocol_version:
+non-empty version | NOT_APPLICABLE
+
+hardware_evidence_contract_reference:
+docs/agent_framework/HARDWARE_EVIDENCE.md | NOT_APPLICABLE
+
+hardware_evidence_contract_version:
+GLYPH_HARDWARE_EVIDENCE_V2 | NOT_APPLICABLE
 
 hardware_result:
 PASS | FAIL | PARTIAL | INCONCLUSIVE | null

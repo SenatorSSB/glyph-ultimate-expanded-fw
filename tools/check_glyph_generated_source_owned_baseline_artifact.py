@@ -38,7 +38,7 @@ EXPECTED_POINT_COUNT = 9
 EXPECTED_AXES_PER_POINT = 2
 
 ALLOWED_PATH_RE = re.compile(
-    r"^(?:docs/runtime_config/|docs/agent_framework/|docs/calibration/|docs/AGENT_CONTEXT\.md|docs/CURRENT_STATE\.md|docs/ROADMAP\.md|tools/|"
+    r"^(?:docs/runtime_config/|docs/agent_framework/|docs/calibration/|docs/project/ACTIVE_AGENT_QUEUE\.md|docs/AGENT_CONTEXT\.md|docs/CURRENT_STATE\.md|docs/ROADMAP\.md|tools/|"
     r"src/modes/UltimateIdentityRuntimeTables\.hpp|"
     r"src/modes/runtime_config/generated_source_owned/)"
 )

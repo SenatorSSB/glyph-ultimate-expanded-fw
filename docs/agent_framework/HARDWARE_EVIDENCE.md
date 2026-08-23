@@ -107,6 +107,13 @@ UF2 hashes are not assumed reproducible across separate rebuilds.
 
 ## Evidence Processing
 
+Revision-2 evidence records are structured JSON blobs referenced only as
+`repo-json:docs/<normalized-path>.json` (resolved from `HEAD`) or
+`git-json:<full-lowercase-commit-sha>:docs/<normalized-path>.json` (resolved
+from that immutable commit). The path must resolve to a regular, non-executable
+Git `100644` blob under `docs/`; mutable refs, external strings, symlinks,
+trees, and executable or submodule entries are not evidence records.
+
 The Hardware Evidence Processor accepts human-supplied observations only. It
 verifies candidate Git SHA, artifact SHA-256, protocol version, controller and
 context, result completeness, source drift after artifact creation, and exact
