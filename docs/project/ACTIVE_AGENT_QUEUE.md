@@ -19,17 +19,19 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "6bc34852e1c823fdeda10f42cc370e5cdec8056e",
+  "audit_base_sha": "4ce08a163d4e2c18f05f85da1c73e52a16a479a2",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
     "branch": "planning/portfolio-20260823-0152",
     "base_configurator_sha": "6bc34852e1c823fdeda10f42cc370e5cdec8056e",
-    "candidate_count": 5,
+    "candidate_count": 3,
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator independently reviewed all nine candidates: four became READY, three dependency successors remain CURATION_REQUIRED after their predecessors, and two remain external-gated."
+      "Curator independently reviewed all nine candidates: four became READY, three dependency successors remained CURATION_REQUIRED after their predecessors, and two remained external-gated.",
+      "GP-SRC-001 and GP-CONFIG-001 completed on configurator without runtime product behavior changes.",
+      "Follow-up Curator review on live configurator 4ce08a163d4e2c18f05f85da1c73e52a16a479a2 authorized GP-VAL-001 and GP-SRC-002; GP-VAL-002 remains dependency-gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-0152",
@@ -41,17 +43,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 4,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "RUNWAY_OK"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -291,6 +293,137 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-001",
+      "title": "Make checker census freshness load-bearing",
+      "status": "READY",
+      "branch": "runtime-config-checker-census-integration",
+      "objective": "Make deterministic repository checker-census freshness a load-bearing prerequisite of the current runtime-config validation aggregate.",
+      "why_this_matters": "Live configurator currently reports a passing runtime-config aggregate while the standalone checker census fails on committed checker drift, so the aggregate can certify a stale view of the available checker surface.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This work changes validation control-plane behavior only: stale checker discovery metadata will make the current aggregate fail before successful validation publication. It changes no firmware, configurator product behavior, runtime semantics, or hardware claim.",
+      "scope": "Regenerate the deterministic static checker census from the live checker surface, add census freshness as a current load-bearing aggregate prerequisite, keep the curated manifest as the authority for checker applicability, update the validation-health record mechanically, and add isolated adversarial coverage proving any discovered checker-set or checker-byte drift fails the aggregate. Census generation remains static inspection only and must not import or execute discovered checkers.",
+      "explicit_excluded_scope": "No manual hash editing; no automatic promotion of census relevance signals into current applicability; no checker weakening or historical-lane promotion; no product/runtime test changes beyond the focused validation aggregate/census/health contract; no CI workflow integration, firmware source, runtime config, device write, persistence, protobuf write, flashing, hardware result, Nunchuk claim, or root-cause claim.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "On live configurator 4ce08a163d4e2c18f05f85da1c73e52a16a479a2, python3 tools/check_glyph_checker_census.py fails with committed artifact drift while python3 tools/run_glyph_runtime_config_validation.py --json passes 20 current load-bearing checks. tools/generate_glyph_checker_census.py deterministically discovers tools/check_glyph_*.py and records static hashes/signals without importing or executing them; tools/run_glyph_runtime_config_validation.py consumes the committed census only for strong-signal classification and does not verify census freshness. Planner candidate GP-VAL-001 at commit 6a21c4f442f3de6fe2da42094dbdc32f68c95d2a identified this exact gap.",
+      "dependencies_prerequisites": [
+        "GP-SRC-001 is DONE on configurator at canonical implementation commit 6152c70e20e00bcb6dda1efb19bf527e341a78fe.",
+        "Implementation begins from a fresh live configurator descendant of 4ce08a163d4e2c18f05f85da1c73e52a16a479a2 and regenerates the census only after all authorized checker edits in its branch are final."
+      ],
+      "substantive_authorization_rationale": "The reproduced contradiction is a fail-closed validation correctness gap with no product or semantic choice. The intended invariant is exact: the current aggregate must not pass when deterministic checker discovery metadata is stale, while census signals remain review prompts and never self-authorize applicability. GP-SRC-001 has completed, so the predecessor-driven checker drift is now concrete and the successor scope can be judged without anticipating further predecessor changes.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The census becomes load-bearing through another current configurator change before implementation.",
+        "The implementation would infer current applicability from static census signals or execute discovered checkers during census generation.",
+        "The patch would weaken, remove, or reclassify an existing current validation invariant instead of adding freshness enforcement.",
+        "The scope expands into CI publication parity, which remains GP-VAL-002 and requires fresh curation after this item is complete."
+      ],
+      "authorization_snapshot_provenance": "Follow-up Curator review of Planner branch planning/portfolio-20260823-0152, candidate GP-VAL-001, packet commit 6a21c4f442f3de6fe2da42094dbdc32f68c95d2a, packet base 6bc34852e1c823fdeda10f42cc370e5cdec8056e, independently reverified against live configurator 4ce08a163d4e2c18f05f85da1c73e52a16a479a2 and published on curation/portfolio-20260823-0421-followup.",
+      "automated_validation": [
+        "python3 tools/generate_glyph_checker_census.py --check passes after deterministic regeneration.",
+        "python3 tools/check_glyph_checker_census.py passes and reports the discovery-derived count.",
+        "An isolated adversarial test proves added, removed, renamed, or byte-changed checkers make the aggregate fail until deterministic census regeneration, without importing or executing discovered checkers.",
+        "Adversarial coverage proves static relevance signals cannot automatically add a checker to the current manifest or remove the requirement for explicit curated classification.",
+        "python3 tools/check_glyph_runtime_config_validation_health.py passes.",
+        "python3 tools/check_glyph_runtime_config_validation_aggregate.py passes.",
+        "python3 tools/run_glyph_runtime_config_validation.py --json passes with census freshness recorded as a current load-bearing result.",
+        "python3 tools/check_glyph_docs_navigation.py passes."
+      ],
+      "canonical_build": "NOT_REQUIRED: deterministic static census, validation manifest/health, adversarial checker, and docs only; any compiled or product source delta stops this work order.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused validation-control-plane branch if deterministic regeneration or aggregate freshness enforcement is incorrect; do not restore a passing aggregate over a known-stale census without renewed curation.",
+      "status_documentation_updates": "Document that checker-census freshness is load-bearing while the curated manifest remains authoritative for applicability; do not claim broader compatibility or runtime evidence.",
+      "done_evidence": "Independent review plus census, validation-health, aggregate adversarial, full runtime-config aggregate, and docs-navigation PASS; a deliberate temporary checker drift makes the aggregate fail; git diff contains no firmware/configurator product code or runtime/product semantic change.",
+      "stop_conditions": [
+        "Any discovered checker is imported or executed by census generation.",
+        "Static signals would become automatic applicability or authorization.",
+        "Any current validation gate, evidence classification, or provenance invariant would be weakened.",
+        "Any CI workflow, product/runtime source, hardware, device-write, persistence, protobuf-write, or flashing scope is required."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-SRC-002",
+      "title": "Render authorized v2 packets as C++ previews",
+      "status": "READY",
+      "branch": "source-owned-v2-cpp-preview-bridge",
+      "objective": "Add a deterministic, review-only prepared-packet-to-C++ preview seam for the source-authority intake and generator-v2 pipeline without installing or activating source.",
+      "why_this_matters": "The completed authority intake and generator-v2 modes preserve explicit ownership and produce a validated 28-table artifact/manifest, but the current prepared-packet install emits JSON and the older C++ generator consumes a separate legacy layout-spec contract. Reviewers therefore lack one authority-preserving v2-to-C++ preview path.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "This work adds deterministic host-side rendering of already explicit validated table symbols and coordinates into inert review text only. It performs no source install, branch creation, build, candidate publication, active-table mutation, RuntimeConfigView change, or controller behavior change.",
+      "scope": "Add a read-only renderer and focused CLI/checker path that accepts only a complete prepared schema-version-1 packet, revalidates its prepared semantic digest, artifact, 28-row manifest, baseline identity, production/source-equivalence gate, explicit ownership, provenance, table order, per-table/candidate digests, and classification, then renders a deterministic C++ header preview to stdout or an explicitly safe temporary/offline target. The renderer must use only the packet's existing table_symbol and nine exact points in canonical baseline order, carry profile/provenance and artifact/manifest semantic digests in review metadata, and label the output as inactive review material.",
+      "explicit_excluded_scope": "No inference of table mapping, ownership, replacement values, profile intent, or game semantics; no generic or active-source install; no writes under src, include, lib, backend, HAL, .git, or active-publication-like paths; no candidate branch preparation, firmware build, hardware artifact, CI integration, runtime loading, active selection, persistence, WebSerial/device write, protobuf write, flashing, production table authorization, Nunchuk claim, or root-cause claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "On live configurator 4ce08a163d4e2c18f05f85da1c73e52a16a479a2, tools/source_owned_source_authority_intake.py emits generator-input v2 only from approved explicit intake and immediately validates the generated artifact/manifest; tools/source_owned_generator_modes.py prepares schema-version-1 packets containing the complete artifact and manifest, but install_prepared writes the artifact as JSON. tools/generate_source_owned_runtime_config.py renders C++ only from the separate schema-version-1 profile/layout-spec path and has no prepared-packet consumer. Current generator-mode and source-authority-intake checks pass, and no production-authorized intake exists. Planner candidate GP-SRC-002 at commit 6a21c4f442f3de6fe2da42094dbdc32f68c95d2a identified this seam.",
+      "dependencies_prerequisites": [
+        "GP-SRC-001 is DONE on configurator at canonical implementation commit 6152c70e20e00bcb6dda1efb19bf527e341a78fe, so active table-source classification and generic write guardrails are current.",
+        "The prepared packet, baseline extractor, v2 schema, table order, production gate, and source-authority intake semantics remain materially unchanged from live configurator 4ce08a163d4e2c18f05f85da1c73e52a16a479a2.",
+        "Tests use synthetic production-authorized packets or the current source-baseline-derived no-op only; no real production authority is asserted or created."
+      ],
+      "substantive_authorization_rationale": "The gap and mapping seam are source-proven, and every rendered semantic input already exists explicitly in the validated prepared packet. Revalidation plus stdout/temporary-only output prevents the renderer from inventing authority or becoming an install path. This is useful engineering integration inside the approved source-owned generator direction and does not consume the missing user/Senscope production-table decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The prepared packet schema, baseline identity, production gate, or authority-intake semantics materially change before implementation.",
+        "Another current tool already supplies an equivalent prepared-v2-to-C++ preview with the same authority and mutation guardrails.",
+        "Implementation requires inferred symbol mapping, ownership, replacement content, profile intent, or any game-semantic decision.",
+        "The output would be written to active or compiled source, used to create a firmware candidate, or treated as production authority."
+      ],
+      "authorization_snapshot_provenance": "Follow-up Curator review of Planner branch planning/portfolio-20260823-0152, candidate GP-SRC-002, packet commit 6a21c4f442f3de6fe2da42094dbdc32f68c95d2a, packet base 6bc34852e1c823fdeda10f42cc370e5cdec8056e, independently reverified against live configurator 4ce08a163d4e2c18f05f85da1c73e52a16a479a2 and published on curation/portfolio-20260823-0421-followup.",
+      "automated_validation": [
+        "Synthetic authorized full-replacement and overlay/preserve prepared packets render deterministic C++ previews with exactly 28 ordered table symbols and exact nine-point coordinates.",
+        "The current source-baseline-derived no-op renders equivalently to the extracted active table bytes while remaining explicitly inactive review output and not a hardware candidate.",
+        "Tampered prepared digest, artifact or manifest digest, baseline identity, row order, table symbol, ownership, provenance, classification, changed/preserved counts, point count, coordinate, and unknown field all fail closed.",
+        "Example, synthetic without explicit test mode, unknown, migrated-legacy, unapproved, unsafe-unowned, and ineligible packets cannot be presented as production previews.",
+        "Path adversarial tests reject repository source trees, active table-source aliases, case variants, symlinks, and active-publication-like names; stdout and isolated temporary outputs leave the repository byte-for-byte unchanged.",
+        "Repeated rendering is byte-deterministic and includes matching artifact and manifest semantic digests in non-semantic review metadata.",
+        "python3 tools/check_glyph_source_owned_generator_modes.py passes.",
+        "python3 tools/check_glyph_source_owned_source_authority_intake.py passes.",
+        "python3 tools/check_glyph_generated_source_owned_generator_contract.py passes.",
+        "python3 tools/run_glyph_runtime_config_validation.py --json passes.",
+        "python3 tools/check_glyph_docs_navigation.py passes."
+      ],
+      "canonical_build": "NOT_REQUIRED: inactive host-side renderer, temporary/offline fixtures, docs, and checker coverage only; any compiled source or active table-content delta stops and requires separate H2/H3 authorization.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "rollback_recovery": "Remove the focused renderer/docs branch if validation, determinism, or non-mutation cannot be proved; retain the existing v2 artifact/manifest and authority-intake contracts unchanged.",
+      "status_documentation_updates": "Document the prepared-v2 C++ preview as offline, review-only, non-installing, and non-authoritative; retain the absence of a production-owned table set and all runtime/device-write non-claims.",
+      "done_evidence": "Independent review plus full synthetic/negative corpus, generator-mode, source-authority-intake, generated-source contract, runtime-config aggregate, and docs-navigation PASS; deterministic digest correspondence is proved; git diff contains no firmware/runtime source, active table bytes, production intake, candidate artifact, workflow, or device-write change.",
+      "stop_conditions": [
+        "Any semantic value, ownership, mapping, or source authority must be inferred rather than read from a valid prepared packet.",
+        "Any repository active/compiled source or active publication path would be written or selected.",
+        "Any real production profile, firmware candidate, build, artifact publication, hardware, CI, runtime loading, persistence, device-write, protobuf-write, or flashing action is required.",
+        "Any forbidden active path, Nunchuk validation, or root-cause claim would be introduced."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
     }
   ]
 }
@@ -299,22 +432,21 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `2`.
+- Immediate Ready runway: `4`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `2`.
-- Current liveness result: `RUNWAY_LOW` below the recorded target of `4`.
+- Effective authorized runway: `4`.
+- Current liveness result: `RUNWAY_OK` at the recorded target of `4`.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
-The two remaining Ready items are independent current H0/H1 opportunities. No
-Preauthorization is recorded: the three dependency successors require a fresh
-Curator judgment after their predecessors because semantic and applicability
-drift cannot be reduced to the current objective mechanical evidence. The
-remaining Planner supply is not a global wait: `GP-AUTH-001` remains
-`USER_DECISION_GATED`, and `GP-CONFIG-002` remains `EVIDENCE_GATED` after
-`GP-CONFIG-003`.
+The four Ready items are independent current H0/H1 opportunities. No
+Preauthorization is recorded. `GP-VAL-002` still requires fresh Curator
+judgment after `GP-VAL-001`; its future workflow and aggregate assumptions
+cannot be activated mechanically. The remaining Planner supply is not a
+global wait: `GP-AUTH-001` remains `USER_DECISION_GATED`, and
+`GP-CONFIG-002` remains `EVIDENCE_GATED` after `GP-CONFIG-003`.
 
 ## Allowed Statuses
 
@@ -348,21 +480,25 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Planner packet `glyph-portfolio-20260823-0152` was independently reviewed
-against live `configurator` base
-`6bc34852e1c823fdeda10f42cc370e5cdec8056e`.
+Planner packet `glyph-portfolio-20260823-0152` was initially reviewed against
+its exact live `configurator` base
+`6bc34852e1c823fdeda10f42cc370e5cdec8056e`. Follow-up review reverified the
+surviving dependency candidates against live `configurator`
+`4ce08a163d4e2c18f05f85da1c73e52a16a479a2` after `GP-SRC-001` and
+`GP-CONFIG-001` completed.
 
-- `GP-SRC-001`: `READY`; source-proven correctness/safety gap, H1, no runtime
-  byte change authorized.
-- `GP-VAL-001`: `SUBSTANTIVE_DEPENDENCY_GATED` / `CURATION_REQUIRED` after
-  `GP-SRC-001`; successor checker/applicability drift needs fresh judgment.
+- `GP-SRC-001`: `DONE`; active-table-source truth and mutation guardrails
+  shipped without a runtime byte change.
+- `GP-VAL-001`: `READY`; the live census/aggregate contradiction remains
+  reproduced after `GP-SRC-001`, with curated applicability preserved.
 - `GP-VAL-002`: `SUBSTANTIVE_DEPENDENCY_GATED` / `CURATION_REQUIRED` after
   `GP-SRC-001` and `GP-VAL-001`; future aggregate safety and workflow parity
   need fresh judgment.
-- `GP-SRC-002`: `SUBSTANTIVE_DEPENDENCY_GATED` / `CURATION_REQUIRED` after
-  `GP-SRC-001`; generator-v2 semantics and duplicate-work checks need fresh
-  judgment.
-- `GP-CONFIG-001`: `READY`; current-vs-historical checker classification only.
+- `GP-SRC-002`: `READY`; the authority-preserving prepared-v2-to-C++ preview
+  seam remains absent after `GP-SRC-001`, with active writes and semantic
+  inference excluded.
+- `GP-CONFIG-001`: `DONE`; current-vs-historical official-configurator checker
+  classification shipped without product behavior change.
 - `GP-CONFIG-003`: `READY`; exact `.DS_Store` regular-file exception only.
 - `GP-PROV-001`: `READY`; observed-only research and inert provenance schema,
   with CI integration and store selection excluded.
