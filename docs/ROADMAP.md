@@ -9,14 +9,14 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Curator review of partially consumed Planner packet
 `glyph-portfolio-20260823-1450` records `GP-HW-001` and `GP-CTL-001` as Done, while
-`GP-VAL-002` remains Ready; `GP-SRC-003` is Done after its host-tool guardrail
+`GP-VAL-002` is Done after its validation-before-publication gate; `GP-SRC-003` is Done after its host-tool guardrail
 implementation at `6cdc25363f1446dea8436cc874992e5adec158ad`, while the six
 previously authorized items remain Done. The current-runway marker above is
 authoritative for runway counts and liveness; external-gated supply does not

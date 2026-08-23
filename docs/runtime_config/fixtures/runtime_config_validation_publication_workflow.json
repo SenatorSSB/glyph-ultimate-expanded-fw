@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "workflow": ".github/workflows/build.yml",
+  "validation_job": "validation",
+  "publication_job": "build",
+  "required_events": ["push:", "pull_request:"],
+  "required_tokens": [
+    "permissions:\n  contents: read",
+    "fetch-depth: 0",
+    "GLYPH_CHECKER_BASE",
+    "git fetch --no-tags origin",
+    "GITHUB_BASE_REF",
+    "origin/configurator",
+    "python3 tools/run_glyph_runtime_config_validation.py --json"
+  ],
+  "publication_tokens": [
+    "pio run -e",
+    "glyph_nuker",
+    "actions/upload-artifact@v4"
+  ],
+  "negative_mutations": [
+    {"id": "missing_pull_request", "old": "  pull_request:\n", "new": ""},
+    {"id": "wrong_validation_command", "old": "python3 tools/run_glyph_runtime_config_validation.py --json", "new": "python3 tools/run_glyph_runtime_config_validation.py --check-manifest"},
+    {"id": "shallow_checkout", "old": "fetch-depth: 0", "new": "fetch-depth: 1"},
+    {"id": "write_permission", "old": "contents: read", "new": "contents: write"},
+    {"id": "missing_dependency", "old": "    needs: validation\n", "new": ""},
+    {"id": "continue_on_error", "old": "  build:\n", "new": "  build:\n    continue-on-error: true\n"},
+    {"id": "alternate_unguarded_publication", "old": "  build:\n", "new": "  publish:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/upload-artifact@v4\n      with:\n        path: firmware.uf2\n\n  build:\n"}
+  ]
+}

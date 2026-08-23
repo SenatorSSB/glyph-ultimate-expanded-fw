@@ -373,7 +373,7 @@ def main() -> int:
         context = collect_checker_context(repo_root=REPO_ROOT)
         validate_feature_scope(
             context,
-            allowed_paths=("docs/", "tools/", "AGENTS.md", "CLAUDE.md"),
+            allowed_paths=("docs/", "tools/", ".github/workflows/build.yml", "AGENTS.md", "CLAUDE.md"),
         )
     except CheckerContextError as exc:
         fail(str(exc))

@@ -64,13 +64,13 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Curator review of partially consumed
   Planner packet `glyph-portfolio-20260823-1450` records `GP-HW-001` as `DONE`,
-  while dependency-resolved `GP-VAL-002` remains `READY`; `GP-SRC-003`
+  while `GP-VAL-002` is now `DONE`; `GP-SRC-003`
   is `DONE` after implementation commit
   `6cdc25363f1446dea8436cc874992e5adec158ad`. No Preauthorization or
   hardware-pending work is recorded; the current-runway marker above is

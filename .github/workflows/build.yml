@@ -1,12 +1,39 @@
 name: PlatformIO CI
 
-on: [push]
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
+  validation:
+    runs-on: ubuntu-latest
+    env:
+      GLYPH_CHECKER_BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'origin/configurator' }}
+    steps:
+    - name: Check out source code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set trusted comparison base
+      run: |
+        if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+          git fetch --no-tags origin "$GITHUB_BASE_REF:refs/remotes/origin/$GITHUB_BASE_REF"
+        else
+          git fetch --no-tags origin "configurator:refs/remotes/origin/configurator"
+        fi
+        test -n "$GLYPH_CHECKER_BASE"
+        git rev-parse --verify "$GLYPH_CHECKER_BASE"
+
+    - name: Run current runtime-config validation
+      run: python3 tools/run_glyph_runtime_config_validation.py --json
+
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    needs: validation
     env:
       PIO_ENV: ${{ matrix.env }}
       BIN_EXT: ${{ matrix.bin_ext }}

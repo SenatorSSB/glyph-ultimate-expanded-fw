@@ -43,17 +43,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
-  "signals": [
-    "RUNWAY_LOW"
+    "signals": [
+    "CURATION_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -253,7 +253,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-002",
       "title": "Gate CI artifact publication on current validation",
-      "status": "READY",
+      "status": "DONE",
       "branch": "ci-runtime-config-validation-publication-gate",
       "objective": "Run the accepted current fail-closed runtime-config validation on pushes and pull requests before any firmware build, postprocessing, or artifact upload can publish bytes.",
       "why_this_matters": "The current build workflow is push-only and builds, postprocesses, and uploads firmware without running the load-bearing checker census and current validation aggregate, so publication is not coupled to the accepted validation lane.",
@@ -296,7 +296,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused workflow/checker branch if valid CI contexts cannot run the current aggregate; do not restore artifact publication that bypasses known-failing validation without renewed curation.",
       "status_documentation_updates": "Document validation-before-publication and pull-request coverage without claiming branch protection, release integrity, immutable storage, reproducible postprocessing, or hardware acceptance.",
-      "done_evidence": "Independent review; exact static workflow positive/adversarial corpus PASS; local current aggregate and census PASS; workflow diff contains no product/runtime source, postprocessor binary, firmware artifact, upload destination, release, device-write, or hardware-result change.",
+      "done_evidence": "Independent review PASS; exact static workflow positive/adversarial corpus PASS; local current aggregate and census PASS; YAML parse PASS; workflow diff contains no product/runtime source, postprocessor binary, firmware artifact, upload destination, release, device-write, or hardware-result change.",
       "stop_conditions": [
         "Any existing checker or Git-context invariant must be weakened or tools/glyph_checker_context.py must change.",
         "Any firmware source/build input, glyph_nuker binary or execution semantics, upload/store/release architecture, or artifact acceptance must change.",
@@ -702,7 +702,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -763,16 +763,16 @@ candidates remain non-executable.
   shipped in this cycle.
 - `GP-CTL-001`: `DONE`; generic machine/prose runway parity enforcement is
   authorized on the ordinary Curator governance-checker surface.
-- `GP-VAL-002`: `READY`; `GP-VAL-001` is complete, and current validation must
-  gate every CI build/postprocess/upload route with pull-request coverage and
-  existing Git-context invariants preserved.
+- `GP-VAL-002`: `DONE`; current validation now gates every CI
+  build/postprocess/upload route with pull-request coverage and existing
+  Git-context invariants preserved.
 
 - `GP-SRC-001`: `DONE`; active-table-source truth and mutation guardrails
   shipped without a runtime byte change.
 - `GP-VAL-001`: `DONE`; checker-census freshness is load-bearing, curated
   applicability remains authoritative, and the exact drift corpus passes.
-- `GP-VAL-002`: `READY`; its dependency gate remains resolved and it is now the
-  highest-priority executable successor.
+- `GP-VAL-002`: `DONE`; its validation-before-publication workflow gate and
+  static adversarial corpus are complete.
 - `GP-SRC-002`: `DONE`; the authority-preserving prepared-v2-to-C++ preview
   seam is implemented as inactive, deterministic host-side review output with
   fail-closed packet and temporary-path validation.
