@@ -19,19 +19,21 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "cf31dfd60b8247a9af19f2c417d8e712d63781ad",
+  "audit_base_sha": "b3f8201c49029586748bcfe9c5110a32f864ffbe",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
     "branch": "planning/portfolio-20260823-1450",
     "base_configurator_sha": "7688ee287491ff05898038045f5c1918be09f675",
-    "candidate_count": 6,
+    "candidate_count": 3,
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
       "The packet was published after GP-SRC-001, GP-CONFIG-001, and GP-CONFIG-003 completed, and before GP-PROV-001, GP-VAL-001, and GP-SRC-002 completed on configurator.",
       "Curator independently reproduced the surviving GP-SRC-003, GP-HW-001, GP-CTL-001, and GP-VAL-002 gaps against live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad and authorized four bounded H0/H1 work orders.",
-      "GP-AUTH-001 remains user/source-authority gated and GP-CONFIG-002 remains external-evidence gated; no global evidence wait is supported."
+      "GP-AUTH-001 remains user/source-authority gated and GP-CONFIG-002 remains external-evidence gated; no global evidence wait is supported.",
+      "GP-HW-001, GP-CTL-001, and GP-VAL-002 are DONE on live configurator b3f8201c49029586748bcfe9c5110a32f864ffbe, but GP-SRC-003 implementation commit 6cdc25363f1446dea8436cc874992e5adec158ad is a sibling of its canonical completion-publication commit and is not an ancestor of configurator.",
+      "Curator and independent review reproduced GP-SRC-003's active-target and stale-correspondence acceptance on live configurator; its false DONE state is corrected to READY with fresh authorization. NONE_AUTHORIZED production delta and zero completed official-configurator manual captures keep the other two survivors non-executable."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-1450",
@@ -43,17 +45,20 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "CURATION_REQUIRED"
+    "RUNWAY_LOW",
+    "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
+    "RUNWAY_SHORTFALL_EVIDENCE_GATED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -66,7 +71,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-003",
       "title": "Complete prepared-packet integrity and output guardrails",
-      "status": "DONE",
+      "status": "READY",
       "branch": "source-owned-v2-prepared-packet-guardrails",
       "objective": "Make every reusable generator-v2 preparation and installation path verify exact prepared-packet correspondence and fail closed for active, compiled, protected, aliased, or ambiguous output targets.",
       "why_this_matters": "The current installer accepts the active compile-time table header and accepts artifact or manifest payloads changed after preparation while their declared digests remain stale, contradicting the documented inert and integrity-gated boundary.",
@@ -78,11 +83,12 @@ Git, but it is not current candidate supply or implementation authority.
         "build tooling",
         "docs/checkers"
       ],
-      "source_authority": "Live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad: tools/source_owned_generator_modes.py validate_manifest() does not recompute the table, artifact, row, manifest, or prepared digests; install_prepared() accepts any absolute path except three case-sensitive substrings; tools/generate_source_owned_generator_modes.py prepare --output writes directly; tools/source_owned_cpp_preview.py contains a stricter but preview-local validator/path policy. Curator read-only reproductions accepted the exact active GeneratedRuntimeConfigBaseline.current.hpp path, a changed artifact coordinate with stale digests, and an arbitrary changed manifest action. Planner candidate GP-SRC-003 records the same gap.",
+      "source_authority": "Live configurator b3f8201c49029586748bcfe9c5110a32f864ffbe: tools/source_owned_generator_modes.py validate_manifest() does not recompute the table, artifact, row, manifest, or prepared digests; install_prepared() accepts any absolute path except three case-sensitive substrings; tools/generate_source_owned_generator_modes.py prepare --output writes directly; tools/source_owned_cpp_preview.py contains a stricter but preview-local validator/path policy. Curator and independent-review non-mutating reproductions accepted the exact active GeneratedRuntimeConfigBaseline.current.hpp path and a changed artifact coordinate with stale correspondence data. Commit 6cdc25363f1446dea8436cc874992e5adec158ad implements the planned guardrails on its focused remote branch but is not an ancestor of live configurator. Planner candidate GP-SRC-003 records the same gap.",
       "dependencies_prerequisites": [
         "GP-SRC-001 and GP-SRC-002 are DONE on configurator; their active-source classification, preview non-claims, and strict preview behavior must remain intact.",
-        "Implementation starts from a fresh descendant of cf31dfd60b8247a9af19f2c417d8e712d63781ad and keeps all repository active table bytes unchanged.",
-        "Permitted post-snapshot deltas are queue/status publication and deterministic checker-census or validation-health fixture regeneration caused solely by other authorized checker bytes; any prepared-packet, baseline, generator, intake, preview, path-policy, table-source, or manifest-applicability semantic drift requires fresh curation."
+        "Implementation recovery starts from a fresh descendant of b3f8201c49029586748bcfe9c5110a32f864ffbe, compares the pinned remote implementation commit 6cdc25363f1446dea8436cc874992e5adec158ad, and keeps all repository active table bytes unchanged.",
+        "The existing focused implementation branch is recovery evidence, not canonical completion; its changes must be reconciled with current checker census, validation manifest, CI gate, and governance state without importing stale queue/status publication.",
+        "Permitted post-snapshot deltas are queue/status publication and deterministic checker-census or validation-health fixture regeneration caused solely by authorized checker bytes; any prepared-packet, baseline, generator, intake, preview, path-policy, table-source, or manifest-applicability semantic drift requires fresh curation."
       ],
       "substantive_authorization_rationale": "The failure is directly reproducible without mutation, the intended fail-closed correspondence is fixed by existing v2 digests and the shipped preview validator, and the protected output boundary already exists in the source-authority intake path. Sharing and strengthening those invariants requires no product, ownership, mapping, or game-semantic decision.",
       "mechanical_activation_conditions": [],
@@ -91,7 +97,7 @@ Git, but it is not current candidate supply or implementation authority.
         "The prepared packet schema, baseline identity, table order, production gate, or preview contract materially changes.",
         "The implementation would write compiled or active source or choose production table content or ownership."
       ],
-      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260823-1450, candidate GP-SRC-003, packet commit 03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1, packet base 7688ee287491ff05898038045f5c1918be09f675, independently reverified against live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad and published on curation/portfolio-20260823-1615-review.",
+      "authorization_snapshot_provenance": "Fresh Curator reauthorization of Planner branch planning/portfolio-20260823-1450, candidate GP-SRC-003, packet commit 03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1, packet base 7688ee287491ff05898038045f5c1918be09f675, after Curator and independent-review reproduction against live configurator b3f8201c49029586748bcfe9c5110a32f864ffbe and ancestry proof that implementation commit 6cdc25363f1446dea8436cc874992e5adec158ad is not canonical; published on curation/portfolio-20260823-2111-recovery-correction.",
       "automated_validation": [
         "Tampered prepared root, artifact, table, point, manifest row/action/ownership/provenance, counts, classification, baseline, and every declared semantic digest fail closed, including unknown, missing, duplicate, boolean-as-integer, and non-finite fields.",
         "Active header, every repository path, non-temporary absolute root, case-variant, relative, input-overwrite, symlink, path-alias, traversal, and active-publication-like target cases fail for prepare, install, and preview through one shared policy.",
@@ -108,7 +114,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host-tool/docs branch if valid offline output or deterministic preparation regresses; do not restore acceptance of unverified packets or protected output targets without renewed curation.",
       "status_documentation_updates": "Correct the generator-v2 integrity and output-boundary docs without creating production authority, a firmware candidate, or a hardware claim.",
-      "done_evidence": "Independent review, complete tamper/path negative corpus, safe-output atomicity and non-mutation proof, shared-validator proof, current aggregate and navigation PASS, and exact active-source/table semantic digests unchanged.",
+      "done_evidence": "Independent review, complete tamper/path negative corpus, safe-output atomicity and non-mutation proof, shared-validator proof, current aggregate and navigation PASS, exact active-source/table semantic digests unchanged, and live configurator ancestry proving the reviewed implementation is actually canonical. The existing unmerged 6cdc25363f1446dea8436cc874992e5adec158ad branch is recovery input, not Done evidence.",
       "stop_conditions": [
         "Any semantic value, ownership, mapping, or production authority must be inferred.",
         "Any active/compiled source, table byte, RuntimeConfigView path, workflow, firmware candidate, or hardware artifact would change.",
@@ -702,16 +708,17 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Ready work remains executable according to the marker above. No
-Preauthorization or hardware-pending work is recorded. The remaining
-external-gated Planner supply is not a global wait:
+One Ready item, `GP-SRC-003`, is recorded after correcting its false canonical
+completion; no Preauthorized, invalidated, or hardware-pending work is
+recorded. The remaining external-gated dispositions are not effective runway
+or a global wait:
 `GP-AUTH-001` remains `USER_DECISION_GATED`, and `GP-CONFIG-002` remains
 `EVIDENCE_GATED` after `GP-CONFIG-003`.
 
@@ -751,11 +758,17 @@ Planner packet `glyph-portfolio-20260823-1450` was independently reviewed
 after its six carried-forward predecessors completed. Its four surviving
 internal candidates were reverified against exact live `configurator`
 `cf31dfd60b8247a9af19f2c417d8e712d63781ad`; its two external-gated
-candidates remain non-executable.
+candidates remain non-executable. Live `configurator`
+`b3f8201c49029586748bcfe9c5110a32f864ffbe` contains `GP-HW-001`,
+`GP-CTL-001`, and `GP-VAL-002`, but not `GP-SRC-003` implementation commit
+`6cdc25363f1446dea8436cc874992e5adec158ad`; the packet remains partially
+consumed and useful for that reauthorized recovery.
 
-- `GP-SRC-003`: `DONE`; prepared-packet correspondence, shared isolated-output
-  guardrails, atomic writes, and adversarial tamper/path coverage shipped in
-  `6cdc25363f1446dea8436cc874992e5adec158ad` without active-source change.
+- `GP-SRC-003`: `READY`; the live installer still accepts active-table output
+  and tampered prepared content. The focused implementation commit
+  `6cdc25363f1446dea8436cc874992e5adec158ad` exists remotely but is not an
+  ancestor of `configurator`; Implementation must recover, reconcile, review,
+  validate, and publish it before recording Done.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
   current-tree structured record or immutable full-commit-plus-path record and
   must match the exact queue identity/result fields. The exact flat schema,
