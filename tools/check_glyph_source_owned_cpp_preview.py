@@ -59,11 +59,15 @@ def main() -> int:
         outside = Path(tempfile.gettempdir()) / "glyph-preview-parent-link"
         outside.mkdir(exist_ok=True)
         alias = Path(directory) / "alias"
+        root_alias = Path(directory) / "root-alias"
         try:
             alias.symlink_to(outside, target_is_directory=True)
             expect_reject(lambda: write_preview(packet, alias / "preview.hpp", test_mode=True), "isolated")
+            root_alias.symlink_to(Path(tempfile.gettempdir()), target_is_directory=True)
+            expect_reject(lambda: write_preview(packet, root_alias / "preview.hpp", test_mode=True), "isolated")
         finally:
             if alias.is_symlink(): alias.unlink()
+            if root_alias.is_symlink(): root_alias.unlink()
     print(json.dumps({"status": "PASS", "positive_tests": 4, "negative_tests": 7, "active_source_changed": False, "hardware_candidate_created": False}, sort_keys=True))
     return 0
 

@@ -10728,7 +10728,7 @@
       },
       "checker_id": "source_owned_cpp_preview",
       "defines_main": true,
-      "file_size_bytes": 4587,
+      "file_size_bytes": 4901,
       "hard_coded_branch_like_strings": [
         "hardware_candidate_created"
       ],
@@ -10737,7 +10737,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 72,
+      "line_count": 76,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_cpp_preview.py",
       "potential_branch_identity_signals": [
@@ -10750,7 +10750,7 @@
         "current_y2_layout",
         "source_owned_generator_modes"
       ],
-      "sha256": "2216f2d6ce6563a8cde2e8bc3e4c652ade739e36f6c15528436c947f94b0d24c",
+      "sha256": "db7bb0d6c773d6b173c1de7d3b1dc833cf85016891a334fb036600ce52f6d378",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -10771,7 +10771,7 @@
       },
       "checker_id": "source_owned_generator_modes",
       "defines_main": true,
-      "file_size_bytes": 6855,
+      "file_size_bytes": 7006,
       "hard_coded_branch_like_strings": [
         "candidate.view",
         "candidate_digest",
@@ -10783,7 +10783,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 144,
+      "line_count": 149,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_generator_modes.py",
       "potential_branch_identity_signals": [
@@ -10799,7 +10799,7 @@
         "current_y2_layout",
         "source_owned_generator_modes"
       ],
-      "sha256": "ea390e05a332e0c4bf6c3856c829226f7dbf36301d7371b24c61d99ef57146e3",
+      "sha256": "128eeaf2aed50947a9626849384d4d20a261b3210b1c06ba6aa3b1171ccf1864",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

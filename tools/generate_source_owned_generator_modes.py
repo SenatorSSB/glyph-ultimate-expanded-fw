@@ -16,7 +16,9 @@ from source_owned_generator_modes import (
     install_prepared,
     load_json,
     prepare,
+    prepare_offline_packet,
     production_gate,
+    _atomic_write_text,
     validate_input,
     validate_manifest,
 )
@@ -65,9 +67,11 @@ def main(argv: list[str] | None = None) -> int:
                 if args.production:
                     packet = prepare(artifact, manifest, hardware_candidate=args.hardware_candidate)
                 else:
-                    packet = {"artifact": artifact, "manifest": manifest, "source_mutation": False}
+                    packet = prepare_offline_packet(artifact, manifest)
                 if args.output:
-                    args.output.write_text(json.dumps(packet, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+                    if args.output.resolve(strict=False) == args.input.resolve(strict=False):
+                        raise GeneratorModesError("prepare output may not overwrite input", "source_authority")
+                    _atomic_write_text(args.output, json.dumps(packet, indent=2, sort_keys=True) + "\n", purpose="prepare")
                 result = packet
         else:
             packet = load_json(args.packet)
