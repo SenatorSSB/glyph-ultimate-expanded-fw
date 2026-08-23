@@ -60,8 +60,14 @@ def main() -> int:
         write_preview(packet, target, test_mode=True)
         assert target.read_text(encoding="utf-8") == preview
         expect_reject(lambda: write_preview(packet, Path(__file__).resolve().parents[1] / "preview.hpp", test_mode=True), "isolated")
-        resolved_temp_alias = Path(tempfile.gettempdir()).resolve() / "glyph-review-resolved-alias-output.json"
-        expect_reject(lambda: write_preview(packet, resolved_temp_alias, test_mode=True), "isolated temporary")
+        raw_temp_root = Path(tempfile.gettempdir())
+        resolved_temp_root = raw_temp_root.resolve()
+        resolved_temp_alias = resolved_temp_root / "glyph-review-resolved-alias-output.json"
+        if raw_temp_root != resolved_temp_root:
+            expect_reject(lambda: write_preview(packet, resolved_temp_alias, test_mode=True), "isolated temporary")
+        else:
+            write_preview(packet, resolved_temp_alias, test_mode=True)
+            resolved_temp_alias.unlink()
         outside = Path(tempfile.gettempdir()) / "glyph-preview-parent-link"
         outside.mkdir(exist_ok=True)
         alias = Path(directory) / "alias"

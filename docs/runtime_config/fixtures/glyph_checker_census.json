@@ -10728,7 +10728,7 @@
       },
       "checker_id": "source_owned_cpp_preview",
       "defines_main": true,
-      "file_size_bytes": 6702,
+      "file_size_bytes": 6966,
       "hard_coded_branch_like_strings": [
         "hardware_candidate_created"
       ],
@@ -10737,7 +10737,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 92,
+      "line_count": 98,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_cpp_preview.py",
       "potential_branch_identity_signals": [
@@ -10754,7 +10754,7 @@
         "current_y2_layout",
         "source_owned_generator_modes"
       ],
-      "sha256": "95e5c6da764145c98fd72e24eb55eb1f68a453ac49de3fc8ee0e18aa734d3d59",
+      "sha256": "8794ab2989eff59cee7739748578b51184e27a0d03fc6f8730f2d35f673c7bf7",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
