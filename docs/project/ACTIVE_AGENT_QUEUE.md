@@ -43,17 +43,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_OK"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -66,7 +66,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-003",
       "title": "Complete prepared-packet integrity and output guardrails",
-      "status": "READY",
+      "status": "DONE",
       "branch": "source-owned-v2-prepared-packet-guardrails",
       "objective": "Make every reusable generator-v2 preparation and installation path verify exact prepared-packet correspondence and fail closed for active, compiled, protected, aliased, or ambiguous output targets.",
       "why_this_matters": "The current installer accepts the active compile-time table header and accepts artifact or manifest payloads changed after preparation while their declared digests remain stale, contradicting the documented inert and integrity-gated boundary.",
@@ -671,16 +671,16 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `4`.
+- Immediate Ready runway: `3`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `4`.
-- Current liveness result: `RUNWAY_OK` at `4` against the recorded target of `4`.
+- Effective authorized runway: `3`.
+- Current liveness result: `RUNWAY_LOW` at `3` against the recorded target of `4`.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
-Four Ready items are recorded. No Preauthorization or hardware-pending work is
+Three Ready items are recorded. No Preauthorization or hardware-pending work is
 recorded. The remaining external-gated Planner supply is not a global wait:
 `GP-AUTH-001` remains `USER_DECISION_GATED`, and `GP-CONFIG-002` remains
 `EVIDENCE_GATED` after `GP-CONFIG-003`.
@@ -723,9 +723,9 @@ internal candidates were reverified against exact live `configurator`
 `cf31dfd60b8247a9af19f2c417d8e712d63781ad`; its two external-gated
 candidates remain non-executable.
 
-- `GP-SRC-003`: `READY`; the current reusable v2 installer accepts the active
-  table header and tampered prepared payloads, so shared exact validation and
-  protected output guardrails are authorized without any active-source write.
+- `GP-SRC-003`: `DONE`; prepared-packet correspondence, shared isolated-output
+  guardrails, atomic writes, and adversarial tamper/path coverage shipped in
+  `6cdc25363f1446dea8436cc874992e5adec158ad` without active-source change.
 - `GP-HW-001`: `READY`; Revision-2 result references are limited to a
   current-tree structured record or immutable full-commit-plus-path record and
   must match the exact queue identity/result fields.
@@ -739,8 +739,8 @@ candidates remain non-executable.
   shipped without a runtime byte change.
 - `GP-VAL-001`: `DONE`; checker-census freshness is load-bearing, curated
   applicability remains authoritative, and the exact drift corpus passes.
-- `GP-VAL-002`: prior dependency gate is resolved; the freshly reviewed
-  successor is recorded above as `READY`.
+- `GP-VAL-002`: `READY`; its dependency gate remains resolved and it is now the
+  highest-priority executable successor.
 - `GP-SRC-002`: `DONE`; the authority-preserving prepared-v2-to-C++ preview
   seam is implemented as inactive, deterministic host-side review output with
   fail-closed packet and temporary-path validation.

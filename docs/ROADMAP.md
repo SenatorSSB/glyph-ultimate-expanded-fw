@@ -11,11 +11,12 @@ and `docs/calibration/INDEX.md`.
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Curator review of partially consumed Planner packet
-`glyph-portfolio-20260823-1450` records `GP-SRC-003`, `GP-HW-001`,
-`GP-CTL-001`, and `GP-VAL-002` as Ready, while the six previously authorized
-items remain Done. No Preauthorization or hardware-pending work is recorded.
-Effective authorized runway is four against target four, so liveness is
-`RUNWAY_OK`; external-gated supply does not establish a portfolio-wide wait.
+`glyph-portfolio-20260823-1450` records `GP-HW-001`, `GP-CTL-001`, and
+`GP-VAL-002` as Ready; `GP-SRC-003` is Done after its host-tool guardrail
+implementation at `6cdc25363f1446dea8436cc874992e5adec158ad`, while the six
+previously authorized items remain Done. No Preauthorization or hardware-pending
+work is recorded. Effective authorized runway is three against target four, so liveness is
+`RUNWAY_LOW`; external-gated supply does not establish a portfolio-wide wait.
 
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The
