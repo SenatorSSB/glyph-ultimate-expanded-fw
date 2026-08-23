@@ -64,14 +64,15 @@ automation from this context document.
 ## Forward Plan
 
 - The canonical executable queue is
-  `docs/project/ACTIVE_AGENT_QUEUE.md`. Initial and follow-up Curator review of
-  Planner packet `glyph-portfolio-20260823-0152` now records `GP-SRC-001` and
-  `GP-CONFIG-001` as `DONE`; `GP-CONFIG-003` is now `DONE`, `GP-PROV-001` is
-  now `DONE`; `GP-VAL-001` and `GP-SRC-002` are now `DONE`. No
-  Preauthorization is recorded; `GP-VAL-002` still requires fresh curation
-  after `GP-VAL-001`. The effective authorized runway is zero against a target
-  of four; liveness is `CURATION_REQUIRED`. Historical or unreviewed candidate
-  supply remains non-authoritative, and this is not a global hardware wait.
+  `docs/project/ACTIVE_AGENT_QUEUE.md`. Curator review of partially consumed
+  Planner packet `glyph-portfolio-20260823-1450` records `GP-SRC-003`,
+  `GP-HW-001`, `GP-CTL-001`, and dependency-resolved `GP-VAL-002` as `READY`;
+  the six previously authorized items remain `DONE`. No Preauthorization or
+  hardware-pending work is recorded. Effective authorized runway is four
+  against a target of four, so liveness is `RUNWAY_OK`. `GP-AUTH-001` remains
+  user/source-authority gated and `GP-CONFIG-002` remains external-evidence
+  gated; historical or unreviewed supply remains non-authoritative, and this
+  is not a global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.

@@ -19,41 +19,41 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "4ce08a163d4e2c18f05f85da1c73e52a16a479a2",
+  "audit_base_sha": "cf31dfd60b8247a9af19f2c417d8e712d63781ad",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
-    "branch": "planning/portfolio-20260823-0152",
-    "base_configurator_sha": "6bc34852e1c823fdeda10f42cc370e5cdec8056e",
-    "candidate_count": 3,
+    "branch": "planning/portfolio-20260823-1450",
+    "base_configurator_sha": "7688ee287491ff05898038045f5c1918be09f675",
+    "candidate_count": 6,
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator independently reviewed all nine candidates: four became READY, three dependency successors remained CURATION_REQUIRED after their predecessors, and two remained external-gated.",
-      "GP-SRC-001 and GP-CONFIG-001 completed on configurator without runtime product behavior changes.",
-      "Follow-up Curator review on live configurator 4ce08a163d4e2c18f05f85da1c73e52a16a479a2 authorized GP-VAL-001 and GP-SRC-002; GP-VAL-002 remains dependency-gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated."
+      "The packet was published after GP-SRC-001, GP-CONFIG-001, and GP-CONFIG-003 completed, and before GP-PROV-001, GP-VAL-001, and GP-SRC-002 completed on configurator.",
+      "Curator independently reproduced the surviving GP-SRC-003, GP-HW-001, GP-CTL-001, and GP-VAL-002 gaps against live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad and authorized four bounded H0/H1 work orders.",
+      "GP-AUTH-001 remains user/source-authority gated and GP-CONFIG-002 remains external-evidence gated; no global evidence wait is supported."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260823-0152",
-      "planning_commit": "6a21c4f442f3de6fe2da42094dbdc32f68c95d2a",
-      "packet_id": "glyph-portfolio-20260823-0152",
-      "packet_base_configurator_sha": "6bc34852e1c823fdeda10f42cc370e5cdec8056e",
-      "curation_branch": "curation/portfolio-20260823-0152-review",
+      "planning_branch": "planning/portfolio-20260823-1450",
+      "planning_commit": "03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1",
+      "packet_id": "glyph-portfolio-20260823-1450",
+      "packet_base_configurator_sha": "7688ee287491ff05898038045f5c1918be09f675",
+      "curation_branch": "curation/portfolio-20260823-1615-review",
       "review_date": "2026-08-23"
     }
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 4,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "CURATION_REQUIRED"
+    "RUNWAY_OK"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -63,6 +63,245 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-SRC-003",
+      "title": "Complete prepared-packet integrity and output guardrails",
+      "status": "READY",
+      "branch": "source-owned-v2-prepared-packet-guardrails",
+      "objective": "Make every reusable generator-v2 preparation and installation path verify exact prepared-packet correspondence and fail closed for active, compiled, protected, aliased, or ambiguous output targets.",
+      "why_this_matters": "The current installer accepts the active compile-time table header and accepts artifact or manifest payloads changed after preparation while their declared digests remain stale, contradicting the documented inert and integrity-gated boundary.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "This work changes host-side integrity validation and output-path safety only. It must not write or change active source, active table bytes, firmware runtime behavior, RuntimeConfigView publication, or controller behavior.",
+      "scope": "Refactor one strict prepared-packet validator and one resolved offline-output policy into the reusable generator-v2 lane, using the already-shipped preview validator as source-backed input rather than maintaining divergent integrity implementations. Preparation, installation, and preview must enforce exact object schemas; rederive the authoritative baseline, canonical 28-table order, table and artifact digests, manifest rows/counts/actions/classification/digest, and prepared digest. Every file output must be absolute and resolve under the system isolated temporary root returned by tempfile.gettempdir(); repository targets, other filesystem roots, relative paths, case variants, aliases, symlinks, input overwrite, and active-publication-like names fail closed. Accepted writes remain atomic; stdout and dry-run remain non-mutating.",
+      "explicit_excluded_scope": "No active or compiled source write; no table-byte, routing, firmware, candidate, build, artifact-publication, workflow, production-ownership, profile-intent, game-semantic, runtime-loading, persistence, WebSerial/device-write, protobuf-write, flashing, Nunchuk, or root-cause change or claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad: tools/source_owned_generator_modes.py validate_manifest() does not recompute the table, artifact, row, manifest, or prepared digests; install_prepared() accepts any absolute path except three case-sensitive substrings; tools/generate_source_owned_generator_modes.py prepare --output writes directly; tools/source_owned_cpp_preview.py contains a stricter but preview-local validator/path policy. Curator read-only reproductions accepted the exact active GeneratedRuntimeConfigBaseline.current.hpp path, a changed artifact coordinate with stale digests, and an arbitrary changed manifest action. Planner candidate GP-SRC-003 records the same gap.",
+      "dependencies_prerequisites": [
+        "GP-SRC-001 and GP-SRC-002 are DONE on configurator; their active-source classification, preview non-claims, and strict preview behavior must remain intact.",
+        "Implementation starts from a fresh descendant of cf31dfd60b8247a9af19f2c417d8e712d63781ad and keeps all repository active table bytes unchanged.",
+        "Permitted post-snapshot deltas are queue/status publication and deterministic checker-census or validation-health fixture regeneration caused solely by other authorized checker bytes; any prepared-packet, baseline, generator, intake, preview, path-policy, table-source, or manifest-applicability semantic drift requires fresh curation."
+      ],
+      "substantive_authorization_rationale": "The failure is directly reproducible without mutation, the intended fail-closed correspondence is fixed by existing v2 digests and the shipped preview validator, and the protected output boundary already exists in the source-authority intake path. Sharing and strengthening those invariants requires no product, ownership, mapping, or game-semantic decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Another current change fully closes preparation/install digest recomputation and output-path safety before implementation.",
+        "The prepared packet schema, baseline identity, table order, production gate, or preview contract materially changes.",
+        "The implementation would write compiled or active source or choose production table content or ownership."
+      ],
+      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260823-1450, candidate GP-SRC-003, packet commit 03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1, packet base 7688ee287491ff05898038045f5c1918be09f675, independently reverified against live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad and published on curation/portfolio-20260823-1615-review.",
+      "automated_validation": [
+        "Tampered prepared root, artifact, table, point, manifest row/action/ownership/provenance, counts, classification, baseline, and every declared semantic digest fail closed, including unknown, missing, duplicate, boolean-as-integer, and non-finite fields.",
+        "Active header, every repository path, non-temporary absolute root, case-variant, relative, input-overwrite, symlink, path-alias, traversal, and active-publication-like target cases fail for prepare, install, and preview through one shared policy.",
+        "Safe isolated absolute offline output is atomic; dry-run and rejected cases leave the repository byte-for-byte unchanged.",
+        "Generator-mode, source-authority-intake, C++ preview, candidate-generation safety, table-source-sync, full runtime-config aggregate, agent docs, and docs-navigation checks pass; checker-census and validation-health artifacts are regenerated mechanically with no applicability reclassification.",
+        "Before/after semantic digests prove all 28 active table arrays and compiled firmware source are unchanged."
+      ],
+      "canonical_build": "NOT_REQUIRED when compiled source and all active table bytes remain unchanged; any such delta stops this H1 order and requires fresh H2/H3 authorization.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused host-tool/docs branch if valid offline output or deterministic preparation regresses; do not restore acceptance of unverified packets or protected output targets without renewed curation.",
+      "status_documentation_updates": "Correct the generator-v2 integrity and output-boundary docs without creating production authority, a firmware candidate, or a hardware claim.",
+      "done_evidence": "Independent review, complete tamper/path negative corpus, safe-output atomicity and non-mutation proof, shared-validator proof, current aggregate and navigation PASS, and exact active-source/table semantic digests unchanged.",
+      "stop_conditions": [
+        "Any semantic value, ownership, mapping, or production authority must be inferred.",
+        "Any active/compiled source, table byte, RuntimeConfigView path, workflow, firmware candidate, or hardware artifact would change.",
+        "Any runtime-loaded config, persistence, device-write, protobuf-write, flashing, Nunchuk, or root-cause boundary is crossed."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-HW-001",
+      "title": "Enforce hardware evidence-record correspondence",
+      "status": "READY",
+      "branch": "agent-framework-hardware-evidence-correspondence",
+      "objective": "Make every Revision-2 H2/H3 result-bearing queue state resolve and validate a structured evidence record for the exact candidate, artifact, locator, protocol, result, and evidence gaps.",
+      "why_this_matters": "The current framework accepts HARDWARE_VALIDATED and other result states when hardware_evidence_record is any nonempty string, including a nonexistent path, so exact-snapshot acceptance can fail open despite the manual hardware contract.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This work strengthens control-plane validation only. It performs no hardware action, creates no PASS, retrieves or executes no firmware artifact, and changes no firmware or configurator product behavior.",
+      "scope": "Define an exact flat JSON Revision-2 hardware-result record and cross-validate it from tools/check_glyph_agent_framework_docs.py for HARDWARE_VALIDATED, HARDWARE_FAILED, and result-bearing LOCAL_ACCEPTANCE_PENDING states. Its exact key set is schema_name, schema_version, work_order_id, candidate_branch, candidate_git_sha, candidate_base_configurator_sha, firmware_artifact_filename, firmware_artifact_build_path, firmware_artifact_sha256, preserved_firmware_artifact_locator, pre_update_sha256_verified, controller_model_revision, firmware_profile_state, update_method, host_platform_adapter, evidence_contract_reference, evidence_contract_version, candidate_protocol_reference, candidate_protocol_version, preconditions, steps, negative_regression_checks, power_cycle_reconnect_checks, result, anomalies, rollback_recovery, tester, tested_at, and evidence_gaps. schema_name is exact string glyph_hardware_evidence_record and schema_version is exact integer 2. The identity/context/protocol/result/recovery/tester/time fields are nonblank strings; tested_at is RFC3339; result is PASS, FAIL, PARTIAL, or INCONCLUSIVE. pre_update_sha256_verified is exact boolean true. preconditions and steps are nonempty arrays; negative_regression_checks, power_cycle_reconnect_checks, anomalies, and evidence_gaps are arrays that may be empty but contain only nonblank strings. Each steps entry has exact keys id, instruction, expected, and observed, all nonblank strings. Add manual_acceptance_protocol_version, hardware_evidence_contract_reference, and hardware_evidence_contract_version to every queue work order. H0/H1 use NOT_APPLICABLE for all three new fields. H2/H3 use exact generic contract reference docs/agent_framework/HARDWARE_EVIDENCE.md and version GLYPH_HARDWARE_EVIDENCE_V2, while manual_acceptance_protocol_reference and manual_acceptance_protocol_version remain candidate-local and nonblank. The record evidence-contract and candidate-protocol fields must respectively equal both queue pairs. hardware_evidence_record accepts exactly repo-json:<path> or git-json:<40-lowercase-SHA>:<path>, where path is a normalized POSIX path under docs/ ending in .json with only alphanumeric, dot, underscore, and hyphen path segments. repo-json resolves HEAD:<path>; git-json resolves <SHA>:<path>. Git tree mode must be exactly regular non-executable blob 100644; symlink, executable, submodule/gitlink, tree, missing object, absolute/escaping path, mutable branch/tag, arbitrary external string, and unsupported scheme fail closed. Every record identity/result/gap field must match the queue; PASS requires no gaps, while PARTIAL/INCONCLUSIVE require gaps. Legacy pre-Revision-2 evidence remains historical and is not upgraded.",
+      "explicit_excluded_scope": "No controller test, hardware observation, evidence fabrication, firmware build or execution, artifact retrieval/upload/store selection, device update, flashing, legacy evidence reinterpretation, runtime source, product behavior, or weakening of manual acceptance and exact-snapshot rules.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "docs/agent_framework/HARDWARE_EVIDENCE.md requires exact candidate/artifact correspondence and a complete result record; WORK_ORDER_TEMPLATE.md requires a canonical evidence path/ref after processing. On live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad, validate_work_order() checks only that hardware_evidence_record is nonempty, and its accepted HARDWARE_VALIDATED self-test points to nonexistent docs/evidence/test.md. Curator independently constructed and validated another nonexistent record reference. Planner candidate GP-HW-001 proposes a structured cross-reference gate and distinguishes current-tree from immutable commit-plus-path evidence.",
+      "dependencies_prerequisites": [
+        "The Revision-2 exact-snapshot contract and current queue result states remain materially unchanged.",
+        "Tests use synthetic records and Git objects only; no historical report is relabeled and no hardware result is asserted.",
+        "Permitted post-snapshot deltas are queue/status publication, additive non-semantic agent-framework self-tests from GP-CTL-001, and deterministic checker-census or validation-health fixture regeneration; any evidence-reference, exact-snapshot, hardware-result, queue-schema, or manifest-applicability semantic drift requires fresh curation."
+      ],
+      "substantive_authorization_rationale": "The safety invariant is already canonical, and the representation/protocol architecture is now fully bound: exact flat v2 JSON with grouped types, exact generic evidence-contract fields, separate candidate-local protocol fields, mandatory successful pre-update rehash, exact repo-json/git-json grammars, 100644 Git blobs only, repository-tree records for already-current evidence, and immutable full-commit-plus-path records for separately published evidence. Unsupported external forms fail closed. This resolves the packet's substantive dependency without selecting a store, credentials, retention policy, candidate test procedure, or product behavior.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Canonical hardware evidence publication adopts a different explicit immutable reference representation before implementation.",
+        "The queue/result schema or exact-snapshot protocol materially changes.",
+        "Implementation would accept an unverifiable external reference, mutable ref, or reinterpret legacy evidence."
+      ],
+      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260823-1450, candidate GP-HW-001, packet commit 03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1, packet base 7688ee287491ff05898038045f5c1918be09f675, reference forms substantively resolved and independently reverified against live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad on curation/portfolio-20260823-1615-review.",
+      "automated_validation": [
+        "Complete synthetic repo-json and git-json records pass only when every exact schema key/type, queue identity, generic evidence-contract pair, candidate-local protocol pair, and result field matches.",
+        "Missing, escaping, absolute, malformed-segment, mode-not-100644, symlink, executable, tree, gitlink/submodule, mutable branch/tag-only, missing commit/blob/path, malformed/duplicate JSON key, unsupported scheme, and arbitrary external references fail closed.",
+        "Candidate/base SHA, work-order/branch, artifact filename/build-path/hash, preserved locator, pre-update verification not exactly true, either protocol pair, PASS/FAIL/PARTIAL/INCONCLUSIVE, tester/RFC3339 time, exact key/type or step shape, and evidence-gap mismatches fail closed; PASS with gaps and partial/inconclusive without gaps fail.",
+        "Framework checker self-tests use real synthetic temporary Git objects rather than nonexistent placeholder paths.",
+        "Agent-framework, agentic-sequence, checker-census, full runtime-config aggregate, docs-navigation, and docs-agent-surface checks pass with focused independent governance review and no applicability reclassification."
+      ],
+      "canonical_build": "NOT_REQUIRED: docs/schema/control-plane checker only; no runtime or product source change.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused governance branch if valid immutable evidence cannot be resolved deterministically; never fall back to accepting an arbitrary nonempty string.",
+      "status_documentation_updates": "Document the two accepted Revision-2 record-reference forms and the unsupported external-form stop, while preserving legacy UNKNOWN identity and all manual hardware gates.",
+      "done_evidence": "Focused independent governance review; structured record and exact cross-reference positive/negative corpus PASS; current framework/navigation gates PASS; no hardware, firmware artifact, workflow, runtime, or product mutation.",
+      "stop_conditions": [
+        "An accepted reference cannot be resolved to immutable structured bytes.",
+        "Any hardware result, legacy identity, artifact equivalence, or controller observation would be inferred or fabricated.",
+        "Any artifact store, upload, device update, flashing, runtime source, or product behavior work becomes necessary."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-CTL-001",
+      "title": "Make queue prose match machine runway",
+      "status": "READY",
+      "branch": "agent-framework-machine-prose-runway-parity",
+      "objective": "Make every current queue and status prose mirror agree mechanically with the canonical machine-readable work-order counts, runway, and liveness state.",
+      "why_this_matters": "The framework checker validates queue JSON while stale prose can still tell an operator that a different number of Ready items authorizes execution; the current queue still says two Ready items although machine state is zero before this curation and four after it.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This work changes governance consistency checks and duplicated status prose only. It does not create, promote, execute, or invalidate a work order and changes no product, runtime, source-authority, or hardware behavior.",
+      "scope": "Strengthen tools/check_glyph_agent_framework_docs.py so the canonical queue interpretation and the current agent-context, current-state, and roadmap operating summaries cannot disagree with the queue JSON on Ready IDs/count, recorded or activatable Preauthorization, invalidated Preauthorization, hardware-pending count, effective/target runway, and primary liveness. Prefer stable machine-derived markers or removal of redundant exact numeric prose where that preserves readable status; keep human-readable candidate dispositions consistent with item statuses. The canonical machine block remains the sole authority.",
+      "explicit_excluded_scope": "No work-order status or authorization change, candidate promotion, Planner ranking, target change, user-direction change, product/runtime checker, firmware/configurator behavior, source authority, hardware result, or weakening of concurrency, publication, activation, and evidence gates.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md makes ACTIVE_AGENT_QUEUE.md machine state canonical and tools/check_glyph_agent_framework_docs.py already derives exact runway and liveness from it. On live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad, the machine block and current summaries report zero Ready while ACTIVE_AGENT_QUEUE.md says 'Only the two remaining READY items'; the framework checker still passes. Planner candidate GP-CTL-001 identified the same recurring parity gap on its earlier base.",
+      "dependencies_prerequisites": [
+        "Implementation starts from the then-current queue snapshot and treats its machine-readable block, not historical Planner prose, as authority.",
+        "Any concurrent legitimate queue publication defers this work rather than racing canonical state.",
+        "Permitted post-snapshot deltas are normal queue/status transitions, additive non-semantic hardware-record checker tests from GP-HW-001, and deterministic checker-census or validation-health fixture regeneration; any queue-schema, liveness, authority, provenance, or manifest-applicability semantic drift requires fresh curation."
+      ],
+      "substantive_authorization_rationale": "The machine block is already canonical and the intended invariant is exact: readable current mirrors must not contradict it. This is a narrow Curator-owned control-plane checker surface and requires no new product, architecture, source, or user decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Another current change adds equivalent generic parity enforcement before implementation.",
+        "Canonical queue ownership or the machine-readable state format changes materially.",
+        "The patch would alter authorization state rather than validate or accurately mirror it."
+      ],
+      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260823-1450, candidate GP-CTL-001, packet commit 03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1, packet base 7688ee287491ff05898038045f5c1918be09f675, independently reverified against live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad and published on curation/portfolio-20260823-1615-review.",
+      "automated_validation": [
+        "Deliberate Ready-ID/count, DONE-ID/count, Preauthorization, invalidation, hardware-pending, effective/target runway, and liveness drift in each current mirrored surface fails.",
+        "A queue transition fixture proves parity derives from machine state rather than hard-coded current counts.",
+        "Historical evidence and Planner packet prose are not misclassified as current authoritative mirrors.",
+        "python3 tools/check_glyph_agent_framework_docs.py, tools/check_glyph_agentic_sequence_protocol.py, tools/check_glyph_checker_census.py, tools/run_glyph_runtime_config_validation.py --json, tools/check_glyph_docs_navigation.py, and tools/check_glyph_docs_agent_surface.py pass with no applicability reclassification.",
+        "Focused independent review confirms the governance checker invariant is preserved or strengthened."
+      ],
+      "canonical_build": "NOT_REQUIRED: current governance docs and ordinary Curator control-plane checker only.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused parity branch if it mistakes historical prose for current state; retain the canonical machine block and do not restore contradictory current guidance.",
+      "status_documentation_updates": "Reconcile only current queue/status mirrors and document generic parity ownership; do not change work authorization while performing this item.",
+      "done_evidence": "Focused independent governance review, adversarial generic parity corpus PASS, current framework/sequence/navigation/surface gates PASS, and exact queue authorization JSON unchanged by the implementation branch.",
+      "stop_conditions": [
+        "The implementation would change queue item status, runway target, user direction, or substantive authority.",
+        "Parity cannot be enforced without weakening machine-state, provenance, concurrency, or liveness validation.",
+        "Any product/runtime checker, firmware/configurator source, or hardware evidence is touched."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-002",
+      "title": "Gate CI artifact publication on current validation",
+      "status": "READY",
+      "branch": "ci-runtime-config-validation-publication-gate",
+      "objective": "Run the accepted current fail-closed runtime-config validation on pushes and pull requests before any firmware build, postprocessing, or artifact upload can publish bytes.",
+      "why_this_matters": "The current build workflow is push-only and builds, postprocesses, and uploads firmware without running the load-bearing checker census and current validation aggregate, so publication is not coupled to the accepted validation lane.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "This work changes CI validation and publication gating only. It does not change source-built firmware behavior, execute a device update, establish artifact acceptance, or claim hardware PASS.",
+      "scope": "Update .github/workflows/build.yml with pull-request and push coverage, full history sufficient for fail-closed Git comparison, least-required read permissions, and an explicit trusted comparison base for detached CI. Run python3 tools/run_glyph_runtime_config_validation.py --json in a validation job before any build, glyph_nuker invocation, or upload; build/publication jobs must depend on validation success and be unreachable on census or aggregate failure. Preserve the current current-vs-historical classifications. Add a focused static workflow checker/fixture that proves event coverage, permissions, ordering/dependency, command parity, and failure-blocks-publication without invoking GitHub Actions, PlatformIO, glyph_nuker, or a firmware artifact; classify that checker explicitly as a current validation/publication-safety entry in the curated manifest and regenerate the deterministic census/health artifacts.",
+      "explicit_excluded_scope": "No branch-protection claim, release automation, artifact-retention/store decision, provenance-sidecar integration, glyph_nuker execution or purpose/effect claim, checker weakening, historical-check promotion, firmware/runtime/product source change, device write, persistence, protobuf write, flashing, or hardware acceptance.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "On live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad, .github/workflows/build.yml uses on: [push], permissions contents: write, then pio build, glyph_nuker, and actions/upload-artifact without the current aggregate. GP-VAL-001 is DONE: tools/run_glyph_runtime_config_validation.py --json now fails on stale checker census and passes all 21 current curated-manifest checks plus the separately load-bearing census-freshness prerequisite, while the curated manifest retains applicability authority. docs/WORKFLOW.md requires repository-native checkers and least-surprise publication; Planner candidate GP-VAL-002 identifies this successor gap.",
+      "dependencies_prerequisites": [
+        "GP-VAL-001 is DONE on configurator and the census freshness plus current aggregate pass on the implementation base.",
+        "The workflow implementation can supply a trusted explicit base for detached pull-request and push contexts without changing glyph_checker_context.py or weakening any scope check.",
+        "GP-PROV-001 remains a separate completed observed-only research lane; this work does not select a durable artifact store or integrate a real sidecar.",
+        "Permitted post-snapshot deltas are queue/status publication and deterministic census/validation-health updates caused by other authorized checker bytes; any aggregate command, census-freshness, curated-applicability, workflow publication, or Git-context semantic drift requires fresh curation."
+      ],
+      "substantive_authorization_rationale": "The predecessor is complete, the exact validation entrypoint and fail-closed result are current, and the required sequencing is fixed: validation success must dominate every build/postprocess/upload route. Pull-request coverage and read-only contents permission are bounded CI safety improvements requiring no product behavior or artifact-store decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The build workflow or current validation entrypoint materially changes before implementation.",
+        "Another current workflow already guarantees the same validation-before-publication invariant.",
+        "Detached CI cannot satisfy existing context checks without editing glyph_checker_context.py or weakening a current invariant."
+      ],
+      "authorization_snapshot_provenance": "Fresh Curator review of Planner branch planning/portfolio-20260823-1450, candidate GP-VAL-002, packet commit 03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1, packet base 7688ee287491ff05898038045f5c1918be09f675, after GP-VAL-001 completion and independent reverification against live configurator cf31dfd60b8247a9af19f2c417d8e712d63781ad on curation/portfolio-20260823-1615-review.",
+      "automated_validation": [
+        "python3 tools/run_glyph_runtime_config_validation.py --json passes locally on the implementation branch with the authorized explicit comparison base.",
+        "Focused static workflow tests prove pull_request and push coverage, full-enough checkout history, trusted detached comparison-base wiring, contents: read permissions, exact current validation command, and validation dependency before every build, postprocess, and upload path.",
+        "Adversarial workflow fixtures prove a missing/renamed validation command, continue-on-error, permissive dependency, alternate unguarded upload/build route, stale-census success, or write permission fails.",
+        "No test executes GitHub Actions, installs PlatformIO, builds firmware, runs glyph_nuker, reads a firmware artifact, uploads, releases, or writes to a device.",
+        "Agent-framework, checker-census, runtime-config aggregate, docs-navigation, and workflow syntax/static checks pass with independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED for this workflow/static-checker change because no firmware or build input changes; CI may continue its existing build only after validation, but a local build is not evidence required by this work order.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused workflow/checker branch if valid CI contexts cannot run the current aggregate; do not restore artifact publication that bypasses known-failing validation without renewed curation.",
+      "status_documentation_updates": "Document validation-before-publication and pull-request coverage without claiming branch protection, release integrity, immutable storage, reproducible postprocessing, or hardware acceptance.",
+      "done_evidence": "Independent review; exact static workflow positive/adversarial corpus PASS; local current aggregate and census PASS; workflow diff contains no product/runtime source, postprocessor binary, firmware artifact, upload destination, release, device-write, or hardware-result change.",
+      "stop_conditions": [
+        "Any existing checker or Git-context invariant must be weakened or tools/glyph_checker_context.py must change.",
+        "Any firmware source/build input, glyph_nuker binary or execution semantics, upload/store/release architecture, or artifact acceptance must change.",
+        "Any runtime-loaded config, persistence, device-write, protobuf-write, flashing, or hardware claim is introduced."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-SRC-001",
       "title": "Reconcile active table-source truth and mutation guardrails",
@@ -432,20 +671,19 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `0`.
+- Immediate Ready runway: `4`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `0`.
-- Current liveness result: `CURATION_REQUIRED` at `0` against the recorded target of `4`; concrete successor candidates need fresh Curator judgment.
+- Effective authorized runway: `4`.
+- Current liveness result: `RUNWAY_OK` at `4` against the recorded target of `4`.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
-No Ready items remain. No Preauthorization is recorded. `GP-VAL-002` still requires fresh Curator
-judgment after `GP-VAL-001`; its future workflow and aggregate assumptions
-cannot be activated mechanically. The remaining Planner supply is not a
-global wait: `GP-AUTH-001` remains `USER_DECISION_GATED`, and
-`GP-CONFIG-002` remains `EVIDENCE_GATED` after `GP-CONFIG-003`.
+Four Ready items are recorded. No Preauthorization or hardware-pending work is
+recorded. The remaining external-gated Planner supply is not a global wait:
+`GP-AUTH-001` remains `USER_DECISION_GATED`, and `GP-CONFIG-002` remains
+`EVIDENCE_GATED` after `GP-CONFIG-003`.
 
 ## Allowed Statuses
 
@@ -479,20 +717,30 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Planner packet `glyph-portfolio-20260823-0152` was initially reviewed against
-its exact live `configurator` base
-`6bc34852e1c823fdeda10f42cc370e5cdec8056e`. Follow-up review reverified the
-surviving dependency candidates against live `configurator`
-`4ce08a163d4e2c18f05f85da1c73e52a16a479a2` after `GP-SRC-001` and
-`GP-CONFIG-001` completed.
+Planner packet `glyph-portfolio-20260823-1450` was independently reviewed
+after its six carried-forward predecessors completed. Its four surviving
+internal candidates were reverified against exact live `configurator`
+`cf31dfd60b8247a9af19f2c417d8e712d63781ad`; its two external-gated
+candidates remain non-executable.
+
+- `GP-SRC-003`: `READY`; the current reusable v2 installer accepts the active
+  table header and tampered prepared payloads, so shared exact validation and
+  protected output guardrails are authorized without any active-source write.
+- `GP-HW-001`: `READY`; Revision-2 result references are limited to a
+  current-tree structured record or immutable full-commit-plus-path record and
+  must match the exact queue identity/result fields.
+- `GP-CTL-001`: `READY`; generic machine/prose runway parity enforcement is
+  authorized on the ordinary Curator governance-checker surface.
+- `GP-VAL-002`: `READY`; `GP-VAL-001` is complete, and current validation must
+  gate every CI build/postprocess/upload route with pull-request coverage and
+  existing Git-context invariants preserved.
 
 - `GP-SRC-001`: `DONE`; active-table-source truth and mutation guardrails
   shipped without a runtime byte change.
 - `GP-VAL-001`: `DONE`; checker-census freshness is load-bearing, curated
   applicability remains authoritative, and the exact drift corpus passes.
-- `GP-VAL-002`: `SUBSTANTIVE_DEPENDENCY_GATED` / `CURATION_REQUIRED` after
-  `GP-SRC-001` and `GP-VAL-001`; future aggregate safety and workflow parity
-  need fresh judgment.
+- `GP-VAL-002`: prior dependency gate is resolved; the freshly reviewed
+  successor is recorded above as `READY`.
 - `GP-SRC-002`: `DONE`; the authority-preserving prepared-v2-to-C++ preview
   seam is implemented as inactive, deterministic host-side review output with
   fail-closed packet and temporary-path validation.
@@ -510,8 +758,8 @@ surviving dependency candidates against live `configurator`
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
-priority order. Only the two remaining `READY` items authorize immediate execution.
-No candidate is Preauthorized.
+priority order. Only the four `READY` items authorize immediate execution. No
+candidate is Preauthorized.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
