@@ -6,11 +6,13 @@ from __future__ import annotations
 import copy
 import json
 import os
+import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 from source_owned_cpp_preview import render_cpp_preview, write_preview
-from source_owned_generator_modes import _baseline_tables, baseline_identity, digest, generate, prepare, GeneratorModesError
+from source_owned_generator_modes import _baseline_tables, baseline_identity, digest, generate, prepare, tables_digest, GeneratorModesError
 
 
 def base(mode: str, provenance: str = "synthetic_test") -> dict:
@@ -49,6 +51,8 @@ def main() -> int:
     tampered = copy.deepcopy(packet); tampered["artifact"]["tables"][0]["table_symbol"] = "kInventedTable"; seal(tampered); expect_reject(lambda: render_cpp_preview(tampered, test_mode=True), "canonical baseline order")
     tampered = copy.deepcopy(packet); tampered["manifest"]["rows"][0]["reason"] = "tampered"; seal(tampered); expect_reject(lambda: render_cpp_preview(tampered, test_mode=True), "manifest semantic digest")
     tampered = copy.deepcopy(packet); tampered["manifest"]["classification"] = "FULL_REPLACEMENT_CHANGESET"; tampered["manifest"]["changed_table_ids"] = []; tampered["manifest"]["preserved_table_ids"] = list(range(28)); tampered["manifest"]["manifest_semantic_digest"] = digest({key: value for key, value in tampered["manifest"].items() if key != "manifest_semantic_digest"}); seal(tampered); expect_reject(lambda: render_cpp_preview(tampered, test_mode=True), "classification")
+    tampered = copy.deepcopy(packet); tampered["artifact"]["tables"][0]["points"][0] = {"x": 1, "y": 1}; tampered["artifact"]["artifact_semantic_digest"] = tables_digest(tampered["artifact"]["tables"]); tampered["manifest"]["artifact_semantic_digest"] = tampered["artifact"]["artifact_semantic_digest"]; tampered["manifest"]["manifest_semantic_digest"] = digest({key: value for key, value in tampered["manifest"].items() if key != "manifest_semantic_digest"}); seal(tampered); expect_reject(lambda: render_cpp_preview(tampered, test_mode=True), "row digest")
+    tampered = copy.deepcopy(packet); tampered["manifest"]["rows"][0]["action"] = "invented"; tampered["manifest"]["manifest_semantic_digest"] = digest({key: value for key, value in tampered["manifest"].items() if key != "manifest_semantic_digest"}); seal(tampered); expect_reject(lambda: render_cpp_preview(tampered, test_mode=True), "action or ownership")
     tampered = copy.deepcopy(packet); tampered["manifest"]["unknown"] = True; seal(tampered); expect_reject(lambda: render_cpp_preview(tampered, test_mode=True), "missing or unexpected")
     expect_reject(lambda: render_cpp_preview(packet), "test-mode")
     with tempfile.TemporaryDirectory() as directory:
@@ -56,6 +60,8 @@ def main() -> int:
         write_preview(packet, target, test_mode=True)
         assert target.read_text(encoding="utf-8") == preview
         expect_reject(lambda: write_preview(packet, Path(__file__).resolve().parents[1] / "preview.hpp", test_mode=True), "isolated")
+        resolved_temp_alias = Path(tempfile.gettempdir()).resolve() / "glyph-review-resolved-alias-output.json"
+        expect_reject(lambda: write_preview(packet, resolved_temp_alias, test_mode=True), "isolated temporary")
         outside = Path(tempfile.gettempdir()) / "glyph-preview-parent-link"
         outside.mkdir(exist_ok=True)
         alias = Path(directory) / "alias"
@@ -68,6 +74,16 @@ def main() -> int:
         finally:
             if alias.is_symlink(): alias.unlink()
             if root_alias.is_symlink(): root_alias.unlink()
+        packet_path = Path(directory) / "packet.json"
+        packet_path.write_text(json.dumps(packet, sort_keys=True), encoding="utf-8")
+        result = subprocess.run(
+            [sys.executable, str(Path(__file__).resolve().parents[1] / "tools/render_source_owned_cpp_preview.py"), str(packet_path), "--output", str(packet_path), "--test-mode"],
+            cwd=Path(__file__).resolve().parents[1],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert result.returncode != 0 and packet_path.read_text(encoding="utf-8") == json.dumps(packet, sort_keys=True)
     print(json.dumps({"status": "PASS", "positive_tests": 4, "negative_tests": 7, "active_source_changed": False, "hardware_candidate_created": False}, sort_keys=True))
     return 0
 

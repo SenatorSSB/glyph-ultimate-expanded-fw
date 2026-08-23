@@ -17,6 +17,8 @@ from source_owned_generator_modes import (
     digest,
     production_gate,
     tables_digest,
+    table_digest,
+    _baseline_tables,
     _atomic_write_text,
     validate_offline_output_target,
     validate_manifest,
@@ -105,6 +107,17 @@ def validate_prepared_packet(packet: dict[str, Any], *, test_mode: bool = False)
         symbols.append(table["table_symbol"])
     if symbols != actual_baseline["table_order"]:
         _fail("prepared table symbols are not in canonical baseline order")
+    baseline_tables = _baseline_tables()
+    for row, table, baseline_table in zip(manifest["rows"], artifact["tables"], baseline_tables, strict=True):
+        expected_changed = table["points"] != baseline_table["points"]
+        expected_action = "replace_explicit_owned" if row["explicit_ownership"] else "preserve_source_owned_baseline"
+        expected_ownership_source = "candidate_input" if row["explicit_ownership"] else "current_source_owned_baseline"
+        if row["baseline_digest"] != table_digest(baseline_table) or row["candidate_digest"] != table_digest(table):
+            _fail("prepared manifest row digest does not match table content", "integrity")
+        if row["changed"] is not expected_changed:
+            _fail("prepared manifest row changed flag does not match table content", "integrity")
+        if row["action"] != expected_action or row["ownership_source"] != expected_ownership_source:
+            _fail("prepared manifest row action or ownership source is invalid", "integrity")
     if artifact["artifact_semantic_digest"] != tables_digest(artifact["tables"]):
         _fail("artifact semantic digest does not match table content", "integrity")
     if manifest["changed_table_count"] + manifest["preserved_table_count"] != TABLE_COUNT:

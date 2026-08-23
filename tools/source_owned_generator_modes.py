@@ -416,6 +416,8 @@ def validate_offline_output_target(target: Path, *, purpose: str) -> Path:
     if any(token.casefold() in str(normalized).casefold() for token in forbidden):
         _fail(f"forbidden publication: {purpose} target is an active-publication-like path", "source_authority")
     try:
+        if os.path.commonpath([os.path.normcase(os.fspath(normalized)), os.path.normcase(os.fspath(raw_temp_root))]) != os.path.normcase(os.fspath(raw_temp_root)):
+            _fail(f"{purpose} target must use the returned isolated temporary root", "source_authority")
         if os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(temp_root))]) != os.path.normcase(os.fspath(temp_root)):
             _fail(f"{purpose} target must be under an isolated temporary directory", "source_authority")
     except ValueError:
@@ -424,14 +426,7 @@ def validate_offline_output_target(target: Path, *, purpose: str) -> Path:
     for component in normalized.parts[1:-1]:
         cursor /= component
         if cursor.is_symlink():
-            resolved_cursor = cursor.resolve(strict=False)
-            try:
-                within_temp = os.path.commonpath([os.path.normcase(os.fspath(resolved_cursor)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(temp_root))
-                temp_under_alias = os.path.commonpath([os.path.normcase(os.fspath(resolved_cursor)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(resolved_cursor))
-                raw_under_temp = os.path.commonpath([os.path.normcase(os.fspath(cursor)), os.path.normcase(os.fspath(raw_temp_root))]) == os.path.normcase(os.fspath(raw_temp_root))
-            except ValueError:
-                within_temp = temp_under_alias = raw_under_temp = False
-            if raw_under_temp or not temp_under_alias:
+            if cursor != raw_temp_root and cursor not in raw_temp_root.parents:
                 _fail(f"{purpose} target is not an isolated path: symlink alias", "source_authority")
     if target.is_symlink():
         _fail(f"{purpose} target may not be a symlink", "source_authority")

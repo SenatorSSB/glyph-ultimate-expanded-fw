@@ -10728,7 +10728,7 @@
       },
       "checker_id": "source_owned_cpp_preview",
       "defines_main": true,
-      "file_size_bytes": 4901,
+      "file_size_bytes": 6702,
       "hard_coded_branch_like_strings": [
         "hardware_candidate_created"
       ],
@@ -10736,21 +10736,25 @@
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
-      "invokes_subprocess": false,
-      "line_count": 76,
+      "invokes_subprocess": true,
+      "line_count": 92,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_cpp_preview.py",
       "potential_branch_identity_signals": [
         "hardware_candidate_created"
       ],
-      "potential_mutation_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
       "python_module": "tools.check_glyph_source_owned_cpp_preview",
-      "referenced_repository_path_prefixes": [],
+      "referenced_repository_path_prefixes": [
+        "tools/render_source_owned_cpp_preview.py"
+      ],
       "runtime_config_relevance_signals": [
         "current_y2_layout",
         "source_owned_generator_modes"
       ],
-      "sha256": "db7bb0d6c773d6b173c1de7d3b1dc833cf85016891a334fb036600ce52f6d378",
+      "sha256": "95e5c6da764145c98fd72e24eb55eb1f68a453ac49de3fc8ee0e18aa734d3d59",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -10771,7 +10775,7 @@
       },
       "checker_id": "source_owned_generator_modes",
       "defines_main": true,
-      "file_size_bytes": 7006,
+      "file_size_bytes": 8481,
       "hard_coded_branch_like_strings": [
         "candidate.view",
         "candidate_digest",
@@ -10782,8 +10786,8 @@
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
-      "invokes_subprocess": false,
-      "line_count": 149,
+      "invokes_subprocess": true,
+      "line_count": 179,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_generator_modes.py",
       "potential_branch_identity_signals": [
@@ -10792,14 +10796,18 @@
         "hardware_candidate",
         "hardware_candidate_created"
       ],
-      "potential_mutation_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
       "python_module": "tools.check_glyph_source_owned_generator_modes",
-      "referenced_repository_path_prefixes": [],
+      "referenced_repository_path_prefixes": [
+        "tools/generate_source_owned_generator_modes.py"
+      ],
       "runtime_config_relevance_signals": [
         "current_y2_layout",
         "source_owned_generator_modes"
       ],
-      "sha256": "128eeaf2aed50947a9626849384d4d20a261b3210b1c06ba6aa3b1171ccf1864",
+      "sha256": "8564795570229f2ad8917428104b47fe5d9f6e8c75b0e5bda35846e9db458fa3",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
