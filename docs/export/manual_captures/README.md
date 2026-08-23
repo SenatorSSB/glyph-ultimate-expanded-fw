@@ -16,7 +16,11 @@ Future capture folders must use:
 `YYYYMMDD_official_configurator_<app-version-or-unknown>/`
 
 Each future folder must contain `input_candidate.json`, `metadata.json`,
-`hashes.txt`, and either `output_export.json` or `rejection_note.md`.
+`hashes.txt`, `notes.md`, `result.md`, and either `output_export.json` or
+`rejection_note.md`.
+The checker ignores only a regular `.DS_Store` host-metadata file at this
+directory or inside a dated capture folder; all other unknown files,
+directories, and symlinks remain rejected and are never evidence or hash input.
 
 Related operator docs live in `docs/export/`:
 

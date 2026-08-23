@@ -10,6 +10,8 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -108,6 +110,18 @@ PLAN_ONLY_STATUSES = {
     "PLAN_ONLY_TEMPLATE",
     "PLAN_ONLY_NOT_A_RESULT",
     "MANUAL_TEST_PLAN_ONLY_NOT_A_RESULT",
+}
+IGNORED_HOST_METADATA_BASENAME = ".DS_Store"
+CAPTURE_FOLDER_ALLOWED_FILES = {
+    "input_candidate.json",
+    "output_export.json",
+    "rejection_note.md",
+    "metadata.json",
+    "hashes.txt",
+    "notes.md",
+    "result.md",
+    "optional_screenshot_or_log_notes.md",
+    IGNORED_HOST_METADATA_BASENAME,
 }
 
 
@@ -414,7 +428,7 @@ def validate_result_doc(folder: Path, capture_id: str) -> None:
     if not result_doc.exists():
         fail(f"{display(folder)} missing required result markdown {result_doc.name}")
     text = read_text(result_doc)
-    status_match = re.search(r"(?im)^\\s*status\\s*[:=]\\s*`?([A-Za-z0-9_\\- ]+)`?", text)
+    status_match = re.search(r"(?im)^\s*status\s*[:=]\s*`?([A-Za-z0-9_- ]+)`?", text)
     if not status_match:
         fail(f"{display(folder)} result markdown must include a Status marker")
     status = status_match.group(1).strip().upper().replace(" ", "_")
@@ -435,6 +449,7 @@ def resolve_and_validate_artifact(path_value: str, *, expected: Path, label: str
 
 
 def validate_file_set(capture_dir: Path, capture_id: str, payload: dict[str, Any]) -> None:
+    validate_capture_folder_entries(capture_dir)
     artifacts = payload.get("artifacts")
     if not isinstance(artifacts, dict):
         fail(f"{display(capture_dir)} artifacts section missing")
@@ -531,14 +546,35 @@ def validate_single_capture_folder(capture_dir: Path) -> None:
         fail(f"{display(capture_dir)} comparison checker output status must be reviewed")
 
 
-def list_dated_capture_folders() -> list[Path]:
-    if not MANUAL_CAPTURE_DIR.exists():
-        fail(f"manual capture directory missing: {display(MANUAL_CAPTURE_DIR)}")
-    if not MANUAL_CAPTURE_README.exists():
-        fail(f"missing required manual capture README: {display(MANUAL_CAPTURE_README)}")
+def _is_regular_non_symlink_file(path: Path) -> bool:
+    return path.is_file() and not path.is_symlink()
+
+
+def _is_ignored_host_metadata(path: Path) -> bool:
+    return path.name == IGNORED_HOST_METADATA_BASENAME and _is_regular_non_symlink_file(path)
+
+
+def validate_capture_folder_entries(capture_dir: Path) -> None:
+    for entry in sorted(capture_dir.iterdir()):
+        if _is_ignored_host_metadata(entry):
+            continue
+        if entry.is_symlink():
+            fail(f"unexpected symlink in capture folder {display(entry)}")
+        if not _is_regular_non_symlink_file(entry) or entry.name not in CAPTURE_FOLDER_ALLOWED_FILES:
+            fail(
+                f"unexpected capture folder entry {display(entry)}; "
+                "only documented capture files and regular .DS_Store host metadata are allowed"
+            )
+
+
+def validate_manual_capture_root_entries(root: Path) -> list[Path]:
     capture_folders: list[Path] = []
-    allowed_files = {"README.md", ".gitkeep"}
-    for entry in sorted(MANUAL_CAPTURE_DIR.iterdir()):
+    allowed_files = {"README.md", ".gitkeep", IGNORED_HOST_METADATA_BASENAME}
+    for entry in sorted(root.iterdir()):
+        if _is_ignored_host_metadata(entry):
+            continue
+        if entry.is_symlink():
+            fail(f"unexpected symlink in manual capture directory {display(entry)}")
         if entry.is_file() and entry.name in allowed_files:
             continue
         if entry.is_dir() and DATE_FOLDER_RE.fullmatch(entry.name):
@@ -551,9 +587,94 @@ def list_dated_capture_folders() -> list[Path]:
     return capture_folders
 
 
+def run_adversarial_tests() -> None:
+    with tempfile.TemporaryDirectory(prefix="glyph-manual-capture-adversarial-") as directory:
+        root = Path(directory)
+        (root / "README.md").write_text("index", encoding="utf-8")
+        (root / ".gitkeep").write_text("", encoding="utf-8")
+        (root / IGNORED_HOST_METADATA_BASENAME).write_bytes(b"host metadata")
+        (root / "20260823_official_configurator_unknown").mkdir()
+        assert len(validate_manual_capture_root_entries(root)) == 1
+
+        (root / "unknown.txt").write_text("evidence", encoding="utf-8")
+        try:
+            validate_manual_capture_root_entries(root)
+        except ManualCaptureResultError:
+            pass
+        else:
+            raise AssertionError("unknown root file must be rejected")
+        (root / "unknown.txt").unlink()
+
+        (root / IGNORED_HOST_METADATA_BASENAME).unlink()
+        (root / IGNORED_HOST_METADATA_BASENAME).mkdir()
+        try:
+            validate_manual_capture_root_entries(root)
+        except ManualCaptureResultError:
+            pass
+        else:
+            raise AssertionError("root .DS_Store directory must be rejected")
+        (root / IGNORED_HOST_METADATA_BASENAME).rmdir()
+
+        (root / IGNORED_HOST_METADATA_BASENAME).symlink_to(root / "README.md")
+        try:
+            validate_manual_capture_root_entries(root)
+        except ManualCaptureResultError:
+            pass
+        else:
+            raise AssertionError("root .DS_Store symlink must be rejected")
+        (root / IGNORED_HOST_METADATA_BASENAME).unlink()
+        (root / IGNORED_HOST_METADATA_BASENAME).write_bytes(b"host metadata")
+
+        capture = root / "20260823_official_configurator_unknown"
+        for name in CAPTURE_FOLDER_ALLOWED_FILES - {IGNORED_HOST_METADATA_BASENAME}:
+            (capture / name).write_text("fixture", encoding="utf-8")
+        (capture / IGNORED_HOST_METADATA_BASENAME).write_bytes(b"host metadata")
+        validate_capture_folder_entries(capture)
+
+        (capture / "unknown.log").write_text("evidence", encoding="utf-8")
+        try:
+            validate_capture_folder_entries(capture)
+        except ManualCaptureResultError:
+            pass
+        else:
+            raise AssertionError("unknown capture file must be rejected")
+        (capture / "unknown.log").unlink()
+
+        (capture / IGNORED_HOST_METADATA_BASENAME).unlink()
+        (capture / IGNORED_HOST_METADATA_BASENAME).mkdir()
+        try:
+            validate_capture_folder_entries(capture)
+        except ManualCaptureResultError:
+            pass
+        else:
+            raise AssertionError(".DS_Store directory must be rejected")
+        (capture / IGNORED_HOST_METADATA_BASENAME).rmdir()
+
+        (capture / IGNORED_HOST_METADATA_BASENAME).symlink_to(capture / "notes.md")
+        try:
+            validate_capture_folder_entries(capture)
+        except ManualCaptureResultError:
+            pass
+        else:
+            raise AssertionError(".DS_Store symlink must be rejected")
+
+
+def list_dated_capture_folders() -> list[Path]:
+    if not MANUAL_CAPTURE_DIR.exists():
+        fail(f"manual capture directory missing: {display(MANUAL_CAPTURE_DIR)}")
+    if not MANUAL_CAPTURE_README.exists():
+        fail(f"missing required manual capture README: {display(MANUAL_CAPTURE_README)}")
+    return validate_manual_capture_root_entries(MANUAL_CAPTURE_DIR)
+
+
 def main() -> int:
     print("glyph_official_configurator_manual_capture_result")
     try:
+        if "--adversarial-test" in sys.argv[1:]:
+            run_adversarial_tests()
+            print("status=PASS")
+            print("adversarial_host_metadata_rules_valid=True")
+            return 0
         validate_required_docs_and_templates()
         capture_folders = list_dated_capture_folders()
         print(f"manual_capture_folder_count={len(capture_folders)}")
