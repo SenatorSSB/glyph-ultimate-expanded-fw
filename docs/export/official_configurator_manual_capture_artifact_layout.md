@@ -22,7 +22,9 @@ docs/export/manual_captures/
     metadata.json
     hashes.txt
     notes.md
+    result.md
     optional_screenshot_or_log_notes.md
+    .DS_Store (optional operating-system metadata; ignored only as a regular file)
 
 Template used for each capture row:
 - `docs/export/fixtures/official_configurator_manual_capture_metadata_TEMPLATE.json`
@@ -37,6 +39,11 @@ Use `unknown` when the exact app version is unavailable.
 The optional screenshot/log notes file must be safe and non-sensitive. Do not
 include personal tokens, private browser state, device identifiers, or account
 information.
+
+The checker ignores exactly one host-metadata basename: a regular file named
+`.DS_Store` at the capture root or inside a dated capture folder. A `.DS_Store`
+directory, symlink, or any other unknown file remains invalid and is not
+evidence or hash input.
 
 ## Baseline Files Required Before Any Capture Record
 
