@@ -41,12 +41,12 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -122,7 +122,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-001",
       "title": "Define the current official-configurator validation lane",
-      "status": "READY",
+      "status": "DONE",
       "branch": "docs-official-configurator-validation-classification",
       "objective": "Create one fail-closed current offline official-configurator validation entrypoint and explicitly separate current primary corpus evidence from superseded compatibility chains.",
       "why_this_matters": "The primary official corpus checks pass, while broad legacy compatibility runners fail on superseded generated-prototype anchors; without explicit classification, historical failure is easily mistaken for current compatibility evidence.",
@@ -158,7 +158,7 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
       "rollback_recovery": "Remove the new aggregate/classification branch if it obscures a current source-backed failure; preserve all historical evidence files.",
       "status_documentation_updates": "Update the official configurator/export navigation and checker classification only; retain bounded non-claims.",
-      "done_evidence": "Independent review, five current checks plus the new aggregate PASS, negative classification coverage PASS, and no product/runtime source change.",
+      "done_evidence": "Independent review PASS, five current checks plus the new aggregate PASS, negative classification coverage PASS, docs navigation PASS, and no product/runtime source change. Canonical implementation commit: 24d18bb666985fedd51d8820971c92ae55db9da7.",
       "stop_conditions": [
         "A source-backed anchor update or product compatibility decision is required.",
         "Any official universal compatibility or production export claim would be introduced.",
@@ -299,16 +299,16 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `4`.
+- Immediate Ready runway: `2`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `4`.
-- Current liveness result: `RUNWAY_OK` at the recorded target of `4`.
+- Effective authorized runway: `2`.
+- Current liveness result: `RUNWAY_LOW` below the recorded target of `4`.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
-The four Ready items are independent current H0/H1 opportunities. No
+The two remaining Ready items are independent current H0/H1 opportunities. No
 Preauthorization is recorded: the three dependency successors require a fresh
 Curator judgment after their predecessors because semantic and applicability
 drift cannot be reduced to the current objective mechanical evidence. The

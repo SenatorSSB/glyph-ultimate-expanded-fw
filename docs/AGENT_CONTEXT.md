@@ -66,10 +66,10 @@ automation from this context document.
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Curator review of Planner packet
   `glyph-portfolio-20260823-0152` authorized four independent H0/H1 items as
-  `READY`; no Preauthorization is recorded, and three dependency successors
-  require fresh curation after their predecessors. The
-  effective authorized runway is four, meeting the recorded target; liveness
-  is `RUNWAY_OK`. Historical or unreviewed candidate supply remains
+  `READY`; `GP-CONFIG-001` is now `DONE`, no Preauthorization is recorded, and
+  three dependency successors require fresh curation after their predecessors.
+  The effective authorized runway is two against a target of four; liveness
+  is `RUNWAY_LOW`. Historical or unreviewed candidate supply remains
   non-authoritative, and this is not a global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the

@@ -11,10 +11,11 @@ and `docs/calibration/INDEX.md`.
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Independent Curator review of Planner packet
-`glyph-portfolio-20260823-0152` records four Ready H0/H1 items and no
-Preauthorization; three dependency successors require fresh curation after
-their predecessors. Effective authorized runway is four against target four,
-so liveness is `RUNWAY_OK`; external-gated supply does not establish a
+`glyph-portfolio-20260823-0152` recorded four Ready H0/H1 items; `GP-CONFIG-001`
+is now complete, leaving two Ready items and no Preauthorization; three
+dependency successors require fresh curation after their predecessors.
+Effective authorized runway is two against target four, so liveness is
+`RUNWAY_LOW`; external-gated supply does not establish a
 portfolio-wide wait.
 
 Runtime-config validation stabilization uses a deterministic repository-wide
