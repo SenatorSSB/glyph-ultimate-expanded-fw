@@ -74,6 +74,8 @@ def main(argv: list[str] | None = None) -> int:
                     _atomic_write_text(args.output, json.dumps(packet, indent=2, sort_keys=True) + "\n", purpose="prepare")
                 result = packet
         else:
+            if args.target.resolve(strict=False) == args.packet.resolve(strict=False):
+                raise GeneratorModesError("install target may not overwrite packet input", "source_authority")
             packet = load_json(args.packet)
             result = {"operations": install_prepared(packet, args.target, dry_run=args.dry_run)}
         print(json.dumps(result, indent=2, sort_keys=True))

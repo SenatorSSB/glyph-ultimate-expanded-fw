@@ -58,7 +58,7 @@ def base(mode: str, provenance: str = "production_authorized") -> dict:
 
 
 def run() -> tuple[int, int]:
-    global POSITIVE
+    global NEGATIVE, POSITIVE
     baseline = _baseline_tables()
 
     artifact, manifest = generate(base("full_replacement"))
@@ -131,6 +131,36 @@ def run() -> tuple[int, int]:
         POSITIVE += 1
         expect_reject(lambda: install_prepared(packet, Path(directory) / "candidate.view"), "forbidden publication")
         expect_reject(lambda: install_prepared(packet, ROOT / "outside.json"), "isolated temporary")
+        alias = Path(directory) / "root-alias"
+        alias.symlink_to(Path(tempfile.gettempdir()), target_is_directory=True)
+        try:
+            expect_reject(lambda: install_prepared(packet, alias / "artifact.json"), "symlink alias")
+        finally:
+            alias.unlink()
+        input_path = Path(directory) / "profile.json"
+        input_text = json.dumps(base("full_replacement"), sort_keys=True)
+        input_path.write_text(input_text, encoding="utf-8")
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "tools/generate_source_owned_generator_modes.py"), "prepare", str(input_path), "--output", str(input_path)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert result.returncode != 0 and input_path.read_text(encoding="utf-8") == input_text
+        NEGATIVE += 1
+        packet_path = Path(directory) / "prepared.json"
+        packet_text = json.dumps(packet, sort_keys=True)
+        packet_path.write_text(packet_text, encoding="utf-8")
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "tools/generate_source_owned_generator_modes.py"), "install", str(packet_path), str(packet_path)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert result.returncode != 0 and packet_path.read_text(encoding="utf-8") == packet_text
+        NEGATIVE += 1
 
     return POSITIVE, NEGATIVE
 
