@@ -20,6 +20,7 @@ from typing import Any
 
 
 RUNNER_PATH = Path(__file__).with_name("run_glyph_runtime_config_validation.py")
+GENERATOR_PATH = Path(__file__).with_name("generate_glyph_checker_census.py")
 REQUIRED = {
     "id",
     "path",
@@ -67,8 +68,8 @@ def entry(
 ) -> dict[str, Any]:
     return {
         "id": checker_id,
-        "path": f"tools/{checker_id}.py",
-        "command": ["python3", f"tools/{checker_id}.py"],
+        "path": f"tools/check_glyph_{checker_id}.py",
+        "command": ["python3", f"tools/check_glyph_{checker_id}.py"],
         "category": category,
         "applicability": applicability,
         "branch_policy": "content_only",
@@ -86,6 +87,17 @@ def write_checker(root: Path, checker: dict[str, Any], exit_code: int) -> None:
     path.write_text(f"raise SystemExit({exit_code})\n", encoding="utf-8")
 
 
+def refresh_census(root: Path) -> None:
+    spec = importlib.util.spec_from_file_location("glyph_census_adversarial", GENERATOR_PATH)
+    if spec is None or spec.loader is None:
+        raise AssertionError("could not load census generator")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    (root / "docs/runtime_config/fixtures/glyph_checker_census.json").write_text(
+        module.rendered(module.generate(root)), encoding="utf-8"
+    )
+
+
 def write_manifest(root: Path, entries: list[dict[str, Any]], categories: list[str]) -> Path:
     manifest = root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
     manifest.write_text(
@@ -99,18 +111,7 @@ def write_manifest(root: Path, entries: list[dict[str, Any]], categories: list[s
         ),
         encoding="utf-8",
     )
-    census = root / "docs/runtime_config/fixtures/glyph_checker_census.json"
-    census.write_text(
-        json.dumps(
-            {
-                "entries": [
-                    {"path": checker["path"], "runtime_config_relevance_signals": []}
-                    for checker in entries
-                ]
-            }
-        ),
-        encoding="utf-8",
-    )
+    refresh_census(root)
     return manifest
 
 
@@ -123,7 +124,7 @@ def load_runner() -> Any:
     return module
 
 
-def invoke(module: Any, root: Path, manifest: Path, *arguments: str) -> tuple[int, str]:
+def invoke(module: Any, root: Path, manifest: Path, *arguments: str, census_path: Path | None = None) -> tuple[int, str]:
     original_root, original_manifest, original_census, original_argv = (
         module.ROOT,
         module.MANIFEST,
@@ -133,7 +134,7 @@ def invoke(module: Any, root: Path, manifest: Path, *arguments: str) -> tuple[in
     captured = io.StringIO()
     try:
         module.ROOT, module.MANIFEST = root, manifest
-        module.CENSUS = root / "docs/runtime_config/fixtures/glyph_checker_census.json"
+        module.CENSUS = census_path or root / "docs/runtime_config/fixtures/glyph_checker_census.json"
         sys.argv = [str(RUNNER_PATH), *arguments]
         with contextlib.redirect_stdout(captured):
             result = module.main()
@@ -163,7 +164,7 @@ def main() -> int:
         manifest = write_manifest(root, entries, ["baseline"])
         result, text = invoke(module, root, manifest, "--json")
         report = payload(text)
-        if result != 1 or [item["id"] for item in report["results"]] != ["pass_one", "fail_two", "pass_three"]:
+        if result != 1 or report["census_freshness"]["status"] != "PASS" or [item["id"] for item in report["results"]] != ["pass_one", "fail_two", "pass_three"]:
             raise AssertionError("full aggregate did not record all load-bearing checks")
         passed.extend(["AGG-01-failing-load-bearing-fails", "AGG-02-full-records-all"])
 
@@ -240,11 +241,51 @@ def main() -> int:
         omitted = exclusions.pop(0)
         probe = root / "omitted-strong-signal-exclusion.json"
         probe.write_text(json.dumps(actual_manifest), encoding="utf-8")
-        result, text = invoke(module, actual_root, probe, "--check-manifest")
+        result, text = invoke(
+            module,
+            actual_root,
+            probe,
+            "--check-manifest",
+            census_path=actual_root / "docs/runtime_config/fixtures/glyph_checker_census.json",
+        )
         needle = f"unclassified strong-signal checker: {omitted['path']}"
         if result != 1 or needle not in text:
             raise AssertionError("strong-signal checker absent from manifest/exclusions was accepted")
         passed.append("AGG-11-unclassified-strong-signal-rejected")
+
+        drift = [entry("stable")]
+        write_checker(root, drift[0], 0)
+        manifest = write_manifest(root, drift, ["baseline"])
+        result, text = invoke(module, root, manifest, "--json")
+        if result != 0 or payload(text)["census_freshness"]["status"] != "PASS":
+            raise AssertionError("fresh census was not accepted")
+        drift_path = root / drift[0]["path"]
+        drift_path.write_text(drift_path.read_text(encoding="utf-8") + "# byte drift\n", encoding="utf-8")
+        result, text = invoke(module, root, manifest, "--json")
+        if result != 1 or "checker census is stale" not in text:
+            raise AssertionError("byte-changed checker was accepted without census regeneration")
+        refresh_census(root)
+        (root / "tools/check_glyph_extra.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
+        refresh_census(root)
+        (root / "tools/check_glyph_extra.py").rename(root / "tools/check_glyph_renamed.py")
+        result, text = invoke(module, root, manifest, "--json")
+        if result != 1 or "checker census is stale" not in text:
+            raise AssertionError("renamed checker was accepted without census regeneration")
+        refresh_census(root)
+        (root / "tools/check_glyph_added.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
+        result, text = invoke(module, root, manifest, "--json")
+        if result != 1 or "checker census is stale" not in text:
+            raise AssertionError("added checker was accepted without census regeneration")
+        refresh_census(root)
+        (root / "tools/check_glyph_added.py").unlink()
+        result, text = invoke(module, root, manifest, "--json")
+        if result != 1 or "checker census is stale" not in text:
+            raise AssertionError("removed checker was accepted without census regeneration")
+        refresh_census(root)
+        result, text = invoke(module, root, manifest, "--json")
+        if result != 0 or payload(text)["census_freshness"]["status"] != "PASS":
+            raise AssertionError("regenerated census was not accepted after drift repair")
+        passed.append("AGG-12-census-freshness-added-removed-renamed-byte-drift")
 
     if set(REQUIRED) != set(entry("schema_probe")):
         raise AssertionError("adversarial manifest entry no longer matches the runner schema")

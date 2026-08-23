@@ -98,8 +98,8 @@ def duplicate_pairs(items: list[tuple[str, object]]) -> dict[str, object]:
     return result
 
 
-def entry(path: Path) -> dict[str, object]:
-    relative = path.relative_to(ROOT).as_posix()
+def entry(path: Path, root: Path = ROOT) -> dict[str, object]:
+    relative = path.relative_to(root).as_posix()
     raw = path.read_bytes()
     text = raw.decode("utf-8", errors="replace")
     parse_error = None
@@ -141,9 +141,9 @@ def entry(path: Path) -> dict[str, object]:
     }
 
 
-def generate() -> dict[str, object]:
-    paths = sorted((ROOT / "tools").glob("check_glyph_*.py"), key=lambda item: item.relative_to(ROOT).as_posix())
-    entries = [entry(path) for path in paths]
+def generate(root: Path = ROOT) -> dict[str, object]:
+    paths = sorted((root / "tools").glob("check_glyph_*.py"), key=lambda item: item.relative_to(root).as_posix())
+    entries = [entry(path, root) for path in paths]
     ids = [item["checker_id"] for item in entries]
     names = [item["path"] for item in entries]
     if len(ids) != len(set(ids)):

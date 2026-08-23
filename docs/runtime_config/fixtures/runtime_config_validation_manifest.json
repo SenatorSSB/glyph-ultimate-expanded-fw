@@ -29,6 +29,8 @@
     {"id":"latest_y2_hardware_evidence","path":"tools/check_glyph_latest_y2_layout_source_owned_port.py","command":["python3","tools/check_glyph_latest_y2_layout_source_owned_port.py"],"category":"historical_evidence","applicability":"historical_only","branch_policy":"named_evidence_branch","required_arguments":[],"mutation_risk":"none","source_dependencies":[],"load_bearing":false,"historical":true,"reason":"hardware result evidence"}
   ],
   "strong_signal_exclusions": [
+    {"id":"artifact_postprocessor_provenance","path":"tools/check_glyph_artifact_postprocessor_provenance.py","reason":"NOT_CURRENT_RUNTIME_CONFIG_LANE","detail":"artifact postprocessing provenance is an offline evidence lane outside current runtime-config validation"},
+    {"id":"official_configurator_validation","path":"tools/check_glyph_official_configurator_validation.py","reason":"NOT_CURRENT_RUNTIME_CONFIG_LANE","detail":"official configurator corpus validation is outside the source-owned runtime-config dependency graph"},
     {"id":"active_runtime_config_state_contract","path":"tools/check_glyph_active_runtime_config_state_contract.py","reason":"NOT_CURRENT_RUNTIME_CONFIG_LANE","detail":"static documentation signal only; not in the current source-sync dependency graph"},
     {"id":"active_runtime_config_state_source_owned_preselection","path":"tools/check_glyph_active_runtime_config_state_source_owned_preselection.py","reason":"HARDWARE_RESULT_EVIDENCE","detail":"preserved active-state preselection evidence"},
     {"id":"active_storage_publication_model","path":"tools/check_glyph_active_storage_publication_model.py","reason":"NOT_CURRENT_RUNTIME_CONFIG_LANE","detail":"future publication-model documentation lane"},

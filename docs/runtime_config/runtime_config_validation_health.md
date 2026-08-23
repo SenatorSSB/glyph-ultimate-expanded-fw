@@ -15,6 +15,13 @@ they are not evidence that every repository checker received a manual semantic
 assessment. The controlled starting baseline remains
 `116d34322837fe1f6f724c820b49ccb0d24d6787`.
 
+The current aggregate treats census freshness as a load-bearing baseline gate:
+any added, removed, renamed, or byte-changed `tools/check_glyph_*.py` file
+fails the aggregate until the static census is deterministically regenerated.
+The census generator only performs static inspection and never imports or
+executes discovered checkers; the curated manifest remains authoritative for
+which checks are current and load-bearing.
+
 The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`.

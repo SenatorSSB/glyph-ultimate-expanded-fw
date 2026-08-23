@@ -10,6 +10,9 @@ from pathlib import Path
 from time import monotonic
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from generate_glyph_checker_census import generate as generate_census, rendered as render_census  # noqa: E402
+
 MANIFEST = ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
 CENSUS = ROOT / "docs/runtime_config/fixtures/glyph_checker_census.json"
 REQUIRED = {"id", "path", "command", "category", "applicability", "branch_policy", "required_arguments", "mutation_risk", "source_dependencies", "load_bearing", "historical", "reason"}
@@ -99,6 +102,19 @@ def context() -> dict[str, object]:
     return {"head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(), "branch": branch or None, "detached": not bool(branch), "base": subprocess.run(["git", "merge-base", "HEAD", "origin/configurator"], cwd=ROOT, text=True, capture_output=True, check=False).stdout.strip() or None}
 
 
+def census_freshness() -> dict[str, object]:
+    committed = CENSUS.read_text(encoding="utf-8")
+    expected = render_census(generate_census(ROOT))
+    return {
+        "id": "checker_census_freshness",
+        "path": "tools/check_glyph_checker_census.py",
+        "category": "baseline",
+        "applicability": "current",
+        "load_bearing": True,
+        "status": "PASS" if committed == expected else "FAIL",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--category", action="append")
@@ -107,6 +123,9 @@ def main() -> int:
     parser.add_argument("--check-manifest", action="store_true")
     args = parser.parse_args()
     try:
+        freshness = census_freshness()
+        if freshness["status"] != "PASS":
+            raise ValueError("checker census is stale; run tools/generate_glyph_checker_census.py")
         entries, exclusions, categories = load()
         if args.category and any(category not in categories for category in args.category):
             raise ValueError("unknown category: " + ", ".join(sorted(set(args.category) - categories)))
@@ -126,7 +145,7 @@ def main() -> int:
         if args.fail_fast and not passed:
             break
     passed = all(result["status"] == "PASS" for result in results)
-    output = {"status": "PASS" if passed else "FAIL", "context": context(), "results": results, "excluded": [{"id": entry["id"], "applicability": entry["applicability"], "reason": entry["reason"]} for entry in entries if entry["applicability"] != "current"] + [{"id": exclusion["id"], "applicability": "excluded", "reason": exclusion["reason"]} for exclusion in exclusions]}
+    output = {"status": "PASS" if passed else "FAIL", "context": context(), "census_freshness": freshness, "results": results, "excluded": [{"id": entry["id"], "applicability": entry["applicability"], "reason": entry["reason"]} for entry in entries if entry["applicability"] != "current"] + [{"id": exclusion["id"], "applicability": "excluded", "reason": exclusion["reason"]} for exclusion in exclusions]}
     if args.json:
         print(json.dumps(output, sort_keys=True))
     else:

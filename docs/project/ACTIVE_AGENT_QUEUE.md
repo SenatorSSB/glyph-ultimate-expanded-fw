@@ -43,12 +43,12 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -297,7 +297,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-001",
       "title": "Make checker census freshness load-bearing",
-      "status": "READY",
+      "status": "DONE",
       "branch": "runtime-config-checker-census-integration",
       "objective": "Make deterministic repository checker-census freshness a load-bearing prerequisite of the current runtime-config validation aggregate.",
       "why_this_matters": "Live configurator currently reports a passing runtime-config aggregate while the standalone checker census fails on committed checker drift, so the aggregate can certify a stale view of the available checker surface.",
@@ -338,7 +338,7 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused validation-control-plane branch if deterministic regeneration or aggregate freshness enforcement is incorrect; do not restore a passing aggregate over a known-stale census without renewed curation.",
       "status_documentation_updates": "Document that checker-census freshness is load-bearing while the curated manifest remains authoritative for applicability; do not claim broader compatibility or runtime evidence.",
-      "done_evidence": "Independent review plus census, validation-health, aggregate adversarial, full runtime-config aggregate, and docs-navigation PASS; a deliberate temporary checker drift makes the aggregate fail; git diff contains no firmware/configurator product code or runtime/product semantic change.",
+      "done_evidence": "Independent review PASS; census freshness, validation-health, aggregate adversarial (including added/removed/renamed/byte-changed checker drift), full runtime-config aggregate, and docs-navigation PASS; git diff contains no firmware/configurator product code or runtime/product semantic change. Canonical implementation commit: b34ed5b31e8140ef9e0484f8e98e0be942d1169c.",
       "stop_conditions": [
         "Any discovered checker is imported or executed by census generation.",
         "Static signals would become automatic applicability or authorization.",
@@ -432,13 +432,13 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Interpretation
 
-- Immediate Ready runway: `2`.
+- Immediate Ready runway: `1`.
 - Recorded Preauthorized runway: `0`.
 - Valid mechanically activatable Preauthorized runway: `0`.
 - Invalidated Preauthorized work: `0`.
 - Hardware-pending work: `0`.
-- Effective authorized runway: `2`.
-- Current liveness result: `RUNWAY_LOW` at `2` against the recorded target of `4`; this is a liveness signal, not a quota.
+- Effective authorized runway: `1`.
+- Current liveness result: `RUNWAY_LOW` at `1` against the recorded target of `4`; this is a liveness signal, not a quota.
 - `GLOBAL_EVIDENCE_WAIT_SUPPORTED`: no.
 
 The two remaining Ready items are independent current H0/H1 opportunities. No
@@ -489,8 +489,8 @@ surviving dependency candidates against live `configurator`
 
 - `GP-SRC-001`: `DONE`; active-table-source truth and mutation guardrails
   shipped without a runtime byte change.
-- `GP-VAL-001`: `READY`; the live census/aggregate contradiction remains
-  reproduced after `GP-SRC-001`, with curated applicability preserved.
+- `GP-VAL-001`: `DONE`; checker-census freshness is load-bearing, curated
+  applicability remains authoritative, and the exact drift corpus passes.
 - `GP-VAL-002`: `SUBSTANTIVE_DEPENDENCY_GATED` / `CURATION_REQUIRED` after
   `GP-SRC-001` and `GP-VAL-001`; future aggregate safety and workflow parity
   need fresh judgment.

@@ -30,6 +30,13 @@ def main() -> int:
         assert census["artifact"] == "docs/runtime_config/fixtures/glyph_checker_census.json"
         census_entries = json.loads(CENSUS.read_text(encoding="utf-8"), object_pairs_hook=pairs)["entries"]
         assert census["discovered_count"] == len(census_entries) and census["validated"] is True
+        freshness = value["aggregate_census_freshness"]
+        assert freshness == {
+            "id": "checker_census_freshness",
+            "path": "tools/check_glyph_checker_census.py",
+            "load_bearing": True,
+            "result": "PASS",
+        }
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=pairs)
         entries = manifest["entries"]
         exclusions = manifest["strong_signal_exclusions"]
