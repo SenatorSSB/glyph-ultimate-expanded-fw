@@ -42,6 +42,34 @@ explicitly instructed.
   hardware test, future phase, product approval required, or forbidden by
   policy.
 
+## Live Remote Verification
+
+Separate local Git inspection from GitHub connectivity. Inspect the repository,
+remote URL, refs, status, branches, and worktrees locally, then attempt the
+ordinary/default minimal read-only live-remote operation. If the restricted
+sandbox cannot resolve or reach GitHub because of environment-level DNS,
+network, or sandbox policy, treat that attempt as inconclusive and retry the
+same minimal read-only verification through the runtime's permitted
+network-enabled/escalated path. The retry grants network access only and does
+not expand filesystem, mutation, product, queue, evidence, or publication
+authority.
+
+A sandbox DNS/network failure is not authentication evidence and is not enough
+for `BLOCKED_EXTERNAL`. Diagnose authentication only after connectivity is
+established and GitHub actually rejects credentials or permissions. A failing
+sandboxed `gh auth status` is not a reliable authentication oracle when GitHub
+cannot be reached. Never automatically run `gh auth login`/`gh auth logout`,
+rewrite tokens, delete Git credentials, change credential helpers, replace SSH
+keys, switch accounts, or request re-login because of unverified connectivity.
+Account-level mutation is user-owned.
+
+If a network-enabled retry succeeds, use its live result as authoritative,
+continue normally, and report the restricted failure plus successful retry
+without calling it an authentication incident. If every permitted
+network-capable retry fails or is unavailable, stop fail-closed with live
+remote unverified because all permitted network-capable retries failed. Stale
+local remote-tracking refs never substitute for successful live verification.
+
 ## Authorization Policy
 
 - `docs/project/ACTIVE_AGENT_QUEUE.md` is the only executable queue.

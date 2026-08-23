@@ -80,6 +80,20 @@ defer safely with IMPLEMENTATION_DEFERRED_CONCURRENT_WRITER. Do not treat every
 remote branch as unfinished work, and never recover planning/* as
 implementation.
 
+Attempt live Git verification normally. If the default sandbox fails because
+GitHub/DNS/network access is restricted, treat the result as inconclusive and
+retry the same minimal read-only verification using the runtime's permitted
+network-enabled/escalated execution mechanism. That retry grants network access
+only. A sandbox DNS/network failure is not authentication evidence and is not
+sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
+a substitute. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication. Never automatically run
+gh auth login/logout, rewrite tokens, delete credentials, change credential
+helpers, replace SSH keys, switch accounts, or request re-login; account-level
+changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
+unavailable, stop fail-closed with live remote unverified because all permitted
+network-capable retries failed.
+
 Recovery comes first. Recover at most one legitimate unfinished contracted
 item, then refresh truth. If recovery is material or risky, stop after
 recovery.
@@ -276,6 +290,20 @@ worktrees, canonical queue writers, and relevant refs. If another legitimate
 canonical writer is mutating or publishing state, return
 CURATION_DEFERRED_CONCURRENT_WRITER rather than race it.
 
+Attempt live Git verification normally. If the default sandbox fails because
+GitHub/DNS/network access is restricted, treat the result as inconclusive and
+retry the same minimal read-only verification using the runtime's permitted
+network-enabled/escalated execution mechanism. That retry grants network access
+only. A sandbox DNS/network failure is not authentication evidence and is not
+sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
+a substitute. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication. Never automatically run
+gh auth login/logout, rewrite tokens, delete credentials, change credential
+helpers, replace SSH keys, switch accounts, or request re-login; account-level
+changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
+unavailable, stop fail-closed with live remote unverified because all permitted
+network-capable retries failed.
+
 Compute and report Immediate Ready, recorded Preauthorized, mechanically
 activatable Preauthorized, invalidated Preauthorized, hardware-pending, and
 effective authorized runway plus the recorded target and its provenance. One
@@ -440,6 +468,20 @@ Fetch and live-verify configurator. Treat live Git and canonical repository
 truth as authoritative over old chats, historical SHAs, roadmap residue, and
 remote branch names. Do not mistake every remote branch for unfinished work.
 
+Attempt live Git verification normally. If the default sandbox fails because
+GitHub/DNS/network access is restricted, treat the result as inconclusive and
+retry the same minimal read-only verification using the runtime's permitted
+network-enabled/escalated execution mechanism. That retry grants network access
+only. A sandbox DNS/network failure is not authentication evidence and is not
+sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
+a substitute. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication. Never automatically run
+gh auth login/logout, rewrite tokens, delete credentials, change credential
+helpers, replace SSH keys, switch accounts, or request re-login; account-level
+changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
+unavailable, stop fail-closed with live remote unverified because all permitted
+network-capable retries failed.
+
 Planner is broad, read-heavy, and non-authoritative. Do not edit product code,
 the canonical queue, Ready/Preauthorized status, durable user direction, or
 runtime tests. Do not decide game semantics or infer undocumented Glyph
@@ -558,6 +600,20 @@ Read completely:
 Fetch and verify live refs. Inspect current branch/HEAD, dirty state,
 worktrees, candidate ref, candidate base, and any result/evidence branch. If a
 legitimate canonical writer is active, defer instead of racing.
+
+Attempt live Git verification normally. If the default sandbox fails because
+GitHub/DNS/network access is restricted, treat the result as inconclusive and
+retry the same minimal read-only verification using the runtime's permitted
+network-enabled/escalated execution mechanism. That retry grants network access
+only. A sandbox DNS/network failure is not authentication evidence and is not
+sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
+a substitute. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication. Never automatically run
+gh auth login/logout, rewrite tokens, delete credentials, change credential
+helpers, replace SSH keys, switch accounts, or request re-login; account-level
+changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
+unavailable, stop fail-closed with live remote unverified because all permitted
+network-capable retries failed.
 
 Input must be human-supplied observations/results. Verify all of:
 - Work-order ID and protocol version;

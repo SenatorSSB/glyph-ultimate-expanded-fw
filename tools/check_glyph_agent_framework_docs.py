@@ -1596,7 +1596,80 @@ def check_task_configurations() -> None:
         for phrase in phrases:
             if normalize(phrase) not in normalize(section):
                 fail(f"{heading} prompt missing required contract: {phrase}")
+        for phrase in (
+            "Attempt live Git verification normally",
+            "treat the result as inconclusive",
+            "permitted network-enabled/escalated execution mechanism",
+            "not authentication evidence",
+            "Authentication may be diagnosed only after connectivity is established and GitHub actually rejects authentication",
+            "Never automatically run gh auth login/logout",
+            "rewrite tokens, delete credentials, change credential helpers, replace SSH keys, switch accounts, or request re-login",
+            "account-level changes are user-owned unless separately requested",
+            "Do not use stale local remote-tracking refs as a substitute",
+            "all permitted network-capable retries failed",
+        ):
+            if normalize(phrase) not in normalize(section):
+                fail(f"{heading} prompt missing live-remote retry contract: {phrase}")
     pass_line("four exact scheduled/manual task configurations validate")
+
+
+def check_live_remote_retry_contract() -> None:
+    required = {
+        "AGENTS.md": (
+            "ordinary/default minimal read-only verification",
+            "result is inconclusive",
+            "permitted network-enabled/escalated execution mechanism",
+            "not authentication evidence",
+            "Never automatically run `gh auth login` or `gh auth logout`",
+            "Stale local remote-tracking refs never substitute",
+            "all permitted network-capable retries failed",
+        ),
+        "docs/WORKFLOW.md": (
+            "ordinary/default minimal read-only live-remote operation",
+            "sandboxed `gh auth status` is not a reliable authentication oracle",
+            "Account-level mutation is user-owned",
+            "Stale local remote-tracking refs never substitute",
+        ),
+        "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md": (
+            "ordinary/default minimal read-only attempt",
+            "first DNS/network failure is inconclusive",
+            "Authentication may be diagnosed only after GitHub connectivity is established",
+            "all permitted network-capable retries failed",
+        ),
+        "docs/agent_framework/VALIDATION_AND_GATES.md": (
+            "attempt ordinary/default read-only verification",
+            "return `BLOCKED_EXTERNAL` until all permitted network-capable retries fail",
+        ),
+    }
+    for rel_path, phrases in required.items():
+        for phrase in phrases:
+            require_phrase(rel_path, phrase)
+    prompt_templates = read_required("docs/agent_framework/PROMPT_TEMPLATES.md")
+    template_headings = (
+        "## Supervisor Cycle Prompt",
+        "## Planner Handoff",
+        "## Curator Handoff",
+        "## Hardware Evidence Processor Handoff",
+        "## Architecture Specialist Handoff",
+    )
+    for index, heading in enumerate(template_headings[:-1]):
+        start = prompt_templates.index(heading)
+        end = prompt_templates.index(template_headings[index + 1], start)
+        section = normalize(prompt_templates[start:end])
+        for phrase in (
+            "Live Git verification: attempt it normally",
+            "restricted-sandbox GitHub/DNS/network failure is inconclusive",
+            "permitted network-enabled/escalated mechanism",
+            "not authentication evidence or sufficient for BLOCKED_EXTERNAL",
+            "Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication",
+            "Never automatically mutate credentials or request re-login",
+            "account-level changes are user-owned unless separately requested",
+            "Do not substitute stale tracking refs",
+            "all permitted network-capable retries fail or are unavailable",
+        ):
+            if normalize(phrase) not in section:
+                fail(f"{heading} missing live-remote retry contract: {phrase}")
+    pass_line("sandbox network/live-remote retry and authentication safety validate")
 
 
 def check_contract_phrases() -> None:
@@ -1670,6 +1743,7 @@ def main() -> int:
         check_firmware_implementation_authority()
         check_legacy_control_plane_supersession()
         check_task_configurations()
+        check_live_remote_retry_contract()
         check_contract_phrases()
         check_navigation_pointers()
         check_forbidden_claims()

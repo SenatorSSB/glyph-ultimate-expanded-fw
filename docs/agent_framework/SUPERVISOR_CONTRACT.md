@@ -42,6 +42,12 @@ recommendation.
   starting a cycle.
 - Load `docs/project/ACTIVE_AGENT_QUEUE.md` and
   `AUTHORIZATION_AND_RUNWAY.md`; only `READY` is immediately executable.
+- Attempt live Git verification normally. A restricted-sandbox DNS/network
+  failure is inconclusive and requires the same minimal read-only retry through
+  the runtime's permitted network-enabled/escalated path. It is not auth
+  evidence or sufficient for `BLOCKED_EXTERNAL`; never mutate credentials,
+  request re-login, or substitute stale tracking refs. Stop fail-closed only
+  after all permitted network-capable retries fail or are unavailable.
 - Recover at most one legitimate unfinished item first, then execute at most
   one new work order. Never self-reseed or promote a Planner candidate.
 - Do not refuse a complete `READY` H2/H3 item solely because it changes active

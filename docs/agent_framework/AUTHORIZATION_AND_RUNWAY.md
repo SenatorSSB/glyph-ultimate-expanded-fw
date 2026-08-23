@@ -214,6 +214,22 @@ publication. Legitimate concurrent publication yields
 `IMPLEMENTATION_DEFERRED_CONCURRENT_WRITER` or
 `CURATION_DEFERRED_CONCURRENT_WRITER`.
 
+Live verification uses an ordinary/default minimal read-only attempt followed,
+when the restricted sandbox cannot resolve or reach GitHub, by the same
+read-only attempt through the runtime's permitted network-enabled/escalated
+execution path. The first DNS/network failure is inconclusive, not
+authentication evidence and not sufficient for `BLOCKED_EXTERNAL`. The retry
+grants network access only. Authentication may be diagnosed only after GitHub
+connectivity is established and GitHub rejects credentials or permission;
+sandboxed `gh auth status` while GitHub is unreachable is not an auth oracle.
+Agents must not automatically run `gh auth login`/`gh auth logout`, rewrite
+tokens, delete credentials, change credential helpers, replace SSH keys,
+switch accounts, or request re-login from an unverified connectivity failure.
+Stale local remote-tracking refs never replace live truth. Only when all
+permitted network-capable retries fail or are unavailable may the role stop
+fail-closed, reporting that live remote is unverified because all permitted
+network-capable retries failed.
+
 Normal implementation uses a focused branch compared against live
 `configurator`. Hardware/result/evidence branches are compared against their
 candidate branch, while failed active source is separately kept out of

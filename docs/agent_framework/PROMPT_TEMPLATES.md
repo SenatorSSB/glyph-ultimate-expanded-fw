@@ -27,6 +27,8 @@ Read first:
 - docs/runtime_config/IMPLEMENTATION_BOUNDARY.md
 - docs/agent_framework/README.md
 
+Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
+
 Scope:
 - ...
 
@@ -62,6 +64,7 @@ Final report:
 Role: planner
 Objective: propose non-authoritative current-configurator candidate supply for ...
 Scope: read current source, tests, docs, roadmap, queue, user direction, evidence, and relevant checkers.
+Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
 Excluded scope: product/queue edits, Ready or Preauthorized promotion, semantic decisions, runtime-loaded config approval.
 Allowed files: repository files for inspection; material output only on planning/portfolio-*.
 Forbidden files: all product/runtime files for mutation; source, include, lib,
@@ -81,6 +84,7 @@ Tool budget: bounded read-only.
 Role: curator
 Objective: independently authorize complete Ready or narrowly Preauthorized work from ...
 Scope: current live configurator, candidate packet, source/tests, queue, user direction, evidence, and control-plane docs/tests.
+Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
 Excluded scope: firmware/configurator product code, runtime/product tests, implementation of newly authorized work.
 Allowed files: canonical queue/status/portfolio/user-direction publication and narrowly coupled control-plane tests.
 Forbidden files: src/**, include/**, config/**, firmware/runtime/configurator product tests.
@@ -98,6 +102,7 @@ Tool budget: bounded judgment and control-plane editing.
 Role: hardware_evidence_processor
 Objective: validate and record supplied controller observations for candidate ... and artifact SHA-256 ...
 Scope: exact work order, protocol, candidate/ref, artifact identity, observations, evidence/status files.
+Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
 Excluded scope: performing/fabricating tests, runtime source edits, source publication.
 Allowed files: evidence record and directly coupled control-plane status.
 Forbidden files: src/**, include/**, config/**, product/runtime tests.

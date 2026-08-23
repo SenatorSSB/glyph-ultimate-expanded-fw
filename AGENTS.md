@@ -71,6 +71,32 @@ A backend behavior claim must reference source, docs, tests, fixtures,
 user-provided research, or an explicit user/domain statement. If behavior is
 inferred, mark it as inferred. If behavior is unknown, say unknown.
 
+## Live Git Verification And Sandbox Networking
+
+Every role that requires fresh GitHub truth must attempt the ordinary/default
+minimal read-only verification first. If the restricted sandbox cannot resolve
+or reach GitHub because of DNS, network, or sandbox policy, the result is
+inconclusive: retry the same read-only verification through the runtime's
+permitted network-enabled/escalated execution mechanism. That escalation grants
+network access only, not broader filesystem, repository-mutation, firmware,
+queue, evidence, or publication authority. A sandbox network failure is not
+authentication evidence and is not sufficient for `BLOCKED_EXTERNAL`.
+
+Diagnose authentication or authorization only after GitHub connectivity is
+established and GitHub rejects credentials or permissions. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable;
+DNS/network failure takes precedence over apparent token messages from a tool
+that could not contact the service. Never automatically run `gh auth login` or
+`gh auth logout`, rewrite tokens, delete Git credentials, change credential
+helpers, replace SSH keys, switch GitHub accounts, or request re-login because
+of an unverified connectivity failure. Account-level mutation is user-owned.
+
+Stale local remote-tracking refs never substitute for successful live
+verification. Only after every permitted network-capable retry fails or is
+unavailable may a role stop fail-closed with `BLOCKED_EXTERNAL`, explicitly
+reporting that live remote is unverified because all permitted network-capable
+retries failed.
+
 ## Stop Conditions
 
 Stop before firmware-behavior implementation when no complete `READY` work
