@@ -16,7 +16,7 @@
     },
     {
       "path": ".github/workflows/build.yml",
-      "sha256": "3fbc0502d85e16ddd006bb46db0462dbbb217667899c150e18f1c75bc24459a1",
+      "sha256": "b2da4ecddd42443fa0d19c56b55dfd2df0ee91bd513258983f0887f2ff7ef638",
       "events": ["push", "pull_request"],
       "classification": "CURRENT_GATED",
       "gate": "validation",

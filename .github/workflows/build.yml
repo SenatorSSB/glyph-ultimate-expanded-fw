@@ -46,9 +46,14 @@ jobs:
     steps:
     - name: Check out source code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: short sha
       run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+    - name: Verify checked-out source and postprocessor identity
+      run: python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-checkout --candidate-sha "$GITHUB_SHA"
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -80,6 +85,13 @@ jobs:
         cd $PIO_ENV
         ls *.uf2 | xargs ./glyph_nuker
         rm glyph_nuker
+
+    - name: Write and verify observed-only sidecar
+      run: |
+        export SIDECAR_PATH="$PIO_ENV/${ARTIFACT_NAME}.provenance.json"
+        test "$SIDECAR_PATH" = "$PIO_ENV/${ARTIFACT_NAME}.provenance.json"
+        python3 tools/check_glyph_artifact_postprocessor_provenance.py --write-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"
+        python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"
 
     - name: Publish ${{ matrix.env }} artifacts
       uses: actions/upload-artifact@v4

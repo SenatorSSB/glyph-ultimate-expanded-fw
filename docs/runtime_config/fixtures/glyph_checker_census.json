@@ -732,8 +732,10 @@
       },
       "checker_id": "artifact_postprocessor_provenance",
       "defines_main": true,
-      "file_size_bytes": 6430,
+      "file_size_bytes": 13702,
       "hard_coded_branch_like_strings": [
+        "--candidate-sha",
+        "args.candidate_sha",
         "candidate",
         "candidate_git_sha",
         "candidate_sha",
@@ -742,18 +744,22 @@
       "imported_local_modules": [],
       "imports_argparse": true,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
-      "invokes_subprocess": false,
-      "line_count": 166,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 339,
       "parse_error": null,
       "path": "tools/check_glyph_artifact_postprocessor_provenance.py",
       "potential_branch_identity_signals": [
+        "--candidate-sha",
+        "args.candidate_sha",
         "candidate",
         "candidate_git_sha",
         "candidate_sha",
         "configurator"
       ],
-      "potential_mutation_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
       "python_module": "tools.check_glyph_artifact_postprocessor_provenance",
       "referenced_repository_path_prefixes": [
         "docs/runtime_config/artifact_postprocessor_provenance.md",
@@ -762,7 +768,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "c7526b7e4da36190b31e047cbb2e3afe783daa6145fb511e0315a69c136ea8f7",
+      "sha256": "bc7f6262d4c5813aba4834d1c6bd5fb31e89f1eb0f2cab233327e85b38070e5c",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -772,6 +778,48 @@
         "hardware_results": false,
         "identity_runtime_tables": false,
         "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "artifact_postprocessor_workflow",
+      "defines_main": true,
+      "file_size_bytes": 3347,
+      "hard_coded_branch_like_strings": [
+        "--candidate-sha"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 83,
+      "parse_error": null,
+      "path": "tools/check_glyph_artifact_postprocessor_workflow.py",
+      "potential_branch_identity_signals": [
+        "--candidate-sha"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_artifact_postprocessor_workflow",
+      "referenced_repository_path_prefixes": [
+        "tools/check_glyph_artifact_postprocessor_provenance.py"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "924b0268645dd1d054a5eca0675613ea5a9c79baf1297fd7b1746ade768769b0",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
         "source_owned": false,
         "y2_tilt3": false
       }

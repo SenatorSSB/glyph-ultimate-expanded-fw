@@ -40,7 +40,7 @@ Commands that can prepare, install, or emit a candidate are classified unsafe
 for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 27 explicit entries, including 22 current
+The curated manifest now has 28 explicit entries, including 23 current
 load-bearing checks. The tracked CI publication-route census records both
 workflow files: `build.yml` is `CURRENT_GATED`, while
 `build-device-config.yml` is `UNRESOLVED_EXTERNAL` because its caller,

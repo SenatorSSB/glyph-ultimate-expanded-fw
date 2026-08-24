@@ -6,8 +6,10 @@ This packet records only static facts visible in the current repository. The
 CI workflow builds `firmware.uf2`, copies it to a short-SHA-named path such as
 `glyph_mk6/Glyph-<short-sha>.uf2`, moves the tracked `glyph_nuker` executable
 next to that file, invokes it on the UF2, and uploads the directory as the
-`Glyph_FW` artifact. The workflow does not record a full candidate Git SHA,
-final artifact SHA-256, or an immutable candidate/artifact-addressed locator.
+`Glyph_FW` artifact. Before the bounded observed-only sidecar integration, the
+workflow did not record a full candidate Git SHA, final artifact SHA-256, or an
+immutable candidate/artifact-addressed locator. The current sidecar records the
+first two for observed correspondence; it still does not establish the third.
 
 The tracked `glyph_nuker` file is an x86-64 statically linked stripped ELF with
 SHA-256
@@ -17,7 +19,7 @@ the bytes it changes, whether it is reproducible, or whether it is safe to
 use for hardware acceptance. Those fields remain `UNKNOWN`; this cycle does
 not execute it or inspect a real pre/postprocessed UF2.
 
-## Inert sidecar contract
+## Observed-only sidecar contract
 
 `docs/runtime_config/fixtures/artifact_postprocessor_provenance.json` defines
 the synthetic-only sidecar shape. A complete record carries:
@@ -34,16 +36,24 @@ The synthetic sidecar pins its candidate Git SHA to the observed live
 source-observation identity, not a firmware candidate or hardware acceptance
 record.
 
-The verifier is
-`tools/check_glyph_artifact_postprocessor_provenance.py --check`. It hashes
-only the tracked postprocessor for its recorded file identity and synthetic
-fixture bytes in a temporary directory. It does not execute `glyph_nuker`,
-read a firmware build output, publish or upload an artifact, select a durable
-store, flash a device, or claim hardware acceptance. It rejects short or
-changed identities, metadata/hash mismatches, and false immutable-locator
-claims.
+The synthetic verifier is
+`tools/check_glyph_artifact_postprocessor_provenance.py --check`. The same
+tool's CI-only `--verify-checkout` mode requires full lowercase `GITHUB_SHA` to
+equal checked-out `git rev-parse HEAD` and verifies the tracked postprocessor
+hash before the existing workflow step. After that step, `--write-sidecar`
+and `--verify-sidecar` bind the final UF2's filename, size, and SHA-256 to the
+same source identity and observed-only fields before upload. The static
+ordering checker is
+`tools/check_glyph_artifact_postprocessor_workflow.py`.
 
-This packet does not create an artifact, sidecar for a real build, release,
-CI integration, or candidate. The durable locator remains unresolved, so the
-exact-snapshot hardware gate still requires a future externally preserved
+These commands do not execute `glyph_nuker` in tests, select a durable store,
+flash a device, or claim hardware acceptance. The workflow sidecar is
+correspondence metadata only; it does not establish artifact acceptance,
+reproducibility, postprocessor purpose/effect, retention, or an immutable
+locator.
+
+This packet does not create a real build artifact or release in repository
+tests. The bounded `build.yml` CI integration emits the sidecar during a real
+workflow run, but the durable locator remains unresolved, so the exact-
+snapshot hardware gate still requires a future externally preserved
 candidate/artifact pair.
