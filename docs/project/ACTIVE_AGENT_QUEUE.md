@@ -19,13 +19,13 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "efda608f9f2af61a44a96f1e5866f2ae57dcc688",
+  "audit_base_sha": "26b939fa3d3664e839cab8076eea60ddb0f67e9f",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
     "branch": "planning/portfolio-20260823-2349",
     "base_configurator_sha": "6b8ebcd404dcbfe9b579eed41fb35b889e9da598",
-    "candidate_count": 5,
+    "candidate_count": 4,
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
@@ -36,29 +36,37 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-CTL-002 remains substantive-design gated on migration and exact-equivalence representation; GP-PROV-002 remains reviewed surplus candidate supply, GP-PROV-003 remains research, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains dependent then external-evidence gated.",
       "No global evidence wait is proposed or supported; runtime/configurator product code and active table bytes were unchanged by curation.",
       "GP-SRC-003 v2 recovery implementation and independent repaired-scope review passed on the fresh descendant of live configurator 6dec5016b486f093a492626aaec3057bf3309274; no active source, table bytes, firmware behavior, or hardware artifact changed.",
-      "GP-SRC-004 completed at efda608f9f2af61a44a96f1e5866f2ae57dcc688 after independent classification review, fallback glyph_mk6 build, full current validation, and live feature-ref verification; no active table bytes or RuntimeConfigView publication changed."
+      "GP-SRC-004 completed at efda608f9f2af61a44a96f1e5866f2ae57dcc688 after independent classification review, fallback glyph_mk6 build, full current validation, and live feature-ref verification; no active table bytes or RuntimeConfigView publication changed.",
+      "GP-CONFIG-004 and GP-VAL-003 completed on configurator without product/runtime changes, reducing effective runway to zero and triggering follow-up curation.",
+      "GP-SRC-004 changed tools/generate_source_owned_runtime_config.py after the GP-SRC-005 authorization snapshot, mechanically invalidating the prior WAITING Preauthorization; follow-up Curator review proved that exact drift classification-only, reproduced both unsafe writer seams, and reauthorized GP-SRC-005 Ready against live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f.",
+      "GP-PROV-002 was independently reproduced and authorized Ready for the bounded observed-only build.yml sidecar; immutable storage, artifact acceptance, postprocessor purpose/effect, device update, and hardware PASS remain excluded.",
+      "GP-CTL-002 remains substantive-dependency gated, GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated; no global wait is proposed or supported."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-2349",
       "planning_commit": "387a2a7b27d11b81c3c571aaf07cf543af626757",
       "packet_id": "glyph-portfolio-20260823-2349",
       "packet_base_configurator_sha": "6b8ebcd404dcbfe9b579eed41fb35b889e9da598",
-      "curation_branch": "curation/portfolio-20260824-0051-review",
+      "curation_branch": "curation/portfolio-20260824-1355-followup",
       "review_date": "2026-08-24"
     }
   },
   "runway": {
-    "immediate_ready": 0,
-    "recorded_preauthorized": 1,
+    "immediate_ready": 2,
+    "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "CURATION_REQUIRED"
+    "RUNWAY_LOW",
+    "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
+    "RUNWAY_SHORTFALL_RESEARCH_GATED",
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
+    "RUNWAY_SHORTFALL_EVIDENCE_GATED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -330,42 +338,39 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-005",
       "title": "Apply isolated-output policy to remaining writers",
-      "status": "PREAUTHORIZED",
-      "branch": "offline-writer-isolated-output-policy",
-      "objective": "Apply the canonically integrated shared isolated-output policy to remaining offline writer paths while preserving stdout and one exact inert example install target.",
-      "why_this_matters": "The legacy source-owned generator currently accepts .git/config, AGENTS.md, case/inode aliases of the active baseline, and non-atomic writes; the coordinate-native bridge accepts arbitrary repository or absolute output paths. The exact safe policy is being established by GP-SRC-003 and should govern these writers once canonical.",
+      "status": "READY",
+      "branch": "glyph/gp-src-005-isolated-writers-20260824",
+      "objective": "Apply the canonically integrated shared isolated-output policy and shared atomic-write implementation to remaining offline writer paths while preserving stdout and one exact inert example install target.",
+      "why_this_matters": "The legacy source-owned generator currently accepts .git/config, AGENTS.md, case/inode aliases of the active baseline, and non-atomic writes; the coordinate-native bridge accepts arbitrary repository or absolute output paths. GP-SRC-003 established the exact isolated-output policy and atomic implementation, which should now govern these writers without broadening repository write authority.",
       "hardware_risk": "H1",
       "behavioral_claim": "This work changes host-side output-path and atomic-write safety only. It must not change generated semantic content, active table bytes, firmware/runtime behavior, profile intent, or the approved publication path.",
-      "scope": "After GP-SRC-003 is canonically Done, reuse its exact shared lexical-system-temp-root, canonical-resolution, case, alias, symlink, input-overwrite, active-publication-name, and atomic-write policy for generic generate_source_owned_runtime_config.py outputs and convert_coordinate_native_profile_to_source_owned_spec.py --output. Preserve stdout as non-mutating. Keep --install-inert-source-artifact only as a separate exact exception for src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp; reject every other repository target, including the active baseline and case/inode aliases. Do not duplicate or weaken the shared policy.",
-      "explicit_excluded_scope": "No prepared-v2 contract change, source-authority-intake root policy, active/compiled source write, table bytes, profile semantics, production ownership, runtime loading, persistence, WebSerial/device write, protobuf write, flashing, Nunchuk, root cause, build, candidate, or hardware action.",
+      "scope": "Reuse GP-SRC-003's exact shared lexical-system-temp-root, canonical-resolution, case, alias, symlink, input-overwrite, active-publication-name, and atomic-write policy for generic generate_source_owned_runtime_config.py outputs and convert_coordinate_native_profile_to_source_owned_spec.py --output. Preserve stdout as non-mutating. Keep --install-inert-source-artifact only as a separate exact exception for src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp; reject every other repository target, including the active baseline and case/inode aliases. To make that exact exception atomic without weakening the isolated-output validator, add one internal _atomic_replace_validated_text(target: Path, text: str, *, purpose: str) -> None helper in tools/source_owned_generator_modes.py; existing _atomic_write_text must continue to validate through validate_offline_output_target and then delegate to it, while the inert install path may call it only after exact inert-target validation. A static call-site check must permit the low-level helper only from _atomic_write_text and the exact inert exception. Do not duplicate or weaken target policy or atomic implementation.",
+      "explicit_excluded_scope": "No prepared-v2 packet/validation semantic change, source-authority-intake root policy, additional low-level atomic call site, active/compiled source write, table bytes, profile semantics, production ownership, runtime loading, persistence, WebSerial/device write, protobuf write, flashing, Nunchuk, root cause, build, candidate, or hardware action.",
       "touched_planes": [
         "build tooling",
         "docs/checkers"
       ],
-      "source_authority": "On live configurator 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, assert_safe_output_path() in generate_source_owned_runtime_config.py rejects only named path components and independently accepted .git/config, AGENTS.md, and a current-filesystem case alias; its writes are direct. convert_coordinate_native_profile_to_source_owned_spec.py normalizes relative output under the repository and writes directly with no target guard. Fresh Planner GP-SRC-005 and independent review confirm the gap but bind implementation to the not-yet-canonical GP-SRC-003 shared policy.",
+      "source_authority": "On live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f, GP-SRC-003 is DONE and tools/source_owned_generator_modes.py exports the shared validate_offline_output_target(target: Path, *, purpose: str) -> Path and _atomic_write_text(target: Path, text: str, *, purpose: str) -> None policy. Fresh non-mutating follow-up probes still show generate_source_owned_runtime_config.assert_safe_output_path accepts .git/config and AGENTS.md, while a mocked convert_coordinate_native_profile_to_source_owned_spec.convert_profile_file reaches Path.write_text for AGENTS.md. GP-SRC-004 changed only current-baseline classification emission in the legacy generator after the prior snapshot; its independent review, exact table/symbol digests, and build prove that drift did not change either writer's output-path behavior, generated semantic content, or active publication.",
       "dependencies_prerequisites": [
-        "GP-SRC-003 is canonically DONE on live configurator with prepared schema v2, one stable shared isolated-output validator, and one stable atomic-write primitive.",
-        "git diff 6b8ebcd404dcbfe9b579eed41fb35b889e9da598..origin/configurator is empty for tools/generate_source_owned_runtime_config.py and tools/convert_coordinate_native_profile_to_source_owned_spec.py, and the exact inert example and active baseline paths remain unchanged.",
-        "Fresh non-mutating probes still reproduce acceptance of repository/alias targets before the successor change."
+        "GP-SRC-003 is canonically DONE on live configurator with prepared schema v2, one stable shared isolated-output validator, and one atomic writer that currently always applies that validator.",
+        "GP-SRC-004 is canonically DONE; its exact reviewed delta to tools/generate_source_owned_runtime_config.py is limited to active-current-baseline versus inert-example classification emission, and all 28 table values/symbols plus active RuntimeConfigView publication remain unchanged.",
+        "The exact inert example and active baseline paths remain src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp and src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp with their current classifications.",
+        "Fresh non-mutating probes reproduce acceptance of repository targets in both remaining writer paths before the successor change."
       ],
-      "substantive_authorization_rationale": "The unsafe writer behavior is directly reproducible and the desired decision is already made: all generic file outputs use the exact shared isolated temporary policy, while the only repository exception is the already-established inert example artifact. Waiting for canonical GP-SRC-003 prevents duplicating or anticipating policy semantics.",
-      "mechanical_activation_conditions": [
-        "Live origin/configurator records GP-SRC-003 as DONE with this curation snapshot's objective, scope, exclusions, and stop conditions unchanged, and exports validate_offline_output_target(target: Path, *, purpose: str) -> Path plus _atomic_write_text(target: Path, text: str, *, purpose: str) -> None from tools/source_owned_generator_modes.py.",
-        "python3 tools/check_glyph_source_owned_generator_modes.py and python3 tools/check_glyph_source_owned_cpp_preview.py pass on live configurator, including lexical/canonical temp-root, alias, symlink, input-overwrite, active-publication-name, atomicity, and identical-/tmp portability cases required by GP-SRC-003.",
-        "git diff 6b8ebcd404dcbfe9b579eed41fb35b889e9da598..origin/configurator -- tools/generate_source_owned_runtime_config.py tools/convert_coordinate_native_profile_to_source_owned_spec.py is empty, and both exact paths src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp and src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp still exist with their current inert-example versus active-table-source classifications.",
-        "Mocked non-writing probes show generate_source_owned_runtime_config.assert_safe_output_path still accepts .git/config and convert_coordinate_native_profile_to_source_owned_spec.convert_profile_file still reaches its write seam for a repository target; no invalidation condition is present."
-      ],
+      "substantive_authorization_rationale": "The prior exact-snapshot Preauthorization invalidated when GP-SRC-004 changed a named writer, so it was not silently activated. Follow-up Curator review resolved that drift from source, independent review, table/symbol digests, and build evidence as classification-only and unrelated to output safety. The unsafe writer behavior remains directly reproducible and the target decision is exact: generic file outputs use the shared isolated temporary policy, while the only repository exception is the established inert example artifact. Because the existing atomic writer always invokes the isolated-output validator and therefore cannot serve that exception, one shared low-level atomic helper with an exact two-call-site invariant resolves atomicity without relaxing either target validator. No product, profile, ownership, game-semantic, or broader repository-write judgment remains.",
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
-        "GP-SRC-003 is not DONE with this exact authorization snapshot, the two named shared functions/signatures are absent, or either named focused checker fails.",
+        "The two existing shared functions/signatures are absent or their isolated-output, alias, symlink, input-overwrite, active-publication-name, atomicity, or portability semantics change before implementation.",
         "A command-specific durable output requirement or additional repository install target is proposed.",
-        "Either named writer differs from base 6b8ebcd404dcbfe9b579eed41fb35b889e9da598 before activation, either exact target path/classification changes, or mocked probes no longer reproduce the gap.",
+        "Either named writer differs materially from live authorization base 26b939fa3d3664e839cab8076eea60ddb0f67e9f before implementation, either exact target path/classification changes, or non-mutating probes no longer reproduce the gap.",
         "Implementation would touch compiled/active source, table bytes, profile intent, production ownership, or a forbidden runtime/device boundary."
       ],
-      "authorization_snapshot_provenance": "Curator Preauthorization of Planner branch planning/portfolio-20260823-2349, candidate GP-SRC-005, packet commit 387a2a7b27d11b81c3c571aaf07cf543af626757, packet/live base 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, independently reproduced and recorded WAITING on curation/portfolio-20260824-0051-review.",
+      "authorization_snapshot_provenance": "Fresh substantive reauthorization of Planner branch planning/portfolio-20260823-2349 candidate GP-SRC-005, packet commit 387a2a7b27d11b81c3c571aaf07cf543af626757 and packet base 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, after the prior Preauthorization mechanically invalidated. Curator reproduced the gaps and reviewed the exact intervening GP-SRC-004 classification-only delta against live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f on curation/portfolio-20260824-1355-followup.",
       "automated_validation": [
         "Generic legacy-generator and coordinate-bridge outputs reject relative paths, every repository path, .git, non-temporary roots, traversal, input overwrite, case/inode aliases, symlinks, active-header aliases, and active-publication-like names.",
-        "Safe isolated absolute outputs use the shared atomic writer; failure leaves no partial target; stdout remains byte-deterministic and non-mutating.",
-        "The exact inert install exception accepts only GeneratedRuntimeConfigArtifact.example.hpp and rejects every other repository/source target and alias.",
+        "Safe isolated absolute outputs validate through validate_offline_output_target and use the shared atomic implementation; failure leaves no partial target; stdout remains byte-deterministic and non-mutating.",
+        "The exact inert install exception accepts only GeneratedRuntimeConfigArtifact.example.hpp, validates that exact target before invoking the shared low-level atomic helper, and rejects every other repository/source target and alias.",
+        "Static call-site census permits _atomic_replace_validated_text only from _atomic_write_text and the exact inert-install branch; direct or additional call sites fail.",
         "Generated semantic output before/after is identical for accepted stdout, isolated output, and inert example cases; repository and active-table digests are unchanged.",
         "Legacy generator, coordinate-native bridge/contract, source sync, checker census, full runtime-config aggregate, and docs-navigation checks pass."
       ],
@@ -378,13 +383,76 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host-tool branch if valid isolated or exact inert-example output regresses; do not restore arbitrary repository writes or duplicate the shared policy.",
       "status_documentation_updates": "Document shared isolated output plus the one exact inert-example exception without creating production authority, active source, a firmware candidate, or hardware claim.",
-      "done_evidence": "Required future evidence after mechanical activation: independent writer-safety review PASS; complete path/alias/inode/symlink/atomicity corpus; semantic output and active-source digests unchanged; current aggregate/navigation PASS; live canonical integration proof.",
+      "done_evidence": "Required future evidence: independent writer-safety review PASS; complete path/alias/inode/symlink/atomicity corpus; semantic output and active-source digests unchanged; current aggregate/navigation PASS; live canonical integration proof.",
       "stop_conditions": [
         "Any new durable output root or repository install target requires judgment.",
         "The shared policy cannot be reused exactly without weakening or duplication.",
         "Any active/compiled source, firmware behavior, profile authority, runtime loading, persistence, device/protobuf write, flashing, or hardware scope appears."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-PROV-002",
+      "title": "Emit observed-only CI artifact sidecar",
+      "status": "READY",
+      "branch": "glyph/gp-prov-002-observed-ci-sidecar-20260824",
+      "objective": "Make the canonically gated build.yml artifact route emit and verify a sidecar carrying the full source Git identity and exact final postprocessed artifact identity.",
+      "why_this_matters": "The current route uploads a postprocessed UF2 named with only a short SHA and no full candidate SHA, final size/SHA-256, or postprocessor identity sidecar, so consumers cannot establish even bounded observed correspondence from the uploaded directory.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "This work changes CI artifact metadata and fail-closed publication ordering only. It does not change firmware source or build inputs, assign a purpose or byte effect to glyph_nuker, establish immutable storage or artifact acceptance, update a device, flash firmware, or claim hardware PASS.",
+      "scope": "Extend the existing observed-only provenance tool and synthetic contract so .github/workflows/build.yml first requires the full lowercase GITHUB_SHA to equal git rev-parse HEAD for the checked-out source before build, and verifies the tracked glyph_nuker bytes equal SHA-256 8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae before its existing postprocessing step. After postprocessing, emit and verify one deterministic JSON sidecar beside each final UF2 before upload. The sidecar must bind that verified full checked-out Git SHA, final artifact filename, byte size and SHA-256, tracked postprocessor path and SHA-256, status observed_only_no_artifact_acceptance, purpose UNKNOWN, byte_transformation UNKNOWN, source classification observed_only, workflow source .github/workflows/build.yml, artifact_store_established false, and immutable_locator null. Build and upload must remain unreachable on source-identity mismatch; upload must remain unreachable when the postprocessor preflight, sidecar generation, or sidecar verification fails; and the verified sidecar must be included in the existing Glyph_FW upload directory.",
+      "explicit_excluded_scope": "No change to build-device-config.yml or any unresolved caller/owner/release route; no dependency/action pin, PlatformIO input, firmware source, postprocessor binary, postprocessor invocation semantics, artifact store/retention, release, locator, reproducibility, artifact acceptance, device/protobuf write, persistence, flashing, hardware result, Nunchuk, root-cause, or product/game-semantic change or claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "On live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f, .github/workflows/build.yml is the bounded CURRENT_GATED route and still derives only SHA_SHORT, postprocesses the copied UF2 with the tracked glyph_nuker, and uploads the directory without a sidecar. tools/check_glyph_artifact_postprocessor_provenance.py and its fixture already define and pass the synthetic observed-only schema while explicitly leaving purpose, byte transformation, and immutable locator unresolved. The tracked glyph_nuker SHA-256 remains 8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae. GP-VAL-003 separately classifies build-device-config.yml UNRESOLVED_EXTERNAL, so this work cannot overclaim or remediate that route.",
+      "dependencies_prerequisites": [
+        "GP-PROV-001, GP-VAL-002, and GP-VAL-003 are DONE and their observed-only non-claims, validation-before-publication gate, and complete tracked-route classification remain intact.",
+        "Implementation starts from a fresh descendant of live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f and limits workflow mutation to the current build.yml route.",
+        "The tracked glyph_nuker path and SHA-256 remain exact; a changed binary stops rather than being reclassified or accepted."
+      ],
+      "substantive_authorization_rationale": "The missing correspondence is directly observable and the accepted schema already fixes every sensitive claim: full source identity, exact observed final bytes, exact tracked postprocessor identity, and explicit UNKNOWN/null fields. Adding a pre-execution identity gate plus postprocessing sidecar generation and verification does not select a store, interpret the binary, change firmware inputs, or convert CI output into a hardware-accepted artifact.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The build.yml postprocess/upload route, tracked glyph_nuker bytes, current validation dependency, or observed-only provenance schema materially changes before implementation.",
+        "Implementation would touch build-device-config.yml, select an unresolved caller/owner/store/release policy, or claim an immutable locator, reproducibility, artifact acceptance, postprocessor purpose/effect, or hardware evidence.",
+        "Any firmware source, dependency, build input, postprocessor binary, device-update, flashing, runtime-loaded config, persistence, or product behavior would change."
+      ],
+      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260823-2349 candidate GP-PROV-002, packet commit 387a2a7b27d11b81c3c571aaf07cf543af626757 and packet base 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, independently reproduced against live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f and authorized on curation/portfolio-20260824-1355-followup.",
+      "automated_validation": [
+        "Synthetic generation and verification pass only when the full lowercase workflow SHA equals the exact checked-out Git HEAD and the record carries that identity plus exact final filename/size/SHA-256, exact tracked postprocessor identity, observed-only classification, UNKNOWN purpose/effect, false artifact-store flag, and null immutable locator.",
+        "Short/malformed or HEAD-mismatched source SHA, pre-versus-postprocessed hash confusion, missing/changed postprocessor identity, wrong file/size/hash, non-UNKNOWN purpose/effect, non-null locator, false acceptance/store claim, malformed/extra/missing field, and sidecar tampering fail closed.",
+        "Focused static workflow cases prove checked-out HEAD equality gates build, postprocessor identity verification occurs before postprocessing, sidecar generation and verification occur after postprocessing and before upload, failure blocks publication, the verified sidecar is included, and no alternate build.yml publication route bypasses the gate.",
+        "The exact build.yml validation dependency remains intact; build-device-config.yml bytes and classification remain unchanged.",
+        "Artifact-provenance, CI publication-route census, validation-publication workflow, checker census, full runtime-config aggregate, agent-framework, docs-navigation, and docs-agent-surface checks pass; no tool test executes glyph_nuker, builds firmware, uploads bytes, or accesses a device."
+      ],
+      "canonical_build": "NOT_REQUIRED: workflow metadata generation/static gating and host-side provenance tooling only; no firmware source or build input changes are authorized.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused workflow/provenance branch if valid current artifacts cannot produce a deterministic verified observed-only sidecar; do not bypass failed identity or sidecar checks and do not infer missing provenance.",
+      "status_documentation_updates": "Document the bounded build.yml observed-only sidecar and retain explicit non-claims for immutable storage, artifact acceptance, reproducibility, postprocessor purpose/effect, hardware, and every unresolved external route.",
+      "done_evidence": "Required future evidence: independent CI/provenance review PASS; complete synthetic sidecar and static ordering/tamper corpus; exact build.yml route diff; tracked postprocessor and firmware/build-input bytes unchanged; current aggregate/framework/navigation PASS; live feature and canonical integration verification.",
+      "stop_conditions": [
+        "The tracked postprocessor identity differs or its purpose/effect must be interpreted.",
+        "A durable locator, store, retention, caller, owner, release, reproducibility, artifact-acceptance, or hardware decision is required.",
+        "Any firmware source/build input, postprocessor binary or semantics, build execution, upload execution, device write, flashing, runtime loading, persistence, Nunchuk, or root-cause scope appears."
+      ],
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -972,19 +1040,20 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-005","GP-PROV-002"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-`GP-SRC-003`, `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are DONE on validated implementation branches. `GP-SRC-005` is recorded
-Preauthorized but WAITING and is not effective runway. No invalidated
-Preauthorization or hardware-pending work is recorded. Effective runway is
-zero against a target of four (`CURATION_REQUIRED`). `GP-AUTH-001` remains user/source-authority gated and
-`GP-CONFIG-002` remains dependent then external-evidence gated; neither is a
-portfolio-global wait.
+`GP-SRC-003`, `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are DONE on
+validated implementation branches. `GP-SRC-005` and `GP-PROV-002` are Ready.
+No recorded or invalidated Preauthorization and no hardware-pending work exist.
+Effective runway is two against a target of four (`RUNWAY_LOW`).
+`GP-AUTH-001` remains user/source-authority gated and
+`GP-CONFIG-002` remains external-evidence gated after its internal dependency
+completed; neither is a portfolio-global wait.
 
 ## Allowed Statuses
 
@@ -1019,8 +1088,9 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 ## Curator Dispositions
 
 Fresh Planner packet `glyph-portfolio-20260823-2349` at
-`387a2a7b27d11b81c3c571aaf07cf543af626757` was independently reviewed against
-exact live `configurator` `6b8ebcd404dcbfe9b579eed41fb35b889e9da598`.
+`387a2a7b27d11b81c3c571aaf07cf543af626757` was initially reviewed against
+`configurator` `6b8ebcd404dcbfe9b579eed41fb35b889e9da598` and follow-up reviewed against
+exact live `configurator` `26b939fa3d3664e839cab8076eea60ddb0f67e9f`.
 Post-packet recovery tip `2b734b26439e9028717becf0010e345cb5efce6c`
 is a material failed-review event and must not merge. The packet is
 `PARTIALLY_CONSUMED` but remains useful for held successor supply.
@@ -1038,14 +1108,17 @@ is a material failed-review event and must not merge. The packet is
 - `GP-VAL-003`: `DONE`; statically censused and classified every tracked CI
   publication route, retain `build-device-config.yml` as unresolved external,
   and reconcile machine-derived health counts without editing workflows.
-- `GP-SRC-005`: `PREAUTHORIZED`, `WAITING`; may activate mechanically only
-  after exact canonical GP-SRC-003 integration with its shared policy intact.
+- `GP-SRC-005`: `READY`; its prior Preauthorization invalidated mechanically
+  when `GP-SRC-004` changed a named writer. Follow-up review proved that drift
+  classification-only, reproduced both unsafe write seams, and freshly
+  reauthorized the item against the current shared isolated-output policy.
 - `GP-CTL-002`: `SUBSTANTIVE_DEPENDENCY_GATED`; false Done publication is
   proven, but migration and exact replay/equivalence representation remain
   insufficiently bound for Ready.
-- `GP-PROV-002`: reviewed surplus `CURATION_READY` supply, not authorized this
-  cycle because effective runway already meets target; its bounded build.yml
-  observed-only sidecar remains useful after current priorities.
+- `GP-PROV-002`: `READY`; the bounded `build.yml` route may add a verified
+  observed-only sidecar with full Git and final postprocessed byte identity,
+  while storage, acceptance, postprocessor semantics, and hardware remain
+  explicitly unresolved and excluded.
 - `GP-PROV-003`: `RESEARCH`; exact static inventory/schema boundary remains
   unresolved and no network resolution or reproducibility claim is allowed.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
@@ -1076,15 +1149,15 @@ is a material failed-review event and must not merge. The packet is
   selection remain excluded.
 - `GP-AUTH-001`: `USER_DECISION_GATED`; no production-authorized owned-table
   set or replacement content exists, so Curator cannot authorize it.
-- `GP-CONFIG-002`: `SUBSTANTIVE_DEPENDENCY_GATED` behind `GP-CONFIG-004`, then
-  `EVIDENCE_GATED` on an external operator capture.
+- `GP-CONFIG-002`: `EVIDENCE_GATED` on an external operator capture after its
+  internal `GP-CONFIG-004` dependency completed.
 
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` in the machine-readable block
-authorize immediate execution. `GP-SRC-005` is Preauthorized but WAITING and
-does not authorize execution yet.
+authorize immediate execution. `GP-SRC-005` is highest priority, followed by
+`GP-PROV-002`.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
