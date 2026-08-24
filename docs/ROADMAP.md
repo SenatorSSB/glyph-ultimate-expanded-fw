@@ -202,12 +202,11 @@ canonical build, exact candidate/artifact identity, and hardware PASS. The
 source-owned active-state preselection `HARDWARE_PASS` evidence, source-owned
 active-state `HARDWARE_PASS` evidence, and active-storage `HARDWARE_FAIL`
 evidence remain distinct. The phrases "generated tables not wired active",
-"future hardware gate required before generated source-owned tables are
-selected active", and "future hardware gate required before generated
-source-owned baseline artifact is selected active" remain only as checker
-navigation markers for inert/example lanes; `GP-SRC-001` completed their
-quarantine, and they are not current claims about the included active
-table-content header.
+	"future hardware gate required before generated source-owned tables are
+	selected active for a behavior-changing candidate" remains the current
+	behavior-change gate; `GP-SRC-001` completed the inert/example quarantine,
+	and it is not a claim that the included current table-content header is
+	inert.
 Nunchuk `NOT_TESTED`.
 The candidate-generation diff diagnosis remains hardware-candidate material
 because table contents differ rather than formatting alone.

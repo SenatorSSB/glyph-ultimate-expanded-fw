@@ -6,7 +6,7 @@
   "baseline_artifact_only": true,
   "baseline_artifact": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
   "generated_baseline_artifact_equivalent_to_current_source_owned_baseline": true,
-  "generated_tables_wired_active": false,
+  "generated_tables_wired_active": true,
   "runtime_loaded_config_implemented": false,
   "persistent_storage_implemented": false,
   "webserial_device_write_implemented": false,

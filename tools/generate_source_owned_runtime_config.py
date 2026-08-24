@@ -383,7 +383,7 @@ def cxx_string(value: str) -> str:
     return f'"{escaped}"'
 
 
-def emit_cpp_header(contract: dict[str, Any]) -> str:
+def emit_cpp_header(contract: dict[str, Any], *, active_table_content: bool = False) -> str:
     shape = contract["table_shape"]
     lines = [
         "#pragma once",
@@ -393,8 +393,16 @@ def emit_cpp_header(contract: dict[str, Any]) -> str:
         "namespace glyph::runtime_config::generated_source_owned::fixtures {",
         "",
         "// generated source-owned runtime config artifact",
-        "// inert generated-table placeholder",
-        "// not wired into runtime selection",
+        (
+            "// active compile-time table-content source through UltimateIdentityRuntimeTables.hpp"
+            if active_table_content
+            else "// inert generated-table placeholder"
+        ),
+        (
+            "// active RuntimeConfigView publication remains source-owned and unchanged"
+            if active_table_content
+            else "// not wired into runtime selection"
+        ),
         "// generated baseline equivalent to kSourceOwnedCurrentBaselineRuntimeConfig when checker-proven",
         "static constexpr std::uint32_t kGeneratedSourceOwnedRuntimeConfigSchemaVersion = "
         f"{contract['schema_version']}u;",
@@ -600,7 +608,7 @@ def generate_from_layout_spec(
 
 
 def generate_current_source_owned_baseline(output_path: Path | None = None) -> str:
-    output = emit_cpp_header(parse_source_owned_baseline_contract())
+    output = emit_cpp_header(parse_source_owned_baseline_contract(), active_table_content=True)
     if output_path is not None:
         fail(
             "baseline mode is read-only; active table-content source must be "

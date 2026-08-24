@@ -2,8 +2,8 @@
 
 Status label: CURRENT.
 
-This packet records the active generated source-owned runtime config table
-content for the current source-owned baseline. The artifact lives at
+This packet records active compile-time generated source-owned runtime config
+table content for the current source-owned baseline. The artifact lives at
 `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`.
 
 This branch follows `generated_source_owned_artifact_install.md` and
@@ -11,8 +11,11 @@ This branch follows `generated_source_owned_artifact_install.md` and
 example artifact as a deterministic inert fixture only; the current baseline
 header is active compile-time table content through
 `UltimateIdentityRuntimeTables.hpp`.
-The baseline header is not included by `src/modes/Ultimate.cpp` directly, and
-the generated example artifact is not wired into runtime selection.
+The baseline header is included indirectly by
+`src/modes/UltimateIdentityRuntimeTables.hpp`; active RuntimeConfigView
+publication remains source-owned and unchanged. The generated example artifact
+is not included by `src/modes/Ultimate.cpp` and is not wired into runtime
+selection.
 
 The source-inspection baseline CLI remains `--emit-current-source-owned-baseline`.
 The explicit `--emit-from-layout-spec` packet mode remains inert and reproduces
@@ -23,7 +26,8 @@ the same baseline-shaped generated artifact when run against
 
 - Add one generated source-owned runtime config artifact for the current
   baseline table data.
-- Classify the artifact as active compile-time table-content source.
+- Classify the artifact as active compile-time table-content source through
+  `UltimateIdentityRuntimeTables.hpp`.
 - Keep the existing active RuntimeConfigView publication path unchanged.
 - Keep it included indirectly through `src/modes/UltimateIdentityRuntimeTables.hpp`;
   `Ultimate.cpp` retains only the existing wrapper include. The active table
@@ -68,8 +72,8 @@ The current accepted model remains unchanged:
   `diagnostic_active_storage_published_hardware_failure_2026-06-28.md`.
 - Source-owned active-state `HARDWARE_PASS` evidence is recorded on the
   source-owned active-state preselection result branch.
-- Generated source-owned artifacts are the chosen next path for future
-  hardware-gated active-selection diagnostics.
+- Generated source-owned artifacts remain the chosen path for future
+  hardware-gated active-selection diagnostics when table behavior changes.
 
 This artifact does not prove a low-level hardware failure mechanism. The
 low-level failure mechanism remains unproven. Nunchuk remains `NOT_TESTED`.
@@ -81,8 +85,8 @@ does not change any table byte, routing decision, or active RuntimeConfigView
 publication; it does not change active firmware behavior. No hardware test is
 required.
 
-Future activation work must happen on a separate hardware-gated branch and must
-continue to avoid runtime-loaded config, persistent storage, WebSerial/device
-write, backend/config.pb write path, firmware flashing automation, and
-candidate-backed active publication unless explicitly approved and
-source-backed.
+Future behavior-changing activation work must happen on a separate
+hardware-gated branch and must continue to avoid runtime-loaded config,
+persistent storage, WebSerial/device write, backend/config.pb write path,
+firmware flashing automation, and candidate-backed active publication unless
+explicitly approved and source-backed.

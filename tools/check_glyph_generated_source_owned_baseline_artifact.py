@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the inert generated source-owned current-baseline artifact."""
+"""Validate the active compile-time generated source-owned baseline artifact."""
 
 from __future__ import annotations
 
@@ -52,8 +52,8 @@ ARTIFACT_PATH_RE = re.compile(
 
 REQUIRED_ARTIFACT_MARKERS = (
     "generated source-owned runtime config artifact",
-    "inert generated-table placeholder",
-    "not wired into runtime selection",
+    "active compile-time table-content source through UltimateIdentityRuntimeTables.hpp",
+    "active RuntimeConfigView publication remains source-owned and unchanged",
     "generated baseline equivalent to kSourceOwnedCurrentBaselineRuntimeConfig",
 )
 FORBIDDEN_ARTIFACT_TOKENS = (
@@ -78,7 +78,7 @@ EXPECTED_FIXTURE_VALUES: dict[str, Any] = {
     "hardware_test_required_before_merge": False,
     "baseline_artifact_only": True,
     "generated_baseline_artifact_equivalent_to_current_source_owned_baseline": True,
-    "generated_tables_wired_active": False,
+    "generated_tables_wired_active": True,
     "runtime_loaded_config_implemented": False,
     "persistent_storage_implemented": False,
     "webserial_device_write_implemented": False,
@@ -95,7 +95,7 @@ REQUIRED_DOC_PHRASES = (
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state `HARDWARE_PASS` evidence",
     "not included by `src/modes/Ultimate.cpp`",
-    "not wired into runtime selection",
+    "active RuntimeConfigView publication remains source-owned and unchanged",
     "does not change active firmware behavior",
     "RAM-backed active table publication remains unsafe under current diagnostics",
     "low-level failure mechanism remains unproven",
@@ -110,7 +110,7 @@ REQUIRED_INDEX_PHRASES = (
     "--emit-current-source-owned-baseline",
     "active-storage `HARDWARE_FAIL` evidence",
     "source-owned active-state `HARDWARE_PASS` evidence",
-    "future hardware gate required before generated source-owned baseline artifact is selected active",
+    "future hardware gate required before generated source-owned tables are selected active for a behavior-changing candidate",
 )
 
 

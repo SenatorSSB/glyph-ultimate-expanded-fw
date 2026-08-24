@@ -152,9 +152,10 @@ hardware gate required before generated source-owned tables are selected active
 for a behavior-changing candidate. The source-owned table symbol-map note and checker document the
 current Alternative B alias/replacement boundary without changing the active
 path. nunchuk `NOT_TESTED`.
-The future hardware gate required before generated source-owned baseline
-artifact is selected active applies to any replacement with changed table
-bytes; the current included baseline remains the approved source-owned path.
+	The future hardware gate required before generated source-owned tables are
+	selected active for a behavior-changing candidate applies to any replacement
+	with changed table bytes; the current included baseline remains the approved
+	source-owned path.
 The example packets retain the bounded non-claim that generated tables not
 wired active are not selected through the inert fixture lane.
 
