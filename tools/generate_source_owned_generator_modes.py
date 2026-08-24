@@ -50,7 +50,8 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "validate-input":
             result = validate_input(load_json(args.input))
         elif args.command in {"generate", "generate-manifest", "compare", "classify", "prepare"}:
-            artifact, manifest = generate(load_json(args.input))
+            normalized_input = validate_input(load_json(args.input))
+            artifact, manifest = generate(normalized_input)
             if args.command == "generate":
                 result = artifact
             elif args.command == "generate-manifest":
@@ -63,7 +64,7 @@ def main(argv: list[str] | None = None) -> int:
                 result = {"classification": manifest["classification"], "manifest": manifest}
             else:
                 if args.production:
-                    packet = prepare(artifact, manifest, hardware_candidate=args.hardware_candidate)
+                    packet = prepare(artifact, manifest, normalized_input, hardware_candidate=args.hardware_candidate)
                 else:
                     packet = {"artifact": artifact, "manifest": manifest, "source_mutation": False}
                 if args.output:
@@ -71,7 +72,7 @@ def main(argv: list[str] | None = None) -> int:
                 result = packet
         else:
             packet = load_json(args.packet)
-            result = {"operations": install_prepared(packet, args.target, dry_run=args.dry_run)}
+            result = {"operations": install_prepared(packet, args.target, dry_run=args.dry_run, input_path=args.packet)}
         print(json.dumps(result, indent=2, sort_keys=True))
         return 0
     except GeneratorModesError as exc:

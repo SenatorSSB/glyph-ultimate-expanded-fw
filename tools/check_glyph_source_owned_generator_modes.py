@@ -14,6 +14,7 @@ from source_owned_generator_modes import (
     GeneratorModesError,
     _baseline_tables,
     baseline_identity,
+    digest,
     generate,
     install_prepared,
     prepare,
@@ -116,16 +117,29 @@ def run() -> tuple[int, int]:
     expect_reject(lambda: validate_manifest(artifact, tampered), "preserved manifest row")
 
     with tempfile.TemporaryDirectory() as directory:
-        packet = prepare(synthetic_artifact, synthetic_manifest) if False else {"schema_version": 1, "artifact": artifact, "manifest": manifest, "target": "inert_source_owned_artifact_only"}
+        normalized = validate_input(base("full_replacement"))
+        full_artifact, full_manifest = generate(normalized)
+        packet = {"schema_version": 2, "normalized_input": normalized, "artifact": full_artifact, "manifest": full_manifest, "target": "inert_source_owned_artifact_only", "source_mutation": False}
+        packet["prepared_semantic_digest"] = digest(packet)
         target = Path(directory) / "artifact.json"
         before = target.exists()
-        operations = install_prepared(packet, target, dry_run=True)
-        assert operations and not target.exists() and not before
-        POSITIVE += 1
-        install_prepared(packet, target)
-        assert target.exists()
-        POSITIVE += 1
-        expect_reject(lambda: install_prepared(packet, Path(directory) / "candidate.view"), "forbidden publication")
+        raw_root = Path(tempfile.gettempdir()).resolve()
+        if Path(tempfile.gettempdir()) != raw_root:
+            expect_reject(lambda: install_prepared(packet, target, dry_run=True), "aliased temporary root")
+        else:
+            operations = install_prepared(packet, target, dry_run=True)
+            assert operations and not target.exists() and not before
+            POSITIVE += 1
+            install_prepared(packet, target)
+            assert target.exists()
+            POSITIVE += 1
+            expect_reject(lambda: install_prepared(packet, Path(directory) / "candidate.view"), "forbidden publication")
+        if Path(tempfile.gettempdir()) == raw_root:
+            tampered_packet = copy.deepcopy(packet)
+            tampered_packet["normalized_input"]["metadata"] = {"intake_id": True}
+            tampered_packet["prepared_semantic_digest"] = digest({key: value for key, value in tampered_packet.items() if key != "prepared_semantic_digest"})
+            expect_reject(lambda: install_prepared(tampered_packet, target, input_path=target), "metadata")
+            expect_reject(lambda: install_prepared(packet, target, input_path=target), "overwrite input")
 
     return POSITIVE, NEGATIVE
 

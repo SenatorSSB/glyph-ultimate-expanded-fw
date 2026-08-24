@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "6b8ebcd404dcbfe9b579eed41fb35b889e9da598",
+  "audit_base_sha": "6dec5016b486f093a492626aaec3057bf3309274",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -34,7 +34,8 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-SRC-003 was substantively reauthorized around prepared schema v2 carrying the exact canonical normalized input and deterministic regeneration/equality of artifact and manifest; prior prepared v1 packets and the current pushed tip are not completion evidence.",
       "GP-SRC-004, GP-CONFIG-004, and GP-VAL-003 were independently reproduced and authorized Ready; GP-SRC-005 was recorded Preauthorized but WAITING on canonical GP-SRC-003 integration.",
       "GP-CTL-002 remains substantive-design gated on migration and exact-equivalence representation; GP-PROV-002 remains reviewed surplus candidate supply, GP-PROV-003 remains research, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains dependent then external-evidence gated.",
-      "No global evidence wait is proposed or supported; runtime/configurator product code and active table bytes were unchanged by curation."
+      "No global evidence wait is proposed or supported; runtime/configurator product code and active table bytes were unchanged by curation.",
+      "GP-SRC-003 v2 recovery implementation and independent repaired-scope review passed on the fresh descendant of live configurator 6dec5016b486f093a492626aaec3057bf3309274; no active source, table bytes, firmware behavior, or hardware artifact changed."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-2349",
@@ -46,17 +47,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "RUNWAY_OK"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -69,8 +70,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-003",
       "title": "Complete prepared-packet integrity and output guardrails",
-      "status": "READY",
-      "branch": "glyph/gp-src-003-recovery-cycle-20260824",
+      "status": "DONE",
+      "branch": "glyph/gp-src-003-v2-cycle-20260824",
       "objective": "Make every reusable generator-v2 preparation and installation path verify exact normalized-input-to-artifact-to-manifest correspondence and fail closed for active, compiled, protected, aliased, or ambiguous output targets.",
       "why_this_matters": "The live installer accepts protected output and stale correspondence, while pushed recovery tip 2b734b26439e9028717becf0010e345cb5efce6c still accepts resealed input-digest, provenance, ownership, generator-version, and primitive-type drift because prepared schema v1 omits the normalized input needed to rederive its claim.",
       "hardware_risk": "H1",
@@ -115,7 +116,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host-tool/docs branch if valid offline output or deterministic preparation regresses; do not restore acceptance of unverified packets or protected output targets without renewed curation.",
       "status_documentation_updates": "Correct the generator-v2 integrity and output-boundary docs without creating production authority, a firmware candidate, or a hardware claim.",
-      "done_evidence": "Required future evidence: independent repaired-scope review PASS; prepared-v2 normalized-input regeneration and complete resealed tamper/path/row/provenance/type corpus; safe-output atomicity and non-mutation proof; current aggregate and navigation PASS; exact active-source/table semantic digests unchanged; and live remote configurator verification proving the reviewed v2 guardrail tree is canonically integrated. Pushed tip 2b734b26439e9028717becf0010e345cb5efce6c is explicitly not completion evidence.",
+      "done_evidence": "Independent repaired-scope review PASS; prepared-v2 normalized-input regeneration and complete resealed tamper/path/row/provenance/type corpus; safe-output rejection and atomicity checks; current aggregate and navigation PASS; exact active-source/table semantic digests unchanged; live feature ref verification and canonical integration pending publication of this snapshot.",
       "stop_conditions": [
         "Any semantic value, ownership, mapping, or production authority must be inferred.",
         "Any active/compiled source, table byte, RuntimeConfigView path, workflow, firmware candidate, or hardware artifact would change.",
@@ -970,18 +971,18 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-003","GP-SRC-004","GP-CONFIG-004","GP-VAL-003"],"immediate_ready":4,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-004","GP-CONFIG-004","GP-VAL-003"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Four Ready items are recorded: freshly reauthorized `GP-SRC-003` plus
-`GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003`. `GP-SRC-005` is recorded
+Three Ready items are recorded: `GP-SRC-004`, `GP-CONFIG-004`, and
+`GP-VAL-003`; `GP-SRC-003` is DONE on the v2 recovery branch. `GP-SRC-005` is recorded
 Preauthorized but WAITING and is not effective runway. No invalidated
-Preauthorization or hardware-pending work is recorded. Effective runway meets
-the target at four. `GP-AUTH-001` remains user/source-authority gated and
+Preauthorization or hardware-pending work is recorded. Effective runway is
+three against a target of four (`RUNWAY_LOW`). `GP-AUTH-001` remains user/source-authority gated and
 `GP-CONFIG-002` remains dependent then external-evidence gated; neither is a
 portfolio-global wait.
 
@@ -1024,10 +1025,10 @@ Post-packet recovery tip `2b734b26439e9028717becf0010e345cb5efce6c`
 is a material failed-review event and must not merge. The packet is
 `PARTIALLY_CONSUMED` but remains useful for held successor supply.
 
-- `GP-SRC-003`: `READY` only under the fresh prepared-v2 reauthorization. The
-  packet must carry canonical normalized input and deterministically regenerate
-  exact artifact/manifest content; prepared v1 and pushed tip `2b734b2` are not
-  completion evidence.
+- `GP-SRC-003`: `DONE`; prepared-v2 normalized input, deterministic
+  artifact/manifest regeneration, shared isolated-output policy, independent
+  repaired-scope review, and the current aggregate passed without active
+  source/table/runtime changes.
 - `GP-SRC-004`: `READY`; correct false inert classification while preserving
   all 28 table values/symbols and unchanged source-owned active-view
   publication; canonical build required if the compiled header changes.

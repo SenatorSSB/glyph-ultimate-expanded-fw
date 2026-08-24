@@ -18,11 +18,14 @@ from source_owned_generator_modes import (
     canonical_json,
     digest,
     production_gate,
+    generate,
     tables_digest,
+    validate_input,
+    validate_safe_output_path,
     validate_manifest,
 )
 
-PREPARED_SCHEMA_VERSION = 1
+PREPARED_SCHEMA_VERSION = 2
 EXPECTED_TARGET = "inert_source_owned_artifact_only"
 PREVIEW_NAMESPACE = "glyph::runtime_config::source_owned_cpp_preview"
 
@@ -47,7 +50,7 @@ def validate_prepared_packet(packet: dict[str, Any], *, test_mode: bool = False)
     _strict_object(
         "prepared packet",
         packet,
-        {"schema_version", "artifact", "manifest", "target", "source_mutation", "prepared_semantic_digest"},
+        {"schema_version", "normalized_input", "artifact", "manifest", "target", "source_mutation", "prepared_semantic_digest"},
     )
     if packet["schema_version"] != PREPARED_SCHEMA_VERSION:
         _fail("unsupported prepared packet schema_version")
@@ -55,6 +58,10 @@ def validate_prepared_packet(packet: dict[str, Any], *, test_mode: bool = False)
         _fail("prepared packet digest mismatch", "integrity")
     if packet["target"] != EXPECTED_TARGET or packet["source_mutation"] is not False:
         _fail("prepared packet is not an inert source-owned artifact", "source_authority")
+    normalized_input = validate_input(packet["normalized_input"])
+    regenerated_artifact, regenerated_manifest = generate(normalized_input)
+    if packet["artifact"] != regenerated_artifact or packet["manifest"] != regenerated_manifest:
+        _fail("prepared input does not deterministically regenerate artifact and manifest", "integrity")
 
     artifact = _strict_object(
         "prepared artifact",
@@ -166,28 +173,19 @@ def render_cpp_preview(packet: dict[str, Any], *, test_mode: bool = False) -> st
 def write_preview(packet: dict[str, Any], target: Path, *, test_mode: bool = False) -> None:
     if not target.is_absolute():
         _fail("preview target must be absolute")
-    root = Path(__file__).resolve().parents[1]
-    target_text = str(target)
-    forbidden = ("GeneratedRuntimeConfigBaseline", "candidate.view", "active_storage.view", "RuntimeConfigView")
-    temp_roots = [Path(tempfile.gettempdir()).resolve(), Path("/private/tmp").resolve()]
-    resolved = target.resolve(strict=False)
-    normalized_target = Path(os.path.abspath(os.fspath(target)))
-    raw_temp_roots = [Path(os.path.abspath(tempfile.gettempdir())), Path(os.path.abspath("/private/tmp"))]
-    raw_allowed = any(os.path.commonpath([os.path.normcase(os.fspath(normalized_target)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(temp_root)) for temp_root in raw_temp_roots)
-    cursor = Path(normalized_target.anchor)
-    unsafe_parent_alias = False
-    for component in normalized_target.parts[1:-1]:
-        cursor /= component
-        if cursor.is_symlink() and not any(cursor == root or cursor in root.parents for root in raw_temp_roots):
-            unsafe_parent_alias = True
-    if unsafe_parent_alias or target.is_symlink() or (resolved != normalized_target and not raw_allowed) or any(token in target_text for token in forbidden):
-        _fail("preview target is not an isolated temporary/offline path", "source_authority")
-    try:
-        if os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(root))]) == os.path.normcase(os.fspath(root)):
-            _fail("preview target is inside the repository", "source_authority")
-    except ValueError:
-        pass
-    if not any(os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(temp_root))]) == os.path.normcase(os.fspath(temp_root)) for temp_root in temp_roots):
-        _fail("preview target must be under an isolated temporary directory", "source_authority")
+    target = validate_safe_output_path(target, purpose="preview")
+    text = render_cpp_preview(packet, test_mode=test_mode)
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(render_cpp_preview(packet, test_mode=test_mode), encoding="utf-8")
+    fd, temp_name = tempfile.mkstemp(prefix=f".{target.name}.", dir=str(target.parent), text=True)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(text)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp_name, target)
+    except OSError as exc:
+        try:
+            os.unlink(temp_name)
+        except OSError:
+            pass
+        _fail(f"atomic preview write failed: {exc}", "integrity")

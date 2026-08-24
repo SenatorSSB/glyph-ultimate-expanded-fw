@@ -27,7 +27,7 @@ except ModuleNotFoundError:  # pragma: no cover - package-style imports
 INPUT_SCHEMA_VERSION = 2
 ARTIFACT_SCHEMA_VERSION = 1
 MANIFEST_SCHEMA_VERSION = 1
-PREPARED_SCHEMA_VERSION = 1
+PREPARED_SCHEMA_VERSION = 2
 TABLE_COUNT = 28
 POINTS_PER_TABLE = 9
 AXES_PER_POINT = 2
@@ -173,15 +173,30 @@ def _validate_table(label: str, raw: Any, expected_id: int | None = None) -> dic
 def validate_baseline_reference(reference: Any, actual: dict[str, Any]) -> None:
     if not isinstance(reference, dict):
         _fail("baseline identity is required", "baseline_mismatch")
+    allowed = set(actual) | {"table_order_digest", "table_inventory"}
+    if not set(reference) <= allowed:
+        _fail("baseline identity has missing or unexpected fields", "baseline_mismatch")
     for key in ("baseline_id", "source_path", "semantic_digest", "table_count"):
         if reference.get(key) != actual[key]:
             _fail(f"baseline {key} does not match authoritative source", "baseline_mismatch")
+    if "table_order_digest" in reference and reference["table_order_digest"] != digest(actual["table_order"]):
+        _fail("baseline table order digest does not match authoritative source", "baseline_mismatch")
+    if "table_inventory" in reference:
+        expected_inventory = [
+            {"table_id": table["table_id"], "table_symbol": table["table_symbol"], "table_digest": table_digest(table)}
+            for table in _baseline_tables()
+        ]
+        if reference["table_inventory"] != expected_inventory:
+            _fail("baseline table inventory does not match authoritative source", "baseline_mismatch")
 
 
 def validate_input(payload: dict[str, Any], *, allow_legacy: bool = False) -> dict[str, Any]:
     if allow_legacy and payload.get("schema_version") == 1 and "owned_tables" not in payload:
         _fail("legacy input without explicit ownership is SOURCE_AUTHORITY_BLOCKER", "source_authority")
     required = {"schema_version", "profile_id", "profile_name", "provenance_class", "generation_mode", "tables"}
+    unexpected = sorted(set(payload) - required - {"baseline", "owned_tables", "metadata"})
+    if unexpected:
+        _fail("input has unexpected keys: " + ", ".join(unexpected), "integrity")
     missing = sorted(required - set(payload))
     if missing:
         if "generation_mode" in missing:
@@ -232,6 +247,8 @@ def validate_input(payload: dict[str, Any], *, allow_legacy: bool = False) -> di
         if "owned_tables" not in payload or not isinstance(payload["owned_tables"], list):
             _fail("overlay_preserve requires explicit owned_tables")
         owned = payload["owned_tables"]
+        if any(not isinstance(symbol, str) or not symbol for symbol in owned):
+            _fail("owned_tables must contain non-empty strings", "integrity")
         if len(set(owned)) != len(owned):
             _fail("duplicate ownership entry")
         unknown = sorted(set(owned) - set(actual_baseline["table_order"]))
@@ -249,6 +266,13 @@ def validate_input(payload: dict[str, Any], *, allow_legacy: bool = False) -> di
             _fail("full_replacement has unknown or missing table symbols")
     elif len(tables_raw) == TABLE_COUNT:
         _fail("reject_partial is validation-only; use an explicit full_replacement transition")
+    if "baseline" in payload and payload["baseline"] is not None and mode != "overlay_preserve":
+        validate_baseline_reference(payload["baseline"], actual_baseline)
+    metadata = payload.get("metadata", {})
+    if not isinstance(metadata, dict):
+        _fail("metadata must be an object")
+    if any(not isinstance(key, str) or not isinstance(value, str) or not value for key, value in metadata.items()):
+        _fail("metadata keys and values must be non-empty strings", "integrity")
     return {
         "schema_version": INPUT_SCHEMA_VERSION,
         "profile_id": profile_id,
@@ -258,7 +282,7 @@ def validate_input(payload: dict[str, Any], *, allow_legacy: bool = False) -> di
         "baseline": payload.get("baseline"),
         "owned_tables": list(payload.get("owned_tables", [])),
         "tables": tables,
-        "metadata": payload.get("metadata", {}),
+        "metadata": json.loads(canonical_json(metadata)),
     }
 
 
@@ -372,10 +396,17 @@ def production_gate(artifact: dict[str, Any], manifest: dict[str, Any], *, hardw
         _fail("NO_OP cannot be prepared as a hardware candidate", "candidate_ineligible")
 
 
-def prepare(artifact: dict[str, Any], manifest: dict[str, Any], *, hardware_candidate: bool = False) -> dict[str, Any]:
+def prepare(artifact: dict[str, Any], manifest: dict[str, Any], normalized_input: dict[str, Any] | None = None, *, hardware_candidate: bool = False) -> dict[str, Any]:
+    if normalized_input is None:
+        _fail("prepared schema v2 requires the canonical normalized input", "integrity")
+    normalized_input = validate_input(normalized_input)
+    regenerated_artifact, regenerated_manifest = generate(normalized_input)
+    if regenerated_artifact != artifact or regenerated_manifest != manifest:
+        _fail("prepared input does not deterministically regenerate artifact and manifest", "integrity")
     production_gate(artifact, manifest, hardware_candidate=hardware_candidate)
     packet = {
         "schema_version": PREPARED_SCHEMA_VERSION,
+        "normalized_input": normalized_input,
         "artifact": artifact,
         "manifest": manifest,
         "target": "inert_source_owned_artifact_only",
@@ -385,22 +416,45 @@ def prepare(artifact: dict[str, Any], manifest: dict[str, Any], *, hardware_cand
     return packet
 
 
-def install_prepared(packet: dict[str, Any], target: Path, *, dry_run: bool = False) -> list[str]:
-    if packet.get("schema_version") != PREPARED_SCHEMA_VERSION:
-        _fail("unsupported prepared packet schema_version")
-    artifact, manifest = packet.get("artifact"), packet.get("manifest")
-    if not isinstance(artifact, dict) or not isinstance(manifest, dict):
-        _fail("prepared packet requires artifact and manifest")
-    production_gate(artifact, manifest)
-    if packet.get("target") != "inert_source_owned_artifact_only":
-        _fail("forbidden publication target", "source_authority")
-    if "candidate.view" in str(target) or "active_storage.view" in str(target) or "RuntimeConfigView" in str(target):
-        _fail("forbidden publication path", "source_authority")
+def validate_safe_output_path(target: Path, *, input_path: Path | None = None, purpose: str = "offline output") -> Path:
     if not target.is_absolute():
-        _fail("install target must be absolute")
-    text = json.dumps(artifact, indent=2, sort_keys=True) + "\n"
-    if dry_run:
-        return [f"would write {target} ({len(text.encode('utf-8'))} bytes)"]
+        _fail(f"{purpose} target must be absolute", "source_authority")
+    raw_root = Path(os.path.abspath(tempfile.gettempdir()))
+    resolved_root = raw_root.resolve()
+    if raw_root != resolved_root:
+        _fail(f"{purpose} target uses an aliased temporary root", "source_authority")
+    lexical = Path(os.path.abspath(os.fspath(target)))
+    try:
+        lexical_common = os.path.commonpath([os.path.normcase(os.fspath(lexical)), os.path.normcase(os.fspath(raw_root))])
+    except ValueError:
+        _fail(f"{purpose} target is on a different filesystem root", "source_authority")
+    if lexical_common != os.path.normcase(os.fspath(raw_root)):
+        _fail(f"{purpose} target must be under the system temporary root", "source_authority")
+    if target.is_symlink():
+        _fail(f"{purpose} target may not be a symlink", "source_authority")
+    cursor = lexical.parent
+    while cursor != raw_root and cursor != cursor.parent:
+        if cursor.is_symlink():
+            _fail(f"{purpose} target contains a symlink alias", "source_authority")
+        cursor = cursor.parent
+    resolved = lexical.resolve(strict=False)
+    if os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(resolved_root))]) != os.path.normcase(os.fspath(resolved_root)):
+        _fail(f"{purpose} target resolves outside the system temporary root", "source_authority")
+    repo = Path(__file__).resolve().parents[1]
+    if os.path.commonpath([os.path.normcase(os.fspath(resolved)), os.path.normcase(os.fspath(repo))]) == os.path.normcase(os.fspath(repo)):
+        _fail(f"{purpose} target is inside the repository", "source_authority")
+    target_casefolded = str(lexical).casefold()
+    if any(token.casefold() in target_casefolded for token in ("candidate.view", "active_storage.view", "RuntimeConfigView", "GeneratedRuntimeConfigBaseline")):
+        _fail(f"{purpose} target resembles forbidden publication", "source_authority")
+    if input_path is not None:
+        input_lexical = Path(os.path.abspath(os.fspath(input_path)))
+        if lexical == input_lexical or resolved == input_lexical.resolve(strict=False):
+            _fail(f"{purpose} target may not overwrite input", "source_authority")
+    return lexical
+
+
+def _atomic_write_text(target: Path, text: str, *, purpose: str) -> None:
+    target = validate_safe_output_path(target, purpose=purpose)
     target.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=f".{target.name}.", dir=str(target.parent), text=True)
     try:
@@ -414,5 +468,36 @@ def install_prepared(packet: dict[str, Any], target: Path, *, dry_run: bool = Fa
             os.unlink(temp_name)
         except OSError:
             pass
-        _fail(f"atomic install failed: {exc}", "integrity")
+        _fail(f"atomic write failed: {exc}", "integrity")
+
+
+def validate_offline_output_target(target: Path, *, purpose: str) -> Path:
+    """Stable shared-policy name for downstream offline writers."""
+    return validate_safe_output_path(target, purpose=purpose)
+
+
+def install_prepared(packet: dict[str, Any], target: Path, *, dry_run: bool = False, input_path: Path | None = None) -> list[str]:
+    if packet.get("schema_version") != PREPARED_SCHEMA_VERSION:
+        _fail("unsupported prepared packet schema_version", "integrity")
+    required = {"schema_version", "normalized_input", "artifact", "manifest", "target", "source_mutation", "prepared_semantic_digest"}
+    if set(packet) != required:
+        _fail("prepared packet has missing or unexpected fields", "integrity")
+    body = dict(packet); body.pop("prepared_semantic_digest")
+    if packet["prepared_semantic_digest"] != digest(body):
+        _fail("prepared packet digest mismatch", "integrity")
+    normalized_input = validate_input(packet["normalized_input"])
+    regenerated_artifact, regenerated_manifest = generate(normalized_input)
+    if packet["artifact"] != regenerated_artifact or packet["manifest"] != regenerated_manifest:
+        _fail("prepared input does not deterministically regenerate artifact and manifest", "integrity")
+    artifact, manifest = packet.get("artifact"), packet.get("manifest")
+    if not isinstance(artifact, dict) or not isinstance(manifest, dict):
+        _fail("prepared packet requires artifact and manifest")
+    production_gate(artifact, manifest)
+    if packet.get("target") != "inert_source_owned_artifact_only" or packet.get("source_mutation") is not False:
+        _fail("forbidden publication target", "source_authority")
+    target = validate_safe_output_path(target, input_path=input_path, purpose="install")
+    text = json.dumps(artifact, indent=2, sort_keys=True) + "\n"
+    if dry_run:
+        return [f"would write {target} ({len(text.encode('utf-8'))} bytes)"]
+    _atomic_write_text(target, text, purpose="install")
     return [f"wrote {target}", f"artifact digest {artifact['artifact_semantic_digest']}"]
