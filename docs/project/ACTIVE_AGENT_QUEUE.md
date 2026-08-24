@@ -48,12 +48,12 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -204,7 +204,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-004",
       "title": "Complete reviewed manual-capture correspondence",
-      "status": "READY",
+      "status": "DONE",
       "branch": "official-configurator-capture-correspondence",
       "objective": "Make the first reviewed official-configurator manual capture parseable and bind its metadata, rows, artifacts, hashes, comparison, and bounded result into one fail-closed packet.",
       "why_this_matters": "The zero-capture scaffold passes while the first reviewed result would reach an invalid status regex and fail to compile; the current checker also does not completely bind row outcome, overall status, every evidence file hash, or comparison output to the exact capture input/output pair.",
@@ -246,7 +246,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker/docs branch if valid reviewed evidence cannot be represented without ambiguity; preserve all real evidence bytes and never loosen unknown-entry or hash rejection.",
       "status_documentation_updates": "Document the reviewed schema and capture-local comparison contract while retaining zero completed captures and every compatibility/device/runtime non-claim.",
-      "done_evidence": "Required future evidence: independent checker review PASS; complete synthetic accepted/rejected/partial/inconclusive and adversarial correspondence corpus; zero-capture PASS; official five-check lane and navigation PASS; no real capture or product/runtime change.",
+      "done_evidence": "Implementation commit fb7f2cf; independent checker review PASS; complete synthetic accepted/rejected/partial/inconclusive and adversarial correspondence corpus; zero-capture PASS; official five-check lane, runtime-config aggregate, census, docs surface, and navigation PASS; no real capture or product/runtime change.",
       "stop_conditions": [
         "Any app behavior, compatibility outcome, operator action, or reviewer observation must be inferred.",
         "Any unknown entry, hash mismatch, row mismatch, or output/rejection ambiguity would be accepted.",
@@ -972,18 +972,18 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-004","GP-VAL-003"],"immediate_ready":2,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Two Ready items are recorded: `GP-CONFIG-004` and `GP-VAL-003`; `GP-SRC-003`
-and `GP-SRC-004` are DONE on validated implementation branches. `GP-SRC-005` is recorded
+One Ready item is recorded: `GP-VAL-003`; `GP-SRC-003`, `GP-SRC-004`, and
+`GP-CONFIG-004` are DONE on validated implementation branches. `GP-SRC-005` is recorded
 Preauthorized but WAITING and is not effective runway. No invalidated
 Preauthorization or hardware-pending work is recorded. Effective runway is
-two against a target of four (`RUNWAY_LOW`). `GP-AUTH-001` remains user/source-authority gated and
+one against a target of four (`RUNWAY_LOW`). `GP-AUTH-001` remains user/source-authority gated and
 `GP-CONFIG-002` remains dependent then external-evidence gated; neither is a
 portfolio-global wait.
 
@@ -1033,7 +1033,7 @@ is a material failed-review event and must not merge. The packet is
 - `GP-SRC-004`: `DONE`; corrected active compile-time table-content classification while preserving
   all 28 table values/symbols and unchanged source-owned active-view
   publication; canonical build required if the compiled header changes.
-- `GP-CONFIG-004`: `READY`; fix the invalid reviewed-status parser and bind a
+- `GP-CONFIG-004`: `DONE`; fixed the invalid reviewed-status parser and bound a
   synthetic reviewed capture's rows, overall status, files, hashes, and
   capture-local comparison without performing or interpreting a real capture.
 - `GP-VAL-003`: `READY`; statically census and classify every tracked CI
