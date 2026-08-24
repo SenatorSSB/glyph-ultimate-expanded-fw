@@ -64,7 +64,7 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-005","GP-PROV-002"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
@@ -75,10 +75,10 @@ automation from this context document.
   `2b734b26439e9028717becf0010e345cb5efce6c` remains failed-review historical
   evidence and must not merge. `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003`
   are DONE;
-  `GP-SRC-005` is freshly reauthorized Ready after its classification-only
-  snapshot drift was reviewed, and `GP-PROV-002` is Ready for the bounded
+  `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
+  and `GP-PROV-002` is Ready for the bounded
   observed-only `build.yml` sidecar. The current-runway marker above is
-  authoritative; effective runway is two against target four (`RUNWAY_LOW`).
+  authoritative; effective runway is one against target four (`RUNWAY_LOW`).
   `GP-AUTH-001` remains user/source-authority gated and
   `GP-CONFIG-002` remains external-evidence gated after its internal dependency
   completed; this is not a global hardware wait.

@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "26b939fa3d3664e839cab8076eea60ddb0f67e9f",
+  "audit_base_sha": "a04e995c1fadc1f8d403c88cea147fb8f99f8939",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -40,7 +40,8 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-CONFIG-004 and GP-VAL-003 completed on configurator without product/runtime changes, reducing effective runway to zero and triggering follow-up curation.",
       "GP-SRC-004 changed tools/generate_source_owned_runtime_config.py after the GP-SRC-005 authorization snapshot, mechanically invalidating the prior WAITING Preauthorization; follow-up Curator review proved that exact drift classification-only, reproduced both unsafe writer seams, and reauthorized GP-SRC-005 Ready against live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f.",
       "GP-PROV-002 was independently reproduced and authorized Ready for the bounded observed-only build.yml sidecar; immutable storage, artifact acceptance, postprocessor purpose/effect, device update, and hardware PASS remain excluded.",
-      "GP-CTL-002 remains substantive-dependency gated, GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated; no global wait is proposed or supported."
+      "GP-CTL-002 remains substantive-dependency gated, GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated; no global wait is proposed or supported.",
+      "GP-SRC-005 completed at a04e995c1fadc1f8d403c88cea147fb8f99f8939 with shared isolated-output and atomic-write enforcement; no active source/table/runtime behavior changed."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-2349",
@@ -52,12 +53,12 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -338,7 +339,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-005",
       "title": "Apply isolated-output policy to remaining writers",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-src-005-isolated-writers-20260824",
       "objective": "Apply the canonically integrated shared isolated-output policy and shared atomic-write implementation to remaining offline writer paths while preserving stdout and one exact inert example install target.",
       "why_this_matters": "The legacy source-owned generator currently accepts .git/config, AGENTS.md, case/inode aliases of the active baseline, and non-atomic writes; the coordinate-native bridge accepts arbitrary repository or absolute output paths. GP-SRC-003 established the exact isolated-output policy and atomic implementation, which should now govern these writers without broadening repository write authority.",
@@ -383,7 +384,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host-tool branch if valid isolated or exact inert-example output regresses; do not restore arbitrary repository writes or duplicate the shared policy.",
       "status_documentation_updates": "Document shared isolated output plus the one exact inert-example exception without creating production authority, active source, a firmware candidate, or hardware claim.",
-      "done_evidence": "Required future evidence: independent writer-safety review PASS; complete path/alias/inode/symlink/atomicity corpus; semantic output and active-source digests unchanged; current aggregate/navigation PASS; live canonical integration proof.",
+      "done_evidence": "Implementation commit a04e995c1fadc1f8d403c88cea147fb8f99f8939; independent writer-safety review PASS; complete path/alias/inode/symlink/atomicity corpus; semantic output and active-source digests unchanged; current aggregate/navigation PASS; canonical integration pending publication.",
       "stop_conditions": [
         "Any new durable output root or repository install target requires judgment.",
         "The shared policy cannot be reused exactly without weakening or duplication.",
@@ -1040,7 +1041,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-005","GP-PROV-002"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1048,9 +1049,9 @@ Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
 `GP-SRC-003`, `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are DONE on
-validated implementation branches. `GP-SRC-005` and `GP-PROV-002` are Ready.
+validated implementation branches. `GP-SRC-005` is DONE and `GP-PROV-002` is Ready.
 No recorded or invalidated Preauthorization and no hardware-pending work exist.
-Effective runway is two against a target of four (`RUNWAY_LOW`).
+Effective runway is one against a target of four (`RUNWAY_LOW`).
 `GP-AUTH-001` remains user/source-authority gated and
 `GP-CONFIG-002` remains external-evidence gated after its internal dependency
 completed; neither is a portfolio-global wait.
@@ -1108,10 +1109,9 @@ is a material failed-review event and must not merge. The packet is
 - `GP-VAL-003`: `DONE`; statically censused and classified every tracked CI
   publication route, retain `build-device-config.yml` as unresolved external,
   and reconcile machine-derived health counts without editing workflows.
-- `GP-SRC-005`: `READY`; its prior Preauthorization invalidated mechanically
-  when `GP-SRC-004` changed a named writer. Follow-up review proved that drift
-  classification-only, reproduced both unsafe write seams, and freshly
-  reauthorized the item against the current shared isolated-output policy.
+- `GP-SRC-005`: `DONE`; shared isolated-output validation and atomic writing now
+  govern both remaining offline writers, with only the exact inert example
+  install exception; no active source/table/runtime behavior changed.
 - `GP-CTL-002`: `SUBSTANTIVE_DEPENDENCY_GATED`; false Done publication is
   proven, but migration and exact replay/equivalence representation remain
   insufficiently bound for Ready.
@@ -1156,8 +1156,7 @@ is a material failed-review event and must not merge. The packet is
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` in the machine-readable block
-authorize immediate execution. `GP-SRC-005` is highest priority, followed by
-`GP-PROV-002`.
+authorize immediate execution. `GP-PROV-002` is the only remaining Ready item.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
