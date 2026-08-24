@@ -205,7 +205,7 @@ Git, but it is not current candidate supply or implementation authority.
       "id": "GP-CONFIG-004",
       "title": "Complete reviewed manual-capture correspondence",
       "status": "DONE",
-      "branch": "official-configurator-capture-correspondence",
+      "branch": "glyph/gp-config-004-manual-capture-correspondence-20260824",
       "objective": "Make the first reviewed official-configurator manual capture parseable and bind its metadata, rows, artifacts, hashes, comparison, and bounded result into one fail-closed packet.",
       "why_this_matters": "The zero-capture scaffold passes while the first reviewed result would reach an invalid status regex and fail to compile; the current checker also does not completely bind row outcome, overall status, every evidence file hash, or comparison output to the exact capture input/output pair.",
       "hardware_risk": "H0",
@@ -246,7 +246,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker/docs branch if valid reviewed evidence cannot be represented without ambiguity; preserve all real evidence bytes and never loosen unknown-entry or hash rejection.",
       "status_documentation_updates": "Document the reviewed schema and capture-local comparison contract while retaining zero completed captures and every compatibility/device/runtime non-claim.",
-      "done_evidence": "Implementation commit fb7f2cf; independent checker review PASS; complete synthetic accepted/rejected/partial/inconclusive and adversarial correspondence corpus; zero-capture PASS; official five-check lane, runtime-config aggregate, census, docs surface, and navigation PASS; no real capture or product/runtime change.",
+      "done_evidence": "Independent repaired-scope review PASS; strict schema-v2 metadata and comparison correspondence; synthetic PASS/FAIL/PARTIAL/INCONCLUSIVE plus rejected packets and tampered comparison/hash/row/path cases; zero-capture PASS; official five-check lane, current aggregate, census, framework, navigation, and agent-surface checks PASS; no real capture or product/runtime change.",
       "stop_conditions": [
         "Any app behavior, compatibility outcome, operator action, or reviewer observation must be inferred.",
         "Any unknown entry, hash mismatch, row mismatch, or output/rejection ambiguity would be accepted.",

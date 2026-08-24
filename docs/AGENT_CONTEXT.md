@@ -76,7 +76,7 @@ automation from this context document.
   not merge. `GP-SRC-004` and `GP-CONFIG-004` are DONE; `GP-VAL-003` remains Ready.
   `GP-SRC-005` is recorded Preauthorized but WAITING and is not effective
   runway. The current-runway marker above is authoritative; effective runway is
-  two against target four. `GP-AUTH-001` remains user/source-authority gated and
+  one against target four. `GP-AUTH-001` remains user/source-authority gated and
   `GP-CONFIG-002` remains dependent then external-evidence gated; this is not a
   global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
