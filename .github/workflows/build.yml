@@ -89,6 +89,7 @@ jobs:
     - name: Write and verify observed-only sidecar
       run: |
         export SIDECAR_PATH="$PIO_ENV/${ARTIFACT_NAME}.provenance.json"
+        test "$SIDECAR_PATH" = "$PIO_ENV/${ARTIFACT_NAME}.provenance.json"
         python3 tools/check_glyph_artifact_postprocessor_provenance.py --write-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"
         python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"
 

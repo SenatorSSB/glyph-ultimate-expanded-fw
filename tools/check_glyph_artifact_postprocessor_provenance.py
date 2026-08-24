@@ -121,6 +121,11 @@ def load_object(path: Path) -> dict[str, Any]:
 
 
 def validate_sidecar(sidecar: dict[str, Any], artifact: bytes) -> None:
+    if set(sidecar) != {
+        "schema_name", "schema_version", "status", "candidate_git_sha",
+        "final_artifact", "postprocessor", "immutable_locator", "source_authority",
+    }:
+        fail("sidecar has missing or unexpected top-level fields")
     if sidecar.get("schema_name") != "glyph_artifact_postprocessor_provenance":
         fail("schema_name drifted")
     if sidecar.get("schema_version") != 1:
@@ -138,6 +143,8 @@ def validate_sidecar(sidecar: dict[str, Any], artifact: bytes) -> None:
     artifact_meta = sidecar.get("final_artifact")
     if not isinstance(artifact_meta, dict):
         fail("final_artifact must be an object")
+    if set(artifact_meta) != {"filename", "size_bytes", "sha256"}:
+        fail("final_artifact has missing or unexpected fields")
     if artifact_meta.get("filename") != "Glyph-synthetic.uf2":
         fail("final artifact filename drifted")
     if artifact_meta.get("size_bytes") != len(artifact):
@@ -148,6 +155,8 @@ def validate_sidecar(sidecar: dict[str, Any], artifact: bytes) -> None:
     postprocessor = sidecar.get("postprocessor")
     if not isinstance(postprocessor, dict):
         fail("postprocessor must be an object")
+    if set(postprocessor) != {"path", "sha256", "purpose", "byte_transformation"}:
+        fail("postprocessor has missing or unexpected fields")
     if postprocessor.get("path") != "glyph_nuker":
         fail("postprocessor path drifted")
     if postprocessor.get("sha256") != EXPECTED_NUKER_SHA256:
@@ -168,6 +177,7 @@ def validate_sidecar(sidecar: dict[str, Any], artifact: bytes) -> None:
 
 
 def check_fixture() -> None:
+    global EXPECTED_NUKER_SHA256
     fixture = load_object(FIXTURE_PATH)
     encoded = fixture.get("synthetic_artifact_bytes_base64")
     if not isinstance(encoded, str):
@@ -218,6 +228,74 @@ def check_fixture() -> None:
             pass
         else:
             fail("false immutable locator claim was accepted")
+
+        missing_locator = json.loads(json.dumps(sidecar))
+        missing_locator.pop("immutable_locator")
+        try:
+            validate_sidecar(missing_locator, artifact)
+        except ProvenanceError:
+            pass
+        else:
+            fail("missing immutable locator was accepted")
+
+        extra_field = json.loads(json.dumps(sidecar))
+        extra_field["unexpected"] = True
+        try:
+            validate_sidecar(extra_field, artifact)
+        except ProvenanceError:
+            pass
+        else:
+            fail("unexpected sidecar field was accepted")
+
+        tampered_postprocessor = json.loads(json.dumps(sidecar))
+        tampered_postprocessor["postprocessor"]["sha256"] = "0" * 64
+        try:
+            validate_sidecar(tampered_postprocessor, artifact)
+        except ProvenanceError:
+            pass
+        else:
+            fail("tampered postprocessor identity was accepted")
+
+        for malformed_sha in ("short", "A" * 40):
+            try:
+                verify_checkout(malformed_sha)
+            except ProvenanceError:
+                pass
+            else:
+                fail("malformed or uppercase checkout SHA was accepted")
+
+        try:
+            verify_checkout("0" * 40)
+        except ProvenanceError:
+            pass
+        else:
+            fail("HEAD-mismatched checkout SHA was accepted")
+
+        original_nuker_sha = EXPECTED_NUKER_SHA256
+        EXPECTED_NUKER_SHA256 = "0" * 64
+        try:
+            try:
+                verify_checkout(git_head())
+            except ProvenanceError:
+                pass
+            else:
+                fail("changed postprocessor identity was accepted")
+        finally:
+            EXPECTED_NUKER_SHA256 = original_nuker_sha
+
+        real_sidecar = Path(directory) / "real.provenance.json"
+        candidate_sha = EXPECTED_CANDIDATE_GIT_SHA
+        write_sidecar(candidate_sha, artifact_path, real_sidecar)
+        verify_real_sidecar(real_sidecar, artifact_path, candidate_sha)
+        real_sidecar_payload = load_object(real_sidecar)
+        real_sidecar_payload["candidate_git_sha"] = "f" * 40
+        real_sidecar.write_text(json.dumps(real_sidecar_payload), encoding="utf-8")
+        try:
+            verify_real_sidecar(real_sidecar, artifact_path, candidate_sha)
+        except ProvenanceError:
+            pass
+        else:
+            fail("tampered written sidecar was accepted")
 
 
 def main() -> int:

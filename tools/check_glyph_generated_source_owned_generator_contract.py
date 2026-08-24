@@ -764,7 +764,7 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
         if run_generator(str(temp_dir / "wrong_axes.json"), str(temp_dir / "wrong_axes.hpp")).returncode == 0:
             fail("generator accepted axes_per_point other than 2")
 
-        active_output = temp_dir / "src" / "generated.hpp"
+        active_output = REPO_ROOT / "src" / "generated.hpp"
         completed = run_generator(str(INPUT_FIXTURE), str(active_output))
         if completed.returncode == 0:
             fail("generator accepted an active source-like output path")

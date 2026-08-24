@@ -23,6 +23,8 @@ def validate(text: str) -> None:
         "--verify-sidecar",
         "--artifact \"$ARTIFACT_PATH\"",
         "--sidecar \"$SIDECAR_PATH\"",
+        'test "$SIDECAR_PATH" = "$PIO_ENV/${ARTIFACT_NAME}.provenance.json"',
+        "path: ${{ env.PIO_ENV }}",
         "actions/upload-artifact@v4",
     )
     for token in required:
@@ -54,6 +56,14 @@ def main() -> int:
             ),
             "remove_sidecar": workflow.replace(
                 "python3 tools/check_glyph_artifact_postprocessor_provenance.py --write-sidecar", "", 1
+            ),
+            "sidecar_outside_upload_directory": workflow.replace(
+                'test "$SIDECAR_PATH" = "$PIO_ENV/${ARTIFACT_NAME}.provenance.json"',
+                'test "$SIDECAR_PATH" = "$ARTIFACT_NAME.provenance.json"', 1,
+            ),
+            "upload_outside_sidecar_directory": workflow.replace(
+                "path: ${{ env.PIO_ENV }}",
+                "path: ${{ env.ARTIFACT_NAME }}", 1,
             ),
         }
         for case, mutated in mutations.items():
