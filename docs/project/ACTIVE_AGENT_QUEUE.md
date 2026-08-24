@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "a04e995c1fadc1f8d403c88cea147fb8f99f8939",
+  "audit_base_sha": "d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -41,7 +41,9 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-SRC-004 changed tools/generate_source_owned_runtime_config.py after the GP-SRC-005 authorization snapshot, mechanically invalidating the prior WAITING Preauthorization; follow-up Curator review proved that exact drift classification-only, reproduced both unsafe writer seams, and reauthorized GP-SRC-005 Ready against live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f.",
       "GP-PROV-002 was independently reproduced and authorized Ready for the bounded observed-only build.yml sidecar; immutable storage, artifact acceptance, postprocessor purpose/effect, device update, and hardware PASS remain excluded.",
       "GP-CTL-002 remains substantive-dependency gated, GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated; no global wait is proposed or supported.",
-      "GP-SRC-005 completed at a04e995c1fadc1f8d403c88cea147fb8f99f8939 with shared isolated-output and atomic-write enforcement; no active source/table/runtime behavior changed."
+      "GP-SRC-005 completed at a04e995c1fadc1f8d403c88cea147fb8f99f8939 with shared isolated-output and atomic-write enforcement; no active source/table/runtime behavior changed.",
+      "Live configurator d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e fails the load-bearing generated-source contract checker on macOS because its legacy positive file-output cases contradict the canonically accepted aliased-temporary-root rejection, and an identical-root reproduction exposes a second stale expectation that isolated temporary src/generated.hpp must reject. GP-VAL-004 was independently bounded as checker/test correction only; shared output policy and generator/product semantics must not change.",
+      "GP-PROV-002 has clean local implementation commits a09ba09d35621b3742ee37f961c012f542ce64c0 and 3810732a0daa3d4c771d205da5b76d8f7a63dbf4 on its authorized branch, but no live remote feature ref or canonical completion publication exists. It remains legitimate unfinished implementation and publication waits for GP-VAL-004 plus fresh aggregate validation."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-2349",
@@ -77,6 +79,70 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-VAL-004",
+      "title": "Make generator contract validation temp-root portable",
+      "status": "READY",
+      "branch": "glyph/gp-val-004-generator-temp-root-portability-20260824",
+      "objective": "Restore load-bearing generated-source contract validation on both aliased and canonical system-temporary-root hosts while preserving the shared isolated-output policy exactly.",
+      "why_this_matters": "Live configurator fails its current runtime-config aggregate before unrelated GP-PROV-002 publication: the legacy generator-contract checker requires positive file writes on a host where the accepted shared policy deliberately rejects every aliased-root output, and its canonical-root path still expects an isolated temporary src/generated.hpp target to reject even though that target is neither repository source nor an active-publication-like name.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This work corrects host-side checker cases and deterministic checker-census/validation-health artifacts only. It must not change the shared output validator, generator output semantics, accepted or rejected target policy, active source, table bytes, firmware/runtime behavior, workflow behavior, or controller behavior.",
+      "scope": "Update tools/check_glyph_generated_source_owned_generator_contract.py so semantic generation, layout-spec equivalence, determinism, fixture equality, and malformed-input cases use non-mutating stdout/in-memory paths when file output is not the subject under test. Exercise file-output policy separately and exactly: when abspath(tempfile.gettempdir()) differs from its resolved spelling, normal outputs under that returned lexical root must fail with the aliased-temporary-root classification and create no target; when the spellings are identical, isolated file outputs under that root must succeed atomically. In the identical-root lane, isolated temporary subdirectories named src are ordinary temporary paths and may succeed; replace the stale broad src/generated.hpp rejection with exact negative cases for repository targets, symlink/case/inode aliases, paths outside the returned root, input overwrite, and active-publication-like names already forbidden by the shared policy. Add deterministic two-environment coverage using isolated subprocess temp-root controls so both aliased and identical root behavior are checked on any supported host. Regenerate only deterministic checker-census and validation-health artifacts required by the checker-byte change.",
+      "explicit_excluded_scope": "No edit to tools/source_owned_generator_modes.py, tools/generate_source_owned_runtime_config.py, tools/glyph_checker_context.py, any other product/runtime checker, generator policy, accepted output root, atomic writer, active/inert install exception, workflow, firmware/runtime source, table content, production ownership, profile intent, device/protobuf write, persistence, flashing, hardware result, Nunchuk, root-cause, or game-semantic claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Fresh live verification pins configurator at d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e. On that exact snapshot, default macOS tempfile.gettempdir() is /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T and resolves to /private/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T; tools/check_glyph_generated_source_owned_generator_contract.py fails when its first positive output reaches the accepted aliased-root rejection. Re-running with the canonical resolved temp root gets past those writes and then fails because the checker expects isolated <temp>/src/generated.hpp to reject. GP-SRC-003's canonical work order and tools/check_glyph_source_owned_generator_modes.py explicitly bind aliased-root rejection and identical-root success, while GP-SRC-005 binds remaining writers to that same policy. The GP-PROV-002 range does not change either implicated generator file.",
+      "dependencies_prerequisites": [
+        "GP-SRC-003 and GP-SRC-005 are DONE on live configurator; their prepared-v2, shared isolated-output, alias/symlink/input-overwrite, active-publication-name, exact inert-example exception, and atomic-write invariants remain authoritative.",
+        "Implementation begins from a fresh descendant of d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e and proves the reproduced default-root and canonical-root failures before editing.",
+        "GP-PROV-002 is legitimate unfinished work but does not own this generator checker; its workflow/provenance commits remain isolated until this repair is canonically integrated and the fresh aggregate passes."
+      ],
+      "substantive_authorization_rationale": "Both failures are directly reproducible contradictions between a stale checker and already-canonical target policy, not unresolved generator or product design. The safe resolution is exact: preserve the shared fail-closed validator and move checker semantic assertions to non-writing execution while testing output policy as its own host-portable matrix. Treating a lexical temporary src subdirectory as repository source would invent a restriction absent from the accepted policy; allowing repository or alias targets would weaken it. No product, profile, ownership, architecture, or game-semantic judgment remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The shared isolated-output policy, exact inert install exception, generator CLI/output semantics, or implicated checker changes materially before implementation.",
+        "Another current canonical change restores both host lanes with equivalent or stronger coverage before implementation.",
+        "The repair would require changing accepted/rejected output policy, generator semantics, product/runtime code, workflow behavior, or tools/glyph_checker_context.py."
+      ],
+      "authorization_snapshot_provenance": "Direct user priority GLYPH-UD-006 plus fresh Curator reproduction against live configurator d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e, with reviewed packet planning/portfolio-20260823-2349 at 387a2a7b27d11b81c3c571aaf07cf543af626757 now partially consumed and not relied on as authorization; authorized on curation/generator-validation-portability-20260824-1543.",
+      "automated_validation": [
+        "Default aliased-root and explicit canonical-root subprocess cases both pass the checker on macOS; synthetic alias and identical-root cases cover both branches on hosts whose default root exposes only one branch.",
+        "Semantic generator and layout-spec output remain byte-deterministic and equal the checked-in fixture through non-mutating stdout/in-memory execution in both root environments.",
+        "Aliased-root normal file output fails with the exact policy classification and leaves no target; identical-root isolated output succeeds atomically, including an ordinary temporary src/generated.hpp subdirectory.",
+        "Repository paths, .git, outside-root paths, relative paths, traversal, symlink/case/inode aliases, input overwrite, active baseline aliases, candidate.view, active_storage.view, RuntimeConfigView, and GeneratedRuntimeConfigBaseline-like targets continue to fail for the exact current reasons.",
+        "Malformed schema/layout/table/point cases fail for their semantic reason rather than being masked by output-path rejection.",
+        "Generated-source contract, generator modes, prepared-v2 preview, source-authority intake, checker census, validation health, full runtime-config aggregate, agent-framework, docs-navigation, and docs-agent-surface checks pass; independent focused validation-policy review confirms no invariant weakening."
+      ],
+      "canonical_build": "NOT_REQUIRED: checker/test correction and deterministic validation metadata only; any generator, workflow, compiled source, or build-input delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused checker branch if either host lane loses meaningful semantic or output-policy coverage; do not relax the shared validator or hide a current aggregate failure.",
+      "status_documentation_updates": "Record only the validation repair and GP-PROV-002 publication dependency; do not create a generator capability, runtime behavior, artifact acceptance, or hardware claim.",
+      "done_evidence": "Required future evidence: independent validation-policy review PASS; both temp-root lanes and full negative matrix PASS; deterministic generator semantics and fixture equality unchanged; current aggregate/framework/navigation PASS; exact implicated source-policy and product/runtime bytes unchanged; live feature and canonical integration verification.",
+      "stop_conditions": [
+        "Any accepted/rejected output-policy decision is not already fixed by GP-SRC-003/005 authority.",
+        "Any generator semantic, active/inert install, workflow, firmware/runtime, table, product, profile, source-authority, device-write, persistence, protobuf-write, flashing, hardware, Nunchuk, or root-cause scope appears.",
+        "The checker can pass only by skipping semantic negative cases, masking their failure reason, weakening alias/path checks, or changing tools/glyph_checker_context.py."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-SRC-003",
       "title": "Complete prepared-packet integrity and output guardrails",
@@ -405,7 +471,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-002",
       "title": "Emit observed-only CI artifact sidecar",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "branch": "glyph/gp-prov-002-observed-ci-sidecar-20260824",
       "objective": "Make the canonically gated build.yml artifact route emit and verify a sidecar carrying the full source Git identity and exact final postprocessed artifact identity.",
       "why_this_matters": "The current route uploads a postprocessed UF2 named with only a short SHA and no full candidate SHA, final size/SHA-256, or postprocessor identity sidecar, so consumers cannot establish even bounded observed correspondence from the uploaded directory.",
@@ -421,7 +487,8 @@ Git, but it is not current candidate supply or implementation authority.
       "dependencies_prerequisites": [
         "GP-PROV-001, GP-VAL-002, and GP-VAL-003 are DONE and their observed-only non-claims, validation-before-publication gate, and complete tracked-route classification remain intact.",
         "Implementation starts from a fresh descendant of live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f and limits workflow mutation to the current build.yml route.",
-        "The tracked glyph_nuker path and SHA-256 remain exact; a changed binary stops rather than being reclassified or accepted."
+        "The tracked glyph_nuker path and SHA-256 remain exact; a changed binary stops rather than being reclassified or accepted.",
+        "GP-VAL-004 must be canonically DONE and a fresh full runtime-config aggregate must pass before GP-PROV-002 review or publication resumes; GP-PROV-002 may not absorb that unrelated checker repair."
       ],
       "substantive_authorization_rationale": "The missing correspondence is directly observable and the accepted schema already fixes every sensitive claim: full source identity, exact observed final bytes, exact tracked postprocessor identity, and explicit UNKNOWN/null fields. Adding a pre-execution identity gate plus postprocessing sidecar generation and verification does not select a store, interpret the binary, change firmware inputs, or convert CI output into a hardware-accepted artifact.",
       "mechanical_activation_conditions": [],
@@ -447,7 +514,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused workflow/provenance branch if valid current artifacts cannot produce a deterministic verified observed-only sidecar; do not bypass failed identity or sidecar checks and do not infer missing provenance.",
       "status_documentation_updates": "Document the bounded build.yml observed-only sidecar and retain explicit non-claims for immutable storage, artifact acceptance, reproducibility, postprocessor purpose/effect, hardware, and every unresolved external route.",
-      "done_evidence": "Required future evidence: independent CI/provenance review PASS; complete synthetic sidecar and static ordering/tamper corpus; exact build.yml route diff; tracked postprocessor and firmware/build-input bytes unchanged; current aggregate/framework/navigation PASS; live feature and canonical integration verification.",
+      "done_evidence": "Unfinished local implementation exists at a09ba09d35621b3742ee37f961c012f542ce64c0 plus documentation clarification 3810732a0daa3d4c771d205da5b76d8f7a63dbf4 on a clean descendant of live configurator d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e. The feature ref is not live and no completion is published. Focused provenance/workflow checks pass, but the full aggregate exposes the unrelated canonical GP-VAL-004 generator-checker failure. Required future evidence remains independent CI/provenance review PASS; complete synthetic sidecar and static ordering/tamper corpus; exact build.yml route diff; tracked postprocessor and firmware/build-input bytes unchanged; fresh current aggregate/framework/navigation PASS after GP-VAL-004; live feature and canonical integration verification.",
       "stop_conditions": [
         "The tracked postprocessor identity differs or its purpose/effect must be interpreted.",
         "A durable locator, store, retention, caller, owner, release, reproducibility, artifact-acceptance, or hardware decision is required.",
@@ -1041,7 +1108,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-004"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1049,7 +1116,10 @@ Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
 `GP-SRC-003`, `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are DONE on
-validated implementation branches. `GP-SRC-005` is DONE and `GP-PROV-002` is Ready.
+validated implementation branches. `GP-SRC-005` is DONE. `GP-VAL-004` is
+Ready for the isolated generator-contract checker correction, and
+`GP-PROV-002` is legitimate unfinished implementation waiting on that repair
+before review and publication.
 No recorded or invalidated Preauthorization and no hardware-pending work exist.
 Effective runway is one against a target of four (`RUNWAY_LOW`).
 `GP-AUTH-001` remains user/source-authority gated and
@@ -1115,10 +1185,15 @@ is a material failed-review event and must not merge. The packet is
 - `GP-CTL-002`: `SUBSTANTIVE_DEPENDENCY_GATED`; false Done publication is
   proven, but migration and exact replay/equivalence representation remain
   insufficiently bound for Ready.
-- `GP-PROV-002`: `READY`; the bounded `build.yml` route may add a verified
-  observed-only sidecar with full Git and final postprocessed byte identity,
-  while storage, acceptance, postprocessor semantics, and hardware remain
-  explicitly unresolved and excluded.
+- `GP-VAL-004`: `READY`; correct only the stale generator-contract checker
+  assumptions for aliased versus identical system temporary roots, preserving
+  the shared output validator and every generator/product semantic exactly.
+- `GP-PROV-002`: `IN_PROGRESS`; the bounded `build.yml` sidecar implementation
+  exists locally on a clean authorized branch but is not live-published and
+  must wait for canonical `GP-VAL-004` completion plus a fresh passing
+  aggregate before review/publication resumes. Storage, acceptance,
+  postprocessor semantics, and hardware remain explicitly unresolved and
+  excluded.
 - `GP-PROV-003`: `RESEARCH`; exact static inventory/schema boundary remains
   unresolved and no network resolution or reproducibility claim is allowed.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
@@ -1156,7 +1231,9 @@ is a material failed-review event and must not merge. The packet is
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` in the machine-readable block
-authorize immediate execution. `GP-PROV-002` is the only remaining Ready item.
+authorize immediate execution. `GP-VAL-004` is the only Ready item;
+`GP-PROV-002` is unfinished recovery/publication work and must not absorb that
+separate repair.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive

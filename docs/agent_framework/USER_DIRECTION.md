@@ -59,6 +59,16 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   before merge. Unresolved behavior or product decisions still require
   user/domain input.
 
+### GLYPH-UD-006
+
+- Type: `Priority`
+- Status: `Active`
+- Source: user continuation direction supplied 2026-08-24
+- Direction: Resolve or curate authorization for the unrelated generator
+  validation failure before resuming `GP-PROV-002` publication. This priority
+  does not itself broaden implementation scope or waive current validation,
+  review, publication, or runtime/product boundaries.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is
