@@ -7,7 +7,10 @@ import argparse
 import base64
 import hashlib
 import json
+import os
 from pathlib import Path
+import re
+import subprocess
 import tempfile
 from typing import Any
 
@@ -36,6 +39,75 @@ def sha256_bytes(value: bytes) -> str:
 
 def sha256_file(path: Path) -> str:
     return sha256_bytes(path.read_bytes())
+
+
+def git_head() -> str:
+    completed = subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, capture_output=True,
+        text=True, check=False,
+    )
+    if completed.returncode or not re.fullmatch(r"[0-9a-f]{40}", completed.stdout.strip()):
+        fail("could not resolve a full lowercase checked-out Git SHA")
+    return completed.stdout.strip()
+
+
+def require_full_sha(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{40}", value):
+        fail(f"{label} must be a full lowercase Git SHA")
+    return value
+
+
+def verify_checkout(candidate_sha: str | None = None) -> str:
+    observed = require_full_sha(candidate_sha or os.environ.get("GITHUB_SHA"), "GITHUB_SHA")
+    if observed != git_head():
+        fail("GITHUB_SHA does not equal checked-out HEAD")
+    if not TRACKED_NUKER.is_file() or sha256_file(TRACKED_NUKER) != EXPECTED_NUKER_SHA256:
+        fail("tracked glyph_nuker identity changed")
+    return observed
+
+
+def build_sidecar(candidate_sha: str, artifact_path: Path) -> dict[str, Any]:
+    candidate_sha = require_full_sha(candidate_sha, "candidate_git_sha")
+    if not artifact_path.is_file() or artifact_path.is_symlink():
+        fail("final artifact must be a regular file")
+    return {
+        "schema_name": "glyph_artifact_postprocessor_provenance",
+        "schema_version": 1,
+        "status": "observed_only_no_artifact_acceptance",
+        "candidate_git_sha": candidate_sha,
+        "final_artifact": {
+            "filename": artifact_path.name,
+            "size_bytes": artifact_path.stat().st_size,
+            "sha256": sha256_file(artifact_path),
+        },
+        "postprocessor": {
+            "path": "glyph_nuker",
+            "sha256": EXPECTED_NUKER_SHA256,
+            "purpose": "UNKNOWN",
+            "byte_transformation": "UNKNOWN",
+        },
+        "immutable_locator": None,
+        "source_authority": {
+            "classification": "observed_only",
+            "workflow_source": ".github/workflows/build.yml",
+            "artifact_store_established": False,
+        },
+    }
+
+
+def write_sidecar(candidate_sha: str, artifact_path: Path, sidecar_path: Path) -> None:
+    sidecar = build_sidecar(candidate_sha, artifact_path)
+    sidecar_path.write_text(json.dumps(sidecar, indent=2) + "\n", encoding="utf-8")
+
+
+def verify_real_sidecar(sidecar_path: Path, artifact_path: Path, candidate_sha: str) -> None:
+    sidecar = load_object(sidecar_path)
+    candidate_sha = require_full_sha(candidate_sha, "candidate_git_sha")
+    if sidecar.get("candidate_git_sha") != candidate_sha:
+        fail("sidecar candidate Git SHA does not match workflow SHA")
+    expected = build_sidecar(candidate_sha, artifact_path)
+    if sidecar != expected:
+        fail("sidecar does not exactly match final artifact and observed-only contract")
 
 
 def load_object(path: Path) -> dict[str, Any]:
@@ -151,14 +223,37 @@ def check_fixture() -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate the committed fixture")
+    parser.add_argument("--verify-checkout", action="store_true")
+    parser.add_argument("--write-sidecar", action="store_true")
+    parser.add_argument("--verify-sidecar", action="store_true")
+    parser.add_argument("--candidate-sha")
+    parser.add_argument("--artifact", type=Path)
+    parser.add_argument("--sidecar", type=Path)
     args = parser.parse_args()
-    if not args.check:
-        parser.error("--check is required")
-    check_fixture()
-    print("artifact_postprocessor_provenance=PASS")
-    print("tracked_postprocessor_execution=NOT_PERFORMED")
-    print("artifact_transformation=UNKNOWN")
-    print("immutable_locator=UNRESOLVED")
+    try:
+        if args.check:
+            check_fixture()
+            print("artifact_postprocessor_provenance=PASS")
+            print("tracked_postprocessor_execution=NOT_PERFORMED")
+            print("artifact_transformation=UNKNOWN")
+            print("immutable_locator=UNRESOLVED")
+        elif args.verify_checkout:
+            print(f"checked_out_git_sha={verify_checkout(args.candidate_sha)}")
+            print("tracked_postprocessor=PASS")
+        elif args.write_sidecar:
+            if not args.artifact or not args.sidecar or not args.candidate_sha:
+                parser.error("--write-sidecar requires --candidate-sha, --artifact, and --sidecar")
+            write_sidecar(args.candidate_sha, args.artifact, args.sidecar)
+            print(f"sidecar_written={args.sidecar}")
+        elif args.verify_sidecar:
+            if not args.artifact or not args.sidecar or not args.candidate_sha:
+                parser.error("--verify-sidecar requires --candidate-sha, --artifact, and --sidecar")
+            verify_real_sidecar(args.sidecar, args.artifact, args.candidate_sha)
+            print("sidecar_verification=PASS")
+        else:
+            parser.error("one of --check, --verify-checkout, --write-sidecar, or --verify-sidecar is required")
+    except (OSError, ProvenanceError, subprocess.SubprocessError) as exc:
+        parser.error(str(exc))
     return 0
 
 
