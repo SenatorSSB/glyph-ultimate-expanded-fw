@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import re
 import subprocess
 import tempfile
@@ -587,10 +588,14 @@ def parse_generated_output_tables(text: str) -> list[tuple[str, list[tuple[int, 
     return tables
 
 
-def run_generator(*args: str) -> subprocess.CompletedProcess[str]:
+def run_generator(*args: str, environment: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
+    process_environment = os.environ.copy()
+    if environment is not None:
+        process_environment.update(environment)
     return subprocess.run(
         ["python3", str(GENERATOR), *args],
         cwd=REPO_ROOT,
+        env=process_environment,
         capture_output=True,
         text=True,
         check=False,
@@ -610,9 +615,8 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def expect_generator_failure(input_text: str, directory: Path, label: str) -> None:
     input_path = directory / f"{label}.json"
-    output_path = directory / f"{label}.hpp"
     input_path.write_text(input_text, encoding="utf-8")
-    completed = run_generator(input_path, output_path)
+    completed = run_generator(input_path)
     if completed.returncode == 0:
         fail(f"generator accepted malformed input case: {label}")
 
@@ -620,27 +624,29 @@ def expect_generator_failure(input_text: str, directory: Path, label: str) -> No
 def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_payload: dict[str, Any]) -> None:
     fixture_output = read_required(OUTPUT_FIXTURE)
     with tempfile.TemporaryDirectory() as temp_name:
-        temp_dir = Path(temp_name)
-        generated_one = temp_dir / "generated_one.hpp"
-        generated_spec_one = temp_dir / "generated_spec_one.hpp"
-        generated_spec_two = temp_dir / "generated_spec_two.hpp"
-        generated_two = temp_dir / "generated_two.hpp"
-        first = run_generator(INPUT_FIXTURE, generated_one)
+        # Work from the resolved parent so the synthetic identical-root lane
+        # is genuinely identical even on macOS, where TemporaryDirectory may
+        # return a lexical path through /var/folders/... rather than /private.
+        temp_dir = Path(temp_name).resolve()
+        # Semantic generation is intentionally exercised through stdout so this
+        # checker does not accidentally couple semantic assertions to the host
+        # temporary-root spelling policy.
+        first = run_generator(INPUT_FIXTURE)
         if first.returncode != 0:
             fail("generator failed on sample input: " + first.stderr.strip())
-        layout_spec_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_FIXTURE, generated_spec_one)
+        layout_spec_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_FIXTURE)
         if layout_spec_run.returncode != 0:
             fail("generator failed on layout spec example: " + layout_spec_run.stderr.strip())
-        layout_spec_second_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_FIXTURE, generated_spec_two)
+        layout_spec_second_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_FIXTURE)
         if layout_spec_second_run.returncode != 0:
             fail("generator failed on second layout spec run: " + layout_spec_second_run.stderr.strip())
-        second = run_generator(INPUT_FIXTURE, generated_two)
+        second = run_generator(INPUT_FIXTURE)
         if second.returncode != 0:
             fail("generator failed on second deterministic run: " + second.stderr.strip())
-        first_text = generated_one.read_text(encoding="utf-8")
-        second_text = generated_two.read_text(encoding="utf-8")
-        layout_spec_text = generated_spec_one.read_text(encoding="utf-8")
-        layout_spec_second_text = generated_spec_two.read_text(encoding="utf-8")
+        first_text = first.stdout
+        second_text = second.stdout
+        layout_spec_text = layout_spec_run.stdout
+        layout_spec_second_text = layout_spec_second_run.stdout
         if first_text != second_text:
             fail("generator output is not deterministic across repeated runs")
         if first_text != fixture_output:
@@ -649,10 +655,10 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
             fail("layout spec example does not match checked-in generated output fixture")
         if layout_spec_text != layout_spec_second_text:
             fail("layout spec mode output is not deterministic across repeated runs")
-        layout_spec_example_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_EXAMPLE, temp_dir / "generated_layout_spec_example.hpp")
+        layout_spec_example_run = run_generator(SPEC_INPUT_MODE, LAYOUT_SPEC_EXAMPLE)
         if layout_spec_example_run.returncode != 0:
             fail("generator failed on layout spec example fixture: " + layout_spec_example_run.stderr.strip())
-        layout_spec_example_text = (temp_dir / "generated_layout_spec_example.hpp").read_text(encoding="utf-8")
+        layout_spec_example_text = layout_spec_example_run.stdout
         if layout_spec_example_text != fixture_output:
             fail("layout spec example fixture does not match checked-in generated output fixture")
 
@@ -673,19 +679,18 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
 
         def expect_layout_spec_rejection(payload: dict[str, Any], label: str) -> None:
             candidate_path = temp_dir / f"{label}.json"
-            candidate_output = temp_dir / f"{label}.hpp"
             write_json(candidate_path, payload)
-            if run_generator(candidate_path, candidate_output).returncode == 0:
+            if run_generator(candidate_path).returncode == 0:
                 fail(f"generator accepted malformed layout spec case: {label}")
-            if run_generator(SPEC_INPUT_MODE, candidate_path, candidate_output).returncode == 0:
+            if run_generator(SPEC_INPUT_MODE, candidate_path).returncode == 0:
                 fail(f"spec-input mode accepted malformed layout spec case: {label}")
 
         missing_layout_spec = copy.deepcopy(layout_spec_payload)
         missing_layout_spec.pop("layout_spec")
         write_json(temp_dir / "missing_layout_spec.json", missing_layout_spec)
-        if run_generator(str(temp_dir / "missing_layout_spec.json"), str(temp_dir / "missing_layout_spec_generic.hpp")).returncode == 0:
+        if run_generator(str(temp_dir / "missing_layout_spec.json")).returncode == 0:
             fail("generator accepted input without layout_spec")
-        if run_generator(SPEC_INPUT_MODE, str(temp_dir / "missing_layout_spec.json"), str(temp_dir / "missing_layout_spec.hpp")).returncode == 0:
+        if run_generator(SPEC_INPUT_MODE, str(temp_dir / "missing_layout_spec.json")).returncode == 0:
             fail("spec-input mode accepted input without layout_spec")
 
         duplicate_key = '{"schema_version": 1, "schema_version": 1}'
@@ -694,7 +699,7 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
         missing_required = copy.deepcopy(layout_spec_payload)
         missing_required.pop("tables")
         write_json(temp_dir / "missing_required.json", missing_required)
-        if run_generator(temp_dir / "missing_required.json", temp_dir / "missing_required.hpp").returncode == 0:
+        if run_generator(temp_dir / "missing_required.json").returncode == 0:
             fail("generator accepted input missing required tables key")
 
         missing_layout_spec_tables = copy.deepcopy(layout_spec_payload)
@@ -743,31 +748,97 @@ def validate_generator_behavior(input_payload: dict[str, Any], layout_spec_paylo
         out_of_range = copy.deepcopy(input_payload)
         out_of_range["tables"][0]["points"][0]["x"] = 256
         write_json(temp_dir / "out_of_range.json", out_of_range)
-        if run_generator(str(temp_dir / "out_of_range.json"), str(temp_dir / "out_of_range.hpp")).returncode == 0:
+        if run_generator(str(temp_dir / "out_of_range.json")).returncode == 0:
             fail("generator accepted byte value outside 0..255")
 
         wrong_count = copy.deepcopy(input_payload)
         wrong_count["table_shape"]["table_count"] = 26
         write_json(temp_dir / "wrong_table_count.json", wrong_count)
-        if run_generator(str(temp_dir / "wrong_table_count.json"), str(temp_dir / "wrong_table_count.hpp")).returncode == 0:
+        if run_generator(str(temp_dir / "wrong_table_count.json")).returncode == 0:
             fail("generator accepted wrong table_count")
 
         wrong_points = copy.deepcopy(input_payload)
         wrong_points["tables"][0]["points"] = wrong_points["tables"][0]["points"][:-1]
         write_json(temp_dir / "wrong_points.json", wrong_points)
-        if run_generator(str(temp_dir / "wrong_points.json"), str(temp_dir / "wrong_points.hpp")).returncode == 0:
+        if run_generator(str(temp_dir / "wrong_points.json")).returncode == 0:
             fail("generator accepted a table without exactly 9 points")
 
         wrong_axes = copy.deepcopy(input_payload)
         wrong_axes["table_shape"]["axes_per_point"] = 3
         write_json(temp_dir / "wrong_axes.json", wrong_axes)
-        if run_generator(str(temp_dir / "wrong_axes.json"), str(temp_dir / "wrong_axes.hpp")).returncode == 0:
+        if run_generator(str(temp_dir / "wrong_axes.json")).returncode == 0:
             fail("generator accepted axes_per_point other than 2")
 
-        active_output = temp_dir / "src" / "generated.hpp"
-        completed = run_generator(str(INPUT_FIXTURE), str(active_output))
-        if completed.returncode == 0:
-            fail("generator accepted an active source-like output path")
+        # File-output policy is tested separately under both spellings of the
+        # system temporary root.  This keeps semantic failures attributable to
+        # malformed input rather than to host-specific path canonicalization.
+        canonical_root = temp_dir / "canonical-root"
+        canonical_root.mkdir()
+        aliased_root = temp_dir / "aliased-root"
+        aliased_root.symlink_to(canonical_root, target_is_directory=True)
+        aliased_output = aliased_root / "ordinary" / "generated.hpp"
+        aliased = run_generator(
+            INPUT_FIXTURE,
+            aliased_output,
+            environment={"TMPDIR": str(aliased_root), "TMP": str(aliased_root), "TEMP": str(aliased_root)},
+        )
+        if aliased.returncode == 0 or aliased_output.exists():
+            fail("generator accepted an aliased temporary-root output")
+        if "aliased temporary root" not in aliased.stderr:
+            fail("aliased temporary-root rejection lost its policy classification")
+
+        identical_output = canonical_root / "src" / "generated.hpp"
+        identical = run_generator(
+            INPUT_FIXTURE,
+            identical_output,
+            environment={"TMPDIR": str(canonical_root), "TMP": str(canonical_root), "TEMP": str(canonical_root)},
+        )
+        if identical.returncode != 0:
+            fail("generator rejected an isolated identical-root output: " + identical.stderr.strip())
+        if identical_output.read_text(encoding="utf-8") != fixture_output:
+            fail("identical-root output does not match the checked-in fixture")
+
+        policy_input = canonical_root / "policy-input.json"
+        policy_input.write_text(read_required(INPUT_FIXTURE), encoding="utf-8")
+        real_dir = canonical_root / "real"
+        real_dir.mkdir()
+        alias_dir = canonical_root / "directory-alias"
+        alias_dir.symlink_to(real_dir, target_is_directory=True)
+        outside = temp_dir / "outside.hpp"
+        traversal = canonical_root / ".." / "traversal.hpp"
+        policy_cases = {
+            "repository": (REPO_ROOT / "src" / "generated.hpp", policy_input),
+            "git": (REPO_ROOT / ".git" / "generated.hpp", policy_input),
+            "outside_root": (outside, policy_input),
+            "relative": (Path("relative-generated.hpp"), policy_input),
+            "traversal": (traversal, policy_input),
+            "symlink_alias": (alias_dir / "generated.hpp", policy_input),
+            "candidate_view": (canonical_root / "candidate.view", policy_input),
+            "active_storage_view": (canonical_root / "active_storage.view", policy_input),
+            "runtime_config_view": (canonical_root / "RuntimeConfigView.hpp", policy_input),
+            "generated_baseline": (canonical_root / "GeneratedRuntimeConfigBaseline.hpp", policy_input),
+        }
+        for label, (target, input_path) in policy_cases.items():
+            completed = run_generator(
+                input_path,
+                target,
+                environment={"TMPDIR": str(canonical_root), "TMP": str(canonical_root), "TEMP": str(canonical_root)},
+            )
+            if completed.returncode == 0:
+                fail(f"generator accepted forbidden output-policy case: {label}")
+
+        # The generator CLI has no input-path parameter in its output-policy
+        # seam; assert the shared validator's input-overwrite invariant
+        # directly so the checker still guards that load-bearing rule without
+        # widening the authorized generator scope.
+        from source_owned_generator_modes import GeneratorModesError, validate_safe_output_path
+
+        try:
+            validate_safe_output_path(policy_input, input_path=policy_input, purpose="source-owned generator output")
+        except GeneratorModesError:
+            pass
+        else:
+            fail("shared output policy accepted input overwrite")
 
 
 def validate_docs() -> None:

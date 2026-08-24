@@ -1,13 +1,13 @@
 # Glyph Current State
 
-Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-VAL-004"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}<!-- current-runway:end -->
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}<!-- current-runway:end -->
 
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
 `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md` before proposing runtime-config
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
-**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-PROV-002` is DONE on live feature ref `9c94b5449b8065cb02aa0689ca0564720238b80c` after independent review and a fresh passing aggregate; `GP-VAL-004` is the separate Ready checker repair; runway remains one against target four (`RUNWAY_LOW`); `PLANNING_REQUIRED` is not current; `CUSTOM_RUNNER_NOT_REQUIRED`; current official-configurator validation lane: `tools/check_glyph_official_configurator_validation.py`; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
+**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-PROV-002` and `GP-VAL-004` are DONE after independent review and fresh passing aggregates; no immediate Ready work remains, and the partially consumed Planner packet retains successor candidates requiring Curator judgment, so effective runway is zero against target four (`CURATION_REQUIRED`); `PLANNING_REQUIRED` is not current while the packet retains those candidates; `CUSTOM_RUNNER_NOT_REQUIRED`; current official-configurator validation lane: `tools/check_glyph_official_configurator_validation.py`; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
 ## Current Known-Good State
 
 - `configurator` contains the latest Y2 layout source-owned port after the

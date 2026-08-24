@@ -55,17 +55,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "RUNWAY_LOW",
+    "CURATION_REQUIRED",
     "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
     "RUNWAY_SHORTFALL_RESEARCH_GATED",
     "RUNWAY_SHORTFALL_USER_DECISION_GATED",
@@ -82,7 +82,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-004",
       "title": "Make generator contract validation temp-root portable",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-004-generator-temp-root-portability-20260824",
       "objective": "Restore load-bearing generated-source contract validation on both aliased and canonical system-temporary-root hosts while preserving the shared isolated-output policy exactly.",
       "why_this_matters": "Live configurator fails its current runtime-config aggregate before unrelated GP-PROV-002 publication: the legacy generator-contract checker requires positive file writes on a host where the accepted shared policy deliberately rejects every aliased-root output, and its canonical-root path still expects an isolated temporary src/generated.hpp target to reject even though that target is neither repository source nor an active-publication-like name.",
@@ -125,7 +125,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker branch if either host lane loses meaningful semantic or output-policy coverage; do not relax the shared validator or hide a current aggregate failure.",
       "status_documentation_updates": "Record only the validation repair and GP-PROV-002 publication dependency; do not create a generator capability, runtime behavior, artifact acceptance, or hardware claim.",
-      "done_evidence": "Required future evidence: independent validation-policy review PASS; both temp-root lanes and full negative matrix PASS; deterministic generator semantics and fixture equality unchanged; current aggregate/framework/navigation PASS; exact implicated source-policy and product/runtime bytes unchanged; live feature and canonical integration verification.",
+      "done_evidence": "Implementation branch glyph/gp-val-004-generator-temp-root-portability-20260824 from live configurator dfc92adf2910532e24f429f61ea3c1fe7026425a; independent validation-policy review PASS; aliased and identical synthetic temp-root lanes, stdout semantic determinism, fixture equality, malformed-input corpus, exact negative output-policy matrix, generator modes, checker census, validation health, full current aggregate, agent-framework, docs-navigation, and docs-agent-surface checks PASS. Only tools/check_glyph_generated_source_owned_generator_contract.py and deterministic docs/runtime_config/fixtures/glyph_checker_census.json changed; shared output policy, generator semantics, active source/table bytes, firmware/runtime behavior, workflow, hardware, Nunchuk, and root-cause claims remain unchanged.",
       "stop_conditions": [
         "Any accepted/rejected output-policy decision is not already fixed by GP-SRC-003/005 authority.",
         "Any generator semantic, active/inert install, workflow, firmware/runtime, table, product, profile, source-authority, device-write, persistence, protobuf-write, flashing, hardware, Nunchuk, or root-cause scope appears.",
@@ -488,7 +488,7 @@ Git, but it is not current candidate supply or implementation authority.
         "GP-PROV-001, GP-VAL-002, and GP-VAL-003 are DONE and their observed-only non-claims, validation-before-publication gate, and complete tracked-route classification remain intact.",
         "Implementation starts from a fresh descendant of live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f and limits workflow mutation to the current build.yml route.",
         "The tracked glyph_nuker path and SHA-256 remain exact; a changed binary stops rather than being reclassified or accepted.",
-        "GP-VAL-004 is a separate Ready item and was not absorbed; GP-PROV-002 publication preserves its independent runway."
+        "GP-VAL-004 completed as a separate checker repair and was not absorbed into GP-PROV-002."
       ],
       "substantive_authorization_rationale": "The missing correspondence is directly observable and the accepted schema already fixes every sensitive claim: full source identity, exact observed final bytes, exact tracked postprocessor identity, and explicit UNKNOWN/null fields. Adding a pre-execution identity gate plus postprocessing sidecar generation and verification does not select a store, interpret the binary, change firmware inputs, or convert CI output into a hardware-accepted artifact.",
       "mechanical_activation_conditions": [],
@@ -1108,7 +1108,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-004"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1116,12 +1116,12 @@ Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
 `GP-SRC-003`, `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are DONE on
-validated implementation branches. `GP-SRC-005` is DONE. `GP-VAL-004` is
-Ready for the isolated generator-contract checker correction, and
-`GP-PROV-002` is legitimate unfinished implementation waiting on that repair
-before review and publication.
+validated implementation branches. `GP-SRC-005`, `GP-PROV-002`, and
+`GP-VAL-004` are DONE. No immediate Ready work remains; the partially
+consumed Planner packet retains successor candidates requiring Curator
+judgment.
 No recorded or invalidated Preauthorization and no hardware-pending work exist.
-Effective runway is one against a target of four (`RUNWAY_LOW`).
+Effective runway is zero against a target of four (`CURATION_REQUIRED`).
 `GP-AUTH-001` remains user/source-authority gated and
 `GP-CONFIG-002` remains external-evidence gated after its internal dependency
 completed; neither is a portfolio-global wait.
@@ -1185,15 +1185,12 @@ is a material failed-review event and must not merge. The packet is
 - `GP-CTL-002`: `SUBSTANTIVE_DEPENDENCY_GATED`; false Done publication is
   proven, but migration and exact replay/equivalence representation remain
   insufficiently bound for Ready.
-- `GP-VAL-004`: `READY`; correct only the stale generator-contract checker
+- `GP-VAL-004`: `DONE`; corrected only the stale generator-contract checker
   assumptions for aliased versus identical system temporary roots, preserving
   the shared output validator and every generator/product semantic exactly.
-- `GP-PROV-002`: `IN_PROGRESS`; the bounded `build.yml` sidecar implementation
-  exists locally on a clean authorized branch but is not live-published and
-  must wait for canonical `GP-VAL-004` completion plus a fresh passing
-  aggregate before review/publication resumes. Storage, acceptance,
-  postprocessor semantics, and hardware remain explicitly unresolved and
-  excluded.
+- `GP-PROV-002`: `DONE` on its live feature ref after independent review and
+  fresh aggregate validation; storage, acceptance, postprocessor semantics,
+  and hardware remain explicitly unresolved and excluded.
 - `GP-PROV-003`: `RESEARCH`; exact static inventory/schema boundary remains
   unresolved and no network resolution or reproducibility claim is allowed.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
@@ -1231,9 +1228,9 @@ is a material failed-review event and must not merge. The packet is
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` in the machine-readable block
-authorize immediate execution. `GP-VAL-004` is the only Ready item;
-`GP-PROV-002` is DONE on its live feature ref; `GP-VAL-004` remains the only
-Ready item and is a separate checker repair.
+authorize immediate execution. No immediate Ready item remains; `GP-VAL-004`
+and `GP-PROV-002` are DONE, while remaining successor candidates require
+Curator judgment.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
