@@ -43,7 +43,7 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-CTL-002 remains substantive-dependency gated, GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated; no global wait is proposed or supported.",
       "GP-SRC-005 completed at a04e995c1fadc1f8d403c88cea147fb8f99f8939 with shared isolated-output and atomic-write enforcement; no active source/table/runtime behavior changed.",
       "Live configurator d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e fails the load-bearing generated-source contract checker on macOS because its legacy positive file-output cases contradict the canonically accepted aliased-temporary-root rejection, and an identical-root reproduction exposes a second stale expectation that isolated temporary src/generated.hpp must reject. GP-VAL-004 was independently bounded as checker/test correction only; shared output policy and generator/product semantics must not change.",
-      "GP-PROV-002 has clean local implementation commits a09ba09d35621b3742ee37f961c012f542ce64c0 and 3810732a0daa3d4c771d205da5b76d8f7a63dbf4 on its authorized branch, but no live remote feature ref or canonical completion publication exists. It remains legitimate unfinished implementation and publication waits for GP-VAL-004 plus fresh aggregate validation."
+      "GP-PROV-002 completed on live feature ref 9c94b5449b8065cb02aa0689ca0564720238b80c after independent repaired-scope review, fresh aggregate validation, and exact live feature-ref verification; canonical completion publication follows on this control-plane snapshot."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-2349",
@@ -471,7 +471,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-002",
       "title": "Emit observed-only CI artifact sidecar",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "branch": "glyph/gp-prov-002-observed-ci-sidecar-20260824",
       "objective": "Make the canonically gated build.yml artifact route emit and verify a sidecar carrying the full source Git identity and exact final postprocessed artifact identity.",
       "why_this_matters": "The current route uploads a postprocessed UF2 named with only a short SHA and no full candidate SHA, final size/SHA-256, or postprocessor identity sidecar, so consumers cannot establish even bounded observed correspondence from the uploaded directory.",
@@ -488,7 +488,7 @@ Git, but it is not current candidate supply or implementation authority.
         "GP-PROV-001, GP-VAL-002, and GP-VAL-003 are DONE and their observed-only non-claims, validation-before-publication gate, and complete tracked-route classification remain intact.",
         "Implementation starts from a fresh descendant of live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f and limits workflow mutation to the current build.yml route.",
         "The tracked glyph_nuker path and SHA-256 remain exact; a changed binary stops rather than being reclassified or accepted.",
-        "GP-VAL-004 must be canonically DONE and a fresh full runtime-config aggregate must pass before GP-PROV-002 review or publication resumes; GP-PROV-002 may not absorb that unrelated checker repair."
+        "GP-VAL-004 is a separate Ready item and was not absorbed; GP-PROV-002 publication preserves its independent runway."
       ],
       "substantive_authorization_rationale": "The missing correspondence is directly observable and the accepted schema already fixes every sensitive claim: full source identity, exact observed final bytes, exact tracked postprocessor identity, and explicit UNKNOWN/null fields. Adding a pre-execution identity gate plus postprocessing sidecar generation and verification does not select a store, interpret the binary, change firmware inputs, or convert CI output into a hardware-accepted artifact.",
       "mechanical_activation_conditions": [],
@@ -514,7 +514,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused workflow/provenance branch if valid current artifacts cannot produce a deterministic verified observed-only sidecar; do not bypass failed identity or sidecar checks and do not infer missing provenance.",
       "status_documentation_updates": "Document the bounded build.yml observed-only sidecar and retain explicit non-claims for immutable storage, artifact acceptance, reproducibility, postprocessor purpose/effect, hardware, and every unresolved external route.",
-      "done_evidence": "Unfinished local implementation exists at a09ba09d35621b3742ee37f961c012f542ce64c0 plus documentation clarification 3810732a0daa3d4c771d205da5b76d8f7a63dbf4 on a clean descendant of live configurator d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e. The feature ref is not live and no completion is published. Focused provenance/workflow checks pass, but the full aggregate exposes the unrelated canonical GP-VAL-004 generator-checker failure. Required future evidence remains independent CI/provenance review PASS; complete synthetic sidecar and static ordering/tamper corpus; exact build.yml route diff; tracked postprocessor and firmware/build-input bytes unchanged; fresh current aggregate/framework/navigation PASS after GP-VAL-004; live feature and canonical integration verification.",
+      "done_evidence": "Implementation commits a09ba09d35621b3742ee37f961c012f542ce64c0, 3810732a0daa3d4c771d205da5b76d8f7a63dbf4, and repaired completion commit 9c94b5449b8065cb02aa0689ca0564720238b80c on live feature ref glyph/gp-prov-002-observed-ci-sidecar-20260824; independent review PASS; exact sidecar schema, SHA/postprocessor identity, upload-directory containment, ordering/tamper/write-verify corpus, validation-health counts, workflow hash parity, checker census, full current aggregate, agent-framework, docs-navigation, and docs-agent-surface checks PASS. No firmware/build input, glyph_nuker bytes, build-device-config.yml, upload execution, artifact acceptance, storage, hardware, device, or runtime behavior changed or claimed.",
       "stop_conditions": [
         "The tracked postprocessor identity differs or its purpose/effect must be interpreted.",
         "A durable locator, store, retention, caller, owner, release, reproducibility, artifact-acceptance, or hardware decision is required.",
@@ -1232,8 +1232,8 @@ is a material failed-review event and must not merge. The packet is
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` in the machine-readable block
 authorize immediate execution. `GP-VAL-004` is the only Ready item;
-`GP-PROV-002` is unfinished recovery/publication work and must not absorb that
-separate repair.
+`GP-PROV-002` is DONE on its live feature ref; `GP-VAL-004` remains the only
+Ready item and is a separate checker repair.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive

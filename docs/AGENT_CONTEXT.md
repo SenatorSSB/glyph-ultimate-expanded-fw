@@ -77,9 +77,9 @@ automation from this context document.
   are DONE;
   `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening.
   `GP-VAL-004` is Ready for a bounded checker-only repair of aliased versus
-  identical system-temporary-root validation. `GP-PROV-002` has clean local
-  implementation commits but is not live-published and waits on that repair
-  plus a fresh passing aggregate before review/publication. The current-runway marker above is
+  identical system-temporary-root validation. `GP-PROV-002` is DONE on live
+  feature ref `9c94b5449b8065cb02aa0689ca0564720238b80c` after independent
+  review and a fresh passing aggregate. The current-runway marker above is
   authoritative; effective runway is one against target four (`RUNWAY_LOW`).
   `GP-AUTH-001` remains user/source-authority gated and
   `GP-CONFIG-002` remains external-evidence gated after its internal dependency
