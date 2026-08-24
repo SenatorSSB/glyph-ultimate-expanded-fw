@@ -1,5 +1,32 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "all_tracked_routes_gated": false,
+  "workflow_census": [
+    {
+      "path": ".github/workflows/build-device-config.yml",
+      "sha256": "abf612c3f27e9884ad600b1c1b3cd1a864fae45c22c24aa7b2508c8ad98df5a5",
+      "events": ["workflow_call"],
+      "classification": "UNRESOLVED_EXTERNAL",
+      "gate": null,
+      "publication_routes": [
+        {"job": "build", "mechanism": "action", "token": "actions/upload-artifact@v4"},
+        {"job": "build", "mechanism": "action", "token": "softprops/action-gh-release@v1"},
+        {"job": "build", "mechanism": "shell", "token": "pio run -e"}
+      ]
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "sha256": "3fbc0502d85e16ddd006bb46db0462dbbb217667899c150e18f1c75bc24459a1",
+      "events": ["push", "pull_request"],
+      "classification": "CURRENT_GATED",
+      "gate": "validation",
+      "publication_routes": [
+        {"job": "build", "mechanism": "action", "token": "actions/upload-artifact@v4"},
+        {"job": "build", "mechanism": "shell", "token": "glyph_nuker"},
+        {"job": "build", "mechanism": "shell", "token": "pio run -e"}
+      ]
+    }
+  ],
   "workflow": ".github/workflows/build.yml",
   "validation_job": "validation",
   "publication_job": "build",

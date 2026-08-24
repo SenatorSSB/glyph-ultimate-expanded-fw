@@ -40,9 +40,13 @@ Commands that can prepare, install, or emit a candidate are classified unsafe
 for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 26 explicit entries, including 21 current
-load-bearing checks. The prepared-v2 C++ preview checker is current and
-load-bearing because it validates the inactive authority-preserving preview
+The curated manifest now has 27 explicit entries, including 22 current
+load-bearing checks. The tracked CI publication-route census records both
+workflow files: `build.yml` is `CURRENT_GATED`, while
+`build-device-config.yml` is `UNRESOLVED_EXTERNAL` because its caller,
+ownership, PAT, `meta.yaml`, and release authority are not established. The
+prepared-v2 C++ preview checker is current and load-bearing because it
+validates the inactive authority-preserving preview
 seam; it does not install source, create a candidate, or change firmware
 behavior. The added behavior evaluator remains superseded historical evidence
 because its May-28 behavior-case dependency is historical; it is not a current

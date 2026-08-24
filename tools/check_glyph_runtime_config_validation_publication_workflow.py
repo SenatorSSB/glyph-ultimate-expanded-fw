@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,9 +19,76 @@ class WorkflowError(ValueError):
 
 def load_fixture() -> dict[str, object]:
     value = json.loads(FIXTURE.read_text(encoding="utf-8"))
-    if not isinstance(value, dict) or value.get("schema_version") != 1:
+    if not isinstance(value, dict) or value.get("schema_version") != 2:
         raise WorkflowError("invalid workflow fixture")
     return value
+
+
+def tracked_workflows() -> list[str]:
+    completed = subprocess.run(
+        ["git", "ls-files", ".github/workflows"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode:
+        raise WorkflowError("could not discover tracked workflow files")
+    return sorted(
+        path for path in completed.stdout.splitlines()
+        if path.endswith((".yml", ".yaml"))
+    )
+
+
+def publication_routes(text: str) -> list[dict[str, str]]:
+    routes: list[dict[str, str]] = []
+    for job, body in job_blocks(text).items():
+        if "pio run -e" in body:
+            routes.append({"job": job, "mechanism": "shell", "token": "pio run -e"})
+        if "glyph_nuker" in body:
+            routes.append({"job": job, "mechanism": "shell", "token": "glyph_nuker"})
+        for action in re.findall(r"(?m)^\s*(?:-\s*)?uses:\s*([^\s]+)", body):
+            if "upload-artifact" in action or "action-gh-release" in action:
+                routes.append({"job": job, "mechanism": "action", "token": action})
+    return sorted(routes, key=lambda item: (item["job"], item["mechanism"], item["token"]))
+
+
+def validate_route_census(fixture: dict[str, object]) -> None:
+    census = fixture.get("workflow_census")
+    if not isinstance(census, list) or not census:
+        raise WorkflowError("workflow census is empty")
+    expected_paths = sorted(str(item["path"]) for item in census)
+    if tracked_workflows() != expected_paths:
+        raise WorkflowError("tracked workflow inventory differs from census")
+    for item in census:
+        if not isinstance(item, dict):
+            raise WorkflowError("invalid workflow census entry")
+        relative = str(item["path"])
+        path = ROOT / relative
+        if not path.is_file():
+            raise WorkflowError(f"missing censused workflow: {relative}")
+        raw = path.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != item["sha256"]:
+            raise WorkflowError(f"workflow hash drift: {relative}")
+        text = raw.decode("utf-8")
+        events = [
+            event for event in ("push", "pull_request", "workflow_call")
+            if re.search(rf"(?m)^\s*{event}:\s*$", text)
+        ]
+        if events != item["events"]:
+            raise WorkflowError(f"workflow trigger drift: {relative}")
+        if publication_routes(text) != item["publication_routes"]:
+            raise WorkflowError(f"publication route drift: {relative}")
+        if item["classification"] not in {"CURRENT_GATED", "UNRESOLVED_EXTERNAL"}:
+            raise WorkflowError(f"invalid workflow classification: {relative}")
+        if item["classification"] == "CURRENT_GATED" and item["gate"] != "validation":
+            raise WorkflowError("current workflow is not gated by validation")
+        if item["classification"] == "UNRESOLVED_EXTERNAL" and item["gate"] is not None:
+            raise WorkflowError("unresolved external workflow has a fabricated gate")
+    if not any(item["classification"] == "UNRESOLVED_EXTERNAL" for item in census):
+        raise WorkflowError("unresolved external route was not retained")
+    if fixture.get("all_tracked_routes_gated") is not False:
+        raise WorkflowError("all-routes-gated claim must remain false")
 
 
 def job_blocks(text: str) -> dict[str, str]:
@@ -60,6 +129,7 @@ def validate(text: str, fixture: dict[str, object]) -> None:
 def main() -> int:
     try:
         fixture = load_fixture()
+        validate_route_census(fixture)
         workflow = WORKFLOW.read_text(encoding="utf-8")
         validate(workflow, fixture)
         cases = []
