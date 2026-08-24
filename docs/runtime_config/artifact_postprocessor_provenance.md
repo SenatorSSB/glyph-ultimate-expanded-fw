@@ -6,8 +6,10 @@ This packet records only static facts visible in the current repository. The
 CI workflow builds `firmware.uf2`, copies it to a short-SHA-named path such as
 `glyph_mk6/Glyph-<short-sha>.uf2`, moves the tracked `glyph_nuker` executable
 next to that file, invokes it on the UF2, and uploads the directory as the
-`Glyph_FW` artifact. The workflow does not record a full candidate Git SHA,
-final artifact SHA-256, or an immutable candidate/artifact-addressed locator.
+`Glyph_FW` artifact. Before the bounded observed-only sidecar integration, the
+workflow did not record a full candidate Git SHA, final artifact SHA-256, or an
+immutable candidate/artifact-addressed locator. The current sidecar records the
+first two for observed correspondence; it still does not establish the third.
 
 The tracked `glyph_nuker` file is an x86-64 statically linked stripped ELF with
 SHA-256
@@ -17,7 +19,7 @@ the bytes it changes, whether it is reproducible, or whether it is safe to
 use for hardware acceptance. Those fields remain `UNKNOWN`; this cycle does
 not execute it or inspect a real pre/postprocessed UF2.
 
-## Inert sidecar contract
+## Observed-only sidecar contract
 
 `docs/runtime_config/fixtures/artifact_postprocessor_provenance.json` defines
 the synthetic-only sidecar shape. A complete record carries:
