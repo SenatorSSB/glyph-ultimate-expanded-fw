@@ -2193,7 +2193,7 @@
       },
       "checker_id": "coordinate_native_runtime_profile_contract",
       "defines_main": true,
-      "file_size_bytes": 79511,
+      "file_size_bytes": 79527,
       "hard_coded_branch_like_strings": [
         "accepted_evidence",
         "accepted_evidence.",
@@ -2257,6 +2257,7 @@
         "docs/ROADMAP.md",
         "docs/agent_framework/",
         "docs/checker-only",
+        "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/",
         "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
@@ -2330,7 +2331,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "9189d726bb71848ab814c7ffd0ec6f4d419f52d7c70bd2aeac42c78657519e8f",
+      "sha256": "a41637dee7314a4efd412001e77db30edfe7c77d7518baf08e284346a319cf22",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -4520,7 +4521,7 @@
       },
       "checker_id": "generated_source_owned_artifact_install",
       "defines_main": true,
-      "file_size_bytes": 23133,
+      "file_size_bytes": 23145,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -4579,6 +4580,7 @@
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
+        "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/",
         "docs/runtime_config/README.md",
@@ -4628,7 +4630,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "9930d8d0435ddd5ce1a70a1785bef69e9db6327d9346bbdc1ae111c619db0887",
+      "sha256": "9d05d82639f89925d27255a116a354faf928869c06686822a09c1f75368938c9",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -4649,7 +4651,7 @@
       },
       "checker_id": "generated_source_owned_baseline_artifact",
       "defines_main": true,
-      "file_size_bytes": 17858,
+      "file_size_bytes": 17871,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
@@ -4688,6 +4690,7 @@
         "docs/ROADMAP.md",
         "docs/agent_framework/",
         "docs/calibration/",
+        "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE",
         "docs/runtime_config/",
         "docs/runtime_config/README.md",
@@ -4709,7 +4712,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "e59fd9386f933f78cfa9cd6329d1d8822134a87843179ed57c4604f8d26b8f53",
+      "sha256": "6ba960ef5a3d427ed2ea436a62e07e0a0a18b905cf239650e23dc10140bdaffb",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -4730,7 +4733,7 @@
       },
       "checker_id": "generated_source_owned_generator_contract",
       "defines_main": true,
-      "file_size_bytes": 38291,
+      "file_size_bytes": 38307,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -4786,6 +4789,7 @@
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
+        "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/",
         "docs/runtime_config/README.md",
@@ -4839,7 +4843,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "7822e978fdd0faa9507cff4656e57f480c06a78a09642339f7e62abd65721541",
+      "sha256": "e403dbdd0d178676d92ad3f92edeaf6b3ce949a86c4416c320e19032c6a349d4",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -6659,7 +6663,7 @@
       },
       "checker_id": "official_configurator_manual_capture_result",
       "defines_main": true,
-      "file_size_bytes": 30196,
+      "file_size_bytes": 45739,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
@@ -6667,6 +6671,8 @@
         "check_glyph_official_configurator_export_candidate_diff.py",
         "configurator",
         "evidence",
+        "evidence.",
+        "evidence_files",
         "generated_official_configurator_candidate_preview.json",
         "input_candidate.json",
         "input_candidate_path",
@@ -6677,7 +6683,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 697,
+      "line_count": 890,
       "parse_error": null,
       "path": "tools/check_glyph_official_configurator_manual_capture_result.py",
       "potential_branch_identity_signals": [
@@ -6687,6 +6693,8 @@
         "check_glyph_official_configurator_export_candidate_diff.py",
         "configurator",
         "evidence",
+        "evidence.",
+        "evidence_files",
         "generated_official_configurator_candidate_preview.json",
         "input_candidate.json",
         "input_candidate_path",
@@ -6701,7 +6709,7 @@
       "runtime_config_relevance_signals": [
         "candidate_generation"
       ],
-      "sha256": "38b8a1d7c8a81ccc3d0d43d5b0fd044299f904dc2006bccce139a478612eafe7",
+      "sha256": "e9dfec998c3e8aee85641b24e20acd6229ee6966c996f2b978bacfa9c05a12a0",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": true,

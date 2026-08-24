@@ -51,6 +51,14 @@ proceed with a capture attempt or result artifact creation.
 8. Run the future result checker only after artifacts exist.
 9. Add reviewer notes and row-level outcome flags for capture path + diff check.
 
+Reviewed metadata is schema version 2. Use exactly one row for import, export,
+and capture-local diff. Record `PASS`, `FAIL`, `NOT_TESTED`, or `INCONCLUSIVE`
+for each row, with `pass` true only for `PASS`; use the exact overall matrix
+and gap rules in the artifact-layout contract. For an output capture, store a
+capture-local `comparison.json` binding the input/output hashes and diff-row
+status. For a rejection, omit comparison.json and bind the rejection-note
+hash instead.
+
 ## Required Operator Fields
 
 - official configurator app/version

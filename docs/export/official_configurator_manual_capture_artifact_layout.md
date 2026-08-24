@@ -23,11 +23,22 @@ docs/export/manual_captures/
     hashes.txt
     notes.md
     result.md
+    comparison.json (required only when the diff row executes)
     optional_screenshot_or_log_notes.md
     .DS_Store (optional operating-system metadata; ignored only as a regular file)
 
 Template used for each capture row:
 - `docs/export/fixtures/official_configurator_manual_capture_metadata_TEMPLATE.json`
+
+Reviewed packets use strict metadata schema version 2. The overall `status`
+and `result_status` must agree and use `PASS`, `FAIL`, `PARTIAL`, or
+`INCONCLUSIVE`. Exactly one row is required for import, export, and the
+capture-local structural diff; a row is `pass: true` exactly when its status
+is `PASS`. `hashes.txt` enumerates every other regular evidence file exactly.
+An accepted output requires `comparison.json`, whose capture ID, input/output
+hashes, checker identity/version, structural diff object, and status are bound
+to the metadata and diff row. A rejection has no comparison and records the
+rejection-note hash instead.
 ```
 
 The folder name must use the pattern:

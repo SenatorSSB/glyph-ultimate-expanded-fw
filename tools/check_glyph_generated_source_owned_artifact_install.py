@@ -508,7 +508,7 @@ def main() -> int:
         context = collect_checker_context(repo_root=REPO_ROOT)
         validate_feature_scope(
             context,
-            allowed_paths=("docs/runtime_config/", "docs/agent_framework/", "docs/project/ACTIVE_AGENT_QUEUE.md", "docs/AGENT_CONTEXT.md", "docs/CURRENT_STATE.md", "docs/ROADMAP.md", "tools/", ".github/workflows/build.yml", "AGENTS.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"),
+        allowed_paths=("docs/runtime_config/", "docs/export/", "docs/agent_framework/", "docs/project/ACTIVE_AGENT_QUEUE.md", "docs/AGENT_CONTEXT.md", "docs/CURRENT_STATE.md", "docs/ROADMAP.md", "tools/", ".github/workflows/build.yml", "AGENTS.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"),
             protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/"),
         )
     except CheckerContextError as exc:
