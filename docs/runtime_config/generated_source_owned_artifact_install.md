@@ -67,6 +67,11 @@ The installed inert source artifact must contain these markers:
 - `inert generated-table placeholder`
 - `not wired into runtime selection`
 
+The generic generator and coordinate-native bridge outputs are restricted to
+absolute isolated temporary paths and are written through the shared atomic
+writer. The explicit install mode accepts only the exact inert example path;
+the active baseline, repository files, aliases, and symlinks are rejected.
+
 The checker regenerates the example output from
 `docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`
 and compares it to the installed inert source artifact. The installed artifact

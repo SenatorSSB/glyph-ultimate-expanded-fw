@@ -455,6 +455,11 @@ def validate_safe_output_path(target: Path, *, input_path: Path | None = None, p
 
 def _atomic_write_text(target: Path, text: str, *, purpose: str) -> None:
     target = validate_safe_output_path(target, purpose=purpose)
+    _atomic_replace_validated_text(target, text, purpose=purpose)
+
+
+def _atomic_replace_validated_text(target: Path, text: str, *, purpose: str) -> None:
+    """Atomically replace a target whose policy was validated by the caller."""
     target.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=f".{target.name}.", dir=str(target.parent), text=True)
     try:

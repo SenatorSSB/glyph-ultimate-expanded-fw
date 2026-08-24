@@ -593,9 +593,9 @@ def convert_profile_file(profile_path: Path, output_path: Path | None = None) ->
     layout_spec = convert_profile(profile, label=display_path(normalized_profile_path))
     text = json.dumps(layout_spec, indent=2) + "\n"
     if output_path is not None:
-        normalized_output_path = output_path if output_path.is_absolute() else (REPO_ROOT / output_path)
-        normalized_output_path.parent.mkdir(parents=True, exist_ok=True)
-        normalized_output_path.write_text(text, encoding="utf-8")
+        from source_owned_generator_modes import _atomic_write_text
+
+        _atomic_write_text(output_path, text, purpose="coordinate-native bridge output")
     return text
 
 

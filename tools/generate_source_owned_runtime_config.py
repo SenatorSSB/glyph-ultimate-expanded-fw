@@ -14,6 +14,7 @@ runtime selection by this generator.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -545,9 +546,11 @@ def parse_source_baseline_table_order(text: str) -> list[str]:
 
 
 def assert_safe_output_path(output_path: Path) -> None:
-    parts = set(output_path.parts)
-    if parts & FORBIDDEN_OUTPUT_PATH_PARTS:
-        fail("output path must not be under active source, HAL, or backend paths")
+    if not output_path.is_absolute():
+        fail("output path must be an absolute isolated temporary path")
+    from source_owned_generator_modes import validate_offline_output_target
+
+    validate_offline_output_target(output_path, purpose="source-owned generator output")
 
 
 def normalize_repo_path(path: Path) -> Path:
@@ -557,19 +560,10 @@ def normalize_repo_path(path: Path) -> Path:
 
 
 def assert_inert_source_install_path(output_path: Path) -> None:
-    resolved = normalize_repo_path(output_path)
-    if resolved == ACTIVE_TABLE_SOURCE_PATH.resolve():
-        fail(
-            "active table-content source is not writable through the generic "
-            "generator/install path; use a separately authorized candidate workflow"
-        )
-    allowed_root = INERT_SOURCE_INSTALL_DIR.resolve()
-    try:
-        resolved.relative_to(allowed_root)
-    except ValueError:
-        fail("install output path must be under src/modes/runtime_config/generated_source_owned")
-    if resolved.suffix not in {".h", ".hpp", ".hh", ".cc", ".cpp"}:
-        fail("install output path must be a C++ source/header artifact")
+    expected = REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
+    normalized = Path(os.path.abspath(os.fspath(output_path)))
+    if normalized != Path(os.path.abspath(os.fspath(expected))):
+        fail("install output path must be the exact inert example artifact")
 
 
 def generate(
@@ -583,11 +577,15 @@ def generate(
     if output_path is not None:
         if allow_inert_source_install:
             assert_inert_source_install_path(output_path)
+            normalized_output_path = Path(os.path.abspath(os.fspath(output_path)))
+            from source_owned_generator_modes import _atomic_replace_validated_text
+
+            _atomic_replace_validated_text(normalized_output_path, output, purpose="inert source artifact install")
         else:
             assert_safe_output_path(output_path)
-        normalized_output_path = normalize_repo_path(output_path)
-        normalized_output_path.parent.mkdir(parents=True, exist_ok=True)
-        normalized_output_path.write_text(output, encoding="utf-8")
+            from source_owned_generator_modes import _atomic_write_text
+
+            _atomic_write_text(output_path, output, purpose="source-owned generator output")
     return output
 
 
@@ -601,9 +599,9 @@ def generate_from_layout_spec(
     output = emit_cpp_header(contract)
     if output_path is not None:
         assert_safe_output_path(output_path)
-        normalized_output_path = normalize_repo_path(output_path)
-        normalized_output_path.parent.mkdir(parents=True, exist_ok=True)
-        normalized_output_path.write_text(output, encoding="utf-8")
+        from source_owned_generator_modes import _atomic_write_text
+
+        _atomic_write_text(output_path, output, purpose="source-owned layout-spec output")
     return output
 
 

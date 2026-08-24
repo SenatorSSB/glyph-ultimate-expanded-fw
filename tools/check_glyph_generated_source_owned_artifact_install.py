@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import tempfile
@@ -489,6 +490,79 @@ def validate_bridge_install_workflow(installed_artifacts: list[str]) -> None:
             fail("bridge workflow output must match the installed inert source artifact")
 
 
+def validate_remaining_writer_boundaries() -> None:
+    """Exercise the two legacy writers through the shared output policy."""
+    with tempfile.TemporaryDirectory() as temp_name:
+        safe_output = Path(temp_name) / "safe-output.json"
+        generator = subprocess.run(
+            ["python3", str(GENERATOR), str(INPUT_FIXTURE), str(safe_output)],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        aliased_temp_root = Path(os.path.abspath(tempfile.gettempdir())) != Path(tempfile.gettempdir()).resolve()
+        if aliased_temp_root:
+            if generator.returncode == 0 or safe_output.exists():
+                fail("legacy generator accepted an aliased temporary-root output")
+        elif generator.returncode != 0 or not safe_output.exists():
+            fail("legacy generator did not write a safe isolated output")
+
+        for rejected in (REPO_ROOT / "AGENTS.md", REPO_ROOT / ".git/config"):
+            result = subprocess.run(
+                ["python3", str(GENERATOR), str(INPUT_FIXTURE), str(rejected)],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if result.returncode == 0:
+                fail(f"legacy generator accepted forbidden output target {rejected}")
+
+        bridge_output = Path(temp_name) / "bridge-output.json"
+        bridge = subprocess.run(
+            [
+                "python3",
+                str(BRIDGE_CONVERTER),
+                "--profile",
+                str(BRIDGE_PROFILE_FIXTURE),
+                "--output",
+                str(bridge_output),
+            ],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if aliased_temp_root:
+            if bridge.returncode == 0 or bridge_output.exists():
+                fail("coordinate-native bridge accepted an aliased temporary-root output")
+        elif bridge.returncode != 0 or not bridge_output.exists():
+            fail("coordinate-native bridge did not write a safe isolated output")
+        for rejected in (REPO_ROOT / "AGENTS.md", REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"):
+            result = subprocess.run(
+                [
+                    "python3",
+                    str(BRIDGE_CONVERTER),
+                    "--profile",
+                    str(BRIDGE_PROFILE_FIXTURE),
+                    "--output",
+                    str(rejected),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if result.returncode == 0:
+                fail(f"coordinate-native bridge accepted forbidden output target {rejected}")
+
+    shared_source = (REPO_ROOT / "tools/source_owned_generator_modes.py").read_text(encoding="utf-8")
+    legacy_source = (REPO_ROOT / "tools/generate_source_owned_runtime_config.py").read_text(encoding="utf-8")
+    if shared_source.count("_atomic_replace_validated_text(") != 2 or legacy_source.count("_atomic_replace_validated_text") != 2:
+        fail("shared low-level atomic helper must have only the shared writer and exact inert-install call sites")
+
+
 def validate_docs() -> None:
     install_doc = read_required(INSTALL_DOC)
     readme = read_required(README)
@@ -518,6 +592,7 @@ def main() -> int:
     installed_artifacts = validate_fixture(fixture)
     validate_deterministic_generation(installed_artifacts)
     validate_bridge_install_workflow(installed_artifacts)
+    validate_remaining_writer_boundaries()
     validate_docs()
     print("glyph_generated_source_owned_artifact_install: PASS")
     print(f"- branch: {branch}")

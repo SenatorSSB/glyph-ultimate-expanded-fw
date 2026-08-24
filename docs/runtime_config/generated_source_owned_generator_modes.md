@@ -16,6 +16,13 @@ The generator never edits `src/**`, builds firmware, flashes hardware, or
 selects a runtime view. Installation is separate and atomic; dry-run reports
 the exact intended output without mutation.
 
+Generic file outputs are restricted to absolute, isolated system-temporary
+paths and use the shared canonical-resolution, alias, symlink, overwrite, and
+atomic-write policy. Standard output remains non-mutating. The only source
+install exception is the exact inert
+`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`
+path; active baseline and all aliases remain rejected.
+
 ## Modes
 
 * `full_replacement` requires all 28 tables. Missing or unknown tables fail;
