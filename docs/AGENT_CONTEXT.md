@@ -64,7 +64,7 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-004","GP-CONFIG-004","GP-VAL-003"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-004","GP-VAL-003"],"immediate_ready":2,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
@@ -73,10 +73,10 @@ automation from this context document.
   `GP-SRC-003` is Ready only under prepared schema v2 with carried normalized
   input and deterministic artifact/manifest regeneration; pushed tip
   `2b734b26439e9028717becf0010e345cb5efce6c` failed independent review and must
-  not merge. `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are also Ready.
+  not merge. `GP-SRC-004` is DONE; `GP-CONFIG-004` and `GP-VAL-003` remain Ready.
   `GP-SRC-005` is recorded Preauthorized but WAITING and is not effective
-  runway. The current-runway marker above is authoritative; runway meets the
-  target at four. `GP-AUTH-001` remains user/source-authority gated and
+  runway. The current-runway marker above is authoritative; effective runway is
+  two against target four. `GP-AUTH-001` remains user/source-authority gated and
   `GP-CONFIG-002` remains dependent then external-evidence gated; this is not a
   global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a

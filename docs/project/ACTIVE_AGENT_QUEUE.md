@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "6dec5016b486f093a492626aaec3057bf3309274",
+  "audit_base_sha": "efda608f9f2af61a44a96f1e5866f2ae57dcc688",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -35,7 +35,8 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-SRC-004, GP-CONFIG-004, and GP-VAL-003 were independently reproduced and authorized Ready; GP-SRC-005 was recorded Preauthorized but WAITING on canonical GP-SRC-003 integration.",
       "GP-CTL-002 remains substantive-design gated on migration and exact-equivalence representation; GP-PROV-002 remains reviewed surplus candidate supply, GP-PROV-003 remains research, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains dependent then external-evidence gated.",
       "No global evidence wait is proposed or supported; runtime/configurator product code and active table bytes were unchanged by curation.",
-      "GP-SRC-003 v2 recovery implementation and independent repaired-scope review passed on the fresh descendant of live configurator 6dec5016b486f093a492626aaec3057bf3309274; no active source, table bytes, firmware behavior, or hardware artifact changed."
+      "GP-SRC-003 v2 recovery implementation and independent repaired-scope review passed on the fresh descendant of live configurator 6dec5016b486f093a492626aaec3057bf3309274; no active source, table bytes, firmware behavior, or hardware artifact changed.",
+      "GP-SRC-004 completed at efda608f9f2af61a44a96f1e5866f2ae57dcc688 after independent classification review, fallback glyph_mk6 build, full current validation, and live feature-ref verification; no active table bytes or RuntimeConfigView publication changed."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260823-2349",
@@ -47,12 +48,12 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -138,7 +139,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-004",
       "title": "Make active baseline classification machine-true",
-      "status": "READY",
+      "status": "DONE",
       "branch": "runtime-config-active-baseline-classification-truth",
       "objective": "Replace machine-enforced inert claims on the active generated baseline header with exact active-table-content and unchanged-publication classification.",
       "why_this_matters": "The compiled source include chain consumes all 28 table arrays from GeneratedRuntimeConfigBaseline.current.hpp, while that header, its fixture, and its current checker still require the contradictory claims 'inert generated-table placeholder' and 'not wired into runtime selection'.",
@@ -152,7 +153,7 @@ Git, but it is not current candidate supply or implementation authority.
         "build tooling",
         "docs/checkers"
       ],
-      "source_authority": "On live configurator 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, src/modes/UltimateIdentityRuntimeTables.hpp directly includes src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp and materializes its 28 arrays, while the header and tools/check_glyph_generated_source_owned_baseline_artifact.py require inert/not-wired markers. docs/CURRENT_STATE.md and docs/runtime_config/generated_source_owned_baseline_artifact.md already classify the header as active compile-time table content and distinguish it from unchanged source-owned active-view publication. Fresh Planner candidate GP-SRC-004 records the same contradiction.",
+      "source_authority": "On live configurator 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, src/modes/UltimateIdentityRuntimeTables.hpp directly includes src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp and materializes its 28 arrays, while the header and tools/check_glyph_generated_source_owned_baseline_artifact.py require inert/not-wired markers. docs/CURRENT_STATE.md and docs/runtime_config/generated_source_owned_baseline_artifact.md already classify the header as active compile-time table content and distinguish it from unchanged source-owned active-view publication. Fresh Planner candidate GP-SRC-004 records the same contradiction; the classification is now corrected without changing compiled table content or publication.",
       "dependencies_prerequisites": [
         "GP-SRC-001 is DONE and its active-table-source truth, mutation guardrails, and source-owned publication distinction remain authoritative.",
         "Implementation starts from a fresh descendant of 6b8ebcd404dcbfe9b579eed41fb35b889e9da598 and records before/after table, symbol, and active-publication evidence.",
@@ -182,7 +183,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused classification branch if compiled content or active-publication evidence drifts; retain the current source-owned baseline and do not restore a known-false inert claim as current truth.",
       "status_documentation_updates": "Reconcile current baseline docs, fixture, and checker language around active table-content inclusion versus unchanged source-owned active-view publication; make no new compatibility, profile, or hardware claim.",
-      "done_evidence": "Required future evidence: independent source-classification review PASS; exact 28-table/symbol/declaration digests unchanged; canonical build PASS; source-sync, current aggregate, and navigation PASS; live canonical integration proof; runtime product behavior changed: NO.",
+      "done_evidence": "Implementation commit efda608f9f2af61a44a96f1e5866f2ae57dcc688; independent source-classification review PASS; exact 28-table/symbol/declaration digests unchanged; canonical command unavailable, documented fallback build PASS; source-sync, current aggregate, and navigation PASS; live feature ref verified; runtime product behavior changed: NO.",
       "stop_conditions": [
         "Any compiled table value, symbol, declaration, routing, or active-view publication would change.",
         "Any production profile, source ownership, game semantic, or hardware interpretation is needed.",
@@ -971,18 +972,18 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-004","GP-CONFIG-004","GP-VAL-003"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-004","GP-VAL-003"],"immediate_ready":2,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Three Ready items are recorded: `GP-SRC-004`, `GP-CONFIG-004`, and
-`GP-VAL-003`; `GP-SRC-003` is DONE on the v2 recovery branch. `GP-SRC-005` is recorded
+Two Ready items are recorded: `GP-CONFIG-004` and `GP-VAL-003`; `GP-SRC-003`
+and `GP-SRC-004` are DONE on validated implementation branches. `GP-SRC-005` is recorded
 Preauthorized but WAITING and is not effective runway. No invalidated
 Preauthorization or hardware-pending work is recorded. Effective runway is
-three against a target of four (`RUNWAY_LOW`). `GP-AUTH-001` remains user/source-authority gated and
+two against a target of four (`RUNWAY_LOW`). `GP-AUTH-001` remains user/source-authority gated and
 `GP-CONFIG-002` remains dependent then external-evidence gated; neither is a
 portfolio-global wait.
 
@@ -1029,7 +1030,7 @@ is a material failed-review event and must not merge. The packet is
   artifact/manifest regeneration, shared isolated-output policy, independent
   repaired-scope review, and the current aggregate passed without active
   source/table/runtime changes.
-- `GP-SRC-004`: `READY`; correct false inert classification while preserving
+- `GP-SRC-004`: `DONE`; corrected active compile-time table-content classification while preserving
   all 28 table values/symbols and unchanged source-owned active-view
   publication; canonical build required if the compiled header changes.
 - `GP-CONFIG-004`: `READY`; fix the invalid reviewed-status parser and bind a
