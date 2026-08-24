@@ -48,17 +48,17 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "RUNWAY_LOW"
+    "CURATION_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -267,8 +267,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-003",
       "title": "Census every CI publication route and claim",
-      "status": "READY",
-      "branch": "ci-publication-route-census",
+      "status": "DONE",
+      "branch": "glyph/gp-val-003-ci-publication-route-census-20260824",
       "objective": "Make every tracked CI build, postprocess, artifact-upload, and release route explicitly discovered and classified before current validation claims complete publication gating.",
       "why_this_matters": "The current load-bearing publication checker inspects only .github/workflows/build.yml even though build-device-config.yml also builds, uploads artifacts, and can publish releases; current health prose also says 26 manifest entries and 21 load-bearing checks while machine state reports 27 and 22.",
       "hardware_risk": "H0",
@@ -309,7 +309,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused census/docs branch if it misses or misclassifies a tracked route; retain current build.yml gating and do not silence unresolved external routes.",
       "status_documentation_updates": "Publish the complete tracked-route census and bounded current claims, including explicit unresolved build-device-config ownership/caller state and machine-derived health counts.",
-      "done_evidence": "Required future evidence: independent CI-governance review PASS; complete positive/adversarial route census; exact workflow bytes unchanged; current aggregate/census/framework/navigation PASS; no build, upload, release, firmware, or product mutation.",
+      "done_evidence": "Implementation commit 4558efb5310de5ccb36bc3d0499d07dfbb6f1188; feature ref pushed and live-verified; independent CI-governance review PASS; complete positive/adversarial route census; exact workflow bytes unchanged; current aggregate/census/framework/navigation PASS; no build, upload, release, firmware, or product mutation.",
       "stop_conditions": [
         "Any workflow file, permission, secret, trigger, caller, release, or artifact destination must change.",
         "Any unresolved external ownership/caller fact would be inferred.",
@@ -972,18 +972,17 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-One Ready item is recorded: `GP-VAL-003`; `GP-SRC-003`, `GP-SRC-004`, and
-`GP-CONFIG-004` are DONE on validated implementation branches. `GP-SRC-005` is recorded
+`GP-SRC-003`, `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are DONE on validated implementation branches. `GP-SRC-005` is recorded
 Preauthorized but WAITING and is not effective runway. No invalidated
 Preauthorization or hardware-pending work is recorded. Effective runway is
-one against a target of four (`RUNWAY_LOW`). `GP-AUTH-001` remains user/source-authority gated and
+zero against a target of four (`CURATION_REQUIRED`). `GP-AUTH-001` remains user/source-authority gated and
 `GP-CONFIG-002` remains dependent then external-evidence gated; neither is a
 portfolio-global wait.
 
@@ -1036,7 +1035,7 @@ is a material failed-review event and must not merge. The packet is
 - `GP-CONFIG-004`: `DONE`; fixed the invalid reviewed-status parser and bound a
   synthetic reviewed capture's rows, overall status, files, hashes, and
   capture-local comparison without performing or interpreting a real capture.
-- `GP-VAL-003`: `READY`; statically census and classify every tracked CI
+- `GP-VAL-003`: `DONE`; statically censused and classified every tracked CI
   publication route, retain `build-device-config.yml` as unresolved external,
   and reconcile machine-derived health counts without editing workflows.
 - `GP-SRC-005`: `PREAUTHORIZED`, `WAITING`; may activate mechanically only

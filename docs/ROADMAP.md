@@ -9,20 +9,20 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Reviewed Planner packet `glyph-portfolio-20260823-2349` is
 partially consumed after fresh curation. `GP-SRC-003`, `GP-SRC-004`, and
-`GP-CONFIG-004` are DONE on validated implementation branches; `GP-VAL-003` remains Ready;
+`GP-CONFIG-004`, and `GP-VAL-003` are DONE on validated implementation branches;
 `GP-SRC-005` is recorded
 Preauthorized but WAITING. Pushed recovery tip
 `2b734b26439e9028717becf0010e345cb5efce6c` failed independent review and is
 not mergeable; `GP-SRC-003` now requires prepared schema v2 with carried
 normalized input and deterministic artifact/manifest regeneration. Effective
-runway is one against target four (`RUNWAY_LOW`). The current-runway marker above is
+runway is zero against target four (`CURATION_REQUIRED`). The current-runway marker above is
 authoritative; user/source-authority and external-evidence gates do not
 establish a portfolio-wide wait.
 
