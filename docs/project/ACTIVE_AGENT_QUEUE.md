@@ -19,53 +19,44 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e",
+  "audit_base_sha": "caf37e10673896b3bf5e2815875a93310b3f3ac1",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
-    "branch": "planning/portfolio-20260823-2349",
-    "base_configurator_sha": "6b8ebcd404dcbfe9b579eed41fb35b889e9da598",
-    "candidate_count": 4,
+    "branch": "planning/portfolio-20260824-2349",
+    "base_configurator_sha": "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+    "candidate_count": 3,
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator and independent review assessed fresh packet glyph-portfolio-20260823-2349 at commit 387a2a7b27d11b81c3c571aaf07cf543af626757 against live configurator 6b8ebcd404dcbfe9b579eed41fb35b889e9da598 and cleared curator_review_required.",
-      "Post-packet implementation tip 2b734b26439e9028717becf0010e345cb5efce6c is a material event: it remains outside configurator and accepts resealed input-digest, provenance, ownership, generator-version, and primitive-type drift, so it must not merge or be marked Done.",
-      "GP-SRC-003 was substantively reauthorized around prepared schema v2 carrying the exact canonical normalized input and deterministic regeneration/equality of artifact and manifest; prior prepared v1 packets and the current pushed tip are not completion evidence.",
-      "GP-SRC-004, GP-CONFIG-004, and GP-VAL-003 were independently reproduced and authorized Ready; GP-SRC-005 was recorded Preauthorized but WAITING on canonical GP-SRC-003 integration.",
-      "GP-CTL-002 remains substantive-design gated on migration and exact-equivalence representation; GP-PROV-002 remains reviewed surplus candidate supply, GP-PROV-003 remains research, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains dependent then external-evidence gated.",
-      "No global evidence wait is proposed or supported; runtime/configurator product code and active table bytes were unchanged by curation.",
-      "GP-SRC-003 v2 recovery implementation and independent repaired-scope review passed on the fresh descendant of live configurator 6dec5016b486f093a492626aaec3057bf3309274; no active source, table bytes, firmware behavior, or hardware artifact changed.",
-      "GP-SRC-004 completed at efda608f9f2af61a44a96f1e5866f2ae57dcc688 after independent classification review, fallback glyph_mk6 build, full current validation, and live feature-ref verification; no active table bytes or RuntimeConfigView publication changed.",
-      "GP-CONFIG-004 and GP-VAL-003 completed on configurator without product/runtime changes, reducing effective runway to zero and triggering follow-up curation.",
-      "GP-SRC-004 changed tools/generate_source_owned_runtime_config.py after the GP-SRC-005 authorization snapshot, mechanically invalidating the prior WAITING Preauthorization; follow-up Curator review proved that exact drift classification-only, reproduced both unsafe writer seams, and reauthorized GP-SRC-005 Ready against live configurator 26b939fa3d3664e839cab8076eea60ddb0f67e9f.",
-      "GP-PROV-002 was independently reproduced and authorized Ready for the bounded observed-only build.yml sidecar; immutable storage, artifact acceptance, postprocessor purpose/effect, device update, and hardware PASS remain excluded.",
-      "GP-CTL-002 remains substantive-dependency gated, GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 remains external-evidence gated; no global wait is proposed or supported.",
-      "GP-SRC-005 completed at a04e995c1fadc1f8d403c88cea147fb8f99f8939 with shared isolated-output and atomic-write enforcement; no active source/table/runtime behavior changed.",
-      "Live configurator d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e fails the load-bearing generated-source contract checker on macOS because its legacy positive file-output cases contradict the canonically accepted aliased-temporary-root rejection, and an identical-root reproduction exposes a second stale expectation that isolated temporary src/generated.hpp must reject. GP-VAL-004 was independently bounded as checker/test correction only; shared output policy and generator/product semantics must not change.",
-      "GP-PROV-002 completed on live feature ref 9c94b5449b8065cb02aa0689ca0564720238b80c after independent repaired-scope review, fresh aggregate validation, and exact live feature-ref verification; canonical completion publication follows on this control-plane snapshot."
+      "Curator independently reviewed fresh packet glyph-portfolio-20260824-2349 at commit ffba28772d8559df4b356de9b3a3f02248d16c07 against live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 and cleared curator_review_required.",
+      "A live-byte-identical reproduction proved that GP-CONFIG-004 Done evidence is incomplete: a reviewed capture with contradictory diff-row/comparison status, contradictory result.md status, contradictory duplicate artifact paths and hashes, and nonexistent nested paths still passed. GP-CONFIG-004 is reopened READY for the exact offline correspondence repair.",
+      "GP-PROV-002 remains legitimate IN_PROGRESS publication recovery because reviewed live feature tip 9c94b5449b8065cb02aa0689ca0564720238b80c is not integrated into live configurator; recovery must precede new implementation.",
+      "GP-CTL-002 remains substantively PREAUTHORIZED/WAITING on exact GP-PROV-002 integration. The exact reviewed recovery tree and control-plane publication are permitted non-semantic deltas; any replay, governance-semantic drift, or changed correspondence architecture invalidates activation.",
+      "GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 is substantive-dependency gated on the GP-CONFIG-004 repair and then external operator evidence. No global evidence wait is proposed or supported.",
+      "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260823-2349",
-      "planning_commit": "387a2a7b27d11b81c3c571aaf07cf543af626757",
-      "packet_id": "glyph-portfolio-20260823-2349",
-      "packet_base_configurator_sha": "6b8ebcd404dcbfe9b579eed41fb35b889e9da598",
-      "curation_branch": "curation/portfolio-20260824-1355-followup",
-      "review_date": "2026-08-24"
+      "planning_branch": "planning/portfolio-20260824-2349",
+      "planning_commit": "ffba28772d8559df4b356de9b3a3f02248d16c07",
+      "packet_id": "glyph-portfolio-20260824-2349",
+      "packet_base_configurator_sha": "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+      "curation_branch": "curation/portfolio-20260826-2131-review",
+      "review_date": "2026-08-26"
     }
   },
   "runway": {
-    "immediate_ready": 0,
-    "recorded_preauthorized": 0,
+    "immediate_ready": 1,
+    "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "CURATION_REQUIRED",
+    "RUNWAY_LOW",
     "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
     "RUNWAY_SHORTFALL_RESEARCH_GATED",
     "RUNWAY_SHORTFALL_USER_DECISION_GATED",
@@ -79,6 +70,76 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-CTL-002",
+      "title": "Prove canonical Done integration correspondence",
+      "status": "PREAUTHORIZED",
+      "branch": "glyph/gp-ctl-002-done-integration-correspondence-20260824",
+      "objective": "Prevent canonical work orders from becoming Done unless immutable Git evidence proves that the reviewed authorized implementation, or one exact reviewed replay, is already integrated in the canonical history before the completion publication.",
+      "why_this_matters": "GP-SRC-003 was twice published Done while its repaired implementation tree was absent, and GP-PROV-002 has now repeated the same failure: publication commit dfc92adf2910532e24f429f61ea3c1fe7026425a marked it Done on the strength of live feature ref 9c94b5449b8065cb02aa0689ca0564720238b80c, while live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 does not contain that implementation tree. The current framework checker validates only nonempty prose done_evidence and therefore certifies a false canonical state.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This work strengthens agent-framework completion publication and synthetic Git correspondence checks only. It changes no firmware, configurator product, workflow, build, artifact, runtime, table, device, or controller behavior.",
+      "scope": "Add a machine-readable completion-correspondence policy to the canonical queue and enforce it in tools/check_glyph_agent_framework_docs.py. The policy must record an immutable full migration-base configurator SHA and a sorted legacy_done_ids list derived exactly from the queue at that Git object; the checker must resolve the object locally, rederive the list, and reject additions, removals, mutable refs, missing objects, or mismatches. Every item first becoming Done after that base must carry strict structured completion evidence with full implementation base, reviewed implementation, and prior canonical integration SHAs, exact reviewed changed paths, independent review/validation provenance, and one mode: DIRECT_ANCESTRY requires the reviewed implementation SHA to be an ancestor of the prior canonical integration SHA; EXACT_PATH_TREE requires a dedicated single-parent integration commit whose changed path set is exactly the reviewed base-to-tip path set and whose Git modes/blob identities for every added, modified, or deleted path exactly equal the reviewed tip. In both modes the integration SHA must be an ancestor of the completion-publication HEAD, must descend from the implementation base, and must precede the status publication so no commit self-identifies. Add isolated temporary-Git positive and adversarial coverage. Keep GP-CTL-002 non-Done on its implementation branch, integrate the checker/docs first, then publish its own Done evidence on a separate descendant control-plane snapshot.",
+      "explicit_excluded_scope": "No retroactive fabrication of integration proof; no semantic or patch-equivalence judgment; no whitespace-normalized patch-id substitute; no mutable branch/tag as evidence; no automatic merge/replay/recovery; no queue promotion outside this work order; no tools/glyph_checker_context.py or other checker; no CI/product/runtime test; no workflow, firmware/runtime source, table content, artifact, hardware, device/protobuf write, persistence, flashing, Nunchuk, root-cause, or game-semantic change or claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Planner candidate GP-CTL-002 on planning/portfolio-20260823-2349 identified two false GP-SRC-003 completion publications and required migration-safe direct-integration or exact-equivalence proof. Fresh live verification now establishes a third case on configurator caf37e10673896b3bf5e2815875a93310b3f3ac1: GP-PROV-002 is canonically Done, but git diff and ancestry show reviewed live feature tip 9c94b5449b8065cb02aa0689ca0564720238b80c is not integrated. docs/WORKFLOW.md requires publication to configurator and exact live verification; tools/check_glyph_agent_framework_docs.py currently validates done_evidence only as a nonempty string. Local immutable Git object identity, ancestry, path sets, file modes, and blob OIDs are sufficient to enforce exact correspondence without inventing product semantics or relying on network state.",
+      "dependencies_prerequisites": [
+        "GP-PROV-002 remains legitimate IN_PROGRESS recovery work and must be canonically integrated before GP-CTL-002 implementation begins; recovery comes first and its implementation commits must not be absorbed into this governance branch.",
+        "Implementation starts from a freshly live-verified configurator descendant of caf37e10673896b3bf5e2815875a93310b3f3ac1 after GP-PROV-002 recovery and derives the immutable legacy Done set mechanically from that exact base.",
+        "The ordinary Curator governance-checker surface remains tools/check_glyph_agent_framework_docs.py; docs-navigation changes are permitted only for a real navigation consequence."
+      ],
+      "substantive_authorization_rationale": "The gap is no longer hypothetical and its architecture is fully bounded. A frozen Git-derived legacy set avoids retroactive evidence invention, while all later transitions must prove immutable canonical integration. Direct ancestry covers ordinary merge/fast-forward integration. Exact dedicated path-tree equality covers reviewed squash/cherry-pick replay without treating branch names, prose, patch-id heuristics, or semantic judgment as proof and without allowing extra changed paths. A separate post-integration completion publication avoids impossible self-referential SHAs. No product, domain, runtime, or source-authority choice remains.",
+      "mechanical_activation_conditions": [
+        "A fresh live configurator ref marks GP-PROV-002 DONE and git merge-base --is-ancestor 9c94b5449b8065cb02aa0689ca0564720238b80c <live-configurator-sha> succeeds, proving the exact reviewed feature tip is integrated rather than merely named by prose or a mutable ref.",
+        "The recovered configurator passes the full runtime-config aggregate, agent-framework, sequence, navigation, and docs-agent-surface gates with no GP-PROV-002 source-authority, review, or publication mismatch.",
+        "The bytes and semantics of tools/check_glyph_agent_framework_docs.py, docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md, docs/agent_framework/WORK_ORDER_TEMPLATE.md, and docs/WORKFLOW.md remain unchanged from authorization base caf37e10673896b3bf5e2815875a93310b3f3ac1; GP-CTL-002 scope and sensitive invariants remain exact. Permitted unrelated deltas are the exact reviewed GP-PROV-002 recovery, the exact GP-CONFIG-004 offline checker/docs repair within its separately authorized work order, and control-plane status/census metadata publication; any overlap with the named GP-CTL-002 sensitive surfaces fails closed.",
+        "No invalidation condition is present and activation requires no review, equivalence, architecture, product, source-authority, or semantic judgment beyond the exact objective checks above."
+      ],
+      "invalidation_conditions": [
+        "GP-PROV-002 recovery changes or replays the reviewed implementation rather than integrating exact tip 9c94b5449b8065cb02aa0689ca0564720238b80c, or its implementation/review authority changes before activation.",
+        "Another current canonical change already enforces equivalent or stronger Git-object-backed Done correspondence and migration safety.",
+        "The proposed checker would need network access, mutable refs, semantic equivalence judgment, automatic Git mutation, or edits outside the authorized governance surface.",
+        "The migration base cannot mechanically derive the exact pre-enforcement Done set without inventing or discarding historical evidence."
+      ],
+      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260823-2349, candidate GP-CTL-002, packet commit 387a2a7b27d11b81c3c571aaf07cf543af626757, packet base 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, independently reverified against live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 after the third false Done publication and authorized on curation/done-integration-correspondence-20260824-1921.",
+      "automated_validation": [
+        "The current false GP-PROV-002 shape fails before correction because its reviewed feature tip is neither directly integrated nor represented by an exact path-tree replay in configurator.",
+        "An isolated synthetic direct merge/fast-forward case passes only when the reviewed implementation is an ancestor of the recorded prior canonical integration and that integration is an ancestor of the completion publication.",
+        "An isolated synthetic squash/cherry-pick replay passes only for one dedicated single-parent integration commit with exactly the reviewed changed paths and identical Git modes/blob OIDs, including exact deletion correspondence.",
+        "Missing/unresolvable/non-commit objects, abbreviated SHAs, mutable refs, wrong base, sibling feature, partial replay, extra path, changed mode/blob, reordered or changed legacy set, retroactive legacy addition, integration after publication, and prose-only evidence fail.",
+        "The migration base is resolved from local Git and mechanically rederives the exact legacy Done IDs from that historical queue; no network or checkout mutation is used.",
+        "Agent-framework sequence, navigation, docs-agent-surface, checker-census, validation-health, and full runtime-config aggregate gates pass; independent focused governance review confirms no authority, publication, or recovery invariant weakened."
+      ],
+      "canonical_build": "NOT_REQUIRED: governance docs, the ordinary agent-framework checker, and isolated synthetic Git fixtures only; any workflow, product/runtime checker, compiled source, or build-input delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused governance implementation if valid direct integration or exact dedicated replay cannot be represented. Never restore prose-only Done publication or classify an unintegrated implementation as legacy evidence.",
+      "status_documentation_updates": "Document the migration boundary, structured completion evidence, direct-ancestry and exact-path-tree modes, and required two-stage implementation/integration then completion publication. Preserve Planner/Curator/Implementation separation and all runtime/product non-claims.",
+      "done_evidence": "Required future evidence: implementation and separate canonical integration SHAs; immutable migration base and mechanically exact legacy Done set; direct-ancestry and exact-path-tree positive/adversarial synthetic Git corpus; focused independent governance review; framework/sequence/navigation/surface/census/health/aggregate PASS; post-integration control-plane completion publication and exact live configurator verification; runtime/configurator product code changed: NO.",
+      "stop_conditions": [
+        "Any historical Done item would need invented integration evidence or GP-PROV-002 would be grandfathered while still unintegrated.",
+        "Any completion can pass with prose, a branch/tag, missing Git object, partial/extra replay, semantic judgment, or a status publication that does not descend from prior canonical integration.",
+        "Any queue authorization, implementation recovery, Git merge, workflow, firmware/runtime, product checker, artifact, hardware, device-write, persistence, protobuf-write, flashing, Nunchuk, root-cause, or game-semantic scope is added."
+      ],
+      "activation_state": "WAITING",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-VAL-004",
       "title": "Make generator contract validation temp-root portable",
@@ -278,38 +339,42 @@ Git, but it is not current candidate supply or implementation authority.
     },
     {
       "id": "GP-CONFIG-004",
-      "title": "Complete reviewed manual-capture correspondence",
-      "status": "DONE",
-      "branch": "glyph/gp-config-004-manual-capture-correspondence-20260824",
-      "objective": "Make the first reviewed official-configurator manual capture parseable and bind its metadata, rows, artifacts, hashes, comparison, and bounded result into one fail-closed packet.",
-      "why_this_matters": "The zero-capture scaffold passes while the first reviewed result would reach an invalid status regex and fail to compile; the current checker also does not completely bind row outcome, overall status, every evidence file hash, or comparison output to the exact capture input/output pair.",
+      "title": "Repair reviewed manual-capture correspondence",
+      "status": "READY",
+      "branch": "glyph/gp-config-004-capture-correspondence-repair-20260826",
+      "objective": "Make every reviewed official-configurator capture status, duplicate artifact field, nested path, precondition, operator/route record, and deterministic comparison describe one exact internally consistent capture packet.",
+      "why_this_matters": "GP-CONFIG-004 is recorded Done, but live-byte-identical adversarial reproduction proves its checker still accepts contradictory evidence: the diff row can disagree with metadata and comparison.json, result.md can disagree with metadata overall status, top-level paths and hashes can contradict nested artifact fields, and nested checker/comparison paths can name nonexistent files. A second reviewed-shape construction can substitute unrelated existing precondition files and empty nested operator/route objects. The existing zero-capture and adversarial checks do not exercise those failures.",
       "hardware_risk": "H0",
       "behavioral_claim": "This work strengthens an offline evidence checker and synthetic fixtures only. It performs no app interaction or capture, asserts no official compatibility, and changes no firmware/configurator product behavior.",
-      "scope": "Revise the reviewed-capture metadata contract to strict schema v2 with exact keys and types; fix the status parser; require exactly one row each for import, export, and capture-local structural diff; allow row statuses PASS, FAIL, NOT_TESTED, or INCONCLUSIVE and require row pass=true exactly for PASS. The exact overall matrix is: PASS requires app ACCEPTED, output only, all three rows PASS, comparison PASS, and no gaps; FAIL requires either app REJECTED with rejection note only, import FAIL, export/diff NOT_TESTED, no comparison, and no gaps, or app ACCEPTED with output only, every row executed as PASS/FAIL, at least one FAIL, required comparison present, and no gaps; PARTIAL requires app ACCEPTED with output, at least one executed PASS/FAIL row and at least one NOT_TESTED row, no INCONCLUSIVE row, nonempty gaps naming every unexecuted/missing item, and comparison exactly when the diff row executed; INCONCLUSIVE requires app INCONCLUSIVE, exactly one declared output-or-rejection artifact, at least one INCONCLUSIVE row, no positive result, nonempty exact gaps, and comparison only when output exists and the diff row executed. For output, require a regular capture-local comparison JSON carrying capture ID, exact input/output SHA-256, checker identity/version, deterministic structural diff, and status matching the diff row. For rejection, require the exact rejection-note hash and forbid a comparison result. hashes.txt must enumerate exactly every other regular evidence file in the capture folder with matching SHA-256. Add complete synthetic PASS/FAIL/PARTIAL/INCONCLUSIVE packets plus tamper cases; preserve the zero-capture scaffold.",
+      "scope": "Preserve the strict schema-v2 PASS/FAIL/PARTIAL/INCONCLUSIVE matrix and reopen only the offline manual-capture checker, the existing export-candidate-diff checker/helper, synthetic tests, template/docs, and deterministic census/health consequences. Make validate_result_doc return the parsed overall status and require it to equal metadata status and result_status. Require metadata comparison status and comparison-file status to equal the post_capture_json_diff_review row. Require top-level input/output path and SHA-256 fields to equal their nested artifacts fields exactly rather than selecting one with fallback truthiness. Require exact semantic basenames input_candidate.json, output_export.json, metadata.json, notes.md, comparison.json, and rejection_note.md for every applicable field; executed diff checker_output_path and comparison_path must both be comparison.json; resolve every declared capture artifact to that exact capture-local regular non-symlink file. Require preconditions to have exactly the six template keys, capture_id equal the folder name, precondition_status equal PASS, the four canonical tracked paths, and those tracked files to retain the exact authorization-snapshot SHA-256 values; require copied input_candidate.json to be byte-equal to the canonical preview. Require operator_fields and routes to have exactly the template keys; bind top-level operator, app version, import route, and export route to their duplicate nested values. Add one pure capture-local JSON-pointer diff helper to tools/check_glyph_official_configurator_export_candidate_diff.py without changing its current static report: comparison_tool and checker_identity must both equal that tool path, checker_version must equal GLYPH_OFFICIAL_CONFIGURATOR_CAPTURE_DIFF_V1, and structural_diff must exactly equal {schema_name: official_configurator_capture_json_pointer_diff, schema_version: 1, equal: bool, added_paths: sorted RFC6901 JSON-pointer list, removed_paths: sorted RFC6901 JSON-pointer list, changed_paths: sorted RFC6901 JSON-pointer list} recomputed from input_candidate.json and output_export.json. Array indices are pointer segments, object keys use RFC6901 escaping, and type/scalar inequality records one changed path without embedding values. The diff is descriptive only and does not infer compatibility. PASS, accepted FAIL, and rejected FAIL retain no gaps. For PARTIAL and INCONCLUSIVE only, require gaps to equal the sorted row IDs whose status is NOT_TESTED or INCONCLUSIVE. Preserve exact null/non-null combinations for accepted-output, rejected-note, and executed-diff shapes, complete hashes.txt correspondence, the zero-capture scaffold, and full synthetic result matrix.",
       "explicit_excluded_scope": "No official app launch, operator action, new real capture, compatibility/importability/exportability interpretation, production exporter, firmware/runtime source, device write, persistence, WebSerial, protobuf write, flashing, hardware result, or game-semantic claim.",
       "touched_planes": [
         "configurator",
         "docs/checkers"
       ],
-      "source_authority": "On live configurator 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, compiling the exact validate_result_doc character class [A-Za-z0-9_- ] raises re.PatternError, but tools/check_glyph_official_configurator_manual_capture_result.py passes because manual_capture_folder_count is zero. Source inspection shows checker_output_path is not resolved or hashed, hashes.txt contents are not completely parsed, result-row uniqueness/pass correspondence is incomplete, and the named offline candidate-diff checker does not consume a capture folder's exact input/output. Fresh Planner candidate GP-CONFIG-004 records the same gaps.",
+      "source_authority": "Fresh live verification pins configurator at caf37e10673896b3bf5e2815875a93310b3f3ac1 and fresh packet glyph-portfolio-20260824-2349 at ffba28772d8559df4b356de9b3a3f02248d16c07. On checker bytes identical to that live base, independent reproduction accepted a synthetic reviewed packet after changing the diff row to FAIL while metadata comparison and comparison.json stayed PASS, changing result.md to PARTIAL while metadata stayed FAIL, contradicting all top-level input/output paths and hashes, and naming nonexistent nested checker/comparison paths. Direct source inspection shows validate_result_doc returns no status, artifact validation chooses nested values with `or`, checker_output_path is not resolved, comparison status is not bound to the diff row, nested object keys are open-ended, preconditions require only existing paths, and comparison identity/output shape are weakly constrained. The template fixes the nested key sets and the existing comparison_tool path. Authorization-snapshot SHA-256 values are manifest 08c8e43218250ad75f187f3fc5d22dd36fc27b112047f9dfdb612cbb232359a5, default fixture 2d24324928f9c0292e3fce74f02083a740272eeb7a271437be10b7b4f6bf025e, back-and-forth fixture 0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b, and canonical preview 7a083bf84bc030e7170739070a9c005527611a457e33db5adaf5342969b3e9ec. The live capture tree contains zero completed captures, so exact schema repair requires no real evidence migration or interpretation.",
       "dependencies_prerequisites": [
         "GP-CONFIG-003 is DONE; its exact regular-file .DS_Store exception and rejection of all other unknown entries, directories, and symlinks must remain intact.",
-        "The official corpus and current five-check offline lane remain source authority only for their existing bounded claims.",
+        "The canonical GP-CONFIG-004 schema-v2 result matrix remains authoritative; this repair binds existing duplicate fields and paths rather than deleting or reinterpreting them.",
+        "The official corpus, canonical preview artifact, and current five-check offline lane remain source authority only for their existing bounded claims; the live manual-capture tree remains at zero completed captures.",
+        "Implementation begins after legitimate GP-PROV-002 publication recovery or from a fresh live-configurator descendant that has reconciled it. Exact reviewed GP-PROV-002 integration, queue/status publication, and deterministic census/health regeneration are permitted unrelated deltas; any change to this checker, capture schema/docs, official corpus/preview bytes, or result semantics requires fresh curation.",
         "Synthetic fixtures must not be stored or described as operator evidence."
       ],
-      "substantive_authorization_rationale": "The crash and correspondence omissions are mechanically reproducible, and the evidence relationships can be made exact without interpreting the app or gameplay: paths, bytes, hashes, row statuses, and a deterministic structural diff either correspond or fail. This enables later evidence intake without supplying that external evidence.",
+      "substantive_authorization_rationale": "The fail-open result is mechanically reproduced and every repair decision is fixed by the already-authorized schema-v2 matrix, canonical tracked artifact identities, and capture-local correspondence rules. Exact equality, strict schemas, canonical basenames, resolved regular files, canonical digests, byte equality, and deterministic comparison output require no app, product, compatibility, operator, or gameplay judgment. Reopening the same work-order ID preserves the truth that its prior Done evidence was incomplete.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "A real completed capture arrives before the schema/checker correction and requires evidence-preserving migration judgment.",
         "The official capture artifact layout or primary corpus changes materially before implementation.",
-        "Implementation would interpret compatibility, automate the app, or fabricate an operator/reviewer result."
+        "The canonical preview, comparison checker identity/version/output contract, or schema-v2 result matrix requires a substantive redesign rather than exact binding.",
+        "Implementation would delete duplicate fields, interpret compatibility, automate the app, or fabricate an operator/reviewer result."
       ],
-      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260823-2349, candidate GP-CONFIG-004, packet commit 387a2a7b27d11b81c3c571aaf07cf543af626757, packet/live base 6b8ebcd404dcbfe9b579eed41fb35b889e9da598, with invalid-regex and zero-capture reproduction plus independent review on curation/portfolio-20260824-0051-review.",
+      "authorization_snapshot_provenance": "Curator review of Planner branch planning/portfolio-20260824-2349, repair/revalidation candidate GP-CONFIG-004, packet commit ffba28772d8559df4b356de9b3a3f02248d16c07, packet/live base caf37e10673896b3bf5e2815875a93310b3f3ac1, with independent fail-open reproduction and source audit on curation/portfolio-20260826-2131-review. The earlier completion remains historical implementation evidence but is not sufficient Done evidence.",
       "automated_validation": [
         "Zero-capture scaffold and exact .DS_Store host-metadata cases remain valid without recording evidence.",
-        "Complete synthetic accepted and rejected packets validate only with exact status/pass/overall, output-or-rejection, every-file hash, capture ID, and comparison correspondence.",
-        "PARTIAL and INCONCLUSIVE synthetic packets require exact nonempty gaps and cannot become a positive compatibility claim.",
-        "Malformed status syntax, duplicate/missing/unknown rows, status/pass mismatch, wrong overall result, output/rejection mismatch, stale/missing/extra hashes, wrong input/output binding, fabricated comparison, symlink, directory, unknown file, and positive-claim cases fail.",
+        "Complete synthetic PASS, accepted FAIL, rejected FAIL, PARTIAL, and INCONCLUSIVE packets validate only with exact metadata/result-doc/row/comparison status correspondence, exact accepted/rejected nullability, exact gaps, and no positive compatibility claim.",
+        "Individually and jointly mutate comparison-vs-row status, comparison-file-vs-row status, result.md-vs-metadata status, top-level-vs-nested path/hash, semantic basename, nested path existence/type/location, capture ID, precondition status/path/snapshot digest, copied-input-versus-preview bytes, operator/route schema and duplicate values, comparison identity/version, JSON-pointer escaping/order/content, nullability, and exact row-ID gaps; every contradiction fails for the intended reason.",
+        "Capture diff positive/adversarial cases cover nested objects, arrays, RFC6901 tilde/slash escaping, root scalar/type change, additions, removals, and scalar changes; the recomputed descriptive diff contains no values and makes no compatibility judgment, while the existing static export-candidate-diff report remains byte-identical.",
+        "Malformed status syntax, duplicate/missing/unknown rows, status/pass mismatch, stale/missing/extra hashes, symlink, directory, alias, wrong existing file, unknown file, fabricated comparison, and positive-claim cases fail.",
         "Official-configurator manual-capture, five-check validation lane, docs-navigation, docs-agent-surface, and current runtime-config aggregate checks pass."
       ],
       "canonical_build": "NOT_REQUIRED: offline evidence checker, docs, and synthetic fixtures only; any product or compiled source delta stops.",
@@ -319,12 +384,13 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_version": "NOT_APPLICABLE",
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
-      "rollback_recovery": "Revert the focused checker/docs branch if valid reviewed evidence cannot be represented without ambiguity; preserve all real evidence bytes and never loosen unknown-entry or hash rejection.",
-      "status_documentation_updates": "Document the reviewed schema and capture-local comparison contract while retaining zero completed captures and every compatibility/device/runtime non-claim.",
-      "done_evidence": "Independent repaired-scope review PASS; strict schema-v2 metadata and comparison correspondence; synthetic PASS/FAIL/PARTIAL/INCONCLUSIVE plus rejected packets and tampered comparison/hash/row/path cases; zero-capture PASS; official five-check lane, current aggregate, census, framework, navigation, and agent-surface checks PASS; no real capture or product/runtime change.",
+      "rollback_recovery": "Revert the focused checker/docs repair if a valid schema-v2 packet cannot be represented without ambiguity; preserve all real evidence bytes and never restore fallback-field selection, unbound paths/statuses, or weak nested schemas.",
+      "status_documentation_updates": "Record GP-CONFIG-004 as reopened for exact correspondence repair and keep GP-CONFIG-002 substantive-dependency gated until the repair is independently reviewed and canonically integrated; retain zero completed captures and every compatibility/device/runtime non-claim.",
+      "done_evidence": "Required future evidence: implementation commit on the named repair branch; independent offline-evidence checker review and repaired-scope re-review if needed; complete positive and adversarial correspondence corpus; zero-capture, official five-check lane, checker census, current aggregate, framework, navigation, and agent-surface PASS; exact live feature and configurator publication verification; no real capture and runtime/configurator product code changed: NO.",
       "stop_conditions": [
         "Any app behavior, compatibility outcome, operator action, or reviewer observation must be inferred.",
-        "Any unknown entry, hash mismatch, row mismatch, or output/rejection ambiguity would be accepted.",
+        "Any duplicate representation, unknown entry, hash/path/status mismatch, weak nested schema, noncanonical comparison output, or output/rejection ambiguity would remain accepted.",
+        "The repair requires a schema migration, field deletion, official-app execution, operator evidence, or product/runtime checker change.",
         "Any firmware/runtime, device-write, persistence, protobuf-write, flashing, hardware, Nunchuk, or root-cause scope is required."
       ],
       "activation_state": "NOT_APPLICABLE",
@@ -471,7 +537,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-002",
       "title": "Emit observed-only CI artifact sidecar",
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "branch": "glyph/gp-prov-002-observed-ci-sidecar-20260824",
       "objective": "Make the canonically gated build.yml artifact route emit and verify a sidecar carrying the full source Git identity and exact final postprocessed artifact identity.",
       "why_this_matters": "The current route uploads a postprocessed UF2 named with only a short SHA and no full candidate SHA, final size/SHA-256, or postprocessor identity sidecar, so consumers cannot establish even bounded observed correspondence from the uploaded directory.",
@@ -514,7 +580,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused workflow/provenance branch if valid current artifacts cannot produce a deterministic verified observed-only sidecar; do not bypass failed identity or sidecar checks and do not infer missing provenance.",
       "status_documentation_updates": "Document the bounded build.yml observed-only sidecar and retain explicit non-claims for immutable storage, artifact acceptance, reproducibility, postprocessor purpose/effect, hardware, and every unresolved external route.",
-      "done_evidence": "Implementation commits a09ba09d35621b3742ee37f961c012f542ce64c0, 3810732a0daa3d4c771d205da5b76d8f7a63dbf4, and repaired completion commit 9c94b5449b8065cb02aa0689ca0564720238b80c on live feature ref glyph/gp-prov-002-observed-ci-sidecar-20260824; independent review PASS; exact sidecar schema, SHA/postprocessor identity, upload-directory containment, ordering/tamper/write-verify corpus, validation-health counts, workflow hash parity, checker census, full current aggregate, agent-framework, docs-navigation, and docs-agent-surface checks PASS. No firmware/build input, glyph_nuker bytes, build-device-config.yml, upload execution, artifact acceptance, storage, hardware, device, or runtime behavior changed or claimed.",
+      "done_evidence": "Implementation commits a09ba09d35621b3742ee37f961c012f542ce64c0, 3810732a0daa3d4c771d205da5b76d8f7a63dbf4, and repaired completion commit 9c94b5449b8065cb02aa0689ca0564720238b80c are live on feature ref glyph/gp-prov-002-observed-ci-sidecar-20260824; independent review and the exact sidecar/workflow/tamper/full-validation corpus passed. Canonical publication dfc92adf2910532e24f429f61ea3c1fe7026425a nevertheless changed status to Done without integrating that implementation tree, and live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 does not contain the feature tip. Publication recovery must refresh configurator, integrate the reviewed feature exactly without absorbing unrelated work, rerun invalidated gates, then publish Done on a separate descendant snapshot and live-verify the exact canonical SHA. No firmware/build input, glyph_nuker bytes, build-device-config.yml, upload execution, artifact acceptance, storage, hardware, device, or runtime behavior changed or is claimed.",
       "stop_conditions": [
         "The tracked postprocessor identity differs or its purpose/effect must be interpreted.",
         "A durable locator, store, retention, caller, owner, release, reproducibility, artifact-acceptance, or hardware decision is required.",
@@ -1108,23 +1174,27 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-004"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-`GP-SRC-003`, `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003` are DONE on
-validated implementation branches. `GP-SRC-005`, `GP-PROV-002`, and
-`GP-VAL-004` are DONE. No immediate Ready work remains; the partially
-consumed Planner packet retains successor candidates requiring Curator
-judgment.
-No recorded or invalidated Preauthorization and no hardware-pending work exist.
-Effective runway is zero against a target of four (`CURATION_REQUIRED`).
+`GP-SRC-003`, `GP-SRC-004`, and `GP-VAL-003` are DONE on validated
+implementation branches. `GP-SRC-005` and `GP-VAL-004` are DONE.
+`GP-CONFIG-004` is reopened `READY` because fresh adversarial evidence proves
+its prior Done correspondence was incomplete.
+`GP-PROV-002` is corrected to `IN_PROGRESS` because its reviewed live feature
+tip is not integrated into configurator; publication recovery comes first.
+`GP-CTL-002` is substantively Preauthorized but `WAITING`; it may activate only
+after exact mechanical proof that recovery integrated the reviewed feature tip.
+Recorded Preauthorization is one, mechanically activatable Preauthorization is
+zero, and no invalidated Preauthorization or hardware-pending work exists.
+Effective runway is one against a target of four (`RUNWAY_LOW`).
 `GP-AUTH-001` remains user/source-authority gated and
-`GP-CONFIG-002` remains external-evidence gated after its internal dependency
-completed; neither is a portfolio-global wait.
+`GP-CONFIG-002` remains substantive-dependency gated on the repair and then
+external-evidence gated; neither is a portfolio-global wait.
 
 ## Allowed Statuses
 
@@ -1158,13 +1228,12 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Fresh Planner packet `glyph-portfolio-20260823-2349` at
-`387a2a7b27d11b81c3c571aaf07cf543af626757` was initially reviewed against
-`configurator` `6b8ebcd404dcbfe9b579eed41fb35b889e9da598` and follow-up reviewed against
-exact live `configurator` `26b939fa3d3664e839cab8076eea60ddb0f67e9f`.
-Post-packet recovery tip `2b734b26439e9028717becf0010e345cb5efce6c`
-is a material failed-review event and must not merge. The packet is
-`PARTIALLY_CONSUMED` but remains useful for held successor supply.
+Fresh Planner packet `glyph-portfolio-20260824-2349` at
+`ffba28772d8559df4b356de9b3a3f02248d16c07` was independently reviewed
+against exact live `configurator` `caf37e10673896b3bf5e2815875a93310b3f3ac1`.
+Its new GP-CONFIG-004 repair evidence reproduced, and the packet is
+`PARTIALLY_CONSUMED` after authorizing that repair and preserving the prior
+GP-CTL-002 Preauthorization. Three explicitly gated survivors remain.
 
 - `GP-SRC-003`: `DONE`; prepared-v2 normalized input, deterministic
   artifact/manifest regeneration, shared isolated-output policy, independent
@@ -1173,24 +1242,30 @@ is a material failed-review event and must not merge. The packet is
 - `GP-SRC-004`: `DONE`; corrected active compile-time table-content classification while preserving
   all 28 table values/symbols and unchanged source-owned active-view
   publication; canonical build required if the compiled header changes.
-- `GP-CONFIG-004`: `DONE`; fixed the invalid reviewed-status parser and bound a
-  synthetic reviewed capture's rows, overall status, files, hashes, and
-  capture-local comparison without performing or interpreting a real capture.
+- `GP-CONFIG-004`: `READY`; reopened under the same ID after a reviewed-shape
+  packet with contradictory statuses, duplicate paths/hashes, and unbound
+  nested paths passed the live checker. The repair is offline H0 checker/docs
+  work only and performs or interprets no real capture.
 - `GP-VAL-003`: `DONE`; statically censused and classified every tracked CI
   publication route, retain `build-device-config.yml` as unresolved external,
   and reconcile machine-derived health counts without editing workflows.
 - `GP-SRC-005`: `DONE`; shared isolated-output validation and atomic writing now
   govern both remaining offline writers, with only the exact inert example
   install exception; no active source/table/runtime behavior changed.
-- `GP-CTL-002`: `SUBSTANTIVE_DEPENDENCY_GATED`; false Done publication is
-  proven, but migration and exact replay/equivalence representation remain
-  insufficiently bound for Ready.
+- `GP-CTL-002`: `PREAUTHORIZED` / `WAITING`; the third false Done publication
+  resolved the substantive migration and correspondence design, but exact
+  reviewed GP-PROV-002 integration is an unmet mechanical prerequisite. After
+  that proof, the work binds a Git-derived frozen legacy set plus immutable
+  direct-ancestry or exact dedicated path-tree replay evidence for every later
+  completion.
 - `GP-VAL-004`: `DONE`; corrected only the stale generator-contract checker
   assumptions for aliased versus identical system temporary roots, preserving
   the shared output validator and every generator/product semantic exactly.
-- `GP-PROV-002`: `DONE` on its live feature ref after independent review and
-  fresh aggregate validation; storage, acceptance, postprocessor semantics,
-  and hardware remain explicitly unresolved and excluded.
+- `GP-PROV-002`: `IN_PROGRESS`; its reviewed implementation is live on feature
+  ref `9c94b5449b8065cb02aa0689ca0564720238b80c`, but configurator does not
+  contain that tree. Publication recovery must integrate it before a separate
+  Done snapshot; storage, acceptance, postprocessor semantics, and hardware
+  remain explicitly unresolved and excluded.
 - `GP-PROV-003`: `RESEARCH`; exact static inventory/schema boundary remains
   unresolved and no network resolution or reproducibility claim is allowed.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
@@ -1221,16 +1296,19 @@ is a material failed-review event and must not merge. The packet is
   selection remain excluded.
 - `GP-AUTH-001`: `USER_DECISION_GATED`; no production-authorized owned-table
   set or replacement content exists, so Curator cannot authorize it.
-- `GP-CONFIG-002`: `EVIDENCE_GATED` on an external operator capture after its
-  internal `GP-CONFIG-004` dependency completed.
+- `GP-CONFIG-002`: `SUBSTANTIVE_DEPENDENCY_GATED` on the GP-CONFIG-004 repair,
+  then `EVIDENCE_GATED` on an external operator capture.
 
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` in the machine-readable block
-authorize immediate execution. No immediate Ready item remains; `GP-VAL-004`
-and `GP-PROV-002` are DONE, while remaining successor candidates require
-Curator judgment.
+authorize immediate execution. `GP-CONFIG-004` is the sole Ready item.
+Recovery comes first: the legitimate unfinished `GP-PROV-002` publication must
+be reconciled before new implementation, and its exact integration may then
+mechanically activate recorded `GP-CTL-002` Preauthorization. Remaining
+successor candidates require research, user/source authority, or external
+evidence.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive

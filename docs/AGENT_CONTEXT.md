@@ -64,26 +64,32 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-004"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Reviewed Planner packet
-  `glyph-portfolio-20260823-2349` is partially consumed after follow-up
-  curation. `GP-SRC-003` is DONE with prepared schema v2 carrying normalized
+  `glyph-portfolio-20260824-2349` is partially consumed after fresh curation.
+  `GP-SRC-003` is DONE with prepared schema v2 carrying normalized
   input and deterministic artifact/manifest regeneration; earlier pushed tip
   `2b734b26439e9028717becf0010e345cb5efce6c` remains failed-review historical
-  evidence and must not merge. `GP-SRC-004`, `GP-CONFIG-004`, and `GP-VAL-003`
-  are DONE;
-  `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening.
-  `GP-VAL-004` is Ready for a bounded checker-only repair of aliased versus
-  identical system-temporary-root validation. `GP-PROV-002` is DONE on live
-  feature ref `9c94b5449b8065cb02aa0689ca0564720238b80c` after independent
-  review and a fresh passing aggregate. The current-runway marker above is
-  authoritative; effective runway is one against target four (`RUNWAY_LOW`).
+  evidence and must not merge. `GP-SRC-004` and `GP-VAL-003` are DONE;
+  `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
+  and `GP-VAL-004` is DONE after its checker-only temporary-root repair.
+  `GP-CONFIG-004` is reopened `READY` because fresh adversarial evidence proves
+  its reviewed-capture status, artifact, path, and nested-schema correspondence
+  remains fail-open; the repair is offline checker/docs work only.
+  `GP-PROV-002` has a reviewed live feature tip at
+  `9c94b5449b8065cb02aa0689ca0564720238b80c` but is corrected to `IN_PROGRESS`
+  because that tree is absent from live configurator; publication recovery
+  comes first. `GP-CTL-002` is substantively Preauthorized but `WAITING` for
+  exact mechanical proof of that integration before it can add immutable
+  Done/integration correspondence. The current-runway marker above is
+  authoritative; recorded Preauthorization is one and effective runway is one
+  against target four (`RUNWAY_LOW`).
   `GP-AUTH-001` remains user/source-authority gated and
-  `GP-CONFIG-002` remains external-evidence gated after its internal dependency
-  completed; this is not a global hardware wait.
+  `GP-CONFIG-002` remains dependency-gated on the repair and then
+  external-evidence gated; this is not a global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
