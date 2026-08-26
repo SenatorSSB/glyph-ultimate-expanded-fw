@@ -64,7 +64,7 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
@@ -81,12 +81,13 @@ automation from this context document.
   `GP-PROV-002` has a reviewed live feature tip at
   `9c94b5449b8065cb02aa0689ca0564720238b80c` and is DONE after exact
   integration into live configurator. `GP-CTL-002` is DONE after its exact
-  implementation integration and separate completion publication. The
-  current-runway marker above is
-  authoritative; recorded Preauthorization is zero and effective runway is zero
-  against target four (`CURATION_REQUIRED`).
+  implementation integration and separate completion publication.
+  `GP-PROV-003` is READY for its exact H0 declared build-input provenance
+  inventory. The current-runway marker above is authoritative; recorded
+  Preauthorization is zero and effective runway is one against target four
+  (`RUNWAY_LOW`).
   `GP-AUTH-001` remains user/source-authority gated and
-  `GP-CONFIG-002` remains dependency-gated on the repair and then
+  `GP-CONFIG-002` has satisfied its repair predecessor and remains
   external-evidence gated; this is not a global hardware wait.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
