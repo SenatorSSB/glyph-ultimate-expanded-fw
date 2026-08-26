@@ -274,7 +274,6 @@ COMPLETION_EVIDENCE_FIELDS = {
     "implementation_base_sha",
     "reviewed_implementation_sha",
     "prior_canonical_integration_sha",
-    "completion_publication_sha",
     "reviewed_changed_paths",
     "independent_review_provenance",
     "validation_provenance",
@@ -448,16 +447,13 @@ def validate_completion_evidence(
     base = _require_commit_sha(evidence["implementation_base_sha"], "implementation_base_sha", repo_root)
     tip = _require_commit_sha(evidence["reviewed_implementation_sha"], "reviewed_implementation_sha", repo_root)
     integration = _require_commit_sha(evidence["prior_canonical_integration_sha"], "prior_canonical_integration_sha", repo_root)
-    publication = _require_commit_sha(evidence["completion_publication_sha"], "completion_publication_sha", repo_root)
-    if publication != publication_sha:
-        fail("completion evidence must identify the current completion-publication commit")
     paths = evidence["reviewed_changed_paths"]
     if not isinstance(paths, list) or paths != sorted(paths) or len(paths) != len(set(paths)) or not all(isinstance(path, str) and path for path in paths):
         fail("completion evidence reviewed_changed_paths must be sorted unique strings")
     _is_ancestor(repo_root, base, tip, "implementation base")
     _is_ancestor(repo_root, base, integration, "canonical integration")
-    _is_ancestor(repo_root, integration, publication, "canonical integration")
-    if integration == publication:
+    _is_ancestor(repo_root, integration, publication_sha, "canonical integration")
+    if integration == publication_sha:
         fail("completion integration must precede status publication")
     if mode == "DIRECT_ANCESTRY":
         _is_ancestor(repo_root, tip, integration, "reviewed implementation")
@@ -500,7 +496,6 @@ def check_completion_correspondence_self_test() -> None:
             "implementation_base_sha": base,
             "reviewed_implementation_sha": tip,
             "prior_canonical_integration_sha": integration,
-            "completion_publication_sha": publication,
             "reviewed_changed_paths": paths,
             "independent_review_provenance": "synthetic independent review",
             "validation_provenance": "synthetic validation",
