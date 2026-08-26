@@ -14,7 +14,7 @@ from unittest.mock import patch
 
 import manage_source_owned_source_authority_intake as intake_cli
 import source_owned_source_authority_intake as intake_module
-from source_owned_generator_modes import GeneratorModesError, _baseline_tables
+from source_owned_generator_modes import GeneratorModesError, _baseline_tables, production_gate, table_digest
 from source_owned_source_authority_intake import (
     EXIT_CODES,
     PLACEHOLDER,
@@ -28,6 +28,7 @@ from source_owned_source_authority_intake import (
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "docs/runtime_config/fixtures/source_owned_source_authority_intake.json"
+CANONICAL_X1_INTAKE = ROOT / "docs/runtime_config/intakes/x1_baseline_equivalent_overlay_v1.intake.json"
 MANAGE = ROOT / "tools/manage_source_owned_source_authority_intake.py"
 PRECEDENCE_CASE_IDS = ["baseline_over_authority_and_ownership"]
 PROTECTED_PATH_CASE_IDS = [
@@ -155,6 +156,53 @@ def run() -> tuple[int, int]:
     equivalence = make_packet(operation="source_equivalence_proof", owned_count=0)
     _, _, manifest = emit_generator_input(equivalence, operation="source_equivalence_proof")
     assert manifest["classification"] == "NO_OP"
+    POSITIVE += 1
+
+    canonical = intake_module.load_json(CANONICAL_X1_INTAKE)
+    canonical_report = review_intake(canonical)
+    assert canonical_report["blockers"] == []
+    assert canonical_report["authority_status"] == "approved"
+    assert canonical_report["provenance_class"] == "production_authorized"
+    assert canonical_report["generation_mode"] == "overlay_preserve"
+    assert canonical_report["production_emission_allowed"] is True
+    assert canonical_report["semantic_change_present"] is False
+    assert canonical_report["future_hardware_candidate_after_downstream_gates"] is False
+    assert canonical["authority"]["approver"] == "Glyph project owner / user authority"
+    assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-008"
+    assert canonical["ownership"]["owned_tables"] == ["kX1Table"]
+    assert [item["table_symbol"] for item in canonical["ownership"]["declarations"]] == ["kX1Table"]
+    assert [item["table_symbol"] for item in canonical["replacements"]] == ["kX1Table"]
+
+    baseline_tables = _baseline_tables()
+    baseline_x1 = next(table for table in baseline_tables if table["table_symbol"] == "kX1Table")
+    replacement_points = canonical["replacements"][0]["points"]
+    assert [point["direction_key"] for point in replacement_points] == list(range(1, 10))
+    assert all(0 <= point[axis] <= 255 for point in replacement_points for axis in ("x", "y"))
+    assert [{"x": point["x"], "y": point["y"]} for point in replacement_points] == baseline_x1["points"]
+
+    emitted_x1, artifact_x1, manifest_x1 = emit_generator_input(canonical, operation="production_changeset")
+    assert emitted_x1["owned_tables"] == ["kX1Table"]
+    assert artifact_x1["tables"] == baseline_tables
+    assert artifact_x1["artifact_semantic_digest"] == inspect_baseline()["semantic_digest"]
+    assert manifest_x1["classification"] == "NO_OP"
+    assert manifest_x1["changed_table_count"] == 0 and manifest_x1["changed_table_ids"] == []
+    assert manifest_x1["preserved_table_count"] == 28 and manifest_x1["preserved_table_ids"] == list(range(28))
+    x1_rows = [row for row in manifest_x1["rows"] if row["table_symbol"] == "kX1Table"]
+    non_x1_rows = [row for row in manifest_x1["rows"] if row["table_symbol"] != "kX1Table"]
+    assert len(x1_rows) == 1
+    assert x1_rows[0]["explicit_ownership"] is True and x1_rows[0]["changed"] is False
+    assert x1_rows[0]["action"] == "replace_explicit_owned"
+    assert x1_rows[0]["candidate_digest"] == x1_rows[0]["baseline_digest"] == table_digest(baseline_x1)
+    assert len(non_x1_rows) == 27
+    assert all(row["explicit_ownership"] is False for row in non_x1_rows)
+    assert all(row["changed"] is False for row in non_x1_rows)
+    assert all(row["action"] == "preserve_source_owned_baseline" for row in non_x1_rows)
+    assert all(row["candidate_digest"] == row["baseline_digest"] for row in non_x1_rows)
+    try:
+        production_gate(artifact_x1, manifest_x1, hardware_candidate=True)
+        raise AssertionError("baseline-equivalent authority intake became a hardware candidate")
+    except GeneratorModesError as exc:
+        assert exc.category == "candidate_ineligible"
     POSITIVE += 1
     template = create_template()
     assert review_intake(template)["blockers"] and not template["replacements"]

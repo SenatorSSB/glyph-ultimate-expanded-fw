@@ -1,6 +1,8 @@
 # Source-authority intake workflow
 
-Status: offline tooling only; no production table set is authorized.
+Status: offline tooling only; the exact baseline-equivalent `kX1Table`
+`overlay_preserve` intake is production-authorized, but it is a semantic
+no-op, creates no active-source change, and is not a hardware candidate.
 
 ## Purpose and boundary
 
@@ -32,6 +34,14 @@ hardware proof block emission.
 example, migrated-legacy, and unknown provenance never become production by
 this tool. `source_baseline_derived` is accepted only for the narrowly scoped
 empty overlay source-equivalence proof; a changed result stops.
+
+Production authority and semantic change are separate facts. An approved
+production-authority intake may deliberately reproduce an owned table's exact
+baseline points to establish ownership without changing bytes. Such an intake
+may emit deterministic offline generator input, but its review report records
+`semantic_change_present: false` and
+`future_hardware_candidate_after_downstream_gates: false`. A downstream
+hardware-candidate gate continues to reject `NO_OP` output.
 
 The deterministic JSON review report contains the complete blocker list,
 baseline match status, ownership/replacement counts, and separate
@@ -82,7 +92,8 @@ ownership/unowned change, candidate ineligible, integrity, invalid input, then
 internal invariant. The selected category determines only the process status;
 the report still retains all blockers. Exit codes are: 0 success; 2 invalid
 input/structure; 3 authority/provenance; 4 baseline mismatch; 5
-ownership/unowned change; 6 ineligible/no-op; 7 I/O/integrity; 8 internal
+ownership/unowned change; 6 candidate ineligible (including an attempted
+hardware-candidate no-op); 7 I/O/integrity; 8 internal
 invariant. An unexpected blocker category maps to 8 rather than incorrectly
 returning success. Blocked emission uses the same selector, so `validate` and
 the matching emit command agree on the category for a mixed-blocker packet.
@@ -112,6 +123,10 @@ behavior. Preparation/install and any later active-source candidate are
 separate cycles. Firmware build and hardware testing only apply to that later
 active candidate cycle, and active changes merge only after HARDWARE_PASS.
 
-The required next production input is a human-approved version-1 intake with
-an explicit owned-table set, exact replacement points, per-table authority
-references, approval evidence, and the current matching baseline identity.
+The canonical first production-authority intake is
+`intakes/x1_baseline_equivalent_overlay_v1.intake.json`. It owns only
+`kX1Table`, copies that table's exact current nine-point baseline, and preserves
+the other 27 tables as unowned. Its project-owner approval reference is
+`docs/agent_framework/USER_DIRECTION.md#glyph-ud-008`. It validates the
+incremental authority path only; it does not prove a future active X1 value
+change safe or authorize any additional table.

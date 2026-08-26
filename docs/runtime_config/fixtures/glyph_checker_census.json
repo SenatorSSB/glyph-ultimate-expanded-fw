@@ -2856,7 +2856,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 14695,
+      "file_size_bytes": 14708,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -2952,7 +2952,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "ca6fba4bb3759cc395270cc4e27d867de8131cc6c1a292cf2fcf08a0ccbf694a",
+      "sha256": "7ae4221b512c0eb1ba7eeccf1d0f0088189642b510ad226cd18791ed6864a488",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -2973,7 +2973,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 9622,
+      "file_size_bytes": 9666,
       "hard_coded_branch_like_strings": [
         "branch",
         "branches",
@@ -3036,7 +3036,7 @@
         "coordinate_native_profile",
         "runtime_config_docs"
       ],
-      "sha256": "4ae3cda8a904cf7cf05f2d028e9ad063a1434ec1971e977334a2ad805ff0465b",
+      "sha256": "8a26d35c2023a34815f0dbcb7260c5f20eb1b97cd58cfc893847cc5f8ebda5e3",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -6889,7 +6889,7 @@
       },
       "checker_id": "official_configurator_validation",
       "defines_main": true,
-      "file_size_bytes": 6558,
+      "file_size_bytes": 7801,
       "hard_coded_branch_like_strings": [
         "check_glyph_official_configurator_export_candidate_diff.py",
         "configurator",
@@ -6902,8 +6902,8 @@
       "imports_argparse": true,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
-      "invokes_subprocess": true,
-      "line_count": 158,
+      "invokes_subprocess": false,
+      "line_count": 186,
       "parse_error": null,
       "path": "tools/check_glyph_official_configurator_validation.py",
       "potential_branch_identity_signals": [
@@ -6914,9 +6914,7 @@
         "evidence_classes",
         "external_remapper_evidence"
       ],
-      "potential_mutation_signals": [
-        "subprocess.run"
-      ],
+      "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_official_configurator_validation",
       "referenced_repository_path_prefixes": [
         "docs/export/fixtures/official_configurator_validation_lane.json",
@@ -6930,7 +6928,7 @@
       "runtime_config_relevance_signals": [
         "candidate_generation"
       ],
-      "sha256": "44cc335022f9db50e634afb7f3e0bff67d78ba02197030122267d28e92b4b2e1",
+      "sha256": "c4d500f6e3b73a1bfd1a5280b25d30277d2324859b7b355c92dfff785e6b1ade",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": true,
@@ -11001,8 +10999,13 @@
       },
       "checker_id": "source_owned_source_authority_intake",
       "defines_main": false,
-      "file_size_bytes": 17596,
+      "file_size_bytes": 20931,
       "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate_digest",
+        "candidate_ineligible",
+        "future_hardware_candidate_after_downstream_gates",
+        "hardware_candidate",
         "hardware_candidate_created",
         "publication_candidate"
       ],
@@ -11011,10 +11014,15 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 257,
+      "line_count": 305,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_source_authority_intake.py",
       "potential_branch_identity_signals": [
+        "candidate",
+        "candidate_digest",
+        "candidate_ineligible",
+        "future_hardware_candidate_after_downstream_gates",
+        "hardware_candidate",
         "hardware_candidate_created",
         "publication_candidate"
       ],
@@ -11023,7 +11031,9 @@
       ],
       "python_module": "tools.check_glyph_source_owned_source_authority_intake",
       "referenced_repository_path_prefixes": [
+        "docs/agent_framework/USER_DIRECTION.md",
         "docs/runtime_config/fixtures/source_owned_source_authority_intake.json",
+        "docs/runtime_config/intakes/x1_baseline_equivalent_overlay_v1.intake.json",
         "tools/manage_source_owned_source_authority_intake.py"
       ],
       "runtime_config_relevance_signals": [
@@ -11031,9 +11041,9 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "43a3b8ab17a1f1c52ed7f5ed471053c04a20cf355e71a4a1117b8c36760aac12",
+      "sha256": "9d6e610e1735f6569764a42325093cfaa44d33a839e5dd1d4868b22e5ff4adc6",
       "static_signals": {
-        "agent_framework": false,
+        "agent_framework": true,
         "candidate_generation": false,
         "coordinate_native": false,
         "docs_navigation": true,

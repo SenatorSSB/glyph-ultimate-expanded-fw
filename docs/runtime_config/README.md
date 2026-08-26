@@ -194,7 +194,11 @@ versioning, digest, manifest, CLI, preparation/install, and migration contract.
 The separate `source_authority_intake_workflow.md` records a human-approved
 source-authority intake and deterministically emits generator-input v2 only
 after explicit ownership, replacement, baseline, and approval gates pass. It
-is offline-only, cannot infer authority, and cannot create a hardware candidate.
+is offline-only and cannot infer authority. The canonical
+`intakes/x1_baseline_equivalent_overlay_v1.intake.json` owns only `kX1Table`
+with its exact matching baseline bytes. That authorized no-op exercises the
+authority flow without creating an active-source delta or hardware candidate;
+future X1 values or additional ownership remain separately gated.
 
 ## Safe Source-Owned Realization Path
 

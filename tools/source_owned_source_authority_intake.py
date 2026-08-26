@@ -276,22 +276,21 @@ def review_intake(payload: dict[str, Any]) -> dict[str, Any]:
     if operation == "source_equivalence_proof":
         if provenance != "source_baseline_derived" or mode != "overlay_preserve" or owned or replacement_symbols:
             _block(blockers, "EQUIVALENCE_SCOPE", "candidate_ineligible", "intent", "source equivalence is only empty source_baseline_derived overlay")
+    semantic_change_present = False
     if operation == "production_changeset" and isinstance(payload.get("replacements"), list):
         baseline_by_symbol = {table["table_symbol"]: table for table in _baseline_tables()}
-        changed = any(
+        semantic_change_present = any(
             isinstance(replacement, dict)
             and replacement.get("table_symbol") in baseline_by_symbol
             and isinstance(replacement.get("points"), list)
             and [{"x": point.get("x"), "y": point.get("y")} for point in replacement["points"] if isinstance(point, dict)] != baseline_by_symbol[replacement["table_symbol"]]["points"]
             for replacement in payload["replacements"]
         )
-        if not changed:
-            _block(blockers, "SEMANTIC_NO_OP", "candidate_ineligible", "replacements", "production changeset must not be a semantic no-op")
     blockers.sort(key=lambda b: (b["category"], b["path"], b["code"]))
-    report = {"schema_version": REPORT_SCHEMA_VERSION, "intake_id": payload.get("intake_id"), "authority_status": status, "provenance_class": provenance, "generation_mode": mode, "requested_operation": operation, "baseline_matches_current": not any(b["category"] == "baseline_mismatch" for b in blockers), "owned_table_count": len(owned), "replacement_table_count": len(replacement_symbols), "blockers": blockers}
+    report = {"schema_version": REPORT_SCHEMA_VERSION, "intake_id": payload.get("intake_id"), "authority_status": status, "provenance_class": provenance, "generation_mode": mode, "requested_operation": operation, "baseline_matches_current": not any(b["category"] == "baseline_mismatch" for b in blockers), "owned_table_count": len(owned), "replacement_table_count": len(replacement_symbols), "semantic_change_present": semantic_change_present, "blockers": blockers}
     report["production_emission_allowed"] = not blockers and operation == "production_changeset"
     report["source_equivalence_emission_allowed"] = not blockers and operation == "source_equivalence_proof"
-    report["future_hardware_candidate_after_downstream_gates"] = report["production_emission_allowed"]
+    report["future_hardware_candidate_after_downstream_gates"] = report["production_emission_allowed"] and semantic_change_present
     report["semantic_digest"] = digest(report)
     return report
 
@@ -324,7 +323,6 @@ def emit_generator_input(payload: dict[str, Any], *, operation: str) -> tuple[di
     artifact, manifest = generate(normalized)
     validate_manifest(artifact, manifest)
     production_gate(artifact, manifest)
-    if operation == "production_changeset" and manifest["classification"] == "NO_OP": _fail("production changeset must not emit a semantic no-op", "candidate_ineligible")
     if operation == "source_equivalence_proof" and manifest["classification"] != "NO_OP": _fail("source equivalence must be a semantic no-op", "candidate_ineligible")
     # Return the authored v2 wire shape.  ``validate_input`` normalizes an
     # omitted full-replacement ownership list to ``[]`` internally, but the
