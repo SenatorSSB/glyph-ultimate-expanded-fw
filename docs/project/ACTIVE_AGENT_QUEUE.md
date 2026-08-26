@@ -19,41 +19,31 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "091834bbb35f785cb67212110339af31a8b64e08",
+  "audit_base_sha": "a747dd54b02b207483142331d8b5be1113fc951e",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
-    "branch": "planning/portfolio-20260824-2349",
-    "base_configurator_sha": "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+    "branch": "planning/portfolio-20260827-0132",
+    "base_configurator_sha": "a747dd54b02b207483142331d8b5be1113fc951e",
     "candidate_count": 2,
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator independently reviewed fresh packet glyph-portfolio-20260824-2349 at commit ffba28772d8559df4b356de9b3a3f02248d16c07 against live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 and cleared curator_review_required.",
-      "A live-byte-identical reproduction proved that GP-CONFIG-004 Done evidence was incomplete: a reviewed capture with contradictory diff-row/comparison status, contradictory result.md status, contradictory duplicate artifact paths and hashes, and nonexistent nested paths still passed. GP-CONFIG-004 was reopened READY for the exact offline correspondence repair and is now DONE.",
-      "GP-PROV-002 publication recovery integrated the exact reviewed feature tip 9c94b5449b8065cb02aa0689ca0564720238b80c into configurator and preserved the reviewed implementation and validation scope; no new implementation was started.",
-      "GP-CTL-002 completed after exact implementation integration and separate completion publication; its Git correspondence guardrails are now canonical.",
-      "Curator independently reverified surviving Planner candidate GP-PROV-003 against live configurator 091834bbb35f785cb67212110339af31a8b64e08, bound its static inventory schema and discovery boundary, and authorized the complete H0 work order as READY.",
-      "GP-CONFIG-004 now satisfies GP-CONFIG-002's substantive predecessor; GP-CONFIG-002 remains evidence-gated on an external official-configurator operator capture, while GP-AUTH-001 remains user/source-authority gated.",
-      "The earlier review retained GP-PROV-003 as research gated, GP-AUTH-001 as user/source-authority gated, and GP-CONFIG-002 behind repair plus external evidence; the current follow-up supersedes only the first classification and records the satisfied GP-CONFIG-004 predecessor. No global evidence wait is proposed or supported.",
+      "Curator independently reviewed fresh packet glyph-portfolio-20260827-0132 at commit 174cac2a61b39de543d110fb9319465961501812 against live configurator a747dd54b02b207483142331d8b5be1113fc951e and authorized GP-PROV-004 and GP-PROV-005 as complete H0 READY work orders.",
+      "GP-PROV-003 reviewed implementation tip 2d468884e5fa812d33886e2520b8251d9ca970be is an ancestor of canonical integration a747dd54b02b207483142331d8b5be1113fc951e and is now DONE through structured direct-ancestry evidence.",
+      "GP-AUTH-001 is resolved by the production-authorized baseline-equivalent sole-kX1Table no-op intake; it was Planner-only and is not fabricated as a DONE queue item or active candidate.",
+      "GP-CONFIG-002 is invalidated by GLYPH-UD-007; no official-configurator capture is required, and historical evidence remains preserved without counting as active runway.",
+      "GP-ART-001 and GP-X1-001 remain USER_DECISION_GATED Planner survivors; neither is executable, Preauthorized, or hardware-pending.",
+      "No global evidence wait is proposed or supported.",
       "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260824-2349",
-      "planning_commit": "ffba28772d8559df4b356de9b3a3f02248d16c07",
-      "packet_id": "glyph-portfolio-20260824-2349",
-      "packet_base_configurator_sha": "caf37e10673896b3bf5e2815875a93310b3f3ac1",
-      "curation_branch": "curation/portfolio-20260826-2131-review",
-      "review_date": "2026-08-26"
-    },
-    "followup_review_provenance": {
-      "planning_branch": "planning/portfolio-20260824-2349",
-      "planning_commit": "ffba28772d8559df4b356de9b3a3f02248d16c07",
-      "packet_id": "glyph-portfolio-20260824-2349",
-      "packet_base_configurator_sha": "caf37e10673896b3bf5e2815875a93310b3f3ac1",
-      "live_configurator_sha": "091834bbb35f785cb67212110339af31a8b64e08",
-      "curation_branch": "curation/portfolio-20260826-2350-review",
-      "review_date": "2026-08-26"
+      "planning_branch": "planning/portfolio-20260827-0132",
+      "planning_commit": "174cac2a61b39de543d110fb9319465961501812",
+      "packet_id": "glyph-portfolio-20260827-0132",
+      "packet_base_configurator_sha": "a747dd54b02b207483142331d8b5be1113fc951e",
+      "curation_branch": "curation/portfolio-20260827-0148-review",
+      "review_date": "2026-08-27"
     }
   },
   "completion_correspondence": {
@@ -78,19 +68,19 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
     "RUNWAY_LOW",
-    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
-    "RUNWAY_SHORTFALL_EVIDENCE_GATED"
+    "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -103,7 +93,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-003",
       "title": "Inventory declared build-input provenance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-003-build-input-provenance-inventory-20260826",
       "objective": "Create one deterministic static inventory of the defined canonical Glyph toolchain, dependency, workflow, source-selection, source-identity, and postprocessor provenance boundary without resolving, changing, installing, or executing any dependency.",
       "why_this_matters": "Current canonical checks prove workflow publication routing and observed source/postprocessor/artifact correspondence, but no load-bearing record covers the selectors that choose the runner, workflow actions, Python line, PlatformIO tool, platform/framework packages, libraries, source tree, local build scripts, nested reusable-workflow caller, or tracked postprocessor. Exact-build and reproducibility claims therefore remain unsupported and selector drift can occur without one complete provenance boundary.",
@@ -147,12 +137,166 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused inventory/checker branch if completeness or classification cannot be enforced without resolution or remediation; retain every existing selector and provenance non-claim rather than inventing resolved identities.",
       "status_documentation_updates": "Document GP-PROV-003 as a declared-input inventory only, add its current validation classification, and retain explicit UNKNOWN/unresolved statements for dependency contents, moving refs, build-device-config ownership/caller, postprocessor semantics, reproducibility, immutable storage, artifact acceptance, and hardware.",
-      "done_evidence": "Pending authorized implementation, fresh independent review, focused provenance adversarial corpus, current validation aggregate, and exact canonical publication evidence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "ea5ae10022bc9face69644c5ae9f7ad322940658",
+        "reviewed_implementation_sha": "2d468884e5fa812d33886e2520b8251d9ca970be",
+        "prior_canonical_integration_sha": "a747dd54b02b207483142331d8b5be1113fc951e",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/build_input_provenance_inventory.md",
+          "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_build_input_provenance_inventory.py"
+        ],
+        "independent_review_provenance": "Independent validator/reviewer PASS on exact feature tip 2d468884e5fa812d33886e2520b8251d9ca970be after adversarial declaration-discovery, selector-classification, workflow-scope, AST static-safety, census, health, and aggregate repairs.",
+        "validation_provenance": "Focused checker PASS with 8 declaration files, 69 selectors, 16 positive cases, 14 negative cases, no network/build/postprocessor execution, plus publication-workflow, postprocessor, census, health, aggregate, framework, sequence, navigation, surface, and diff checks."
+      },
       "stop_conditions": [
         "Any selector or tracked build-input byte would change rather than only be inventoried.",
         "Any remote content, package resolution, cache state, action implementation, runner image, dependency closure, postprocessor behavior, artifact equivalence, reproducibility, or external ownership fact would be inferred or promoted without evidence.",
         "Any build, workflow execution, postprocessor execution, artifact publication, device write, flashing, hardware result, runtime-loaded configuration, persistence, Nunchuk, root-cause, or game-semantic scope appears.",
         "Any new load-bearing checker can pass with missing nested workflows, unclassified selectors, stale declaration hashes, or weakened validation applicability."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-PROV-004",
+      "title": "Record timestamped upstream observations for canonical build-input selectors",
+      "status": "READY",
+      "branch": "glyph/gp-prov-004-observed-build-input-resolutions-20260827",
+      "objective": "Create a deterministic exact-base observational record for every network-addressable toolchain, dependency, workflow action, runner, reusable-workflow, and external source selector in the canonical GP-PROV-003 inventory, recording resolved identities or explicit bounded unresolved/unreachable outcomes without changing or installing any build input.",
+      "why_this_matters": "GP-PROV-003 binds declared selectors but intentionally leaves package/action content identity, toolchain resolution, runner image identity, and build-device-config caller/ownership unresolved. Timestamped source-classified observations narrow those gaps without claiming immutable resolution or reproducibility.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This adds observational provenance docs, a fixture, and an offline checker only. It does not install dependencies, alter selectors or pins, build firmware, execute workflows or glyph_nuker, publish or accept an artifact, access a device, or change runtime/configurator behavior.",
+      "scope": "Add docs/runtime_config/build_input_resolution_observations.md, docs/runtime_config/fixtures/build_input_resolution_observations.json, and tools/check_glyph_build_input_resolution_observations.py. Bind the source inventory path, SHA-256 d783688fdc140ad2a5706b168f24f76093d0a388431ca4b33253257c52dfc455, blob 5e6d2f128cc6baccd98c39369fbd6bc5acc43851, base configurator SHA, observation timestamp, lookup method, authoritative upstream locator, raw selector, observed full identity when available, mutability classification, result, evidence locator, and exact unresolved reason. Cover exactly the 42 direct selectors selected by categories toolchain, dependency, workflow_action, workflow_runner, and reusable_workflow plus meta.external_repo and meta.external_revision, and bind workflow.device.external_repo and workflow.device.external_revision as the two tracked derived route expressions. Distinguish visible reusable-workflow source/ref from proof of live invocation, secrets, permissions, or repository ownership. Individual lookups may resolve, remain unresolved, or be unreachable, but must never be silently omitted.",
+      "explicit_excluded_scope": "No package installation, lockfile, cache authority, selector/pin/remediation change, workflow mutation, build, compiler/configuration census, postprocessor execution, artifact generation/upload/acceptance/storage, reproducibility or byte-equivalence claim, caller/secret/permission inference, firmware/runtime source, device write, protobuf write, persistence, flashing, hardware result, Nunchuk claim, root-cause claim, or gameplay-semantic claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator a747dd54b02b207483142331d8b5be1113fc951e; canonical GP-PROV-003 inventory docs/runtime_config/fixtures/build_input_provenance_inventory.json, SHA-256 d783688fdc140ad2a5706b168f24f76093d0a388431ca4b33253257c52dfc455, with 8 declaration files and 69 selectors; direct read-only upstream Git, vendor, package-registry, action, runner, and reusable-workflow observations. Observations are timestamped facts, not immutable guarantees.",
+      "dependencies_prerequisites": [
+        "GP-PROV-003 is canonically published DONE with structured ancestry evidence.",
+        "All eight declaration-file hashes and the source inventory SHA-256 still match.",
+        "Implementation begins with live remote verification under the repository networking policy.",
+        "Only read-only upstream lookup mechanisms are used."
+      ],
+      "substantive_authorization_rationale": "The missing facts and eligible selector set are mechanically established by canonical source. Resolving or explicitly preserving uncertainty is observational H0 research requiring no product, domain, storage, gameplay, or firmware-behavior decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Any declaration byte, inventory selector, source-inventory digest, canonical environment, workflow topology, or eligible-selector rule drifts before implementation.",
+        "The work would require installing or resolving dependencies locally, changing selectors or pins, inferring workflow ownership or permissions, or asserting reproducibility.",
+        "A network-capable observation route is wholly unavailable after every permitted retry; do not publish an all-unreachable packet as meaningful completion."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of planning/portfolio-20260827-0132 commit 174cac2a61b39de543d110fb9319465961501812, packet glyph-portfolio-20260827-0132, independently rebound to live configurator a747dd54b02b207483142331d8b5be1113fc951e on curation/portfolio-20260827-0148-review on 2026-08-27.",
+      "automated_validation": [
+        "The fixture has exact schema and one record for every required direct selector plus the two derived route expressions, with no duplicates or omissions.",
+        "Every record exactly binds selector ID, raw selector, source inventory identity, observation time, lookup method, result class, mutability, evidence locator, and nullable observed identity.",
+        "Resolved Git identities require full lowercase commits; tag and branch observations remain movable and cannot be promoted to immutable.",
+        "Unresolved, unreachable, runtime-derived, and visible-source-without-invocation outcomes remain distinct.",
+        "Adversarial fixtures reject omitted selectors, fabricated resolutions, abbreviated immutable SHAs, selector mismatch, stale inventory identity, duplicate records, unknown fields or statuses, malformed timestamps or URLs, and contradictory nullability.",
+        "The checker performs no network access, installation, workflow execution, build, postprocessing, upload, artifact read, or device access.",
+        "Focused checker, GP-PROV-003 checker, workflow and publication provenance checks, census, validation health, full current aggregate in correct branch context, framework, sequence, navigation, surface, and git diff checks pass."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 observational docs, fixture, and offline checker only; any build-input or product/runtime delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Drop the focused observational packet if selector correspondence or evidence classification cannot be made deterministic; preserve GP-PROV-003 declarations and all unresolved non-claims.",
+      "status_documentation_updates": "Link the observation packet from the runtime-config provenance documentation and record only independently observed resolution states; do not rewrite the GP-PROV-003 declared-only inventory into a reproducibility or pinning claim.",
+      "done_evidence": "Pending implementation, independent review, exact selector correspondence, current validation, feature-ref publication, canonical ancestry, and separate structured completion publication.",
+      "stop_conditions": [
+        "Selector or declaration drift.",
+        "A required observed identity cannot be represented without inference or trust promotion.",
+        "The work needs a pin, version, or workflow-owner decision.",
+        "The work would mutate a build input, workflow, product source, artifact, or external account.",
+        "All permitted network-capable observation paths fail."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-PROV-005",
+      "title": "Establish bounded source lineage evidence for glyph_nuker",
+      "status": "READY",
+      "branch": "glyph/gp-prov-005-glyph-nuker-source-lineage-20260827",
+      "objective": "Search the exact repository history and named authoritative upstream repositories and releases for glyph_nuker source, immutable source commit, documented purpose, and build provenance; record authoritative lineage if found or a bounded searched-not-found result without claiming global absence.",
+      "why_this_matters": "The tracked executable participates in the publication route, but canonical evidence establishes only its bytes and invocation. Purpose, byte transformation, source lineage, and build recipe remain UNKNOWN.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This is static source-lineage research and deterministic evidence checking only. It does not execute, replace, rebuild, reverse-engineer as authority, or validate glyph_nuker; it does not inspect a real UF2 transformation, build firmware, publish an artifact, access a device, or change runtime/configurator behavior.",
+      "scope": "Add docs/runtime_config/glyph_nuker_source_lineage.md, docs/runtime_config/fixtures/glyph_nuker_source_lineage.json, and tools/check_glyph_nuker_source_lineage.py. Bind glyph_nuker Git mode 100755, SHA-256 8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae, blob d0524944a90503a8881281b6673b1f46e36f9383, current workflow invocation, and local history showing binary introduction in squash commit cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd. Search the live SenatorSSB/glyph-ultimate-expanded-fw history and the source-named GregTurbo/HayBox-Glyph repository's immutable commits, trees, tags, and releases. Each search records exact query or method, time, live locator or ref, outcome, and immutable evidence identity. Result is either AUTHORITATIVE_SOURCE_LINEAGE_FOUND or BOUNDED_SOURCE_LINEAGE_NOT_FOUND. A found result requires exact upstream repository, full source commit, source paths, build-recipe paths, and source-backed purpose or effect references. A not-found result keeps lineage, purpose, effect, and build recipe UNKNOWN and states the bounded search limitations.",
+      "explicit_excluded_scope": "No glyph_nuker execution; no real or synthetic UF2 pre or post experiment; no rebuild, binary-equivalence, safety, artifact-acceptance, reproducibility, replacement, workflow, upload, store, release, firmware/runtime, device, persistence, protobuf, flashing, hardware, Nunchuk, root-cause, or gameplay-semantic change or claim. Static strings, file metadata, or disassembly may be observations only and cannot establish source authority; no global proof of source absence.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator a747dd54b02b207483142331d8b5be1113fc951e; canonical binary blob d0524944a90503a8881281b6673b1f46e36f9383, mode 100755, SHA-256 8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae; local path history currently reaches only import commit cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd. Purpose or effect may become source-backed only through exact authoritative upstream source or docs at immutable identities.",
+      "dependencies_prerequisites": [
+        "GP-PROV-003 is canonically DONE.",
+        "The glyph_nuker blob, mode, workflow invocation, and local path history remain unchanged.",
+        "Named upstream sources are checked through permitted read-only network access."
+      ],
+      "substantive_authorization_rationale": "The unknown lineage is directly source-proven and a bounded evidence search cannot change firmware or product semantics. Both a source-backed positive result and an explicitly bounded not-found result are useful without requiring a product decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "glyph_nuker bytes, mode, workflow invocation, or relevant repository history changes.",
+        "The task would execute, rebuild, or replace the binary or inspect a real artifact transformation.",
+        "A claimed purpose, byte effect, source, recipe, equivalence, or safety conclusion lacks immutable authoritative evidence.",
+        "All permitted network-capable searches fail, preventing a meaningful bounded search."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of planning/portfolio-20260827-0132 commit 174cac2a61b39de543d110fb9319465961501812 against live configurator a747dd54b02b207483142331d8b5be1113fc951e on curation/portfolio-20260827-0148-review on 2026-08-27, including independent path-history and canonical binary/workflow inspection.",
+      "automated_validation": [
+        "The fixture exactly binds binary mode, SHA-256, Git blob, workflow invocation, import commit, canonical base, and every required search surface.",
+        "A positive result requires full immutable upstream commit identities, existing source and build-recipe paths, exact evidence correspondence, and source-backed classification.",
+        "A negative result requires complete bounded search records and keeps source lineage, recipe, purpose, and byte transformation UNKNOWN.",
+        "Adversarial cases reject fabricated paths, mutable refs presented as immutable, abbreviated SHAs, omitted search surfaces, binary drift, unsupported purpose or effect promotion, and contradictory found or not-found fields.",
+        "The checker uses local bytes and checked-in evidence only; it performs no network access or binary or artifact execution.",
+        "Focused lineage, build-input provenance, artifact-postprocessor provenance and workflow, census, health, full current aggregate in correct branch context, framework, sequence, navigation, surface, and diff checks pass."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 static research, fixture, and checker only; any binary, workflow, build input, product, or runtime delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Drop the focused lineage packet if evidence cannot be bound without inference; leave glyph_nuker, workflow, artifact contracts, and UNKNOWN claims unchanged.",
+      "status_documentation_updates": "Link the bounded lineage record from existing artifact and build-input provenance docs. Update current factual status only for claims directly established by immutable source evidence; retain UNKNOWN otherwise.",
+      "done_evidence": "Pending bounded source search, deterministic evidence packet, independent review, current validation, feature-ref publication, canonical ancestry, and separate structured completion publication.",
+      "stop_conditions": [
+        "Binary, workflow, or history drift.",
+        "Execution, rebuilding, replacement, or real artifact analysis becomes necessary.",
+        "Authoritative lineage cannot be distinguished from inference.",
+        "A product, safety, artifact-acceptance, or workflow-remediation decision is required.",
+        "All permitted network-capable source searches fail."
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -1282,7 +1426,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-004","GP-PROV-005"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1296,13 +1440,16 @@ live-verified in canonical configurator.
 `GP-PROV-002` is `DONE`; its reviewed feature tip is integrated into
 configurator and its exact recovery publication is live-verified.
 `GP-CTL-002` is `DONE`; its exact integration and separate completion
-publication are canonical. `GP-PROV-003` is the sole immediate `READY` item.
+publication are canonical. `GP-PROV-003` is `DONE` after exact reviewed
+implementation ancestry and separate structured completion publication.
+`GP-PROV-004` and `GP-PROV-005` are the two immediate `READY` items.
 Recorded Preauthorization is zero, mechanically activatable Preauthorization is
 zero, and no invalidated Preauthorization or hardware-pending work exists.
-Effective runway is one against a target of four (`RUNWAY_LOW`).
-`GP-AUTH-001` remains user/source-authority gated and
-`GP-CONFIG-002` has satisfied its repair predecessor and remains
-external-evidence gated; neither survivor is a portfolio-global wait.
+Effective runway is two against a target of four (`RUNWAY_LOW`).
+`GP-AUTH-001` is resolved by the baseline-equivalent sole-X1 production intake;
+`GP-CONFIG-002` is invalidated by user direction. Planner survivors
+`GP-ART-001` and `GP-X1-001` remain user-decision gated; no survivor is a
+portfolio-global wait.
 
 ## Allowed Statuses
 
@@ -1336,13 +1483,11 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Fresh Planner packet `glyph-portfolio-20260824-2349` at
-`ffba28772d8559df4b356de9b3a3f02248d16c07` was independently reviewed
-against exact live `configurator` `caf37e10673896b3bf5e2815875a93310b3f3ac1`,
-then followed up against live `091834bbb35f785cb67212110339af31a8b64e08`.
-Its GP-CONFIG-004 repair evidence reproduced, and the packet is
-`PARTIALLY_CONSUMED` after the repair, GP-CTL-002, and GP-PROV-003 curation.
-Two explicitly gated survivors remain.
+Fresh Planner packet `glyph-portfolio-20260827-0132` at
+`174cac2a61b39de543d110fb9319465961501812` was independently reviewed
+against exact live `configurator` `a747dd54b02b207483142331d8b5be1113fc951e`.
+It is `PARTIALLY_CONSUMED` after `GP-PROV-004` and `GP-PROV-005` authorization.
+Two explicitly user-decision-gated survivors remain.
 
 - `GP-SRC-003`: `DONE`; prepared-v2 normalized input, deterministic
   artifact/manifest regeneration, shared isolated-output policy, independent
@@ -1368,10 +1513,15 @@ Two explicitly gated survivors remain.
 - `GP-PROV-002`: `DONE`; its reviewed implementation is integrated in
   configurator and live-verified; storage, acceptance, postprocessor
   semantics, and hardware remain explicitly unresolved and excluded.
-- `GP-PROV-003`: `READY`; its H0 static declaration-file and selector inventory
-  has an exact schema, discovery boundary, classification vocabulary, and
-  non-claims; network resolution, pin changes, builds, and reproducibility
-  claims remain excluded.
+- `GP-PROV-003`: `DONE`; its exact independently reviewed H0 implementation is
+  an ancestor of canonical integration `a747dd54b02b207483142331d8b5be1113fc951e`,
+  and structured completion evidence binds the reviewed path set.
+- `GP-PROV-004`: `READY`; record timestamped read-only upstream observations
+  for every eligible build-input selector without installation, pin change,
+  workflow mutation, build, or reproducibility claim.
+- `GP-PROV-005`: `READY`; perform bounded source-lineage research for the
+  exact tracked `glyph_nuker` identity without executing, rebuilding,
+  replacing, or promoting inference into authority.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
   current-tree structured record or immutable full-commit-plus-path record and
   must match the exact queue identity/result fields. The exact flat schema,
@@ -1398,17 +1548,24 @@ Two explicitly gated survivors remain.
 - `GP-PROV-001`: `DONE`; observed-only research and inert provenance schema
   record the tracked identity and synthetic verifier; CI integration and store
   selection remain excluded.
-- `GP-AUTH-001`: `USER_DECISION_GATED`; no production-authorized owned-table
-  set or replacement content exists, so Curator cannot authorize it.
-- `GP-CONFIG-002`: `EVIDENCE_GATED` on an external operator capture; its
-  GP-CONFIG-004 repair predecessor is satisfied.
+- `GP-AUTH-001`: `RESOLVED_BY_PRODUCTION_AUTHORIZED_NO_OP_INTAKE`; the Planner-
+  only gate is satisfied by the sole-`kX1Table` baseline-equivalent intake and
+  is not fabricated as a Done work order or active candidate.
+- `GP-CONFIG-002`: `INVALIDATED_BY_USER_DIRECTION`; no official-configurator
+  capture is required, the historical lane remains preserved, and the item is
+  not counted as invalidated Preauthorization.
+- `GP-ART-001`: `USER_DECISION_GATED`; exact store, custody, retention,
+  immutability, access, and deletion policy remain substantive owner choices.
+- `GP-X1-001`: `USER_DECISION_GATED`; no different X1 bytes are authorized and
+  no candidate or preserved artifact exists.
 
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` in the machine-readable block
-authorize immediate execution. `GP-PROV-003` is the sole Ready item. Remaining
-successor candidates require user/source authority or external evidence.
+authorize immediate execution. `GP-PROV-004` is first and `GP-PROV-005` is
+second in canonical priority order. Remaining Planner survivors require new
+user/source authority.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive

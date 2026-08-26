@@ -9,13 +9,13 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-004","GP-PROV-005"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Reviewed Planner packet `glyph-portfolio-20260824-2349` is
-partially consumed after fresh curation. `GP-SRC-003`, `GP-SRC-004`, and
+implementation. Reviewed Planner packet `glyph-portfolio-20260827-0132` is
+partially consumed after independent curation. `GP-SRC-003`, `GP-SRC-004`, and
 `GP-VAL-003` are DONE on validated implementation branches.
 `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
 and `GP-VAL-004` is DONE after its bounded checker-only temporary-root repair.
@@ -26,21 +26,22 @@ repair; no real capture was performed or interpreted.
 and live-verified.
 `GP-CTL-002` is DONE after exact implementation integration and separate
 completion publication; its Git correspondence guardrails are canonical.
-The partially consumed Planner packet retains one authorized H0 candidate and
-two explicitly gated survivors.
+The partially consumed Planner packet produced two authorized H0 work orders
+and retains two explicitly user-decision-gated survivors.
 Pushed recovery tip
 `2b734b26439e9028717becf0010e345cb5efce6c` failed independent review and is
 not mergeable; `GP-SRC-003` now requires prepared schema v2 with carried
 normalized input and deterministic artifact/manifest regeneration.
-`GP-PROV-003` is READY for an exact static inventory of declared build-input
-selectors and tracked identities; it authorizes no resolution, pin change,
-build, or reproducibility claim. Recorded Preauthorization is zero and
-effective runway is one against target four (`RUNWAY_LOW`). The current-runway marker above is
-authoritative pending fresh post-recovery curation. The `GP-AUTH-001`
-user-decision gate is satisfied by the exact baseline-equivalent `kX1Table`
-`overlay_preserve` intake, which changes no active table bytes and creates no
-hardware candidate. The former official-configurator external-evidence gate is
-invalidated.
+`GP-PROV-003` is DONE after exact reviewed implementation ancestry and separate
+structured completion publication. `GP-PROV-004` and `GP-PROV-005` are READY
+for bounded observational build-input resolution and `glyph_nuker`
+source-lineage research; neither may change pins, build inputs, workflows,
+artifacts, or runtime behavior. Recorded Preauthorization is zero and effective
+runway is two against target four (`RUNWAY_LOW`); the marker above is
+authoritative. `GP-AUTH-001` is resolved by the exact baseline-equivalent
+`kX1Table` `overlay_preserve` intake, which changes no active table bytes and
+creates no hardware candidate. `GP-CONFIG-002` is invalidated and no
+official-configurator evidence is awaited.
 
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The
