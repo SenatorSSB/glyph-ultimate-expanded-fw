@@ -448,7 +448,9 @@ def validate_completion_evidence(
     tip = _require_commit_sha(evidence["reviewed_implementation_sha"], "reviewed_implementation_sha", repo_root)
     integration = _require_commit_sha(evidence["prior_canonical_integration_sha"], "prior_canonical_integration_sha", repo_root)
     paths = evidence["reviewed_changed_paths"]
-    if not isinstance(paths, list) or paths != sorted(paths) or len(paths) != len(set(paths)) or not all(isinstance(path, str) and path for path in paths):
+    if not isinstance(paths, list) or not all(isinstance(path, str) and path for path in paths):
+        fail("completion evidence reviewed_changed_paths must be a string list")
+    if paths != sorted(paths) or len(paths) != len(set(paths)):
         fail("completion evidence reviewed_changed_paths must be sorted unique strings")
     _is_ancestor(repo_root, base, tip, "implementation base")
     _is_ancestor(repo_root, base, integration, "canonical integration")
@@ -468,11 +470,12 @@ def check_completion_correspondence(payload: dict[str, object], items: list[dict
     if not isinstance(policy, dict) or set(policy) != set(COMPLETION_POLICY_FIELDS):
         fail("queue completion_correspondence policy has invalid fields")
     migration = _require_commit_sha(policy.get("migration_base_configurator_sha"), "migration_base_configurator_sha")
+    current_publication = _git(REPO_ROOT, "rev-parse", "HEAD").strip()
+    _is_ancestor(REPO_ROOT, migration, current_publication, "migration base")
     legacy_payload = _queue_from_commit(migration)
     legacy = sorted(item["id"] for item in legacy_payload["items"] if isinstance(item, dict) and item.get("status") == "DONE")
     if policy.get("legacy_done_ids") != legacy:
         fail("queue legacy_done_ids do not match the migration-base Done set")
-    current_publication = _git(REPO_ROOT, "rev-parse", "HEAD").strip()
     for item in items:
         if item["status"] == "DONE" and item["id"] not in legacy:
             validate_completion_evidence(item, item["done_evidence"], policy=policy, publication_sha=current_publication)
@@ -533,6 +536,15 @@ def check_completion_correspondence_self_test() -> None:
         replay_publication = commit(replay_root, "completion publication")
         replay = evidence(replay_base, replay_tip, replay_integration, replay_publication, "EXACT_PATH_TREE", ["docs/reviewed.txt"])
         validate_completion_evidence({}, replay, policy={}, publication_sha=replay_publication, repo_root=replay_root)
+        for bad_paths in (["docs/extra.txt", "docs/reviewed.txt"], ["docs/reviewed.txt", "docs/reviewed.txt"]):
+            invalid_replay = dict(replay)
+            invalid_replay["reviewed_changed_paths"] = bad_paths
+            try:
+                validate_completion_evidence({}, invalid_replay, policy={}, publication_sha=replay_publication, repo_root=replay_root)
+            except FrameworkDocsError:
+                pass
+            else:
+                fail("invalid exact replay path set passed completion correspondence")
 
         invalid = dict(direct)
         invalid["reviewed_implementation_sha"] = base
@@ -542,6 +554,22 @@ def check_completion_correspondence_self_test() -> None:
             pass
         else:
             fail("unintegrated reviewed implementation passed completion correspondence")
+        malformed = dict(direct)
+        malformed["reviewed_changed_paths"] = [None, "docs/reviewed.txt"]
+        try:
+            validate_completion_evidence({}, malformed, policy={}, publication_sha=publication, repo_root=repo)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail("malformed reviewed path list passed completion correspondence")
+        wrong_base = dict(direct)
+        wrong_base["implementation_base_sha"] = tip
+        try:
+            validate_completion_evidence({}, wrong_base, policy={}, publication_sha=publication, repo_root=repo)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail("wrong implementation base passed completion correspondence")
     pass_line("completion correspondence direct/replay and negative Git corpus validate")
 
 
