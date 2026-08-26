@@ -388,6 +388,8 @@ def _is_ancestor(repo_root: Path, ancestor: str, descendant: str, field: str) ->
 
 def _queue_from_commit(commit: str, repo_root: Path = REPO_ROOT) -> dict[str, object]:
     raw = _git(repo_root, "show", f"{commit}:docs/project/ACTIVE_AGENT_QUEUE.md")
+    if raw.count(QUEUE_START) != 1 or raw.count(QUEUE_END) != 1:
+        fail("migration-base queue state must contain exactly one marker pair")
     block = raw.split(QUEUE_START, 1)[1].split(QUEUE_END, 1)[0].strip()
     if not block.startswith("```json") or not block.endswith("```"):
         fail("migration-base queue state must be fenced JSON")
@@ -562,6 +564,23 @@ def check_completion_correspondence_self_test() -> None:
             pass
         else:
             fail("malformed reviewed path list passed completion correspondence")
+        for field, value in (("implementation_base_sha", "refs/heads/main"), ("prior_canonical_integration_sha", "HEAD")):
+            invalid_ref = dict(direct)
+            invalid_ref[field] = value
+            try:
+                validate_completion_evidence({}, invalid_ref, policy={}, publication_sha=publication, repo_root=repo)
+            except FrameworkDocsError:
+                pass
+            else:
+                fail("mutable completion Git reference passed correspondence")
+        invalid_order = dict(direct)
+        invalid_order["prior_canonical_integration_sha"] = publication
+        try:
+            validate_completion_evidence({}, invalid_order, policy={}, publication_sha=publication, repo_root=repo)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail("completion integration equal to publication passed correspondence")
         wrong_base = dict(direct)
         wrong_base["implementation_base_sha"] = tip
         try:
