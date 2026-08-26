@@ -9,7 +9,7 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-004"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CTL-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The executable work runway is owned separately by
@@ -19,16 +19,13 @@ partially consumed after fresh curation. `GP-SRC-003`, `GP-SRC-004`, and
 `GP-VAL-003` are DONE on validated implementation branches.
 `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
 and `GP-VAL-004` is DONE after its bounded checker-only temporary-root repair.
-`GP-CONFIG-004` is reopened `READY` for exact offline reviewed-capture status,
-artifact, path, precondition, operator/route, and comparison correspondence;
-fresh adversarial evidence disproved its prior Done completeness without
-performing or interpreting a real capture.
-`GP-PROV-002` has reviewed live feature tip
-`9c94b5449b8065cb02aa0689ca0564720238b80c` for the bounded observed-only
-`build.yml` sidecar, but it is `IN_PROGRESS` because live configurator does not
-contain that implementation tree; publication recovery comes first.
-`GP-CTL-002` is substantively Preauthorized but `WAITING` to enforce immutable
-Done/integration correspondence until exact mechanical proof of that recovery.
+`GP-CONFIG-004` is DONE after exact offline reviewed-capture correspondence
+repair; no real capture was performed or interpreted.
+`GP-PROV-002` is DONE after the reviewed live feature tip
+`9c94b5449b8065cb02aa0689ca0564720238b80c` was integrated into configurator
+and live-verified.
+`GP-CTL-002` is READY after mechanical activation on exact recovery proof;
+its implementation remains the next authorized work.
 The partially consumed Planner packet retains three explicitly gated survivors.
 Pushed recovery tip
 `2b734b26439e9028717becf0010e345cb5efce6c` failed independent review and is

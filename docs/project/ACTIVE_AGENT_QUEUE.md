@@ -32,7 +32,7 @@ Git, but it is not current candidate supply or implementation authority.
       "Curator independently reviewed fresh packet glyph-portfolio-20260824-2349 at commit ffba28772d8559df4b356de9b3a3f02248d16c07 against live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 and cleared curator_review_required.",
       "A live-byte-identical reproduction proved that GP-CONFIG-004 Done evidence is incomplete: a reviewed capture with contradictory diff-row/comparison status, contradictory result.md status, contradictory duplicate artifact paths and hashes, and nonexistent nested paths still passed. GP-CONFIG-004 is reopened READY for the exact offline correspondence repair.",
       "GP-PROV-002 publication recovery integrated the exact reviewed feature tip 9c94b5449b8065cb02aa0689ca0564720238b80c into configurator and preserved the reviewed implementation and validation scope; no new implementation was started.",
-      "GP-CTL-002 remains substantively PREAUTHORIZED/WAITING on exact GP-PROV-002 integration. The exact reviewed recovery tree and control-plane publication are permitted non-semantic deltas; any replay, governance-semantic drift, or changed correspondence architecture invalidates activation.",
+      "GP-CTL-002 is mechanically activated READY after exact GP-PROV-002 integration and prerequisite-gate verification; its implementation remains unstarted.",
       "GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 is substantive-dependency gated on the GP-CONFIG-004 repair and then external operator evidence. No global evidence wait is proposed or supported.",
       "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
     ],
@@ -47,7 +47,7 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "runway": {
     "immediate_ready": 1,
-    "recorded_preauthorized": 1,
+    "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
@@ -73,7 +73,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CTL-002",
       "title": "Prove canonical Done integration correspondence",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "glyph/gp-ctl-002-done-integration-correspondence-20260824",
       "objective": "Prevent canonical work orders from becoming Done unless immutable Git evidence proves that the reviewed authorized implementation, or one exact reviewed replay, is already integrated in the canonical history before the completion publication.",
       "why_this_matters": "GP-SRC-003 was twice published Done while its repaired implementation tree was absent, and GP-PROV-002 has now repeated the same failure: publication commit dfc92adf2910532e24f429f61ea3c1fe7026425a marked it Done on the strength of live feature ref 9c94b5449b8065cb02aa0689ca0564720238b80c, while live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 does not contain that implementation tree. The current framework checker validates only nonempty prose done_evidence and therefore certifies a false canonical state.",
@@ -92,12 +92,7 @@ Git, but it is not current candidate supply or implementation authority.
         "The ordinary Curator governance-checker surface remains tools/check_glyph_agent_framework_docs.py; docs-navigation changes are permitted only for a real navigation consequence."
       ],
       "substantive_authorization_rationale": "The gap is no longer hypothetical and its architecture is fully bounded. A frozen Git-derived legacy set avoids retroactive evidence invention, while all later transitions must prove immutable canonical integration. Direct ancestry covers ordinary merge/fast-forward integration. Exact dedicated path-tree equality covers reviewed squash/cherry-pick replay without treating branch names, prose, patch-id heuristics, or semantic judgment as proof and without allowing extra changed paths. A separate post-integration completion publication avoids impossible self-referential SHAs. No product, domain, runtime, or source-authority choice remains.",
-      "mechanical_activation_conditions": [
-        "A fresh live configurator ref marks GP-PROV-002 DONE and git merge-base --is-ancestor 9c94b5449b8065cb02aa0689ca0564720238b80c <live-configurator-sha> succeeds, proving the exact reviewed feature tip is integrated rather than merely named by prose or a mutable ref.",
-        "The recovered configurator passes the full runtime-config aggregate, agent-framework, sequence, navigation, and docs-agent-surface gates with no GP-PROV-002 source-authority, review, or publication mismatch.",
-        "The bytes and semantics of tools/check_glyph_agent_framework_docs.py, docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md, docs/agent_framework/WORK_ORDER_TEMPLATE.md, and docs/WORKFLOW.md remain unchanged from authorization base caf37e10673896b3bf5e2815875a93310b3f3ac1; GP-CTL-002 scope and sensitive invariants remain exact. Permitted unrelated deltas are the exact reviewed GP-PROV-002 recovery, the exact GP-CONFIG-004 offline checker/docs repair within its separately authorized work order, and control-plane status/census metadata publication; any overlap with the named GP-CTL-002 sensitive surfaces fails closed.",
-        "No invalidation condition is present and activation requires no review, equivalence, architecture, product, source-authority, or semantic judgment beyond the exact objective checks above."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "GP-PROV-002 recovery changes or replays the reviewed implementation rather than integrating exact tip 9c94b5449b8065cb02aa0689ca0564720238b80c, or its implementation/review authority changes before activation.",
         "Another current canonical change already enforces equivalent or stronger Git-object-backed Done correspondence and migration safety.",
@@ -128,7 +123,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Any completion can pass with prose, a branch/tag, missing Git object, partial/extra replay, semantic judgment, or a status publication that does not descend from prior canonical integration.",
         "Any queue authorization, implementation recovery, Git merge, workflow, firmware/runtime, product checker, artifact, hardware, device-write, persistence, protobuf-write, flashing, Nunchuk, root-cause, or game-semantic scope is added."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -340,7 +335,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-004",
       "title": "Repair reviewed manual-capture correspondence",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-config-004-capture-correspondence-repair-20260826",
       "objective": "Make every reviewed official-configurator capture status, duplicate artifact field, nested path, precondition, operator/route record, and deterministic comparison describe one exact internally consistent capture packet.",
       "why_this_matters": "GP-CONFIG-004 is recorded Done, but live-byte-identical adversarial reproduction proves its checker still accepts contradictory evidence: the diff row can disagree with metadata and comparison.json, result.md can disagree with metadata overall status, top-level paths and hashes can contradict nested artifact fields, and nested checker/comparison paths can name nonexistent files. A second reviewed-shape construction can substitute unrelated existing precondition files and empty nested operator/route objects. The existing zero-capture and adversarial checks do not exercise those failures.",
@@ -386,7 +381,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker/docs repair if a valid schema-v2 packet cannot be represented without ambiguity; preserve all real evidence bytes and never restore fallback-field selection, unbound paths/statuses, or weak nested schemas.",
       "status_documentation_updates": "Record GP-CONFIG-004 as reopened for exact correspondence repair and keep GP-CONFIG-002 substantive-dependency gated until the repair is independently reviewed and canonically integrated; retain zero completed captures and every compatibility/device/runtime non-claim.",
-      "done_evidence": "Required future evidence: implementation commit on the named repair branch; independent offline-evidence checker review and repaired-scope re-review if needed; complete positive and adversarial correspondence corpus; zero-capture, official five-check lane, checker census, current aggregate, framework, navigation, and agent-surface PASS; exact live feature and configurator publication verification; no real capture and runtime/configurator product code changed: NO.",
+      "done_evidence": "Implementation commit b606244f8810b7457be09de4813dff68d87eb2117 on the named repair branch; independent offline-evidence checker review and repaired-scope re-review PASS; complete positive and adversarial correspondence corpus including exact nullability, duplicate-field binding, capture-local path/hash/status checks, and RFC6901 array/root/type/add/remove/tilde/slash cases; zero-capture, official five-check lane, checker census (190 entries), current aggregate, framework, navigation, sequence, and agent-surface PASS; merged into fresh canonical configurator in publication commit 3a266b2 and live feature ref b606244f8810b7457be09de4813dff68d87eb2117 verified; no real capture and runtime/configurator product code changed: NO.",
       "stop_conditions": [
         "Any app behavior, compatibility outcome, operator action, or reviewer observation must be inferred.",
         "Any duplicate representation, unknown entry, hash/path/status mismatch, weak nested schema, noncanonical comparison output, or output/rejection ambiguity would remain accepted.",
@@ -1174,7 +1169,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-004"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CTL-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1183,13 +1178,13 @@ target runway, primary liveness, and global evidence-wait support.
 
 `GP-SRC-003`, `GP-SRC-004`, and `GP-VAL-003` are DONE on validated
 implementation branches. `GP-SRC-005` and `GP-VAL-004` are DONE.
-`GP-CONFIG-004` is reopened `READY` because fresh adversarial evidence proves
-its prior Done correspondence was incomplete.
-`GP-PROV-002` is corrected to `IN_PROGRESS` because its reviewed live feature
-tip is not integrated into configurator; publication recovery comes first.
-`GP-CTL-002` is substantively Preauthorized but `WAITING`; it may activate only
-after exact mechanical proof that recovery integrated the reviewed feature tip.
-Recorded Preauthorization is one, mechanically activatable Preauthorization is
+`GP-CONFIG-004` is `DONE`; its exact reviewed H0 checker repair is merged and
+live-verified in canonical configurator.
+`GP-PROV-002` is `DONE`; its reviewed feature tip is integrated into
+configurator and its exact recovery publication is live-verified.
+`GP-CTL-002` is mechanically activated as `READY` because exact recovery
+integration and all recorded prerequisite gates now pass.
+Recorded Preauthorization is zero, mechanically activatable Preauthorization is
 zero, and no invalidated Preauthorization or hardware-pending work exists.
 Effective runway is one against a target of four (`RUNWAY_LOW`).
 `GP-AUTH-001` remains user/source-authority gated and
@@ -1242,30 +1237,25 @@ GP-CTL-002 Preauthorization. Three explicitly gated survivors remain.
 - `GP-SRC-004`: `DONE`; corrected active compile-time table-content classification while preserving
   all 28 table values/symbols and unchanged source-owned active-view
   publication; canonical build required if the compiled header changes.
-- `GP-CONFIG-004`: `READY`; reopened under the same ID after a reviewed-shape
-  packet with contradictory statuses, duplicate paths/hashes, and unbound
-  nested paths passed the live checker. The repair is offline H0 checker/docs
-  work only and performs or interprets no real capture.
+- `GP-CONFIG-004`: `DONE`; exact offline H0 checker/docs correspondence repair
+  is independently reviewed, fully validated, merged, and live-verified; no
+  real capture was performed or interpreted.
 - `GP-VAL-003`: `DONE`; statically censused and classified every tracked CI
   publication route, retain `build-device-config.yml` as unresolved external,
   and reconcile machine-derived health counts without editing workflows.
 - `GP-SRC-005`: `DONE`; shared isolated-output validation and atomic writing now
   govern both remaining offline writers, with only the exact inert example
   install exception; no active source/table/runtime behavior changed.
-- `GP-CTL-002`: `PREAUTHORIZED` / `WAITING`; the third false Done publication
-  resolved the substantive migration and correspondence design, but exact
-  reviewed GP-PROV-002 integration is an unmet mechanical prerequisite. After
-  that proof, the work binds a Git-derived frozen legacy set plus immutable
-  direct-ancestry or exact dedicated path-tree replay evidence for every later
-  completion.
+- `GP-CTL-002`: `READY`; exact reviewed GP-PROV-002 integration and all
+  mechanical activation prerequisites are satisfied. Its implementation binds
+  a Git-derived frozen legacy set plus immutable direct-ancestry or exact
+  dedicated path-tree replay evidence for every later completion.
 - `GP-VAL-004`: `DONE`; corrected only the stale generator-contract checker
   assumptions for aliased versus identical system temporary roots, preserving
   the shared output validator and every generator/product semantic exactly.
-- `GP-PROV-002`: `IN_PROGRESS`; its reviewed implementation is live on feature
-  ref `9c94b5449b8065cb02aa0689ca0564720238b80c`, but configurator does not
-  contain that tree. Publication recovery must integrate it before a separate
-  Done snapshot; storage, acceptance, postprocessor semantics, and hardware
-  remain explicitly unresolved and excluded.
+- `GP-PROV-002`: `DONE`; its reviewed implementation is integrated in
+  configurator and live-verified; storage, acceptance, postprocessor
+  semantics, and hardware remain explicitly unresolved and excluded.
 - `GP-PROV-003`: `RESEARCH`; exact static inventory/schema boundary remains
   unresolved and no network resolution or reproducibility claim is allowed.
 - `GP-HW-001`: `DONE`; Revision-2 result references are limited to a
