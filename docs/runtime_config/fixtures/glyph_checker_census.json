@@ -889,7 +889,7 @@
       },
       "checker_id": "build_input_resolution_observations",
       "defines_main": false,
-      "file_size_bytes": 5285,
+      "file_size_bytes": 5284,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence_locator"
@@ -899,7 +899,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 61,
+      "line_count": 60,
       "parse_error": null,
       "path": "tools/check_glyph_build_input_resolution_observations.py",
       "potential_branch_identity_signals": [
@@ -917,7 +917,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "b66019724ab2f6c5bc2b5e5a5317793667eafa9cecd80416eefb61a2d06dd703",
+      "sha256": "e4c77de9377043343d9b928757b7ed6b89569640810f405123949fbe5da89d24",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
