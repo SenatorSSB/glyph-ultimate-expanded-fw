@@ -32,7 +32,7 @@ Git, but it is not current candidate supply or implementation authority.
       "Curator independently reviewed fresh packet glyph-portfolio-20260824-2349 at commit ffba28772d8559df4b356de9b3a3f02248d16c07 against live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 and cleared curator_review_required.",
       "A live-byte-identical reproduction proved that GP-CONFIG-004 Done evidence is incomplete: a reviewed capture with contradictory diff-row/comparison status, contradictory result.md status, contradictory duplicate artifact paths and hashes, and nonexistent nested paths still passed. GP-CONFIG-004 is reopened READY for the exact offline correspondence repair.",
       "GP-PROV-002 publication recovery integrated the exact reviewed feature tip 9c94b5449b8065cb02aa0689ca0564720238b80c into configurator and preserved the reviewed implementation and validation scope; no new implementation was started.",
-      "GP-CTL-002 is mechanically activated READY after exact GP-PROV-002 integration and prerequisite-gate verification; its implementation remains unstarted.",
+      "GP-CTL-002 completed after exact implementation integration and separate completion publication; its Git correspondence guardrails are now canonical.",
       "GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 is substantive-dependency gated on the GP-CONFIG-004 repair and then external operator evidence. No global evidence wait is proposed or supported.",
       "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
     ],
@@ -67,17 +67,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "RUNWAY_LOW",
+    "CURATION_REQUIRED",
     "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
     "RUNWAY_SHORTFALL_RESEARCH_GATED",
     "RUNWAY_SHORTFALL_USER_DECISION_GATED",
@@ -94,7 +94,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CTL-002",
       "title": "Prove canonical Done integration correspondence",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-ctl-002-done-integration-correspondence-20260824",
       "objective": "Prevent canonical work orders from becoming Done unless immutable Git evidence proves that the reviewed authorized implementation, or one exact reviewed replay, is already integrated in the canonical history before the completion publication.",
       "why_this_matters": "GP-SRC-003 was twice published Done while its repaired implementation tree was absent, and GP-PROV-002 has now repeated the same failure: publication commit dfc92adf2910532e24f429f61ea3c1fe7026425a marked it Done on the strength of live feature ref 9c94b5449b8065cb02aa0689ca0564720238b80c, while live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 does not contain that implementation tree. The current framework checker validates only nonempty prose done_evidence and therefore certifies a false canonical state.",
@@ -138,7 +138,24 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused governance implementation if valid direct integration or exact dedicated replay cannot be represented. Never restore prose-only Done publication or classify an unintegrated implementation as legacy evidence.",
       "status_documentation_updates": "Document the migration boundary, structured completion evidence, direct-ancestry and exact-path-tree modes, and required two-stage implementation/integration then completion publication. Preserve Planner/Curator/Implementation separation and all runtime/product non-claims.",
-      "done_evidence": "Required future evidence: implementation and separate canonical integration SHAs; immutable migration base and mechanically exact legacy Done set; direct-ancestry and exact-path-tree positive/adversarial synthetic Git corpus; focused independent governance review; framework/sequence/navigation/surface/census/health/aggregate PASS; post-integration control-plane completion publication and exact live configurator verification; runtime/configurator product code changed: NO.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "2fbda7a674555e23cc6d003f2c0bfa02a97fafc8",
+        "reviewed_implementation_sha": "afb3121277d12bbd0aa78555f975840f1c8dbb96",
+        "prior_canonical_integration_sha": "60e0cc1f784cc5b4638b0b662cd0e4cb6c2001dd",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUPERVISOR_CONTRACT.md",
+          "docs/agent_framework/VALIDATION_AND_GATES.md",
+          "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_agent_framework_docs.py"
+        ],
+        "independent_review_provenance": "Fresh bounded governance review and repaired-scope inspection passed; no authority, publication, or runtime invariant was weakened.",
+        "validation_provenance": "Focused framework checker, 190-entry census, full runtime-config aggregate, sequence, navigation, and agent-surface gates passed."
+      },
       "stop_conditions": [
         "Any historical Done item would need invented integration evidence or GP-PROV-002 would be grandfathered while still unintegrated.",
         "Any completion can pass with prose, a branch/tag, missing Git object, partial/extra replay, semantic judgment, or a status publication that does not descend from prior canonical integration.",
@@ -1190,7 +1207,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CTL-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1267,10 +1284,8 @@ GP-CTL-002 Preauthorization. Three explicitly gated survivors remain.
 - `GP-SRC-005`: `DONE`; shared isolated-output validation and atomic writing now
   govern both remaining offline writers, with only the exact inert example
   install exception; no active source/table/runtime behavior changed.
-- `GP-CTL-002`: `READY`; exact reviewed GP-PROV-002 integration and all
-  mechanical activation prerequisites are satisfied. Its implementation binds
-  a Git-derived frozen legacy set plus immutable direct-ancestry or exact
-  dedicated path-tree replay evidence for every later completion.
+- `GP-CTL-002`: `DONE`; immutable migration-boundary, direct-ancestry, exact
+  replay, and separate publication correspondence are enforced.
 - `GP-VAL-004`: `DONE`; corrected only the stale generator-contract checker
   assumptions for aliased versus identical system temporary roots, preserving
   the shared output validator and every generator/product semantic exactly.
