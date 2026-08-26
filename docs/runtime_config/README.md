@@ -14,6 +14,13 @@ load-bearing static checker at
 selectors and unresolved claims without fetching dependencies, executing build
 tooling or the postprocessor, or claiming reproducibility.
 
+Timestamped, read-only observations for the canonical build-input selectors are
+documented in `build_input_resolution_observations.md`, with fixture
+`fixtures/build_input_resolution_observations.json` and offline checker
+`tools/check_glyph_build_input_resolution_observations.py`. The packet records
+bounded resolution and unresolved outcomes without changing selectors,
+installing dependencies, or claiming reproducibility.
+
 The observed-only artifact-postprocessor provenance packet is documented in
 `artifact_postprocessor_provenance.md`, with its synthetic fixture and
 verifier at
