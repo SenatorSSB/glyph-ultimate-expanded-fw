@@ -266,6 +266,23 @@ CURRENT_RUNWAY_MIRRORS = (
     "docs/ROADMAP.md",
 )
 
+COMPLETION_POLICY_FIELDS = ("migration_base_configurator_sha", "legacy_done_ids")
+COMPLETION_EVIDENCE_FIELDS = {
+    "schema_name",
+    "schema_version",
+    "mode",
+    "implementation_base_sha",
+    "reviewed_implementation_sha",
+    "prior_canonical_integration_sha",
+    "completion_publication_sha",
+    "reviewed_changed_paths",
+    "independent_review_provenance",
+    "validation_provenance",
+}
+COMPLETION_EVIDENCE_NAME = "glyph_done_completion_evidence"
+COMPLETION_EVIDENCE_VERSION = 1
+SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+
 PRIMARY_LIVENESS_SIGNALS = {
     "RUNWAY_OK",
     "RUNWAY_LOW",
@@ -350,6 +367,187 @@ def _git(repo_root: Path, *args: str) -> str:
     except (OSError, subprocess.CalledProcessError) as exc:
         fail(f"unable to resolve hardware evidence Git object: {exc}")
     return result.stdout
+
+
+def _require_commit_sha(value: object, field: str, repo_root: Path = REPO_ROOT) -> str:
+    if not isinstance(value, str) or not SHA_RE.fullmatch(value):
+        fail(f"{field} must be a full lowercase Git SHA")
+    if _git(repo_root, "cat-file", "-t", f"{value}^{{commit}}").strip() != "commit":
+        fail(f"{field} must resolve to a Git commit")
+    return value
+
+
+def _is_ancestor(repo_root: Path, ancestor: str, descendant: str, field: str) -> None:
+    try:
+        subprocess.run(
+            ["git", "merge-base", "--is-ancestor", ancestor, descendant],
+            cwd=repo_root, check=True, capture_output=True, text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        fail(f"{field} must be an ancestor of the completion publication")
+
+
+def _queue_from_commit(commit: str, repo_root: Path = REPO_ROOT) -> dict[str, object]:
+    raw = _git(repo_root, "show", f"{commit}:docs/project/ACTIVE_AGENT_QUEUE.md")
+    block = raw.split(QUEUE_START, 1)[1].split(QUEUE_END, 1)[0].strip()
+    if not block.startswith("```json") or not block.endswith("```"):
+        fail("migration-base queue state must be fenced JSON")
+    try:
+        payload = json.loads(block[len("```json") : -len("```")].strip())
+    except (IndexError, json.JSONDecodeError) as exc:
+        fail(f"migration-base queue state is invalid: {exc}")
+    if not isinstance(payload, dict) or not isinstance(payload.get("items"), list):
+        fail("migration-base queue state must contain an items list")
+    return payload
+
+
+def _changed_paths(repo_root: Path, base: str, tip: str) -> list[str]:
+    return sorted(
+        path for path in _git(repo_root, "diff", "--name-only", base, tip).splitlines()
+        if path
+    )
+
+
+def _tree_entry(repo_root: Path, commit: str, path: str) -> tuple[str, str, str] | None:
+    entries = [line for line in _git(repo_root, "ls-tree", commit, "--", path).splitlines() if line]
+    if not entries:
+        return None
+    header, found_path = entries[0].split("\t", 1)
+    mode, kind, oid = header.split(" ")
+    if found_path != path:
+        fail("completion evidence tree path resolution is ambiguous")
+    return mode, kind, oid
+
+
+def _validate_exact_path_tree(repo_root: Path, base: str, tip: str, integration: str, paths: list[str]) -> None:
+    parents = _git(repo_root, "rev-list", "--parents", "-n", "1", integration).split()
+    if len(parents) != 2:
+        fail("EXACT_PATH_TREE integration must be a dedicated single-parent commit")
+    if _changed_paths(repo_root, base, tip) != paths:
+        fail("completion evidence reviewed_changed_paths do not match implementation diff")
+    if _changed_paths(repo_root, parents[1], integration) != paths:
+        fail("exact replay changed paths do not match reviewed implementation paths")
+    for path in paths:
+        if _tree_entry(repo_root, tip, path) != _tree_entry(repo_root, integration, path):
+            fail("exact replay Git modes or blob identities differ from reviewed implementation")
+
+
+def validate_completion_evidence(
+    item: dict[str, object], evidence: object, *, policy: dict[str, object],
+    publication_sha: str, repo_root: Path = REPO_ROOT,
+) -> None:
+    if not isinstance(evidence, dict) or set(evidence) != COMPLETION_EVIDENCE_FIELDS:
+        fail(f"{item['id']} Done evidence must use the strict structured completion schema")
+    if evidence["schema_name"] != COMPLETION_EVIDENCE_NAME or type(evidence["schema_version"]) is not int or evidence["schema_version"] != COMPLETION_EVIDENCE_VERSION:
+        fail("completion evidence schema identity is invalid")
+    mode = evidence["mode"]
+    if mode not in {"DIRECT_ANCESTRY", "EXACT_PATH_TREE"}:
+        fail("completion evidence mode is invalid")
+    for field in ("independent_review_provenance", "validation_provenance"):
+        require_nonempty_string(evidence[field], f"completion evidence {field}")
+    base = _require_commit_sha(evidence["implementation_base_sha"], "implementation_base_sha", repo_root)
+    tip = _require_commit_sha(evidence["reviewed_implementation_sha"], "reviewed_implementation_sha", repo_root)
+    integration = _require_commit_sha(evidence["prior_canonical_integration_sha"], "prior_canonical_integration_sha", repo_root)
+    publication = _require_commit_sha(evidence["completion_publication_sha"], "completion_publication_sha", repo_root)
+    if publication != publication_sha:
+        fail("completion evidence must identify the current completion-publication commit")
+    paths = evidence["reviewed_changed_paths"]
+    if not isinstance(paths, list) or paths != sorted(paths) or len(paths) != len(set(paths)) or not all(isinstance(path, str) and path for path in paths):
+        fail("completion evidence reviewed_changed_paths must be sorted unique strings")
+    _is_ancestor(repo_root, base, tip, "implementation base")
+    _is_ancestor(repo_root, base, integration, "canonical integration")
+    _is_ancestor(repo_root, integration, publication, "canonical integration")
+    if integration == publication:
+        fail("completion integration must precede status publication")
+    if mode == "DIRECT_ANCESTRY":
+        _is_ancestor(repo_root, tip, integration, "reviewed implementation")
+        if _changed_paths(repo_root, base, tip) != paths:
+            fail("completion evidence reviewed_changed_paths do not match implementation diff")
+    else:
+        _validate_exact_path_tree(repo_root, base, tip, integration, paths)
+
+
+def check_completion_correspondence(payload: dict[str, object], items: list[dict[str, object]]) -> None:
+    policy = payload.get("completion_correspondence")
+    if not isinstance(policy, dict) or set(policy) != set(COMPLETION_POLICY_FIELDS):
+        fail("queue completion_correspondence policy has invalid fields")
+    migration = _require_commit_sha(policy.get("migration_base_configurator_sha"), "migration_base_configurator_sha")
+    legacy_payload = _queue_from_commit(migration)
+    legacy = sorted(item["id"] for item in legacy_payload["items"] if isinstance(item, dict) and item.get("status") == "DONE")
+    if policy.get("legacy_done_ids") != legacy:
+        fail("queue legacy_done_ids do not match the migration-base Done set")
+    current_publication = _git(REPO_ROOT, "rev-parse", "HEAD").strip()
+    for item in items:
+        if item["status"] == "DONE" and item["id"] not in legacy:
+            validate_completion_evidence(item, item["done_evidence"], policy=policy, publication_sha=current_publication)
+
+
+def check_completion_correspondence_self_test() -> None:
+    def run(repo: Path, *args: str) -> str:
+        result = subprocess.run(["git", *args], cwd=repo, check=True, capture_output=True, text=True)
+        return result.stdout.strip()
+
+    def commit(repo: Path, message: str) -> str:
+        run(repo, "add", ".")
+        run(repo, "commit", "-qm", message)
+        return run(repo, "rev-parse", "HEAD")
+
+    def evidence(base: str, tip: str, integration: str, publication: str, mode: str, paths: list[str]) -> dict[str, object]:
+        return {
+            "schema_name": COMPLETION_EVIDENCE_NAME,
+            "schema_version": COMPLETION_EVIDENCE_VERSION,
+            "mode": mode,
+            "implementation_base_sha": base,
+            "reviewed_implementation_sha": tip,
+            "prior_canonical_integration_sha": integration,
+            "completion_publication_sha": publication,
+            "reviewed_changed_paths": paths,
+            "independent_review_provenance": "synthetic independent review",
+            "validation_provenance": "synthetic validation",
+        }
+
+    with tempfile.TemporaryDirectory(prefix="glyph-completion-") as raw_root:
+        repo = Path(raw_root)
+        run(repo, "init", "-q")
+        run(repo, "config", "user.email", "checker@example.invalid")
+        run(repo, "config", "user.name", "checker")
+        (repo / "docs").mkdir()
+        (repo / "docs" / "reviewed.txt").write_text("before\n", encoding="utf-8")
+        base = commit(repo, "base")
+        (repo / "docs" / "reviewed.txt").write_text("after\n", encoding="utf-8")
+        tip = commit(repo, "reviewed implementation")
+        (repo / "docs" / "publication.txt").write_text("published\n", encoding="utf-8")
+        publication = commit(repo, "completion publication")
+        direct = evidence(base, tip, tip, publication, "DIRECT_ANCESTRY", ["docs/reviewed.txt"])
+        validate_completion_evidence({}, direct, policy={}, publication_sha=publication, repo_root=repo)
+
+        replay_root = Path(raw_root) / "replay"
+        replay_root.mkdir()
+        run(replay_root, "init", "-q")
+        run(replay_root, "config", "user.email", "checker@example.invalid")
+        run(replay_root, "config", "user.name", "checker")
+        (replay_root / "docs").mkdir()
+        (replay_root / "docs" / "reviewed.txt").write_text("before\n", encoding="utf-8")
+        replay_base = commit(replay_root, "base")
+        (replay_root / "docs" / "reviewed.txt").write_text("after\n", encoding="utf-8")
+        replay_tip = commit(replay_root, "reviewed implementation")
+        run(replay_root, "checkout", "-q", replay_base)
+        (replay_root / "docs" / "reviewed.txt").write_text("after\n", encoding="utf-8")
+        replay_integration = commit(replay_root, "dedicated replay")
+        (replay_root / "docs" / "publication.txt").write_text("published\n", encoding="utf-8")
+        replay_publication = commit(replay_root, "completion publication")
+        replay = evidence(replay_base, replay_tip, replay_integration, replay_publication, "EXACT_PATH_TREE", ["docs/reviewed.txt"])
+        validate_completion_evidence({}, replay, policy={}, publication_sha=replay_publication, repo_root=replay_root)
+
+        invalid = dict(direct)
+        invalid["reviewed_implementation_sha"] = base
+        try:
+            validate_completion_evidence({}, invalid, policy={}, publication_sha=publication, repo_root=repo)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail("unintegrated reviewed implementation passed completion correspondence")
+    pass_line("completion correspondence direct/replay and negative Git corpus validate")
 
 
 def _load_evidence_record(reference: object, repo_root: Path = REPO_ROOT) -> dict[str, object]:
@@ -479,9 +677,16 @@ def validate_work_order(item: object, evidence_repo_root: Path = REPO_ROOT) -> d
         "manual_acceptance_protocol_reference",
         "rollback_recovery",
         "status_documentation_updates",
-        "done_evidence",
     ):
         require_nonempty_string(item[field], field)
+
+    if item["status"] == "DONE":
+        if not isinstance(item["done_evidence"], (str, dict)):
+            fail("DONE work order done_evidence must be a string or structured object")
+        if isinstance(item["done_evidence"], str) and not item["done_evidence"].strip():
+            fail("DONE work order done_evidence must not be blank")
+    else:
+        require_nonempty_string(item["done_evidence"], "done_evidence")
 
     status = item["status"]
     if status not in QUEUE_STATUSES:
@@ -932,6 +1137,7 @@ def check_queue_contract() -> None:
     if not isinstance(items_raw, list):
         fail("queue items must be a list")
     items = [validate_work_order(item) for item in items_raw]
+    check_completion_correspondence(payload, items)
     ids = [item["id"] for item in items]
     if len(ids) != len(set(ids)):
         fail("queue work-order IDs must be unique")
@@ -1739,6 +1945,7 @@ def main() -> int:
         check_codex_only_surface()
         check_model_routing()
         check_queue_contract()
+        check_completion_correspondence_self_test()
         check_revision_two_surface()
         check_firmware_implementation_authority()
         check_legacy_control_plane_supersession()

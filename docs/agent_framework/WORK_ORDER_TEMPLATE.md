@@ -90,6 +90,20 @@ Hardware result:
 PASS | FAIL | PARTIAL | INCONCLUSIVE | null
 
 Hardware evidence gaps:
+
+## Completion correspondence
+
+The canonical queue may freeze an immutable migration-base configurator SHA
+and the sorted `legacy_done_ids` derived from that queue object. Every work
+order that first becomes `DONE` after that boundary must replace prose-only
+completion evidence with a strict `glyph_done_completion_evidence` object.
+The object records full implementation-base, reviewed-implementation,
+prior-canonical-integration, and completion-publication SHAs; exact reviewed
+changed paths; independent review provenance; validation provenance; and one
+mode: `DIRECT_ANCESTRY` or `EXACT_PATH_TREE`. The checker resolves only full
+Git object IDs locally, proves integration precedes publication, and compares
+Git modes/blob identities for exact replay. This is correspondence proof, not
+semantic equivalence or a substitute for review.
 [exact missing/retest evidence; empty only when none]
 
 Rollback / recovery:
