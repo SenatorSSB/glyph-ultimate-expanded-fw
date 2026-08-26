@@ -15,6 +15,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from check_glyph_official_configurator_export_candidate_diff import capture_json_pointer_diff
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -148,6 +150,25 @@ COMPARISON_FILE_KEYS = {
     "schema_name", "schema_version", "capture_id", "input_artifact_sha256",
     "output_artifact_sha256", "checker_identity", "checker_version",
     "structural_diff", "status",
+}
+PRECONDITION_KEYS = {
+    "official_corpus_manifest_path", "official_corpus_default_profiles_path",
+    "official_corpus_back_and_forth_path", "candidate_preview_artifact",
+    "capture_id", "precondition_status",
+}
+OPERATOR_KEYS = {"operator", "official_configurator_app_version", "operator_started_utc", "operator_finished_utc"}
+ROUTE_KEYS = {"import_route", "export_back_and_forth_route", "browser_environment"}
+AUTHORIZATION_SNAPSHOT_HASHES = {
+    "official_corpus_manifest_path": "08c8e43218250ad75f187f3fc5d22dd36fc27b112047f9dfdb612cbb232359a5",
+    "official_corpus_default_profiles_path": "2d24324928f9c0292e3fce74f02083a740272eeb7a271437be10b7b4f6bf025e",
+    "official_corpus_back_and_forth_path": "0a782564bd454c50e3fbeccc754acaec6c6ffdc6e0dcff145eef9121b7a3b39b",
+    "candidate_preview_artifact": "7a083bf84bc030e7170739070a9c005527611a457e33db5adaf5342969b3e9ec",
+}
+EXPECTED_PRECONDITION_PATHS = {
+    "official_corpus_manifest_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+    "official_corpus_default_profiles_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+    "official_corpus_back_and_forth_path": "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json",
+    "candidate_preview_artifact": "docs/export/fixtures/generated_official_configurator_candidate_preview.json",
 }
 
 
@@ -388,7 +409,7 @@ def validate_metadata_payload(payload: dict[str, Any], capture_dir: Path) -> Non
         fail(f"{display(capture_dir)} app_acceptance_status must be ACCEPTED, REJECTED, or INCONCLUSIVE")
 
     preconditions = payload.get("preconditions")
-    if not isinstance(preconditions, dict):
+    if not isinstance(preconditions, dict) or set(preconditions) != PRECONDITION_KEYS:
         fail(f"{display(capture_dir)} metadata preconditions missing")
     for key in (
         "official_corpus_manifest_path",
@@ -397,24 +418,32 @@ def validate_metadata_payload(payload: dict[str, Any], capture_dir: Path) -> Non
         "candidate_preview_artifact",
     ):
         value = preconditions.get(key)
-        if is_unknown(value):
+        if is_unknown(value) or value != EXPECTED_PRECONDITION_PATHS[key]:
             fail(f"{display(capture_dir)} precondition {key} must be filled in reviewed packets")
-        if not isinstance(value, str) or not resolve_path(value).exists():
+        if not isinstance(value, str) or not resolve_path(value).is_file() or resolve_path(value).is_symlink():
             fail(f"{display(capture_dir)} precondition path missing or invalid: {key}")
+        if sha256_file(resolve_path(value)) != AUTHORIZATION_SNAPSHOT_HASHES[key]:
+            fail(f"{display(capture_dir)} precondition {key} hash differs from authorization snapshot")
+    if preconditions["capture_id"] != capture_dir.name or preconditions["precondition_status"] != "PASS":
+        fail(f"{display(capture_dir)} precondition capture identity/status mismatch")
 
     operator_fields = payload.get("operator_fields")
-    if not isinstance(operator_fields, dict):
+    if not isinstance(operator_fields, dict) or set(operator_fields) != OPERATOR_KEYS:
         fail(f"{display(capture_dir)} metadata operator_fields missing")
     for key, value in operator_fields.items():
         if is_unknown(value):
             fail(f"{display(capture_dir)} operator field {key} must be reviewed")
+    if operator_fields["operator"] != payload["operator"] or operator_fields["official_configurator_app_version"] != payload["official_configurator_app_version"]:
+        fail(f"{display(capture_dir)} operator duplicate fields do not match top-level metadata")
 
     routes = payload.get("routes")
-    if not isinstance(routes, dict):
+    if not isinstance(routes, dict) or set(routes) != ROUTE_KEYS:
         fail(f"{display(capture_dir)} metadata routes missing")
     for key, value in routes.items():
         if is_unknown(value):
             fail(f"{display(capture_dir)} route {key} must be reviewed")
+    if routes["import_route"] != payload["import_route"] or routes["export_back_and_forth_route"] != payload["export_route"]:
+        fail(f"{display(capture_dir)} route duplicate fields do not match top-level metadata")
 
     comparison = payload.get("comparison")
     if comparison is not None and (not isinstance(comparison, dict) or set(comparison) != COMPARISON_KEYS):
@@ -471,6 +500,11 @@ def validate_metadata_payload(payload: dict[str, Any], capture_dir: Path) -> Non
     if not isinstance(gaps, list) or any(not isinstance(item, str) or not item.strip() for item in gaps):
         fail(f"{display(capture_dir)} gaps must be a list of non-empty strings")
     rows = {row["row_id"]: row for row in payload["result_rows"]}
+    expected_gaps = sorted(row_id for row_id, row in rows.items() if row["status"] in {"NOT_TESTED", "INCONCLUSIVE"})
+    if overall in {"PASS", "FAIL"} and gaps:
+        fail(f"{display(capture_dir)} PASS/FAIL packets must have no gaps")
+    if overall in {"PARTIAL", "INCONCLUSIVE"} and sorted(gaps) != expected_gaps:
+        fail(f"{display(capture_dir)} gaps must equal untested/inconclusive row IDs")
     executed = [row for row in rows.values() if row["status"] in {"PASS", "FAIL"}]
     if overall == "PASS":
         if acceptance != "ACCEPTED" or not executed or any(row["status"] != "PASS" for row in rows.values()) or comparison is None or gaps:
@@ -491,9 +525,11 @@ def validate_metadata_payload(payload: dict[str, Any], capture_dir: Path) -> Non
             fail(f"{display(capture_dir)} unexecuted diff row forbids comparison")
     elif acceptance != "INCONCLUSIVE" or not any(row["status"] == "INCONCLUSIVE" for row in rows.values()) or not gaps or (comparison is not None and rows["post_capture_json_diff_review"]["status"] == "NOT_TESTED"):
         fail(f"{display(capture_dir)} INCONCLUSIVE matrix is not satisfied")
+    if isinstance(comparison, dict) and comparison["checker_output_status"] != rows["post_capture_json_diff_review"]["status"]:
+        fail(f"{display(capture_dir)} comparison status must match diff row")
 
 
-def validate_result_doc(folder: Path, capture_id: str) -> None:
+def validate_result_doc(folder: Path, capture_id: str) -> str:
     result_doc = folder / "result.md"
     if not result_doc.exists():
         fail(f"{display(folder)} missing required result markdown {result_doc.name}")
@@ -505,6 +541,7 @@ def validate_result_doc(folder: Path, capture_id: str) -> None:
     if status not in OVERALL_STATUSES:
         fail(f"{display(folder)} result markdown status must be an overall v2 status")
     no_positive_claim(text, where=f"result doc {display(result_doc)}")
+    return status
 
 
 def resolve_and_validate_artifact(path_value: str, *, expected: Path, label: str, where: str, capture_dir: Path) -> Path:
@@ -560,8 +597,16 @@ def validate_file_set(capture_dir: Path, capture_id: str, payload: dict[str, Any
     if has_output and not isinstance(read_json_object(expected_output), dict):
         fail(f"{display(expected_output)} must contain a JSON object")
 
+    if artifacts.get("input_artifact_path") != payload.get("input_candidate_path") or artifacts.get("input_artifact_sha256") != payload.get("input_candidate_sha256"):
+        fail(f"{display(capture_dir)} input top-level and nested artifact fields disagree")
+    if artifacts.get("output_artifact_path") != payload.get("output_export_path") or artifacts.get("output_artifact_sha256") != payload.get("output_export_sha256"):
+        fail(f"{display(capture_dir)} output top-level and nested artifact fields disagree")
+    if artifacts.get("input_artifact_path") != "input_candidate.json" or payload.get("input_candidate_path") != "input_candidate.json":
+        fail(f"{display(capture_dir)} input artifact path must be input_candidate.json")
+    if has_output and (artifacts.get("output_artifact_path") != "output_export.json" or payload.get("output_export_path") != "output_export.json"):
+        fail(f"{display(capture_dir)} output artifact path must be output_export.json")
     input_path = resolve_and_validate_artifact(
-        artifacts.get("input_artifact_path") or payload.get("input_candidate_path"),
+        artifacts.get("input_artifact_path"),
         expected=expected_input,
         label="input_artifact_path",
         where=display(capture_dir),
@@ -570,7 +615,7 @@ def validate_file_set(capture_dir: Path, capture_id: str, payload: dict[str, Any
     output_path: Path | None = None
     if has_output:
         output_path = resolve_and_validate_artifact(
-            artifacts.get("output_artifact_path") or payload.get("output_export_path"),
+            artifacts.get("output_artifact_path"),
             expected=expected_output,
             label="output_artifact_path",
             where=display(capture_dir),
@@ -583,6 +628,24 @@ def validate_file_set(capture_dir: Path, capture_id: str, payload: dict[str, Any
     resolved_metadata = resolve_capture_path(metadata_path, capture_dir)
     if resolved_metadata != expected_metadata:
         fail(f"{display(capture_dir)} artifacts.metadata_path must be metadata.json")
+    if not _is_regular_non_symlink_file(resolved_metadata):
+        fail(f"{display(capture_dir)} metadata.json must be a capture-local regular file")
+    if artifacts.get("notes_path") != "notes.md":
+        fail(f"{display(capture_dir)} artifacts.notes_path must be notes.md")
+    if artifacts.get("rejection_note_path") not in (None, "rejection_note.md"):
+        fail(f"{display(capture_dir)} artifacts.rejection_note_path must be rejection_note.md or null")
+    if has_output and artifacts.get("rejection_note_path") is not None:
+        fail(f"{display(capture_dir)} accepted output must have null rejection_note_path")
+    if not has_output and artifacts.get("rejection_note_path") != "rejection_note.md":
+        fail(f"{display(capture_dir)} rejected output must name rejection_note.md")
+    if not has_output and any(payload.get(key) is not None for key in ("output_export_path", "output_export_sha256")):
+        fail(f"{display(capture_dir)} rejected output must have null top-level output fields")
+    if not has_output and any(artifacts.get(key) is not None for key in ("output_artifact_path", "output_artifact_sha256")):
+        fail(f"{display(capture_dir)} rejected output must have null nested output fields")
+    if payload.get("comparison") is not None and (artifacts.get("checker_output_path") != "comparison.json" or artifacts.get("comparison_path") != "comparison.json"):
+        fail(f"{display(capture_dir)} executed diff paths must both be comparison.json")
+    if payload.get("comparison") is None and any(artifacts.get(key) is not None for key in ("checker_output_path", "comparison_path")):
+        fail(f"{display(capture_dir)} unexecuted diff must have null checker/comparison paths")
 
     expected_notes_text = read_text(expected_notes)
     no_positive_claim(expected_notes_text, where=f"notes {display(expected_notes)}")
@@ -592,6 +655,8 @@ def validate_file_set(capture_dir: Path, capture_id: str, payload: dict[str, Any
     expected_input_hash = artifacts.get("input_artifact_sha256") or payload.get("input_candidate_sha256")
     if expected_input_hash != sha256_file(input_path):
         fail(f"{display(capture_dir)} input_artifact_sha256 mismatch")
+    if input_path.read_bytes() != BASELINE_PREVIEW_ARTIFACT.read_bytes():
+        fail(f"{display(capture_dir)} input_candidate.json must equal canonical preview bytes")
     if output_path is not None:
         expected_output_hash = artifacts.get("output_artifact_sha256") or payload.get("output_export_sha256")
         if expected_output_hash != sha256_file(output_path):
@@ -614,10 +679,11 @@ def validate_file_set(capture_dir: Path, capture_id: str, payload: dict[str, Any
             fail(f"{display(expected_comparison)} capture_id mismatch")
         if comparison_payload.get("input_artifact_sha256") != sha256_file(input_path) or comparison_payload.get("output_artifact_sha256") != sha256_file(output_path):
             fail(f"{display(expected_comparison)} input/output hash binding mismatch")
-        if not isinstance(comparison_payload.get("checker_identity"), str) or not comparison_payload["checker_identity"].strip() or not isinstance(comparison_payload.get("checker_version"), str) or not comparison_payload["checker_version"].strip():
-            fail(f"{display(expected_comparison)} checker identity/version must be non-empty")
-        if not isinstance(comparison_payload.get("structural_diff"), dict):
-            fail(f"{display(expected_comparison)} structural_diff must be an object")
+        if comparison_payload.get("checker_identity") != "tools/check_glyph_official_configurator_export_candidate_diff.py" or comparison_payload.get("checker_version") != "GLYPH_OFFICIAL_CONFIGURATOR_CAPTURE_DIFF_V1":
+            fail(f"{display(expected_comparison)} checker identity/version mismatch")
+        expected_diff = capture_json_pointer_diff(read_json_object(input_path), read_json_object(output_path))
+        if comparison_payload.get("structural_diff") != expected_diff:
+            fail(f"{display(expected_comparison)} structural_diff does not match capture-local inputs")
         if comparison_payload.get("status") != comparison.get("checker_output_status"):
             fail(f"{display(expected_comparison)} status must match metadata diff row")
     elif expected_comparison.exists():
@@ -656,7 +722,9 @@ def validate_single_capture_folder(capture_dir: Path) -> None:
     metadata = find_reviewed_capture_metadata(capture_dir)
     validate_metadata_payload(metadata, capture_dir)
     validate_file_set(capture_dir, capture_id, metadata)
-    validate_result_doc(capture_dir, capture_id)
+    result_status = validate_result_doc(capture_dir, capture_id)
+    if result_status != metadata["status"]:
+        fail(f"{display(capture_dir)} result markdown status must match metadata status")
 
     metadata_path = metadata.get("artifacts", {}).get("metadata_path")
     if isinstance(metadata_path, str):
@@ -782,7 +850,7 @@ def run_adversarial_tests() -> None:
         def write_synthetic_packet(folder: Path, *, status: str, acceptance: str, row_statuses: dict[str, str], gaps: list[str], rejected: bool = False) -> None:
             folder.mkdir()
             input_path = folder / "input_candidate.json"
-            input_path.write_text('{"candidate": "synthetic"}\n', encoding="utf-8")
+            input_path.write_bytes(BASELINE_PREVIEW_ARTIFACT.read_bytes())
             output_path = folder / "output_export.json"
             rejection_path = folder / "rejection_note.md"
             if rejected:
@@ -803,9 +871,9 @@ def run_adversarial_tests() -> None:
                     "capture_id": folder.name,
                     "input_artifact_sha256": sha256_file(input_path),
                     "output_artifact_sha256": sha256_file(output_path),
-                    "checker_identity": "synthetic-checker",
-                    "checker_version": "2",
-                    "structural_diff": {},
+                    "checker_identity": "tools/check_glyph_official_configurator_export_candidate_diff.py",
+                    "checker_version": "GLYPH_OFFICIAL_CONFIGURATOR_CAPTURE_DIFF_V1",
+                    "structural_diff": capture_json_pointer_diff(read_json_object(input_path), read_json_object(output_path)),
                     "status": row_statuses["post_capture_json_diff_review"],
                 }, sort_keys=True) + "\n", encoding="utf-8")
             metadata = {
@@ -818,9 +886,9 @@ def run_adversarial_tests() -> None:
                 "output_export_sha256": None if rejected else sha256_file(output_path),
                 "app_acceptance_status": acceptance, "import_route": "synthetic", "export_route": "synthetic",
                 "result_status": status, "capture_performed": True, "result_recorded": True,
-                "preconditions": {"official_corpus_manifest_path": display(BASELINE_MANIFEST_PATH), "official_corpus_default_profiles_path": display(BASELINE_DEFAULT_FIXTURE), "official_corpus_back_and_forth_path": display(BASELINE_BACK_AND_FORTH_FIXTURE), "candidate_preview_artifact": display(BASELINE_PREVIEW_ARTIFACT)},
-                "operator_fields": {"operator": "synthetic"}, "routes": {"import_route": "synthetic", "export_route": "synthetic"},
-                "artifacts": {"input_artifact_path": "input_candidate.json", "input_artifact_sha256": sha256_file(input_path), "output_artifact_path": None if rejected else "output_export.json", "output_artifact_sha256": None if rejected else sha256_file(output_path), "metadata_path": "metadata.json", "notes_path": "notes.md", "checker_output_path": None if rejected else "comparison.json", "comparison_path": None if rejected else "comparison.json", "rejection_note_path": "rejection_note.md" if rejected else None},
+                "preconditions": {"official_corpus_manifest_path": display(BASELINE_MANIFEST_PATH), "official_corpus_default_profiles_path": display(BASELINE_DEFAULT_FIXTURE), "official_corpus_back_and_forth_path": display(BASELINE_BACK_AND_FORTH_FIXTURE), "candidate_preview_artifact": display(BASELINE_PREVIEW_ARTIFACT), "capture_id": folder.name, "precondition_status": "PASS"},
+                "operator_fields": {"operator": "synthetic", "official_configurator_app_version": "synthetic", "operator_started_utc": "2026-08-24T00:00:00Z", "operator_finished_utc": "2026-08-24T00:00:00Z"}, "routes": {"import_route": "synthetic", "export_back_and_forth_route": "synthetic", "browser_environment": "synthetic"},
+                "artifacts": {"input_artifact_path": "input_candidate.json", "input_artifact_sha256": sha256_file(input_path), "output_artifact_path": None if rejected else "output_export.json", "output_artifact_sha256": None if rejected else sha256_file(output_path), "metadata_path": "metadata.json", "notes_path": "notes.md", "checker_output_path": "comparison.json" if comparison is not None else None, "comparison_path": "comparison.json" if comparison is not None else None, "rejection_note_path": "rejection_note.md" if rejected else None},
                 "comparison": comparison,
                 "result_rows": [{"row_id": row_id, "status": row_statuses[row_id], "pass": row_statuses[row_id] == "PASS"} for row_id in REQUIRED_ROW_IDS],
                 "gaps": gaps, "non_claims": dict(REQUIRED_METADATA_NON_CLAIMS), "non_claims_list": sorted(REQUIRED_NON_CLAIMS_LIST),
@@ -835,8 +903,8 @@ def run_adversarial_tests() -> None:
         synthetic_root.mkdir()
         write_synthetic_packet(synthetic_root / "20260824_official_configurator_pass", status="PASS", acceptance="ACCEPTED", row_statuses={row_id: "PASS" for row_id in REQUIRED_ROW_IDS}, gaps=[])
         write_synthetic_packet(synthetic_root / "20260824_official_configurator_fail", status="FAIL", acceptance="ACCEPTED", row_statuses={"official_configurator_import_route": "PASS", "official_configurator_export_route": "FAIL", "post_capture_json_diff_review": "PASS"}, gaps=[])
-        write_synthetic_packet(synthetic_root / "20260824_official_configurator_partial", status="PARTIAL", acceptance="ACCEPTED", row_statuses={"official_configurator_import_route": "PASS", "official_configurator_export_route": "NOT_TESTED", "post_capture_json_diff_review": "NOT_TESTED"}, gaps=["export not executed", "diff not executed"])
-        write_synthetic_packet(synthetic_root / "20260824_official_configurator_inconclusive", status="INCONCLUSIVE", acceptance="INCONCLUSIVE", row_statuses={"official_configurator_import_route": "INCONCLUSIVE", "official_configurator_export_route": "NOT_TESTED", "post_capture_json_diff_review": "NOT_TESTED"}, gaps=["operator result unresolved"])
+        write_synthetic_packet(synthetic_root / "20260824_official_configurator_partial", status="PARTIAL", acceptance="ACCEPTED", row_statuses={"official_configurator_import_route": "PASS", "official_configurator_export_route": "NOT_TESTED", "post_capture_json_diff_review": "NOT_TESTED"}, gaps=["official_configurator_export_route", "post_capture_json_diff_review"])
+        write_synthetic_packet(synthetic_root / "20260824_official_configurator_inconclusive", status="INCONCLUSIVE", acceptance="INCONCLUSIVE", row_statuses={"official_configurator_import_route": "INCONCLUSIVE", "official_configurator_export_route": "NOT_TESTED", "post_capture_json_diff_review": "NOT_TESTED"}, gaps=["official_configurator_import_route", "official_configurator_export_route", "post_capture_json_diff_review"])
         write_synthetic_packet(synthetic_root / "20260824_official_configurator_rejected", status="FAIL", acceptance="REJECTED", row_statuses={"official_configurator_import_route": "FAIL", "official_configurator_export_route": "NOT_TESTED", "post_capture_json_diff_review": "NOT_TESTED"}, gaps=[], rejected=True)
 
         tamper = synthetic_root / "20260824_official_configurator_tamper"
@@ -850,6 +918,44 @@ def run_adversarial_tests() -> None:
             pass
         else:
             raise AssertionError("tampered comparison binding must be rejected")
+
+        diff = capture_json_pointer_diff(
+            {"a/b": [1, {"x~y": True}], "removed": 1, "type": 1},
+            {"a/b": [2], "added": None, "type": "1"},
+        )
+        assert diff == {
+            "schema_name": "official_configurator_capture_json_pointer_diff", "schema_version": 1,
+            "equal": False, "added_paths": ["/added"],
+            "removed_paths": ["/a~1b/1", "/removed"], "changed_paths": ["/a~1b/0", "/type"],
+        }
+        assert capture_json_pointer_diff(1, "1")["changed_paths"] == [""]
+        assert capture_json_pointer_diff({"x~y": 1}, {"x~y": 2})["changed_paths"] == ["/x~0y"]
+
+        def assert_packet_rejected(folder: Path, message: str) -> None:
+            try:
+                validate_single_capture_folder(folder)
+            except ManualCaptureResultError:
+                return
+            raise AssertionError(message)
+
+        contradictory = synthetic_root / "20260824_official_configurator_contradictory"
+        write_synthetic_packet(contradictory, status="PASS", acceptance="ACCEPTED", row_statuses={row_id: "PASS" for row_id in REQUIRED_ROW_IDS}, gaps=[])
+        (contradictory / "result.md").write_text("# Result\n\nStatus: `FAIL`\n", encoding="utf-8")
+        assert_packet_rejected(contradictory, "result markdown status mismatch must be rejected")
+
+        contradictory = synthetic_root / "20260824_official_configurator_duplicate-path"
+        write_synthetic_packet(contradictory, status="PASS", acceptance="ACCEPTED", row_statuses={row_id: "PASS" for row_id in REQUIRED_ROW_IDS}, gaps=[])
+        metadata = read_json_object(contradictory / "metadata.json")
+        metadata["input_candidate_path"] = "notes.md"
+        (contradictory / "metadata.json").write_text(json.dumps(metadata, sort_keys=True) + "\n", encoding="utf-8")
+        assert_packet_rejected(contradictory, "duplicate top-level/nested paths must be rejected")
+
+        contradictory = synthetic_root / "20260824_official_configurator-unbound-route"
+        write_synthetic_packet(contradictory, status="PASS", acceptance="ACCEPTED", row_statuses={row_id: "PASS" for row_id in REQUIRED_ROW_IDS}, gaps=[])
+        metadata = read_json_object(contradictory / "metadata.json")
+        metadata["routes"]["export_back_and_forth_route"] = "unrelated route"
+        (contradictory / "metadata.json").write_text(json.dumps(metadata, sort_keys=True) + "\n", encoding="utf-8")
+        assert_packet_rejected(contradictory, "duplicate route fields must be bound")
 
 
 def list_dated_capture_folders() -> list[Path]:

@@ -6442,7 +6442,7 @@
       },
       "checker_id": "official_configurator_export_candidate_diff",
       "defines_main": true,
-      "file_size_bytes": 2512,
+      "file_size_bytes": 4395,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -6454,7 +6454,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 66,
+      "line_count": 100,
       "parse_error": null,
       "path": "tools/check_glyph_official_configurator_export_candidate_diff.py",
       "potential_branch_identity_signals": [
@@ -6469,7 +6469,7 @@
       "runtime_config_relevance_signals": [
         "candidate_generation"
       ],
-      "sha256": "31abe1375f40d02370420a0b7967750132c8eea3bf4933116c9a0338c8629ba3",
+      "sha256": "fc4760dd3eaa5566ba577d6a847062d908e72993bbae565ebb15b6b516428d22",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": true,
@@ -6714,11 +6714,12 @@
       },
       "checker_id": "official_configurator_manual_capture_result",
       "defines_main": true,
-      "file_size_bytes": 45739,
+      "file_size_bytes": 55182,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
         "candidate_preview_artifact",
+        "check_glyph_official_configurator_export_candidate_diff",
         "check_glyph_official_configurator_export_candidate_diff.py",
         "configurator",
         "evidence",
@@ -6734,13 +6735,14 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 890,
+      "line_count": 996,
       "parse_error": null,
       "path": "tools/check_glyph_official_configurator_manual_capture_result.py",
       "potential_branch_identity_signals": [
         "branch",
         "candidate",
         "candidate_preview_artifact",
+        "check_glyph_official_configurator_export_candidate_diff",
         "check_glyph_official_configurator_export_candidate_diff.py",
         "configurator",
         "evidence",
@@ -6754,13 +6756,17 @@
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_official_configurator_manual_capture_result",
       "referenced_repository_path_prefixes": [
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__back-and-forth-custom-profile__20260606.json",
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/fixtures/glyph_export__official-glyph-configurator__glyph-mk6__default-profiles__20260606.json",
+        "docs/calibration/export_corpus/official_glyph_configurator_2026-06-06/manifest.json",
+        "docs/export/fixtures/generated_official_configurator_candidate_preview.json",
         "docs/templates",
         "tools/check_glyph_official_configurator_export_candidate_diff.py"
       ],
       "runtime_config_relevance_signals": [
         "candidate_generation"
       ],
-      "sha256": "e9dfec998c3e8aee85641b24e20acd6229ee6966c996f2b978bacfa9c05a12a0",
+      "sha256": "559f9b22bd31f86270c7d228b5fae936719e639db3225b85413943218b5f7109",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": true,
