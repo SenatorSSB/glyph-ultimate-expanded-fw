@@ -3,6 +3,12 @@
 This directory is reserved for offline-only, source-backed export-target
 contract documentation and preview fixtures.
 
+The official-configurator integration lane is retired historical evidence, not
+a current product or development dependency. `GP-CONFIG-002` is invalidated,
+no operator capture is required, and a later explicit user decision is required
+to reopen the lane. Existing corpus, templates, procedures, and capture tooling
+remain for provenance; they are not active runway.
+
 Rules:
 
 - do not add production export output here;
@@ -60,6 +66,8 @@ export-target workflow.
 - `tools/check_glyph_official_configurator_manual_capture_result.py` validates
   manual capture instructions, artifact layout, metadata template, and any
   future capture folders while passing when no capture result exists.
-- `tools/check_glyph_official_configurator_validation.py` runs the current
-  five-check offline lane and keeps historical compatibility chains and
-  external-remapper evidence explicitly out of that lane.
+- `tools/check_glyph_official_configurator_validation.py` validates the
+  classification and presence of five preserved historical corpus/export
+  checks without executing them, while enforcing zero current checks, no
+  operator-capture requirement, and continued quarantine of external-remapper
+  evidence.

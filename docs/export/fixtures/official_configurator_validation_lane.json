@@ -1,7 +1,8 @@
 {
-  "status": "OFFLINE_CURRENT_LANE_CLASSIFICATION_ONLY",
-  "current_evidence_class": "primary_official_configurator_corpus",
-  "current_checks": [
+  "status": "RETIRED_HISTORICAL_EVIDENCE_ONLY",
+  "current_evidence_class": null,
+  "current_checks": [],
+  "historical_integrity_checks": [
     "tools/check_glyph_official_configurator_export_corpus.py",
     "tools/check_glyph_official_configurator_corpus_diff.py",
     "tools/check_glyph_official_configurator_export_target_contract.py",
@@ -10,8 +11,11 @@
   ],
   "historical_checker": "tools/check_glyph_import_export_compatibility.py",
   "historical_checker_status": "HISTORICAL_ONLY_NOT_CURRENT_LANE",
+  "official_configurator_product_dependency": false,
+  "operator_capture_required": false,
+  "reopen_requires_explicit_user_decision": true,
   "evidence_classes": [
-    {"id": "primary_official_configurator_corpus", "classification": "current", "eligible_for_current_lane": true},
+    {"id": "primary_official_configurator_corpus", "classification": "historical_only", "eligible_for_current_lane": false},
     {"id": "historical_generated_prototype", "classification": "historical_only", "eligible_for_current_lane": false},
     {"id": "external_remapper", "classification": "quarantined", "eligible_for_current_lane": false}
   ],

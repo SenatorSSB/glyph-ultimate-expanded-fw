@@ -378,7 +378,7 @@ def main() -> int:
         context = collect_checker_context(repo_root=REPO_ROOT)
         validate_feature_scope(
             context,
-            allowed_paths=("docs/", "tools/", ".github/workflows/build.yml", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"),
+            allowed_paths=("docs/", "tools/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"),
             protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/"),
         )
     except CheckerContextError as exc:

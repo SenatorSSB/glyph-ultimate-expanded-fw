@@ -36,8 +36,11 @@ normalized input and deterministic artifact/manifest regeneration.
 selectors and tracked identities; it authorizes no resolution, pin change,
 build, or reproducibility claim. Recorded Preauthorization is zero and
 effective runway is one against target four (`RUNWAY_LOW`). The current-runway marker above is
-authoritative; user/source-authority and external-evidence gates do not
-establish a portfolio-wide wait.
+authoritative pending fresh post-recovery curation. The `GP-AUTH-001`
+user-decision gate is satisfied by the exact baseline-equivalent `kX1Table`
+`overlay_preserve` intake, which changes no active table bytes and creates no
+hardware candidate. The former official-configurator external-evidence gate is
+invalidated.
 
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The
@@ -45,10 +48,11 @@ census detects checker-set drift mechanically; the curated manifest retains
 the detailed current validation dependency graph and explicit evidence/unsafe
 exclusions. This creates no production authority or hardware claim.
 
-The official-configurator direction currently has one bounded offline lane at
-`tools/check_glyph_official_configurator_validation.py`. It uses the primary
-official corpus only; the older compatibility chain is historical-only and
-external-remapper evidence remains quarantined.
+The official-configurator direction is retired historical evidence at
+`tools/check_glyph_official_configurator_validation.py`. The official app is
+not a product/development dependency, no operator capture is required, the
+older compatibility chain is historical-only, and external-remapper evidence
+remains quarantined.
 
 The current known-good firmware state is the latest Y2 layout source-owned port
 merged into `configurator` after HARDWARE_PASS. The implementation lineage is
@@ -184,8 +188,9 @@ candidate, or change active source. The next blocker is an explicit
 source-authorized owned-table set and replacement content. The former 27-table
 literal-body replacement contract is SUPERSEDED historical evidence; current
 28-table baseline extraction, generator modes, and source-authority intake are
-authoritative. This cleanup creates no candidate and approves no production
-table ownership.
+authoritative. The subsequent X1 pilot approves production ownership of only
+`kX1Table` with its exact matching baseline values; it creates no active byte
+delta or hardware candidate and approves no other table.
 The inert proof report is
 `docs/runtime_config/generated_source_owned_overlay_preserve_proof_2026-07-19.md`.
 The normal generator input now requires `layout_spec`, so spec-less JSON is

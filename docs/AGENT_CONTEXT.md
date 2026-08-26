@@ -86,9 +86,12 @@ automation from this context document.
   inventory. The current-runway marker above is authoritative; recorded
   Preauthorization is zero and effective runway is one against target four
   (`RUNWAY_LOW`).
-  `GP-AUTH-001` remains user/source-authority gated and
-  `GP-CONFIG-002` has satisfied its repair predecessor and remains
-  external-evidence gated; this is not a global hardware wait.
+  The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
+  baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
+  it owns no other table, changes no active bytes, and creates no hardware
+  candidate. `GP-CONFIG-002` is invalidated by `GLYPH-UD-007`; no
+  official-configurator capture is required or awaited, and the retained
+  corpus/templates are historical provenance.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
@@ -98,9 +101,11 @@ automation from this context document.
   semantics and checker enforcement. Candidate generation must use full
   replacement, overlay/preserve, or reject semantics and must not silently fill
   unspecified production tables with example/canonical defaults.
-- The source-authority intake workflow is offline-only: it records explicit
-  human approval and ownership before v2 generation, but authorizes no real
-  production table set and creates no hardware candidate.
+- The source-authority intake workflow is offline-only. The canonical X1 pilot
+  authorizes only `kX1Table`, with its exact matching baseline points, before
+  deterministic v2 generation. This no-op authority record creates no active
+  table-byte delta or hardware candidate; any future X1 values or other table
+  ownership remain separately gated.
 - The former 27-table literal-body replacement generator contract is
   SUPERSEDED historical evidence; current authority is the 28-table baseline
   extraction, source-owned generator modes, and source-authority intake.

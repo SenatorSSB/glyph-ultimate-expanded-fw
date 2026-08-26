@@ -69,6 +69,45 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   does not itself broaden implementation scope or waive current validation,
   review, publication, or runtime/product boundaries.
 
+### GLYPH-UD-007
+
+- Type: `Decision`
+- Status: `Active`
+- Source: user supervisor task supplied 2026-08-27
+- Direction: Official Glyph configurator interoperability is no longer a
+  product requirement, development dependency, or progression dependency for
+  the custom Glyph/Senscope firmware path. `GP-CONFIG-002` is invalidated; no
+  official-configurator operator capture is required or awaited. Historical
+  corpus, templates, procedures, and evidence remain provenance only. This
+  lane may become active again only through a later explicit user decision.
+
+### GLYPH-UD-008
+
+- Type: `Decision`
+- Status: `Active`
+- Source: user supervisor task supplied 2026-08-27
+- Direction: The first production source-authority pilot uses
+  `overlay_preserve` and owns exactly the canonical X1 table symbol established
+  mechanically from the current 28-table baseline. Its initial replacement is
+  the exact existing ordered nine-point raw-byte X1 baseline content, so this
+  pilot authorizes ownership while deliberately preserving active table bytes.
+  The baseline supplied the bytes; this decision supplies production authority
+  and does not claim that Senscope generated the values. All other 27 tables
+  remain unowned and preserved.
+
+### GLYPH-UD-009
+
+- Type: `Directive`
+- Status: `Active`
+- Source: user supervisor task supplied 2026-08-27
+- Direction: The X1 pilot authorizes no different X1 coordinate, second table,
+  all-table replacement, active byte change, new modifier/gameplay semantic,
+  runtime-loaded or persistent configuration, WebSerial/device write,
+  protobuf write, flashing automation, alternate active publication path, or
+  Nunchuk claim. Future active X1 changes and future ownership expansion each
+  require separate explicit authority; behavior-changing candidates retain the
+  exact-candidate build, artifact, and physical hardware gate.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is

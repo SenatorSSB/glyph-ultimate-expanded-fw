@@ -7,7 +7,7 @@ This is the short current-state entrypoint. Agents should read
 `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md` before proposing runtime-config
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
-**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-VAL-004`, `GP-CONFIG-004`, and `GP-CTL-002` are DONE after independently reviewed checker/governance repairs; `GP-PROV-002` is DONE after exact reviewed feature integration and live verification; `GP-PROV-003` is the sole immediate Ready H0 work order for a declared build-input provenance inventory; recorded Preauthorization and mechanically activatable Preauthorization are zero, and effective runway is one against target four (`RUNWAY_LOW`); `PLANNING_REQUIRED` is not current while the partially consumed packet retains user/source-authority- and external-evidence-gated survivors; `CUSTOM_RUNNER_NOT_REQUIRED`; current official-configurator validation lane: `tools/check_glyph_official_configurator_validation.py`; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
+**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-VAL-004`, `GP-CONFIG-004`, and `GP-CTL-002` are DONE after independently reviewed checker/governance repairs; `GP-PROV-002` is DONE after exact reviewed feature integration and live verification; `GP-PROV-003` is the sole immediate Ready H0 work order for a declared build-input provenance inventory; recorded Preauthorization and mechanically activatable Preauthorization are zero, and effective runway is one against target four (`RUNWAY_LOW`); `PLANNING_REQUIRED` is not current while the partially consumed packet retains a user/source-authority-gated survivor; `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` is invalidated and no operator capture is required; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
 ## Current Known-Good State
 
 - `configurator` contains the latest Y2 layout source-owned port after the
@@ -42,13 +42,8 @@ implementation work. Detailed historical evidence remains indexed from
 - Nunchuk remains NOT_TESTED; the low-level root cause remains unproven; the coordinate-native runtime profile contract now has a standalone repo-enforced profile validator, deterministic selection semantics, an offline dry-run evaluator, invalid/positive fixture corpora with expected results and failure reasons, and fixture-backed offline dry-run coverage for neutral, cardinal, diagonal, and Tilt3-aligned coordinate paths tied to current source-backed Y2/Tilt3 evidence.
 - The current docs/checker queue also includes `docs/runtime_config/runtime_config_activation_alternatives_a_f.md` and `tools/check_glyph_runtime_config_activation_alternatives.py`, which classify A as currently hardware-passed, B as hardware-passed only for the source-owned generated-table alias candidate that preserves the active publication path, C-E as explicitly forbidden under current evidence, and F as future architecture only.
 - The source-owned table symbol-map note and checker now document the current Alternative B alias/replacement boundary without changing the active publication path.
-- Overlay/preserve generation is checker-enforced; unowned tables preserve the current source-owned baseline and production example provenance is rejected; source-authority intake remains offline-only and records no real production approval.
-- Generator modes are complete as offline tooling: `full_replacement`,
-  `overlay_preserve`, and `reject_partial` have explicit semantics, complete
-  28-row manifests, deterministic semantic digests, stable CLI exit codes,
-  preparation/install gates, and fixture-backed regression coverage. No
-  production profile has been authorized; the current example remains
-  `SOURCE_AUTHORITY_BLOCKER`, and no hardware candidate was created; the old 27-table literal-body replacement contract is SUPERSEDED historical evidence, while the 28-table baseline extraction, generator modes, and source-authority intake are authoritative and this cleanup approves no production table ownership.
+- Overlay/preserve generation is checker-enforced; unowned tables preserve the current source-owned baseline and production example provenance is rejected. The offline-only production-authorized X1 pilot owns exactly `kX1Table` and reproduces its exact current nine-point baseline, preserving all 28 active table contents and creating no hardware candidate.
+- Generator modes are complete offline tooling with explicit modes, 28-row manifests, deterministic digests, stable exits, gates, and fixtures. The example remains `SOURCE_AUTHORITY_BLOCKER`; separately, the production-authorized X1 overlay owns only `kX1Table` with exact baseline-equivalent content. Its manifest is `NO_OP`, all 28 contents remain preserved, and no hardware candidate exists. The 27-table literal-body contract is SUPERSEDED; the 28-table baseline, generator modes, and intake are authoritative.
 
 ## Current Implementation Boundary
 
@@ -84,9 +79,7 @@ implementation work. Detailed historical evidence remains indexed from
   source-owned table symbol-map claim-invariant hardening.
 - Next safe queue: keep coordinate-native offline pipeline, bundle manifest,
   and export-package checks aligned with their fixtures.
-- Next safe queue: obtain an explicit source-authorized owned-table set and
-  replacement content. The completed offline generator must not be promoted to
-  a production or hardware candidate without that authority.
+- Future X1 values or other table ownership require separate explicit authority; a behavior-changing candidate must also pass the exact-candidate hardware lifecycle.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 - Offline dry-run evaluator: `tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed positive and negative cases under `docs/runtime_config/fixtures/`.

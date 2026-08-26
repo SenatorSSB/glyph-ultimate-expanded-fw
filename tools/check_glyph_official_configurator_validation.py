@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Run the current offline official-configurator validation lane.
+"""Validate retired official-configurator historical evidence integrity.
 
-This entrypoint deliberately excludes historical compatibility chains.  It
-aggregates only the five current corpus/export checks whose evidence is backed
-by the committed official configurator corpus.
+The official app is not a current product dependency or progression gate. The
+preserved corpus/export checks remain runnable only as historical integrity
+checks; no operator capture is required.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -18,7 +17,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CLASSIFICATION_FIXTURE = REPO_ROOT / "docs/export/fixtures/official_configurator_validation_lane.json"
-CURRENT_CHECKS = (
+HISTORICAL_INTEGRITY_CHECKS = (
     "tools/check_glyph_official_configurator_export_corpus.py",
     "tools/check_glyph_official_configurator_corpus_diff.py",
     "tools/check_glyph_official_configurator_export_target_contract.py",
@@ -39,22 +38,35 @@ def fail(message: str) -> None:
 def validate_payload(payload: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(payload, dict):
         fail("classification fixture must be an object")
-    if payload.get("status") != "OFFLINE_CURRENT_LANE_CLASSIFICATION_ONLY":
-        fail("classification status must remain offline current-lane-only")
-    if payload.get("current_evidence_class") != "primary_official_configurator_corpus":
-        fail("current evidence class must remain primary_official_configurator_corpus")
+    if set(payload) != {
+        "status", "current_evidence_class", "current_checks",
+        "historical_integrity_checks", "historical_checker",
+        "historical_checker_status", "official_configurator_product_dependency",
+        "operator_capture_required", "reopen_requires_explicit_user_decision",
+        "evidence_classes", "blocked_claims",
+    }:
+        fail("retired classification fixture fields must remain exact")
+    if payload.get("status") != "RETIRED_HISTORICAL_EVIDENCE_ONLY":
+        fail("classification status must remain retired historical evidence only")
+    if payload.get("current_evidence_class") is not None or payload.get("current_checks") != []:
+        fail("retired lane cannot retain a current evidence class or current checks")
+    if payload.get("historical_integrity_checks") != list(HISTORICAL_INTEGRITY_CHECKS):
+        fail("historical integrity checks must preserve the bounded five-check corpus")
     if payload.get("historical_checker") != HISTORICAL_CHECK:
         fail("historical checker must remain explicitly excluded")
     if payload.get("historical_checker_status") != "HISTORICAL_ONLY_NOT_CURRENT_LANE":
         fail("historical checker status must remain excluded")
-    current = payload.get("current_checks")
-    if current != list(CURRENT_CHECKS):
-        fail("current checks must match the bounded five-check lane")
+    if payload.get("official_configurator_product_dependency") is not False:
+        fail("official configurator must not be a current product dependency")
+    if payload.get("operator_capture_required") is not False:
+        fail("retired lane must not require an operator capture")
+    if payload.get("reopen_requires_explicit_user_decision") is not True:
+        fail("retired lane must require explicit user direction to reopen")
     entries = payload.get("evidence_classes")
     if not isinstance(entries, list):
         fail("evidence_classes must be a list")
     required = {
-        "primary_official_configurator_corpus": "current",
+        "primary_official_configurator_corpus": "historical_only",
         "historical_generated_prototype": "historical_only",
         "external_remapper": "quarantined",
     }
@@ -64,8 +76,8 @@ def validate_payload(payload: dict[str, Any]) -> dict[str, Any]:
     for entry in entries:
         if not isinstance(entry, dict) or not isinstance(entry.get("id"), str) or not isinstance(entry.get("classification"), str):
             fail("evidence class entries must contain string id and classification")
-        if entry["classification"] != "current" and entry.get("eligible_for_current_lane") is not False:
-            fail(f"non-current evidence is eligible for current lane: {entry.get('id')}")
+        if entry.get("eligible_for_current_lane") is not False:
+            fail(f"retired evidence is eligible for a current lane: {entry.get('id')}")
     claims = payload.get("blocked_claims")
     if not isinstance(claims, list) or claims != [
         "official_configurator_compatibility",
@@ -87,14 +99,6 @@ def load_fixture() -> dict[str, Any]:
     return validate_payload(payload)
 
 
-def run_checker(path: str) -> tuple[str, int, str]:
-    completed = subprocess.run(
-        [sys.executable, path], cwd=REPO_ROOT, capture_output=True, text=True, check=False
-    )
-    output = "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
-    return path, completed.returncode, output
-
-
 def exercise_classification_mutations(payload: dict[str, Any]) -> None:
     mutated = json.loads(json.dumps(payload))
     for entry in mutated["evidence_classes"]:
@@ -112,6 +116,24 @@ def exercise_classification_mutations(payload: dict[str, Any]) -> None:
     fail("external-remapper promotion mutation was not rejected")
 
 
+def exercise_dependency_mutations(payload: dict[str, Any]) -> None:
+    for field, value in (
+        ("official_configurator_product_dependency", True),
+        ("operator_capture_required", True),
+        ("reopen_requires_explicit_user_decision", False),
+    ):
+        original = payload[field]
+        payload[field] = value
+        try:
+            validate_payload(payload)
+        except ValidationLaneError:
+            pass
+        else:
+            fail(f"retired dependency mutation was accepted: {field}")
+        finally:
+            payload[field] = original
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true")
@@ -119,12 +141,13 @@ def main() -> int:
     try:
         payload = load_fixture()
         exercise_classification_mutations(payload)
-        results = []
-        for path in CURRENT_CHECKS:
-            checked_path, exit_code, output = run_checker(path)
-            results.append({"path": checked_path, "status": "PASS" if exit_code == 0 else "FAIL", "exit_code": exit_code, "last_output": output.splitlines()[-1:]})
-        if any(result["status"] != "PASS" for result in results):
-            raise ValidationLaneError("one or more current official-configurator checks failed")
+        exercise_dependency_mutations(payload)
+        results = [
+            {"path": path, "status": "PRESERVED_NOT_EXECUTED_BY_RETIRED_AGGREGATE"}
+            for path in HISTORICAL_INTEGRITY_CHECKS
+        ]
+        if any(not (REPO_ROOT / result["path"]).is_file() for result in results):
+            raise ValidationLaneError("one or more preserved historical integrity checks is missing")
     except (ValidationLaneError, OSError) as exc:
         print("glyph_official_configurator_validation")
         print("status=FAIL")
@@ -133,8 +156,10 @@ def main() -> int:
 
     report = {
         "status": "PASS",
-        "current_lane": "offline_primary_official_configurator_corpus",
-        "current_check_count": len(results),
+        "current_lane": None,
+        "current_check_count": 0,
+        "classification": "RETIRED_HISTORICAL_EVIDENCE_ONLY",
+        "historical_integrity_check_count": len(results),
         "historical_checker": HISTORICAL_CHECK,
         "historical_checker_status": "HISTORICAL_ONLY_NOT_CURRENT_LANE",
         "external_remapper_evidence": "QUARANTINED",
@@ -146,8 +171,11 @@ def main() -> int:
     else:
         print("glyph_official_configurator_validation")
         print("status=PASS")
-        print("current_lane=offline_primary_official_configurator_corpus")
-        print("current_check_count=5")
+        print("current_lane=none")
+        print("current_check_count=0")
+        print("classification=RETIRED_HISTORICAL_EVIDENCE_ONLY")
+        print("historical_integrity_check_count=5")
+        print("operator_capture_required=false")
         print("historical_checker_status=HISTORICAL_ONLY_NOT_CURRENT_LANE")
         print("external_remapper_evidence=QUARANTINED")
         print("official_configurator_compatibility_claim=false")

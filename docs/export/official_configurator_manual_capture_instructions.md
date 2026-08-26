@@ -1,5 +1,9 @@
 # Official Configurator Manual Capture Instructions
 
+> Retired lane notice: `GP-CONFIG-002` is invalidated by `GLYPH-UD-007`.
+> This procedure is retained as historical provenance only. No operator
+> capture is required or awaited unless the user explicitly reopens the lane.
+
 Status: `MANUAL_CAPTURE_INSTRUCTIONS_ONLY_NOT_A_RESULT`
 
 ## Purpose

@@ -1,6 +1,11 @@
 # Official Configurator Manual Capture Directory
 
-Status: `PLAN_ONLY_DIRECTORY_INDEX`
+Status: `PLAN_ONLY_DIRECTORY_INDEX`; lane classification:
+`RETIRED_HISTORICAL_PROVENANCE_ONLY`.
+
+`GP-CONFIG-002` is invalidated. No official-configurator capture is required
+or awaited; this directory and its validation rules remain provenance only.
+Reopening requires an explicit later user decision.
 
 This directory contains operator-facing guidance and templates only.
 

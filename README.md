@@ -46,9 +46,10 @@ not change Senscope game-semantic source authority.
   back-and-forth JSON fixtures when the correction packet is present.
 - Offline official configurator export target contract work is docs/tools only,
   preview-only, and not a public release or official compatibility claim.
-- Current official-configurator validation is the bounded offline lane in
-  `tools/check_glyph_official_configurator_validation.py`; historical
-  compatibility chains are not current evidence.
+- Retired official-configurator historical evidence is bounded by
+  `tools/check_glyph_official_configurator_validation.py`; the official app is
+  not a product/development dependency, no operator capture is required, and
+  historical compatibility chains are not current evidence.
 - Calibration docs remain useful evidence, but the current roadmap should be
   read from `docs/CURRENT_STATE.md`, `docs/ROADMAP.md`, and
   `docs/WORKFLOW.md`.
