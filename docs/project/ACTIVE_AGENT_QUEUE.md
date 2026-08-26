@@ -68,12 +68,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -178,7 +178,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-004",
       "title": "Record timestamped upstream observations for canonical build-input selectors",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-004-observed-build-input-resolutions-20260827",
       "objective": "Create a deterministic exact-base observational record for every network-addressable toolchain, dependency, workflow action, runner, reusable-workflow, and external source selector in the canonical GP-PROV-003 inventory, recording resolved identities or explicit bounded unresolved/unreachable outcomes without changing or installing any build input.",
       "why_this_matters": "GP-PROV-003 binds declared selectors but intentionally leaves package/action content identity, toolchain resolution, runner image identity, and build-device-config caller/ownership unresolved. Timestamped source-classified observations narrow those gaps without claiming immutable resolution or reproducibility.",
@@ -223,7 +223,25 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused observational packet if selector correspondence or evidence classification cannot be made deterministic; preserve GP-PROV-003 declarations and all unresolved non-claims.",
       "status_documentation_updates": "Link the observation packet from the runtime-config provenance documentation and record only independently observed resolution states; do not rewrite the GP-PROV-003 declared-only inventory into a reproducibility or pinning claim.",
-      "done_evidence": "Pending implementation, independent review, exact selector correspondence, current validation, feature-ref publication, canonical ancestry, and separate structured completion publication.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "56ec1ecce6d099bb07ad5071eaed044831273b19",
+        "reviewed_implementation_sha": "119bfba855d5533271bfa64e515f0410c5b4fc62",
+        "prior_canonical_integration_sha": "189b09966be0abeb0a0dde4094604d822c4e32c8",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/build_input_resolution_observations.md",
+          "docs/runtime_config/fixtures/build_input_resolution_observations.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "tools/check_glyph_build_input_resolution_observations.py"
+        ],
+        "independent_review_provenance": "Independent post-implementation review PASS on exact feature tip 119bfba855d5533271bfa64e515f0410c5b4fc62; focused and full docs/checker gates passed with no firmware, build-input, workflow, artifact, or hardware changes.",
+        "validation_provenance": "Focused observation and declared-inventory checkers, census, health, full runtime-config aggregate, publication workflow, postprocessor workflow, framework, sequence, navigation, agent-surface, and diff checks PASS. Exact feature ref was live-verified before canonical integration."
+      },
       "stop_conditions": [
         "Selector or declaration drift.",
         "A required observed identity cannot be represented without inference or trust promotion.",
@@ -1426,7 +1444,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-004","GP-PROV-005"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-005"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1442,10 +1460,13 @@ configurator and its exact recovery publication is live-verified.
 `GP-CTL-002` is `DONE`; its exact integration and separate completion
 publication are canonical. `GP-PROV-003` is `DONE` after exact reviewed
 implementation ancestry and separate structured completion publication.
-`GP-PROV-004` and `GP-PROV-005` are the two immediate `READY` items.
+`GP-PROV-004` is `DONE` after exact reviewed H0 observation implementation,
+full current validation, feature-ref publication, canonical integration, and
+separate structured completion publication. `GP-PROV-005` is the remaining
+immediate `READY` item.
 Recorded Preauthorization is zero, mechanically activatable Preauthorization is
 zero, and no invalidated Preauthorization or hardware-pending work exists.
-Effective runway is two against a target of four (`RUNWAY_LOW`).
+Effective runway is one against a target of four (`RUNWAY_LOW`).
 `GP-AUTH-001` is resolved by the baseline-equivalent sole-X1 production intake;
 `GP-CONFIG-002` is invalidated by user direction. Planner survivors
 `GP-ART-001` and `GP-X1-001` remain user-decision gated; no survivor is a
@@ -1516,9 +1537,10 @@ Two explicitly user-decision-gated survivors remain.
 - `GP-PROV-003`: `DONE`; its exact independently reviewed H0 implementation is
   an ancestor of canonical integration `a747dd54b02b207483142331d8b5be1113fc951e`,
   and structured completion evidence binds the reviewed path set.
-- `GP-PROV-004`: `READY`; record timestamped read-only upstream observations
-  for every eligible build-input selector without installation, pin change,
-  workflow mutation, build, or reproducibility claim.
+- `GP-PROV-004`: `DONE`; recorded 42 direct and two derived timestamped
+  read-only build-input observations with bounded uncertainty, exact source
+  inventory correspondence, and no installation, selector mutation, build, or
+  reproducibility claim.
 - `GP-PROV-005`: `READY`; perform bounded source-lineage research for the
   exact tracked `glyph_nuker` identity without executing, rebuilding,
   replacing, or promoting inference into authority.
