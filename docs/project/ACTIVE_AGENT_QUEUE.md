@@ -31,7 +31,7 @@ Git, but it is not current candidate supply or implementation authority.
     "material_events_since_packet": [
       "Curator independently reviewed fresh packet glyph-portfolio-20260824-2349 at commit ffba28772d8559df4b356de9b3a3f02248d16c07 against live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 and cleared curator_review_required.",
       "A live-byte-identical reproduction proved that GP-CONFIG-004 Done evidence is incomplete: a reviewed capture with contradictory diff-row/comparison status, contradictory result.md status, contradictory duplicate artifact paths and hashes, and nonexistent nested paths still passed. GP-CONFIG-004 is reopened READY for the exact offline correspondence repair.",
-      "GP-PROV-002 remains legitimate IN_PROGRESS publication recovery because reviewed live feature tip 9c94b5449b8065cb02aa0689ca0564720238b80c is not integrated into live configurator; recovery must precede new implementation.",
+      "GP-PROV-002 publication recovery integrated the exact reviewed feature tip 9c94b5449b8065cb02aa0689ca0564720238b80c into configurator and preserved the reviewed implementation and validation scope; no new implementation was started.",
       "GP-CTL-002 remains substantively PREAUTHORIZED/WAITING on exact GP-PROV-002 integration. The exact reviewed recovery tree and control-plane publication are permitted non-semantic deltas; any replay, governance-semantic drift, or changed correspondence architecture invalidates activation.",
       "GP-PROV-003 remains research gated, GP-AUTH-001 remains user/source-authority gated, and GP-CONFIG-002 is substantive-dependency gated on the GP-CONFIG-004 repair and then external operator evidence. No global evidence wait is proposed or supported.",
       "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
@@ -537,7 +537,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-002",
       "title": "Emit observed-only CI artifact sidecar",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "branch": "glyph/gp-prov-002-observed-ci-sidecar-20260824",
       "objective": "Make the canonically gated build.yml artifact route emit and verify a sidecar carrying the full source Git identity and exact final postprocessed artifact identity.",
       "why_this_matters": "The current route uploads a postprocessed UF2 named with only a short SHA and no full candidate SHA, final size/SHA-256, or postprocessor identity sidecar, so consumers cannot establish even bounded observed correspondence from the uploaded directory.",
@@ -580,7 +580,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused workflow/provenance branch if valid current artifacts cannot produce a deterministic verified observed-only sidecar; do not bypass failed identity or sidecar checks and do not infer missing provenance.",
       "status_documentation_updates": "Document the bounded build.yml observed-only sidecar and retain explicit non-claims for immutable storage, artifact acceptance, reproducibility, postprocessor purpose/effect, hardware, and every unresolved external route.",
-      "done_evidence": "Implementation commits a09ba09d35621b3742ee37f961c012f542ce64c0, 3810732a0daa3d4c771d205da5b76d8f7a63dbf4, and repaired completion commit 9c94b5449b8065cb02aa0689ca0564720238b80c are live on feature ref glyph/gp-prov-002-observed-ci-sidecar-20260824; independent review and the exact sidecar/workflow/tamper/full-validation corpus passed. Canonical publication dfc92adf2910532e24f429f61ea3c1fe7026425a nevertheless changed status to Done without integrating that implementation tree, and live configurator caf37e10673896b3bf5e2815875a93310b3f3ac1 does not contain the feature tip. Publication recovery must refresh configurator, integrate the reviewed feature exactly without absorbing unrelated work, rerun invalidated gates, then publish Done on a separate descendant snapshot and live-verify the exact canonical SHA. No firmware/build input, glyph_nuker bytes, build-device-config.yml, upload execution, artifact acceptance, storage, hardware, device, or runtime behavior changed or is claimed.",
+      "done_evidence": "Implementation commits a09ba09d35621b3742ee37f961c012f542ce64c0, 3810732a0daa3d4c771d205da5b76d8f7a63dbf4, and repaired completion commit 9c94b5449b8065cb02aa0689ca0564720238b80c are integrated into configurator by recovery merge 4859c94c038125f42da6771ad5f1a0396df2333c; independent review and the exact sidecar/workflow/tamper/full-validation corpus passed. No firmware/build input, glyph_nuker bytes, build-device-config.yml, upload execution, artifact acceptance, storage, hardware, device, or runtime behavior changed or is claimed.",
       "stop_conditions": [
         "The tracked postprocessor identity differs or its purpose/effect must be interpreted.",
         "A durable locator, store, retention, caller, owner, release, reproducibility, artifact-acceptance, or hardware decision is required.",
