@@ -89,6 +89,9 @@ Stop and report.
 - Nunchuk remains NOT_TESTED unless the user explicitly reports a test.
 - Root cause remains unproven unless direct evidence is found.
 - Runtime-loaded config remains not implemented.
+- A post-migration `DONE` item requires strict completion evidence: full Git
+  SHAs, exact reviewed changed paths, and either direct ancestry or a
+  dedicated exact path/tree replay whose integration precedes publication.
 
 ## Current Active Path Boundary
 

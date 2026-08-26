@@ -482,7 +482,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 78345,
+      "file_size_bytes": 89517,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -513,6 +513,7 @@
         "expect_evidence_rejection",
         "global_evidence_wait",
         "global_evidence_wait_supported",
+        "glyph_done_completion_evidence",
         "glyph_hardware_evidence_record",
         "hardware_evidence_contract_reference",
         "hardware_evidence_contract_version",
@@ -525,6 +526,7 @@
         "planner_packet.candidate_count",
         "required_external_evidence",
         "substantive_candidate_exists",
+        "validate_completion_evidence",
         "validate_evidence_record"
       ],
       "imported_local_modules": [],
@@ -532,7 +534,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1759,
+      "line_count": 1966,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -565,6 +567,7 @@
         "expect_evidence_rejection",
         "global_evidence_wait",
         "global_evidence_wait_supported",
+        "glyph_done_completion_evidence",
         "glyph_hardware_evidence_record",
         "hardware_evidence_contract_reference",
         "hardware_evidence_contract_version",
@@ -577,6 +580,7 @@
         "planner_packet.candidate_count",
         "required_external_evidence",
         "substantive_candidate_exists",
+        "validate_completion_evidence",
         "validate_evidence_record"
       ],
       "potential_mutation_signals": [
@@ -625,11 +629,12 @@
         "docs/project/AGENT_PROMPT_TEMPLATES.md",
         "docs/project/CODEX_CLOUD_WORKFLOW.md",
         "docs/project/CODEX_WORKFLOW.md",
+        "docs/reviewed.txt",
         "docs/symlink.json",
         "docs/test_protocol.md"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "1d6b240ae8a10369517209b1be9e3f33c8b9aa90958139f9de2b3ee49a58a77b",
+      "sha256": "b9607b789a6d810eacc2be1f2edb475f2a8b3f8680eeb0c8cbe12a1259032c09",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

@@ -75,6 +75,9 @@ recommendation.
   bounded fix loops, commit, push, and safe merge only when gates pass.
 - Preserve current facts: Nunchuk remains NOT_TESTED, root cause remains
   unproven, runtime-loaded config is not implemented.
+- Completion publication must use the queue's immutable migration boundary
+  and structured Git-backed Done correspondence; integrate implementation and
+  checker changes first, then publish status in a separate descendant.
 
 ## Compact Cycle Template
 

@@ -45,7 +45,28 @@ Git, but it is not current candidate supply or implementation authority.
       "review_date": "2026-08-26"
     }
   },
-  "runway": {
+  "completion_correspondence": {
+    "migration_base_configurator_sha": "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+    "legacy_done_ids": [
+      "GP-CONFIG-001",
+      "GP-CONFIG-003",
+      "GP-CONFIG-004",
+      "GP-CTL-001",
+      "GP-HW-001",
+      "GP-PROV-001",
+      "GP-PROV-002",
+      "GP-SRC-001",
+      "GP-SRC-002",
+      "GP-SRC-003",
+      "GP-SRC-004",
+      "GP-SRC-005",
+      "GP-VAL-001",
+      "GP-VAL-002",
+      "GP-VAL-003",
+      "GP-VAL-004"
+    ]
+  },
+    "runway": {
     "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
