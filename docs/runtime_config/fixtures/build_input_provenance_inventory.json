@@ -1,0 +1,697 @@
+{
+  "canonical_environment": "glyph_mk6",
+  "declaration_files": [
+    {
+      "git_mode": "100644",
+      "path": ".github/workflows/build-device-config.yml",
+      "sha256": "abf612c3f27e9884ad600b1c1b3cd1a864fae45c22c24aa7b2508c8ad98df5a5"
+    },
+    {
+      "git_mode": "100644",
+      "path": ".github/workflows/build.yml",
+      "sha256": "b2da4ecddd42443fa0d19c56b55dfd2df0ee91bd513258983f0887f2ff7ef638"
+    },
+    {
+      "git_mode": "100644",
+      "path": "builder_scripts/arduino_pico.py",
+      "sha256": "456a4b7d5582bbeb0244868db28920cd0f276d3db1924b36b401047cdf4569c2"
+    },
+    {
+      "git_mode": "100644",
+      "path": "config/glyph/.github/workflows/build.yml",
+      "sha256": "85e134a6b98e377db510c468e50a41446c4b62ec486728e1da880f04e531c4a7"
+    },
+    {
+      "git_mode": "100644",
+      "path": "config/glyph/env.ini",
+      "sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf"
+    },
+    {
+      "git_mode": "100644",
+      "path": "config/glyph/meta.yaml",
+      "sha256": "22e3d23a7b596aa99da26fe86cc83e9e24d57b40200f702b9289e94cef2d8655"
+    },
+    {
+      "git_mode": "100755",
+      "path": "glyph_nuker",
+      "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae"
+    },
+    {
+      "git_mode": "100644",
+      "path": "platformio.ini",
+      "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9"
+    }
+  ],
+  "postprocessor_identity": {
+    "byte_transformation": "UNKNOWN",
+    "git_mode": "100755",
+    "path": "glyph_nuker",
+    "purpose": "UNKNOWN",
+    "resolution_state": "STATIC_TRACKED_BYTES",
+    "sha256": "8c488005c1ae7676518a0f8e048ff7d2fb51b71b743fdb785aeed3d8cf9f56ae"
+  },
+  "schema_name": "glyph_build_input_provenance_inventory",
+  "schema_version": 1,
+  "selectors": [
+    {
+      "category": "environment",
+      "declaration_context": "build[1].bin_ext",
+      "declaring_path": "config/glyph/meta.yaml",
+      "id": "meta.build.glyph_mk6.bin_ext",
+      "raw_selector": "uf2",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "build[1].env",
+      "declaring_path": "config/glyph/meta.yaml",
+      "id": "meta.build.glyph_mk6.env",
+      "raw_selector": "glyph_mk6",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "build[0].bin_ext",
+      "declaring_path": "config/glyph/meta.yaml",
+      "id": "meta.build.glyph_protoA.bin_ext",
+      "raw_selector": "uf2",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "build[0].env",
+      "declaring_path": "config/glyph/meta.yaml",
+      "id": "meta.build.glyph_protoA.env",
+      "raw_selector": "glyph_protoA",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "repo",
+      "declaring_path": "config/glyph/meta.yaml",
+      "id": "meta.external_repo",
+      "raw_selector": "GregTurbo/Haybox-Glyph",
+      "resolution_state": "UNRESOLVED_EXTERNAL",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "source_identity",
+      "declaration_context": "revision",
+      "declaring_path": "config/glyph/meta.yaml",
+      "id": "meta.external_revision",
+      "raw_selector": "05a7d2b",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "ABBREVIATED_GIT_COMMIT"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "arduino_pico_base.board",
+      "declaring_path": "platformio.ini",
+      "id": "pio.arduino_pico.board",
+      "raw_selector": "pico",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "arduino_pico_base.board_build.core",
+      "declaring_path": "platformio.ini",
+      "id": "pio.arduino_pico.core",
+      "raw_selector": "earlephilhower",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "local_script",
+      "declaration_context": "arduino_pico_base.extra_scripts",
+      "declaring_path": "platformio.ini",
+      "id": "pio.arduino_pico.extra_script",
+      "raw_selector": "pre:builder_scripts/arduino_pico.py",
+      "resolution_state": "STATIC_TRACKED_BYTES",
+      "selector_class": "LOCAL_TRACKED_FILE"
+    },
+    {
+      "category": "toolchain",
+      "declaration_context": "arduino_pico_base.framework",
+      "declaring_path": "platformio.ini",
+      "id": "pio.arduino_pico.framework",
+      "raw_selector": "arduino",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "SYMBOLIC_FRAMEWORK"
+    },
+    {
+      "category": "toolchain",
+      "declaration_context": "arduino_pico_base.platform",
+      "declaring_path": "platformio.ini",
+      "id": "pio.arduino_pico.platform",
+      "raw_selector": "https://github.com/maxgerhardt/platform-raspberrypi.git#5e87ae34ca025274df25b3303e9e9cb6c120123c",
+      "resolution_state": "DECLARED_EXACT_NOT_FETCHED",
+      "selector_class": "FULL_GIT_COMMIT"
+    },
+    {
+      "category": "toolchain",
+      "declaration_context": "arduino_pico_base.platform_packages",
+      "declaring_path": "platformio.ini",
+      "id": "pio.arduino_pico.platform_package",
+      "raw_selector": "framework-arduinopico@https://github.com/earlephilhower/arduino-pico.git#3.6.3",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "platformio.default_envs",
+      "declaring_path": "platformio.ini",
+      "id": "pio.default_environment",
+      "raw_selector": "glyph_mk6",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "env.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.env.lib.haybox_proto",
+      "raw_selector": "https://github.com/JonnyHaystack/HayBox-proto#5b2bb5d",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "ABBREVIATED_GIT_COMMIT"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "env.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.env.lib.nanopb",
+      "raw_selector": "nanopb/Nanopb@^0.4.8",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "COMPATIBLE_VERSION_RANGE"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "env.custom_nanopb_protos",
+      "declaring_path": "platformio.ini",
+      "id": "pio.env.nanopb_proto",
+      "raw_selector": "+<.pio/libdeps/${PIOENV}/HayBox-proto/config.proto>",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_SOURCE_SELECTION"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "env.build_src_filter",
+      "declaring_path": "platformio.ini",
+      "id": "pio.env.source_filter",
+      "raw_selector": "+<src/>",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_SOURCE_SELECTION"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "platformio.extra_configs",
+      "declaring_path": "platformio.ini",
+      "id": "pio.extra_configs",
+      "raw_selector": "config/*/env.ini",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_SOURCE_SELECTION"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "glyph_base.extends",
+      "declaring_path": "config/glyph/env.ini",
+      "id": "pio.glyph.extends",
+      "raw_selector": "arduino_pico_base",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "glyph_base.lib_deps",
+      "declaring_path": "config/glyph/env.ini",
+      "id": "pio.glyph.lib.haybox_proto",
+      "raw_selector": "https://github.com/GregTurbo/HayBox-proto#db4e2f6",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "ABBREVIATED_GIT_COMMIT"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "glyph_base.lib_ignore",
+      "declaring_path": "config/glyph/env.ini",
+      "id": "pio.glyph.lib_ignore.haybox_proto",
+      "raw_selector": "https://github.com/JonnyHaystack/HayBox-proto",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "glyph_base.build_src_filter",
+      "declaring_path": "config/glyph/env.ini",
+      "id": "pio.glyph.source_common",
+      "raw_selector": "+<config/glyph/common/src>",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_SOURCE_SELECTION"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "glyph_base.build_src_filter",
+      "declaring_path": "config/glyph/env.ini",
+      "id": "pio.glyph.source_environment",
+      "raw_selector": "+<config/glyph/${PIOENV}>",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_SOURCE_SELECTION"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "env:glyph_mk6.extends",
+      "declaring_path": "config/glyph/env.ini",
+      "id": "pio.glyph_mk6.extends",
+      "raw_selector": "glyph_base",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.adafruit_gfx",
+      "raw_selector": "adafruit/Adafruit GFX Library@^1.11.9",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "COMPATIBLE_VERSION_RANGE"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.adafruit_ssd1306",
+      "raw_selector": "adafruit/Adafruit SSD1306@^2.5.9",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "COMPATIBLE_VERSION_RANGE"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.arduino_nunchuk",
+      "raw_selector": "https://github.com/JonnyHaystack/arduino-nunchuk/archive/refs/tags/v1.0.1.zip",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.crc32",
+      "raw_selector": "bakercp/CRC32@^2.0.0",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "COMPATIBLE_VERSION_RANGE"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.fastled",
+      "raw_selector": "https://github.com/FastLED/FastLED#6daa782",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "ABBREVIATED_GIT_COMMIT"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.joybus_pio",
+      "raw_selector": "https://github.com/GregTurbo/joybus-pio#f2f59c0",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "ABBREVIATED_GIT_COMMIT"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.nanopb_arduino",
+      "raw_selector": "https://github.com/JonnyHaystack/nanopb-arduino/archive/refs/tags/v1.1.1.zip",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.nes_pio",
+      "raw_selector": "https://github.com/GregTurbo/nes-pio#422f16f",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "ABBREVIATED_GIT_COMMIT"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.packetio",
+      "raw_selector": "eric-wieser/PacketIO@^0.3.0",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "COMPATIBLE_VERSION_RANGE"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.pcf8575",
+      "raw_selector": "robtillaart/PCF8575@^0.2.2",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "COMPATIBLE_VERSION_RANGE"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.tu_composite_hid",
+      "raw_selector": "TUCompositeHID",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "arduino_pico_base.lib_deps",
+      "declaring_path": "platformio.ini",
+      "id": "pio.lib.xinput",
+      "raw_selector": "https://github.com/JonnyHaystack/Adafruit_TinyUSB_XInput#4b5617b",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "ABBREVIATED_GIT_COMMIT"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "arduino_pico_base.build_src_filter",
+      "declaring_path": "platformio.ini",
+      "id": "pio.source_filter.pico",
+      "raw_selector": "+<HAL/pico/src>",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_SOURCE_SELECTION"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "platformio.src_dir",
+      "declaring_path": "platformio.ini",
+      "id": "pio.src_dir",
+      "raw_selector": "./",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_SOURCE_SELECTION"
+    },
+    {
+      "category": "workflow_expression",
+      "declaration_context": "jobs.build.strategy.matrix.include",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.build_matrix",
+      "raw_selector": "${{ fromJson(needs.metadata.outputs.meta_json).build }}",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "RUNTIME_EXPRESSION"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.metadata.steps.Checkout.uses",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.checkout_action",
+      "raw_selector": "actions/checkout@v4",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.build.steps.Check out config repo.uses",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.config_checkout_action",
+      "raw_selector": "actions/checkout@v4",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "workflow_expression",
+      "declaration_context": "jobs.build.env.DEVICE_CONFIG_REVISION",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.device_config_revision",
+      "raw_selector": "${{ github.ref_type == 'tag' && github.ref_name || github.sha }}",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "RUNTIME_EXPRESSION"
+    },
+    {
+      "category": "workflow_expression",
+      "declaration_context": "jobs.build.env.HAYBOX_REPO",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.external_repo",
+      "raw_selector": "${{ fromJson(needs.metadata.outputs.meta_json).repo }}",
+      "resolution_state": "UNRESOLVED_EXTERNAL",
+      "selector_class": "RUNTIME_EXPRESSION"
+    },
+    {
+      "category": "workflow_expression",
+      "declaration_context": "jobs.build.env.HAYBOX_REVISION",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.external_revision",
+      "raw_selector": "${{ fromJson(needs.metadata.outputs.meta_json).revision }}",
+      "resolution_state": "UNRESOLVED_EXTERNAL",
+      "selector_class": "RUNTIME_EXPRESSION"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "jobs.metadata.steps.Read metadata from yaml file.run",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.metadata_path",
+      "raw_selector": "meta.yaml",
+      "resolution_state": "STATIC_TRACKED_BYTES",
+      "selector_class": "LOCAL_TRACKED_FILE"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "jobs.build.steps.Install PlatformIO.run",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.pip",
+      "raw_selector": "python -m pip install --upgrade pip",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "jobs.build.steps.Install PlatformIO.run",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.platformio",
+      "raw_selector": "pip install --upgrade platformio",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "toolchain",
+      "declaration_context": "jobs.build.steps.Set up Python.with.python-version",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.python",
+      "raw_selector": "3.10",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "VERSION_LINE"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.build.steps.Upload binaries to release.uses",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.release_action",
+      "raw_selector": "softprops/action-gh-release@v1",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "jobs.metadata.steps.Install yaml2json.run",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.remarshal",
+      "raw_selector": "python3 -m pip install remarshal",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "workflow_runner",
+      "declaration_context": "jobs.build.runs-on",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.runner.build",
+      "raw_selector": "ubuntu-latest",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "MOVING_REF"
+    },
+    {
+      "category": "workflow_runner",
+      "declaration_context": "jobs.metadata.runs-on",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.runner.metadata",
+      "raw_selector": "ubuntu-latest",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "MOVING_REF"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.build.steps.Set up Python.uses",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.setup_python_action",
+      "raw_selector": "actions/setup-python@v5",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.build.steps.Publish ${{ matrix.env }} artifacts.uses",
+      "declaring_path": ".github/workflows/build-device-config.yml",
+      "id": "workflow.device.upload_action",
+      "raw_selector": "actions/upload-artifact@v4",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "reusable_workflow",
+      "declaration_context": "jobs.build.uses",
+      "declaring_path": "config/glyph/.github/workflows/build.yml",
+      "id": "workflow.nested.reusable_caller",
+      "raw_selector": "GregTurbo/HayBox-Glyph/.github/workflows/build-device-config.yml@configurator",
+      "resolution_state": "UNRESOLVED_EXTERNAL",
+      "selector_class": "MOVING_REF"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "jobs.build.strategy.matrix.include.env",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.build_environment",
+      "raw_selector": "glyph_mk6",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "environment",
+      "declaration_context": "jobs.build.strategy.matrix.include.bin_ext",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.build_extension",
+      "raw_selector": "uf2",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "LOCAL_CONFIGURATION_SYMBOL"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.build.steps.Check out source code.uses",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.checkout_build",
+      "raw_selector": "actions/checkout@v4",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.validation.steps.Check out source code.uses",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.checkout_validation",
+      "raw_selector": "actions/checkout@v4",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "source_selection",
+      "declaration_context": "jobs.validation.env.GLYPH_CHECKER_BASE",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.comparison_base",
+      "raw_selector": "${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'origin/configurator' }}",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "RUNTIME_EXPRESSION"
+    },
+    {
+      "category": "postprocessor",
+      "declaration_context": "jobs.build.steps.nuke.run",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.glyph_nuker",
+      "raw_selector": "glyph_nuker",
+      "resolution_state": "STATIC_TRACKED_BYTES",
+      "selector_class": "TRACKED_FILE_IDENTITY"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "jobs.build.steps.Install PlatformIO.run",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.pip",
+      "raw_selector": "python -m pip install --upgrade pip",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "dependency",
+      "declaration_context": "jobs.build.steps.Install PlatformIO.run",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.platformio",
+      "raw_selector": "pip install --upgrade platformio",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "UNVERSIONED"
+    },
+    {
+      "category": "toolchain",
+      "declaration_context": "jobs.build.steps.Set up Python.with.python-version",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.python",
+      "raw_selector": "3.10",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "VERSION_LINE"
+    },
+    {
+      "category": "workflow_runner",
+      "declaration_context": "jobs.build.runs-on",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.runner.build",
+      "raw_selector": "ubuntu-latest",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "MOVING_REF"
+    },
+    {
+      "category": "workflow_runner",
+      "declaration_context": "jobs.validation.runs-on",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.runner.validation",
+      "raw_selector": "ubuntu-latest",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "MOVING_REF"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.build.steps.Set up Python.uses",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.setup_python_action",
+      "raw_selector": "actions/setup-python@v5",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    },
+    {
+      "category": "source_identity",
+      "declaration_context": "jobs.build.steps.Verify checked-out source and postprocessor identity.run",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.source_sha",
+      "raw_selector": "$GITHUB_SHA",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY",
+      "selector_class": "RUNTIME_EXPRESSION"
+    },
+    {
+      "category": "workflow_action",
+      "declaration_context": "jobs.build.steps.Publish ${{ matrix.env }} artifacts.uses",
+      "declaring_path": ".github/workflows/build.yml",
+      "id": "workflow.top.upload_action",
+      "raw_selector": "actions/upload-artifact@v4",
+      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED",
+      "selector_class": "TAG"
+    }
+  ],
+  "source_identity": {
+    "claim": "exact_source_snapshot_only_not_dependency_closure_or_reproducibility",
+    "mechanism": "git rev-parse HEAD",
+    "required_value_shape": "full_lowercase_40_hex",
+    "resolution_state": "RUNTIME_RESOLVED_ONLY"
+  },
+  "status": "declared_input_inventory_only_no_resolution_or_reproducibility",
+  "unresolved_claims": [
+    "artifact_acceptance",
+    "build_device_config_live_caller_and_ownership",
+    "complete_dependency_resolution",
+    "immutable_artifact_locator",
+    "package_and_action_content_identity",
+    "postprocessor_byte_transformation",
+    "postprocessor_purpose",
+    "reproducible_build",
+    "runner_image_identity",
+    "toolchain_resolution"
+  ]
+}

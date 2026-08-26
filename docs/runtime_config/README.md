@@ -6,6 +6,14 @@ This directory contains runtime-config design, evidence, fixtures, and checker
 contracts. Read the current boundary first; use archived diagnostics only when
 you need the supporting evidence.
 
+The current declared-only build-input provenance boundary is documented in
+`build_input_provenance_inventory.md`, with its deterministic fixture and
+load-bearing static checker at
+`fixtures/build_input_provenance_inventory.json` and
+`tools/check_glyph_build_input_provenance_inventory.py`. It records declared
+selectors and unresolved claims without fetching dependencies, executing build
+tooling or the postprocessor, or claiming reproducibility.
+
 The observed-only artifact-postprocessor provenance packet is documented in
 `artifact_postprocessor_provenance.md`, with its synthetic fixture and
 verifier at
