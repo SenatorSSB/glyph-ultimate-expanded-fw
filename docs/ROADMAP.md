@@ -9,7 +9,7 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-004","GP-PROV-005"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-005"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The executable work runway is owned separately by
@@ -33,9 +33,10 @@ Pushed recovery tip
 not mergeable; `GP-SRC-003` now requires prepared schema v2 with carried
 normalized input and deterministic artifact/manifest regeneration.
 `GP-PROV-003` is DONE after exact reviewed implementation ancestry and separate
-structured completion publication. `GP-PROV-004` and `GP-PROV-005` are READY
-for bounded observational build-input resolution and `glyph_nuker`
-source-lineage research; neither may change pins, build inputs, workflows,
+structured completion publication. `GP-PROV-004` is DONE after its exact
+reviewed bounded observational build-input resolution packet was integrated
+and published. `GP-PROV-005` remains READY for `glyph_nuker` source-lineage
+research; neither may change pins, build inputs, workflows,
 artifacts, or runtime behavior. Recorded Preauthorization is zero and effective
 runway is two against target four (`RUNWAY_LOW`); the marker above is
 authoritative. `GP-AUTH-001` is resolved by the exact baseline-equivalent
