@@ -15,6 +15,40 @@ from glyph_official_configurator_export_candidate_diff import (
 )
 
 
+def capture_json_pointer_diff(left: object, right: object) -> dict[str, object]:
+    """Return a deterministic, value-free RFC6901 diff for two JSON values."""
+    added: list[str] = []
+    removed: list[str] = []
+    changed: list[str] = []
+
+    def pointer(parent: str, segment: str) -> str:
+        escaped = segment.replace("~", "~0").replace("/", "~1")
+        return f"{parent}/{escaped}" if parent else f"/{escaped}"
+
+    def visit(left_value: object, right_value: object, path: str) -> None:
+        if isinstance(left_value, dict) and isinstance(right_value, dict):
+            left_keys, right_keys = set(left_value), set(right_value)
+            removed.extend(pointer(path, str(key)) for key in sorted(left_keys - right_keys))
+            added.extend(pointer(path, str(key)) for key in sorted(right_keys - left_keys))
+            for key in sorted(left_keys & right_keys):
+                visit(left_value[key], right_value[key], pointer(path, str(key)))
+            return
+        if isinstance(left_value, list) and isinstance(right_value, list):
+            common = min(len(left_value), len(right_value))
+            for index in range(common):
+                visit(left_value[index], right_value[index], pointer(path, str(index)))
+            removed.extend(pointer(path, str(index)) for index in range(common, len(left_value)))
+            added.extend(pointer(path, str(index)) for index in range(common, len(right_value)))
+            return
+        if type(left_value) is not type(right_value) or left_value != right_value:
+            changed.append(path)
+
+    visit(left, right, "")
+    return {"schema_name": "official_configurator_capture_json_pointer_diff", "schema_version": 1,
+            "equal": not added and not removed and not changed, "added_paths": sorted(added),
+            "removed_paths": sorted(removed), "changed_paths": sorted(changed)}
+
+
 def fail(message: str) -> None:
     raise CorpusError(message)
 
