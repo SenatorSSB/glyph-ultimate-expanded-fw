@@ -64,17 +64,18 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-005"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-004","GP-PROV-005","GP-VAL-003","GP-CTL-001"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Reviewed Planner packet
-  `glyph-portfolio-20260827-0132` is partially consumed after independent
+  `glyph-portfolio-20260827-1210` is partially consumed after independent
   curation.
   `GP-SRC-003` is DONE with prepared schema v2 carrying normalized
   input and deterministic artifact/manifest regeneration; earlier pushed tip
   `2b734b26439e9028717becf0010e345cb5efce6c` remains failed-review historical
-  evidence and must not merge. `GP-SRC-004` and `GP-VAL-003` are DONE;
+  evidence and must not merge. `GP-SRC-004` is DONE; `GP-VAL-003` is reopened
+  READY for its validation-health prose correspondence repair.
   `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
   and `GP-VAL-004` is DONE after its checker-only temporary-root repair.
   `GP-CONFIG-004` is DONE after its independently reviewed offline checker/docs
@@ -85,11 +86,12 @@ automation from this context document.
   implementation integration and separate completion publication.
   `GP-PROV-003` is DONE after its reviewed H0 implementation became a real
   canonical ancestor and received separate structured completion publication.
-  `GP-PROV-004` is DONE after its exact reviewed bounded observational
-  build-input resolution packet was integrated and published. `GP-PROV-005`
-  remains READY for `glyph_nuker` source-lineage research. The
-  current-runway marker above is authoritative; recorded Preauthorization is
-  zero and effective runway is two against target four (`RUNWAY_LOW`).
+  `GP-PROV-004`, `GP-VAL-003`, and `GP-CTL-001` are reopened READY H0
+  repair/revalidation work orders after direct current-source correspondence
+  defects were confirmed. `GP-PROV-005` remains READY for `glyph_nuker`
+  source-lineage research. The current-runway marker above is authoritative;
+  recorded Preauthorization is zero and effective runway meets the target at
+  four (`RUNWAY_OK`).
   The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
   baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
   it owns no other table, changes no active bytes, and creates no hardware
