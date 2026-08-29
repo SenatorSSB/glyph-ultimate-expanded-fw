@@ -6504,6 +6504,57 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "nuker_source_lineage",
+      "defines_main": true,
+      "file_size_bytes": 6013,
+      "hard_coded_branch_like_strings": [
+        "configurator",
+        "evidence",
+        "immutable_evidence_identity"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 106,
+      "parse_error": null,
+      "path": "tools/check_glyph_nuker_source_lineage.py",
+      "potential_branch_identity_signals": [
+        "configurator",
+        "evidence",
+        "immutable_evidence_identity"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output"
+      ],
+      "python_module": "tools.check_glyph_nuker_source_lineage",
+      "referenced_repository_path_prefixes": [
+        "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json",
+        "docs/runtime_config/glyph_nuker_source_lineage.md"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "4099d1e4fd4c24587423e44b35cdb64329aa70b877ae0ab3301095965ef0c3ca",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "official_configurator_corpus_diff",
       "defines_main": true,
       "file_size_bytes": 2332,
