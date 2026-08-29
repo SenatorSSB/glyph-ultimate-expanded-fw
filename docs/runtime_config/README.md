@@ -32,6 +32,14 @@ upload. Postprocessor purpose and byte transformation remain `UNKNOWN`; the
 sidecar does not claim immutable storage, artifact acceptance, reproducibility,
 or hardware validation.
 
+The bounded `glyph_nuker` source-lineage search is documented in
+`glyph_nuker_source_lineage.md`, with fixture
+`fixtures/glyph_nuker_source_lineage.json` and offline checker
+`tools/check_glyph_nuker_source_lineage.py`. The search found no authoritative
+source or build recipe within its named repository/history/release surfaces;
+purpose and byte transformation remain `UNKNOWN`, and the result is not a
+global absence claim.
+
 ## Current Known-Good State
 
 Overlay/preserve candidate-generation semantics are now checker-enforced in
