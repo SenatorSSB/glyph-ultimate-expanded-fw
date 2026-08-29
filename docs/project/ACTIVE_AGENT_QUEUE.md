@@ -35,7 +35,7 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-PROV-006 remains dependency-gated on truthful GP-PROV-004 repair; GP-VAL-007 remains curation-gated on an exact bounded dependency-metadata contract; neither is Preauthorized.",
       "GP-VAL-008 remains EVIDENCE_GATED, while GP-ART-001 and GP-X1-001 remain USER_DECISION_GATED; none is executable or hardware-pending.",
       "No global evidence wait is proposed or supported.",
-      "GP-PROV-004 was repaired, reviewed, integrated, and is being published Done in this descendant; the remaining Ready runway is GP-PROV-005, GP-VAL-003, and GP-CTL-001.",
+      "GP-PROV-004 was repaired, reviewed, integrated, and published Done; GP-PROV-005 is integrated and being published Done in this descendant; the remaining Ready runway is GP-VAL-003 and GP-CTL-001.",
       "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
     ],
     "curator_review_provenance": {
@@ -262,7 +262,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-005",
       "title": "Establish bounded source lineage evidence for glyph_nuker",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-005-glyph-nuker-source-lineage-20260827",
       "objective": "Search the exact repository history and named authoritative upstream repositories and releases for glyph_nuker source, immutable source commit, documented purpose, and build provenance; record authoritative lineage if found or a bounded searched-not-found result without claiming global absence.",
       "why_this_matters": "The tracked executable participates in the publication route, but canonical evidence establishes only its bytes and invocation. Purpose, byte transformation, source lineage, and build recipe remain UNKNOWN.",
@@ -306,7 +306,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused lineage packet if evidence cannot be bound without inference; leave glyph_nuker, workflow, artifact contracts, and UNKNOWN claims unchanged.",
       "status_documentation_updates": "Link the bounded lineage record from existing artifact and build-input provenance docs. Update current factual status only for claims directly established by immutable source evidence; retain UNKNOWN otherwise.",
-      "done_evidence": "Pending bounded source search, deterministic evidence packet, independent review, current validation, feature-ref publication, canonical ancestry, and separate structured completion publication.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"d5050847d3f850951b3f47865dc8a91aedea0834","reviewed_implementation_sha":"2982e4aef11b5da01b65fac706cb81d7068835bf","prior_canonical_integration_sha":"def48ddd72a095f4ea150de9eca9164eed6c32e6","reviewed_changed_paths":["docs/runtime_config/README.md","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/glyph_nuker_source_lineage.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/glyph_nuker_source_lineage.md","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_nuker_source_lineage.py"],"independent_review_provenance":"Fresh repaired-scope review PASS on exact feature tip 2982e4aef11b5da01b65fac706cb81d7068835bf; authorized lineage scope, bounded not-found claims, checker safety, manifest/census consequences, and forbidden-path invariants were preserved.","validation_provenance":"Focused lineage, build-input provenance, postprocessor/workflow, 193-entry census, validation health, full current aggregate, framework, sequence, navigation, surface, diff, and compile checks passed; no binary execution, build, artifact, or device action was performed."},
       "stop_conditions": [
         "Binary, workflow, or history drift.",
         "Execution, rebuilding, replacement, or real artifact analysis becomes necessary.",
@@ -1446,7 +1446,7 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-005","GP-VAL-003","GP-CTL-001"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The current-runway marker above is the machine-derived interpretation of
@@ -1467,11 +1467,13 @@ implementation ancestry and separate structured completion publication.
 correspondence repair, independent review, canonical integration, and
 structured completion publication. `GP-VAL-003` and `GP-CTL-001` remain
 `READY` H0 repair/revalidation items after direct current-source
-correspondence defects were confirmed. `GP-PROV-005` remains `READY` for bounded source-lineage
-research.
+correspondence defects were confirmed. `GP-PROV-005` is `DONE` after bounded
+source-lineage research; source lineage, purpose, byte transformation, build
+recipe, reproducibility, safety, artifact acceptance, and hardware remain
+`UNKNOWN`.
 Recorded Preauthorization is zero, mechanically activatable Preauthorization is
 zero, and no invalidated Preauthorization or hardware-pending work exists.
-Effective runway is three against a target of four (`RUNWAY_LOW`).
+Effective runway is two against a target of four (`RUNWAY_LOW`).
 `GP-AUTH-001` is resolved by the baseline-equivalent sole-X1 production intake;
 `GP-CONFIG-002` is invalidated by user direction. Planner survivors
 `GP-ART-001` and `GP-X1-001` remain user-decision gated; no survivor is a
@@ -1526,7 +1528,7 @@ effective runway target. Historical Done items not named below remain Done.
   specifically manifest-entry count and current load-bearing count, must agree
   mechanically with its machine fixture and manifest without reclassifying any
   checker or workflow route.
-- `GP-PROV-005`: remains `READY`; perform bounded `glyph_nuker` source-lineage
+- `GP-PROV-005`: `DONE`; bounded `glyph_nuker` source-lineage research recorded
   research without executing, rebuilding, replacing, or promoting inference
   into authority.
 - `GP-VAL-005`: `PREAUTHORIZABLE_NOT_AUTHORIZED`; three explicit fixed-flag
@@ -1556,7 +1558,7 @@ effective runway target. Historical Done items not named below remain Done.
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` authorize immediate execution. The
-current Ready order is `GP-PROV-005`, `GP-VAL-003`, then `GP-CTL-001`.
+current Ready order is `GP-VAL-003`, then `GP-CTL-001`.
 The remaining reopened governance repairs remain separate work orders;
 the one-new-work-order-per-Implementation-cycle rule still applies. Remaining
 Planner survivors are non-executable under the dispositions above.

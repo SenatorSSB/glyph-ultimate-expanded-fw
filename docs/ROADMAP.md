@@ -9,7 +9,7 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-005","GP-VAL-003","GP-CTL-001"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 The executable work runway is owned separately by
@@ -39,9 +39,11 @@ structured completion publication. `GP-PROV-004` is DONE after exact source,
 identity, base, and dependency correspondence repair and separate structured
 completion publication. Direct current-source correspondence defects leave
 `GP-VAL-003` and `GP-CTL-001` as READY H0 repair/revalidation work orders.
-`GP-PROV-005` remains READY for `glyph_nuker` source-lineage research; none may
+`GP-PROV-005` is DONE after bounded `glyph_nuker` source-lineage research;
+source lineage, purpose, byte transformation, build recipe, reproducibility,
+safety, artifact acceptance, and hardware remain UNKNOWN. None may
 change pins, build inputs, workflows, artifacts, or runtime behavior. Recorded
-Preauthorization is zero and effective runway is three against target four
+Preauthorization is zero and effective runway is two against target four
 (`RUNWAY_LOW`); the marker above is authoritative.
 `GP-AUTH-001` is resolved by the exact baseline-equivalent
 `kX1Table` `overlay_preserve` intake, which changes no active table bytes and

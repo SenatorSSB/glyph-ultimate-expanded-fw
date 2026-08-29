@@ -64,7 +64,7 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-005","GP-VAL-003","GP-CTL-001"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 - The canonical executable queue is
@@ -90,10 +90,12 @@ automation from this context document.
   correspondence repair, independent review, canonical integration, and
   separate structured completion publication. `GP-VAL-003` and `GP-CTL-001`
   remain READY H0 repair/revalidation work orders after direct current-source
-  correspondence defects were confirmed. `GP-PROV-005` remains READY for
-  `glyph_nuker` source-lineage research. The current-runway marker above is
+correspondence defects were confirmed. `GP-PROV-005` is DONE after bounded
+  `glyph_nuker` source-lineage research; source lineage, purpose, byte
+  transformation, build recipe, reproducibility, safety, artifact acceptance,
+  and hardware remain UNKNOWN. The current-runway marker above is
   authoritative; recorded Preauthorization is zero and effective runway is
-  three against target four (`RUNWAY_LOW`).
+  two against target four (`RUNWAY_LOW`).
   The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
   baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
   it owns no other table, changes no active bytes, and creates no hardware
