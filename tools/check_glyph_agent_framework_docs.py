@@ -266,6 +266,20 @@ CURRENT_RUNWAY_MIRRORS = (
     "docs/ROADMAP.md",
 )
 
+CURRENT_RUNWAY_SUMMARY_START = "<!-- current-runway-summary:start -->"
+CURRENT_RUNWAY_SUMMARY_END = "<!-- current-runway-summary:end -->"
+CURRENT_RUNWAY_SUMMARY_FIELDS = (
+    "Ready IDs",
+    "Immediate Ready",
+    "Recorded Preauthorized",
+    "Mechanically activatable Preauthorized",
+    "Invalidated Preauthorized",
+    "Hardware-pending",
+    "Effective authorized runway",
+    "Target effective authorized runway",
+    "Primary liveness",
+)
+
 COMPLETION_POLICY_FIELDS = ("migration_base_configurator_sha", "legacy_done_ids")
 COMPLETION_EVIDENCE_FIELDS = {
     "schema_name",
@@ -1084,6 +1098,105 @@ def check_current_runway_mirrors(
     pass_line("current queue/status mirrors match machine-derived runway state")
 
 
+def parse_current_runway_summary(text: str, rel_path: str) -> dict[str, object]:
+    if text.count(CURRENT_RUNWAY_SUMMARY_START) != 1 or text.count(CURRENT_RUNWAY_SUMMARY_END) != 1:
+        fail(f"{rel_path} must contain exactly one current-runway summary block")
+    start = text.index(CURRENT_RUNWAY_SUMMARY_START) + len(CURRENT_RUNWAY_SUMMARY_START)
+    end = text.find(CURRENT_RUNWAY_SUMMARY_END)
+    if end < start:
+        fail(f"{rel_path} current-runway summary markers are out of order")
+    raw_lines = [line.strip() for line in text[start:end].splitlines() if line.strip()]
+    lines = raw_lines if len(raw_lines) != 1 else [part.strip() for part in raw_lines[0].split("; ")]
+    if len(lines) != len(CURRENT_RUNWAY_SUMMARY_FIELDS):
+        fail(f"{rel_path} current-runway summary must contain exactly nine fields")
+    values: dict[str, object] = {}
+    for line, field in zip(lines, CURRENT_RUNWAY_SUMMARY_FIELDS):
+        prefix = field + ": "
+        if not line.startswith(prefix) or line.count(": ") != 1:
+            fail(f"{rel_path} current-runway summary has malformed {field} field")
+        value = line[len(prefix):]
+        if not value:
+            fail(f"{rel_path} current-runway summary has blank {field} field")
+        if field == "Ready IDs":
+            values[field] = [] if value == "(none)" else value.split(", ")
+        elif field in {
+            "Immediate Ready",
+            "Recorded Preauthorized",
+            "Mechanically activatable Preauthorized",
+            "Invalidated Preauthorized",
+            "Hardware-pending",
+            "Effective authorized runway",
+            "Target effective authorized runway",
+        }:
+            if not value.isdigit():
+                fail(f"{rel_path} current-runway summary {field} must be an integer")
+            values[field] = int(value)
+        else:
+            values[field] = value
+    return values
+
+
+def check_current_runway_summaries(
+    *,
+    items: list[dict[str, object]],
+    runway: dict[str, object],
+    expected_liveness: str,
+) -> None:
+    expected = {
+        "Ready IDs": [item["id"] for item in items if item["status"] == "READY"],
+        "Immediate Ready": runway["immediate_ready"],
+        "Recorded Preauthorized": runway["recorded_preauthorized"],
+        "Mechanically activatable Preauthorized": runway[
+            "mechanically_activatable_preauthorized"
+        ],
+        "Invalidated Preauthorized": runway["invalidated_preauthorized"],
+        "Hardware-pending": runway["hardware_pending"],
+        "Effective authorized runway": runway["effective_authorized_runway"],
+        "Target effective authorized runway": runway[
+            "target_effective_authorized_runway"
+        ],
+        "Primary liveness": expected_liveness,
+    }
+
+    def require_summary_match(actual: dict[str, object], rel_path: str) -> None:
+        if actual != expected:
+            fail(
+                f"{rel_path} current-runway summary disagrees with canonical queue: "
+                f"expected {json.dumps(expected, sort_keys=True)}, "
+                f"found {json.dumps(actual, sort_keys=True)}"
+            )
+
+    for rel_path in CURRENT_RUNWAY_MIRRORS:
+        actual = parse_current_runway_summary(read_required(rel_path), rel_path)
+        require_summary_match(actual, rel_path)
+    stale_text = read_required(CURRENT_RUNWAY_MIRRORS[0]).replace(
+        "Immediate Ready: " + str(expected["Immediate Ready"]),
+        "Immediate Ready: " + str(int(expected["Immediate Ready"]) + 1),
+        1,
+    )
+    try:
+        actual = parse_current_runway_summary(stale_text, "synthetic current-runway summary")
+        require_summary_match(actual, "synthetic current-runway summary")
+    except FrameworkDocsError:
+        pass
+    else:
+        fail("stale current-runway summary fixture was accepted")
+    reversed_text = (
+        CURRENT_RUNWAY_SUMMARY_END
+        + "\n"
+        + CURRENT_RUNWAY_SUMMARY_START
+        + "\n"
+        + "Ready IDs: TEST"
+    )
+    try:
+        parse_current_runway_summary(reversed_text, "synthetic reversed current-runway summary")
+    except FrameworkDocsError:
+        pass
+    else:
+        fail("reversed current-runway summary markers were accepted")
+    pass_line("current human-readable runway summaries match machine state")
+
+
 def require_phrase(rel_path: str, phrase: str) -> None:
     text = read_required(rel_path)
     if normalize(phrase) not in normalize(text):
@@ -1336,6 +1449,11 @@ def check_queue_contract() -> None:
         runway=runway,
         expected_liveness=expected_liveness,
         global_wait_supported=global_wait["supported"],
+    )
+    check_current_runway_summaries(
+        items=items,
+        runway=runway,
+        expected_liveness=expected_liveness,
     )
 
     adversarial_cases = (
