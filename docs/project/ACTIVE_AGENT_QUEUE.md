@@ -19,23 +19,24 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "8c04262c66613d46b933b1b739c01c575cb0c580",
+  "audit_base_sha": "b81c299e1449fc319788a35763b71d3e73d906f1",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
     "branch": "planning/portfolio-20260827-1210",
     "base_configurator_sha": "8c04262c66613d46b933b1b739c01c575cb0c580",
-    "candidate_count": 7,
+    "candidate_count": 4,
     "curator_review_required": false,
     "global_wait_proposed": false,
       "material_events_since_packet": [
       "Curator independently reviewed fresh packet glyph-portfolio-20260827-1210 at commit ae1d15b9a7941934b26d4371b0ea0e10691629cb against live configurator 8c04262c66613d46b933b1b739c01c575cb0c580.",
       "Direct current-source inspection confirmed incomplete accepted correspondence in GP-PROV-004, GP-CTL-001, and GP-VAL-003; the same identities are reopened as complete H0 READY repair/revalidation work orders rather than duplicated.",
-      "GP-VAL-005 remains plausible PREAUTHORIZABLE Planner supply but is not authorized after effective runway reached the target; GP-VAL-006 remains CURATION_REQUIRED on a stricter isolated-repository design. Both are non-executable candidates.",
-      "GP-PROV-006 remains dependency-gated on truthful GP-PROV-004 repair; GP-VAL-007 remains curation-gated on an exact bounded dependency-metadata contract; neither is Preauthorized.",
+      "Subsequent implementation completed GP-PROV-004, GP-PROV-005, and GP-CTL-001; GP-VAL-003 remained Ready but its 30/25 authorization snapshot drifted mechanically to the current 31/26 manifest state and required same-identity reauthorization.",
+      "Curator reverified the surviving packet against live configurator b81c299e1449fc319788a35763b71d3e73d906f1, reauthorized GP-VAL-003, and authorized GP-VAL-005, GP-PROV-006, and GP-VAL-007 as complete H0 READY work orders.",
+      "GP-VAL-006 remains non-executable after independent verification: the gap persists, but the responsible design adds H1 host-side branch-correspondence refusal and must wait until GP-VAL-003 completes before its manifest/count consequence can activate.",
       "GP-VAL-008 remains EVIDENCE_GATED, while GP-ART-001 and GP-X1-001 remain USER_DECISION_GATED; none is executable or hardware-pending.",
       "No global evidence wait is proposed or supported.",
-      "GP-PROV-004 was repaired, reviewed, integrated, and published Done; GP-PROV-005 is integrated and being published Done in this descendant.",
+      "GP-PROV-004, GP-PROV-005, and GP-CTL-001 are repaired or completed, independently reviewed, integrated, and canonically published Done.",
       "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
     ],
     "curator_review_provenance": {
@@ -43,8 +44,8 @@ Git, but it is not current candidate supply or implementation authority.
       "planning_commit": "ae1d15b9a7941934b26d4371b0ea0e10691629cb",
       "packet_id": "glyph-portfolio-20260827-1210",
       "packet_base_configurator_sha": "8c04262c66613d46b933b1b739c01c575cb0c580",
-      "curation_branch": "curation/portfolio-20260827-1232-review",
-      "review_date": "2026-08-27"
+      "curation_branch": "curation/portfolio-20260830-0211-review",
+      "review_date": "2026-08-30"
     }
   },
   "completion_correspondence": {
@@ -69,17 +70,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 4,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_LOW"
+      "RUNWAY_OK"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -677,9 +678,9 @@ Git, but it is not current candidate supply or implementation authority.
       "id": "GP-VAL-003",
       "title": "Census every CI publication route and claim",
       "status": "READY",
-      "branch": "glyph/gp-val-003-health-prose-correspondence-repair-20260827",
+      "branch": "glyph/gp-val-003-health-prose-correspondence-repair-20260830",
       "objective": "Repair and revalidate GP-VAL-003 so the validation-health Markdown manifest-entry count and current load-bearing count mechanically agree with the machine fixture and manifest-derived state while preserving the complete tracked CI publication-route census.",
-      "why_this_matters": "The current machine fixture and passing aggregate report 30 manifest entries and 25 current load-bearing checks, but docs/runtime_config/runtime_config_validation_health.md still reports 29 and 24. The health checker validates the JSON against the manifest but never reads the Markdown claims, so the completed correspondence objective is not load-bearing.",
+      "why_this_matters": "Later provenance work mechanically refreshed the Markdown and machine fixture from 30/25 to the current 31 manifest entries and 26 current load-bearing checks, but tools/check_glyph_runtime_config_validation_health.py still never reads the Markdown claims. The values happen to agree while the completed correspondence objective remains fail-open, and the prior exact-count authorization snapshot is invalidated.",
       "hardware_risk": "H0",
       "behavioral_claim": "This work adds static CI route census, explicit classification, and current-claim parity only. It does not edit or invoke a workflow, build firmware, publish bytes, select an owner/caller/store, or change product behavior.",
       "scope": "Update docs/runtime_config/runtime_config_validation_health.md and tools/check_glyph_runtime_config_validation_health.py, plus only synthetic/adversarial test data and mechanically consequent census metadata. Give the Markdown exactly one current-summary sentence or delimited block whose manifest-entry count and current load-bearing count are parsed and required to equal both docs/runtime_config/fixtures/runtime_config_validation_health.json and values derived from docs/runtime_config/fixtures/runtime_config_validation_manifest.json. Preserve all other prose, the existing workflow census, CURRENT_GATED build.yml classification, UNRESOLVED_EXTERNAL build-device-config.yml classification, and every current manifest applicability decision exactly.",
@@ -688,22 +689,22 @@ Git, but it is not current candidate supply or implementation authority.
         "build tooling",
         "docs/checkers"
       ],
-      "source_authority": "Live configurator 8c04262c66613d46b933b1b739c01c575cb0c580. docs/runtime_config/fixtures/runtime_config_validation_health.json records manifest_entry_count 30 and current_load_bearing_count 25 and tools/run_glyph_runtime_config_validation.py --json passes that state; docs/runtime_config/runtime_config_validation_health.md says 29 and 24. tools/check_glyph_runtime_config_validation_health.py verifies machine fixture/manifest equality but does not parse those Markdown claims. Existing workflow census source still classifies build.yml CURRENT_GATED and build-device-config.yml UNRESOLVED_EXTERNAL. Prior GP-VAL-003 completion remains historical evidence of the incomplete prose-correspondence gate.",
+      "source_authority": "Live configurator b81c299e1449fc319788a35763b71d3e73d906f1. docs/runtime_config/fixtures/runtime_config_validation_health.json and docs/runtime_config/runtime_config_validation_health.md currently report 31 manifest entries and 26 current load-bearing checks, and tools/run_glyph_runtime_config_validation.py --json passes. tools/check_glyph_runtime_config_validation_health.py derives and verifies the JSON counts against the manifest but does not read or bind the Markdown claims, so a deliberate prose-only drift still passes. Existing workflow census source still classifies build.yml CURRENT_GATED and build-device-config.yml UNRESOLVED_EXTERNAL. Prior GP-VAL-003 completion remains historical evidence of the incomplete prose-correspondence gate.",
       "dependencies_prerequisites": [
         "GP-VAL-001 and GP-VAL-002 remain DONE; checker-census freshness, curated applicability authority, and build.yml validation-before-publication remain intact.",
-        "The current 30-entry manifest, 25 current load-bearing entries, machine health schema, and complete tracked workflow census remain materially unchanged at implementation start.",
+        "The current 31-entry manifest, 26 current load-bearing entries, machine health schema, and complete tracked workflow census remain the fresh starting state; implementation derives the values mechanically rather than hard-coding either count.",
         "Static discovery proves tracked routes only and must not claim that an external caller invokes build-device-config.yml.",
         "Any manifest/applicability or unresolved-route remediation remains separate authority and is not coupled into this repair."
       ],
-      "substantive_authorization_rationale": "The two-count contradiction is directly reproduced and the intended values are already machine-derived. Binding exactly those current Markdown counts to the existing fixture and manifest completes the original GP-VAL-003 count-parity promise without choosing a checker classification, changing a route, or making any product or external decision.",
+      "substantive_authorization_rationale": "The stale 30/25 authorization snapshot was independently detected and not silently reused. Current 31/26 prose is accurate only by convention; the fail-open checker gap remains directly source-proven. Binding one exact current summary generically to the fixture and manifest completes the original GP-VAL-003 parity promise without choosing a checker classification, changing a route, or making a product or external decision.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
-        "The validation-health machine schema, manifest entry set/applicability, tracked workflows, or publication classifications materially change before implementation.",
+        "The validation-health machine schema, meaning of either count, tracked workflow census, or publication classification materially changes before implementation; ordinary separately reviewed checker additions and their deterministic manifest/census/health consequences are permitted only when the generic parity invariant remains exact.",
         "Authoritative caller/ownership evidence arrives and changes build-device-config.yml classification.",
         "Implementation would edit/reclassify the manifest or a workflow rather than bind already-current machine state to prose.",
         "Current Markdown cannot be parsed deterministically without replacing prose with one explicit machine-derived marker or equivalent stronger invariant."
       ],
-      "authorization_snapshot_provenance": "Independent Curator review of repair candidate GP-VAL-003 in planning/portfolio-20260827-1210 commit ae1d15b9a7941934b26d4371b0ea0e10691629cb, packet base and live configurator 8c04262c66613d46b933b1b739c01c575cb0c580, with direct machine/Markdown/checker reproduction on curation/portfolio-20260827-1232-review on 2026-08-27.",
+      "authorization_snapshot_provenance": "Same-identity substantive reauthorization of repair candidate GP-VAL-003 from planning/portfolio-20260827-1210 commit ae1d15b9a7941934b26d4371b0ea0e10691629cb, packet base 8c04262c66613d46b933b1b739c01c575cb0c580, independently rebound after the old 30/25 snapshot invalidated to live configurator b81c299e1449fc319788a35763b71d3e73d906f1 on curation/portfolio-20260830-0211-review on 2026-08-30.",
       "automated_validation": [
         "Validation-health Markdown contains exactly one parseable current summary whose manifest-entry count and current load-bearing count agree mechanically with the machine fixture and manifest-derived state.",
         "Adversarially drifting either Markdown count independently, duplicating/removing the summary, or mismatching JSON versus manifest fails while historical records remain excluded from current counts.",
@@ -719,13 +720,201 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused repair if readable current health prose cannot be bound without weakening machine authority; retain the complete route census and unresolved external classification, and never restore a checker that accepts stale current counts.",
-      "status_documentation_updates": "Record GP-VAL-003 as reopened for machine/prose correspondence repair while preserving the current route census and every unresolved external, runtime, artifact, and hardware non-claim.",
+      "status_documentation_updates": "Record GP-VAL-003 as reauthorized against current 31/26 machine state for generic machine/prose correspondence enforcement while preserving the route census and every unresolved external, runtime, artifact, and hardware non-claim.",
       "done_evidence": "Pending exact Markdown/machine correspondence enforcement, independent repaired-scope review, current validation, exact feature-ref publication, canonical integration, and separate structured completion publication. Prior implementation commit 4558efb5310de5ccb36bc3d0499d07dfbb6f1188 remains historical evidence of the incomplete health-prose gate.",
       "stop_conditions": [
         "Any workflow, manifest applicability, checker classification, permission, secret, trigger, caller, release, or artifact destination must change.",
         "Any unresolved external ownership/caller fact would be inferred.",
         "The current machine/prose state cannot be bound without weakening manifest or health authority.",
         "Any firmware build/input, postprocessor execution, publication, device write, flashing, or hardware claim occurs."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-005",
+      "title": "Make advertised offline packaging modes load-bearing",
+      "status": "READY",
+      "branch": "glyph/gp-val-005-offline-packaging-load-bearing-20260830",
+      "objective": "Make the existing offline pipeline, artifact-bundle-manifest, and export-package validators execute through the canonical no-argument coordinate-native checker route and prove that each layer ran.",
+      "why_this_matters": "Current docs advertise all three offline packaging modes and each explicit flag passes, but the single current manifest entry invokes only the no-argument checker path, which omits those validators. The aggregate can therefore pass while advertised packaging coverage never runs.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This strengthens offline checker coverage only. It changes no coordinate/profile semantics, generated artifact bytes, manifest applicability or count, firmware/runtime source, active publication, device path, or controller behavior.",
+      "scope": "Update tools/check_glyph_coordinate_native_runtime_profile_contract.py and only its in-memory or isolated-temporary adversarial coverage plus deterministic checker-census consequences. Preserve every explicit flag route. On the no-argument path, validate the offline pipeline, offline artifact bundle manifest, and offline export package through the existing validators; record an ordered execution trace only after successful validation; require exactly offline_pipeline, offline_artifact_bundle_manifest, offline_export_package; and emit that exact trace as the final aggregate-captured sentinel. Keep the existing single coordinate_native_contract manifest entry, required_arguments empty, runner argument policy, entry count, applicability, and source authority unchanged.",
+      "explicit_excluded_scope": "No new manifest entry or fixed-flag runner policy; no general dependency-metadata contract; no fixture semantic redesign; no real artifact, vendor export, runtime-loaded profile, persistent storage, WebSerial/device write, protobuf write, flashing, active source/publication, firmware build, hardware result, Nunchuk claim, root-cause claim, or gameplay-semantic claim.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator b81c299e1449fc319788a35763b71d3e73d906f1. tools/check_glyph_coordinate_native_runtime_profile_contract.py blob 7ea68a278c310e8bc9525c82d792947b9ddc95c5 implements all three explicit validators, and each explicit command independently passes. docs/runtime_config/fixtures/runtime_config_validation_manifest.json has one current coordinate_native_contract entry with command python3 tools/check_glyph_coordinate_native_runtime_profile_contract.py and empty required_arguments. Direct source inspection shows the default path validates contract/schema, examples, dry-run fixtures, and layout bridge but does not call the three advertised packaging validators. The checker and runner are unchanged from packet base 8c04262c66613d46b933b1b739c01c575cb0c580.",
+      "dependencies_prerequisites": [
+        "The three explicit mode commands, their current fixtures, and the single no-argument manifest entry remain present and passing at implementation start.",
+        "The implementation keeps the manifest entry count/applicability and tools/run_glyph_runtime_config_validation.py argument policy unchanged, so GP-VAL-003 completion is not a prerequisite.",
+        "All tests remain offline and use only checked-in or isolated temporary fixture bytes."
+      ],
+      "substantive_authorization_rationale": "The coverage gap and all validators are already source-proven. Expanding the existing no-argument contract is the smallest architecture: it avoids a new runner argument policy and count churn while an exact ordered trace plus mode-specific adversarial drift prevents silent early-return or omitted-layer coverage. No product, profile, export, device, or runtime decision remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Any explicit mode, fixture schema, no-argument manifest route, or coordinate-native checker architecture materially changes before implementation.",
+        "The implementation would require a new manifest entry, runner required-argument policy, fixture semantic choice, or product/runtime behavior change.",
+        "An equivalent or stronger default-route execution trace and adversarial gate becomes canonical first."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of Planner candidate GP-VAL-005 from planning/portfolio-20260827-1210 commit ae1d15b9a7941934b26d4371b0ea0e10691629cb, packet base 8c04262c66613d46b933b1b739c01c575cb0c580, with bounded specialist verification of all explicit modes and the default-route omission against live configurator b81c299e1449fc319788a35763b71d3e73d906f1 on curation/portfolio-20260830-0211-review.",
+      "automated_validation": [
+        "The no-argument checker succeeds only after the exact ordered trace offline_pipeline, offline_artifact_bundle_manifest, offline_export_package is complete and prints that trace in the final aggregate-captured sentinel.",
+        "Removing, reordering, short-circuiting, or falsely pre-recording any layer fails; malformed pipeline input, bundle manifest, and export package each fail independently for their intended reason using in-memory or isolated temporary data.",
+        "Every explicit flag route retains its current result and output contract; the current single manifest entry, required_arguments, applicability, and counts are byte-unchanged.",
+        "Coordinate-native contract, checker census, validation health, full runtime-config aggregate, framework, sequence, navigation, and agent-surface checks pass with independent repaired-scope review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 offline checker and deterministic census metadata only; any product, generated semantic, compiled source, or build-input delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused checker branch if a valid explicit mode or default contract regresses; never restore aggregate success that omits an advertised packaging layer.",
+      "status_documentation_updates": "Record the three existing offline packaging validators as load-bearing through the one default coordinate-native checker route without creating a production export, artifact, runtime, or hardware claim.",
+      "done_evidence": "Pending exact default-route trace enforcement, independent review, focused adversarial coverage, current aggregate validation, feature-ref verification, canonical integration, and separate structured completion publication.",
+      "stop_conditions": [
+        "Any profile, package, artifact, export, or active behavior semantics must be chosen or changed.",
+        "Any manifest argument-policy or dependency-contract change is required.",
+        "Any runtime-loaded config, persistence, device/protobuf write, flashing, build, hardware, Nunchuk, or root-cause scope appears."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-PROV-006",
+      "title": "Census declared effective non-selector build configuration",
+      "status": "READY",
+      "branch": "glyph/gp-prov-006-non-selector-config-census-20260830",
+      "objective": "Create a deterministic exact-source census of the declared literal non-selector configuration reached by glyph_mk6, including its finite inheritance/reference order, while preserving unresolved runtime interpolation and making no PlatformIO, compiler, or behavior-effect claim.",
+      "why_this_matters": "GP-PROV-003 intentionally inventories selectors and excludes build flags, unflags, literal environment settings, non-path nanopb options, and their ordering. No current load-bearing record detects drift in those declared inputs, while complete effective build and reproducibility claims remain unsupported.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This adds static provenance documentation, a fixture, and a read-only checker only. It does not change or execute build configuration, resolve PlatformIO/compiler behavior, install dependencies, build firmware, process or accept an artifact, or change runtime/configurator behavior.",
+      "scope": "Add docs/runtime_config/build_input_non_selector_configuration.md, docs/runtime_config/fixtures/build_input_non_selector_configuration.json, and tools/check_glyph_build_input_non_selector_configuration.py, then add one current manifest entry with direct dependencies platformio.ini and config/glyph/env.ini and regenerate only deterministic census/health consequences. Use status declared_effective_literal_census_not_platformio_or_compiler_resolution. Bind exactly source blobs 4d56f8630c1b12e84cd12f40ce05a4dc71b9362e and fac4e20461ad632ca1d65826241a4a9c73630f04, the source-declared chain [env], arduino_pico_base, glyph_base, env:glyph_mk6, scalar keys build_type, lib_ldf_mode, debug_tool, monitor_speed, board_build.f_cpu, board_build.filesystem_size, lib_archive, and upload_protocol, ordered-list keys build_flags and build_unflags, and only the non-path custom_nanopb_options token --error-on-unmatched. Preserve declaring path, section, key, raw literal line, order, inheritance/shadow origin, and explicit ${section.option} list-reference expansion order. Preserve ${PIOENV} and ${platformio.name} as unresolved source-labelled runtime interpolation tokens. Record literal token shapes only, never macro, compiler, protocol, board, or behavior effects.",
+      "explicit_excluded_scope": "No PlatformIO invocation or claim of exact PlatformIO evaluation; no compiler/preprocessor invocation; no dependency/cache resolution; no source selector, platform, framework, board/core, package, library, ignore, script, source-filter, proto-path, options-file, extends/default-env, workflow, pin, flag, frequency, filesystem, upload, or build-input mutation; no complete configuration/dependency closure, reproducibility, artifact, device, firmware/runtime, Nunchuk, root-cause, or gameplay claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator b81c299e1449fc319788a35763b71d3e73d906f1. platformio.ini has blob 4d56f8630c1b12e84cd12f40ce05a4dc71b9362e and SHA-256 99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9; config/glyph/env.ini has blob fac4e20461ad632ca1d65826241a4a9c73630f04 and SHA-256 c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf. Their declared chain and values are unchanged from the Planner packet base. Canonical GP-PROV-003 explicitly excludes build_flags values, macro meanings, optimization flags, non-path custom_nanopb_options flags, board behavior, and include-path semantics; repaired GP-PROV-004 is DONE and supplies the accepted exact-source correspondence pattern.",
+      "dependencies_prerequisites": [
+        "GP-PROV-003 and repaired GP-PROV-004 remain canonically DONE with their selector and correspondence non-claims intact.",
+        "The two exact INI blobs, declared section chain, in-scope key set, and GP-PROV-003 selector boundary remain unchanged at implementation start.",
+        "Implementation uses Python standard-library static parsing only and does not invoke PlatformIO, a compiler, a build script, a dependency, or the network."
+      ],
+      "substantive_authorization_rationale": "The remaining provenance gap is directly source-proven and the contract is finite. Exact key lists, source identities, source-declared inheritance/reference order, and explicit unresolved interpolation prevent the implementer from inventing PlatformIO or compiler semantics. The work records declared literals and their provenance without choosing or changing any value, so no product, device, workflow, or gameplay judgment remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Either exact INI blob, in-scope key, declared chain/reference, or GP-PROV-003 selector boundary drifts before implementation.",
+        "The census would need PlatformIO/compiler execution, dependency/cache inspection, dynamic environment resolution, or effect interpretation to complete.",
+        "Another canonical change supplies an equivalent or stronger exact-source non-selector census first.",
+        "A source value, selector, workflow, build input, product/runtime file, or artifact would be changed rather than only inventoried."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of Planner candidate GP-PROV-006 from planning/portfolio-20260827-1210 commit ae1d15b9a7941934b26d4371b0ea0e10691629cb, packet base 8c04262c66613d46b933b1b739c01c575cb0c580, after repaired GP-PROV-004 completion and bounded specialist verification of the exact current INI sources and contract against live configurator b81c299e1449fc319788a35763b71d3e73d906f1 on curation/portfolio-20260830-0211-review.",
+      "automated_validation": [
+        "The fixture contains every and only authorized scalar, ordered-list, and non-path nanopb literal with exact source path/blob, section/key, raw line, declaration order, inheritance/shadow origin, and explicit reference-expansion order.",
+        "Wrong chain/order/source/blob, omitted/invented/duplicate/shadowed key, changed token, selector overlap, unresolved-placeholder promotion, escaping/missing/untracked/symlink dependency, and either INI drift fail closed.",
+        "${PIOENV} and ${platformio.name} remain explicit unresolved runtime interpolation tokens and no macro, compiler, board, protocol, device, artifact, or reproducibility effect is asserted.",
+        "Focused checker, GP-PROV-003 inventory, GP-PROV-004 observations, checker census, validation health, full runtime-config aggregate, framework, sequence, navigation, and agent-surface checks pass with independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 static declaration census and offline checker only; any build-input or product/runtime mutation stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Drop the focused census if exact source/reference correspondence cannot be enforced without evaluating effects; retain every existing build input and all unresolved dependency/reproducibility claims.",
+      "status_documentation_updates": "Record only a declared literal non-selector census and its current validation entry; keep complete configuration, PlatformIO/compiler resolution, reproducibility, artifact acceptance, and hardware explicitly unproved.",
+      "done_evidence": "Pending exact fixture/source correspondence, independent review, adversarial static validation, current aggregate, feature-ref verification, canonical integration, and separate structured completion publication.",
+      "stop_conditions": [
+        "Any PlatformIO/compiler behavior, macro effect, source selection, build result, or device meaning would be inferred.",
+        "Any dependency, cache, workflow, source, flag, board, frequency, filesystem, upload, or build input would be changed or executed.",
+        "Any firmware/runtime, artifact, device-write, persistence, protobuf-write, flashing, hardware, Nunchuk, root-cause, or game-semantic scope appears."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-007",
+      "title": "Enforce bounded validation-manifest dependency metadata",
+      "status": "READY",
+      "branch": "glyph/gp-val-007-manifest-dependency-metadata-20260830",
+      "objective": "Define and enforce a bounded truthful contract for validation-manifest source_dependencies and branch_policy without claiming complete transitive or semantic dependency closure.",
+      "why_this_matters": "The runner requires both fields but validates neither field's contents. On current source, 19 manifest entries have empty dependency lists and static inspection finds 26 missing direct tracked helper-import edges across 18 entries, so the described dependency graph can drift while the manifest check passes.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This strengthens offline validation metadata and adversarial schema checks only. It does not change checker product semantics, execute discovered code during metadata discovery, change branch behavior, build firmware, or alter runtime/configurator behavior.",
+      "scope": "Upgrade the runtime-config validation manifest to schema version 4; update tools/run_glyph_runtime_config_validation.py, the existing aggregate adversarial checker, manifest docs, current entry metadata, and only deterministic census/health consequences. Define source_dependencies as an ordered duplicate-free list of normalized repository-relative POSIX paths to existing stage-0 tracked regular non-symlink files inside the repository; the entry checker path is implicit and not repeated. Static AST inspection, without import or execution, must require every direct absolute local single-module Import or level-zero ImportFrom resolving exactly to a tracked tools/<module>.py file to appear. Curated additional direct tracked inputs may remain and receive the same path validation. Explicitly exclude transitive imports, dynamic/importlib imports, subprocess targets, runtime data reads, generated files, external/standard-library modules, and complete semantic closure. Define branch_policy exactly as content_only, content_and_scope, named_evidence_branch, or not_run, with current entries using content_only/content_and_scope, historical_only using named_evidence_branch, and unsafe_or_mutating using not_run. Treat policy as curated classification metadata, not proof of checker-internal branch semantics or a new runner branch gate.",
+      "explicit_excluded_scope": "No complete semantic/transitive dependency claim; no dynamic import, subprocess, runtime-data, or generated-file discovery; no arbitrary code execution or import; no branch-policy reclassification; no tools/glyph_checker_context.py change; no current checker applicability change except separately authorized work; no product/runtime checker semantic change, network, workflow, firmware source, build, artifact, device, persistence, protobuf write, flashing, hardware, Nunchuk, root-cause, or gameplay claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator b81c299e1449fc319788a35763b71d3e73d906f1. tools/run_glyph_runtime_config_validation.py blob 8a760901f78e666f862269e62fb36c9cbebf1e93 requires field presence but does not validate source_dependencies contents or branch_policy. Current manifest blob 63c0740f4a298b34b7880b56f7ced37d27cdce3c passes with 31 entries and 37 strong-signal exclusions; 19 entries have empty dependencies. Independent read-only AST census found 26 missing direct tracked helper edges across 18 entries. The current exact policy matrix is 19 current/content_only, 7 current/content_and_scope, 4 historical_only/named_evidence_branch, and 1 unsafe_or_mutating/not_run, with no reclassification required.",
+      "dependencies_prerequisites": [
+        "The current runner, aggregate adversarial checker, manifest entry set, tracked checker AST set, and four-value branch-policy matrix are freshly inspected before implementation.",
+        "Any prior Ready work landing first is permitted only as a separately reviewed mechanical entry/checker/census/health delta that is re-read under this generic contract.",
+        "Static discovery never imports or executes a checker, helper, workflow, subprocess target, or generated file."
+      ],
+      "substantive_authorization_rationale": "The gap is directly reproduced and the exact bounded meaning is now resolved: source_dependencies is a validated set of direct tracked inputs with a mechanically required local-helper lower bound, not a claim of completeness; branch_policy is a finite applicability-consistent classification, not runtime enforcement. This strengthens truthful metadata without choosing product behavior, branch policy, or semantic dependency meaning outside current authority.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The manifest schema, runner topology, tracked checker import shapes, applicability vocabulary, or branch-policy matrix materially changes before implementation.",
+        "The work would require complete semantic/transitive dependency truth, dynamic execution, import of discovered code, or branch behavior enforcement.",
+        "A current entry cannot be represented truthfully under the bounded direct-helper lower-bound contract without substantive reclassification.",
+        "Another canonical change supplies an equivalent or stronger bounded metadata contract first."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of Planner candidate GP-VAL-007 from planning/portfolio-20260827-1210 commit ae1d15b9a7941934b26d4371b0ea0e10691629cb, packet base 8c04262c66613d46b933b1b739c01c575cb0c580, with bounded specialist verification of the 31-entry manifest, direct-helper gaps, and exact policy matrix against live configurator b81c299e1449fc319788a35763b71d3e73d906f1 on curation/portfolio-20260830-0211-review.",
+      "automated_validation": [
+        "Absolute, empty, dot, dot-dot, backslash, non-normalized, escaping, missing, untracked, directory, duplicate, checker-self, and symlink dependency paths fail; normalized tracked stage-0 regular direct inputs pass in exact order.",
+        "Every direct absolute local single-module Import or level-zero ImportFrom resolving to tracked tools/<module>.py is required; missing helper edges fail, while transitive, dynamic/importlib, subprocess, runtime-data, generated, external, and standard-library exclusions remain explicit and tested.",
+        "Unknown branch policies and every invalid applicability/policy pair fail; the current matrix passes without reclassification and creates no claim that checker-internal branch semantics were proved.",
+        "A zero-import/zero-execution sentinel proves discovery uses AST/static tracked metadata only; manually curated additional direct tracked inputs remain accepted after path validation.",
+        "Manifest, aggregate adversarial, checker census, validation health, full runtime-config aggregate, framework, sequence, navigation, and agent-surface checks pass with independent metadata-contract review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 manifest/schema/runner metadata validation only; any checker product semantic, build input, compiled source, or runtime delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused metadata-contract branch if current valid entries cannot be represented without overclaiming completeness; never restore acceptance of malformed paths, missing direct helper edges, or invalid policy pairs.",
+      "status_documentation_updates": "Document manifest v4's bounded direct-input/helper lower bound and branch-policy classification matrix with explicit dynamic, transitive, semantic, and enforcement non-claims.",
+      "done_evidence": "Pending exact manifest-v4 implementation, helper-edge regeneration, independent review, adversarial static validation, current aggregate, feature-ref verification, canonical integration, and separate structured completion publication.",
+      "stop_conditions": [
+        "Any complete dependency graph, dynamic behavior, or checker branch semantics would be inferred.",
+        "Any discovered code must be imported or executed, or tools/glyph_checker_context.py must change.",
+        "Any checker applicability, product/runtime semantics, workflow, firmware, build, artifact, device, or hardware behavior would change."
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -1446,11 +1635,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003","GP-VAL-005","GP-PROV-006","GP-VAL-007"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-003, GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -1459,8 +1648,9 @@ Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
 `GP-SRC-003` and `GP-SRC-004` are DONE on validated implementation branches.
-`GP-SRC-005` and `GP-VAL-004` are DONE; `GP-VAL-003` is reopened `READY` for
-the exact health-prose correspondence repair recorded above.
+`GP-SRC-005` and `GP-VAL-004` are DONE; `GP-VAL-003` is reauthorized `READY`
+against the current 31/26 machine state for the exact health-prose
+correspondence repair recorded above.
 `GP-CONFIG-004` is `DONE`; its exact reviewed H0 checker repair is merged and
 live-verified in canonical configurator.
 `GP-PROV-002` is `DONE`; its reviewed feature tip is integrated into
@@ -1470,9 +1660,10 @@ publication are canonical. `GP-PROV-003` is `DONE` after exact reviewed
 implementation ancestry and separate structured completion publication.
 `GP-PROV-004` is `DONE` after exact source/identity/base/dependency
 correspondence repair, independent review, canonical integration, and
-structured completion publication. `GP-VAL-003` remains the `READY` H0
-repair/revalidation item after direct current-source
-correspondence defects were confirmed. `GP-PROV-005` is `DONE` after bounded
+structured completion publication. `GP-CTL-001` is `DONE` after exact
+machine/prose runway parity enforcement and separate completion publication.
+`GP-VAL-003`, `GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are the ordered
+`READY` H0 runway. `GP-PROV-005` is `DONE` after bounded
 source-lineage research; source lineage, purpose, byte transformation, build
 recipe, reproducibility, safety, artifact acceptance, and hardware remain
 `UNKNOWN`.
@@ -1480,9 +1671,9 @@ No invalidated Preauthorization or hardware-pending work exists.
 The current-runway summary above is authoritative for the human-readable
 runway state.
 `GP-AUTH-001` is resolved by the baseline-equivalent sole-X1 production intake;
-`GP-CONFIG-002` is invalidated by user direction. Planner survivors
-`GP-ART-001` and `GP-X1-001` remain user-decision gated; no survivor is a
-portfolio-global wait.
+`GP-CONFIG-002` is invalidated by user direction. Remaining Planner survivors
+are `GP-VAL-006`, `GP-VAL-008`, `GP-ART-001`, and `GP-X1-001`; none is
+executable or a portfolio-global wait.
 
 ## Allowed Statuses
 
@@ -1516,40 +1707,45 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Fresh Planner packet `glyph-portfolio-20260827-1210` at
+Planner packet `glyph-portfolio-20260827-1210` at
 `ae1d15b9a7941934b26d4371b0ea0e10691629cb` was independently reviewed
-against exact live `configurator` `8c04262c66613d46b933b1b739c01c575cb0c580`.
-It is `PARTIALLY_CONSUMED` after three same-identity H0 repairs restored the
-effective runway target. Historical Done items not named below remain Done.
+against exact live `configurator` `8c04262c66613d46b933b1b739c01c575cb0c580`
+and its surviving candidates were independently reverified against live
+`configurator` `b81c299e1449fc319788a35763b71d3e73d906f1`. It is
+`PARTIALLY_CONSUMED`: three surviving H0 candidates are now authorized, four
+non-executable survivors remain, and effective runway again meets target.
+Historical Done items not named below remain Done.
 
 - `GP-PROV-004`: `DONE`; exact workflow expressions, source classes,
   lookup/locator rules, immutable identity correspondence, base/blob closure,
   record order, and exact direct manifest dependencies were repaired without
   adding, promoting, or claiming complete dependency closure for external facts.
-- `GP-CTL-001`: reopened `READY`; current human-readable runway and priority
-  prose must be machine-bound. It is a separate work order and cannot be
-  executed in the same normal Implementation cycle as `GP-VAL-003`.
-- `GP-VAL-003`: reopened `READY`; validation-health Markdown counts,
-  specifically manifest-entry count and current load-bearing count, must agree
-  mechanically with its machine fixture and manifest without reclassifying any
-  checker or workflow route.
+- `GP-CTL-001`: `DONE`; current human-readable runway and priority prose are
+  machine-bound and canonically published.
+- `GP-VAL-003`: reauthorized `READY`; its old 30/25 snapshot invalidated when
+  later provenance work moved the machine state to 31/26. The current prose is
+  accurate, but its checker must enforce generic Markdown/fixture/manifest
+  correspondence without reclassifying any checker or workflow route.
 - `GP-PROV-005`: `DONE`; bounded `glyph_nuker` source-lineage research recorded
   research without executing, rebuilding, replacing, or promoting inference
   into authority.
-- `GP-VAL-005`: `PREAUTHORIZABLE_NOT_AUTHORIZED`; three explicit fixed-flag
-  manifest entries are plausible load-bearing coverage after `GP-VAL-003`
-  repair, but target runway is already met and no work order is created here.
-- `GP-VAL-006`: `CURATION_REQUIRED`; the gap is real, but the checker has an
-  additional stale assertion and the wrapper does not require current branch
-  identity to equal `--candidate-branch`. A future design must isolate every
-  subprocess in a temporary Git repository and prove zero canonical mutation.
-- `GP-PROV-006`: `SUBSTANTIVE_DEPENDENCY_GATED`; it depends on truthful
-  `GP-PROV-004` completion and still needs an exact definition of effective
-  non-selector configuration and inheritance/override semantics. It is not
-  mechanically Preauthorized.
-- `GP-VAL-007`: `CURATION_REQUIRED`; the exact bounded meaning of declared
-  dependency, dynamic/semantic exclusions, and branch-policy values remains a
-  substantive contract choice, so no Preauthorization is recorded.
+- `GP-VAL-005`: `READY`; the existing no-argument coordinate-native checker
+  will run all three advertised offline packaging validators with an exact
+  execution trace, leaving manifest counts and runner argument policy unchanged.
+- `GP-VAL-006`: `PREAUTHORIZABLE_WAITING_NOT_RECORDED`; independent review
+  confirms the current checker failure and resolves the safer architecture as
+  an H1 current-branch/requested-branch equality guard plus a copied standalone
+  temporary Git repository for every subprocess. It remains non-executable and
+  should be reconsidered after `GP-VAL-003` is DONE because its future manifest
+  activation changes the load-bearing count.
+- `GP-PROV-006`: `READY`; repaired `GP-PROV-004` satisfies its dependency, and
+  the exact two-source, finite-key, literal-only inheritance/reference census
+  preserves runtime interpolation and all PlatformIO/compiler effects as
+  unresolved.
+- `GP-VAL-007`: `READY`; its work order defines manifest v4 with an exact
+  normalized tracked-file dependency contract, a static direct-local-helper
+  lower bound, explicit dynamic/transitive/semantic non-claims, and a finite
+  applicability-consistent branch-policy matrix.
 - `GP-VAL-008`: `EVIDENCE_GATED`; current source/evidence does not yet define a
   safe runtime-behavior regression subset without historical or semantic
   inference.
@@ -1563,9 +1759,9 @@ effective runway target. Historical Done items not named below remain Done.
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` authorize immediate execution. The
-remaining reopened governance repairs remain separate work orders;
-the one-new-work-order-per-Implementation-cycle rule still applies. Remaining
-Planner survivors are non-executable under the dispositions above.
+four Ready items remain separate work orders; the one-new-work-order-per-
+Implementation-cycle rule still applies. Remaining Planner survivors are
+non-executable under the dispositions above.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive

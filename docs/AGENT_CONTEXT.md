@@ -64,11 +64,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003","GP-VAL-005","GP-PROV-006","GP-VAL-007"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-003, GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
@@ -78,8 +78,9 @@ Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanical
   `GP-SRC-003` is DONE with prepared schema v2 carrying normalized
   input and deterministic artifact/manifest regeneration; earlier pushed tip
   `2b734b26439e9028717becf0010e345cb5efce6c` remains failed-review historical
-  evidence and must not merge. `GP-SRC-004` is DONE; `GP-VAL-003` is reopened
-  READY for its validation-health prose correspondence repair.
+  evidence and must not merge. `GP-SRC-004` is DONE; `GP-VAL-003` is
+  reauthorized READY against current 31/26 validation state for its generic
+  health-prose correspondence repair.
   `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
   and `GP-VAL-004` is DONE after its checker-only temporary-root repair.
   `GP-CONFIG-004` is DONE after its independently reviewed offline checker/docs
@@ -92,13 +93,18 @@ Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanical
   canonical ancestor and received separate structured completion publication.
   `GP-PROV-004` is DONE after exact source/identity/base/dependency
   correspondence repair, independent review, canonical integration, and
-  separate structured completion publication. `GP-VAL-003` remains the READY
-  H0 repair/revalidation work order after direct current-source
-correspondence defects were confirmed. `GP-PROV-005` is DONE after bounded
+  separate structured completion publication. `GP-CTL-001` is DONE after
+  machine/prose runway parity enforcement and separate publication.
+  `GP-VAL-003`, `GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are the ordered
+  READY H0 runway for prose correspondence, offline packaging coverage,
+  declared non-selector provenance, and bounded manifest metadata.
+  `GP-PROV-005` is DONE after bounded
   `glyph_nuker` source-lineage research; source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
-  and hardware remain UNKNOWN. The current-runway summary above is the
-  authoritative human-readable runway state.
+  and hardware remain UNKNOWN. `GP-VAL-006` remains non-executable pending
+  later H1 curation after `GP-VAL-003`; `GP-VAL-008` remains evidence gated,
+  and `GP-ART-001` plus `GP-X1-001` remain user-decision gated. The
+  current-runway summary above is the authoritative human-readable runway state.
   The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
   baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
   it owns no other table, changes no active bytes, and creates no hardware
