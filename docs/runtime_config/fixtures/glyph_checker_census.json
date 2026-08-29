@@ -10229,7 +10229,7 @@
       },
       "checker_id": "runtime_config_validation_health",
       "defines_main": true,
-      "file_size_bytes": 3460,
+      "file_size_bytes": 5953,
       "hard_coded_branch_like_strings": [
         "configurator",
         "feature_branch",
@@ -10240,7 +10240,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 64,
+      "line_count": 124,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_health.py",
       "potential_branch_identity_signals": [
@@ -10255,12 +10255,13 @@
         "docs/runtime_config/fixtures/glyph_checker_census.json",
         "docs/runtime_config/fixtures/runtime_config_validation_health.json",
         "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/runtime_config_validation_health.md",
         "tools/check_glyph_checker_census.py"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "482ee8db990a9fba8bcf38f4bd3c5eb34724dbe5bf3c7eb9cde32283aa482736",
+      "sha256": "5dec0eff5f3fcd0021fe47afc9c6a9bb48f0833cfd74d1cacf041e2b48cff1b5",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

@@ -26,6 +26,10 @@ The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`.
 
+<!-- validation-health-summary:start -->
+Current summary: manifest entries = 31; current load-bearing checks = 26.
+<!-- validation-health-summary:end -->
+
 The two repaired load-bearing baseline failures were
 `check_glyph_identity_runtime_table_source_sync.py` and
 `check_glyph_runtime_config_semantics_evaluator_bridge.py`. Both read the
