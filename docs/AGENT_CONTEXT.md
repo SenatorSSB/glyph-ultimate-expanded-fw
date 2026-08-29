@@ -67,6 +67,10 @@ automation from this context document.
 {"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
+<!-- current-runway-summary:start -->
+Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+<!-- current-runway-summary:end -->
+
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Reviewed Planner packet
   `glyph-portfolio-20260827-1210` is partially consumed after independent
@@ -93,9 +97,8 @@ automation from this context document.
 correspondence defects were confirmed. `GP-PROV-005` is DONE after bounded
   `glyph_nuker` source-lineage research; source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
-  and hardware remain UNKNOWN. The current-runway marker above is
-  authoritative; recorded Preauthorization is zero and effective runway is
-  two against target four (`RUNWAY_LOW`).
+  and hardware remain UNKNOWN. The current-runway summary above is the
+  authoritative human-readable runway state.
   The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
   baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
   it owns no other table, changes no active bytes, and creates no hardware

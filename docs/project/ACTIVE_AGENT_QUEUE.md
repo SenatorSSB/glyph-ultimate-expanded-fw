@@ -35,7 +35,7 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-PROV-006 remains dependency-gated on truthful GP-PROV-004 repair; GP-VAL-007 remains curation-gated on an exact bounded dependency-metadata contract; neither is Preauthorized.",
       "GP-VAL-008 remains EVIDENCE_GATED, while GP-ART-001 and GP-X1-001 remain USER_DECISION_GATED; none is executable or hardware-pending.",
       "No global evidence wait is proposed or supported.",
-      "GP-PROV-004 was repaired, reviewed, integrated, and published Done; GP-PROV-005 is integrated and being published Done in this descendant; the remaining Ready runway is GP-VAL-003 and GP-CTL-001.",
+      "GP-PROV-004 was repaired, reviewed, integrated, and published Done; GP-PROV-005 is integrated and being published Done in this descendant.",
       "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
     ],
     "curator_review_provenance": {
@@ -1449,7 +1449,12 @@ Git, but it is not current candidate supply or implementation authority.
 {"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
-The current-runway marker above is the machine-derived interpretation of
+<!-- current-runway-summary:start -->
+Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+<!-- current-runway-summary:end -->
+
+The current-runway marker and summary above are the machine-derived
+interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
@@ -1471,9 +1476,9 @@ correspondence defects were confirmed. `GP-PROV-005` is `DONE` after bounded
 source-lineage research; source lineage, purpose, byte transformation, build
 recipe, reproducibility, safety, artifact acceptance, and hardware remain
 `UNKNOWN`.
-Recorded Preauthorization is zero, mechanically activatable Preauthorization is
-zero, and no invalidated Preauthorization or hardware-pending work exists.
-Effective runway is two against a target of four (`RUNWAY_LOW`).
+No invalidated Preauthorization or hardware-pending work exists.
+The current-runway summary above is authoritative for the human-readable
+runway state.
 `GP-AUTH-001` is resolved by the baseline-equivalent sole-X1 production intake;
 `GP-CONFIG-002` is invalidated by user direction. Planner survivors
 `GP-ART-001` and `GP-X1-001` remain user-decision gated; no survivor is a
@@ -1558,8 +1563,7 @@ effective runway target. Historical Done items not named below remain Done.
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` authorize immediate execution. The
-current Ready order is `GP-VAL-003`, then `GP-CTL-001`.
-The remaining reopened governance repairs remain separate work orders;
+remaining reopened governance repairs remain separate work orders;
 the one-new-work-order-per-Implementation-cycle rule still applies. Remaining
 Planner survivors are non-executable under the dispositions above.
 

@@ -12,6 +12,10 @@ and `docs/calibration/INDEX.md`.
 {"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
+<!-- current-runway-summary:start -->
+Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+<!-- current-runway-summary:end -->
+
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Reviewed Planner packet `glyph-portfolio-20260827-1210` is
@@ -42,9 +46,8 @@ completion publication. Direct current-source correspondence defects leave
 `GP-PROV-005` is DONE after bounded `glyph_nuker` source-lineage research;
 source lineage, purpose, byte transformation, build recipe, reproducibility,
 safety, artifact acceptance, and hardware remain UNKNOWN. None may
-change pins, build inputs, workflows, artifacts, or runtime behavior. Recorded
-Preauthorization is zero and effective runway is two against target four
-(`RUNWAY_LOW`); the marker above is authoritative.
+change pins, build inputs, workflows, artifacts, or runtime behavior. The
+current-runway summary above is the authoritative human-readable state.
 `GP-AUTH-001` is resolved by the exact baseline-equivalent
 `kX1Table` `overlay_preserve` intake, which changes no active table bytes and
 creates no hardware candidate. `GP-CONFIG-002` is invalidated and no
