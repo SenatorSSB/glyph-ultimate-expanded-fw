@@ -69,12 +69,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -934,7 +934,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CTL-001",
       "title": "Make queue prose match machine runway",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-ctl-001-current-prose-parity-repair-20260827",
       "objective": "Repair and revalidate GP-CTL-001 so the four current executable-runway summaries mechanically agree with canonical Ready order, authorization counts, effective/target runway, and primary liveness.",
       "why_this_matters": "The framework's current-runway JSON markers agree, but docs/AGENT_CONTEXT.md and docs/ROADMAP.md still say effective runway is two while the canonical markers report one, and the queue's closing priority prose still places completed GP-PROV-004 before the sole Ready GP-PROV-005. The completed parity objective therefore remains fail-open for human-readable claims.",
@@ -976,7 +976,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused repair if it mistakes historical/planning prose for current authority; retain the canonical machine block and never restore a checker that accepts contradictory current guidance.",
       "status_documentation_updates": "Record GP-CTL-001 as reopened for current executable-runway summary parity repair. Reconcile only the four delimited current-runway summaries and remove redundant unguarded executable priority/count prose; per-item Done/history prose remains outside this objective, and work authorization must not change during implementation.",
-      "done_evidence": "Pending generic current-prose and priority parity enforcement, independent governance review, current validation, exact feature-ref publication, canonical integration, and separate structured completion publication. The prior GP-CTL-001 implementation remains historical evidence of the incomplete checker.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"b901d10360402e98953eac539d3a681971e72e20","reviewed_implementation_sha":"8909e50594a4443a4ee2d5cd16a2e78c22ef960f","prior_canonical_integration_sha":"b901d10360402e98953eac539d3a681971e72e20","reviewed_changed_paths":["docs/AGENT_CONTEXT.md","docs/CURRENT_STATE.md","docs/ROADMAP.md","docs/project/ACTIVE_AGENT_QUEUE.md","docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_agent_framework_docs.py"],"independent_review_provenance":"Fresh independent reviewer PASS on the exact feature tip, followed by repaired-scope re-review PASS confirming removal of unguarded Ready-order prose, fail-closed reversed-marker handling, and no queue, authorization, product, runtime, firmware, or hardware drift.","validation_provenance":"Framework, sequence, 193-entry census, full current runtime-config aggregate, navigation, agent-surface, health, publication-workflow, and diff checks passed on the exact integrated snapshot; no build or hardware was required."},
       "stop_conditions": [
         "The implementation would change queue item status, priority, runway target, user direction, or substantive authority rather than only enforce current mirrors.",
         "Parity cannot be enforced generically without weakening machine-state, provenance, concurrency, liveness, or historical-evidence separation.",
@@ -1446,11 +1446,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -1470,8 +1470,8 @@ publication are canonical. `GP-PROV-003` is `DONE` after exact reviewed
 implementation ancestry and separate structured completion publication.
 `GP-PROV-004` is `DONE` after exact source/identity/base/dependency
 correspondence repair, independent review, canonical integration, and
-structured completion publication. `GP-VAL-003` and `GP-CTL-001` remain
-`READY` H0 repair/revalidation items after direct current-source
+structured completion publication. `GP-VAL-003` remains the `READY` H0
+repair/revalidation item after direct current-source
 correspondence defects were confirmed. `GP-PROV-005` is `DONE` after bounded
 source-lineage research; source lineage, purpose, byte transformation, build
 recipe, reproducibility, safety, artifact acceptance, and hardware remain

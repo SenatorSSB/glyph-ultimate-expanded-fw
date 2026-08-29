@@ -64,11 +64,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
@@ -92,8 +92,8 @@ Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0
   canonical ancestor and received separate structured completion publication.
   `GP-PROV-004` is DONE after exact source/identity/base/dependency
   correspondence repair, independent review, canonical integration, and
-  separate structured completion publication. `GP-VAL-003` and `GP-CTL-001`
-  remain READY H0 repair/revalidation work orders after direct current-source
+  separate structured completion publication. `GP-VAL-003` remains the READY
+  H0 repair/revalidation work order after direct current-source
 correspondence defects were confirmed. `GP-PROV-005` is DONE after bounded
   `glyph_nuker` source-lineage research; source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,

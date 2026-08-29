@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
@@ -42,7 +42,7 @@ normalized input and deterministic artifact/manifest regeneration.
 structured completion publication. `GP-PROV-004` is DONE after exact source,
 identity, base, and dependency correspondence repair and separate structured
 completion publication. Direct current-source correspondence defects leave
-`GP-VAL-003` and `GP-CTL-001` as READY H0 repair/revalidation work orders.
+`GP-VAL-003` as the READY H0 repair/revalidation work order.
 `GP-PROV-005` is DONE after bounded `glyph_nuker` source-lineage research;
 source lineage, purpose, byte transformation, build recipe, reproducibility,
 safety, artifact acceptance, and hardware remain UNKNOWN. None may

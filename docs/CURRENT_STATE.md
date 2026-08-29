@@ -1,6 +1,6 @@
 # Glyph Current State
 
-Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-VAL-003","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}<!-- current-runway:end -->
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-VAL-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}<!-- current-runway:end -->
 
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
@@ -8,9 +8,9 @@ This is the short current-state entrypoint. Agents should read
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-003; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
-**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-VAL-004`, `GP-CONFIG-004`, and `GP-CTL-002` are DONE after independently reviewed checker/governance repairs; `GP-PROV-002`, `GP-PROV-003`, `GP-PROV-004`, and `GP-PROV-005` are DONE after exact reviewed implementation ancestry and separate completion publication; `GP-VAL-003` and `GP-CTL-001` remain READY H0 work orders; `PLANNING_REQUIRED` is not current while fresh packet `glyph-portfolio-20260827-1210` is partially consumed with seven non-executable survivors; `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` is invalidated and no operator capture is required; `GP-AUTH-001` is resolved by the sole-X1 production-authorized no-op intake; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
+**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-VAL-004`, `GP-CONFIG-004`, and `GP-CTL-002` are DONE after independently reviewed checker/governance repairs; `GP-PROV-002`, `GP-PROV-003`, `GP-PROV-004`, and `GP-PROV-005` are DONE after exact reviewed implementation ancestry and separate completion publication; `GP-VAL-003` remains the READY H0 work order; `PLANNING_REQUIRED` is not current while fresh packet `glyph-portfolio-20260827-1210` is partially consumed with seven non-executable survivors; `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` is invalidated and no operator capture is required; `GP-AUTH-001` is resolved by the sole-X1 production-authorized no-op intake; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
 ## Current Known-Good State
 
 - `configurator` contains the latest Y2 layout source-owned port after the
