@@ -482,7 +482,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 91650,
+      "file_size_bytes": 103680,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -503,7 +503,9 @@
         "configurator",
         "done_evidence",
         "evidence",
+        "evidence-mutation",
         "evidence.json",
+        "evidence/contracts",
         "evidence/test.md",
         "evidence_contract_reference",
         "evidence_contract_version",
@@ -534,7 +536,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 2008,
+      "line_count": 2305,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -557,7 +559,9 @@
         "configurator",
         "done_evidence",
         "evidence",
+        "evidence-mutation",
         "evidence.json",
+        "evidence/contracts",
         "evidence/test.md",
         "evidence_contract_reference",
         "evidence_contract_version",
@@ -635,7 +639,7 @@
         "docs/test_protocol.md"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "a5dc6f196eb3ce25f2dda4389cc52cb2b5476a0f602d9fdb2f8db432a6d1b590",
+      "sha256": "dbcab6c3dc4310ea0c4c4d09f4c2f3c2d8fd6b3bb5d12264ed6abe4a2fe0fe45",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

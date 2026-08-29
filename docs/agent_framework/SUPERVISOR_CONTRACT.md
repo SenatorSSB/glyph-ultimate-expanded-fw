@@ -61,6 +61,17 @@ recommendation.
   satisfied without new user, product, architecture, source, evidence, or
   hardware judgment; otherwise return `CURATION_REQUIRED`.
 - Instantiate subagents explicitly; do not rely on implicit background work.
+- Before substantive implementation or research, perform and record the
+  delegation preflight in `SUBAGENT_CONTRACTS.md`. Complete runtime capability
+  discovery is required before an unavailability claim; the initial visible
+  tool manifest is not exhaustive evidence, and user-owned task/thread
+  creation is not native internal delegation.
+- For a normal cycle that mutates repository state, use a fresh independent
+  post-implementation reviewer when native capability is available. Use an
+  additional bounded specialist when materially separable investigation
+  exists. For H2/H3, normally use a source-authority or firmware-safety
+  specialist plus a separate fresh reviewer without adding a user-approval
+  gate.
 - Keep handoffs scoped and reversible.
 - Stop on hardware gate for any active behavior change.
 - For H2/H3, publish and live-verify the exact candidate/artifact packet, record
@@ -110,6 +121,8 @@ Gates:
 - source authority:
 
 Final report:
+- delegation guidance / discovery / availability / specialists / reviewer /
+  exact no-use reason
 - summary
 - files changed
 - verification

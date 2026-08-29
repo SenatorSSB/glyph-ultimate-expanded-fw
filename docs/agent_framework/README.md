@@ -63,7 +63,8 @@ Use separated generation, judgment, execution, and evidence roles:
 - `SCHEDULED_TASKS.md` - exact copy-paste scheduled/manual role configurations;
   it does not create schedules.
 - `SUPERVISOR_CONTRACT.md` - supervisor ownership and cycle contract.
-- `SUBAGENT_CONTRACTS.md` - specialist role contracts and handoff template.
+- `SUBAGENT_CONTRACTS.md` - canonical native-delegation discovery,
+  accountability, specialist, reviewer, and handoff contract.
 - `CYCLE_STATE_MACHINE.md` - bounded cycle state machine.
 - `JUDGE_WATCHDOG_CONTRACT.md` - verdicts and anti-looping rules.
 - `VALIDATION_AND_GATES.md` - branch classifications and merge gates.
