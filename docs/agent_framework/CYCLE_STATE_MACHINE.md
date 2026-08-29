@@ -31,25 +31,34 @@ implementation is deferred.
      self-reseed.
    - Complete at most one new work order.
 
-4. Spawn bounded subagents
+4. Perform delegation preflight
+   - Determine whether repository delegation guidance applies.
+   - Inspect the complete runtime capability/tool catalog or use the supported
+     discovery mechanism; initial manifest absence is insufficient evidence of
+     native unavailability.
+   - Distinguish native internal children from user-owned tasks, threads, and
+     Automations; record capability, separable tasks, delegation, reviewer, and
+     any exact no-use reason.
+
+5. Spawn bounded subagents
    - Use explicit handoffs.
    - Keep tool budgets bounded.
    - Require compact returns with evidence and unknowns.
 
-5. Validate
+6. Validate
    - Run required checkers.
    - Run build only when source/build-affecting files require it.
    - Do not request hardware for docs/checker-only branches with active
      behavior unchanged.
 
-6. Classify behavior
+7. Classify behavior
    - `DOCS_CHECKER_ONLY`
    - `INACTIVE_GENERATOR_OR_FIXTURE`
    - `FIRMWARE_SOURCE_NON_ACTIVE`
    - `FIRMWARE_SOURCE_ACTIVE_BEHAVIOR`
    - `FORBIDDEN_OR_UNSAFE`
 
-7. Publish candidate, merge, or stop
+8. Publish candidate, merge, or stop
    - Merge recommendation is allowed only after validation and gate review.
    - Active behavior change requires build proof and hardware PASS before
      merge.
@@ -63,13 +72,13 @@ implementation is deferred.
      remains `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
    - Forbidden or unsafe paths stop.
 
-8. Update status docs
+9. Update status docs
    - Keep `docs/AGENT_CONTEXT.md`, `docs/CURRENT_STATE.md`,
      `docs/ROADMAP.md`, runtime-config docs, and archive indexes aligned when
      facts change.
    - Do not convert status docs into run logs.
 
-9. Recompute runway and liveness
+10. Recompute runway and liveness
    - Report Ready, recorded/activatable/invalidated Preauthorized,
      hardware-pending, and effective runway separately.
    - Return `PLANNING_REQUIRED` for absent/stale/consumed candidate supply.
@@ -82,7 +91,9 @@ implementation is deferred.
    - Treat candidate-local `HARDWARE_TEST_REQUIRED` and `REPAIR_REQUIRED` as
      supporting signals, not the exclusive portfolio liveness state.
 
-10. Return compact final report
+11. Return compact final report
+    - Delegation guidance, capability discovery, native availability,
+      specialists, reviewer, and exact no-use reason.
     - Summary.
     - Files changed.
     - Verification.

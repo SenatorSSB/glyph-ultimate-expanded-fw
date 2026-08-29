@@ -124,14 +124,40 @@ Do not promote Planner candidates, self-reseed the queue, or invent roadmap
 work. Complete at most one new work order in this invocation. Never start a
 second item because time remains.
 
-Use native subagents just in time and proportionately. Ordinarily use 1-2
-bounded read-heavy specialists when separable investigation exists and at
-least one fresh independent post-implementation reviewer. For cross-cutting
-H2/H3 work, use additional bounded source-authority, build/test-gap, and
-firmware-safety review when warranted. Give every child objective, scope,
-excluded scope, constraints, evidence questions, mutation permission, likely
-files, stop conditions, and concise return format. Root owns integrated
-mutation, authoritative validation, Git, publication, and status.
+Before substantive implementation or research, perform and later report a
+delegation preflight. Determine whether repository delegation guidance applies;
+inspect the complete available runtime capability/tool catalog or use the
+runtime's supported capability-discovery mechanism; determine whether native
+internal subagents are available; identify useful separable specialist work and
+required review; and record each delegated role/objective or the exact no-use
+reason. Absence from the initial visible tool manifest or tool list is
+insufficient evidence that subagents are unavailable; do not treat the initial
+manifest as exhaustive or hardcode one implementation-specific tool name as the
+only backend. Native internal child agents/sidecars/reviewers return to this
+root and are distinct from user-owned task, thread, conversation, or Automation
+creation. Never substitute a user-owned job for a required internal reviewer.
+
+For a normal implementation cycle that mutates repository state, a fresh
+independent post-implementation reviewer is REQUIRED when native capability is
+available; root self-review is not a substitute. Give the reviewer the exact
+work-order objective/scope/exclusions, exact diff or changed-area description,
+relevant evidence/contracts, validation results, and instructions to find
+material correctness, safety, authority, scope, publication, and regression
+defects. Repair material findings and re-review repaired areas. Use at least one
+additional bounded specialist when a materially separable investigation exists,
+but do not create work merely to satisfy a quota. Reviewer-only is acceptable
+for a small mechanical implementation with no meaningful separable research.
+For H2/H3, normally use at least one bounded source-authority or firmware-safety
+specialist and a separate fresh independent reviewer; add build/evidence help
+when warranted. This creates no new user-approval gate for a complete READY
+H2/H3 contract. Root retains integrated mutation, authoritative validation,
+Git, publication, status, and final authority.
+
+Acceptable no-use reasons are a true no-op cycle; a trivial mechanical task
+with no useful separable investigation while separately satisfying any required
+review; complete capability discovery confirming no native facility; runtime
+failure after attempted discovery or child creation; or a concurrency/safety
+stop before substantive work. "No tools were visible initially" is invalid.
 
 Implement the smallest coherent solution satisfying the work order and current
 source authority. Do not invent Glyph/HayBox behavior or Smash semantics. Do
@@ -216,9 +242,17 @@ runway, exact missing evidence/resume event, and that one primary liveness
 state.
 
 Finish with the repository Implementation report: starting state, recovery,
-selected work, specialists, implementation, review/repairs, validation,
+selected work, implementation, review/repairs, validation,
 branch/SHA, artifact identity where applicable, publication/live verification,
 queue/runway counts, primary state, blockers, and next authorized work.
+Include exactly this concise audit section:
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
 
 Expected no-op/stop states:
 IMPLEMENTATION_DEFERRED_CONCURRENT_WRITER
@@ -289,6 +323,20 @@ First fetch and live-verify configurator. Inspect current branch, dirty state,
 worktrees, canonical queue writers, and relevant refs. If another legitimate
 canonical writer is mutating or publishing state, return
 CURATION_DEFERRED_CONCURRENT_WRITER rather than race it.
+
+Before substantive research or curation, perform and later report a delegation
+preflight: repository guidance applicable; complete available runtime
+capability/tool catalog discovery attempted; native internal subagent
+availability; separable verification tasks; specialists/reviewer used; and an
+exact no-use reason. Initial visible tool-manifest or tool-list absence is
+insufficient and must not be treated as exhaustive. Do not hardcode one backend
+tool name. Native internal subagents return to this root and are distinct from
+user-owned task/thread/conversation/Automation creation, which is not a
+substitute. Use bounded verification specialists when independent source,
+evidence, validation, or hardware-risk verification is materially separable.
+Curator retains the final substantive authorization judgment and may not
+delegate it away. A true no-op or no useful separable verification is a valid
+no-use reason; "no tools were visible initially" is not.
 
 Attempt live Git verification normally. If the default sandbox fails because
 GitHub/DNS/network access is restricted, treat the result as inconclusive and
@@ -402,6 +450,14 @@ Return: base configurator SHA, packet considered and freshness, runway before,
 candidates evaluated and dispositions, Ready/Preauthorized changes, runway
 after, user decisions, Planner refresh need, review/validation, branch/SHA,
 live verification, and confirmation that runtime product code changed: NO.
+Include exactly:
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
 
 Expected no-op/stop states:
 NO_CURATION_REQUIRED
@@ -467,6 +523,22 @@ Read completely:
 Fetch and live-verify configurator. Treat live Git and canonical repository
 truth as authoritative over old chats, historical SHAs, roadmap residue, and
 remote branch names. Do not mistake every remote branch for unfinished work.
+
+Before substantive research, perform and later report a delegation preflight:
+repository guidance applicable; complete available runtime capability/tool
+catalog discovery attempted; native internal subagent availability; useful
+separable audit partitions; specialists/reviewer used; and an exact no-use
+reason. Initial visible tool-manifest or tool-list absence is insufficient and
+must not be treated as exhaustive. Do not hardcode one backend tool name.
+Native internal subagents return to this root and are distinct from user-owned
+task/thread/conversation/Automation creation, which is not a substitute. Use
+parallel read-heavy specialists when the broad audit can be cleanly partitioned
+across runtime/source architecture, validation/build/tooling,
+configurator/evidence, firmware/hardware state, or repo history/candidate
+supply. Do not require arbitrary parallelism when the candidate surface is
+tiny. Planner and all helpers remain non-authoritative. A true no-op or tiny
+surface with no useful partition is a valid no-use reason; "no tools were
+visible initially" is not.
 
 Attempt live Git verification normally. If the default sandbox fails because
 GitHub/DNS/network access is restricted, treat the result as inconclusive and
@@ -544,6 +616,14 @@ Return: base SHA, previous packet/freshness, material change, broad-audit scope,
 bottleneck, candidates and dispositions, user-direction/evidence effects,
 whether GLOBAL_EVIDENCE_WAIT_SUPPORTED is proposed and why, rejected
 alternatives, planning branch/SHA/live verification, and configurator changed: NO.
+Include exactly:
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
 
 Expected no-op/stop states:
 NO_MATERIAL_PORTFOLIO_UPDATE
@@ -600,6 +680,20 @@ Read completely:
 Fetch and verify live refs. Inspect current branch/HEAD, dirty state,
 worktrees, candidate ref, candidate base, and any result/evidence branch. If a
 legitimate canonical writer is active, defer instead of racing.
+
+Before substantive evidence processing, perform and later report a delegation
+preflight: repository guidance applicable; complete available runtime
+capability/tool catalog discovery attempted; native internal subagent
+availability; separable verification tasks; specialists/reviewer used; and an
+exact no-use reason. Initial visible tool-manifest or tool-list absence is
+insufficient and must not be treated as exhaustive. Do not hardcode one backend
+tool name. Native internal subagents return to this root and are distinct from
+user-owned task/thread/conversation/Automation creation, which is not a
+substitute. When processing a result-bearing evidence mutation, use a fresh
+reviewer if native capability exists. The reviewer may validate identity,
+correspondence, and schema, but must not invent physical observations. A
+truthful no-op or stop before result-bearing mutation is a valid no-use reason;
+"no tools were visible initially" is not.
 
 Attempt live Git verification normally. If the default sandbox fails because
 GitHub/DNS/network access is restricted, treat the result as inconclusive and
@@ -669,6 +763,14 @@ and live-verify the evidence and control-plane refs according to
 docs/WORKFLOW.md, and report
 candidate SHA, artifact SHA, result, completeness, drift check, queue state,
 branch/SHA, and exact next action.
+Include exactly:
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
 
 Expected no-op/stop states:
 HARDWARE_EVIDENCE_MISMATCH

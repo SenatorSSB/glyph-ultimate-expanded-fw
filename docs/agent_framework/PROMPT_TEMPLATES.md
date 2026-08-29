@@ -27,6 +27,22 @@ Read first:
 - docs/runtime_config/IMPLEMENTATION_BOUNDARY.md
 - docs/agent_framework/README.md
 
+Delegation preflight before substantive implementation/research: determine
+whether repository guidance applies; inspect the complete available runtime
+capability/tool catalog or use supported discovery; do not treat absence from
+the initial visible manifest/tool list as exhaustive or sufficient evidence of
+unavailability; distinguish native internal children from user-owned
+task/thread/Automation creation; identify separable specialists and required
+review; record roles/objectives or the exact no-use reason. For a normal
+repository-mutating Implementation cycle, a fresh independent reviewer is
+required when native capability exists. Give that reviewer the exact objective,
+scope, exclusions, diff/changed areas, relevant evidence/contracts, validation
+results, and material correctness, safety, authority, scope, publication, and
+regression questions. Use an additional bounded specialist
+for materially separable investigation; for H2/H3 normally use a
+source-authority/firmware-safety specialist and a separate reviewer. Root
+retains mutation, validation, Git, publication, status, and final authority.
+
 Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
 
 Scope:
@@ -48,6 +64,13 @@ Verification:
 - ...
 
 Final report:
+- Delegation:
+  - guidance applicable:
+  - capability discovery:
+  - native capability available:
+  - specialists used:
+  - reviewer used:
+  - if none, reason:
 - summary
 - files changed
 - verification
@@ -64,6 +87,12 @@ Final report:
 Role: planner
 Objective: propose non-authoritative current-configurator candidate supply for ...
 Scope: read current source, tests, docs, roadmap, queue, user direction, evidence, and relevant checkers.
+Delegation preflight: inspect the complete runtime capability/tool catalog or
+supported discovery before an unavailability claim; initial visible manifest
+absence is insufficient and non-exhaustive. Native internal subagents are
+distinct from user-owned task/thread/Automation creation. Use parallel
+read-heavy specialists when a broad audit partitions cleanly; avoid arbitrary
+parallelism for a tiny surface. Planner/helpers remain non-authoritative.
 Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
 Excluded scope: product/queue edits, Ready or Preauthorized promotion, semantic decisions, runtime-loaded config approval.
 Allowed files: repository files for inspection; material output only on planning/portfolio-*.
@@ -74,7 +103,14 @@ unchanged.
 Verification required: none; propose verification.
 Stop conditions: source authority ambiguity, hardware gate, forbidden path.
 Return format: base SHA, freshness, broad-audit scope, candidates with estimates,
-rejected alternatives, gates, and global-wait/resume-event assessment.
+rejected alternatives, gates, global-wait/resume-event assessment, and:
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
 Tool budget: bounded read-only.
 ```
 
@@ -84,6 +120,12 @@ Tool budget: bounded read-only.
 Role: curator
 Objective: independently authorize complete Ready or narrowly Preauthorized work from ...
 Scope: current live configurator, candidate packet, source/tests, queue, user direction, evidence, and control-plane docs/tests.
+Delegation preflight: inspect the complete runtime capability/tool catalog or
+supported discovery before an unavailability claim; initial visible manifest
+absence is insufficient and non-exhaustive. Native internal subagents are
+distinct from user-owned task/thread/Automation creation. Use bounded
+verification specialists when source, evidence, validation, or hardware-risk
+verification is separable; Curator retains final authorization judgment.
 Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
 Excluded scope: firmware/configurator product code, runtime/product tests, implementation of newly authorized work.
 Allowed files: canonical queue/status/portfolio/user-direction publication and narrowly coupled control-plane tests.
@@ -92,7 +134,14 @@ Active behavior constraints: runtime product code changed: NO.
 Verification required: agent-framework, navigation, queue/runway, and independent governance review.
 Stop conditions: concurrent canonical writer, source authority ambiguity, new material idea requiring Planner, forbidden path.
 Return format: base, packet/provenance, runway before/after, dispositions,
-authorizations, refresh signal, validation, live publication.
+authorizations, refresh signal, validation, live publication, and:
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
 Tool budget: bounded judgment and control-plane editing.
 ```
 
@@ -102,6 +151,13 @@ Tool budget: bounded judgment and control-plane editing.
 Role: hardware_evidence_processor
 Objective: validate and record supplied controller observations for candidate ... and artifact SHA-256 ...
 Scope: exact work order, protocol, candidate/ref, artifact identity, observations, evidence/status files.
+Delegation preflight: inspect the complete runtime capability/tool catalog or
+supported discovery before an unavailability claim; initial visible manifest
+absence is insufficient and non-exhaustive. Native internal subagents are
+distinct from user-owned task/thread/Automation creation. Use a fresh reviewer
+for a result-bearing evidence mutation when native capability exists; review
+may validate identity/correspondence/schema but never invent physical
+observations.
 Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
 Excluded scope: performing/fabricating tests, runtime source edits, source publication.
 Allowed files: evidence record and directly coupled control-plane status.
@@ -110,7 +166,14 @@ Active behavior constraints: evidence branch is not source authority.
 Verification required: identity, completeness, drift, framework/evidence checks, independent review.
 Stop conditions: identity mismatch, incomplete protocol, source drift, concurrent writer.
 Return format: match/mismatch, PASS/FAIL/PARTIAL/INCONCLUSIVE, disposition,
-branch/SHA, retest/repair/publication action.
+branch/SHA, retest/repair/publication action, and:
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
 Tool budget: bounded evidence verification.
 ```
 

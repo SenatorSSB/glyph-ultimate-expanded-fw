@@ -332,6 +332,50 @@ def normalize(text: str) -> str:
     return " ".join(text.replace("`", "").split()).lower()
 
 
+TASK_HEADINGS = (
+    "Glyph Implementation Supervisor",
+    "Glyph Work-Order Curator",
+    "Glyph Portfolio Planner",
+    "Glyph Hardware Evidence Processor",
+)
+
+
+def extract_task_sections(text: str) -> dict[str, str]:
+    sections: dict[str, str] = {}
+    for index, heading in enumerate(TASK_HEADINGS):
+        marker = f"## {heading}"
+        if text.count(marker) != 1:
+            fail(f"SCHEDULED_TASKS.md must contain exactly one {heading} section")
+        start = text.index(marker)
+        end = text.index(f"## {TASK_HEADINGS[index + 1]}") if index + 1 < len(TASK_HEADINGS) else len(text)
+        sections[heading] = text[start:end]
+    return sections
+
+
+def require_concept(label: str, text: str, concept: str, groups: tuple[tuple[str, ...], ...]) -> None:
+    normalized = normalize(text)
+    missing = ["/".join(group) for group in groups if not any(normalize(term) in normalized for term in group)]
+    if missing:
+        fail(f"{label} missing {concept}: " + ", ".join(missing))
+
+
+def validate_no_subagent_reason(reason: str) -> None:
+    normalized = normalize(reason).strip(" .\"")
+    if "no tools were visible initially" in normalized:
+        fail("initial tool visibility is not a valid no-subagent reason")
+    accepted = (
+        "true no-op",
+        "trivial mechanical",
+        "complete capability discovery confirming no native",
+        "runtime failure after attempted discovery",
+        "runtime failure after attempted child creation",
+        "concurrency stop",
+        "safety stop",
+    )
+    if not any(marker in normalized for marker in accepted):
+        fail("no-subagent reason is not an explicit permitted exception")
+
+
 def load_queue_state() -> dict[str, object]:
     text = read_required("docs/project/ACTIVE_AGENT_QUEUE.md")
     if text.count(QUEUE_START) != 1 or text.count(QUEUE_END) != 1:
@@ -1757,6 +1801,258 @@ def check_legacy_control_plane_supersession() -> None:
     pass_line("legacy project-local control plane is explicitly superseded")
 
 
+def validate_delegation_sections(sections: dict[str, str]) -> None:
+    report_fields = (
+        "Delegation:",
+        "guidance applicable:",
+        "capability discovery:",
+        "native capability available:",
+        "specialists used:",
+        "reviewer used:",
+        "if none, reason:",
+    )
+    for heading, section in sections.items():
+        require_concept(
+            heading,
+            section,
+            "complete runtime capability discovery",
+            (("complete available runtime", "complete runtime"),
+             ("capability/tool catalog", "capability catalog", "tool catalog"),
+             ("discovery", "discover")),
+        )
+        require_concept(
+            heading,
+            section,
+            "initial manifest non-exhaustiveness",
+            (("initial visible",), ("manifest", "tool list"),
+             ("insufficient", "not exhaustive", "non-exhaustive")),
+        )
+        require_concept(
+            heading,
+            section,
+            "native delegation versus user-owned jobs",
+            (("native internal subagent", "native internal child"),
+             ("user-owned",), ("task",), ("thread",),
+             ("distinct", "not equivalent", "not a substitute")),
+        )
+        for field in report_fields:
+            if normalize(field) not in normalize(section):
+                fail(f"{heading} missing delegation report field: {field}")
+        normalized = normalize(section)
+        if re.search(
+            r"initial (?:visible )?(?:tool )?(?:manifest|list).{0,100}"
+            r"(?:is |as )?(?:exhaustive|complete) (?:evidence|proof)",
+            normalized,
+        ):
+            fail(f"{heading} treats initial tool visibility as exhaustive")
+        if re.search(
+            r"user-owned (?:task|thread|conversation|automation|job).{0,80}"
+            r"(?:equivalent to|serves as|constitutes|counts as|"
+            r"is (?:the )?(?:only )?) native internal (?:subagent|delegation)",
+            normalized,
+        ):
+            fail(f"{heading} conflates user-owned tasks with native delegation")
+
+    implementation = sections["Glyph Implementation Supervisor"]
+    require_concept(
+        "Glyph Implementation Supervisor",
+        implementation,
+        "mandatory fresh reviewer for mutation",
+        (("normal implementation cycle",), ("mutates repository state",)),
+    )
+    normalized_implementation = normalize(implementation)
+    if not re.search(
+        r"fresh independent post-implementation reviewer (?:is )?required "
+        r"when native capability is available",
+        normalized_implementation,
+    ):
+        fail(
+            "Glyph Implementation Supervisor missing coupled mandatory fresh "
+            "reviewer requirement for available native capability"
+        )
+    require_concept(
+        "Glyph Implementation Supervisor",
+        implementation,
+        "reviewer evidence and defect scope",
+        (("objective/scope/exclusions",), ("diff or changed-area",),
+         ("evidence/contracts",), ("validation results",),
+         ("correctness",), ("safety",), ("authority",), ("scope",),
+         ("publication",), ("regression",)),
+    )
+    require_concept(
+        "Glyph Implementation Supervisor",
+        implementation,
+        "materially separable specialist",
+        (("at least one additional bounded specialist",),
+         ("materially separable investigation",), ("quota",)),
+    )
+    require_concept(
+        "Glyph Implementation Supervisor",
+        implementation,
+        "H2/H3 specialist and separate reviewer",
+        (("H2/H3",), ("source-authority", "firmware-safety"),
+         ("separate fresh independent reviewer",), ("no new user-approval gate", "no new user approval gate")),
+    )
+    require_concept(
+        "Glyph Implementation Supervisor",
+        implementation,
+        "root retained authority",
+        (("root retains", "root owns"), ("mutation",), ("validation",),
+         ("Git",), ("publication",), ("final authority",)),
+    )
+    for reason in (
+        "true no-op cycle",
+        "trivial mechanical task",
+        "complete capability discovery confirming no native facility",
+        "runtime failure after attempted discovery or child creation",
+        "concurrency/safety stop",
+    ):
+        if normalize(reason) not in normalize(implementation):
+            fail(f"Implementation prompt missing no-use exception: {reason}")
+
+    planner = sections["Glyph Portfolio Planner"]
+    require_concept(
+        "Glyph Portfolio Planner",
+        planner,
+        "partitioned parallel read-heavy specialists",
+        (("parallel read-heavy specialists",), ("cleanly partitioned",),
+         ("candidate surface is tiny",), ("non-authoritative",)),
+    )
+    curator = sections["Glyph Work-Order Curator"]
+    require_concept(
+        "Glyph Work-Order Curator",
+        curator,
+        "bounded verification with retained judgment",
+        (("bounded verification specialists",), ("materially separable",),
+         ("retains the final substantive authorization judgment",)),
+    )
+    evidence = sections["Glyph Hardware Evidence Processor"]
+    require_concept(
+        "Glyph Hardware Evidence Processor",
+        evidence,
+        "fresh evidence-mutation reviewer",
+        (("result-bearing evidence mutation",), ("fresh reviewer",),
+         ("native capability exists",), ("identity",), ("correspondence",),
+         ("schema",), ("must not invent physical observations",)),
+    )
+
+
+def check_delegation_contract_self_test(sections: dict[str, str]) -> None:
+    validate_delegation_sections(sections)
+
+    def expect_rejection(label: str, mutated: dict[str, str]) -> None:
+        try:
+            validate_delegation_sections(mutated)
+        except FrameworkDocsError:
+            return
+        fail(f"delegation adversarial self-test passed unexpectedly: {label}")
+
+    implementation = sections["Glyph Implementation Supervisor"]
+    mutations = (
+        (
+            "capability discovery removed",
+            re.sub(r"\bcomplete\b", "partial", implementation, flags=re.IGNORECASE),
+        ),
+        (
+            "initial visibility made exhaustive",
+            implementation
+            + "\nThe initial tool list is exhaustive proof that subagents are unavailable.\n",
+        ),
+        (
+            "user task conflated with native delegation",
+            implementation
+            + "\nUser-owned thread creation is equivalent to native internal delegation.\n",
+        ),
+        (
+            "user task serves as native delegation",
+            implementation
+            + "\nA user-owned task serves as native internal delegation.\n",
+        ),
+        (
+            "mandatory reviewer removed",
+            re.sub(
+                r"(fresh\s+independent\s+post-implementation\s+reviewer\s+is\s+)REQUIRED",
+                r"\1OPTIONAL",
+                implementation,
+                count=1,
+                flags=re.IGNORECASE,
+            ),
+        ),
+    )
+    for label, changed in mutations:
+        if changed == implementation:
+            fail(f"delegation self-test mutation did not alter fixture: {label}")
+        mutated_sections = dict(sections)
+        mutated_sections["Glyph Implementation Supervisor"] = changed
+        expect_rejection(label, mutated_sections)
+
+    validate_no_subagent_reason("true no-op cycle")
+    try:
+        validate_no_subagent_reason("no tools were visible initially")
+    except FrameworkDocsError:
+        pass
+    else:
+        fail("initial-visibility no-use reason passed adversarial validation")
+    pass_line("delegation discovery and accountability adversarial self-tests validate")
+
+
+def check_native_delegation_contract() -> None:
+    canonical = read_required("docs/agent_framework/SUBAGENT_CONTRACTS.md")
+    for phrase in (
+        "Native Delegation Discovery And Accountability",
+        "complete available runtime capability/tool catalog",
+        "initial manifest must not be treated as exhaustive",
+        "distinct from and not equivalent to native internal subagent delegation",
+        "without hardcoding one runtime-specific tool name",
+        "root retains integrated mutation, authoritative validation, Git",
+        "a fresh independent post-implementation reviewer is required",
+        "Do not create specialist work merely to satisfy a quota",
+        "a complete `READY` H2/H3 contract remains executable",
+        "Curator retains the final substantive authorization judgment",
+        "must not invent physical observations",
+    ):
+        if normalize(phrase) not in normalize(canonical):
+            fail(f"canonical delegation contract missing: {phrase}")
+
+    supervisor = read_required("docs/agent_framework/SUPERVISOR_CONTRACT.md")
+    require_concept(
+        "Supervisor contract",
+        supervisor,
+        "delegation discovery and review gate",
+        (("delegation preflight",), ("complete runtime capability discovery",),
+         ("initial visible tool manifest is not exhaustive evidence",),
+         ("user-owned task/thread creation is not native internal delegation",),
+         ("fresh independent post-implementation reviewer",),
+         ("materially separable investigation",), ("H2/H3",)),
+    )
+
+    scheduled = read_required("docs/agent_framework/SCHEDULED_TASKS.md")
+    sections = extract_task_sections(scheduled)
+    check_delegation_contract_self_test(sections)
+
+    templates = read_required("docs/agent_framework/PROMPT_TEMPLATES.md")
+    for heading in (
+        "## Supervisor Cycle Prompt",
+        "## Planner Handoff",
+        "## Curator Handoff",
+        "## Hardware Evidence Processor Handoff",
+    ):
+        if heading not in templates:
+            fail(f"PROMPT_TEMPLATES.md missing delegation-aware template: {heading}")
+    for phrase in (
+        "complete available runtime capability/tool catalog",
+        "initial visible manifest",
+        "Native internal subagents are distinct from user-owned",
+        "Delegation:",
+        "capability discovery:",
+        "native capability available:",
+        "if none, reason:",
+    ):
+        if normalize(phrase) not in normalize(templates):
+            fail(f"prompt templates missing delegation concept: {phrase}")
+    pass_line("native delegation discovery, role boundaries, and reporting validate")
+
+
 def check_task_configurations() -> None:
     text = read_required("docs/agent_framework/SCHEDULED_TASKS.md")
     role_requirements = {
@@ -1991,6 +2287,7 @@ def main() -> int:
         check_revision_two_surface()
         check_firmware_implementation_authority()
         check_legacy_control_plane_supersession()
+        check_native_delegation_contract()
         check_task_configurations()
         check_live_remote_retry_contract()
         check_contract_phrases()

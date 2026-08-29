@@ -14,6 +14,89 @@ before integration. When hard read-only enforcement is required, use an
 actually isolated/read-only execution environment rather than relying on the
 prompt label.
 
+## Native Delegation Discovery And Accountability
+
+Native internal subagent delegation means scoped child agents, sidecars, or
+reviewers created by the current root run. They return results to that root;
+the root retains integrated mutation, authoritative validation, Git,
+publication, status, and final authority.
+
+User-owned task, thread, conversation, or Automation creation starts a separate
+user-visible job. It is distinct from and not equivalent to native internal
+subagent delegation. A root must not present user-owned job creation as the
+only delegation mechanism when a native internal facility exists, and must not
+replace a required independent reviewer with a suggestion to create another
+user task or thread.
+
+Before substantive implementation or research, when repository guidance or
+the selected role calls for subagent use, the root must perform this delegation
+preflight:
+
+1. Determine whether repository delegation guidance applies.
+2. Inspect the complete available runtime capability/tool catalog, or use the
+   runtime's supported capability-discovery mechanism, before declaring native
+   delegation unavailable. Absence from the initial visible tool manifest or
+   tool list is insufficient evidence of unavailability and the initial
+   manifest must not be treated as exhaustive.
+3. Determine whether a native internal subagent facility is available without
+   hardcoding one runtime-specific tool name as the only valid backend.
+4. Identify useful separable specialist tasks and required independent review.
+5. Record every delegated role and objective. If no native subagent is used,
+   record the exact reason.
+
+Acceptable no-subagent reasons include a true no-op cycle; a trivial mechanical
+task with no useful separable investigation, provided any independently
+required review is still satisfied; complete capability discovery confirming
+that no native facility exists; a runtime failure after attempted discovery or
+child creation; or a concurrency/safety stop before substantive work. "No
+tools were visible initially" is never an acceptable reason.
+
+For a normal Implementation cycle that mutates repository state, a fresh
+independent post-implementation reviewer is required when native capability is
+available. The root may not self-review as a substitute. The reviewer receives
+the exact work-order objective, scope, and exclusions; the exact diff or
+changed-area description; relevant evidence and contracts; validation results;
+and an instruction to look for material correctness, safety, authority, scope,
+publication, and regression defects. The root repairs material findings and
+obtains re-review of repaired areas.
+
+Use at least one additional bounded specialist when a materially separable
+investigation exists. Examples include source/upstream history, source
+authority, schema/contract, build/test gaps, provenance/evidence, firmware
+safety, and recovery/lineage. Do not create specialist work merely to satisfy a
+quota; reviewer-only is acceptable for a small mechanical implementation with
+no meaningful separable research.
+
+For active firmware or H2/H3 work, normally use at least one bounded
+source-authority or firmware-safety specialist and a separate fresh independent
+reviewer. Use additional build/evidence help when warranted. This adds no new
+user-approval gate: a complete `READY` H2/H3 contract remains executable to its
+existing exact-snapshot hardware stop.
+
+Planner should use parallel read-heavy specialists when a broad audit can be
+cleanly partitioned, while avoiding arbitrary parallelism for a tiny candidate
+surface. Planner and its helpers remain non-authoritative. Curator may use
+bounded verification specialists for separable source, evidence, validation,
+or hardware-risk checks, but Curator retains the final substantive
+authorization judgment. Hardware Evidence Processor uses a fresh reviewer for
+a result-bearing evidence mutation when native capability exists; that reviewer
+may validate identity, correspondence, and schema but must not invent physical
+observations.
+
+Every affected root task prompt must require this final-report evidence:
+
+```text
+Delegation:
+- guidance applicable:
+- capability discovery:
+- native capability available:
+- specialists used:
+- reviewer used:
+- if none, reason:
+```
+
+This is per-run audit evidence, not canonical queue telemetry.
+
 ## Planner
 
 - Objective: produce broad, non-authoritative current-`configurator` candidate

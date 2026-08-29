@@ -70,6 +70,12 @@ Stop and report.
 - H2/H3 -> automated validation, canonical build, fresh independent review,
   exact candidate publication, full Git SHA plus exact artifact SHA-256, and
   physical controller PASS before merge.
+- Normal Implementation cycle with repository mutation and available native
+  subagents -> fresh independent post-implementation review. A materially
+  separable investigation also requires a bounded specialist; H2/H3 normally
+  requires a source-authority or firmware-safety specialist and a separate
+  fresh reviewer. Apply the discovery and exception rules in
+  `SUBAGENT_CONTRACTS.md` without creating a new approval gate.
 - A successful build proves build integrity only. It never proves controller
   acceptance.
 - Relevant source change or a different rebuild invalidates affected hardware
