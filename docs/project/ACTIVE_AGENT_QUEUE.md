@@ -70,17 +70,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_OK"
+      "RUNWAY_LOW"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -677,7 +677,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-003",
       "title": "Census every CI publication route and claim",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-003-health-prose-correspondence-repair-20260830",
       "objective": "Repair and revalidate GP-VAL-003 so the validation-health Markdown manifest-entry count and current load-bearing count mechanically agree with the machine fixture and manifest-derived state while preserving the complete tracked CI publication-route census.",
       "why_this_matters": "Later provenance work mechanically refreshed the Markdown and machine fixture from 30/25 to the current 31 manifest entries and 26 current load-bearing checks, but tools/check_glyph_runtime_config_validation_health.py still never reads the Markdown claims. The values happen to agree while the completed correspondence objective remains fail-open, and the prior exact-count authorization snapshot is invalidated.",
@@ -721,7 +721,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused repair if readable current health prose cannot be bound without weakening machine authority; retain the complete route census and unresolved external classification, and never restore a checker that accepts stale current counts.",
       "status_documentation_updates": "Record GP-VAL-003 as reauthorized against current 31/26 machine state for generic machine/prose correspondence enforcement while preserving the route census and every unresolved external, runtime, artifact, and hardware non-claim.",
-      "done_evidence": "Pending exact Markdown/machine correspondence enforcement, independent repaired-scope review, current validation, exact feature-ref publication, canonical integration, and separate structured completion publication. Prior implementation commit 4558efb5310de5ccb36bc3d0499d07dfbb6f1188 remains historical evidence of the incomplete health-prose gate.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"d4d68a1e708674c04a0d81846183cb74918ae241","reviewed_implementation_sha":"7987251866da58575a2a6a0dc7556f9d0cc60d3d","prior_canonical_integration_sha":"00c2b9aa91633ee877186052d4f1c5d93cdc8f45","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_runtime_config_validation_health.py"],"independent_review_provenance":"Fresh independent reviewer found one fail-open unmatched-marker case; root repaired it by requiring exactly one marker pair and added adversarial coverage, followed by fresh repaired-scope re-review PASS on the exact feature tip 7987251866da58575a2a6a0dc7556f9d0cc60d3d.","validation_provenance":"Focused health checker, 193-entry census, full runtime-config aggregate, publication workflow, full runtime-config validation, agent-framework, sequence, docs-navigation, docs-agent-surface, py_compile, and diff checks passed on the integrated snapshot; no build or hardware was required."},
       "stop_conditions": [
         "Any workflow, manifest applicability, checker classification, permission, secret, trigger, caller, release, or artifact destination must change.",
         "Any unresolved external ownership/caller fact would be inferred.",
@@ -1635,11 +1635,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003","GP-VAL-005","GP-PROV-006","GP-VAL-007"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-005","GP-PROV-006","GP-VAL-007"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003, GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -1648,9 +1648,8 @@ Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
 `GP-SRC-003` and `GP-SRC-004` are DONE on validated implementation branches.
-`GP-SRC-005` and `GP-VAL-004` are DONE; `GP-VAL-003` is reauthorized `READY`
-against the current 31/26 machine state for the exact health-prose
-correspondence repair recorded above.
+`GP-SRC-005` and `GP-VAL-004` are DONE; `GP-VAL-003` is DONE after exact
+health-prose correspondence repair against the current 31/26 machine state.
 `GP-CONFIG-004` is `DONE`; its exact reviewed H0 checker repair is merged and
 live-verified in canonical configurator.
 `GP-PROV-002` is `DONE`; its reviewed feature tip is integrated into
@@ -1662,8 +1661,9 @@ implementation ancestry and separate structured completion publication.
 correspondence repair, independent review, canonical integration, and
 structured completion publication. `GP-CTL-001` is `DONE` after exact
 machine/prose runway parity enforcement and separate completion publication.
-`GP-VAL-003`, `GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are the ordered
-`READY` H0 runway. `GP-PROV-005` is `DONE` after bounded
+`GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are the ordered
+`READY` H0 runway. `GP-VAL-003` is `DONE` after exact reviewed health-prose
+correspondence repair and canonical integration. `GP-PROV-005` is `DONE` after bounded
 source-lineage research; source lineage, purpose, byte transformation, build
 recipe, reproducibility, safety, artifact acceptance, and hardware remain
 `UNKNOWN`.
@@ -1722,10 +1722,9 @@ Historical Done items not named below remain Done.
   adding, promoting, or claiming complete dependency closure for external facts.
 - `GP-CTL-001`: `DONE`; current human-readable runway and priority prose are
   machine-bound and canonically published.
-- `GP-VAL-003`: reauthorized `READY`; its old 30/25 snapshot invalidated when
-  later provenance work moved the machine state to 31/26. The current prose is
-  accurate, but its checker must enforce generic Markdown/fixture/manifest
-  correspondence without reclassifying any checker or workflow route.
+- `GP-VAL-003`: `DONE`; its checker now enforces exactly one Markdown summary
+  marker pair and generic Markdown/fixture/manifest correspondence without
+  reclassifying any checker or workflow route.
 - `GP-PROV-005`: `DONE`; bounded `glyph_nuker` source-lineage research recorded
   research without executing, rebuilding, replacing, or promoting inference
   into authority.

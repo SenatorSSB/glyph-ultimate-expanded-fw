@@ -9,20 +9,19 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003","GP-VAL-005","GP-PROV-006","GP-VAL-007"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-005","GP-PROV-006","GP-VAL-007"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003, GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Reviewed Planner packet `glyph-portfolio-20260827-1210` is
-partially consumed after independent curation. `GP-SRC-003` and `GP-SRC-004`
-are DONE on validated implementation branches; `GP-VAL-003` is reauthorized
-READY against current 31/26 validation state for generic health-prose
-correspondence repair.
+partially consumed after independent curation. `GP-SRC-003`, `GP-SRC-004`, and
+`GP-VAL-003` are DONE on validated implementation branches; GP-VAL-003 now
+enforces generic health-prose correspondence against current 31/26 state.
 `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
 and `GP-VAL-004` is DONE after its bounded checker-only temporary-root repair.
 `GP-CONFIG-004` is DONE after exact offline reviewed-capture correspondence
@@ -43,10 +42,10 @@ normalized input and deterministic artifact/manifest regeneration.
 structured completion publication. `GP-PROV-004` is DONE after exact source,
 identity, base, and dependency correspondence repair and separate structured
 completion publication. `GP-CTL-001` is DONE after machine/prose runway parity
-enforcement. `GP-VAL-003`, `GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are
-the ordered READY H0 runway for health-prose correspondence, advertised offline
-packaging coverage, declared non-selector provenance, and bounded manifest
-dependency metadata.
+enforcement. `GP-VAL-003` is DONE after exact health-prose correspondence
+enforcement. `GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are the ordered
+READY H0 runway for advertised offline packaging coverage, declared
+non-selector provenance, and bounded manifest dependency metadata.
 `GP-PROV-005` is DONE after bounded `glyph_nuker` source-lineage research;
 source lineage, purpose, byte transformation, build recipe, reproducibility,
 safety, artifact acceptance, and hardware remain UNKNOWN. None may
