@@ -2353,7 +2353,7 @@
       },
       "checker_id": "coordinate_native_runtime_profile_contract",
       "defines_main": true,
-      "file_size_bytes": 79527,
+      "file_size_bytes": 82726,
       "hard_coded_branch_like_strings": [
         "accepted_evidence",
         "accepted_evidence.",
@@ -2382,7 +2382,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1615,
+      "line_count": 1705,
       "parse_error": null,
       "path": "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
       "potential_branch_identity_signals": [
@@ -2491,7 +2491,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "a41637dee7314a4efd412001e77db30edfe7c77d7518baf08e284346a319cf22",
+      "sha256": "c5fd4443530a32086b3a732fc974dd2d2f4d0192ba87d95faa3ba24281d6eaef",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,

@@ -1465,6 +1465,87 @@ def validate_offline_export_package() -> None:
             fail(f"offline export package notes missing phrase: {phrase}")
 
 
+OFFLINE_PACKAGING_TRACE = (
+    "offline_pipeline",
+    "offline_artifact_bundle_manifest",
+    "offline_export_package",
+)
+
+
+def run_offline_packaging_layers(
+    validators: tuple[tuple[str, Any], ...],
+    *,
+    trace_sink: list[str] | None = None,
+) -> tuple[str, ...]:
+    """Run the advertised packaging layers and trace only completed layers."""
+    if tuple(name for name, _ in validators) != OFFLINE_PACKAGING_TRACE:
+        fail("offline packaging validator order or coverage drifted")
+    trace: list[str] = []
+    for name, validator in validators:
+        validator()
+        trace.append(name)
+        if trace_sink is not None:
+            trace_sink.append(name)
+    if tuple(trace) != OFFLINE_PACKAGING_TRACE:
+        fail("offline packaging execution trace is incomplete or out of order")
+    return tuple(trace)
+
+
+def validate_offline_packaging_trace_contract() -> None:
+    """Adversarially prove the default route cannot pre-record or omit layers."""
+    successful = run_offline_packaging_layers(
+        tuple((name, lambda: None) for name in OFFLINE_PACKAGING_TRACE)
+    )
+    if successful != OFFLINE_PACKAGING_TRACE:
+        fail("offline packaging success trace drifted")
+
+    try:
+        run_offline_packaging_layers(
+            ((OFFLINE_PACKAGING_TRACE[0], lambda: None),)
+        )
+    except CoordinateNativeRuntimeProfileContractError:
+        pass
+    else:
+        fail("offline packaging omission was accepted")
+
+    try:
+        run_offline_packaging_layers(
+            tuple((name, lambda: None) for name in reversed(OFFLINE_PACKAGING_TRACE))
+        )
+    except CoordinateNativeRuntimeProfileContractError:
+        pass
+    else:
+        fail("offline packaging reorder was accepted")
+
+    observed: list[str] = []
+    completed_trace: list[str] = []
+
+    def fail_after_observation() -> None:
+        observed.append("failed_layer_called")
+        raise CoordinateNativeRuntimeProfileContractError("synthetic layer failure")
+
+    def unexpected_third_layer() -> None:
+        observed.append("unexpected_third_layer_called")
+
+    try:
+        run_offline_packaging_layers(
+            (
+                (OFFLINE_PACKAGING_TRACE[0], lambda: None),
+                (OFFLINE_PACKAGING_TRACE[1], fail_after_observation),
+                (OFFLINE_PACKAGING_TRACE[2], unexpected_third_layer),
+            ),
+            trace_sink=completed_trace,
+        )
+    except CoordinateNativeRuntimeProfileContractError:
+        pass
+    else:
+        fail("offline packaging short-circuit was accepted")
+    if observed != ["failed_layer_called"]:
+        fail("offline packaging adversarial failure did not short-circuit")
+    if completed_trace != [OFFLINE_PACKAGING_TRACE[0]]:
+        fail("offline packaging recorded a failed or skipped layer")
+
+
 def validate_contract_schema() -> None:
     validate_schema(load_json_object(SCHEMA))
 
@@ -1602,12 +1683,21 @@ def main() -> int:
     validate_example_fixtures()
     validate_dry_run_fixtures()
     validate_layout_spec_bridge()
+    validate_offline_packaging_trace_contract()
+    packaging_trace = run_offline_packaging_layers(
+        (
+            ("offline_pipeline", validate_offline_pipeline),
+            ("offline_artifact_bundle_manifest", validate_offline_artifact_bundle_manifest),
+            ("offline_export_package", validate_offline_export_package),
+        )
+    )
     validate_contract_fixture_and_docs()
     print("glyph_coordinate_native_runtime_profile_contract: PASS")
     print(f"- branch: {branch}")
     print(f"- fixture: {rel(FIXTURE)}")
     print(f"- contract: {rel(CONTRACT_DOC)}")
     print(f"- dry-run tool: {rel(DRY_RUN_TOOL)}")
+    print("aggregate-captured: " + ",".join(packaging_trace))
     return 0
 
 
