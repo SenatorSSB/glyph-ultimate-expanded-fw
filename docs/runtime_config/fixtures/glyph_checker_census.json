@@ -840,29 +840,30 @@
         "parser_add_argument_calls": 0
       },
       "checker_id": "build_input_non_selector_configuration",
-      "defines_main": false,
-      "file_size_bytes": 7015,
+      "defines_main": true,
+      "file_size_bytes": 9395,
       "hard_coded_branch_like_strings": [],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 103,
+      "line_count": 163,
       "parse_error": null,
       "path": "tools/check_glyph_build_input_non_selector_configuration.py",
       "potential_branch_identity_signals": [],
       "potential_mutation_signals": [
-        "subprocess.check_output"
+        "subprocess.run"
       ],
       "python_module": "tools.check_glyph_build_input_non_selector_configuration",
       "referenced_repository_path_prefixes": [
+        "docs/runtime_config/build_input_non_selector_configuration.md",
         "docs/runtime_config/fixtures/build_input_non_selector_configuration.json"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "77eae6835afe15e2b1c95304f149a6ad54043da8f23bd64f9a2ea573ec78c924",
+      "sha256": "a27a0898c6a8076a3dc2bb9e72cdae7de26f0e2a655b8b88a1558019b7e249e2",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
