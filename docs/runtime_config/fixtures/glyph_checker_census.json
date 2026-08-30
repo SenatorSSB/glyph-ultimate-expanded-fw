@@ -839,6 +839,48 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "build_input_non_selector_configuration",
+      "defines_main": false,
+      "file_size_bytes": 7015,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 103,
+      "parse_error": null,
+      "path": "tools/check_glyph_build_input_non_selector_configuration.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.check_output"
+      ],
+      "python_module": "tools.check_glyph_build_input_non_selector_configuration",
+      "referenced_repository_path_prefixes": [
+        "docs/runtime_config/fixtures/build_input_non_selector_configuration.json"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "77eae6835afe15e2b1c95304f149a6ad54043da8f23bd64f9a2ea573ec78c924",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "build_input_provenance_inventory",
       "defines_main": true,
       "file_size_bytes": 37112,
@@ -10261,7 +10303,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "5dec0eff5f3fcd0021fe47afc9c6a9bb48f0833cfd74d1cacf041e2b48cff1b5",
+      "sha256": "cdb85fcd0022e414202d8821b006987191820a480bbbe78c46d17fa298daecc5",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

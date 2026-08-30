@@ -48,16 +48,16 @@ def validate_summary(text: str, expected: tuple[int, int]) -> None:
 def validate_summary_parser() -> None:
     valid = (
         "<!-- validation-health-summary:start -->\n"
-        "Current summary: manifest entries = 31; current load-bearing checks = 26.\n"
+        "Current summary: manifest entries = 32; current load-bearing checks = 27.\n"
         "<!-- validation-health-summary:end -->"
     )
-    assert parse_current_summary(valid) == (31, 26)
+    assert parse_current_summary(valid) == (32, 27)
     for mutated in (
-        valid.replace("manifest entries = 31", "manifest entries = 30"),
-        valid.replace("current load-bearing checks = 26", "current load-bearing checks = 25"),
+        valid.replace("manifest entries = 32", "manifest entries = 31"),
+        valid.replace("current load-bearing checks = 27", "current load-bearing checks = 26"),
     ):
         try:
-            validate_summary(mutated, (31, 26))
+            validate_summary(mutated, (32, 27))
         except ValueError:
             continue
         raise AssertionError("adversarial Markdown summary mutation was accepted")

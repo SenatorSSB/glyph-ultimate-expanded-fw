@@ -206,6 +206,30 @@ This is per-run audit evidence, not canonical queue telemetry.
 
 ## Generic Handoff Template
 
+## Implementation Supervisor cycle — GP-PROV-006 recovery (2026-08-30)
+
+- guidance applicable: yes; GP-PROV-006 is a complete H0 READY work order and
+  the supervisor requires bounded delegation plus fresh independent review for
+  repository mutation.
+- capability discovery: complete runtime tool catalog inspected; native
+  internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: source/contract specialist; inspect the recovered GP-PROV-006
+  partial state against the exact READY scope, source identities, finite INI
+  chain, literal/reference correspondence, and excluded PlatformIO/compiler
+  claims; read-only, no file edits.
+- reviewer: fresh validator reviewer after implementation; inspect the exact
+  diff and run the required offline gates for correctness, authority, scope,
+  publication, and regression defects; no unrelated edits.
+- allowed specialist files: current GP-PROV-006 docs/fixture/checker state and
+  platformio.ini/config/glyph/env.ini plus relevant checker contracts.
+- forbidden specialist actions: edits, PlatformIO/compiler/build execution,
+  dependency/network access, runtime or firmware claims.
+- stop conditions: source drift, missing exact correspondence, scope creep, or
+  any need to interpret PlatformIO/compiler behavior.
+- return format: findings first; exact contract matches/gaps; recommended
+  bounded next action.
+
 ```yaml
 role:
 branch/worktree:

@@ -27,7 +27,7 @@ The current source-owned contract is 28 ordered tables ending in
 `9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`.
 
 <!-- validation-health-summary:start -->
-Current summary: manifest entries = 31; current load-bearing checks = 26.
+Current summary: manifest entries = 32; current load-bearing checks = 27.
 <!-- validation-health-summary:end -->
 
 The two repaired load-bearing baseline failures were
@@ -44,7 +44,7 @@ Commands that can prepare, install, or emit a candidate are classified unsafe
 for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 31 explicit entries, including 26 current
+The curated manifest now has 32 explicit entries, including 27 current
 load-bearing checks. The tracked CI publication-route census records both
 workflow files: `build.yml` is `CURRENT_GATED`, while
 `build-device-config.yml` is `UNRESOLVED_EXTERNAL` because its caller,
