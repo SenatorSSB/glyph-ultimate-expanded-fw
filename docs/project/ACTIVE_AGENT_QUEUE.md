@@ -70,17 +70,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_LOW"
+      "PLANNING_REQUIRED"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -867,7 +867,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-007",
       "title": "Enforce bounded validation-manifest dependency metadata",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-007-manifest-dependency-metadata-20260830",
       "objective": "Define and enforce a bounded truthful contract for validation-manifest source_dependencies and branch_policy without claiming complete transitive or semantic dependency closure.",
       "why_this_matters": "The runner requires both fields but validates neither field's contents. On current source, 19 manifest entries have empty dependency lists and static inspection finds 26 missing direct tracked helper-import edges across 18 entries, so the described dependency graph can drift while the manifest check passes.",
@@ -910,7 +910,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused metadata-contract branch if current valid entries cannot be represented without overclaiming completeness; never restore acceptance of malformed paths, missing direct helper edges, or invalid policy pairs.",
       "status_documentation_updates": "Document manifest v4's bounded direct-input/helper lower bound and branch-policy classification matrix with explicit dynamic, transitive, semantic, and enforcement non-claims.",
-      "done_evidence": "Pending exact manifest-v4 implementation, helper-edge regeneration, independent review, adversarial static validation, current aggregate, feature-ref verification, canonical integration, and separate structured completion publication.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"a49117062282efc077417143c325cae3c55bff4e","reviewed_implementation_sha":"e8ab9b86408d1c89f3b35a07949782d9e3c414ff","prior_canonical_integration_sha":"e8ab9b86408d1c89f3b35a07949782d9e3c414ff","reviewed_changed_paths":["docs/agent_framework/SUBAGENT_CONTRACTS.md","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.md","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","tools/check_glyph_runtime_config_validation_aggregate.py","tools/run_glyph_runtime_config_validation.py"],"independent_review_provenance":"Fresh independent validator review PASS on exact repaired feature tip e8ab9b86408d1c89f3b35a07949782d9e3c414ff; prior policy reclassification finding was repaired and direct dependency path adversarial coverage was expanded.","validation_provenance":"Manifest schema-v4 check, aggregate adversarial suite, 194-entry census, validation health, full 27-check runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no firmware build or hardware was required."},
       "stop_conditions": [
         "Any complete dependency graph, dynamic behavior, or checker branch semantics would be inferred.",
         "Any discovered code must be imported or executed, or tools/glyph_checker_context.py must change.",
@@ -1635,11 +1635,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-007"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-007; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived

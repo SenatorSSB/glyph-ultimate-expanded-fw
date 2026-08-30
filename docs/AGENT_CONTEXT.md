@@ -64,11 +64,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-007"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-007; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
@@ -96,16 +96,17 @@ Ready IDs: GP-VAL-007; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanical
   separate structured completion publication. `GP-CTL-001` is DONE after
   machine/prose runway parity enforcement and separate publication.
   `GP-VAL-003` and `GP-VAL-005` are DONE after exact reviewed checker repairs
-  and separate completion publication. `GP-PROV-006` is DONE and `GP-VAL-007` is the remaining ordered
-  READY H0 runway for bounded manifest metadata,
-  declared non-selector provenance, and bounded manifest metadata.
+  and separate completion publication. `GP-PROV-006` and `GP-VAL-007` are DONE
+  after exact reviewed checker repairs and separate structured completion
+  publication; the effective authorized runway is now zero.
   `GP-PROV-005` is DONE after bounded
   `glyph_nuker` source-lineage research; source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
   and hardware remain UNKNOWN. `GP-VAL-006` remains non-executable pending
   later H1 curation after `GP-VAL-003`; `GP-VAL-008` remains evidence gated,
   and `GP-ART-001` plus `GP-X1-001` remain user-decision gated. The
-  current-runway summary above is the authoritative human-readable runway state.
+  current-runway summary above is the authoritative human-readable runway state;
+  `PLANNING_REQUIRED` is current until fresh candidate supply is curated.
   The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
   baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
   it owns no other table, changes no active bytes, and creates no hardware
