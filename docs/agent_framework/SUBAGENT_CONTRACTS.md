@@ -230,6 +230,29 @@ This is per-run audit evidence, not canonical queue telemetry.
 - return format: findings first; exact contract matches/gaps; recommended
   bounded next action.
 
+## Implementation Supervisor cycle — GP-VAL-007 (2026-08-30)
+
+- guidance applicable: yes; GP-VAL-007 is a complete H0 READY work order and
+  repository mutation requires bounded delegation plus fresh independent review.
+- capability discovery: complete available runtime catalog inspected; native
+  internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: read-only source/contract specialist; inspect the manifest,
+  runner, aggregate adversarial checker, checker census, direct helper-import
+  shapes, and exact GP-VAL-007 exclusions; no edits or repository mutation.
+- reviewer: fresh independent validator reviewer after implementation; inspect
+  the exact diff and run the required metadata, adversarial, census, health,
+  aggregate, framework, navigation, and agent-surface gates.
+- allowed specialist files: relevant GP-VAL-007 docs, manifest/health fixtures,
+  runner/checkers, and tracked tools imports.
+- forbidden specialist actions: edits, commits, pushes, builds, dependency or
+  network resolution, code execution/import of discovered checkers, and any
+  runtime/firmware claim.
+- stop conditions: source/manifest drift, dynamic or transitive discovery,
+  branch-semantic enforcement, scope creep, or any active behavior delta.
+- return format: findings first; exact contract matches/gaps; recommended
+  bounded next action.
+
 ```yaml
 role:
 branch/worktree:

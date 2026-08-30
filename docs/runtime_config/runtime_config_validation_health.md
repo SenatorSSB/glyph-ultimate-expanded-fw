@@ -22,6 +22,16 @@ The census generator only performs static inspection and never imports or
 executes discovered checkers; the curated manifest remains authoritative for
 which checks are current and load-bearing.
 
+Manifest schema version 4 validates `source_dependencies` as an ordered,
+duplicate-free list of normalized repository-relative POSIX paths to tracked
+stage-0 regular non-symlink files. The checker path is implicit, and static AST
+inspection requires every direct absolute single-module local helper import to
+be listed. This is a bounded direct-input lower bound, not a transitive,
+dynamic, runtime-data, subprocess, generated-file, or complete semantic
+dependency claim. `branch_policy` is limited to `content_only`,
+`content_and_scope`, `named_evidence_branch`, and `not_run`, with applicability
+consistency enforced as curated metadata rather than checker-branch semantics.
+
 The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`.

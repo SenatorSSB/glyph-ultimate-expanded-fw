@@ -103,7 +103,7 @@ def write_manifest(root: Path, entries: list[dict[str, Any]], categories: list[s
     manifest.write_text(
         json.dumps(
             {
-                "schema_version": 3,
+                "schema_version": 4,
                 "categories": categories,
                 "entries": entries,
                 "strong_signal_exclusions": [],
@@ -155,8 +155,57 @@ def payload(text: str) -> dict[str, Any]:
 def main() -> int:
     module = load_runner()
     passed: list[str] = []
+    actual_root = RUNNER_PATH.parents[1]
+    module.ROOT = actual_root
+    probe = entry("probe")
+    probe["path"] = "tools/check_glyph_runtime_config_validation_aggregate.py"
+    probe["command"][1] = probe["path"]
+    for bad in ("/absolute", "", ".", "../escape", "tools\\bad.py", "tools/check_glyph_runtime_config_validation_aggregate.py"):
+        probe["source_dependencies"] = [bad]
+        try:
+            module.validate_dependencies(probe)
+        except ValueError:
+            continue
+        raise AssertionError(f"malformed dependency path was accepted: {bad!r}")
+    policy_probe = entry("policy_probe")
+    policy_probe["applicability"] = "historical_only"
+    policy_probe["branch_policy"] = "content_only"
+    try:
+        module.validate_branch_policy(policy_probe)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("invalid applicability/policy pair was accepted")
+    passed.append("AGG-13-dependency-path-and-policy-boundaries")
     with tempfile.TemporaryDirectory(prefix="glyph-aggregate-adversarial-") as directory:
         root = fresh_root(Path(directory))
+
+        (root / "tools/helper.py").write_text("VALUE = 1\n", encoding="utf-8")
+        import_probe = entry("import_probe")
+        write_checker(root, import_probe, 0)
+        (root / import_probe["path"]).write_text("from helper import VALUE\nraise SystemExit(0)\n", encoding="utf-8")
+        run_git(root, "add", "tools/helper.py", import_probe["path"])
+        run_git(root, "commit", "-m", "add import probe")
+        manifest = write_manifest(root, [import_probe], ["baseline"])
+        result, text = invoke(module, root, manifest, "--check-manifest")
+        if result != 1 or "missing direct helper dependencies" not in text:
+            raise AssertionError("missing direct helper import was accepted")
+        passed.append("AGG-14-direct-helper-import-required")
+        (root / "tools/link.py").symlink_to("helper.py")
+        run_git(root, "add", "tools/link.py")
+        run_git(root, "commit", "-m", "add symlink probe")
+        for bad in ("tools/untracked.py", "tools", "tools/link.py"):
+            import_probe["source_dependencies"] = [bad]
+            manifest = write_manifest(root, [import_probe], ["baseline"])
+            result, text = invoke(module, root, manifest, "--check-manifest")
+            if result != 1 or "invalid source dependency path" not in text:
+                raise AssertionError(f"invalid dependency target was accepted: {bad}")
+        import_probe["source_dependencies"] = ["README.md", "README.md"]
+        manifest = write_manifest(root, [import_probe], ["baseline"])
+        result, text = invoke(module, root, manifest, "--check-manifest")
+        if result != 1 or "duplicate source dependency" not in text:
+            raise AssertionError("duplicate dependency was accepted")
+        passed.append("AGG-15-untracked-directory-symlink-duplicate-rejected")
 
         entries = [entry("pass_one"), entry("fail_two"), entry("pass_three")]
         for checker, code in zip(entries, (0, 7, 0), strict=True):
@@ -198,6 +247,7 @@ def main() -> int:
         passed.append("AGG-06-unexpected-success-exit-mismatch-fails")
 
         unsafe = [entry("unsafe_never_run", applicability="unsafe_or_mutating", load_bearing=False, mutation_risk="candidate_preparation")]
+        unsafe[0]["branch_policy"] = "not_run"
         write_checker(root, unsafe[0], 9)
         manifest = write_manifest(root, unsafe, ["baseline"])
         result, text = invoke(module, root, manifest, "--json")
@@ -229,7 +279,6 @@ def main() -> int:
             raise AssertionError("historical checker marked current was accepted")
         passed.append("AGG-10-historical-current-rejected")
 
-        actual_root = RUNNER_PATH.parents[1]
         actual_manifest = json.loads(
             (actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text(
                 encoding="utf-8"
@@ -238,7 +287,16 @@ def main() -> int:
         exclusions = actual_manifest.get("strong_signal_exclusions")
         if not isinstance(exclusions, list) or not exclusions:
             raise AssertionError("committed manifest has no strong-signal exclusion to probe")
-        omitted = exclusions.pop(0)
+        census_value = json.loads(
+            (actual_root / "docs/runtime_config/fixtures/glyph_checker_census.json").read_text(encoding="utf-8")
+        )
+        strong_paths = {
+            item["path"] for item in census_value["entries"] if item["runtime_config_relevance_signals"]
+        }
+        omitted = next((item for item in exclusions if item["path"] in strong_paths), None)
+        if omitted is None:
+            raise AssertionError("committed manifest has no exclusion with a census signal to probe")
+        exclusions.remove(omitted)
         probe = root / "omitted-strong-signal-exclusion.json"
         probe.write_text(json.dumps(actual_manifest), encoding="utf-8")
         result, text = invoke(

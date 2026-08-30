@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import subprocess
 import sys
 from pathlib import Path
+from pathlib import PurePosixPath
 from time import monotonic
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +18,8 @@ from generate_glyph_checker_census import generate as generate_census, rendered 
 MANIFEST = ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
 CENSUS = ROOT / "docs/runtime_config/fixtures/glyph_checker_census.json"
 REQUIRED = {"id", "path", "command", "category", "applicability", "branch_policy", "required_arguments", "mutation_risk", "source_dependencies", "load_bearing", "historical", "reason"}
+BRANCH_POLICIES = {"content_only", "content_and_scope", "named_evidence_branch", "not_run"}
+APPLICABILITIES = {"current", "historical_only", "unsafe_or_mutating"}
 EXCLUSION_REQUIRED = {"id", "path", "reason", "detail"}
 EXCLUSION_REASONS = {"HISTORICAL_BRANCH_EVIDENCE", "HARDWARE_RESULT_EVIDENCE", "SUPERSEDED_CONTRACT", "REQUIRES_NONCANONICAL_ARGUMENT", "UNSAFE_OR_MUTATING", "DUPLICATE_COVERAGE", "NOT_CURRENT_RUNTIME_CONFIG_LANE"}
 
@@ -29,9 +33,71 @@ def pairs(items: list[tuple[str, object]]) -> dict[str, object]:
     return result
 
 
+def tracked_regular_stage_zero(path: str) -> bool:
+    if not path or path.startswith("/") or "\\" in path:
+        return False
+    pure = PurePosixPath(path)
+    if pure.as_posix() != path or any(part in {"", ".", ".."} for part in pure.parts):
+        return False
+    result = subprocess.run(["git", "ls-files", "--stage", "--", path], cwd=ROOT, text=True, capture_output=True, check=False)
+    records = [line.split("\t", 1)[0].split() for line in result.stdout.splitlines() if "\t" in line]
+    return len(records) == 1 and records[0][0] in {"100644", "100755"} and (ROOT / path).is_file() and not (ROOT / path).is_symlink()
+
+
+def direct_local_helpers(checker_path: str) -> set[str]:
+    source = (ROOT / checker_path).read_text(encoding="utf-8")
+    tree = ast.parse(source, filename=checker_path)
+    found: set[str] = set()
+    for node in ast.walk(tree):
+        module = None
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name.startswith("tools.") and alias.name.count(".") == 1:
+                    candidate = f"{alias.name.replace('.', '/')}.py"
+                    if tracked_regular_stage_zero(candidate):
+                        found.add(candidate)
+                elif "." not in alias.name and tracked_regular_stage_zero(f"tools/{alias.name}.py"):
+                    found.add(f"tools/{alias.name}.py")
+        elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+            module = node.module
+            if module.startswith("tools.") and module.count(".") == 1:
+                candidate = f"{module.replace('.', '/')}.py"
+                if tracked_regular_stage_zero(candidate):
+                    found.add(candidate)
+            elif "." not in module and tracked_regular_stage_zero(f"tools/{module}.py"):
+                found.add(f"tools/{module}.py")
+    return found
+
+
+def validate_dependencies(entry: dict[str, object]) -> None:
+    dependencies = entry["source_dependencies"]
+    if not isinstance(dependencies, list) or not all(isinstance(path, str) for path in dependencies):
+        raise ValueError(f"invalid source_dependencies: {entry['id']}")
+    if len(dependencies) != len(set(dependencies)):
+        raise ValueError(f"duplicate source dependency: {entry['id']}")
+    for path in dependencies:
+        if path == entry["path"]:
+            raise ValueError(f"checker path repeated as source dependency: {entry['id']}")
+        if not tracked_regular_stage_zero(path):
+            raise ValueError(f"invalid source dependency path: {entry['id']}: {path}")
+    required = direct_local_helpers(str(entry["path"]))
+    missing = sorted(required - set(dependencies))
+    if missing:
+        raise ValueError(f"missing direct helper dependencies for {entry['id']}: {', '.join(missing)}")
+
+
+def validate_branch_policy(entry: dict[str, object]) -> None:
+    applicability, policy = entry["applicability"], entry["branch_policy"]
+    if applicability not in APPLICABILITIES or policy not in BRANCH_POLICIES:
+        raise ValueError(f"invalid applicability/branch_policy: {entry['id']}")
+    expected = {"current": {"content_only", "content_and_scope"}, "historical_only": {"named_evidence_branch"}, "unsafe_or_mutating": {"not_run"}}[applicability]
+    if policy not in expected:
+        raise ValueError(f"invalid applicability/branch_policy pair: {entry['id']}")
+
+
 def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     value = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=pairs)
-    if value.get("schema_version") != 3 or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list) or not isinstance(value.get("strong_signal_exclusions"), list):
+    if value.get("schema_version") != 4 or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list) or not isinstance(value.get("strong_signal_exclusions"), list):
         raise ValueError("invalid manifest root")
     categories = set(value["categories"])
     ids: set[str] = set()
@@ -49,6 +115,8 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
             raise ValueError(f"invalid command: {checker_id}")
         if entry["path"] != entry["command"][1] or not (ROOT / entry["path"]).is_file():
             raise ValueError(f"missing checker file: {entry['path']}")
+        validate_dependencies(entry)
+        validate_branch_policy(entry)
         if entry["applicability"] == "current" and (entry["historical"] or not entry["load_bearing"] or entry["required_arguments"] or entry["mutation_risk"] not in {"none", "temporary_file_only", "temporary_repository_only"}):
             raise ValueError(f"unsafe current aggregate entry: {checker_id}")
         if entry["historical"] and entry["applicability"] != "historical_only":

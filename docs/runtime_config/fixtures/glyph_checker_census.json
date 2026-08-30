@@ -10216,24 +10216,26 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 12889,
+      "file_size_bytes": 16202,
       "hard_coded_branch_like_strings": [
         "branch_policy",
         "candidate_preparation",
-        "configurator"
+        "configurator",
+        "module.validate_branch_policy"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 297,
+      "line_count": 355,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
         "branch_policy",
         "candidate_preparation",
-        "configurator"
+        "configurator",
+        "module.validate_branch_policy"
       ],
       "potential_mutation_signals": [
         "subprocess.run"
@@ -10246,12 +10248,16 @@
         "tools/check_glyph_",
         "tools/check_glyph_added.py",
         "tools/check_glyph_extra.py",
-        "tools/check_glyph_renamed.py"
+        "tools/check_glyph_renamed.py",
+        "tools/check_glyph_runtime_config_validation_aggregate.py",
+        "tools/helper.py",
+        "tools/link.py",
+        "tools/untracked.py"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "0481e69a94d77b195ccbd668442cbfdb636806554f38c6f5bc883304585d3a22",
+      "sha256": "f68fcfa20143b15c947deb31eef4f5eee2696652a92a3d14f4522643a05e6001",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
