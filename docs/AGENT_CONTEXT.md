@@ -64,11 +64,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-005","GP-PROV-006","GP-VAL-007"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-006","GP-VAL-007"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-PROV-006, GP-VAL-007; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
@@ -95,8 +95,9 @@ Ready IDs: GP-VAL-005, GP-PROV-006, GP-VAL-007; Immediate Ready: 3; Recorded Pre
   correspondence repair, independent review, canonical integration, and
   separate structured completion publication. `GP-CTL-001` is DONE after
   machine/prose runway parity enforcement and separate publication.
-  `GP-VAL-003`, `GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are the ordered
-  READY H0 runway for prose correspondence, offline packaging coverage,
+  `GP-VAL-003` and `GP-VAL-005` are DONE after exact reviewed checker repairs
+  and separate completion publication. `GP-PROV-006` and `GP-VAL-007` are the ordered
+  READY H0 runway for declared non-selector provenance and bounded manifest metadata,
   declared non-selector provenance, and bounded manifest metadata.
   `GP-PROV-005` is DONE after bounded
   `glyph_nuker` source-lineage research; source lineage, purpose, byte

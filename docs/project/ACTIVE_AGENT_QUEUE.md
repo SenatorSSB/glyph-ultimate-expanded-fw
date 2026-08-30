@@ -70,12 +70,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -743,7 +743,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-005",
       "title": "Make advertised offline packaging modes load-bearing",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-005-offline-packaging-load-bearing-20260830",
       "objective": "Make the existing offline pipeline, artifact-bundle-manifest, and export-package validators execute through the canonical no-argument coordinate-native checker route and prove that each layer ran.",
       "why_this_matters": "Current docs advertise all three offline packaging modes and each explicit flag passes, but the single current manifest entry invokes only the no-argument checker path, which omits those validators. The aggregate can therefore pass while advertised packaging coverage never runs.",
@@ -783,7 +783,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker branch if a valid explicit mode or default contract regresses; never restore aggregate success that omits an advertised packaging layer.",
       "status_documentation_updates": "Record the three existing offline packaging validators as load-bearing through the one default coordinate-native checker route without creating a production export, artifact, runtime, or hardware claim.",
-      "done_evidence": "Pending exact default-route trace enforcement, independent review, focused adversarial coverage, current aggregate validation, feature-ref verification, canonical integration, and separate structured completion publication.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"e41e4ea1017b5abde4f17eed1a4bc50404238c75","reviewed_implementation_sha":"7a042fbdd1dc28db8efbd7c59e1730565fe33288","prior_canonical_integration_sha":"7a042fbdd1dc28db8efbd7c59e1730565fe33288","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_coordinate_native_runtime_profile_contract.py"],"independent_review_provenance":"Fresh independent reviewer PASS on exact feature tip 7a042fbdd1dc28db8efbd7c59e1730565fe33288; specialist follow-up repaired explicit pre-recording and short-circuit assertions, followed by repaired-scope review PASS with no findings.","validation_provenance":"Focused explicit/default packaging routes, census freshness, aggregate adversarial checks, validation health, full runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build or hardware was required."},
       "stop_conditions": [
         "Any profile, package, artifact, export, or active behavior semantics must be chosen or changed.",
         "Any manifest argument-policy or dependency-contract change is required.",
