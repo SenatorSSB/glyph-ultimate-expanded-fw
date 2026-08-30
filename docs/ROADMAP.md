@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-006","GP-VAL-007"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-007"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-006, GP-VAL-007; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-007; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
@@ -44,8 +44,8 @@ identity, base, and dependency correspondence repair and separate structured
 completion publication. `GP-CTL-001` is DONE after machine/prose runway parity
 enforcement. `GP-VAL-003` is DONE after exact health-prose correspondence
 enforcement. `GP-VAL-005` is DONE after exact offline packaging trace
-enforcement and separate completion publication. `GP-PROV-006` and
-`GP-VAL-007` are the ordered READY H0 runway for declared
+enforcement and separate completion publication. `GP-PROV-006` is DONE and
+`GP-VAL-007` is the remaining ordered READY H0 runway for declared
 non-selector provenance, and bounded manifest dependency metadata.
 `GP-PROV-005` is DONE after bounded `glyph_nuker` source-lineage research;
 source lineage, purpose, byte transformation, build recipe, reproducibility,

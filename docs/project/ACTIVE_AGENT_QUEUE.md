@@ -70,12 +70,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -804,7 +804,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-006",
       "title": "Census declared effective non-selector build configuration",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-006-non-selector-config-census-20260830",
       "objective": "Create a deterministic exact-source census of the declared literal non-selector configuration reached by glyph_mk6, including its finite inheritance/reference order, while preserving unresolved runtime interpolation and making no PlatformIO, compiler, or behavior-effect claim.",
       "why_this_matters": "GP-PROV-003 intentionally inventories selectors and excludes build flags, unflags, literal environment settings, non-path nanopb options, and their ordering. No current load-bearing record detects drift in those declared inputs, while complete effective build and reproducibility claims remain unsupported.",
@@ -846,7 +846,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused census if exact source/reference correspondence cannot be enforced without evaluating effects; retain every existing build input and all unresolved dependency/reproducibility claims.",
       "status_documentation_updates": "Record only a declared literal non-selector census and its current validation entry; keep complete configuration, PlatformIO/compiler resolution, reproducibility, artifact acceptance, and hardware explicitly unproved.",
-      "done_evidence": "Pending exact fixture/source correspondence, independent review, adversarial static validation, current aggregate, feature-ref verification, canonical integration, and separate structured completion publication.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"0086b388cd230b65e3b9dee0be2e69600b3ae3a0","reviewed_implementation_sha":"26e3ca148df4de6fb9c10806f97204cc17164f52","prior_canonical_integration_sha":"26e3ca148df4de6fb9c10806f97204cc17164f52","reviewed_changed_paths":["docs/agent_framework/SUBAGENT_CONTRACTS.md","docs/runtime_config/build_input_non_selector_configuration.md","docs/runtime_config/fixtures/build_input_non_selector_configuration.json","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_build_input_non_selector_configuration.py","tools/check_glyph_runtime_config_validation_health.py"],"independent_review_provenance":"Fresh repaired-scope independent reviewer PASS on exact feature tip 26e3ca148df4de6fb9c10806f97204cc17164f52 after prior findings were repaired; source reference expansions, chain_references schema, parser-backed correspondence, non-claims, and manifest/census/health consistency passed.","validation_provenance":"Focused census, checker census, validation health, aggregate adversarial, full runtime-config runner, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed; no build or hardware was required."},
       "stop_conditions": [
         "Any PlatformIO/compiler behavior, macro effect, source selection, build result, or device meaning would be inferred.",
         "Any dependency, cache, workflow, source, flag, board, frequency, filesystem, upload, or build input would be changed or executed.",
@@ -1635,11 +1635,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-006","GP-VAL-007"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-007"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-006, GP-VAL-007; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-007; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -1661,8 +1661,9 @@ implementation ancestry and separate structured completion publication.
 correspondence repair, independent review, canonical integration, and
 structured completion publication. `GP-CTL-001` is `DONE` after exact
 machine/prose runway parity enforcement and separate completion publication.
-`GP-VAL-005`, `GP-PROV-006`, and `GP-VAL-007` are the ordered
-`READY` H0 runway. `GP-VAL-003` is `DONE` after exact reviewed health-prose
+`GP-VAL-007` is the remaining ordered `READY` H0 runway. `GP-PROV-006` is
+`DONE` after exact reviewed implementation ancestry and separate completion
+publication. `GP-VAL-003` is `DONE` after exact reviewed health-prose
 correspondence repair and canonical integration. `GP-PROV-005` is `DONE` after bounded
 source-lineage research; source lineage, purpose, byte transformation, build
 recipe, reproducibility, safety, artifact acceptance, and hardware remain
