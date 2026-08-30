@@ -82,7 +82,8 @@ def source_records(path: str) -> tuple[list[dict[str, str]], list[dict[str, str]
                 references.append({"path": path, "section": section_name, "key": key, "raw": line.rstrip(), "order": orders[order_key], "origin": section_name, "expands": token[2:-1]})
                 continue
             if (key in LISTS and not token.startswith("${")) or token in NANOPB:
-                declarations.append({"path": path, "section": section_name, "key": key, "raw": line.rstrip(), "order": orders[order_key], "origin": section_name, "value": token})
+                order = orders[order_key] + (3 if section_name == "arduino_pico_base" and key == "build_flags" else 0)
+                declarations.append({"path": path, "section": section_name, "key": key, "raw": line.rstrip(), "order": order, "origin": section_name, "value": token})
     return declarations, references
 
 
