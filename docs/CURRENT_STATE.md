@@ -1,6 +1,6 @@
 # Glyph Current State
 
-Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}<!-- current-runway:end -->
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}<!-- current-runway:end -->
 
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
@@ -8,9 +8,9 @@ This is the short current-state entrypoint. Agents should read
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
 <!-- current-runway-summary:start -->
-Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
-**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-VAL-007` is DONE after exact reviewed manifest metadata enforcement and the effective authorized runway is zero; `PLANNING_REQUIRED` is current while packet `glyph-portfolio-20260827-1210` is partially consumed with four non-executable survivors; `GP-VAL-006` remains awaiting later H1 curation, `GP-VAL-008` remains evidence gated, and `GP-ART-001` plus `GP-X1-001` remain user-decision gated; `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` is invalidated and no operator capture is required; `GP-AUTH-001` is resolved by the sole-X1 production-authorized no-op intake; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
+**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-VAL-007` is DONE after exact reviewed manifest metadata enforcement and the effective authorized runway is zero; `CURATION_REQUIRED` is current while packet `glyph-portfolio-20260827-1210` is partially consumed with four non-executable survivors; `GP-VAL-006` remains awaiting later H1 curation, `GP-VAL-008` remains evidence gated, and `GP-ART-001` plus `GP-X1-001` remain user-decision gated; `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` is invalidated and no operator capture is required; `GP-AUTH-001` is resolved by the sole-X1 production-authorized no-op intake; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
 ## Current Known-Good State
 
 - `configurator` contains the latest Y2 layout source-owned port after the
