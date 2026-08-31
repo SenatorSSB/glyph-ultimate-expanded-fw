@@ -19,28 +19,31 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "3e668694f1826ff079b6ecb529d6e3706d8184e7",
+  "audit_base_sha": "30f5e348762eafec8ee2845d9d2c002ef5ebe18f",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
+    "state": "CONSUMED",
     "branch": "planning/portfolio-20260831-1540",
     "base_configurator_sha": "d94eb6d629f9e8e73e893971a3f47c4485cf17ee",
-    "candidate_count": 6,
+    "candidate_count": 5,
     "curator_review_required": false,
     "global_wait_proposed": false,
       "material_events_since_packet": [
       "Curator independently reviewed fresh packet glyph-portfolio-20260831-1540 at commit 896a06c092bfa2f99339c944fceffda957e4478d against live configurator d94eb6d629f9e8e73e893971a3f47c4485cf17ee.",
-      "Direct source and checker inspection confirmed incomplete accepted correspondence under GP-SRC-004, GP-VAL-003, and GP-CTL-001 plus the exact new GP-VAL-009 health-schema gap; all four were authorized as complete independent H0 READY work orders, with GP-SRC-004 now completed and published.",
+      "Direct source and checker inspection confirmed incomplete accepted correspondence under GP-SRC-004, GP-VAL-003, and GP-CTL-001 plus the exact new GP-VAL-009 health-schema gap; all four were authorized as complete independent H0 READY work orders and are now completed and published.",
       "GP-VAL-010 remains plausible reviewed H0 supply but is not authorized in this cycle because the four-item throughput target is met; the GP-PROV-003 repair is substantive-dependency gated pending schema-v2 representation and a GP-PROV-004 preservation/revalidation strategy, while GP-VAL-011 remains dependency and exact-snapshot-design gated.",
       "GP-VAL-008 remains EVIDENCE_GATED, while GP-ART-001 and GP-X1-001 remain USER_DECISION_GATED; none is executable or hardware-pending.",
-      "No global evidence wait is proposed or supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, or hardware state changed in curation."
+      "No global evidence wait is proposed or supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, or hardware state changed in curation.",
+      "The four Ready repairs authorized from this packet are now completed on live configurator 30f5e348762eafec8ee2845d9d2c002ef5ebe18f, reducing effective runway to zero before this follow-up curation.",
+      "Independent current-source and specialist verification confirmed GP-VAL-010 remains the final complete curation-ready survivor: its manifest command vectors are not bound to exact python3, tracked-checker path, and required-argument correspondence, so it is authorized as one H0 READY work order.",
+      "The packet is consumed for further executable supply. GP-PROV-003 repair and GP-VAL-011 remain substantive-dependency gated, GP-VAL-008 remains evidence gated, and GP-ART-001 plus GP-X1-001 remain user-decision gated; a fresh broad Planner audit is requested without treating those gates as a global wait."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260831-1540",
       "planning_commit": "896a06c092bfa2f99339c944fceffda957e4478d",
       "packet_id": "glyph-portfolio-20260831-1540",
       "packet_base_configurator_sha": "d94eb6d629f9e8e73e893971a3f47c4485cf17ee",
-      "curation_branch": "curation/portfolio-20260831-1540-review",
+      "curation_branch": "curation/portfolio-20260831-1540-followup",
       "review_date": "2026-08-31"
     }
   },
@@ -66,17 +69,22 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "CURATION_REQUIRED"
+      "RUNWAY_LOW",
+      "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+      "RUNWAY_SHORTFALL_EVIDENCE_GATED",
+      "RUNWAY_SHORTFALL_USER_DECISION_GATED",
+      "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
+      "PLANNER_REFRESH_REQUIRED"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -86,6 +94,69 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-VAL-010",
+      "title": "Bind manifest commands to tracked checkers",
+      "status": "READY",
+      "branch": "glyph/gp-val-010-manifest-command-correspondence-20260831",
+      "objective": "Make every validation-manifest command an exact execution contract for python3, one normalized stage-0 tracked regular checker path, and the manifest's reviewed required-argument vector before the aggregate can execute it.",
+      "why_this_matters": "The aggregate currently accepts any nonempty string-list command, checks only command[1] against the declared path and filesystem existence, rejects all current nonempty required_arguments, and then executes the command directly. A manifest row can therefore name one checker while selecting another executable, wrapper, argument set, untracked regular-file target, or symlink without a complete fail-closed correspondence check; the existing directory rejection is untested regression behavior rather than a current directory-execution gap.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This strengthens aggregate-runner validation semantics and the exact aggregate-adversarial checker's isolated coverage only. It does not change the applicability, branch policy, semantic behavior, or source dependencies of any other checker executed from the manifest, nor product/runtime behavior, workflow, build input, firmware artifact, device, or controller behavior.",
+      "scope": "Update tools/run_glyph_runtime_config_validation.py so every manifest entry requires path to satisfy the existing normalized tracked_regular_stage_zero policy, required_arguments to be a string list, and command to equal exactly [\"python3\", path, *required_arguments]. Reject malformed command vectors before indexing or execution. Update only tools/check_glyph_runtime_config_validation_aggregate.py isolated temporary-repository adversarial cases for alternate executable, shell/wrapper selection, extra or missing arguments, malformed required_arguments, command/path mismatch, untracked target, executable-mode checker, directory, symlink, absolute/escaping/non-normalized target, and one-element command. Preserve the current manifest schema, all 32 entry records and 37 exclusions, and regenerate only deterministic checker-census/validation-health consequences caused by the two authorized checker-byte changes.",
+      "explicit_excluded_scope": "No PATH-resolved python3 binary identity or trust claim; no interpreter pin, wrapper, shell, timeout, aggregate execution isolation, canonical-worktree mutation detection, manifest entry/exclusion/applicability/branch-policy/source-dependency/load-bearing/reason change, semantic edit to any manifest-executed checker other than the exact authorized aggregate-adversarial coverage, or edit to any file beyond the exact aggregate runner/adversarial/census-health consequence surface, tools/glyph_checker_context.py change, workflow, build, product/runtime source, generator, table, artifact, device, persistence, WebSerial/protobuf write, flashing, hardware, Nunchuk, root-cause, or game-semantic change or claim. GP-VAL-011 aggregate isolation remains separate and non-executable.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator 30f5e348762eafec8ee2845d9d2c002ef5ebe18f. tools/run_glyph_runtime_config_validation.py accepts any nonempty all-string command list, then reads command[1], checks only entry.path equality plus filesystem is_file(), and executes the vector in canonical ROOT; its existing tracked_regular_stage_zero helper is applied to dependencies but not to the checker command target. Current entries incidentally use exactly [python3, path] with empty required_arguments, but tools/check_glyph_runtime_config_validation_aggregate.py has no alternate-executable, wrapper, argument-correspondence, untracked-target, directory, symlink, escaping-target, or one-element-vector adversarial cases. Planner packet glyph-portfolio-20260831-1540 at 896a06c092bfa2f99339c944fceffda957e4478d proposed GP-VAL-010; root and two bounded specialists independently confirmed the gap survives all four preceding repairs and no equivalent current gate exists.",
+      "dependencies_prerequisites": [
+        "Implementation starts from a fresh live-configurator descendant of 30f5e348762eafec8ee2845d9d2c002ef5ebe18f with manifest schema v4, the current 32 entries/37 exclusions, current command vectors, and the aggregate runner/adversarial checker materially unchanged.",
+        "Every current and historical manifest command is mechanically rederived as exactly python3 plus the declared normalized checker path plus required_arguments in recorded order before editing; any noncanonical-argument lane remains excluded rather than silently activated.",
+        "GP-SRC-004, GP-VAL-003, GP-VAL-009, and GP-CTL-001 remain canonically DONE with their reviewed correspondence repairs intact."
+      ],
+      "substantive_authorization_rationale": "The command-correspondence gap is direct and the architecture is fully resolved without product judgment. The manifest already separates path, command, and required_arguments; exact equality to [python3, path, *required_arguments] makes that representation unambiguous, while the existing normalized stage-0 tracked-regular policy prevents filesystem existence from substituting for repository identity. This binds only the declared command vector and explicitly makes no claim about the ambient PATH-resolved python3 executable. No checker applicability, semantic, runtime, external-evidence, or user decision remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The manifest schema, command/required_arguments representation, tracked_regular_stage_zero policy, current checker execution architecture, or aggregate adversarial harness changes materially before implementation.",
+        "Another canonical change supplies equivalent or stronger exact interpreter/path/argument and tracked-checker correspondence first.",
+        "Any current command requires a non-python3 interpreter, wrapper, extra implicit argument, untracked target, symlink, directory, escaping path, or product-semantic interpretation.",
+        "The repair would require aggregate snapshot isolation, timeout policy, environment selection, semantic edits to any manifest-executed checker other than the exact authorized aggregate-adversarial coverage, manifest reclassification, tools/glyph_checker_context.py, workflow, build, product/runtime, artifact, device, or hardware scope."
+      ],
+      "authorization_snapshot_provenance": "Independent follow-up Curator review of candidate GP-VAL-010 from planning/portfolio-20260831-1540 commit 896a06c092bfa2f99339c944fceffda957e4478d, packet base d94eb6d629f9e8e73e893971a3f47c4485cf17ee, rebound after completion of the first four authorized repairs to live configurator 30f5e348762eafec8ee2845d9d2c002ef5ebe18f with root and bounded specialist source/manifest/adversarial verification on curation/portfolio-20260831-1540-followup.",
+      "automated_validation": [
+        "All 32 manifest entries pass only when command equals exactly [python3, path, *required_arguments], required_arguments is a list of strings, and path is one normalized stage-0 tracked regular non-symlink file; malformed vectors fail before indexing or execution.",
+        "Isolated adversarial cases independently reject an alternate executable, shell/wrapper, extra or missing argument, malformed required_arguments, command/path mismatch, one-element command, absolute/escaping/non-normalized target, untracked file, directory, symlink, and executable-mode confusion without executing an unauthorized target.",
+        "A positive isolated case with a reviewed tracked executable-mode Python checker proves Git mode alone is not confused with interpreter selection, while exact current command vectors remain unchanged and pass.",
+        "Manifest schema v4 retains exactly 32 entries and 37 exclusions with byte-identical entry applicability, branch policy, required arguments, mutation risk, source dependencies, load-bearing, historical, and reason fields; only deterministic census/health identities caused by authorized checker bytes may change.",
+        "Focused aggregate adversarial, manifest check, checker census, validation health, full runtime-config aggregate, agent-framework, sequence, navigation, agent-surface, py_compile, and exact diff checks pass with fresh independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 aggregate manifest-command validation and isolated adversarial coverage only; any workflow, build input, generated/compiled source, or runtime delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused runner/adversarial/census-health branch if exact current command correspondence cannot be enforced without semantic edits to any other manifest-executed checker or without manifest classification changes; never restore acceptance of a command that can select a different executable, target, or argument vector than the reviewed manifest fields.",
+      "status_documentation_updates": "Record GP-VAL-010 as Done only after exact reviewed integration and separate structured completion publication. Retain GP-VAL-011 as separately dependency/design gated and every runtime, product, artifact, and hardware non-claim.",
+      "done_evidence": "Not complete; no implementation, review, integration, or publication evidence exists yet for GP-VAL-010.",
+      "stop_conditions": [
+        "Any manifest command can select an executable, checker target, or argument vector different from the exact reviewed interpreter/path/required_arguments fields.",
+        "Any untracked, directory, symlink, escaping, malformed, or unauthorized target can reach execution.",
+        "Any semantic behavior change to a manifest-executed checker other than the exact authorized aggregate-adversarial coverage, applicability, branch policy, source dependency, load-bearing classification, aggregate isolation/timeout architecture, file outside the exact authorized aggregate runner/adversarial/census-health consequence surface, workflow, build, product/runtime source, generator, artifact, device, persistence, WebSerial/protobuf write, flashing, hardware, Nunchuk, root-cause, or game-semantic scope appears."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-VAL-006",
       "title": "Isolate candidate-preparation safety validation",
@@ -1787,11 +1858,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-010"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-VAL-010; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -1799,11 +1870,13 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Fresh packet `glyph-portfolio-20260831-1540` is partially consumed after
-independent curation. The remaining packet supply has explicit dependency,
-evidence, or user-decision dispositions and does not support a portfolio-global
-evidence wait. Historical Done items remain canonical evidence but do not
-authorize implementation.
+Packet `glyph-portfolio-20260831-1540` is consumed for further executable
+supply after independent follow-up curation authorized `GP-VAL-010` as the
+sole Ready item. The remaining packet survivors have explicit substantive,
+evidence, or user-decision gates and do not support a portfolio-global evidence
+wait. Historical Done items remain canonical evidence but do not authorize
+implementation. Fresh Planner supply is requested to restore the recorded
+four-item target after this one-item runway is used.
 
 ## Allowed Statuses
 
@@ -1841,9 +1914,12 @@ Planner packet `glyph-portfolio-20260831-1540` at
 `896a06c092bfa2f99339c944fceffda957e4478d` was independently reviewed
 against exact live `configurator`
 `d94eb6d629f9e8e73e893971a3f47c4485cf17ee`. It is
-`PARTIALLY_CONSUMED`; Curator accepted enough complete independent supply to
-meet the recorded throughput-aware target without treating that target as a
-quota.
+`CONSUMED` for further executable supply. The first four authorized repairs are
+now Done, and follow-up review against exact live `configurator`
+`30f5e348762eafec8ee2845d9d2c002ef5ebe18f` authorized the final complete
+curation-ready survivor as one H0 Ready item. Effective runway is one against
+target four, so fresh Planner supply is requested without treating the target
+as a quota.
 
 - `GP-SRC-004`: completed H0 same-identity repair; it binds the active generated
   baseline manifest row to active compile-time table content with unchanged
@@ -1852,12 +1928,12 @@ quota.
   top-level/nested workflows while retaining unresolved external routes.
 - `GP-VAL-009`: completed H0 repair; health schema v3 removes the obsolete duplicate
   exclusion list and enforces exact source-correspondent structure.
-- `GP-CTL-001`: selected H0 same-identity repair; remove redundant unguarded
-  current runway/priority/count claims and preserve machine-derived summaries
-  as sole current truth.
-- `GP-VAL-010`: `CURATION_READY_NOT_AUTHORIZED`; the command-correspondence
-  gap is verified and its exact `python3`/tracked-checker contract is plausible,
-  but it remains fresh non-executable packet supply.
+- `GP-CTL-001`: completed H0 same-identity repair; machine-derived summaries
+  are the sole current runway truth and redundant unguarded claims are rejected.
+- `GP-VAL-010`: authorized complete H0 command-correspondence work order;
+  exact `python3`/normalized stage-0 tracked regular checker path/required-
+  argument correspondence and isolated adversarial coverage are fully bound
+  without claiming ambient interpreter identity.
 - `GP-PROV-003` repair: `SUBSTANTIVE_DEPENDENCY_GATED`; the documented local
   build wrappers are omitted, but schema-v2 representation and GP-PROV-004
   observation-correspondence preservation/revalidation must be bound first.
