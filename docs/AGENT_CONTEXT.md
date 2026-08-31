@@ -64,21 +64,22 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-010"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-VAL-010; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
-  `docs/project/ACTIVE_AGENT_QUEUE.md`. Fresh live-verified Planner packet
-  `glyph-portfolio-20260831-1540` is partially consumed after independent
-  curation. The current-runway summary above is the authoritative executable
-  order and liveness state. The packet retains reviewed non-executable supply,
-  including one dependency/design-gated aggregate-isolation successor, one
-  evidence-gated runtime-regression research item, and two user-decision-gated
-  survivors. It does not support a portfolio-global evidence wait.
+  `docs/project/ACTIVE_AGENT_QUEUE.md`. Live-verified Planner packet
+  `glyph-portfolio-20260831-1540` is consumed for further executable supply
+  after follow-up curation authorized `GP-VAL-010` as the sole Ready H0 item.
+  The current-runway summary above is the authoritative executable order and
+  liveness state. The packet retains non-executable substantive-dependency,
+  evidence, and user-decision survivors, but it does not support a portfolio-
+  global evidence wait. Fresh Planner supply is requested to restore the
+  four-item target.
   Completed implementation history remains in the canonical queue. Bounded
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
