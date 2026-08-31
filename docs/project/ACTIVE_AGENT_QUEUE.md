@@ -1800,12 +1800,10 @@ Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
 Fresh packet `glyph-portfolio-20260831-1540` is partially consumed after
-independent curation. Four bounded H0 correspondence repairs are authorized in
-the array priority order above. No Preauthorization, invalidated
-Preauthorization, or hardware-pending work exists. Remaining packet supply has
-explicit dependency, evidence, or user-decision dispositions and does not
-support a portfolio-global evidence wait. Historical Done items remain
-canonical evidence but do not authorize implementation.
+independent curation. The remaining packet supply has explicit dependency,
+evidence, or user-decision dispositions and does not support a portfolio-global
+evidence wait. Historical Done items remain canonical evidence but do not
+authorize implementation.
 
 ## Allowed Statuses
 
@@ -1847,19 +1845,19 @@ against exact live `configurator`
 meet the recorded throughput-aware target without treating that target as a
 quota.
 
-- `GP-SRC-004`: `READY` H0 same-identity repair; bind the active generated
+- `GP-SRC-004`: completed H0 same-identity repair; it binds the active generated
   baseline manifest row to active compile-time table content with unchanged
   source-owned active-view publication.
-- `GP-VAL-003`: `READY` H0 same-identity repair; census all three tracked
+- `GP-VAL-003`: completed H0 same-identity repair; it censuses all three tracked
   top-level/nested workflows while retaining unresolved external routes.
-- `GP-VAL-009`: `READY` H0; health schema v3 removes the obsolete duplicate
+- `GP-VAL-009`: completed H0 repair; health schema v3 removes the obsolete duplicate
   exclusion list and enforces exact source-correspondent structure.
-- `GP-CTL-001`: `READY` H0 same-identity repair; remove redundant unguarded
+- `GP-CTL-001`: selected H0 same-identity repair; remove redundant unguarded
   current runway/priority/count claims and preserve machine-derived summaries
   as sole current truth.
 - `GP-VAL-010`: `CURATION_READY_NOT_AUTHORIZED`; the command-correspondence
   gap is verified and its exact `python3`/tracked-checker contract is plausible,
-  but current runway already meets target and it remains fresh packet supply.
+  but it remains fresh non-executable packet supply.
 - `GP-PROV-003` repair: `SUBSTANTIVE_DEPENDENCY_GATED`; the documented local
   build wrappers are omitted, but schema-v2 representation and GP-PROV-004
   observation-correspondence preservation/revalidation must be bound first.
@@ -1878,7 +1876,8 @@ quota.
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
-priority order. Only items marked `READY` authorize immediate execution.
+canonical work-order ordering. Only items marked `READY` authorize immediate
+execution.
 The one-new-work-order-per-Implementation-cycle rule still applies. Remaining
 Planner survivors are non-executable under the dispositions above.
 

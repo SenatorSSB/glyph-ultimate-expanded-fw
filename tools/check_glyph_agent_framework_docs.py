@@ -280,6 +280,75 @@ CURRENT_RUNWAY_SUMMARY_FIELDS = (
     "Primary liveness",
 )
 
+CURRENT_PROSE_MIRROR_PATTERNS = (
+    re.compile(r"(?im)^\s*(?:[-*]\s*)?(?:Ready IDs|Immediate Ready|Recorded Preauthorized|"
+               r"Mechanically activatable Preauthorized|Invalidated Preauthorized|"
+               r"Hardware-pending|Effective authorized runway|Target effective authorized runway|"
+               r"Primary liveness):"),
+    re.compile(r"(?im)\b(?:current|canonical|effective|actual)\s+(?:executable\s+)?"
+               r"(?:runway|liveness)\s*(?:is|=|of|:)\s*(?:\d+|RUNWAY_[A-Z_]+|"
+               r"PLANNING_REQUIRED|CURATION_REQUIRED)\b"),
+    re.compile(r"(?im)\b\d+\s+(?:current\s+)?(?:load-bearing\s+)?"
+               r"(?:validation\s+)?(?:checks?|entries?)\b"),
+    re.compile(r"(?im)^\s*[-*]\s*`?[A-Z][A-Z0-9-]+`?\s*:\s*`?READY\b|"
+               r"\bGP-[A-Z0-9-]+\s+(?:is|remains|currently)\s+READY\b|"
+               r"\bCurrent\s+(?:status|state|Ready ID)\s*:\s*(?:GP-[A-Z0-9-]+|READY)\b"),
+    re.compile(r"(?im)\b(?:current|executable|selected|next|highest)\s+"
+               r"(?:work-order\s+)?priority(?:\s+order)?\b"),
+)
+
+
+def current_prose_without_authoritative_blocks(text: str) -> str:
+    text = re.sub(
+        r"<!-- current-runway:start -->.*?<!-- current-runway:end -->",
+        "",
+        text,
+        flags=re.DOTALL,
+    )
+    text = re.sub(
+        r"<!-- current-runway-summary:start -->.*?<!-- current-runway-summary:end -->",
+        "",
+        text,
+        flags=re.DOTALL,
+    )
+    text = re.sub(
+        r"<!-- queue-state:start -->.*?<!-- queue-state:end -->",
+        "",
+        text,
+        flags=re.DOTALL,
+    )
+    return text
+
+
+def check_current_prose_mirrors() -> None:
+    for rel_path in CURRENT_RUNWAY_MIRRORS:
+        prose = current_prose_without_authoritative_blocks(read_required(rel_path))
+        for pattern in CURRENT_PROSE_MIRROR_PATTERNS:
+            match = pattern.search(prose)
+            if match:
+                fail(
+                    f"{rel_path} contains an unguarded current runway/prose claim: "
+                    f"{match.group(0).strip()}"
+                )
+
+    fixtures = (
+        "- GP-SYNTHETIC: READY stale current claim",
+        "GP-SYNTHETIC is READY.",
+        "Current status: READY.",
+        "Current Ready ID: GP-SYNTHETIC.",
+        "Current executable runway is 2.",
+        "Primary liveness: RUNWAY_LOW",
+        "The current validation has 31 checks.",
+        "The current executable priority is GP-SYNTHETIC.",
+    )
+    for rel_path in CURRENT_RUNWAY_MIRRORS:
+        base = current_prose_without_authoritative_blocks(read_required(rel_path))
+        for fixture in fixtures:
+            mutated = base + "\n" + fixture + "\n"
+            if not any(pattern.search(mutated) for pattern in CURRENT_PROSE_MIRROR_PATTERNS):
+                fail(f"current-prose adversarial fixture was accepted for {rel_path}: {fixture}")
+    pass_line("current prose contains no duplicated unguarded runway claims")
+
 COMPLETION_POLICY_FIELDS = ("migration_base_configurator_sha", "legacy_done_ids")
 COMPLETION_EVIDENCE_FIELDS = {
     "schema_name",
@@ -1455,6 +1524,7 @@ def check_queue_contract() -> None:
         runway=runway,
         expected_liveness=expected_liveness,
     )
+    check_current_prose_mirrors()
 
     adversarial_cases = (
         (0, 4, "CONSUMED", True, False, False, False, False, "PLANNING_REQUIRED"),
