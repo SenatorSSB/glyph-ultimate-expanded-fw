@@ -1,6 +1,6 @@
 # Glyph Current State
 
-Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}<!-- current-runway:end -->
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-SRC-004","GP-VAL-003","GP-VAL-009","GP-CTL-001"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}<!-- current-runway:end -->
 
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
@@ -8,14 +8,13 @@ This is the short current-state entrypoint. Agents should read
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-SRC-004, GP-VAL-003, GP-VAL-009, GP-CTL-001; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
-**Current Agentic Operating State:** `docs/project/ACTIVE_AGENT_QUEUE.md` is canonical; `GP-VAL-006` is the sole Ready H1 work order after exact branch-correspondence and standalone-temporary-repository safety curation, so effective authorized runway is one and `RUNWAY_LOW` is current; packet `glyph-portfolio-20260827-1210` is consumed for further executable supply and a fresh broad Planner audit is requested; `GP-VAL-008` remains evidence gated, and `GP-ART-001` plus `GP-X1-001` remain user-decision gated; current validation is manifest v4 with 32 entries and 27 load-bearing checks before GP-VAL-006 implementation; `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` is invalidated and no operator capture is required; `GP-AUTH-001` is resolved by the sole-X1 production-authorized no-op intake; older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; no hardware wait or product/runtime claim is implied.
+**Current Agentic Operating State:** the machine-derived summary above and `docs/project/ACTIVE_AGENT_QUEUE.md` are canonical. Fresh packet `glyph-portfolio-20260831-1540` is partially consumed after independent curation; remaining survivors retain their recorded evidence, dependency, or user-decision gates and do not establish a global wait. Authorization policy, including `PLANNING_REQUIRED`, is defined by the agent framework rather than this prose. `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` remains invalidated; the older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; and the sole-X1 no-op intake remains the complete current production authority. No hardware wait or product/runtime claim is implied.
 ## Current Known-Good State
 
-`PLANNING_REQUIRED` is not the current liveness state because `GP-VAL-006` is
-Ready; a Planner refresh is nevertheless requested to restore runway after its
-consumed packet supplied no other executable survivor.
+Use the current-runway summary above for current authorization and liveness;
+historical completion prose below does not authorize implementation.
 
 - `configurator` contains the latest Y2 layout source-owned port after the
   recorded source-owned Y2 layout HARDWARE_PASS.
