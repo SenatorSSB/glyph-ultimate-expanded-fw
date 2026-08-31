@@ -73,17 +73,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_LOW",
+      "CURATION_REQUIRED",
       "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
       "RUNWAY_SHORTFALL_EVIDENCE_GATED",
       "RUNWAY_SHORTFALL_USER_DECISION_GATED",
@@ -100,7 +100,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-006",
       "title": "Isolate candidate-preparation safety validation",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-006-isolated-candidate-safety-20260831",
       "objective": "Make candidate-preparation branch, target, scope, dirty-tree, and dry-run refusal behavior current and load-bearing without allowing any checker subprocess to mutate or depend on the canonical worktree.",
       "why_this_matters": "The existing candidate-generation checker is excluded as unsafe and currently fails on configurator because it asks the tool to record a synthetic candidate branch while every subprocess still runs in the real repository. The real configurator branch guard therefore preempts the intended active-table-source refusal, and the write-capable tool does not require the requested candidate branch to equal the checked-out branch on non-configurator worktrees.",
@@ -144,8 +144,18 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host-tool/checker/metadata branch if valid dry-run coverage regresses or canonical non-mutation cannot be proved; keep candidate_generation excluded rather than making an unsafe or context-dependent checker load-bearing.",
-      "status_documentation_updates": "Record GP-VAL-006 as the sole Ready item, the packet as consumed for executable supply, the remaining evidence/user gates, and the 1/4 runway plus Planner refresh need without creating a product, candidate, artifact, or hardware claim.",
-      "done_evidence": "Not yet implemented; completion requires exact reviewed implementation/integration correspondence and the validation evidence specified by this work order.",
+      "status_documentation_updates": "Record GP-VAL-006 as Done after exact reviewed integration; retain the remaining evidence/user gates and zero effective runway without creating a product, candidate, artifact, or hardware claim.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "f8610327da8283c914c0e9b478276e67aea0f4bb",
+        "reviewed_implementation_sha": "9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db",
+        "prior_canonical_integration_sha": "f72bff6fd752f6b3643557743058b3a40888c8d8",
+        "reviewed_changed_paths": ["docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_health.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "docs/runtime_config/runtime_config_validation_health.md", "tools/check_glyph_source_owned_candidate_generation.py", "tools/prepare_source_owned_candidate_branch.py"],
+        "independent_review_provenance": "Fresh independent reviewer PASS after exact-byte isolation repair; focused, full aggregate, census, health, framework, navigation, agent-surface, syntax, and diff gates passed.",
+        "validation_provenance": "Exact feature snapshot 9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db validated before direct-ancestry integration f72bff6fd752f6b3643557743058b3a40888c8d8."
+      },
       "stop_conditions": [
         "Any checker subprocess or attempted write uses the canonical repository as its Git or write context.",
         "Any requested/current branch mismatch, active target, unrelated target, dirty tree, or unsafe source-authority case can reach mutation or pass for the wrong reason.",
@@ -1709,11 +1719,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-006"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-006; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -1746,8 +1756,9 @@ recipe, reproducibility, safety, artifact acceptance, and hardware remain
 No invalidated Preauthorization or hardware-pending work exists.
 The current-runway summary above is authoritative for the human-readable
 runway state.
-`GP-VAL-006` is the sole ordered `READY` H1 work order after exact current-gap,
-branch-correspondence, and standalone-temporary-repository safety curation.
+`GP-VAL-006` is DONE after exact reviewed branch-correspondence and
+standalone-temporary-repository safety validation; no executable Ready item
+remains.
 `GP-AUTH-001` is resolved by the baseline-equivalent sole-X1 production intake;
 `GP-CONFIG-002` is invalidated by user direction. Remaining non-executable
 Planner survivors are `GP-VAL-008`, `GP-ART-001`, and `GP-X1-001`; none
@@ -1813,12 +1824,10 @@ Historical Done items not named below remain Done.
   into authority.
 - `GP-VAL-005`: `DONE`; the existing no-argument coordinate-native checker now
   runs all three advertised offline packaging validators with an exact trace.
-- `GP-VAL-006`: `READY`; independent current verification confirms the checker
-  still fails because canonical branch context preempts the active-target
-  refusal. Its complete H1 order requires exact checked-out/requested branch
-  equality and a fresh copied standalone temporary Git repository for every
-  subprocess, then reclassifies the existing manifest-v4 row in place as the
-  28th current load-bearing check.
+- `GP-VAL-006`: `DONE`; exact checked-out/requested branch equality, isolated
+  standalone temporary repositories, canonical immutability snapshots, and
+  the existing manifest-v4 row's 28th current load-bearing classification are
+  reviewed and canonically integrated.
 - `GP-PROV-006`: `DONE`; its exact two-source, finite-key, literal-only census
   preserves runtime interpolation and PlatformIO/compiler effects as unresolved.
 - `GP-VAL-007`: `DONE`; manifest v4 now enforces its bounded normalized tracked-
@@ -1837,8 +1846,8 @@ Historical Done items not named below remain Done.
 
 The complete machine-readable work orders above are canonical. Array order is
 priority order. Only items marked `READY` authorize immediate execution.
-`GP-VAL-006` is the sole Ready work order; the one-new-work-order-per-
-Implementation-cycle rule still applies. Remaining Planner survivors are
+No Ready work order remains; the one-new-work-order-per-Implementation-cycle
+rule still applies. Remaining Planner survivors are
 non-executable under the dispositions above.
 
 Every future item recorded in the machine-readable `items` list must satisfy
