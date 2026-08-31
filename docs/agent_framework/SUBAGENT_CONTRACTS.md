@@ -228,6 +228,32 @@ This is per-run audit evidence, not canonical queue telemetry.
 
 ## Generic Handoff Template
 
+## Implementation Supervisor cycle — GP-VAL-003 (2026-08-31)
+
+- guidance applicable: yes; GP-VAL-003 is a complete H0 READY work order and
+  repository mutation requires bounded delegation plus fresh independent review.
+- capability discovery: complete available runtime tool catalog inspected;
+  native internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: bounded read-only source/contract specialist; inspect tracked
+  workflow discovery, route extraction, fixture correspondence, health prose,
+  manifest dependencies, and exact scope/exclusions; no edits or canonical
+  mutation.
+- reviewer: fresh independent validator reviewer after implementation; inspect
+  the exact diff and run focused route-census, aggregate, census, health,
+  framework, navigation, agent-surface, syntax, and diff gates.
+- allowed specialist files: publication workflow checker, workflow-census
+  fixture, runtime-config health/manifest/census metadata, and directly
+  relevant contracts.
+- forbidden specialist actions: edits, commits, pushes, workflow execution,
+  build/artifact/device actions, dependency or network resolution, or authority
+  inference about external callers/owners.
+- stop conditions: workflow bytes or classifications drift, external authority
+  is inferred, manifest applicability changes, scope expands, or firmware/
+  runtime behavior is implicated.
+- return format: findings first; exact contract matches/gaps; recommended
+  bounded next action.
+
 ## Implementation Supervisor cycle — GP-PROV-006 recovery (2026-08-30)
 
 - guidance applicable: yes; GP-PROV-006 is a complete H0 READY work order and

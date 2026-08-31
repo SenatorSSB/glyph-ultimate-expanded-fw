@@ -5,32 +5,81 @@
     {
       "path": ".github/workflows/build-device-config.yml",
       "sha256": "abf612c3f27e9884ad600b1c1b3cd1a864fae45c22c24aa7b2508c8ad98df5a5",
-      "events": ["workflow_call"],
+      "events": [
+        "workflow_call"
+      ],
       "classification": "UNRESOLVED_EXTERNAL",
       "gate": null,
       "publication_routes": [
-        {"job": "build", "mechanism": "action", "token": "actions/upload-artifact@v4"},
-        {"job": "build", "mechanism": "action", "token": "softprops/action-gh-release@v1"},
-        {"job": "build", "mechanism": "shell", "token": "pio run -e"}
+        {
+          "job": "build",
+          "mechanism": "action",
+          "token": "actions/upload-artifact@v4"
+        },
+        {
+          "job": "build",
+          "mechanism": "action",
+          "token": "softprops/action-gh-release@v1"
+        },
+        {
+          "job": "build",
+          "mechanism": "shell",
+          "token": "pio run -e"
+        }
       ]
     },
     {
       "path": ".github/workflows/build.yml",
       "sha256": "b2da4ecddd42443fa0d19c56b55dfd2df0ee91bd513258983f0887f2ff7ef638",
-      "events": ["push", "pull_request"],
+      "events": [
+        "push",
+        "pull_request"
+      ],
       "classification": "CURRENT_GATED",
       "gate": "validation",
       "publication_routes": [
-        {"job": "build", "mechanism": "action", "token": "actions/upload-artifact@v4"},
-        {"job": "build", "mechanism": "shell", "token": "glyph_nuker"},
-        {"job": "build", "mechanism": "shell", "token": "pio run -e"}
+        {
+          "job": "build",
+          "mechanism": "action",
+          "token": "actions/upload-artifact@v4"
+        },
+        {
+          "job": "build",
+          "mechanism": "shell",
+          "token": "glyph_nuker"
+        },
+        {
+          "job": "build",
+          "mechanism": "shell",
+          "token": "pio run -e"
+        }
+      ]
+    },
+    {
+      "path": "config/glyph/.github/workflows/build.yml",
+      "sha256": "85e134a6b98e377db510c468e50a41446c4b62ec486728e1da880f04e531c4a7",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "classification": "UNRESOLVED_EXTERNAL",
+      "gate": null,
+      "publication_routes": [
+        {
+          "job": "build",
+          "mechanism": "reusable_workflow",
+          "token": "GregTurbo/HayBox-Glyph/.github/workflows/build-device-config.yml@configurator"
+        }
       ]
     }
   ],
   "workflow": ".github/workflows/build.yml",
   "validation_job": "validation",
   "publication_job": "build",
-  "required_events": ["push:", "pull_request:"],
+  "required_events": [
+    "push:",
+    "pull_request:"
+  ],
   "required_tokens": [
     "permissions:\n  contents: read",
     "fetch-depth: 0",
@@ -46,12 +95,40 @@
     "actions/upload-artifact@v4"
   ],
   "negative_mutations": [
-    {"id": "missing_pull_request", "old": "  pull_request:\n", "new": ""},
-    {"id": "wrong_validation_command", "old": "python3 tools/run_glyph_runtime_config_validation.py --json", "new": "python3 tools/run_glyph_runtime_config_validation.py --check-manifest"},
-    {"id": "shallow_checkout", "old": "fetch-depth: 0", "new": "fetch-depth: 1"},
-    {"id": "write_permission", "old": "contents: read", "new": "contents: write"},
-    {"id": "missing_dependency", "old": "    needs: validation\n", "new": ""},
-    {"id": "continue_on_error", "old": "  build:\n", "new": "  build:\n    continue-on-error: true\n"},
-    {"id": "alternate_unguarded_publication", "old": "  build:\n", "new": "  publish:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/upload-artifact@v4\n      with:\n        path: firmware.uf2\n\n  build:\n"}
+    {
+      "id": "missing_pull_request",
+      "old": "  pull_request:\n",
+      "new": ""
+    },
+    {
+      "id": "wrong_validation_command",
+      "old": "python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "python3 tools/run_glyph_runtime_config_validation.py --check-manifest"
+    },
+    {
+      "id": "shallow_checkout",
+      "old": "fetch-depth: 0",
+      "new": "fetch-depth: 1"
+    },
+    {
+      "id": "write_permission",
+      "old": "contents: read",
+      "new": "contents: write"
+    },
+    {
+      "id": "missing_dependency",
+      "old": "    needs: validation\n",
+      "new": ""
+    },
+    {
+      "id": "continue_on_error",
+      "old": "  build:\n",
+      "new": "  build:\n    continue-on-error: true\n"
+    },
+    {
+      "id": "alternate_unguarded_publication",
+      "old": "  build:\n",
+      "new": "  publish:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/upload-artifact@v4\n      with:\n        path: firmware.uf2\n\n  build:\n"
+    }
   ]
 }

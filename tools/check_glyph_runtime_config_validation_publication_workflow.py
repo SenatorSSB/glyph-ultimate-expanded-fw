@@ -26,7 +26,7 @@ def load_fixture() -> dict[str, object]:
 
 def tracked_workflows() -> list[str]:
     completed = subprocess.run(
-        ["git", "ls-files", ".github/workflows"],
+        ["git", "ls-files"],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -37,6 +37,7 @@ def tracked_workflows() -> list[str]:
     return sorted(
         path for path in completed.stdout.splitlines()
         if path.endswith((".yml", ".yaml"))
+        and (path.startswith(".github/workflows/") or "/.github/workflows/" in path)
     )
 
 
@@ -48,7 +49,9 @@ def publication_routes(text: str) -> list[dict[str, str]]:
         if "glyph_nuker" in body:
             routes.append({"job": job, "mechanism": "shell", "token": "glyph_nuker"})
         for action in re.findall(r"(?m)^\s*(?:-\s*)?uses:\s*([^\s]+)", body):
-            if "upload-artifact" in action or "action-gh-release" in action:
+            if "/.github/workflows/" in action:
+                routes.append({"job": job, "mechanism": "reusable_workflow", "token": action})
+            elif "upload-artifact" in action or "action-gh-release" in action:
                 routes.append({"job": job, "mechanism": "action", "token": action})
     return sorted(routes, key=lambda item: (item["job"], item["mechanism"], item["token"]))
 
@@ -71,10 +74,12 @@ def validate_route_census(fixture: dict[str, object]) -> None:
         if hashlib.sha256(raw).hexdigest() != item["sha256"]:
             raise WorkflowError(f"workflow hash drift: {relative}")
         text = raw.decode("utf-8")
-        events = [
-            event for event in ("push", "pull_request", "workflow_call")
-            if re.search(rf"(?m)^\s*{event}:\s*$", text)
-        ]
+        events = []
+        for event in ("push", "pull_request", "workflow_call"):
+            if re.search(rf"(?m)^\s*{event}:\s*$", text) or re.search(
+                rf"(?m)^\s*on:\s*\[[^\]]*\b{event}\b[^\]]*\]", text
+            ):
+                events.append(event)
         if events != item["events"]:
             raise WorkflowError(f"workflow trigger drift: {relative}")
         if publication_routes(text) != item["publication_routes"]:

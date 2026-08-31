@@ -55,9 +55,10 @@ standalone temporary repositories for this offline validation lane. Historical a
 explicit curated records; they are not counted as current aggregate passes.
 
 The curated manifest now has 32 explicit entries, including 28 current
-load-bearing checks. The tracked CI publication-route census records both
-workflow files: `build.yml` is `CURRENT_GATED`, while
-`build-device-config.yml` is `UNRESOLVED_EXTERNAL` because its caller,
+load-bearing checks. The tracked CI publication-route census records all three
+tracked workflow files: top-level `build.yml` is `CURRENT_GATED`, while
+`build-device-config.yml` and nested `config/glyph/.github/workflows/build.yml`
+are `UNRESOLVED_EXTERNAL` because their caller,
 ownership, PAT, `meta.yaml`, and release authority are not established. The
 prepared-v2 C++ preview checker is current and load-bearing because it
 validates the inactive authority-preserving preview
