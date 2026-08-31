@@ -1,16 +1,18 @@
 # Runtime-config validation health
 
-This health record has two explicit layers. The repository-wide layer is the
+This schema-v3 health record has two explicit layers. The repository-wide layer is the
 mechanical checker census at `fixtures/glyph_checker_census.json`; it discovers
 every `tools/check_glyph_*.py` path without executing or behaviorally auditing
 those checkers. Its count is derived from discovery, not treated as a permanent
 constant. The curated layer is
 `fixtures/runtime_config_validation_manifest.json`, which records only the
 current runtime-config dependency graph and its explicit historical,
-evidentiary, and unsafe exclusions.
+evidentiary, and unsafe exclusions. The manifest remains the sole authority
+for the strong-signal exclusion list; the obsolete duplicate health-level list
+was removed in schema v3.
 
 This corrects the earlier single-level inventory scope. The prior records are
-preserved as current-result, historical-evidence, and exclusion records below;
+preserved as current-result and historical-evidence records below;
 they are not evidence that every repository checker received a manual semantic
 assessment. The controlled starting baseline remains
 `116d34322837fe1f6f724c820b49ccb0d24d6787`.

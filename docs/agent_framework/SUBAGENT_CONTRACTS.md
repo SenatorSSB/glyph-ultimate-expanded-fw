@@ -315,3 +315,27 @@ stop_conditions:
 return_format:
 tool_budget:
 ```
+
+## Implementation Supervisor cycle — GP-VAL-009 (2026-08-31)
+
+- guidance applicable: yes; GP-VAL-009 is a complete H0 READY work order and
+  repository mutation requires bounded delegation plus fresh independent review.
+- capability discovery: complete available runtime capability catalog inspected;
+  native internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: bounded read-only schema/contract specialist; inspect the health
+  fixture, checker, manifest/census correspondence, exact schema-v3 invariants,
+  and focused validation; no edits, commits, pushes, builds, or network.
+- reviewer: fresh independent validator reviewer after implementation; inspect
+  the exact diff and run focused health, census, manifest, aggregate, full
+  current-lane, framework, navigation, agent-surface, compile, and diff gates.
+- allowed specialist files: GP-VAL-009 health checker, health fixture/docs,
+  manifest/census fixtures, aggregate checker, and directly relevant contracts.
+- forbidden specialist actions: repository mutation, discovered-checker
+  execution outside authorized validation, dependency/network resolution,
+  firmware/runtime/product claims, build, hardware, or publication.
+- stop conditions: duplicate exclusion authority accepted, incomplete exact
+  schema/correspondence, manifest/census drift, scope expansion, or any active
+  behavior change.
+- return format: findings first; exact contract matches/gaps; validation
+  results; residual risks and bounded next action.

@@ -10279,24 +10279,34 @@
       },
       "checker_id": "runtime_config_validation_health",
       "defines_main": true,
-      "file_size_bytes": 5953,
+      "file_size_bytes": 15499,
       "hard_coded_branch_like_strings": [
+        ".feature_branch",
+        ".feature_branch.result",
+        "check_glyph_reconstructed_source_authority_evidence.py",
         "configurator",
+        "evidence",
         "feature_branch",
-        "historical_evidence"
+        "historical_evidence",
+        "latest_y2_hardware_evidence"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 124,
+      "line_count": 204,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_health.py",
       "potential_branch_identity_signals": [
+        ".feature_branch",
+        ".feature_branch.result",
+        "check_glyph_reconstructed_source_authority_evidence.py",
         "configurator",
+        "evidence",
         "feature_branch",
-        "historical_evidence"
+        "historical_evidence",
+        "latest_y2_hardware_evidence"
       ],
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_runtime_config_validation_health",
@@ -10306,22 +10316,30 @@
         "docs/runtime_config/fixtures/runtime_config_validation_health.json",
         "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
         "docs/runtime_config/runtime_config_validation_health.md",
-        "tools/check_glyph_checker_census.py"
+        "tools/check_glyph_checker_census.py",
+        "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
+        "tools/check_glyph_identity_runtime_table_source_sync.py",
+        "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+        "tools/check_glyph_reconstructed_source_authority_evidence.py",
+        "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
+        "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
+        "tools/check_glyph_wrong.py"
       ],
       "runtime_config_relevance_signals": [
+        "current_y2_layout",
         "runtime_config_docs"
       ],
-      "sha256": "cdb85fcd0022e414202d8821b006987191820a480bbbe78c46d17fa298daecc5",
+      "sha256": "769d3659bc18351dd44011107cd442463b386a2625d318a42d6587b5147737b4",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
         "coordinate_native": false,
         "docs_navigation": true,
         "generated_source_owned_artifacts": false,
-        "hardware_results": false,
+        "hardware_results": true,
         "identity_runtime_tables": false,
         "runtime_config": true,
-        "source_owned": false,
+        "source_owned": true,
         "y2_tilt3": false
       }
     },

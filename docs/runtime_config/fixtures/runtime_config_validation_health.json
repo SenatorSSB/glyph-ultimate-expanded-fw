@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "starting_commit": "116d34322837fe1f6f724c820b49ccb0d24d6787",
   "canonical_baseline": {
     "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
@@ -27,7 +27,6 @@
     {"id":"identity_table_source_sync","path":"tools/check_glyph_identity_runtime_table_source_sync.py","classification":"repaired_current_load_bearing_source_sync_checker","starting_configurator":{"exit_code":1,"error":"stale 27-table interpreter bridge fixture"},"feature_branch":{"result":"PASS"}},
     {"id":"runtime_semantics_evaluator_bridge","path":"tools/check_glyph_runtime_config_semantics_evaluator_bridge.py","classification":"repaired_current_load_bearing_evaluator_bridge_checker","starting_configurator":{"exit_code":1,"error":"stale Ultimate.cpp SHA and 27-table bridge lineage"},"feature_branch":{"result":"PASS"}}
   ],
-  "strong_signal_exclusions": [],
   "known_preexisting_failures": [
     {"id":"identity_table_source_sync","result":"PRE_EXISTING_FIXTURE_DRIFT","starting_configurator_exit_code":1},
     {"id":"runtime_semantics_evaluator_bridge","result":"PRE_EXISTING_FIXTURE_DRIFT","starting_configurator_exit_code":1}
