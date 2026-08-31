@@ -66,12 +66,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -756,7 +756,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-003",
       "title": "Census every CI publication route and claim",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-003-tracked-workflow-census-repair-20260831",
       "objective": "Complete the accepted GP-VAL-003 route-census objective by discovering and classifying every tracked top-level or nested GitHub workflow that builds, publishes, releases, or invokes another build workflow while preserving exact current health correspondence.",
       "why_this_matters": "Git tracks three workflow files, including config/glyph/.github/workflows/build.yml, but the load-bearing census discovers only .github/workflows and records two workflows. The omitted nested caller runs on push/pull_request and invokes a moving external reusable workflow while current health prose still calls the two-file census complete and all checks pass.",
@@ -800,7 +800,17 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused route-census repair if every tracked workflow cannot be represented without external-authority inference; preserve current validation dominance and unresolved classifications rather than hiding the nested route.",
       "status_documentation_updates": "Record GP-VAL-003 as reopened for complete tracked-workflow route correspondence and later Done only after exact reviewed integration with fresh completion evidence for this repair under the repository's legacy-ID correspondence policy. Its earlier completion evidence must remain historical and must not substitute for new repair correspondence. Retain all external ownership, runtime, artifact, and hardware non-claims.",
-      "done_evidence": "Not complete; prior GP-VAL-003 completion evidence remains historical evidence of earlier route and health correspondence work and does not satisfy this reopened nested-workflow census objective.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "a7bf7dab6980703fd0003b985d05e0e70b2b7468",
+        "reviewed_implementation_sha": "a3c554ab5b8ee266bb8c1f789d8d103c7aef2e86",
+        "prior_canonical_integration_sha": "a3c554ab5b8ee266bb8c1f789d8d103c7aef2e86",
+        "reviewed_changed_paths": ["docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json", "docs/runtime_config/runtime_config_validation_health.md", "tools/check_glyph_runtime_config_validation_publication_workflow.py"],
+        "independent_review_provenance": "Fresh independent reviewer PASS on exact feature tip a3c554ab5b8ee266bb8c1f789d8d103c7aef2e86; route census, unresolved external classification, scope, authority, and required static gates were confirmed.",
+        "validation_provenance": "Focused publication-workflow checker, manifest and health checks, full runtime-config aggregate, 194-entry census, framework, sequence, navigation, agent-surface, py_compile, and git diff checks passed on the exact reviewed snapshot; no build or hardware was required."
+      },
       "stop_conditions": [
         "Any workflow, manifest applicability, checker classification, permission, secret, trigger, caller, release, or artifact destination must change.",
         "Any unresolved external ownership/caller fact would be inferred.",
@@ -1777,11 +1787,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-003","GP-VAL-009","GP-CTL-001"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-009","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-003, GP-VAL-009, GP-CTL-001; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-009, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
