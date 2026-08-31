@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
+  "audit_base_sha": "3e668694f1826ff079b6ecb529d6e3706d8184e7",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -66,17 +66,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_LOW"
+      "CURATION_REQUIRED"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -1274,7 +1274,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CTL-001",
       "title": "Make queue prose match machine runway",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-ctl-001-current-prose-parity-repair-20260831",
       "objective": "Complete the accepted GP-CTL-001 parity objective by removing redundant unguarded current Ready, runway, liveness, priority, and validation-count claims and enforcing the four existing machine-derived summary blocks as the sole current runway statements.",
       "why_this_matters": "The four guarded machine summaries correctly track the queue, but current unguarded prose still names completed GP-VAL-006 as Ready, reports runway one and RUNWAY_LOW, denies current PLANNING_REQUIRED, and reports the obsolete 27-check validation state while every framework check passes.",
@@ -1316,8 +1316,8 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused repair if it mistakes historical/planning prose for current authority; retain the canonical machine block and never restore a checker that accepts contradictory current guidance.",
-      "status_documentation_updates": "Record GP-CTL-001 as reopened for current executable-runway summary parity repair. Reconcile only the four delimited current-runway summaries and remove redundant unguarded executable priority/count prose; per-item Done/history prose remains outside this objective, and work authorization must not change during implementation. A new Done transition requires fresh completion evidence for this repair under the repository's legacy-ID correspondence policy; the earlier completion evidence must remain historical and must not substitute for it.",
-      "done_evidence": "Not complete; prior GP-CTL-001 completion evidence remains historical evidence of the first parity implementation and does not satisfy this reopened unguarded-prose regression repair.",
+      "status_documentation_updates": "Record GP-CTL-001 as Done after exact reviewed integration. Reconcile the four delimited current-runway summaries to the queue-derived state; per-item Done/history prose remains outside the current-truth scan and no product or runtime authority changes.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"9ea6c4e4aa23587c540bcd1b36ebd0c2b88b8907","reviewed_implementation_sha":"3e668694f1826ff079b6ecb529d6e3706d8184e7","prior_canonical_integration_sha":"3e668694f1826ff079b6ecb529d6e3706d8184e7","reviewed_changed_paths":["docs/project/ACTIVE_AGENT_QUEUE.md","docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_agent_framework_docs.py"],"independent_review_provenance":"Fresh independent reviewer PASS after current-prose coverage repair; repaired-scope review PASS confirmed generic claim detection, historical exclusion, and all required gates.","validation_provenance":"Focused framework, sequence, census, full runtime-config aggregate, navigation, agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no firmware build or hardware was required."},
       "stop_conditions": [
         "The implementation would change queue item status, priority, runway target, user direction, or substantive authority rather than only enforce current mirrors.",
         "Parity cannot be enforced generically without weakening machine-state, provenance, concurrency, liveness, or historical-evidence separation.",
@@ -1787,11 +1787,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CTL-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CTL-001; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
