@@ -30,7 +30,7 @@ Git, but it is not current candidate supply or implementation authority.
     "global_wait_proposed": false,
       "material_events_since_packet": [
       "Curator independently reviewed fresh packet glyph-portfolio-20260831-1540 at commit 896a06c092bfa2f99339c944fceffda957e4478d against live configurator d94eb6d629f9e8e73e893971a3f47c4485cf17ee.",
-      "Direct source and checker inspection confirmed incomplete accepted correspondence under GP-SRC-004, GP-VAL-003, and GP-CTL-001 plus the exact new GP-VAL-009 health-schema gap; all four are authorized as complete independent H0 READY work orders.",
+      "Direct source and checker inspection confirmed incomplete accepted correspondence under GP-SRC-004, GP-VAL-003, and GP-CTL-001 plus the exact new GP-VAL-009 health-schema gap; all four were authorized as complete independent H0 READY work orders, with GP-SRC-004 now completed and published.",
       "GP-VAL-010 remains plausible reviewed H0 supply but is not authorized in this cycle because the four-item throughput target is met; the GP-PROV-003 repair is substantive-dependency gated pending schema-v2 representation and a GP-PROV-004 preservation/revalidation strategy, while GP-VAL-011 remains dependency and exact-snapshot-design gated.",
       "GP-VAL-008 remains EVIDENCE_GATED, while GP-ART-001 and GP-X1-001 remain USER_DECISION_GATED; none is executable or hardware-pending.",
       "No global evidence wait is proposed or supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, or hardware state changed in curation."
@@ -66,17 +66,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_OK"
+      "RUNWAY_LOW"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -617,7 +617,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-004",
       "title": "Make active baseline classification machine-true",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-src-004-active-baseline-manifest-correspondence-20260831",
       "objective": "Complete the accepted active-baseline classification objective by making the current validation-manifest row and its load-bearing checks identify GeneratedRuntimeConfigBaseline.current.hpp as active compile-time table content rather than an inert baseline.",
       "why_this_matters": "The active header, focused checker, fixture, and current docs now correctly distinguish active compile-time table content from unchanged source-owned RuntimeConfigView publication, but the current load-bearing manifest still describes generated_baseline_artifact as 'inert baseline equivalence' and no check rejects that contradiction.",
@@ -656,8 +656,18 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused metadata/checker repair if exact active/inert classification cannot be enforced without semantic source change; never restore inert wording for the active baseline as current truth.",
-      "status_documentation_updates": "Record GP-SRC-004 as reopened for the final manifest-correspondence repair and later Done only after exact reviewed integration with fresh completion evidence for this repair under the repository's legacy-ID correspondence policy. Its earlier completion evidence must remain historical and must not substitute for new repair correspondence. Retain every runtime, product, artifact, and hardware non-claim.",
-      "done_evidence": "Not complete; prior GP-SRC-004 completion evidence remains historical evidence of the earlier header/checker correction and does not satisfy this reopened manifest-correspondence objective.",
+      "status_documentation_updates": "Record GP-SRC-004 as Done after exact reviewed integration of the final manifest-correspondence repair under the repository's legacy-ID correspondence policy. Retain every runtime, product, artifact, and hardware non-claim.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "a40e446c09b3f69e699ad697be3eda874a122f62",
+        "reviewed_implementation_sha": "aacff861c7958eefee9fad86e271489ec956ad8e",
+        "prior_canonical_integration_sha": "aacff861c7958eefee9fad86e271489ec956ad8e",
+        "reviewed_changed_paths": ["docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "tools/check_glyph_generated_source_owned_baseline_artifact.py"],
+        "independent_review_provenance": "Fresh independent publication review PASS on exact feature tip aacff861c7958eefee9fad86e271489ec956ad8e; exact ancestry, authorized scope, active/inert classification correspondence, no runtime/product drift, and publication safety were confirmed.",
+        "validation_provenance": "Focused baseline checker, manifest adversarial coverage, 194-entry census, validation health, full runtime-config aggregate, framework, navigation, docs-agent-surface, py_compile, and git diff checks passed on the exact integrated snapshot; no build or hardware was required."
+      },
       "stop_conditions": [
         "Any table value, symbol, declaration, digest, generated/compiled source, generator behavior, routing, or active-view publication would change.",
         "Any manifest applicability, load-bearing status, or unrelated entry would be reclassified.",
@@ -1767,11 +1777,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-004","GP-VAL-003","GP-VAL-009","GP-CTL-001"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-003","GP-VAL-009","GP-CTL-001"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-004, GP-VAL-003, GP-VAL-009, GP-CTL-001; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-003, GP-VAL-009, GP-CTL-001; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
