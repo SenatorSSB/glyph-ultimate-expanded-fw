@@ -27,11 +27,22 @@ SOURCE_TABLES = REPO_ROOT / "src/modes/UltimateIdentityRuntimeTables.hpp"
 SOURCE_INTERPRETER = REPO_ROOT / "src/modes/UltimateRuntimeConfigInterpreter.hpp"
 ULTIMATE_CPP = REPO_ROOT / "src/modes/Ultimate.cpp"
 FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_baseline_artifact.json"
+MANIFEST = REPO_ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
 DOC = REPO_ROOT / "docs/runtime_config/generated_source_owned_baseline_artifact.md"
 README = REPO_ROOT / "docs/runtime_config/README.md"
 CURRENT_STATE = REPO_ROOT / "docs/CURRENT_STATE.md"
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 GENERATOR = REPO_ROOT / "tools/generate_source_owned_runtime_config.py"
+
+ACTIVE_MANIFEST_REASON = (
+    "active compile-time table-content source through UltimateIdentityRuntimeTables.hpp; "
+    "source-owned active-view publication remains unchanged"
+)
+INERT_MANIFEST_REASONS = {
+    "generated_source_contract": "inert generator contract",
+    "artifact_install": "inert install contract",
+    "source_owned_cpp_preview": "inactive prepared-v2 C++ preview boundary",
+}
 
 EXPECTED_TABLE_COUNT = 28
 EXPECTED_POINT_COUNT = 9
@@ -363,6 +374,38 @@ def validate_fixture(fixture: dict[str, Any]) -> None:
             fail(f"fixture equivalence_comparison.{key} must be {expected!r}")
 
 
+def validate_manifest_classification(manifest: dict[str, Any]) -> None:
+    entries = manifest.get("entries")
+    if not isinstance(entries, list):
+        fail("runtime validation manifest entries must be a list")
+    by_id = {entry.get("id"): entry for entry in entries if isinstance(entry, dict)}
+    active = by_id.get("generated_baseline_artifact")
+    if not isinstance(active, dict):
+        fail("runtime validation manifest is missing generated_baseline_artifact")
+    if active.get("reason") != ACTIVE_MANIFEST_REASON:
+        fail("generated_baseline_artifact must identify active compile-time table content")
+    for entry_id, expected_reason in INERT_MANIFEST_REASONS.items():
+        entry = by_id.get(entry_id)
+        if not isinstance(entry, dict) or entry.get("reason") != expected_reason:
+            fail(f"{entry_id} must retain its inert classification")
+
+
+def validate_manifest_classification_adversarial() -> None:
+    manifest = load_json_object(MANIFEST)
+    mutated = json.loads(json.dumps(manifest))
+    for entry in mutated["entries"]:
+        if entry.get("id") == "generated_baseline_artifact":
+            entry["reason"] = "inert baseline equivalence"
+            break
+    else:
+        fail("adversarial manifest fixture is missing generated_baseline_artifact")
+    try:
+        validate_manifest_classification(mutated)
+    except GeneratedSourceOwnedBaselineArtifactError:
+        return
+    fail("adversarial inert generated-baseline classification was accepted")
+
+
 def require_phrases(label: str, text: str, phrases: tuple[str, ...]) -> None:
     normalized_text = " ".join(text.lower().split())
     missing = [
@@ -423,6 +466,8 @@ def main() -> int:
     validate_changed_paths(changed_paths(branch))
     validate_identity_header_includes_generated_baseline()
     validate_not_included_by_ultimate()
+    validate_manifest_classification(load_json_object(MANIFEST))
+    validate_manifest_classification_adversarial()
     validate_equivalence()
     validate_deterministic_generation()
     validate_docs()
