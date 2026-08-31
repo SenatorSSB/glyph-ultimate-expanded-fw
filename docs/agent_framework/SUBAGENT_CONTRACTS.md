@@ -97,6 +97,28 @@ Delegation:
 
 This is per-run audit evidence, not canonical queue telemetry.
 
+## Implementation Supervisor cycle — GP-VAL-006 (2026-08-31)
+
+- guidance applicable: yes; GP-VAL-006 is a complete H1 READY work order and
+  repository mutation requires bounded delegation plus fresh independent review.
+- capability discovery: complete runtime tool catalog inspected; native
+  internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: bounded read-only source/contract specialist; inspect the
+  candidate writer/checker seams and required isolated-repository invariants;
+  no edits, commits, pushes, or canonical-repository mutation.
+- reviewer: fresh independent validator reviewer after implementation; inspect
+  the exact diff and run the focused, manifest, aggregate, census, health,
+  framework, navigation, agent-surface, syntax, and diff gates.
+- allowed specialist files: GP-VAL-006 candidate writer/checker, fixture,
+  runtime-config manifest/health/census, and directly relevant contracts.
+- forbidden specialist actions: edits, commits, pushes, builds, dependency or
+  network resolution, device/runtime claims, or canonical writes.
+- stop conditions: canonical subprocess/write context, branch/target refusal
+  bypass, incomplete repository isolation, scope drift, or active behavior.
+- return format: findings first; exact contract matches/gaps; recommended
+  bounded next action.
+
 ## Planner
 
 - Objective: produce broad, non-authoritative current-`configurator` candidate

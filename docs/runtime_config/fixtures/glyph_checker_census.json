@@ -10821,7 +10821,7 @@
       },
       "checker_id": "source_owned_candidate_generation",
       "defines_main": true,
-      "file_size_bytes": 13551,
+      "file_size_bytes": 17269,
       "hard_coded_branch_like_strings": [
         "--candidate-branch",
         "branch",
@@ -10833,6 +10833,7 @@
         "candidates",
         "configurator",
         "example_profile_production_candidate_allowed_without_explicit_approval",
+        "glyph_candidate_generation_",
         "glyph_source_owned_candidate_generation",
         "prepare_source_owned_candidate_branch.py",
         "runtime-config-install-workflow-candidate-generation",
@@ -10843,9 +10844,9 @@
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
+      "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 295,
+      "line_count": 345,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_candidate_generation.py",
       "potential_branch_identity_signals": [
@@ -10859,6 +10860,7 @@
         "candidates",
         "configurator",
         "example_profile_production_candidate_allowed_without_explicit_approval",
+        "glyph_candidate_generation_",
         "glyph_source_owned_candidate_generation",
         "prepare_source_owned_candidate_branch.py",
         "runtime-config-install-workflow-candidate-generation",
@@ -10897,7 +10899,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "fe15aaa4f26bc1068b9a1530aff9b73f6c00d39bcdc992a8b15b282dbb21468b",
+      "sha256": "ba726cd15efd7449a0df490126a53b73d4bdd897ba1fc6dd6c5e9a2cc5fe92c5",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,

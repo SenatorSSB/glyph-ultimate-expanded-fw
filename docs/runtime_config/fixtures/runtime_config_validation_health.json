@@ -19,7 +19,7 @@
   },
   "curated_runtime_config_scope": {
     "manifest_entry_count": 32,
-    "current_load_bearing_count": 27,
+    "current_load_bearing_count": 28,
     "historical_or_evidentiary_count": 4,
     "explicit_exclusion_count": 37
   },
@@ -27,9 +27,7 @@
     {"id":"identity_table_source_sync","path":"tools/check_glyph_identity_runtime_table_source_sync.py","classification":"repaired_current_load_bearing_source_sync_checker","starting_configurator":{"exit_code":1,"error":"stale 27-table interpreter bridge fixture"},"feature_branch":{"result":"PASS"}},
     {"id":"runtime_semantics_evaluator_bridge","path":"tools/check_glyph_runtime_config_semantics_evaluator_bridge.py","classification":"repaired_current_load_bearing_evaluator_bridge_checker","starting_configurator":{"exit_code":1,"error":"stale Ultimate.cpp SHA and 27-table bridge lineage"},"feature_branch":{"result":"PASS"}}
   ],
-  "strong_signal_exclusions": [
-    {"id":"candidate_generation","path":"tools/check_glyph_source_owned_candidate_generation.py","reason":"UNSAFE_OR_MUTATING","detail":"candidate preparation is excluded from the read-only aggregate"}
-  ],
+  "strong_signal_exclusions": [],
   "known_preexisting_failures": [
     {"id":"identity_table_source_sync","result":"PRE_EXISTING_FIXTURE_DRIFT","starting_configurator_exit_code":1},
     {"id":"runtime_semantics_evaluator_bridge","result":"PRE_EXISTING_FIXTURE_DRIFT","starting_configurator_exit_code":1}

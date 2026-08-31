@@ -283,6 +283,13 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.write_source:
             current_branch = git_current_branch()
+            if current_branch != args.candidate_branch:
+                ensure_clean_worktree()
+                fail(
+                    "candidate source write refused: checked-out branch must exactly "
+                    f"match --candidate-branch (current={current_branch!r}, "
+                    f"requested={args.candidate_branch!r})"
+                )
             ensure_not_configurator(args.candidate_branch)
             ensure_not_configurator(current_branch)
             ensure_allowed_target_path(args.target_source_path)
