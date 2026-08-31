@@ -37,7 +37,7 @@ The current source-owned contract is 28 ordered tables ending in
 `9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`.
 
 <!-- validation-health-summary:start -->
-Current summary: manifest entries = 32; current load-bearing checks = 27.
+Current summary: manifest entries = 32; current load-bearing checks = 28.
 <!-- validation-health-summary:end -->
 
 The two repaired load-bearing baseline failures were
@@ -50,11 +50,11 @@ interpreter bridge fixture; the second had the stale `Ultimate.cpp` SHA and
 27-table generated-prototype evaluator remains historical evidence, not a
 current aggregate PASS.
 
-Commands that can prepare, install, or emit a candidate are classified unsafe
-for this offline validation lane. Historical and hardware-result checkers are
+Commands that can prepare, install, or emit a candidate are isolated into
+standalone temporary repositories for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 32 explicit entries, including 27 current
+The curated manifest now has 32 explicit entries, including 28 current
 load-bearing checks. The tracked CI publication-route census records both
 workflow files: `build.yml` is `CURRENT_GATED`, while
 `build-device-config.yml` is `UNRESOLVED_EXTERNAL` because its caller,

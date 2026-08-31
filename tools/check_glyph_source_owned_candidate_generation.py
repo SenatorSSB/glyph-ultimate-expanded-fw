@@ -4,8 +4,14 @@
 from __future__ import annotations
 
 import json
+import io
+import hashlib
+import os
 import subprocess
 import sys
+import shutil
+import tarfile
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -75,10 +81,82 @@ def parse_tool_json(output: str) -> dict[str, Any]:
     return payload
 
 
-def run_tool(*args: str) -> tuple[int, dict[str, Any], str]:
-    completed = subprocess.run(
-        [sys.executable, str(TOOL.relative_to(REPO_ROOT)), *args],
+def tracked_bytes_snapshot(root: Path) -> str:
+    paths = subprocess.run(
+        ["git", "ls-files", "-z"], cwd=root, capture_output=True, check=True
+    ).stdout.split(b"\0")
+    records: list[str] = []
+    for raw_path in paths:
+        if not raw_path:
+            continue
+        relative = Path(raw_path.decode())
+        path = root / relative
+        if path.is_symlink():
+            mode = "120000"
+            content = os.readlink(path).encode()
+        else:
+            mode = "100755" if path.stat().st_mode & 0o111 else "100644"
+            content = path.read_bytes()
+        digest = hashlib.sha256(content).hexdigest()
+        records.append(f"{mode} {relative.as_posix()} {digest}")
+    return "\n".join(records)
+
+
+def canonical_snapshot() -> tuple[str, str, str, str]:
+    def run(*command: str) -> str:
+        completed = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, check=True)
+        return completed.stdout
+
+    return (
+        run("git", "rev-parse", "HEAD"),
+        run("git", "ls-files", "--stage"),
+        tracked_bytes_snapshot(REPO_ROOT),
+        run("git", "status", "--porcelain=v1", "-uall"),
+    )
+
+
+def temporary_repository(branch: str) -> tempfile.TemporaryDirectory[str]:
+    archive = subprocess.run(
+        ["git", "archive", "--format=tar", "HEAD"],
         cwd=REPO_ROOT,
+        capture_output=True,
+        check=True,
+    ).stdout
+    directory = tempfile.TemporaryDirectory(prefix="glyph_candidate_generation_")
+    root = Path(directory.name)
+    with tarfile.open(fileobj=io.BytesIO(archive), mode="r:") as tar:
+        tar.extractall(root)
+    tracked = subprocess.run(
+        ["git", "ls-files", "-z"], cwd=REPO_ROOT, capture_output=True, check=True
+    ).stdout.split(b"\0")
+    for raw_path in tracked:
+        if not raw_path:
+            continue
+        relative = Path(raw_path.decode())
+        source = REPO_ROOT / relative
+        destination = root / relative
+        if source.is_symlink():
+            destination.unlink(missing_ok=True)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.symlink_to(source.readlink())
+        elif source.is_file():
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+    subprocess.run(["git", "init", "-b", branch], cwd=root, capture_output=True, text=True, check=True)
+    subprocess.run(["git", "config", "user.name", "Glyph checker"], cwd=root, check=True)
+    subprocess.run(["git", "config", "user.email", "glyph-checker@example.invalid"], cwd=root, check=True)
+    subprocess.run(["git", "add", "--all"], cwd=root, check=True)
+    subprocess.run(["git", "commit", "-m", "controlled checker snapshot"], cwd=root, capture_output=True, check=True)
+    if tracked_bytes_snapshot(root) != tracked_bytes_snapshot(REPO_ROOT):
+        directory.cleanup()
+        fail("temporary repository does not match exact tracked stage-0 bytes")
+    return directory
+
+
+def run_tool_in_repository(root: Path, *args: str) -> tuple[int, dict[str, Any], str]:
+    completed = subprocess.run(
+        [sys.executable, "tools/prepare_source_owned_candidate_branch.py", *args],
+        cwd=root,
         capture_output=True,
         text=True,
         check=False,
@@ -90,7 +168,23 @@ def run_tool(*args: str) -> tuple[int, dict[str, Any], str]:
     return completed.returncode, payload, output
 
 
-def validate_plan_payload(payload: dict[str, Any], fixture: dict[str, Any], *, input_kind: str) -> None:
+def assert_rejected(root: Path, *args: str, reason: str) -> None:
+    before = (subprocess.run(["git", "ls-files", "--stage"], cwd=root, capture_output=True, text=True, check=True).stdout,
+              tracked_bytes_snapshot(root),
+              subprocess.run(["git", "status", "--porcelain=v1", "-uall"], cwd=root, capture_output=True, text=True, check=True).stdout,
+              (root / ALLOWED_TARGET_PATH).read_bytes())
+    returncode, payload, output = run_tool_in_repository(root, *args)
+    if returncode == 0 or payload or reason not in output:
+        fail(f"{reason} refusal failed: {output}")
+    after = (subprocess.run(["git", "ls-files", "--stage"], cwd=root, capture_output=True, text=True, check=True).stdout,
+             tracked_bytes_snapshot(root),
+             subprocess.run(["git", "status", "--porcelain=v1", "-uall"], cwd=root, capture_output=True, text=True, check=True).stdout,
+             (root / ALLOWED_TARGET_PATH).read_bytes())
+    if before != after:
+        fail(f"{reason} refusal changed temporary repository state")
+
+
+def validate_plan_payload(payload: dict[str, Any], fixture: dict[str, Any], *, input_kind: str, repository_root: Path = REPO_ROOT) -> None:
     if payload.get("schema_version") != 1:
         fail("plan schema_version must be 1")
     if payload.get("packet") != "source_owned_candidate_generation_plan":
@@ -101,7 +195,7 @@ def validate_plan_payload(payload: dict[str, Any], fixture: dict[str, Any], *, i
         fail("candidate branch name drifted")
     if payload.get("input_kind") != input_kind:
         fail("input kind drifted")
-    expected_target = (REPO_ROOT / str(fixture.get("approved_target_source_path"))).resolve()
+    expected_target = (repository_root / str(fixture.get("approved_target_source_path"))).resolve()
     if Path(payload.get("target_source_install_path", "")).resolve() != expected_target:
         fail("target source install path drifted")
     if payload.get("build_command") != fixture.get("build_command"):
@@ -184,94 +278,50 @@ def validate_fixture(fixture: dict[str, Any]) -> None:
 def validate_dry_run_outputs() -> None:
     fixture = load_json_object(FIXTURE)
     validate_fixture(fixture)
-
-    profile_returncode, profile_payload, profile_output = run_tool(
-        "--profile",
-        str(PROFILE_FIXTURE.relative_to(REPO_ROOT)),
-    )
-    if profile_returncode != 0:
-        fail("profile dry-run unexpectedly failed: " + profile_output)
-    validate_plan_payload(profile_payload, fixture, input_kind="profile")
-    if not Path(profile_payload["converted_or_validated_layout_spec_path"]).is_absolute():
-        fail("profile dry-run layout-spec path must be absolute")
-    if not Path(profile_payload["generated_source_artifact_path"]).is_absolute():
-        fail("profile dry-run generated artifact path must be absolute")
-
-    layout_returncode, layout_payload, layout_output = run_tool(
-        "--layout-spec",
-        str(LAYOUT_SPEC_FIXTURE.relative_to(REPO_ROOT)),
-    )
-    if layout_returncode != 0:
-        fail("layout-spec dry-run unexpectedly failed: " + layout_output)
-    validate_plan_payload(layout_payload, fixture, input_kind="layout-spec")
+    before = canonical_snapshot()
+    with temporary_repository("feature-test") as directory:
+        root = Path(directory)
+        for argument, kind in (("docs/runtime_config/fixtures/coordinate_native_runtime_profile_y2_inspired_sketch.example.json", "profile"),
+                               ("docs/runtime_config/fixtures/generated_source_owned_layout_spec.json", "layout-spec")):
+            option = "--profile" if kind == "profile" else "--layout-spec"
+            returncode, payload, output = run_tool_in_repository(root, option, argument)
+            if returncode != 0:
+                fail(f"{kind} dry-run unexpectedly failed: {output}")
+            validate_plan_payload(payload, fixture, input_kind=kind, repository_root=root)
+            if not Path(payload["converted_or_validated_layout_spec_path"]).is_absolute() or not Path(payload["generated_source_artifact_path"]).is_absolute():
+                fail(f"{kind} dry-run paths must be absolute")
+    if canonical_snapshot() != before:
+        fail("canonical repository changed during isolated dry-run")
 
 
 def validate_path_guards() -> None:
     fixture = load_json_object(FIXTURE)
     validate_fixture(fixture)
 
-    unsupported_returncode, unsupported_payload, unsupported_output = run_tool(
-        "--profile",
-        str(INVALID_PROFILE_FIXTURE.relative_to(REPO_ROOT)),
-    )
-    if unsupported_returncode == 0:
-        fail("unsupported profile fixture unexpectedly succeeded")
-    if unsupported_payload:
-        fail("unsupported profile fixture must not emit a plan")
-    if "error:" not in unsupported_output:
-        fail("unsupported profile refusal must report an error")
-
-    allowed_path = Path(REPO_ROOT / fixture["approved_target_source_path"])
-    if not allowed_path.is_absolute():
-        fail("approved target path must resolve to an absolute path")
     forbidden_path = Path("/tmp/not-approved-path.hpp")
 
-    completed = subprocess.run(
-        [sys.executable, str(TOOL.relative_to(REPO_ROOT)), "--layout-spec", str(LAYOUT_SPEC_FIXTURE.relative_to(REPO_ROOT)), "--candidate-branch", "configurator", "--write-source", "--target-source-path", str(allowed_path)],
-        cwd=REPO_ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if completed.returncode == 0:
-        fail("direct configurator source write unexpectedly succeeded")
-    if "configurator" not in completed.stderr:
-        fail("configurator refusal must mention the branch guard")
-
-    active_path = REPO_ROOT / ACTIVE_TARGET_PATH
-    completed = subprocess.run(
-        [
-            sys.executable,
-            str(TOOL.relative_to(REPO_ROOT)),
-            "--layout-spec",
-            str(LAYOUT_SPEC_FIXTURE.relative_to(REPO_ROOT)),
-            "--write-source",
-            "--candidate-branch",
-            "feature-test",
-            "--target-source-path",
-            str(active_path),
-        ],
-        cwd=REPO_ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if completed.returncode == 0:
-        fail("active table-source write unexpectedly succeeded")
-    if "active compile-time table content" not in completed.stderr:
-        fail("active table-source refusal must identify active compile-time content")
-
-    completed = subprocess.run(
-        [sys.executable, str(TOOL.relative_to(REPO_ROOT)), "--layout-spec", str(LAYOUT_SPEC_FIXTURE.relative_to(REPO_ROOT)), "--write-source", "--target-source-path", str(forbidden_path)],
-        cwd=REPO_ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if completed.returncode == 0:
-        fail("forbidden target path unexpectedly succeeded")
-    if "install output path must be under" not in completed.stderr:
-        fail("forbidden target path refusal must mention the allow-list")
+    before = canonical_snapshot()
+    common = ("--layout-spec", "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json", "--write-source", "--candidate-branch", "feature-test")
+    with temporary_repository("configurator") as directory:
+        root = Path(directory)
+        assert_rejected(root, *common, "--candidate-branch", "configurator", reason="configurator")
+    with temporary_repository("feature-current") as directory:
+        root = Path(directory)
+        assert_rejected(root, "--layout-spec", "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json", "--write-source", "--candidate-branch", "feature-requested", reason="checked-out branch")
+    with temporary_repository("feature-test") as directory:
+        root = Path(directory)
+        unsupported_returncode, unsupported_payload, unsupported_output = run_tool_in_repository(
+            root, "--profile", "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json"
+        )
+        if unsupported_returncode == 0 or unsupported_payload or "error:" not in unsupported_output:
+            fail("unsupported profile refusal failed: " + unsupported_output)
+        assert_rejected(root, *common, "--target-source-path", str(root / ACTIVE_TARGET_PATH), reason="active compile-time table content")
+        assert_rejected(root, *common, "--target-source-path", str(forbidden_path), reason="exact inert example artifact")
+        assert_rejected(root, "--profile", "docs/runtime_config/fixtures/coordinate_native_runtime_profile_invalid_runtime_loaded_claim.json", "--write-source", "--candidate-branch", "feature-test", reason="runtime_loaded_config_implemented must be False")
+        (root / "untracked.txt").write_text("dirty\n", encoding="utf-8")
+        assert_rejected(root, *common, reason="working tree must be clean")
+    if canonical_snapshot() != before:
+        fail("canonical repository changed during isolated refusal tests")
 
 
 def main() -> int:
