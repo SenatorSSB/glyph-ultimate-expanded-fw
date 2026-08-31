@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "d94eb6d629f9e8e73e893971a3f47c4485cf17ee",
+  "audit_base_sha": "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -832,7 +832,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-009",
       "title": "Make validation-health schema exact",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-009-health-schema-exactness-20260831",
       "objective": "Make the validation-health machine record exact by removing its obsolete duplicate strong_signal_exclusions field and rejecting every unknown, missing, mistyped, stale, or contradictory field against current manifest- and census-derived truth.",
       "why_this_matters": "The current health fixture reports explicit_exclusion_count 37 while also carrying an unchecked empty strong_signal_exclusions list. The checker derives the count from the manifest, never reads that duplicate list, and does not enforce an exact top-level health schema, so contradictory or invented health state can pass.",
@@ -873,7 +873,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused health-schema branch if exact current state cannot be represented without duplicate authority or manifest reclassification; never restore acceptance of contradictory or unknown health fields.",
       "status_documentation_updates": "Record GP-VAL-009 as Done only after exact reviewed integration; document schema v3 and retain all manifest completeness, product/runtime, artifact, and hardware non-claims.",
-      "done_evidence": "Not complete; no implementation, review, integration, or publication evidence exists yet for GP-VAL-009.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"9c0324969a2adbe7d13e611e2f636df6fab4d690","reviewed_implementation_sha":"f466ac50e23ff62ecc0825de44501b30a8f0e23b","prior_canonical_integration_sha":"f466ac50e23ff62ecc0825de44501b30a8f0e23b","reviewed_changed_paths":["docs/agent_framework/SUBAGENT_CONTRACTS.md","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_runtime_config_validation_health.py"],"independent_review_provenance":"Fresh independent reviewer initially required repair for current result/census/manifest path correspondence; repaired-scope review PASS confirmed exact schema, source bindings, adversarial coverage, and forbidden-scope invariants on f466ac50e23ff62ecc0825de44501b30a8f0e23b.","validation_provenance":"Focused health, census, manifest, aggregate adversarial, full 28-check runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build or hardware was required."},
       "stop_conditions": [
         "Any manifest entry, exclusion, applicability, branch policy, command, dependency, reason, load-bearing classification, or checker product semantic must change.",
         "Any second exclusion authority or schema ambiguity remains accepted.",
@@ -1787,11 +1787,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-009","GP-CTL-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CTL-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-009, GP-CTL-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CTL-001; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
