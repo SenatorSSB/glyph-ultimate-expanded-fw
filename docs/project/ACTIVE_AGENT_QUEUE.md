@@ -19,13 +19,13 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "b81c299e1449fc319788a35763b71d3e73d906f1",
+  "audit_base_sha": "0e180e9671b78f8ed3c2a5c9220a4fcafbfae598",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
+    "state": "CONSUMED",
     "branch": "planning/portfolio-20260827-1210",
     "base_configurator_sha": "8c04262c66613d46b933b1b739c01c575cb0c580",
-    "candidate_count": 4,
+    "candidate_count": 3,
     "curator_review_required": false,
     "global_wait_proposed": false,
       "material_events_since_packet": [
@@ -37,15 +37,18 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-VAL-008 remains EVIDENCE_GATED, while GP-ART-001 and GP-X1-001 remain USER_DECISION_GATED; none is executable or hardware-pending.",
       "No global evidence wait is proposed or supported.",
       "GP-PROV-004, GP-PROV-005, and GP-CTL-001 are repaired or completed, independently reviewed, integrated, and canonically published Done.",
-      "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation."
+      "Runtime/configurator product code, active table bytes, workflows, firmware artifacts, and hardware state were unchanged by this curation.",
+      "All four work orders authorized on 2026-08-30 are now Done on live configurator 0e180e9671b78f8ed3c2a5c9220a4fcafbfae598, reducing effective authorized runway to zero before this curation.",
+      "GP-VAL-006 was independently reverified against live configurator: its checker still fails because canonical branch context preempts the intended active-target refusal, while GP-VAL-003 is Done and the exact H1 isolated-temporary-repository design is now recorded as Ready.",
+      "The packet is now consumed for independently executable supply; GP-VAL-008 remains EVIDENCE_GATED and GP-ART-001 plus GP-X1-001 remain USER_DECISION_GATED, so a fresh broad Planner audit is requested without treating those gates as a global wait."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260827-1210",
       "planning_commit": "ae1d15b9a7941934b26d4371b0ea0e10691629cb",
       "packet_id": "glyph-portfolio-20260827-1210",
       "packet_base_configurator_sha": "8c04262c66613d46b933b1b739c01c575cb0c580",
-      "curation_branch": "curation/portfolio-20260830-0211-review",
-      "review_date": "2026-08-30"
+      "curation_branch": "curation/portfolio-20260831-gp-val-006-review",
+      "review_date": "2026-08-31"
     }
   },
   "completion_correspondence": {
@@ -70,17 +73,21 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "CURATION_REQUIRED"
+      "RUNWAY_LOW",
+      "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+      "RUNWAY_SHORTFALL_EVIDENCE_GATED",
+      "RUNWAY_SHORTFALL_USER_DECISION_GATED",
+      "PLANNER_REFRESH_REQUIRED"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -90,6 +97,73 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-VAL-006",
+      "title": "Isolate candidate-preparation safety validation",
+      "status": "READY",
+      "branch": "glyph/gp-val-006-isolated-candidate-safety-20260831",
+      "objective": "Make candidate-preparation branch, target, scope, dirty-tree, and dry-run refusal behavior current and load-bearing without allowing any checker subprocess to mutate or depend on the canonical worktree.",
+      "why_this_matters": "The existing candidate-generation checker is excluded as unsafe and currently fails on configurator because it asks the tool to record a synthetic candidate branch while every subprocess still runs in the real repository. The real configurator branch guard therefore preempts the intended active-table-source refusal, and the write-capable tool does not require the requested candidate branch to equal the checked-out branch on non-configurator worktrees.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "This work strengthens host-side candidate-preparation refusal and validation behavior only. It adds checked-out/requested branch correspondence, confines checker subprocesses and any attempted materialization to copied standalone temporary Git repositories, and makes that safety checker load-bearing. It changes no generated semantic content, active source, active table bytes, firmware/runtime behavior, workflow, artifact, device, or controller behavior.",
+      "scope": "Update tools/prepare_source_owned_candidate_branch.py so --write-source fails before generation or mutation unless the checked-out branch exactly equals --candidate-branch and both remain non-configurator. Update tools/check_glyph_source_owned_candidate_generation.py so every tested tool subprocess executes with cwd inside a fresh standalone temporary Git repository copied only from the current tracked stage-0 bytes, initialized with controlled identity and the exact test branch; no subprocess may use canonical REPO_ROOT as its Git or write context. Independently exercise dry-run success, direct-configurator refusal, requested/current branch mismatch, active-table target refusal, unrelated target refusal, dirty-tree refusal, and safe-generation/source-authority refusal before write, and verify canonical repository HEAD, index, tracked bytes, status, and untracked set are unchanged before/after. Reclassify the existing candidate_generation manifest entry in place as current, content_only, temporary_repository_only, load-bearing, with exact direct source dependency tools/prepare_source_owned_candidate_branch.py; keep manifest schema/version and entry count unchanged and regenerate only deterministic checker-census and validation-health consequences.",
+      "explicit_excluded_scope": "No successful materialization in the canonical worktree; no new output root, repository install target, generator mode, table ownership, profile intent, coordinate, table byte, active source, RuntimeConfigView path, workflow, build, candidate artifact, publication, merge, hardware action/result, runtime-loaded config, persistence, WebSerial/device write, protobuf write, flashing automation, Nunchuk claim, root-cause claim, or game-semantic claim. No tools/glyph_checker_context.py or product/runtime checker change.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator 0e180e9671b78f8ed3c2a5c9220a4fcafbfae598. tools/check_glyph_source_owned_candidate_generation.py blob 8fde4b1cabf4e36c7f9eb07d5f311476197bb78a (SHA-256 fe15aaa4f26bc1068b9a1530aff9b73f6c00d39bcdc992a8b15b282dbb21468b) fails with 'active table-source refusal must identify active compile-time content' while leaving the canonical worktree clean. It invokes tools/prepare_source_owned_candidate_branch.py from canonical REPO_ROOT for every case. That tool's current blob 84b4d943e73c32d4fe3f956240ba9f63c6c5a4b1 (SHA-256 b12cb3b574a75390c840e760209964b4832578c057f598b691942ec5191af58e) rejects requested and checked-out configurator identities separately but does not require their equality, then writes at its materialization seam after the existing target and production-generation guards. The workflow fixture blob cf4fb1671ab12c86c2ce746eafad18d6902f0530 and manifest-v4 blob 97836fba92e6faf6567351bba360dd77f7fd65d8 retain the exact Planner gap. GP-VAL-003 and GP-VAL-007 are now Done; current validation has 32 manifest entries and 27 current load-bearing checks before this activation.",
+      "dependencies_prerequisites": [
+        "GP-VAL-003 and GP-VAL-007 remain canonically DONE, with generic validation-health prose correspondence and manifest-v4 bounded dependency metadata intact.",
+        "Implementation starts from a fresh live-configurator descendant of 0e180e9671b78f8ed3c2a5c9220a4fcafbfae598 and first reproduces the exact candidate-generation checker failure with a clean before/after canonical status.",
+        "The candidate-preparation tool, workflow fixture, active/inert target identities, source-owned generation policy, manifest schema v4, and current 32-entry/27-load-bearing validation state remain materially unchanged.",
+        "Every test subprocess and attempted write uses a fresh standalone temporary Git repository; the canonical worktree is observation-only throughout validation."
+      ],
+      "substantive_authorization_rationale": "The gap and its safety consequence are directly source-proven, GP-VAL-003's recorded wait is satisfied, and the architecture is resolved without product judgment. Exact checked-out/requested branch equality closes the real write-authorization ambiguity. Fresh copied standalone temporary Git repositories make branch, index, dirtiness, target, and source-authority refusal cases deterministic while preventing the current aggregate from depending on or writing the canonical worktree. Reclassifying the existing manifest row in place makes the repaired safety lane load-bearing without changing manifest shape, product semantics, or runtime authority.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The candidate-preparation tool, workflow fixture, active/inert target identity, generator/source-authority policy, manifest schema, or current checker architecture changes materially before implementation.",
+        "Another canonical change supplies equivalent or stronger checked-out/requested branch correspondence plus standalone-temporary-repository load-bearing coverage first.",
+        "The checker cannot execute every tool subprocess outside canonical REPO_ROOT or cannot prove canonical HEAD, index, tracked bytes, status, and untracked set unchanged.",
+        "The implementation would require successful canonical materialization, a new write/output decision, tools/glyph_checker_context.py, product/runtime code, workflow, build, artifact, or hardware scope."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of Planner candidate GP-VAL-006 from planning/portfolio-20260827-1210 commit ae1d15b9a7941934b26d4371b0ea0e10691629cb, packet base 8c04262c66613d46b933b1b739c01c575cb0c580, after GP-VAL-003 and GP-VAL-007 completion. Root and bounded verification specialists independently reproduced the current failure, inspected the write/branch seams, and confirmed the other three survivors remain gated against live configurator 0e180e9671b78f8ed3c2a5c9220a4fcafbfae598 on curation/portfolio-20260831-gp-val-006-review.",
+      "automated_validation": [
+        "The focused checker runs every candidate-preparation subprocess in a fresh controlled standalone temporary Git repository and passes while the canonical repository's HEAD, index, tracked bytes, status, and untracked set remain exactly unchanged.",
+        "Correct non-configurator branch correspondence permits the authorized dry-run path; requested/current branch mismatch and either requested or current configurator identity fail before generation or mutation for their exact reasons.",
+        "Active table target, unrelated target, dirty tree, unsafe generation/source authority, and forbidden runtime/device claims fail independently without being preempted by unrelated branch context; rejected cases leave no target or partial write.",
+        "The existing fixture policy, allowed inert target, dry-run plan fields, validation command list, forbidden claims, and generated semantic output remain unchanged; no successful materialization is required or performed in the canonical worktree.",
+        "Manifest v4 retains 32 entries, reclassifies only candidate_generation to current/content_only/temporary_repository_only/load-bearing with exact direct tool dependency, and raises the current load-bearing count from 27 to 28 without changing another entry's applicability or policy.",
+        "Candidate-generation, manifest aggregate adversarial, checker census, validation health, full runtime-config aggregate, agent-framework, sequence, navigation, docs-agent-surface, py_compile, and exact diff checks pass; independent review confirms no write authority, source authority, runtime, publication, or hardware invariant weakened."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 host-side branch/write refusal, isolated temporary-repository checker coverage, and validation metadata only; any compiled source, generated semantics, build input, workflow, or runtime delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused host-tool/checker/metadata branch if valid dry-run coverage regresses or canonical non-mutation cannot be proved; keep candidate_generation excluded rather than making an unsafe or context-dependent checker load-bearing.",
+      "status_documentation_updates": "Record GP-VAL-006 as the sole Ready item, the packet as consumed for executable supply, the remaining evidence/user gates, and the 1/4 runway plus Planner refresh need without creating a product, candidate, artifact, or hardware claim.",
+      "done_evidence": "Not yet implemented; completion requires exact reviewed implementation/integration correspondence and the validation evidence specified by this work order.",
+      "stop_conditions": [
+        "Any checker subprocess or attempted write uses the canonical repository as its Git or write context.",
+        "Any requested/current branch mismatch, active target, unrelated target, dirty tree, or unsafe source-authority case can reach mutation or pass for the wrong reason.",
+        "Any additional manifest entry, other applicability/policy reclassification, successful canonical materialization, write target, generator semantic, product/runtime source, workflow, build, artifact, publication, device, or hardware scope appears.",
+        "Any runtime-loaded config, persistence, WebSerial/device write, protobuf write, flashing, Nunchuk, root-cause, or game-semantic claim is introduced."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-PROV-003",
       "title": "Inventory declared build-input provenance",
@@ -1635,11 +1709,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-006"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-VAL-006; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -1649,7 +1723,8 @@ target runway, primary liveness, and global evidence-wait support.
 
 `GP-SRC-003` and `GP-SRC-004` are DONE on validated implementation branches.
 `GP-SRC-005` and `GP-VAL-004` are DONE; `GP-VAL-003` is DONE after exact
-health-prose correspondence repair against the current 31/26 machine state.
+generic health-prose correspondence repair, with current validation now at 32
+manifest entries and 27 load-bearing checks before GP-VAL-006 implementation.
 `GP-CONFIG-004` is `DONE`; its exact reviewed H0 checker repair is merged and
 live-verified in canonical configurator.
 `GP-PROV-002` is `DONE`; its reviewed feature tip is integrated into
@@ -1661,20 +1736,23 @@ implementation ancestry and separate structured completion publication.
 correspondence repair, independent review, canonical integration, and
 structured completion publication. `GP-CTL-001` is `DONE` after exact
 machine/prose runway parity enforcement and separate completion publication.
-`GP-VAL-007` is the remaining ordered `READY` H0 runway. `GP-PROV-006` is
-`DONE` after exact reviewed implementation ancestry and separate completion
-publication. `GP-VAL-003` is `DONE` after exact reviewed health-prose
-correspondence repair and canonical integration. `GP-PROV-005` is `DONE` after bounded
+`GP-PROV-006` and `GP-VAL-007` are `DONE` after exact reviewed implementation
+ancestry and separate completion publication. `GP-VAL-003` is `DONE` after
+exact reviewed health-prose correspondence repair and canonical integration.
+`GP-PROV-005` is `DONE` after bounded
 source-lineage research; source lineage, purpose, byte transformation, build
 recipe, reproducibility, safety, artifact acceptance, and hardware remain
 `UNKNOWN`.
 No invalidated Preauthorization or hardware-pending work exists.
 The current-runway summary above is authoritative for the human-readable
 runway state.
+`GP-VAL-006` is the sole ordered `READY` H1 work order after exact current-gap,
+branch-correspondence, and standalone-temporary-repository safety curation.
 `GP-AUTH-001` is resolved by the baseline-equivalent sole-X1 production intake;
-`GP-CONFIG-002` is invalidated by user direction. Remaining Planner survivors
-are `GP-VAL-006`, `GP-VAL-008`, `GP-ART-001`, and `GP-X1-001`; none is
-executable or a portfolio-global wait.
+`GP-CONFIG-002` is invalidated by user direction. Remaining non-executable
+Planner survivors are `GP-VAL-008`, `GP-ART-001`, and `GP-X1-001`; none
+establishes a portfolio-global wait. The packet is consumed for further
+executable supply and a fresh Planner audit is requested.
 
 ## Allowed Statuses
 
@@ -1712,9 +1790,13 @@ Planner packet `glyph-portfolio-20260827-1210` at
 `ae1d15b9a7941934b26d4371b0ea0e10691629cb` was independently reviewed
 against exact live `configurator` `8c04262c66613d46b933b1b739c01c575cb0c580`
 and its surviving candidates were independently reverified against live
-`configurator` `b81c299e1449fc319788a35763b71d3e73d906f1`. It is
-`PARTIALLY_CONSUMED`: three surviving H0 candidates are now authorized, four
-non-executable survivors remain, and effective runway again meets target.
+`configurator` `b81c299e1449fc319788a35763b71d3e73d906f1`, with the final
+actionable survivor reverified again against live `configurator`
+`0e180e9671b78f8ed3c2a5c9220a4fcafbfae598`. It is
+`CONSUMED`: all previously authorized H0 candidates are now Done. Independent
+reverification authorized the final actionable survivor, `GP-VAL-006`, as one
+H1 Ready work order; three non-executable survivors remain, effective runway is
+one against target four, and fresh Planner supply is requested.
 Historical Done items not named below remain Done.
 
 - `GP-PROV-004`: `DONE`; exact workflow expressions, source classes,
@@ -1729,23 +1811,19 @@ Historical Done items not named below remain Done.
 - `GP-PROV-005`: `DONE`; bounded `glyph_nuker` source-lineage research recorded
   research without executing, rebuilding, replacing, or promoting inference
   into authority.
-- `GP-VAL-005`: `READY`; the existing no-argument coordinate-native checker
-  will run all three advertised offline packaging validators with an exact
-  execution trace, leaving manifest counts and runner argument policy unchanged.
-- `GP-VAL-006`: `PREAUTHORIZABLE_WAITING_NOT_RECORDED`; independent review
-  confirms the current checker failure and resolves the safer architecture as
-  an H1 current-branch/requested-branch equality guard plus a copied standalone
-  temporary Git repository for every subprocess. It remains non-executable and
-  should be reconsidered after `GP-VAL-003` is DONE because its future manifest
-  activation changes the load-bearing count.
-- `GP-PROV-006`: `READY`; repaired `GP-PROV-004` satisfies its dependency, and
-  the exact two-source, finite-key, literal-only inheritance/reference census
-  preserves runtime interpolation and all PlatformIO/compiler effects as
-  unresolved.
-- `GP-VAL-007`: `READY`; its work order defines manifest v4 with an exact
-  normalized tracked-file dependency contract, a static direct-local-helper
-  lower bound, explicit dynamic/transitive/semantic non-claims, and a finite
-  applicability-consistent branch-policy matrix.
+- `GP-VAL-005`: `DONE`; the existing no-argument coordinate-native checker now
+  runs all three advertised offline packaging validators with an exact trace.
+- `GP-VAL-006`: `READY`; independent current verification confirms the checker
+  still fails because canonical branch context preempts the active-target
+  refusal. Its complete H1 order requires exact checked-out/requested branch
+  equality and a fresh copied standalone temporary Git repository for every
+  subprocess, then reclassifies the existing manifest-v4 row in place as the
+  28th current load-bearing check.
+- `GP-PROV-006`: `DONE`; its exact two-source, finite-key, literal-only census
+  preserves runtime interpolation and PlatformIO/compiler effects as unresolved.
+- `GP-VAL-007`: `DONE`; manifest v4 now enforces its bounded normalized tracked-
+  file dependency contract, static direct-local-helper lower bound, explicit
+  exclusions, and applicability-consistent branch-policy matrix.
 - `GP-VAL-008`: `EVIDENCE_GATED`; current source/evidence does not yet define a
   safe runtime-behavior regression subset without historical or semantic
   inference.
@@ -1758,8 +1836,8 @@ Historical Done items not named below remain Done.
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
-priority order. Only items marked `READY` authorize immediate execution. The
-four Ready items remain separate work orders; the one-new-work-order-per-
+priority order. Only items marked `READY` authorize immediate execution.
+`GP-VAL-006` is the sole Ready work order; the one-new-work-order-per-
 Implementation-cycle rule still applies. Remaining Planner survivors are
 non-executable under the dispositions above.
 

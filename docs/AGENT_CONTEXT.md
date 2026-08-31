@@ -64,23 +64,23 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-006"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-VAL-006; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Reviewed Planner packet
-  `glyph-portfolio-20260827-1210` is partially consumed after independent
-  curation.
+  `glyph-portfolio-20260827-1210` is consumed for further executable supply
+  after independent curation; a fresh broad Planner audit is requested.
   `GP-SRC-003` is DONE with prepared schema v2 carrying normalized
   input and deterministic artifact/manifest regeneration; earlier pushed tip
   `2b734b26439e9028717becf0010e345cb5efce6c` remains failed-review historical
   evidence and must not merge. `GP-SRC-004` is DONE; `GP-VAL-003` is
-  DONE after exact reviewed health-prose correspondence repair against current
-  31/26 validation state.
+  DONE after exact reviewed health-prose correspondence repair; current
+  validation state is 32 manifest entries and 27 load-bearing checks.
   `GP-SRC-005` is DONE after shared isolated-output and atomic-write hardening,
   and `GP-VAL-004` is DONE after its checker-only temporary-root repair.
   `GP-CONFIG-004` is DONE after its independently reviewed offline checker/docs
@@ -98,15 +98,15 @@ Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically a
   `GP-VAL-003` and `GP-VAL-005` are DONE after exact reviewed checker repairs
   and separate completion publication. `GP-PROV-006` and `GP-VAL-007` are DONE
   after exact reviewed checker repairs and separate structured completion
-  publication; the effective authorized runway is now zero.
+  publication.
   `GP-PROV-005` is DONE after bounded
   `glyph_nuker` source-lineage research; source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
-  and hardware remain UNKNOWN. `GP-VAL-006` remains non-executable pending
-  later H1 curation after `GP-VAL-003`; `GP-VAL-008` remains evidence gated,
-  and `GP-ART-001` plus `GP-X1-001` remain user-decision gated. The
-  current-runway summary above is the authoritative human-readable runway state;
-  `CURATION_REQUIRED` is current until the concrete survivor work is curated.
+  and hardware remain UNKNOWN. `GP-VAL-006` is the sole Ready H1 work order
+  after exact branch-correspondence and standalone-temporary-repository safety
+  curation; `GP-VAL-008` remains evidence gated, and `GP-ART-001` plus
+  `GP-X1-001` remain user-decision gated. The current-runway summary above is
+  the authoritative human-readable runway state; `RUNWAY_LOW` is current.
   The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
   baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
   it owns no other table, changes no active bytes, and creates no hardware
