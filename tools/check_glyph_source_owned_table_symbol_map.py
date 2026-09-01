@@ -83,6 +83,102 @@ def line_lookup(path: Path, needle: str) -> tuple[int, str]:
     fail(f"missing required source symbol in {path.relative_to(REPO_ROOT)}: {needle}")
 
 
+def strip_cpp_comments(text: str) -> str:
+    """Remove comments before applying exact source-shape contracts."""
+    return re.sub(r"//[^\n]*|/\*.*?\*/", "", text, flags=re.DOTALL)
+
+
+def extract_function_block(text: str, signature: str) -> str:
+    """Extract one balanced function block, ignoring braces in comments."""
+    source = strip_cpp_comments(text)
+    if source.count(signature) != 1:
+        fail(f"expected exactly one function definition: {signature}")
+    signature_start = source.find(signature)
+    if signature_start < 0:
+        fail(f"missing required function signature: {signature}")
+    open_brace = source.find("{", signature_start)
+    if open_brace < 0:
+        fail(f"missing function body: {signature}")
+    depth = 0
+    for index in range(open_brace, len(source)):
+        if source[index] == "{":
+            depth += 1
+        elif source[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return source[signature_start : index + 1]
+    fail(f"unterminated function body: {signature}")
+
+
+def compact_source(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def validate_publication_structure(ultimate_text: str) -> None:
+    """Require the one reviewed active-state and resolver topology exactly."""
+    active = compact_source(
+        extract_function_block(
+            ultimate_text,
+            "const ActiveRuntimeConfigState& GetActiveRuntimeConfigState()",
+        )
+    )
+    expected_active = re.compile(
+        r"const ActiveRuntimeConfigState& GetActiveRuntimeConfigState\(\) \{ "
+        r"static_assert\( ValidateRuntimeConfigView\(kSourceOwnedCurrentBaselineRuntimeConfig\), "
+        r'"source-owned scaffold publishes only the baseline runtime config" '
+        r"\); static const ActiveRuntimeConfigState state = \{ "
+        r"&kSourceOwnedCurrentBaselineRuntimeConfig, RuntimeConfigSource::SourceOwnedBaseline, "
+        r"RuntimeConfigActivationStatus::SourceOwnedSelected, \}; return state; \}"
+    )
+    if expected_active.fullmatch(active) is None:
+        fail("GetActiveRuntimeConfigState() does not match the exact approved single-state structure")
+
+    resolver = compact_source(
+        extract_function_block(
+            ultimate_text,
+            "const RuntimeConfigView& ResolveActiveRuntimeConfig()",
+        )
+    )
+    expected_resolver = (
+        "const RuntimeConfigView& ResolveActiveRuntimeConfig() { "
+        "return *GetActiveRuntimeConfigState().active_view; }"
+    )
+    if resolver != expected_resolver:
+        fail("ResolveActiveRuntimeConfig() does not match the exact approved single-return structure")
+
+
+def run_structure_adversarial_tests(ultimate_text: str) -> None:
+    """Exercise each structural rejection against an isolated source string."""
+    active_signature = "const ActiveRuntimeConfigState& GetActiveRuntimeConfigState()"
+    resolver_signature = "const RuntimeConfigView& ResolveActiveRuntimeConfig()"
+    mutations = (
+        ("conditional active return", active_signature, "return state;", "return inputs ? state : state;"),
+        ("extra active return", active_signature, "return state;", "return state; return state;"),
+        ("mismatched source enum", active_signature, "RuntimeConfigSource::SourceOwnedBaseline", "RuntimeConfigSource::Candidate"),
+        ("mismatched activation enum", active_signature, "RuntimeConfigActivationStatus::SourceOwnedSelected", "RuntimeConfigActivationStatus::CandidateSelected"),
+        ("reordered initializer", active_signature, "RuntimeConfigSource::SourceOwnedBaseline,", "&kSourceOwnedCurrentBaselineRuntimeConfig, RuntimeConfigSource::SourceOwnedBaseline,"),
+        ("wrong initializer arity", active_signature, "RuntimeConfigActivationStatus::SourceOwnedSelected,", "RuntimeConfigActivationStatus::SourceOwnedSelected, 1,") ,
+        ("wrapper publication", active_signature, "&kSourceOwnedCurrentBaselineRuntimeConfig", "&GeneratedRuntimeConfigView"),
+        ("RAM-backed publication", active_signature, "&kSourceOwnedCurrentBaselineRuntimeConfig", "&active_storage.view"),
+        ("parser state read", active_signature, "static const ActiveRuntimeConfigState state", "if (parser_loaded) {} static const ActiveRuntimeConfigState state"),
+        ("indirect resolver", resolver_signature, "return *GetActiveRuntimeConfigState().active_view;", "return ResolveStoredView();"),
+        ("duplicate active definition", active_signature, "", ""),
+    )
+    for label, signature, original, replacement in mutations:
+        block = extract_function_block(ultimate_text, signature)
+        if label == "duplicate active definition":
+            mutated = ultimate_text + "\n" + block
+        else:
+            mutated = ultimate_text.replace(block, block.replace(original, replacement, 1), 1)
+        if mutated == ultimate_text:
+            fail(f"adversarial mutation did not apply: {label}")
+        try:
+            validate_publication_structure(mutated)
+        except SourceOwnedTableSymbolMapError:
+            continue
+        fail(f"adversarial mutation unexpectedly passed: {label}")
+
+
 def block_lookup(path: Path, signature: str, required_fragments: tuple[str, ...]) -> tuple[int, int, list[str]]:
     lines = read_required(path).splitlines()
     for start_index, line in enumerate(lines):
@@ -121,6 +217,10 @@ def ensure_doc_is_safe(path: Path) -> None:
 
 def main() -> int:
     print("glyph_source_owned_table_symbol_map: PASS")
+
+    ultimate_text = read_required(ULTIMATE_CPP)
+    validate_publication_structure(ultimate_text)
+    run_structure_adversarial_tests(ultimate_text)
 
     active_start, active_end, active_block = block_lookup(
         ULTIMATE_CPP,
@@ -176,7 +276,6 @@ def main() -> int:
         "SOURCE_OWNED_GENERATED_TABLE(kDefaultTable, 0);",
     )
 
-    ultimate_text = read_required(ULTIMATE_CPP)
     interpreter_text = read_required(INTERPRETER_HPP)
     forbidden_source_tokens = (
         "GeneratedRuntimeConfigBaselineActiveView",

@@ -11397,7 +11397,7 @@
       },
       "checker_id": "source_owned_table_symbol_map",
       "defines_main": true,
-      "file_size_bytes": 12203,
+      "file_size_bytes": 17397,
       "hard_coded_branch_like_strings": [
         "bcandidate",
         "candidate",
@@ -11408,7 +11408,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 261,
+      "line_count": 360,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_table_symbol_map.py",
       "potential_branch_identity_signals": [
@@ -11458,7 +11458,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "f0d6e5e207af3921ed8140f5a24eeaa85fabc8cf424669b38f6c7c9129a15c6e",
+      "sha256": "cf23bd8e37969b9ed7199a19916044fcb32da846d2a16038c8439c07ff7313e5",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
