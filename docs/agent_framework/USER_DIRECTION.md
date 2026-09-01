@@ -108,6 +108,34 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   require separate explicit authority; behavior-changing candidates retain the
   exact-candidate build, artifact, and physical hardware gate.
 
+### GLYPH-UD-010
+
+- Type: `Decision`
+- Status: `Active`
+- Source: user Codex task supplied 2026-09-02
+- Direction: For the single X1 offset-41 hardware-test candidate based on the
+  then-current live `configurator`, the project owner explicitly supersedes
+  the baseline-equivalent X1 no-op restriction and authorizes
+  `generation_mode = overlay_preserve`, ownership of `kX1Table` only, and the
+  exact ordered raw coordinates `(87,87)`, `(128,87)`, `(169,87)`,
+  `(87,128)`, `(128,128)`, `(169,128)`, `(87,169)`, `(128,169)`, and
+  `(169,169)`. The user supplies this coordinate intent; Glyph realizes the
+  exact raw values without inferring gameplay meaning.
+
+### GLYPH-UD-011
+
+- Type: `Directive`
+- Status: `Active`
+- Source: user Codex task supplied 2026-09-02
+- Direction: GLYPH-UD-010 is candidate-specific and does not authorize any
+  other X1 value, any other source-owned table, routing or publication-path
+  changes, modifier or game-semantic changes, runtime-loaded configuration,
+  persistence, WebSerial/device write, protobuf write, flashing automation,
+  release/upload, or merge. The exact committed candidate may be built to a
+  local UF2 for manual exploratory hardware testing, but no hardware PASS or
+  merge eligibility exists until the user reports physical results for the
+  preserved candidate/artifact identity.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is
