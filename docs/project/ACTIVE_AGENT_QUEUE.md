@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-    "audit_base_sha": "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
+    "audit_base_sha": "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -36,6 +36,7 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-VAL-010, GP-SRC-006, GP-VAL-013, and GP-VAL-012 completed on configurator. Independent verification found that both recorded successor conditions were literally invalidated: GP-VAL-013's reviewed path set included its publication-workflow fixture beyond GP-PROV-007's allowlist, and GP-VAL-013 changed GP-VAL-012's exact-bound manifest blob while preserving its category/applicability tuples.",
       "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 completed first; GP-PROV-007 was mechanically ACTIVATABLE and its later manifest dependency update did not re-invalidate GP-VAL-012.",
       "GP-PROV-007 completed as a reviewed H1 host-side checker repair at 721cd20388c39beefe6b1b85ce25228a7efe6a0e with no workflow, artifact, product/runtime, firmware, device, or hardware change.",
+      "The project owner resolved the GP-X1-001 user-decision gate with exact X1-only offset-41 authority, tested candidate 74ae24364b84520d4e0e39240beb9867653cc7b9 and UF2 SHA-256 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254, reported all expected outputs and no disconnects, and confirmed the restored prior firmware worked. Revision-2 evidence is published as HARDWARE_VALIDATED pending exact candidate integration recovery.",
       "The packet remains partially useful with nine non-executable survivors. No global evidence wait or Planner refresh is supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence changed in curation."
     ],
     "curator_review_provenance": {
@@ -93,6 +94,48 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-X1-001",
+      "title": "Realize exact X1 offset-41 source-owned hardware candidate",
+      "status": "HARDWARE_VALIDATED",
+      "branch": "runtime-config-x1-offset41-hardware-candidate",
+      "objective": "Realize the project-owner-supplied exact raw X1 9-way coordinates at center-relative plus or minus 41 through the existing source-owned overlay-preserve path, preserving every other active table and the current publication/routing path.",
+      "why_this_matters": "The project owner requested one bounded behavior-changing X1 candidate for direct controller testing and supplied the exact raw values without asking Glyph to infer gameplay meaning.",
+      "hardware_risk": "H2",
+      "behavioral_claim": "On the existing sole/non-mode X1 path, kX1Table contains neutral (128,128), cardinals (87,128), (169,128), (128,87), (128,169), and diagonals (87,87), (169,87), (87,169), (169,169). The project owner reported all expected outputs and no disconnects for the exact candidate/artifact pair.",
+      "scope": "Candidate-specific overlay_preserve ownership of kX1Table only; exact nine raw coordinates; source-owned generator/intake realization; exact committed candidate build; independent source/diff review; local UF2 handoff; Revision-2 reconciliation of the human hardware PASS; and exact-candidate publication recovery.",
+      "explicit_excluded_scope": "No X2, Y1/Y2, Tilt, layer/flipper, routing, button-binding, controller-semantic, gameplay-semantic, other modifier, other source-owned table, alternate publication, runtime-loaded config, persistence, WebSerial/device write, protobuf write, flashing automation, release/upload, Nunchuk, or root-cause claim.",
+      "touched_planes": ["source-owned configuration", "generated tables/artifacts", "firmware runtime", "docs/checkers"],
+      "source_authority": "Project-owner directions GLYPH-UD-010 and GLYPH-UD-011 authorize only the exact candidate-specific X1 raw coordinates and preserve all other tables and publication behavior. Candidate intake docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json records overlay_preserve with owned_tables=[kX1Table].",
+      "dependencies_prerequisites": ["Exact live base configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc.", "Existing generated-source-owned include chain and RuntimeConfigView publication remain unchanged.", "Exact candidate/artifact identity and direct human physical report are available before source integration."],
+      "substantive_authorization_rationale": "The project owner explicitly supplied the complete nine-value X1 intent, superseded the prior no-op restriction for this candidate only, excluded all other behavior, and later directed processing of the real successful hardware results. No gameplay or cross-table judgment was delegated to the implementer.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": ["The candidate ref no longer resolves exactly to 74ae24364b84520d4e0e39240beb9867653cc7b9.", "The preserved UF2 no longer hashes exactly to the recorded SHA-256.", "Any non-X1 active table, routing, publication path, or other runtime source differs from the reviewed candidate delta.", "The structured PASS evidence does not correspond exactly to the recorded candidate/artifact pair."],
+      "authorization_snapshot_provenance": "User Codex task supplied 2026-09-02, recorded as GLYPH-UD-010/011 in exact candidate 74ae24364b84520d4e0e39240beb9867653cc7b9; follow-up direct user reports confirmed expected outputs, no disconnects, successful restoration of the prior UF2, and direction to proceed with the real results.",
+      "automated_validation": ["Generator classification EXPLICIT_OWNED_TABLE_CHANGESET with changed_table_ids=[2] and preserved_table_count=27.", "Independent exact base-to-candidate inspection confirmed only kX1Table semantic contents changed and publication/routing source remained unchanged.", "Focused source-owned generator, symbol-map, identity-sync, activation-alternative, framework, navigation, and surface checks passed on the candidate.", "Fallback canonical-policy build ./scripts/build-glyph-mk6-quiet.sh passed because the pio executable was unavailable; exact UF2 SHA-256 was recorded."],
+      "canonical_build": "pio run -e glyph_mk6 was unavailable in the environment; documented fallback ./scripts/build-glyph-mk6-quiet.sh succeeded for exact candidate 74ae24364b84520d4e0e39240beb9867653cc7b9.",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "candidate_git_sha": "74ae24364b84520d4e0e39240beb9867653cc7b9",
+      "candidate_base_configurator_sha": "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/74ae24364b84520d4e0e39240beb9867653cc7b9/5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254/firmware.uf2",
+      "firmware_artifact_sha256": "5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254",
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/calibration/x1_offset41_hardware_test_protocol_2026-09-02.md",
+      "manual_acceptance_protocol_version": "GLYPH_X1_OFFSET41_MANUAL_PROTOCOL_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "hardware_evidence_record": "git-json:83efff3615768889967fc2b1675dfeb455afca91:docs/calibration/fixtures/x1_offset41_hardware_evidence_2026-09-02.json",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": [],
+      "rollback_recovery": "A prior configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc UF2 was regenerated and supplied with SHA-256 69064a5c1d52772926fe010a593f2a2e04e9675a638737b619b7b0bc4785d001; the project owner confirmed it worked after restoration.",
+      "status_documentation_updates": "Publish the exact PASS evidence without candidate source, then perform publication recovery by revalidating identity/evidence and merging only the exact tested candidate; finally publish strict DONE correspondence and current accepted-baseline status.",
+      "done_evidence": "Pending exact tested-candidate integration and structured completion correspondence after canonical HARDWARE_VALIDATED publication.",
+      "stop_conditions": ["Any exact candidate Git SHA, base SHA, artifact SHA, protocol, or evidence correspondence mismatch.", "Any active change outside kX1Table or any routing/publication delta.", "Any need to rebuild or substitute firmware bytes for hardware identity.", "Any runtime-loaded, persistence, device-write, flashing, release/upload, Nunchuk, root-cause, or gameplay scope."],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": true
+    },
     {
       "id": "GP-VAL-010",
       "title": "Bind manifest commands to tracked checkers",
@@ -2106,9 +2149,13 @@ against exact live `configurator`
   inference.
 - `GP-PERSIST-001`: `RESEARCH`; authoritative filesystem/recovery evidence and
   device-specific design decisions are absent.
-- `GP-CONFIG-005`, `GP-ART-001`, and `GP-X1-001`:
-  `USER_DECISION_GATED`; existing backend-write authority, store/custody, and
-  different X1 bytes respectively remain absent.
+- `GP-X1-001`: the user-decision gate is resolved. Exact candidate
+  `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
+  `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
+  are `HARDWARE_VALIDATED` by the project owner's direct report; exact-source
+  integration recovery is pending.
+- `GP-CONFIG-005` and `GP-ART-001`: `USER_DECISION_GATED`; existing
+  backend-write authority and store/custody respectively remain absent.
 - `GP-AUTH-001` remains resolved by the baseline-equivalent sole-`kX1Table`
   no-op intake. `GP-CONFIG-002` remains invalidated by user direction. No
   global evidence wait is proposed or supported.

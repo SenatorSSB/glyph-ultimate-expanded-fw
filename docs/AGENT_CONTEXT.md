@@ -6,6 +6,13 @@ Read this before using older calibration packets as roadmap input.
 
 ## Current Known-Good Branch State
 
+- Exact candidate `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2
+  `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
+  are now recorded as Revision-2 `HARDWARE_VALIDATED` for the bounded
+  sole/non-mode X1 offset-41 scope. The project owner reported all expected
+  outputs and no disconnects, then confirmed the restored prior firmware
+  worked. Exact-candidate integration recovery is pending in this evidence
+  snapshot; `configurator` has not yet received the candidate source.
 - `configurator` contains the full latest Y2 layout source-owned port after the
   recorded latest Y2 layout HARDWARE_PASS.
 - The current approved Glyph realization path is source-owned table/routing
@@ -92,6 +99,9 @@ Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically a
   candidate. `GP-CONFIG-002` is invalidated by `GLYPH-UD-007`; no
   official-configurator capture is required or awaited, and the retained
   corpus/templates are historical provenance.
+  `GP-X1-001` is now `HARDWARE_VALIDATED` for its exact Git/artifact pair;
+  publication recovery must reverify those identities and merge only the
+  tested candidate before the item becomes `DONE`.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.

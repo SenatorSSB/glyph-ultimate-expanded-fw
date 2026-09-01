@@ -41,6 +41,15 @@ change pins, build inputs, workflows, artifacts, or runtime behavior.
 creates no hardware candidate. `GP-CONFIG-002` is invalidated and no
 official-configurator evidence is awaited.
 
+`GP-X1-001` has resolved its user-decision and physical gates. Exact candidate
+`74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
+`5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
+are `HARDWARE_VALIDATED` for the bounded sole/non-mode X1 offset-41 scope.
+The current recovery action is to reverify the pinned candidate, preserved
+bytes, and structured PASS, then merge only that tested source snapshot and
+publish strict `DONE` correspondence. Nunchuk remains NOT_TESTED and root
+cause remains unproven.
+
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The
 census detects checker-set drift mechanically; the curated manifest retains
