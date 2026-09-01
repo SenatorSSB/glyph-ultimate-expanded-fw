@@ -64,22 +64,24 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Live-verified Planner packet
-  `glyph-portfolio-20260901-0909` is partially consumed after curation added
-  two independent H0 work orders and two mechanically gated successors.
+  `glyph-portfolio-20260901-0909` is partially consumed after three reviewed
+  H0 completions. Curator rebound both literally invalidated successors to the
+  current snapshot: `GP-VAL-012` is mechanically activatable first, while
+  `GP-PROV-007` waits on its completion to preserve manifest sequencing.
   The current-runway summary above is the authoritative executable order and
   liveness state. The packet retains non-executable substantive-dependency,
   evidence, and user-decision survivors, but it does not support a portfolio-
-  global evidence wait. Planner refresh is not requested while this fresh
-  packet retains useful gated supply.
+  global evidence wait. Planner refresh is not requested while this partially
+  consumed current packet retains useful gated supply.
   Completed implementation history remains in the canonical queue. Bounded
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
