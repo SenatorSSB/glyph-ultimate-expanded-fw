@@ -8,6 +8,16 @@ for full discovery.
 
 ## Current Merge-Gating Hardware PASS
 
+- `x1_offset41_hardware_result_2026-09-02.md` - exact-snapshot manual
+  HARDWARE_PASS for the X1-only offset-41 candidate at
+  `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
+  `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`.
+  The project owner confirmed all expected outputs and no disconnects, then
+  confirmed the restored prior firmware worked. Nunchuk remains NOT_TESTED.
+- `x1_offset41_hardware_test_protocol_2026-09-02.md` - exact sole/non-mode X1
+  neutral, cardinal, diagonal, and connection-stability acceptance protocol.
+- `fixtures/x1_offset41_hardware_evidence_2026-09-02.json` - Revision-2
+  structured evidence for the same exact candidate/artifact pair.
 - `latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md` - current
   merge-gating latest Y2 layout source-owned port HARDWARE_PASS. It records all
   usual tests passing including Up+A and Down+A, RF5 forced A + Up and LT6

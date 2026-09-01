@@ -1,0 +1,97 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-X1-001",
+  "candidate_branch": "runtime-config-x1-offset41-hardware-candidate",
+  "candidate_git_sha": "74ae24364b84520d4e0e39240beb9867653cc7b9",
+  "candidate_base_configurator_sha": "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/74ae24364b84520d4e0e39240beb9867653cc7b9/5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6 build target; board revision not separately reported by the project owner",
+  "firmware_profile_state": "Existing sole/non-mode X1 path selecting kX1Table; all other tables and routing unchanged",
+  "update_method": "Manual UF2 flash by the project owner under the authorized exploratory hardware-test workflow",
+  "host_platform_adapter": "User-managed host and adapter; exact host and adapter were not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/calibration/x1_offset41_hardware_test_protocol_2026-09-02.md",
+  "candidate_protocol_version": "GLYPH_X1_OFFSET41_MANUAL_PROTOCOL_V1",
+  "preconditions": [
+    "The candidate branch was fixed at Git SHA 74ae24364b84520d4e0e39240beb9867653cc7b9 before build and no source changes followed.",
+    "The locally handed-off UF2 was SHA-256 verified as 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254 before the project owner's manual test.",
+    "The project owner supplied the exact nine X1 expectations before generation and performed the physical test."
+  ],
+  "steps": [
+    {
+      "id": "X1-NEUTRAL",
+      "instruction": "Observe neutral on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (128,128).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-LEFT",
+      "instruction": "Observe left on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (87,128).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-RIGHT",
+      "instruction": "Observe right on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (169,128).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-DOWN",
+      "instruction": "Observe down on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (128,87).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-UP",
+      "instruction": "Observe up on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (128,169).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-DOWN-LEFT",
+      "instruction": "Observe down-left on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (87,87).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-DOWN-RIGHT",
+      "instruction": "Observe down-right on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (169,87).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-UP-LEFT",
+      "instruction": "Observe up-left on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (87,169).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    },
+    {
+      "id": "X1-UP-RIGHT",
+      "instruction": "Observe up-right on the existing sole/non-mode X1 path.",
+      "expected": "Raw X1 output is (169,169).",
+      "observed": "Project owner confirmed the outputs were as expected."
+    }
+  ],
+  "negative_regression_checks": [
+    "Project owner reported that the controller did not disconnect at any point during candidate testing."
+  ],
+  "power_cycle_reconnect_checks": [
+    "After the prior configurator UF2 was supplied for restoration, the project owner reported that it worked."
+  ],
+  "result": "PASS",
+  "anomalies": [
+    "The exact UF2 was preserved at its candidate-SHA/artifact-SHA-addressed local backup after the exploratory test by re-hashing and copying the unchanged pre-handoff build bytes; no external immutable artifact-store upload was authorized.",
+    "The project owner did not separately report board revision, host/adapter details, an exact device-test clock time, or an explicit power-cycle sequence."
+  ],
+  "rollback_recovery": "The prior configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc UF2 was regenerated with SHA-256 69064a5c1d52772926fe010a593f2a2e04e9675a638737b619b7b0bc4785d001; after receiving it, the project owner reported that it worked.",
+  "tester": "Project owner / user (direct user-reported physical result)",
+  "tested_at": "2026-09-02T02:23:58+03:00",
+  "evidence_gaps": []
+}
