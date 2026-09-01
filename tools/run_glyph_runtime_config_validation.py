@@ -217,6 +217,12 @@ def main() -> int:
         print(f"glyph_runtime_config_validation_manifest: PASS; entries={len(entries)}; strong_signal_exclusions={len(exclusions)}")
         return 0
     selected = [entry for entry in entries if entry["applicability"] == "current" and (not args.category or entry["category"] in args.category)]
+    if args.category:
+        selected_categories = {str(entry["category"]) for entry in selected}
+        empty_categories = sorted(set(args.category) - selected_categories)
+        if empty_categories:
+            print("glyph_runtime_config_validation: FAIL: requested category selects zero current checks: " + ", ".join(empty_categories))
+            return 1
     results = []
     for entry in selected:
         started = monotonic()

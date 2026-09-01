@@ -234,7 +234,17 @@ def main() -> int:
         category_entries = [entry("baseline_pass"), entry("docs_pass", category="docs")]
         for checker in category_entries:
             write_checker(root, checker, 0)
-        manifest = write_manifest(root, category_entries, ["baseline", "docs"])
+        historical_category_entry = entry(
+            "historical_evidence_probe",
+            category="historical_evidence",
+            applicability="historical_only",
+            historical=True,
+            load_bearing=False,
+        )
+        historical_category_entry["branch_policy"] = "named_evidence_branch"
+        write_checker(root, historical_category_entry, 0)
+        category_entries.append(historical_category_entry)
+        manifest = write_manifest(root, category_entries, ["baseline", "docs", "historical_evidence"])
         result, text = invoke(module, root, manifest, "--json", "--category", "docs")
         report = payload(text)
         if result != 0 or [item["id"] for item in report["results"]] != ["docs_pass"]:
@@ -245,6 +255,16 @@ def main() -> int:
         if result != 1 or "unknown category" not in text:
             raise AssertionError("unknown category was accepted")
         passed.append("AGG-05-unknown-category-rejected")
+
+        for arguments, label in (
+            (("historical_evidence",), "historical-only"),
+            (("docs", "historical_evidence"), "mixed"),
+            (("historical_evidence", "historical_evidence"), "duplicate"),
+        ):
+            result, text = invoke(module, root, manifest, "--category", arguments[0], *sum((["--category", category] for category in arguments[1:]), []))
+            if result != 1 or "requested category selects zero current checks: historical_evidence" not in text:
+                raise AssertionError(f"{label} zero-result category was accepted")
+        passed.append("AGG-17-zero-result-category-rejected")
 
         command_probe = entry("command_probe")
         write_checker(root, command_probe, 0)

@@ -10217,26 +10217,32 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 19488,
+      "file_size_bytes": 20597,
       "hard_coded_branch_like_strings": [
         "branch_policy",
         "candidate_preparation",
         "configurator",
-        "module.validate_branch_policy"
+        "historical_evidence",
+        "historical_evidence_probe",
+        "module.validate_branch_policy",
+        "named_evidence_branch"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 409,
+      "line_count": 429,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
         "branch_policy",
         "candidate_preparation",
         "configurator",
-        "module.validate_branch_policy"
+        "historical_evidence",
+        "historical_evidence_probe",
+        "module.validate_branch_policy",
+        "named_evidence_branch"
       ],
       "potential_mutation_signals": [
         "subprocess.run"
@@ -10260,7 +10266,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "1400843f6db338cefe447c0689cbbf2fd81c2685077256bb7823cc1393c2aa33",
+      "sha256": "8afa5dabb5c92805781fa77deb1df91f0ba76174e700a1c525973e567ebffae8",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
