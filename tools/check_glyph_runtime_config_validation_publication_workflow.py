@@ -8,6 +8,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from glyph_workflow_step_contract import WorkflowStepError, validate_current_workflow
+
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/build.yml"
 FIXTURE = ROOT / "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json"
@@ -113,22 +115,23 @@ def validate(text: str, fixture: dict[str, object]) -> None:
             raise WorkflowError(f"missing required token: {token}")
     if "continue-on-error:" in text or re.search(r"\bif:\s*always\(\)", text):
         raise WorkflowError("publication must fail closed on validation failure")
-    jobs = job_blocks(text)
     validation_job = str(fixture["validation_job"])
     publication_job = str(fixture["publication_job"])
-    if validation_job not in jobs or publication_job not in jobs:
-        raise WorkflowError("validation/publication jobs missing")
+    try:
+        validate_current_workflow(
+            text,
+            validation_job=validation_job,
+            aggregate="python3 tools/run_glyph_runtime_config_validation.py --json",
+            publication_tokens=[str(token) for token in fixture["publication_tokens"]],
+        )
+    except WorkflowStepError as exc:
+        raise WorkflowError(str(exc)) from exc
+    jobs = job_blocks(text)
     validation = jobs[validation_job]
-    if "python3 tools/run_glyph_runtime_config_validation.py --json" not in validation:
-        raise WorkflowError("current aggregate is not in validation job")
     if "fetch-depth: 0" not in validation or "git fetch --no-tags origin" not in validation:
         raise WorkflowError("validation job lacks full-history trusted-base setup")
     if "GITHUB_BASE_REF" not in validation or "origin/configurator" not in validation:
         raise WorkflowError("detached CI comparison base is not explicit")
-    for job, body in jobs.items():
-        if any(token in body for token in fixture["publication_tokens"]):
-            if not re.search(r"(?m)^    needs:\s*validation\s*$", body):
-                raise WorkflowError(f"publication job {job} is not gated by validation")
 
 
 def main() -> int:

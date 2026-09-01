@@ -129,6 +129,46 @@
       "id": "alternate_unguarded_publication",
       "old": "  build:\n",
       "new": "  publish:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/upload-artifact@v4\n      with:\n        path: firmware.uf2\n\n  build:\n"
+    },
+    {
+      "id": "comment_only_aggregate",
+      "old": "run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "run: '# python3 tools/run_glyph_runtime_config_validation.py --json'"
+    },
+    {
+      "id": "inert_aggregate_step",
+      "old": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "    - name: Run current runtime-config validation\n      if: false\n      run: python3 tools/run_glyph_runtime_config_validation.py --json"
+    },
+    {
+      "id": "folded_aggregate_shape",
+      "old": "run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "run: >"
+    },
+    {
+      "id": "aggregate_in_wrong_job",
+      "old": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "    - name: Run current runtime-config validation\n      run: echo validation"
+    },
+    {
+      "id": "ambiguous_duplicate_step",
+      "old": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json\n    - name: Duplicate validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json"
+    },
+    {
+      "id": "unsupported_needs_shape",
+      "old": "    needs: validation\n",
+      "new": "    needs: [validation]\n"
+    },
+    {
+      "id": "alternate_unguarded_nuker",
+      "old": "    - name: nuke\n      run: |\n        mv glyph_nuker $PIO_ENV/glyph_nuker",
+      "new": "    - name: nuke\n      run: |\n        mv glyph_nuker $PIO_ENV/glyph_nuker\n\n  publish-nuker:\n    runs-on: ubuntu-latest\n    steps:\n    - name: nuke\n      run: glyph_nuker"
+    },
+    {
+      "id": "conditional_validation_or_publication",
+      "old": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "    - name: Run current runtime-config validation\n      if: failure()\n      run: python3 tools/run_glyph_runtime_config_validation.py --json"
     }
   ]
 }
