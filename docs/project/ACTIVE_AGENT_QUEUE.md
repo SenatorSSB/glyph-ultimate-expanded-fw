@@ -125,7 +125,7 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_version": "GLYPH_X1_OFFSET41_MANUAL_PROTOCOL_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
-      "hardware_evidence_record": "git-json:83efff3615768889967fc2b1675dfeb455afca91:docs/calibration/fixtures/x1_offset41_hardware_evidence_2026-09-02.json",
+      "hardware_evidence_record": "git-json:6b0061489cb67d345f212f75268455c181ba271f:docs/calibration/fixtures/x1_offset41_hardware_evidence_2026-09-02.json",
       "hardware_result": "PASS",
       "hardware_evidence_gaps": [],
       "rollback_recovery": "A prior configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc UF2 was regenerated and supplied with SHA-256 69064a5c1d52772926fe010a593f2a2e04e9675a638737b619b7b0bc4785d001; the project owner confirmed it worked after restoration.",
