@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "c3f3438172c8de977d390c9a2fb2c1037262e2a9",
+    "audit_base_sha": "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -33,8 +33,8 @@ Git, but it is not current candidate supply or implementation authority.
       "Direct source and specialist verification confirmed GP-SRC-006 and the executable validation-before-publication repair as independent complete H0 work; they are authorized as GP-SRC-006 and GP-VAL-013 READY without changing workflow or product source.",
       "The executable sidecar/unique-JSON repair is authorized as GP-PROV-007 PREAUTHORIZED and WAITING mechanically on GP-VAL-013 integration; zero-result category rejection is authorized as GP-VAL-012 PREAUTHORIZED and WAITING mechanically on GP-VAL-010 integration.",
       "GP-PROV-003 repair, GP-VAL-011, GP-CTL-003, and GP-BUILD-001 remain substantive-dependency gated; GP-VAL-008 remains evidence gated; GP-PERSIST-001 remains research gated; GP-CONFIG-005, GP-ART-001, and GP-X1-001 remain user-decision gated.",
-      "GP-VAL-010, GP-SRC-006, and GP-VAL-013 completed on configurator. Independent verification found that both recorded successor conditions were literally invalidated: GP-VAL-013's reviewed path set included its publication-workflow fixture beyond GP-PROV-007's allowlist, and GP-VAL-013 changed GP-VAL-012's exact-bound manifest blob while preserving its category/applicability tuples.",
-      "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 is mechanically ACTIVATABLE first; GP-PROV-007 remains WAITING on its completion so GP-PROV-007's later manifest dependency update cannot re-invalidate GP-VAL-012.",
+      "GP-VAL-010, GP-SRC-006, GP-VAL-013, and GP-VAL-012 completed on configurator. Independent verification found that both recorded successor conditions were literally invalidated: GP-VAL-013's reviewed path set included its publication-workflow fixture beyond GP-PROV-007's allowlist, and GP-VAL-013 changed GP-VAL-012's exact-bound manifest blob while preserving its category/applicability tuples.",
+      "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 completed first; GP-PROV-007 is now mechanically ACTIVATABLE so its later manifest dependency update cannot re-invalidate GP-VAL-012.",
       "The packet remains partially useful with nine non-executable survivors. No global evidence wait or Planner refresh is supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence changed in curation."
     ],
     "curator_review_provenance": {
@@ -69,7 +69,7 @@ Git, but it is not current candidate supply or implementation authority.
   },
     "runway": {
     "immediate_ready": 0,
-    "recorded_preauthorized": 2,
+    "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
@@ -269,7 +269,7 @@ Git, but it is not current candidate supply or implementation authority.
       "status_documentation_updates": "Activate mechanically only after rebound GP-VAL-012 integration with the manifest unchanged; record Done only after reviewed publication while retaining all artifact and hardware non-claims.",
       "done_evidence": "Not complete; PREAUTHORIZED and waiting mechanically on rebound GP-VAL-012 completion.",
       "stop_conditions": ["The activation dependency is absent, drifted, or requires interpretation.", "Any workflow, postprocessor, artifact route, product/runtime, device, or hardware state changes.", "Duplicate JSON identities can still be accepted."],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -284,7 +284,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-012",
       "title": "Reject zero-execution category success",
-      "status": "PREAUTHORIZED",
+      "status": "DONE",
       "branch": "glyph/gp-val-012-zero-category-rejection-20260901",
       "objective": "Make every explicit aggregate category request fail when any requested category selects zero current executable checks.",
       "why_this_matters": "The live historical_evidence category request returns PASS with an empty results list because selection filters to current entries and all([]) succeeds.",
@@ -309,9 +309,9 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused repair if valid current category execution regresses; never restore PASS for an explicit empty selection.",
       "status_documentation_updates": "Activate mechanically only after GP-VAL-010 integration and record Done after reviewed publication; preserve all applicability and runtime non-claims.",
-      "done_evidence": "Not complete; PREAUTHORIZED and mechanically ACTIVATABLE after rebound Curator review.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"6d3c2812a45d4d59caab9699cdcd080bf1d7571f","reviewed_implementation_sha":"c91dad6ac3a4a8629e93179d152b882b862a7fd9","prior_canonical_integration_sha":"c91dad6ac3a4a8629e93179d152b882b862a7fd9","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_runtime_config_validation_aggregate.py","tools/run_glyph_runtime_config_validation.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS on exact reviewed snapshot c91dad6ac3a4a8629e93179d152b882b862a7fd9; focused, manifest, census, health, full aggregate, framework, sequence, navigation, agent-surface, py_compile, and diff gates passed.","validation_provenance":"Exact integrated snapshot c91dad6ac3a4a8629e93179d152b882b862a7fd9 passed all authorized GP-VAL-012 checks; no build, artifact, device, or hardware action was required."},
       "stop_conditions": ["The activation dependency is absent, drifted, or requires interpretation.", "Any historical/unsafe checker is promoted or executed.", "Any runtime-config validation manifest byte or field changes.", "Any manifest classification, workflow, build, product/runtime, artifact, device, or hardware behavior changes."],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -2024,11 +2024,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2087,10 +2087,11 @@ against exact live `configurator`
 - `GP-SRC-006`: authorized H0 structural active-publication checker work.
 - `GP-VAL-013`: authorized H0 executable validation-before-publication repair;
   the new repair identity preserves historical `GP-VAL-002` completion.
-- `GP-PROV-007`: rebound `PREAUTHORIZED` and `WAITING` mechanically on reviewed
-  `GP-VAL-012` completion; it preserves historical `GP-PROV-002` completion.
-- `GP-VAL-012`: rebound `PREAUTHORIZED` and `ACTIVATABLE` after exact
-  GP-VAL-010 path/blob and current manifest revalidation.
+- `GP-PROV-007`: rebound `PREAUTHORIZED` and `ACTIVATABLE` mechanically after
+  reviewed `GP-VAL-012` completion; it preserves historical `GP-PROV-002`
+  completion.
+- `GP-VAL-012`: completed after exact GP-VAL-010 path/blob and current manifest
+  revalidation.
 - `GP-PROV-003` repair: `SUBSTANTIVE_DEPENDENCY_GATED`; the documented local
   build wrappers are omitted, but schema-v2 representation and GP-PROV-004
   observation-correspondence preservation/revalidation must be bound first.
