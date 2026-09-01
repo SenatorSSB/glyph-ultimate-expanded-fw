@@ -12,6 +12,7 @@ import contextlib
 import importlib.util
 import io
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -82,9 +83,16 @@ def entry(
     }
 
 
+def assert_manifest_failure(module: Any, root: Path, manifest: Path, needle: str) -> None:
+    result, text = invoke(module, root, manifest, "--check-manifest")
+    if result != 1 or needle not in text:
+        raise AssertionError(f"manifest accepted invalid command contract: {needle}")
+
+
 def write_checker(root: Path, checker: dict[str, Any], exit_code: int) -> None:
     path = root / checker["path"]
     path.write_text(f"raise SystemExit({exit_code})\n", encoding="utf-8")
+    run_git(root, "add", checker["path"])
 
 
 def refresh_census(root: Path) -> None:
@@ -238,6 +246,52 @@ def main() -> int:
             raise AssertionError("unknown category was accepted")
         passed.append("AGG-05-unknown-category-rejected")
 
+        command_probe = entry("command_probe")
+        write_checker(root, command_probe, 0)
+        run_git(root, "commit", "-m", "add command probe")
+        command_cases = [
+            (["python", command_probe["path"]], [], "command does not match"),
+            (["python3", command_probe["path"], "--extra"], [], "command does not match"),
+            (["python3", command_probe["path"]], ["--required"], "command does not match"),
+            (["python3"], [], "command does not match"),
+            (["python3", "tools/other.py"], [], "command does not match"),
+        ]
+        for command, required_arguments, needle in command_cases:
+            command_probe["command"] = command
+            command_probe["required_arguments"] = required_arguments
+            manifest = write_manifest(root, [command_probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest, needle)
+        command_probe["command"] = ["python3", command_probe["path"], "--required"]
+        command_probe["required_arguments"] = [1]
+        manifest = write_manifest(root, [command_probe], ["baseline"])
+        assert_manifest_failure(module, root, manifest, "invalid required_arguments")
+        command_probe["required_arguments"] = []
+        command_probe["command"] = ["python3", command_probe["path"]]
+        manifest = write_manifest(root, [command_probe], ["baseline"])
+        result, text = invoke(module, root, manifest, "--check-manifest")
+        if result != 0 or "entries=1" not in text:
+            raise AssertionError(f"valid command contract was rejected: {text}")
+        executable_probe = entry("executable_probe")
+        write_checker(root, executable_probe, 0)
+        os.chmod(root / executable_probe["path"], 0o755)
+        run_git(root, "add", executable_probe["path"])
+        manifest = write_manifest(root, [executable_probe], ["baseline"])
+        result, text = invoke(module, root, manifest, "--check-manifest")
+        if result != 0 or "entries=1" not in text:
+            raise AssertionError("tracked executable-mode Python checker was rejected")
+        for bad_path in ("tools", "tools/link.py", "/absolute.py", "../escape.py", "tools/./bad.py", "tools\\bad.py"):
+            command_probe["path"] = bad_path
+            command_probe["command"] = ["python3", bad_path]
+            command_probe["required_arguments"] = []
+            manifest = write_manifest(root, [command_probe], ["baseline"])
+            assert_manifest_failure(module, root, manifest, "invalid checker path")
+        command_probe["path"] = "tools/untracked.py"
+        command_probe["command"] = ["python3", command_probe["path"]]
+        command_probe["required_arguments"] = []
+        manifest = write_manifest(root, [command_probe], ["baseline"])
+        assert_manifest_failure(module, root, manifest, "invalid checker path")
+        passed.append("AGG-16-command-interpreter-path-arguments-and-target-contract")
+
         mismatch = [entry("unexpected_exit")]
         write_checker(root, mismatch[0], 9)
         manifest = write_manifest(root, mismatch, ["baseline"])
@@ -258,7 +312,7 @@ def main() -> int:
         missing = [entry("missing_checker")]
         manifest = write_manifest(root, missing, ["baseline"])
         result, text = invoke(module, root, manifest)
-        if result != 1 or "missing checker file" not in text:
+        if result != 1 or "invalid checker path" not in text:
             raise AssertionError("missing checker was not rejected before execution")
         passed.append("AGG-08-missing-checker-rejected")
 

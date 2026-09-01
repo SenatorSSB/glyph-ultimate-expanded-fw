@@ -44,6 +44,20 @@ def tracked_regular_stage_zero(path: str) -> bool:
     return len(records) == 1 and records[0][0] in {"100644", "100755"} and (ROOT / path).is_file() and not (ROOT / path).is_symlink()
 
 
+def validate_checker_command(entry: dict[str, object]) -> None:
+    checker_id = entry["id"]
+    path = entry["path"]
+    required_arguments = entry["required_arguments"]
+    command = entry["command"]
+    if not isinstance(path, str) or not tracked_regular_stage_zero(path):
+        raise ValueError(f"invalid checker path: {checker_id}")
+    if not isinstance(required_arguments, list) or not all(isinstance(argument, str) for argument in required_arguments):
+        raise ValueError(f"invalid required_arguments: {checker_id}")
+    expected = ["python3", path, *required_arguments]
+    if command != expected:
+        raise ValueError(f"command does not match path/required_arguments: {checker_id}")
+
+
 def direct_local_helpers(checker_path: str) -> set[str]:
     source = (ROOT / checker_path).read_text(encoding="utf-8")
     tree = ast.parse(source, filename=checker_path)
@@ -111,10 +125,9 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         ids.add(checker_id)
         if entry["category"] not in categories:
             raise ValueError(f"invalid category: {entry['category']}")
-        if not isinstance(entry["command"], list) or not entry["command"] or not all(isinstance(part, str) for part in entry["command"]):
+        if not isinstance(entry["command"], list) or not all(isinstance(part, str) for part in entry["command"]):
             raise ValueError(f"invalid command: {checker_id}")
-        if entry["path"] != entry["command"][1] or not (ROOT / entry["path"]).is_file():
-            raise ValueError(f"missing checker file: {entry['path']}")
+        validate_checker_command(entry)
         validate_dependencies(entry)
         validate_branch_policy(entry)
         if entry["applicability"] == "current" and (entry["historical"] or not entry["load_bearing"] or entry["required_arguments"] or entry["mutation_risk"] not in {"none", "temporary_file_only", "temporary_repository_only"}):
