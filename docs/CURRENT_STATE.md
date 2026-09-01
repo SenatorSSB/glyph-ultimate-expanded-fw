@@ -1,6 +1,6 @@
 # Glyph Current State
 
-Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-VAL-013"],"immediate_ready":1,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}<!-- current-runway:end -->
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}<!-- current-runway:end -->
 
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
@@ -8,7 +8,7 @@ This is the short current-state entrypoint. Agents should read
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-013; Immediate Ready: 1; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 **Current Agentic Operating State:** the machine-derived summary above and `docs/project/ACTIVE_AGENT_QUEUE.md` are canonical. Packet `glyph-portfolio-20260901-0909` is partially consumed after independent curation added two H0 work orders and two waiting mechanical successors; its remaining candidates retain substantive-dependency, evidence, research, or user-decision gates and do not establish a global wait. Planner refresh is not requested while the fresh packet remains useful. Authorization policy, including `PLANNING_REQUIRED`, is defined by the agent framework rather than this prose. `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` remains invalidated; the older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined; and the sole-X1 no-op intake remains the complete current production authority. No hardware wait or product/runtime claim is implied.
 ## Current Known-Good State
