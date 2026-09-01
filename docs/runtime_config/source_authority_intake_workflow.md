@@ -1,8 +1,9 @@
 # Source-authority intake workflow
 
-Status: offline tooling only; the exact baseline-equivalent `kX1Table`
-`overlay_preserve` intake is production-authorized, but it is a semantic
-no-op, creates no active-source change, and is not a hardware candidate.
+Status: offline tooling only; the accepted `kX1Table` `overlay_preserve`
+authority record preserves its immutable candidate baseline and is now a
+semantic no-op against the hardware-validated current source. It creates no
+new active-source change or hardware candidate.
 
 ## Purpose and boundary
 
@@ -123,10 +124,13 @@ behavior. Preparation/install and any later active-source candidate are
 separate cycles. Firmware build and hardware testing only apply to that later
 active candidate cycle, and active changes merge only after HARDWARE_PASS.
 
-The canonical first production-authority intake is
-`intakes/x1_baseline_equivalent_overlay_v1.intake.json`. It owns only
-`kX1Table`, copies that table's exact current nine-point baseline, and preserves
-the other 27 tables as unowned. Its project-owner approval reference is
-`docs/agent_framework/USER_DIRECTION.md#glyph-ud-008`. It validates the
-incremental authority path only; it does not prove a future active X1 value
-change safe or authorize any additional table.
+The accepted canonical X1 authority record is
+`intakes/x1_offset41_overlay_hardware_candidate.intake.json`. It owns only
+`kX1Table`, records the exact offset-41 replacement against its immutable
+pre-change baseline, and preserves the other 27 tables as unowned. Its
+project-owner approval reference is
+`docs/agent_framework/USER_DIRECTION.md#glyph-ud-010`. The exact candidate and
+artifact subsequently passed the Revision-2 hardware gate and were integrated;
+the checker preserves the recorded candidate baseline while proving those
+replacement values are now equivalent to the current accepted source. It does
+not authorize a future X1 value change or any additional table.

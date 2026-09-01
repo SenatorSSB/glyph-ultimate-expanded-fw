@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-    "audit_base_sha": "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+    "audit_base_sha": "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -37,6 +37,7 @@ Git, but it is not current candidate supply or implementation authority.
       "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 completed first; GP-PROV-007 was mechanically ACTIVATABLE and its later manifest dependency update did not re-invalidate GP-VAL-012.",
       "GP-PROV-007 completed as a reviewed H1 host-side checker repair at 721cd20388c39beefe6b1b85ce25228a7efe6a0e with no workflow, artifact, product/runtime, firmware, device, or hardware change.",
       "The project owner resolved the GP-X1-001 user-decision gate with exact X1-only offset-41 authority, tested candidate 74ae24364b84520d4e0e39240beb9867653cc7b9 and UF2 SHA-256 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254, reported all expected outputs and no disconnects, and confirmed the restored prior firmware worked. Revision-2 evidence is published as HARDWARE_VALIDATED pending exact candidate integration recovery.",
+      "GP-X1-001 publication recovery reverified the pinned candidate, content-addressed local artifact, immutable PASS record, and exact three-path reviewed delta; merge commit 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c integrated only the tested candidate, and post-integration baseline/intake validators were aligned without further firmware-source changes.",
       "The packet remains partially useful with nine non-executable survivors. No global evidence wait or Planner refresh is supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence changed in curation."
     ],
     "curator_review_provenance": {
@@ -97,7 +98,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-X1-001",
       "title": "Realize exact X1 offset-41 source-owned hardware candidate",
-      "status": "HARDWARE_VALIDATED",
+      "status": "DONE",
       "branch": "runtime-config-x1-offset41-hardware-candidate",
       "objective": "Realize the project-owner-supplied exact raw X1 9-way coordinates at center-relative plus or minus 41 through the existing source-owned overlay-preserve path, preserving every other active table and the current publication/routing path.",
       "why_this_matters": "The project owner requested one bounded behavior-changing X1 candidate for direct controller testing and supplied the exact raw values without asking Glyph to infer gameplay meaning.",
@@ -129,8 +130,8 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_result": "PASS",
       "hardware_evidence_gaps": [],
       "rollback_recovery": "A prior configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc UF2 was regenerated and supplied with SHA-256 69064a5c1d52772926fe010a593f2a2e04e9675a638737b619b7b0bc4785d001; the project owner confirmed it worked after restoration.",
-      "status_documentation_updates": "Publish the exact PASS evidence without candidate source, then perform publication recovery by revalidating identity/evidence and merging only the exact tested candidate; finally publish strict DONE correspondence and current accepted-baseline status.",
-      "done_evidence": "Pending exact tested-candidate integration and structured completion correspondence after canonical HARDWARE_VALIDATED publication.",
+      "status_documentation_updates": "Exact PASS evidence was published without candidate source; publication recovery reverified identity/evidence, merged only the exact tested candidate, aligned accepted-baseline validators without further firmware-source changes, and published strict DONE correspondence.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"045bca0d1450c261c3c60ccf5ef86f7302bd3dbc","reviewed_implementation_sha":"74ae24364b84520d4e0e39240beb9867653cc7b9","prior_canonical_integration_sha":"1597c01b416b6aa697d73efc7d2c2b3695dc3e5c","reviewed_changed_paths":["docs/agent_framework/USER_DIRECTION.md","docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json","src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"],"independent_review_provenance":"Fresh independent candidate reviewer PASS on exact snapshot 74ae24364b84520d4e0e39240beb9867653cc7b9 confirmed only kX1Table changed semantically, exact requested values, 27 preserved tables, unchanged routing/publication, successful fallback build, and artifact identity; fresh evidence reviewer PASS confirmed bounded Revision-2 record correspondence after two precision fixes.","validation_provenance":"Exact candidate/base and remote refs reverified; preserved UF2 rehashed to 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254; immutable PASS evidence and protocol validated; pre-integration full runtime-config aggregate passed; merge staged blobs for the active header and intake matched the candidate exactly; post-integration source-sync, intake, census, health, framework, navigation, surface, semantic table, and full aggregate gates passed with no further firmware-source change."},
       "stop_conditions": ["Any exact candidate Git SHA, base SHA, artifact SHA, protocol, or evidence correspondence mismatch.", "Any active change outside kX1Table or any routing/publication delta.", "Any need to rebuild or substitute firmware bytes for hardware identity.", "Any runtime-loaded, persistence, device-write, flashing, release/upload, Nunchuk, root-cause, or gameplay scope."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -2149,15 +2150,17 @@ against exact live `configurator`
   inference.
 - `GP-PERSIST-001`: `RESEARCH`; authoritative filesystem/recovery evidence and
   device-specific design decisions are absent.
-- `GP-X1-001`: the user-decision gate is resolved. Exact candidate
+- `GP-X1-001`: `DONE`. Exact candidate
   `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
   `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
-  are `HARDWARE_VALIDATED` by the project owner's direct report; exact-source
-  integration recovery is pending.
+  received the project owner's direct PASS and entered `configurator` only
+  through exact-candidate integration commit
+  `1597c01b416b6aa697d73efc7d2c2b3695dc3e5c`.
 - `GP-CONFIG-005` and `GP-ART-001`: `USER_DECISION_GATED`; existing
   backend-write authority and store/custody respectively remain absent.
-- `GP-AUTH-001` remains resolved by the baseline-equivalent sole-`kX1Table`
-  no-op intake. `GP-CONFIG-002` remains invalidated by user direction. No
+- `GP-AUTH-001` remains historical authority provenance; the accepted current
+  sole-`kX1Table` record is the exact hardware-validated offset-41 intake.
+  `GP-CONFIG-002` remains invalidated by user direction. No
   global evidence wait is proposed or supported.
 
 ## Work Orders

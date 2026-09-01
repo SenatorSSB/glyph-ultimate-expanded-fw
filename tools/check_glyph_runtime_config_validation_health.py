@@ -114,7 +114,7 @@ def validate_health(value: dict[str, Any], census_value: dict[str, Any], manifes
     validate_types(value)
     if value["schema_version"] != 3 or value["starting_commit"] != EXPECTED:
         raise ValueError("health schema or starting commit is incorrect")
-    if value["canonical_baseline"] != {"semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970", "table_count": 28, "final_table": "kLt1LowMagnitudeTable"}:
+    if value["canonical_baseline"] != {"semantic_digest": "b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874", "table_count": 28, "final_table": "kLt1LowMagnitudeTable"}:
         raise ValueError("canonical baseline does not match source-owned baseline")
     if value["repository_checker_census"] != {"artifact": "docs/runtime_config/fixtures/glyph_checker_census.json", "discovered_count": len(census_value["entries"]), "validated": True}:
         raise ValueError("checker census correspondence is stale")

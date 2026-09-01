@@ -22,7 +22,7 @@ FIXTURES = (
     REPO_ROOT / "docs/runtime_config/fixtures/current_baseline_runtime_config_interpreter_source_baseline.json",
     REPO_ROOT / "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
 )
-EXPECTED_DIGEST = "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970"
+EXPECTED_DIGEST = "b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874"
 EXPECTED_FINAL = "kLt1LowMagnitudeTable"
 
 

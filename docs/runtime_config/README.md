@@ -209,11 +209,12 @@ versioning, digest, manifest, CLI, preparation/install, and migration contract.
 The separate `source_authority_intake_workflow.md` records a human-approved
 source-authority intake and deterministically emits generator-input v2 only
 after explicit ownership, replacement, baseline, and approval gates pass. It
-is offline-only and cannot infer authority. The canonical
-`intakes/x1_baseline_equivalent_overlay_v1.intake.json` owns only `kX1Table`
-with its exact matching baseline bytes. That authorized no-op exercises the
-authority flow without creating an active-source delta or hardware candidate;
-future X1 values or additional ownership remain separately gated.
+is offline-only and cannot infer authority. The accepted canonical X1 record
+is `intakes/x1_offset41_overlay_hardware_candidate.intake.json`: it owns only
+`kX1Table`, records the exact tested offset-41 values against its immutable
+pre-change baseline, and is now baseline-equivalent after exact-snapshot
+hardware PASS and integration. Future X1 values or additional ownership remain
+separately gated.
 
 ## Safe Source-Owned Realization Path
 
@@ -444,7 +445,7 @@ current path:
 Run `python3 tools/run_glyph_runtime_config_validation.py` for the current,
 read-only runtime-config validation lane. `python3 tools/check_glyph_runtime_config_source_sync.py`
 checks the canonical 28-table source baseline (digest
-`9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`).
+`b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`).
 `python3 tools/check_glyph_checker_census.py` verifies the deterministic,
 repository-wide static checker census. The census count is derived from the
 discovered `tools/check_glyph_*.py` set; it does not behaviorally audit every

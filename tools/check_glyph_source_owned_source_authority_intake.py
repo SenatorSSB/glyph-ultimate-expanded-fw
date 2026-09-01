@@ -28,7 +28,7 @@ from source_owned_source_authority_intake import (
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "docs/runtime_config/fixtures/source_owned_source_authority_intake.json"
-CANONICAL_X1_INTAKE = ROOT / "docs/runtime_config/intakes/x1_baseline_equivalent_overlay_v1.intake.json"
+CANONICAL_X1_INTAKE = ROOT / "docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json"
 MANAGE = ROOT / "tools/manage_source_owned_source_authority_intake.py"
 PRECEDENCE_CASE_IDS = ["baseline_over_authority_and_ownership"]
 PROTECTED_PATH_CASE_IDS = [
@@ -159,7 +159,17 @@ def run() -> tuple[int, int]:
     POSITIVE += 1
 
     canonical = intake_module.load_json(CANONICAL_X1_INTAKE)
-    canonical_report = review_intake(canonical)
+    recorded_report = review_intake(canonical)
+    assert [blocker["code"] for blocker in recorded_report["blockers"]] == [
+        "BASELINE_MISMATCH", "BASELINE_MISMATCH"
+    ]
+    assert {blocker["path"] for blocker in recorded_report["blockers"]} == {
+        "baseline.semantic_digest", "baseline.table_inventory"
+    }
+    assert canonical["baseline"]["semantic_digest"] == "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970"
+    accepted_current = copy.deepcopy(canonical)
+    accepted_current["baseline"] = inspect_baseline()
+    canonical_report = review_intake(accepted_current)
     assert canonical_report["blockers"] == []
     assert canonical_report["authority_status"] == "approved"
     assert canonical_report["provenance_class"] == "production_authorized"
@@ -168,7 +178,7 @@ def run() -> tuple[int, int]:
     assert canonical_report["semantic_change_present"] is False
     assert canonical_report["future_hardware_candidate_after_downstream_gates"] is False
     assert canonical["authority"]["approver"] == "Glyph project owner / user authority"
-    assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-008"
+    assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-010"
     assert canonical["ownership"]["owned_tables"] == ["kX1Table"]
     assert [item["table_symbol"] for item in canonical["ownership"]["declarations"]] == ["kX1Table"]
     assert [item["table_symbol"] for item in canonical["replacements"]] == ["kX1Table"]
@@ -180,7 +190,7 @@ def run() -> tuple[int, int]:
     assert all(0 <= point[axis] <= 255 for point in replacement_points for axis in ("x", "y"))
     assert [{"x": point["x"], "y": point["y"]} for point in replacement_points] == baseline_x1["points"]
 
-    emitted_x1, artifact_x1, manifest_x1 = emit_generator_input(canonical, operation="production_changeset")
+    emitted_x1, artifact_x1, manifest_x1 = emit_generator_input(accepted_current, operation="production_changeset")
     assert emitted_x1["owned_tables"] == ["kX1Table"]
     assert artifact_x1["tables"] == baseline_tables
     assert artifact_x1["artifact_semantic_digest"] == inspect_baseline()["semantic_digest"]
@@ -200,7 +210,7 @@ def run() -> tuple[int, int]:
     assert all(row["candidate_digest"] == row["baseline_digest"] for row in non_x1_rows)
     try:
         production_gate(artifact_x1, manifest_x1, hardware_candidate=True)
-        raise AssertionError("baseline-equivalent authority intake became a hardware candidate")
+        raise AssertionError("accepted X1 authority intake became a new hardware candidate")
     except GeneratorModesError as exc:
         assert exc.category == "candidate_ineligible"
     POSITIVE += 1

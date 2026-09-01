@@ -36,7 +36,7 @@ consistency enforced as curated metadata rather than checker-branch semantics.
 
 The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
-`9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970`.
+`b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.
 
 <!-- validation-health-summary:start -->
 Current summary: manifest entries = 32; current load-bearing checks = 28.

@@ -36,19 +36,19 @@ normalized input and deterministic artifact/manifest regeneration.
 source lineage, purpose, byte transformation, build recipe, reproducibility,
 safety, artifact acceptance, and hardware remain UNKNOWN. None may
 change pins, build inputs, workflows, artifacts, or runtime behavior.
-`GP-AUTH-001` is resolved by the exact baseline-equivalent
-`kX1Table` `overlay_preserve` intake, which changes no active table bytes and
-creates no hardware candidate. `GP-CONFIG-002` is invalidated and no
+`GP-AUTH-001` remains historical authority provenance; the accepted current
+`kX1Table` record is the exact hardware-validated offset-41 overlay.
+`GP-CONFIG-002` is invalidated and no
 official-configurator evidence is awaited.
 
-`GP-X1-001` has resolved its user-decision and physical gates. Exact candidate
+`GP-X1-001` is `DONE`. Exact candidate
 `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
 `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
-are `HARDWARE_VALIDATED` for the bounded sole/non-mode X1 offset-41 scope.
-The current recovery action is to reverify the pinned candidate, preserved
-bytes, and structured PASS, then merge only that tested source snapshot and
-publish strict `DONE` correspondence. Nunchuk remains NOT_TESTED and root
-cause remains unproven.
+received Revision-2 hardware PASS for the bounded sole/non-mode X1 offset-41
+scope and entered `configurator` through exact-candidate integration commit
+`1597c01b416b6aa697d73efc7d2c2b3695dc3e5c`. Strict completion
+correspondence is published. Nunchuk remains NOT_TESTED and root cause remains
+unproven.
 
 Runtime-config validation stabilization uses a deterministic repository-wide
 checker census together with a curated runtime-config validation manifest. The

@@ -6,13 +6,14 @@ Read this before using older calibration packets as roadmap input.
 
 ## Current Known-Good Branch State
 
-- Exact candidate `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2
+- `configurator` now contains exact candidate
+  `74ae24364b84520d4e0e39240beb9867653cc7b9` through integration commit
+  `1597c01b416b6aa697d73efc7d2c2b3695dc3e5c`; UF2
   `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
-  are now recorded as Revision-2 `HARDWARE_VALIDATED` for the bounded
+  is recorded as Revision-2 `HARDWARE_PASS` for the bounded
   sole/non-mode X1 offset-41 scope. The project owner reported all expected
   outputs and no disconnects, then confirmed the restored prior firmware
-  worked. Exact-candidate integration recovery is pending in this evidence
-  snapshot; `configurator` has not yet received the candidate source.
+  worked. `GP-X1-001` is `DONE` with strict completion correspondence.
 - `configurator` contains the full latest Y2 layout source-owned port after the
   recorded latest Y2 layout HARDWARE_PASS.
 - The current approved Glyph realization path is source-owned table/routing
@@ -93,15 +94,13 @@ Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically a
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
   and hardware UNKNOWN.
-  The `GP-AUTH-001` user-decision gate is satisfied by the production-authorized
-  baseline-equivalent `kX1Table` overlay intake recorded under `GLYPH-UD-008`;
-  it owns no other table, changes no active bytes, and creates no hardware
-  candidate. `GP-CONFIG-002` is invalidated by `GLYPH-UD-007`; no
+  The accepted X1 authority is the exact offset-41 `kX1Table` overlay recorded
+  under `GLYPH-UD-010`, with hardware observation under `GLYPH-UD-012`; it
+  owns no other table. `GP-CONFIG-002` is invalidated by `GLYPH-UD-007`; no
   official-configurator capture is required or awaited, and the retained
   corpus/templates are historical provenance.
-  `GP-X1-001` is now `HARDWARE_VALIDATED` for its exact Git/artifact pair;
-  publication recovery must reverify those identities and merge only the
-  tested candidate before the item becomes `DONE`.
+  `GP-X1-001` is `DONE` for its exact Git/artifact pair after source-free PASS
+  publication, exact-candidate integration, and accepted-baseline validation.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
@@ -111,11 +110,11 @@ Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically a
   semantics and checker enforcement. Candidate generation must use full
   replacement, overlay/preserve, or reject semantics and must not silently fill
   unspecified production tables with example/canonical defaults.
-- The source-authority intake workflow is offline-only. The canonical X1 pilot
-  authorizes only `kX1Table`, with its exact matching baseline points, before
-  deterministic v2 generation. This no-op authority record creates no active
-  table-byte delta or hardware candidate; any future X1 values or other table
-  ownership remain separately gated.
+- The source-authority intake workflow is offline-only. The accepted canonical
+  X1 record owns only `kX1Table` and preserves the immutable pre-change
+  candidate baseline while validating its exact offset-41 points against the
+  current accepted source. Any future X1 values or other table ownership
+  remain separately gated.
 - The former 27-table literal-body replacement generator contract is
   SUPERSEDED historical evidence; current authority is the 28-table baseline
   extraction, source-owned generator modes, and source-authority intake.

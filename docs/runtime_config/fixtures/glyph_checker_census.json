@@ -10111,7 +10111,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "be9e663a49ff71dd94bf1025cee5995e5501f183b7fa09b0a11dc8f33bb07c9b",
+      "sha256": "b1ed6734ad6f17cc4f42e2153ed799b8779b9ac28e33dcf727a9f4264f2fa156",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -10337,7 +10337,7 @@
         "current_y2_layout",
         "runtime_config_docs"
       ],
-      "sha256": "769d3659bc18351dd44011107cd442463b386a2625d318a42d6587b5147737b4",
+      "sha256": "33f40ff321713737aa7691b23921a954ecf493e0d810b6e2134998390730140e",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -11183,7 +11183,7 @@
       },
       "checker_id": "source_owned_source_authority_intake",
       "defines_main": false,
-      "file_size_bytes": 20931,
+      "file_size_bytes": 21495,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate_digest",
@@ -11191,14 +11191,15 @@
         "future_hardware_candidate_after_downstream_gates",
         "hardware_candidate",
         "hardware_candidate_created",
-        "publication_candidate"
+        "publication_candidate",
+        "x1_offset41_overlay_hardware_candidate.intake.json"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 305,
+      "line_count": 315,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_source_authority_intake.py",
       "potential_branch_identity_signals": [
@@ -11208,7 +11209,8 @@
         "future_hardware_candidate_after_downstream_gates",
         "hardware_candidate",
         "hardware_candidate_created",
-        "publication_candidate"
+        "publication_candidate",
+        "x1_offset41_overlay_hardware_candidate.intake.json"
       ],
       "potential_mutation_signals": [
         "subprocess.run"
@@ -11217,7 +11219,7 @@
       "referenced_repository_path_prefixes": [
         "docs/agent_framework/USER_DIRECTION.md",
         "docs/runtime_config/fixtures/source_owned_source_authority_intake.json",
-        "docs/runtime_config/intakes/x1_baseline_equivalent_overlay_v1.intake.json",
+        "docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json",
         "tools/manage_source_owned_source_authority_intake.py"
       ],
       "runtime_config_relevance_signals": [
@@ -11225,7 +11227,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "9d6e610e1735f6569764a42325093cfaa44d33a839e5dd1d4868b22e5ff4adc6",
+      "sha256": "84ded3621c700ef5184194a8e183621543eafc94266df94489ebafb5cbd13572",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
