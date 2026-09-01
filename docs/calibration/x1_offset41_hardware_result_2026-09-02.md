@@ -53,6 +53,11 @@ preserved sufficiently; no upload or release was authorized.
 The exact candidate branch is pinned remotely. This result does not claim UF2
 reproducibility across rebuilds.
 
+The structured record's `tested_at` value is the local evidence-processing
+timestamp recorded after the user's report, not a separately supplied device-
+test clock time. No explicit power-cycle sequence is claimed; the successful
+prior-firmware restoration is rollback evidence only.
+
 ## Non-Claims
 
 - No other source-owned table or routing behavior was tested or accepted.

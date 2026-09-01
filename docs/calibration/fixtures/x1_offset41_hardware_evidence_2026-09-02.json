@@ -82,13 +82,12 @@
   "negative_regression_checks": [
     "Project owner reported that the controller did not disconnect at any point during candidate testing."
   ],
-  "power_cycle_reconnect_checks": [
-    "After the prior configurator UF2 was supplied for restoration, the project owner reported that it worked."
-  ],
+  "power_cycle_reconnect_checks": [],
   "result": "PASS",
   "anomalies": [
     "The exact UF2 was preserved at its candidate-SHA/artifact-SHA-addressed local backup after the exploratory test by re-hashing and copying the unchanged pre-handoff build bytes; no external immutable artifact-store upload was authorized.",
-    "The project owner did not separately report board revision, host/adapter details, an exact device-test clock time, or an explicit power-cycle sequence."
+    "The tested_at value is the local evidence-processing timestamp recorded after the project owner's report; the project owner did not separately report an exact device-test clock time.",
+    "The project owner did not separately report board revision, host/adapter details, or an explicit power-cycle sequence."
   ],
   "rollback_recovery": "The prior configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc UF2 was regenerated with SHA-256 69064a5c1d52772926fe010a593f2a2e04e9675a638737b619b7b0bc4785d001; after receiving it, the project owner reported that it worked.",
   "tester": "Project owner / user (direct user-reported physical result)",
