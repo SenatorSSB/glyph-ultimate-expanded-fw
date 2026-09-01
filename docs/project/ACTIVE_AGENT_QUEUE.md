@@ -76,7 +76,7 @@ Git, but it is not current candidate supply or implementation authority.
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_LOW",
+      "CURATION_REQUIRED",
       "RUNWAY_SHORTFALL_EVIDENCE_GATED",
       "RUNWAY_SHORTFALL_USER_DECISION_GATED",
       "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
