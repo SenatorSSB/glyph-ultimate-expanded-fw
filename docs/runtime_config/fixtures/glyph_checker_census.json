@@ -742,7 +742,7 @@
       },
       "checker_id": "artifact_postprocessor_provenance",
       "defines_main": true,
-      "file_size_bytes": 13702,
+      "file_size_bytes": 14756,
       "hard_coded_branch_like_strings": [
         "--candidate-sha",
         "args.candidate_sha",
@@ -756,7 +756,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 339,
+      "line_count": 368,
       "parse_error": null,
       "path": "tools/check_glyph_artifact_postprocessor_provenance.py",
       "potential_branch_identity_signals": [
@@ -778,7 +778,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "bc7f6262d4c5813aba4834d1c6bd5fb31e89f1eb0f2cab233327e85b38070e5c",
+      "sha256": "a52241836991a7df1242e3f4a7091c4e94a9ceaeb76e2a6f72f1212c9fce2961",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -799,7 +799,7 @@
       },
       "checker_id": "artifact_postprocessor_workflow",
       "defines_main": true,
-      "file_size_bytes": 3347,
+      "file_size_bytes": 5288,
       "hard_coded_branch_like_strings": [
         "--candidate-sha"
       ],
@@ -808,7 +808,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 83,
+      "line_count": 124,
       "parse_error": null,
       "path": "tools/check_glyph_artifact_postprocessor_workflow.py",
       "potential_branch_identity_signals": [
@@ -820,7 +820,7 @@
         "tools/check_glyph_artifact_postprocessor_provenance.py"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "924b0268645dd1d054a5eca0675613ea5a9c79baf1297fd7b1746ade768769b0",
+      "sha256": "eb720586e11f2d2995da5a5f6d09a08ae0acd82440e1d8e3035b6735e096dbca",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

@@ -29,6 +29,15 @@ class ProvenanceError(ValueError):
     """Raised when the static provenance contract is not fail-closed."""
 
 
+def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            fail(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
 def fail(message: str) -> None:
     raise ProvenanceError(message)
 
@@ -112,7 +121,9 @@ def verify_real_sidecar(sidecar_path: Path, artifact_path: Path, candidate_sha: 
 
 def load_object(path: Path) -> dict[str, Any]:
     try:
-        value = json.loads(path.read_text(encoding="utf-8"))
+        value = json.loads(
+            path.read_text(encoding="utf-8"), object_pairs_hook=reject_duplicate_keys
+        )
     except json.JSONDecodeError as exc:
         fail(f"invalid JSON in {path}: {exc}")
     if not isinstance(value, dict):
@@ -296,6 +307,24 @@ def check_fixture() -> None:
             pass
         else:
             fail("tampered written sidecar was accepted")
+
+        duplicate_top_level = (
+            '{"candidate_git_sha":"' + "0" * 40 + '",'
+            '"candidate_git_sha":"' + candidate_sha + '"}'
+        )
+        duplicate_nested = (
+            '{"final_artifact":{"sha256":"' + "0" * 64 + '",'
+            '"sha256":"' + sidecar["final_artifact"]["sha256"] + '"}}'
+        )
+        for duplicate_payload in (duplicate_top_level, duplicate_nested):
+            duplicate_path = Path(directory) / "duplicate.json"
+            duplicate_path.write_text(duplicate_payload, encoding="utf-8")
+            try:
+                load_object(duplicate_path)
+            except ProvenanceError:
+                pass
+            else:
+                fail("duplicate JSON key was accepted")
 
 
 def main() -> int:
