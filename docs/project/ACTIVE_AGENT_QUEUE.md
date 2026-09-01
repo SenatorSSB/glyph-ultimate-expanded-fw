@@ -66,12 +66,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 2,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -93,8 +93,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-010",
       "title": "Bind manifest commands to tracked checkers",
-      "status": "READY",
-      "branch": "glyph/gp-val-010-manifest-command-correspondence-20260831",
+      "status": "DONE",
+      "branch": "glyph/gp-val-010-command-contract-20260901",
       "objective": "Make every validation-manifest command an exact execution contract for python3, one normalized stage-0 tracked regular checker path, and the manifest's reviewed required-argument vector before the aggregate can execute it.",
       "why_this_matters": "The aggregate currently accepts any nonempty string-list command, checks only command[1] against the declared path and filesystem existence, rejects all current nonempty required_arguments, and then executes the command directly. A manifest row can therefore name one checker while selecting another executable, wrapper, argument set, untracked regular-file target, or symlink without a complete fail-closed correspondence check; the existing directory rejection is untested regression behavior rather than a current directory-execution gap.",
       "hardware_risk": "H0",
@@ -135,7 +135,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused runner/adversarial/census-health branch if exact current command correspondence cannot be enforced without semantic edits to any other manifest-executed checker or without manifest classification changes; never restore acceptance of a command that can select a different executable, target, or argument vector than the reviewed manifest fields.",
       "status_documentation_updates": "Record GP-VAL-010 as Done only after exact reviewed integration and separate structured completion publication. Retain GP-VAL-011 as separately dependency/design gated and every runtime, product, artifact, and hardware non-claim.",
-      "done_evidence": "Not complete; no implementation, review, integration, or publication evidence exists yet for GP-VAL-010.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"885daf198be7445bec9fa565eca6d3b2784c7842","reviewed_implementation_sha":"6affdecb526b5571e507cf51d62d3b819b2926bb","prior_canonical_integration_sha":"6affdecb526b5571e507cf51d62d3b819b2926bb","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_runtime_config_validation_aggregate.py","tools/run_glyph_runtime_config_validation.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS on exact repaired snapshot 6affdecb526b5571e507cf51d62d3b819b2926bb; command contract, adversarial target coverage, executable-mode coverage, and scope invariants confirmed.","validation_provenance":"Focused aggregate adversarial, manifest, census, health, full current runtime-config aggregate, framework, sequence, navigation, agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build, artifact, device, or hardware action was required."},
       "stop_conditions": [
         "Any manifest command can select an executable, checker target, or argument vector different from the exact reviewed interpreter/path/required_arguments fields.",
         "Any untracked, directory, symlink, escaping, malformed, or unauthorized target can reach execution.",
@@ -2022,11 +2022,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-010","GP-SRC-006","GP-VAL-013"],"immediate_ready":3,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-006","GP-VAL-013"],"immediate_ready":2,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-010, GP-SRC-006, GP-VAL-013; Immediate Ready: 3; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-SRC-006, GP-VAL-013; Immediate Ready: 2; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
