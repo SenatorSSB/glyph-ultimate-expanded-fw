@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-    "audit_base_sha": "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
+    "audit_base_sha": "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -34,7 +34,8 @@ Git, but it is not current candidate supply or implementation authority.
       "The executable sidecar/unique-JSON repair is authorized as GP-PROV-007 PREAUTHORIZED and WAITING mechanically on GP-VAL-013 integration; zero-result category rejection is authorized as GP-VAL-012 PREAUTHORIZED and WAITING mechanically on GP-VAL-010 integration.",
       "GP-PROV-003 repair, GP-VAL-011, GP-CTL-003, and GP-BUILD-001 remain substantive-dependency gated; GP-VAL-008 remains evidence gated; GP-PERSIST-001 remains research gated; GP-CONFIG-005, GP-ART-001, and GP-X1-001 remain user-decision gated.",
       "GP-VAL-010, GP-SRC-006, GP-VAL-013, and GP-VAL-012 completed on configurator. Independent verification found that both recorded successor conditions were literally invalidated: GP-VAL-013's reviewed path set included its publication-workflow fixture beyond GP-PROV-007's allowlist, and GP-VAL-013 changed GP-VAL-012's exact-bound manifest blob while preserving its category/applicability tuples.",
-      "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 completed first; GP-PROV-007 is now mechanically ACTIVATABLE so its later manifest dependency update cannot re-invalidate GP-VAL-012.",
+      "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 completed first; GP-PROV-007 was mechanically ACTIVATABLE and its later manifest dependency update did not re-invalidate GP-VAL-012.",
+      "GP-PROV-007 completed as a reviewed H1 host-side checker repair at 721cd20388c39beefe6b1b85ce25228a7efe6a0e with no workflow, artifact, product/runtime, firmware, device, or hardware change.",
       "The packet remains partially useful with nine non-executable survivors. No global evidence wait or Planner refresh is supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence changed in curation."
     ],
     "curator_review_provenance": {
@@ -69,16 +70,16 @@ Git, but it is not current candidate supply or implementation authority.
   },
     "runway": {
     "immediate_ready": 0,
-    "recorded_preauthorized": 1,
-    "mechanically_activatable_preauthorized": 1,
+    "recorded_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "RUNWAY_LOW",
+      "CURATION_REQUIRED",
       "RUNWAY_SHORTFALL_EVIDENCE_GATED",
       "RUNWAY_SHORTFALL_USER_DECISION_GATED",
       "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
@@ -242,7 +243,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-007",
       "title": "Bind executable sidecar route and unique JSON identity",
-      "status": "PREAUTHORIZED",
+      "status": "DONE",
       "branch": "glyph/gp-prov-007-sidecar-execution-json-identity-20260901",
       "objective": "Repair the accepted GP-PROV-002 outcome by proving its checkout, sidecar generation, and verification commands are executable workflow steps and by rejecting duplicate JSON keys before identity comparison.",
       "why_this_matters": "The workflow checker accepts comment-only command text and ordinary json.loads accepts a bogus first and correct last duplicate identity key.",
@@ -266,10 +267,10 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused repair if parser reuse or duplicate-key rejection cannot be preserved without broader artifact semantics.",
-      "status_documentation_updates": "Activate mechanically only after rebound GP-VAL-012 integration with the manifest unchanged; record Done only after reviewed publication while retaining all artifact and hardware non-claims.",
-      "done_evidence": "Not complete; PREAUTHORIZED and waiting mechanically on rebound GP-VAL-012 completion.",
+      "status_documentation_updates": "Record GP-PROV-007 Done after exact reviewed integration and structured completion publication while retaining all artifact and hardware non-claims.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"a1225102179639f06bb00a6735987824b85972ae","reviewed_implementation_sha":"721cd20388c39beefe6b1b85ce25228a7efe6a0e","prior_canonical_integration_sha":"721cd20388c39beefe6b1b85ce25228a7efe6a0e","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","tools/check_glyph_artifact_postprocessor_provenance.py","tools/check_glyph_artifact_postprocessor_workflow.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS on exact reviewed snapshot 721cd20388c39beefe6b1b85ce25228a7efe6a0e; focused workflow/provenance, census, health, aggregate, framework, navigation, agent-surface, py_compile, and diff gates passed.","validation_provenance":"Exact integrated H1 host-side checker snapshot passed the authorized focused and full validation gates; no workflow, build, artifact, device, or hardware action was required."},
       "stop_conditions": ["The activation dependency is absent, drifted, or requires interpretation.", "Any workflow, postprocessor, artifact route, product/runtime, device, or hardware state changes.", "Duplicate JSON identities can still be accepted."],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -2024,11 +2025,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2036,11 +2037,11 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260901-0909` is partially consumed after three
+Packet `glyph-portfolio-20260901-0909` is partially consumed after four
 reviewed H0 completions. Independent verification found both recorded waiting
 contracts literally invalidated. Curator rebound both to the exact current
-snapshot: `GP-VAL-012` is mechanically activatable first and `GP-PROV-007`
-waits on its completion to preserve manifest sequencing. The remaining packet survivors have explicit substantive,
+snapshot: `GP-VAL-012` completed first and `GP-PROV-007` then completed while
+preserving manifest sequencing. The remaining packet survivors have explicit substantive,
 evidence, research, or user-decision gates and do not support a portfolio-
 global evidence wait. Historical Done items remain canonical evidence but do
 not authorize implementation. Planner refresh is not requested while this
@@ -2087,9 +2088,8 @@ against exact live `configurator`
 - `GP-SRC-006`: authorized H0 structural active-publication checker work.
 - `GP-VAL-013`: authorized H0 executable validation-before-publication repair;
   the new repair identity preserves historical `GP-VAL-002` completion.
-- `GP-PROV-007`: rebound `PREAUTHORIZED` and `ACTIVATABLE` mechanically after
-  reviewed `GP-VAL-012` completion; it preserves historical `GP-PROV-002`
-  completion.
+- `GP-PROV-007`: completed as a reviewed H1 host-side checker repair after
+  `GP-VAL-012`; it preserves historical `GP-PROV-002` completion.
 - `GP-VAL-012`: completed after exact GP-VAL-010 path/blob and current manifest
   revalidation.
 - `GP-PROV-003` repair: `SUBSTANTIVE_DEPENDENCY_GATED`; the documented local
