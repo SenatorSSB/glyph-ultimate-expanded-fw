@@ -66,12 +66,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 2,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -156,7 +156,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-006",
       "title": "Structurally bind active source-owned publication",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-src-006-active-publication-structure-20260901",
       "objective": "Make the load-bearing source-owned checker enforce the exact approved active-state initializer and resolver structure instead of accepting required strings inside a materially different publication function.",
       "why_this_matters": "The current checker accepts a synthetic conditional or alternate return when the approved pointer fragment remains present and only the two named forbidden member strings are absent.",
@@ -181,7 +181,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker branch if exact current source cannot be accepted without weakening the source-owned publication boundary.",
       "status_documentation_updates": "Record GP-SRC-006 Done only after reviewed integration and structured completion publication; preserve every current runtime and hardware non-claim.",
-      "done_evidence": "Not complete; no implementation, review, integration, or publication evidence exists yet for GP-SRC-006.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"325defbbf7e1cdefe6f7578a924b96073c95dcb6","reviewed_implementation_sha":"bcf5831c00f8ab3a34576e544d9b795eac89e826","prior_canonical_integration_sha":"783334b7476f2c68335d6f312669eac72e78316f","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_source_owned_table_symbol_map.py"],"independent_review_provenance":"Fresh independent reviewer PASS on repaired exact snapshot bcf5831c00f8ab3a34576e544d9b795eac89e826; exact publication topology, all required adversarial mutation classes, scope, and non-claims confirmed.","validation_provenance":"Focused source-owned symbol-map, checker census, validation health, full runtime-config aggregate, framework, latest-Y2 source sync, navigation, agent-surface, py_compile, and exact-diff checks passed on the integrated snapshot; no build, artifact, device, or hardware action was required."},
       "stop_conditions": ["Any active publication, table, routing, firmware, build, artifact, device, or hardware behavior would change.", "The checker would accept multiple publication outcomes or rely only on string presence.", "Any forbidden runtime-loaded, persistence, device-write, flashing, Nunchuk, root-cause, or gameplay scope appears."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -2022,11 +2022,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-006","GP-VAL-013"],"immediate_ready":2,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-013"],"immediate_ready":1,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-006, GP-VAL-013; Immediate Ready: 2; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-013; Immediate Ready: 1; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
