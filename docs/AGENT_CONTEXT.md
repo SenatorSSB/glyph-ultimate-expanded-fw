@@ -72,24 +72,27 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CTL-003","GP-PROV-008","GP-VAL-008"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-CTL-003, GP-PROV-008, GP-VAL-008; Immediate Ready: 3; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
   `docs/project/ACTIVE_AGENT_QUEUE.md`. Live-verified Planner packet
-  `glyph-portfolio-20260901-0909` is partially consumed after three reviewed
-  H0 completions. Curator rebound both literally invalidated successors to the
-  current snapshot: `GP-VAL-012` and `GP-PROV-007` are completed, with manifest
-  sequencing preserved.
+  `glyph-portfolio-20260901-0909` is partially consumed. Curator rebound both
+  literally invalidated successors to the current snapshot, and `GP-VAL-012`
+  and `GP-PROV-007` are completed with manifest sequencing preserved.
+  Follow-up review corrected post-X1 survivor accounting, authorized
+  `GP-CTL-003`, `GP-PROV-008`, and the bounded current `GP-VAL-008` X1
+  regression lane, and Preauthorized `GP-BUILD-001` waiting on reviewed
+  `GP-PROV-008` integration.
   The current-runway summary above is the authoritative executable order and
-  liveness state. The packet retains non-executable substantive-dependency,
-  evidence, and user-decision survivors, but it does not support a portfolio-
-  global evidence wait. Planner refresh is not requested while this partially
-  consumed current packet retains useful gated supply.
+  liveness state. `GP-VAL-011`, `GP-CONFIG-005`, `GP-PERSIST-001`, and
+  `GP-ART-001` retain substantive-dependency, research, or user-decision gates,
+  but the packet does not support a portfolio-global evidence wait. Planner
+  refresh is not requested while this partially consumed packet remains useful.
   Completed implementation history remains in the canonical queue. Bounded
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
