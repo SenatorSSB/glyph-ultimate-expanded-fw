@@ -19,13 +19,13 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-    "audit_base_sha": "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
+    "audit_base_sha": "3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
     "branch": "planning/portfolio-20260901-0909",
     "base_configurator_sha": "1977ef0d6ec1a65d02947a0b7dae2675c2e8228c",
-    "candidate_count": 9,
+    "candidate_count": 4,
     "curator_review_required": false,
     "global_wait_proposed": false,
       "material_events_since_packet": [
@@ -38,7 +38,9 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-PROV-007 completed as a reviewed H1 host-side checker repair at 721cd20388c39beefe6b1b85ce25228a7efe6a0e with no workflow, artifact, product/runtime, firmware, device, or hardware change.",
       "The project owner resolved the GP-X1-001 user-decision gate with exact X1-only offset-41 authority, tested candidate 74ae24364b84520d4e0e39240beb9867653cc7b9 and UF2 SHA-256 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254, reported all expected outputs and no disconnects, and confirmed the restored prior firmware worked. Revision-2 evidence is published as HARDWARE_VALIDATED pending exact candidate integration recovery.",
       "GP-X1-001 publication recovery reverified the pinned candidate, content-addressed local artifact, immutable PASS record, and exact three-path reviewed delta; merge commit 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c integrated only the tested candidate, and post-integration baseline/intake validators were aligned without further firmware-source changes.",
-      "The packet remains partially useful with nine non-executable survivors. No global evidence wait or Planner refresh is supported, and no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence changed in curation."
+      "Follow-up Curator review against live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 removed completed GP-X1-001 from surviving packet supply; the prior count of nine was stale and the exact preauthorization-review survivor set was eight.",
+      "Direct source and specialist verification resolved the representation contract for GP-CTL-003 and the GP-PROV-003 repair, authorized the latter under new identity GP-PROV-008, and resolved GP-VAL-008 through the new exact X1 source and Revision-2 hardware evidence. GP-BUILD-001 is substantively PREAUTHORIZED but waits mechanically on reviewed GP-PROV-008 integration so its builder-script hash update cannot invalidate the current provenance inventory first.",
+      "GP-VAL-011 remains substantive-dependency gated because snapshot fidelity, prevention versus detection, environment, process-tree termination, and timeout policy are unresolved. GP-CONFIG-005 and GP-ART-001 remain user-decision gated; GP-PERSIST-001 remains research gated. The packet remains partially useful with four non-executable survivors, no global evidence wait or Planner refresh is supported, and curation changed no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260901-0909",
@@ -71,18 +73,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 0,
-    "recorded_preauthorized": 0,
+    "immediate_ready": 3,
+    "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-      "CURATION_REQUIRED",
-      "RUNWAY_SHORTFALL_EVIDENCE_GATED",
+      "RUNWAY_LOW",
       "RUNWAY_SHORTFALL_USER_DECISION_GATED",
       "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
       "RUNWAY_SHORTFALL_RESEARCH_GATED"
@@ -95,6 +96,252 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-CTL-003",
+      "title": "Bind Planner and Curator packet provenance",
+      "status": "READY",
+      "branch": "glyph/gp-ctl-003-packet-provenance-20260902",
+      "objective": "Make canonical queue liveness depend on exact locally resolvable Planner and Curator Git-object correspondence plus a unique structured surviving-candidate inventory instead of trusting free-form provenance, prose, and an independent candidate_count integer.",
+      "why_this_matters": "The current framework checker accepts bogus planning commits, packet identities, Curator provenance, and arbitrary nonzero candidate counts; GP-X1-001 completion also left the queue claiming nine survivors when only eight existed before this curation.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This strengthens offline control-plane provenance and survivor-accounting validation only. It does not change liveness policy, authorize a Planner candidate by inference, edit product/runtime behavior, or perform network access during ordinary validation.",
+      "scope": "Upgrade the canonical queue packet representation and tools/check_glyph_agent_framework_docs.py so non-ABSENT packets carry exact packet_id, packet_path, planning_commit, curation_commit, and a unique ordered survivors array of candidate_id plus a closed disposition. Derive candidate_count from survivors. Resolve the immutable planning and curation commits locally, require commit objects and regular non-executable Git 100644 packet/queue blobs, verify planning parent/base and exact packet frontmatter/candidate inventory, verify Curator parent/base and ancestry into current HEAD, and bind the initial reviewed disposition set. Add isolated temporary-Git positive and adversarial cases. Update only canonical queue/status prose and deterministic checker-census, manifest, or validation-health consequences of the authorized checker byte change.",
+      "explicit_excluded_scope": "No fetch or network access in the checker; no mutable branch tip as the sole authority; no candidate promotion, new liveness rule, queue target change, implementation execution, tools/glyph_checker_context.py change, workflow, build, product/runtime source, source-authority, hardware result, device, persistence, WebSerial/protobuf write, flashing, Nunchuk, root-cause, or gameplay claim.",
+      "touched_planes": ["docs/checkers"],
+      "source_authority": "Live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3; Planner packet planning/portfolio-20260901-0909 at 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb with sole packet path docs/planning/portfolio_20260901_0909.md and parent/base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c; initial reviewed curation commit 7b6601709b6f7780601ff68c0e8d9df1bf63ad8a with the same parent/base and ancestry into current configurator. tools/check_glyph_agent_framework_docs.py currently validates only coarse packet shape and never reads curator_review_provenance or either Git object. Independent adversarial verification confirmed bogus provenance and candidate_count=999 pass today.",
+      "dependencies_prerequisites": [
+        "Implementation starts from a fresh live-configurator descendant of 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 with queue schema v2, packet 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, curation commit 7b6601709b6f7780601ff68c0e8d9df1bf63ad8a, and current completion correspondence locally resolvable.",
+        "The implementation repository contains the required immutable planning and curation commit objects; ordinary validation must fail closed rather than fetch when either object is unavailable.",
+        "Permitted intervening deltas are reviewed completion/status publication, deterministic census/manifest/health consequences, and the exact Curator-authorized survivor transitions recorded in queue history; any packet identity, initial Curator disposition, or liveness-policy drift requires re-curation."
+      ],
+      "substantive_authorization_rationale": "The object-required policy is fully resolved by existing immutable Git evidence and is stronger than an unverifiable embedded snapshot. The exact packet, path, base, initial curation object, original thirteen candidate headings, and current dispositions are known. A closed structured survivor list makes candidate_count derived while preserving Planner non-authority. No product, domain, source, hardware, or external-service decision remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Either required planning or curation commit object is unavailable or does not resolve to the exact expected commit/tree shape.",
+        "The packet path, frontmatter identity/base/review flag, original candidate inventory, initial Curator disposition, queue schema, liveness policy, or completion correspondence changes materially before implementation.",
+        "Implementation would require a fetch, trust a mutable ref, embed unverified prose as correspondence, promote a survivor, or change any product/runtime or hardware state.",
+        "Another canonical change supplies equivalent or stronger packet-object and structured-survivor correspondence first."
+      ],
+      "authorization_snapshot_provenance": "Follow-up Curator review of candidate GP-CTL-003 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, packet base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, initial curation commit 7b6601709b6f7780601ff68c0e8d9df1bf63ad8a, and exact live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3, with independent object/provenance/adversarial verification on curation/portfolio-20260901-survivors-20260902.",
+      "automated_validation": [
+        "Exact current planning and curation objects, parent/base relationships, packet path/mode/frontmatter, original thirteen unique candidate headings, initial reviewed dispositions, and curation ancestry pass without network access.",
+        "Queue candidate_count equals the length of a unique ordered survivors array; every survivor exists in the original packet, uses a closed disposition, and is neither authorized in the current queue nor recorded complete by current material events.",
+        "Isolated temporary-Git cases reject missing/wrong object, object type, path, mode, parent/base, packet ID/branch/review flag/candidate inventory, curation object/ancestry, duplicate queue or survivor IDs, count mismatch, unknown disposition, completed survivor, and survivor absent from the packet.",
+        "python3 tools/check_glyph_agent_framework_docs.py, tools/check_glyph_agentic_sequence_protocol.py, tools/check_glyph_checker_census.py, tools/run_glyph_runtime_config_validation.py --json, tools/check_glyph_docs_navigation.py, and tools/check_glyph_docs_agent_surface.py pass with focused independent governance review and no applicability reclassification."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 queue/schema/governance-checker work only; any workflow, build input, product/runtime source, or firmware delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": [],
+      "rollback_recovery": "Drop the focused branch if immutable object correspondence cannot be enforced offline without changing liveness policy; retain current queue authority and never fall back to trusting a shape-valid free-form provenance string or independent count.",
+      "status_documentation_updates": "Publish schema/provenance and exact survivor accounting in the canonical queue/status surfaces without changing candidate dispositions beyond already-authorized execution transitions.",
+      "done_evidence": "Not complete; no implementation, independent review, integration, or completion publication exists for GP-CTL-003.",
+      "stop_conditions": [
+        "Any required object or exact packet/curation correspondence is missing, ambiguous, mutable-only, or requires network access during validation.",
+        "Any candidate is promoted, rejected, or reinterpreted by checker logic instead of an explicit Curator transition.",
+        "Any authority, provenance, concurrency, completion, liveness, hardware, or publication invariant would be weakened.",
+        "Any file outside the exact control-plane/governance-checker and deterministic consequence surface is required."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null
+    },
+    {
+      "id": "GP-PROV-008",
+      "title": "Census canonical local build entrypoints",
+      "status": "READY",
+      "branch": "glyph/gp-prov-008-local-build-entrypoints-20260902",
+      "objective": "Finish the declared build-input provenance boundary by recording the documented canonical and fallback local glyph_mk6 entrypoints, the exact tracked wrapper chain, and unresolved interpreter selection without executing a build or changing any build input.",
+      "why_this_matters": "The accepted GP-PROV-003 inventory omits scripts/build-glyph-mk6-quiet.sh and scripts/pio-local.sh even though AGENTS.md and docs/WORKFLOW.md prescribe that fallback chain, so current declared-input provenance is incomplete.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "This is static provenance/schema/checker work only. It records command and tracked-wrapper identity while preserving every unresolved executable, dependency, reproducibility, artifact, device, and hardware non-claim.",
+      "scope": "Create a schema-v2 current build-input inventory that preserves every existing selector, source-identity, postprocessor, and unresolved-claim record exactly; adds the two tracked 100755 wrappers to declaration_files; and adds one exact local_build_entrypoints contract for canonical [pio, run, -e, glyph_mk6], fallback [./scripts/build-glyph-mk6-quiet.sh], its edge to [./scripts/pio-local.sh, run, -e, glyph_mk6], the exact ordered pio-local interpreter alternatives [.venv/bin/python, ambient python, python3], and the PLATFORMIO_CORE_DIR line. Bind roles, tracked modes/hashes, and AGENTS.md/docs/WORKFLOW.md policy sources. Rework GP-PROV-004 validation to derive its unchanged 44 timestamped observations from the exact historical schema-v1 Git blob at base 8c04262c66613d46b933b1b739c01c575cb0c580 rather than requiring the current inventory bytes to remain frozen. Update focused docs/checkers and deterministic manifest/census/health consequences only.",
+      "explicit_excluded_scope": "No wrapper, PlatformIO configuration, builder script, selector, dependency, workflow, postprocessor, build, installation, environment resolution, artifact, upload/store, device, firmware/runtime, table, persistence, WebSerial/protobuf write, flashing, Nunchuk, root-cause, reproducibility, or hardware change or claim.",
+      "touched_planes": ["build tooling", "docs/checkers"],
+      "source_authority": "AGENTS.md and docs/WORKFLOW.md name pio run -e glyph_mk6 as canonical and scripts/build-glyph-mk6-quiet.sh as fallback. On exact live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3, the fallback wrapper is tracked mode 100755, blob e35164eeb512cec678a2f138b2b13f2b52263dc6, SHA-256 328ff73b9f1da1ccad5d7ee0431b664b9c33a70c35959e4a14f6677881844eeb and invokes ./scripts/pio-local.sh run -e glyph_mk6; pio-local is tracked mode 100755, blob deaabc271a8268dcd1f29c473f48beadf979cf7f, SHA-256 3b81e400830b30db0a4a194cdb5ff35df61e4d15f13b8d3891e79f2716ee9714 and selects the three recorded interpreters. The current inventory/checker remains schema v1 with eight declarations. GP-PROV-004 binds historical inventory blob 5e6d2f128cc6baccd98c39369fbd6bc5acc43851 and SHA-256 d783688fdc140ad2a5706b168f24f76093d0a388431ca4b33253257c52dfc455 at base 8c04262c66613d46b933b1b739c01c575cb0c580.",
+      "dependencies_prerequisites": [
+        "Implementation starts from a fresh live-configurator descendant of 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 with both wrapper blobs, canonical/fallback policy text, schema-v1 inventory, and GP-PROV-004 historical object materially unchanged.",
+        "The exact historical inventory commit/blob required by GP-PROV-004 is locally resolvable; validation fails closed rather than refreshing or fabricating observations.",
+        "Every existing schema-v1 selector, source identity, postprocessor identity, unresolved claim, and all 44 GP-PROV-004 observation records/timestamps remain semantically unchanged."
+      ],
+      "substantive_authorization_rationale": "The documented command chain and exact wrapper bytes resolve the missing representation. Schema v2 can add local entrypoints without promoting ambient pio or Python identity. Loading GP-PROV-004 from its immutable historical object preserves the observation's original source correspondence and avoids false re-observation. No user, product, runtime, external-evidence, or architecture decision remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Either wrapper, its mode/hash/command chain, the canonical/fallback policy, schema-v1 inventory, or GP-PROV-004 historical base/blob changes before implementation.",
+        "Any implementation would resolve or infer ambient pio/Python identity, execute a shell/build tool, refresh timestamped observations, or change a selector/build input.",
+        "Another canonical change supplies equivalent or stronger local-entrypoint provenance and historical observation preservation first."
+      ],
+      "authorization_snapshot_provenance": "Follow-up Curator review of the GP-PROV-003 repair from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, packet base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, rebound under new repair identity GP-PROV-008 against exact live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 with independent wrapper/schema/history verification on curation/portfolio-20260901-survivors-20260902.",
+      "automated_validation": [
+        "Schema v2 preserves all schema-v1 semantic records exactly and requires the two exact tracked executable wrappers plus the complete canonical/fallback command, role, edge, ordered interpreter-selection, core-directory, mode/hash, and policy-source representation.",
+        "Missing, changed, duplicated, reordered, extra, escaping, symlinked, untracked, wrong-mode, wrong-hash, wrong-role, wrong-edge, wrong-command, wrong-policy, or promoted executable-identity cases fail without executing any discovered script.",
+        "GP-PROV-004 checker resolves and hashes the exact historical schema-v1 inventory object, reproduces all 44 unchanged observations and direct/derived ordering, proves base ancestry, and rejects missing/wrong historical object/blob without rewriting its evidence fixture or timestamps.",
+        "Focused provenance inventory and resolution-observation checks, manifest/adversarial checks, checker census, validation health, full runtime-config aggregate, framework, sequence, navigation, agent-surface, py_compile, and diff checks pass with fresh independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 static provenance/schema/checker work; no wrapper or build input changes.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": [],
+      "rollback_recovery": "Drop the focused repair if schema-v2 correspondence or historical-object preservation cannot remain static and fail closed; retain the original GP-PROV-003 and GP-PROV-004 evidence rather than rewriting observations.",
+      "status_documentation_updates": "Record the complete local entrypoint chain and historical-object observation boundary without any resolved interpreter, execution, artifact, reproducibility, or hardware claim.",
+      "done_evidence": "Not complete; no implementation, independent review, integration, or completion publication exists for GP-PROV-008.",
+      "stop_conditions": [
+        "Any wrapper, build, PlatformIO, dependency, postprocessor, workflow, artifact, network, device, or hardware action would execute.",
+        "Any ambient executable identity, dependency closure, reproducibility, purpose/effect, or artifact acceptance would be inferred.",
+        "Any GP-PROV-004 observation record, timestamp, external identity, or immutable source locator would be refreshed or weakened.",
+        "Any runtime/configurator product source or build input would change."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null
+    },
+    {
+      "id": "GP-VAL-008",
+      "title": "Bind the current X1 regression subset",
+      "status": "READY",
+      "branch": "glyph/gp-val-008-current-x1-regression-20260902",
+      "objective": "Create one current load-bearing offline regression contract for the exact source-backed and Revision-2 hardware-accepted sole/non-mode X1 nine-direction subset without reviving the stale May-28 behavior fixture or claiming a firmware simulation.",
+      "why_this_matters": "GP-VAL-008 was evidence-gated when no current accepted behavior subset existed. GP-X1-001 now supplies exact owner intent, current integrated source, an exact candidate/artifact PASS, and bounded sole/non-mode X1 observations for all nine directions.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "For the already-accepted current source only, SelectRuntimeTableId with mode inactive, X1 active, and every other table modifier inactive selects RuntimeTableId::X1; DirectionIndexFromAxes maps the bounded -1/0/1 axis grid to indices 0..8; ApplyTableAnalogOutput reads the corresponding current kX1Table point; and those nine points are the accepted offset-41 values. The checker is static/offline evidence correspondence, not hardware execution or a general Ultimate behavior oracle.",
+      "scope": "Add a dedicated docs/fixture/checker lane that binds exact immutable GLYPH-UD-010/011/012, the Revision-2 evidence record, candidate and integration identities, current source selection/axis-index/lookup structure, and the current extracted kX1Table values. Use only the abstract RoleState boundary mode_active=false, x1_active=true, all other table modifiers=false and axes in {-1,0,1}. Require exact direction/index/raw-coordinate rows and no-disconnect observation classification. Add the checker as one current load-bearing manifest entry and regenerate deterministic census/health consequences.",
+      "explicit_excluded_scope": "No physical button-binding assertion, mode+X1/MX1, X2, Y1/Y2, Tilt, layer/flipper, direction-plus-A, RF6/RF7/RF9 or other override, SOCD beyond the supplied normalized axes, digital output, controller/gameplay semantic, stale May-28 case revival, firmware simulation, firmware/runtime source edit, table byte, routing/publication path, build, artifact, device, persistence, WebSerial/protobuf write, flashing, Nunchuk, root-cause, or new hardware claim.",
+      "touched_planes": ["docs/checkers"],
+      "source_authority": "Project-owner authority GLYPH-UD-010/011 and observation GLYPH-UD-012; exact protocol docs/calibration/x1_offset41_hardware_test_protocol_2026-09-02.md; immutable Revision-2 evidence git-json:6b0061489cb67d345f212f75268455c181ba271f:docs/calibration/fixtures/x1_offset41_hardware_evidence_2026-09-02.json; exact candidate 74ae24364b84520d4e0e39240beb9867653cc7b9 and integration 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c; live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3. Current source defines X1 selection, direction-index mapping, table lookup, and the integrated nine kX1Table points. Existing current checkers bind table/source and intake identity but no current behavior subset; the old identity runtime evaluator remains historical-only and contains obsolete literals.",
+      "dependencies_prerequisites": [
+        "GP-X1-001 remains DONE with exact candidate/artifact PASS and exact-candidate integration correspondence; GLYPH-UD-010/011/012, protocol, immutable evidence object, intake, and current kX1Table remain exact.",
+        "Implementation starts from a fresh live-configurator descendant of 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 with SelectRuntimeTableId, DirectionIndexFromAxes, ApplyTableAnalogOutput, active source-owned publication, and the X1 table materially unchanged.",
+        "The work remains a new bounded current fixture/checker; historical behavior fixtures/evaluators remain excluded and are not copied, edited, or promoted."
+      ],
+      "substantive_authorization_rationale": "The new owner direction and exact-snapshot PASS resolve the former evidence gate for one narrow subset. Repository source resolves selection, index, lookup, and current bytes without game-semantic inference. Binding only the abstract sole/non-mode X1 role state avoids unsupported physical-button claims, while immutable evidence references prevent a static checker from masquerading as new hardware proof.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Any exact user direction, candidate/artifact/evidence identity, integration correspondence, X1 table byte, selection/index/lookup source, or active publication path changes before implementation.",
+        "The proposed checker would require a physical binding, unsupported role/override/SOCD/game-semantic assertion, historical fixture promotion, or general firmware-simulator claim.",
+        "Another current checker supplies equivalent or stronger exact X1 source-and-evidence behavior correspondence first."
+      ],
+      "authorization_snapshot_provenance": "Follow-up Curator review of GP-VAL-008 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb after material event GP-X1-001 exact PASS and integration, independently rebound to live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 on curation/portfolio-20260901-survivors-20260902.",
+      "automated_validation": [
+        "A new strict fixture contains exactly nine unique normalized-axis cases in canonical index order, exact direction labels and raw points, exact evidence/user/source identities, and bounded non-claims; duplicate/missing/reordered/extra/unknown fields fail.",
+        "The checker extracts current kX1Table through the accepted source extractor and structurally binds the sole/non-mode X1 selection, clamped direction-index formula, active-table lookup, and output assignment without importing the historical evaluator or executing firmware.",
+        "Wrong mode/modifier state, index, coordinate, evidence commit/path/mode/blob, candidate/artifact/integration identity, source fragment, table byte, active publication, hardware-result classification, or broadened claim fails in isolated adversarial cases.",
+        "Focused X1 regression, source-sync, baseline, source-authority intake, symbol-map, activation-alternative, manifest, census, health, full runtime-config aggregate, framework, sequence, navigation, agent-surface, py_compile, and exact-diff checks pass with fresh independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 offline current-source/evidence checker and inert fixture only; any compiled source or table-byte delta stops and requires separate H2 authorization.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": [],
+      "rollback_recovery": "Drop the focused checker/fixture branch if exact source/evidence correspondence cannot be expressed without unsupported semantics; retain GP-X1-001 evidence and historical evaluator exclusion unchanged.",
+      "status_documentation_updates": "Document the one current X1 regression subset and its immutable evidence limits without broadening physical acceptance or current runtime-config capability claims.",
+      "done_evidence": "Not complete; no implementation, independent review, integration, or completion publication exists for GP-VAL-008.",
+      "stop_conditions": [
+        "Any expected behavior lacks exact current source plus accepted user/evidence provenance.",
+        "Any historical literal, physical binding, mode+X1, additional modifier/override, digital/gameplay, Nunchuk, root-cause, or general simulation claim enters scope.",
+        "Any firmware/runtime/table/publication source, build input, artifact, device, persistence, write, flashing, or hardware state changes.",
+        "Any hardware PASS is inferred beyond the immutable nine-row sole/non-mode X1 record."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null
+    },
+    {
+      "id": "GP-BUILD-001",
+      "title": "Fail closed on pre-build Git identity",
+      "status": "PREAUTHORIZED",
+      "branch": "glyph/gp-build-001-prebuild-git-identity-20260902",
+      "objective": "Preserve successful firmware-version stamping while making Git identity and dirtiness failures stop the build and eliminating process-global Git configuration mutation from the PlatformIO pre-build script.",
+      "why_this_matters": "builder_scripts/arduino_pico.py performs an unchecked git config --global write and unchecked identity/status reads; command failure can embed an empty or misleading FIRMWARE_VERSION while the build continues.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "For successful reads, clean source still embeds the existing lowercase abbreviated HEAD and any staged, unstaged, or untracked change appends -DIRTY with the existing escaped CPPDEFINE representation. Missing Git, command failure, empty/multiline/nonhex identity, or unreadable status fails before env.Append and no global Git configuration is written. This changes build-failure safety and version metadata only, not controller runtime behavior.",
+      "scope": "After GP-PROV-008 is integrated, update only builder_scripts/arduino_pico.py for an explicit repository root, checked command-local git -c core.longpaths=true rev-parse --short HEAD and git -c core.longpaths=true status --porcelain --untracked-files=normal calls, strict output validation, and failure before env.Append. Factor an injectable/pure identity helper in that file and add a dedicated isolated checker with temporary Git repositories/fake runner. Add the checker as current load-bearing validation and update only the now-complete GP-PROV-008 builder hash plus deterministic manifest/census/health consequences. Build the exact clean committed implementation snapshot.",
+      "explicit_excluded_scope": "No selector, dependency, pin, wrapper, PlatformIO configuration, workflow, postprocessor, version-format change on successful reads, firmware logic/table/routing/publication, artifact acceptance/upload/store, device, persistence, WebSerial/protobuf write, flashing, hardware acceptance, Nunchuk, root-cause, or gameplay claim.",
+      "touched_planes": ["build tooling", "docs/checkers"],
+      "source_authority": "On live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3, platformio.ini selects builder_scripts/arduino_pico.py at tracked blob e883cb393ab0ec9b1e499a333cb189cc666cf386 and SHA-256 456a4b7d5582bbeb0244868db28920cd0f276d3db1924b36b401047cdf4569c2. That script runs unchecked git config --global core.longpaths true, unchecked git rev-parse --short HEAD, and unchecked git status --porcelain, then derives FIRMWARE_VERSION. No current checker enforces failure or global-mutation behavior. docs/WORKFLOW.md requires exact build snapshots and forbids unsafe mutation; Planner candidate GP-BUILD-001 and independent verification confirm the surviving gap.",
+      "dependencies_prerequisites": [
+        "GP-PROV-008 is reviewed, integrated, and recorded DONE on live configurator with schema-v2 local-entrypoint provenance and historical-object GP-PROV-004 validation passing.",
+        "builder_scripts/arduino_pico.py, platformio.ini selection, successful FIRMWARE_VERSION abbreviation/-DIRTY/escaping behavior, and the canonical build command remain materially identical to live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3.",
+        "No equivalent fail-closed pre-build identity repair is already integrated, and no legitimate concurrent canonical writer is active."
+      ],
+      "substantive_authorization_rationale": "The successful and error contracts are fully resolved: preserve existing successful output, classify any ordinary staged/unstaged/untracked porcelain result as dirty, make every identity/status ambiguity fatal before define publication, use command-local longpaths configuration, and never write global Git state. Waiting only prevents the builder hash change from invalidating the old schema-v1 provenance lane before GP-PROV-008 can absorb it; no later judgment is required.",
+      "mechanical_activation_conditions": [
+        "Live configurator records GP-PROV-008 as DONE with its exact reviewed schema-v2 inventory and historical-object observation preservation integrated and passing.",
+        "The current builder script and platformio.ini selector still match the exact source authority recorded here except for deterministic GP-PROV-008 provenance identities.",
+        "No equivalent repair exists, the canonical worktree is clean, the live remote is verified, and no legitimate concurrent queue or configurator writer is active."
+      ],
+      "invalidation_conditions": [
+        "GP-PROV-008 completes with a materially different schema, builder-identity update path, or observation-preservation contract.",
+        "The builder script, PlatformIO selection, successful version format/quoting, Git dirty semantics, canonical build policy, or build-input topology changes before activation.",
+        "Implementation would require a global Git write, best-effort/UNKNOWN identity, selector/pin/workflow/wrapper change, runtime behavior change, or hardware interpretation.",
+        "Another canonical change supplies equivalent or stronger pre-build identity failure and no-global-mutation enforcement first."
+      ],
+      "authorization_snapshot_provenance": "Follow-up Curator substantive review of GP-BUILD-001 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, packet base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, against exact live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 with independent builder/provenance verification; PREAUTHORIZED on curation/portfolio-20260901-survivors-20260902 and waiting only on GP-PROV-008 integration.",
+      "automated_validation": [
+        "Isolated clean, staged, unstaged, and untracked repositories produce exactly lowercase abbreviated HEAD or that value plus -DIRTY with the existing escaped define representation; ignored-only state does not add -DIRTY.",
+        "Missing Git/repository, nonzero rev-parse/status, empty/multiline/nonhex identity, unexpected status failure, wrong cwd/argv/order, absent command-local longpaths, any --global/config write, or env.Append before complete validation fails.",
+        "The GP-PROV-008 inventory updates only the exact builder-script tracked hash/blob consequence while all local-entrypoint, wrapper, selector, historical observation, and unresolved identity records remain valid.",
+        "Dedicated pre-build identity checker, provenance inventory/observation checks, manifest/adversarial, census, health, full runtime-config aggregate, framework, sequence, navigation, agent-surface, py_compile, exact diff, and canonical pio run -e glyph_mk6 pass on the exact clean committed snapshot with fresh independent review."
+      ],
+      "canonical_build": "pio run -e glyph_mk6; use the documented fallback only if the canonical executable is unavailable and report it explicitly.",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": [],
+      "rollback_recovery": "Drop the focused builder/checker branch if successful version metadata is not byte/format invariant or any error can still publish a define; never restore a global Git config mutation or fail-open identity result.",
+      "status_documentation_updates": "After exact reviewed integration, record fail-closed pre-build identity and preserved successful version semantics without artifact acceptance, reproducibility, runtime, or hardware claims.",
+      "done_evidence": "Not complete; GP-BUILD-001 is substantively authorized but waits mechanically on GP-PROV-008 integration.",
+      "stop_conditions": [
+        "GP-PROV-008 is not exact DONE and passing, or activation requires interpretation rather than objective checks.",
+        "Any successful clean/dirty FIRMWARE_VERSION format or quoting changes, any Git ambiguity remains nonfatal, or any global/repository Git configuration is mutated.",
+        "Any selector, dependency, wrapper, workflow, postprocessor, firmware runtime/table/publication, artifact/store, device, persistence, write, flashing, or hardware scope appears.",
+        "The exact committed implementation snapshot does not pass the canonical build or documented fallback."
+      ],
+      "activation_state": "WAITING",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null
+    },
     {
       "id": "GP-X1-001",
       "title": "Realize exact X1 offset-41 source-owned hardware candidate",
@@ -2069,11 +2316,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CTL-003","GP-PROV-008","GP-VAL-008"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-CTL-003, GP-PROV-008, GP-VAL-008; Immediate Ready: 3; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2081,12 +2328,12 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260901-0909` is partially consumed after four
-reviewed H0 completions. Independent verification found both recorded waiting
-contracts literally invalidated. Curator rebound both to the exact current
-snapshot: `GP-VAL-012` completed first and `GP-PROV-007` then completed while
-preserving manifest sequencing. The remaining packet survivors have explicit substantive,
-evidence, research, or user-decision gates and do not support a portfolio-
+Packet `glyph-portfolio-20260901-0909` is partially consumed. Follow-up
+Curator review corrected stale post-X1 survivor accounting, authorized
+`GP-CTL-003`, `GP-PROV-008`, and the newly evidence-grounded `GP-VAL-008`, and
+recorded `GP-BUILD-001` as waiting Preauthorization behind `GP-PROV-008`.
+`GP-VAL-011`, `GP-CONFIG-005`, `GP-PERSIST-001`, and `GP-ART-001` retain their
+substantive, user-decision, or research gates and do not support a portfolio-
 global evidence wait. Historical Done items remain canonical evidence but do
 not authorize implementation. Planner refresh is not requested while this
 partially consumed current packet retains useful supply.
@@ -2136,21 +2383,22 @@ against exact live `configurator`
   `GP-VAL-012`; it preserves historical `GP-PROV-002` completion.
 - `GP-VAL-012`: completed after exact GP-VAL-010 path/blob and current manifest
   revalidation.
-- `GP-PROV-003` repair: `SUBSTANTIVE_DEPENDENCY_GATED`; the documented local
-  build wrappers are omitted, but schema-v2 representation and GP-PROV-004
-  observation-correspondence preservation/revalidation must be bound first.
+- `GP-PROV-008`: authorized H0 schema-v2 local-build-entrypoint provenance and
+  immutable historical-object preservation for prior GP-PROV-004 observations;
+  this is the repair successor to completed `GP-PROV-003`.
 - `GP-VAL-011`: `SUBSTANTIVE_DEPENDENCY_GATED`; it depends on GP-VAL-010 and
   still needs an exact isolated snapshot, branch/base, dirty-state, and timeout
   contract before authorization.
-- `GP-CTL-003` and `GP-BUILD-001`: `SUBSTANTIVE_DEPENDENCY_GATED`; packet/object
-  provenance representation and pre-build identity/error contracts remain
-  unresolved respectively.
-- `GP-VAL-008`: `EVIDENCE_GATED`; current source/evidence still does not define
-  a safe runtime-behavior regression subset without historical or semantic
-  inference.
+- `GP-CTL-003`: authorized H0 object-required packet/Curator provenance and
+  structured surviving-supply correspondence.
+- `GP-BUILD-001`: substantively `PREAUTHORIZED` and mechanically `WAITING` on
+  reviewed `GP-PROV-008` integration before its builder hash may change.
+- `GP-VAL-008`: authorized H1 offline regression correspondence for only the
+  exact sole/non-mode X1 subset established by current source and accepted
+  Revision-2 evidence.
 - `GP-PERSIST-001`: `RESEARCH`; authoritative filesystem/recovery evidence and
   device-specific design decisions are absent.
-- `GP-X1-001`: `DONE`. Exact candidate
+- `GP-X1-001`: `DONE` and removed from surviving Planner supply. Exact candidate
   `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
   `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
   received the project owner's direct PASS and entered `configurator` only

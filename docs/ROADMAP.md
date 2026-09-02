@@ -9,25 +9,26 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CTL-003","GP-PROV-008","GP-VAL-008"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-CTL-003, GP-PROV-008, GP-VAL-008; Immediate Ready: 3; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
 implementation. Live-verified Planner packet `glyph-portfolio-20260901-0909`
-is partially consumed after three reviewed H0 completions. Independent
-successor verification found both waiting contracts literally invalidated;
-Curator rebound them to the current snapshot, and `GP-VAL-012` is now complete
-while `GP-PROV-007` is mechanically activatable, preserving manifest
-sequencing. The current-runway summary above is the
-sole current executable order and liveness statement; remaining packet
-survivors keep their explicit substantive-dependency, evidence, research, or
-user-decision dispositions and no global wait is supported. Planner refresh is
-not requested while this partially consumed current packet retains useful supply.
+is partially consumed. The earlier invalidated-successor recovery completed
+`GP-VAL-012` and `GP-PROV-007` with manifest sequencing preserved. Follow-up
+Curator review corrected post-X1 survivor accounting, authorized `GP-CTL-003`,
+`GP-PROV-008`, and the exact current-X1 `GP-VAL-008` regression lane, and
+recorded `GP-BUILD-001` as waiting Preauthorization behind reviewed
+`GP-PROV-008` integration. The current-runway summary above is the sole current
+executable order and liveness statement; `GP-VAL-011`, `GP-CONFIG-005`,
+`GP-PERSIST-001`, and `GP-ART-001` retain substantive-dependency, research, or
+user-decision gates, and no global wait is supported. Planner refresh is not
+requested while this partially consumed current packet retains useful supply.
 Pushed recovery tip
 `2b734b26439e9028717becf0010e345cb5efce6c` failed independent review and is
 not mergeable; `GP-SRC-003` now requires prepared schema v2 with carried
