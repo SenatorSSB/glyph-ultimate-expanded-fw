@@ -1,0 +1,100 @@
+{
+  "schema_name": "glyph_current_x1_regression_subset",
+  "schema_version": 1,
+  "work_order_id": "GP-VAL-008",
+  "scope": "sole_non_mode_x1_only",
+  "role_state": {
+    "mode_active": false,
+    "x1_active": true,
+    "x2_active": false,
+    "y1_active": false,
+    "y2_active": false,
+    "layer_normal_x_active": false,
+    "layer_flipper_active": false,
+    "tilt1_effective": false,
+    "tilt2_effective": false,
+    "tilt3_effective": false
+  },
+  "axes_domain": [-1, 0, 1],
+  "directions": [
+    {"label":"down_left", "x_axis":-1, "y_axis":-1, "index":0, "raw":{"x":87,"y":87}},
+    {"label":"down", "x_axis":0, "y_axis":-1, "index":1, "raw":{"x":128,"y":87}},
+    {"label":"down_right", "x_axis":1, "y_axis":-1, "index":2, "raw":{"x":169,"y":87}},
+    {"label":"left", "x_axis":-1, "y_axis":0, "index":3, "raw":{"x":87,"y":128}},
+    {"label":"neutral", "x_axis":0, "y_axis":0, "index":4, "raw":{"x":128,"y":128}},
+    {"label":"right", "x_axis":1, "y_axis":0, "index":5, "raw":{"x":169,"y":128}},
+    {"label":"up_left", "x_axis":-1, "y_axis":1, "index":6, "raw":{"x":87,"y":169}},
+    {"label":"up", "x_axis":0, "y_axis":1, "index":7, "raw":{"x":128,"y":169}},
+    {"label":"up_right", "x_axis":1, "y_axis":1, "index":8, "raw":{"x":169,"y":169}}
+  ],
+  "evidence": {
+    "user_direction_ids": ["GLYPH-UD-010", "GLYPH-UD-011"],
+    "user_observation_id": "GLYPH-UD-012",
+    "work_order_id": "GP-X1-001",
+    "candidate_branch": "runtime-config-x1-offset41-hardware-candidate",
+    "candidate_git_sha": "74ae24364b84520d4e0e39240beb9867653cc7b9",
+    "candidate_base_configurator_sha": "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+    "integration_commit": "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
+    "evidence_commit": "6b0061489cb67d345f212f75268455c181ba271f",
+    "evidence_path": "docs/calibration/fixtures/x1_offset41_hardware_evidence_2026-09-02.json",
+    "evidence_blob_sha256": "d0d00c4bd3d9a6cae355fecd30aa1c72d1f99581fd53a1b96e610339d61c438b",
+    "artifact_sha256": "5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254",
+    "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+    "protocol_reference": "docs/calibration/x1_offset41_hardware_test_protocol_2026-09-02.md",
+    "protocol_version": "GLYPH_X1_OFFSET41_MANUAL_PROTOCOL_V1",
+    "result": "PASS",
+    "disconnect_observation": "PASS",
+    "evidence_gaps": []
+  },
+  "source": {
+    "runtime": "src/modes/Ultimate.cpp",
+    "interpreter": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+    "tables": "src/modes/UltimateIdentityRuntimeTables.hpp",
+    "active_baseline": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+    "table_symbol": "kX1Table",
+    "file_sha256": {
+      "src/modes/Ultimate.cpp": "a40d24db990f0f59ab20ba76257596210e9ccca459415e78235374c2996b2dfd",
+      "src/modes/UltimateRuntimeConfigInterpreter.hpp": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108",
+      "src/modes/UltimateIdentityRuntimeTables.hpp": "a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb",
+      "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp": "533b6a278abfbeb158f5ef7290f00ec79953ad1d0ddc56dede639669f1ea4b7e"
+    },
+    "selection_required_fragments": [
+      "if (x1_active)",
+      "active_modifier_count++",
+      "single_modifier = EffectiveModifier::X1",
+      "if (active_modifier_count != 1)",
+      "if (!mode_active)",
+      "case EffectiveModifier::X1:",
+      "return RuntimeTableId::X1;"
+    ],
+    "index_required_fragments": [
+      "if (x < -1)",
+      "if (x > 1)",
+      "if (y < -1)",
+      "if (y > 1)",
+      "const int index = ((y + 1) * 3) + (x + 1);"
+    ],
+    "lookup_required_fragments": [
+      "const size_t direction_index = DirectionIndexFromAxes(x_axis, y_axis);",
+      "const StickPoint *active_table = LookupRuntimeTable(runtime_config, active_table_id);",
+      "outputs.leftStickX = active_table[direction_index].x;",
+      "outputs.leftStickY = active_table[direction_index].y;"
+    ],
+    "publication_required_fragments": [
+      "&kSourceOwnedCurrentBaselineRuntimeConfig",
+      "RuntimeConfigSource::SourceOwnedBaseline",
+      "RuntimeConfigActivationStatus::SourceOwnedSelected",
+      "return *GetActiveRuntimeConfigState().active_view;"
+    ]
+  },
+  "non_claims": [
+    "not_physical_button_binding",
+    "not_mode_x1_or_mx1",
+    "not_other_modifier_or_override",
+    "not_firmware_simulation",
+    "not_gameplay_semantics",
+    "not_new_hardware_result",
+    "nunchuk_not_tested",
+    "root_cause_unproven"
+  ]
+}
