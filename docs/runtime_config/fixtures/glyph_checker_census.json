@@ -8685,6 +8685,44 @@
     },
     {
       "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "prebuild_git_identity",
+      "defines_main": true,
+      "file_size_bytes": 6004,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 138,
+      "parse_error": null,
+      "path": "tools/check_glyph_prebuild_git_identity.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_prebuild_git_identity",
+      "referenced_repository_path_prefixes": [],
+      "runtime_config_relevance_signals": [],
+      "sha256": "6c2eac8ef5b1c0d1876baa64072f3b19272c21efb19dd5de51de12823f64c0c2",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
         "imports_argparse": true,
         "parser_add_argument_calls": 1
       },

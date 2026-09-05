@@ -17,7 +17,7 @@
     {
       "path": "builder_scripts/arduino_pico.py",
       "git_mode": "100644",
-      "sha256": "456a4b7d5582bbeb0244868db28920cd0f276d3db1924b36b401047cdf4569c2"
+      "sha256": "5a02c888d95581384415b38cfc0d5cd2fef76e205140e383bc01b9a66f3a2eb4"
     },
     {
       "path": "config/glyph/.github/workflows/build.yml",
