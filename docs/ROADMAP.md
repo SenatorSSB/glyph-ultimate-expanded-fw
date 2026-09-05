@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-008","GP-VAL-008"],"immediate_ready":2,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-008"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-008, GP-VAL-008; Immediate Ready: 2; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-008; Immediate Ready: 1; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
@@ -23,8 +23,8 @@ is partially consumed. The earlier invalidated-successor recovery completed
 `GP-VAL-012` and `GP-PROV-007` with manifest sequencing preserved. Follow-up
 Curator review corrected post-X1 survivor accounting, authorized `GP-CTL-003`,
 `GP-PROV-008`, and the exact current-X1 `GP-VAL-008` regression lane, and
-recorded `GP-BUILD-001` as waiting Preauthorization behind reviewed
-`GP-PROV-008` integration. The current-runway summary above is the sole current
+recorded `GP-BUILD-001` as Preauthorized and mechanically activatable after
+reviewed `GP-PROV-008` integration. The current-runway summary above is the sole current
 executable order and liveness statement; `GP-VAL-011`, `GP-CONFIG-005`,
 `GP-PERSIST-001`, and `GP-ART-001` retain substantive-dependency, research, or
 user-decision gates, and no global wait is supported. Planner refresh is not

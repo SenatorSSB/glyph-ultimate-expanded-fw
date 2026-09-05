@@ -49,9 +49,10 @@ Git, but it is not current candidate supply or implementation authority.
       "The project owner resolved the GP-X1-001 user-decision gate with exact X1-only offset-41 authority, tested candidate 74ae24364b84520d4e0e39240beb9867653cc7b9 and UF2 SHA-256 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254, reported all expected outputs and no disconnects, and confirmed the restored prior firmware worked. Revision-2 evidence is published as HARDWARE_VALIDATED pending exact candidate integration recovery.",
       "GP-X1-001 publication recovery reverified the pinned candidate, content-addressed local artifact, immutable PASS record, and exact three-path reviewed delta; merge commit 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c integrated only the tested candidate, and post-integration baseline/intake validators were aligned without further firmware-source changes.",
       "Follow-up Curator review against live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 removed completed GP-X1-001 from surviving packet supply; the prior count of nine was stale and the exact preauthorization-review survivor set was eight.",
-      "Direct source and specialist verification resolved the representation contract for GP-CTL-003 and the GP-PROV-003 repair, authorized the latter under new identity GP-PROV-008, and resolved GP-VAL-008 through the new exact X1 source and Revision-2 hardware evidence. GP-BUILD-001 is substantively PREAUTHORIZED but waits mechanically on reviewed GP-PROV-008 integration so its builder-script hash update cannot invalidate the current provenance inventory first.",
+      "Direct source and specialist verification resolved the representation contract for GP-CTL-003 and the GP-PROV-003 repair, authorized the latter under new identity GP-PROV-008, and resolved GP-VAL-008 through the new exact X1 source and Revision-2 hardware evidence. GP-BUILD-001 is substantively PREAUTHORIZED and is mechanically activatable after reviewed GP-PROV-008 integration.",
       "GP-VAL-011 remains substantive-dependency gated because snapshot fidelity, prevention versus detection, environment, process-tree termination, and timeout policy are unresolved. GP-CONFIG-005 and GP-ART-001 remain user-decision gated; GP-PERSIST-001 remains research gated. The packet remains partially useful with four non-executable survivors, no global evidence wait or Planner refresh is supported, and curation changed no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence.",
-      "GP-CTL-003 implementation was integrated through merge commit 97267efcf5962a6dfa28a551670455aa3bd91c65 after exact feature commit 9dff89d835ccb0bb45dd10c79305b9fef5096263; the checker/census repair remains H0 control-plane-only."
+      "GP-CTL-003 implementation was integrated through merge commit 97267efcf5962a6dfa28a551670455aa3bd91c65 after exact feature commit 9dff89d835ccb0bb45dd10c79305b9fef5096263; the checker/census repair remains H0 control-plane-only.",
+      "GP-PROV-008 was integrated at bc76af250eb61e68daae8b1a91acb6412ecd95a0 after fresh independent repaired-scope PASS; its schema-v2 inventory and immutable historical observation boundary remain H0 control-plane-only."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260901-0909",
@@ -187,7 +188,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-008",
       "title": "Census canonical local build entrypoints",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-008-local-build-entrypoints-20260902",
       "objective": "Finish the declared build-input provenance boundary by recording the documented canonical and fallback local glyph_mk6 entrypoints, the exact tracked wrapper chain, and unresolved interpreter selection without executing a build or changing any build input.",
       "why_this_matters": "The accepted GP-PROV-003 inventory omits scripts/build-glyph-mk6-quiet.sh and scripts/pio-local.sh even though AGENTS.md and docs/WORKFLOW.md prescribe that fallback chain, so current declared-input provenance is incomplete.",
@@ -233,7 +234,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused repair if schema-v2 correspondence or historical-object preservation cannot remain static and fail closed; retain the original GP-PROV-003 and GP-PROV-004 evidence rather than rewriting observations.",
       "status_documentation_updates": "Record the complete local entrypoint chain and historical-object observation boundary without any resolved interpreter, execution, artifact, reproducibility, or hardware claim.",
-      "done_evidence": "Not complete; no implementation, independent review, integration, or completion publication exists for GP-PROV-008.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"d360ff36586133890e9faf07811cc04a806fdbbf","reviewed_implementation_sha":"bc76af250eb61e68daae8b1a91acb6412ecd95a0","prior_canonical_integration_sha":"d360ff36586133890e9faf07811cc04a806fdbbf","reviewed_changed_paths":["docs/runtime_config/build_input_provenance_inventory.md","docs/runtime_config/build_input_resolution_observations.md","docs/runtime_config/fixtures/build_input_provenance_inventory.json","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","tools/check_glyph_build_input_provenance_inventory.py","tools/check_glyph_build_input_resolution_observations.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS after raw historical observation packet pinning and census regeneration on exact integrated implementation snapshot bc76af250eb61e68daae8b1a91acb6412ecd95a0.","validation_provenance":"Focused provenance/observation, manifest, census, health, full runtime-config aggregate, framework, navigation, agent-surface, py_compile, and diff checks passed; no firmware, build, artifact, device, or hardware action was required."},
       "stop_conditions": [
         "Any wrapper, build, PlatformIO, dependency, postprocessor, workflow, artifact, network, device, or hardware action would execute.",
         "Any ambient executable identity, dependency closure, reproducibility, purpose/effect, or artifact acceptance would be inferred.",
@@ -358,14 +359,14 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused builder/checker branch if successful version metadata is not byte/format invariant or any error can still publish a define; never restore a global Git config mutation or fail-open identity result.",
       "status_documentation_updates": "After exact reviewed integration, record fail-closed pre-build identity and preserved successful version semantics without artifact acceptance, reproducibility, runtime, or hardware claims.",
-      "done_evidence": "Not complete; GP-BUILD-001 is substantively authorized but waits mechanically on GP-PROV-008 integration.",
+      "done_evidence": "Not complete; GP-BUILD-001 is substantively authorized and mechanically activatable after GP-PROV-008 integration.",
       "stop_conditions": [
         "GP-PROV-008 is not exact DONE and passing, or activation requires interpretation rather than objective checks.",
         "Any successful clean/dirty FIRMWARE_VERSION format or quoting changes, any Git ambiguity remains nonfatal, or any global/repository Git configuration is mutated.",
         "Any selector, dependency, wrapper, workflow, postprocessor, firmware runtime/table/publication, artifact/store, device, persistence, write, flashing, or hardware scope appears.",
         "The exact committed implementation snapshot does not pass the canonical build or documented fallback."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null
     },
@@ -2343,11 +2344,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-008","GP-VAL-008"],"immediate_ready":2,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-008"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-008, GP-VAL-008; Immediate Ready: 2; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-008; Immediate Ready: 1; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2358,7 +2359,8 @@ target runway, primary liveness, and global evidence-wait support.
 Packet `glyph-portfolio-20260901-0909` is partially consumed. Follow-up
 Curator review corrected stale post-X1 survivor accounting, authorized
 `GP-CTL-003`, `GP-PROV-008`, and the newly evidence-grounded `GP-VAL-008`, and
-recorded `GP-BUILD-001` as waiting Preauthorization behind `GP-PROV-008`.
+recorded `GP-BUILD-001` as Preauthorized and mechanically activatable after
+reviewed `GP-PROV-008` integration.
 `GP-VAL-011`, `GP-CONFIG-005`, `GP-PERSIST-001`, and `GP-ART-001` retain their
 substantive, user-decision, or research gates and do not support a portfolio-
 global evidence wait. Historical Done items remain canonical evidence but do
