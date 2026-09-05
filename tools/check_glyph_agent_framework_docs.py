@@ -365,6 +365,43 @@ COMPLETION_EVIDENCE_NAME = "glyph_done_completion_evidence"
 COMPLETION_EVIDENCE_VERSION = 1
 SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 
+PLANNER_PACKET_FIELDS = {
+    "state",
+    "branch",
+    "base_configurator_sha",
+    "packet_id",
+    "packet_path",
+    "planning_commit",
+    "curation_commit",
+    "candidate_count",
+    "survivors",
+    "curator_review_required",
+    "global_wait_proposed",
+    "material_events_since_packet",
+    "curator_review_provenance",
+}
+CURATOR_PROVENANCE_FIELDS = {
+    "planning_branch",
+    "planning_commit",
+    "packet_id",
+    "packet_base_configurator_sha",
+    "curation_branch",
+    "curation_commit",
+    "review_date",
+    "initial_reviewed_dispositions",
+}
+PLANNER_DISPOSITIONS = {
+    "READY",
+    "PREAUTHORIZED",
+    "SUBSTANTIVE_DEPENDENCY_GATED",
+    "EVIDENCE_GATED",
+    "RESEARCH_GATED",
+    "USER_DECISION_GATED",
+    "REPAIR_REAUTHORIZATION",
+}
+PLANNER_PACKET_ID_RE = re.compile(r"^glyph-portfolio-[0-9]{8}-[0-9]{4}$")
+PLANNER_BRANCH_RE = re.compile(r"^planning/portfolio-[0-9]{8}-[0-9]{4}$")
+
 PRIMARY_LIVENESS_SIGNALS = {
     "RUNWAY_OK",
     "RUNWAY_LOW",
@@ -474,6 +511,269 @@ def load_queue_state() -> dict[str, object]:
     if not isinstance(payload, dict):
         fail("ACTIVE_AGENT_QUEUE.md state block must be a JSON object")
     return payload
+
+
+def _queue_block_from_text(raw: str, label: str) -> dict[str, object]:
+    if raw.count(QUEUE_START) != 1 or raw.count(QUEUE_END) != 1:
+        fail(f"{label} must contain exactly one queue-state marker pair")
+    block = raw.split(QUEUE_START, 1)[1].split(QUEUE_END, 1)[0].strip()
+    if not block.startswith("```json") or not block.endswith("```"):
+        fail(f"{label} queue-state block must be fenced JSON")
+    try:
+        payload = json.loads(block[len("```json") : -len("```")].strip())
+    except json.JSONDecodeError as exc:
+        fail(f"{label} queue-state block is not valid JSON: {exc}")
+    if not isinstance(payload, dict):
+        fail(f"{label} queue-state block must be an object")
+    return payload
+
+
+def _git_tree_entry(commit: str, path: str, label: str, repo_root: Path = REPO_ROOT) -> tuple[str, str, str]:
+    entries = [line for line in _git(repo_root, "ls-tree", commit, "--", path).splitlines() if line]
+    if len(entries) != 1:
+        fail(f"{label} must resolve to exactly one Git tree entry")
+    header, found_path = entries[0].split("\t", 1)
+    mode, kind, oid = header.split(" ")
+    if found_path != path or mode != "100644" or kind != "blob":
+        fail(f"{label} must be a regular non-executable 100644 blob")
+    return mode, kind, oid
+
+
+def _planner_packet_correspondence(
+    planner_packet: dict[str, object], packet_state: str, items_raw: object,
+    repo_root: Path = REPO_ROOT,
+) -> int:
+    if packet_state == "ABSENT":
+        expected = {
+            "state", "branch", "base_configurator_sha", "candidate_count",
+            "curator_review_required", "global_wait_proposed",
+            "material_events_since_packet",
+        }
+        if set(planner_packet) != expected or planner_packet["candidate_count"] != 0:
+            fail("ABSENT Planner packet must not carry packet/object correspondence")
+        return 0
+    if set(planner_packet) != PLANNER_PACKET_FIELDS:
+        fail("recorded Planner packet fields do not match the object-correspondence contract")
+    packet_id = planner_packet["packet_id"]
+    packet_path = planner_packet["packet_path"]
+    planning_commit = planner_packet["planning_commit"]
+    curation_commit = planner_packet["curation_commit"]
+    base_sha = planner_packet["base_configurator_sha"]
+    if not isinstance(packet_id, str) or not PLANNER_PACKET_ID_RE.fullmatch(packet_id):
+        fail("recorded Planner packet requires a canonical packet_id")
+    packet_filename = packet_id.removeprefix("glyph-").replace("-", "_") + ".md"
+    if not isinstance(packet_path, str) or packet_path != f"docs/planning/{packet_filename}":
+        fail("Planner packet_path must be the canonical packet document path")
+    if not isinstance(planner_packet["branch"], str) or not PLANNER_BRANCH_RE.fullmatch(planner_packet["branch"]):
+        fail("recorded Planner packet branch must use the packet identity")
+    for value, field in ((base_sha, "base_configurator_sha"), (planning_commit, "planning_commit"), (curation_commit, "curation_commit")):
+        if not isinstance(value, str) or not SHA_RE.fullmatch(value):
+            fail(f"{field} must be a full lowercase Git SHA")
+        _require_commit_sha(value, field, repo_root)
+    if _git(repo_root, "rev-list", "--parents", "-n", "1", planning_commit).split()[1:] != [base_sha]:
+        fail("planning_commit must be a direct child of packet_base_configurator_sha")
+    if _git(repo_root, "rev-list", "--parents", "-n", "1", curation_commit).split()[1:] != [base_sha]:
+        fail("curation_commit must be a direct child of packet_base_configurator_sha")
+    _is_ancestor(repo_root, curation_commit, _git(repo_root, "rev-parse", "HEAD").strip(), "curation_commit")
+    _git_tree_entry(planning_commit, packet_path, "Planner packet document", repo_root)
+    _git_tree_entry(curation_commit, "docs/project/ACTIVE_AGENT_QUEUE.md", "Curator queue snapshot", repo_root)
+
+    packet_text = _git(repo_root, "show", f"{planning_commit}:{packet_path}")
+    if packet_text.count("```yaml") != 1:
+        fail("Planner packet must contain exactly one YAML frontmatter block")
+    frontmatter_text = packet_text.split("```yaml", 1)[1].split("```", 1)[0]
+    frontmatter: dict[str, str] = {}
+    for line in frontmatter_text.splitlines():
+        if not line.strip():
+            continue
+        match = re.fullmatch(r"([a-z][a-z0-9_]*):[ \t]*(.+)", line)
+        if not match or match.group(1) in frontmatter:
+            fail("Planner packet frontmatter must use unique anchored key/value lines")
+        frontmatter[match.group(1)] = match.group(2).strip()
+    required_frontmatter = {
+        "packet_id": packet_id,
+        "packet_state": "FRESH",
+        "planning_branch": planner_packet["branch"],
+        "base_configurator_sha": base_sha,
+        "candidate_count": "13",
+        "curator_review_required": "true",
+        "global_wait_proposed": "false",
+    }
+    if any(frontmatter.get(key) != value for key, value in required_frontmatter.items()):
+        fail("Planner packet frontmatter does not match the exact queue correspondence")
+    candidate_ids = re.findall(r"^###? +(GP-[A-Z0-9-]+)(?:\s|$)", packet_text, re.MULTILINE)
+    if len(candidate_ids) != len(set(candidate_ids)) or len(candidate_ids) != 13:
+        fail("Planner packet candidate headings must contain exactly thirteen unique candidates")
+    candidate_set = set(candidate_ids)
+
+    provenance = planner_packet["curator_review_provenance"]
+    if not isinstance(provenance, dict) or set(provenance) != CURATOR_PROVENANCE_FIELDS:
+        fail("curator_review_provenance fields do not match the object-correspondence contract")
+    for key, expected in (
+        ("planning_branch", planner_packet["branch"]),
+        ("planning_commit", planning_commit),
+        ("packet_id", packet_id),
+        ("packet_base_configurator_sha", base_sha),
+        ("curation_commit", curation_commit),
+    ):
+        if provenance.get(key) != expected:
+            fail(f"curator_review_provenance.{key} disagrees with packet identity")
+    if not isinstance(provenance.get("curation_branch"), str) or not provenance["curation_branch"].startswith("curation/"):
+        fail("curator_review_provenance.curation_branch must identify a curation branch")
+    initial = provenance["initial_reviewed_dispositions"]
+    if not isinstance(initial, list) or len(initial) != len(candidate_ids):
+        fail("initial reviewed dispositions must cover every Planner candidate")
+    seen_initial: set[str] = set()
+    for entry in initial:
+        if not isinstance(entry, dict) or set(entry) != {"candidate_id", "disposition"}:
+            fail("initial reviewed dispositions must use candidate_id/disposition pairs")
+        candidate_id = entry["candidate_id"]
+        if candidate_id not in candidate_set or candidate_id in seen_initial:
+            fail("initial reviewed dispositions must be unique members of the packet")
+        if entry["disposition"] not in PLANNER_DISPOSITIONS:
+            fail("initial reviewed disposition is outside the closed disposition set")
+        seen_initial.add(candidate_id)
+    if seen_initial != candidate_set:
+        fail("initial reviewed dispositions must cover the exact packet inventory")
+
+    survivors = planner_packet["survivors"]
+    if not isinstance(survivors, list) or planner_packet["candidate_count"] != len(survivors):
+        fail("Planner candidate_count must be derived from survivors")
+    if not isinstance(items_raw, list):
+        fail("queue items must be a list before survivor correspondence")
+    current_ids = {item.get("id") for item in items_raw if isinstance(item, dict)}
+    seen_survivors: set[str] = set()
+    for entry in survivors:
+        if not isinstance(entry, dict) or set(entry) != {"candidate_id", "disposition"}:
+            fail("survivors must use candidate_id/disposition pairs")
+        candidate_id = entry["candidate_id"]
+        if candidate_id not in candidate_set or candidate_id in seen_survivors:
+            fail("survivors must be unique members of the original packet")
+        if entry["disposition"] not in PLANNER_DISPOSITIONS:
+            fail("survivor disposition is outside the closed disposition set")
+        if candidate_id in current_ids:
+            fail("survivors may not be authorized or represented by a current queue item")
+        seen_survivors.add(candidate_id)
+    return len(survivors)
+
+
+def check_planner_packet_correspondence_self_test() -> None:
+    with tempfile.TemporaryDirectory(prefix="glyph-planner-packet-") as temp:
+        repo = Path(temp)
+        subprocess.run(["git", "init", "-q", "-b", "main"], cwd=repo, check=True)
+        subprocess.run(["git", "config", "user.email", "checker@example.invalid"], cwd=repo, check=True)
+        subprocess.run(["git", "config", "user.name", "Glyph checker"], cwd=repo, check=True)
+        (repo / "docs/planning").mkdir(parents=True)
+        (repo / "docs/project").mkdir(parents=True)
+        (repo / "README").write_text("base\n", encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "base"], cwd=repo, check=True)
+        base = _git(repo, "rev-parse", "HEAD").strip()
+        packet_id = "glyph-portfolio-20260901-0909"
+        packet_path = "docs/planning/portfolio_20260901_0909.md"
+        candidates = [
+            "GP-SRC-006", "GP-VAL-002", "GP-PROV-002", "GP-VAL-012", "GP-PROV-003",
+            "GP-VAL-011", "GP-CTL-003", "GP-BUILD-001", "GP-VAL-008", "GP-CONFIG-005",
+            "GP-PERSIST-001", "GP-ART-001", "GP-X1-001",
+        ]
+        packet = "```yaml\n" + "\n".join((
+            f"packet_id: {packet_id}",
+            "packet_state: FRESH",
+            "planning_branch: planning/portfolio-20260901-0909",
+            f"base_configurator_sha: {base}",
+            "candidate_count: 13",
+            "curator_review_required: true",
+            "global_wait_proposed: false",
+        )) + "\n```\n\n" + "\n".join(f"### {candidate} — fixture" for candidate in candidates) + "\n"
+        (repo / packet_path).write_text(packet, encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "planning"], cwd=repo, check=True)
+        planning = _git(repo, "rev-parse", "HEAD").strip()
+        subprocess.run(["git", "checkout", "-qb", "curation", base], cwd=repo, check=True)
+        (repo / "docs/project/ACTIVE_AGENT_QUEUE.md").write_text("queue\n", encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "curation"], cwd=repo, check=True)
+        curation = _git(repo, "rev-parse", "HEAD").strip()
+        planner_packet: dict[str, object] = {
+            "state": "PARTIALLY_CONSUMED",
+            "branch": "planning/portfolio-20260901-0909",
+            "base_configurator_sha": base,
+            "packet_id": packet_id,
+            "packet_path": packet_path,
+            "planning_commit": planning,
+            "curation_commit": curation,
+            "candidate_count": 2,
+            "survivors": [
+                {"candidate_id": "GP-VAL-011", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
+                {"candidate_id": "GP-ART-001", "disposition": "USER_DECISION_GATED"},
+            ],
+            "curator_review_required": False,
+            "global_wait_proposed": False,
+            "material_events_since_packet": ["fixture event"],
+            "curator_review_provenance": {
+                "planning_branch": "planning/portfolio-20260901-0909",
+                "planning_commit": planning,
+                "packet_id": packet_id,
+                "packet_base_configurator_sha": base,
+                "curation_branch": "curation/fixture",
+                "curation_commit": curation,
+                "review_date": "2026-09-01",
+                "initial_reviewed_dispositions": [
+                    {"candidate_id": candidate, "disposition": "USER_DECISION_GATED"}
+                    for candidate in candidates
+                ],
+            },
+        }
+        items = [{"id": "GP-CTL-003"}, {"id": "GP-VAL-008"}]
+        if _planner_packet_correspondence(planner_packet, "PARTIALLY_CONSUMED", items, repo) != 2:
+            fail("valid synthetic Planner packet correspondence returned the wrong survivor count")
+        subprocess.run(["git", "checkout", "-qb", "bad-frontmatter", base], cwd=repo, check=True)
+        bad_packet = packet.replace("packet_id: glyph-portfolio-20260901-0909", "not_packet_id: glyph-portfolio-20260901-0909")
+        (repo / "docs/planning").mkdir(parents=True, exist_ok=True)
+        (repo / packet_path).write_text(bad_packet, encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "bad frontmatter"], cwd=repo, check=True)
+        bad_planning = _git(repo, "rev-parse", "HEAD").strip()
+        subprocess.run(["git", "checkout", "-q", "curation"], cwd=repo, check=True)
+        malformed = json.loads(json.dumps(planner_packet))
+        malformed["planning_commit"] = bad_planning
+        try:
+            _planner_packet_correspondence(malformed, "PARTIALLY_CONSUMED", items, repo)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail("prefixed synthetic Planner frontmatter key was accepted")
+        duplicate = json.loads(json.dumps(planner_packet))
+        duplicate["survivors"][1] = duplicate["survivors"][0]
+        try:
+            _planner_packet_correspondence(duplicate, "PARTIALLY_CONSUMED", items, repo)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail("duplicate synthetic Planner survivor was accepted")
+        missing_blob = json.loads(json.dumps(planner_packet))
+        missing_blob["packet_path"] = "docs/planning/missing.md"
+        try:
+            _planner_packet_correspondence(missing_blob, "PARTIALLY_CONSUMED", items, repo)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail("missing synthetic Planner packet blob was accepted")
+        for label, mutation in (
+            ("count mismatch", lambda value: value.update(candidate_count=3)),
+            ("unknown disposition", lambda value: value["survivors"][0].update(disposition="UNKNOWN")),
+            ("current survivor", lambda value: value["survivors"][0].update(candidate_id="GP-CTL-003")),
+            ("absent survivor", lambda value: value["survivors"][0].update(candidate_id="GP-NOT-IN-PACKET")),
+        ):
+            variant = json.loads(json.dumps(planner_packet))
+            mutation(variant)
+            try:
+                _planner_packet_correspondence(variant, "PARTIALLY_CONSUMED", items, repo)
+            except FrameworkDocsError:
+                pass
+            else:
+                fail(f"{label} synthetic Planner packet was accepted")
+    pass_line("Planner/Curator packet object and survivor adversarial cases validate")
 
 
 def require_nonempty_string(value: object, field: str) -> None:
@@ -1353,9 +1653,8 @@ def check_queue_contract() -> None:
     packet_state = planner_packet.get("state")
     if packet_state not in {"ABSENT", "FRESH", "PARTIALLY_CONSUMED", "STALE", "CONSUMED"}:
         fail(f"queue planner packet has invalid state: {packet_state!r}")
-    candidate_count = planner_packet.get("candidate_count")
-    if not isinstance(candidate_count, int) or candidate_count < 0:
-        fail("queue planner_packet.candidate_count must be a non-negative integer")
+    items_raw = payload.get("items")
+    candidate_count = _planner_packet_correspondence(planner_packet, packet_state, items_raw)
     events = planner_packet.get("material_events_since_packet")
     if not isinstance(events, list) or not all(
         isinstance(event, str) and event.strip() for event in events
@@ -1401,11 +1700,11 @@ def check_queue_contract() -> None:
     if global_wait_proposed and packet_state not in {"FRESH", "PARTIALLY_CONSUMED"}:
         fail("global wait proposal requires a current useful Planner packet")
 
-    items_raw = payload.get("items")
     if not isinstance(items_raw, list):
         fail("queue items must be a list")
     items = [validate_work_order(item) for item in items_raw]
     check_completion_correspondence(payload, items)
+    check_planner_packet_correspondence_self_test()
     ids = [item["id"] for item in items]
     if len(ids) != len(set(ids)):
         fail("queue work-order IDs must be unique")
