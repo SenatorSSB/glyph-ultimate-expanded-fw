@@ -2349,7 +2349,7 @@ Git, but it is not current candidate supply or implementation authority.
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: []; Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
