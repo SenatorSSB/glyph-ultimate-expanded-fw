@@ -6,7 +6,7 @@ reproducibility claim.
 ## Purpose
 
 `docs/runtime_config/fixtures/build_input_provenance_inventory.json` is the
-deterministic static inventory of declarations that select the canonical
+deterministic schema-v2 static inventory of declarations that select the canonical
 `glyph_mk6` build boundary. It binds the tracked declaration bytes and records
 the PlatformIO/environment, dependency, workflow runner/action, source
 selection, source identity, local script, nested reusable-workflow caller, and
@@ -18,6 +18,12 @@ dependency cache, import workflow code, execute a discovered script, invoke
 PlatformIO, execute `glyph_nuker`, build firmware, publish an artifact, or
 access a controller.
 
+The local entrypoint contract records the canonical `pio run -e glyph_mk6`
+command, the fallback wrapper chain through `scripts/build-glyph-mk6-quiet.sh`
+and `scripts/pio-local.sh`, the ordered interpreter alternatives, and the
+`PLATFORMIO_CORE_DIR` declaration. It does not resolve which executable or
+dependency environment is selected.
+
 ## Discovery boundary
 
 The declaration-file set is discovered from tracked repository state:
@@ -26,7 +32,9 @@ The declaration-file set is discovered from tracked repository state:
 - `config/*/env.ini` and `config/*/meta.yaml`;
 - every tracked top-level or nested `.github/workflows/*.yml` or `*.yaml`;
 - the local `extra_scripts` target reached by `glyph_mk6`; and
-- the tracked `glyph_nuker` postprocessor blob.
+- the tracked `glyph_nuker` postprocessor blob;
+- `scripts/build-glyph-mk6-quiet.sh`, the documented fallback entrypoint; and
+- `scripts/pio-local.sh`, the documented local interpreter selector.
 
 The inherited canonical PlatformIO chain is `[env]` plus
 `arduino_pico_base`, `glyph_base`, and `env:glyph_mk6`. AVR-only inputs such as

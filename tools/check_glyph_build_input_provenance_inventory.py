@@ -26,7 +26,7 @@ DOC = ROOT / "docs/runtime_config/build_input_provenance_inventory.md"
 TOP_LEVEL_FIELDS = {
     "schema_name", "schema_version", "status", "canonical_environment",
     "declaration_files", "selectors", "source_identity",
-    "postprocessor_identity", "unresolved_claims",
+    "postprocessor_identity", "unresolved_claims", "local_build_entrypoints",
 }
 DECLARATION_FIELDS = {"path", "git_mode", "sha256"}
 SELECTOR_FIELDS = {
@@ -166,7 +166,8 @@ def declaration_paths(index: dict[str, tuple[str, str]]) -> list[str]:
         or (path.startswith("config/") and (path.endswith("/env.ini") or path.endswith("/meta.yaml")))
         or (path.endswith((".yml", ".yaml")) and (path.startswith(".github/workflows/") or "/.github/workflows/" in path))
     }
-    paths.update({"builder_scripts/arduino_pico.py", "glyph_nuker"})
+    paths.update({"builder_scripts/arduino_pico.py", "glyph_nuker",
+                  "scripts/build-glyph-mk6-quiet.sh", "scripts/pio-local.sh"})
     return sorted(paths)
 
 
@@ -350,7 +351,7 @@ def expected_inventory(root: Path = ROOT) -> dict[str, object]:
         declarations.append({"path": relative, "git_mode": index[relative][0], "sha256": sha256(path)})
     return {
         "schema_name": "glyph_build_input_provenance_inventory",
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "declared_input_inventory_only_no_resolution_or_reproducibility",
         "canonical_environment": "glyph_mk6",
         "declaration_files": declarations,
@@ -368,18 +369,40 @@ def expected_inventory(root: Path = ROOT) -> dict[str, object]:
             "resolution_state": "STATIC_TRACKED_BYTES",
         },
         "unresolved_claims": UNRESOLVED_CLAIMS,
+        "local_build_entrypoints": {
+            "canonical_command": ["pio", "run", "-e", "glyph_mk6"],
+            "fallback_command": ["./scripts/build-glyph-mk6-quiet.sh"],
+            "fallback_edge": {"wrapper": "scripts/build-glyph-mk6-quiet.sh", "command": ["./scripts/pio-local.sh", "run", "-e", "glyph_mk6"]},
+            "interpreter_selection": {"wrapper": "scripts/pio-local.sh", "alternatives": [".venv/bin/python", "python", "python3"], "resolution_state": "UNRESOLVED"},
+            "environment_line": "PLATFORMIO_CORE_DIR=\"$PWD/.platformio-home\"",
+            "policy_sources": ["AGENTS.md", "docs/WORKFLOW.md"],
+            "wrapper_roles": [{"path": "scripts/build-glyph-mk6-quiet.sh", "role": "fallback_build_entrypoint"}, {"path": "scripts/pio-local.sh", "role": "local_interpreter_selector"}],
+        },
     }
 
 
 def validate_shape(value: object) -> dict[str, object]:
     if not isinstance(value, dict) or set(value) != TOP_LEVEL_FIELDS:
         raise ValueError("inventory top-level fields do not match the contract")
-    if value["schema_name"] != "glyph_build_input_provenance_inventory" or type(value["schema_version"]) is not int or value["schema_version"] != 1:
+    if value["schema_name"] != "glyph_build_input_provenance_inventory" or type(value["schema_version"]) is not int or value["schema_version"] != 2:
         raise ValueError("inventory schema identity is invalid")
     declarations = value.get("declaration_files")
     selectors = value.get("selectors")
     if not isinstance(declarations, list) or not isinstance(selectors, list):
         raise ValueError("declaration_files and selectors must be arrays")
+    entrypoints = value["local_build_entrypoints"]
+    if not isinstance(entrypoints, dict) or set(entrypoints) != {"canonical_command", "fallback_command", "fallback_edge", "interpreter_selection", "environment_line", "policy_sources", "wrapper_roles"}:
+        raise ValueError("local build entrypoint contract shape is invalid")
+    if entrypoints["canonical_command"] != ["pio", "run", "-e", "glyph_mk6"] or entrypoints["fallback_command"] != ["./scripts/build-glyph-mk6-quiet.sh"]:
+        raise ValueError("build command contract drift")
+    if entrypoints["fallback_edge"] != {"wrapper": "scripts/build-glyph-mk6-quiet.sh", "command": ["./scripts/pio-local.sh", "run", "-e", "glyph_mk6"]}:
+        raise ValueError("fallback edge drift")
+    if entrypoints["interpreter_selection"] != {"wrapper": "scripts/pio-local.sh", "alternatives": [".venv/bin/python", "python", "python3"], "resolution_state": "UNRESOLVED"}:
+        raise ValueError("interpreter selection drift")
+    if entrypoints["environment_line"] != 'PLATFORMIO_CORE_DIR="$PWD/.platformio-home"' or entrypoints["policy_sources"] != ["AGENTS.md", "docs/WORKFLOW.md"]:
+        raise ValueError("build policy boundary drift")
+    if entrypoints["wrapper_roles"] != [{"path": "scripts/build-glyph-mk6-quiet.sh", "role": "fallback_build_entrypoint"}, {"path": "scripts/pio-local.sh", "role": "local_interpreter_selector"}]:
+        raise ValueError("wrapper role binding drift")
     if any(not isinstance(item, dict) or set(item) != DECLARATION_FIELDS for item in declarations):
         raise ValueError("invalid declaration record shape")
     if any(not isinstance(item, dict) or set(item) != SELECTOR_FIELDS for item in selectors):
@@ -396,7 +419,7 @@ def validate_shape(value: object) -> dict[str, object]:
             raise ValueError("declaration path escapes repository")
         if item["git_mode"] not in {"100644", "100755"} or not isinstance(item["sha256"], str) or not SHA256_RE.fullmatch(item["sha256"]):
             raise ValueError("invalid declaration identity")
-        if path != "glyph_nuker" and item["git_mode"] != "100644":
+        if path not in {"glyph_nuker", "scripts/build-glyph-mk6-quiet.sh", "scripts/pio-local.sh"} and item["git_mode"] != "100644":
             raise ValueError("unexpected executable declaration")
     for item in selectors:
         if item["selector_class"] not in SELECTOR_CLASSES or item["resolution_state"] not in RESOLUTION_STATES:
@@ -420,7 +443,7 @@ def validate_declaration_files(
         actual_mode = index[relative][0]
         if actual_mode != item["git_mode"]:
             raise ValueError(f"declaration mode drift: {relative}")
-        if relative != "glyph_nuker" and actual_mode != "100644":
+        if relative not in {"glyph_nuker", "scripts/build-glyph-mk6-quiet.sh", "scripts/pio-local.sh"} and actual_mode != "100644":
             raise ValueError(f"unexpected executable declaration: {relative}")
         if sha256(path) != item["sha256"]:
             raise ValueError(f"declaration byte drift: {relative}")

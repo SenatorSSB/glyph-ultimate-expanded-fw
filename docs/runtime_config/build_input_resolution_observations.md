@@ -12,6 +12,11 @@ tracked build-device-config workflow in exact inventory order. Source identity
 is bound by path, SHA-256, Git blob, and base configurator SHA; the workflow and
 metadata blobs are direct dependencies of this packet.
 
+The 44 timestamped observations remain bound to the immutable schema-v1
+inventory Git object at the recorded historical base. The current schema-v2
+inventory is not substituted for, refreshed from, or used to rewrite those
+observations.
+
 A resolved record means only that the observed full identity was obtained at the
 recorded time. Mutable tags, ranges, version lines, unversioned packages,
 runners, and selectors without an immutable identity remain bounded unresolved.

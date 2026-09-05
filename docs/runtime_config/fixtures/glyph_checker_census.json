@@ -901,7 +901,7 @@
       },
       "checker_id": "build_input_provenance_inventory",
       "defines_main": true,
-      "file_size_bytes": 37112,
+      "file_size_bytes": 39623,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -912,7 +912,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 579,
+      "line_count": 602,
       "parse_error": null,
       "path": "tools/check_glyph_build_input_provenance_inventory.py",
       "potential_branch_identity_signals": [
@@ -926,13 +926,14 @@
       "python_module": "tools.check_glyph_build_input_provenance_inventory",
       "referenced_repository_path_prefixes": [
         "HAL/pico/src",
+        "docs/WORKFLOW.md",
         "docs/runtime_config/build_input_provenance_inventory.md",
         "docs/runtime_config/fixtures/build_input_provenance_inventory.json"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "a7f75d1eb8a4190279a31f5f5ee59031b7444c1e55d55d25c461617c2641132c",
+      "sha256": "c719ecc1a611f15a7027660f796e20fd0acef30a8c1d8570d6170f24eadf09e3",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -953,7 +954,7 @@
       },
       "checker_id": "build_input_resolution_observations",
       "defines_main": false,
-      "file_size_bytes": 8525,
+      "file_size_bytes": 9161,
       "hard_coded_branch_like_strings": [
         "configurator",
         "evidence_locator"
@@ -963,7 +964,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 118,
+      "line_count": 134,
       "parse_error": null,
       "path": "tools/check_glyph_build_input_resolution_observations.py",
       "potential_branch_identity_signals": [
@@ -982,7 +983,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "151e401743245fc56dfc8b0b2ffdf2591425c940d35594ef155c80e2e7bcfce3",
+      "sha256": "86702aa1e5522136fe7299913aac6c67c1414aaec04bbb0ceaa55576eb491b14",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

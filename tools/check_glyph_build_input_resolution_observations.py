@@ -10,6 +10,7 @@ INVENTORY = ROOT / "docs/runtime_config/fixtures/build_input_provenance_inventor
 PATH = ROOT / "docs/runtime_config/fixtures/build_input_resolution_observations.json"
 MANIFEST = ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
 BASE = "8c04262c66613d46b933b1b739c01c575cb0c580"
+OBSERVATION_BASE = "ffc007552abc848051841362b0b0ac4c1a7d087b"
 INVENTORY_SHA = "d783688fdc140ad2a5706b168f24f76093d0a388431ca4b33253257c52dfc455"
 INVENTORY_BLOB = "5e6d2f128cc6baccd98c39369fbd6bc5acc43851"
 WORKFLOW_BLOB = "40f8ca91fefc64674c08c03183595983c5054d1f"
@@ -33,6 +34,18 @@ def base_blob(path: str) -> str:
 
 def base_text(path: str) -> str:
     return git("show", f"{BASE}:{path}")
+
+def historical_inventory() -> dict:
+    return json.loads(base_text(str(INVENTORY.relative_to(ROOT))))
+
+def historical_observations() -> dict:
+    return json.loads(git("show", f"{OBSERVATION_BASE}:{PATH.relative_to(ROOT)}"))
+
+def historical_observations_bytes() -> bytes:
+    return subprocess.run(
+        ["git", "show", f"{OBSERVATION_BASE}:{PATH.relative_to(ROOT)}"],
+        cwd=ROOT, capture_output=True, check=True,
+    ).stdout
 
 def blob_locator(commit: str, path: str) -> str:
     return f"https://github.com/SenatorSSB/glyph-ultimate-expanded-fw/blob/{commit}/{path}"
@@ -62,8 +75,11 @@ def expected_records(inv: dict, workflow_text: str) -> list[dict]:
     return records
 
 def check() -> None:
-    inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
+    inv = historical_inventory()
     data = json.loads(PATH.read_text(encoding="utf-8"))
+    historical_data = historical_observations()
+    if PATH.read_bytes() != historical_observations_bytes() or data != historical_data:
+        fail("timestamped observation packet drifted from immutable historical object")
     if set(data) != {"schema_name","schema_version","status","source_inventory","records"}:
         fail("top-level schema mismatch")
     if data["schema_name"] != "glyph_build_input_resolution_observations" or data["schema_version"] != 1:
@@ -73,8 +89,8 @@ def check() -> None:
     source = data["source_inventory"]
     if source != {"path": str(INVENTORY.relative_to(ROOT)), "sha256": INVENTORY_SHA, "blob": INVENTORY_BLOB, "base_configurator_sha": BASE}:
         fail("source inventory identity or base binding mismatch")
-    if hashlib.sha256(INVENTORY.read_bytes()).hexdigest() != INVENTORY_SHA or base_blob(source["path"]) != INVENTORY_BLOB:
-        fail("source inventory bytes drifted")
+    if base_blob(source["path"]) != INVENTORY_BLOB:
+        fail("historical source inventory blob drifted")
     if base_blob(WORKFLOW) != WORKFLOW_BLOB or base_blob(META) != META_BLOB:
         fail("bound workflow or metadata blob drifted")
     subprocess.run(["git", "merge-base", "--is-ancestor", BASE, "HEAD"], cwd=ROOT, check=True, capture_output=True)
