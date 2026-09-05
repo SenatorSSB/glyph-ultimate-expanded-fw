@@ -72,11 +72,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-008"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-008; Immediate Ready: 1; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is
@@ -88,8 +88,9 @@ Ready IDs: GP-VAL-008; Immediate Ready: 1; Recorded Preauthorized: 1; Mechanical
   immutable historical observation preservation.
   Follow-up review corrected post-X1 survivor accounting, authorized
   `GP-CTL-003`, `GP-PROV-008`, and the bounded current `GP-VAL-008` X1
-  regression lane, and Preauthorized `GP-BUILD-001` waiting on reviewed
-  `GP-PROV-008` integration.
+  regression lane. `GP-VAL-008` is now DONE and Preauthorized
+  `GP-BUILD-001` is mechanically activatable after reviewed `GP-PROV-008`
+  integration.
   The current-runway summary above is the authoritative executable order and
   liveness state. `GP-VAL-011`, `GP-CONFIG-005`, `GP-PERSIST-001`, and
   `GP-ART-001` retain substantive-dependency, research, or user-decision gates,

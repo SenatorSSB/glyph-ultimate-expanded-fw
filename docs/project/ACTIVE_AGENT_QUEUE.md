@@ -42,7 +42,7 @@ Git, but it is not current candidate supply or implementation authority.
       "Curator independently reviewed fresh packet glyph-portfolio-20260901-0909 at commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb against live configurator 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c.",
       "Direct source and specialist verification confirmed GP-SRC-006 and the executable validation-before-publication repair as independent complete H0 work; they are authorized as GP-SRC-006 and GP-VAL-013 READY without changing workflow or product source.",
       "The executable sidecar/unique-JSON repair is authorized as GP-PROV-007 PREAUTHORIZED and WAITING mechanically on GP-VAL-013 integration; zero-result category rejection is authorized as GP-VAL-012 PREAUTHORIZED and WAITING mechanically on GP-VAL-010 integration.",
-      "GP-PROV-003 repair, GP-VAL-011, GP-CTL-003, and GP-BUILD-001 remain substantive-dependency gated; GP-VAL-008 remains evidence gated; GP-PERSIST-001 remains research gated; GP-CONFIG-005, GP-ART-001, and GP-X1-001 remain user-decision gated.",
+      "GP-PROV-003 repair, GP-VAL-011, GP-CTL-003, and GP-BUILD-001 remain substantive-dependency gated or preauthorized; GP-VAL-008 remains evidence gated in the historical disposition record but is now complete; GP-PERSIST-001 remains research gated; GP-CONFIG-005, GP-ART-001, and GP-X1-001 remain user-decision gated.",
       "GP-VAL-010, GP-SRC-006, GP-VAL-013, and GP-VAL-012 completed on configurator. Independent verification found that both recorded successor conditions were literally invalidated: GP-VAL-013's reviewed path set included its publication-workflow fixture beyond GP-PROV-007's allowlist, and GP-VAL-013 changed GP-VAL-012's exact-bound manifest blob while preserving its category/applicability tuples.",
       "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 completed first; GP-PROV-007 was mechanically ACTIVATABLE and its later manifest dependency update did not re-invalidate GP-VAL-012.",
       "GP-PROV-007 completed as a reviewed H1 host-side checker repair at 721cd20388c39beefe6b1b85ce25228a7efe6a0e with no workflow, artifact, product/runtime, firmware, device, or hardware change.",
@@ -53,6 +53,7 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-VAL-011 remains substantive-dependency gated because snapshot fidelity, prevention versus detection, environment, process-tree termination, and timeout policy are unresolved. GP-CONFIG-005 and GP-ART-001 remain user-decision gated; GP-PERSIST-001 remains research gated. The packet remains partially useful with four non-executable survivors, no global evidence wait or Planner refresh is supported, and curation changed no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence.",
       "GP-CTL-003 implementation was integrated through merge commit 97267efcf5962a6dfa28a551670455aa3bd91c65 after exact feature commit 9dff89d835ccb0bb45dd10c79305b9fef5096263; the checker/census repair remains H0 control-plane-only.",
       "GP-PROV-008 was integrated at bc76af250eb61e68daae8b1a91acb6412ecd95a0 after fresh independent repaired-scope PASS; its schema-v2 inventory and immutable historical observation boundary remain H0 control-plane-only."
+      ,"GP-VAL-008 was integrated at 63616108477bff72e1cda49572a56601782bac3b after fresh independent repaired-scope PASS; its current X1 correspondence remains H1 offline evidence only with no firmware, build, artifact, device, or hardware action."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260901-0909",
@@ -100,13 +101,13 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-VAL-004"
     ]
   },
-    "runway": {
-    "immediate_ready": 1,
+      "runway": {
+    "immediate_ready": 0,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -248,7 +249,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-008",
       "title": "Bind the current X1 regression subset",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-008-current-x1-regression-20260902",
       "objective": "Create one current load-bearing offline regression contract for the exact source-backed and Revision-2 hardware-accepted sole/non-mode X1 nine-direction subset without reviving the stale May-28 behavior fixture or claiming a firmware simulation.",
       "why_this_matters": "GP-VAL-008 was evidence-gated when no current accepted behavior subset existed. GP-X1-001 now supplies exact owner intent, current integrated source, an exact candidate/artifact PASS, and bounded sole/non-mode X1 observations for all nine directions.",
@@ -294,7 +295,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused checker/fixture branch if exact source/evidence correspondence cannot be expressed without unsupported semantics; retain GP-X1-001 evidence and historical evaluator exclusion unchanged.",
       "status_documentation_updates": "Document the one current X1 regression subset and its immutable evidence limits without broadening physical acceptance or current runtime-config capability claims.",
-      "done_evidence": "Not complete; no implementation, independent review, integration, or completion publication exists for GP-VAL-008.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"84ba70d28629134c92d0b0d25c9d05fb4bd2596c","reviewed_implementation_sha":"63616108477bff72e1cda49572a56601782bac3b","prior_canonical_integration_sha":"63616108477bff72e1cda49572a56601782bac3b","reviewed_changed_paths":["docs/runtime_config/current_x1_regression_subset.md","docs/runtime_config/fixtures/current_x1_regression_subset.json","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_current_x1_regression_subset.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS after strict identity/schema and adversarial-coverage repairs on exact implementation snapshot 63616108477bff72e1cda49572a56601782bac3b.","validation_provenance":"Focused X1 checker, py_compile, manifest, census, health, full 29-check runtime-config aggregate, framework, sequence, navigation, agent-surface, candidate-generation isolation, and exact diff checks passed; no firmware build, artifact, device, or hardware action was required."},
       "stop_conditions": [
         "Any expected behavior lacks exact current source plus accepted user/evidence provenance.",
         "Any historical literal, physical binding, mode+X1, additional modifier/override, digital/gameplay, Nunchuk, root-cause, or general simulation claim enters scope.",
@@ -2344,11 +2345,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-008"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-008; Immediate Ready: 1; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2358,9 +2359,9 @@ target runway, primary liveness, and global evidence-wait support.
 
 Packet `glyph-portfolio-20260901-0909` is partially consumed. Follow-up
 Curator review corrected stale post-X1 survivor accounting, authorized
-`GP-CTL-003`, `GP-PROV-008`, and the newly evidence-grounded `GP-VAL-008`, and
-recorded `GP-BUILD-001` as Preauthorized and mechanically activatable after
-reviewed `GP-PROV-008` integration.
+`GP-CTL-003`, `GP-PROV-008`, and the newly evidence-grounded `GP-VAL-008` were
+completed, and `GP-BUILD-001` is now Preauthorized and mechanically activatable
+after reviewed `GP-PROV-008` integration.
 `GP-VAL-011`, `GP-CONFIG-005`, `GP-PERSIST-001`, and `GP-ART-001` retain their
 substantive, user-decision, or research gates and do not support a portfolio-
 global evidence wait. Historical Done items remain canonical evidence but do
@@ -2422,7 +2423,7 @@ against exact live `configurator`
   structured surviving-supply correspondence.
 - `GP-BUILD-001`: substantively `PREAUTHORIZED` and mechanically `WAITING` on
   reviewed `GP-PROV-008` integration before its builder hash may change.
-- `GP-VAL-008`: authorized H1 offline regression correspondence for only the
+- `GP-VAL-008`: DONE as H1 offline regression correspondence for only the
   exact sole/non-mode X1 subset established by current source and accepted
   Revision-2 evidence.
 - `GP-PERSIST-001`: `RESEARCH`; authoritative filesystem/recovery evidence and
