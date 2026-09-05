@@ -50,7 +50,8 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-X1-001 publication recovery reverified the pinned candidate, content-addressed local artifact, immutable PASS record, and exact three-path reviewed delta; merge commit 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c integrated only the tested candidate, and post-integration baseline/intake validators were aligned without further firmware-source changes.",
       "Follow-up Curator review against live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 removed completed GP-X1-001 from surviving packet supply; the prior count of nine was stale and the exact preauthorization-review survivor set was eight.",
       "Direct source and specialist verification resolved the representation contract for GP-CTL-003 and the GP-PROV-003 repair, authorized the latter under new identity GP-PROV-008, and resolved GP-VAL-008 through the new exact X1 source and Revision-2 hardware evidence. GP-BUILD-001 is substantively PREAUTHORIZED but waits mechanically on reviewed GP-PROV-008 integration so its builder-script hash update cannot invalidate the current provenance inventory first.",
-      "GP-VAL-011 remains substantive-dependency gated because snapshot fidelity, prevention versus detection, environment, process-tree termination, and timeout policy are unresolved. GP-CONFIG-005 and GP-ART-001 remain user-decision gated; GP-PERSIST-001 remains research gated. The packet remains partially useful with four non-executable survivors, no global evidence wait or Planner refresh is supported, and curation changed no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence."
+      "GP-VAL-011 remains substantive-dependency gated because snapshot fidelity, prevention versus detection, environment, process-tree termination, and timeout policy are unresolved. GP-CONFIG-005 and GP-ART-001 remain user-decision gated; GP-PERSIST-001 remains research gated. The packet remains partially useful with four non-executable survivors, no global evidence wait or Planner refresh is supported, and curation changed no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence.",
+      "GP-CTL-003 implementation was integrated through merge commit 97267efcf5962a6dfa28a551670455aa3bd91c65 after exact feature commit 9dff89d835ccb0bb45dd10c79305b9fef5096263; the checker/census repair remains H0 control-plane-only."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260901-0909",
@@ -99,12 +100,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
     "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -125,7 +126,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CTL-003",
       "title": "Bind Planner and Curator packet provenance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-ctl-003-packet-provenance-20260902",
       "objective": "Make canonical queue liveness depend on exact locally resolvable Planner and Curator Git-object correspondence plus a unique structured surviving-candidate inventory instead of trusting free-form provenance, prose, and an independent candidate_count integer.",
       "why_this_matters": "The current framework checker accepts bogus planning commits, packet identities, Curator provenance, and arbitrary nonzero candidate counts; GP-X1-001 completion also left the queue claiming nine survivors when only eight existed before this curation.",
@@ -172,7 +173,7 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused branch if immutable object correspondence cannot be enforced offline without changing liveness policy; retain current queue authority and never fall back to trusting a shape-valid free-form provenance string or independent count.",
       "status_documentation_updates": "Publish schema/provenance and exact survivor accounting in the canonical queue/status surfaces without changing candidate dispositions beyond already-authorized execution transitions.",
-      "done_evidence": "Not complete; no implementation, independent review, integration, or completion publication exists for GP-CTL-003.",
+      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"33694f3a67f336c25b3c82008b3511d06a490016","reviewed_implementation_sha":"9dff89d835ccb0bb45dd10c79305b9fef5096263","prior_canonical_integration_sha":"97267efcf5962a6dfa28a551670455aa3bd91c65","reviewed_changed_paths":["docs/project/ACTIVE_AGENT_QUEUE.md","docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_agent_framework_docs.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS after frontmatter fail-closed repair and expanded packet/survivor adversarial coverage on the exact integrated source snapshot.","validation_provenance":"Focused framework, packet-object adversarial, census, full current runtime-config aggregate, sequence, navigation, agent-surface, py_compile, and diff checks passed; no firmware, build, artifact, device, or hardware action was required."},
       "stop_conditions": [
         "Any required object or exact packet/curation correspondence is missing, ambiguous, mutable-only, or requires network access during validation.",
         "Any candidate is promoted, rejected, or reinterpreted by checker logic instead of an explicit Curator transition.",
@@ -2342,11 +2343,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CTL-003","GP-PROV-008","GP-VAL-008"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-008","GP-VAL-008"],"immediate_ready":2,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CTL-003, GP-PROV-008, GP-VAL-008; Immediate Ready: 3; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-PROV-008, GP-VAL-008; Immediate Ready: 2; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
