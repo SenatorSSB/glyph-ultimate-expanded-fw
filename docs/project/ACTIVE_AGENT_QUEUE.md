@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-    "audit_base_sha": "3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3",
+  "audit_base_sha": "766237660e96189064203c3dc6e00cbdbe0df2c5",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "PARTIALLY_CONSUMED",
@@ -29,16 +29,14 @@ Git, but it is not current candidate supply or implementation authority.
     "packet_path": "docs/planning/portfolio_20260901_0909.md",
     "planning_commit": "3fb785749d8653e91bb8e4b3a73a01be03aaf9cb",
     "curation_commit": "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
-    "candidate_count": 4,
+    "candidate_count": 2,
     "survivors": [
-      {"candidate_id": "GP-VAL-011", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
       {"candidate_id": "GP-CONFIG-005", "disposition": "USER_DECISION_GATED"},
-      {"candidate_id": "GP-PERSIST-001", "disposition": "RESEARCH_GATED"},
       {"candidate_id": "GP-ART-001", "disposition": "USER_DECISION_GATED"}
     ],
     "curator_review_required": false,
     "global_wait_proposed": false,
-      "material_events_since_packet": [
+    "material_events_since_packet": [
       "Curator independently reviewed fresh packet glyph-portfolio-20260901-0909 at commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb against live configurator 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c.",
       "Direct source and specialist verification confirmed GP-SRC-006 and the executable validation-before-publication repair as independent complete H0 work; they are authorized as GP-SRC-006 and GP-VAL-013 READY without changing workflow or product source.",
       "The executable sidecar/unique-JSON repair is authorized as GP-PROV-007 PREAUTHORIZED and WAITING mechanically on GP-VAL-013 integration; zero-result category rejection is authorized as GP-VAL-012 PREAUTHORIZED and WAITING mechanically on GP-VAL-010 integration.",
@@ -53,7 +51,11 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-VAL-011 remains substantive-dependency gated because snapshot fidelity, prevention versus detection, environment, process-tree termination, and timeout policy are unresolved. GP-CONFIG-005 and GP-ART-001 remain user-decision gated; GP-PERSIST-001 remains research gated. The packet remains partially useful with four non-executable survivors, no global evidence wait or Planner refresh is supported, and curation changed no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence.",
       "GP-CTL-003 implementation was integrated through merge commit 97267efcf5962a6dfa28a551670455aa3bd91c65 after exact feature commit 9dff89d835ccb0bb45dd10c79305b9fef5096263; the checker/census repair remains H0 control-plane-only.",
       "GP-PROV-008 was integrated at bc76af250eb61e68daae8b1a91acb6412ecd95a0 after fresh independent repaired-scope PASS; its schema-v2 inventory and immutable historical observation boundary remain H0 control-plane-only."
-      ,"GP-VAL-008 was integrated at 63616108477bff72e1cda49572a56601782bac3b after fresh independent repaired-scope PASS; its current X1 correspondence remains H1 offline evidence only with no firmware, build, artifact, device, or hardware action."
+      ,"GP-VAL-008 was integrated at 63616108477bff72e1cda49572a56601782bac3b after fresh independent repaired-scope PASS; its current X1 correspondence remains H1 offline evidence only with no firmware, build, artifact, device, or hardware action.",
+      "GP-BUILD-001 was integrated and published DONE at live configurator 766237660e96189064203c3dc6e00cbdbe0df2c5 after canonical build and independent review, consuming the last previously authorized item.",
+      "On 2026-09-06, Curator independently rebound GP-VAL-011 to an exact clean committed disposable-clone, controlled-environment, mutation-detection, and 120-second-per-check/300-second-aggregate timeout contract and authorized it READY as H1 validation-control work.",
+      "On 2026-09-06, Curator independently verified GP-PERSIST-001 as bounded H1 evidence-only research and authorized it READY without choosing or authorizing any future H3 persistence mechanism, recovery policy, firmware change, build, artifact, device, or hardware action.",
+      "GP-CONFIG-005 and GP-ART-001 remain USER_DECISION_GATED. The remaining packet supply cannot cover the throughput-aware runway target, so RUNWAY_SHORTFALL_CANDIDATE_SUPPLY and PLANNER_REFRESH_REQUIRED are recorded without claiming a global evidence wait."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260901-0909",
@@ -101,21 +103,21 @@ Git, but it is not current candidate supply or implementation authority.
       "GP-VAL-004"
     ]
   },
-      "runway": {
-    "immediate_ready": 0,
+  "runway": {
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
-    "signals": [
-      "CURATION_REQUIRED",
+  "signals": [
+      "RUNWAY_LOW",
+      "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
       "RUNWAY_SHORTFALL_USER_DECISION_GATED",
-      "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
-      "RUNWAY_SHORTFALL_RESEARCH_GATED"
+      "PLANNER_REFRESH_REQUIRED"
     ],
   "global_evidence_wait": {
     "supported": false,
@@ -125,6 +127,130 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-VAL-011",
+      "title": "Isolate and time-bound aggregate validation",
+      "status": "READY",
+      "branch": "glyph/gp-val-011-isolated-aggregate-execution",
+      "objective": "Run every current runtime-config aggregate checker only inside one independently copied exact committed Git snapshot, with a constructed environment, canonical-state mutation proof, and deterministic process-tree timeouts.",
+      "why_this_matters": "The current aggregate executes every checker in the canonical worktree with inherited environment and no timeout or process-tree termination, so declarative mutation-risk metadata does not prevent canonical mutation and one hanging checker can hang the entire validation gate.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "This changes host-side validation execution safety only. A clean exact committed source snapshot that passes today must still run the same current checker command vectors and classifications; checker execution moves to an independent disposable Git repository and timeout or mutation becomes a fail-closed validation result. It changes no checker product semantics, workflow, build input, firmware/runtime behavior, artifact, device, or hardware state.",
+      "scope": "Update tools/run_glyph_runtime_config_validation.py, tools/check_glyph_runtime_config_validation_aggregate.py, docs/runtime_config/README.md, and only deterministic checker-census consequences. Reject caller state with staged, unstaged, or untracked paths; pre-existing ignored files may exist but are excluded from the snapshot. Resolve source HEAD, symbolic branch or detached state, GLYPH_CHECKER_BASE or origin/configurator default, and expected merge base to immutable commits before execution. Capture a complete canonical pre-execution fingerprint covering HEAD and branch/detached state, index, tracked bytes/modes/symlink targets, refs, repository Git config, staged, unstaged, untracked, and the complete ignored-path set. Create a TemporaryDirectory local clone using git clone --no-local --no-checkout so it has an independent object database, remove the canonical-path origin, recreate only the exact origin/configurator comparison ref, and check out the same exact HEAD under the same branch or detached state. Execute every selected checker only in that clone. Construct the child environment from ambient PATH plus disposable HOME, TMPDIR, TMP, TEMP, XDG_CONFIG_HOME, XDG_CACHE_HOME, PYTHONPYCACHEPREFIX, deterministic Python/locale/time and Git no-global/no-system/no-optional-lock settings, and exact resolved checker-base variables. Use fixed non-user-configurable production budgets of 120 seconds per checker, 300 seconds for the whole command including snapshot setup and final proof, and two seconds between process-group TERM and KILL; use smaller injected budgets only in isolated tests. After timeout or mutation, terminate and reap the process group, record the exact checker and failure kind, stop further execution regardless of fail-fast, and fail. Before every return, compare the entire canonical fingerprint with the pre-execution fingerprint; after each checker, require the isolated clone to retain unchanged HEAD, branch, index, tracked bytes/modes/symlink targets, refs, Git config, staged, unstaged, untracked, and ignored state.",
+      "explicit_excluded_scope": "No dirty-snapshot overlay support; no copying ignored files; no manifest schema, entry, applicability, category, command, dependency, branch-policy, load-bearing, historical, exclusion, or checker-semantic change; no tools/glyph_checker_context.py or workflow edit; no ambient python3/PATH identity claim; no network sandbox, container, virtual machine, or general malicious-code containment claim; no protection against deliberately detached daemons or arbitrary absolute host writes beyond the exact repository/Git/process-tree contract; no build, firmware/runtime source, artifact, device, persistence, WebSerial/protobuf write, flashing, hardware, Nunchuk, root-cause, or gameplay change or claim.",
+      "touched_planes": ["docs/checkers", "build tooling"],
+      "source_authority": "Exact clean live configurator 766237660e96189064203c3dc6e00cbdbe0df2c5. tools/run_glyph_runtime_config_validation.py executes selected checker commands with cwd=ROOT through subprocess.run, inherited environment, and no timeout or new process session, while manifest validation accepts mutation_risk as declarative metadata. GP-VAL-010, GP-VAL-012, GP-VAL-013, and GP-PROV-007 are DONE and preserve exact command and workflow correspondence. A fresh full aggregate passed all 30 current checks in about 66 seconds; candidate_generation was the slowest at about 34 seconds. Planner packet glyph-portfolio-20260901-0909 at 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb identified GP-VAL-011, and bounded specialist verification confirmed the gap and exact clone/environment/timeout contract remain current.",
+      "dependencies_prerequisites": [
+        "Implementation starts from a fresh live-configurator descendant of 766237660e96189064203c3dc6e00cbdbe0df2c5 with the aggregate runner, aggregate adversarial checker, manifest schema and 34 entries, 30 current checker commands, 37 exclusions, checker-context contract, and current branch/base semantics materially unchanged.",
+        "The source worktree is clean for staged, unstaged, and untracked paths before snapshot creation; ignored files are permitted only as excluded caller-local state and are not copied into the isolated repository.",
+        "The source repository contains every immutable Git object required by current checkers and the canonical queue; snapshot creation and checker execution perform no fetch or network access."
+      ],
+      "substantive_authorization_rationale": "The direct execution gap is source-proven and every previously unresolved architecture decision is now bound: exact clean committed input, independent no-local clone, preserved branch/detached and immutable comparison-base context, constructed environment, repository/Git mutation fingerprints, POSIX process-group termination, and fixed budgets with measured headroom. This strengthens validation isolation without changing checker applicability or product behavior. No user, product, runtime, hardware, or external-service decision remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The aggregate runner, manifest representation, checker-context base contract, current command set, or required locally resolvable Git-object topology changes materially before implementation.",
+        "A current checker requires caller ignored state, network access, a dirty source overlay, a non-POSIX execution platform, or an ambient environment variable outside the exact authorized set.",
+        "The implementation would need to change any checker semantic, manifest classification, workflow, tools/glyph_checker_context.py, build input, product/runtime source, artifact, device, or hardware behavior.",
+        "Another canonical change supplies equivalent or stronger exact snapshot, environment, mutation, and process-tree timeout enforcement first."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of Planner candidate GP-VAL-011 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, packet base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, rebound to exact clean live configurator 766237660e96189064203c3dc6e00cbdbe0df2c5 with bounded aggregate/source/timeout specialist verification on curation/portfolio-20260901-final-survivors-20260906.",
+      "automated_validation": [
+        "Exact feature, configurator, and detached clean committed snapshots preserve HEAD, branch/detached state, origin/configurator comparison identity, GLYPH_CHECKER_BASE and expected merge-base meaning, and current checker-context results inside the disposable clone.",
+        "Staged, unstaged, or untracked caller state fails before cloning; multiple pre-existing ignored caller paths are excluded and the complete ignored-path set remains exact. Canonical HEAD and branch/detached state, index, tracked bytes/modes/symlink targets, refs, repository Git config, staged, unstaged, untracked, and ignored state remain exact before and after success, checker failure, mutation failure, timeout, and setup failure.",
+        "Isolated adversarial checkers that mutate tracked bytes, index, HEAD, refs, Git config, staged, unstaged, untracked, or ignored state fail immediately in the clone; historical and excluded checkers never execute.",
+        "Environment and cwd probes see only the exact constructed values and disposable repository. Per-check and whole-command timeout fixtures use injected short budgets, prove child-process TERM/KILL/reap with no late sentinel, report exact identity and budget, and stop subsequent execution.",
+        "The current full 30-check aggregate passes within the production budgets from a clean exact committed implementation snapshot; focused aggregate adversarial, manifest, census, health, framework, sequence, navigation, agent-surface, py_compile, and exact-diff checks pass with fresh independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 host-side validation isolation and checker/docs consequences only; any build input, compiled source, firmware/runtime, artifact, or device delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Drop the focused implementation branch if exact current checks cannot execute from the isolated snapshot without broadening environment, dirty-state, network, manifest, or product authority; retain the current direct aggregate rather than silently skipping checks or weakening failure behavior.",
+      "status_documentation_updates": "Document the clean committed disposable-snapshot requirement, exact isolation/non-claims, fixed time budgets, and fail-closed mutation/timeout results without describing the runner as a general security sandbox.",
+      "done_evidence": "Pending exact reviewed implementation, isolated mutation/timeout adversarial corpus, full current aggregate PASS, and canonical publication correspondence.",
+      "stop_conditions": [
+        "Any selected checker executes in or resolves repository state from the canonical worktree.",
+        "Any staged, unstaged, or untracked caller state is ignored, any caller ignored file is copied, any canonical HEAD/branch/index/tracked/ref/config/staged/unstaged/untracked/ignored mutation can pass, or any isolated tracked/index/ref/config/status/ignored mutation can pass.",
+        "Any timeout can leave the checker process group unreaped, permit later checks to run, or return success.",
+        "Any checker semantic, manifest classification, workflow, build input, product/runtime source, artifact, device, persistence, write, flashing, hardware, Nunchuk, root-cause, or gameplay scope appears."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-PERSIST-001",
+      "title": "Research current Config persistence recovery",
+      "status": "READY",
+      "branch": "glyph/gp-persist-001-current-config-recovery-research",
+      "objective": "Produce an exact source- and upstream-provenance research packet for the existing Pico config.bin SaveConfig, LoadConfig, startup, and SetConfig persistence path, mapping failure windows and future recovery alternatives without selecting or implementing a mechanism.",
+      "why_this_matters": "The current SaveConfig path truncates and rewrites the sole config.bin with a placeholder header, protobuf body, CRC pass, and final header, while the repository has no direct persistence fault-injection test or accepted current-device recovery contract. Future H3 repair cannot be responsibly authorized until the exact filesystem guarantees, failure windows, unknowns, and decision gates are recorded.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "This is evidence-only persistence research and offline correspondence checking. It may describe source-backed current behavior, authoritative dependency guarantees, inferred failure windows labeled as inference, and unknown device facts; it does not choose or authorize a future persistence algorithm, change current config.bin behavior, access a device, or create hardware evidence.",
+      "scope": "Add docs/runtime_config/current_config_persistence_recovery_research.md, docs/runtime_config/fixtures/current_config_persistence_recovery_research.json, tools/check_glyph_current_config_persistence_recovery_research.py, one current load-bearing research/provenance manifest entry, and only deterministic census/health consequences. Bind exact current repository blobs and the configured framework-arduinopico 3.6.3 selector, then use permitted read-only live verification to resolve the authoritative Arduino-Pico tag/commit, its LittleFS wrapper source, and the exact upstream littlefs commit and documentation/source/test blobs it incorporates. Record every SaveConfig encode/open/truncate/header/body/seek/read/CRC/header-rewrite/close step; LoadConfig validation/decode behavior; boot load/default-save path; HandleSetConfig save call; checked and ignored return values; and a failure-window/current-consequence matrix with SOURCE_BACKED, INFERRED, or UNKNOWN classification. Compare temp-and-rename, temp-plus-backup, and two-slot/generation alternatives only as non-authoritative design options. Record future fault-injection cut points, exact automated/build/hardware gates, and every unresolved H3 product/device decision. A bounded insufficient-evidence result is valid completion when exact searches and unknowns are preserved.",
+      "explicit_excluded_scope": "No edit to HAL/, config/, platformio.ini, dependency selectors, firmware/runtime/product tests, or current storage code; no build, UF2, config.bin read/write, filesystem mount, device access, artifact, controller test, or hardware result; no selection of temp/backup filenames, old-or-new versus prior-good invariant, recovery precedence, cleanup, migration, backward/old-firmware compatibility, autoformat policy, diagnostics, free-space reserve, wear threshold, save cadence, update preservation, fault-injection mechanism, or physical recovery UX; no bundling with GP-CONFIG-005 live-memory transaction work; no runtime-table persistence, runtime-loaded config, WebSerial/device write, protobuf-write expansion, flashing, Nunchuk, root-cause, or gameplay claim.",
+      "touched_planes": ["docs/checkers", "persistence"],
+      "source_authority": "Exact clean live configurator 766237660e96189064203c3dc6e00cbdbe0df2c5. HAL/pico/src/core/Persistence.cpp opens config.bin with w+, writes a zero header, streams Config protobuf data, rereads it for CRC, rewrites the header, and closes without a temporary, backup, rename, or generation slot; HAL/pico/include/core/Persistence.hpp defines the filename/header; config/glyph/common/src/config.cpp loads on startup and saves the in-memory default when load fails; HAL/pico/src/comms/ConfiguratorBackend.cpp calls SaveConfig after decode and bounds checks. platformio.ini selects framework-arduinopico at tag 3.6.3. Existing storage/fallback docs explicitly say current persistence is not an atomic rollback architecture and leave recovery policy unresolved; the existing storage simulator excludes config.bin. Planner packet glyph-portfolio-20260901-0909 at 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb proposed GP-PERSIST-001, and bounded specialist verification confirmed exact authoritative upstream provenance is available while later H3 choices remain unresolved.",
+      "dependencies_prerequisites": [
+        "Implementation starts from a fresh live-configurator descendant of 766237660e96189064203c3dc6e00cbdbe0df2c5 with Persistence.cpp/.hpp, startup config.cpp, ConfiguratorBackend.cpp, platformio.ini selector, and current storage/fallback boundary documents materially unchanged.",
+        "Every retained upstream fact resolves through permitted read-only access to an authoritative repository at a full immutable commit and exact regular source/doc/test blob; mutable tags or local installed caches alone are observations, not authority.",
+        "The research remains useful with a bounded evidence-insufficient outcome and does not depend on selecting a future recovery mechanism or receiving hardware observations."
+      ],
+      "substantive_authorization_rationale": "The existing non-atomic application sequence and missing recovery evidence are directly source-proven, and the research question is fully bounded. Exact immutable upstream provenance, a closed current-path/failure-window schema, non-authoritative alternative comparison, explicit unknowns, and future test gates can be completed without deciding any H3 behavior. No user, product, storage-mechanism, migration, runtime-table, device-write, or hardware decision is delegated to the implementer.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Any current persistence, boot, SetConfig, filesystem selector, or accepted storage/fallback boundary changes materially before implementation.",
+        "Authoritative upstream source cannot be resolved to full immutable commits and exact relevant blobs after every permitted network-capable retry.",
+        "The packet would need to choose a recovery invariant, algorithm, filename/layout, migration, compatibility, autoformat, diagnostics, wear/capacity threshold, save cadence, update policy, fault-injection implementation, or hardware procedure rather than record it as a future decision.",
+        "Another canonical change supplies equivalent or stronger exact current-path, upstream-guarantee, failure-window, and decision-gate evidence first."
+      ],
+      "authorization_snapshot_provenance": "Independent Curator review of Planner candidate GP-PERSIST-001 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, packet base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, rebound to exact clean live configurator 766237660e96189064203c3dc6e00cbdbe0df2c5 with bounded current-source, upstream-provenance, failure-window, and future-decision specialist verification on curation/portfolio-20260901-final-survivors-20260906.",
+      "automated_validation": [
+        "The fixture uses an exact closed schema and binds current repository paths, Git blobs, source fragments/order, platform selector, authoritative upstream repository/full commits, exact source/doc/test blob identities, lookup timestamps/methods, and immutable locators; wrong/missing/mutable/abbreviated/duplicate/contradictory provenance fails.",
+        "Every current save/load/boot/SetConfig step and return-value handling is represented once in exact order; every failure-window row has a SOURCE_BACKED, INFERRED, or UNKNOWN classification, exact evidence references, current consequence, and no unsupported power-loss or hardware claim.",
+        "The three alternative families are descriptive only, select none, and expose exact unresolved decisions for recovery invariant, stale-state cleanup, boot/default and autoformat policy, migration/compatibility, rename replacement, readback/diagnostics, concurrency, capacity/wear/save cadence, update preservation, fault injection, and physical recovery acceptance.",
+        "The checker and tests perform no network access, import or execute upstream code, mount a filesystem, read/write config.bin, build firmware, access a device, or create hardware evidence; implementation-time live research is frozen into checked-in immutable provenance for offline validation.",
+        "Focused persistence-research and existing storage-transport/source-authority checks, manifest, census, health, full current runtime-config aggregate, framework, sequence, navigation, agent-surface, py_compile, and exact-diff checks pass with fresh independent source-authority review and zero product/build/device delta."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 docs, evidence fixture, offline checker, and deterministic validation metadata only; any selector, dependency, firmware/runtime, persistence implementation, or product-source delta stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Drop the focused research branch if exact current/upstream correspondence cannot be retained without inference; preserve current persistence behavior and explicit UNKNOWN/H3 decision gates rather than selecting a mechanism or fabricating guarantees.",
+      "status_documentation_updates": "Publish only exact current-path facts, immutable upstream evidence, labeled inferences, unknowns, option comparisons, and future decision/test gates. Keep runtime-loaded storage and every persistence implementation unapproved.",
+      "done_evidence": "Pending exact reviewed research packet, immutable provenance and adversarial correspondence checks, explicit H3 decision-gated conclusion, and canonical publication correspondence.",
+      "stop_conditions": [
+        "Any current or future persistence behavior, storage layout, selector, dependency, boot/default policy, config update behavior, or firmware/product test would be changed.",
+        "Any filesystem, rename, power-loss, wear, capacity, update-preservation, or device behavior claim lacks exact authoritative immutable evidence or is not labeled inferred/unknown.",
+        "Any future H3 mechanism, migration, compatibility, recovery, diagnostics, fault-injection, or physical acceptance choice would be made or authorized.",
+        "Any build, artifact, device/config.bin action, runtime-loaded config, persistence implementation, WebSerial/protobuf write, flashing, hardware, Nunchuk, root-cause, or gameplay scope appears."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-CTL-003",
       "title": "Bind Planner and Curator packet provenance",
@@ -2345,11 +2471,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-011","GP-PERSIST-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-VAL-011, GP-PERSIST-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2358,15 +2484,14 @@ Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
 Packet `glyph-portfolio-20260901-0909` is partially consumed. Follow-up
-Curator review corrected stale post-X1 survivor accounting, authorized
-`GP-CTL-003`, `GP-PROV-008`, and the newly evidence-grounded `GP-VAL-008` were
-completed, and `GP-BUILD-001` is now Done after reviewed `GP-PROV-008`
-integration.
-`GP-VAL-011`, `GP-CONFIG-005`, `GP-PERSIST-001`, and `GP-ART-001` retain their
-substantive, user-decision, or research gates and do not support a portfolio-
-global evidence wait. Historical Done items remain canonical evidence but do
-not authorize implementation. Planner refresh is not requested while this
-partially consumed current packet retains useful supply.
+Curator review corrected stale post-X1 survivor accounting; `GP-CTL-003`,
+`GP-PROV-008`, `GP-VAL-008`, and `GP-BUILD-001` are completed. Curator now
+authorizes `GP-VAL-011` as bounded aggregate-runner isolation work and
+`GP-PERSIST-001` as evidence-only persistence research. `GP-CONFIG-005` and
+`GP-ART-001` remain user-decision gated and do not support a portfolio-global
+evidence wait. Historical Done items remain canonical evidence but do not
+authorize implementation. A Planner refresh is required because the remaining
+candidate supply cannot fill the target runway without those user decisions.
 
 ## Allowed Statuses
 
@@ -2404,7 +2529,9 @@ Planner packet `glyph-portfolio-20260901-0909` at
 `3fb785749d8653e91bb8e4b3a73a01be03aaf9cb` was independently reviewed
 against exact live `configurator`
 `1977ef0d6ec1a65d02947a0b7dae2675c2e8228c`. It is
-`PARTIALLY_CONSUMED`; no global wait or Planner refresh is supported.
+`PARTIALLY_CONSUMED`. No global wait is supported. A Planner refresh is
+required because the remaining candidate supply cannot fill the target runway
+without the unresolved user decisions.
 
 - `GP-SRC-006`: authorized H0 structural active-publication checker work.
 - `GP-VAL-013`: authorized H0 executable validation-before-publication repair;
@@ -2416,18 +2543,19 @@ against exact live `configurator`
 - `GP-PROV-008`: authorized H0 schema-v2 local-build-entrypoint provenance and
   immutable historical-object preservation for prior GP-PROV-004 observations;
   this is the repair successor to completed `GP-PROV-003`.
-- `GP-VAL-011`: `SUBSTANTIVE_DEPENDENCY_GATED`; it depends on GP-VAL-010 and
-  still needs an exact isolated snapshot, branch/base, dirty-state, and timeout
-  contract before authorization.
+- `GP-VAL-011`: authorized as H1 host-side validation work under the exact clean
+  committed disposable-clone, controlled-environment, mutation-proof, and
+  fixed process-tree timeout contract recorded below.
 - `GP-CTL-003`: authorized H0 object-required packet/Curator provenance and
   structured surviving-supply correspondence.
-- `GP-BUILD-001`: substantively `PREAUTHORIZED` and mechanically `WAITING` on
-  reviewed `GP-PROV-008` integration before its builder hash may change.
+- `GP-BUILD-001`: DONE after reviewed `GP-PROV-008` integration and canonical
+  build verification; no hardware action was required.
 - `GP-VAL-008`: DONE as H1 offline regression correspondence for only the
   exact sole/non-mode X1 subset established by current source and accepted
   Revision-2 evidence.
-- `GP-PERSIST-001`: `RESEARCH`; authoritative filesystem/recovery evidence and
-  device-specific design decisions are absent.
+- `GP-PERSIST-001`: authorized as H1 evidence-only research into current
+  `config.bin` persistence and authoritative upstream filesystem behavior. It
+  selects and authorizes no future H3 recovery mechanism or firmware change.
 - `GP-X1-001`: `DONE` and removed from surviving Planner supply. Exact candidate
   `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
   `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`

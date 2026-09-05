@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-011","GP-PERSIST-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-VAL-011, GP-PERSIST-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
@@ -23,11 +23,13 @@ is partially consumed. The earlier invalidated-successor recovery completed
 `GP-VAL-012` and `GP-PROV-007` with manifest sequencing preserved. Follow-up
 Curator review corrected post-X1 survivor accounting, authorized `GP-CTL-003`,
 `GP-PROV-008`, and the exact current-X1 `GP-VAL-008` regression lane, and
-completed `GP-BUILD-001` after reviewed `GP-PROV-008` integration. The current-runway summary above is the sole current
-executable order and liveness statement; `GP-VAL-011`, `GP-CONFIG-005`,
-`GP-PERSIST-001`, and `GP-ART-001` retain substantive-dependency, research, or
-user-decision gates, and no global wait is supported. Planner refresh is not
-requested while this partially consumed current packet retains useful supply.
+completed `GP-BUILD-001` after reviewed `GP-PROV-008` integration. The
+current-runway summary above is the sole current executable order and liveness
+statement. Curator authorized `GP-VAL-011` as bounded aggregate-runner
+isolation work and `GP-PERSIST-001` as evidence-only persistence research.
+`GP-CONFIG-005` and `GP-ART-001` remain user-decision gated, no global wait is
+supported, and a Planner refresh is required because remaining packet supply
+cannot fill the target runway without those decisions.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip
