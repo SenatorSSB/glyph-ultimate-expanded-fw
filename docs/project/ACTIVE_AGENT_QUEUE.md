@@ -25,7 +25,17 @@ Git, but it is not current candidate supply or implementation authority.
     "state": "PARTIALLY_CONSUMED",
     "branch": "planning/portfolio-20260901-0909",
     "base_configurator_sha": "1977ef0d6ec1a65d02947a0b7dae2675c2e8228c",
+    "packet_id": "glyph-portfolio-20260901-0909",
+    "packet_path": "docs/planning/portfolio_20260901_0909.md",
+    "planning_commit": "3fb785749d8653e91bb8e4b3a73a01be03aaf9cb",
+    "curation_commit": "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
     "candidate_count": 4,
+    "survivors": [
+      {"candidate_id": "GP-VAL-011", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
+      {"candidate_id": "GP-CONFIG-005", "disposition": "USER_DECISION_GATED"},
+      {"candidate_id": "GP-PERSIST-001", "disposition": "RESEARCH_GATED"},
+      {"candidate_id": "GP-ART-001", "disposition": "USER_DECISION_GATED"}
+    ],
     "curator_review_required": false,
     "global_wait_proposed": false,
       "material_events_since_packet": [
@@ -48,6 +58,22 @@ Git, but it is not current candidate supply or implementation authority.
       "packet_id": "glyph-portfolio-20260901-0909",
       "packet_base_configurator_sha": "1977ef0d6ec1a65d02947a0b7dae2675c2e8228c",
       "curation_branch": "curation/portfolio-20260901-0909-review",
+      "curation_commit": "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
+      "initial_reviewed_dispositions": [
+        {"candidate_id": "GP-SRC-006", "disposition": "READY"},
+        {"candidate_id": "GP-VAL-002", "disposition": "REPAIR_REAUTHORIZATION"},
+        {"candidate_id": "GP-PROV-002", "disposition": "REPAIR_REAUTHORIZATION"},
+        {"candidate_id": "GP-VAL-012", "disposition": "PREAUTHORIZED"},
+        {"candidate_id": "GP-PROV-003", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
+        {"candidate_id": "GP-VAL-011", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
+        {"candidate_id": "GP-CTL-003", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
+        {"candidate_id": "GP-BUILD-001", "disposition": "PREAUTHORIZED"},
+        {"candidate_id": "GP-VAL-008", "disposition": "EVIDENCE_GATED"},
+        {"candidate_id": "GP-CONFIG-005", "disposition": "USER_DECISION_GATED"},
+        {"candidate_id": "GP-PERSIST-001", "disposition": "RESEARCH_GATED"},
+        {"candidate_id": "GP-ART-001", "disposition": "USER_DECISION_GATED"},
+        {"candidate_id": "GP-X1-001", "disposition": "USER_DECISION_GATED"}
+      ],
       "review_date": "2026-09-01"
     }
   },
