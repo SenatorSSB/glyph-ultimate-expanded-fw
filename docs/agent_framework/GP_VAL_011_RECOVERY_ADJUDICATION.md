@@ -33,3 +33,41 @@ The 300-second operational deadline cannot promise a complete fingerprint after 
 ## Local immutable object transfer clarification
 
 The original contract requires every needed immutable object to be locally available and exact comparison semantics, but a normal clone may omit objects held only by caller remote-tracking refs. Supplying those exact objects through a local independent pack is a mechanical implementation of the already selected independent snapshot architecture, not a new checker or topology authority. The permitted transfer roots are source HEAD, selected comparison base, supplied expected merge-base, actual merge-base, original origin/configurator identity, and the conditionally required X1 candidate/evidence/integration IDs. Deduplicate and resolve them before transfer. Use local `git pack-objects --revs --stdout` with only those full IDs and destination `git index-pack --stdin`; no `--all`, reflogs, arbitrary refs, thin/shared packs, alternates, hardlinks, fetch, or network/lazy retrieval. Transfer includes necessary reachable object closure, not unrelated refs. Require local completeness and verify imported identities; missing local objects or errors fail closed. Both processes remain setup-budget/process-group bounded and caller fingerprint remains unchanged.
+
+
+# GP-VAL-011 second independent recovery curation
+
+Disposition: source-determined Path A, pending separately published contract. Candidate 95efad7 remains failed, nonauthoritative evidence. Full aggregate reported 27/30 PASS and outer canonical MATCH; this is not merge authority. No final portfolio wait is accepted.
+
+## Scope of independent source audit
+
+Reviewed all 30 selected current manifest command vectors, 42 manifest/direct-import Python surfaces, and a conservative 85-file surface including named subprocess/historical references. Inspected actual main/call paths to exclude dormant branch functions and historical checkers from current topology requirements. This is a bounded current source audit, not a claim of general dynamic dependency closure.
+
+## Closed ref set
+
+Retain prior source HEAD branch/detached and original origin/configurator comparison identity plus exact conditional X1 candidate ref. Add only caller refs/heads/configurator at its own pinned commit when exact generated_baseline_artifact command is selected. Its main calls validate_branch unconditionally and diffs configurator...HEAD; origin/base substitution would change scope semantics. Missing source local ref fails closed. Supervisor temporary source clone was itself missing this ref at inspection and needs explicit legitimate source preparation before validation; the runner may not silently create it from origin. Preserve detached failure of this unchanged checker.
+
+## Closed additional object roots
+
+- build_input_resolution_observations: 8c04262c66613d46b933b1b739c01c575cb0c580 and ffc007552abc848051841362b0b0ac4c1a7d087b.
+- nuker_source_lineage: a747dd54b02b207483142331d8b5be1113fc951e and d5050847d3f850951b3f47865dc8a91aedea0834. These are current HEAD ancestors; no new ref or weakening of rev-list --all reachability is allowed.
+- agent_framework, from committed regular HEAD queue blob: non-ABSENT planner_packet.base_configurator_sha/planning_commit/curation_commit; completion_correspondence.migration_base_configurator_sha; nonlegacy DONE items' done_evidence.implementation_base_sha/reviewed_implementation_sha/prior_canonical_integration_sha; and git-json hardware_evidence_record SHA only for HARDWARE_VALIDATED, HARDWARE_FAILED, or result-bearing LOCAL_ACCEPTANCE_PENDING states actually read by current evidence validation. repo-json uses HEAD. No arbitrary recursive metadata or SHA scanning.
+- Existing exact X1 candidate/evidence/integration roots and runner HEAD/base/expected/merge-base/origin roots remain.
+
+Select each row only for its exact current checker ID and unchanged command. Verify field types, duplicate-free committed JSON, full commit IDs, local object completeness; transfer exact deduplicated root closure using the already authorized local pack mechanism into independent objects. Do not infer authority, add arbitrary refs, load checkers in caller, read ignored state, or fetch. Malformed current metadata fails, and the unchanged checker still judges its semantics in the clone. Runtime-generated temporary Git repositories belong to self-tests and add no caller source dependencies. Fixed Git-blob identities need no separate roots because their owning commit closure supplies them.
+
+## Nested timeout failure
+
+The report records PermissionError during snapshot setup and final proof unavailable after the 0.5-second injected budget. Source evidence does not identify the exact failing syscall. Treat this as an execution/test failure needing operation-level diagnosis within the already authorized runner/adversarial files. Do not weaken the fixture to accept SETUP_FAILURE as evidence of a timeout or suppress unexpected signal errors. No new environment/product architecture is authorized by it.
+
+## Authorization and stopping
+
+This correction is deterministic from current source, not an owner product decision. Publish the explicit rebound before repair. Preserve exact failed candidate evidence and run the complete focused/aggregate/current-checker corpus again with fresh independent implementation review. This is the final substantive topology expansion permitted in this recovery; any further required checker semantic/topology expansion stops as non-executable REPAIR_REQUIRED while independent safe phases continue. No firmware, build, artifact, device, physical result or gameplay change is authorized.
+
+Supervisor preparation: the temporary integration repository now has local
+`configurator` explicitly bound to freshly live-verified canonical
+`1a4b9311c8f7ae6d7cbf0a8680cd976499112f03`. This is source-repository
+preparation outside validation, not inferred clone state. Subsequent repeated
+timeout diagnostics reproduced the alarm interrupting TERM cleanup. Repair
+must preserve the fixed bounded cleanup grace and demonstrate both deadline
+and process-group termination; no failed result has been accepted.
