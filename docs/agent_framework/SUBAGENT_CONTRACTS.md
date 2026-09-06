@@ -339,3 +339,14 @@ tool_budget:
   behavior change.
 - return format: findings first; exact contract matches/gaps; validation
   results; residual risks and bounded next action.
+
+## Bounded recovery supervisor — 2026-09-06
+
+Guidance applies. The native collaboration capability is available; independent
+contract Curator, bounded implementation and persistence specialists, fresh
+postimplementation reviewers, and separate Planner/portfolio Curator passes
+are used. Root owns Git, authoritative validation and publication. Specialists
+use separate temporary repositories or read-only source inspection; no device,
+build, firmware, or hardware work is delegated. The failed local implementation
+log at ab8e68e remains historical evidence and is superseded by this recovery
+record, not evidence of a passing review.
