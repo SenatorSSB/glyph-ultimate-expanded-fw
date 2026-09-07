@@ -1,6 +1,8 @@
 # Independent final portfolio Curator review — 2026-09-07
 
-Result: PASS; accept the exact fresh packet and its bounded global-evidence-wait proposal. This decision becomes canonical only through reviewed receipt/adoption publication and passing repository-native gates. It authorizes no firmware work or user-owned choice.
+Current applicability: historical acceptance only; revoked after final main-checkout ignored-directory failure at `31bdbbc83f3129ecb9cbf5bc4ad20e073bdd60a4`. The canonical queue now records STALE and reopened READY GP-VAL-011; use its current repair authority.
+
+Result at the reviewed completed base: PASS; accept the exact fresh packet and its bounded global-evidence-wait proposal. This decision becomes canonical only through reviewed receipt/adoption publication and passing repository-native gates. It authorizes no firmware work or user-owned choice.
 
 Live `configurator`: `4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6`.
 Live Planner: `fc2a0eac5963298de9ff1e2c5b3f86a27d96f056`, branch `planning/portfolio-20260907-1256`.
