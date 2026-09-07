@@ -178,7 +178,7 @@ def validate_sidecar(sidecar: dict[str, Any], artifact: bytes) -> None:
         fail("postprocessor byte transformation must remain UNKNOWN")
 
     if sidecar.get("immutable_locator") is not None:
-        fail("immutable_locator must be null because no durable store is established")
+        fail("immutable_locator must be null because this CI sidecar performs no custody")
     if sidecar.get("source_authority") != {
         "classification": "observed_only",
         "workflow_source": ".github/workflows/build.yml",
@@ -343,7 +343,7 @@ def main() -> int:
             print("artifact_postprocessor_provenance=PASS")
             print("tracked_postprocessor_execution=NOT_PERFORMED")
             print("artifact_transformation=UNKNOWN")
-            print("immutable_locator=UNRESOLVED")
+            print("immutable_locator=UNRESOLVED_BY_CI_SIDECAR")
         elif args.verify_checkout:
             print(f"checked_out_git_sha={verify_checkout(args.candidate_sha)}")
             print("tracked_postprocessor=PASS")

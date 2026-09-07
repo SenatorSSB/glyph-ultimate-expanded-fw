@@ -761,7 +761,7 @@
       },
       "checker_id": "artifact_postprocessor_provenance",
       "defines_main": true,
-      "file_size_bytes": 14756,
+      "file_size_bytes": 14774,
       "hard_coded_branch_like_strings": [
         "--candidate-sha",
         "args.candidate_sha",
@@ -797,7 +797,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "a52241836991a7df1242e3f4a7091c4e94a9ceaeb76e2a6f72f1212c9fce2961",
+      "sha256": "5a601f8000543cd74c1b580471c1f0b17d1f014a1d9396d7f5baca62924ebc4f",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
