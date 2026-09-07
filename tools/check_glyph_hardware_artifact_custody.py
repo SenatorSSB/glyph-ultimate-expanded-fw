@@ -35,9 +35,16 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="glyph-artifact-custody-") as temp:
         base = Path(temp).resolve()
         root = base / "local_backups" / "hardware-artifacts"
+        absent_root = base / "absent" / "hardware-artifacts"
         source = base / "firmware.uf2"
         source.write_bytes(GOOD_BYTES)
         digest = hashlib.sha256(GOOD_BYTES).hexdigest()
+
+        expect_failure(
+            "missing custody root",
+            lambda: verify_preserved(absent_root, CANDIDATE_A, digest),
+        )
+        assert not absent_root.exists()
 
         target, observed, size, status = preserve(source, CANDIDATE_A, root)
         assert status == "PRESERVED_AND_VERIFIED"
@@ -48,9 +55,11 @@ def main() -> int:
         assert readback == target and readback_size == len(GOOD_BYTES)
 
         inode = target.stat().st_ino
+        mtime_ns = target.stat().st_mtime_ns
         _, _, _, second_status = preserve(source, CANDIDATE_A, root)
         assert second_status == "ALREADY_PRESENT_VERIFIED"
         assert target.stat().st_ino == inode
+        assert target.stat().st_mtime_ns == mtime_ns
 
         expect_failure(
             "wrong candidate identity",

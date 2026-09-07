@@ -99,6 +99,22 @@ def _ensure_real_directory(path: Path) -> None:
         cursor = cursor.parent
 
 
+def _require_real_directory(path: Path) -> None:
+    """Require an existing directory without creating verification state."""
+    absolute = path.absolute()
+    cursor = absolute
+    while True:
+        try:
+            mode = cursor.lstat().st_mode
+        except FileNotFoundError as exc:
+            raise CustodyError("custody directory is missing") from exc
+        if not stat.S_ISDIR(mode) or cursor.is_symlink():
+            raise CustodyError("custody path component must be a real directory")
+        if cursor == cursor.parent:
+            break
+        cursor = cursor.parent
+
+
 def custody_path(root: Path, candidate_sha: str, artifact_sha256: str) -> Path:
     candidate_sha = require_candidate_sha(candidate_sha)
     artifact_sha256 = require_artifact_sha256(artifact_sha256)
@@ -143,7 +159,7 @@ def verify_preserved(
     artifact_sha256: str,
 ) -> tuple[Path, int]:
     target = custody_path(root, candidate_sha, artifact_sha256)
-    _ensure_real_directory(root)
+    _require_real_directory(root)
     relative_parent = target.parent.relative_to(root)
     cursor = root
     for component in relative_parent.parts:
