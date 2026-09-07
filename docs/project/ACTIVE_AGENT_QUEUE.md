@@ -104,21 +104,21 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-      "RUNWAY_LOW",
-      "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
-      "RUNWAY_SHORTFALL_USER_DECISION_GATED",
-      "PLANNER_REFRESH_REQUIRED"
-    ],
+    "RUNWAY_LOW",
+    "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
+    "PLANNER_REFRESH_REQUIRED"
+  ],
   "global_evidence_wait": {
     "supported": false,
     "planner_broad_audit_provenance": null,
@@ -130,7 +130,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-011",
       "title": "Isolate and time-bound aggregate validation",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-011-isolated-aggregate-execution",
       "objective": "Run every current runtime-config aggregate checker only inside one independently copied exact committed Git snapshot, with a constructed environment, canonical-state mutation proof, and deterministic process-tree timeouts.",
       "why_this_matters": "The current aggregate executes every checker in the canonical worktree with inherited environment and no timeout or process-tree termination, so declarative mutation-risk metadata does not prevent canonical mutation and one hanging checker can hang the entire validation gate.",
@@ -179,7 +179,22 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused implementation branch if exact current checks cannot execute from the isolated snapshot without broadening environment, dirty-state, network, manifest, or product authority; retain the current direct aggregate rather than silently skipping checks or weakening failure behavior.",
       "status_documentation_updates": "Document the clean committed disposable-snapshot requirement, exact isolation/non-claims, fixed time budgets, and fail-closed mutation/timeout results without describing the runner as a general security sandbox.",
-      "done_evidence": "Pending exact reviewed implementation, isolated mutation/timeout adversarial corpus, full current aggregate PASS, and canonical publication correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "0b851b969560c3bcb13339afc770d5ff5ec8713a",
+        "reviewed_implementation_sha": "9d80cc5fe6324ba301ab1e05b06e4d4532360055",
+        "prior_canonical_integration_sha": "0381a0150c6f2d590072bedb2c4e61ad810e80e3",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/run_glyph_runtime_config_validation.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer PASS on exact 9d80cc5: scope, complete topology catalog, dirty index flags, exact branch identity, child ownership and bounded cleanup verified; no material findings.",
+        "validation_provenance": "Exact 9d80cc5: full aggregate 30/30 PASS with canonical and every isolated fingerprint MATCH; 35 adversarial groups; 20/20 stalled-setup timeout repetitions; context18, census196, manifest34, health, framework, sequence, navigation, surface, compile and diff PASS. Integration 0381a01 live-verified before this separate completion record."
+      },
       "stop_conditions": [
         "Any selected checker executes in or resolves repository state from the canonical worktree.",
         "Any staged, unstaged, or untracked caller state is ignored, any caller ignored file is copied, any canonical HEAD/branch/index/tracked/ref/config/staged/unstaged/untracked/ignored mutation can pass, or any isolated tracked/index/ref/config/status/ignored mutation can pass.",
@@ -2480,11 +2495,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-011","GP-PERSIST-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PERSIST-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-011, GP-PERSIST-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-PERSIST-001; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2597,4 +2612,4 @@ order, highest first.
 
 Independent GP-VAL-011 recovery adjudication and the exact rebound contract are
 recorded in `docs/agent_framework/GP_VAL_011_RECOVERY_ADJUDICATION.md`.
-The prior local implementation remains unreviewed recovery evidence.
+The prior local implementation remains failed, superseded recovery evidence.
