@@ -130,7 +130,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Save failure proves SaveConfig sees the intended candidate exactly once while live remains old, then existing error/false leaves live unchanged; no disk rollback is asserted.",
         "Success proves SaveConfig sees candidate while live is old, then one assignment activates it and existing success/true occurs once.",
         "Renewed GP-PERSIST-001 bindings describe staged RAM behavior while preserving all config.bin and H3 limitations.",
-        "Focused tests, pio run -e glyph_mk6, map/RAM review, manifest/health/census, full aggregate, framework, sequence, navigation, surface, syntax, and diff gates pass."
+        "Focused tests, pio run -e glyph_mk6, map/RAM review, all applicable current manifest checks, health/census, framework, sequence, navigation, surface, syntax, and diff gates pass. Run the full aggregate and report its fail-closed result truthfully; the known owner-deferred GP-VAL-011 isolation/setup defect is not reclassified as a product-check failure or repaired through this work order."
       ],
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
