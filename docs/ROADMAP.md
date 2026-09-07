@@ -9,16 +9,16 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-005","GP-ART-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-005"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-005, GP-ART-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-005; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015`. `GP-VAL-011` is retained as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; its evidence remains and its optimization did not resume. `GP-PERSIST-001` remains `DONE`. `GP-ART-001` and `GP-CONFIG-005` are complete bounded `READY` work orders pending the custody completion transition in this run; effective runway is two and primary liveness is `RUNWAY_LOW`. Current packet survivors are empty, review is complete, global wait remains unsupported, and no Planner refresh is required while executable work exists.
+implementation. Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015`. `GP-VAL-011` is retained as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; its evidence remains and its optimization did not resume. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is the sole complete bounded `READY` work order; effective runway is one and primary liveness is `RUNWAY_LOW`. Current packet survivors are empty, review is complete, global wait remains unsupported, and no Planner refresh is required while executable work exists.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip

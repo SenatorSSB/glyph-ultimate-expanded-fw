@@ -78,12 +78,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -163,8 +163,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-ART-001",
       "title": "Establish owner-held local content-addressed firmware custody",
-      "status": "READY",
-      "branch": "codex/gp-art-001-local-custody",
+      "status": "DONE",
+      "branch": "curation/september-supervisor-decisions",
       "objective": "Establish and enforce owner-held local write-once custody for Revision-2 artifacts at local_backups/hardware-artifacts/<candidate SHA>/<artifact SHA>/firmware.uf2, with stable hashing, readback, pre-handoff verification, retention, rebuild, and loss semantics.",
       "why_this_matters": "H2/H3 acceptance is exact-artifact evidence. Mutable .pio output and later rebuilds cannot preserve tested bytes; the approved local contract supplies deterministic custody without cloud infrastructure.",
       "hardware_risk": "H1",
@@ -189,7 +189,7 @@ Git, but it is not current candidate supply or implementation authority.
       "automated_validation": [
         "Synthetic tests cover exact path, stable hash, positive preserve/readback, wrong candidate/hash, malformed SHA, missing/mutated file, occupied no-overwrite, same-byte idempotence, different-byte rebuild identity, and root/source/component symlink/escape rejection.",
         "Framework tests require the exact approved local locator and reject mutable .pio and wrong-root/extra-segment/wrong-filename shapes while current X1 correspondence remains valid.",
-        "Checker uses temporary bytes only; compile, manifest, health, census, aggregate, framework, sequence, navigation, agent surface, user direction, and diff gates pass."
+        "Checker uses temporary bytes only; compile, manifest, health, census, framework, sequence, navigation, agent surface, user direction, and diff gates pass. The full aggregate is attempted and any known deferred GP-VAL-011 isolation failure is reported truthfully rather than reclassified as a custody failure."
       ],
       "canonical_build": "NOT_REQUIRED: H1 docs, host utility, synthetic tests, and governance integration only; any firmware/build-input delta stops.",
       "expected_artifact": "NOT_APPLICABLE",
@@ -200,7 +200,42 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused implementation before integration if exact local enforcement requires real bytes or destructive/external behavior. Existing ignored artifacts and historical evidence remain untouched.",
       "status_documentation_updates": "After reviewed canonical integration publish GP-ART-001 DONE with structured ancestry and state local custody is sufficient for future H2/H3 handoff after preserve/readback/pre-handoff verification; external backup remains recommendation only.",
-      "done_evidence": "PENDING: focused implementation, synthetic adversarial PASS, independent review, canonical integration, and separate structured completion publication required.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "8b4babd8ebea7e4f363b694eeb27435a47befbe7",
+        "reviewed_implementation_sha": "305557cdcdb9857b54ccae0790f71046ca87a4e1",
+        "prior_canonical_integration_sha": "d3e5303f3e0584a279ce4a6c5cd82ed1d0c4e8c0",
+        "reviewed_changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/WORKFLOW.md",
+          "docs/agent_framework/GP_CONFIG_005_HARDWARE_PROTOCOL.md",
+          "docs/agent_framework/GP_VAL_011_RECOVERY_ADJUDICATION.md",
+          "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
+          "docs/agent_framework/HARDWARE_EVIDENCE.md",
+          "docs/agent_framework/README.md",
+          "docs/agent_framework/SCHEDULED_TASKS.md",
+          "docs/agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md",
+          "docs/agent_framework/USER_DIRECTION.md",
+          "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/artifact_postprocessor_provenance.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_agent_framework_docs.py",
+          "tools/check_glyph_artifact_postprocessor_provenance.py",
+          "tools/check_glyph_docs_navigation.py",
+          "tools/check_glyph_hardware_artifact_custody.py",
+          "tools/glyph_hardware_artifact_custody.py"
+        ],
+        "independent_review_provenance": "Fresh independent Curator review PASS on exact 305557cdcdb9857b54ccae0790f71046ca87a4e1 against base 8b4babd8ebea7e4f363b694eeb27435a47befbe7: exact owner-direction correspondence; truthful GP-VAL-011 owner-deferred state with evidence preserved; fail-closed local content-addressed custody including exact clean-candidate binding and read-only verification; CI provenance separation; source-derived GP-CONFIG-005 H2 contract; synchronized queue mirrors; fresh census; and no firmware/runtime/build-input change. No material findings.",
+        "validation_provenance": "Exact reviewed 305557c custody adversarial, framework, sequence, navigation, surface, census198, health manifest36/current32, CI provenance/workflow, Python compilation, diff and clean-status gates PASS. Full runtime-config aggregate was attempted and failed closed in preflight on the preserved GP-VAL-011 ignored .pio nested-repository defect; it was not weakened or repaired. Canonical integration d3e5303f3e0584a279ce4a6c5cd82ed1d0c4e8c0 verified before this separate DONE publication. No real artifact was created or read by custody validation."
+      },
       "stop_conditions": [
         "Any overwrite, delete, garbage collection, symlink traversal, escape, mutable locator, mismatch, unverified readback, or rebuild acceptance inheritance can pass.",
         "Any cloud/store, credential, upload/release, real artifact/build/device/flashing/hardware, firmware/runtime, persistence, official-configurator, or gameplay scope appears.",
@@ -2988,11 +3023,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-005","GP-ART-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-005"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-005, GP-ART-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-005; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3000,7 +3035,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` remains `DONE`. `GP-CONFIG-005` and `GP-ART-001` are complete bounded `READY` work orders pending the custody completion transition in this run. Effective runway is two, primary liveness is `RUNWAY_LOW`, global wait is unsupported, and no Planner refresh is currently required.
+Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is the sole complete bounded `READY` work order. Effective runway is one, primary liveness is `RUNWAY_LOW`, global wait is unsupported, and no Planner refresh is currently required.
 
 ## Allowed Statuses
 
@@ -3036,12 +3071,12 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 Independent source review: [fresh non-waiting recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907_1359.md).
 
-The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-CONFIG-005` and `GP-ART-001` are complete bounded `READY` work orders pending the custody completion transition in this run; primary liveness is `RUNWAY_LOW`, without `REPAIR_REQUIRED`.
+The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is the sole complete bounded `READY` work order; primary liveness is `RUNWAY_LOW`, without `REPAIR_REQUIRED`.
 
 Planner commit `c5ba86af32194055752e790fbeadd6efe1512d59` and immutable Curator receipt `6ea9451fa5e3d122b122eb163846753e26b86b3b` bind the exact two initial and surviving dispositions.
 
 - `GP-CONFIG-005`: owner-approved H2 live-RAM rejection invariant, now `READY` under the exact staged-candidate architecture and physical gate in its work order. Disk recovery remains separately gated and official configurator retired.
-- `GP-ART-001`: owner-approved H1 local content-addressed custody, now `READY` for the exact policy/tool/checker integration; no external store, credentials, build, or device action is selected.
+- `GP-ART-001`: `DONE` through reviewed H1 local content-addressed custody policy/tool/checker integration; no external store, credentials, build, real artifact, or device action was selected.
 
 No new independent candidate is promoted. GP-VAL-011 is the existing stopped technical repair, not a third Planner candidate or completed work. Its observed complete-proof/300-second feasibility failure requires separate substantive architecture/validation authority; no new implementation or filler research precursor is authorized. Future persistence durability/recovery policy and modifier intent remain separately owner-gated; no H3 mechanism or gameplay semantics is selected.
 
