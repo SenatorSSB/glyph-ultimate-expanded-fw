@@ -9,16 +9,16 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Packet `glyph-portfolio-20260907-1256` is `STALE` after real main-checkout validation of ignored-directory repair failed the 300-second aggregate budget without final canonical proof. `GP-VAL-011` is `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; no implementation or merge may resume without separately adjudicated complete READY authority. Prior reviewed completion and failed unmerged `a0373bd` are preserved as evidence. `GP-PERSIST-001` remains `DONE`; `GP-CONFIG-005` and `GP-ART-001` remain `USER_DECISION_GATED`. Authorized runway is zero, target four; there is no READY, PREAUTHORIZED or hardware-pending work. Global wait is not supported. `PLANNING_REQUIRED` and `PLANNER_REFRESH_REQUIRED` demand a fresh audit of this unresolved technical repair; no firmware/runtime, build, artifact, device or hardware authority changes.
+implementation. Packet `glyph-portfolio-20260907-1359` is `FRESH` at independently reviewed canonical base `a23658d1d2b2e90952de4c62a343de52c386041a`, which includes the stopped repair disposition. `GP-VAL-011` remains `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; the failed unmerged candidate and prior completion are preserved as evidence. No implementation or merge may resume without separate substantive authorization and a complete canonical READY contract. `GP-PERSIST-001` remains `DONE`. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, remain `USER_DECISION_GATED`. READY, PREAUTHORIZED, mechanically activatable and hardware-pending sets are empty; effective runway is zero, target four. The fresh audit and independent Curator review support no global wait while the technical repair remains unresolved. `curator_review_required: true` retains substantive follow-up for the unresolved repair despite recorded initial dispositions. `CURATION_REQUIRED` with `REPAIR_REQUIRED` is the current routing; this fresh packet clears the stale refresh requirement without making work executable.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip
