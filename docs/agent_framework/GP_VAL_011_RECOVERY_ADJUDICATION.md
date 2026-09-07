@@ -71,3 +71,26 @@ preparation outside validation, not inferred clone state. Subsequent repeated
 timeout diagnostics reproduced the alarm interrupting TERM cleanup. Repair
 must preserve the fixed bounded cleanup grace and demonstrate both deadline
 and process-group termination; no failed result has been accepted.
+
+
+## Reviewed completion — 2026-09-07
+
+The final four-file repair `9d80cc5fe6324ba301ab1e05b06e4d4532360055`
+from rebound base `0b851b969560c3bcb13339afc770d5ff5ec8713a` received a
+fresh independent PASS and entered live configurator through
+`0381a0150c6f2d590072bedb2c4e61ad810e80e3` before separate DONE publication.
+The full current aggregate passed 30/30, with canonical fingerprint MATCH and
+MATCH after every isolated checker. All focused, adversarial, checker-context,
+census, manifest, health, framework, sequence, navigation, surface, syntax and
+diff gates passed. Twenty repetitions of the original stalled-setup timeout
+reproducer passed. The operational budget is 300 seconds, with bounded
+TERM-to-KILL grace and reaping; this is not an exact 302-second wall guarantee.
+
+The original `ab8e68ede84468c89365b7f5144889c5728e0583` and
+`34f430886fb808ce70df81e21d926aef05ed7169` were retained locally on
+`codex/gp-val-011-recovery-evidence`; their permitted implementation delta was
+reused and repaired, while their failed commits were superseded and never
+entered canonical ancestry. Intermediate failed candidate `95efad7bb49b3eb0e9b02a004fa05144cde2167b`
+is also superseded local evidence, not unfinished authorized work. No failed
+experimental commit was published as canonical implementation. No firmware,
+runtime, workflow, build input, device, artifact or hardware behavior changed.
