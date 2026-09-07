@@ -9,16 +9,16 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"GLOBAL_EVIDENCE_WAIT_SUPPORTED","global_evidence_wait_supported":true}
+{"ready_ids":["GP-VAL-011"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: GLOBAL_EVIDENCE_WAIT_SUPPORTED
+Ready IDs: GP-VAL-011; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Packet `glyph-portfolio-20260907-1256` is `FRESH` at the independently reviewed completed canonical base `4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6`. `GP-VAL-011` and `GP-PERSIST-001` are `DONE` with separate canonical completion correspondence. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, are `USER_DECISION_GATED`; there is no READY, PREAUTHORIZED, mechanically activatable, or hardware-pending work. Independent Curator review accepts a portfolio-global evidence wait with zero effective authorized runway. The target remains four; it creates no authority or quota. Owner direction on a gated lane, new material source/evidence, or a demonstrated independent H0/H1 gap resumes curation/planning. Elapsed time alone supplies no evidence. Historical DONE work does not authorize new implementation.
+implementation. Packet `glyph-portfolio-20260907-1256` is `STALE` after final clean main-checkout validation exposed an original ignored-directory fingerprint defect. `GP-VAL-011` is reopened `READY` for the independently source-adjudicated bounded repair; prior reviewed completion is preserved as historical evidence. `GP-PERSIST-001` remains `DONE`. `GP-CONFIG-005` and `GP-ART-001` remain `USER_DECISION_GATED`. Effective authorized runway is one, target four; no PREAUTHORIZED or hardware-pending work exists. Global evidence wait is revoked and `PLANNER_REFRESH_REQUIRED` records the material event. The next executable work order is `GP-VAL-011`; no checker topology, firmware/runtime, build, artifact, device or hardware authority is expanded.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip

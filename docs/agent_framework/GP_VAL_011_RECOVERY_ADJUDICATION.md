@@ -94,3 +94,35 @@ entered canonical ancestry. Intermediate failed candidate `95efad7bb49b3eb0e9b02
 is also superseded local evidence, not unfinished authorized work. No failed
 experimental commit was published as canonical implementation. No firmware,
 runtime, workflow, build input, device, artifact or hardware behavior changed.
+
+
+## Original ignored-directory defect — independent reopening 2026-09-07
+
+Final clean main-checkout aggregate at live 31bdbbc83f3129ecb9cbf5bc4ad20e073bdd60a4 failed before checker execution: canonical_fingerprint rejected ignored nested Git directory .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/. Independent source Curator classifies this as an original ignored-path fingerprint implementation bug, not a new checker Git-topology requirement. GP-VAL-011 is reopened READY for the exact bounded directory traversal repair. Previous reviewed implementation/completion evidence remains historical; GP-PERSIST-001 stays DONE. Prior global wait is revoked and Planner packet STALE pending completed repair and fresh material review.
+
+Current narrow repair: canonical_fingerprint must handle directory entries emitted by git ls-files --others --ignored --exclude-standard for caller-local ignored nested Git repositories. Recursively enumerate only physical descendants of such IGNORED directory entries in deterministic sorted order and fingerprint each relative path, file type/mode, directory membership (including empty directories), regular-file bytes and symlink target text. Treat nested .git content as opaque caller-local filesystem bytes; never use its refs/objects/config as validation inputs, execute Git there, copy it to the clone, or add it to required-ref/object catalogs. Use lstat and do not follow symlink directories or external targets. Preserve unambiguous length-framed hashing, existing whole-command budget checks during enumeration and byte reads, final proof rules, and fail-closed handling of unsupported special entries, unreadable state, detectable traversal races or unavailable proof. No timestamps are added as mutation semantics. This is support for the already permitted complete ignored-path set, not dirty-state support or new Git topology. Existing original snapshot, exact ref/object catalog, environment, checker commands/applicability, independent object storage and timeouts remain unchanged. The three implementation consequences are runner, aggregate adversarial tests and deterministic census; README may change only to explain this existing ignored-state contract.
+
+This is an original implementation defect, not a third substantive topology expansion. No caller ignored state was deleted, moved, copied or modified to bypass failure. The failed preflight truthfully returned SETUP_FAILURE with canonical proof UNAVAILABLE and no checker results. Prior temporary-clone PASS remains truthful historical evidence but cannot establish present work-order completion.
+
+### Historical prior DONE correspondence
+
+The prior reviewed feature/integration/completion remains preserved; this record is not current DONE authority. Separate completion was published at `3171837fcfe8fa8b9f6ab1d1a8891478c98c76a3`.
+
+```json
+{
+  "schema_name": "glyph_done_completion_evidence",
+  "schema_version": 1,
+  "mode": "DIRECT_ANCESTRY",
+  "implementation_base_sha": "0b851b969560c3bcb13339afc770d5ff5ec8713a",
+  "reviewed_implementation_sha": "9d80cc5fe6324ba301ab1e05b06e4d4532360055",
+  "prior_canonical_integration_sha": "0381a0150c6f2d590072bedb2c4e61ad810e80e3",
+  "reviewed_changed_paths": [
+    "docs/runtime_config/README.md",
+    "docs/runtime_config/fixtures/glyph_checker_census.json",
+    "tools/check_glyph_runtime_config_validation_aggregate.py",
+    "tools/run_glyph_runtime_config_validation.py"
+  ],
+  "independent_review_provenance": "Fresh independent reviewer PASS on exact 9d80cc5: scope, complete topology catalog, dirty index flags, exact branch identity, child ownership and bounded cleanup verified; no material findings.",
+  "validation_provenance": "Exact 9d80cc5: full aggregate 30/30 PASS with canonical and every isolated fingerprint MATCH; 35 adversarial groups; 20/20 stalled-setup timeout repetitions; context18, census196, manifest34, health, framework, sequence, navigation, surface, compile and diff PASS. Integration 0381a01 live-verified before this separate completion record."
+}
+```
