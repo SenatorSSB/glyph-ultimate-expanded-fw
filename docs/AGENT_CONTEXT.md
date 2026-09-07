@@ -72,15 +72,15 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-011"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-011; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is `docs/project/ACTIVE_AGENT_QUEUE.md`.
-  Packet `glyph-portfolio-20260907-1256` is `STALE` after final clean main-checkout validation exposed an original ignored-directory fingerprint defect. `GP-VAL-011` is reopened `READY` for the independently source-adjudicated bounded repair; prior reviewed completion is preserved as historical evidence. `GP-PERSIST-001` remains `DONE`. `GP-CONFIG-005` and `GP-ART-001` remain `USER_DECISION_GATED`. Effective authorized runway is one, target four; no PREAUTHORIZED or hardware-pending work exists. Global evidence wait is revoked and `PLANNER_REFRESH_REQUIRED` records the material event. The next executable work order is `GP-VAL-011`; no checker topology, firmware/runtime, build, artifact, device or hardware authority is expanded.
+  Packet `glyph-portfolio-20260907-1256` is `STALE` after real main-checkout validation of ignored-directory repair failed the 300-second aggregate budget without final canonical proof. `GP-VAL-011` is `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; no implementation or merge may resume without separately adjudicated complete READY authority. Prior reviewed completion and failed unmerged `a0373bd` are preserved as evidence. `GP-PERSIST-001` remains `DONE`; `GP-CONFIG-005` and `GP-ART-001` remain `USER_DECISION_GATED`. Authorized runway is zero, target four; there is no READY, PREAUTHORIZED or hardware-pending work. Global wait is not supported. `PLANNING_REQUIRED` and `PLANNER_REFRESH_REQUIRED` demand a fresh audit of this unresolved technical repair; no firmware/runtime, build, artifact, device or hardware authority changes.
   Completed implementation history remains in the canonical queue. Bounded
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
