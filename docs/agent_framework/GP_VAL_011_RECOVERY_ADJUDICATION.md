@@ -126,3 +126,31 @@ The prior reviewed feature/integration/completion remains preserved; this record
   "validation_provenance": "Exact 9d80cc5: full aggregate 30/30 PASS with canonical and every isolated fingerprint MATCH; 35 adversarial groups; 20/20 stalled-setup timeout repetitions; context18, census196, manifest34, health, framework, sequence, navigation, surface, compile and diff PASS. Integration 0381a01 live-verified before this separate completion record."
 }
 ```
+
+
+# Independent GP-VAL-011 performance/authority adjudication — 2026-09-07
+
+Disposition: **REPAIR_REQUIRED, not executable under the current bounded recovery contract.** Do not publish or integrate candidate `a0373bde823856c4835bb5aed429d0b402eadd48`. Preserve its failed evidence and the truthful historical review/completion of the prior implementation; GP-PERSIST-001 remains DONE.
+
+The clean real caller contains roughly 4.77 GB of ignored collapsed directory contents, predominantly the installed framework's 55,494 files and 10,320 directories. The initial complete canonical fingerprint measured 205.872 seconds before census, metadata validation, clone setup, selected checkers and the required final complete fingerprint. The actual full aggregate exhausted its unchanged 300-second operational budget around checker 10 and could not supply final canonical proof. This is FAIL, not partial aggregate acceptance.
+
+The independently inspected bounded profile records 54.814 of 60.002 seconds in 26,104 `posix.open` calls; reads consumed 1.694 seconds and hashing 1.004 seconds. These opens obtain file bytes or anchored directory access required by the proof. No redundant hot operation or small semantics-preserving correction is demonstrated. A 600-file diagnostic with four/sixteen threads shows possible latency overlap, not full-tree proof, whole-command feasibility, worker cleanup or race safety.
+
+Parallel full-read workers would introduce substantive acquisition/ownership/cancellation and proof aggregation decisions: threads versus processes, ownership before acquisition, bounded outstanding work and descriptors, deterministic ordered digest publication, symlink/ancestor and membership race correspondence, worker failure propagation, and cancellation/reaping at the whole deadline. The existing source does not unambiguously choose or validate that architecture. The published narrow ignored-directory repair authorizes the original complete ignored-path proof; it does not provide authority to self-expand after this new full-run failure into an unreviewed concurrent execution design. This is distinct from the prohibited third Git-ref/object topology expansion, which also remains prohibited.
+
+No budget increase, metadata-keyed digest reuse, ignored-package/nested-Git omission, fewer bytes or race checks, proof outside the 300-second budget, caller deletion/movement, checker removal, or weaker fail-closed result is authorized. No claim is made that a correct faster implementation is impossible; feasibility is currently unproven under the exact constraints.
+
+## Canonical disposition
+
+Remove READY authority immediately. The existing queue schema has no REPAIR_REQUIRED work-order status; represent GP-VAL-011 as REVIEW with explicit stopped, nonexecutable contract adjudication and REPAIR_REQUIRED support signal. This is not pending merge approval and no implementation may resume from it. Preserve prior done evidence in historical adjudication; the current done_evidence remains a nonempty pending explanation. Do not use BLOCKED_EXTERNAL because GitHub and the repository are available, or DONE because actual required validation failed.
+
+Retain the prior packet as STALE with this material event, global wait false, zero authorized runway and PLANNER_REFRESH_REQUIRED. With that schema state, primary liveness is PLANNING_REQUIRED; after a genuinely fresh independently reviewed non-wait packet covering this unresolved technical repair and the two carried user gates, ordinary derivation may return CURATION_REQUIRED. Do not invent a third candidate for the existing work-order defect or a filler research precursor. No global wait may obscure this unresolved repair. The next Runner must see the stop rather than retry implementation automatically.
+
+## Narrow remaining authority question
+
+Whether to authorize a separate, explicitly designed and independently reviewed concurrent fingerprint repair effort that preserves full caller-byte/membership/race proof and the existing 300-second whole-command budget, or leave GP-VAL-011 nonexecutable. The project owner need not select a worker count or implementation mechanism; any newly authorized effort still needs a complete exact Curator contract and proof of feasibility before READY/implementation. Authorization alone is not proof that the performance target is achievable. Existing GP-CONFIG-005 and GP-ART-001 questions remain independent; answering either does not repair this validation failure automatically.
+
+No firmware/runtime source, build input, workflow, artifact, device, physical test or gameplay/controller semantics is changed or claimed by this adjudication. Nunchuk remains NOT_TESTED and root cause unproven.
+
+
+The failed candidate remains available on local `codex/gp-val-011-ignored-directory-failed-evidence`; canonical contains none of its unreviewed repair delta. The main checkout is restored to live `4174001e39f23d2dcb438c232bb3b4e498d153a4`. Full report `/private/tmp/glyph-ignored-main-candidate-aggregate.json` and bounded profile `/private/tmp/glyph-walker-60s-profile.txt` supplied the recorded observations; their load-bearing outcome and exact timing facts are frozen above so repository state does not require those temporary files.
