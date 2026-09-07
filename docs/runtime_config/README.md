@@ -453,3 +453,50 @@ checker. The aggregate manifest reconciles every checker with a strong static
 runtime-config signal to either the curated scope or an explicit exclusion.
 Historical and hardware-evidence checkers are explicitly excluded from current
 aggregate PASS; this does not create production authority or a candidate.
+
+The aggregate runner refuses staged, unstaged, or untracked source state for
+both checker execution and `--check-manifest`. It
+pins HEAD, branch or detached state, comparison base, and expected merge base,
+and runs the unchanged selected commands in an independent local
+`git clone --no-local --no-checkout`. An explicit `GLYPH_CHECKER_BASE` does
+not replace the caller's actual `origin/configurator` identity; a mismatched
+`GLYPH_CHECKER_EXPECTED_MERGE_BASE` fails. The clone retains only the source
+branch, comparison ref when present, and the pinned historical X1 candidate
+ref when the exact current X1 regression checker is selected, plus the caller's
+separate local configurator ref when its unchanged baseline checker requires it.
+The closed source catalog also includes the exact observation/nuker history and
+only the canonical queue commit fields consumed by the selected framework
+checker; unrelated metadata and prose are excluded. Required local
+objects may be copied through an independent pack containing only the closure
+of those pinned identities. Missing local objects or a missing/wrong X1 ref
+fail; no fetch, alternates, hardlinked object database, or network transport is
+introduced. Existing ignored caller files remain excluded from the clone.
+
+The launch environment inherits only PATH. HOME, temporary/cache directories,
+Python hash/user-site settings, locale/time, Git configuration isolation, and
+immutable checker comparison variables are explicitly constructed. Only the
+exact `checker_context` and `validation_aggregate_adversarial` self-test
+ID/command pairs omit the two GLYPH comparison variables, because their
+synthetic repositories establish their own contexts. Python or the operating
+system may subsequently add its own process-local state; arbitrary ambient
+variables are never inherited by the runner.
+
+Each checker has a fixed 120-second timeout. The whole operation, including
+preflight, clone setup, fingerprint proof, and cleanup, has a fixed 300-second
+POSIX real-time deadline. Timed-out process groups receive TERM and then KILL
+after the fixed two-second grace, with bounded reaping. Mutation or timeout
+stops further checks regardless of `--fail-fast`. Caller fingerprints include
+HEAD/branch, index, refs/config, and tracked/untracked/ignored bytes, modes,
+and symlink targets. Direct committed-byte/mode/symlink comparisons reject changes
+hidden by index flags; full symbolic refs avoid branch/tag ambiguity. Process
+ownership is established before child exec/setup and retained across the
+deadline and cleanup grace; each checker must also leave the isolated repository
+unchanged. PASS requires complete matching proofs. Structured failures retain
+census freshness only when evaluated. Deadline exhaustion explicitly reports
+unavailable final proof and any retained disposable scratch directory instead
+of claiming unchanged state or performing unbounded cleanup.
+
+These controls detect repository mutation and bound ordinary process trees;
+they are not a network sandbox or protection against intentionally detached
+daemons or arbitrary absolute host writes. No checker applicability, workflow,
+firmware, build, device, or hardware behavior changes.
