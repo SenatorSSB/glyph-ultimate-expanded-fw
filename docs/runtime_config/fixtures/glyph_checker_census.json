@@ -2571,6 +2571,71 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "current_config_persistence_recovery_research",
+      "defines_main": true,
+      "file_size_bytes": 61002,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "evidence",
+        "evidence/authority",
+        "known_evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 1017,
+      "parse_error": null,
+      "path": "tools/check_glyph_current_config_persistence_recovery_research.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "evidence",
+        "evidence/authority",
+        "known_evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output"
+      ],
+      "python_module": "tools.check_glyph_current_config_persistence_recovery_research",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "docs/runtime_config/current_config_persistence_recovery_research.md",
+        "docs/runtime_config/fixtures/current_config_persistence_recovery_research.json",
+        "docs/runtime_config/runtime_config_storage_fallback_architecture.md",
+        "docs/runtime_config/runtime_config_storage_fallback_source_authority.md",
+        "lib/littlefs",
+        "src/LittleFS.cpp",
+        "src/LittleFS.h",
+        "src/config.cpp",
+        "src/lfs.c",
+        "tools/glyph_runtime_config_storage_simulator.py"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "40719da6922fcdf1ceaedc627870414b1cb186947fcc4179f5e73af20cac84e7",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "current_x1_regression_subset",
       "defines_main": true,
       "file_size_bytes": 16855,
