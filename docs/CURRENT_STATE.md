@@ -1,6 +1,6 @@
 # Glyph Current State
 
-Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-PERSIST-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}<!-- current-runway:end -->
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}<!-- current-runway:end -->
 
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
@@ -8,7 +8,7 @@ This is the short current-state entrypoint. Agents should read
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PERSIST-001; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 **Current Agentic Operating State:** the machine-derived summary above and `docs/project/ACTIVE_AGENT_QUEUE.md` are canonical. Packet `glyph-portfolio-20260901-0909` is partially consumed. Curator authorized `GP-VAL-011` as bounded aggregate-runner isolation work and `GP-PERSIST-001` as evidence-only persistence research; neither authorization changes firmware, build inputs, artifacts, devices, or hardware evidence. `GP-CONFIG-005` and `GP-ART-001` remain user-decision gated and do not establish a global wait. A Planner refresh is required because remaining packet supply cannot fill the target runway without those decisions. `GP-X1-001` is `DONE`: exact candidate `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256 `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254` received Revision-2 hardware PASS and entered `configurator` through integration commit `1597c01b416b6aa697d73efc7d2c2b3695dc3e5c`. Authorization policy, including `PLANNING_REQUIRED`, is defined by the agent framework rather than this prose. `CUSTOM_RUNNER_NOT_REQUIRED`; retired official-configurator historical evidence: `tools/check_glyph_official_configurator_validation.py`; `GP-CONFIG-002` remains invalidated; the older import/export compatibility chain is historical-only; and external-remapper evidence remains quarantined.
 ## Current Known-Good State

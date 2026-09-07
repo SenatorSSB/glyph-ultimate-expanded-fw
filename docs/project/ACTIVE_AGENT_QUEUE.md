@@ -104,17 +104,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
+    "CURATION_REQUIRED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
     "RUNWAY_SHORTFALL_USER_DECISION_GATED",
     "PLANNER_REFRESH_REQUIRED"
@@ -216,7 +216,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PERSIST-001",
       "title": "Research current Config persistence recovery",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-persist-001-current-config-recovery-research",
       "objective": "Produce an exact source- and upstream-provenance research packet for the existing Pico config.bin SaveConfig, LoadConfig, startup, and SetConfig persistence path, mapping failure windows and future recovery alternatives without selecting or implementing a mechanism.",
       "why_this_matters": "The current SaveConfig path truncates and rewrites the sole config.bin with a placeholder header, protobuf body, CRC pass, and final header, while the repository has no direct persistence fault-injection test or accepted current-device recovery contract. Future H3 repair cannot be responsibly authorized until the exact filesystem guarantees, failure windows, unknowns, and decision gates are recorded.",
@@ -224,7 +224,10 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "This is evidence-only persistence research and offline correspondence checking. It may describe source-backed current behavior, authoritative dependency guarantees, inferred failure windows labeled as inference, and unknown device facts; it does not choose or authorize a future persistence algorithm, change current config.bin behavior, access a device, or create hardware evidence.",
       "scope": "Add docs/runtime_config/current_config_persistence_recovery_research.md, docs/runtime_config/fixtures/current_config_persistence_recovery_research.json, tools/check_glyph_current_config_persistence_recovery_research.py, one current load-bearing research/provenance manifest entry, and only deterministic census/health consequences. Bind exact current repository blobs and the configured framework-arduinopico 3.6.3 selector, then use permitted read-only live verification to resolve the authoritative Arduino-Pico tag/commit, its LittleFS wrapper source, and the exact upstream littlefs commit and documentation/source/test blobs it incorporates. Record every SaveConfig encode/open/truncate/header/body/seek/read/CRC/header-rewrite/close step; LoadConfig validation/decode behavior; boot load/default-save path; HandleSetConfig save call; checked and ignored return values; and a failure-window/current-consequence matrix with SOURCE_BACKED, INFERRED, or UNKNOWN classification. Compare temp-and-rename, temp-plus-backup, and two-slot/generation alternatives only as non-authoritative design options. Record future fault-injection cut points, exact automated/build/hardware gates, and every unresolved H3 product/device decision. A bounded insufficient-evidence result is valid completion when exact searches and unknowns are preserved.",
       "explicit_excluded_scope": "No edit to HAL/, config/, platformio.ini, dependency selectors, firmware/runtime/product tests, or current storage code; no build, UF2, config.bin read/write, filesystem mount, device access, artifact, controller test, or hardware result; no selection of temp/backup filenames, old-or-new versus prior-good invariant, recovery precedence, cleanup, migration, backward/old-firmware compatibility, autoformat policy, diagnostics, free-space reserve, wear threshold, save cadence, update preservation, fault-injection mechanism, or physical recovery UX; no bundling with GP-CONFIG-005 live-memory transaction work; no runtime-table persistence, runtime-loaded config, WebSerial/device write, protobuf-write expansion, flashing, Nunchuk, root-cause, or gameplay claim.",
-      "touched_planes": ["docs/checkers", "persistence"],
+      "touched_planes": [
+        "docs/checkers",
+        "persistence"
+      ],
       "source_authority": "Exact clean live configurator 766237660e96189064203c3dc6e00cbdbe0df2c5. HAL/pico/src/core/Persistence.cpp opens config.bin with w+, writes a zero header, streams Config protobuf data, rereads it for CRC, rewrites the header, and closes without a temporary, backup, rename, or generation slot; HAL/pico/include/core/Persistence.hpp defines the filename/header; config/glyph/common/src/config.cpp loads on startup and saves the in-memory default when load fails; HAL/pico/src/comms/ConfiguratorBackend.cpp calls SaveConfig after decode and bounds checks. platformio.ini selects framework-arduinopico at tag 3.6.3. Existing storage/fallback docs explicitly say current persistence is not an atomic rollback architecture and leave recovery policy unresolved; the existing storage simulator excludes config.bin. Planner packet glyph-portfolio-20260901-0909 at 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb proposed GP-PERSIST-001, and bounded specialist verification confirmed exact authoritative upstream provenance is available while later H3 choices remain unresolved.",
       "dependencies_prerequisites": [
         "Implementation starts from a fresh live-configurator descendant of 766237660e96189064203c3dc6e00cbdbe0df2c5 with Persistence.cpp/.hpp, startup config.cpp, ConfiguratorBackend.cpp, platformio.ini selector, and current storage/fallback boundary documents materially unchanged.",
@@ -256,7 +259,25 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused research branch if exact current/upstream correspondence cannot be retained without inference; preserve current persistence behavior and explicit UNKNOWN/H3 decision gates rather than selecting a mechanism or fabricating guarantees.",
       "status_documentation_updates": "Publish only exact current-path facts, immutable upstream evidence, labeled inferences, unknowns, option comparisons, and future decision/test gates. Keep runtime-loaded storage and every persistence implementation unapproved.",
-      "done_evidence": "Pending exact reviewed research packet, immutable provenance and adversarial correspondence checks, explicit H3 decision-gated conclusion, and canonical publication correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "3171837fcfe8fa8b9f6ab1d1a8891478c98c76a3",
+        "reviewed_implementation_sha": "2b2a48e14e9d621b13038d7a8f29e57713ef462a",
+        "prior_canonical_integration_sha": "3a9d41a9927983f1ba5d1e4ff6cf74af57ac634f",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/current_config_persistence_recovery_research.md",
+          "docs/runtime_config/fixtures/current_config_persistence_recovery_research.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_current_config_persistence_recovery_research.py"
+        ],
+        "independent_review_provenance": "Independent source/provenance and final replay reviewer PASS on exact 2b2a48e: six noncensus blobs equal reviewed 6827f174; nine current source blobs unchanged; closed seven-path authorized delta. H1 evidence only; no mechanism selected.",
+        "validation_provenance": "Exact 2b2a48e full isolated aggregate31/31 PASS with canonical and per-check MATCH; 48 ordered operations,15 immutable upstream blobs,52 standard negative cases,159 additional independent record/source negatives; manifest35,census197,health,framework,sequence,navigation,surface,compile,diff and cleanliness PASS. Live integration3a9d41a verified before separate DONE publication."
+      },
       "stop_conditions": [
         "Any current or future persistence behavior, storage layout, selector, dependency, boot/default policy, config update behavior, or firmware/product test would be changed.",
         "Any filesystem, rename, power-loss, wear, capacity, update-preservation, or device behavior claim lacks exact authoritative immutable evidence or is not labeled inferred/unknown.",
@@ -2495,11 +2516,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PERSIST-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PERSIST-001; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
