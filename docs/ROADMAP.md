@@ -9,27 +9,16 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"GLOBAL_EVIDENCE_WAIT_SUPPORTED","global_evidence_wait_supported":true}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: GLOBAL_EVIDENCE_WAIT_SUPPORTED
 <!-- current-runway-summary:end -->
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Live-verified Planner packet `glyph-portfolio-20260901-0909`
-is partially consumed. The earlier invalidated-successor recovery completed
-`GP-VAL-012` and `GP-PROV-007` with manifest sequencing preserved. Follow-up
-Curator review corrected post-X1 survivor accounting, authorized `GP-CTL-003`,
-`GP-PROV-008`, and the exact current-X1 `GP-VAL-008` regression lane, and
-completed `GP-BUILD-001` after reviewed `GP-PROV-008` integration. The
-current-runway summary above is the sole current executable order and liveness
-statement. Curator authorized `GP-VAL-011` as bounded aggregate-runner
-isolation work and `GP-PERSIST-001` as evidence-only persistence research.
-`GP-CONFIG-005` and `GP-ART-001` remain user-decision gated, no global wait is
-supported, and a Planner refresh is required because remaining packet supply
-cannot fill the target runway without those decisions.
+implementation. Packet `glyph-portfolio-20260907-1256` is `FRESH` at the independently reviewed completed canonical base `4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6`. `GP-VAL-011` and `GP-PERSIST-001` are `DONE` with separate canonical completion correspondence. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, are `USER_DECISION_GATED`; there is no READY, PREAUTHORIZED, mechanically activatable, or hardware-pending work. Independent Curator review accepts a portfolio-global evidence wait with zero effective authorized runway. The target remains four; it creates no authority or quota. Owner direction on a gated lane, new material source/evidence, or a demonstrated independent H0/H1 gap resumes curation/planning. Elapsed time alone supplies no evidence. Historical DONE work does not authorize new implementation.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip
