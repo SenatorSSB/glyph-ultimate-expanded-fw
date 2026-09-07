@@ -19,67 +19,48 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "2a80462ba2801192154e42ee4bebb9b1b43ca699",
+  "audit_base_sha": "4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
-    "branch": "planning/portfolio-20260901-0909",
-    "base_configurator_sha": "1977ef0d6ec1a65d02947a0b7dae2675c2e8228c",
-    "packet_id": "glyph-portfolio-20260901-0909",
-    "packet_path": "docs/planning/portfolio_20260901_0909.md",
-    "planning_commit": "3fb785749d8653e91bb8e4b3a73a01be03aaf9cb",
-    "curation_commit": "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
+    "state": "FRESH",
+    "branch": "planning/portfolio-20260907-1256",
+    "base_configurator_sha": "4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6",
+    "packet_id": "glyph-portfolio-20260907-1256",
+    "packet_path": "docs/planning/portfolio_20260907_1256.md",
+    "planning_commit": "fc2a0eac5963298de9ff1e2c5b3f86a27d96f056",
+    "curation_commit": "a9b975c5e00d10ae2d13b9f3f25d46a49a7045cb",
     "candidate_count": 2,
     "survivors": [
-      {"candidate_id": "GP-CONFIG-005", "disposition": "USER_DECISION_GATED"},
-      {"candidate_id": "GP-ART-001", "disposition": "USER_DECISION_GATED"}
+      {
+        "candidate_id": "GP-CONFIG-005",
+        "disposition": "USER_DECISION_GATED"
+      },
+      {
+        "candidate_id": "GP-ART-001",
+        "disposition": "USER_DECISION_GATED"
+      }
     ],
     "curator_review_required": false,
-    "global_wait_proposed": false,
-    "material_events_since_packet": [
-      "Curator independently reviewed fresh packet glyph-portfolio-20260901-0909 at commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb against live configurator 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c.",
-      "Direct source and specialist verification confirmed GP-SRC-006 and the executable validation-before-publication repair as independent complete H0 work; they are authorized as GP-SRC-006 and GP-VAL-013 READY without changing workflow or product source.",
-      "The executable sidecar/unique-JSON repair is authorized as GP-PROV-007 PREAUTHORIZED and WAITING mechanically on GP-VAL-013 integration; zero-result category rejection is authorized as GP-VAL-012 PREAUTHORIZED and WAITING mechanically on GP-VAL-010 integration.",
-      "GP-PROV-003 repair, GP-VAL-011, GP-CTL-003, and GP-BUILD-001 remain substantive-dependency gated or preauthorized; GP-VAL-008 remains evidence gated in the historical disposition record but is now complete; GP-PERSIST-001 remains research gated; GP-CONFIG-005, GP-ART-001, and GP-X1-001 remain user-decision gated.",
-      "GP-VAL-010, GP-SRC-006, GP-VAL-013, and GP-VAL-012 completed on configurator. Independent verification found that both recorded successor conditions were literally invalidated: GP-VAL-013's reviewed path set included its publication-workflow fixture beyond GP-PROV-007's allowlist, and GP-VAL-013 changed GP-VAL-012's exact-bound manifest blob while preserving its category/applicability tuples.",
-      "Curator substantively reauthorized the two unchanged successor objectives against configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. GP-VAL-012 completed first; GP-PROV-007 was mechanically ACTIVATABLE and its later manifest dependency update did not re-invalidate GP-VAL-012.",
-      "GP-PROV-007 completed as a reviewed H1 host-side checker repair at 721cd20388c39beefe6b1b85ce25228a7efe6a0e with no workflow, artifact, product/runtime, firmware, device, or hardware change.",
-      "The project owner resolved the GP-X1-001 user-decision gate with exact X1-only offset-41 authority, tested candidate 74ae24364b84520d4e0e39240beb9867653cc7b9 and UF2 SHA-256 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254, reported all expected outputs and no disconnects, and confirmed the restored prior firmware worked. Revision-2 evidence is published as HARDWARE_VALIDATED pending exact candidate integration recovery.",
-      "GP-X1-001 publication recovery reverified the pinned candidate, content-addressed local artifact, immutable PASS record, and exact three-path reviewed delta; merge commit 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c integrated only the tested candidate, and post-integration baseline/intake validators were aligned without further firmware-source changes.",
-      "Follow-up Curator review against live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 removed completed GP-X1-001 from surviving packet supply; the prior count of nine was stale and the exact preauthorization-review survivor set was eight.",
-      "Direct source and specialist verification resolved the representation contract for GP-CTL-003 and the GP-PROV-003 repair, authorized the latter under new identity GP-PROV-008, and resolved GP-VAL-008 through the new exact X1 source and Revision-2 hardware evidence. GP-BUILD-001 is DONE after reviewed GP-PROV-008 integration.",
-      "GP-VAL-011 remains substantive-dependency gated because snapshot fidelity, prevention versus detection, environment, process-tree termination, and timeout policy are unresolved. GP-CONFIG-005 and GP-ART-001 remain user-decision gated; GP-PERSIST-001 remains research gated. The packet remains partially useful with four non-executable survivors, no global evidence wait or Planner refresh is supported, and curation changed no runtime/configurator product code, workflow, build input, active table byte, firmware artifact, device state, or hardware evidence.",
-      "GP-CTL-003 implementation was integrated through merge commit 97267efcf5962a6dfa28a551670455aa3bd91c65 after exact feature commit 9dff89d835ccb0bb45dd10c79305b9fef5096263; the checker/census repair remains H0 control-plane-only.",
-      "GP-PROV-008 was integrated at bc76af250eb61e68daae8b1a91acb6412ecd95a0 after fresh independent repaired-scope PASS; its schema-v2 inventory and immutable historical observation boundary remain H0 control-plane-only."
-      ,"GP-VAL-008 was integrated at 63616108477bff72e1cda49572a56601782bac3b after fresh independent repaired-scope PASS; its current X1 correspondence remains H1 offline evidence only with no firmware, build, artifact, device, or hardware action.",
-      "GP-BUILD-001 was integrated and published DONE at live configurator 766237660e96189064203c3dc6e00cbdbe0df2c5 after canonical build and independent review, consuming the last previously authorized item.",
-      "On 2026-09-06, Curator independently rebound GP-VAL-011 to an exact clean committed disposable-clone, controlled-environment, mutation-detection, and 120-second-per-check/300-second-aggregate timeout contract and authorized it READY as H1 validation-control work.",
-      "On 2026-09-06, Curator independently verified GP-PERSIST-001 as bounded H1 evidence-only research and authorized it READY without choosing or authorizing any future H3 persistence mechanism, recovery policy, firmware change, build, artifact, device, or hardware action.",
-      "GP-CONFIG-005 and GP-ART-001 remain USER_DECISION_GATED. The remaining packet supply cannot cover the throughput-aware runway target, so RUNWAY_SHORTFALL_CANDIDATE_SUPPLY and PLANNER_REFRESH_REQUIRED are recorded without claiming a global evidence wait."
-    ],
+    "global_wait_proposed": true,
+    "material_events_since_packet": [],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260901-0909",
-      "planning_commit": "3fb785749d8653e91bb8e4b3a73a01be03aaf9cb",
-      "packet_id": "glyph-portfolio-20260901-0909",
-      "packet_base_configurator_sha": "1977ef0d6ec1a65d02947a0b7dae2675c2e8228c",
-      "curation_branch": "curation/portfolio-20260901-0909-review",
-      "curation_commit": "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
+      "planning_branch": "planning/portfolio-20260907-1256",
+      "planning_commit": "fc2a0eac5963298de9ff1e2c5b3f86a27d96f056",
+      "packet_id": "glyph-portfolio-20260907-1256",
+      "packet_base_configurator_sha": "4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6",
+      "curation_branch": "curation/portfolio-20260907-1256-review",
       "initial_reviewed_dispositions": [
-        {"candidate_id": "GP-SRC-006", "disposition": "READY"},
-        {"candidate_id": "GP-VAL-002", "disposition": "REPAIR_REAUTHORIZATION"},
-        {"candidate_id": "GP-PROV-002", "disposition": "REPAIR_REAUTHORIZATION"},
-        {"candidate_id": "GP-VAL-012", "disposition": "PREAUTHORIZED"},
-        {"candidate_id": "GP-PROV-003", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
-        {"candidate_id": "GP-VAL-011", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
-        {"candidate_id": "GP-CTL-003", "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"},
-        {"candidate_id": "GP-BUILD-001", "disposition": "PREAUTHORIZED"},
-        {"candidate_id": "GP-VAL-008", "disposition": "EVIDENCE_GATED"},
-        {"candidate_id": "GP-CONFIG-005", "disposition": "USER_DECISION_GATED"},
-        {"candidate_id": "GP-PERSIST-001", "disposition": "RESEARCH_GATED"},
-        {"candidate_id": "GP-ART-001", "disposition": "USER_DECISION_GATED"},
-        {"candidate_id": "GP-X1-001", "disposition": "USER_DECISION_GATED"}
+        {
+          "candidate_id": "GP-CONFIG-005",
+          "disposition": "USER_DECISION_GATED"
+        },
+        {
+          "candidate_id": "GP-ART-001",
+          "disposition": "USER_DECISION_GATED"
+        }
       ],
-      "review_date": "2026-09-01"
+      "review_date": "2026-09-07",
+      "curation_commit": "a9b975c5e00d10ae2d13b9f3f25d46a49a7045cb"
     }
   },
   "completion_correspondence": {
@@ -114,17 +95,16 @@ Git, but it is not current candidate supply or implementation authority.
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "CURATION_REQUIRED",
+    "GLOBAL_EVIDENCE_WAIT_SUPPORTED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
-    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED"
   ],
   "global_evidence_wait": {
-    "supported": false,
-    "planner_broad_audit_provenance": null,
-    "curator_acceptance_provenance": null,
-    "required_external_evidence": null,
-    "resume_event": null
+    "supported": true,
+    "planner_broad_audit_provenance": "Fresh broad Planner packet glyph-portfolio-20260907-1256 at immutable fc2a0eac5963298de9ff1e2c5b3f86a27d96f056, direct child of independently live-verified completed configurator 4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6; twelve current source/evidence surfaces audited, exactly two carried owner gates and zero new independent implementation candidates.",
+    "curator_acceptance_provenance": "Independent skeptical Curator review on 2026-09-07 verified live canonical and Planner identities, direct-parent regular packet blob, both recovery implementation/integration/completion ancestries, unchanged firmware/runtime/build/workflow/user/hardware authority, and current backend/custody source. Accept exact two USER_DECISION_GATED survivors and zero authorized runway; completed safe work and preserved superseded failures are accounted for. No new source-grounded independent H0/H1 precursor remains identified; this does not deny possible future defects.",
+    "required_external_evidence": "Recorded project-owner authority for GP-CONFIG-005 existing custom-backend rejection invariant or GP-ART-001 prospective artifact custody; alternatively exact new source-owned modifier intent/ownership or approved current-Config durability requirements. The owner need decide only one lane to resume curation. Official configurator interoperability remains retired.",
+    "resume_event": "A recorded owner decision on one gated lane, new material source/evidence, or an independently demonstrated H0/H1 defect triggers fresh Curator/Planner inspection. No automatic PREAUTHORIZED activation or H2/H3 implementation is authorized. Elapsed time alone does not supply new evidence or invalidate this accepted wait."
   },
   "items": [
     {
@@ -307,7 +287,9 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "This strengthens offline control-plane provenance and survivor-accounting validation only. It does not change liveness policy, authorize a Planner candidate by inference, edit product/runtime behavior, or perform network access during ordinary validation.",
       "scope": "Upgrade the canonical queue packet representation and tools/check_glyph_agent_framework_docs.py so non-ABSENT packets carry exact packet_id, packet_path, planning_commit, curation_commit, and a unique ordered survivors array of candidate_id plus a closed disposition. Derive candidate_count from survivors. Resolve the immutable planning and curation commits locally, require commit objects and regular non-executable Git 100644 packet/queue blobs, verify planning parent/base and exact packet frontmatter/candidate inventory, verify Curator parent/base and ancestry into current HEAD, and bind the initial reviewed disposition set. Add isolated temporary-Git positive and adversarial cases. Update only canonical queue/status prose and deterministic checker-census, manifest, or validation-health consequences of the authorized checker byte change.",
       "explicit_excluded_scope": "No fetch or network access in the checker; no mutable branch tip as the sole authority; no candidate promotion, new liveness rule, queue target change, implementation execution, tools/glyph_checker_context.py change, workflow, build, product/runtime source, source-authority, hardware result, device, persistence, WebSerial/protobuf write, flashing, Nunchuk, root-cause, or gameplay claim.",
-      "touched_planes": ["docs/checkers"],
+      "touched_planes": [
+        "docs/checkers"
+      ],
       "source_authority": "Live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3; Planner packet planning/portfolio-20260901-0909 at 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb with sole packet path docs/planning/portfolio_20260901_0909.md and parent/base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c; initial reviewed curation commit 7b6601709b6f7780601ff68c0e8d9df1bf63ad8a with the same parent/base and ancestry into current configurator. tools/check_glyph_agent_framework_docs.py currently validates only coarse packet shape and never reads curator_review_provenance or either Git object. Independent adversarial verification confirmed bogus provenance and candidate_count=999 pass today.",
       "dependencies_prerequisites": [
         "Implementation starts from a fresh live-configurator descendant of 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 with queue schema v2, packet 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, curation commit 7b6601709b6f7780601ff68c0e8d9df1bf63ad8a, and current completion correspondence locally resolvable.",
@@ -346,7 +328,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused branch if immutable object correspondence cannot be enforced offline without changing liveness policy; retain current queue authority and never fall back to trusting a shape-valid free-form provenance string or independent count.",
       "status_documentation_updates": "Publish schema/provenance and exact survivor accounting in the canonical queue/status surfaces without changing candidate dispositions beyond already-authorized execution transitions.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"33694f3a67f336c25b3c82008b3511d06a490016","reviewed_implementation_sha":"9dff89d835ccb0bb45dd10c79305b9fef5096263","prior_canonical_integration_sha":"97267efcf5962a6dfa28a551670455aa3bd91c65","reviewed_changed_paths":["docs/project/ACTIVE_AGENT_QUEUE.md","docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_agent_framework_docs.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS after frontmatter fail-closed repair and expanded packet/survivor adversarial coverage on the exact integrated source snapshot.","validation_provenance":"Focused framework, packet-object adversarial, census, full current runtime-config aggregate, sequence, navigation, agent-surface, py_compile, and diff checks passed; no firmware, build, artifact, device, or hardware action was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "33694f3a67f336c25b3c82008b3511d06a490016",
+        "reviewed_implementation_sha": "9dff89d835ccb0bb45dd10c79305b9fef5096263",
+        "prior_canonical_integration_sha": "97267efcf5962a6dfa28a551670455aa3bd91c65",
+        "reviewed_changed_paths": [
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_agent_framework_docs.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer PASS after frontmatter fail-closed repair and expanded packet/survivor adversarial coverage on the exact integrated source snapshot.",
+        "validation_provenance": "Focused framework, packet-object adversarial, census, full current runtime-config aggregate, sequence, navigation, agent-surface, py_compile, and diff checks passed; no firmware, build, artifact, device, or hardware action was required."
+      },
       "stop_conditions": [
         "Any required object or exact packet/curation correspondence is missing, ambiguous, mutable-only, or requires network access during validation.",
         "Any candidate is promoted, rejected, or reinterpreted by checker logic instead of an explicit Curator transition.",
@@ -368,7 +364,10 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "This is static provenance/schema/checker work only. It records command and tracked-wrapper identity while preserving every unresolved executable, dependency, reproducibility, artifact, device, and hardware non-claim.",
       "scope": "Create a schema-v2 current build-input inventory that preserves every existing selector, source-identity, postprocessor, and unresolved-claim record exactly; adds the two tracked 100755 wrappers to declaration_files; and adds one exact local_build_entrypoints contract for canonical [pio, run, -e, glyph_mk6], fallback [./scripts/build-glyph-mk6-quiet.sh], its edge to [./scripts/pio-local.sh, run, -e, glyph_mk6], the exact ordered pio-local interpreter alternatives [.venv/bin/python, ambient python, python3], and the PLATFORMIO_CORE_DIR line. Bind roles, tracked modes/hashes, and AGENTS.md/docs/WORKFLOW.md policy sources. Rework GP-PROV-004 validation to derive its unchanged 44 timestamped observations from the exact historical schema-v1 Git blob at base 8c04262c66613d46b933b1b739c01c575cb0c580 rather than requiring the current inventory bytes to remain frozen. Update focused docs/checkers and deterministic manifest/census/health consequences only.",
       "explicit_excluded_scope": "No wrapper, PlatformIO configuration, builder script, selector, dependency, workflow, postprocessor, build, installation, environment resolution, artifact, upload/store, device, firmware/runtime, table, persistence, WebSerial/protobuf write, flashing, Nunchuk, root-cause, reproducibility, or hardware change or claim.",
-      "touched_planes": ["build tooling", "docs/checkers"],
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
       "source_authority": "AGENTS.md and docs/WORKFLOW.md name pio run -e glyph_mk6 as canonical and scripts/build-glyph-mk6-quiet.sh as fallback. On exact live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3, the fallback wrapper is tracked mode 100755, blob e35164eeb512cec678a2f138b2b13f2b52263dc6, SHA-256 328ff73b9f1da1ccad5d7ee0431b664b9c33a70c35959e4a14f6677881844eeb and invokes ./scripts/pio-local.sh run -e glyph_mk6; pio-local is tracked mode 100755, blob deaabc271a8268dcd1f29c473f48beadf979cf7f, SHA-256 3b81e400830b30db0a4a194cdb5ff35df61e4d15f13b8d3891e79f2716ee9714 and selects the three recorded interpreters. The current inventory/checker remains schema v1 with eight declarations. GP-PROV-004 binds historical inventory blob 5e6d2f128cc6baccd98c39369fbd6bc5acc43851 and SHA-256 d783688fdc140ad2a5706b168f24f76093d0a388431ca4b33253257c52dfc455 at base 8c04262c66613d46b933b1b739c01c575cb0c580.",
       "dependencies_prerequisites": [
         "Implementation starts from a fresh live-configurator descendant of 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3 with both wrapper blobs, canonical/fallback policy text, schema-v1 inventory, and GP-PROV-004 historical object materially unchanged.",
@@ -406,7 +405,25 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused repair if schema-v2 correspondence or historical-object preservation cannot remain static and fail closed; retain the original GP-PROV-003 and GP-PROV-004 evidence rather than rewriting observations.",
       "status_documentation_updates": "Record the complete local entrypoint chain and historical-object observation boundary without any resolved interpreter, execution, artifact, reproducibility, or hardware claim.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"d360ff36586133890e9faf07811cc04a806fdbbf","reviewed_implementation_sha":"bc76af250eb61e68daae8b1a91acb6412ecd95a0","prior_canonical_integration_sha":"bc76af250eb61e68daae8b1a91acb6412ecd95a0","reviewed_changed_paths":["docs/runtime_config/build_input_provenance_inventory.md","docs/runtime_config/build_input_resolution_observations.md","docs/runtime_config/fixtures/build_input_provenance_inventory.json","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","tools/check_glyph_build_input_provenance_inventory.py","tools/check_glyph_build_input_resolution_observations.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS after raw historical observation packet pinning and census regeneration on exact integrated implementation snapshot bc76af250eb61e68daae8b1a91acb6412ecd95a0.","validation_provenance":"Focused provenance/observation, manifest, census, health, full runtime-config aggregate, framework, navigation, agent-surface, py_compile, and diff checks passed; no firmware, build, artifact, device, or hardware action was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "d360ff36586133890e9faf07811cc04a806fdbbf",
+        "reviewed_implementation_sha": "bc76af250eb61e68daae8b1a91acb6412ecd95a0",
+        "prior_canonical_integration_sha": "bc76af250eb61e68daae8b1a91acb6412ecd95a0",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/build_input_provenance_inventory.md",
+          "docs/runtime_config/build_input_resolution_observations.md",
+          "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "tools/check_glyph_build_input_provenance_inventory.py",
+          "tools/check_glyph_build_input_resolution_observations.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer PASS after raw historical observation packet pinning and census regeneration on exact integrated implementation snapshot bc76af250eb61e68daae8b1a91acb6412ecd95a0.",
+        "validation_provenance": "Focused provenance/observation, manifest, census, health, full runtime-config aggregate, framework, navigation, agent-surface, py_compile, and diff checks passed; no firmware, build, artifact, device, or hardware action was required."
+      },
       "stop_conditions": [
         "Any wrapper, build, PlatformIO, dependency, postprocessor, workflow, artifact, network, device, or hardware action would execute.",
         "Any ambient executable identity, dependency closure, reproducibility, purpose/effect, or artifact acceptance would be inferred.",
@@ -428,7 +445,9 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "For the already-accepted current source only, SelectRuntimeTableId with mode inactive, X1 active, and every other table modifier inactive selects RuntimeTableId::X1; DirectionIndexFromAxes maps the bounded -1/0/1 axis grid to indices 0..8; ApplyTableAnalogOutput reads the corresponding current kX1Table point; and those nine points are the accepted offset-41 values. The checker is static/offline evidence correspondence, not hardware execution or a general Ultimate behavior oracle.",
       "scope": "Add a dedicated docs/fixture/checker lane that binds exact immutable GLYPH-UD-010/011/012, the Revision-2 evidence record, candidate and integration identities, current source selection/axis-index/lookup structure, and the current extracted kX1Table values. Use only the abstract RoleState boundary mode_active=false, x1_active=true, all other table modifiers=false and axes in {-1,0,1}. Require exact direction/index/raw-coordinate rows and no-disconnect observation classification. Add the checker as one current load-bearing manifest entry and regenerate deterministic census/health consequences.",
       "explicit_excluded_scope": "No physical button-binding assertion, mode+X1/MX1, X2, Y1/Y2, Tilt, layer/flipper, direction-plus-A, RF6/RF7/RF9 or other override, SOCD beyond the supplied normalized axes, digital output, controller/gameplay semantic, stale May-28 case revival, firmware simulation, firmware/runtime source edit, table byte, routing/publication path, build, artifact, device, persistence, WebSerial/protobuf write, flashing, Nunchuk, root-cause, or new hardware claim.",
-      "touched_planes": ["docs/checkers"],
+      "touched_planes": [
+        "docs/checkers"
+      ],
       "source_authority": "Project-owner authority GLYPH-UD-010/011 and observation GLYPH-UD-012; exact protocol docs/calibration/x1_offset41_hardware_test_protocol_2026-09-02.md; immutable Revision-2 evidence git-json:6b0061489cb67d345f212f75268455c181ba271f:docs/calibration/fixtures/x1_offset41_hardware_evidence_2026-09-02.json; exact candidate 74ae24364b84520d4e0e39240beb9867653cc7b9 and integration 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c; live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3. Current source defines X1 selection, direction-index mapping, table lookup, and the integrated nine kX1Table points. Existing current checkers bind table/source and intake identity but no current behavior subset; the old identity runtime evaluator remains historical-only and contains obsolete literals.",
       "dependencies_prerequisites": [
         "GP-X1-001 remains DONE with exact candidate/artifact PASS and exact-candidate integration correspondence; GLYPH-UD-010/011/012, protocol, immutable evidence object, intake, and current kX1Table remain exact.",
@@ -466,7 +485,25 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused checker/fixture branch if exact source/evidence correspondence cannot be expressed without unsupported semantics; retain GP-X1-001 evidence and historical evaluator exclusion unchanged.",
       "status_documentation_updates": "Document the one current X1 regression subset and its immutable evidence limits without broadening physical acceptance or current runtime-config capability claims.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"84ba70d28629134c92d0b0d25c9d05fb4bd2596c","reviewed_implementation_sha":"63616108477bff72e1cda49572a56601782bac3b","prior_canonical_integration_sha":"63616108477bff72e1cda49572a56601782bac3b","reviewed_changed_paths":["docs/runtime_config/current_x1_regression_subset.md","docs/runtime_config/fixtures/current_x1_regression_subset.json","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_current_x1_regression_subset.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS after strict identity/schema and adversarial-coverage repairs on exact implementation snapshot 63616108477bff72e1cda49572a56601782bac3b.","validation_provenance":"Focused X1 checker, py_compile, manifest, census, health, full 29-check runtime-config aggregate, framework, sequence, navigation, agent-surface, candidate-generation isolation, and exact diff checks passed; no firmware build, artifact, device, or hardware action was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "84ba70d28629134c92d0b0d25c9d05fb4bd2596c",
+        "reviewed_implementation_sha": "63616108477bff72e1cda49572a56601782bac3b",
+        "prior_canonical_integration_sha": "63616108477bff72e1cda49572a56601782bac3b",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/current_x1_regression_subset.md",
+          "docs/runtime_config/fixtures/current_x1_regression_subset.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_current_x1_regression_subset.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer PASS after strict identity/schema and adversarial-coverage repairs on exact implementation snapshot 63616108477bff72e1cda49572a56601782bac3b.",
+        "validation_provenance": "Focused X1 checker, py_compile, manifest, census, health, full 29-check runtime-config aggregate, framework, sequence, navigation, agent-surface, candidate-generation isolation, and exact diff checks passed; no firmware build, artifact, device, or hardware action was required."
+      },
       "stop_conditions": [
         "Any expected behavior lacks exact current source plus accepted user/evidence provenance.",
         "Any historical literal, physical binding, mode+X1, additional modifier/override, digital/gameplay, Nunchuk, root-cause, or general simulation claim enters scope.",
@@ -488,7 +525,10 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "For successful reads, clean source still embeds the existing lowercase abbreviated HEAD and any staged, unstaged, or untracked change appends -DIRTY with the existing escaped CPPDEFINE representation. Missing Git, command failure, empty/multiline/nonhex identity, or unreadable status fails before env.Append and no global Git configuration is written. This changes build-failure safety and version metadata only, not controller runtime behavior.",
       "scope": "After GP-PROV-008 is integrated, update only builder_scripts/arduino_pico.py for an explicit repository root, checked command-local git -c core.longpaths=true rev-parse --short HEAD and git -c core.longpaths=true status --porcelain --untracked-files=normal calls, strict output validation, and failure before env.Append. Factor an injectable/pure identity helper in that file and add a dedicated isolated checker with temporary Git repositories/fake runner. Add the checker as current load-bearing validation and update only the now-complete GP-PROV-008 builder hash plus deterministic manifest/census/health consequences. Build the exact clean committed implementation snapshot.",
       "explicit_excluded_scope": "No selector, dependency, pin, wrapper, PlatformIO configuration, workflow, postprocessor, version-format change on successful reads, firmware logic/table/routing/publication, artifact acceptance/upload/store, device, persistence, WebSerial/protobuf write, flashing, hardware acceptance, Nunchuk, root-cause, or gameplay claim.",
-      "touched_planes": ["build tooling", "docs/checkers"],
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
       "source_authority": "On live configurator 3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3, platformio.ini selects builder_scripts/arduino_pico.py at tracked blob e883cb393ab0ec9b1e499a333cb189cc666cf386 and SHA-256 456a4b7d5582bbeb0244868db28920cd0f276d3db1924b36b401047cdf4569c2. That script runs unchecked git config --global core.longpaths true, unchecked git rev-parse --short HEAD, and unchecked git status --porcelain, then derives FIRMWARE_VERSION. No current checker enforces failure or global-mutation behavior. docs/WORKFLOW.md requires exact build snapshots and forbids unsafe mutation; Planner candidate GP-BUILD-001 and independent verification confirm the surviving gap.",
       "dependencies_prerequisites": [
         "GP-PROV-008 is reviewed, integrated, and recorded DONE on live configurator with schema-v2 local-entrypoint provenance and historical-object GP-PROV-004 validation passing.",
@@ -531,7 +571,25 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "Drop the focused builder/checker branch if successful version metadata is not byte/format invariant or any error can still publish a define; never restore a global Git config mutation or fail-open identity result.",
       "status_documentation_updates": "After exact reviewed integration, record fail-closed pre-build identity and preserved successful version semantics without artifact acceptance, reproducibility, runtime, or hardware claims.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"0fbaebfc4729439f10f5e541e995547e46399e8b","reviewed_implementation_sha":"ecbbf5beecae5a5f8837d4261298c8304e2dec96","prior_canonical_integration_sha":"ecbbf5beecae5a5f8837d4261298c8304e2dec96","reviewed_changed_paths":["builder_scripts/arduino_pico.py","docs/runtime_config/fixtures/build_input_provenance_inventory.json","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_prebuild_git_identity.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS, repaired-scope PASS, and PlatformIO compatibility repaired-scope PASS on the exact implementation snapshot.","validation_provenance":"Focused pre-build identity, provenance, observations, manifest, census, health, full current aggregate, framework, navigation, agent-surface, syntax, diff, and canonical pio run -e glyph_mk6 passed on the exact clean committed snapshot; UF2 build output was not hardware-accepted."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "0fbaebfc4729439f10f5e541e995547e46399e8b",
+        "reviewed_implementation_sha": "ecbbf5beecae5a5f8837d4261298c8304e2dec96",
+        "prior_canonical_integration_sha": "ecbbf5beecae5a5f8837d4261298c8304e2dec96",
+        "reviewed_changed_paths": [
+          "builder_scripts/arduino_pico.py",
+          "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_prebuild_git_identity.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer PASS, repaired-scope PASS, and PlatformIO compatibility repaired-scope PASS on the exact implementation snapshot.",
+        "validation_provenance": "Focused pre-build identity, provenance, observations, manifest, census, health, full current aggregate, framework, navigation, agent-surface, syntax, diff, and canonical pio run -e glyph_mk6 passed on the exact clean committed snapshot; UF2 build output was not hardware-accepted."
+      },
       "stop_conditions": [
         "GP-PROV-008 is not exact DONE and passing, or activation requires interpretation rather than objective checks.",
         "Any successful clean/dirty FIRMWARE_VERSION format or quoting changes, any Git ambiguity remains nonfatal, or any global/repository Git configuration is mutated.",
@@ -553,14 +611,33 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "On the existing sole/non-mode X1 path, kX1Table contains neutral (128,128), cardinals (87,128), (169,128), (128,87), (128,169), and diagonals (87,87), (169,87), (87,169), (169,169). The project owner reported all expected outputs and no disconnects for the exact candidate/artifact pair.",
       "scope": "Candidate-specific overlay_preserve ownership of kX1Table only; exact nine raw coordinates; source-owned generator/intake realization; exact committed candidate build; independent source/diff review; local UF2 handoff; Revision-2 reconciliation of the human hardware PASS; and exact-candidate publication recovery.",
       "explicit_excluded_scope": "No X2, Y1/Y2, Tilt, layer/flipper, routing, button-binding, controller-semantic, gameplay-semantic, other modifier, other source-owned table, alternate publication, runtime-loaded config, persistence, WebSerial/device write, protobuf write, flashing automation, release/upload, Nunchuk, or root-cause claim.",
-      "touched_planes": ["source-owned configuration", "generated tables/artifacts", "firmware runtime", "docs/checkers"],
+      "touched_planes": [
+        "source-owned configuration",
+        "generated tables/artifacts",
+        "firmware runtime",
+        "docs/checkers"
+      ],
       "source_authority": "Project-owner directions GLYPH-UD-010 and GLYPH-UD-011 authorize only the exact candidate-specific X1 raw coordinates and preserve all other tables and publication behavior. Candidate intake docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json records overlay_preserve with owned_tables=[kX1Table].",
-      "dependencies_prerequisites": ["Exact live base configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc.", "Existing generated-source-owned include chain and RuntimeConfigView publication remain unchanged.", "Exact candidate/artifact identity and direct human physical report are available before source integration."],
+      "dependencies_prerequisites": [
+        "Exact live base configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc.",
+        "Existing generated-source-owned include chain and RuntimeConfigView publication remain unchanged.",
+        "Exact candidate/artifact identity and direct human physical report are available before source integration."
+      ],
       "substantive_authorization_rationale": "The project owner explicitly supplied the complete nine-value X1 intent, superseded the prior no-op restriction for this candidate only, excluded all other behavior, and later directed processing of the real successful hardware results. No gameplay or cross-table judgment was delegated to the implementer.",
       "mechanical_activation_conditions": [],
-      "invalidation_conditions": ["The candidate ref no longer resolves exactly to 74ae24364b84520d4e0e39240beb9867653cc7b9.", "The preserved UF2 no longer hashes exactly to the recorded SHA-256.", "Any non-X1 active table, routing, publication path, or other runtime source differs from the reviewed candidate delta.", "The structured PASS evidence does not correspond exactly to the recorded candidate/artifact pair."],
+      "invalidation_conditions": [
+        "The candidate ref no longer resolves exactly to 74ae24364b84520d4e0e39240beb9867653cc7b9.",
+        "The preserved UF2 no longer hashes exactly to the recorded SHA-256.",
+        "Any non-X1 active table, routing, publication path, or other runtime source differs from the reviewed candidate delta.",
+        "The structured PASS evidence does not correspond exactly to the recorded candidate/artifact pair."
+      ],
       "authorization_snapshot_provenance": "User Codex task supplied 2026-09-02, recorded as GLYPH-UD-010/011 in exact candidate 74ae24364b84520d4e0e39240beb9867653cc7b9; follow-up direct user reports confirmed expected outputs, no disconnects, successful restoration of the prior UF2, and direction to proceed with the real results.",
-      "automated_validation": ["Generator classification EXPLICIT_OWNED_TABLE_CHANGESET with changed_table_ids=[2] and preserved_table_count=27.", "Independent exact base-to-candidate inspection confirmed only kX1Table semantic contents changed and publication/routing source remained unchanged.", "Focused source-owned generator, symbol-map, identity-sync, activation-alternative, framework, navigation, and surface checks passed on the candidate.", "Fallback canonical-policy build ./scripts/build-glyph-mk6-quiet.sh passed because the pio executable was unavailable; exact UF2 SHA-256 was recorded."],
+      "automated_validation": [
+        "Generator classification EXPLICIT_OWNED_TABLE_CHANGESET with changed_table_ids=[2] and preserved_table_count=27.",
+        "Independent exact base-to-candidate inspection confirmed only kX1Table semantic contents changed and publication/routing source remained unchanged.",
+        "Focused source-owned generator, symbol-map, identity-sync, activation-alternative, framework, navigation, and surface checks passed on the candidate.",
+        "Fallback canonical-policy build ./scripts/build-glyph-mk6-quiet.sh passed because the pio executable was unavailable; exact UF2 SHA-256 was recorded."
+      ],
       "canonical_build": "pio run -e glyph_mk6 was unavailable in the environment; documented fallback ./scripts/build-glyph-mk6-quiet.sh succeeded for exact candidate 74ae24364b84520d4e0e39240beb9867653cc7b9.",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
       "candidate_git_sha": "74ae24364b84520d4e0e39240beb9867653cc7b9",
@@ -578,8 +655,27 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": [],
       "rollback_recovery": "A prior configurator 045bca0d1450c261c3c60ccf5ef86f7302bd3dbc UF2 was regenerated and supplied with SHA-256 69064a5c1d52772926fe010a593f2a2e04e9675a638737b619b7b0bc4785d001; the project owner confirmed it worked after restoration.",
       "status_documentation_updates": "Exact PASS evidence was published without candidate source; publication recovery reverified identity/evidence, merged only the exact tested candidate, aligned accepted-baseline validators without further firmware-source changes, and published strict DONE correspondence.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"045bca0d1450c261c3c60ccf5ef86f7302bd3dbc","reviewed_implementation_sha":"74ae24364b84520d4e0e39240beb9867653cc7b9","prior_canonical_integration_sha":"1597c01b416b6aa697d73efc7d2c2b3695dc3e5c","reviewed_changed_paths":["docs/agent_framework/USER_DIRECTION.md","docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json","src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"],"independent_review_provenance":"Fresh independent candidate reviewer PASS on exact snapshot 74ae24364b84520d4e0e39240beb9867653cc7b9 confirmed only kX1Table changed semantically, exact requested values, 27 preserved tables, unchanged routing/publication, successful fallback build, and artifact identity; fresh evidence reviewer PASS confirmed bounded Revision-2 record correspondence after two precision fixes.","validation_provenance":"Exact candidate/base and remote refs reverified; preserved UF2 rehashed to 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254; immutable PASS evidence and protocol validated; pre-integration full runtime-config aggregate passed; merge staged blobs for the active header and intake matched the candidate exactly; post-integration source-sync, intake, census, health, framework, navigation, surface, semantic table, and full aggregate gates passed with no further firmware-source change."},
-      "stop_conditions": ["Any exact candidate Git SHA, base SHA, artifact SHA, protocol, or evidence correspondence mismatch.", "Any active change outside kX1Table or any routing/publication delta.", "Any need to rebuild or substitute firmware bytes for hardware identity.", "Any runtime-loaded, persistence, device-write, flashing, release/upload, Nunchuk, root-cause, or gameplay scope."],
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+        "reviewed_implementation_sha": "74ae24364b84520d4e0e39240beb9867653cc7b9",
+        "prior_canonical_integration_sha": "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/USER_DIRECTION.md",
+          "docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json",
+          "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+        ],
+        "independent_review_provenance": "Fresh independent candidate reviewer PASS on exact snapshot 74ae24364b84520d4e0e39240beb9867653cc7b9 confirmed only kX1Table changed semantically, exact requested values, 27 preserved tables, unchanged routing/publication, successful fallback build, and artifact identity; fresh evidence reviewer PASS confirmed bounded Revision-2 record correspondence after two precision fixes.",
+        "validation_provenance": "Exact candidate/base and remote refs reverified; preserved UF2 rehashed to 5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254; immutable PASS evidence and protocol validated; pre-integration full runtime-config aggregate passed; merge staged blobs for the active header and intake matched the candidate exactly; post-integration source-sync, intake, census, health, framework, navigation, surface, semantic table, and full aggregate gates passed with no further firmware-source change."
+      },
+      "stop_conditions": [
+        "Any exact candidate Git SHA, base SHA, artifact SHA, protocol, or evidence correspondence mismatch.",
+        "Any active change outside kX1Table or any routing/publication delta.",
+        "Any need to rebuild or substitute firmware bytes for hardware identity.",
+        "Any runtime-loaded, persistence, device-write, flashing, release/upload, Nunchuk, root-cause, or gameplay scope."
+      ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": true
@@ -629,7 +725,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused runner/adversarial/census-health branch if exact current command correspondence cannot be enforced without semantic edits to any other manifest-executed checker or without manifest classification changes; never restore acceptance of a command that can select a different executable, target, or argument vector than the reviewed manifest fields.",
       "status_documentation_updates": "Record GP-VAL-010 as Done only after exact reviewed integration and separate structured completion publication. Retain GP-VAL-011 as separately dependency/design gated and every runtime, product, artifact, and hardware non-claim.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"885daf198be7445bec9fa565eca6d3b2784c7842","reviewed_implementation_sha":"6affdecb526b5571e507cf51d62d3b819b2926bb","prior_canonical_integration_sha":"6affdecb526b5571e507cf51d62d3b819b2926bb","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_runtime_config_validation_aggregate.py","tools/run_glyph_runtime_config_validation.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS on exact repaired snapshot 6affdecb526b5571e507cf51d62d3b819b2926bb; command contract, adversarial target coverage, executable-mode coverage, and scope invariants confirmed.","validation_provenance":"Focused aggregate adversarial, manifest, census, health, full current runtime-config aggregate, framework, sequence, navigation, agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build, artifact, device, or hardware action was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "885daf198be7445bec9fa565eca6d3b2784c7842",
+        "reviewed_implementation_sha": "6affdecb526b5571e507cf51d62d3b819b2926bb",
+        "prior_canonical_integration_sha": "6affdecb526b5571e507cf51d62d3b819b2926bb",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/run_glyph_runtime_config_validation.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer PASS on exact repaired snapshot 6affdecb526b5571e507cf51d62d3b819b2926bb; command contract, adversarial target coverage, executable-mode coverage, and scope invariants confirmed.",
+        "validation_provenance": "Focused aggregate adversarial, manifest, census, health, full current runtime-config aggregate, framework, sequence, navigation, agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build, artifact, device, or hardware action was required."
+      },
       "stop_conditions": [
         "Any manifest command can select an executable, checker target, or argument vector different from the exact reviewed interpreter/path/required_arguments fields.",
         "Any untracked, directory, symlink, escaping, malformed, or unauthorized target can reach execution.",
@@ -658,14 +768,27 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "This strengthens static source-structure validation only. It changes no firmware source, active table byte, routing, runtime behavior, build input, artifact, device, or hardware state.",
       "scope": "Update tools/check_glyph_source_owned_table_symbol_map.py and isolated temporary-source adversarial coverage so GetActiveRuntimeConfigState() has exactly the current static_assert, one static const ActiveRuntimeConfigState initializer containing the approved baseline pointer/source/status members, and one return of that state; ResolveActiveRuntimeConfig() has exactly one return dereferencing GetActiveRuntimeConfigState().active_view. Reject alternate or conditional returns, extra state publication, mismatched enums, parser/load-state reads, wrapper publication, RAM-backed views, and indirect resolver paths. Regenerate only deterministic checker-census or validation-health consequences caused by the checker byte change.",
       "explicit_excluded_scope": "No src/ firmware edit, active table or routing change, RuntimeConfigView replacement, candidate.view or active_storage.view publication, parser/materialization/load integration, runtime-loaded config, persistence, workflow, build input, artifact, device write, protobuf write, flashing, hardware, Nunchuk, root-cause, or gameplay claim. No tools/glyph_checker_context.py change.",
-      "touched_planes": ["docs/checkers"],
+      "touched_planes": [
+        "docs/checkers"
+      ],
       "source_authority": "Live configurator 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c. src/modes/Ultimate.cpp has the accepted single-state/single-return structure at GetActiveRuntimeConfigState() and ResolveActiveRuntimeConfig(). tools/check_glyph_source_owned_table_symbol_map.py currently requires only pointer/return fragments and rejects candidate.view and active_storage.view tokens, so structurally different alternate returns pass. Planner candidate GP-SRC-006 in planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb and independent specialist inspection confirm no equivalent stronger current gate.",
-      "dependencies_prerequisites": ["Implementation starts from a fresh live-configurator descendant of 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c with the accepted Ultimate.cpp publication shape and checker materially unchanged.", "GP-SRC-001 remains DONE and the approved source-owned publication boundary remains current."],
+      "dependencies_prerequisites": [
+        "Implementation starts from a fresh live-configurator descendant of 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c with the accepted Ultimate.cpp publication shape and checker materially unchanged.",
+        "GP-SRC-001 remains DONE and the approved source-owned publication boundary remains current."
+      ],
       "substantive_authorization_rationale": "The accepted source shape and forbidden alternatives are already durably resolved by current source and boundary documents. Structural enforcement is a checker-only H0 repair with no product, gameplay, firmware, or hardware decision left to the implementer.",
       "mechanical_activation_conditions": [],
-      "invalidation_conditions": ["The accepted active-state or resolver topology changes before implementation.", "Another canonical change supplies equivalent or stronger exact structural enforcement first.", "The repair would require firmware source, tools/glyph_checker_context.py, product/runtime checker semantics beyond this exact checker, build, artifact, device, or hardware scope."],
+      "invalidation_conditions": [
+        "The accepted active-state or resolver topology changes before implementation.",
+        "Another canonical change supplies equivalent or stronger exact structural enforcement first.",
+        "The repair would require firmware source, tools/glyph_checker_context.py, product/runtime checker semantics beyond this exact checker, build, artifact, device, or hardware scope."
+      ],
       "authorization_snapshot_provenance": "Independent Curator review of Planner candidate GP-SRC-006 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, packet/live base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, with root and bounded specialist source/checker verification on curation/portfolio-20260901-0909-review.",
-      "automated_validation": ["Exact current GetActiveRuntimeConfigState() and ResolveActiveRuntimeConfig() source passes.", "Isolated mutations for alternate/conditional pointers, extra returns, mismatched source/status enums, parser/load-state reads, wrapper publication, RAM-backed publication, and indirect resolution fail independently.", "Focused symbol-map, source-sync, checker-census, validation-health, full runtime-config aggregate, agent-framework, sequence, navigation, agent-surface, py_compile, and exact-diff checks pass with fresh independent review."],
+      "automated_validation": [
+        "Exact current GetActiveRuntimeConfigState() and ResolveActiveRuntimeConfig() source passes.",
+        "Isolated mutations for alternate/conditional pointers, extra returns, mismatched source/status enums, parser/load-state reads, wrapper publication, RAM-backed publication, and indirect resolution fail independently.",
+        "Focused symbol-map, source-sync, checker-census, validation-health, full runtime-config aggregate, agent-framework, sequence, navigation, agent-surface, py_compile, and exact-diff checks pass with fresh independent review."
+      ],
       "canonical_build": "NOT_REQUIRED: H0 checker-only structural enforcement; any firmware or build-input delta stops.",
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
@@ -675,8 +798,25 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker branch if exact current source cannot be accepted without weakening the source-owned publication boundary.",
       "status_documentation_updates": "Record GP-SRC-006 Done only after reviewed integration and structured completion publication; preserve every current runtime and hardware non-claim.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"325defbbf7e1cdefe6f7578a924b96073c95dcb6","reviewed_implementation_sha":"bcf5831c00f8ab3a34576e544d9b795eac89e826","prior_canonical_integration_sha":"783334b7476f2c68335d6f312669eac72e78316f","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_source_owned_table_symbol_map.py"],"independent_review_provenance":"Fresh independent reviewer PASS on repaired exact snapshot bcf5831c00f8ab3a34576e544d9b795eac89e826; exact publication topology, all required adversarial mutation classes, scope, and non-claims confirmed.","validation_provenance":"Focused source-owned symbol-map, checker census, validation health, full runtime-config aggregate, framework, latest-Y2 source sync, navigation, agent-surface, py_compile, and exact-diff checks passed on the integrated snapshot; no build, artifact, device, or hardware action was required."},
-      "stop_conditions": ["Any active publication, table, routing, firmware, build, artifact, device, or hardware behavior would change.", "The checker would accept multiple publication outcomes or rely only on string presence.", "Any forbidden runtime-loaded, persistence, device-write, flashing, Nunchuk, root-cause, or gameplay scope appears."],
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "325defbbf7e1cdefe6f7578a924b96073c95dcb6",
+        "reviewed_implementation_sha": "bcf5831c00f8ab3a34576e544d9b795eac89e826",
+        "prior_canonical_integration_sha": "783334b7476f2c68335d6f312669eac72e78316f",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_source_owned_table_symbol_map.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer PASS on repaired exact snapshot bcf5831c00f8ab3a34576e544d9b795eac89e826; exact publication topology, all required adversarial mutation classes, scope, and non-claims confirmed.",
+        "validation_provenance": "Focused source-owned symbol-map, checker census, validation health, full runtime-config aggregate, framework, latest-Y2 source sync, navigation, agent-surface, py_compile, and exact-diff checks passed on the integrated snapshot; no build, artifact, device, or hardware action was required."
+      },
+      "stop_conditions": [
+        "Any active publication, table, routing, firmware, build, artifact, device, or hardware behavior would change.",
+        "The checker would accept multiple publication outcomes or rely only on string presence.",
+        "Any forbidden runtime-loaded, persistence, device-write, flashing, Nunchuk, root-cause, or gameplay scope appears."
+      ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
@@ -700,14 +840,28 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "This strengthens offline workflow-structure validation only. It changes no workflow YAML, build input, artifact route, product/runtime behavior, device, or hardware state.",
       "scope": "Add tools/glyph_workflow_step_contract.py as the single bounded fail-closed parser for the repository's current workflow job, steps, run, uses, needs, and continue-on-error subset, consume it from tools/check_glyph_runtime_config_validation_publication_workflow.py, and extend isolated adversarial coverage. Prove the exact aggregate command is executable in the validation job and that every CURRENT_GATED local build, glyph_nuker, and upload route depends on successful validation. Reject comments, inert/shadowed commands, unsupported scalar shapes, duplicate ambiguous steps, wrong jobs, permissive failure, missing needs, and alternate unguarded local publication routes. Preserve UNRESOLVED_EXTERNAL nested routes. Update only the existing workflow checker's manifest source_dependencies to add tools/glyph_workflow_step_contract.py and regenerate deterministic census/health consequences.",
       "explicit_excluded_scope": "No .github/workflows YAML edit, trigger, permission, branch-base, upload, artifact, checker-applicability, build, product/runtime, device, or hardware change; no external YAML package; no workflow execution; no claim that UNRESOLVED_EXTERNAL routes are gated; no tools/glyph_checker_context.py change.",
-      "touched_planes": ["docs/checkers"],
+      "touched_planes": [
+        "docs/checkers"
+      ],
       "source_authority": "Live configurator 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c. .github/workflows/build.yml currently contains a real validation step and build needs validation, but tools/check_glyph_runtime_config_validation_publication_workflow.py uses raw substring and regex scans; a comment-only aggregate command is accepted. Planner GP-VAL-002 repair in packet 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb and independent verification confirm the incomplete executable-step correspondence.",
-      "dependencies_prerequisites": ["Implementation starts from fresh live configurator with the current workflow and publication census materially unchanged.", "GP-VAL-010 command identity remains source-correspondent; implementation may proceed independently because this order parses the exact existing aggregate command without changing runner semantics."],
+      "dependencies_prerequisites": [
+        "Implementation starts from fresh live configurator with the current workflow and publication census materially unchanged.",
+        "GP-VAL-010 command identity remains source-correspondent; implementation may proceed independently because this order parses the exact existing aggregate command without changing runner semantics."
+      ],
       "substantive_authorization_rationale": "The original publication-gating intent is accepted, the defect is directly reproducible, and the smallest safe architecture is a fail-closed parser for the finite current YAML subset with no workflow mutation or external dependency. No product, artifact-store, firmware, or hardware decision remains.",
       "mechanical_activation_conditions": [],
-      "invalidation_conditions": ["Workflow topology or the exact validation command changes materially before implementation.", "A canonical change provides equivalent executable-step and dominance proof first.", "The parser would need an external dependency, workflow execution, YAML mutation, checker reclassification, tools/glyph_checker_context.py, or product/runtime scope."],
+      "invalidation_conditions": [
+        "Workflow topology or the exact validation command changes materially before implementation.",
+        "A canonical change provides equivalent executable-step and dominance proof first.",
+        "The parser would need an external dependency, workflow execution, YAML mutation, checker reclassification, tools/glyph_checker_context.py, or product/runtime scope."
+      ],
       "authorization_snapshot_provenance": "Independent Curator review of the GP-VAL-002 repair candidate from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb against packet/live base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c. GP-VAL-013 is the executable repair identity while the historical GP-VAL-002 completion record remains immutable.",
-      "automated_validation": ["Exact current workflow parses and proves one executable validation step dominates every CURRENT_GATED local publication route.", "Comment-only, inert, folded/block ambiguity, duplicate/shadowed step, wrong-job, continue-on-error, missing-needs, and alternate-route mutations fail closed; unsupported shapes fail rather than being inferred.", "No test executes GitHub Actions, PlatformIO, glyph_nuker, artifact upload, or device access.", "Focused workflow checker, publication census, artifact workflow checker where applicable, census, health, full aggregate, framework, sequence, navigation, surface, py_compile, and exact diff checks pass with fresh independent review."],
+      "automated_validation": [
+        "Exact current workflow parses and proves one executable validation step dominates every CURRENT_GATED local publication route.",
+        "Comment-only, inert, folded/block ambiguity, duplicate/shadowed step, wrong-job, continue-on-error, missing-needs, and alternate-route mutations fail closed; unsupported shapes fail rather than being inferred.",
+        "No test executes GitHub Actions, PlatformIO, glyph_nuker, artifact upload, or device access.",
+        "Focused workflow checker, publication census, artifact workflow checker where applicable, census, health, full aggregate, framework, sequence, navigation, surface, py_compile, and exact diff checks pass with fresh independent review."
+      ],
       "canonical_build": "NOT_REQUIRED: H0 static checker-only repair; workflow and build inputs remain unchanged.",
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
@@ -717,8 +871,28 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker branch if current workflow syntax cannot be parsed fail closed; never restore acceptance based on comment or raw substring presence.",
       "status_documentation_updates": "Record GP-VAL-013 Done only after reviewed integration; retain historical GP-VAL-002 evidence and all external-route/artifact/hardware non-claims.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"b0255a3b8e80cafc65d20526aa42769b1b402316","reviewed_implementation_sha":"dae87ac468f3c9ce6512fc96f855083054668a29","prior_canonical_integration_sha":"dae87ac468f3c9ce6512fc96f855083054668a29","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json","tools/check_glyph_runtime_config_validation_publication_workflow.py","tools/glyph_workflow_step_contract.py"],"independent_review_provenance":"Fresh independent reviewer identified and confirmed repair of conditional-step bypass; repaired-scope PASS on exact snapshot dae87ac468f3c9ce6512fc96f855083054668a29.","validation_provenance":"Focused workflow checker with 15 adversarial cases, aggregate adversarial, checker census, validation health, docs navigation, docs agent surface, agent framework, agentic sequence, and py_compile passed; workflow YAML, firmware, build input, artifact, device, and hardware state unchanged."},
-      "stop_conditions": ["Any workflow YAML, build input, artifact route, product/runtime, device, or hardware state would change.", "The checker can pass on comment-only or ambiguous non-executable text.", "Any external-route gating or artifact-acceptance claim is inferred."],
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "b0255a3b8e80cafc65d20526aa42769b1b402316",
+        "reviewed_implementation_sha": "dae87ac468f3c9ce6512fc96f855083054668a29",
+        "prior_canonical_integration_sha": "dae87ac468f3c9ce6512fc96f855083054668a29",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json",
+          "tools/check_glyph_runtime_config_validation_publication_workflow.py",
+          "tools/glyph_workflow_step_contract.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer identified and confirmed repair of conditional-step bypass; repaired-scope PASS on exact snapshot dae87ac468f3c9ce6512fc96f855083054668a29.",
+        "validation_provenance": "Focused workflow checker with 15 adversarial cases, aggregate adversarial, checker census, validation health, docs navigation, docs agent surface, agent framework, agentic sequence, and py_compile passed; workflow YAML, firmware, build input, artifact, device, and hardware state unchanged."
+      },
+      "stop_conditions": [
+        "Any workflow YAML, build input, artifact route, product/runtime, device, or hardware state would change.",
+        "The checker can pass on comment-only or ambiguous non-executable text.",
+        "Any external-route gating or artifact-acceptance claim is inferred."
+      ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
@@ -742,14 +916,35 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "This strengthens static workflow and observed-only sidecar verification only; it changes no workflow, postprocessor, artifact, product/runtime, device, or hardware behavior.",
       "scope": "After GP-VAL-013 lands, reuse its exact reviewed executable-step parser in tools/check_glyph_artifact_postprocessor_workflow.py, add duplicate-key rejection to tools/check_glyph_artifact_postprocessor_provenance.py, extend isolated workflow and JSON adversarial cases, update only the existing artifact workflow checker's manifest source_dependencies to name the shared helper, and regenerate deterministic census/health consequences.",
       "explicit_excluded_scope": "No workflow YAML, sidecar schema, postprocessor bytes/invocation, artifact generation/upload/store, immutable locator, reproducibility, acceptance, firmware/runtime, device, or hardware change or claim.",
-      "touched_planes": ["docs/checkers", "build tooling"],
+      "touched_planes": [
+        "docs/checkers",
+        "build tooling"
+      ],
       "source_authority": "Live configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9; the exact-bound artifact workflow/provenance checkers and sidecar fixture remain byte-identical to the independently reproduced GP-PROV-002 repair gaps in Planner packet 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb. GP-VAL-013 integrated the reviewed shared parser at blob 5c625ff47655acd4ac795cbfc2f0a26fe2d53eb0 without workflow mutation. Independent successor review found the prior Preauthorization literally invalidated only because its predecessor path allowlist omitted the reviewed publication-workflow adversarial fixture; no successor input, artifact behavior, or product/runtime authority changed.",
-      "dependencies_prerequisites": ["GP-VAL-013 is canonically DONE with tools/glyph_workflow_step_contract.py integrated through strict structured completion evidence and no workflow mutation.", "GP-VAL-012 completes first without changing the runtime-config validation manifest, so GP-PROV-007's authorized manifest source-dependency update cannot invalidate the earlier zero-category repair before it executes.", "At activation, .github/workflows/build.yml, tools/glyph_workflow_step_contract.py, tools/check_glyph_artifact_postprocessor_workflow.py, tools/check_glyph_artifact_postprocessor_provenance.py, and docs/runtime_config/fixtures/artifact_postprocessor_provenance.json have the exact rebound blob identities recorded in the mechanical activation conditions."],
+      "dependencies_prerequisites": [
+        "GP-VAL-013 is canonically DONE with tools/glyph_workflow_step_contract.py integrated through strict structured completion evidence and no workflow mutation.",
+        "GP-VAL-012 completes first without changing the runtime-config validation manifest, so GP-PROV-007's authorized manifest source-dependency update cannot invalidate the earlier zero-category repair before it executes.",
+        "At activation, .github/workflows/build.yml, tools/glyph_workflow_step_contract.py, tools/check_glyph_artifact_postprocessor_workflow.py, tools/check_glyph_artifact_postprocessor_provenance.py, and docs/runtime_config/fixtures/artifact_postprocessor_provenance.json have the exact rebound blob identities recorded in the mechanical activation conditions."
+      ],
       "substantive_authorization_rationale": "The substantive decision is complete: once the shared parser exists, reuse it rather than create divergent workflow interpretation, and reject duplicate keys at every JSON load boundary before semantic checks. Remaining work is objective and mechanical.",
-      "mechanical_activation_conditions": ["Live configurator records GP-VAL-013 as DONE with strict completion evidence whose reviewed implementation is integrated and whose changed paths are exactly docs/runtime_config/fixtures/glyph_checker_census.json, docs/runtime_config/fixtures/runtime_config_validation_manifest.json, docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json, tools/check_glyph_runtime_config_validation_publication_workflow.py, and tools/glyph_workflow_step_contract.py; workflow YAML remains unchanged.", "Live configurator records GP-VAL-012 as DONE with strict reviewed completion evidence, and its implementation changed no runtime-config validation manifest field or blob.", "At activation, Git blobs equal exactly .github/workflows/build.yml=d01c382e48bf71bd12ae41430b89d156ad8237e5, tools/glyph_workflow_step_contract.py=5c625ff47655acd4ac795cbfc2f0a26fe2d53eb0, tools/check_glyph_artifact_postprocessor_workflow.py=c228c6afb3c2cd42d8a34dfc437b1638dc96748d, tools/check_glyph_artifact_postprocessor_provenance.py=ded2459117e0ac78c475a289517ddbd69d83683d, and docs/runtime_config/fixtures/artifact_postprocessor_provenance.json=9a3089707fe3544ff5284f790d25ae5f9a89a025.", "The runtime-config validation manifest remains blob 82380ccb0205835254a52f3b3edddeedc7ae3124 immediately before GP-PROV-007 activation; implementation may then add only tools/glyph_workflow_step_contract.py to the existing artifact_postprocessor_workflow entry's source_dependencies as already authorized."],
-      "invalidation_conditions": ["GP-VAL-013 completion evidence, exact five-path set, or tools/glyph_workflow_step_contract.py architecture differs from the rebound authorization snapshot.", "GP-VAL-012 does not complete first, changes the runtime-config validation manifest, or broadens beyond its rebound zero-category repair.", "Any recorded workflow, shared parser, artifact checker, provenance checker, sidecar fixture, or pre-activation manifest blob differs from the exact rebound identity.", "Implementation requires workflow, postprocessor, artifact-store, product/runtime, device, or hardware changes."],
+      "mechanical_activation_conditions": [
+        "Live configurator records GP-VAL-013 as DONE with strict completion evidence whose reviewed implementation is integrated and whose changed paths are exactly docs/runtime_config/fixtures/glyph_checker_census.json, docs/runtime_config/fixtures/runtime_config_validation_manifest.json, docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json, tools/check_glyph_runtime_config_validation_publication_workflow.py, and tools/glyph_workflow_step_contract.py; workflow YAML remains unchanged.",
+        "Live configurator records GP-VAL-012 as DONE with strict reviewed completion evidence, and its implementation changed no runtime-config validation manifest field or blob.",
+        "At activation, Git blobs equal exactly .github/workflows/build.yml=d01c382e48bf71bd12ae41430b89d156ad8237e5, tools/glyph_workflow_step_contract.py=5c625ff47655acd4ac795cbfc2f0a26fe2d53eb0, tools/check_glyph_artifact_postprocessor_workflow.py=c228c6afb3c2cd42d8a34dfc437b1638dc96748d, tools/check_glyph_artifact_postprocessor_provenance.py=ded2459117e0ac78c475a289517ddbd69d83683d, and docs/runtime_config/fixtures/artifact_postprocessor_provenance.json=9a3089707fe3544ff5284f790d25ae5f9a89a025.",
+        "The runtime-config validation manifest remains blob 82380ccb0205835254a52f3b3edddeedc7ae3124 immediately before GP-PROV-007 activation; implementation may then add only tools/glyph_workflow_step_contract.py to the existing artifact_postprocessor_workflow entry's source_dependencies as already authorized."
+      ],
+      "invalidation_conditions": [
+        "GP-VAL-013 completion evidence, exact five-path set, or tools/glyph_workflow_step_contract.py architecture differs from the rebound authorization snapshot.",
+        "GP-VAL-012 does not complete first, changes the runtime-config validation manifest, or broadens beyond its rebound zero-category repair.",
+        "Any recorded workflow, shared parser, artifact checker, provenance checker, sidecar fixture, or pre-activation manifest blob differs from the exact rebound identity.",
+        "Implementation requires workflow, postprocessor, artifact-store, product/runtime, device, or hardware changes."
+      ],
       "authorization_snapshot_provenance": "Independent Curator reauthorization of GP-PROV-007 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, originally reviewed at live base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, rebound after explicit path-set invalidation to clean live configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9 on curation/portfolio-20260901-successor-reauthorization. Root and bounded specialists verified exact predecessor ancestry/path correspondence, all successor blobs, unchanged workflow/product inputs, and the sequencing dependency on GP-VAL-012. GP-PROV-007 preserves historical GP-PROV-002 completion.",
-      "automated_validation": ["Comment-only, inert, reordered, wrong-job, and shadowed sidecar workflow steps fail through the shared parser.", "Duplicate top-level and nested JSON keys fail before identity comparison; exact deterministic current sidecar passes.", "Focused workflow/provenance, census, health, aggregate, framework, sequence, navigation, surface, py_compile, and diff checks pass with independent review."],
+      "automated_validation": [
+        "Comment-only, inert, reordered, wrong-job, and shadowed sidecar workflow steps fail through the shared parser.",
+        "Duplicate top-level and nested JSON keys fail before identity comparison; exact deterministic current sidecar passes.",
+        "Focused workflow/provenance, census, health, aggregate, framework, sequence, navigation, surface, py_compile, and diff checks pass with independent review."
+      ],
       "canonical_build": "NOT_REQUIRED: H1 host-side CI sidecar validation only; workflow and firmware build-input bytes remain unchanged, so a firmware build is not relevant evidence.",
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
@@ -759,8 +954,27 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused repair if parser reuse or duplicate-key rejection cannot be preserved without broader artifact semantics.",
       "status_documentation_updates": "Record GP-PROV-007 Done after exact reviewed integration and structured completion publication while retaining all artifact and hardware non-claims.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"a1225102179639f06bb00a6735987824b85972ae","reviewed_implementation_sha":"721cd20388c39beefe6b1b85ce25228a7efe6a0e","prior_canonical_integration_sha":"721cd20388c39beefe6b1b85ce25228a7efe6a0e","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","tools/check_glyph_artifact_postprocessor_provenance.py","tools/check_glyph_artifact_postprocessor_workflow.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS on exact reviewed snapshot 721cd20388c39beefe6b1b85ce25228a7efe6a0e; focused workflow/provenance, census, health, aggregate, framework, navigation, agent-surface, py_compile, and diff gates passed.","validation_provenance":"Exact integrated H1 host-side checker snapshot passed the authorized focused and full validation gates; no workflow, build, artifact, device, or hardware action was required."},
-      "stop_conditions": ["The activation dependency is absent, drifted, or requires interpretation.", "Any workflow, postprocessor, artifact route, product/runtime, device, or hardware state changes.", "Duplicate JSON identities can still be accepted."],
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "a1225102179639f06bb00a6735987824b85972ae",
+        "reviewed_implementation_sha": "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
+        "prior_canonical_integration_sha": "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "tools/check_glyph_artifact_postprocessor_provenance.py",
+          "tools/check_glyph_artifact_postprocessor_workflow.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer PASS on exact reviewed snapshot 721cd20388c39beefe6b1b85ce25228a7efe6a0e; focused workflow/provenance, census, health, aggregate, framework, navigation, agent-surface, py_compile, and diff gates passed.",
+        "validation_provenance": "Exact integrated H1 host-side checker snapshot passed the authorized focused and full validation gates; no workflow, build, artifact, device, or hardware action was required."
+      },
+      "stop_conditions": [
+        "The activation dependency is absent, drifted, or requires interpretation.",
+        "Any workflow, postprocessor, artifact route, product/runtime, device, or hardware state changes.",
+        "Duplicate JSON identities can still be accepted."
+      ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
@@ -784,14 +998,32 @@ Git, but it is not current candidate supply or implementation authority.
       "behavioral_claim": "This strengthens aggregate selection validation only and does not promote historical checks, change checker semantics, or affect product/runtime behavior.",
       "scope": "After GP-VAL-010 lands, update tools/run_glyph_runtime_config_validation.py and isolated aggregate adversarial fixtures so each explicitly requested category must select at least one current manifest entry; fail the whole request if any requested category is empty. Preserve unfiltered aggregate behavior and all manifest applicability/category classifications.",
       "explicit_excluded_scope": "No historical or unsafe checker promotion/execution, manifest field or blob edit, manifest reclassification, checker semantic edit, workflow, build, runtime, artifact, device, or hardware change.",
-      "touched_planes": ["docs/checkers"],
+      "touched_planes": [
+        "docs/checkers"
+      ],
       "source_authority": "Live configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9. python3 tools/run_glyph_runtime_config_validation.py --category historical_evidence --json still returns exit zero, PASS, and results empty. GP-VAL-010's reviewed runner and aggregate-adversarial blobs remain exact. GP-VAL-013 changed only the manifest source_dependencies of validation_publication_workflow; all category/applicability tuples remain unchanged. Independent successor review confirmed the original whole-manifest binding was literally invalidated while the GP-VAL-012 substantive gap and scope remain unchanged.",
-      "dependencies_prerequisites": ["GP-VAL-010 is canonically DONE with exact command/path/argument correspondence and strict structured completion evidence.", "The manifest category/applicability tuples remain byte-identical to authorization base and all runner/adversarial drift is exactly GP-VAL-010's reviewed implementation."],
+      "dependencies_prerequisites": [
+        "GP-VAL-010 is canonically DONE with exact command/path/argument correspondence and strict structured completion evidence.",
+        "The manifest category/applicability tuples remain byte-identical to authorization base and all runner/adversarial drift is exactly GP-VAL-010's reviewed implementation."
+      ],
       "substantive_authorization_rationale": "The desired fail-closed result is fully resolved; GP-VAL-010 is the only mechanical predecessor because both touch runner validation and adversarial coverage. No classification or product judgment remains.",
-      "mechanical_activation_conditions": ["Live configurator records GP-VAL-010 as DONE with strict completion evidence whose reviewed implementation 6affdecb526b5571e507cf51d62d3b819b2926bb is integrated and whose reviewed changed paths are exactly docs/runtime_config/fixtures/glyph_checker_census.json, tools/check_glyph_runtime_config_validation_aggregate.py, and tools/run_glyph_runtime_config_validation.py.", "At activation, docs/runtime_config/fixtures/runtime_config_validation_manifest.json remains exact rebound blob 82380ccb0205835254a52f3b3edddeedc7ae3124, tools/run_glyph_runtime_config_validation.py remains exact reviewed blob 8914130b76c1615cae45169a800b9414d49c9842, and tools/check_glyph_runtime_config_validation_aggregate.py remains exact reviewed blob cc4114546c4eebbe2b87e03a9d619118b9f3f611; no manifest category or applicability field is changed by implementation.", "The exact live command python3 tools/run_glyph_runtime_config_validation.py --category historical_evidence --json still returns success with an empty results list immediately before activation, proving the authorized gap remains and has not been superseded."],
-      "invalidation_conditions": ["GP-VAL-010 completion evidence or reviewed runner/adversarial blobs differ from the exact rebound identities, or the manifest differs from 82380ccb0205835254a52f3b3edddeedc7ae3124 before implementation.", "Another canonical change already rejects every requested zero-result category, or the exact historical_evidence probe no longer reproduces the gap.", "Implementation would require historical execution, category reclassification, workflow, build, product/runtime, artifact, device, or hardware scope."],
+      "mechanical_activation_conditions": [
+        "Live configurator records GP-VAL-010 as DONE with strict completion evidence whose reviewed implementation 6affdecb526b5571e507cf51d62d3b819b2926bb is integrated and whose reviewed changed paths are exactly docs/runtime_config/fixtures/glyph_checker_census.json, tools/check_glyph_runtime_config_validation_aggregate.py, and tools/run_glyph_runtime_config_validation.py.",
+        "At activation, docs/runtime_config/fixtures/runtime_config_validation_manifest.json remains exact rebound blob 82380ccb0205835254a52f3b3edddeedc7ae3124, tools/run_glyph_runtime_config_validation.py remains exact reviewed blob 8914130b76c1615cae45169a800b9414d49c9842, and tools/check_glyph_runtime_config_validation_aggregate.py remains exact reviewed blob cc4114546c4eebbe2b87e03a9d619118b9f3f611; no manifest category or applicability field is changed by implementation.",
+        "The exact live command python3 tools/run_glyph_runtime_config_validation.py --category historical_evidence --json still returns success with an empty results list immediately before activation, proving the authorized gap remains and has not been superseded."
+      ],
+      "invalidation_conditions": [
+        "GP-VAL-010 completion evidence or reviewed runner/adversarial blobs differ from the exact rebound identities, or the manifest differs from 82380ccb0205835254a52f3b3edddeedc7ae3124 before implementation.",
+        "Another canonical change already rejects every requested zero-result category, or the exact historical_evidence probe no longer reproduces the gap.",
+        "Implementation would require historical execution, category reclassification, workflow, build, product/runtime, artifact, device, or hardware scope."
+      ],
       "authorization_snapshot_provenance": "Independent Curator reauthorization of Planner candidate GP-VAL-012 from planning/portfolio-20260901-0909 commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb, originally reviewed at live base 1977ef0d6ec1a65d02947a0b7dae2675c2e8228c, rebound after explicit manifest-blob invalidation to clean live configurator c3f3438172c8de977d390c9a2fb2c1037262e2a9 on curation/portfolio-20260901-successor-reauthorization. Root and bounded specialists verified GP-VAL-010 ancestry and exact path/blob correspondence, the one-field GP-VAL-013 manifest source-dependency delta, unchanged category/applicability tuples, and the still-reproducing zero-result PASS.",
-      "automated_validation": ["Historical-only, excluded-only, unknown, duplicate, and mixed requests containing any zero-result category fail accurately.", "Every requested nonempty current category executes its exact entries, and unfiltered aggregate still runs every current load-bearing check.", "The runtime-config validation manifest remains exact blob 82380ccb0205835254a52f3b3edddeedc7ae3124 after implementation; no manifest field, category, applicability, or source dependency changes.", "Focused aggregate adversarial, manifest, census, health, full aggregate, framework, sequence, navigation, surface, py_compile, and diff checks pass with independent review."],
+      "automated_validation": [
+        "Historical-only, excluded-only, unknown, duplicate, and mixed requests containing any zero-result category fail accurately.",
+        "Every requested nonempty current category executes its exact entries, and unfiltered aggregate still runs every current load-bearing check.",
+        "The runtime-config validation manifest remains exact blob 82380ccb0205835254a52f3b3edddeedc7ae3124 after implementation; no manifest field, category, applicability, or source dependency changes.",
+        "Focused aggregate adversarial, manifest, census, health, full aggregate, framework, sequence, navigation, surface, py_compile, and diff checks pass with independent review."
+      ],
       "canonical_build": "NOT_REQUIRED: H0 aggregate selection validation only.",
       "expected_artifact": "NOT_APPLICABLE",
       "manual_acceptance": "NOT_REQUIRED",
@@ -801,8 +1033,27 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused repair if valid current category execution regresses; never restore PASS for an explicit empty selection.",
       "status_documentation_updates": "Activate mechanically only after GP-VAL-010 integration and record Done after reviewed publication; preserve all applicability and runtime non-claims.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"6d3c2812a45d4d59caab9699cdcd080bf1d7571f","reviewed_implementation_sha":"c91dad6ac3a4a8629e93179d152b882b862a7fd9","prior_canonical_integration_sha":"c91dad6ac3a4a8629e93179d152b882b862a7fd9","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_runtime_config_validation_aggregate.py","tools/run_glyph_runtime_config_validation.py"],"independent_review_provenance":"Fresh independent Validator Reviewer PASS on exact reviewed snapshot c91dad6ac3a4a8629e93179d152b882b862a7fd9; focused, manifest, census, health, full aggregate, framework, sequence, navigation, agent-surface, py_compile, and diff gates passed.","validation_provenance":"Exact integrated snapshot c91dad6ac3a4a8629e93179d152b882b862a7fd9 passed all authorized GP-VAL-012 checks; no build, artifact, device, or hardware action was required."},
-      "stop_conditions": ["The activation dependency is absent, drifted, or requires interpretation.", "Any historical/unsafe checker is promoted or executed.", "Any runtime-config validation manifest byte or field changes.", "Any manifest classification, workflow, build, product/runtime, artifact, device, or hardware behavior changes."],
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "6d3c2812a45d4d59caab9699cdcd080bf1d7571f",
+        "reviewed_implementation_sha": "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
+        "prior_canonical_integration_sha": "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/run_glyph_runtime_config_validation.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer PASS on exact reviewed snapshot c91dad6ac3a4a8629e93179d152b882b862a7fd9; focused, manifest, census, health, full aggregate, framework, sequence, navigation, agent-surface, py_compile, and diff gates passed.",
+        "validation_provenance": "Exact integrated snapshot c91dad6ac3a4a8629e93179d152b882b862a7fd9 passed all authorized GP-VAL-012 checks; no build, artifact, device, or hardware action was required."
+      },
+      "stop_conditions": [
+        "The activation dependency is absent, drifted, or requires interpretation.",
+        "Any historical/unsafe checker is promoted or executed.",
+        "Any runtime-config validation manifest byte or field changes.",
+        "Any manifest classification, workflow, build, product/runtime, artifact, device, or hardware behavior changes."
+      ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
@@ -870,7 +1121,15 @@ Git, but it is not current candidate supply or implementation authority.
         "implementation_base_sha": "f8610327da8283c914c0e9b478276e67aea0f4bb",
         "reviewed_implementation_sha": "9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db",
         "prior_canonical_integration_sha": "f72bff6fd752f6b3643557743058b3a40888c8d8",
-        "reviewed_changed_paths": ["docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_health.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "docs/runtime_config/runtime_config_validation_health.md", "tools/check_glyph_source_owned_candidate_generation.py", "tools/prepare_source_owned_candidate_branch.py"],
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_source_owned_candidate_generation.py",
+          "tools/prepare_source_owned_candidate_branch.py"
+        ],
         "independent_review_provenance": "Fresh independent reviewer PASS after exact-byte isolation repair; focused, full aggregate, census, health, framework, navigation, agent-surface, syntax, and diff gates passed.",
         "validation_provenance": "Exact feature snapshot 9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db validated before direct-ancestry integration f72bff6fd752f6b3643557743058b3a40888c8d8."
       },
@@ -1109,7 +1368,26 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused lineage packet if evidence cannot be bound without inference; leave glyph_nuker, workflow, artifact contracts, and UNKNOWN claims unchanged.",
       "status_documentation_updates": "Link the bounded lineage record from existing artifact and build-input provenance docs. Update current factual status only for claims directly established by immutable source evidence; retain UNKNOWN otherwise.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"d5050847d3f850951b3f47865dc8a91aedea0834","reviewed_implementation_sha":"2982e4aef11b5da01b65fac706cb81d7068835bf","prior_canonical_integration_sha":"def48ddd72a095f4ea150de9eca9164eed6c32e6","reviewed_changed_paths":["docs/runtime_config/README.md","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/glyph_nuker_source_lineage.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/glyph_nuker_source_lineage.md","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_nuker_source_lineage.py"],"independent_review_provenance":"Fresh repaired-scope review PASS on exact feature tip 2982e4aef11b5da01b65fac706cb81d7068835bf; authorized lineage scope, bounded not-found claims, checker safety, manifest/census consequences, and forbidden-path invariants were preserved.","validation_provenance":"Focused lineage, build-input provenance, postprocessor/workflow, 193-entry census, validation health, full current aggregate, framework, sequence, navigation, surface, diff, and compile checks passed; no binary execution, build, artifact, or device action was performed."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "d5050847d3f850951b3f47865dc8a91aedea0834",
+        "reviewed_implementation_sha": "2982e4aef11b5da01b65fac706cb81d7068835bf",
+        "prior_canonical_integration_sha": "def48ddd72a095f4ea150de9eca9164eed6c32e6",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/glyph_nuker_source_lineage.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/glyph_nuker_source_lineage.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_nuker_source_lineage.py"
+        ],
+        "independent_review_provenance": "Fresh repaired-scope review PASS on exact feature tip 2982e4aef11b5da01b65fac706cb81d7068835bf; authorized lineage scope, bounded not-found claims, checker safety, manifest/census consequences, and forbidden-path invariants were preserved.",
+        "validation_provenance": "Focused lineage, build-input provenance, postprocessor/workflow, 193-entry census, validation health, full current aggregate, framework, sequence, navigation, surface, diff, and compile checks passed; no binary execution, build, artifact, or device action was performed."
+      },
       "stop_conditions": [
         "Binary, workflow, or history drift.",
         "Execution, rebuilding, replacement, or real artifact analysis becomes necessary.",
@@ -1393,7 +1671,11 @@ Git, but it is not current candidate supply or implementation authority.
         "implementation_base_sha": "a40e446c09b3f69e699ad697be3eda874a122f62",
         "reviewed_implementation_sha": "aacff861c7958eefee9fad86e271489ec956ad8e",
         "prior_canonical_integration_sha": "aacff861c7958eefee9fad86e271489ec956ad8e",
-        "reviewed_changed_paths": ["docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "tools/check_glyph_generated_source_owned_baseline_artifact.py"],
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+        ],
         "independent_review_provenance": "Fresh independent publication review PASS on exact feature tip aacff861c7958eefee9fad86e271489ec956ad8e; exact ancestry, authorized scope, active/inert classification correspondence, no runtime/product drift, and publication safety were confirmed.",
         "validation_provenance": "Focused baseline checker, manifest adversarial coverage, 194-entry census, validation health, full runtime-config aggregate, framework, navigation, docs-agent-surface, py_compile, and git diff checks passed on the exact integrated snapshot; no build or hardware was required."
       },
@@ -1536,7 +1818,14 @@ Git, but it is not current candidate supply or implementation authority.
         "implementation_base_sha": "a7bf7dab6980703fd0003b985d05e0e70b2b7468",
         "reviewed_implementation_sha": "a3c554ab5b8ee266bb8c1f789d8d103c7aef2e86",
         "prior_canonical_integration_sha": "a3c554ab5b8ee266bb8c1f789d8d103c7aef2e86",
-        "reviewed_changed_paths": ["docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json", "docs/runtime_config/runtime_config_validation_health.md", "tools/check_glyph_runtime_config_validation_publication_workflow.py"],
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_runtime_config_validation_publication_workflow.py"
+        ],
         "independent_review_provenance": "Fresh independent reviewer PASS on exact feature tip a3c554ab5b8ee266bb8c1f789d8d103c7aef2e86; route census, unresolved external classification, scope, authority, and required static gates were confirmed.",
         "validation_provenance": "Focused publication-workflow checker, manifest and health checks, full runtime-config aggregate, 194-entry census, framework, sequence, navigation, agent-surface, py_compile, and git diff checks passed on the exact reviewed snapshot; no build or hardware was required."
       },
@@ -1602,7 +1891,23 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused health-schema branch if exact current state cannot be represented without duplicate authority or manifest reclassification; never restore acceptance of contradictory or unknown health fields.",
       "status_documentation_updates": "Record GP-VAL-009 as Done only after exact reviewed integration; document schema v3 and retain all manifest completeness, product/runtime, artifact, and hardware non-claims.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"9c0324969a2adbe7d13e611e2f636df6fab4d690","reviewed_implementation_sha":"f466ac50e23ff62ecc0825de44501b30a8f0e23b","prior_canonical_integration_sha":"f466ac50e23ff62ecc0825de44501b30a8f0e23b","reviewed_changed_paths":["docs/agent_framework/SUBAGENT_CONTRACTS.md","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_runtime_config_validation_health.py"],"independent_review_provenance":"Fresh independent reviewer initially required repair for current result/census/manifest path correspondence; repaired-scope review PASS confirmed exact schema, source bindings, adversarial coverage, and forbidden-scope invariants on f466ac50e23ff62ecc0825de44501b30a8f0e23b.","validation_provenance":"Focused health, census, manifest, aggregate adversarial, full 28-check runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build or hardware was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "9c0324969a2adbe7d13e611e2f636df6fab4d690",
+        "reviewed_implementation_sha": "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
+        "prior_canonical_integration_sha": "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_runtime_config_validation_health.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer initially required repair for current result/census/manifest path correspondence; repaired-scope review PASS confirmed exact schema, source bindings, adversarial coverage, and forbidden-scope invariants on f466ac50e23ff62ecc0825de44501b30a8f0e23b.",
+        "validation_provenance": "Focused health, census, manifest, aggregate adversarial, full 28-check runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build or hardware was required."
+      },
       "stop_conditions": [
         "Any manifest entry, exclusion, applicability, branch policy, command, dependency, reason, load-bearing classification, or checker product semantic must change.",
         "Any second exclusion authority or schema ambiguity remains accepted.",
@@ -1663,7 +1968,20 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused checker branch if a valid explicit mode or default contract regresses; never restore aggregate success that omits an advertised packaging layer.",
       "status_documentation_updates": "Record the three existing offline packaging validators as load-bearing through the one default coordinate-native checker route without creating a production export, artifact, runtime, or hardware claim.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"e41e4ea1017b5abde4f17eed1a4bc50404238c75","reviewed_implementation_sha":"7a042fbdd1dc28db8efbd7c59e1730565fe33288","prior_canonical_integration_sha":"7a042fbdd1dc28db8efbd7c59e1730565fe33288","reviewed_changed_paths":["docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_coordinate_native_runtime_profile_contract.py"],"independent_review_provenance":"Fresh independent reviewer PASS on exact feature tip 7a042fbdd1dc28db8efbd7c59e1730565fe33288; specialist follow-up repaired explicit pre-recording and short-circuit assertions, followed by repaired-scope review PASS with no findings.","validation_provenance":"Focused explicit/default packaging routes, census freshness, aggregate adversarial checks, validation health, full runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build or hardware was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "e41e4ea1017b5abde4f17eed1a4bc50404238c75",
+        "reviewed_implementation_sha": "7a042fbdd1dc28db8efbd7c59e1730565fe33288",
+        "prior_canonical_integration_sha": "7a042fbdd1dc28db8efbd7c59e1730565fe33288",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer PASS on exact feature tip 7a042fbdd1dc28db8efbd7c59e1730565fe33288; specialist follow-up repaired explicit pre-recording and short-circuit assertions, followed by repaired-scope review PASS with no findings.",
+        "validation_provenance": "Focused explicit/default packaging routes, census freshness, aggregate adversarial checks, validation health, full runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no build or hardware was required."
+      },
       "stop_conditions": [
         "Any profile, package, artifact, export, or active behavior semantics must be chosen or changed.",
         "Any manifest argument-policy or dependency-contract change is required.",
@@ -1726,7 +2044,27 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused census if exact source/reference correspondence cannot be enforced without evaluating effects; retain every existing build input and all unresolved dependency/reproducibility claims.",
       "status_documentation_updates": "Record only a declared literal non-selector census and its current validation entry; keep complete configuration, PlatformIO/compiler resolution, reproducibility, artifact acceptance, and hardware explicitly unproved.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"0086b388cd230b65e3b9dee0be2e69600b3ae3a0","reviewed_implementation_sha":"26e3ca148df4de6fb9c10806f97204cc17164f52","prior_canonical_integration_sha":"26e3ca148df4de6fb9c10806f97204cc17164f52","reviewed_changed_paths":["docs/agent_framework/SUBAGENT_CONTRACTS.md","docs/runtime_config/build_input_non_selector_configuration.md","docs/runtime_config/fixtures/build_input_non_selector_configuration.json","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_health.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_build_input_non_selector_configuration.py","tools/check_glyph_runtime_config_validation_health.py"],"independent_review_provenance":"Fresh repaired-scope independent reviewer PASS on exact feature tip 26e3ca148df4de6fb9c10806f97204cc17164f52 after prior findings were repaired; source reference expansions, chain_references schema, parser-backed correspondence, non-claims, and manifest/census/health consistency passed.","validation_provenance":"Focused census, checker census, validation health, aggregate adversarial, full runtime-config runner, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed; no build or hardware was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "0086b388cd230b65e3b9dee0be2e69600b3ae3a0",
+        "reviewed_implementation_sha": "26e3ca148df4de6fb9c10806f97204cc17164f52",
+        "prior_canonical_integration_sha": "26e3ca148df4de6fb9c10806f97204cc17164f52",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/build_input_non_selector_configuration.md",
+          "docs/runtime_config/fixtures/build_input_non_selector_configuration.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_build_input_non_selector_configuration.py",
+          "tools/check_glyph_runtime_config_validation_health.py"
+        ],
+        "independent_review_provenance": "Fresh repaired-scope independent reviewer PASS on exact feature tip 26e3ca148df4de6fb9c10806f97204cc17164f52 after prior findings were repaired; source reference expansions, chain_references schema, parser-backed correspondence, non-claims, and manifest/census/health consistency passed.",
+        "validation_provenance": "Focused census, checker census, validation health, aggregate adversarial, full runtime-config runner, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed; no build or hardware was required."
+      },
       "stop_conditions": [
         "Any PlatformIO/compiler behavior, macro effect, source selection, build result, or device meaning would be inferred.",
         "Any dependency, cache, workflow, source, flag, board, frequency, filesystem, upload, or build input would be changed or executed.",
@@ -1790,7 +2128,24 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused metadata-contract branch if current valid entries cannot be represented without overclaiming completeness; never restore acceptance of malformed paths, missing direct helper edges, or invalid policy pairs.",
       "status_documentation_updates": "Document manifest v4's bounded direct-input/helper lower bound and branch-policy classification matrix with explicit dynamic, transitive, semantic, and enforcement non-claims.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"a49117062282efc077417143c325cae3c55bff4e","reviewed_implementation_sha":"e8ab9b86408d1c89f3b35a07949782d9e3c414ff","prior_canonical_integration_sha":"e8ab9b86408d1c89f3b35a07949782d9e3c414ff","reviewed_changed_paths":["docs/agent_framework/SUBAGENT_CONTRACTS.md","docs/runtime_config/fixtures/glyph_checker_census.json","docs/runtime_config/fixtures/runtime_config_validation_manifest.json","docs/runtime_config/runtime_config_validation_health.md","tools/check_glyph_runtime_config_validation_aggregate.py","tools/run_glyph_runtime_config_validation.py"],"independent_review_provenance":"Fresh independent validator review PASS on exact repaired feature tip e8ab9b86408d1c89f3b35a07949782d9e3c414ff; prior policy reclassification finding was repaired and direct dependency path adversarial coverage was expanded.","validation_provenance":"Manifest schema-v4 check, aggregate adversarial suite, 194-entry census, validation health, full 27-check runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no firmware build or hardware was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "a49117062282efc077417143c325cae3c55bff4e",
+        "reviewed_implementation_sha": "e8ab9b86408d1c89f3b35a07949782d9e3c414ff",
+        "prior_canonical_integration_sha": "e8ab9b86408d1c89f3b35a07949782d9e3c414ff",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/run_glyph_runtime_config_validation.py"
+        ],
+        "independent_review_provenance": "Fresh independent validator review PASS on exact repaired feature tip e8ab9b86408d1c89f3b35a07949782d9e3c414ff; prior policy reclassification finding was repaired and direct dependency path adversarial coverage was expanded.",
+        "validation_provenance": "Manifest schema-v4 check, aggregate adversarial suite, 194-entry census, validation health, full 27-check runtime-config aggregate, framework, sequence, navigation, docs-agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no firmware build or hardware was required."
+      },
       "stop_conditions": [
         "Any complete dependency graph, dynamic behavior, or checker branch semantics would be inferred.",
         "Any discovered code must be imported or executed, or tools/glyph_checker_context.py must change.",
@@ -2046,7 +2401,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the focused repair if it mistakes historical/planning prose for current authority; retain the canonical machine block and never restore a checker that accepts contradictory current guidance.",
       "status_documentation_updates": "Record GP-CTL-001 as Done after exact reviewed integration. Reconcile the four delimited current-runway summaries to the queue-derived state; per-item Done/history prose remains outside the current-truth scan and no product or runtime authority changes.",
-      "done_evidence": {"schema_name":"glyph_done_completion_evidence","schema_version":1,"mode":"DIRECT_ANCESTRY","implementation_base_sha":"9ea6c4e4aa23587c540bcd1b36ebd0c2b88b8907","reviewed_implementation_sha":"3e668694f1826ff079b6ecb529d6e3706d8184e7","prior_canonical_integration_sha":"3e668694f1826ff079b6ecb529d6e3706d8184e7","reviewed_changed_paths":["docs/project/ACTIVE_AGENT_QUEUE.md","docs/runtime_config/fixtures/glyph_checker_census.json","tools/check_glyph_agent_framework_docs.py"],"independent_review_provenance":"Fresh independent reviewer PASS after current-prose coverage repair; repaired-scope review PASS confirmed generic claim detection, historical exclusion, and all required gates.","validation_provenance":"Focused framework, sequence, census, full runtime-config aggregate, navigation, agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no firmware build or hardware was required."},
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "9ea6c4e4aa23587c540bcd1b36ebd0c2b88b8907",
+        "reviewed_implementation_sha": "3e668694f1826ff079b6ecb529d6e3706d8184e7",
+        "prior_canonical_integration_sha": "3e668694f1826ff079b6ecb529d6e3706d8184e7",
+        "reviewed_changed_paths": [
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_agent_framework_docs.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer PASS after current-prose coverage repair; repaired-scope review PASS confirmed generic claim detection, historical exclusion, and all required gates.",
+        "validation_provenance": "Focused framework, sequence, census, full runtime-config aggregate, navigation, agent-surface, py_compile, and diff checks passed on the exact integrated snapshot; no firmware build or hardware was required."
+      },
       "stop_conditions": [
         "The implementation would change queue item status, priority, runway target, user direction, or substantive authority rather than only enforce current mirrors.",
         "Parity cannot be enforced generically without weakening machine-state, provenance, concurrency, liveness, or historical-evidence separation.",
@@ -2516,11 +2885,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"GLOBAL_EVIDENCE_WAIT_SUPPORTED","global_evidence_wait_supported":true}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: GLOBAL_EVIDENCE_WAIT_SUPPORTED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2528,15 +2897,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260901-0909` is partially consumed. Follow-up
-Curator review corrected stale post-X1 survivor accounting; `GP-CTL-003`,
-`GP-PROV-008`, `GP-VAL-008`, and `GP-BUILD-001` are completed. Curator now
-authorizes `GP-VAL-011` as bounded aggregate-runner isolation work and
-`GP-PERSIST-001` as evidence-only persistence research. `GP-CONFIG-005` and
-`GP-ART-001` remain user-decision gated and do not support a portfolio-global
-evidence wait. Historical Done items remain canonical evidence but do not
-authorize implementation. A Planner refresh is required because the remaining
-candidate supply cannot fill the target runway without those user decisions.
+Packet `glyph-portfolio-20260907-1256` is `FRESH` at the independently reviewed completed canonical base `4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6`. `GP-VAL-011` and `GP-PERSIST-001` are `DONE` with separate canonical completion correspondence. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, are `USER_DECISION_GATED`; there is no READY, PREAUTHORIZED, mechanically activatable, or hardware-pending work. Independent Curator review accepts a portfolio-global evidence wait with zero effective authorized runway. The target remains four; it creates no authority or quota. Owner direction on a gated lane, new material source/evidence, or a demonstrated independent H0/H1 gap resumes curation/planning. Elapsed time alone supplies no evidence. Historical DONE work does not authorize new implementation.
 
 ## Allowed Statuses
 
@@ -2570,49 +2931,16 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Planner packet `glyph-portfolio-20260901-0909` at
-`3fb785749d8653e91bb8e4b3a73a01be03aaf9cb` was independently reviewed
-against exact live `configurator`
-`1977ef0d6ec1a65d02947a0b7dae2675c2e8228c`. It is
-`PARTIALLY_CONSUMED`. No global wait is supported. A Planner refresh is
-required because the remaining candidate supply cannot fill the target runway
-without the unresolved user decisions.
+Independent source review: [2026-09-07 recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907.md).
 
-- `GP-SRC-006`: authorized H0 structural active-publication checker work.
-- `GP-VAL-013`: authorized H0 executable validation-before-publication repair;
-  the new repair identity preserves historical `GP-VAL-002` completion.
-- `GP-PROV-007`: completed as a reviewed H1 host-side checker repair after
-  `GP-VAL-012`; it preserves historical `GP-PROV-002` completion.
-- `GP-VAL-012`: completed after exact GP-VAL-010 path/blob and current manifest
-  revalidation.
-- `GP-PROV-008`: authorized H0 schema-v2 local-build-entrypoint provenance and
-  immutable historical-object preservation for prior GP-PROV-004 observations;
-  this is the repair successor to completed `GP-PROV-003`.
-- `GP-VAL-011`: authorized as H1 host-side validation work under the exact clean
-  committed disposable-clone, controlled-environment, mutation-proof, and
-  fixed process-tree timeout contract recorded below.
-- `GP-CTL-003`: authorized H0 object-required packet/Curator provenance and
-  structured surviving-supply correspondence.
-- `GP-BUILD-001`: DONE after reviewed `GP-PROV-008` integration and canonical
-  build verification; no hardware action was required.
-- `GP-VAL-008`: DONE as H1 offline regression correspondence for only the
-  exact sole/non-mode X1 subset established by current source and accepted
-  Revision-2 evidence.
-- `GP-PERSIST-001`: authorized as H1 evidence-only research into current
-  `config.bin` persistence and authoritative upstream filesystem behavior. It
-  selects and authorizes no future H3 recovery mechanism or firmware change.
-- `GP-X1-001`: `DONE` and removed from surviving Planner supply. Exact candidate
-  `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
-  `5fadd3d7e82e629fbccd41fac868312b07b01e39d2ef0a0a98a06d649ae28254`
-  received the project owner's direct PASS and entered `configurator` only
-  through exact-candidate integration commit
-  `1597c01b416b6aa697d73efc7d2c2b3695dc3e5c`.
-- `GP-CONFIG-005` and `GP-ART-001`: `USER_DECISION_GATED`; existing
-  backend-write authority and store/custody respectively remain absent.
-- `GP-AUTH-001` remains historical authority provenance; the accepted current
-  sole-`kX1Table` record is the exact hardware-validated offset-41 intake.
-  `GP-CONFIG-002` remains invalidated by user direction. No
-  global evidence wait is proposed or supported.
+Packet `glyph-portfolio-20260907-1256` is `FRESH` at the independently reviewed completed canonical base `4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6`. `GP-VAL-011` and `GP-PERSIST-001` are `DONE` with separate canonical completion correspondence. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, are `USER_DECISION_GATED`; there is no READY, PREAUTHORIZED, mechanically activatable, or hardware-pending work. Independent Curator review accepts a portfolio-global evidence wait with zero effective authorized runway. The target remains four; it creates no authority or quota. Owner direction on a gated lane, new material source/evidence, or a demonstrated independent H0/H1 gap resumes curation/planning. Elapsed time alone supplies no evidence. Historical DONE work does not authorize new implementation.
+
+Planner commit `fc2a0eac5963298de9ff1e2c5b3f86a27d96f056` and immutable Curator receipt `a9b975c5e00d10ae2d13b9f3f25d46a49a7045cb` bind the exact two initial and surviving dispositions.
+
+- `GP-CONFIG-005`: decide whether to authorize preserving prior live Config on every decode/validation/save rejection in the existing custom Glyph/HayBox backend, with disk recovery separately gated, or defer that route. Official configurator interoperability remains retired. Approval requires a later exact H2 staging/reference/publication work order and hardware acceptance; no automatic activation is authorized.
+- `GP-ART-001`: approve prospective durable owner-held local content-addressed custody with explicit retention/access/backup responsibilities, or designate an external store and its access/retention owner. The X1 retrospective local backup remains accepted only for that exact candidate. Resolve prospective custody before the next ordinary H2/H3 hardware handoff. No store or credentials are chosen.
+
+No new independent candidate is promoted. Completed implementation and research history remains in the canonical work orders. Future persistence durability/recovery policy and modifier intent remain separately owner-gated; no H3 mechanism or gameplay semantics is selected. No safe independent precursor identified in the fresh broad audit is left unfinished.
 
 ## Work Orders
 
@@ -2634,3 +2962,39 @@ order, highest first.
 Independent GP-VAL-011 recovery adjudication and the exact rebound contract are
 recorded in `docs/agent_framework/GP_VAL_011_RECOVERY_ADJUDICATION.md`.
 The prior local implementation remains failed, superseded recovery evidence.
+
+## Immutable Curator Receipt
+
+This record becomes effective only when its actual commit is referenced by
+a separately published canonical queue adoption. It contains no self-SHA.
+
+<!-- curator-receipt:start -->
+```json
+{
+  "schema_name": "glyph_curator_packet_receipt",
+  "schema_version": 1,
+  "planning_branch": "planning/portfolio-20260907-1256",
+  "planning_commit": "fc2a0eac5963298de9ff1e2c5b3f86a27d96f056",
+  "packet_id": "glyph-portfolio-20260907-1256",
+  "packet_base_configurator_sha": "4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6",
+  "curation_branch": "curation/portfolio-20260907-1256-review",
+  "initial_reviewed_dispositions": [
+    {
+      "candidate_id": "GP-CONFIG-005",
+      "disposition": "USER_DECISION_GATED"
+    },
+    {
+      "candidate_id": "GP-ART-001",
+      "disposition": "USER_DECISION_GATED"
+    }
+  ],
+  "review_date": "2026-09-07",
+  "global_wait_proposed": true,
+  "global_wait_accepted": true,
+  "planner_broad_audit_provenance": "Fresh broad Planner packet glyph-portfolio-20260907-1256 at immutable fc2a0eac5963298de9ff1e2c5b3f86a27d96f056, direct child of independently live-verified completed configurator 4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6; twelve current source/evidence surfaces audited, exactly two carried owner gates and zero new independent implementation candidates.",
+  "curator_acceptance_provenance": "Independent skeptical Curator review on 2026-09-07 verified live canonical and Planner identities, direct-parent regular packet blob, both recovery implementation/integration/completion ancestries, unchanged firmware/runtime/build/workflow/user/hardware authority, and current backend/custody source. Accept exact two USER_DECISION_GATED survivors and zero authorized runway; completed safe work and preserved superseded failures are accounted for. No new source-grounded independent H0/H1 precursor remains identified; this does not deny possible future defects.",
+  "required_external_evidence": "Recorded project-owner authority for GP-CONFIG-005 existing custom-backend rejection invariant or GP-ART-001 prospective artifact custody; alternatively exact new source-owned modifier intent/ownership or approved current-Config durability requirements. The owner need decide only one lane to resume curation. Official configurator interoperability remains retired.",
+  "resume_event": "A recorded owner decision on one gated lane, new material source/evidence, or an independently demonstrated H0/H1 defect triggers fresh Curator/Planner inspection. No automatic PREAUTHORIZED activation or H2/H3 implementation is authorized. Elapsed time alone does not supply new evidence or invalidate this accepted wait."
+}
+```
+<!-- curator-receipt:end -->

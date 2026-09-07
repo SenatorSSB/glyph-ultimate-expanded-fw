@@ -539,10 +539,80 @@ def _git_tree_entry(commit: str, path: str, label: str, repo_root: Path = REPO_R
     return mode, kind, oid
 
 
+LEGACY_PLANNER_CURATION = (
+    "3fb785749d8653e91bb8e4b3a73a01be03aaf9cb",
+    "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
+)
+CURATOR_RECEIPT_START = "<!-- curator-receipt:start -->"
+CURATOR_RECEIPT_END = "<!-- curator-receipt:end -->"
+WAIT_EVIDENCE_FIELDS = (
+    "planner_broad_audit_provenance", "curator_acceptance_provenance",
+    "required_external_evidence", "resume_event",
+)
+CURATOR_RECEIPT_FIELDS = {
+    "schema_name", "schema_version", "packet_id", "planning_branch",
+    "planning_commit", "packet_base_configurator_sha", "curation_branch",
+    "review_date", "initial_reviewed_dispositions", "global_wait_proposed",
+    "global_wait_accepted", *WAIT_EVIDENCE_FIELDS,
+}
+
+
+def _curator_receipt(
+    planner_packet: dict[str, object], repo_root: Path = REPO_ROOT,
+    published_proposal: bool | None = None,
+) -> dict[str, object] | None:
+    # Only the exact already-accepted historical pair predates receipts.
+    if (planner_packet["planning_commit"], planner_packet["curation_commit"]) == LEGACY_PLANNER_CURATION:
+        return None
+    raw = _git(repo_root, "show", f"{planner_packet['curation_commit']}:docs/project/ACTIVE_AGENT_QUEUE.md")
+    if raw.count(CURATOR_RECEIPT_START) != 1 or raw.count(CURATOR_RECEIPT_END) != 1:
+        fail("new Planner packet requires exactly one immutable Curator receipt")
+    if raw.index(CURATOR_RECEIPT_START) > raw.index(CURATOR_RECEIPT_END):
+        fail("Curator receipt markers are reversed")
+    block = raw.split(CURATOR_RECEIPT_START, 1)[1].split(CURATOR_RECEIPT_END, 1)[0].strip()
+    if not block.startswith("```json\n") or not block.endswith("\n```"):
+        fail("Curator receipt must contain fenced JSON")
+
+    def unique_pairs(pairs: list[tuple[str, object]]) -> dict[str, object]:
+        value: dict[str, object] = {}
+        for key, item in pairs:
+            if key in value:
+                fail("duplicate Curator receipt JSON key")
+            value[key] = item
+        return value
+
+    try:
+        receipt = json.loads(block[len("```json\n"):-len("\n```")], object_pairs_hook=unique_pairs)
+    except json.JSONDecodeError as exc:
+        fail(f"Curator receipt is invalid JSON: {exc}")
+    if not isinstance(receipt, dict) or set(receipt) != CURATOR_RECEIPT_FIELDS:
+        fail("Curator receipt fields do not match the closed contract")
+    if receipt["schema_name"] != "glyph_curator_packet_receipt" or type(receipt["schema_version"]) is not int or receipt["schema_version"] != 1:
+        fail("Curator receipt requires exact schema version 1")
+    provenance = planner_packet["curator_review_provenance"]
+    for key in CURATOR_PROVENANCE_FIELDS - {"curation_commit"}:
+        if receipt[key] != provenance[key]:
+            fail(f"immutable Curator receipt disagrees with {key}")
+    if type(receipt["global_wait_proposed"]) is not bool or type(receipt["global_wait_accepted"]) is not bool:
+        fail("Curator receipt wait fields must be booleans")
+    if published_proposal is not None and receipt["global_wait_proposed"] != published_proposal:
+        fail("Curator receipt proposal disagrees with immutable Planner packet")
+    if receipt["global_wait_accepted"]:
+        if not receipt["global_wait_proposed"]:
+            fail("Curator receipt cannot accept an unproposed wait")
+        for field in WAIT_EVIDENCE_FIELDS:
+            require_nonempty_string(receipt[field], field)
+    elif any(receipt[field] is not None for field in WAIT_EVIDENCE_FIELDS):
+        fail("unaccepted Curator receipt must have null wait evidence")
+    return receipt
+
+
 def _planner_packet_correspondence(
     planner_packet: dict[str, object], packet_state: str, items_raw: object,
     repo_root: Path = REPO_ROOT,
 ) -> int:
+    if type(planner_packet.get("candidate_count")) is not int or planner_packet["candidate_count"] < 0:
+        fail("Planner candidate_count must be an exact nonnegative integer")
     if packet_state == "ABSENT":
         expected = {
             "state", "branch", "base_configurator_sha", "candidate_count",
@@ -595,15 +665,23 @@ def _planner_packet_correspondence(
         "packet_state": "FRESH",
         "planning_branch": planner_packet["branch"],
         "base_configurator_sha": base_sha,
-        "candidate_count": "13",
         "curator_review_required": "true",
-        "global_wait_proposed": "false",
     }
     if any(frontmatter.get(key) != value for key, value in required_frontmatter.items()):
         fail("Planner packet frontmatter does not match the exact queue correspondence")
+    published_count = frontmatter.get("candidate_count", "")
+    if not re.fullmatch(r"0|[1-9][0-9]*", published_count):
+        fail("Planner published candidate_count must be canonical nonnegative decimal")
+    published_wait = frontmatter.get("global_wait_proposed")
+    if published_wait not in {"true", "false"}:
+        fail("Planner published global_wait_proposed must be true or false")
+    if type(planner_packet["global_wait_proposed"]) is not bool:
+        fail("queue global_wait_proposed must be boolean")
+    if packet_state in {"FRESH", "PARTIALLY_CONSUMED"} and planner_packet["global_wait_proposed"] != (published_wait == "true"):
+        fail("current wait proposal disagrees with immutable Planner packet")
     candidate_ids = re.findall(r"^###? +(GP-[A-Z0-9-]+)(?:\s|$)", packet_text, re.MULTILINE)
-    if len(candidate_ids) != len(set(candidate_ids)) or len(candidate_ids) != 13:
-        fail("Planner packet candidate headings must contain exactly thirteen unique candidates")
+    if len(candidate_ids) != len(set(candidate_ids)) or len(candidate_ids) != int(published_count):
+        fail("Planner published count must equal its unique candidate headings")
     candidate_set = set(candidate_ids)
 
     provenance = planner_packet["curator_review_provenance"]
@@ -636,6 +714,7 @@ def _planner_packet_correspondence(
     if seen_initial != candidate_set:
         fail("initial reviewed dispositions must cover the exact packet inventory")
 
+    _curator_receipt(planner_packet, repo_root, published_wait == "true")
     survivors = planner_packet["survivors"]
     if not isinstance(survivors, list) or planner_packet["candidate_count"] != len(survivors):
         fail("Planner candidate_count must be derived from survivors")
@@ -655,6 +734,51 @@ def _planner_packet_correspondence(
             fail("survivors may not be authorized or represented by a current queue item")
         seen_survivors.add(candidate_id)
     return len(survivors)
+
+
+def _validate_global_wait(
+    global_wait: object, planner_packet: dict[str, object], packet_state: str,
+    computed: dict[str, object], signals: list[str], repo_root: Path = REPO_ROOT,
+) -> None:
+    global_wait_proposed = planner_packet["global_wait_proposed"]
+    curator_review_required = planner_packet["curator_review_required"]
+    if not isinstance(global_wait, dict) or not isinstance(global_wait.get("supported"), bool):
+        fail("queue global_evidence_wait must contain boolean supported")
+    if global_wait["supported"]:
+        if packet_state != "FRESH":
+            fail("global evidence wait requires a fresh broad Planner packet")
+        if computed["effective_authorized_runway"] != 0:
+            fail("global evidence wait requires zero effective authorized runway")
+        if computed["invalidated_preauthorized"] or computed["hardware_failed"]:
+            fail("global evidence wait cannot bypass invalidated or failed work")
+        if not global_wait_proposed or curator_review_required:
+            fail("global evidence wait requires a proposed packet accepted by Curator")
+        for field in (
+            "planner_broad_audit_provenance",
+            "curator_acceptance_provenance",
+            "required_external_evidence",
+            "resume_event",
+        ):
+            require_nonempty_string(global_wait.get(field), field)
+        receipt = _curator_receipt(planner_packet, repo_root)
+        if receipt is None or not receipt["global_wait_accepted"]:
+            fail("accepted global wait requires immutable Curator acceptance")
+        for field in WAIT_EVIDENCE_FIELDS:
+            if global_wait[field] != receipt[field]:
+                fail(f"accepted global wait disagrees with immutable receipt: {field}")
+        if "GLOBAL_EVIDENCE_WAIT_SUPPORTED" not in signals:
+            fail("accepted global evidence wait must be reported in queue signals")
+    else:
+        for field in (
+            "planner_broad_audit_provenance",
+            "curator_acceptance_provenance",
+            "required_external_evidence",
+            "resume_event",
+        ):
+            if global_wait.get(field) is not None:
+                fail("unsupported global evidence wait must have null provenance")
+        if packet_state == "FRESH" and not curator_review_required:
+            fail("unaccepted FRESH Planner packet must require Curator review")
 
 
 def check_planner_packet_correspondence_self_test() -> None:
@@ -690,7 +814,19 @@ def check_planner_packet_correspondence_self_test() -> None:
         subprocess.run(["git", "commit", "-qm", "planning"], cwd=repo, check=True)
         planning = _git(repo, "rev-parse", "HEAD").strip()
         subprocess.run(["git", "checkout", "-qb", "curation", base], cwd=repo, check=True)
-        (repo / "docs/project/ACTIVE_AGENT_QUEUE.md").write_text("queue\n", encoding="utf-8")
+        initial = [{"candidate_id": candidate, "disposition": "USER_DECISION_GATED"} for candidate in candidates]
+        receipt = {
+            "schema_name": "glyph_curator_packet_receipt", "schema_version": 1,
+            "packet_id": packet_id, "planning_branch": "planning/portfolio-20260901-0909",
+            "planning_commit": planning, "packet_base_configurator_sha": base,
+            "curation_branch": "curation/fixture", "review_date": "2026-09-01",
+            "initial_reviewed_dispositions": initial,
+            "global_wait_proposed": False, "global_wait_accepted": False,
+            **{field: None for field in WAIT_EVIDENCE_FIELDS},
+        }
+        (repo / "docs/project/ACTIVE_AGENT_QUEUE.md").write_text(
+            CURATOR_RECEIPT_START + "\n```json\n" + json.dumps(receipt) + "\n```\n" + CURATOR_RECEIPT_END + "\n", encoding="utf-8"
+        )
         subprocess.run(["git", "add", "."], cwd=repo, check=True)
         subprocess.run(["git", "commit", "-qm", "curation"], cwd=repo, check=True)
         curation = _git(repo, "rev-parse", "HEAD").strip()
@@ -774,6 +910,152 @@ def check_planner_packet_correspondence_self_test() -> None:
             else:
                 fail(f"{label} synthetic Planner packet was accepted")
     pass_line("Planner/Curator packet object and survivor adversarial cases validate")
+
+
+def check_new_planner_receipt_self_test() -> None:
+    """Exercise new zero/nonzero packets with actual immutable Git receipts."""
+    def expect_failure(label: str, action: object, needle: str) -> None:
+        try:
+            action()
+        except FrameworkDocsError as exc:
+            if needle not in str(exc):
+                fail(f"{label} failed for an unrelated reason: {exc}")
+        else:
+            fail(f"{label} was accepted")
+
+    for count, proposed in ((0, True), (2, True), (1, False)):
+        with tempfile.TemporaryDirectory(prefix="glyph-curator-receipt-") as temp:
+            repo = Path(temp)
+            def git(*args: str) -> str:
+                return _git(repo, *args).strip()
+            git("init", "-q", "-b", "base")
+            git("config", "user.email", "receipt@example.invalid")
+            git("config", "user.name", "Receipt fixture")
+            (repo / "README").write_text("base\n")
+            git("add", "."); git("commit", "-qm", "base")
+            base = git("rev-parse", "HEAD")
+            packet_id = "glyph-portfolio-20260906-1800"
+            branch = "planning/portfolio-20260906-1800"
+            path = "docs/planning/portfolio_20260906_1800.md"
+            candidates = [f"GP-FIXTURE-{i:03d}" for i in range(count)]
+            dispositions = [{"candidate_id": candidate, "disposition": "USER_DECISION_GATED"} for candidate in candidates]
+            packet_text = "```yaml\n" + "\n".join((
+                f"packet_id: {packet_id}", "packet_state: FRESH",
+                f"planning_branch: {branch}", f"base_configurator_sha: {base}",
+                f"candidate_count: {count}", "curator_review_required: true",
+                "global_wait_proposed: " + str(proposed).lower(),
+            )) + "\n```\n" + "\n".join(f"### {candidate} — fixture" for candidate in candidates) + "\n"
+
+            def commit_file(which: str, relative: str, text: str) -> str:
+                git("checkout", "-qB", which, base)
+                target = repo / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(text)
+                git("add", "."); git("commit", "-qm", which)
+                return git("rev-parse", "HEAD")
+
+            planning = commit_file("planning", path, packet_text)
+            receipt = {
+                "schema_name": "glyph_curator_packet_receipt", "schema_version": 1,
+                "packet_id": packet_id, "planning_branch": branch,
+                "planning_commit": planning, "packet_base_configurator_sha": base,
+                "curation_branch": "curation/receipt-fixture", "review_date": "2026-09-06",
+                "initial_reviewed_dispositions": dispositions,
+                "global_wait_proposed": proposed, "global_wait_accepted": proposed,
+                **{field: "exact fixture " + field if proposed else None for field in WAIT_EVIDENCE_FIELDS},
+            }
+            def render(value: dict[str, object]) -> str:
+                return CURATOR_RECEIPT_START + "\n```json\n" + json.dumps(value) + "\n```\n" + CURATOR_RECEIPT_END + "\n"
+            curation = commit_file("curation", "docs/project/ACTIVE_AGENT_QUEUE.md", render(receipt))
+            info = {
+                "state": "FRESH", "branch": branch, "base_configurator_sha": base,
+                "packet_id": packet_id, "packet_path": path,
+                "planning_commit": planning, "curation_commit": curation,
+                "candidate_count": count, "survivors": dispositions,
+                "curator_review_required": False if proposed else True,
+                "global_wait_proposed": proposed, "material_events_since_packet": [],
+                "curator_review_provenance": {
+                    key: receipt[key] for key in CURATOR_PROVENANCE_FIELDS - {"curation_commit"}
+                } | {"curation_commit": curation},
+            }
+            wait = {"supported": proposed, **{field: receipt[field] for field in WAIT_EVIDENCE_FIELDS}}
+            computed = {"effective_authorized_runway": 0, "invalidated_preauthorized": 0, "hardware_failed": 0}
+            signals = ["GLOBAL_EVIDENCE_WAIT_SUPPORTED"] if proposed else ["CURATION_REQUIRED"]
+            if _planner_packet_correspondence(info, "FRESH", [], repo) != count:
+                fail("new packet count did not match its exact initial inventory")
+            _validate_global_wait(wait, info, "FRESH", computed, signals, repo)
+            variant = json.loads(json.dumps(info)); variant["candidate_count"] = bool(count)
+            expect_failure("boolean survivor count", lambda: _planner_packet_correspondence(variant, "FRESH", [], repo), "exact nonnegative integer")
+            if count == 2:
+                variant = json.loads(json.dumps(info)); variant["candidate_count"] = 1; variant["survivors"] = variant["survivors"][:1]
+                if _planner_packet_correspondence(variant, "PARTIALLY_CONSUMED", [], repo) != 1:
+                    fail("initial count was incorrectly equated with survivor count")
+            if not proposed:
+                continue
+            for label, state, values, queue, changed_wait, changed_signals, needle in (
+                ("stale wait", "STALE", computed, info, wait, signals, "fresh broad"),
+                ("consumed wait", "CONSUMED", computed, info, wait, signals, "fresh broad"),
+                ("nonzero runway", "FRESH", {**computed, "effective_authorized_runway": 1}, info, wait, signals, "zero effective"),
+                ("invalidated work", "FRESH", {**computed, "invalidated_preauthorized": 1}, info, wait, signals, "invalidated or failed"),
+                ("failed hardware", "FRESH", {**computed, "hardware_failed": 1}, info, wait, signals, "invalidated or failed"),
+                ("unreviewed wait", "FRESH", computed, {**info, "curator_review_required": True}, wait, signals, "accepted by Curator"),
+                ("changed resume event", "FRESH", computed, info, {**wait, "resume_event": "different"}, signals, "disagrees with immutable receipt"),
+                ("missing wait signal", "FRESH", computed, info, wait, [], "reported in queue signals"),
+            ):
+                expect_failure(label, lambda: _validate_global_wait(changed_wait, queue, state, values, changed_signals, repo), needle)
+            # Every altered receipt is a real direct-base immutable commit, not a mocked parser.
+            bad_receipts = [
+                ("missing receipt", "queue\n", "exactly one"),
+                ("duplicate receipt", render(receipt) + render(receipt), "exactly one"),
+                ("duplicate JSON key", render(receipt).replace('"schema_version": 1', '"schema_version": 1, "schema_version": 1'), "duplicate Curator"),
+                ("unknown receipt field", render({**receipt, "extra": 1}), "closed contract"),
+                ("boolean schema", render({**receipt, "schema_version": True}), "exact schema"),
+                ("wrong packet identity", render({**receipt, "packet_id": "glyph-portfolio-20260101-0000"}), "disagrees with packet_id"),
+                ("wrong source commit", render({**receipt, "planning_commit": base}), "disagrees with planning_commit"),
+                ("wrong base", render({**receipt, "packet_base_configurator_sha": planning}), "disagrees with packet_base_configurator_sha"),
+                ("wrong proposal", render({**receipt, "global_wait_proposed": False, "global_wait_accepted": False, **{field: None for field in WAIT_EVIDENCE_FIELDS}}), "proposal disagrees"),
+                ("missing evidence", render({**receipt, "required_external_evidence": ""}), "required_external_evidence"),
+            ]
+            if count:
+                altered = json.loads(json.dumps(receipt)); altered["initial_reviewed_dispositions"][0]["disposition"] = "READY"
+                bad_receipts.append(("altered judgment", render(altered), "disagrees with initial_reviewed_dispositions"))
+            for label, raw, needle in bad_receipts:
+                bad_sha = commit_file("bad-curation", "docs/project/ACTIVE_AGENT_QUEUE.md", raw)
+                variant = json.loads(json.dumps(info)); variant["curation_commit"] = bad_sha; variant["curator_review_provenance"]["curation_commit"] = bad_sha
+                expect_failure(label, lambda: _planner_packet_correspondence(variant, "FRESH", [], repo), needle)
+            rejected = {**receipt, "global_wait_accepted": False, **{field: None for field in WAIT_EVIDENCE_FIELDS}}
+            bad_sha = commit_file("rejected-curation", "docs/project/ACTIVE_AGENT_QUEUE.md", render(rejected))
+            variant = json.loads(json.dumps(info)); variant["curation_commit"] = bad_sha; variant["curator_review_provenance"]["curation_commit"] = bad_sha
+            _planner_packet_correspondence(variant, "FRESH", [], repo)
+            expect_failure("unaccepted receipt wait", lambda: _validate_global_wait(wait, variant, "FRESH", computed, signals, repo), "immutable Curator acceptance")
+            # Malformed immutable frontmatter cannot be rescued by matching receipt identities.
+            for count_text in ("-1", "1.0", "true", "02", str(count + 1)):
+                text = packet_text.replace(f"candidate_count: {count}", f"candidate_count: {count_text}")
+                bad_planning = commit_file("bad-planning", path, text)
+                matching = {**receipt, "planning_commit": bad_planning}
+                bad_curation = commit_file("matching-curation", "docs/project/ACTIVE_AGENT_QUEUE.md", render(matching))
+                variant = json.loads(json.dumps(info)); variant["planning_commit"] = bad_planning; variant["curation_commit"] = bad_curation
+                variant["curator_review_provenance"].update(planning_commit=bad_planning, curation_commit=bad_curation)
+                expect_failure("invalid immutable count", lambda: _planner_packet_correspondence(variant, "FRESH", [], repo), "published")
+            if count == 2:
+                for label, bad_text, needle in (
+                    ("duplicate candidate heading", packet_text + f"### {candidates[0]} duplicate\n", "unique candidate headings"),
+                    ("missing published count", packet_text.replace(f"candidate_count: {count}\n", ""), "canonical nonnegative decimal"),
+                    ("malformed proposal", packet_text.replace("global_wait_proposed: true", "global_wait_proposed: TRUE"), "must be true or false"),
+                    ("unproposed current wait", packet_text.replace("global_wait_proposed: true", "global_wait_proposed: false"), "current wait proposal disagrees"),
+                ):
+                    bad_planning = commit_file("bad-planning", path, bad_text)
+                    matching = {**receipt, "planning_commit": bad_planning}
+                    bad_curation = commit_file("matching-curation", "docs/project/ACTIVE_AGENT_QUEUE.md", render(matching))
+                    variant = json.loads(json.dumps(info)); variant["planning_commit"] = bad_planning; variant["curation_commit"] = bad_curation
+                    variant["curator_review_provenance"].update(planning_commit=bad_planning, curation_commit=bad_curation)
+                    expect_failure(label, lambda: _planner_packet_correspondence(variant, "FRESH", [], repo), needle)
+                git("checkout", "-q", curation)
+                variant = json.loads(json.dumps(info)); variant["curation_commit"] = base; variant["curator_review_provenance"]["curation_commit"] = base
+                expect_failure("wrong Curator parent", lambda: _planner_packet_correspondence(variant, "FRESH", [], repo), "direct child")
+                git("checkout", "-q", base)
+                expect_failure("Curator not in canonical ancestry", lambda: _planner_packet_correspondence(info, "FRESH", [], repo), "must be an ancestor")
+    pass_line("new zero/nonzero Planner receipts and accepted-wait adversarial cases validate")
 
 
 def require_nonempty_string(value: object, field: str) -> None:
@@ -1705,6 +1987,7 @@ def check_queue_contract() -> None:
     items = [validate_work_order(item) for item in items_raw]
     check_completion_correspondence(payload, items)
     check_planner_packet_correspondence_self_test()
+    check_new_planner_receipt_self_test()
     ids = [item["id"] for item in items]
     if len(ids) != len(set(ids)):
         fail("queue work-order IDs must be unique")
@@ -1756,37 +2039,7 @@ def check_queue_contract() -> None:
     if unknown_signals:
         fail("queue contains unknown signals: " + ", ".join(sorted(unknown_signals)))
     global_wait = payload.get("global_evidence_wait")
-    if not isinstance(global_wait, dict) or not isinstance(global_wait.get("supported"), bool):
-        fail("queue global_evidence_wait must contain boolean supported")
-    if global_wait["supported"]:
-        if packet_state != "FRESH":
-            fail("global evidence wait requires a fresh broad Planner packet")
-        if computed["effective_authorized_runway"] != 0:
-            fail("global evidence wait requires zero effective authorized runway")
-        if computed["invalidated_preauthorized"] or computed["hardware_failed"]:
-            fail("global evidence wait cannot bypass invalidated or failed work")
-        if not global_wait_proposed or curator_review_required:
-            fail("global evidence wait requires a proposed packet accepted by Curator")
-        for field in (
-            "planner_broad_audit_provenance",
-            "curator_acceptance_provenance",
-            "required_external_evidence",
-            "resume_event",
-        ):
-            require_nonempty_string(global_wait.get(field), field)
-        if "GLOBAL_EVIDENCE_WAIT_SUPPORTED" not in signals:
-            fail("accepted global evidence wait must be reported in queue signals")
-    else:
-        for field in (
-            "planner_broad_audit_provenance",
-            "curator_acceptance_provenance",
-            "required_external_evidence",
-            "resume_event",
-        ):
-            if global_wait.get(field) is not None:
-                fail("unsupported global evidence wait must have null provenance")
-        if packet_state == "FRESH" and not curator_review_required:
-            fail("unaccepted FRESH Planner packet must require Curator review")
+    _validate_global_wait(global_wait, planner_packet, packet_state, computed, signals)
 
     expected_liveness = derive_liveness(
         effective_runway=computed["effective_authorized_runway"],
