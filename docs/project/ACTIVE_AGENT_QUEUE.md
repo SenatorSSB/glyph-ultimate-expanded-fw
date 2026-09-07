@@ -19,16 +19,16 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 2,
   "canonical_branch": "configurator",
-  "audit_base_sha": "4174001e39f23d2dcb438c232bb3b4e498d153a4",
+  "audit_base_sha": "a23658d1d2b2e90952de4c62a343de52c386041a",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
-    "state": "STALE",
-    "branch": "planning/portfolio-20260907-1256",
-    "base_configurator_sha": "4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6",
-    "packet_id": "glyph-portfolio-20260907-1256",
-    "packet_path": "docs/planning/portfolio_20260907_1256.md",
-    "planning_commit": "fc2a0eac5963298de9ff1e2c5b3f86a27d96f056",
-    "curation_commit": "a9b975c5e00d10ae2d13b9f3f25d46a49a7045cb",
+    "state": "FRESH",
+    "branch": "planning/portfolio-20260907-1359",
+    "base_configurator_sha": "a23658d1d2b2e90952de4c62a343de52c386041a",
+    "packet_id": "glyph-portfolio-20260907-1359",
+    "packet_path": "docs/planning/portfolio_20260907_1359.md",
+    "planning_commit": "c5ba86af32194055752e790fbeadd6efe1512d59",
+    "curation_commit": "6ea9451fa5e3d122b122eb163846753e26b86b3b",
     "candidate_count": 2,
     "survivors": [
       {
@@ -40,18 +40,15 @@ Git, but it is not current candidate supply or implementation authority.
         "disposition": "USER_DECISION_GATED"
       }
     ],
-    "curator_review_required": false,
+    "curator_review_required": true,
     "global_wait_proposed": false,
-    "material_events_since_packet": [
-      "Final clean main-checkout aggregate at live 31bdbbc83f3129ecb9cbf5bc4ad20e073bdd60a4 failed before checker execution: canonical_fingerprint rejected ignored nested Git directory .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/. Independent source Curator classifies this as an original ignored-path fingerprint implementation bug, not a new checker Git-topology requirement. GP-VAL-011 is reopened READY for the exact bounded directory traversal repair. Previous reviewed implementation/completion evidence remains historical; GP-PERSIST-001 stays DONE. Prior global wait is revoked and Planner packet STALE pending completed repair and fresh material review.",
-      "Failed unmerged ignored-directory repair a0373bde823856c4835bb5aed429d0b402eadd48 passed 41 focused adversarial groups but real clean main full aggregate exhausted 300 seconds around checker 10 with final canonical proof UNAVAILABLE. Initial complete caller fingerprint 205.872 seconds; bounded profile 54.814 of 60 seconds in required opens. Independent Curator stops further implementation: concurrent acquisition/cancellation/proof architecture is not source-determined by current narrow authority. GP-VAL-011 is REVIEW/NONEXECUTABLE with REPAIR_REQUIRED, not READY or DONE; GP-PERSIST-001 remains DONE. Failed branch is preserved, main restored to live 4174001. Fresh Planner/Curator audit must cover this material unresolved repair and may not claim global wait."
-    ],
+    "material_events_since_packet": [],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260907-1256",
-      "planning_commit": "fc2a0eac5963298de9ff1e2c5b3f86a27d96f056",
-      "packet_id": "glyph-portfolio-20260907-1256",
-      "packet_base_configurator_sha": "4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6",
-      "curation_branch": "curation/portfolio-20260907-1256-review",
+      "planning_branch": "planning/portfolio-20260907-1359",
+      "planning_commit": "c5ba86af32194055752e790fbeadd6efe1512d59",
+      "packet_id": "glyph-portfolio-20260907-1359",
+      "packet_base_configurator_sha": "a23658d1d2b2e90952de4c62a343de52c386041a",
+      "curation_branch": "curation/portfolio-20260907-1359-review",
       "initial_reviewed_dispositions": [
         {
           "candidate_id": "GP-CONFIG-005",
@@ -63,7 +60,7 @@ Git, but it is not current candidate supply or implementation authority.
         }
       ],
       "review_date": "2026-09-07",
-      "curation_commit": "a9b975c5e00d10ae2d13b9f3f25d46a49a7045cb"
+      "curation_commit": "6ea9451fa5e3d122b122eb163846753e26b86b3b"
     }
   },
   "completion_correspondence": {
@@ -98,11 +95,10 @@ Git, but it is not current candidate supply or implementation authority.
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
+    "CURATION_REQUIRED",
     "REPAIR_REQUIRED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
-    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -2882,11 +2878,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -2894,7 +2890,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260907-1256` is `STALE` after real main-checkout validation of ignored-directory repair failed the 300-second aggregate budget without final canonical proof. `GP-VAL-011` is `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; no implementation or merge may resume without separately adjudicated complete READY authority. Prior reviewed completion and failed unmerged `a0373bd` are preserved as evidence. `GP-PERSIST-001` remains `DONE`; `GP-CONFIG-005` and `GP-ART-001` remain `USER_DECISION_GATED`. Authorized runway is zero, target four; there is no READY, PREAUTHORIZED or hardware-pending work. Global wait is not supported. `PLANNING_REQUIRED` and `PLANNER_REFRESH_REQUIRED` demand a fresh audit of this unresolved technical repair; no firmware/runtime, build, artifact, device or hardware authority changes.
+Packet `glyph-portfolio-20260907-1359` is `FRESH` at independently reviewed canonical base `a23658d1d2b2e90952de4c62a343de52c386041a`, which includes the stopped repair disposition. `GP-VAL-011` remains `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; the failed unmerged candidate and prior completion are preserved as evidence. No implementation or merge may resume without separate substantive authorization and a complete canonical READY contract. `GP-PERSIST-001` remains `DONE`. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, remain `USER_DECISION_GATED`. READY, PREAUTHORIZED, mechanically activatable and hardware-pending sets are empty; effective runway is zero, target four. The fresh audit and independent Curator review support no global wait while the technical repair remains unresolved. `curator_review_required: true` retains substantive follow-up for the unresolved repair despite recorded initial dispositions. `CURATION_REQUIRED` with `REPAIR_REQUIRED` is the current routing; this fresh packet clears the stale refresh requirement without making work executable.
 
 ## Allowed Statuses
 
@@ -2928,16 +2924,16 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Independent source review: [2026-09-07 recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907.md).
+Independent source review: [fresh non-waiting recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907_1359.md).
 
-Packet `glyph-portfolio-20260907-1256` is `STALE` after real main-checkout validation of ignored-directory repair failed the 300-second aggregate budget without final canonical proof. `GP-VAL-011` is `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; no implementation or merge may resume without separately adjudicated complete READY authority. Prior reviewed completion and failed unmerged `a0373bd` are preserved as evidence. `GP-PERSIST-001` remains `DONE`; `GP-CONFIG-005` and `GP-ART-001` remain `USER_DECISION_GATED`. Authorized runway is zero, target four; there is no READY, PREAUTHORIZED or hardware-pending work. Global wait is not supported. `PLANNING_REQUIRED` and `PLANNER_REFRESH_REQUIRED` demand a fresh audit of this unresolved technical repair; no firmware/runtime, build, artifact, device or hardware authority changes.
+Packet `glyph-portfolio-20260907-1359` is `FRESH` at independently reviewed canonical base `a23658d1d2b2e90952de4c62a343de52c386041a`, which includes the stopped repair disposition. `GP-VAL-011` remains `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; the failed unmerged candidate and prior completion are preserved as evidence. No implementation or merge may resume without separate substantive authorization and a complete canonical READY contract. `GP-PERSIST-001` remains `DONE`. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, remain `USER_DECISION_GATED`. READY, PREAUTHORIZED, mechanically activatable and hardware-pending sets are empty; effective runway is zero, target four. The fresh audit and independent Curator review support no global wait while the technical repair remains unresolved. `curator_review_required: true` retains substantive follow-up for the unresolved repair despite recorded initial dispositions. `CURATION_REQUIRED` with `REPAIR_REQUIRED` is the current routing; this fresh packet clears the stale refresh requirement without making work executable.
 
-Planner commit `fc2a0eac5963298de9ff1e2c5b3f86a27d96f056` and immutable Curator receipt `a9b975c5e00d10ae2d13b9f3f25d46a49a7045cb` bind the exact two initial and surviving dispositions.
+Planner commit `c5ba86af32194055752e790fbeadd6efe1512d59` and immutable Curator receipt `6ea9451fa5e3d122b122eb163846753e26b86b3b` bind the exact two initial and surviving dispositions.
 
 - `GP-CONFIG-005`: decide whether to authorize preserving prior live Config on every decode/validation/save rejection in the existing custom Glyph/HayBox backend, with disk recovery separately gated, or defer that route. Official configurator interoperability remains retired. Approval requires a later exact H2 staging/reference/publication work order and hardware acceptance; no automatic activation is authorized.
 - `GP-ART-001`: approve prospective durable owner-held local content-addressed custody with explicit retention/access/backup responsibilities, or designate an external store and its access/retention owner. The X1 retrospective local backup remains accepted only for that exact candidate. Resolve prospective custody before the next ordinary H2/H3 hardware handoff. No store or credentials are chosen.
 
-No new independent candidate is promoted. Completed implementation and research history remains in the canonical work orders. Future persistence durability/recovery policy and modifier intent remain separately owner-gated; no H3 mechanism or gameplay semantics is selected. That prior wait judgment remains revoked. The exact ignored-directory candidate failed full validation and GP-VAL-011 is now nonexecutable REPAIR_REQUIRED; no replacement or filler research candidate is authorized.
+No new independent candidate is promoted. GP-VAL-011 is the existing stopped technical repair, not a third Planner candidate or completed work. Its observed complete-proof/300-second feasibility failure requires separate substantive architecture/validation authority; no new implementation or filler research precursor is authorized. Future persistence durability/recovery policy and modifier intent remain separately owner-gated; no H3 mechanism or gameplay semantics is selected.
 
 ## Work Orders
 
