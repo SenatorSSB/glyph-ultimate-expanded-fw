@@ -5712,7 +5712,7 @@
       },
       "checker_id": "hardware_artifact_custody",
       "defines_main": true,
-      "file_size_bytes": 4567,
+      "file_size_bytes": 4909,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate_link",
@@ -5723,7 +5723,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 136,
+      "line_count": 145,
       "parse_error": null,
       "path": "tools/check_glyph_hardware_artifact_custody.py",
       "potential_branch_identity_signals": [
@@ -5735,7 +5735,7 @@
       "python_module": "tools.check_glyph_hardware_artifact_custody",
       "referenced_repository_path_prefixes": [],
       "runtime_config_relevance_signals": [],
-      "sha256": "247de7d385ae6049a8190934ba3426f7fc5096012ab50a260b2eeb333e60910e",
+      "sha256": "a0cd18a8c16a8bfd14d158fa7c0b03407709c43816adc17520994dfee63caf98",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
