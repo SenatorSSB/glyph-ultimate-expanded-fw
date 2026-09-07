@@ -182,9 +182,11 @@ H2/H3, after automated validation and independent review:
 - finalize and commit the clean exact candidate source snapshot before build;
 - build that exact candidate Git SHA and record base configurator SHA, exact
   UF2 path, and SHA-256;
-- preserve the exact UF2 at a unique immutable candidate-SHA/artifact-SHA-
-  addressed locator outside mutable .pio output; if no durable store is
-  available, stop BLOCKED_EXTERNAL;
+- preserve the exact UF2 and readback-verify it under the approved owner-held
+  local contract at local_backups/hardware-artifacts/<candidate SHA>/<artifact
+  SHA>/firmware.uf2; missing, unreadable, symlinked or hash-mismatched custody
+  stops before handoff, while absence of an external/cloud store alone does
+  not;
 - push and live-verify the candidate ref pinned at the built source snapshot;
 - publish artifact/handoff metadata and update the canonical queue to
   HARDWARE_TEST_REQUIRED or LOCAL_ACCEPTANCE_PENDING through a separate
@@ -718,6 +720,7 @@ Input must be human-supplied observations/results. Verify all of:
 - immutable candidate-SHA/artifact-SHA-addressed preserved artifact locator;
 - SHA-256 of the retrieved preserved bytes immediately before human update,
   with no rebuild substitution;
+- exact compliance with docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md;
 - controller model/revision without demanding irrelevant sensitive IDs;
 - relevant firmware/profile state, update method, host/platform/adapter;
 - preconditions, every test step, expected and observed result for every step;

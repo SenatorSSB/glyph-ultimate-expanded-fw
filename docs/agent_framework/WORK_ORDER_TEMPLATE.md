@@ -66,8 +66,8 @@ Firmware artifact build path:
 [exact build output path when an H2/H3 artifact exists; otherwise null]
 
 Preserved firmware artifact locator:
-[immutable candidate-SHA/artifact-SHA-addressed locator outside mutable .pio
-output; otherwise null]
+[`local_backups/hardware-artifacts/<full-candidate-git-sha>/<full-artifact-sha256>/firmware.uf2`
+after preserve/readback verification; otherwise null]
 
 Firmware artifact SHA-256:
 [full lowercase digest of preserved exact bytes; otherwise null]

@@ -133,10 +133,11 @@ local remote-tracking refs never substitute for successful live verification.
 - H2/H3 acceptance requires the full candidate Git SHA and SHA-256 of the exact
   tested firmware artifact. A new build or relevant source change invalidates
   affected evidence.
-- Preserve the exact UF2 at an immutable candidate-SHA/artifact-SHA-addressed
-  locator outside mutable `.pio` output and re-hash the retrieved bytes
-  immediately before device update. Never substitute a rebuild; without a
-  durable artifact locator, stop before hardware handoff.
+- Preserve the exact UF2 under the approved owner-held local contract at
+  `local_backups/hardware-artifacts/<candidate SHA>/<artifact SHA>/firmware.uf2`
+  and re-hash those preserved bytes immediately before device update. Never
+  substitute a rebuild. Missing, unreadable, symlinked, or mismatched custody
+  stops before handoff; absence of an external/cloud store alone does not.
 - Prefer at most one dependent H2/H3 candidate awaiting controller testing at
   once. Independent H0/H1 work may continue when it cannot contaminate the
   candidate.

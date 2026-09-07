@@ -482,7 +482,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 145320,
+      "file_size_bytes": 146386,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -542,7 +542,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 3045,
+      "line_count": 3076,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -613,6 +613,7 @@
         "docs/agent_framework/",
         "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
         "docs/agent_framework/CYCLE_STATE_MACHINE.md",
+        "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
         "docs/agent_framework/JUDGE_WATCHDOG_CONTRACT.md",
         "docs/agent_framework/MODEL_ROUTING.md",
@@ -657,7 +658,7 @@
         "docs/test_protocol.md"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "1b6ebeefd35a8529ed9cfb2dd0f86db08de204ad9ac1ec3f2356b4b1300e0503",
+      "sha256": "122406156006c1ef7d900f3bc91d56f43d174f9c7458db580681e134a88327f0",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -760,7 +761,7 @@
       },
       "checker_id": "artifact_postprocessor_provenance",
       "defines_main": true,
-      "file_size_bytes": 14756,
+      "file_size_bytes": 14774,
       "hard_coded_branch_like_strings": [
         "--candidate-sha",
         "args.candidate_sha",
@@ -796,7 +797,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "a52241836991a7df1242e3f4a7091c4e94a9ceaeb76e2a6f72f1212c9fce2961",
+      "sha256": "5a601f8000543cd74c1b580471c1f0b17d1f014a1d9396d7f5baca62924ebc4f",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -3243,7 +3244,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 9666,
+      "file_size_bytes": 9727,
       "hard_coded_branch_like_strings": [
         "branch",
         "branches",
@@ -3256,7 +3257,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 265,
+      "line_count": 266,
       "parse_error": null,
       "path": "tools/check_glyph_docs_navigation.py",
       "potential_branch_identity_signals": [
@@ -3274,6 +3275,7 @@
         "docs/ROADMAP.md",
         "docs/WORKFLOW.md",
         "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
+        "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
         "docs/agent_framework/MODEL_ROUTING.md",
         "docs/agent_framework/README.md",
@@ -3306,7 +3308,7 @@
         "coordinate_native_profile",
         "runtime_config_docs"
       ],
-      "sha256": "8a26d35c2023a34815f0dbcb7260c5f20eb1b97cd58cfc893847cc5f8ebda5e3",
+      "sha256": "40bec39a7ea5ba43510f12f06579da9715006a8a623c15fa92fd50748bac4767",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -5701,6 +5703,60 @@
         "runtime_config": false,
         "source_owned": false,
         "y2_tilt3": true
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "hardware_artifact_custody",
+      "defines_main": true,
+      "file_size_bytes": 6433,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate-repo",
+        "candidate_a",
+        "candidate_b",
+        "candidate_link",
+        "candidate_link.symlink_to",
+        "require_clean_candidate_checkout"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 181,
+      "parse_error": null,
+      "path": "tools/check_glyph_hardware_artifact_custody.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate-repo",
+        "candidate_a",
+        "candidate_b",
+        "candidate_link",
+        "candidate_link.symlink_to",
+        "require_clean_candidate_checkout"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_hardware_artifact_custody",
+      "referenced_repository_path_prefixes": [],
+      "runtime_config_relevance_signals": [],
+      "sha256": "349cf0e5228cdeb3145c79cb1cfb296a8e4f7f94a5a263ef2f6a5d8e51e42f62",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
       }
     },
     {

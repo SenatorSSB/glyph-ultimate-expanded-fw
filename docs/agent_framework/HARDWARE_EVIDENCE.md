@@ -29,14 +29,16 @@ after artifact creation invalidates affected evidence. A failed candidate must
 not enter `configurator`.
 
 The mutable `.pio/build/glyph_mk6/firmware.uf2` output is never a durable test
-artifact. Before handoff, preserve the exact UF2 at a unique immutable
-candidate-SHA/artifact-SHA-addressed locator (for example an approved
-release/CI artifact store). If no durable store is available, stop
-`BLOCKED_EXTERNAL`; a local build path alone is insufficient. Immediately
-before device update, retrieve and re-hash those exact preserved bytes and
-require equality with the recorded SHA-256. A rebuild, even at the same Git
-SHA, is a different artifact unless its bytes independently match; never
-substitute a rebuild for the preserved candidate.
+artifact. Before handoff, preserve the exact UF2 under the approved owner-held
+local content-addressed contract in `HARDWARE_ARTIFACT_CUSTODY.md`; this is the
+repository's immutable candidate-SHA/artifact-SHA-addressed locator:
+`local_backups/hardware-artifacts/<candidate SHA>/<artifact SHA>/firmware.uf2`.
+Absence of an external release/CI/cloud store does not block H2/H3 work when
+that contract passes. Missing, unreadable, symlinked, or hash-mismatched local
+custody stops before handoff. Immediately before device update, re-hash those
+exact preserved bytes and require equality with the recorded SHA-256. A
+rebuild, even at the same Git SHA, is a different artifact unless its bytes
+independently match; never substitute a rebuild for the preserved candidate.
 
 A hardware-result/evidence branch is evidence, not source authority. If it
 contains source modifications, treat them as new source changes requiring

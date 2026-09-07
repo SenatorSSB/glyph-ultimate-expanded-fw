@@ -72,15 +72,15 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-005","GP-ART-001"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-CONFIG-005, GP-ART-001; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is `docs/project/ACTIVE_AGENT_QUEUE.md`.
-  Packet `glyph-portfolio-20260907-1359` is `FRESH` at independently reviewed canonical base `a23658d1d2b2e90952de4c62a343de52c386041a`, which includes the stopped repair disposition. `GP-VAL-011` remains `REVIEW`, explicitly NONEXECUTABLE/REPAIR_REQUIRED; the failed unmerged candidate and prior completion are preserved as evidence. No implementation or merge may resume without separate substantive authorization and a complete canonical READY contract. `GP-PERSIST-001` remains `DONE`. The exact two surviving candidates, `GP-CONFIG-005` and `GP-ART-001`, remain `USER_DECISION_GATED`. READY, PREAUTHORIZED, mechanically activatable and hardware-pending sets are empty; effective runway is zero, target four. The fresh audit and independent Curator review support no global wait while the technical repair remains unresolved. `curator_review_required: true` retains substantive follow-up for the unresolved repair despite recorded initial dispositions. `CURATION_REQUIRED` with `REPAIR_REQUIRED` is the current routing; this fresh packet clears the stale refresh requirement without making work executable.
+  Packet `glyph-portfolio-20260907-1359` is `CONSUMED`: owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and intentionally deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; all failed and historical evidence is preserved, no repair implementation resumed, and `REPAIR_REQUIRED` is no longer current liveness. `GP-PERSIST-001` remains `DONE`. `GP-ART-001` and `GP-CONFIG-005` are complete bounded `READY` work orders pending the custody implementation/completion transition in this run; effective runway is two and primary liveness is `RUNWAY_LOW`. The immutable packet receipt retains its truthful initial dispositions, while current survivors are empty and `curator_review_required` is false. Global wait remains unsupported and no Planner refresh is required while executable work exists.
   Completed implementation history remains in the canonical queue. Bounded
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,

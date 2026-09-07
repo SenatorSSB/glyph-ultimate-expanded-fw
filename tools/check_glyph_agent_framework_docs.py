@@ -19,6 +19,7 @@ REQUIRED_DOCS = (
     "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
     "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
     "docs/agent_framework/HARDWARE_EVIDENCE.md",
+    "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
     "docs/agent_framework/USER_DIRECTION.md",
     "docs/agent_framework/SCHEDULED_TASKS.md",
     "docs/agent_framework/MODEL_ROUTING.md",
@@ -1578,9 +1579,13 @@ def validate_work_order(item: object, evidence_repo_root: Path = REPO_ROOT) -> d
         build_path = item["firmware_artifact_build_path"]
         if locator == build_path or locator.startswith(".pio/") or "/.pio/" in locator:
             fail(f"{status} preserved artifact locator cannot be mutable .pio output")
-        if item["candidate_git_sha"] not in locator or artifact_hash not in locator:
+        expected_locator = (
+            "local_backups/hardware-artifacts/"
+            f"{item['candidate_git_sha']}/{artifact_hash}/firmware.uf2"
+        )
+        if locator != expected_locator:
             fail(
-                f"{status} preserved artifact locator must be addressed by candidate and artifact SHA"
+                f"{status} preserved artifact locator must use the exact approved local custody path"
             )
         if item["hardware_evidence_dependency_satisfied"] is not False and status in {
             "HARDWARE_TEST_REQUIRED",
@@ -2210,7 +2215,8 @@ def check_queue_contract() -> None:
             "candidate_base_configurator_sha": "b" * 40,
             "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
             "preserved_firmware_artifact_locator": (
-                "artifact://" + "a" * 40 + "/" + "c" * 64 + "/firmware.uf2"
+                "local_backups/hardware-artifacts/" + "a" * 40 + "/"
+                + "c" * 64 + "/firmware.uf2"
             ),
             "firmware_artifact_sha256": "c" * 64,
             "hardware_evidence_record": "docs/evidence/test.md",
@@ -2389,7 +2395,7 @@ def check_queue_contract() -> None:
         fail("mutable .pio hardware artifact locator passed validation")
     incomplete_locator = dict(pretest_hardware)
     incomplete_locator["preserved_firmware_artifact_locator"] = (
-        "artifact://" + "a" * 40 + "/firmware.uf2"
+        "local_backups/hardware-artifacts/" + "a" * 40 + "/firmware.uf2"
     )
     try:
         validate_work_order(incomplete_locator, evidence_root)
@@ -2397,6 +2403,31 @@ def check_queue_contract() -> None:
         pass
     else:
         fail("preserved artifact locator without artifact SHA passed validation")
+    for label, locator in (
+        (
+            "wrong custody root",
+            "external/hardware-artifacts/" + "a" * 40 + "/" + "c" * 64
+            + "/firmware.uf2",
+        ),
+        (
+            "extra custody segment",
+            "local_backups/hardware-artifacts/extra/" + "a" * 40 + "/"
+            + "c" * 64 + "/firmware.uf2",
+        ),
+        (
+            "wrong custody filename",
+            "local_backups/hardware-artifacts/" + "a" * 40 + "/"
+            + "c" * 64 + "/rebuilt.uf2",
+        ),
+    ):
+        variant = dict(pretest_hardware)
+        variant["preserved_firmware_artifact_locator"] = locator
+        try:
+            validate_work_order(variant, evidence_root)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail(f"{label} passed hardware work-order validation")
     temp_context.cleanup()
     pass_line("canonical queue, runway counts, and zero-runway liveness validate")
 

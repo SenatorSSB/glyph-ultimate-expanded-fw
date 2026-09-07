@@ -29,7 +29,8 @@ the synthetic-only sidecar shape. A complete record carries:
 - tracked postprocessor path and SHA-256;
 - `purpose: UNKNOWN` and `byte_transformation: UNKNOWN`;
 - `observed_only` source classification; and
-- `immutable_locator: null` until an approved durable store exists.
+- `immutable_locator: null` because this observed-only CI sidecar does not
+  install or verify bytes in the separately approved local custody root.
 
 The synthetic sidecar pins its candidate Git SHA to the observed live
 `configurator` snapshot `7688ee287491ff05898038045f5c1918be09f675`; this is a
@@ -46,7 +47,7 @@ same source identity and observed-only fields before upload. The static
 ordering checker is
 `tools/check_glyph_artifact_postprocessor_workflow.py`.
 
-These commands do not execute `glyph_nuker` in tests, select a durable store,
+These commands do not execute `glyph_nuker` in tests, perform local custody,
 flash a device, or claim hardware acceptance. The workflow sidecar is
 correspondence metadata only; it does not establish artifact acceptance,
 reproducibility, postprocessor purpose/effect, retention, or an immutable
@@ -55,5 +56,5 @@ locator.
 This packet does not create a real build artifact or release in repository
 tests. The bounded `build.yml` CI integration emits the sidecar during a real
 workflow run, but the durable locator remains unresolved, so the exact-
-snapshot hardware gate still requires a future externally preserved
-candidate/artifact pair.
+snapshot hardware gate still requires the workflow output to be separately
+preserved and verified under `HARDWARE_ARTIFACT_CUSTODY.md` before handoff.
