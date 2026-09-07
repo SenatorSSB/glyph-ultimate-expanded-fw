@@ -2634,3 +2634,39 @@ order, highest first.
 Independent GP-VAL-011 recovery adjudication and the exact rebound contract are
 recorded in `docs/agent_framework/GP_VAL_011_RECOVERY_ADJUDICATION.md`.
 The prior local implementation remains failed, superseded recovery evidence.
+
+## Immutable Curator Receipt
+
+This record becomes effective only when its actual commit is referenced by
+a separately published canonical queue adoption. It contains no self-SHA.
+
+<!-- curator-receipt:start -->
+```json
+{
+  "schema_name": "glyph_curator_packet_receipt",
+  "schema_version": 1,
+  "planning_branch": "planning/portfolio-20260907-1256",
+  "planning_commit": "fc2a0eac5963298de9ff1e2c5b3f86a27d96f056",
+  "packet_id": "glyph-portfolio-20260907-1256",
+  "packet_base_configurator_sha": "4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6",
+  "curation_branch": "curation/portfolio-20260907-1256-review",
+  "initial_reviewed_dispositions": [
+    {
+      "candidate_id": "GP-CONFIG-005",
+      "disposition": "USER_DECISION_GATED"
+    },
+    {
+      "candidate_id": "GP-ART-001",
+      "disposition": "USER_DECISION_GATED"
+    }
+  ],
+  "review_date": "2026-09-07",
+  "global_wait_proposed": true,
+  "global_wait_accepted": true,
+  "planner_broad_audit_provenance": "Fresh broad Planner packet glyph-portfolio-20260907-1256 at immutable fc2a0eac5963298de9ff1e2c5b3f86a27d96f056, direct child of independently live-verified completed configurator 4ef7e43f6f4f8b888ad7f10dc2794d9aec48a7e6; twelve current source/evidence surfaces audited, exactly two carried owner gates and zero new independent implementation candidates.",
+  "curator_acceptance_provenance": "Independent skeptical Curator review on 2026-09-07 verified live canonical and Planner identities, direct-parent regular packet blob, both recovery implementation/integration/completion ancestries, unchanged firmware/runtime/build/workflow/user/hardware authority, and current backend/custody source. Accept exact two USER_DECISION_GATED survivors and zero authorized runway; completed safe work and preserved superseded failures are accounted for. No new source-grounded independent H0/H1 precursor remains identified; this does not deny possible future defects.",
+  "required_external_evidence": "Recorded project-owner authority for GP-CONFIG-005 existing custom-backend rejection invariant or GP-ART-001 prospective artifact custody; alternatively exact new source-owned modifier intent/ownership or approved current-Config durability requirements. The owner need decide only one lane to resume curation. Official configurator interoperability remains retired.",
+  "resume_event": "A recorded owner decision on one gated lane, new material source/evidence, or an independently demonstrated H0/H1 defect triggers fresh Curator/Planner inspection. No automatic PREAUTHORIZED activation or H2/H3 implementation is authorized. Elapsed time alone does not supply new evidence or invalidate this accepted wait."
+}
+```
+<!-- curator-receipt:end -->

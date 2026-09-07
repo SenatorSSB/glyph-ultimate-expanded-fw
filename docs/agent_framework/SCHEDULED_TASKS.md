@@ -27,9 +27,10 @@ Recommended cadence if scheduled:
 Every 4 hours, staggered away from Curator
 
 Reason for cadence:
-The audited full current-lane validation takes about 10 seconds and the local
-fallback Glyph build took about 78 seconds, but implementation/review and
-hardware-gate variance dominate. Four hours is a conservative initial
+The historical pre-isolation audit measured the then-current validation lane
+at about 10 seconds, and the local fallback Glyph build at about 78 seconds.
+Those observations are not current isolated-aggregate timing;
+implementation/review and hardware-gate variance dominate. Four hours is a conservative initial
 heartbeat for a shared canonical branch and a stale project with no empirical
 cycle ledger.
 

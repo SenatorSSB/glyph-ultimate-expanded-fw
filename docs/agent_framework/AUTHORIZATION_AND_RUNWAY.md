@@ -153,6 +153,97 @@ changes, or new material evidence appears. Time passage, an unrelated docs
 commit, or a SHA change alone does not make a packet stale. A partially
 consumed packet may remain useful for surviving independent authorized work.
 
+## Immutable Planner And Curator Correspondence
+
+Every new packet uses the canonical packet ID, branch and document path:
+`glyph-portfolio-YYYYMMDD-HHMM`, `planning/portfolio-YYYYMMDD-HHMM`, and
+`docs/planning/portfolio_YYYYMMDD_HHMM.md`. Its published YAML records `FRESH`,
+the exact live base, `curator_review_required: true`, a canonical nonnegative
+decimal `candidate_count`, and `global_wait_proposed: true` or `false`.
+The count equals its unique GP-ID candidate headings; zero is legitimate.
+This immutable initial inventory is distinct from the current queue's count,
+which equals its exact remaining `survivors` list. No fixed target count or
+Planner ranking grants authorization.
+
+Independent Curator judgment requires an immutable receipt in
+`docs/project/ACTIVE_AGENT_QUEUE.md` at the recorded `curation_commit`, outside
+the normal queue-state block. Use exactly one
+`<!-- curator-receipt:start -->` / `<!-- curator-receipt:end -->` pair containing
+one fenced `json` object. Duplicate keys are invalid. The closed receipt fields
+are:
+
+```text
+schema_name: glyph_curator_packet_receipt
+schema_version: integer 1
+packet_id
+planning_branch
+planning_commit
+packet_base_configurator_sha
+curation_branch
+review_date
+initial_reviewed_dispositions
+global_wait_proposed
+global_wait_accepted
+planner_broad_audit_provenance
+curator_acceptance_provenance
+required_external_evidence
+resume_event
+```
+
+Identity, date and initial-disposition fields equal the queue's
+`curator_review_provenance`; the receipt deliberately has no `curation_commit`
+self-reference. Git identities are full immutable commit SHAs. Curation branch
+names begin `curation/`. Initial dispositions are unique
+`candidate_id`/`disposition` objects covering every published candidate, with
+no additions or omissions. Use the queue's closed recorded disposition set:
+`READY`, `PREAUTHORIZED`, `SUBSTANTIVE_DEPENDENCY_GATED`, `EVIDENCE_GATED`,
+`RESEARCH_GATED`, `USER_DECISION_GATED`, or `REPAIR_REAUTHORIZATION`. Rejected
+supply remains rejected provenance and must not be relabeled to enter this set;
+if a packet cannot be adopted within this contract, record the review outcome
+and return to curation/planning instead of inventing executable authority.
+Both wait fields are JSON booleans. The proposal matches the immutable packet.
+Acceptance requires a true proposal and four nonblank provenance/evidence/
+resume strings; otherwise those four fields are null.
+
+Publish without a self-SHA cycle:
+
+1. Verify the exact live canonical base and published Planner object. The
+   Planner commit and the first Curator receipt commit must each be a direct
+   child of that same base. The packet and receipt queue path must be regular
+   non-executable Git `100644` blobs. Independently adjudicate every initial
+   candidate and any global-wait proposal.
+2. Create the receipt commit on the curation branch while preserving the prior
+   canonical queue state. Include directly coupled reviewed governance changes
+   when required. Record its actual immutable SHA; its existence alone does
+   not activate a new canonical queue or wait.
+3. In a later descendant on the same curation branch, record that receipt SHA as both
+   `planner_packet.curation_commit` and provenance `curation_commit`. Adopt the
+   exact Planner identity, initial dispositions, current survivors, freshness,
+   runway and all mirrors. The referenced receipt must be an ancestor of the
+   reviewed adoption HEAD and of the final canonical publication. The receipt
+   and descendant adoption may be reviewed, validated and published/integrated
+   together; a separate live publication between those commits is not required.
+   Run the native framework, sequence, navigation, surface and other affected
+   gates on the final adoption before publication; preserve ordinary independent-
+   review boundaries. This does not relax the separate rule that DONE evidence
+   follows live integration of its reviewed implementation.
+
+Only the exact previously accepted historical pair, Planner
+`3fb785749d8653e91bb8e4b3a73a01be03aaf9cb` and Curator
+`7b6601709b6f7780601ff68c0e8d9df1bf63ad8a`, predates the receipt requirement.
+No name, date, count or other new packet receives that exception.
+
+A supported global wait additionally requires the receipt's explicit
+acceptance and exact equality of its four evidence/provenance/resume strings
+with current `global_evidence_wait`. The current packet must be `FRESH`, with
+no material events, no pending Curator review, zero effective runway and no
+invalidated authorization or failed hardware hidden by the wait. Preserve all
+other queue and primary-liveness rules below. `FRESH` and
+`PARTIALLY_CONSUMED` current proposals match the published proposal;
+`STALE`/`CONSUMED` may clear current proposal or wait without rewriting the
+immutable receipt. A stale or partially consumed packet cannot support a
+current global wait.
+
 ## Zero-Runway Liveness
 
 When effective authorized runway is zero:
