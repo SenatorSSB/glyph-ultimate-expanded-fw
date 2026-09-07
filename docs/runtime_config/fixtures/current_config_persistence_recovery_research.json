@@ -1,0 +1,1524 @@
+{
+  "schema_name": "glyph_current_config_persistence_recovery_research",
+  "schema_version": 1,
+  "work_order": "GP-PERSIST-001",
+  "research_base_commit": "1a4b9311c8f7ae6d7cbf0a8680cd976499112f03",
+  "status": "EVIDENCE_COMPLETE_IMPLEMENTATION_NOT_AUTHORIZED",
+  "selected_recovery_mechanism": null,
+  "repository_sources": [
+    {
+      "id": "HAL/pico/src/core/Persistence.cpp",
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "mode": "100644",
+      "blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+      "sha256": "941cc54f0fb762e6067db338601325d33cf7f980148a59caa1d61f226e140955"
+    },
+    {
+      "id": "HAL/pico/include/core/Persistence.hpp",
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "mode": "100644",
+      "blob": "43cbd3f39b4c9a09ecc855b0f2704b2081a45981",
+      "sha256": "56d8c3281b54a6d8168a7e8d04d31c0c2b20d1c2223b21b77a9a1549460a669d"
+    },
+    {
+      "id": "config/glyph/common/src/config.cpp",
+      "path": "config/glyph/common/src/config.cpp",
+      "mode": "100644",
+      "blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5"
+    },
+    {
+      "id": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "mode": "100644",
+      "blob": "80c8a891bcb7d13b9b072de4a8ec490fa25ceb94",
+      "sha256": "5d4091bc86c46b0d61ce2384e40d36ff19f283d1fe94c1d15148762b18a4942b"
+    },
+    {
+      "id": "HAL/pico/src/comms/backend_init.cpp",
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "mode": "100644",
+      "blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+      "sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea"
+    },
+    {
+      "id": "platformio.ini",
+      "path": "platformio.ini",
+      "mode": "100644",
+      "blob": "4d56f8630c1b12e84cd12f40ce05a4dc71b9362e",
+      "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9"
+    },
+    {
+      "id": "docs/runtime_config/runtime_config_storage_fallback_source_authority.md",
+      "path": "docs/runtime_config/runtime_config_storage_fallback_source_authority.md",
+      "mode": "100644",
+      "blob": "27d0ce05248cbacc3ed5a75215ddf2d2f2a7dd73",
+      "sha256": "14ecb8d78b2289055be655d7ed4121665066fed6e9fcad6ce1c34bbcf840b8c8"
+    },
+    {
+      "id": "docs/runtime_config/runtime_config_storage_fallback_architecture.md",
+      "path": "docs/runtime_config/runtime_config_storage_fallback_architecture.md",
+      "mode": "100644",
+      "blob": "4b47afd874534bb12e286294667f072bf77f4da3",
+      "sha256": "b85bb657596b34e71dc2e497935dde2d57ccb75f8818eb1a3e05cf1584b08215"
+    },
+    {
+      "id": "tools/glyph_runtime_config_storage_simulator.py",
+      "path": "tools/glyph_runtime_config_storage_simulator.py",
+      "mode": "100644",
+      "blob": "902f9d9d0cb972a867e1de58526c95665d757408",
+      "sha256": "e56f32b3717a2c6d17cebbfe387554859ddf22eed9961a03c10adcf7b557282f"
+    }
+  ],
+  "platform_selector": {
+    "path": "platformio.ini",
+    "fragment": "framework-arduinopico@https://github.com/earlephilhower/arduino-pico.git#3.6.3"
+  },
+  "upstream_repositories": [
+    {
+      "repository": "https://github.com/earlephilhower/arduino-pico.git",
+      "commit": "32e74d024e5e3ee5e7ec9593f5a4101641c61897",
+      "tree": "1092683c3dde85659bca81441b1fbd91a2284e86",
+      "method": "HTTPS GitHub Git commit/tree API, immutable raw source SHA-1 object rehash",
+      "lookup_timestamp": "2026-09-06T00:28:49.697580+00:00",
+      "commit_api": "https://api.github.com/repos/earlephilhower/arduino-pico/git/commits/32e74d024e5e3ee5e7ec9593f5a4101641c61897",
+      "id": "arduino_pico",
+      "selector_observation": "refs/tags/3.6.3",
+      "parent_gitlink": null
+    },
+    {
+      "repository": "https://github.com/littlefs-project/littlefs.git",
+      "commit": "6a53d76e90af33f0656333c1db09bd337fa75d23",
+      "tree": "0aaa773e30366b34b36e6a60c9776a0755eb5c3c",
+      "method": "HTTPS GitHub Git commit/tree API, immutable raw source SHA-1 object rehash",
+      "lookup_timestamp": "2026-09-06T00:28:50.014061+00:00",
+      "commit_api": "https://api.github.com/repos/littlefs-project/littlefs/git/commits/6a53d76e90af33f0656333c1db09bd337fa75d23",
+      "id": "littlefs",
+      "selector_observation": null,
+      "parent_gitlink": {
+        "repository": "arduino_pico",
+        "path": "libraries/LittleFS/lib/littlefs",
+        "mode": "160000",
+        "commit": "6a53d76e90af33f0656333c1db09bd337fa75d23"
+      }
+    }
+  ],
+  "upstream_blobs": [
+    {
+      "id": "arduino_pico:.gitmodules",
+      "repository": "arduino_pico",
+      "path": ".gitmodules",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a754388fde16464d414423684b6dd71b86c728ee",
+      "sha256": "786388fac4fb09a1f50f13e1a1c386eb33a0e1db5d8dff609a60b9f301c98e27",
+      "immutable_url": "https://raw.githubusercontent.com/earlephilhower/arduino-pico/32e74d024e5e3ee5e7ec9593f5a4101641c61897/.gitmodules",
+      "lookup_timestamp": "2026-09-06T00:27:10.977803+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "arduino_pico:cores/rp2040/FS.cpp",
+      "repository": "arduino_pico",
+      "path": "cores/rp2040/FS.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8a25e225551473e2af889877b6d4e8d493d86441",
+      "sha256": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50",
+      "immutable_url": "https://raw.githubusercontent.com/earlephilhower/arduino-pico/32e74d024e5e3ee5e7ec9593f5a4101641c61897/cores/rp2040/FS.cpp",
+      "lookup_timestamp": "2026-09-06T00:27:11.187302+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "arduino_pico:cores/rp2040/FS.h",
+      "repository": "arduino_pico",
+      "path": "cores/rp2040/FS.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0ea617aaa8ca548735df335ef4ac686655167617",
+      "sha256": "c188a6b49d593855d839162dd112c6a81ef4142dd5da82d59dcb983916521763",
+      "immutable_url": "https://raw.githubusercontent.com/earlephilhower/arduino-pico/32e74d024e5e3ee5e7ec9593f5a4101641c61897/cores/rp2040/FS.h",
+      "lookup_timestamp": "2026-09-06T00:27:11.407780+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.cpp",
+      "repository": "arduino_pico",
+      "path": "libraries/LittleFS/src/LittleFS.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a6299da36aa62fd0d628ce17d2a25e611e3b9a24",
+      "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+      "immutable_url": "https://raw.githubusercontent.com/earlephilhower/arduino-pico/32e74d024e5e3ee5e7ec9593f5a4101641c61897/libraries/LittleFS/src/LittleFS.cpp",
+      "lookup_timestamp": "2026-09-06T00:27:11.633413+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+      "repository": "arduino_pico",
+      "path": "libraries/LittleFS/src/LittleFS.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "53e8637b3675a13ede044ddc513a79658ea3f373",
+      "sha256": "6036f92f824ee8257da051ed37fe01e7dfdedece33c772ae6321036dc0f412f9",
+      "immutable_url": "https://raw.githubusercontent.com/earlephilhower/arduino-pico/32e74d024e5e3ee5e7ec9593f5a4101641c61897/libraries/LittleFS/src/LittleFS.h",
+      "lookup_timestamp": "2026-09-06T00:27:11.977378+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/lfs.c",
+      "repository": "arduino_pico",
+      "path": "libraries/LittleFS/src/lfs.c",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "63bebe1965d127bb220db7a520e06de3c107391b",
+      "sha256": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e",
+      "immutable_url": "https://raw.githubusercontent.com/earlephilhower/arduino-pico/32e74d024e5e3ee5e7ec9593f5a4101641c61897/libraries/LittleFS/src/lfs.c",
+      "lookup_timestamp": "2026-09-06T00:27:12.280711+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:DESIGN.md",
+      "repository": "littlefs",
+      "path": "DESIGN.md",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1d02ba3bfcc37303fe3251acf3047fa2974fc498",
+      "sha256": "80d3311b045d2c3555d0ba64bbbbfd8f5742db1d3ca082c915fc922c28108649",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/DESIGN.md",
+      "lookup_timestamp": "2026-09-06T00:28:01.817339+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:README.md",
+      "repository": "littlefs",
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "32b3793f37360e2c467dd929f07c162ccf1ce6d4",
+      "sha256": "411841c4ef6a58f97bc2628ff33147f7ef320eea6ba9af32f4f09fd371cc3f18",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/README.md",
+      "lookup_timestamp": "2026-09-06T00:28:02.029931+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:SPEC.md",
+      "repository": "littlefs",
+      "path": "SPEC.md",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3663ea54425f9054196dcd9b42ab205726078f5e",
+      "sha256": "b8201b4b4ea66ff0ae9b487a4aecb6c47f43af658f5d61f5e180a61f7c3b7514",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/SPEC.md",
+      "lookup_timestamp": "2026-09-06T00:28:02.276812+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:bd/lfs_testbd.c",
+      "repository": "littlefs",
+      "path": "bd/lfs_testbd.c",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1f0877d43aa0c20d08ff94ccf090a79b5d1db7d5",
+      "sha256": "ccdfd0740fee110d54ac0606948d5625be87aae79eef9c745d3d74282b9c7fed",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/bd/lfs_testbd.c",
+      "lookup_timestamp": "2026-09-06T00:28:02.509258+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:bd/lfs_testbd.h",
+      "repository": "littlefs",
+      "path": "bd/lfs_testbd.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "61679e5e026aecfe2981efb918102e9a09b80b74",
+      "sha256": "8a9731c0cf3898e12ea4d5aeeb94305c5a3d357684a7cf783545e12131daebce",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/bd/lfs_testbd.h",
+      "lookup_timestamp": "2026-09-06T00:28:02.729375+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:lfs.c",
+      "repository": "littlefs",
+      "path": "lfs.c",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "26280fa89509bb4f94ced008ac02cd60b5c2cff8",
+      "sha256": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/lfs.c",
+      "lookup_timestamp": "2026-09-06T00:28:03.022623+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:lfs.h",
+      "repository": "littlefs",
+      "path": "lfs.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2bce17f5ccb91236341f30994c1b8ff42fc06872",
+      "sha256": "bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/lfs.h",
+      "lookup_timestamp": "2026-09-06T00:28:03.269613+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:tests/test_files.toml",
+      "repository": "littlefs",
+      "path": "tests/test_files.toml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "565e665bc9f999554d12dfe29b43926b56d870aa",
+      "sha256": "805100143ddd894b916b133e511a877c04adbfeb6b77557bfa632e26217716ac",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/tests/test_files.toml",
+      "lookup_timestamp": "2026-09-06T00:28:03.560264+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    },
+    {
+      "id": "littlefs:tests/test_move.toml",
+      "repository": "littlefs",
+      "path": "tests/test_move.toml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bb3b713f1013ac79e50c0f12aa1442477f21e3f0",
+      "sha256": "c47a85c4aba4a23bcb81d6c2db54583b011d79982138e4c452aaf8173663de92",
+      "immutable_url": "https://raw.githubusercontent.com/littlefs-project/littlefs/6a53d76e90af33f0656333c1db09bd337fa75d23/tests/test_move.toml",
+      "lookup_timestamp": "2026-09-06T00:28:03.782300+00:00",
+      "lookup_method": "HTTPS immutable raw source; Git blob SHA-1 and SHA-256 recomputed"
+    }
+  ],
+  "upstream_excerpts": [
+    {
+      "id": "arduino_pico:.gitmodules:10",
+      "blob": "arduino_pico:.gitmodules",
+      "line_start": 10,
+      "line_end": 12,
+      "text": "[submodule \"libraries/LittleFS/lib/littlefs\"]\n\tpath = libraries/LittleFS/lib/littlefs\n\turl = https://github.com/littlefs-project/littlefs.git\n"
+    },
+    {
+      "id": "arduino_pico:cores/rp2040/FS.cpp:60",
+      "blob": "arduino_pico:cores/rp2040/FS.cpp",
+      "line_start": 60,
+      "line_end": 79,
+      "text": "\nint File::read() {\n    if (!_p) {\n        return -1;\n    }\n\n    uint8_t result;\n    if (_p->read(&result, 1) != 1) {\n        return -1;\n    }\n\n    return result;\n}\n\nint File::read(uint8_t* buf, size_t size) {\n    if (!_p) {\n        return 0;\n    }\n\n    return _p->read(buf, size);\n"
+    },
+    {
+      "id": "arduino_pico:cores/rp2040/FS.cpp:125",
+      "blob": "arduino_pico:cores/rp2040/FS.cpp",
+      "line_start": 125,
+      "line_end": 131,
+      "text": "void File::close() {\n    if (_p) {\n        _p->close();\n        _p = nullptr;\n    }\n}\n\n"
+    },
+    {
+      "id": "arduino_pico:cores/rp2040/FS.cpp:481",
+      "blob": "arduino_pico:cores/rp2040/FS.cpp",
+      "line_start": 481,
+      "line_end": 509,
+      "text": "static bool sflags(const char* mode, OpenMode& om, AccessMode& am) {\n    switch (mode[0]) {\n    case 'r':\n        am = AM_READ;\n        om = OM_DEFAULT;\n        break;\n    case 'w':\n        am = AM_WRITE;\n        om = (OpenMode)(OM_CREATE | OM_TRUNCATE);\n        break;\n    case 'a':\n        am = AM_WRITE;\n        om = (OpenMode)(OM_CREATE | OM_APPEND);\n        break;\n    default:\n        return false;\n    }\n    switch (mode[1]) {\n    case '+':\n        am = (AccessMode)(AM_WRITE | AM_READ);\n        break;\n    case 0:\n        break;\n    default:\n        return false;\n    }\n    return true;\n}\n\n"
+    },
+    {
+      "id": "arduino_pico:cores/rp2040/FS.h:70",
+      "blob": "arduino_pico:cores/rp2040/FS.h",
+      "line_start": 70,
+      "line_end": 100,
+      "text": "    int read(uint8_t* buf, size_t size);\n    bool seek(uint32_t pos, SeekMode mode);\n    bool seek(uint32_t pos) {\n        return seek(pos, SeekSet);\n    }\n    size_t position() const;\n    size_t size() const;\n    virtual ssize_t streamRemaining() {\n        return (ssize_t)size() - (ssize_t)position();\n    }\n    void close();\n    operator bool() const;\n    const char* name() const;\n    const char* fullName() const; // Includes path\n    bool truncate(uint32_t size);\n\n    bool isFile() const;\n    bool isDirectory() const;\n\n    // Arduino \"class SD\" methods for compatibility\n    //TODO use stream::send / check read(buf,size) result\n    template<typename T> size_t write(T &src) {\n        uint8_t obuf[256];\n        size_t doneLen = 0;\n        size_t sentLen;\n\n        while ((size_t)src.available() > sizeof(obuf)) {\n            src.read(obuf, sizeof(obuf));\n            sentLen = write(obuf, sizeof(obuf));\n            doneLen = doneLen + sentLen;\n            if (sentLen != sizeof(obuf)) {\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.cpp:44",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.cpp",
+      "line_start": 44,
+      "line_end": 104,
+      "text": "FileImplPtr LittleFSImpl::open(const char* path, OpenMode openMode, AccessMode accessMode) {\n    if (!_mounted) {\n        DEBUGV(\"LittleFSImpl::open() called on unmounted FS\\n\");\n        return FileImplPtr();\n    }\n    if (!path || !path[0]) {\n        DEBUGV(\"LittleFSImpl::open() called with invalid filename\\n\");\n        return FileImplPtr();\n    }\n    if (!LittleFSImpl::pathValid(path)) {\n        DEBUGV(\"LittleFSImpl::open() called with too long filename\\n\");\n        return FileImplPtr();\n    }\n\n    int flags = _getFlags(openMode, accessMode);\n    auto fd = std::make_shared<lfs_file_t>();\n\n    if ((openMode & OM_CREATE) && strchr(path, '/')) {\n        // For file creation, silently make subdirs as needed.  If any fail,\n        // it will be caught by the real file open later on\n        char *pathStr = strdup(path);\n        if (pathStr) {\n            // Make dirs up to the final fnamepart\n            char *ptr = strchr(pathStr, '/');\n            while (ptr) {\n                *ptr = 0;\n                lfs_mkdir(&_lfs, pathStr);\n                *ptr = '/';\n                ptr = strchr(ptr + 1, '/');\n            }\n        }\n        free(pathStr);\n    }\n\n    time_t creation = 0;\n    if (_timeCallback && (openMode & OM_CREATE)) {\n        // O_CREATE means we *may* make the file, but not if it already exists.\n        // See if it exists, and only if not update the creation time\n        int rc = lfs_file_open(&_lfs, fd.get(), path, LFS_O_RDONLY);\n        if (rc == 0) {\n            lfs_file_close(&_lfs, fd.get()); // It exists, don't update create time\n        } else {\n            creation = _timeCallback();  // File didn't exist or otherwise, so we're going to create this time\n        }\n    }\n\n    int rc = lfs_file_open(&_lfs, fd.get(), path, flags);\n    if (rc == LFS_ERR_ISDIR) {\n        // To support the SD.openNextFile, a null FD indicates to the LittleFSFile this is just\n        // a directory whose name we are carrying around but which cannot be read or written\n        return std::make_shared<LittleFSFileImpl>(this, path, nullptr, flags, creation);\n    } else if (rc == 0) {\n        lfs_file_sync(&_lfs, fd.get());\n        return std::make_shared<LittleFSFileImpl>(this, path, fd, flags, creation);\n    } else {\n        DEBUGV(\"LittleFSDirImpl::openFile: rc=%d fd=%p path=`%s` openMode=%d accessMode=%d err=%d\\n\",\n               rc, fd.get(), path, openMode, accessMode, rc);\n        return FileImplPtr();\n    }\n}\n\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.cpp:173",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.cpp",
+      "line_start": 173,
+      "line_end": 215,
+      "text": "int LittleFSImpl::lfs_flash_read(const struct lfs_config *c,\n                                 lfs_block_t block, lfs_off_t off, void *dst, lfs_size_t size) {\n    LittleFSImpl *me = reinterpret_cast<LittleFSImpl*>(c->context);\n    //    Serial.printf(\" READ: %p, %d\\n\", me->_start + (block * me->_blockSize) + off, size);\n    memcpy(dst, me->_start + (block * me->_blockSize) + off, size);\n    return 0;\n}\n\nint LittleFSImpl::lfs_flash_prog(const struct lfs_config *c,\n                                 lfs_block_t block, lfs_off_t off, const void *buffer, lfs_size_t size) {\n    LittleFSImpl *me = reinterpret_cast<LittleFSImpl*>(c->context);\n    uint8_t *addr = me->_start + (block * me->_blockSize) + off;\n    noInterrupts();\n    rp2040.idleOtherCore();\n    //    Serial.printf(\"WRITE: %p, $d\\n\", (intptr_t)addr - (intptr_t)XIP_BASE, size);\n    flash_range_program((intptr_t)addr - (intptr_t)XIP_BASE, (const uint8_t *)buffer, size);\n    rp2040.resumeOtherCore();\n    interrupts();\n    return 0;\n}\n\nint LittleFSImpl::lfs_flash_erase(const struct lfs_config *c, lfs_block_t block) {\n    LittleFSImpl *me = reinterpret_cast<LittleFSImpl*>(c->context);\n    uint8_t *addr = me->_start + (block * me->_blockSize);\n    //    Serial.printf(\"ERASE: %p, %d\\n\", (intptr_t)addr - (intptr_t)XIP_BASE, me->_blockSize);\n    noInterrupts();\n    rp2040.idleOtherCore();\n    flash_range_erase((intptr_t)addr - (intptr_t)XIP_BASE, me->_blockSize);\n    rp2040.resumeOtherCore();\n    interrupts();\n    return 0;\n}\n\nint LittleFSImpl::lfs_flash_sync(const struct lfs_config *c) {\n    /* NOOP */\n    (void) c;\n    return 0;\n}\n\n\n}; // namespace\n\nFS LittleFS = FS(FSImplPtr(new littlefs_impl::LittleFSImpl(&_FS_start, &_FS_end - &_FS_start, 256, 4096, 16)));\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.h:40",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+      "line_start": 40,
+      "line_end": 70,
+      "text": "class LittleFSDirImpl;\n\nclass LittleFSConfig : public FSConfig {\npublic:\n    static constexpr uint32_t FSId = 0x4c495454;\n    LittleFSConfig(bool autoFormat = true) : FSConfig(FSId, autoFormat) { }\n};\n\nclass LittleFSImpl : public FSImpl {\npublic:\n    LittleFSImpl(uint8_t *start, uint32_t size, uint32_t pageSize, uint32_t blockSize, uint32_t maxOpenFds)\n        : _start(start), _size(size), _pageSize(pageSize), _blockSize(blockSize), _maxOpenFds(maxOpenFds),\n          _mounted(false) {\n        memset(&_lfs, 0, sizeof(_lfs));\n        memset(&_lfs_cfg, 0, sizeof(_lfs_cfg));\n        _lfs_cfg.context = (void*) this;\n        _lfs_cfg.read = lfs_flash_read;\n        _lfs_cfg.prog = lfs_flash_prog;\n        _lfs_cfg.erase = lfs_flash_erase;\n        _lfs_cfg.sync = lfs_flash_sync;\n        _lfs_cfg.read_size = 256;\n        _lfs_cfg.prog_size = 256;\n        _lfs_cfg.block_size =  _blockSize;\n        _lfs_cfg.block_count = _blockSize ? _size / _blockSize : 0;\n        _lfs_cfg.block_cycles = 16; // TODO - need better explanation\n        _lfs_cfg.cache_size = 256;\n        _lfs_cfg.lookahead_size = 256;\n        _lfs_cfg.read_buffer = nullptr;\n        _lfs_cfg.prog_buffer = nullptr;\n        _lfs_cfg.lookahead_buffer = nullptr;\n        _lfs_cfg.name_max = 0;\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.h:93",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+      "line_start": 93,
+      "line_end": 106,
+      "text": "    bool rename(const char* pathFrom, const char* pathTo) override {\n        if (!_mounted || !pathFrom || !pathFrom[0] || !pathTo || !pathTo[0]) {\n            return false;\n        }\n        int rc = lfs_rename(&_lfs, pathFrom, pathTo);\n        if (rc != 0) {\n            DEBUGV(\"lfs_rename: rc=%d, from=`%s`, to=`%s`\\n\", rc, pathFrom, pathTo);\n            return false;\n        }\n        return true;\n    }\n\n    bool info(FSInfo& info) override {\n        if (!_mounted) {\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.h:175",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+      "line_start": 175,
+      "line_end": 195,
+      "text": "    bool begin() override {\n        if (_mounted) {\n            return true;\n        }\n        if (_size <= 0) {\n            DEBUGV(\"LittleFS size is <= zero\");\n            return false;\n        }\n        if (_tryMount()) {\n            return true;\n        }\n        if (!_cfg._autoFormat || !format()) {\n            return false;\n        }\n        return _tryMount();\n    }\n\n    void end() override {\n        if (!_mounted) {\n            return;\n        }\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.h:288",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+      "line_start": 288,
+      "line_end": 321,
+      "text": "    static int _getFlags(OpenMode openMode, AccessMode accessMode) {\n        int mode = 0;\n        if (openMode & OM_CREATE) {\n            mode |= LFS_O_CREAT;\n        }\n        if (openMode & OM_APPEND) {\n            mode |= LFS_O_APPEND;\n        }\n        if (openMode & OM_TRUNCATE) {\n            mode |= LFS_O_TRUNC;\n        }\n        if (accessMode & AM_READ) {\n            mode |= LFS_O_RDONLY;\n        }\n        if (accessMode & AM_WRITE) {\n            mode |= LFS_O_WRONLY;\n        }\n        return mode;\n    }\n\n    // Check that no components of path beyond max len\n    static bool pathValid(const char *path) {\n        while (*path) {\n            const char *slash = strchr(path, '/');\n            if (!slash) {\n                if (strlen(path) >= LFS_NAME_MAX) {\n                    // Terminal filename is too long\n                    return false;\n                }\n                break;\n            }\n            if ((slash - path) >= LFS_NAME_MAX) {\n                // This subdir name too long\n                return false;\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.h:362",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+      "line_start": 362,
+      "line_end": 418,
+      "text": "    }\n\n    size_t write(const uint8_t *buf, size_t size) override {\n        if (!_opened || !_fd || !buf) {\n            return 0;\n        }\n        int result = lfs_file_write(_fs->getFS(), _getFD(), (void*) buf, size);\n        if (result < 0) {\n            DEBUGV(\"lfs_write rc=%d\\n\", result);\n            return 0;\n        }\n        return result;\n    }\n\n    int read(uint8_t* buf, size_t size) override {\n        if (!_opened || !_fd | !buf) {\n            return 0;\n        }\n        int result = lfs_file_read(_fs->getFS(), _getFD(), (void*) buf, size);\n        if (result < 0) {\n            DEBUGV(\"lfs_read rc=%d\\n\", result);\n            return 0;\n        }\n\n        return result;\n    }\n\n    void flush() override {\n        if (!_opened || !_fd) {\n            return;\n        }\n        int rc = lfs_file_sync(_fs->getFS(), _getFD());\n        if (rc < 0) {\n            DEBUGV(\"lfs_file_sync rc=%d\\n\", rc);\n        }\n    }\n\n    bool seek(uint32_t pos, SeekMode mode) override {\n        if (!_opened || !_fd) {\n            return false;\n        }\n        int32_t offset = static_cast<int32_t>(pos);\n        if (mode == SeekEnd) {\n            offset = -offset; // TODO - this seems like its plain wrong vs. POSIX\n        }\n        auto lastPos = position();\n        int rc = lfs_file_seek(_fs->getFS(), _getFD(), offset, (int)mode); // NB. SeekMode === LFS_SEEK_TYPES\n        if (rc < 0) {\n            DEBUGV(\"lfs_file_seek rc=%d\\n\", rc);\n            return false;\n        }\n        if (position() > size()) {\n            seek(lastPos, SeekSet); // Pretend the seek() never happened\n            return false;\n        }\n        return true;\n    }\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/LittleFS.h:449",
+      "blob": "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+      "line_start": 449,
+      "line_end": 470,
+      "text": "    void close() override {\n        if (_opened && _fd) {\n            lfs_file_close(_fs->getFS(), _getFD());\n            _opened = false;\n            DEBUGV(\"lfs_file_close: fd=%p\\n\", _getFD());\n            if (_timeCallback && (_flags & LFS_O_WRONLY)) {\n                // If the file opened with O_CREAT, write the creation time attribute\n                if (_creation) {\n                    int rc = lfs_setattr(_fs->getFS(), _name.get(), 'c', (const void *)&_creation, sizeof(_creation));\n                    if (rc < 0) {\n                        DEBUGV(\"Unable to set creation time on '%s' to %lld\\n\", _name.get(), _creation);\n                    }\n                }\n                // Add metadata with last write time\n                time_t now = _timeCallback();\n                int rc = lfs_setattr(_fs->getFS(), _name.get(), 't', (const void *)&now, sizeof(now));\n                if (rc < 0) {\n                    DEBUGV(\"Unable to set last write time on '%s' to %lld\\n\", _name.get(), now);\n                }\n            }\n        }\n    }\n"
+    },
+    {
+      "id": "arduino_pico:libraries/LittleFS/src/lfs.c:1",
+      "blob": "arduino_pico:libraries/LittleFS/src/lfs.c",
+      "line_start": 1,
+      "line_end": 10,
+      "text": "// Can't place library in the src/ directory, Arduino will attempt to build the tests/etc.\n// Just have a stub here that redirects to the actual source file\n\n#pragma GCC diagnostic ignored \"-Wmissing-field-initializers\"\n#define LFS_NAME_MAX 32\n#define LFS_NO_DEBUG\n#define LFS_NO_WARN\n#define LFS_NO_ERROR\n\n#include \"../lib/littlefs/lfs.c\"\n"
+    },
+    {
+      "id": "littlefs:DESIGN.md:1",
+      "blob": "littlefs:DESIGN.md",
+      "line_start": 1,
+      "line_end": 24,
+      "text": "## The design of littlefs\n\nA little fail-safe filesystem designed for microcontrollers.\n\n```\n   | | |     .---._____\n  .-----.   |          |\n--|o    |---| littlefs |\n--|     |---|          |\n  '-----'   '----------'\n   | | |\n```\n\nlittlefs was originally built as an experiment to learn about filesystem design\nin the context of microcontrollers. The question was: How would you build a\nfilesystem that is resilient to power-loss and flash wear without using\nunbounded memory?\n\nThis document covers the high-level design of littlefs, how it is different\nthan other filesystems, and the design decisions that got us here. For the\nlow-level details covering every bit on disk, check out [SPEC.md](SPEC.md).\n\n## The problem\n\n"
+    },
+    {
+      "id": "littlefs:README.md:12",
+      "blob": "littlefs:README.md",
+      "line_start": 12,
+      "line_end": 21,
+      "text": "```\n\n**Power-loss resilience** - littlefs is designed to handle random power\nfailures. All file operations have strong copy-on-write guarantees and if\npower is lost the filesystem will fall back to the last known good state.\n\n**Dynamic wear leveling** - littlefs is designed with flash in mind, and\nprovides wear leveling over dynamic blocks. Additionally, littlefs can\ndetect bad blocks and work around them.\n\n"
+    },
+    {
+      "id": "littlefs:README.md:112",
+      "blob": "littlefs:README.md",
+      "line_start": 112,
+      "line_end": 135,
+      "text": "All POSIX operations, such as remove and rename, are atomic, even in event\nof power-loss. Additionally, file updates are not actually committed to\nthe filesystem until sync or close is called on the file.\n\n## Other notes\n\nLittlefs is written in C, and specifically should compile with any compiler\nthat conforms to the `C99` standard.\n\nAll littlefs calls have the potential to return a negative error code. The\nerrors can be either one of those found in the `enum lfs_error` in\n[lfs.h](lfs.h), or an error returned by the user's block device operations.\n\nIn the configuration struct, the `prog` and `erase` function provided by the\nuser may return a `LFS_ERR_CORRUPT` error if the implementation already can\ndetect corrupt blocks. However, the wear leveling does not depend on the return\ncode of these functions, instead all data is read back and checked for\nintegrity.\n\nIf your storage caches writes, make sure that the provided `sync` function\nflushes all the data to memory and ensures that the next read fetches the data\nfrom memory, otherwise data integrity can not be guaranteed. If the `write`\nfunction does not perform caching, and therefore each `read` or `write` call\nhits the memory, the `sync` function can simply return 0.\n"
+    },
+    {
+      "id": "littlefs:README.md:139",
+      "blob": "littlefs:README.md",
+      "line_start": 139,
+      "line_end": 150,
+      "text": "At a high level, littlefs is a block based filesystem that uses small logs to\nstore metadata and larger copy-on-write (COW) structures to store file data.\n\nIn littlefs, these ingredients form a sort of two-layered cake, with the small\nlogs (called metadata pairs) providing fast updates to metadata anywhere on\nstorage, while the COW structures store file data compactly and without any\nwear amplification cost.\n\nBoth of these data structures are built out of blocks, which are fed by a\ncommon block allocator. By limiting the number of erases allowed on a block\nper allocation, the allocator provides dynamic wear leveling over the entire\nfilesystem.\n"
+    },
+    {
+      "id": "littlefs:SPEC.md:1",
+      "blob": "littlefs:SPEC.md",
+      "line_start": 1,
+      "line_end": 18,
+      "text": "## littlefs technical specification\n\nThis is the technical specification of the little filesystem. This document\ncovers the technical details of how the littlefs is stored on disk for\nintrospection and tooling. This document assumes you are familiar with the\ndesign of the littlefs, for more info on how littlefs works check\nout [DESIGN.md](DESIGN.md).\n\n```\n   | | |     .---._____\n  .-----.   |          |\n--|o    |---| littlefs |\n--|     |---|          |\n  '-----'   '----------'\n   | | |\n```\n\n## Some quick notes\n"
+    },
+    {
+      "id": "littlefs:bd/lfs_testbd.c:198",
+      "blob": "littlefs:bd/lfs_testbd.c",
+      "line_start": 198,
+      "line_end": 216,
+      "text": "\n    // prog\n    int err = lfs_testbd_rawprog(cfg, block, off, buffer, size);\n    if (err) {\n        LFS_TESTBD_TRACE(\"lfs_testbd_prog -> %d\", err);\n        return err;\n    }\n\n    // lose power?\n    if (bd->power_cycles > 0) {\n        bd->power_cycles -= 1;\n        if (bd->power_cycles == 0) {\n            // sync to make sure we persist the last changes\n            LFS_ASSERT(lfs_testbd_rawsync(cfg) == 0);\n            // simulate power loss\n            exit(33);\n        }\n    }\n\n"
+    },
+    {
+      "id": "littlefs:bd/lfs_testbd.c:245",
+      "blob": "littlefs:bd/lfs_testbd.c",
+      "line_start": 245,
+      "line_end": 263,
+      "text": "\n    // erase\n    int err = lfs_testbd_rawerase(cfg, block);\n    if (err) {\n        LFS_TESTBD_TRACE(\"lfs_testbd_erase -> %d\", err);\n        return err;\n    }\n\n    // lose power?\n    if (bd->power_cycles > 0) {\n        bd->power_cycles -= 1;\n        if (bd->power_cycles == 0) {\n            // sync to make sure we persist the last changes\n            LFS_ASSERT(lfs_testbd_rawsync(cfg) == 0);\n            // simulate power loss\n            exit(33);\n        }\n    }\n\n"
+    },
+    {
+      "id": "littlefs:bd/lfs_testbd.h:53",
+      "blob": "littlefs:bd/lfs_testbd.h",
+      "line_start": 53,
+      "line_end": 65,
+      "text": "    int32_t erase_value;\n\n    // Number of erase cycles before a block becomes \"bad\". The exact behavior\n    // of bad blocks is controlled by the badblock_mode.\n    uint32_t erase_cycles;\n\n    // The mode determining how bad blocks fail\n    uint8_t badblock_behavior;\n\n    // Number of write operations (erase/prog) before forcefully killing\n    // the program with exit. Simulates power-loss. 0 disables.\n    uint32_t power_cycles;\n\n"
+    },
+    {
+      "id": "littlefs:lfs.c:2905",
+      "blob": "littlefs:lfs.c",
+      "line_start": 2905,
+      "line_end": 2910,
+      "text": "    } else if (flags & LFS_O_TRUNC) {\n        // truncate if requested\n        tag = LFS_MKTAG(LFS_TYPE_INLINESTRUCT, file->id, 0);\n        file->flags |= LFS_F_DIRTY;\n#endif\n    } else {\n"
+    },
+    {
+      "id": "littlefs:lfs.h:209",
+      "blob": "littlefs:lfs.h",
+      "line_start": 209,
+      "line_end": 217,
+      "text": "    lfs_size_t block_count;\n\n    // Number of erase cycles before littlefs evicts metadata logs and moves\n    // the metadata to another block. Suggested values are in the\n    // range 100-1000, with large values having better performance at the cost\n    // of less consistent wear distribution.\n    //\n    // Set to -1 to disable block-level wear-leveling.\n    int32_t block_cycles;\n"
+    },
+    {
+      "id": "littlefs:lfs.h:462",
+      "blob": "littlefs:lfs.h",
+      "line_start": 462,
+      "line_end": 469,
+      "text": "#ifndef LFS_READONLY\n// Rename or move a file or directory\n//\n// If the destination exists, it must match the source in type.\n// If the destination is a directory, the directory must be empty.\n//\n// Returns a negative error code on failure.\nint lfs_rename(lfs_t *lfs, const char *oldpath, const char *newpath);\n"
+    },
+    {
+      "id": "littlefs:lfs.h:545",
+      "blob": "littlefs:lfs.h",
+      "line_start": 545,
+      "line_end": 575,
+      "text": "// Close a file\n//\n// Any pending writes are written out to storage as though\n// sync had been called and releases any allocated resources.\n//\n// Returns a negative error code on failure.\nint lfs_file_close(lfs_t *lfs, lfs_file_t *file);\n\n// Synchronize a file on storage\n//\n// Any pending writes are written out to storage.\n// Returns a negative error code on failure.\nint lfs_file_sync(lfs_t *lfs, lfs_file_t *file);\n\n// Read data from file\n//\n// Takes a buffer and size indicating where to store the read data.\n// Returns the number of bytes read, or a negative error code on failure.\nlfs_ssize_t lfs_file_read(lfs_t *lfs, lfs_file_t *file,\n        void *buffer, lfs_size_t size);\n\n#ifndef LFS_READONLY\n// Write data to file\n//\n// Takes a buffer and size indicating the data to write. The file will not\n// actually be updated on the storage until either sync or close is called.\n//\n// Returns the number of bytes written, or a negative error code on failure.\nlfs_ssize_t lfs_file_write(lfs_t *lfs, lfs_file_t *file,\n        const void *buffer, lfs_size_t size);\n#endif\n"
+    },
+    {
+      "id": "littlefs:tests/test_files.toml:288",
+      "blob": "littlefs:tests/test_files.toml",
+      "line_start": 288,
+      "line_end": 299,
+      "text": "[[case]] # reentrant file writing\ndefine.SIZE = [32, 0, 7, 2049]\ndefine.CHUNKSIZE = [31, 16, 65]\nreentrant = true\ncode = '''\n    err = lfs_mount(&lfs, &cfg);\n    if (err) {\n        lfs_format(&lfs, &cfg) => 0;\n        lfs_mount(&lfs, &cfg) => 0;\n    }\n\n    err = lfs_file_open(&lfs, &file, \"avacado\", LFS_O_RDONLY);\n"
+    },
+    {
+      "id": "littlefs:tests/test_files.toml:336",
+      "blob": "littlefs:tests/test_files.toml",
+      "line_start": 336,
+      "line_end": 358,
+      "text": "[[case]] # reentrant file writing with syncs\ndefine = [\n    # append (O(n))\n    {MODE='LFS_O_APPEND',   SIZE=[32, 0, 7, 2049],  CHUNKSIZE=[31, 16, 65]},\n    # truncate (O(n^2))\n    {MODE='LFS_O_TRUNC',    SIZE=[32, 0, 7, 200],   CHUNKSIZE=[31, 16, 65]},\n    # rewrite (O(n^2))\n    {MODE=0,                SIZE=[32, 0, 7, 200],   CHUNKSIZE=[31, 16, 65]},\n]\nreentrant = true\ncode = '''\n    err = lfs_mount(&lfs, &cfg);\n    if (err) {\n        lfs_format(&lfs, &cfg) => 0;\n        lfs_mount(&lfs, &cfg) => 0;\n    }\n\n    err = lfs_file_open(&lfs, &file, \"avacado\", LFS_O_RDONLY);\n    assert(err == LFS_ERR_NOENT || err == 0);\n    if (err == 0) {\n        // with syncs we could be any size, but it at least must be valid data\n        size = lfs_file_size(&lfs, &file);\n        assert(size <= SIZE);\n"
+    },
+    {
+      "id": "littlefs:tests/test_move.toml:338",
+      "blob": "littlefs:tests/test_move.toml",
+      "line_start": 338,
+      "line_end": 349,
+      "text": "[[case]] # simple reentrant move file\nreentrant = true\ncode = '''\n    err = lfs_mount(&lfs, &cfg);\n    if (err) {\n        lfs_format(&lfs, &cfg) => 0;\n        lfs_mount(&lfs, &cfg) => 0;\n    }\n    err = lfs_mkdir(&lfs, \"a\");\n    assert(!err || err == LFS_ERR_EXIST);\n    err = lfs_mkdir(&lfs, \"b\");\n    assert(!err || err == LFS_ERR_EXIST);\n"
+    }
+  ],
+  "current_steps": [
+    {
+      "id": "lifecycle.mount",
+      "group": "lifecycle",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "Persistence::Persistence()",
+      "function_end": "bool Persistence::SaveConfig",
+      "fragment": "LittleFS.begin();",
+      "line_start": 29,
+      "line_end": 29,
+      "return_handling": "IGNORED",
+      "consequence": "Mount result is not inspected."
+    },
+    {
+      "id": "lifecycle.unmount",
+      "group": "lifecycle",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "Persistence::Persistence()",
+      "function_end": "bool Persistence::SaveConfig",
+      "fragment": "LittleFS.end();",
+      "line_start": 33,
+      "line_end": 33,
+      "return_handling": "VOID",
+      "consequence": "Destructor ends filesystem use."
+    },
+    {
+      "id": "save.size",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "if (!pb_get_encoded_size(&encoded_size, Config_fields, &config)) {\n        return false;\n    }",
+      "line_start": 39,
+      "line_end": 41,
+      "return_handling": "CHECKED",
+      "consequence": "Encode-size failure returns before file open; encoded_size is not later used for reservation."
+    },
+    {
+      "id": "save.open",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "File config_file = LittleFS.open(config_filename, \"w+\");\n    if (!config_file) {\n        return false;\n    }",
+      "line_start": 44,
+      "line_end": 47,
+      "return_handling": "CHECKED",
+      "consequence": "Create/truncate read-write open must return a valid File."
+    },
+    {
+      "id": "save.placeholder",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "ConfigHeader header = { .config_size = 0, .config_crc = 0 };",
+      "line_start": 50,
+      "line_end": 50,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Header begins with zero length and CRC."
+    },
+    {
+      "id": "save.header_write",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "config_file.write((uint8_t *)&header, sizeof(ConfigHeader));",
+      "line_start": 51,
+      "line_end": 51,
+      "return_handling": "IGNORED",
+      "consequence": "Placeholder header byte count is ignored."
+    },
+    {
+      "id": "save.stream",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "pb_ostream_t ostream = as_pb_ostream(config_file);",
+      "line_start": 54,
+      "line_end": 54,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Protobuf output stream targets the open file."
+    },
+    {
+      "id": "save.encode",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "if (!pb_encode(&ostream, Config_fields, &config)) {\n        config_file.close();\n        return false;\n    }",
+      "line_start": 55,
+      "line_end": 58,
+      "return_handling": "CHECKED",
+      "consequence": "Encode failure closes the file and returns false."
+    },
+    {
+      "id": "save.seek_body",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "config_file.seek(config_offset);",
+      "line_start": 61,
+      "line_end": 61,
+      "return_handling": "IGNORED",
+      "consequence": "CRC read-position seek success is ignored."
+    },
+    {
+      "id": "save.crc_init",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "CRC32 crc;",
+      "line_start": 62,
+      "line_end": 62,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Construct CRC accumulator."
+    },
+    {
+      "id": "save.read_crc",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "while ((value = config_file.read()) != -1) {\n        crc.update((uint8_t)value);\n    }",
+      "line_start": 64,
+      "line_end": 66,
+      "return_handling": "SENTINEL_ONLY",
+      "consequence": "Single-byte read EOF and error are not distinguished."
+    },
+    {
+      "id": "save.length",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "header.config_size = ostream.bytes_written;",
+      "line_start": 69,
+      "line_end": 69,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Record stream bytes_written rather than preflight encoded_size."
+    },
+    {
+      "id": "save.crc_final",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "header.config_crc = crc.finalize();",
+      "line_start": 70,
+      "line_end": 70,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Record computed CRC."
+    },
+    {
+      "id": "save.seek_header",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "config_file.seek(0);",
+      "line_start": 71,
+      "line_end": 71,
+      "return_handling": "IGNORED",
+      "consequence": "Final header-position seek success is ignored."
+    },
+    {
+      "id": "save.header_rewrite",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "config_file.write((uint8_t *)&header, sizeof(ConfigHeader));",
+      "line_start": 72,
+      "line_end": 72,
+      "return_handling": "IGNORED",
+      "consequence": "Final header byte count is ignored."
+    },
+    {
+      "id": "save.close",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "config_file.close();",
+      "line_start": 75,
+      "line_end": 75,
+      "return_handling": "VOID",
+      "consequence": "Wrapper does not propagate littlefs close result."
+    },
+    {
+      "id": "save.success",
+      "group": "save",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::SaveConfig",
+      "function_end": "bool Persistence::LoadConfig",
+      "fragment": "return true;",
+      "line_start": 77,
+      "line_end": 77,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Success has no explicit final sync-status or readback check."
+    },
+    {
+      "id": "load.open",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "File config_file = LittleFS.open(config_filename, \"r\");\n    if (!config_file) {\n        return false;\n    }",
+      "line_start": 82,
+      "line_end": 85,
+      "return_handling": "CHECKED",
+      "consequence": "Read-only open failure returns false."
+    },
+    {
+      "id": "load.validate",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "if (!CheckSavedConfig(config_file)) {\n        config_file.close();\n        return false;\n    }",
+      "line_start": 87,
+      "line_end": 90,
+      "return_handling": "CHECKED",
+      "consequence": "Header/size/CRC rejection closes and returns false."
+    },
+    {
+      "id": "load.seek",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "if (!config_file.seek(config_offset)) {\n        config_file.close();\n        return false;\n    }",
+      "line_start": 93,
+      "line_end": 96,
+      "return_handling": "CHECKED",
+      "consequence": "Body seek failure closes and returns false."
+    },
+    {
+      "id": "load.reset",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "config = Config_init_default;",
+      "line_start": 100,
+      "line_end": 100,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Caller config is reset before decode."
+    },
+    {
+      "id": "load.stream",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "pb_istream_t istream = as_pb_istream(config_file, (size_t)config_file.available());",
+      "line_start": 103,
+      "line_end": 103,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Decode stream is bounded by available bytes."
+    },
+    {
+      "id": "load.decode",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "if (!pb_decode(&istream, Config_fields, &config)) {\n        config_file.close();\n        return false;\n    }",
+      "line_start": 104,
+      "line_end": 107,
+      "return_handling": "CHECKED",
+      "consequence": "Decode failure returns after caller config was reset and passed to decoder."
+    },
+    {
+      "id": "load.close",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "config_file.close();",
+      "line_start": 109,
+      "line_end": 109,
+      "return_handling": "VOID",
+      "consequence": "Close is not a caller-visible status."
+    },
+    {
+      "id": "load.success",
+      "group": "load",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::LoadConfig",
+      "function_end": "bool Persistence::CheckSavedConfig()",
+      "fragment": "return true;",
+      "line_start": 110,
+      "line_end": 110,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Successful decode returns true."
+    },
+    {
+      "id": "check.size",
+      "group": "check",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::CheckSavedConfig(File &config_file)",
+      "function_end": null,
+      "fragment": "size_t file_size = config_file.size();",
+      "line_start": 155,
+      "line_end": 155,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Read observed file size."
+    },
+    {
+      "id": "check.header",
+      "group": "check",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::CheckSavedConfig(File &config_file)",
+      "function_end": null,
+      "fragment": "size_t bytes_read = config_file.read((uint8_t *)&header, sizeof(ConfigHeader));\n    if (bytes_read < sizeof(ConfigHeader)) {\n        return false;\n    }",
+      "line_start": 159,
+      "line_end": 162,
+      "return_handling": "CHECKED",
+      "consequence": "Require complete buffered header read."
+    },
+    {
+      "id": "check.length",
+      "group": "check",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::CheckSavedConfig(File &config_file)",
+      "function_end": null,
+      "fragment": "size_t config_size = file_size - config_offset;\n    if (config_size != header.config_size) {\n        return false;\n    }",
+      "line_start": 165,
+      "line_end": 168,
+      "return_handling": "CHECKED",
+      "consequence": "Require actual payload length equals recorded length."
+    },
+    {
+      "id": "check.read_crc",
+      "group": "check",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::CheckSavedConfig(File &config_file)",
+      "function_end": null,
+      "fragment": "while ((value = config_file.read()) != -1) {\n        crc.update((uint8_t)value);\n    }",
+      "line_start": 173,
+      "line_end": 175,
+      "return_handling": "SENTINEL_ONLY",
+      "consequence": "Consume single bytes until EOF/error sentinel."
+    },
+    {
+      "id": "check.crc",
+      "group": "check",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::CheckSavedConfig(File &config_file)",
+      "function_end": null,
+      "fragment": "if (crc.finalize() != header.config_crc) {\n        return false;\n    }",
+      "line_start": 176,
+      "line_end": 178,
+      "return_handling": "CHECKED",
+      "consequence": "Require computed CRC matches header."
+    },
+    {
+      "id": "check.success",
+      "group": "check",
+      "source": "HAL/pico/src/core/Persistence.cpp",
+      "function_start": "bool Persistence::CheckSavedConfig(File &config_file)",
+      "function_end": null,
+      "fragment": "return true;",
+      "line_start": 180,
+      "line_end": 180,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Integrity check alone does not decode protobuf."
+    },
+    {
+      "id": "boot.default",
+      "group": "boot",
+      "source": "config/glyph/common/src/config.cpp",
+      "function_start": "Config config = glyph_default_config();",
+      "function_end": "void loop() {",
+      "fragment": "Config config = glyph_default_config();",
+      "line_start": 34,
+      "line_end": 34,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Global config starts from Glyph defaults."
+    },
+    {
+      "id": "boot.load_save",
+      "group": "boot",
+      "source": "config/glyph/common/src/config.cpp",
+      "function_start": "Config config = glyph_default_config();",
+      "function_end": "void loop() {",
+      "fragment": "if (!persistence.LoadConfig(config)) {\n        persistence.SaveConfig(config);\n    }",
+      "line_start": 91,
+      "line_end": 93,
+      "return_handling": "CHECKED_LOAD_IGNORED_SAVE",
+      "consequence": "Failed load triggers saving the remaining in-memory config; no explicit restoration of Glyph defaults."
+    },
+    {
+      "id": "boot.backends",
+      "group": "boot",
+      "source": "config/glyph/common/src/config.cpp",
+      "function_start": "Config config = glyph_default_config();",
+      "function_end": "void loop() {",
+      "fragment": "backend_count = initialize_backends(",
+      "line_start": 96,
+      "line_end": 96,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Backend initialization follows load/save attempt."
+    },
+    {
+      "id": "setconfig.reset",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "_config = Config_init_default;",
+      "line_start": 163,
+      "line_end": 163,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Reset live referenced config before decoding."
+    },
+    {
+      "id": "setconfig.stream",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "pb_istream_t istream = as_pb_istream(_in);",
+      "line_start": 165,
+      "line_end": 165,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "Read command input through protobuf stream."
+    },
+    {
+      "id": "setconfig.decode",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (!pb_decode(&istream, Config_fields, &_config)) {",
+      "line_start": 166,
+      "line_end": 166,
+      "return_handling": "CHECKED",
+      "consequence": "Decode failure enters error and restore branch."
+    },
+    {
+      "id": "setconfig.decode_error",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);",
+      "line_start": 170,
+      "line_end": 170,
+      "return_handling": "IGNORED",
+      "consequence": "Error packet return ignored."
+    },
+    {
+      "id": "setconfig.restore",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "persistence.LoadConfig(_config);\n        return false;",
+      "line_start": 173,
+      "line_end": 174,
+      "return_handling": "IGNORED",
+      "consequence": "Decode failure attempts restore but ignores its result."
+    },
+    {
+      "id": "setconfig.backend_bound",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (_config.default_backend_config > _config.communication_backend_configs_count) {",
+      "line_start": 177,
+      "line_end": 177,
+      "return_handling": "CHECKED",
+      "consequence": "Invalid default backend sends error and returns without restore."
+    },
+    {
+      "id": "setconfig.mode_bound",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (default_mode_id > _config.game_mode_configs_count) {",
+      "line_start": 192,
+      "line_end": 192,
+      "return_handling": "CHECKED",
+      "consequence": "Invalid mode reference sends error and returns without restore."
+    },
+    {
+      "id": "setconfig.keyboard_type",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (keyboard_mode_id > 0 && gamemode_config.mode_id != MODE_KEYBOARD) {",
+      "line_start": 212,
+      "line_end": 212,
+      "return_handling": "CHECKED",
+      "consequence": "Keyboard-mode type mismatch sends error and returns without restore."
+    },
+    {
+      "id": "setconfig.custom_type",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (custom_mode_id > 0 && gamemode_config.mode_id != MODE_CUSTOM) {",
+      "line_start": 224,
+      "line_end": 224,
+      "return_handling": "CHECKED",
+      "consequence": "Custom-mode type mismatch sends error and returns without restore."
+    },
+    {
+      "id": "setconfig.keyboard_bound",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (keyboard_mode_id > _config.keyboard_modes_count) {",
+      "line_start": 236,
+      "line_end": 236,
+      "return_handling": "CHECKED",
+      "consequence": "Keyboard reference overflow sends error and returns without restore."
+    },
+    {
+      "id": "setconfig.custom_bound",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (custom_mode_id > _config.custom_modes_count) {",
+      "line_start": 250,
+      "line_end": 250,
+      "return_handling": "CHECKED",
+      "consequence": "Custom reference overflow sends error and returns without restore."
+    },
+    {
+      "id": "setconfig.save",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "if (!persistence.SaveConfig(_config)) {\n        char errmsg[] = \"Failed to save config to memory\";\n        WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));\n        return false;\n    }",
+      "line_start": 265,
+      "line_end": 269,
+      "return_handling": "CHECKED_SAVE_IGNORED_PACKET",
+      "consequence": "False save sends error and returns false without restore."
+    },
+    {
+      "id": "setconfig.success",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "WritePacket(CMD_SUCCESS, nullptr, 0);\n    return true;",
+      "line_start": 271,
+      "line_end": 272,
+      "return_handling": "IGNORED_PACKET",
+      "consequence": "True save sends success; packet return ignored."
+    },
+    {
+      "id": "additional_save.save",
+      "group": "additional_save",
+      "source": "HAL/pico/src/comms/backend_init.cpp",
+      "function_start": "        if(backend_config.backend_id != COMMS_BACKEND_CONFIGURATOR)",
+      "function_end": null,
+      "fragment": "if(temp_backend_index > 0 || temp_gamemode_index > 0) {\n                persistence.SaveConfig(config);\n            }",
+      "line_start": 117,
+      "line_end": 119,
+      "return_handling": "IGNORED",
+      "consequence": "Selected startup backend/mode change also saves with ignored result; cadence/concurrency not established."
+    }
+  ],
+  "claims": [
+    {
+      "id": "header_abi",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "statement": "Current header uses native size_t length and uint32_t CRC; offset is sizeof(ConfigHeader). Portable serialized ABI is not claimed."
+    },
+    {
+      "id": "wrapper_truncate_sync",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "arduino_pico:cores/rp2040/FS.cpp",
+        "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+        "arduino_pico:libraries/LittleFS/src/LittleFS.cpp",
+        "littlefs:lfs.c"
+      ],
+      "statement": "w+ creates/truncates with read/write access; successful wrapper open immediately calls lfs_file_sync and ignores its return."
+    },
+    {
+      "id": "atomicity_boundary",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "littlefs:README.md",
+        "littlefs:lfs.h",
+        "save.open",
+        "save.close"
+      ],
+      "statement": "Upstream documents atomic individual rename/remove operations and file commits on sync/close under block-device obligations; this does not establish whole SaveConfig atomicity or controller power-loss safety."
+    },
+    {
+      "id": "rename_constraints",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "littlefs:lfs.h",
+        "arduino_pico:libraries/LittleFS/src/LittleFS.h"
+      ],
+      "statement": "Pinned rename API permits existing destination of matching type, requires empty destination directory, returns negative error on failure; no recovery replacement policy selected."
+    },
+    {
+      "id": "read_and_close",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "arduino_pico:cores/rp2040/FS.cpp",
+        "arduino_pico:libraries/LittleFS/src/LittleFS.h"
+      ],
+      "statement": "Single-byte File::read collapses EOF/error to -1; buffered reads return counts or zero. Wrapper close discards lfs_file_close status and flush only logs sync failure."
+    },
+    {
+      "id": "autoformat",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+        "lifecycle.mount"
+      ],
+      "statement": "Wrapper defaults autoFormat to true, retries mount after enabled format on mount failure; application ignores begin result."
+    },
+    {
+      "id": "flash_callbacks",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "arduino_pico:libraries/LittleFS/src/LittleFS.cpp"
+      ],
+      "statement": "Wrapper read copies mapped bytes; program/erase disable interrupts and idle/resume the other core around flash calls then return zero; sync is a zero-return no-op. Underlying device guarantees remain UNKNOWN."
+    },
+    {
+      "id": "wear_and_capacity",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "platformio.ini",
+        "arduino_pico:libraries/LittleFS/src/LittleFS.cpp",
+        "arduino_pico:libraries/LittleFS/src/LittleFS.h",
+        "littlefs:lfs.h",
+        "littlefs:README.md"
+      ],
+      "statement": "Selector declares filesystem_size 0.5m; wrapper uses linker FS bounds, 256-byte read/program/cache/lookahead, 4096-byte blocks and block_cycles 16. block_cycles is metadata relocation policy, not flash endurance. Device free space, lifetime and update preservation remain UNKNOWN."
+    },
+    {
+      "id": "boot_decode_failure",
+      "classification": "INFERRED",
+      "evidence": [
+        "load.reset",
+        "load.decode",
+        "boot.load_save"
+      ],
+      "statement": "If decode fails after reset, boot can save default-initialized/partly decoded remaining config; it does not explicitly restore glyph_default_config. Exact partial contents are UNKNOWN."
+    },
+    {
+      "id": "testability",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "littlefs:bd/lfs_testbd.c",
+        "littlefs:bd/lfs_testbd.h",
+        "littlefs:tests/test_files.toml",
+        "littlefs:tests/test_move.toml",
+        "tools/glyph_runtime_config_storage_simulator.py"
+      ],
+      "statement": "Pinned testbd supports interruption at erase/program operation boundaries; upstream has reentrant file/sync/move tests. These were not run, do not establish torn writes/brownout/controller behavior, and Glyph storage simulator excludes config.bin."
+    },
+    {
+      "id": "device_outcomes",
+      "classification": "UNKNOWN",
+      "evidence": [
+        "flash_callbacks",
+        "wear_and_capacity",
+        "testability"
+      ],
+      "statement": "Actual power-loss outcome, flash endurance, usable/free capacity, concurrency correctness, save cadence and firmware-update preservation are not established by this research."
+    }
+  ],
+  "failure_windows": [
+    {
+      "id": "encode_preflight",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "save.size"
+      ],
+      "current_consequence": "False returns before application open; no physical prior-storage claim.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "mount_open",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "lifecycle.mount",
+        "save.open",
+        "autoformat"
+      ],
+      "current_consequence": "Failed open returns false; enabled format may follow failed mount. Physical data outcome UNKNOWN.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "truncate_sync",
+      "classification": "INFERRED",
+      "evidence": [
+        "wrapper_truncate_sync",
+        "atomicity_boundary"
+      ],
+      "current_consequence": "Successful initial sync can commit an empty file before header/body; no application backup exists. Exact interruption outcome UNKNOWN.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "placeholder_write",
+      "classification": "INFERRED",
+      "evidence": [
+        "save.header_write"
+      ],
+      "current_consequence": "Ignored short/error write can leave incomplete header; later flow continues.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "body_encode",
+      "classification": "INFERRED",
+      "evidence": [
+        "save.encode",
+        "save.placeholder"
+      ],
+      "current_consequence": "Encode failure closes then returns false; incomplete data may be persisted with placeholder header.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "seek_read_crc",
+      "classification": "INFERRED",
+      "evidence": [
+        "save.seek_body",
+        "save.read_crc",
+        "read_and_close"
+      ],
+      "current_consequence": "Ignored seek or read error can compute CRC over wrong/incomplete bytes while flow continues.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "header_rewrite",
+      "classification": "INFERRED",
+      "evidence": [
+        "save.seek_header",
+        "save.header_rewrite"
+      ],
+      "current_consequence": "Unchecked final positioning/write may leave invalid header despite subsequent true return.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "close_sync",
+      "classification": "INFERRED",
+      "evidence": [
+        "save.close",
+        "save.success",
+        "read_and_close"
+      ],
+      "current_consequence": "Close status is unavailable to caller; true SaveConfig is not proof of persistent success.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "load_integrity",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "load.validate",
+        "check.header",
+        "check.length",
+        "check.crc",
+        "boot.load_save"
+      ],
+      "current_consequence": "Header/length/CRC rejection returns false and boot attempts save of remaining in-memory config.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "load_decode",
+      "classification": "INFERRED",
+      "evidence": [
+        "boot_decode_failure"
+      ],
+      "current_consequence": "Decode failure after integrity pass can leave reset/partial config that boot then saves.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "setconfig_failure",
+      "classification": "SOURCE_BACKED",
+      "evidence": [
+        "setconfig.restore",
+        "setconfig.backend_bound",
+        "setconfig.mode_bound",
+        "setconfig.save"
+      ],
+      "current_consequence": "Decode failure attempts unchecked restore; reference and save failure do not use that restore branch. Exact live usability UNKNOWN; GP-CONFIG-005 remains separate.",
+      "hardware_observation": "UNKNOWN"
+    },
+    {
+      "id": "device_limits",
+      "classification": "UNKNOWN",
+      "evidence": [
+        "device_outcomes"
+      ],
+      "current_consequence": "Capacity, wear, concurrency, update and physical interruption outcomes require future evidence and authority.",
+      "hardware_observation": "UNKNOWN"
+    }
+  ],
+  "alternatives": [
+    {
+      "id": "temp_and_rename",
+      "selected": false,
+      "description": "Stage and validate a complete candidate before an individual namespace replacement; this is an option, not an approved transaction.",
+      "decisions": [
+        "recovery_invariant",
+        "stale_state_cleanup",
+        "rename_replacement",
+        "readback_diagnostics",
+        "migration_compatibility",
+        "capacity_wear_save_cadence"
+      ]
+    },
+    {
+      "id": "temp_plus_backup",
+      "selected": false,
+      "description": "Retain a prior candidate as well as staged replacement; added capacity and recovery-precedence complexity remain, and multiple renames are not one atomic operation.",
+      "decisions": [
+        "recovery_invariant",
+        "stale_state_cleanup",
+        "rename_replacement",
+        "boot_default",
+        "migration_compatibility",
+        "capacity_wear_save_cadence"
+      ]
+    },
+    {
+      "id": "two_slot_generation",
+      "selected": false,
+      "description": "Compare separately validated slots and generation metadata; layout, ties/rollover, selection, compatibility, capacity and wear remain undecided.",
+      "decisions": [
+        "recovery_invariant",
+        "stale_state_cleanup",
+        "boot_default",
+        "migration_compatibility",
+        "capacity_wear_save_cadence"
+      ]
+    }
+  ],
+  "decision_gates": [
+    {
+      "id": "recovery_invariant",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "Should a failed update preserve old-or-new valid data or a specifically identified prior-good configuration?"
+    },
+    {
+      "id": "stale_state_cleanup",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "What recovery precedence and stale-state cleanup are required for incomplete candidates?"
+    },
+    {
+      "id": "boot_default",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "What should boot do after integrity/decode failure and which default or retained state may it save?"
+    },
+    {
+      "id": "autoformat",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "Should mount failure permit autoformat, retain data for recovery, or require an explicit recovery action?"
+    },
+    {
+      "id": "migration_compatibility",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "What old-firmware and stored-layout compatibility/migration must be preserved?"
+    },
+    {
+      "id": "rename_replacement",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "What replacement behavior and failure handling are required if a future mechanism uses rename?"
+    },
+    {
+      "id": "readback_diagnostics",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "Which write/sync/readback failures must be exposed and through what approved diagnostic behavior?"
+    },
+    {
+      "id": "concurrency",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "Who owns save serialization and concurrent access to current Config and storage?"
+    },
+    {
+      "id": "capacity_wear_save_cadence",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "What reserve, capacity, wear bounds and save cadence must be measured and accepted?"
+    },
+    {
+      "id": "update_preservation",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "What storage preservation is required across firmware updates and rollback?"
+    },
+    {
+      "id": "fault_injection",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "Which separately authorized host or physical fault model and cut-point coverage establish the chosen invariant?"
+    },
+    {
+      "id": "physical_recovery_acceptance",
+      "status": "UNRESOLVED_H3_NOT_SELECTED",
+      "question": "What operator recovery UX and exact Revision-2 physical acceptance rows must a future candidate satisfy?"
+    }
+  ],
+  "future_cut_points": [
+    "lifecycle.mount",
+    "lifecycle.unmount",
+    "save.size",
+    "save.open",
+    "save.placeholder",
+    "save.header_write",
+    "save.stream",
+    "save.encode",
+    "save.seek_body",
+    "save.crc_init",
+    "save.read_crc",
+    "save.length",
+    "save.crc_final",
+    "save.seek_header",
+    "save.header_rewrite",
+    "save.close",
+    "save.success",
+    "load.open",
+    "load.validate",
+    "load.seek",
+    "load.reset",
+    "load.stream",
+    "load.decode",
+    "load.close",
+    "load.success",
+    "check.size",
+    "check.header",
+    "check.length",
+    "check.read_crc",
+    "check.crc",
+    "check.success",
+    "boot.default",
+    "boot.load_save",
+    "boot.backends",
+    "setconfig.reset",
+    "setconfig.stream",
+    "setconfig.decode",
+    "setconfig.decode_error",
+    "setconfig.restore",
+    "setconfig.backend_bound",
+    "setconfig.mode_bound",
+    "setconfig.keyboard_type",
+    "setconfig.custom_type",
+    "setconfig.keyboard_bound",
+    "setconfig.custom_bound",
+    "setconfig.save",
+    "setconfig.success",
+    "additional_save.save",
+    "wrapper_truncate_sync",
+    "autoformat"
+  ],
+  "future_validation_gates": [
+    {
+      "id": "authority",
+      "requirement": "Complete H3 READY work order resolves mechanism, invariant, policy and exact acceptance before implementation."
+    },
+    {
+      "id": "offline",
+      "requirement": "Separately approved return-error/short-I/O and interruption tests cover chosen invariant at exact application and filesystem cut points."
+    },
+    {
+      "id": "review",
+      "requirement": "Independent source and safety review of exact candidate and selected fault model."
+    },
+    {
+      "id": "build",
+      "requirement": "Canonical pio run -e glyph_mk6 proof for exact future candidate, without treating build as controller acceptance."
+    },
+    {
+      "id": "custody",
+      "requirement": "Full candidate SHA and exact tested artifact SHA-256 with retrievable immutable custody under Revision-2."
+    },
+    {
+      "id": "hardware",
+      "requirement": "User physical PASS for exact candidate/artifact and approved recovery/regression rows before merge; Nunchuk NOT_TESTED unless explicitly tested."
+    }
+  ],
+  "research_limits": {
+    "firmware_runtime_source_changed": false,
+    "build_performed": false,
+    "firmware_artifact_produced": false,
+    "config_bin_accessed": false,
+    "filesystem_mounted": false,
+    "device_touched": false,
+    "hardware_tested": false,
+    "upstream_code_executed": false,
+    "checker_network_access": false,
+    "recovery_implementation_authorized": false,
+    "runtime_loaded_config_implemented": false,
+    "gameplay_semantics_claimed": false,
+    "nunchuk": "NOT_TESTED",
+    "root_cause": "UNPROVEN"
+  },
+  "searches": [
+    {
+      "id": "current_path",
+      "method": "rg -n SaveConfig/LoadConfig/LittleFS/config.bin across HAL/config/src/include/tools",
+      "outcome": "Required paths plus backend_init additional save; storage simulator excludes config.bin.",
+      "limitation": "No actual config.bin opened; no exhaustive concurrency or save-frequency proof."
+    },
+    {
+      "id": "upstream_identity",
+      "method": "git ls-remote exact 3.6.3; GitHub immutable commit/tree and raw-source reads; Git blob rehash",
+      "outcome": "Authoritative full Arduino-Pico commit, littlefs gitlink and exact regular blobs resolved.",
+      "limitation": "Default sandbox DNS failed, permitted escalated read-only retry succeeded; no build/install/device identity claim."
+    },
+    {
+      "id": "fault_tests",
+      "method": "Inspect pinned littlefs recursive tree and testbd/test_files/test_move source",
+      "outcome": "No tests/test_powerloss.toml at pinned tree; reentrant cases exist in test_files and test_move.",
+      "limitation": "No upstream code imported/executed; no torn program/erase, brownout or physical guarantee."
+    }
+  ]
+}
