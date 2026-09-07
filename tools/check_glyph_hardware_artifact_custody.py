@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import os
 from pathlib import Path
+import subprocess
 import tempfile
 
 from glyph_hardware_artifact_custody import (
@@ -13,6 +14,7 @@ from glyph_hardware_artifact_custody import (
     FILENAME,
     custody_path,
     preserve,
+    require_clean_candidate_checkout,
     verify_preserved,
 )
 
@@ -31,6 +33,13 @@ def expect_failure(label: str, operation) -> None:
     raise AssertionError(f"{label} was accepted")
 
 
+def run_git(repo: Path, *args: str) -> str:
+    completed = subprocess.run(
+        ["git", *args], cwd=repo, check=True, capture_output=True, text=True
+    )
+    return completed.stdout.strip()
+
+
 def main() -> int:
     with tempfile.TemporaryDirectory(prefix="glyph-artifact-custody-") as temp:
         base = Path(temp).resolve()
@@ -39,6 +48,33 @@ def main() -> int:
         source = base / "firmware.uf2"
         source.write_bytes(GOOD_BYTES)
         digest = hashlib.sha256(GOOD_BYTES).hexdigest()
+
+        repo = base / "candidate-repo"
+        repo.mkdir()
+        run_git(repo, "init", "-q")
+        run_git(repo, "config", "user.name", "Glyph Custody Self-Test")
+        run_git(repo, "config", "user.email", "custody-self-test@example.invalid")
+        tracked = repo / "tracked.txt"
+        tracked.write_text("candidate A\n", encoding="utf-8")
+        run_git(repo, "add", "tracked.txt")
+        run_git(repo, "commit", "-q", "-m", "candidate A")
+        candidate_a = run_git(repo, "rev-parse", "HEAD")
+        require_clean_candidate_checkout(candidate_a, repo)
+        tracked.write_text("candidate B\n", encoding="utf-8")
+        run_git(repo, "commit", "-q", "-am", "candidate B")
+        candidate_b = run_git(repo, "rev-parse", "HEAD")
+        assert candidate_a != candidate_b
+        expect_failure(
+            "candidate SHA not equal to checked-out HEAD",
+            lambda: require_clean_candidate_checkout(candidate_a, repo),
+        )
+        require_clean_candidate_checkout(candidate_b, repo)
+        tracked.write_text("dirty\n", encoding="utf-8")
+        expect_failure(
+            "dirty candidate checkout",
+            lambda: require_clean_candidate_checkout(candidate_b, repo),
+        )
+        run_git(repo, "restore", "tracked.txt")
 
         expect_failure(
             "missing custody root",
