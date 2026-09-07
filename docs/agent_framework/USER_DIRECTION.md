@@ -152,6 +152,58 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   the recorded X1 test scope; Nunchuk remains NOT_TESTED and root cause remains
   unproven.
 
+### GLYPH-UD-013
+
+- Type: `Decision`
+- Status: `Active`
+- Source: one-time supervisor task supplied by the project owner 2026-09-07
+- Direction: `GP-VAL-011` complete-proof isolation optimization is intentionally
+  deferred and nonexecutable. Preserve its objective, research, failed
+  candidates, measurements, adjudication, and historical reviewed completion,
+  but do not treat the deliberately deprioritized repair as the primary current
+  liveness blocker. Reopening requires fresh substantive authorization. This
+  decision authorizes no concurrent fingerprint/proof work, cancellation or
+  timeout-resource redesign, Git-object/ref-topology expansion, production
+  deadline increase, mutation-proof or ignored-state weakening, isolated-clone
+  weakening, or false DONE claim.
+
+### GLYPH-UD-014
+
+- Type: `Decision`
+- Status: `Active`
+- Source: one-time supervisor task supplied by the project owner 2026-09-07
+- Direction: In the existing custom Glyph/HayBox backend, a rejected
+  `SetConfig` operation must not leave rejected candidate values active in the
+  live in-memory `Config`. Decode, validation/bounds, persistence/save, and any
+  other rejection in the existing bounded transaction path preserve or restore
+  the prior accepted live `Config`; only complete success may publish the
+  candidate live. This is a live-RAM transaction invariant only. It does not
+  claim or authorize atomic `config.bin` persistence, disk rollback/recovery,
+  power-loss safety, a new persistence mechanism, a configurator redesign, or
+  revived official-configurator interoperability. Source-derived Curator
+  architecture may authorize an exact candidate, but behavior-changing source
+  remains H2/H3 and cannot merge without exact-snapshot build and physical PASS.
+
+### GLYPH-UD-015
+
+- Type: `Decision`
+- Status: `Active`
+- Source: one-time supervisor task supplied by the project owner 2026-09-07
+- Direction: Revision-2 H2/H3 firmware candidates use owner-held local
+  content-addressed custody rooted at
+  `local_backups/hardware-artifacts/<full-candidate-git-sha>/<full-artifact-sha256>/firmware.uf2`.
+  The custodian identity is `Glyph project owner / user authority`. Preserved
+  bytes at an identity are write-once and retained while their hardware evidence
+  remains accepted, current, or historical; tested artifacts are not
+  automatically garbage-collected. Hash the produced bytes, preserve under the
+  matching identity, read back and re-hash, and re-hash immediately before
+  hardware handoff. A rebuild substitutes only when its bytes independently
+  match the recorded SHA-256; otherwise it is a new artifact requiring new
+  hardware evidence. Loss preserves the historical record but transfers no
+  acceptance to a rebuild. Independent system/filesystem backup is recommended,
+  not required; no cloud/external store, upload, release, credential, CI release
+  policy, flashing automation, or device write is authorized.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is

@@ -154,3 +154,34 @@ No firmware/runtime source, build input, workflow, artifact, device, physical te
 
 
 The failed candidate remains available on local `codex/gp-val-011-ignored-directory-failed-evidence`; canonical contains none of its unreviewed repair delta. The main checkout is restored to live `4174001e39f23d2dcb438c232bb3b4e498d153a4`. Full report `/private/tmp/glyph-ignored-main-candidate-aggregate.json` and bounded profile `/private/tmp/glyph-walker-60s-profile.txt` supplied the recorded observations; their load-bearing outcome and exact timing facts are frozen above so repository state does not require those temporary files.
+
+# Owner deferment — 2026-09-07
+
+Disposition: **OWNER_DEFERRED, intentionally nonexecutable.** User direction
+`GLYPH-UD-013` resolves the narrow remaining authority question by declining
+further complete-proof optimization work at this time. The technical objective
+remains desirable and incomplete; this is not `DONE`, `READY`,
+`PREAUTHORIZED`, hardware-pending, or an assertion that a compliant
+implementation is impossible.
+
+All prior research, measurements, failed candidates, rebound contracts,
+adjudications, and historical reviewed completion above remain evidence. In
+particular, failed candidate `a0373bde823856c4835bb5aed429d0b402eadd48`
+remains failed/unmerged historical evidence and receives no renewed authority.
+No implementation is resumed and no evidence is deleted or rewritten.
+
+The canonical queue continues to use its existing `REVIEW` work-order status,
+with explicit `OWNER_DEFERRED / NONEXECUTABLE` scope, because `REVIEW` already
+represents a nonexecuting adjudication and the current schema has no separate
+deferred status. The `REPAIR_REQUIRED` supporting liveness signal is removed:
+owner-deferred incomplete work remains visible, but does not require ordinary
+Implementation Supervisor repair before independent authorized work proceeds.
+Reopening requires fresh substantive owner/Curator authorization and a new
+complete `READY` contract.
+
+This deferment does not authorize concurrent fingerprint acquisition,
+concurrent proof aggregation, revised cancellation or timeout-resource
+architecture, additional required Git-object/ref topology, a production
+deadline increase, weaker mutation proof, skipped ignored state, weaker
+isolated-clone guarantees, firmware/runtime work, build/artifact/device action,
+or physical testing.

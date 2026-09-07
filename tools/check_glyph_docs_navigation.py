@@ -60,6 +60,7 @@ def main() -> int:
         "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
         "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
+        "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
         "docs/agent_framework/USER_DIRECTION.md",
         "docs/agent_framework/SCHEDULED_TASKS.md",
         "docs/agent_framework/MODEL_ROUTING.md",
