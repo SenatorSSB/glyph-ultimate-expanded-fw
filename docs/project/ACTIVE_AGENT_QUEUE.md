@@ -78,17 +78,19 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "hardware_pending": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
+    "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -101,7 +103,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-005",
       "title": "Preserve accepted live Config when SetConfig rejects",
-      "status": "READY",
+      "status": "HARDWARE_TEST_REQUIRED",
       "branch": "glyph/gp-config-005-transactional-setconfig",
       "objective": "Make the existing custom Glyph/HayBox SetConfig handler decode, validate, and save a staged candidate while leaving the prior accepted live Config untouched until complete success, then publish the candidate exactly once.",
       "why_this_matters": "Current HandleSetConfig resets and decodes directly into live Config, restores from disk only after decode failure, and leaves rejected candidate state live after later validation or save failure. The approved invariant prevents rejected values from remaining active without claiming storage rollback.",
@@ -150,12 +152,12 @@ Git, but it is not current candidate supply or implementation authority.
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "hardware_evidence_dependency_satisfied": false,
+      "candidate_git_sha": "437f87e8086a50f0dfbd834176b80d245c1ed307",
+      "candidate_base_configurator_sha": "9550a1bf1309383e351f4f9e66663562fc9f13ac",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/437f87e8086a50f0dfbd834176b80d245c1ed307/650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44/firmware.uf2",
+      "firmware_artifact_sha256": "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44",
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": []
@@ -3023,11 +3025,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-005"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-005; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3035,7 +3037,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is the sole complete bounded `READY` work order. Effective runway is one, primary liveness is `RUNWAY_LOW`, global wait is unsupported, and no Planner refresh is currently required.
+Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is hardware-pending at `HARDWARE_TEST_REQUIRED` for candidate `437f87e8086a50f0dfbd834176b80d245c1ed307` and preserved UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`; `hardware_result` is null. Effective runway is zero, primary liveness is `PLANNING_REQUIRED`, `PLANNER_REFRESH_REQUIRED` is current, and global wait is unsupported.
 
 ## Allowed Statuses
 
@@ -3071,11 +3073,11 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 Independent source review: [fresh non-waiting recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907_1359.md).
 
-The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is the sole complete bounded `READY` work order; primary liveness is `RUNWAY_LOW`, without `REPAIR_REQUIRED`.
+The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is `HARDWARE_TEST_REQUIRED` for its exact candidate/artifact pair; primary liveness is `PLANNING_REQUIRED`, with `PLANNER_REFRESH_REQUIRED` and without `REPAIR_REQUIRED`.
 
 Planner commit `c5ba86af32194055752e790fbeadd6efe1512d59` and immutable Curator receipt `6ea9451fa5e3d122b122eb163846753e26b86b3b` bind the exact two initial and surviving dispositions.
 
-- `GP-CONFIG-005`: owner-approved H2 live-RAM rejection invariant, now `READY` under the exact staged-candidate architecture and physical gate in its work order. Disk recovery remains separately gated and official configurator retired.
+- `GP-CONFIG-005`: owner-approved H2 live-RAM rejection invariant, now `HARDWARE_TEST_REQUIRED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, artifact SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`. Disk recovery remains separately gated and official configurator retired.
 - `GP-ART-001`: `DONE` through reviewed H1 local content-addressed custody policy/tool/checker integration; no external store, credentials, build, real artifact, or device action was selected.
 
 No new independent candidate is promoted. GP-VAL-011 is the existing stopped technical repair, not a third Planner candidate or completed work. Its observed complete-proof/300-second feasibility failure requires separate substantive architecture/validation authority; no new implementation or filler research precursor is authorized. Future persistence durability/recovery policy and modifier intent remain separately owner-gated; no H3 mechanism or gameplay semantics is selected.
