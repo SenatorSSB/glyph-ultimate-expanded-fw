@@ -1,0 +1,40 @@
+{
+  "schema_name": "glyph_configurator_setconfig_transaction",
+  "schema_version": 2,
+  "work_order": "GP-CONFIG-005",
+  "production_source": {
+    "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "sha256": "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876",
+    "method": "literal translation-unit include compiled by host C++ compiler"
+  },
+  "build_contract": {
+    "translation_unit": "tools/fixtures/configurator_setconfig_host/handler_harness.cpp",
+    "production_header": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+    "stub_include_root": "tools/fixtures/configurator_setconfig_host/include"
+  },
+  "dependency_substitutions": [
+    "nanopb decode/stream plumbing",
+    "Persistence SaveConfig result and observation",
+    "packet stream/output plumbing",
+    "platform-only USB/reboot/delay symbols",
+    "host Config shape with production array cardinalities used by the handler"
+  ],
+  "cases": [
+    {"name":"malformed_decode","result":"PASS"},
+    {"name":"invalid_default_backend_index","result":"PASS"},
+    {"name":"invalid_default_game_mode_reference","result":"PASS"},
+    {"name":"invalid_keyboard_mode_condition","result":"PASS"},
+    {"name":"invalid_custom_mode_condition","result":"PASS"},
+    {"name":"out_of_range_keyboard_config","result":"PASS"},
+    {"name":"out_of_range_custom_config","result":"PASS"},
+    {"name":"save_failure","result":"PASS"},
+    {"name":"full_success","result":"PASS"}
+  ],
+  "non_claims": [
+    "disk rollback",
+    "atomic config.bin",
+    "persistence recovery",
+    "power-loss safety",
+    "device hardware acceptance"
+  ]
+}

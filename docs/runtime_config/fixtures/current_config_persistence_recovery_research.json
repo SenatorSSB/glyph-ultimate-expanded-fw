@@ -1,6 +1,6 @@
 {
   "schema_name": "glyph_current_config_persistence_recovery_research",
-  "schema_version": 1,
+  "schema_version": 2,
   "work_order": "GP-PERSIST-001",
   "research_base_commit": "1a4b9311c8f7ae6d7cbf0a8680cd976499112f03",
   "status": "EVIDENCE_COMPLETE_IMPLEMENTATION_NOT_AUTHORIZED",
@@ -68,6 +68,16 @@
       "mode": "100644",
       "blob": "902f9d9d0cb972a867e1de58526c95665d757408",
       "sha256": "e56f32b3717a2c6d17cebbfe387554859ddf22eed9961a03c10adcf7b557282f"
+    }
+  ],
+  "repository_source_overlays": [
+    {
+      "id": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "work_order": "GP-CONFIG-005",
+      "mode": "100644",
+      "blob": "3e934f2f5aae13a36310a35d273727da60723abe",
+      "sha256": "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876"
     }
   ],
   "platform_selector": {
@@ -905,11 +915,11 @@
       "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "_config = Config_init_default;",
-      "line_start": 163,
-      "line_end": 163,
+      "fragment": "candidate = Config_init_default;",
+      "line_start": 169,
+      "line_end": 169,
       "return_handling": "NOT_APPLICABLE",
-      "consequence": "Reset live referenced config before decoding."
+      "consequence": "Reset function-static candidate storage before decoding; live referenced config remains unchanged."
     },
     {
       "id": "setconfig.stream",
@@ -918,8 +928,8 @@
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
       "fragment": "pb_istream_t istream = as_pb_istream(_in);",
-      "line_start": 165,
-      "line_end": 165,
+      "line_start": 171,
+      "line_end": 171,
       "return_handling": "NOT_APPLICABLE",
       "consequence": "Read command input through protobuf stream."
     },
@@ -929,11 +939,11 @@
       "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "if (!pb_decode(&istream, Config_fields, &_config)) {",
-      "line_start": 166,
-      "line_end": 166,
+      "fragment": "if (!pb_decode(&istream, Config_fields, &candidate)) {",
+      "line_start": 172,
+      "line_end": 172,
       "return_handling": "CHECKED",
-      "consequence": "Decode failure enters error and restore branch."
+      "consequence": "Decode targets staged candidate; failure sends error and leaves live config unchanged."
     },
     {
       "id": "setconfig.decode_error",
@@ -942,22 +952,10 @@
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
       "fragment": "WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);",
-      "line_start": 170,
-      "line_end": 170,
+      "line_start": 176,
+      "line_end": 176,
       "return_handling": "IGNORED",
       "consequence": "Error packet return ignored."
-    },
-    {
-      "id": "setconfig.restore",
-      "group": "setconfig",
-      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
-      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
-      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "persistence.LoadConfig(_config);\n        return false;",
-      "line_start": 173,
-      "line_end": 174,
-      "return_handling": "IGNORED",
-      "consequence": "Decode failure attempts restore but ignores its result."
     },
     {
       "id": "setconfig.backend_bound",
@@ -965,11 +963,11 @@
       "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "if (_config.default_backend_config > _config.communication_backend_configs_count) {",
-      "line_start": 177,
-      "line_end": 177,
+      "fragment": "if (candidate.default_backend_config > candidate.communication_backend_configs_count) {",
+      "line_start": 181,
+      "line_end": 181,
       "return_handling": "CHECKED",
-      "consequence": "Invalid default backend sends error and returns without restore."
+      "consequence": "Invalid default backend sends error and returns without changing live config."
     },
     {
       "id": "setconfig.mode_bound",
@@ -977,11 +975,11 @@
       "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "if (default_mode_id > _config.game_mode_configs_count) {",
-      "line_start": 192,
-      "line_end": 192,
+      "fragment": "if (default_mode_id > candidate.game_mode_configs_count) {",
+      "line_start": 196,
+      "line_end": 196,
       "return_handling": "CHECKED",
-      "consequence": "Invalid mode reference sends error and returns without restore."
+      "consequence": "Invalid mode reference sends error and returns without changing live config."
     },
     {
       "id": "setconfig.keyboard_type",
@@ -990,10 +988,10 @@
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
       "fragment": "if (keyboard_mode_id > 0 && gamemode_config.mode_id != MODE_KEYBOARD) {",
-      "line_start": 212,
-      "line_end": 212,
+      "line_start": 216,
+      "line_end": 216,
       "return_handling": "CHECKED",
-      "consequence": "Keyboard-mode type mismatch sends error and returns without restore."
+      "consequence": "Keyboard-mode type mismatch sends error and returns without changing live config."
     },
     {
       "id": "setconfig.custom_type",
@@ -1002,10 +1000,10 @@
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
       "fragment": "if (custom_mode_id > 0 && gamemode_config.mode_id != MODE_CUSTOM) {",
-      "line_start": 224,
-      "line_end": 224,
+      "line_start": 228,
+      "line_end": 228,
       "return_handling": "CHECKED",
-      "consequence": "Custom-mode type mismatch sends error and returns without restore."
+      "consequence": "Custom-mode type mismatch sends error and returns without changing live config."
     },
     {
       "id": "setconfig.keyboard_bound",
@@ -1013,11 +1011,11 @@
       "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "if (keyboard_mode_id > _config.keyboard_modes_count) {",
-      "line_start": 236,
-      "line_end": 236,
+      "fragment": "if (keyboard_mode_id > candidate.keyboard_modes_count) {",
+      "line_start": 240,
+      "line_end": 240,
       "return_handling": "CHECKED",
-      "consequence": "Keyboard reference overflow sends error and returns without restore."
+      "consequence": "Keyboard reference overflow sends error and returns without changing live config."
     },
     {
       "id": "setconfig.custom_bound",
@@ -1025,11 +1023,11 @@
       "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "if (custom_mode_id > _config.custom_modes_count) {",
-      "line_start": 250,
-      "line_end": 250,
+      "fragment": "if (custom_mode_id > candidate.custom_modes_count) {",
+      "line_start": 254,
+      "line_end": 254,
       "return_handling": "CHECKED",
-      "consequence": "Custom reference overflow sends error and returns without restore."
+      "consequence": "Custom reference overflow sends error and returns without changing live config."
     },
     {
       "id": "setconfig.save",
@@ -1037,11 +1035,23 @@
       "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
-      "fragment": "if (!persistence.SaveConfig(_config)) {\n        char errmsg[] = \"Failed to save config to memory\";\n        WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));\n        return false;\n    }",
-      "line_start": 265,
-      "line_end": 269,
+      "fragment": "if (!persistence.SaveConfig(candidate)) {\n        char errmsg[] = \"Failed to save config to memory\";\n        WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));\n        return false;\n    }",
+      "line_start": 269,
+      "line_end": 273,
       "return_handling": "CHECKED_SAVE_IGNORED_PACKET",
-      "consequence": "False save sends error and returns false without restore."
+      "consequence": "False SaveConfig(candidate) sends error and returns false while live config remains unchanged."
+    },
+    {
+      "id": "setconfig.publish",
+      "group": "setconfig",
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
+      "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
+      "fragment": "_config = candidate;",
+      "line_start": 275,
+      "line_end": 275,
+      "return_handling": "NOT_APPLICABLE",
+      "consequence": "After SaveConfig(candidate) returns true, assign candidate once into existing live Config storage."
     },
     {
       "id": "setconfig.success",
@@ -1050,10 +1060,10 @@
       "function_start": "bool ConfiguratorBackend::HandleSetConfig()",
       "function_end": "bool ConfiguratorBackend::HandleUnknownCommand",
       "fragment": "WritePacket(CMD_SUCCESS, nullptr, 0);\n    return true;",
-      "line_start": 271,
-      "line_end": 272,
+      "line_start": 277,
+      "line_end": 278,
       "return_handling": "IGNORED_PACKET",
-      "consequence": "True save sends success; packet return ignored."
+      "consequence": "After candidate publication, send success and return true; packet return remains ignored."
     },
     {
       "id": "additional_save.save",
@@ -1287,12 +1297,13 @@
       "id": "setconfig_failure",
       "classification": "SOURCE_BACKED",
       "evidence": [
-        "setconfig.restore",
+        "setconfig.decode",
         "setconfig.backend_bound",
         "setconfig.mode_bound",
-        "setconfig.save"
+        "setconfig.save",
+        "setconfig.publish"
       ],
-      "current_consequence": "Decode failure attempts unchecked restore; reference and save failure do not use that restore branch. Exact live usability UNKNOWN; GP-CONFIG-005 remains separate.",
+      "current_consequence": "Every decode, reference, or SaveConfig rejection leaves accepted live RAM unchanged; persistence disk recovery remains unclaimed.",
       "hardware_observation": "UNKNOWN"
     },
     {
@@ -1446,7 +1457,6 @@
     "setconfig.stream",
     "setconfig.decode",
     "setconfig.decode_error",
-    "setconfig.restore",
     "setconfig.backend_bound",
     "setconfig.mode_bound",
     "setconfig.keyboard_type",
@@ -1454,6 +1464,7 @@
     "setconfig.keyboard_bound",
     "setconfig.custom_bound",
     "setconfig.save",
+    "setconfig.publish",
     "setconfig.success",
     "additional_save.save",
     "wrapper_truncate_sync",

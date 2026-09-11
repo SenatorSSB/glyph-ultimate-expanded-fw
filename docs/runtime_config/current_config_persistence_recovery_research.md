@@ -38,7 +38,9 @@ LoadConfig order: read-only open checked; CheckSavedConfig checked (close/false 
 
 Boot starts global Config from glyph_default_config(), calls LoadConfig, and if false calls SaveConfig(config) without checking its bool, before initialize_backends. Caveat: the comment's 'write default' is not universal behavior. If LoadConfig reaches reset/decode and then fails, setup saves the Config_init_default/partially decoded state left by that call; it does not restore glyph_default_config. The exact partial contents are UNKNOWN without a payload/nanopb analysis. This is source-backed flow plus labeled inference, not a proposed GP-CONFIG-005 transaction repair.
 
-SetConfig first resets the live _config; decode failure sends error and calls LoadConfig(_config), ignoring restore result; count/reference checks return errors without the same restoration call; SaveConfig is called only after checks and its false produces CMD_ERROR; its true leads to CMD_SUCCESS whose WritePacket return is ignored. SendReport does not use HandleSetConfig's return. No atomic live-memory transaction is claimed. An additional existing persistence caller is backend_init.cpp's selected boot-backend/mode update; SaveConfig result is ignored. It prevents claiming that the four requested files cover all save cadence or concurrency.
+SetConfig now uses a function-static candidate: defaults and protobuf decode occur in candidate storage, all existing reference checks read candidate, and the existing SaveConfig(candidate) call runs while live _config remains unchanged. A successful save is followed by one `_config = candidate` publication; decode, reference, and save rejection paths send the existing CMD_ERROR and leave live RAM untouched. This is the bounded GP-CONFIG-005 RAM invariant only; it does not claim disk atomicity, persistence recovery, or successful-update runtime rebinding. SendReport does not use HandleSetConfig's return. An additional existing persistence caller is backend_init.cpp's selected boot-backend/mode update; SaveConfig result is ignored. It prevents claiming that the four requested files cover all save cadence or concurrency.
+
+The companion [GP-CONFIG-005 transaction fixture](fixtures/configurator_setconfig_transaction.json) and [compiled production-path host harness](../../tools/check_glyph_configurator_setconfig_transaction.py) bind and compile the exact current handler source. Host doubles replace only nanopb decode/stream plumbing, persistence, packet transport, and platform-only symbols; the binary executes the production `HandleSetConfig()` body through all seven current validation families, save failure, and success without a runtime fault command, device access, or config.bin access. The immutable GP-PERSIST-001 source catalog remains pinned to its research base, while its explicit GP-CONFIG-005 overlay and current step table bind the renewed live handler.
 
 ## Dependency semantics and limits
 
@@ -62,7 +64,7 @@ Declared filesystem size is 0.5m. Wrapper global construction uses linker _FS_st
 8. Close/sync error or interruption: SOURCE_BACKED status not propagated; INFERRED SaveConfig true is not persistence-success proof.
 9. Load header/size/CRC failure: SOURCE_BACKED false, boot attempts save remaining config.
 10. Decode failure after integrity pass: SOURCE_BACKED config reset before checked decode; INFERRED boot may save partially decoded/default-initialized object.
-11. SetConfig decode/reference/save failure: SOURCE_BACKED uneven restore branches; exact live-state usability UNKNOWN and GP-CONFIG-005 remains separate.
+11. SetConfig decode/reference/save failure: SOURCE_BACKED staged-candidate rejection paths preserve the previously accepted live RAM config; persistence recovery and disk atomicity remain unclaimed.
 12. Capacity/wear/concurrent save/update/power-loss effects: UNKNOWN device facts, bounded by source evidence and future gates.
 
 ## Options only; none selected
@@ -120,19 +122,19 @@ The companion [fixture](fixtures/current_config_persistence_recovery_research.js
 | `boot.default` | NOT_APPLICABLE | `config/glyph/common/src/config.cpp:34` |
 | `boot.load_save` | CHECKED_LOAD_IGNORED_SAVE | `config/glyph/common/src/config.cpp:91` |
 | `boot.backends` | NOT_APPLICABLE | `config/glyph/common/src/config.cpp:96` |
-| `setconfig.reset` | NOT_APPLICABLE | `HAL/pico/src/comms/ConfiguratorBackend.cpp:163` |
-| `setconfig.stream` | NOT_APPLICABLE | `HAL/pico/src/comms/ConfiguratorBackend.cpp:165` |
-| `setconfig.decode` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:166` |
-| `setconfig.decode_error` | IGNORED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:170` |
-| `setconfig.restore` | IGNORED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:173` |
-| `setconfig.backend_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:177` |
-| `setconfig.mode_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:192` |
-| `setconfig.keyboard_type` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:212` |
-| `setconfig.custom_type` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:224` |
-| `setconfig.keyboard_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:236` |
-| `setconfig.custom_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:250` |
-| `setconfig.save` | CHECKED_SAVE_IGNORED_PACKET | `HAL/pico/src/comms/ConfiguratorBackend.cpp:265` |
-| `setconfig.success` | IGNORED_PACKET | `HAL/pico/src/comms/ConfiguratorBackend.cpp:271` |
+| `setconfig.reset` | NOT_APPLICABLE | `HAL/pico/src/comms/ConfiguratorBackend.cpp:169` |
+| `setconfig.stream` | NOT_APPLICABLE | `HAL/pico/src/comms/ConfiguratorBackend.cpp:171` |
+| `setconfig.decode` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:172` |
+| `setconfig.decode_error` | IGNORED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:176` |
+| `setconfig.backend_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:181` |
+| `setconfig.mode_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:196` |
+| `setconfig.keyboard_type` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:216` |
+| `setconfig.custom_type` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:228` |
+| `setconfig.keyboard_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:240` |
+| `setconfig.custom_bound` | CHECKED | `HAL/pico/src/comms/ConfiguratorBackend.cpp:254` |
+| `setconfig.save` | CHECKED_SAVE_IGNORED_PACKET | `HAL/pico/src/comms/ConfiguratorBackend.cpp:269` |
+| `setconfig.publish` | NOT_APPLICABLE | `HAL/pico/src/comms/ConfiguratorBackend.cpp:275` |
+| `setconfig.success` | IGNORED_PACKET | `HAL/pico/src/comms/ConfiguratorBackend.cpp:277` |
 | `additional_save.save` | IGNORED | `HAL/pico/src/comms/backend_init.cpp:117` |
 
 | Failure window | Classification | Current consequence |
@@ -147,7 +149,7 @@ The companion [fixture](fixtures/current_config_persistence_recovery_research.js
 | `close_sync` | INFERRED | Close status is unavailable to caller; true SaveConfig is not proof of persistent success. |
 | `load_integrity` | SOURCE_BACKED | Header/length/CRC rejection returns false and boot attempts save of remaining in-memory config. |
 | `load_decode` | INFERRED | Decode failure after integrity pass can leave reset/partial config that boot then saves. |
-| `setconfig_failure` | SOURCE_BACKED | Decode failure attempts unchecked restore; reference and save failure do not use that restore branch. Exact live usability UNKNOWN; GP-CONFIG-005 remains separate. |
+| `setconfig_failure` | SOURCE_BACKED | Every decode, reference, or SaveConfig rejection leaves accepted live RAM unchanged; persistence disk recovery remains unclaimed. |
 | `device_limits` | UNKNOWN | Capacity, wear, concurrency, update and physical interruption outcomes require future evidence and authority. |
 
 | Future H3 decision | Exact question |

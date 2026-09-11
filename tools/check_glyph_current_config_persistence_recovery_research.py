@@ -41,6 +41,14 @@ SOURCE_IDENTITIES = {'HAL/pico/src/core/Persistence.cpp': ('907e6ca3d84fc414aa67
  'tools/glyph_runtime_config_storage_simulator.py': ('902f9d9d0cb972a867e1de58526c95665d757408',
                                                      'e56f32b3717a2c6d17cebbfe387554859ddf22eed9961a03c10adcf7b557282f')}
 
+SOURCE_OVERLAYS = {
+    'HAL/pico/src/comms/ConfiguratorBackend.cpp': (
+        'GP-CONFIG-005',
+        '3e934f2f5aae13a36310a35d273727da60723abe',
+        '28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876',
+    ),
+}
+
 REPOSITORY_IDENTITIES = {'arduino_pico': ('https://github.com/earlephilhower/arduino-pico.git',
                   '32e74d024e5e3ee5e7ec9593f5a4101641c61897',
                   '1092683c3dde85659bca81441b1fbd91a2284e86'),
@@ -432,7 +440,7 @@ STEP_IDENTITIES = {'lifecycle.mount': ('lifecycle',
                      'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                      'bool ConfiguratorBackend::HandleSetConfig()',
                      'bool ConfiguratorBackend::HandleUnknownCommand',
-                     '_config = Config_init_default;',
+                     'candidate = Config_init_default;',
                      'NOT_APPLICABLE'),
  'setconfig.stream': ('setconfig',
                       'HAL/pico/src/comms/ConfiguratorBackend.cpp',
@@ -444,7 +452,7 @@ STEP_IDENTITIES = {'lifecycle.mount': ('lifecycle',
                       'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                       'bool ConfiguratorBackend::HandleSetConfig()',
                       'bool ConfiguratorBackend::HandleUnknownCommand',
-                      'if (!pb_decode(&istream, Config_fields, &_config)) {',
+                      'if (!pb_decode(&istream, Config_fields, &candidate)) {',
                       'CHECKED'),
  'setconfig.decode_error': ('setconfig',
                             'HAL/pico/src/comms/ConfiguratorBackend.cpp',
@@ -452,24 +460,18 @@ STEP_IDENTITIES = {'lifecycle.mount': ('lifecycle',
                             'bool ConfiguratorBackend::HandleUnknownCommand',
                             'WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);',
                             'IGNORED'),
- 'setconfig.restore': ('setconfig',
-                       'HAL/pico/src/comms/ConfiguratorBackend.cpp',
-                       'bool ConfiguratorBackend::HandleSetConfig()',
-                       'bool ConfiguratorBackend::HandleUnknownCommand',
-                       'persistence.LoadConfig(_config);\n        return false;',
-                       'IGNORED'),
  'setconfig.backend_bound': ('setconfig',
                              'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                              'bool ConfiguratorBackend::HandleSetConfig()',
                              'bool ConfiguratorBackend::HandleUnknownCommand',
-                             'if (_config.default_backend_config > '
-                             '_config.communication_backend_configs_count) {',
+                             'if (candidate.default_backend_config > '
+                             'candidate.communication_backend_configs_count) {',
                              'CHECKED'),
  'setconfig.mode_bound': ('setconfig',
                           'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                           'bool ConfiguratorBackend::HandleSetConfig()',
                           'bool ConfiguratorBackend::HandleUnknownCommand',
-                          'if (default_mode_id > _config.game_mode_configs_count) {',
+                          'if (default_mode_id > candidate.game_mode_configs_count) {',
                           'CHECKED'),
  'setconfig.keyboard_type': ('setconfig',
                              'HAL/pico/src/comms/ConfiguratorBackend.cpp',
@@ -487,24 +489,30 @@ STEP_IDENTITIES = {'lifecycle.mount': ('lifecycle',
                               'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                               'bool ConfiguratorBackend::HandleSetConfig()',
                               'bool ConfiguratorBackend::HandleUnknownCommand',
-                              'if (keyboard_mode_id > _config.keyboard_modes_count) {',
+                              'if (keyboard_mode_id > candidate.keyboard_modes_count) {',
                               'CHECKED'),
  'setconfig.custom_bound': ('setconfig',
                             'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                             'bool ConfiguratorBackend::HandleSetConfig()',
                             'bool ConfiguratorBackend::HandleUnknownCommand',
-                            'if (custom_mode_id > _config.custom_modes_count) {',
+                            'if (custom_mode_id > candidate.custom_modes_count) {',
                             'CHECKED'),
  'setconfig.save': ('setconfig',
                     'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                     'bool ConfiguratorBackend::HandleSetConfig()',
                     'bool ConfiguratorBackend::HandleUnknownCommand',
-                    'if (!persistence.SaveConfig(_config)) {\n'
+                    'if (!persistence.SaveConfig(candidate)) {\n'
                     '        char errmsg[] = "Failed to save config to memory";\n'
                     '        WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));\n'
                     '        return false;\n'
                     '    }',
                     'CHECKED_SAVE_IGNORED_PACKET'),
+ 'setconfig.publish': ('setconfig',
+                       'HAL/pico/src/comms/ConfiguratorBackend.cpp',
+                       'bool ConfiguratorBackend::HandleSetConfig()',
+                       'bool ConfiguratorBackend::HandleUnknownCommand',
+                       '_config = candidate;',
+                       'NOT_APPLICABLE'),
  'setconfig.success': ('setconfig',
                        'HAL/pico/src/comms/ConfiguratorBackend.cpp',
                        'bool ConfiguratorBackend::HandleSetConfig()',
@@ -543,7 +551,7 @@ REVIEWED_RECORDS = {'claims': [('header_abi', 'be7493c8575a4fc33fc9ad43281de84e7
                      ('load_integrity', '5c36d815488529ac188a4f88734c7fa6855534ef30710f0307d0fad467cdf272'),
                      ('load_decode', 'e0de146c272db1b6db84ddb19ec9dc5a955714e1c4a03e2fd8ac6994b06b24f3'),
                      ('setconfig_failure',
-                      'c2421941b0e6172285612f7a4e3db2891b33cb3ed222566a9b0fc99608187b00'),
+                      'fff50023b591b7ff86f43f7cc767dc036749657553be695b84691ee2b25f3fe2'),
                      ('device_limits', '1cdfeaa1ab82063965f5d4e4b931f5beef6ec3d7851ba9e75bc3cd8c4bb136c9')],
  'alternatives': [('temp_and_rename', 'b38d9adcc4f4b90a72f500261a90a20e29c7c24ac0d3055e6f3b6a15f92a0545'),
                   ('temp_plus_backup', '9b7236a7ea8eec28a5786b6bd8edcc448e8d3ebdb09a5a772c1e1bd761a2a665'),
@@ -603,6 +611,7 @@ TOP_KEYS = ['schema_name',
  'status',
  'selected_recovery_mechanism',
  'repository_sources',
+ 'repository_source_overlays',
  'platform_selector',
  'upstream_repositories',
  'upstream_blobs',
@@ -669,19 +678,19 @@ STEP_CONSEQUENCES = {'lifecycle.mount': '595770ee38380a91a69a273bb45f0084c743966
  'boot.default': '1dbce4f36fa643e2d280259c928e643de12d0d62913ce9635eccff14a383101b',
  'boot.load_save': 'a87f05d4f900d335ae56bc6016d7ad80d3c355ec9ee22ed7439c817556d2c9c0',
  'boot.backends': '057ff452f5aa80e2614b1c42400f272acb3a1c78353f731d84dea80fc41fd96f',
- 'setconfig.reset': '3946a32e220582adc79b22df77f39aa0abcbaf7f48230d5ada3ca9dfbf632278',
+ 'setconfig.reset': '2a2287edf9fb49060a35dbf44821c574f07861181af6a2a3b2a1982645bca0c1',
  'setconfig.stream': 'ffd9645ca45e7a27507a552ee814d5eff8a7cd69c06492b40bcddc44b40a8555',
- 'setconfig.decode': '210159a60f246be4f7dca9e49af713bacc009ed7bbf654ab3cefc07b103ec9e3',
+ 'setconfig.decode': '24a0414e41d7e4f11b80323fbfcaca9b887364bf3821c0cc1d7a34ce0e617bb6',
  'setconfig.decode_error': 'd80f89fe2a4c88f4e19d801236f3698b7753107e718987707d95930d7e4c37c7',
- 'setconfig.restore': '8b10ed9af96edfc07b4f78120f27a62904dd16459fe73c48ec7087af7d207b92',
- 'setconfig.backend_bound': '9d7000fd3f163efcee352b6e4010864d4918d3450459bd787958ec073017ab9f',
- 'setconfig.mode_bound': 'de25a4cce7028aef87f7e112e92490daea22d158a6040825e4bab4725c27cd8d',
- 'setconfig.keyboard_type': '5d83cebc3de93676a8706d002d7506209d88ceb29237e2c6f5f2d9de8062aad4',
- 'setconfig.custom_type': 'f8554e36ed654704025b9cea27d1dcdd0faf5d57a2cc84bef5ce2662e7f3634a',
- 'setconfig.keyboard_bound': '26ed19d12d75998c3c7b65f8e01aca717f40dbdeb866bf207a684414166f8403',
- 'setconfig.custom_bound': '95149468e2c45740f1c9ef47eef96a500554924bf9b514540070bec71464a7cf',
- 'setconfig.save': '316b2659be6df402eec35867281f3a8c06ad0e9a8f340d3236ccb5c5bb0eb23c',
- 'setconfig.success': '22567d0ecb803cea4ee02ed63e763bb24321e6f648d40af640418d41d0518dfd',
+ 'setconfig.backend_bound': '5e89986c524f1d6e80b5318fa4a685d0a6bcab94a9f6222630be182f5f4d2b1d',
+ 'setconfig.mode_bound': '608002b9302b6ad792d8a32170040702bd4c09bb28ae4592cff02300807b7700',
+ 'setconfig.keyboard_type': '0424f91eadb979127a434a62a859e2663d0982ab441b3dad666a1a78dae1c00a',
+ 'setconfig.custom_type': '474fa4d222431095edf9922ddbfaa89a92d513abf5d1e84c0470364e0b19e417',
+ 'setconfig.keyboard_bound': '24bc10c24f25df28b82ba6d65a47723c949c0d702f27c9b8a6a063810cc7d3c8',
+ 'setconfig.custom_bound': '8db931b1707ae6bdcc949e4c9dd22b470128f6fa3bcbeac36abc818ef92e876b',
+ 'setconfig.save': '9eb2d1d6cb6fec084d780f5a7888914a4931936bdacbb6ec1935bb70469fa024',
+ 'setconfig.publish': 'ba279f5d75f7d2d4aadb3c3dad1d99a5dbc1e425ad00e75b230eb87f38fceb25',
+ 'setconfig.success': '5bf633af4febb7f3033a61ea892de8763da9c5dcdd9f14eb063ddb61ade1a75d',
  'additional_save.save': '3d326b02fc30c5fda3f72e7f04bc1f4021d82ab858b577ca8e5263fbdf2cbf2b'}
 
 
@@ -747,7 +756,7 @@ def source_bytes(root: Path = ROOT) -> dict[str, bytes]:
 def validate(value: dict, sources: dict[str, bytes]) -> None:
     exact(value, TOP_KEYS, "research")
     require(value["schema_name"] == "glyph_current_config_persistence_recovery_research" and
-            type(value["schema_version"]) is int and value["schema_version"] == 1,
+            type(value["schema_version"]) is int and value["schema_version"] == 2,
             "research schema identity")
     require(value["work_order"] == "GP-PERSIST-001" and value["research_base_commit"] == BASE,
             "research work-order/base identity")
@@ -761,9 +770,20 @@ def validate(value: dict, sources: dict[str, bytes]) -> None:
         require(record["path"] == path and record["mode"] == "100644", "source path/mode")
         sha(record["blob"], 40, path); sha(record["sha256"], 64, path)
         require((record["blob"], record["sha256"]) == (blob, digest), "source provenance drift")
-        data = sources[path]
+        data = (subprocess.check_output(["git", "show", f"{BASE}:{path}"], cwd=ROOT)
+                if path in SOURCE_OVERLAYS else sources[path])
         require(hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == blob and
                 hashlib.sha256(data).hexdigest() == digest, f"current source bytes drift: {path}")
+    overlays = ordered(value["repository_source_overlays"], list(SOURCE_OVERLAYS), "repository_source_overlays")
+    for record in overlays:
+        exact(record, ["id", "path", "work_order", "mode", "blob", "sha256"], "repository source overlay")
+        path = record["id"]
+        work_order, blob, digest = SOURCE_OVERLAYS[path]
+        require(record == {"id": path, "path": path, "work_order": work_order, "mode": "100644",
+                           "blob": blob, "sha256": digest}, "source overlay provenance drift")
+        data = sources[path]
+        require(hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == blob and
+                hashlib.sha256(data).hexdigest() == digest, f"current source overlay bytes drift: {path}")
     selector = exact(value["platform_selector"], ["path", "fragment"], "platform selector")
     require(selector == {"path": "platformio.ini", "fragment":
             "framework-arduinopico@https://github.com/earlephilhower/arduino-pico.git#3.6.3"},
@@ -889,6 +909,9 @@ def validate_git_sources(root: Path = ROOT) -> None:
         actual[path] = (mode, kind, blob)
     require(actual == {p: ("100644", "blob", blob) for p, (blob, _) in SOURCE_IDENTITIES.items()},
             "immutable repository base source objects unavailable or drifted")
+    for path, (_, blob, _) in SOURCE_OVERLAYS.items():
+        observed = subprocess.check_output(["git", "hash-object", "--", path], cwd=root, text=True).strip()
+        require(observed == blob, f"current source overlay Git blob drifted: {path}")
 
 
 def coverage(value: dict) -> str:
@@ -910,8 +933,13 @@ def validate_doc(text: str, value: dict) -> None:
             "document coverage table must match reviewed fixture")
     for phrase in (BASE, "EVIDENCE_COMPLETE_IMPLEMENTATION_NOT_AUTHORIZED", "Single-byte File::read()",
                    "buffered reads report counts or zero", "torn program/erase", "No filenames",
-                   "Nunchuk stays NOT_TESTED", "root cause unproven", "not whole SaveConfig atomicity"):
+                   "Nunchuk stays NOT_TESTED", "root cause unproven", "not whole SaveConfig atomicity",
+                   "SetConfig decode/reference/save failure: SOURCE_BACKED staged-candidate rejection paths "
+                   "preserve the previously accepted live RAM config; persistence recovery and disk atomicity "
+                   "remain unclaimed."):
         require(phrase in text, f"required evidence caveat absent: {phrase}")
+    for phrase in ("uneven restore branches", "GP-CONFIG-005 remains separate"):
+        require(phrase not in text, f"stale GP-CONFIG-005 wording remains: {phrase}")
 
 
 def adversarial(value: dict, sources: dict[str, bytes]) -> int:
@@ -930,6 +958,8 @@ def adversarial(value: dict, sources: dict[str, bytes]) -> int:
         (("repository_sources", 0, "blob"), "0"*40),
         (("repository_sources", 0, "path"), "config.bin"),
         (("repository_sources", 0, "mode"), "120000"),
+        (("repository_source_overlays", 0, "work_order"), "GP-PERSIST-001"),
+        (("repository_source_overlays", 0, "blob"), "0"*40),
         (("platform_selector", "fragment"), "framework-arduinopico#latest"),
         (("upstream_repositories", 0, "commit"), "0"*40),
         (("upstream_repositories", 0, "commit"), "32e74d0"),
@@ -958,7 +988,7 @@ def adversarial(value: dict, sources: dict[str, bytes]) -> int:
         (("future_cut_points",), []),
     ]:
         tests.append((str(path), changed(path, replacement)))
-    for section in ("repository_sources", "upstream_blobs", "current_steps", "failure_windows", "decision_gates"):
+    for section in ("repository_sources", "repository_source_overlays", "upstream_blobs", "current_steps", "failure_windows", "decision_gates"):
         tests.append((f"missing {section}", changed((section,), value[section][1:])))
         tests.append((f"duplicate {section}", changed((section,), value[section]+[value[section][0]])))
     tests.append(("wrong operation order", changed(("current_steps",), value["current_steps"][::-1])))
