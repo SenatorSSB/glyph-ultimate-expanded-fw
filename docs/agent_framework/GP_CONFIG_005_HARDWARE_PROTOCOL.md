@@ -8,6 +8,10 @@ This is the candidate-local H2 protocol for the approved live-RAM SetConfig
 rejection invariant. It is not evidence that a test occurred. The exact
 candidate and preserved artifact are:
 
+The bounded project-owner CLI and runbook for executing this protocol are in
+`tools/gp_config_005_hw_test.py` and
+`docs/agent_framework/GP_CONFIG_005_HARDWARE_OPERATOR.md`.
+
 - Candidate branch: `glyph/gp-config-005-transactional-setconfig`
 - Candidate Git SHA: `437f87e8086a50f0dfbd834176b80d245c1ed307`
 - Base `configurator` SHA: `9550a1bf1309383e351f4f9e66663562fc9f13ac`

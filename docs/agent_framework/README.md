@@ -61,6 +61,8 @@ Use separated generation, judgment, execution, and evidence roles:
 - `HARDWARE_EVIDENCE.md` - H0-H3 risk and exact-snapshot acceptance lane.
 - `HARDWARE_ARTIFACT_CUSTODY.md` - approved owner-held local content-addressed
   preservation, readback, retention, rebuild, and loss contract.
+- `GP_CONFIG_005_HARDWARE_OPERATOR.md` - bounded project-owner CLI runbook for
+  the exact GP-CONFIG-005 physical protocol; it is not hardware evidence.
 - `USER_DIRECTION.md` - actual human direction only.
 - `SCHEDULED_TASKS.md` - exact copy-paste scheduled/manual role configurations;
   it does not create schedules.
