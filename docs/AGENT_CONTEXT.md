@@ -72,15 +72,15 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-005"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-005; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is `docs/project/ACTIVE_AGENT_QUEUE.md`.
-  Packet `glyph-portfolio-20260907-1359` is `CONSUMED`: owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and intentionally deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; all failed and historical evidence is preserved, no repair implementation resumed, and `REPAIR_REQUIRED` is no longer current liveness. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is the sole complete bounded `READY` work order; effective runway is one and primary liveness is `RUNWAY_LOW`. The immutable packet receipt retains its truthful initial dispositions, while current survivors are empty and `curator_review_required` is false. Global wait remains unsupported and no Planner refresh is required while executable work exists.
+  Packet `glyph-portfolio-20260907-1359` is `CONSUMED`: owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and intentionally deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; all failed and historical evidence is preserved, no repair implementation resumed, and `REPAIR_REQUIRED` is no longer current liveness. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is hardware-pending at `HARDWARE_TEST_REQUIRED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307` and UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`; its `hardware_result` remains null. Effective runway is zero, primary liveness is `PLANNING_REQUIRED`, and `PLANNER_REFRESH_REQUIRED` is current while the hardware-pending signal remains separate. The immutable packet receipt retains its truthful initial dispositions, while current survivors are empty and `curator_review_required` is false. Global wait remains unsupported.
   Completed implementation history remains in the canonical queue. Bounded
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,
