@@ -820,16 +820,7 @@ def load_capture(path: Path, config_pb2: Any, json_format: Any) -> tuple[dict[st
     return capture, message, payload
 
 
-def request_device_info(transport: Transport, config_pb2: Any) -> tuple[dict[str, Any], dict[str, Any]]:
-    command_id, payload = transport.transact(CMD_GET_DEVICE_INFO, b"")
-    response = response_record(command_id, payload)
-    if command_id == CMD_ERROR:
-        raise ToolError(f"device error during GET_DEVICE_INFO: {response['text']}")
-    if command_id != CMD_SET_DEVICE_INFO:
-        raise ToolError(
-            "unexpected response command for GET_DEVICE_INFO: "
-            f"expected=CMD_SET_DEVICE_INFO, actual={command_name(command_id)}"
-        )
+def decode_device_info_payload(payload: bytes, config_pb2: Any) -> dict[str, Any]:
     message = config_pb2.DeviceInfo()
     try:
         message.ParseFromString(payload)
@@ -841,19 +832,29 @@ def request_device_info(transport: Transport, config_pb2: Any) -> tuple[dict[str
             f"expected={EXPECTED_DEVICE_FIRMWARE_VERSION!r}, actual={message.firmware_version!r}. "
             "The short value is supportive only; the preserved UF2 hash remains the exact identity."
         )
-    return (
-        {
-            "firmware_name": message.firmware_name,
-            "firmware_version": message.firmware_version,
-            "device_name": message.device_name,
-            "candidate_short_identity_matches": True,
-            "identity_nonclaim": (
-                "The embedded short Git version supports selection but does not prove the full "
-                "candidate SHA or exact flashed UF2 bytes."
-            ),
-        },
-        response,
-    )
+    return {
+        "firmware_name": message.firmware_name,
+        "firmware_version": message.firmware_version,
+        "device_name": message.device_name,
+        "candidate_short_identity_matches": True,
+        "identity_nonclaim": (
+            "The embedded short Git version supports selection but does not prove the full "
+            "candidate SHA or exact flashed UF2 bytes."
+        ),
+    }
+
+
+def request_device_info(transport: Transport, config_pb2: Any) -> tuple[dict[str, Any], dict[str, Any]]:
+    command_id, payload = transport.transact(CMD_GET_DEVICE_INFO, b"")
+    response = response_record(command_id, payload)
+    if command_id == CMD_ERROR:
+        raise ToolError(f"device error during GET_DEVICE_INFO: {response['text']}")
+    if command_id != CMD_SET_DEVICE_INFO:
+        raise ToolError(
+            "unexpected response command for GET_DEVICE_INFO: "
+            f"expected=CMD_SET_DEVICE_INFO, actual={command_name(command_id)}"
+        )
+    return decode_device_info_payload(payload, config_pb2), response
 
 
 def request_device_info_response(transport: Transport, config_pb2: Any) -> dict[str, Any]:
@@ -1031,6 +1032,13 @@ def execute_valid_update(
         result["followup_responsive"] = True
         result["post_update_get_config_matches_sent_payload"] = followup_payload == payload
         result["connected_after"] = transport_is_open(transport)
+        if followup_payload != payload:
+            result["mechanical_outcome"] = "POST_UPDATE_PERSISTED_READBACK_MISMATCH_STOP"
+            result["error"] = (
+                "CMD_SUCCESS was followed by a persisted GET_CONFIG payload that does not match "
+                "the sent valid payload"
+            )
+            return result
         result["mechanical_outcome"] = "SUCCESS_RESPONSE_AND_RESPONSIVE"
         return result
     except Exception as exc:
@@ -1100,6 +1108,23 @@ def validate_result_schema(value: Any) -> None:
             raise ToolError("mechanical rejection records must leave human_observation null")
 
 
+def payload_from_response_record(record: dict[str, Any]) -> bytes:
+    encoded = record.get("payload_base64")
+    if not isinstance(encoded, str):
+        raise ToolError("stored response payload_base64 must be a string")
+    try:
+        payload = base64.b64decode(encoded, validate=True)
+    except Exception as exc:
+        raise ToolError(f"stored response payload base64 is invalid: {exc}") from exc
+    if record.get("payload_length") != len(payload):
+        raise ToolError("stored response payload length mismatch")
+    if record.get("payload_sha256") != sha256_bytes(payload):
+        raise ToolError("stored response payload SHA-256 mismatch")
+    if record.get("payload_hex") != payload.hex():
+        raise ToolError("stored response payload hex mismatch")
+    return payload
+
+
 def load_completed_rejection_result(
     path: Path,
     capture: dict[str, Any],
@@ -1127,13 +1152,21 @@ def load_completed_rejection_result(
         response = record.get("response")
         followup = record.get("followup")
         request = record.get("request")
+        if not isinstance(response, dict):
+            raise ToolError(f"rejection result response is missing: {case.id}")
+        error_payload = payload_from_response_record(response)
+        if response.get("text") != decode_error_payload(error_payload):
+            raise ToolError(f"stored error text does not match payload bytes: {case.id}")
+        if not isinstance(followup, dict) or not isinstance(followup.get("response"), dict):
+            raise ToolError(f"rejection follow-up response is missing: {case.id}")
+        followup_payload = payload_from_response_record(followup["response"])
+        decoded_followup = decode_device_info_payload(followup_payload, config_pb2)
         if not (
             record.get("mechanical_outcome") == "EXPECTED_REJECTION_AND_RESPONSIVE"
             and record.get("response_matches_expected") is True
             and record.get("unexpected_success") is False
             and record.get("connected_after") is True
             and record.get("followup_responsive") is True
-            and isinstance(response, dict)
             and response.get("command") == "CMD_ERROR"
             and expected_error_matches(case, response.get("text"))
             and record.get("target_validation_branch") == case.target_validation_branch
@@ -1143,10 +1176,9 @@ def load_completed_rejection_result(
             and isinstance(request, dict)
             and request.get("command") == "CMD_SET_CONFIG"
             and request.get("protobuf_payload_sha256") == sha256_bytes(case.payload)
-            and isinstance(followup, dict)
             and followup.get("request_command") == "CMD_GET_DEVICE_INFO"
-            and isinstance(followup.get("response"), dict)
             and followup["response"].get("command") == "CMD_SET_DEVICE_INFO"
+            and followup.get("decoded_device_info") == decoded_followup
         ):
             raise ToolError(f"rejection result case is not mechanically complete: {record.get('id')}")
     if value["valid_update"].get("sent") is not False:

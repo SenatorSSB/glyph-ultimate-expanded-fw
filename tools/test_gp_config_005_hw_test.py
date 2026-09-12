@@ -372,6 +372,33 @@ class OperatorUtilityTests(unittest.TestCase):
         self.assertEqual(record["mechanical_outcome"], "BASELINE_DRIFT_STOP")
         self.assertEqual([call[0] for call in transport.calls], [operator.CMD_GET_CONFIG])
 
+    def test_post_success_persisted_readback_mismatch_is_a_hard_stop(self) -> None:
+        baseline = self.make_baseline()
+        baseline_payload = operator.deterministic_payload(baseline)
+        _, metadata = operator.build_valid_update(baseline, self.config_pb2)
+        transport = MockTransport(
+            [
+                (operator.CMD_SET_CONFIG, baseline_payload),
+                (operator.CMD_SUCCESS, b""),
+                (operator.CMD_SET_CONFIG, baseline_payload),
+            ]
+        )
+        record = operator.execute_valid_update(
+            transport,
+            baseline,
+            baseline_payload,
+            self.config_pb2,
+            confirmation_token=metadata["confirmation_token"],
+            rejection_observations_acknowledged=True,
+        )
+        self.assertTrue(record["sent"])
+        self.assertTrue(record["followup_responsive"])
+        self.assertFalse(record["post_update_get_config_matches_sent_payload"])
+        self.assertEqual(
+            record["mechanical_outcome"],
+            "POST_UPDATE_PERSISTED_READBACK_MISMATCH_STOP",
+        )
+
     def test_valid_update_is_never_sent_without_rejection_observation_ack(self) -> None:
         baseline = self.make_baseline()
         baseline_payload = operator.deterministic_payload(baseline)
@@ -511,6 +538,9 @@ class OperatorUtilityTests(unittest.TestCase):
                         "response": operator.response_record(
                             operator.CMD_SET_DEVICE_INFO,
                             self.make_device_info_payload(),
+                        ),
+                        "decoded_device_info": operator.decode_device_info_payload(
+                            self.make_device_info_payload(), self.config_pb2
                         ),
                     },
                 }
