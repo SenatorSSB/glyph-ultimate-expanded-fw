@@ -1100,7 +1100,12 @@ def validate_result_schema(value: Any) -> None:
             raise ToolError("mechanical rejection records must leave human_observation null")
 
 
-def load_completed_rejection_result(path: Path, capture: dict[str, Any]) -> dict[str, Any]:
+def load_completed_rejection_result(
+    path: Path,
+    capture: dict[str, Any],
+    baseline: Any,
+    config_pb2: Any,
+) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
@@ -1108,26 +1113,20 @@ def load_completed_rejection_result(path: Path, capture: dict[str, Any]) -> dict
     validate_result_schema(value)
     if value.get("suite_mechanically_complete") is not True:
         raise ToolError("valid update requires suite_mechanically_complete=true")
-    baseline = value.get("baseline_capture")
-    if not isinstance(baseline, dict) or (
-        baseline.get("raw_config_payload_sha256")
+    baseline_record = value.get("baseline_capture")
+    if not isinstance(baseline_record, dict) or (
+        baseline_record.get("raw_config_payload_sha256")
         != capture["raw_config_payload_sha256"]
     ):
         raise ToolError("rejection result baseline does not match the selected capture")
-    expected_ids = [
-        "malformed_decode",
-        "invalid_default_backend_index",
-        "invalid_backend_default_mode_reference",
-        "invalid_keyboard_reference_type",
-        "invalid_custom_reference_type",
-        "keyboard_index_out_of_range",
-        "custom_index_out_of_range",
-    ]
+    expected_cases = build_rejection_cases(baseline, config_pb2)
+    expected_ids = [case.id for case in expected_cases]
     if [record.get("id") for record in value["tests"]] != expected_ids:
         raise ToolError("rejection result does not contain the exact ordered seven-case suite")
-    for record in value["tests"]:
+    for case, record in zip(expected_cases, value["tests"]):
         response = record.get("response")
         followup = record.get("followup")
+        request = record.get("request")
         if not (
             record.get("mechanical_outcome") == "EXPECTED_REJECTION_AND_RESPONSIVE"
             and record.get("response_matches_expected") is True
@@ -1136,6 +1135,14 @@ def load_completed_rejection_result(path: Path, capture: dict[str, Any]) -> dict
             and record.get("followup_responsive") is True
             and isinstance(response, dict)
             and response.get("command") == "CMD_ERROR"
+            and expected_error_matches(case, response.get("text"))
+            and record.get("target_validation_branch") == case.target_validation_branch
+            and record.get("changed_fields") == case.changed_fields
+            and record.get("source_baseline_payload_sha256")
+            == capture["raw_config_payload_sha256"]
+            and isinstance(request, dict)
+            and request.get("command") == "CMD_SET_CONFIG"
+            and request.get("protobuf_payload_sha256") == sha256_bytes(case.payload)
             and isinstance(followup, dict)
             and followup.get("request_command") == "CMD_GET_DEVICE_INFO"
             and isinstance(followup.get("response"), dict)
@@ -1280,7 +1287,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
                 return 1
             completed_rejection_result = load_completed_rejection_result(
-                args.rejection_result, capture
+                args.rejection_result, capture, baseline, config_pb2
             )
             print("Confirmed prerequisite: exact seven-case rejection result is mechanically complete.")
             print("Review the valid-update diff immediately before device access:")

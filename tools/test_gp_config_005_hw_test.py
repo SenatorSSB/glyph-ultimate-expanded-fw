@@ -492,6 +492,12 @@ class OperatorUtilityTests(unittest.TestCase):
                 {
                     "id": case.id,
                     "human_observation": None,
+                    "target_validation_branch": case.target_validation_branch,
+                    "changed_fields": case.changed_fields,
+                    "source_baseline_payload_sha256": operator.sha256_bytes(payload),
+                    "request": operator.payload_record(
+                        operator.CMD_SET_CONFIG, case.payload
+                    ),
                     "mechanical_outcome": "EXPECTED_REJECTION_AND_RESPONSIVE",
                     "response_matches_expected": True,
                     "unexpected_success": False,
@@ -513,12 +519,16 @@ class OperatorUtilityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             path = Path(temp_dir) / "rejections.json"
             path.write_text(operator.json_dump(result), encoding="utf-8")
-            loaded = operator.load_completed_rejection_result(path, capture)
+            loaded = operator.load_completed_rejection_result(
+                path, capture, baseline, self.config_pb2
+            )
             self.assertTrue(loaded["suite_mechanically_complete"])
             result["tests"][0]["followup_responsive"] = False
             path.write_text(operator.json_dump(result), encoding="utf-8")
             with self.assertRaisesRegex(ToolError, "not mechanically complete"):
-                operator.load_completed_rejection_result(path, capture)
+                operator.load_completed_rejection_result(
+                    path, capture, baseline, self.config_pb2
+                )
 
 
 if __name__ == "__main__":
