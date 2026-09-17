@@ -8,6 +8,16 @@ for full discovery.
 
 ## Current Merge-Gating Hardware PASS
 
+- `gp_config_005_hardware_result_2026-09-17.md` - exact-snapshot
+  `HARDWARE_PASS` for candidate
+  `437f87e8086a50f0dfbd834176b80d245c1ed307` and UF2 SHA-256
+  `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`
+  under the bounded `GP_CONFIG_005_HW_V1` live-Config rejection protocol.
+  The separate earlier persistence event remains inconclusive; no disk
+  rollback, atomic persistence, power-loss, recovery, live-RAM readback,
+  Nunchuk, unrelated-path, or root-cause claim is made.
+- `fixtures/gp_config_005_hardware_evidence_2026-09-17.json` - Revision-2
+  structured evidence for that exact candidate/artifact pair and fresh run.
 - `x1_offset41_hardware_result_2026-09-02.md` - exact-snapshot manual
   HARDWARE_PASS for the X1-only offset-41 candidate at
   `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
@@ -52,6 +62,10 @@ for full discovery.
 These packets remain important historical evidence. They are not current work
 and must not be reintroduced as active publication paths.
 
+- `gp_config_005_prior_inconclusive_persistence_event_2026-09-17.md` -
+  separately preserved `INCONCLUSIVE_PERSISTENCE_EVENT` from the earlier
+  GP-CONFIG-005 attempt. Its exact compiled-default post-drift identity does
+  not prove a persistence-failure window and is not reused as PASS evidence.
 - `generated_canonical_grid_candidate_hardware_result_2026-07-19.md` -
   generated canonical-grid candidate HARDWARE_FAIL for commit
   `e643017c1577c9ca2b94581fa6f18c0dfb1bac9b`. Forced Up + A, forced Down + A,

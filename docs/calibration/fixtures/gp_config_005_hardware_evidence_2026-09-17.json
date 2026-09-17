@@ -1,0 +1,117 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-005",
+  "candidate_branch": "glyph/gp-config-005-transactional-setconfig",
+  "candidate_git_sha": "437f87e8086a50f0dfbd834176b80d245c1ed307",
+  "candidate_base_configurator_sha": "9550a1bf1309383e351f4f9e66663562fc9f13ac",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/437f87e8086a50f0dfbd834176b80d245c1ed307/650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6 build target and device_name glyph_mk6; physical board revision was not separately reported by the project owner",
+  "firmware_profile_state": "Exact restored 4202-byte persisted baseline SHA-256 26919308427aa081633b0a40c0c83c5762ba9edf35eb912b901e9fa847a4dd84 with the Ultimate profile in ordinary use; the final benign accepted update changed only rgb_brightness from 255 to 20",
+  "update_method": "Manual owner-controlled UF2 update using the exact preserved firmware.uf2; no flashing automation was used or authorized",
+  "host_platform_adapter": "User-managed host on /dev/cu.usbmodem101 using the existing custom Glyph/HayBox serial configurator backend; exact adapter details were not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_005_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_005_HW_V1",
+  "preconditions": [
+    "The live candidate ref resolved exactly to 437f87e8086a50f0dfbd834176b80d245c1ed307, a direct child of recorded base 9550a1bf1309383e351f4f9e66663562fc9f13ac, and the candidate tree remained fixed.",
+    "The owner identified the exact tested artifact as the preserved regular read-only UF2 at the candidate-SHA/artifact-SHA locator; independent processing re-hashed those 792064 bytes to 650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44 without rebuilding.",
+    "Before the fresh acceptance attempt, the original config artifact re-encoded to 4202 bytes with SHA-256 26919308427aa081633b0a40c0c83c5762ba9edf35eb912b901e9fa847a4dd84; immediate post-restore and post-reboot GET_CONFIG reads matched it exactly.",
+    "The fresh baseline capture in local_backups/gp-config-005-operator/fresh-run-20260917T224913Z matched the restored reboot-stable original config byte-for-byte."
+  ],
+  "steps": [
+    {
+      "id": "IDENTITY-AND-BASELINE",
+      "instruction": "Confirm the exact candidate/artifact/protocol context and capture the restored persisted baseline before mutations.",
+      "expected": "Candidate 437f87e8086a50f0dfbd834176b80d245c1ed307, artifact SHA-256 650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44, protocol GP_CONFIG_005_HW_V1, responsive glyph_mk6 device, and baseline payload 4202 bytes / 26919308427aa081633b0a40c0c83c5762ba9edf35eb912b901e9fa847a4dd84.",
+      "observed": "The operator package records the exact full candidate/artifact/protocol identities, selected /dev/cu.usbmodem101, responsive device info glyph_mk6 / HayBox / 437f87e, and the exact expected baseline payload identity. The embedded short Git value supports device selection but is not treated alone as full source/artifact proof."
+    },
+    {
+      "id": "REJECT-MALFORMED-DECODE",
+      "instruction": "Send the malformed protobuf zero-tag SetConfig case, then request device info.",
+      "expected": "Exact CMD_ERROR text 'Failed to decode config: zero tag', no CMD_SUCCESS, continued connection, and responsive CMD_SET_DEVICE_INFO follow-up.",
+      "observed": "Exact CMD_ERROR text matched; unexpected_success was false; connected_after and followup_responsive were true; CMD_SET_DEVICE_INFO followed."
+    },
+    {
+      "id": "REJECT-DEFAULT-BACKEND",
+      "instruction": "Send a candidate whose default_backend_config is one beyond communication_backend_configs_count, then request device info.",
+      "expected": "Exact existing default-backend CMD_ERROR, no CMD_SUCCESS, continued connection, and responsive CMD_SET_DEVICE_INFO follow-up.",
+      "observed": "CMD_ERROR was 'Default backend ID is 9 but only 8 backend configs are defined'; exact match true; unexpected_success false; connected_after and followup_responsive true."
+    },
+    {
+      "id": "REJECT-BACKEND-DEFAULT-MODE",
+      "instruction": "Send a candidate whose first backend default_mode_config is one beyond game_mode_configs_count, then request device info.",
+      "expected": "Exact existing backend-default-mode CMD_ERROR, no CMD_SUCCESS, continued connection, and responsive CMD_SET_DEVICE_INFO follow-up.",
+      "observed": "CMD_ERROR was 'Default mode ID is 14 for backend 1 but only 13 modes are defined'; exact match true; unexpected_success false; connected_after and followup_responsive true."
+    },
+    {
+      "id": "REJECT-KEYBOARD-REFERENCE-TYPE",
+      "instruction": "Send a candidate with keyboard_mode_config set on a non-keyboard game mode, then request device info.",
+      "expected": "Exact existing keyboard-reference/type CMD_ERROR, no CMD_SUCCESS, continued connection, and responsive CMD_SET_DEVICE_INFO follow-up.",
+      "observed": "CMD_ERROR was 'keyboard_mode_id is set for game mode 1 but mode_id is not MODE_KEYBOARD'; exact match true; unexpected_success false; connected_after and followup_responsive true."
+    },
+    {
+      "id": "REJECT-CUSTOM-REFERENCE-TYPE",
+      "instruction": "Send a candidate with custom_mode_config set on a non-custom game mode, then request device info.",
+      "expected": "Exact existing custom-reference/type CMD_ERROR, no CMD_SUCCESS, continued connection, and responsive CMD_SET_DEVICE_INFO follow-up.",
+      "observed": "CMD_ERROR was 'custom_mode_id is set for game mode 1 but mode_id is not MODE_CUSTOM'; exact match true; unexpected_success false; connected_after and followup_responsive true."
+    },
+    {
+      "id": "REJECT-KEYBOARD-INDEX-BOUND",
+      "instruction": "Send a keyboard-mode candidate whose keyboard reference is one beyond keyboard_modes_count, then request device info.",
+      "expected": "Exact existing keyboard-index-bound CMD_ERROR, no CMD_SUCCESS, continued connection, and responsive CMD_SET_DEVICE_INFO follow-up.",
+      "observed": "CMD_ERROR was 'Keyboard mode ID 2 is for game mode 13 but only 1 keyboard modes are defined'; exact match true; unexpected_success false; connected_after and followup_responsive true."
+    },
+    {
+      "id": "REJECT-CUSTOM-INDEX-BOUND",
+      "instruction": "Send a custom-mode candidate whose custom reference is one beyond custom_modes_count, then request device info.",
+      "expected": "Exact existing custom-index-bound CMD_ERROR, no CMD_SUCCESS, continued connection, and responsive CMD_SET_DEVICE_INFO follow-up.",
+      "observed": "CMD_ERROR was 'Custom mode ID 1 is for game mode config 1 but only 0 custom modes are defined'; exact match true; unexpected_success false; connected_after and followup_responsive true."
+    },
+    {
+      "id": "POST-REJECTION-CORRESPONDENCE",
+      "instruction": "Read persisted config after all seven rejections and perform the ordinary Ultimate/controller/display smoke observations.",
+      "expected": "Persisted GET_CONFIG payload remains the exact fresh baseline; no rejected value is operationally observed; controller, display/menu, and connection behavior remain normal.",
+      "observed": "Post-rejection payload was byte-for-byte the 4202-byte baseline with SHA-256 26919308427aa081633b0a40c0c83c5762ba9edf35eb912b901e9fa847a4dd84. The owner reported that the Ultimate profile operated normally on Switch, no rejected value was observed operationally, display/menu behavior appeared normal, and no disconnect or regression was observed."
+    },
+    {
+      "id": "VALID-BENIGN-UPDATE",
+      "instruction": "Starting from a fresh matching prewrite read, send the one-field rgb_brightness update 255 to 20 and perform the immediate persisted readback.",
+      "expected": "Only rgb_brightness changes; write attempt and system call complete; response is received and decoded as CMD_SUCCESS; immediate GET_CONFIG payload equals the exact 4201-byte sent payload; device remains responsive.",
+      "observed": "The only decoded field diff was rgb_brightness 255 to 20. Transaction stages recorded prewrite_read_attempted/completed, prewrite_baseline_matched, pre_write, write_attempted, write_system_call_completed, awaiting_response, response_received/decoded, and followup_read_attempted/completed. CMD_SUCCESS was received; immediate readback exactly matched sent SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480; connected_after and followup_responsive were true."
+    },
+    {
+      "id": "POST-VALID-REBOOT",
+      "instruction": "Reboot once, read persisted config again, and perform the ordinary controller/profile/display/connection smoke observations.",
+      "expected": "The post-reboot persisted payload exactly equals the sent valid payload, rgb_brightness is 20, and no controller/profile/display/connection regression is observed.",
+      "observed": "Post-reboot GET_CONFIG was 4201 bytes with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480, byte-for-byte equal to the sent and immediate-readback payload, with rgb_brightness 20. The owner reported normal controller behavior, expected profile/mapping behavior, normal display/menu behavior, and normal connection behavior."
+    }
+  ],
+  "negative_regression_checks": [
+    "All seven invalid requests returned their exact expected CMD_ERROR; no invalid request returned CMD_SUCCESS.",
+    "The device remained connected and returned CMD_SET_DEVICE_INFO after every rejection.",
+    "The owner reported no rejected value observed operationally after the rejection suite.",
+    "The owner reported normal Ultimate operation on Switch, normal display/menu behavior, and no disconnect or regression after the rejection suite.",
+    "After the valid update and reboot, the owner reported normal controller, expected profile/mapping, display/menu, and connection behavior."
+  ],
+  "power_cycle_reconnect_checks": [
+    "After one reboot, GET_CONFIG exactly matched the sent valid payload at 4201 bytes / f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 and the owner reported normal connection behavior."
+  ],
+  "result": "PASS",
+  "anomalies": [
+    "The earlier acceptance attempt remains separately classified as INCONCLUSIVE_PERSISTENCE_EVENT in docs/calibration/gp_config_005_prior_inconclusive_persistence_event_2026-09-17.md; this fresh PASS supersedes it only as the current acceptance attempt and does not reinterpret or delete it.",
+    "The local operator JSON intentionally leaves human observation fields null; the owner observations in this canonical record were supplied directly to the Hardware Evidence Processor and are not inferred from mechanical output.",
+    "The tested_at value is the final machine-recorded post-reboot capture time. The owner did not separately report an exact clock time for the physical smoke observations.",
+    "GET_CONFIG correspondence establishes persisted config.bin payload identity only; it is not treated as proof of live-RAM byte identity.",
+    "The physical board revision and exact host adapter details were not separately reported."
+  ],
+  "rollback_recovery": "Before the fresh run, the original decoded config artifact was validated and written through the existing owner-controlled path. Its re-encoded payload was exactly 4202 bytes / 26919308427aa081633b0a40c0c83c5762ba9edf35eb912b901e9fa847a4dd84; immediate post-write readback, post-reboot readback, and the fresh acceptance baseline all matched those exact bytes. No automated firmware flashing or disk-recovery guarantee is claimed.",
+  "tester": "Project owner / user (direct owner-reported physical observations) with mechanically captured custom-backend operator evidence",
+  "tested_at": "2026-09-17T23:01:40Z",
+  "evidence_gaps": []
+}
