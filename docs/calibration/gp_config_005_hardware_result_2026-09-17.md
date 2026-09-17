@@ -123,4 +123,3 @@ integration. It does not merge or publish candidate runtime source.
 - No Nunchuk behavior claim; Nunchuk remains `NOT_TESTED`.
 - No unrelated firmware path acceptance.
 - No low-level root-cause claim.
-
