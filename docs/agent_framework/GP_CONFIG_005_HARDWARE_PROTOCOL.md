@@ -1,6 +1,6 @@
 # GP-CONFIG-005 Hardware Acceptance Protocol
 
-Status: HARDWARE_TEST_REQUIRED.
+Status: HARDWARE_VALIDATED.
 
 Protocol version: `GP_CONFIG_005_HW_V1`.
 
@@ -18,7 +18,11 @@ The bounded project-owner CLI and runbook for executing this protocol are in
 - Build output: `.pio/build/glyph_mk6/firmware.uf2`
 - Artifact SHA-256: `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`
 - Preserved locator: `local_backups/hardware-artifacts/437f87e8086a50f0dfbd834176b80d245c1ed307/650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44/firmware.uf2`
-- Hardware result: `null`
+- Hardware result: `PASS`
+- Canonical result:
+  `docs/calibration/gp_config_005_hardware_result_2026-09-17.md`
+- Structured evidence:
+  `docs/calibration/fixtures/gp_config_005_hardware_evidence_2026-09-17.json`
 
 The tester must record controller context, observations, tester identity, and
 time in a Revision-2 evidence record after the physical test.
