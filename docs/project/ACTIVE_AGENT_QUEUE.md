@@ -23,39 +23,33 @@ Git, but it is not current candidate supply or implementation authority.
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260907-1359",
-    "base_configurator_sha": "a23658d1d2b2e90952de4c62a343de52c386041a",
-    "packet_id": "glyph-portfolio-20260907-1359",
-    "packet_path": "docs/planning/portfolio_20260907_1359.md",
-    "planning_commit": "c5ba86af32194055752e790fbeadd6efe1512d59",
-    "curation_commit": "6ea9451fa5e3d122b122eb163846753e26b86b3b",
+    "branch": "planning/portfolio-20260919-0155",
+    "base_configurator_sha": "13a0e76e4de39f6fc7e9c80d210315cb19adf316",
+    "packet_id": "glyph-portfolio-20260919-0155",
+    "packet_path": "docs/planning/portfolio_20260919_0155.md",
+    "planning_commit": "6536b723336a21ee773a4fa6f367887a97e020cc",
+    "curation_commit": "b90bcd9cd1595a87123fccf0d9543c55adc3282c",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Owner decisions GLYPH-UD-013 through GLYPH-UD-015 resolved both surviving gates and intentionally deferred GP-VAL-011 on 2026-09-07.",
-      "Exact GP-CONFIG-005 candidate 437f87e8086a50f0dfbd834176b80d245c1ed307 and UF2 SHA-256 650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44 received bounded GP_CONFIG_005_HW_V1 PASS on 2026-09-17; the prior inconclusive persistence event remains separate historical evidence and exact-candidate integration recovery is pending.",
-      "GP-VAL-015 general H1 correspondence repair completed; GP-CONFIG-005 exact hardware-tested candidate integrated through 4e50be81716117022318d8dcdc7aa60c4390b605 on 2026-09-19 with focused gates/build and independent review PASS. Strict DONE publication follows live integration; the prior inconclusive event remains separate."
+      "Curator independently authorized the sole candidate GP-CONFIG-006 as H1 READY on 2026-09-19; the published packet is fully consumed."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260907-1359",
-      "planning_commit": "c5ba86af32194055752e790fbeadd6efe1512d59",
-      "packet_id": "glyph-portfolio-20260907-1359",
-      "packet_base_configurator_sha": "a23658d1d2b2e90952de4c62a343de52c386041a",
-      "curation_branch": "curation/portfolio-20260907-1359-review",
+      "planning_branch": "planning/portfolio-20260919-0155",
+      "planning_commit": "6536b723336a21ee773a4fa6f367887a97e020cc",
+      "packet_id": "glyph-portfolio-20260919-0155",
+      "packet_base_configurator_sha": "13a0e76e4de39f6fc7e9c80d210315cb19adf316",
+      "curation_branch": "curation/portfolio-20260919-0155-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-CONFIG-005",
-          "disposition": "USER_DECISION_GATED"
-        },
-        {
-          "candidate_id": "GP-ART-001",
-          "disposition": "USER_DECISION_GATED"
+          "candidate_id": "GP-CONFIG-006",
+          "disposition": "READY"
         }
       ],
-      "review_date": "2026-09-07",
-      "curation_commit": "6ea9451fa5e3d122b122eb163846753e26b86b3b"
+      "review_date": "2026-09-19",
+      "curation_commit": "b90bcd9cd1595a87123fccf0d9543c55adc3282c"
     }
   },
   "completion_correspondence": {
@@ -80,18 +74,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -101,6 +94,70 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-CONFIG-006",
+      "title": "Report host serial transaction stages truthfully",
+      "status": "READY",
+      "branch": "glyph/gp-config-006-transaction-stage-reporting",
+      "objective": "Make the existing GP-CONFIG-005 host operator utility record transaction stages truthfully so a serial response timeout cannot imply that no host write occurred.",
+      "why_this_matters": "At canonical 13a0e76, PosixSerialPort.transact completes write_all before waiting for a response, but execute_valid_update sets sent only after transact returns. A timeout after full host write leaves sent false and obscures whether a request may have reached the controller.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Report the reached prewrite-read, write-attempt, full host-write, response, and follow-up-read stages. Full host-write completion means the serial write call accepted all encoded bytes, not that the controller received, accepted, published, or persisted the request. Partial or uncertain write and response timeout remain ambiguous; no automatic retry or PASS follows. Existing command bytes, command order, confirmation gate, result outcome classifications, and firmware behavior are unchanged.",
+      "scope": "Change only tools/glyph_serial_config_tool.py, tools/gp_config_005_hw_test.py, and tools/test_gp_config_005_hw_test.py for an optional transport stage callback and bounded valid-update result fields. Record prewrite GET_CONFIG attempt/completion and baseline match; valid CMD_SET_CONFIG write attempt before write_all, full host write completion only after write_all returns, awaiting/received/decoded response, and follow-up GET_CONFIG attempt/completion at actual boundaries. Redefine the retained sent key as a full-host-write-completed flag; false means full write was not confirmed, not that zero bytes were written. Stage data must explicitly retain partial-write ambiguity. Permit only directly required GP-CONFIG-005 operator runbook/protocol and deterministic manifest/census consequences. Implement from fresh canonical; use unpublished 8b2c893 only as evidence.",
+      "explicit_excluded_scope": "No cherry-pick or wholesale merge of 8b2c893; no firmware, HAL, active tables, build inputs, UF2, protocol/wire command or ordering, new device operation, auto-retry, hardware evidence reinterpretation, persistence/recovery guarantee, runtime-loaded config, WebSerial/device-write expansion, protobuf or wire schema change, flashing automation, GP-VAL-011 repair, modifier/layout semantic choice, Nunchuk or root-cause claim. This order authorizes no device execution.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator 13a0e76: tools/glyph_serial_config_tool.py PosixSerialPort.transact writes encoded bytes before read_packet and decode; tools/gp_config_005_hw_test.py execute_valid_update sets sent only after transact returns. Existing tools/test_gp_config_005_hw_test.py covers current outcomes. Published Planner packet glyph-portfolio-20260919-0155 at 6536b723336a21ee773a4fa6f367887a97e020cc proposed the candidate. Unpublished 8b2c8932304ecf5c56149eb91ec5ddd7511c59e8 is prior-work evidence only. Current GP-CONFIG-005 operator protocol and accepted hardware record retain their exact scope.",
+      "dependencies_prerequisites": [
+        "Begin from fresh live configurator and confirm the source gap and operator schema still exist.",
+        "Keep GP-VAL-011 REVIEW / OWNER_DEFERRED / NONEXECUTABLE and GP-CONFIG-005 exact hardware evidence unchanged.",
+        "Use host mocks or isolated transports only; no device connection or write is needed."
+      ],
+      "substantive_authorization_rationale": "The source-proven gap has a bounded host-only correction at existing write/read operation boundaries. Reporting those boundaries requires no new product, game, firmware, wire, or device behavior decision. The work order resolves the partial-write and response-timeout ambiguity explicitly. H1 risk is correct because firmware and build inputs stay unchanged.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Canonical already provides equivalent reporting or operator/transport architecture changes materially before implementation.",
+        "A correction needs wire, device, firmware, protocol/schema, persistence, hardware-evidence, or GP-VAL-011 changes.",
+        "The implementation cannot preserve truthful distinction among write attempt, full host write, response, and device acceptance."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator 13a0e76e4de39f6fc7e9c80d210315cb19adf316 and Planner branch planning/portfolio-20260919-0155 candidate GP-CONFIG-006 at immutable commit 6536b723336a21ee773a4fa6f367887a97e020cc, packet base 13a0e76e4de39f6fc7e9c80d210315cb19adf316. Direct-child receipt b90bcd9cd1595a87123fccf0d9543c55adc3282c records READY disposition. Independent source verification confirmed the gap and noncanonical status of 8b2c893.",
+      "automated_validation": [
+        "Host tests cover no-confirmation, prewrite read failure/drift, zero-progress and partial-write failure, completed write then response timeout, response decode failure/error, successful response and matching follow-up, and follow-up timeout. Assert stage order/final state, sent meaning, outcome, and unchanged human-observation fields.",
+        "Mock transport tests prove callback timing and unchanged encoded bytes and command order.",
+        "Run .venv/bin/python tools/test_gp_config_005_hw_test.py and directly affected serial transport tests.",
+        "Run python3 tools/check_glyph_agent_framework_docs.py, python3 tools/check_glyph_docs_navigation.py, python3 tools/check_glyph_docs_agent_surface.py, and required runtime-config manifest/census gates for changed tool bytes.",
+        "Review exact diff against fresh configurator; prove no firmware, build input, protocol, artifact, hardware evidence, GP-VAL-011, or unrelated product delta."
+      ],
+      "canonical_build": "NOT_REQUIRED: host-only reporting; firmware/build inputs unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "On failed stage proof or review, stop and leave the canonical operator utility unchanged; this work changes no device or artifact state.",
+      "status_documentation_updates": "Explain stage meaning and uncertainty in the directly affected operator runbook if needed; publish strict DONE correspondence only after reviewed H1 integration. Preserve GP-VAL-011 deferral and H2 source-authority gate.",
+      "done_evidence": "Exact host-only implementation independently reviewed; focused stage/failure tests and required repo gates pass; diff proves unchanged wire bytes/order and no firmware/build/hardware evidence change; separate strict DONE correspondence follows canonical integration.",
+      "stop_conditions": [
+        "Any stage or sent value claims controller receipt, SetConfig acceptance, live RAM publication, disk persistence, or hardware PASS without evidence.",
+        "Partial write or response timeout is treated as safe no-write or automatically retried.",
+        "New device operation, firmware/product behavior, protocol change, evidence reinterpretation, GP-VAL-011 work, or owner/Senscope semantic input is needed.",
+        "Focused tests, independent review, or required gates fail."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-VAL-015",
       "title": "Bind hardware correspondence to authoritative firmware and build inputs",
@@ -3233,11 +3290,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-006"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-006; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3245,7 +3302,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `DONE` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, preserved UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; exact-candidate integration 4e50be81716117022318d8dcdc7aa60c4390b605 and strict completion correspondence are published. The earlier `INCONCLUSIVE_PERSISTENCE_EVENT` remains separate historical evidence. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. `GP-VAL-015` is DONE after independently reviewed general hardware-correspondence repair 50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144 and separate strict completion publication; all critical firmware/build inputs remain exact while audited host-only metadata may evolve. Effective runway is zero, hardware-pending is zero, primary liveness is `PLANNING_REQUIRED`, and global wait is unsupported.
+Packet glyph-portfolio-20260919-0155 is CONSUMED after independent Curator authorization of its sole candidate GP-CONFIG-006 as bounded H1 READY. Its immutable receipt binds the exact published packet and READY disposition; no survivors remain. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. GP-CONFIG-005, GP-VAL-014, GP-VAL-015, GP-ART-001, and GP-PERSIST-001 remain DONE under their existing evidence. The machine-derived runway markers above carry the current counts and liveness; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
@@ -3279,18 +3336,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Independent source review: [fresh non-waiting recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907_1359.md).
-
-The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is `DONE` for its exact candidate/artifact pair after exact-candidate integration 4e50be81716117022318d8dcdc7aa60c4390b605 and strict completion publication; `GP-VAL-014` is DONE, `GP-VAL-015` is DONE, primary liveness is `PLANNING_REQUIRED`, and `REPAIR_REQUIRED` remains absent.
-
-Planner commit `c5ba86af32194055752e790fbeadd6efe1512d59` and immutable Curator receipt `6ea9451fa5e3d122b122eb163846753e26b86b3b` bind the exact two initial and surviving dispositions.
-
-- `GP-VAL-015`: DONE after independently curated, implemented and reviewed H1 correspondence repair and separate strict completion publication.
-- `GP-VAL-014`: DONE after separate reviewed H1 repair publication and strict completion correspondence; GP-CONFIG-005 H2 integration remains separate.
-- `GP-CONFIG-005`: owner-approved H2 live-RAM rejection invariant, now `DONE` with exact hardware PASS for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, artifact SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`. The prior inconclusive persistence event remains separate, exact-candidate integration 4e50be81716117022318d8dcdc7aa60c4390b605 and strict completion correspondence are published, disk recovery remains separately gated, and official configurator remains retired.
-- `GP-ART-001`: `DONE` through reviewed H1 local content-addressed custody policy/tool/checker integration; no external store, credentials, build, real artifact, or device action was selected.
-
-No other new work is promoted. GP-VAL-011 is the existing stopped technical repair, not a third Planner candidate or completed work. Its observed complete-proof/300-second feasibility failure requires separate substantive architecture/validation authority; no new implementation or filler research precursor is authorized. Future persistence durability/recovery policy and modifier intent remain separately owner-gated; no H3 mechanism or gameplay semantics is selected.
+Independent review of packet glyph-portfolio-20260919-0155 against live configurator 13a0e76 found one current host reporting gap. GP-CONFIG-006 received a bounded H1 authorization with strict host-write versus device-acceptance nonclaims. Prior commit 8b2c893 is evidence only and cannot be published wholesale. The packet is fully consumed, with no global evidence wait or filler authorization. GP-VAL-011 remains owner-deferred and nonexecutable; future H2 modifier/layout realization remains evidence-gated on owner/Senscope data and routing intent. Historical completed work and its strict correspondence remain in the work orders above.
 
 ## Work Orders
 
@@ -3323,22 +3369,18 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260907-1359",
-  "planning_commit": "c5ba86af32194055752e790fbeadd6efe1512d59",
-  "packet_id": "glyph-portfolio-20260907-1359",
-  "packet_base_configurator_sha": "a23658d1d2b2e90952de4c62a343de52c386041a",
-  "curation_branch": "curation/portfolio-20260907-1359-review",
+  "planning_branch": "planning/portfolio-20260919-0155",
+  "planning_commit": "6536b723336a21ee773a4fa6f367887a97e020cc",
+  "packet_id": "glyph-portfolio-20260919-0155",
+  "packet_base_configurator_sha": "13a0e76e4de39f6fc7e9c80d210315cb19adf316",
+  "curation_branch": "curation/portfolio-20260919-0155-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-CONFIG-005",
-      "disposition": "USER_DECISION_GATED"
-    },
-    {
-      "candidate_id": "GP-ART-001",
-      "disposition": "USER_DECISION_GATED"
+      "candidate_id": "GP-CONFIG-006",
+      "disposition": "READY"
     }
   ],
-  "review_date": "2026-09-07",
+  "review_date": "2026-09-19",
   "global_wait_proposed": false,
   "global_wait_accepted": false,
   "planner_broad_audit_provenance": null,
