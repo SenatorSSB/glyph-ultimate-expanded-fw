@@ -79,17 +79,18 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -102,7 +103,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-014",
       "title": "Accept exact hardware-validated integration in post-integration host gates",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-014-post-integration-validation",
       "objective": "Repair two host validation false positives so the pinned GP-CONFIG-005 operator identity check and agent-surface checker accept exact authorized post-integration state while retaining candidate, artifact, evidence, and protected-source rejection gates.",
       "why_this_matters": "The correctly ordered local exact-candidate integration 55eaec9bde837e149647627f67e2bf7c34135cca preserves candidate ancestry and all 23 candidate-changed path entries, including the tested HAL blob, and built successfully, but the operator test assumes a pre-integration merge base and the docs agent-surface checker rejects the intentional protected HAL delta. These host gates now reject a valid publication step.",
@@ -142,7 +143,23 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "If exact evidence or protected-path proof cannot be retained, keep the focused repair unmerged and return to Curator. Preserve the H2 candidate/artifact and canonical HARDWARE_VALIDATED state; retry H2 integration only after reviewed H1 publication.",
       "status_documentation_updates": "Publish GP-VAL-014 DONE only after independently reviewed H1 implementation is integrated and strict completion correspondence is recorded in a later queue publication. Leave GP-CONFIG-005 HARDWARE_VALIDATED until its separate exact-candidate integration, post-integration gates and DONE publication; keep GP-VAL-011 deferred.",
-      "done_evidence": "PENDING: H1 implementation, independent review, canonical integration, and later strict DONE correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "a44b3786b362335801fae32048617d332a9ead85",
+        "reviewed_implementation_sha": "0f7f71bfff4b9488d8b148c6eb155ad20cc05589",
+        "prior_canonical_integration_sha": "0f7f71bfff4b9488d8b148c6eb155ad20cc05589",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_docs_agent_surface.py",
+          "tools/gp_config_005_hw_test.py",
+          "tools/test_glyph_docs_agent_surface_integration.py",
+          "tools/test_gp_config_005_hw_test.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer PASS on exact GP-VAL-014 implementation 0f7f71bfff4b9488d8b148c6eb155ad20cc05589 against a44b3786b362335801fae32048617d332a9ead85. Prior mixed active-source and recreated-handler findings were fixed; both counterexamples were rerun and rejected. Candidate ref, parent, artifact, PASS evidence, protected HAL, and mixed-source gates remained fail-closed; no firmware or build input changed.",
+        "validation_provenance": "Exact reviewed GP-VAL-014 commit: operator 24 tests and agent-surface 6 tests PASS; checker context, agent surface, framework, sequence, navigation, source sync, census 198, validation health 36 entries, Python compilation and diff gates PASS. Firmware glyph_mk6 build SUCCESS: RAM 51928/262144 bytes, flash 383808/1568768 bytes. Aggregate adversarial gate remains failed on its separately deferred GP-VAL-011 defect; aggregate preflight failed on ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ path. Canonical H1 integration verified before this separate DONE publication."
+      },
       "stop_conditions": [
         "Any active firmware/source, build-input, hardware artifact, protocol or PASS record edit is required.",
         "Exact tested candidate ancestry, direct parent, changed path entries, or artifact/evidence correspondence cannot be proven.",
@@ -3086,11 +3103,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-014"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-014; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3098,7 +3115,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, preserved UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; exact-candidate integration recovery remains pending. The earlier `INCONCLUSIVE_PERSISTENCE_EVENT` remains separate historical evidence. `GP-VAL-014` has H1 authorization for the bounded post-integration checker repair. Effective runway is one, hardware-pending is zero, primary liveness is `RUNWAY_LOW`, and global wait is unsupported.
+Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, preserved UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; exact-candidate integration recovery remains pending. The earlier `INCONCLUSIVE_PERSISTENCE_EVENT` remains separate historical evidence. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. Effective runway is zero, hardware-pending is zero, primary liveness is `PLANNING_REQUIRED`, and global wait is unsupported.
 
 ## Allowed Statuses
 
@@ -3134,11 +3151,11 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 Independent source review: [fresh non-waiting recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907_1359.md).
 
-The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is `HARDWARE_VALIDATED` for its exact candidate/artifact pair pending Implementation Supervisor publication recovery; `GP-VAL-014` has H1 authorization, primary liveness is `RUNWAY_LOW`, and `REPAIR_REQUIRED` remains absent.
+The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is `HARDWARE_VALIDATED` for its exact candidate/artifact pair pending Implementation Supervisor publication recovery; `GP-VAL-014` is DONE, primary liveness is `PLANNING_REQUIRED`, and `REPAIR_REQUIRED` remains absent.
 
 Planner commit `c5ba86af32194055752e790fbeadd6efe1512d59` and immutable Curator receipt `6ea9451fa5e3d122b122eb163846753e26b86b3b` bind the exact two initial and surviving dispositions.
 
-- `GP-VAL-014`: H1 repair for exact post-integration operator ancestry and agent-surface applicability; implement and publish separately before H2 integration recovery.
+- `GP-VAL-014`: DONE after separate reviewed H1 repair publication and strict completion correspondence; GP-CONFIG-005 H2 integration remains separate.
 - `GP-CONFIG-005`: owner-approved H2 live-RAM rejection invariant, now `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, artifact SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`. The prior inconclusive persistence event remains separate, exact-candidate integration recovery is pending, disk recovery remains separately gated, and official configurator remains retired.
 - `GP-ART-001`: `DONE` through reviewed H1 local content-addressed custody policy/tool/checker integration; no external store, credentials, build, real artifact, or device action was selected.
 
