@@ -14,6 +14,7 @@ from unittest import mock
 from google.protobuf.message import DecodeError
 
 import gp_config_005_hw_test as operator
+import glyph_serial_config_tool as serial_tool
 from glyph_serial_config_tool import ToolError, cobs_encode
 
 
@@ -23,14 +24,26 @@ class MockTransport:
         self.calls: list[tuple[int, bytes]] = []
         self.is_open = True
 
-    def transact(self, command_id: int, payload: bytes) -> tuple[int, bytes]:
+    def transact(
+        self,
+        command_id: int,
+        payload: bytes,
+        *,
+        stage_callback=None,
+    ) -> tuple[int, bytes]:
         self.calls.append((command_id, payload))
         if not self.responses:
             raise AssertionError("mock transport received an unexpected transaction")
+        if stage_callback is not None:
+            stage_callback("write_attempted")
+            stage_callback("full_host_write_completed")
+            stage_callback("awaiting_response")
         response = self.responses.pop(0)
         if isinstance(response, Exception):
             self.is_open = False
             raise response
+        if stage_callback is not None:
+            stage_callback("response_received")
         return response
 
 
@@ -399,6 +412,34 @@ class OperatorUtilityTests(unittest.TestCase):
             rejection_observations_acknowledged=True,
         )
         self.assertTrue(record["sent"])
+        self.assertTrue(record["prewrite_read_attempted"])
+        self.assertTrue(record["prewrite_read_completed"])
+        self.assertTrue(record["prewrite_baseline_matched"])
+        self.assertTrue(record["write_attempted"])
+        self.assertTrue(record["full_host_write_completed"])
+        self.assertTrue(record["awaiting_response"])
+        self.assertTrue(record["response_received"])
+        self.assertTrue(record["response_decoded"])
+        self.assertTrue(record["followup_read_attempted"])
+        self.assertTrue(record["followup_read_completed"])
+        self.assertFalse(record["partial_write_ambiguous"])
+        self.assertIsNone(record["human_reboot_observation"])
+        self.assertIsNone(record["human_controller_display_smoke"])
+        self.assertEqual(
+            [item["stage"] for item in record["transaction_stages"]],
+            [
+                "prewrite_read_attempted",
+                "prewrite_read_completed",
+                "prewrite_baseline_matched",
+                "write_attempted",
+                "full_host_write_completed",
+                "awaiting_response",
+                "response_received",
+                "response_decoded",
+                "followup_read_attempted",
+                "followup_read_completed",
+            ],
+        )
         self.assertTrue(record["followup_responsive"])
         self.assertTrue(record["post_update_get_config_matches_sent_payload"])
         self.assertEqual(record["mechanical_outcome"], "SUCCESS_RESPONSE_AND_RESPONSIVE")
@@ -406,6 +447,187 @@ class OperatorUtilityTests(unittest.TestCase):
             [call[0] for call in transport.calls],
             [operator.CMD_GET_CONFIG, operator.CMD_SET_CONFIG, operator.CMD_GET_CONFIG],
         )
+
+    def test_valid_update_response_timeout_records_full_write_without_response(self) -> None:
+        baseline = self.make_baseline()
+        baseline_payload = operator.deterministic_payload(baseline)
+        _, metadata = operator.build_valid_update(baseline, self.config_pb2)
+        transport = MockTransport(
+            [
+                (operator.CMD_SET_CONFIG, baseline_payload),
+                ToolError("timed out waiting for serial response packet"),
+            ]
+        )
+        record = operator.execute_valid_update(
+            transport,
+            baseline,
+            baseline_payload,
+            self.config_pb2,
+            confirmation_token=metadata["confirmation_token"],
+            rejection_observations_acknowledged=True,
+        )
+        self.assertTrue(record["sent"])
+        self.assertTrue(record["write_attempted"])
+        self.assertTrue(record["full_host_write_completed"])
+        self.assertTrue(record["awaiting_response"])
+        self.assertFalse(record["response_received"])
+        self.assertTrue(record["partial_write_ambiguous"] is False)
+        self.assertEqual(record["transaction_stage"], "awaiting_response")
+        self.assertEqual(record["mechanical_outcome"], "TRANSPORT_OR_FOLLOWUP_ERROR_STOP")
+
+    def test_valid_update_prewrite_failure_does_not_attempt_write(self) -> None:
+        baseline = self.make_baseline()
+        baseline_payload = operator.deterministic_payload(baseline)
+        _, metadata = operator.build_valid_update(baseline, self.config_pb2)
+        record = operator.execute_valid_update(
+            MockTransport([ToolError("prewrite GET_CONFIG failed")]),
+            baseline,
+            baseline_payload,
+            self.config_pb2,
+            confirmation_token=metadata["confirmation_token"],
+            rejection_observations_acknowledged=True,
+        )
+        self.assertTrue(record["prewrite_read_attempted"])
+        self.assertFalse(record["write_attempted"])
+        self.assertFalse(record["sent"])
+        self.assertFalse(record["partial_write_ambiguous"])
+
+    def test_valid_update_partial_write_remains_ambiguous(self) -> None:
+        baseline = self.make_baseline()
+        baseline_payload = operator.deterministic_payload(baseline)
+        _, metadata = operator.build_valid_update(baseline, self.config_pb2)
+
+        class PartialWriteTransport(MockTransport):
+            def transact(self, command_id, payload, *, stage_callback=None):
+                if command_id == operator.CMD_GET_CONFIG:
+                    return super().transact(command_id, payload, stage_callback=stage_callback)
+                assert stage_callback is not None
+                stage_callback("write_attempted")
+                raise ToolError("serial write returned partial progress")
+
+        record = operator.execute_valid_update(
+            PartialWriteTransport([(operator.CMD_SET_CONFIG, baseline_payload)]),
+            baseline,
+            baseline_payload,
+            self.config_pb2,
+            confirmation_token=metadata["confirmation_token"],
+            rejection_observations_acknowledged=True,
+        )
+        self.assertTrue(record["write_attempted"])
+        self.assertFalse(record["full_host_write_completed"])
+        self.assertFalse(record["sent"])
+        self.assertTrue(record["partial_write_ambiguous"])
+
+    def test_result_schema_requires_transaction_stage_fields(self) -> None:
+        value = operator.empty_result({"selected_port": "/dev/mock"}, None)
+        operator.validate_result_schema(value)
+        for field in ("transaction_stage", "transaction_stages", "sent"):
+            malformed = json.loads(json.dumps(value))
+            malformed["valid_update"].pop(field)
+            with self.subTest(field=field), self.assertRaisesRegex(ToolError, field):
+                operator.validate_result_schema(malformed)
+
+    def test_valid_update_followup_timeout_records_response_but_not_followup_completion(self) -> None:
+        baseline = self.make_baseline()
+        baseline_payload = operator.deterministic_payload(baseline)
+        _, metadata = operator.build_valid_update(baseline, self.config_pb2)
+        transport = MockTransport(
+            [
+                (operator.CMD_SET_CONFIG, baseline_payload),
+                (operator.CMD_SUCCESS, b""),
+                ToolError("timed out waiting for follow-up serial response packet"),
+            ]
+        )
+        record = operator.execute_valid_update(
+            transport,
+            baseline,
+            baseline_payload,
+            self.config_pb2,
+            confirmation_token=metadata["confirmation_token"],
+            rejection_observations_acknowledged=True,
+        )
+        self.assertTrue(record["response_received"])
+        self.assertTrue(record["followup_read_attempted"])
+        self.assertFalse(record["followup_read_completed"])
+        self.assertEqual(record["transaction_stage"], "followup_read_attempted")
+        self.assertEqual(record["mechanical_outcome"], "TRANSPORT_OR_FOLLOWUP_ERROR_STOP")
+
+    def test_serial_transport_stage_callback_boundaries(self) -> None:
+        transport = operator.PosixSerialPort("/dev/not-opened", 115200, 5.0)
+        stages: list[str] = []
+        with mock.patch.object(transport, "write_all") as write_all, mock.patch.object(
+            transport,
+            "read_packet",
+            return_value=cobs_encode(bytes([operator.CMD_SUCCESS])),
+        ):
+            command_id, payload = transport.transact(
+                operator.CMD_SET_CONFIG,
+                b"candidate",
+                stage_callback=stages.append,
+            )
+        self.assertEqual((command_id, payload), (operator.CMD_SUCCESS, b""))
+        write_all.assert_called_once()
+        write_all.assert_called_once_with(cobs_encode(bytes([operator.CMD_SET_CONFIG]) + b"candidate"))
+        self.assertEqual(
+            stages,
+            [
+                "write_attempted",
+                "full_host_write_completed",
+                "awaiting_response",
+                "response_received",
+            ],
+        )
+
+    def test_serial_transport_write_failure_does_not_claim_full_write(self) -> None:
+        transport = operator.PosixSerialPort("/dev/not-opened", 115200, 5.0)
+        stages: list[str] = []
+        with mock.patch.object(
+            transport, "write_all", side_effect=ToolError("serial write failed")
+        ), mock.patch.object(
+            transport, "read_packet", side_effect=AssertionError("read after write failure")
+        ):
+            with self.assertRaisesRegex(ToolError, "serial write failed"):
+                transport.transact(
+                    operator.CMD_SET_CONFIG,
+                    b"candidate",
+                    stage_callback=stages.append,
+                )
+        self.assertEqual(stages, ["write_attempted"])
+
+    def test_serial_transport_decode_failure_records_received_not_decoded(self) -> None:
+        transport = operator.PosixSerialPort("/dev/not-opened", 115200, 5.0)
+        stages: list[str] = []
+        with mock.patch.object(transport, "write_all"), mock.patch.object(
+            transport, "read_packet", return_value=b"\x00"
+        ):
+            with self.assertRaisesRegex(ToolError, "empty decoded packet"):
+                transport.transact(
+                    operator.CMD_SET_CONFIG,
+                    b"candidate",
+                    stage_callback=stages.append,
+                )
+        self.assertEqual(
+            stages,
+            ["write_attempted", "full_host_write_completed", "awaiting_response", "response_received"],
+        )
+
+    def test_serial_transport_allows_partial_progress_until_complete(self) -> None:
+        transport = operator.PosixSerialPort("/dev/not-opened", 115200, 5.0)
+        transport.fd = 7
+        with mock.patch.object(serial_tool.select, "select", return_value=([], [7], [])), mock.patch.object(
+            serial_tool.os, "write", side_effect=[2, 3]
+        ) as write:
+            transport.write_all(b"12345")
+        self.assertEqual([call.args[1] for call in write.call_args_list], [b"12345", b"345"])
+
+    def test_serial_transport_zero_progress_is_an_uncertain_write_failure(self) -> None:
+        transport = operator.PosixSerialPort("/dev/not-opened", 115200, 5.0)
+        transport.fd = 7
+        with mock.patch.object(serial_tool.select, "select", return_value=([], [7], [])), mock.patch.object(
+            serial_tool.os, "write", return_value=0
+        ):
+            with self.assertRaisesRegex(ToolError, "serial write returned no progress"):
+                transport.write_all(b"12345")
 
     def test_baseline_drift_prevents_valid_setconfig(self) -> None:
         baseline = self.make_baseline()

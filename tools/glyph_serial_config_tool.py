@@ -18,7 +18,7 @@ import tempfile
 import termios
 import time
 from types import ModuleType
-from typing import Any
+from typing import Any, Callable
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -150,11 +150,24 @@ class PosixSerialPort:
                 continue
             self._rx_buffer.extend(chunk)
 
-    def transact(self, command_id: int, payload: bytes) -> tuple[int, bytes]:
+    def transact(
+        self,
+        command_id: int,
+        payload: bytes,
+        *,
+        stage_callback: Callable[[str], None] | None = None,
+    ) -> tuple[int, bytes]:
         raw_packet = bytes([command_id]) + payload
         encoded = cobs_encode(raw_packet)
+        if stage_callback is not None:
+            stage_callback("write_attempted")
         self.write_all(encoded)
+        if stage_callback is not None:
+            stage_callback("full_host_write_completed")
+            stage_callback("awaiting_response")
         response_packet = self.read_packet()
+        if stage_callback is not None:
+            stage_callback("response_received")
         decoded = cobs_decode(response_packet)
         if not decoded:
             raise ToolError("received empty decoded packet")

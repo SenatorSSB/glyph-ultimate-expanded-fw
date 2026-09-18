@@ -70,6 +70,7 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'tools/fixtures/configurator_setconfig_host/include/pb_encode.h',
     'tools/fixtures/configurator_setconfig_host/include/reboot.hpp',
     'tools/glyph_hardware_correspondence.py',
+    'tools/glyph_serial_config_tool.py',
     'tools/gp_config_005_hw_test.py',
     'tools/test_glyph_docs_agent_surface_integration.py',
     'tools/test_glyph_hardware_correspondence.py',
