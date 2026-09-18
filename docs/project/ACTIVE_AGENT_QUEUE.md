@@ -3323,22 +3323,18 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260907-1359",
-  "planning_commit": "c5ba86af32194055752e790fbeadd6efe1512d59",
-  "packet_id": "glyph-portfolio-20260907-1359",
-  "packet_base_configurator_sha": "a23658d1d2b2e90952de4c62a343de52c386041a",
-  "curation_branch": "curation/portfolio-20260907-1359-review",
+  "planning_branch": "planning/portfolio-20260919-0155",
+  "planning_commit": "6536b723336a21ee773a4fa6f367887a97e020cc",
+  "packet_id": "glyph-portfolio-20260919-0155",
+  "packet_base_configurator_sha": "13a0e76e4de39f6fc7e9c80d210315cb19adf316",
+  "curation_branch": "curation/portfolio-20260919-0155-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-CONFIG-005",
-      "disposition": "USER_DECISION_GATED"
-    },
-    {
-      "candidate_id": "GP-ART-001",
-      "disposition": "USER_DECISION_GATED"
+      "candidate_id": "GP-CONFIG-006",
+      "disposition": "READY"
     }
   ],
-  "review_date": "2026-09-07",
+  "review_date": "2026-09-19",
   "global_wait_proposed": false,
   "global_wait_accepted": false,
   "planner_broad_audit_provenance": null,
