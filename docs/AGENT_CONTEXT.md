@@ -6,16 +6,14 @@ Read this before using older calibration packets as roadmap input.
 
 ## Current Known-Good Branch State
 
-- Exact GP-CONFIG-005 candidate
-  `437f87e8086a50f0dfbd834176b80d245c1ed307` and UF2
+- `GP-CONFIG-005` is `DONE`: exact candidate
+  `437f87e8086a50f0dfbd834176b80d245c1ed307` entered `configurator` through
+  `4e50be81716117022318d8dcdc7aa60c4390b605`, after reviewed GP-VAL-015
+  correspondence repair and exact Revision-2 hardware PASS. Original UF2
   `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`
-  are Revision-2 `HARDWARE_VALIDATED` for the bounded staged-SetConfig
-  rejection invariant and `GP_CONFIG_005_HW_V1`. The fresh seven-case
-  rejection suite, one-field valid update, immediate readback, reboot
-  readback, and owner observations passed. The earlier inconclusive
-  persistence event remains separate historical evidence. Exact-candidate
-  integration recovery is pending; `configurator` does not yet contain this
-  candidate source.
+  remains the physically accepted artifact. The prior inconclusive persistence
+  event remains separate; no disk-atomicity, recovery or rebuild-acceptance
+  guarantee is added. Strict completion correspondence is published.
 - `configurator` now contains exact candidate
   `74ae24364b84520d4e0e39240beb9867653cc7b9` through integration commit
   `1597c01b416b6aa697d73efc7d2c2b3695dc3e5c`; UF2
@@ -90,7 +88,7 @@ Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically a
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is `docs/project/ACTIVE_AGENT_QUEUE.md`.
-  Packet `glyph-portfolio-20260907-1359` is `CONSUMED`: owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and intentionally deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; all failed and historical evidence is preserved, no repair implementation resumed, and `REPAIR_REQUIRED` is no longer current liveness. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307` and UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`; the earlier inconclusive persistence event remains separate and exact-candidate integration recovery is pending. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. `GP-VAL-015` is DONE after independently reviewed general hardware-correspondence repair 50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144 and separate strict completion publication; all critical firmware/build inputs remain exact while audited host-only metadata may evolve. Effective runway is zero, hardware-pending is zero, and primary liveness is `PLANNING_REQUIRED`. The immutable packet receipt retains its truthful initial dispositions, while current survivors are empty and `curator_review_required` is false. Global wait remains unsupported.
+  Packet `glyph-portfolio-20260907-1359` is `CONSUMED`: owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and intentionally deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; all failed and historical evidence is preserved, no repair implementation resumed, and `REPAIR_REQUIRED` is no longer current liveness. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `DONE` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307` and UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`; the earlier inconclusive persistence event remains separate and exact-candidate integration 4e50be81716117022318d8dcdc7aa60c4390b605 and strict completion correspondence are published. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. `GP-VAL-015` is DONE after independently reviewed general hardware-correspondence repair 50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144 and separate strict completion publication; all critical firmware/build inputs remain exact while audited host-only metadata may evolve. Effective runway is zero, hardware-pending is zero, and primary liveness is `PLANNING_REQUIRED`. The immutable packet receipt retains its truthful initial dispositions, while current survivors are empty and `curator_review_required` is false. Global wait remains unsupported.
   Completed implementation history remains in the canonical queue. Bounded
   `glyph_nuker` research still leaves source lineage, purpose, byte
   transformation, build recipe, reproducibility, safety, artifact acceptance,

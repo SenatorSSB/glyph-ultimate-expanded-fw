@@ -18,7 +18,7 @@ Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically a
 
 The executable work runway is owned separately by
 `docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015`. `GP-VAL-011` is retained as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; its evidence remains and its optimization did not resume. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, artifact SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; the earlier inconclusive persistence event remains separate and exact-candidate integration recovery is pending. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. `GP-VAL-015` is DONE after independently reviewed general hardware-correspondence repair 50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144 and separate strict completion publication; all critical firmware/build inputs remain exact while audited host-only metadata may evolve. Effective runway is zero, hardware-pending is zero, and primary liveness is `PLANNING_REQUIRED`. Current packet survivors are empty, review is complete, and global wait remains unsupported.
+implementation. Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015`. `GP-VAL-011` is retained as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; its evidence remains and its optimization did not resume. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `DONE` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, artifact SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; the earlier inconclusive persistence event remains separate and exact-candidate integration 4e50be81716117022318d8dcdc7aa60c4390b605 and strict completion correspondence are published. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. `GP-VAL-015` is DONE after independently reviewed general hardware-correspondence repair 50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144 and separate strict completion publication; all critical firmware/build inputs remain exact while audited host-only metadata may evolve. Effective runway is zero, hardware-pending is zero, and primary liveness is `PLANNING_REQUIRED`. Current packet survivors are empty, review is complete, and global wait remains unsupported.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip
@@ -34,17 +34,16 @@ change pins, build inputs, workflows, artifacts, or runtime behavior.
 `GP-CONFIG-002` is invalidated and no
 official-configurator evidence is awaited.
 
-`GP-CONFIG-005` has resolved its exact physical gate. The fresh seven-case
-rejection suite, benign `rgb_brightness` update, immediate persisted readback,
-post-reboot persisted readback, and bounded owner observations support PASS for
-the approved live-Config rejection invariant only. The earlier
-`INCONCLUSIVE_PERSISTENCE_EVENT` remains historical and separate. The next
-control-plane action is Implementation Supervisor publication recovery for `GP-CONFIG-005`, after canonical publication of the separate `GP-VAL-015` H1 general correspondence repair (retaining `GP-VAL-014` protections):
-reverify the pinned candidate, preserved artifact and immutable PASS record,
-refresh `configurator`, merge only the exact tested candidate tree, rerun
-invalidated gates, and publish strict `DONE` correspondence. No atomic
-persistence, power-loss, rollback, recovery, GET_CONFIG live-RAM, Nunchuk,
-unrelated-path, or root-cause claim is created.
+`GP-CONFIG-005` is complete after the reviewed GP-VAL-015 general H1
+correspondence repair and exact-candidate integration
+`4e50be81716117022318d8dcdc7aa60c4390b605`. The original candidate/artifact
+hardware PASS remains pinned; the earlier `INCONCLUSIVE_PERSISTENCE_EVENT`
+remains historical and separate. Focused gates, build and independent review
+passed, with strict DONE correspondence published after live integration.
+No atomic persistence, power-loss, rollback, recovery, GET_CONFIG live-RAM,
+Nunchuk, unrelated-path or root-cause claim is created. The integration build
+is build proof only. Next control-plane action: a fresh non-authoritative
+Planner audit from live canonical; deferred GP-VAL-011 is not executable.
 
 `GP-X1-001` is `DONE`. Exact candidate
 `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
