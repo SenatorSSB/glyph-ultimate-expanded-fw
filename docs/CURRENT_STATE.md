@@ -1,6 +1,6 @@
 # Glyph Current State
 
-Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":["GP-CONFIG-006"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+Status label: CURRENT. <!-- current-runway:start -->{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 This is the short current-state entrypoint. Agents should read
 `docs/AGENT_CONTEXT.md` first for the operating snapshot, then
@@ -8,7 +8,7 @@ This is the short current-state entrypoint. Agents should read
 implementation work. Detailed historical evidence remains indexed from
 `docs/archive/README.md` and `docs/calibration/INDEX.md`.
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-006; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 **Current Agentic Operating State:** The canonical queue has GP-CONFIG-006 READY as a bounded H1 host/operator reporting repair. Packet glyph-portfolio-20260919-0155 is CONSUMED after independent Curator review of its sole candidate; its immutable receipt is recorded and no survivors remain. The machine-derived markers above carry the current runway and liveness. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. GP-CONFIG-005 remains DONE for its exact accepted candidate/artifact pair; its prior inconclusive persistence event remains separate. GP-VAL-014 and GP-VAL-015 remain DONE. Global evidence wait is unsupported. Next H2 realization awaits owner/Senscope modifier/layout data and routing intent. No new hardware acceptance or runtime behavior is claimed. This follows the prior PLANNING_REQUIRED state. CUSTOM_RUNNER_NOT_REQUIRED; retired official-configurator historical evidence remains at tools/check_glyph_official_configurator_validation.py; the older import/export compatibility chain is historical-only; and external-remapper evidence remains quarantined.
 ## Current Known-Good State

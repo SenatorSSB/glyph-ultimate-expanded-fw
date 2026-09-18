@@ -74,17 +74,18 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -97,7 +98,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-006",
       "title": "Report host serial transaction stages truthfully",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-config-006-transaction-stage-reporting",
       "objective": "Make the existing GP-CONFIG-005 host operator utility record transaction stages truthfully so a serial response timeout cannot imply that no host write occurred.",
       "why_this_matters": "At canonical 13a0e76, PosixSerialPort.transact completes write_all before waiting for a response, but execute_valid_update sets sent only after transact returns. A timeout after full host write leaves sent false and obscures whether a request may have reached the controller.",
@@ -139,7 +140,23 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "On failed stage proof or review, stop and leave the canonical operator utility unchanged; this work changes no device or artifact state.",
       "status_documentation_updates": "Explain stage meaning and uncertainty in the directly affected operator runbook if needed; publish strict DONE correspondence only after reviewed H1 integration. Preserve GP-VAL-011 deferral and H2 source-authority gate.",
-      "done_evidence": "Exact host-only implementation independently reviewed; focused stage/failure tests and required repo gates pass; diff proves unchanged wire bytes/order and no firmware/build/hardware evidence change; separate strict DONE correspondence follows canonical integration.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "e2523d94eb1023f0146cee9fd975453125c67fa2",
+        "reviewed_implementation_sha": "1f9e58cd15d5d8df5cb07aeca2e03eaf4c81d953",
+        "prior_canonical_integration_sha": "68dd958fe200618399582929c7c1665c941185e0",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/glyph_serial_config_tool.py",
+          "tools/gp_config_005_hw_test.py",
+          "tools/test_gp_config_005_hw_test.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope reviewer PASS on the exact GP-CONFIG-006 implementation against e2523d94eb1023f0146cee9fd975453125c67fa2. The review repaired and rechecked stage order, prewrite/partial-write/decode/follow-up failure coverage, encoded-byte/order preservation, human-observation nonmutation, additive result-schema enforcement, and current-cycle correspondence audit separation from the historical GP-CONFIG-005 inventory. No firmware, wire, device, persistence, hardware, or unrelated scope changed.",
+        "validation_provenance": "Focused GP-CONFIG-005 host suite 35/35 PASS; correspondence suite 33/33 PASS; Python syntax, framework, navigation, agent-surface, census 199, health, and diff gates PASS. Full runtime-config aggregate attempted on the exact snapshot and failed/unavailable in preflight with AGG-11 SETUP_FAILURE on ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/; Curator adjudicated this as pre-existing GP-VAL-011 OWNER_DEFERRED/NONEXECUTABLE state, not a GP-CONFIG-006 failure. No full aggregate-green claim, build, artifact, device, or hardware action. Feature ref and canonical integration were live-verified before this separate status publication."
+      },
       "stop_conditions": [
         "Any stage or sent value claims controller receipt, SetConfig acceptance, live RAM publication, disk persistence, or hardware PASS without evidence.",
         "Partial write or response timeout is treated as safe no-write or automatically retried.",
@@ -3290,11 +3307,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-006"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-006; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
