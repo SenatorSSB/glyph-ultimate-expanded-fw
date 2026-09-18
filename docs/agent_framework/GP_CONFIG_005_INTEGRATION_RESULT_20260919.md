@@ -147,7 +147,7 @@ custody, historical evidence, build and focused-gate inspection.
 - Authorization: `06903092e086e65904be1ae09e6f377fac50728e`.
 - Model implementation: `bf861b05bf272eaa4729b3057cb7a8c0217bc4fa`.
 - Final reviewed implementation with declared helper dependency:
-  `50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144` (includes intermediate formatting
+  `50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144` (includes dependency
   correction `91998ee`; final net manifest edit is one dependency).
 - Strict H1 DONE: `79608f5e4ceb91209ffe5d5581b985bb5fe7c347`.
 - Superseded local completion `372ea85` remained unpublished and is not final
