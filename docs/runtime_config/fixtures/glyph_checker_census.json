@@ -2291,6 +2291,58 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "configurator_setconfig_transaction",
+      "defines_main": true,
+      "file_size_bytes": 7229,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "configurator"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 152,
+      "parse_error": null,
+      "path": "tools/check_glyph_configurator_setconfig_transaction.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "configurator"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_configurator_setconfig_transaction",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "docs/runtime_config/fixtures/configurator_setconfig_transaction.json",
+        "tools/fixtures/configurator_setconfig_host"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "03dcd5a729781016df48c0b2d5bc2d51efb8373abb03be15a98e8d529f158425",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "coordinate_native_runtime_plan",
       "defines_main": true,
       "file_size_bytes": 13092,
@@ -2575,26 +2627,40 @@
       },
       "checker_id": "current_config_persistence_recovery_research",
       "defines_main": true,
-      "file_size_bytes": 61002,
+      "file_size_bytes": 62986,
       "hard_coded_branch_like_strings": [
+        "branches",
         "candidate",
+        "candidate.communication_backend_configs_count",
+        "candidate.custom_modes_count",
+        "candidate.default_backend_config",
+        "candidate.game_mode_configs_count",
+        "candidate.keyboard_modes_count",
         "evidence",
         "evidence/authority",
-        "known_evidence"
+        "known_evidence",
+        "staged-candidate"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1017,
+      "line_count": 1047,
       "parse_error": null,
       "path": "tools/check_glyph_current_config_persistence_recovery_research.py",
       "potential_branch_identity_signals": [
+        "branches",
         "candidate",
+        "candidate.communication_backend_configs_count",
+        "candidate.custom_modes_count",
+        "candidate.default_backend_config",
+        "candidate.game_mode_configs_count",
+        "candidate.keyboard_modes_count",
         "evidence",
         "evidence/authority",
-        "known_evidence"
+        "known_evidence",
+        "staged-candidate"
       ],
       "potential_mutation_signals": [
         "subprocess.check_output"
@@ -2619,7 +2685,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "40719da6922fcdf1ceaedc627870414b1cb186947fcc4179f5e73af20cac84e7",
+      "sha256": "4328e6fc0a1a855d369b759ea3d9e7214ef52f78879365e31331c0e275a165a0",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

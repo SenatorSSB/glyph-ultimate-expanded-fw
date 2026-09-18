@@ -159,37 +159,41 @@ bool ConfiguratorBackend::HandleGetConfig() {
 }
 
 bool ConfiguratorBackend::HandleSetConfig() {
+    // Keep the accepted live configuration untouched until the complete
+    // decode, validation, and persistence sequence succeeds.  The candidate
+    // is static because Config contains the fixed-size embedded arrays used
+    // by the selected input modes and is too large for the call stack.
+    static Config candidate;
+
     // Reset config defaults first, so config is completely replaced rather than merged.
-    _config = Config_init_default;
+    candidate = Config_init_default;
 
     pb_istream_t istream = as_pb_istream(_in);
-    if (!pb_decode(&istream, Config_fields, &_config)) {
+    if (!pb_decode(&istream, Config_fields, &candidate)) {
         char errmsg[100];
         size_t errmsg_len =
             snprintf(errmsg, sizeof(errmsg), "Failed to decode config: %s", istream.errmsg);
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
 
-        // Restore old config.
-        persistence.LoadConfig(_config);
         return false;
     }
 
-    if (_config.default_backend_config > _config.communication_backend_configs_count) {
+    if (candidate.default_backend_config > candidate.communication_backend_configs_count) {
         char errmsg[75];
         size_t errmsg_len = snprintf(
             errmsg,
             sizeof(errmsg),
             "Default backend ID is %d but only %d backend configs are defined",
-            (uint8_t)_config.default_backend_config,
-            (uint8_t)_config.communication_backend_configs_count
+            (uint8_t)candidate.default_backend_config,
+            (uint8_t)candidate.communication_backend_configs_count
         );
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
         return false;
     }
 
-    for (size_t i = 0; i < _config.communication_backend_configs_count; i++) {
-        uint8_t default_mode_id = _config.communication_backend_configs[i].default_mode_config;
-        if (default_mode_id > _config.game_mode_configs_count) {
+    for (size_t i = 0; i < candidate.communication_backend_configs_count; i++) {
+        uint8_t default_mode_id = candidate.communication_backend_configs[i].default_mode_config;
+        if (default_mode_id > candidate.game_mode_configs_count) {
             char errmsg[75];
             size_t errmsg_len = snprintf(
                 errmsg,
@@ -197,15 +201,15 @@ bool ConfiguratorBackend::HandleSetConfig() {
                 "Default mode ID is %d for backend %d but only %d modes are defined",
                 (uint8_t)default_mode_id,
                 (uint8_t)i + 1,
-                (uint8_t)_config.game_mode_configs_count
+                (uint8_t)candidate.game_mode_configs_count
             );
             WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
             return false;
         }
     }
 
-    for (size_t i = 0; i < _config.game_mode_configs_count; i++) {
-        const GameModeConfig &gamemode_config = _config.game_mode_configs[i];
+    for (size_t i = 0; i < candidate.game_mode_configs_count; i++) {
+        const GameModeConfig &gamemode_config = candidate.game_mode_configs[i];
         uint8_t keyboard_mode_id = gamemode_config.keyboard_mode_config;
         uint8_t custom_mode_id = gamemode_config.custom_mode_config;
 
@@ -233,7 +237,7 @@ bool ConfiguratorBackend::HandleSetConfig() {
             return false;
         }
 
-        if (keyboard_mode_id > _config.keyboard_modes_count) {
+        if (keyboard_mode_id > candidate.keyboard_modes_count) {
             char errmsg[85];
             size_t errmsg_len = snprintf(
                 errmsg,
@@ -241,13 +245,13 @@ bool ConfiguratorBackend::HandleSetConfig() {
                 "Keyboard mode ID %d is for game mode %d but only %d keyboard modes are defined",
                 (uint8_t)keyboard_mode_id,
                 (uint8_t)i + 1,
-                (uint8_t)_config.keyboard_modes_count
+                (uint8_t)candidate.keyboard_modes_count
             );
             WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
             return false;
         }
 
-        if (custom_mode_id > _config.custom_modes_count) {
+        if (custom_mode_id > candidate.custom_modes_count) {
             char errmsg[85];
             size_t errmsg_len = snprintf(
                 errmsg,
@@ -255,18 +259,20 @@ bool ConfiguratorBackend::HandleSetConfig() {
                 "Custom mode ID %d is for game mode config %d but only %d custom modes are defined",
                 (uint8_t)custom_mode_id,
                 (uint8_t)i + 1,
-                (uint8_t)_config.custom_modes_count
+                (uint8_t)candidate.custom_modes_count
             );
             WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
             return false;
         }
     }
 
-    if (!persistence.SaveConfig(_config)) {
+    if (!persistence.SaveConfig(candidate)) {
         char errmsg[] = "Failed to save config to memory";
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
         return false;
     }
+
+    _config = candidate;
 
     WritePacket(CMD_SUCCESS, nullptr, 0);
     return true;
