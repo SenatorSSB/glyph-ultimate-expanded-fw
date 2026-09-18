@@ -40,7 +40,7 @@ remains historical and separate. Focused gates, build and independent review
 passed, with strict DONE correspondence published after live integration.
 No atomic persistence, power-loss, rollback, recovery, GET_CONFIG live-RAM,
 Nunchuk, unrelated-path or root-cause claim is created. The integration build
-is build proof only. Next executable item: GP-CONFIG-006 H1 operator reporting under its bounded READY work order; deferred GP-VAL-011 is not executable.
+is build proof only. No executable item remains; Planner refresh is required. Deferred GP-VAL-011 is not executable.
 
 `GP-X1-001` is `DONE`. Exact candidate
 `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
