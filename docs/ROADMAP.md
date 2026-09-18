@@ -9,16 +9,14 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-006"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-006; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
-The executable work runway is owned separately by
-`docs/project/ACTIVE_AGENT_QUEUE.md`; roadmap status does not authorize
-implementation. Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015`. `GP-VAL-011` is retained as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; its evidence remains and its optimization did not resume. `GP-PERSIST-001` and the reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `DONE` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, artifact SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; the earlier inconclusive persistence event remains separate and exact-candidate integration 4e50be81716117022318d8dcdc7aa60c4390b605 and strict completion correspondence are published. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. `GP-VAL-015` is DONE after independently reviewed general hardware-correspondence repair 50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144 and separate strict completion publication; all critical firmware/build inputs remain exact while audited host-only metadata may evolve. Effective runway is zero, hardware-pending is zero, and primary liveness is `PLANNING_REQUIRED`. Current packet survivors are empty, review is complete, and global wait remains unsupported.
+The executable work runway is owned by docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260919-0155 is CONSUMED after independent authorization of its sole candidate GP-CONFIG-006 as bounded H1 READY. The machine-derived markers above carry the current runway; no filler is authorized. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. GP-CONFIG-005 remains DONE with exact hardware acceptance and its separate prior inconclusive persistence event; GP-VAL-014 and GP-VAL-015 remain DONE. The next H2 realization awaits owner/Senscope modifier/layout data and routing intent. Global evidence wait is unsupported.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip
@@ -42,8 +40,7 @@ remains historical and separate. Focused gates, build and independent review
 passed, with strict DONE correspondence published after live integration.
 No atomic persistence, power-loss, rollback, recovery, GET_CONFIG live-RAM,
 Nunchuk, unrelated-path or root-cause claim is created. The integration build
-is build proof only. Next control-plane action: a fresh non-authoritative
-Planner audit from live canonical; deferred GP-VAL-011 is not executable.
+is build proof only. Next executable item: GP-CONFIG-006 H1 operator reporting under its bounded READY work order; deferred GP-VAL-011 is not executable.
 
 `GP-X1-001` is `DONE`. Exact candidate
 `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256
