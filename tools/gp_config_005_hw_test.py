@@ -22,6 +22,8 @@ import subprocess
 import sys
 from typing import Any, Iterable, Protocol
 
+from glyph_hardware_correspondence import CorrespondenceError, verify_correspondence
+
 from glyph_serial_config_tool import (  # Existing custom-backend host transport.
     CMD_ERROR,
     CMD_GET_CONFIG,
@@ -41,6 +43,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 PROTOCOL_VERSION = "GP_CONFIG_005_HW_V1"
 CANDIDATE_BRANCH = "glyph/gp-config-005-transactional-setconfig"
 CANDIDATE_GIT_SHA = "437f87e8086a50f0dfbd834176b80d245c1ed307"
+CANDIDATE_TREE_SHA = "4b9e2f1eb56add78ff880321730eb15ed22ce72f"
 CANDIDATE_BASE_SHA = "9550a1bf1309383e351f4f9e66663562fc9f13ac"
 ARTIFACT_SHA256 = "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44"
 CONFIG_PROTO_SHA256 = "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b"
@@ -149,27 +152,21 @@ def verify_candidate_ancestry(repo_root: Path) -> None:
             "candidate tested parent mismatch: "
             f"expected={CANDIDATE_BASE_SHA}, actual={parents[1:]}"
         )
+    if run_git(repo_root, "rev-parse", f"{CANDIDATE_GIT_SHA}^{{tree}}") != CANDIDATE_TREE_SHA:
+        raise ToolError("candidate tested tree mismatch")
     merge_base = run_git(repo_root, "merge-base", CANDIDATE_GIT_SHA, "HEAD")
-    if merge_base == CANDIDATE_GIT_SHA:
-        changed = run_git(
-            repo_root, "diff-tree", "--no-commit-id", "--name-only", "-r", CANDIDATE_GIT_SHA
-        ).splitlines()
-        if not changed or CANDIDATE_HANDLER_PATH not in changed:
-            raise ToolError("candidate changed-path set is missing the tested handler")
-        for path in changed:
-            expected_entry = run_git(repo_root, "ls-tree", CANDIDATE_GIT_SHA, "--", path)
-            actual_entry = run_git(repo_root, "ls-tree", "HEAD", "--", path)
-            if actual_entry != expected_entry:
-                raise ToolError(f"integrated candidate path differs from tested candidate: {path}")
-    elif merge_base != CANDIDATE_BASE_SHA:
+    if merge_base not in {CANDIDATE_GIT_SHA, CANDIDATE_BASE_SHA}:
         raise ToolError(
             "candidate/protocol ancestry mismatch: "
             f"expected={CANDIDATE_BASE_SHA}, actual_merge_base={merge_base}"
         )
-    elif run_git(repo_root, "ls-tree", "HEAD", "--", CANDIDATE_HANDLER_PATH) != run_git(
-        repo_root, "ls-tree", CANDIDATE_BASE_SHA, "--", CANDIDATE_HANDLER_PATH
-    ):
-        raise ToolError("pre-integration HEAD modifies the tested handler without candidate ancestry")
+    try:
+        verify_correspondence(
+            repo_root, CANDIDATE_GIT_SHA, CANDIDATE_BASE_SHA,
+            integrated=merge_base == CANDIDATE_GIT_SHA,
+        )
+    except CorrespondenceError as exc:
+        raise ToolError(str(exc)) from exc
 
 
 def verify_repository_identity(

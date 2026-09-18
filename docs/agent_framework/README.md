@@ -59,6 +59,8 @@ Use separated generation, judgment, execution, and evidence roles:
   packet freshness, runway, liveness, and concurrency.
 - `WORK_ORDER_TEMPLATE.md` - complete executable/Preauthorized contract shape.
 - `HARDWARE_EVIDENCE.md` - H0-H3 risk and exact-snapshot acceptance lane.
+- `HARDWARE_CORRESPONDENCE.md` - audited critical-input exactness and separate
+  validation of non-behavioral repository metadata.
 - `HARDWARE_ARTIFACT_CUSTODY.md` - approved owner-held local content-addressed
   preservation, readback, retention, rebuild, and loss contract.
 - `GP_CONFIG_005_HARDWARE_OPERATOR.md` - bounded project-owner CLI runbook for

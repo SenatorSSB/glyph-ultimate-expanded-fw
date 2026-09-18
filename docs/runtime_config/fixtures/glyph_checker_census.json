@@ -3127,7 +3127,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 19162,
+      "file_size_bytes": 19563,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -3142,6 +3142,7 @@
         "evidence",
         "evidence.get",
         "evidence_commit",
+        "evidence_gaps",
         "evidence_path",
         "evidence_ref",
         "evidence_ref.split",
@@ -3162,7 +3163,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 494,
+      "line_count": 503,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -3179,6 +3180,7 @@
         "evidence",
         "evidence.get",
         "evidence_commit",
+        "evidence_gaps",
         "evidence_path",
         "evidence_ref",
         "evidence_ref.split",
@@ -3249,7 +3251,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "704f1a345805ff74afae2c0dd35d3874b3d8f29421da386d0a81e4b2a0014c56",
+      "sha256": "672fffe2094f08eff9e958960c7bae63050ed07f10b9a925b6dcf1ca7458a853",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,

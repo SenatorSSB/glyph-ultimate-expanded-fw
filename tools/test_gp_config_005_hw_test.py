@@ -96,44 +96,43 @@ class OperatorUtilityTests(unittest.TestCase):
             with self.assertRaisesRegex(ToolError, "protocol identity mismatch"):
                 operator.verify_repository_identity(root, require_artifact=False)
 
-    def test_candidate_ancestry_pre_and_post_integration(self) -> None:
-        candidate = operator.CANDIDATE_GIT_SHA
-        base = operator.CANDIDATE_BASE_SHA
-        handler = operator.CANDIDATE_HANDLER_PATH
-        for merge_base in (base, candidate):
-            with self.subTest(merge_base=merge_base):
-                def fake_git(_root, *args):
-                    if args[0] == "cat-file": return ""
-                    if args[0] == "rev-list": return f"{candidate} {base}"
-                    if args[0] == "merge-base": return merge_base
-                    if args[0] == "diff-tree": return handler
-                    if args[0] == "ls-tree": return f"100644 blob valid\t{handler}"
-                    raise AssertionError(args)
-                with mock.patch.object(operator, "run_git", side_effect=fake_git):
-                    operator.verify_candidate_ancestry(Path("/synthetic"))
+    def ancestry_git(self, parent=None, merge_base=None, tree=None):
+        def fake_git(_root, *args):
+            if args[0] == "cat-file": return ""
+            if args[0] == "rev-list": return f"{operator.CANDIDATE_GIT_SHA} {parent or operator.CANDIDATE_BASE_SHA}"
+            if args[0] == "rev-parse": return tree or operator.CANDIDATE_TREE_SHA
+            if args[0] == "merge-base": return merge_base or operator.CANDIDATE_BASE_SHA
+            raise AssertionError(args)
+        return fake_git
 
-    def test_candidate_ancestry_rejects_parent_recreation_and_path_drift(self) -> None:
-        candidate = operator.CANDIDATE_GIT_SHA
-        base = operator.CANDIDATE_BASE_SHA
-        handler = operator.CANDIDATE_HANDLER_PATH
-        def check(parent, merge_base, drift=False):
-            def fake_git(_root, *args):
-                if args[0] == "cat-file": return ""
-                if args[0] == "rev-list": return f"{candidate} {parent}"
-                if args[0] == "merge-base": return merge_base
-                if args[0] == "diff-tree": return handler
-                if args[0] == "ls-tree": return f"100644 blob {'drift' if drift and args[1] == 'HEAD' else 'valid'}\t{handler}"
-                raise AssertionError(args)
-            with mock.patch.object(operator, "run_git", side_effect=fake_git):
+    def test_candidate_ancestry_pre_and_post_integration(self) -> None:
+        for merge_base in (operator.CANDIDATE_BASE_SHA, operator.CANDIDATE_GIT_SHA):
+            with self.subTest(merge_base=merge_base), mock.patch.object(
+                operator, "run_git", side_effect=self.ancestry_git(merge_base=merge_base)
+            ), mock.patch.object(operator, "verify_correspondence") as correspondence:
                 operator.verify_candidate_ancestry(Path("/synthetic"))
-        with self.assertRaisesRegex(ToolError, "tested parent mismatch"):
-            check("other-parent", candidate)
-        with self.assertRaisesRegex(ToolError, "ancestry mismatch"):
-            check(base, "recreated-equivalent")
-        with self.assertRaisesRegex(ToolError, "without candidate ancestry"):
-            check(base, base, drift=True)
-        with self.assertRaisesRegex(ToolError, "integrated candidate path differs"):
-            check(base, candidate, drift=True)
+                correspondence.assert_called_once_with(
+                    Path("/synthetic"), operator.CANDIDATE_GIT_SHA, operator.CANDIDATE_BASE_SHA,
+                    integrated=merge_base == operator.CANDIDATE_GIT_SHA,
+                )
+
+    def test_candidate_ancestry_rejects_parent_tree_and_recreation(self) -> None:
+        for kwargs, message in (
+            ({"parent": "other-parent"}, "tested parent mismatch"),
+            ({"tree": "other-tree"}, "tested tree mismatch"),
+            ({"merge_base": "recreated-equivalent"}, "ancestry mismatch"),
+        ):
+            with self.subTest(kwargs=kwargs), mock.patch.object(
+                operator, "run_git", side_effect=self.ancestry_git(**kwargs)
+            ), self.assertRaisesRegex(ToolError, message):
+                operator.verify_candidate_ancestry(Path("/synthetic"))
+
+    def test_correspondence_failure_is_not_suppressed(self) -> None:
+        for merge_base in (operator.CANDIDATE_BASE_SHA, operator.CANDIDATE_GIT_SHA):
+            with mock.patch.object(operator, "run_git", side_effect=self.ancestry_git(merge_base=merge_base)), \
+                 mock.patch.object(operator, "verify_correspondence", side_effect=operator.CorrespondenceError("critical drift")), \
+                 self.assertRaisesRegex(ToolError, "critical drift"):
+                operator.verify_candidate_ancestry(Path("/synthetic"))
 
     def test_identity_verifier_rejects_ref_and_artifact_mismatch(self) -> None:
         original_run = operator.subprocess.run

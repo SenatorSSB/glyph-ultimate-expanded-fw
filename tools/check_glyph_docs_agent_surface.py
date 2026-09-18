@@ -8,6 +8,8 @@ import subprocess
 import json
 from pathlib import Path
 
+from glyph_hardware_correspondence import CorrespondenceError, verify_correspondence
+
 from glyph_checker_context import (
     DEFAULT_PROTECTED_PREFIXES,
     CheckerContextError,
@@ -36,6 +38,8 @@ CALIBRATION_INDEX = REPO_ROOT / "docs/calibration/INDEX.md"
 ARCHIVE_INDEX = REPO_ROOT / "docs/archive/README.md"
 QUEUE_PATH = "docs/project/ACTIVE_AGENT_QUEUE.md"
 GP005_CANDIDATE = "437f87e8086a50f0dfbd834176b80d245c1ed307"
+GP005_TREE = "4b9e2f1eb56add78ff880321730eb15ed22ce72f"
+GP005_BRANCH = "glyph/gp-config-005-transactional-setconfig"
 GP005_BASE = "9550a1bf1309383e351f4f9e66663562fc9f13ac"
 GP005_ARTIFACT = "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44"
 GP005_HAL_PATH = "HAL/pico/src/comms/ConfiguratorBackend.cpp"
@@ -176,15 +180,20 @@ def exact_gp005_integration(context: CheckerContext) -> bool:
         return False
     if (item.get("status") != "HARDWARE_VALIDATED" or item.get("hardware_result") != "PASS"
             or item.get("hardware_evidence_gaps") != [] or evidence.get("work_order_id") != "GP-CONFIG-005"
-            or evidence.get("result") != "PASS"):
+            or evidence.get("result") != "PASS" or evidence.get("evidence_gaps") != []):
         return False
 
-    changed = git_output(root, "diff-tree", "--no-commit-id", "--name-only", "-r", GP005_CANDIDATE).splitlines()
-    if not changed or GP005_HAL_PATH not in changed:
+    if git_output(root, "rev-parse", f"{GP005_CANDIDATE}^{{tree}}") != GP005_TREE:
         return False
-    for path in changed:
-        if git_output(root, "ls-tree", GP005_CANDIDATE, "--", path) != git_output(root, "ls-tree", context.head, "--", path):
-            return False
+    refs = git_output(root, "for-each-ref", "--format=%(objectname)",
+                      f"refs/heads/{GP005_BRANCH}", f"refs/remotes/origin/{GP005_BRANCH}").splitlines()
+    if not refs or any(ref != GP005_CANDIDATE for ref in refs):
+        return False
+    try:
+        verify_correspondence(root, GP005_CANDIDATE, GP005_BASE, context.head, integrated=True)
+    except CorrespondenceError:
+        return False
+
     return True
 
 

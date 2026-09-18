@@ -78,9 +78,11 @@ Stop and report.
   `SUBAGENT_CONTRACTS.md` without creating a new approval gate.
 - A successful build proves build integrity only. It never proves controller
   acceptance.
-- Relevant source change or a different rebuild invalidates affected hardware
-  evidence unless the exact tested artifact bytes and snapshot remain the
-  candidate being published.
+- Relevant source/build-input drift invalidates hardware correspondence.
+  `HARDWARE_CORRESPONDENCE.md` defines exact critical-input preservation,
+  audited non-behavioral metadata evolution, and unknown-path rejection. A
+  rebuild is build proof only: the original tested artifact remains pinned
+  and is never replaced by the integration build.
 - Failed candidate source must not enter `configurator`; a result/evidence
   branch is not source authority.
 - Docs/checker-only with active behavior unchanged -> hardware not required.
