@@ -139,6 +139,39 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def verify_candidate_ancestry(repo_root: Path) -> None:
+    """Accept only the exact tested commit before or after its integration."""
+
+    run_git(repo_root, "cat-file", "-e", f"{CANDIDATE_GIT_SHA}^{{commit}}")
+    parents = run_git(repo_root, "rev-list", "--parents", "-n", "1", CANDIDATE_GIT_SHA).split()
+    if parents != [CANDIDATE_GIT_SHA, CANDIDATE_BASE_SHA]:
+        raise ToolError(
+            "candidate tested parent mismatch: "
+            f"expected={CANDIDATE_BASE_SHA}, actual={parents[1:]}"
+        )
+    merge_base = run_git(repo_root, "merge-base", CANDIDATE_GIT_SHA, "HEAD")
+    if merge_base == CANDIDATE_GIT_SHA:
+        changed = run_git(
+            repo_root, "diff-tree", "--no-commit-id", "--name-only", "-r", CANDIDATE_GIT_SHA
+        ).splitlines()
+        if not changed or CANDIDATE_HANDLER_PATH not in changed:
+            raise ToolError("candidate changed-path set is missing the tested handler")
+        for path in changed:
+            expected_entry = run_git(repo_root, "ls-tree", CANDIDATE_GIT_SHA, "--", path)
+            actual_entry = run_git(repo_root, "ls-tree", "HEAD", "--", path)
+            if actual_entry != expected_entry:
+                raise ToolError(f"integrated candidate path differs from tested candidate: {path}")
+    elif merge_base != CANDIDATE_BASE_SHA:
+        raise ToolError(
+            "candidate/protocol ancestry mismatch: "
+            f"expected={CANDIDATE_BASE_SHA}, actual_merge_base={merge_base}"
+        )
+    elif run_git(repo_root, "ls-tree", "HEAD", "--", CANDIDATE_HANDLER_PATH) != run_git(
+        repo_root, "ls-tree", CANDIDATE_BASE_SHA, "--", CANDIDATE_HANDLER_PATH
+    ):
+        raise ToolError("pre-integration HEAD modifies the tested handler without candidate ancestry")
+
+
 def verify_repository_identity(
     repo_root: Path = REPO_ROOT,
     *,
@@ -186,13 +219,7 @@ def verify_repository_identity(
     if mismatches:
         raise ToolError(f"candidate branch identity mismatch: {mismatches}")
 
-    run_git(repo_root, "cat-file", "-e", f"{CANDIDATE_GIT_SHA}^{{commit}}")
-    merge_base = run_git(repo_root, "merge-base", CANDIDATE_GIT_SHA, "HEAD")
-    if merge_base != CANDIDATE_BASE_SHA:
-        raise ToolError(
-            "candidate/protocol base mismatch: "
-            f"expected={CANDIDATE_BASE_SHA}, actual_merge_base={merge_base}"
-        )
+    verify_candidate_ancestry(repo_root)
 
     candidate_handler = run_git(
         repo_root, "show", f"{CANDIDATE_GIT_SHA}:{CANDIDATE_HANDLER_PATH}"

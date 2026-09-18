@@ -96,6 +96,59 @@ class OperatorUtilityTests(unittest.TestCase):
             with self.assertRaisesRegex(ToolError, "protocol identity mismatch"):
                 operator.verify_repository_identity(root, require_artifact=False)
 
+    def test_candidate_ancestry_pre_and_post_integration(self) -> None:
+        candidate = operator.CANDIDATE_GIT_SHA
+        base = operator.CANDIDATE_BASE_SHA
+        handler = operator.CANDIDATE_HANDLER_PATH
+        for merge_base in (base, candidate):
+            with self.subTest(merge_base=merge_base):
+                def fake_git(_root, *args):
+                    if args[0] == "cat-file": return ""
+                    if args[0] == "rev-list": return f"{candidate} {base}"
+                    if args[0] == "merge-base": return merge_base
+                    if args[0] == "diff-tree": return handler
+                    if args[0] == "ls-tree": return f"100644 blob valid\t{handler}"
+                    raise AssertionError(args)
+                with mock.patch.object(operator, "run_git", side_effect=fake_git):
+                    operator.verify_candidate_ancestry(Path("/synthetic"))
+
+    def test_candidate_ancestry_rejects_parent_recreation_and_path_drift(self) -> None:
+        candidate = operator.CANDIDATE_GIT_SHA
+        base = operator.CANDIDATE_BASE_SHA
+        handler = operator.CANDIDATE_HANDLER_PATH
+        def check(parent, merge_base, drift=False):
+            def fake_git(_root, *args):
+                if args[0] == "cat-file": return ""
+                if args[0] == "rev-list": return f"{candidate} {parent}"
+                if args[0] == "merge-base": return merge_base
+                if args[0] == "diff-tree": return handler
+                if args[0] == "ls-tree": return f"100644 blob {'drift' if drift and args[1] == 'HEAD' else 'valid'}\t{handler}"
+                raise AssertionError(args)
+            with mock.patch.object(operator, "run_git", side_effect=fake_git):
+                operator.verify_candidate_ancestry(Path("/synthetic"))
+        with self.assertRaisesRegex(ToolError, "tested parent mismatch"):
+            check("other-parent", candidate)
+        with self.assertRaisesRegex(ToolError, "ancestry mismatch"):
+            check(base, "recreated-equivalent")
+        with self.assertRaisesRegex(ToolError, "without candidate ancestry"):
+            check(base, base, drift=True)
+        with self.assertRaisesRegex(ToolError, "integrated candidate path differs"):
+            check(base, candidate, drift=True)
+
+    def test_identity_verifier_rejects_ref_and_artifact_mismatch(self) -> None:
+        original_run = operator.subprocess.run
+        def wrong_ref(command, **kwargs):
+            result = original_run(command, **kwargs)
+            if command[:3] == ["git", "rev-parse", "--verify"] and "transactional-setconfig" in command[3] and result.returncode == 0:
+                result.stdout = "0" * 40 + "\n"
+            return result
+        with mock.patch.object(operator.subprocess, "run", side_effect=wrong_ref):
+            with self.assertRaisesRegex(ToolError, "candidate branch identity mismatch"):
+                operator.verify_repository_identity(require_artifact=False)
+        with mock.patch.object(operator, "file_sha256", side_effect=[operator.CONFIG_PROTO_SHA256, "0" * 64]):
+            with self.assertRaisesRegex(ToolError, "preserved artifact SHA-256 mismatch"):
+                operator.verify_repository_identity(require_artifact=True)
+
     def test_all_rejection_mutations_are_minimal_deterministic_and_encodable(self) -> None:
         baseline = self.make_baseline()
         cases = operator.build_rejection_cases(baseline, self.config_pb2)

@@ -5,11 +5,13 @@ from __future__ import annotations
 
 import re
 import subprocess
+import json
 from pathlib import Path
 
 from glyph_checker_context import (
     DEFAULT_PROTECTED_PREFIXES,
     CheckerContextError,
+    CheckerContext,
     collect_checker_context,
     validate_feature_scope,
 )
@@ -32,6 +34,11 @@ ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 RUNTIME_README = REPO_ROOT / "docs/runtime_config/README.md"
 CALIBRATION_INDEX = REPO_ROOT / "docs/calibration/INDEX.md"
 ARCHIVE_INDEX = REPO_ROOT / "docs/archive/README.md"
+QUEUE_PATH = "docs/project/ACTIVE_AGENT_QUEUE.md"
+GP005_CANDIDATE = "437f87e8086a50f0dfbd834176b80d245c1ed307"
+GP005_BASE = "9550a1bf1309383e351f4f9e66663562fc9f13ac"
+GP005_ARTIFACT = "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44"
+GP005_HAL_PATH = "HAL/pico/src/comms/ConfiguratorBackend.cpp"
 
 CHECKER_REL = "tools/check_glyph_docs_agent_surface.py"
 ALLOWED_EXACT_CHANGED_PATHS = {
@@ -94,6 +101,91 @@ class AgentSurfaceError(AssertionError):
 
 def fail(message: str) -> None:
     raise AgentSurfaceError(message)
+
+
+def git_output(root: Path, *args: str) -> str:
+    result = subprocess.run(["git", *args], cwd=root, capture_output=True, text=True, check=False)
+    if result.returncode:
+        fail(f"git {' '.join(args)} failed: {result.stderr.strip()}")
+    return result.stdout.strip()
+
+
+def is_ancestor(root: Path, earlier: str, later: str) -> bool:
+    return subprocess.run(
+        ["git", "merge-base", "--is-ancestor", earlier, later],
+        cwd=root, capture_output=True, check=False,
+    ).returncode == 0
+
+
+def exact_gp005_integration(context: CheckerContext) -> bool:
+    """Authorize only the immutable, canonically validated HAL merge delta."""
+
+    root = context.repo_root
+    if GP005_HAL_PATH not in context.committed_paths:
+        return False
+    if any(
+        path != GP005_HAL_PATH
+        and not (path.startswith("docs/") or path.startswith("tools/") or path in {"README.md", "AGENTS.md", "CLAUDE.md"})
+        for path in context.changed_paths
+    ):
+        return False
+    if GP005_HAL_PATH in (context.staged_paths | context.unstaged_paths):
+        return False
+    if not context.base_commit or context.base_commit != git_output(root, "rev-parse", "origin/configurator"):
+        return False
+    if is_ancestor(root, GP005_CANDIDATE, context.base_commit):
+        return False
+    if not is_ancestor(root, GP005_CANDIDATE, context.head):
+        return False
+    if git_output(root, "rev-list", "--parents", "-n", "1", GP005_CANDIDATE).split() != [GP005_CANDIDATE, GP005_BASE]:
+        return False
+    merges = git_output(root, "rev-list", "--merges", "--parents", f"{context.base_commit}..{context.head}")
+    if not any(
+        len(parts := line.split()) >= 3
+        and parts[2:] == [GP005_CANDIDATE]
+        and is_ancestor(root, context.base_commit, parts[1])
+        for line in merges.splitlines()
+    ):
+        return False
+
+    queue_text = git_output(root, "show", f"{context.base_commit}:{QUEUE_PATH}")
+    match = re.search(r"<!-- queue-state:start -->\s*```json\s*(.*?)\s*```", queue_text, re.S)
+    if not match:
+        return False
+    try:
+        items = json.loads(match.group(1))["items"]
+        item, = [entry for entry in items if entry.get("id") == "GP-CONFIG-005"]
+    except (ValueError, KeyError, TypeError):
+        return False
+    evidence_ref = item.get("hardware_evidence_record", "")
+    if not isinstance(evidence_ref, str) or not evidence_ref.startswith("git-json:"):
+        return False
+    try:
+        _, evidence_commit, evidence_path = evidence_ref.split(":", 2)
+        if not re.fullmatch(r"[0-9a-f]{40}", evidence_commit) or not is_ancestor(root, evidence_commit, context.base_commit):
+            return False
+        evidence = json.loads(git_output(root, "show", f"{evidence_commit}:{evidence_path}"))
+    except (ValueError, KeyError, TypeError, AgentSurfaceError):
+        return False
+    identity = {
+        "candidate_git_sha": GP005_CANDIDATE,
+        "candidate_base_configurator_sha": GP005_BASE,
+        "firmware_artifact_sha256": GP005_ARTIFACT,
+    }
+    if any(item.get(key) != value or evidence.get(key) != value for key, value in identity.items()):
+        return False
+    if (item.get("status") != "HARDWARE_VALIDATED" or item.get("hardware_result") != "PASS"
+            or item.get("hardware_evidence_gaps") != [] or evidence.get("work_order_id") != "GP-CONFIG-005"
+            or evidence.get("result") != "PASS"):
+        return False
+
+    changed = git_output(root, "diff-tree", "--no-commit-id", "--name-only", "-r", GP005_CANDIDATE).splitlines()
+    if not changed or GP005_HAL_PATH not in changed:
+        return False
+    for path in changed:
+        if git_output(root, "ls-tree", GP005_CANDIDATE, "--", path) != git_output(root, "ls-tree", context.head, "--", path):
+            return False
+    return True
 
 
 def rel(path: Path) -> str:
@@ -373,14 +465,19 @@ def validate_docs() -> None:
     validate_archive_index(docs[ARCHIVE_INDEX])
 
 
+def validate_surface_scope(context: CheckerContext) -> None:
+    authorized_hal = exact_gp005_integration(context) if GP005_HAL_PATH in context.changed_paths else False
+    validate_feature_scope(
+        context,
+        allowed_paths=("docs/", "tools/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ())),
+        protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/" and (not authorized_hal or prefix.casefold() != "hal/")),
+    )
+
+
 def main() -> int:
     try:
         context = collect_checker_context(repo_root=REPO_ROOT)
-        validate_feature_scope(
-            context,
-            allowed_paths=("docs/", "tools/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"),
-            protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/"),
-        )
+        validate_surface_scope(context)
     except CheckerContextError as exc:
         fail(str(exc))
     branch = context.branch or "detached HEAD"
