@@ -20,7 +20,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
-from typing import Any, Iterable, Protocol
+from typing import Any, Callable, Iterable, Protocol
 
 from glyph_hardware_correspondence import CorrespondenceError, verify_correspondence
 
@@ -93,7 +93,13 @@ RESULT_NONCLAIMS = [
 class Transport(Protocol):
     """Small interface shared by the serial transport and test doubles."""
 
-    def transact(self, command_id: int, payload: bytes) -> tuple[int, bytes]: ...
+    def transact(
+        self,
+        command_id: int,
+        payload: bytes,
+        *,
+        stage_callback: Callable[[str], None] | None = None,
+    ) -> tuple[int, bytes]: ...
 
 
 @dataclass
@@ -114,6 +120,47 @@ def utc_now() -> str:
 
 def sha256_bytes(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
+
+
+def transaction_stage_state() -> dict[str, Any]:
+    return {
+        "transaction_stage": "not_started",
+        "transaction_stages": [],
+        "prewrite_read_attempted": False,
+        "prewrite_read_completed": False,
+        "prewrite_baseline_matched": False,
+        "write_attempted": False,
+        "full_host_write_completed": False,
+        "awaiting_response": False,
+        "response_received": False,
+        "response_decoded": False,
+        "followup_read_attempted": False,
+        "followup_read_completed": False,
+        "partial_write_ambiguous": False,
+    }
+
+
+def record_transaction_stage(result: dict[str, Any], stage: str) -> None:
+    result["transaction_stage"] = stage
+    result["transaction_stages"].append({"stage": stage, "at_utc": utc_now()})
+    if stage in {
+        "prewrite_read_attempted",
+        "prewrite_read_completed",
+        "prewrite_baseline_matched",
+        "write_attempted",
+        "full_host_write_completed",
+        "awaiting_response",
+        "response_received",
+        "response_decoded",
+        "followup_read_attempted",
+        "followup_read_completed",
+    }:
+        result[stage] = True
+    if stage == "write_attempted":
+        result["partial_write_ambiguous"] = True
+    if stage == "full_host_write_completed":
+        result["sent"] = True
+        result["partial_write_ambiguous"] = False
 
 
 def json_dump(value: Any) -> str:
@@ -1014,6 +1061,7 @@ def execute_valid_update(
             "Acknowledgement permits the next operation; it does not auto-populate a hardware PASS."
         ),
         "sent": False,
+        **transaction_stage_state(),
         "response": None,
         "unexpected_error": False,
         "connected_after": False,
@@ -1030,7 +1078,9 @@ def execute_valid_update(
         return result
 
     try:
+        record_transaction_stage(result, "prewrite_read_attempted")
         current_payload, _ = request_config(transport)
+        record_transaction_stage(result, "prewrite_read_completed")
         if current_payload != baseline_payload:
             result["mechanical_outcome"] = "BASELINE_DRIFT_STOP"
             result["error"] = (
@@ -1039,15 +1089,22 @@ def execute_valid_update(
             )
             result["connected_after"] = transport_is_open(transport)
             return result
-        command_id, response_payload = transport.transact(CMD_SET_CONFIG, payload)
-        result["sent"] = True
+        record_transaction_stage(result, "prewrite_baseline_matched")
+        command_id, response_payload = transport.transact(
+            CMD_SET_CONFIG,
+            payload,
+            stage_callback=lambda stage: record_transaction_stage(result, stage),
+        )
         result["response"] = response_record(command_id, response_payload)
+        record_transaction_stage(result, "response_decoded")
         result["unexpected_error"] = command_id == CMD_ERROR
         result["connected_after"] = transport_is_open(transport)
         if command_id != CMD_SUCCESS:
             result["mechanical_outcome"] = "UNEXPECTED_VALID_UPDATE_RESPONSE_STOP"
             return result
+        record_transaction_stage(result, "followup_read_attempted")
         followup_payload, followup_response = request_config(transport)
+        record_transaction_stage(result, "followup_read_completed")
         result["followup"] = {
             "request_command": "CMD_GET_CONFIG",
             "response": followup_response,
@@ -1066,7 +1123,7 @@ def execute_valid_update(
         result["mechanical_outcome"] = "SUCCESS_RESPONSE_AND_RESPONSIVE"
         return result
     except Exception as exc:
-        result["connected_after"] = False
+        result["connected_after"] = transport_is_open(transport)
         result["mechanical_outcome"] = "TRANSPORT_OR_FOLLOWUP_ERROR_STOP"
         result["error"] = str(exc)
         return result
@@ -1092,6 +1149,7 @@ def empty_result(device_context: dict[str, Any], capture: dict[str, Any] | None)
         "tests": [],
         "valid_update": {
             "sent": False,
+            **transaction_stage_state(),
             "mechanical_outcome": "NOT_RUN",
             "human_reboot_observation": None,
             "human_controller_display_smoke": None,
@@ -1123,6 +1181,39 @@ def validate_result_schema(value: Any) -> None:
         raise ToolError("result tests must be a list")
     if not isinstance(value.get("valid_update"), dict):
         raise ToolError("result valid_update must be an object")
+    valid_update = value["valid_update"]
+    required_boolean_fields = {
+        "sent",
+        "prewrite_read_attempted",
+        "prewrite_read_completed",
+        "prewrite_baseline_matched",
+        "write_attempted",
+        "full_host_write_completed",
+        "awaiting_response",
+        "response_received",
+        "response_decoded",
+        "followup_read_attempted",
+        "followup_read_completed",
+        "partial_write_ambiguous",
+    }
+    for field in required_boolean_fields:
+        if not isinstance(valid_update.get(field), bool):
+            raise ToolError(f"result valid_update.{field} must be a boolean")
+    if not isinstance(valid_update.get("transaction_stage"), str):
+        raise ToolError("result valid_update.transaction_stage must be a string")
+    stages = valid_update.get("transaction_stages")
+    if not isinstance(stages, list):
+        raise ToolError("result valid_update.transaction_stages must be a list")
+    for stage in stages:
+        if (
+            not isinstance(stage, dict)
+            or not isinstance(stage.get("stage"), str)
+            or not isinstance(stage.get("at_utc"), str)
+        ):
+            raise ToolError("result valid_update.transaction_stages entries are invalid")
+    for field in ("human_reboot_observation", "human_controller_display_smoke"):
+        if field not in valid_update or valid_update[field] is not None:
+            raise ToolError(f"result valid_update.{field} must remain null")
     if value.get("operator_assessment") is not None:
         raise ToolError("new mechanical result must leave operator_assessment null")
     for record in value["tests"]:

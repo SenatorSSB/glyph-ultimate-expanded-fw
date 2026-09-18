@@ -137,6 +137,12 @@ no earlier whole-candidate-path rule. The unpushed diagnostic merge
 inputs; its sole candidate-path mismatch is the legitimately evolved census.
 It remains diagnostic evidence only, never the final integration candidate.
 
+The current GP-CONFIG-006 host-only branch additionally changes
+`tools/glyph_serial_config_tool.py`. It is audited as `NON_BEHAVIORAL` in the
+correspondence checker because it records host transport boundaries without
+changing firmware, build inputs, or encoded command bytes; this current-cycle
+path is not part of the historical GP-CONFIG-005 candidate inventory above.
+
 ## Artifact identity and limitations
 
 `builder_scripts/arduino_pico.py` embeds Git HEAD plus dirty status into
