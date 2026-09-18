@@ -79,18 +79,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -100,6 +99,71 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-VAL-015",
+      "title": "Bind hardware correspondence to authoritative firmware and build inputs",
+      "status": "READY",
+      "branch": "codex/gp-val-015-hardware-correspondence",
+      "objective": "Replace GP-VAL-014 whole-candidate-path equality with a general fail-closed distinction between hardware-correspondence-critical inputs and proven host-only repository metadata; retain exact candidate/artifact/PASS identity and reject every unrelated or later critical input delta.",
+      "why_this_matters": "The unpushed diagnostic merge 8220bc4c05c5fcb53f0bc5a7a52f0646bea311cd contains the exact tested candidate and handler but fails solely because the checker census legitimately evolved on canonical. GP-VAL-014 introduced all-candidate-path equality as a conservative host implementation rule; physical acceptance protects firmware inputs, not every historical repository blob. Its useful ancestry and protected-source protections must remain.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Host-only correspondence validation accepts legitimate evolution of independently classified non-behavioral metadata while preserving exact Git modes and blobs of ALL critical firmware/build inputs in the tested candidate versus the integrated target, including inputs not changed by the candidate. Unknown paths fail closed. Generated active runtime source remains critical. No firmware, build-input, preserved artifact, protocol, hardware PASS, or device behavior changes. The tested artifact stays authoritative: builder_scripts/arduino_pico.py embeds Git HEAD/dirty FIRMWARE_VERSION, so a later merge rebuild is not asserted byte-identical or hardware accepted.",
+      "scope": "Repair tools/gp_config_005_hw_test.py and tools/check_glyph_docs_agent_surface.py; add one small shared host correspondence/classification helper under tools/ and focused operator/surface/classification synthetic tests. A finite audited host-only path inventory with source-backed dependency rationale may be encoded in the helper or a directly coupled inert docs/runtime_config fixture. Critical source/build classification takes precedence over metadata classification; reject malformed, ambiguous, unclassified, symlink/gitlink or unsupported entries unless their safe treatment is explicitly proved. Reuse conservative src/, include/, HAL/, lib/ protection and cover config/, builder_scripts/, platformio.ini, build scripts/dependency controls and other proven build inputs; never classify docs/, tools/, fixture, generated, or extension prefixes alone as harmless. Classify every candidate-changed path, every candidate-to-target changed path, and staged/unstaged/untracked paths relevant to correspondence; compare all critical candidate-to-target entries, not only the historical changed set, and reject dirty critical or unknown inputs. Before integration retain the pinned tested-base ancestry check and prove critical candidate-independent baseline inputs have not drifted. Preserve exact candidate SHA/tree/direct parent/ref, artifact hash, protocol/config.proto checks, canonical HARDWARE_VALIDATED PASS evidence correspondence, and narrow exact-source integration applicability. Host-only differences remain subject to normal scope, fixture, census, provenance and governance validators; exemption never skips them. Allow only deterministic direct consequences in validation manifest/census/health fixtures or docs, classification/source-authority documentation, operator runbook or relevant hardware/validation governance wording, and queue/status completion mirrors. No unrelated checker refactor.",
+      "explicit_excluded_scope": "No active firmware, HAL, src/include/lib/config source, generated active tables, platformio.ini, builder/build/dependency input, product/runtime semantics, UF2, preserved artifact, candidate commit, protocol, hardware evidence content, persistence, device/write/flashing, runtime-loaded configuration, Nunchuk, root-cause, or game-semantic changes. No GP-VAL-011 repair or unrelated transaction-stage tooling commit 8b2c8932304ecf5c56149eb91ec5ddd7511c59e8. No one-filename census exemption, blanket docs/tools trust, arbitrary branch exemption, weaker candidate/artifact/PASS pins, recreated/rebased/reimplemented candidate substitute, H2 integration or GP-CONFIG-005 DONE within this H1 order.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "Live configurator 2f8e93cfe1430a33ef082829d6c9e0340fd66fbf; GP-VAL-014 implementation 0f7f71bfff4b9488d8b148c6eb155ad20cc05589 introduced the broad loops in both host validators. Canonical GP-CONFIG-005 HARDWARE_VALIDATED/PASS binds candidate 437f87e8086a50f0dfbd834176b80d245c1ed307, tree 4b9e2f1eb56add78ff880321730eb15ed22ce72f, direct tested parent 9550a1bf1309383e351f4f9e66663562fc9f13ac, artifact 650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44 and git-json:0bb9e29a2ba8f92483c8a0177997efe32d400030:docs/calibration/fixtures/gp_config_005_hardware_evidence_2026-09-17.json. platformio.ini source filters/include roots and config/glyph/env.ini inheritance compile src/, HAL/pico/src and Glyph config sources/headers, with builder_scripts/arduino_pico.py and declared dependencies as build authority. The candidate has 23 changed paths: only HAL/pico/src/comms/ConfiguratorBackend.cpp contributes to firmware. The other 22 are seven docs/runtime_config research/contract/census/manifest/health files, two host checkers, and thirteen tools/fixtures/configurator_setconfig_host harness/stub files. Production filters exclude these host locations; the host checker explicitly supplies its stub include root to its own c++ invocation, and the harness includes production source rather than production including the harness. The census is consumed by host census/aggregate validation and has no build/runtime input dependency in this audited graph. tools/glyph_checker_context.py supplies conservative protected-source concepts; build_input_provenance_inventory supplies declared build controls, not a complete dependency closure. HARDWARE_EVIDENCE.md, VALIDATION_AND_GATES.md and IMPLEMENTATION_BOUNDARY.md retain exact physical and source authority.",
+      "dependencies_prerequisites": [
+        "GP-CONFIG-005 remains canonical HARDWARE_VALIDATED/PASS with no evidence gaps for its immutable candidate/artifact pair; preserved artifact readback and live candidate ref must still match.",
+        "Begin from fresh live canonical containing GP-VAL-014 DONE; independently trace source filters, include paths, build hooks/dependency declarations and host-only consumers before allowing metadata classification.",
+        "Independent review must inspect the general classification and its adversarial tests. Publish reviewed H1 implementation and then separate strict DONE correspondence before fresh GP-CONFIG-005 integration recovery."
+      ],
+      "substantive_authorization_rationale": "The owner explicitly requested a general H1 governance/model repair and supplied the safety invariant. Independent Curator review and source dependency inspection establish that the census collision is host-only and that exact all-path equivalence was a GP-VAL-014 implementation shortcut, not a firmware acceptance invariant. Replacing it with conservative critical-input exactness across the entire candidate-to-target delta strengthens protection of unchanged-at-candidate inputs while allowing only dependency-proven host metadata evolution. This resolves the substantive model decision without authorizing firmware changes or a new hardware judgment. GP-VAL-014 is already DONE and does not authorize a new implementation cycle; GP-VAL-015 is the next unused VAL identifier.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Live tested identity, candidate ref/direct parent/tree, artifact readback, queue authorization or immutable PASS record differs from the pinned accepted pair.",
+        "Dependency tracing reveals a purported host-only exemption can affect the firmware build or runtime, or an unknown path needs judgment beyond conservative rejection.",
+        "The proposed model cannot reject unrelated/later critical source/build deltas, unsafe path modes, or active generated source drift without changing active firmware or weakening identity/protected-source authority."
+      ],
+      "authorization_snapshot_provenance": "Independent Revision-2 Work-Order Curator on 2026-09-19, separate from Implementation Supervisor, inspected current governance, exact candidate diff and live canonical 2f8e93cfe1430a33ef082829d6c9e0340fd66fbf; ordinary read-only GitHub lookup failed DNS, permitted network-enabled retry verified the exact live ref. Parallel independent dependency audit confirmed the 1 critical / 22 host-only candidate split from PlatformIO inheritance and host compiler include paths. Owner architecture/control-plane request authorizes this bounded model decision, not a new Planner packet; immutable consumed Planner receipt and deferred GP-VAL-011 remain unchanged.",
+      "automated_validation": [
+        "Critical correspondence: exact candidate integration with all critical inputs exact PASS; one-byte tested handler change FAIL; another firmware/build input changed after candidate FAIL even if not candidate-changed; critical additions/deletions/mode changes FAIL. Recreated/reimplemented candidate, moved candidate ref, changed direct parent/base/tree, wrong artifact digest, or PASS belonging to another candidate/artifact FAIL.",
+        "Non-behavioral evolution: legitimately regenerated candidate-touched census/inventory and superseded docs/governance paths PASS correspondence only with audited absence from firmware/build dependency inputs and their normal validators passing; deliberately invalid exempt metadata still fails its ordinary validator. Exercise at least two distinct metadata categories so no one-file exception can satisfy the invariant.",
+        "Protected source: exact canonically authorized hardware-validated source integration PASS; exact candidate plus unrelated firmware source edit FAIL; dirty staged/unstaged/untracked critical input FAIL; missing canonical HARDWARE_VALIDATED/PASS, stale/mismatched authorization and ordinary H0/H1 HAL edit FAIL. Preserve narrow merge-parent/base checks and existing ordinary scope rules.",
+        "Classification: unknown/unclassified candidate or later path FAIL CLOSED; generated active runtime table/header FAIL on drift; path-prefix/extension tricks, unsupported modes and host-harness lookalikes cannot create an exemption. Build hooks, config include/source inputs and dependency control drift fail even outside old protected prefixes. Critical classification takes precedence over any metadata inventory.",
+        "Run focused operator, agent-surface and shared-helper synthetic tests; checker context, agent surface, framework, sequence, navigation, source-sync, census, manifest/health and directly affected aggregate gates; Python compilation, git diff --check, exact changed-path and clean-state checks. Report deferred GP-VAL-011 aggregate failures separately without repairing or relabeling them. No H1 firmware build or new hardware test is required because active/build inputs are unchanged.",
+        "Fresh independent reviewer must examine later-source bypasses, active generated tables, prefix tricks, unknown paths, exact candidate/artifact/PASS pins, general census-collision resolution and accurate source authority. Fix material findings within this order before publication; return to Curator for expanded scope."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 host validation/model work only; any active firmware or build-input delta stops. Canonical firmware command remains pio run -e glyph_mk6 for separate H2 integration verification; a new build is not new physical acceptance.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Keep the H1 repair unmerged on failed classification, identity or independent-review gates; return substantive ambiguity to Curator. Preserve the exact tested artifact and all historical hardware records. After reviewed H1 canonical publication only, separate Implementation Supervisor recovery starts from freshly verified canonical and performs a new conflict-free exact candidate merge; never reuse diagnostic 8220bc4c05c5fcb53f0bc5a7a52f0646bea311cd.",
+      "status_documentation_updates": "Publish GP-VAL-015 READY and synchronized runway/status mirrors through independent curation. Implementation may update execution state for this one order and publish strict DONE evidence only in a later canonical publication after reviewed H1 integration. Keep GP-CONFIG-005 HARDWARE_VALIDATED/PASS until its separate exact-candidate integration and post-integration validation. Preserve GP-VAL-014 DONE, GP-VAL-011 OWNER_DEFERRED and INCONCLUSIVE_PERSISTENCE_EVENT history.",
+      "done_evidence": "Pending: reviewed H1 implementation, focused tests and separate strict glyph_done_completion_evidence publication after live canonical integration.",
+      "stop_conditions": [
+        "Any active firmware/build input, exact candidate/artifact, protocol or hardware evidence content requires mutation.",
+        "Exact tested identity, artifact/PASS correspondence or critical-input equality cannot be proved; any unknown path requires an unrecorded exemption.",
+        "Mixed unrelated source/build edits, dirty protected inputs, generated active source or path tricks can pass; a claimed metadata category lacks dependency evidence.",
+        "Work expands into GP-VAL-011, excluded transaction-stage tooling, new device/write/persistence/flashing/runtime-config authority, H2 integration or GP-CONFIG-005 DONE before separate reviewed H1 publication.",
+        "Live canonical drift changes substantive authority or another canonical writer conflicts; reverify and defer instead of self-authorizing scope."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": true,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-VAL-014",
       "title": "Accept exact hardware-validated integration in post-integration host gates",
@@ -3103,11 +3167,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-015"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-VAL-015; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3115,7 +3179,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, preserved UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; exact-candidate integration recovery remains pending. The earlier `INCONCLUSIVE_PERSISTENCE_EVENT` remains separate historical evidence. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. Effective runway is zero, hardware-pending is zero, primary liveness is `PLANNING_REQUIRED`, and global wait is unsupported.
+Packet `glyph-portfolio-20260907-1359` is `CONSUMED` after owner decisions `GLYPH-UD-013` through `GLYPH-UD-015` resolved both survivors and deferred `GP-VAL-011`. `GP-VAL-011` remains visible as `REVIEW / OWNER_DEFERRED / NONEXECUTABLE`; failed and historical evidence is preserved, no implementation resumed, and `REPAIR_REQUIRED` is not current liveness. `GP-PERSIST-001` and reviewed, canonically integrated `GP-ART-001` are `DONE`. `GP-CONFIG-005` is `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, preserved UF2 SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`; exact-candidate integration recovery remains pending. The earlier `INCONCLUSIVE_PERSISTENCE_EVENT` remains separate historical evidence. `GP-VAL-014` is DONE after reviewed H1 publication and separate strict completion correspondence. `GP-VAL-015` is READY for the separately curated H1 general hardware-correspondence repair; exact critical firmware/build inputs remain pinned while audited host-only metadata may evolve. Effective runway is one, hardware-pending is zero, primary liveness is `RUNWAY_LOW`, and global wait is unsupported.
 
 ## Allowed Statuses
 
@@ -3151,10 +3215,11 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 Independent source review: [fresh non-waiting recovery curation](../agent_framework/PORTFOLIO_RECOVERY_CURATOR_REVIEW_20260907_1359.md).
 
-The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is `HARDWARE_VALIDATED` for its exact candidate/artifact pair pending Implementation Supervisor publication recovery; `GP-VAL-014` is DONE, primary liveness is `PLANNING_REQUIRED`, and `REPAIR_REQUIRED` remains absent.
+The one-time transition Curator adjudication is [recorded here](../agent_framework/SUPERVISOR_TRANSITION_CURATOR_ADJUDICATION_20260907.md). Packet `glyph-portfolio-20260907-1359` is now `CONSUMED`; its immutable receipt continues to record the truthful initial `USER_DECISION_GATED` dispositions. `GP-VAL-011` is `REVIEW / OWNER_DEFERRED / NONEXECUTABLE` with evidence preserved. `GP-ART-001` is `DONE` through reviewed direct ancestry, and `GP-CONFIG-005` is `HARDWARE_VALIDATED` for its exact candidate/artifact pair pending Implementation Supervisor publication recovery; `GP-VAL-014` is DONE, `GP-VAL-015` is READY, primary liveness is `RUNWAY_LOW`, and `REPAIR_REQUIRED` remains absent.
 
 Planner commit `c5ba86af32194055752e790fbeadd6efe1512d59` and immutable Curator receipt `6ea9451fa5e3d122b122eb163846753e26b86b3b` bind the exact two initial and surviving dispositions.
 
+- `GP-VAL-015`: independently curated H1 general fail-closed firmware/build correspondence repair; independent curation precedes implementation and separate H2 recovery.
 - `GP-VAL-014`: DONE after separate reviewed H1 repair publication and strict completion correspondence; GP-CONFIG-005 H2 integration remains separate.
 - `GP-CONFIG-005`: owner-approved H2 live-RAM rejection invariant, now `HARDWARE_VALIDATED` for exact candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, artifact SHA-256 `650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44`, and protocol `GP_CONFIG_005_HW_V1`. The prior inconclusive persistence event remains separate, exact-candidate integration recovery is pending, disk recovery remains separately gated, and official configurator remains retired.
 - `GP-ART-001`: `DONE` through reviewed H1 local content-addressed custody policy/tool/checker integration; no external store, credentials, build, real artifact, or device action was selected.
