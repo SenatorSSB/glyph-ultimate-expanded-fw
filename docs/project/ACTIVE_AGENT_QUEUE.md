@@ -124,17 +124,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "RUNWAY_LOW"
+    "CURATION_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -540,7 +540,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-020",
       "title": "Classify build and artifact safety checkers",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-020-safety-checker-classification",
       "objective": "Make new CI, build, artifact, custody, and hardware-evidence safety checkers require manifest or explicit-exclusion classification even when they lack runtime-config vocabulary.",
       "why_this_matters": "A new safety checker can currently enter the census with no strong signal and silently fall outside both the validation manifest and exclusion set.",
@@ -580,7 +580,25 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave the current signal set unchanged if closed classification cannot avoid unrelated false positives; do not weaken manifest/exclusion enforcement.",
       "status_documentation_updates": "Document the added safety-checker signal classes only; preserve static-observation and no-completeness claims.",
-      "done_evidence": "Pending exact reviewed signal inventory, adversarial aggregate corpus, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "f0a1eab7f75c6c037983e4d7290c63f800f2ede6",
+        "reviewed_implementation_sha": "2759a37b8908bd68be8fd830ced313e9ec16bed2",
+        "prior_canonical_integration_sha": "2759a37b8908bd68be8fd830ced313e9ec16bed2",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/generate_glyph_checker_census.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-VAL-020 snapshot. The review confirmed canonical path/identifier boundaries, near-miss prefix probes, manifest/exclusion correspondence, static-only scope, and no firmware, build, hardware, or policy change.",
+        "validation_provenance": "Checker census (202 entries), validation health (41 manifest entries / 42 exclusions), aggregate adversarial suite including AGG-22 safety and near-miss probes, framework, navigation, agent-surface, Python syntax, and git diff --check PASS. The direct manifest command remains a documented pre-existing SETUP_FAILURE because preflight rejects the ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ path; no aggregate-green claim is made. No firmware build or hardware action was required."
+      },
       "stop_conditions": [
         "A new safety checker using a reviewed signal can remain unclassified.",
         "Unrelated general-purpose checkers are forced into the manifest without source-backed relevance.",
@@ -4235,11 +4253,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-020"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-020; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4250,7 +4268,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. One bounded H0/H1 item remains Ready after GP-SRC-008 completion: safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. No bounded item remains Ready after GP-VAL-020 completion. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-018 remains USER_DECISION_GATED, so the zero-runway primary is CURATION_REQUIRED. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
