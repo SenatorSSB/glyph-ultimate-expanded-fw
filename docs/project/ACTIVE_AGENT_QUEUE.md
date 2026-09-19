@@ -107,17 +107,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
-  "signals": [
-    "RUNWAY_LOW"
+    "signals": [
+    "PLANNING_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -461,7 +461,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PERSIST-002",
       "title": "Characterize CMD_GET_CONFIG raw-load failures",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-persist-002-get-config-raw-load-characterization",
       "objective": "Complete source-side persistence/readback characterization for HandleGetConfig and LoadConfigRaw without selecting or implementing a firmware correction.",
       "why_this_matters": "GP-CONFIG-005/006 use GET_CONFIG for prewrite and follow-up checks, but current persistence research omits that command path: HandleGetConfig ignores LoadConfigRaw's return and LoadConfigRaw ignores per-byte output-write results.",
@@ -502,7 +502,38 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Remove the host-only harness/research delta if exact source correspondence cannot be proved; leave firmware and current persistence behavior unchanged.",
       "status_documentation_updates": "Extend persistence research with explicit uncertainty and nonclaims; publish DONE only after exact-body and adversarial source-drift gates pass.",
-      "done_evidence": "NOT_DONE: publish completion only after focused implementation, fresh independent review, required validation, and canonical integration.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "c664d858ad656554d990196f3c46472ca9ebc46e",
+        "reviewed_implementation_sha": "b0aa22aff74ae7711dad219330b1490e930b8714",
+        "prior_canonical_integration_sha": "b0aa22aff74ae7711dad219330b1490e930b8714",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/getconfig_raw_load_characterization.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/getconfig_raw_load_characterization.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_getconfig_raw_load_characterization.py",
+          "tools/fixtures/configurator_setconfig_host/handler_harness.cpp",
+          "tools/fixtures/configurator_setconfig_host/include/host_stubs.hpp",
+          "tools/fixtures/getconfig_raw_host/getconfig_handler_harness.cpp",
+          "tools/fixtures/getconfig_raw_host/handler_harness.cpp",
+          "tools/fixtures/getconfig_raw_host/include/CRC32.h",
+          "tools/fixtures/getconfig_raw_host/include/LittleFS.h",
+          "tools/fixtures/getconfig_raw_host/include/config.pb.h",
+          "tools/fixtures/getconfig_raw_host/include/host_stubs.hpp",
+          "tools/fixtures/getconfig_raw_host/include/pb_arduino.h",
+          "tools/fixtures/getconfig_raw_host/include/pb_decode.h",
+          "tools/fixtures/getconfig_raw_host/include/pb_encode.h",
+          "tools/fixtures/getconfig_raw_host/include/stdlib.hpp"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS: explicit validate=false and packet-end failure coverage, exact source hashes/literal includes, host-only non-claims, and no firmware/protocol/device/persistence/recovery/hardware behavior change.",
+        "validation_provenance": "GP-PERSIST-002 checker PASS with 11 cases; existing SetConfig compiled production-handler regression PASS with 9 cases; GP-PERSIST-001 research PASS; checker census PASS with 201 entries; health PASS with 40 manifest entries and 36 current load-bearing checks; framework/navigation/agent-surface/syntax/diff gates PASS. Canonical firmware build not required; no production or build-input bytes changed."
+      },
       "stop_conditions": [
         "Any production firmware, protocol, packet framing, device, config.bin, persistence/recovery, or hardware behavior is changed or prescribed.",
         "Output delivery, integrity, storage recovery, or device acceptance is claimed from the host harness.",
@@ -3732,11 +3763,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PERSIST-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PERSIST-002; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3747,7 +3778,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work; GP-PROV-009, GP-VAL-016, GP-CONFIG-007, and GP-VAL-017 are now DONE with strict completion correspondence, while GP-PERSIST-002 is the next authorized work item. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry the current counts and RUNWAY_LOW liveness; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of five bounded work items; GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 are now DONE with strict completion correspondence. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry zero effective authorized runway and PLANNING_REQUIRED; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
