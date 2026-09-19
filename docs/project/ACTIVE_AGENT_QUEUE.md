@@ -310,7 +310,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-011",
       "title": "Reject ignored files in source-critical paths",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-011-ignored-critical-paths",
       "objective": "Reject ignored untracked files under the exact audited source and build-control inventory before clean firmware identity or artifact custody is accepted.",
       "why_this_matters": "An ignored source file can currently produce a clean builder identity and pass custody even though it may affect the built artifact.",
@@ -352,7 +352,24 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave builder and custody integrity unchanged if exact critical discovery, current clean build, or review fails; do not inspect or mutate ignored owner artifacts.",
       "status_documentation_updates": "Document only the finite ignored-critical-path rejection and the builder-DIRTY versus custody-reject distinction; preserve GP-VAL-011 deferral.",
-      "done_evidence": "Pending exact reviewed implementation, focused ignored-path corpus, canonical build, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "a63c50d7701480fffaf75b01e2f5f10883e12aa5",
+        "reviewed_implementation_sha": "46f71c956f1e6866fb9b4f325d7ca751a0741734",
+        "prior_canonical_integration_sha": "d170509476ecb4bd1fa0fc371cd3c73391ad4f55",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_hardware_artifact_custody.py",
+          "tools/check_glyph_prebuild_git_identity.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/glyph_tracked_worktree_integrity.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-PROV-011 snapshot. The review confirmed root and nested .github/workflows coverage, approved .pio/.platformio-home/.venv/local_backups exclusions, repository/info-exclude/global-exclude rejection of ignored critical inputs, preservation of tracked/correspondence behavior, and no GP-VAL-011, runtime, device, or artifact-policy expansion.",
+        "validation_provenance": "Pre-build identity, artifact custody, 33 hardware-correspondence tests, build-input provenance, artifact-postprocessor provenance, checker census (201 entries), validation health (40 manifest entries), framework, navigation, agent-surface, Python syntax, git diff --check, and canonical pio run -e glyph_mk6 PASS. The first build attempt hit the host-owned PlatformIO permission boundary before compilation; the permitted repository-local PlatformIO core retry succeeded. No firmware source/runtime behavior, artifact custody, device, or hardware action changed."
+      },
       "stop_conditions": [
         "Any ignored entry in the exact critical inventory is silently accepted.",
         "Allowed caches or custody roots are scanned or rejected without separate authority.",
@@ -4198,11 +4215,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
