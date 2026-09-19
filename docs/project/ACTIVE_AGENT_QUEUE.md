@@ -24,63 +24,73 @@ Git, but it is not current candidate supply or implementation authority.
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Every candidate in glyph-portfolio-20260919-0320 has been adjudicated; GP-VAL-018 remains user-decision gated and GP-PROV-010 remains research gated, so neither is pending Curator work.",
+    "resolution": "Every candidate in glyph-portfolio-20260919-2050 has been adjudicated: GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, and GP-VAL-020 are authorized READY; GP-PROV-010 remains research gated.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:1c15b71d2d1658c1fde13689f925c7372308dc1d:docs/planning/portfolio_20260919_0320.md",
+      "opening_reference": "git-json:4e38028b97ed07e894368564b9f9cdce87ba9c55:docs/planning/portfolio_20260919_2050.md",
       "subject_ids": [
-        "GP-VAL-018",
+        "GP-SRC-007",
+        "GP-VAL-019",
+        "GP-PROV-011",
+        "GP-CONFIG-008",
+        "GP-SRC-008",
+        "GP-VAL-020",
         "GP-PROV-010"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:3a6714cc056960c0d04f69401942b50e58ce4150:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:2d50315600e9528df5daa0db57c9e27b7a710732:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
-    "state": "CONSUMED",
-    "branch": "planning/portfolio-20260919-0320",
-    "base_configurator_sha": "64c9875c53095964ea7a540c7112104ea1a4ab8f",
-    "packet_id": "glyph-portfolio-20260919-0320",
-    "packet_path": "docs/planning/portfolio_20260919_0320.md",
-    "planning_commit": "1c15b71d2d1658c1fde13689f925c7372308dc1d",
-    "curation_commit": "3a6714cc056960c0d04f69401942b50e58ce4150",
-    "candidate_count": 0,
-    "survivors": [],
+    "state": "PARTIALLY_CONSUMED",
+    "branch": "planning/portfolio-20260919-2050",
+    "base_configurator_sha": "f1977c1104472d1e58733a14a11acf83fef3139b",
+    "packet_id": "glyph-portfolio-20260919-2050",
+    "packet_path": "docs/planning/portfolio_20260919_2050.md",
+    "planning_commit": "4e38028b97ed07e894368564b9f9cdce87ba9c55",
+    "curation_commit": "2d50315600e9528df5daa0db57c9e27b7a710732",
+    "candidate_count": 1,
+    "survivors": [
+      {
+        "candidate_id": "GP-PROV-010",
+        "disposition": "RESEARCH_GATED"
+      }
+    ],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator independently authorized GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work on 2026-09-19; all five are now DONE.",
-      "Curator fully adjudicated the remaining packet supply on 2026-09-19: GP-VAL-018 remains USER_DECISION_GATED and GP-PROV-010 remains RESEARCH_GATED, so neither is retained as pending Curator work."
+      "Curator independently authorized GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, and GP-VAL-020 as bounded READY work on 2026-09-19.",
+      "Curator retained GP-PROV-010 as RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260919-0320",
-      "planning_commit": "1c15b71d2d1658c1fde13689f925c7372308dc1d",
-      "packet_id": "glyph-portfolio-20260919-0320",
-      "packet_base_configurator_sha": "64c9875c53095964ea7a540c7112104ea1a4ab8f",
-      "curation_branch": "curation/portfolio-20260919-0320-review",
+      "planning_branch": "planning/portfolio-20260919-2050",
+      "planning_commit": "4e38028b97ed07e894368564b9f9cdce87ba9c55",
+      "packet_id": "glyph-portfolio-20260919-2050",
+      "packet_base_configurator_sha": "f1977c1104472d1e58733a14a11acf83fef3139b",
+      "curation_branch": "curation/portfolio-20260919-2050-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-PROV-009",
+          "candidate_id": "GP-SRC-007",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-VAL-016",
+          "candidate_id": "GP-VAL-019",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-CONFIG-007",
+          "candidate_id": "GP-PROV-011",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-VAL-017",
+          "candidate_id": "GP-CONFIG-008",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-VAL-018",
-          "disposition": "USER_DECISION_GATED"
+          "candidate_id": "GP-SRC-008",
+          "disposition": "READY"
         },
         {
-          "candidate_id": "GP-PERSIST-002",
+          "candidate_id": "GP-VAL-020",
           "disposition": "READY"
         },
         {
@@ -89,7 +99,7 @@ Git, but it is not current candidate supply or implementation authority.
         }
       ],
       "review_date": "2026-09-19",
-      "curation_commit": "3a6714cc056960c0d04f69401942b50e58ce4150"
+      "curation_commit": "2d50315600e9528df5daa0db57c9e27b7a710732"
     }
   },
   "completion_correspondence": {
@@ -114,20 +124,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 6,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 6,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED",
-    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
-    "RUNWAY_SHORTFALL_RESEARCH_GATED"
+    "RUNWAY_OK"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -137,6 +144,387 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-SRC-007",
+      "title": "Fail closed on non-corresponding coordinate conversion",
+      "status": "READY",
+      "branch": "glyph/gp-src-007-fail-closed-conversion",
+      "objective": "Stop the coordinate-native bridge from emitting one fixed source-owned layout packet for materially different validated profiles.",
+      "why_this_matters": "The current converter labels unrelated inputs as converted output, so review and candidate preparation can carry false input/output provenance into the source-owned generation lane.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Every currently generic coordinate-native profile is rejected with a stable fail-closed result instead of receiving the fixed 28-table layout. The directly supplied, already-authorized source-owned layout-spec path remains unchanged; no positive coordinate-to-table mapping is invented.",
+      "scope": "Change only tools/convert_coordinate_native_profile_to_source_owned_spec.py, its bridge and candidate-preparation checker coverage, directly affected offline pipeline documentation/fixtures, and deterministic manifest, census, and health consequences. Remove positive expectations that distinct generic profiles equal the fixed fixture and bind explicit rejection.",
+      "explicit_excluded_scope": "No inferred coordinate-to-table mapping, table ownership, table values, routing or tie semantics, active source mutation, firmware/runtime publication, runtime-loaded config, persistence, WebSerial/device write, protobuf write, flashing, build, artifact, or hardware action.",
+      "touched_planes": [
+        "generated tables/artifacts",
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At f1977c1104472d1e58733a14a11acf83fef3139b, convert_profile() validates then unconditionally returns EXPECTED_LAYOUT_SPEC; the minimal, 9-way modifier, and bridge profiles have different tables, coordinates, and routing yet emit the same digest. IMPLEMENTATION_BOUNDARY.md permits only a strict bridge subset and requires explicit full-replacement, overlay/preserve, or rejection semantics. No accepted authority maps those generic profiles to the fixed 28-table packet.",
+      "dependencies_prerequisites": [
+        "Start from fresh live configurator with the converter and current 28-table source authority materially unchanged.",
+        "Preserve the direct authorized source-owned layout-spec generator path and current full/overlay/reject semantics.",
+        "Treat every positive profile-to-source mapping as a separate substantive dependency."
+      ],
+      "substantive_authorization_rationale": "The false-correspondence gap is directly reproduced and the safe behavior is fully determined by existing fail-closed source-authority policy: reject uncorresponded inputs. No product, mapping, ownership, or firmware decision is needed for this bounded correction.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Accepted repository authority supplies an explicit profile-to-table mapping before implementation begins.",
+        "The direct source-owned layout-spec path cannot remain accepted without changing its semantics.",
+        "The repair would need active source, runtime, device, or hardware behavior."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator f1977c1104472d1e58733a14a11acf83fef3139b and Planner candidate GP-SRC-007 at 4e38028b97ed07e894368564b9f9cdce87ba9c55. Receipt 2d50315600e9528df5daa0db57c9e27b7a710732 records READY after independent reproduction and narrowing to rejection of every currently uncorresponded generic profile.",
+      "automated_validation": [
+        "Distinct minimal, 9-way modifier, bridge, coordinate, table, and routing inputs fail explicitly instead of emitting the fixed packet.",
+        "Direct authorized layout-spec generation, generator modes, artifact-install, candidate-generation, and offline package checks retain their current valid outcomes.",
+        "Run affected bridge and candidate-preparation checks, manifest semantic load, census, health, framework, navigation, agent-surface, syntax, and git diff --check.",
+        "Fresh independent review confirms no mapping, ownership, active-source, runtime, or device behavior was introduced."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 offline converter fail-closed behavior only; firmware source and build inputs remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave the current converter unchanged if rejection cannot be isolated from the direct authorized layout-spec lane; publish no converted packet or candidate from an uncorresponded profile.",
+      "status_documentation_updates": "Document that the generic bridge is fail-closed until explicit mapping and ownership authority exists; preserve every runtime, device-write, persistence, Nunchuk, and root-cause non-claim.",
+      "done_evidence": "Pending exact reviewed implementation, focused fail-closed corpus, affected control-plane gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any positive mapping, table ownership, coordinate, routing, or gameplay intent would be inferred.",
+        "Any unsupported profile can still emit the fixed source-owned layout packet.",
+        "Active firmware, runtime publication, persistence, device-write, or flashing scope appears.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-019",
+      "title": "Make artifact provenance commands failure-bearing",
+      "status": "READY",
+      "branch": "glyph/gp-val-019-artifact-command-integrity",
+      "objective": "Require the checkout, postprocessor, sidecar-write, and sidecar-verification workflow operations to be exact failure-bearing commands before artifact publication.",
+      "why_this_matters": "The current artifact workflow validators accept success-masked protected commands, allowing a failing identity or provenance operation to be hidden before upload.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "The exact four current protected command lines, their order, and their supported step fields are required; masking, wrapping, duplication, conditional execution, or trailing shell content fails closed while the tracked workflow remains unchanged.",
+      "scope": "Change the artifact-postprocessor workflow checker, the bounded workflow parser/helper only where useful, focused adversarial cases, and deterministic manifest/census/health consequences. Reuse the GP-VAL-016 exact-command model without broad YAML parsing.",
+      "explicit_excluded_scope": "No workflow YAML or command change, runner or publication-route change, postprocessor/artifact bytes, sidecar schema, custody policy, build input, firmware, device, hardware, or GP-VAL-011 work.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "At the authorization snapshot, the four operations in .github/workflows/build.yml are discovered by substring and order checks. Independent in-memory mutations appending || true to each operation were accepted by both workflow validators. Current artifact provenance docs require checkout verification, postprocessing, sidecar writing, and sidecar verification before upload.",
+      "dependencies_prerequisites": [
+        "The exact current build workflow command lines and default shell contract remain unchanged.",
+        "GP-VAL-016 aggregate-command integrity remains intact.",
+        "The parser stays limited to the reviewed workflow subset."
+      ],
+      "substantive_authorization_rationale": "The defect, accepted command bytes, and required fail-closed result are source-proven. This is bounded H0 checker hardening with no product, workflow, artifact, or runtime decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The tracked workflow legitimately changes any protected command or shell/step shape.",
+        "The repair would require workflow, runner, publication, artifact, or custody behavior changes.",
+        "The shared parser cannot preserve current validation and artifact workflow acceptance."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator f1977c1104472d1e58733a14a11acf83fef3139b and Planner candidate GP-VAL-019 at 4e38028b97ed07e894368564b9f9cdce87ba9c55. Receipt 2d50315600e9528df5daa0db57c9e27b7a710732 records READY after independent masked-command reproduction.",
+      "automated_validation": [
+        "Accept the exact current workflow and require unique protected commands in exact order and supported fields.",
+        "For each protected command reject || true, ; true, exit 0, subshell, function, heredoc, continuation, comment disguise, conditional, duplicate, and field-shape variants.",
+        "Run both workflow checkers, manifest semantic load, census, health, framework, navigation, agent-surface, Python syntax, and git diff --check.",
+        "Fresh independent review confirms workflow YAML, commands, artifact bytes, and publication behavior are unchanged."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 checker-only work; workflow, build inputs, artifact transformation, and firmware remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave the current checker unchanged if the exact tracked workflow cannot pass the bounded contract; do not edit the workflow to satisfy the checker.",
+      "status_documentation_updates": "Record exact failure-bearing artifact command enforcement only; make no artifact acceptance or runtime claim.",
+      "done_evidence": "Pending exact reviewed checker implementation, adversarial workflow corpus, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any protected operation remains accepted with failure masking or non-exact shell content.",
+        "Workflow YAML, commands, runner, publication route, artifact bytes, or custody semantics would change.",
+        "Parser scope expands beyond the reviewed subset.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-PROV-011",
+      "title": "Reject ignored files in source-critical paths",
+      "status": "READY",
+      "branch": "glyph/gp-prov-011-ignored-critical-paths",
+      "objective": "Reject ignored untracked files under the exact audited source and build-control inventory before clean firmware identity or artifact custody is accepted.",
+      "why_this_matters": "An ignored source file can currently produce a clean builder identity and pass custody even though it may affect the built artifact.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Builder identity reports DIRTY and custody rejects when Git reports ignored untracked entries in the exact hardware-correspondence critical roots, critical files, or workflow inventory. Existing tracked-entry proof is preserved; ignored caches and custody roots outside that finite inventory remain allowed.",
+      "scope": "Extend the shared worktree-integrity seam and its builder/custody consumers with the exact source-backed CRITICAL_ROOTS, CRITICAL_FILES, and .github/workflows inventory from hardware correspondence, or one exact shared classifier. Cover .gitignore, .git/info/exclude, and isolated global excludes, with deterministic fail-closed path handling and focused checkers.",
+      "explicit_excluded_scope": "No complete ignored-tree fingerprint, nested-repository traversal, GP-VAL-011 isolation, timeout or concurrency redesign, dependency-resolution claim, cache cleanup, custody-root change, artifact acceptance change, firmware behavior, device, or hardware action.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "An isolated repository with ignored src/ghost.cpp yields empty porcelain, a clean builder SHA, and accepted custody. GP-PROV-009 verifies tracked entries only. tools/glyph_hardware_correspondence.py already defines the finite critical roots/files/workflow discovery policy and ignores .pio while rejecting ignored critical source.",
+      "dependencies_prerequisites": [
+        "Preserve GP-BUILD-001 clean/shortsha-DIRTY output and GP-PROV-009 direct tracked correspondence.",
+        "Preserve GP-ART-001 custody identity, path, hash, readback, and pre/post checks.",
+        "Use the exact audited finite critical inventory; do not reopen GP-VAL-011."
+      ],
+      "substantive_authorization_rationale": "The bypass is reproduced and the accepted hardware-correspondence classifier supplies the exact safe inventory. This intentionally supersedes GP-PROV-009 ignored-only acceptance only inside that finite critical scope while retaining its tracked semantics.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The accepted critical-path inventory changes materially before implementation.",
+        "A safe implementation requires scanning caches/custody, nested repositories, or the complete ignored tree.",
+        "Active/runtime source or firmware behavior would change beyond the expected embedded Git source-identity/version metadata consequence."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator f1977c1104472d1e58733a14a11acf83fef3139b and Planner candidate GP-PROV-011 at 4e38028b97ed07e894368564b9f9cdce87ba9c55. Receipt 2d50315600e9528df5daa0db57c9e27b7a710732 records READY after isolated reproduction and exact-inventory narrowing.",
+      "automated_validation": [
+        "Reject .gitignore, info-exclude, and isolated global-exclude entries under every exact critical inventory class; fail closed on ambiguous, symlinked, special, unreadable, or drifted discovery.",
+        "Allow reviewed .pio, .platformio-home, and local_backups paths outside the critical inventory.",
+        "Retain every GP-PROV-009 staged, unstaged, untracked, hidden-tracked, mode, symlink, missing, and unsupported-entry outcome.",
+        "Run pre-build identity, custody, hardware-correspondence, provenance, manifest, census, health, framework, navigation, surface, git diff --check, and pio run -e glyph_mk6.",
+        "Fresh independent review confirms active/runtime source and firmware behavior are unchanged apart from the expected embedded Git source-identity/version metadata consequence, and artifact policy is unchanged."
+      ],
+      "canonical_build": "pio run -e glyph_mk6 is required because the build identity hook changes. Cross-commit byte equality is not expected because FIRMWARE_VERSION embeds Git identity; physical hardware acceptance is not required when active/runtime source and firmware behavior are otherwise unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave builder and custody integrity unchanged if exact critical discovery, current clean build, or review fails; do not inspect or mutate ignored owner artifacts.",
+      "status_documentation_updates": "Document only the finite ignored-critical-path rejection and the builder-DIRTY versus custody-reject distinction; preserve GP-VAL-011 deferral.",
+      "done_evidence": "Pending exact reviewed implementation, focused ignored-path corpus, canonical build, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any ignored entry in the exact critical inventory is silently accepted.",
+        "Allowed caches or custody roots are scanned or rejected without separate authority.",
+        "GP-VAL-011, dependency resolution, artifact policy, firmware runtime, device, or hardware scope appears.",
+        "Canonical build, focused validation, or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-CONFIG-008",
+      "title": "Characterize successful SetConfig runtime rebinding",
+      "status": "READY",
+      "branch": "glyph/gp-config-008-setconfig-runtime-rebinding",
+      "objective": "Establish which successful persisted SetConfig values become visible immediately and which live subsystems remain cached, reselection-dependent, or boot-dependent.",
+      "why_this_matters": "The transaction handler publishes the new Config, but activation masks, selected mode state, custom-mode caches, backend selection, and display/LED bindings have separate update boundaries that are not currently characterized.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Exact-source host characterization distinguishes in-place Config visibility from activation-mask, same-index selection, mode-object, custom-mode, backend, display, LED, reselection, and boot reconstruction boundaries. Cross-core timing, atomicity, visibility, physical behavior, and performed reboot outcomes remain UNKNOWN.",
+      "scope": "Add a bounded docs/fixture/checker characterization using exact production bodies and source/blob drift binding for ConfiguratorBackend, mode_selection, InputMode, CustomControllerMode, backend_init, the setup/core loops, and NeoPixel binding. Reuse the GP-CONFIG-005 stable-address facts and characterize sequential host-visible state only.",
+      "explicit_excluded_scope": "No firmware fix or source change, automatic reboot, success-response reinterpretation, backend reinitialization, persistence mechanism, protocol/schema change, game-semantic choice, device access, physical observation, cross-core guarantee, or hardware claim.",
+      "touched_planes": [
+        "configurator",
+        "firmware runtime",
+        "persistence",
+        "docs/checkers"
+      ],
+      "source_authority": "HandleSetConfig assigns _config = candidate after successful SaveConfig. GP-CONFIG-005 proves stable embedded addresses and selected pointee visibility but explicitly disclaims successful-update rebinding. Production source separately builds activation masks, suppresses same-index reselection, configures mode singletons only on selection, caches custom masks/pointers, selects backends at boot, and updates display/LED state on distinct pointer or setup paths.",
+      "dependencies_prerequisites": [
+        "Bind exact production source bodies and preserve GP-CONFIG-005 rejection semantics and GP-PERSIST-002 raw-load characterization.",
+        "Use sequential host characterization only; cross-core and physical outcomes remain unknown.",
+        "Any desired runtime repair remains a separate H2/H3 authorization."
+      ],
+      "substantive_authorization_rationale": "This work records current source-derived behavior without selecting a corrective architecture or desired product behavior. The evidence boundary and non-claims are complete, so bounded H1 characterization needs no user or hardware decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Any bound production body or existing SetConfig/persistence contract changes materially.",
+        "Characterization would require copied behavioral models instead of exact production/source correspondence.",
+        "A fix, reboot policy, protocol change, cross-core guarantee, or physical claim becomes necessary."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator f1977c1104472d1e58733a14a11acf83fef3139b and Planner candidate GP-CONFIG-008 at 4e38028b97ed07e894368564b9f9cdce87ba9c55. Receipt 2d50315600e9528df5daa0db57c9e27b7a710732 records READY after independent source-boundary verification.",
+      "automated_validation": [
+        "Characterize old/new activation chords, same-index suppression, different-index same-mode-object and different-mode-object selection.",
+        "Characterize custom-mode reference and cached masks, generic InputMode pointer visibility, backend/default-mode boot binding, RGB pointer/count/color cache, brightness reference, remapper/display paths, and source-path boot reconstruction.",
+        "Bind exact source/blob identities and fail on drift; preserve explicit UNKNOWN for cross-core atomicity, timing, visibility, performed reboot, and physical behavior.",
+        "Run existing SetConfig and GET_CONFIG checks, focused characterization, manifest/census/health, framework, navigation, surface, syntax, diff, and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 source/host characterization only; production and build-input bytes remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Drop the characterization branch if exact-source correspondence or bounded host proof cannot be maintained; do not select or implement a runtime repair.",
+      "status_documentation_updates": "Publish only current rebinding boundaries and explicit UNKNOWN/non-claims; route any desired runtime change back through planning and H2/H3 curation.",
+      "done_evidence": "Pending exact reviewed characterization, source-drift and adversarial cases, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any production firmware, protocol, persistence, reboot, backend, display, LED, or runtime behavior is changed.",
+        "Copied models replace exact production/source correspondence.",
+        "Cross-core, reboot-executed, device, or physical behavior is claimed as proven.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-SRC-008",
+      "title": "Bind source-authority intake locators",
+      "status": "READY",
+      "branch": "glyph/gp-src-008-authority-locator-binding",
+      "objective": "Require the canonical production X1 intake's approval, ownership, and replacement evidence locators to resolve to the exact reviewed authority they claim.",
+      "why_this_matters": "The intake currently treats arbitrary non-placeholder strings as production authority and carries an unverified approval string into emitted generator metadata.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Only the closed current-corpus locator mapping for the accepted X1 intake and GLYPH-UD-010 is accepted, with exact field, kX1Table ownership, and nine-point correspondence. Every unsupported, unrelated, external, compound, absent, ambiguous, or mismatched locator fails closed.",
+      "scope": "Change the source-authority intake validator/checker, exact current production intake corpus contract, locator documentation, and deterministic manifest/census/health consequences. Resolve the canonical USER_DIRECTION.md#glyph-ud-010 mapping as a closed reviewed record; defer generic anchor and path:symbol grammars unless separately authorized.",
+      "explicit_excluded_scope": "No inference that any existing GLYPH-UD anchor grants production authority, no new human approval, ownership expansion, coordinate change, historical intake reinterpretation, generic external locator, active source mutation, candidate build, device, or hardware action.",
+      "touched_planes": [
+        "source-owned configuration",
+        "generated tables/artifacts",
+        "docs/checkers"
+      ],
+      "source_authority": "review_intake() checks approval_reference, authorization_reference, and source_reference only for non-placeholder text; fake nonexistent values pass and are emitted. The exact accepted current intake uses docs/agent_framework/USER_DIRECTION.md#glyph-ud-010 for all three fields, and GLYPH-UD-010 explicitly owns kX1Table plus the exact nine ordered coordinates. Older compound locator forms are stale/noncanonical and need no reinterpretation.",
+      "dependencies_prerequisites": [
+        "Limit acceptance to the exact canonical X1 production intake and GLYPH-UD-010 correspondence.",
+        "Preserve current 28-table baseline, overlay-preserve ownership, and downstream generator gates.",
+        "Reject rather than infer every locator form outside the closed reviewed mapping."
+      ],
+      "substantive_authorization_rationale": "The authority record and canonical intake already contain the exact approved table and points. Resolving that one closed mapping prevents fabricated locators without interpreting generic user-direction semantics or creating new authority.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The canonical X1 intake or GLYPH-UD-010 record changes materially.",
+        "Implementation requires accepting generic anchors, compound path/symbol forms, or external evidence.",
+        "The repair would change ownership, coordinates, active source, or candidate behavior."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator f1977c1104472d1e58733a14a11acf83fef3139b and Planner candidate GP-SRC-008 at 4e38028b97ed07e894368564b9f9cdce87ba9c55. Receipt 2d50315600e9528df5daa0db57c9e27b7a710732 records READY after fake-locator reproduction and narrowing to the exact canonical X1/GLYPH-UD-010 mapping.",
+      "automated_validation": [
+        "Reject missing, duplicate, wrong, inactive, unrelated, unsupported, external, compound, escaping, absent, and ambiguous locator forms.",
+        "Reject approval, ownership, table, or point mismatches; require exact kX1Table and ordered nine-point correspondence with GLYPH-UD-010.",
+        "Accept the exact current X1 production intake after current-baseline substitution while stale baseline remains independently blocked.",
+        "Run intake, generator modes, manifest/census/health, framework, navigation, surface, syntax, diff, and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 host source-authority validation only; active source and build inputs remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave intake emission unchanged if exact closed correspondence cannot be proved; no packet with unresolved locator authority may be emitted as production-authorized.",
+      "status_documentation_updates": "Document the closed current-corpus locator contract and fail-closed boundary; preserve all ownership, hardware, runtime, device-write, and historical non-claims.",
+      "done_evidence": "Pending exact reviewed locator enforcement, negative corpus, current X1 positive proof, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any unrelated user-direction entry or arbitrary existing anchor can grant authority.",
+        "Any table ownership, coordinate, or approval meaning is inferred.",
+        "Active source, candidate, build, device, or hardware scope appears.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-020",
+      "title": "Classify build and artifact safety checkers",
+      "status": "READY",
+      "branch": "glyph/gp-val-020-safety-checker-classification",
+      "objective": "Make new CI, build, artifact, custody, and hardware-evidence safety checkers require manifest or explicit-exclusion classification even when they lack runtime-config vocabulary.",
+      "why_this_matters": "A new safety checker can currently enter the census with no strong signal and silently fall outside both the validation manifest and exclusion set.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "A closed source-backed signal inventory classifies checkers referencing canonical CI workflows, build declarations/hooks, artifact custody/provenance, or hardware-evidence contracts. Unclassified strong-signal checkers fail; unrelated general checkers remain census-only.",
+      "scope": "Change only the static census generator, aggregate adversarial cases, deterministic census/health artifacts and directly coupled documentation. Add closed exact path/identifier signals and one synthetic unclassified probe per signal class.",
+      "explicit_excluded_scope": "No discovered-checker execution expansion, semantic or transitive completeness claim, workflow/command/build input, artifact, custody, hardware-evidence policy, firmware, device, hardware, or GP-VAL-011 change.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "STRONG_RELEVANCE currently contains only runtime/source/profile vocabulary. A synthetic checker referencing only .github/workflows/build.yml receives no strong signal and escapes manifest/exclusion classification after normal census regeneration. Existing CI/build/artifact/hardware checkers are already classified; ROADMAP states census drift and explicit exclusions are load-bearing.",
+      "dependencies_prerequisites": [
+        "Use a closed signal vocabulary derived from current canonical paths and contract identifiers.",
+        "Keep unrelated general-purpose checkers outside mandatory runtime-config classification.",
+        "Validate adversarial aggregate behavior in a clean checkout without reopening GP-VAL-011."
+      ],
+      "substantive_authorization_rationale": "The classification hole is reproduced and the existing manifest/exclusion policy determines the safe result. This is H0 static control-plane hardening with no product, runner, workflow, or firmware judgment.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The census/manifest classification architecture changes materially.",
+        "Closed signals cannot avoid classifying unrelated general-purpose checkers.",
+        "The repair would execute more checkers or change workflow/build/artifact policy."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator f1977c1104472d1e58733a14a11acf83fef3139b and Planner candidate GP-VAL-020 at 4e38028b97ed07e894368564b9f9cdce87ba9c55. Receipt 2d50315600e9528df5daa0db57c9e27b7a710732 records READY after synthetic escape reproduction.",
+      "automated_validation": [
+        "One synthetic unclassified checker for each CI workflow, build declaration/hook, artifact custody/provenance, and hardware-evidence signal fails.",
+        "Manifest or explicit-exclusion classification succeeds for each signal; an unrelated census-only checker remains allowed.",
+        "Run census freshness, manifest semantic load, health, aggregate adversarial checks in a clean checkout, framework, navigation, agent-surface, syntax, diff, and independent review.",
+        "Report the known shared-checkout GP-VAL-011 preflight failure truthfully without modifying or reclassifying it."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 static census and adversarial validation only; workflows, build inputs, and firmware remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave the current signal set unchanged if closed classification cannot avoid unrelated false positives; do not weaken manifest/exclusion enforcement.",
+      "status_documentation_updates": "Document the added safety-checker signal classes only; preserve static-observation and no-completeness claims.",
+      "done_evidence": "Pending exact reviewed signal inventory, adversarial aggregate corpus, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "A new safety checker using a reviewed signal can remain unclassified.",
+        "Unrelated general-purpose checkers are forced into the manifest without source-backed relevance.",
+        "Checker execution, workflow/build/artifact policy, or GP-VAL-011 scope changes.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-PROV-009",
       "title": "Detect hidden-dirty source before build and custody",
@@ -3773,11 +4161,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-007","GP-VAL-019","GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":6,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":6,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 6; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 6; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3788,7 +4176,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-0320 is CONSUMED after independent Curator adjudication of all seven candidates; GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 are DONE with strict completion correspondence. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy, while GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization; those reviewed dispositions are preserved by the immutable receipt and are not pending Curator work. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. With zero executable runway after completed curation, the next primary state is PLANNING_REQUIRED with exact user-decision and research shortfall signals; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. Six bounded H0/H1 items cover fail-closed coordinate conversion, artifact-command integrity, ignored critical paths, successful SetConfig rebinding characterization, exact X1 authority locators, and safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
@@ -3824,17 +4212,17 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Independent review of packet glyph-portfolio-20260919-0320 against live configurator 64c9875 authorized five source-proven H0/H1 items: hidden-dirty build/custody detection, failure-bearing workflow validation, transaction-stage schema v2 integrity, current 28-table authority, and GET_CONFIG raw-load characterization. GP-VAL-018 is not executable until the owner/Senscope chooses the exact tie/conflict policy. GP-PROV-010 is not executable until completed-build metadata interfaces and authority are characterized. No global wait or filler was authorized. GP-VAL-011 remains owner-deferred and nonexecutable; future H2 modifier/layout realization remains evidence-gated on owner/Senscope data and routing intent. Historical completed work and its strict correspondence remain unchanged.
+Independent review of packet glyph-portfolio-20260919-2050 against live configurator f1977c1 authorized six source-proven H0/H1 items. GP-SRC-007 is narrowed to rejection of every currently uncorresponded generic profile; GP-SRC-008 accepts only the exact canonical X1/GLYPH-UD-010 mapping; GP-PROV-011 uses the exact audited finite critical-path inventory. GP-PROV-010 is not executable until completed-build/source binding, package enumeration, generated metadata treatment, and bounded content membership are source-backed. No global wait or filler was authorized. GP-VAL-011 remains owner-deferred and nonexecutable; future H2 modifier/layout realization remains evidence-gated on owner/Senscope data and routing intent. Historical completed work and its strict correspondence remain unchanged.
 
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
 canonical work-order ordering. Only items marked `READY` authorize immediate
 execution.
-The one-new-work-order-per-Implementation-cycle rule still applies. The packet
-has no remaining Curator survivors; its gated dispositions require new user or
-research evidence before they can return through a future planning/curation
-cycle.
+The one-new-work-order-per-Implementation-cycle rule still applies. The
+partially consumed packet retains GP-PROV-010 as its exact gated survivor; it
+cannot execute unless later source-backed research returns it through planning
+and curation.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
