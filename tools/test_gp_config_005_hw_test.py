@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import contextlib
+import copy
 import io
 import json
 from pathlib import Path
@@ -95,7 +96,8 @@ class OperatorUtilityTests(unittest.TestCase):
             operator.ARTIFACT_SHA256,
             "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44",
         )
-        identity = operator.verify_repository_identity(require_artifact=True)
+        with mock.patch.object(operator, "verify_correspondence"):
+            identity = operator.verify_repository_identity(require_artifact=True)
         self.assertTrue(identity["verified"])
         self.assertTrue(identity["artifact"]["matches_expected"])
         self.assertEqual(identity["config_proto_sha256"], operator.CONFIG_PROTO_SHA256)
@@ -157,7 +159,9 @@ class OperatorUtilityTests(unittest.TestCase):
         with mock.patch.object(operator.subprocess, "run", side_effect=wrong_ref):
             with self.assertRaisesRegex(ToolError, "candidate branch identity mismatch"):
                 operator.verify_repository_identity(require_artifact=False)
-        with mock.patch.object(operator, "file_sha256", side_effect=[operator.CONFIG_PROTO_SHA256, "0" * 64]):
+        with mock.patch.object(operator, "verify_correspondence"), mock.patch.object(
+            operator, "file_sha256", side_effect=[operator.CONFIG_PROTO_SHA256, "0" * 64]
+        ):
             with self.assertRaisesRegex(ToolError, "preserved artifact SHA-256 mismatch"):
                 operator.verify_repository_identity(require_artifact=True)
 
@@ -525,6 +529,132 @@ class OperatorUtilityTests(unittest.TestCase):
             malformed = json.loads(json.dumps(value))
             malformed["valid_update"].pop(field)
             with self.subTest(field=field), self.assertRaisesRegex(ToolError, field):
+                operator.validate_result_schema(malformed)
+
+    def test_result_schema_accepts_every_exact_prefix_and_rejects_v1(self) -> None:
+        outcomes = {
+            0: "NOT_RUN",
+            1: "TRANSPORT_OR_FOLLOWUP_ERROR_STOP",
+            2: "BASELINE_DRIFT_STOP",
+            3: "TRANSPORT_OR_FOLLOWUP_ERROR_STOP",
+            4: "TRANSPORT_OR_FOLLOWUP_ERROR_STOP",
+            5: "TRANSPORT_OR_FOLLOWUP_ERROR_STOP",
+            6: "TRANSPORT_OR_FOLLOWUP_ERROR_STOP",
+            7: "TRANSPORT_OR_FOLLOWUP_ERROR_STOP",
+            8: "UNEXPECTED_VALID_UPDATE_RESPONSE_STOP",
+            9: "TRANSPORT_OR_FOLLOWUP_ERROR_STOP",
+            10: "SUCCESS_RESPONSE_AND_RESPONSIVE",
+        }
+        for count, outcome in outcomes.items():
+            with self.subTest(count=count):
+                value = operator.empty_result({"selected_port": "/dev/mock"}, None)
+                update = value["valid_update"]
+                names = list(operator.TRANSACTION_STAGE_ORDER[:count])
+                update["transaction_stage"] = names[-1] if names else "not_started"
+                update["transaction_stages"] = [
+                    {"stage": name, "at_utc": "2026-01-01T00:00:00+00:00"}
+                    for name in names
+                ]
+                for name in operator.TRANSACTION_STAGE_ORDER:
+                    update[name] = name in names
+                update["sent"] = count >= 5
+                update["partial_write_ambiguous"] = 4 <= count < 5
+                update["mechanical_outcome"] = outcome
+                update["followup_responsive"] = count == 10
+                if count in {1, 2, 3, 4, 5, 6, 7, 9}:
+                    update["error"] = "synthetic observed failure"
+                update["response"] = (
+                    {"command": "CMD_ERROR"} if count == 8 else
+                    {"command": "CMD_SUCCESS"} if count >= 9 else None
+                )
+                update["unexpected_error"] = count == 8
+                update["followup"] = {"response": {"command": "CMD_GET_CONFIG"}} if count == 10 else None
+                update["post_update_get_config_matches_sent_payload"] = count == 10
+                operator.validate_result_schema(value)
+        legacy = operator.empty_result({"selected_port": "/dev/mock"}, None)
+        legacy["schema_version"] = 1
+        with self.assertRaisesRegex(ToolError, "schema_version"):
+            operator.validate_result_schema(legacy)
+
+    def test_result_schema_rejects_impossible_stage_and_outcome_combinations(self) -> None:
+        value = operator.empty_result({"selected_port": "/dev/mock"}, None)
+        update = value["valid_update"]
+        names = list(operator.TRANSACTION_STAGE_ORDER)
+        update["transaction_stage"] = names[-1]
+        update["transaction_stages"] = [
+            {"stage": name, "at_utc": "2026-01-01T00:00:00+00:00"}
+            for name in names
+        ]
+        for name in names:
+            update[name] = True
+        update["sent"] = True
+        update["mechanical_outcome"] = "SUCCESS_RESPONSE_AND_RESPONSIVE"
+        update["followup_responsive"] = True
+        update["response"] = {"command": "CMD_SUCCESS"}
+        update["followup"] = {"response": {"command": "CMD_GET_CONFIG"}}
+        update["post_update_get_config_matches_sent_payload"] = True
+        operator.validate_result_schema(value)
+        mutations = []
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["transaction_stages"] = list(reversed(changed["valid_update"]["transaction_stages"]))
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["response_received"] = False
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["sent"] = False
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["transaction_stages"][0]["at_utc"] = "2026-01-01T00:00:00"
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["transaction_stages"][0]["extra"] = True
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["mechanical_outcome"] = "TRANSPORT_OR_FOLLOWUP_ERROR_STOP"
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["post_update_get_config_matches_sent_payload"] = False
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["mechanical_outcome"] = "POST_UPDATE_PERSISTED_READBACK_MISMATCH_STOP"
+        mutations.append(changed)
+        changed["valid_update"]["post_update_get_config_matches_sent_payload"] = False
+        changed["valid_update"]["response"] = {"command": "CMD_ERROR"}
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["unexpected_error"] = True
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["mechanical_outcome"] = "TRANSPORT_OR_FOLLOWUP_ERROR_STOP"
+        changed["valid_update"].pop("error", None)
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["mechanical_outcome"] = "TRANSPORT_OR_FOLLOWUP_ERROR_STOP"
+        changed["valid_update"]["error"] = "synthetic failure"
+        changed["valid_update"]["followup"] = {"response": {"command": "CMD_GET_CONFIG"}}
+        mutations.append(changed)
+        changed = copy.deepcopy(value)
+        changed["valid_update"]["mechanical_outcome"] = "POST_UPDATE_PERSISTED_READBACK_MISMATCH_STOP"
+        changed["valid_update"]["post_update_get_config_matches_sent_payload"] = False
+        changed["valid_update"].pop("error", None)
+        mutations.append(changed)
+        prewrite = operator.empty_result({"selected_port": "/dev/mock"}, None)
+        pre_update = prewrite["valid_update"]
+        pre_names = list(operator.TRANSACTION_STAGE_ORDER[:2])
+        pre_update["transaction_stage"] = pre_names[-1]
+        pre_update["transaction_stages"] = [
+            {"stage": name, "at_utc": "2026-01-01T00:00:00+00:00"}
+            for name in pre_names
+        ]
+        for name in operator.TRANSACTION_STAGE_ORDER:
+            pre_update[name] = name in pre_names
+        pre_update["mechanical_outcome"] = "BASELINE_DRIFT_STOP"
+        pre_update["error"] = "baseline drift"
+        pre_update["unexpected_error"] = True
+        mutations.append(prewrite)
+        for malformed in mutations:
+            with self.assertRaises(ToolError):
                 operator.validate_result_schema(malformed)
 
     def test_valid_update_followup_timeout_records_response_but_not_followup_completion(self) -> None:

@@ -71,9 +71,22 @@ COMMAND_NAMES = {
 CAPTURE_SCHEMA = "gp_config_005_host_config_capture"
 CAPTURE_SCHEMA_VERSION = 1
 RESULT_SCHEMA = "gp_config_005_operator_result"
-RESULT_SCHEMA_VERSION = 1
+RESULT_SCHEMA_VERSION = 2
 PLAN_SCHEMA = "gp_config_005_payload_plan"
 PLAN_SCHEMA_VERSION = 1
+
+TRANSACTION_STAGE_ORDER = (
+    "prewrite_read_attempted",
+    "prewrite_read_completed",
+    "prewrite_baseline_matched",
+    "write_attempted",
+    "full_host_write_completed",
+    "awaiting_response",
+    "response_received",
+    "response_decoded",
+    "followup_read_attempted",
+    "followup_read_completed",
+)
 
 CAPTURE_NONCLAIMS = [
     "This is a host-side captured config from the existing CMD_GET_CONFIG path.",
@@ -141,6 +154,12 @@ def transaction_stage_state() -> dict[str, Any]:
 
 
 def record_transaction_stage(result: dict[str, Any], stage: str) -> None:
+    if stage not in TRANSACTION_STAGE_ORDER:
+        raise ToolError(f"unknown transaction stage: {stage}")
+    if result["transaction_stages"] and stage in {
+        item["stage"] for item in result["transaction_stages"]
+    }:
+        raise ToolError(f"duplicate transaction stage: {stage}")
     result["transaction_stage"] = stage
     result["transaction_stages"].append({"stage": stage, "at_utc": utc_now()})
     if stage in {
@@ -1151,6 +1170,11 @@ def empty_result(device_context: dict[str, Any], capture: dict[str, Any] | None)
             "sent": False,
             **transaction_stage_state(),
             "mechanical_outcome": "NOT_RUN",
+            "response": None,
+            "followup": None,
+            "unexpected_error": False,
+            "followup_responsive": False,
+            "post_update_get_config_matches_sent_payload": False,
             "human_reboot_observation": None,
             "human_controller_display_smoke": None,
         },
@@ -1182,20 +1206,7 @@ def validate_result_schema(value: Any) -> None:
     if not isinstance(value.get("valid_update"), dict):
         raise ToolError("result valid_update must be an object")
     valid_update = value["valid_update"]
-    required_boolean_fields = {
-        "sent",
-        "prewrite_read_attempted",
-        "prewrite_read_completed",
-        "prewrite_baseline_matched",
-        "write_attempted",
-        "full_host_write_completed",
-        "awaiting_response",
-        "response_received",
-        "response_decoded",
-        "followup_read_attempted",
-        "followup_read_completed",
-        "partial_write_ambiguous",
-    }
+    required_boolean_fields = set(TRANSACTION_STAGE_ORDER) | {"sent", "partial_write_ambiguous"}
     for field in required_boolean_fields:
         if not isinstance(valid_update.get(field), bool):
             raise ToolError(f"result valid_update.{field} must be a boolean")
@@ -1204,13 +1215,107 @@ def validate_result_schema(value: Any) -> None:
     stages = valid_update.get("transaction_stages")
     if not isinstance(stages, list):
         raise ToolError("result valid_update.transaction_stages must be a list")
+    stage_names: list[str] = []
     for stage in stages:
         if (
             not isinstance(stage, dict)
+            or set(stage) != {"stage", "at_utc"}
             or not isinstance(stage.get("stage"), str)
             or not isinstance(stage.get("at_utc"), str)
         ):
             raise ToolError("result valid_update.transaction_stages entries are invalid")
+        stage_name = stage["stage"]
+        if stage_name not in TRANSACTION_STAGE_ORDER:
+            raise ToolError(f"result valid_update contains unknown transaction stage: {stage_name}")
+        if stage_name in stage_names:
+            raise ToolError(f"result valid_update contains duplicate transaction stage: {stage_name}")
+        try:
+            timestamp = datetime.fromisoformat(stage["at_utc"].replace("Z", "+00:00"))
+        except ValueError as exc:
+            raise ToolError("result valid_update.transaction_stages timestamps are invalid") from exc
+        if timestamp.tzinfo is None or timestamp.utcoffset() != timezone.utc.utcoffset(timestamp):
+            raise ToolError("result valid_update.transaction_stages timestamps must be UTC")
+        stage_names.append(stage_name)
+    expected_prefix = list(TRANSACTION_STAGE_ORDER[: len(stage_names)])
+    if stage_names != expected_prefix:
+        raise ToolError("result valid_update.transaction_stages must be an exact ordered prefix")
+    expected_stage = stage_names[-1] if stage_names else "not_started"
+    if valid_update["transaction_stage"] != expected_stage:
+        raise ToolError("result valid_update.transaction_stage does not match the stage prefix")
+    for stage_name in TRANSACTION_STAGE_ORDER:
+        if valid_update[stage_name] is not (stage_name in stage_names):
+            raise ToolError(f"result valid_update.{stage_name} does not match transaction stages")
+    if valid_update["sent"] is not valid_update["full_host_write_completed"]:
+        raise ToolError("result valid_update.sent must match full_host_write_completed")
+    if valid_update["partial_write_ambiguous"] is not (
+        valid_update["write_attempted"] and not valid_update["full_host_write_completed"]
+    ):
+        raise ToolError("result valid_update.partial_write_ambiguous is inconsistent with write stages")
+    outcome = valid_update.get("mechanical_outcome")
+    if not isinstance(outcome, str):
+        raise ToolError("result valid_update.mechanical_outcome must be a string")
+    if not stage_names:
+        if outcome != "NOT_RUN" and not outcome.startswith("NOT_SENT_"):
+            raise ToolError("empty transaction cannot report an executed outcome")
+    elif len(stage_names) == 2 and outcome != "BASELINE_DRIFT_STOP":
+        raise ToolError("baseline-drift outcome must stop after the two prewrite reads")
+    elif len(stage_names) == 8 and outcome != "UNEXPECTED_VALID_UPDATE_RESPONSE_STOP":
+        raise ToolError("unexpected-response outcome must stop after response decoding")
+    elif len(stage_names) == len(TRANSACTION_STAGE_ORDER):
+        if outcome not in {"SUCCESS_RESPONSE_AND_RESPONSIVE", "POST_UPDATE_PERSISTED_READBACK_MISMATCH_STOP"}:
+            raise ToolError("complete transaction has an invalid mechanical outcome")
+    elif len(stage_names) not in {2, 8, len(TRANSACTION_STAGE_ORDER)} and outcome != "TRANSPORT_OR_FOLLOWUP_ERROR_STOP":
+        raise ToolError("incomplete executed transaction must report a transport/follow-up stop")
+    response = valid_update.get("response")
+    followup = valid_update.get("followup")
+    unexpected_error = valid_update.get("unexpected_error")
+    followup_responsive = valid_update.get("followup_responsive")
+    readback_matches = valid_update.get("post_update_get_config_matches_sent_payload")
+    has_error = "error" in valid_update
+    if has_error and (not isinstance(valid_update["error"], str) or not valid_update["error"]):
+        raise ToolError("result valid_update.error must be a non-empty string when present")
+    if len(stage_names) in {0, 1, 2, 3, 4, 5, 6, 7} and response is not None:
+        raise ToolError("response is present before a decoded response stage")
+    if outcome == "NOT_RUN" or outcome.startswith("NOT_SENT_"):
+        if response is not None or followup is not None or unexpected_error is not False or followup_responsive is not False or readback_matches is not False or has_error:
+            raise ToolError("not-run outcome contains execution fields")
+    if outcome == "TRANSPORT_OR_FOLLOWUP_ERROR_STOP":
+        if not has_error or unexpected_error is not False or followup is not None or followup_responsive is not False or readback_matches is not False:
+            raise ToolError("transport stop fields do not match the observed failure")
+    if outcome == "BASELINE_DRIFT_STOP":
+        if not has_error or response is not None or followup is not None or unexpected_error is not False or followup_responsive is not False or readback_matches is not False:
+            raise ToolError("baseline-drift fields do not match the observed failure")
+    if len(stage_names) == 8:
+        if not isinstance(response, dict) or response.get("command") == "CMD_SUCCESS":
+            raise ToolError("unexpected-response outcome requires a non-success response record")
+        if valid_update.get("unexpected_error") is not (response.get("command") == "CMD_ERROR"):
+            raise ToolError("unexpected response error flag does not match response command")
+        if followup is not None or followup_responsive is not False or readback_matches is not False or has_error:
+            raise ToolError("unexpected-response outcome cannot include a follow-up")
+    if len(stage_names) == 9:
+        if not isinstance(response, dict) or response.get("command") != "CMD_SUCCESS":
+            raise ToolError("follow-up timeout requires a successful decoded response")
+        if followup is not None or followup_responsive is not False or readback_matches is not False or not has_error:
+            raise ToolError("follow-up timeout cannot claim a follow-up response")
+    if len(stage_names) == len(TRANSACTION_STAGE_ORDER):
+        if not isinstance(response, dict) or response.get("command") != "CMD_SUCCESS":
+            raise ToolError("complete transaction requires a successful decoded response")
+        if not isinstance(followup, dict) or followup_responsive is not True:
+            raise ToolError("complete transaction requires a responsive follow-up")
+        if outcome == "SUCCESS_RESPONSE_AND_RESPONSIVE":
+            if has_error or unexpected_error is not False:
+                raise ToolError("success outcome contains error fields")
+            if readback_matches is not True:
+                raise ToolError("success outcome requires matching persisted readback")
+        if outcome == "POST_UPDATE_PERSISTED_READBACK_MISMATCH_STOP" and (readback_matches is not False or not has_error or unexpected_error is not False):
+            raise ToolError("readback mismatch outcome requires a mismatching persisted readback")
+    if outcome == "SUCCESS_RESPONSE_AND_RESPONSIVE":
+        if stage_names != list(TRANSACTION_STAGE_ORDER):
+            raise ToolError("successful result must contain the complete transaction stage prefix")
+        if valid_update["sent"] is not True or valid_update.get("followup_responsive") is not True:
+            raise ToolError("successful result must record a sent and responsive full transaction")
+    if outcome.startswith("NOT_SENT_") and valid_update["sent"]:
+        raise ToolError("not-sent outcome cannot report sent=true")
     for field in ("human_reboot_observation", "human_controller_display_smoke"):
         if field not in valid_update or valid_update[field] is not None:
             raise ToolError(f"result valid_update.{field} must remain null")
