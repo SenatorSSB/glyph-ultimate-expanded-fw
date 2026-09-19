@@ -3859,34 +3859,34 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260919-0320",
-  "planning_commit": "1c15b71d2d1658c1fde13689f925c7372308dc1d",
-  "packet_id": "glyph-portfolio-20260919-0320",
-  "packet_base_configurator_sha": "64c9875c53095964ea7a540c7112104ea1a4ab8f",
-  "curation_branch": "curation/portfolio-20260919-0320-review",
+  "planning_branch": "planning/portfolio-20260919-2050",
+  "planning_commit": "4e38028b97ed07e894368564b9f9cdce87ba9c55",
+  "packet_id": "glyph-portfolio-20260919-2050",
+  "packet_base_configurator_sha": "f1977c1104472d1e58733a14a11acf83fef3139b",
+  "curation_branch": "curation/portfolio-20260919-2050-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-PROV-009",
+      "candidate_id": "GP-SRC-007",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-VAL-016",
+      "candidate_id": "GP-VAL-019",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-CONFIG-007",
+      "candidate_id": "GP-PROV-011",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-VAL-017",
+      "candidate_id": "GP-CONFIG-008",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-VAL-018",
-      "disposition": "USER_DECISION_GATED"
+      "candidate_id": "GP-SRC-008",
+      "disposition": "READY"
     },
     {
-      "candidate_id": "GP-PERSIST-002",
+      "candidate_id": "GP-VAL-020",
       "disposition": "READY"
     },
     {
