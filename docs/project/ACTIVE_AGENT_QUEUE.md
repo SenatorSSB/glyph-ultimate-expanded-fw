@@ -107,17 +107,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_OK"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -214,7 +214,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-016",
       "title": "Reject masked validation commands in workflow parsing",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-016-workflow-command-integrity",
       "objective": "Make validation-before-publication proof require one exact failure-bearing aggregate command instead of accepting a command whose failure can be masked by later shell content.",
       "why_this_matters": "The supported workflow parser currently swallows a same-indent sibling shell field into a block scalar and accepts any run block that merely contains the aggregate command, so a trailing true can erase its failure status.",
@@ -254,7 +254,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave the current parser/checker unchanged if exact current workflows cannot pass under the bounded contract.",
       "status_documentation_updates": "Update only directly affected checker contract prose and deterministic validation inventories; retain GP-VAL-011 deferral.",
-      "done_evidence": "NOT_DONE: publish completion only after focused implementation, fresh independent review, required validation, and canonical integration.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "8992f1de9c586a29cd102340f8acce49a1a54456",
+        "reviewed_implementation_sha": "cccfe43f3b1ffbba82573d3583db8aeb61e2de04",
+        "prior_canonical_integration_sha": "1fe57c6885e72c1054be3ae9814e912003a8646c",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json",
+          "tools/glyph_workflow_step_contract.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-VAL-016 implementation. The review verified all requested adversarial mutations, unchanged workflow YAML and commands, shared artifact-postprocessor acceptance, focused scope, and no parser or metadata defects.",
+        "validation_provenance": "Publication-workflow checker PASS with 27 negative cases, artifact-postprocessor workflow checker PASS, census199 and health37 PASS, framework/navigation/agent-surface PASS, Python AST syntax and git diff --check PASS. Full aggregate remains FAIL/UNAVAILABLE on the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ unsupported-path setup failure; no aggregate-green claim was made. Feature ref and canonical integration were live-verified before this separate status publication."
+      },
       "stop_conditions": [
         "The aggregate can still be followed by a success-masking command.",
         "Sibling fields can still be consumed as shell text or supported-shell restrictions are weakened.",
