@@ -3692,13 +3692,16 @@ Git, but it is not current candidate supply or implementation authority.
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-016, GP-CONFIG-007, GP-VAL-017, GP-PERSIST-002; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-CONFIG-007, GP-VAL-017, GP-PERSIST-002; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
 interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
+
+The preceding packet prose records the authorization snapshot; the current
+machine-derived state above supersedes its historical runway wording.
 
 Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work; GP-PROV-009 is now DONE with strict completion correspondence. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry the current counts and RUNWAY_OK liveness; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
