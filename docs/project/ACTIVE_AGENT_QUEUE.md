@@ -42,25 +42,20 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
+    "state": "CONSUMED",
     "branch": "planning/portfolio-20260919-2050",
     "base_configurator_sha": "f1977c1104472d1e58733a14a11acf83fef3139b",
     "packet_id": "glyph-portfolio-20260919-2050",
     "packet_path": "docs/planning/portfolio_20260919_2050.md",
     "planning_commit": "4e38028b97ed07e894368564b9f9cdce87ba9c55",
     "curation_commit": "2d50315600e9528df5daa0db57c9e27b7a710732",
-    "candidate_count": 1,
-    "survivors": [
-      {
-        "candidate_id": "GP-PROV-010",
-        "disposition": "RESEARCH_GATED"
-      }
-    ],
+    "candidate_count": 0,
+    "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
       "Curator independently authorized GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, and GP-VAL-020 as bounded READY work on 2026-09-19.",
-      "Curator retained GP-PROV-010 as RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved."
+      "Curator retained GP-PROV-010 as RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved; the reviewed gated survivor was consumed with the completed READY runway."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260919-2050",
@@ -134,7 +129,7 @@ Git, but it is not current candidate supply or implementation authority.
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "CURATION_REQUIRED"
+    "PLANNING_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -4253,11 +4248,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4268,7 +4263,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. No bounded item remains Ready after GP-VAL-020 completion. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-018 remains USER_DECISION_GATED, so the zero-runway primary is CURATION_REQUIRED. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-2050 is CONSUMED after independent Curator adjudication and completion of all authorized survivors. No bounded item remains Ready after GP-VAL-020 completion. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-018 remains USER_DECISION_GATED, so no implementation runway is executable. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
