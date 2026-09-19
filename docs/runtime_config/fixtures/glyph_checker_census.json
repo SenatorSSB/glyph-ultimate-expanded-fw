@@ -5676,6 +5676,62 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "getconfig_raw_load_characterization",
+      "defines_main": true,
+      "file_size_bytes": 5610,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "configurator"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 73,
+      "parse_error": null,
+      "path": "tools/check_glyph_getconfig_raw_load_characterization.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "configurator"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_getconfig_raw_load_characterization",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "docs/runtime_config/fixtures/getconfig_raw_load_characterization.json",
+        "tools/fixtures/configurator_setconfig_host/include",
+        "tools/fixtures/getconfig_raw_host/getconfig_handler_harness.cpp",
+        "tools/fixtures/getconfig_raw_host/handler_harness.cpp",
+        "tools/fixtures/getconfig_raw_host/include"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "81c081e363939640620a97d38d62b06b1941f460f2d82dee77dd569a9b75c777",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gfw3_runtime_remap_hardware_result",
       "defines_main": true,
       "file_size_bytes": 8164,

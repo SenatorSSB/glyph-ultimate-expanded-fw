@@ -1,0 +1,21 @@
+{
+  "schema_name": "glyph_getconfig_raw_load_characterization",
+  "schema_version": 1,
+  "work_order": "GP-PERSIST-002",
+  "production_sources": [
+    {"path":"HAL/pico/src/comms/ConfiguratorBackend.cpp","sha256":"28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876","function":"bool ConfiguratorBackend::HandleGetConfig()"},
+    {"path":"HAL/pico/src/core/Persistence.cpp","sha256":"941cc54f0fb762e6067db338601325d33cf7f980148a59caa1d61f226e140955","function":"size_t Persistence::LoadConfigRaw(Print &out, bool validate)"}
+  ],
+  "cases": [
+    "invalid_check_no_raw_load", "open_failure", "seek_failure", "empty_eof",
+    "payload_order", "validate_false", "zero_output_write", "partial_output_write",
+    "read_error_sentinel", "raw_result_ignored_packet_end_wins", "packet_end_failure_propagates"
+  ],
+  "observations": {
+    "raw_return": "size_t 0 represents open/seek/validation failure and 1 represents loop completion; HandleGetConfig discards it",
+    "output_write": "per-byte Print::write results are ignored",
+    "sentinel": "EOF and read-error both use -1 and are not distinguished",
+    "packet": "CMD_SET_CONFIG precedes raw bytes and _out.end() determines HandleGetConfig result",
+    "non_claims": ["device delivery", "filesystem correctness", "persistence integrity", "recovery", "atomicity", "hardware acceptance"]
+  }
+}

@@ -350,3 +350,28 @@ use separate temporary repositories or read-only source inspection; no device,
 build, firmware, or hardware work is delegated. The failed local implementation
 log at ab8e68e remains historical evidence and is superseded by this recovery
 record, not evidence of a passing review.
+
+## Implementation Supervisor cycle — GP-PERSIST-002 (2026-09-19)
+
+- guidance applicable: yes; GP-PERSIST-002 is a complete H1 READY work order
+  and repository mutation requires bounded delegation plus fresh independent
+  review.
+- capability discovery: complete available runtime tool catalog inspected;
+  native internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: Euclid, bounded read-only source-authority specialist; inspect
+  exact HandleGetConfig and LoadConfigRaw control flow, existing persistence
+  research/harness seams, adversarial cases, and invalidation conditions.
+- reviewer: fresh independent validator reviewer after implementation; inspect
+  exact GP-PERSIST-002 diff, source correspondence, host-only harness cases,
+  non-claims, manifest/census/health wiring, and required focused gates.
+- allowed specialist files: the two production source bodies, current
+  persistence research, related fixtures/checkers, and host harness seams.
+- forbidden specialist actions: edits, commits, pushes, builds, device/config.bin
+  access, protocol or firmware decisions, persistence/recovery/hardware claims,
+  and network dependency resolution.
+- stop conditions: production source drift, copied rather than literal bodies,
+  invented filesystem/device semantics, missing adversarial cases, scope creep,
+  or any firmware/protocol/persistence/recovery/hardware behavior change.
+- return format: findings first; exact control-flow correspondence; harness
+  seams; risks; invalidation conditions.

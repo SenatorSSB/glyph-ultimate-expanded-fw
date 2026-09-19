@@ -12,6 +12,11 @@
 #include "../../../HAL/pico/include/comms/ConfiguratorBackend.hpp"
 #undef private
 
+bool host_getconfig_check_saved = true;
+size_t host_getconfig_raw_result = 0;
+std::vector<uint8_t> host_getconfig_raw_bytes;
+bool host_packet_end_result = true;
+
 namespace {
 
 enum class Scenario {

@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
+#include <vector>
 
 #ifdef EOF
 #undef EOF
@@ -23,6 +24,8 @@ class Stream : public Print {
     virtual int peek() = 0;
     virtual void flush() = 0;
 };
+
+extern bool host_packet_end_result;
 
 namespace packetio {
 
@@ -53,7 +56,7 @@ class COBSPrint : public Print {
     size_t write(const uint8_t *buffer, size_t size) override {
         return _stream.write(buffer, size);
     }
-    bool end() { return true; }
+    bool end() { return host_packet_end_result; }
 
   private:
     Stream &_stream;
@@ -170,6 +173,11 @@ class InputMode {};
 enum InputScanSpeed { INPUT_SCAN_SPEED_STUB = 0 };
 struct OutputState {};
 
+extern bool host_getconfig_check_saved;
+extern size_t host_getconfig_raw_result;
+extern std::vector<uint8_t> host_getconfig_raw_bytes;
+extern bool host_packet_end_result;
+
 class CommunicationBackend {
   public:
     CommunicationBackend(InputState &, InputSource **, size_t) {}
@@ -181,8 +189,11 @@ class Persistence {
   public:
     bool SaveConfig(Config &config);
     bool LoadConfig(Config &) { return false; }
-    bool CheckSavedConfig() { return true; }
-    size_t LoadConfigRaw(Print &, bool = true) { return 0; }
+    bool CheckSavedConfig() { return host_getconfig_check_saved; }
+    size_t LoadConfigRaw(Print &out, bool = true) {
+        for (uint8_t value : host_getconfig_raw_bytes) out.write(value);
+        return host_getconfig_raw_result;
+    }
 };
 
 extern Persistence persistence;
