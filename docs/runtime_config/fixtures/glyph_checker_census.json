@@ -2627,7 +2627,7 @@
       },
       "checker_id": "current_config_persistence_recovery_research",
       "defines_main": true,
-      "file_size_bytes": 62986,
+      "file_size_bytes": 63466,
       "hard_coded_branch_like_strings": [
         "branches",
         "candidate",
@@ -2646,7 +2646,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1047,
+      "line_count": 1056,
       "parse_error": null,
       "path": "tools/check_glyph_current_config_persistence_recovery_research.py",
       "potential_branch_identity_signals": [
@@ -2685,7 +2685,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "4328e6fc0a1a855d369b759ea3d9e7214ef52f78879365e31331c0e275a165a0",
+      "sha256": "a51d43bcb4f6447bdd7f4a286d51048627da612db715a9d3361c778518156529",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -10453,20 +10453,26 @@
       },
       "checker_id": "runtime_config_semantics_evaluator_bridge",
       "defines_main": true,
-      "file_size_bytes": 20119,
+      "file_size_bytes": 22253,
       "hard_coded_branch_like_strings": [
-        "config_owned_candidate_data"
+        "candidates",
+        "candidates.items",
+        "config_owned_candidate_data",
+        "evidence."
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 493,
+      "line_count": 537,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
       "potential_branch_identity_signals": [
-        "config_owned_candidate_data"
+        "candidates",
+        "candidates.items",
+        "config_owned_candidate_data",
+        "evidence."
       ],
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_runtime_config_semantics_evaluator_bridge",
@@ -10477,6 +10483,8 @@
         "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json",
         "docs/runtime_config/fixtures/invalid_runtime_config_semantics_cases.json",
         "docs/runtime_config/runtime_config_semantics_evaluator_bridge.md",
+        "docs/runtime_config/runtime_config_storage_fallback_architecture.md",
+        "docs/runtime_config/runtime_config_storage_fallback_source_authority.md",
         "docs/runtime_config/runtime_loaded_config_schema_design.md",
         "src/modes/Ultimate.cpp",
         "src/modes/UltimateIdentityRuntimeTables.hpp",
@@ -10488,7 +10496,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "20a514ca14cffc8d08d4cec57e44ad671ffe06d0c497ed200632f4756cc0b302",
+      "sha256": "fc0283a40aaae53f593d049983890547f7506d9e58eb40c4cf23b2915fdcd7f4",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -10551,14 +10559,14 @@
       },
       "checker_id": "runtime_config_storage_fallback",
       "defines_main": true,
-      "file_size_bytes": 6443,
+      "file_size_bytes": 7469,
       "hard_coded_branch_like_strings": [],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 198,
+      "line_count": 216,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_storage_fallback.py",
       "potential_branch_identity_signals": [],
@@ -10568,10 +10576,11 @@
         "HAL/pico/include/core/Persistence.hpp",
         "HAL/pico/src/comms/ConfiguratorBackend.cpp",
         "HAL/pico/src/core/Persistence.cpp",
-        "src/config.cpp"
+        "src/config.cpp",
+        "src/modes/Ultimate.cpp"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "a05e62634b1549d9d48c166cbfcc87b520977e79bf84338f76d62f4fa3896143",
+      "sha256": "7cfa1684e40c262daa96fc7d06eb150c3302a6db08ae0dcd7f1e15aa83383e19",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

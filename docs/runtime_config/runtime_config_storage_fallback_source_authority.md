@@ -89,12 +89,16 @@ object on Pico builds:
 
 ## Source-Backed Runtime-Config Boundary Found
 
+Current source-derived authority: exactly 28 `StickPoint[9]` tables from the
+canonical interpreter/extractor corpus. Any older 27-table wording is
+historical/superseded design evidence and is not current authority.
+
 `src/modes/UltimateRuntimeConfigInterpreter.hpp` is source-backed for the
-current source-owned interpreter baseline only.
+current 28-table source-owned interpreter baseline only.
 
 It provides:
 
-- source-owned 27-table `StickPoint[9]` runtime table metadata;
+- source-owned 28-table `StickPoint[9]` runtime table metadata;
 - validation-before-use helpers for `RuntimeConfigView`;
 - fallback-to-known-good source-owned baseline helpers;
 - explicit caveats that the values are not runtime-loaded config and are not

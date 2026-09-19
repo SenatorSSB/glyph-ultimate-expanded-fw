@@ -1,6 +1,8 @@
 # Phase 3 Generated C++ Constants Contract
 
-Status: mixed-phase document with historical docs/tools contract and a current firmware-integration branch.
+Status: mixed-phase historical/superseded document. Its Phase 3 docs/tools and
+firmware-integration records are preserved evidence; current table authority
+comes from the canonical 28-table interpreter/extractor corpus.
 
 ## Branch split and contract ownership
 
@@ -118,7 +120,7 @@ current branch by themselves:
 
 ## Generated C++ constants target shape
 
-The current source-backed target shape is the current 27-table
+The historical Phase 3 source-backed target shape was the then-current 27-table
 `StickPoint[9]` family used in `src/modes/Ultimate.cpp`.
 
 For this integration branch, the firmware-facing generated-like source path is:

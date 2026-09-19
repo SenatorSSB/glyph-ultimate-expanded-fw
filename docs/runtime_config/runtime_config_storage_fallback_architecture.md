@@ -38,6 +38,10 @@ must not become controller output.
 
 ## Validation Before Use
 
+Current source-derived authority: exactly 28 `StickPoint[9]` tables from the
+canonical interpreter/extractor corpus. Any older 27-table wording is
+historical/superseded design evidence and is not current authority.
+
 Any future storage-backed runtime config must validate before use.
 
 Minimum future validation requirements:
@@ -45,7 +49,7 @@ Minimum future validation requirements:
 - schema name is recognized;
 - schema version is supported;
 - mode scope is `MODE_ULTIMATE`;
-- table count is exactly 27;
+- table count is exactly 28;
 - point count per table is exactly 9;
 - table IDs are complete, ordered, and unique;
 - coordinates are integers in `[0,255]`;
@@ -128,7 +132,7 @@ profile-scoped, backend-scoped, mode-scoped, or tied to current persisted
 Decision status: unresolved.
 
 The Step 12 offline binary preview records a deterministic candidate size for
-the current 27-table baseline, but this branch does not approve a firmware
+a historical 27-table baseline, but this branch does not approve a firmware
 maximum size, storage allocation, or memory budget.
 
 ## Hardware Test Trigger Points

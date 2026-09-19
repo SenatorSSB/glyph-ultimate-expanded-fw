@@ -18,8 +18,8 @@
     "result": "PASS"
   },
   "curated_runtime_config_scope": {
-    "manifest_entry_count": 38,
-    "current_load_bearing_count": 34,
+    "manifest_entry_count": 39,
+    "current_load_bearing_count": 35,
     "historical_or_evidentiary_count": 4,
     "explicit_exclusion_count": 37
   },

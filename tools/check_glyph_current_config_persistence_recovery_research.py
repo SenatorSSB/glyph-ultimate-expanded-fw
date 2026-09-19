@@ -49,6 +49,15 @@ SOURCE_OVERLAYS = {
     ),
 }
 
+# These two design documents retain the immutable GP-PERSIST-001 source-base
+# records above while their current-authority wording is maintained by the
+# GP-VAL-017 overlay checkers. They are intentionally not reclassified as
+# firmware or persistence-source bytes.
+CURRENT_DOC_OVERLAYS = {
+    'docs/runtime_config/runtime_config_storage_fallback_source_authority.md',
+    'docs/runtime_config/runtime_config_storage_fallback_architecture.md',
+}
+
 REPOSITORY_IDENTITIES = {'arduino_pico': ('https://github.com/earlephilhower/arduino-pico.git',
                   '32e74d024e5e3ee5e7ec9593f5a4101641c61897',
                   '1092683c3dde85659bca81441b1fbd91a2284e86'),
@@ -771,7 +780,7 @@ def validate(value: dict, sources: dict[str, bytes]) -> None:
         sha(record["blob"], 40, path); sha(record["sha256"], 64, path)
         require((record["blob"], record["sha256"]) == (blob, digest), "source provenance drift")
         data = (subprocess.check_output(["git", "show", f"{BASE}:{path}"], cwd=ROOT)
-                if path in SOURCE_OVERLAYS else sources[path])
+                if path in SOURCE_OVERLAYS or path in CURRENT_DOC_OVERLAYS else sources[path])
         require(hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == blob and
                 hashlib.sha256(data).hexdigest() == digest, f"current source bytes drift: {path}")
     overlays = ordered(value["repository_source_overlays"], list(SOURCE_OVERLAYS), "repository_source_overlays")
