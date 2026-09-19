@@ -8,6 +8,32 @@ import subprocess
 import os
 
 
+CRITICAL_ROOTS = frozenset({
+    "src", "include", "hal", "backend", "lib", "active", "storage", "config",
+    "builder_scripts", "scripts", "boards", "variants", "patches", "proto",
+})
+CRITICAL_FILES = frozenset({
+    "platformio.ini", "glyph_nuker", ".gitmodules", ".gitignore", ".gitattributes",
+    "cmakelists.txt", "makefile", "sconstruct", "sconscript", "library.json",
+    "library.properties", "requirements.txt", "platformio.lock",
+})
+IGNORED_ALLOWED_ROOTS = (".pio", ".platformio-home", ".venv", "local_backups")
+
+
+def is_critical_path(path: str) -> bool:
+    """Return whether a canonical Git path is in the audited critical inventory."""
+    if (not isinstance(path, str) or not path or path.startswith("/")
+            or "\\" in path or ":" in path
+            or any(ord(char) < 32 or ord(char) == 127 for char in path)
+            or any(part in {"", ".", ".."} for part in path.split("/"))):
+        raise TrackedWorktreeIntegrityError(f"unsafe ignored Git path: {path!r}")
+    folded = path.casefold()
+    return (folded.split("/", 1)[0] in CRITICAL_ROOTS
+            or folded in CRITICAL_FILES
+            or folded.startswith(".github/workflows/")
+            or "/.github/workflows/" in folded)
+
+
 class TrackedWorktreeIntegrityError(ValueError):
     """Raised when Git cannot provide an unambiguous tracked-entry snapshot."""
 
@@ -21,6 +47,45 @@ def _git(repo_root: Path, *args: str) -> bytes:
             f"git {' '.join(args)} failed: {result.stderr.decode(errors='replace').strip()}"
         )
     return result.stdout
+
+
+def ignored_critical_worktree_paths(repo_root: Path) -> tuple[str, ...]:
+    """List ignored untracked entries in the finite firmware/build inventory.
+
+    Git applies repository, info-exclude, and global excludes through
+    ``--exclude-standard``.  The pathspecs intentionally omit disposable
+    dependency caches and the owner-held custody root.
+    """
+    scope = sorted(CRITICAL_ROOTS | CRITICAL_FILES)
+    workflow_scope = (
+        ":(icase,glob).github/workflows/**",
+        ":(icase,glob)**/.github/workflows/**",
+    )
+    excluded_roots = (
+        ":(exclude,icase,glob).pio/**",
+        ":(exclude,icase,glob).platformio-home/**",
+        ":(exclude,icase,glob).venv/**",
+        ":(exclude,icase,glob)local_backups/**",
+    )
+    raw = _git(
+        repo_root,
+        "ls-files", "--others", "--ignored", "--exclude-standard", "--full-name", "-z",
+        "--", *(f":(icase){path}" for path in scope), *workflow_scope, *excluded_roots,
+    )
+    if raw and not raw.endswith(b"\0"):
+        raise TrackedWorktreeIntegrityError("unterminated ignored Git path output")
+    try:
+        paths = tuple(sorted({part.decode("utf-8") for part in raw.split(b"\0") if part}))
+    except UnicodeDecodeError as exc:
+        raise TrackedWorktreeIntegrityError("non-UTF-8 ignored Git path") from exc
+    paths = tuple(
+        path for path in paths
+        if not any(path == root or path.startswith(root + "/") for root in IGNORED_ALLOWED_ROOTS)
+    )
+    for path in paths:
+        if not is_critical_path(path):
+            raise TrackedWorktreeIntegrityError(f"ignored path escaped critical inventory: {path}")
+    return paths
 
 
 def _tree(repo_root: Path) -> dict[str, tuple[str, str]]:
@@ -108,7 +173,7 @@ def tracked_worktree_divergence(repo_root: Path) -> tuple[str, ...]:
     index = _index(repo_root)
     if set(head) != set(index):
         return tuple(sorted(set(head) ^ set(index)))
-    divergent: set[str] = set()
+    divergent: set[str] = set(ignored_critical_worktree_paths(repo_root))
     for path in sorted(head):
         head_mode, head_blob = head[path]
         index_mode, stage, index_blob = index[path]

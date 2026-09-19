@@ -100,6 +100,20 @@ def main() -> int:
         )
         tracked.chmod(0o644)
 
+        (repo / ".gitignore").write_text("src/ignored.cpp\n.pio/\n", encoding="utf-8")
+        run_git(repo, "add", ".gitignore")
+        run_git(repo, "commit", "-q", "-m", "ignore policy")
+        (repo / "src").mkdir()
+        (repo / "src/ignored.cpp").write_text("compiler input\n", encoding="utf-8")
+        expect_failure(
+            "ignored critical source",
+            lambda: require_clean_candidate_checkout(run_git(repo, "rev-parse", "HEAD"), repo),
+        )
+        (repo / "src/ignored.cpp").unlink()
+        (repo / ".pio").mkdir()
+        (repo / ".pio/cache.bin").write_text("dependency cache\n", encoding="utf-8")
+        require_clean_candidate_checkout(run_git(repo, "rev-parse", "HEAD"), repo)
+
         expect_failure(
             "missing custody root",
             lambda: verify_preserved(absent_root, CANDIDATE_A, digest),

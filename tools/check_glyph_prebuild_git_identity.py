@@ -8,7 +8,11 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from glyph_tracked_worktree_integrity import TrackedWorktreeIntegrityError, tracked_worktree_divergence
+from glyph_tracked_worktree_integrity import (
+    TrackedWorktreeIntegrityError,
+    ignored_critical_worktree_paths,
+    tracked_worktree_divergence,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -96,11 +100,50 @@ def main() -> None:
     expect(all(call[1]["cwd"] == Path("/repo") for call in fake.calls), "Git cwd is not explicit")
 
     ignored = new_repo()
-    (ignored / ".gitignore").write_text("ignored.txt\n", encoding="utf-8")
+    (ignored / ".gitignore").write_text(
+        "ignored.txt\nsrc/ghost.cpp\nplatformio.ini\n.github/workflows/ghost.yml\n"
+        "docs/.github/workflows/ghost.yml\n"
+        ".git/info-exclude-placeholder\n.pio/\n",
+        encoding="utf-8",
+    )
     subprocess.run(["git", "-C", str(ignored), "add", ".gitignore"], check=True)
     subprocess.run(["git", "-C", str(ignored), "-c", "user.name=Glyph", "-c", "user.email=glyph@example.invalid", "commit", "-qm", "ignore"], check=True)
     (ignored / "ignored.txt").write_text("ignored\n", encoding="utf-8")
-    expect(not identity(ignored).endswith("-DIRTY"), "ignored-only state marked dirty")
+    (ignored / "src").mkdir()
+    (ignored / "src/ghost.cpp").write_text("compiler input\n", encoding="utf-8")
+    (ignored / "platformio.ini").write_text("build control\n", encoding="utf-8")
+    (ignored / ".github/workflows").mkdir(parents=True)
+    (ignored / ".github/workflows/ghost.yml").write_text("workflow\n", encoding="utf-8")
+    (ignored / "docs/.github/workflows").mkdir(parents=True)
+    (ignored / "docs/.github/workflows/ghost.yml").write_text("nested workflow\n", encoding="utf-8")
+    expect(identity(ignored).endswith("-DIRTY"), "ignored critical source was accepted")
+    (ignored / "src/ghost.cpp").unlink()
+    (ignored / "platformio.ini").unlink()
+    (ignored / ".github/workflows/ghost.yml").unlink()
+    (ignored / "docs/.github/workflows/ghost.yml").unlink()
+    (ignored / ".git/info/exclude").write_text("include/ghost.hpp\n", encoding="utf-8")
+    (ignored / "include").mkdir()
+    (ignored / "include/ghost.hpp").write_text("compiler input\n", encoding="utf-8")
+    expect(identity(ignored).endswith("-DIRTY"), "ignored info-exclude source was accepted")
+    (ignored / "include/ghost.hpp").unlink()
+    global_excludes = ignored.parent / "global-excludes"
+    global_excludes.write_text("config/ghost.ini\n", encoding="utf-8")
+    global_config = ignored.parent / "global-gitconfig"
+    global_config.write_text(f"[core]\n\texcludesFile = {global_excludes}\n", encoding="utf-8")
+    previous_global = os.environ.get("GIT_CONFIG_GLOBAL")
+    os.environ["GIT_CONFIG_GLOBAL"] = str(global_config)
+    (ignored / "config").mkdir()
+    (ignored / "config/ghost.ini").write_text("compiler input\n", encoding="utf-8")
+    expect(identity(ignored).endswith("-DIRTY"), "ignored global-exclude source was accepted")
+    (ignored / "config/ghost.ini").unlink()
+    if previous_global is None:
+        os.environ.pop("GIT_CONFIG_GLOBAL", None)
+    else:
+        os.environ["GIT_CONFIG_GLOBAL"] = previous_global
+    (ignored / ".pio").mkdir()
+    (ignored / ".pio/cache.bin").write_text("dependency cache\n", encoding="utf-8")
+    expect(not identity(ignored).endswith("-DIRTY"), "ignored cache was rejected")
+    expect(ignored_critical_worktree_paths(ignored) == (), "ignored cache entered critical inventory")
 
     def status_failure(argv, **kwargs):
         if argv[-1] == "HEAD":
