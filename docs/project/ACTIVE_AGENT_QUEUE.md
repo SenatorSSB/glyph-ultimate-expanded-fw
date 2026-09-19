@@ -107,12 +107,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -290,7 +290,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-007",
       "title": "Version and continuously gate host transaction stages",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-config-007-transaction-stage-schema-v2",
       "objective": "Turn GP-CONFIG-006 transaction-stage reporting into a versioned, internally consistent, continuously load-bearing host result contract.",
       "why_this_matters": "GP-CONFIG-006 added stage state while RESULT_SCHEMA_VERSION remained 1; validate_result_schema checks only types and accepts impossible boolean/list combinations, and no current manifest entry makes the host modules and test seam continuously load-bearing.",
@@ -333,7 +333,26 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Reject the focused branch if v2 consistency cannot be enforced without wire, firmware, device, or evidence reinterpretation; leave historical records untouched.",
       "status_documentation_updates": "Document v2 as the only accepted new mechanical result schema and v1 as refused historical input; publish DONE only after reviewed continuous-gate coverage.",
-      "done_evidence": "NOT_DONE: publish completion only after focused implementation, fresh independent review, required validation, and canonical integration.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "01d43af2878a207f20379d46dcee62a842f31810",
+        "reviewed_implementation_sha": "bf9affbb4de1fe97b0e80057daf6d95127db4d2c",
+        "prior_canonical_integration_sha": "6603249af47f83b7dd4c17214529df7c127011b8",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_config_007_transaction_stage_schema.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_gp_config_007_transaction_stage_schema.py",
+          "tools/gp_config_005_hw_test.py",
+          "tools/test_gp_config_005_hw_test.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-CONFIG-007 implementation. The review verified schema-v2/v1 refusal, every legal stage prefix, exact stage/boolean/write/ambiguity/timestamp correspondence, terminal outcome binding to response/error/follow-up/readback fields, unchanged COBS bytes/order/callback boundaries, adversarial coverage, manifest/census/health wiring, and excluded-scope preservation.",
+        "validation_provenance": "Project-venv GP-CONFIG host suite PASS (37/37), stdlib-only GP-CONFIG-007 checker PASS, census200 and health38 PASS, framework/navigation/agent-surface PASS, Python syntax and git diff --check PASS. Publication-workflow and artifact-postprocessor workflow checkers PASS. Full aggregate remains FAIL/UNAVAILABLE on the pre-existing AGG-11 strong-signal adversarial setup defect; no aggregate-green claim was made. Feature ref and canonical integration were live-verified before this separate status publication. No firmware, build, device, artifact, or hardware action occurred."
+      },
       "stop_conditions": [
         "Old v1 results are silently accepted, migrated, or reinterpreted.",
         "Any impossible prefix/boolean/final-stage/success combination validates.",
@@ -3688,11 +3707,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-007","GP-VAL-017","GP-PERSIST-002"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-017","GP-PERSIST-002"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-007, GP-VAL-017, GP-PERSIST-002; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-017, GP-PERSIST-002; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
