@@ -24,7 +24,7 @@ Git, but it is not current candidate supply or implementation authority.
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Every candidate in glyph-portfolio-20260919-2050 has been adjudicated: GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, and GP-VAL-020 are authorized READY; GP-PROV-010 remains research gated.",
+    "resolution": "Every candidate in glyph-portfolio-20260919-2050 has been adjudicated: GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, and GP-VAL-020 were authorized READY; GP-CONFIG-008 is now DONE and GP-PROV-010 remains research gated.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
       "opening_reference": "git-json:4e38028b97ed07e894368564b9f9cdce87ba9c55:docs/planning/portfolio_20260919_2050.md",
@@ -124,12 +124,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -391,7 +391,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-008",
       "title": "Characterize successful SetConfig runtime rebinding",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-config-008-setconfig-runtime-rebinding",
       "objective": "Establish which successful persisted SetConfig values become visible immediately and which live subsystems remain cached, reselection-dependent, or boot-dependent.",
       "why_this_matters": "The transaction handler publishes the new Config, but activation masks, selected mode state, custom-mode caches, backend selection, and display/LED bindings have separate update boundaries that are not currently characterized.",
@@ -434,7 +434,17 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the characterization branch if exact-source correspondence or bounded host proof cannot be maintained; do not select or implement a runtime repair.",
       "status_documentation_updates": "Publish only current rebinding boundaries and explicit UNKNOWN/non-claims; route any desired runtime change back through planning and H2/H3 curation.",
-      "done_evidence": "Pending exact reviewed characterization, source-drift and adversarial cases, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "327f442b9df6d0c0a15a6ff8365b3c06071323cc",
+        "reviewed_implementation_sha": "7a3c242d5197ffaec3c3a4884cd62da978e955b3",
+        "prior_canonical_integration_sha": "7a3c242d5197ffaec3c3a4884cd62da978e955b3",
+        "reviewed_changed_paths": ["docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_health.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "docs/runtime_config/fixtures/setconfig_runtime_rebinding_characterization.json", "docs/runtime_config/runtime_config_validation_health.md", "docs/runtime_config/setconfig_runtime_rebinding_characterization.md", "tools/check_glyph_setconfig_runtime_rebinding_characterization.py"],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on exact 7a3c242. Exact ordered 8-source list, 13-case corpus, source hashes/anchors, adversarial rejection, manifest/census/health consistency, and forbidden-scope non-claims were verified.",
+        "validation_provenance": "GP-CONFIG-008 characterization PASS (13 cases); exact GP-CONFIG-005 SetConfig transaction PASS (9 cases); GP-PERSIST-002 GET_CONFIG/raw-load PASS (11 cases); census 202; health manifest 41/current load-bearing 37; framework, navigation, surface, Python syntax, and diff checks PASS. Aggregate runner stopped at documented pre-existing GP-VAL-011 preflight SETUP_FAILURE on ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/; no aggregate-green claim. No firmware build or hardware action required."
+      },
       "stop_conditions": [
         "Any production firmware, protocol, persistence, reboot, backend, display, LED, or runtime behavior is changed.",
         "Copied models replace exact production/source correspondence.",
@@ -4215,11 +4225,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-008","GP-VAL-020"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-SRC-008, GP-VAL-020; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
