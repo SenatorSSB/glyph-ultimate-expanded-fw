@@ -124,12 +124,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 5,
+    "immediate_ready": 4,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 5,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -234,7 +234,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-019",
       "title": "Make artifact provenance commands failure-bearing",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-019-artifact-command-integrity",
       "objective": "Require the checkout, postprocessor, sidecar-write, and sidecar-verification workflow operations to be exact failure-bearing commands before artifact publication.",
       "why_this_matters": "The current artifact workflow validators accept success-masked protected commands, allowing a failing identity or provenance operation to be hidden before upload.",
@@ -274,7 +274,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave the current checker unchanged if the exact tracked workflow cannot pass the bounded contract; do not edit the workflow to satisfy the checker.",
       "status_documentation_updates": "Record exact failure-bearing artifact command enforcement only; make no artifact acceptance or runtime claim.",
-      "done_evidence": "Pending exact reviewed checker implementation, adversarial workflow corpus, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "a861964418a9b0e84abb89b2146f8430a5e7c69b",
+        "reviewed_implementation_sha": "933456a61269d47603f54b31aea33274a6381f6d",
+        "prior_canonical_integration_sha": "a861964418a9b0e84abb89b2146f8430a5e7c69b",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/artifact_postprocessor_provenance.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_artifact_postprocessor_workflow.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-VAL-019 snapshot. The review confirmed exact unique failure-bearing protected commands, rejection of family variants, masking, duplicates, trailing commands, conditionals, loops, subshells, functions, heredocs, set/trap state changes, comments, and unsupported fields, with workflow, artifact, publication, custody, sidecar, and firmware scope unchanged.",
+        "validation_provenance": "Artifact workflow, provenance, publication workflow, checker census (201 entries), validation health (40 manifest entries), framework, navigation, agent-surface, Python syntax, and git diff --check gates PASS. The aggregate runner remains unavailable because its preflight rejects the pre-existing ignored nested .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ path; no aggregate-green claim is made. No firmware build or hardware action was required."
+      },
       "stop_conditions": [
         "Any protected operation remains accepted with failure masking or non-exact shell content.",
         "Workflow YAML, commands, runner, publication route, artifact bytes, or custody semantics would change.",
@@ -4184,11 +4198,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-019","GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4199,7 +4213,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. Five bounded H0/H1 items remain Ready after GP-SRC-007 completion; they cover artifact-command integrity, ignored critical paths, successful SetConfig rebinding characterization, exact X1 authority locators, and safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. Four bounded H0/H1 items remain Ready after GP-SRC-007 and GP-VAL-019 completion; they cover ignored critical paths, successful SetConfig rebinding characterization, exact X1 authority locators, and safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
