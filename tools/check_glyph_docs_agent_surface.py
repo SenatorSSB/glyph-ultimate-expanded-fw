@@ -78,6 +78,14 @@ ALLOWED_EXACT_CHANGED_PATHS = {
     "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
     "tools/generate_source_owned_table_replacement.py",
     "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
+    "builder_scripts/arduino_pico.py",
+    "tools/glyph_tracked_worktree_integrity.py",
+    "tools/glyph_hardware_artifact_custody.py",
+    "tools/check_glyph_prebuild_git_identity.py",
+    "tools/check_glyph_hardware_artifact_custody.py",
+    "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
+    "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+    "docs/runtime_config/fixtures/glyph_checker_census.json",
 }
 ALLOWED_PREFIXES = ("docs/",)
 
@@ -478,7 +486,7 @@ def validate_surface_scope(context: CheckerContext) -> None:
     authorized_hal = exact_gp005_integration(context) if GP005_HAL_PATH in context.changed_paths else False
     validate_feature_scope(
         context,
-        allowed_paths=("docs/", "tools/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ())),
+        allowed_paths=("docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ())),
         protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/" and (not authorized_hal or prefix.casefold() != "hal/")),
     )
 

@@ -12,6 +12,11 @@ import stat
 import subprocess
 import tempfile
 
+from glyph_tracked_worktree_integrity import (
+    TrackedWorktreeIntegrityError,
+    tracked_worktree_divergence,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CUSTODY_ROOT = REPO_ROOT / "local_backups" / "hardware-artifacts"
@@ -65,6 +70,12 @@ def require_clean_candidate_checkout(candidate_sha: str, repo_root: Path = REPO_
         check=False,
     )
     if status_result.returncode or status_result.stdout:
+        raise CustodyError("preserve requires a clean candidate checkout")
+    try:
+        divergence = tracked_worktree_divergence(repo_root)
+    except TrackedWorktreeIntegrityError as exc:
+        raise CustodyError("preserve requires a directly verified tracked checkout") from exc
+    if divergence:
         raise CustodyError("preserve requires a clean candidate checkout")
 
 

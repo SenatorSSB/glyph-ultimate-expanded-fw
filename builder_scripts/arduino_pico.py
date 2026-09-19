@@ -1,14 +1,22 @@
 import subprocess
 from pathlib import Path
 import re
+import sys
 
 Import("env")
-
 ROOT = Path(env.subst("$PROJECT_DIR"))
+TOOLS = ROOT / "tools"
+if str(TOOLS) not in sys.path:
+    sys.path.insert(0, str(TOOLS))
+from glyph_tracked_worktree_integrity import (
+    TrackedWorktreeIntegrityError,
+    tracked_worktree_divergence,
+)
+
 _HEX_IDENTITY = re.compile(r"[0-9a-f]+")
 
 
-def git_identity(repo_root=ROOT, runner=subprocess.run):
+def git_identity(repo_root=ROOT, runner=subprocess.run, integrity_checker=tracked_worktree_divergence):
     """Return the existing firmware version identity, or fail before publish."""
     common = ["git", "-c", "core.longpaths=true"]
     try:
@@ -38,7 +46,11 @@ def git_identity(repo_root=ROOT, runner=subprocess.run):
         raise RuntimeError("unable to invoke Git for status") from exc
     if status.returncode != 0 or not isinstance(status.stdout, str):
         raise RuntimeError("unable to resolve Git status")
-    return commit + ("-DIRTY" if status.stdout else "")
+    try:
+        hidden_divergence = integrity_checker(repo_root)
+    except TrackedWorktreeIntegrityError as exc:
+        raise RuntimeError("unable to verify tracked working-tree integrity") from exc
+    return commit + ("-DIRTY" if status.stdout or hidden_divergence else "")
 
 
 def before_build():
