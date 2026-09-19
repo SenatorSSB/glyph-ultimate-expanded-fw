@@ -249,17 +249,70 @@ current global wait.
 When effective authorized runway is zero:
 
 - use `PLANNING_REQUIRED` when candidate supply is absent or the latest packet
-  is materially stale/consumed and a fresh broad search is needed;
-- use `CURATION_REQUIRED` when concrete candidates or invalidated
-  Preauthorization exist but need substantive authorization, reauthorization,
-  or interpretation;
+  is materially stale/consumed and a fresh broad search is needed, including
+  after a Curator has fully adjudicated the current packet and only
+  user/evidence/research-gated dispositions remain;
+- use `CURATION_REQUIRED` only while a new material packet, invalidated
+  Preauthorization, failed-hardware event, or other concrete state is actually
+  awaiting Curator judgment;
 - never let Implementation self-reseed or promote raw Planner rankings.
 
-Invalidated Preauthorization and failed hardware take precedence over an
-absent/stale/consumed Planner packet at zero runway: the primary liveness state
-is `CURATION_REQUIRED`, with `REPAIR_REQUIRED` also recorded for hardware
-failure. Candidate-local `HARDWARE_TEST_REQUIRED` and `REPAIR_REQUIRED` are
-supporting signals, not mutually exclusive portfolio liveness states.
+Invalidated Preauthorization, failed hardware, and new material packets create
+a curation obligation before adjudication. The role that records such an event
+sets the canonical `curation_obligation.pending` flag and its exact trigger;
+the primary liveness state is then `CURATION_REQUIRED`, with
+`REPAIR_REQUIRED` also recorded for hardware failure. Curator alone clears that
+pending obligation by recording its resolution/provenance. The underlying
+invalidated or failed evidence remains preserved after resolution and does not
+force a completed Curator back into itself. Candidate-local
+`HARDWARE_TEST_REQUIRED` and `REPAIR_REQUIRED` are supporting signals, not
+mutually exclusive portfolio liveness states.
+
+### Curator Exit Invariant
+
+A completed Curator run consumes the curation obligation it accepted and must
+not publish `CURATION_REQUIRED` as its own successor. It either creates
+effective authorization and publishes `RUNWAY_LOW`/`RUNWAY_OK`, accepts a
+supported global wait, or—when effective runway is zero—publishes
+`PLANNING_REQUIRED` with exact shortfall and external-decision signals. A
+reviewed gated candidate is preserved in disposition/provenance, but is not a
+pending Curator survivor until new material evidence or direction returns it
+through planning. If the Curator cannot adjudicate the obligation because of a
+concurrency, external-verification, or safety stop, it does not claim a
+completed Curator publication; it returns the precise stop state instead.
+
+This invariant does not erase user/evidence/research gates, authorize filler,
+or let Planner or Implementation promote a gated candidate. A later material
+event may establish a new `CURATION_REQUIRED` state for a future Curator run.
+
+The canonical queue schema carries exactly one `curation_obligation` object:
+`pending`, `trigger`, `resolution`, and structured `provenance`. Provenance
+names the opening role/reference, exact subject IDs, resolving role, and
+immutable resolution reference. Pending state requires a nonblank trigger,
+null resolution, and null resolution provenance. Resolved state requires null
+trigger, a resolution naming every subject, `Glyph Work-Order Curator` as the
+resolving role, and a reference to the immutable Curator receipt that covers
+those exact subjects. For an invalidation or failed-hardware event, that must
+be an event-specific receipt committed after the immutable pending-obligation
+opening snapshot; a pre-event packet receipt is not resolution authority. A
+preserved invalidated/failed item must be covered by the pending obligation or
+its authenticated post-opening resolution. Primary liveness
+derives `CURATION_REQUIRED` from this explicit obligation, never merely from
+preserved failed/invalidated evidence or already-reviewed gated candidates. At
+zero runway, completed curation must also consume any reviewed gated survivors
+unless an accepted global wait applies. A supported global wait and a pending
+curation obligation are mutually exclusive.
+
+Event-specific resolution receipts are regular JSON files under
+`docs/agent_framework/curation_receipts/` with schema name
+`glyph_curation_resolution_receipt`, schema version 1, resolver role, RFC3339
+resolution time, the exact immutable queue-opening reference, and one closed
+`subject_id` / `event_kind` / `disposition` / `resolution` entry per subject.
+The opening reference is
+`git-json:<opening-sha>:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state`; the
+resolution reference is `git-json:<later-sha>:<receipt-path>`. The later commit
+must descend from the opening commit and both must be integrated into current
+history before the obligation can be cleared.
 
 A candidate-local `HARDWARE_TEST_REQUIRED` state does not imply portfolio-wide
 hardware scarcity. `GLOBAL_EVIDENCE_WAIT_SUPPORTED` requires a fresh broad

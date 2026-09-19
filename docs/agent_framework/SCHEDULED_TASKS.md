@@ -108,7 +108,9 @@ present, activation_state is ACTIVATABLE, no new judgment is required, and
 required hardware evidence is already exactly satisfied. Do not reinterpret
 scope, relax a condition, decide semantic drift is harmless, judge new
 hardware evidence, or perform product/source/architecture judgment. Return
-CURATION_REQUIRED when judgment or reauthorization is needed.
+CURATION_REQUIRED when judgment or reauthorization is needed. Any canonical
+publication of that finding must set `curation_obligation.pending: true` with
+the exact trigger and provenance; only the Curator may publish its resolution.
 
 Do not refuse an otherwise complete READY H2/H3 item solely because it changes
 active firmware. It is executable when its behavioral claim, source authority,
@@ -232,11 +234,14 @@ GLOBAL_EVIDENCE_WAIT_SUPPORTED
 BLOCKED_EXTERNAL
 UNSAFE
 
-Use PLANNING_REQUIRED when effective runway is zero and candidate supply is
-absent or materially stale/consumed. Use CURATION_REQUIRED when a concrete
-candidate or invalidated Preauthorization needs substantive judgment. When
-invalidated Preauthorization and absent/stale supply coexist, invalidation
-takes precedence and the primary state is CURATION_REQUIRED. Candidate-local
+Use PLANNING_REQUIRED when effective runway is zero, no canonical curation
+obligation is pending, and candidate supply is absent or materially
+stale/consumed. Use CURATION_REQUIRED at zero runway only while the canonical
+`curation_obligation.pending` flag is true. Before Curator resolution, a newly
+recorded invalidation takes precedence over absent/stale supply and the primary
+state is CURATION_REQUIRED. After the Curator records resolution and
+provenance, preserve the invalidation evidence without deriving another
+Curator run from it. Candidate-local
 HARDWARE_TEST_REQUIRED and REPAIR_REQUIRED are supporting signals, not the
 exclusive portfolio liveness state; a local hardware gate does not establish a
 global evidence wait. Return GLOBAL_EVIDENCE_WAIT_SUPPORTED only when the canonical queue
@@ -405,14 +410,37 @@ physical exact-snapshot PASS remains mandatory before merge.
 
 Handle invalidated Preauthorization through substantive reauthorization,
 narrowing, return to planning, or rejection. Never count invalidated or
-hardware-pending Preauthorization as effective runway. If invalidation and
-absent/stale Planner supply coexist, return primary CURATION_REQUIRED;
-invalidation takes precedence over Planner refresh.
+hardware-pending Preauthorization as effective runway. During intake,
+invalidation takes precedence over Planner refresh. A completed Curator run
+must resolve, narrow, reject, or route every current invalidation; it must not
+publish CURATION_REQUIRED as its own next primary state. If a concurrency,
+external-verification, or safety stop prevents adjudication, stop without
+claiming completed curation and report that precise stop instead.
 
 If effective runway is zero and the latest packet is absent or materially
 consumed/stale, publish the candidate-supply shortfall in the queue and return
 PLANNER_REFRESH_REQUIRED / PLANNING_REQUIRED. Do not infer a portfolio-global
 hardware/evidence wait from gated survivors in an old packet.
+
+Before a successful Curator publication, consume the current curation
+obligation completely. If every candidate has been adjudicated and the only
+remaining dispositions require new user, evidence, or research input, preserve
+those exact dispositions in provenance, remove them from pending Curator
+survivors, mark the packet consumed, and publish PLANNING_REQUIRED with the
+applicable RUNWAY_SHORTFALL_* signals. Never make Curator the next actor after
+a completed Curator run. Clear the canonical curation_obligation only with a
+nonblank resolution naming every subject and structured provenance that names
+`Glyph Work-Order Curator` as resolver and references an immutable Curator
+receipt covering those exact subjects. Invalidation and failed-hardware
+resolution requires an event-specific Curator receipt committed after the
+immutable opening snapshot; the older packet receipt cannot resolve a later
+event. A supported global wait cannot coexist with a pending curation
+obligation. A later material event may create a new curation obligation.
+For an event-specific resolution, first publish the source-free version-1
+`glyph_curation_resolution_receipt` JSON under
+docs/agent_framework/curation_receipts/ from a commit descending from the
+immutable pending queue snapshot; only a later control-plane publication may
+reference that receipt and clear the obligation.
 
 Accept GLOBAL_EVIDENCE_WAIT_SUPPORTED only after a fresh broad current-configurator
 Planner audit searched plausible independent correctness, usability,
@@ -746,8 +774,12 @@ publication remains an Implementation Supervisor/recovery responsibility.
 
 For FAIL, record HARDWARE_FAILED, preserve the result, ensure failed active
 source cannot enter configurator, and always add supporting REPAIR_REQUIRED.
-When effective runway is zero, the primary state is CURATION_REQUIRED; when
-runway exists, keep its single derived RUNWAY_LOW/RUNWAY_OK primary state. For
+Set the canonical `curation_obligation.pending` flag with the exact candidate,
+evidence reference, trigger, and provenance. When effective runway is zero,
+the primary state is CURATION_REQUIRED; when runway exists, keep its single
+derived RUNWAY_LOW/RUNWAY_OK primary state while preserving the pending
+obligation. Only the Curator may clear that obligation with a recorded
+resolution; the preserved failure must not reopen it by itself. For
 PARTIAL or INCONCLUSIVE, preserve exact observations,
 keep the candidate at LOCAL_ACCEPTANCE_PENDING, and record the required
 retest/evidence in hardware_evidence_gaps.

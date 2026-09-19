@@ -59,7 +59,11 @@ recommendation.
   item for curation or user/evidence resolution.
 - Mechanically activate `PREAUTHORIZED` only when every objective condition is
   satisfied without new user, product, architecture, source, evidence, or
-  hardware judgment; otherwise return `CURATION_REQUIRED`.
+  hardware judgment. When a new judgment need is discovered, set the canonical
+  `curation_obligation.pending` flag with exact trigger and provenance and
+  return `CURATION_REQUIRED`. If the same invalidation already has an
+  authenticated Curator resolution, preserve it without reopening the
+  obligation; at zero runway return `PLANNING_REQUIRED` instead.
 - Instantiate subagents explicitly; do not rely on implicit background work.
 - Before substantive implementation or research, perform and record the
   delegation preflight in `SUBAGENT_CONTRACTS.md`. Complete runtime capability

@@ -422,6 +422,50 @@ SUPPORTING_SIGNALS = {
     "REPAIR_REQUIRED",
 }
 
+CURATION_OBLIGATION_FIELDS = {
+    "pending",
+    "trigger",
+    "resolution",
+    "provenance",
+}
+CURATION_OBLIGATION_PROVENANCE_FIELDS = {
+    "opened_by_role",
+    "opening_reference",
+    "subject_ids",
+    "resolved_by_role",
+    "resolution_reference",
+}
+EVENT_CURATION_OPENING_RE = re.compile(
+    r"^git-json:([0-9a-f]{40}):docs/project/ACTIVE_AGENT_QUEUE\.md#queue-state$"
+)
+EVENT_CURATION_RESOLUTION_RE = re.compile(
+    r"^git-json:([0-9a-f]{40}):(docs/agent_framework/curation_receipts/"
+    r"[a-z0-9][a-z0-9_\-]*\.json)$"
+)
+EVENT_CURATION_RECEIPT_FIELDS = {
+    "schema_name",
+    "schema_version",
+    "resolver_role",
+    "resolved_at",
+    "opening_reference",
+    "subject_resolutions",
+}
+EVENT_CURATION_SUBJECT_FIELDS = {
+    "subject_id",
+    "event_kind",
+    "disposition",
+    "resolution",
+}
+EVENT_CURATION_DISPOSITIONS = {
+    "REAUTHORIZED",
+    "NARROWED",
+    "RETURNED_TO_PLANNING",
+    "REJECTED",
+    "REPAIR_REQUIRED",
+    "USER_DECISION_GATED",
+    "EVIDENCE_GATED",
+}
+
 
 class FrameworkDocsError(AssertionError):
     """Raised when framework docs drift from the contract."""
@@ -527,6 +571,190 @@ def _queue_block_from_text(raw: str, label: str) -> dict[str, object]:
     if not isinstance(payload, dict):
         fail(f"{label} queue-state block must be an object")
     return payload
+
+
+def _event_curation_resolution_subjects(
+    reference: object,
+    opening_reference: object,
+    event_subject_kinds: dict[str, str],
+    repo_root: Path = REPO_ROOT,
+) -> set[str]:
+    if not isinstance(reference, str) or not isinstance(opening_reference, str):
+        fail("event curation resolution requires immutable Git references")
+    resolution_match = EVENT_CURATION_RESOLUTION_RE.fullmatch(reference)
+    opening_match = EVENT_CURATION_OPENING_RE.fullmatch(opening_reference)
+    if resolution_match is None or opening_match is None:
+        fail("event curation resolution/opening references use unsupported forms")
+    resolution_commit, receipt_path = resolution_match.groups()
+    opening_commit = opening_match.group(1)
+    if resolution_commit == opening_commit:
+        fail("event curation resolution receipt must postdate its opening event")
+    _require_commit_sha(opening_commit, "curation obligation opening commit", repo_root)
+    _require_commit_sha(resolution_commit, "curation resolution commit", repo_root)
+    _is_ancestor(repo_root, opening_commit, resolution_commit, "curation resolution ancestry")
+    _is_ancestor(
+        repo_root,
+        resolution_commit,
+        _git(repo_root, "rev-parse", "HEAD").strip(),
+        "curation resolution publication",
+    )
+
+    opening_raw = _git(repo_root, "show", f"{opening_commit}:docs/project/ACTIVE_AGENT_QUEUE.md")
+    opening_queue = _queue_block_from_text(opening_raw, "curation obligation opening snapshot")
+    opening_obligation = opening_queue.get("curation_obligation")
+    if not isinstance(opening_obligation, dict) or opening_obligation.get("pending") is not True:
+        fail("event curation opening snapshot must carry a pending obligation")
+    opening_provenance = opening_obligation.get("provenance")
+    if not isinstance(opening_provenance, dict):
+        fail("event curation opening snapshot lacks structured provenance")
+    opening_subjects = opening_provenance.get("subject_ids")
+    if not isinstance(opening_subjects, list) or set(opening_subjects) != set(event_subject_kinds):
+        fail("event curation opening snapshot must bind the exact event subjects")
+    opening_items = opening_queue.get("items")
+    if not isinstance(opening_items, list):
+        fail("event curation opening snapshot must contain queue items")
+    opening_statuses = {
+        item.get("id"): item.get("status")
+        for item in opening_items
+        if isinstance(item, dict)
+    }
+    for subject_id, event_kind in event_subject_kinds.items():
+        if opening_statuses.get(subject_id) != event_kind:
+            fail("event curation opening snapshot does not contain the exact event kind")
+
+    _git_tree_entry(resolution_commit, receipt_path, "event Curator resolution receipt", repo_root)
+    raw = _git(repo_root, "show", f"{resolution_commit}:{receipt_path}")
+
+    def unique_pairs(pairs: list[tuple[str, object]]) -> dict[str, object]:
+        value: dict[str, object] = {}
+        for key, item in pairs:
+            if key in value:
+                fail("event Curator resolution receipt contains duplicate JSON keys")
+            value[key] = item
+        return value
+
+    try:
+        receipt = json.loads(raw, object_pairs_hook=unique_pairs)
+    except json.JSONDecodeError as exc:
+        fail(f"event Curator resolution receipt is invalid JSON: {exc}")
+    if not isinstance(receipt, dict) or set(receipt) != EVENT_CURATION_RECEIPT_FIELDS:
+        fail("event Curator resolution receipt fields do not match the closed contract")
+    if (
+        receipt["schema_name"] != "glyph_curation_resolution_receipt"
+        or type(receipt["schema_version"]) is not int
+        or receipt["schema_version"] != 1
+        or receipt["resolver_role"] != "Glyph Work-Order Curator"
+        or receipt["opening_reference"] != opening_reference
+    ):
+        fail("event Curator resolution receipt identity/provenance is invalid")
+    if not isinstance(receipt["resolved_at"], str) or not RFC3339_RE.fullmatch(receipt["resolved_at"]):
+        fail("event Curator resolution receipt requires RFC3339 resolved_at")
+    resolutions = receipt["subject_resolutions"]
+    if not isinstance(resolutions, list) or len(resolutions) != len(event_subject_kinds):
+        fail("event Curator resolution receipt must cover the exact event subjects")
+    seen: set[str] = set()
+    for entry in resolutions:
+        if not isinstance(entry, dict) or set(entry) != EVENT_CURATION_SUBJECT_FIELDS:
+            fail("event Curator subject resolution fields do not match the closed contract")
+        subject_id = entry["subject_id"]
+        if subject_id in seen or event_subject_kinds.get(subject_id) != entry["event_kind"]:
+            fail("event Curator resolution subject/event correspondence is invalid")
+        if entry["disposition"] not in EVENT_CURATION_DISPOSITIONS:
+            fail("event Curator resolution disposition is invalid")
+        require_nonempty_string(entry["resolution"], "event Curator subject resolution")
+        seen.add(subject_id)
+    if seen != set(event_subject_kinds):
+        fail("event Curator resolution receipt omitted an event subject")
+    return seen
+
+
+def check_event_curation_resolution_self_test() -> None:
+    with tempfile.TemporaryDirectory(prefix="glyph-curation-event-") as temp:
+        repo = Path(temp)
+        subprocess.run(["git", "init", "-q", "-b", "main"], cwd=repo, check=True)
+        subprocess.run(["git", "config", "user.email", "checker@example.invalid"], cwd=repo, check=True)
+        subprocess.run(["git", "config", "user.name", "Glyph checker"], cwd=repo, check=True)
+        (repo / "docs/project").mkdir(parents=True)
+        (repo / "docs/agent_framework/curation_receipts").mkdir(parents=True)
+        (repo / "README").write_text("base\n", encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "base"], cwd=repo, check=True)
+
+        opening_queue = {
+            "curation_obligation": {
+                "pending": True,
+                "provenance": {"subject_ids": ["GP-TEST-001"]},
+            },
+            "items": [{"id": "GP-TEST-001", "status": "HARDWARE_FAILED"}],
+        }
+        opening_text = (
+            QUEUE_START + "\n```json\n" + json.dumps(opening_queue)
+            + "\n```\n" + QUEUE_END + "\n"
+        )
+        (repo / "docs/project/ACTIVE_AGENT_QUEUE.md").write_text(opening_text, encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "open curation event"], cwd=repo, check=True)
+        opening_commit = _git(repo, "rev-parse", "HEAD").strip()
+        opening_reference = (
+            f"git-json:{opening_commit}:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state"
+        )
+        receipt = {
+            "schema_name": "glyph_curation_resolution_receipt",
+            "schema_version": 1,
+            "resolver_role": "Glyph Work-Order Curator",
+            "resolved_at": "2026-09-19T12:00:00Z",
+            "opening_reference": opening_reference,
+            "subject_resolutions": [{
+                "subject_id": "GP-TEST-001",
+                "event_kind": "HARDWARE_FAILED",
+                "disposition": "REPAIR_REQUIRED",
+                "resolution": "Preserve failure and route repair through planning.",
+            }],
+        }
+        receipt_path = "docs/agent_framework/curation_receipts/gp_test_001.json"
+        (repo / receipt_path).write_text(json.dumps(receipt), encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-qm", "resolve curation event"], cwd=repo, check=True)
+        resolution_commit = _git(repo, "rev-parse", "HEAD").strip()
+        resolution_reference = f"git-json:{resolution_commit}:{receipt_path}"
+        subjects = _event_curation_resolution_subjects(
+            resolution_reference,
+            opening_reference,
+            {"GP-TEST-001": "HARDWARE_FAILED"},
+            repo,
+        )
+        if subjects != {"GP-TEST-001"}:
+            fail("valid post-opening event Curator receipt lost subject identity")
+
+        stale_reference = (
+            f"git-json:{opening_commit}:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+        )
+        for label, reference, opening, kinds in (
+            (
+                "stale pre-event packet receipt",
+                stale_reference,
+                opening_reference,
+                {"GP-TEST-001": "HARDWARE_FAILED"},
+            ),
+            (
+                "wrong opening snapshot",
+                resolution_reference,
+                "git-json:" + "0" * 40 + ":docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+                {"GP-TEST-001": "HARDWARE_FAILED"},
+            ),
+            (
+                "wrong event kind",
+                resolution_reference,
+                opening_reference,
+                {"GP-TEST-001": "INVALIDATED_PREAUTHORIZED"},
+            ),
+        ):
+            try:
+                _event_curation_resolution_subjects(reference, opening, kinds, repo)
+            except (FrameworkDocsError, subprocess.CalledProcessError):
+                pass
+            else:
+                fail(f"event Curator receipt adversarial fixture passed: {label}")
 
 
 def _git_tree_entry(commit: str, path: str, label: str, repo_root: Path = REPO_ROOT) -> tuple[str, str, str]:
@@ -740,12 +968,15 @@ def _planner_packet_correspondence(
 def _validate_global_wait(
     global_wait: object, planner_packet: dict[str, object], packet_state: str,
     computed: dict[str, object], signals: list[str], repo_root: Path = REPO_ROOT,
+    *, curation_pending: bool = False,
 ) -> None:
     global_wait_proposed = planner_packet["global_wait_proposed"]
     curator_review_required = planner_packet["curator_review_required"]
     if not isinstance(global_wait, dict) or not isinstance(global_wait.get("supported"), bool):
         fail("queue global_evidence_wait must contain boolean supported")
     if global_wait["supported"]:
+        if curation_pending:
+            fail("global evidence wait cannot coexist with a pending curation obligation")
         if packet_state != "FRESH":
             fail("global evidence wait requires a fresh broad Planner packet")
         if computed["effective_authorized_runway"] != 0:
@@ -1004,6 +1235,19 @@ def check_new_planner_receipt_self_test() -> None:
                 ("missing wait signal", "FRESH", computed, info, wait, [], "reported in queue signals"),
             ):
                 expect_failure(label, lambda: _validate_global_wait(changed_wait, queue, state, values, changed_signals, repo), needle)
+            expect_failure(
+                "pending curation plus accepted wait",
+                lambda: _validate_global_wait(
+                    wait,
+                    info,
+                    "FRESH",
+                    computed,
+                    signals,
+                    repo,
+                    curation_pending=True,
+                ),
+                "cannot coexist",
+            )
             # Every altered receipt is a real direct-base immutable commit, not a mocked parser.
             bad_receipts = [
                 ("missing receipt", "queue\n", "exactly one"),
@@ -1652,23 +1896,46 @@ def derive_liveness(
     effective_runway: int,
     target_runway: int,
     packet_state: str,
-    substantive_candidate_exists: bool,
-    invalidated_authorization_exists: bool,
-    failed_hardware_exists: bool,
-    curator_review_required: bool,
+    curation_pending: bool,
     global_wait_supported: bool,
 ) -> str:
-    if global_wait_supported:
-        return "GLOBAL_EVIDENCE_WAIT_SUPPORTED"
     if effective_runway > 0:
         return "RUNWAY_LOW" if effective_runway < target_runway else "RUNWAY_OK"
-    if invalidated_authorization_exists or failed_hardware_exists or curator_review_required:
+    if curation_pending:
         return "CURATION_REQUIRED"
+    if global_wait_supported:
+        return "GLOBAL_EVIDENCE_WAIT_SUPPORTED"
     if packet_state in {"ABSENT", "STALE", "CONSUMED"}:
         return "PLANNING_REQUIRED"
-    if substantive_candidate_exists:
-        return "CURATION_REQUIRED"
     return "PLANNING_REQUIRED"
+
+
+def validate_curation_event_binding(
+    *,
+    pending: bool,
+    subject_ids: set[str],
+    event_subject_ids: set[str],
+    packet_subject_ids: set[str],
+    resolution_reference: object,
+    expected_resolution_reference: str | None,
+    receipt_subject_ids: set[str],
+    event_receipt_subject_ids: set[str],
+) -> None:
+    required_subject_ids = event_subject_ids | packet_subject_ids
+    if not required_subject_ids.issubset(subject_ids):
+        fail("curation_obligation subject_ids must cover every pending or resolved judgment event")
+    if pending:
+        return
+    if event_subject_ids:
+        if subject_ids != event_subject_ids:
+            fail("event curation obligation cannot mix post-event subjects with old packet subjects")
+        if event_receipt_subject_ids != event_subject_ids:
+            fail("resolved event obligation requires an exact post-opening Curator receipt")
+        return
+    if expected_resolution_reference is None or resolution_reference != expected_resolution_reference:
+        fail("resolved curation_obligation must reference the current immutable Curator receipt")
+    if not subject_ids.issubset(receipt_subject_ids):
+        fail("resolved curation_obligation subjects must be authenticated by the Curator receipt")
 
 
 def parse_current_runway_marker(text: str, rel_path: str) -> dict[str, object]:
@@ -1924,8 +2191,8 @@ def check_model_routing() -> None:
 
 def check_queue_contract() -> None:
     payload = load_queue_state()
-    if payload.get("schema_version") != 2:
-        fail("queue schema_version must be 2")
+    if payload.get("schema_version") != 3:
+        fail("queue schema_version must be 3")
     if payload.get("canonical_branch") != "configurator":
         fail("queue canonical_branch must be configurator")
     require_nonempty_string(payload.get("audit_base_sha"), "audit_base_sha")
@@ -1933,6 +2200,62 @@ def check_queue_contract() -> None:
     if len(audit_base_sha) != 40 or any(char not in "0123456789abcdef" for char in audit_base_sha):
         fail("queue audit_base_sha must be a full lowercase Git SHA")
     require_nonempty_string(payload.get("operating_mode"), "operating_mode")
+
+    curation_obligation = payload.get("curation_obligation")
+    if (
+        not isinstance(curation_obligation, dict)
+        or set(curation_obligation) != CURATION_OBLIGATION_FIELDS
+        or type(curation_obligation.get("pending")) is not bool
+    ):
+        fail("queue curation_obligation must use the closed schema")
+    curation_pending = curation_obligation["pending"]
+    obligation_provenance = curation_obligation.get("provenance")
+    if (
+        not isinstance(obligation_provenance, dict)
+        or set(obligation_provenance) != CURATION_OBLIGATION_PROVENANCE_FIELDS
+    ):
+        fail("curation_obligation.provenance must use the closed schema")
+    require_nonempty_string(
+        obligation_provenance.get("opened_by_role"),
+        "curation_obligation.provenance.opened_by_role",
+    )
+    require_nonempty_string(
+        obligation_provenance.get("opening_reference"),
+        "curation_obligation.provenance.opening_reference",
+    )
+    obligation_subject_ids = obligation_provenance.get("subject_ids")
+    if (
+        not isinstance(obligation_subject_ids, list)
+        or not obligation_subject_ids
+        or not all(isinstance(item_id, str) and item_id.strip() for item_id in obligation_subject_ids)
+        or len(obligation_subject_ids) != len(set(obligation_subject_ids))
+    ):
+        fail("curation_obligation provenance requires unique nonblank subject_ids")
+    if curation_pending:
+        require_nonempty_string(curation_obligation.get("trigger"), "curation_obligation.trigger")
+        if curation_obligation.get("resolution") is not None:
+            fail("pending curation_obligation cannot carry a resolution")
+        if (
+            obligation_provenance.get("resolved_by_role") is not None
+            or obligation_provenance.get("resolution_reference") is not None
+        ):
+            fail("pending curation_obligation cannot carry resolution provenance")
+        for subject_id in obligation_subject_ids:
+            if subject_id not in curation_obligation["trigger"]:
+                fail("pending curation_obligation trigger must name every subject_id")
+    else:
+        if curation_obligation.get("trigger") is not None:
+            fail("resolved curation_obligation cannot retain a pending trigger")
+        require_nonempty_string(curation_obligation.get("resolution"), "curation_obligation.resolution")
+        if obligation_provenance.get("resolved_by_role") != "Glyph Work-Order Curator":
+            fail("resolved curation_obligation requires Glyph Work-Order Curator provenance")
+        require_nonempty_string(
+            obligation_provenance.get("resolution_reference"),
+            "curation_obligation.provenance.resolution_reference",
+        )
+        for subject_id in obligation_subject_ids:
+            if subject_id not in curation_obligation["resolution"]:
+                fail("resolved curation_obligation resolution must name every subject_id")
 
     planner_packet = payload.get("planner_packet")
     if not isinstance(planner_packet, dict):
@@ -1993,6 +2316,7 @@ def check_queue_contract() -> None:
     check_completion_correspondence(payload, items)
     check_planner_packet_correspondence_self_test()
     check_new_planner_receipt_self_test()
+    check_event_curation_resolution_self_test()
     ids = [item["id"] for item in items]
     if len(ids) != len(set(ids)):
         fail("queue work-order IDs must be unique")
@@ -2017,6 +2341,58 @@ def check_queue_contract() -> None:
     }
     computed["effective_authorized_runway"] = (
         computed["immediate_ready"] + computed["mechanically_activatable_preauthorized"]
+    )
+
+    event_subject_kinds = {
+        item["id"]: item["status"]
+        for item in items
+        if item["status"] in {"INVALIDATED_PREAUTHORIZED", "HARDWARE_FAILED"}
+    }
+    event_subject_ids = set(event_subject_kinds)
+    packet_subject_ids = (
+        {
+            survivor["candidate_id"]
+            for survivor in planner_packet.get("survivors", [])
+        }
+        if curator_review_required
+        else set()
+    )
+    expected_resolution_reference: str | None = None
+    receipt_subject_ids: set[str] = set()
+    event_receipt_subject_ids: set[str] = set()
+    if packet_state != "ABSENT":
+        expected_opening_reference = (
+            f"git-json:{planner_packet['planning_commit']}:{planner_packet['packet_path']}"
+        )
+        if (
+            obligation_provenance["opened_by_role"] == "Glyph Portfolio Planner"
+            and obligation_provenance["opening_reference"] != expected_opening_reference
+        ):
+            fail("Planner-opened curation obligation must reference the immutable Planner packet")
+        expected_resolution_reference = (
+            f"git-json:{planner_packet['curation_commit']}:"
+            "docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+        )
+        receipt = _curator_receipt(planner_packet)
+        if receipt is not None:
+            receipt_subject_ids = {
+                entry["candidate_id"] for entry in receipt["initial_reviewed_dispositions"]
+            }
+    if event_subject_ids and not curation_pending:
+        event_receipt_subject_ids = _event_curation_resolution_subjects(
+            obligation_provenance["resolution_reference"],
+            obligation_provenance["opening_reference"],
+            event_subject_kinds,
+        )
+    validate_curation_event_binding(
+        pending=curation_pending,
+        subject_ids=set(obligation_subject_ids),
+        event_subject_ids=event_subject_ids,
+        packet_subject_ids=packet_subject_ids,
+        resolution_reference=obligation_provenance["resolution_reference"],
+        expected_resolution_reference=expected_resolution_reference,
+        receipt_subject_ids=receipt_subject_ids,
+        event_receipt_subject_ids=event_receipt_subject_ids,
     )
 
     runway = payload.get("runway")
@@ -2044,16 +2420,31 @@ def check_queue_contract() -> None:
     if unknown_signals:
         fail("queue contains unknown signals: " + ", ".join(sorted(unknown_signals)))
     global_wait = payload.get("global_evidence_wait")
-    _validate_global_wait(global_wait, planner_packet, packet_state, computed, signals)
+    _validate_global_wait(
+        global_wait,
+        planner_packet,
+        packet_state,
+        computed,
+        signals,
+        curation_pending=curation_pending,
+    )
+
+    if curator_review_required and not curation_pending:
+        fail("curator_review_required packet requires a pending curation_obligation")
+    if (
+        not curation_pending
+        and computed["effective_authorized_runway"] == 0
+        and candidate_count > 0
+        and packet_state in {"FRESH", "PARTIALLY_CONSUMED"}
+        and not global_wait["supported"]
+    ):
+        fail("completed zero-runway curation must consume gated survivors before publication")
 
     expected_liveness = derive_liveness(
         effective_runway=computed["effective_authorized_runway"],
         target_runway=target_runway,
         packet_state=packet_state,
-        substantive_candidate_exists=bool(candidate_count),
-        invalidated_authorization_exists=bool(computed["invalidated_preauthorized"]),
-        failed_hardware_exists=bool(computed["hardware_failed"]),
-        curator_review_required=curator_review_required,
+        curation_pending=curation_pending,
         global_wait_supported=global_wait["supported"],
     )
     actual_primary = set(signals) & PRIMARY_LIVENESS_SIGNALS
@@ -2084,27 +2475,97 @@ def check_queue_contract() -> None:
     check_current_prose_mirrors()
 
     adversarial_cases = (
-        (0, 4, "CONSUMED", True, False, False, False, False, "PLANNING_REQUIRED"),
-        (0, 4, "FRESH", True, False, False, True, False, "CURATION_REQUIRED"),
-        (0, 4, "FRESH", False, False, False, False, True, "GLOBAL_EVIDENCE_WAIT_SUPPORTED"),
-        (0, 4, "ABSENT", False, True, False, False, False, "CURATION_REQUIRED"),
-        (0, 4, "ABSENT", False, False, True, False, False, "CURATION_REQUIRED"),
-        (1, 4, "CONSUMED", False, False, False, False, False, "RUNWAY_LOW"),
-        (4, 4, "CONSUMED", False, False, False, False, False, "RUNWAY_OK"),
+        (0, 4, "CONSUMED", False, False, "PLANNING_REQUIRED"),
+        (0, 4, "FRESH", True, False, "CURATION_REQUIRED"),
+        (0, 4, "FRESH", True, True, "CURATION_REQUIRED"),
+        (0, 4, "FRESH", False, True, "GLOBAL_EVIDENCE_WAIT_SUPPORTED"),
+        (1, 4, "CONSUMED", False, False, "RUNWAY_LOW"),
+        (1, 4, "CONSUMED", True, False, "RUNWAY_LOW"),
+        (4, 4, "CONSUMED", False, False, "RUNWAY_OK"),
+        (4, 4, "CONSUMED", True, False, "RUNWAY_OK"),
     )
-    for effective, target, state, candidate, invalidated, failed, review, wait, expected in adversarial_cases:
+    for effective, target, state, pending, wait, expected in adversarial_cases:
         actual = derive_liveness(
             effective_runway=effective,
             target_runway=target,
             packet_state=state,
-            substantive_candidate_exists=candidate,
-            invalidated_authorization_exists=invalidated,
-            failed_hardware_exists=failed,
-            curator_review_required=review,
+            curation_pending=pending,
             global_wait_supported=wait,
         )
         if actual != expected:
             fail(f"liveness derivation returned {actual}, expected {expected}")
+
+    validate_curation_event_binding(
+        pending=True,
+        subject_ids={"GP-TEST-001"},
+        event_subject_ids={"GP-TEST-001"},
+        packet_subject_ids=set(),
+        resolution_reference=None,
+        expected_resolution_reference=None,
+        receipt_subject_ids=set(),
+        event_receipt_subject_ids=set(),
+    )
+    validate_curation_event_binding(
+        pending=False,
+        subject_ids={"GP-TEST-001"},
+        event_subject_ids={"GP-TEST-001"},
+        packet_subject_ids=set(),
+        resolution_reference="post-event-receipt",
+        expected_resolution_reference="old-packet-receipt",
+        receipt_subject_ids=set(),
+        event_receipt_subject_ids={"GP-TEST-001"},
+    )
+    validate_curation_event_binding(
+        pending=False,
+        subject_ids={"GP-PACKET-001"},
+        event_subject_ids=set(),
+        packet_subject_ids=set(),
+        resolution_reference="immutable-packet-receipt",
+        expected_resolution_reference="immutable-packet-receipt",
+        receipt_subject_ids={"GP-PACKET-001"},
+        event_receipt_subject_ids=set(),
+    )
+    for label, fixture in (
+        (
+            "omitted event subject",
+            {
+                "pending": False, "subject_ids": set(),
+                "event_subject_ids": {"GP-TEST-001"}, "packet_subject_ids": set(),
+                "resolution_reference": "immutable-receipt",
+                "expected_resolution_reference": "immutable-receipt",
+                "receipt_subject_ids": {"GP-TEST-001"},
+                "event_receipt_subject_ids": {"GP-TEST-001"},
+            },
+        ),
+        (
+            "stale pre-event packet receipt",
+            {
+                "pending": False, "subject_ids": {"GP-TEST-001"},
+                "event_subject_ids": {"GP-TEST-001"}, "packet_subject_ids": set(),
+                "resolution_reference": "old-packet-receipt",
+                "expected_resolution_reference": "immutable-receipt",
+                "receipt_subject_ids": {"GP-TEST-001"},
+                "event_receipt_subject_ids": set(),
+            },
+        ),
+        (
+            "wrong post-event receipt subject",
+            {
+                "pending": False, "subject_ids": {"GP-TEST-001"},
+                "event_subject_ids": {"GP-TEST-001"}, "packet_subject_ids": set(),
+                "resolution_reference": "post-event-receipt",
+                "expected_resolution_reference": "old-packet-receipt",
+                "receipt_subject_ids": set(),
+                "event_receipt_subject_ids": {"GP-OTHER-001"},
+            },
+        ),
+    ):
+        try:
+            validate_curation_event_binding(**fixture)
+        except FrameworkDocsError:
+            pass
+        else:
+            fail(f"curation obligation adversarial fixture passed: {label}")
 
     activatable_example: dict[str, object] = {
         "status": "PREAUTHORIZED",
@@ -2452,6 +2913,10 @@ def check_revision_two_surface() -> None:
         "Implementation autonomy is not merge autonomy",
         "USER_DECISION_GATED",
         "EVIDENCE_GATED",
+        "A completed Curator run consumes the curation obligation",
+        "must not publish `CURATION_REQUIRED` as its own successor",
+        "a pre-event packet receipt is not resolution authority",
+        "A supported global wait and a pending curation obligation are mutually exclusive",
     ):
         require_phrase("docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md", phrase)
 
@@ -2483,6 +2948,15 @@ def check_revision_two_surface() -> None:
         "Hardware risk alone does not require fresh human approval before candidate implementation",
     ):
         require_phrase("docs/agent_framework/WORK_ORDER_TEMPLATE.md", phrase)
+
+    require_phrase(
+        "docs/agent_framework/CYCLE_STATE_MACHINE.md",
+        "After the Curator records an authenticated resolution",
+    )
+    require_phrase(
+        "docs/agent_framework/SUPERVISOR_CONTRACT.md",
+        "authenticated Curator resolution",
+    )
 
     for phrase in (
         "Candidate Git SHA:",
@@ -2841,6 +3315,7 @@ def check_task_configurations() -> None:
             "Do not refuse an otherwise complete READY H2/H3 item solely because it changes active firmware",
             "No fresh human approval is required solely because the authorized candidate is H2/H3",
             "return CURATION_REQUIRED and name the exact user/evidence decision gate",
+            "curation_obligation.pending: true",
             "Implementation autonomy is not merge autonomy",
         ),
         "Glyph Work-Order Curator": (
@@ -2859,6 +3334,10 @@ def check_task_configurations() -> None:
             "do not infer user intent or invent undocumented Glyph behavior",
             "USER_DECISION_GATED, EVIDENCE_GATED",
             "physical exact-snapshot PASS remains mandatory before merge",
+            "Never make Curator the next actor after a completed Curator run",
+            "immutable Curator receipt covering those exact subjects",
+            "the older packet receipt cannot resolve a later event",
+            "A supported global wait cannot coexist with a pending curation obligation",
         ),
         "Glyph Portfolio Planner": (
             "MANUAL",
@@ -2877,6 +3356,7 @@ def check_task_configurations() -> None:
             "HARDWARE_EVIDENCE_MISMATCH",
             "LOCAL_ACCEPTANCE_PENDING",
             "always add supporting REPAIR_REQUIRED",
+            "Set the canonical `curation_obligation.pending` flag",
             "primary state is CURATION_REQUIRED",
             "separate source-free docs/control-plane snapshot",
             "no runtime source editing",

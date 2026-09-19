@@ -83,11 +83,17 @@ implementation is deferred.
      hardware-pending, and effective runway separately.
    - Return `PLANNING_REQUIRED` for absent/stale/consumed candidate supply.
    - Return `CURATION_REQUIRED` for substantive authorization,
-     reauthorization, or interpretation.
-   - At zero runway, invalidated Preauthorization or failed hardware takes
-     precedence over absent/stale Planner supply and yields primary
-     `CURATION_REQUIRED`; hardware failure also carries supporting
-     `REPAIR_REQUIRED`.
+     reauthorization, or interpretation only while the canonical
+     `curation_obligation.pending` flag is true.
+   - A newly recorded invalidated Preauthorization or failed-hardware event
+     opens that obligation with exact trigger and provenance. At zero runway
+     the pending obligation takes precedence over absent/stale Planner supply
+     and yields primary `CURATION_REQUIRED`; hardware failure also carries
+     supporting `REPAIR_REQUIRED`.
+   - After the Curator records an authenticated resolution, preserve the
+     invalidated/failed item without deriving another Curator cycle from the
+     same evidence. Zero runway then routes to `PLANNING_REQUIRED` unless an
+     independently accepted global wait applies.
    - Treat candidate-local `HARDWARE_TEST_REQUIRED` and `REPAIR_REQUIRED` as
      supporting signals, not the exclusive portfolio liveness state.
 
