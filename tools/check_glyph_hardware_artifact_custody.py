@@ -76,6 +76,30 @@ def main() -> int:
         )
         run_git(repo, "restore", "tracked.txt")
 
+        run_git(repo, "update-index", "--assume-unchanged", "tracked.txt")
+        tracked.write_text("hidden change\n", encoding="utf-8")
+        expect_failure(
+            "assume-unchanged tracked divergence",
+            lambda: require_clean_candidate_checkout(candidate_b, repo),
+        )
+        run_git(repo, "update-index", "--no-assume-unchanged", "tracked.txt")
+        tracked.write_text("candidate B\n", encoding="utf-8")
+        run_git(repo, "update-index", "--skip-worktree", "tracked.txt")
+        tracked.write_text("hidden skip-worktree change\n", encoding="utf-8")
+        expect_failure(
+            "skip-worktree tracked divergence",
+            lambda: require_clean_candidate_checkout(candidate_b, repo),
+        )
+        run_git(repo, "update-index", "--no-skip-worktree", "tracked.txt")
+        tracked.write_text("candidate B\n", encoding="utf-8")
+        run_git(repo, "config", "core.filemode", "false")
+        tracked.chmod(0o755)
+        expect_failure(
+            "core.filemode tracked mode divergence",
+            lambda: require_clean_candidate_checkout(candidate_b, repo),
+        )
+        tracked.chmod(0o644)
+
         expect_failure(
             "missing custody root",
             lambda: verify_preserved(absent_root, CANDIDATE_A, digest),

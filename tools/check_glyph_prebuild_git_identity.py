@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import ast
+import os
 import subprocess
 import tempfile
 from pathlib import Path
+
+from glyph_tracked_worktree_integrity import TrackedWorktreeIntegrityError, tracked_worktree_divergence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,7 +30,11 @@ def load_builder():
         )],
         type_ignores=[],
     )
-    namespace = {"__name__": "builder_contract", "ROOT": BUILDER.parents[1]}
+    namespace = {
+        "__name__": "builder_contract",
+        "__file__": str(BUILDER),
+        "ROOT": BUILDER.parents[1],
+    }
     exec(compile(helper, str(BUILDER), "exec"), namespace)
     return namespace["git_identity"]
 
@@ -81,7 +88,7 @@ def main() -> None:
             return subprocess.CompletedProcess(argv, 0, stdout=stdout, stderr="")
 
     fake = Fake()
-    expect(identity(Path("/repo"), fake) == "abc1234", "fake clean identity changed")
+    expect(identity(Path("/repo"), fake, lambda _root: ()) == "abc1234", "fake clean identity changed")
     expect([call[0] for call in fake.calls] == [
         ["git", "-c", "core.longpaths=true", "rev-parse", "--short", "HEAD"],
         ["git", "-c", "core.longpaths=true", "status", "--porcelain", "--untracked-files=normal"],
@@ -101,7 +108,7 @@ def main() -> None:
         return subprocess.CompletedProcess(argv, 1, stdout="", stderr="failed")
 
     try:
-        identity(Path("/repo"), status_failure)
+        identity(Path("/repo"), status_failure, lambda _root: ())
     except RuntimeError:
         pass
     else:
@@ -116,7 +123,7 @@ def main() -> None:
 
     for bad in ("", "abc\ndef\n", "ABC123\n", "not-hex\n"):
         try:
-            identity(Path("."), Fake(rev=bad))
+            identity(Path("."), Fake(rev=bad), lambda _root: ())
         except RuntimeError:
             pass
         else:
@@ -125,11 +132,100 @@ def main() -> None:
     def fail_runner(argv, **kwargs):
         return subprocess.CompletedProcess(argv, 1, stdout="", stderr="failed")
     try:
-        identity(Path("."), fail_runner)
+        identity(Path("."), fail_runner, lambda _root: ())
     except RuntimeError:
         pass
     else:
         raise AssertionError("accepted failed Git command")
+
+    hidden = new_repo()
+    (hidden / "tracked.txt").write_text("hidden change\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(hidden), "update-index", "--assume-unchanged", "tracked.txt"], check=True)
+    expect(identity(hidden).endswith("-DIRTY"), "assume-unchanged hid tracked bytes")
+    subprocess.run(["git", "-C", str(hidden), "update-index", "--no-assume-unchanged", "tracked.txt"], check=True)
+    (hidden / "tracked.txt").write_text("base\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(hidden), "update-index", "--skip-worktree", "tracked.txt"], check=True)
+    (hidden / "tracked.txt").write_text("skip-worktree change\n", encoding="utf-8")
+    expect(identity(hidden).endswith("-DIRTY"), "skip-worktree hid tracked bytes")
+    subprocess.run(["git", "-C", str(hidden), "update-index", "--no-skip-worktree", "tracked.txt"], check=True)
+    (hidden / "tracked.txt").write_text("base\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(hidden), "config", "core.filemode", "false"], check=True)
+    (hidden / "tracked.txt").chmod(0o755)
+    expect(identity(hidden).endswith("-DIRTY"), "core.filemode hid executable-bit change")
+
+    hidden.chmod(0o755)
+    subprocess.run(["git", "-C", str(hidden), "config", "core.filemode", "true"], check=True)
+    (hidden / "tracked.txt").chmod(0o755)
+    expect(identity(hidden).endswith("-DIRTY"), "owner executable-bit change was missed")
+
+    same_size = new_repo()
+    same_path = same_size / "tracked.txt"
+    previous = same_path.stat()
+    same_path.write_text("same\n", encoding="utf-8")
+    os.utime(same_path, ns=(previous.st_atime_ns, previous.st_mtime_ns))
+    expect(identity(same_size).endswith("-DIRTY"), "same-size restored-mtime change was missed")
+
+    missing = new_repo()
+    (missing / "tracked.txt").unlink()
+    try:
+        identity(missing)
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("accepted missing tracked file")
+
+    symlink_repo = new_repo()
+    (symlink_repo / "target").write_text("target\n", encoding="utf-8")
+    (symlink_repo / "link").symlink_to("./target")
+    subprocess.run(["git", "-C", str(symlink_repo), "add", "target", "link"], check=True)
+    subprocess.run(["git", "-C", str(symlink_repo), "-c", "user.name=Glyph", "-c", "user.email=glyph@example.invalid", "commit", "-qm", "symlink"], check=True)
+    expect(not identity(symlink_repo).endswith("-DIRTY"), "clean raw symlink target was rejected")
+    (symlink_repo / "link").unlink()
+    (symlink_repo / "link").symlink_to("target")
+    expect(identity(symlink_repo).endswith("-DIRTY"), "symlink target change was missed")
+    (symlink_repo / "link").unlink()
+    (symlink_repo / "link").symlink_to("./target")
+    raw_link = symlink_repo / "raw-link"
+    os.symlink(b"\xff-target", os.fsencode(raw_link))
+    subprocess.run(["git", "-C", str(symlink_repo), "add", "raw-link"], check=True)
+    subprocess.run(["git", "-C", str(symlink_repo), "commit", "-qm", "raw symlink"], check=True)
+    expect(not identity(symlink_repo).endswith("-DIRTY"), "clean non-UTF-8 symlink target was rejected")
+    raw_link.unlink()
+    os.symlink(b"\xfe-target", os.fsencode(raw_link))
+    expect(identity(symlink_repo).endswith("-DIRTY"), "non-UTF-8 symlink target change was missed")
+
+    conflicted = new_repo()
+    subprocess.run(["git", "-C", str(conflicted), "switch", "-c", "feature"], check=True)
+    (conflicted / "tracked.txt").write_text("feature\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(conflicted), "commit", "-qam", "feature"], check=True)
+    subprocess.run(["git", "-C", str(conflicted), "switch", "main"], check=True)
+    (conflicted / "tracked.txt").write_text("main\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(conflicted), "commit", "-qam", "main"], check=True)
+    subprocess.run(["git", "-C", str(conflicted), "merge", "feature"], check=False)
+    try:
+        identity(conflicted)
+    except TrackedWorktreeIntegrityError:
+        pass
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("accepted unmerged tracked index")
+
+    gitlink = new_repo()
+    nested = gitlink / "nested"
+    nested.mkdir()
+    subprocess.run(["git", "-C", str(nested), "init", "-q"], check=True)
+    (nested / "nested.txt").write_text("nested\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(nested), "add", "nested.txt"], check=True)
+    subprocess.run(["git", "-C", str(nested), "-c", "user.name=Glyph", "-c", "user.email=glyph@example.invalid", "commit", "-qm", "nested"], check=True)
+    subprocess.run(["git", "-C", str(gitlink), "add", "nested"], check=True)
+    subprocess.run(["git", "-C", str(gitlink), "-c", "user.name=Glyph", "-c", "user.email=glyph@example.invalid", "commit", "-qm", "gitlink"], check=True)
+    try:
+        identity(gitlink)
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("accepted unsupported gitlink entry")
 
     print("pre-build Git identity contract: PASS")
 
