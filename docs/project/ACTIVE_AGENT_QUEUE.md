@@ -130,7 +130,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-009",
       "title": "Detect hidden-dirty source before build and custody",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-009-hidden-dirty-source",
       "objective": "Make firmware-version identity and local artifact-custody clean-snapshot checks detect tracked working bytes or modes concealed by Git index flags or stat optimizations.",
       "why_this_matters": "A changed tracked source can currently be hidden by assume-unchanged, skip-worktree, core.filemode=false, or restored stat data, causing a clean firmware identity and allowing custody of an artifact whose checkout is not the recorded candidate.",
@@ -172,7 +172,27 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave the canonical builder and custody tools unchanged if tracked-entry proof, clean build, or review fails; preserve all existing artifacts and evidence.",
       "status_documentation_updates": "Document only the hidden-dirty detection and existing DIRTY-versus-reject distinction; publish DONE only after reviewed build proof and host gates.",
-      "done_evidence": "NOT_DONE: publish completion only after focused implementation, fresh independent review, required validation, and canonical integration.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "36e9d5f6782011b560a761c9e26b1b4937d1298f",
+        "reviewed_implementation_sha": "797113740c2a601e6231642140863b26dac4aa1e",
+        "prior_canonical_integration_sha": "7f9b097ba0c840afbc5f4d104dfa1756a3dce97c",
+        "reviewed_changed_paths": [
+          "builder_scripts/arduino_pico.py",
+          "docs/runtime_config/fixtures/build_input_provenance_inventory.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "tools/check_glyph_docs_agent_surface.py",
+          "tools/check_glyph_hardware_artifact_custody.py",
+          "tools/check_glyph_prebuild_git_identity.py",
+          "tools/glyph_hardware_artifact_custody.py",
+          "tools/glyph_tracked_worktree_integrity.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-PROV-009 implementation against 36e9d5f6782011b560a761c9e26b1b4937d1298f. The review repaired and rechecked raw non-UTF-8 symlink target bytes, all executable-mode bits, direct HEAD/index/worktree correspondence, fail-closed edge cases, and scope boundaries. No firmware/runtime, build-selector, artifact-policy, hardware, device, correspondence, or reproducibility claim changed.",
+        "validation_provenance": "Focused pre-build identity and artifact custody checkers PASS, including staged/unstaged/untracked/ignored-only, assume-unchanged, skip-worktree, same-size/restored-mtime, core.filemode, all executable bits, symlink/type, missing, unmerged, unsupported gitlink, and non-UTF-8 symlink cases. Build-input provenance, manifest, census199, health37, framework, navigation, agent-surface, Python syntax, and diff gates PASS. Canonical .venv/bin/python -m platformio run -e glyph_mk6 SUCCESS with RAM 78720/262144 bytes and flash 383800/1568768 bytes. Full aggregate remains FAIL/UNAVAILABLE in preflight on local ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/; clean 36e9d5f baseline reproduces PASS, so no aggregate-green claim. Feature ref and canonical integration were live-verified before this separate status publication."
+      },
       "stop_conditions": [
         "Hidden divergence is silently treated as clean by either consumer.",
         "Builder changes hidden divergence from the existing -DIRTY result to an unconditional failure absent ambiguity.",
@@ -3654,11 +3674,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-009","GP-VAL-016","GP-CONFIG-007","GP-VAL-017","GP-PERSIST-002"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-016","GP-CONFIG-007","GP-VAL-017","GP-PERSIST-002"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, GP-PERSIST-002; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-016, GP-CONFIG-007, GP-VAL-017, GP-PERSIST-002; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3666,7 +3686,7 @@ interpretation of
 Immediate Ready, Preauthorized, invalidated, hardware-pending, effective and
 target runway, primary liveness, and global evidence-wait support.
 
-Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry the current counts and RUNWAY_OK liveness; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work; GP-PROV-009 is now DONE with strict completion correspondence. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry the current counts and RUNWAY_OK liveness; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
