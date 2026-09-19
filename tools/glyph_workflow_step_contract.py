@@ -116,8 +116,18 @@ def parse_jobs(text: str) -> dict[str, Job]:
                         else:
                             block: list[str] = []
                             i += 1
-                            while i < len(lines) and (not lines[i].strip() or lines[i].startswith("      ")):
-                                block.append(lines[i][6:] if lines[i].startswith("      ") else "")
+                            while i < len(lines):
+                                block_line = lines[i]
+                                if not block_line.strip():
+                                    block.append("")
+                                    i += 1
+                                    continue
+                                indentation = len(block_line) - len(block_line.lstrip(" "))
+                                if indentation <= 6:
+                                    break
+                                if indentation < 8:
+                                    raise WorkflowStepError("malformed block scalar indentation")
+                                block.append(block_line[8:])
                                 i += 1
                             step.run = "\n".join(block)
                             continue
@@ -184,6 +194,8 @@ def validate_current_workflow(text: str, *, validation_job: str, aggregate: str,
     ]
     if len(matches) != 1:
         raise WorkflowStepError("aggregate is not exactly one executable validation step")
+    if executable_lines(matches[0].run) != [aggregate] or matches[0].fields != {"run"}:
+        raise WorkflowStepError("validation step must contain exactly the aggregate command")
     for job in jobs.values():
         if job.continue_on_error is not None:
             raise WorkflowStepError(f"permissive failure policy in {job.name}")

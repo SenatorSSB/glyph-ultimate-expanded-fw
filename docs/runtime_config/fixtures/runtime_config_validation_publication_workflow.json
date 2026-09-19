@@ -169,6 +169,61 @@
       "id": "conditional_validation_or_publication",
       "old": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json",
       "new": "    - name: Run current runtime-config validation\n      if: failure()\n      run: python3 tools/run_glyph_runtime_config_validation.py --json"
+    },
+    {
+      "id": "trailing_success_mask",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: |\n        python3 tools/run_glyph_runtime_config_validation.py --json\n        true"
+    },
+    {
+      "id": "trailing_exit_success_mask",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: |\n        python3 tools/run_glyph_runtime_config_validation.py --json\n        exit 0"
+    },
+    {
+      "id": "same_indent_sibling_shell",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: |\n        python3 tools/run_glyph_runtime_config_validation.py --json\n      shell: bash {0}"
+    },
+    {
+      "id": "explicit_shell",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: python3 tools/run_glyph_runtime_config_validation.py --json\n      shell: bash"
+    },
+    {
+      "id": "explicit_working_directory",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: python3 tools/run_glyph_runtime_config_validation.py --json\n      working-directory: ."
+    },
+    {
+      "id": "explicit_env",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: python3 tools/run_glyph_runtime_config_validation.py --json\n      env: FOO=bar"
+    },
+    {
+      "id": "explicit_uses",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: python3 tools/run_glyph_runtime_config_validation.py --json\n      uses: actions/checkout@v4"
+    },
+    {
+      "id": "shell_function",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: |\n        check() { python3 tools/run_glyph_runtime_config_validation.py --json; }\n        check"
+    },
+    {
+      "id": "heredoc_control_flow",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: |\n        cat <<EOF\n        python3 tools/run_glyph_runtime_config_validation.py --json\n        EOF"
+    },
+    {
+      "id": "multiline_control_flow",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: |\n        if true; then\n          python3 tools/run_glyph_runtime_config_validation.py --json\n        fi"
+    },
+    {
+      "id": "malformed_block_indentation",
+      "old": "      run: python3 tools/run_glyph_runtime_config_validation.py --json",
+      "new": "      run: |\n       python3 tools/run_glyph_runtime_config_validation.py --json"
     }
   ]
 }
