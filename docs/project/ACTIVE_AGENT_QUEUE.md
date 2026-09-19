@@ -128,8 +128,9 @@ Git, but it is not current candidate supply or implementation authority.
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
-    "signals": [
-    "PLANNING_REQUIRED"
+  "signals": [
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
