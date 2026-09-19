@@ -2470,7 +2470,7 @@
       },
       "checker_id": "coordinate_native_runtime_profile_contract",
       "defines_main": true,
-      "file_size_bytes": 82726,
+      "file_size_bytes": 81864,
       "hard_coded_branch_like_strings": [
         "accepted_evidence",
         "accepted_evidence.",
@@ -2499,7 +2499,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1705,
+      "line_count": 1692,
       "parse_error": null,
       "path": "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
       "potential_branch_identity_signals": [
@@ -2608,7 +2608,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "c5fd4443530a32086b3a732fc974dd2d2f4d0192ba87d95faa3ba24281d6eaef",
+      "sha256": "f5782b407dd735189cdd221171158a763142f25cd520e5f2f8858ff3b5d40bb2",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5002,7 +5002,7 @@
       },
       "checker_id": "generated_source_owned_artifact_install",
       "defines_main": true,
-      "file_size_bytes": 26533,
+      "file_size_bytes": 25576,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5028,7 +5028,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 605,
+      "line_count": 590,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_artifact_install.py",
       "potential_branch_identity_signals": [
@@ -5113,7 +5113,7 @@
         "runtime_config_docs",
         "source_owned_generator_modes"
       ],
-      "sha256": "b3ffe7a4afaee8aa4f3dc2aed8d218215a06f5f9b296db7fe569a9256578b714",
+      "sha256": "bc7c3d1ac5e3801ad570127f79c2fceda0f4532499fa7071e1b29e186862ce9c",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -11358,7 +11358,7 @@
       },
       "checker_id": "source_owned_candidate_generation",
       "defines_main": true,
-      "file_size_bytes": 17269,
+      "file_size_bytes": 17523,
       "hard_coded_branch_like_strings": [
         "--candidate-branch",
         "branch",
@@ -11383,7 +11383,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 345,
+      "line_count": 349,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_candidate_generation.py",
       "potential_branch_identity_signals": [
@@ -11436,7 +11436,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "ba726cd15efd7449a0df490126a53b73d4bdd897ba1fc6dd6c5e9a2cc5fe92c5",
+      "sha256": "2e84b5115da692ff0671d0831e828445018950e8d015ab7c65dfc0129908d878",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,

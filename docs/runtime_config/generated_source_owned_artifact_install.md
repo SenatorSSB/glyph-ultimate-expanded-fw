@@ -76,9 +76,11 @@ The checker regenerates the example output from
 `docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`
 and compares it to the installed inert source artifact. The installed artifact
 is deterministic from the example input.
-The install wrapper checker also exercises the bridge flow:
-coordinate-native profile fixture -> layout-spec converter -> source-owned
-generator -> dry-run install output -> expected source-owned alias text.
+The install wrapper checker also exercises both boundaries: a generic
+coordinate-native profile fixture is rejected by the bridge with the stable
+fail-closed reason, while the direct layout-spec fixture feeds the
+source-owned generator -> dry-run install output -> expected source-owned
+alias text.
 
 ## Active-Behavior Boundary
 

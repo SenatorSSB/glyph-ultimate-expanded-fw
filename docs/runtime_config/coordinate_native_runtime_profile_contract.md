@@ -126,10 +126,11 @@ The contract fixture and positive example fixtures carry annotated
 machine-readable examples that show the future input shape, the expected
 selection result, and the trace markers a later offline resolver should emit.
 
-An offline bridge converter may also transform a validated strict subset of
-this profile into the inert source-owned layout-spec packet used by the
-generator lane. That bridge is docs/tools only and does not change active
-firmware behavior.
+An offline bridge converter validates this profile but fails closed for every
+generic profile until an explicit profile-to-table correspondence is
+source-authorized. The direct source-owned layout-spec generator remains
+separate; both paths are docs/tools only and do not change active firmware
+behavior.
 
 The source-owned layout-spec bridge lives in
 `tools/convert_coordinate_native_profile_to_source_owned_spec.py`, and the

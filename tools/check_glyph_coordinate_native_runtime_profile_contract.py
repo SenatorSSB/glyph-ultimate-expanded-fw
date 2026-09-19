@@ -15,7 +15,6 @@ import json
 import re
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -53,7 +52,7 @@ OFFLINE_PIPELINE_PROFILE_FIXTURE = Y2_FIXTURE
 CONVERTER_TOOL = REPO_ROOT / "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
 BRIDGE_POSITIVE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge.example.json"
 BRIDGE_NEGATIVE_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_source_owned_layout_spec_bridge_invalid_extra_field.json"
-CONVERTER_POSITIVE_FIXTURES: tuple[Path, ...] = (
+CONVERTER_PROFILE_FIXTURES: tuple[Path, ...] = (
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_9way_modifier_table.example.json",
     REPO_ROOT / "docs/runtime_config/fixtures/coordinate_native_runtime_profile_minimal.example.json",
     BRIDGE_POSITIVE_FIXTURE,
@@ -1215,48 +1214,36 @@ def run_converter(profile_path: Path) -> tuple[int, str, str]:
 
 
 def validate_layout_spec_bridge() -> None:
-    expected_layout_spec = load_json_object(LAYOUT_SPEC_FIXTURE)
     expected_generated_output = GENERATED_OUTPUT_FIXTURE.read_text(encoding="utf-8").rstrip("\n")
-    for profile_path in CONVERTER_POSITIVE_FIXTURES:
-        profile = load_json_object(profile_path)
-        validate_profile_fixture(profile, label=rel(profile_path))
-        exit_code, stdout, stderr = run_converter(profile_path)
-        if exit_code != 0:
-            fail(f"converter rejected supported fixture {rel(profile_path)}: {stderr.strip() or stdout.strip()}")
-        try:
-            emitted_layout_spec = json.loads(stdout)
-        except json.JSONDecodeError as exc:
-            fail(f"converter output for {rel(profile_path)} was not valid JSON: {exc}")
-        if emitted_layout_spec != expected_layout_spec:
-            fail(f"converter output for {rel(profile_path)} drifted from the inert layout-spec fixture")
-        with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json", delete=False) as temp_file:
-            temp_path = Path(temp_file.name)
-            temp_file.write(json.dumps(emitted_layout_spec, indent=2))
-            temp_file.write("\n")
-        try:
-            generated = subprocess.run(
-                [sys.executable, str(REPO_ROOT / "tools/generate_source_owned_runtime_config.py"), "--emit-from-layout-spec", str(temp_path)],
-                cwd=REPO_ROOT,
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-        finally:
-            temp_path.unlink(missing_ok=True)
-        if generated.returncode != 0:
-            fail(
-                f"generator rejected converter output for {rel(profile_path)}: "
-                f"{generated.stderr.strip() or generated.stdout.strip()}"
-            )
-        if generated.stdout.rstrip("\n") != expected_generated_output:
-            fail(f"generator output for {rel(profile_path)} drifted from the inert C++ fixture")
+    direct_generator = subprocess.run(
+        [
+            sys.executable,
+            str(REPO_ROOT / "tools/generate_source_owned_runtime_config.py"),
+            "--emit-from-layout-spec",
+            str(LAYOUT_SPEC_FIXTURE),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if direct_generator.returncode != 0:
+        fail(
+            "direct source-owned layout-spec generator rejected the authorized fixture: "
+            f"{direct_generator.stderr.strip()}"
+        )
+    if direct_generator.stdout.rstrip("\n") != expected_generated_output:
+        fail("direct source-owned layout-spec generator output drifted from the inert C++ fixture")
 
-    for profile_path in CONVERTER_NEGATIVE_FIXTURES:
+    for profile_path in CONVERTER_PROFILE_FIXTURES + CONVERTER_NEGATIVE_FIXTURES:
         exit_code, stdout, stderr = run_converter(profile_path)
         if exit_code == 0:
-            fail(f"converter unexpectedly accepted unsupported fixture {rel(profile_path)}")
-        if not stderr.strip() and not stdout.strip():
+            fail(f"converter unexpectedly accepted generic profile {rel(profile_path)}")
+        message = stderr.strip() or stdout.strip()
+        if not message:
             fail(f"converter rejection for {rel(profile_path)} did not include an error message")
+        if profile_path in CONVERTER_PROFILE_FIXTURES and "no source-authorized profile-to-layout mapping exists" not in message:
+            fail(f"converter rejection for {rel(profile_path)} did not use the stable fail-closed reason")
 
 
 def validate_offline_pipeline() -> None:
@@ -1637,7 +1624,7 @@ def main() -> int:
     if args.check_layout_spec_bridge:
         validate_layout_spec_bridge()
         print("glyph_coordinate_native_runtime_profile_contract: LAYOUT-SPEC BRIDGE PASS")
-        for path in CONVERTER_POSITIVE_FIXTURES + CONVERTER_NEGATIVE_FIXTURES:
+        for path in CONVERTER_PROFILE_FIXTURES + CONVERTER_NEGATIVE_FIXTURES:
             print(f"- {rel(path)}")
         print(f"- layout spec fixture: {rel(LAYOUT_SPEC_FIXTURE)}")
         print(f"- generated output fixture: {rel(GENERATED_OUTPUT_FIXTURE)}")

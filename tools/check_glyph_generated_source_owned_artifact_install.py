@@ -418,22 +418,10 @@ def validate_bridge_install_workflow(installed_artifacts: list[str]) -> None:
         text=True,
         check=False,
     )
-    if bridge_completed.returncode != 0:
-        fail("bridge converter failed on source-owned layout-spec fixture: " + bridge_completed.stderr.strip())
-    try:
-        bridge_layout_spec = json.loads(bridge_completed.stdout)
-    except json.JSONDecodeError as exc:
-        fail(f"bridge converter did not emit JSON: {exc}")
-    layout_spec_payload = load_json_object(REPO_ROOT / LAYOUT_SPEC_FIXTURE)
-    if bridge_layout_spec != layout_spec_payload:
-        fail("bridge converter output must match the declarative layout-spec packet")
-    expected_layout_spec = layout_spec_payload.get("layout_spec")
-    if not isinstance(expected_layout_spec, dict):
-        fail("layout spec fixture must contain a nested layout_spec object")
-    if expected_layout_spec.get("layout_spec_kind") != "generated_source_owned_layout_spec":
-        fail("layout spec fixture must carry the generated source-owned layout spec")
-    if expected_layout_spec.get("layout_name") != "current_source_owned_baseline_layout":
-        fail("bridge converter output must target the current source-owned baseline layout")
+    if bridge_completed.returncode == 0:
+        fail("bridge converter unexpectedly emitted a source-owned layout-spec packet")
+    if "no source-authorized profile-to-layout mapping exists" not in bridge_completed.stderr:
+        fail("bridge converter rejection did not use the stable fail-closed reason")
 
     with tempfile.TemporaryDirectory() as temp_name:
         temp_dir = Path(temp_name)
@@ -447,7 +435,7 @@ def validate_bridge_install_workflow(installed_artifacts: list[str]) -> None:
             check=False,
         )
         if generated_completed.returncode != 0:
-            fail("generator failed on bridge-derived layout spec: " + generated_completed.stderr.strip())
+            fail("direct generator failed on authorized layout spec: " + generated_completed.stderr.strip())
 
         generated_output_path.write_text(generated_completed.stdout, encoding="utf-8")
         dry_run_layout_spec = subprocess.run(
@@ -487,7 +475,7 @@ def validate_bridge_install_workflow(installed_artifacts: list[str]) -> None:
             fail("installer dry-run output must match generator output for generated-output input")
 
         if generated_completed.stdout != read_required(REPO_ROOT / installed_artifacts[0]):
-            fail("bridge workflow output must match the installed inert source artifact")
+            fail("direct layout-spec workflow output must match the installed inert source artifact")
 
 
 def validate_remaining_writer_boundaries() -> None:
@@ -534,11 +522,8 @@ def validate_remaining_writer_boundaries() -> None:
             text=True,
             check=False,
         )
-        if aliased_temp_root:
-            if bridge.returncode == 0 or bridge_output.exists():
-                fail("coordinate-native bridge accepted an aliased temporary-root output")
-        elif bridge.returncode != 0 or not bridge_output.exists():
-            fail("coordinate-native bridge did not write a safe isolated output")
+        if bridge.returncode == 0 or bridge_output.exists():
+            fail("coordinate-native bridge did not fail closed before writing output")
         for rejected in (REPO_ROOT / "AGENTS.md", REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"):
             result = subprocess.run(
                 [

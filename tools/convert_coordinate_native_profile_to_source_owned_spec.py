@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Convert a validated coordinate-native runtime profile into the inert source-owned layout spec.
+"""Reject uncorresponded coordinate-native profiles before generation.
 
-Offline tooling only. This bridge rejects unsupported fields and semantics
-explicitly, preserves deterministic ordering, emits the canonical
-source-owned layout-spec fixture, and does not implement runtime-loaded
-config, WebSerial/device write, persistent storage, or active firmware
-behavior.
+Offline tooling only. The coordinate-native contract remains design-only until
+an explicit profile-to-table correspondence is source-authorized. This bridge
+therefore validates the contract and then fails closed for every generic
+profile; the direct source-owned layout-spec generator remains the only path
+that emits the inert layout-spec packet. No runtime-loaded config,
+WebSerial/device write, persistent storage, or active firmware behavior is
+implemented.
 """
 
 from __future__ import annotations
@@ -25,7 +27,6 @@ from check_glyph_coordinate_native_runtime_profile_contract import (
 )
 
 
-LAYOUT_SPEC_FIXTURE = REPO_ROOT / "docs/runtime_config/fixtures/generated_source_owned_layout_spec.json"
 EXPECTED_BRANCH = "runtime-config-coordinate-native-selection-semantics"
 BRIDGE_TOP_LEVEL_KEYS = {
     "schema_version",
@@ -149,9 +150,6 @@ OUTPUT_SHAPE_KEYS = {
     "trace_item_fields",
     "explanation_field",
 }
-EXPECTED_LAYOUT_SPEC = load_json_object(LAYOUT_SPEC_FIXTURE)
-
-
 class CoordinateNativeRuntimeProfileBridgeError(Exception):
     """Raised when the coordinate-native bridge converter rejects input."""
 
@@ -584,7 +582,10 @@ def validate_bridge_profile(profile: dict[str, Any], *, label: str) -> None:
 
 def convert_profile(profile: dict[str, Any], *, label: str) -> dict[str, Any]:
     validate_bridge_profile(profile, label=label)
-    return EXPECTED_LAYOUT_SPEC
+    fail(
+        "no source-authorized profile-to-layout mapping exists for "
+        f"{label}; coordinate-native conversion is fail-closed"
+    )
 
 
 def convert_profile_file(profile_path: Path, output_path: Path | None = None) -> str:

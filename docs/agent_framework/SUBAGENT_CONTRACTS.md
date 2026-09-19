@@ -375,3 +375,29 @@ record, not evidence of a passing review.
   or any firmware/protocol/persistence/recovery/hardware behavior change.
 - return format: findings first; exact control-flow correspondence; harness
   seams; risks; invalidation conditions.
+
+## Implementation Supervisor cycle — GP-SRC-007 (2026-09-19)
+
+- guidance applicable: yes; GP-SRC-007 is a complete H1 READY work order and
+  repository mutation requires bounded delegation plus fresh independent review.
+- capability discovery: complete available runtime tool catalog inspected;
+  native internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: Darwin, bounded read-only source-authority specialist; inspect
+  the coordinate-native converter, bridge fixtures/checker, direct generator
+  path, and the exact fail-closed scope.
+- reviewer: fresh independent validator reviewer after implementation; inspect
+  the exact GP-SRC-007 diff, fail-closed corpus, direct generator regression,
+  non-claims, manifest/census/health wiring, and required focused gates.
+- allowed specialist files: the converter, coordinate-native contract checker,
+  bridge fixtures/docs, generated source-owned layout-spec generator path, and
+  directly relevant contracts.
+- forbidden specialist actions: edits, commits, pushes, builds, device/config
+  access, runtime/protocol/persistence/hardware decisions, and network
+  dependency resolution.
+- stop conditions: accepted profile still emits the fixed packet, direct
+  layout-spec generation changes, a positive mapping or ownership claim is
+  inferred, scope expands into active source/runtime/device behavior, or a
+  required checker fails.
+- return format: findings first; exact source correspondence; focused checks;
+  risks; invalidation conditions.
