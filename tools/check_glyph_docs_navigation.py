@@ -155,7 +155,7 @@ def main() -> int:
             "coordinate_native_runtime_profile_contract.json",
             "offline dry-run evaluator",
             "Current Agentic Operating State",
-            "PLANNING_REQUIRED",
+            "RUNWAY_OK",
             "CUSTOM_RUNNER_NOT_REQUIRED",
             "retired official-configurator historical evidence",
             "tools/check_glyph_official_configurator_validation.py",
