@@ -5922,7 +5922,7 @@
       },
       "checker_id": "hardware_artifact_custody",
       "defines_main": true,
-      "file_size_bytes": 7589,
+      "file_size_bytes": 8309,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate-repo",
@@ -5937,7 +5937,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 205,
+      "line_count": 219,
       "parse_error": null,
       "path": "tools/check_glyph_hardware_artifact_custody.py",
       "potential_branch_identity_signals": [
@@ -5953,9 +5953,11 @@
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_hardware_artifact_custody",
-      "referenced_repository_path_prefixes": [],
+      "referenced_repository_path_prefixes": [
+        "src/ignored.cpp"
+      ],
       "runtime_config_relevance_signals": [],
-      "sha256": "b5368080b77e4dc250a036012507ee97cd3de97e8dcb05a206a74e40c0ea2aaf",
+      "sha256": "ca5055a1c3058a8d001f3500c9e4c878c40552d2f4fdf2e29fc8c8a13a6e28c7",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -9022,14 +9024,14 @@
       },
       "checker_id": "prebuild_git_identity",
       "defines_main": true,
-      "file_size_bytes": 11175,
+      "file_size_bytes": 13547,
       "hard_coded_branch_like_strings": [],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 234,
+      "line_count": 277,
       "parse_error": null,
       "path": "tools/check_glyph_prebuild_git_identity.py",
       "potential_branch_identity_signals": [],
@@ -9037,14 +9039,19 @@
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_prebuild_git_identity",
-      "referenced_repository_path_prefixes": [],
+      "referenced_repository_path_prefixes": [
+        "docs/.github/workflows",
+        "docs/.github/workflows/ghost.yml",
+        "include/ghost.hpp",
+        "src/ghost.cpp"
+      ],
       "runtime_config_relevance_signals": [],
-      "sha256": "35ffa584af9763e01295f3db1fa6beb3396dfbbd51dc8d2c2501d6d341b2e314",
+      "sha256": "bf7656988e92d72740149081d10f4b9a800974ad8d0d23ea5b796020ac4f33d6",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
         "coordinate_native": false,
-        "docs_navigation": false,
+        "docs_navigation": true,
         "generated_source_owned_artifacts": false,
         "hardware_results": false,
         "identity_runtime_tables": false,

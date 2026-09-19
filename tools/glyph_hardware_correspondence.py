@@ -12,20 +12,18 @@ import re
 import stat
 import subprocess
 
+from glyph_tracked_worktree_integrity import (
+    CRITICAL_FILES,
+    CRITICAL_ROOTS,
+    TrackedWorktreeIntegrityError,
+    ignored_critical_worktree_paths,
+)
+
 
 class CorrespondenceError(ValueError):
     """An input is unknown, unsafe, or differs from the tested source snapshot."""
 
 
-CRITICAL_ROOTS = frozenset({
-    "src", "include", "hal", "backend", "lib", "active", "storage", "config",
-    "builder_scripts", "scripts", "boards", "variants", "patches", "proto",
-})
-CRITICAL_FILES = frozenset({
-    "platformio.ini", "glyph_nuker", ".gitmodules", ".gitignore", ".gitattributes",
-    "cmakelists.txt", "makefile", "sconstruct", "sconscript", "library.json",
-    "library.properties", "requirements.txt", "platformio.lock",
-})
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
     'docs/AGENT_CONTEXT.md',
@@ -181,12 +179,12 @@ This does not confer hardware acceptance or authorize metadata mutations.
         dirty = _paths(_git(root, "diff", "--no-renames", "--name-only", "-z", "--"))
         dirty |= _paths(_git(root, "diff", "--cached", "--no-renames", "--name-only", "-z", "--"))
         dirty |= _paths(_git(root, "ls-files", "--others", "--exclude-standard", "-z"))
-        # Git ignores do not exclude source from the firmware compiler. Limit
-        # discovery to critical roots/controls so dependency caches under .pio
-        # are not mistaken for repository inputs.
-        ignored_scope = sorted(CRITICAL_ROOTS | CRITICAL_FILES | {".github/workflows"})
-        dirty |= _paths(_git(root, "ls-files", "--others", "--ignored", "--exclude-standard", "-z",
-                             "--", *(f":(icase){path}" for path in ignored_scope)))
+        # Git ignores do not exclude source from the firmware compiler. The
+        # shared seam applies the exact audited inventory and excludes caches.
+        try:
+            dirty |= set(ignored_critical_worktree_paths(root))
+        except TrackedWorktreeIntegrityError as exc:
+            raise CorrespondenceError("unable to inspect ignored critical inputs") from exc
         index = {}
         for record in _git(root, "ls-files", "--stage", "-z").split(b"\0"):
             if record:

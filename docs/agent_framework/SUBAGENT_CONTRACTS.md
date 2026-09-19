@@ -401,3 +401,29 @@ record, not evidence of a passing review.
   required checker fails.
 - return format: findings first; exact source correspondence; focused checks;
   risks; invalidation conditions.
+
+## Implementation Supervisor cycle — GP-PROV-011 (2026-09-20)
+
+- guidance applicable: yes; GP-PROV-011 is a complete H1 READY work order and
+  repository mutation requires bounded delegation plus fresh independent review.
+- capability discovery: complete available runtime capability catalog inspected;
+  native internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: Noether, bounded read-only source-authority specialist; inspect
+  the finite hardware-correspondence critical inventory, shared tracked-worktree
+  seam, builder identity, artifact custody, and GP-PROV-009 coverage.
+- reviewer: Kant, fresh independent post-implementation reviewer; inspect the
+  exact GP-PROV-011 diff, ignored source/build/workflow inventory, exclusions,
+  regressions, and focused validation.
+- allowed specialist/reviewer files: tools/glyph_tracked_worktree_integrity.py,
+  tools/glyph_hardware_correspondence.py, builder_scripts/arduino_pico.py,
+  tools/glyph_hardware_artifact_custody.py, their focused checkers/tests, and
+  directly coupled contracts.
+- forbidden specialist/reviewer actions: edits, commits, pushes, firmware or
+  device actions, artifact creation/custody mutation, GP-VAL-011 isolation or
+  timeout redesign, dependency/network resolution, and authority inference.
+- stop conditions: critical inventory drift, cache/custody scanning, ignored
+  tree or nested-repository redesign, active firmware/runtime behavior beyond
+  the expected embedded Git identity consequence, or focused/reviewer failure.
+- return format: findings first; exact scope/authority correspondence;
+  validation results; residual risks; bounded next action.
