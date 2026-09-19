@@ -177,6 +177,45 @@ def run() -> tuple[int, int]:
     assert canonical_report["production_emission_allowed"] is True
     assert canonical_report["semantic_change_present"] is False
     assert canonical_report["future_hardware_candidate_after_downstream_gates"] is False
+
+    # The accepted production intake is a closed current-corpus mapping.  Its
+    # three authority-bearing locators and exact owned table/points must not be
+    # replaceable by plausible-looking, external, compound, or stale text.
+    def assign_case(packet: dict, field: str, value: object) -> None:
+        target: object = packet
+        parts = field.replace("]", "").replace("[", ".").split(".")
+        for part in parts[:-1]:
+            target = target[int(part)] if isinstance(target, list) else target[part]  # type: ignore[index]
+        if isinstance(target, list):
+            target[int(parts[-1])] = value
+        else:
+            target[parts[-1]] = value  # type: ignore[index]
+
+    canonical_cases = policy["canonical_locator_cases"]
+    assert [case["case_id"] for case in canonical_cases] == [
+        "approval_locator_wrong_anchor", "ownership_locator_wrong_anchor",
+        "replacement_locator_external", "canonical_ownership_expanded", "canonical_points_changed",
+        "canonical_intake_identity_changed", "canonical_profile_identity_changed", "canonical_identity_pair_changed"
+    ]
+    for case in canonical_cases:
+        tampered = copy.deepcopy(accepted_current)
+        if "|" in case["field"]:
+            for field, value in zip(case["field"].split("|"), case["value"]):
+                assign_case(tampered, field, value)
+        else:
+            assign_case(tampered, case["field"], case["value"])
+        assert case["expected_blocker_code"] in {b["code"] for b in review_intake(tampered)["blockers"]}, case["case_id"]
+        POSITIVE += 1
+    for field, value in (("intake_id", "renamed-intake"), ("profile_id", "renamed-profile")):
+        tampered = copy.deepcopy(accepted_current)
+        tampered[field] = value
+        assert "CANONICAL_IDENTITY_MISMATCH" in {b["code"] for b in review_intake(tampered)["blockers"]}
+        POSITIVE += 1
+    tampered = copy.deepcopy(accepted_current)
+    tampered["intake_id"] = "renamed-intake"
+    tampered["profile_id"] = "renamed-profile"
+    assert "CANONICAL_IDENTITY_MISMATCH" in {b["code"] for b in review_intake(tampered)["blockers"]}
+    POSITIVE += 1
     assert canonical["authority"]["approver"] == "Glyph project owner / user authority"
     assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-010"
     assert canonical["ownership"]["owned_tables"] == ["kX1Table"]

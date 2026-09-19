@@ -38,6 +38,19 @@ PROVENANCE = {"production_authorized", "source_baseline_derived", "synthetic_tes
 MODES = {"full_replacement", "overlay_preserve", "reject_partial"}
 OPERATIONS = {"production_changeset", "source_equivalence_proof"}
 
+# The current production intake is deliberately a closed corpus record.  Do
+# not generalize these locators into an anchor/path grammar: a future intake
+# needs separate source-authority review.
+CANONICAL_X1_INTAKE_ID = "x1-offset41-overlay-hardware-candidate-2026-09-02"
+CANONICAL_X1_PROFILE_ID = "glyph_x1_offset41_overlay_hardware_candidate"
+CANONICAL_X1_AUTHORITY_REFERENCE = "docs/agent_framework/USER_DIRECTION.md#glyph-ud-010"
+CANONICAL_X1_TABLE = "kX1Table"
+CANONICAL_X1_POINTS = [
+    {"x": 87, "y": 87}, {"x": 128, "y": 87}, {"x": 169, "y": 87},
+    {"x": 87, "y": 128}, {"x": 128, "y": 128}, {"x": 169, "y": 128},
+    {"x": 87, "y": 169}, {"x": 128, "y": 169}, {"x": 169, "y": 169},
+]
+
 # A review can contain several blocker classes.  Validation must select one
 # stable machine exit category without hiding the complete review report.
 VALIDATION_CATEGORY_PRECEDENCE = (
@@ -193,6 +206,53 @@ def _replacement_symbols(replacements: Any, blockers: list[dict[str, str]]) -> l
     return symbols
 
 
+def _closed_canonical_x1_mapping(
+    payload: dict[str, Any],
+    blockers: list[dict[str, str]],
+    owned: list[str],
+    declarations: Any,
+    replacements: Any,
+) -> None:
+    """Enforce the one reviewed production locator mapping, fail-closed."""
+    identity_values = (payload.get("intake_id"), payload.get("profile_id"))
+    canonical_identity = (CANONICAL_X1_INTAKE_ID, CANONICAL_X1_PROFILE_ID)
+    if identity_values == (None, None):
+        return
+    authority = payload.get("authority")
+    declarations = payload.get("ownership", {}).get("declarations") if isinstance(payload.get("ownership"), dict) else None
+    replacements = payload.get("replacements")
+    claims_canonical_locator = (
+        isinstance(authority, dict) and authority.get("approval_reference") == CANONICAL_X1_AUTHORITY_REFERENCE
+    ) or any(
+        isinstance(item, dict) and item.get("authorization_reference") == CANONICAL_X1_AUTHORITY_REFERENCE
+        for item in declarations or []
+    ) or any(
+        isinstance(item, dict) and item.get("source_reference") == CANONICAL_X1_AUTHORITY_REFERENCE
+        for item in replacements or []
+    )
+    if identity_values != canonical_identity and not any(value in canonical_identity for value in identity_values):
+        if claims_canonical_locator:
+            _block(blockers, "CANONICAL_IDENTITY_MISMATCH", "authority", "intake_id/profile_id", "canonical GLYPH-UD-010 authority must retain its reviewed intake and profile identities")
+        return
+    if identity_values != canonical_identity:
+        _block(blockers, "CANONICAL_IDENTITY_MISMATCH", "authority", "intake_id/profile_id", "canonical X1 intake and profile identities must remain paired")
+        return
+        return
+    authority = payload.get("authority")
+    if not isinstance(authority, dict) or authority.get("approval_reference") != CANONICAL_X1_AUTHORITY_REFERENCE:
+        _block(blockers, "CANONICAL_LOCATOR_MISMATCH", "authority", "authority.approval_reference", "canonical X1 approval locator must resolve to GLYPH-UD-010")
+    if owned != [CANONICAL_X1_TABLE]:
+        _block(blockers, "CANONICAL_OWNERSHIP_MISMATCH", "ownership", "ownership.owned_tables", "canonical X1 intake owns only kX1Table")
+    if not isinstance(declarations, list) or len(declarations) != 1 or not isinstance(declarations[0], dict) or declarations[0].get("table_symbol") != CANONICAL_X1_TABLE or declarations[0].get("authorization_reference") != CANONICAL_X1_AUTHORITY_REFERENCE:
+        _block(blockers, "CANONICAL_LOCATOR_MISMATCH", "authority", "ownership.declarations", "canonical X1 ownership locator must resolve to GLYPH-UD-010")
+    if not isinstance(replacements, list) or len(replacements) != 1 or not isinstance(replacements[0], dict) or replacements[0].get("table_symbol") != CANONICAL_X1_TABLE or replacements[0].get("source_reference") != CANONICAL_X1_AUTHORITY_REFERENCE:
+        _block(blockers, "CANONICAL_LOCATOR_MISMATCH", "authority", "replacements", "canonical X1 replacement locator must resolve to GLYPH-UD-010")
+    else:
+        points = replacements[0].get("points")
+        if not isinstance(points, list) or [{"x": p.get("x"), "y": p.get("y")} for p in points if isinstance(p, dict)] != CANONICAL_X1_POINTS:
+            _block(blockers, "CANONICAL_POINTS_MISMATCH", "authority", "replacements[0].points", "canonical X1 intake must preserve the reviewed nine-point GLYPH-UD-010 correspondence")
+
+
 def review_intake(payload: dict[str, Any]) -> dict[str, Any]:
     blockers: list[dict[str, str]] = []
     expected = {"schema_version", "intake_id", "profile_id", "profile_name", "purpose", "author", "notes", "authority", "intent", "baseline", "ownership", "replacements", "review"}
@@ -260,6 +320,7 @@ def review_intake(payload: dict[str, Any]) -> dict[str, Any]:
     if len(set(replacement_symbols)) != len(replacement_symbols): _block(blockers, "DUPLICATE_REPLACEMENT", "ownership", "replacements", "duplicate replacement table is forbidden")
     if any(s not in known for s in replacement_symbols): _block(blockers, "UNKNOWN_REPLACEMENT", "ownership", "replacements", "unknown replacement table is forbidden")
     if set(replacement_symbols) != set(owned): _block(blockers, "OWNERSHIP_REPLACEMENT_MISMATCH", "ownership", "replacements", "every owned table must have one replacement and no unowned replacement is allowed")
+    _closed_canonical_x1_mapping(payload, blockers, owned, declarations, payload.get("replacements"))
     review = payload.get("review")
     if not isinstance(review, dict) or set(review) != {"unresolved_questions", "acknowledges_build_not_hardware_proof", "acknowledges_separate_hardware_gate"}:
         _block(blockers, "REVIEW_SHAPE", "invalid_input", "review", "review has invalid shape"); review = {}

@@ -31,6 +31,15 @@ basis, approver, approval statement, and approval reference. Placeholders,
 unresolved blocking questions, and missing acknowledgement that a build is not
 hardware proof block emission.
 
+The accepted production X1 intake is a closed current-corpus mapping. Its
+approval reference, sole `kX1Table` ownership declaration, and replacement
+source reference must each be exactly
+`docs/agent_framework/USER_DIRECTION.md#glyph-ud-010`, and its nine ordered
+points must match that reviewed record. Plausible anchors, compound locators,
+external references, other tables, and changed points fail closed. Generic
+locator/path grammars are not implied by this record and remain separately
+gated.
+
 `production_authorized` is required for a production changeset. Synthetic,
 example, migrated-legacy, and unknown provenance never become production by
 this tool. `source_baseline_derived` is accepted only for the narrowly scoped
