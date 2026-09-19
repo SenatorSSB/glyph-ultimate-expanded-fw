@@ -4335,42 +4335,38 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260919-2050",
-  "planning_commit": "4e38028b97ed07e894368564b9f9cdce87ba9c55",
-  "packet_id": "glyph-portfolio-20260919-2050",
-  "packet_base_configurator_sha": "f1977c1104472d1e58733a14a11acf83fef3139b",
-  "curation_branch": "curation/portfolio-20260919-2050-review",
+  "planning_branch": "planning/portfolio-20260920-0227",
+  "planning_commit": "6f7be340568a03069f605503c5ad67dc7f692bda",
+  "packet_id": "glyph-portfolio-20260920-0227",
+  "packet_base_configurator_sha": "c4a4ddfb82b2ec7b650202be427ef5797f5092fe",
+  "curation_branch": "curation/portfolio-20260920-0227-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-SRC-007",
+      "candidate_id": "GP-SRC-009",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-VAL-019",
+      "candidate_id": "GP-VAL-021",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-PROV-011",
+      "candidate_id": "GP-VAL-022",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-CONFIG-008",
+      "candidate_id": "GP-VAL-023",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-009",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-SRC-008",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-VAL-020",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-PROV-010",
+      "candidate_id": "GP-PERSIST-003",
       "disposition": "RESEARCH_GATED"
     }
   ],
-  "review_date": "2026-09-19",
+  "review_date": "2026-09-20",
   "global_wait_proposed": false,
   "global_wait_accepted": false,
   "planner_broad_audit_provenance": null,
