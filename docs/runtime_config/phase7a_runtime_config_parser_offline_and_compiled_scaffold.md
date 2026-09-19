@@ -1,6 +1,9 @@
 # Phase 7A Runtime-Config Parser Offline And Compiled Scaffold
 
-Status: `PHASE7A_COMPILED_SCAFFOLD_NOT_RUNTIME_ACTIVE`.
+Status: `PHASE7A_COMPILED_SCAFFOLD_NOT_RUNTIME_ACTIVE`; historical/superseded
+27-table parser/scaffold evidence. Current table authority comes from the
+canonical 28-table interpreter/extractor corpus. Parser and fixture bytes are
+preserved unchanged.
 
 This packet records the first autonomous Phase 7A build sequence for the
 source-owned Ultimate runtime-config baseline. It is grounded in the existing

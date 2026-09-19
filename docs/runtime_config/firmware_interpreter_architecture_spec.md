@@ -42,9 +42,13 @@ Anything outside those classes remains firmware-owned or out of scope.
 
 ## Source-Owned Current Baseline
 
+Current source-derived authority: exactly 28 `StickPoint[9]` tables from the
+canonical interpreter/extractor corpus. Any older 27-table wording is
+historical/superseded design evidence and is not current authority.
+
 The current implementation branch uses `src/modes/UltimateRuntimeConfigInterpreter.hpp`
 as a source-owned runtime config interpreter boundary and source-owned current
-baseline view for the 27-table StickPoint[9] corpus.
+baseline view for the 28-table StickPoint[9] corpus.
 
 That baseline keeps stable table ids complete and unique, validates before use,
 and falls back to the known-good source-owned baseline if validation fails.

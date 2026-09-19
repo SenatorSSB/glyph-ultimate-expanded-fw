@@ -19,11 +19,15 @@ known-good baseline rather than guessing.
 
 ## Allowed Bounded Data
 
+Current source-derived authority: exactly 28 `StickPoint[9]` tables from the
+canonical interpreter/extractor corpus. The former 27-table material below is
+historical/superseded design evidence, not current authority.
+
 The future schema may own only bounded data that is already source-backed or
 can be source-backed later:
 
-- the 27 `StickPoint[9]` table values;
-- stable table ids for the 27-table corpus;
+- the 28 `StickPoint[9]` table values;
+- stable table ids for the 28-table corpus;
 - table names;
 - source-backed role metadata;
 - source-backed provenance;

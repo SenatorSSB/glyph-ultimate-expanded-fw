@@ -81,6 +81,15 @@ DOC_REQUIRED_PHRASES = {
     ),
 }
 
+TABLE_AUTHORITY_DOCS = (
+    DOC_PATH,
+    SCHEMA_DOC_PATH,
+    ARCH_DOC_PATH,
+    REPO_ROOT / "docs/runtime_config/runtime_config_storage_fallback_architecture.md",
+    REPO_ROOT / "docs/runtime_config/runtime_config_storage_fallback_source_authority.md",
+)
+CURRENT_TABLE_AUTHORITY_MARKER = "current source-derived authority: exactly 28 `stickpoint[9]` tables"
+
 
 class BridgeCheckError(ValueError):
     """Raised when evaluator bridge fixtures diverge from design constraints."""
@@ -140,6 +149,40 @@ def validate_doc_phrases() -> None:
         for phrase in phrases:
             if phrase not in lowered:
                 fail(f"{path.relative_to(REPO_ROOT)} missing required phrase: {phrase}")
+
+
+def validate_current_table_authority_docs(source_tables: dict[str, tuple[tuple[int, int], ...]]) -> None:
+    """Bind current authority to the extractor while allowing historical 27-table evidence."""
+    if len(source_tables) != EXPECTED_TABLE_COUNT:
+        fail(f"canonical extractor table count must be {EXPECTED_TABLE_COUNT}, found {len(source_tables)}")
+
+    texts = {path: path.read_text(encoding="utf-8") for path in TABLE_AUTHORITY_DOCS}
+
+    def validate_texts(candidates: dict[Path, str]) -> None:
+        for path, text in candidates.items():
+            lowered = text.lower()
+            if CURRENT_TABLE_AUTHORITY_MARKER not in lowered:
+                fail(f"{path.relative_to(REPO_ROOT)} missing current 28-table authority marker")
+            for line in lowered.splitlines():
+                if "current" in line and "27-table" in line:
+                    fail(f"{path.relative_to(REPO_ROOT)} contains a current 27-table claim")
+                if "current" in line and "29-table" in line:
+                    fail(f"{path.relative_to(REPO_ROOT)} contains a current 29-table claim")
+
+    validate_texts(texts)
+
+    # The marker is load-bearing: synthetic current 27/29 mutations must fail,
+    # while historical packets outside this current-authority set remain valid.
+    for replacement in ("27", "29"):
+        mutated = {
+            path: text.replace("exactly 28 `StickPoint[9]` tables", f"exactly {replacement} `StickPoint[9]` tables")
+            for path, text in texts.items()
+        }
+        try:
+            validate_texts(mutated)
+        except BridgeCheckError:
+            continue
+        fail(f"synthetic {replacement}-table current-authority mutation was accepted")
 
 
 def validate_file_reference(entry: dict[str, Any], label: str) -> None:
@@ -466,6 +509,7 @@ def main() -> int:
         validate_doc_phrases()
 
         source_tables = load_source_tables(REPO_ROOT / "src/modes/Ultimate.cpp")
+        validate_current_table_authority_docs(source_tables)
 
         baseline = load_json_object(BASELINE_FIXTURE_PATH)
         preview = load_json_object(PREVIEW_FIXTURE_PATH)

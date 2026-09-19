@@ -6,6 +6,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from extract_glyph_identity_runtime_tables import load_source_tables
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_AUTHORITY_DOC = (
@@ -60,6 +62,8 @@ REQUIRED_SECTION_ASSERTS = (
     "firmware flashing automation is not implemented",
     "official protobuf compatibility is not claimed",
 )
+EXPECTED_TABLE_COUNT = 28
+CURRENT_TABLE_AUTHORITY_MARKER = "current source-derived authority: exactly 28 `stickpoint[9]` tables"
 
 
 class RuntimeConfigStorageFallbackError(ValueError):
@@ -171,6 +175,19 @@ def validate_architecture_doc(text: str) -> None:
     ensure_no_positive_implementation_claims(text, "architecture doc")
 
 
+def validate_current_table_authority(source_text: str, architecture_text: str) -> None:
+    source_tables = load_source_tables(REPO_ROOT / "src/modes/Ultimate.cpp")
+    if len(source_tables) != EXPECTED_TABLE_COUNT:
+        fail(f"canonical source table count must be {EXPECTED_TABLE_COUNT}")
+    for label, text in (("source authority doc", source_text), ("architecture doc", architecture_text)):
+        lowered = text.lower()
+        if CURRENT_TABLE_AUTHORITY_MARKER not in lowered:
+            fail(f"{label} missing current 28-table authority marker")
+        for line in lowered.splitlines():
+            if "current" in line and ("27-table" in line or "29-table" in line):
+                fail(f"{label} contains a current non-28-table claim")
+
+
 def main() -> int:
     print("glyph_runtime_config_storage_fallback")
     source_text = read_doc(SOURCE_AUTHORITY_DOC)
@@ -179,6 +196,7 @@ def main() -> int:
     try:
         validate_source_authority_doc(source_text)
         validate_architecture_doc(architecture_text)
+        validate_current_table_authority(source_text, architecture_text)
     except (RuntimeConfigStorageFallbackError, OSError, ValueError) as exc:
         print("status=FAIL")
         print(f"error={exc}")

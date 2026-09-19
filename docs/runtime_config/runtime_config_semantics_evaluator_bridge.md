@@ -28,6 +28,10 @@ layers.
 
 ## Baseline Extraction
 
+Current source-derived authority: exactly 28 `StickPoint[9]` tables from the
+canonical interpreter/extractor corpus. Any older 27-table wording is
+historical/superseded design evidence and is not current authority.
+
 Current baseline evidence is sourced from:
 
 - `src/modes/Ultimate.cpp`
@@ -36,7 +40,7 @@ Current baseline evidence is sourced from:
 - `docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json`
 - `docs/calibration/fixtures/glyph_identity_runtime_generated_config_contract_v0_2026-05-28.json`
 
-`table_family=StickPoint` and the baseline contains `27` tables with `9` points
+`table_family=StickPoint` and the baseline contains `28` tables with `9` points
 per table in the source-backed extractor output.
 
 This is the validate-before-use / fallback-to-known-good path for the source-owned
