@@ -107,12 +107,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -374,7 +374,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-017",
       "title": "Bind current design authority to the 28-table baseline",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-017-current-28-table-authority",
       "objective": "Remove present-tense 27-table claims from current/future architecture authority and make source-derived validation reject their recurrence while preserving historical 27-table evidence.",
       "why_this_matters": "UltimateRuntimeConfigInterpreter.hpp defines the current 28-table corpus, but four current design/source-authority documents still call it 27 and existing checkers accept both those contradictions and synthetic 29-table mutations.",
@@ -414,7 +414,32 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave current docs/checkers unchanged if source-derived assertions cannot distinguish current authority from historical 27-table evidence without changing parser or source bytes.",
       "status_documentation_updates": "Publish current 28-table authority and explicit historical classifications only after all source-sync and persistence correspondence gates pass.",
-      "done_evidence": "NOT_DONE: publish completion only after focused implementation, fresh independent review, required validation, and canonical integration.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "44e7a9e76228dc64f5e1b4b6fc84f26f87e976fe",
+        "reviewed_implementation_sha": "58242472fb47d899bc84ab34db06803d4b778c50",
+        "prior_canonical_integration_sha": "e96ae3025ccadd91e581295fadd73059b9d2c611",
+        "reviewed_changed_paths": [
+          "docs/generated_constants/phase3_generated_constants_contract.md",
+          "docs/runtime_config/firmware_interpreter_architecture_spec.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/phase7a_runtime_config_parser_offline_and_compiled_scaffold.md",
+          "docs/runtime_config/runtime_config_semantics_evaluator_bridge.md",
+          "docs/runtime_config/runtime_config_storage_fallback_architecture.md",
+          "docs/runtime_config/runtime_config_storage_fallback_source_authority.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "docs/runtime_config/runtime_loaded_config_schema_design.md",
+          "tools/check_glyph_current_config_persistence_recovery_research.py",
+          "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
+          "tools/check_glyph_runtime_config_storage_fallback.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-VAL-017 implementation. The review verified the semantics bridge design document and four current authority documents bind the current source-derived 28-table corpus, the storage/fallback checker is manifest load-bearing, persistence immutable-base overlays are bounded, historical Phase 3/7A parser and fixture bytes remain unchanged, and no firmware, parser, storage, device, build, or hardware scope entered the diff.",
+        "validation_provenance": "Focused source-sync PASS with table_count=28 and unchanged semantic digest b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874; semantics bridge PASS with 10 invalid cases; storage/fallback PASS; persistence research PASS with 48 ordered steps, 15 immutable upstream blobs, and 56 negative cases; validation health PASS with census200, manifest39, and 35 current load-bearing checks; checker census, framework/navigation/agent-surface, Python syntax, and git diff --check PASS. No firmware build, artifact, device, or hardware action occurred."
+      },
       "stop_conditions": [
         "Any current-authority 27/29 claim remains accepted.",
         "Legitimate historical 27-table evidence is rewritten or treated as current.",
@@ -3707,11 +3732,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-017","GP-PERSIST-002"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PERSIST-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-017, GP-PERSIST-002; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-PERSIST-002; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3722,7 +3747,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work; GP-PROV-009 is now DONE with strict completion correspondence. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry the current counts and RUNWAY_OK liveness; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work; GP-PROV-009, GP-VAL-016, GP-CONFIG-007, and GP-VAL-017 are now DONE with strict completion correspondence, while GP-PERSIST-002 remains READY. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry the current counts and RUNWAY_LOW liveness; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
