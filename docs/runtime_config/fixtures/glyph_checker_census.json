@@ -169,6 +169,7 @@
         "tools/check_glyph_active_runtime_config_state_source_owned_preselection.py"
       ],
       "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
         "runtime_config_docs"
       ],
       "sha256": "f71e59a29edafb0c7069b008eb8728899adfe0a1fe5109b9e934fe2516309037",
@@ -659,7 +660,10 @@
         "docs/symlink.json",
         "docs/test_protocol.md"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
+        "hardware_evidence_contracts"
+      ],
       "sha256": "a62d25ba63ff1e17c2082c8c25509da7cb9b41780623abcf904ab27eb8de2093",
       "static_signals": {
         "agent_framework": true,
@@ -797,6 +801,8 @@
         "docs/runtime_config/fixtures/artifact_postprocessor_provenance.json"
       ],
       "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
+        "ci_workflows",
         "runtime_config_docs"
       ],
       "sha256": "5a601f8000543cd74c1b580471c1f0b17d1f014a1d9396d7f5baca62924ebc4f",
@@ -840,7 +846,10 @@
       "referenced_repository_path_prefixes": [
         "tools/check_glyph_artifact_postprocessor_provenance.py"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
+        "ci_workflows"
+      ],
       "sha256": "824934098286cad6cad8106f72694acafca0d24624ad3094d0d55c467a9ae427",
       "static_signals": {
         "agent_framework": false,
@@ -882,6 +891,7 @@
         "docs/runtime_config/fixtures/build_input_non_selector_configuration.json"
       ],
       "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
         "runtime_config_docs"
       ],
       "sha256": "c03945e0cccdcbe818cd26094786c547743061be3f47cd6860d8b897086188dc",
@@ -935,6 +945,8 @@
         "docs/runtime_config/fixtures/build_input_provenance_inventory.json"
       ],
       "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "ci_workflows",
         "runtime_config_docs"
       ],
       "sha256": "c719ecc1a611f15a7027660f796e20fd0acef30a8c1d8570d6170f24eadf09e3",
@@ -985,6 +997,7 @@
         "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
       ],
       "runtime_config_relevance_signals": [
+        "ci_workflows",
         "runtime_config_docs"
       ],
       "sha256": "86702aa1e5522136fe7299913aac6c67c1414aaec04bbb0ceaa55576eb491b14",
@@ -1119,6 +1132,7 @@
         "tools/check_glyph_candidate_state_materialization_scaffold.py"
       ],
       "runtime_config_relevance_signals": [
+        "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
       "sha256": "07c5f1fe24e45948c4a3b624ee7f0dafdc4e41e14e4f9f1e1978f52baee029cb",
@@ -2601,6 +2615,7 @@
       "runtime_config_relevance_signals": [
         "activation_alternatives",
         "candidate_generation",
+        "ci_workflows",
         "coordinate_native_profile",
         "current_y2_layout",
         "generated_baseline",
@@ -2685,6 +2700,7 @@
         "tools/glyph_runtime_config_storage_simulator.py"
       ],
       "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
         "runtime_config_docs"
       ],
       "sha256": "a51d43bcb4f6447bdd7f4a286d51048627da612db715a9d3361c778518156529",
@@ -2770,8 +2786,10 @@
         "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
       ],
       "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
         "generated_baseline",
         "generated_source_owned",
+        "hardware_evidence_contracts",
         "identity_runtime_tables",
         "runtime_config_docs",
         "runtime_config_interpreter"
@@ -3172,6 +3190,7 @@
         "tools/check_glyph_diagnostic_parsed_candidate_present_source_owned_published.py"
       ],
       "runtime_config_relevance_signals": [
+        "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
       "sha256": "501bf7989dcd3cde9ae4013ac94db8a09fd268589d191296a00472cef9bb6b82",
@@ -3317,11 +3336,15 @@
       ],
       "runtime_config_relevance_signals": [
         "activation_alternatives",
+        "artifact_custody_provenance",
+        "build_declarations_hooks",
         "candidate_generation",
+        "ci_workflows",
         "coordinate_native_profile",
         "current_y2_layout",
         "generated_baseline",
         "generated_source_owned",
+        "hardware_evidence_contracts",
         "identity_runtime_tables",
         "runtime_config_docs",
         "source_authority_intake"
@@ -3408,7 +3431,9 @@
       ],
       "runtime_config_relevance_signals": [
         "activation_alternatives",
+        "artifact_custody_provenance",
         "coordinate_native_profile",
+        "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
       "sha256": "96d66234b327f0a1499a578f463d81c67b485e0a04b606082f1e1481e20e23e9",
@@ -4764,6 +4789,7 @@
         "src/modes/UltimateIdentityRuntimeTables.hpp"
       ],
       "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
         "identity_runtime_tables"
       ],
       "sha256": "ee3be3c6e7399cdcc6ee68a2255a446f1c795d4b5e7ed3083d8c0f54b8391c1c",
@@ -4897,7 +4923,9 @@
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_generated_constants_phase3_integration_hardware_result",
       "referenced_repository_path_prefixes": [],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance"
+      ],
       "sha256": "c46baee9791ed8d28e1f6669fff0a0fdbcf2a5ccf9e4550b472fedeea0d7bc17",
       "static_signals": {
         "agent_framework": false,
@@ -5105,6 +5133,7 @@
       "runtime_config_relevance_signals": [
         "activation_alternatives",
         "candidate_generation",
+        "ci_workflows",
         "coordinate_native_profile",
         "current_y2_layout",
         "generated_baseline",
@@ -5319,6 +5348,7 @@
       "runtime_config_relevance_signals": [
         "activation_alternatives",
         "candidate_generation",
+        "ci_workflows",
         "coordinate_native_profile",
         "current_y2_layout",
         "generated_baseline",
@@ -5899,6 +5929,7 @@
         "tools/test_gp_config_005_hw_test.py"
       ],
       "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
         "runtime_config_docs"
       ],
       "sha256": "30d4585295c187863a6326df35dc918aea29f20d8f3105aaafb484a543203d89",
@@ -6360,7 +6391,9 @@
         "docs/calibration/fixtures",
         "docs/tools-only"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance"
+      ],
       "sha256": "49aca70af67f530edc692d022f129d7e48b450dd8983b5d6b1bc7e8ab767f033",
       "static_signals": {
         "agent_framework": false,
@@ -7023,6 +7056,7 @@
         "docs/runtime_config/glyph_nuker_source_lineage.md"
       ],
       "runtime_config_relevance_signals": [
+        "ci_workflows",
         "runtime_config_docs"
       ],
       "sha256": "4099d1e4fd4c24587423e44b35cdb64329aa70b877ae0ab3301095965ef0c3ca",
@@ -8598,6 +8632,7 @@
         "tools/check_glyph_runtime_config_firmware_parser_scaffold.py"
       ],
       "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
         "runtime_config_docs"
       ],
       "sha256": "9626cb33980fc6a6629c70f5eb577fe1467420cfdd9d3432d9b40057aa813997",
@@ -9045,7 +9080,9 @@
         "include/ghost.hpp",
         "src/ghost.cpp"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks"
+      ],
       "sha256": "bf7656988e92d72740149081d10f4b9a800974ad8d0d23ea5b796020ac4f33d6",
       "static_signals": {
         "agent_framework": false,
@@ -9580,6 +9617,7 @@
         "tools/run_glyph_next_runtime_change_readiness_checks.py"
       ],
       "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
         "runtime_config_docs"
       ],
       "sha256": "b58a97d166c2b9c6f39c4d0568fdd3aad4542e52df3a3d159f1f37e200ed1ecd",
@@ -9640,7 +9678,9 @@
         "docs/calibration/fixtures/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.json",
         "docs/calibration/glyph_public_manual_workflow_release_candidate_hardware_result_2026-06-07.md"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance"
+      ],
       "sha256": "b74b9d55b8da6233d110d8a4254c390e92a93e85af09e46fbf5f2230af99f8e3",
       "static_signals": {
         "agent_framework": false,
@@ -9783,6 +9823,7 @@
         "current_y2_layout",
         "generated_baseline",
         "generated_source_owned",
+        "hardware_evidence_contracts",
         "identity_runtime_tables",
         "runtime_config_docs",
         "runtime_config_interpreter",
@@ -10337,6 +10378,7 @@
         "tools/check_glyph_runtime_config_flashing_automation_safety_boundary.py"
       ],
       "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
         "runtime_config_docs"
       ],
       "sha256": "57fccdbe8498758c7d51edc2ef475462ef72a4723bf1706aea547adc06211c62",
@@ -10387,7 +10429,9 @@
         "docs/calibration/fixtures/glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.json",
         "docs/calibration/glyph_runtime_config_interpreter_source_baseline_hardware_result_2026-06-07.md"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance"
+      ],
       "sha256": "0c13258d9a1c6282a79bed3e7dbd37b735684be678b5ad92d42b973abb95aa05",
       "static_signals": {
         "agent_framework": false,
@@ -10644,7 +10688,9 @@
         "src/config.cpp",
         "src/modes/Ultimate.cpp"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks"
+      ],
       "sha256": "7cfa1684e40c262daa96fc7d06eb150c3302a6db08ae0dcd7f1e15aa83383e19",
       "static_signals": {
         "agent_framework": false,
@@ -10710,7 +10756,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 53237,
+      "file_size_bytes": 57041,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -10719,6 +10765,7 @@
         "configurator",
         "done_evidence",
         "evidence.json",
+        "hardware-evidence",
         "hardware_evidence_record",
         "historical_evidence",
         "historical_evidence_probe",
@@ -10733,7 +10780,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 915,
+      "line_count": 976,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -10744,6 +10791,7 @@
         "configurator",
         "done_evidence",
         "evidence.json",
+        "hardware-evidence",
         "hardware_evidence_record",
         "historical_evidence",
         "historical_evidence_probe",
@@ -10759,6 +10807,7 @@
       ],
       "python_module": "tools.check_glyph_runtime_config_validation_aggregate",
       "referenced_repository_path_prefixes": [
+        "docs/agent_framework/xHARDWARE_EVIDENCE.md",
         "docs/evidence.json",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/fixtures",
@@ -10774,16 +10823,23 @@
         "tools/check_glyph_nuker_source_lineage.py",
         "tools/check_glyph_renamed.py",
         "tools/check_glyph_runtime_config_validation_aggregate.py",
+        "tools/check_glyph_synthetic_",
+        "tools/check_glyph_synthetic_near_",
+        "tools/glyph_hardware_artifact_custody.py",
         "tools/helper.py",
         "tools/link.py",
         "tools/other.py",
         "tools/untracked.py"
       ],
       "runtime_config_relevance_signals": [
+        "artifact_custody_provenance",
+        "build_declarations_hooks",
+        "ci_workflows",
         "generated_source_owned",
+        "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "c0c77be2022b2cce14953500c88c1f8ebbc7b6a0f3194738774e481bdfa5c9d1",
+      "sha256": "c09b01e8d513a8f71af8261bc79c652255a911c0d06b4d58bba1888291303795",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -10899,6 +10955,7 @@
         "tools/run_glyph_runtime_config_validation.py"
       ],
       "runtime_config_relevance_signals": [
+        "ci_workflows",
         "runtime_config_docs"
       ],
       "sha256": "3ebd739719a88fe35ec425c357b2b3e89694d48f15e0adbea973184aca080076",
@@ -12323,7 +12380,9 @@
         "docs/calibration/glyph_ultimate_preservation_hardware_result_TEMPLATE.md",
         "tools/check_glyph_ultimate_preservation_hardware_result.py"
       ],
-      "runtime_config_relevance_signals": [],
+      "runtime_config_relevance_signals": [
+        "artifact_custody_provenance"
+      ],
       "sha256": "1929a7aae077d6818d150cf80fb22188bb1bff29676fa4190de1a2c493950ffe",
       "static_signals": {
         "agent_framework": false,

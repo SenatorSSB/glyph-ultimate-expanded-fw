@@ -452,7 +452,12 @@ checks the canonical 28-table source baseline (digest
 repository-wide static checker census. The census count is derived from the
 discovered `tools/check_glyph_*.py` set; it does not behaviorally audit every
 checker. The aggregate manifest reconciles every checker with a strong static
-runtime-config signal to either the curated scope or an explicit exclusion.
+runtime-config or safety-control signal to either the curated scope or an
+explicit exclusion. Safety-control signals are a closed inventory of canonical
+CI workflow paths, build declaration/hook paths or identifiers, artifact
+custody/provenance paths or identifiers, and hardware-evidence contract paths
+or identifiers. This remains static observation only: it does not claim
+semantic or transitive completeness.
 Historical and hardware-evidence checkers are explicitly excluded from current
 aggregate PASS; this does not create production authority or a candidate.
 

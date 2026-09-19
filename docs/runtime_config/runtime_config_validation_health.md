@@ -11,6 +11,13 @@ evidentiary, and unsafe exclusions. The manifest remains the sole authority
 for the strong-signal exclusion list; the obsolete duplicate health-level list
 was removed in schema v3.
 
+The static census also recognizes a closed safety-control inventory: canonical
+CI workflow paths, build declaration/hook paths or identifiers, artifact
+custody/provenance paths or identifiers, and hardware-evidence contract paths
+or identifiers. A checker carrying one of these signals must be in the
+manifest or its explicit exclusion list; unrelated general checkers remain
+census-only. This is not a semantic, transitive, or completeness claim.
+
 This corrects the earlier single-level inventory scope. The prior records are
 preserved as current-result and historical-evidence records below;
 they are not evidence that every repository checker received a manual semantic

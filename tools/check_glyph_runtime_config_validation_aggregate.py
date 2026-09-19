@@ -853,18 +853,79 @@ def main() -> int:
         exclusions.remove(omitted)
         probe = root / "omitted-strong-signal-exclusion.json"
         probe.write_text(json.dumps(actual_manifest), encoding="utf-8")
-        result, text = invoke(
-            module,
-            actual_root,
-            probe,
-            "--check-manifest",
-            census_path=actual_root / "docs/runtime_config/fixtures/glyph_checker_census.json",
-        )
+        # The canonical checkout carries the documented pre-existing ignored
+        # .pio/libdeps setup entry that blocks aggregate preflight.  This
+        # probe targets manifest classification only, so bypass that unrelated
+        # preflight gate while retaining the runner's actual load() checks.
+        original_reject_partial_repository = module.reject_partial_repository
+        original_canonical_fingerprint = module.canonical_fingerprint
+        original_census_freshness = module.census_freshness
+        module.reject_partial_repository = lambda: None
+        module.canonical_fingerprint = lambda *args, **kwargs: "classification-probe"
+        module.census_freshness = lambda: {"status": "PASS"}
+        try:
+            result, text = invoke(
+                module,
+                actual_root,
+                probe,
+                "--check-manifest",
+                census_path=actual_root / "docs/runtime_config/fixtures/glyph_checker_census.json",
+            )
+        finally:
+            module.reject_partial_repository = original_reject_partial_repository
+            module.canonical_fingerprint = original_canonical_fingerprint
+            module.census_freshness = original_census_freshness
         needle = f"unclassified strong-signal checker: {omitted['path']}"
         if result != 1 or needle not in text:
             raise AssertionError("strong-signal checker absent from manifest/exclusions was accepted")
-        probe.unlink()
+        exclusions.append(omitted)
+        probe.write_text(json.dumps(actual_manifest), encoding="utf-8")
+        # Use a disposable minimal manifest for the synthetic probes; the
+        # canonical manifest names repository files that are intentionally not
+        # present in this tiny adversarial repository.
+        manifest = write_manifest(root, [], ["baseline"])
         passed.append("AGG-11-unclassified-strong-signal-rejected")
+
+        # Each safety-control signal class must participate in the same
+        # manifest-or-exclusion classification boundary as runtime-config
+        # signals.  The probes are synthetic and are never executed.
+        safety_signal_cases = {
+            "ci-workflow": ".github/workflows/build.yml",
+            "build-hook": "builder_scripts/arduino_pico.py",
+            "artifact-custody": "tools/glyph_hardware_artifact_custody.py",
+            "hardware-evidence": "HARDWARE_EVIDENCE",
+        }
+        for label, signal in safety_signal_cases.items():
+            synthetic = root / f"tools/check_glyph_synthetic_{label}.py"
+            synthetic.write_text(f"# static reference: {signal}\nraise SystemExit(0)\n", encoding="utf-8")
+            refresh_census(root)
+            result, text = invoke(module, root, manifest, "--check-manifest")
+            expected = f"unclassified strong-signal checker: tools/check_glyph_synthetic_{label}.py"
+            if result != 1 or expected not in text:
+                raise AssertionError(f"{label} safety signal escaped classification")
+            synthetic.unlink()
+            refresh_census(root)
+            near_misses = [f"x{signal}"]
+            if label == "ci-workflow":
+                near_misses.append("xconfig/glyph/.github/workflows/build.yml")
+            if label == "hardware-evidence":
+                near_misses.append("xdocs/agent_framework/xHARDWARE_EVIDENCE.md")
+            for index, near_signal in enumerate(near_misses):
+                near_miss = root / f"tools/check_glyph_synthetic_near_{label}_{index}.py"
+                near_miss.write_text(f"# static near miss: {near_signal}\nraise SystemExit(0)\n", encoding="utf-8")
+                refresh_census(root)
+                original_require_clean_source = module.require_clean_source
+                module.require_clean_source = lambda: None
+                try:
+                    result, text = invoke(module, root, manifest, "--check-manifest")
+                finally:
+                    module.require_clean_source = original_require_clean_source
+                if result != 0 or "glyph_runtime_config_validation_manifest: PASS" not in text:
+                    raise AssertionError(f"{label} near-miss prefix became a safety signal")
+                near_miss.unlink()
+                refresh_census(root)
+        passed.append("AGG-22-safety-signal-classes-require-classification")
+        probe.unlink()
 
         drift = [entry("stable")]
         write_checker(root, drift[0], 0)

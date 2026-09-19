@@ -21,7 +21,7 @@
     "manifest_entry_count": 41,
     "current_load_bearing_count": 37,
     "historical_or_evidentiary_count": 4,
-    "explicit_exclusion_count": 37
+    "explicit_exclusion_count": 42
   },
   "checker_results": [
     {"id":"identity_table_source_sync","path":"tools/check_glyph_identity_runtime_table_source_sync.py","classification":"repaired_current_load_bearing_source_sync_checker","starting_configurator":{"exit_code":1,"error":"stale 27-table interpreter bridge fixture"},"feature_branch":{"result":"PASS"}},

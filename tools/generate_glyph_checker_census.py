@@ -43,6 +43,12 @@ STRONG_RELEVANCE = {
     "candidate_generation": r"candidate[_ -]?(?:generation|diff)",
     "current_y2_layout": r"latest_y2_layout_source_owned_port|kY2Table|kTilt3Table",
     "activation_alternatives": r"runtime_config_activation_alternatives",
+    # Closed safety-control signals.  These are exact canonical paths or
+    # contract identifiers, not broad words such as "build" or "artifact".
+    "ci_workflows": r"(?:(?<![A-Za-z0-9_/-])\.github/workflows/(?:build\.yml|build-device-config\.yml)(?![A-Za-z0-9_.-])|(?<![A-Za-z0-9_/-])config/glyph/\.github/workflows/build\.yml(?![A-Za-z0-9_.-]))",
+    "build_declarations_hooks": r"(?<![A-Za-z0-9_/-])(?:platformio\.ini(?![A-Za-z0-9_.-])|builder_scripts/arduino_pico\.py(?![A-Za-z0-9_.-])|\bbuild_inputs?\b|\b(?:PRE_BUILD|POST_BUILD)\b)",
+    "artifact_custody_provenance": r"(?<![A-Za-z0-9_/-])(?:tools/(?:glyph_hardware_artifact_custody|check_glyph_artifact_postprocessor_provenance)\.py(?![A-Za-z0-9_.-])|docs/(?:agent_framework/HARDWARE_ARTIFACT_CUSTODY|runtime_config/artifact_postprocessor_provenance)\.md(?![A-Za-z0-9_.-])|\b(?:glyph_artifact_postprocessor_provenance|GLYPH_HARDWARE_ARTIFACT_CUSTODY_V1|candidate_git_sha|firmware_artifact_sha256|preserved_firmware_artifact_locator)\b)",
+    "hardware_evidence_contracts": r"(?:(?<![A-Za-z0-9_/-])docs/agent_framework/(?:HARDWARE_EVIDENCE|HARDWARE_ARTIFACT_CUSTODY)\.md(?![A-Za-z0-9_.-])|\b(?:glyph_hardware_evidence_record|GLYPH_HARDWARE_EVIDENCE_V2|HARDWARE_EVIDENCE(?:_MISMATCH)?|HARDWARE_VALIDATED|HARDWARE_FAILED|HARDWARE_TEST_REQUIRED|LOCAL_ACCEPTANCE_PENDING)\b)",
 }
 PATH_PREFIX = re.compile(r"(?:docs|src|include|HAL|hal|backend|lib|tools)/[A-Za-z0-9_./-]+")
 BRANCH = re.compile(r"(?:origin/)?(?:configurator|[A-Za-z0-9._-]*(?:branch|candidate|evidence)[A-Za-z0-9._/-]*)")
