@@ -39,7 +39,7 @@ The current source-owned contract is 28 ordered tables ending in
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.
 
 <!-- validation-health-summary:start -->
-Current summary: manifest entries = 40; current load-bearing checks = 36.
+Current summary: manifest entries = 41; current load-bearing checks = 37.
 <!-- validation-health-summary:end -->
 
 The two repaired load-bearing baseline failures were
@@ -56,7 +56,7 @@ Commands that can prepare, install, or emit a candidate are isolated into
 standalone temporary repositories for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 37 explicit entries, including 33 current
+The curated manifest now has 41 explicit entries, including 37 current
 load-bearing checks. The `configurator` category contains the compiled
 GP-CONFIG-005 production-handler transaction check. The tracked CI
 publication-route census records all three

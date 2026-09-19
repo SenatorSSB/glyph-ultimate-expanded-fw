@@ -1,0 +1,34 @@
+{
+  "schema_name": "glyph_setconfig_runtime_rebinding_characterization",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-008",
+  "production_sources": [
+    {"path":"HAL/pico/src/comms/ConfiguratorBackend.cpp","sha256":"28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876","anchors":["bool ConfiguratorBackend::HandleSetConfig()","persistence.SaveConfig(candidate)","_config = candidate"]},
+    {"path":"src/core/mode_selection.cpp","sha256":"57ae73a3eea4250bab5027bd6fdb1b1fa3ea9d2689cd6309026e7bbbc39d9875","anchors":["uint64_t mode_activation_masks[10]","i != current_mode_index","void setup_mode_activation_bindings"]},
+    {"path":"src/core/InputMode.cpp","sha256":"080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7","anchors":["void InputMode::SetConfig(GameModeConfig &config)","_config = &config"]},
+    {"path":"src/modes/CustomControllerMode.cpp","sha256":"a85d36b53fc17b3a7da46d835761558a97052432ac10226b94985263fa8468a6","anchors":["void CustomControllerMode::SetConfig(","_custom_mode_config = &custom_mode_config","_modifier_button_masks","_button_combo_mappings_masks"]},
+    {"path":"HAL/pico/src/comms/backend_init.cpp","sha256":"8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea","anchors":["size_t initialize_backends(","init_primary_backend(","set_mode(backends[i], mode_config, config)"]},
+    {"path":"HAL/pico/include/comms/NeoPixelBackend.hpp","sha256":"a3a83278a2f13464f6fa15de7f611ec4189f40fcf14f0ce44ce0b8e6cc890dbc","anchors":["virtual void SetGameMode(InputMode *gamemode)","_button_colors","const uint8_t &_brightness"]},
+    {"path":"config/glyph/common/src/config.cpp","sha256":"bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5","anchors":["setup_mode_activation_bindings(config.game_mode_configs","void setup1()","void loop1()","led_backend->SetGameMode"]},
+    {"path":"HAL/pico/src/display/InputDisplay.cpp","sha256":"761f3a5bb6357a278042356e25c691ef82bb45030ee6588cd6571a08e2e6480b","anchors":["InputDisplay::InputDisplay(","const CommunicationBackendId backend_id","const GameModeConfig &mode_config"]}
+  ],
+  "cases": [
+    "successful_setconfig_live_config_visibility",
+    "old_activation_chord_mask",
+    "same_index_selection_suppressed",
+    "different_index_mode_selection",
+    "same_mode_object_reconfigured",
+    "different_mode_object_selection",
+    "custom_mode_cached_masks",
+    "generic_inputmode_pointer",
+    "backend_boot_binding",
+    "neopixel_rgb_cache_and_brightness",
+    "display_menu_binding",
+    "source_path_boot_reconstruction",
+    "display_backend_id_capture"
+  ],
+  "observations": {
+    "sequence": "successful persistence precedes live Config assignment; no automatic reselection or backend reconstruction is in HandleSetConfig",
+    "non_claims": ["cross-core timing", "cross-core atomicity", "physical output", "performed reboot", "boot result after a new persisted config", "hardware acceptance"]
+  }
+}

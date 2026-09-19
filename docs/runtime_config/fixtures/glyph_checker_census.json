@@ -11245,6 +11245,58 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "setconfig_runtime_rebinding_characterization",
+      "defines_main": true,
+      "file_size_bytes": 4952,
+      "hard_coded_branch_like_strings": [
+        "candidate"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 114,
+      "parse_error": null,
+      "path": "tools/check_glyph_setconfig_runtime_rebinding_characterization.py",
+      "potential_branch_identity_signals": [
+        "candidate"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_setconfig_runtime_rebinding_characterization",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/display/InputDisplay.cpp",
+        "docs/runtime_config/fixtures/setconfig_runtime_rebinding_characterization.json",
+        "src/config.cpp",
+        "src/core/InputMode.cpp",
+        "src/core/mode_selection.cpp",
+        "src/modes/CustomControllerMode.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "e04442c0333e5e4c1df921e4b80633d0122145c8c74b2fcb50a36f7e6e0b7831",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "smashbox_identity_runtime_bindings",
       "defines_main": true,
       "file_size_bytes": 5532,
