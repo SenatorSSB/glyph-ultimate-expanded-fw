@@ -80,11 +80,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-007","GP-VAL-019","GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":6,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":6,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-019","GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 6; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 6; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is docs/project/ACTIVE_AGENT_QUEUE.md. Published packet glyph-portfolio-20260919-2050 has been independently adjudicated: six bounded H0/H1 items cover fail-closed conversion, artifact-command integrity, ignored critical paths, successful SetConfig rebinding characterization, exact X1 authority locators, and safety-checker classification. GP-PROV-010 remains RESEARCH_GATED on unresolved completed-build binding and content-closure architecture. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. The next H2 realization still awaits owner/Senscope modifier/layout data and routing intent. Global evidence wait is unsupported.

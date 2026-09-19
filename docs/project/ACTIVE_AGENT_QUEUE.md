@@ -124,12 +124,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 6,
+    "immediate_ready": 5,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 6,
+    "effective_authorized_runway": 5,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -147,7 +147,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-007",
       "title": "Fail closed on non-corresponding coordinate conversion",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-src-007-fail-closed-conversion",
       "objective": "Stop the coordinate-native bridge from emitting one fixed source-owned layout packet for materially different validated profiles.",
       "why_this_matters": "The current converter labels unrelated inputs as converted output, so review and candidate preparation can carry false input/output provenance into the source-owned generation lane.",
@@ -189,7 +189,30 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave the current converter unchanged if rejection cannot be isolated from the direct authorized layout-spec lane; publish no converted packet or candidate from an uncorresponded profile.",
       "status_documentation_updates": "Document that the generic bridge is fail-closed until explicit mapping and ownership authority exists; preserve every runtime, device-write, persistence, Nunchuk, and root-cause non-claim.",
-      "done_evidence": "Pending exact reviewed implementation, focused fail-closed corpus, affected control-plane gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "76f6f12ffa053cbabf55d6be64b41ddb89bc292d",
+        "reviewed_implementation_sha": "40e38fcf51acd43a2a2cab085cf9848ad4ee3483",
+        "prior_canonical_integration_sha": "f37a0ed72bf1f211cad62a10747f5259ac96fdd5",
+        "reviewed_changed_paths": [
+          "docs/CURRENT_STATE.md",
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/coordinate_native_runtime_profile_contract.md",
+          "docs/runtime_config/fixtures/generated_source_owned_artifact_install.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/generated_source_owned_artifact_install.md",
+          "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+          "tools/check_glyph_generated_source_owned_artifact_install.py",
+          "tools/check_glyph_source_owned_candidate_generation.py",
+          "tools/convert_coordinate_native_profile_to_source_owned_spec.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-SRC-007 snapshot. The review confirmed generic profiles fail closed with the stable source-authority reason, direct layout-spec generation remains byte-identical, candidate-preparation and artifact-install coverage are aligned, census/health are fresh, and no firmware/runtime/device/persistence/hardware claim entered the diff.",
+        "validation_provenance": "Bridge, full coordinate-native contract, offline pipeline/bundle/export, candidate-generation, artifact-install, generator contract, checker census (201 entries), validation health (40 manifest entries), framework, navigation, agent-surface, Python syntax, and git diff --check gates PASS. The aggregate runner remains unavailable because its preflight rejects the pre-existing ignored nested .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ path; no aggregate-green claim is made. No firmware build or hardware action was required."
+      },
       "stop_conditions": [
         "Any positive mapping, table ownership, coordinate, routing, or gameplay intent would be inferred.",
         "Any unsupported profile can still emit the fixed source-owned layout packet.",
@@ -4161,11 +4184,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-007","GP-VAL-019","GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":6,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":6,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-019","GP-PROV-011","GP-CONFIG-008","GP-SRC-008","GP-VAL-020"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 6; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 6; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, GP-VAL-020; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4176,7 +4199,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. Six bounded H0/H1 items cover fail-closed coordinate conversion, artifact-command integrity, ignored critical paths, successful SetConfig rebinding characterization, exact X1 authority locators, and safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. Five bounded H0/H1 items remain Ready after GP-SRC-007 completion; they cover artifact-command integrity, ignored critical paths, successful SetConfig rebinding characterization, exact X1 authority locators, and safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
