@@ -16,6 +16,47 @@ class WorkflowError(ValueError):
     pass
 
 
+PROTECTED_COMMANDS = (
+    'python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-checkout --candidate-sha "$GITHUB_SHA"',
+    "ls *.uf2 | xargs ./glyph_nuker",
+    'python3 tools/check_glyph_artifact_postprocessor_provenance.py --write-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"',
+    'python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"',
+)
+PROTECTED_FAMILY_MARKERS = (
+    "--verify-checkout",
+    "ls *.uf2 | xargs ./glyph_nuker",
+    "--write-sidecar",
+    "--verify-sidecar",
+)
+
+
+def require_exact_protected_commands(steps: list[object]) -> None:
+    """Require each reviewed provenance operation as one failure-bearing line."""
+    executable: list[str] = []
+    for step in steps:
+        lines = executable_lines(getattr(step, "run", None))
+        for line in lines:
+            if any(marker in line for marker in PROTECTED_FAMILY_MARKERS) and line not in PROTECTED_COMMANDS:
+                raise WorkflowError("protected command has non-exact or masked variant")
+        if any(command in lines for command in PROTECTED_COMMANDS):
+            controls = (
+                "if ", "then", "fi", "else", "elif ", "while ", "until ", "do", "done",
+                "function ", "(", ")", "{", "}", "<<", "\\", "set ", "trap ",
+            )
+            if any("<<" in line for line in lines) or any(
+                line == token or line.startswith(token) or line.endswith(token)
+                for line in lines for token in controls
+            ):
+                raise WorkflowError("protected command is wrapped in shell control flow")
+        if getattr(step, "fields", set()) == {"run"}:
+            executable.extend(lines)
+    for command in PROTECTED_COMMANDS:
+        if executable.count(command) != 1:
+            raise WorkflowError(
+                f"protected command must appear exactly once as an executable line: {command}"
+            )
+
+
 def validate(text: str) -> None:
     required = (
         "fetch-depth: 0",
@@ -40,6 +81,7 @@ def validate(text: str) -> None:
     if build_job is None:
         raise WorkflowError("build job missing")
     steps = build_job.steps
+    require_exact_protected_commands(steps)
     checkout = [
         step for step in steps
         if any("--verify-checkout" in line for line in executable_lines(step.run))
@@ -107,6 +149,36 @@ def main() -> int:
                 "# python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar", 1,
             ),
         }
+        for index, command in enumerate(PROTECTED_COMMANDS):
+            mutations[f"masked_{index}"] = workflow.replace(command, f"{command} || true", 1)
+            mutations[f"trailing_{index}"] = workflow.replace(command, f"{command}; true", 1)
+            mutations[f"duplicate_{index}"] = workflow.replace(
+                command, f"{command}\n        {command}", 1
+            )
+            mutations[f"conditional_{index}"] = workflow.replace(
+                command, f"if true; then\n        {command}\n        fi", 1
+            )
+            mutations[f"subshell_{index}"] = workflow.replace(
+                command, f"(\n        {command}\n        )", 1
+            )
+            mutations[f"function_{index}"] = workflow.replace(
+                command, f"run_protected() {{\n        {command}\n        }}\n        run_protected", 1
+            )
+            mutations[f"while_{index}"] = workflow.replace(
+                command, f"while true; do\n        {command}\n        done", 1
+            )
+            mutations[f"set_errexit_{index}"] = workflow.replace(
+                command, f"set +e\n        {command}", 1
+            )
+            mutations[f"set_pipefail_{index}"] = workflow.replace(
+                command, f"set +o pipefail\n        {command}", 1
+            )
+            mutations[f"masked_duplicate_{index}"] = workflow.replace(
+                command, f"{command}\n        {command} || true", 1
+            )
+            mutations[f"heredoc_{index}"] = workflow.replace(
+                command, f"cat <<EOF\n        {command}\n        EOF", 1
+            )
         for case, mutated in mutations.items():
             try:
                 validate(mutated)

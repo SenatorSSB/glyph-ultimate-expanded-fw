@@ -47,6 +47,12 @@ same source identity and observed-only fields before upload. The static
 ordering checker is
 `tools/check_glyph_artifact_postprocessor_workflow.py`.
 
+That checker requires the four reviewed provenance operations—checkout identity,
+postprocessing, sidecar write, and sidecar verification—to occur exactly once
+as executable lines in supported `name`/`run` steps. Shell masking, trailing
+commands, wrapping, conditionals, comments, or duplicates are rejected; the
+tracked workflow command bytes remain unchanged.
+
 These commands do not execute `glyph_nuker` in tests, perform local custody,
 flash a device, or claim hardware acceptance. The workflow sidecar is
 correspondence metadata only; it does not establish artifact acceptance,
