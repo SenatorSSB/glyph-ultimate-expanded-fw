@@ -3338,7 +3338,7 @@
       },
       "checker_id": "docs_navigation",
       "defines_main": true,
-      "file_size_bytes": 9727,
+      "file_size_bytes": 9719,
       "hard_coded_branch_like_strings": [
         "branch",
         "branches",
@@ -3402,7 +3402,7 @@
         "coordinate_native_profile",
         "runtime_config_docs"
       ],
-      "sha256": "40bec39a7ea5ba43510f12f06579da9715006a8a623c15fa92fd50748bac4767",
+      "sha256": "96d66234b327f0a1499a578f463d81c67b485e0a04b606082f1e1481e20e23e9",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
