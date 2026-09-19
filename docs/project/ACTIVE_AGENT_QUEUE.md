@@ -280,7 +280,7 @@ Git, but it is not current candidate supply or implementation authority.
         "mode": "DIRECT_ANCESTRY",
         "implementation_base_sha": "a861964418a9b0e84abb89b2146f8430a5e7c69b",
         "reviewed_implementation_sha": "933456a61269d47603f54b31aea33274a6381f6d",
-        "prior_canonical_integration_sha": "a861964418a9b0e84abb89b2146f8430a5e7c69b",
+        "prior_canonical_integration_sha": "933456a61269d47603f54b31aea33274a6381f6d",
         "reviewed_changed_paths": [
           "docs/runtime_config/artifact_postprocessor_provenance.md",
           "docs/runtime_config/fixtures/glyph_checker_census.json",
