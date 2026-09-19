@@ -124,12 +124,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -466,7 +466,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-008",
       "title": "Bind source-authority intake locators",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-src-008-authority-locator-binding",
       "objective": "Require the canonical production X1 intake's approval, ownership, and replacement evidence locators to resolve to the exact reviewed authority they claim.",
       "why_this_matters": "The intake currently treats arbitrary non-placeholder strings as production authority and carries an unverified approval string into emitted generator metadata.",
@@ -508,7 +508,17 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave intake emission unchanged if exact closed correspondence cannot be proved; no packet with unresolved locator authority may be emitted as production-authorized.",
       "status_documentation_updates": "Document the closed current-corpus locator contract and fail-closed boundary; preserve all ownership, hardware, runtime, device-write, and historical non-claims.",
-      "done_evidence": "Pending exact reviewed locator enforcement, negative corpus, current X1 positive proof, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "ccb01a1ac3c8a21f69358bc345242303503ffbde",
+        "reviewed_implementation_sha": "d849fbecb9712751284d9540d8c030aa30273fa7",
+        "prior_canonical_integration_sha": "220b8a1d27bbd31d00f707303b546fe59b3765dd",
+        "reviewed_changed_paths": ["docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/source_owned_source_authority_intake.json", "docs/runtime_config/source_authority_intake_workflow.md", "tools/check_glyph_source_owned_source_authority_intake.py", "tools/source_owned_source_authority_intake.py"],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on exact d849fbe. Paired identity tampering fails closed, exact GLYPH-UD-010 locator/ownership/point binding holds, stale baseline remains blocked, current-baseline substitution remains a NO_OP, and no active source/build/device/hardware scope entered the diff.",
+        "validation_provenance": "Intake checker PASS (22 positive, 104 negative); generator modes PASS; census 202; health 41/current load-bearing 37; framework, navigation, docs-surface, Python syntax, and git diff --check PASS. Aggregate runner remains pre-existing SETUP_FAILURE on ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/; no aggregate-green claim. No firmware build or hardware action required."
+      },
       "stop_conditions": [
         "Any unrelated user-direction entry or arbitrary existing anchor can grant authority.",
         "Any table ownership, coordinate, or approval meaning is inferred.",
@@ -4225,11 +4235,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-008","GP-VAL-020"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-020"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-008, GP-VAL-020; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-020; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4240,7 +4250,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. Four bounded H0/H1 items remain Ready after GP-SRC-007 and GP-VAL-019 completion; they cover ignored critical paths, successful SetConfig rebinding characterization, exact X1 authority locators, and safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-2050 is PARTIALLY_CONSUMED after independent Curator adjudication. One bounded H0/H1 item remains Ready after GP-SRC-008 completion: safety-checker classification. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
