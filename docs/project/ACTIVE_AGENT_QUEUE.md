@@ -24,77 +24,77 @@ Git, but it is not current candidate supply or implementation authority.
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Every candidate in glyph-portfolio-20260919-2050 has been adjudicated: GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, and GP-VAL-020 were authorized READY; GP-CONFIG-008 is now DONE and GP-PROV-010 remains research gated.",
+    "resolution": "Every candidate in glyph-portfolio-20260920-0227 has been adjudicated: GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 are READY; GP-VAL-023 is PREAUTHORIZED and mechanically waiting on GP-VAL-021 integration; GP-PERSIST-003 remains research gated.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:4e38028b97ed07e894368564b9f9cdce87ba9c55:docs/planning/portfolio_20260919_2050.md",
+      "opening_reference": "git-json:6f7be340568a03069f605503c5ad67dc7f692bda:docs/planning/portfolio_20260920_0227.md",
       "subject_ids": [
-        "GP-SRC-007",
-        "GP-VAL-019",
-        "GP-PROV-011",
-        "GP-CONFIG-008",
-        "GP-SRC-008",
-        "GP-VAL-020",
-        "GP-PROV-010"
+        "GP-SRC-009",
+        "GP-VAL-021",
+        "GP-VAL-022",
+        "GP-VAL-023",
+        "GP-CONFIG-009",
+        "GP-PERSIST-003"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:2d50315600e9528df5daa0db57c9e27b7a710732:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:92c3e6b44e66314bde72e99783b22867d3abcf7d:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
-    "state": "CONSUMED",
-    "branch": "planning/portfolio-20260919-2050",
-    "base_configurator_sha": "f1977c1104472d1e58733a14a11acf83fef3139b",
-    "packet_id": "glyph-portfolio-20260919-2050",
-    "packet_path": "docs/planning/portfolio_20260919_2050.md",
-    "planning_commit": "4e38028b97ed07e894368564b9f9cdce87ba9c55",
-    "curation_commit": "2d50315600e9528df5daa0db57c9e27b7a710732",
-    "candidate_count": 0,
-    "survivors": [],
+    "state": "PARTIALLY_CONSUMED",
+    "branch": "planning/portfolio-20260920-0227",
+    "base_configurator_sha": "c4a4ddfb82b2ec7b650202be427ef5797f5092fe",
+    "packet_id": "glyph-portfolio-20260920-0227",
+    "packet_path": "docs/planning/portfolio_20260920_0227.md",
+    "planning_commit": "6f7be340568a03069f605503c5ad67dc7f692bda",
+    "curation_commit": "92c3e6b44e66314bde72e99783b22867d3abcf7d",
+    "candidate_count": 1,
+    "survivors": [
+      {
+        "candidate_id": "GP-PERSIST-003",
+        "disposition": "RESEARCH_GATED"
+      }
+    ],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator independently authorized GP-SRC-007, GP-VAL-019, GP-PROV-011, GP-CONFIG-008, GP-SRC-008, and GP-VAL-020 as bounded READY work on 2026-09-19.",
-      "Curator retained GP-PROV-010 as RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved; the reviewed gated survivor was consumed with the completed READY runway."
+      "Curator independently authorized GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 as bounded READY work on 2026-09-20 and GP-VAL-023 as PREAUTHORIZED pending GP-VAL-021 integration.",
+      "Curator retained GP-PERSIST-003 as RESEARCH_GATED because the host fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity remain unresolved."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260919-2050",
-      "planning_commit": "4e38028b97ed07e894368564b9f9cdce87ba9c55",
-      "packet_id": "glyph-portfolio-20260919-2050",
-      "packet_base_configurator_sha": "f1977c1104472d1e58733a14a11acf83fef3139b",
-      "curation_branch": "curation/portfolio-20260919-2050-review",
+      "planning_branch": "planning/portfolio-20260920-0227",
+      "planning_commit": "6f7be340568a03069f605503c5ad67dc7f692bda",
+      "packet_id": "glyph-portfolio-20260920-0227",
+      "packet_base_configurator_sha": "c4a4ddfb82b2ec7b650202be427ef5797f5092fe",
+      "curation_branch": "curation/portfolio-20260920-0227-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-SRC-007",
+          "candidate_id": "GP-SRC-009",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-VAL-019",
+          "candidate_id": "GP-VAL-021",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-PROV-011",
+          "candidate_id": "GP-VAL-022",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-CONFIG-008",
+          "candidate_id": "GP-VAL-023",
+          "disposition": "PREAUTHORIZED"
+        },
+        {
+          "candidate_id": "GP-CONFIG-009",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-SRC-008",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-VAL-020",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-PROV-010",
+          "candidate_id": "GP-PERSIST-003",
           "disposition": "RESEARCH_GATED"
         }
       ],
-      "review_date": "2026-09-19",
-      "curation_commit": "2d50315600e9528df5daa0db57c9e27b7a710732"
+      "review_date": "2026-09-20",
+      "curation_commit": "92c3e6b44e66314bde72e99783b22867d3abcf7d"
     }
   },
   "completion_correspondence": {
@@ -119,18 +119,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
-    "recorded_preauthorized": 0,
+    "immediate_ready": 4,
+    "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_OK"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -140,6 +139,326 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-SRC-009",
+      "title": "Fail closed on noncanonical production authority",
+      "status": "READY",
+      "branch": "glyph/gp-src-009-canonical-production-authority",
+      "objective": "Prevent synthetic or otherwise unreviewed source-authority intake identities and arbitrary locator text from authorizing a production source-owned changeset.",
+      "why_this_matters": "The current closed X1 mapping rejects misuse of the canonical identity or locator but returns without a blocker for wholly noncanonical identities, after which generic nonempty approval strings can authorize production emission.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "For requested_operation production_changeset, only the exact canonical X1 intake/profile pair, GLYPH-UD-010 locator mapping, sole kX1Table ownership, and exact nine reviewed points may pass production emission. Every other identity, locator, ownership set, or production replacement fails closed. Source-equivalence proof and synthetic construction remain explicitly non-production only.",
+      "scope": "Change the source-authority intake validator/manager/checker, current closed-corpus fixtures and locator documentation, and deterministic manifest/census/health consequences. Convert current synthetic production-positive cases into fail-closed coverage while preserving non-production review and source-equivalence operations.",
+      "explicit_excluded_scope": "No new authority registry, generic anchor grammar, external locator support, human approval, table ownership or value, source install, active firmware, runtime publication, build, artifact, device, or hardware action.",
+      "touched_planes": [
+        "source-owned configuration",
+        "generated tables/artifacts",
+        "docs/checkers"
+      ],
+      "source_authority": "At c4a4ddfb82b2ec7b650202be427ef5797f5092fe, tools/source_owned_source_authority_intake.py::_closed_canonical_x1_mapping returns without a blocker for wholly noncanonical identities unless they reuse the canonical locator. The current checker constructs fixture-intake/fixture-profile with fixture-approval, owns kDefaultTable, receives zero blockers and production_emission_allowed true, and emits an EXPLICIT_OWNED_TABLE_CHANGESET. GP-SRC-008 and source_authority_intake_workflow.md authorize only the exact closed X1/GLYPH-UD-010 corpus mapping.",
+      "dependencies_prerequisites": [
+        "Preserve the exact current 28-table baseline and canonical X1 intake/profile, GLYPH-UD-010 locator, kX1Table, and nine-point correspondence.",
+        "Preserve stale-baseline rejection, overlay/preserve semantics, downstream production gates, and source-equivalence proof as non-production evidence.",
+        "Reject rather than infer every production authority outside the closed reviewed mapping."
+      ],
+      "substantive_authorization_rationale": "The positive gap and the only accepted production authority are directly source-proven. Enforcing the already-recorded closed corpus requires no new product, ownership, coordinate, firmware, or user decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The canonical X1 intake, GLYPH-UD-010 record, or current production operation contract changes materially.",
+        "Implementation would require a generic registry, locator grammar, external authority, or newly approved production intake.",
+        "The repair would change table ownership, values, active source, runtime behavior, build inputs, or hardware scope."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator c4a4ddfb82b2ec7b650202be427ef5797f5092fe and Planner candidate GP-SRC-009 at 6f7be340568a03069f605503c5ad67dc7f692bda. Receipt 92c3e6b44e66314bde72e99783b22867d3abcf7d records READY after an independent direct probe reproduced production emission from synthetic identity, locator, ownership, and replacement evidence.",
+      "automated_validation": [
+        "Reject every noncanonical production identity, arbitrary or mismatched locator, ownership expansion, multi-table overlay, full replacement, and changed canonical point through direct API and CLI paths.",
+        "Accept the exact canonical X1 record after current-baseline substitution only as its current NO_OP production result; preserve stale-baseline rejection.",
+        "Preserve source_equivalence_proof and synthetic helper construction only where they cannot set production_emission_allowed or emit a production changeset.",
+        "Run intake, generator, manifest/census/health, framework, navigation, agent-surface, syntax, diff, and fresh independent review gates."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 host source-authority enforcement only; active source and build inputs remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave production emission unchanged only if the closed canonical restriction cannot be implemented without broader authority design; emit no noncanonical packet as production-authorized.",
+      "status_documentation_updates": "Document the closed production corpus and explicit non-production helper boundary while preserving ownership, runtime, device-write, persistence, Nunchuk, root-cause, and hardware non-claims.",
+      "done_evidence": "Pending exact reviewed implementation, focused authority corpus, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any noncanonical identity or arbitrary locator can still authorize production emission.",
+        "Any new authority, table ownership, coordinate, or approval meaning would be inferred.",
+        "Active source, runtime, build, artifact, device, or hardware scope appears.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-021",
+      "title": "Seal the CI build-to-upload command chain",
+      "status": "READY",
+      "branch": "glyph/gp-val-021-ci-build-upload-chain",
+      "objective": "Require the current CI build, artifact preparation, sidecar verification, and upload boundary to be exact, unique, unconditional, failure-bearing, and mutation-free after verification.",
+      "why_this_matters": "Current workflow checkers accept masked or unreachable build/copy commands, decoy canonical text, post-verification artifact mutation, intervening mutation steps, extra upload actions, and extra upload fields.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "The exact current build/mkdir/copy step, four-line nuke step, four-line sidecar step, and one current upload-artifact family step with its exact flat field map are required in order. Sidecar verification is the final executable command before the immediately following unique upload step; masking, conditional execution, decoys, duplicates, alternate uploads, extra fields, or intervening/post-verification mutation fail closed.",
+      "scope": "Change the artifact workflow checker, bounded workflow-step parser/helper only where required for exact flat upload-with fields, focused in-memory adversarial cases, directly affected documentation, and deterministic manifest/census/health consequences. Preserve the tracked workflow bytes.",
+      "explicit_excluded_scope": "No workflow YAML or command change, alternate publication-route claim outside the current build workflow, dependency pin, runner, build input, postprocessor behavior, artifact bytes/store/custody, firmware, device, hardware, or GP-VAL-011 work.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "At c4a4ddfb82b2ec7b650202be427ef5797f5092fe, the artifact checker protects checkout/postprocessor/sidecar operations but discovers build and copy by substring and compares only step indices. Independent mutations with pio or cp followed by || true, an unreachable build, a decoy canonical copy string, post-verify artifact append, an intervening update step, an extra upload-artifact version, and extra nested upload fields are accepted while the exact baseline also passes.",
+      "dependencies_prerequisites": [
+        "The exact current .github/workflows/build.yml commands, step names, default shell, environment expressions, and upload destination remain unchanged.",
+        "Preserve GP-VAL-016 aggregate-command integrity and GP-VAL-019 protected artifact command enforcement.",
+        "Keep parser changes limited to the reviewed workflow subset and exact flat upload-with mapping."
+      ],
+      "substantive_authorization_rationale": "The accepted adversarial mutations and exact current acceptance language are source-proven. This is bounded H0 checker hardening and does not select or alter CI, artifact, product, or firmware behavior.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The tracked workflow legitimately changes any protected command, step order, field map, shell, or upload shape.",
+        "The repair would require editing workflow YAML, commands, publication routing, artifact bytes, or custody semantics.",
+        "The shared parser cannot preserve the exact current validation and artifact workflow acceptance."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator c4a4ddfb82b2ec7b650202be427ef5797f5092fe and Planner candidate GP-VAL-021 at 6f7be340568a03069f605503c5ad67dc7f692bda. Receipt 92c3e6b44e66314bde72e99783b22867d3abcf7d records READY after independent reproduction of masked, unreachable, decoy, post-verification mutation, intervening-step, alternate-upload, and extra-field acceptance.",
+      "automated_validation": [
+        "Accept the exact current workflow and require the exact complete build, nuke, sidecar, and upload steps with unique names, order, command lines, supported fields, and exact flat upload-with map.",
+        "Reject masking, trailing success, conditionals, functions, subshells, heredocs, duplicates, decoys, wrong source copy, post-verification mutation, intervening steps, alternate upload versions, multiple upload-family steps, and extra or changed upload fields.",
+        "Require sidecar verification to be the last executable command of its step and that step to immediately precede the unique upload step.",
+        "Run both workflow checkers, parser tests, provenance, manifest/census/health, framework, navigation, agent-surface, syntax, diff, and fresh independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 checker/parser-only work; workflow, build inputs, artifact transformation, and firmware remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave the checker unchanged if the exact tracked workflow cannot pass the bounded contract; do not edit the workflow to satisfy the checker.",
+      "status_documentation_updates": "Record exact failure-bearing build-to-upload enforcement only; make no artifact, release, runtime, device, or hardware acceptance claim.",
+      "done_evidence": "Pending exact reviewed checker implementation, adversarial workflow corpus, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any protected operation remains accepted when masked, unreachable, decoyed, duplicated, reordered, or followed by artifact mutation.",
+        "Any alternate upload-family action or extra upload field remains accepted in the current workflow.",
+        "Workflow YAML, commands, artifact bytes, publication routing, build inputs, firmware, device, hardware, or GP-VAL-011 would change.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-022",
+      "title": "Validate every generated adapter mapping",
+      "status": "READY",
+      "branch": "glyph/gp-val-022-adapter-mapping-correspondence",
+      "objective": "Make current load-bearing source-sync gates prove every active generated table symbol/index and point/axis adapter mapping instead of validating only raw generated rows.",
+      "why_this_matters": "The current extractor normalizes raw generated rows by comments and contents without parsing the active adapter macros, so compiled table-symbol correspondence can drift while extracted tables and semantic digest remain unchanged.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "One exact load-bearing correspondence parser proves all 28 symbol-to-index aliases, the nine point indices 0 through 8, x then y axis expansion, the exact raw-array namespace, and absence of extra, duplicate, missing, or malformed adapter invocations. Active header bytes, table values, runtime publication, and firmware behavior remain unchanged.",
+      "scope": "Update the extractor/current source-sync path and one focused checker or bounded host compile probe, reusing or relocating existing historical alias validation rather than creating competing authority. Add adapter fixtures/documentation and deterministic manifest/census/health consequences.",
+      "explicit_excluded_scope": "No table value, symbol order, adapter mapping, generated array, active header, runtime publication, build selector, firmware behavior, device, artifact, or hardware change.",
+      "touched_planes": [
+        "source-owned configuration",
+        "generated tables/artifacts",
+        "docs/checkers"
+      ],
+      "source_authority": "At c4a4ddfb82b2ec7b650202be427ef5797f5092fe, extract_glyph_identity_runtime_tables.py parses generated raw rows and embedded row comments but not SOURCE_OWNED_GENERATED_TABLE or SOURCE_OWNED_GENERATED_TABLE_POINT. The current symbol-map checker anchors only kDefaultTable index 0. Mutating the live kX1Table alias from index 2 to 3 leaves extracted tables and digest unchanged. A historical non-load-bearing generator-contract checker already validates the 28 aliases but not point/axis expansion and must be reused or promoted rather than duplicated.",
+      "dependencies_prerequisites": [
+        "Preserve the exact current 28-symbol order, generated semantic digest, source-owned active publication, and X1/Y2 evidence.",
+        "Reuse or relocate the historical alias validation into one current load-bearing authority path.",
+        "Treat the gate as correspondence proof only; it must not infer table semantics or change active bytes."
+      ],
+      "substantive_authorization_rationale": "The blind current extraction path, exact adapter grammar, and expected current mapping are directly source-proven. Making that correspondence load-bearing is bounded H1 host validation and needs no product, table-semantic, runtime, or hardware decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The generated adapter grammar, 28-symbol order, raw-array namespace, or point/axis expansion changes materially.",
+        "Implementation would duplicate a second authority source instead of reusing the canonical symbol order and current adapter source.",
+        "The repair would change active source bytes, table values, mapping, runtime publication, or firmware behavior."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator c4a4ddfb82b2ec7b650202be427ef5797f5092fe and Planner candidate GP-VAL-022 at 6f7be340568a03069f605503c5ad67dc7f692bda. Receipt 92c3e6b44e66314bde72e99783b22867d3abcf7d records READY after independent kX1 index mutation reproduced unchanged extraction/digest and identified the historical non-load-bearing alias checker overlap.",
+      "automated_validation": [
+        "Accept the exact current adapter and prove all 28 unique symbol/index mappings plus exact point indices and x/y expansion against the current raw array.",
+        "Reject swapped, duplicate, missing, extra, skipped, and out-of-range table indices; wrong point indices; point reorder; x/y inversion; wrong namespace/raw array; and malformed macro expansion.",
+        "Retain current source-sync, generator, X1, and generated-baseline results while making adapter correspondence load-bearing and avoiding duplicate authority.",
+        "Run focused extractor/checker, manifest/census/health, framework, navigation, agent-surface, syntax, diff, and fresh independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 host correspondence validation only; active source and build-input bytes remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Leave current production gates unchanged if one exact load-bearing adapter proof cannot be established without duplicate authority; do not alter the active adapter to satisfy the checker.",
+      "status_documentation_updates": "Record adapter correspondence proof and historical-check reuse only; preserve all table-value, runtime, firmware, device, Nunchuk, root-cause, and hardware non-claims.",
+      "done_evidence": "Pending exact reviewed correspondence implementation, adversarial adapter corpus, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any current symbol/index or point/axis drift remains invisible to load-bearing source-sync validation.",
+        "A competing symbol-order or table-semantic authority is introduced.",
+        "Active header bytes, table values, mapping, runtime publication, firmware, device, or hardware behavior would change.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-CONFIG-009",
+      "title": "Characterize config-menu invalid states",
+      "status": "READY",
+      "branch": "glyph/gp-config-009-config-menu-invalid-state-characterization",
+      "objective": "Establish bounded host-sanitizer evidence for the exact production config-menu bodies under source-supported null-mode and empty-page states, without selecting a firmware repair.",
+      "why_this_matters": "Current menu source dereferences a possibly null CurrentGameMode, subtracts one from zero item counts, and accepts highlighted index equal to count before indexing, but physical reachability and device consequences are not established.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "An exact-production host harness records whether isolated null-current-mode, production-filtered empty-page, and injected index-equals-count cases complete or trigger sanitizer/assertion failures. Index-equals-count reachability, dual-core timing, device crash/display/controller effects, and physical behavior remain UNKNOWN; undefined behavior is not relabeled deterministic firmware behavior.",
+      "scope": "Literal-include and compile the exact current ConfigMenu.cpp, DefaultConfigMenu.cpp, and GlyphConfigMenu.cpp bodies once with only platform/display/backend dependency doubles, exact source/blob drift binding, ASan/UBSan or equivalent deterministic host assertions, and one subprocess per expected-failure case. Bind construction order from setup source without claiming whole-device setup timing.",
+      "explicit_excluded_scope": "No firmware/UI fix, empty-page or no-mode product policy, default selection, SetConfig validation change, setup timing claim, persistence/protocol change, gameplay decision, production source edit, device access, build artifact, physical observation, or hardware claim.",
+      "touched_planes": [
+        "firmware runtime",
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At c4a4ddfb82b2ec7b650202be427ef5797f5092fe, ConfigMenu::HandleControls uses items_count - 1 without an empty guard, checks highlighted index with > rather than >=, then indexes; UpdateDisplay also subtracts count/offset. DefaultConfigMenu dereferences _backends[0]->CurrentGameMode()->GetConfig() unconditionally. CommunicationBackend initializes mode null, backend boot selects only when default_mode_config > 0, SetConfig accepts zero, setup constructs GlyphConfigMenu, and GlyphConfigMenu filtering can publish a zero-item page. No exact production transition to highlighted==count is proved.",
+      "dependencies_prerequisites": [
+        "Bind the exact current menu, backend-mode initialization, setup construction, and relevant SetConfig source correspondence.",
+        "Use isolated host cases with only dependency doubles; distinguish source-supported state from injected primitive state and unknown physical reachability.",
+        "Preserve GP-CONFIG-005 transaction behavior and GP-CONFIG-008 rebinding observations; any desired repair is separate H2/H3 curation."
+      ],
+      "substantive_authorization_rationale": "The null and empty-page states and unsafe operations are direct source facts. A narrowly bounded exact-body sanitizer characterization records evidence without choosing desired UI behavior, editing firmware, or claiming controller outcomes.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Any bound menu, backend-mode, setup, or SetConfig source body changes materially before implementation.",
+        "The harness would copy behavioral logic instead of compiling exact production bodies or would require a production source change.",
+        "A UI policy, repair, setup-timing guarantee, physical reachability, or device-behavior claim becomes necessary."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator c4a4ddfb82b2ec7b650202be427ef5797f5092fe and Planner candidate GP-CONFIG-009 at 6f7be340568a03069f605503c5ad67dc7f692bda. Receipt 92c3e6b44e66314bde72e99783b22867d3abcf7d records READY after independent source inspection verified null/empty operations and narrowed index-equals-count to an injected case with reachability UNKNOWN.",
+      "automated_validation": [
+        "Compile exact production menu bodies with source/blob drift binding and isolate every sanitizer/assertion case in its own subprocess.",
+        "Cover null CurrentGameMode construction; production-filtered zero game-mode and USB-option pages; fresh up/down/enter/back and UpdateDisplay on empty child pages; and synthetic highlighted==items_count with explicit non-reachability labeling.",
+        "Preserve UNKNOWN for dual-core scheduling, physical reachability, performed setup/device timing, display/controller effects, and hardware behavior.",
+        "Run existing SetConfig/rebinding checks, focused sanitizer harness, manifest/census/health, framework, navigation, agent-surface, syntax, diff, and fresh independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: H1 exact-production host characterization only; production source and build inputs remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Drop the host characterization if exact production-body correspondence or isolated sanitizer evidence cannot be maintained; do not select or implement a menu repair.",
+      "status_documentation_updates": "Publish only bounded host observations and explicit reachability/device unknowns; route any desired firmware behavior change through separate H2/H3 planning and curation.",
+      "done_evidence": "Pending exact reviewed host characterization, isolated sanitizer corpus, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any production firmware, UI, setup, protocol, persistence, backend, display, or runtime behavior would change.",
+        "Copied behavioral models replace exact production-body correspondence.",
+        "Injected host state is claimed reachable or host sanitizer output is claimed as physical controller behavior.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-023",
+      "title": "Make trusted comparison-base setup failure-bearing",
+      "status": "PREAUTHORIZED",
+      "branch": "glyph/gp-val-023-trusted-base-command-integrity",
+      "objective": "Require the current validation workflow's trusted comparison-base setup and handoff to the aggregate step to be exact, unique, unconditional within each current branch, failure-bearing, and free of intervening ref mutation.",
+      "why_this_matters": "The current validator accepts masked or unreachable fetch/assert/resolve operations and an intervening step that mutates origin/configurator after verification but before the aggregate consumes the comparison ref.",
+      "hardware_risk": "H0",
+      "behavioral_claim": "After GP-VAL-021 integrates the shared workflow parser contract, the one current setup step must contain the exact seven-line PR/configurator conditional fetch, nonempty assertion, and rev-parse sequence; it must immediately precede the exact aggregate step, with no duplicate operations, alternate fields, trailing commands, or intervening ref mutation. The aggregate remains responsible for resolving GLYPH_CHECKER_BASE to a commit; no intrinsic immutable-remote-ref claim is added.",
+      "scope": "After GP-VAL-021 is DONE, change the validation-publication checker and fixture, reuse the integrated bounded parser without broadening its supported YAML language, add focused adversarial cases and directly affected documentation, and refresh deterministic manifest/census/health consequences.",
+      "explicit_excluded_scope": "No workflow YAML, fetch target, base-expression, Git credential/network behavior, aggregate runner, publication route, build, artifact, firmware, device, hardware, GP-VAL-011, or concurrent parser redesign.",
+      "touched_planes": [
+        "docs/checkers"
+      ],
+      "source_authority": "At c4a4ddfb82b2ec7b650202be427ef5797f5092fe, the validation-publication checker requires substrings for fetch, nonempty GLYPH_CHECKER_BASE, and rev-parse. Independent mutations with || true, unreachable branch operations, duplicate or wrong operations, and an intervening git update-ref step are accepted while the exact workflow passes. The current conditional PR-base versus origin/configurator setup is intentional and must be preserved exactly.",
+      "dependencies_prerequisites": [
+        "GP-VAL-021 is integrated and DONE with its exact current workflow/parser contract passing.",
+        "The exact current trusted-base setup, PR/configurator expressions, aggregate command, default shell, and step order remain unchanged.",
+        "GP-VAL-016 aggregate-command integrity remains intact and GP-VAL-011 remains owner-deferred."
+      ],
+      "substantive_authorization_rationale": "The defect and desired fail-closed current workflow contract are source-proven. The work should be done, but waiting for GP-VAL-021 avoids overlapping shared-parser authority; after that exact integration, activation is objective and mechanical.",
+      "mechanical_activation_conditions": [
+        "Canonical queue records GP-VAL-021 DONE with strict completion correspondence and its reviewed implementation integrated into live configurator.",
+        "The tracked validation workflow's exact seven executable setup lines, environment expressions, aggregate command, default shell, and immediate setup-to-aggregate step order match the c4a4ddfb82b2ec7b650202be427ef5797f5092fe authorization snapshot.",
+        "The integrated shared parser and both current workflow checkers accept their exact tracked workflows with no unexpected semantic or supported-shape drift."
+      ],
+      "invalidation_conditions": [
+        "GP-VAL-021 changes the shared parser or workflow contract beyond the exact reviewed delta classes or is not integrated as reviewed.",
+        "The trusted-base workflow commands, expressions, fields, shell, step order, aggregate handoff, or remote-selection policy changes materially.",
+        "Implementation would require workflow, runner, network, credential, publication, build, artifact, firmware, device, hardware, or GP-VAL-011 changes."
+      ],
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator c4a4ddfb82b2ec7b650202be427ef5797f5092fe and Planner candidate GP-VAL-023 at 6f7be340568a03069f605503c5ad67dc7f692bda. Receipt 92c3e6b44e66314bde72e99783b22867d3abcf7d records PREAUTHORIZED after independent reproduction of masked, unreachable, duplicate, and intervening-ref-mutation acceptance and separation from GP-VAL-021's shared-parser work.",
+      "automated_validation": [
+        "Accept the exact current conditional setup and aggregate workflow after GP-VAL-021 integration.",
+        "Reject masking, trailing success, unreachable or reordered branch operations, duplicate setup operations, wrong refs/fields/shell, functions, subshells, heredocs, continuation/comment disguise, and alternate environment expressions.",
+        "Require the exact setup step to end at rev-parse and immediately precede the exact aggregate step; reject intervening or later mutation of the compared refs before aggregate execution.",
+        "Run publication/artifact workflow, parser, manifest/census/health, framework, navigation, agent-surface, syntax, diff, and fresh independent review gates."
+      ],
+      "canonical_build": "NOT_REQUIRED: H0 checker-only work; workflow, runner, build inputs, and firmware remain unchanged.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Remain PREAUTHORIZED/WAITING if GP-VAL-021 is not exactly integrated or any activation condition drifts; do not edit the workflow or aggregate runner to satisfy the checker.",
+      "status_documentation_updates": "Record exact failure-bearing trusted-base setup and immediate aggregate handoff only; make no remote immutability, network, credential, runner, artifact, runtime, or hardware claim.",
+      "done_evidence": "Pending mechanical activation after exact GP-VAL-021 integration, reviewed checker implementation, adversarial workflow corpus, affected gates, and strict completion correspondence.",
+      "stop_conditions": [
+        "Any activation condition is unsatisfied or GP-VAL-021 introduces unexpected parser/workflow drift.",
+        "Any setup operation can be masked, skipped, duplicated, reordered, or separated from aggregate execution by ref mutation.",
+        "Workflow, runner, network, credential, publication, build, artifact, firmware, device, hardware, or GP-VAL-011 scope appears.",
+        "Focused validation or independent review fails."
+      ],
+      "activation_state": "WAITING",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-SRC-007",
       "title": "Fail closed on non-corresponding coordinate conversion",
@@ -4249,11 +4568,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-009","GP-VAL-021","GP-VAL-022","GP-CONFIG-009"],"immediate_ready":4,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-SRC-009, GP-VAL-021, GP-VAL-022, GP-CONFIG-009; Immediate Ready: 4; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4264,7 +4583,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-2050 is CONSUMED after independent Curator adjudication and completion of all authorized survivors. No bounded item remains Ready after GP-VAL-020 completion. GP-PROV-010 remains RESEARCH_GATED because completed-build binding, package enumeration, generated metadata policy, and bounded content closure remain unresolved. GP-VAL-018 remains USER_DECISION_GATED, so no implementation runway is executable. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260920-0227 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 are READY. GP-VAL-023 is PREAUTHORIZED / WAITING on exact GP-VAL-021 integration and is not mechanically activatable yet. GP-PERSIST-003 remains RESEARCH_GATED because its fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity are unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
@@ -4300,7 +4619,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-Independent review of packet glyph-portfolio-20260919-2050 against live configurator f1977c1 authorized six source-proven H0/H1 items. GP-SRC-007 is narrowed to rejection of every currently uncorresponded generic profile; GP-SRC-008 accepts only the exact canonical X1/GLYPH-UD-010 mapping; GP-PROV-011 uses the exact audited finite critical-path inventory. GP-PROV-010 is not executable until completed-build/source binding, package enumeration, generated metadata treatment, and bounded content membership are source-backed. No global wait or filler was authorized. GP-VAL-011 remains owner-deferred and nonexecutable; future H2 modifier/layout realization remains evidence-gated on owner/Senscope data and routing intent. Historical completed work and its strict correspondence remain unchanged.
+Independent review of packet glyph-portfolio-20260920-0227 against live configurator c4a4ddf authorized four bounded H0/H1 READY items. GP-SRC-009 closes production emission to the exact canonical X1 record; GP-VAL-021 binds the exact build-to-upload chain; GP-VAL-022 makes the current generated adapter mapping load-bearing; and GP-CONFIG-009 characterizes exact menu bodies without claiming deterministic firmware behavior or physical reachability. GP-VAL-023 is substantively PREAUTHORIZED but waits mechanically on exact GP-VAL-021 integration to avoid overlapping shared-parser authority. GP-PERSIST-003 is not executable until its fault-double semantics, target ABI correspondence, dependency identities, and observation boundary are source-backed. No global wait or filler was authorized. GP-VAL-011 remains owner-deferred and nonexecutable; future H2 modifier/layout realization remains evidence-gated on owner/Senscope data and routing intent. Historical completed work and strict correspondence remain unchanged.
 
 ## Work Orders
 
@@ -4308,7 +4627,7 @@ The complete machine-readable work orders above are canonical. Array order is
 canonical work-order ordering. Only items marked `READY` authorize immediate
 execution.
 The one-new-work-order-per-Implementation-cycle rule still applies. The
-partially consumed packet retains GP-PROV-010 as its exact gated survivor; it
+partially consumed packet retains GP-PERSIST-003 as its exact gated survivor; it
 cannot execute unless later source-backed research returns it through planning
 and curation.
 
