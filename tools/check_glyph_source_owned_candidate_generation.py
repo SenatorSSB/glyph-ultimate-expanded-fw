@@ -285,6 +285,10 @@ def validate_dry_run_outputs() -> None:
                                ("docs/runtime_config/fixtures/generated_source_owned_layout_spec.json", "layout-spec")):
             option = "--profile" if kind == "profile" else "--layout-spec"
             returncode, payload, output = run_tool_in_repository(root, option, argument)
+            if kind == "profile":
+                if returncode == 0 or payload or "no source-authorized profile-to-layout mapping exists" not in output:
+                    fail(f"profile dry-run did not fail closed: {output}")
+                continue
             if returncode != 0:
                 fail(f"{kind} dry-run unexpectedly failed: {output}")
             validate_plan_payload(payload, fixture, input_kind=kind, repository_root=root)

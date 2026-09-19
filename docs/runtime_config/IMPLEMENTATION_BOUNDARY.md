@@ -41,10 +41,12 @@ merge policy, dry-run output shape, and future dry-run annotations in
 `future_dry_run_examples`. Those annotations are documentation only and do not
 implement an evaluator.
 
-An offline coordinate-native-to-source-owned layout-spec bridge converter may
-validate a strict profile subset and emit the inert source-owned layout-spec
-packet consumed by `--emit-from-layout-spec`. That bridge is docs/tools only,
-stays offline-only, and is not an approval for runtime-loaded config,
+The offline coordinate-native-to-source-owned layout-spec bridge converter
+validates the strict profile contract but currently rejects every generic
+profile because no explicit profile-to-table correspondence is
+source-authorized. The direct source-owned layout-spec path consumed by
+`--emit-from-layout-spec` remains available. Both paths are docs/tools only,
+stay offline-only, and are not an approval for runtime-loaded config,
 WebSerial/device write, persistent runtime-config storage, backend config
 write, or flashing automation.
 

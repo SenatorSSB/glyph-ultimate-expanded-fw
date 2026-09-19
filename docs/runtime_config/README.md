@@ -320,9 +320,11 @@ RuntimeConfigView publication.
 
 The coordinate-native bridge converter
 `tools/convert_coordinate_native_profile_to_source_owned_spec.py` is also
-offline tooling only. It validates a supported fixture-backed coordinate-native
-profile and emits the canonical inert layout-spec packet consumed by
-`--emit-from-layout-spec`. The emitted layout spec is not loaded by firmware,
+offline tooling only. It validates fixture-backed coordinate-native profiles
+and then rejects them with a stable fail-closed result because no explicit
+profile-to-table correspondence is source-authorized. The direct
+source-owned layout-spec path remains available through
+`--emit-from-layout-spec`; its inert output is not loaded by firmware,
 runtime-loaded config remains not implemented, and there is no WebSerial/device
 write, no persistence/storage, no flashing automation, and no active
 RuntimeConfigView publication.
