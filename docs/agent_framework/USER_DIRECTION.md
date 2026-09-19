@@ -204,6 +204,25 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   not required; no cloud/external store, upload, release, credential, CI release
   policy, flashing automation, or device write is authorized.
 
+### GLYPH-UD-016
+
+- Type: `Decision`
+- Status: `Active`
+- Source: direct user governance correction supplied 2026-09-19
+- Direction: A completed Work-Order Curator run must consume the current
+  curation obligation and must never publish `CURATION_REQUIRED` as the next
+  primary state. If it creates executable authorization, the next state is the
+  derived runway state. If effective runway remains zero after every current
+  candidate and invalidation has been adjudicated, the Curator must preserve
+  exact user/evidence/research gates as supporting dispositions, mark supply
+  that cannot proceed without new input as no longer pending Curator work, and
+  route next to `PLANNING_REQUIRED` (or an independently accepted global wait).
+  A later material packet, invalidation, failed-hardware event, or new external
+  evidence may create a new curation obligation; it does not justify a
+  self-loop at the end of the current Curator run. This decision authorizes no
+  filler work, inferred product semantics, weakened evidence gate, or direct
+  execution of gated candidates.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is

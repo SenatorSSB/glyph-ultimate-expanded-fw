@@ -19,7 +19,9 @@ READY
        -> HARDWARE_TEST_REQUIRED
        -> LOCAL_ACCEPTANCE_PENDING
        -> PASS: HARDWARE_VALIDATED -> MERGE_ELIGIBLE
-       -> FAIL: HARDWARE_FAILED -> REPAIR_REQUIRED / CURATION_REQUIRED
+       -> FAIL: HARDWARE_FAILED -> REPAIR_REQUIRED + pending curation obligation
+            -> while pending: CURATION_REQUIRED
+            -> after authenticated Curator resolution: preserve failure; no self-loop
        -> PARTIAL/INCONCLUSIVE: LOCAL_ACCEPTANCE_PENDING with exact gaps
 ```
 
@@ -124,8 +126,10 @@ candidate correspondence.
 - Identity or protocol mismatch: `HARDWARE_EVIDENCE_MISMATCH`.
 - Complete exact PASS: `HARDWARE_VALIDATED`.
 - FAIL: isolate candidate, record `HARDWARE_FAILED`, and always add supporting
-  `REPAIR_REQUIRED`; with zero effective runway the primary state is
-  `CURATION_REQUIRED`.
+  `REPAIR_REQUIRED`; set the canonical curation obligation pending with the
+  exact candidate, evidence reference, trigger, and provenance. With zero
+  effective runway the primary state is `CURATION_REQUIRED`; positive runway
+  retains its runway primary while the obligation remains pending.
 - PARTIAL or INCONCLUSIVE: keep non-merge-eligible and state exact retest needs.
 
 The processor updates evidence and control-plane state only. It does not edit
@@ -138,7 +142,12 @@ runtime source or publish source to `configurator`.
 - Exact complete PASS: `HARDWARE_VALIDATED`, `hardware_result: PASS`, canonical
   evidence reference, and an empty evidence-gap list.
 - Exact FAIL: `HARDWARE_FAILED`, `hardware_result: FAIL`, canonical evidence
-  reference, and `REPAIR_REQUIRED` or `CURATION_REQUIRED` as the next signal.
+  reference, supporting `REPAIR_REQUIRED`, and a pending canonical curation
+  obligation. Curator resolution preserves the failure while clearing the
+  obligation only through an immutable Curator receipt covering that exact
+  failed candidate and committed after the pending-obligation opening
+  snapshot; a pre-failure packet receipt is insufficient. The same evidence
+  therefore cannot create a post-Curator self-loop.
 - Exact PARTIAL or INCONCLUSIVE: remain `LOCAL_ACCEPTANCE_PENDING`, record the
   corresponding result and exact gaps/retest steps; no merge eligibility.
 - Identity/protocol mismatch: keep the prior non-validated status, record

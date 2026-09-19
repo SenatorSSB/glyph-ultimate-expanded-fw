@@ -482,7 +482,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 146386,
+      "file_size_bytes": 167296,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -533,7 +533,6 @@
         "packet_branch.startswith",
         "planning_branch",
         "required_external_evidence",
-        "substantive_candidate_exists",
         "validate_completion_evidence",
         "validate_evidence_record"
       ],
@@ -542,7 +541,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 3076,
+      "line_count": 3556,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -595,7 +594,6 @@
         "packet_branch.startswith",
         "planning_branch",
         "required_external_evidence",
-        "substantive_candidate_exists",
         "validate_completion_evidence",
         "validate_evidence_record"
       ],
@@ -627,6 +625,9 @@
         "docs/agent_framework/USER_DIRECTION.md",
         "docs/agent_framework/VALIDATION_AND_GATES.md",
         "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
+        "docs/agent_framework/curation_receipts",
+        "docs/agent_framework/curation_receipts/",
+        "docs/agent_framework/curation_receipts/gp_test_001.json",
         "docs/agent_framework/examples/example_cycle_report.md",
         "docs/agent_framework/examples/example_subagent_handoff.md",
         "docs/agent_framework/examples/example_supervisor_cycle_request.md",
@@ -647,6 +648,7 @@
         "docs/planning/portfolio_20260901_0909.md",
         "docs/planning/portfolio_20260906_1800.md",
         "docs/project",
+        "docs/project/ACTIVE_AGENT_QUEUE",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/project/AGENTS.md",
         "docs/project/AGENT_OPERATING_CONTRACT.md",
@@ -658,7 +660,7 @@
         "docs/test_protocol.md"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "122406156006c1ef7d900f3bc91d56f43d174f9c7458db580681e134a88327f0",
+      "sha256": "a62d25ba63ff1e17c2082c8c25509da7cb9b41780623abcf904ab27eb8de2093",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

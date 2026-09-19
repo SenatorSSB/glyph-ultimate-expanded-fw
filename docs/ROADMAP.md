@@ -9,14 +9,14 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
-The executable work runway is owned by docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent authorization of five bounded H0/H1 candidates: GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002. All five are now DONE with strict completion correspondence; no immediate Ready item remains. The machine-derived markers above carry zero effective authorized runway and CURATION_REQUIRED. GP-VAL-018 remains USER_DECISION_GATED and GP-PROV-010 remains RESEARCH_GATED. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. The next H2 realization awaits owner/Senscope modifier/layout data and routing intent. Global evidence wait is unsupported.
+The executable work runway is owned by docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260919-0320 is CONSUMED after independent adjudication of all seven candidates. GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 are DONE with strict completion correspondence; no immediate Ready item remains. The machine-derived markers above carry zero effective authorized runway and PLANNING_REQUIRED. GP-VAL-018 remains USER_DECISION_GATED and GP-PROV-010 remains RESEARCH_GATED, but neither is pending Curator work. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. The next H2 realization awaits owner/Senscope modifier/layout data and routing intent. Global evidence wait is unsupported.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip
@@ -40,8 +40,8 @@ remains historical and separate. Focused gates, build and independent review
 passed, with strict DONE correspondence published after live integration.
 No atomic persistence, power-loss, rollback, recovery, GET_CONFIG live-RAM,
 Nunchuk, unrelated-path or root-cause claim is created. The integration build
-is build proof only. No executable item remains; concrete gated survivors keep
-the current liveness at CURATION_REQUIRED. Deferred GP-VAL-011 is not executable.
+is build proof only. No executable item remains; completed curation leaves the
+current liveness at PLANNING_REQUIRED. Deferred GP-VAL-011 is not executable.
 
 `GP-X1-001` is `DONE`. Exact candidate
 `74ae24364b84520d4e0e39240beb9867653cc7b9` and UF2 SHA-256

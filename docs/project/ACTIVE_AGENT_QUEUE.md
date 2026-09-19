@@ -17,33 +17,40 @@ Git, but it is not current candidate supply or implementation authority.
 <!-- queue-state:start -->
 ```json
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "canonical_branch": "configurator",
   "audit_base_sha": "8b4babd8ebea7e4f363b694eeb27435a47befbe7",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
+  "curation_obligation": {
+    "pending": false,
+    "trigger": null,
+    "resolution": "Every candidate in glyph-portfolio-20260919-0320 has been adjudicated; GP-VAL-018 remains user-decision gated and GP-PROV-010 remains research gated, so neither is pending Curator work.",
+    "provenance": {
+      "opened_by_role": "Glyph Portfolio Planner",
+      "opening_reference": "git-json:1c15b71d2d1658c1fde13689f925c7372308dc1d:docs/planning/portfolio_20260919_0320.md",
+      "subject_ids": [
+        "GP-VAL-018",
+        "GP-PROV-010"
+      ],
+      "resolved_by_role": "Glyph Work-Order Curator",
+      "resolution_reference": "git-json:3a6714cc056960c0d04f69401942b50e58ce4150:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+    }
+  },
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
+    "state": "CONSUMED",
     "branch": "planning/portfolio-20260919-0320",
     "base_configurator_sha": "64c9875c53095964ea7a540c7112104ea1a4ab8f",
     "packet_id": "glyph-portfolio-20260919-0320",
     "packet_path": "docs/planning/portfolio_20260919_0320.md",
     "planning_commit": "1c15b71d2d1658c1fde13689f925c7372308dc1d",
     "curation_commit": "3a6714cc056960c0d04f69401942b50e58ce4150",
-    "candidate_count": 2,
-    "survivors": [
-      {
-        "candidate_id": "GP-VAL-018",
-        "disposition": "USER_DECISION_GATED"
-      },
-      {
-        "candidate_id": "GP-PROV-010",
-        "disposition": "RESEARCH_GATED"
-      }
-    ],
+    "candidate_count": 0,
+    "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator independently authorized GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work on 2026-09-19; GP-VAL-018 remains USER_DECISION_GATED and GP-PROV-010 remains RESEARCH_GATED."
+      "Curator independently authorized GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 as bounded READY work on 2026-09-19; all five are now DONE.",
+      "Curator fully adjudicated the remaining packet supply on 2026-09-19: GP-VAL-018 remains USER_DECISION_GATED and GP-PROV-010 remains RESEARCH_GATED, so neither is retained as pending Curator work."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260919-0320",
@@ -117,7 +124,10 @@ Git, but it is not current candidate supply or implementation authority.
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
     "signals": [
-    "CURATION_REQUIRED"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
+    "RUNWAY_SHORTFALL_RESEARCH_GATED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -3763,11 +3773,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -3778,7 +3788,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260919-0320 is PARTIALLY_CONSUMED after independent Curator authorization of five bounded work items; GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 are now DONE with strict completion correspondence. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy; GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization. Its immutable receipt binds all seven initial dispositions. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. The machine-derived runway markers above carry zero effective authorized runway and CURATION_REQUIRED; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260919-0320 is CONSUMED after independent Curator adjudication of all seven candidates; GP-PROV-009, GP-VAL-016, GP-CONFIG-007, GP-VAL-017, and GP-PERSIST-002 are DONE with strict completion correspondence. GP-VAL-018 remains USER_DECISION_GATED on the owner/Senscope tie and conflict policy, while GP-PROV-010 remains RESEARCH_GATED pending source-backed resolved-build metadata characterization; those reviewed dispositions are preserved by the immutable receipt and are not pending Curator work. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE evidence is unchanged. With zero executable runway after completed curation, the next primary state is PLANNING_REQUIRED with exact user-decision and research shortfall signals; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
@@ -3806,8 +3816,10 @@ effective authorized runway.
 
 Hardware-pending items require the supporting signal
 `HARDWARE_TEST_REQUIRED`. `HARDWARE_FAILED` items require the supporting signal
-`REPAIR_REQUIRED`; with zero effective runway they also derive the primary
-`CURATION_REQUIRED` state. `HARDWARE_TEST_REQUIRED` carries no result yet;
+`REPAIR_REQUIRED`; newly recorded failure also opens the canonical curation
+obligation, which derives primary `CURATION_REQUIRED` at zero runway until the
+Curator records its resolution. The preserved failure does not reopen that
+resolved obligation. `HARDWARE_TEST_REQUIRED` carries no result yet;
 PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
@@ -3819,8 +3831,10 @@ Independent review of packet glyph-portfolio-20260919-0320 against live configur
 The complete machine-readable work orders above are canonical. Array order is
 canonical work-order ordering. Only items marked `READY` authorize immediate
 execution.
-The one-new-work-order-per-Implementation-cycle rule still applies. Remaining
-Planner survivors are non-executable under the dispositions above.
+The one-new-work-order-per-Implementation-cycle rule still applies. The packet
+has no remaining Curator survivors; its gated dispositions require new user or
+research evidence before they can return through a future planning/curation
+cycle.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
