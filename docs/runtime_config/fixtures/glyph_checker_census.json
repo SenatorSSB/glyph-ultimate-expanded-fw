@@ -826,7 +826,7 @@
       },
       "checker_id": "artifact_postprocessor_workflow",
       "defines_main": true,
-      "file_size_bytes": 8980,
+      "file_size_bytes": 12227,
       "hard_coded_branch_like_strings": [
         "--candidate-sha"
       ],
@@ -835,7 +835,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 196,
+      "line_count": 255,
       "parse_error": null,
       "path": "tools/check_glyph_artifact_postprocessor_workflow.py",
       "potential_branch_identity_signals": [
@@ -850,7 +850,7 @@
         "artifact_custody_provenance",
         "ci_workflows"
       ],
-      "sha256": "824934098286cad6cad8106f72694acafca0d24624ad3094d0d55c467a9ae427",
+      "sha256": "4d10a76387f4d01a08b784e459685e345dee706ba545c074da199caaff095f53",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

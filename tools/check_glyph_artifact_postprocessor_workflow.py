@@ -29,6 +29,37 @@ PROTECTED_FAMILY_MARKERS = (
     "--verify-sidecar",
 )
 
+EXACT_BUILD_LINES = [
+    'pio run -e "$PIO_ENV"',
+    'mkdir -p "$PIO_ENV"',
+    'cp ".pio/build/${PIO_ENV}/firmware.${BIN_EXT}" "$ARTIFACT_PATH"',
+]
+EXACT_CHECKOUT_LINES = [PROTECTED_COMMANDS[0]]
+EXACT_NUKE_LINES = [
+    "mv glyph_nuker $PIO_ENV/glyph_nuker",
+    "cd $PIO_ENV",
+    "ls *.uf2 | xargs ./glyph_nuker",
+    "rm glyph_nuker",
+]
+EXACT_SIDECAR_LINES = [
+    'export SIDECAR_PATH="$PIO_ENV/${ARTIFACT_NAME}.provenance.json"',
+    'test "$SIDECAR_PATH" = "$PIO_ENV/${ARTIFACT_NAME}.provenance.json"',
+    'python3 tools/check_glyph_artifact_postprocessor_provenance.py --write-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"',
+    'python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"',
+]
+EXACT_UPLOAD_FIELDS = {"name": "Glyph_FW", "path": "${{ env.PIO_ENV }}"}
+
+
+def reject_decoys_and_conditions(steps: list[object]) -> None:
+    exact_blocks = (EXACT_CHECKOUT_LINES, EXACT_BUILD_LINES, EXACT_NUKE_LINES, EXACT_SIDECAR_LINES)
+    markers = PROTECTED_FAMILY_MARKERS + ("pio run -e", 'mkdir -p "$PIO_ENV"', 'cp ".pio/build/')
+    for step in steps:
+        if getattr(step, "condition", None) is not None:
+            raise WorkflowError("conditional workflow step is not failure-bearing")
+        lines = executable_lines(getattr(step, "run", None))
+        if any(marker in line for line in lines for marker in markers) and lines not in exact_blocks:
+            raise WorkflowError("protected operation has a decoy, masked, or mutated step")
+
 
 def require_exact_protected_commands(steps: list[object]) -> None:
     """Require each reviewed provenance operation as one failure-bearing line."""
@@ -80,7 +111,10 @@ def validate(text: str) -> None:
     build_job = jobs.get("build")
     if build_job is None:
         raise WorkflowError("build job missing")
+    if build_job.continue_on_error is not None:
+        raise WorkflowError("build job uses a permissive failure policy")
     steps = build_job.steps
+    reject_decoys_and_conditions(steps)
     require_exact_protected_commands(steps)
     checkout = [
         step for step in steps
@@ -108,15 +142,18 @@ def validate(text: str) -> None:
     positions = [steps.index(step) for step in (checkout[0], build[0], postprocess[0], write[0], verify[0], upload[0])]
     if not positions[0] < positions[1] < positions[2] < positions[3] <= positions[4] < positions[5]:
         raise WorkflowError("identity, postprocessing, sidecar, and upload ordering drifted")
-    sidecar_lines = executable_lines(write[0].run)
-    if not any("--write-sidecar" in line for line in sidecar_lines):
-        raise WorkflowError("sidecar write command is not executable")
-    if not any("--verify-sidecar" in line for line in sidecar_lines):
-        raise WorkflowError("sidecar verification command is not executable")
-    if next(i for i, line in enumerate(sidecar_lines) if "--write-sidecar" in line) >= next(
-        i for i, line in enumerate(sidecar_lines) if "--verify-sidecar" in line
-    ):
-        raise WorkflowError("sidecar verification precedes sidecar write")
+    if positions[4] + 1 != positions[5]:
+        raise WorkflowError("sidecar verification must immediately precede upload")
+    if executable_lines(build[0].run) != EXACT_BUILD_LINES:
+        raise WorkflowError("build step command block drifted")
+    if executable_lines(postprocess[0].run) != EXACT_NUKE_LINES:
+        raise WorkflowError("nuke step command block drifted")
+    if executable_lines(write[0].run) != EXACT_SIDECAR_LINES:
+        raise WorkflowError("sidecar step command block drifted")
+    if getattr(upload[0], "fields", set()) != {"uses", "with"} or upload[0].with_fields != EXACT_UPLOAD_FIELDS:
+        raise WorkflowError("upload step fields drifted")
+    if sum(1 for step in steps if step.uses and "upload-artifact" in step.uses) != 1:
+        raise WorkflowError("alternate upload action is present")
     if "build-device-config.yml" in text:
         raise WorkflowError("unresolved external workflow was touched")
 
@@ -147,6 +184,28 @@ def main() -> int:
             "comment_only_verify": workflow.replace(
                 "python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar",
                 "# python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar", 1,
+            ),
+            "masked_build": workflow.replace('pio run -e "$PIO_ENV"', 'pio run -e "$PIO_ENV" || true', 1),
+            "decoy_copy": workflow.replace(
+                'cp ".pio/build/${PIO_ENV}/firmware.${BIN_EXT}" "$ARTIFACT_PATH"',
+                'cp ".pio/build/wrong/firmware.uf2" "$ARTIFACT_PATH"', 1,
+            ),
+            "post_verify_mutation": workflow.replace(
+                PROTECTED_COMMANDS[3], f"{PROTECTED_COMMANDS[3]}\n        echo mutation", 1
+            ),
+            "intervening_mutation": workflow.replace(
+                "    - name: Publish ${{ matrix.env }} artifacts",
+                "    - name: Intervening mutation\n      run: echo mutation\n\n    - name: Publish ${{ matrix.env }} artifacts", 1,
+            ),
+            "extra_upload_field": workflow.replace(
+                "        path: ${{ env.PIO_ENV }}",
+                "        path: ${{ env.PIO_ENV }}\n        retention-days: 1", 1,
+            ),
+            "alternate_upload": workflow.replace(
+                "actions/upload-artifact@v4", "actions/upload-artifact@v3", 1
+            ),
+            "job_continue_on_error": workflow.replace(
+                "  build:\n", "  build:\n    continue-on-error: true\n", 1
             ),
         }
         for index, command in enumerate(PROTECTED_COMMANDS):

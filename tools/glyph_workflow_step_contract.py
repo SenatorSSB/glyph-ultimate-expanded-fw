@@ -17,6 +17,7 @@ class Step:
     uses: str | None = None
     condition: str | None = None
     fields: set[str] = field(default_factory=set)
+    with_fields: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass
@@ -34,7 +35,7 @@ def _scalar(value: str | None, label: str) -> str:
     if value is None or not value.strip() or value.strip() in {"|", ">", "|-", ">-", "|+", ">+"}:
         raise WorkflowStepError(f"unsupported scalar shape: {label}")
     value = value.strip()
-    if value[0] in "[{" or value.endswith(("}", "]")):
+    if value[0] in "[{" or value.endswith("]"):
         raise WorkflowStepError(f"unsupported scalar shape: {label}")
     return value
 
@@ -101,10 +102,6 @@ def parse_jobs(text: str) -> dict[str, Job]:
                         break
                     detail_match = _KEY.match(detail)
                     if not detail_match or len(detail_match.group("indent")) != 6:
-                        # Nested 'with' values are deliberately outside this parser.
-                        if detail.startswith("      ") and current_step.fields and "with" in current_step.fields:
-                            i += 1
-                            continue
                         raise WorkflowStepError("unsupported step field shape")
                     key, value = detail_match.group("key"), detail_match.group("value")
                     if key in step.fields:
@@ -136,6 +133,25 @@ def parse_jobs(text: str) -> dict[str, Job]:
                     elif key == "with":
                         if value is not None:
                             raise WorkflowStepError("with must be a mapping")
+                        i += 1
+                        while i < len(lines):
+                            nested = lines[i]
+                            if not nested.strip():
+                                i += 1
+                                continue
+                            if nested.startswith("    - ") or re.match(r"^  [A-Za-z0-9_-]+:", nested):
+                                break
+                            nested_match = _KEY.match(nested)
+                            if nested_match and len(nested_match.group("indent")) <= 6:
+                                break
+                            if not nested_match or len(nested_match.group("indent")) != 8:
+                                raise WorkflowStepError("unsupported with field shape")
+                            nested_key, nested_value = nested_match.group("key"), nested_match.group("value")
+                            if nested_key in step.with_fields:
+                                raise WorkflowStepError(f"duplicate with field: {nested_key}")
+                            step.with_fields[nested_key] = _scalar(nested_value, f"with.{nested_key}")
+                            i += 1
+                        continue
                     elif key in {"name", "if", "env", "shell", "working-directory"}:
                         scalar = _scalar(value, key)
                         if key == "if":
