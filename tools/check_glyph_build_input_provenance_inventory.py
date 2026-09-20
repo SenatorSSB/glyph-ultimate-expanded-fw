@@ -121,18 +121,18 @@ SELECTOR_SPECS = [
     ("workflow.nested.reusable_caller", "reusable_workflow", "config/glyph/.github/workflows/build.yml", "jobs.build.uses", "GregTurbo/HayBox-Glyph/.github/workflows/build-device-config.yml@configurator", "MOVING_REF", "UNRESOLVED_EXTERNAL"),
     ("workflow.top.build_environment", "environment", ".github/workflows/build.yml", "jobs.build.strategy.matrix.include.env", "glyph_mk6", "LOCAL_CONFIGURATION_SYMBOL", "RUNTIME_RESOLVED_ONLY"),
     ("workflow.top.build_extension", "environment", ".github/workflows/build.yml", "jobs.build.strategy.matrix.include.bin_ext", "uf2", "LOCAL_CONFIGURATION_SYMBOL", "RUNTIME_RESOLVED_ONLY"),
-    ("workflow.top.checkout_build", "workflow_action", ".github/workflows/build.yml", "jobs.build.steps.Check out source code.uses", "actions/checkout@v4", "TAG", "DECLARED_MOVABLE_NOT_RESOLVED"),
-    ("workflow.top.checkout_validation", "workflow_action", ".github/workflows/build.yml", "jobs.validation.steps.Check out source code.uses", "actions/checkout@v4", "TAG", "DECLARED_MOVABLE_NOT_RESOLVED"),
+    ("workflow.top.checkout_build", "workflow_action", ".github/workflows/build.yml", "jobs.build.steps.Check out source code (actions/checkout v4.4.0).uses", "actions/checkout@11d5960a326750d5838078e36cf38b85af677262", "FULL_GIT_COMMIT", "DECLARED_EXACT_NOT_FETCHED"),
+    ("workflow.top.checkout_validation", "workflow_action", ".github/workflows/build.yml", "jobs.validation.steps.Check out source code (actions/checkout v4.4.0).uses", "actions/checkout@11d5960a326750d5838078e36cf38b85af677262", "FULL_GIT_COMMIT", "DECLARED_EXACT_NOT_FETCHED"),
     ("workflow.top.comparison_base", "source_selection", ".github/workflows/build.yml", "jobs.validation.env.GLYPH_CHECKER_BASE", "${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'origin/configurator' }}", "RUNTIME_EXPRESSION", "RUNTIME_RESOLVED_ONLY"),
     ("workflow.top.glyph_nuker", "postprocessor", ".github/workflows/build.yml", "jobs.build.steps.nuke.run", "glyph_nuker", "TRACKED_FILE_IDENTITY", "STATIC_TRACKED_BYTES"),
     ("workflow.top.pip", "dependency", ".github/workflows/build.yml", "jobs.build.steps.Install PlatformIO.run", "python -m pip install --upgrade pip", "UNVERSIONED", "DECLARED_MOVABLE_NOT_RESOLVED"),
     ("workflow.top.platformio", "dependency", ".github/workflows/build.yml", "jobs.build.steps.Install PlatformIO.run", "pip install --upgrade platformio", "UNVERSIONED", "DECLARED_MOVABLE_NOT_RESOLVED"),
-    ("workflow.top.python", "toolchain", ".github/workflows/build.yml", "jobs.build.steps.Set up Python.with.python-version", "3.10", "VERSION_LINE", "DECLARED_MOVABLE_NOT_RESOLVED"),
+    ("workflow.top.python", "toolchain", ".github/workflows/build.yml", "jobs.build.steps.Set up Python (actions/setup-python v5.6.0).with.python-version", "3.10", "VERSION_LINE", "DECLARED_MOVABLE_NOT_RESOLVED"),
     ("workflow.top.runner.build", "workflow_runner", ".github/workflows/build.yml", "jobs.build.runs-on", "ubuntu-latest", "MOVING_REF", "DECLARED_MOVABLE_NOT_RESOLVED"),
     ("workflow.top.runner.validation", "workflow_runner", ".github/workflows/build.yml", "jobs.validation.runs-on", "ubuntu-latest", "MOVING_REF", "DECLARED_MOVABLE_NOT_RESOLVED"),
-    ("workflow.top.setup_python_action", "workflow_action", ".github/workflows/build.yml", "jobs.build.steps.Set up Python.uses", "actions/setup-python@v5", "TAG", "DECLARED_MOVABLE_NOT_RESOLVED"),
+    ("workflow.top.setup_python_action", "workflow_action", ".github/workflows/build.yml", "jobs.build.steps.Set up Python (actions/setup-python v5.6.0).uses", "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065", "FULL_GIT_COMMIT", "DECLARED_EXACT_NOT_FETCHED"),
     ("workflow.top.source_sha", "source_identity", ".github/workflows/build.yml", "jobs.build.steps.Verify checked-out source and postprocessor identity.run", "$GITHUB_SHA", "RUNTIME_EXPRESSION", "RUNTIME_RESOLVED_ONLY"),
-    ("workflow.top.upload_action", "workflow_action", ".github/workflows/build.yml", "jobs.build.steps.Publish ${{ matrix.env }} artifacts.uses", "actions/upload-artifact@v4", "TAG", "DECLARED_MOVABLE_NOT_RESOLVED"),
+    ("workflow.top.upload_action", "workflow_action", ".github/workflows/build.yml", "jobs.build.steps.Publish ${{ matrix.env }} artifacts (actions/upload-artifact v4.6.2).uses", "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02", "FULL_GIT_COMMIT", "DECLARED_EXACT_NOT_FETCHED"),
 ]
 
 
@@ -177,6 +177,8 @@ def sha256(path: Path) -> str:
 
 def classify_selector(raw: str, category: str) -> str:
     """Classify the reviewed raw selector without resolving its target."""
+    if re.fullmatch(r"[^@\s]+@[0-9a-f]{40}", raw):
+        return "FULL_GIT_COMMIT"
     suffix = raw.rsplit("#", 1)[-1] if "#" in raw else raw
     if re.fullmatch(r"[0-9a-f]{40}", suffix):
         return "FULL_GIT_COMMIT"

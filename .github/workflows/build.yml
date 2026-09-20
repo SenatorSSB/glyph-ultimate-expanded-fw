@@ -13,8 +13,8 @@ jobs:
     env:
       GLYPH_CHECKER_BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'origin/configurator' }}
     steps:
-    - name: Check out source code
-      uses: actions/checkout@v4
+    - name: Check out source code (actions/checkout v4.4.0)
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       with:
         fetch-depth: 0
 
@@ -44,8 +44,8 @@ jobs:
           - env: glyph_mk6
             bin_ext: uf2
     steps:
-    - name: Check out source code
-      uses: actions/checkout@v4
+    - name: Check out source code (actions/checkout v4.4.0)
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       with:
         fetch-depth: 0
 
@@ -55,8 +55,8 @@ jobs:
     - name: Verify checked-out source and postprocessor identity
       run: python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-checkout --candidate-sha "$GITHUB_SHA"
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - name: Set up Python (actions/setup-python v5.6.0)
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
       with:
         python-version: '3.10'
 
@@ -99,8 +99,8 @@ jobs:
         python3 tools/check_glyph_artifact_postprocessor_provenance.py --write-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"
         python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"
 
-    - name: Publish ${{ matrix.env }} artifacts
-      uses: actions/upload-artifact@v4
+    - name: Publish ${{ matrix.env }} artifacts (actions/upload-artifact v4.6.2)
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
         name: Glyph_FW
         path: ${{ env.PIO_ENV }}

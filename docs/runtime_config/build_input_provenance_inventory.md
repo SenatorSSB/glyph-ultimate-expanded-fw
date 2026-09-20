@@ -12,7 +12,9 @@ the PlatformIO/environment, dependency, workflow runner/action, source
 selection, source identity, local script, nested reusable-workflow caller, and
 `glyph_nuker` selectors that are declared by the repository.
 
-The inventory is intentionally observational. It does not fetch or install a
+The top-level CI action selectors are pinned to the exact live-verified
+commits authorized by GP-PROV-013, with release annotations retained in the
+workflow. The inventory is intentionally observational. It does not fetch or install a
 package, resolve an action or runner image, inspect `.pio` or another local
 dependency cache, import workflow code, execute a discovered script, invoke
 PlatformIO, execute `glyph_nuker`, build firmware, publish an artifact, or

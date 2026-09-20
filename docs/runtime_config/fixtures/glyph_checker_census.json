@@ -828,7 +828,7 @@
       },
       "checker_id": "artifact_postprocessor_workflow",
       "defines_main": true,
-      "file_size_bytes": 13515,
+      "file_size_bytes": 16634,
       "hard_coded_branch_like_strings": [
         "--candidate-sha"
       ],
@@ -837,7 +837,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 274,
+      "line_count": 313,
       "parse_error": null,
       "path": "tools/check_glyph_artifact_postprocessor_workflow.py",
       "potential_branch_identity_signals": [
@@ -853,7 +853,7 @@
         "build_declarations_hooks",
         "ci_workflows"
       ],
-      "sha256": "44ae3abede3f22b0be721d1be8451912a5c37ae23f6c7b0674a3620dce2d6d9b",
+      "sha256": "75b559050abc600d36ab0c8075a3cf93680819c75afa4611e0914a5bfccc6488",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -918,7 +918,7 @@
       },
       "checker_id": "build_input_provenance_inventory",
       "defines_main": true,
-      "file_size_bytes": 39623,
+      "file_size_bytes": 40040,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -929,7 +929,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 602,
+      "line_count": 604,
       "parse_error": null,
       "path": "tools/check_glyph_build_input_provenance_inventory.py",
       "potential_branch_identity_signals": [
@@ -952,7 +952,7 @@
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "c719ecc1a611f15a7027660f796e20fd0acef30a8c1d8570d6170f24eadf09e3",
+      "sha256": "0fe7e9555690b5e6c27c15dcedc0129665e0f506e5ab60ed6ea455e9b2bf5c0f",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

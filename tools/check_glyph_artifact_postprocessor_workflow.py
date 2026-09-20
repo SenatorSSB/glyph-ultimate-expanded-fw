@@ -53,6 +53,11 @@ EXACT_SIDECAR_LINES = [
     'python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"',
 ]
 EXACT_UPLOAD_FIELDS = {"name": "Glyph_FW", "path": "${{ env.PIO_ENV }}"}
+PINNED_ACTIONS = {
+    "actions/checkout": ("11d5960a326750d5838078e36cf38b85af677262", "v4.4.0"),
+    "actions/setup-python": ("a26af69be951a213d495a4c3e4e4022e16d87065", "v5.6.0"),
+    "actions/upload-artifact": ("ea165f8d65b6e75b540449e92b4886f43607fa02", "v4.6.2"),
+}
 
 
 def reject_decoys_and_conditions(steps: list[object]) -> None:
@@ -106,7 +111,7 @@ def validate(text: str) -> None:
         "--sidecar \"$SIDECAR_PATH\"",
         'test "$SIDECAR_PATH" = "$PIO_ENV/${ARTIFACT_NAME}.provenance.json"',
         "path: ${{ env.PIO_ENV }}",
-        "actions/upload-artifact@v4",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
     )
     for token in required:
         if token not in text:
@@ -121,6 +126,22 @@ def validate(text: str) -> None:
     if build_job.continue_on_error is not None:
         raise WorkflowError("build job uses a permissive failure policy")
     steps = build_job.steps
+    for step in jobs["validation"].steps + steps:
+        if step.uses and step.uses.startswith("actions/"):
+            action, _, revision = step.uses.partition("@")
+            if action in PINNED_ACTIONS:
+                expected_revision, release = PINNED_ACTIONS[action]
+                if revision != expected_revision:
+                    raise WorkflowError(f"unapproved mutable or incorrect action pin: {step.uses}")
+                if f"{action} {release}" not in step.name:
+                    raise WorkflowError(f"missing release annotation for {step.uses}")
+    action_steps = [step for step in jobs["validation"].steps + steps if step.uses]
+    if sum(step.uses == "actions/checkout@11d5960a326750d5838078e36cf38b85af677262" for step in action_steps) != 2:
+        raise WorkflowError("exactly two pinned checkout actions are required")
+    if sum(step.uses == "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065" for step in action_steps) != 1:
+        raise WorkflowError("exactly one pinned setup-python action is required")
+    if sum(step.uses == "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02" for step in action_steps) != 1:
+        raise WorkflowError("exactly one pinned upload-artifact action is required")
     reject_decoys_and_conditions(steps)
     require_exact_protected_commands(steps)
     checkout = [
@@ -151,7 +172,7 @@ def validate(text: str) -> None:
         step for step in steps
         if any("--verify-sidecar" in line for line in executable_lines(step.run))
     ]
-    upload = [step for step in steps if step.uses == "actions/upload-artifact@v4"]
+    upload = [step for step in steps if step.uses == "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"]
     if not len(checkout) == len(pre_build) == len(build) == len(post_build) == len(postprocess) == len(write) == len(verify) == len(upload) == 1:
         raise WorkflowError("identity, worktree, build, postprocessing, sidecar, and upload steps are not unique")
     positions = [steps.index(step) for step in (checkout[0], pre_build[0], build[0], post_build[0], postprocess[0], write[0], verify[0], upload[0])]
@@ -221,7 +242,25 @@ def main() -> int:
                 "        path: ${{ env.PIO_ENV }}\n        retention-days: 1", 1,
             ),
             "alternate_upload": workflow.replace(
-                "actions/upload-artifact@v4", "actions/upload-artifact@v3", 1
+                "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02", "actions/upload-artifact@v3", 1
+            ),
+            "mutable_checkout": workflow.replace(
+                "actions/checkout@11d5960a326750d5838078e36cf38b85af677262", "actions/checkout@v4", 1
+            ),
+            "wrong_setup_pin": workflow.replace(
+                "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065", "actions/setup-python@0000000000000000000000000000000000000000", 1
+            ),
+            "missing_upload_annotation": workflow.replace(
+                "Publish ${{ matrix.env }} artifacts (actions/upload-artifact v4.6.2)", "Publish ${{ matrix.env }} artifacts", 1
+            ),
+            "duplicate_checkout": workflow.replace(
+                "    - name: Set trusted comparison base", "    - name: Duplicate checkout\n      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n\n    - name: Set trusted comparison base", 1
+            ),
+            "duplicate_setup_python": workflow.replace(
+                "    - name: Install PlatformIO", "    - name: Duplicate setup-python (actions/setup-python v5.6.0)\n      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065\n\n    - name: Install PlatformIO", 1
+            ),
+            "duplicate_upload": workflow.replace(
+                "    - name: Set trusted comparison base", "    - name: Duplicate upload (actions/upload-artifact v4.6.2)\n      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02\n\n    - name: Set trusted comparison base", 1
             ),
             "job_continue_on_error": workflow.replace(
                 "  build:\n", "  build:\n    continue-on-error: true\n", 1

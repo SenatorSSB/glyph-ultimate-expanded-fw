@@ -30,7 +30,7 @@
     },
     {
       "path": ".github/workflows/build.yml",
-      "sha256": "8fec2df531c8a804923bf1c2c35884f3d35b97c3f0669414a873ed4498eec00c",
+      "sha256": "97e8970d77658af99512383094993b9a56ca921b926aaf036b30fb7e85799de5",
       "events": [
         "push",
         "pull_request"
@@ -41,7 +41,7 @@
         {
           "job": "build",
           "mechanism": "action",
-          "token": "actions/upload-artifact@v4"
+          "token": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
         },
         {
           "job": "build",

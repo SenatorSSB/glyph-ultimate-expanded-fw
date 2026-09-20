@@ -12,7 +12,7 @@
     {
       "path": ".github/workflows/build.yml",
       "git_mode": "100644",
-      "sha256": "8fec2df531c8a804923bf1c2c35884f3d35b97c3f0669414a873ed4498eec00c"
+      "sha256": "97e8970d77658af99512383094993b9a56ca921b926aaf036b30fb7e85799de5"
     },
     {
       "path": "builder_scripts/arduino_pico.py",
@@ -573,19 +573,19 @@
       "id": "workflow.top.checkout_build",
       "category": "workflow_action",
       "declaring_path": ".github/workflows/build.yml",
-      "declaration_context": "jobs.build.steps.Check out source code.uses",
-      "raw_selector": "actions/checkout@v4",
-      "selector_class": "TAG",
-      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
+      "declaration_context": "jobs.build.steps.Check out source code (actions/checkout v4.4.0).uses",
+      "raw_selector": "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "selector_class": "FULL_GIT_COMMIT",
+      "resolution_state": "DECLARED_EXACT_NOT_FETCHED"
     },
     {
       "id": "workflow.top.checkout_validation",
       "category": "workflow_action",
       "declaring_path": ".github/workflows/build.yml",
-      "declaration_context": "jobs.validation.steps.Check out source code.uses",
-      "raw_selector": "actions/checkout@v4",
-      "selector_class": "TAG",
-      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
+      "declaration_context": "jobs.validation.steps.Check out source code (actions/checkout v4.4.0).uses",
+      "raw_selector": "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "selector_class": "FULL_GIT_COMMIT",
+      "resolution_state": "DECLARED_EXACT_NOT_FETCHED"
     },
     {
       "id": "workflow.top.comparison_base",
@@ -627,7 +627,7 @@
       "id": "workflow.top.python",
       "category": "toolchain",
       "declaring_path": ".github/workflows/build.yml",
-      "declaration_context": "jobs.build.steps.Set up Python.with.python-version",
+      "declaration_context": "jobs.build.steps.Set up Python (actions/setup-python v5.6.0).with.python-version",
       "raw_selector": "3.10",
       "selector_class": "VERSION_LINE",
       "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
@@ -654,10 +654,10 @@
       "id": "workflow.top.setup_python_action",
       "category": "workflow_action",
       "declaring_path": ".github/workflows/build.yml",
-      "declaration_context": "jobs.build.steps.Set up Python.uses",
-      "raw_selector": "actions/setup-python@v5",
-      "selector_class": "TAG",
-      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
+      "declaration_context": "jobs.build.steps.Set up Python (actions/setup-python v5.6.0).uses",
+      "raw_selector": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "selector_class": "FULL_GIT_COMMIT",
+      "resolution_state": "DECLARED_EXACT_NOT_FETCHED"
     },
     {
       "id": "workflow.top.source_sha",
@@ -672,10 +672,10 @@
       "id": "workflow.top.upload_action",
       "category": "workflow_action",
       "declaring_path": ".github/workflows/build.yml",
-      "declaration_context": "jobs.build.steps.Publish ${{ matrix.env }} artifacts.uses",
-      "raw_selector": "actions/upload-artifact@v4",
-      "selector_class": "TAG",
-      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
+      "declaration_context": "jobs.build.steps.Publish ${{ matrix.env }} artifacts (actions/upload-artifact v4.6.2).uses",
+      "raw_selector": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "selector_class": "FULL_GIT_COMMIT",
+      "resolution_state": "DECLARED_EXACT_NOT_FETCHED"
     }
   ],
   "source_identity": {
