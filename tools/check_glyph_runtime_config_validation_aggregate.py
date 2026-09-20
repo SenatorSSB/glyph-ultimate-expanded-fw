@@ -13,6 +13,7 @@ import importlib.util
 import io
 import json
 import os
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -485,6 +486,59 @@ def isolation_contract_cases(module: Any) -> list[str]:
         if module.canonical_fingerprint(root) == before:
             raise AssertionError("leading whitespace ignored filename bytes were omitted")
         passed.append("ISO-11-whitespace-newline-file-name-fingerprints")
+
+        # A hostile PATH must not replace the interpreter that launched the
+        # aggregate.  The manifest command remains portable and is only
+        # rewritten at the execution boundary.
+        fake_python = parent / "fake-bin" / "python3"
+        fake_python.parent.mkdir()
+        fake_invocation = fake_python.with_name("invoked")
+        fake_python.write_text(
+            "#!/bin/sh\nprintf invoked > " + shlex.quote(str(fake_invocation)) + "\nprintf forged-output\nexit 0\n",
+            encoding="utf-8",
+        )
+        fake_python.chmod(0o755)
+        interpreter_probe = install(
+            "import json,sys\nprint(json.dumps({'executable': sys.executable}))\n"
+        )
+        old_path = os.environ.get("PATH")
+        os.environ["PATH"] = str(fake_python.parent) + os.pathsep + (old_path or "")
+        try:
+            report = execute(interpreter_probe)
+        finally:
+            if old_path is None:
+                os.environ.pop("PATH", None)
+            else:
+                os.environ["PATH"] = old_path
+        if report["status"] != "PASS":
+            raise AssertionError(f"ambient python3 substituted for invoking interpreter: {report}")
+        observed = json.loads(report["results"][0]["stdout_summary"][0])["executable"]
+        if observed != module.sys.executable or fake_invocation.exists():
+            raise AssertionError("checker did not run under the invoking interpreter")
+
+        fake_python.write_text(
+            "#!/bin/sh\nprintf invoked > " + shlex.quote(str(fake_invocation)) + "\nexit 91\n",
+            encoding="utf-8",
+        )
+        report = execute(interpreter_probe)
+        if report["status"] != "PASS" or fake_invocation.exists():
+            raise AssertionError("failing PATH substitute was reached or changed real-checker behavior")
+
+        original_executable = module.sys.executable
+        unusable = ["", "relative-invoking-python", str(parent / "missing-invoking-python")]
+        non_executable = parent / "non-executable-invoking-python"
+        non_executable.write_text("placeholder\n", encoding="utf-8")
+        non_executable.chmod(0o644)
+        unusable.append(str(non_executable))
+        try:
+            for candidate in unusable:
+                module.sys.executable = candidate
+                report = execute(interpreter_probe)
+                if report["status"] != "FAIL" or report["failure_kind"] != "SETUP_FAILURE" or "invoking Python executable" not in report["message"]:
+                    raise AssertionError(f"unusable invoking interpreter was not rejected: {candidate!r}: {report}")
+        finally:
+            module.sys.executable = original_executable
+        passed.append("ISO-12-invoking-python-binding-and-unusable-identity-failure")
     return passed
 
 
