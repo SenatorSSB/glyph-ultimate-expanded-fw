@@ -19,12 +19,12 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "f2fd0892ea9856573c59142ca854fe56585454b8",
+  "audit_base_sha": "2d95d6ba87843708aea56b98d1cd0bb563309c9d",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Every candidate in glyph-portfolio-20260920-0227 has been adjudicated: GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 were authorized READY; GP-VAL-023 is PREAUTHORIZED and mechanically activatable; GP-PERSIST-003 remains research gated.",
+    "resolution": "Every candidate in glyph-portfolio-20260920-0227 has been adjudicated: GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 were authorized READY; GP-VAL-023 was PREAUTHORIZED and is now DONE after its exact activation; GP-PERSIST-003 remains research gated.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
       "opening_reference": "git-json:6f7be340568a03069f605503c5ad67dc7f692bda:docs/planning/portfolio_20260920_0227.md",
@@ -120,16 +120,16 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "runway": {
     "immediate_ready": 0,
-    "recorded_preauthorized": 1,
-    "mechanically_activatable_preauthorized": 1,
+    "recorded_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -478,7 +478,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-023",
       "title": "Make trusted comparison-base setup failure-bearing",
-      "status": "PREAUTHORIZED",
+      "status": "DONE",
       "branch": "glyph/gp-val-023-trusted-base-command-integrity",
       "objective": "Require the current validation workflow's trusted comparison-base setup and handoff to the aggregate step to be exact, unique, unconditional within each current branch, failure-bearing, and free of intervening ref mutation.",
       "why_this_matters": "The current validator accepts masked or unreachable fetch/assert/resolve operations and an intervening step that mutates origin/configurator after verification but before the aggregate consumes the comparison ref.",
@@ -522,14 +522,31 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Remain PREAUTHORIZED/WAITING if GP-VAL-021 is not exactly integrated or any activation condition drifts; do not edit the workflow or aggregate runner to satisfy the checker.",
       "status_documentation_updates": "Record exact failure-bearing trusted-base setup and immediate aggregate handoff only; make no remote immutability, network, credential, runner, artifact, runtime, or hardware claim.",
-      "done_evidence": "Pending mechanical activation after exact GP-VAL-021 integration, reviewed checker implementation, adversarial workflow corpus, affected gates, and strict completion correspondence.",
       "stop_conditions": [
         "Any activation condition is unsatisfied or GP-VAL-021 introduces unexpected parser/workflow drift.",
         "Any setup operation can be masked, skipped, duplicated, reordered, or separated from aggregate execution by ref mutation.",
         "Workflow, runner, network, credential, publication, build, artifact, firmware, device, hardware, or GP-VAL-011 scope appears.",
         "Focused validation or independent review fails."
       ],
-      "activation_state": "ACTIVATABLE",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "8d4b69c64316757f1ef23532ee000fa0ac71da5f",
+        "reviewed_implementation_sha": "2d95d6ba87843708aea56b98d1cd0bb563309c9d",
+        "prior_canonical_integration_sha": "2d95d6ba87843708aea56b98d1cd0bb563309c9d",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_runtime_config_validation_publication_workflow.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-VAL-023 implementation snapshot. Review confirmed exact and unique jobs.validation.env base expression placement, exact seven-line setup, failure-bearing operations, immediate aggregate adjacency, rejection of masking, unreachable branches, duplicates, ref mutation, continuation splits, block/flow defaults, and no excluded scope.",
+        "validation_provenance": "Focused publication-workflow checker PASS with 38 adversarial cases, checker census 203 entries, validation health 42 manifest entries and 38 current load-bearing checks, framework, navigation, agent-surface, Python compilation, and git diff --check PASS. No firmware build, artifact, device, or hardware action was required. Aggregate runtime validation remains unavailable on the pre-existing ignored nested .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ preflight defect; no aggregate-green claim is made."
+      },
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
