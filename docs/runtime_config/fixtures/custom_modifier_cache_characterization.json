@@ -1,0 +1,38 @@
+{
+  "schema_name": "glyph_custom_modifier_cache_characterization",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-011",
+  "cases": ["setconfig_0", "setconfig_10", "setconfig_11", "setconfig_20", "process_0", "process_10", "process_11", "process_20"],
+  "expected_results": {
+    "setconfig_0": "PASS", "setconfig_10": "PASS", "setconfig_11": "SANITIZER_FAILURE", "setconfig_20": "SANITIZER_FAILURE",
+    "process_0": "PASS", "process_10": "PASS", "process_11": "SANITIZER_FAILURE", "process_20": "SANITIZER_FAILURE"
+  },
+  "harness": {
+    "path": "tools/fixtures/custom_modifier_cache_host/modifier_cache_harness.cpp",
+    "sha256": "ec8c7d9c3d4a050190e3b0f5bf42578a88e224154b5fe9b89923f46e66b859df"
+  },
+  "production_sources": [
+    {"path": "include/modes/CustomControllerMode.hpp", "sha256": "0d4c8a7dbfd53d84745e2931739730bfeb760a47b20a5cba1b1c0531775e5744", "anchors": ["uint64_t _modifier_button_masks[10];"]},
+    {"path": "src/modes/CustomControllerMode.cpp", "sha256": "a85d36b53fc17b3a7da46d835761558a97052432ac10226b94985263fa8468a6", "anchors": ["for (size_t i = 0; i < custom_mode_config.modifiers_count; i++)", "_modifier_button_masks[i]", "for (size_t i = 0; i < _custom_mode_config->modifiers_count; i++)"]},
+    {"path": "include/core/ControllerMode.hpp", "sha256": "bbac9de7fd0ad758bd7e8b47c40eb2315b377ef32c8ebc08e4e87be0482d3f47", "anchors": ["class ControllerMode"]},
+    {"path": "src/core/ControllerMode.cpp", "sha256": "1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8", "anchors": ["void ControllerMode::UpdateOutputs"]},
+    {"path": "include/core/InputMode.hpp", "sha256": "dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee", "anchors": ["class InputMode"]},
+    {"path": "src/core/InputMode.cpp", "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7", "anchors": ["void InputMode::HandleRemap"]},
+    {"path": "include/core/socd.hpp", "sha256": "88ff9be552e89f0c92a1548662fc4bf9b6fd4408b242f6f42bec8ecf70e6fc91", "anchors": ["namespace socd"]},
+    {"path": "src/core/socd.cpp", "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3", "anchors": ["void socd::neutral"]},
+    {"path": "HAL/pico/include/util/state_util.hpp", "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81", "anchors": ["inline uint64_t make_button_mask"]},
+    {"path": "include/core/state.hpp", "sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3", "anchors": ["typedef struct _OutputState"]},
+    {"path": "platformio.ini", "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9", "anchors": ["custom_nanopb_protos"]},
+    {"path": "config/glyph/env.ini", "sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf", "anchors": ["GregTurbo/HayBox-proto#db4e2f6"]}
+  ],
+  "resolved_schema": {
+    "dependency_commit": "db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8",
+    "config_proto_sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+    "config_options_sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+    "generated_header_sha256": "532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3",
+    "custom_mode_modifiers_max_count": 20
+  },
+  "observations": {
+    "non_claims": ["cache or schema repair", "modifier semantics", "SetConfig policy", "physical reachability", "device behavior", "firmware behavior", "hardware acceptance", "root cause"]
+  }
+}

@@ -2868,6 +2868,67 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "custom_modifier_cache_characterization",
+      "defines_main": true,
+      "file_size_bytes": 6575,
+      "hard_coded_branch_like_strings": [
+        "evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 142,
+      "parse_error": null,
+      "path": "tools/check_glyph_custom_modifier_cache_characterization.py",
+      "potential_branch_identity_signals": [
+        "evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_custom_modifier_cache_characterization",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/util/state_util.hpp",
+        "docs/runtime_config/fixtures/custom_modifier_cache_characterization.json",
+        "include/core/ControllerMode.hpp",
+        "include/core/InputMode.hpp",
+        "include/core/socd.hpp",
+        "include/core/state.hpp",
+        "include/modes/CustomControllerMode.hpp",
+        "src/config.pb.h",
+        "src/core/ControllerMode.cpp",
+        "src/core/InputMode.cpp",
+        "src/core/socd.cpp",
+        "src/modes/CustomControllerMode.cpp",
+        "tools/fixtures/custom_modifier_cache_host/include",
+        "tools/fixtures/custom_modifier_cache_host/modifier_cache_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "runtime_config_docs"
+      ],
+      "sha256": "df5ab64ebd9b58464e5447a692713263050b65726241e74b333a66fccb566305",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "diagnostic_active_storage_published",
       "defines_main": true,
       "file_size_bytes": 42210,
