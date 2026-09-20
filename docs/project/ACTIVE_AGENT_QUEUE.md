@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "28426e4ba4763a99f0ca13491c023af77665c79c",
+  "audit_base_sha": "38d57ee2ced51a37475e299fb08a368877a0e507",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -129,12 +129,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 6,
+    "immediate_ready": 5,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 6,
+    "effective_authorized_runway": 5,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -195,7 +195,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-024",
       "title": "Declare the manifest helper closure",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-024-manifest-helper-closure",
       "objective": "Make the advertised validation manifest runnable from a clean clone by declaring the table-replacement checker's direct extractor helper.",
       "why_this_matters": "The clean-clone manifest preflight currently returns SETUP_FAILURE because table_replacement_contract imports tools/extract_glyph_identity_runtime_tables.py but does not declare it.",
@@ -220,7 +220,19 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the declaration if it does not exactly match the direct import; do not weaken dependency-closure validation.",
       "status_documentation_updates": "Record clean-clone manifest closure only; make no aggregate-isolation, product, build, or hardware claim.",
-      "done_evidence": "Exact one-entry dependency delta, clean-clone manifest proof, deterministic consequences, and independent review.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "fd6044109ce3af2311c32875979dc37849dd75be",
+        "reviewed_implementation_sha": "d8220daee328eae517c5ed10a1a78460b4f46ba7",
+        "prior_canonical_integration_sha": "38d57ee2ced51a37475e299fb08a368877a0e507",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer Lorentz PASSed the exact manifest-only diff, confirming the direct extractor import, unchanged command/applicability/classification/load-bearing semantics, and no excluded scope.",
+        "validation_provenance": "Manifest preflight, checker census (203 entries), validation health (42 manifest entries and 38 current load-bearing checks), framework, agentic sequence, navigation, agent-surface, Python compilation, and git diff --check PASS. Aggregate runtime validation remains unavailable on the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ preflight defect; no aggregate-green claim is made. No firmware build, artifact, device, or hardware action was required."
+      },
       "stop_conditions": ["Any checker semantic, applicability, classification, runner, workflow, build, firmware, or GP-VAL-011 change is required.", "Clean-clone manifest validation or independent review fails."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -4972,11 +4984,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-024","GP-VAL-025","GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":6,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":6,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-025","GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-024, GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 6; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 6; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4987,7 +4999,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010, GP-VAL-024, GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are READY. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are READY; GP-VAL-024 is DONE. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 

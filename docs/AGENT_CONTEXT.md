@@ -80,14 +80,14 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-024","GP-VAL-025","GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":6,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":6,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-025","GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-024, GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 6; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 6; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
-- The canonical executable queue is docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260920-1457 has six immediate READY items: GP-VAL-024, GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013; GP-CONFIG-010 is HARDWARE_TEST_REQUIRED with its exact candidate/artifact pair pinned. GP-HW-002 remains RESEARCH_GATED because protocol-hash schema evolution and truthful historical correspondence are unresolved. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. GP-CONFIG-010 is H3 and cannot merge before physical PASS. The next separate H2 modifier/layout realization still awaits owner/Senscope data and routing intent. Global evidence wait is unsupported.
+- The canonical executable queue is docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260920-1457 has five immediate READY items: GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013; GP-VAL-024 is DONE and GP-CONFIG-010 is HARDWARE_TEST_REQUIRED with its exact candidate/artifact pair pinned. GP-HW-002 remains RESEARCH_GATED because protocol-hash schema evolution and truthful historical correspondence are unresolved. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. GP-CONFIG-010 is H3 and cannot merge before physical PASS. The next separate H2 modifier/layout realization still awaits owner/Senscope data and routing intent. Global evidence wait is unsupported.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
