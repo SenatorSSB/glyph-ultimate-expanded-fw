@@ -18,7 +18,8 @@ the exact intended output without mutation.
 
 Generic file outputs are restricted to absolute, isolated system-temporary
 paths and use the shared canonical-resolution, alias, symlink, overwrite, and
-atomic-write policy. Standard output remains non-mutating. The only source
+atomic-write policy. Prepared packet output uses the same shared seam and
+rejects input overwrite. Standard output remains non-mutating. The only source
 install exception is the exact inert
 `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp`
 path; active baseline and all aliases remain rejected.

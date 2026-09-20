@@ -432,6 +432,13 @@ def validate_safe_output_path(target: Path, *, input_path: Path | None = None, p
         _fail(f"{purpose} target must be under the system temporary root", "source_authority")
     if target.is_symlink():
         _fail(f"{purpose} target may not be a symlink", "source_authority")
+    if target.exists():
+        try:
+            target_stat = target.stat()
+        except OSError as exc:
+            _fail(f"{purpose} target cannot be inspected: {exc}", "source_authority")
+        if not target.is_file() or target_stat.st_nlink != 1:
+            _fail(f"{purpose} target is an unsafe existing alias", "source_authority")
     cursor = lexical.parent
     while cursor != raw_root and cursor != cursor.parent:
         if cursor.is_symlink():
@@ -450,11 +457,23 @@ def validate_safe_output_path(target: Path, *, input_path: Path | None = None, p
         input_lexical = Path(os.path.abspath(os.fspath(input_path)))
         if lexical == input_lexical or resolved == input_lexical.resolve(strict=False):
             _fail(f"{purpose} target may not overwrite input", "source_authority")
+        if target.exists() and input_lexical.exists():
+            try:
+                if os.path.samefile(target, input_lexical):
+                    _fail(f"{purpose} target may not alias input", "source_authority")
+            except OSError:
+                pass
     return lexical
 
 
-def _atomic_write_text(target: Path, text: str, *, purpose: str) -> None:
-    target = validate_safe_output_path(target, purpose=purpose)
+def _atomic_write_text(
+    target: Path,
+    text: str,
+    *,
+    purpose: str,
+    input_path: Path | None = None,
+) -> None:
+    target = validate_safe_output_path(target, input_path=input_path, purpose=purpose)
     _atomic_replace_validated_text(target, text, purpose=purpose)
 
 
@@ -479,6 +498,51 @@ def _atomic_replace_validated_text(target: Path, text: str, *, purpose: str) -> 
 def validate_offline_output_target(target: Path, *, purpose: str) -> Path:
     """Stable shared-policy name for downstream offline writers."""
     return validate_safe_output_path(target, purpose=purpose)
+
+
+def validate_inert_source_install_target(
+    target: Path,
+    *,
+    input_path: Path | None = None,
+    purpose: str = "inert source install",
+) -> Path:
+    """Validate the one explicitly authorized inert repository target."""
+    repo = Path(__file__).resolve().parents[1]
+    expected = repo / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
+    lexical = Path(os.path.abspath(os.fspath(target)))
+    if lexical != Path(os.path.abspath(os.fspath(expected))):
+        _fail(f"{purpose} target must be the exact inert example artifact", "source_authority")
+    if target.is_symlink():
+        _fail(f"{purpose} target may not be a symlink", "source_authority")
+    cursor = lexical.parent
+    repo_root = Path(os.path.abspath(os.fspath(repo)))
+    while cursor != repo_root and cursor != cursor.parent:
+        if cursor.is_symlink():
+            _fail(f"{purpose} target contains a symlink alias", "source_authority")
+        cursor = cursor.parent
+    if target.exists():
+        try:
+            target_stat = target.stat()
+        except OSError as exc:
+            _fail(f"{purpose} target cannot be inspected: {exc}", "source_authority")
+        if not target.is_file() or target_stat.st_nlink != 1:
+            _fail(f"{purpose} target is an unsafe existing alias", "source_authority")
+    if input_path is not None:
+        input_lexical = Path(os.path.abspath(os.fspath(input_path)))
+        if lexical == input_lexical or (target.exists() and input_lexical.exists() and os.path.samefile(target, input_lexical)):
+            _fail(f"{purpose} target may not overwrite input", "source_authority")
+    return lexical
+
+
+def _atomic_write_inert_source_text(
+    target: Path,
+    text: str,
+    *,
+    input_path: Path | None = None,
+    purpose: str = "inert source install",
+) -> None:
+    target = validate_inert_source_install_target(target, input_path=input_path, purpose=purpose)
+    _atomic_replace_validated_text(target, text, purpose=purpose)
 
 
 def install_prepared(packet: dict[str, Any], target: Path, *, dry_run: bool = False, input_path: Path | None = None) -> list[str]:

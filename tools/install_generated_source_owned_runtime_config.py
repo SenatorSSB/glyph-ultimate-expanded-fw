@@ -27,6 +27,7 @@ from generate_source_owned_runtime_config import (
     generate_from_layout_spec,
 )
 from glyph_source_owned_overlay import OverlayContractError, generate_overlay_payload
+from source_owned_generator_modes import _atomic_write_inert_source_text
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -128,9 +129,12 @@ def main(argv: list[str] | None = None) -> int:
         if args.dry_run:
             sys.stdout.write(install_text)
             return 0
-        assert_inert_source_install_path(args.output)
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(install_text, encoding="utf-8")
+        _atomic_write_inert_source_text(
+            args.output,
+            install_text,
+            input_path=args.from_generated_output or args.from_layout_spec,
+            purpose="inert source install",
+        )
     except (GeneratedSourceOwnedRuntimeConfigInstallError, GeneratorContractError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1

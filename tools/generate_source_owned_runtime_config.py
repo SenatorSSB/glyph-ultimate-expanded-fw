@@ -560,10 +560,12 @@ def normalize_repo_path(path: Path) -> Path:
 
 
 def assert_inert_source_install_path(output_path: Path) -> None:
-    expected = REPO_ROOT / "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp"
-    normalized = Path(os.path.abspath(os.fspath(output_path)))
-    if normalized != Path(os.path.abspath(os.fspath(expected))):
-        fail("install output path must be the exact inert example artifact")
+    from source_owned_generator_modes import validate_inert_source_install_target
+
+    try:
+        validate_inert_source_install_target(output_path, purpose="inert source install")
+    except Exception as exc:
+        fail(str(exc))
 
 
 def generate(
@@ -578,9 +580,14 @@ def generate(
         if allow_inert_source_install:
             assert_inert_source_install_path(output_path)
             normalized_output_path = Path(os.path.abspath(os.fspath(output_path)))
-            from source_owned_generator_modes import _atomic_replace_validated_text
+            from source_owned_generator_modes import _atomic_write_inert_source_text
 
-            _atomic_replace_validated_text(normalized_output_path, output, purpose="inert source artifact install")
+            _atomic_write_inert_source_text(
+                normalized_output_path,
+                output,
+                input_path=input_path,
+                purpose="inert source artifact install",
+            )
         else:
             assert_safe_output_path(output_path)
             from source_owned_generator_modes import _atomic_write_text

@@ -5,11 +5,13 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
+import source_owned_generator_modes as generator_modes
 from source_owned_generator_modes import (
     GeneratorModesError,
     _baseline_tables,
@@ -140,6 +142,41 @@ def run() -> tuple[int, int]:
             tampered_packet["prepared_semantic_digest"] = digest({key: value for key, value in tampered_packet.items() if key != "prepared_semantic_digest"})
             expect_reject(lambda: install_prepared(tampered_packet, target, input_path=target), "metadata")
             expect_reject(lambda: install_prepared(packet, target, input_path=target), "overwrite input")
+
+        if Path(tempfile.gettempdir()) == raw_root:
+            input_path = Path(directory) / "input.json"
+            input_path.write_text("input\n", encoding="utf-8")
+            hardlink = Path(directory) / "hardlink.json"
+            hardlink.hardlink_to(input_path)
+            expect_reject(
+                lambda: generator_modes.validate_safe_output_path(hardlink, input_path=input_path),
+                "unsafe existing alias",
+                "source_authority",
+            )
+            real_parent = Path(directory) / "real-parent"
+            real_parent.mkdir()
+            alias_parent = Path(directory) / "alias-parent"
+            alias_parent.symlink_to(real_parent, target_is_directory=True)
+            expect_reject(
+                lambda: generator_modes.validate_safe_output_path(alias_parent / "output.json"),
+                "symlink alias",
+                "source_authority",
+            )
+            safe_output = raw_root / f"glyph-writer-failure-{os.getpid()}.json"
+            original_replace = generator_modes.os.replace
+            def fail_replace(source: str, target_name: str) -> None:
+                raise OSError("injected replacement failure")
+            generator_modes.os.replace = fail_replace
+            try:
+                expect_reject(
+                    lambda: generator_modes._atomic_write_text(safe_output, "bytes\n", purpose="injected failure"),
+                    "atomic write failed",
+                    "integrity",
+                )
+            finally:
+                generator_modes.os.replace = original_replace
+            assert not safe_output.exists()
+            assert not list(safe_output.parent.glob(f".{safe_output.name}.*"))
 
     return POSITIVE, NEGATIVE
 

@@ -67,10 +67,14 @@ The installed inert source artifact must contain these markers:
 - `inert generated-table placeholder`
 - `not wired into runtime selection`
 
-The generic generator and coordinate-native bridge outputs are restricted to
-absolute isolated temporary paths and are written through the shared atomic
-writer. The explicit install mode accepts only the exact inert example path;
-the active baseline, repository files, aliases, and symlinks are rejected.
+The generic generator, coordinate-native bridge, and generator-modes packet
+outputs are restricted to absolute isolated temporary paths and are written
+through the shared atomic writer. Candidate-preparation's fresh `mkdtemp`
+intermediates are internal-only writes; its user-selected final write uses the
+shared exact inert source-install API. The installer and the legacy explicit
+generator install use that same API. The exact inert example path is the only
+repository exception; the active baseline, aliases, hard links, and symlinks
+are rejected, input overwrite is rejected, and replacement is failure-atomic.
 
 The checker regenerates the example output from
 `docs/runtime_config/fixtures/generated_source_owned_generator_input.example.json`

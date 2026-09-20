@@ -19,6 +19,7 @@ from source_owned_generator_modes import (
     production_gate,
     validate_input,
     validate_manifest,
+    _atomic_write_text,
 )
 
 
@@ -68,7 +69,12 @@ def main(argv: list[str] | None = None) -> int:
                 else:
                     packet = {"artifact": artifact, "manifest": manifest, "source_mutation": False}
                 if args.output:
-                    args.output.write_text(json.dumps(packet, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+                    _atomic_write_text(
+                        args.output,
+                        json.dumps(packet, indent=2, sort_keys=True) + "\n",
+                        input_path=args.input.resolve(),
+                        purpose="prepared generator packet",
+                    )
                 result = packet
         else:
             packet = load_json(args.packet)
