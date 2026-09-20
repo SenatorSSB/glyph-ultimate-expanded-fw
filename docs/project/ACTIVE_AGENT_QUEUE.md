@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "38d57ee2ced51a37475e299fb08a368877a0e507",
+  "audit_base_sha": "8d1f49334973429d7b094dbcb3b86d669c465cae",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -129,12 +129,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 5,
+    "immediate_ready": 4,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 5,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -249,7 +249,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-025",
       "title": "Bind Python validation to the invoking interpreter",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-025-invoking-python",
       "objective": "Prevent ambient PATH resolution from substituting a different program for every manifest Python checker.",
       "why_this_matters": "The aggregate preserves ambient PATH, executes manifest command[0] through execvpe, and accepts zero exit without output correspondence; its own source states interpreter identity is not claimed.",
@@ -274,7 +274,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Retain the existing fail-closed aggregate if invoking-interpreter substitution cannot preserve all current checker behavior; do not change manifest commands to bypass the issue.",
       "status_documentation_updates": "Record invoking-interpreter binding without claiming generic host/toolchain trust.",
-      "done_evidence": "Focused substitute-path rejection, unchanged real-checker results, full affected gates, and independent review.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "5554328c00c43853008b3f82d4744ee08099782b",
+        "reviewed_implementation_sha": "6305781ec7b4099e615f772dc979c3a493626a89",
+        "prior_canonical_integration_sha": "8d1f49334973429d7b094dbcb3b86d669c465cae",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/run_glyph_runtime_config_validation.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer Linnaeus PASSed the repaired exact diff after the initial reviewer identified missing forged-output, non-invocation, failing-substitute, and unusable-interpreter coverage; the repaired focused corpus closed those findings with no scope drift.",
+        "validation_provenance": "Focused aggregate validation PASSed all existing cases plus invoking-interpreter binding, forged-success output, substitute non-invocation, failing substitute, and empty/relative/missing/non-executable interpreter cases. Checker census (203), validation health (42 manifest entries and 38 current load-bearing checks), framework, navigation, agent-surface, Python compilation, and git diff --check PASS. Full aggregate remains unavailable on the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ preflight path; no aggregate-green claim is made. No firmware build, artifact, device, or hardware action was required."
+      },
       "stop_conditions": ["Any checker command/semantic, workflow, product/runtime, firmware, device, hardware, or GP-VAL-011 change appears.", "Any Python manifest entry can still execute through ambient PATH or validation/review fails."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -4984,11 +4998,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-025","GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4999,7 +5013,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are READY; GP-VAL-024 is DONE. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025 and GP-VAL-024 are DONE; GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are READY. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
