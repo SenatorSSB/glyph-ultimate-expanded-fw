@@ -128,7 +128,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-026",
       "title": "Close clean-checkout exact-schema characterization dependencies",
-      "status": "REVIEW",
+      "status": "DONE",
       "branch": "codex/gp-val-026-clean-schema-closure",
       "objective": "Make the current load-bearing custom-modifier characterization runnable from a clean checkout in the declared Python/C++ sanitizer environment without a firmware build or ignored .pio input.",
       "why_this_matters": "The checker currently reads generated schema/Nanopb files from ignored .pio; CI validation runs before the build and fresh canonical checkout fails missing generated schema header.",
@@ -165,7 +165,36 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Keep failed implementation isolated; repair within the contract or return to Curator. Never weaken source correspondence or rewrite historical evidence.",
       "status_documentation_updates": "Update only the selected work order and synchronized current-state mirrors; preserve all other evidence. Publish reviewed implementation first, then strict DONE correspondence in a later canonical metadata snapshot.",
-      "done_evidence": "Exact reviewed implementation, reproducible host evidence and required checks PASS; prior live canonical integration followed by separate strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "11df2f077466df59b192610a7b03818442d747b4",
+        "reviewed_implementation_sha": "597a39545f156bd1e032edaf21085ef44589adcb",
+        "prior_canonical_integration_sha": "597a39545f156bd1e032edaf21085ef44589adcb",
+        "reviewed_changed_paths": [
+          ".gitattributes",
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/custom_modifier_cache_characterization.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "tools/check_glyph_custom_modifier_cache_characterization.py",
+          "tools/check_glyph_docs_agent_surface.py",
+          "tools/fixtures/custom_modifier_cache_host/schema/LICENSE.nanopb.txt",
+          "tools/fixtures/custom_modifier_cache_host/schema/README.md",
+          "tools/fixtures/custom_modifier_cache_host/schema/config.options",
+          "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h",
+          "tools/fixtures/custom_modifier_cache_host/schema/config.proto",
+          "tools/fixtures/custom_modifier_cache_host/schema/haybox-proto.library.json",
+          "tools/fixtures/custom_modifier_cache_host/schema/pb.h",
+          "tools/fixtures/custom_modifier_cache_host/schema/provenance.json"
+        ],
+        "independent_review_provenance": "Independent reviewer glyph_planner approved exact 597a39545f156bd1e032edaf21085ef44589adcb with no findings after clean-clone direct/configurator/docs checks and exact attribute negative controls. Independent Curator confirmed narrowly guarded six-file gitattributes coupling is within the existing order. Root independently reviewed exact diff and reran framework/sequence/direct characterization.",
+        "validation_provenance": "Clean checkout without .pio passes exact-production eight 0/10/11/20 sanitizer cases and missing/tamper/symlink/untracked/wrong upstream/schema/selector/source negative controls; configurator6/6 and docs2/2 PASS with canonical and all isolated proofs MATCH. Manifest closure, census204, health43, framework, sequence, navigation, agent-surface, Python and diff PASS. Firmware, original GP-CONFIG-011 fixture/harness, GP-CONFIG-010 candidate/artifact and GP-VAL-011 unchanged. Exact REVIEW snapshot published and live verified before this completion metadata. No full-aggregate or hardware acceptance claim."
+      },
       "stop_conditions": [
         "Any unresolved behavior/source decision or excluded scope is required.",
         "Any exact-source, validation, independent-review or publication gate fails."
