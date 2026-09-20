@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-    "audit_base_sha": "3ca30cc8cd39dc69c94ba4120812fae00735d5d4",
+  "audit_base_sha": "83b0e69822676381f4ad432cb97907ae438a5517",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -129,12 +129,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -369,8 +369,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-012",
       "title": "Bind CI build provenance to a clean tracked worktree",
-      "status": "READY",
-      "branch": "glyph/gp-prov-012-ci-worktree-integrity",
+      "status": "DONE",
+      "branch": "glyph/gp-prov-012-clean-worktree-gates",
       "objective": "Fail the build workflow when persistent tracked or firmware-relevant untracked divergence exists immediately before the build or after it and before postprocessing.",
       "why_this_matters": "The current checkout gate binds HEAD and glyph_nuker but accepts untracked source; no worktree-integrity proof is adjacent to the build, while the sidecar still records clean GITHUB_SHA.",
       "hardware_risk": "H1",
@@ -394,7 +394,17 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Do not publish the workflow change if clean dependency/build outputs cannot be finitely distinguished from source divergence; preserve current workflow and report the exact unresolved path class.",
       "status_documentation_updates": "Record pre/post persistent worktree-integrity proof and its transient/race non-claim; make no artifact acceptance or firmware behavior claim.",
-      "done_evidence": "Exact workflow/helper diff, disposable dirty/clean cases, canonical build smoke, affected gates, and independent review.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "92bad797c3e7e0c32dea2768e1da32870d2aecd8",
+        "reviewed_implementation_sha": "244837e424c3369b7b4ba0b836ded29d67d5ba87",
+        "prior_canonical_integration_sha": "83b0e69822676381f4ad432cb97907ae438a5517",
+        "reviewed_changed_paths": [".github/workflows/build.yml", "docs/runtime_config/README.md", "docs/runtime_config/artifact_postprocessor_provenance.md", "docs/runtime_config/fixtures/build_input_provenance_inventory.json", "docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json", "tools/check_glyph_artifact_postprocessor_provenance.py", "tools/check_glyph_artifact_postprocessor_workflow.py", "tools/glyph_tracked_worktree_integrity.py"],
+        "independent_review_provenance": "Fresh independent reviewer Epicurus PASSed the exact diff, confirming pre/post placement, finite tracked/ordinary-untracked/ignored allowlist behavior, adversarial workflow coverage, observed-only sidecar semantics, and excluded-scope preservation.",
+        "validation_provenance": "Focused provenance, workflow, publication-route, build-input inventory, prebuild integrity, disposable worktree, census, health, framework, navigation, agent-surface, Python compilation, and git diff checks PASS. Canonical pio was unavailable; documented fallback build passed with RAM 78720/262144 and flash 383792/1568768. Aggregate runtime validation remains unavailable on the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ preflight defect; no aggregate-green claim is made. No firmware behavior, artifact custody, device, or hardware action occurred."
+      },
       "stop_conditions": ["Any critical divergence can pass either gate or broad suppression is required.", "Any transient/race-free, reproducibility, artifact acceptance, firmware, device, hardware, or GP-VAL-011 claim enters scope.", "Build or review fails."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -5020,11 +5030,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-011","GP-PROV-013"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-011, GP-PROV-013; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
