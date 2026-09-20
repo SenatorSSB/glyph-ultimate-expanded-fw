@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "04ea022dd0eb0c6d01771f260aff6bb4af6ae104",
+  "audit_base_sha": "3c4f3a915938ee3eef8e6f7402853bd127cf3f78",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -43,7 +43,7 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
+    "state": "CONSUMED",
     "branch": "planning/portfolio-20260920-1457",
     "base_configurator_sha": "37b6d7e5573703f9854674e424b526cf7f5dd1a8",
     "packet_id": "glyph-portfolio-20260920-1457",
@@ -129,17 +129,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
     "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -473,7 +473,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-013",
       "title": "Pin reviewed build actions to immutable commits",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-013-pin-build-actions",
       "objective": "Replace the four current major-tag action references in the top-level firmware build workflow with live-verified immutable commits.",
       "why_this_matters": "The current workflow references two actions/checkout@v4 uses, actions/setup-python@v5, and actions/upload-artifact@v4; those tags can move while current provenance records them as unresolved.",
@@ -498,7 +498,17 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Do not publish if any official tag mapping cannot be reverified or affected workflow checker cannot bind the exact pins; leave current tags and report the exact external mismatch.",
       "status_documentation_updates": "Record only the four top-level immutable action pins and preserve every excluded unresolved provenance item.",
-      "done_evidence": "Live official tag mapping, exact four-line workflow delta, updated provenance/checker bindings, affected gates, and independent review.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "320fd3fcfbcb810c62171a7be90c55929b6d9b9d",
+        "reviewed_implementation_sha": "3c4f3a915938ee3eef8e6f7402853bd127cf3f78",
+        "prior_canonical_integration_sha": "3c4f3a915938ee3eef8e6f7402853bd127cf3f78",
+        "reviewed_changed_paths": [".github/workflows/build.yml", "docs/runtime_config/build_input_provenance_inventory.md", "docs/runtime_config/fixtures/build_input_provenance_inventory.json", "docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json", "tools/check_glyph_artifact_postprocessor_workflow.py", "tools/check_glyph_build_input_provenance_inventory.py"],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASSed the exact workflow/provenance diff after closing duplicate checkout, setup-python, and upload action-count findings; live official tag mappings matched the authorized commits.",
+        "validation_provenance": "Artifact workflow, build-input inventory, publication workflow, historical resolution observations, census 204, validation health 43 manifest entries and 39 current load-bearing checks, framework, sequence, navigation, agent-surface, Python compilation, and git diff --check PASS. Aggregate runtime validation remains unavailable on the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ preflight defect; no aggregate-green claim is made. No firmware build, artifact, device, or hardware action occurred."
+      },
       "stop_conditions": ["Any live upstream mapping differs from the authorized commit.", "Any action repository/major, workflow step configuration, excluded dependency, build/product, artifact, device, or hardware scope changes.", "Affected validation or independent review fails."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -5040,11 +5050,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-013"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-013; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5055,7 +5065,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025, GP-VAL-024, GP-SRC-010, GP-PROV-012, and GP-CONFIG-011 are DONE; the machine-derived marker above identifies GP-PROV-013 as the sole immediate authorized item. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. GP-CONFIG-011 added host-only characterization with no firmware/runtime product or hardware claim.
+Packet glyph-portfolio-20260920-1457 is CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025, GP-VAL-024, GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are DONE. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. The effective runway is zero and requires planning; global evidence wait is unsupported. Existing DONE and hardware evidence is unchanged. No firmware/runtime product or hardware claim was added.
 
 ## Allowed Statuses
 
