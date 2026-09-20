@@ -482,11 +482,27 @@ def validate_docs() -> None:
     validate_archive_index(docs[ARCHIVE_INDEX])
 
 
+def exact_gp026_schema_attributes(root: Path) -> bool:
+    """Only the six reviewed vendored files may retain upstream bytes/whitespace."""
+    path = root / ".gitattributes"
+    if not path.is_file() or path.is_symlink():
+        return False
+    expected = "# Preserve exact upstream fixture bytes and their original whitespace.\n" + "".join(
+        f"tools/fixtures/custom_modifier_cache_host/schema/{name} -text -whitespace\n"
+        for name in (
+            "config.proto", "config.options", "config.pb.h", "pb.h",
+            "LICENSE.nanopb.txt", "haybox-proto.library.json",
+        )
+    )
+    return path.read_bytes() == expected.encode("utf-8")
+
+
 def validate_surface_scope(context: CheckerContext) -> None:
     authorized_hal = exact_gp005_integration(context) if GP005_HAL_PATH in context.changed_paths else False
+    schema_attributes = (".gitattributes",) if exact_gp026_schema_attributes(context.repo_root) else ()
     validate_feature_scope(
         context,
-        allowed_paths=("docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ())),
+        allowed_paths=(*schema_attributes, "docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ())),
         protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/" and (not authorized_hal or prefix.casefold() != "hal/")),
     )
 

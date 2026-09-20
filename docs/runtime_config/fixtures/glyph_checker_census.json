@@ -3330,7 +3330,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 20035,
+      "file_size_bytes": 20820,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -3366,7 +3366,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 511,
+      "line_count": 527,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -3441,6 +3441,7 @@
         "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
         "tools/dry_run_coordinate_native_runtime_profile.py",
         "tools/extract_glyph_identity_runtime_tables.py",
+        "tools/fixtures/custom_modifier_cache_host/schema/",
         "tools/generate_source_owned_runtime_config.py",
         "tools/generate_source_owned_table_replacement.py",
         "tools/glyph_hardware_artifact_custody.py",
@@ -3465,7 +3466,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "12381ac39d2c64fc37423af75f0d0d1947564daea8a554fe3545dbad85a91e3f",
+      "sha256": "a41727b47fd283de0ae86672c8a9af9b0aed129ad96c1385d1a51a4bb7fe889d",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
