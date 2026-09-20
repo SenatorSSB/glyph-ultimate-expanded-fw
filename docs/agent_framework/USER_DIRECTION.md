@@ -223,6 +223,26 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   filler work, inferred product semantics, weakened evidence gate, or direct
   execution of gated candidates.
 
+### GLYPH-UD-017
+
+- Type: `Directive`
+- Status: `Active`
+- Source: owner campaign steering reported through the implementation supervisor
+  on 2026-09-21; the owner said the warning did not show affected task names.
+- Direction: park work associated with the reported cybersecurity warning as
+  TODO/draft work and continue the remaining campaign. The supervisor applies
+  this deferral to `GP-CONFIG-012`, `GP-CONFIG-013` and `GP-CONFIG-014` while
+  preserving their prior source contracts and unfinished work. The exact
+  warning source, cause and flagged item identities are `UNKNOWN`; this record
+  does not assert an observed automatic approval rejection, exploitability,
+  security classification, firmware defect severity or physical symptom.
+  Independent Curator records these three items as `REVIEW / OWNER_DEFERRED /
+  NONEXECUTABLE`. Do not continue their probes, implementation, firmware build
+  or merge. Resumption requires explicit owner direction and fresh Curator
+  reauthorization against live source, including every original validation and
+  hardware gate. This does not defer other campaign work, change GP-VAL-011,
+  or alter GP-CONFIG-010's exact preserved candidate/artifact or hardware gate.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is
