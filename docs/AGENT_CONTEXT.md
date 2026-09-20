@@ -80,14 +80,14 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-009"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-009; Immediate Ready: 1; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
-- The canonical executable queue is docs/project/ACTIVE_AGENT_QUEUE.md. Published packet glyph-portfolio-20260920-0227 has GP-VAL-021 and GP-VAL-022 DONE after exact reviewed integrations; GP-CONFIG-009 is the remaining immediate authorized item; GP-VAL-023 is mechanically ACTIVATABLE after the exact GP-VAL-021 integration. GP-PERSIST-003 remains RESEARCH_GATED on unresolved host fault semantics, target ABI correspondence, and dependency identity. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. The next H2 realization still awaits owner/Senscope modifier/layout data and routing intent. Global evidence wait is unsupported.
+- The canonical executable queue is docs/project/ACTIVE_AGENT_QUEUE.md. Published packet glyph-portfolio-20260920-0227 has GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 DONE after exact reviewed integrations; GP-VAL-023 is mechanically ACTIVATABLE after the exact GP-VAL-021 integration. GP-PERSIST-003 remains RESEARCH_GATED on unresolved host fault semantics, target ABI correspondence, and dependency identity. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. The next H2 realization still awaits owner/Senscope modifier/layout data and routing intent. Global evidence wait is unsupported.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
