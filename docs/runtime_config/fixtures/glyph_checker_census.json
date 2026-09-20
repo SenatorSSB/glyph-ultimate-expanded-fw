@@ -10986,7 +10986,7 @@
       },
       "checker_id": "runtime_config_validation_publication_workflow",
       "defines_main": true,
-      "file_size_bytes": 7141,
+      "file_size_bytes": 10189,
       "hard_coded_branch_like_strings": [
         "origin/configurator"
       ],
@@ -10995,7 +10995,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 162,
+      "line_count": 223,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_publication_workflow.py",
       "potential_branch_identity_signals": [
@@ -11013,7 +11013,7 @@
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "3ebd739719a88fe35ec425c357b2b3e89694d48f15e0adbea973184aca080076",
+      "sha256": "b86c10fe75a65fe7607327c5fb4f56d6bed4302bdca1a89d37ece85e426ced8c",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

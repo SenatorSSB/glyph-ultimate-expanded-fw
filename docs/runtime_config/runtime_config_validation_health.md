@@ -71,6 +71,10 @@ tracked workflow files: top-level `build.yml` is `CURRENT_GATED`, while
 `build-device-config.yml` and nested `config/glyph/.github/workflows/build.yml`
 are `UNRESOLVED_EXTERNAL` because their caller,
 ownership, PAT, `meta.yaml`, and release authority are not established. The
+current workflow checker also requires the exact seven-line trusted
+comparison-base setup to be unique, failure-bearing, and immediately adjacent
+to the aggregate handoff; this does not make any claim about remote
+immutability. The
 prepared-v2 C++ preview checker is current and load-bearing because it
 validates the inactive authority-preserving preview
 seam; it does not install source, create a candidate, or change firmware

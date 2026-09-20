@@ -481,6 +481,12 @@ of those pinned identities. Missing local objects or a missing/wrong X1 ref
 fail; no fetch, alternates, hardlinked object database, or network transport is
 introduced. Existing ignored caller files remain excluded from the clone.
 
+The CI publication-workflow checker separately requires the current validation
+job's seven-line trusted comparison-base setup to be unique, exact, failure-
+bearing, and immediately followed by the aggregate handoff. This checks the
+local workflow contract only; it does not establish immutable remote refs or
+remote/network guarantees.
+
 The launch environment inherits only PATH. HOME, temporary/cache directories,
 Python hash/user-site settings, locale/time, Git configuration isolation, and
 immutable checker comparison variables are explicitly constructed. Only the

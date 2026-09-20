@@ -8,7 +8,12 @@ import re
 import subprocess
 from pathlib import Path
 
-from glyph_workflow_step_contract import WorkflowStepError, validate_current_workflow
+from glyph_workflow_step_contract import (
+    WorkflowStepError,
+    executable_lines,
+    parse_jobs,
+    validate_current_workflow,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/build.yml"
@@ -126,12 +131,68 @@ def validate(text: str, fixture: dict[str, object]) -> None:
         )
     except WorkflowStepError as exc:
         raise WorkflowError(str(exc)) from exc
+    validate_trusted_comparison_setup(text, fixture)
     jobs = job_blocks(text)
     validation = jobs[validation_job]
     if "fetch-depth: 0" not in validation or "git fetch --no-tags origin" not in validation:
         raise WorkflowError("validation job lacks full-history trusted-base setup")
     if "GITHUB_BASE_REF" not in validation or "origin/configurator" not in validation:
         raise WorkflowError("detached CI comparison base is not explicit")
+
+
+def validate_trusted_comparison_setup(text: str, fixture: dict[str, object]) -> None:
+    """Require the exact setup-to-aggregate handoff in the current workflow."""
+    setup = fixture.get("trusted_comparison_setup")
+    if not isinstance(setup, dict):
+        raise WorkflowError("trusted comparison setup contract is missing")
+    step_name = setup.get("step_name")
+    exact_lines = setup.get("exact_lines")
+    if not isinstance(step_name, str) or not isinstance(exact_lines, list) or not all(
+        isinstance(line, str) for line in exact_lines
+    ):
+        raise WorkflowError("invalid trusted comparison setup contract")
+    expression = fixture.get("trusted_comparison_base_expression")
+    if not isinstance(expression, str) or text.count(expression) != 1:
+        raise WorkflowError("trusted comparison base expression is not exact and unique")
+    raw_jobs = job_blocks(text)
+    validation_body = raw_jobs.get(str(fixture["validation_job"]))
+    if validation_body is None or validation_body.count(expression) != 1:
+        raise WorkflowError("trusted comparison base expression is not in validation job env")
+    if re.search(r"(?m)^defaults:(?:\s|$)", text):
+        raise WorkflowError("workflow default shell override is not allowed")
+    try:
+        jobs = parse_jobs(text)
+    except WorkflowStepError as exc:
+        raise WorkflowError(str(exc)) from exc
+    validation = jobs.get(str(fixture["validation_job"]))
+    if validation is None:
+        raise WorkflowError("validation job missing")
+    matches = [index for index, step in enumerate(validation.steps) if step.name == step_name]
+    if len(matches) != 1:
+        raise WorkflowError("trusted comparison setup is not exactly one step")
+    setup_index = matches[0]
+    setup_step = validation.steps[setup_index]
+    if setup_step.fields != {"run"} or executable_lines(setup_step.run) != exact_lines:
+        raise WorkflowError("trusted comparison setup is not exact")
+    aggregate = "python3 tools/run_glyph_runtime_config_validation.py --json"
+    aggregate_indexes = [
+        index for index, step in enumerate(validation.steps)
+        if executable_lines(step.run) == [aggregate] and step.fields == {"run"}
+    ]
+    if len(aggregate_indexes) != 1 or aggregate_indexes[0] != setup_index + 1:
+        raise WorkflowError("trusted comparison setup is not immediately before aggregate")
+    forbidden_tokens = (
+        r"git\s+fetch\s+--no-tags\s+origin",
+        r"test\s+-n\s+\"\$GLYPH_CHECKER_BASE\"",
+        r"git\s+rev-parse\s+--verify\s+\"\$GLYPH_CHECKER_BASE\"",
+        r"git\s+update-ref",
+    )
+    for index, step in enumerate(validation.steps):
+        if index == setup_index:
+            continue
+        normalized = re.sub(r"\\\s*", " ", " ".join(executable_lines(step.run)))
+        if any(re.search(token, normalized) for token in forbidden_tokens):
+            raise WorkflowError("duplicate or displaced trusted-base operation")
 
 
 def main() -> int:
