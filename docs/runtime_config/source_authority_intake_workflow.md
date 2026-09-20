@@ -31,7 +31,11 @@ basis, approver, approval statement, and approval reference. Placeholders,
 unresolved blocking questions, and missing acknowledgement that a build is not
 hardware proof block emission.
 
-The accepted production X1 intake is a closed current-corpus mapping. Its
+Production emission is fail-closed to the exact accepted X1 intake/profile
+identity pair. Synthetic or otherwise noncanonical production packets are
+rejected even when their approval and ownership fields are non-empty; they
+remain usable only in explicitly non-production helper paths. The accepted
+production X1 intake is a closed current-corpus mapping. Its
 approval reference, sole `kX1Table` ownership declaration, and replacement
 source reference must each be exactly
 `docs/agent_framework/USER_DIRECTION.md#glyph-ud-010`, and its nine ordered

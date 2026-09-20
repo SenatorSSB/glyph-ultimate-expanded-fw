@@ -11809,7 +11809,7 @@
       },
       "checker_id": "source_owned_source_authority_intake",
       "defines_main": false,
-      "file_size_bytes": 23642,
+      "file_size_bytes": 23700,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate_digest",
@@ -11825,7 +11825,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 354,
+      "line_count": 357,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_source_authority_intake.py",
       "potential_branch_identity_signals": [
@@ -11853,7 +11853,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "13477a90970a83aaa2b8a66a1c4a1113e3f1d35dd78ddb710ed389ece90410bd",
+      "sha256": "0b591c6dbcba101b69298ab27b68c51524dd51ddc248fecb8d263f938f4a2c65",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

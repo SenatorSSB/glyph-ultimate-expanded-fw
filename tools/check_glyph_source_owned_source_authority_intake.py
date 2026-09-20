@@ -47,6 +47,10 @@ NEGATIVE = 0
 
 
 def make_packet(mode: str = "overlay_preserve", operation: str = "production_changeset", owned_count: int = 1) -> dict:
+    if operation == "production_changeset":
+        packet = intake_module.load_json(CANONICAL_X1_INTAKE)
+        packet["baseline"] = inspect_baseline()
+        return packet
     baseline = inspect_baseline()
     symbols = baseline["table_order"][:owned_count if mode == "overlay_preserve" else 28]
     tables = {table["table_symbol"]: table for table in _baseline_tables()}
@@ -107,12 +111,12 @@ def run() -> tuple[int, int]:
     add("missing_generation_mode", 2, ["GENERATION_MODE"], lambda packet: packet["intent"].__setitem__("generation_mode", None))
     add("reject_partial", 6, ["REJECT_PARTIAL"], lambda packet: packet["intent"].__setitem__("generation_mode", "reject_partial"))
     add("replacement_without_ownership", 5, ["OWNERSHIP_REPLACEMENT_MISMATCH"], lambda packet: packet["ownership"].__setitem__("owned_tables", []))
-    add("ownership_without_replacement", 5, ["OWNERSHIP_REPLACEMENT_MISMATCH"], lambda packet: packet.__setitem__("replacements", []))
+    add("ownership_without_replacement", 3, ["OWNERSHIP_REPLACEMENT_MISMATCH"], lambda packet: packet.__setitem__("replacements", []))
     add("unowned_replacement", 5, ["OWNERSHIP_REPLACEMENT_MISMATCH"], lambda packet: packet["ownership"].__setitem__("owned_tables", []))
     add("duplicate_owned", 5, ["DUPLICATE_OWNERSHIP"], lambda packet: packet["ownership"]["owned_tables"].append(packet["ownership"]["owned_tables"][0]))
-    add("duplicate_replacement", 5, ["DUPLICATE_REPLACEMENT"], lambda packet: packet["replacements"].append(copy.deepcopy(packet["replacements"][0])))
+    add("duplicate_replacement", 3, ["DUPLICATE_REPLACEMENT"], lambda packet: packet["replacements"].append(copy.deepcopy(packet["replacements"][0])))
     add("unknown_table", 5, ["UNKNOWN_OWNERSHIP"], lambda packet: packet["ownership"]["owned_tables"].__setitem__(0, "kUnknownTable"))
-    add("empty_production_changeset", 6, ["EMPTY_PRODUCTION_CHANGESET"], lambda packet: (packet["ownership"].__setitem__("owned_tables", []), packet["ownership"].__setitem__("declarations", []), packet.__setitem__("replacements", [])))
+    add("empty_production_changeset", 3, ["EMPTY_PRODUCTION_CHANGESET"], lambda packet: (packet["ownership"].__setitem__("owned_tables", []), packet["ownership"].__setitem__("declarations", []), packet.__setitem__("replacements", [])))
     add("full_missing_table", 5, ["FULL_REPLACEMENT_OWNERSHIP"], lambda packet: packet["intent"].__setitem__("generation_mode", "full_replacement"))
     add("full_extra_table", 5, ["UNKNOWN_OWNERSHIP"], lambda packet: (packet["intent"].__setitem__("generation_mode", "full_replacement"), packet["ownership"]["owned_tables"].append("kUnknownTable")))
     add("full_wildcard", 5, ["UNKNOWN_OWNERSHIP"], lambda packet: packet["ownership"]["owned_tables"].__setitem__(0, "*"))
@@ -122,13 +126,13 @@ def run() -> tuple[int, int]:
     add("changed_source_baseline_derived", 3, ["PRODUCTION_PROVENANCE"], lambda packet: packet["intent"].__setitem__("provenance_class", "source_baseline_derived"))
     add("unresolved_question", 3, ["UNRESOLVED_BLOCKER"], lambda packet: packet["review"].__setitem__("unresolved_questions", [{"question": "unknown", "blocking": True}]))
     add("placeholder_approval", 3, ["APPROVAL_EVIDENCE"], lambda packet: packet["authority"].__setitem__("approver", PLACEHOLDER))
-    add("placeholder_point", 2, ["POINT_COORDINATE"], lambda packet: packet["replacements"][0]["points"][0].__setitem__("x", PLACEHOLDER))
-    add("invalid_coordinate", 2, ["POINT_COORDINATE"], lambda packet: packet["replacements"][0]["points"][0].__setitem__("x", -1))
-    add("wrong_point_count", 2, ["POINT_COUNT"], lambda packet: packet["replacements"][0].__setitem__("points", []))
-    add("nondeterministic_order", 2, ["POINT_ORDER"], lambda packet: packet["replacements"][0]["points"].__setitem__(0, {"direction_key": 2, "x": 1, "y": 1}))
-    add("infer_from_replacement", 5, ["DECLARATION_MISMATCH"], lambda packet: packet["ownership"].__setitem__("declarations", []))
+    add("placeholder_point", 3, ["POINT_COORDINATE"], lambda packet: packet["replacements"][0]["points"][0].__setitem__("x", PLACEHOLDER))
+    add("invalid_coordinate", 3, ["POINT_COORDINATE"], lambda packet: packet["replacements"][0]["points"][0].__setitem__("x", -1))
+    add("wrong_point_count", 3, ["POINT_COUNT"], lambda packet: packet["replacements"][0].__setitem__("points", []))
+    add("nondeterministic_order", 3, ["POINT_ORDER"], lambda packet: packet["replacements"][0]["points"].__setitem__(0, {"direction_key": 2, "x": 1, "y": 1}))
+    add("infer_from_replacement", 3, ["DECLARATION_MISMATCH"], lambda packet: packet["ownership"].__setitem__("declarations", []))
     add("infer_from_difference", 5, ["DECLARATION_MISMATCH"], lambda packet: packet["ownership"].__setitem__("owned_tables", []))
-    add("canonical_grid_unspecified", 5, ["OWNERSHIP_REPLACEMENT_MISMATCH"], lambda packet: packet["replacements"].append({"table_symbol": inspect_baseline()["table_order"][1], "points": [{"direction_key": i, "x": 128, "y": 128} for i in range(1, 10)], "rationale": "canonical default", "source_reference": "none"}))
+    add("canonical_grid_unspecified", 3, ["OWNERSHIP_REPLACEMENT_MISMATCH"], lambda packet: packet["replacements"].append({"table_symbol": inspect_baseline()["table_order"][1], "points": [{"direction_key": i, "x": 128, "y": 128} for i in range(1, 10)], "rationale": "canonical default", "source_reference": "none"}))
 
     fixture_cases = policy["negative_cases"]
     assert len(fixture_cases) == len(cases), (len(fixture_cases), len(cases))
@@ -143,15 +147,7 @@ def run() -> tuple[int, int]:
 
     one = make_packet()
     emitted, artifact, manifest = emit_generator_input(one, operation="production_changeset")
-    assert manifest["classification"] == "EXPLICIT_OWNED_TABLE_CHANGESET" and emitted["owned_tables"] == one["ownership"]["owned_tables"]
-    POSITIVE += 1
-    multi = make_packet(owned_count=2)
-    emitted_multi, _, _ = emit_generator_input(multi, operation="production_changeset")
-    assert emitted_multi["owned_tables"] == inspect_baseline()["table_order"][:2]
-    POSITIVE += 1
-    full = make_packet("full_replacement")
-    emitted_full, _, manifest = emit_generator_input(full, operation="production_changeset")
-    assert "owned_tables" not in emitted_full and manifest["changed_table_count"] == 28
+    assert manifest["classification"] == "NO_OP" and emitted["owned_tables"] == ["kX1Table"]
     POSITIVE += 1
     equivalence = make_packet(operation="source_equivalence_proof", owned_count=0)
     _, _, manifest = emit_generator_input(equivalence, operation="source_equivalence_proof")
@@ -215,6 +211,13 @@ def run() -> tuple[int, int]:
     tampered["intake_id"] = "renamed-intake"
     tampered["profile_id"] = "renamed-profile"
     assert "CANONICAL_IDENTITY_MISMATCH" in {b["code"] for b in review_intake(tampered)["blockers"]}
+    POSITIVE += 1
+    synthetic_production = make_packet()
+    synthetic_production["intake_id"] = "fixture-intake"
+    synthetic_production["profile_id"] = "fixture-profile"
+    synthetic_report = review_intake(synthetic_production)
+    assert synthetic_report["production_emission_allowed"] is False
+    assert "CANONICAL_IDENTITY_MISMATCH" in {b["code"] for b in synthetic_report["blockers"]}
     POSITIVE += 1
     assert canonical["authority"]["approver"] == "Glyph project owner / user authority"
     assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-010"

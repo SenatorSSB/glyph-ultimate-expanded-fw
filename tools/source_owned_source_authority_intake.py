@@ -214,6 +214,14 @@ def _closed_canonical_x1_mapping(
     replacements: Any,
 ) -> None:
     """Enforce the one reviewed production locator mapping, fail-closed."""
+    # Source-equivalence proofs and other synthetic packets remain useful as
+    # explicitly non-production fixtures.  Production emission, however, is
+    # authorized only by the one reviewed X1 corpus record below; do not let a
+    # synthetic identity become production authority merely because its other
+    # fields are non-empty.
+    intent = payload.get("intent")
+    if not isinstance(intent, dict) or intent.get("requested_operation") != "production_changeset":
+        return
     identity_values = (payload.get("intake_id"), payload.get("profile_id"))
     canonical_identity = (CANONICAL_X1_INTAKE_ID, CANONICAL_X1_PROFILE_ID)
     if identity_values == (None, None):
@@ -221,22 +229,8 @@ def _closed_canonical_x1_mapping(
     authority = payload.get("authority")
     declarations = payload.get("ownership", {}).get("declarations") if isinstance(payload.get("ownership"), dict) else None
     replacements = payload.get("replacements")
-    claims_canonical_locator = (
-        isinstance(authority, dict) and authority.get("approval_reference") == CANONICAL_X1_AUTHORITY_REFERENCE
-    ) or any(
-        isinstance(item, dict) and item.get("authorization_reference") == CANONICAL_X1_AUTHORITY_REFERENCE
-        for item in declarations or []
-    ) or any(
-        isinstance(item, dict) and item.get("source_reference") == CANONICAL_X1_AUTHORITY_REFERENCE
-        for item in replacements or []
-    )
-    if identity_values != canonical_identity and not any(value in canonical_identity for value in identity_values):
-        if claims_canonical_locator:
-            _block(blockers, "CANONICAL_IDENTITY_MISMATCH", "authority", "intake_id/profile_id", "canonical GLYPH-UD-010 authority must retain its reviewed intake and profile identities")
-        return
     if identity_values != canonical_identity:
-        _block(blockers, "CANONICAL_IDENTITY_MISMATCH", "authority", "intake_id/profile_id", "canonical X1 intake and profile identities must remain paired")
-        return
+        _block(blockers, "CANONICAL_IDENTITY_MISMATCH", "authority", "intake_id/profile_id", "production authority must use the exact reviewed X1 intake and profile identities")
         return
     authority = payload.get("authority")
     if not isinstance(authority, dict) or authority.get("approval_reference") != CANONICAL_X1_AUTHORITY_REFERENCE:
