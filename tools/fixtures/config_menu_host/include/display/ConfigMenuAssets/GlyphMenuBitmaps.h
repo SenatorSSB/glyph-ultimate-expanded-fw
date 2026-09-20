@@ -1,0 +1,20 @@
+#pragma once
+inline const unsigned char bitmap_glyph_menu_base[] = {};
+inline const unsigned char bitmap_list_menu_base[] = {};
+inline const unsigned char bitmap_gamemode_small[] = {};
+inline const unsigned char bitmap_gamemode_large[] = {};
+inline const unsigned char bitmap_usb_small[] = {};
+inline const unsigned char bitmap_usb_large[] = {};
+inline const unsigned char bitmap_brightness_small[] = {};
+inline const unsigned char bitmap_brightness_large[] = {};
+inline const unsigned char bitmap_input_small[] = {};
+inline const unsigned char bitmap_input_large[] = {};
+inline const unsigned char bitmap_config_small[] = {};
+inline const unsigned char bitmap_config_large[] = {};
+inline const unsigned char bitmap_firmware_small[] = {};
+inline const unsigned char bitmap_firmware_large[] = {};
+inline const unsigned char bitmap_gameing_small[] = {};
+inline const unsigned char bitmap_gameing_large[] = {};
+inline const unsigned char bitmap_about_small[] = {};
+inline const unsigned char bitmap_about_large[] = {};
+inline const unsigned char bitmap_glyph_list_menu_base[] = {};

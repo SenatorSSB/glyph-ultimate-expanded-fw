@@ -2264,6 +2264,58 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "config_menu_invalid_state_characterization",
+      "defines_main": true,
+      "file_size_bytes": 4839,
+      "hard_coded_branch_like_strings": [
+        "evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 85,
+      "parse_error": null,
+      "path": "tools/check_glyph_config_menu_invalid_state_characterization.py",
+      "potential_branch_identity_signals": [
+        "evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_config_menu_invalid_state_characterization",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/display/ConfigMenu.cpp",
+        "HAL/pico/src/display/DefaultConfigMenu.cpp",
+        "docs/runtime_config/fixtures/config_menu_invalid_state_characterization.json",
+        "src/display/GlyphConfigMenu.cpp",
+        "tools/fixtures/config_menu_host/include",
+        "tools/fixtures/config_menu_host/menu_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "1103e0713b3b0d7db1a5acab0d8bf5121c45899c0a0c244d8466179bbd7f0b42",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "configurator_compatibility_source_registry",
       "defines_main": true,
       "file_size_bytes": 7762,

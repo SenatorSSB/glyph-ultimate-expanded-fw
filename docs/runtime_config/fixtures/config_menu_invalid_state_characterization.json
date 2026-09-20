@@ -1,0 +1,39 @@
+{
+  "schema_name": "glyph_config_menu_invalid_state_characterization",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-009",
+  "production_sources": [
+    {"path": "HAL/pico/src/display/ConfigMenu.cpp", "sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be", "anchors": ["void ConfigMenu::HandleControls(", "_highlighted_menu_item > _current_menu_page->items_count", "_current_menu_page->items_count - _current_menu_offset"]},
+    {"path": "HAL/pico/src/display/DefaultConfigMenu.cpp", "sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20", "anchors": ["DefaultConfigMenu::DefaultConfigMenu(", "CurrentGameMode()->GetConfig()", "void DefaultConfigMenu::SetDefaultMode("]},
+    {"path": "config/glyph/common/src/display/GlyphConfigMenu.cpp", "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0", "anchors": ["GlyphConfigMenu::GlyphConfigMenu(", "_gamemode_options_page.items_count = gamemode_options_count", "applicable_backends_count"]},
+    {"path": "HAL/pico/src/comms/backend_init.cpp", "sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea", "anchors": ["if (backend_config.default_mode_config > 0)", "set_mode(backends[i], mode_config, config);"]},
+    {"path": "config/glyph/common/src/config.cpp", "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5", "anchors": ["static GlyphConfigMenu config_menu(config, backends, backend_count);", "void setup1()"]},
+    {"path": "HAL/pico/include/display/ConfigMenu.hpp", "sha256": "16c4c1da62c3b0309a51779780727d1191b6c7bb4bff1a6b1bde2c69c68a8088", "anchors": ["struct _MenuPage", "class ConfigMenu"]},
+    {"path": "HAL/pico/include/display/DefaultConfigMenu.hpp", "sha256": "94c6404c37fa6de41563ba06fe839a169b2281d990d8bde36d61c6f29238fa7f", "anchors": ["class DefaultConfigMenu"]},
+    {"path": "config/glyph/common/include/display/GlyphConfigMenu.hpp", "sha256": "428ad8033d9a03adbf51526a7cb494287da0525e6c493f83f8c19d8d366f64d7", "anchors": ["class GlyphConfigMenu"]},
+    {"path": "include/core/CommunicationBackend.hpp", "sha256": "bfee254cb9175cdff2fe81406648c0b53d4e35b158a5a120ba985b0dd62bd6c1", "anchors": ["class CommunicationBackend", "CurrentGameMode"]},
+    {"path": "include/core/InputMode.hpp", "sha256": "dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee", "anchors": ["class InputMode", "GetConfig"]},
+    {"path": "include/core/mode_selection.hpp", "sha256": "277d5e9cc1a4e165f571b4b3601614ef0caa21f6ff39f0bf8ae26b2dab3dd17e", "anchors": ["void set_mode("]},
+    {"path": "src/core/CommunicationBackend.cpp", "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575", "anchors": ["CommunicationBackend::CommunicationBackend(", "CommunicationBackend::CurrentGameMode()"]},
+    {"path": "src/core/InputMode.cpp", "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7", "anchors": ["InputMode::GetConfig()"]},
+    {"path": "src/core/mode_selection.cpp", "sha256": "57ae73a3eea4250bab5027bd6fdb1b1fa3ea9d2689cd6309026e7bbbc39d9875", "anchors": ["void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config &config)"]},
+    {"path": "HAL/pico/src/comms/ConfiguratorBackend.cpp", "sha256": "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876", "anchors": ["bool ConfiguratorBackend::HandleSetConfig()", "persistence.SaveConfig(candidate)"]}
+  ],
+  "build_contract": {
+    "translation_unit": "tools/fixtures/config_menu_host/menu_harness.cpp",
+    "stub_include_root": "tools/fixtures/config_menu_host/include",
+    "source_method": "literal production translation-unit includes compiled by host C++ compiler"
+  },
+  "cases": [
+    {"name": "null_current_mode", "result": "SANITIZER_FAILURE"},
+    {"name": "empty_filtered_pages", "result": "PASS"},
+    {"name": "empty_child_page_update", "result": "PASS"},
+    {"name": "empty_usb_page_update", "result": "PASS"},
+    {"name": "injected_index_equals_count", "result": "SANITIZER_FAILURE"}
+  ],
+  "observations": {
+    "injected_state_label": "synthetic and reachability UNKNOWN",
+    "unknowns": ["dual-core timing", "physical reachability", "display effects", "controller effects", "device crash behavior", "hardware behavior"]
+  },
+  "non_claims": ["firmware repair", "empty-page UI policy", "physical reachability", "device behavior", "hardware acceptance", "root cause"]
+}
