@@ -88,6 +88,36 @@ def ignored_critical_worktree_paths(repo_root: Path) -> tuple[str, ...]:
     return paths
 
 
+def untracked_critical_worktree_paths(repo_root: Path) -> tuple[str, ...]:
+    """List ordinary untracked entries in the finite firmware/build inventory."""
+    scope = sorted(CRITICAL_ROOTS | CRITICAL_FILES)
+    workflow_scope = (
+        ":(icase,glob).github/workflows/**",
+        ":(icase,glob)**/.github/workflows/**",
+    )
+    excluded_roots = (
+        ":(exclude,icase,glob).pio/**",
+        ":(exclude,icase,glob).platformio-home/**",
+        ":(exclude,icase,glob).venv/**",
+        ":(exclude,icase,glob)local_backups/**",
+    )
+    raw = _git(
+        repo_root,
+        "ls-files", "--others", "--exclude-standard", "--full-name", "-z",
+        "--", *(f":(icase){path}" for path in scope), *workflow_scope, *excluded_roots,
+    )
+    if raw and not raw.endswith(b"\0"):
+        raise TrackedWorktreeIntegrityError("unterminated untracked Git path output")
+    try:
+        paths = tuple(sorted({part.decode("utf-8") for part in raw.split(b"\0") if part}))
+    except UnicodeDecodeError as exc:
+        raise TrackedWorktreeIntegrityError("non-UTF-8 untracked Git path") from exc
+    for path in paths:
+        if not is_critical_path(path):
+            raise TrackedWorktreeIntegrityError(f"untracked path escaped critical inventory: {path}")
+    return paths
+
+
 def _tree(repo_root: Path) -> dict[str, tuple[str, str]]:
     entries: dict[str, tuple[str, str]] = {}
     raw = _git(repo_root, "ls-tree", "-r", "-z", "HEAD")
@@ -174,6 +204,7 @@ def tracked_worktree_divergence(repo_root: Path) -> tuple[str, ...]:
     if set(head) != set(index):
         return tuple(sorted(set(head) ^ set(index)))
     divergent: set[str] = set(ignored_critical_worktree_paths(repo_root))
+    divergent.update(untracked_critical_worktree_paths(repo_root))
     for path in sorted(head):
         head_mode, head_blob = head[path]
         index_mode, stage, index_blob = index[path]
