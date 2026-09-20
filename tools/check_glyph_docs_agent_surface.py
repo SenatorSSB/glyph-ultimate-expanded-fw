@@ -43,6 +43,8 @@ GP005_BRANCH = "glyph/gp-config-005-transactional-setconfig"
 GP005_BASE = "9550a1bf1309383e351f4f9e66663562fc9f13ac"
 GP005_ARTIFACT = "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44"
 GP005_HAL_PATH = "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+GP_CONFIG_010_BRANCH = "glyph/gp-config-010-mode-activation-capacity"
+GP_CONFIG_010_SOURCE_PATH = "src/core/mode_selection.cpp"
 
 CHECKER_REL = "tools/check_glyph_docs_agent_surface.py"
 ALLOWED_EXACT_CHANGED_PATHS = {
@@ -203,6 +205,29 @@ def exact_gp005_integration(context: CheckerContext) -> bool:
         return False
 
     return True
+
+
+def exact_gp_config_010_source_candidate(context: CheckerContext) -> bool:
+    """Authorize only the bounded pre-hardware GP-CONFIG-010 source seam."""
+
+    if context.branch != GP_CONFIG_010_BRANCH or GP_CONFIG_010_SOURCE_PATH not in context.changed_paths:
+        return False
+    if any(
+        path != GP_CONFIG_010_SOURCE_PATH
+        and not (path.startswith("docs/") or path.startswith("tools/") or path in {"README.md", "AGENTS.md", "CLAUDE.md"})
+        for path in context.changed_paths
+    ):
+        return False
+    source = (context.repo_root / GP_CONFIG_010_SOURCE_PATH).read_text(encoding="utf-8")
+    return all(
+        anchor in source
+        for anchor in (
+            "kModeActivationMaskCapacity = 30",
+            "std::extent_v<decltype(Config::game_mode_configs)>",
+            "if (mode_configs_count > kModeActivationMaskCapacity)",
+            "if (config.game_mode_configs_count > kModeActivationMaskCapacity)",
+        )
+    )
 
 
 def rel(path: Path) -> str:
@@ -484,9 +509,10 @@ def validate_docs() -> None:
 
 def validate_surface_scope(context: CheckerContext) -> None:
     authorized_hal = exact_gp005_integration(context) if GP005_HAL_PATH in context.changed_paths else False
+    authorized_gp_config_010 = exact_gp_config_010_source_candidate(context)
     validate_feature_scope(
         context,
-        allowed_paths=("docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ())),
+        allowed_paths=("docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ()), *((GP_CONFIG_010_SOURCE_PATH,) if authorized_gp_config_010 else ())),
         protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/" and (not authorized_hal or prefix.casefold() != "hal/")),
     )
 

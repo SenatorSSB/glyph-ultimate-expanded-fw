@@ -1,0 +1,25 @@
+{
+  "schema_name": "glyph_gp_config_010_mode_activation_capacity",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-010",
+  "capacity": 30,
+  "default_count": 13,
+  "cases": ["count_0", "count_10", "count_11", "count_13", "count_30", "count_31", "indices_0_to_12"],
+  "production_sources": [
+    {
+      "path": "src/core/mode_selection.cpp",
+      "sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+      "anchors": ["kModeActivationMaskCapacity = 30", "setup_mode_activation_bindings", "select_mode"]
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+      "anchors": [".game_mode_configs_count = 13", "GameModeConfig {"]
+    },
+    {
+      "path": ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+      "sha256": "532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3",
+      "anchors": ["GameModeConfig game_mode_configs[30]"]
+    }
+  ]
+}

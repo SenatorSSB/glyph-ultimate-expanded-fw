@@ -2208,6 +2208,55 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "config_010_mode_activation_capacity",
+      "defines_main": true,
+      "file_size_bytes": 3383,
+      "hard_coded_branch_like_strings": [
+        "candidate"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 65,
+      "parse_error": null,
+      "path": "tools/check_glyph_config_010_mode_activation_capacity.py",
+      "potential_branch_identity_signals": [
+        "candidate"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_config_010_mode_activation_capacity",
+      "referenced_repository_path_prefixes": [
+        "docs/runtime_config/fixtures/gp_config_010_mode_activation_capacity.json",
+        "src/core/mode_selection.cpp",
+        "tools/fixtures/mode_selection_host/include",
+        "tools/fixtures/mode_selection_host/mode_selection_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "53e0dbbbebdac9565d9dd9ad08eb08d67a03727e03ce4ed2f3c92fd9405c73d6",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "config_json_compatibility_fixtures",
       "defines_main": true,
       "file_size_bytes": 11609,
@@ -3266,7 +3315,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 20035,
+      "file_size_bytes": 21271,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -3286,6 +3335,7 @@
         "evidence_ref",
         "evidence_ref.split",
         "evidence_ref.startswith",
+        "exact_gp_config_010_source_candidate",
         "hardware_evidence_gaps",
         "hardware_evidence_record",
         "origin/configurator",
@@ -3302,7 +3352,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 511,
+      "line_count": 537,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -3324,6 +3374,7 @@
         "evidence_ref",
         "evidence_ref.split",
         "evidence_ref.startswith",
+        "exact_gp_config_010_source_candidate",
         "hardware_evidence_gaps",
         "hardware_evidence_record",
         "origin/configurator",
@@ -3352,6 +3403,7 @@
         "docs/runtime_config/fixtures/glyph_checker_census.json",
         "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
         "docs/runtime_config/fixtures/source_owned_candidate_generation_workflow.json",
+        "src/core/mode_selection.cpp",
         "src/modes/UltimateIdentityRuntimeTables.hpp",
         "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
         "tools/check_glyph_agent_framework_docs.py",
@@ -3401,7 +3453,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "12381ac39d2c64fc37423af75f0d0d1947564daea8a554fe3545dbad85a91e3f",
+      "sha256": "94ea782a85b8ffd27180f9da21d08bc9660a6316bb93bb2d157c6bd729ea69cd",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -9449,7 +9501,7 @@
       "python_module": "tools.check_glyph_profile_adapter_prewrite",
       "referenced_repository_path_prefixes": [],
       "runtime_config_relevance_signals": [],
-      "sha256": "5ff911f54e0f2291c38e33838a252c8cb27cc87232f605b1dd7fb2e373f193f9",
+      "sha256": "4349ac4e455d8a0b6bb67d818b191e940a66fe14237fa3228a4ffe767ad4b3dd",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -9535,7 +9587,7 @@
         "src/core/mode_selection.cpp"
       ],
       "runtime_config_relevance_signals": [],
-      "sha256": "1c247bb127d9b0861734cf1637fa4a2dd38f0693edaf481dd5aecc3bae5185d6",
+      "sha256": "7c6324dfc636e8201b8422090453e4c6681f82b828ae9d08f220959a9363de75",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

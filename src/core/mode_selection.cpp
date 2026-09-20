@@ -15,6 +15,7 @@
 #include "util/state_util.hpp"
 
 #include <config.pb.h>
+#include <type_traits>
 
 Melee20Button melee_mode;
 ProjectM projectm_mode;
@@ -27,7 +28,18 @@ CustomControllerMode custom_mode;
 Smash64 s64_mode;
 SenscopePrototype senscope_prototype_mode;
 
-uint64_t mode_activation_masks[10];
+namespace {
+
+constexpr size_t kModeActivationMaskCapacity = 30;
+static_assert(
+    kModeActivationMaskCapacity == std::extent_v<decltype(Config::game_mode_configs)>,
+    "mode activation cache must match generated Config capacity"
+);
+static_assert(kModeActivationMaskCapacity >= 13, "default mode set must fit activation cache");
+
+} // namespace
+
+uint64_t mode_activation_masks[kModeActivationMaskCapacity];
 
 size_t current_mode_index = SIZE_MAX;
 
@@ -164,6 +176,10 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
     // TODO: Use a counter variable to only run the contents of this function every x iterations
     // rather than on every single poll.
 
+    if (config.game_mode_configs_count > kModeActivationMaskCapacity) {
+        return;
+    }
+
     InputState &inputs = backends[0]->GetInputs();
 
     if constexpr (senscope::prototype::kEnableSenscopePrototypeManualSelection) {
@@ -186,6 +202,10 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
 
 void setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t mode_configs_count) {
     // Build bit masks for checking for matching button holds.
+    if (mode_configs_count > kModeActivationMaskCapacity) {
+        return;
+    }
+
     for (size_t i = 0; i < mode_configs_count; i++) {
         mode_activation_masks[i] = make_button_mask(
             mode_configs[i].activation_binding,

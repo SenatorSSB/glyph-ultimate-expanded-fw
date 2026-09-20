@@ -427,3 +427,29 @@ record, not evidence of a passing review.
   the expected embedded Git identity consequence, or focused/reviewer failure.
 - return format: findings first; exact scope/authority correspondence;
   validation results; residual risks; bounded next action.
+
+## Implementation Supervisor cycle — GP-CONFIG-010 (2026-09-20)
+
+- guidance applicable: yes; GP-CONFIG-010 is a complete READY H3 work order and
+  repository mutation requires bounded delegation plus fresh independent review.
+- capability discovery: complete available runtime capability catalog inspected;
+  native internal subagent facility confirmed available.
+- native capability available: yes.
+- specialist: Halley, bounded read-only source-authority/firmware-safety
+  specialist; verify the 13-entry default, 10-entry cache, generated 30-entry
+  extent, exact mode order, sanitizer cases, and invalidation conditions.
+- reviewer: fresh independent post-implementation reviewer required after the
+  exact candidate diff; inspect source correspondence, sanitizer harness,
+  capacity guards, build/map result, artifact custody, protocol, scope, and
+  hardware-stop publication.
+- allowed specialist/reviewer files: GP-CONFIG-010 source, generated-capacity
+  evidence, mode-selection harness/checker, directly affected profile checkers,
+  protocol, and required control-plane metadata.
+- forbidden specialist/reviewer actions: device or hardware actions, flashing,
+  schema/persistence changes, runtime-loaded config, Nunchuk or root-cause
+  claims, destructive Git, and publication of an unreviewed candidate.
+- stop conditions: source/default/generated-capacity drift, valid mode/order/
+  binding change, forbidden scope, failed exact sanitizer/build/review/custody,
+  or missing exact hardware protocol/evidence.
+- return format: findings first; exact source correspondence; validation results;
+  residual risks; bounded next action.
