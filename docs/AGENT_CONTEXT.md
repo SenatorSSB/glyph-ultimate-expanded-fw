@@ -80,11 +80,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-011","GP-PROV-013"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-013"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-011, GP-PROV-013; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-PROV-013; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 - The canonical executable queue is docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260920-1457 has two immediate READY items: GP-CONFIG-011 and GP-PROV-013; GP-VAL-024, GP-VAL-025, GP-SRC-010, and GP-PROV-012 are DONE and GP-CONFIG-010 is HARDWARE_TEST_REQUIRED with its exact candidate/artifact pair pinned. GP-HW-002 remains RESEARCH_GATED because protocol-hash schema evolution and truthful historical correspondence are unresolved. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. GP-CONFIG-010 is H3 and cannot merge before physical PASS. The next separate H2 modifier/layout realization still awaits owner/Senscope data and routing intent. Global evidence wait is unsupported.

@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "83b0e69822676381f4ad432cb97907ae438a5517",
+  "audit_base_sha": "04ea022dd0eb0c6d01771f260aff6bb4af6ae104",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -129,12 +129,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -419,9 +419,9 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_gaps": []
     },
     {
-      "id": "GP-CONFIG-011",
+    "id": "GP-CONFIG-011",
       "title": "Characterize custom-modifier cache capacity",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-config-011-modifier-cache-characterization",
       "objective": "Establish exact-production host behavior and schema correspondence for the 10-slot modifier mask cache before any repair decision.",
       "why_this_matters": "CustomControllerMode writes and reads _modifier_button_masks through modifiers_count; the cache has 10 slots while the build-resolved schema permits 20 modifiers.",
@@ -446,7 +446,17 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Drop the characterization if exact production/schema correspondence cannot be maintained; do not patch the cache or schema under this work order.",
       "status_documentation_updates": "Publish bounded host observations and explicit dependency, reachability, firmware, device, and hardware non-claims; route any repair back through planning/curation.",
-      "done_evidence": "Exact source/dependency binding, isolated sanitizer observations for all four counts, affected gates, and independent review.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "952e08998c0c0954773cac88d3067f0721912334",
+        "reviewed_implementation_sha": "04ea022dd0eb0c6d01771f260aff6bb4af6ae104",
+        "prior_canonical_integration_sha": "952e08998c0c0954773cac88d3067f0721912334",
+        "reviewed_changed_paths": ["docs/runtime_config/custom_modifier_cache_characterization.md", "docs/runtime_config/fixtures/custom_modifier_cache_characterization.json", "docs/runtime_config/fixtures/glyph_checker_census.json", "docs/runtime_config/fixtures/runtime_config_validation_health.json", "docs/runtime_config/fixtures/runtime_config_validation_manifest.json", "docs/runtime_config/runtime_config_validation_health.md", "tools/check_glyph_custom_modifier_cache_characterization.py", "tools/fixtures/custom_modifier_cache_host/include/stdlib.hpp", "tools/fixtures/custom_modifier_cache_host/modifier_cache_harness.cpp"],
+        "independent_review_provenance": "Fresh independent reviewer Linnaeus PASSed the repaired exact diff, confirming the harness SHA and unique literal production include, exact eight-case characterization, schema/source bindings, and excluded-scope preservation.",
+        "validation_provenance": "Focused GP-CONFIG-011 (8 cases), SetConfig rebinding (13 cases), build-input provenance, checker census 204, validation health 43 manifest entries and 39 current load-bearing checks, framework, sequence, navigation, agent surface, Python compilation, and git diff checks PASS. Aggregate runtime validation remains unavailable: its existing AGG-11 exclusion adversarial probe fails before the documented ignored .pio/libdeps preflight defect; no aggregate-green claim is made. No firmware source, build, artifact, device, hardware, or physical behavior changed."
+      },
       "stop_conditions": ["Any cache/schema/SetConfig/runtime behavior changes.", "Copied models replace exact production/schema correspondence or injected host state is claimed physically reachable.", "Focused validation or independent review fails."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -5030,11 +5040,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-011","GP-PROV-013"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-013"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-011, GP-PROV-013; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-PROV-013; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5045,7 +5055,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025, GP-VAL-024, and GP-SRC-010 are DONE; GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are READY. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025, GP-VAL-024, GP-SRC-010, GP-PROV-012, and GP-CONFIG-011 are DONE; GP-PROV-013 is READY. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. GP-CONFIG-011 added host-only characterization with no firmware/runtime product or hardware claim.
 
 ## Allowed Statuses
 
