@@ -41,25 +41,21 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
+    "state": "CONSUMED",
     "branch": "planning/portfolio-20260920-0227",
     "base_configurator_sha": "c4a4ddfb82b2ec7b650202be427ef5797f5092fe",
     "packet_id": "glyph-portfolio-20260920-0227",
     "packet_path": "docs/planning/portfolio_20260920_0227.md",
     "planning_commit": "6f7be340568a03069f605503c5ad67dc7f692bda",
     "curation_commit": "92c3e6b44e66314bde72e99783b22867d3abcf7d",
-    "candidate_count": 1,
-    "survivors": [
-      {
-        "candidate_id": "GP-PERSIST-003",
-        "disposition": "RESEARCH_GATED"
-      }
-    ],
+    "candidate_count": 0,
+    "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
       "Curator independently authorized GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 as bounded READY work on 2026-09-20 and GP-VAL-023 as PREAUTHORIZED pending GP-VAL-021 integration.",
-      "Curator retained GP-PERSIST-003 as RESEARCH_GATED because the host fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity remain unresolved."
+      "Curator retained GP-PERSIST-003 as RESEARCH_GATED because the host fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity remain unresolved.",
+      "Implementation Supervisor completed GP-VAL-023 as an exact H0 checker-only integration; the gated GP-PERSIST-003 survivor remains outside executable runway pending future planning/curation."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260920-0227",
@@ -129,7 +125,8 @@ Git, but it is not current candidate supply or implementation authority.
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -4667,11 +4664,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
