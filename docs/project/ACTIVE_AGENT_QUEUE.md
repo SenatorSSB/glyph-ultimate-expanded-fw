@@ -4633,7 +4633,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260920-0227 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-VAL-022 is DONE after exact reviewed integration; GP-CONFIG-009 remains READY. GP-VAL-023 is PREAUTHORIZED / ACTIVATABLE after exact GP-VAL-021 integration. GP-PERSIST-003 remains RESEARCH_GATED because its fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity are unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260920-0227 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-VAL-022 is DONE after exact reviewed integration; GP-CONFIG-009 is the remaining immediate authorized item. GP-VAL-023 is PREAUTHORIZED / ACTIVATABLE after exact GP-VAL-021 integration. GP-PERSIST-003 remains RESEARCH_GATED because its fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity are unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
