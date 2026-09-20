@@ -14,6 +14,11 @@ import subprocess
 import tempfile
 from typing import Any
 
+from glyph_tracked_worktree_integrity import (
+    TrackedWorktreeIntegrityError,
+    tracked_worktree_divergence,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOC_PATH = REPO_ROOT / "docs/runtime_config/artifact_postprocessor_provenance.md"
@@ -73,6 +78,18 @@ def verify_checkout(candidate_sha: str | None = None) -> str:
     if not TRACKED_NUKER.is_file() or sha256_file(TRACKED_NUKER) != EXPECTED_NUKER_SHA256:
         fail("tracked glyph_nuker identity changed")
     return observed
+
+
+def verify_worktree(phase: str) -> tuple[str, ...]:
+    if phase not in {"pre-build", "post-build"}:
+        fail("worktree verification phase must be pre-build or post-build")
+    try:
+        divergence = tracked_worktree_divergence(REPO_ROOT)
+    except TrackedWorktreeIntegrityError as exc:
+        fail(f"worktree integrity could not be established: {exc}")
+    if divergence:
+        fail(f"persistent worktree divergence {phase}: {', '.join(divergence)}")
+    return divergence
 
 
 def build_sidecar(candidate_sha: str, artifact_path: Path) -> dict[str, Any]:
@@ -326,11 +343,53 @@ def check_fixture() -> None:
             else:
                 fail("duplicate JSON key was accepted")
 
+        # Exercise the CI worktree gate against a disposable repository. The
+        # shared integrity helper is already covered by the pre-build contract;
+        # these cases bind this provenance entrypoint to the persistent-divergence
+        # policy and preserve the finite dependency/build-output allowlist.
+        worktree = Path(directory) / "worktree"
+        worktree.mkdir()
+        subprocess.run(["git", "init", "-q", "-b", "main", str(worktree)], check=True)
+        (worktree / "src").mkdir()
+        (worktree / "src/input.cpp").write_text("base\n", encoding="utf-8")
+        (worktree / ".gitignore").write_text(".pio/\n", encoding="utf-8")
+        subprocess.run(["git", "-C", str(worktree), "add", "src/input.cpp", ".gitignore"], check=True)
+        subprocess.run([
+            "git", "-C", str(worktree), "-c", "user.name=Glyph", "-c",
+            "user.email=glyph@example.invalid", "commit", "-qm", "base",
+        ], check=True)
+        original_root = globals()["REPO_ROOT"]
+        globals()["REPO_ROOT"] = worktree
+        try:
+            verify_worktree("pre-build")
+            (worktree / "src/ghost.cpp").write_text("critical input\n", encoding="utf-8")
+            try:
+                verify_worktree("pre-build")
+            except ProvenanceError:
+                pass
+            else:
+                fail("critical untracked input passed the worktree gate")
+            (worktree / "src/ghost.cpp").unlink()
+            (worktree / ".pio").mkdir()
+            (worktree / ".pio/build-output.bin").write_bytes(b"dependency/build output\n")
+            verify_worktree("post-build")
+            (worktree / "src/input.cpp").write_text("post-build mutation\n", encoding="utf-8")
+            try:
+                verify_worktree("post-build")
+            except ProvenanceError:
+                pass
+            else:
+                fail("post-build tracked mutation passed the worktree gate")
+        finally:
+            globals()["REPO_ROOT"] = original_root
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate the committed fixture")
     parser.add_argument("--verify-checkout", action="store_true")
+    parser.add_argument("--verify-worktree", action="store_true")
+    parser.add_argument("--phase", choices=("pre-build", "post-build"))
     parser.add_argument("--write-sidecar", action="store_true")
     parser.add_argument("--verify-sidecar", action="store_true")
     parser.add_argument("--candidate-sha")
@@ -347,6 +406,11 @@ def main() -> int:
         elif args.verify_checkout:
             print(f"checked_out_git_sha={verify_checkout(args.candidate_sha)}")
             print("tracked_postprocessor=PASS")
+        elif args.verify_worktree:
+            if not args.phase:
+                parser.error("--verify-worktree requires --phase")
+            verify_worktree(args.phase)
+            print(f"worktree_integrity={args.phase}:PASS")
         elif args.write_sidecar:
             if not args.artifact or not args.sidecar or not args.candidate_sha:
                 parser.error("--write-sidecar requires --candidate-sha, --artifact, and --sidecar")
@@ -358,7 +422,7 @@ def main() -> int:
             verify_real_sidecar(args.sidecar, args.artifact, args.candidate_sha)
             print("sidecar_verification=PASS")
         else:
-            parser.error("one of --check, --verify-checkout, --write-sidecar, or --verify-sidecar is required")
+            parser.error("one of --check, --verify-checkout, --verify-worktree, --write-sidecar, or --verify-sidecar is required")
     except (OSError, ProvenanceError, subprocess.SubprocessError) as exc:
         parser.error(str(exc))
     return 0

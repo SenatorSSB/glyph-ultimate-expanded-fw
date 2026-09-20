@@ -18,12 +18,15 @@ class WorkflowError(ValueError):
 
 PROTECTED_COMMANDS = (
     'python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-checkout --candidate-sha "$GITHUB_SHA"',
+    "python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-worktree --phase pre-build",
+    "python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-worktree --phase post-build",
     "ls *.uf2 | xargs ./glyph_nuker",
     'python3 tools/check_glyph_artifact_postprocessor_provenance.py --write-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"',
     'python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-sidecar --candidate-sha "$GITHUB_SHA" --artifact "$ARTIFACT_PATH" --sidecar "$SIDECAR_PATH"',
 )
 PROTECTED_FAMILY_MARKERS = (
     "--verify-checkout",
+    "--verify-worktree",
     "ls *.uf2 | xargs ./glyph_nuker",
     "--write-sidecar",
     "--verify-sidecar",
@@ -35,12 +38,14 @@ EXACT_BUILD_LINES = [
     'cp ".pio/build/${PIO_ENV}/firmware.${BIN_EXT}" "$ARTIFACT_PATH"',
 ]
 EXACT_CHECKOUT_LINES = [PROTECTED_COMMANDS[0]]
+EXACT_PRE_BUILD_LINES = [PROTECTED_COMMANDS[1]]
 EXACT_NUKE_LINES = [
     "mv glyph_nuker $PIO_ENV/glyph_nuker",
     "cd $PIO_ENV",
     "ls *.uf2 | xargs ./glyph_nuker",
     "rm glyph_nuker",
 ]
+EXACT_POST_BUILD_LINES = [PROTECTED_COMMANDS[2]]
 EXACT_SIDECAR_LINES = [
     'export SIDECAR_PATH="$PIO_ENV/${ARTIFACT_NAME}.provenance.json"',
     'test "$SIDECAR_PATH" = "$PIO_ENV/${ARTIFACT_NAME}.provenance.json"',
@@ -51,7 +56,7 @@ EXACT_UPLOAD_FIELDS = {"name": "Glyph_FW", "path": "${{ env.PIO_ENV }}"}
 
 
 def reject_decoys_and_conditions(steps: list[object]) -> None:
-    exact_blocks = (EXACT_CHECKOUT_LINES, EXACT_BUILD_LINES, EXACT_NUKE_LINES, EXACT_SIDECAR_LINES)
+    exact_blocks = (EXACT_CHECKOUT_LINES, EXACT_PRE_BUILD_LINES, EXACT_BUILD_LINES, EXACT_POST_BUILD_LINES, EXACT_NUKE_LINES, EXACT_SIDECAR_LINES)
     markers = PROTECTED_FAMILY_MARKERS + ("pio run -e", 'mkdir -p "$PIO_ENV"', 'cp ".pio/build/')
     for step in steps:
         if getattr(step, "condition", None) is not None:
@@ -92,6 +97,8 @@ def validate(text: str) -> None:
     required = (
         "fetch-depth: 0",
         "python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-checkout",
+        "python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-worktree --phase pre-build",
+        "python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-worktree --phase post-build",
         "--candidate-sha \"$GITHUB_SHA\"",
         "--write-sidecar",
         "--verify-sidecar",
@@ -120,9 +127,17 @@ def validate(text: str) -> None:
         step for step in steps
         if any("--verify-checkout" in line for line in executable_lines(step.run))
     ]
+    pre_build = [
+        step for step in steps
+        if any("--verify-worktree --phase pre-build" in line for line in executable_lines(step.run))
+    ]
     build = [
         step for step in steps
         if any("pio run -e" in line for line in executable_lines(step.run))
+    ]
+    post_build = [
+        step for step in steps
+        if any("--verify-worktree --phase post-build" in line for line in executable_lines(step.run))
     ]
     postprocess = [
         step for step in steps
@@ -137,13 +152,17 @@ def validate(text: str) -> None:
         if any("--verify-sidecar" in line for line in executable_lines(step.run))
     ]
     upload = [step for step in steps if step.uses == "actions/upload-artifact@v4"]
-    if not len(checkout) == len(build) == len(postprocess) == len(write) == len(verify) == len(upload) == 1:
-        raise WorkflowError("identity, build, postprocessing, sidecar, and upload steps are not unique")
-    positions = [steps.index(step) for step in (checkout[0], build[0], postprocess[0], write[0], verify[0], upload[0])]
-    if not positions[0] < positions[1] < positions[2] < positions[3] <= positions[4] < positions[5]:
+    if not len(checkout) == len(pre_build) == len(build) == len(post_build) == len(postprocess) == len(write) == len(verify) == len(upload) == 1:
+        raise WorkflowError("identity, worktree, build, postprocessing, sidecar, and upload steps are not unique")
+    positions = [steps.index(step) for step in (checkout[0], pre_build[0], build[0], post_build[0], postprocess[0], write[0], verify[0], upload[0])]
+    if not positions[0] < positions[1] < positions[2] < positions[3] < positions[4] < positions[5] <= positions[6] < positions[7]:
         raise WorkflowError("identity, postprocessing, sidecar, and upload ordering drifted")
-    if positions[4] + 1 != positions[5]:
+    if positions[6] + 1 != positions[7]:
         raise WorkflowError("sidecar verification must immediately precede upload")
+    if executable_lines(pre_build[0].run) != EXACT_PRE_BUILD_LINES:
+        raise WorkflowError("pre-build worktree gate drifted")
+    if executable_lines(post_build[0].run) != EXACT_POST_BUILD_LINES:
+        raise WorkflowError("post-build worktree gate drifted")
     if executable_lines(build[0].run) != EXACT_BUILD_LINES:
         raise WorkflowError("build step command block drifted")
     if executable_lines(postprocess[0].run) != EXACT_NUKE_LINES:
@@ -191,7 +210,7 @@ def main() -> int:
                 'cp ".pio/build/wrong/firmware.uf2" "$ARTIFACT_PATH"', 1,
             ),
             "post_verify_mutation": workflow.replace(
-                PROTECTED_COMMANDS[3], f"{PROTECTED_COMMANDS[3]}\n        echo mutation", 1
+                PROTECTED_COMMANDS[5], f"{PROTECTED_COMMANDS[5]}\n        echo mutation", 1
             ),
             "intervening_mutation": workflow.replace(
                 "    - name: Publish ${{ matrix.env }} artifacts",

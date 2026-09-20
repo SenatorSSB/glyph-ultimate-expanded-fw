@@ -43,12 +43,16 @@ tool's CI-only `--verify-checkout` mode requires full lowercase `GITHUB_SHA` to
 equal checked-out `git rev-parse HEAD` and verifies the tracked postprocessor
 hash before the existing workflow step. After that step, `--write-sidecar`
 and `--verify-sidecar` bind the final UF2's filename, size, and SHA-256 to the
-same source identity and observed-only fields before upload. The static
-ordering checker is
+same source identity and observed-only fields before upload. The CI-only
+`--verify-worktree --phase pre-build` and `--verify-worktree --phase post-build`
+modes fail closed on persistent tracked or firmware-relevant untracked/ignored
+divergence using the finite allowlist in
+`tools/glyph_tracked_worktree_integrity.py`; they do not claim race freedom or
+detect transient changes restored between gates. The static ordering checker is
 `tools/check_glyph_artifact_postprocessor_workflow.py`.
 
-That checker requires the reviewed build, copy, checkout identity,
-postprocessing, sidecar write/verification, and upload operations to occur as
+That checker requires the reviewed build, copy, checkout identity, pre/post
+worktree gates, postprocessing, sidecar write/verification, and upload operations to occur as
 the exact current command blocks, in order, with each required operation
 unique. The upload action must retain the exact flat `name`/`path` mapping, and
 sidecar verification must be the final executable block immediately before

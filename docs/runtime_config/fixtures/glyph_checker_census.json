@@ -767,7 +767,7 @@
       },
       "checker_id": "artifact_postprocessor_provenance",
       "defines_main": true,
-      "file_size_bytes": 14774,
+      "file_size_bytes": 17770,
       "hard_coded_branch_like_strings": [
         "--candidate-sha",
         "args.candidate_sha",
@@ -781,7 +781,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 368,
+      "line_count": 432,
       "parse_error": null,
       "path": "tools/check_glyph_artifact_postprocessor_provenance.py",
       "potential_branch_identity_signals": [
@@ -798,14 +798,16 @@
       "python_module": "tools.check_glyph_artifact_postprocessor_provenance",
       "referenced_repository_path_prefixes": [
         "docs/runtime_config/artifact_postprocessor_provenance.md",
-        "docs/runtime_config/fixtures/artifact_postprocessor_provenance.json"
+        "docs/runtime_config/fixtures/artifact_postprocessor_provenance.json",
+        "src/ghost.cpp",
+        "src/input.cpp"
       ],
       "runtime_config_relevance_signals": [
         "artifact_custody_provenance",
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "5a601f8000543cd74c1b580471c1f0b17d1f014a1d9396d7f5baca62924ebc4f",
+      "sha256": "af617014ef54b76bb06cb95b365a61a12a87430c157ae41868c783f8490b732a",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -826,7 +828,7 @@
       },
       "checker_id": "artifact_postprocessor_workflow",
       "defines_main": true,
-      "file_size_bytes": 12227,
+      "file_size_bytes": 13515,
       "hard_coded_branch_like_strings": [
         "--candidate-sha"
       ],
@@ -835,7 +837,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 255,
+      "line_count": 274,
       "parse_error": null,
       "path": "tools/check_glyph_artifact_postprocessor_workflow.py",
       "potential_branch_identity_signals": [
@@ -848,9 +850,10 @@
       ],
       "runtime_config_relevance_signals": [
         "artifact_custody_provenance",
+        "build_declarations_hooks",
         "ci_workflows"
       ],
-      "sha256": "4d10a76387f4d01a08b784e459685e345dee706ba545c074da199caaff095f53",
+      "sha256": "44ae3abede3f22b0be721d1be8451912a5c37ae23f6c7b0674a3620dce2d6d9b",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

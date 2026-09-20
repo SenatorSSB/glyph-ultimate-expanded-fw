@@ -73,11 +73,17 @@ jobs:
       run: |
         echo "ARTIFACT_PATH=${PIO_ENV}/${ARTIFACT_NAME}" >> "$GITHUB_ENV"
 
+    - name: Verify clean worktree before build
+      run: python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-worktree --phase pre-build
+
     - name: Build ${{ matrix.env }} env
       run: |
         pio run -e "$PIO_ENV"
         mkdir -p "$PIO_ENV"
         cp ".pio/build/${PIO_ENV}/firmware.${BIN_EXT}" "$ARTIFACT_PATH"
+
+    - name: Verify clean worktree after build
+      run: python3 tools/check_glyph_artifact_postprocessor_provenance.py --verify-worktree --phase post-build
 
     - name: nuke
       run: |

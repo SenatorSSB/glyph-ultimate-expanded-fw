@@ -27,10 +27,12 @@ verifier at
 `fixtures/artifact_postprocessor_provenance.json` and
 `tools/check_glyph_artifact_postprocessor_provenance.py`. Its bounded
 `build.yml` route verifies full checked-out Git identity and tracked
-postprocessor identity, then emits and verifies a final-artifact sidecar before
-upload. Postprocessor purpose and byte transformation remain `UNKNOWN`; the
-sidecar does not claim immutable storage, artifact acceptance, reproducibility,
-or hardware validation.
+postprocessor identity, fails closed on persistent critical worktree divergence
+immediately before and after the build/copy block, then emits and verifies a
+final-artifact sidecar before upload. Postprocessor purpose and byte
+transformation remain `UNKNOWN`; the sidecar does not claim race freedom,
+immutable storage, artifact acceptance, reproducibility, or hardware
+validation.
 
 The bounded `glyph_nuker` source-lineage search is documented in
 `glyph_nuker_source_lineage.md`, with fixture
