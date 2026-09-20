@@ -29,7 +29,10 @@ from extract_glyph_identity_runtime_tables import (
     TableExtractionError,
     build_runtime_config_interpreter_source_baseline,
     load_source_tables,
+    load_source_text_with_generated_tables,
     normalized_table_names,
+    parse_source_owned_adapter_correspondence,
+    required_table_symbols,
     runtime_table_id_by_normalized_name,
     runtime_table_id_names,
     source_symbol_by_normalized_name,
@@ -41,6 +44,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 EVALUATOR_PATH = REPO_ROOT / "tools" / "check_glyph_identity_runtime_behavior_evaluator.py"
 INTERPRETER_PATH = REPO_ROOT / "src" / "modes" / "UltimateRuntimeConfigInterpreter.hpp"
 BASELINE_FIXTURE_PATH = REPO_ROOT / "docs" / "runtime_config" / "fixtures" / "current_baseline_runtime_config_semantics_bridge.json"
+ADAPTER_FIXTURE_PATH = REPO_ROOT / "docs" / "runtime_config" / "fixtures" / "generated_adapter_correspondence.json"
 
 REQUIRED_INTERPRETER_PHRASES = (
     "source-owned runtime config interpreter boundary",
@@ -334,6 +338,53 @@ def compare_tables(
     return mismatches
 
 
+def validate_adapter_correspondence(source_text: str) -> None:
+    """Keep adapter drift load-bearing while preserving one canonical order."""
+
+    expected = tuple((symbol, index) for index, symbol in enumerate(required_table_symbols()))
+    if parse_source_owned_adapter_correspondence(source_text) != expected:
+        raise RuntimeError("generated adapter correspondence does not match canonical symbol order")
+
+    mutations = (
+        ("swapped table index", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 3);"),
+        ("wrong point index", "SOURCE_OWNED_GENERATED_TABLE_POINT(TABLE_INDEX, 4)", "SOURCE_OWNED_GENERATED_TABLE_POINT(TABLE_INDEX, 5)"),
+        ("axis inversion", "[POINT_INDEX][0],", "[POINT_INDEX][1],"),
+        ("wrong raw namespace", "generated_source_owned::fixtures::kGeneratedSourceOwnedRuntimeConfigTables", "generated_source_owned::wrong::kGeneratedSourceOwnedRuntimeConfigTables"),
+        ("duplicate table alias", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);\nSOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);"),
+        ("malformed table alias", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2)"),
+        ("split table alias", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);", "SOURCE_OWNED_GENERATED_TABLE \n(kX1Table, 2);"),
+        ("spaced table alias", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);", "SOURCE_OWNED_GENERATED_TABLE (kX1Table, 2);"),
+        ("extra table macro token", "constexpr StickPoint TABLE_SYMBOL[9] = {", "constexpr StickPoint TABLE_SYMBOL[9] = { extra_token "),
+        ("extra point invocation", "SOURCE_OWNED_GENERATED_TABLE_POINT(TABLE_INDEX, 8)", "SOURCE_OWNED_GENERATED_TABLE_POINT(TABLE_INDEX, 8),\n        SOURCE_OWNED_GENERATED_TABLE_POINT(TABLE_INDEX, 8)"),
+        ("malformed point invocation", "SOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);", "SOURCE_OWNED_GENERATED_TABLE_POINT(TABLE_INDEX, 9)\nSOURCE_OWNED_GENERATED_TABLE(kX1Table, 2);"),
+        ("raw array outside namespace", "namespace glyph::runtime_config::generated_source_owned::fixtures {", "namespace other {"),
+    )
+    for label, original, replacement in mutations:
+        mutated = source_text.replace(original, replacement, 1)
+        if mutated == source_text:
+            raise RuntimeError(f"adapter adversarial mutation did not apply: {label}")
+        try:
+            parse_source_owned_adapter_correspondence(mutated)
+        except TableExtractionError:
+            continue
+        raise RuntimeError(f"adapter adversarial mutation unexpectedly passed: {label}")
+
+
+def validate_adapter_fixture(fixture: dict[str, object]) -> None:
+    expected = {
+        "schema_name": "glyph_generated_adapter_correspondence",
+        "schema_version": 1,
+        "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "raw_array_namespace": "glyph::runtime_config::generated_source_owned::fixtures::kGeneratedSourceOwnedRuntimeConfigTables",
+        "table_count": 28,
+        "points_per_table": 9,
+        "axis_order": ["x", "y"],
+        "point_indices": list(range(9)),
+    }
+    if fixture != expected:
+        raise RuntimeError("generated adapter correspondence fixture drifted")
+
+
 def print_mismatches(mismatches: list[TableMismatch]) -> None:
     if not mismatches:
         return
@@ -358,11 +409,14 @@ def main() -> int:
     try:
         # load_source_tables() is the enforced byte-range gate for source literals.
         source_tables = load_source_tables(DEFAULT_SOURCE_PATH)
+        validate_adapter_correspondence(load_source_text_with_generated_tables(DEFAULT_SOURCE_PATH))
         evaluator_tables = load_evaluator_tables(EVALUATOR_PATH)
         source_text = Path(DEFAULT_SOURCE_PATH).read_text(encoding="utf-8")
         validate_interpreter_source_text(source_text)
         interpreter_text = INTERPRETER_PATH.read_text(encoding="utf-8")
         baseline_fixture = load_json_object(BASELINE_FIXTURE_PATH)
+        adapter_fixture = load_json_object(ADAPTER_FIXTURE_PATH)
+        validate_adapter_fixture(adapter_fixture)
         validate_interpreter_header(interpreter_text, source_tables, baseline_fixture)
     except (OSError, RuntimeError, TableExtractionError) as exc:
         print("status=FAIL")

@@ -1,0 +1,23 @@
+{
+  "axis_order": [
+    "x",
+    "y"
+  ],
+  "points_per_table": 9,
+  "point_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "raw_array_namespace": "glyph::runtime_config::generated_source_owned::fixtures::kGeneratedSourceOwnedRuntimeConfigTables",
+  "schema_name": "glyph_generated_adapter_correspondence",
+  "schema_version": 1,
+  "source_path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+  "table_count": 28
+}

@@ -112,6 +112,8 @@ fixtures:
 - `tools/check_glyph_source_owned_candidate_generation_diff.py`
 - `source_owned_table_symbol_map.md` and
   `tools/check_glyph_source_owned_table_symbol_map.py`
+- `generated_adapter_correspondence.md` and
+  `tools/check_glyph_identity_runtime_table_source_sync.py`
 - `src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
 - `fixtures/generated_source_owned_generator_input.example.json`
 - `fixtures/generated_source_owned_layout_spec.example.json`

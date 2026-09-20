@@ -11,6 +11,14 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+
+from extract_glyph_identity_runtime_tables import (  # noqa: E402
+    TableExtractionError,
+    load_source_text_with_generated_tables,
+    parse_source_owned_adapter_correspondence,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RECOVERY_BRANCH = "runtime-config-literal-table-contract-supersession"
@@ -35,7 +43,6 @@ EXPECTED_POINTS_PER_TABLE = 9
 EXPECTED_AXES_PER_POINT = 2
 FINAL_TABLE_SYMBOL = "kLt1LowMagnitudeTable"
 GENERATED_BASELINE_INCLUDE = '#include "runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"'
-ALIAS_RE = re.compile(r"SOURCE_OWNED_GENERATED_TABLE\(\s*(k[A-Za-z0-9_]+Table)\s*,\s*(\d+)\s*\);")
 LITERAL_TABLE_RE = re.compile(r"constexpr\s+StickPoint\s+k[A-Za-z0-9_]+Table\s*\[\s*9\s*\]\s*=\s*\{")
 HISTORICAL_LITERAL_TABLE_RE = re.compile(r"constexpr\s+StickPoint\s+k[A-Za-z0-9_]+Table\s*\[\s*9\s*\]\s*=\s*\{")
 
@@ -187,13 +194,12 @@ def validate_current_representation(baseline: dict[str, Any]) -> list[str]:
         fail("active table header must retain macro-backed source-owned aliases")
     if LITERAL_TABLE_RE.search(source):
         fail("active table header must not contain obsolete direct literal StickPoint table bodies")
-    aliases = [(symbol, int(index)) for symbol, index in ALIAS_RE.findall(source)]
-    if len(aliases) != EXPECTED_TABLE_COUNT:
-        fail(f"active table header must declare exactly {EXPECTED_TABLE_COUNT} macro-backed aliases")
-    if [symbol for symbol, _index in aliases] != symbols:
+    try:
+        aliases = parse_source_owned_adapter_correspondence(load_source_text_with_generated_tables())
+    except TableExtractionError as exc:
+        fail(f"active macro-backed adapter correspondence is invalid: {exc}")
+    if aliases != tuple((symbol, index) for index, symbol in enumerate(symbols)):
         fail("active macro-backed table symbols must match canonical extraction order")
-    if [index for _symbol, index in aliases] != list(range(EXPECTED_TABLE_COUNT)):
-        fail("active macro-backed table indexes must be stable and complete")
     return symbols
 
 

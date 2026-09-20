@@ -6325,34 +6325,37 @@
       },
       "checker_id": "identity_runtime_table_source_sync",
       "defines_main": true,
-      "file_size_bytes": 17791,
+      "file_size_bytes": 21499,
       "hard_coded_branch_like_strings": [],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 383,
+      "line_count": 437,
       "parse_error": null,
       "path": "tools/check_glyph_identity_runtime_table_source_sync.py",
       "potential_branch_identity_signals": [],
       "potential_mutation_signals": [],
       "python_module": "tools.check_glyph_identity_runtime_table_source_sync",
       "referenced_repository_path_prefixes": [
-        "src/modes/Ultimate.cpp"
+        "src/modes/Ultimate.cpp",
+        "src/modes/UltimateIdentityRuntimeTables.hpp"
       ],
       "runtime_config_relevance_signals": [
+        "generated_source_owned",
+        "identity_runtime_tables",
         "runtime_config_interpreter"
       ],
-      "sha256": "eef5ad3bd9667a566ea94d7183595b3153bc48086f0d4f62b8d6b84c13a87599",
+      "sha256": "51b76db9881ba720469dcac6bf397bf9b17c4e781720dfe4342e5afb1ed64e01",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
         "coordinate_native": false,
         "docs_navigation": false,
-        "generated_source_owned_artifacts": false,
+        "generated_source_owned_artifacts": true,
         "hardware_results": true,
-        "identity_runtime_tables": false,
+        "identity_runtime_tables": true,
         "runtime_config": true,
         "source_owned": true,
         "y2_tilt3": false
@@ -11956,7 +11959,7 @@
       },
       "checker_id": "source_owned_table_replacement_generator_contract",
       "defines_main": true,
-      "file_size_bytes": 14167,
+      "file_size_bytes": 14188,
       "hard_coded_branch_like_strings": [
         "branch",
         "branches",
@@ -11970,7 +11973,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 300,
+      "line_count": 306,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
       "potential_branch_identity_signals": [
@@ -12010,7 +12013,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "f1e195d9b8974b6f5accd7207d4290d4a6d1b298b5620d793afca071a847b9bc",
+      "sha256": "5f48a4ee150b3ac82b0e6a4466caf6028a3c873489c31ccb1a27f3a09ba8f4c5",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

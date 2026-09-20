@@ -136,10 +136,132 @@ _GENERATED_RAW_ROW_PATTERN = re.compile(
     re.DOTALL,
 )
 _GENERATED_RAW_POINT_PATTERN = re.compile(r"\{\s*(?P<x>\d+)u?\s*,\s*(?P<y>\d+)u?\s*\}")
+_SOURCE_OWNED_POINT_MACRO_PATTERN = re.compile(
+    r"#define\s+SOURCE_OWNED_GENERATED_TABLE_POINT\s*\(\s*TABLE_INDEX\s*,\s*POINT_INDEX\s*\)"
+    r"(?P<body>.*?)(?=\n#define\s+SOURCE_OWNED_GENERATED_TABLE\s*\(|\Z)",
+    re.DOTALL,
+)
+_SOURCE_OWNED_TABLE_MACRO_PATTERN = re.compile(
+    r"#define\s+SOURCE_OWNED_GENERATED_TABLE\s*\(\s*TABLE_SYMBOL\s*,\s*TABLE_INDEX\s*\)"
+    r"(?P<body>.*?)(?=\nSOURCE_OWNED_GENERATED_TABLE\s*\(|\n#undef\s+SOURCE_OWNED_GENERATED_TABLE\s*\(|\Z)",
+    re.DOTALL,
+)
+_SOURCE_OWNED_TABLE_INVOCATION_PATTERN = re.compile(
+    r"(?m)^\s*SOURCE_OWNED_GENERATED_TABLE\(\s*(?P<symbol>k[A-Za-z0-9_]+Table)\s*,\s*(?P<index>\d+)\s*\)\s*;\s*$"
+)
+_SOURCE_OWNED_RAW_ARRAY = (
+    "glyph::runtime_config::generated_source_owned::fixtures::"
+    "kGeneratedSourceOwnedRuntimeConfigTables"
+)
 
 
 class TableExtractionError(ValueError):
     """Raised when source table extraction cannot be trusted."""
+
+
+def parse_source_owned_adapter_correspondence(source_text: str) -> tuple[tuple[str, int], ...]:
+    """Validate the active generated-table adapter grammar and return its aliases.
+
+    This is deliberately a correspondence parser, not a second table-semantic
+    authority: table order remains TABLE_SYMBOL_TO_NAME and point values remain
+    owned by the canonical raw generated array.
+    """
+
+    namespace_matches = list(
+        re.finditer(r"namespace\s+glyph::runtime_config::generated_source_owned::fixtures\s*\{", source_text)
+    )
+    namespace_openings = re.findall(r"namespace\s+[A-Za-z0-9_:]+\s*\{", source_text)
+    if len(namespace_matches) != 1 or len(namespace_openings) != 1:
+        raise TableExtractionError("generated adapter must contain the canonical generated-source namespace exactly once")
+    raw_array_pattern = re.compile(
+        r"static\s+constexpr\s+std::uint8_t\s+kGeneratedSourceOwnedRuntimeConfigTables"
+        r"\s*\[\s*28\s*\]\s*\[\s*9\s*\]\s*\[\s*2\s*\]"
+    )
+    raw_array_matches = list(raw_array_pattern.finditer(source_text))
+    if len(raw_array_matches) != 1:
+        raise TableExtractionError("generated adapter must contain exactly one canonical raw table array")
+    namespace_close = re.search(
+        r"\n}\s*//\s*namespace\s+glyph::runtime_config::generated_source_owned::fixtures\b",
+        source_text[namespace_matches[0].end() :],
+        re.DOTALL,
+    )
+    if namespace_close is None:
+        raise TableExtractionError("canonical generated-source namespace is not closed exactly")
+    namespace_end = namespace_matches[0].end() + namespace_close.start()
+    if not namespace_matches[0].end() <= raw_array_matches[0].start() < namespace_end:
+        raise TableExtractionError("canonical raw table array must be declared inside its canonical namespace")
+
+    point_macros = _SOURCE_OWNED_POINT_MACRO_PATTERN.findall(source_text)
+    if len(point_macros) != 1:
+        raise TableExtractionError("generated adapter point macro is missing")
+    point_body = point_macros[0]
+    point_body_compact = re.sub(r"\s+", "", point_body).replace("\\", "")
+    expected_point_body = (
+        "{"
+        + _SOURCE_OWNED_RAW_ARRAY
+        + "[TABLE_INDEX][POINT_INDEX][0],"
+        + _SOURCE_OWNED_RAW_ARRAY
+        + "[TABLE_INDEX][POINT_INDEX][1],"
+        + "}"
+    )
+    if point_body_compact != expected_point_body:
+        raise TableExtractionError("generated adapter point macro must expand x then y from the canonical raw array")
+
+    table_macro_matches = list(_SOURCE_OWNED_TABLE_MACRO_PATTERN.finditer(source_text))
+    if len(table_macro_matches) != 1:
+        raise TableExtractionError("generated adapter table macro is missing")
+    table_macro_match = table_macro_matches[0]
+    table_macro_body = table_macro_match.group("body")
+    table_body_compact = re.sub(r"\s+", "", table_macro_body).replace("\\", "")
+    expected_table_body = (
+        "constexprStickPointTABLE_SYMBOL[9]={"
+        + "".join(
+            f"SOURCE_OWNED_GENERATED_TABLE_POINT(TABLE_INDEX,{index}),"
+            for index in range(EXPECTED_POINT_COUNT)
+        )
+        + "}"
+    )
+    if table_body_compact != expected_table_body:
+        raise TableExtractionError("generated adapter table macro body contains extra or malformed tokens")
+    expected_point_calls = [str(index) for index in range(EXPECTED_POINT_COUNT)]
+    point_calls = re.findall(
+        r"SOURCE_OWNED_GENERATED_TABLE_POINT\s*\(\s*TABLE_INDEX\s*,\s*(\d+)\s*\)\s*,?",
+        table_macro_body,
+    )
+    if point_calls != expected_point_calls:
+        raise TableExtractionError("generated adapter table macro must expand point indices 0 through 8 in order")
+    all_point_calls = re.findall(
+        r"SOURCE_OWNED_GENERATED_TABLE_POINT\s*\(\s*TABLE_INDEX\s*,\s*(\d+)\s*\)",
+        source_text,
+    )
+    if all_point_calls != expected_point_calls:
+        raise TableExtractionError("generated adapter contains extra or malformed point invocations")
+
+    undef_match = re.search(
+        r"\n#undef\s+SOURCE_OWNED_GENERATED_TABLE\s*$",
+        source_text[table_macro_match.end() :],
+        re.MULTILINE,
+    )
+    if undef_match is None:
+        raise TableExtractionError("generated adapter table macro is not closed by its undefinition")
+    adapter_tail = source_text[table_macro_match.end() : table_macro_match.end() + undef_match.start()]
+    invocations_list: list[tuple[str, int]] = []
+    for line in adapter_tail.splitlines():
+        if "SOURCE_OWNED_GENERATED_TABLE_POINT" in line:
+            raise TableExtractionError("generated adapter contains a point invocation outside its table macro")
+        if "SOURCE_OWNED_GENERATED_TABLE" not in line:
+            continue
+        invocation = _SOURCE_OWNED_TABLE_INVOCATION_PATTERN.fullmatch(line.strip())
+        if invocation is None:
+            raise TableExtractionError("generated adapter contains a malformed table alias invocation")
+        invocations_list.append((invocation.group("symbol"), int(invocation.group("index"))))
+    invocations = tuple(invocations_list)
+    expected = tuple((symbol, index) for index, (symbol, _name) in enumerate(TABLE_SYMBOL_TO_NAME))
+    if invocations != expected:
+        raise TableExtractionError(
+            "generated adapter table aliases must exactly match the canonical 28-symbol order and indices"
+        )
+    return invocations
 
 
 def required_table_symbols() -> tuple[str, ...]:
