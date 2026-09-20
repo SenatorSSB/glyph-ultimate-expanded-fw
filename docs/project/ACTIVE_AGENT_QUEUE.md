@@ -119,17 +119,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_OK"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -142,7 +142,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-009",
       "title": "Fail closed on noncanonical production authority",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-src-009-canonical-production-authority",
       "objective": "Prevent synthetic or otherwise unreviewed source-authority intake identities and arbitrary locator text from authorizing a production source-owned changeset.",
       "why_this_matters": "The current closed X1 mapping rejects misuse of the canonical identity or locator but returns without a blocker for wholly noncanonical identities, after which generic nonempty approval strings can authorize production emission.",
@@ -184,7 +184,23 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave production emission unchanged only if the closed canonical restriction cannot be implemented without broader authority design; emit no noncanonical packet as production-authorized.",
       "status_documentation_updates": "Document the closed production corpus and explicit non-production helper boundary while preserving ownership, runtime, device-write, persistence, Nunchuk, root-cause, and hardware non-claims.",
-      "done_evidence": "Pending exact reviewed implementation, focused authority corpus, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "9ac48cd8eb3aa3a673ba85bdc836b664e6b913aa",
+        "reviewed_implementation_sha": "70f5d3b119a2881c9cae52c2c3cf91c75b186257",
+        "prior_canonical_integration_sha": "70f5d3b119a2881c9cae52c2c3cf91c75b186257",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/source_owned_source_authority_intake.json",
+          "docs/runtime_config/source_authority_intake_workflow.md",
+          "tools/check_glyph_source_owned_source_authority_intake.py",
+          "tools/source_owned_source_authority_intake.py"
+        ],
+        "independent_review_provenance": "Fresh independent repaired-scope review PASS on the exact GP-SRC-009 snapshot. The review confirmed noncanonical production identities fail closed, exact canonical X1/GLYPH-UD-010/kX1Table/nine-point NO_OP remains accepted, source-equivalence helpers remain non-production, and no firmware/runtime/device/hardware scope entered the diff.",
+        "validation_provenance": "Focused intake checker (104 negative, 21 positive), checker census (202 entries), validation health (41 manifest entries), framework, navigation, agent-surface, Python syntax, and git diff --check gates PASS. The aggregate runner remains unavailable because its preflight rejects the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ path; no aggregate-green claim is made. No firmware build or hardware action was required."
+      },
       "stop_conditions": [
         "Any noncanonical identity or arbitrary locator can still authorize production emission.",
         "Any new authority, table ownership, coordinate, or approval meaning would be inferred.",
@@ -4568,11 +4584,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-009","GP-VAL-021","GP-VAL-022","GP-CONFIG-009"],"immediate_ready":4,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-021","GP-VAL-022","GP-CONFIG-009"],"immediate_ready":3,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-009, GP-VAL-021, GP-VAL-022, GP-CONFIG-009; Immediate Ready: 4; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-021, GP-VAL-022, GP-CONFIG-009; Immediate Ready: 3; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
