@@ -9,14 +9,14 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
-The executable work runway is owned by docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260920-1457 has four READY items: GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013; GP-VAL-024 and GP-VAL-025 are DONE and GP-CONFIG-010 is HARDWARE_TEST_REQUIRED with its exact candidate/artifact pair pinned. GP-HW-002 remains RESEARCH_GATED on protocol-hash schema evolution and truthful historical correspondence. GP-CONFIG-010 is H3 and remains exact-candidate/hardware-gated before merge; GP-CONFIG-011 is host characterization only. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. The next separate H2 modifier/layout realization awaits owner/Senscope data and routing intent. Global evidence wait is unsupported.
+The executable work runway is owned by docs/project/ACTIVE_AGENT_QUEUE.md. Packet glyph-portfolio-20260920-1457 has three READY items: GP-PROV-012, GP-CONFIG-011, and GP-PROV-013; GP-VAL-024, GP-VAL-025, and GP-SRC-010 are DONE and GP-CONFIG-010 is HARDWARE_TEST_REQUIRED with its exact candidate/artifact pair pinned. GP-HW-002 remains RESEARCH_GATED on protocol-hash schema evolution and truthful historical correspondence. GP-CONFIG-010 is H3 and remains exact-candidate/hardware-gated before merge; GP-CONFIG-011 is host characterization only. The machine-derived markers above are authoritative. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence remains unchanged. The next separate H2 modifier/layout realization awaits owner/Senscope data and routing intent. Global evidence wait is unsupported.
 `GP-VAL-008` is complete as an offline current-X1 correspondence lane at
 `63616108477bff72e1cda49572a56601782bac3b`; no firmware, build, artifact,
 device, or hardware action occurred. Pushed recovery tip

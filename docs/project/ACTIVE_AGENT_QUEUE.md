@@ -19,7 +19,7 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "8d1f49334973429d7b094dbcb3b86d669c465cae",
+    "audit_base_sha": "3ca30cc8cd39dc69c94ba4120812fae00735d5d4",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -129,17 +129,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_OK",
+    "RUNWAY_LOW",
     "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -305,7 +305,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-SRC-010",
       "title": "Close residual offline writer bypasses",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-src-010-offline-writer-closure",
       "objective": "Apply the existing exact-target, containment, symlink/alias, and atomic-replacement invariant to three remaining source-owned output paths.",
       "why_this_matters": "The artifact installer, candidate-preparation writer, and generator-modes prepare CLI still call mkdir/write_text directly and can bypass GP-SRC-005's shared output boundary.",
@@ -330,7 +330,29 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Keep the existing operations unchanged if they cannot reuse the exact shared policy without widening it; never add a direct-write exception.",
       "status_documentation_updates": "Record shared offline writer closure only; retain all active-source/runtime/device/hardware non-claims.",
-      "done_evidence": "Exact call-site closure, filesystem adversarial coverage, byte-equivalence proof, affected gates, and independent review.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "575ed922ffb2812a1838e645e636fe2ac59abae9",
+        "reviewed_implementation_sha": "6e616fa8adb78b98865e7bd1db1766ac0f56464f",
+        "prior_canonical_integration_sha": "3ca30cc8cd39dc69c94ba4120812fae00735d5d4",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/generated_source_owned_artifact_install.md",
+          "docs/runtime_config/generated_source_owned_generator_modes.md",
+          "tools/check_glyph_generated_source_owned_artifact_install.py",
+          "tools/check_glyph_source_owned_generator_modes.py",
+          "tools/generate_source_owned_generator_modes.py",
+          "tools/generate_source_owned_runtime_config.py",
+          "tools/install_generated_source_owned_runtime_config.py",
+          "tools/prepare_source_owned_candidate_branch.py",
+          "tools/source_owned_generator_modes.py"
+        ],
+        "independent_review_provenance": "Fresh independent Validator Reviewer Pauli PASSed the repaired exact diff, confirming all three named writers and the legacy explicit install route through the reviewed shared APIs, adversarial filesystem coverage, byte preservation, and no excluded scope.",
+        "validation_provenance": "Focused generator-modes (6 positive / 16 negative), candidate-generation, and inert-artifact-install checkers PASS; adversarial coverage includes hard links, symlink ancestors, input aliases/overwrite, and injected replacement failure. Checker census 203, validation health 42 manifest entries and 38 current load-bearing checks, source sync, framework, navigation, agent surface, Python compilation, and git diff --check PASS. Aggregate runtime validation remains unavailable on the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ preflight defect; no aggregate-green claim is made. No firmware build, artifact, device, or hardware action was required."
+      },
       "stop_conditions": ["Any new output root, install exception, generated semantic, active source, runtime, device, or hardware scope is needed.", "Any direct bypass remains or focused validation/review fails."],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -4998,11 +5020,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-SRC-010","GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-012","GP-CONFIG-011","GP-PROV-013"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-SRC-010, GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-PROV-012, GP-CONFIG-011, GP-PROV-013; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5013,7 +5035,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025 and GP-VAL-024 are DONE; GP-SRC-010, GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are READY. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260920-1457 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-CONFIG-010 is HARDWARE_TEST_REQUIRED; GP-VAL-025, GP-VAL-024, and GP-SRC-010 are DONE; GP-PROV-012, GP-CONFIG-011, and GP-PROV-013 are READY. GP-HW-002 remains RESEARCH_GATED because its proposed historical protocol-byte migration cannot truthfully bind current bytes to prior tests without a separately resolved schema and legacy-correspondence design. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
