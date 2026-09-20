@@ -119,9 +119,9 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 1,
-    "mechanically_activatable_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -222,7 +222,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-021",
       "title": "Seal the CI build-to-upload command chain",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-021-ci-build-upload-chain",
       "objective": "Require the current CI build, artifact preparation, sidecar verification, and upload boundary to be exact, unique, unconditional, failure-bearing, and mutation-free after verification.",
       "why_this_matters": "Current workflow checkers accept masked or unreachable build/copy commands, decoy canonical text, post-verification artifact mutation, intervening mutation steps, extra upload actions, and extra upload fields.",
@@ -262,7 +262,22 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave the checker unchanged if the exact tracked workflow cannot pass the bounded contract; do not edit the workflow to satisfy the checker.",
       "status_documentation_updates": "Record exact failure-bearing build-to-upload enforcement only; make no artifact, release, runtime, device, or hardware acceptance claim.",
-      "done_evidence": "Pending exact reviewed checker implementation, adversarial workflow corpus, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "db2502dca3b820d8744ed6d567e5173702dc65ed",
+        "reviewed_implementation_sha": "a5ec9012684d7c8e45ef4fbd57aa3a4ac755de55",
+        "prior_canonical_integration_sha": "b0162560779f10e568de80cff2baf04aae0447a9",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/artifact_postprocessor_provenance.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_artifact_postprocessor_workflow.py",
+          "tools/glyph_workflow_step_contract.py"
+        ],
+        "independent_review_provenance": "Fresh independent initial review found a job-level continue-on-error masking gap; the repaired-scope re-review PASS confirmed exact command blocks, upload fields, failure-bearing job policy, unchanged workflow bytes, and no scope expansion.",
+        "validation_provenance": "Artifact workflow, publication workflow, provenance, checker census (202 entries), framework, navigation, agent-surface, Python compilation, and git diff --check gates PASS. The aggregate runtime runner remains unavailable because preflight rejects the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ path; no aggregate-green claim is made. No firmware build or hardware action was required."
+      },
       "stop_conditions": [
         "Any protected operation remains accepted when masked, unreachable, decoyed, duplicated, reordered, or followed by artifact mutation.",
         "Any alternate upload-family action or extra upload field remains accepted in the current workflow.",
@@ -463,7 +478,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Workflow, runner, network, credential, publication, build, artifact, firmware, device, hardware, or GP-VAL-011 scope appears.",
         "Focused validation or independent review fails."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
