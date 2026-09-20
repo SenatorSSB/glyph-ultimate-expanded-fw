@@ -19,12 +19,12 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "8b4babd8ebea7e4f363b694eeb27435a47befbe7",
+  "audit_base_sha": "b9a0a20549909a22a1552f216ded7941b7a26a71",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Every candidate in glyph-portfolio-20260920-0227 has been adjudicated: GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 are READY; GP-VAL-023 is PREAUTHORIZED and mechanically waiting on GP-VAL-021 integration; GP-PERSIST-003 remains research gated.",
+    "resolution": "Every candidate in glyph-portfolio-20260920-0227 has been adjudicated: GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 were authorized READY; GP-VAL-023 is PREAUTHORIZED and mechanically activatable; GP-PERSIST-003 remains research gated.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
       "opening_reference": "git-json:6f7be340568a03069f605503c5ad67dc7f692bda:docs/planning/portfolio_20260920_0227.md",
@@ -119,12 +119,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -299,7 +299,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-022",
       "title": "Validate every generated adapter mapping",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-022-adapter-mapping-correspondence",
       "objective": "Make current load-bearing source-sync gates prove every active generated table symbol/index and point/axis adapter mapping instead of validating only raw generated rows.",
       "why_this_matters": "The current extractor normalizes raw generated rows by comments and contents without parsing the active adapter macros, so compiled table-symbol correspondence can drift while extracted tables and semantic digest remain unchanged.",
@@ -341,7 +341,26 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Leave current production gates unchanged if one exact load-bearing adapter proof cannot be established without duplicate authority; do not alter the active adapter to satisfy the checker.",
       "status_documentation_updates": "Record adapter correspondence proof and historical-check reuse only; preserve all table-value, runtime, firmware, device, Nunchuk, root-cause, and hardware non-claims.",
-      "done_evidence": "Pending exact reviewed correspondence implementation, adversarial adapter corpus, affected gates, and strict completion correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "79ac6bf1164143d6011a3dad46d047b72352b2a6",
+        "reviewed_implementation_sha": "b9a0a20549909a22a1552f216ded7941b7a26a71",
+        "prior_canonical_integration_sha": "b9a0a20549909a22a1552f216ded7941b7a26a71",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/fixtures/generated_adapter_correspondence.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/generated_adapter_correspondence.md",
+          "tools/check_glyph_identity_runtime_table_source_sync.py",
+          "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
+          "tools/extract_glyph_identity_runtime_tables.py"
+        ],
+        "independent_review_provenance": "Fresh independent review found and repaired malformed macro-token and namespace-binding gaps; final repaired-scope re-review PASS confirmed exact alias/point grammar, canonical authority reuse, adversarial rejection, unchanged active source, and no scope expansion.",
+        "validation_provenance": "Source-sync, source-owned baseline, symbol-map, checker census (202 entries), validation health, docs navigation, agent surface, Python compilation, and git diff --check PASS. Aggregate runtime validation remains unavailable because preflight rejects the pre-existing ignored .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/ path; no aggregate-green claim is made. No firmware build or hardware action was required."
+      },
       "stop_conditions": [
         "Any current symbol/index or point/axis drift remains invisible to load-bearing source-sync validation.",
         "A competing symbol-order or table-semantic authority is introduced.",
@@ -4599,11 +4618,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-022","GP-CONFIG-009"],"immediate_ready":2,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-009"],"immediate_ready":1,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-022, GP-CONFIG-009; Immediate Ready: 2; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-009; Immediate Ready: 1; Recorded Preauthorized: 1; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -4614,7 +4633,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260920-0227 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-SRC-009, GP-VAL-021, GP-VAL-022, and GP-CONFIG-009 are READY. GP-VAL-023 is PREAUTHORIZED / WAITING on exact GP-VAL-021 integration and is not mechanically activatable yet. GP-PERSIST-003 remains RESEARCH_GATED because its fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity are unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
+Packet glyph-portfolio-20260920-0227 is PARTIALLY_CONSUMED after independent Curator adjudication. GP-VAL-022 is DONE after exact reviewed integration; GP-CONFIG-009 remains READY. GP-VAL-023 is PREAUTHORIZED / ACTIVATABLE after exact GP-VAL-021 integration. GP-PERSIST-003 remains RESEARCH_GATED because its fault-model semantics, target ABI correspondence, and exact protobuf/CRC dependency identity are unresolved. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. Existing DONE and hardware evidence is unchanged; global wait is unsupported. No firmware/runtime product code or hardware evidence changed.
 
 ## Allowed Statuses
 
