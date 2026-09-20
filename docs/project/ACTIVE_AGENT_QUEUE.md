@@ -140,6 +140,7 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "signals": [
     "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
     "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
