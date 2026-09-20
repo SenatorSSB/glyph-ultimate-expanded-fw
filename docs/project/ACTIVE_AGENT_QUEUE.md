@@ -103,17 +103,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 3,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
     "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -127,7 +127,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-026",
       "title": "Close clean-checkout exact-schema characterization dependencies",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-val-026-clean-schema-closure",
       "objective": "Make the current load-bearing custom-modifier characterization runnable from a clean checkout in the declared Python/C++ sanitizer environment without a firmware build or ignored .pio input.",
       "why_this_matters": "The checker currently reads generated schema/Nanopb files from ignored .pio; CI validation runs before the build and fresh canonical checkout fails missing generated schema header.",
@@ -5277,11 +5277,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-026"],"immediate_ready":1,"recorded_preauthorized":3,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":3,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-026; Immediate Ready: 1; Recorded Preauthorized: 3; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 3; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived

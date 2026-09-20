@@ -1,0 +1,50 @@
+{
+  "schema_name": "glyph_exact_host_schema_fixture",
+  "schema_version": 1,
+  "work_order": "GP-VAL-026",
+  "glyph_source_commit": "4351b951916abbfbcaffec6f4512571a17d15ca5",
+  "haybox_proto": {
+    "repository": "https://github.com/GregTurbo/HayBox-proto",
+    "commit": "db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8",
+    "selector": "https://github.com/GregTurbo/HayBox-proto#db4e2f6",
+    "selector_path": "config/glyph/env.ini",
+    "license": "GPL-3.0-only"
+  },
+  "nanopb": {
+    "repository": "https://github.com/nanopb/nanopb",
+    "commit": "cad3c18ef15a663e30e3e43e3a752b66378adec1",
+    "tag": "0.4.9.1",
+    "platformio_package": "nanopb/Nanopb@0.4.91",
+    "generator_version": "nanopb-0.4.9.1",
+    "proto_header_version": 40,
+    "generator_blob": "16c6fd7149ade9ae8bce603d51a93fe5de8324cf",
+    "generator_sha256": "9e6551f8a5c9332cb16c711364e3de93dd16ae69b4c390547cbdf0b8639710f3"
+  },
+  "custom_mode_modifiers_max_count": 20,
+  "files": {
+    "config.proto": {
+      "sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+      "git_blob": "a58a2bf4dd827ad92482f1ac30c3d56bbea93c05"
+    },
+    "config.options": {
+      "sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+      "git_blob": "7175d8463ade5b0cd45f1a5f8f99be44f5719c3c"
+    },
+    "config.pb.h": {
+      "sha256": "532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3",
+      "git_blob": "9b8d8eb9e771e3a791356a94681cb5c89ce93e74"
+    },
+    "pb.h": {
+      "sha256": "a2ecdca9fdaeef5f4972ed983540c0d6fb0a5c402a2e0b0349d7e1bc5e188d29",
+      "git_blob": "10249bb651f72e17f2789c435edf0dfd398d2183"
+    },
+    "LICENSE.nanopb.txt": {
+      "sha256": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d",
+      "git_blob": "d11c9af1d7e469e9a5357a660fd184f58c3a4ff2"
+    },
+    "haybox-proto.library.json": {
+      "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+      "git_blob": "04da440b92d5da9cd4ee3c33a58c5ef8830e8198"
+    }
+  }
+}

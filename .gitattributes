@@ -1,0 +1,7 @@
+# Preserve exact upstream fixture bytes and their original whitespace.
+tools/fixtures/custom_modifier_cache_host/schema/config.proto -text -whitespace
+tools/fixtures/custom_modifier_cache_host/schema/config.options -text -whitespace
+tools/fixtures/custom_modifier_cache_host/schema/config.pb.h -text -whitespace
+tools/fixtures/custom_modifier_cache_host/schema/pb.h -text -whitespace
+tools/fixtures/custom_modifier_cache_host/schema/LICENSE.nanopb.txt -text -whitespace
+tools/fixtures/custom_modifier_cache_host/schema/haybox-proto.library.json -text -whitespace

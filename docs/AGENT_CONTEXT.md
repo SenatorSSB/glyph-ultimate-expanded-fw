@@ -80,11 +80,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-026"],"immediate_ready":1,"recorded_preauthorized":3,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":3,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-026; Immediate Ready: 1; Recorded Preauthorized: 3; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 3; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 - Packet glyph-portfolio-20260921-0052 has independent Curator authorization for exact host-schema dependency closure, separate invalid-button and USB-default characterizations, and a distinct schema20 modifier-cache repair candidate. See docs/project/ACTIVE_AGENT_QUEUE.md for complete mechanical activation conditions and authoritative runway. GP-CONFIG-010 remains HARDWARE_TEST_REQUIRED at its unchanged exact candidate/artifact pair; GP-CONFIG-011 remains completed characterization. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE; GP-HW-002 remains research gated. All existing DONE and hardware evidence is preserved. Button/USB repair policy and first real modifier/table/routing correspondence remain unresolved. H3 repair may not merge before its own exact physical PASS; Nunchuk remains NOT_TESTED and root cause remains unproven.

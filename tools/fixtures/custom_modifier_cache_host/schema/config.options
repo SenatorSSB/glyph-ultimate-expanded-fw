@@ -1,0 +1,92 @@
+ButtonRemap.physical_button int_size:IS_8
+ButtonRemap.activates int_size:IS_8
+
+SocdPair.button_dir1 int_size:IS_8
+SocdPair.button_dir2 int_size:IS_8
+SocdPair.socd_type int_size:IS_8
+
+AnalogTriggerMapping.button int_size:IS_8
+AnalogTriggerMapping.trigger int_size:IS_8
+AnalogTriggerMapping.value int_size:IS_8
+
+AnalogModifier.buttons int_size:IS_8
+AnalogModifier.buttons max_count:3
+AnalogModifier.axis int_size:IS_8
+AnalogModifier.combination_mode int_size:IS_8
+
+ButtonComboMapping.buttons int_size:IS_8
+ButtonComboMapping.buttons max_count:3
+ButtonComboMapping.digital_output int_size:IS_8
+
+Coords.x int_size:IS_8
+Coords.y int_size:IS_8
+
+ButtonToKeycodeMapping.button int_size:IS_8
+ButtonToKeycodeMapping.keycode int_size:IS_8
+
+ButtonToColorMapping.button int_size:IS_8
+
+GameModeConfig.mode_id int_size:IS_8
+GameModeConfig.name max_length:17
+GameModeConfig.socd_pairs max_count:10
+GameModeConfig.button_remapping max_count:60
+GameModeConfig.activation_binding max_count:4
+GameModeConfig.keyboard_mode_config int_size:IS_8
+GameModeConfig.rgb_config int_size:IS_8
+
+CustomModeConfig.id int_size:IS_8
+CustomModeConfig.digital_button_mappings max_count:18
+CustomModeConfig.digital_button_mappings int_size:IS_8
+CustomModeConfig.stick_direction_mappings max_count:8
+CustomModeConfig.stick_direction_mappings int_size:IS_8
+CustomModeConfig.analog_trigger_mappings max_count:4
+CustomModeConfig.button_combo_mappings max_count:5
+CustomModeConfig.modifiers max_count:20
+CustomModeConfig.stick_range int_size:IS_8
+
+KeyboardModeConfig.id int_size:IS_8
+KeyboardModeConfig.buttons_to_keycodes max_count:60
+
+CommunicationBackendConfig.backend_id int_size:IS_8
+CommunicationBackendConfig.default_mode_config int_size:IS_8
+CommunicationBackendConfig.activation_binding max_count:2
+
+RgbConfig.button_colors max_count:60
+RgbConfig.animation int_size:IS_8
+RgbConfig.speed int_size:IS_8
+
+Config.game_mode_configs max_count:30
+Config.communication_backend_configs max_count:15
+Config.custom_modes max_count:10
+Config.keyboard_modes max_count:10
+Config.rgb_configs max_count:30
+Config.default_backend_config int_size:IS_8
+Config.default_usb_backend_config int_size:IS_8
+Config.rgb_brightness int_size:IS_8
+
+DeviceInfo.firmware_name max_length:25
+DeviceInfo.firmware_version max_length:30
+DeviceInfo.device_name max_length:30
+
+Command long_names:false
+Button long_names:false
+DigitalOutput long_names:false
+StickDirectionButton long_names:false
+AnalogAxis long_names:false
+AnalogTrigger long_names:false
+ModifierCombinationMode long_names:false
+SocdType long_names:false
+GameModeId long_names:false
+CommunicationBackendId long_names:false
+RgbAnimationId long_names:false
+OutputOption long_names:false
+
+GameModeConfig.layout_plate int_size:IS_8
+GameModeConfig.applicable_backends max_count:15
+GameModeConfig.applicable_backends int_size:IS_8
+GameModeConfig.menu_button_icon max_count: 7
+GameModeConfig.menu_button_icon int_size:IS_8
+GameModeConfig.menu_button_icon fixed_length:true
+Config.default_dashboard_option int_size:IS_8
+LayoutPlate long_names:false
+DashboardOption long_names:false

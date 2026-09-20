@@ -1,0 +1,639 @@
+/**
+ * Configuration data structures for HayBox firmware.
+ */
+syntax = "proto3";
+
+/**
+ * Message type identifier for use when sending/receiving messages to/from a HayBox device.
+ */
+enum Command {
+  // Invalid command.
+  CMD_UNSPECIFIED = 0;
+  // Request device info from device.
+  CMD_GET_DEVICE_INFO = 1;
+  // Respond with device info to host.
+  CMD_SET_DEVICE_INFO = 2;
+  // Request current active configuration from device.
+  CMD_GET_CONFIG = 3;
+  // Respond to host with current active configuration, or send new configuration to apply to
+  // device.
+  CMD_SET_CONFIG = 4;
+  // Respond to host with error message.
+  CMD_ERROR = 5;
+  // Respond to host confirming operation completed successfully.
+  CMD_SUCCESS = 6;
+  // Request for device to reboot into firmware.
+  CMD_REBOOT_FIRMWARE = 7;
+  // Request for device to reboot into bootloader.
+  CMD_REBOOT_BOOTLOADER = 8;
+}
+
+/**
+ * Button identifiers for all 60 supported button inputs.
+ */
+enum Button {
+  BTN_UNSPECIFIED = 0; // Unspecified button.
+  BTN_LF1 = 1;         // Left Finger 1
+  BTN_LF2 = 2;         // Left Finger 2
+  BTN_LF3 = 3;         // Left Finger 3
+  BTN_LF4 = 4;         // Left Finger 4
+  BTN_LF5 = 5;         // Left Finger 5
+  BTN_LF6 = 6;         // Left Finger 6
+  BTN_LF7 = 7;         // Left Finger 7
+  BTN_LF8 = 8;         // Left Finger 8
+  BTN_LF9 = 9;         // Left Finger 9
+  BTN_LF10 = 10;       // Left Finger 10
+  BTN_LF11 = 11;       // Left Finger 11
+  BTN_LF12 = 12;       // Left Finger 12
+  BTN_LF13 = 13;       // Left Finger 13
+  BTN_LF14 = 14;       // Left Finger 14
+  BTN_LF15 = 15;       // Left Finger 15
+  BTN_LF16 = 16;       // Left Finger 16
+  BTN_RF1 = 17;        // Right Finger 1
+  BTN_RF2 = 18;        // Right Finger 2
+  BTN_RF3 = 19;        // Right Finger 3
+  BTN_RF4 = 20;        // Right Finger 4
+  BTN_RF5 = 21;        // Right Finger 5
+  BTN_RF6 = 22;        // Right Finger 6
+  BTN_RF7 = 23;        // Right Finger 7
+  BTN_RF8 = 24;        // Right Finger 8
+  BTN_RF9 = 25;        // Right Finger 9
+  BTN_RF10 = 26;       // Right Finger 10
+  BTN_RF11 = 27;       // Right Finger 11
+  BTN_RF12 = 28;       // Right Finger 12
+  BTN_RF13 = 29;       // Right Finger 13
+  BTN_RF14 = 30;       // Right Finger 14
+  BTN_RF15 = 31;       // Right Finger 15
+  BTN_RF16 = 32;       // Right Finger 16
+  BTN_LT1 = 33;        // Left Thumb 1
+  BTN_LT2 = 34;        // Left Thumb 2
+  BTN_LT3 = 35;        // Left Thumb 3
+  BTN_LT4 = 36;        // Left Thumb 4
+  BTN_LT5 = 37;        // Left Thumb 5
+  BTN_LT6 = 38;        // Left Thumb 6
+  BTN_LT7 = 39;        // Left Thumb 7
+  BTN_LT8 = 40;        // Left Thumb 8
+  BTN_RT1 = 41;        // Right Thumb 1
+  BTN_RT2 = 42;        // Right Thumb 2
+  BTN_RT3 = 43;        // Right Thumb 3
+  BTN_RT4 = 44;        // Right Thumb 4
+  BTN_RT5 = 45;        // Right Thumb 5
+  BTN_RT6 = 46;        // Right Thumb 6
+  BTN_RT7 = 47;        // Right Thumb 7
+  BTN_RT8 = 48;        // Right Thumb 8
+  BTN_MB1 = 49;        // Menu Button 1
+  BTN_MB2 = 50;        // Menu Button 2
+  BTN_MB3 = 51;        // Menu Button 3
+  BTN_MB4 = 52;        // Menu Button 4
+  BTN_MB5 = 53;        // Menu Button 5
+  BTN_MB6 = 54;        // Menu Button 6
+  BTN_MB7 = 55;        // Menu Button 7
+  BTN_MB8 = 56;        // Menu Button 8
+  BTN_MB9 = 57;        // Menu Button 9
+  BTN_MB10 = 58;       // Menu Button 10
+  BTN_MB11 = 59;       // Menu Button 11
+  BTN_MB12 = 60;       // Menu Button 12
+};
+
+/**
+ * SOCD cleaning methods.
+ */
+enum SocdType {
+  // No SOCD cleaning
+  SOCD_UNSPECIFIED = 0;
+  // Neutral SOCD (Left + Right = neutral)
+  SOCD_NEUTRAL = 1;
+  // Second input priority: Left -> Left + Right = Right, and vice versa.
+  // Releasing the second direction gives the original direction.
+  SOCD_2IP = 2;
+  // Second input priority without reactivation - same as above, except releasing the second
+  // direction results in neutral. The original direction must be physically reactuated.
+  SOCD_2IP_NO_REAC = 3;
+  // The first button in the [SocdPair](#socdpair) always takes priority over the second
+  SOCD_DIR1_PRIORITY = 4;
+  // The second button in the [SocdPair](#socdpair) always takes priority over the first
+  SOCD_DIR2_PRIORITY = 5;
+}
+
+/**
+ * Gamemode identifier.
+ *
+ * Indicates to the firmware which gamemode class to switch to when activating a
+ * [GameModeConfig](#gamemodeconfig).
+ */
+enum GameModeId {
+  // No mode specified.
+  MODE_UNSPECIFIED = 0;
+  // Built-in Super Smash Bros Melee mode.
+  MODE_MELEE = 1;
+  // Built in Project M/Project+ mode.
+  MODE_PROJECT_M = 2;
+  // Built-in Super Smash Bros Ultimate mode.
+  MODE_ULTIMATE = 3;
+  // Built-in traditional fighting game/hitbox-style mode.
+  MODE_FGC = 4;
+  // Built-in Rivals of Aether mode.
+  MODE_RIVALS_OF_AETHER = 5;
+  // Keyboard mode - a [GameModeConfig](#gamemodeconfig) using this mode id must set
+  // GameModeConfig.keyboard_mode_config to reference a [KeyboardModeConfig](#keyboardmodeconfig).
+  MODE_KEYBOARD = 6;
+  // Custom gamemode - a [GameModeConfig](#gamemodeconfig) using this mode id must set
+  // GameModeConfig.custom_mode_config to reference a [CustomModeConfig](#custommodeconfig).
+  MODE_CUSTOM = 7;
+  // Built-in 64 mode
+  MODE_64 = 8;
+  // Built-in Rivals 2 mode.
+  MODE_RIVALS2 = 9;
+  //number of enum members
+  MODE_NUM_VALUES = 10;
+}
+
+/**
+ * Gamemode identifier.
+ *
+ * Indicates to the firmware which communication backend class to switch to when activating a
+ * [CommunicationBackendConfig].
+ */
+enum CommunicationBackendId {
+  // No backend specified.
+  COMMS_BACKEND_UNSPECIFIED = 0;
+  // HID/DirectInput gamepad backend.
+  COMMS_BACKEND_DINPUT = 1;
+  // XInput gamepad backend.
+  COMMS_BACKEND_XINPUT = 2;
+  // GameCube console backend.
+  COMMS_BACKEND_GAMECUBE = 3;
+  // N64 console backend.
+  COMMS_BACKEND_N64 = 4;
+  // NES console backend.
+  COMMS_BACKEND_NES = 5;
+  // SNES console backend.
+  COMMS_BACKEND_SNES = 6;
+  // Nintendo Switch USB backend.
+  COMMS_BACKEND_NINTENDO_SWITCH = 7;
+  // Configurator mode - for reading/writing config via this protocol.
+  COMMS_BACKEND_CONFIGURATOR = 8;
+  COMMS_BACKEND_PASSTHROUGH_PS4 = 9;
+  COMMS_BACKEND_PASSTHROUGH_PS5 = 10;
+
+}
+
+/**
+ * RGB animation identifier.
+ *
+ * Indicates to the firmware which animation to use when activation an [RgbConfig](#rgbconfig).
+ */ 
+enum RgbAnimationId {
+  RGB_ANIM_UNSPECIFIED = 0;     // No animation specified.
+  RGB_ANIM_STATIC = 1;          // Static - no animation.
+  RGB_ANIM_BREATHE = 2;         // Simple "breathing" (fade in, fade out) animation.
+  RGB_ANIM_REACTIVE_SIMPLE = 3; // Per-key reactive LED (keys light up when pressed).
+  RGB_ANIM_RAINBOW_SHIFT = 4;
+  RGB_ANIM_RAINBOW_XWAVE_LEFT = 5;
+}
+
+enum OutputOption {
+  OUT_UNSPECIFIED = 0;   // Invalid output.
+  OUT_A = 1;          
+  OUT_B = 2;          
+  OUT_X = 3;            
+  OUT_Y = 4;          
+  OUT_LB = 5;           
+  OUT_RB = 6;            
+  OUT_LT = 7;           
+  OUT_RT = 8;            
+  OUT_START = 9;        
+  OUT_SELECT = 10;       
+  OUT_HOME = 11;        
+  OUT_SW_CAPTURE = 12;      
+  OUT_SHARE = 13;      
+  OUT_DPAD_DOWN = 14;   
+  OUT_DPAD_LEFT = 15;   
+  OUT_DPAD_RIGHT = 16;  
+  OUT_DPAD_UP = 17; 
+  OUT_L3 = 18; 
+  OUT_R3 = 19; 
+  OUT_TP = 20;
+  OUT_TRIANGLE = 21;
+  OUT_SQUARE = 22;
+  OUT_CIRCLE = 23;
+  OUT_Z = 24;
+  OUT_ZL = 25;
+  OUT_ZR = 26;
+  OUT_LS_LEFT = 27;
+  OUT_LS_RIGHT = 28;
+  OUT_LS_UP = 29;
+  OUT_LS_DOWN = 30;
+  OUT_RS_LEFT = 31;
+  OUT_RS_RIGHT = 32;
+  OUT_RS_UP = 33;
+  OUT_RS_DOWN = 34;
+  OUT_CS_LEFT = 35;
+  OUT_CS_RIGHT = 36;
+  OUT_CS_UP = 37;
+  OUT_CS_DOWN = 38;
+  OUT_PLUS = 39;
+  OUT_MINUS = 40;
+  OUT_MENU = 41;
+  OUT_L = 42;
+  OUT_R = 43;
+  OUT_XB_START = 44;
+  OUT_XB_BACK = 45;
+}
+
+/**
+ * Output state button identifiers, used by [CustomModeConfig](#custommodeconfig) to bind button
+ * inputs to digital gamepad outputs.
+ */
+enum DigitalOutput {
+  GP_UNSPECIFIED = 0;   // Invalid output.
+  GP_A = 1;             // The A button.
+  GP_B = 2;             // The B button.
+  GP_X = 3;             // The X button.
+  GP_Y = 4;             // The Y button.
+  GP_LB = 5;            // The left bumper.
+  GP_RB = 6;            // The right bumper.
+  GP_LT = 7;            // The left trigger.
+  GP_RT = 8;            // The right trigger.
+  GP_START = 9;         // The Start button.
+  GP_SELECT = 10;       // The Select button.
+  GP_HOME = 11;         // The Home button.
+  GP_CAPTURE = 12;      // The Capture button.
+  GP_DPAD_UP = 13;      // The Up direction on the D-Pad.
+  GP_DPAD_DOWN = 14;    // The Down direction on the D-Pad.
+  GP_DPAD_LEFT = 15;    // The Left direction on the D-Pad.
+  GP_DPAD_RIGHT = 16;   // The Right direction on the D-Pad.
+  GP_LSTICK_CLICK = 17; // The click input of the left analog stick.
+  GP_RSTICK_CLICK = 18; // The click input of the right analog stick.
+}
+
+/**
+ * Stick direction specifiers used for mapping analog stick directions to buttons in
+ * [CustomModeConfig](#custommodeconfig).
+ */
+enum StickDirectionButton {
+  SD_UNSPECIFIED = 0;  // No stick direction specified.
+  SD_LSTICK_UP = 1;    // Up on the left analog stick.
+  SD_LSTICK_DOWN = 2;  // Down on the left analog stick.
+  SD_LSTICK_LEFT = 3;  // Left on the left analog stick.
+  SD_LSTICK_RIGHT = 4; // Right on the left analog stick.
+  SD_RSTICK_UP = 5;    // Up on the right analog stick.
+  SD_RSTICK_DOWN = 6;  // Down on the right analog stick.
+  SD_RSTICK_LEFT = 7;  // Left on the right analog stick.
+  SD_RSTICK_RIGHT = 8; // Right on the right analog stick.
+}
+
+/**
+ * Analog axis specifier used for binding [AnalogModifier](#analogmodifier)s to specific axes.
+ */
+enum AnalogAxis {
+  AXIS_UNSPECIFIED = 0; // No axis specified.
+  AXIS_LSTICK_X = 1;    // Left stick X-axis.
+  AXIS_LSTICK_Y = 2;    // Left stick Y-axis.
+  AXIS_RSTICK_X = 3;    // Right stick X-axis.
+  AXIS_RSTICK_Y = 4;    // Right stick Y-axis.
+  AXIS_LTRIGGER = 5;    // Left trigger axis.
+  AXIS_RTRIGGER = 6;    // Right trigger axis.
+}
+
+/**
+ * Analog trigger specifier used by [AnalogTriggerMapping](#analogtriggermapping) to bind button
+ * inputs to analog trigger
+ * values.
+ */
+enum AnalogTrigger {
+  TRIGGER_UNSPECIFIED = 0; // No trigger specified.
+  TRIGGER_LT = 1;          // Left Trigger.
+  TRIGGER_RT = 2;          // Right Trigger.
+}
+
+/**
+ * Modifier combination mode.
+ *
+ * Specifies the behaviour when multiple modifiers are applied to the same axis.
+ */
+enum ModifierCombinationMode {
+  // No combination mode specified - currently defaults to COMBINATION_MODE_COMPOUND.
+  COMBINATION_MODE_UNSPECIFIED = 0;
+  // Compound combination mode - modifiers applying to the same axis stack with each other
+  // multiplicatively.
+  COMBINATION_MODE_COMPOUND = 1;
+  // Override combination mode - modifiers applying to the same axis override each other, with the
+  // last one applied taking priority over all others.
+  COMBINATION_MODE_OVERRIDE = 2;
+};
+
+enum LayoutPlate {
+  LAYOUT_PLATE_UNSPECIFIED = 0;
+  LAYOUT_PLATE_EVERYTHING = 1;
+  LAYOUT_PLATE_FGC = 2;
+  LAYOUT_PLATE_SPLIT_FGC = 3;
+  LAYOUT_PLATE_PLATFORM_FIGHTER = 4;
+}
+
+enum DashboardOption {
+  DASHBOARD_UNSPECIFIED = 0;
+  DASHBOARD_MENU_BUTTON_HINTS = 1;
+  DASHBOARD_INPUT_VIEWER = 2;
+}
+
+/**
+ * Button remapping descriptor.
+ *
+ * Specifies a remapping from one button to another. You can map multiple physical buttons to
+ * activate the same button, but one physical button cannot activate multiple inputs.
+ */
+message ButtonRemap {
+  // The physical button input to remap.
+  Button physical_button = 1;
+  // The button input to activate instead when the above physical button is pressed.
+  Button activates = 2;
+}
+
+/**
+ * SOCD pair.
+ *
+ * Specifies a pair of button inputs to apply SOCD handling to, and the SOCD cleaning algorithm to
+ * use.
+ */
+message SocdPair {
+  Button button_dir1 = 1; // The first direction button.
+  Button button_dir2 = 2; // The second direction button.
+  SocdType socd_type = 3; // The SOCD cleaning mode to apply to the above button inputs.
+}
+
+/**
+ * Analog trigger mapping.
+ *
+ * Maps a button input to set a specified analog trigger with a predetermined value.
+ */
+message AnalogTriggerMapping {
+  Button button = 1;         // The button input that should activate the trigger.
+  AnalogTrigger trigger = 2; // The analog trigger to activate.
+  uint32 value = 3;          // The value to set the trigger to when button is pressed.
+}
+
+/**
+ * Analog axis modifier definition.
+ *
+ * Creates a mapping that a specified analog axis should have a specified multiplier applied to it
+ * when a specified set of button inputs are held down.
+ */
+message AnalogModifier {
+  // A list of buttons that must all be pressed simultaneously to activate this modifier.
+  repeated Button buttons = 1;
+  // The analog axis to modify.
+  AnalogAxis axis = 2;
+  // The multiplier to apply to axis.
+  float multiplier = 3;
+  // The resolution behaviour to use when multiple modifiers are applied to the same axis.
+  ModifierCombinationMode combination_mode = 4;
+}
+
+/**
+ * Mapping of multiple button inputs to a single digital output.
+ */
+message ButtonComboMapping {
+  // A list of buttons that must all be pressed simultaneously to activate this mapping.
+  repeated Button buttons = 1;
+  // The digital button output to activate when the button combo is pressed.
+  DigitalOutput digital_output = 2;
+}
+
+/**
+ * Analog stick coordinates.
+ *
+ * Used by various customisation options to describe analog stick positions with unsigned X and Y
+ * values.
+ */
+message Coords {
+  uint32 x = 1; // The X coordinate of the stick.
+  uint32 y = 2; // The Y coordinate of the stick.
+}
+
+/**
+ * Button to HID keyboard keycode mapping.
+ *
+ * Used by [KeyboardModeConfig](#keyboardmodeconfig) to map button inputs to keyboard inputs.
+ */
+message ButtonToKeycodeMapping {
+  Button button = 1;  // The button input that should output this keycode.
+  uint32 keycode = 2; // The HID keycode to output.
+}
+
+/**
+ * Button to RGB color code mapping.
+ *
+ * Used by [RgbConfig](#rgbconfig) to specify per-key lighting colors.
+ */
+message ButtonToColorMapping {
+  Button button = 1; // The button to apply the LED color to.
+  uint32 color = 2;  // The RGB color value to apply.
+}
+
+/**
+ * Custom gamemode definition.
+ *
+ * Used to implement a fully custom gamemode from scratch, mapping button inputs to digital buttons,
+ * stick directions, analog trigger values, and analog axis modifiers.
+ */
+message CustomModeConfig {
+  // Currently unused.
+  uint32 id = 1;
+  // An ordered list of button inputs to map to gamepad buttons, following the same order of the
+  // output buttons in [DigitalOutput](#digitaloutput) (i.e. first input in this list is mapped to
+  // the A button, second input is mapped to B, and so on).
+  repeated Button digital_button_mappings = 2;
+  // An ordered list of button inputs to map to analog stick directions, following the order of the
+  // specifiers in [StickDirectionButton](#stickdirectionbutton) (i.e. first input in this list is
+  // mapped to Left Stick Up, second input is mapped to Left Stick Down, and so on).
+  repeated Button stick_direction_mappings = 3;
+  // Maps button inputs to specific analog trigger values values.
+  repeated AnalogTriggerMapping analog_trigger_mappings = 4;
+  // Applies specified multipliers to analog axes when specified buttons are pressed.
+  repeated AnalogModifier modifiers = 5;
+  // The base stick range to apply based when stick direction buttons are pressed, which may then
+  // have modifiers applied to it.
+  uint32 stick_range = 6;
+  // Applies mappings of multiple button inputs to single digital output.
+  repeated ButtonComboMapping button_combo_mappings = 7;
+}
+
+/**
+ * A config profile for a custom HID keyboard mode.
+ */
+message KeyboardModeConfig {
+  // Currently unused.
+  uint32 id = 1;
+  // A map of button inputs to HID keycodes.
+  repeated ButtonToKeycodeMapping buttons_to_keycodes = 2;
+}
+
+/**
+ * A general config profile.
+ *
+ * Defines a gamemode profile.
+ */
+message GameModeConfig {
+  // The ID of the underlying `InputMode` implementing class to use.
+  GameModeId mode_id = 1;
+  // The name of the profile (optional).
+  string name = 2;
+  // Pairs of button inputs to apply SOCD handling to, and the SOCD cleaning algorithms to use.
+  repeated SocdPair socd_pairs = 3;
+  // Button remappings to apply.
+  repeated ButtonRemap button_remapping = 4;
+  // The combination of buttons to press simultaneously to activate this profile.
+  repeated Button activation_binding = 5;
+
+  /**
+   * Index into the Config.custom_modes array of [CustomModeConfig](#custommodeconfig)s. Only valid
+   * when mode_id = CUSTOM_MODE.
+   * This array index starts at 1, because Protobuf 3 does not transmit zeroes and has no other way
+   * to check field presence.
+   */
+  uint32 custom_mode_config = 6;
+
+  /**
+   * Index into the Config.keyboard_modes array of [KeyboardModeConfig](#keyboardmodeconfig)s. Only
+   * valid when mode_id = KEYBOARD_MODE.
+   * This array index starts at 1, because Protobuf 3 does not transmit zeroes and has no other way
+   * to check field presence.
+   */
+  uint32 keyboard_mode_config = 7;
+
+  /*
+   * An [RgbConfig](#rgbconfig) to apply when this mode is activated. This is an index into the
+   * Config.rgb_configs array of [RgbConfig](#rgbconfig)s (optional).
+   * This array index starts at 1, because Protobuf 3 does not transmit zeroes and has no other way
+   * to check field presence.
+   */
+  uint32 rgb_config = 8;
+  LayoutPlate layout_plate = 200;
+  repeated CommunicationBackendId applicable_backends = 201;
+  repeated OutputOption menu_button_icon = 202;
+}
+
+/**
+ * A communication backend config.
+ *
+ * Defines a comms backend profile.
+ */
+message CommunicationBackendConfig {
+  // The ID of the underlying `CommunicationBackend` implementation to use.
+  CommunicationBackendId backend_id = 1;
+  // The default gamemode profile to activate after initialization.
+  uint32 default_mode_config = 2;
+  // The combination of buttons to hold on plugin to activate this comms backend config.
+  repeated Button activation_binding = 3;
+  // Currently unused.
+  repeated CommunicationBackendId secondary_backends = 4;
+}
+
+/**
+ * A per-key RGB lighting profile.
+ */
+message RgbConfig {
+  // Map of buttons to RGB color codes.
+  repeated ButtonToColorMapping button_colors = 1;
+  // The default color to apply where specific button color is not mapped.
+  uint32 default_color = 2;
+  // The animation effect to apply to the LEDs.
+  RgbAnimationId animation = 3;
+  // Speed at which to render the animation.
+  uint32 speed = 4;
+}
+
+/**
+ * Melee mode specific options.
+ */
+message MeleeOptions {
+  // Set to true to enable downward diagonal coordinate which will cause you to enter walk state if
+  // you are hit while crouching.
+  bool crouch_walk_os = 1;
+  // Set to true to disable the horizontal SOCD modifier override intended to assist with
+  // ledgedashing.
+  bool disable_ledgedash_socd_override = 2;
+  // Custom airdodge X/Y coordinates. Valid X/Y values are 0 to 80.
+  Coords custom_airdodge = 3;
+}
+
+/**
+ * Project M mode specific options.
+ */
+message ProjectMOptions {
+  /**
+   * Set to true to make a Z input (mapped to RF3 by default) output an actual Z button press rather
+   * than the default analog shield + A grab macro.
+   * 
+   * The default macro behaviour allows you to L cancel with Z without being locked out of tech,
+   * and true Z is still accessible by pressing Mod X (mapped to LT2 by default) and Z at the same
+   * time.
+   */
+  bool true_z_press = 1;
+
+  // Set to true to disable the horizontal SOCD modifier override intended to assist with
+  // ledgedashing.
+  bool disable_ledgedash_socd_override = 2;
+  // Custom airdodge X/Y coordinates. Valid X/Y values are 0 to 100.
+  Coords custom_airdodge = 3;
+}
+
+/**
+ * The global container for all device configuration data.
+ */
+message Config {
+  // Array containing all defined gamemode profiles.
+  repeated GameModeConfig game_mode_configs = 1;
+  // Array containing all defined communication backend configs.
+  repeated CommunicationBackendConfig communication_backend_configs = 2;
+  // Array containing custom controller mode definitions.
+  repeated CustomModeConfig custom_modes = 3;
+  // Array containing custom keyboard mode definitions.
+  repeated KeyboardModeConfig keyboard_modes = 4;
+  // Array containing per-key RGB lighting profiles.
+  repeated RgbConfig rgb_configs = 5;
+
+  /**
+   * Index into the communication_backend_configs array specifying which
+   * [CommunicationBackendConfig](#communicationbackendconfig) to fall back to if none is selected
+   * by button holds, console detection, or other methods.
+   * This array index starts at 1, because Protobuf 3 does not transmit zeroes and has no other way
+   * to check field presence.
+   */
+  uint32 default_backend_config = 6;
+
+  /**
+   * Index into the communication_backend_configs array specifying which
+   * [CommunicationBackendConfig](#communicationbackendconfig) to default to if the console
+   * detection step detects that USB is connected, and no button hold or other method is used to
+   * manually select a specific USB backend.
+   * This array index starts at 1, because Protobuf 3 does not transmit zeroes and has no other way
+   * to check field presence.
+   */
+  uint32 default_usb_backend_config = 7;
+
+  // Overall RGB brightness modifier, which applies to all [RgbConfig](#rgbconfig)s.
+  uint32 rgb_brightness = 8;
+  // Melee mode specific options.
+  MeleeOptions melee_options = 9;
+  // Project M mode specific options.
+  ProjectMOptions project_m_options = 10;
+  DashboardOption default_dashboard_option = 200;
+}
+
+/**
+ * Device info message.
+ *
+ * Sent to host in response to a GET_DEVICE_INFO command.
+ */
+message DeviceInfo {
+  // The name of the firmware running on the device - HayBox by default, but can be changed in
+  // PlatformIO config.
+  string firmware_name = 1;
+  // The running firmware build version.
+  string firmware_version = 2;
+  // The name of the device - currently this is pulled straight from the PlatformIO build
+  // environment name.
+  string device_name = 3;
+}
