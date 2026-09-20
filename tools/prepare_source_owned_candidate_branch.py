@@ -34,6 +34,7 @@ from generate_source_owned_runtime_config import (
     load_json_object,
 )
 from glyph_source_owned_overlay import OverlayContractError, generate_overlay_payload
+from source_owned_generator_modes import _atomic_write_inert_source_text
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -324,8 +325,12 @@ def main(argv: list[str] | None = None) -> int:
         )
 
         if args.write_source:
-            args.target_source_path.parent.mkdir(parents=True, exist_ok=True)
-            args.target_source_path.write_text(generated_text, encoding="utf-8")
+            _atomic_write_inert_source_text(
+                args.target_source_path,
+                generated_text,
+                input_path=input_path,
+                purpose="candidate inert source install",
+            )
             plan["materialized_source_write"] = rel(args.target_source_path)
 
         json.dump(plan, sys.stdout, indent=2)

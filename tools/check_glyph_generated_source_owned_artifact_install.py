@@ -479,7 +479,7 @@ def validate_bridge_install_workflow(installed_artifacts: list[str]) -> None:
 
 
 def validate_remaining_writer_boundaries() -> None:
-    """Exercise the two legacy writers through the shared output policy."""
+    """Exercise legacy writers and enforce the shared output call-site policy."""
     with tempfile.TemporaryDirectory() as temp_name:
         safe_output = Path(temp_name) / "safe-output.json"
         generator = subprocess.run(
@@ -544,8 +544,22 @@ def validate_remaining_writer_boundaries() -> None:
 
     shared_source = (REPO_ROOT / "tools/source_owned_generator_modes.py").read_text(encoding="utf-8")
     legacy_source = (REPO_ROOT / "tools/generate_source_owned_runtime_config.py").read_text(encoding="utf-8")
-    if shared_source.count("_atomic_replace_validated_text(") != 2 or legacy_source.count("_atomic_replace_validated_text") != 2:
+    if shared_source.count("_atomic_replace_validated_text(") != 3 or legacy_source.count("_atomic_replace_validated_text") != 0:
         fail("shared low-level atomic helper must have only the shared writer and exact inert-install call sites")
+    installer_source = (REPO_ROOT / "tools/install_generated_source_owned_runtime_config.py").read_text(encoding="utf-8")
+    candidate_source = (REPO_ROOT / "tools/prepare_source_owned_candidate_branch.py").read_text(encoding="utf-8")
+    modes_cli_source = (REPO_ROOT / "tools/generate_source_owned_generator_modes.py").read_text(encoding="utf-8")
+    for label, source, forbidden in (
+        ("installer", installer_source, ("args.output.parent.mkdir", "args.output.write_text")),
+        ("candidate final install", candidate_source, ("args.target_source_path.parent.mkdir", "args.target_source_path.write_text")),
+        ("generator-modes prepare", modes_cli_source, ("args.output.write_text",)),
+    ):
+        if any(token in source for token in forbidden):
+            fail(f"{label} retains a direct user-selected output write")
+    if "_atomic_write_inert_source_text" not in installer_source or "_atomic_write_inert_source_text" not in candidate_source:
+        fail("repository-target writers must use the shared inert-source atomic API")
+    if "_atomic_write_text" not in modes_cli_source:
+        fail("generator-modes prepare must use the shared isolated-output atomic API")
 
 
 def validate_docs() -> None:

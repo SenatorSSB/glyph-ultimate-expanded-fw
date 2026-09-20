@@ -5082,12 +5082,14 @@
       },
       "checker_id": "generated_source_owned_artifact_install",
       "defines_main": true,
-      "file_size_bytes": 25576,
+      "file_size_bytes": 26775,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
         "branch.startswith",
+        "candidate",
         "candidate.view",
+        "candidate_source",
         "check_glyph_source_owned_candidate_generation.py",
         "check_glyph_source_owned_candidate_generation_diff.py",
         "configurator",
@@ -5108,14 +5110,16 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 590,
+      "line_count": 604,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_artifact_install.py",
       "potential_branch_identity_signals": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
         "branch.startswith",
+        "candidate",
         "candidate.view",
+        "candidate_source",
         "check_glyph_source_owned_candidate_generation.py",
         "check_glyph_source_owned_candidate_generation_diff.py",
         "configurator",
@@ -5177,6 +5181,7 @@
         "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
         "tools/dry_run_coordinate_native_runtime_profile.py",
         "tools/extract_glyph_identity_runtime_tables.py",
+        "tools/generate_source_owned_generator_modes.py",
         "tools/generate_source_owned_runtime_config.py",
         "tools/install_generated_source_owned_runtime_config.py",
         "tools/prepare_source_owned_candidate_branch.py",
@@ -5194,7 +5199,7 @@
         "runtime_config_docs",
         "source_owned_generator_modes"
       ],
-      "sha256": "bc7c3d1ac5e3801ad570127f79c2fceda0f4532499fa7071e1b29e186862ce9c",
+      "sha256": "5e2953e7aca33e045af945ee5e4446135f76c629e5852e0ebcf27cc6864c9d6b",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -11767,7 +11772,7 @@
       },
       "checker_id": "source_owned_generator_modes",
       "defines_main": true,
-      "file_size_bytes": 7872,
+      "file_size_bytes": 9648,
       "hard_coded_branch_like_strings": [
         "candidate.view",
         "candidate_digest",
@@ -11779,7 +11784,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 158,
+      "line_count": 195,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_generator_modes.py",
       "potential_branch_identity_signals": [
@@ -11795,7 +11800,7 @@
         "current_y2_layout",
         "source_owned_generator_modes"
       ],
-      "sha256": "2b88f75210ee9b3f78c5f3dae04ea405f237ae5ad558e34a0ae89f9e6ec355c5",
+      "sha256": "394207f48a53341357fbc3b2238167f3b311841bbd65c84d8b15dc4ab78affd4",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
