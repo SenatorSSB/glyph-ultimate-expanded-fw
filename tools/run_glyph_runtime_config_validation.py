@@ -276,6 +276,22 @@ def child_exec(command: list[str], cwd: Path, env: dict[str, str]) -> None:
     os.execvpe(command[0], command, env)
 
 
+def execution_command(command: list[str]) -> list[str]:
+    """Bind portable manifest Python commands to this runner's interpreter."""
+    if not command or command[0] != "python3":
+        return command
+    executable = Path(sys.executable)
+    if not executable.is_absolute():
+        raise ValueError("invoking Python executable must be an absolute path")
+    try:
+        mode = executable.stat().st_mode
+    except OSError as exc:
+        raise ValueError(f"invoking Python executable is unusable: {executable}") from exc
+    if not stat.S_ISREG(mode) or not os.access(executable, os.X_OK):
+        raise ValueError(f"invoking Python executable is unusable: {executable}")
+    return [str(executable), *command[1:]]
+
+
 def run_checker(command: list[str], cwd: Path, env: dict[str, str], timeout: float,
                 *, input_text: str | None = None, input_file=None, output_file=None) -> tuple[int, str, str, str | None, float]:
     """Own the child before exec/setup; drain pipes and reap within bounded clocks."""
@@ -780,7 +796,9 @@ def main() -> int:
                     output["phase"] = "checker:" + str(entry["id"])
                     remaining = require_budget(output["phase"])
                     timeout = min(CHECKER_TIMEOUT_SECONDS, remaining)
-                    code, stdout, stderr, failure, duration = run_checker(entry["command"], clone, checker_environment(entry, env), timeout)
+                    code, stdout, stderr, failure, duration = run_checker(
+                        execution_command(entry["command"]), clone, checker_environment(entry, env), timeout
+                    )
                     if failure == "CHECKER_TIMEOUT" and remaining <= CHECKER_TIMEOUT_SECONDS:
                         failure = "AGGREGATE_TIMEOUT"
                     result = {"id": entry["id"], "command": entry["command"], "category": entry["category"],
