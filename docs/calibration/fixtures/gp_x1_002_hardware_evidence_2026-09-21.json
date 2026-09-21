@@ -1,0 +1,129 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-X1-002",
+  "candidate_branch": "glyph/gp-x1-002-restore-normal-x1",
+  "candidate_git_sha": "f657715b26d26587a931074ce7dd12c698785290",
+  "candidate_base_configurator_sha": "34a6c1bc9a9e13dcdf412c8b56a5c53011383503",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f657715b26d26587a931074ce7dd12c698785290/00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Standard Glyph purchased from the supplier, as reported by the project owner; specific model and board revision unknown",
+  "firmware_profile_state": "Ultimate automatically selected on normal Nintendo Switch connection after the candidate update and after reconnect",
+  "update_method": "Manual owner-controlled drag of the exact preserved UF2 to the RPI-RP2 volume; no rebuild or flashing automation was used",
+  "host_platform_adapter": "Owner-managed host for the manual RPI-RP2 update, followed by normal Nintendo Switch connection; exact host, Switch, and adapter revisions were not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_X1_002_HW_V1",
+  "preconditions": [
+    "Live GitHub verification resolved origin/configurator to 8020314150871571156d19343619f8582e2dc642 and the candidate branch to f657715b26d26587a931074ce7dd12c698785290.",
+    "The candidate tree was 972e1a2ef0cdf41a9d3b6f6204ef1cc0c4dd3fa6 and its direct parent was the recorded base 34a6c1bc9a9e13dcdf412c8b56a5c53011383503.",
+    "Immediately before the owner's manual update, the custody verifier reported PRE_HANDOFF_VERIFIED for a regular non-symlink 792064-byte UF2 whose SHA-256 was exactly 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451.",
+    "The complete nine-row raw and miniscreen table from GP_X1_002_HW_V1 was shown to the owner before coordinate validation.",
+    "The owner confirmed LT5 as the physical activation for the logical sole/non-Mode X1 path, with Mode released and no other modifier held."
+  ],
+  "steps": [
+    {
+      "id": "UPDATE",
+      "instruction": "Update the controller through ordinary RP2040 programming mode using the exact preserved UF2, then allow it to reboot normally.",
+      "expected": "The exact candidate firmware updates and boots normally without substituting a rebuilt artifact.",
+      "observed": "PASS — the project owner reported that the exact preserved UF2 flashed successfully and the controller worked normally after reboot."
+    },
+    {
+      "id": "SWITCH-CONNECTION",
+      "instruction": "Connect the Glyph normally to Nintendo Switch and confirm the expected Ultimate profile is active.",
+      "expected": "The controller connects normally and Ultimate is automatically selected.",
+      "observed": "PASS — the project owner reported normal Switch operation with Ultimate selected as the beginning profile."
+    },
+    {
+      "id": "X1-1-DOWN-LEFT",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus down-left.",
+      "expected": "Raw output is (93,51) and the miniscreen shows (-35,-77).",
+      "observed": "PASS — the project owner directly confirmed the expected (-35,-77) miniscreen value."
+    },
+    {
+      "id": "X1-2-DOWN",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus down.",
+      "expected": "Raw output is (128,51) and the miniscreen shows (0,-77).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table."
+    },
+    {
+      "id": "X1-3-DOWN-RIGHT",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus down-right.",
+      "expected": "Raw output is (163,51) and the miniscreen shows (+35,-77).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table."
+    },
+    {
+      "id": "X1-4-LEFT",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus left.",
+      "expected": "Raw output is (93,128) and the miniscreen shows (-35,0).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table."
+    },
+    {
+      "id": "X1-5-NEUTRAL",
+      "instruction": "With Mode released and no direction held, activate LT5 and observe neutral.",
+      "expected": "Raw output is (128,128) and the miniscreen shows (0,0).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table."
+    },
+    {
+      "id": "X1-6-RIGHT",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus right.",
+      "expected": "Raw output is (163,128) and the miniscreen shows (+35,0).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table, and again confirmed normal operation when this representative row was requested after reconnect."
+    },
+    {
+      "id": "X1-7-UP-LEFT",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus up-left.",
+      "expected": "Raw output is (93,205) and the miniscreen shows (-35,+77).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table."
+    },
+    {
+      "id": "X1-8-UP",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus up.",
+      "expected": "Raw output is (128,205) and the miniscreen shows (0,+77).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table."
+    },
+    {
+      "id": "X1-9-UP-RIGHT",
+      "instruction": "With Mode released and no other modifier held, activate LT5 plus up-right.",
+      "expected": "Raw output is (163,205) and the miniscreen shows (+35,+77).",
+      "observed": "PASS — the project owner directly confirmed that all nine displayed X1 rows matched the complete expected table."
+    },
+    {
+      "id": "X1-RELEASE",
+      "instruction": "Release LT5 and every direction input and observe neutral behavior.",
+      "expected": "The miniscreen returns to (0,0) with no stuck input.",
+      "observed": "PASS — the project owner confirmed return to (0,0) with no stuck input."
+    },
+    {
+      "id": "ULTIMATE-REGRESSION",
+      "instruction": "Exercise representative unrelated normal inputs, miniscreen/menu behavior, and continuous connection on Ultimate.",
+      "expected": "Unrelated Ultimate controls, other modifiers, miniscreen behavior, and connection remain normal.",
+      "observed": "PASS — the project owner reported a full Ultimate functionality test of all buttons and modifiers, with correct miniscreen behavior and stable connection."
+    },
+    {
+      "id": "RECONNECT-REGRESSION",
+      "instruction": "Disconnect ordinarily, reconnect/power-cycle, confirm automatic Ultimate selection, stable connection, normal controls, and one representative X1 row.",
+      "expected": "Ultimate automatically selects; controls and connection remain normal; representative LT5 plus right remains (+35,0).",
+      "observed": "PASS — after ordinary disconnect/reconnect the owner reported Ultimate auto-selected, all buttons remained correct, everything was stable, the requested representative X1 check worked, and multiple disconnect/reconnect cycles also worked."
+    }
+  ],
+  "negative_regression_checks": [
+    "The owner reported a full Ultimate-profile test covering all buttons, all modifiers, and miniscreen behavior with everything correct.",
+    "The owner reported no unexpected disconnect, abnormal controller behavior, stuck input, menu/display anomaly, or stability problem.",
+    "No Mode+X1/MX1, gameplay semantics, persistence, runtime-loaded configuration, device-write behavior, Nunchuk, or root-cause claim is made."
+  ],
+  "power_cycle_reconnect_checks": [
+    "The owner ordinarily disconnected and reconnected the controller; Ultimate automatically selected and all buttons remained correct with stable connection.",
+    "The owner additionally reported multiple successful disconnect/reconnect cycles and confirmed the requested representative post-reconnect X1 check worked."
+  ],
+  "result": "PASS",
+  "anomalies": [],
+  "rollback_recovery": "No rollback was performed. The exact candidate remained installed after the completed PASS observations.",
+  "tester": "Project owner / user (direct owner-reported physical observations)",
+  "tested_at": "2026-09-21T19:00:01Z",
+  "evidence_gaps": []
+}
