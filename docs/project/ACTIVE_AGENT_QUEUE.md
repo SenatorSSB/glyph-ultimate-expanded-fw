@@ -5622,14 +5622,14 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260921-1252",
-  "planning_commit": "525296975bcd6791e8e3a57945b2c47e0fc16ef0",
-  "packet_id": "glyph-portfolio-20260921-1252",
-  "packet_base_configurator_sha": "71dc9979a78ae2174a232884e1692f833ea80de3",
-  "curation_branch": "curation/portfolio-20260921-1252-review-v2",
+  "planning_branch": "planning/portfolio-20260921-2232",
+  "planning_commit": "6856ddefd5ea61d8097b2e8523f20200787b49ad",
+  "packet_id": "glyph-portfolio-20260921-2232",
+  "packet_base_configurator_sha": "47813ecef8d98fc489a207b16e365c4b8e71f2c1",
+  "curation_branch": "curation/portfolio-20260921-2232-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-X1-002",
+      "candidate_id": "GP-VAL-027",
       "disposition": "READY"
     }
   ],
