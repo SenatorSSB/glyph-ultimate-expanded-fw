@@ -2,13 +2,13 @@
   "schema_version": 3,
   "starting_commit": "116d34322837fe1f6f724c820b49ccb0d24d6787",
   "canonical_baseline": {
-    "semantic_digest": "b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874",
+    "semantic_digest": "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970",
     "table_count": 28,
     "final_table": "kLt1LowMagnitudeTable"
   },
   "repository_checker_census": {
     "artifact": "docs/runtime_config/fixtures/glyph_checker_census.json",
-    "discovered_count": 204,
+    "discovered_count": 205,
     "validated": true
   },
   "aggregate_census_freshness": {
@@ -18,9 +18,9 @@
     "result": "PASS"
   },
   "curated_runtime_config_scope": {
-    "manifest_entry_count": 43,
+    "manifest_entry_count": 44,
     "current_load_bearing_count": 39,
-    "historical_or_evidentiary_count": 4,
+    "historical_or_evidentiary_count": 5,
     "explicit_exclusion_count": 42
   },
   "checker_results": [

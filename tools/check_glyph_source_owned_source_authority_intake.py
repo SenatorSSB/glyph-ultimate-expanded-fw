@@ -28,7 +28,7 @@ from source_owned_source_authority_intake import (
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "docs/runtime_config/fixtures/source_owned_source_authority_intake.json"
-CANONICAL_X1_INTAKE = ROOT / "docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json"
+CANONICAL_X1_INTAKE = ROOT / "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json"
 MANAGE = ROOT / "tools/manage_source_owned_source_authority_intake.py"
 PRECEDENCE_CASE_IDS = ["baseline_over_authority_and_ownership"]
 PROTECTED_PATH_CASE_IDS = [
@@ -162,7 +162,7 @@ def run() -> tuple[int, int]:
     assert {blocker["path"] for blocker in recorded_report["blockers"]} == {
         "baseline.semantic_digest", "baseline.table_inventory"
     }
-    assert canonical["baseline"]["semantic_digest"] == "9ea314bd17680d8353198ac174e59faf84c419fcd95a4ef3db24b3bd7e0f2970"
+    assert canonical["baseline"]["semantic_digest"] == "b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874"
     accepted_current = copy.deepcopy(canonical)
     accepted_current["baseline"] = inspect_baseline()
     canonical_report = review_intake(accepted_current)
@@ -220,7 +220,7 @@ def run() -> tuple[int, int]:
     assert "CANONICAL_IDENTITY_MISMATCH" in {b["code"] for b in synthetic_report["blockers"]}
     POSITIVE += 1
     assert canonical["authority"]["approver"] == "Glyph project owner / user authority"
-    assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-010"
+    assert canonical["authority"]["approval_reference"] == "docs/agent_framework/USER_DIRECTION.md#glyph-ud-018"
     assert canonical["ownership"]["owned_tables"] == ["kX1Table"]
     assert [item["table_symbol"] for item in canonical["ownership"]["declarations"]] == ["kX1Table"]
     assert [item["table_symbol"] for item in canonical["replacements"]] == ["kX1Table"]
@@ -252,7 +252,7 @@ def run() -> tuple[int, int]:
     assert all(row["candidate_digest"] == row["baseline_digest"] for row in non_x1_rows)
     try:
         production_gate(artifact_x1, manifest_x1, hardware_candidate=True)
-        raise AssertionError("accepted X1 authority intake became a new hardware candidate")
+        raise AssertionError("accepted restored X1 authority intake became a new hardware candidate")
     except GeneratorModesError as exc:
         assert exc.category == "candidate_ineligible"
     POSITIVE += 1
