@@ -1,0 +1,172 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-010",
+  "candidate_branch": "glyph/gp-config-010-mode-activation-capacity",
+  "candidate_git_sha": "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+  "candidate_base_configurator_sha": "28426e4ba4763a99f0ca13491c023af77665c79c",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Device-reported model glyph_mk6; the project owner uses the standard supplier-purchased Glyph, with specific board revision not separately reported",
+  "firmware_profile_state": "The exact GP-CONFIG-010 candidate ran a temporary persisted 13-profile GameCube-only Ultimate-clone configuration derived from the owner's accepted Ultimate profile; after evidence capture the exact owner-original Config was restored and the exact physically accepted GP-X1-002 artifact was restored",
+  "update_method": "Manual owner-controlled drag of each exact preserved UF2 to the RPI-RP2 volume; Config backup, temporary write, readback, and exact restore used the existing source-supported custom Configurator GET_CONFIG and SET_CONFIG paths without flashing automation",
+  "host_platform_adapter": "macOS host using USB CDC Configurator access, followed by the owner's normal GameCube cable/adapter connection to Nintendo Switch; exact Mac, Switch, and adapter revisions were not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_010_HARDWARE_RECOVERY_ADDENDUM.md",
+  "candidate_protocol_version": "GP_CONFIG_010_HW_RECOVERY_V1",
+  "preconditions": [
+    "Live GitHub verification at result processing resolved origin/configurator to 2ddc938a930fb8cc6abfb9ec0a9ffd0212a4b382, the candidate branch to f4771e17430fd1ea3f1e3e5339a83dfe648290a3, and the accepted rollback branch to f657715b26d26587a931074ce7dd12c698785290.",
+    "The candidate tree was e18a7496125bf485a179d9b8e08f1f47f5090b80 and its direct parent was the recorded base 28426e4ba4763a99f0ca13491c023af77665c79c.",
+    "Immediately before handoff, custody verification accepted a regular non-symlink 791040-byte GP-CONFIG-010 UF2 with SHA-256 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a; no rebuild was substituted.",
+    "Before any flash or persisted mutation, device information reported HayBox, glyph_mk6, firmware f657715; the complete owner-original Config payload was captured as 4201 bytes with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480, decoded, preserved as raw bytes/base64/JSON, and deterministically re-encoded byte-for-byte.",
+    "After manually flashing the exact GP-CONFIG-010 UF2, device information reported firmware f4771e1 and GET_CONFIG exactly matched the owner-original 4201-byte payload and SHA-256 before any temporary write.",
+    "The offline plan derived from the sole owner-original Ultimate entry contained exactly 13 Ultimate profiles, exact ordered names Ult01 through Ult13, GameCube-only applicability, source-mapped unique singleton activation masks, pairwise non-ambiguity, clone equality outside name/binding/applicability, and equality of all unrelated top-level fields.",
+    "The intended temporary payload was 6691 bytes with SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589. SET_CONFIG completed with CMD_SUCCESS and exact immediate GET_CONFIG equality, and one Configurator-mode reboot again produced exact payload equality before GameCube testing."
+  ],
+  "steps": [
+    {
+      "id": "PROFILE-MENU-VISIBILITY",
+      "instruction": "Open the Glyph Profile menu after connecting normally through the GameCube cable/adapter to Nintendo Switch and inspect the complete ordered list.",
+      "expected": "Ult01 through Ult13 are visible in order.",
+      "observed": "PASS — the project owner reported the exact visible sequence Ult01 through Ult13 in order."
+    },
+    {
+      "id": "MODE-0-ULT01-LF6",
+      "instruction": "From another active profile, press and release LF6, the far-right isolated button near center.",
+      "expected": "Index 0 activates Ult01; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS after procedural correction — the first check began with Ult01 already selected and could not prove a transition. The owner then selected Ult13, pressed LF6, and reported that the profile immediately changed to Ult01 with stable connection and working directional input."
+    },
+    {
+      "id": "MODE-1-ULT02-LF7",
+      "instruction": "Press and release LF7, the far-upper-right button.",
+      "expected": "Index 1 activates Ult02; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult02 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-2-ULT03-LF8",
+      "instruction": "Press and release LF8, the upper-right button.",
+      "expected": "Index 2 activates Ult03; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult03 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-3-ULT04-RF9",
+      "instruction": "Press and release RF9, the bottom-left button in the center/right cluster.",
+      "expected": "Index 3 activates Ult04; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult04 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-4-ULT05-RF10",
+      "instruction": "Press and release RF10, the left-lower button in the center cluster.",
+      "expected": "Index 4 activates Ult05; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult05 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-5-ULT06-RF11",
+      "instruction": "Press and release RF11, the center-left middle button.",
+      "expected": "Index 5 activates Ult06; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult06 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-6-ULT07-RF12",
+      "instruction": "Press and release RF12, the center-right middle button.",
+      "expected": "Index 6 activates Ult07; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult07 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-7-ULT08-RF13",
+      "instruction": "Press and release RF13, the left-middle button in the upper center cluster.",
+      "expected": "Index 7 activates Ult08; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult08 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-8-ULT09-RF14",
+      "instruction": "Press and release RF14, the upper-left button in the center cluster.",
+      "expected": "Index 8 activates Ult09; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult09 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-9-ULT10-RF15",
+      "instruction": "Press and release RF15, the upper-right button in the center cluster.",
+      "expected": "Index 9 activates Ult10; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult10 selection and no reported stability or directional problem."
+    },
+    {
+      "id": "MODE-10-ULT11-RF16-OVERFLOW-BOUNDARY",
+      "instruction": "Press and release RF16, the lower-center button.",
+      "expected": "Former-overflow-boundary index 10 activates Ult11; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult11 selection with no reported disconnect, miniscreen instability, or directional problem."
+    },
+    {
+      "id": "MODE-11-ULT12-LT3-OVERFLOW-BOUNDARY",
+      "instruction": "Press and release LT3, the right button in the left-thumb diamond.",
+      "expected": "Former-overflow-boundary index 11 activates Ult12; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult12 selection with no reported disconnect, miniscreen instability, or directional problem."
+    },
+    {
+      "id": "MODE-12-ULT13-LT4-OVERFLOW-BOUNDARY",
+      "instruction": "Press and release LT4, the upper button in the left-thumb diamond.",
+      "expected": "Former-overflow-boundary index 12 activates Ult13; the connection and miniscreen remain stable and ordinary directions respond.",
+      "observed": "PASS — the project owner confirmed the expected Ult13 selection with no reported disconnect, miniscreen instability, or directional problem."
+    },
+    {
+      "id": "REPRESENTATIVE-ULTIMATE-SANITY",
+      "instruction": "On Ult13, exercise ordinary directional movement, representative face buttons and LT5 modifier behavior while observing connection and display stability.",
+      "expected": "Normal directions and representative buttons/modifier work; no disconnect or stuck input; display remains normal.",
+      "observed": "PASS — the owner reported everything worked, ordinary directions showed the familiar 67/77 offsets, and later confirmed LT5 matched the complete accepted nine-row X1 table with no disconnect or other issue."
+    },
+    {
+      "id": "FINAL-POWER-CYCLE-RECONNECT",
+      "instruction": "Perform a normal disconnect/reconnect or power-cycle, require normal GameCube operation and all profiles still visible, then select Ult13 again.",
+      "expected": "The first reconnect starts normally, all 13 profiles remain visible, and Ult13/index 12 can be selected with stable GameCube input and display.",
+      "observed": "INCONCLUSIVE — the first reconnect froze the miniscreen at the initial logo. After a second disconnect/reconnect it opened normally on Ult13 and subsequent input was stable, but the owner did not explicitly re-open the Profile menu to reconfirm all 13 entries or reselect Ult13 through LT4 after that reconnect."
+    },
+    {
+      "id": "EXACT-CONFIG-RESTORE",
+      "instruction": "Capture the current temporary state, write the exact owner-original raw payload, require immediate exact GET_CONFIG equality, reboot once in Configurator mode, and require exact equality again.",
+      "expected": "Both immediate and post-reboot readbacks are 4201 bytes with owner-original SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 and no field drift.",
+      "observed": "PASS — pre-restore capture was 6691 bytes with SHA-256 be222f6828b97d5dc9c8a5aab0276a82a0eed4e5846d01d24081936076ccd327; SET_CONFIG returned success and the immediate and post-reboot GET_CONFIG readbacks both exactly matched the original 4201-byte payload and SHA-256."
+    },
+    {
+      "id": "ACCEPTED-X1-FIRMWARE-ROLLBACK",
+      "instruction": "After exact Config restoration, manually flash only the exact physically accepted GP-X1-002 custody artifact and reconnect normally through GameCube to Nintendo Switch.",
+      "expected": "Ultimate auto-selects, ordinary operation is normal, LT5 activates the accepted X1 table, and there is no unexpected disconnect.",
+      "observed": "PASS — custody verification accepted the regular non-symlink 792064-byte artifact with SHA-256 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 for candidate f657715b26d26587a931074ce7dd12c698785290; the owner flashed it, reported Ultimate auto-selected, confirmed the complete accepted LT5 X1 table, and reported no disconnect or issue."
+    },
+    {
+      "id": "LT1-FINAL-SANITY",
+      "instruction": "With the restored accepted firmware, press LT1 and inspect the miniscreen and Nintendo Switch button-test result.",
+      "expected": "Source-defined behavior is analog L=140 and GameCube digital L; the dashboard may show the generic internal buttonL icon as LB because it is evaluated before triggerLDigital.",
+      "observed": "PASS with newly noticed display behavior — LT1 showed LB and analog L=140 on the miniscreen, released cleanly with no stuck input, and the Nintendo Switch Test Controller Buttons screen detected only L."
+    }
+  ],
+  "negative_regression_checks": [
+    "Every one of the 13 activation bindings selected its exact expected profile, including direct human PASS observations for indices 10, 11, and 12; no disconnect, miniscreen instability, or directional failure was reported during those rows.",
+    "Representative Ult13 Ultimate behavior and the complete restored LT5 X1 table worked with no stuck input or disconnect.",
+    "Nunchuk was NOT_TESTED. No full per-profile modifier-table claim, gameplay-angle/radius inference, generalized persistence claim, or root-cause claim is made.",
+    "The initial invalid LF6 observation while Ult01 was already selected is not counted as evidence; only the corrected transition from Ult13 to Ult01 is counted.",
+    "The final first-attempt frozen-logo reconnect prevents a complete negative-regression PASS even though a second reconnect recovered."
+  ],
+  "power_cycle_reconnect_checks": [
+    "Before GameCube testing, one Configurator-mode reboot preserved the intended temporary payload byte-for-byte at SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589.",
+    "The first final normal reconnect froze at the initial logo; a second disconnect/reconnect opened normally on Ult13 and subsequent GameCube input remained stable.",
+    "After exact owner-original Config restoration, one Configurator-mode reboot again produced exact original payload equality at SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480.",
+    "After flashing the accepted GP-X1-002 rollback artifact, normal GameCube connection selected Ultimate and the complete LT5 X1 table operated without disconnect."
+  ],
+  "result": "INCONCLUSIVE",
+  "anomalies": [
+    "The first final normal reconnect froze the miniscreen at the initial logo; a second disconnect/reconnect recovered normally. The isolated event is unexplained and is not attributed to the candidate as a proven root cause.",
+    "The pre-restore temporary Config SHA-256 was be222f6828b97d5dc9c8a5aab0276a82a0eed4e5846d01d24081936076ccd327 instead of the originally written 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589. Structured comparison found only the GameCube communication backend default_mode_config changing from 3 to 13. This is source-explained as a consequence of using the Profile menu to select Ult13: SetDefaultMode writes index+1 to watchdog scratch, and backend initialization persists that value; it is not unexplained field drift.",
+    "The owner newly noticed that LT1 displays LB on the miniscreen. Candidate source sets both internal buttonL and triggerLDigital for LT1 and sets analog L to 140; the GameCube report sends triggerLDigital as L, the dashboard prioritizes buttonL as LB, and the Switch button test observed only L. This is recorded as source-consistent display behavior, not an extra transmitted GameCube button.",
+    "The first LF6 check began with Ult01 already selected and therefore could not prove activation. The operator corrected the procedure by selecting Ult13 first; LF6 then immediately selected Ult01 and the corrected row passed."
+  ],
+  "rollback_recovery": "Mandatory recovery completed. The exact owner-original 4201-byte Config payload with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored with successful immediate and post-reboot exact GET_CONFIG equality. The owner then manually flashed only the exact physically accepted GP-X1-002 artifact for candidate f657715b26d26587a931074ce7dd12c698785290, SHA-256 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451, and confirmed normal Ultimate selection, complete LT5 X1-table behavior, GameCube L behavior, and no disconnect.",
+  "tester": "Project owner / user (direct owner-reported physical observations), with host-side capture and evidence processing by Codex",
+  "tested_at": "2026-09-21T23:38:02Z",
+  "evidence_gaps": [
+    "Obtain fresh bounded owner/Curator reauthorization because GLYPH-UD-019 authorized one recovery run and that run has been consumed and fully restored. Under that new authority, re-establish the same exact candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3, artifact 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a, and exact temporary payload 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589 through the mandatory owner-original backup, post-flash preservation, prewrite equality, write/readback, and reboot-persistence gates. Then require normal GameCube startup on the first reconnect attempt, explicitly confirm Ult01 through Ult13 remain visible in order, activate Ult13/index 12 with LT4, and confirm stable connection, directions, and display. Finally repeat exact owner-original Config restoration with immediate and post-reboot equality and the accepted GP-X1-002 artifact rollback. If the frozen-logo behavior recurs, record FAIL."
+  ]
+}
