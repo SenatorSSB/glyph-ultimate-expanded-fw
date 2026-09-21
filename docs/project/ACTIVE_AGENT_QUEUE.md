@@ -93,7 +93,7 @@ Git, but it is not current candidate supply or implementation authority.
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 2,
+    "hardware_pending": 1,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
@@ -114,7 +114,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-X1-002",
       "title": "Restore owner-confirmed prior X1 table",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "HARDWARE_VALIDATED",
       "branch": "glyph/gp-x1-002-restore-normal-x1",
       "objective": "Restore the existing Ultimate sole/non-Mode kX1Table to the exact owner-confirmed prior nine-point raw table while preserving every unrelated table, route, mode behavior and publication mechanism.",
       "why_this_matters": "GP-X1-001 intentionally installed a test-oriented offset-41 table. The owner has now selected the prior source-owned table as the desired normal X1 behavior.",
@@ -168,14 +168,14 @@ Git, but it is not current candidate supply or implementation authority.
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": false,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": "f657715b26d26587a931074ce7dd12c698785290",
       "candidate_base_configurator_sha": "34a6c1bc9a9e13dcdf412c8b56a5c53011383503",
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f657715b26d26587a931074ce7dd12c698785290/00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451/firmware.uf2",
       "firmware_artifact_sha256": "00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
+      "hardware_evidence_record": "git-json:66f1d25622a79e7ac4298b7558c6013410eabc07:docs/calibration/fixtures/gp_x1_002_hardware_evidence_2026-09-21.json",
+      "hardware_result": "PASS",
       "hardware_evidence_gaps": []
     },
     {
@@ -5539,11 +5539,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":2,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 2; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5554,7 +5554,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Corrected packet glyph-portfolio-20260921-1252 is independently adjudicated. GP-X1-002 is HARDWARE_TEST_REQUIRED at exact candidate f657715b26d26587a931074ce7dd12c698785290 and artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451; its sole kX1Table restoration remains unmerged, with all other tables, LT5/non-Mode routing, Mode/MX1 behavior, publication, GP-CONFIG-010 and Senscope binding excluded. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING with its exact INCONCLUSIVE evidence and gaps. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated. No new hardware PASS is accepted.
+Corrected packet glyph-portfolio-20260921-1252 is independently adjudicated. GP-X1-002 is HARDWARE_VALIDATED for exact candidate f657715b26d26587a931074ce7dd12c698785290 and artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 through immutable Revision-2 evidence; its sole kX1Table restoration remains unmerged and awaits Implementation Supervisor publication recovery under GP-VAL-015, with all other tables, LT5/non-Mode routing, Mode/MX1 behavior, publication, GP-CONFIG-010 and Senscope binding excluded. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING with its exact INCONCLUSIVE evidence and gaps. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
