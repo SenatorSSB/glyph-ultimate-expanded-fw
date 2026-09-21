@@ -13,7 +13,7 @@
   "controller_model_revision": "Standard Glyph purchased from the supplier, as reported by the project owner; specific model and board revision unknown",
   "firmware_profile_state": "The owner's persisted six-profile configuration remained active after the candidate update: Melee, Brawl, Ultimate, RoA, RoA2, and Gamecube. The candidate was not intended to replace persisted profile/configuration data.",
   "update_method": "Manual owner-controlled drag of the exact preserved UF2 to the RPI-RP2 volume; no rebuild or flashing automation was used",
-  "host_platform_adapter": "Mac host for the manual UF2 update, followed by a normal Nintendo Switch connection; exact Mac, Switch, and adapter revisions were not separately reported",
+  "host_platform_adapter": "User-managed host for the manual UF2 update, followed by a normal Nintendo Switch connection; exact host, Switch, and adapter revisions were not separately reported",
   "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
   "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
   "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_010_HARDWARE_PROTOCOL.md",
@@ -101,7 +101,7 @@
     {
       "id": "MODE-12-KEYBOARD",
       "instruction": "Exercise the current default mode entry.",
-      "expected": "Index 12 selects Keyboard / CustomKeyboardMode and forces DInput; no activation binding is declared and activation count is zero.",
+      "expected": "Index 12 selects Keyboard / CustomKeyboardMode when the backend is DInput; the source-default row is applicable only to DInput, no activation binding is declared, and activation count is zero.",
       "observed": "NOT_TESTED — the persisted six-profile configuration did not expose this source-default entry."
     },
     {
