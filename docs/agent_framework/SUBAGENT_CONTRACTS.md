@@ -427,3 +427,23 @@ record, not evidence of a passing review.
   the expected embedded Git identity consequence, or focused/reviewer failure.
 - return format: findings first; exact scope/authority correspondence;
   validation results; residual risks; bounded next action.
+
+## Implementation Supervisor cycle — GP-X1-002 (2026-09-21)
+
+- guidance applicable: yes; GP-X1-002 is a complete H2 READY work order and
+  repository mutation requires a bounded source-authority specialist plus a
+  fresh independent post-implementation reviewer.
+- capability discovery: native collaboration agents are available.
+- specialist: bounded read-only source-authority/firmware-safety specialist;
+  inspect the exact intake, sole-table source delta, route/publication
+  preservation, protocol, checker consequences, and stop conditions.
+- reviewer: fresh independent post-implementation reviewer; inspect the exact
+  committed candidate diff, authority, source/table correspondence, exclusions,
+  focused validation, canonical build, artifact custody, and handoff metadata.
+- forbidden specialist/reviewer actions: edits, commits, pushes, merges,
+  flashing/device actions, invented binding/gameplay semantics, GP-CONFIG-010
+  mutation, Senscope mutation, persistence/runtime-loaded config, or hardware
+  acceptance claims.
+- stop conditions: any table other than kX1Table changes, routing/publication or
+  Mode/MX1 behavior changes, authority/identity mismatch, failed validation,
+  failed build/review/custody, or required physical mapping is invented.

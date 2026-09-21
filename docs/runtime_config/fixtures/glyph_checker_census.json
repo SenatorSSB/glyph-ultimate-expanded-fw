@@ -6073,6 +6073,91 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_x1_002_candidate",
+      "defines_main": true,
+      "file_size_bytes": 6893,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate.",
+        "check_glyph_gp_x1_002_candidate.py",
+        "glyph_gp_x1_002_candidate",
+        "glyph_x1_normal_restoration_overlay_hardware_candidate",
+        "x1-normal-restoration-overlay-hardware-candidate-2026-09-21",
+        "x1_normal_restoration_overlay_hardware_candidate.intake.json"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 101,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_x1_002_candidate.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate.",
+        "check_glyph_gp_x1_002_candidate.py",
+        "glyph_gp_x1_002_candidate",
+        "glyph_x1_normal_restoration_overlay_hardware_candidate",
+        "x1-normal-restoration-overlay-hardware-candidate-2026-09-21",
+        "x1_normal_restoration_overlay_hardware_candidate.intake.json"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output"
+      ],
+      "python_module": "tools.check_glyph_gp_x1_002_candidate",
+      "referenced_repository_path_prefixes": [
+        "docs/agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
+        "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+        "docs/agent_framework/USER_DIRECTION.md",
+        "docs/runtime_config/current_x1_regression_subset.md",
+        "docs/runtime_config/fixtures/current_x1_regression_subset.json",
+        "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json",
+        "docs/runtime_config/runtime_config_validation_health.md",
+        "docs/runtime_config/source_authority_intake_workflow.md",
+        "src/modes/Ultimate.cpp",
+        "src/modes/UltimateIdentityRuntimeTables.hpp",
+        "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+        "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+        "tools/check_glyph_current_x1_regression_subset.py",
+        "tools/check_glyph_gp_x1_002_candidate.py",
+        "tools/check_glyph_runtime_config_source_sync.py",
+        "tools/check_glyph_runtime_config_validation_health.py",
+        "tools/check_glyph_source_owned_source_authority_intake.py",
+        "tools/source_owned_source_authority_intake.py"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "generated_baseline",
+        "generated_source_owned",
+        "identity_runtime_tables",
+        "runtime_config_docs",
+        "runtime_config_interpreter",
+        "source_authority_intake",
+        "source_owned_generator_modes"
+      ],
+      "sha256": "f174dda377b39f1b3c9edbd64501a5e8251311d48d94bf568ad2c9154ade0015",
+      "static_signals": {
+        "agent_framework": true,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": true,
+        "hardware_results": false,
+        "identity_runtime_tables": true,
+        "runtime_config": true,
+        "source_owned": true,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "hardware_artifact_custody",
       "defines_main": true,
       "file_size_bytes": 8309,
@@ -10772,7 +10857,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "b1ed6734ad6f17cc4f42e2153ed799b8779b9ac28e33dcf727a9f4264f2fa156",
+      "sha256": "be9e663a49ff71dd94bf1025cee5995e5501f183b7fa09b0a11dc8f33bb07c9b",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -11037,7 +11122,7 @@
         "current_y2_layout",
         "runtime_config_docs"
       ],
-      "sha256": "33f40ff321713737aa7691b23921a954ecf493e0d810b6e2134998390730140e",
+      "sha256": "769d3659bc18351dd44011107cd442463b386a2625d318a42d6587b5147737b4",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -11936,7 +12021,7 @@
       },
       "checker_id": "source_owned_source_authority_intake",
       "defines_main": false,
-      "file_size_bytes": 23700,
+      "file_size_bytes": 23719,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate_digest",
@@ -11945,7 +12030,7 @@
         "hardware_candidate",
         "hardware_candidate_created",
         "publication_candidate",
-        "x1_offset41_overlay_hardware_candidate.intake.json"
+        "x1_normal_restoration_overlay_hardware_candidate.intake.json"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
@@ -11963,7 +12048,7 @@
         "hardware_candidate",
         "hardware_candidate_created",
         "publication_candidate",
-        "x1_offset41_overlay_hardware_candidate.intake.json"
+        "x1_normal_restoration_overlay_hardware_candidate.intake.json"
       ],
       "potential_mutation_signals": [
         "subprocess.run"
@@ -11972,7 +12057,7 @@
       "referenced_repository_path_prefixes": [
         "docs/agent_framework/USER_DIRECTION.md",
         "docs/runtime_config/fixtures/source_owned_source_authority_intake.json",
-        "docs/runtime_config/intakes/x1_offset41_overlay_hardware_candidate.intake.json",
+        "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json",
         "tools/manage_source_owned_source_authority_intake.py"
       ],
       "runtime_config_relevance_signals": [
@@ -11980,7 +12065,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "0b591c6dbcba101b69298ab27b68c51524dd51ddc248fecb8d263f938f4a2c65",
+      "sha256": "b40276c58cf0c3d9c2d3e05d341dbb53c8dd36d55917dc7918cd0d1e361f6cff",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
