@@ -80,14 +80,14 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-X1-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-X1-002; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
-- GP-VAL-026 host-schema closure is complete. GLYPH-UD-017 parks GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 as REVIEW / OWNER_DEFERRED / NONEXECUTABLE; retained contracts require explicit owner resumption and fresh Curator reauthorization. See docs/project/DEFERRED_CONFIG_WORK_2026-09-21.md for TODOs and docs/project/ACTIVE_AGENT_QUEUE.md for authoritative state. GP-CONFIG-010 is LOCAL_ACCEPTANCE_PENDING after exact-candidate INCONCLUSIVE evidence: rows 0 through 2 and a bounded Ultimate regression passed, but the owner's persisted six-profile configuration did not expose the full 13-entry matrix or cross the former 10-entry boundary. GP-CONFIG-011 remains completed characterization. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE; GP-HW-002 remains research gated. All existing DONE and hardware evidence is preserved. Button/USB repair policy and first real modifier/table/routing correspondence remain unresolved. H3 repair may not merge before its own exact physical PASS; Nunchuk remains NOT_TESTED and root cause remains unproven.
+- GP-X1-002 has a complete READY order for the exact owner-confirmed sole kX1Table restoration under GLYPH-UD-018; all other tables, LT5/non-Mode routing, Mode/MX1 behavior, active publication, GP-CONFIG-010 and Senscope binding remain excluded. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING after exact-candidate INCONCLUSIVE evidence and retains all recorded gaps. GLYPH-UD-017 keeps GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 REVIEW / OWNER_DEFERRED / NONEXECUTABLE; GP-VAL-011 remains deferred and GP-HW-002 remains research gated. All existing DONE and hardware evidence is preserved. GP-X1-002 may not merge before its own exact physical PASS; Nunchuk remains NOT_TESTED and root cause remains unproven.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
