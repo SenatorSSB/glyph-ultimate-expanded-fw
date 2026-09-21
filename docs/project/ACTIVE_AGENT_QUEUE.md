@@ -417,7 +417,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-010",
       "title": "Repair mode-activation capacity correspondence",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "LOCAL_ACCEPTANCE_PENDING",
       "branch": "glyph/gp-config-010-mode-activation-capacity",
       "objective": "Eliminate the active 13-entry configuration flowing through a 10-slot mode-activation cache while preserving every current default mode, order, binding, and selection behavior.",
       "why_this_matters": "The exact production setup and selection loops index mode_activation_masks through game_mode_configs_count; the current default count is 13 and the cache has 10 slots, creating source-proven out-of-bounds writes and reads.",
@@ -452,9 +452,9 @@ Git, but it is not current candidate supply or implementation authority.
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
       "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
-      "hardware_evidence_gaps": ["Exact candidate/artifact physical PASS is required before merge."]
+      "hardware_evidence_record": "git-json:aa7f221378ce48965bf71737e23d8c5b22dc260b:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-21.json",
+      "hardware_result": "INCONCLUSIVE",
+      "hardware_evidence_gaps": ["Run GP_CONFIG_010_HW_V1 with an active test configuration containing all 13 current default mode entries in source order so indices 0 through 12 are physically exercisable.", "Record expected and observed mode/backend behavior for mandatory indices 3 through 12; indices 0 through 2 need not be inferred as coverage for the missing rows.", "Exercise and record at least one valid entry beyond the historical 10-slot boundary, including indices 10, 11, and 12 as required by the full protocol.", "After all 13 mandatory rows pass, execute and record the protocol's final ordinary disconnect, power-cycle/reconnect, default-profile, representative-operation, display/menu, and connection-stability regression checks."]
     },
     {
       "id": "GP-VAL-024",
@@ -5329,7 +5329,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260921-0052 is independently adjudicated. GP-VAL-026 is complete; GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 are now REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017. Their retained contracts do not authorize automatic resumption. See [parked TODOs](DEFERRED_CONFIG_WORK_2026-09-21.md). GP-CONFIG-010 remains HARDWARE_TEST_REQUIRED with its preserved pair; GP-CONFIG-011 is completed historical characterization. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. GP-HW-002 remains research gated on historical protocol correspondence. No global evidence wait or new physical claim is accepted.
+Packet glyph-portfolio-20260921-0052 is independently adjudicated. GP-VAL-026 is complete; GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 are now REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017. Their retained contracts do not authorize automatic resumption. See [parked TODOs](DEFERRED_CONFIG_WORK_2026-09-21.md). GP-CONFIG-010 is LOCAL_ACCEPTANCE_PENDING after an exact-candidate INCONCLUSIVE result: indices 0 through 2 and the bounded Ultimate regression passed, but the owner's persisted six-profile configuration did not expose the full 13-entry source-default matrix or cross the former 10-entry boundary. GP-CONFIG-011 is completed historical characterization. GP-VAL-011 remains REVIEW / OWNER_DEFERRED / NONEXECUTABLE. GP-HW-002 remains research gated on historical protocol correspondence. No global evidence wait or hardware PASS is accepted.
 
 ## Allowed Statuses
 
