@@ -1,0 +1,209 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-010",
+  "candidate_branch": "glyph/gp-config-010-mode-activation-capacity",
+  "candidate_git_sha": "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+  "candidate_tree_sha": "e18a7496125bf485a179d9b8e08f1f47f5090b80",
+  "candidate_base_configurator_sha": "28426e4ba4763a99f0ca13491c023af77665c79c",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
+  "firmware_artifact_size_bytes": 791040,
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Standard Glyph purchased from the supplier, as reported by the project owner; specific model and board revision unknown",
+  "firmware_profile_state": "The owner's persisted six-profile configuration remained active after the candidate update: Melee, Brawl, Ultimate, RoA, RoA2, and Gamecube. The candidate was not intended to replace persisted profile/configuration data.",
+  "update_method": "Manual owner-controlled drag of the exact preserved UF2 to the RPI-RP2 volume; no rebuild or flashing automation was used",
+  "host_platform_adapter": "Mac host for the manual UF2 update, followed by a normal Nintendo Switch connection; exact Mac, Switch, and adapter revisions were not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_010_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_010_HW_V1",
+  "preconditions": [
+    "Live GitHub verification resolved origin/configurator to 09372cde8969fdaa46f495adcfb735ca50bb72fb and the candidate branch to f4771e17430fd1ea3f1e3e5339a83dfe648290a3.",
+    "The candidate tree was e18a7496125bf485a179d9b8e08f1f47f5090b80 and its direct parent was the recorded base 28426e4ba4763a99f0ca13491c023af77665c79c.",
+    "Immediately before the owner's manual update, the custody verifier reported PRE_HANDOFF_VERIFIED for a regular non-symlink 791040-byte UF2 whose SHA-256 was exactly 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a.",
+    "The owner reported that the exact candidate update completed and the Glyph rebooted normally with Ultimate automatically selected.",
+    "The owner connected the Glyph normally to Nintendo Switch and reported that Ultimate was automatically selected."
+  ],
+  "steps": [
+    {
+      "id": "MODE-0-MELEE",
+      "index": 0,
+      "expected_mode_config_name": "Melee",
+      "expected_mode_implementation": "Melee20Button",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Select Melee through the profile menu and confirm displayed profile/backend, reconnection, Switch input, disconnects, and abnormal behavior.",
+      "observed": "The project owner reported: 'Worked'.",
+      "row_result": "PASS"
+    },
+    {
+      "id": "MODE-1-BRAWL",
+      "index": 1,
+      "expected_mode_config_name": "Brawl",
+      "expected_mode_implementation": "ProjectM",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Select Brawl through the profile menu and confirm the expected profile, reconnection, and normal Switch input.",
+      "observed": "The project owner reported: 'Worked'.",
+      "row_result": "PASS"
+    },
+    {
+      "id": "MODE-2-ULTIMATE",
+      "index": 2,
+      "expected_mode_config_name": "Ultimate",
+      "expected_mode_implementation": "Ultimate",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Select Ultimate through the profile menu and confirm the expected profile, reconnection, and normal Switch input.",
+      "observed": "The project owner reported: 'Worked'.",
+      "row_result": "PASS"
+    },
+    {
+      "id": "MODE-3-SPLIT-FGC",
+      "index": 3,
+      "expected_mode_config_name": "Split FGC",
+      "expected_mode_implementation": "FgcMode",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Select Split FGC through the profile menu and confirm the expected profile/backend and normal operation.",
+      "observed": "The profile was not visible. The project owner reported that the active persisted profile list contained only Melee, Brawl, Ultimate, RoA, RoA2, and Gamecube, and believed Split FGC and the other omitted profiles had intentionally been deleted from the profile file.",
+      "row_result": "INCONCLUSIVE"
+    },
+    {
+      "id": "MODE-4-FGC",
+      "index": 4,
+      "expected_mode_config_name": "FGC",
+      "expected_mode_implementation": "FgcMode",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "Not executed; the persisted six-profile configuration did not expose this source-default entry.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-5-SMASH64",
+      "index": 5,
+      "expected_mode_config_name": "Smash64",
+      "expected_mode_implementation": "Smash64",
+      "expected_backend": "N64",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "Not executed; the persisted six-profile configuration did not expose this source-default entry and the source default is not applicable to the Switch backend.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-6-ROA",
+      "index": 6,
+      "expected_mode_config_name": "RoA",
+      "expected_mode_implementation": "RivalsOfAether",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "The owner reported RoA was visible in the persisted profile list, but this row was not executed.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-7-ROA2",
+      "index": 7,
+      "expected_mode_config_name": "RoA2",
+      "expected_mode_implementation": "Rivals2",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "The owner reported RoA2 was visible in the persisted profile list, but this row was not executed.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-8-GAMECUBE",
+      "index": 8,
+      "expected_mode_config_name": "GameCube",
+      "expected_mode_implementation": "Melee20Button",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "The owner reported Gamecube was visible in the persisted profile list, but this row was not executed.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-9-N64",
+      "index": 9,
+      "expected_mode_config_name": "N64",
+      "expected_mode_implementation": "Melee20Button",
+      "expected_backend": "Nintendo Switch",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "Not executed; the persisted six-profile configuration did not expose this source-default entry.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-10-SNES",
+      "index": 10,
+      "expected_mode_config_name": "SNES",
+      "expected_mode_implementation": "FgcMode",
+      "expected_backend": "SNES",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "Not executed; the persisted six-profile configuration did not expose this source-default entry and the source default is not applicable to the Switch backend.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-11-NES",
+      "index": 11,
+      "expected_mode_config_name": "NES",
+      "expected_mode_implementation": "FgcMode",
+      "expected_backend": "NES",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "Not executed; the persisted six-profile configuration did not expose this source-default entry and the source default is not applicable to the Switch backend.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "MODE-12-KEYBOARD",
+      "index": 12,
+      "expected_mode_config_name": "Keyboard",
+      "expected_mode_implementation": "CustomKeyboardMode",
+      "expected_backend": "DInput",
+      "expected_activation_binding": "None declared; zero activation count",
+      "instruction": "Exercise the current default mode entry.",
+      "observed": "Not executed; the persisted six-profile configuration did not expose this source-default entry.",
+      "row_result": "NOT_TESTED"
+    },
+    {
+      "id": "SUPPLEMENTAL-ULTIMATE-REGRESSION",
+      "instruction": "Return to Ultimate and exercise ordinary Switch movement and action buttons while observing miniscreen behavior and connection stability.",
+      "expected": "Ultimate values and buttons, miniscreen behavior, and connection stability remain normal.",
+      "observed": "The project owner reported: 'Ult profile values and buttons perform normally, so does miniscreen, stability and everything normal.'",
+      "row_result": "PASS"
+    }
+  ],
+  "negative_regression_checks": [
+    "The exact candidate flashed and rebooted normally, with Ultimate automatically selected.",
+    "The candidate connected normally to Nintendo Switch, with Ultimate automatically selected.",
+    "The owner reported normal Ultimate profile values and buttons, normal miniscreen behavior, normal stability, and everything normal.",
+    "No failure, unexpected disconnect, or abnormal controller behavior was reported in the executed scope."
+  ],
+  "power_cycle_reconnect_checks": [
+    "The post-flash reboot and subsequent normal Nintendo Switch connection succeeded, but the protocol's final ordinary disconnect/power-cycle/reconnect sequence after all 13 mode rows was not executed because the mandatory matrix stopped at unavailable row 3."
+  ],
+  "result": "INCONCLUSIVE",
+  "anomalies": [
+    "The active controller configuration was the owner's persisted six-profile configuration, not the 13-entry compiled source default required by GP_CONFIG_010_HW_V1.",
+    "The candidate was not intended to replace or modify persisted profile/configuration data; preservation of the owner's six-profile file is not classified as a firmware regression.",
+    "Because the active configuration had only six profiles, this attempt did not exercise an entry beyond the historical 10-slot cache boundary.",
+    "The exact clock time of each physical observation was not separately reported; tested_at is the evidence-processing time.",
+    "The specific controller model/board revision and exact host/Switch revisions were not separately reported."
+  ],
+  "rollback_recovery": "No rollback was performed. The exact candidate remained installed when the owner supplied the final observation.",
+  "tester": "Project owner / user (direct owner-reported physical observations)",
+  "tested_at": "2026-09-21T09:11:58Z",
+  "evidence_gaps": [
+    "Run GP_CONFIG_010_HW_V1 with an active test configuration containing all 13 current default mode entries in source order so indices 0 through 12 are physically exercisable.",
+    "Record expected and observed mode/backend behavior for mandatory indices 3 through 12; indices 0 through 2 need not be inferred as coverage for the missing rows.",
+    "Exercise and record at least one valid entry beyond the historical 10-slot boundary, including indices 10, 11, and 12 as required by the full protocol.",
+    "After all 13 mandatory rows pass, execute and record the protocol's final ordinary disconnect, power-cycle/reconnect, default-profile, representative-operation, display/menu, and connection-stability regression checks.",
+    "Nunchuk remains NOT_TESTED and is not required unless separately exercised."
+  ]
+}
