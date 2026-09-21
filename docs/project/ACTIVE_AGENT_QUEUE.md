@@ -93,15 +93,14 @@ Git, but it is not current candidate supply or implementation authority.
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 1,
+    "hardware_pending": 0,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
     "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED",
-    "HARDWARE_TEST_REQUIRED"
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -192,7 +191,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-X1-002",
       "title": "Restore owner-confirmed prior X1 table",
-      "status": "HARDWARE_VALIDATED",
+      "status": "DONE",
       "branch": "glyph/gp-x1-002-restore-normal-x1",
       "objective": "Restore the existing Ultimate sole/non-Mode kX1Table to the exact owner-confirmed prior nine-point raw table while preserving every unrelated table, route, mode behavior and publication mechanism.",
       "why_this_matters": "GP-X1-001 intentionally installed a test-oriented offset-41 table. The owner has now selected the prior source-owned table as the desired normal X1 behavior.",
@@ -238,7 +237,32 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Before handoff preserve the currently accepted rollback artifact selected through custody records. On FAIL, PARTIAL, INCONCLUSIVE, custody mismatch or source drift, preserve exact evidence and stop; do not patch or rebuild under the same candidate/evidence identity. Never transfer GP-X1-001 or rebuilt/integrated artifact acceptance.",
       "status_documentation_updates": "Record the exact source candidate/base/artifact identity and hardware-pending state without changing GP-CONFIG-010. After exact PASS, use a fresh Hardware Evidence Processor and GP-VAL-015 integration correspondence; preserve GP-X1-001 as historical evidence and the physically tested artifact as the acceptance artifact.",
-      "done_evidence": "Exact sole-kX1Table candidate diff, source-authority and negative proofs, canonical build, map/RAM inspection, fresh independent review, preserved UF2 custody, complete GP_X1_002_HW_V1 exact-snapshot physical PASS, independent evidence publication, current-canonical GP-VAL-015 integration correspondence and later strict DONE correspondence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "34a6c1bc9a9e13dcdf412c8b56a5c53011383503",
+        "reviewed_implementation_sha": "f657715b26d26587a931074ce7dd12c698785290",
+        "prior_canonical_integration_sha": "3b4a7c950e1b14e24a88c951c19313f6134f4ea3",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "docs/runtime_config/source_authority_intake_workflow.md",
+          "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+          "tools/check_glyph_gp_x1_002_candidate.py",
+          "tools/check_glyph_runtime_config_source_sync.py",
+          "tools/check_glyph_runtime_config_validation_health.py",
+          "tools/check_glyph_source_owned_source_authority_intake.py",
+          "tools/source_owned_source_authority_intake.py"
+        ],
+        "independent_review_provenance": "Fresh independent integration rereviewer approved exact repaired tip 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 with no findings after independently verifying exact candidate ancestry, GP-VAL-015/027 integrated correspondence, zero critical target drift, immutable candidate/tree/parent and original artifact/evidence identity, GP-CONFIG-010 isolation, established post-integration candidate-checker lifecycle, focused validation and clean build evidence. This is integration correspondence review, not physical acceptance of the integration rebuild.",
+        "validation_provenance": "Exact candidate checker PASS in isolated f657715b26d26587a931074ce7dd12c698785290 checkout; integrated GP-VAL-015/027 correspondence PASS; 37 hardware-correspondence and 12 agent-surface integration tests PASS; source authority, source sync, generator, generated baseline, framework, sequence, navigation, agent surface, census, health, Python compilation, diff and post-build integrity gates PASS. Clean .venv/bin/python -m platformio run -e glyph_mk6 build SUCCESS at integration tip, RAM 78720/262144 and flash 383792/1568768. Original tested 792064-byte UF2 SHA-256 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remains authoritative; integration rebuild SHA-256 68b50e0b368e3cbd75b564280d301bad4cf563a88ee8b451aac566b3fbf08557 was not physically tested. Main aggregate remains known preflight SETUP_FAILURE on .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/; no aggregate-green claim. Nunchuk remains NOT_TESTED and root cause remains unproven."
+      },
       "stop_conditions": [
         "Any value, source authority, route, binding, precedence, Mode/MX1 behavior or physical activation sequence must be invented.",
         "Any table other than kX1Table, profile/configuration behavior, persistence, USB, active publication, GP-CONFIG-010 identity/evidence or Senscope data/binding would change.",
@@ -5617,11 +5641,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5632,7 +5656,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260921-2232 is independently adjudicated. GP-VAL-027 is DONE through reviewed H1 integration af77f8f702ab83d74cdf1625cacf763c820ccef5 and strict completion correspondence; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-X1-002 remains HARDWARE_VALIDATED for exact candidate f657715b26d26587a931074ce7dd12c698785290 and artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451, and correspondence-governed integration may now be retried by a fresh Implementation Supervisor. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING with its exact INCONCLUSIVE evidence and gaps. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260921-2232 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING with its exact INCONCLUSIVE evidence and gaps. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
