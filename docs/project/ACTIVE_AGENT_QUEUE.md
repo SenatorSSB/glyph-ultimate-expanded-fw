@@ -24,7 +24,7 @@ Git, but it is not current candidate supply or implementation authority.
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Planner packet glyph-portfolio-20260921-2232 is fully adjudicated. GP-VAL-027 has one complete READY H1 order for the exact finite GP-X1-002 host-path correspondence repair; no packet survivor or pending Curator decision remains.",
+    "resolution": "Planner packet glyph-portfolio-20260921-2232 is fully adjudicated. GP-VAL-027 completed through reviewed H1 integration and strict completion correspondence; no packet survivor or pending Curator decision remains.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
       "opening_reference": "git-json:6856ddefd5ea61d8097b2e8523f20200787b49ad:docs/planning/portfolio_20260921_2232.md",
@@ -48,7 +48,7 @@ Git, but it is not current candidate supply or implementation authority.
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator authorized GP-VAL-027 as one complete READY H1 order for the exact ten reviewed GP-X1-002 host/governance paths in the finite GP-VAL-015 NON_BEHAVIORAL inventory.",
+      "GP-VAL-027 completed the exact ten-path finite GP-X1-002 correspondence repair through reviewed H1 integration af77f8f702ab83d74cdf1625cacf763c820ccef5.",
       "GeneratedRuntimeConfigBaseline.current.hpp remains CRITICAL; unknown paths, unsafe Git entries and critical drift remain fail-closed. Firmware, tested candidate/artifact/evidence, diagnostic integration, GP-CONFIG-010 and runtime behavior remain unchanged."
     ],
     "curator_review_provenance": {
@@ -89,17 +89,18 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
     "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -113,7 +114,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-027",
       "title": "Extend hardware correspondence for exact GP-X1-002 host paths",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-027-x1-correspondence-classifier",
       "objective": "Extend the completed GP-VAL-015 finite correspondence classifier so it recognizes exactly ten dependency-reviewed GP-X1-002 host/governance paths while preserving exact critical firmware/build-input correspondence and fail-closed rejection of every unknown path.",
       "why_this_matters": "GP-X1-002 has exact-snapshot hardware PASS, but the current finite NON_BEHAVIORAL inventory predates its host-side protocol, authority, validation and evidence paths, so the correspondence gate cannot evaluate an otherwise source-exact integration.",
@@ -156,7 +157,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Keep a failed implementation isolated and return to Curator if any dependency proof, exact inventory, critical-precedence, fail-closed, ordinary-validator or independent-review gate fails. Preserve the tested candidate, original UF2 and immutable PASS evidence unchanged.",
       "status_documentation_updates": "Publish the reviewed H1 implementation first and strict DONE correspondence only in a later canonical metadata snapshot. GP-X1-002 stays HARDWARE_VALIDATED until a fresh Implementation Supervisor performs correspondence-governed integration from then-current canonical; the integration rebuild never replaces the physically accepted artifact.",
-      "done_evidence": "Reviewed exact classifier/test/contract and deterministic metadata diff; full focused/adversarial and ordinary affected validation; fresh independent implementation review; canonical integration of the repair; and later strict DONE correspondence. No firmware build, artifact or hardware evidence is part of GP-VAL-027 completion.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "33e24e0bb8ddc6e0ac0a72f9d572b1369dd98939",
+        "reviewed_implementation_sha": "1cfb8ab2315dbccb85544a1c7c44ee7c87b37369",
+        "prior_canonical_integration_sha": "af77f8f702ab83d74cdf1625cacf763c820ccef5",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer approved exact commit 1cfb8ab2315dbccb85544a1c7c44ee7c87b37369 with no findings after live-ref, exact-scope, candidate/diagnostic correspondence, fail-closed adversarial, ordinary affected-validator and clean-state review.",
+        "validation_provenance": "Exact ten-path classification and real-Git/adversarial suite PASS (37 tests); agent-surface integration PASS (12 tests); pinned f657715b26d26587a931074ce7dd12c698785290 to 5a47d0b23a8daceb60a26ed5ff547cb413d45589 correspondence PASS with the active generated baseline sole CRITICAL candidate path; framework, sequence, navigation, agent surface, source sync, source-authority intake, exact candidate checker in an isolated candidate checkout, census, validation health, Python compilation, exact changed-path and diff checks PASS. No firmware build or hardware test required for this H1 repair."
+      },
       "stop_conditions": [
         "Any inventory entry lacks host-only dependency proof or any directory/pattern exemption is needed.",
         "Any critical input, tested candidate/artifact/protocol/evidence content, integration branch, firmware behavior, GP-CONFIG-010 or excluded surface would change.",
@@ -5602,11 +5617,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-027"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-027; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5617,7 +5632,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260921-2232 is independently adjudicated. GP-VAL-027 has the executable status shown in the guarded runway state above for the exact finite GP-X1-002 host-path correspondence repair; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-X1-002 remains HARDWARE_VALIDATED for exact candidate f657715b26d26587a931074ce7dd12c698785290 and artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451, with integration blocked until the H1 repair is reviewed and published. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING with its exact INCONCLUSIVE evidence and gaps. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260921-2232 is independently adjudicated. GP-VAL-027 is DONE through reviewed H1 integration af77f8f702ab83d74cdf1625cacf763c820ccef5 and strict completion correspondence; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-X1-002 remains HARDWARE_VALIDATED for exact candidate f657715b26d26587a931074ce7dd12c698785290 and artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451, and correspondence-governed integration may now be retried by a fresh Implementation Supervisor. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING with its exact INCONCLUSIVE evidence and gaps. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
