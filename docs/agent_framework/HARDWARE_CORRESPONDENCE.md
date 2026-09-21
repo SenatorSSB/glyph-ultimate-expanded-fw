@@ -143,6 +143,35 @@ correspondence checker because it records host transport boundaries without
 changing firmware, build inputs, or encoded command bytes; this current-cycle
 path is not part of the historical GP-CONFIG-005 candidate inventory above.
 
+## GP-X1-002 finite host-path extension
+
+GP-VAL-027 adds only the following ten exact paths to the finite
+`NON_BEHAVIORAL` inventory after review of the GP-X1-002 candidate, its later
+hardware-evidence publication, and the current PlatformIO dependency boundary:
+
+- `docs/agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md`
+- `docs/agent_framework/SUBAGENT_CONTRACTS.md`
+- `docs/calibration/fixtures/gp_x1_002_hardware_evidence_2026-09-21.json`
+- `docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json`
+- `docs/runtime_config/source_authority_intake_workflow.md`
+- `tools/check_glyph_gp_x1_002_candidate.py`
+- `tools/check_glyph_runtime_config_source_sync.py`
+- `tools/check_glyph_runtime_config_validation_health.py`
+- `tools/check_glyph_source_owned_source_authority_intake.py`
+- `tools/source_owned_source_authority_intake.py`
+
+The first GP-X1-002 delta contains nine of these host paths together with the
+active generated baseline. The tenth path is the later immutable hardware
+evidence record. These files are protocol, authority-intake, evidence, and
+host-validation inputs; none is selected by the reviewed Glyph PlatformIO
+source filters or build controls. Their classification does not relax their
+ordinary content, evidence, source-authority, or governance validators.
+
+`src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp`
+remains `CRITICAL` and byte/mode exact. Exact membership remains mandatory:
+adjacent names, case variants, aliases, extensions, prefixes, nonregular Git
+entries, executable metadata, and every other unknown path fail closed.
+
 ## Artifact identity and limitations
 
 `builder_scripts/arduino_pico.py` embeds Git HEAD plus dirty status into

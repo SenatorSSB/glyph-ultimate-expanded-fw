@@ -20,6 +20,18 @@ CENSUS = "docs/runtime_config/fixtures/glyph_checker_census.json"
 DOC = "docs/AGENT_CONTEXT.md"
 GENERATED = "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
 STUB = "tools/fixtures/configurator_setconfig_host/include/config.pb.h"
+X1_HOST_PATHS = (
+    "docs/agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
+    "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+    "docs/calibration/fixtures/gp_x1_002_hardware_evidence_2026-09-21.json",
+    "docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json",
+    "docs/runtime_config/source_authority_intake_workflow.md",
+    "tools/check_glyph_gp_x1_002_candidate.py",
+    "tools/check_glyph_runtime_config_source_sync.py",
+    "tools/check_glyph_runtime_config_validation_health.py",
+    "tools/check_glyph_source_owned_source_authority_intake.py",
+    "tools/source_owned_source_authority_intake.py",
+)
 
 
 class CorrespondenceTests(unittest.TestCase):
@@ -67,6 +79,34 @@ class CorrespondenceTests(unittest.TestCase):
         report = self.verify()
         self.assertEqual(set(report["target_paths"]), {CENSUS, DOC, STUB})
         self.assertTrue(report["normal_metadata_validation_required"])
+
+    def test_x1_candidate_style_delta_and_later_evidence_are_exactly_classified(self):
+        evidence = X1_HOST_PATHS[2]
+        candidate_paths = tuple(path for path in X1_HOST_PATHS if path != evidence)
+        self.git("switch", "-q", "-c", "x1-candidate", self.base)
+        self.write(GENERATED, "tested x1 runtime table\n")
+        for path in candidate_paths:
+            self.write(path, f"candidate host path: {path}\n")
+        self.candidate = self.commit("exact x1 candidate-style delta")
+        self.write(evidence, "immutable hardware evidence\n")
+        self.commit("later x1 evidence")
+
+        report = self.verify()
+        self.assertEqual(report["candidate_paths"][GENERATED], "CRITICAL")
+        self.assertEqual(
+            {path: report["candidate_paths"][path] for path in candidate_paths},
+            {path: "NON_BEHAVIORAL" for path in candidate_paths},
+        )
+        self.assertEqual(report["target_paths"], {evidence: "NON_BEHAVIORAL"})
+
+    def test_x1_inventory_rejects_unsafe_git_entry_modes(self):
+        path = X1_HOST_PATHS[0]
+        self.git("switch", "-q", "-c", "x1-bad-modes", self.candidate)
+        self.write(path, "ordinary metadata\n")
+        (self.root / path).chmod(0o755)
+        self.commit("executable x1 metadata")
+        with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
+            self.verify()
 
     def test_changed_handler_fails(self):
         self.write(HANDLER, "tested handler!\n")
@@ -275,6 +315,25 @@ class CorrespondenceTests(unittest.TestCase):
 
 
 class ClassificationTests(unittest.TestCase):
+    def test_exact_x1_host_inventory(self):
+        self.assertEqual(len(X1_HOST_PATHS), 10)
+        for path in X1_HOST_PATHS:
+            with self.subTest(path=path):
+                self.assertEqual(correspondence.classify_path(path), "NON_BEHAVIORAL")
+
+    def test_x1_inventory_lookalikes_fail_closed(self):
+        aliases = []
+        for path in X1_HOST_PATHS:
+            aliases.extend((path + ".bak", path.swapcase(), "prefix/" + path, "./" + path))
+        aliases.extend((
+            "docs/agent_framework/../agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
+            "docs//agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
+            "docs\\agent_framework\\GP_X1_002_HARDWARE_PROTOCOL.md",
+        ))
+        for path in aliases:
+            with self.subTest(path=path), self.assertRaises(correspondence.CorrespondenceError):
+                correspondence.classify_path(path)
+
     def test_conservative_source_build_and_generated_categories(self):
         for path in (HANDLER, GENERATED, "hal/new.cpp", "include/new.hpp", "lib/new.cpp",
                      "config/glyph/common/include/example.hpp", "config/glyph/env.ini",
