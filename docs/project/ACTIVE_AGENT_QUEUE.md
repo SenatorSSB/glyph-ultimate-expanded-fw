@@ -628,17 +628,10 @@ Git, but it is not current candidate supply or implementation authority.
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
       "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
+      "hardware_evidence_record": "git-json:d69b1694c84f803c278b532dbd20a8725eb17a81:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-22_recovery_13mode.json",
+      "hardware_result": "INCONCLUSIVE",
       "hardware_evidence_gaps": [
-        "Capture and verify the owner-original raw Config protobuf payload before any flash or mutation, including length, SHA-256, decoded representation, identity/status, operator log, and exact deterministic decode/re-encode equality.",
-        "After manually flashing the unchanged exact GP-CONFIG-010 custody artifact, prove the persisted Config still equals the owner-original payload byte-for-byte before constructing or writing test state.",
-        "Offline-derive and validate exactly 13 owner-Ultimate clones named Ult01 through Ult13 at indices 0 through 12, all GameCube-applicable, with unique non-empty source-mapped unambiguous bindings and no unrelated Config drift.",
-        "Write the temporary payload through the existing SetConfig path with ordered transaction-stage evidence, exact prewrite baseline equality, CMD_SUCCESS, exact follow-up readback, and exact post-reboot persistence equality; do not retry an ambiguous write.",
-        "Record Profile-menu visibility/order and all 13 physical activation rows, including expected/observed names, connection/miniscreen stability, ordinary directional response, and explicit PASS observations for former-overflow indices 10, 11, and 12.",
-        "Record representative Ultimate sanity on Ult13 and an ordinary GameCube power-cycle/reconnect with Ult13 selectable afterward; preserve Nunchuk NOT_TESTED and make no gameplay-angle claim.",
-        "Restore the exact captured owner-original protobuf payload bytes, prove immediate and post-reboot GET_CONFIG equality and the original SHA-256, then manually flash the exact physically accepted GP-X1-002 custody artifact and record bounded normal Ultimate/LT5-X1 sanity.",
-        "Create a fresh evidence identity for independent Hardware Evidence Processor review; preserve git-json:6c858622657b70c8dc964db0cd4ffaac6ca4fb9f:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-21.json unchanged as historical INCONCLUSIVE evidence."
+        "Obtain fresh bounded owner/Curator reauthorization because GLYPH-UD-019 authorized one recovery run and that run has been consumed and fully restored. Under that new authority, re-establish the same exact candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3, artifact 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a, and exact temporary payload 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589 through the mandatory owner-original backup, post-flash preservation, prewrite equality, write/readback, and reboot-persistence gates. Then require normal GameCube startup on the first reconnect attempt, explicitly confirm Ult01 through Ult13 remain visible in order, activate Ult13/index 12 with LT4, and confirm stable connection, directions, and display. Finally repeat exact owner-original Config restoration with immediate and post-reboot equality and the accepted GP-X1-002 artifact rollback. If the frozen-logo behavior recurs, record FAIL."
       ]
     },
     {
