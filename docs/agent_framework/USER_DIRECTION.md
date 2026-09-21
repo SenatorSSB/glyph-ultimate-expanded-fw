@@ -261,6 +261,32 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   candidate, canonical build, preserved UF2 custody, independent review, and
   exact-snapshot physical PASS before merge.
 
+### GLYPH-UD-019
+
+- Type: `Directive`
+- Status: `Active`
+- Source: direct project-owner recovery instruction supplied 2026-09-22
+- Direction: Complete GP-CONFIG-010 physical acceptance using only unchanged
+  candidate `f4771e17430fd1ea3f1e3e5339a83dfe648290a3` and preserved UF2 SHA-256
+  `9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a`.
+  Before mutation, capture and verify the owner's exact current protobuf Config
+  payload bytes. Temporarily write an owner-Ultimate-derived configuration with
+  exactly thirteen GameCube-applicable Ultimate clones, names `Ult01` through
+  `Ult13`, and unique safe source-backed activation bindings so indices 0..12
+  can be exercised. Preserve unrelated configuration and restore the exact
+  original captured payload bytes immediately and after reboot whether the run
+  passes or fails. Then manually restore only the physically accepted
+  GP-X1-002 artifact for candidate
+  `f657715b26d26587a931074ce7dd12c698785290`, SHA-256
+  `00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451`,
+  and perform bounded normal Ultimate/X1 sanity. This is one bounded recovery
+  authorization through existing source-supported commands; it does not
+  authorize firmware/source/schema/default changes, persistence architecture,
+  generalized runtime-loaded configuration or device-write capability,
+  flashing automation, candidate rebuild/substitution, Nunchuk claims,
+  gameplay-semantic inference, evidence overwrite, or merge before a fresh
+  independent Hardware Evidence Processor accepts complete observations.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is

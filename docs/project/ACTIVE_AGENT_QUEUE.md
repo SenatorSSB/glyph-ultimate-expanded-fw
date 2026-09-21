@@ -24,47 +24,47 @@ Git, but it is not current candidate supply or implementation authority.
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Planner packet glyph-portfolio-20260921-2232 is fully adjudicated. GP-VAL-027 completed through reviewed H1 integration and strict completion correspondence; no packet survivor or pending Curator decision remains.",
+    "resolution": "Planner packet glyph-portfolio-20260922-0108 is fully adjudicated. GP-CONFIG-010 received bounded source-free recovery-protocol reauthorization for its unchanged candidate/artifact; no packet survivor or pending Curator decision remains.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:6856ddefd5ea61d8097b2e8523f20200787b49ad:docs/planning/portfolio_20260921_2232.md",
+      "opening_reference": "git-json:417f164eec7a92e5499e6713a314907ce750c4a9:docs/planning/portfolio_20260922_0108.md",
       "subject_ids": [
-        "GP-VAL-027"
+        "GP-CONFIG-010"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:71a0467ec0748a582643cb74235f2e66af95b0c5:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:8ce6a7f6660f6463b48522c51e13670eade27559:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260921-2232",
-    "base_configurator_sha": "47813ecef8d98fc489a207b16e365c4b8e71f2c1",
-    "packet_id": "glyph-portfolio-20260921-2232",
-    "packet_path": "docs/planning/portfolio_20260921_2232.md",
-    "planning_commit": "6856ddefd5ea61d8097b2e8523f20200787b49ad",
-    "curation_commit": "71a0467ec0748a582643cb74235f2e66af95b0c5",
+    "branch": "planning/portfolio-20260922-0108",
+    "base_configurator_sha": "2bb99fdc0ea4104793e0068846e442a82d76cd9e",
+    "packet_id": "glyph-portfolio-20260922-0108",
+    "packet_path": "docs/planning/portfolio_20260922_0108.md",
+    "planning_commit": "417f164eec7a92e5499e6713a314907ce750c4a9",
+    "curation_commit": "8ce6a7f6660f6463b48522c51e13670eade27559",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "GP-VAL-027 completed the exact ten-path finite GP-X1-002 correspondence repair through reviewed H1 integration af77f8f702ab83d74cdf1625cacf763c820ccef5.",
-      "GeneratedRuntimeConfigBaseline.current.hpp remains CRITICAL; unknown paths, unsafe Git entries and critical drift remain fail-closed. Firmware, tested candidate/artifact/evidence, diagnostic integration, GP-CONFIG-010 and runtime behavior remain unchanged."
+      "Independent Curator accepted GP-CONFIG-010 REPAIR_REAUTHORIZATION for one owner-directed 13-Ultimate recovery acceptance run on the unchanged exact candidate/artifact.",
+      "The prior GP-CONFIG-010 INCONCLUSIVE record remains immutable historical evidence. Current result fields are reset only to represent the fresh recovery run awaiting observations; firmware, schema, defaults and runtime source remain unchanged."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260921-2232",
-      "planning_commit": "6856ddefd5ea61d8097b2e8523f20200787b49ad",
-      "packet_id": "glyph-portfolio-20260921-2232",
-      "packet_base_configurator_sha": "47813ecef8d98fc489a207b16e365c4b8e71f2c1",
-      "curation_branch": "curation/portfolio-20260921-2232-review",
+      "planning_branch": "planning/portfolio-20260922-0108",
+      "planning_commit": "417f164eec7a92e5499e6713a314907ce750c4a9",
+      "packet_id": "glyph-portfolio-20260922-0108",
+      "packet_base_configurator_sha": "2bb99fdc0ea4104793e0068846e442a82d76cd9e",
+      "curation_branch": "curation/portfolio-20260922-0108-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-VAL-027",
-          "disposition": "READY"
+          "candidate_id": "GP-CONFIG-010",
+          "disposition": "REPAIR_REAUTHORIZATION"
         }
       ],
-      "review_date": "2026-09-21",
-      "curation_commit": "71a0467ec0748a582643cb74235f2e66af95b0c5"
+      "review_date": "2026-09-22",
+      "curation_commit": "8ce6a7f6660f6463b48522c51e13670eade27559"
     }
   },
   "completion_correspondence": {
@@ -608,12 +608,12 @@ Git, but it is not current candidate supply or implementation authority.
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
       "manual_acceptance": "REQUIRED",
-      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_010_HARDWARE_PROTOCOL.md",
-      "manual_acceptance_protocol_version": "GP_CONFIG_010_HW_V1",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_010_HARDWARE_RECOVERY_ADDENDUM.md",
+      "manual_acceptance_protocol_version": "GP_CONFIG_010_HW_RECOVERY_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
-      "rollback_recovery": "Do not merge or substitute rebuilt bytes without exact PASS. On any regression or FAIL, restore the accepted configurator artifact/source and publish the exact failed evidence through the hardware lane.",
-      "status_documentation_updates": "Record the source-proven capacity repair, exact candidate/artifact identity, and hardware-pending state; preserve Nunchuk NOT_TESTED, root cause unproven, and all runtime-loaded/device-write non-claims.",
+      "rollback_recovery": "Do not merge or substitute rebuilt bytes without exact PASS. The 2026-09-22 recovery addendum requires exact owner-original protobuf payload restoration immediately and after reboot before manually flashing only the physically accepted GP-X1-002 custody artifact; any restoration mismatch stops and takes priority. Publish the resulting evidence through the hardware lane.",
+      "status_documentation_updates": "Record the source-proven capacity repair, exact candidate/artifact identity, and hardware-pending recovery state. Preserve the immutable 2026-09-21 INCONCLUSIVE evidence as historical provenance while the fresh run awaits observations; preserve Nunchuk NOT_TESTED, root cause unproven, and all generalized runtime-loaded/device-write non-claims.",
       "done_evidence": "Exact source diff, sanitizer proof, canonical build, independent review, preserved UF2 identity, candidate-local protocol, exact-snapshot hardware PASS, and strict completion correspondence before DONE.",
       "stop_conditions": [
         "Any valid current mode, order, binding, or selection behavior would change.",
@@ -628,13 +628,17 @@ Git, but it is not current candidate supply or implementation authority.
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
       "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
-      "hardware_evidence_record": "git-json:6c858622657b70c8dc964db0cd4ffaac6ca4fb9f:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-21.json",
-      "hardware_result": "INCONCLUSIVE",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Run GP_CONFIG_010_HW_V1 with an active test configuration containing all 13 current default mode entries in source order so indices 0 through 12 are physically exercisable.",
-        "Record expected and observed mode/backend behavior for mandatory indices 3 through 12; indices 0 through 2 need not be inferred as coverage for the missing rows.",
-        "Exercise and record at least one valid entry beyond the historical 10-slot boundary, including indices 10, 11, and 12 as required by the full protocol.",
-        "After all 13 mandatory rows pass, execute and record the protocol's final ordinary disconnect, power-cycle/reconnect, default-profile, representative-operation, display/menu, and connection-stability regression checks."
+        "Capture and verify the owner-original raw Config protobuf payload before any flash or mutation, including length, SHA-256, decoded representation, identity/status, operator log, and exact deterministic decode/re-encode equality.",
+        "After manually flashing the unchanged exact GP-CONFIG-010 custody artifact, prove the persisted Config still equals the owner-original payload byte-for-byte before constructing or writing test state.",
+        "Offline-derive and validate exactly 13 owner-Ultimate clones named Ult01 through Ult13 at indices 0 through 12, all GameCube-applicable, with unique non-empty source-mapped unambiguous bindings and no unrelated Config drift.",
+        "Write the temporary payload through the existing SetConfig path with ordered transaction-stage evidence, exact prewrite baseline equality, CMD_SUCCESS, exact follow-up readback, and exact post-reboot persistence equality; do not retry an ambiguous write.",
+        "Record Profile-menu visibility/order and all 13 physical activation rows, including expected/observed names, connection/miniscreen stability, ordinary directional response, and explicit PASS observations for former-overflow indices 10, 11, and 12.",
+        "Record representative Ultimate sanity on Ult13 and an ordinary GameCube power-cycle/reconnect with Ult13 selectable afterward; preserve Nunchuk NOT_TESTED and make no gameplay-angle claim.",
+        "Restore the exact captured owner-original protobuf payload bytes, prove immediate and post-reboot GET_CONFIG equality and the original SHA-256, then manually flash the exact physically accepted GP-X1-002 custody artifact and record bounded normal Ultimate/LT5-X1 sanity.",
+        "Create a fresh evidence identity for independent Hardware Evidence Processor review; preserve git-json:6c858622657b70c8dc964db0cd4ffaac6ca4fb9f:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-21.json unchanged as historical INCONCLUSIVE evidence."
       ]
     },
     {
@@ -5657,7 +5661,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260921-2232 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING with its exact INCONCLUSIVE evidence and gaps. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260922-0108 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING for one bounded 13-Ultimate recovery run on its unchanged candidate/artifact under GP_CONFIG_010_HW_RECOVERY_V1. Its prior 2026-09-21 INCONCLUSIVE evidence remains immutable historical provenance and has not been upgraded. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
@@ -5693,7 +5697,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The initial review selected exact tracked schema closure and separate button/USB characterizations, plus a distinct hardware-gated modifier-cache repair. GLYPH-UD-017 now parks the three configuration items without erasing that historical authorization. No probe, implementation, build or merge of these parked items is executable. Resumption needs explicit owner direction and fresh Curator reauthorization; button/USB policies remain unresolved and every H3 exact-artifact physical gate remains mandatory. The initial immutable receipt below is historical provenance, not permission to bypass this later deferral.
+The current independent review accepts only a bounded source-free GP-CONFIG-010 hardware-recovery protocol for the unchanged candidate/artifact. It does not create READY implementation runway or alter other candidate dispositions. GLYPH-UD-017 continues to park GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 without erasing their historical authorization. No probe, implementation, build or merge of those parked items is executable. Every H3 exact-artifact physical gate remains mandatory.
 
 ## Work Orders
 
