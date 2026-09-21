@@ -243,6 +243,24 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   hardware gate. This does not defer other campaign work, change GP-VAL-011,
   or alter GP-CONFIG-010's exact preserved candidate/artifact or hardware gate.
 
+### GLYPH-UD-018
+
+- Type: `Decision`
+- Status: `Active`
+- Source: direct project-owner confirmation supplied 2026-09-21
+- Direction: Restore the existing Ultimate sole/non-Mode `kX1Table` to the
+  ordered direction rows `(93,51)`, `(128,51)`, `(163,51)`, `(93,128)`,
+  `(128,128)`, `(163,128)`, `(93,205)`, `(128,205)`, and `(163,205)`. Preserve
+  every other source-owned table, including `kMX1Table`, and preserve the
+  current LT5/non-Mode selection route, Mode behavior, precedence, active
+  publication mechanism, profile/configuration behavior, and GP-CONFIG-010
+  identity. This decision creates no Senscope modifier or binding, makes no
+  gameplay-angle or radius claim, and does not authorize runtime-loaded
+  configuration, persistence, device write, protobuf write, WebSerial, or
+  flashing automation. The restoration is H2 and requires an exact committed
+  candidate, canonical build, preserved UF2 custody, independent review, and
+  exact-snapshot physical PASS before merge.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is

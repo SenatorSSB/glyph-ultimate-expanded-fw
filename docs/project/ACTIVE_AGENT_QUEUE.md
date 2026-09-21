@@ -5397,27 +5397,15 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260921-0052",
-  "planning_commit": "4d6f0ed73bff368546c983c6fe2fcf3be7bcef3e",
-  "packet_id": "glyph-portfolio-20260921-0052",
-  "packet_base_configurator_sha": "4351b951916abbfbcaffec6f4512571a17d15ca5",
-  "curation_branch": "curation/portfolio-20260921-0052-review",
+  "planning_branch": "planning/portfolio-20260921-1252",
+  "planning_commit": "525296975bcd6791e8e3a57945b2c47e0fc16ef0",
+  "packet_id": "glyph-portfolio-20260921-1252",
+  "packet_base_configurator_sha": "71dc9979a78ae2174a232884e1692f833ea80de3",
+  "curation_branch": "curation/portfolio-20260921-1252-review-v2",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-VAL-026",
+      "candidate_id": "GP-X1-002",
       "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-CONFIG-012",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-013",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-014",
-      "disposition": "PREAUTHORIZED"
     }
   ],
   "review_date": "2026-09-21",
