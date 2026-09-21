@@ -19,8 +19,8 @@
   },
   "curated_runtime_config_scope": {
     "manifest_entry_count": 44,
-    "current_load_bearing_count": 39,
-    "historical_or_evidentiary_count": 5,
+    "current_load_bearing_count": 38,
+    "historical_or_evidentiary_count": 6,
     "explicit_exclusion_count": 42
   },
   "checker_results": [

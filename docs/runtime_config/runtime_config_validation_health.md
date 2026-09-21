@@ -46,7 +46,7 @@ The current source-owned contract is 28 ordered tables ending in
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.
 
 <!-- validation-health-summary:start -->
-Current summary: manifest entries = 44; current load-bearing checks = 39.
+Current summary: manifest entries = 44; current load-bearing checks = 38.
 <!-- validation-health-summary:end -->
 
 The two repaired load-bearing baseline failures were
