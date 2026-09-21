@@ -38,7 +38,7 @@ remain usable only in explicitly non-production helper paths. The accepted
 production X1 intake is a closed current-corpus mapping. Its
 approval reference, sole `kX1Table` ownership declaration, and replacement
 source reference must each be exactly
-`docs/agent_framework/USER_DIRECTION.md#glyph-ud-010`, and its nine ordered
+`docs/agent_framework/USER_DIRECTION.md#glyph-ud-018`, and its nine ordered
 points must match that reviewed record. Plausible anchors, compound locators,
 external references, other tables, and changed points fail closed. Generic
 locator/path grammars are not implied by this record and remain separately
@@ -138,12 +138,11 @@ separate cycles. Firmware build and hardware testing only apply to that later
 active candidate cycle, and active changes merge only after HARDWARE_PASS.
 
 The accepted canonical X1 authority record is
-`intakes/x1_offset41_overlay_hardware_candidate.intake.json`. It owns only
-`kX1Table`, records the exact offset-41 replacement against its immutable
-pre-change baseline, and preserves the other 27 tables as unowned. Its
+`intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json`. It owns only
+`kX1Table`, records the exact GP-X1-002 restoration replacement against its immutable
+offset-41 pre-change baseline, and preserves the other 27 tables as unowned. Its
 project-owner approval reference is
-`docs/agent_framework/USER_DIRECTION.md#glyph-ud-010`. The exact candidate and
-artifact subsequently passed the Revision-2 hardware gate and were integrated;
-the checker preserves the recorded candidate baseline while proving those
-replacement values are now equivalent to the current accepted source. It does
-not authorize a future X1 value change or any additional table.
+`docs/agent_framework/USER_DIRECTION.md#glyph-ud-018`. The candidate remains hardware-gated. The checker preserves the recorded
+offset-41 candidate baseline while proving the restoration replacement values
+are equivalent to this candidate source. It does not claim hardware acceptance
+or authorize a future X1 value change or any additional table.
