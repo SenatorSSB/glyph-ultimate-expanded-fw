@@ -452,7 +452,7 @@ Git, but it is not current candidate supply or implementation authority.
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
       "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
-      "hardware_evidence_record": "git-json:aa7f221378ce48965bf71737e23d8c5b22dc260b:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-21.json",
+      "hardware_evidence_record": "git-json:6c858622657b70c8dc964db0cd4ffaac6ca4fb9f:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-21.json",
       "hardware_result": "INCONCLUSIVE",
       "hardware_evidence_gaps": ["Run GP_CONFIG_010_HW_V1 with an active test configuration containing all 13 current default mode entries in source order so indices 0 through 12 are physically exercisable.", "Record expected and observed mode/backend behavior for mandatory indices 3 through 12; indices 0 through 2 need not be inferred as coverage for the missing rows.", "Exercise and record at least one valid entry beyond the historical 10-slot boundary, including indices 10, 11, and 12 as required by the full protocol.", "After all 13 mandatory rows pass, execute and record the protocol's final ordinary disconnect, power-cycle/reconnect, default-profile, representative-operation, display/menu, and connection-stability regression checks."]
     },
