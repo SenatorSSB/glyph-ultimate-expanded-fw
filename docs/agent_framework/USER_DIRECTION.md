@@ -264,7 +264,7 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
 ### GLYPH-UD-019
 
 - Type: `Directive`
-- Status: `Active`
+- Status: `Resolved`
 - Source: direct project-owner recovery instruction supplied 2026-09-22
 - Direction: Complete GP-CONFIG-010 physical acceptance using only unchanged
   candidate `f4771e17430fd1ea3f1e3e5339a83dfe648290a3` and preserved UF2 SHA-256
@@ -286,6 +286,35 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
   flashing automation, candidate rebuild/substitution, Nunchuk claims,
   gameplay-semantic inference, evidence overwrite, or merge before a fresh
   independent Hardware Evidence Processor accepts complete observations.
+
+Resolution: the one bounded recovery run was consumed. It established all
+thirteen activation rows and exact restoration/rollback, but remained
+INCONCLUSIVE after the first final reconnect froze at the Glyph logo and the
+required post-reconnect visibility and LT4-to-Ult13 checks were not completed.
+
+### GLYPH-UD-020
+
+- Type: `Directive`
+- Status: `Active`
+- Source: direct project-owner reconnect-completion instruction supplied 2026-09-22
+- Direction: Authorize through normal Planner/Curator governance one bounded
+  GP-CONFIG-010 reconnect-completion retest using only unchanged candidate
+  `f4771e17430fd1ea3f1e3e5339a83dfe648290a3` and preserved 791040-byte UF2
+  SHA-256
+  `9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a`.
+  Preserve the prior exact 13/13 activation evidence, including indices 10,
+  11, and 12, and do not repeat the full matrix absent a new discrepancy.
+  Recreate the exact prior temporary thirteen-Ultimate Config only after a
+  fresh exact owner-original backup, then require first-attempt normal
+  GameCube startup, exact Ult01-through-Ult13 menu visibility, LT4-to-Ult13
+  post-reconnect selection, representative normal operation, and exactly three
+  additional reconnect cycles. Any controlled frozen-logo recurrence stops
+  the run and is expected to classify FAIL unless evidence clearly proves an
+  unrelated external cause. Restore the exact owner Config and the exact
+  accepted GP-X1-002 firmware/artifact regardless of result. This directive
+  authorizes no build, firmware patch, full-matrix repetition without
+  discrepancy, product/runtime capability, GP-VAL-011 work, or merge before a
+  fresh independent Hardware Evidence Processor publishes exact PASS.
 
 ## Publishing Rules
 

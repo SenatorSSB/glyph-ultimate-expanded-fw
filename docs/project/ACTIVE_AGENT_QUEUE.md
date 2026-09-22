@@ -24,39 +24,39 @@ Git, but it is not current candidate supply or implementation authority.
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Planner packet glyph-portfolio-20260922-0108 is fully adjudicated. GP-CONFIG-010 received bounded source-free recovery-protocol reauthorization for its unchanged candidate/artifact; no packet survivor or pending Curator decision remains.",
+    "resolution": "Planner packet glyph-portfolio-20260922-1327 is fully adjudicated. GP-CONFIG-010 received bounded source-free reconnect-completion reauthorization for its unchanged candidate/artifact; no packet survivor or pending Curator decision remains.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:417f164eec7a92e5499e6713a314907ce750c4a9:docs/planning/portfolio_20260922_0108.md",
+      "opening_reference": "git-json:83fef0c529db28b1505a224f5b3432dab5865d6a:docs/planning/portfolio_20260922_1327.md",
       "subject_ids": [
         "GP-CONFIG-010"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:8ce6a7f6660f6463b48522c51e13670eade27559:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:a7d7999786e74704234ab24add315c653df70698:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260922-0108",
-    "base_configurator_sha": "2bb99fdc0ea4104793e0068846e442a82d76cd9e",
-    "packet_id": "glyph-portfolio-20260922-0108",
-    "packet_path": "docs/planning/portfolio_20260922_0108.md",
-    "planning_commit": "417f164eec7a92e5499e6713a314907ce750c4a9",
-    "curation_commit": "8ce6a7f6660f6463b48522c51e13670eade27559",
+    "branch": "planning/portfolio-20260922-1327",
+    "base_configurator_sha": "4b2d16e555a5f01ea06955785891ba1506c23162",
+    "packet_id": "glyph-portfolio-20260922-1327",
+    "packet_path": "docs/planning/portfolio_20260922_1327.md",
+    "planning_commit": "83fef0c529db28b1505a224f5b3432dab5865d6a",
+    "curation_commit": "a7d7999786e74704234ab24add315c653df70698",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator accepted GP-CONFIG-010 REPAIR_REAUTHORIZATION for one owner-directed 13-Ultimate recovery acceptance run on the unchanged exact candidate/artifact.",
-      "The prior GP-CONFIG-010 INCONCLUSIVE record remains immutable historical evidence. Current result fields are reset only to represent the fresh recovery run awaiting observations; firmware, schema, defaults and runtime source remain unchanged."
+      "Independent Curator accepted GP-CONFIG-010 REPAIR_REAUTHORIZATION for one owner-directed reconnect-completion retest on the unchanged exact candidate/artifact.",
+      "The prior GP-CONFIG-010 13/13 activation PASS observations remain admissible immutable historical evidence. This authorization targets only first-attempt startup, exact all-profile visibility, LT4-to-Ult13 post-reconnect selection, representative sanity, three additional reconnect cycles, and mandatory exact restoration."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260922-0108",
-      "planning_commit": "417f164eec7a92e5499e6713a314907ce750c4a9",
-      "packet_id": "glyph-portfolio-20260922-0108",
-      "packet_base_configurator_sha": "2bb99fdc0ea4104793e0068846e442a82d76cd9e",
-      "curation_branch": "curation/portfolio-20260922-0108-review",
+      "planning_branch": "planning/portfolio-20260922-1327",
+      "planning_commit": "83fef0c529db28b1505a224f5b3432dab5865d6a",
+      "packet_id": "glyph-portfolio-20260922-1327",
+      "packet_base_configurator_sha": "4b2d16e555a5f01ea06955785891ba1506c23162",
+      "curation_branch": "curation/portfolio-20260922-1327-review",
       "initial_reviewed_dispositions": [
         {
           "candidate_id": "GP-CONFIG-010",
@@ -64,7 +64,7 @@ Git, but it is not current candidate supply or implementation authority.
         }
       ],
       "review_date": "2026-09-22",
-      "curation_commit": "8ce6a7f6660f6463b48522c51e13670eade27559"
+      "curation_commit": "a7d7999786e74704234ab24add315c653df70698"
     }
   },
   "completion_correspondence": {
@@ -598,7 +598,7 @@ Git, but it is not current candidate supply or implementation authority.
         "The repair would require a protobuf/schema/persistence ABI change, a mode/binding semantic change, or a different active publication path.",
         "Exact-production sanitizer coverage, canonical build, independent firmware-safety review, artifact custody, or hardware protocol cannot be completed."
       ],
-      "authorization_snapshot_provenance": "Curator independently reviewed live configurator 37b6d7e5573703f9854674e424b526cf7f5dd1a8 and Planner GP-CONFIG-010 at ebdb7f3d728320c4c6ee229f040cb98a29a8b524. Receipt b2ff798314c9e42f189f280fc1413d6601cef127 records READY after direct source verification of the 13-to-10 mismatch and the generated 30-entry Config extent.",
+      "authorization_snapshot_provenance": "Curator independently reviewed live configurator 37b6d7e5573703f9854674e424b526cf7f5dd1a8 and Planner GP-CONFIG-010 at ebdb7f3d728320c4c6ee229f040cb98a29a8b524. Receipt b2ff798314c9e42f189f280fc1413d6601cef127 records READY after direct source verification of the 13-to-10 mismatch and the generated 30-entry Config extent. For the source-free reconnect completion only, a fresh independent Curator reviewed live configurator 4b2d16e555a5f01ea06955785891ba1506c23162, immutable Planner packet 83fef0c529db28b1505a224f5b3432dab5865d6a, prior evidence d69b1694c84f803c278b532dbd20a8725eb17a81, and exact artifact custody; receipt a7d7999786e74704234ab24add315c653df70698 records REPAIR_REAUTHORIZATION under GLYPH-UD-020.",
       "automated_validation": [
         "Compile exact production mode-selection bodies with the named 30-entry capacity and prove equality to the current generated member extent plus fit of the 13-entry default.",
         "Exercise counts 0, 10, 11, 13, 30, and above 30 plus selection indices 0 through 12 under ASan/UBSan or equivalent; prove no out-of-bounds access and no valid-entry ordering/binding drift.",
@@ -612,8 +612,8 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_version": "GP_CONFIG_010_HW_RECOVERY_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
-      "rollback_recovery": "Do not merge or substitute rebuilt bytes without exact PASS. The 2026-09-22 recovery addendum requires exact owner-original protobuf payload restoration immediately and after reboot before manually flashing only the physically accepted GP-X1-002 custody artifact; any restoration mismatch stops and takes priority. Publish the resulting evidence through the hardware lane.",
-      "status_documentation_updates": "Record the source-proven capacity repair, exact candidate/artifact identity, and hardware-pending recovery state. Preserve the immutable 2026-09-21 INCONCLUSIVE evidence as historical provenance while the fresh run awaits observations; preserve Nunchuk NOT_TESTED, root cause unproven, and all generalized runtime-loaded/device-write non-claims.",
+      "rollback_recovery": "Do not merge or substitute rebuilt bytes without exact PASS. GP_CONFIG_010_RECONNECT_COMPLETION_V1 requires exact fresh owner-original protobuf backup and immediate plus post-reboot restoration before manually flashing only the physically accepted GP-X1-002 custody artifact; any restoration mismatch stops and takes priority. Restoration is mandatory after PASS, FAIL, or INCONCLUSIVE.",
+      "status_documentation_updates": "Record the source-proven capacity repair and unchanged exact candidate/artifact identity. Preserve the immutable d69b1694c84f803c278b532dbd20a8725eb17a81 INCONCLUSIVE record and its 13/13 activation PASS observations as historical provenance while one bounded reconnect-completion run awaits observations; preserve Nunchuk NOT_TESTED, root cause unproven, and all generalized runtime-loaded/device-write non-claims.",
       "done_evidence": "Exact source diff, sanitizer proof, canonical build, independent review, preserved UF2 identity, candidate-local protocol, exact-snapshot hardware PASS, and strict completion correspondence before DONE.",
       "stop_conditions": [
         "Any valid current mode, order, binding, or selection behavior would change.",
@@ -5654,7 +5654,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260922-0108 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING for one bounded 13-Ultimate recovery run on its unchanged candidate/artifact under GP_CONFIG_010_HW_RECOVERY_V1. Its prior 2026-09-21 INCONCLUSIVE evidence remains immutable historical provenance and has not been upgraded. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260922-1327 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING / INCONCLUSIVE with one bounded reconnect-completion retest authorized under GP_CONFIG_010_RECONNECT_COMPLETION_V1. Its prior 13/13 activation PASS evidence remains admissible and unchanged. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
@@ -5690,7 +5690,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The current independent review accepts only a bounded source-free GP-CONFIG-010 hardware-recovery protocol for the unchanged candidate/artifact. It does not create READY implementation runway or alter other candidate dispositions. GLYPH-UD-017 continues to park GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 without erasing their historical authorization. No probe, implementation, build or merge of those parked items is executable. Every H3 exact-artifact physical gate remains mandatory.
+The current independent review accepts only one bounded source-free GP-CONFIG-010 reconnect-completion protocol for the unchanged candidate/artifact. It preserves the prior 13/13 activation evidence, prohibits full-matrix repetition absent discrepancy, and binds any controlled frozen-logo recurrence to an expected FAIL disposition absent clearly proven unrelated cause. It does not create READY implementation runway or alter other candidate dispositions. GLYPH-UD-017 continues to park GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 without erasing their historical authorization. No probe, implementation, build or merge of those parked items is executable. Every H3 exact-artifact physical gate remains mandatory.
 
 ## Work Orders
 
