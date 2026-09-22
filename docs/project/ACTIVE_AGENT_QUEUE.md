@@ -608,8 +608,8 @@ Git, but it is not current candidate supply or implementation authority.
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
       "manual_acceptance": "REQUIRED",
-      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_010_HARDWARE_RECOVERY_ADDENDUM.md",
-      "manual_acceptance_protocol_version": "GP_CONFIG_010_HW_RECOVERY_V1",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_010_RECONNECT_COMPLETION_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_CONFIG_010_RECONNECT_COMPLETION_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Do not merge or substitute rebuilt bytes without exact PASS. GP_CONFIG_010_RECONNECT_COMPLETION_V1 requires exact fresh owner-original protobuf backup and immediate plus post-reboot restoration before manually flashing only the physically accepted GP-X1-002 custody artifact; any restoration mismatch stops and takes priority. Restoration is mandatory after PASS, FAIL, or INCONCLUSIVE.",
@@ -628,10 +628,13 @@ Git, but it is not current candidate supply or implementation authority.
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
       "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
-      "hardware_evidence_record": "git-json:d69b1694c84f803c278b532dbd20a8725eb17a81:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-22_recovery_13mode.json",
-      "hardware_result": "INCONCLUSIVE",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Obtain fresh bounded owner/Curator reauthorization because GLYPH-UD-019 authorized one recovery run and that run has been consumed and fully restored. Under that new authority, re-establish the same exact candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3, artifact 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a, and exact temporary payload 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589 through the mandatory owner-original backup, post-flash preservation, prewrite equality, write/readback, and reboot-persistence gates. Then require normal GameCube startup on the first reconnect attempt, explicitly confirm Ult01 through Ult13 remain visible in order, activate Ult13/index 12 with LT4, and confirm stable connection, directions, and display. Finally repeat exact owner-original Config restoration with immediate and post-reboot equality and the accepted GP-X1-002 artifact rollback. If the frozen-logo behavior recurs, record FAIL."
+        "Under GLYPH-UD-020 and GP_CONFIG_010_RECONNECT_COMPLETION_V1, create a fresh evidence directory and re-establish the same exact candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3, artifact 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a, and exact temporary payload 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589 through fresh owner-original backup, post-flash preservation, prewrite equality, write/readback, and reboot-persistence gates.",
+        "On the first normal GameCube startup attempt require passage beyond the Glyph logo, then explicitly confirm exactly Ult01 through Ult13 visible in order, activate Ult13/index 12 with LT4, and record representative horizontal, vertical, face-button, LT5/X1, neutral, display, stuck-input, and connection sanity. The prior thirteen activation rows at git-json:d69b1694c84f803c278b532dbd20a8725eb17a81:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-22_recovery_13mode.json remain admissible historical evidence and must not be repeated absent a new discrepancy.",
+        "After the required first startup, record exactly three additional consecutive normal GameCube reconnect/startup cycles. Any controlled frozen-logo recurrence stops the hardware portion and is expected to classify FAIL unless evidence clearly proves an unrelated external cause; later successful retries must not hide it.",
+        "After PASS, FAIL, or INCONCLUSIVE, restore the exact fresh owner-original Config with immediate and post-reboot equality, restore the exact accepted GP-X1-002 artifact, and record bounded normal Ultimate/LT5-X1 sanity before fresh independent Hardware Evidence Processor disposition."
       ]
     },
     {
@@ -5654,7 +5657,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260922-1327 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING / INCONCLUSIVE with one bounded reconnect-completion retest authorized under GP_CONFIG_010_RECONNECT_COMPLETION_V1. Its prior 13/13 activation PASS evidence remains admissible and unchanged. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260922-1327 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 remains LOCAL_ACCEPTANCE_PENDING for one bounded reconnect-completion retest under GP_CONFIG_010_RECONNECT_COMPLETION_V1. Its prior INCONCLUSIVE record and 13/13 activation PASS evidence remain admissible unchanged historical evidence. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
