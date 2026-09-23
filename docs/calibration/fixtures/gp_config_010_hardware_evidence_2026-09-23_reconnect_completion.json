@@ -1,0 +1,125 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-010",
+  "candidate_branch": "glyph/gp-config-010-mode-activation-capacity",
+  "candidate_git_sha": "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+  "candidate_base_configurator_sha": "28426e4ba4763a99f0ca13491c023af77665c79c",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Device-reported model glyph_mk6; the project owner uses the standard supplier-purchased Glyph, with specific board revision not separately reported",
+  "firmware_profile_state": "The exact GP-CONFIG-010 candidate ran the protocol-required temporary persisted 13-profile GameCube-only Ultimate-clone Config. The immutable prior record supplies all thirteen activation observations; this completion run supplied first-startup, menu visibility, post-reconnect LT4-to-Ult13, representative sanity, and three additional reconnect observations. The exact owner Config and accepted GP-X1-002 firmware were restored afterward.",
+  "update_method": "Manual owner-controlled drag of each exact preserved UF2 to the RPI-RP2 volume; Config backup, temporary write, readback, and exact restore used the existing source-supported custom Configurator GET_CONFIG and SET_CONFIG paths without flashing automation",
+  "host_platform_adapter": "macOS host using USB CDC Configurator access, followed by the owner's normal GameCube cable/adapter connection to Nintendo Switch; exact Mac, Switch, and adapter revisions were not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_010_RECONNECT_COMPLETION_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_010_RECONNECT_COMPLETION_V1",
+  "preconditions": [
+    "Fresh live GitHub verification resolved origin/configurator to 4cd7b662335252cc9147641582af6b6d666334fa, the candidate branch to f4771e17430fd1ea3f1e3e5339a83dfe648290a3, the accepted rollback branch to f657715b26d26587a931074ce7dd12c698785290, and the prior evidence branch to d69b1694c84f803c278b532dbd20a8725eb17a81.",
+    "Immutable Planner packet 83fef0c529db28b1505a224f5b3432dab5865d6a and Curator receipt a7d7999786e74704234ab24add315c653df70698 authorized exactly one source-free GP-CONFIG-010 reconnect-completion retest. Canonical 4cd7b662335252cc9147641582af6b6d666334fa binds protocol GP_CONFIG_010_RECONNECT_COMPLETION_V1 to the unchanged candidate/artifact.",
+    "The candidate is the direct child of recorded base 28426e4ba4763a99f0ca13491c023af77665c79c and has tree e18a7496125bf485a179d9b8e08f1f47f5090b80. No candidate build, rebuild, source edit, patch, rebase, replacement artifact, or integration-build substitution occurred.",
+    "Custody verification accepted a regular non-symlink 791040-byte GP-CONFIG-010 UF2 with SHA-256 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a. The accepted rollback artifact was independently verified as a regular non-symlink 792064-byte UF2 with SHA-256 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451.",
+    "Before flash or persisted mutation, device information reported HayBox, glyph_mk6, firmware f657715. The complete owner Config was captured as 4201 bytes with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480, preserved as raw bytes/base64/decoded JSON, and deterministically re-encoded byte-for-byte.",
+    "After the owner manually flashed the exact GP-CONFIG-010 UF2, device information reported firmware f4771e1 and GET_CONFIG still exactly matched the freshly captured owner payload before any temporary write.",
+    "The new offline plan contained exactly thirteen MODE_ULTIMATE profiles named Ult01 through Ult13 in order, GameCube-only applicability, the protocol-required unique singleton activation bindings, clone equality outside the allowed fields, deterministic round-trip equality, and no unrelated top-level drift.",
+    "The intended temporary payload was 6691 bytes with SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589. SET_CONFIG completed with CMD_SUCCESS and exact immediate GET_CONFIG equality; one Configurator-mode reboot again produced exact byte equality before GameCube testing.",
+    "Immutable prior evidence git-json:d69b1694c84f803c278b532dbd20a8725eb17a81:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-22_recovery_13mode.json remains admissible for this unchanged candidate/artifact and supplies PASS observations for all thirteen activation rows, including indices 10, 11, and 12, plus representative Ult13 operation. This completion record does not repeat or reinterpret those observations."
+  ],
+  "steps": [
+    {
+      "id": "FIRST-GAMECUBE-STARTUP",
+      "instruction": "Move from Mac Configurator mode to the normal GameCube cable/adapter path and observe the first startup attempt without retrying.",
+      "expected": "The first attempt passes the Glyph logo normally; any frozen or stuck logo stops acceptance.",
+      "observed": "PASS — the project owner directly reported that the controller passed the Glyph logo normally on the first required connection."
+    },
+    {
+      "id": "POST-RECONNECT-PROFILE-MENU-VISIBILITY",
+      "instruction": "Open the Profile menu and inspect the complete list, including count, order, missing entries, and extras.",
+      "expected": "Exactly Ult01 through Ult13 are visible in order with no missing or extra entries.",
+      "observed": "PASS — the project owner reported Ult01 through Ult13 in order; this is thirteen entries with no reported missing or extra entry."
+    },
+    {
+      "id": "POST-RECONNECT-MODE-12-ULT13-LT4",
+      "instruction": "Return to the normal dashboard, press and release LT4 once, and observe the selected profile plus connection and miniscreen stability.",
+      "expected": "LT4 selects exact profile Ult13 at config index 12, beyond the former 10-entry cache boundary, with stable connection and miniscreen.",
+      "observed": "PASS — LT4 switched the displayed profile to Ult13 and the owner reported no connection or miniscreen instability."
+    },
+    {
+      "id": "COMPLETION-ULT13-REPRESENTATIVE-SANITY",
+      "instruction": "With Ult13 active, exercise one horizontal direction, one vertical direction, one representative face button, LT5 with directional input, then release to neutral.",
+      "expected": "Directions and face input respond normally; LT5 plus direction uses the expected X1 offset table; release is clean with no stuck input, display problem, or disconnect.",
+      "observed": "PASS — ordinary directional and representative face inputs functioned normally. LT5 alone produced no visible neutral change, as expected; after procedural clarification, the owner confirmed LT5 plus directions produced the 41-offset table values. No stuck input, display problem, or disconnect was reported."
+    },
+    {
+      "id": "RECONNECT-CONFIDENCE-1",
+      "instruction": "Disconnect normally, reconnect through the GameCube adapter, do not press anything, and report logo passage plus the displayed profile/dashboard.",
+      "expected": "Startup passes the Glyph logo normally and a profile/dashboard appears without instability.",
+      "observed": "PASS — startup passed normally and Ult03 appeared, matching the profile seen at the preceding connection."
+    },
+    {
+      "id": "RECONNECT-CONFIDENCE-2",
+      "instruction": "Repeat one normal disconnect/reconnect and report logo passage plus the displayed profile/dashboard.",
+      "expected": "Startup again passes the Glyph logo normally and a profile/dashboard appears without instability.",
+      "observed": "PASS — the owner reported the same result: normal logo passage and Ult03 displayed."
+    },
+    {
+      "id": "RECONNECT-CONFIDENCE-3",
+      "instruction": "Repeat the third and final normal disconnect/reconnect and report logo passage plus the displayed profile/dashboard.",
+      "expected": "Startup again passes the Glyph logo normally and a profile/dashboard appears without instability.",
+      "observed": "PASS — the owner reported the same result: normal logo passage and Ult03 displayed. No frozen-logo recurrence occurred in any of the three additional cycles."
+    },
+    {
+      "id": "PRE-RESTORE-TEMPORARY-CAPTURE",
+      "instruction": "Reconnect in Configurator mode and capture the complete current temporary persisted Config before restoration.",
+      "expected": "The temporary state remains the exact intended 6691-byte payload with SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589 and deterministic decode/re-encode equality.",
+      "observed": "PASS — the pre-restore capture was exactly 6691 bytes with the required SHA-256 and deterministic re-encode equality."
+    },
+    {
+      "id": "EXACT-OWNER-CONFIG-RESTORE",
+      "instruction": "Write the exact owner Config captured at the beginning, require immediate exact GET_CONFIG equality, reboot once in Configurator mode, and require exact equality again.",
+      "expected": "The write returns CMD_SUCCESS and immediate plus post-reboot readbacks are exactly 4201 bytes with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480.",
+      "observed": "PASS — the restore transaction completed with CMD_SUCCESS, complete transaction-stage evidence, and exact immediate readback. The post-reboot GET_CONFIG was again exactly 4201 bytes with the required owner-original SHA-256."
+    },
+    {
+      "id": "ACCEPTED-GP-X1-002-FIRMWARE-ROLLBACK",
+      "instruction": "After exact Config restoration, manually flash the exact accepted GP-X1-002 custody artifact, then reconnect normally through GameCube to Nintendo Switch.",
+      "expected": "The exact rollback artifact boots normally, connects normally, and auto-selects Ultimate.",
+      "observed": "PASS — the owner manually flashed the exact accepted artifact, then reported a normal GameCube connection with Ultimate auto-selected."
+    },
+    {
+      "id": "FINAL-NORMAL-CONTROLLER-SANITY",
+      "instruction": "On restored GP-X1-002 firmware, hold LT5 with Right, observe the expected X1 coordinate, release cleanly, and check for stuck input or disconnect.",
+      "expected": "LT5 plus Right produces raw (163,128), shown center-relative as (+35,0), then returns cleanly to neutral without stuck input or disconnect.",
+      "observed": "PASS — the owner reported the requested row worked as expected and additionally reported the same expected behavior for all other directions and combinations. No stuck input or disconnect was reported. This bounded rollback sanity does not create new X1 acceptance."
+    }
+  ],
+  "negative_regression_checks": [
+    "The prior immutable record supplies all thirteen activation-row PASS observations for the unchanged candidate/artifact, including indices 10, 11, and 12 and representative Ult13 operation; no new discrepancy called those observations into question.",
+    "The required first startup and exactly three additional reconnect cycles all passed the Glyph logo normally. The prior isolated frozen-logo event did not recur under the controlled completion state.",
+    "Post-reconnect Profile-menu visibility was exactly Ult01 through Ult13 in order, and LT4 selected exact Ult13 at config index 12 with stable connection and miniscreen.",
+    "Representative Ult13 inputs and LT5 directional behavior passed without stuck input, display problem, or disconnect.",
+    "The owner-original Config and accepted GP-X1-002 firmware were restored; final normal GameCube/Ultimate/X1 sanity passed.",
+    "Nunchuk was NOT_TESTED. No generalized persistence, gameplay-angle/radius, root-cause, or rebuilt-artifact claim is made."
+  ],
+  "power_cycle_reconnect_checks": [
+    "Before GameCube testing, one Configurator-mode reboot preserved the intended temporary payload byte-for-byte at SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589.",
+    "The first required normal GameCube startup passed the Glyph logo on its first attempt.",
+    "Three additional consecutive normal GameCube reconnects each passed the logo and displayed Ult03; no frozen-logo recurrence occurred.",
+    "After exact owner Config restoration, one Configurator-mode reboot preserved the exact original 4201-byte payload at SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480.",
+    "After manual rollback to the accepted GP-X1-002 artifact, the controller connected normally through GameCube, auto-selected Ultimate, and passed the representative LT5 plus Right check without stuck input or disconnect."
+  ],
+  "result": "PASS",
+  "anomalies": [
+    "The prior immutable recovery record retains the unexplained single frozen-logo event from its first final reconnect. It is not erased or reinterpreted; it simply did not recur during this separately authorized first startup and three additional controlled reconnect cycles.",
+    "All three additional completion-run reconnects displayed Ult03 rather than the earlier selected Ult13. The protocol required recording the selected profile/dashboard and did not require persistence of the actively selected profile across reconnects; exact Ult01-through-Ult13 visibility and post-reconnect LT4-to-Ult13 activation had already passed.",
+    "During representative sanity, LT5 alone was initially reported as doing nothing. The operator correctly clarified that neutral remains visually unchanged, then the owner confirmed LT5 plus directions produced the expected 41-offset table values. The neutral-only observation is not treated as a failed modifier check."
+  ],
+  "rollback_recovery": "Mandatory recovery completed. The exact owner-original 4201-byte Config payload with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored with CMD_SUCCESS and exact immediate and post-reboot GET_CONFIG equality. The owner then manually flashed only the exact accepted GP-X1-002 artifact for candidate f657715b26d26587a931074ce7dd12c698785290, SHA-256 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451, and confirmed normal connection, Ultimate auto-selection, expected representative LT5-plus-Right output, clean neutral behavior, and no stuck input or disconnect.",
+  "tester": "Project owner / user (direct owner-reported physical observations), with host-side Config capture and independent evidence processing by Codex",
+  "tested_at": "2026-09-23T14:07:12Z",
+  "evidence_gaps": []
+}
