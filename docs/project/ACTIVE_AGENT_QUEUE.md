@@ -88,17 +88,19 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "hardware_pending": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
+    "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -569,7 +571,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-010",
       "title": "Produce and physically accept the exact current-canonical mode-capacity integration",
-      "status": "READY",
+      "status": "HARDWARE_TEST_REQUIRED",
       "branch": "glyph/gp-config-010-current-canonical-integration",
       "objective": "From exact canonical 47f9b122a7eb60073c114e6568b4d0005ce1edb2, create one committed integration candidate that carries forward the exact meaningful GP-CONFIG-010 firmware repair while preserving GP-X1-002 and every later accepted canonical change, then build, preserve, independently review, and physically test that exact combined artifact.",
       "why_this_matters": "The original GP-CONFIG-010 candidate and artifact passed physical testing, but current canonical contains later critical firmware/build-input changes, including accepted GP-X1-002 table bytes. The actual final combined firmware bytes therefore need their own exact-snapshot evidence; separate historical PASS results cannot be inferred to compose.",
@@ -632,15 +634,17 @@ Git, but it is not current candidate supply or implementation authority.
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "hardware_evidence_dependency_satisfied": false,
+      "candidate_git_sha": "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+      "candidate_base_configurator_sha": "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/1c0ff22646729d26d45eacb4b8322c5baea7de48/4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476/firmware.uf2",
+      "firmware_artifact_sha256": "4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476",
       "hardware_evidence_record": null,
       "hardware_result": null,
-      "hardware_evidence_gaps": []
+      "hardware_evidence_gaps": [
+        "Exact integration candidate/artifact combined physical PASS and exact owner Config restoration are required before integration or DONE."
+      ]
     },
     {
       "id": "GP-VAL-024",
@@ -5647,11 +5651,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-010"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-010; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5662,7 +5666,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260923-1435 is independently adjudicated. Strategy B is selected and the machine-readable queue grants GP-CONFIG-010 executable authority for one exact current-canonical integration candidate plus new exact-artifact combined physical test. Strategy A is rejected because separately accepted critical changes do not establish final-byte behavior and would require weakening or redesigning correspondence. No distinct repository-native Strategy C closes the physical evidence gap. The original GP-CONFIG-010 candidate/artifact/PASS remain distinct historical evidence; GP-X1-002 remains DONE and its current generated table remains CRITICAL. GP-VAL-015/027 retain exact critical-path and unknown-path fail-closed behavior. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260923-1435 is independently adjudicated and consumed. Strategy B produced exact integration candidate `1c0ff22646729d26d45eacb4b8322c5baea7de48` from base `22c639c31ea7006c18a29ec2693c8b18ff688ed4` with preserved 791552-byte UF2 `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`; GP-CONFIG-010 is now `HARDWARE_TEST_REQUIRED`. Strategy A remains rejected because separately accepted critical changes do not establish final-byte behavior and would require weakening or redesigning correspondence. No distinct repository-native Strategy C closes the physical evidence gap. The original GP-CONFIG-010 candidate/artifact/PASS remain distinct historical evidence; GP-X1-002 remains DONE and its current generated table remains CRITICAL. GP-VAL-015/027 retain exact critical-path and unknown-path fail-closed behavior. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
@@ -5698,7 +5702,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The current independent review authorizes Strategy B only: one fresh integration candidate from exact canonical `47f9b122a7eb60073c114e6568b4d0005ce1edb2`, exact original GP-CONFIG-010 source semantics, unchanged current GP-X1-002/current-canonical behavior, committed-before-build identity, current sanitizer and correspondence proof, content-addressed custody, fresh independent safety review, and the bounded combined physical protocol. It does not authorize automatic composition, critical-path reclassification, GP-VAL-015/027 weakening, source redesign, or pre-PASS integration. GLYPH-UD-017 continues to park GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 without erasing their historical authorization. No probe, implementation, build or merge of those parked items is executable. Every H3 exact-artifact physical gate remains mandatory.
+The completed independent review passed the exact Strategy B candidate, tree, parent, original GP-CONFIG-010 source semantics, unchanged current GP-X1-002/current-canonical behavior, committed-before-build identity, sanitizer and correspondence proof, content-addressed custody, and bounded combined physical protocol. It does not confer physical acceptance or authorize automatic composition, critical-path reclassification, GP-VAL-015/027 weakening, source redesign, or pre-PASS integration. GLYPH-UD-017 continues to park GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 without erasing their historical authorization. No probe, implementation, build or merge of those parked items is executable. Every H3 exact-artifact physical gate remains mandatory.
 
 ## Work Orders
 

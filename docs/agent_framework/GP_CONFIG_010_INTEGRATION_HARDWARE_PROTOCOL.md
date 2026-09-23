@@ -2,6 +2,38 @@
 
 Protocol version: `GP_CONFIG_010_INTEGRATION_HW_V1`
 
+Status: `HARDWARE_TEST_REQUIRED`.
+
+Exact hardware handoff identity:
+
+- Candidate branch: `glyph/gp-config-010-current-canonical-integration`
+- Candidate Git SHA: `1c0ff22646729d26d45eacb4b8322c5baea7de48`
+- Candidate tree: `cf5ba50e707d5c0a6b1728619718f28b2dceff93`
+- Sole parent / authorized canonical base:
+  `22c639c31ea7006c18a29ec2693c8b18ff688ed4`
+- Build output: `.pio/build/glyph_mk6/firmware.uf2`
+- UF2 SHA-256:
+  `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`
+- UF2 size: `791552` bytes
+- Preserved locator:
+  `local_backups/hardware-artifacts/1c0ff22646729d26d45eacb4b8322c5baea7de48/4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476/firmware.uf2`
+- Build: SUCCESS; RAM `78880 / 262144` bytes; flash
+  `383520 / 1568768` bytes.
+- Semantic comparison: eight `EXACT_SOURCE_MATCH`, zero behaviorally
+  relevant `DIFFERENT`; production source blob `7d659d3133271c2ed956a16d8f5e3eda73040f81`.
+- GP-X1-002 preservation: complete 28-table generated baseline blob
+  `40a0b4703b3cbc5800acca5f2fdc3229bd82844a`, exact to accepted candidate
+  `f657715b26d26587a931074ce7dd12c698785290`.
+- Fresh independent postimplementation review: PASS with no findings for the
+  exact candidate, build output, custody bytes, correspondence, and protocol.
+
+The focused validation, sanitizer, source-sync, current governance, build,
+custody, and correspondence gates passed. The full aggregate was attempted
+and stopped in preflight on the known ignored nested
+`.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/` repository-path issue; no
+aggregate-green claim is made. The preserved bytes above must not be rebuilt
+or substituted after handoff.
+
 This protocol tests the exact fresh integration artifact that combines the
 original GP-CONFIG-010 capacity repair with current canonical, including the
 accepted GP-X1-002 table. It does not transfer acceptance from either
