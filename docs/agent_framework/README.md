@@ -65,6 +65,8 @@ Use separated generation, judgment, execution, and evidence roles:
   preservation, readback, retention, rebuild, and loss contract.
 - `GP_CONFIG_005_INTEGRATION_RESULT_20260919.md` - consolidated exact integration,
   correspondence model, validation and completion report.
+- `GP_CONFIG_010_INTEGRATION_HARDWARE_RESULT_20260923.md` - exact combined
+  candidate/artifact physical PASS summary and source-free publication boundary.
 - `GP_CONFIG_005_HARDWARE_OPERATOR.md` - bounded project-owner CLI runbook for
   the exact GP-CONFIG-005 physical protocol; it is not hardware evidence.
 - `GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md` - bounded exact-artifact

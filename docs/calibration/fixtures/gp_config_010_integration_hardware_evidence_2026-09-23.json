@@ -1,0 +1,215 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-010",
+  "candidate_branch": "glyph/gp-config-010-current-canonical-integration",
+  "candidate_git_sha": "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+  "candidate_base_configurator_sha": "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/1c0ff22646729d26d45eacb4b8322c5baea7de48/4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Device-reported model glyph_mk6; the project owner uses the standard supplier-purchased Glyph, with specific board revision not separately reported",
+  "firmware_profile_state": "The exact integration candidate ran the protocol-required temporary persisted 13-profile GameCube-only Ultimate-clone Config for the GP-CONFIG-010 capacity regression. The exact owner 4201-byte Config was then restored before the complete nine-row GP-X1-002 regression, with Ultimate automatically selected. Device information reported firmware 1c0ff22.",
+  "update_method": "Manual owner-controlled update from the exact preserved UF2; Config backup, temporary write, readback, and exact restore used the existing source-supported custom Configurator GET_CONFIG and SET_CONFIG paths without flashing automation",
+  "host_platform_adapter": "macOS host using USB CDC Configurator port /dev/cu.usbmodem1101, followed by the owner's normal Nintendo Switch connection; exact Mac, Switch, cable, and adapter revisions were not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_010_INTEGRATION_HW_V1",
+  "preconditions": [
+    "Fresh live GitHub verification resolved origin/configurator to a3f3df0403ea32b9ee7014cf2706563079e8a208 and the candidate branch to 1c0ff22646729d26d45eacb4b8322c5baea7de48.",
+    "The candidate tree was cf5ba50e707d5c0a6b1728619718f28b2dceff93 and its sole parent was the recorded authorized base 22c639c31ea7006c18a29ec2693c8b18ff688ed4.",
+    "Immediately before the owner's manual update, custody verification accepted a regular non-symlink 791552-byte UF2 at the recorded candidate-SHA/artifact-SHA locator with SHA-256 4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476; no rebuilt or mutable .pio output was substituted.",
+    "The exact candidate was committed before its successful build. Recorded build use was RAM 78880 of 262144 bytes and flash 383520 of 1568768 bytes. Fresh independent postimplementation review found no candidate, build, custody, correspondence, or protocol blocker.",
+    "The machine-readable original-to-integration comparison classified all eight meaningful GP-CONFIG-010 firmware semantics EXACT_SOURCE_MATCH with zero behaviorally relevant DIFFERENT results, and the complete 28-table generated baseline remained blob 40a0b4703b3cbc5800acca5f2fdc3229bd82844a, exact to accepted GP-X1-002 candidate f657715b26d26587a931074ce7dd12c698785290.",
+    "Before firmware or persisted-Config mutation, device information reported HayBox, glyph_mk6, firmware f657715. The complete owner Config was captured as 4201 bytes with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 and deterministically re-encoded byte-for-byte.",
+    "After the owner manually flashed the exact integration UF2, device information reported firmware 1c0ff22 and GET_CONFIG still exactly matched the freshly captured owner payload before any temporary write.",
+    "The temporary plan contained exactly thirteen MODE_ULTIMATE profiles named Ult01 through Ult13 in order, GameCube-only applicability, the established unique singleton activation bindings, clone equality outside the allowed fields, deterministic round-trip equality, and no unrelated top-level drift.",
+    "The intended temporary payload was 6691 bytes with SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589. SET_CONFIG completed successfully with exact immediate GET_CONFIG equality; one Configurator-mode reboot again produced exact byte equality before normal-controller observations."
+  ],
+  "steps": [
+    {
+      "id": "UPDATE",
+      "instruction": "Manually update the controller using the exact preserved integration UF2, reconnect in Configurator mode, and verify device and persisted-Config identity.",
+      "expected": "The exact integration firmware boots, reports candidate short identity 1c0ff22, and leaves the owner Config unchanged before the temporary protocol write.",
+      "observed": "PASS — the project owner reported the manual update completed; host evidence reported firmware 1c0ff22 and the unchanged 4201-byte owner Config with exact expected SHA-256."
+    },
+    {
+      "id": "TEMPORARY-CONFIG-WRITE-AND-REBOOT",
+      "instruction": "Write the exact planned 13-profile temporary payload, require immediate exact readback, reboot once in Configurator mode, and require exact readback again.",
+      "expected": "The temporary Config is exactly 6691 bytes with SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589 immediately and after reboot.",
+      "observed": "PASS — the write returned success with exact immediate readback; post-reboot capture exactly matched the required size and SHA-256 with an unambiguous device state."
+    },
+    {
+      "id": "FIRST-NORMAL-STARTUP",
+      "instruction": "Connect normally once without retrying and observe logo passage plus dashboard stability.",
+      "expected": "The Glyph logo passes and the controller reaches a stable normal dashboard on the first attempt.",
+      "observed": "PASS — the project owner directly reported that the logo passed and the normal dashboard was stable."
+    },
+    {
+      "id": "THIRTEEN-PROFILE-VISIBILITY",
+      "instruction": "Open the controller Profile menu and report the complete profile list in order.",
+      "expected": "Exactly Ult01 through Ult13 are visible in order with no missing or extra entry.",
+      "observed": "PASS — the project owner directly reported Ult01 through Ult13 in order."
+    },
+    {
+      "id": "MODE-0-ULT01-LF6",
+      "instruction": "Press and release LF6, the far-right isolated button near center.",
+      "expected": "Config index 0 selects and displays Ult01.",
+      "observed": "PASS — the project owner reported the expected profile was shown."
+    },
+    {
+      "id": "MODE-9-ULT10-RF15",
+      "instruction": "Press and release RF15, the upper-right button in the center cluster.",
+      "expected": "Config index 9 selects and displays Ult10.",
+      "observed": "PASS — the project owner reported the expected profile was shown."
+    },
+    {
+      "id": "MODE-10-ULT11-RF16",
+      "instruction": "Press and release RF16, the lower-center button.",
+      "expected": "Config index 10 selects and displays Ult11.",
+      "observed": "PASS — the project owner reported the expected profile was shown."
+    },
+    {
+      "id": "MODE-11-ULT12-LT3",
+      "instruction": "Press and release LT3, the right button in the left-thumb diamond.",
+      "expected": "Config index 11 selects and displays Ult12.",
+      "observed": "PASS — the project owner reported the expected profile was shown."
+    },
+    {
+      "id": "MODE-12-ULT13-LT4",
+      "instruction": "Press and release LT4, the upper button in the left-thumb diamond.",
+      "expected": "Config index 12 selects and displays Ult13.",
+      "observed": "PASS — the project owner reported the expected profile was shown."
+    },
+    {
+      "id": "CAPACITY-RECONNECT",
+      "instruction": "Disconnect and reconnect normally once without retrying; observe logo passage, stability, menu visibility, and startup profile.",
+      "expected": "The logo passes, connection and miniscreen become stable, and Ult01 through Ult13 remain visible in order.",
+      "observed": "PASS — the logo passed, the controller was stable, Ult03 appeared at startup consistently with the preserved default index, and the owner reconfirmed all thirteen profiles remained visible in order."
+    },
+    {
+      "id": "POST-RECONNECT-MODE-12-ULT13-LT4",
+      "instruction": "After reconnect, press and release LT4 once.",
+      "expected": "LT4 again selects and displays Ult13 at config index 12.",
+      "observed": "PASS — the project owner reported Ult13 was shown."
+    },
+    {
+      "id": "TEMPORARY-CONFIG-CONTROLLER-SANITY",
+      "instruction": "Exercise one horizontal direction, one vertical direction, and one representative face button, releasing each input.",
+      "expected": "Each input appears normally, returns cleanly to neutral, and causes no disconnect.",
+      "observed": "PASS — the project owner directly confirmed normal horizontal, vertical, and face-button response, clean release, and no disconnect."
+    },
+    {
+      "id": "PRE-RESTORE-TEMPORARY-CAPTURE",
+      "instruction": "Reconnect in Configurator mode and capture the complete temporary persisted Config before restoration.",
+      "expected": "The temporary state remains the exact intended 6691-byte payload with SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589.",
+      "observed": "PASS — the pre-restore capture exactly matched the required size and SHA-256."
+    },
+    {
+      "id": "EXACT-OWNER-CONFIG-RESTORE",
+      "instruction": "Restore the exact owner Config, require immediate exact readback, reboot once in Configurator mode, and require exact readback again.",
+      "expected": "Immediate and post-reboot readbacks are exactly 4201 bytes with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480.",
+      "observed": "PASS — the restore transaction succeeded with exact immediate readback, and the post-reboot capture again had the exact owner-original size and SHA-256."
+    },
+    {
+      "id": "RESTORED-CONFIG-NORMAL-STARTUP",
+      "instruction": "Connect normally once after exact restoration and observe logo passage, connection/miniscreen stability, and automatic profile selection.",
+      "expected": "The logo passes, the connection and miniscreen are stable, and Ultimate automatically selects.",
+      "observed": "PASS — the project owner directly confirmed every expected observation."
+    },
+    {
+      "id": "X1-1-DOWN-LEFT",
+      "instruction": "Hold LT5 with down-left, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (93,51), miniscreen (-35,-77), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed this row and all nine displayed X1 rows matched the complete expected table, with neutral return after each."
+    },
+    {
+      "id": "X1-2-DOWN",
+      "instruction": "Hold LT5 with down, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (128,51), miniscreen (0,-77), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table, with neutral return after each."
+    },
+    {
+      "id": "X1-3-DOWN-RIGHT",
+      "instruction": "Hold LT5 with down-right, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (163,51), miniscreen (+35,-77), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table, with neutral return after each."
+    },
+    {
+      "id": "X1-4-LEFT",
+      "instruction": "Hold LT5 with left, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (93,128), miniscreen (-35,0), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table, with neutral return after each."
+    },
+    {
+      "id": "X1-5-NEUTRAL",
+      "instruction": "Hold LT5 without a direction and observe raw/miniscreen coordinates, then release.",
+      "expected": "Raw (128,128), miniscreen (0,0), with no stuck input.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table and no input remained stuck."
+    },
+    {
+      "id": "X1-6-RIGHT",
+      "instruction": "Hold LT5 with right, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (163,128), miniscreen (+35,0), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table, with neutral return after each."
+    },
+    {
+      "id": "X1-7-UP-LEFT",
+      "instruction": "Hold LT5 with up-left, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (93,205), miniscreen (-35,+77), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table, with neutral return after each."
+    },
+    {
+      "id": "X1-8-UP",
+      "instruction": "Hold LT5 with up, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (128,205), miniscreen (0,+77), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table, with neutral return after each."
+    },
+    {
+      "id": "X1-9-UP-RIGHT",
+      "instruction": "Hold LT5 with up-right, observe raw/miniscreen coordinates, then release to neutral.",
+      "expected": "Raw (163,205), miniscreen (+35,+77), then clean neutral return.",
+      "observed": "PASS — the project owner explicitly confirmed all nine rows matched the exact raw and miniscreen table, with neutral return after each and no stuck input or disconnect."
+    },
+    {
+      "id": "RESTORED-CONFIG-ORDINARY-SANITY",
+      "instruction": "Without LT5, exercise ordinary directions and one ordinary face button, observing miniscreen behavior, release, and connection stability.",
+      "expected": "Ordinary controls and miniscreen response are normal, release is clean, and no disconnect occurs.",
+      "observed": "PASS — the project owner reported all directions of most modifiers seemed right and directly confirmed the ordinary face button registered and released normally. The extra modifier observations are retained only as observed-normal regression coverage, not game-semantic evidence."
+    },
+    {
+      "id": "FINAL-NORMAL-RECONNECT",
+      "instruction": "Disconnect and reconnect normally once without retrying; observe logo passage, connection/miniscreen stability, automatic Ultimate selection, neutral state, and stuck input.",
+      "expected": "The logo passes, connection and miniscreen are stable, Ultimate auto-selects, and the controller rests at neutral with no stuck input.",
+      "observed": "PASS — the project owner directly confirmed every expected observation."
+    }
+  ],
+  "negative_regression_checks": [
+    "All five required activation rows passed, including indices 10, 11, and 12 beyond the former ten-entry boundary, with exact all-profile visibility before and after reconnect.",
+    "The required first normal startup, capacity-phase reconnect, restored-owner-Config startup, and final normal reconnect all passed the Glyph logo without retry; the historical isolated frozen-logo event did not recur.",
+    "The exact owner Config was restored immediately and after Configurator-mode reboot before X1 testing.",
+    "All nine accepted GP-X1-002 raw/miniscreen rows passed with neutral return after each and no stuck input or disconnect.",
+    "Representative ordinary directions, face-button response, miniscreen behavior, release, and connection stability passed.",
+    "Nunchuk was NOT_TESTED. No gameplay-angle/radius, generalized persistence, runtime-loaded configuration, device-write implementation, or root-cause claim is made."
+  ],
+  "power_cycle_reconnect_checks": [
+    "One Configurator-mode reboot preserved the intended temporary 6691-byte payload at SHA-256 02a456e4868d659e6c54bff7f2b5d26d069755496089c4ab2cd266b084e5e589.",
+    "The first required normal startup passed the Glyph logo and reached a stable normal dashboard without retry.",
+    "After the activation checks, one ordinary reconnect passed the logo, remained stable, retained all thirteen profile names in order, and LT4 again selected Ult13.",
+    "One Configurator-mode reboot after restoration preserved the exact original 4201-byte owner payload at SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480.",
+    "With the owner Config restored, the initial normal startup and final ordinary reconnect both passed the logo, remained stable, auto-selected Ultimate, and showed no stuck input."
+  ],
+  "result": "PASS",
+  "anomalies": [
+    "The reused host Config backup/write/restore helper emitted its historical GP_CONFIG_010_HW_RECOVERY_V1 transaction label and retained historical candidate expectations in the initial capture metadata. No device mutation occurred under the first rejected helper invocation. The successful write/restore records and all post-flash snapshots directly reported firmware 1c0ff22 and exact payload hashes; the physical acceptance protocol was GP_CONFIG_010_INTEGRATION_HW_V1.",
+    "Ult03 appeared after the temporary-Config reconnect. This matches the preserved default profile index and was not a protocol failure; all thirteen entries remained visible and LT4 selected Ult13 afterward.",
+    "The owner additionally reported that all directions of most modifiers seemed right. This is recorded only as observed-normal regression coverage and is not interpreted as gameplay angle, radius, or semantic authority."
+  ],
+  "rollback_recovery": "The exact owner-original 4201-byte Config payload with SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored successfully with exact immediate and post-reboot GET_CONFIG equality. The exact integration firmware remained installed for the combined X1 and final reconnect checks; no rebuild, substitute artifact, or firmware rollback was used. Final state was stable, Ultimate auto-selected, neutral, and had no stuck input.",
+  "tester": "Project owner / user (direct owner-reported physical observations), with host-side Config capture and independent evidence processing by Codex",
+  "tested_at": "2026-09-23T19:33:42Z",
+  "evidence_gaps": []
+}

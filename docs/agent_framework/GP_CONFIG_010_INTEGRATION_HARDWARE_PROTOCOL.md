@@ -2,7 +2,7 @@
 
 Protocol version: `GP_CONFIG_010_INTEGRATION_HW_V1`
 
-Status: `HARDWARE_TEST_REQUIRED`.
+Status: `HARDWARE_VALIDATED / PASS`.
 
 Exact hardware handoff identity:
 
@@ -148,3 +148,18 @@ the exact integration candidate/artifact. `PASS` requires every required step,
 exact owner Config restoration, both GP-CONFIG-010 and GP-X1-002 regression
 results, and an empty evidence-gap list. The original GP-CONFIG-010 candidate,
 artifact, and PASS record remain distinct historical evidence.
+
+## Published result
+
+The project owner completed this protocol against the exact candidate and UF2
+identified above. All required GP-CONFIG-010 activation/reconnect observations,
+all nine GP-X1-002 rows, exact owner Config restoration, representative normal
+controller checks, and final reconnect passed with no evidence gaps. The
+Revision-2 record is
+`repo-json:docs/calibration/fixtures/gp_config_010_integration_hardware_evidence_2026-09-23.json`.
+
+This hardware publication does not integrate the candidate or mark the work
+order `DONE`. The original historical GP-CONFIG-010 candidate/artifact/PASS
+remain distinct and unchanged. Nunchuk remains `NOT_TESTED`; the prior
+frozen-logo event remains historical and unexplained, and no gameplay or root
+cause is inferred.
