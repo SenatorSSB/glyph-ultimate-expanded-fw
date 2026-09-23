@@ -47,11 +47,11 @@ observation:
 
 | Profile | Index | Activation button | Physical location | Expected screen profile |
 | --- | ---: | --- | --- | --- |
-| Ult01 | 0 | LF6 | left-finger auxiliary in the LF6/LF8 axis group | Ult01 |
-| Ult10 | 9 | RF15 | right-side upper/action bank | Ult10 |
-| Ult11 | 10 | RF16 | far-right/right-side auxiliary | Ult11 |
-| Ult12 | 11 | LT3 | lower-left thumb MX position | Ult12 |
-| Ult13 | 12 | LT4 | lower-left thumb MY position | Ult13 |
+| Ult01 | 0 | LF6 | far-right isolated button near center | Ult01 |
+| Ult10 | 9 | RF15 | upper-right button in the center cluster | Ult10 |
+| Ult11 | 10 | RF16 | lower-center button | Ult11 |
+| Ult12 | 11 | LT3 | right button in the left-thumb diamond | Ult12 |
+| Ult13 | 12 | LT4 | upper button in the left-thumb diamond | Ult13 |
 
 If physical-label placement differs from the established owner controller,
 use the exact previously recorded activation binding rather than guessing and
