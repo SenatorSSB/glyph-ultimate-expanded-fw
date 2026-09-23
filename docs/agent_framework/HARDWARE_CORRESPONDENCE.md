@@ -41,6 +41,15 @@ These host programs run explicitly in validation or operator workflows, not as
 PlatformIO inputs. Their classification does not authorize device operations,
 evidence rewriting, or governance changes. Those retain their separate gates.
 
+GP-CONFIG-010 final integration adds exactly three later source-free evidence
+paths to that finite inventory:
+`docs/agent_framework/GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md`,
+`docs/agent_framework/GP_CONFIG_010_INTEGRATION_HARDWARE_RESULT_20260923.md`,
+and
+`docs/calibration/fixtures/gp_config_010_integration_hardware_evidence_2026-09-23.json`.
+This narrow completion-control consequence does not add a pattern exemption:
+critical precedence and rejection of every unknown path remain unchanged.
+
 Nonbehavioral files must be ordinary Git `100644` blobs. Symlinks, gitlinks,
 executables and malformed/ambiguous paths fail. Git path output uses NUL records
 and disables rename folding so both sides of a move are inspected. Staged,

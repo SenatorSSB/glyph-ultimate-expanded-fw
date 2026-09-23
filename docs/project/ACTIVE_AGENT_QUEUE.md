@@ -570,7 +570,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-010",
       "title": "Produce and physically accept the exact current-canonical mode-capacity integration",
-      "status": "HARDWARE_VALIDATED",
+      "status": "DONE",
       "branch": "glyph/gp-config-010-current-canonical-integration",
       "objective": "From exact canonical 47f9b122a7eb60073c114e6568b4d0005ce1edb2, create one committed integration candidate that carries forward the exact meaningful GP-CONFIG-010 firmware repair while preserving GP-X1-002 and every later accepted canonical change, then build, preserve, independently review, and physically test that exact combined artifact.",
       "why_this_matters": "The original GP-CONFIG-010 candidate and artifact passed physical testing, but current canonical contains later critical firmware/build-input changes, including accepted GP-X1-002 table bytes. The actual final combined firmware bytes therefore need their own exact-snapshot evidence; separate historical PASS results cannot be inferred to compose.",
@@ -623,7 +623,52 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Do not merge, rebuild after handoff, or substitute bytes without exact integration-artifact PASS. Before temporary Config mutation, capture a fresh complete owner payload; expected identity if unchanged is 4201 bytes and SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480. Require raw-byte preservation, deterministic decode/re-encode, intended-only temporary mutation, and exact immediate plus post-reboot restoration after PASS, FAIL, PARTIAL, or INCONCLUSIVE. Any backup or restoration mismatch stops and takes recovery priority. After restored-owner-Config X1 checks, leave the controller in the owner-directed accepted state; manual firmware update/rollback remains owner-controlled and must use only recorded custody bytes.",
       "status_documentation_updates": "During candidate publication, record the new integration SHA/tree/parent, build metrics, exact artifact hash/size/custody, comparison result, review provenance, and HARDWARE_TEST_REQUIRED state without erasing the historical original candidate/artifact/PASS. After a fresh Hardware Evidence Processor records complete exact PASS with empty gaps and exact owner-Config restoration, a fresh Implementation Supervisor may integrate only the tested commit, verify current canonical ancestry, run strict DONE correspondence, and publish GP-CONFIG-010 DONE while retaining both evidence lineages. Preserve Nunchuk NOT_TESTED, prior frozen-logo anomaly, root cause unproven, and runtime-loaded/device-write/game-semantic nonclaims.",
-      "done_evidence": "Requires the exact integration candidate source/tree/parent; machine-readable semantic correspondence with no behaviorally relevant DIFFERENT result; current-state/X1 preservation proof; sanitizer and focused validation; canonical build RAM/flash and exact content-addressed UF2 identity; fresh independent firmware-safety review; complete GP_CONFIG_010_INTEGRATION_HW_V1 physical PASS for that exact candidate/artifact with owner Config restored and empty gaps; fresh Hardware Evidence Processor publication; tested-commit-only integration; live canonical ancestry; and strict structured DONE correspondence. Original candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3 and artifact 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a remain distinct historical accepted evidence.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+        "reviewed_implementation_sha": "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+        "prior_canonical_integration_sha": "7ca129e218b292c0aa64b38577848dd8b63a4c66",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_config_010_integration_semantic_correspondence.json",
+          "docs/runtime_config/fixtures/gp_config_010_mode_activation_capacity.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/fixtures/setconfig_runtime_rebinding_characterization.json",
+          "docs/runtime_config/gp_config_010_mode_activation_capacity.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "src/core/mode_selection.cpp",
+          "tools/check_glyph_config_010_integration_semantic_correspondence.py",
+          "tools/check_glyph_config_010_mode_activation_capacity.py",
+          "tools/check_glyph_docs_agent_surface.py",
+          "tools/check_glyph_profile_adapter_prewrite.py",
+          "tools/check_glyph_profile_config_semantics.py",
+          "tools/fixtures/mode_selection_host/include/config.pb.h",
+          "tools/fixtures/mode_selection_host/include/core/CommunicationBackend.hpp",
+          "tools/fixtures/mode_selection_host/include/core/ControllerMode.hpp",
+          "tools/fixtures/mode_selection_host/include/core/KeyboardMode.hpp",
+          "tools/fixtures/mode_selection_host/include/core/mode_selection.hpp",
+          "tools/fixtures/mode_selection_host/include/core/state.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/64.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/CustomControllerMode.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/CustomKeyboardMode.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/FgcMode.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/Melee20Button.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/ProjectM.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/Rivals2.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/RivalsOfAether.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/SenscopePrototype.hpp",
+          "tools/fixtures/mode_selection_host/include/modes/Ultimate.hpp",
+          "tools/fixtures/mode_selection_host/include/prototypes/senscope/SenscopePrototypeBuildFlags.hpp",
+          "tools/fixtures/mode_selection_host/include/util/state_util.hpp",
+          "tools/fixtures/mode_selection_host/mode_selection_harness.cpp",
+          "tools/glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent postimplementation firmware-safety reviewer approved exact candidate 1c0ff22646729d26d45eacb4b8322c5baea7de48, tree cf5ba50e707d5c0a6b1728619718f28b2dceff93 and parent 22c639c31ea7006c18a29ec2693c8b18ff688ed4 with no findings after exact semantic, current-state/X1 preservation, source/build scope, sanitizer, focused validation, build, custody and protocol review. Fresh Hardware Evidence Processor then accepted the exact 791552-byte UF2 4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476 with complete GP_CONFIG_010_INTEGRATION_HW_V1 PASS and empty gaps.",
+        "validation_provenance": "Exact tested candidate entered canonical through merge 50a6357eddf0d9c83d31233666c451806fb1f424 with parents 60614dae8150338160b3440aef6b275bf073fecf and 1c0ff22646729d26d45eacb4b8322c5baea7de48. Narrow completion-control commit 7ca129e218b292c0aa64b38577848dd8b63a4c66 added only the three exact source-free protocol/result/evidence paths to the finite NON_BEHAVIORAL inventory; 37 real-Git adversarial tests retained critical precedence and unknown-path fail-closed behavior. Integrated GP-VAL-015/027 correspondence PASS with zero critical target drift; candidate-only semantic comparison reported eight EXACT_SOURCE_MATCH and zero behaviorally relevant DIFFERENT results; counts 0, 10, 11, 13, 30, above-capacity rejection and indices 0..12 passed ASan/UBSan harness coverage. Source sync, source-authority intake, census207, health46, framework, sequence, navigation, agent-surface after canonical publication, Python syntax, diff and clean-state gates passed. Custody rehash matched 791552 bytes and SHA-256 4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476. Candidate build evidence remains RAM 78880/262144 and flash 383520/1568768; no rebuild was performed. The full aggregate remains without a green claim because of the known nested .pio issue; GP-VAL-011 remains deferred."
+      },
       "stop_conditions": [
         "Any invalidation condition is present or any GP-CONFIG-010 semantic cannot be carried forward exactly.",
         "Any current GP-X1-002 row or other current canonical firmware/build behavior differs unexpectedly or the implementation would restore the prior offset-41 test grid.",
@@ -5663,7 +5708,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260923-1435 is independently adjudicated and consumed. Strategy B produced exact integration candidate `1c0ff22646729d26d45eacb4b8322c5baea7de48` from base `22c639c31ea7006c18a29ec2693c8b18ff688ed4` with preserved 791552-byte UF2 `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`; the project owner completed `GP_CONFIG_010_INTEGRATION_HW_V1`, and GP-CONFIG-010 is now `HARDWARE_VALIDATED / PASS` with empty evidence gaps and exact owner Config restoration. Strategy A remains rejected because separately accepted critical changes do not establish final-byte behavior and would require weakening or redesigning correspondence. No distinct repository-native Strategy C closes the physical evidence gap. The original GP-CONFIG-010 candidate/artifact/PASS remain distinct historical evidence; GP-X1-002 remains DONE and its current generated table remains CRITICAL. GP-VAL-015/027 retain exact critical-path and unknown-path fail-closed behavior. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260923-1435 is independently adjudicated and consumed. Strategy B produced exact integration candidate `1c0ff22646729d26d45eacb4b8322c5baea7de48` from base `22c639c31ea7006c18a29ec2693c8b18ff688ed4` with preserved 791552-byte UF2 `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`; the project owner completed `GP_CONFIG_010_INTEGRATION_HW_V1`, and GP-CONFIG-010 is `DONE` through exact tested-candidate merge `50a6357eddf0d9c83d31233666c451806fb1f424`, narrow three-path completion-control commit `7ca129e218b292c0aa64b38577848dd8b63a4c66`, and strict structured completion correspondence. Strategy A remains rejected because separately accepted critical changes do not establish final-byte behavior and would require weakening or redesigning correspondence. No distinct repository-native Strategy C closes the physical evidence gap. The original GP-CONFIG-010 candidate/artifact/PASS remain distinct historical evidence; GP-X1-002 remains DONE and its current generated table remains CRITICAL. GP-VAL-015/027 retain exact critical-path and unknown-path fail-closed behavior. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
