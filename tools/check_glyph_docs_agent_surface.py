@@ -43,6 +43,10 @@ GP005_BRANCH = "glyph/gp-config-005-transactional-setconfig"
 GP005_BASE = "9550a1bf1309383e351f4f9e66663562fc9f13ac"
 GP005_ARTIFACT = "650b90961e170e6d88221ffe610545f43d880c9334c4d28ab613ad380418af44"
 GP005_HAL_PATH = "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+GP_CONFIG_010_BRANCH = "glyph/gp-config-010-current-canonical-integration"
+GP_CONFIG_010_BASE = "22c639c31ea7006c18a29ec2693c8b18ff688ed4"
+GP_CONFIG_010_SOURCE_PATH = "src/core/mode_selection.cpp"
+GP_CONFIG_010_SOURCE_BLOB = "7d659d3133271c2ed956a16d8f5e3eda73040f81"
 
 CHECKER_REL = "tools/check_glyph_docs_agent_surface.py"
 ALLOWED_EXACT_CHANGED_PATHS = {
@@ -203,6 +207,46 @@ def exact_gp005_integration(context: CheckerContext) -> bool:
         return False
 
     return True
+
+
+def exact_gp_config_010_integration_candidate(context: CheckerContext) -> bool:
+    """Authorize only the Curator-bound exact current-canonical source carry-forward."""
+
+    root = context.repo_root
+    if context.branch != GP_CONFIG_010_BRANCH or GP_CONFIG_010_SOURCE_PATH not in context.changed_paths:
+        return False
+    if any(
+        path != GP_CONFIG_010_SOURCE_PATH
+        and not (path.startswith("docs/") or path.startswith("tools/"))
+        for path in context.changed_paths
+    ):
+        return False
+    if GP_CONFIG_010_SOURCE_PATH in (context.staged_paths | context.unstaged_paths):
+        return False
+    if context.base_commit != GP_CONFIG_010_BASE:
+        return False
+    if git_output(root, "rev-parse", "origin/configurator") != GP_CONFIG_010_BASE:
+        return False
+    if git_output(root, "rev-list", "--parents", "-n", "1", context.head).split() != [context.head, GP_CONFIG_010_BASE]:
+        return False
+    if git_output(root, "rev-parse", f"{context.head}:{GP_CONFIG_010_SOURCE_PATH}") != GP_CONFIG_010_SOURCE_BLOB:
+        return False
+
+    queue_text = git_output(root, "show", f"{GP_CONFIG_010_BASE}:{QUEUE_PATH}")
+    match = re.search(r"<!-- queue-state:start -->\s*```json\s*(.*?)\s*```", queue_text, re.S)
+    if not match:
+        return False
+    try:
+        items = json.loads(match.group(1))["items"]
+        item, = [entry for entry in items if entry.get("id") == "GP-CONFIG-010"]
+    except (ValueError, KeyError, TypeError):
+        return False
+    return (
+        item.get("status") == "READY"
+        and item.get("branch") == GP_CONFIG_010_BRANCH
+        and item.get("candidate_git_sha") is None
+        and item.get("firmware_artifact_sha256") is None
+    )
 
 
 def rel(path: Path) -> str:
@@ -499,10 +543,14 @@ def exact_gp026_schema_attributes(root: Path) -> bool:
 
 def validate_surface_scope(context: CheckerContext) -> None:
     authorized_hal = exact_gp005_integration(context) if GP005_HAL_PATH in context.changed_paths else False
+    authorized_gp_config_010 = (
+        exact_gp_config_010_integration_candidate(context)
+        if GP_CONFIG_010_SOURCE_PATH in context.changed_paths else False
+    )
     schema_attributes = (".gitattributes",) if exact_gp026_schema_attributes(context.repo_root) else ()
     validate_feature_scope(
         context,
-        allowed_paths=(*schema_attributes, "docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ())),
+        allowed_paths=(*schema_attributes, "docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ()), *((GP_CONFIG_010_SOURCE_PATH,) if authorized_gp_config_010 else ())),
         protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/" and (not authorized_hal or prefix.casefold() != "hal/")),
     )
 

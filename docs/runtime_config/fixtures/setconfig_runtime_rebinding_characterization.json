@@ -4,7 +4,7 @@
   "work_order": "GP-CONFIG-008",
   "production_sources": [
     {"path":"HAL/pico/src/comms/ConfiguratorBackend.cpp","sha256":"28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876","anchors":["bool ConfiguratorBackend::HandleSetConfig()","persistence.SaveConfig(candidate)","_config = candidate"]},
-    {"path":"src/core/mode_selection.cpp","sha256":"57ae73a3eea4250bab5027bd6fdb1b1fa3ea9d2689cd6309026e7bbbc39d9875","anchors":["uint64_t mode_activation_masks[10]","i != current_mode_index","void setup_mode_activation_bindings"]},
+    {"path":"src/core/mode_selection.cpp","sha256":"8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44","anchors":["uint64_t mode_activation_masks[kModeActivationMaskCapacity]","i != current_mode_index","void setup_mode_activation_bindings"]},
     {"path":"src/core/InputMode.cpp","sha256":"080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7","anchors":["void InputMode::SetConfig(GameModeConfig &config)","_config = &config"]},
     {"path":"src/modes/CustomControllerMode.cpp","sha256":"a85d36b53fc17b3a7da46d835761558a97052432ac10226b94985263fa8468a6","anchors":["void CustomControllerMode::SetConfig(","_custom_mode_config = &custom_mode_config","_modifier_button_masks","_button_combo_mappings_masks"]},
     {"path":"HAL/pico/src/comms/backend_init.cpp","sha256":"8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea","anchors":["size_t initialize_backends(","init_primary_backend(","set_mode(backends[i], mode_config, config)"]},
