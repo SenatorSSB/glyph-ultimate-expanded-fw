@@ -17,7 +17,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MODE_ACTIVATION_MASK_CAPACITY = 10
+MODE_ACTIVATION_MASK_CAPACITY = 30
 
 
 @dataclass

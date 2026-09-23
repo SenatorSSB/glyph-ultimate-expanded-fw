@@ -1,0 +1,30 @@
+{
+  "schema_name": "glyph_gp_config_010_integration_semantic_correspondence",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-010",
+  "historical_candidate": "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+  "historical_base": "28426e4ba4763a99f0ca13491c023af77665c79c",
+  "authorized_integration_base": "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+  "candidate_branch": "glyph/gp-config-010-current-canonical-integration",
+  "containing_commit_parent": "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+  "source_path": "src/core/mode_selection.cpp",
+  "base_source_blob": "5366045d080c381510e8daa25081d51086b25a2c",
+  "historical_candidate_source_blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+  "integration_candidate_source_blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+  "exact_source_diff_sha256": "57d8feaef3b8cfd2dc77f11ced1d10bdad194efbb6d5ead6bda0449f9f4c6a02",
+  "accepted_x1_candidate": "f657715b26d26587a931074ce7dd12c698785290",
+  "generated_baseline_path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+  "accepted_x1_generated_baseline_blob": "40a0b4703b3cbc5800acca5f2fdc3229bd82844a",
+  "integration_generated_baseline_blob": "40a0b4703b3cbc5800acca5f2fdc3229bd82844a",
+  "semantics": [
+    {"id": "type_traits_extent_support", "classification": "EXACT_SOURCE_MATCH", "source": "#include <type_traits>"},
+    {"id": "named_capacity_30", "classification": "EXACT_SOURCE_MATCH", "source": "constexpr size_t kModeActivationMaskCapacity = 30;"},
+    {"id": "generated_extent_equality", "classification": "EXACT_SOURCE_MATCH", "source": "kModeActivationMaskCapacity == std::extent_v<decltype(Config::game_mode_configs)>"},
+    {"id": "default_13_fit", "classification": "EXACT_SOURCE_MATCH", "source": "static_assert(kModeActivationMaskCapacity >= 13, \"default mode set must fit activation cache\");"},
+    {"id": "capacity_sized_storage", "classification": "EXACT_SOURCE_MATCH", "source": "uint64_t mode_activation_masks[kModeActivationMaskCapacity];"},
+    {"id": "selection_oversize_guard", "classification": "EXACT_SOURCE_MATCH", "source": "if (config.game_mode_configs_count > kModeActivationMaskCapacity)"},
+    {"id": "setup_oversize_guard", "classification": "EXACT_SOURCE_MATCH", "source": "if (mode_configs_count > kModeActivationMaskCapacity)"},
+    {"id": "valid_ordering_bindings_applicability_selection_unchanged", "classification": "EXACT_SOURCE_MATCH", "source": "for (size_t i = 0; i < config.game_mode_configs_count; i++)"}
+  ],
+  "behaviorally_relevant_differences": []
+}

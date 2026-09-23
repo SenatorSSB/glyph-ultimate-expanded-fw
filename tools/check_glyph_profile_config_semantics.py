@@ -25,7 +25,7 @@ DEFAULT_FIXTURES = [
 ]
 
 # Source reference: src/core/mode_selection.cpp currently stores activation masks in a fixed array.
-MODE_ACTIVATION_MASK_CAPACITY = 10
+MODE_ACTIVATION_MASK_CAPACITY = 30
 
 
 @dataclass

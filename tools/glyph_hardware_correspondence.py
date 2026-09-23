@@ -24,6 +24,13 @@ class CorrespondenceError(ValueError):
     """An input is unknown, unsafe, or differs from the tested source snapshot."""
 
 
+# Executable validation code changed by the candidate is held to critical-path
+# correspondence even though it is not a firmware compiler input.
+CORRESPONDENCE_CRITICAL_PATHS = frozenset({
+    'tools/check_glyph_profile_adapter_prewrite.py',
+})
+
+
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
     'docs/AGENT_CONTEXT.md',
@@ -49,16 +56,23 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'docs/runtime_config/fixtures/configurator_setconfig_transaction.json',
     'docs/runtime_config/fixtures/current_config_persistence_recovery_research.json',
     'docs/runtime_config/fixtures/glyph_checker_census.json',
+    'docs/runtime_config/fixtures/gp_config_010_integration_semantic_correspondence.json',
+    'docs/runtime_config/fixtures/gp_config_010_mode_activation_capacity.json',
     'docs/runtime_config/fixtures/runtime_config_validation_health.json',
     'docs/runtime_config/fixtures/runtime_config_validation_manifest.json',
+    'docs/runtime_config/fixtures/setconfig_runtime_rebinding_characterization.json',
+    'docs/runtime_config/gp_config_010_mode_activation_capacity.md',
     'docs/runtime_config/intakes/x1_normal_restoration_overlay_hardware_candidate.intake.json',
     'docs/runtime_config/runtime_config_validation_health.md',
     'docs/runtime_config/source_authority_intake_workflow.md',
     'tools/check_glyph_agent_framework_docs.py',
     'tools/check_glyph_configurator_setconfig_transaction.py',
+    'tools/check_glyph_config_010_integration_semantic_correspondence.py',
+    'tools/check_glyph_config_010_mode_activation_capacity.py',
     'tools/check_glyph_current_config_persistence_recovery_research.py',
     'tools/check_glyph_docs_agent_surface.py',
     'tools/check_glyph_docs_navigation.py',
+    'tools/check_glyph_profile_config_semantics.py',
     'tools/check_glyph_gp_x1_002_candidate.py',
     'tools/check_glyph_runtime_config_source_sync.py',
     'tools/check_glyph_runtime_config_validation_health.py',
@@ -76,6 +90,25 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'tools/fixtures/configurator_setconfig_host/include/pb_decode.h',
     'tools/fixtures/configurator_setconfig_host/include/pb_encode.h',
     'tools/fixtures/configurator_setconfig_host/include/reboot.hpp',
+    'tools/fixtures/mode_selection_host/include/config.pb.h',
+    'tools/fixtures/mode_selection_host/include/core/CommunicationBackend.hpp',
+    'tools/fixtures/mode_selection_host/include/core/ControllerMode.hpp',
+    'tools/fixtures/mode_selection_host/include/core/KeyboardMode.hpp',
+    'tools/fixtures/mode_selection_host/include/core/mode_selection.hpp',
+    'tools/fixtures/mode_selection_host/include/core/state.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/64.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/CustomControllerMode.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/CustomKeyboardMode.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/FgcMode.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/Melee20Button.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/ProjectM.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/Rivals2.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/RivalsOfAether.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/SenscopePrototype.hpp',
+    'tools/fixtures/mode_selection_host/include/modes/Ultimate.hpp',
+    'tools/fixtures/mode_selection_host/include/prototypes/senscope/SenscopePrototypeBuildFlags.hpp',
+    'tools/fixtures/mode_selection_host/include/util/state_util.hpp',
+    'tools/fixtures/mode_selection_host/mode_selection_harness.cpp',
     'tools/glyph_hardware_correspondence.py',
     'tools/glyph_serial_config_tool.py',
     'tools/gp_config_005_hw_test.py',
@@ -94,7 +127,8 @@ def classify_path(path: str) -> str:
             or any(part in {"", ".", ".."} for part in path.split("/"))):
         raise CorrespondenceError(f"unsafe correspondence path: {path!r}")
     folded = path.casefold()
-    if (folded.split("/", 1)[0] in CRITICAL_ROOTS
+    if (path in CORRESPONDENCE_CRITICAL_PATHS
+            or folded.split("/", 1)[0] in CRITICAL_ROOTS
             or folded in CRITICAL_FILES
             or folded.startswith(".github/workflows/")
             or "/.github/workflows/" in folded):
