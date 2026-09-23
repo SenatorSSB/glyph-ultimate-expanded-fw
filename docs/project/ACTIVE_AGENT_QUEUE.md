@@ -19,52 +19,51 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "b0f8133b10abe11865dc6887f29a2c90f4aaad8a",
+  "audit_base_sha": "47f9b122a7eb60073c114e6568b4d0005ce1edb2",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Planner packet glyph-portfolio-20260922-1327 is fully adjudicated. GP-CONFIG-010 received bounded source-free reconnect-completion reauthorization for its unchanged candidate/artifact; no packet survivor or pending Curator decision remains.",
+    "resolution": "Planner packet glyph-portfolio-20260923-1435 is fully adjudicated. GP-CONFIG-010 is READY for one fresh exact current-canonical integration candidate and exact-artifact combined physical test under Strategy B.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:83fef0c529db28b1505a224f5b3432dab5865d6a:docs/planning/portfolio_20260922_1327.md",
+      "opening_reference": "git-json:3c445363ba15a403597efb7c288e3489db8a5fe0:docs/planning/portfolio_20260923_1435.md",
       "subject_ids": [
         "GP-CONFIG-010"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:a7d7999786e74704234ab24add315c653df70698:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:f78577e59ad279c0d1b832c4eb0f043de2df51f9:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260922-1327",
-    "base_configurator_sha": "4b2d16e555a5f01ea06955785891ba1506c23162",
-    "packet_id": "glyph-portfolio-20260922-1327",
-    "packet_path": "docs/planning/portfolio_20260922_1327.md",
-    "planning_commit": "83fef0c529db28b1505a224f5b3432dab5865d6a",
-    "curation_commit": "a7d7999786e74704234ab24add315c653df70698",
+    "branch": "planning/portfolio-20260923-1435",
+    "base_configurator_sha": "47f9b122a7eb60073c114e6568b4d0005ce1edb2",
+    "packet_id": "glyph-portfolio-20260923-1435",
+    "packet_path": "docs/planning/portfolio_20260923_1435.md",
+    "planning_commit": "3c445363ba15a403597efb7c288e3489db8a5fe0",
+    "curation_commit": "f78577e59ad279c0d1b832c4eb0f043de2df51f9",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator accepted GP-CONFIG-010 REPAIR_REAUTHORIZATION for one owner-directed reconnect-completion retest on the unchanged exact candidate/artifact.",
-      "The prior GP-CONFIG-010 13/13 activation PASS observations remain admissible immutable historical evidence. This authorization targets only first-attempt startup, exact all-profile visibility, LT4-to-Ult13 post-reconnect selection, representative sanity, three additional reconnect cycles, and mandatory exact restoration."
+      "Independent Curator selected Strategy B and authorized GP-CONFIG-010 READY as one fresh exact current-canonical integration candidate with exact-artifact combined physical acceptance."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260922-1327",
-      "planning_commit": "83fef0c529db28b1505a224f5b3432dab5865d6a",
-      "packet_id": "glyph-portfolio-20260922-1327",
-      "packet_base_configurator_sha": "4b2d16e555a5f01ea06955785891ba1506c23162",
-      "curation_branch": "curation/portfolio-20260922-1327-review",
+      "planning_branch": "planning/portfolio-20260923-1435",
+      "planning_commit": "3c445363ba15a403597efb7c288e3489db8a5fe0",
+      "packet_id": "glyph-portfolio-20260923-1435",
+      "packet_base_configurator_sha": "47f9b122a7eb60073c114e6568b4d0005ce1edb2",
+      "curation_branch": "curation/portfolio-20260923-1435-review",
       "initial_reviewed_dispositions": [
         {
           "candidate_id": "GP-CONFIG-010",
-          "disposition": "REPAIR_REAUTHORIZATION"
+          "disposition": "READY"
         }
       ],
-      "review_date": "2026-09-22",
-      "curation_commit": "a7d7999786e74704234ab24add315c653df70698"
+      "review_date": "2026-09-23",
+      "curation_commit": "f78577e59ad279c0d1b832c4eb0f043de2df51f9"
     }
   },
   "completion_correspondence": {
@@ -89,18 +88,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -570,65 +568,78 @@ Git, but it is not current candidate supply or implementation authority.
     },
     {
       "id": "GP-CONFIG-010",
-      "title": "Repair mode-activation capacity correspondence",
-      "status": "HARDWARE_VALIDATED",
-      "branch": "glyph/gp-config-010-mode-activation-capacity",
-      "objective": "Eliminate the active 13-entry configuration flowing through a 10-slot mode-activation cache while preserving every current default mode, order, binding, and selection behavior.",
-      "why_this_matters": "The exact production setup and selection loops index mode_activation_masks through game_mode_configs_count; the current default count is 13 and the cache has 10 slots, creating source-proven out-of-bounds writes and reads.",
+      "title": "Produce and physically accept the exact current-canonical mode-capacity integration",
+      "status": "READY",
+      "branch": "glyph/gp-config-010-current-canonical-integration",
+      "objective": "From exact canonical 47f9b122a7eb60073c114e6568b4d0005ce1edb2, create one committed integration candidate that carries forward the exact meaningful GP-CONFIG-010 firmware repair while preserving GP-X1-002 and every later accepted canonical change, then build, preserve, independently review, and physically test that exact combined artifact.",
+      "why_this_matters": "The original GP-CONFIG-010 candidate and artifact passed physical testing, but current canonical contains later critical firmware/build-input changes, including accepted GP-X1-002 table bytes. The actual final combined firmware bytes therefore need their own exact-snapshot evidence; separate historical PASS results cannot be inferred to compose.",
       "hardware_risk": "H3",
-      "behavioral_claim": "A named fixed activation-mask capacity of 30 is compile-time proven equal to the exact current generated Config.game_mode_configs extent without sizing storage from a Config object; all current 13 entries remain represented in order, and setup/selection refuse counts above capacity before indexing. The persisted Config/protobuf layout and every current valid binding remain unchanged.",
-      "scope": "Change mode-selection cache capacity and bounds enforcement, add an exact-production host sanitizer harness and compile-time correspondence checks, add a candidate-local manual protocol, update directly affected source-bound docs/checkers, run the canonical build, and publish only an exact candidate/artifact pair for hardware testing.",
-      "explicit_excluded_scope": "No Config/protobuf/schema or persistence-layout change; no new, removed, or reordered mode; no binding, gameplay, routing, runtime-loaded configuration, storage, device-write, Nunchuk, or root-cause change; no merge before exact-snapshot physical PASS.",
+      "behavioral_claim": "The exact original GP-CONFIG-010 repair is carried forward without semantic redesign: activation-mask capacity is 30; it is compile-time equal to the generated Config.game_mode_configs extent; the current 13 entries fit; setup and selection return before indexing when a count exceeds capacity; and all valid mode ordering, bindings, applicability, and selection behavior remain unchanged. The combined candidate simultaneously retains the accepted GP-X1-002 kX1Table rows and all other current canonical behavior.",
+      "scope": "Apply only the original meaningful src/core/mode_selection.cpp repair to exact current canonical; restore its current-compatible exact-production sanitizer and source-correspondence proof; add the machine-readable original-candidate-to-integration-candidate semantic comparison at docs/runtime_config/fixtures/gp_config_010_integration_semantic_correspondence.json; update directly coupled candidate docs/checkers/fixtures/manifest/census/health and candidate-local combined hardware protocol; run current focused and governance validation; commit before build; build and content-address the exact UF2; obtain fresh independent firmware-safety review; publish source-free pending metadata; and stop before integration until exact-artifact physical PASS is processed.",
+      "explicit_excluded_scope": "No GP-VAL-015/027 weakening, compositional hardware-evidence exception, critical-path reclassification, or claim that separately tested changes automatically compose; no Config/protobuf/schema/persistence-layout change; mode/profile addition, removal, reordering, rebinding, or applicability change; X1 or other runtime-table edit; LT5/non-Mode or Mode/MX1 routing, precedence, active RuntimeConfigView publication, persistence, USB/backend behavior, .gitattributes, workflow, build-control, host-fix, protocol-infrastructure, or historical-evidence rewrite; no runtime-loaded config, WebSerial/device/protobuf/backend write addition, flashing automation, gameplay angle/radius inference, Senscope decision, Nunchuk claim, root-cause claim, GP-VAL-011 reopening, opportunistic refactor, rebuild substitution, or merge before exact integration-artifact PASS.",
       "touched_planes": [
+        "source-owned configuration",
+        "generated tables/artifacts",
         "firmware runtime",
         "build tooling",
         "docs/checkers"
       ],
-      "source_authority": "At live configurator 37b6d7e5573703f9854674e424b526cf7f5dd1a8, config/glyph/common/include/glyph_overrides.hpp sets game_mode_configs_count to 13, src/core/mode_selection.cpp declares mode_activation_masks[10], and both setup_mode_activation_bindings and select_mode index that cache to the supplied/configured count. The build-resolved generated Config has game_mode_configs[30]. Existing source and defaults own the valid behavior; no new mode semantics are selected.",
+      "source_authority": "Fresh live verification fixes the implementation base at configurator 47f9b122a7eb60073c114e6568b4d0005ce1edb2. Original tested candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3 is the direct child of 28426e4ba4763a99f0ca13491c023af77665c79c with tree e18a7496125bf485a179d9b8e08f1f47f5090b80; its sole production firmware change is src/core/mode_selection.cpp blob 7d659d3133271c2ed956a16d8f5e3eda73040f81. The original base and current canonical share exact pre-repair mode_selection.cpp blob 5366045d080c381510e8daa25081d51086b25a2c, so the repair applies without source-context ambiguity. Current GeneratedRuntimeConfigBaseline.current.hpp contains accepted ordered kX1Table raw rows (93,51), (128,51), (163,51), (93,128), (128,128), (163,128), (93,205), (128,205), (163,205). Historical exact PASS remains git-json:830f519e95a72c85abea8593c11f1097e5248d49:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-23_reconnect_completion.json for original 791040-byte UF2 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a; accepted GP-X1-002 authority remains candidate f657715b26d26587a931074ce7dd12c698785290 and 792064-byte UF2 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451. Both lineages remain historical and do not transfer acceptance to new bytes.",
       "dependencies_prerequisites": [
-        "Preserve all 13 current default entries, order, activation bindings, backend applicability, and selection behavior.",
-        "Use a named fixed 30-entry mask capacity with a compile-time equality proof against the generated member extent; do not restore the reverted Config-member sizeof expression or allocate a Config-sized object.",
-        "Review the exact RAM/map delta and keep GP-VAL-011 plus all forbidden runtime/device-write paths unchanged."
+        "Implementation starts from a freshly live-verified descendant of configurator 47f9b122a7eb60073c114e6568b4d0005ce1edb2 containing only this reviewed curation adoption as intervening control-plane state. Immediately before candidate creation, record the exact then-live authorized canonical SHA; any other advance, or any relevant firmware/build-input advance, returns to Curator rather than being silently rebased.",
+        "Apply the original src/core/mode_selection.cpp patch exactly: include <type_traits>; define kModeActivationMaskCapacity = 30; statically equate it to std::extent_v<decltype(Config::game_mode_configs)>; statically require capacity at least 13; size mode_activation_masks from that constant; and return before indexing in selection and setup when count exceeds capacity. Do not rename, reorder, refactor, generalize, or recreate different semantics.",
+        "Preserve exact current canonical outside directly required host-proof and metadata consequences, including all accepted GP-X1-002 rows, every other source-owned table byte including kMX1Table, routing, precedence, active publication, profiles/defaults, persistence, USB/backend behavior, .gitattributes, workflows, provenance controls, host/checker fixes, and governance infrastructure.",
+        "Produce docs/runtime_config/fixtures/gp_config_010_integration_semantic_correspondence.json as a regular 100644 machine-readable comparison that binds the original candidate/base/source blob, integration candidate/base/source blob, exact relevant hunks, and one classification per original firmware semantic from EXACT_SOURCE_MATCH, SEMANTICALLY_IDENTICAL_WITH_CONTEXT_CHANGE, or DIFFERENT. Any behaviorally relevant DIFFERENT stops before build or hardware.",
+        "Use a fresh source-authority/firmware-safety specialist before implementation completion and a different fresh independent reviewer after the exact candidate is committed. Neither may implement, merge, flash, or infer physical acceptance.",
+        "Owner Config mutation is permitted only during the later owner-controlled physical protocol under the established exact backup/write/readback/restore envelope; agents do not automate flashing or device writes."
       ],
-      "substantive_authorization_rationale": "The memory-safety defect, valid configured behavior, generated capacity, and ABI-preserving repair architecture are source-proven. Refusing impossible above-capacity counts before indexing is a bounded safety invariant and requires no game-semantic or product choice. H3 governs candidate handling and merge, not whether the exact repair may be implemented.",
+      "substantive_authorization_rationale": "Independent Curator selects Strategy B. It provides direct evidence for the actual final source snapshot and UF2, preserves the existing exact critical-input correspondence model, and avoids the unsafe inference that two separately accepted artifacts compose. Strategy A is rejected because it would require a new critical-change independence model and still would not physically test final bytes. No distinct Strategy C exists: current direct-ancestry/exact-replay governance proves integration correspondence but cannot confer physical acceptance on an untested rebuild. The original repair is source-exactly portable because the live pre-repair production blob equals the original base blob; current X1 values and later accepted controls are directly observable and can be held exact. No unresolved product, game-semantic, architecture, or source-authority choice remains.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
-        "The current default count, generated Config member extent, or exact setup/selection bodies change materially before implementation.",
-        "The repair would require a protobuf/schema/persistence ABI change, a mode/binding semantic change, or a different active publication path.",
-        "Exact-production sanitizer coverage, canonical build, independent firmware-safety review, artifact custody, or hardware protocol cannot be completed."
+        "Live configurator advances from the authorized exact base with any relevant firmware, generated-table, dependency, workflow, provenance, or build-input change before candidate creation.",
+        "The pre-repair mode_selection.cpp blob, generated Config extent, 13-entry default, original candidate diff, or accepted nine-row X1 table differs from the pinned authority.",
+        "Any original firmware semantic classifies DIFFERENT, any unrelated active source/table byte changes, or preservation requires a semantic redesign or opportunistic refactor.",
+        "Any required source, sanitizer, comparison, correspondence, governance, build, custody, independent-review, owner-Config safety, or physical gate fails or becomes ambiguous.",
+        "Execution would weaken unknown/critical-path fail-closed behavior, infer automatic composition, reopen GP-VAL-011, cross a forbidden runtime/device boundary, or rewrite historical evidence."
       ],
-      "authorization_snapshot_provenance": "Curator independently reviewed live configurator 37b6d7e5573703f9854674e424b526cf7f5dd1a8 and Planner GP-CONFIG-010 at ebdb7f3d728320c4c6ee229f040cb98a29a8b524. Receipt b2ff798314c9e42f189f280fc1413d6601cef127 records READY after direct source verification of the 13-to-10 mismatch and the generated 30-entry Config extent. For the source-free reconnect completion only, a fresh independent Curator reviewed live configurator 4b2d16e555a5f01ea06955785891ba1506c23162, immutable Planner packet 83fef0c529db28b1505a224f5b3432dab5865d6a, prior evidence d69b1694c84f803c278b532dbd20a8725eb17a81, and exact artifact custody; receipt a7d7999786e74704234ab24add315c653df70698 records REPAIR_REAUTHORIZATION under GLYPH-UD-020.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator live-verified configurator 47f9b122a7eb60073c114e6568b4d0005ce1edb2, immutable Planner packet glyph-portfolio-20260923-1435 at 3c445363ba15a403597efb7c288e3489db8a5fe0, original candidate/base/source blobs and PASS evidence, accepted GP-X1-002 identities/current table, current GP-VAL-015/027 contract, build/custody contracts, and owner direction on 2026-09-23. Immutable receipt f78577e59ad279c0d1b832c4eb0f043de2df51f9 records READY and selects Strategy B.",
       "automated_validation": [
-        "Compile exact production mode-selection bodies with the named 30-entry capacity and prove equality to the current generated member extent plus fit of the 13-entry default.",
-        "Exercise counts 0, 10, 11, 13, 30, and above 30 plus selection indices 0 through 12 under ASan/UBSan or equivalent; prove no out-of-bounds access and no valid-entry ordering/binding drift.",
-        "Run focused mode/config checks, RAM/map review, pio run -e glyph_mk6, relevant manifest/census/health gates, framework/navigation/surface gates, exact diff review, a bounded source-authority/firmware-safety specialist, and fresh independent review.",
-        "Commit the exact candidate before build; preserve and hash the exact UF2; publish the candidate ref and hardware handoff without merging."
+        "Compile the current exact production mode-selection bodies with the named 30-entry capacity and prove compile-time equality to the build-resolved Config.game_mode_configs extent plus fit of the current 13-entry default.",
+        "Under ASan/UBSan or current equivalent, exercise counts 0, 10, 11, 13, 30, and greater than 30, plus selection indices 0 through 12; require above-capacity setup/selection rejection before indexing and no valid-entry ordering, binding, applicability, or selection drift.",
+        "Validate the machine-readable original-to-integration comparison against both Git snapshots and source blobs; require all behaviorally relevant classifications to be EXACT_SOURCE_MATCH or SEMANTICALLY_IDENTICAL_WITH_CONTEXT_CHANGE and fail on missing, duplicate, reordered, generalized, or DIFFERENT semantics.",
+        "Prove GeneratedRuntimeConfigBaseline.current.hpp retains exactly the accepted nine kX1Table rows and all other current table bytes, including kMX1Table; run current source-sync, generated-baseline, source-authority intake, and GP-X1-002 candidate/regression checks.",
+        "Run GP-VAL-015/027 correspondence without exemptions or reclassification, including critical-drift and unknown-path negative controls; the active generated baseline remains CRITICAL.",
+        "Run framework, agentic-sequence, navigation, agent-surface, manifest, checker census, validation health, provenance/build-input, focused Python/C++ tests, exact changed-path/clean-state checks, Python compilation, and git diff --check. Report the known nested .pio aggregate issue truthfully and do not claim full aggregate green if it remains.",
+        "Commit the exact integration candidate before pio run -e glyph_mk6 or the canonical approved fallback; record full candidate SHA, tree, parent, RAM, flash, exact UF2 path, SHA-256, and byte size. Preserve and readback-verify only those bytes at the approved content-addressed custody locator and do not rebuild after handoff.",
+        "Fresh independent postimplementation review must verify exact semantics, X1/current-canonical preservation, source/build scope, all validation evidence, committed-before-build identity, RAM/map result, artifact/custody identity, and protocol readiness before any hardware handoff."
       ],
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
       "manual_acceptance": "REQUIRED",
-      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_010_RECONNECT_COMPLETION_PROTOCOL.md",
-      "manual_acceptance_protocol_version": "GP_CONFIG_010_RECONNECT_COMPLETION_V1",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_CONFIG_010_INTEGRATION_HW_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
-      "rollback_recovery": "Do not merge or substitute rebuilt bytes without exact PASS. GP_CONFIG_010_RECONNECT_COMPLETION_V1 requires exact fresh owner-original protobuf backup and immediate plus post-reboot restoration before manually flashing only the physically accepted GP-X1-002 custody artifact; any restoration mismatch stops and takes priority. Restoration is mandatory after PASS, FAIL, or INCONCLUSIVE.",
-      "status_documentation_updates": "Record the source-proven capacity repair and unchanged exact candidate/artifact identity. Preserve the immutable d69b1694c84f803c278b532dbd20a8725eb17a81 INCONCLUSIVE record and its 13/13 activation PASS observations as historical provenance while one bounded reconnect-completion run awaits observations; preserve Nunchuk NOT_TESTED, root cause unproven, and all generalized runtime-loaded/device-write non-claims.",
-      "done_evidence": "Exact source diff, sanitizer proof, canonical build, independent review, preserved UF2 identity, candidate-local protocol, exact-snapshot hardware PASS, and strict completion correspondence before DONE.",
+      "rollback_recovery": "Do not merge, rebuild after handoff, or substitute bytes without exact integration-artifact PASS. Before temporary Config mutation, capture a fresh complete owner payload; expected identity if unchanged is 4201 bytes and SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480. Require raw-byte preservation, deterministic decode/re-encode, intended-only temporary mutation, and exact immediate plus post-reboot restoration after PASS, FAIL, PARTIAL, or INCONCLUSIVE. Any backup or restoration mismatch stops and takes recovery priority. After restored-owner-Config X1 checks, leave the controller in the owner-directed accepted state; manual firmware update/rollback remains owner-controlled and must use only recorded custody bytes.",
+      "status_documentation_updates": "During candidate publication, record the new integration SHA/tree/parent, build metrics, exact artifact hash/size/custody, comparison result, review provenance, and HARDWARE_TEST_REQUIRED state without erasing the historical original candidate/artifact/PASS. After a fresh Hardware Evidence Processor records complete exact PASS with empty gaps and exact owner-Config restoration, a fresh Implementation Supervisor may integrate only the tested commit, verify current canonical ancestry, run strict DONE correspondence, and publish GP-CONFIG-010 DONE while retaining both evidence lineages. Preserve Nunchuk NOT_TESTED, prior frozen-logo anomaly, root cause unproven, and runtime-loaded/device-write/game-semantic nonclaims.",
+      "done_evidence": "Requires the exact integration candidate source/tree/parent; machine-readable semantic correspondence with no behaviorally relevant DIFFERENT result; current-state/X1 preservation proof; sanitizer and focused validation; canonical build RAM/flash and exact content-addressed UF2 identity; fresh independent firmware-safety review; complete GP_CONFIG_010_INTEGRATION_HW_V1 physical PASS for that exact candidate/artifact with owner Config restored and empty gaps; fresh Hardware Evidence Processor publication; tested-commit-only integration; live canonical ancestry; and strict structured DONE correspondence. Original candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3 and artifact 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a remain distinct historical accepted evidence.",
       "stop_conditions": [
-        "Any valid current mode, order, binding, or selection behavior would change.",
-        "Any schema/persistence ABI, gameplay semantic, runtime-loaded config, device-write, or forbidden active-publication scope appears.",
-        "Any build, review, custody, protocol, or exact-snapshot hardware requirement fails."
+        "Any invalidation condition is present or any GP-CONFIG-010 semantic cannot be carried forward exactly.",
+        "Any current GP-X1-002 row or other current canonical firmware/build behavior differs unexpectedly or the implementation would restore the prior offset-41 test grid.",
+        "Any behaviorally relevant comparison result is DIFFERENT, any unrelated active source changes, or correspondence requires weakening critical/unknown fail-closed behavior.",
+        "Any required sanitizer, current checker, independent review, build, custody, owner-Config safety, physical observation, reconnect/startup, or evidence-processing gate fails or is incomplete.",
+        "Hardware failure, owner Config restoration failure, GP-VAL-011 reopening, forbidden-boundary expansion, or relevant live-canonical drift requires an immediate stop and fresh Curator judgment."
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": true,
-      "candidate_git_sha": "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
-      "candidate_base_configurator_sha": "28426e4ba4763a99f0ca13491c023af77665c79c",
-      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
-      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/f4771e17430fd1ea3f1e3e5339a83dfe648290a3/9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a/firmware.uf2",
-      "firmware_artifact_sha256": "9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a",
-      "hardware_evidence_record": "git-json:830f519e95a72c85abea8593c11f1097e5248d49:docs/calibration/fixtures/gp_config_010_hardware_evidence_2026-09-23_reconnect_completion.json",
-      "hardware_result": "PASS",
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
       "hardware_evidence_gaps": []
     },
     {
@@ -5636,11 +5647,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-010"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-010; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5651,7 +5662,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet glyph-portfolio-20260922-1327 is independently adjudicated. GP-X1-002 is DONE through reviewed exact-candidate integration 3b4a7c950e1b14e24a88c951c19313f6134f4ea3 and strict completion correspondence; exact candidate f657715b26d26587a931074ce7dd12c698785290 and original tested artifact 00dc75b65a080830131c3c260558d4daeff45bb528e43d196b8ad94fcd06f451 remain authoritative, while the integration rebuild is not physically accepted. GP-VAL-027 remains DONE; the active generated table remains CRITICAL and unknown paths remain fail-closed. GP-CONFIG-010 is HARDWARE_VALIDATED / PASS for exact candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3 and original tested artifact 9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a. Immutable prior 13/13 activation evidence and the authorized reconnect-completion evidence jointly close the exact protocol with no remaining gap; the prior frozen-logo event remains preserved as an unexplained historical anomaly. A fresh Implementation Supervisor owns correspondence-safe integration. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
+Packet glyph-portfolio-20260923-1435 is independently adjudicated. Strategy B is selected and the machine-readable queue grants GP-CONFIG-010 executable authority for one exact current-canonical integration candidate plus new exact-artifact combined physical test. Strategy A is rejected because separately accepted critical changes do not establish final-byte behavior and would require weakening or redesigning correspondence. No distinct repository-native Strategy C closes the physical evidence gap. The original GP-CONFIG-010 candidate/artifact/PASS remain distinct historical evidence; GP-X1-002 remains DONE and its current generated table remains CRITICAL. GP-VAL-015/027 retain exact critical-path and unknown-path fail-closed behavior. GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 remain REVIEW / OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-017; GP-VAL-011 remains deferred and GP-HW-002 remains research gated.
 
 ## Allowed Statuses
 
@@ -5687,7 +5698,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The current independent review accepts only one bounded source-free GP-CONFIG-010 reconnect-completion protocol for the unchanged candidate/artifact. It preserves the prior 13/13 activation evidence, prohibits full-matrix repetition absent discrepancy, and binds any controlled frozen-logo recurrence to an expected FAIL disposition absent clearly proven unrelated cause. It does not create READY implementation runway or alter other candidate dispositions. GLYPH-UD-017 continues to park GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 without erasing their historical authorization. No probe, implementation, build or merge of those parked items is executable. Every H3 exact-artifact physical gate remains mandatory.
+The current independent review authorizes Strategy B only: one fresh integration candidate from exact canonical `47f9b122a7eb60073c114e6568b4d0005ce1edb2`, exact original GP-CONFIG-010 source semantics, unchanged current GP-X1-002/current-canonical behavior, committed-before-build identity, current sanitizer and correspondence proof, content-addressed custody, fresh independent safety review, and the bounded combined physical protocol. It does not authorize automatic composition, critical-path reclassification, GP-VAL-015/027 weakening, source redesign, or pre-PASS integration. GLYPH-UD-017 continues to park GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 without erasing their historical authorization. No probe, implementation, build or merge of those parked items is executable. Every H3 exact-artifact physical gate remains mandatory.
 
 ## Work Orders
 

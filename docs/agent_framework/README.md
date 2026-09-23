@@ -67,6 +67,8 @@ Use separated generation, judgment, execution, and evidence roles:
   correspondence model, validation and completion report.
 - `GP_CONFIG_005_HARDWARE_OPERATOR.md` - bounded project-owner CLI runbook for
   the exact GP-CONFIG-005 physical protocol; it is not hardware evidence.
+- `GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md` - bounded exact-artifact
+  combined regression for the current-canonical GP-CONFIG-010 integration.
 - `USER_DIRECTION.md` - actual human direction only.
 - `SCHEDULED_TASKS.md` - exact copy-paste scheduled/manual role configurations;
   it does not create schedules.
