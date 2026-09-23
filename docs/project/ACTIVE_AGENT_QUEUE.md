@@ -5719,18 +5719,18 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260922-1327",
-  "planning_commit": "83fef0c529db28b1505a224f5b3432dab5865d6a",
-  "packet_id": "glyph-portfolio-20260922-1327",
-  "packet_base_configurator_sha": "4b2d16e555a5f01ea06955785891ba1506c23162",
-  "curation_branch": "curation/portfolio-20260922-1327-review",
+  "planning_branch": "planning/portfolio-20260923-1435",
+  "planning_commit": "3c445363ba15a403597efb7c288e3489db8a5fe0",
+  "packet_id": "glyph-portfolio-20260923-1435",
+  "packet_base_configurator_sha": "47f9b122a7eb60073c114e6568b4d0005ce1edb2",
+  "curation_branch": "curation/portfolio-20260923-1435-review",
   "initial_reviewed_dispositions": [
     {
       "candidate_id": "GP-CONFIG-010",
-      "disposition": "REPAIR_REAUTHORIZATION"
+      "disposition": "READY"
     }
   ],
-  "review_date": "2026-09-22",
+  "review_date": "2026-09-23",
   "global_wait_proposed": false,
   "global_wait_accepted": false,
   "planner_broad_audit_provenance": null,
