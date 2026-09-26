@@ -226,7 +226,7 @@ it. Agents must not invent entries. Types are `Directive`, `Decision`,
 ### GLYPH-UD-017
 
 - Type: `Directive`
-- Status: `Active`
+- Status: `Superseded`
 - Source: owner campaign steering reported through the implementation supervisor
   on 2026-09-21; the owner said the warning did not show affected task names.
 - Direction: park work associated with the reported cybersecurity warning as
@@ -315,6 +315,13 @@ required post-reconnect visibility and LT4-to-Ult13 checks were not completed.
   authorizes no build, firmware patch, full-matrix repetition without
   discrepancy, product/runtime capability, GP-VAL-011 work, or merge before a
   fresh independent Hardware Evidence Processor publishes exact PASS.
+
+### GLYPH-UD-021
+
+- Type: `Directive`
+- Status: `Active`
+- Source: direct project-owner instruction in the Codex task "Resume config safety planning" (task `01a0dee7-fbe3-7202-b91c-fc0b49ebe74c`), supplied 2026-09-26
+- Direction: Resume GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 for normal Planner-to-Curator consideration. GLYPH-UD-017 no longer parks these three items by itself. This is planning/curation permission only; each item still needs fresh live-source Curator authorization before probes or implementation. No firmware candidate, build, device action, hardware result or merge is authorized by this direction. No invalid-button, USB-default or in-place custom-mode update policy is selected. GP-VAL-011 remains independently OWNER_DEFERRED / NONEXECUTABLE. The earlier warning source, cause and affected identities remain UNKNOWN.
 
 ## Publishing Rules
 
