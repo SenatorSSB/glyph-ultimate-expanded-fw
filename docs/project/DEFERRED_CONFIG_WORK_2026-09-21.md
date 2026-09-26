@@ -12,18 +12,19 @@ On 2026-09-26, GLYPH-UD-021 superseded the parking effect for GP-CONFIG-012/013/
 
 The owner reported a cybersecurity warning, asked to park flagged work and
 continue elsewhere, and reported that affected task names were not shown.
-The supervisor applies that parking to GP-CONFIG-012/013/014. The warning's
+The supervisor applied that parking to GP-CONFIG-012/013/014. The warning's
 source, cause and exact flagged identities remain UNKNOWN. No observed
 automatic approval rejection, security diagnosis, exploitability or physical
 symptom is claimed.
 
-The canonical queue records each item as REVIEW / OWNER_DEFERRED /
-NONEXECUTABLE, following the existing GP-VAL-011 status convention. REVIEW
-means parked scope here, not implementation acceptance or pending merge
+At the time, the canonical queue recorded each item as REVIEW /
+OWNER_DEFERRED / NONEXECUTABLE, following the GP-VAL-011 status convention.
+That REVIEW meant parked scope, not implementation acceptance or pending merge
 approval. Original source contracts, validation requirements and mechanical
-conditions are retained as history; satisfying those conditions does not
-resume a parked item. Explicit owner resumption must be followed by fresh
-Curator reauthorization against live source. Other campaign work may continue.
+conditions remain here as history. GLYPH-UD-021 later supplied owner resumption;
+the fresh Curator review authorized only GP-CONFIG-012/013 H1 characterization.
+GP-CONFIG-014 remains nonexecutable pending a behavior decision and a fresh H3
+work order. Current status is in the canonical queue.
 
 ## GP-CONFIG-012: partial host characterization retained
 
@@ -37,7 +38,7 @@ checker/harness files `tools/check_glyph_button_mask_characterization.py` and
 mirror transitions there are unintegrated history; they are not executable
 canonical authority. Do not delete or overwrite this partial work.
 
-Remaining TODOs, only after renewed authorization:
+Historical remaining TODOs at deferral; current GP-CONFIG-012 authority is the fresh canonical READY order:
 
 - Reconcile the retained partial source with live canonical and verify its
   exact decoder/schema/source correspondence, licenses and required dependency
@@ -54,8 +55,8 @@ Remaining TODOs, only after renewed authorization:
 
 ## GP-CONFIG-013: not started
 
-Retain the complete USB-default H1 contract without implementation. After
-renewed authorization, complete the exact getter no-write cases, decoder
+At deferral, the USB-default H1 contract was retained without implementation.
+The fresh canonical READY order now authorizes the exact getter no-write cases, decoder
 closure, destination-initialization/caller matrix, defaults/persistence/menu
 and SetConfig paths; run the original tests and independent review. Rejection,
 specific fallback and retained-backend alternatives remain unselected. No
@@ -63,13 +64,15 @@ physical symptom or firmware repair is asserted.
 
 ## GP-CONFIG-014: not implemented
 
-Retain the source-authorized schema-capacity repair design and original H3
-requirements without producing a firmware candidate. After renewed
-Curator authorization, implement only that contract, validate the exact
-production bodies, commit the exact candidate, build and preserve its exact
-UF2, publish its separate protocol and stop before merge until the exact
-physical PASS. No candidate, artifact or hardware result exists for this item
-in this deferral record. Do not couple it to GP-CONFIG-010.
+At deferral, the proposed schema-capacity repair design and original H3
+requirements were retained without producing a firmware candidate. Fresh
+Curator review found that successful SetConfig may replace the active custom
+Config in place without refreshing cached masks. The owner must decide the
+expected valid count-change, modifier, combo, digital and axis behavior before
+a fresh H3 work order can authorize implementation. The old proposal's exact
+candidate, build, custody and physical PASS gates remain required for any
+future behavior-changing repair. No candidate, artifact or hardware result for
+GP-CONFIG-014 exists in this record. Do not couple it to GP-CONFIG-010.
 
 ## Existing evidence remains intact
 
@@ -77,8 +80,9 @@ GP-VAL-026 remains DONE. GP-CONFIG-011 remains completed historical
 characterization. GP-VAL-011 remains independently owner-deferred and
 nonexecutable; this record does not reopen it.
 
-GP-CONFIG-010 remains HARDWARE_TEST_REQUIRED with exact candidate
-`f4771e17430fd1ea3f1e3e5339a83dfe648290a3` and preserved UF2 SHA-256
-`9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a`.
-Do not modify, rebuild, rebase, merge or replace it. This documentation action
-adds no hardware evidence and does not change its custody or test protocol.
+At the 2026-09-21 deferral, GP-CONFIG-010 was HARDWARE_TEST_REQUIRED for
+candidate `f4771e17430fd1ea3f1e3e5339a83dfe648290a3` and preserved UF2
+SHA-256 `9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a`.
+It later completed a distinct combined exact-artifact hardware cycle and is
+DONE in the current canonical queue. This historical record supplies no new
+hardware evidence or authority.
