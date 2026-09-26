@@ -1,12 +1,14 @@
 # Parked configuration work
 
-Status label: CURRENT.
+Status label: HISTORICAL.
 
-This is an owner-directed TODO and preservation record under
+This is a historical owner-directed TODO and preservation record under
 [GLYPH-UD-017](../agent_framework/USER_DIRECTION.md#glyph-ud-017), adjudicated
 against live `configurator` at
 `b0f8133b10abe11865dc6887f29a2c90f4aaad8a`. It authorizes no implementation,
 probe, firmware build, source-policy selection, device action or merge.
+
+On 2026-09-26, GLYPH-UD-021 superseded the parking effect for GP-CONFIG-012/013/014 and allowed fresh Planner/Curator consideration. The original deferral facts and partial-work custody below remain historical; current executable status is solely in the canonical queue. GP-VAL-011 remains parked.
 
 The owner reported a cybersecurity warning, asked to park flagged work and
 continue elsewhere, and reported that affected task names were not shown.
