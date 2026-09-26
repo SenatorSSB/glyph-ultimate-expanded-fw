@@ -38,24 +38,20 @@ Git, but it is not current candidate supply or implementation authority.
     }
   },
   "planner_packet": {
-    "state": "PARTIALLY_CONSUMED",
+    "state": "CONSUMED",
     "branch": "planning/portfolio-20260926-2109",
     "base_configurator_sha": "975b902c6b2facf27108cd5ac7153dd9efb7638a",
     "packet_id": "glyph-portfolio-20260926-2109",
     "packet_path": "docs/planning/portfolio_20260926_2109.md",
     "planning_commit": "872b0f68ed3a187bfcd1ca4dd0d123c5c073d8af",
     "curation_commit": "877ed3df709d325a979be48e6bd76f0173ace974",
-    "candidate_count": 1,
-    "survivors": [
-      {
-        "candidate_id": "GP-CONFIG-014",
-        "disposition": "USER_DECISION_GATED"
-      }
-    ],
+    "candidate_count": 0,
+    "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator authorized fresh GP-CONFIG-012 and GP-CONFIG-013 H1 characterization; GP-CONFIG-014 remains user-decision gated on live in-place Config replacement and modifier-cache coherence."
+      "Independent Curator authorized fresh GP-CONFIG-012 and GP-CONFIG-013 H1 characterization; GP-CONFIG-014 remains user-decision gated on live in-place Config replacement and modifier-cache coherence.",
+      "A clean isolated current-configurator PlatformIO Nanopb range resolution selected 0.4.92 rather than the 0.4.91 observed at authorization; GP-CONFIG-012 and GP-CONFIG-013 returned to REVIEW / EVIDENCE_GATED and GP-CONFIG-014 remains USER_DECISION_GATED. All current packet supply was adjudicated; fresh broad Planner supply review is required."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260926-2109",
@@ -103,17 +99,19 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
+    "RUNWAY_SHORTFALL_EVIDENCE_GATED",
     "RUNWAY_SHORTFALL_USER_DECISION_GATED"
   ],
   "global_evidence_wait": {
@@ -383,7 +381,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-012",
       "title": "Characterize invalid buttons through exact decoder and mask callers",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "glyph/gp-config-012-button-mask-characterization",
       "objective": "Finish exact schema/decoder/helper and complete production caller characterization for zero and invalid button values, producing a decision-ready source matrix without selecting firmware policy.",
       "why_this_matters": "Nanopb accepts BTN_UNSPECIFIED=0 and Pico make_button_mask shifts by button-1; the audit observed UBSan negative shift while physical reachability remains untested.",
@@ -422,8 +420,8 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_version": "NOT_APPLICABLE",
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
-      "rollback_recovery": "Keep failed implementation isolated; repair within the contract or return to Curator. Never weaken source correspondence or rewrite historical evidence.",
-      "status_documentation_updates": "Publish bounded H1 source/decoder/caller facts and explicit physical-unknown and policy-unselected non-claims; later READY-to-DONE completion requires reviewed implementation integration and separate strict correspondence publication. Keep GP-CONFIG-014 user-decision gated and GP-VAL-011 deferred.",
+      "rollback_recovery": "Keep failed implementation isolated; repair within the contract or return to Curator. Never weaken source correspondence or rewrite historical evidence. Curator 2026-09-26 returned this order to REVIEW / EVIDENCE_GATED: a fresh isolated current-configurator Nanopb range resolution selected 0.4.92, while this authorization recorded observed 0.4.91; no current exact generated decoder closure, license/hash correspondence, or reproducible package identity has been accepted. Do not execute the historical READY scope until fresh source-backed curation publishes a replacement order.",
+      "status_documentation_updates": "Nonexecutable REVIEW / EVIDENCE_GATED after 2026-09-26 Curator dependency check. Preserve the historical H1 scope and exact source observations. Fresh planning/curation must bind the current resolved Nanopb package and generated config.pb.c, licenses, hashes, manifest dependencies, and production-source correspondence before any host fixture or checker implementation. No firmware or policy repair is authorized.",
       "done_evidence": "Exact reviewed implementation, reproducible host evidence and required checks PASS; prior live canonical integration followed by separate strict completion correspondence.",
       "stop_conditions": [
         "Decoder provenance, exact source/caller correspondence, fixture completeness, sanitizer isolation, affected validation or independent review fails.",
@@ -431,7 +429,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Any live source/schema/selector drift requires renewed Curator judgment before execution."
       ],
       "activation_state": "NOT_APPLICABLE",
-      "activation_requires_new_judgment": false,
+      "activation_requires_new_judgment": true,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -445,7 +443,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-013",
       "title": "Characterize USB default no-write and downstream selection paths",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "glyph/gp-config-013-usb-default-characterization",
       "objective": "Finish exact getter/caller/decoder characterization for missing and invalid USB defaults, producing no-write and downstream-read evidence without selecting fallback policy.",
       "why_this_matters": "The default getter writes only for index>0 and <=backend count; its production caller declares usb_backend_config uninitialized and reads backend_id. SetConfig checks a different default index.",
@@ -484,8 +482,8 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_version": "NOT_APPLICABLE",
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
-      "rollback_recovery": "Keep failed implementation isolated; repair within the contract or return to Curator. Never weaken source correspondence or rewrite historical evidence.",
-      "status_documentation_updates": "Publish bounded H1 no-write/decode/caller facts with explicit source-level versus physical-effect distinction and no selected USB policy; later READY-to-DONE completion requires reviewed implementation integration and separate strict correspondence publication. Keep GP-CONFIG-014 user-decision gated and GP-VAL-011 deferred.",
+      "rollback_recovery": "Keep failed implementation isolated; repair within the contract or return to Curator. Never weaken source correspondence or rewrite historical evidence. Curator 2026-09-26 returned this order to REVIEW / EVIDENCE_GATED: a fresh isolated current-configurator Nanopb range resolution selected 0.4.92, while this authorization recorded observed 0.4.91; no current exact generated decoder closure, license/hash correspondence, or reproducible package identity has been accepted. Do not execute the historical READY scope until fresh source-backed curation publishes a replacement order.",
+      "status_documentation_updates": "Nonexecutable REVIEW / EVIDENCE_GATED after 2026-09-26 Curator dependency check. Preserve the historical H1 scope and exact source observations. Fresh planning/curation must bind the current resolved Nanopb package and generated config.pb.c, licenses, hashes, manifest dependencies, and production-source correspondence before any host fixture or checker implementation. No firmware or policy repair is authorized.",
       "done_evidence": "Exact reviewed implementation, reproducible host evidence and required checks PASS; prior live canonical integration followed by separate strict completion correspondence.",
       "stop_conditions": [
         "Decoder provenance, exact getter/caller correspondence, sentinel matrix, affected validation or independent review fails.",
@@ -493,7 +491,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Any live source/schema/selector drift requires renewed Curator judgment before execution."
       ],
       "activation_state": "NOT_APPLICABLE",
-      "activation_requires_new_judgment": false,
+      "activation_requires_new_judgment": true,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -5630,11 +5628,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-012","GP-CONFIG-013"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-012, GP-CONFIG-013; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5647,10 +5645,20 @@ machine-derived state above supersedes its historical runway wording.
 
 Packet `glyph-portfolio-20260926-2109` was independently reviewed against live
 `configurator` `975b902c6b2facf27108cd5ac7153dd9efb7638a` after the owner
-resumed planning/curation consideration under GLYPH-UD-021. GP-CONFIG-012 and
-GP-CONFIG-013 are READY only for source-bound H1 host characterization, with
-exact decoder provenance, independent review, and no firmware repair or
-policy selection. Their shared decoder fixtures require serialized edits.
+resumed planning/curation consideration under GLYPH-UD-021. The original
+GP-CONFIG-012 and GP-CONFIG-013 READY grants are historical. On 2026-09-26,
+a fresh isolated checkout of live `configurator` `73777c67795f1a4e577fcae5ee58352e565a86e8`
+resolved the declared `nanopb/Nanopb@^0.4.8` range to package `0.4.92`;
+`pb_decode.c` SHA-256 is `f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632`.
+Their authorization snapshot observed `0.4.91` and upstream tag `0.4.9.1`
+(`cad3c18ef15a663e30e3e43e3a752b66378adec1`), whose `pb_decode.c`
+SHA-256 is `6c2fc2f357bffdb774c1d329b533e981498d58405c0b1ef066f5a87fd46b5a17`.
+The same range previously produced both versions in separate build caches.
+Current generated `config.pb.c` and full license/hash/manifest correspondence
+remain unverified. Both orders are REVIEW / EVIDENCE_GATED and nonexecutable;
+no decoder fixture, firmware repair, or policy selection was authorized.
+Their shared decoder fixture work still requires serialized edits after a
+fresh source-backed order.
 GP-CONFIG-014 remains USER_DECISION_GATED and is not an executable work order.
 A successful SetConfig can replace the active custom-mode Config in place
 without rerunning the mode's SetConfig, leaving a prior modifier-mask cache.
@@ -5697,11 +5705,14 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-GP-CONFIG-012 and GP-CONFIG-013 each have a complete fresh H1 characterization
-order. Their source observations establish investigation scope, not a physical
-symptom or a selected firmware repair. GP-CONFIG-014 is retained as the sole
-non-executable `USER_DECISION_GATED` survivor of the current Planner packet.
-The cache mismatch is source-backed, but current code can change the active
+GP-CONFIG-012 and GP-CONFIG-013 are REVIEW / EVIDENCE_GATED after the fresh
+Nanopb resolution contradicted the decoder version observed in their READY
+authorization. Their historical source observations still establish an H1
+investigation scope, not a physical symptom or a selected firmware repair.
+Fresh Planner supply review must address the current exact decoder closure and
+independent alternatives. GP-CONFIG-014 remains `USER_DECISION_GATED`; the
+current Planner packet is consumed and has no pending Curator survivors.
+The modifier-cache mismatch is source-backed, but current code can change the active
 custom-mode configuration in place after a successful SetConfig while retaining
 cached masks. Refreshing masks, suppressing output, or forcing reactivation
 would each select externally visible behavior not resolved by the packet or
