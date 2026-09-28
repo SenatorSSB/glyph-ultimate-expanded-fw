@@ -103,12 +103,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -279,7 +279,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-031",
       "title": "Refresh current semantics bridge source correspondence",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-031-semantics-bridge-metadata",
       "objective": "Update only current semantics bridge fixture references to the exact current extractor SHA-256 after proving equivalence under the existing checker invariant.",
       "why_this_matters": "Both current fixtures pin the extractor digest before generated-adapter parsing was added, so the load-bearing bridge stops before its table and invalid-corpus checks.",
@@ -320,7 +320,20 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Restore current fixture references if bounded equivalence fails; return to Curator for semantic divergence.",
       "status_documentation_updates": "Record exact old and new digest provenance; do not claim firmware behavior change.",
-      "done_evidence": "Fresh independent review, bounded equivalence and negative digest proof, source-sync pass, aggregate differential fixes target without new failures, affected governance gates pass.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "42008cd7ddf7b63adb5840fad9c62657c95a87e6",
+        "reviewed_implementation_sha": "1e1ad3af210b483c968649f6363e2503a9c968ee",
+        "prior_canonical_integration_sha": "caf0822cf3de97a49a7d9b13c920a9951cb24ee2",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/current_baseline_extracted_config_preview.json",
+          "docs/runtime_config/fixtures/current_baseline_runtime_config_semantics_bridge.json"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer approved exact final candidate 1e1ad3af210b483c968649f6363e2503a9c968ee with no findings after independently comparing old/current extractor outputs, all 28 by 9 table values, generated interpreter fields, preview, ten invalid cases, exact hashes and stale/tampered digest rejection. The reviewed diff changes only two current fixture files; bridge, source sync, current GP-CONFIG-010 semantic correspondence and diff --check passed.",
+        "validation_provenance": "Historical extractor at 79ac6bf1164143d6011a3dad46d047b72352b2a6 has SHA-256 c3e2d943954b59171cd87713786052b19aafa8578647a54c5d13df559542c458; current extractor has SHA-256 fb6b1eb017d66fa5a4d31204d56b1f9622f1303611fd3a709d5b88ae71428631. Both are equivalent under the existing checker contract for all 28 table values, preview/interpreter summaries and ten invalid-corpus outcomes; production tables are unchanged. Current preview fixture SHA-256 after metadata update is 0d7b1f783f2942c390ecb8e2d66249e5a28be282a9d689efea64096097371635. Clean canonical 42008cd7ddf7b63adb5840fad9c62657c95a87e6 aggregate failed capacity missing generated .pio config.pb.h, config-menu source drift and semantics bridge stale digest. Clean reviewed candidate aggregate with canonical fingerprint MATCH removed the semantics bridge failure and introduced no new failure; only capacity and config-menu source drift remain. One earlier candidate aggregate had an intermittent adversarial self-test IndexError; the standalone full adversarial suite and final clean candidate aggregate passed that gate. Bridge, ten invalid cases, source sync, manifest, census, validation health, framework, navigation, agent surface, Python syntax and diff --check passed. Integration caf0822cf3de97a49a7d9b13c920a9951cb24ee2 has the exact reviewed candidate tree. No firmware, table, interpreter, schema, device or hardware action changed."
+      },
       "stop_conditions": [
         "Any source table, preview or invalid-case semantic difference appears.",
         "Runtime/firmware/product code or historical evidence must change.",
@@ -5970,11 +5983,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-031","GP-CONFIG-016","GP-PROV-014"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-016","GP-PROV-014"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-031, GP-CONFIG-016, GP-PROV-014; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-016, GP-PROV-014; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5985,7 +5998,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029 and GP-VAL-030 are DONE; current remaining authorization is recorded in the queue-state block. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029, GP-VAL-030, and GP-VAL-031 are DONE; current remaining authorization is recorded in the queue-state block. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
