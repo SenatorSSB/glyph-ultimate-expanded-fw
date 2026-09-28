@@ -19,62 +19,76 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "975b902c6b2facf27108cd5ac7153dd9efb7638a",
+  "audit_base_sha": "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Packet glyph-portfolio-20260926-2109 adjudicated: GP-CONFIG-012 and GP-CONFIG-013 READY for H1 characterization; GP-CONFIG-014 USER_DECISION_GATED on active in-place custom-mode Config replacement semantics.",
+    "resolution": "Packet glyph-portfolio-20260928-1129 fully adjudicated: GP-CONFIG-016 and GP-PROV-014 READY; GP-CONFIG-015 RESEARCH_GATED; GP-CONFIG-012 and GP-CONFIG-013 EVIDENCE_GATED; GP-CONFIG-014 USER_DECISION_GATED.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:872b0f68ed3a187bfcd1ca4dd0d123c5c073d8af:docs/planning/portfolio_20260926_2109.md",
+      "opening_reference": "git-json:a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd:docs/planning/portfolio_20260928_1129.md",
       "subject_ids": [
+        "GP-CONFIG-016",
+        "GP-CONFIG-015",
+        "GP-PROV-014",
         "GP-CONFIG-012",
         "GP-CONFIG-013",
         "GP-CONFIG-014"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:877ed3df709d325a979be48e6bd76f0173ace974:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:0abb9cc1494786e7d6ad6f6abf499608b6c5c565:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260926-2109",
-    "base_configurator_sha": "975b902c6b2facf27108cd5ac7153dd9efb7638a",
-    "packet_id": "glyph-portfolio-20260926-2109",
-    "packet_path": "docs/planning/portfolio_20260926_2109.md",
-    "planning_commit": "872b0f68ed3a187bfcd1ca4dd0d123c5c073d8af",
-    "curation_commit": "877ed3df709d325a979be48e6bd76f0173ace974",
+    "branch": "planning/portfolio-20260928-1129",
+    "base_configurator_sha": "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
+    "packet_id": "glyph-portfolio-20260928-1129",
+    "packet_path": "docs/planning/portfolio_20260928_1129.md",
+    "planning_commit": "a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd",
+    "curation_commit": "0abb9cc1494786e7d6ad6f6abf499608b6c5c565",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator authorized fresh GP-CONFIG-012 and GP-CONFIG-013 H1 characterization; GP-CONFIG-014 remains user-decision gated on live in-place Config replacement and modifier-cache coherence.",
-      "A clean isolated current-configurator PlatformIO Nanopb range resolution selected 0.4.92 rather than the 0.4.91 observed at authorization; GP-CONFIG-012 and GP-CONFIG-013 returned to REVIEW / EVIDENCE_GATED and GP-CONFIG-014 remains USER_DECISION_GATED. All current packet supply was adjudicated; fresh broad Planner supply review is required."
+      "Independent Curator authorized GP-CONFIG-016 and GP-PROV-014 as bounded H1 source/evidence work; GP-CONFIG-015 lacks a source-supported user-visible same-session menu sequence, GP-CONFIG-012/013 need accepted exact decoder closure, and GP-CONFIG-014 needs owner policy."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260926-2109",
-      "planning_commit": "872b0f68ed3a187bfcd1ca4dd0d123c5c073d8af",
-      "packet_id": "glyph-portfolio-20260926-2109",
-      "packet_base_configurator_sha": "975b902c6b2facf27108cd5ac7153dd9efb7638a",
-      "curation_branch": "curation/portfolio-20260926-2109-review",
+      "planning_branch": "planning/portfolio-20260928-1129",
+      "planning_commit": "a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd",
+      "packet_id": "glyph-portfolio-20260928-1129",
+      "packet_base_configurator_sha": "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
+      "curation_branch": "curation/portfolio-20260928-1129-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-CONFIG-012",
+          "candidate_id": "GP-CONFIG-016",
           "disposition": "READY"
         },
         {
-          "candidate_id": "GP-CONFIG-013",
+          "candidate_id": "GP-CONFIG-015",
+          "disposition": "RESEARCH_GATED"
+        },
+        {
+          "candidate_id": "GP-PROV-014",
           "disposition": "READY"
+        },
+        {
+          "candidate_id": "GP-CONFIG-012",
+          "disposition": "EVIDENCE_GATED"
+        },
+        {
+          "candidate_id": "GP-CONFIG-013",
+          "disposition": "EVIDENCE_GATED"
         },
         {
           "candidate_id": "GP-CONFIG-014",
           "disposition": "USER_DECISION_GATED"
         }
       ],
-      "review_date": "2026-09-26",
-      "curation_commit": "877ed3df709d325a979be48e6bd76f0173ace974"
+      "review_date": "2026-09-28",
+      "curation_commit": "0abb9cc1494786e7d6ad6f6abf499608b6c5c565"
     }
   },
   "completion_correspondence": {
@@ -99,20 +113,21 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
+    "RUNWAY_LOW",
     "PLANNER_REFRESH_REQUIRED",
     "RUNWAY_SHORTFALL_EVIDENCE_GATED",
-    "RUNWAY_SHORTFALL_USER_DECISION_GATED"
+    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
+    "RUNWAY_SHORTFALL_RESEARCH_GATED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -122,6 +137,132 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-CONFIG-016",
+      "title": "Characterize null RGB SendReport with exact source",
+      "status": "READY",
+      "branch": "glyph/gp-config-016-rgb-null-characterization",
+      "objective": "Build bounded host evidence for NeoPixelBackend::SendReport when _config is null, preserving the distinction between source ordering, host sanitizer result and physical reachability.",
+      "why_this_matters": "The exact current class computes _config->speed before its null guard while several SetGameMode branches intentionally clear _config; existing rebinding/menu coverage does not execute this exact expression.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "H1 host-only characterization of current source. Any null dereference demonstrated by host instrumentation is evidence about those bytes and sequence, not a physical controller crash or repair policy.",
+      "scope": "Literal-include the exact current NeoPixelBackend production template/body once in an isolated host harness with platform/FastLED doubles; drive startup-null, explicit no mode, zero/out-of-range RGB index, unsupported animation and valid static/dynamic controls. Bind source blob and Glyph call-site drift, classify which sequences are source-supported versus injected, and publish only bounded evidence and a focused checker when reproducible.",
+      "explicit_excluded_scope": "No firmware repair, default RGB policy, menu or active source change, build/artifact, device action, physical claim, runtime-loaded config, persistence, WebSerial/device/protobuf write, flashing, Nunchuk or root-cause claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At live configurator 57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f, HAL/pico/include/comms/NeoPixelBackend.hpp computes deltaHue from _config->speed before the null guard in SendReport (lines 146-148); _config starts null (line 195) and SetGameMode clears it on no mode/config, invalid RGB index and unsupported animation. config/glyph/common/src/config.cpp constructs led_backend and conditionally calls SendReport in loop1. GP-CONFIG-008 and GP-CONFIG-009 do not execute this exact SendReport null expression.",
+      "dependencies_prerequisites": [
+        "The exact production class and call-site bytes at 57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f remain available and materially unchanged.",
+        "Host doubles preserve expression order and do not silently replace the production method.",
+        "No physical reachability or default RGB behavior is inferred from the host result."
+      ],
+      "substantive_authorization_rationale": "The source ordering and missing exact characterization are independently verified. The finite host evidence task needs no product or game-semantic decision, and any active repair remains separately gated.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "NeoPixelBackend::SendReport, SetGameMode, Glyph loop1 call topology, or relevant config schema materially changes before implementation.",
+        "A prior current checker already proves the exact same null SendReport expression and sequence.",
+        "The harness cannot literal-include the production method or distinguish source-supported from injected states.",
+        "Any active source, RGB fallback policy, physical behavior or device action becomes necessary."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of planning/portfolio-20260928-1129, candidate GP-CONFIG-016, immutable packet a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd, packet base and live configurator 57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f, on 2026-09-28; immutable receipt 0abb9cc1494786e7d6ad6f6abf499608b6c5c565 records READY.",
+      "automated_validation": [
+        "Compile the exact production template/body with only bounded platform/FastLED dependency doubles; prove source/blob/caller identity and fail on drift or copied method body.",
+        "Run each null case in a separate sanitizer or equivalent deterministic assertion subprocess with valid static/dynamic controls proving the target expression was reached.",
+        "Record source-supported and injected sequences separately; do not claim a physical crash or default behavior from host UB.",
+        "Run existing GP-CONFIG-008/009 checks, runtime-config manifest/census/health/aggregate, framework, navigation and agent-surface checks, Python syntax, git diff --check, and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: bounded H1 host evidence/provenance tooling and docs only; any compiled source or active firmware behavior change stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Isolate any failing host harness or checker branch; return to Curator if exact production correspondence or runtime boundary fails.",
+      "status_documentation_updates": "Record bounded host evidence and preserve physical reachability UNKNOWN; no firmware status or hardware acceptance changes.",
+      "done_evidence": "Fresh independent implementation review, exact-source and negative fixture checks, affected provenance/validation gates, full runtime-config aggregate, framework and navigation gates, diff/clean-state proof; no firmware/configurator runtime source or active behavior changed.",
+      "stop_conditions": [
+        "Any production method is copied into a substitute rather than literal-included, or its semantic body is edited.",
+        "Host sanitizer output is promoted to a controller symptom, exploitability, or a selected repair.",
+        "Active firmware, package selector, device/write or hardware action is required."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-PROV-014",
+      "title": "Record exact current decoder dependency closure",
+      "status": "READY",
+      "branch": "glyph/gp-prov-014-decoder-closure",
+      "objective": "Capture and verify the build-resolved Nanopb/generated decoder source closure for one exact current configurator snapshot so dependent characterizations can be reconsidered against observed bytes.",
+      "why_this_matters": "The 012/013 authorization used observed 0.4.91, while a clean current resolution selected 0.4.92; only one 0.4.92 pb_decode.c hash is recorded and complete generated/source/license correspondence is unverified.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "H1 offline observed provenance for one exact snapshot and package resolution. It does not pin future ^0.4.8 resolution or authorize decoder behavior/firmware repair.",
+      "scope": "Use an isolated clean checkout of an exact live configurator SHA and record selector, package/version/source identity, generated config.pb.c/h, config.proto/options, Nanopb pb_decode.c/h, pb_common.c/h, applicable included headers, generation metadata and licenses. Hash actual bytes, map generation and dependency correspondence, retain alternate 0.4.91/0.4.92 observations distinctly, and add a narrowly scoped offline checker/report for the verified closure.",
+      "explicit_excluded_scope": "No package pin, build selector or vendored fixture change, no 012/013 decoder acceptance or shared fixture edit, no protocol policy, compiled source, firmware candidate, artifact, device/protobuf write, persistence, flashing, reproducible-build or physical claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At live configurator 57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f, platformio.ini declares nanopb/Nanopb@^0.4.8 and config/glyph/env.ini selects HayBox-proto #db4e2f6. Queue evidence records isolated resolution to 0.4.92 and pb_decode.c SHA-256 f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632; generated config.pb.c, other decoder/header/license hashes and manifest correspondence remain unknown. GP-VAL-026 pins a prior observed 0.4.91 fixture and does not prove the new closure.",
+      "dependencies_prerequisites": [
+        "Start from a newly live-verified exact configurator SHA in a clean isolated checkout.",
+        "Required package/generated inputs and licenses are readable and hashable; stop instead of approximating missing bytes.",
+        "Do not edit shared GP-CONFIG-012/013 decoder fixtures or infer future compatible-range resolution."
+      ],
+      "substantive_authorization_rationale": "The moving dependency and unverified closure are source/queue-proven. A snapshot-bound evidence record can be collected without selecting runtime semantics, accepting a decoder fixture, or changing build inputs.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "The selector, generated-input process or package resolution changes materially before the observed run; bind the new exact snapshot rather than reuse this one.",
+        "Current accepted correspondence already contains every exact byte and license closure for the selected version.",
+        "Any required source/license byte is unavailable or mismatched, or legal provenance cannot be established.",
+        "The task would require pinning, vendoring, decoder policy, compiled input or firmware behavior change."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of planning/portfolio-20260928-1129, candidate GP-PROV-014, immutable packet a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd, packet base and live configurator 57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f, on 2026-09-28; immutable receipt 0abb9cc1494786e7d6ad6f6abf499608b6c5c565 records READY.",
+      "automated_validation": [
+        "Resolve dependencies in a clean isolated checkout and record the exact source commit/package version, source archive or immutable bytes, generated inputs, generation command/metadata and SHA-256 for each required file.",
+        "Prove config.pb.c/h correspond to exact proto/options/generator inputs and verify license presence; wrong-version, tampered, omitted and mismatched-generation negatives fail closed.",
+        "Show the report is one observed snapshot only; rerun drift test against an alternate compatible version without claiming future reproducibility.",
+        "Run GP-VAL-026 and affected provenance checks, runtime-config manifest/census/health/aggregate, framework, navigation and agent-surface checks, Python syntax, git diff --check, and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: bounded H1 host evidence/provenance tooling and docs only; any compiled source or active firmware behavior change stops.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Keep incomplete closure as evidence only and return to Curator if exact generation, license or hash correspondence fails.",
+      "status_documentation_updates": "Document observed closure and its snapshot limit; keep GP-CONFIG-012/013 REVIEW/EVIDENCE_GATED until separate acceptance.",
+      "done_evidence": "Fresh independent implementation review, exact-source and negative fixture checks, affected provenance/validation gates, full runtime-config aggregate, framework and navigation gates, diff/clean-state proof; no firmware/configurator runtime source or active behavior changed.",
+      "stop_conditions": [
+        "Any package or generated byte is assumed from an ignored cache rather than verified in clean isolated resolution.",
+        "The checker claims a permanent pin or transitive reproducibility for ^0.4.8.",
+        "The implementation edits build selectors, compiled decoder, shared 012/013 fixtures, active firmware, or product/runtime tests."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-VAL-027",
       "title": "Extend hardware correspondence for exact GP-X1-002 host paths",
@@ -5628,11 +5769,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-016","GP-PROV-014"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-016, GP-PROV-014; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5643,33 +5784,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260926-2109` was independently reviewed against live
-`configurator` `975b902c6b2facf27108cd5ac7153dd9efb7638a` after the owner
-resumed planning/curation consideration under GLYPH-UD-021. The original
-GP-CONFIG-012 and GP-CONFIG-013 READY grants are historical. On 2026-09-26,
-a fresh isolated checkout of live `configurator` `73777c67795f1a4e577fcae5ee58352e565a86e8`
-resolved the declared `nanopb/Nanopb@^0.4.8` range to package `0.4.92`;
-`pb_decode.c` SHA-256 is `f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632`.
-Their authorization snapshot observed `0.4.91` and upstream tag `0.4.9.1`
-(`cad3c18ef15a663e30e3e43e3a752b66378adec1`), whose `pb_decode.c`
-SHA-256 is `6c2fc2f357bffdb774c1d329b533e981498d58405c0b1ef066f5a87fd46b5a17`.
-The same range previously produced both versions in separate build caches.
-Current generated `config.pb.c` and full license/hash/manifest correspondence
-remain unverified. Both orders are REVIEW / EVIDENCE_GATED and nonexecutable;
-no decoder fixture, firmware repair, or policy selection was authorized.
-Their shared decoder fixture work still requires serialized edits after a
-fresh source-backed order.
-GP-CONFIG-014 remains USER_DECISION_GATED and is not an executable work order.
-A successful SetConfig can replace the active custom-mode Config in place
-without rerunning the mode's SetConfig, leaving a prior modifier-mask cache.
-The owner must choose valid in-place replacement and invalid-count behavior,
-including the expected modifier, combo, digital and axis output behavior,
-before a fresh H3 repair order can be considered. Its 10-versus-20 capacity
-defect and GP-CONFIG-011 observations remain preserved evidence; no build,
-candidate artifact or hardware PASS exists for GP-CONFIG-014. GP-CONFIG-010
-and GP-X1-002 remain DONE with their distinct exact hardware evidence.
-GP-VAL-011 remains deferred; GP-HW-002 remains research gated. Nunchuk is
-NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260928-1129` was independently reviewed against live `configurator` `57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f`. GP-CONFIG-016 and GP-PROV-014 are bounded H1 READY work orders. GP-CONFIG-015 is RESEARCH_GATED because source proves construction-time menu caching but does not prove user-visible same-session menu access after SetConfig. GP-CONFIG-012 and GP-CONFIG-013 remain REVIEW / EVIDENCE_GATED until an accepted exact current decoder closure; GP-CONFIG-014 remains USER_DECISION_GATED on in-place custom-mode behavior. The packet is CONSUMED: every candidate has a disposition and no pending Curator survivor remains. GP-CONFIG-012/013 remain tracked as REVIEW queue items. No global wait is supported. GP-VAL-011 remains owner deferred; Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
@@ -5705,28 +5820,14 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-GP-CONFIG-012 and GP-CONFIG-013 are REVIEW / EVIDENCE_GATED after the fresh
-Nanopb resolution contradicted the decoder version observed in their READY
-authorization. Their historical source observations still establish an H1
-investigation scope, not a physical symptom or a selected firmware repair.
-Fresh Planner supply review must address the current exact decoder closure and
-independent alternatives. GP-CONFIG-014 remains `USER_DECISION_GATED`; the
-current Planner packet is consumed and has no pending Curator survivors.
-The modifier-cache mismatch is source-backed, but current code can change the active
-custom-mode configuration in place after a successful SetConfig while retaining
-cached masks. Refreshing masks, suppressing output, or forcing reactivation
-would each select externally visible behavior not resolved by the packet or
-owner resumption. A new owner decision and fresh Curator order are required.
-GLYPH-UD-021 does not reopen GP-VAL-011. H2/H3 exact candidate/artifact and
-physical PASS requirements remain mandatory before any behavior-changing
-firmware source can merge.
+The six-candidate packet has been fully adjudicated. GP-CONFIG-016 and GP-PROV-014 are READY for independent H1 characterization/provenance only. GP-CONFIG-015 is RESEARCH_GATED pending a source-supported user-visible same-session menu sequence. GP-CONFIG-012 and GP-CONFIG-013 remain EVIDENCE_GATED on accepted exact decoder closure and serialized fixture editing; no decoder fixture or firmware repair is authorized. GP-CONFIG-014 remains USER_DECISION_GATED until the owner selects valid in-place replacement and invalid-count behavior for modifier, combo, digital and axis outputs. GP-CONFIG-015 and GP-CONFIG-014 retain their gated dispositions in immutable review provenance; GP-CONFIG-012/013 remain tracked REVIEW queue items. The four gated candidates are not executable.
 
 ## Work Orders
 
 The complete machine-readable work orders above are canonical. Array order is
 canonical work-order ordering. Only items marked `READY` authorize immediate
 execution.
-The one-new-work-order-per-Implementation-cycle rule still applies. GP-HW-002 remains historical gated supply and cannot execute without later source-backed planning and curation; it is not a survivor of the current three-candidate packet.
+The one-new-work-order-per-Implementation-cycle rule still applies. GP-HW-002 remains historical gated supply and cannot execute without later source-backed planning and curation; it is not a survivor of the prior three-candidate packet.
 
 Every future item recorded in the machine-readable `items` list must satisfy
 `docs/agent_framework/WORK_ORDER_TEMPLATE.md`. Curator owns substantive
