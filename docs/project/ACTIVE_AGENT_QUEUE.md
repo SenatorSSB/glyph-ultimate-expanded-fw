@@ -103,17 +103,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_OK"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -206,7 +206,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-030",
       "title": "Make prebuild Git identity self-test hermetic",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-030-hermetic-git-identity",
       "objective": "Supply explicit test-local author and committer identity for every temporary repository commit in the prebuild Git identity checker.",
       "why_this_matters": "The raw symlink and conflict fixture commits fail with Author identity unknown when aggregate isolation removes global Git config, although the production helper passes direct default checks.",
@@ -245,7 +245,20 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the bounded harness change if negative coverage weakens; return to Curator if production behavior is implicated.",
       "status_documentation_updates": "Record hermetic checker result only; preserve builder/firmware status.",
-      "done_evidence": "Fresh independent review, normal and hermetic self-test pass with all negatives, aggregate differential fixes only this failure, affected governance gates pass.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "70c02afda69f08711aac715b7a46be6aa1095735",
+        "reviewed_implementation_sha": "cb742cb0dad1a87019100697dcf15ed8459f31e5",
+        "prior_canonical_integration_sha": "31c825ddd6ecbfa3a063ab82c1346a2037ed6637",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "tools/check_glyph_prebuild_git_identity.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer approved exact candidate cb742cb0dad1a87019100697dcf15ed8459f31e5 with no findings after confirming all adversarial assertions remain, production builder/helper are unchanged, and repository-local test identity replaces reliance on host global configuration. Reviewer independently ran normal and hermetic self-tests, census and diff --check.",
+        "validation_provenance": "Clean canonical 70c02afda69f08711aac715b7a46be6aa1095735 aggregate completed with canonical fingerprint MATCH and failed GP-CONFIG-010 capacity missing generated .pio config.pb.h, config-menu source drift, prebuild Git identity, and semantics bridge digest. Clean reviewed candidate aggregate completed with canonical fingerprint MATCH, removed only the prebuild identity failure and introduced no new failure; capacity, config-menu source drift and semantics bridge digest remained. The self-test passed normally and with GIT_CONFIG_NOSYSTEM=1 and GIT_CONFIG_GLOBAL=/dev/null; all existing staged, unstaged, untracked, ignored, symlink, conflict and gitlink adversarial assertions executed and rejected as before. Manifest, census, validation health, framework, navigation, agent surface, Python syntax, diff --check and clean-state gates passed. Integration 31c825ddd6ecbfa3a063ab82c1346a2037ed6637 has the exact reviewed candidate tree. No firmware, production helper, global/system Git config, device or hardware action changed."
+      },
       "stop_conditions": [
         "Production builder/helper or global Git configuration would change.",
         "Any adversarial test is skipped or softened.",
@@ -5957,11 +5970,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-030","GP-VAL-031","GP-CONFIG-016","GP-PROV-014"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-031","GP-CONFIG-016","GP-PROV-014"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-030, GP-VAL-031, GP-CONFIG-016, GP-PROV-014; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-VAL-031, GP-CONFIG-016, GP-PROV-014; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5972,7 +5985,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029 is DONE; GP-VAL-030/031 remain bounded H1 READY validation repairs. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029 is DONE; GP-VAL-030 is DONE; GP-VAL-031 remains a bounded H1 READY validation repair. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
@@ -6008,7 +6021,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The four-candidate packet has been fully adjudicated. GP-VAL-029 was completed; GP-VAL-030/031 remain READY for distinct validation repairs. GP-VAL-028 is EVIDENCE_GATED on authenticated generated-header bytes and deterministic clean-checkout materialization; no host-double substitution is authorized. Existing GP-CONFIG-016 and GP-PROV-014 cannot publish DONE without their existing full aggregate gate. The gated proposal is recorded in immutable Curator provenance and is not executable.
+The four-candidate packet has been fully adjudicated. GP-VAL-029 was completed; GP-VAL-030 was completed; GP-VAL-031 remains READY for its validation repair. GP-VAL-028 is EVIDENCE_GATED on authenticated generated-header bytes and deterministic clean-checkout materialization; no host-double substitution is authorized. Existing GP-CONFIG-016 and GP-PROV-014 cannot publish DONE without their existing full aggregate gate. The gated proposal is recorded in immutable Curator provenance and is not executable.
 
 ## Work Orders
 
