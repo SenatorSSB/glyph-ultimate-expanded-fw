@@ -447,3 +447,31 @@ record, not evidence of a passing review.
 - stop conditions: any table other than kX1Table changes, routing/publication or
   Mode/MX1 behavior changes, authority/identity mismatch, failed validation,
   failed build/review/custody, or required physical mapping is invented.
+
+## Implementation Supervisor cycle — GP-CONFIG-016 (2026-09-28)
+
+- guidance applicable: yes; GP-CONFIG-016 is a complete H1 READY work order;
+  repository mutation requires a bounded specialist for the exact production
+  source/call-site seam and a fresh independent post-implementation reviewer.
+- capability discovery: complete available runtime tool catalog inspected;
+  native internal collaboration subagents confirmed available.
+- native capability available: yes.
+- specialist: bounded read-only source-authority investigation of the exact
+  `NeoPixelBackend::SendReport` body, null-producing `SetGameMode` branches,
+  Glyph loop1 call topology, and existing host-test seams/cases.
+- reviewer: fresh independent post-implementation reviewer of the exact
+  changed paths, literal production-source correspondence, case separation,
+  sanitizer evidence, scope/non-claims, and required validation gates.
+- allowed specialist/reviewer files: exact NeoPixel backend and Glyph call-site
+  source, GP-CONFIG-016 order, directly related fixtures/checkers and existing
+  characterization harnesses/contracts.
+- forbidden specialist/reviewer actions: edits, commits, pushes, firmware
+  builds, device/hardware actions, RGB fallback/product policy, firmware repair,
+  physical reachability or crash claims, runtime config, persistence, or
+  network/dependency resolution.
+- stop conditions: material source/call-topology drift, inability to
+  literal-include the exact method, host doubles replacing the target body,
+  unseparated injected/source-supported states, active behavior scope, or any
+  physical/root-cause claim.
+- return format: findings first; exact source anchors; case and harness
+  recommendations; validation gaps; residual risks and invalidation conditions.

@@ -16,7 +16,7 @@
     {"path": "include/core/mode_selection.hpp", "sha256": "277d5e9cc1a4e165f571b4b3601614ef0caa21f6ff39f0bf8ae26b2dab3dd17e", "anchors": ["void set_mode("]},
     {"path": "src/core/CommunicationBackend.cpp", "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575", "anchors": ["CommunicationBackend::CommunicationBackend(", "CommunicationBackend::CurrentGameMode()"]},
     {"path": "src/core/InputMode.cpp", "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7", "anchors": ["InputMode::GetConfig()"]},
-    {"path": "src/core/mode_selection.cpp", "sha256": "57ae73a3eea4250bab5027bd6fdb1b1fa3ea9d2689cd6309026e7bbbc39d9875", "anchors": ["void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config &config)"]},
+    {"path": "src/core/mode_selection.cpp", "sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44", "anchors": ["void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config &config)"]},
     {"path": "HAL/pico/src/comms/ConfiguratorBackend.cpp", "sha256": "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876", "anchors": ["bool ConfiguratorBackend::HandleSetConfig()", "persistence.SaveConfig(candidate)"]}
   ],
   "build_contract": {

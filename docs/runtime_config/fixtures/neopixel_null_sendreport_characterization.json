@@ -1,0 +1,52 @@
+{
+  "schema_name": "glyph_neopixel_null_sendreport_characterization",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-016",
+  "base_configurator_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+  "production_sources": [
+    {
+      "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+      "sha256": "a3a83278a2f13464f6fa15de7f611ec4189f40fcf14f0ce44ce0b8e6cc890dbc",
+      "required_anchors": [
+        "virtual void SetGameMode(InputMode *gamemode)",
+        "_config = nullptr;",
+        "if (gamemode == nullptr || gamemode->GetConfig() == nullptr)",
+        "rgb_config_id == 0 || rgb_config_id > _rgb_configs_count",
+        "case RGB_ANIM_BREATHE:",
+        "virtual void SendReport()",
+        "(interval * _config->speed)",
+        "if(_config == nullptr)"
+      ]
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5",
+      "required_anchors": [
+        "void loop1()",
+        "backends[0]->CurrentGameMode() != nullptr",
+        "led_backend->SetGameMode(backends[0]->CurrentGameMode());",
+        "if(led_backend != nullptr)",
+        "led_backend->SendReport();"
+      ]
+    }
+  ],
+  "literal_include": "../../../HAL/pico/include/comms/NeoPixelBackend.hpp",
+  "cases": [
+    {"id": "startup_null", "kind": "null", "sequence_class": "source_supported_initial_member_state", "evidence": "constructor member initializer leaves _config null; host directly calls SendReport"},
+    {"id": "no_mode", "kind": "null", "sequence_class": "injected_host_setup", "evidence": "SetGameMode(nullptr) branch is source-backed; loop1 physical reachability is unknown"},
+    {"id": "no_config", "kind": "null", "sequence_class": "injected_host_setup", "evidence": "non-null InputMode with null config follows source branch; call topology is injected"},
+    {"id": "zero_rgb_index", "kind": "null", "sequence_class": "injected_host_setup", "evidence": "zero index guard is source-backed; host supplies this mode/config sequence"},
+    {"id": "out_of_range_rgb_index", "kind": "null", "sequence_class": "injected_host_setup", "evidence": "out-of-range guard is source-backed; host supplies this mode/config sequence"},
+    {"id": "unsupported_animation", "kind": "null", "sequence_class": "injected_host_setup", "evidence": "BREATHE clears _config in SetGameMode; host supplies this sequence"},
+    {"id": "unknown_animation_enum", "kind": "null", "sequence_class": "injected_host_setup", "evidence": "unknown enum reaches the default branch and clears _config; host supplies this sequence"},
+    {"id": "valid_static", "kind": "control", "sequence_class": "injected_valid_control", "evidence": "valid static config reaches and returns from production SendReport"},
+    {"id": "valid_dynamic", "kind": "control", "sequence_class": "injected_valid_control", "evidence": "valid rainbow config reaches and returns from production SendReport"}
+  ],
+  "observations": {
+    "null_result": "UndefinedBehaviorSanitizer reports member access through null at the pre-guard speed expression for these host inputs",
+    "physical_reachability": "UNKNOWN",
+    "physical_controller_crash": "NOT_CLAIMED",
+    "repair_policy": "NOT_SELECTED",
+    "non_claims": ["physical call reachability", "controller crash", "default RGB policy", "firmware repair", "hardware acceptance", "root cause"]
+  }
+}
