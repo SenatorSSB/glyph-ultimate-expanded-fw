@@ -5985,7 +5985,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029 is DONE; GP-VAL-030 is DONE; GP-VAL-031 remains a bounded H1 READY validation repair. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029 and GP-VAL-030 are DONE; current remaining authorization is recorded in the queue-state block. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
@@ -6021,7 +6021,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The four-candidate packet has been fully adjudicated. GP-VAL-029 was completed; GP-VAL-030 was completed; GP-VAL-031 remains READY for its validation repair. GP-VAL-028 is EVIDENCE_GATED on authenticated generated-header bytes and deterministic clean-checkout materialization; no host-double substitution is authorized. Existing GP-CONFIG-016 and GP-PROV-014 cannot publish DONE without their existing full aggregate gate. The gated proposal is recorded in immutable Curator provenance and is not executable.
+The four-candidate packet has been fully adjudicated. GP-VAL-029 and GP-VAL-030 were completed; current remaining authorization is recorded in the queue-state block. GP-VAL-028 is EVIDENCE_GATED on authenticated generated-header bytes and deterministic clean-checkout materialization; no host-double substitution is authorized. Existing GP-CONFIG-016 and GP-PROV-014 cannot publish DONE without their existing full aggregate gate. The gated proposal is recorded in immutable Curator provenance and is not executable.
 
 ## Work Orders
 
