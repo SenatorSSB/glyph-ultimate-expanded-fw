@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import tempfile
 from pathlib import Path
@@ -14,6 +15,16 @@ HARNESS = ROOT / "tools/fixtures/neopixel_null_host/neo_harness.cpp"
 INCLUDE = ROOT / "tools/fixtures/neopixel_null_host/include"
 SOURCE_HEADER = ROOT / "HAL/pico/include/comms/NeoPixelBackend.hpp"
 SOURCE_CALLER = ROOT / "config/glyph/common/src/config.cpp"
+SCHEMA_HEADER = ROOT / "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h"
+HOST_PROTO = INCLUDE / "config.pb.h"
+RGB_ENUM = {
+    "RGB_ANIM_UNSPECIFIED": 0,
+    "RGB_ANIM_STATIC": 1,
+    "RGB_ANIM_BREATHE": 2,
+    "RGB_ANIM_REACTIVE_SIMPLE": 3,
+    "RGB_ANIM_RAINBOW_SHIFT": 4,
+    "RGB_ANIM_RAINBOW_XWAVE_LEFT": 5,
+}
 
 
 class CheckError(AssertionError):
@@ -64,6 +75,24 @@ def load_fixture() -> dict:
     value = json.loads(FIXTURE.read_text(), object_pairs_hook=unique_object)
     validate_fixture(value)
     return value
+
+
+def verify_host_schema(host_text: str | None = None, schema_text: str | None = None) -> None:
+    """Bind the narrow host RGB double to the tracked generated schema fixture."""
+    schema = SCHEMA_HEADER.read_text() if schema_text is None else schema_text
+    host = HOST_PROTO.read_text() if host_text is None else host_text
+    for label, source, enum_pattern, struct_pattern in [
+        ("tracked schema", schema, r"typedef enum _RgbAnimationId\s*\{([^}]*)\}", r"typedef struct _RgbConfig\s*\{(.*?)\}\s*RgbConfig;"),
+        ("host double", host, r"enum RgbAnimationId\s*\{([^}]*)\}", r"struct RgbConfig\s*\{(.*?)\n\};"),
+    ]:
+        enum_match = re.search(enum_pattern, source, re.DOTALL)
+        struct_match = re.search(struct_pattern, source, re.DOTALL)
+        require(enum_match is not None and struct_match is not None, f"{label}: RGB schema shape missing")
+        observed = {name: int(number) for name, number in re.findall(r"\b(RGB_ANIM_[A-Z_]+)\s*=\s*(\d+)\b", enum_match.group(1))}
+        require(observed == RGB_ENUM, f"{label}: RGB animation values drift")
+        body = struct_match.group(1)
+        require(re.search(r"\bButtonToColorMapping\s+button_colors\[60\]", body) is not None, f"{label}: RGB color capacity drift")
+        require(re.search(r"\b(?:std::)?uint8_t\s+speed\b", body) is not None, f"{label}: RGB speed type drift")
 
 
 def verify_sources(value: dict, harness_text: str | None = None) -> None:
@@ -119,6 +148,22 @@ def adversarial_contract_checks(value: dict) -> int:
         cases += 1
     else:
         raise CheckError("copied production method body accepted")
+    for changed, label in [
+        (HOST_PROTO.read_text().replace("RGB_ANIM_STATIC = 1", "RGB_ANIM_STATIC = 0", 1), "host animation value"),
+        (HOST_PROTO.read_text().replace("button_colors[60]", "button_colors[36]", 1), "host color capacity"),
+    ]:
+        try:
+            verify_host_schema(host_text=changed)
+        except CheckError:
+            cases += 1
+        else:
+            raise CheckError(f"adversarial host schema accepted: {label}")
+    try:
+        verify_host_schema(schema_text=SCHEMA_HEADER.read_text().replace("RGB_ANIM_STATIC = 1", "RGB_ANIM_STATIC = 7", 1))
+    except CheckError:
+        cases += 1
+    else:
+        raise CheckError("adversarial tracked schema drift accepted")
     return cases
 
 
@@ -152,6 +197,7 @@ def main() -> int:
     try:
         value = load_fixture()
         verify_sources(value)
+        verify_host_schema()
         adversarial = adversarial_contract_checks(value)
         cases = run_checker(value)
         print(f"glyph_neopixel_null_sendreport_characterization: PASS; {cases} isolated cases; {adversarial} adversarial contracts; H1 host evidence; physical reachability UNKNOWN")

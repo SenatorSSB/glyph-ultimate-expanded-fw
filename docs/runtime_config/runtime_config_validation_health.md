@@ -63,7 +63,7 @@ Commands that can prepare, install, or emit a candidate are isolated into
 standalone temporary repositories for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 46 explicit entries, including 40 current
+The curated manifest now has 47 explicit entries, including 41 current
 load-bearing checks. The `configurator` category contains the compiled
 GP-CONFIG-005 production-handler transaction check. The tracked CI
 publication-route census records all three

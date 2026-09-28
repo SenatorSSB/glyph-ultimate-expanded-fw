@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
         backend.SetGameMode(&mode); // Injected unsupported animation sequence.
     } else if (std::strcmp(which, "unknown_animation_enum") == 0) {
         game_cfg.rgb_config = 1;
-        configs[0].animation = static_cast<RgbAnimationId>(254);
+        configs[0].animation = static_cast<RgbAnimationId>(6);
         backend.SetGameMode(&mode); // Injected unknown enum follows default branch.
     } else if (std::strcmp(which, "valid_static") == 0) {
         game_cfg.rgb_config = 1;

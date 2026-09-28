@@ -7254,7 +7254,7 @@
       },
       "checker_id": "neopixel_null_sendreport_characterization",
       "defines_main": true,
-      "file_size_bytes": 8445,
+      "file_size_bytes": 10892,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate.update",
@@ -7266,7 +7266,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 165,
+      "line_count": 211,
       "parse_error": null,
       "path": "tools/check_glyph_neopixel_null_sendreport_characterization.py",
       "potential_branch_identity_signals": [
@@ -7284,13 +7284,14 @@
         "HAL/pico/include/comms/NeoPixelBackend.hpp",
         "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json",
         "src/config.cpp",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h",
         "tools/fixtures/neopixel_null_host/include",
         "tools/fixtures/neopixel_null_host/neo_harness.cpp"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "16c0111b629bde02d519f70c0d81c74d84570e335c2c4b6e68f9f38a39c5e444",
+      "sha256": "a6204924f1d94b4e87abc9535fe67af8e6387302f2aa98e2c48c9170c63712e8",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

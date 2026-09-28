@@ -14,6 +14,14 @@ host harness literal-includes the production header. It does not copy the
 protobuf value types, FastLED calls, and Pico time functions required to
 compile the production template.
 
+The recovered branch is compared with live `configurator`
+`2fd9a827b90b2079f981d75e836833dc99ec7b10`. The fixture's `0da68bd`
+base records the original host-evidence snapshot; the two bound production
+blobs are identical on both commits. The RGB enum values, 60-entry color
+array, and speed type in the host protobuf double are checked against the
+tracked generated schema fixture. That fixture is a host reference, not a
+claim that generated device bytes were built or tested here.
+
 `SendReport` evaluates `_config->speed` while calculating `deltaHue` before
 checking `_config == nullptr`. The constructor initializes `_config` to null.
 `SetGameMode` also clears the pointer for a missing mode/config, RGB index zero
@@ -52,7 +60,8 @@ index setups are injected characterization inputs.
 Run `python3 tools/check_glyph_neopixel_null_sendreport_characterization.py`.
 The checker also rejects modified fixture schema/base identity, promoted
 physical claims, relabeling an injected case as source-supported, changed
-production-source digests, and a copied `SendReport` body. It proves only the
+production-source digests, changed host/schema RGB values or color capacity,
+and a copied `SendReport` body. It proves only the
 compiled host inputs and exact bound source bytes.
 
 Physical call reachability: UNKNOWN. Physical controller crash: NOT CLAIMED.

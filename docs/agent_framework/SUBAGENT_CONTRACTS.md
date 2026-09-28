@@ -454,7 +454,8 @@ record, not evidence of a passing review.
   repository mutation requires a bounded specialist for the exact production
   source/call-site seam and a fresh independent post-implementation reviewer.
 - capability discovery: complete available runtime tool catalog inspected;
-  native internal collaboration subagents confirmed available.
+  191 runtime tools enumerated; native internal collaboration subagents
+  confirmed available.
 - native capability available: yes.
 - specialist: bounded read-only source-authority investigation of the exact
   `NeoPixelBackend::SendReport` body, null-producing `SetGameMode` branches,
@@ -475,3 +476,11 @@ record, not evidence of a passing review.
   physical/root-cause claim.
 - return format: findings first; exact source anchors; case and harness
   recommendations; validation gaps; residual risks and invalidation conditions.
+
+Recovery continuation on live `configurator` `2fd9a827b90b2079f981d75e836833dc99ec7b10`:
+the read-only specialist checked exact source/caller blobs and validation
+manifest/census/health drift. A separate fresh read-only reviewer inspected
+the recovered 13-path diff, focused PASS results, and full aggregate FAIL;
+review found host RGB schema correspondence to repair and four pre-existing
+aggregate blockers. Root owns the repair, re-review, final gates, and
+publication decision.
