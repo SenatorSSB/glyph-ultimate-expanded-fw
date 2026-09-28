@@ -9399,14 +9399,14 @@
       },
       "checker_id": "prebuild_git_identity",
       "defines_main": true,
-      "file_size_bytes": 13547,
+      "file_size_bytes": 13675,
       "hard_coded_branch_like_strings": [],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 277,
+      "line_count": 279,
       "parse_error": null,
       "path": "tools/check_glyph_prebuild_git_identity.py",
       "potential_branch_identity_signals": [],
@@ -9423,7 +9423,7 @@
       "runtime_config_relevance_signals": [
         "build_declarations_hooks"
       ],
-      "sha256": "bf7656988e92d72740149081d10f4b9a800974ad8d0d23ea5b796020ac4f33d6",
+      "sha256": "154cea8bf6abbb666b42f518796b36188655d9eea7d23d5a36cb7fb60da3c619",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
