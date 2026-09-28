@@ -34,7 +34,7 @@
       {
         "path": "tools/extract_glyph_identity_runtime_tables.py",
         "role": "source_table_extractor",
-        "sha256": "c3e2d943954b59171cd87713786052b19aafa8578647a54c5d13df559542c458"
+        "sha256": "fb6b1eb017d66fa5a4d31204d56b1f9622f1303611fd3a709d5b88ae71428631"
       }
     ],
     "unknowns": [
