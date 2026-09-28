@@ -41,6 +41,13 @@ dependency claim. `branch_policy` is limited to `content_only`,
 `content_and_scope`, `named_evidence_branch`, and `not_run`, with applicability
 consistency enforced as curated metadata rather than checker-branch semantics.
 
+GP-CONFIG-010 semantic correspondence has two explicit proofs. The default
+current check requires a descendant of the reviewed canonical snapshot, exact
+accepted mode-selection and 28-table blobs, and the finite correspondence
+classifier for all post-integration paths. `--historical` retains the exact
+integration candidate, branch, and direct-parent proof. Neither mode grants
+new firmware or hardware acceptance.
+
 The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.
