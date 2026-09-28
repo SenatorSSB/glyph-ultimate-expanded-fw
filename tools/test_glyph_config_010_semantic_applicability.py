@@ -43,6 +43,8 @@ def main() -> None:
         run(root, "python3", CHECKER)
         commit_change(root, "docs/ROADMAP.md", "\nGP-VAL-029 isolated scope control.\n", "gp-val-029-positive")
         run(root, "python3", CHECKER)
+        commit_change(root, "tools/check_glyph_prebuild_git_identity.py", "\n# isolated H1 validation self-test delta\n", "gp-val-029-ready-prerequisite")
+        run(root, "python3", CHECKER)
         for label, path, data in (
             ("unknown-doc", "docs/unknown_gp_val_029.md", "unknown\n"),
             ("unknown-tool", "tools/unknown_gp_val_029.py", "# unknown\n"),
