@@ -19,76 +19,66 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
+  "audit_base_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Packet glyph-portfolio-20260928-1129 fully adjudicated: GP-CONFIG-016 and GP-PROV-014 READY; GP-CONFIG-015 RESEARCH_GATED; GP-CONFIG-012 and GP-CONFIG-013 EVIDENCE_GATED; GP-CONFIG-014 USER_DECISION_GATED.",
+    "resolution": "Packet glyph-portfolio-20260928-1434 fully adjudicated: GP-VAL-028 EVIDENCE_GATED on generated-header correspondence; GP-VAL-029 READY, GP-VAL-030 READY, and GP-VAL-031 READY for bounded validation repairs.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd:docs/planning/portfolio_20260928_1129.md",
+      "opening_reference": "git-json:1516ea458003e2948965471b535c3bcb0b4d39e0:docs/planning/portfolio_20260928_1434.md",
       "subject_ids": [
-        "GP-CONFIG-016",
-        "GP-CONFIG-015",
-        "GP-PROV-014",
-        "GP-CONFIG-012",
-        "GP-CONFIG-013",
-        "GP-CONFIG-014"
+        "GP-VAL-028",
+        "GP-VAL-029",
+        "GP-VAL-030",
+        "GP-VAL-031"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:0abb9cc1494786e7d6ad6f6abf499608b6c5c565:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:a06a3673bc5d35bf2c3eec1eb4c32f618798449f:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260928-1129",
-    "base_configurator_sha": "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
-    "packet_id": "glyph-portfolio-20260928-1129",
-    "packet_path": "docs/planning/portfolio_20260928_1129.md",
-    "planning_commit": "a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd",
-    "curation_commit": "0abb9cc1494786e7d6ad6f6abf499608b6c5c565",
+    "branch": "planning/portfolio-20260928-1434",
+    "base_configurator_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+    "packet_id": "glyph-portfolio-20260928-1434",
+    "packet_path": "docs/planning/portfolio_20260928_1434.md",
+    "planning_commit": "1516ea458003e2948965471b535c3bcb0b4d39e0",
+    "curation_commit": "a06a3673bc5d35bf2c3eec1eb4c32f618798449f",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator authorized GP-CONFIG-016 and GP-PROV-014 as bounded H1 source/evidence work; GP-CONFIG-015 lacks a source-supported user-visible same-session menu sequence, GP-CONFIG-012/013 need accepted exact decoder closure, and GP-CONFIG-014 needs owner policy."
+      "Curator independently authorized three bounded validation repairs; GP-VAL-028 lacks authenticated generated-header bytes and clean-checkout materialization proof. All four proposals were adjudicated."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260928-1129",
-      "planning_commit": "a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd",
-      "packet_id": "glyph-portfolio-20260928-1129",
-      "packet_base_configurator_sha": "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
-      "curation_branch": "curation/portfolio-20260928-1129-review",
+      "planning_branch": "planning/portfolio-20260928-1434",
+      "planning_commit": "1516ea458003e2948965471b535c3bcb0b4d39e0",
+      "packet_id": "glyph-portfolio-20260928-1434",
+      "packet_base_configurator_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+      "curation_branch": "curation/portfolio-20260928-1514-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-CONFIG-016",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-CONFIG-015",
-          "disposition": "RESEARCH_GATED"
-        },
-        {
-          "candidate_id": "GP-PROV-014",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-CONFIG-012",
+          "candidate_id": "GP-VAL-028",
           "disposition": "EVIDENCE_GATED"
         },
         {
-          "candidate_id": "GP-CONFIG-013",
-          "disposition": "EVIDENCE_GATED"
+          "candidate_id": "GP-VAL-029",
+          "disposition": "READY"
         },
         {
-          "candidate_id": "GP-CONFIG-014",
-          "disposition": "USER_DECISION_GATED"
+          "candidate_id": "GP-VAL-030",
+          "disposition": "READY"
+        },
+        {
+          "candidate_id": "GP-VAL-031",
+          "disposition": "READY"
         }
       ],
       "review_date": "2026-09-28",
-      "curation_commit": "0abb9cc1494786e7d6ad6f6abf499608b6c5c565"
+      "curation_commit": "a06a3673bc5d35bf2c3eec1eb4c32f618798449f"
     }
   },
   "completion_correspondence": {
@@ -113,21 +103,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 5,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 5,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
-    "PLANNER_REFRESH_REQUIRED",
-    "RUNWAY_SHORTFALL_EVIDENCE_GATED",
-    "RUNWAY_SHORTFALL_USER_DECISION_GATED",
-    "RUNWAY_SHORTFALL_RESEARCH_GATED"
+    "RUNWAY_OK"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -137,6 +123,191 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-VAL-029",
+      "title": "Separate historical GP-CONFIG-010 identity from current semantic proof",
+      "status": "READY",
+      "branch": "glyph/gp-val-029-current-semantic-applicability",
+      "objective": "Make current clean descendants with unchanged accepted mode-selection and 28-table bytes pass the load-bearing GP-CONFIG-010 semantic checker while preserving exact historical candidate identity proof.",
+      "why_this_matters": "The current manifest selects a checker that rejects every branch except the historical integration candidate before reaching its source checks.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "H1 host validation applicability repair only; passing current proof states exact accepted source/content and scope correspondence, not new firmware behavior or hardware acceptance.",
+      "scope": "Introduce an explicit current-descendant proof path with bounded applicability and exact accepted source/table blob checks; keep the historical candidate direct-parent/branch identity proof separately callable and unchanged in force. Bind descendant scope to the finite reviewed GP-CONFIG-010 post-integration path inventory and named non-semantic docs/control-plane, evidence, and validation-test delta classes under the existing correspondence classifier; reject unrecognized paths and any critical firmware/build input drift until separately reviewed.",
+      "explicit_excluded_scope": "No broad branch-name exemption, historical evidence rewrite, accepted table/source edit, firmware change, or demotion that removes current load-bearing coverage.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At live configurator 0da68bdab9bf0fed4ed595538bea9aba7d2f49f3, tools/check_glyph_config_010_integration_semantic_correspondence.py lines 72-76 require the historical branch/direct parent, while current load-bearing manifest entry selects it for all branches. Lines 85-119 already check mode-selection and accepted 28-table bytes; live blobs match the accepted fixture. The integration merge is ancestral. The finite current post-integration delta from accepted candidate 1c0ff22646729d26d45eacb4b8322c5baea7de48 contains 12 docs/tool paths, including governance checker tools/glyph_hardware_correspondence.py; its classification rules are in that module.",
+      "dependencies_prerequisites": [
+        "The historical fixture and accepted source/table blob identities remain exact.",
+        "A current-descendant proof can reject dirty critical source, changed bytes, unknown paths and false scope without relaxing historical proof."
+      ],
+      "substantive_authorization_rationale": "The defect is a mismatch between current aggregate applicability and historical exact-candidate identity. The bounded host checker architecture is source-backed and needs no product/domain choice.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Accepted mode-selection or 28-table bytes change before repair.",
+        "Separating current from historical proof weakens historical identity or current content/scope rejection.",
+        "A firmware or product behavior change becomes necessary."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of planning/portfolio-20260928-1434, immutable packet 1516ea458003e2948965471b535c3bcb0b4d39e0, packet base and live configurator 0da68bdab9bf0fed4ed595538bea9aba7d2f49f3, on 2026-09-28; immutable receipt a06a3673bc5d35bf2c3eec1eb4c32f618798449f records GP-VAL-029 READY.",
+      "automated_validation": [
+        "Historical candidate still passes exact identity; wrong branch/parent fails that mode.",
+        "Canonical and an unrelated clean H1 descendant with identical accepted bytes pass current proof.",
+        "Prove exact current 12-path post-integration inventory and named non-semantic delta classes; reject an unclassified new docs/tool path, altered firmware/build input, and a falsely classified critical path.",
+        "Changed mode-selection, changed 28-table content, dirty critical source, unknown path and false-scope cases fail.",
+        "Run the full runtime-config aggregate on a clean checkout and record the exact baseline-versus-candidate failure set; this order may publish only if its target failure is repaired without introducing a new failure. Other independently recorded prerequisite failures remain explicit; this does not waive GP-CONFIG-016 or GP-PROV-014 full-aggregate DONE gates.",
+        "Run affected manifest, census, validation-health, framework, navigation, agent-surface, Python syntax, git diff --check and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: host validation/checker and fixture repair only; stop if active firmware/build inputs change.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Restore the checker/manifest pair if either proof path loses fail-closed behavior; return to Curator for semantic drift.",
+      "status_documentation_updates": "Document separate historical and current proof scopes; preserve GP-CONFIG-010 and GP-X1-002 evidence unchanged.",
+      "done_evidence": "Fresh independent review and focused positive/negative correspondence proof; aggregate differential shows target fixed without new failure; affected governance gates pass. Full aggregate remains required for dependent GP-CONFIG-016/GP-PROV-014 publication.",
+      "stop_conditions": [
+        "Historical exact identity becomes optional or mutable.",
+        "Current proof accepts source/table drift, dirty critical source or unknown paths.",
+        "Any active firmware, hardware or product code edit is required."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-030",
+      "title": "Make prebuild Git identity self-test hermetic",
+      "status": "READY",
+      "branch": "glyph/gp-val-030-hermetic-git-identity",
+      "objective": "Supply explicit test-local author and committer identity for every temporary repository commit in the prebuild Git identity checker.",
+      "why_this_matters": "The raw symlink and conflict fixture commits fail with Author identity unknown when aggregate isolation removes global Git config, although the production helper passes direct default checks.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "H1 host self-test setup repair only; production Git identity and dirty-source rejection semantics remain unchanged.",
+      "scope": "Change only temporary test-repository commit setup in tools/check_glyph_prebuild_git_identity.py; retain every existing adversarial case and failure assertion.",
+      "explicit_excluded_scope": "No global/system Git config mutation, production helper or builder change, dirty-source bypass, skipped negative case, firmware build or runtime edit.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At live configurator 0da68bdab9bf0fed4ed595538bea9aba7d2f49f3, tools/check_glyph_prebuild_git_identity.py uses local command identity for initial commits but omits it at raw symlink and conflict fixture commits near lines 234, 243 and 246. The failure reproduces with GIT_CONFIG_NOSYSTEM=1 and GIT_CONFIG_GLOBAL=/dev/null.",
+      "dependencies_prerequisites": [
+        "Use per-repository or command-local test identity, not host-global state.",
+        "Keep all staged/unstaged/untracked/ignored/symlink/conflict/gitlink adversarial cases."
+      ],
+      "substantive_authorization_rationale": "The observed failure is within temporary self-test setup; the finite correction requires no product, build or source-authority decision.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Hermetic failure persists beyond fixture setup or exposes a production identity defect.",
+        "A required negative case would need removal or weakened assertion."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of planning/portfolio-20260928-1434, immutable packet 1516ea458003e2948965471b535c3bcb0b4d39e0, packet base and live configurator 0da68bdab9bf0fed4ed595538bea9aba7d2f49f3, on 2026-09-28; immutable receipt a06a3673bc5d35bf2c3eec1eb4c32f618798449f records GP-VAL-030 READY.",
+      "automated_validation": [
+        "Run checker normally and with GIT_CONFIG_NOSYSTEM=1 and GIT_CONFIG_GLOBAL=/dev/null; both pass.",
+        "Demonstrate all existing staged, unstaged, untracked, ignored, symlink, conflict and gitlink negatives still execute and reject.",
+        "Run the full runtime-config aggregate on a clean checkout and record the exact baseline-versus-candidate failure set; this order may publish only if its target failure is repaired without introducing a new failure. Other independently recorded prerequisite failures remain explicit; this does not waive GP-CONFIG-016 or GP-PROV-014 full-aggregate DONE gates.",
+        "Run affected manifest, census, validation-health, framework, navigation, agent-surface, Python syntax, git diff --check and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: host validation/checker and fixture repair only; stop if active firmware/build inputs change.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the bounded harness change if negative coverage weakens; return to Curator if production behavior is implicated.",
+      "status_documentation_updates": "Record hermetic checker result only; preserve builder/firmware status.",
+      "done_evidence": "Fresh independent review, normal and hermetic self-test pass with all negatives, aggregate differential fixes only this failure, affected governance gates pass.",
+      "stop_conditions": [
+        "Production builder/helper or global Git configuration would change.",
+        "Any adversarial test is skipped or softened.",
+        "A firmware build or product/runtime edit becomes necessary."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-VAL-031",
+      "title": "Refresh current semantics bridge source correspondence",
+      "status": "READY",
+      "branch": "glyph/gp-val-031-semantics-bridge-metadata",
+      "objective": "Update only current semantics bridge fixture references to the exact current extractor SHA-256 after proving equivalence under the existing checker invariant.",
+      "why_this_matters": "Both current fixtures pin the extractor digest before generated-adapter parsing was added, so the load-bearing bridge stops before its table and invalid-corpus checks.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "H1 current validation metadata repair; passing bridge proves the bounded 28-table, preview and ten invalid-case contract, not arbitrary runtime semantic equivalence.",
+      "scope": "Record old extractor digest and commit as historical provenance; update the two current fixture source-reference hashes to current exact bytes only after before/after bridge output and source sync checks.",
+      "explicit_excluded_scope": "No historical evidence overwrite, runtime/firmware/table/interpreter/schema change, automatic fixture regeneration, digest bypass or broader semantic claim.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At live configurator 0da68bdab9bf0fed4ed595538bea9aba7d2f49f3, current tools/extract_glyph_identity_runtime_tables.py SHA-256 is fb6b1eb017d66fa5a4d31204d56b1f9622f1303611fd3a709d5b88ae71428631. Both current bridge/preview fixtures store c3e2d943954b59171cd87713786052b19aafa8578647a54c5d13df559542c458, equal to the pre-b9a0a205 extractor. The checker enforces source digest then 28-table/preview/10-invalid-case coverage; in-memory digest substitution passed that bounded proof.",
+      "dependencies_prerequisites": [
+        "Current extractor bytes retain the recorded hash at implementation.",
+        "Before/after values and checker-defined preview/invalid-case results can be compared without changing production source."
+      ],
+      "substantive_authorization_rationale": "The only observed mismatch is stale current source-correspondence metadata; the bounded proof and exact historic digest are known, so no product/domain judgment is required.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Current extractor or any source table/preview/interpreter result changes before implementation.",
+        "Any of the 28 table records or ten invalid-case outcomes differ under the checker invariant.",
+        "Historical evidence would need overwrite or digest enforcement weakened."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of planning/portfolio-20260928-1434, immutable packet 1516ea458003e2948965471b535c3bcb0b4d39e0, packet base and live configurator 0da68bdab9bf0fed4ed595538bea9aba7d2f49f3, on 2026-09-28; immutable receipt a06a3673bc5d35bf2c3eec1eb4c32f618798449f records GP-VAL-031 READY.",
+      "automated_validation": [
+        "Prove before/after extracted 28-table values and checker-defined preview/interpreter summary equal; preserve prior digest provenance.",
+        "Bridge and all ten invalid-corpus cases pass; stale/tampered source digest fails.",
+        "Source-sync and current manifest, census, validation-health checks pass.",
+        "Run the full runtime-config aggregate on a clean checkout and record the exact baseline-versus-candidate failure set; this order may publish only if its target failure is repaired without introducing a new failure. Other independently recorded prerequisite failures remain explicit; this does not waive GP-CONFIG-016 or GP-PROV-014 full-aggregate DONE gates.",
+        "Run framework, navigation, agent-surface, Python syntax, git diff --check and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: host validation/checker and fixture repair only; stop if active firmware/build inputs change.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Restore current fixture references if bounded equivalence fails; return to Curator for semantic divergence.",
+      "status_documentation_updates": "Record exact old and new digest provenance; do not claim firmware behavior change.",
+      "done_evidence": "Fresh independent review, bounded equivalence and negative digest proof, source-sync pass, aggregate differential fixes target without new failures, affected governance gates pass.",
+      "stop_conditions": [
+        "Any source table, preview or invalid-case semantic difference appears.",
+        "Runtime/firmware/product code or historical evidence must change.",
+        "Digest enforcement or source authority would be weakened."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-CONFIG-016",
       "title": "Characterize null RGB SendReport with exact source",
@@ -5769,11 +5940,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-016","GP-PROV-014"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-029","GP-VAL-030","GP-VAL-031","GP-CONFIG-016","GP-PROV-014"],"immediate_ready":5,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":5,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-016, GP-PROV-014; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-029, GP-VAL-030, GP-VAL-031, GP-CONFIG-016, GP-PROV-014; Immediate Ready: 5; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 5; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5784,7 +5955,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260928-1129` was independently reviewed against live `configurator` `57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f`. GP-CONFIG-016 and GP-PROV-014 are bounded H1 READY work orders. GP-CONFIG-015 is RESEARCH_GATED because source proves construction-time menu caching but does not prove user-visible same-session menu access after SetConfig. GP-CONFIG-012 and GP-CONFIG-013 remain REVIEW / EVIDENCE_GATED until an accepted exact current decoder closure; GP-CONFIG-014 remains USER_DECISION_GATED on in-place custom-mode behavior. The packet is CONSUMED: every candidate has a disposition and no pending Curator survivor remains. GP-CONFIG-012/013 remain tracked as REVIEW queue items. No global wait is supported. GP-VAL-011 remains owner deferred; Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029/030/031 are bounded H1 READY validation repairs. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
@@ -5820,7 +5991,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The six-candidate packet has been fully adjudicated. GP-CONFIG-016 and GP-PROV-014 are READY for independent H1 characterization/provenance only. GP-CONFIG-015 is RESEARCH_GATED pending a source-supported user-visible same-session menu sequence. GP-CONFIG-012 and GP-CONFIG-013 remain EVIDENCE_GATED on accepted exact decoder closure and serialized fixture editing; no decoder fixture or firmware repair is authorized. GP-CONFIG-014 remains USER_DECISION_GATED until the owner selects valid in-place replacement and invalid-count behavior for modifier, combo, digital and axis outputs. GP-CONFIG-015 and GP-CONFIG-014 retain their gated dispositions in immutable review provenance; GP-CONFIG-012/013 remain tracked REVIEW queue items. The four gated candidates are not executable.
+The four-candidate packet has been fully adjudicated. GP-VAL-029/030/031 are READY for distinct validation repairs. GP-VAL-028 is EVIDENCE_GATED on authenticated generated-header bytes and deterministic clean-checkout materialization; no host-double substitution is authorized. Existing GP-CONFIG-016 and GP-PROV-014 cannot publish DONE without their existing full aggregate gate. The gated proposal is recorded in immutable Curator provenance and is not executable.
 
 ## Work Orders
 
@@ -5852,35 +6023,27 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260928-1129",
-  "planning_commit": "a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd",
-  "packet_id": "glyph-portfolio-20260928-1129",
-  "packet_base_configurator_sha": "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
-  "curation_branch": "curation/portfolio-20260928-1129-review",
+  "planning_branch": "planning/portfolio-20260928-1434",
+  "planning_commit": "1516ea458003e2948965471b535c3bcb0b4d39e0",
+  "packet_id": "glyph-portfolio-20260928-1434",
+  "packet_base_configurator_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+  "curation_branch": "curation/portfolio-20260928-1514-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-CONFIG-016",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-CONFIG-015",
-      "disposition": "RESEARCH_GATED"
-    },
-    {
-      "candidate_id": "GP-PROV-014",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-CONFIG-012",
+      "candidate_id": "GP-VAL-028",
       "disposition": "EVIDENCE_GATED"
     },
     {
-      "candidate_id": "GP-CONFIG-013",
-      "disposition": "EVIDENCE_GATED"
+      "candidate_id": "GP-VAL-029",
+      "disposition": "READY"
     },
     {
-      "candidate_id": "GP-CONFIG-014",
-      "disposition": "USER_DECISION_GATED"
+      "candidate_id": "GP-VAL-030",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-VAL-031",
+      "disposition": "READY"
     }
   ],
   "review_date": "2026-09-28",
