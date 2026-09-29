@@ -484,3 +484,17 @@ the recovered 13-path diff, focused PASS results, and full aggregate FAIL;
 review found host RGB schema correspondence to repair and four pre-existing
 aggregate blockers. Root owns the repair, re-review, final gates, and
 publication decision.
+
+Recovery continuation on live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`
+(2026-09-29): repository delegation guidance applies; native internal
+collaboration agents are available. Two bounded read-only specialists checked
+the GP-CONFIG-010 generated-header capacity gate and the GP-CONFIG-009 menu
+source-digest drift against that exact live commit. A third read-only specialist
+investigated the generated-header materialization evidence gate. A fresh
+independent read-only reviewer inspected recovered GP-CONFIG-016 candidate
+`cea311d9c0174c0b0c13652157fc092dc699113e` against live, including merge
+integrity, exact changed paths, focused results, aggregate failures, scope,
+authority, and publication safety. Specialists and reviewer were excluded from
+edits, Git publication, firmware build, device or hardware action, and new
+backend-behavior claims. Root retains validation and publication authority;
+the full aggregate gate remains failure-bearing.
