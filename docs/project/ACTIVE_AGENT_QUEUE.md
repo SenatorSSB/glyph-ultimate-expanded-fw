@@ -19,51 +19,76 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+  "audit_base_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Packet glyph-portfolio-20260929-1728 independently adjudicated: GP-VAL-032 READY solely for exact GP-CONFIG-010 historical-object closure; all other GP-VAL-011 work remains owner deferred.",
+    "resolution": "Packet glyph-portfolio-20260929-2218 independently adjudicated: GP-CONFIG-012, GP-CONFIG-013, GP-CONFIG-014 and GP-CONFIG-017 READY; GP-CONFIG-015 RESEARCH_GATED; GP-CONFIG-018 USER_DECISION_GATED. GP-VAL-011 remains owner deferred.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:565626cdf7014820fcc401bf1f776669b1cf57d6:docs/planning/portfolio_20260929_1728.md",
+      "opening_reference": "git-json:7db3cfb56c0630b7bf41c3634fa460440812ac04:docs/planning/portfolio_20260929_2218.md",
       "subject_ids": [
-        "GP-VAL-032"
+        "GP-CONFIG-012",
+        "GP-CONFIG-013",
+        "GP-CONFIG-014",
+        "GP-CONFIG-015",
+        "GP-CONFIG-017",
+        "GP-CONFIG-018"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:e6f66e3a95b8538f167c13b862d598dadfa31603:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:03c04c7669c85fee02ff52eb11f75d35fecc9040:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260929-1728",
-    "base_configurator_sha": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
-    "packet_id": "glyph-portfolio-20260929-1728",
-    "packet_path": "docs/planning/portfolio_20260929_1728.md",
-    "planning_commit": "565626cdf7014820fcc401bf1f776669b1cf57d6",
-    "curation_commit": "e6f66e3a95b8538f167c13b862d598dadfa31603",
+    "branch": "planning/portfolio-20260929-2218",
+    "base_configurator_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
+    "packet_id": "glyph-portfolio-20260929-2218",
+    "packet_path": "docs/planning/portfolio_20260929_2218.md",
+    "planning_commit": "7db3cfb56c0630b7bf41c3634fa460440812ac04",
+    "curation_commit": "03c04c7669c85fee02ff52eb11f75d35fecc9040",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator authorized GP-VAL-032 solely for the exact GP-CONFIG-010 historical-object closure after fresh live source and runner inspection; GP-VAL-011 remains owner deferred and GP-PROV-014 remains READY."
+      "Independent Curator adjudicated all six packet candidates at the exact unchanged live base; four complete READY orders entered the queue and the two gated proposals have no executable survivor."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260929-1728",
-      "planning_commit": "565626cdf7014820fcc401bf1f776669b1cf57d6",
-      "packet_id": "glyph-portfolio-20260929-1728",
-      "packet_base_configurator_sha": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
-      "curation_branch": "curation/portfolio-20260929-1728-review",
+      "planning_branch": "planning/portfolio-20260929-2218",
+      "planning_commit": "7db3cfb56c0630b7bf41c3634fa460440812ac04",
+      "packet_id": "glyph-portfolio-20260929-2218",
+      "packet_base_configurator_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
+      "curation_branch": "curation/portfolio-20260929-2218-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-VAL-032",
+          "candidate_id": "GP-CONFIG-012",
           "disposition": "READY"
+        },
+        {
+          "candidate_id": "GP-CONFIG-013",
+          "disposition": "READY"
+        },
+        {
+          "candidate_id": "GP-CONFIG-014",
+          "disposition": "READY"
+        },
+        {
+          "candidate_id": "GP-CONFIG-015",
+          "disposition": "RESEARCH_GATED"
+        },
+        {
+          "candidate_id": "GP-CONFIG-017",
+          "disposition": "READY"
+        },
+        {
+          "candidate_id": "GP-CONFIG-018",
+          "disposition": "USER_DECISION_GATED"
         }
       ],
       "review_date": "2026-09-29",
-      "curation_commit": "e6f66e3a95b8538f167c13b862d598dadfa31603"
+      "curation_commit": "03c04c7669c85fee02ff52eb11f75d35fecc9040"
     }
   },
   "completion_correspondence": {
@@ -88,18 +113,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 4,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 4,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_OK"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -114,8 +138,8 @@ Git, but it is not current candidate supply or implementation authority.
       "title": "Repair exact GP-CONFIG-010 historical-object closure in isolated aggregate",
       "status": "DONE",
       "branch": "glyph/gp-val-032-config-010-object-closure",
-      "objective": "For the exact current load-bearing GP-CONFIG-010 semantic checker ID and command, require the exact locally present historical candidate commit f4771e17430fd1ea3f1e3e5339a83dfe648290a3 and transfer only its Git-readable object closure through the runner’s existing bounded local pack/index mechanism.",
-      "why_this_matters": "The isolated aggregate’s closed object catalog omits a non-ancestor historical candidate that the current semantic checker dereferences. Untouched canonical aggregate therefore lacks a required object even though the caller has the committed candidate and its complete closure.",
+      "objective": "For the exact current load-bearing GP-CONFIG-010 semantic checker ID and command, require the exact locally present historical candidate commit f4771e17430fd1ea3f1e3e5339a83dfe648290a3 and transfer only its Git-readable object closure through the runner\u2019s existing bounded local pack/index mechanism.",
+      "why_this_matters": "The isolated aggregate\u2019s closed object catalog omits a non-ancestor historical candidate that the current semantic checker dereferences. Untouched canonical aggregate therefore lacks a required object even though the caller has the committed candidate and its complete closure.",
       "hardware_risk": "H1",
       "behavioral_claim": "Offline validation-infrastructure object availability only; no firmware, build input, runtime, device, artifact or historical acceptance change.",
       "scope": "Add one exact checker ID/command conditional root to the existing finite runner catalog or equivalently closed selection point. Verify the fixed historical commit exists locally as that commit and has complete closure before clone/transfer. Preserve current isolated repository, local pack-objects --revs --stdout / index-pack --stdin path, required refs, deadline, source/clean/fingerprint/mutation proofs and fail-closed errors. Add focused positive and adversarial runner coverage and update only directly coupled validation docs/census if required. Permit only the separately adjudicated exact-path correspondence consequence: add tools/run_glyph_runtime_config_validation.py to finite NON_BEHAVIORAL_PATHS in tools/glyph_hardware_correspondence.py, with focused tests in tools/test_glyph_hardware_correspondence.py and source-backed explanation in docs/agent_framework/HARDWARE_CORRESPONDENCE.md. Keep critical precedence, unknown-path failure, regular non-executable 100644 mode, and ordinary validation gates. Direct deterministic census/manifest/health consequences may change only when required.",
@@ -124,14 +148,14 @@ Git, but it is not current candidate supply or implementation authority.
         "validation infrastructure",
         "docs/checkers"
       ],
-      "source_authority": "Fresh live configurator 739c9c58acfde78de1639cd18be5a7c60fa06f1a; manifest load-bearing current ID gp_config_010_integration_semantic_correspondence has exact command [python3, tools/check_glyph_config_010_integration_semantic_correspondence.py]. Fixture fixes historical_candidate=f4771e17430fd1ea3f1e3e5339a83dfe648290a3; current_main resolves that commit’s source blob and historical diff. Exact local object is a non-ancestor commit with missing-object-free rev-list closure. Current runner required_catalog lacks this conditional root and clone_snapshot transfers only enumerated roots by bounded local pack/index. Owner explicitly authorized this narrow exception to GLYPH-UD-013. Planner packet 565626cdf7014820fcc401bf1f776669b1cf57d6 is independent candidate supply. Fresh independent follow-up review on live configurator fddc676c16c509c1ca7fe74acf3e266a789d05d2, recorded immutably at 9c7377c8d8e69f8353f275f5acdbfd02fcf07fe2, found the current semantic checker calls verify_correspondence over complete candidate-to-HEAD changed paths and the exact runner path is unclassified. PlatformIO filters and build controls documented in HARDWARE_CORRESPONDENCE.md exclude the host runner from firmware inputs; finite exact-path nonbehavioral classification is source-backed.",
+      "source_authority": "Fresh live configurator 739c9c58acfde78de1639cd18be5a7c60fa06f1a; manifest load-bearing current ID gp_config_010_integration_semantic_correspondence has exact command [python3, tools/check_glyph_config_010_integration_semantic_correspondence.py]. Fixture fixes historical_candidate=f4771e17430fd1ea3f1e3e5339a83dfe648290a3; current_main resolves that commit\u2019s source blob and historical diff. Exact local object is a non-ancestor commit with missing-object-free rev-list closure. Current runner required_catalog lacks this conditional root and clone_snapshot transfers only enumerated roots by bounded local pack/index. Owner explicitly authorized this narrow exception to GLYPH-UD-013. Planner packet 565626cdf7014820fcc401bf1f776669b1cf57d6 is independent candidate supply. Fresh independent follow-up review on live configurator fddc676c16c509c1ca7fe74acf3e266a789d05d2, recorded immutably at 9c7377c8d8e69f8353f275f5acdbfd02fcf07fe2, found the current semantic checker calls verify_correspondence over complete candidate-to-HEAD changed paths and the exact runner path is unclassified. PlatformIO filters and build controls documented in HARDWARE_CORRESPONDENCE.md exclude the host runner from firmware inputs; finite exact-path nonbehavioral classification is source-backed.",
       "dependencies_prerequisites": [
         "Start from newly live-verified clean configurator; preserve the exact manifest ID/command and fixture candidate contract.",
         "Require f4771e17430fd1ea3f1e3e5339a83dfe648290a3 to be a locally verifiable exact commit with complete object closure; missing or unverifiable local object is hard failure.",
         "Preserve existing runner transfer architecture and all other checker catalog decisions; no candidate ref is required by the current checker.",
         "Before modifying the correspondence inventory, verify the runner remains a host validation entrypoint outside PlatformIO firmware/build input closure; any newly shown compiler/build dependency stops for Curator judgment."
       ],
-      "substantive_authorization_rationale": "Owner’s express narrow GP-VAL-011 exception and independently verified current manifest, fixture, checker dereference, object topology and closed runner transfer establish a bounded H1 repair without runtime or hardware judgment. The exact-path host correspondence consequence is separately source-reviewed and necessary for the unchanged semantic checker to evaluate the authorized runner repair; it grants no pattern or broad GP-VAL-011 exception.",
+      "substantive_authorization_rationale": "Owner\u2019s express narrow GP-VAL-011 exception and independently verified current manifest, fixture, checker dereference, object topology and closed runner transfer establish a bounded H1 repair without runtime or hardware judgment. The exact-path host correspondence consequence is separately source-reviewed and necessary for the unchanged semantic checker to evaluate the authorized runner repair; it grants no pattern or broad GP-VAL-011 exception.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Exact manifest ID/command or semantic fixture/checker historical identity contract changes.",
@@ -951,37 +975,34 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-012",
       "title": "Characterize invalid buttons through exact decoder and mask callers",
-      "status": "REVIEW",
+      "status": "READY",
       "branch": "glyph/gp-config-012-button-mask-characterization",
       "objective": "Finish exact schema/decoder/helper and complete production caller characterization for zero and invalid button values, producing a decision-ready source matrix without selecting firmware policy.",
       "why_this_matters": "Nanopb accepts BTN_UNSPECIFIED=0 and Pico make_button_mask shifts by button-1; the audit observed UBSan negative shift while physical reachability remains untested.",
       "hardware_risk": "H1",
       "behavioral_claim": "Record decode acceptance, enum-read validity, helper behavior and validation paths separately. No invalid-binding repair or reject/no-binding/ignore policy is selected.",
-      "scope": "Add exact-production host harness/checker/fixtures and report under tools and docs. Reuse GP-VAL-026 tracked fixture; add exact config.pb.c plus Nanopb pb_decode.c/h and pb_common.c/h with immutable package/source identity, licenses, hashes and declared manifest dependencies. Produce caller matrix and source-census drift checks; no firmware edit.",
-      "explicit_excluded_scope": "No firmware/helper/getter/caller repair or externally visible reject, no-binding, ignore, fallback, retain, or initialization policy; no gameplay, routing, source-owned table, neutral Profile schema, runtime-loaded config, active publication, device/WebSerial/protobuf/backend write, persistence/ABI mutation, flashing automation, Nunchuk acceptance, exploitability, physical symptom or root-cause claim. GP-VAL-011 remains independently owner-deferred. GP-CONFIG-010 and GP-X1-002 are DONE and their exact tested source/artifacts/evidence remain untouched. Later firmware repair requires separate source-backed Curator authorization and exact hardware gate.",
+      "scope": "Exact production host/source characterization of decoder acceptance and failure, raw Button storage, Pico enum-read sanitizer, shift sanitizer and all four caller reachability paths. Bind current proto/options/generated C/header and Nanopb decoder/common closure; cover default, Configurator and persistence producers, mixed/packed/repeated scalar and extent cases, named controls and negative controls. Separate source-supported from injected and physical UNKNOWN. Keep modifier count <=10 to isolate GP-CONFIG-014.",
+      "explicit_excluded_scope": "No firmware repair, invalid-binding or USB-default policy, reject/no-binding/ignore/clamp/fallback/retain/retry/default behavior, schema or persistence ABI change, runtime-loaded config, device/WebSerial/protobuf/backend write, flashing, gameplay, GP-VAL-011, physical symptom, root cause or Nunchuk claim.",
       "touched_planes": [
         "docs/checkers"
       ],
-      "source_authority": "At live configurator 975b902c6b2facf27108cd5ac7153dd9efb7638a, HAL/pico/include/util/state_util.hpp make_button_mask lacks zero validation; get_button/set_button guard BTN_UNSPECIFIED only, not the full button range. Callers: CustomControllerMode::SetConfig modifier and combo masks, setup_mode_activation_bindings, backend_config_from_buttons. SetConfig/defaults/persisted/menu paths require explicit characterization; AVR helper is a separate non-Glyph target. Nanopb upstream tag0.4.9.1 resolves to cad3c18ef15a663e30e3e43e3a752b66378adec1; pb.h Git blob10249bb651f72e17f2789c435edf0dfd398d2183. GregTurbo/HayBox-proto db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8, unchanged selector GregTurbo/HayBox-proto#db4e2f6 in config/glyph/env.ini. config.proto SHA256 2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b; config.options 6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805; generated config.pb.h 532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3; Nanopb pb.h a2ecdca9fdaeef5f4972ed983540c0d6fb0a5c402a2e0b0349d7e1bc5e188d29. CustomModeConfig.modifiers extent is20. Generated header identifies nanopb0.4.9.1/header40 and observed library metadata0.4.91; observed correspondence, not transitive reproducible-build proof.",
+      "source_authority": "Current live source at 1b0364ce16b1c20fcea6dfef3ed12130c5c27093. HAL/pico/include/util/state_util.hpp:26-31 shifts 1ULL by Button-1; four Pico production call sites are src/modes/CustomControllerMode.cpp:10-27 (modifier and combo), src/core/mode_selection.cpp:203-215, and src/core/config_utils.cpp:8-30. None validates individual Button values before the helper. Generated Button is nonfixed enum with names 0..60; Pico ABI must be asserted. ConfiguratorBackend.cpp:161-278 and Persistence.cpp:80-110 do not validate button values. Actual Glyph defaults are glyph_overrides.hpp; GP-PROV-014 records observed 0.4.9.2 decoder/common/generated closure, not decoder policy.",
       "dependencies_prerequisites": [
-        "Start from freshly live-verified configurator 975b902c6b2facf27108cd5ac7153dd9efb7638a; GP-VAL-026 is DONE with strict completion correspondence and its tracked schema/selector closure remains exact.",
-        "Bind the exact current Pico make_button_mask body, all four production call sites, generated schema and build-resolved decoder inputs. Current GP-CONFIG-010 mode-count guard does not validate button values; AVR helper is outside this work order.",
-        "Before introducing decoder fixtures, independently verify and record exact upstream/build-resolved config.pb.c, pb_decode.c/h and pb_common.c/h bytes, licenses, hashes and validation-manifest dependencies. The absent old partial checkout supplies no authority.",
-        "Serialize shared decoder fixture edits with GP-CONFIG-013; if 013 lands first, reuse its reviewed exact closure only after current correspondence verification."
+        "Start from freshly live-verified configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093; GLYPH-UD-021 permits curation and GP-PROV-014 is DONE with one exact observed 0.4.9.2 closure.",
+        "Authenticate and hash every needed generated config C/header, proto/options and Nanopb decode/common source/header/license byte against GP-PROV-014 before host execution; do not treat the compatible range as a permanent pin.",
+        "Serialize any shared decoder fixture writer. This order may independently create the authenticated shared fixture if the other H1 order has not integrated; neither H1 conclusion is a prerequisite to the other."
       ],
-      "substantive_authorization_rationale": "Direct owner resumption GLYPH-UD-021 removes the earlier parking instruction for curation. The exact unguarded mask shift and four current callers establish a bounded H1 evidence gap, while decode acceptance, numeric value, helper UB, source reachability and physical effect can be characterized without selecting any invalid-binding policy. Missing decoder implementation provenance is an explicit implementation stop gate, not inferred source authority.",
+      "substantive_authorization_rationale": "The source defect and exact accepted decoder provenance are sufficiently bounded for immediate H1 characterization without a product-policy decision. GP-PROV-014 authenticates one snapshot; the order itself independently checks/reuses those bytes and can create its own fixture. No other H1 integration is a prerequisite.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
-        "Current make_button_mask, the four caller bodies, generated schema, decoder selector or build-resolved dependency identity changes materially before implementation.",
-        "Exact decoder bytes/licenses/hashes cannot be verified or the harness cannot bind exact production bodies and all call sites.",
-        "Work requires invalid-binding policy, active firmware repair, device action, persistence change, or any excluded boundary."
+        "Exact production source, schema, selector, generated bytes or observed decoder closure materially change before execution.",
+        "Authenticated closure bytes or licenses are unavailable, the host cannot bind exact production bodies, or a required behavioral/policy choice appears.",
+        "Another shared fixture writer conflicts; serialize before mutation without promoting an unreviewed fixture."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator reviewed live configurator 975b902c6b2facf27108cd5ac7153dd9efb7638a, immutable Planner packet glyph-portfolio-20260926-2109 at 872b0f68ed3a187bfcd1ca4dd0d123c5c073d8af, direct owner resumption GLYPH-UD-021, current exact production sources, GP-VAL-026 schema/dependency closure and GP-CONFIG-010/X1 completion on 2026-09-26. Immutable Curator receipt 877ed3df709d325a979be48e6bd76f0173ace974 records READY; no firmware or physical behavior is authorized by this H1 order.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of live configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, tree aaa5d7dff632b95e95f2ccbc4459d6b08ed3d91b, immutable Planner packet glyph-portfolio-20260929-2218 at 7db3cfb56c0630b7bf41c3634fa460440812ac04, GLYPH-UD-021, exact current source, GP-PROV-014 observed Nanopb 0.4.9.2 closure, and completed evidence on 2026-09-29. Receipt 03c04c7669c85fee02ff52eb11f75d35fecc9040 records disposition. This order authorizes only its stated scope.",
       "automated_validation": [
-        "Exact production helper/caller bodies and actual decoder: empty,zero,first1,last60,61..64,65,max decoder-representable values,negative/overlong/malformed varints,packed/repeated encodings and mixed zero+valid. Separate decoder rejection, numeric storage, enum sanitizer failure, invalid shift and defined completion in independent processes.",
-        "Matrix: caller -> input source -> pre-helper validation -> decoded/configured zero reachability -> observed host result -> physical reachability status. Inspect every production caller, HandleSetConfig, compiled defaults, Persistence::LoadConfig, Glyph setup and menu/watchdog/config-producing paths.",
-        "Preserve valid mask bit positions. Exact-source/caller-census/fixture tamper and omission FAIL; affected transaction/rebinding/config checks PASS. Physical reachability remains UNKNOWN unless directly proven, hardware NOT_TESTED; host UB is not a physical symptom.",
-        "Run clean-checkout direct and affected configurator-category checks; manifest dependency closure, checker census, validation health, framework, agentic sequence, navigation, agent surface, Python compilation and exact diff checks; fresh independent review. Report unrelated aggregate limitations exactly; no aggregate-green claim from category PASS and no GP-VAL-011 redesign."
+        "Assert Pico sizeof(Button), enum descriptor width and compile flags; record exact decode status/raw bytes then isolate enum-read and shift sanitizer results in separate processes; exercise all named 1..60 controls and 0,61..64, larger, negative and malformed encodings.",
+        "Census all four production helper callers and Configurator/Persistence/default/menu paths; exact source/closure hashes, tamper/omission controls, affected transaction/mode/rebinding tests, manifest/census/health, framework, sequence, navigation, surface/integration, Python syntax, diff and independent review. Run direct/affected category gates; full aggregate only when required by current manifest/work-order contract."
       ],
       "canonical_build": "NOT_REQUIRED: H1 host/docs/checker-only work; no firmware source or build inputs change.",
       "expected_artifact": "NOT_APPLICABLE",
@@ -990,16 +1011,15 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_version": "NOT_APPLICABLE",
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
-      "rollback_recovery": "Keep failed implementation isolated; repair within the contract or return to Curator. Never weaken source correspondence or rewrite historical evidence. Curator 2026-09-26 returned this order to REVIEW / EVIDENCE_GATED: a fresh isolated current-configurator Nanopb range resolution selected 0.4.92, while this authorization recorded observed 0.4.91; no current exact generated decoder closure, license/hash correspondence, or reproducible package identity has been accepted. Do not execute the historical READY scope until fresh source-backed curation publishes a replacement order.",
-      "status_documentation_updates": "Nonexecutable REVIEW / EVIDENCE_GATED after 2026-09-26 Curator dependency check. Preserve the historical H1 scope and exact source observations. Fresh planning/curation must bind the current resolved Nanopb package and generated config.pb.c, licenses, hashes, manifest dependencies, and production-source correspondence before any host fixture or checker implementation. No firmware or policy repair is authorized.",
-      "done_evidence": "Exact reviewed implementation, reproducible host evidence and required checks PASS; prior live canonical integration followed by separate strict completion correspondence.",
+      "rollback_recovery": "Keep failed H1 work isolated; preserve historical exact evidence and return to Curator on source, decoder or validation drift. No policy repair is authorized.",
+      "status_documentation_updates": "Record exact host observations, source-supported and injected cases, physical UNKNOWN, decoder snapshot limits and separate strict DONE correspondence after reviewed integration. No firmware or owner policy claim.",
+      "done_evidence": "Exact source/decoder fixture hashes, complete source-supported versus injected matrix, isolated host observations, adversarial drift controls, direct/affected validation, fresh independent review, reviewed integration and separate strict DONE correspondence; physical behavior remains UNKNOWN.",
       "stop_conditions": [
-        "Decoder provenance, exact source/caller correspondence, fixture completeness, sanitizer isolation, affected validation or independent review fails.",
-        "Any invalid-binding repair or externally visible policy, active firmware, build input, device, persistence, GP-CONFIG-014 or other excluded surface would change.",
-        "Any live source/schema/selector drift requires renewed Curator judgment before execution."
+        "Stop and return to Curator on material source or decoder drift, failed byte correspondence, missing caller coverage, ambiguous sanitizer attribution, or policy dependence.",
+        "No active firmware, build-input, ABI, persistence write, device/protobuf write, flashing, GP-VAL-011 or Nunchuk validation change."
       ],
       "activation_state": "NOT_APPLICABLE",
-      "activation_requires_new_judgment": true,
+      "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -1013,37 +1033,34 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-013",
       "title": "Characterize USB default no-write and downstream selection paths",
-      "status": "REVIEW",
+      "status": "READY",
       "branch": "glyph/gp-config-013-usb-default-characterization",
       "objective": "Finish exact getter/caller/decoder characterization for missing and invalid USB defaults, producing no-write and downstream-read evidence without selecting fallback policy.",
       "why_this_matters": "The default getter writes only for index>0 and <=backend count; its production caller declares usb_backend_config uninitialized and reads backend_id. SetConfig checks a different default index.",
       "hardware_risk": "H1",
       "behavioral_claim": "Sentinel tests prove no-write branches and exact valid copying; uninitialized production reads remain separate source facts unless reliable memory-sanitizer evidence exists. No USB behavior repair or physical symptom is claimed.",
-      "scope": "Exact-production getter/caller harnesses bound to current source, decoder fixtures, checker and complete initialization/caller matrix/report. Reuse GP-VAL-026; if GP-CONFIG-012 decoder closure is absent, add the identical pinned config.pb.c and Nanopb pb_decode.c/h,pb_common.c/h with the same provenance/license/hash/dependency rules. Serialize shared fixture edits.",
-      "explicit_excluded_scope": "No firmware/helper/getter/caller repair or externally visible reject, no-binding, ignore, fallback, retain, or initialization policy; no gameplay, routing, source-owned table, neutral Profile schema, runtime-loaded config, active publication, device/WebSerial/protobuf/backend write, persistence/ABI mutation, flashing automation, Nunchuk acceptance, exploitability, physical symptom or root-cause claim. GP-VAL-011 remains independently owner-deferred. GP-CONFIG-010 and GP-X1-002 are DONE and their exact tested source/artifacts/evidence remain untouched. Later firmware repair requires separate source-backed Curator authorization and exact hardware gate.",
+      "scope": "Exact production host/source characterization of tag-7 decode/storage, getter write/no-write for count 0..15 and index 0..255, destination initialization, downstream reads/copies and source-reachable bypass/watchdog/detection paths. Cover omitted, malformed, overlong, repeated and out-of-range uint32 wire cases, backend count bounds, defaults, Configurator save/publication and Persistence successful/partial failed-load states. Use sentinels for no-write; never read uninitialized memory in a harness.",
+      "explicit_excluded_scope": "No firmware repair, invalid-binding or USB-default policy, reject/no-binding/ignore/clamp/fallback/retain/retry/default behavior, schema or persistence ABI change, runtime-loaded config, device/WebSerial/protobuf/backend write, flashing, gameplay, GP-VAL-011, physical symptom, root cause or Nunchuk claim.",
       "touched_planes": [
         "docs/checkers"
       ],
-      "source_authority": "At live configurator 975b902c6b2facf27108cd5ac7153dd9efb7638a, HAL/pico/src/comms/backend_init.cpp get_usb_backend_config_default has zero/out-of-range no-write paths; initialize_backends reads uninitialized usb_backend_config.backend_id and later may copy default_mode_config. config/glyph/common/src/config.cpp registers the getter; defaults use USB index1; Config.default_usb_backend_config generated uint8 limit is separate from protobuf uint32 wire type. HandleSetConfig validates default_backend_config, not this field. Nanopb upstream tag0.4.9.1 resolves to cad3c18ef15a663e30e3e43e3a752b66378adec1; pb.h Git blob10249bb651f72e17f2789c435edf0dfd398d2183. GregTurbo/HayBox-proto db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8, unchanged selector GregTurbo/HayBox-proto#db4e2f6 in config/glyph/env.ini. config.proto SHA256 2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b; config.options 6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805; generated config.pb.h 532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3; Nanopb pb.h a2ecdca9fdaeef5f4972ed983540c0d6fb0a5c402a2e0b0349d7e1bc5e188d29. CustomModeConfig.modifiers extent is20. Generated header identifies nanopb0.4.9.1/header40 and observed library metadata0.4.91; observed correspondence, not transitive reproducible-build proof.",
+      "source_authority": "Current live source at 1b0364ce16b1c20fcea6dfef3ed12130c5c27093. HAL/pico/src/comms/backend_init.cpp:23-145,253-297 contains a conditional-write USB getter and initialize_backends local CommunicationBackendConfig without initialization before backend_id read. Glyph registers that callback in config/glyph/common/src/config.cpp:96-106; actual defaults use USB index 1. ConfiguratorBackend.cpp:181-278 checks default_backend_config but not default_usb_backend_config. Persistence.cpp:80-110 loads directly into live Config and can return after partial failed decode; successful publication and failed load are separate. Proto tag 7 is uint32, generated Config field is uint8, backend extent is 15; GP-PROV-014 records observed 0.4.9.2 decoder closure.",
       "dependencies_prerequisites": [
-        "Start from freshly live-verified configurator 975b902c6b2facf27108cd5ac7153dd9efb7638a; GP-VAL-026 is DONE with strict completion correspondence and its tracked schema/selector closure remains exact.",
-        "Bind the current exact USB getter and initialize_backends caller bodies, downstream reads/copies, defaults, SetConfig, persisted-load and watchdog/menu producers; distinguish source-level read from any unproven physical symptom.",
-        "Before introducing decoder fixtures, independently verify and record exact upstream/build-resolved config.pb.c, pb_decode.c/h and pb_common.c/h bytes, licenses, hashes and validation-manifest dependencies. GP-CONFIG-012 is not a substantive prerequisite: reuse its reviewed closure if present, otherwise add identical pinned closure here.",
-        "Serialize shared decoder fixture edits with GP-CONFIG-012. The current canonical GP-CONFIG-010 and GP-X1-002 completions are baseline, not pending dependencies."
+        "Start from freshly live-verified configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093; GLYPH-UD-021 permits curation and GP-PROV-014 is DONE with one exact observed 0.4.9.2 closure.",
+        "Authenticate and hash every needed generated config C/header, proto/options and Nanopb decode/common source/header/license byte against GP-PROV-014 before host execution; do not treat the compatible range as a permanent pin.",
+        "Serialize any shared decoder fixture writer. This order may independently create the authenticated shared fixture if the other H1 order has not integrated; neither H1 conclusion is a prerequisite to the other."
       ],
-      "substantive_authorization_rationale": "Direct owner resumption GLYPH-UD-021 removes the earlier parking instruction for curation. The source-level no-write path followed by consumption of an uninitialized destination establishes a bounded H1 characterization gap. Sentinel, decoder and caller tests can establish facts without choosing reject, fallback, retain or initialization behavior; physical effects remain unknown.",
+      "substantive_authorization_rationale": "The source defect and exact accepted decoder provenance are sufficiently bounded for immediate H1 characterization without a product-policy decision. GP-PROV-014 authenticates one snapshot; the order itself independently checks/reuses those bytes and can create its own fixture. No other H1 integration is a prerequisite.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
-        "Current USB getter/caller, defaults, persistence/SetConfig path, generated schema, decoder selector or build-resolved dependency identity changes materially before implementation.",
-        "Exact decoder bytes/licenses/hashes cannot be verified or exact production getter/caller binding fails.",
-        "Work requires USB fallback/rejection/retention policy, active firmware repair, device action, persistence mutation or another excluded boundary."
+        "Exact production source, schema, selector, generated bytes or observed decoder closure materially change before execution.",
+        "Authenticated closure bytes or licenses are unavailable, the host cannot bind exact production bodies, or a required behavioral/policy choice appears.",
+        "Another shared fixture writer conflicts; serialize before mutation without promoting an unreviewed fixture."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator reviewed live configurator 975b902c6b2facf27108cd5ac7153dd9efb7638a, immutable Planner packet glyph-portfolio-20260926-2109 at 872b0f68ed3a187bfcd1ca4dd0d123c5c073d8af, direct owner resumption GLYPH-UD-021, current exact production sources, GP-VAL-026 schema/dependency closure and GP-CONFIG-010/X1 completion on 2026-09-26. Immutable Curator receipt 877ed3df709d325a979be48e6bd76f0173ace974 records READY; no firmware or physical behavior is authorized by this H1 order.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of live configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, tree aaa5d7dff632b95e95f2ccbc4459d6b08ed3d91b, immutable Planner packet glyph-portfolio-20260929-2218 at 7db3cfb56c0630b7bf41c3634fa460440812ac04, GLYPH-UD-021, exact current source, GP-PROV-014 observed Nanopb 0.4.9.2 closure, and completed evidence on 2026-09-29. Receipt 03c04c7669c85fee02ff52eb11f75d35fecc9040 records disposition. This order authorizes only its stated scope.",
       "automated_validation": [
-        "Empty list; index0; first1; distinct last/count; count+1; representable extremes; malformed/overflow wire encodings. Sentinel destination stays byte-identical on no-write paths; full CommunicationBackendConfig valid entry copied exactly. Do not manufacture uninitialized reads in harness.",
-        "Matrix every getter/callback caller and destination initialization; actual registrations/custom callback API contract; compiled defaults, persisted LoadConfig, SetConfig, menu/default updates and watchdog scratch; downstream backend_id/default_mode_config and other reads.",
-        "Exact body, caller census and decoder/schema tamper FAIL. Host results separated from physical UNKNOWN. Record explicit reject/fallback/retain alternatives unless authoritative source unambiguously resolves them.",
-        "Run clean-checkout direct and affected configurator-category checks; manifest dependency closure, checker census, validation health, framework, agentic sequence, navigation, agent surface, Python compilation and exact diff checks; fresh independent review. Report unrelated aggregate limitations exactly; no aggregate-green claim from category PASS and no GP-VAL-011 redesign."
+        "Prove valid getter copies with distinct first/last records and no-write with initialized sentinel across count 0..15 and stored index 0..255; isolate tag-7 decode and failure destination bytes, omitted/malformed/repeated/overflow encodings and count 16 rejection.",
+        "Census actual/default callback registrations and all downstream backend_id/default_mode_config reads; distinguish ordinary valid bypass, no match, mode-only/USB/non-USB watchdog and USB/non-USB detection, plus successful SetConfig and partial Persistence failure. Exact source/closure hashes, tamper/omission controls, affected transaction gates, manifest/census/health, framework, sequence, navigation, surface/integration, syntax, diff and independent review; no deterministic uninitialized result claim."
       ],
       "canonical_build": "NOT_REQUIRED: H1 host/docs/checker-only work; no firmware source or build inputs change.",
       "expected_artifact": "NOT_APPLICABLE",
@@ -1052,16 +1069,135 @@ Git, but it is not current candidate supply or implementation authority.
       "manual_acceptance_protocol_version": "NOT_APPLICABLE",
       "hardware_evidence_contract_reference": "NOT_APPLICABLE",
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
-      "rollback_recovery": "Keep failed implementation isolated; repair within the contract or return to Curator. Never weaken source correspondence or rewrite historical evidence. Curator 2026-09-26 returned this order to REVIEW / EVIDENCE_GATED: a fresh isolated current-configurator Nanopb range resolution selected 0.4.92, while this authorization recorded observed 0.4.91; no current exact generated decoder closure, license/hash correspondence, or reproducible package identity has been accepted. Do not execute the historical READY scope until fresh source-backed curation publishes a replacement order.",
-      "status_documentation_updates": "Nonexecutable REVIEW / EVIDENCE_GATED after 2026-09-26 Curator dependency check. Preserve the historical H1 scope and exact source observations. Fresh planning/curation must bind the current resolved Nanopb package and generated config.pb.c, licenses, hashes, manifest dependencies, and production-source correspondence before any host fixture or checker implementation. No firmware or policy repair is authorized.",
-      "done_evidence": "Exact reviewed implementation, reproducible host evidence and required checks PASS; prior live canonical integration followed by separate strict completion correspondence.",
+      "rollback_recovery": "Keep failed H1 work isolated; preserve historical exact evidence and return to Curator on source, decoder or validation drift. No policy repair is authorized.",
+      "status_documentation_updates": "Record exact host observations, source-supported and injected cases, physical UNKNOWN, decoder snapshot limits and separate strict DONE correspondence after reviewed integration. No firmware or owner policy claim.",
+      "done_evidence": "Exact source/decoder fixture hashes, complete source-supported versus injected matrix, isolated host observations, adversarial drift controls, direct/affected validation, fresh independent review, reviewed integration and separate strict DONE correspondence; physical behavior remains UNKNOWN.",
       "stop_conditions": [
-        "Decoder provenance, exact getter/caller correspondence, sentinel matrix, affected validation or independent review fails.",
-        "Any USB policy or active firmware, build input, device, persistence, GP-CONFIG-014 or other excluded surface would change.",
-        "Any live source/schema/selector drift requires renewed Curator judgment before execution."
+        "Stop and return to Curator on material source or decoder drift, failed byte correspondence, missing caller coverage, ambiguous sanitizer attribution, or policy dependence.",
+        "No active firmware, build-input, ABI, persistence write, device/protobuf write, flashing, GP-VAL-011 or Nunchuk validation change."
       ],
       "activation_state": "NOT_APPLICABLE",
-      "activation_requires_new_judgment": true,
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-CONFIG-014",
+      "title": "Bound custom modifier mask cache to generated capacity",
+      "status": "READY",
+      "branch": "glyph/gp-config-014-modifier-capacity",
+      "objective": "Repair only the 10-slot custom modifier mask cache against generated 20-entry modifier capacity while preserving valid 0..20 activation behavior and leaving same-session active-mode replacement semantics undecided.",
+      "why_this_matters": "The production class caches ten modifier masks while the generated schema permits twenty; GP-CONFIG-011 observed exact host sanitizer failures at 11 and 20.",
+      "hardware_risk": "H3",
+      "behavioral_claim": "The class stores all valid 0..20 modifier masks in existing order and rejects only impossible count >20 before state mutation or cache read. No same-session replacement policy is selected.",
+      "scope": "In CustomControllerMode.hpp/.cpp and directly coupled tests/docs only: name capacity 20 with compile-time equality to generated modifiers extent; initialize _custom_mode_config safely; reject direct SetConfig impossible count before InputMode state, pointer or cache mutation; guard impossible current count before modifier-cache reads in UpdateAnalogOutputs, returning before analog processing for that call. Preserve valid mask meaning, ordering, arithmetic, combo/digital/axis behavior, schema and persistence ABI. Classify impossible live count as injected unless a source route is proved. Do not claim all-path Configurator transaction rejection.",
+      "explicit_excluded_scope": "No zero/invalid-button policy; no same-session active-mode rebind or transaction redesign, truncate/clamp/reorder/arithmetic/priority change, schema/persistence ABI, fallback, runtime-loaded/device/protobuf write, flashing, Nunchuk or GP-VAL-011 work.",
+      "touched_planes": [
+        "firmware runtime",
+        "docs/checkers"
+      ],
+      "source_authority": "At live 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, include/modes/CustomControllerMode.hpp:18-21 has uninitialized _custom_mode_config and _modifier_button_masks[10]; generated config.pb.h CustomModeConfig.modifiers has 20 entries. src/modes/CustomControllerMode.cpp:10-27 caches by decoded count and :86-93 reads by the current live count. GP-CONFIG-011 exact production 0/10/11/20 sanitizer characterization remains valid. ConfiguratorBackend.cpp:269-278 replaces live Config after success without calling custom SetConfig; mode_selection.cpp:191-199 suppresses same-index reactivation. Thus GP-CONFIG-018 is a separate valid-state issue.",
+      "dependencies_prerequisites": [
+        "Current generated 20-entry extent and GP-CONFIG-011 historical exact-base evidence must match; GP-CONFIG-010 capacity repair is precedent only.",
+        "Prove direct impossible-count SetConfig can refuse before any pointer/cache/InputMode mutation and preserve prior accepted class state.",
+        "Keep existing source-owned Ultimate path and all valid 0..20 custom-mode semantics unchanged; GP-CONFIG-018 owner decision is not a prerequisite to this narrow repair."
+      ],
+      "substantive_authorization_rationale": "The 10-versus-20 mismatch and exact source-local repair are source-authoritative. A direct impossible-count guard and valid capacity expansion do not decide whether successful live Config replacement should rebind an already active mode; that valid-state issue remains GP-CONFIG-018.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Generated modifier extent, custom class, Configurator transaction or mode selection source changes materially.",
+        "Impossible-count refusal cannot preserve prior class state, or valid 0..20 repair necessarily selects in-place active-mode replacement semantics.",
+        "Repaired-current checker or hardware correspondence cannot be made fail closed while retaining historical GP-CONFIG-011 evidence."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of live configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, tree aaa5d7dff632b95e95f2ccbc4459d6b08ed3d91b, immutable Planner packet glyph-portfolio-20260929-2218 at 7db3cfb56c0630b7bf41c3634fa460440812ac04, GLYPH-UD-021, exact current source, GP-PROV-014 observed Nanopb 0.4.9.2 closure, and completed evidence on 2026-09-29. Receipt 03c04c7669c85fee02ff52eb11f75d35fecc9040 records disposition. This order authorizes only its stated scope.",
+      "automated_validation": [
+        "Compile exact production class with generated-extent static assertion; ASan/UBSan 0,10,11,20 and injected 21/oversized SetConfig cases; verify impossible rejection preserves all prior class state and current-count 21 avoids cache read and analog processing.",
+        "Check valid modifier, combo and mask ordering/arithmetic, boot and explicit reselection, plus a valid same-session replacement limitation without asserting desired output. Preserve GP-CONFIG-011 immutable DONE proof and transition its old-source load-bearing checker to reviewed repaired-current exact-source/negative-control proof, maintaining manifest/census/health and all affected gates.",
+        "Canonical Mk6 build, RAM/flash delta, exact committed SHA, preserved content-addressed UF2 with pre-handoff rehash, fresh independent review and source-grounded protocol for 0/10/11/20 activation, combos, reconnect, ordinary Ultimate sanity and owner Config restoration."
+      ],
+      "canonical_build": "pio run -e glyph_mk6",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_CONFIG_014_HW_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "rollback_recovery": "Keep candidate isolated on proof failure; retain original GP-CONFIG-011 fixture/evidence and physically accepted GP-CONFIG-010 source/artifact. Return to Curator if rebind policy becomes unavoidable.",
+      "status_documentation_updates": "Document 0..20 class-local capacity repair and impossible-count injected classification; explicitly retain GP-CONFIG-018 user gate and historical GP-CONFIG-011 DONE record. Publish hardware pending/result and separate strict DONE correspondence.",
+      "done_evidence": "Reviewed exact candidate and RAM/flash build delta; repaired-current host/negative proof and all affected gates; source-grounded candidate-local hardware protocol, preserved UF2 SHA-256, owner observations and fresh independent Hardware Evidence Processor exact candidate/artifact PASS before merge; later strict DONE correspondence.",
+      "stop_conditions": [
+        "Stop before any valid same-session rebind choice, zero-button policy or broader Configurator transaction redesign.",
+        "Do not merge without exact committed candidate, Mk6 build, preserved/rehashed UF2, independent review and hardware PASS."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-CONFIG-017",
+      "title": "Place existing null RGB branch before speed access",
+      "status": "READY",
+      "branch": "glyph/gp-config-017-rgb-null-order",
+      "objective": "Move the existing NeoPixel SendReport null handling ahead of the speed dereference while preserving time bookkeeping and all valid RGB outputs.",
+      "why_this_matters": "GP-CONFIG-016 exact-production host evidence shows _config->speed is read before the existing null branch.",
+      "hardware_risk": "H3",
+      "behavioral_claim": "A null _config follows the already present blank/brightness/show branch without null member access; nonnull static/dynamic behavior and timing remain unchanged.",
+      "scope": "Change only HAL/pico/include/comms/NeoPixelBackend.hpp and directly coupled proof/docs. Preserve existing prevTime/time bookkeeping placement and move the existing null branch to immediately before the deltaHue expression that reads _config->speed; keep its blank/brightness/show behavior and every nonnull path byte/semantically unchanged. Do not add a fallback or new RGB transition rule.",
+      "explicit_excluded_scope": "No fallback RGB/default color/new animation/transition policy, schema, persistence, runtime profile, device/protobuf write, flashing, physical crash claim, Nunchuk or GP-VAL-011 work.",
+      "touched_planes": [
+        "firmware runtime",
+        "docs/checkers"
+      ],
+      "source_authority": "At live 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, HAL/pico/include/comms/NeoPixelBackend.hpp:195 initializes _config null; SetGameMode at :41-63 and :112-114 can clear it. SendReport at :146 computes deltaHue using _config->speed before the explicit null branch at :148-156. GP-CONFIG-016 exact production header/caller characterization has nine isolated cases; physical null call reachability remains UNKNOWN. config/glyph/common/src/config.cpp:243-247,287-293 does not prove a physical null sequence.",
+      "dependencies_prerequisites": [
+        "GP-CONFIG-016 is DONE and its exact source characterization remains valid; current header and caller hashes must match.",
+        "Preserve prevTime/time updates before the moved guard so later valid dynamic hue timing remains consistent with prior code.",
+        "Hardware protocol can test ordinary static/dynamic RGB, mode changes and reconnect without requiring physical reproduction of an unproven null route."
+      ],
+      "substantive_authorization_rationale": "Reordering the already existing null branch to precede the first dereference is an exact source-local safety repair. Keeping prior time bookkeeping before the guard avoids choosing a new transition behavior; no new null output policy is needed.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Header, SetGameMode or Glyph caller source changes materially.",
+        "Existing null output or valid static/dynamic timing/output cannot be preserved without choosing new semantics.",
+        "Repaired-current checker or hardware correspondence cannot be made fail closed while retaining historical GP-CONFIG-016 evidence."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of live configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, tree aaa5d7dff632b95e95f2ccbc4459d6b08ed3d91b, immutable Planner packet glyph-portfolio-20260929-2218 at 7db3cfb56c0630b7bf41c3634fa460440812ac04, GLYPH-UD-021, exact current source, GP-PROV-014 observed Nanopb 0.4.9.2 closure, and completed evidence on 2026-09-29. Receipt 03c04c7669c85fee02ff52eb11f75d35fecc9040 records disposition. This order authorizes only its stated scope.",
+      "automated_validation": [
+        "Compile exact production header with GP-CONFIG-016 nine-case host corpus; null cases now reach existing blank/brightness/show branch without null access; valid static/dynamic and timing controls match pre-repair outputs.",
+        "Preserve immutable GP-CONFIG-016 DONE fixture and observations as historical exact-base evidence; add repaired-current exact-source and adversarial proof and reviewed fail-closed manifest/census/health applicability transition. Run affected RGB/rebinding, framework, sequence, navigation, surface/integration, syntax and diff gates.",
+        "Canonical Mk6 build, RAM/flash review, exact committed SHA and preserved content-addressed UF2 with pre-handoff rehash; independent review and physical protocol for normal static/dynamic RGB, mode changes, reconnect and owner Config restoration. Try null transition only if a source-supported safe sequence exists; otherwise physical reachability UNKNOWN."
+      ],
+      "canonical_build": "pio run -e glyph_mk6",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_CONFIG_017_HW_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "rollback_recovery": "Keep failed candidate isolated; preserve GP-CONFIG-016 exact historical proof and original source for recovery. Return to Curator if output/transition policy becomes necessary.",
+      "status_documentation_updates": "Record narrowly repaired source order and null physical reachability UNKNOWN if unexercised; preserve historical GP-CONFIG-016 DONE evidence. Publish hardware pending/result and separate strict DONE correspondence.",
+      "done_evidence": "Reviewed exact candidate, Mk6 build and RAM/flash delta, repaired-current host/adversarial proof and affected checks, exact preserved UF2 SHA-256, candidate-local protocol, owner ordinary RGB observations and fresh independent Hardware Evidence Processor exact candidate/artifact PASS before merge; later strict DONE correspondence.",
+      "stop_conditions": [
+        "Stop if moving guard changes valid static/dynamic output or timing or requires new RGB fallback/transition policy.",
+        "Do not merge without exact committed candidate, build, UF2 custody/rehash, independent review and hardware PASS."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -3438,7 +3574,7 @@ Git, but it is not current candidate supply or implementation authority.
       "why_this_matters": "The ignored-directory repair candidate passes 41 focused adversarial groups but fails the required real clean main-checkout aggregate at the 300-second deadline, around checker 10, without final canonical proof. The first full fingerprint alone measured 205.872seconds for existing roughly 4.77GB ignored state. The original directory support bug was corrected in a failed, unmerged candidate; overall GP-VAL-011 remains incomplete.",
       "hardware_risk": "H1",
       "behavioral_claim": "This changes host-side validation execution safety only. A clean exact committed source snapshot that passes today must still run the same current checker command vectors and classifications; checker execution moves to an independent disposable Git repository and timeout or mutation becomes a fail-closed validation result. It changes no checker product semantics, workflow, build input, firmware/runtime behavior, artifact, device, or hardware state.",
-      "scope": "OWNER_DEFERRED — NONEXECUTABLE. GLYPH-UD-013 supersedes the prior repair-required disposition as the current status. Implementation and merge are stopped. The retained contract below is historical closed scope and validation requirements, not current READY authority. No implementation may resume until separate substantive authorization, exact architecture/validation adjudication and a newly complete canonical READY contract. Review here means stopped contract adjudication, not pending approval to merge the failed candidate. Update only tools/run_glyph_runtime_config_validation.py, tools/check_glyph_runtime_config_validation_aggregate.py, docs/runtime_config/README.md, and deterministic docs/runtime_config/fixtures/glyph_checker_census.json consequences. Reject staged, unstaged, and untracked caller paths; permit pre-existing ignored files only as excluded caller-local state. Before execution pin source HEAD, symbolic branch or detached state, comparison base selected by GLYPH_CHECKER_BASE or origin/configurator, caller-supplied GLYPH_CHECKER_EXPECTED_MERGE_BASE when present, and actual merge base to immutable commits; preserve expected-base mismatch as failure rather than replacing caller intent with computed truth. Preserve the exact origin/configurator comparison identity separately when an explicit comparison override differs. Capture canonical fingerprints over HEAD/branch, index, tracked bytes/modes/symlink targets, refs, repository Git config, staged/unstaged/untracked paths, and the complete ignored-path set. Create a TemporaryDirectory git clone --no-local --no-checkout with an independent object database, no caller ignored files or alternates, no canonical-path origin, and the same exact HEAD under the same branch or detached state. Its closed required-ref set is the source symbolic HEAD when present, the exact origin/configurator comparison ref when present or required by default comparison semantics, and, only when the exact existing current_x1_regression_subset entry with unchanged command [python3, tools/check_glyph_current_x1_regression_subset.py] is selected, refs/heads/runtime-config-x1-offset41-hardware-candidate pinned to 74ae24364b84520d4e0e39240beb9867653cc7b9. Require that exact candidate ref to resolve to the pinned SHA in the caller before recreating it, and require the immutable candidate/evidence/integration objects already available locally; never repair caller ref drift or fetch. No unrelated refs/tags are retained. If clone transfer omits a pinned locally available identity, snapshot setup may transfer only the reachable object closure rooted at the exact resolved source HEAD, selected comparison base, caller expected merge-base when present, actual merge-base, original origin/configurator identity when present, and the conditional X1 candidate/evidence/integration identities enumerated above. Use local git pack-objects --revs --stdout with only those deduplicated full object IDs as input and git index-pack --stdin in the clone; never --all, --reflog, arbitrary ref enumeration, thin/shared packs, alternates, hardlinks, fetch, or network/lazy object retrieval. Prove required object closure is locally available, bound both subprocess groups to the setup deadline, verify transferred identities in the clone, and create no additional refs. Missing caller objects, transfer errors, or unverifiable local completeness fail closed. Synthetic adversarial repositories not selecting current_x1_regression_subset need not manufacture the production candidate ref. Every selected unchanged checker command executes only in the clone. Construct environment from ambient PATH only, disposable HOME/TMPDIR/TMP/TEMP/XDG_CONFIG_HOME/XDG_CACHE_HOME/PYTHONPYCACHEPREFIX, PYTHONHASHSEED=0, PYTHONNOUSERSITE=1, LC_ALL=C, LANG=C, TZ=UTC, GIT_CONFIG_NOSYSTEM=1, GIT_CONFIG_GLOBAL=os.devnull, GIT_OPTIONAL_LOCKS=0, and exact immutable GLYPH_CHECKER_BASE/GLYPH_CHECKER_EXPECTED_MERGE_BASE. For exactly checker_context with command [python3, tools/check_glyph_checker_context.py] and validation_aggregate_adversarial with command [python3, tools/check_glyph_runtime_config_validation_aggregate.py], omit only the two GLYPH comparison variables: these unchanged self-tests create unrelated synthetic repositories and must establish their own context. Do not generalize that exception by category, branch_policy, mutation_risk, arbitrary ID, or ambient state. Preserve census_freshness in structured failure reports whenever census evaluation completed, never invent PASS before evaluation, and retain exact failure phase/kind and checker identity. Fixed production budgets remain 120 seconds per checker, 300 seconds for whole command including preflight/setup/proof, and two seconds TERM-to-KILL grace; only isolated tests may inject shorter budgets. All timed subprocess trees including clone/setup use bounded process groups terminated and reaped on timeout. Attempt bounded final canonical fingerprint proof on every exit path after initial capture, and unchanged clone fingerprint proof after every checker; never return PASS without complete matching proofs. If the whole-command deadline expires before final proof completes, fail closed with explicit final-proof-unavailable status rather than claiming unchanged state. The 300-second operational deadline permits only the separately fixed two-second TERM-to-KILL cleanup grace; no additional unbounded proof or cleanup work is permitted. Timeout, mutation, or inability to prove invariants fails closed and stops later checkers regardless of fail-fast. Second independent recovery curation binds the complete current source-root topology catalog, conditional on each exact current selected entry ID and unchanged command. For generated_baseline_artifact / [python3, tools/check_glyph_generated_source_owned_baseline_artifact.py], preserve the caller refs/heads/configurator at its own exact locally resolved commit; it is distinct from origin/configurator and GLYPH_CHECKER_BASE and must never be synthesized from either. If absent, ambiguous, conflicting with source HEAD, or not locally complete, fail closed. Its current branch-required checker behavior, including detached failure, remains unchanged. For build_input_resolution_observations / [python3, tools/check_glyph_build_input_resolution_observations.py], include exact locally available commit roots 8c04262c66613d46b933b1b739c01c575cb0c580 and ffc007552abc848051841362b0b0ac4c1a7d087b. For nuker_source_lineage / [python3, tools/check_glyph_nuker_source_lineage.py], include a747dd54b02b207483142331d8b5be1113fc951e and d5050847d3f850951b3f47865dc8a91aedea0834; preserve the existing rev-list --all reachability check, do not invent a ref for it (the accepted source lineage already contains these ancestors). For agent_framework / [python3, tools/check_glyph_agent_framework_docs.py], parse only the exact committed HEAD:docs/project/ACTIVE_AGENT_QUEUE.md regular 100644 queue-state JSON block with duplicate-key rejection and enumerate only these source-consumed commit fields: planner_packet.base_configurator_sha, planner_packet.planning_commit, planner_packet.curation_commit for non-ABSENT packet; completion_correspondence.migration_base_configurator_sha; items with status DONE not in completion_correspondence.legacy_done_ids: done_evidence.implementation_base_sha, done_evidence.reviewed_implementation_sha, done_evidence.prior_canonical_integration_sha; and the SHA component of items.hardware_evidence_record only where status HARDWARE_VALIDATED, HARDWARE_FAILED, or LOCAL_ACCEPTANCE_PENDING with a nonnull result causes current validate_evidence_record to read a git-json reference. repo-json evidence uses HEAD. Require the expected source container/field types and full lowercase commit identities, deduplicate, and verify every required object locally before closed local pack transfer. Do not recursively traverse historical queues, scan arbitrary SHA-looking strings, import/run a checker in the caller, select authority from prose, collect unrelated hardware/artifact/upstream hashes, or copy refs named by metadata. Duplicate provenance fields remain independently validated by the unchanged checker, not normalized by the runner. These roots augment the already enumerated HEAD/base/expected/origin and conditional X1 object roots only; all ordinary checker commands, branch/scope rules, classifications, environment exceptions, independent object database, no-network transfer, timeout and fingerprint requirements remain unchanged. No broad automatic dependency discovery runs during validation. Any further substantive source/ref/object-topology requirement exposed after this complete bounded audit stops as non-executable REPAIR_REQUIRED for later authority rather than a third expansion in this recovery. The nested PermissionError remains an unproven execution/test failure: locate the exact operation and repair only within current runner/adversarial scope; do not weaken timeout proof by accepting SETUP_FAILURE or suppressing unexpected signaling errors. Current narrow repair: canonical_fingerprint must handle directory entries emitted by git ls-files --others --ignored --exclude-standard for caller-local ignored nested Git repositories. Recursively enumerate only physical descendants of such IGNORED directory entries in deterministic sorted order and fingerprint each relative path, file type/mode, directory membership (including empty directories), regular-file bytes and symlink target text. Treat nested .git content as opaque caller-local filesystem bytes; never use its refs/objects/config as validation inputs, execute Git there, copy it to the clone, or add it to required-ref/object catalogs. Use lstat and do not follow symlink directories or external targets. Preserve unambiguous length-framed hashing, existing whole-command budget checks during enumeration and byte reads, final proof rules, and fail-closed handling of unsupported special entries, unreadable state, detectable traversal races or unavailable proof. No timestamps are added as mutation semantics. This is support for the already permitted complete ignored-path set, not dirty-state support or new Git topology. Existing original snapshot, exact ref/object catalog, environment, checker commands/applicability, independent object storage and timeouts remain unchanged. The three implementation consequences are runner, aggregate adversarial tests and deterministic census; README may change only to explain this existing ignored-state contract.",
+      "scope": "OWNER_DEFERRED \u2014 NONEXECUTABLE. GLYPH-UD-013 supersedes the prior repair-required disposition as the current status. Implementation and merge are stopped. The retained contract below is historical closed scope and validation requirements, not current READY authority. No implementation may resume until separate substantive authorization, exact architecture/validation adjudication and a newly complete canonical READY contract. Review here means stopped contract adjudication, not pending approval to merge the failed candidate. Update only tools/run_glyph_runtime_config_validation.py, tools/check_glyph_runtime_config_validation_aggregate.py, docs/runtime_config/README.md, and deterministic docs/runtime_config/fixtures/glyph_checker_census.json consequences. Reject staged, unstaged, and untracked caller paths; permit pre-existing ignored files only as excluded caller-local state. Before execution pin source HEAD, symbolic branch or detached state, comparison base selected by GLYPH_CHECKER_BASE or origin/configurator, caller-supplied GLYPH_CHECKER_EXPECTED_MERGE_BASE when present, and actual merge base to immutable commits; preserve expected-base mismatch as failure rather than replacing caller intent with computed truth. Preserve the exact origin/configurator comparison identity separately when an explicit comparison override differs. Capture canonical fingerprints over HEAD/branch, index, tracked bytes/modes/symlink targets, refs, repository Git config, staged/unstaged/untracked paths, and the complete ignored-path set. Create a TemporaryDirectory git clone --no-local --no-checkout with an independent object database, no caller ignored files or alternates, no canonical-path origin, and the same exact HEAD under the same branch or detached state. Its closed required-ref set is the source symbolic HEAD when present, the exact origin/configurator comparison ref when present or required by default comparison semantics, and, only when the exact existing current_x1_regression_subset entry with unchanged command [python3, tools/check_glyph_current_x1_regression_subset.py] is selected, refs/heads/runtime-config-x1-offset41-hardware-candidate pinned to 74ae24364b84520d4e0e39240beb9867653cc7b9. Require that exact candidate ref to resolve to the pinned SHA in the caller before recreating it, and require the immutable candidate/evidence/integration objects already available locally; never repair caller ref drift or fetch. No unrelated refs/tags are retained. If clone transfer omits a pinned locally available identity, snapshot setup may transfer only the reachable object closure rooted at the exact resolved source HEAD, selected comparison base, caller expected merge-base when present, actual merge-base, original origin/configurator identity when present, and the conditional X1 candidate/evidence/integration identities enumerated above. Use local git pack-objects --revs --stdout with only those deduplicated full object IDs as input and git index-pack --stdin in the clone; never --all, --reflog, arbitrary ref enumeration, thin/shared packs, alternates, hardlinks, fetch, or network/lazy object retrieval. Prove required object closure is locally available, bound both subprocess groups to the setup deadline, verify transferred identities in the clone, and create no additional refs. Missing caller objects, transfer errors, or unverifiable local completeness fail closed. Synthetic adversarial repositories not selecting current_x1_regression_subset need not manufacture the production candidate ref. Every selected unchanged checker command executes only in the clone. Construct environment from ambient PATH only, disposable HOME/TMPDIR/TMP/TEMP/XDG_CONFIG_HOME/XDG_CACHE_HOME/PYTHONPYCACHEPREFIX, PYTHONHASHSEED=0, PYTHONNOUSERSITE=1, LC_ALL=C, LANG=C, TZ=UTC, GIT_CONFIG_NOSYSTEM=1, GIT_CONFIG_GLOBAL=os.devnull, GIT_OPTIONAL_LOCKS=0, and exact immutable GLYPH_CHECKER_BASE/GLYPH_CHECKER_EXPECTED_MERGE_BASE. For exactly checker_context with command [python3, tools/check_glyph_checker_context.py] and validation_aggregate_adversarial with command [python3, tools/check_glyph_runtime_config_validation_aggregate.py], omit only the two GLYPH comparison variables: these unchanged self-tests create unrelated synthetic repositories and must establish their own context. Do not generalize that exception by category, branch_policy, mutation_risk, arbitrary ID, or ambient state. Preserve census_freshness in structured failure reports whenever census evaluation completed, never invent PASS before evaluation, and retain exact failure phase/kind and checker identity. Fixed production budgets remain 120 seconds per checker, 300 seconds for whole command including preflight/setup/proof, and two seconds TERM-to-KILL grace; only isolated tests may inject shorter budgets. All timed subprocess trees including clone/setup use bounded process groups terminated and reaped on timeout. Attempt bounded final canonical fingerprint proof on every exit path after initial capture, and unchanged clone fingerprint proof after every checker; never return PASS without complete matching proofs. If the whole-command deadline expires before final proof completes, fail closed with explicit final-proof-unavailable status rather than claiming unchanged state. The 300-second operational deadline permits only the separately fixed two-second TERM-to-KILL cleanup grace; no additional unbounded proof or cleanup work is permitted. Timeout, mutation, or inability to prove invariants fails closed and stops later checkers regardless of fail-fast. Second independent recovery curation binds the complete current source-root topology catalog, conditional on each exact current selected entry ID and unchanged command. For generated_baseline_artifact / [python3, tools/check_glyph_generated_source_owned_baseline_artifact.py], preserve the caller refs/heads/configurator at its own exact locally resolved commit; it is distinct from origin/configurator and GLYPH_CHECKER_BASE and must never be synthesized from either. If absent, ambiguous, conflicting with source HEAD, or not locally complete, fail closed. Its current branch-required checker behavior, including detached failure, remains unchanged. For build_input_resolution_observations / [python3, tools/check_glyph_build_input_resolution_observations.py], include exact locally available commit roots 8c04262c66613d46b933b1b739c01c575cb0c580 and ffc007552abc848051841362b0b0ac4c1a7d087b. For nuker_source_lineage / [python3, tools/check_glyph_nuker_source_lineage.py], include a747dd54b02b207483142331d8b5be1113fc951e and d5050847d3f850951b3f47865dc8a91aedea0834; preserve the existing rev-list --all reachability check, do not invent a ref for it (the accepted source lineage already contains these ancestors). For agent_framework / [python3, tools/check_glyph_agent_framework_docs.py], parse only the exact committed HEAD:docs/project/ACTIVE_AGENT_QUEUE.md regular 100644 queue-state JSON block with duplicate-key rejection and enumerate only these source-consumed commit fields: planner_packet.base_configurator_sha, planner_packet.planning_commit, planner_packet.curation_commit for non-ABSENT packet; completion_correspondence.migration_base_configurator_sha; items with status DONE not in completion_correspondence.legacy_done_ids: done_evidence.implementation_base_sha, done_evidence.reviewed_implementation_sha, done_evidence.prior_canonical_integration_sha; and the SHA component of items.hardware_evidence_record only where status HARDWARE_VALIDATED, HARDWARE_FAILED, or LOCAL_ACCEPTANCE_PENDING with a nonnull result causes current validate_evidence_record to read a git-json reference. repo-json evidence uses HEAD. Require the expected source container/field types and full lowercase commit identities, deduplicate, and verify every required object locally before closed local pack transfer. Do not recursively traverse historical queues, scan arbitrary SHA-looking strings, import/run a checker in the caller, select authority from prose, collect unrelated hardware/artifact/upstream hashes, or copy refs named by metadata. Duplicate provenance fields remain independently validated by the unchanged checker, not normalized by the runner. These roots augment the already enumerated HEAD/base/expected/origin and conditional X1 object roots only; all ordinary checker commands, branch/scope rules, classifications, environment exceptions, independent object database, no-network transfer, timeout and fingerprint requirements remain unchanged. No broad automatic dependency discovery runs during validation. Any further substantive source/ref/object-topology requirement exposed after this complete bounded audit stops as non-executable REPAIR_REQUIRED for later authority rather than a third expansion in this recovery. The nested PermissionError remains an unproven execution/test failure: locate the exact operation and repair only within current runner/adversarial scope; do not weaken timeout proof by accepting SETUP_FAILURE or suppressing unexpected signaling errors. Current narrow repair: canonical_fingerprint must handle directory entries emitted by git ls-files --others --ignored --exclude-standard for caller-local ignored nested Git repositories. Recursively enumerate only physical descendants of such IGNORED directory entries in deterministic sorted order and fingerprint each relative path, file type/mode, directory membership (including empty directories), regular-file bytes and symlink target text. Treat nested .git content as opaque caller-local filesystem bytes; never use its refs/objects/config as validation inputs, execute Git there, copy it to the clone, or add it to required-ref/object catalogs. Use lstat and do not follow symlink directories or external targets. Preserve unambiguous length-framed hashing, existing whole-command budget checks during enumeration and byte reads, final proof rules, and fail-closed handling of unsupported special entries, unreadable state, detectable traversal races or unavailable proof. No timestamps are added as mutation semantics. This is support for the already permitted complete ignored-path set, not dirty-state support or new Git topology. Existing original snapshot, exact ref/object catalog, environment, checker commands/applicability, independent object storage and timeouts remain unchanged. The three implementation consequences are runner, aggregate adversarial tests and deterministic census; README may change only to explain this existing ignored-state contract.",
       "explicit_excluded_scope": "No dirty-snapshot overlay support; no copying ignored files; no manifest schema, entry, applicability, category, command, dependency, branch-policy, load-bearing, historical, exclusion, or checker-semantic change; no tools/glyph_checker_context.py or workflow edit; no ambient python3/PATH identity claim; no network sandbox, container, virtual machine, or general malicious-code containment claim; no protection against deliberately detached daemons or arbitrary absolute host writes beyond the exact repository/Git/process-tree contract; no build, firmware/runtime source, artifact, device, persistence, WebSerial/protobuf write, flashing, hardware, Nunchuk, root-cause, or gameplay change or claim.",
       "touched_planes": [
         "docs/checkers",
@@ -3446,11 +3582,11 @@ Git, but it is not current candidate supply or implementation authority.
       ],
       "source_authority": "Independent recovery Curator live-verified configurator 2a80462ba2801192154e42ee4bebb9b1b43ca699 on 2026-09-06 after ordinary DNS failure and permitted read-only network retry. tools/glyph_checker_context.py collect_checker_context resolves explicit base but also inherited GLYPH_CHECKER_EXPECTED_MERGE_BASE; tools/check_glyph_checker_context.py creates unrelated synthetic repositories and tests detached missing-base rejection. The aggregate adversarial checker similarly creates unrelated repositories and invokes the runner with module-local ROOT. tools/check_glyph_current_x1_regression_subset.py evidence_correspondence expressly requires candidate_branch to resolve to exact candidate SHA, separately checks immutable evidence blob and integration parent; its current fixture binds runtime-config-x1-offset41-hardware-candidate to 74ae24364b84520d4e0e39240beb9867653cc7b9, evidence commit 6b0061489cb67d345f212f75268455c181ba271f, and integration 1597c01b416b6aa697d73efc7d2c2b3695dc3e5c. All are locally available. Canonical census_freshness is an existing load-bearing result and the adversarial check correctly expects it after census success. Local failed commits ab8e68ede84468c89365b7f5144889c5728e0583 and 34f430886fb808ce70df81e21d926aef05ed7169 are non-authoritative implementation evidence only. Second independent curation inspected failed candidate 95efad7 and /private/tmp/glyph-val011-full-aggregate.json (27/30 PASS; outer canonical proof MATCH), all 30 current commands and manifest Python dependencies, their direct-import closure (42 files), and additional named subprocess/historical references (85-file conservative static surface) with call-path inspection distinguishing current execution from dormant/historical functions. Current generated-baseline main unconditionally validates literal local configurator ancestry; context-migrated generator/artifact/profile/agent-surface mains use glyph_checker_context instead of their obsolete validate_branch functions. Framework reads exactly the enumerated metadata identities, including planning commit 3fb785749d8653e91bb8e4b3a73a01be03aaf9cb which need not be reachable from clone-advertised local heads. Fixed observation and nuker history roots are locally available and HEAD ancestors. The supervisor temporary source clone itself lacked local configurator at inspection, so recreating it is explicit source-repository preparation, not runner inference. No checker semantic or current applicability change is authorized. Independent Curator reverified live 31bdbbc83f3129ecb9cbf5bc4ad20e073bdd60a4 on 2026-09-07 (ordinary DNS inconclusive; permitted read-only retry PASS). Actual Git ignored enumeration emits the reported directory under .gitignore .pio/; canonical_fingerprint lines617-665 accepts only file/symlink and raises on that directory. Existing test ISO-02 covers ordinary ignored directory files but not nested Git collapse. No checker consumes this caller ignored state. Independent final Curator source review on 2026-09-07 examined failed a0373bde823856c4835bb5aed429d0b402eadd48, actual main aggregate and bounded 60-second profile: 26,104 posix.open calls consumed 54.814 of 60.002 seconds; read 1.694 seconds and hashing 1.004 seconds. Opens provide required byte/anchored-directory access; no demonstrated redundant operation may be removed without weakening proof. A 600-file threaded diagnostic is only possible overlap evidence, not full proof/timeout/cancellation feasibility. Live canonical 4174001e39f23d2dcb438c232bb3b4e498d153a4 verified after permitted network retry; main restored to this canonical snapshot, failed candidate retained separately.",
       "dependencies_prerequisites": [
-        "NONEXECUTABLE — OWNER_DEFERRED. Implementation and merge are stopped. The retained contract is historical scope/evidence, not READY authority. No implementation may resume until fresh substantive authorization and a new complete contract.",
+        "NONEXECUTABLE \u2014 OWNER_DEFERRED. Implementation and merge are stopped. The retained contract is historical scope/evidence, not READY authority. No implementation may resume until fresh substantive authorization and a new complete contract.",
         "A future separately authorized effort must resolve an exact concurrent or other complete-proof architecture, bound ownership/cancellation/resources/deterministic ordering/races, and establish feasibility under the unchanged 300-second budget before a new complete READY work order. A small synthetic latency benchmark supplies no such proof.",
         "Keep original source-independent clone, exact closed ref/object catalog, environment, unchanged current checker commands/applicability, complete ignored-byte proof and fail-closed semantics. Preserve failed candidate a037 and truthful previous reviewed implementation/completion history without merging failed work."
       ],
-      "substantive_authorization_rationale": "NONEXECUTABLE — OWNER_DEFERRED under GLYPH-UD-013. No implementation or merge is authorized. A future concurrent design would require fresh acquisition/ownership/cancellation, resource, aggregation, and race-proof authority. No topology expansion, budget increase, ignored-data omission, cache shortcut, reduced proof, caller cleanup, or semantic weakening is authorized.",
+      "substantive_authorization_rationale": "NONEXECUTABLE \u2014 OWNER_DEFERRED under GLYPH-UD-013. No implementation or merge is authorized. A future concurrent design would require fresh acquisition/ownership/cancellation, resource, aggregation, and race-proof authority. No topology expansion, budget increase, ignored-data omission, cache shortcut, reduced proof, caller cleanup, or semantic weakening is authorized.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "The aggregate runner, manifest representation, checker-context base contract, current command set, or required locally resolvable Git-object topology changes materially before implementation.",
@@ -3488,7 +3624,7 @@ Git, but it is not current candidate supply or implementation authority.
       "rollback_recovery": "Retain canonical fail-closed implementation and all reviewed/failed evidence; main has been restored to live 4174001. Candidate a037 remains on codex/gp-val-011-ignored-directory-failed-evidence and must not merge. Do not delete/move caller ignored data, restore direct canonical checker execution, change budgets or weaken proof. Await new substantive contract adjudication.",
       "status_documentation_updates": "Keep GP-VAL-011 REVIEW with explicit OWNER_DEFERRED/NONEXECUTABLE meaning; preserve prior completion and failed a037 evidence, remove REPAIR_REQUIRED as current liveness, and require fresh substantive authority plus a new READY contract to reopen. GP-PERSIST-001 stays DONE.",
       "stop_conditions": [
-        "OWNER_DEFERRED — NONEXECUTABLE. GLYPH-UD-013 supersedes the prior repair-required disposition as the current status. Implementation and merge are stopped. The retained contract below is historical closed scope and validation requirements, not current READY authority. No implementation may resume until separate substantive authorization, exact architecture/validation adjudication and a newly complete canonical READY contract. Review here means stopped contract adjudication, not pending approval to merge the failed candidate.",
+        "OWNER_DEFERRED \u2014 NONEXECUTABLE. GLYPH-UD-013 supersedes the prior repair-required disposition as the current status. Implementation and merge are stopped. The retained contract below is historical closed scope and validation requirements, not current READY authority. No implementation may resume until separate substantive authorization, exact architecture/validation adjudication and a newly complete canonical READY contract. Review here means stopped contract adjudication, not pending approval to merge the failed candidate.",
         "Any selected checker executes in or resolves repository state from the canonical worktree.",
         "Any staged, unstaged, or untracked caller state is ignored, any caller ignored file is copied, any canonical HEAD/branch/index/tracked/ref/config/staged/unstaged/untracked/ignored mutation can pass, or any isolated tracked/index/ref/config/status/ignored mutation can pass.",
         "Any timeout can leave the checker process group unreaped, permit later checks to run, or return success.",
@@ -6198,11 +6334,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-012","GP-CONFIG-013","GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-012, GP-CONFIG-013, GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6215,9 +6351,64 @@ machine-derived state above supersedes its historical runway wording.
 
 GP-VAL-032 is DONE after reviewed H1 integration `ab6e609cf973d8735c034d160966faef780cf90b` and strict completion correspondence. Its clean 41-of-41 aggregate and current/historical GP-CONFIG-010 semantic proofs passed; the bounded local object tests rejected absence, omission and substitution without adding refs. At that publication, GP-PROV-014 still had its own full-aggregate gate. All other GP-VAL-011 work remains deferred under GLYPH-UD-013.
 
-GP-PROV-014 is DONE after exact reviewed integration `66fa47dee9dfe04df26be50a20ac74331924cc60` and a clean 42-of-42 full aggregate with canonical proof MATCH on the recorded candidate checkout. Independent replay in a reduced-object local clone passed 41 of 42: the GP-CONFIG-010 historical semantic checker hashes textual `git diff` whose `index` SHA abbreviation varied with object database contents, although the patch body was identical. The recorded full pass is therefore checkout-specific, not a clean-clone portability guarantee. Its observed Nanopb 0.4.92 decoder closure remains bound to one source snapshot; GP-CONFIG-012/013 remain evidence gated. The ignored-state preflight defect in the original worktree did not expand GP-VAL-011 authority.
+GP-PROV-014 is DONE after exact reviewed integration `66fa47dee9dfe04df26be50a20ac74331924cc60` and a clean 42-of-42 full aggregate with canonical proof MATCH on the recorded candidate checkout. Independent replay in a reduced-object local clone passed 41 of 42: the GP-CONFIG-010 historical semantic checker hashes textual `git diff` whose `index` SHA abbreviation varied with object database contents, although the patch body was identical. The recorded full pass is therefore checkout-specific, not a clean-clone portability guarantee. Its observed Nanopb 0.4.92 decoder closure remains bound to one source snapshot; GP-CONFIG-012/013 were evidence gated at that publication. The ignored-state preflight defect in the original worktree did not expand GP-VAL-011 authority.
 
-Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-028/029/030/031 are DONE. GP-CONFIG-016 is DONE after a clean 41-of-41 aggregate and independent review; GP-PROV-014 retains its exact dependency-closure and aggregate DONE gates. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-028/029/030/031 are DONE. GP-CONFIG-016 is DONE after a clean 41-of-41 aggregate and independent review; GP-PROV-014 retains its exact dependency-closure and aggregate DONE gates. No global wait is supported. At that prior publication GP-CONFIG-012/013 were REVIEW / EVIDENCE_GATED and the unsplit GP-CONFIG-014 was USER_DECISION_GATED; GP-CONFIG-015 was RESEARCH_GATED and GP-VAL-011 remained owner deferred. The later 2026-09-29 Curator receipt and queue-state block supersede those earlier dispositions. Nunchuk remains NOT_TESTED and root cause remains unproven.
+
+## 2026-09-29 configuration safety Curator adjudication
+
+The immutable receipt above covers Planner packet `glyph-portfolio-20260929-2218`
+at `7db3cfb56c0630b7bf41c3634fa460440812ac04` against live canonical
+`1b0364ce16b1c20fcea6dfef3ed12130c5c27093` (tree
+`aaa5d7dff632b95e95f2ccbc4459d6b08ed3d91b`). No canonical material
+source/evidence event intervened. The completed GP-CONFIG-010, GP-X1-002,
+GP-CONFIG-011, GP-CONFIG-016, GP-PROV-014 and GP-VAL-026/028/029/030/031/032
+records remain accepted within their exact scopes. GP-PROV-014 is one observed
+Nanopb 0.4.9.2 closure, not a permanent pin or decoder-policy decision. The
+prior 42/42 aggregate applies to its exact checkout; the reduced-object-clone
+41/42 textual Git diff abbreviation limitation does not invalidate it or
+reopen GP-VAL-011. GLYPH-UD-021 resumes 012-014 for curation only.
+
+| Candidate | Disposition / risk | Curator reason and prerequisite |
+| --- | --- | --- |
+| GP-CONFIG-012 | READY / H1 | Exact Pico helper, all four production caller uses, generated Button storage and accepted decoder closure support immediate source/host characterization. Exact closure bytes and Pico ABI are verified inside the order. No invalid-button policy or firmware edit. |
+| GP-CONFIG-013 | READY / H1 | The getter, uninitialized destination, downstream reads, generated uint8 storage versus uint32 wire field, and accepted closure support independent immediate characterization. It may authenticate or create the shared decoder fixture itself; GP-CONFIG-012 integration is not required. Shared fixture writers must serialize. Partial failed Persistence loads belong in its matrix, not a repair authorization. |
+| GP-CONFIG-014 | READY / H3 | The 10-slot cache versus generated 20-entry modifier field and GP-CONFIG-011 evidence support only the class-local capacity repair. Direct impossible-count refusal can precede InputMode/pointer/cache mutation; current-count guard can precede analog cache reads. Valid same-session replacement coherence remains GP-CONFIG-018. |
+| GP-CONFIG-015 | RESEARCH_GATED / prospective H1 | A constructed menu cache is source-visible, but the Configurator route selects REMAPPER and `loop1` returns there. No supported user-visible old-menu sequence follows successful same-session SetConfig. Resume only with a source-supported transition sequence or sufficiently specific owner-observed/manual sequence. |
+| GP-CONFIG-017 | READY / H3 | GP-CONFIG-016 and current source show `_config->speed` before the existing null branch. Preserve time bookkeeping before the moved guard and preserve valid static/dynamic outputs. Physical null reachability remains UNKNOWN. |
+| GP-CONFIG-018 | USER_DECISION_GATED / prospective H3 | Successful SetConfig can replace live valid Config without rebuilding active custom-mode mask caches. Source cannot choose immediate coherent adoption versus coherent deferred behavior. Owner direction and fresh Curator authorization are required. |
+
+For GP-CONFIG-015, the future H1 research must bind `config.cpp` menu and
+REMAPPER transitions, `DefaultConfigMenu.cpp` construction, and SetConfig
+publication to an exact source or owner-observed route. It must distinguish
+cached state from physical reachability, run exact-body host/source and affected
+framework/navigation/manifest checks after authorization, and require no
+firmware build or hardware. Invalidate on relevant source change. No menu
+refresh, reboot, fallback or UI policy is selected; stop if the route remains
+unproven. No DONE evidence exists for this gated item.
+
+For GP-CONFIG-018, the owner question is: after a successful same-session
+SetConfig replaces Config while a custom mode is active, should it **A**
+immediately adopt the new valid custom configuration and rebuild coherent
+modifier/combo/digital/axis state, or **B** retain coherent previous behavior
+until explicit mode reactivation or reboot? Both concern valid schema states,
+not merely count >20. After the answer, a new exact H3 order must cover
+successful and failed transactions, valid old/new 0/10/11/20 counts, cache and
+pointer consistency, independent review, Mk6 build, RAM/flash delta, exact
+UF2 custody and owner exact-artifact hardware PASS before merge. No automatic
+activation, repair, ABI change, button policy or DONE claim exists now; source
+or owner-direction drift returns to curation.
+
+The executable sequence is GP-CONFIG-012 then GP-CONFIG-013 for convenient
+shared fixture serialization, with GP-CONFIG-014 and GP-CONFIG-017 independently
+eligible for implementation. Only one normal new work order executes per
+Implementation cycle. H3 candidates require exact committed candidate SHA,
+canonical Mk6 build, preserved content-addressed UF2 SHA-256, pre-handoff
+rehash, candidate-local source-grounded protocol, owner observations, fresh
+independent Hardware Evidence Processor, and correspondence-governed
+integration. A successful build never substitutes for hardware PASS. GP-VAL-011
+remains OWNER_DEFERRED / NONEXECUTABLE under GLYPH-UD-013; Nunchuk remains
+NOT_TESTED. No GP-CONFIG-010 checker portability proxy is authorized.
 
 ## Allowed Statuses
 
@@ -6285,15 +6476,35 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260929-1728",
-  "planning_commit": "565626cdf7014820fcc401bf1f776669b1cf57d6",
-  "packet_id": "glyph-portfolio-20260929-1728",
-  "packet_base_configurator_sha": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
-  "curation_branch": "curation/portfolio-20260929-1728-review",
+  "planning_branch": "planning/portfolio-20260929-2218",
+  "planning_commit": "7db3cfb56c0630b7bf41c3634fa460440812ac04",
+  "packet_id": "glyph-portfolio-20260929-2218",
+  "packet_base_configurator_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
+  "curation_branch": "curation/portfolio-20260929-2218-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-VAL-032",
+      "candidate_id": "GP-CONFIG-012",
       "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-013",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-014",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-015",
+      "disposition": "RESEARCH_GATED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-017",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-018",
+      "disposition": "USER_DECISION_GATED"
     }
   ],
   "review_date": "2026-09-29",
