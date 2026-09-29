@@ -80,11 +80,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-012","GP-CONFIG-013","GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-012, GP-CONFIG-013, GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 GP-VAL-032 is DONE: the exact current GP-CONFIG-010 semantic checker now has
@@ -99,8 +99,8 @@ GP-PROV-014 is DONE: the preserved candidate was reconciled with canonical
 after GP-VAL-032, then passed its snapshot-bound source/dependency closure
 checks, 33 adversarial cases, independent review, and the required clean
 42-of-42 aggregate with canonical proof MATCH. The observed Nanopb 0.4.92
-closure does not pin future resolution or authorize GP-CONFIG-012/013 decoder
-acceptance. Independent replay in a reduced-object local clone passed 41 of 42:
+closure does not pin future resolution or itself authorize GP-CONFIG-012/013 decoder
+acceptance; the separate Curator receipt authorizes bounded H1 characterization. Independent replay in a reduced-object local clone passed 41 of 42:
 GP-CONFIG-010's historical proof hashes `git diff` text whose `index` SHA
 abbreviation changed with the object database; the patch body was identical.
 The 42-of-42 result is specific to the recorded candidate checkout, not a
@@ -114,7 +114,7 @@ GP-VAL-031 is DONE: the current semantics bridge fixtures bind the exact current
 
 GP-VAL-028 is DONE: an authenticated tracked Nanopb 0.4.9.2 generated header makes the GP-CONFIG-010 capacity checker run from a clean checkout. GP-CONFIG-016 subsequently completed a clean 41-of-41 aggregate with canonical proof MATCH and independent review; its NeoPixel null result is bounded host evidence with physical reachability UNKNOWN. The historical tested-artifact package identity remains UNKNOWN.
 
-- GP-CONFIG-010 is `DONE`. Exact tested integration candidate `1c0ff22646729d26d45eacb4b8322c5baea7de48`, based on `22c639c31ea7006c18a29ec2693c8b18ff688ed4`, entered canonical through merge `50a6357eddf0d9c83d31233666c451806fb1f424`; narrow completion-control commit `7ca129e218b292c0aa64b38577848dd8b63a4c66` added only the three exact source-free protocol/result/evidence paths to the finite correspondence inventory. The physically passed artifact remains the preserved 791552-byte UF2 `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`. Required 13-profile capacity/reconnect checks, exact owner Config restoration, all nine GP-X1-002 rows, ordinary sanity, and final reconnect passed with empty evidence gaps. The original candidate `f4771e17430fd1ea3f1e3e5339a83dfe648290a3`, UF2 `9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a`, and immutable PASS remain distinct historical evidence. GP-VAL-015/027 retain critical precedence and unknown-path fail-closed behavior. The prior frozen-logo event remains unexplained and did not recur. GP-CONFIG-012 and GP-CONFIG-013 are REVIEW / EVIDENCE_GATED after the current isolated Nanopb range resolved to 0.4.92 rather than the 0.4.91 observed in their authorization; fresh source-backed curation is required before H1 characterization. GP-CONFIG-014 is USER_DECISION_GATED: successful SetConfig can replace the live custom-mode count while an active mode retains its modifier-mask cache, so valid in-place replacement behavior needs an owner decision before H3 repair authorization. GP-VAL-011 remains deferred and GP-HW-002 remains research gated. Nunchuk remains NOT_TESTED and root cause remains unproven.
+- GP-CONFIG-010 is `DONE`. Exact tested integration candidate `1c0ff22646729d26d45eacb4b8322c5baea7de48`, based on `22c639c31ea7006c18a29ec2693c8b18ff688ed4`, entered canonical through merge `50a6357eddf0d9c83d31233666c451806fb1f424`; narrow completion-control commit `7ca129e218b292c0aa64b38577848dd8b63a4c66` added only the three exact source-free protocol/result/evidence paths to the finite correspondence inventory. The physically passed artifact remains the preserved 791552-byte UF2 `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`. Required 13-profile capacity/reconnect checks, exact owner Config restoration, all nine GP-X1-002 rows, ordinary sanity, and final reconnect passed with empty evidence gaps. The original candidate `f4771e17430fd1ea3f1e3e5339a83dfe648290a3`, UF2 `9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a`, and immutable PASS remain distinct historical evidence. GP-VAL-015/027 retain critical precedence and unknown-path fail-closed behavior. The prior frozen-logo event remains unexplained and did not recur. The 2026-09-29 Curator receipt independently replaced the obsolete GP-CONFIG-012/013 evidence gates with exact 0.4.9.2-bound H1 orders, authorized the narrow GP-CONFIG-014 capacity repair and GP-CONFIG-017 RGB ordering repair, and kept valid same-session custom-mode replacement semantics separately USER_DECISION_GATED as GP-CONFIG-018. GP-CONFIG-015 remains RESEARCH_GATED. GP-VAL-011 remains deferred and GP-HW-002 remains research gated. Nunchuk remains NOT_TESTED and root cause remains unproven.
 - Runtime-config validation now uses a full static checker census plus a
   curated runtime-config manifest. The census count is discovery-derived; the
   manifest, not a manual audit of every checker, owns current semantic gates.
