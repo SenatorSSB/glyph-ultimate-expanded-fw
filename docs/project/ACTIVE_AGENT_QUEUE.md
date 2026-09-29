@@ -6255,3 +6255,34 @@ a separately published canonical queue adoption. It contains no self-SHA.
 }
 ```
 <!-- curator-receipt:end -->
+
+## GP-VAL-032 exact-path correspondence follow-up review
+
+Independent Curator source review on live `configurator`
+`fddc676c16c509c1ca7fe74acf3e266a789d05d2` found that the current
+GP-CONFIG-010 semantic checker calls `verify_correspondence` over every changed
+path from its immutable integration candidate to current HEAD. The current
+finite `NON_BEHAVIORAL_PATHS` omits
+`tools/run_glyph_runtime_config_validation.py`, so a properly scoped GP-VAL-032
+runner edit fails closed as an unclassified path before the historical-object
+proof can be evaluated. The checker itself remains unchanged.
+
+The runner is an explicit host validation entrypoint, outside the firmware
+source/include/build controls documented in `HARDWARE_CORRESPONDENCE.md`.
+Classifying this one exact path as `NON_BEHAVIORAL` permits source-free
+validation evolution while retaining critical-path precedence, unknown-path
+rejection, regular non-executable `100644` restrictions, and all ordinary
+runner, semantic, framework, census, health and aggregate gates. The exact
+path classification is a separately reviewed authorization consequence of
+GP-VAL-032, not a pattern exemption or permission for unrelated validation
+changes. The prior GP-VAL-032 READY order did not name this helper edit and
+therefore required this fresh Curator amendment before implementation.
+
+The amended scope must require focused positive and negative correspondence
+tests, including exact runner path, nearby/lookalike aliases, protected critical
+path precedence, unsupported Git entry types and modes, and retained failure
+for unknown paths. Neither the GP-CONFIG-010 semantic checker nor its fixture,
+historical evidence, source proof, or fingerprint correspondence may change.
+All other GP-VAL-011 work remains deferred under GLYPH-UD-013. This review
+records source authority only; the later queue adoption commit supplies the
+executable amended contract.
