@@ -631,6 +631,97 @@ def topology_catalog_cases(module: Any) -> list[str]:
             raise AssertionError("fixed current-source roots differ")
     return ["ISO-12-exact-local-configurator-ref", "ISO-13-source-enumerated-queue-roots-and-off-head-transfer", "ISO-14-catalog-schema-identity-and-local-object-failures"]
 
+
+def gp_config_010_historical_object_cases(module: Any) -> list[str]:
+    """The exact selected checker alone receives its locally complete historical commit."""
+    with tempfile.TemporaryDirectory(prefix="glyph-config-010-object-contract-") as directory:
+        parent = Path(directory)
+        root = fresh_root(parent)
+        module.ROOT = root
+        initial = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+
+        def off_head_commit(branch: str, filename: str) -> str:
+            run_git(root, "switch", "-c", branch)
+            (root / filename).write_text(branch + "\n", encoding="utf-8")
+            run_git(root, "add", filename)
+            run_git(root, "commit", "-m", branch)
+            identity = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+            run_git(root, "switch", "configurator")
+            run_git(root, "branch", "-D", branch)
+            return identity
+
+        historical = off_head_commit("historical-candidate", "historical.txt")
+        substitute = off_head_commit("substitute-candidate", "substitute.txt")
+        semantic = entry("gp_config_010_integration_semantic_correspondence")
+        semantic["path"] = module.GP_CONFIG_010_SEMANTIC_COMMAND[1]
+        semantic["command"] = module.GP_CONFIG_010_SEMANTIC_COMMAND[:]
+        unrelated = entry("unrelated")
+        wrong_id = entry("near_semantic")
+        wrong_id["path"], wrong_id["command"] = semantic["path"], semantic["command"][:]
+        wrong_command = dict(semantic)
+        wrong_command["command"] = ["python3", "tools/check_glyph_other.py"]
+        original_candidate = module.GP_CONFIG_010_HISTORICAL_CANDIDATE
+        original_env = module.EXECUTION_ENV
+        try:
+            module.GP_CONFIG_010_HISTORICAL_CANDIDATE = historical
+            refs, roots = module.required_catalog([semantic])
+            if refs or roots != {historical}:
+                raise AssertionError("exact GP-CONFIG-010 checker did not select only its historical root")
+            for selected in ([unrelated], [wrong_id], [wrong_command]):
+                refs, roots = module.required_catalog(selected)
+                if refs or roots:
+                    raise AssertionError("unrelated or altered checker received historical root/ref")
+            module.GP_CONFIG_010_HISTORICAL_CANDIDATE = "0" * 40
+            try:
+                module.immutable_source_context([semantic])
+            except ValueError as exc:
+                if "0000000000000000000000000000000000000000^{commit}" not in str(exc):
+                    raise
+            else:
+                raise AssertionError("missing local historical commit was accepted")
+            module.GP_CONFIG_010_HISTORICAL_CANDIDATE = historical
+            context = module.immutable_source_context([semantic])
+            if historical not in context["object_roots"] or context["required_refs"]:
+                raise AssertionError("historical root/ref context differs")
+
+            def isolated_clone(label: str, roots: list[str]) -> Path:
+                location = parent / label
+                location.mkdir()
+                module.EXECUTION_ENV = module.isolated_environment(location)
+                altered = dict(context)
+                altered["object_roots"] = roots
+                return module.clone_snapshot(altered, location)
+
+            without = isolated_clone("without", [root_id for root_id in context["object_roots"] if root_id != historical])
+            replaced = isolated_clone("replaced", [root_id for root_id in context["object_roots"] if root_id != historical] + [substitute])
+            with_historical = isolated_clone("with", context["object_roots"])
+            for clone in (without, replaced):
+                if module.git("cat-file", "-e", f"{historical}^{{commit}}", cwd=clone).returncode == 0:
+                    raise AssertionError("omitted/substituted transfer satisfied exact historical identity")
+            if module.git_value("cat-file", "-t", historical, cwd=with_historical) != "commit":
+                raise AssertionError("exact historical commit was not imported")
+            if any(line.startswith("?") for line in module.git_value(
+                    "rev-list", "--objects", "--missing=print", historical, cwd=with_historical).splitlines()):
+                raise AssertionError("historical closure incomplete")
+            expected_refs = {"refs/heads/configurator": initial, "refs/remotes/origin/configurator": initial}
+            for clone in (without, replaced, with_historical):
+                observed = dict(line.split(" ", 1) for line in module.git_value(
+                    "for-each-ref", "--format=%(refname) %(objectname)", cwd=clone).splitlines())
+                if observed != expected_refs:
+                    raise AssertionError("historical transfer introduced or changed a ref")
+            def object_ids(clone: Path) -> set[str]:
+                return set(module.git_value("cat-file", "--batch-all-objects", "--batch-check=%(objectname)", cwd=clone).splitlines())
+            added = object_ids(with_historical) - object_ids(without)
+            closure = {line.split(" ", 1)[0] for line in module.git_value(
+                "rev-list", "--objects", historical, "--not", initial).splitlines()}
+            if added != closure:
+                raise AssertionError(f"historical transfer object delta exceeds exact required closure: {added ^ closure}")
+        finally:
+            module.GP_CONFIG_010_HISTORICAL_CANDIDATE = original_candidate
+            module.EXECUTION_ENV = original_env
+    return ["ISO-15-exact-config-010-selection-and-local-failure",
+            "ISO-16-config-010-omission-substitution-bounded-closure-and-no-ref"]
+
 def main() -> int:
     module = load_runner()
     passed: list[str] = []
@@ -1019,6 +1110,7 @@ def main() -> int:
 
     passed.extend(isolation_contract_cases(module))
     passed.extend(topology_catalog_cases(module))
+    passed.extend(gp_config_010_historical_object_cases(module))
 
     if set(REQUIRED) != set(entry("schema_probe")):
         raise AssertionError("adversarial manifest entry no longer matches the runner schema")

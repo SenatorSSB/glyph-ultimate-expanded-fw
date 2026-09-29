@@ -107,6 +107,25 @@ their synthetic tests. No inspected firmware/include/build-hook input consumes i
 bytes. Census validity gates repository validation but does not provide compiled
 firmware data. The census keeps its existing freshness and integrity validators.
 
+## GP-VAL-032 exact host runner path
+
+The isolated runtime-config aggregate entrypoint
+`tools/run_glyph_runtime_config_validation.py` reads the current checker
+manifest and runs host validation in a disposable local Git repository. The
+reviewed PlatformIO source filters and build controls do not select this file
+as firmware or a build input. GP-VAL-032 therefore adds only this exact path
+to the finite `NON_BEHAVIORAL` inventory so the unchanged GP-CONFIG-010
+semantic checker can evaluate a reviewed runner change. Its local historical
+object transfer remains subject to the aggregate's own isolation, timeout,
+mutation, clean-state, and final fingerprint checks.
+
+Critical-path precedence, unknown-path rejection, and regular non-executable
+`100644` entry requirements still apply. Adjacent names and aliases gain no
+classification, and ordinary checker, census, health, and framework gates
+remain independent. This classification makes no firmware, build-package,
+device, or historical artifact claim and does not reopen the rest of
+GP-VAL-011.
+
 ## Exact candidate audit
 
 Candidate `437f87e8086a50f0dfbd834176b80d245c1ed307`, direct parent

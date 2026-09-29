@@ -218,6 +218,8 @@ X1_COMMAND = ["python3", "tools/check_glyph_current_x1_regression_subset.py"]
 X1_REF = "refs/heads/runtime-config-x1-offset41-hardware-candidate"
 X1_CANDIDATE = "74ae24364b84520d4e0e39240beb9867653cc7b9"
 X1_OBJECTS = (X1_CANDIDATE, "6b0061489cb67d345f212f75268455c181ba271f", "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c")
+GP_CONFIG_010_SEMANTIC_COMMAND = ["python3", "tools/check_glyph_config_010_integration_semantic_correspondence.py"]
+GP_CONFIG_010_HISTORICAL_CANDIDATE = "f4771e17430fd1ea3f1e3e5339a83dfe648290a3"
 
 
 def require_budget(label: str) -> float:
@@ -529,6 +531,9 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         ("nuker_source_lineage", "check_glyph_nuker_source_lineage.py", ("a747dd54b02b207483142331d8b5be1113fc951e", "d5050847d3f850951b3f47865dc8a91aedea0834")),
     ):
         if has(checker_id, filename): roots.update(identities)
+    if any(entry["id"] == "gp_config_010_integration_semantic_correspondence"
+           and entry["command"] == GP_CONFIG_010_SEMANTIC_COMMAND for entry in selected):
+        roots.add(GP_CONFIG_010_HISTORICAL_CANDIDATE)
     if not has("agent_framework", "check_glyph_agent_framework_docs.py"):
         return refs, roots
     path = "docs/project/ACTIVE_AGENT_QUEUE.md"
