@@ -87,6 +87,14 @@ automation from this context document.
 Ready IDs: GP-PROV-014; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
+GP-VAL-032 is DONE: the exact current GP-CONFIG-010 semantic checker now has
+the locally required historical commit in the isolated aggregate's closed
+object catalog. The reviewed H1 repair passed 41 of 41 aggregate checks,
+current and historical semantic proofs, adversarial omission/substitution and
+closure tests, and independent review. GP-PROV-014 retains its
+preserved candidate and separate full-aggregate DONE gate. All other
+GP-VAL-011 work remains deferred under GLYPH-UD-013.
+
 GP-VAL-029 is DONE: the current semantic checker now proves accepted mode-selection and 28-table bytes on reviewed descendants; its historical candidate proof remains separate. At GP-VAL-029 publication, the full aggregate still had independent capacity, config-menu source drift, prebuild identity, and semantics bridge failures.
 
 GP-VAL-030 is DONE: the prebuild self-test now sets Git identity only in its temporary repositories and passes with system and global Git config disabled. The aggregate still fails capacity, config-menu source drift, and semantics bridge checks; production builder behavior is unchanged.

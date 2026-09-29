@@ -20,6 +20,7 @@ CENSUS = "docs/runtime_config/fixtures/glyph_checker_census.json"
 DOC = "docs/AGENT_CONTEXT.md"
 GENERATED = "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
 STUB = "tools/fixtures/configurator_setconfig_host/include/config.pb.h"
+AGGREGATE_RUNNER = "tools/run_glyph_runtime_config_validation.py"
 X1_HOST_PATHS = (
     "docs/agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
     "docs/agent_framework/SUBAGENT_CONTRACTS.md",
@@ -122,6 +123,46 @@ class CorrespondenceTests(unittest.TestCase):
         self.commit("executable x1 metadata")
         with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
             self.verify()
+
+    def test_exact_aggregate_runner_is_host_metadata_with_closed_aliases(self):
+        self.write(AGGREGATE_RUNNER, "bounded host-only historical object transfer\n")
+        self.commit("exact aggregate runner metadata")
+        self.assertEqual(self.verify()["target_paths"], {AGGREGATE_RUNNER: "NON_BEHAVIORAL"})
+        for path in (
+            "tools/Run_glyph_runtime_config_validation.py",
+            "tools/run_glyph_runtime_config_validation.py.bak",
+            "tools/run_glyph_runtime_config_validation_extra.py",
+            "tools/other/run_glyph_runtime_config_validation.py",
+            "tools/unreviewed_host_validation.py",
+        ):
+            with self.subTest(path=path), self.assertRaisesRegex(correspondence.CorrespondenceError, "unclassified"):
+                correspondence.classify_path(path)
+        with mock.patch.object(correspondence, "CORRESPONDENCE_CRITICAL_PATHS",
+                               correspondence.CORRESPONDENCE_CRITICAL_PATHS | {AGGREGATE_RUNNER}):
+            self.assertEqual(correspondence.classify_path(AGGREGATE_RUNNER), "CRITICAL")
+        self.assertEqual(correspondence.classify_path(HANDLER), "CRITICAL")
+        self.write(HANDLER, "dirty critical input")
+        with self.assertRaisesRegex(correspondence.CorrespondenceError, "dirty critical"):
+            self.verify()
+
+    def test_exact_aggregate_runner_rejects_executable_symlink_and_gitlink(self):
+        for kind in ("executable", "symlink", "gitlink"):
+            with self.subTest(kind=kind):
+                self.git("switch", "-q", "-c", "runner-" + kind, self.candidate)
+                if kind == "executable":
+                    self.write(AGGREGATE_RUNNER, "host runner\n")
+                    (self.root / AGGREGATE_RUNNER).chmod(0o755)
+                    self.commit("executable runner")
+                elif kind == "symlink":
+                    path = self.root / AGGREGATE_RUNNER
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.symlink_to("check_glyph_runtime_config_validation_aggregate.py")
+                    self.commit("symlink runner")
+                else:
+                    self.git("update-index", "--add", "--cacheinfo", f"160000,{self.candidate},{AGGREGATE_RUNNER}")
+                    self.git("commit", "-q", "-m", "gitlink runner")
+                with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
+                    self.verify(check_worktree=False)
 
     def test_changed_handler_fails(self):
         self.write(HANDLER, "tested handler!\n")
