@@ -6285,15 +6285,35 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260929-1728",
-  "planning_commit": "565626cdf7014820fcc401bf1f776669b1cf57d6",
-  "packet_id": "glyph-portfolio-20260929-1728",
-  "packet_base_configurator_sha": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
-  "curation_branch": "curation/portfolio-20260929-1728-review",
+  "planning_branch": "planning/portfolio-20260929-2218",
+  "planning_commit": "7db3cfb56c0630b7bf41c3634fa460440812ac04",
+  "packet_id": "glyph-portfolio-20260929-2218",
+  "packet_base_configurator_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
+  "curation_branch": "curation/portfolio-20260929-2218-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-VAL-032",
+      "candidate_id": "GP-CONFIG-012",
       "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-013",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-014",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-015",
+      "disposition": "RESEARCH_GATED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-017",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-CONFIG-018",
+      "disposition": "USER_DECISION_GATED"
     }
   ],
   "review_date": "2026-09-29",
