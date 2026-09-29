@@ -48,6 +48,13 @@ classifier for all post-integration paths. `--historical` retains the exact
 integration candidate, branch, and direct-parent proof. Neither mode grants
 new firmware or hardware acceptance.
 
+GP-VAL-028 makes the GP-CONFIG-010 capacity checker runnable from a clean
+checkout. The current checker binds the tracked 0.4.9.2 generated header to
+the exact `bdd72a22…` digest, schema inputs, generator provenance, package
+metadata, license and selectors before its seven ASan/UBSan cases. The
+handwritten compile double is checked separately. The historical tested
+artifact's Nanopb package identity remains unknown.
+
 The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.

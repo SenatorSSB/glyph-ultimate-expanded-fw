@@ -5,3 +5,5 @@ tools/fixtures/custom_modifier_cache_host/schema/config.pb.h -text -whitespace
 tools/fixtures/custom_modifier_cache_host/schema/pb.h -text -whitespace
 tools/fixtures/custom_modifier_cache_host/schema/LICENSE.nanopb.txt -text -whitespace
 tools/fixtures/custom_modifier_cache_host/schema/haybox-proto.library.json -text -whitespace
+tools/fixtures/mode_selection_host/generated/config.pb.h -text -whitespace
+tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt -text -whitespace

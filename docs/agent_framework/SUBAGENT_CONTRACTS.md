@@ -447,3 +447,24 @@ record, not evidence of a passing review.
 - stop conditions: any table other than kX1Table changes, routing/publication or
   Mode/MX1 behavior changes, authority/identity mismatch, failed validation,
   failed build/review/custody, or required physical mapping is invented.
+
+## Implementation Supervisor cycle — GP-VAL-028 (2026-09-29)
+
+- guidance applicable: yes; GP-VAL-028 is a complete H1 READY work order and
+  repository mutation requires bounded delegation and fresh independent review.
+- capability discovery: native internal collaboration agents are available.
+- native capability available: yes.
+- specialists: a read-only header-provenance specialist independently
+  regenerated the exact `bdd72a22` Nanopb 0.4.9.2 header; a bounded
+  implementation agent prepared host fixture, checker, provenance, and
+  validation changes in an isolated worktree. Root retained Git, authoritative
+  validation, and publication decisions.
+- reviewer: a fresh independent post-implementation reviewer checked exact
+  scope, generated-byte custody, fail-closed source and manifest correspondence,
+  sanitizer coverage, adversarial negatives, history separation, and repaired
+  findings before the final candidate gate.
+- forbidden delegated actions: canonical queue or source publication, firmware
+  build, active source/selector/schema edits, device or hardware action, and
+  claims about the historical tested artifact's Nanopb package identity.
+- stop conditions: generated-header or provenance mismatch, weaker exact-source
+  proof, unreviewed active behavior, failed full aggregate, or publication drift.

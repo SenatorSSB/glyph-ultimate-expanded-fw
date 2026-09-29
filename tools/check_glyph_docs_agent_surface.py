@@ -526,8 +526,8 @@ def validate_docs() -> None:
     validate_archive_index(docs[ARCHIVE_INDEX])
 
 
-def exact_gp026_schema_attributes(root: Path) -> bool:
-    """Only the six reviewed vendored files may retain upstream bytes/whitespace."""
+def exact_schema_attributes(root: Path) -> bool:
+    """Only reviewed vendored/generated fixtures retain original whitespace."""
     path = root / ".gitattributes"
     if not path.is_file() or path.is_symlink():
         return False
@@ -538,6 +538,10 @@ def exact_gp026_schema_attributes(root: Path) -> bool:
             "LICENSE.nanopb.txt", "haybox-proto.library.json",
         )
     )
+    expected += (
+        "tools/fixtures/mode_selection_host/generated/config.pb.h -text -whitespace\n"
+        "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt -text -whitespace\n"
+    )
     return path.read_bytes() == expected.encode("utf-8")
 
 
@@ -547,7 +551,7 @@ def validate_surface_scope(context: CheckerContext) -> None:
         exact_gp_config_010_integration_candidate(context)
         if GP_CONFIG_010_SOURCE_PATH in context.changed_paths else False
     )
-    schema_attributes = (".gitattributes",) if exact_gp026_schema_attributes(context.repo_root) else ()
+    schema_attributes = (".gitattributes",) if exact_schema_attributes(context.repo_root) else ()
     validate_feature_scope(
         context,
         allowed_paths=(*schema_attributes, "docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ()), *((GP_CONFIG_010_SOURCE_PATH,) if authorized_gp_config_010 else ())),
