@@ -91,8 +91,8 @@ GP-VAL-032 is DONE: the exact current GP-CONFIG-010 semantic checker now has
 the locally required historical commit in the isolated aggregate's closed
 object catalog. The reviewed H1 repair passed 41 of 41 aggregate checks,
 current and historical semantic proofs, adversarial omission/substitution and
-closure tests, and independent review. GP-PROV-014 remains READY on its
-preserved candidate with a separate full-aggregate DONE gate. All other
+closure tests, and independent review. GP-PROV-014 retains its
+preserved candidate and separate full-aggregate DONE gate. All other
 GP-VAL-011 work remains deferred under GLYPH-UD-013.
 
 GP-VAL-029 is DONE: the current semantic checker now proves accepted mode-selection and 28-table bytes on reviewed descendants; its historical candidate proof remains separate. At GP-VAL-029 publication, the full aggregate still had independent capacity, config-menu source drift, prebuild identity, and semantics bridge failures.
