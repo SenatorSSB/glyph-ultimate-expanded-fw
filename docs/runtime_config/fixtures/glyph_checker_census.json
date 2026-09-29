@@ -11164,7 +11164,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 59811,
+      "file_size_bytes": 65643,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -11176,12 +11176,14 @@
         "evidence.json",
         "hardware-evidence",
         "hardware_evidence_record",
+        "historical-candidate",
         "historical_evidence",
         "historical_evidence_probe",
         "module.validate_branch_policy",
         "named_evidence_branch",
         "origin/configurator",
         "original_candidate",
+        "substitute-candidate",
         "unrelated-branch"
       ],
       "imported_local_modules": [],
@@ -11189,7 +11191,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1030,
+      "line_count": 1122,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -11203,12 +11205,14 @@
         "evidence.json",
         "hardware-evidence",
         "hardware_evidence_record",
+        "historical-candidate",
         "historical_evidence",
         "historical_evidence_probe",
         "module.validate_branch_policy",
         "named_evidence_branch",
         "origin/configurator",
         "original_candidate",
+        "substitute-candidate",
         "unrelated-branch"
       ],
       "potential_mutation_signals": [
@@ -11231,6 +11235,7 @@
         "tools/check_glyph_extra.py",
         "tools/check_glyph_generated_source_owned_baseline_artifact.py",
         "tools/check_glyph_nuker_source_lineage.py",
+        "tools/check_glyph_other.py",
         "tools/check_glyph_renamed.py",
         "tools/check_glyph_runtime_config_validation_aggregate.py",
         "tools/check_glyph_synthetic_",
@@ -11249,7 +11254,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "db878c233ec66e1d8ae9679e1def3398ecd022fde561c6334d1498e3a9d51d9a",
+      "sha256": "e94e5a2f75760f8719ab863e639f209c2e3fcb90f22cc16d7328240709f5dcce",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

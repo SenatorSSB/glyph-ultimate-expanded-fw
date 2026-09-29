@@ -82,6 +82,7 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'tools/check_glyph_neopixel_null_sendreport_characterization.py',
     'tools/check_glyph_prebuild_git_identity.py',
     'tools/check_glyph_runtime_config_validation_aggregate.py',
+    'tools/run_glyph_runtime_config_validation.py',
     'tools/check_glyph_current_config_persistence_recovery_research.py',
     'tools/check_glyph_docs_agent_surface.py',
     'tools/check_glyph_docs_navigation.py',
