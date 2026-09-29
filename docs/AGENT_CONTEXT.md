@@ -80,11 +80,11 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-014"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-014; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 GP-VAL-032 is DONE: the exact current GP-CONFIG-010 semantic checker now has
@@ -94,6 +94,17 @@ current and historical semantic proofs, adversarial omission/substitution and
 closure tests, and independent review. GP-PROV-014 retains its
 preserved candidate and separate full-aggregate DONE gate. All other
 GP-VAL-011 work remains deferred under GLYPH-UD-013.
+
+GP-PROV-014 is DONE: the preserved candidate was reconciled with canonical
+after GP-VAL-032, then passed its snapshot-bound source/dependency closure
+checks, 33 adversarial cases, independent review, and the required clean
+42-of-42 aggregate with canonical proof MATCH. The observed Nanopb 0.4.92
+closure does not pin future resolution or authorize GP-CONFIG-012/013 decoder
+acceptance. Independent replay in a reduced-object local clone passed 41 of 42:
+GP-CONFIG-010's historical proof hashes `git diff` text whose `index` SHA
+abbreviation changed with the object database; the patch body was identical.
+The 42-of-42 result is specific to the recorded candidate checkout, not a
+clean-clone portability guarantee. All other GP-VAL-011 work remains deferred.
 
 GP-VAL-029 is DONE: the current semantic checker now proves accepted mode-selection and 28-table bytes on reviewed descendants; its historical candidate proof remains separate. At GP-VAL-029 publication, the full aggregate still had independent capacity, config-menu source drift, prebuild identity, and semantics bridge failures.
 

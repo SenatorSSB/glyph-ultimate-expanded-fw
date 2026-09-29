@@ -88,17 +88,18 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -608,7 +609,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-PROV-014",
       "title": "Record exact current decoder dependency closure",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-prov-014-decoder-closure",
       "objective": "Capture and verify the build-resolved Nanopb/generated decoder source closure for one exact current configurator snapshot so dependent characterizations can be reconsidered against observed bytes.",
       "why_this_matters": "The 012/013 authorization used observed 0.4.91, while a clean current resolution selected 0.4.92; only one 0.4.92 pb_decode.c hash is recorded and complete generated/source/license correspondence is unverified.",
@@ -650,7 +651,30 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Keep incomplete closure as evidence only and return to Curator if exact generation, license or hash correspondence fails.",
       "status_documentation_updates": "Document observed closure and its snapshot limit; keep GP-CONFIG-012/013 REVIEW/EVIDENCE_GATED until separate acceptance.",
-      "done_evidence": "Fresh independent implementation review, exact-source and negative fixture checks, affected provenance/validation gates, full runtime-config aggregate, framework and navigation gates, diff/clean-state proof; no firmware/configurator runtime source or active behavior changed.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "2aae124c99a54af8b9d66f8b2b5864dd75f2471c",
+        "reviewed_implementation_sha": "da20f4afaea61e3f48d16ab19e2fb2e2e25e7775",
+        "prior_canonical_integration_sha": "66fa47dee9dfe04df26be50a20ac74331924cc60",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/runtime_config/README.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_prov_014_decoder_closure.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_gp_prov_014_decoder_closure.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/test_glyph_gp_prov_014_decoder_closure.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent review PASS on exact preserved GP-PROV-014 candidate da20f4afaea61e3f48d16ab19e2fb2e2e25e7775 against live canonical 2aae124c99a54af8b9d66f8b2b5864dd75f2471c after narrow GP-VAL-032 integration. Original implementation 5a3031c1fe02e39f6fec6c921c44d285dfad43ee is ancestral; core checker, pinned fixture, adversarial tests, manifest and health bytes are preserved across the canonical merge. The reviewer found only twelve host/docs/checker/fixture paths, no firmware or build-input change, current tracked selector and proto/header/license correspondence, and no material findings. Review did not waive the separately completed full aggregate gate.",
+        "validation_provenance": "The preserved candidate was merged with canonical 2aae124c99a54af8b9d66f8b2b5864dd75f2471c without conflicts. Current tracked selectors, proto/options, generated header and license matched the snapshot-bound report; GP-VAL-026 host characterization passed eight cases. The GP-PROV-014 checker passed its one observed snapshot contract and 33 isolated adversarial cases; 41 correspondence tests, census 209, health 48 entries, framework, sequence, navigation, agent surface/integration, Python syntax and diff checks passed. An attempt in the original worktree failed preflight before checker execution on its ignored .pio directory, preserving the deferred GP-VAL-011 behavior. The exact candidate commit da20f4afaea61e3f48d16ab19e2fb2e2e25e7775 was then validated in a clean checkout without .pio: the required full aggregate passed 42/42 with canonical proof MATCH, including gp_prov_014_decoder_closure. Live canonical integration 66fa47dee9dfe04df26be50a20ac74331924cc60 was verified. Independent replay in a reduced-object local clone passed 41/42 because the existing GP-CONFIG-010 historical semantic checker hashes textual git diff, including an object-database-dependent abbreviated index line; the patch body matched. The recorded 42/42 full pass is limited to the exact candidate checkout and does not establish arbitrary clean-clone portability. The recorded Nanopb 0.4.92 closure remains one observed 739c9c58acfde78de1639cd18be5a7c60fa06f1a snapshot; no future dependency pin, historical GP-CONFIG-010 artifact identity, GP-CONFIG-012/013 acceptance, physical behavior, firmware, build input or device change is claimed."
+      },
       "stop_conditions": [
         "Any package or generated byte is assumed from an ignored cache rather than verified in clean isolated resolution.",
         "The checker claims a permanent pin or transitive reproducibility for ^0.4.8.",
@@ -6174,11 +6198,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-014"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-014; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6189,7 +6213,9 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-GP-VAL-032 is DONE after reviewed H1 integration `ab6e609cf973d8735c034d160966faef780cf90b` and strict completion correspondence. Its clean 41-of-41 aggregate and current/historical GP-CONFIG-010 semantic proofs passed; the bounded local object tests rejected absence, omission and substitution without adding refs. GP-PROV-014 retains its full-aggregate DONE gate. All other GP-VAL-011 work remains deferred under GLYPH-UD-013.
+GP-VAL-032 is DONE after reviewed H1 integration `ab6e609cf973d8735c034d160966faef780cf90b` and strict completion correspondence. Its clean 41-of-41 aggregate and current/historical GP-CONFIG-010 semantic proofs passed; the bounded local object tests rejected absence, omission and substitution without adding refs. At that publication, GP-PROV-014 still had its own full-aggregate gate. All other GP-VAL-011 work remains deferred under GLYPH-UD-013.
+
+GP-PROV-014 is DONE after exact reviewed integration `66fa47dee9dfe04df26be50a20ac74331924cc60` and a clean 42-of-42 full aggregate with canonical proof MATCH on the recorded candidate checkout. Independent replay in a reduced-object local clone passed 41 of 42: the GP-CONFIG-010 historical semantic checker hashes textual `git diff` whose `index` SHA abbreviation varied with object database contents, although the patch body was identical. The recorded full pass is therefore checkout-specific, not a clean-clone portability guarantee. Its observed Nanopb 0.4.92 decoder closure remains bound to one source snapshot; GP-CONFIG-012/013 remain evidence gated. The ignored-state preflight defect in the original worktree did not expand GP-VAL-011 authority.
 
 Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-028/029/030/031 are DONE. GP-CONFIG-016 is DONE after a clean 41-of-41 aggregate and independent review; GP-PROV-014 retains its exact dependency-closure and aggregate DONE gates. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 

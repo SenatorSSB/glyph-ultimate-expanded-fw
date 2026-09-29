@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-PROV-014"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-PROV-014; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 GP-VAL-032 is DONE after a clean 41-of-41 aggregate with canonical proof
@@ -21,6 +21,14 @@ MATCH, current and historical GP-CONFIG-010 semantic proofs, bounded local
 historical-object adversarial tests, and independent review. GP-PROV-014
 retains its preserved candidate and required full aggregate. All other
 GP-VAL-011 work remains deferred under GLYPH-UD-013.
+
+GP-PROV-014 is DONE after independent review and a clean 42-of-42 full
+aggregate with canonical proof MATCH on the preserved, reconciled candidate.
+Its decoder closure is one observed Nanopb 0.4.92 snapshot. Independent replay
+in a reduced-object clone found that GP-CONFIG-010's historical `git diff`
+index abbreviation changes its textual proof hash despite an identical patch
+body; the recorded 42-of-42 result is checkout-specific. GP-CONFIG-012/013
+remain evidence gated, and other GP-VAL-011 work remains deferred.
 
 GP-VAL-029 is DONE: the current semantic checker now proves accepted mode-selection and 28-table bytes on reviewed descendants; its historical candidate proof remains separate. At GP-VAL-029 publication, the full aggregate still had independent capacity, config-menu source drift, prebuild identity, and semantics bridge failures.
 
