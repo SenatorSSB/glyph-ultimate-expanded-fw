@@ -80,12 +80,14 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-013","GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-013, GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
+
+GP-CONFIG-012 and GP-CONFIG-013 are now REVIEW after the 2026-09-30 Curator correspondence disposition. The exact GP-CONFIG-012 candidate has 16 unclassified host/documentation paths; GP-CONFIG-013 has no candidate path inventory yet. A separate Planner-proposed governance work order must authorize exact-path correspondence classification before either resumes or integrates. GP-CONFIG-014/017 authorization and all firmware and physical results are unchanged.
 
 GP-VAL-032 is DONE: the exact current GP-CONFIG-010 semantic checker now has
 the locally required historical commit in the isolated aggregate's closed

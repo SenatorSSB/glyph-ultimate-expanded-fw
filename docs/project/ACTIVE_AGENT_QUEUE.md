@@ -22,17 +22,17 @@ Git, but it is not current candidate supply or implementation authority.
   "audit_base_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": true,
-    "trigger": "GP-CONFIG-012 candidate 523fe2506359b68203f7f816ee9cb6a15a775c58 is not merge-eligible: the unchanged current checker tools/check_glyph_config_010_integration_semantic_correspondence.py rejects docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json as an unclassified correspondence path. The same checker passes on canonical base 6b6424dc9f915530b4a3386cd3864671a236d4e6. The READY order excludes changing the GP-CONFIG-010 checker, fixture, or correspondence policy; Curator judgment is required on whether to authorize an exact changed-path correspondence amendment for this H1 docs/checker candidate or leave it unintegrated. No GP-CONFIG-010 path classification or portability change was made.",
-    "resolution": null,
+    "pending": false,
+    "trigger": null,
+    "resolution": "GP-CONFIG-012 remains REVIEW: its exact candidate adds 16 unclassified host/documentation paths, and the existing work order does not authorize correspondence-policy edits. A separate Planner-proposed governance work order must authorize any finite exact-path classification after source/dependency review. GP-CONFIG-013 is separately held in REVIEW after its empty implementation branch reached the same gate; its eventual changed paths are not yet known. Neither characterization item may merge through an unclassified-path bypass. The referenced 2026-09-29 packet receipt authenticates GP-CONFIG-012 subject coverage and its initial READY judgment only; this later reviewed canonical publication records the REVIEW disposition.",
     "provenance": {
       "opened_by_role": "Glyph Implementation Supervisor",
       "opening_reference": "git-json:523fe2506359b68203f7f816ee9cb6a15a775c58:docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json",
       "subject_ids": [
         "GP-CONFIG-012"
       ],
-      "resolved_by_role": null,
-      "resolution_reference": null
+      "resolved_by_role": "Glyph Work-Order Curator",
+      "resolution_reference": "git-json:03c04c7669c85fee02ff52eb11f75d35fecc9040:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
@@ -48,7 +48,8 @@ Git, but it is not current candidate supply or implementation authority.
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator adjudicated all six packet candidates at the exact unchanged live base; four complete READY orders entered the queue and the two gated proposals have no executable survivor."
+      "Independent Curator adjudicated all six packet candidates at the exact unchanged live base; four complete READY orders entered the queue and the two gated proposals have no executable survivor.",
+      "2026-09-30 Curator reviewed GP-CONFIG-012 exact changed-path gate and GP-CONFIG-013 runner report; both H1 characterization orders are held in REVIEW pending separately proposed and authorized exact correspondence governance work."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260929-2218",
@@ -108,17 +109,20 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "RUNWAY_LOW",
+    "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
+    "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -1011,7 +1015,8 @@ Git, but it is not current candidate supply or implementation authority.
       "done_evidence": "Exact source/decoder fixture hashes, complete source-supported versus injected matrix, isolated host observations, adversarial drift controls, direct/affected validation, fresh independent review, reviewed integration and separate strict DONE correspondence; physical behavior remains UNKNOWN.",
       "stop_conditions": [
         "Stop and return to Curator on material source or decoder drift, failed byte correspondence, missing caller coverage, ambiguous sanitizer attribution, or policy dependence.",
-        "No active firmware, build-input, ABI, persistence write, device/protobuf write, flashing, GP-VAL-011 or Nunchuk validation change."
+        "No active firmware, build-input, ABI, persistence write, device/protobuf write, flashing, GP-VAL-011 or Nunchuk validation change.",
+        "Do not integrate candidate 523fe2506359b68203f7f816ee9cb6a15a775c58 while its 16 changed host/documentation paths remain unclassified; correspondence policy requires a separate governance work order."
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -1028,7 +1033,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-013",
       "title": "Characterize USB default no-write and downstream selection paths",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "glyph/gp-config-013-usb-default-characterization",
       "objective": "Finish exact getter/caller/decoder characterization for missing and invalid USB defaults, producing no-write and downstream-read evidence without selecting fallback policy.",
       "why_this_matters": "The default getter writes only for index>0 and <=backend count; its production caller declares usb_backend_config uninitialized and reads backend_id. SetConfig checks a different default index.",
@@ -1043,7 +1048,8 @@ Git, but it is not current candidate supply or implementation authority.
       "dependencies_prerequisites": [
         "Start from freshly live-verified configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093; GLYPH-UD-021 permits curation and GP-PROV-014 is DONE with one exact observed 0.4.9.2 closure.",
         "Authenticate and hash every needed generated config C/header, proto/options and Nanopb decode/common source/header/license byte against GP-PROV-014 before host execution; do not treat the compatible range as a permanent pin.",
-        "Serialize any shared decoder fixture writer. This order may independently create the authenticated shared fixture if the other H1 order has not integrated; neither H1 conclusion is a prerequisite to the other."
+        "Serialize any shared decoder fixture writer. This order may independently create the authenticated shared fixture if the other H1 order has not integrated; neither H1 conclusion is a prerequisite to the other.",
+        "Before integration, every changed path must satisfy GP-CONFIG-010 correspondence; current finite inventory does not classify anticipated new host/doc paths. Return through a separate Planner-proposed governance work order for an exact path inventory. The empty GP-CONFIG-013 branch is not an authorized correspondence-policy amendment."
       ],
       "substantive_authorization_rationale": "The source defect and exact accepted decoder provenance are sufficiently bounded for immediate H1 characterization without a product-policy decision. GP-PROV-014 authenticates one snapshot; the order itself independently checks/reuses those bytes and can create its own fixture. No other H1 integration is a prerequisite.",
       "mechanical_activation_conditions": [],
@@ -1069,7 +1075,8 @@ Git, but it is not current candidate supply or implementation authority.
       "done_evidence": "Exact source/decoder fixture hashes, complete source-supported versus injected matrix, isolated host observations, adversarial drift controls, direct/affected validation, fresh independent review, reviewed integration and separate strict DONE correspondence; physical behavior remains UNKNOWN.",
       "stop_conditions": [
         "Stop and return to Curator on material source or decoder drift, failed byte correspondence, missing caller coverage, ambiguous sanitizer attribution, or policy dependence.",
-        "No active firmware, build-input, ABI, persistence write, device/protobuf write, flashing, GP-VAL-011 or Nunchuk validation change."
+        "No active firmware, build-input, ABI, persistence write, device/protobuf write, flashing, GP-VAL-011 or Nunchuk validation change.",
+        "Do not resume candidate mutation or integration while required GP-CONFIG-013 paths remain unclassified or while a separately authorized correspondence governance order is absent."
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -6329,11 +6336,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-013","GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-013, GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6373,7 +6380,46 @@ reopen GP-VAL-011. GLYPH-UD-021 resumes 012-014 for curation only.
 | GP-CONFIG-017 | READY / H3 | GP-CONFIG-016 and current source show `_config->speed` before the existing null branch. Preserve time bookkeeping before the moved guard and preserve valid static/dynamic outputs. Physical null reachability remains UNKNOWN. |
 | GP-CONFIG-018 | USER_DECISION_GATED / prospective H3 | Successful SetConfig can replace live valid Config without rebuilding active custom-mode mask caches. Source cannot choose immediate coherent adoption versus coherent deferred behavior. Owner direction and fresh Curator authorization are required. |
 
-GP-CONFIG-012 execution is now REVIEW on the pushed candidate branch `glyph/gp-config-012-button-mask-characterization-final-20260929` (`523fe2506359b68203f7f816ee9cb6a15a775c58`). Its exact decoder/source matrix and focused checks pass, but current GP-CONFIG-010 correspondence rejects the new fixture path as unclassified. The READY work order does not authorize that checker/policy change, so integration is held for the pending Curator judgment recorded in `curation_obligation`; GP-CONFIG-013 is now the highest Ready order.
+The table above records the 2026-09-29 authorization snapshot. The later
+correspondence disposition below controls the current GP-CONFIG-012/013 state.
+
+## 2026-09-30 GP-CONFIG-012/013 correspondence disposition
+
+The existing immutable packet receipt covers GP-CONFIG-012 as an original
+reviewed subject; it does not record this later correspondence judgment. This
+publication records the later disposition after independent Curator review.
+
+Live `configurator` was `e220f59334266b411e6704be24aea24220428190`.
+The pushed GP-CONFIG-012 candidate
+`523fe2506359b68203f7f816ee9cb6a15a775c58` changes 22 paths against
+its recorded base `6b6424dc9f915530b4a3386cd3864671a236d4e6`.
+Six are already in the finite `NON_BEHAVIORAL_PATHS` inventory; 16 are
+unclassified: the characterization report, its JSON fixture and checker,
+and 13 files under `tools/fixtures/gp_config012_button_host/`. The first
+unclassified path reported by the current GP-CONFIG-010 semantic checker is
+only the first failure, not the full required amendment. The candidate's
+focused characterization result does not override correspondence failure.
+
+The exact host and documentation paths are plausible non-firmware inputs
+under the source filters and include roots documented in
+`docs/agent_framework/HARDWARE_CORRESPONDENCE.md`. Classifying them requires
+an independently proposed, separately authorized governance work order for
+`tools/glyph_hardware_correspondence.py`. That order must audit every exact
+path and Git mode, keep critical precedence and unknown-path failure, prove
+adjacent aliases and unsupported modes still fail, and retain normal semantic,
+fixture, census, health, framework and aggregate gates. The Curator does not
+edit that checker in this invocation. GP-CONFIG-012 stays `REVIEW` and its
+candidate remains unintegrated. No GP-CONFIG-010 checker or fixture change,
+portability proxy, firmware behavior, or physical acceptance is authorized.
+
+The GP-CONFIG-013 runner reports the same classification gate on its empty
+branch at the live base. There is no candidate path inventory to authenticate
+for that item, so its anticipated paths cannot be preclassified. GP-CONFIG-013
+is also `REVIEW` until a separate exact-path governance order and fresh
+authorization resolve the gate. The consumed packet has no surviving Planner
+candidate for that order; fresh Planner supply is required. GP-CONFIG-014 and
+GP-CONFIG-017 retain their earlier authorizations and H3 build, exact-artifact
+and physical PASS gates. The machine-derived marker above records the runway.
 
 For GP-CONFIG-015, the future H1 research must bind `config.cpp` menu and
 REMAPPER transitions, `DefaultConfigMenu.cpp` construction, and SetConfig
@@ -6396,10 +6442,8 @@ UF2 custody and owner exact-artifact hardware PASS before merge. No automatic
 activation, repair, ABI change, button policy or DONE claim exists now; source
 or owner-direction drift returns to curation.
 
-The next Ready order is GP-CONFIG-013. GP-CONFIG-012 is held in REVIEW pending
-Curator judgment on exact correspondence scope; its shared decoder fixture is
-not a prerequisite for GP-CONFIG-013. GP-CONFIG-014 and GP-CONFIG-017 remain
-independently eligible for implementation. Only one normal new work order executes per
+The next Ready order is GP-CONFIG-014. GP-CONFIG-012 and GP-CONFIG-013 are held
+in REVIEW for the correspondence governance dependency. Only one normal new work order executes per
 Implementation cycle. H3 candidates require exact committed candidate SHA,
 canonical Mk6 build, preserved content-addressed UF2 SHA-256, pre-handoff
 rehash, candidate-local source-grounded protocol, owner observations, fresh
