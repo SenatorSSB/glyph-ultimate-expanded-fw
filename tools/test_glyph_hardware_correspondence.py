@@ -40,6 +40,13 @@ GP_VAL_028_HOST_PATHS = (
     "tools/fixtures/mode_selection_host/generated/provenance.json",
     "tools/test_glyph_config_010_capacity_provenance.py",
 )
+GP_PROV_014_HOST_PATHS = (
+    "docs/runtime_config/README.md",
+    "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
+    "docs/runtime_config/gp_prov_014_decoder_closure.md",
+    "tools/check_glyph_gp_prov_014_decoder_closure.py",
+    "tools/test_glyph_gp_prov_014_decoder_closure.py",
+)
 
 
 class CorrespondenceTests(unittest.TestCase):
@@ -374,6 +381,15 @@ class ClassificationTests(unittest.TestCase):
         for path in ("src/core/mode_selection.cpp", "config/glyph/env.ini", "platformio.ini"):
             with self.subTest(path=path):
                 self.assertEqual(correspondence.classify_path(path), "CRITICAL")
+
+    def test_gp_prov_014_exact_host_paths_only(self):
+        for path in GP_PROV_014_HOST_PATHS:
+            with self.subTest(path=path):
+                self.assertEqual(correspondence.classify_path(path), "NON_BEHAVIORAL")
+            for alias in (path + ".bak", path.swapcase(), "prefix/" + path, "./" + path):
+                with self.subTest(path=alias), self.assertRaises(correspondence.CorrespondenceError):
+                    correspondence.classify_path(alias)
+        self.assertEqual(correspondence.classify_path("src/core/mode_selection.cpp"), "CRITICAL")
 
     def test_critical_precedence_over_inventory(self):
         with mock.patch.object(correspondence, "NON_BEHAVIORAL_PATHS", {HANDLER, GENERATED, "platformio.ini"}):

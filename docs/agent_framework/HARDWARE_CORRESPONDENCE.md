@@ -50,6 +50,13 @@ and
 This narrow completion-control consequence does not add a pattern exemption:
 critical precedence and rejection of every unknown path remain unchanged.
 
+GP-PROV-014 adds five exact host-only paths: the runtime-config index, its
+decoder closure report and fixture, and the report checker and focused tests.
+The index and report are documentation; the fixture is read only by its host
+checker; that checker and its tests run only during repository validation.
+The firmware source filters and include roots below do not select these paths.
+Critical precedence and rejection of other paths remain unchanged.
+
 Nonbehavioral files must be ordinary Git `100644` blobs. Symlinks, gitlinks,
 executables and malformed/ambiguous paths fail. Git path output uses NUL records
 and disables rename folding so both sides of a move are inspected. Staged,
