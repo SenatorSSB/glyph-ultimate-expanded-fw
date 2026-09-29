@@ -19,66 +19,51 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+  "audit_base_sha": "e30fd2435fac5986c6536ae876dd956d9431ef73",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Packet glyph-portfolio-20260928-1434 fully adjudicated: GP-VAL-028 EVIDENCE_GATED on generated-header correspondence; GP-VAL-029 READY, GP-VAL-030 READY, and GP-VAL-031 READY for bounded validation repairs.",
+    "resolution": "Packet glyph-portfolio-20260929-1017 fully adjudicated: GP-VAL-028 READY on authenticated Nanopb 0.4.9.2 generated-header correspondence and clean-checkout validation repair.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:1516ea458003e2948965471b535c3bcb0b4d39e0:docs/planning/portfolio_20260928_1434.md",
+      "opening_reference": "git-json:0f5123ff3560aa19c9fed0fb27581dfd3ffa1311:docs/planning/portfolio_20260929_1017.md",
       "subject_ids": [
-        "GP-VAL-028",
-        "GP-VAL-029",
-        "GP-VAL-030",
-        "GP-VAL-031"
+        "GP-VAL-028"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:a06a3673bc5d35bf2c3eec1eb4c32f618798449f:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:063bc51de8d2b75949546de50104d7cf9e4c8b05:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20260928-1434",
-    "base_configurator_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
-    "packet_id": "glyph-portfolio-20260928-1434",
-    "packet_path": "docs/planning/portfolio_20260928_1434.md",
-    "planning_commit": "1516ea458003e2948965471b535c3bcb0b4d39e0",
-    "curation_commit": "a06a3673bc5d35bf2c3eec1eb4c32f618798449f",
+    "branch": "planning/portfolio-20260929-1017",
+    "base_configurator_sha": "e30fd2435fac5986c6536ae876dd956d9431ef73",
+    "packet_id": "glyph-portfolio-20260929-1017",
+    "packet_path": "docs/planning/portfolio_20260929_1017.md",
+    "planning_commit": "0f5123ff3560aa19c9fed0fb27581dfd3ffa1311",
+    "curation_commit": "063bc51de8d2b75949546de50104d7cf9e4c8b05",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Curator independently authorized three bounded validation repairs; GP-VAL-028 lacks authenticated generated-header bytes and clean-checkout materialization proof. All four proposals were adjudicated."
+      "Independent Curator authorized GP-VAL-028 as a bounded H1 checker/fixture repair after exact 0.4.9.2 regeneration matched the current capacity fixture digest; historical GP-CONFIG-010 artifact build-package identity remains unknown."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20260928-1434",
-      "planning_commit": "1516ea458003e2948965471b535c3bcb0b4d39e0",
-      "packet_id": "glyph-portfolio-20260928-1434",
-      "packet_base_configurator_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
-      "curation_branch": "curation/portfolio-20260928-1514-review",
+      "planning_branch": "planning/portfolio-20260929-1017",
+      "planning_commit": "0f5123ff3560aa19c9fed0fb27581dfd3ffa1311",
+      "packet_id": "glyph-portfolio-20260929-1017",
+      "packet_base_configurator_sha": "e30fd2435fac5986c6536ae876dd956d9431ef73",
+      "curation_branch": "curation/portfolio-20260929-1017-review",
       "initial_reviewed_dispositions": [
         {
           "candidate_id": "GP-VAL-028",
-          "disposition": "EVIDENCE_GATED"
-        },
-        {
-          "candidate_id": "GP-VAL-029",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-VAL-030",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-VAL-031",
           "disposition": "READY"
         }
       ],
-      "review_date": "2026-09-28",
-      "curation_commit": "a06a3673bc5d35bf2c3eec1eb4c32f618798449f"
+      "review_date": "2026-09-29",
+      "curation_commit": "063bc51de8d2b75949546de50104d7cf9e4c8b05"
     }
   },
   "completion_correspondence": {
@@ -103,12 +88,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -123,6 +108,70 @@ Git, but it is not current candidate supply or implementation authority.
     "resume_event": null
   },
   "items": [
+    {
+      "id": "GP-VAL-028",
+      "title": "Authenticate clean-checkout mode activation capacity input",
+      "status": "READY",
+      "branch": "glyph/gp-val-028-generated-capacity-header",
+      "objective": "Make the current GP-CONFIG-010 capacity checker run from a clean checkout by using a tracked, authenticated Nanopb 0.4.9.2 generated header with the exact current integration-fixture digest, while preserving exact active-source and seven-case sanitizer correspondence.",
+      "why_this_matters": "The load-bearing capacity checker requires an ignored .pio generated header absent from clean checkouts, stopping GP-CONFIG-016 full aggregate validation before its own host characterization can publish.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Host validation and provenance repair only. The generated header proves a 30-entry Config.game_mode_configs extent for the pinned 0.4.9.2 output; it does not prove which Nanopb package built the historical tested GP-CONFIG-010 artifact, physical controller behavior, or future resolution of the semver range.",
+      "scope": "Track the exact 73915-byte bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323 Nanopb 0.4.9.2 config.pb.h as a host-only fixture with source/generator/host-package/license provenance. Derive it from the already tracked GP-VAL-026 config.proto and config.options bytes, preserving their earlier 0.4.9.1 fixture and provenance. Update the current capacity checker and fixture to verify the tracked generated bytes, version, exact 30-entry extent, proto/options/provenance/selector/source hashes, and agreement with the separate handwritten host compile double; remove the ignored .pio file as a required input. Include every new current checker input in the validation manifest. Preserve all seven existing ASan/UBSan cases and exact active-source checks.",
+      "explicit_excluded_scope": "No active firmware, schema, proto/options, package selector, dependency resolution, generated active source, configurator product behavior, runtime table, persistence, USB/device/protobuf write, flashing, build, hardware, GP-CONFIG-010 DONE/candidate/artifact history, GP-VAL-011, or host-double substitution as generated authority.",
+      "touched_planes": [
+        "build tooling",
+        "docs/checkers"
+      ],
+      "source_authority": "At live configurator e30fd2435fac5986c6536ae876dd956d9431ef73, tools/check_glyph_config_010_mode_activation_capacity.py requires ignored .pio/build/glyph_mk6/nanopb/generated-src/config.pb.h with current fixture SHA-256 bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323. Original candidate f4771e17430fd1ea3f1e3e5339a83dfe648290a3 pinned distinct 532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3; integration commit 1c0ff22646729d26d45eacb4b8322c5baea7de48 introduced bdd72a22. GP-VAL-026 tracked proto/options SHA-256 are 2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b and 6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805. Isolated regeneration with Nanopb tag 0.4.9.2 commit 160d4f09e5fabb2b66aa2dea32d4f38ace2c4b3f, generator blob 096d5c3b96b8a2712b087fc91e9cf74c2cd989ab / SHA-256 67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738, protobuf 6.33.6 and grpcio-tools 1.80.0 yields exact 73915-byte bdd72a22 header with GameModeConfig game_mode_configs[30]. Upstream library.json declares 0.4.92, SHA-256 01f2027fcd3c19b304581c0bba7a9f0096a16842874e6686a38d168a69d952fe; license SHA-256 e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d. platformio.ini still selects nanopb/Nanopb@^0.4.8 and config/glyph/env.ini selects HayBox-proto#db4e2f6; neither is a permanent resolved-version pin.",
+      "dependencies_prerequisites": [
+        "The exact regenerated bdd72a22 header bytes and upstream generator/proto/options/license/host-toolchain closure remain available and verifiable.",
+        "Current active source and current fixture anchors remain materially unchanged from live configurator e30fd2435fac5986c6536ae876dd956d9431ef73.",
+        "GP-VAL-026 0.4.9.1 schema fixture/provenance and immutable GP-CONFIG-010 completion evidence remain distinct and unchanged."
+      ],
+      "substantive_authorization_rationale": "Independent Curator verified the exact regenerated bytes, tracked proto/options identity, upstream generator blob, package metadata/license and 30-entry extent against the current fixture. A tracked host-only generated snapshot plus fail-closed provenance/source checks removes the clean-checkout validation defect without selecting product behavior or rewriting historical acceptance. The current ^0.4.8 selector is explicitly a drift boundary, not a transitive build guarantee.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Current schema/proto/options, Nanopb resolution, generator, license, host package, selector or generated-header bytes/extent differ from the authorized closure before implementation.",
+        "Active mode-selection/default configuration source or the capacity fixture changes materially before implementation.",
+        "The checker cannot distinguish the authenticated generated fixture from the handwritten compile double or would silently accept missing/tampered provenance.",
+        "Implementation requires product/runtime source, package selector, schema or historical DONE evidence changes."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of planning/portfolio-20260929-1017, candidate GP-VAL-028, immutable packet 0f5123ff3560aa19c9fed0fb27581dfd3ffa1311, packet base and live configurator e30fd2435fac5986c6536ae876dd956d9431ef73, on 2026-09-29; immutable receipt 063bc51de8d2b75949546de50104d7cf9e4c8b05 records READY. The prior GP-VAL-028 EVIDENCE_GATED disposition is preserved in the earlier receipt and superseded only for this newly authenticated current checker scope.",
+      "automated_validation": [
+        "Clean checkout without .pio runs the capacity checker and all seven ordered ASan/UBSan cases: count_0, count_10, count_11, count_13, count_30, count_31, indices_0_to_12.",
+        "Prove exact bdd72a22 generated-header SHA-256, nanopb-0.4.9.2 banner and GameModeConfig game_mode_configs[30]; prove the separate host compile double has matching extent but cannot satisfy generated-header proof.",
+        "Missing/tampered generated fixture, altered provenance/version/license/proto/options/selector, wrong host-double extent, active-source drift, and absent/wrong manifest dependencies fail closed.",
+        "Run full runtime-config aggregate from clean checkout and record exact baseline-versus-candidate failure set; target capacity failure must disappear with no new failure. GP-CONFIG-016 and GP-PROV-014 retain their own full-aggregate DONE gates.",
+        "Run affected manifest, checker census and validation-health checks, framework, navigation, agent-surface, Python syntax, git diff --check and independent review."
+      ],
+      "canonical_build": "NOT_REQUIRED: tracked generated host fixture and checker/docs only; stop if active firmware or build selectors change.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Revert the focused host fixture/checker branch if current generated provenance or fail-closed checks cannot be proved; retain original and integration GP-CONFIG-010 evidence distinct.",
+      "status_documentation_updates": "Document the 0.4.9.1 original-candidate versus 0.4.9.2 current-fixture digest distinction, clean-checkout validation scope, and unknown historical tested-artifact generator identity. Preserve physical reachability UNKNOWN, Nunchuk NOT_TESTED and root cause unproven.",
+      "done_evidence": "Independent review, exact generated-header and provenance closure, adversarial negative tests, clean seven-case sanitizer PASS, target failure removed with no new aggregate failure, manifest/census/health/framework/navigation/agent-surface/Python/diff PASS, and no product source or behavior change. Historical GP-CONFIG-010 artifact package identity remains UNKNOWN.",
+      "stop_conditions": [
+        "Any production/active source, package selector, proto/options/schema, generated active source or firmware behavior edit is required.",
+        "A handwritten double, ignored .pio artifact or unauthenticated generated bytes would be treated as current generated authority.",
+        "The historical tested artifact package identity, physical behavior, Nunchuk validation or root cause would be inferred from host regeneration."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
+    },
     {
       "id": "GP-VAL-029",
       "title": "Separate historical GP-CONFIG-010 identity from current semantic proof",
@@ -5983,11 +6032,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-016","GP-PROV-014"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-028","GP-CONFIG-016","GP-PROV-014"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-016, GP-PROV-014; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-028, GP-CONFIG-016, GP-PROV-014; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -5998,7 +6047,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260928-1434` was independently reviewed against live `configurator` `0da68bdab9bf0fed4ed595538bea9aba7d2f49f3`. GP-VAL-029, GP-VAL-030, and GP-VAL-031 are DONE; current remaining authorization is recorded in the queue-state block. GP-VAL-028 remains EVIDENCE_GATED until exact generated `config.pb.h` bytes and clean-checkout materialization can be authenticated; the tracked host double is not generated authority. The packet is CONSUMED with every proposal adjudicated and no pending Curator survivor. GP-CONFIG-016's unpublished candidate is preserved for revalidation after prerequisites; its full aggregate DONE gate remains. The GP-PROV-014 aggregate gate and exact dependency closure still apply. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-029/030/031 are DONE. GP-CONFIG-016 and GP-PROV-014 remain READY with their full aggregate DONE gates; GP-CONFIG-016's unpublished candidate is preserved for revalidation after GP-VAL-028. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
@@ -6034,7 +6083,7 @@ PARTIAL/INCONCLUSIVE stays `LOCAL_ACCEPTANCE_PENDING` with exact gaps.
 
 ## Curator Dispositions
 
-The four-candidate packet has been fully adjudicated. GP-VAL-029 and GP-VAL-030 were completed; current remaining authorization is recorded in the queue-state block. GP-VAL-028 is EVIDENCE_GATED on authenticated generated-header bytes and deterministic clean-checkout materialization; no host-double substitution is authorized. Existing GP-CONFIG-016 and GP-PROV-014 cannot publish DONE without their existing full aggregate gate. The gated proposal is recorded in immutable Curator provenance and is not executable.
+The earlier four-candidate packet is preserved as historical curation evidence. The fresh single-candidate packet `glyph-portfolio-20260929-1017` is fully adjudicated: The new GP-VAL-028 authorization covers authenticated generated-header custody and clean-checkout capacity validation only. The handwritten host double cannot replace the generated proof. GP-CONFIG-016 and GP-PROV-014 retain their existing full aggregate DONE gates; historical artifact package identity remains UNKNOWN.
 
 ## Work Orders
 
@@ -6066,30 +6115,18 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260928-1434",
-  "planning_commit": "1516ea458003e2948965471b535c3bcb0b4d39e0",
-  "packet_id": "glyph-portfolio-20260928-1434",
-  "packet_base_configurator_sha": "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
-  "curation_branch": "curation/portfolio-20260928-1514-review",
+  "planning_branch": "planning/portfolio-20260929-1017",
+  "planning_commit": "0f5123ff3560aa19c9fed0fb27581dfd3ffa1311",
+  "packet_id": "glyph-portfolio-20260929-1017",
+  "packet_base_configurator_sha": "e30fd2435fac5986c6536ae876dd956d9431ef73",
+  "curation_branch": "curation/portfolio-20260929-1017-review",
   "initial_reviewed_dispositions": [
     {
       "candidate_id": "GP-VAL-028",
-      "disposition": "EVIDENCE_GATED"
-    },
-    {
-      "candidate_id": "GP-VAL-029",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-VAL-030",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-VAL-031",
       "disposition": "READY"
     }
   ],
-  "review_date": "2026-09-28",
+  "review_date": "2026-09-29",
   "global_wait_proposed": false,
   "global_wait_accepted": false,
   "planner_broad_audit_provenance": null,
