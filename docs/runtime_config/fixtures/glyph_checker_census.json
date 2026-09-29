@@ -6161,6 +6161,79 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_config012_button_mask_characterization",
+      "defines_main": true,
+      "file_size_bytes": 22559,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "configurator",
+        "enum_evidence",
+        "enum_evidence.append",
+        "shift_evidence",
+        "shift_evidence.append"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 391,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config012_button_mask_characterization.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "configurator",
+        "enum_evidence",
+        "enum_evidence.append",
+        "shift_evidence",
+        "shift_evidence.append"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config012_button_mask_characterization",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/util/state_util.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/src/display/ConfigMenu.cpp",
+        "HAL/pico/src/display/DefaultConfigMenu.cpp",
+        "docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json",
+        "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
+        "docs/runtime_config/gp_prov_014_decoder_closure.md",
+        "include/glyph_overrides.hpp",
+        "src/config.cpp",
+        "src/core/config_utils.cpp",
+        "src/core/mode_selection.cpp",
+        "src/display/GlyphConfigMenu.cpp",
+        "src/modes/CustomControllerMode.cpp",
+        "tools/fixtures/custom_modifier_cache_host/include",
+        "tools/fixtures/gp_config012_button_host"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "runtime_config_docs"
+      ],
+      "sha256": "e4174bdb5d249204bf1425a4ec6b54bd5c6ffb7a33fdd05283772304d4a4c13e",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gp_config_007_transaction_stage_schema",
       "defines_main": true,
       "file_size_bytes": 13409,

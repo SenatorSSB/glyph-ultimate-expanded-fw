@@ -1,0 +1,322 @@
+{
+  "schema_name": "glyph_gp_config012_button_mask_characterization",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-012",
+  "authorized_source_snapshot": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
+  "observed_configurator_base": "6b6424dc9f915530b4a3386cd3864671a236d4e6",
+  "nanopb_commit": "160d4f09e5fabb2b66aa2dea32d4f38ace2c4b3f",
+  "proto_selector": "https://github.com/GregTurbo/HayBox-proto#db4e2f6",
+  "modifiers_count_limit": 10,
+  "source_supported_enum_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60
+  ],
+  "injected_enum_values": [
+    61,
+    62,
+    63,
+    64,
+    65,
+    127,
+    255,
+    256,
+    300,
+    -1
+  ],
+  "production_sources": [
+    {
+      "path": "HAL/pico/include/util/state_util.hpp",
+      "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81",
+      "anchors": [
+        "inline uint64_t make_button_mask",
+        "button_mask |= (1ULL << (buttons[j] - 1));"
+      ]
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "sha256": "a85d36b53fc17b3a7da46d835761558a97052432ac10226b94985263fa8468a6",
+      "anchors": [
+        "void CustomControllerMode::SetConfig(",
+        "make_button_mask("
+      ]
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+      "anchors": [
+        "void setup_mode_activation_bindings(",
+        "mode_activation_masks[i] = make_button_mask("
+      ]
+    },
+    {
+      "path": "src/core/config_utils.cpp",
+      "sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab",
+      "anchors": [
+        "CommunicationBackendConfig backend_config_from_buttons(",
+        "uint64_t button_hold_mask = make_button_mask("
+      ]
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876",
+      "anchors": [
+        "bool ConfiguratorBackend::HandleSetConfig()",
+        "pb_decode(&istream, Config_fields, &candidate)"
+      ]
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "941cc54f0fb762e6067db338601325d33cf7f980148a59caa1d61f226e140955",
+      "anchors": [
+        "bool Persistence::LoadConfig(Config &config)",
+        "pb_decode(&istream, Config_fields, &config)"
+      ]
+    },
+    {
+      "path": "HAL/pico/src/display/ConfigMenu.cpp",
+      "sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be",
+      "anchors": [
+        "void ConfigMenu::HandleControls(",
+        "selected_item.action(instance, this, _config, selected_item.key)"
+      ]
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20",
+      "anchors": [
+        "DefaultConfigMenu::DefaultConfigMenu",
+        "SetDefaultMode"
+      ]
+    },
+    {
+      "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0",
+      "anchors": [
+        "GlyphConfigMenu::GlyphConfigMenu",
+        "SetDefaultMode"
+      ]
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5",
+      "anchors": [
+        "Config config = glyph_default_config();",
+        "setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count)"
+      ]
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+      "anchors": [
+        "const Config default_config = {",
+        "Config glyph_default_config()"
+      ]
+    },
+    {
+      "path": "platformio.ini",
+      "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9",
+      "anchors": [
+        "nanopb/Nanopb@^0.4.8",
+        "-fshort-enums"
+      ]
+    },
+    {
+      "path": "config/glyph/env.ini",
+      "sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf",
+      "anchors": [
+        "https://github.com/GregTurbo/HayBox-proto#db4e2f6"
+      ]
+    }
+  ],
+  "default_activation_bindings": [
+    [
+      "BTN_RF3"
+    ],
+    [
+      "BTN_RF2"
+    ],
+    [
+      "BTN_LT1"
+    ],
+    [
+      "BTN_LT2"
+    ],
+    [
+      "BTN_RT2"
+    ]
+  ],
+  "production_fragment_sha256": {
+    "custom_modifier_and_combo": "363927b28360d7420e9a329c5fabc94109cecb767b392a188411ca4ed3f4a448",
+    "mode_activation": "953ad96ae36fb6bcfb30c9851762491d967fe11441bc91ed2011487bd7f300cb",
+    "backend_activation": "eb5fe80e9a57087a654eefd9526ffc09ef5d54662bd00973f2395457fe2fa6f6"
+  },
+  "harness_sha256": "0a064e469c48531a741cf0a00de80774b1def521a893f5732c722f3216731380",
+  "provenance_document_sha256": "93bda0975f70bb9a92da9bef33ec74d2d99f397c46bb9bb2ebfa9079d4fbddc8",
+  "decoder_observations": {
+    "enum_0": "case=enum_0 decoder=accept count=1 raw=0",
+    "enum_1": "case=enum_1 decoder=accept count=1 raw=1",
+    "enum_2": "case=enum_2 decoder=accept count=1 raw=2",
+    "enum_3": "case=enum_3 decoder=accept count=1 raw=3",
+    "enum_4": "case=enum_4 decoder=accept count=1 raw=4",
+    "enum_5": "case=enum_5 decoder=accept count=1 raw=5",
+    "enum_6": "case=enum_6 decoder=accept count=1 raw=6",
+    "enum_7": "case=enum_7 decoder=accept count=1 raw=7",
+    "enum_8": "case=enum_8 decoder=accept count=1 raw=8",
+    "enum_9": "case=enum_9 decoder=accept count=1 raw=9",
+    "enum_10": "case=enum_10 decoder=accept count=1 raw=10",
+    "enum_11": "case=enum_11 decoder=accept count=1 raw=11",
+    "enum_12": "case=enum_12 decoder=accept count=1 raw=12",
+    "enum_13": "case=enum_13 decoder=accept count=1 raw=13",
+    "enum_14": "case=enum_14 decoder=accept count=1 raw=14",
+    "enum_15": "case=enum_15 decoder=accept count=1 raw=15",
+    "enum_16": "case=enum_16 decoder=accept count=1 raw=16",
+    "enum_17": "case=enum_17 decoder=accept count=1 raw=17",
+    "enum_18": "case=enum_18 decoder=accept count=1 raw=18",
+    "enum_19": "case=enum_19 decoder=accept count=1 raw=19",
+    "enum_20": "case=enum_20 decoder=accept count=1 raw=20",
+    "enum_21": "case=enum_21 decoder=accept count=1 raw=21",
+    "enum_22": "case=enum_22 decoder=accept count=1 raw=22",
+    "enum_23": "case=enum_23 decoder=accept count=1 raw=23",
+    "enum_24": "case=enum_24 decoder=accept count=1 raw=24",
+    "enum_25": "case=enum_25 decoder=accept count=1 raw=25",
+    "enum_26": "case=enum_26 decoder=accept count=1 raw=26",
+    "enum_27": "case=enum_27 decoder=accept count=1 raw=27",
+    "enum_28": "case=enum_28 decoder=accept count=1 raw=28",
+    "enum_29": "case=enum_29 decoder=accept count=1 raw=29",
+    "enum_30": "case=enum_30 decoder=accept count=1 raw=30",
+    "enum_31": "case=enum_31 decoder=accept count=1 raw=31",
+    "enum_32": "case=enum_32 decoder=accept count=1 raw=32",
+    "enum_33": "case=enum_33 decoder=accept count=1 raw=33",
+    "enum_34": "case=enum_34 decoder=accept count=1 raw=34",
+    "enum_35": "case=enum_35 decoder=accept count=1 raw=35",
+    "enum_36": "case=enum_36 decoder=accept count=1 raw=36",
+    "enum_37": "case=enum_37 decoder=accept count=1 raw=37",
+    "enum_38": "case=enum_38 decoder=accept count=1 raw=38",
+    "enum_39": "case=enum_39 decoder=accept count=1 raw=39",
+    "enum_40": "case=enum_40 decoder=accept count=1 raw=40",
+    "enum_41": "case=enum_41 decoder=accept count=1 raw=41",
+    "enum_42": "case=enum_42 decoder=accept count=1 raw=42",
+    "enum_43": "case=enum_43 decoder=accept count=1 raw=43",
+    "enum_44": "case=enum_44 decoder=accept count=1 raw=44",
+    "enum_45": "case=enum_45 decoder=accept count=1 raw=45",
+    "enum_46": "case=enum_46 decoder=accept count=1 raw=46",
+    "enum_47": "case=enum_47 decoder=accept count=1 raw=47",
+    "enum_48": "case=enum_48 decoder=accept count=1 raw=48",
+    "enum_49": "case=enum_49 decoder=accept count=1 raw=49",
+    "enum_50": "case=enum_50 decoder=accept count=1 raw=50",
+    "enum_51": "case=enum_51 decoder=accept count=1 raw=51",
+    "enum_52": "case=enum_52 decoder=accept count=1 raw=52",
+    "enum_53": "case=enum_53 decoder=accept count=1 raw=53",
+    "enum_54": "case=enum_54 decoder=accept count=1 raw=54",
+    "enum_55": "case=enum_55 decoder=accept count=1 raw=55",
+    "enum_56": "case=enum_56 decoder=accept count=1 raw=56",
+    "enum_57": "case=enum_57 decoder=accept count=1 raw=57",
+    "enum_58": "case=enum_58 decoder=accept count=1 raw=58",
+    "enum_59": "case=enum_59 decoder=accept count=1 raw=59",
+    "enum_60": "case=enum_60 decoder=accept count=1 raw=60",
+    "enum_61": "case=enum_61 decoder=accept count=1 raw=61",
+    "enum_62": "case=enum_62 decoder=accept count=1 raw=62",
+    "enum_63": "case=enum_63 decoder=accept count=1 raw=63",
+    "enum_64": "case=enum_64 decoder=accept count=1 raw=64",
+    "enum_65": "case=enum_65 decoder=accept count=1 raw=65",
+    "enum_127": "case=enum_127 decoder=accept count=1 raw=127",
+    "enum_255": "case=enum_255 decoder=accept count=1 raw=255",
+    "enum_256": "case=enum_256 decoder=reject",
+    "enum_300": "case=enum_300 decoder=reject",
+    "enum_-1": "case=enum_-1 decoder=reject",
+    "packed_four": "case=packed_four decoder=accept count=4 raw=60",
+    "mixed_four": "case=mixed_four decoder=accept count=4 raw=60",
+    "extent_activation_five": "case=extent_activation_five decoder=reject",
+    "extent_modifier_four": "case=extent_modifier_four decoder=reject",
+    "malformed_truncated_varint": "case=malformed_truncated_varint decoder=reject",
+    "malformed_overlong_varint": "case=malformed_overlong_varint decoder=reject"
+  },
+  "sanitizer_observations": {
+    "enum_read": [
+      "61: no diagnostic; ABI range control",
+      "62: no diagnostic; ABI range control",
+      "63: no diagnostic; ABI range control",
+      "64: invalid Button enum read diagnosed",
+      "65: invalid Button enum read diagnosed",
+      "127: invalid Button enum read diagnosed",
+      "255: invalid Button enum read diagnosed"
+    ],
+    "helper_shift": [
+      "0: invalid shift diagnosed",
+      "65: invalid shift diagnosed",
+      "255: invalid shift diagnosed",
+      "-1: invalid shift diagnosed after Button narrowing"
+    ],
+    "in_range_invalid_enum_shifts": [
+      "61: helper shift in range; mask=1152921504606846976; 4 callers reached",
+      "62: helper shift in range; mask=2305843009213693952; 4 callers reached",
+      "63: helper shift in range; mask=4611686018427387904; 4 callers reached",
+      "64: helper shift in range; mask=9223372036854775808; 4 callers reached"
+    ],
+    "production_callers": [
+      "mode_activation: zero value reached invalid shift",
+      "backend_activation: zero value reached invalid shift",
+      "custom_modifier: zero value reached invalid shift",
+      "custom_combo: zero value reached invalid shift"
+    ]
+  }
+}
