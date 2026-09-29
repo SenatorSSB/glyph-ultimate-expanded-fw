@@ -6169,14 +6169,14 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260929-1017",
-  "planning_commit": "0f5123ff3560aa19c9fed0fb27581dfd3ffa1311",
-  "packet_id": "glyph-portfolio-20260929-1017",
-  "packet_base_configurator_sha": "e30fd2435fac5986c6536ae876dd956d9431ef73",
-  "curation_branch": "curation/portfolio-20260929-1017-review",
+  "planning_branch": "planning/portfolio-20260929-1728",
+  "planning_commit": "565626cdf7014820fcc401bf1f776669b1cf57d6",
+  "packet_id": "glyph-portfolio-20260929-1728",
+  "packet_base_configurator_sha": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+  "curation_branch": "curation/portfolio-20260929-1728-review",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-VAL-028",
+      "candidate_id": "GP-VAL-032",
       "disposition": "READY"
     }
   ],
