@@ -22,22 +22,17 @@ Git, but it is not current candidate supply or implementation authority.
   "audit_base_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "Packet glyph-portfolio-20260929-2218 independently adjudicated: GP-CONFIG-012, GP-CONFIG-013, GP-CONFIG-014 and GP-CONFIG-017 READY; GP-CONFIG-015 RESEARCH_GATED; GP-CONFIG-018 USER_DECISION_GATED. GP-VAL-011 remains owner deferred.",
+    "pending": true,
+    "trigger": "GP-CONFIG-012 candidate 523fe2506359b68203f7f816ee9cb6a15a775c58 is not merge-eligible: the unchanged current checker tools/check_glyph_config_010_integration_semantic_correspondence.py rejects docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json as an unclassified correspondence path. The same checker passes on canonical base 6b6424dc9f915530b4a3386cd3864671a236d4e6. The READY order excludes changing the GP-CONFIG-010 checker, fixture, or correspondence policy; Curator judgment is required on whether to authorize an exact changed-path correspondence amendment for this H1 docs/checker candidate or leave it unintegrated. No GP-CONFIG-010 path classification or portability change was made.",
+    "resolution": null,
     "provenance": {
-      "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:7db3cfb56c0630b7bf41c3634fa460440812ac04:docs/planning/portfolio_20260929_2218.md",
+      "opened_by_role": "Glyph Implementation Supervisor",
+      "opening_reference": "git-json:523fe2506359b68203f7f816ee9cb6a15a775c58:docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json",
       "subject_ids": [
-        "GP-CONFIG-012",
-        "GP-CONFIG-013",
-        "GP-CONFIG-014",
-        "GP-CONFIG-015",
-        "GP-CONFIG-017",
-        "GP-CONFIG-018"
+        "GP-CONFIG-012"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:03c04c7669c85fee02ff52eb11f75d35fecc9040:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -113,17 +108,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 4,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_OK"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -975,8 +970,8 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-012",
       "title": "Characterize invalid buttons through exact decoder and mask callers",
-      "status": "READY",
-      "branch": "glyph/gp-config-012-button-mask-characterization",
+      "status": "REVIEW",
+      "branch": "glyph/gp-config-012-button-mask-characterization-final-20260929",
       "objective": "Finish exact schema/decoder/helper and complete production caller characterization for zero and invalid button values, producing a decision-ready source matrix without selecting firmware policy.",
       "why_this_matters": "Nanopb accepts BTN_UNSPECIFIED=0 and Pico make_button_mask shifts by button-1; the audit observed UBSan negative shift while physical reachability remains untested.",
       "hardware_risk": "H1",
@@ -6334,11 +6329,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-012","GP-CONFIG-013","GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":4,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-013","GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-012, GP-CONFIG-013, GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 4; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-CONFIG-013, GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6378,6 +6373,8 @@ reopen GP-VAL-011. GLYPH-UD-021 resumes 012-014 for curation only.
 | GP-CONFIG-017 | READY / H3 | GP-CONFIG-016 and current source show `_config->speed` before the existing null branch. Preserve time bookkeeping before the moved guard and preserve valid static/dynamic outputs. Physical null reachability remains UNKNOWN. |
 | GP-CONFIG-018 | USER_DECISION_GATED / prospective H3 | Successful SetConfig can replace live valid Config without rebuilding active custom-mode mask caches. Source cannot choose immediate coherent adoption versus coherent deferred behavior. Owner direction and fresh Curator authorization are required. |
 
+GP-CONFIG-012 execution is now REVIEW on the pushed candidate branch `glyph/gp-config-012-button-mask-characterization-final-20260929` (`523fe2506359b68203f7f816ee9cb6a15a775c58`). Its exact decoder/source matrix and focused checks pass, but current GP-CONFIG-010 correspondence rejects the new fixture path as unclassified. The READY work order does not authorize that checker/policy change, so integration is held for the pending Curator judgment recorded in `curation_obligation`; GP-CONFIG-013 is now the highest Ready order.
+
 For GP-CONFIG-015, the future H1 research must bind `config.cpp` menu and
 REMAPPER transitions, `DefaultConfigMenu.cpp` construction, and SetConfig
 publication to an exact source or owner-observed route. It must distinguish
@@ -6399,9 +6396,10 @@ UF2 custody and owner exact-artifact hardware PASS before merge. No automatic
 activation, repair, ABI change, button policy or DONE claim exists now; source
 or owner-direction drift returns to curation.
 
-The executable sequence is GP-CONFIG-012 then GP-CONFIG-013 for convenient
-shared fixture serialization, with GP-CONFIG-014 and GP-CONFIG-017 independently
-eligible for implementation. Only one normal new work order executes per
+The next Ready order is GP-CONFIG-013. GP-CONFIG-012 is held in REVIEW pending
+Curator judgment on exact correspondence scope; its shared decoder fixture is
+not a prerequisite for GP-CONFIG-013. GP-CONFIG-014 and GP-CONFIG-017 remain
+independently eligible for implementation. Only one normal new work order executes per
 Implementation cycle. H3 candidates require exact committed candidate SHA,
 canonical Mk6 build, preserved content-addressed UF2 SHA-256, pre-handoff
 rehash, candidate-local source-grounded protocol, owner observations, fresh
