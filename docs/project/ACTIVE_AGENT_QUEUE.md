@@ -88,12 +88,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -433,7 +433,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-016",
       "title": "Characterize null RGB SendReport with exact source",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-config-016-rgb-null-characterization",
       "objective": "Build bounded host evidence for NeoPixelBackend::SendReport when _config is null, preserving the distinction between source ordering, host sanitizer result and physical reachability.",
       "why_this_matters": "The exact current class computes _config->speed before its null guard while several SetGameMode branches intentionally clear _config; existing rebinding/menu coverage does not execute this exact expression.",
@@ -475,7 +475,31 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Isolate any failing host harness or checker branch; return to Curator if exact production correspondence or runtime boundary fails.",
       "status_documentation_updates": "Record bounded host evidence and preserve physical reachability UNKNOWN; no firmware status or hardware acceptance changes.",
-      "done_evidence": "Fresh independent implementation review, exact-source and negative fixture checks, affected provenance/validation gates, full runtime-config aggregate, framework and navigation gates, diff/clean-state proof; no firmware/configurator runtime source or active behavior changed.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "7afd85e5d353692b1e3fa015af985ba5e0a46f4d",
+        "reviewed_implementation_sha": "efdea79269753e14cc8e6fc75df24830854672f9",
+        "prior_canonical_integration_sha": "efdea79269753e14cc8e6fc75df24830854672f9",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/config_menu_invalid_state_characterization.json",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/neopixel_null_sendreport_characterization.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_neopixel_null_sendreport_characterization.py",
+          "tools/fixtures/neopixel_null_host/include/FastLED.h",
+          "tools/fixtures/neopixel_null_host/include/config.pb.h",
+          "tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp",
+          "tools/fixtures/neopixel_null_host/neo_harness.cpp"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer approved clean exact recovered candidate efdea79269753e14cc8e6fc75df24830854672f9 against live canonical 7afd85e5d353692b1e3fa015af985ba5e0a46f4d. Review covered the 13 host/docs paths, merge preservation of GP-VAL-028 and GP-CONFIG-016 delegation records, literal production NeoPixel inclusion, source-supported versus injected cases, exact backend/caller/schema bindings, menu fixture correction, validation inventory, scope, non-claims and publication safety. No findings remained; no active source or build selector changed.",
+        "validation_provenance": "Exact recovered candidate efdea79269753e14cc8e6fc75df24830854672f9 passed nine isolated NeoPixel host cases (seven null and two valid controls) and nine adversarial contracts; source-supported initial null state is distinguished from injected setups. GP-CONFIG-008 rebinding passed 13 cases and GP-CONFIG-009 menu passed five cases after its fixture bound unchanged current src/core/mode_selection.cpp SHA-256 8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44. The full clean isolated runtime-config aggregate passed all 41 current load-bearing checks with canonical_proof MATCH; checker census 208, manifest 47, validation health, framework, navigation, agent surface, Python syntax, git diff --check and clean-state checks passed. Exact NeoPixelBackend.hpp SHA-256 a3a83278a2f13464f6fa15de7f611ec4189f40fcf14f0ce44ce0b8e6cc890dbc and Glyph caller config.cpp SHA-256 bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5 match the fixture. Reviewed candidate was integrated unchanged at efdea79269753e14cc8e6fc75df24830854672f9 and live verified. Host sanitizer observations do not establish physical reachability or a firmware repair; physical reachability remains UNKNOWN, Nunchuk NOT_TESTED and root cause unproven. No firmware build, artifact, device or hardware action occurred."
+      },
       "stop_conditions": [
         "Any production method is copied into a substitute rather than literal-included, or its semantic body is edited.",
         "Host sanitizer output is promoted to a controller symptom, exploitability, or a selected repair.",
@@ -6062,11 +6086,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-016","GP-PROV-014"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-PROV-014"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-016, GP-PROV-014; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-PROV-014; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6077,7 +6101,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-028/029/030/031 are DONE. GP-CONFIG-016 and GP-PROV-014 remain READY with their full aggregate DONE gates; GP-CONFIG-016's unpublished candidate is preserved for final revalidation and review. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-028/029/030/031 are DONE. GP-CONFIG-016 is DONE after a clean 41-of-41 aggregate and independent review; GP-PROV-014 remains READY with its exact dependency-closure and aggregate DONE gates. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 
