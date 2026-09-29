@@ -88,12 +88,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -111,7 +111,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-028",
       "title": "Authenticate clean-checkout mode activation capacity input",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-028-generated-capacity-header",
       "objective": "Make the current GP-CONFIG-010 capacity checker run from a clean checkout by using a tracked, authenticated Nanopb 0.4.9.2 generated header with the exact current integration-fixture digest, while preserving exact active-source and seven-case sanitizer correspondence.",
       "why_this_matters": "The load-bearing capacity checker requires an ignored .pio generated header absent from clean checkouts, stopping GP-CONFIG-016 full aggregate validation before its own host characterization can publish.",
@@ -157,7 +157,33 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Revert the focused host fixture/checker branch if current generated provenance or fail-closed checks cannot be proved; retain original and integration GP-CONFIG-010 evidence distinct.",
       "status_documentation_updates": "Document the 0.4.9.1 original-candidate versus 0.4.9.2 current-fixture digest distinction, clean-checkout validation scope, and unknown historical tested-artifact generator identity. Preserve physical reachability UNKNOWN, Nunchuk NOT_TESTED and root cause unproven.",
-      "done_evidence": "Independent review, exact generated-header and provenance closure, adversarial negative tests, clean seven-case sanitizer PASS, target failure removed with no new aggregate failure, manifest/census/health/framework/navigation/agent-surface/Python/paired exact-byte diff gate PASS, with ordinary unqualified full-diff failure recorded explicitly as the expected ten upstream trailing-space diagnostics, and no product source or behavior change. Historical GP-CONFIG-010 artifact package identity remains UNKNOWN.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "040fcc9fa94c1e42a538c35cf2b7a1a830c492ca",
+        "reviewed_implementation_sha": "70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8",
+        "prior_canonical_integration_sha": "70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_config_010_mode_activation_capacity.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_config_010_mode_activation_capacity.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_config_010_mode_activation_capacity.py",
+          "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt",
+          "tools/fixtures/mode_selection_host/generated/README.md",
+          "tools/fixtures/mode_selection_host/generated/config.pb.h",
+          "tools/fixtures/mode_selection_host/generated/nanopb.library.json",
+          "tools/fixtures/mode_selection_host/generated/provenance.json",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/test_glyph_config_010_capacity_provenance.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer approved clean exact candidate 70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8 against live canonical 040fcc9fa94c1e42a538c35cf2b7a1a830c492ca after reviewing both Curator amendments, merge ancestry, all 15 host/docs paths, exact authenticated hashes, paired diff checks and ten expected upstream warnings. No active firmware/build-selector or .gitattributes change and no remaining material publication finding.",
+        "validation_provenance": "The clean current-canonical baseline had GP-CONFIG-010 capacity missing ignored .pio config.pb.h and config-menu source drift. Exact candidate 70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8 completed the isolated aggregate with canonical_proof MATCH: the capacity failure was removed, no new failure appeared, and only the existing config_menu_invalid_state_characterization source drift in src/core/mode_selection.cpp remained. The authenticated tracked Nanopb 0.4.9.2 header is exactly 73915 bytes and SHA-256 bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323; upstream license SHA-256 is e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d. Seven ordered ASan/UBSan capacity cases, 16 adversarial provenance cases, 38 correspondence tests, manifest/census 207, validation health 46, framework, sequence, navigation, agent surface and Python syntax passed. The Curator-authorized strict diff excluding only those two exact upstream paths and complete command-local core.whitespace=-trailing-space diff both passed; ordinary unqualified complete diff failed with exactly the expected ten upstream trailing-space diagnostics (nine license, one header), never reported as PASS. Integration 70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8 is the exact reviewed candidate and was live verified. No active firmware/build/device/hardware action changed; historical tested-artifact package identity, physical reachability and root cause remain UNKNOWN, and Nunchuk remains NOT_TESTED."
+      },
       "stop_conditions": [
         "Any production/active source, package selector, proto/options/schema, generated active source or firmware behavior edit is required.",
         "A handwritten double, ignored .pio artifact or unauthenticated generated bytes would be treated as current generated authority.",
@@ -6036,11 +6062,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-028","GP-CONFIG-016","GP-PROV-014"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-016","GP-PROV-014"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-028, GP-CONFIG-016, GP-PROV-014; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-016, GP-PROV-014; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6051,7 +6077,7 @@ target runway, primary liveness, and global evidence-wait support.
 The preceding packet prose records the authorization snapshot; the current
 machine-derived state above supersedes its historical runway wording.
 
-Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-029/030/031 are DONE. GP-CONFIG-016 and GP-PROV-014 remain READY with their full aggregate DONE gates; GP-CONFIG-016's unpublished candidate is preserved for revalidation after GP-VAL-028. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
+Packet `glyph-portfolio-20260929-1017` was independently reviewed against live `configurator` `e30fd2435fac5986c6536ae876dd956d9431ef73`. The new GP-VAL-028 order authorizes a bounded host fixture/checker repair after exact Nanopb 0.4.9.2 regeneration matched the current `bdd72a22…` fixture digest; the historical tested GP-CONFIG-010 artifact's generator remains UNKNOWN. The packet is CONSUMED with its sole proposal adjudicated and no pending Curator survivor. GP-VAL-028/029/030/031 are DONE. GP-CONFIG-016 and GP-PROV-014 remain READY with their full aggregate DONE gates; GP-CONFIG-016's unpublished candidate is preserved for final revalidation and review. No global wait is supported. GP-CONFIG-012/013 remain REVIEW / EVIDENCE_GATED, GP-CONFIG-014 remains USER_DECISION_GATED, GP-CONFIG-015 remains RESEARCH_GATED, and GP-VAL-011 remains owner deferred. Nunchuk remains NOT_TESTED and root cause remains unproven.
 
 ## Allowed Statuses
 

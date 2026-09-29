@@ -80,18 +80,20 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-028","GP-CONFIG-016","GP-PROV-014"],"immediate_ready":3,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-016","GP-PROV-014"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-028, GP-CONFIG-016, GP-PROV-014; Immediate Ready: 3; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-016, GP-PROV-014; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 GP-VAL-029 is DONE: the current semantic checker now proves accepted mode-selection and 28-table bytes on reviewed descendants; its historical candidate proof remains separate. At GP-VAL-029 publication, the full aggregate still had independent capacity, config-menu source drift, prebuild identity, and semantics bridge failures.
 
 GP-VAL-030 is DONE: the prebuild self-test now sets Git identity only in its temporary repositories and passes with system and global Git config disabled. The aggregate still fails capacity, config-menu source drift, and semantics bridge checks; production builder behavior is unchanged.
 
-GP-VAL-031 is DONE: the current semantics bridge fixtures bind the exact current extractor digest after bounded old/current equivalence proof. The aggregate still fails the generated .pio header dependency and config-menu source drift; GP-CONFIG-016 remains preserved and blocked by these mandatory gates.
+GP-VAL-031 is DONE: the current semantics bridge fixtures bind the exact current extractor digest after bounded old/current equivalence proof.
+
+GP-VAL-028 is DONE: an authenticated tracked Nanopb 0.4.9.2 generated header makes the GP-CONFIG-010 capacity checker run from a clean checkout. The current aggregate retains only config-menu source drift; GP-CONFIG-016 remains preserved for final aggregate validation and review. The historical tested-artifact package identity remains UNKNOWN.
 
 - GP-CONFIG-010 is `DONE`. Exact tested integration candidate `1c0ff22646729d26d45eacb4b8322c5baea7de48`, based on `22c639c31ea7006c18a29ec2693c8b18ff688ed4`, entered canonical through merge `50a6357eddf0d9c83d31233666c451806fb1f424`; narrow completion-control commit `7ca129e218b292c0aa64b38577848dd8b63a4c66` added only the three exact source-free protocol/result/evidence paths to the finite correspondence inventory. The physically passed artifact remains the preserved 791552-byte UF2 `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`. Required 13-profile capacity/reconnect checks, exact owner Config restoration, all nine GP-X1-002 rows, ordinary sanity, and final reconnect passed with empty evidence gaps. The original candidate `f4771e17430fd1ea3f1e3e5339a83dfe648290a3`, UF2 `9be230cdce6b6ce0b97941da920ec8f043ff98c174ffb126cfcc654ad599209a`, and immutable PASS remain distinct historical evidence. GP-VAL-015/027 retain critical precedence and unknown-path fail-closed behavior. The prior frozen-logo event remains unexplained and did not recur. GP-CONFIG-012 and GP-CONFIG-013 are REVIEW / EVIDENCE_GATED after the current isolated Nanopb range resolved to 0.4.92 rather than the 0.4.91 observed in their authorization; fresh source-backed curation is required before H1 characterization. GP-CONFIG-014 is USER_DECISION_GATED: successful SetConfig can replace the live custom-mode count while an active mode retains its modifier-mask cache, so valid in-place replacement behavior needs an owner decision before H3 repair authorization. GP-VAL-011 remains deferred and GP-HW-002 remains research gated. Nunchuk remains NOT_TESTED and root cause remains unproven.
 - Runtime-config validation now uses a full static checker census plus a
