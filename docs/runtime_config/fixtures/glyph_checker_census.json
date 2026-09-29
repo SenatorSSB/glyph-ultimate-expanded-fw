@@ -6210,6 +6210,61 @@
     },
     {
       "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "gp_prov_014_decoder_closure",
+      "defines_main": true,
+      "file_size_bytes": 26700,
+      "hard_coded_branch_like_strings": [
+        "configurator",
+        "evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 447,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_prov_014_decoder_closure.py",
+      "potential_branch_identity_signals": [
+        "configurator",
+        "evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_prov_014_decoder_closure",
+      "referenced_repository_path_prefixes": [
+        "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
+        "src/config.pb.",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.options",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.proto",
+        "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt",
+        "tools/fixtures/mode_selection_host/generated/config.pb.h",
+        "tools/fixtures/mode_selection_host/generated/nanopb.library.json"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "runtime_config_docs"
+      ],
+      "sha256": "89078c19bd35bd3c69402c388a2fcb66893ea2138831ed479664b6836b31f288",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },

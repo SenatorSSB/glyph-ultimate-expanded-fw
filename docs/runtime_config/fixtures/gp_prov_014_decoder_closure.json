@@ -1,0 +1,286 @@
+{
+  "schema_name": "glyph_gp_prov_014_decoder_closure",
+  "schema_version": 1,
+  "work_order": "GP-PROV-014",
+  "configurator_sha": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+  "resolution": {
+    "nanopb_selector": "nanopb/Nanopb@^0.4.8",
+    "nanopb_version": "0.4.92",
+    "nanopb_tag": "0.4.9.2",
+    "nanopb_commit": "160d4f09e5fabb2b66aa2dea32d4f38ace2c4b3f",
+    "nanopb_license_package_present": false,
+    "nanopb_license_sha256": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d",
+    "generation_input_declaration": "+<.pio/libdeps/${PIOENV}/HayBox-proto/config.proto>",
+    "proto_instances": [
+      {
+        "role": "generation_input",
+        "selector": "https://github.com/GregTurbo/HayBox-proto#db4e2f6",
+        "selector_path": "config/glyph/env.ini",
+        "package_path": ".pio/libdeps/glyph_mk6/HayBox-proto",
+        "source_commit": "db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8",
+        "license_file_present": false,
+        "license_declared": "GPL-3.0-only",
+        "piopm_sha256": "e3c2aae427f4538bd25d277ba2cb76248b3687ce3962d41588d0db8b82b8c1ce"
+      },
+      {
+        "role": "other_resolved",
+        "selector": "https://github.com/JonnyHaystack/HayBox-proto#5b2bb5d",
+        "selector_path": "platformio.ini",
+        "package_path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa",
+        "source_commit": "5b2bb5d2c2a212647d5aaef7d5dc794be5197ecb",
+        "license_file_present": false,
+        "license_declared": "GPL-3.0-only",
+        "piopm_sha256": "0b4c1862132196c8ad5b2d14603093b6cc36c9b72c99e6b67ed05a66e206486d"
+      }
+    ],
+    "nanopb_piopm_sha256": "bc8ba8afe756cc4b7a7c6146b098ef893c0f9dabd4ab0b1cdc608d15ab72ec7a"
+  },
+  "generation": {
+    "generator_version": "nanopb-0.4.9.2",
+    "protobuf_version": "6.33.6",
+    "grpcio_tools_version": "1.80.0",
+    "generator_sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+    "options": [
+      "--error-on-unmatched"
+    ],
+    "build_command": [
+      "{python}",
+      "{generator}",
+      "--output-dir",
+      "{build_output_dir}",
+      "--error-on-unmatched",
+      "--proto-path",
+      "{proto_dir}",
+      "config.proto"
+    ],
+    "build_cwd": "{checkout}",
+    "regeneration_command": [
+      "{python}",
+      "-B",
+      "{generator}",
+      "--output-dir",
+      "{output_dir}",
+      "--error-on-unmatched",
+      "--proto-path",
+      "{proto_dir}",
+      "config.proto"
+    ],
+    "regeneration_cwd": "{proto_dir}"
+  },
+  "files": [
+    {
+      "role": "nanopb_package",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/library.json",
+      "sha256": "01f2027fcd3c19b304581c0bba7a9f0096a16842874e6686a38d168a69d952fe",
+      "bytes": 1098
+    },
+    {
+      "role": "nanopb_generator",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py",
+      "sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+      "bytes": 117446
+    },
+    {
+      "role": "nanopb_pb_h",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/pb.h",
+      "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+      "bytes": 44315
+    },
+    {
+      "role": "nanopb_pb_decode_c",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c",
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+      "bytes": 55177
+    },
+    {
+      "role": "nanopb_platformio_generator",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/platformio_generator.py",
+      "sha256": "3dd541f77affb32d0a6515ce472612e364a9042024f2d2f79a8e66da43b68312",
+      "bytes": 6649
+    },
+    {
+      "role": "nanopb_generator_proto_init",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/__init__.py",
+      "sha256": "b387c9a6a553ed2184cf8c67243bb26b27bd46baf44465f0d5ffeb139c365105",
+      "bytes": 4531
+    },
+    {
+      "role": "nanopb_generator_utils",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/_utils.py",
+      "sha256": "6d091e256cdda09002c357da4901d259078fe1ef53a010392a251dd1107d6313",
+      "bytes": 3338
+    },
+    {
+      "role": "nanopb_generator_nanopb_pb2",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/nanopb_pb2.py",
+      "sha256": "fe72409165c1973e05a41dbeee1292246d02fe1a0f05c4424270e771e2b4dbb4",
+      "bytes": 5028
+    },
+    {
+      "role": "nanopb_generator_nanopb_proto",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/nanopb.proto",
+      "sha256": "1a50d0822c5ba4395297755b11864af952053be3e0dc44c860f988b1b73c3c55",
+      "bytes": 8421
+    },
+    {
+      "role": "nanopb_protoc",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/protoc",
+      "sha256": "6bc34847cc6c0c9ef6ec6137beceef6b05c378f248dee6a7086e5b2166ffc71d",
+      "bytes": 1801
+    },
+    {
+      "role": "nanopb_pb_decode_h",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.h",
+      "sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+      "bytes": 8092
+    },
+    {
+      "role": "nanopb_pb_common_c",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c",
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+      "bytes": 12141
+    },
+    {
+      "role": "nanopb_pb_common_h",
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.h",
+      "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+      "bytes": 1677
+    },
+    {
+      "role": "proto_package",
+      "path": ".pio/libdeps/glyph_mk6/HayBox-proto/library.json",
+      "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+      "bytes": 667
+    },
+    {
+      "role": "config_proto",
+      "path": ".pio/libdeps/glyph_mk6/HayBox-proto/config.proto",
+      "sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+      "bytes": 21947
+    },
+    {
+      "role": "config_options",
+      "path": ".pio/libdeps/glyph_mk6/HayBox-proto/config.options",
+      "sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+      "bytes": 3067
+    },
+    {
+      "role": "other_proto_package",
+      "path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/library.json",
+      "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+      "bytes": 667
+    },
+    {
+      "role": "other_config_proto",
+      "path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/config.proto",
+      "sha256": "09a75613866c8508d50cccd5c1ef31280fecb2ee0042576c6688091a5919cce4",
+      "bytes": 20183
+    },
+    {
+      "role": "other_config_options",
+      "path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/config.options",
+      "sha256": "460f9b4c09cdffb042866db27e574d090dfd7d8a4deda9c08479b2ed6f741599",
+      "bytes": 2611
+    },
+    {
+      "role": "generated_c",
+      "path": ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.c",
+      "sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+      "bytes": 1076
+    },
+    {
+      "role": "generated_h",
+      "path": ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+      "bytes": 73915
+    }
+  ],
+  "include_edges": [
+    {
+      "source_role": "nanopb_pb_decode_c",
+      "header": "pb.h"
+    },
+    {
+      "source_role": "nanopb_pb_decode_c",
+      "header": "pb_decode.h"
+    },
+    {
+      "source_role": "nanopb_pb_decode_c",
+      "header": "pb_common.h"
+    },
+    {
+      "source_role": "nanopb_pb_decode_h",
+      "header": "pb.h"
+    },
+    {
+      "source_role": "nanopb_pb_common_c",
+      "header": "pb_common.h"
+    },
+    {
+      "source_role": "nanopb_pb_common_h",
+      "header": "pb.h"
+    },
+    {
+      "source_role": "generated_c",
+      "header": "config.pb.h"
+    },
+    {
+      "source_role": "generated_h",
+      "header": "pb.h"
+    }
+  ],
+  "full_package_selection": {
+    "build_src_filter": [
+      "+<*.c>"
+    ],
+    "pb_encode_c": {
+      "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c",
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      "bytes": 30784
+    }
+  },
+  "non_claims": [
+    "future compatible-range resolution",
+    "historical tested-artifact package identity",
+    "transitive reproducible build",
+    "decoder behavior acceptance",
+    "firmware behavior",
+    "physical controller behavior",
+    "GP-CONFIG-012/013 authorization"
+  ],
+  "alternate_observation": {
+    "nanopb_tag": "0.4.9.1",
+    "nanopb_commit": "cad3c18ef15a663e30e3e43e3a752b66378adec1",
+    "package_version": "0.4.91",
+    "selected_for_observed_build": false,
+    "result": "REJECTED_VERSION_DRIFT",
+    "files": [
+      {
+        "role": "pb_decode_c",
+        "path": "nanopb-0.4.9.1/pb_decode.c",
+        "sha256": "6c2fc2f357bffdb774c1d329b533e981498d58405c0b1ef066f5a87fd46b5a17",
+        "bytes": 53847
+      },
+      {
+        "role": "pb_decode_h",
+        "path": "nanopb-0.4.9.1/pb_decode.h",
+        "sha256": "1747746e5961de5789bcf0795588da0790cd18b2e4e706ad9c7099a0fa1cc83f",
+        "bytes": 7870
+      },
+      {
+        "role": "regenerated_config_c",
+        "path": "regenerated/config.pb.c",
+        "sha256": "99a682d90b04e77f3e0c52620d5f3403a7ee5e3014711c4c2883f1a14f592ea2",
+        "bytes": 1076
+      },
+      {
+        "role": "regenerated_config_h",
+        "path": "regenerated/config.pb.h",
+        "sha256": "532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3",
+        "bytes": 73915
+      }
+    ],
+    "generation_proto_sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+    "generation_options_sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805"
+  }
+}

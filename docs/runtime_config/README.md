@@ -452,6 +452,10 @@ Run `python3 tools/run_glyph_runtime_config_validation.py` for the current,
 read-only runtime-config validation lane. `python3 tools/check_glyph_runtime_config_source_sync.py`
 checks the canonical 28-table source baseline (digest
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`).
+The GP-PROV-014 snapshot-bound Nanopb decoder/dependency record is in
+`gp_prov_014_decoder_closure.md`; its no-argument checker validates tracked
+correspondence, while explicit isolated-resolution mode rehashes the package
+bytes and regenerates the C/header pair.
 `python3 tools/check_glyph_checker_census.py` verifies the deterministic,
 repository-wide static checker census. The census count is derived from the
 discovered `tools/check_glyph_*.py` set; it does not behaviorally audit every

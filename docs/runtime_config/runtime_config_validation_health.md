@@ -55,12 +55,18 @@ metadata, license and selectors before its seven ASan/UBSan cases. The
 handwritten compile double is checked separately. The historical tested
 artifact's Nanopb package identity remains unknown.
 
+GP-PROV-014 records the clean, current-snapshot Nanopb decoder and generator
+closure in `gp_prov_014_decoder_closure.md`. Its checker binds that one
+observation to source/package identities and tracked inputs; an explicit
+isolated resolution is required to rehash ignored package bytes. It does not
+pin a future compatible-range resolution or accept GP-CONFIG-012/013.
+
 The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.
 
 <!-- validation-health-summary:start -->
-Current summary: manifest entries = 47; current load-bearing checks = 41.
+Current summary: manifest entries = 48; current load-bearing checks = 42.
 <!-- validation-health-summary:end -->
 
 The two repaired load-bearing baseline failures were
@@ -77,7 +83,7 @@ Commands that can prepare, install, or emit a candidate are isolated into
 standalone temporary repositories for this offline validation lane. Historical and hardware-result checkers are
 explicit curated records; they are not counted as current aggregate passes.
 
-The curated manifest now has 47 explicit entries, including 41 current
+The curated manifest now has 48 explicit entries, including 42 current
 load-bearing checks. The `configurator` category contains the compiled
 GP-CONFIG-005 production-handler transaction check. The tracked CI
 publication-route census records all three
