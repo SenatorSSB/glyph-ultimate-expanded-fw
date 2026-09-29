@@ -2291,37 +2291,47 @@
       },
       "checker_id": "config_010_mode_activation_capacity",
       "defines_main": true,
-      "file_size_bytes": 3395,
-      "hard_coded_branch_like_strings": [
-        "candidate"
-      ],
+      "file_size_bytes": 11735,
+      "hard_coded_branch_like_strings": [],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
+      "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 65,
+      "line_count": 208,
       "parse_error": null,
       "path": "tools/check_glyph_config_010_mode_activation_capacity.py",
-      "potential_branch_identity_signals": [
-        "candidate"
-      ],
+      "potential_branch_identity_signals": [],
       "potential_mutation_signals": [
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_config_010_mode_activation_capacity",
       "referenced_repository_path_prefixes": [
+        "docs/agent_framework/GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md",
         "docs/runtime_config/fixtures/gp_config_010_mode_activation_capacity.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/gp_config_010_mode_activation_capacity.md",
+        "include/glyph_overrides.hpp",
         "src/core/mode_selection.cpp",
+        "tools/check_glyph_config_010_mode_activation_capacity.py",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.options",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.proto",
+        "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt",
+        "tools/fixtures/mode_selection_host/generated/README.md",
+        "tools/fixtures/mode_selection_host/generated/config.pb.h",
+        "tools/fixtures/mode_selection_host/generated/nanopb.library.json",
+        "tools/fixtures/mode_selection_host/generated/provenance.json",
         "tools/fixtures/mode_selection_host/include",
+        "tools/fixtures/mode_selection_host/include/config.pb.h",
         "tools/fixtures/mode_selection_host/mode_selection_harness.cpp"
       ],
       "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "9a2940c5867d78f3f7ab7610d4dff18f4e4f77c9b00bac3815004de93d0aca3d",
+      "sha256": "82e8376d5fc671da3c476eae64a1a59bca20cc60ec8787bb07265fe2cc95290d",
       "static_signals": {
-        "agent_framework": false,
+        "agent_framework": true,
         "candidate_generation": false,
         "coordinate_native": false,
         "docs_navigation": true,

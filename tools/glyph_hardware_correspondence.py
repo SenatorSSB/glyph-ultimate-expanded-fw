@@ -104,6 +104,11 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'tools/fixtures/configurator_setconfig_host/include/pb_encode.h',
     'tools/fixtures/configurator_setconfig_host/include/reboot.hpp',
     'tools/fixtures/mode_selection_host/include/config.pb.h',
+    'tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt',
+    'tools/fixtures/mode_selection_host/generated/README.md',
+    'tools/fixtures/mode_selection_host/generated/config.pb.h',
+    'tools/fixtures/mode_selection_host/generated/nanopb.library.json',
+    'tools/fixtures/mode_selection_host/generated/provenance.json',
     'tools/fixtures/mode_selection_host/include/core/CommunicationBackend.hpp',
     'tools/fixtures/mode_selection_host/include/core/ControllerMode.hpp',
     'tools/fixtures/mode_selection_host/include/core/KeyboardMode.hpp',
@@ -133,6 +138,7 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'tools/test_glyph_docs_agent_surface_integration.py',
     'tools/test_glyph_hardware_correspondence.py',
     'tools/test_glyph_config_010_semantic_applicability.py',
+    'tools/test_glyph_config_010_capacity_provenance.py',
     'tools/test_gp_config_005_hw_test.py',
 })
 

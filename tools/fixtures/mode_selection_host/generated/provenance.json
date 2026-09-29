@@ -1,0 +1,43 @@
+{
+  "schema_name": "glyph_gp_val_028_generated_capacity_header",
+  "schema_version": 1,
+  "work_order": "GP-VAL-028",
+  "generated_header": {
+    "path": "tools/fixtures/mode_selection_host/generated/config.pb.h",
+    "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+    "bytes": 73915,
+    "generator_version": "nanopb-0.4.9.2",
+    "proto_header_version": 40,
+    "extent": 30
+  },
+  "source_schema": {
+    "repository": "https://github.com/GregTurbo/HayBox-proto",
+    "commit": "db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8",
+    "proto_path": "tools/fixtures/custom_modifier_cache_host/schema/config.proto",
+    "proto_sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+    "options_path": "tools/fixtures/custom_modifier_cache_host/schema/config.options",
+    "options_sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+    "selector_path": "config/glyph/env.ini",
+    "selector": "https://github.com/GregTurbo/HayBox-proto#db4e2f6",
+    "selector_sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf"
+  },
+  "nanopb": {
+    "repository": "https://github.com/nanopb/nanopb",
+    "tag": "0.4.9.2",
+    "commit": "160d4f09e5fabb2b66aa2dea32d4f38ace2c4b3f",
+    "generator_blob": "096d5c3b96b8a2712b087fc91e9cf74c2cd989ab",
+    "generator_sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+    "package_path": "tools/fixtures/mode_selection_host/generated/nanopb.library.json",
+    "package_sha256": "01f2027fcd3c19b304581c0bba7a9f0096a16842874e6686a38d168a69d952fe",
+    "package_version": "0.4.92",
+    "license_path": "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt",
+    "license_sha256": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d",
+    "selector_path": "platformio.ini",
+    "selector": "nanopb/Nanopb@^0.4.8",
+    "selector_sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9"
+  },
+  "host_generator": {
+    "protobuf": "6.33.6",
+    "grpcio_tools": "1.80.0"
+  }
+}

@@ -32,6 +32,14 @@ X1_HOST_PATHS = (
     "tools/check_glyph_source_owned_source_authority_intake.py",
     "tools/source_owned_source_authority_intake.py",
 )
+GP_VAL_028_HOST_PATHS = (
+    "tools/fixtures/mode_selection_host/generated/LICENSE.nanopb.txt",
+    "tools/fixtures/mode_selection_host/generated/README.md",
+    "tools/fixtures/mode_selection_host/generated/config.pb.h",
+    "tools/fixtures/mode_selection_host/generated/nanopb.library.json",
+    "tools/fixtures/mode_selection_host/generated/provenance.json",
+    "tools/test_glyph_config_010_capacity_provenance.py",
+)
 
 
 class CorrespondenceTests(unittest.TestCase):
@@ -350,6 +358,22 @@ class ClassificationTests(unittest.TestCase):
                      "docs\\AGENT_CONTEXT.md", DOC + "/", DOC + "\t", ""):
             with self.subTest(path=path), self.assertRaises(correspondence.CorrespondenceError):
                 correspondence.classify_path(path)
+
+    def test_gp_val_028_exact_host_paths_only(self):
+        for path in GP_VAL_028_HOST_PATHS:
+            with self.subTest(path=path):
+                self.assertEqual(correspondence.classify_path(path), "NON_BEHAVIORAL")
+        for path in (
+            "tools/fixtures/mode_selection_host/generated/config.pb.c",
+            "tools/fixtures/mode_selection_host/generated/config.pb.h.bak",
+            "tools/test_glyph_config_010_capacity_provenance.py.bak",
+        ):
+            with self.subTest(path=path), self.assertRaisesRegex(
+                    correspondence.CorrespondenceError, "unclassified"):
+                correspondence.classify_path(path)
+        for path in ("src/core/mode_selection.cpp", "config/glyph/env.ini", "platformio.ini"):
+            with self.subTest(path=path):
+                self.assertEqual(correspondence.classify_path(path), "CRITICAL")
 
     def test_critical_precedence_over_inventory(self):
         with mock.patch.object(correspondence, "NON_BEHAVIORAL_PATHS", {HANDLER, GENERATED, "platformio.ini"}):

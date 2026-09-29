@@ -15,11 +15,18 @@
       "path": "config/glyph/common/include/glyph_overrides.hpp",
       "sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
       "anchors": [".game_mode_configs_count = 13", "GameModeConfig {"]
-    },
-    {
-      "path": ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
-      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
-      "anchors": ["GameModeConfig game_mode_configs[30]"]
     }
-  ]
+  ],
+  "generated_header": {
+    "path": "tools/fixtures/mode_selection_host/generated/config.pb.h",
+    "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+    "bytes": 73915,
+    "version": "nanopb-0.4.9.2",
+    "extent": "GameModeConfig game_mode_configs[30];",
+    "provenance_path": "tools/fixtures/mode_selection_host/generated/provenance.json"
+  },
+  "host_double": {
+    "path": "tools/fixtures/mode_selection_host/include/config.pb.h",
+    "extent": "GameModeConfig game_mode_configs[30]{};"
+  }
 }
