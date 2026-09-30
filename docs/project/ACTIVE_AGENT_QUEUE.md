@@ -49,7 +49,8 @@ Git, but it is not current candidate supply or implementation authority.
     "global_wait_proposed": false,
     "material_events_since_packet": [
       "Independent Curator adjudicated all six packet candidates at the exact unchanged live base; four complete READY orders entered the queue and the two gated proposals have no executable survivor.",
-      "2026-09-30 Curator reviewed GP-CONFIG-012 exact changed-path gate and GP-CONFIG-013 runner report; both H1 characterization orders are held in REVIEW pending separately proposed and authorized exact correspondence governance work."
+      "2026-09-30 Curator reviewed GP-CONFIG-012 exact changed-path gate and GP-CONFIG-013 runner report; both H1 characterization orders are held in REVIEW pending separately proposed and authorized exact correspondence governance work.",
+      "2026-09-30 Curator reviewed committed GP-CONFIG-014 candidate ea5a531155471fa4a45f63b9ed2ab2517e0a42d7: five existing aggregate checkers reject its protected include/modes/CustomControllerMode.hpp path. The H3 candidate is held in REVIEW pending a separately Planner-proposed and Curator-authorized exact governance guard work order; no build artifact or hardware handoff exists."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260929-2218",
@@ -109,12 +110,12 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -1093,7 +1094,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-014",
       "title": "Bound custom modifier mask cache to generated capacity",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "glyph/gp-config-014-modifier-capacity",
       "objective": "Repair only the 10-slot custom modifier mask cache against generated 20-entry modifier capacity while preserving valid 0..20 activation behavior and leaving same-session active-mode replacement semantics undecided.",
       "why_this_matters": "The production class caches ten modifier masks while the generated schema permits twenty; GP-CONFIG-011 observed exact host sanitizer failures at 11 and 20.",
@@ -6336,11 +6337,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-014","GP-CONFIG-017"],"immediate_ready":2,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-017"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-014, GP-CONFIG-017; Immediate Ready: 2; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-017; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6417,9 +6418,48 @@ branch at the live base. There is no candidate path inventory to authenticate
 for that item, so its anticipated paths cannot be preclassified. GP-CONFIG-013
 is also `REVIEW` until a separate exact-path governance order and fresh
 authorization resolve the gate. The consumed packet has no surviving Planner
-candidate for that order; fresh Planner supply is required. GP-CONFIG-014 and
-GP-CONFIG-017 retain their earlier authorizations and H3 build, exact-artifact
-and physical PASS gates. The machine-derived marker above records the runway.
+candidate for that order; fresh Planner supply is required. GP-CONFIG-017
+retains its READY authorization and H3 build, exact-artifact and physical
+PASS gates. GP-CONFIG-014 retains its bounded H3 rationale but is held in
+REVIEW under the guard disposition below; its candidate cannot publish or
+merge until validation and build gates pass. The machine-derived marker above
+records the runway.
+
+## 2026-09-30 GP-CONFIG-014 protected-path validation disposition
+
+The local, clean GP-CONFIG-014 candidate `ea5a531155471fa4a45f63b9ed2ab2517e0a42d7`
+is a direct child of live `configurator` `ba103dc56c5105c6f04998a8b095c51e52127cc0`.
+It changes `include/modes/CustomControllerMode.hpp` inside the authorized firmware
+repair, but five full-aggregate checkers reject that protected path:
+`check_glyph_generated_source_owned_generator_contract.py`,
+`check_glyph_generated_source_owned_baseline_artifact.py`,
+`check_glyph_generated_source_owned_artifact_install.py`,
+`check_glyph_coordinate_native_runtime_profile_contract.py`, and
+`check_glyph_docs_agent_surface.py`. Four use the shared protected-prefix check;
+the baseline-artifact checker has a separate restrictive path allowlist. The
+candidate's focused sanitizer and characterization proofs do not bypass these
+guards. The runner reports that the canonical Mk6 build and wrapper both
+stopped because PlatformIO is unavailable; no UF2, custody copy, hardware
+handoff, or physical result exists.
+
+This is a validation-governance dependency, not authority to weaken the
+protected source boundary. The current GP-CONFIG-014 order covers its class
+repair and directly coupled tests/docs, not amendments to those five checkers
+or `tools/glyph_checker_context.py`. The consumed Planner packet contains no
+separate governance candidate. Curator holds GP-CONFIG-014 in `REVIEW` and
+requests a fresh Planner-proposed, separately authorized governance work order
+for exact candidate-aware guard handling. That proposal must inspect each
+checker and the shared helper's protected-before-allowlist rule; preserve
+unrelated `include/`, active-source, runtime, storage, write and flashing
+rejection; bind any exception to reviewed source and candidate identity; and
+prove positive and negative controls, the full aggregate, source/semantic
+correspondence and ordinary publication gates. It may not treat a branch name
+or blanket `include/` allowance as authorization. GP-CONFIG-014's firmware
+candidate stays unmerged and unpublished; build, artifact custody, independent
+hardware evidence and exact-snapshot physical PASS remain required before any
+future merge. GP-CONFIG-018's valid same-session replacement policy remains
+USER_DECISION_GATED. No firmware or checker change is authorized by this
+review disposition.
 
 For GP-CONFIG-015, the future H1 research must bind `config.cpp` menu and
 REMAPPER transitions, `DefaultConfigMenu.cpp` construction, and SetConfig
@@ -6442,7 +6482,7 @@ UF2 custody and owner exact-artifact hardware PASS before merge. No automatic
 activation, repair, ABI change, button policy or DONE claim exists now; source
 or owner-direction drift returns to curation.
 
-The next Ready order is GP-CONFIG-014. GP-CONFIG-012 and GP-CONFIG-013 are held
+The next Ready order is GP-CONFIG-017. GP-CONFIG-012 and GP-CONFIG-013 are held
 in REVIEW for the correspondence governance dependency. Only one normal new work order executes per
 Implementation cycle. H3 candidates require exact committed candidate SHA,
 canonical Mk6 build, preserved content-addressed UF2 SHA-256, pre-handoff
