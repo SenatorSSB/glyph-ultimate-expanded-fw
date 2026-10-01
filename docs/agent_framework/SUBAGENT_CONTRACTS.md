@@ -576,3 +576,29 @@ the full aggregate gate remains failure-bearing.
   before production, ambiguous sanitizer attribution, unavailable current
   aggregate proof, or requested scope crossing into invalid-button policy,
   firmware, build inputs, persistence, device writes, or physical acceptance.
+
+
+## Implementation Supervisor cycle — GP-CONFIG-012 (2026-10-02)
+
+- guidance applicable: yes; the current READY H1 order and supervisor contract
+  require bounded specialist verification, a fresh independent post-implementation
+  reviewer, and strict completion publication.
+- capability discovery: inspected the complete runtime capability catalog (242
+  tools); the native collaboration facility is available.
+- native capability available: yes.
+- specialist used: `gp_config012_source_audit`, read-only verification of all 22
+  candidate paths/modes, thirteen source/build-selector hashes, GP-PROV-014
+  decoder/schema/generated/license closure, source correspondence, and
+  integration compatibility on current configurator `18a71ef`.
+- reviewer used: fresh independent `gp_config012_independent_review` approved
+  exact integration `0b792540f2f3887da1b2ccc8784c3e07b7316be6` against
+  `18a71ef` with no material findings.
+- exact changed scope: candidate integration remains the authorized 22 regular
+  `100644` source-free paths; no firmware/build input, runtime behavior, or
+  product policy changed.
+- validation: candidate host proof, exact 22/22 correspondence, current and
+  historical GP-CONFIG-010 proofs, 45 correspondence tests, full runtime-config
+  aggregate, framework, sequence, navigation, agent-surface, and Python syntax
+  passed. The exact upstream decoder/generated fixture bytes were retained;
+  `git diff --check` identifies their preserved whitespace.
+- stop conditions: none. No firmware build or hardware work was applicable.
