@@ -24,49 +24,54 @@ Git, but it is not current candidate supply or implementation authority.
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "GP-VAL-033 is READY for exact finite classification of sixteen GP-CONFIG-012 host paths only. GP-KBD-001 is SUBSTANTIVE_DEPENDENCY_GATED until an exact host-proof path and mode inventory is authorized. GP-VAL-034 is SUBSTANTIVE_DEPENDENCY_GATED pending a current-base candidate identity and five-checker architecture. GP-VAL-035 is RESEARCH_GATED pending a committed GP-CONFIG-017 candidate and candidate-phase correspondence design. GP-VAL-036 is SUBSTANTIVE_DEPENDENCY_GATED pending GP-CONFIG-013 exact candidate paths and modes. The 2026-10-01 immutable receipt covers all five judgments; this later adoption activates only GP-VAL-033.",
+    "resolution": "GP-CONFIG-012 is READY for exact H1 completion of unchanged candidate 523fe2506359b68203f7f816ee9cb6a15a775c58 after GP-VAL-033 cleared its sixteen-path correspondence gate. GP-KBD-001 and GP-CONFIG-019 are SUBSTANTIVE_DEPENDENCY_GATED pending exact host-proof path and mode inventories plus separate finite correspondence authority. GP-VAL-034 is SUBSTANTIVE_DEPENDENCY_GATED pending a current-base GP-CONFIG-014 identity and exact five-checker design. GP-VAL-035 is RESEARCH_GATED pending a committed GP-CONFIG-017 snapshot and candidate-phase design. GP-VAL-036 is SUBSTANTIVE_DEPENDENCY_GATED pending GP-CONFIG-013 exact candidate path and mode inventory. The immutable 2026-10-01 receipt covers all six judgments; only GP-CONFIG-012 enters Ready.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:57a2413cebe4b85e6d7d2160485700f5d1148ab9:docs/planning/portfolio_20261001_2155.md",
+      "opening_reference": "git-json:970d223ae60a522573f1f0da8c3a6a79273cab39:docs/planning/portfolio_20261001_2305.md",
       "subject_ids": [
-        "GP-VAL-033",
+        "GP-CONFIG-012",
         "GP-KBD-001",
+        "GP-CONFIG-019",
         "GP-VAL-034",
         "GP-VAL-035",
         "GP-VAL-036"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:f38af61a88b8458ff376825607fcc33060a6e907:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:d70bc26d43a8ce5c4fca9b0263e2e018815039e1:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20261001-2155",
-    "base_configurator_sha": "3d8866e4a1b38baddded12eb27a6a634a7832f40",
-    "packet_id": "glyph-portfolio-20261001-2155",
-    "packet_path": "docs/planning/portfolio_20261001_2155.md",
-    "planning_commit": "57a2413cebe4b85e6d7d2160485700f5d1148ab9",
-    "curation_commit": "f38af61a88b8458ff376825607fcc33060a6e907",
+    "branch": "planning/portfolio-20261001-2305",
+    "base_configurator_sha": "d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8",
+    "packet_id": "glyph-portfolio-20261001-2305",
+    "packet_path": "docs/planning/portfolio_20261001_2305.md",
+    "planning_commit": "970d223ae60a522573f1f0da8c3a6a79273cab39",
+    "curation_commit": "d70bc26d43a8ce5c4fca9b0263e2e018815039e1",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator adjudicated all five packet candidates against the exact live base: GP-VAL-033 is READY; GP-KBD-001, GP-VAL-034 and GP-VAL-036 require substantive exact-path or validation-architecture dependencies; GP-VAL-035 remains research gated. No pending Curator survivor or global wait remains."
+      "Independent Curator adjudicated all six exact live packet candidates: GP-CONFIG-012 READY after finite correspondence and current source verification; GP-KBD-001, GP-CONFIG-019, GP-VAL-034 and GP-VAL-036 remain substantive-dependency gated; GP-VAL-035 remains research gated. No pending Curator survivor or global wait remains."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20261001-2155",
-      "planning_commit": "57a2413cebe4b85e6d7d2160485700f5d1148ab9",
-      "packet_id": "glyph-portfolio-20261001-2155",
-      "packet_base_configurator_sha": "3d8866e4a1b38baddded12eb27a6a634a7832f40",
-      "curation_branch": "curation/portfolio-20261001-2155-reviewed",
+      "planning_branch": "planning/portfolio-20261001-2305",
+      "planning_commit": "970d223ae60a522573f1f0da8c3a6a79273cab39",
+      "packet_id": "glyph-portfolio-20261001-2305",
+      "packet_base_configurator_sha": "d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8",
+      "curation_branch": "curation/portfolio-20261001-2305-review",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-VAL-033",
+          "candidate_id": "GP-CONFIG-012",
           "disposition": "READY"
         },
         {
           "candidate_id": "GP-KBD-001",
+          "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
+        },
+        {
+          "candidate_id": "GP-CONFIG-019",
           "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
         },
         {
@@ -83,7 +88,7 @@ Git, but it is not current candidate supply or implementation authority.
         }
       ],
       "review_date": "2026-10-01",
-      "curation_commit": "f38af61a88b8458ff376825607fcc33060a6e907"
+      "curation_commit": "d70bc26d43a8ce5c4fca9b0263e2e018815039e1"
     }
   },
   "completion_correspondence": {
@@ -108,17 +113,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
+    "RUNWAY_LOW",
     "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
     "RUNWAY_SHORTFALL_RESEARCH_GATED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
@@ -1049,34 +1054,36 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-012",
       "title": "Characterize invalid buttons through exact decoder and mask callers",
-      "status": "REVIEW",
+      "status": "READY",
       "branch": "glyph/gp-config-012-button-mask-characterization-final-20260929",
       "objective": "Finish exact schema/decoder/helper and complete production caller characterization for zero and invalid button values, producing a decision-ready source matrix without selecting firmware policy.",
       "why_this_matters": "Nanopb accepts BTN_UNSPECIFIED=0 and Pico make_button_mask shifts by button-1; the audit observed UBSan negative shift while physical reachability remains untested.",
       "hardware_risk": "H1",
       "behavioral_claim": "Record decode acceptance, enum-read validity, helper behavior and validation paths separately. No invalid-binding repair or reject/no-binding/ignore policy is selected.",
-      "scope": "Exact production host/source characterization of decoder acceptance and failure, raw Button storage, Pico enum-read sanitizer, shift sanitizer and all four caller reachability paths. Bind current proto/options/generated C/header and Nanopb decoder/common closure; cover default, Configurator and persistence producers, mixed/packed/repeated scalar and extent cases, named controls and negative controls. Separate source-supported from injected and physical UNKNOWN. Keep modifier count <=10 to isolate GP-CONFIG-014.",
+      "scope": "Resume only unchanged pinned source-free H1 candidate 523fe2506359b68203f7f816ee9cb6a15a775c58 for current-base review, validation, and integration; preserve its exact 22 regular paths and host observations. Exact production host/source characterization of decoder acceptance and failure, raw Button storage, Pico enum-read sanitizer, shift sanitizer and all four caller reachability paths. Bind current proto/options/generated C/header and Nanopb decoder/common closure; cover default, Configurator and persistence producers, mixed/packed/repeated scalar and extent cases, named controls and negative controls. Separate source-supported from injected and physical UNKNOWN. Keep modifier count <=10 to isolate GP-CONFIG-014.",
       "explicit_excluded_scope": "No firmware repair, invalid-binding or USB-default policy, reject/no-binding/ignore/clamp/fallback/retain/retry/default behavior, schema or persistence ABI change, runtime-loaded config, device/WebSerial/protobuf/backend write, flashing, gameplay, GP-VAL-011, physical symptom, root cause or Nunchuk claim.",
       "touched_planes": [
         "docs/checkers"
       ],
-      "source_authority": "Current live source at 1b0364ce16b1c20fcea6dfef3ed12130c5c27093. HAL/pico/include/util/state_util.hpp:26-31 shifts 1ULL by Button-1; four Pico production call sites are src/modes/CustomControllerMode.cpp:10-27 (modifier and combo), src/core/mode_selection.cpp:203-215, and src/core/config_utils.cpp:8-30. None validates individual Button values before the helper. Generated Button is nonfixed enum with names 0..60; Pico ABI must be asserted. ConfiguratorBackend.cpp:161-278 and Persistence.cpp:80-110 do not validate button values. Actual Glyph defaults are glyph_overrides.hpp; GP-PROV-014 records observed 0.4.9.2 decoder/common/generated closure, not decoder policy.",
+      "source_authority": "Original 2026-09-29 source snapshot at 1b0364ce16b1c20fcea6dfef3ed12130c5c27093. HAL/pico/include/util/state_util.hpp:26-31 shifts 1ULL by Button-1; four Pico production call sites are src/modes/CustomControllerMode.cpp:10-27 (modifier and combo), src/core/mode_selection.cpp:203-215, and src/core/config_utils.cpp:8-30. None validates individual Button values before the helper. Generated Button is nonfixed enum with names 0..60; Pico ABI must be asserted. ConfiguratorBackend.cpp:161-278 and Persistence.cpp:80-110 do not validate button values. Actual Glyph defaults are glyph_overrides.hpp; GP-PROV-014 records observed 0.4.9.2 decoder/common/generated closure, not decoder policy. Fresh 2026-10-01 Curator audit at live configurator d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8: candidate ref remains 523fe2506359b68203f7f816ee9cb6a15a775c58, direct child of 6b6424dc9f915530b4a3386cd3864671a236d4e6; all 22 candidate paths are regular 100644 and pass finite correspondence after GP-VAL-033 DONE. All thirteen recorded production source/build-selector SHA-256 entries match current canonical. Exact candidate host checker passes its observed 0.4.9.2 closure, enum-read/shift sanitizer cases, and four helper callers. These source/host observations establish no physical reachability or invalid-button policy.",
       "dependencies_prerequisites": [
-        "Start from freshly live-verified configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093; GLYPH-UD-021 permits curation and GP-PROV-014 is DONE with one exact observed 0.4.9.2 closure.",
+        "Start from freshly live-verified configurator d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8 and exact live candidate ref 523fe2506359b68203f7f816ee9cb6a15a775c58, direct child of 6b6424dc9f915530b4a3386cd3864671a236d4e6. GLYPH-UD-021 permits curation; GP-PROV-014 and GP-VAL-033 are DONE. Preserve all 22 exact 100644 candidate paths and reverify all thirteen production source/build-selector hashes against current canonical.",
         "Authenticate and hash every needed generated config C/header, proto/options and Nanopb decode/common source/header/license byte against GP-PROV-014 before host execution; do not treat the compatible range as a permanent pin.",
-        "Serialize any shared decoder fixture writer. This order may independently create the authenticated shared fixture if the other H1 order has not integrated; neither H1 conclusion is a prerequisite to the other."
+        "The pinned candidate already contains its authenticated decoder fixture; preserve its exact bytes. Serialize any separate shared fixture writer without adding its changes to this candidate or treating another H1 conclusion as a prerequisite.",
+        "Before integration, prove the exact candidate/current finite correspondence remains 22/22 NON_BEHAVIORAL with critical-source equality and unknown-path rejection. If current-base metadata, manifest or census would require candidate changes outside the exact original 22 paths, stop for renewed Curator judgment. Stop if any candidate blob or source dependency differs."
       ],
-      "substantive_authorization_rationale": "The source defect and exact accepted decoder provenance are sufficiently bounded for immediate H1 characterization without a product-policy decision. GP-PROV-014 authenticates one snapshot; the order itself independently checks/reuses those bytes and can create its own fixture. No other H1 integration is a prerequisite.",
+      "substantive_authorization_rationale": "The source defect and exact accepted decoder provenance are sufficiently bounded for immediate H1 characterization without a product-policy decision. GP-PROV-014 authenticates one snapshot; the order itself independently checks/reuses those bytes and can create its own fixture. No other H1 integration is a prerequisite. Fresh current-base review confirms the former sixteen-path blocker was cleared by GP-VAL-033, exact candidate/current correspondence and all thirteen source hashes match, and the pinned host checker passes. This reauthorization is for unchanged H1 characterization and normal source-free publication only.",
       "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Exact production source, schema, selector, generated bytes or observed decoder closure materially change before execution.",
         "Authenticated closure bytes or licenses are unavailable, the host cannot bind exact production bodies, or a required behavioral/policy choice appears.",
         "Another shared fixture writer conflicts; serialize before mutation without promoting an unreviewed fixture."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of live configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, tree aaa5d7dff632b95e95f2ccbc4459d6b08ed3d91b, immutable Planner packet glyph-portfolio-20260929-2218 at 7db3cfb56c0630b7bf41c3634fa460440812ac04, GLYPH-UD-021, exact current source, GP-PROV-014 observed Nanopb 0.4.9.2 closure, and completed evidence on 2026-09-29. Receipt 03c04c7669c85fee02ff52eb11f75d35fecc9040 records disposition. This order authorizes only its stated scope.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator review of live configurator 1b0364ce16b1c20fcea6dfef3ed12130c5c27093, tree aaa5d7dff632b95e95f2ccbc4459d6b08ed3d91b, immutable Planner packet glyph-portfolio-20260929-2218 at 7db3cfb56c0630b7bf41c3634fa460440812ac04, GLYPH-UD-021, exact current source, GP-PROV-014 observed Nanopb 0.4.9.2 closure, and completed evidence on 2026-09-29. Receipt 03c04c7669c85fee02ff52eb11f75d35fecc9040 records disposition. This order authorizes only its stated scope. Fresh Curator reauthorization on live d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8, packet glyph-portfolio-20261001-2305 at 970d223ae60a522573f1f0da8c3a6a79273cab39, candidate GP-CONFIG-012 and immutable receipt d70bc26d43a8ce5c4fca9b0263e2e018815039e1 after GP-VAL-033 DONE; current candidate correspondence/source and host checker independently verified on 2026-10-01.",
       "automated_validation": [
         "Assert Pico sizeof(Button), enum descriptor width and compile flags; record exact decode status/raw bytes then isolate enum-read and shift sanitizer results in separate processes; exercise all named 1..60 controls and 0,61..64, larger, negative and malformed encodings.",
-        "Census all four production helper callers and Configurator/Persistence/default/menu paths; exact source/closure hashes, tamper/omission controls, affected transaction/mode/rebinding tests, manifest/census/health, framework, sequence, navigation, surface/integration, Python syntax, diff and independent review. Run direct/affected category gates; full aggregate only when required by current manifest/work-order contract."
+        "Census all four production helper callers and Configurator/Persistence/default/menu paths; exact source/closure hashes, tamper/omission controls, affected transaction/mode/rebinding tests, manifest/census/health, framework, sequence, navigation, surface/integration, Python syntax, diff and independent review. Run direct/affected category gates; full aggregate only when required by current manifest/work-order contract.",
+        "On the exact unchanged candidate and reconciled current-base integration snapshot, rerun the candidate production-body host checker, current and historical GP-CONFIG-010 semantic/correspondence proofs, finite-path negative controls, affected full runtime-config aggregate, manifest/census/health, framework/sequence/navigation/agent-surface, Python syntax, diff checks and fresh independent review; publish DONE only after strict reviewed integration correspondence. Preserve source-free 22-path content and physical UNKNOWN."
       ],
       "canonical_build": "NOT_REQUIRED: H1 host/docs/checker-only work; no firmware source or build inputs change.",
       "expected_artifact": "NOT_APPLICABLE",
@@ -1087,11 +1094,11 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Keep failed H1 work isolated; preserve historical exact evidence and return to Curator on source, decoder or validation drift. No policy repair is authorized.",
       "status_documentation_updates": "Record exact host observations, source-supported and injected cases, physical UNKNOWN, decoder snapshot limits and separate strict DONE correspondence after reviewed integration. No firmware or owner policy claim.",
-      "done_evidence": "Exact source/decoder fixture hashes, complete source-supported versus injected matrix, isolated host observations, adversarial drift controls, direct/affected validation, fresh independent review, reviewed integration and separate strict DONE correspondence; physical behavior remains UNKNOWN.",
+      "done_evidence": "Exact source/decoder fixture hashes, complete source-supported versus injected matrix, isolated host observations, adversarial drift controls, direct/affected validation, fresh independent review, reviewed integration and separate strict DONE correspondence; physical behavior remains UNKNOWN. Fresh 2026-10-01 resumption additionally requires exact live candidate/ref and current source hash match, 22/22 finite correspondence, current-base full aggregate and control-plane PASS, fresh independent reviewed integration, and separate strict DONE correspondence; no physical outcome claim.",
       "stop_conditions": [
         "Stop and return to Curator on material source or decoder drift, failed byte correspondence, missing caller coverage, ambiguous sanitizer attribution, or policy dependence.",
         "No active firmware, build-input, ABI, persistence write, device/protobuf write, flashing, GP-VAL-011 or Nunchuk validation change.",
-        "Do not integrate candidate 523fe2506359b68203f7f816ee9cb6a15a775c58 while its 16 changed host/documentation paths remain unclassified; correspondence policy requires a separate governance work order."
+        "Do not integrate if any of the exact 22 candidate paths or modes, current production source hashes, observed decoder closure, finite correspondence, source-free scope, current-base aggregate or independent review fails. Do not bypass unknown-path or critical-source gates; return to Curator on substantive drift."
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
@@ -6411,12 +6418,37 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-012"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-012; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
+
+## 2026-10-01 23:05 portfolio Curator adjudication
+
+Live `configurator` was `d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8`.
+The direct-child Planner packet `glyph-portfolio-20261001-2305` at
+`970d223ae60a522573f1f0da8c3a6a79273cab39` offered six non-authoritative
+candidates. An immutable direct-child Curator receipt records all six initial
+judgments; this later adoption authorizes only GP-CONFIG-012 as READY H1.
+
+| Candidate | Disposition | Independent judgment |
+| --- | --- | --- |
+| GP-CONFIG-012 | READY / H1 | GP-VAL-033 is DONE. The unchanged exact candidate `523fe2506359b68203f7f816ee9cb6a15a775c58` has 22 regular host/documentation paths now passing finite correspondence. Its thirteen production source/build-selector hashes match current canonical and its exact host checker passes the 0.4.9.2 decoder, sanitizer and four-caller proof. Current-base full aggregate and independent integration review remain required. No firmware repair, invalid-button policy or physical outcome is authorized. |
+| GP-KBD-001 | SUBSTANTIVE_DEPENDENCY_GATED | The keyboard copy/original input seam remains source-backed, but an exact new host path/mode inventory and separate finite correspondence authority are absent. Physical activation and effect remain UNKNOWN. |
+| GP-CONFIG-019 | SUBSTANTIVE_DEPENDENCY_GATED | The USB menu scans duplicate names without a local loop exit and a returning reboot host double could show repeated scratch writes. Real reboot control flow and physical result are UNKNOWN. New proof paths and modes need an exact inventory and separately authorized finite correspondence before H1 characterization. |
+| GP-VAL-034 | SUBSTANTIVE_DEPENDENCY_GATED | The GP-CONFIG-014 header/source candidate still needs a current-base identity and exact architecture across five protected-path checkers. The H3 source item remains REVIEW and physical PASS is still mandatory before merge. |
+| GP-VAL-035 | RESEARCH_GATED | GP-CONFIG-017 still lacks a committed source candidate and candidate-phase correspondence design; its HAL header remains critical. |
+| GP-VAL-036 | SUBSTANTIVE_DEPENDENCY_GATED | GP-CONFIG-013 has no exact candidate path/mode inventory; guessed host classifications remain unauthorized. |
+
+The packet is `CONSUMED` with no pending Curator survivor or supported global
+wait. GP-CONFIG-012 supplies one immediate Ready item against target four.
+All Preauthorized and hardware-pending counts remain zero. Exact-path,
+architecture and research dependencies require later Planner supply; GP-CONFIG-018
+remains user-decision gated, GP-VAL-011 owner deferred, Nunchuk NOT_TESTED and
+root cause unproven. This source-free Curator publication does not execute the
+newly authorized H1 order.
 
 ## 2026-10-01 portfolio refresh Curator adjudication
 
