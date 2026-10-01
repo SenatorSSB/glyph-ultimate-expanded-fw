@@ -119,6 +119,40 @@ This is per-run audit evidence, not canonical queue telemetry.
 - return format: findings first; exact contract matches/gaps; recommended
   bounded next action.
 
+## Implementation Supervisor cycle — GP-CONFIG-012 (2026-09-29)
+
+- guidance applicable: yes; the complete READY order requires exact decoder,
+  source, and caller characterization, and repository mutation requires a
+  bounded specialist plus fresh independent post-implementation review.
+- capability discovery: inspected the complete runtime tool catalog (202
+  capabilities); native internal child agents are available through the
+  collaboration runtime.
+- native capability available: yes.
+- specialist used: `gp_config012_source`, read-only verification of the exact
+  authorized source selector, four callers, GP-PROV-014 decoder closure, and
+  invalidation conditions against live configurator `6b6424dc9f915530b4a3386cd3864671a236d4e6`.
+- reviewer used: fresh independent post-implementation review is required
+  before publication; review the exact GP-CONFIG-012 diff, source/closure
+  evidence, focused and affected gates, and the work-order exclusions.
+- separable investigation: the source/authority and accepted dependency
+  closure were independently checked; exact GP-PROV-014 bytes were rehashed
+  from the preserved GP-PROV-014 worktree after the root checkout's ignored
+  cache was found to be the rejected 0.4.9.1 alternate.
+- findings: current production source, selectors, and four callers remain
+  aligned with the authorized source snapshot. All recorded accepted 0.4.9.2
+  package, schema, generated C/header, decode/common closure, and license
+  hashes match; upstream tag `0.4.9.2` resolves to pinned commit
+  `160d4f09e5fabb2b66aa2dea32d4f38ace2c4b3f`. The local ignored cache is not
+  an authorized test input.
+- allowed specialist scope: source, schema, selector, dependency-provenance,
+  and caller inspection only; no edits, tests, dependency installation,
+  builds, hardware, or queue/status changes.
+- stop conditions: any source/decoder drift, unavailable exact bytes, missing
+  caller coverage, ambiguous sanitizer attribution, policy dependence, or
+  prohibited behavior change.
+- return format: exact evidence, source identities, invalidation result, and
+  bounded next action.
+
 ## Planner
 
 - Objective: produce broad, non-authoritative current-`configurator` candidate
@@ -518,3 +552,27 @@ the full aggregate gate remains failure-bearing.
   claims about the historical tested artifact's Nanopb package identity.
 - stop conditions: generated-header or provenance mismatch, weaker exact-source
   proof, unreviewed active behavior, failed full aggregate, or publication drift.
+
+## Implementation Supervisor cycle — GP-CONFIG-012 (2026-09-29)
+
+- guidance applicable: yes; complete H1 READY order; exact decoder/source
+  characterization only, with no firmware policy or behavior change.
+- capability discovery: complete runtime tool catalog inspected (202 available
+  tools); native internal collaboration capability confirmed.
+- native capability available: yes.
+- specialist: `/root/gp_config012_source`, read-only verification of exact
+  source and Nanopb closure identities, production callers, default values,
+  and compatible-range cache caveat.
+- reviewer: `/root/gp_config012_review` found one attribution bug: the backend
+  harness probe shifted before entering production on raw zero. Root fixed the
+  probe to use a safe all-ones input mask. Fresh repaired-scope reviewer
+  `/root/gp_config012_repaired_review` returned PASS on the changed harness,
+  caller reachability, exact closure/source binding, manifest wiring, and
+  non-claims.
+- reviewer/specialist scope: read-only; no delegated edits, commits, pushes,
+  firmware builds, device or hardware actions, policy selection, or physical
+  behavior claims.
+- stop conditions: any source or closure drift, caller probe that can fail
+  before production, ambiguous sanitizer attribution, unavailable current
+  aggregate proof, or requested scope crossing into invalid-button policy,
+  firmware, build inputs, persistence, device writes, or physical acceptance.

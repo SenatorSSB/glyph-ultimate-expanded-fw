@@ -6,6 +6,14 @@ This directory contains runtime-config design, evidence, fixtures, and checker
 contracts. Read the current boundary first; use archived diagnostics only when
 you need the supporting evidence.
 
+The exact GP-CONFIG-012 Button decoder and mask-caller host characterization
+is documented in `gp_config_012_button_mask_characterization.md`, with its
+hash-bound observation fixture at
+`fixtures/gp_config012_button_mask_characterization.json` and checker at
+`tools/check_glyph_gp_config012_button_mask_characterization.py`. It is limited
+to one authenticated Nanopb 0.4.9.2 snapshot and makes no invalid-binding
+policy or physical-reachability claim.
+
 The current declared-only build-input provenance boundary is documented in
 `build_input_provenance_inventory.md`, with its deterministic fixture and
 load-bearing static checker at
