@@ -50,7 +50,8 @@ Git, but it is not current candidate supply or implementation authority.
     "material_events_since_packet": [
       "Independent Curator adjudicated all six packet candidates at the exact unchanged live base; four complete READY orders entered the queue and the two gated proposals have no executable survivor.",
       "2026-09-30 Curator reviewed GP-CONFIG-012 exact changed-path gate and GP-CONFIG-013 runner report; both H1 characterization orders are held in REVIEW pending separately proposed and authorized exact correspondence governance work.",
-      "2026-09-30 Curator reviewed committed GP-CONFIG-014 candidate ea5a531155471fa4a45f63b9ed2ab2517e0a42d7: five existing aggregate checkers reject its protected include/modes/CustomControllerMode.hpp path. The H3 candidate is held in REVIEW pending a separately Planner-proposed and Curator-authorized exact governance guard work order; no build artifact or hardware handoff exists."
+      "2026-09-30 Curator reviewed committed GP-CONFIG-014 candidate ea5a531155471fa4a45f63b9ed2ab2517e0a42d7: five existing aggregate checkers reject its protected include/modes/CustomControllerMode.hpp path. The H3 candidate is held in REVIEW pending a separately Planner-proposed and Curator-authorized exact governance guard work order; no build artifact or hardware handoff exists.",
+      "2026-10-01 Curator independently reproduced GP-CONFIG-017 checkpoint validation blockers: the docs agent-surface checker rejects its protected HAL/pico/include/comms/NeoPixelBackend.hpp change, and the GP-CONFIG-010 correspondence checker treats that changed header as critical while four new proof/protocol paths are unclassified. The existing H3 order does not authorize guard or correspondence-policy edits. GP-CONFIG-017 is held in REVIEW pending a separate Planner-proposed, Curator-authorized governance work order; no candidate commit, build artifact, or hardware handoff exists."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20260929-2218",
@@ -110,17 +111,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
     "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
     "PLANNER_REFRESH_REQUIRED"
@@ -1154,7 +1155,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-017",
       "title": "Place existing null RGB branch before speed access",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "glyph/gp-config-017-rgb-null-order",
       "objective": "Move the existing NeoPixel SendReport null handling ahead of the speed dereference while preserving time bookkeeping and all valid RGB outputs.",
       "why_this_matters": "GP-CONFIG-016 exact-production host evidence shows _config->speed is read before the existing null branch.",
@@ -6337,11 +6338,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-017"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-017; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 The current-runway marker and summary above are the machine-derived
@@ -6381,8 +6382,9 @@ reopen GP-VAL-011. GLYPH-UD-021 resumes 012-014 for curation only.
 | GP-CONFIG-017 | READY / H3 | GP-CONFIG-016 and current source show `_config->speed` before the existing null branch. Preserve time bookkeeping before the moved guard and preserve valid static/dynamic outputs. Physical null reachability remains UNKNOWN. |
 | GP-CONFIG-018 | USER_DECISION_GATED / prospective H3 | Successful SetConfig can replace live valid Config without rebuilding active custom-mode mask caches. Source cannot choose immediate coherent adoption versus coherent deferred behavior. Owner direction and fresh Curator authorization are required. |
 
-The table above records the 2026-09-29 authorization snapshot. The later
-correspondence disposition below controls the current GP-CONFIG-012/013 state.
+The table above records the 2026-09-29 authorization snapshot. The
+later dated dispositions below control the current GP-CONFIG-012/013/014/017
+states.
 
 ## 2026-09-30 GP-CONFIG-012/013 correspondence disposition
 
@@ -6418,12 +6420,11 @@ branch at the live base. There is no candidate path inventory to authenticate
 for that item, so its anticipated paths cannot be preclassified. GP-CONFIG-013
 is also `REVIEW` until a separate exact-path governance order and fresh
 authorization resolve the gate. The consumed packet has no surviving Planner
-candidate for that order; fresh Planner supply is required. GP-CONFIG-017
-retains its READY authorization and H3 build, exact-artifact and physical
-PASS gates. GP-CONFIG-014 retains its bounded H3 rationale but is held in
-REVIEW under the guard disposition below; its candidate cannot publish or
-merge until validation and build gates pass. The machine-derived marker above
-records the runway.
+candidate for that order; fresh Planner supply is required. GP-CONFIG-014
+retains its bounded H3 rationale but is held in REVIEW under the guard
+disposition below; its candidate cannot publish or merge until validation
+and build gates pass. GP-CONFIG-017 is addressed by the later 2026-10-01
+disposition. The machine-derived marker above records the runway.
 
 ## 2026-09-30 GP-CONFIG-014 protected-path validation disposition
 
@@ -6461,6 +6462,50 @@ future merge. GP-CONFIG-018's valid same-session replacement policy remains
 USER_DECISION_GATED. No firmware or checker change is authorized by this
 review disposition.
 
+## 2026-10-01 GP-CONFIG-017 validation and correspondence disposition
+
+Live `configurator` is `3d286bc43aa5b6f0af97094d779bd8ccdeb4a17f`.
+The separate GP-CONFIG-017 worktree at `/private/tmp/glyph-gp-config-017`
+contains an uncommitted, unpublished H3 checkpoint. The Implementation
+Supervisor reported that its narrow source change and repaired-current host
+proof passed focused review and checks, but stopped before commit, build,
+artifact custody, hardware handoff, or queue publication. Curator reproduced
+the current `check_glyph_docs_agent_surface.py` failure:
+`HAL/pico/include/comms/NeoPixelBackend.hpp` is a protected-prefix path.
+The existing checker has only the separately authorized GP-CONFIG-005 HAL and
+GP-CONFIG-010 source exceptions. The current GP-CONFIG-010 semantic
+correspondence checker also treats this changed HAL header as a critical
+firmware input; its dirty-input failure is immediate, and merely committing
+the checkpoint would not establish correspondence to the older tested source.
+Four new checkpoint paths are absent from the finite nonbehavioral inventory:
+`docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md`,
+`docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json`,
+`docs/runtime_config/gp_config_017_neopixel_repaired_current.md`, and
+`tools/check_glyph_gp_config_017_neopixel_repaired_current.py`.
+
+The source-local RGB repair remains within the 2026-09-29 H3 rationale, but
+its READY work order does not authorize changes to the protected-path guard,
+shared `tools/glyph_checker_context.py`, or hardware correspondence policy.
+Curator holds GP-CONFIG-017 in `REVIEW`. A fresh Planner packet must propose a
+separate governance work order that audits the exact checkpoint paths and Git
+modes, preserves the HAL header as a critical firmware input, and establishes
+candidate-aware validation without weakening protected-prefix, historical
+artifact, critical-path, or unknown-path rejection. That proposal must cover
+both positive and adjacent negative controls, source/semantic correspondence,
+full affected aggregate and ordinary publication gates. The Curator makes no
+governance-checker or product-code edit in this disposition. The checkpoint
+stays local and unmerged; no candidate Git SHA, UF2 identity, custody, or
+hardware result exists. Any later H3 candidate still requires build, review,
+exact preserved artifact and owner physical PASS before merge.
+
+The consumed Planner packet has no surviving candidate for this governance
+work. With GP-CONFIG-012/013/014/017 held in REVIEW and no PREAUTHORIZED item,
+effective authorized runway is zero. `PLANNING_REQUIRED` and the recorded
+candidate-supply and substantive-dependency shortfalls apply; this completed
+Curator disposition creates no pending curation self-loop or global evidence
+wait. GP-CONFIG-015 remains research gated and GP-CONFIG-018 remains
+user-decision gated. Nunchuk remains NOT_TESTED and root cause unproven.
+
 For GP-CONFIG-015, the future H1 research must bind `config.cpp` menu and
 REMAPPER transitions, `DefaultConfigMenu.cpp` construction, and SetConfig
 publication to an exact source or owner-observed route. It must distinguish
@@ -6482,10 +6527,10 @@ UF2 custody and owner exact-artifact hardware PASS before merge. No automatic
 activation, repair, ABI change, button policy or DONE claim exists now; source
 or owner-direction drift returns to curation.
 
-The next Ready order is GP-CONFIG-017. GP-CONFIG-012 and GP-CONFIG-013 are held
-in REVIEW for the correspondence governance dependency. Only one normal new work order executes per
-Implementation cycle. H3 candidates require exact committed candidate SHA,
-canonical Mk6 build, preserved content-addressed UF2 SHA-256, pre-handoff
+No Ready order remains. GP-CONFIG-012, GP-CONFIG-013, GP-CONFIG-014 and
+GP-CONFIG-017 are held in REVIEW for separately planned governance
+dependencies. Only one normal new work order executes per Implementation
+cycle. H3 candidates require exact committed candidate SHA, canonical Mk6 build, preserved content-addressed UF2 SHA-256, pre-handoff
 rehash, candidate-local source-grounded protocol, owner observations, fresh
 independent Hardware Evidence Processor, and correspondence-governed
 integration. A successful build never substitutes for hardware PASS. GP-VAL-011

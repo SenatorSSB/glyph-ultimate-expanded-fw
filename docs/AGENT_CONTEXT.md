@@ -80,14 +80,14 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-017"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-017; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
-GP-CONFIG-012 and GP-CONFIG-013 are now REVIEW after the 2026-09-30 Curator correspondence disposition. The exact GP-CONFIG-012 candidate has 16 unclassified host/documentation paths; GP-CONFIG-013 has no candidate path inventory yet. A separate Planner-proposed governance work order must authorize exact-path correspondence classification before either resumes or integrates. GP-CONFIG-014 is now REVIEW after its committed candidate reached five protected-path aggregate guards; a separate Planner-proposed governance order is required before that candidate resumes. GP-CONFIG-017 is unaffected; the machine-derived runway marker defines current executability. No firmware candidate, artifact, or physical result from GP-CONFIG-014 entered canonical history.
+GP-CONFIG-012 and GP-CONFIG-013 are now REVIEW after the 2026-09-30 Curator correspondence disposition. The exact GP-CONFIG-012 candidate has 16 unclassified host/documentation paths; GP-CONFIG-013 has no candidate path inventory yet. A separate Planner-proposed governance work order must authorize exact-path correspondence classification before either resumes or integrates. GP-CONFIG-014 is now REVIEW after its committed candidate reached five protected-path aggregate guards; a separate Planner-proposed governance order is required before that candidate resumes. GP-CONFIG-017 is also REVIEW after its unpublished checkpoint reached the protected HAL agent-surface gate and critical-source plus four unclassified hardware-correspondence paths. A separate Planner-proposed governance order is required. No new firmware candidate, artifact, or physical result from GP-CONFIG-014 or GP-CONFIG-017 entered canonical history; the machine-derived marker defines current executability.
 
 GP-VAL-032 is DONE: the exact current GP-CONFIG-010 semantic checker now has
 the locally required historical commit in the isolated aggregate's closed
