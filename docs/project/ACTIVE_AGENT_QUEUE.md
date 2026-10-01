@@ -6603,38 +6603,34 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20260929-2218",
-  "planning_commit": "7db3cfb56c0630b7bf41c3634fa460440812ac04",
-  "packet_id": "glyph-portfolio-20260929-2218",
-  "packet_base_configurator_sha": "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
-  "curation_branch": "curation/portfolio-20260929-2218-review",
+  "planning_branch": "planning/portfolio-20261001-2155",
+  "planning_commit": "57a2413cebe4b85e6d7d2160485700f5d1148ab9",
+  "packet_id": "glyph-portfolio-20261001-2155",
+  "packet_base_configurator_sha": "3d8866e4a1b38baddded12eb27a6a634a7832f40",
+  "curation_branch": "curation/portfolio-20261001-2155-reviewed",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-CONFIG-012",
+      "candidate_id": "GP-VAL-033",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-CONFIG-013",
-      "disposition": "READY"
+      "candidate_id": "GP-KBD-001",
+      "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
     },
     {
-      "candidate_id": "GP-CONFIG-014",
-      "disposition": "READY"
+      "candidate_id": "GP-VAL-034",
+      "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
     },
     {
-      "candidate_id": "GP-CONFIG-015",
+      "candidate_id": "GP-VAL-035",
       "disposition": "RESEARCH_GATED"
     },
     {
-      "candidate_id": "GP-CONFIG-017",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-CONFIG-018",
-      "disposition": "USER_DECISION_GATED"
+      "candidate_id": "GP-VAL-036",
+      "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
     }
   ],
-  "review_date": "2026-09-29",
+  "review_date": "2026-10-01",
   "global_wait_proposed": false,
   "global_wait_accepted": false,
   "planner_broad_audit_provenance": null,
