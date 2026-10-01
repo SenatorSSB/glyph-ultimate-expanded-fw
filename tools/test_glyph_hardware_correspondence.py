@@ -48,6 +48,24 @@ GP_PROV_014_HOST_PATHS = (
     "tools/check_glyph_gp_prov_014_decoder_closure.py",
     "tools/test_glyph_gp_prov_014_decoder_closure.py",
 )
+GP_CONFIG_012_HOST_PATHS = (
+    "docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json",
+    "docs/runtime_config/gp_config_012_button_mask_characterization.md",
+    "tools/check_glyph_gp_config012_button_mask_characterization.py",
+    "tools/fixtures/gp_config012_button_host/LICENSE.nanopb.txt",
+    "tools/fixtures/gp_config012_button_host/button_harness.cpp",
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+    "tools/fixtures/gp_config012_button_host/include/Arduino.h",
+    "tools/fixtures/gp_config012_button_host/include/pico/stdlib.h",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+    "tools/fixtures/gp_config012_button_host/schema/config.options",
+    "tools/fixtures/gp_config012_button_host/schema/config.proto",
+)
 
 
 class CorrespondenceTests(unittest.TestCase):
@@ -161,6 +179,40 @@ class CorrespondenceTests(unittest.TestCase):
                 else:
                     self.git("update-index", "--add", "--cacheinfo", f"160000,{self.candidate},{AGGREGATE_RUNNER}")
                     self.git("commit", "-q", "-m", "gitlink runner")
+                with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
+                    self.verify(check_worktree=False)
+
+    def test_gp_config_012_candidate_style_delta_is_exactly_classified(self):
+        self.git("switch", "-q", "-c", "gp012-candidate", self.base)
+        for path in GP_CONFIG_012_HOST_PATHS:
+            self.write(path, f"host-only candidate input: {path}\n")
+        self.candidate = self.commit("exact GP-CONFIG-012 host candidate delta")
+        report = self.verify()
+        self.assertEqual(
+            {path: report["candidate_paths"][path] for path in GP_CONFIG_012_HOST_PATHS},
+            {path: "NON_BEHAVIORAL" for path in GP_CONFIG_012_HOST_PATHS},
+        )
+        self.assertEqual(len(GP_CONFIG_012_HOST_PATHS), 16)
+        self.assertEqual(len(report["candidate_paths"]), 16)
+        self.assertEqual(report["target_paths"], {})
+
+    def test_gp_config_012_candidate_style_delta_rejects_unsafe_modes(self):
+        path = GP_CONFIG_012_HOST_PATHS[0]
+        for kind in ("executable", "symlink", "gitlink"):
+            with self.subTest(kind=kind):
+                self.git("switch", "-q", "-c", "gp012-bad-" + kind, self.candidate)
+                if kind == "executable":
+                    self.write(path, "host metadata\n")
+                    (self.root / path).chmod(0o755)
+                    self.commit("executable GP-CONFIG-012 metadata")
+                elif kind == "symlink":
+                    target = self.root / path
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.symlink_to("config.json")
+                    self.commit("symlink GP-CONFIG-012 metadata")
+                else:
+                    self.git("update-index", "--add", "--cacheinfo", f"160000,{self.candidate},{path}")
+                    self.git("commit", "-q", "-m", "gitlink GP-CONFIG-012 metadata")
                 with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
                     self.verify(check_worktree=False)
 
@@ -371,6 +423,28 @@ class CorrespondenceTests(unittest.TestCase):
 
 
 class ClassificationTests(unittest.TestCase):
+    def test_gp_config_012_exact_host_inventory(self):
+        self.assertEqual(len(GP_CONFIG_012_HOST_PATHS), 16)
+        for path in GP_CONFIG_012_HOST_PATHS:
+            with self.subTest(path=path):
+                self.assertEqual(correspondence.classify_path(path), "NON_BEHAVIORAL")
+
+    def test_gp_config_012_inventory_lookalikes_and_critical_paths_fail_closed(self):
+        aliases = []
+        for path in GP_CONFIG_012_HOST_PATHS:
+            aliases.extend((path + ".bak", path.swapcase(), "prefix/" + path, "./" + path))
+        for path in aliases:
+            with self.subTest(path=path), self.assertRaises(correspondence.CorrespondenceError):
+                correspondence.classify_path(path)
+        for path in ("HAL/pico/src/comms/ConfiguratorBackend.cpp", "platformio.ini"):
+            with self.subTest(path=path):
+                self.assertEqual(correspondence.classify_path(path), "CRITICAL")
+        with self.assertRaisesRegex(correspondence.CorrespondenceError, "unclassified"):
+            correspondence.classify_path("tools/fixtures/gp_config012_button_host/generated/config.pb.c.bak")
+        with mock.patch.object(correspondence, "NON_BEHAVIORAL_PATHS",
+                               correspondence.NON_BEHAVIORAL_PATHS | {"platformio.ini"}):
+            self.assertEqual(correspondence.classify_path("platformio.ini"), "CRITICAL")
+
     def test_exact_x1_host_inventory(self):
         self.assertEqual(len(X1_HOST_PATHS), 10)
         for path in X1_HOST_PATHS:

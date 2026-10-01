@@ -207,6 +207,44 @@ remains `CRITICAL` and byte/mode exact. Exact membership remains mandatory:
 adjacent names, case variants, aliases, extensions, prefixes, nonregular Git
 entries, executable metadata, and every other unknown path fail closed.
 
+## GP-CONFIG-012 exact host-path extension
+
+GP-VAL-033 adds exactly sixteen `100644` host/documentation paths used by the
+GP-CONFIG-012 button-mask characterization: its report and fixture, explicit
+host checker, copied schema and Nanopb decoder inputs, platform stubs, and
+host harness. The candidate checker loads the production source bodies it
+characterizes, then compiles the copied decoder and harness in a temporary
+host directory using only the fixture include roots. The firmware source
+filters and include roots in `platformio.ini` and `config/glyph/env.ini` do not
+select these documentation, checker, or fixture paths; no production source or
+build hook consumes them. Their exact membership only permits source-free
+candidate metadata to pass this correspondence layer; the normal content,
+semantic, census, health, and aggregate validators still apply.
+
+The finite additions are:
+
+- `docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json`
+- `docs/runtime_config/gp_config_012_button_mask_characterization.md`
+- `tools/check_glyph_gp_config012_button_mask_characterization.py`
+- `tools/fixtures/gp_config012_button_host/LICENSE.nanopb.txt`
+- `tools/fixtures/gp_config012_button_host/button_harness.cpp`
+- `tools/fixtures/gp_config012_button_host/generated/config.pb.c`
+- `tools/fixtures/gp_config012_button_host/generated/config.pb.h`
+- `tools/fixtures/gp_config012_button_host/include/Arduino.h`
+- `tools/fixtures/gp_config012_button_host/include/pico/stdlib.h`
+- `tools/fixtures/gp_config012_button_host/nanopb/pb.h`
+- `tools/fixtures/gp_config012_button_host/nanopb/pb_common.c`
+- `tools/fixtures/gp_config012_button_host/nanopb/pb_common.h`
+- `tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c`
+- `tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h`
+- `tools/fixtures/gp_config012_button_host/schema/config.options`
+- `tools/fixtures/gp_config012_button_host/schema/config.proto`
+
+This is a finite exact-path addition. Critical firmware/build inputs retain
+precedence, and aliases, unknown paths, symlinks, gitlinks, executable files,
+and unsupported modes remain rejected. The GP-CONFIG-010 semantic checker,
+fixture, tested-source fingerprint, and hardware evidence are unchanged.
+
 ## Artifact identity and limitations
 
 `builder_scripts/arduino_pico.py` embeds Git HEAD plus dirty status into
