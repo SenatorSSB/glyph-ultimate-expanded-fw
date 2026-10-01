@@ -108,17 +108,17 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
     "RUNWAY_SHORTFALL_SUBSTANTIVE_DEPENDENCY",
     "RUNWAY_SHORTFALL_RESEARCH_GATED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
@@ -135,7 +135,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-033",
       "title": "Classify exact GP-CONFIG-012 host correspondence paths",
-      "status": "READY",
+      "status": "DONE",
       "branch": "glyph/gp-val-033-gp-config-012-correspondence",
       "objective": "Allow the exact source-free GP-CONFIG-012 host characterization files through finite GP-CONFIG-010 correspondence while preserving critical firmware-input and unknown-path rejection.",
       "why_this_matters": "The committed GP-CONFIG-012 H1 characterization is held in REVIEW because sixteen added host/documentation paths are absent from the finite correspondence inventory, despite its focused host proof.",
@@ -175,7 +175,21 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Keep the sixteen-path classification isolated if any proof fails; preserve the committed GP-CONFIG-012 candidate and accepted GP-CONFIG-010 source/artifact evidence. No hardware action or candidate-source merge follows this governance order.",
       "status_documentation_updates": "After reviewed integration record GP-VAL-033 DONE with strict completion correspondence; leave GP-CONFIG-012 in REVIEW until a fresh Curator adjudicates its execution and publication gates. Preserve GP-CONFIG-013 exact-inventory dependency.",
-      "done_evidence": "Exact sixteen-path and Git-mode audit, positive and adversarial correspondence results, unchanged critical-source proof, full affected aggregate and control-plane gates, fresh independent review, exact live integration and separate strict DONE correspondence publication.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "0450eb109f46c03e0d10f4114be6b261c7e70074",
+        "reviewed_implementation_sha": "6daa76a301069beef6207731bbc8beaae4451aa1",
+        "prior_canonical_integration_sha": "6daa76a301069beef6207731bbc8beaae4451aa1",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent native reviewer gp_val033_independent_review approved the exact three-file implementation diff with no findings on 2026-10-01.",
+        "validation_provenance": "On reviewed implementation 6daa76a301069beef6207731bbc8beaae4451aa1: full runtime-config aggregate PASS (42 current checks); focused correspondence suite PASS (45 tests); exact GP-CONFIG-012 candidate correspondence PASS (22/22 candidate paths classified NON_BEHAVIORAL); GP-CONFIG-010 current semantic correspondence PASS; census 209 PASS; health 209/48 PASS; framework, sequence, navigation, agent-surface, py_compile, and diff checks PASS."
+      },
       "stop_conditions": [
         "Stop if any proposed path is a production source/build input or changes mode/type, or if GP-CONFIG-012 identity or dependency proof drifts.",
         "Do not weaken critical precedence, unknown-path rejection, historical GP-CONFIG-010 evidence or ordinary content gates; return to Curator if safe exact classification cannot be shown.",
@@ -6397,11 +6411,11 @@ Git, but it is not current candidate supply or implementation authority.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-033"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-033; Immediate Ready: 1; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 0; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 portfolio refresh Curator adjudication
