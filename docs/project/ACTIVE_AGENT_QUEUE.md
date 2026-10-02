@@ -22,17 +22,17 @@ Git, but it is not current candidate supply or implementation authority.
   "audit_base_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "GP-VAL-040 scope invalidation is fully adjudicated: reauthorized finite three-checker/two-host-literal allowance and exact composed rejection tests, with immutable post-opening receipt. Separate GP-VAL-040 implementation and strict DONE remain required before KBD resumption. No outstanding Curator subject remains; original stop/fingerprint evidence retained, no source/product/hardware authority expansion.",
+    "pending": true,
+    "trigger": "GP-VAL-037 first mechanical condition does not name its hardware-bearing predecessor or define accepted critical chain. C020 handoff stopped before mutation; new explicit Curator mapping is required, not an inferred mechanical activation.",
+    "resolution": null,
     "provenance": {
-      "opened_by_role": "Glyph Implementation Supervisor",
-      "opening_reference": "git-json:cbd8b2fab4ca9558d6483564262a4ab9b0a8a69a:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "opened_by_role": "Glyph Work-Order Curator",
+      "opening_reference": "git-json:8b050cfa1c87b65823f464695ff425efba99ebb2:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
-        "GP-VAL-040"
+        "GP-VAL-037"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58:docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -93,9 +93,9 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "runway": {
     "immediate_ready": 2,
-    "recorded_preauthorized": 13,
+    "recorded_preauthorized": 12,
     "mechanically_activatable_preauthorized": 1,
-    "invalidated_preauthorized": 0,
+    "invalidated_preauthorized": 1,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
@@ -327,7 +327,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-037",
       "title": "C020 candidate-phase governance",
-      "status": "PREAUTHORIZED",
+      "status": "INVALIDATED_PREAUTHORIZED",
       "branch": "codex/gp-val-037-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -375,8 +375,8 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
-      "activation_requires_new_judgment": false,
+      "activation_state": "INVALIDATED",
+      "activation_requires_new_judgment": true,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -7574,11 +7574,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":1,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 1; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -8386,3 +8386,21 @@ focused event-resolution tests and the complete framework checker. The generated
 census refresh changes only this framework entry's size, line count and SHA-256.
 No user-owned chat or automation was created. Final gates and live publication
 remain root responsibilities.
+
+
+## 2026-10-03 GP-VAL-037 predecessor-condition opening
+
+The independent Curator records the actual activation-authority gap reported by
+the C020 handoff supervisor before making a new judgment. GP-VAL-037 is
+INVALIDATED_PREAUTHORIZED for this finite condition only. The earlier GP-VAL-040
+event remains fully resolved in immutable canonical snapshot
+`8b050cfa1c87b65823f464695ff425efba99ebb2` and receipt
+`a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58`; its amended authority is unchanged.
+C020 exact candidate `256bf44cea71f6d5c87aa1675c8dac9f6b79259f`, base
+`3dac79dac4eefcf832510817e8cb5ecd6a27f219`, tree
+`45831eeb88ece9c8b293e2e819ee5ecb362b64ec` remains unmerged and unmodified.
+KBD exact candidate and all other order objects remain unchanged. This opening
+performs no handoff, governance implementation, build or hardware action.
+A later event receipt and descendant adoption will record the independent
+judgment; the initial opening reference identifies the prior reviewed canonical
+state and will be replaced with this opening's actual immutable SHA at adoption.
