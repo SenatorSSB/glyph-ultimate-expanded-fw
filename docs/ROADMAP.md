@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-013","GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":4,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-013, GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 4; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 GP-CONFIG-012 and GP-VAL-033 retain exact completed H1 evidence. The 2026-10-02 Curator adoption supersedes the prior correspondence/protected-path REVIEW stops for candidate creation and establishes the serialized safety campaign plus independent Keyboard and USB-menu characterization. The machine-derived marker defines executability. Governance successors authenticate future candidate identities finitely; historical evidence and every build/hardware gate remain intact. GP-CONFIG-021 is narrowed to operation refusal on stored rejection or ambiguous storage failure, preserving the file and bypassing normal reports and save-capable construction. The OLED warning is supplementary and never treated as physical acknowledgment. GP-REL-001 retains substantive dependencies, GP-VAL-011 remains owner-deferred, Nunchuk remains NOT_TESTED and root cause remains unproven.

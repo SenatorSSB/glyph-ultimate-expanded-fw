@@ -168,9 +168,9 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 4,
+    "immediate_ready": 3,
     "recorded_preauthorized": 12,
-    "mechanically_activatable_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 4,
@@ -191,7 +191,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-013",
       "title": "Release-critical USB-default characterization",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-config-013-release-safety",
       "objective": "Getter conditional write, uninitialized caller destination and authenticated uint8/tag-7 decoder storage are independently source-verified. Characterization chooses no USB policy and now covers supported GC preliminary startup and USB matrix.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -238,8 +238,8 @@ Git, but it is not current candidate supply or implementation authority.
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f",
+      "candidate_base_configurator_sha": "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -359,7 +359,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7325,14 +7325,33 @@ Git, but it is not current candidate supply or implementation authority.
 ```
 <!-- queue-state:end -->
 
+## GP-CONFIG-013 candidate handoff and GP-VAL-036 mechanical activation (2026-10-02)
+
+Live `configurator` and focused branch verification resolved to B `7a2dba85332c90fa2bcc6c06e1205c4745facb92` and C `fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f`. C has direct parent B and tree `a97dbb89bece05d3c31e0cc30baf10659a4bf800`; its focused branch is `codex/gp-config-013-release-safety`, with clean tracked, staged, untracked and critical ignored inputs. The complete `git diff-tree -r --no-renames --raw -z B C` inventory is:
+
+| Exact path | Old mode / blob | New mode / blob |
+| --- | --- | --- |
+| `docs/runtime_config/fixtures/glyph_checker_census.json` | `100644` / `cdec98f303ac83af3f30bf176b472dc7fa335f49` | `100644` / `90fcc213840481b9aa3d5377b3cebb2c7a3b45db` |
+| `docs/runtime_config/fixtures/gp_config013_usb_default_characterization.json` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `651ff3a89cf8992a4a0476e184e27a595cb037a3` |
+| `docs/runtime_config/fixtures/runtime_config_validation_health.json` | `100644` / `50489828f194fda177b544ede73c959d8c011cff` | `100644` / `0980710700e662410b9d7576e6c76eab8209c493` |
+| `docs/runtime_config/fixtures/runtime_config_validation_manifest.json` | `100644` / `13096decdd4f46d39c99198654fb9d355408713b` | `100644` / `4a8f3fde712048ac927b65a8e750f5d2c9433629` |
+| `docs/runtime_config/gp_config013_usb_default_characterization.md` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `4a36da1e405e5e0cf33924eb5545a87d739e3efc` |
+| `docs/runtime_config/runtime_config_validation_health.md` | `100644` / `c654fe39114b078d3a2d54ed539202d1f79d7a02` | `100644` / `dc33ebc1a508ce74c64b9d7ee065eae5c47b8583` |
+| `tools/check_glyph_gp_config013_usb_default_characterization.py` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `1934362a132141a4b9c91ffea8fa40b1a9f18cf8` |
+| `tools/fixtures/gp_config013_usb_host/usb_harness.cpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `c92d8d5718b1b21ae56c427d5deaeea2e22e7ebe` |
+
+Independent read-only source/build-role conformance PASS: these eight paths are the adopted GP-CONFIG-013 report, fixture, checker, harness and directly coupled census/manifest/health consequences. Every final entry is a regular non-executable `100644` blob. There is no production source or build-input delta: the PlatformIO source filters, include roots and extra script do not select any changed path. All 25 fixture-pinned source/default/schema/decoder/build identities match SHA-256 and Git blobs in B and C. The focused checker passed ordinary and AddressSanitizer/UndefinedBehaviorSanitizer runs over the 4,096 getter matrix rows, decoder controls and routes; `git diff --check B C` passed. The only predicted current correspondence failure is the four new exact host paths (C013 fixture, report, checker and harness). No source, policy, architecture, source-authority or hardware claim expands. The reported invalid/missing-index path reaches a production read of an uninitialized destination; the host harness uses a sentinel and establishes no deterministic physical outcome. No USB fallback was selected.
+
+Each recorded GP-VAL-036 activation condition is objectively met: clean C and direct live-verified B/tree/raw inventory; independent scope PASS and unchanged critical/source/decoder/build dependencies; exact regular source-free paths, clean critical inputs and no failed hardware or invalid accepted-source transition. This is the C013 candidate-phase pending snapshot. C remains preserved outside canonical; GP-VAL-036 is mechanically `ACTIVATABLE` pending its separate READY transition.
+
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-013","GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":4,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-013, GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 4; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
