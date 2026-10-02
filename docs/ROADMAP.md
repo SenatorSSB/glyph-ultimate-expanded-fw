@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":1,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":1,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 1; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
+Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 1; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 GP-VAL-040 is INVALIDATED_PREAUTHORIZED with a pending CURATION_REQUIRED obligation: independent review found that its inherited three-file correspondence scope does not authorize the three additional checker allowlist changes needed for the exact Keyboard calibration paths. Source/build conformance passed; the preserved GP-KBD-001 candidate remains REVIEW and unchanged. Curator must authorize that finite validation consequence before 040 resumes. No implementation or hardware acceptance is claimed. Exact candidate `4fb7c1e9507547774ff9f55cd7788355648d5d1e` remains unmerged; prior recovery MATCH and original fingerprint-failure UNKNOWN records are preserved. C020/037, USB023/042 and GLYPH-UD-026 remain unchanged.
