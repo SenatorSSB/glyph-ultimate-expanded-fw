@@ -22,18 +22,17 @@ Git, but it is not current candidate supply or implementation authority.
   "audit_base_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "Independent Curator adjudicated GP-CONFIG-023 and GP-VAL-042 as complete PREAUTHORIZED/WAITING end-of-chain orders. GLYPH-UD-026 settles index validity only. Both covered by immutable same-base receipt; prior 0151 resolutions remain in historical canonical commits; no Curator survivor or global wait.",
+    "pending": true,
+    "trigger": "GP-VAL-040 requires Curator scope amendment: the inherited GP-VAL-036 three-file correspondence surface cannot resolve the three independent feature-scope allowlists rejecting the exact GP-KBD-001 calibration report and fixture. No source or candidate drift; no checker expansion authorized.",
+    "resolution": null,
     "provenance": {
-      "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:bd0582ba73268a7023edd6c338374aed23907194:docs/planning/portfolio_20261002_1701.md",
+      "opened_by_role": "Glyph Implementation Supervisor",
+      "opening_reference": "git-json:7e959d018acdcc7384ff101c87ac0b25f0a0ed34:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
-        "GP-CONFIG-023",
-        "GP-VAL-042"
+        "GP-VAL-040"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:6d372d91bc22dbc26963300bb3bfcbcdf6101843:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -94,16 +93,16 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "runway": {
     "immediate_ready": 2,
-    "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 1,
-    "invalidated_preauthorized": 0,
+    "recorded_preauthorized": 12,
+    "mechanically_activatable_preauthorized": 0,
+    "invalidated_preauthorized": 1,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "CURATION_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -968,7 +967,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-040",
       "title": "Keyboard host finite correspondence",
-      "status": "PREAUTHORIZED",
+      "status": "INVALIDATED_PREAUTHORIZED",
       "branch": "codex/gp-val-040-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1015,8 +1014,8 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "ACTIVATABLE",
-      "activation_requires_new_judgment": false,
+      "activation_state": "INVALIDATED",
+      "activation_requires_new_judgment": true,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -7523,14 +7522,61 @@ all unrelated work-order objects, and framework/sequence/navigation/surface/diff
 gates. No material findings remained; this receipt grants no candidate integration,
 Keyboard repair or hardware acceptance.
 
+## GP-VAL-040 finite scope stop (2026-10-02)
+
+Fresh Implementation preflight verified live canonical
+`7e959d018acdcc7384ff101c87ac0b25f0a0ed34`. The preserved Keyboard candidate
+`4fb7c1e9507547774ff9f55cd7788355648d5d1e`, direct parent
+`328c6a1bfb09eb035c2065d0de080283307f34d6`, tree
+`a847f1dab9e7918ec49d5dd887b009adf087c87f` remains unchanged and unmerged.
+Independent native `kbd040_source` verified its exact nine-path regular
+`100644` inventory, all 28 dependency identities, production/build equality,
+critical worktree integrity and recorded object closure. This source/build
+conformance PASS does not expand the governance edit surface.
+
+Independent native authority reviewer `val040_authority` found a validation
+scope gap. The adopted 040 contract inherits 036's explicit
+`tools/glyph_hardware_correspondence.py`, its tests and
+`docs/agent_framework/HARDWARE_CORRESPONDENCE.md` surface, plus coupled
+manifest/census/health and self-path metadata. It does not authorize changes
+to these three separate feature-scope allowlists:
+
+- `tools/check_glyph_generated_source_owned_generator_contract.py`
+- `tools/check_glyph_generated_source_owned_artifact_install.py`
+- `tools/check_glyph_coordinate_native_runtime_profile_contract.py`
+
+The preserved recovery aggregate has independent out-of-scope failures for the
+Keyboard calibration fixture in each checker. Source inspection confirms that
+both exact calibration paths are outside all three allowlists. Adding entries
+only to `NON_BEHAVIORAL_PATHS` cannot repair those gates. The common algorithm
+requires unchanged protected-before-allowlist checks; its five-checker source
+transition permissions are scoped to their named orders, not 040. Running
+all affected consumers does not authorize modifying every failed consumer.
+
+GP-VAL-040 therefore stops before activation or implementation as
+`INVALIDATED_PREAUTHORIZED`, with a pending `CURATION_REQUIRED` obligation.
+The substantive gap is authorization for the exact two calibration literals
+in those three checker allowlists, with bounded rejection tests and unchanged
+content/protected-source checks, or another independently authorized bounded
+disposition. No prefix exemption, candidate replay, test waiver or silent
+hash update is proposed. A separate Curator invocation must adjudicate this
+new opening event before implementation can resume.
+
+All other 94 work-order objects, including KBD's exact C/B REVIEW state,
+C020/037, USB023/042 and their evidence, are unchanged. GLYPH-UD-026 is unchanged.
+Prior 41/45 aggregate evidence remains preserved; it is not a new aggregate
+PASS. Original fingerprint-failure cause remains UNKNOWN. No firmware build,
+UF2, device action, hardware acceptance or Keyboard/SOCD policy was produced.
+Nunchuk remains NOT_TESTED; root cause remains unproven.
+
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":1,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 1; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
