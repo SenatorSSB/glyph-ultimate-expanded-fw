@@ -1,0 +1,15 @@
+{
+  "schema_name": "glyph_curation_resolution_receipt",
+  "schema_version": 1,
+  "resolver_role": "Glyph Work-Order Curator",
+  "resolved_at": "2026-10-02T21:55:18Z",
+  "opening_reference": "git-json:cbd8b2fab4ca9558d6483564262a4ab9b0a8a69a:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+  "subject_resolutions": [
+    {
+      "subject_id": "GP-VAL-040",
+      "event_kind": "INVALIDATED_PREAUTHORIZED",
+      "disposition": "REAUTHORIZED",
+      "resolution": "Independent source review verifies the three live main() validate_feature_scope calls reject the two authorized Keyboard calibration host paths. Reauthorize only finite GP-VAL-040 H1 implementation: add docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json and docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md to allowed_paths tuples in tools/check_glyph_generated_source_owned_generator_contract.py, tools/check_glyph_generated_source_owned_artifact_install.py, tools/check_glyph_coordinate_native_runtime_profile_contract.py. Add actual-consumer scope regressions in tools/check_glyph_checker_context.py and strict mode/identity/critical regressions in tools/test_glyph_hardware_correspondence.py; preserve shared helper semantics, existing prefixes/protected precedence, content validation and frozen hashes. Existing finite correspondence work in tools/glyph_hardware_correspondence.py and docs/agent_framework/HARDWARE_CORRESPONDENCE.md includes exact nine-path C inventory plus these exact governance paths, this receipt and reviewed current Curator framework-control transition tools/check_glyph_agent_framework_docs.py; all newly classified metadata regular100644 outside firmware build roles. No future040 edits to framework checker or sharedcontext helper. Feature matcher already casefolds and lacks modes; mandatory composed strict-correspondence gates retain exact alias/unknown/mode/type rejection. C4fb7c1e9507547774ff9f55cd7788355648d5d1e, B328c6a1bfb09eb035c2065d0de080283307f34d6, treea847f1dab9e7918ec49d5dd887b009adf087c87f and rawinventoryf8cc5721ad63f142d535aae73087c9466d1891e3010ea241fd03688aa81f6ad5 remain unmerged/unreplayed. All28 pinned dependencies and234 critical entries match B/C/currentcanonical; no substantive Keyboard/product/hardware policy choice. Later adoption restores PREAUTHORIZED/ACTIVATABLE with full rechecks, isolated aggregate, source-free integration and strictDONE; only040DONE permits KBD resumption. Original fingerprint failures and subsequent MATCH evidence remain distinct; no waiver. C020/037 rejected handoff excluded. Narrow current Curator framework test correction binds resolved reauthorization to immutable openingevent/receipt rather than current invalidated status; no weakened ancestry/subject/kind/mode gates. All94 other work-order objects unchanged."
+    }
+  ]
+}
