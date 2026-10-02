@@ -66,6 +66,18 @@ GP_CONFIG_012_HOST_PATHS = (
     "tools/fixtures/gp_config012_button_host/schema/config.options",
     "tools/fixtures/gp_config012_button_host/schema/config.proto",
 )
+GP_CONFIG_013_HOST_PATHS = (
+    "docs/runtime_config/fixtures/gp_config013_usb_default_characterization.json",
+    "docs/runtime_config/gp_config013_usb_default_characterization.md",
+    "tools/check_glyph_gp_config013_usb_default_characterization.py",
+    "tools/fixtures/gp_config013_usb_host/usb_harness.cpp",
+)
+GP_CONFIG_013_COUPLED_PATHS = (
+    CENSUS,
+    "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+    "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+    "docs/runtime_config/runtime_config_validation_health.md",
+)
 
 
 class CorrespondenceTests(unittest.TestCase):
@@ -215,6 +227,57 @@ class CorrespondenceTests(unittest.TestCase):
                     self.git("commit", "-q", "-m", "gitlink GP-CONFIG-012 metadata")
                 with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
                     self.verify(check_worktree=False)
+
+    def test_gp_config_013_whole_candidate_and_each_exact_path(self):
+        self.git("switch", "-q", "-c", "gp013-candidate", self.base)
+        paths = GP_CONFIG_013_HOST_PATHS + GP_CONFIG_013_COUPLED_PATHS
+        self.assertEqual(len(paths), 8)
+        for path in paths:
+            self.write(path, f"source-free C013 input: {path}\n")
+        self.candidate = self.commit("exact GP-CONFIG-013 candidate-style delta")
+        report = self.verify()
+        self.assertEqual(report["candidate_paths"], {path: "NON_BEHAVIORAL" for path in paths})
+        self.assertEqual(report["target_paths"], {})
+        for path in GP_CONFIG_013_HOST_PATHS:
+            with self.subTest(path=path):
+                self.assertEqual(correspondence.classify_path(path), "NON_BEHAVIORAL")
+
+    def test_gp_config_013_adjacent_unknown_and_critical_precedence(self):
+        for path in GP_CONFIG_013_HOST_PATHS:
+            for lookalike in (path + ".bak", path.upper(), path.replace("/", "/other/", 1)):
+                with self.subTest(path=lookalike), self.assertRaisesRegex(
+                    correspondence.CorrespondenceError, "unclassified"
+                ):
+                    correspondence.classify_path(lookalike)
+        with self.assertRaisesRegex(correspondence.CorrespondenceError, "unclassified"):
+            correspondence.classify_path("tools/fixtures/gp_config013_usb_host/extra.cpp")
+        for path in GP_CONFIG_013_HOST_PATHS:
+            with self.subTest(critical=path), mock.patch.object(
+                correspondence, "CORRESPONDENCE_CRITICAL_PATHS",
+                correspondence.CORRESPONDENCE_CRITICAL_PATHS | {path},
+            ):
+                self.assertEqual(correspondence.classify_path(path), "CRITICAL")
+        self.assertEqual(correspondence.classify_path(HANDLER), "CRITICAL")
+
+    def test_gp_config_013_host_paths_reject_bad_git_modes_and_types(self):
+        for index, path in enumerate(GP_CONFIG_013_HOST_PATHS):
+            for kind in ("executable", "symlink", "gitlink"):
+                with self.subTest(path=path, kind=kind):
+                    self.git("switch", "-q", "-c", f"gp013-{index}-{kind}", self.candidate)
+                    if kind == "executable":
+                        self.write(path, "host metadata\n")
+                        (self.root / path).chmod(0o755)
+                        self.commit("executable GP-CONFIG-013 metadata")
+                    elif kind == "symlink":
+                        target = self.root / path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        target.symlink_to("unexpected")
+                        self.commit("symlink GP-CONFIG-013 metadata")
+                    else:
+                        self.git("update-index", "--add", "--cacheinfo", f"160000,{self.candidate},{path}")
+                        self.git("commit", "-q", "-m", "gitlink GP-CONFIG-013 metadata")
+                    with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
+                        self.verify(check_worktree=False)
 
     def test_changed_handler_fails(self):
         self.write(HANDLER, "tested handler!\n")
