@@ -323,6 +323,34 @@ required post-reconnect visibility and LT4-to-Ult13 checks were not completed.
 - Source: direct project-owner instruction in the Codex task "Resume config safety planning" (task `01a0dee7-fbe3-7202-b91c-fc0b49ebe74c`), supplied 2026-09-26
 - Direction: Resume GP-CONFIG-012, GP-CONFIG-013 and GP-CONFIG-014 for normal Planner-to-Curator consideration. GLYPH-UD-017 no longer parks these three items by itself. This is planning/curation permission only; each item still needs fresh live-source Curator authorization before probes or implementation. No firmware candidate, build, device action, hardware result or merge is authorized by this direction. No invalid-button, USB-default or in-place custom-mode update policy is selected. GP-VAL-011 remains independently OWNER_DEFERRED / NONEXECUTABLE. The earlier warning source, cause and affected identities remain UNKNOWN.
 
+### GLYPH-UD-022
+
+- Type: `Decision`
+- Status: `Active`
+- Source: direct project-owner Curator campaign request supplied 2026-10-02.
+- Direction: For populated Config fields/list elements representing actual button bindings, accept only supported source-defined named nonzero Button IDs; reject BTN_UNSPECIFIED/0, unnamed IDs and out-of-domain values. Absence/no binding is structural absence/count zero. Rejected candidates never become live; preserve GP-CONFIG-005 transaction semantics. The source-defined remap disable sentinel is a distinct operation, not a populated actual binding. This selects no RGB, USB fallback or valid live-rebind policy.
+
+### GLYPH-UD-023
+
+- Type: `Decision`
+- Status: `Active`
+- Source: direct project-owner Curator campaign request supplied 2026-10-02.
+- Direction: If persisted Config fails decode or semantic validation, preserve the rejected stored file byte-for-byte; do not publish or consume partial/invalid state. Use independently validated source defaults for that boot, do not automatically overwrite the rejected file, and present a conspicuous persistent user-visible indication that stored Config was rejected, defaults are active and recovery is required. Do not present normal successful-profile-load UI/state. If reliable persistent fail-loud indication cannot be implemented and validated, refuse normal controller operation pending manual recovery. No general persistence/power-loss architecture is selected. The Curator's narrower current refusal authorization is an application of this fallback, not a new owner preference for all future recovery.
+
+### GLYPH-UD-024
+
+- Type: `Decision`
+- Status: `Active`
+- Source: direct project-owner Curator campaign request supplied 2026-10-02.
+- Direction: Populated RGB button-color mapping targets must be supported physical RGB-targetable named nonzero buttons. Reject zero, unnamed and out-of-domain IDs; structural absence means no mapping. RGB eligibility is independent of gameplay binding state; a disabled/unassigned physical button may have lighting. No palette, animation, brightness, pin map or fallback color is chosen.
+
+### GLYPH-UD-025
+
+- Type: `Decision`
+- Status: `Active`
+- Source: direct project-owner Curator campaign request supplied 2026-10-02.
+- Direction: The beta supports normal gameplay through GameCube-controller transport via GC adapter and ordinary source-verified default Glyph USB gameplay on Nintendo Switch and computers, including existing normal mode selection required for those paths. Configuration change -> reboot -> gameplay is an acceptable required workflow; same-session active custom-mode hot replacement remains deferred. This claims no official Glyph Configurator compatibility, generalized live reconfiguration, runtime-loaded profiles, WebSerial/device write, automated flashing or Nunchuk support. Common startup/persistence/GC/supported USB defects remain release-relevant. USB-default fallback remains undecided until GP-CONFIG-013 completes.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is
