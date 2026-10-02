@@ -351,6 +351,14 @@ required post-reconnect visibility and LT4-to-Ult13 checks were not completed.
 - Source: direct project-owner Curator campaign request supplied 2026-10-02.
 - Direction: The beta supports normal gameplay through GameCube-controller transport via GC adapter and ordinary source-verified default Glyph USB gameplay on Nintendo Switch and computers, including existing normal mode selection required for those paths. Configuration change -> reboot -> gameplay is an acceptable required workflow; same-session active custom-mode hot replacement remains deferred. This claims no official Glyph Configurator compatibility, generalized live reconfiguration, runtime-loaded profiles, WebSerial/device write, automated flashing or Nunchuk support. Common startup/persistence/GC/supported USB defects remain release-relevant. USB-default fallback remains undecided until GP-CONFIG-013 completes.
 
+### GLYPH-UD-026
+
+- Type: `Decision`
+- Status: `Active`
+- Source: direct project-owner message “Owner decision — USB default validation”, supplied 2026-10-02; daemon chat `01a0fcbd-2b4c-7d31-9088-42a22e260b57`, turn `01a0fcc9-98f0-7b41-9183-04f6d313685e`, userMessage `01a0fcc9-9965-7372-afbf-8e15a5dc88cc`, independently read by Curator.
+- Direction: `default_usb_backend_config` is required one-based configuration. Reject Config before publication/acceptance when omitted and decoded zero, explicitly zero, or greater than `communication_backend_configs_count`. Zero has no no-USB meaning. Do not silently fall back to index 1 or another backend. Apply at all beta-relevant Config acceptance seams including external and persisted loading. Rejected candidates preserve existing accepted/live state and follow separately approved persisted recovery. This selects index validity only; no further referenced backend-type eligibility rule. Additional type constraints require separate source evidence and authority.
+- Effect: resolves the USB-default policy left undecided by GLYPH-UD-025 and completed GP-CONFIG-013 characterization; other GLYPH-UD-025 support/reboot/non-claims remain active. Firmware repair still follows the complete gated GP-CONFIG-023 order.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is

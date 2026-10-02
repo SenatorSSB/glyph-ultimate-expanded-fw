@@ -19,129 +19,54 @@ Git, but it is not current candidate supply or implementation authority.
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "d9ad6132ca0912398839673cc0da24e54a924210",
+  "audit_base_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "Independent Curator adjudicated GP-CONFIG-013, GP-CONFIG-020, GP-VAL-036, GP-VAL-037, GP-CONFIG-014, GP-VAL-034, GP-CONFIG-017, GP-VAL-035, GP-CONFIG-021, GP-VAL-038, GP-CONFIG-022, GP-VAL-039, GP-KBD-001, GP-VAL-040, GP-CONFIG-019, GP-VAL-041, GP-REL-001. Sixteen campaign orders adopted; GP-REL-001 remains substantive-dependency gated. 021 refusal narrowing applies to 038/022/039. No pending Curator obligation remains.",
+    "resolution": "Independent Curator adjudicated GP-CONFIG-023 and GP-VAL-042 as complete PREAUTHORIZED/WAITING end-of-chain orders. GLYPH-UD-026 settles index validity only. Both covered by immutable same-base receipt; prior 0151 resolutions remain in historical canonical commits; no Curator survivor or global wait.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:49528e32849069e87f2729c24be35a21b002b6df:docs/planning/portfolio_20261002_0151.md",
+      "opening_reference": "git-json:bd0582ba73268a7023edd6c338374aed23907194:docs/planning/portfolio_20261002_1701.md",
       "subject_ids": [
-        "GP-CONFIG-013",
-        "GP-CONFIG-020",
-        "GP-VAL-036",
-        "GP-VAL-037",
-        "GP-CONFIG-014",
-        "GP-VAL-034",
-        "GP-CONFIG-017",
-        "GP-VAL-035",
-        "GP-CONFIG-021",
-        "GP-VAL-038",
-        "GP-CONFIG-022",
-        "GP-VAL-039",
-        "GP-KBD-001",
-        "GP-VAL-040",
-        "GP-CONFIG-019",
-        "GP-VAL-041",
-        "GP-REL-001"
+        "GP-CONFIG-023",
+        "GP-VAL-042"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:3194fd86c5391f19e598acae7879d6898e3e2072:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:6d372d91bc22dbc26963300bb3bfcbcdf6101843:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20261002-0151",
-    "base_configurator_sha": "d9ad6132ca0912398839673cc0da24e54a924210",
-    "packet_id": "glyph-portfolio-20261002-0151",
-    "packet_path": "docs/planning/portfolio_20261002_0151.md",
-    "planning_commit": "49528e32849069e87f2729c24be35a21b002b6df",
-    "curation_commit": "3194fd86c5391f19e598acae7879d6898e3e2072",
+    "branch": "planning/portfolio-20261002-1701",
+    "base_configurator_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+    "packet_id": "glyph-portfolio-20261002-1701",
+    "packet_path": "docs/planning/portfolio_20261002_1701.md",
+    "planning_commit": "bd0582ba73268a7023edd6c338374aed23907194",
+    "curation_commit": "6d372d91bc22dbc26963300bb3bfcbcdf6101843",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator fully adjudicated all seventeen initial candidates; sixteen adopted as complete READY/PREAUTHORIZED orders, GP-REL-001 substantive dependencies retained in immutable provenance. No pending Curator survivor or global wait. 021 and its successors narrowed to owner-approved unconditional refusal fallback."
+      "Independent Curator adjudicated both 1701 candidates as PREAUTHORIZED/WAITING complete end-of-chain orders; owner index-only decision GLYPH-UD-026 recorded. No pending Curator survivors. Prior campaign and rejected C020 handoff preserved."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20261002-0151",
-      "planning_commit": "49528e32849069e87f2729c24be35a21b002b6df",
-      "packet_id": "glyph-portfolio-20261002-0151",
-      "packet_base_configurator_sha": "d9ad6132ca0912398839673cc0da24e54a924210",
-      "curation_branch": "curation/portfolio-20261002-0151-review",
-      "curation_commit": "3194fd86c5391f19e598acae7879d6898e3e2072",
+      "planning_branch": "planning/portfolio-20261002-1701",
+      "planning_commit": "bd0582ba73268a7023edd6c338374aed23907194",
+      "packet_id": "glyph-portfolio-20261002-1701",
+      "packet_base_configurator_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+      "curation_branch": "curation/portfolio-20261002-1701-review",
+      "curation_commit": "6d372d91bc22dbc26963300bb3bfcbcdf6101843",
       "review_date": "2026-10-02",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-CONFIG-013",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-CONFIG-020",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-VAL-036",
+          "candidate_id": "GP-CONFIG-023",
           "disposition": "PREAUTHORIZED"
         },
         {
-          "candidate_id": "GP-VAL-037",
+          "candidate_id": "GP-VAL-042",
           "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-CONFIG-014",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-VAL-034",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-CONFIG-017",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-VAL-035",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-CONFIG-021",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-VAL-038",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-CONFIG-022",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-VAL-039",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-KBD-001",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-VAL-040",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-CONFIG-019",
-          "disposition": "READY"
-        },
-        {
-          "candidate_id": "GP-VAL-041",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-REL-001",
-          "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
         }
       ]
     }
@@ -169,7 +94,7 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "runway": {
     "immediate_ready": 3,
-    "recorded_preauthorized": 11,
+    "recorded_preauthorized": 13,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
@@ -7348,6 +7273,137 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-CONFIG-023",
+      "title": "Required USB-default index validation and checked startup",
+      "status": "PREAUTHORIZED",
+      "branch": "codex/gp-config-023-release-safety",
+      "objective": "GLYPH-UD-026 resolves required index validity only. Exact completed 013 source/decoder proof establishes the gap; shared 021/022 producer validation and synchronized refusal permit this bounded repair without fallback, type policy, wire/schema or callback ABI changes.",
+      "why_this_matters": "Close the completed 013 safety finding within the already adopted Mk6 GC/ordinary USB beta envelope, preserving existing campaign and exact acceptance gates.",
+      "hardware_risk": "H3",
+      "behavioral_claim": "Reject omitted/zero/out-of-range required USB-default index before either Config acceptance and before startup initializer consumption; rejected live/file state preserved, invalid startup follows existing operation refusal.",
+      "scope": "Adopt PREAUTHORIZED/WAITING, H3. Objective: ensure\nno omitted/zero/out-of-range USB-default candidate is accepted, persisted or\npublished and prevent invalid startup selection from reaching initialization.\nValue: close the source-proved 013 defect across both supported USB and shared\nGC startup. Touched planes: firmware validation/startup and docs/checkers;\nexisting persistence acceptance through 021 only, no new storage architecture.\n\nSource scope: new `include/core/config_usb_default_validation.hpp` and\n`src/core/config_usb_default_validation.cpp`; shared\n`include/core/config_validation.hpp` and `src/core/config_validation.cpp` from\naccepted 021; `HAL/pico/src/comms/backend_init.cpp` and\n`config/glyph/common/src/config.cpp`; coupled finite source-free proofs below.\nDo not change the USB getter void callback ABI or backend_init.hpp. Existing\nSetConfig/LoadConfig/Glyph wrapper call sites consume shared validation; no\nadditional changes to those files are needed unless independently re-curated.\n\nPure allocation-free helper checks `communication_backend_configs_count` against\nthe actual generated fixed array extent before any indexing/callback, then\nrequires decoded index >=1 and <=count. Count zero cannot have a valid required\nindex. No mutation, fallback, backend-ID enum reads or type rule. Integrate into\n021 shared validation consumed by 022 Glyph wrapper, retaining nested count\nproofs before traversal. Both external private candidate before save/publication\nand persisted private candidate before caller assignment invoke it. Failure\nleaves accepted/live bytes unchanged. Rejected stored bytes remain unchanged and\nlatch adopted 021 operation refusal; defaults stay private if refusal applies.\nValidated source defaults must satisfy the same required index invariant.\n\nStartup defense: check count/index at initialize_backends entry before any\nselector/initializer callback; recheck immediately after get_backend_config can\napply watchdog scratch changes and before preliminary USB init. Deterministically\ninitialize the local with CommunicationBackendConfig_init_zero, but never pass\nzero as a failure sentinel. For the named default getter, source-bound valid\npredicate proves a complete selected-entry copy before backend_id consumption.\nPreserve the void callback API and all valid callback/default-copy behavior.\nOther custom getter semantics are outside this named beta repair; unexpected\nneed for generalized callback result handling returns CURATION_REQUIRED.\n\nOn invalid pre/post-selector index, return zero before constructors/descriptors/\ndetection/secondary setup/mode activation/save. Glyph setup must detect this\ninvalid-config failure and latch the existing 021 synchronized operation-refusal\nstate before setup_mode_activation_bindings, backend_count=1 fallback and\nnormal core1 setup. Both loops avoid all normal pointer consumers/reports.\nUse the pure predicate on current Config to distinguish this cause from an\nordinary zero-backend no-console result; preserve existing no-console behavior.\nDisplay text reflects actual provenance: invalid source/default/startup Config\nmust not falsely claim stored-file rejection. Refusal never depends on physical\nOLED acknowledgment. No general console-detection/null-backend redesign.\n\nMechanical activation before candidate creation: 022/039 strict DONE with exact\nF022/artifact PASS and accepted 020/014/017/021 chain; no pending hardware failure;\nfresh clean live canonical B023; exact sensitive source/default/schema/decoder\nidentities equal annex or named accepted transitions; existing shared validation,\nwrapper and refusal seams match their adopted contracts. Create fresh direct\nchild C023, record tree, raw NUL old/new path/blob/mode inventory and independent\nscope/build-role conformance review. Future C023 SHA is an output, not a missing\nproduct decision. Candidate stays unbuilt/unmerged until 042 DONE.\n\nFocused host proof: all stored indices 0..255 crossed with counts 0..15; count16\nand impossible extents fail before traversal; every valid first/last selected\nentry copies exactly; omitted/explicit zero, repeated tag last values, 256,\nmalformed/truncated/wrong-wire/overflow cases on accepted decoder; no invalid\nsave/publication/caller contamination; bad-file hash preserved and refusal;\nsource defaults; valid GC preliminary USB path; all supported USB/Keyboard,\nRF2/RF3 bypass, watchdog mode-only/backend selection. Inject invalid pre- and\npost-selector cases: assert no initializer/descriptors/detection/save; Glyph\nrefusal precedes bindings/count fallback/core consumers. Full-success prior\noutputs and ordinary no-console path unchanged; omission/one-byte substitutions\nfail. Compare returned/copy bytes using initialized host state, never observe\nindeterminate production memory as deterministic evidence.\n\nHardware protocol: normal valid stored startup on GC, XInput, DInput, Switch and\nKeyboard; ordinary selection/profile/modifier behavior and reconnect/reboot;\nsafely reachable external omitted/zero/out-of-range rejection retains previous\naccepted operation; safely prepared invalid stored Config refuses gameplay on\nGC/USB, preserves file and repeats refusal after reboot; approved manual recovery,\nrestoration and exact rollback. Exercise default/held/menu/watchdog paths without\nunsupported hot replacement. Display-working refusal message verified; display\nfailure cannot permit operation. No new device writer or flashing automation.\n\nInvalidation/stops: unexpected semantic/schema/default/build/domain drift;\narchitecture outside exact helper/shared-validator/default-callback/refusal scope;\nbackend-type policy dependence; any uncontrolled initializer/save on failure;\nmissing predecessor exact PASS or safe operator recovery; unknown path/mode;\ndirty critical inputs; source replay/rebase or F critical drift; hardware FAIL.\nContradiction returns CURATION_REQUIRED, missing objective prerequisite WAITING.\nDONE: complete common proofs/build/custody/review/exact PASS, reviewed integration\nof exact tested F and later strict completion; no inherited 010 hardware PASS.\n\nShared complete adopted contract:\nBoth adopted orders inherit current WORK_ORDER_TEMPLATE, AUTHORIZATION_AND_RUNWAY,\nHARDWARE_EVIDENCE and the adopted finite governance architecture from the exact\nreceipt/packet references above. Local fields below specify this delta.\n\nAuthorization/provenance: immutable packet bd0582ba73268a7023edd6c338374aed23907194 plus GLYPH-UD-026 and the verified human\nturn; the independent receipt 6d372d91bc22dbc26963300bb3bfcbcdf6101843 and this descendant adoption establish the complete recorded orders. Confidence high for pinned source facts; future runtime/physical evidence\nUNKNOWN. Branches: codex/gp-config-023-release-safety and\ncodex/gp-val-042-release-safety. New candidate/base/artifact/evidence/result\nfields are null until produced. H3 gaps include missing exact F/build/custody/\nreview/PASS; H1 hardware fields NOT_APPLICABLE, no manual acceptance.\n\nOne Supervisor invocation completes at most one new order. Candidate creation\nand resumption remain phases of 023, governance is a separate 042 invocation.\nAt most one dependent H3 artifact awaits testing. Independent H1 may proceed\nonly without contaminating that candidate, dependencies or evidence.\n\nH3 build is `pio run -e glyph_mk6`; approved fallback only if unavailable and\nreported. Build from exact committed F, review RAM/flash and dependencies;\nexpected `.pio/build/glyph_mk6/firmware.uf2`, preserve/re-hash at\n`local_backups/hardware-artifacts/<F SHA>/<UF2 SHA-256>/firmware.uf2`, re-hash\nbefore handoff. Fresh independent source/build review and processor-accepted\nGLYPH_HARDWARE_EVIDENCE_V2 exact candidate/artifact PASS with empty gaps precede\nmerge. A build is not hardware acceptance. H1 canonical build/artifact/manual\nacceptance NOT_REQUIRED/NOT_APPLICABLE/NOT_REQUIRED.\n\nReserve exact regular Git 100644 paths: protocol\n`docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md`, version\n`GP_CONFIG_023_HW_V1`; result `docs/calibration/gp_config_023_hardware_result.md`;\nmachine evidence `docs/calibration/fixtures/gp_config_023_hardware_evidence.json`.\nNo prefix or alternate result location is authorized. Processor validates actual\nresult bytes; reservation is not fabricated evidence.\n\nAutomated gates: literal production-body positive/negative proofs; pinned\nschema/decoder/ABI; accepted Ultimate/X1 source/table correspondence; affected\nhistorical/current consumers; manifest/census/health; framework/runway/sequence/\nnavigation/surface; syntax/diff; clean committed isolated full aggregate; fresh\nindependent review. No known failing gate is waived. Candidate stops at predicted\n042 scope/correspondence gate, with exact C retained. H3 pending/result/DONE\nupdates use separately authorized source-free control-plane snapshots. DONE\nfollows reviewed live integration and strict completion correspondence.\n\nRollback/recovery: preserve owner accepted Config, rejected bytes, historical\nand failed evidence and exact accepted rollback UF2; only existing approved\nmanual operator route. No new payload sender/device writer, automatic config\nreplacement/format, rename/delete, persistence architecture, flash fault injection,\nflashing automation, RuntimeConfigView change, runtime-loaded profile, game\nsemantics or compatibility claim. Stop if safe mandatory physical route is\nunavailable. Impossible malicious wire cases remain host-only; required safely\nreachable rejection/refusal/recovery rows cannot be replaced by host PASS.\nNunchuk NOT_TESTED; root cause unproven; public release human-owned.",
+      "explicit_excluded_scope": "No additional backend-type allowlist, no-USB sentinel, fallback, protobuf/schema/default change, callback ABI change, generalized custom getter or console/null-backend redesign. No runtime-loaded config, RuntimeConfigView/active publication change, device/WebSerial/protobuf/backend writer, flashing automation, persistence format/atomicity/power-loss architecture, source replay/rebase, historical evidence rewrite, generic prefix exemption, GP-VAL-011 reopening, Senscope/game semantics, official Configurator compatibility or public release. H1 cannot change firmware/build; H3 cannot exceed its six exact production paths. No C020/VAL037 handoff/status/candidate change.",
+      "touched_planes": [
+        "firmware runtime",
+        "existing Config acceptance",
+        "USB startup",
+        "docs/checkers"
+      ],
+      "source_authority": "Live canonical 3dac79dac4eefcf832510817e8cb5ecd6a27f219, tree 0f149c1b0fa901effe777ff2835bf1f01d5d9f23; immutable 1701 bd0582ba73268a7023edd6c338374aed23907194 at docs/planning/portfolio_20261002_1701.md, 19 source/decoder/governance annex rows and 25-entry completed GP-CONFIG-013 closure independently mode/blob/SHA-256 verified. Accepted0151 receipt 3194fd86c5391f19e598acae7879d6898e3e2072 and current queue override earlier Planner recovery prose. GLYPH-UD-026 exact human turn; future source/physical behavior unknown.",
+      "dependencies_prerequisites": [
+        "GP-CONFIG-022 and GP-VAL-039 strict DONE; exact accepted F022/artifact PASS with empty gaps and accepted 020/014/017/021 chain. Shared validator/wrapper/refusal must equal their authorized contracts.",
+        "Candidate creation precedes GP-VAL-042; preserve committed C023 unbuilt/unmerged until042 source-free governance strict DONE, then exact descendant F023 build/review/custody/hardware PASS."
+      ],
+      "substantive_authorization_rationale": "GLYPH-UD-026 resolves required index validity only. Exact completed 013 source/decoder proof establishes the gap; shared 021/022 producer validation and synchronized refusal permit this bounded repair without fallback, type policy, wire/schema or callback ABI changes.",
+      "mechanical_activation_conditions": [
+        "022/039 strict DONE and processor-accepted exact F022/artifact PASS, no gaps or pending hardware FAIL; accepted 020/014/017/021 chain intact.",
+        "Fresh live clean canonical B023; sensitive dependencies equal1701 annex or named accepted transitions; existing shared 021 validator, 022 wrapper and synchronized refusal meet adopted contracts; only finite named source-free deltas.",
+        "Create fresh direct-child C023 under exact six-path source scope, with tree/raw NUL old/new paths/modes/blobs and independent production/build-role conformance. C023 identity is activation output. Commit and preserve C023;042 strict DONE precedes build/integration."
+      ],
+      "invalidation_conditions": [
+        "Unexpected semantic/source/schema/default/decoder/domain/build drift or additional architecture/backend-type decision; unexpected getter/API/consumer change requires bounded curation.",
+        "Unknown extra path/mode, unavailable exact object closure, failed inventory/conformance, historical/current proof weakened or resealed, controlled initializer/save/report on failure, unsafe/unavailable mandatory operator recovery.",
+        "HardwareFAIL or invalid exact predecessor acceptance, dirty critical inputs, source replay/rebase, changed critical C-to-F tree, old/partial/mismatched hardware evidence."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; same-base immutable receipt 6d372d91bc22dbc26963300bb3bfcbcdf6101843 direct child of 3dac79dac4eefcf832510817e8cb5ecd6a27f219, sibling of Planner bd0582ba73268a7023edd6c338374aed23907194; this descendant adoption authorizes only 023/042, with GLYPH-UD-026. Prior work-order objects remain unchanged; rejected C020 handoff excluded.",
+      "automated_validation": [
+        "Exact local host/adversarial matrix in scope, shared complete contract and inherited adopted eight-step algorithm; authenticate schema/decoder/literal bodies; all five guarded scopes protect remaining paths; historical005/010/011/012/013/016 andUltimate/X1 evidence frozen; current repairedproof separate.",
+        "Focused proofs, all affected source consumers, closed raw mode/blob/path inventory, manifest/census/health, framework/runway/schema/receipt/sequence/navigation/agent surface and integration, syntax/diff, full affected clean committed isolated aggregate and fresh independent review. Expected042gate permits candidate creation but bars build/integration until042 DONE.",
+        "Exact committed F023 canonical Mk6 build; RAM/flash/resolved dependency review; raw UF2 approved immutable custody/readback/pre-handoff hash; safely executable required protocol, owner physical rows and independent Processor exact candidate/artifact PASS/no gaps before merge."
+      ],
+      "canonical_build": "pio run -e glyph_mk6",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_CONFIG_023_HW_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
+      "status_documentation_updates": "Separate source-free canonical candidate/handoff/result/completion publications by authorized roles; preserve exact C023;042 strict DONE mechanically resumes023. FutureREL requires023 DONE/new PASS/acceptedcorrespondence; no public publication authority.",
+      "done_evidence": "Exact reviewed B/C/F source/mode/path conformance; all affected proofs/aggregate; independent review; reviewed live integration and later strict DONEcorrespondence. Exact builtF023 and preserved UF2 Processor-accepted physical PASS without gaps.",
+      "stop_conditions": [
+        "Missing objective prerequisite WAITING; contradiction or substantive new judgment CURATION_REQUIRED. One new order per invocation; at most one dependent H3 artifact awaiting test.",
+        "Preserve C023 without replay; source-free GP-VAL-042 integrates independently; F023 descendant C023 with entirecriticaltree equal C-to-F; no H3 merge before exact build/custody/review/physical PASS.",
+        "Do not route around rejected C020/037handoff or infer safehardwarefixtures; stop on unavailable mandatorymanual recovery."
+      ],
+      "activation_state": "WAITING",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": [
+        "Exact future F build, UF2 custody and physical PASS not produced."
+      ]
+    },
+    {
+      "id": "GP-VAL-042",
+      "title": "Exact C023 candidate governance and accepted-transition proof",
+      "status": "PREAUTHORIZED",
+      "branch": "codex/gp-val-042-release-safety",
+      "objective": "Fully specified finite eight-step algorithm extends only exact 023 B/C/F transition. Future SHA/path inventory is mechanical evidence; historical proof, all five protected scopes and exact new hardware acceptance remain mandatory.",
+      "why_this_matters": "Close the completed 013 safety finding within the already adopted Mk6 GC/ordinary USB beta envelope, preserving existing campaign and exact acceptance gates.",
+      "hardware_risk": "H1",
+      "behavioral_claim": "Source-free exact candidate/accepted-transition authentication with preserved historical observations; no firmware behavior.",
+      "scope": "Adopt PREAUTHORIZED/WAITING, H1. Objective: apply\nexisting finite semantic-candidate/governance architecture to the fully specified\n023 transition; missing future identities are mechanical inputs only.\nTouched planes docs/checkers/validation; no firmware/build modifications.\n\nActivation: 023 clean committed C023 with exact B023/direct parent/tree and full\nraw NUL path/mode/blob inventory; independent production/build-role scope review;\n039 and required predecessors strict DONE/PASS; all other critical blobs/modes\nequal B023; schema/default/decoder and semantic contract unchanged; no new policy.\nStore exact literal finite host/protocol/result/evidence inventory after proving\nregular 100644 and outside build source filters/include roots/extra scripts.\nNew helper/shared validation remain CRITICAL, never classified as metadata.\n\nScope/algorithm: adopted eight-step architecture, no new permission mechanism.\nAuthenticate exact B/C source transition and CANDIDATE_VALIDATION_ONLY proof;\nkeep historical 010 exact proof/Ultimate/X1 tables and strict correspondence;\nall five protected-scope checks receive only authenticated exact changed-path\nexclusions for this transition, protected-first on remaining paths. Preserve C\nwithout replay/rebase; composed built F contains only exact reviewed governance/\nmetadata deltas after C, C-to-F entire critical tree equality required. Source-free\ngovernance can integrate while C stays unmerged. After new physical F/PASS,\nextend exact accepted chain F022 -> F023 and whole critical-tree correspondence;\nnever report old 010 whole-binary acceptance for new source.\n\nUse existing governance files `tools/glyph_checker_context.py`,\n`tools/glyph_hardware_correspondence.py`, `tools/test_glyph_hardware_correspondence.py`,\n`tools/check_glyph_config_010_integration_semantic_correspondence.py`, the five\nprotected checkers named in adopted campaign, corresponding tests/docs and closed\nobject-root catalog in `tools/run_glyph_runtime_config_validation.py`. No unrelated\nGP-VAL-011 isolation/runner redesign. Include only exact C/B/historical/accepted\nroots actually consumed, no arbitrary refs/network/object-store copying.\n\nNew 023 proof outputs: `docs/runtime_config/gp_config023_usb_index_validation.md`,\n`docs/runtime_config/fixtures/gp_config023_usb_index_validation.json`,\n`tools/check_glyph_gp_config023_usb_index_validation.py`,\n`tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp`; exact required\nadditional host stubs inventoried at C and independently reviewed. Finite unknown\nnames are mechanical inventory, never a prefix grant.\n\nExplicit proof consequences: preserve 013 fixture/report historical getter,\ndecoder and downstream observations; add separate current source-bound index,\ninitialized-local and failure/refusal proof. Cover\n`tools/check_glyph_gp_config013_usb_default_characterization.py` and its exact\nreport/fixture/harness; `check_glyph_configurator_setconfig_transaction.py`,\n`check_glyph_current_config_persistence_recovery_research.py`,\n`check_glyph_getconfig_raw_load_characterization.py`,\n`check_glyph_config_menu_invalid_state_characterization.py`,\n`check_glyph_gp_config012_button_mask_characterization.py`,\n`check_glyph_setconfig_runtime_rebinding_characterization.py`,\n`check_glyph_neopixel_null_sendreport_characterization.py`, their exact existing\nfixture/report/harness/stub outputs, and exact adopted 020/021/022/KBD/019\nproduction-source consumers. Literal current menu/GET/mask/Keyboard bodies and\nvalid outputs remain equal; changed acceptance/startup has separate repaired\nproof, not a claim of old unsafe equivalence. Preserve historical fixture hashes,\nsource roots and observations. Actual exact host paths must enter reviewed raw\ninventory; no generic tools/fixtures or docs prefix classification.\n\nFinite coupled manifest/census/health, HARDWARE_CORRESPONDENCE and queue/status\nconsequences follow ordinary separately authorized roles and candidate lifecycle.\nC023/F023 identity, result triple and governance self-paths are closed literals.\nNo test omission, blind digest update or silent historical reseal. Runtime-loaded\nstorage and WebSerial authority guards retain all prohibitions unchanged.\n\nAdversarial controls: positive candidate on differently named branch/detached\nexplicit base; wrong/missing parent/base/root/object; one-byte source substitution;\nextra include/src/HAL/build input; deletion/rename/case/lookalike; executable,\nsymlink/gitlink metadata; dirty/staged/untracked/ignored critical inputs;\nforged inventory/receipt; reordered/missing transition; old/partial/mismatched\nhardware evidence; C evidence when F built; historical PASS reused. Every negative\nfails. Validate governance-only, exact composed candidate and post-PASS integration\nsimulation using clearly labeled synthetic test evidence, never real PASS.\n\nInvalidation: policy/source/default/schema/build drift outside named accepted\ntransition; extra production-consuming path; unavailable object closure; unsafe\nhistorical/current proof weakening; failed conformance or hardware ancestry;\nnew architecture or blocked operator route. H1 cannot repair firmware or decide\nbackend types. DONE requires common full affected aggregate, independent review,\nsource-free reviewed live integration and strict completion. Then 023 resumes\nmechanically without routine Planner/Curator return for SHA/path binding.\n\nShared complete adopted contract:\nBoth adopted orders inherit current WORK_ORDER_TEMPLATE, AUTHORIZATION_AND_RUNWAY,\nHARDWARE_EVIDENCE and the adopted finite governance architecture from the exact\nreceipt/packet references above. Local fields below specify this delta.\n\nAuthorization/provenance: immutable packet bd0582ba73268a7023edd6c338374aed23907194 plus GLYPH-UD-026 and the verified human\nturn; the independent receipt 6d372d91bc22dbc26963300bb3bfcbcdf6101843 and this descendant adoption establish the complete recorded orders. Confidence high for pinned source facts; future runtime/physical evidence\nUNKNOWN. Branches: codex/gp-config-023-release-safety and\ncodex/gp-val-042-release-safety. New candidate/base/artifact/evidence/result\nfields are null until produced. H3 gaps include missing exact F/build/custody/\nreview/PASS; H1 hardware fields NOT_APPLICABLE, no manual acceptance.\n\nOne Supervisor invocation completes at most one new order. Candidate creation\nand resumption remain phases of 023, governance is a separate 042 invocation.\nAt most one dependent H3 artifact awaits testing. Independent H1 may proceed\nonly without contaminating that candidate, dependencies or evidence.\n\nH3 build is `pio run -e glyph_mk6`; approved fallback only if unavailable and\nreported. Build from exact committed F, review RAM/flash and dependencies;\nexpected `.pio/build/glyph_mk6/firmware.uf2`, preserve/re-hash at\n`local_backups/hardware-artifacts/<F SHA>/<UF2 SHA-256>/firmware.uf2`, re-hash\nbefore handoff. Fresh independent source/build review and processor-accepted\nGLYPH_HARDWARE_EVIDENCE_V2 exact candidate/artifact PASS with empty gaps precede\nmerge. A build is not hardware acceptance. H1 canonical build/artifact/manual\nacceptance NOT_REQUIRED/NOT_APPLICABLE/NOT_REQUIRED.\n\nReserve exact regular Git 100644 paths: protocol\n`docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md`, version\n`GP_CONFIG_023_HW_V1`; result `docs/calibration/gp_config_023_hardware_result.md`;\nmachine evidence `docs/calibration/fixtures/gp_config_023_hardware_evidence.json`.\nNo prefix or alternate result location is authorized. Processor validates actual\nresult bytes; reservation is not fabricated evidence.\n\nAutomated gates: literal production-body positive/negative proofs; pinned\nschema/decoder/ABI; accepted Ultimate/X1 source/table correspondence; affected\nhistorical/current consumers; manifest/census/health; framework/runway/sequence/\nnavigation/surface; syntax/diff; clean committed isolated full aggregate; fresh\nindependent review. No known failing gate is waived. Candidate stops at predicted\n042 scope/correspondence gate, with exact C retained. H3 pending/result/DONE\nupdates use separately authorized source-free control-plane snapshots. DONE\nfollows reviewed live integration and strict completion correspondence.\n\nRollback/recovery: preserve owner accepted Config, rejected bytes, historical\nand failed evidence and exact accepted rollback UF2; only existing approved\nmanual operator route. No new payload sender/device writer, automatic config\nreplacement/format, rename/delete, persistence architecture, flash fault injection,\nflashing automation, RuntimeConfigView change, runtime-loaded profile, game\nsemantics or compatibility claim. Stop if safe mandatory physical route is\nunavailable. Impossible malicious wire cases remain host-only; required safely\nreachable rejection/refusal/recovery rows cannot be replaced by host PASS.\nNunchuk NOT_TESTED; root cause unproven; public release human-owned.",
+      "explicit_excluded_scope": "No additional backend-type allowlist, no-USB sentinel, fallback, protobuf/schema/default change, callback ABI change, generalized custom getter or console/null-backend redesign. No runtime-loaded config, RuntimeConfigView/active publication change, device/WebSerial/protobuf/backend writer, flashing automation, persistence format/atomicity/power-loss architecture, source replay/rebase, historical evidence rewrite, generic prefix exemption, GP-VAL-011 reopening, Senscope/game semantics, official Configurator compatibility or public release. H1 cannot change firmware/build; H3 cannot exceed its six exact production paths. No C020/VAL037 handoff/status/candidate change.",
+      "touched_planes": [
+        "validation infrastructure",
+        "docs/checkers"
+      ],
+      "source_authority": "Live canonical 3dac79dac4eefcf832510817e8cb5ecd6a27f219, tree 0f149c1b0fa901effe777ff2835bf1f01d5d9f23; immutable 1701 bd0582ba73268a7023edd6c338374aed23907194 at docs/planning/portfolio_20261002_1701.md, 19 source/decoder/governance annex rows and 25-entry completed GP-CONFIG-013 closure independently mode/blob/SHA-256 verified. Accepted0151 receipt 3194fd86c5391f19e598acae7879d6898e3e2072 and current queue override earlier Planner recovery prose. GLYPH-UD-026 exact human turn; future source/physical behavior unknown.",
+      "dependencies_prerequisites": [
+        "GP-CONFIG-023 exact clean committed C023/direct B023/tree/raw NUL inventory and independent source/build-role conformance.",
+        "GP-VAL-039 and all required predecessors strict DONE/PASS; governance integrates source-free before preserved C023 resumes, no future023PASS prerequisite to042 activation."
+      ],
+      "substantive_authorization_rationale": "Fully specified finite eight-step algorithm extends only exact 023 B/C/F transition. Future SHA/path inventory is mechanical evidence; historical proof, all five protected scopes and exact new hardware acceptance remain mandatory.",
+      "mechanical_activation_conditions": [
+        "Exact clean committed C023 with live-verified B023 directparent/tree/raw NUL old/new path/mode/blob inventory, independent production/build-role review; 039 and required predecessor strict DONE/PASS.",
+        "Every production change equals023 authorized six-path scope; all other critical bytes/modes equal B023. Count/index semantics, schema/default/decoder unchanged outside named accepted chain. New/shared helpers remain CRITICAL.",
+        "Authenticate finite actual host/protocol/result/evidence literals only after independent regular 100644 nonexecuting role/outside production filters/include roots/extra scripts proof. Objects actually consumed locally available; no dirty/staged/untracked/ignored critical inputs, new policy or invalid hardware ancestry."
+      ],
+      "invalidation_conditions": [
+        "Unexpected semantic/source/schema/default/decoder/domain/build drift or additional architecture/backend-type decision; unexpected getter/API/consumer change requires bounded curation.",
+        "Unknown extra path/mode, unavailable exact object closure, failed inventory/conformance, historical/current proof weakened or resealed, controlled initializer/save/report on failure, unsafe/unavailable mandatory operator recovery.",
+        "HardwareFAIL or invalid exact predecessor acceptance, dirty critical inputs, source replay/rebase, changed critical C-to-F tree, old/partial/mismatched hardware evidence."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; same-base immutable receipt 6d372d91bc22dbc26963300bb3bfcbcdf6101843 direct child of 3dac79dac4eefcf832510817e8cb5ecd6a27f219, sibling of Planner bd0582ba73268a7023edd6c338374aed23907194; this descendant adoption authorizes only 023/042, with GLYPH-UD-026. Prior work-order objects remain unchanged; rejected C020 handoff excluded.",
+      "automated_validation": [
+        "Exact local host/adversarial matrix in scope, shared complete contract and inherited adopted eight-step algorithm; authenticate schema/decoder/literal bodies; all five guarded scopes protect remaining paths; historical005/010/011/012/013/016 andUltimate/X1 evidence frozen; current repairedproof separate.",
+        "Focused proofs, all affected source consumers, closed raw mode/blob/path inventory, manifest/census/health, framework/runway/schema/receipt/sequence/navigation/agent surface and integration, syntax/diff, full affected clean committed isolated aggregate and fresh independent review. Expected042gate permits candidate creation but bars build/integration until042 DONE."
+      ],
+      "canonical_build": "NOT_REQUIRED: source-free H1 governance/characterization; stop on firmware/build change.",
+      "expected_artifact": "NOT_APPLICABLE",
+      "manual_acceptance": "NOT_REQUIRED",
+      "manual_acceptance_protocol_reference": "NOT_APPLICABLE",
+      "manual_acceptance_protocol_version": "NOT_APPLICABLE",
+      "hardware_evidence_contract_reference": "NOT_APPLICABLE",
+      "hardware_evidence_contract_version": "NOT_APPLICABLE",
+      "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
+      "status_documentation_updates": "Separate source-free canonical candidate/handoff/result/completion publications by authorized roles; preserve exact C023;042 strict DONE mechanically resumes023. FutureREL requires023 DONE/new PASS/acceptedcorrespondence; no public publication authority.",
+      "done_evidence": "Exact reviewed B023/C023 source/mode/path conformance and exact source-free governance diff; full affected proofs/aggregate, fresh independent review, reviewed live source-free integration and later strict DONE correspondence. Governance-only, composed-candidate and post-PASS validation simulations use explicitly synthetic test evidence and do not require or claim actual F023/build/custody/physical PASS. Those actual facts belong to GP-CONFIG-023 resumption after GP-VAL-042 strict DONE; no candidate firmware enters this H1 integration.",
+      "stop_conditions": [
+        "Missing objective prerequisite WAITING; contradiction or substantive new judgment CURATION_REQUIRED. One new order per invocation; at most one dependent H3 artifact awaiting test.",
+        "Preserve C023 without replay; source-free GP-VAL-042 integrates independently; F023 descendant C023 with entirecriticaltree equal C-to-F; no H3 merge before exact build/custody/review/physical PASS.",
+        "Do not route around rejected C020/037handoff or infer safehardwarefixtures; stop on unavailable mandatorymanual recovery."
+      ],
+      "activation_state": "WAITING",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
     }
   ]
 }
@@ -7376,11 +7432,11 @@ Each recorded GP-VAL-036 activation condition is objectively met: clean C and di
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -8107,3 +8163,50 @@ Full firmware/runtime aggregate, builds, artifacts and hardware actions are not
 performed for this docs-only authorization adoption; their future work-order
 gates remain intact. Default GitHub DNS verification failed; permitted
 network-enabled read-only retry verified canonical and both Planner refs.
+
+## 2026-10-02 USB-default delta adoption
+
+Immutable Planner 1701 `bd0582ba73268a7023edd6c338374aed23907194` at
+`docs/planning/portfolio_20261002_1701.md`, same-base Curator receipt
+`6d372d91bc22dbc26963300bb3bfcbcdf6101843`, and GLYPH-UD-026 settle the required one-based USB index.
+Only GP-CONFIG-023 and GP-VAL-042 are added; immediate executability is defined
+by the machine marker. No firmware, candidate build or hardware result is produced.
+The packet is fully consumed. Prior0151 receipt and subject resolutions remain
+in immutable history; all preexisting work-order objects and completion evidence
+are unchanged. The rejected C020/VAL037 handoff is expressly excluded: C020
+keeps READY/null candidate fields, VAL037 keeps WAITING; this adoption does not
+authorize, perform or bypass that handoff.
+
+Finite additive clarification to the prior shared permitted-intervening-deltas
+contract: this 1701 receipt/adoption may change only
+`docs/project/ACTIVE_AGENT_QUEUE.md`, `docs/agent_framework/USER_DIRECTION.md`,
+`docs/AGENT_CONTEXT.md`, `docs/CURRENT_STATE.md`, `docs/ROADMAP.md` and necessary
+reviewed Curator control-plane consequences allowed by the existing exact test
+surface. It records GLYPH-UD-026, appends023/042 WAITING, consumes 1701 and mirrors status.
+These source-free metadata deltas do not alter any earlier sensitive source,
+substantive order, exact B/C identity or gate. No earlier successor authenticates
+GP-CONFIG-023 source: only GP-VAL-042 extends the accepted 020->014->017->021->022 chain to023
+after 022/039 strict DONE/PASS. All five protected checkers and raw exact mode/blob/
+path inventory rules remain mandatory. No prefix, wildcard or branch-name grant.
+
+023 startup/acceptance implements index validity only, preserving every in-range
+selected entry without backend-type policy. Reuse 021 unconditional synchronized
+refusal/no-autoformat and 022 stable producer wrapper; no default-backed gameplay
+route is revived. Accurate refusal provenance and ordinary no-console behavior
+are mandatory. New six-path source scope and finite current-proof consequences
+are in the complete orders; every historical observation/root remains frozen.
+GP-REL-001 remains non-executable: future prerequisites additionally require023 DONE,
+new exact F023/artifact PASS and accepted-transition correspondence. Existing
+GC/USB/Keyboard/recovery/RGB/rollback release rows and human public-release gate
+remain required; neither013 nor old 010 PASS accepts the repaired binary.
+
+Delegation: Curator guidance applies; complete functions catalog and native
+collaboration capability inspected. usb_source_1701 independently verified
+19 annex/25 decoder identities and source feasibility; usb_governance_1701 checked
+finite governance and prior-campaign coexistence. Root retains authorization
+and mutation. Fresh usb_adoption_review_1701 returned PASS after clarifying
+042 completion: B023/C023 plus explicitly synthetic composition proofs precede
+actual F023 build/custody/PASS during023 resumption. Reviewed pre-record diff
+SHA-256 `a8b4ae0ffcb6c920e8c8349dc6dfea4395c0656ee66be2ca79a7d2fb61be8fe5`;
+no outstanding findings. Final control-plane gates and live publication remain
+root responsibilities. No checker/test edits, firmware, build or hardware result.
