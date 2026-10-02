@@ -12,6 +12,10 @@ authorized objective mechanical activation conditions.
 The former G-series queue in this file is superseded. Its history remains in
 Git, but it is not current candidate supply or implementation authority.
 
+## Current GP-VAL-037 Stop
+
+GP-VAL-037 is INVALIDATED_PREAUTHORIZED / CURATION_REQUIRED after the 2026-10-03 activation audit. Source prerequisites passed, but the adopted unchanged WebSerial guard pass obligation conflicts with its historical Step15 scope: the actual checker rejects all three authorized C020 source paths. Its aggregate exclusion does not resolve that explicit obligation. A pending obligation covers only GP-VAL-037 and requires a bounded Curator applicability decision before activation. The prior exact accepted-baseline clarification remains valid. C020 stays REVIEW at `256bf44cea71f6d5c87aa1675c8dac9f6b79259f`, parent `3dac79dac4eefcf832510817e8cb5ecd6a27f219`, tree `45831eeb88ece9c8b293e2e819ee5ecb362b64ec`; no candidate modification, firmware integration, build, new hardware result or strict DONE. KBD exact candidate and GP-VAL-040 amended ACTIVATABLE authority remain unchanged. After Curator resolution, a separate GP-VAL-037 supervisor must deliver both candidate and accepted-transition governance with all required gates; only its strict DONE permits separate C020 resumption through actual build, custody, review and exact human hardware PASS.
+
 ## Current Queue State
 
 <!-- queue-state:start -->
@@ -22,17 +26,17 @@ Git, but it is not current candidate supply or implementation authority.
   "audit_base_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "GP-VAL-037 undefined predecessor condition fully adjudicated by NEW explicit exact accepted GP-CONFIG-010 integration/artifact baseline and closed accepted critical-chain definition. PREAUTHORIZED/WAITING restored; separate objective handoff recheck required. No outstanding Curator subject; no C020 acceptance inheritance, implementation or hardware observation. GP-VAL-040 resolved history and all other orders preserved.",
+    "pending": true,
+    "trigger": "GP-VAL-037 validation applicability conflict discovered before activation at live 41ba14202450860340e07bea161f7910c3af922c: adopted 0151 Additional exact transaction-proof consequence requires unchanged storage-fallback and WebSerial source-authority guards to pass. Actual unchanged tools/check_glyph_runtime_config_webserial_device_write_source_authority.py main fails on preserved C020 256bf44cea71f6d5c87aa1675c8dac9f6b79259f because its historical Step15 configurator...HEAD scope rejects HAL/pico/src/comms/ConfiguratorBackend.cpp, include/core/config_button_validation.hpp and src/core/config_button_validation.cpp. The same guard passes current canonical; C020 adds no forbidden runtime/device-write marker. Existing manifest NOT_CURRENT_RUNTIME_CONFIG_LANE exclusion does not establish satisfaction of the explicit adopted pass obligation. The finite five-checker/shared-context scope and 9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0 accepted-baseline clarification grant no edit or applicability exception for this separate guard. Independent source prerequisites PASS and independent blocker review agree a new bounded Curator applicability decision is required. Do not patch the guard, hide the candidate delta by rebinding configurator, omit the obligation or report aggregate PASS as its substitute. Earlier accepted-baseline resolution remains valid; no C020 hardware acceptance or source integration.",
+    "resolution": null,
     "provenance": {
-      "opened_by_role": "Glyph Work-Order Curator",
-      "opening_reference": "git-json:ca7bd671be6437c3cbaf3730f9739a089b272399:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "opened_by_role": "Glyph Implementation Supervisor",
+      "opening_reference": "GP-VAL-037 activation audit at git:41ba14202450860340e07bea161f7910c3af922c; exact candidate256bf44cea71f6d5c87aa1675c8dac9f6b79259f; adopted0151:49528e32849069e87f2729c24be35a21b002b6df:docs/planning/portfolio_20261002_0151.md lines515-531",
       "subject_ids": [
         "GP-VAL-037"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0:docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -93,11 +97,11 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "runway": {
     "immediate_ready": 1,
-    "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 2,
-    "invalidated_preauthorized": 0,
+    "recorded_preauthorized": 12,
+    "mechanically_activatable_preauthorized": 1,
+    "invalidated_preauthorized": 1,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -327,7 +331,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-037",
       "title": "C020 candidate-phase governance",
-      "status": "PREAUTHORIZED",
+      "status": "INVALIDATED_PREAUTHORIZED",
       "branch": "codex/gp-val-037-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -375,8 +379,8 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "ACTIVATABLE",
-      "activation_requires_new_judgment": false,
+      "activation_state": "INVALIDATED",
+      "activation_requires_new_judgment": true,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -7574,11 +7578,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":1,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 1; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
