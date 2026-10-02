@@ -6737,38 +6737,82 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "planning_branch": "planning/portfolio-20261001-2305",
-  "planning_commit": "970d223ae60a522573f1f0da8c3a6a79273cab39",
-  "packet_id": "glyph-portfolio-20261001-2305",
-  "packet_base_configurator_sha": "d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8",
-  "curation_branch": "curation/portfolio-20261001-2305-review",
+  "packet_id": "glyph-portfolio-20261002-0151",
+  "planning_branch": "planning/portfolio-20261002-0151",
+  "planning_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+  "packet_base_configurator_sha": "d9ad6132ca0912398839673cc0da24e54a924210",
+  "curation_branch": "curation/portfolio-20261002-0151-review",
+  "review_date": "2026-10-02",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-CONFIG-012",
+      "candidate_id": "GP-CONFIG-013",
       "disposition": "READY"
     },
     {
-      "candidate_id": "GP-KBD-001",
-      "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-019",
-      "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
-    },
-    {
-      "candidate_id": "GP-VAL-034",
-      "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
-    },
-    {
-      "candidate_id": "GP-VAL-035",
-      "disposition": "RESEARCH_GATED"
+      "candidate_id": "GP-CONFIG-020",
+      "disposition": "READY"
     },
     {
       "candidate_id": "GP-VAL-036",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-VAL-037",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-014",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-VAL-034",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-017",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-VAL-035",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-021",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-VAL-038",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-022",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-VAL-039",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-KBD-001",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-VAL-040",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-CONFIG-019",
+      "disposition": "READY"
+    },
+    {
+      "candidate_id": "GP-VAL-041",
+      "disposition": "PREAUTHORIZED"
+    },
+    {
+      "candidate_id": "GP-REL-001",
       "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
     }
   ],
-  "review_date": "2026-10-01",
   "global_wait_proposed": false,
   "global_wait_accepted": false,
   "planner_broad_audit_provenance": null,
@@ -6809,3 +6853,46 @@ historical evidence, source proof, or fingerprint correspondence may change.
 All other GP-VAL-011 work remains deferred under GLYPH-UD-013. This review
 records source authority only; the later queue adoption commit supplies the
 executable amended contract.
+
+## 2026-10-02 immutable campaign review bounds
+
+The receipt adjudicates exactly the seventeen candidates in immutable Planner
+0151 at `49528e32849069e87f2729c24be35a21b002b6df`, incorporating 0118 at
+`3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a`, against unchanged live canonical
+`d9ad6132ca0912398839673cc0da24e54a924210`, tree
+`d4d03b87d217d6d47da719d8e5690e97e92f9828`. Both Planner objects and this
+receipt are direct children of that same base. All packet source-annex blob,
+mode and SHA-256 identities were independently verified. Initial dispositions
+are preserved in the receipt; this first commit preserves prior queue-state.
+
+GP-CONFIG-021 is narrowed to GLYPH-UD-023's operation-refusal fallback. The
+tracked startup only exposes SSD1306 drawing calls; the locally resolved
+SSD1306 2.5.16 implementation's begin() reports allocation failure, while
+display() returns void and ignores I2C transmission status. These APIs do not
+establish physical warning visibility. Therefore rejected existing Config and
+ambiguous storage/open/I/O failure latch refusal before any backend, activation
+or normal menu construction. No controller reports or Config writes occur on
+that boot. Validated defaults may be held privately but do not enable gameplay.
+A dedicated persistent best-effort recovery page says stored rejection/recovery
+and operation refusal; drawing requires successful display buffer initialization.
+No conditional authorization for default-backed gameplay is granted. GP-VAL-038
+and GP-CONFIG-022/GP-VAL-039 inherit this narrower recovery contract. Reliable
+default-backed gameplay would require new bounded source-backed curation.
+
+The source-local pure candidate/validator seam, single boot-time ownership,
+refusal branches before all backend/display dereferences, and unchanged valid
+boot behavior are implementable within the proposed source scope. Refusal skips
+initialize_backends and setup_mode_activation_bindings entirely, covers loop,
+setup1 and loop1, and cannot enter save-capable menus or Configurator. Positive
+absence must be separately proved; arbitrary failed open is not absence.
+This is narrow repair of existing Config persistence, not persistent runtime
+profile storage or a general recovery/power-loss architecture.
+
+The adopted governance chain is closed to 020 -> 014 -> 017 -> 021 -> 022.
+Its exact C/B inventories, reviewed source conformance, preserved C-to-F
+critical equality and independent exact F/artifact PASS are mandatory. All
+five protected validation surfaces retain critical/unknown rejection. Future
+identity fills this contract mechanically; it does not select a new architecture.
+Source-free 036/040/041 classify only their committed host inventories.
+GP-REL-001 retains substantive release dependencies. No firmware, build,
+artifact, device action or physical evidence is produced by this curation.
