@@ -191,7 +191,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-013",
       "title": "Release-critical USB-default characterization",
-      "status": "REVIEW",
+      "status": "DONE",
       "branch": "codex/gp-config-013-release-safety",
       "objective": "Getter conditional write, uninitialized caller destination and authenticated uint8/tag-7 decoder storage are independently source-verified. Characterization chooses no USB policy and now covers supported GC preliminary startup and USB matrix.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -229,7 +229,26 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+        "reviewed_implementation_sha": "fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f",
+        "prior_canonical_integration_sha": "161dfcf1003f822f5f83014e8b10f426265acb6c",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_config013_usb_default_characterization.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_config013_usb_default_characterization.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_gp_config013_usb_default_characterization.py",
+          "tools/fixtures/gp_config013_usb_host/usb_harness.cpp"
+        ],
+        "independent_review_provenance": "Fresh independent reviewer PASS on exact integration 161dfcf1003f822f5f83014e8b10f426265acb6c against live canonical base de1d1a23f25368717a038bd4ca3d66a4a33d89a7; confirmed exact candidate ancestry, all eight preserved blobs and 100644 modes, no product/build source change, finite fail-closed correspondence, and no fallback/policy or physical claim. Final review addendum after full validation returned PASS with no material findings.",
+        "validation_provenance": "Preserved candidate fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f (tree a97dbb89bece05d3c31e0cc30baf10659a4bf800) integrated as a second parent of 161dfcf1003f822f5f83014e8b10f426265acb6c from base 7a2dba85332c90fa2bcc6c06e1205c4745facb92; exact 8/8 paths and blobs preserved. GP-CONFIG-013 focused checker PASS verified all 25 pinned source/default/schema/decoder/build identities and host observations. GP-VAL-036 integrated finite correspondence PASS: exact 8/8 NON_BEHAVIORAL, seven canonical progression paths, zero critical changes and zero unknown paths; hardware correspondence suite 48/48 PASS with lookalike, unknown-path, critical-precedence and unsupported mode/type negatives. GP-CONFIG-010 current and historical proofs PASS. Checker census PASS (211); validation health PASS (50 manifest entries, 44 current load-bearing checks); framework/runway, sequence, navigation, agent surface and 12 surface-integration cases, Python syntax and git diff --check PASS. Clean isolated full runtime-config aggregate PASS, 44/44 current load-bearing checks. No firmware build, UF2, hardware test/result or physical acceptance required or claimed for this source-free H1 completion."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -7352,7 +7371,7 @@ Live `configurator` and focused branch verification resolved to B `7a2dba85332c9
 
 Independent read-only source/build-role conformance PASS: these eight paths are the adopted GP-CONFIG-013 report, fixture, checker, harness and directly coupled census/manifest/health consequences. Every final entry is a regular non-executable `100644` blob. There is no production source or build-input delta: the PlatformIO source filters, include roots and extra script do not select any changed path. All 25 fixture-pinned source/default/schema/decoder/build identities match SHA-256 and Git blobs in B and C. The focused checker passed ordinary and AddressSanitizer/UndefinedBehaviorSanitizer runs over the 4,096 getter matrix rows, decoder controls and routes; `git diff --check B C` passed. The only predicted current correspondence failure is the four new exact host paths (C013 fixture, report, checker and harness). No source, policy, architecture, source-authority or hardware claim expands. The reported invalid/missing-index path reaches a production read of an uninitialized destination; the host harness uses a sentinel and establishes no deterministic physical outcome. No USB fallback was selected.
 
-Each recorded GP-VAL-036 activation condition is objectively met: clean C and direct live-verified B/tree/raw inventory; independent scope PASS and unchanged critical/source/decoder/build dependencies; exact regular source-free paths, clean critical inputs and no failed hardware or invalid accepted-source transition. This is the C013 candidate-phase pending snapshot. C remains preserved outside canonical; GP-VAL-036 was mechanically `ACTIVATABLE` at the candidate-phase snapshot; the separate source-free activation commit transitioned it to `READY` without changing the adopted scope. Its reviewed implementation `fceebd9793d276480dfa4e72149ecc6e4e383c2c` entered canonical through `aa01750618a50727156881b22a088f1ef55a09d5`; strict `DONE` evidence is published in this later descendant. C013 remains `REVIEW` on its exact candidate branch for recovery and metadata-only composition in the next campaign cycle.
+Each recorded GP-VAL-036 activation condition is objectively met: clean C and direct live-verified B/tree/raw inventory; independent scope PASS and unchanged critical/source/decoder/build dependencies; exact regular source-free paths, clean critical inputs and no failed hardware or invalid accepted-source transition. At this C013 candidate-phase pending snapshot, C was preserved outside canonical; GP-VAL-036 was mechanically `ACTIVATABLE` at the candidate-phase snapshot; the separate source-free activation commit transitioned it to `READY` without changing the adopted scope. Its reviewed implementation `fceebd9793d276480dfa4e72149ecc6e4e383c2c` entered canonical through `aa01750618a50727156881b22a088f1ef55a09d5`; strict `DONE` evidence is published in this later descendant. GP-CONFIG-013 is now `DONE` through exact integration `161dfcf1003f822f5f83014e8b10f426265acb6c` and this later strict completion-correspondence publication.
 
 ## Interpretation
 
