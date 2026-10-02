@@ -245,6 +245,32 @@ precedence, and aliases, unknown paths, symlinks, gitlinks, executable files,
 and unsupported modes remain rejected. The GP-CONFIG-010 semantic checker,
 fixture, tested-source fingerprint, and hardware evidence are unchanged.
 
+## GP-CONFIG-013 exact host-path extension
+
+GP-VAL-036 classifies only four newly inventoried paths from the clean,
+committed GP-CONFIG-013 candidate
+`fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f`. Its direct parent is
+`7a2dba85332c90fa2bcc6c06e1205c4745facb92` and its tree is
+`a97dbb89bece05d3c31e0cc30baf10659a4bf800`. The complete raw diff has
+eight regular `100644` changes: these four paths plus the already classified
+checker census, validation manifest, validation health fixture, and validation
+health document. Independent source/build-role conformance found no production
+or build-input delta; unchanged PlatformIO filters, include roots and extra
+script do not select these host inputs. All 25 pinned source, default, schema,
+decoder, and build dependencies match the candidate and its parent.
+
+- `docs/runtime_config/fixtures/gp_config013_usb_default_characterization.json`
+- `docs/runtime_config/gp_config013_usb_default_characterization.md`
+- `tools/check_glyph_gp_config013_usb_default_characterization.py`
+- `tools/fixtures/gp_config013_usb_host/usb_harness.cpp`
+
+Only these literal paths receive `NON_BEHAVIORAL` classification. The
+characterization remains `CANDIDATE_VALIDATION_ONLY` until its separate
+candidate-resume cycle. This finite classification preserves critical input
+precedence, exact-path matching, unknown-path rejection, and regular
+non-executable `100644` mode restrictions. It does not select a USB fallback,
+repair firmware, or establish physical controller behavior.
+
 ## Artifact identity and limitations
 
 `builder_scripts/arduino_pico.py` embeds Git HEAD plus dirty status into
