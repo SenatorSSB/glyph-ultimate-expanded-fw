@@ -168,9 +168,9 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
-    "recorded_preauthorized": 12,
-    "mechanically_activatable_preauthorized": 1,
+    "immediate_ready": 4,
+    "recorded_preauthorized": 11,
+    "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 4,
@@ -312,7 +312,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-036",
       "title": "C013 finite correspondence",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-036-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -329,11 +329,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve the exact committed GP-CONFIG-013 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
       "substantive_authorization_rationale": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
-      "mechanical_activation_conditions": [
-        "GP-CONFIG-013 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-013 scope; expected full-aggregate failure does not bar candidate creation.",
-        "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
-        "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
@@ -359,7 +355,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7342,16 +7338,16 @@ Live `configurator` and focused branch verification resolved to B `7a2dba85332c9
 
 Independent read-only source/build-role conformance PASS: these eight paths are the adopted GP-CONFIG-013 report, fixture, checker, harness and directly coupled census/manifest/health consequences. Every final entry is a regular non-executable `100644` blob. There is no production source or build-input delta: the PlatformIO source filters, include roots and extra script do not select any changed path. All 25 fixture-pinned source/default/schema/decoder/build identities match SHA-256 and Git blobs in B and C. The focused checker passed ordinary and AddressSanitizer/UndefinedBehaviorSanitizer runs over the 4,096 getter matrix rows, decoder controls and routes; `git diff --check B C` passed. The only predicted current correspondence failure is the four new exact host paths (C013 fixture, report, checker and harness). No source, policy, architecture, source-authority or hardware claim expands. The reported invalid/missing-index path reaches a production read of an uninitialized destination; the host harness uses a sentinel and establishes no deterministic physical outcome. No USB fallback was selected.
 
-Each recorded GP-VAL-036 activation condition is objectively met: clean C and direct live-verified B/tree/raw inventory; independent scope PASS and unchanged critical/source/decoder/build dependencies; exact regular source-free paths, clean critical inputs and no failed hardware or invalid accepted-source transition. This is the C013 candidate-phase pending snapshot. C remains preserved outside canonical; GP-VAL-036 is mechanically `ACTIVATABLE` pending its separate READY transition.
+Each recorded GP-VAL-036 activation condition is objectively met: clean C and direct live-verified B/tree/raw inventory; independent scope PASS and unchanged critical/source/decoder/build dependencies; exact regular source-free paths, clean critical inputs and no failed hardware or invalid accepted-source transition. This is the C013 candidate-phase pending snapshot. C remains preserved outside canonical; GP-VAL-036 was mechanically `ACTIVATABLE` at the candidate-phase snapshot; the subsequent source-free activation commit transitions it to `READY` without changing the adopted scope.
 
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-VAL-036","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":4,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-CONFIG-020, GP-VAL-036, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 4; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
