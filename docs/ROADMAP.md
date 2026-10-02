@@ -9,12 +9,16 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-VAL-036","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":4,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":4,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_OK","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-VAL-036, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 4; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 4; Target effective authorized runway: 4; Primary liveness: RUNWAY_OK
+Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
+
+GP-VAL-036 is `DONE`: exact reviewed source-free correspondence implementation `fceebd9793d276480dfa4e72149ecc6e4e383c2c` entered `configurator` through `aa01750618a50727156881b22a088f1ef55a09d5`, with strict completion evidence. The preserved GP-CONFIG-013 candidate `fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f` remains `REVIEW` for exact recovery and metadata-only composition in the next cycle; it is not integrated or DONE.
+
+
 
 GP-CONFIG-012 and GP-VAL-033 retain exact completed H1 evidence. The 2026-10-02 Curator adoption supersedes the prior correspondence/protected-path REVIEW stops for candidate creation and establishes the serialized safety campaign plus independent Keyboard and USB-menu characterization. The machine-derived marker defines executability. Governance successors authenticate future candidate identities finitely; historical evidence and every build/hardware gate remain intact. GP-CONFIG-021 is narrowed to operation refusal on stored rejection or ambiguous storage failure, preserving the file and bypassing normal reports and save-capable construction. The OLED warning is supplementary and never treated as physical acknowledgment. GP-REL-001 retains substantive dependencies, GP-VAL-011 remains owner-deferred, Nunchuk remains NOT_TESTED and root cause remains unproven.
 
