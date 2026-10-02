@@ -7697,80 +7697,20 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "packet_id": "glyph-portfolio-20261002-0151",
-  "planning_branch": "planning/portfolio-20261002-0151",
-  "planning_commit": "49528e32849069e87f2729c24be35a21b002b6df",
-  "packet_base_configurator_sha": "d9ad6132ca0912398839673cc0da24e54a924210",
-  "curation_branch": "curation/portfolio-20261002-0151-review",
+  "packet_id": "glyph-portfolio-20261002-1701",
+  "planning_branch": "planning/portfolio-20261002-1701",
+  "planning_commit": "bd0582ba73268a7023edd6c338374aed23907194",
+  "packet_base_configurator_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+  "curation_branch": "curation/portfolio-20261002-1701-review",
   "review_date": "2026-10-02",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-CONFIG-013",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-CONFIG-020",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-VAL-036",
+      "candidate_id": "GP-CONFIG-023",
       "disposition": "PREAUTHORIZED"
     },
     {
-      "candidate_id": "GP-VAL-037",
+      "candidate_id": "GP-VAL-042",
       "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-014",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-VAL-034",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-017",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-VAL-035",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-021",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-VAL-038",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-022",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-VAL-039",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-KBD-001",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-VAL-040",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-CONFIG-019",
-      "disposition": "READY"
-    },
-    {
-      "candidate_id": "GP-VAL-041",
-      "disposition": "PREAUTHORIZED"
-    },
-    {
-      "candidate_id": "GP-REL-001",
-      "disposition": "SUBSTANTIVE_DEPENDENCY_GATED"
     }
   ],
   "global_wait_proposed": false,
