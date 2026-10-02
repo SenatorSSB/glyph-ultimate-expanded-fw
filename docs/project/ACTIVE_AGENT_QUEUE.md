@@ -92,9 +92,9 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 1,
+    "mechanically_activatable_preauthorized": 2,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -193,7 +193,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-CONFIG-020",
       "title": "Actual-binding rejection",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-config-020-release-safety",
       "objective": "Owner GLYPH-UD-022 resolves actual-binding semantics. Existing private SetConfig candidate plus pure raw-representation-safe validator before typed consumption/save/publication is bounded; remap disable sentinel stays valid.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -241,8 +241,8 @@ Git, but it is not current candidate supply or implementation authority.
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "256bf44cea71f6d5c87aa1675c8dac9f6b79259f",
+      "candidate_base_configurator_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -375,7 +375,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7574,11 +7574,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -8430,3 +8430,135 @@ with no material findings: all 94 other order objects preserved, immutable
 event identity and phase gates intact, no implementation. Final control-plane
 gates passed; root retains live publication and validation responsibility.
 No user-owned chat or automation was created; no writing peer dispatched.
+
+
+## 2026-10-03 GP-CONFIG-020 source-free candidate handoff
+
+This handoff is based on freshly live-verified canonical
+`a4c41f84ece9a10bdd65cb46bb7693902fcd44f7` and the adopted GP-VAL-037 receipt
+`9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0`, after opening
+`ca7bd671be6437c3cbaf3730f9739a089b272399`. It changes execution state only:
+GP-CONFIG-020 READY -> REVIEW with exact C/B; GP-VAL-037 remains PREAUTHORIZED
+and WAITING -> ACTIVATABLE. All 93 unrelated work-order objects, including
+GP-VAL-040 PREAUTHORIZED/ACTIVATABLE and GP-KBD-001 REVIEW at exact
+`4fb7c1e9507547774ff9f55cd7788355648d5d1e`, are unchanged. Four runway mirrors
+record Ready 1, Preauthorized 13, activatable 2, effective 3/4, RUNWAY_LOW.
+No new authorization, candidate source integration or governance implementation
+is performed.
+
+### Exact preserved candidate and source/build-role receipt
+
+C = `256bf44cea71f6d5c87aa1675c8dac9f6b79259f`; sole direct parent B =
+`3dac79dac4eefcf832510817e8cb5ecd6a27f219`; tree =
+`45831eeb88ece9c8b293e2e819ee5ecb362b64ec`; branch =
+`codex/gp-config-020-release-safety`. Candidate and canonical refs were freshly
+live-verified; the clean candidate is neither edited, replayed nor rebased.
+Original creation-session live B verification is recorded in worker chat
+`01a0fc9f-0304-78d1-ae2f-0d77f1cfe901`: successful live check at
+2026-10-02T13:14:21.806Z preceded branch creation at 13:16:18Z; the successful
+`exec-acda39be-5309-400b-8a38-253b1365de9f` live check again returned B after
+final candidate commit and before its branch publication. These are original
+command observations, not a present-day reconstruction of the old remote ref.
+
+Complete `git diff-tree --no-commit-id --no-renames --raw -r -z B C` SHA-256:
+`7197560406157c5a43963157f79a010dec424553db7f14235859fab42278e27c`.
+All entries are blobs and all new modes are regular non-executable 100644.
+
+| Path | Old mode/blob | New mode/blob |
+| --- | --- | --- |
+| `HAL/pico/src/comms/ConfiguratorBackend.cpp` | `100644` / `3e934f2f5aae13a36310a35d273727da60723abe` | `100644` / `6ca93c96c944ee539a2d409e32889306c1eafac7` |
+| `include/core/config_button_validation.hpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `1b6e3dc98a9b6c0eb1f04e077c86382eaee324bb` |
+| `src/core/config_button_validation.cpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `3b449bcd619a39a9a46ad599748bd9699d090b2a` |
+| `tools/check_glyph_gp_config020_button_validation.py` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `bd1f15b5d78f869af69dac169bfab973720773b4` |
+| `tools/fixtures/gp_config020_button_validation/decoder_harness.cpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `a5fda1a75e8e9b168070dbd6f1c692689c02c1be` |
+| `tools/fixtures/gp_config020_button_validation/include/Adafruit_TinyUSB.h` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `e3e444d3661c04527bc16c4051e2be995f09cfcd` |
+| `tools/fixtures/gp_config020_button_validation/setconfig_harness.cpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `8b695d07b13472a3dcc7abbc5e4957418f0428e3` |
+| `tools/fixtures/gp_config020_button_validation/validation_harness.cpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `c378ec997d8467c3c083bf54386c4814b01db31d` |
+
+Fresh bounded source specialist `c020_source` independently reviewed the exact
+field/transaction contract and build roles. Only the handler and new validator
+header/cpp are critical changes. The other five paths are finite host proof
+inputs outside production source filters, include roots and extra scripts;
+the validator files remain critical. The five host paths remain unclassified
+by finite correspondence until the separately authorized GP-VAL-037 work.
+The validator is pure/allocation-free,
+checks extents before walking populated records, inspects raw enum object
+representation before typed use, uses the exact named 1..60 domain, preserves
+the remap-disable sentinel, and excludes RGB. The handler rejects after decode
+and before save/live assignment while preserving existing reference checks and
+save-failure transaction behavior. This is source/host conformance, not Pico
+build or physical proof.
+
+The specialist authenticated all 55 distinct rows in the two adopted annexes.
+The only B/H difference from the older annex is the exact GP-VAL-036 four-literal
+correspondence-helper addition, authenticated through reviewed `fceebd9793d276480dfa4e72149ecc6e4e383c2c`
+and integration `aa01750618a50727156881b22a088f1ef55a09d5`; C additionally changes
+only the intended handler among pinned rows. Schema/default/domain/decoder,
+Persistence, accepted Ultimate/X1 and all other source/build inputs are preserved.
+All 12,290 reachable candidate objects are present. Tracked integrity and
+staged/unstaged/untracked/ignored critical-input checks pass.
+
+### GP-VAL-037 mechanical prerequisites
+
+- Native strict DONE validation passes for GP-CONFIG-010, GP-CONFIG-013 and
+  GP-VAL-036. Exact accepted F010 parent/tree, immutable Revision-2 evidence at
+  `60614dae8150338160b3440aef6b275bf073fecf`, exact PASS and empty gaps match.
+  Current evidence SHA-256 is
+  `5f87066df7a06a44340790237fcf3a1ec0adfc0f9a51cb46edb1c9d6dbc38a54`.
+  The actual regular preserved original 791552-byte UF2 rehash matches
+  `4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476`.
+- The complete critical union has exactly 234 equal path/mode/type/blob entries
+  at F010, B020 and this handoff's canonical base. C adds only the two named
+  validator files and changes only the named handler. This equality does not
+  transfer hardware acceptance to C020.
+- B020-to-base ancestry and full old/new path/mode/blob inventory contain
+  exactly the nine permitted metadata paths: the four current-state/queue
+  documents, USER_DIRECTION, the two exact 037/040 receipts, checker census and
+  framework checker. All changed metadata entries are regular 100644 blobs.
+  Receipt ancestry and ordinary metadata validation retain the finite scope;
+  no arbitrary metadata or source progression is accepted.
+- No new product/policy/architecture/source decision, forbidden capability,
+  failed hardware event or invalid accepted-source transition was found.
+  Focused source/build-role review, object closure and clean-input proof are
+  recorded above. The amended objective prerequisites are satisfied.
+
+### Validation and separate successor gates
+
+Fresh candidate focused host checker PASS: 12 binding classes, all named
+1..60 values, invalid raw/decoder controls, extents/omissions/last elements,
+accepted defaults, disable sentinel, order/mask identity and no mutation, and
+10 production SetConfig transaction cases. Historical 012/013 observations
+remain frozen. The previously recorded candidate-phase failures remain routed
+to GP-VAL-037: protected handler/source digests, current/historical 010 semantic
+correspondence, 012/013 and SetConfig proof applicability, census freshness,
+and aggregate SETUP_FAILURE before any checks. They are not waived. Current
+canonical's unclassified 040/037 receipts are also explicitly covered by the
+new finite 037 authority. No full aggregate PASS is claimed by this handoff.
+
+Fresh source-free framework (including strict completion, schema, runway and
+event receipt adversarial checks), sequence, navigation, agent surface with
+explicit base, surface integration (12 tests), census (211), health (50 manifest
+entries), hardware correspondence (48 tests), and diff checks pass. No Python
+source is changed, so Python syntax validation adds no changed-code target.
+The manifest-only runner refused the uncommitted draft at its clean-worktree
+preflight; it must pass on the clean committed handoff before publication.
+Fresh independent reviewer `c020_handoff_review` returned PASS with no material
+findings after independently checking exact candidate/raw inventory, all 93
+unrelated order objects, nine-path metadata progression, original live-base
+observations, 234 critical entries, strict evidence/artifact identity and
+phase separation. The final committed snapshot is rechecked before publication.
+No checker or firmware code is changed. GP-VAL-037 must separately implement its complete
+candidate and accepted-transition proof, retain all five protected filters,
+run every required current/historical/affected aggregate gate and independent
+review, integrate governance alone, then publish strict DONE. Only then may a
+separate C020 invocation resume the preserved candidate through exact F build,
+RAM/flash/dependency review, artifact custody, safe existing operator protocol,
+independent review, exact hardware PASS and reviewed integration. C020 artifact
+identity/locator remain null and its future hardware gap remains explicit.
+Nunchuk remains NOT_TESTED; root cause remains unproven.
+
+Delegation: complete 241-tool catalog and native collaboration were discovered.
+`c020_source` is a bounded read-only specialist; fresh reviewer
+`c020_handoff_review` owns independent handoff review. The supervisor alone owns all four-document edits,
+validation and publication. No writing peer, user-owned chat or automation was
+created. This invocation ends at the source-free handoff.
