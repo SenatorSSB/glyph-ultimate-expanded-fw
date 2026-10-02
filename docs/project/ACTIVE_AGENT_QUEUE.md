@@ -93,9 +93,9 @@ Git, but it is not current candidate supply or implementation authority.
     ]
   },
   "runway": {
-    "immediate_ready": 3,
+    "immediate_ready": 2,
     "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -909,7 +909,7 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-KBD-001",
       "title": "Release-critical Keyboard pipeline characterization",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-kbd-001-release-safety",
       "objective": "Keyboard is source-default profile 13, USB Profile menu forces DInput; literal SendReport transforms a copy but passes original input to UpdateKeys. Characterization supplies release-relevant evidence without choosing desired behavior.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -956,8 +956,8 @@ Git, but it is not current candidate supply or implementation authority.
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "4fb7c1e9507547774ff9f55cd7788355648d5d1e",
+      "candidate_base_configurator_sha": "328c6a1bfb09eb035c2065d0de080283307f34d6",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -1015,7 +1015,7 @@ Git, but it is not current candidate supply or implementation authority.
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7429,14 +7429,108 @@ Independent read-only source/build-role conformance PASS: these eight paths are 
 
 Each recorded GP-VAL-036 activation condition is objectively met: clean C and direct live-verified B/tree/raw inventory; independent scope PASS and unchanged critical/source/decoder/build dependencies; exact regular source-free paths, clean critical inputs and no failed hardware or invalid accepted-source transition. At this C013 candidate-phase pending snapshot, C was preserved outside canonical; GP-VAL-036 was mechanically `ACTIVATABLE` at the candidate-phase snapshot; the separate source-free activation commit transitioned it to `READY` without changing the adopted scope. Its reviewed implementation `fceebd9793d276480dfa4e72149ecc6e4e383c2c` entered canonical through `aa01750618a50727156881b22a088f1ef55a09d5`; strict `DONE` evidence is published in this later descendant. GP-CONFIG-013 is now `DONE` through exact integration `161dfcf1003f822f5f83014e8b10f426265acb6c` and this later strict completion-correspondence publication.
 
+## GP-KBD-001 candidate handoff and GP-VAL-040 mechanical activation (2026-10-02)
+
+The preserved source-free candidate C is `4fb7c1e9507547774ff9f55cd7788355648d5d1e`, sole direct child of
+live-verified canonical B `328c6a1bfb09eb035c2065d0de080283307f34d6`, tree `a847f1dab9e7918ec49d5dd887b009adf087c87f`.
+Candidate branch: `codex/gp-kbd-001-release-safety`.
+Complete `git diff-tree -r --no-commit-id --no-renames --raw -z B C` inventory
+SHA-256: `f8cc5721ad63f142d535aae73087c9466d1891e3010ea241fd03688aa81f6ad5`. Its full old/new entries follow; additions retain
+the zero old mode/blob rather than an omitted field.
+
+| Exact path | Old mode / blob | New mode / blob |
+| --- | --- | --- |
+| `docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `ea61079fcbb3962b1da9c301de7c3d3867ee4db3` |
+| `docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `66592c2bb5a9c4860d4a72accdab52e72080b8fc` |
+| `docs/runtime_config/fixtures/glyph_checker_census.json` | `100644` / `90fcc213840481b9aa3d5377b3cebb2c7a3b45db` | `100644` / `4b3bb774b374e7679d23637e5d02fc44b3e2de16` |
+| `docs/runtime_config/fixtures/runtime_config_validation_health.json` | `100644` / `0980710700e662410b9d7576e6c76eab8209c493` | `100644` / `debda0716fb59ade80746a48679fdeb92fd45c98` |
+| `docs/runtime_config/fixtures/runtime_config_validation_manifest.json` | `100644` / `4a8f3fde712048ac927b65a8e750f5d2c9433629` | `100644` / `63cb5e66877bf0ee7aba4ef1567ad6e1c7b6001a` |
+| `docs/runtime_config/runtime_config_validation_health.md` | `100644` / `dc33ebc1a508ce74c64b9d7ee065eae5c47b8583` | `100644` / `723426e76a3154de95540e08912081b63d71996b` |
+| `tools/check_glyph_gp_kbd_001_keyboard_pipeline.py` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `fad8c930329b3317ddf7c07bfec725ac1a7f457f` |
+| `tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `4bd11a0168f8f0f2308aefd6f7b2942156c9ba9c` |
+| `tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp` | `000000` / `0000000000000000000000000000000000000000` | `100644` / `d9bbaf7cccd5b35f65b6bd8b0462d78c9bf4fd63` |
+
+Fresh independent native reviewer `kbd_review` returned conformance PASS for
+this exact C/B/tree/raw inventory: nine regular non-executable Git `100644`
+paths, five new host outputs and four coupled manifest/census/health records.
+All 233 critical source/build entries match authorization
+`d9ad6132ca0912398839673cc0da24e54a924210`, B, C and actual working bytes/modes.
+There are no hidden index flags, dirty/staged/untracked or ignored critical
+inputs. The 28 pinned dependency records match Git objects and SHA-256.
+B contains the authority object; required source roots have no missing objects.
+
+Build-role conformance: unchanged Mk6 selectors include `src/`, `HAL/pico/src`,
+`config/glyph/common/src`, and `config/glyph/glyph_mk6`; production include roots
+exclude the new host directory. The unchanged extra script imports only the
+existing integrity helper, which is also unchanged. Host compilation is invoked
+explicitly by the checker in temporary directories. No production source,
+default, schema, decoder, build input or firmware artifact changes.
+
+Focused root and independent replays PASS: 103 input observations, eight
+lifecycle cycles, 118 identity negatives, five executable behavioral mutants
+rejected, and identical AddressSanitizer/UndefinedBehaviorSanitizer observations.
+Census/health, framework, sequence, navigation, agent surface and its twelve
+integration tests, Python syntax and diff checks PASS. The single unmodified recovery aggregate returned 41/45 PASS, all 45 isolated
+proofs MATCH, canonical proof MATCH, and no aggregate failure kind. Its only
+four failures are the predicted GP-VAL-040 unknown/out-of-scope fixture gates
+in GP-CONFIG-010 semantic correspondence, generated-source contract, artifact
+install and coordinate-native contract. Separate before/after diagnostics
+recorded 2,785 components and zero changes. Recovery aggregate SHA-256:
+`71a87a17e4284caad701503a636736764952fd432bfaa73514338f0cc3eda268`.
+
+The literal production pipeline transforms a copy but maps keys from original
+input on the source-supported ordinary USB Keyboard path. This is the bounded
+supported-path finding, with no desired SOCD/gameplay rule or repair selected.
+The exact report in C retains its later Curator repair/disposition requirement.
+Physical effect and controller acceptance remain UNKNOWN; Nunchuk NOT_TESTED,
+root cause unproven. No firmware build, device write, flashing or public release.
+
+GP-KBD-001 remains at REVIEW with immutable C preserved outside canonical.
+GP-VAL-040 is mechanically ACTIVATABLE: direct live-verified parent/tree/raw
+inventory, independent source/build-role conformance, clean object/source
+closure and exact regular host scope satisfy its recorded conditions. Its
+finite classification must preserve critical-first and unknown-path rejection.
+This handoff does not execute GP-VAL-040 or integrate the KBD experiment.
+After GP-VAL-040 DONE, resume the same preserved KBD candidate through affected
+aggregate/review, source-free integration and later strict DONE evidence.
+C020/037 and every other work-order object remain unchanged.
+
+### Distinct historical failures and recovery provenance
+
+The earlier candidate runs reported canonical fingerprint MISMATCH. Preserve
+those observations; original root cause remains UNKNOWN. Original clean-run
+JSON SHA-256 is
+`86a06289802fdb3bc2daae5689b0ce91c268fa0cbc09db4f1334da8e620c3564`.
+Independent Curator source/reviewer diagnosis found no demonstrated runner
+repair: one instrumented current run had 4,159 matching components and only
+the four expected classification failures; diagnostic aggregate SHA-256
+`acb40070d0f1b31c0a2c2370135a82e8591ad84d7a80f328518abb48efa6e85a`.
+That evidence enabled this separate exact-C recovery invocation under the
+existing KBD lifecycle. The recovery ran the unchanged production runner once,
+with writes paused, bytecode disabled and optional Git locks disabled. Its
+runner SHA-256 remains
+`a28d4a21fc88fb36248bca36a3e8da5da980122ac2c9253ff0f0e530e6841b52`.
+No gate, timeout, checker or source byte was changed or waived. Current MATCH
+does not rewrite either original failure or establish its cause.
+
+Fresh native `kbd_recovery_preflight` verified the exact C/B/tree/raw inventory,
+233 critical entries, 28 source dependencies and closed source roots before
+stopping all repository access for the run. Fresh independent native reviewer `kbd_handoff_review` returned PASS for this
+four-doc source-free handoff and authenticated recovery evidence. It independently
+verified the exact four expected failures, all 45 isolated MATCH proofs, canonical
+MATCH, zero changes among 2,785 diagnostic components, unchanged candidate and
+all unrelated work-order objects, and framework/sequence/navigation/surface/diff
+gates. No material findings remained; this receipt grants no candidate integration,
+Keyboard repair or hardware acceptance.
+
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

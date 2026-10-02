@@ -80,12 +80,14 @@ automation from this context document.
 ## Forward Plan
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-KBD-001","GP-CONFIG-019"],"immediate_ready":3,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-KBD-001, GP-CONFIG-019; Immediate Ready: 3; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
+
+GP-KBD-001 preserves reviewed source-free candidate `4fb7c1e9507547774ff9f55cd7788355648d5d1e` at the GP-VAL-040 gate. The exact-C recovery aggregate has canonical and isolated proofs MATCH with only four expected path-classification failures; earlier fingerprint failures remain historical with cause UNKNOWN. GP-VAL-040 is mechanically ACTIVATABLE, while KBD remains REVIEW outside canonical. No Keyboard repair, SOCD policy or physical acceptance is selected. C020/037, USB023/042 and GLYPH-UD-026 remain unchanged.
 
 GP-VAL-036 is `DONE` through exact source-free correspondence. GP-CONFIG-013 is now `DONE` through integration `161dfcf1003f822f5f83014e8b10f426265acb6c` and strict completion correspondence. Its characterization establishes that a missing or invalid USB default can leave the production local destination unwritten before downstream `backend_id` use in source-supported USB paths. This is a source-level safety finding; runtime outcome and physical behavior remain UNKNOWN. GLYPH-UD-026 now settles required one-based index rejection without fallback/type policy. Curator 1701 appends gated GP-CONFIG-023/GP-VAL-042 after 022/039 exact DONE/PASS; no new source or physical acceptance is claimed. C020/VAL037 rejected handoff remains excluded and unchanged.
 
