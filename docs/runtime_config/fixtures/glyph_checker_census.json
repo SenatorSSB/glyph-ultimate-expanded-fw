@@ -483,7 +483,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 167296,
+      "file_size_bytes": 171428,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -542,7 +542,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 3556,
+      "line_count": 3634,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -664,7 +664,7 @@
         "artifact_custody_provenance",
         "hardware_evidence_contracts"
       ],
-      "sha256": "a62d25ba63ff1e17c2082c8c25509da7cb9b41780623abcf904ab27eb8de2093",
+      "sha256": "1d4f5c2651bbbce167463d06650c834035c4bda5288a48baac7e273536171522",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

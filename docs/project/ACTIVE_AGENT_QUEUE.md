@@ -22,17 +22,17 @@ Git, but it is not current candidate supply or implementation authority.
   "audit_base_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": true,
-    "trigger": "GP-VAL-040 requires Curator scope amendment: the inherited GP-VAL-036 three-file correspondence surface cannot resolve the three independent feature-scope allowlists rejecting the exact GP-KBD-001 calibration report and fixture. No source or candidate drift; no checker expansion authorized.",
-    "resolution": null,
+    "pending": false,
+    "trigger": null,
+    "resolution": "GP-VAL-040 scope invalidation is fully adjudicated: reauthorized finite three-checker/two-host-literal allowance and exact composed rejection tests, with immutable post-opening receipt. Separate GP-VAL-040 implementation and strict DONE remain required before KBD resumption. No outstanding Curator subject remains; original stop/fingerprint evidence retained, no source/product/hardware authority expansion.",
     "provenance": {
       "opened_by_role": "Glyph Implementation Supervisor",
       "opening_reference": "git-json:cbd8b2fab4ca9558d6483564262a4ab9b0a8a69a:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
         "GP-VAL-040"
       ],
-      "resolved_by_role": null,
-      "resolution_reference": null
+      "resolved_by_role": "Glyph Work-Order Curator",
+      "resolution_reference": "git-json:a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58:docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json"
     }
   },
   "planner_packet": {
@@ -93,11 +93,11 @@ Git, but it is not current candidate supply or implementation authority.
   },
   "runway": {
     "immediate_ready": 2,
-    "recorded_preauthorized": 12,
-    "mechanically_activatable_preauthorized": 0,
-    "invalidated_preauthorized": 1,
+    "recorded_preauthorized": 13,
+    "mechanically_activatable_preauthorized": 1,
+    "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -967,37 +967,39 @@ Git, but it is not current candidate supply or implementation authority.
     {
       "id": "GP-VAL-040",
       "title": "Keyboard host finite correspondence",
-      "status": "INVALIDATED_PREAUTHORIZED",
+      "status": "PREAUTHORIZED",
       "branch": "codex/gp-val-040-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H1",
       "behavioral_claim": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
-      "scope": "### GP-VAL-040 — Keyboard host finite correspondence\n\nAdopt only the bounded contract below. Same closed algorithm as 036, exact Ckbd/Bkbd\nclean path/mode/blob inventory, zero firmware/build delta, independent host/build\nscope review, production hash/decoder invariants unchanged. Only exact new host\npaths and self/coupled metadata enter NON_BEHAVIORAL_PATHS; critical-first and\nunknown/mode/lookalike rejection remain. Full affected aggregate, independent\nreview and strict DONE after integration. No product or keyboard fix authority.\n\nShared adopted finite algorithm/consumer/negative matrix applies. Closed source chain is 020 -> 014 -> 017 -> 021 -> 022; each extension belongs only to its separate order. Reserve predecessor literal hardware triple if H3. Include exact transaction-proof consequence for 037/038/039 and KBD/019/menu proof overlays as named in 0151. Never silently reseal source hashes.",
+      "scope": "### GP-VAL-040 — Keyboard host finite correspondence\n\nAdopt only the bounded contract below. Same closed algorithm as 036, exact Ckbd/Bkbd\nclean path/mode/blob inventory, zero firmware/build delta, independent host/build\nscope review, production hash/decoder invariants unchanged. Only exact new host\npaths and self/coupled metadata enter NON_BEHAVIORAL_PATHS; critical-first and\nunknown/mode/lookalike rejection remain. Full affected aggregate, independent\nreview and strict DONE after integration. No product or keyboard fix authority.\n\nShared adopted finite algorithm/consumer/negative matrix applies. Closed source chain is 020 -> 014 -> 017 -> 021 -> 022; each extension belongs only to its separate order. Reserve predecessor literal hardware triple if H3. Include exact transaction-proof consequence for 037/038/039 and KBD/019/menu proof overlays as named in 0151. Never silently reseal source hashes.\n\n2026-10-03 event-specific finite scope amendment (supersedes only the inherited three-file edit-surface limit for GP-VAL-040):\n1. In the existing main() validate_feature_scope call of each of the following three checkers, add ONLY these two entries to the existing allowed_paths tuple (no slash-ended prefix or generalized matcher):\ntools/check_glyph_generated_source_owned_generator_contract.py\ntools/check_glyph_generated_source_owned_artifact_install.py\ntools/check_glyph_coordinate_native_runtime_profile_contract.py\nHost literals:\ndocs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json\ndocs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md\nPreserve each call's protected_prefixes/protected_components, ancestry/base requirements and every existing content/schema/generator/installer/offline/export/forbidden-capability check. Do not rewrite unused legacy validate_changed_paths functions or change branch policy, shared glyph_checker_context.py implementation, loader/runner, build/source filters or source/hash observations.\n2. Explicit finite regression edit authority: tools/check_glyph_checker_context.py and tools/test_glyph_hardware_correspondence.py. Exercise each actual main() scope call, not only duplicated allowlist constants. Prove both normal literals together/individually allowed; neighboring/.bak/unknown paths rejected; protected HAL/backend/config.pb/storage/write paths remain rejected even beside allowed host files. Do not assert feature matching rejects case aliases or modes: its existing casefold semantics and lack of mode checks remain unchanged. Mandatory composed strict-correspondence tests reject case/lookalike aliases, unclassified adjacent files, renamed/deleted candidate inventory substitution, executable 100755, symlink 120000, gitlink 160000, dirty/staged/untracked/ignored critical inputs and attempted allowlist downgrade of critical source/build. Modes/types and alias rejection are composition obligations, never waived by feature allowlisting. Pin current C host blob identities and preserve immutable experiment observations; no resealing or arbitrary candidate inventory trust.\n3. Retain original finite tools/glyph_hardware_correspondence.py NON_BEHAVIORAL_PATHS, tools/test_glyph_hardware_correspondence.py and docs/agent_framework/HARDWARE_CORRESPONDENCE.md implementation scope. Authenticate the exact nine-path C inventory (five host additions, four existing coupled metadata modifications) with raw old/new modes/blobs/paths and all critical entry equality. Add only inventory-proven unclassified C paths and these exact new governance consequences where unclassified: the three named checkers; tools/check_glyph_checker_context.py; tools/check_glyph_agent_framework_docs.py for the already reviewed Curator opening-event control-plane correction only; docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json. Their literal regular 100644/nonexecuting build roles must be independently established; critical precedence stays first, unknown entries fail, no prefix/category exemption. This grants GP-VAL-040 no edits to framework checker or receipt; bind the already committed reviewed bytes. Existing coupled records are limited to docs/project/ACTIVE_AGENT_QUEUE.md, docs/AGENT_CONTEXT.md, docs/CURRENT_STATE.md, docs/ROADMAP.md, docs/runtime_config/fixtures/runtime_config_validation_manifest.json, docs/runtime_config/fixtures/glyph_checker_census.json, docs/runtime_config/fixtures/runtime_config_validation_health.json and docs/runtime_config/runtime_config_validation_health.md. Add the three actual checker files to the existing checker_context manifest source_dependencies only if required by the new consumer tests; unchanged current applicability and no test omission. Deterministic census/health regeneration only where genuinely required.\n4. Preserve C 4fb7c1e9507547774ff9f55cd7788355648d5d1e/B 328c6a1bfb09eb035c2065d0de080283307f34d6/tree a847f1dab9e7918ec49d5dd887b009adf087c87f and raw inventory SHA-256 f8cc5721ad63f142d535aae73087c9466d1891e3010ea241fd03688aa81f6ad5. No replay/rebase or candidate edits. All 28 pinned dependencies and234 current critical entries equal B/C/currentcanonical. The immutable event opening cbd8b2fab4ca9558d6483564262a4ab9b0a8a69a and receipt a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58 are permitted finite source-free metadata progression only; do not refresh candidate B identity. Original fingerprint failures/UNKNOWN cause and later canonical/isolated MATCH recovery remain distinct historical observations.\n5. Full affected isolated aggregate and fresh independent implementation review remain mandatory. Demonstrate source-free GP-VAL-040 governance snapshot and exact preserved-C composition using temporary validation snapshots with finite roots; current and historical strict correspondence and all five protected scopes must pass without omitted entries. Never interpret four expected pre-040 failures as aggregate PASS. Strict DONE follows reviewed live source-free GP-VAL-040 integration; only then a separate invocation resumes exact KBD C under its existing gates. No Keyboard repair/policy decision, physical acceptance, firmware/device/write/flashing/public-release action or C020/037 rejected handoff authority.\n",
       "explicit_excluded_scope": "No firmware/build/source changes under an H1 order. No scope beyond exact named H3 repair. No runtime-loaded profile/config, RuntimeConfigView/active publication change, new device/WebSerial/protobuf/backend writer, flashing automation, storage format/power-loss recovery redesign, Senscope/game semantics, official Configurator compatibility, Nunchuk or root-cause claim. No GP-VAL-011 reopening, blanket source exemption, branch-name authority, historical evidence rewrite, fallback/USB/naming/Keyboard/rebind policy invention.",
       "touched_planes": [
         "validation infrastructure",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022–025; source evidence only, no new hardware acceptance.",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022–025; source evidence only, no new hardware acceptance. Current independent event review at c6427a35cb8bb5081fcce7d6502eb8357fac08ba; exact KBD C/B/tree/raw inventory above; all 28 source/dependency modes/blob/SHA256 and 234 critical entries equal B/C/H. Three current main() validate_feature_scope calls and shared matching/correspondence source independently reviewed; opening cbd8b2fab4ca9558d6483564262a4ab9b0a8a69a, event receipt a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58:docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json.",
       "dependencies_prerequisites": [
         "Preserve the exact committed GP-KBD-001 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
-      "substantive_authorization_rationale": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
+      "substantive_authorization_rationale": "Independent Curator verified the two regular 100644 host additions are required outputs of authorized KBD characterization outside production build selection. Exact source proves three independent current feature-scope calls need these two literals; inherited GP-VAL-036 implementation scope was insufficient. The finite amendment resolves validation edit/test authority now, preserving protected/critical precedence and strict modes/aliases via composed gates; no product or Keyboard semantics are selected.",
       "mechanical_activation_conditions": [
         "GP-KBD-001 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-KBD-001 scope; expected full-aggregate failure does not bar candidate creation.",
         "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
-        "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
+        "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded.",
+        "Reverify the committed exact KBD C/B/tree/raw nine-path 100644 inventory, all 28 pinned dependencies and 234 critical entries, closed consumed object roots, clean working/index/ignored critical state and current source-free progression. Current event receipt resolves only the proven three-checker validation-surface gap. Any contradiction returns new bounded curation; no unreviewed scope expansion."
       ],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
         "Hardware FAIL, invalid predecessor acceptance, unsafe/unavailable required physical recovery/operator route, candidate replay/rebase or changed critical C-to-F bytes."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract. Reauthorized by independent Curator on 2026-10-03 under immutable post-opening event receipt git-json:a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58:docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json. Later adoption clears only this scope event. Amendment is explicit implementation authority for separate GP-VAL-040 invocation, not implementation/DONE.",
       "automated_validation": [
         "Apply the exact local scope validation matrix plus adopted finite algorithm and all negative controls. Authenticate literal production bodies/schema/decoder, old versus current observations, omission/one-byte substitution and modes; retain historical 005/010/011/012/016 and accepted Ultimate/X1 table/source authority. No silent hash reseal.",
-        "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate."
+        "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate.",
+        "Run finite actual-consumer tests in checker_context and strict correspondence mode/alias/critical negatives, each three-checker full content validation, current/historical GP-CONFIG-010 and frozen KBD proof, manifest/census/health, framework/sequence/navigation/surface/integration, syntax/diff and full affected isolated aggregate on exact governance and composed preserved-C snapshots. Regular100644 governance roles and unchanged 234 critical production entries independently reviewed. No gate waiver or historical hash reseal."
       ],
       "canonical_build": "NOT_REQUIRED: source-free H1 governance/characterization; stop on firmware/build change.",
       "expected_artifact": "NOT_APPLICABLE",
@@ -1008,14 +1010,14 @@ Git, but it is not current candidate supply or implementation authority.
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": "Exact finite reviewed source-free governance diff, original C/B/tree/raw inventory conformance and closed object proof; focused consumer/strict correspondence negatives; full affected aggregate with canonical/isolated MATCH; independent review and reviewed live integration; later strict DONE correspondence. Temporary composed-C validation preserves all KBD critical bytes and observations. No actual KBD integration is prerequisite to GP-VAL-040 DONE; separate KBD resumption follows GP-VAL-040 DONE.",
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "INVALIDATED",
-      "activation_requires_new_judgment": true,
+      "activation_state": "ACTIVATABLE",
+      "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -7572,11 +7574,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":1,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 1; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -8350,3 +8352,37 @@ actual F023 build/custody/PASS during023 resumption. Reviewed pre-record diff
 SHA-256 `a8b4ae0ffcb6c920e8c8349dc6dfea4395c0656ee66be2ca79a7d2fb61be8fe5`;
 no outstanding findings. Final control-plane gates and live publication remain
 root responsibilities. No checker/test edits, firmware, build or hardware result.
+
+## 2026-10-03 GP-VAL-040 event resolution
+
+Independent Curator resolved only the finite validation-scope event opened at
+`cbd8b2fab4ca9558d6483564262a4ab9b0a8a69a`; immutable receipt
+`a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58` at `docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json` precedes this adoption.
+The complete amended GP-VAL-040 order names the exact three main() feature allowlist
+calls, two host literals and bounded consumer/composed regression test surfaces.
+It does not implement those edits. The current state follows the machine marker;
+all other work-order objects, consumed Planner receipt, completion evidence,
+C020/037, USB023/042 and owner026 remain unchanged. KBD exact C remains REVIEW,
+unmerged and unmodified; only separate GP-VAL-040 strict DONE enables its resumption.
+The earlier fingerprint failures and later MATCH recovery retain separate scope;
+root cause remains UNKNOWN. No new Keyboard/game/backend behavior is selected.
+
+Coupled Curator framework-control correction: resolved reauthorization authenticates
+its immutable opening event and post-opening receipt even after current status
+ceases to be invalidated. Preserve subject/kind/ancestry/regular-mode validation
+and rejection of old packet receipts. Focused event-opening and stale/mismatched
+receipt negatives accompany this exact intended control-plane transition.
+No changes to the three feature checkers or shared context/correspondence helpers
+are performed by Curator. This receipt/adoption/framework consequence is the
+finite source-free metadata progression named in amended GP-VAL-040, not a source grant
+for any earlier/later campaign order.
+
+Delegation: current Curator guidance applies; complete 241-tool functions catalog
+and native collaboration discovered. val040_scope_source independently verified
+actual consumer calls, candidate/build/dependency identities and composed mode/
+alias boundaries. Root retains authorization and mutation; fresh independent
+review by val040_amendment_review passed without material findings, including
+focused event-resolution tests and the complete framework checker. The generated
+census refresh changes only this framework entry's size, line count and SHA-256.
+No user-owned chat or automation was created. Final gates and live publication
+remain root responsibilities.

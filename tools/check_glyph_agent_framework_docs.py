@@ -573,6 +573,48 @@ def _queue_block_from_text(raw: str, label: str) -> dict[str, object]:
     return payload
 
 
+def _opening_event_subject_kinds(
+    opening_reference: str,
+    subject_ids: set[str],
+    repo_root: Path = REPO_ROOT,
+) -> dict[str, str]:
+    """Bind resolved events to their immutable opening, even after reauthorization."""
+    match = EVENT_CURATION_OPENING_RE.fullmatch(opening_reference)
+    if match is None:
+        fail("event opening requires an immutable queue reference")
+    opening_commit = match.group(1)
+    _require_commit_sha(opening_commit, "curation obligation opening commit", repo_root)
+    _git_tree_entry(
+        opening_commit, "docs/project/ACTIVE_AGENT_QUEUE.md", "event opening queue", repo_root,
+    )
+    opening = _queue_block_from_text(
+        _git(repo_root, "show", f"{opening_commit}:docs/project/ACTIVE_AGENT_QUEUE.md"),
+        "curation obligation opening snapshot",
+    )
+    obligation = opening.get("curation_obligation")
+    if not isinstance(obligation, dict) or obligation.get("pending") is not True:
+        fail("event opening snapshot must carry a pending obligation")
+    provenance = obligation.get("provenance")
+    subjects = provenance.get("subject_ids") if isinstance(provenance, dict) else None
+    if (not isinstance(subjects, list) or not all(isinstance(value, str) for value in subjects)
+            or len(subjects) != len(set(subjects)) or set(subjects) != subject_ids):
+        fail("event opening must bind the exact unique subjects")
+    items = opening.get("items")
+    if not isinstance(items, list):
+        fail("event opening snapshot must contain queue items")
+    kinds: dict[str, str] = {}
+    for item in items:
+        if not isinstance(item, dict) or item.get("id") not in subject_ids:
+            continue
+        identity, kind = item["id"], item.get("status")
+        if identity in kinds or kind not in {"INVALIDATED_PREAUTHORIZED", "HARDWARE_FAILED"}:
+            fail("event opening must contain each exact invalidation/failure kind once")
+        kinds[identity] = kind
+    if set(kinds) != subject_ids:
+        fail("event opening omitted a required subject")
+    return kinds
+
+
 def _event_curation_resolution_subjects(
     reference: object,
     opening_reference: object,
@@ -725,6 +767,34 @@ def check_event_curation_resolution_self_test() -> None:
         )
         if subjects != {"GP-TEST-001"}:
             fail("valid post-opening event Curator receipt lost subject identity")
+
+        # Reauthorization removes the current failure status, not its event.
+        kinds = _opening_event_subject_kinds(opening_reference, {"GP-TEST-001"}, repo)
+        if kinds != {"GP-TEST-001": "HARDWARE_FAILED"}:
+            fail("reauthorized event lost its immutable opening kind")
+        validate_curation_event_binding(
+            pending=False, subject_ids={"GP-TEST-001"}, event_subject_ids=set(kinds),
+            packet_subject_ids=set(), resolution_reference=resolution_reference,
+            expected_resolution_reference="older packet receipt", receipt_subject_ids=set(),
+            event_receipt_subject_ids=_event_curation_resolution_subjects(
+                resolution_reference, opening_reference, kinds, repo,
+            ),
+        )
+        for label, reference, expected_subjects in (
+            ("pre-event nonpending snapshot",
+             f"git-json:{_git(repo, 'rev-parse', opening_commit + '^').strip()}:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+             {"GP-TEST-001"}),
+            ("wrong opening subject", opening_reference, {"GP-OTHER-001"}),
+            ("omitted opening subject", opening_reference, set()),
+            ("missing opening commit", "git-json:" + "0" * 40 + ":docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+             {"GP-TEST-001"}),
+        ):
+            try:
+                _opening_event_subject_kinds(reference, expected_subjects, repo)
+            except (FrameworkDocsError, subprocess.CalledProcessError):
+                pass
+            else:
+                fail(f"reauthorized event opening adversarial fixture passed: {label}")
 
         stale_reference = (
             f"git-json:{opening_commit}:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
@@ -2348,6 +2418,14 @@ def check_queue_contract() -> None:
         for item in items
         if item["status"] in {"INVALIDATED_PREAUTHORIZED", "HARDWARE_FAILED"}
     }
+    if not curation_pending and EVENT_CURATION_OPENING_RE.fullmatch(
+        obligation_provenance["opening_reference"]
+    ):
+        # Current statuses may have been reauthorized. The immutable event still
+        # requires its own post-opening receipt; retain any other live events.
+        event_subject_kinds.update(_opening_event_subject_kinds(
+            obligation_provenance["opening_reference"], set(obligation_subject_ids),
+        ))
     event_subject_ids = set(event_subject_kinds)
     packet_subject_ids = (
         {
