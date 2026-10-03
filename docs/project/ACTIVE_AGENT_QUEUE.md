@@ -96,9 +96,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 1,
+    "mechanically_activatable_preauthorized": 2,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -197,7 +197,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-020",
       "title": "Actual-binding rejection: target ABI repair",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-config-020-abi-repair",
       "objective": "Repair the false four-byte Button representation assertions without changing complete-object validation, named domain, enum/schema/build flags or SetConfig transaction semantics; create a new exact reviewed H3 candidate.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -209,7 +209,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "firmware runtime",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. New exact current base 38017600deb243b5e281edec6d0d378b997d9e40, immutable1256 packet and receipt; originalC source and actual failed target compile diagnostics authenticate this bounded amendment. \n\nGitHub configurator live-verifies as `38017600deb243b5e281edec6d0d378b997d9e40`,\ntree `3d3f1e727929cce292beabfc4488783d5bc6a6a6`. Ordinary read first failed sandbox\nDNS; identical permitted network-enabled read succeeded. No authentication\nchange. Main checkout clean; planning occurs in a separate worktree.\n\n| Preserved object | Exact identity |\n| --- | --- |\n| Original C020 | `256bf44cea71f6d5c87aa1675c8dac9f6b79259f` |\n| Original parent B020 | `3dac79dac4eefcf832510817e8cb5ecd6a27f219` |\n| Original tree | `45831eeb88ece9c8b293e2e819ee5ecb362b64ec` |\n| Original branch | `codex/gp-config-020-release-safety`, live unchanged |\n| Original raw inventory SHA-256 | `7197560406157c5a43963157f79a010dec424553db7f14235859fab42278e27c` |\n| Failed build F | `0a5dd751c391198140ed146853a69fc825d902c7` |\n| Failed F parent | `5c7a716728414e38eb136b0ca56bc2fb9781135d` |\n| Failed F tree | `2245b07e86264991561909c0406d7211fc7296a4` |\n| F preservation | `/private/tmp/glyph-c020-built-f`, local only, no UF2 |\n| GP-VAL-037 | DONE; source-free integration `caf0718472c7752c78838be6f1d48b56932d90b9`, strict completion at live base |\n\nActual `pio run -e glyph_mk6` fails at\n`src/core/config_button_validation.cpp:32\u201335`: comparisons reduce to1==4 and32==8.\nOriginal eight C paths remain identical in F. Selected arm-none-eabi-g++12.3.0\npackage5.120300.240127 reports short enums enabled by default. Actual generated\nheader SHA-256 `bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323`\nmatches authenticated tracked fixture. This is an incorrect source/host ABI\nassumption, not demonstrated dependency drift. platformio.ini:39 explicitly\nsets short enums for AVR; that section is not Pico. Do not change build flags.\n\nRead `/private/tmp/glyph-c020-build-evidence/worker-result.json`,\n`source-build-blocker.json`, `firmware-build.log`, `independent-review.json`,\noriginal C/F source, current queue/context/correspondence/runner and coupled\nharnesses. Local diagnostic hashes, respectively for blocker/build log/review:\n`e0f8b73d7c9fd160e858d633873efb2e9f2b081d6eb23c385ce70f40c180c4bd`,\n`a181771837d73b24787b14a3bf324d6458ffd1560612b10e03e59da24c6839e8`,\n`9b4e67dc8dc253604ec90c4e6f0dc12c5ccaaff85e35e7c1a0a2952006f1f880`.\nThese are diagnostics, not immutable canonical hardware acceptance.\nFinal F aggregate46/46 and canonical/isolation MATCH are retained separately\nfrom earlier CANONICAL_REPOSITORY_MUTATION failure, whose cause is UNKNOWN.\nAdditional semantic synthetic transition suite failed because F was used as a\nsource-free fixture base despite containing C source. Preserve that failed run;\nno PASS or gate waiver. No RAM/flash, complete postbuild dependency proof, UF2,\ncustody, hardware pending or physical FAIL. Nunchuk NOT_TESTED; root cause of\nphysical behavior unproven.\n\n## Exact source choice\n\nExisting `valid_button(const Button&)` at source51\u201361 and remap-disable64\u201367\nalready compare full object bytes via memcmp and sizeof(Button), before any\nuntrusted typed enum read. Preserve this algorithm. Replace false four-byte\nassertions/comments and coupled tests with authenticated representation proof.\nNo new integer conversion, enum ABI, schema, domain or product semantics.\n\nGenerated Button fields are UENUM; Nanopb pb.h:863 maps UENUM to UVARINT.\npb.h:682\u2013687 derives descriptor data_size from actual member/element sizeof.\npb_decode.c:1462\u20131485 writes a size-selected unsigned destination, THEN tests\noverflow. Partial candidate bytes can change on decodefalse. IS_8 options are\nnot an independent byte cap on enum storage under every compiler. One-byte\nPico permits wire0..255 storage; wire256/300/UINT64_MAX overflows decode, possibly\nafter writing narrowed bytes. Ordinary host4 can differ; final validation must\nreject unsupported values in either layout. Never truncate wire values into\naccepted low IDs or publish after failed decode.\n\nChosen representation assertions: CHAR_BIT8, enum type, unsigned underlying\ntype, no padding (underlying digits equals sizeof(Button)*CHAR_BIT), verified\nwidth1 or4, unchanged exact named enumerator completeness. Separate target\nproof enforces actual Mk6 width1; host4 is portability evidence, never Pico\nproof. Unknown signedness/padding/width/layout returns CURATION_REQUIRED.\nReject alternatives: changing flags/schema/ABI, removing all proof assertions,\nreading/casting invalid enums before checking, or clamping/sanitizing values.\n\n",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. New exact current base 38017600deb243b5e281edec6d0d378b997d9e40, immutable1256 packet and receipt; originalC source and actual failed target compile diagnostics authenticate this bounded amendment. \n\nGitHub configurator live-verifies as `38017600deb243b5e281edec6d0d378b997d9e40`,\ntree `3d3f1e727929cce292beabfc4488783d5bc6a6a6`. Ordinary read first failed sandbox\nDNS; identical permitted network-enabled read succeeded. No authentication\nchange. Main checkout clean; planning occurs in a separate worktree.\n\n| Preserved object | Exact identity |\n| --- | --- |\n| Original C020 | `256bf44cea71f6d5c87aa1675c8dac9f6b79259f` |\n| Original parent B020 | `3dac79dac4eefcf832510817e8cb5ecd6a27f219` |\n| Original tree | `45831eeb88ece9c8b293e2e819ee5ecb362b64ec` |\n| Original branch | `codex/gp-config-020-release-safety`, live unchanged |\n| Original raw inventory SHA-256 | `7197560406157c5a43963157f79a010dec424553db7f14235859fab42278e27c` |\n| Failed build F | `0a5dd751c391198140ed146853a69fc825d902c7` |\n| Failed F parent | `5c7a716728414e38eb136b0ca56bc2fb9781135d` |\n| Failed F tree | `2245b07e86264991561909c0406d7211fc7296a4` |\n| F preservation | `/private/tmp/glyph-c020-built-f`, local only, no UF2 |\n| GP-VAL-037 | DONE; source-free integration `caf0718472c7752c78838be6f1d48b56932d90b9`, strict completion at live base |\n\nActual `pio run -e glyph_mk6` fails at\n`src/core/config_button_validation.cpp:32\u201335`: comparisons reduce to1==4 and32==8.\nOriginal eight C paths remain identical in F. Selected arm-none-eabi-g++12.3.0\npackage5.120300.240127 reports short enums enabled by default. Actual generated\nheader SHA-256 `bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323`\nmatches authenticated tracked fixture. This is an incorrect source/host ABI\nassumption, not demonstrated dependency drift. platformio.ini:39 explicitly\nsets short enums for AVR; that section is not Pico. Do not change build flags.\n\nRead `/private/tmp/glyph-c020-build-evidence/worker-result.json`,\n`source-build-blocker.json`, `firmware-build.log`, `independent-review.json`,\noriginal C/F source, current queue/context/correspondence/runner and coupled\nharnesses. Local diagnostic hashes, respectively for blocker/build log/review:\n`e0f8b73d7c9fd160e858d633873efb2e9f2b081d6eb23c385ce70f40c180c4bd`,\n`a181771837d73b24787b14a3bf324d6458ffd1560612b10e03e59da24c6839e8`,\n`9b4e67dc8dc253604ec90c4e6f0dc12c5ccaaff85e35e7c1a0a2952006f1f880`.\nThese are diagnostics, not immutable canonical hardware acceptance.\nFinal F aggregate46/46 and canonical/isolation MATCH are retained separately\nfrom earlier CANONICAL_REPOSITORY_MUTATION failure, whose cause is UNKNOWN.\nAdditional semantic synthetic transition suite failed because F was used as a\nsource-free fixture base despite containing C source. Preserve that failed run;\nno PASS or gate waiver. No RAM/flash, complete postbuild dependency proof, UF2,\ncustody, hardware pending or physical FAIL. Nunchuk NOT_TESTED; root cause of\nphysical behavior unproven.\n\n## Exact source choice\n\nExisting `valid_button(const Button&)` at source51\u201361 and remap-disable64\u201367\nalready compare full object bytes via memcmp and sizeof(Button), before any\nuntrusted typed enum read. Preserve this algorithm. Replace false four-byte\nassertions/comments and coupled tests with authenticated representation proof.\nNo new integer conversion, enum ABI, schema, domain or product semantics.\n\nGenerated Button fields are UENUM; Nanopb pb.h:863 maps UENUM to UVARINT.\npb.h:682\u2013687 derives descriptor data_size from actual member/element sizeof.\npb_decode.c:1462\u20131485 writes a size-selected unsigned destination, THEN tests\noverflow. Partial candidate bytes can change on decodefalse. IS_8 options are\nnot an independent byte cap on enum storage under every compiler. One-byte\nPico permits wire0..255 storage; wire256/300/UINT64_MAX overflows decode, possibly\nafter writing narrowed bytes. Ordinary host4 can differ; final validation must\nreject unsupported values in either layout. Never truncate wire values into\naccepted low IDs or publish after failed decode.\n\nChosen representation assertions: CHAR_BIT8, enum type, unsigned underlying\ntype, no padding (underlying digits equals sizeof(Button)*CHAR_BIT), verified\nwidth1 or4, unchanged exact named enumerator completeness. Separate target\nproof enforces actual Mk6 width1; host4 is portability evidence, never Pico\nproof. Unknown signedness/padding/width/layout returns CURATION_REQUIRED.\nReject alternatives: changing flags/schema/ABI, removing all proof assertions,\nreading/casting invalid enums before checking, or clamping/sanitizing values.\n\n\n\n2026-10-03 ABI repair handoff: clean published C_R `3138ade526cabde23a0abedcb94acae8512579d1`, direct B_R `0f7fe50b3b5f385397a9737bc4c0a50ddda683c8`, tree `67a4edd29bcd4c0adfd3ea52790d9a31293f6036`, complete eleven regular100644 paths, raw NUL inventory SHA-256 `e3fcf78810c251f1d72f61bcb736075593b489293edd5d42b7c84c4eb1c81864`. Original C256bf and failed F0a5dd remain unchanged. Source conformance PASS: baseline234 critical entries equal B020; only the three authorized firmware paths differ; handler/header/stub identical to original C and helper executable algorithm/domain/counts unchanged. Both consistent host ABI modes PASS with all12 descriptor classes and required negative controls. Postcommit actual Mk6 GCC12.3.0 object-only proof PASS: Button1/align1, Config26792/align4, all82 C/C++ layout values equal; actual generated/Nanopb include edges and dependencies authenticated. Target result SHA-256 `56fb8ad66c51ea4725a35f4fe9401085a71d3f64650006036282b683660a4259`. Fresh independent exact source/build review PASS with no findings. Complete evidence is in the source-free handoff section below and candidate reports; no self-SHA rewrite. Original037 refuses the exact three new proof paths as predicted; only043 may extend its finite contract. No full link, UF2, custody, hardware pending/PASS, source integration or device action. Earlier fingerprint UNKNOWN and wrong-context synthetic FAIL retained; first target-proof parser failure and overwritten-log limitation recorded without claiming its logs survived.",
       "dependencies_prerequisites": [
         "Create a clean separate new candidate C_R directly from fresh source-free adopted canonical B_R; preserve originalC256bf/F0a5dd and037DONE. Current critical234 baseline must equal authenticated B020 except the three authorized source deltas; schema/default/domain/decoder/build inputs unchanged.",
         "New exact11 path/mode/blob conformance, dual ABI host PASS, postcommit actual selected-target diagnostic object compile PASS and fresh independent source/build review precede source-free handoff to043. No modification of frozen C_R reports to add self-SHA execution evidence.",
@@ -247,15 +247,15 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "3138ade526cabde23a0abedcb94acae8512579d1",
+      "candidate_base_configurator_sha": "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "New exact C_R/F_R, full build/dependency/RAM/flash, UF2 custody and processor-accepted physical PASS not produced. Original F compile failed; no UF2 or physical FAIL."
+        "GP-VAL-043 separate reviewed source-free implementation and strict DONE pending; then exact composed F_R full build/dependency/RAM/flash, UF2 custody, independent review and processor-accepted human physical PASS required. Early object-only compile and host proofs are not firmware/hardware acceptance."
       ]
     },
     {
@@ -7469,7 +7469,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "validation infrastructure",
         "docs/checkers"
       ],
-      "source_authority": "Exact canonical 38017600deb243b5e281edec6d0d378b997d9e40 and immutable1256 packet76cb953cd6bfe5398db11669f3d195175361700c; reviewed originalC/F/source/decoder diagnostics, current037 source-free DONE and literal finite annex. \n\nGitHub configurator live-verifies as `38017600deb243b5e281edec6d0d378b997d9e40`,\ntree `3d3f1e727929cce292beabfc4488783d5bc6a6a6`. Ordinary read first failed sandbox\nDNS; identical permitted network-enabled read succeeded. No authentication\nchange. Main checkout clean; planning occurs in a separate worktree.\n\n| Preserved object | Exact identity |\n| --- | --- |\n| Original C020 | `256bf44cea71f6d5c87aa1675c8dac9f6b79259f` |\n| Original parent B020 | `3dac79dac4eefcf832510817e8cb5ecd6a27f219` |\n| Original tree | `45831eeb88ece9c8b293e2e819ee5ecb362b64ec` |\n| Original branch | `codex/gp-config-020-release-safety`, live unchanged |\n| Original raw inventory SHA-256 | `7197560406157c5a43963157f79a010dec424553db7f14235859fab42278e27c` |\n| Failed build F | `0a5dd751c391198140ed146853a69fc825d902c7` |\n| Failed F parent | `5c7a716728414e38eb136b0ca56bc2fb9781135d` |\n| Failed F tree | `2245b07e86264991561909c0406d7211fc7296a4` |\n| F preservation | `/private/tmp/glyph-c020-built-f`, local only, no UF2 |\n| GP-VAL-037 | DONE; source-free integration `caf0718472c7752c78838be6f1d48b56932d90b9`, strict completion at live base |\n\nActual `pio run -e glyph_mk6` fails at\n`src/core/config_button_validation.cpp:32\u201335`: comparisons reduce to1==4 and32==8.\nOriginal eight C paths remain identical in F. Selected arm-none-eabi-g++12.3.0\npackage5.120300.240127 reports short enums enabled by default. Actual generated\nheader SHA-256 `bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323`\nmatches authenticated tracked fixture. This is an incorrect source/host ABI\nassumption, not demonstrated dependency drift. platformio.ini:39 explicitly\nsets short enums for AVR; that section is not Pico. Do not change build flags.\n\nRead `/private/tmp/glyph-c020-build-evidence/worker-result.json`,\n`source-build-blocker.json`, `firmware-build.log`, `independent-review.json`,\noriginal C/F source, current queue/context/correspondence/runner and coupled\nharnesses. Local diagnostic hashes, respectively for blocker/build log/review:\n`e0f8b73d7c9fd160e858d633873efb2e9f2b081d6eb23c385ce70f40c180c4bd`,\n`a181771837d73b24787b14a3bf324d6458ffd1560612b10e03e59da24c6839e8`,\n`9b4e67dc8dc253604ec90c4e6f0dc12c5ccaaff85e35e7c1a0a2952006f1f880`.\nThese are diagnostics, not immutable canonical hardware acceptance.\nFinal F aggregate46/46 and canonical/isolation MATCH are retained separately\nfrom earlier CANONICAL_REPOSITORY_MUTATION failure, whose cause is UNKNOWN.\nAdditional semantic synthetic transition suite failed because F was used as a\nsource-free fixture base despite containing C source. Preserve that failed run;\nno PASS or gate waiver. No RAM/flash, complete postbuild dependency proof, UF2,\ncustody, hardware pending or physical FAIL. Nunchuk NOT_TESTED; root cause of\nphysical behavior unproven.\n\n## Exact source choice\n\nExisting `valid_button(const Button&)` at source51\u201361 and remap-disable64\u201367\nalready compare full object bytes via memcmp and sizeof(Button), before any\nuntrusted typed enum read. Preserve this algorithm. Replace false four-byte\nassertions/comments and coupled tests with authenticated representation proof.\nNo new integer conversion, enum ABI, schema, domain or product semantics.\n\nGenerated Button fields are UENUM; Nanopb pb.h:863 maps UENUM to UVARINT.\npb.h:682\u2013687 derives descriptor data_size from actual member/element sizeof.\npb_decode.c:1462\u20131485 writes a size-selected unsigned destination, THEN tests\noverflow. Partial candidate bytes can change on decodefalse. IS_8 options are\nnot an independent byte cap on enum storage under every compiler. One-byte\nPico permits wire0..255 storage; wire256/300/UINT64_MAX overflows decode, possibly\nafter writing narrowed bytes. Ordinary host4 can differ; final validation must\nreject unsupported values in either layout. Never truncate wire values into\naccepted low IDs or publish after failed decode.\n\nChosen representation assertions: CHAR_BIT8, enum type, unsigned underlying\ntype, no padding (underlying digits equals sizeof(Button)*CHAR_BIT), verified\nwidth1 or4, unchanged exact named enumerator completeness. Separate target\nproof enforces actual Mk6 width1; host4 is portability evidence, never Pico\nproof. Unknown signedness/padding/width/layout returns CURATION_REQUIRED.\nReject alternatives: changing flags/schema/ABI, removing all proof assertions,\nreading/casting invalid enums before checking, or clamping/sanitizing values.\n\n",
+      "source_authority": "Exact canonical 38017600deb243b5e281edec6d0d378b997d9e40 and immutable1256 packet76cb953cd6bfe5398db11669f3d195175361700c; reviewed originalC/F/source/decoder diagnostics, current037 source-free DONE and literal finite annex. \n\nGitHub configurator live-verifies as `38017600deb243b5e281edec6d0d378b997d9e40`,\ntree `3d3f1e727929cce292beabfc4488783d5bc6a6a6`. Ordinary read first failed sandbox\nDNS; identical permitted network-enabled read succeeded. No authentication\nchange. Main checkout clean; planning occurs in a separate worktree.\n\n| Preserved object | Exact identity |\n| --- | --- |\n| Original C020 | `256bf44cea71f6d5c87aa1675c8dac9f6b79259f` |\n| Original parent B020 | `3dac79dac4eefcf832510817e8cb5ecd6a27f219` |\n| Original tree | `45831eeb88ece9c8b293e2e819ee5ecb362b64ec` |\n| Original branch | `codex/gp-config-020-release-safety`, live unchanged |\n| Original raw inventory SHA-256 | `7197560406157c5a43963157f79a010dec424553db7f14235859fab42278e27c` |\n| Failed build F | `0a5dd751c391198140ed146853a69fc825d902c7` |\n| Failed F parent | `5c7a716728414e38eb136b0ca56bc2fb9781135d` |\n| Failed F tree | `2245b07e86264991561909c0406d7211fc7296a4` |\n| F preservation | `/private/tmp/glyph-c020-built-f`, local only, no UF2 |\n| GP-VAL-037 | DONE; source-free integration `caf0718472c7752c78838be6f1d48b56932d90b9`, strict completion at live base |\n\nActual `pio run -e glyph_mk6` fails at\n`src/core/config_button_validation.cpp:32\u201335`: comparisons reduce to1==4 and32==8.\nOriginal eight C paths remain identical in F. Selected arm-none-eabi-g++12.3.0\npackage5.120300.240127 reports short enums enabled by default. Actual generated\nheader SHA-256 `bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323`\nmatches authenticated tracked fixture. This is an incorrect source/host ABI\nassumption, not demonstrated dependency drift. platformio.ini:39 explicitly\nsets short enums for AVR; that section is not Pico. Do not change build flags.\n\nRead `/private/tmp/glyph-c020-build-evidence/worker-result.json`,\n`source-build-blocker.json`, `firmware-build.log`, `independent-review.json`,\noriginal C/F source, current queue/context/correspondence/runner and coupled\nharnesses. Local diagnostic hashes, respectively for blocker/build log/review:\n`e0f8b73d7c9fd160e858d633873efb2e9f2b081d6eb23c385ce70f40c180c4bd`,\n`a181771837d73b24787b14a3bf324d6458ffd1560612b10e03e59da24c6839e8`,\n`9b4e67dc8dc253604ec90c4e6f0dc12c5ccaaff85e35e7c1a0a2952006f1f880`.\nThese are diagnostics, not immutable canonical hardware acceptance.\nFinal F aggregate46/46 and canonical/isolation MATCH are retained separately\nfrom earlier CANONICAL_REPOSITORY_MUTATION failure, whose cause is UNKNOWN.\nAdditional semantic synthetic transition suite failed because F was used as a\nsource-free fixture base despite containing C source. Preserve that failed run;\nno PASS or gate waiver. No RAM/flash, complete postbuild dependency proof, UF2,\ncustody, hardware pending or physical FAIL. Nunchuk NOT_TESTED; root cause of\nphysical behavior unproven.\n\n## Exact source choice\n\nExisting `valid_button(const Button&)` at source51\u201361 and remap-disable64\u201367\nalready compare full object bytes via memcmp and sizeof(Button), before any\nuntrusted typed enum read. Preserve this algorithm. Replace false four-byte\nassertions/comments and coupled tests with authenticated representation proof.\nNo new integer conversion, enum ABI, schema, domain or product semantics.\n\nGenerated Button fields are UENUM; Nanopb pb.h:863 maps UENUM to UVARINT.\npb.h:682\u2013687 derives descriptor data_size from actual member/element sizeof.\npb_decode.c:1462\u20131485 writes a size-selected unsigned destination, THEN tests\noverflow. Partial candidate bytes can change on decodefalse. IS_8 options are\nnot an independent byte cap on enum storage under every compiler. One-byte\nPico permits wire0..255 storage; wire256/300/UINT64_MAX overflows decode, possibly\nafter writing narrowed bytes. Ordinary host4 can differ; final validation must\nreject unsupported values in either layout. Never truncate wire values into\naccepted low IDs or publish after failed decode.\n\nChosen representation assertions: CHAR_BIT8, enum type, unsigned underlying\ntype, no padding (underlying digits equals sizeof(Button)*CHAR_BIT), verified\nwidth1 or4, unchanged exact named enumerator completeness. Separate target\nproof enforces actual Mk6 width1; host4 is portability evidence, never Pico\nproof. Unknown signedness/padding/width/layout returns CURATION_REQUIRED.\nReject alternatives: changing flags/schema/ABI, removing all proof assertions,\nreading/casting invalid enums before checking, or clamping/sanitizing values.\n\n\n\nMechanical prerequisite assessment: 2026-10-03 ABI repair handoff: clean published C_R `3138ade526cabde23a0abedcb94acae8512579d1`, direct B_R `0f7fe50b3b5f385397a9737bc4c0a50ddda683c8`, tree `67a4edd29bcd4c0adfd3ea52790d9a31293f6036`, complete eleven regular100644 paths, raw NUL inventory SHA-256 `e3fcf78810c251f1d72f61bcb736075593b489293edd5d42b7c84c4eb1c81864`. Original C256bf and failed F0a5dd remain unchanged. Source conformance PASS: baseline234 critical entries equal B020; only the three authorized firmware paths differ; handler/header/stub identical to original C and helper executable algorithm/domain/counts unchanged. Both consistent host ABI modes PASS with all12 descriptor classes and required negative controls. Postcommit actual Mk6 GCC12.3.0 object-only proof PASS: Button1/align1, Config26792/align4, all82 C/C++ layout values equal; actual generated/Nanopb include edges and dependencies authenticated. Target result SHA-256 `56fb8ad66c51ea4725a35f4fe9401085a71d3f64650006036282b683660a4259`. Fresh independent exact source/build review PASS with no findings. Complete evidence is in the source-free handoff section below and candidate reports; no self-SHA rewrite. Original037 refuses the exact three new proof paths as predicted; only043 may extend its finite contract. No full link, UF2, custody, hardware pending/PASS, source integration or device action. Earlier fingerprint UNKNOWN and wrong-context synthetic FAIL retained; first target-proof parser failure and overwritten-log limitation recorded without claiming its logs survived.",
       "dependencies_prerequisites": [
         "Clean independently reviewed published new C_R/direct B_R/tree/raw11 regular100644 paths, dual-ABI host PASS, early actual-target objectcompile PASS, source-free handoff and adopted immutable1256 authority.",
         "Unchanged source/default/schema/domain/decoder/build dependencies outside the exact bounded repair; originalC/F and037DONE retained; no pending physical failure."
@@ -7507,7 +7507,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve original037 constants/catalog/receipts/DONE and accepted010/Ultimate/X1/historical observations. Exact new module/fixtures and literal annex only; unknown paths, modes, omitted/forged roots or dirty source fail closed.",
         "No H3 source integration or hardware inheritance; 020 resumes full F_R build/custody/review/exact hardware PASS only after043 reviewed source-free integration and strict DONE."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7687,11 +7687,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-020","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-020, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -8770,3 +8770,472 @@ Final exact committed review and live publication verification remain required. 
 owner decision, Nunchuk or root-cause claim is added.
 
 Original C020 `256bf44cea71f6d5c87aa1675c8dac9f6b79259f` (parent `3dac79dac4eefcf832510817e8cb5ecd6a27f219`, tree `45831eeb88ece9c8b293e2e819ee5ecb362b64ec`) remains preserved and unmerged. Actual Mk6 F `0a5dd751c391198140ed146853a69fc825d902c7` failed compile at false Button width4 assertions; no UF2 or hardware result. Curator1256 receipt `5a82aa06e116cb8c8580cee87a55f1ea98f406cb` resolves that external build stop with a bounded new ABI repair attempt and separate GP-VAL-043 mechanical governance successor, while preserving037 strict DONE. The queue and machine marker define authorization; no implementation/build acceptance is claimed. New clean C_R, dual ABI host proofs and postcommit actual-target diagnostic object compile precede043; its strict DONE precedes full F_R build/custody/review/exact human processor PASS and source integration. Earlier fingerprint anomaly remains UNKNOWN and wrong-context synthetic failure preserved. All94 unrelated orders, KBD/040/019 supply and owner directions are unchanged.
+
+
+## 2026-10-03 C020 repaired candidate handoff to GP-VAL-043
+
+2026-10-03 ABI repair handoff: clean published C_R `3138ade526cabde23a0abedcb94acae8512579d1`, direct B_R `0f7fe50b3b5f385397a9737bc4c0a50ddda683c8`, tree `67a4edd29bcd4c0adfd3ea52790d9a31293f6036`, complete eleven regular100644 paths, raw NUL inventory SHA-256 `e3fcf78810c251f1d72f61bcb736075593b489293edd5d42b7c84c4eb1c81864`. Original C256bf and failed F0a5dd remain unchanged. Source conformance PASS: baseline234 critical entries equal B020; only the three authorized firmware paths differ; handler/header/stub identical to original C and helper executable algorithm/domain/counts unchanged. Both consistent host ABI modes PASS with all12 descriptor classes and required negative controls. Postcommit actual Mk6 GCC12.3.0 object-only proof PASS: Button1/align1, Config26792/align4, all82 C/C++ layout values equal; actual generated/Nanopb include edges and dependencies authenticated. Target result SHA-256 `56fb8ad66c51ea4725a35f4fe9401085a71d3f64650006036282b683660a4259`. Fresh independent exact source/build review PASS with no findings. Complete evidence is in the source-free handoff section below and candidate reports; no self-SHA rewrite. Original037 refuses the exact three new proof paths as predicted; only043 may extend its finite contract. No full link, UF2, custody, hardware pending/PASS, source integration or device action. Earlier fingerprint UNKNOWN and wrong-context synthetic FAIL retained; first target-proof parser failure and overwritten-log limitation recorded without claiming its logs survived.
+
+The following execution record is source/host/object evidence only. It does not
+record hardware acceptance or authorize a full firmware build before043 DONE.
+
+```json
+{
+  "schema_name": "glyph_c020_abi_repair_candidate_handoff",
+  "schema_version": 1,
+  "candidate": {
+    "status": "PASS",
+    "candidate": "3138ade526cabde23a0abedcb94acae8512579d1",
+    "parent": "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+    "tree": "67a4edd29bcd4c0adfd3ea52790d9a31293f6036",
+    "raw_inventory_sha256": "e3fcf78810c251f1d72f61bcb736075593b489293edd5d42b7c84c4eb1c81864",
+    "path_count": 11,
+    "baseline_critical_count": 234,
+    "candidate_critical_count": 236,
+    "critical_deltas": [
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "include/core/config_button_validation.hpp",
+      "src/core/config_button_validation.cpp"
+    ],
+    "entries": [
+      {
+        "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "new_tree_entry": "100644 blob 6ca93c96c944ee539a2d409e32889306c1eafac7\tHAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "old_tree_entry": "100644 blob 3e934f2f5aae13a36310a35d273727da60723abe\tHAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "sha256": "68bc7756eacb63c6831709c803349d52206ed7a271dc49b0cd33d6c53f0c3c38"
+      },
+      {
+        "path": "docs/runtime_config/fixtures/gp_config020_abi_repair.json",
+        "new_tree_entry": "100644 blob f81af99f3ebecc40b42802ceb8201cfb9a3901ad\tdocs/runtime_config/fixtures/gp_config020_abi_repair.json",
+        "old_tree_entry": null,
+        "sha256": "6f4e15e2ac7c562adc636d54b46e96b822e0de3619e46619632d897fbb629e07"
+      },
+      {
+        "path": "docs/runtime_config/gp_config020_abi_repair.md",
+        "new_tree_entry": "100644 blob c9f59e55ec0db1cb54ff238ad040ece0b90a7b67\tdocs/runtime_config/gp_config020_abi_repair.md",
+        "old_tree_entry": null,
+        "sha256": "e8b74a51aed7b67b7d7b2511a3b6b7116d625767cbc970b24b0f692f179def4a"
+      },
+      {
+        "path": "include/core/config_button_validation.hpp",
+        "new_tree_entry": "100644 blob 1b6e3dc98a9b6c0eb1f04e077c86382eaee324bb\tinclude/core/config_button_validation.hpp",
+        "old_tree_entry": null,
+        "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f"
+      },
+      {
+        "path": "src/core/config_button_validation.cpp",
+        "new_tree_entry": "100644 blob 70a7cee746fd42d1cfaff11f6043650bbfcc4c74\tsrc/core/config_button_validation.cpp",
+        "old_tree_entry": null,
+        "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+      },
+      {
+        "path": "tools/check_glyph_gp_config020_button_validation.py",
+        "new_tree_entry": "100644 blob 4c64f0e84032854cd94db8a6f03c211d5e00ed28\ttools/check_glyph_gp_config020_button_validation.py",
+        "old_tree_entry": null,
+        "sha256": "0e1800984f49c705ed30a89cb8b6dda0e3dc9c4d1144446f98b121a347a16276"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/abi_probe.cpp",
+        "new_tree_entry": "100644 blob afdd2653c586a2e4c632a2c607249bd734c0060a\ttools/fixtures/gp_config020_button_validation/abi_probe.cpp",
+        "old_tree_entry": null,
+        "sha256": "74af7062c8b0b19a63ea6c7240292142e760c3adec43431053903c26caaeddac"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/decoder_harness.cpp",
+        "new_tree_entry": "100644 blob 932db17185e0f51a7f6c3494bfe5f97548fae13c\ttools/fixtures/gp_config020_button_validation/decoder_harness.cpp",
+        "old_tree_entry": null,
+        "sha256": "666b5a6584ec798c69242f5232a4d622b49f466289f116351900d462c5edb1c9"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/include/Adafruit_TinyUSB.h",
+        "new_tree_entry": "100644 blob e3e444d3661c04527bc16c4051e2be995f09cfcd\ttools/fixtures/gp_config020_button_validation/include/Adafruit_TinyUSB.h",
+        "old_tree_entry": null,
+        "sha256": "d12ca4ac50b8aad384ede12db7d9f3a10d42b562ee63d95c04ed9376d40cc9d9"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/setconfig_harness.cpp",
+        "new_tree_entry": "100644 blob 2e6c8e710226ec03ca2a817c74247343213242c2\ttools/fixtures/gp_config020_button_validation/setconfig_harness.cpp",
+        "old_tree_entry": null,
+        "sha256": "785e2c9842701516ea95894c4a3f25ae1c7ac66775633abe358e401e72e86046"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/validation_harness.cpp",
+        "new_tree_entry": "100644 blob a34316a209b3709a0e55d0d2f8dbaa580a5f6a0e\ttools/fixtures/gp_config020_button_validation/validation_harness.cpp",
+        "old_tree_entry": null,
+        "sha256": "b3f5a502006a5820e8fa95c72bfcd6681b7602ba40e0a808921b7a7eb320a86f"
+      }
+    ]
+  },
+  "target_object_execution": {
+    "status": "PASS_OBJECT_ONLY",
+    "candidate_sha": "3138ade526cabde23a0abedcb94acae8512579d1",
+    "candidate_tree": "67a4edd29bcd4c0adfd3ea52790d9a31293f6036",
+    "metadata_sha256": "32034745daf9d6d3d6818d5e767a030f55a8f9f1787627267a1234e09a45c359",
+    "compiler_version": "arm-none-eabi-g++ (GCC) 12.3.0",
+    "cc_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-gcc",
+    "cxx_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+    "cc_flags": [
+      "-std=gnu17",
+      "-O3",
+      "-Wall",
+      "-Wstack-usage=1024",
+      "-Wno-unused-variable",
+      "-Werror=return-type",
+      "-Wno-psabi",
+      "-march=armv6-m",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-ffunction-sections",
+      "-fdata-sections"
+    ],
+    "cxx_flags": [
+      "-fno-exceptions",
+      "-fno-rtti",
+      "-std=gnu++17",
+      "-O3",
+      "-Wall",
+      "-Wstack-usage=1024",
+      "-Wno-unused-variable",
+      "-Werror=return-type",
+      "-Wno-psabi",
+      "-march=armv6-m",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-ffunction-sections",
+      "-fdata-sections"
+    ],
+    "defines": [
+      "FIRMWARE_VERSION=\"3138ade\"",
+      "PLATFORMIO=60119",
+      "ARDUINO_RASPBERRY_PI_PICO",
+      "ARDUINO_ARCH_RP2040",
+      "USBD_MAX_POWER_MA=500",
+      "DEVICE_NAME=\"glyph_mk6\"",
+      "FIRMWARE_NAME=\"HayBox\"",
+      "USE_TINYUSB",
+      "CFG_TUSB_CONFIG_FILE=\"tusb_config_pico.h\"",
+      "NDEBUG",
+      "FASTLED_RP2040_CLOCKLESS_M0_FALLBACK=0",
+      "FASTLED_RP2040_CLOCKLESS_IRQ_SHARED=0",
+      "SSD1306_NO_SPLASH",
+      "ARDUINO=10810",
+      "ARDUINO_ARCH_RP2040",
+      "F_CPU=130000000L",
+      "BOARD_NAME=\"pico\"",
+      "ARM_MATH_CM0_FAMILY",
+      "ARM_MATH_CM0_PLUS",
+      "TARGET_RP2040",
+      "PICO_FLASH_SIZE_BYTES=2097152",
+      "CFG_TUSB_MCU=OPT_MCU_RP2040",
+      "USB_VID=0x2e8a",
+      "USB_PID=0x000a",
+      "USB_MANUFACTURER=\"Raspberry Pi\"",
+      "USB_PRODUCT=\"Pico\"",
+      "SERIALUSB_PID=0x000a",
+      "PICO_CYW43_ARCH_THREADSAFE_BACKGROUND=1",
+      "CYW43_LWIP=1",
+      "LWIP_IPV4=1",
+      "LWIP_IGMP=1",
+      "LWIP_CHECKSUM_CTRL_PER_NETIF=1",
+      "LWIP_IPV6=0",
+      "ARDUINO_VARIANT=\"rpipico\""
+    ],
+    "build_includes": [
+      "/private/tmp/glyph-c020-abi-candidate",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/HayBox-proto",
+      "/private/tmp/glyph-c020-abi-candidate/lib/TUCompositeHID/include",
+      "/private/tmp/glyph-c020-abi-candidate/lib/TUCompositeHID/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/PCF8575",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/CRC32/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/PacketIO/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Adafruit SSD1306",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Adafruit GFX Library",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Adafruit BusIO",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/nanopb-arduino/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/FastLED/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/include",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/arduino-nunchuk/include",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/arduino-nunchuk/src",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Wire/src",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/SPI/src",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/nes-pio/include",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/nes-pio/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/joybus-pio/include",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/joybus-pio/src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb",
+      "/private/tmp/glyph-c020-abi-candidate/src",
+      "/private/tmp/glyph-c020-abi-candidate/include",
+      "/private/tmp/glyph-c020-abi-candidate/HAL/pico/include",
+      "/private/tmp/glyph-c020-abi-candidate/config/glyph/common/include",
+      "/private/tmp/glyph-c020-abi-candidate/config/glyph/glyph_mk6/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/deprecated",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/deprecated-avr-comp",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/deprecated-avr-comp",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/include/pico_base",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/src",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/boards/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_base/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_binary_info/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_bit_ops/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_divider/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_stdlib/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_usb_reset_interface/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_util/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_regs/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_structs/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/cmsis/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_adc/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_base/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_claim/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_clocks/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_divider/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_dma/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_exception/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_flash/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_gpio/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_i2c/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_interp/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_irq/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_rtc/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_pio/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_pll/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_pwm/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_resets/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_spi/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_sync/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_timer/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_uart/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_vreg/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_watchdog/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_xosc/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_async_context/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_bootrom/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_btstack/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_cyw43_arch/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_cyw43_driver/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_double/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_float/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_int64_ops/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_lwip/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_platform/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_printf/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_runtime/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_rand/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_stdio/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_stdio_uart/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_unique_id/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/cyw43-driver/src",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/lwip/src/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/btstack/src",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/btstack/platform/embedded",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/include",
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/variants/rpipico"
+    ],
+    "layout_tuple_count": 82,
+    "c_cpp_layout_tuple": [
+      1,
+      1,
+      26792,
+      4,
+      16,
+      4,
+      2,
+      2,
+      1,
+      1,
+      3,
+      6,
+      2,
+      2,
+      2,
+      1,
+      1,
+      3,
+      216,
+      4,
+      176,
+      176,
+      1,
+      1,
+      4,
+      16,
+      4,
+      4,
+      4,
+      1,
+      1,
+      2,
+      2,
+      1,
+      0,
+      0,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      3,
+      1,
+      0,
+      0,
+      1,
+      1,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      404,
+      4,
+      4,
+      4,
+      1,
+      1,
+      18,
+      404,
+      4,
+      24,
+      24,
+      1,
+      1,
+      8,
+      3,
+      1,
+      0,
+      0,
+      1,
+      1,
+      2,
+      1,
+      0,
+      0,
+      1,
+      1
+    ],
+    "dependency_sha256": {
+      "platformio.ini": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9",
+      "glyph_env_ini": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf",
+      "generated_header": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+      "generated_c": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+      "nanopb_pb_h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+      "nanopb_pb_decode_c": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+      "validator": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "abi_probe": "74af7062c8b0b19a63ea6c7240292142e760c3adec43431053903c26caaeddac",
+      "compiler_cc": "a67dc17a0f7b8f0b5dafb8c57f6210495403d108d868c23d56aeaa8f1677aa24",
+      "compiler_cxx": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c"
+    },
+    "actual_include_edges": {
+      "validator": {
+        "config.pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+        "pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h"
+      },
+      "abi_probe": {
+        "config.pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+        "pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h"
+      },
+      "generated_c": {
+        "config.pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+        "pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h"
+      },
+      "layout_c": {
+        "config.pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+        "pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h"
+      },
+      "layout_cpp": {
+        "config.pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+        "pb.h": "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h"
+      }
+    },
+    "actual_transitive_dependency_sha256": {
+      "/private/tmp/glyph-c020-abi-candidate/src/core/config_button_validation.cpp": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "/private/tmp/glyph-c020-abi-candidate/include/core/config_button_validation.hpp": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+      "/private/tmp/glyph-c020-abi-candidate/tools/fixtures/gp_config020_button_validation/abi_probe.cpp": "74af7062c8b0b19a63ea6c7240292142e760c3adec43431053903c26caaeddac",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb_common.h": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+      "/private/tmp/glyph-c020-abi-candidate/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.c": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+      "/private/tmp/glyph-c020-abi-repair/c-r-object-proof/layout_c.c": "68c2f4c452a4c0e9b1907ffdd067f367e3bc2c9a31a15f31d7bfdfd6ddbac193",
+      "/private/tmp/glyph-c020-abi-repair/c-r-object-proof/layout_cpp.cpp": "00a1bb14f604d1b96fe5b5773f1c7f7722f85c7af984bb4496c837498692fd7a"
+    },
+    "object_sha256": {
+      "validator": "8ccf7843b6d353e227391370688b01475a4c0b9d47276183f297c29776626f4f",
+      "abi_probe": "e2217ae97d29a1e2a0badf0913a44ac3d3af57cbb9990b8c40569a0647f30a25",
+      "generated_c": "2f5eeafd3af6e6d03b201510e4fc7fc18518125da609cbe49cd96f219e6e236b",
+      "layout_c": "badb6893422a8e84cc6a5912cd81e331a0d2b8d6806936ac6d655b4f2f1395b4",
+      "layout_cpp": "71168ceaecb2df63b5eb82ec5489d310a6f6de628b22dd37b94d3c94c1372568"
+    },
+    "nonclaims": [
+      "No target execution",
+      "No full firmware build or link",
+      "No UF2 or hardware acceptance",
+      "Observed reused dependency cache, not fresh resolution/reproducibility"
+    ]
+  },
+  "target_object_execution_sha256": "56fb8ad66c51ea4725a35f4fe9401085a71d3f64650006036282b683660a4259",
+  "target_proof_script_sha256": "f18c724ab31cb5f6833b22d224642b087df683089c2d16b7fc7e9e1003fe8f47",
+  "host_execution_sha256": "ea6dd1ec501cbb17f1ee2f5051e4b36d4b5a55054e634641c210e8f52758fa3d",
+  "independent_review": "# Independent C020 ABI repair review\n\nStatus: PASS for the exact repaired C020 candidate and its source/host/target-object prerequisites. GP-VAL-043 source-free handoff and governance implementation remain separate.\n\n## Scope and source\n\n- Reviewed the adopted `GP-CONFIG-020` and `GP-VAL-043` full queue objects at canonical `0f7fe50b3b5f385397a9737bc4c0a50ddda683c8`, original C `256bf44cea71f6d5c87aa1675c8dac9f6b79259f`, and failed F `0a5dd751c391198140ed146853a69fc825d902c7`.\n- Clean committed candidate `3138ade526cabde23a0abedcb94acae8512579d1` has direct parent `0f7fe50b3b5f385397a9737bc4c0a50ddda683c8` and tree `67a4edd29bcd4c0adfd3ea52790d9a31293f6036`. The exact eleven authorized paths are all regular `100644` files. The NUL raw inventory from `git diff-tree -r --no-renames --raw -z B_R C_R` has SHA-256 `e3fcf78810c251f1d72f61bcb736075593b489293edd5d42b7c84c4eb1c81864`. The handler insertion, public validator header, and TinyUSB stub are byte-identical to original C.\n- The validator retains its exact 60 named values, full `memcmp(sizeof(Button))` checks, remap disable sentinel, extent checks, traversal, and no-mutation semantics. Its changes are `<climits>`, compile-time assertions for eight-bit bytes, unsigned padding-free enum storage with width one or four, and matching comments.\n- The dedicated SetConfig harness labels its mocked validator honestly. Actual-helper dual-ABI transaction proof belongs to `GP-VAL-043` and has not passed in this candidate.\n\n## Host evidence\n\n- The focused checker applies an explicit ABI flag to Nanopb/generated C and every C++ consumer in each mode. The short and ordinary modes pass with `Button` sizes 1 and 4, respectively, plus all twelve descriptor field data-size/offset/stride/capacity checks.\n- Both modes pass the 12-class named 1..60 and raw 0..255 matrices, source defaults, count boundaries, ordering, mask identity, remap disable and no-mutation checks. Short mode rejects wire 256, 257, 300, UINT32_MAX and UINT64_MAX at decode in all twelve classes; ordinary mode decodes then rejects the four uint32-range controls and fails UINT64_MAX decode.\n- Isolated enum sanitizer controls detect typed invalid reads in both modes. A truncating injection and mixed C/C++ layout are detected. Mocked SetConfig transaction cases pass in both modes.\n- The companion JSON's nine code/proof blob identities match committed bytes. Its two report paths are excluded from their self-referential blob list; the exact Git raw inventory binds all eleven paths.\n\n## Actual selected Mk6 object proof\n\nThe postcommit diagnostic in `c-r-object-proof/result.json` is `PASS_OBJECT_ONLY` for this exact candidate/tree. It uses selected arm-none-eabi GCC 12.3.0 and candidate `glyph_mk6` compiler flags, defines and include paths. The validator, ABI probe and actual generated `config.pb.c` compile as objects. The C and C++ target layout tuples match in all 82 recorded values, including Button size/alignment 1/1, Config size/alignment 26792/4, and all twelve Button field sizes, offsets and strides. Dependency files prove each translation unit selected the candidate generated `config.pb.h` and Nanopb `pb.h`; the result records source, tool and object hashes. This is a compile/layout proof, with no target execution.\n\nThe original GP-VAL-037 gate refuses this candidate on exactly the three newly authorized proof paths, as expected. That gate and its DONE history remain intact; only GP-VAL-043 may authenticate the repaired candidate through its separate finite contract. The source-free handoff must bind this exact candidate and proof before 043 activates. The real-helper dual-ABI transaction proof, governance aggregate, later full firmware build, UF2 custody and exact human hardware PASS remain pending. Earlier fingerprint UNKNOWN and wrong-context synthetic FAIL are preserved.\n",
+  "independent_review_sha256": "237fec421bf9c278499525b7e2b6b575f45a05f83e4808e8ca60c256cf38a0b6",
+  "prior_execution_limit": {
+    "kind": "PRELIMINARY_OBJECT_PROOF_SCRIPT_FAILURE",
+    "candidate_sha": "3138ade526cabde23a0abedcb94acae8512579d1",
+    "exit_code": 1,
+    "error": "OBJECT_PROOF_FAILED: abi_probe selected wrong Nanopb pb.h: [PosixPath('/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h'), PosixPath('/private/tmp/glyph-c020-abi-candidate/.pio/libdeps/glyph_mk6/Nanopb/pb.h')]",
+    "interpretation": "All five object compilations completed successfully, but the external depfile parser required one entry and rejected two entries resolving to the same authenticated Nanopb header. The parser was corrected to require a nonempty singleton set of resolved paths.",
+    "evidence_limit": "The first run wrote no result.json. Its per-object logs were overwritten by the subsequent same-directory rerun before separate preservation; the original tool output and error are recorded here without claiming distinct preserved first-run logs.",
+    "candidate_source_changed": false,
+    "second_run_result": "/private/tmp/glyph-c020-abi-repair/c-r-object-proof/result.json"
+  },
+  "original_contract_gate": {
+    "status": "EXPECTED_GATE_REFUSAL",
+    "contract": "original GP-VAL-037 fixed candidate",
+    "candidate": "3138ade526cabde23a0abedcb94acae8512579d1",
+    "error": "unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config020_abi_repair.json', 'docs/runtime_config/gp_config020_abi_repair.md', 'tools/fixtures/gp_config020_button_validation/abi_probe.cpp']",
+    "disposition": "GP-VAL-043 must add separate exact repair contract; no gate waived or edited"
+  },
+  "authority": {
+    "status": "PASS",
+    "base": "38017600deb243b5e281edec6d0d378b997d9e40",
+    "packet": "76cb953cd6bfe5398db11669f3d195175361700c",
+    "same_base_receipt": "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+    "adoption": "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+    "adoption_tree": "fb9b2db23af48842c7320c40ce93dbeef01ee931",
+    "existing_orders_changed": [
+      "GP-CONFIG-020"
+    ],
+    "orders_added": [
+      "GP-VAL-043"
+    ],
+    "other_orders_preserved": 94,
+    "native_framework": "PASS; canonical-framework.log",
+    "adoption_files": [
+      "docs/AGENT_CONTEXT.md",
+      "docs/CURRENT_STATE.md",
+      "docs/ROADMAP.md",
+      "docs/project/ACTIVE_AGENT_QUEUE.md"
+    ]
+  },
+  "artifact_sha256": null,
+  "hardware_result": null,
+  "mechanical_conditions": "All four recorded GP-VAL-043 activation conditions satisfied for the published exact C_R. No new source, policy, architecture or hardware judgment. GP-VAL-043 implementation and strict DONE remain separate.",
+  "external_evidence_directory": "/private/tmp/glyph-c020-abi-repair"
+}
+```
