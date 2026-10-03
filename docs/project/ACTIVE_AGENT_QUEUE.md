@@ -96,12 +96,12 @@ GP-VAL-037 runner-entry conflict is resolved by the 2026-10-03 immutable Curator
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 12,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -331,7 +331,7 @@ GP-VAL-037 runner-entry conflict is resolved by the 2026-10-03 immutable Curator
     {
       "id": "GP-VAL-037",
       "title": "C020 candidate-phase governance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "codex/gp-val-037-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -370,7 +370,52 @@ GP-VAL-037 runner-entry conflict is resolved by the 2026-10-03 immutable Curator
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "93b3c9ee8f702886f731714281ce143428724a17",
+        "reviewed_implementation_sha": "caf0718472c7752c78838be6f1d48b56932d90b9",
+        "prior_canonical_integration_sha": "caf0718472c7752c78838be6f1d48b56932d90b9",
+        "reviewed_changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_val037_accepted_transitions.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_checker_context.py",
+          "tools/check_glyph_config_010_integration_semantic_correspondence.py",
+          "tools/check_glyph_config_menu_invalid_state_characterization.py",
+          "tools/check_glyph_configurator_setconfig_transaction.py",
+          "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+          "tools/check_glyph_current_config_persistence_recovery_research.py",
+          "tools/check_glyph_docs_agent_surface.py",
+          "tools/check_glyph_generated_source_owned_artifact_install.py",
+          "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+          "tools/check_glyph_generated_source_owned_generator_contract.py",
+          "tools/check_glyph_getconfig_raw_load_characterization.py",
+          "tools/check_glyph_gp_config012_button_mask_characterization.py",
+          "tools/check_glyph_gp_config013_usb_default_characterization.py",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+          "tools/check_glyph_setconfig_runtime_rebinding_characterization.py",
+          "tools/fixtures/configurator_setconfig_host/handler_harness.cpp",
+          "tools/fixtures/configurator_setconfig_host/include/host_stubs.hpp",
+          "tools/glyph_campaign_transition.py",
+          "tools/glyph_checker_context.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/run_glyph_runtime_config_validation.py",
+          "tools/test_glyph_config_010_semantic_applicability.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent native final_review_v3 approved exact source-free implementation caf0718472c7752c78838be6f1d48b56932d90b9 after repaired accepted-history, metadata and complete phase validation; separate activation/source, runner-policy, accepted-transition and actual-five-scope specialists supplied bounded evidence.",
+        "validation_provenance": "Exact caf0718472c7752c78838be6f1d48b56932d90b9 governance full aggregate PASS45/45; disposable composed candidate dd0d9c29303ae4e29cb55798b6b1171c993b35e4 PASS46/46; disposable synthetic accepted79f5f4f08109f0645aa22252fc585ece0870de66 PASS46/46. Every isolated and canonical fingerprint MATCH. Full current/historical semantic regressions PASS on identical implementation code, native correspondence49 controls PASS, actual-five-scope/guard and reserved-argument/catalog closure tests load-bearing. Original120s checker/300s aggregate limits unchanged; accepted run295.65s leaves limited margin. No synthetic hardware evidence in real repository; source-free live canonical caf0718472c7752c78838be6f1d48b56932d90b9 verified before this later DONE snapshot."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -7575,11 +7620,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-037","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-037, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
