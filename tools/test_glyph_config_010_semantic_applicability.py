@@ -409,6 +409,36 @@ def tree_inventory_cache_tests(root: Path) -> None:
     assert shows.count('HEAD:'+path)==4
     assert shows.count(campaign.ADOPTION+':'+campaign.QUEUE)==2
     assert campaign._blob_bytes_cache.get() is None
+    # The lower correspondence layer shares only exact immutable query bytes.
+    import glyph_hardware_correspondence as hardware
+    native_run = hardware.subprocess.run
+    invocations = []
+    def observed_run(command, *args, **kwargs):
+        invocations.append(tuple(command[1:]))
+        return native_run(command, *args, **kwargs)
+    immutable = ('rev-parse', campaign.B + '^{tree}')
+    live = ('rev-parse', 'HEAD')
+    dirty = ('diff', '--name-only', '-z')
+    absent = ('ls-tree', '-r', '-z', '0' * 40)
+    @campaign._proof_invocation
+    def query_reads():
+        for command in (immutable, immutable, live, live, dirty, dirty):
+            hardware._git(root, *command)
+        for _ in range(2):
+            rejected(lambda: hardware._git(root, *absent), 'failed immutable query must rerun')
+    with patch.object(hardware.subprocess, 'run', side_effect=observed_run):
+        query_reads()
+        query_reads()
+    assert invocations.count(immutable) == 2
+    assert invocations.count(live) == 4 and invocations.count(dirty) == 4
+    assert invocations.count(absent) == 4
+    for args in (('ls-tree', '-r', '-z', 'HEAD'), ('merge-base', campaign.B, 'HEAD'),
+                 ('rev-list', '--reverse', '--topo-order', campaign.B + '..HEAD'),
+                 ('diff', '--cached', '--name-only', '-z'), ('ls-files', '--stage'),
+                 ('ls-tree', '-r', '-z', campaign.B.upper())):
+        assert not hardware._immutable_query(args)
+    rejected(failed, 'all immutable caches reset on failure')
+    assert hardware._immutable_query_cache.get() is None
     native_tree=campaign._tree
     def executable(where,ref):
         value=native_tree(where,ref)

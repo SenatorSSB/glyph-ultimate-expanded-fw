@@ -7,7 +7,7 @@ import stat
 from pathlib import Path
 from contextvars import ContextVar
 from functools import wraps
-from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence, _git, _tree as _uncached_tree
+from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence, _git, _immutable_query_cache, _tree as _uncached_tree
 
 C = '256bf44cea71f6d5c87aa1675c8dac9f6b79259f'
 B = '3dac79dac4eefcf832510817e8cb5ecd6a27f219'
@@ -65,10 +65,12 @@ def _proof_invocation(function):
             return function(*args, **kwargs)
         token = _tree_inventory_cache.set({})
         blob_token = _blob_bytes_cache.set({})
+        query_token = _immutable_query_cache.set({})
         try:
             return function(*args, **kwargs)
         finally:
             _blob_bytes_cache.reset(blob_token)
+            _immutable_query_cache.reset(query_token)
             _tree_inventory_cache.reset(token)
     return invoke
 

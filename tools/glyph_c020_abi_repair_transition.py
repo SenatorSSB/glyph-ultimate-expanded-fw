@@ -211,18 +211,23 @@ def validate_accepted_transition(root, record, target):
     verify_correspondence(root,F,parent,target=target,integrated=True,check_worktree=True)
     return F
 
-def _history(root, head, catalog_path, records, candidate):
-    """Traverse full topology; accepted second parents cannot be erased."""
+def _history(root, head, old_records, repaired_records):
+    """Check both catalogs over full original topology; no second parent is hidden."""
     accepted = False
-    for revision in _git(root, 'rev-list', '--reverse', '--topo-order', B_R + '..' + head).decode().split():
+    for revision in _git(root, 'rev-list', '--reverse', '--topo-order',
+                         original.ADOPTION + '..' + head).decode().split():
         state = item(root, revision, 'GP-CONFIG-020')
         accepted |= state['status'] in {'HARDWARE_VALIDATED', 'DONE'} or state['hardware_result'] == 'PASS'
-        if catalog_path in _tree(root, revision):
-            previous = _catalog(raw_bytes(root, revision, catalog_path))
-            if previous:
-                require(previous == records and previous[0].get('candidate') == candidate,
-                        'accepted transition history erased or substituted')
-                accepted = True
+        inventory = _tree(root, revision)
+        for catalog_path, records, candidate in (
+                (original.TRANSITIONS, old_records, original.C),
+                (TRANSITIONS, repaired_records, C_R)):
+            if catalog_path in inventory:
+                previous = _catalog(raw_bytes(root, revision, catalog_path))
+                if previous:
+                    require(previous == records and previous[0].get('candidate') == candidate,
+                            'accepted transition history erased or substituted')
+                    accepted = True
     return accepted
 
 
@@ -288,9 +293,7 @@ def authenticate(root):
     state = item(root, head, 'GP-CONFIG-020')
     require(state['status'] != 'HARDWARE_FAILED' and state['hardware_result'] != 'FAIL', 'failed candidate cannot enter campaign phase')
     claims = state['status'] in {'HARDWARE_VALIDATED', 'DONE'} or state['hardware_result'] == 'PASS'
-    history = _history(root, head, TRANSITIONS, repaired_records, C_R)
-    history |= _history(root, head, original.TRANSITIONS, old_records, original.C)
-    history |= original.prior_accepted_phase(root, head, old_records)
+    history = _history(root, head, old_records, repaired_records)
     require(not (claims or history) or bool(records), 'accepted phase lacks mandatory transition record')
     accepted_metadata = frozenset()
     roots = set(ROOTS)

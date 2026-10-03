@@ -7,6 +7,7 @@ dependency audit behind the deliberately finite metadata inventory.
 from __future__ import annotations
 
 from pathlib import Path
+from contextvars import ContextVar
 import hashlib
 import re
 import stat
@@ -223,10 +224,44 @@ def classify_path(path: str) -> str:
     raise CorrespondenceError(f"unclassified correspondence path: {path}")
 
 
+# Enabled only by a bounded campaign proof invocation. The cache contains raw
+# outputs of a closed set of full-SHA immutable reads, never successful proofs.
+_immutable_query_cache = ContextVar("correspondence_immutable_queries", default=None)
+
+
+def _immutable_query(args: tuple[str, ...]) -> bool:
+    def sha(value: str) -> bool:
+        return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{40}", value) is not None
+    if len(args) == 4 and args[:3] == ("ls-tree", "-r", "-z"):
+        return sha(args[3])
+    if len(args) == 5 and args[:4] == ("rev-list", "--parents", "-n", "1"):
+        return sha(args[4])
+    if len(args) == 2 and args[0] == "rev-parse":
+        return args[1].endswith("^{tree}") and sha(args[1][:-7])
+    if len(args) == 4 and args[:3] == ("rev-parse", "--verify", "--end-of-options"):
+        return args[3].endswith("^{commit}") and sha(args[3][:-9])
+    if len(args) == 3 and args[0] == "merge-base":
+        return sha(args[1]) and sha(args[2])
+    if len(args) in (6, 7) and args[:4] == ("diff", "--no-renames", "--name-only", "-z"):
+        return sha(args[4]) and sha(args[5]) and (len(args) == 6 or args[6] == "--")
+    if len(args) == 7 and args[:5] == ("diff-tree", "-r", "--no-renames", "--raw", "-z"):
+        return sha(args[5]) and sha(args[6])
+    if len(args) == 4 and args[:3] == ("rev-list", "--reverse", "--topo-order"):
+        pair = args[3].split("..")
+        return len(pair) == 2 and all(sha(value) for value in pair)
+    return False
+
+
 def _git(root: Path, *args: str) -> bytes:
+    cache = _immutable_query_cache.get()
+    key = (str(Path(root).resolve()), args) if cache is not None and _immutable_query(args) else None
+    if key is not None and key in cache:
+        return cache[key]
     result = subprocess.run(["git", *args], cwd=root, capture_output=True, check=False)
     if result.returncode:
         raise CorrespondenceError(f"git {' '.join(args)} failed: {result.stderr.decode(errors='replace').strip()}")
+    if key is not None:
+        cache[key] = result.stdout
     return result.stdout
 
 
