@@ -6347,6 +6347,69 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_config020_button_validation",
+      "defines_main": true,
+      "file_size_bytes": 16062,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "configurator"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 267,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config020_button_validation.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "configurator"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config020_button_validation",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/util/state_util.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "include/core/config_button_validation.hpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_utils.cpp",
+        "src/core/mode_selection.cpp",
+        "src/modes/CustomControllerMode.cpp",
+        "tools/fixtures/configurator_setconfig_host/include",
+        "tools/fixtures/gp_config012_button_host/generated",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb",
+        "tools/fixtures/gp_config012_button_host/schema/config.proto",
+        "tools/fixtures/gp_config020_button_validation/abi_probe.cpp",
+        "tools/fixtures/gp_config020_button_validation/decoder_harness.cpp",
+        "tools/fixtures/gp_config020_button_validation/include",
+        "tools/fixtures/gp_config020_button_validation/setconfig_harness.cpp",
+        "tools/fixtures/gp_config020_button_validation/validation_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "0e1800984f49c705ed30a89cb8b6dda0e3dc9c4d1144446f98b121a347a16276",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gp_config_007_transaction_stage_schema",
       "defines_main": true,
       "file_size_bytes": 13409,
