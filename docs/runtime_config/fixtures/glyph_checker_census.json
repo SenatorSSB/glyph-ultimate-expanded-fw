@@ -1197,7 +1197,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 24234,
+      "file_size_bytes": 24238,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1284,7 +1284,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "edf364659cee55bd89590631c5029ea0008b92a0365cfec2b9fb106695688fbd",
+      "sha256": "48ea6335acda076a246f94b7490f865e4597319c050d86a585e72ac6245b54a7",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

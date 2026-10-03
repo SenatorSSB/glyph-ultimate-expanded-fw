@@ -320,6 +320,13 @@ def accepted_contract_tests(directory: Path) -> None:
     fixture_commit(root,'attempt to erase processor PASS before catalog')
     rejected(lambda:campaign.authenticate(root),'committed pre-catalog processor downgrade')
     run(root,'git','switch','--detach',target)
+    # An ours merge can retain candidate-only bytes while adding accepted
+    # ancestry through the second parent. A path-limited rev-list may simplify
+    # away that parent; complete commit ancestry must still reject the downgrade.
+    run(root,'git','switch','-c','synthetic-ours-merge-downgrade',record['build'])
+    run(root,'git','merge','--no-ff','-s','ours','--no-edit',target)
+    rejected(lambda:campaign.authenticate(root),'ours merge hides accepted second-parent history')
+    run(root,'git','switch','--detach',target)
     # Boundary injection retains all real commits/objects, changing one input at
     # a time. No all-ancestor or processor-validation mocks can create a PASS.
     native_item=campaign.item

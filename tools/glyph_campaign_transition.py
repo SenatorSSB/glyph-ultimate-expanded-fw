@@ -234,8 +234,9 @@ def prior_accepted_phase(root, head, records):
     PASS and relabel integrated source as an unaccepted candidate.
     """
     accepted=False
-    revisions=_git(root,'rev-list','--reverse','--topo-order',ADOPTION+'..'+head,
-                   '--',QUEUE,TRANSITIONS).decode().split()
+    # No pathspec: Git path-history simplification can hide a second parent's
+    # accepted state when an ours merge keeps the unaccepted first-parent tree.
+    revisions=_git(root,'rev-list','--reverse','--topo-order',ADOPTION+'..'+head).decode().split()
     for revision in revisions:
         state=item(root,revision,'GP-CONFIG-020')
         accepted |= state['status'] in {'HARDWARE_VALIDATED','DONE'} or state['hardware_result']=='PASS'
