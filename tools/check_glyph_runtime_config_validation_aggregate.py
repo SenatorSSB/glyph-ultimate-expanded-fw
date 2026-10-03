@@ -784,10 +784,14 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
             authenticated.assert_called_once_with(module.ROOT)
         if len(authenticated_proofs) != 1 or module.canonical_fingerprint() != before:
             raise AssertionError("actual catalog phase authentication changed repository")
-        catalog_path = module.ROOT / campaign.TRANSITIONS
-        if catalog_path.exists():
-            for record in json.loads(catalog_path.read_text())["accepted_transitions"]:
-                expected.update(record[key] for key in ("build", "parent", "review_commit", "evidence_commit", "integration"))
+        proof = authenticated_proofs[0]
+        if proof.get('contract') == 'c020_abi_repair':
+            expected.update(proof['object_roots'])
+        else:
+            catalog_path = module.ROOT / campaign.TRANSITIONS
+            if catalog_path.exists():
+                for record in json.loads(catalog_path.read_text())["accepted_transitions"]:
+                    expected.update(record[key] for key in ("build", "parent", "review_commit", "evidence_commit", "integration"))
         configurator = module.git_value("rev-parse", "--verify", "refs/heads/configurator^{commit}")
         if (combined_roots != expected | {configurator, module.GP_CONFIG_010_HISTORICAL_CANDIDATE}
                 or combined_refs != {"refs/heads/configurator": configurator}):
@@ -839,11 +843,24 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
             # Pack only selected immutable closures, never all refs or alternates.
             # Accepted-phase roots can also descend from C. Remove every root
             # that carries C for the omission control, retaining all other roots.
+            candidate = proof['candidate']
+            candidate_base = proof['base']
             carrying_candidate = {identity for identity in expected
-                if module.git("merge-base", "--is-ancestor", campaign.C, identity).returncode == 0}
+                if module.git("merge-base", "--is-ancestor", candidate, identity).returncode == 0}
             without_candidate = expected - carrying_candidate
-            for label, roots in (("complete", expected), ("omitted", without_candidate),
-                                 ("substituted", without_candidate | {campaign.B})):
+            scenarios = [("complete", expected, candidate, True),
+                         ("omitted", without_candidate, candidate, False),
+                         ("substituted", without_candidate | {candidate_base}, candidate, False)]
+            if proof.get('contract') == 'c020_abi_repair':
+                from glyph_c020_abi_repair_transition import B_R, PACKET
+                # Remove every selected descendant as well as the root itself:
+                # retaining C_R would otherwise still carry B_R by ancestry.
+                for label, missing in (("omitted-repaired-base", B_R),
+                                       ("omitted-repaired-packet", PACKET)):
+                    carrying = {identity for identity in expected
+                        if module.git("merge-base", "--is-ancestor", missing, identity).returncode == 0}
+                    scenarios.append((label, expected - carrying, missing, False))
+            for label, roots, checked_identity, should_exist in scenarios:
                 clone = parent / label
                 clone.mkdir()
                 run_git(clone, "init", "-b", "catalog-test")
@@ -854,8 +871,8 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                     input=packed.stdout, capture_output=True, check=True)
                 if module.git_value("for-each-ref", "--format=%(refname)", cwd=clone):
                     raise AssertionError("campaign closure imported a ref")
-                found = module.git("cat-file", "-e", campaign.C + "^{commit}", cwd=clone).returncode == 0
-                if found != (label == "complete"):
+                found = module.git("cat-file", "-e", checked_identity + "^{commit}", cwd=clone).returncode == 0
+                if found != should_exist:
                     raise AssertionError("campaign omission/substitution root identity failure: " + label)
                 if label == "complete":
                     objects = set(module.git_value("cat-file", "--batch-all-objects", "--batch-check=%(objectname)", cwd=clone).splitlines())
@@ -873,7 +890,70 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
         module.ROOT, module.EXECUTION_ENV = original_root, original_env
     return ["ISO-17-campaign-exact-consumer-before-framework-selection",
             "ISO-18-campaign-authority-failure-and-near-match-rejection",
-            "ISO-19-campaign-reduced-closure-omission-substitution-no-ref"]
+            "ISO-19-campaign-reduced-closure-omission-substitution-no-ref",
+            "ISO-24-repaired-base-and-immutable-packet-closure-omission"]
+
+
+def gp_val043_runner_proof_cases(module: Any) -> list[str]:
+    """Finite repaired proof wiring; mocked identities never establish acceptance."""
+    import glyph_campaign_transition as campaign
+    from glyph_hardware_correspondence import CorrespondenceError
+
+    with tempfile.TemporaryDirectory(prefix="glyph-val043-runner-proof-") as directory:
+        root = fresh_root(Path(directory))
+        guard = entry("campaign_webserial_source_authority", category="candidate_safety")
+        guard.update(path="tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+                     required_arguments=["--campaign-transition"], branch_policy="content_and_scope")
+        guard["command"] = ["python3", guard["path"], *guard["required_arguments"]]
+        write_checker(root, guard, 0)
+        (root / guard["path"]).write_text(
+            "import sys\nassert sys.argv[1:] == ['--campaign-transition'], sys.argv\n"
+            "print('SYNTHETIC TEST ONLY: repaired proof exact argv PASS')\n")
+        run_git(root, "add", guard["path"])
+        manifest = write_manifest(root, [guard], ["baseline", "candidate_safety", "historical_evidence"])
+        head = module.git_value("rev-parse", "HEAD", cwd=root)
+        finite_roots = frozenset({head})
+        proof = {"contract": "c020_abi_repair", "object_roots": finite_roots,
+                 "test_only_inert_probe": True}
+        with mock.patch.object(module, "ROOT", root), mock.patch.object(campaign, "ROOTS", frozenset()):
+            with mock.patch.object(campaign, "authenticate", return_value=proof) as authenticated:
+                if module.required_catalog([guard]) != ({}, set(finite_roots)):
+                    raise AssertionError("repaired selected proof roots differ")
+                authenticated.assert_called_once_with(root)
+            for malformed in (None, set(finite_roots), [], frozenset(), frozenset({"0" * 39}),
+                              frozenset({"A" * 40}), frozenset({1})):
+                with mock.patch.object(campaign, "authenticate", return_value=dict(proof, object_roots=malformed)):
+                    try:
+                        module.required_catalog([guard])
+                    except ValueError:
+                        pass
+                    else:
+                        raise AssertionError("malformed repaired proof roots accepted: " + repr(malformed))
+            # A mutable catalog on its own never gives this runner roots. The
+            # actual helper owns catalog validation before exporting its proof.
+            (root / "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json").write_text(
+                '{"schema_version":1,"accepted_transitions":[{"build":"' + 'b' * 40 + '"}]}\n')
+            with mock.patch.object(campaign, "authenticate", return_value=proof):
+                if module.required_catalog([guard]) != ({}, set(finite_roots)):
+                    raise AssertionError("unauthenticated repaired catalog supplied roots")
+            (root / "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json").unlink()
+            with mock.patch.object(campaign, "authenticate", return_value=proof):
+                code, text = invoke(module, root, manifest, "--json")
+            report = payload(text)
+            if (code or report["canonical_proof"] != "MATCH" or len(report["results"]) != 1
+                    or report["results"][0]["command"] != guard["command"]
+                    or report["results"][0]["isolated_proof"] != "MATCH"
+                    or report["results"][0]["status"] != "PASS"):
+                raise AssertionError("repaired proof actual argv dispatch failed: " + text)
+            with mock.patch.object(campaign, "authenticate", side_effect=CorrespondenceError("repaired authority unavailable")):
+                code, text = invoke(module, root, manifest, "--json")
+            report = payload(text)
+            if (code != 1 or report["failure_kind"] != "SETUP_FAILURE"
+                    or report["canonical_proof"] != "MATCH" or report["results"]):
+                raise AssertionError("repaired authentication failure bypassed setup: " + text)
+    return ["ISO-21-repaired-authenticated-proof-roots-and-malformed-rejection",
+            "ISO-22-repaired-catalog-not-root-authority",
+            "ISO-23-repaired-exact-argv-and-authentication-setup-failure"]
 
 def gp_val037_current_argument_cases(module: Any) -> list[str]:
     """Exercise the actual load/preflight and argv path in disposable repositories.
@@ -1462,6 +1542,7 @@ def main() -> int:
         passed.append("AGG-12-census-freshness-added-removed-renamed-byte-drift")
 
     passed.extend(gp_val037_current_argument_cases(module))
+    passed.extend(gp_val043_runner_proof_cases(module))
     passed.extend(isolation_contract_cases(module))
     # The old synthetic repositories exercise only the pre-campaign catalog.
     # They contain no adopted campaign authority and must not impersonate it.

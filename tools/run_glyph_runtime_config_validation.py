@@ -575,13 +575,25 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
     if any(entry['id'] == identity and entry['command'] == command
            for entry in selected for identity, command in campaign_consumers):
         from glyph_campaign_transition import ROOTS, TRANSITIONS, authenticate
-        authenticate(ROOT)
+        proof = authenticate(ROOT)
         roots.update(ROOTS)
-        catalog_path = ROOT / TRANSITIONS
-        if catalog_path.exists():
-            catalog = json.loads(catalog_path.read_text(), object_pairs_hook=pairs)
-            for record in catalog['accepted_transitions']:
-                roots.update(record[k] for k in ('build', 'parent', 'review_commit', 'evidence_commit', 'integration'))
+        if proof.get('contract') == 'c020_abi_repair':
+            # GP-VAL-043 exports only roots whose finite candidate, authority and
+            # accepted-transition contracts passed the actual phase proof. The
+            # mutable mapping/catalog never supplies runner authority by itself.
+            repaired_roots = proof.get('object_roots')
+            if (type(repaired_roots) is not frozenset or not repaired_roots
+                    or any(not isinstance(identity, str) or re.fullmatch(r'[0-9a-f]{40}', identity) is None
+                           for identity in repaired_roots)):
+                raise ValueError('invalid authenticated C020 ABI repair object roots')
+            roots.update(repaired_roots)
+        else:
+            # Original037 keeps its authenticated historical catalog contract.
+            catalog_path = ROOT / TRANSITIONS
+            if catalog_path.exists():
+                catalog = json.loads(catalog_path.read_text(), object_pairs_hook=pairs)
+                for record in catalog['accepted_transitions']:
+                    roots.update(record[k] for k in ('build', 'parent', 'review_commit', 'evidence_commit', 'integration'))
     if not has("agent_framework", "check_glyph_agent_framework_docs.py"):
         return refs, roots
     path = "docs/project/ACTIVE_AGENT_QUEUE.md"

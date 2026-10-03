@@ -5,6 +5,8 @@ from __future__ import annotations
 import os
 import copy
 import json
+import hashlib
+import sys
 from unittest.mock import patch
 from pathlib import Path
 import shutil
@@ -77,6 +79,7 @@ def campaign_contract_tests(directory: Path) -> None:
     import check_glyph_agent_framework_docs as framework
     root = directory / "campaign-contract"
     run(ROOT, "git", "clone", "--quiet", "--no-local", str(ROOT), str(root))
+    run(root, "git", "switch", "--detach", "caf0718472c7752c78838be6f1d48b56932d90b9")
     # Read-only contract authentication exercises the actual immutable objects.
     before, after = campaign.source_contract(root)
     assert before != after and set(after) - set(before) == campaign.CRITICAL - {
@@ -189,7 +192,7 @@ def fixture_commit(root: Path, message: str) -> str:
     return run(root,'git','rev-parse','HEAD').strip()
 
 
-def make_synthetic_accepted_fixture(directory: Path) -> tuple[Path, dict]:
+def make_synthetic_accepted_fixture(directory: Path, *, repaired: bool = False) -> tuple[Path, dict]:
     """Disposable real Git evidence chronology; never physical acceptance.
 
     Call only with a fresh temp directory. Returned repository can run actual
@@ -197,18 +200,58 @@ def make_synthetic_accepted_fixture(directory: Path) -> tuple[Path, dict]:
     This function performs no firmware build, artifact creation, or publication.
     """
     import glyph_campaign_transition as campaign
-    root=directory.resolve()/'accepted-contract'
+    import glyph_c020_abi_repair_transition as repair
+    candidate = repair.C_R if repaired else campaign.C
+    catalog_path = repair.TRANSITIONS if repaired else campaign.TRANSITIONS
+    root=directory.resolve()/('repaired-accepted-contract' if repaired else 'accepted-contract')
     run(ROOT,'git','clone','--quiet','--no-local',str(ROOT),str(root))
+    # Nested disposable clones need immutable off-head roots that may be present
+    # only as the caller's remote refs. Fetch exact objects locally without refs.
+    roots = repair.ROOTS if repaired else campaign.ROOTS
+    run(root, 'git', 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head',
+        str(ROOT), *sorted(roots))
     run(root,'git','config','user.name','Synthetic GP-VAL-037 tests')
     run(root,'git','config','user.email','synthetic@example.invalid')
-    G=run(root,'git','rev-parse','HEAD').strip()
-    run(root,'git','switch','-c','synthetic-candidate')
-    run(root,'git','merge','--no-ff','--no-edit',campaign.C)
+    source_free_base = repair.B_R if repaired else 'caf0718472c7752c78838be6f1d48b56932d90b9'
+    run(root, 'git', 'switch', '--detach', source_free_base)
+    if repaired:
+        # Copy only adopted H1 governance literals from the current worktree.
+        # ROOT may itself be a composed candidate; critical source is never copied.
+        status_paths = {'docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md',
+                        'docs/ROADMAP.md', campaign.QUEUE}
+        accepted_metadata = {repair.PROTOCOL, repair.EVIDENCE,
+                             'docs/calibration/gp_config_020_hardware_result.md'}
+        excluded = repair.PROOF_PATHS | status_paths | accepted_metadata | {
+            campaign.TRANSITIONS, repair.TRANSITIONS}
+        for path in sorted(repair.GOVERNANCE_PATHS - excluded):
+            source = ROOT / path
+            if source.is_file():
+                destination = root / path
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, destination)
+        # Accepted caller catalogs, queue and protocol are never a fixture base.
+        # Reconstruct source-free status mirrors from the authenticated handoff.
+        for path in sorted(status_paths):
+            (root / path).write_bytes(campaign.raw_bytes(root, repair.HANDOFF_R, path))
+        for path in (campaign.TRANSITIONS, repair.TRANSITIONS):
+            (root / path).write_text('{"schema_version":1,"accepted_transitions":[]}\n')
+        G = fixture_commit(root, 'source-free repaired governance on explicit B_R')
+        assert campaign.critical_tree(root, G) == campaign.critical_tree(root, repair.B_R)
+        assert campaign.authenticate(root)['phase'] == 'BASELINE'
+    else:
+        G=run(root,'git','rev-parse','HEAD').strip()
+        assert campaign.critical_tree(root, G) == campaign.critical_tree(root, campaign.B)
+    private_suffix = hashlib.sha256(str(root).encode()).hexdigest()[:12]
+    run(root,'git','switch','-c','synthetic-candidate-' + private_suffix)
+    run(root,'git','merge','--no-ff','--no-edit',candidate)
     P=run(root,'git','rev-parse','HEAD').strip()
     F=fixture_commit(root,'unbuilt candidate identity; no artifact exists')
     T=run(root,'git','rev-parse',F+'^{tree}').strip()
+    if repaired:
+        proof = campaign.authenticate(root)
+        assert proof['phase'] == 'CANDIDATE_VALIDATION_ONLY' and proof['candidate'] == repair.C_R
     run(root,'git','switch','--detach',G)
-    run(root,'git','switch','-c','synthetic-evidence')
+    run(root,'git','switch','-c','synthetic-evidence-' + private_suffix)
     review=campaign.item(root,G,'GP-CONFIG-020')
     digest='a'*64
     locator=f'local_backups/hardware-artifacts/{F}/{digest}/firmware.uf2'
@@ -250,9 +293,9 @@ def make_synthetic_accepted_fixture(directory: Path) -> tuple[Path, dict]:
     E=fixture_commit(root,'source-free synthetic processor acceptance')
     run(root,'git','merge','--no-ff','--no-edit',F)
     I=run(root,'git','rev-parse','HEAD').strip()
-    record=dict(work_order='GP-CONFIG-020',candidate=campaign.C,build=F,parent=P,tree=T,
+    record=dict(work_order='GP-CONFIG-020',candidate=candidate,build=F,parent=P,tree=T,
                 review_commit=R,evidence_commit=E,integration=I)
-    (root/campaign.TRANSITIONS).write_text(json.dumps(dict(schema_version=1,accepted_transitions=[record]),indent=2)+'\n')
+    (root/catalog_path).write_text(json.dumps(dict(schema_version=1,accepted_transitions=[record]),indent=2)+'\n')
     fixture_commit(root,'synthetic accepted transition catalog')
     return root,record
 
@@ -482,6 +525,145 @@ def accepted_contract_tests(directory: Path) -> None:
             rejected(lambda:campaign.validate_accepted_transition(root,record,target),'accepted '+key)
 
 
+
+def repaired_contract_tests(directory: Path) -> None:
+    """Actual four phases and rejection controls in disposable Git repositories."""
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    historical = directory / 'repair-original-historical'
+    run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(historical))
+    run(historical, 'git', 'switch', '--detach', 'caf0718472c7752c78838be6f1d48b56932d90b9')
+    before, after = campaign.source_contract(historical)
+    assert campaign.authenticate(historical)['contract'] == 'original037'
+    assert campaign.authenticate_original(historical)['phase'] == 'BASELINE'
+    # The generator asserts source-free B_R/G, source-free R/E, repaired candidate
+    # and accepted phases before returning its explicitly synthetic accepted tip.
+    root, record = make_synthetic_accepted_fixture(directory, repaired=True)
+    target = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    proof = campaign.authenticate(root)
+    assert proof['phase'] == 'ACCEPTED_TRANSITION' and proof['contract'] == 'c020_abi_repair'
+    assert proof['candidate'] == repair.C_R and repair.C_R in proof['object_roots']
+    assert repair.validate_accepted_transition(root, record, target) == record['build']
+    assert campaign.critical_tree(root, record['review_commit']) == before
+    assert campaign.critical_tree(root, record['evidence_commit']) == before
+    assert not campaign.ancestor(root, record['build'], record['review_commit'])
+    assert not campaign.ancestor(root, record['build'], record['evidence_commit'])
+    accepted_live_input_tests(root)
+    # A caller already in accepted phase must still produce source-free G/R/E.
+    with tempfile.TemporaryDirectory(prefix='gp-val043-accepted-caller-') as nested_dir:
+        with patch.object(sys.modules[__name__], 'ROOT', root):
+            nested, nested_record = make_synthetic_accepted_fixture(Path(nested_dir), repaired=True)
+        assert campaign.critical_tree(nested, nested_record['review_commit']) == before
+        assert campaign.critical_tree(nested, nested_record['evidence_commit']) == before
+        assert campaign.authenticate(nested)['phase'] == 'ACCEPTED_TRANSITION'
+    # Exact tuple/source/ABI/mode/authority substitution must fail at immutable reads.
+    native_git = repair._git
+    for label, command, replacement in (
+        ('CR parent', ('rev-list', '--parents', '-n', '1', repair.C_R), b'0' * 40),
+        ('CR tree', ('rev-parse', repair.C_R + '^{tree}'), b'0' * 40),
+        ('raw11', ('diff-tree', '-r', '--no-renames', '--raw', '-z', repair.B_R, repair.C_R), b'forged'),
+        ('receipt lineage', ('rev-list', '--parents', '-n', '1', repair.RECEIPT), b'0' * 40),
+    ):
+        def changed_git(where, *args):
+            return replacement if args == command else native_git(where, *args)
+        with patch.object(repair, '_git', side_effect=changed_git):
+            rejected(lambda: repair.source_contract(root), label)
+    native_bytes = repair.raw_bytes
+    for ref, path in ((repair.C_R, 'src/core/config_button_validation.cpp'),
+                      (repair.C_R, 'tools/fixtures/gp_config020_button_validation/abi_probe.cpp'),
+                      (repair.HANDOFF_R, campaign.QUEUE),
+                      (repair.PACKET, 'docs/planning/portfolio_20261003_1256.md')):
+        def changed_bytes(where, revision, name):
+            raw = native_bytes(where, revision, name)
+            return raw + b'forged' if (revision, name) == (ref, path) else raw
+        with patch.object(repair, 'raw_bytes', side_effect=changed_bytes):
+            rejected(lambda: repair.source_contract(root), 'immutable blob ' + path)
+    native_tree = repair._tree
+    def executable_candidate(where, revision):
+        value = native_tree(where, revision)
+        if revision == repair.C_R:
+            path = 'src/core/config_button_validation.cpp'
+            value[path] = ('100755', *value[path][1:])
+        return value
+    with patch.object(repair, '_tree', side_effect=executable_candidate):
+        rejected(lambda: repair.source_contract(root), 'repaired candidate mode substitution')
+    host = root / 'tools/check_glyph_gp_config020_button_validation.py'
+    host_bytes = host.read_bytes()
+    try:
+        host.write_bytes(host_bytes + b'\n# substituted reviewed host\n')
+        rejected(lambda: campaign.authenticate(root), 'reviewed repaired host substitution')
+    finally:
+        host.write_bytes(host_bytes)
+    for path in (repair.MAPPING, repair.TRANSITIONS):
+        file = root / path
+        original_bytes = file.read_bytes()
+        mode = file.stat().st_mode
+        try:
+            file.write_bytes(original_bytes + b'\n')
+            rejected(lambda: campaign.authenticate(root), 'fixture substitution ' + path)
+            file.write_bytes(original_bytes)
+            file.chmod(mode | 0o111)
+            rejected(lambda: campaign.authenticate(root), 'executable fixture ' + path)
+        finally:
+            file.write_bytes(original_bytes)
+            file.chmod(mode)
+    mapping = root / repair.MAPPING
+    original_bytes = mapping.read_bytes()
+    for change in (lambda x: dict(x, bypass=True),
+                   lambda x: dict(x, candidate=dict(x['candidate'], candidate='0' * 40)),
+                   lambda x: dict(x, authority=dict(x['authority'], adoption='0' * 40)),
+                   lambda x: dict(x, host_execution_sha256='0' * 64)):
+        try:
+            mapping.write_text(json.dumps(change(json.loads(original_bytes))))
+            rejected(lambda: campaign.authenticate(root), 'literal mapping identity/ABI substitution')
+        finally:
+            mapping.write_bytes(original_bytes)
+    for key, value in (('candidate', campaign.C), ('parent', repair.B_R), ('tree', '0' * 40),
+                       ('review_commit', record['evidence_commit']),
+                       ('review_commit', record['build']),
+                       ('evidence_commit', record['build']),
+                       ('evidence_commit', record['integration']),
+                       ('integration', record['review_commit'])):
+        rejected(lambda: repair.validate_accepted_transition(root, dict(record, **{key: value}), target), key)
+    native_item = repair.item
+    for which, key, value in (
+        (record['review_commit'], 'status', 'READY'),
+        (record['review_commit'], 'candidate_git_sha', '0' * 40),
+        (record['review_commit'], 'firmware_artifact_sha256', 'b' * 64),
+        (record['evidence_commit'], 'hardware_result', 'FAIL'),
+        (record['evidence_commit'], 'hardware_evidence_gaps', ['missing physical row']),
+        (record['evidence_commit'], 'hardware_evidence_record', 'git-json:' + campaign.C + ':' + repair.EVIDENCE),
+        (target, 'status', 'REVIEW'),
+    ):
+        def changed_item(where, revision, order):
+            value_item = native_item(where, revision, order)
+            return dict(value_item, **{key: value}) if revision == which else value_item
+        with patch.object(repair, 'item', side_effect=changed_item):
+            rejected(lambda: repair.validate_accepted_transition(root, record, target), key)
+    catalog = root / repair.TRANSITIONS
+    catalog_bytes = catalog.read_bytes()
+    try:
+        catalog.unlink()
+        rejected(lambda: campaign.authenticate(root), 'missing repaired accepted catalog')
+        catalog.write_text('{"schema_version":1,"accepted_transitions":[]}\n')
+        rejected(lambda: campaign.authenticate(root), 'empty repaired accepted catalog')
+    finally:
+        catalog.write_bytes(catalog_bytes)
+    downgraded = campaign.item(root, target, 'GP-CONFIG-020')
+    downgraded.update(status='REVIEW', hardware_result=None, hardware_evidence_record=None,
+                      hardware_evidence_dependency_satisfied=None)
+    run(root, 'git', 'switch', '-c', 'synthetic-repair-downgrade')
+    write_queue_item(root, downgraded)
+    catalog.write_text('{"schema_version":1,"accepted_transitions":[]}\n')
+    fixture_commit(root, 'erase repaired accepted queue/catalog')
+    rejected(lambda: campaign.authenticate(root), 'committed repaired acceptance downgrade')
+    run(root, 'git', 'switch', '--detach', target)
+    run(root, 'git', 'switch', '-c', 'synthetic-repair-ours', record['build'])
+    run(root, 'git', 'merge', '--no-ff', '-s', 'ours', '--no-edit', target)
+    rejected(lambda: campaign.authenticate(root), 'second-parent repaired acceptance concealment')
+    print('GP-VAL-043 four actual Git phases and mandatory identity/source/ABI/acceptance negatives PASS; SYNTHETIC TEST ONLY')
+
+
 def legacy_applicability_tests(directory: Path) -> None:
     """Keep legacy positive scope and exact historical identity coverage separate."""
     canonical = Path(directory) / "canonical"
@@ -526,6 +708,7 @@ def main() -> None:
         run(root, "git", "config", "user.email", "gp-val-029@example.invalid")
         run(root, "python3", CHECKER)
         campaign_contract_tests(Path(directory))
+        repaired_contract_tests(Path(directory))
         commit_change(root, "docs/ROADMAP.md", "\nGP-VAL-029 isolated scope control.\n", "gp-val-029-positive")
         run(root, "python3", CHECKER)
         commit_change(root, "tools/check_glyph_prebuild_git_identity.py", "\n# isolated H1 validation self-test delta\n", "gp-val-029-ready-prerequisite")

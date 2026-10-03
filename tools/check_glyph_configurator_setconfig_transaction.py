@@ -9,7 +9,7 @@ import subprocess
 import shutil
 import tempfile
 
-from glyph_campaign_transition import verify_current_source
+from glyph_campaign_transition import C, authenticate, verify_current_source
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "HAL/pico/src/comms/ConfiguratorBackend.cpp"
@@ -118,7 +118,14 @@ def validate_correspondence() -> None:
 HISTORICAL_SOURCE_SHA256 = "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876"
 
 
-def compile_translation_unit(harness: Path, historical: bool = False) -> str:
+def current_abi_modes(historical: bool = False) -> tuple[str | None, ...]:
+    if historical or hashlib.sha256(SOURCE.read_bytes()).hexdigest() == HISTORICAL_SOURCE_SHA256:
+        return (None,)
+    proof = authenticate(ROOT)
+    return ("short", "ordinary") if proof['contract'] == 'c020_abi_repair' and proof['candidate'] != C else (None,)
+
+
+def compile_translation_unit(harness: Path, historical: bool = False, abi_mode: str | None = None) -> str:
     """Run a literal production TU in an isolated mirror; never replace the live tree."""
     frozen = verify_current_source(ROOT, SOURCE.relative_to(ROOT).as_posix(), HISTORICAL_SOURCE_SHA256)
     current = SOURCE.read_bytes()
@@ -126,6 +133,8 @@ def compile_translation_unit(harness: Path, historical: bool = False) -> str:
     require(hashlib.sha256((ROOT / "tools/fixtures/gp_config012_button_host/nanopb/pb.h").read_bytes()).hexdigest() == "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2", "frozen generated schema/ABI dependency drift")
 
     repaired = not historical and current != frozen
+    require(abi_mode in (None, "short", "ordinary"), "unknown host ABI mode")
+    require(abi_mode is None or repaired, "ABI modes apply only to the real candidate helper")
     with tempfile.TemporaryDirectory(prefix="glyph-setconfig-host-") as temp:
         mirror = Path(temp)
         shutil.copytree(HOST_ROOT, mirror / HOST_ROOT.relative_to(ROOT))
@@ -147,6 +156,22 @@ def compile_translation_unit(harness: Path, historical: bool = False) -> str:
             command += ["-DGLYPH_ACTUAL_BUTTON_VALIDATOR", f"-I{mirror / 'include'}",
                         f"-I{mirror / 'tools/fixtures/gp_config012_button_host/nanopb'}",
                         str(mirror / "src/core/config_button_validation.cpp")]
+        if abi_mode is not None:
+            # Every Config-consuming C++ unit receives the same explicit ABI.
+            # Decode is mocked here; the separate frozen C_R suite checks actual C descriptors.
+            width = 1 if abi_mode == "short" else 4
+            probe = mirror / "abi_assert.hpp"
+            probe.write_text('#include "' + str(mirror / "tools/fixtures/gp_config012_button_host/generated/config.pb.h") +
+                             '"\nstatic_assert(sizeof(Button) == GLYPH_EXPECT_BUTTON_BYTES, "host Button ABI mismatch");\n')
+            command += ["-fshort-enums" if abi_mode == "short" else "-fno-short-enums",
+                        "-include", str(probe), f"-DGLYPH_EXPECT_BUTTON_BYTES={width}"]
+            if harness == HARNESS:
+                negative = [part if not part.startswith("-DGLYPH_EXPECT_BUTTON_BYTES=") else
+                            f"-DGLYPH_EXPECT_BUTTON_BYTES={4 if width == 1 else 1}" for part in command]
+                negative += ["-fsyntax-only", str(mirror / harness.relative_to(ROOT))]
+                rejected = subprocess.run(negative, cwd=mirror, capture_output=True, text=True, check=False)
+                require(rejected.returncode != 0 and "host Button ABI mismatch" in rejected.stderr,
+                        "contradictory host ABI assertion was not rejected")
         binary = mirror / "host"
         command += [str(mirror / harness.relative_to(ROOT)), "-o", str(binary)]
         compiled = subprocess.run(command, cwd=mirror, capture_output=True, text=True, check=False)
@@ -161,12 +186,14 @@ def compile_and_run(expected_names: list[str]) -> str:
     repaired = hashlib.sha256(SOURCE.read_bytes()).hexdigest() != HISTORICAL_SOURCE_SHA256
     for historical in (True, False):
         names = expected_names + (["invalid_button_binding", "invalid_binding_count"] if repaired and not historical else [])
-        output = compile_translation_unit(HARNESS, historical=historical)
-        require(output.splitlines() == [f"case={name} result=PASS" for name in names] + [
-            "production_source=HAL/pico/src/comms/ConfiguratorBackend.cpp",
-            "production_handler_cases=11 actual_validator=linked result=PASS" if repaired and not historical else "production_handler_cases=9 result=PASS",
-        ], "host production correspondence output drift")
-        outputs.append(("historical" if historical else "current") + " translation-unit proof:\n" + output)
+        for abi_mode in current_abi_modes(historical):
+            output = compile_translation_unit(HARNESS, historical=historical, abi_mode=abi_mode)
+            require(output.splitlines() == [f"case={name} result=PASS" for name in names] + [
+                "production_source=HAL/pico/src/comms/ConfiguratorBackend.cpp",
+                "production_handler_cases=11 actual_validator=linked result=PASS" if repaired and not historical else "production_handler_cases=9 result=PASS",
+            ], "host production correspondence output drift")
+            label = ("historical" if historical else "current") + (f" ABI={abi_mode}" if abi_mode else "")
+            outputs.append(label + " translation-unit proof:\n" + output)
     return "".join(outputs)
 
 

@@ -48,6 +48,15 @@ classifier for all post-integration paths. `--historical` retains the exact
 integration candidate, branch, and direct-parent proof. Neither mode grants
 new firmware or hardware acceptance.
 
+GP-VAL-043 adds a separate finite contract for the exact C020 ABI repair. The
+runner keeps the reserved current WebSerial invocation and its argument rules,
+then imports the repaired candidate and authority object closure only after
+phase authentication. The original GP-VAL-037 identities and accepted catalog
+retain their historical proof. The new accepted catalog starts empty; synthetic
+transition records belong only to disposable test repositories. Current
+transaction validation links the real helper in both consistent host ABI modes,
+while historical observations and their fixture digests remain fixed.
+
 GP-VAL-028 makes the GP-CONFIG-010 capacity checker runnable from a clean
 checkout. The current checker binds the tracked 0.4.9.2 generated header to
 the exact `bdd72a22…` digest, schema inputs, generator provenance, package

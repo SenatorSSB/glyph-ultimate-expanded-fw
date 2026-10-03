@@ -582,6 +582,24 @@ class ClassificationTests(unittest.TestCase):
                     correspondence.classify_path(alias)
         self.assertEqual(correspondence.classify_path("src/core/mode_selection.cpp"), "CRITICAL")
 
+    def test_gp_val043_literal_paths_and_critical_precedence(self):
+        paths = (
+            'tools/glyph_c020_abi_repair_transition.py',
+            'docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json',
+            'docs/runtime_config/fixtures/gp_val043_accepted_transitions.json',
+            'tools/fixtures/gp_config020_button_validation/abi_probe.cpp',
+            'docs/runtime_config/gp_config020_abi_repair.md',
+            'docs/runtime_config/fixtures/gp_config020_abi_repair.json',
+        )
+        for path in paths:
+            self.assertEqual(correspondence.classify_path(path), 'NON_BEHAVIORAL')
+            for alias in (path + '.bak', path.swapcase(), 'prefix/' + path, './' + path):
+                with self.subTest(path=alias), self.assertRaises(correspondence.CorrespondenceError):
+                    correspondence.classify_path(alias)
+        for path in ('HAL/pico/src/comms/ConfiguratorBackend.cpp',
+                     'include/core/config_button_validation.hpp', 'src/core/config_button_validation.cpp'):
+            self.assertEqual(correspondence.classify_path(path), 'CRITICAL')
+
     def test_critical_precedence_over_inventory(self):
         with mock.patch.object(correspondence, "NON_BEHAVIORAL_PATHS", {HANDLER, GENERATED, "platformio.ini"}):
             for path in correspondence.NON_BEHAVIORAL_PATHS:

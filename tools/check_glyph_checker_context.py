@@ -194,8 +194,14 @@ PROTECTED_SCOPE_MAINS = (
 def campaign_protected_scope_tests() -> None:
     """Exercise all five real mains on an ancestry-preserving private composition."""
     from concurrent.futures import ThreadPoolExecutor
-    from glyph_campaign_transition import ADOPTION, C, GOVERNANCE_PATHS
+    from glyph_campaign_transition import ADOPTION, C, GOVERNANCE_PATHS, authenticate
     source = Path(__file__).resolve().parents[1]
+    source_proof = authenticate(source)
+    if source_proof['contract'] == 'c020_abi_repair':
+        from glyph_c020_abi_repair_transition import B_R, GOVERNANCE_PATHS
+        base, candidate = B_R, source_proof['candidate']
+    else:
+        base, candidate = ADOPTION, C
     with tempfile.TemporaryDirectory(prefix="glyph-five-campaign-scopes-") as directory:
         root = Path(directory) / "composed"
         run(source, "clone", "--shared", "--no-checkout", str(source), str(root))
@@ -205,18 +211,20 @@ def campaign_protected_scope_tests() -> None:
         # Development runs may exercise pending governance edits. In the final
         # clean aggregate this set is empty, so only committed inputs are used.
         pending = set(output(source, "diff", "HEAD", "--name-only").splitlines())
+        pending.update(output(source, "ls-files", "--others", "--exclude-standard").splitlines())
         if not pending <= GOVERNANCE_PATHS:
             raise AssertionError("scope test refuses non-governance development edits")
         for relative in pending:
+            (root / relative).parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source / relative, root / relative)
         if pending:
             run(root, "add", "--", *sorted(pending))
             run(root, "commit", "-m", "private pending governance test snapshot")
-        run(root, "branch", "-f", "configurator", ADOPTION)
-        run(root, "merge", "--no-ff", "--no-edit", C)
-        for ancestor in (ADOPTION, C):
+        run(root, "branch", "-f", "configurator", base)
+        run(root, "merge", "--no-ff", "--no-edit", candidate)
+        for ancestor in (base, candidate):
             run(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
-        env = dict(os.environ, GLYPH_CHECKER_BASE=ADOPTION, PYTHONDONTWRITEBYTECODE="1")
+        env = dict(os.environ, GLYPH_CHECKER_BASE=base, PYTHONDONTWRITEBYTECODE="1")
 
         def actual_main(filename: str, rejection: str | None) -> None:
             result = subprocess.run([sys.executable, str(root / "tools" / filename)],
@@ -241,6 +249,7 @@ def campaign_protected_scope_tests() -> None:
                            for filename in PROTECTED_SCOPE_MAINS]
                 for future in futures:
                     future.result()
+            guard_main(root, True, rejection)
 
         all_mains()
         # Changes are confined to the private checkout. Each main must reject
@@ -284,7 +293,7 @@ def campaign_protected_scope_tests() -> None:
                 alias.unlink()
         if output(root, "status", "--porcelain", "--untracked-files=all"):
             raise AssertionError("five-scope tests left dirty composition")
-    print("campaign_five_scope_actual_mains: PASS; five authenticated composed-phase positives; "
+    print("campaign_five_scope_actual_mains: PASS; five scope mains plus WebSerial authenticated composed-phase positives; "
           "protected source, executable mode, unknown metadata and alias negatives per main")
 
 

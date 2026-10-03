@@ -269,7 +269,12 @@ def authenticated_campaign_context(context: CheckerContext) -> CheckerContext:
     from dataclasses import replace
     from glyph_campaign_transition import ADOPTION, authenticate
     # Historical checkers and small unit repositories retain their original context.
-    if _git_returncode(context.repo_root, ["merge-base", "--is-ancestor", ADOPTION, context.head]):
+    repair_markers = (
+        "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
+        "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
+    )
+    if (_git_returncode(context.repo_root, ["merge-base", "--is-ancestor", ADOPTION, context.head])
+            and not any((context.repo_root / path).exists() for path in repair_markers)):
         return context
     try:
         proof = authenticate(context.repo_root)

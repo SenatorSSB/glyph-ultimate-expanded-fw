@@ -333,3 +333,31 @@ transaction and raw GET translation units compile the actual helper against the
 frozen generated Config schema. Historical line coverage and observations remain
 separate. GP-CONFIG-010 keeps its legacy patch digest; a pinned full-index digest
 and exact blob/mode/patch-body comparison handles only Git abbreviation variance.
+
+
+## GP-VAL-043 finite C020 ABI repair successor
+
+`tools/glyph_c020_abi_repair_transition.py` authenticates the separately adopted
+repair candidate `3138ade526cabde23a0abedcb94acae8512579d1`, its direct base
+`0f7fe50b3b5f385397a9737bc4c0a50ddda683c8`, immutable1256 authority and source-free
+handoff. The original GP-VAL-037 constants, source proof, catalog and DONE
+history remain unchanged. The new closed mapping is
+`docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json`; the separate real
+`gp_val043_accepted_transitions.json` catalog starts empty.
+
+The finite metadata inventory adds only those three paths and the candidate's
+three reviewed proof paths: `tools/fixtures/gp_config020_button_validation/abi_probe.cpp`,
+`docs/runtime_config/gp_config020_abi_repair.md`, and
+`docs/runtime_config/fixtures/gp_config020_abi_repair.json`. Regular file modes,
+critical precedence, full critical-tree equality and unknown-path rejection
+remain mandatory. The mapping binds the exact eleven-path raw inventory and
+immutable host, independent review and target object evidence.
+
+Current transaction and GET host mirrors compile the exact repaired helper
+with consistent short and ordinary enum modes. The transaction decode remains
+mocked; actual generated C/Nanopb descriptor proof belongs to the frozen repaired
+candidate suite. Historical fixtures and observations are unchanged. Synthetic
+acceptance tests reconstruct a source-free adopted base before review and
+processor records; they never establish controller acceptance. Actual acceptance
+still requires the exact built snapshot, independent review, preserved artifact,
+processor-accepted human PASS, empty gaps and reviewed integration chronology.

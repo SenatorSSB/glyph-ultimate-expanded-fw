@@ -4,7 +4,7 @@ from __future__ import annotations
 import copy, hashlib, json, subprocess, tempfile
 from pathlib import Path
 from glyph_campaign_transition import verify_current_source
-from check_glyph_configurator_setconfig_transaction import compile_translation_unit, ContractError
+from check_glyph_configurator_setconfig_transaction import compile_translation_unit, current_abi_modes, ContractError
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "docs/runtime_config/fixtures/getconfig_raw_load_characterization.json"
@@ -51,8 +51,9 @@ def correspondence():
 def compile_run(source, expected):
     if source == GET:
         for historical in (True, False):
-            output = compile_translation_unit(GET, historical=historical)
-            require(all(line in output for line in expected), "GET historical/current output drift")
+            for abi_mode in current_abi_modes(historical):
+                output = compile_translation_unit(GET, historical=historical, abi_mode=abi_mode)
+                require(all(line in output for line in expected), "GET historical/current output drift")
         return
     with tempfile.TemporaryDirectory(prefix="glyph-getconfig-host-") as td:
         binary = Path(td) / "host"

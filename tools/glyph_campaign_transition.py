@@ -383,5 +383,31 @@ def verify_current_source(root, path, historical_sha256):
     if actual!=old:
         proof=authenticate(root)
         require(proof['phase']!='BASELINE' and path in CRITICAL,'unadopted current source overlay: '+path)
-        require(actual==raw_bytes(root,C,path),'current source substitution: '+path)
+        require(actual==raw_bytes(root,proof['candidate'],path),'current source substitution: '+path)
     return old
+
+
+# Preserve the historical callable and its literal source_contract/constants.
+authenticate_original = authenticate
+
+
+@_proof_invocation
+def authenticate(root):
+    root = Path(root).resolve()
+    head = _git(root, 'rev-parse', 'HEAD').decode().strip()
+    B_R = "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8"
+    MAPPING = "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json"
+    REPAIRED_TRANSITIONS = "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"
+    present = any(path in _tree(root, head) or (root / path).exists()
+                  for path in (MAPPING, REPAIRED_TRANSITIONS))
+    # Missing adopted objects with repaired literals present must never fall back.
+    adopted = False
+    try:
+        adopted = ancestor(root, B_R, head)
+    except CorrespondenceError:
+        require(not present, 'repaired mapping lacks adopted immutable authority')
+    if adopted or present:
+        from glyph_c020_abi_repair_transition import authenticate as repaired
+        return repaired(root)
+    proof = authenticate_original(root)
+    return dict(proof, contract='original037', object_roots=ROOTS)

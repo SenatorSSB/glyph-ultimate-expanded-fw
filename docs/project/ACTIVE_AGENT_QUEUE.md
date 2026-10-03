@@ -14,6 +14,8 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Current C020 ABI Repair Authority
 
+GP-VAL-043 mechanical activation: the exact published C_R and source-free handoff passed 66 independent identity/source/evidence checks and fresh live-ref verification. The recorded objective conditions are satisfied; The queue marker records GP-VAL-043 activation for its bounded source-free implementation. Original037 DONE and C020 REVIEW remain unchanged. No implementation or hardware acceptance is claimed by activation.
+
 GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7752c78838be6f1d48b56932d90b9`; its original candidate contract, receipts, runner-entry judgment and all historical evidence remain intact. Its resolved event provenance below records that earlier judgment, not a new pending event. The original C020 candidate and failed actual F remain preserved and unmerged. The failed build produced no UF2 or physical result. Corrected immutable1256 packet and same-base Curator receipt authorize only a new bounded representation/proof repair attempt and the separate finite GP-VAL-043 successor. No product/domain/schema/ABI/buildflag change is authorized. The machine-derived queue and mirrors define executability. New C_R must receive both host ABI proofs, postcommit actual-target diagnostic object proof and fresh independent source review before043 activation. No full firmware link/UF2 until043 strict DONE; exact built F_R/artifact custody, review and processor-accepted human hardware PASS with empty gaps precede source integration. KBD/040/019 and every94 unrelated order remain unchanged. No implementation, build, device, hardware acceptance or public release occurs in this curation.
 
 ## Current Queue State
@@ -96,9 +98,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
-    "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 2,
+    "immediate_ready": 2,
+    "recorded_preauthorized": 12,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -7457,7 +7459,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-043",
       "title": "Repaired C020 exact-candidate governance",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-043-c020-abi-repair",
       "objective": "Authenticate only the new bounded C020 ABI repair candidate and later accepted transition through the finite algorithm below, retaining original037 contract and every historical proof.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -7475,12 +7477,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Unchanged source/default/schema/domain/decoder/build dependencies outside the exact bounded repair; originalC/F and037DONE retained; no pending physical failure."
       ],
       "substantive_authorization_rationale": "The bounded repair, source seam and finite correspondence algorithm are resolved now. Future candidate/base/tree/raw11 blobs/review/target proof are mechanical identities and evidence, not new product/architecture decisions. Preserve old037 as historical DONE; separate new contract prevents overwriting old exact-C authority.",
-      "mechanical_activation_conditions": [
-        "Authenticate actual1256 packet/direct same-base receipt/descendant adoption; no authority from branch, mutable report or self-authenticating catalog.",
-        "Exact published clean C_R/direct adopted B_R/tree/raw NUL inventory of eleven literal paths/modes/old-new blobs; compare originalC handler/header/helper algorithm and full critical234 union except the three named source files.",
-        "Fresh independent old/new source conformance review PASS, both consistent ABI host-mode suites PASS, postcommit actual-selected-target validator/ABI probe/generatedC object proof PASS with compiler/version/effective flags/includes/defines/dependency and C/C++ Button1/layout agreement.",
-        "Source-free handoff binds exact C_R without altering frozen candidate or replay/rebase/reseal; owner semantics/sensitive source unchanged, no hardware failure/new substantive judgment. All true means ACTIVATABLE; missing facts WAITING, contradictory facts invalidate to curation."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
@@ -7507,7 +7504,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve original037 constants/catalog/receipts/DONE and accepted010/Ultimate/X1/historical observations. Exact new module/fixtures and literal annex only; unknown paths, modes, omitted/forged roots or dirty source fail closed.",
         "No H3 source integration or hardware inheritance; 020 resumes full F_R build/custody/review/exact hardware PASS only after043 reviewed source-free integration and strict DONE."
       ],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7687,11 +7684,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019","GP-VAL-043"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019, GP-VAL-043; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

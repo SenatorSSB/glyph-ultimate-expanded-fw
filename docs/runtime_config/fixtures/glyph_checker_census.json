@@ -1197,7 +1197,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 26055,
+      "file_size_bytes": 26590,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1223,7 +1223,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 508,
+      "line_count": 517,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1284,7 +1284,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "da2c70f3c9ef482e16f6d2b56ba8832cb06c210233b5f6276b9add165301810c",
+      "sha256": "958d2ba013425f5f4b8316e2cb0045b9e6b468a9603385d81286202c245694cf",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -2527,7 +2527,7 @@
       },
       "checker_id": "configurator_setconfig_transaction",
       "defines_main": true,
-      "file_size_bytes": 10147,
+      "file_size_bytes": 12214,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator"
@@ -2537,7 +2537,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 189,
+      "line_count": 216,
       "parse_error": null,
       "path": "tools/check_glyph_configurator_setconfig_transaction.py",
       "potential_branch_identity_signals": [
@@ -2563,7 +2563,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "ac4cba460b3b81ffc2e8ffabb0984ddbd74a2d08783d19f76a187f5492b2c50f",
+      "sha256": "3a60f1516b3753f6b4813a599ae283302c9db0f461255bb3163dadc26f817504",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -6005,7 +6005,7 @@
       },
       "checker_id": "getconfig_raw_load_characterization",
       "defines_main": true,
-      "file_size_bytes": 6465,
+      "file_size_bytes": 6570,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator"
@@ -6015,7 +6015,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 84,
+      "line_count": 85,
       "parse_error": null,
       "path": "tools/check_glyph_getconfig_raw_load_characterization.py",
       "potential_branch_identity_signals": [
@@ -6040,7 +6040,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "3c60b114598225dddbbd0bf5b4100a3263a5c2b569f92cae9ffb658389a2824a",
+      "sha256": "ff39dc8263e4e0ba1a2574b43081aa7badd792104d9749ed33302f3173f04d24",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -11405,12 +11405,13 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 88835,
+      "file_size_bytes": 94433,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
         "branch_policy",
         "candidate",
+        "candidate_base",
         "candidate_preparation",
         "candidate_safety",
         "carrying_candidate",
@@ -11436,7 +11437,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1482,
+      "line_count": 1563,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -11444,6 +11445,7 @@
         "branch",
         "branch_policy",
         "candidate",
+        "candidate_base",
         "candidate_preparation",
         "candidate_safety",
         "carrying_candidate",
@@ -11475,6 +11477,7 @@
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/fixtures",
         "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
         "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
         "tools/./bad.py",
         "tools/./check_glyph_runtime_config_webserial_device_write_source_authority.py",
@@ -11507,7 +11510,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "6210d32d3989711f5d5548c0ffeb5aa9df1694ba629e0151c102579f00d37dc3",
+      "sha256": "c9e619b2de57187d2332a5665d3a14f812359033cd66ca959ef13ac45c6f981b",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

@@ -38,6 +38,14 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'tools/check_glyph_getconfig_raw_load_characterization.py',
     'tools/check_glyph_setconfig_runtime_rebinding_characterization.py',
 
+    # GP-VAL-043: six exact source-free proof/governance paths.
+    'tools/glyph_c020_abi_repair_transition.py',
+    'docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json',
+    'docs/runtime_config/fixtures/gp_val043_accepted_transitions.json',
+    'tools/fixtures/gp_config020_button_validation/abi_probe.cpp',
+    'docs/runtime_config/gp_config020_abi_repair.md',
+    'docs/runtime_config/fixtures/gp_config020_abi_repair.json',
+
     # GP-VAL-037: literal reviewed host roles; critical classification remains first.
     'tools/glyph_campaign_transition.py',
     'docs/runtime_config/fixtures/gp_val037_accepted_transitions.json',

@@ -1,0 +1,100 @@
+{
+  "schema_name": "glyph_gp_val043_c020_abi_repair",
+  "schema_version": 1,
+  "work_order": "GP-VAL-043",
+  "authority": {
+    "packet": "76cb953cd6bfe5398db11669f3d195175361700c",
+    "packet_path": "docs/planning/portfolio_20261003_1256.md",
+    "packet_base": "38017600deb243b5e281edec6d0d378b997d9e40",
+    "receipt": "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+    "adoption": "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+    "handoff": "c7bc3364b51959a47d1fa0ba7b11df2db2c46770"
+  },
+  "candidate": {
+    "status": "PASS",
+    "candidate": "3138ade526cabde23a0abedcb94acae8512579d1",
+    "parent": "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+    "tree": "67a4edd29bcd4c0adfd3ea52790d9a31293f6036",
+    "raw_inventory_sha256": "e3fcf78810c251f1d72f61bcb736075593b489293edd5d42b7c84c4eb1c81864",
+    "path_count": 11,
+    "baseline_critical_count": 234,
+    "candidate_critical_count": 236,
+    "critical_deltas": [
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "include/core/config_button_validation.hpp",
+      "src/core/config_button_validation.cpp"
+    ],
+    "entries": [
+      {
+        "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "new_tree_entry": "100644 blob 6ca93c96c944ee539a2d409e32889306c1eafac7\tHAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "old_tree_entry": "100644 blob 3e934f2f5aae13a36310a35d273727da60723abe\tHAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "sha256": "68bc7756eacb63c6831709c803349d52206ed7a271dc49b0cd33d6c53f0c3c38"
+      },
+      {
+        "path": "docs/runtime_config/fixtures/gp_config020_abi_repair.json",
+        "new_tree_entry": "100644 blob f81af99f3ebecc40b42802ceb8201cfb9a3901ad\tdocs/runtime_config/fixtures/gp_config020_abi_repair.json",
+        "old_tree_entry": null,
+        "sha256": "6f4e15e2ac7c562adc636d54b46e96b822e0de3619e46619632d897fbb629e07"
+      },
+      {
+        "path": "docs/runtime_config/gp_config020_abi_repair.md",
+        "new_tree_entry": "100644 blob c9f59e55ec0db1cb54ff238ad040ece0b90a7b67\tdocs/runtime_config/gp_config020_abi_repair.md",
+        "old_tree_entry": null,
+        "sha256": "e8b74a51aed7b67b7d7b2511a3b6b7116d625767cbc970b24b0f692f179def4a"
+      },
+      {
+        "path": "include/core/config_button_validation.hpp",
+        "new_tree_entry": "100644 blob 1b6e3dc98a9b6c0eb1f04e077c86382eaee324bb\tinclude/core/config_button_validation.hpp",
+        "old_tree_entry": null,
+        "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f"
+      },
+      {
+        "path": "src/core/config_button_validation.cpp",
+        "new_tree_entry": "100644 blob 70a7cee746fd42d1cfaff11f6043650bbfcc4c74\tsrc/core/config_button_validation.cpp",
+        "old_tree_entry": null,
+        "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+      },
+      {
+        "path": "tools/check_glyph_gp_config020_button_validation.py",
+        "new_tree_entry": "100644 blob 4c64f0e84032854cd94db8a6f03c211d5e00ed28\ttools/check_glyph_gp_config020_button_validation.py",
+        "old_tree_entry": null,
+        "sha256": "0e1800984f49c705ed30a89cb8b6dda0e3dc9c4d1144446f98b121a347a16276"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/abi_probe.cpp",
+        "new_tree_entry": "100644 blob afdd2653c586a2e4c632a2c607249bd734c0060a\ttools/fixtures/gp_config020_button_validation/abi_probe.cpp",
+        "old_tree_entry": null,
+        "sha256": "74af7062c8b0b19a63ea6c7240292142e760c3adec43431053903c26caaeddac"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/decoder_harness.cpp",
+        "new_tree_entry": "100644 blob 932db17185e0f51a7f6c3494bfe5f97548fae13c\ttools/fixtures/gp_config020_button_validation/decoder_harness.cpp",
+        "old_tree_entry": null,
+        "sha256": "666b5a6584ec798c69242f5232a4d622b49f466289f116351900d462c5edb1c9"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/include/Adafruit_TinyUSB.h",
+        "new_tree_entry": "100644 blob e3e444d3661c04527bc16c4051e2be995f09cfcd\ttools/fixtures/gp_config020_button_validation/include/Adafruit_TinyUSB.h",
+        "old_tree_entry": null,
+        "sha256": "d12ca4ac50b8aad384ede12db7d9f3a10d42b562ee63d95c04ed9376d40cc9d9"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/setconfig_harness.cpp",
+        "new_tree_entry": "100644 blob 2e6c8e710226ec03ca2a817c74247343213242c2\ttools/fixtures/gp_config020_button_validation/setconfig_harness.cpp",
+        "old_tree_entry": null,
+        "sha256": "785e2c9842701516ea95894c4a3f25ae1c7ac66775633abe358e401e72e86046"
+      },
+      {
+        "path": "tools/fixtures/gp_config020_button_validation/validation_harness.cpp",
+        "new_tree_entry": "100644 blob a34316a209b3709a0e55d0d2f8dbaa580a5f6a0e\ttools/fixtures/gp_config020_button_validation/validation_harness.cpp",
+        "old_tree_entry": null,
+        "sha256": "b3f5a502006a5820e8fa95c72bfcd6681b7602ba40e0a808921b7a7eb320a86f"
+      }
+    ]
+  },
+  "target_object_execution_sha256": "56fb8ad66c51ea4725a35f4fe9401085a71d3f64650006036282b683660a4259",
+  "target_proof_script_sha256": "f18c724ab31cb5f6833b22d224642b087df683089c2d16b7fc7e9e1003fe8f47",
+  "host_execution_sha256": "ea6dd1ec501cbb17f1ee2f5051e4b36d4b5a55054e634641c210e8f52758fa3d",
+  "independent_review_sha256": "237fec421bf9c278499525b7e2b6b575f45a05f83e4808e8ca60c256cf38a0b6"
+}

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 #define private public
@@ -221,8 +222,16 @@ Config candidate_for(Scenario current) {
 #ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
         case Scenario::InvalidButtonBinding: {
             result.game_mode_configs[0].activation_binding_count = 1;
-            const unsigned invalid = 64;
-            std::memcpy(&result.game_mode_configs[0].activation_binding[0], &invalid, sizeof(invalid));
+            using Storage = std::underlying_type_t<Button>;
+            static_assert(std::is_unsigned<Storage>::value && sizeof(Storage) == sizeof(Button),
+                          "raw injection must match the unsigned Button representation");
+            const Storage invalid = 64;
+            auto &bindings = result.game_mode_configs[0].activation_binding;
+            std::array<unsigned char, sizeof(Button)> neighbor{};
+            std::memcpy(neighbor.data(), &bindings[1], sizeof(Button));
+            std::memcpy(&bindings[0], &invalid, sizeof(Button));
+            if (std::memcmp(neighbor.data(), &bindings[1], sizeof(Button)) != 0)
+                throw std::runtime_error("raw injection changed adjacent Button storage");
             break;
         }
         case Scenario::InvalidBindingCount:
