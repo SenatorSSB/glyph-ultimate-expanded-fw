@@ -548,7 +548,18 @@ def repaired_contract_tests(directory: Path) -> None:
     assert campaign.critical_tree(root, record['evidence_commit']) == before
     assert not campaign.ancestor(root, record['build'], record['review_commit'])
     assert not campaign.ancestor(root, record['build'], record['evidence_commit'])
-    accepted_live_input_tests(root)
+    # Host consumer mains share immutable reads, but every later live edit still rejects.
+    campaign._proof_invocation(accepted_live_input_tests)(root)
+    assert campaign._tree_inventory_cache.get() is None and campaign._blob_bytes_cache.get() is None
+    protocol = root / repair.PROTOCOL
+    protocol_bytes = protocol.read_bytes()
+    try:
+        protocol.write_bytes(protocol_bytes + b'\nrejected immutable accepted metadata\n')
+        with patch.object(repair, 'source_contract', wraps=repair.source_contract) as source_proof:
+            rejected(lambda: campaign.authenticate(root), 'early accepted metadata substitution')
+            assert not source_proof.called
+    finally:
+        protocol.write_bytes(protocol_bytes)
     # A caller already in accepted phase must still produce source-free G/R/E.
     with tempfile.TemporaryDirectory(prefix='gp-val043-accepted-caller-') as nested_dir:
         with patch.object(sys.modules[__name__], 'ROOT', root):

@@ -2527,7 +2527,7 @@
       },
       "checker_id": "configurator_setconfig_transaction",
       "defines_main": true,
-      "file_size_bytes": 12214,
+      "file_size_bytes": 12340,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator"
@@ -2537,7 +2537,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 216,
+      "line_count": 218,
       "parse_error": null,
       "path": "tools/check_glyph_configurator_setconfig_transaction.py",
       "potential_branch_identity_signals": [
@@ -2563,7 +2563,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "3a60f1516b3753f6b4813a599ae283302c9db0f461255bb3163dadc26f817504",
+      "sha256": "b93009cdbe301591db4563bda2cf0d82e60f344eba30ed3dd4f350db43c7f595",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -2867,7 +2867,7 @@
       },
       "checker_id": "current_config_persistence_recovery_research",
       "defines_main": true,
-      "file_size_bytes": 66950,
+      "file_size_bytes": 67072,
       "hard_coded_branch_like_strings": [
         "branches",
         "candidate",
@@ -2886,7 +2886,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1115,
+      "line_count": 1117,
       "parse_error": null,
       "path": "tools/check_glyph_current_config_persistence_recovery_research.py",
       "potential_branch_identity_signals": [
@@ -2926,7 +2926,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "993cd9a1fec8f6b8efcf6e0f1c356c49bf8dab470c14f7e40f2264388a8e51fe",
+      "sha256": "8bf5d42f403f0d68d7d3ebe37e6a8cbc8545b94734af79ad5d1cef9007561551",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -6005,7 +6005,7 @@
       },
       "checker_id": "getconfig_raw_load_characterization",
       "defines_main": true,
-      "file_size_bytes": 6570,
+      "file_size_bytes": 6696,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator"
@@ -6015,7 +6015,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 85,
+      "line_count": 87,
       "parse_error": null,
       "path": "tools/check_glyph_getconfig_raw_load_characterization.py",
       "potential_branch_identity_signals": [
@@ -6040,7 +6040,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "ff39dc8263e4e0ba1a2574b43081aa7badd792104d9749ed33302f3173f04d24",
+      "sha256": "0a0c5d9b68cf5a648bc1265847dd7c8c26edadef61e5e98408f6eddece5fb52a",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

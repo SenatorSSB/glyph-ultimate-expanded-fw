@@ -3,7 +3,7 @@
 from __future__ import annotations
 import copy, hashlib, json, subprocess, tempfile
 from pathlib import Path
-from glyph_campaign_transition import verify_current_source
+from glyph_campaign_transition import _proof_invocation, verify_current_source
 from check_glyph_configurator_setconfig_transaction import compile_translation_unit, current_abi_modes, ContractError
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,6 +72,8 @@ def adversarial(value):
     require(candidate["production_sources"][0]["sha256"] != hashlib.sha256(SOURCE_GET.read_bytes()).hexdigest(), "source tamper accepted")
     raw = FIXTURE.read_text(); require('"schema_version": 1' in raw, "fixture literal")
     return 1
+# Share immutable Git inventories across this host proof; live inputs are never cached.
+@_proof_invocation
 def main():
     try:
         value = load(); correspondence(); adversarial(value)

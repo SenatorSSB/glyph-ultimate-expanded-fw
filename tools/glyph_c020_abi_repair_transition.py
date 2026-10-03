@@ -235,6 +235,18 @@ def authenticate(root):
                  ('ls-files', '--others', '--exclude-standard', '-z')]:
         dirty.update(filter(None, _git(root, *args).decode().split('\0')))
     require(dirty <= GOVERNANCE_PATHS, 'dirty path outside reviewed governance inventory')
+    # Accepted metadata is immutable under the existing final correspondence proof.
+    # Reject its live substitutions before expensive source validation. A catalog
+    # here can only cause rejection; every successful call still authenticates it.
+    accepted_literals = frozenset((PROTOCOL, EVIDENCE,
+        'docs/calibration/gp_config_020_hardware_result.md', MAPPING))
+    if dirty & (accepted_literals | {TRANSITIONS, original.TRANSITIONS}):
+        inventory = _tree(root, head)
+        for catalog in (TRANSITIONS, original.TRANSITIONS):
+            protected = accepted_literals | {catalog}
+            if dirty & protected and catalog in inventory and _catalog(raw_bytes(root, head, catalog)):
+                require(False, 'accepted metadata substitution or nonregular file mode: '
+                        + repr(sorted(dirty & protected)))
     require(ancestor(root, B_R, head), 'repaired campaign snapshot lacks adopted authority')
     before, old_after, after = source_contract(root)
     delta = set(filter(None, _git(root, 'diff', '--no-renames', '--name-only', '-z', B_R, head).decode().split('\0')))

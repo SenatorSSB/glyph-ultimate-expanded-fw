@@ -9,7 +9,7 @@ from __future__ import annotations
 import copy
 import hashlib
 
-from glyph_campaign_transition import verify_current_source
+from glyph_campaign_transition import _proof_invocation, verify_current_source
 import json
 import re
 import subprocess
@@ -1092,6 +1092,8 @@ def verify_frozen_fixture() -> None:
     require(FIXTURE.is_file() and not FIXTURE.is_symlink() and
             FIXTURE.read_bytes() == historical, "frozen historical fixture changed")
 
+# Reuse only immutable Git inventories across the coupled historical/current proof.
+@_proof_invocation
 def main() -> int:
     try:
         verify_frozen_fixture()

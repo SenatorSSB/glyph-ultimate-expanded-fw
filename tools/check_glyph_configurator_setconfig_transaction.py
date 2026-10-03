@@ -9,7 +9,7 @@ import subprocess
 import shutil
 import tempfile
 
-from glyph_campaign_transition import C, authenticate, verify_current_source
+from glyph_campaign_transition import _proof_invocation, C, authenticate, verify_current_source
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "HAL/pico/src/comms/ConfiguratorBackend.cpp"
@@ -197,6 +197,8 @@ def compile_and_run(expected_names: list[str]) -> str:
     return "".join(outputs)
 
 
+# Share immutable Git inventories across this host proof; live inputs are never cached.
+@_proof_invocation
 def main() -> int:
     try:
         require(hashlib.sha256(FIXTURE.read_bytes()).hexdigest() == "f483e7d371189663098dbec44b77c7cedf7274dc389d0513fc4cf7ca7a238d8f", "frozen historical fixture drift")
