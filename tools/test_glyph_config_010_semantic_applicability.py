@@ -266,7 +266,9 @@ def accepted_live_input_tests(root: Path) -> None:
     mode=source.stat().st_mode
     try:
         source.write_bytes(original+b'\n// rejected dirty source\n')
-        rejected(lambda:campaign.authenticate(root),'fresh accepted dirty source')
+        with patch.object(campaign,'source_contract',wraps=campaign.source_contract) as source_proof:
+            rejected(lambda:campaign.authenticate(root),'fresh accepted dirty source')
+            assert not source_proof.called
         run(root,'git','add','--','src/core/config_button_validation.cpp')
         source.write_bytes(original)
         rejected(lambda:campaign.authenticate(root),'fresh accepted staged source')
@@ -296,6 +298,15 @@ def accepted_live_input_tests(root: Path) -> None:
     finally:
         frozen.write_bytes(prior)
     assert campaign.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+    governance=root/'docs/ROADMAP.md'
+    original_governance=governance.read_bytes()
+    try:
+        governance.write_bytes(original_governance+b'\nSynthetic allowed governance test.\n')
+        with patch.object(campaign,'source_contract',wraps=campaign.source_contract) as source_proof:
+            assert campaign.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+            assert source_proof.called
+    finally:
+        governance.write_bytes(original_governance)
 
 
 def tree_inventory_cache_tests(root: Path) -> None:

@@ -74,8 +74,12 @@ def guard_main(root: Path, campaign: bool, expected: str | None = None) -> None:
     if expected is None:
         if result.returncode or "status=PASS" not in result.stdout:
             raise AssertionError("actual guard main positive failed: " + combined)
-    elif result.returncode == 0 or expected not in combined:
-        raise AssertionError("actual guard main negative lost " + repr(expected) + ": " + combined)
+    else:
+        reasons = [expected]
+        if campaign and expected in {"critical", "unclassified"}:
+            reasons.append("dirty path outside reviewed governance inventory")
+        if result.returncode == 0 or not any(reason in combined for reason in reasons):
+            raise AssertionError("actual guard main negative lost " + repr(expected) + ": " + combined)
 
 
 def campaign_guard_tests() -> None:

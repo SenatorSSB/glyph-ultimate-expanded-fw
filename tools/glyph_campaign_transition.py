@@ -316,6 +316,12 @@ def prior_accepted_phase(root, head, records):
 @_proof_invocation
 def authenticate(root):
     root=Path(root).resolve(); head=_git(root,'rev-parse','HEAD').decode().strip()
+    # Reject forbidden live changes before paying for immutable source proofs.
+    # Allowed governance inputs still pass every immutable and final live gate.
+    dirty=set()
+    for args in [('diff','--name-only','-z'),('diff','--cached','--name-only','-z'),('ls-files','--others','--exclude-standard','-z')]:
+        dirty.update(x for x in _git(root,*args).decode().split('\0') if x)
+    require(dirty <= GOVERNANCE_PATHS, 'dirty path outside reviewed governance inventory')
     before,after=source_contract(root)
     require(ancestor(root,ADOPTION,head),'campaign snapshot lacks adopted authority')
     delta=set(x for x in _git(root,'diff','--no-renames','--name-only','-z',ADOPTION,head).decode().split('\0') if x)
@@ -350,10 +356,6 @@ def authenticate(root):
     changed=set(_git(root,'diff','--no-renames','--name-only','-z',B,head).decode().strip('\0').split('\0'))-{''}
     for args in [('diff','--no-renames','--name-only','-z'),('diff','--cached','--no-renames','--name-only','-z'),('ls-files','--others','--exclude-standard','-z')]:
         changed.update(x for x in _git(root,*args).decode().split('\0') if x)
-    dirty=set()
-    for args in [('diff','--name-only','-z'),('diff','--cached','--name-only','-z'),('ls-files','--others','--exclude-standard','-z')]:
-        dirty.update(x for x in _git(root,*args).decode().split('\0') if x)
-    require(dirty <= GOVERNANCE_PATHS, 'dirty path outside reviewed governance inventory')
     for path in changed:
         category=classify_path(path)
         if category=='CRITICAL':require(path in critical,'unexpected critical scope input: '+path)
