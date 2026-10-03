@@ -9271,3 +9271,31 @@ record hardware acceptance or authorize a full firmware build before043 DONE.
   "external_evidence_directory": "/private/tmp/glyph-c020-abi-repair"
 }
 ```
+
+## Independent C020 Processor-Phase Authorization Review
+
+This immutable source-free review records the separately reported finite E/I defect and its bounded successor. The prior native Planner receipt, queue and event resolution remain unchanged at this checkpoint. A later reviewed descendant complete READY order activates only the exact scope digest below. This review is not canonical hardware acceptance, checker implementation, a new Planner inventory or a typed event-obligation resolution.
+
+<!-- c020-processor-curation:start -->
+```json
+{
+  "schema_name": "glyph_c020_processor_phase_authorization_review",
+  "schema_version": 1,
+  "resolver_role": "Independent Glyph Work-Order Curator",
+  "review_date": "2026-10-03",
+  "canonical_base": "040735f6916c7a77924ef53f1b4a873281f2cb7f",
+  "subject_id": "GP-VAL-044",
+  "disposition": "READY",
+  "external_defect_draft": "84e999693c5ef058c3a116c1632baa818add6ddb",
+  "tested_F": "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+  "artifact_sha256": "7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500",
+  "scope_sha256": "c3a5a4f9d874ce4049f92cabe6467f22a7757cb0dde7e35ad5f4455a89af2530",
+  "source_report_sha256": "08aada216847aaada2ad36c68f39958fe252eaf6fb63a071b21315e5283d4c59",
+  "processor_result_sha256": "7e39cdb7c64306eaaf6cb530aea7cb045f3dee39f6305450338e2806450a8fc6",
+  "processor_review_sha256": "1912a76a4e358ca675ad38d642dd9dae59c6e60123622bdb33391ee6595eedb7",
+  "historical_planner_branch": "planning/portfolio-20261003-1256",
+  "historical_planner_base": "38017600deb243b5e281edec6d0d378b997d9e40",
+  "native_packet_receipt_and_prior_obligation": "PRESERVED_UNCHANGED; this is not an event-obligation resolution receipt or a new Planner packet"
+}
+```
+<!-- c020-processor-curation:end -->
