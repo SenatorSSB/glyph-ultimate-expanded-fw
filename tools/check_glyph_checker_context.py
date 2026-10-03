@@ -91,9 +91,13 @@ def campaign_guard_tests() -> None:
         run(root, "config", "user.email", "guard-control@example.invalid")
         run(root, "branch", "-f", "configurator", ADOPTION)
         guard_main(root, False)
-        for relative in (GUARD, "tools/glyph_campaign_transition.py", "tools/glyph_hardware_correspondence.py",
-                         "docs/runtime_config/fixtures/gp_val037_accepted_transitions.json"):
+        for relative in (GUARD, "tools/glyph_campaign_transition.py", "tools/glyph_hardware_correspondence.py"):
             shutil.copyfile(source / relative, root / relative)
+        # This disposable control is the pre-transition baseline, even when the
+        # test itself runs from an accepted-phase repository. Never transplant
+        # that repository's nonempty accepted catalog onto baseline source.
+        write(root, "docs/runtime_config/fixtures/gp_val037_accepted_transitions.json",
+              '{"schema_version":1,"accepted_transitions":[]}\n')
         guard_main(root, False)
         guard_main(root, True)
         spec = importlib.util.spec_from_file_location("campaign_guard_under_test", root / GUARD)

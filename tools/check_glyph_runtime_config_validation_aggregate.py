@@ -760,23 +760,45 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
     }
     if not current_argument_authority <= expected:
         raise AssertionError("campaign catalog omitted exact current-argument opening/receipt/adoption")
-    # Authenticate the real source first. A test double below only observes calls
-    # and never replaces this positive or makes an invalid repository pass.
-    campaign.authenticate(module.ROOT)
-    catalog_path = module.ROOT / campaign.TRANSITIONS
-    if catalog_path.exists():
-        for record in json.loads(catalog_path.read_text())["accepted_transitions"]:
-            expected.update(record[key] for key in ("build", "parent", "review_commit", "evidence_commit", "integration"))
+    # The combined selection calls the actual phase authenticator once. The
+    # per-consumer tests below isolate selection wiring using that exact proof,
+    # guarded by the same complete repository fingerprint throughout.
     selected_entries = []
+    for checker_id, filename in consumers.items():
+        selected = entry(checker_id)
+        selected["path"] = "tools/" + filename
+        selected["command"] = ["python3", selected["path"]]
+        if checker_id == "campaign_webserial_source_authority":
+            selected["command"].append("--campaign-transition")
+        selected_entries.append(selected)
+    before = module.canonical_fingerprint()
+    actual_authenticate = campaign.authenticate
+    authenticated_proofs = []
+    def authenticate_phase(root):
+        proof = actual_authenticate(root)
+        authenticated_proofs.append(proof)
+        return proof
     try:
-        for checker_id, filename in consumers.items():
-            selected = entry(checker_id)
-            selected["path"] = "tools/" + filename
-            selected["command"] = ["python3", selected["path"]]
-            if checker_id == "campaign_webserial_source_authority":
-                selected["command"].append("--campaign-transition")
-            selected_entries.append(selected)
-            with mock.patch.object(campaign, "authenticate", wraps=campaign.authenticate) as authenticated:
+        with mock.patch.object(campaign, "authenticate", side_effect=authenticate_phase) as authenticated:
+            combined_refs, combined_roots = module.required_catalog(selected_entries)
+            authenticated.assert_called_once_with(module.ROOT)
+        if len(authenticated_proofs) != 1 or module.canonical_fingerprint() != before:
+            raise AssertionError("actual catalog phase authentication changed repository")
+        catalog_path = module.ROOT / campaign.TRANSITIONS
+        if catalog_path.exists():
+            for record in json.loads(catalog_path.read_text())["accepted_transitions"]:
+                expected.update(record[key] for key in ("build", "parent", "review_commit", "evidence_commit", "integration"))
+        configurator = module.git_value("rev-parse", "--verify", "refs/heads/configurator^{commit}")
+        if (combined_roots != expected | {configurator, module.GP_CONFIG_010_HISTORICAL_CANDIDATE}
+                or combined_refs != {"refs/heads/configurator": configurator}):
+            raise AssertionError("actual combined catalog selection differs")
+        def unchanged_phase_proof(root):
+            if root != module.ROOT or module.canonical_fingerprint() != before:
+                raise AssertionError("selection attempted to reuse proof for changed repository")
+            return authenticated_proofs[0]
+        for selected in selected_entries:
+            checker_id = selected["id"]
+            with mock.patch.object(campaign, "authenticate", side_effect=unchanged_phase_proof) as authenticated:
                 refs, roots = module.required_catalog([selected])
                 authenticated.assert_called_once_with(module.ROOT)
             wanted = expected.copy()
@@ -843,6 +865,8 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                     if any(line.startswith("?") for line in module.git_value(
                             "rev-list", "--objects", "--missing=print", *sorted(expected), cwd=clone).splitlines()):
                         raise AssertionError("campaign reduced closure missing an object")
+        if module.canonical_fingerprint() != before:
+            raise AssertionError("campaign catalog tests changed authenticated repository")
     finally:
         module.ROOT, module.EXECUTION_ENV = original_root, original_env
     return ["ISO-17-campaign-exact-consumer-before-framework-selection",
