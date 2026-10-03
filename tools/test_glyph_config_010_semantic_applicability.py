@@ -1020,6 +1020,19 @@ def processor_contract_tests(directory: Path) -> None:
     run(root, 'git', 'merge', '--no-ff', '-s', 'ours', '--no-edit', invalid_prior)
     rejected(lambda: campaign.authenticate(root), 'hidden second-parent invalid processor claim')
     run(root, 'git', 'switch', '--detach', E)
+    # Every later processor claim needs native work-order validation, even
+    # when its exact accepted hardware tuple and immutable payload are intact.
+    for label, updates in (
+        ('later processor malformed schema', dict(title=None)),
+        ('source-free premature DONE', dict(status='DONE', done_evidence='SYNTHETIC prose only')),
+    ):
+        write_queue_item(root, dict(baseline_item, **updates))
+        fixture_commit(root, label)
+        rejected(lambda: campaign.authenticate(root), label)
+        write_queue_item(root, baseline_item)
+        fixture_commit(root, 'restore valid processor state after ' + label)
+        rejected(lambda: campaign.authenticate(root), 'historical ' + label + ' after restoration')
+        run(root, 'git', 'switch', '--detach', E)
     # A clean source-free descendant retains earliest E, exact evidence and
     # empty protected-source authority. It is still authenticated before I.
     descendant = fixture_commit(root, 'source-free retained processor descendant')
@@ -1046,6 +1059,67 @@ def processor_contract_tests(directory: Path) -> None:
         assert campaign.ancestor(native, payload, native_proof['evidence_commit'])
     synthetic_processor_tests(directory)
     print('GP-VAL-044 actual pinned standalone E/E descendant native proof and scope/metadata negatives PASS; disposable overlay only')
+
+
+def native_integrated_public_api_tests(directory: Path, source_root: Path, record: dict) -> None:
+    """External postcheckpoint regression on an already-composed actual I.
+
+    Call only after all fifteen E/E-descendant mains passed before I was made.
+    This function integrates no F and publishes no completion or acceptance.
+    It validates native strict DONE mechanics only in a disposable descendant.
+    """
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    import check_glyph_agent_framework_docs as framework
+    assert record['build'] == ACTUAL_F and record['review_commit'] == ACTUAL_R
+    root = directory / 'native-I-public-api'
+    run(source_root, 'git', 'clone', '--quiet', '--no-local', str(source_root), str(root))
+    run(root, 'git', 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head', str(ROOT),
+        *sorted(repair.ROOTS | {PRESERVED_E, ACTUAL_F}))
+    run(root, 'git', 'config', 'user.name', 'Disposable GP-VAL-044 native API proof')
+    run(root, 'git', 'config', 'user.email', 'native-api@example.invalid')
+    target = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    assert repair.validate_accepted_transition(root, record, target) == ACTUAL_F
+    for key, value in (('build', campaign.C), ('review_commit', record['evidence_commit']),
+                       ('evidence_commit', record['integration'])):
+        rejected(lambda: repair.validate_accepted_transition(root, dict(record, **{key: value}), target),
+                 'direct native accepted API ' + key)
+    catalog = root / repair.TRANSITIONS
+    original_catalog = catalog.read_bytes()
+    try:
+        catalog.write_text('{"schema_version":1,"accepted_transitions":[]}\n')
+        rejected(lambda: repair.validate_accepted_transition(root, record, target),
+                 'direct native accepted API requires genuine catalog')
+    finally:
+        catalog.write_bytes(original_catalog)
+    accepted = campaign.item(root, target, 'GP-CONFIG-020')
+    paths = run(root, 'git', 'diff', '--name-only', repair.B_R, repair.C_R).splitlines()
+    completion = dict(schema_name=framework.COMPLETION_EVIDENCE_NAME,
+                      schema_version=framework.COMPLETION_EVIDENCE_VERSION, mode='DIRECT_ANCESTRY',
+                      implementation_base_sha=repair.B_R, reviewed_implementation_sha=repair.C_R,
+                      prior_canonical_integration_sha=record['integration'], reviewed_changed_paths=sorted(paths),
+                      independent_review_provenance='SYNTHETIC TEST ONLY: native schema mechanics',
+                      validation_provenance='SYNTHETIC TEST ONLY: no published C020 completion')
+    # Prove a structurally complete native DONE first, so malformed DONE
+    # controls cannot pass through an unconditional refusal of every DONE.
+    write_queue_item(root, dict(accepted, status='DONE', done_evidence=completion))
+    valid_done = fixture_commit(root, 'native strict completion structural positive only')
+    assert repair.validate_accepted_transition(root, record, valid_done) == ACTUAL_F
+    assert campaign.authenticate(root)['phase'] == 'ACCEPTED_TRANSITION'
+    for label, evidence in (
+        ('prose DONE completion', 'SYNTHETIC prose-only completion'),
+        ('forged DONE completion', dict(completion, implementation_base_sha='0' * 40)),
+    ):
+        run(root, 'git', 'switch', '--detach', valid_done)
+        write_queue_item(root, dict(accepted, status='DONE', done_evidence=evidence))
+        invalid = fixture_commit(root, label)
+        rejected(lambda: repair.validate_accepted_transition(root, record, invalid), label)
+        rejected(lambda: campaign.authenticate(root), 'authenticated ' + label)
+        write_queue_item(root, dict(accepted, status='DONE', done_evidence=completion))
+        restored = fixture_commit(root, 'restore valid completion after ' + label)
+        rejected(lambda: repair.validate_accepted_transition(root, record, restored), 'historical ' + label)
+        rejected(lambda: campaign.authenticate(root), 'restored historical ' + label)
+    print('GP-VAL-044 direct native accepted API and strict later DONE/history regressions PASS; disposable postcheckpoint only')
 
 
 def synthetic_processor_tests(directory: Path) -> None:

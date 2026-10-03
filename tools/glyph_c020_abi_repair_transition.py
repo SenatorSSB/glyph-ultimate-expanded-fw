@@ -76,6 +76,7 @@ BUILT_F = PROCESSOR_PINS['build']
 class ProcessorRoots:
     repository: str
     pins: tuple
+    source_trees: tuple = ()
 
     def values(self):
         return dict(self.pins)
@@ -317,6 +318,11 @@ def authenticate_processor_roots(root, pins=None):
     campaign dispatcher, real catalogs, or the production object-root export.
     """
     root = Path(root).resolve()
+    return _authenticate_processor_roots(root, pins, source_contract(root))
+
+
+def _authenticate_processor_roots(root, pins, source_trees):
+    """Private continuation after the caller's complete source proof."""
     pins = dict(PROCESSOR_PINS if pins is None else pins)
     require(set(pins) == set(PROCESSOR_PINS), 'processor pin fields mismatch')
     for key in ('review_commit', 'build', 'parent', 'tree', 'authority_commit', 'authority_adoption'):
@@ -332,7 +338,6 @@ def authenticate_processor_roots(root, pins=None):
             and pins['authority_adoption'] == PROCESSOR_ADOPTION,
             'unadopted processor authority roots')
     processor_authority(root)
-    source_contract(root)
     R, F, parent = (pins[key] for key in ('review_commit', 'build', 'parent'))
     # The actual review predates044; explicit structural review fixtures must
     # retain the actual adopted authority in their disposable history.
@@ -351,7 +356,7 @@ def authenticate_processor_roots(root, pins=None):
         require(raw_bytes(root, F, path) == raw_bytes(root, C_R, path),
                 'processor F candidate host/proof substitution: ' + path)
     require(not ancestor(root, F, R)
-            and critical_tree(root, R) == critical_tree(root, B_R),
+            and critical_tree(root, R) == source_trees[0],
             'processor review contains candidate source')
     verify_correspondence(root, F010, B010, target=R, integrated=True, check_worktree=False)
     require(_sha(raw_bytes(root, R, PROTOCOL)) == pins['protocol_sha256'],
@@ -372,7 +377,8 @@ def authenticate_processor_roots(root, pins=None):
     size = re.findall(r'^- UF2 size: `([0-9]+)` bytes\s*$',
                       raw_bytes(root, R, PROTOCOL).decode(), re.MULTILINE)
     require(size == [str(pins['artifact_size'])], 'processor reviewed artifact size mismatch')
-    return ProcessorRoots(str(root), tuple(sorted(pins.items())))
+    return ProcessorRoots(str(root), tuple(sorted(pins.items())),
+                          tuple(tuple(sorted(tree.items())) for tree in source_trees))
 
 
 _PROCESSOR_IDENTITIES = (
@@ -402,9 +408,16 @@ def validate_processor_transition(root, record, target, *, structural_roots=None
     require(type(proof) is ProcessorRoots and proof.repository == str(root),
             'processor roots belong to another repository')
     pins = proof.values()
-    # Reauthenticate even explicit proofs; no stale invocation or hand-built
-    # dataclass can supply unproved pins.
-    require(authenticate_processor_roots(root, pins) == proof, 'processor roots substitution')
+    if structural_roots is not None:
+        # Public callers cannot reuse a certificate from a previous invocation.
+        require(authenticate_processor_roots(root, pins) == proof, 'processor roots substitution')
+    evidence = _validate_processor_evidence(root, record, proof)
+    return _validate_processor_target(root, evidence, target)
+
+
+def _validate_processor_evidence(root, record, proof):
+    """Certify immutable E once in the current private call graph."""
+    pins = proof.values()
     fields = {'work_order', 'candidate', 'build', 'parent', 'tree', 'review_commit', 'evidence_commit'}
     require(type(record) is dict and set(record) == fields
             and record['work_order'] == 'GP-CONFIG-020' and record['candidate'] == C_R,
@@ -415,10 +428,9 @@ def validate_processor_transition(root, record, target, *, structural_roots=None
     require(all(record[key] == pins[key] for key in ('build', 'parent', 'tree', 'review_commit')),
             'processor transition differs from authenticated roots')
     R, E, F = record['review_commit'], record['evidence_commit'], record['build']
-    require(R != E and ancestor(root, R, E) and ancestor(root, E, target),
-            'processor review/E/target chronology mismatch')
+    require(R != E and ancestor(root, R, E), 'processor review/E chronology mismatch')
     require(ancestor(root, PROCESSOR_ADOPTION, E), 'processor E lacks adopted044 repair authority')
-    require(not ancestor(root, F, E) and critical_tree(root, E) == critical_tree(root, B_R),
+    require(not ancestor(root, F, E) and critical_tree(root, E) == dict(proof.source_trees[0]),
             'processor E integrated candidate source')
     verify_correspondence(root, F010, B010, target=E, integrated=True, check_worktree=False)
     for catalog in (original.TRANSITIONS, TRANSITIONS):
@@ -463,6 +475,18 @@ def validate_processor_transition(root, record, target, *, structural_roots=None
         F, pins['tree'], pins['parent'], R, pins['artifact_sha256'], pins['protocol_sha256'],
         review['preserved_firmware_artifact_locator'], 'HARDWARE_VALIDATED', 'PASS')),
         'processor native result/tuple coupling mismatch')
+    return dict(record=dict(record), accepted=accepted, evidence_root=evidence_root,
+                payload=payload, result=result, protocol=raw_bytes(root, R, PROTOCOL),
+                roots=proof)
+
+
+def _validate_processor_target(root, evidence, target):
+    """Every immutable historical target and every live input is checked anew."""
+    record, accepted = evidence['record'], evidence['accepted']
+    R, E, F = record['review_commit'], record['evidence_commit'], record['build']
+    pins = evidence['roots'].values()
+    evidence_root, payload, result = (evidence[key] for key in ('evidence_root', 'payload', 'result'))
+    require(ancestor(root, E, target), 'processor E/target chronology mismatch')
     current = item(root, target, 'GP-CONFIG-020')
     require(current['status'] in {'HARDWARE_VALIDATED', 'DONE'} and current['hardware_result'] == 'PASS'
             and current['hardware_evidence_gaps'] == []
@@ -470,6 +494,15 @@ def validate_processor_transition(root, record, target, *, structural_roots=None
             'processor PASS downgraded at target')
     for key in (*_PROCESSOR_IDENTITIES, 'hardware_evidence_record'):
         require(current[key] == accepted[key], 'processor accepted tuple drift: ' + key)
+    from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
+    native = dict(current, hardware_evidence_record='git-json:' + evidence_root + ':' + EVIDENCE)
+    validate_work_order(native, evidence_repo_root=root)
+    if native['status'] == 'DONE':
+        validate_evidence_record(native, evidence_repo_root=root)
+        from check_glyph_agent_framework_docs import validate_completion_evidence
+        validate_completion_evidence(native, native['done_evidence'],
+            policy=queue(root, target)['completion_correspondence'],
+            publication_sha=target, repo_root=root)
     live_keys = (*_PROCESSOR_IDENTITIES, 'hardware_evidence_record', 'status', 'hardware_result',
                  'hardware_evidence_gaps', 'hardware_evidence_dependency_satisfied')
     # Queue docs may be edited, but live/index physical identity and acceptance
@@ -480,7 +513,7 @@ def validate_processor_transition(root, record, target, *, structural_roots=None
         require(all(live[key] == head_state[key] for key in live_keys),
                 'live/index processor tuple or acceptance substitution')
     for path, data in ((EVIDENCE, payload), (RESULT, result),
-                       (PROTOCOL, raw_bytes(root, R, PROTOCOL))):
+                       (PROTOCOL, evidence['protocol'])):
         require(raw_bytes(root, target, path) == data and current_bytes(root, path) == data,
                 'processor current metadata substitution: ' + path)
     return dict(evidence_commit=E, evidence_root=evidence_root,
@@ -491,6 +524,10 @@ def validate_processor_transition(root, record, target, *, structural_roots=None
 @original._proof_invocation
 def validate_accepted_transition(root, record, target):
     """Closed consumer: later014/017 need separately adopted literal contracts."""
+    return _validate_accepted_transition(Path(root).resolve(), record, target)
+
+
+def _validate_accepted_transition(root, record, target, observations=None):
     root=Path(root).resolve()
     fields={'work_order','candidate','build','parent','tree','review_commit','evidence_commit','integration'}
     require(type(record) is dict and set(record)==fields,'accepted transition fields mismatch')
@@ -506,10 +543,20 @@ def validate_accepted_transition(root, record, target):
         require(_catalog(raw_bytes(root, target, TRANSITIONS)) == [record]
                 and current_bytes(root, TRANSITIONS) == raw_bytes(root, target, TRANSITIONS),
                 'accepted transition lacks genuine committed catalog')
-        observations = processor_history(root, target, [], [record])
+        if observations is None:
+            observations = processor_history(root, target, [], [record])
         require(observations['processor'] is not None
                 and record['evidence_commit'] == observations['processor']['evidence_commit'],
                 'accepted transition replaced earliest processor E')
+        # The full root/E/history proof above includes the native reviewed
+        # build, source-free R/E, schema and payload checks. Prove the remaining
+        # integration and live-source correspondence here without repeating it.
+        R, E, I = record['review_commit'], record['evidence_commit'], record['integration']
+        require(R != E and E != I and ancestor(root, R, E) and ancestor(root, E, I)
+                and ancestor(root, F, I) and ancestor(root, I, target),
+                'review/PASS/integration chronology mismatch')
+        verify_correspondence(root, F, parent, target=target, integrated=True, check_worktree=True)
+        return F
     require(_git(root,'rev-list','--parents','-n','1',F).decode().split()==[F,parent],'built F direct parent mismatch')
     require(_git(root,'rev-parse',F+'^{tree}').decode().strip()==record['tree'],'built F tree mismatch')
     require(ancestor(root,C_R,F) and ancestor(root,B_R,F),'built F omitted candidate/governance authority')
@@ -611,7 +658,16 @@ def processor_history(root, head, old_records, repaired_records, *, structural_r
     roots = authenticate_processor_roots(root) if structural_roots is None else structural_roots
     require(type(roots) is ProcessorRoots and roots.repository == str(root),
             'history roots belong to another repository')
+    if structural_roots is not None:
+        require(authenticate_processor_roots(root, roots.values()) == roots,
+                'history roots substitution')
+    return _processor_history(root, head, old_records, repaired_records, roots)
+
+
+def _processor_history(root, head, old_records, repaired_records, roots):
+    """One immutable certificate chain; each historical SHA is still checked."""
     pins = roots.values()
+    baseline, candidate_tree = dict(roots.source_trees[0]), dict(roots.source_trees[2])
     revisions = _git(root, 'rev-list', '--reverse', '--topo-order',
                      original.ADOPTION + '..' + head).decode().split()
     requests = []
@@ -621,7 +677,7 @@ def processor_history(root, head, old_records, repaired_records, *, structural_r
         requests.extend((revision, path) for path in (original.TRANSITIONS, TRANSITIONS)
                         if path in inventory)
     _prefetch_blobs(root, requests)
-    earliest, integrated = None, False
+    earliest, evidence, integrated = None, None, False
     introductions = {}
     for revision in revisions:
         state = item(root, revision, 'GP-CONFIG-020')
@@ -645,26 +701,22 @@ def processor_history(root, head, old_records, repaired_records, *, structural_r
                 record = dict(work_order='GP-CONFIG-020', candidate=C_R,
                               **{key: pins[key] for key in ('build', 'parent', 'tree', 'review_commit')},
                               evidence_commit=revision)
-                earliest = validate_processor_transition(root, record, revision, structural_roots=roots)
-            record = dict(work_order='GP-CONFIG-020', candidate=C_R,
-                          **{key: pins[key] for key in ('build', 'parent', 'tree', 'review_commit')},
-                          evidence_commit=earliest['evidence_commit'])
-            validate_processor_transition(root, record, revision, structural_roots=roots)
+                evidence = _validate_processor_evidence(root, record, roots)
+            observed = _validate_processor_target(root, evidence, revision)
+            if earliest is None:
+                earliest = observed
             actual = critical_tree(root, revision)
-            if actual == critical_tree(root, B_R):
+            if actual == baseline:
                 require(state['status'] == 'HARDWARE_VALIDATED' and not any(catalogs.values())
                         and not ancestor(root, pins['build'], revision),
                         'source-free processor claims integrated acceptance')
             else:
-                require(actual == critical_tree(root, C_R) and ancestor(root, pins['build'], revision),
+                require(actual == candidate_tree and ancestor(root, pins['build'], revision),
                         'processor history source/ancestry mismatch')
         elif earliest is not None and ancestor(root, earliest['evidence_commit'], revision):
             require(False, 'processor history downgraded or erased PASS')
     if earliest is not None:
-        record = dict(work_order='GP-CONFIG-020', candidate=C_R,
-                      **{key: pins[key] for key in ('build', 'parent', 'tree', 'review_commit')},
-                      evidence_commit=earliest['evidence_commit'])
-        validate_processor_transition(root, record, head, structural_roots=roots)
+        _validate_processor_target(root, evidence, head)
     return dict(processor=earliest, integrated=integrated)
 
 
@@ -728,7 +780,7 @@ def authenticate(root):
     before, old_after, after = source_contract(root)
     # Fixed off-ancestry roots are exported even for historical repaired phases;
     # authenticate them independently of current phase or catalog selection.
-    authenticate_processor_roots(root)
+    processor_roots = _authenticate_processor_roots(root, None, (before, old_after, after))
     delta = set(filter(None, _git(root, 'diff', '--no-renames', '--name-only', '-z', B_R, head).decode().split('\0')))
     require(delta <= GOVERNANCE_PATHS | CRITICAL | HOSTS,
             'unreviewed governance/host delta: ' + repr(sorted(delta - GOVERNANCE_PATHS - CRITICAL - HOSTS)))
@@ -771,7 +823,7 @@ def authenticate(root):
     processor = None
     adopted_processor = ancestor(root, PROCESSOR_ADOPTION, head)
     if adopted_processor:
-        observations = processor_history(root, head, old_records, repaired_records)
+        observations = _processor_history(root, head, old_records, repaired_records, processor_roots)
         processor = observations['processor']
         require(not observations['integrated'] or bool(records),
                 'accepted phase lacks mandatory transition record')
@@ -804,7 +856,10 @@ def authenticate(root):
                     'integrated transition differs from authenticated processor E/tuple')
             require(ancestor(root, processor['evidence_commit'], records[0]['integration']),
                     'integrated transition omitted authenticated processor E')
-        validate(root, records[0], head)
+        if adopted_processor:
+            _validate_accepted_transition(root, records[0], head, observations)
+        else:
+            validate(root, records[0], head)
         accepted_metadata = accepted_scope_metadata(root, records[0])
         phase = 'ACCEPTED_TRANSITION'
         roots.update(v for k, v in records[0].items() if k not in {'work_order', 'tree'})
