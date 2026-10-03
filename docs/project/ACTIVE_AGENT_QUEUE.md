@@ -12,9 +12,9 @@ authorized objective mechanical activation conditions.
 The former G-series queue in this file is superseded. Its history remains in
 Git, but it is not current candidate supply or implementation authority.
 
-## Current GP-VAL-037 Authority
+## Current GP-VAL-037 Runner Stop
 
-GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator receipt: explicit authenticated campaign WebSerial main becomes load-bearing, legacy Step15 controls remain separate, unchanged storage guard must PASS, and all seven coupled current consumers retain separate historical/current proof with the actual validator. GP-VAL-037 is PREAUTHORIZED/ACTIVATABLE; a separate supervisor must freshly authenticate objective prerequisites and deliver candidate plus accepted-transition governance, full required validation, independent review and strict DONE. C020 stays REVIEW at `256bf44cea71f6d5c87aa1675c8dac9f6b79259f`, parent `3dac79dac4eefcf832510817e8cb5ecd6a27f219`, tree `45831eeb88ece9c8b293e2e819ee5ecb362b64ec`, unmodified and unmerged. Its later actual F build, artifact custody and exact hardware PASS remain mandatory. Prior accepted-baseline judgment, KBD exact REVIEW candidate and GP-VAL-040 amended ACTIVATABLE authority remain intact. This adoption changes no firmware or implementation checker and claims no new aggregate, hardware acceptance or strict DONE.
+GP-VAL-037 is INVALIDATED_PREAUTHORIZED / CURATION_REQUIRED after a new runner-entry conflict found during the 2026-10-03 implementation. The prior baseline and WebSerial campaign applicability judgments remain resolved. The adopted exact guard command requires required_arguments=[--campaign-transition], but the unchanged aggregate load() rejects every current entry with nonempty required_arguments. Actual --check-manifest fails with unsafe current aggregate entry: campaign_webserial_source_authority; canonical fingerprint MATCH is not aggregate PASS. The explicit runner edit boundary remains closed proof-root selection and historical serialization, so a finite current-entry safety-policy exception needs independent Curator authority. Do not omit the required argument, change applicability/load-bearing status or patch the runner to force green. Partial source-free implementation is preserved, unmerged and not approved for integration at `c0916f93ad280f995f39d30a3381389423cad4e4` on `codex/gp-val-037-release-safety`; its accepted-transition validation still needs reviewer-requested repairs and full phase aggregates. C020 stays REVIEW at `256bf44cea71f6d5c87aa1675c8dac9f6b79259f`, parent `3dac79dac4eefcf832510817e8cb5ecd6a27f219`, tree `45831eeb88ece9c8b293e2e819ee5ecb362b64ec`. KBD exact candidate, GP-VAL-040 amended ACTIVATABLE authority and all other orders remain unchanged. No firmware/build changes, new artifact, physical test, acceptance inheritance, source integration, public release or strict DONE. After bounded Curator resolution, resume the preserved GP-VAL-037 work through complete candidate and accepted-transition proof, fresh review and strict DONE; only then a separate C020 supervisor may proceed to actual F build, custody, review and exact human hardware PASS.
 
 ## Current Queue State
 
@@ -26,17 +26,17 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
   "audit_base_sha": "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "GP-VAL-037 validation applicability conflict fully adjudicated by NEW explicit finite campaign WebSerial actual-main scope and load-bearing manifest authority, with all seven directly coupled consumers and actual-helper historical/current proof closure. PREAUTHORIZED/ACTIVATABLE restored; unchanged storage guard and all prohibitions/PASS obligations remain mandatory. Separate GP-VAL-037 implementation, review, full proof and strict DONE required before C020 resumption. Prior baseline and GP-VAL-040 amendments preserved; no outstanding Curator subject, implementation or hardware observation.",
+    "pending": true,
+    "trigger": "GP-VAL-037 new current-entry safety-policy conflict. Adopted 85c1ec43abffb737d080f19190b393c591b862ef guard receipt section5 mandates exact current load-bearing command [python3, tools/check_glyph_runtime_config_webserial_device_write_source_authority.py, --campaign-transition] and required_arguments containing --campaign-transition, while expressly retaining the original narrow runner root-selection scope. At exact adopted a8e249eb210b7cd1e010e27dee8f4c61f8fcb537, tools/run_glyph_runtime_config_validation.py load() rejects every current entry with any required_arguments (line146). Actual implementation --check-manifest reproduces SETUP_FAILURE unsafe current aggregate entry: campaign_webserial_source_authority with canonical_proof MATCH. Changing that safety predicate is outside root selection/stable historical serialization. Independent reviewer confirms bounded Curator adjudication is required; no policy exception is inferred from intended manifest outcome. Previous baseline/guard applicability decisions stay valid. Partial unmerged checkpoint c0916f93ad280f995f39d30a3381389423cad4e4 contains no source/build changes, is NOT_APPROVED and has separately recorded implementation repair findings; those do not require new product authority. C020/KBD/040 and all other orders preserved.",
+    "resolution": null,
     "provenance": {
       "opened_by_role": "Glyph Implementation Supervisor",
-      "opening_reference": "git-json:b4e7ad7d4f54ae5aeb06314c08e8e07a0fb19579:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "opening_reference": "GP-VAL-037 resumed implementation at git:a8e249eb210b7cd1e010e27dee8f4c61f8fcb537; immutable guard receipt85c1ec43abffb737d080f19190b393c591b862ef; actual runner failure and independent review of checkpointc0916f93ad280f995f39d30a3381389423cad4e4",
       "subject_ids": [
         "GP-VAL-037"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:85c1ec43abffb737d080f19190b393c591b862ef:docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -97,11 +97,11 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
   },
   "runway": {
     "immediate_ready": 1,
-    "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 2,
-    "invalidated_preauthorized": 0,
+    "recorded_preauthorized": 12,
+    "mechanically_activatable_preauthorized": 1,
+    "invalidated_preauthorized": 1,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -331,7 +331,7 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
     {
       "id": "GP-VAL-037",
       "title": "C020 candidate-phase governance",
-      "status": "PREAUTHORIZED",
+      "status": "INVALIDATED_PREAUTHORIZED",
       "branch": "codex/gp-val-037-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -381,8 +381,8 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "ACTIVATABLE",
-      "activation_requires_new_judgment": false,
+      "activation_state": "INVALIDATED",
+      "activation_requires_new_judgment": true,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
@@ -7580,11 +7580,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":1,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 1; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
