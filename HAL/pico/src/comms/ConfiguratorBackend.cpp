@@ -19,6 +19,7 @@
 
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
+#include "core/config_button_validation.hpp"
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
 
@@ -175,6 +176,12 @@ bool ConfiguratorBackend::HandleSetConfig() {
             snprintf(errmsg, sizeof(errmsg), "Failed to decode config: %s", istream.errmsg);
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
 
+        return false;
+    }
+
+    if (!validate_config_button_bindings(candidate)) {
+        char errmsg[] = "Config contains an invalid button binding";
+        WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
         return false;
     }
 
