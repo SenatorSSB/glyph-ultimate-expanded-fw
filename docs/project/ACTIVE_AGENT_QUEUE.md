@@ -14,7 +14,7 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Current C020 ABI Repair Authority
 
-GP-VAL-043 mechanical activation: the exact published C_R and source-free handoff passed 66 independent identity/source/evidence checks and fresh live-ref verification. The recorded objective conditions are satisfied; The queue marker records GP-VAL-043 activation for its bounded source-free implementation. Original037 DONE and C020 REVIEW remain unchanged. No implementation or hardware acceptance is claimed by activation.
+GP-VAL-043 is DONE through reviewed source-free integration `774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718` and later strict completion correspondence. The separate finite contract authenticates exact repaired C020, preserves original037 authority and history, and passes four isolated validation phases with canonical proof MATCH. Synthetic acceptance establishes no controller result. C020 remains REVIEW; a separate invocation must perform full F_R build, artifact custody, independent review and exact human hardware PASS before source integration.
 
 GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7752c78838be6f1d48b56932d90b9`; its original candidate contract, receipts, runner-entry judgment and all historical evidence remain intact. Its resolved event provenance below records that earlier judgment, not a new pending event. The original C020 candidate and failed actual F remain preserved and unmerged. The failed build produced no UF2 or physical result. Corrected immutable1256 packet and same-base Curator receipt authorize only a new bounded representation/proof repair attempt and the separate finite GP-VAL-043 successor. No product/domain/schema/ABI/buildflag change is authorized. The machine-derived queue and mirrors define executability. New C_R must receive both host ABI proofs, postcommit actual-target diagnostic object proof and fresh independent source review before043 activation. No full firmware link/UF2 until043 strict DONE; exact built F_R/artifact custody, review and processor-accepted human hardware PASS with empty gaps precede source integration. KBD/040/019 and every94 unrelated order remain unchanged. No implementation, build, device, hardware acceptance or public release occurs in this curation.
 
@@ -98,12 +98,12 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 12,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 3,
+    "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -7459,7 +7459,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-043",
       "title": "Repaired C020 exact-candidate governance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "codex/gp-val-043-c020-abi-repair",
       "objective": "Authenticate only the new bounded C020 ABI repair candidate and later accepted transition through the finite algorithm below, retaining original037 contract and every historical proof.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -7498,7 +7498,41 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Fresh independent exact implementation review, focused current/historical/governance/composed repaired candidate/synthetic accepted-transition proofs and full isolated aggregates PASS with MATCH; source-free live integration then later strict DONE completion correspondence. Synthetic evidence never controller acceptance.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+        "reviewed_implementation_sha": "774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718",
+        "prior_canonical_integration_sha": "774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718",
+        "reviewed_changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
+          "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_checker_context.py",
+          "tools/check_glyph_configurator_setconfig_transaction.py",
+          "tools/check_glyph_current_config_persistence_recovery_research.py",
+          "tools/check_glyph_getconfig_raw_load_characterization.py",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/fixtures/configurator_setconfig_host/handler_harness.cpp",
+          "tools/glyph_c020_abi_repair_transition.py",
+          "tools/glyph_campaign_transition.py",
+          "tools/glyph_checker_context.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/run_glyph_runtime_config_validation.py",
+          "tools/test_glyph_config_010_semantic_applicability.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent native val043_final_review_recovery approved exact source-free implementation 774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718 after original/repaired contract, actual host ABI and protected mains, finite runner closure, synthetic accepted chronology and all four phase aggregate proof. Activation/source and runner specialists supplied separate bounded evidence.",
+        "validation_provenance": "Frozen semantic regression PASS; final governance45/45, original46/46, repaired46/46, syntheticaccepted46/46 full isolated aggregates PASS with all canonical/isolated proofs MATCH and complete cleanup, unchanged120/300 limits. Exact reports and hashes are bound in independent-review.json SHA256cc4ff3d38b762694983f5f1b668e8ab807c755af2fe43ae3eeb0bb86015dc02e. Independent reviewed source-free implementation was published and live-verified on feature and configurator before this later strict DONE snapshot. Earlier failures and interrupted evidence remain preserved; no firmware or controller acceptance."
+      },
       "stop_conditions": [
         "Missing objective prerequisites remain WAITING; contradiction, additional source/path/policy/architecture/layout/runner judgment returns CURATION_REQUIRED. No firmware/buildflag/schema/domain/device action under043.",
         "Preserve original037 constants/catalog/receipts/DONE and accepted010/Ultimate/X1/historical observations. Exact new module/fixtures and literal annex only; unknown paths, modes, omitted/forged roots or dirty source fail closed.",
@@ -7684,11 +7718,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019","GP-VAL-043"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019, GP-VAL-043; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
