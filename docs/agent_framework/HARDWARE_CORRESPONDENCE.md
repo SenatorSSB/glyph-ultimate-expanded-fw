@@ -290,7 +290,10 @@ agent-surface and ordinary affected repository validators.
 `glyph_campaign_transition.authenticate` is a separate semantic proof. The legacy
 `verify_correspondence` API remains strict: new critical source never inherits
 GP-CONFIG-010 hardware acceptance. The immutable 0118/0151 adoption, exact C020
-handoff, accepted-baseline receipt and guard-applicability receipt bind this lane.
+handoff, accepted-baseline, guard-applicability and exact current-argument receipts bind this lane. The last receipt is the regular non-executable literal
+`docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json`
+at `6cb59e97ddfdb96830432923ac588a76383153b7`, adopted at
+`93b3c9ee8f702886f731714281ce143428724a17`.
 The candidate, direct parent, tree and complete recursive raw inventory are
 literal identities. The only production delta is the reviewed validator header,
 implementation and exact Configurator insertion; all other critical entries,
@@ -309,9 +312,12 @@ review_commit, evidence_commit and integration. Only the literal adopted C020
 contract is implemented. The consumer reserves the closed 020/014/017 order set;
 014/017 remain rejected until their separately authorized literal contracts exist.
 Each accepted record must prove preserved C ancestry, actual F direct parent/tree,
-C-to-F strict critical correspondence, exact independent review recorded in the
-immutable queue, native processor PASS and empty gaps for F/artifact, and reviewed
-integration ancestry. The native artifact locator contract remains mandatory;
+C-to-F strict critical correspondence, exact independent review bound by the
+immutable protocol and queue to F/tree/parent/artifact/locator, and native processor
+PASS with empty gaps for the same pair. Source-free review precedes processor
+PASS, which precedes integration. Immutable evidence must belong to that chain.
+The catalog is mandatory; missing or empty records cannot downgrade accepted
+source to candidate validation. The native artifact locator contract remains mandatory;
 actual UF2 custody and rehash remain the separate build/operator gate. Synthetic
 records used in disposable tests never become repository evidence.
 

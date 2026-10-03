@@ -360,8 +360,13 @@ def isolation_contract_cases(module: Any) -> list[str]:
                 (root / command[1]).write_text("import os\n" + ("assert 'GLYPH_CHECKER_BASE' not in os.environ and 'GLYPH_CHECKER_EXPECTED_MERGE_BASE' not in os.environ\n" if exact_pair else "assert os.environ['GLYPH_CHECKER_BASE'] and os.environ['GLYPH_CHECKER_EXPECTED_MERGE_BASE']\n"), encoding="utf-8")
                 run_git(root, "add", command[1])
                 test_manifest = write_manifest(root, [self_test], ["baseline"])
-                report = execute(test_manifest)
-                if report["status"] != "PASS": raise AssertionError("self-test environment exception is not exact")
+                # These inert self-test scripts prove environment dispatch only;
+                # the real adopted campaign catalog is exercised separately.
+                import glyph_campaign_transition as campaign
+                with mock.patch.object(campaign, "ROOTS", frozenset()), mock.patch.object(
+                        campaign, "authenticate", return_value={"test_only_self_test_dispatch": True}):
+                    report = execute(test_manifest)
+                if report["status"] != "PASS": raise AssertionError("self-test environment exception is not exact: " + str(report))
         passed.append("ISO-06-exact-self-test-id-command-pairs")
 
         x1_entry = entry("current_x1_regression_subset")
@@ -748,6 +753,13 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
         "campaign_webserial_source_authority": "check_glyph_runtime_config_webserial_device_write_source_authority.py",
     }
     expected = set(campaign.ROOTS)
+    current_argument_authority = {
+        "32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb",
+        "6cb59e97ddfdb96830432923ac588a76383153b7",
+        "93b3c9ee8f702886f731714281ce143428724a17",
+    }
+    if not current_argument_authority <= expected:
+        raise AssertionError("campaign catalog omitted exact current-argument opening/receipt/adoption")
     # Authenticate the real source first. A test double below only observes calls
     # and never replaces this positive or makes an invalid repository pass.
     campaign.authenticate(module.ROOT)
@@ -836,6 +848,206 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
     return ["ISO-17-campaign-exact-consumer-before-framework-selection",
             "ISO-18-campaign-authority-failure-and-near-match-rejection",
             "ISO-19-campaign-reduced-closure-omission-substitution-no-ref"]
+
+def gp_val037_current_argument_cases(module: Any) -> list[str]:
+    """Exercise the actual load/preflight and argv path in disposable repositories.
+
+    The inert dispatch fixture mocks only campaign authority/catalog selection;
+    it is a runner compatibility proof, never a real guard/source phase PASS.
+    """
+    from copy import deepcopy
+    import glyph_campaign_transition as campaign
+
+    with tempfile.TemporaryDirectory(prefix="glyph-current-arguments-") as directory:
+        root = fresh_root(Path(directory))
+        guard = entry("campaign_webserial_source_authority", category="candidate_safety")
+        guard.update({
+            "path": "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+            "required_arguments": ["--campaign-transition"],
+            "branch_policy": "content_and_scope",
+        })
+        guard["command"] = ["python3", guard["path"], *guard["required_arguments"]]
+        ordinary = entry("ordinary")
+        write_checker(root, guard, 0)
+        write_checker(root, ordinary, 0)
+        categories = ["baseline", "candidate_safety", "historical_evidence"]
+        manifest = write_manifest(root, [guard, ordinary], categories)
+
+        def check_load(accepted: bool, label: str) -> None:
+            with mock.patch.object(module, "ROOT", root), mock.patch.object(module, "MANIFEST", manifest), mock.patch.object(
+                    module, "CENSUS", root / "docs/runtime_config/fixtures/glyph_checker_census.json"):
+                try:
+                    module.load()
+                except ValueError:
+                    if accepted:
+                        raise
+                else:
+                    if not accepted:
+                        raise AssertionError("actual load accepted " + label)
+
+        def check_preflight(accepted: bool, label: str) -> None:
+            code, text = invoke(module, root, manifest, "--check-manifest", "--json")
+            report = payload(text)
+            if ((code == 0) != accepted or report["results"]
+                    or report["canonical_proof"] != ("UNAVAILABLE" if label == "directory" else "MATCH")
+                    or (not accepted and (report["status"] != "FAIL" or report["failure_kind"] != "SETUP_FAILURE"))):
+                raise AssertionError("actual preflight result differs for " + label + ": " + text)
+
+        check_load(True, "exact guard and ordinary empty arguments")
+        check_preflight(True, "exact guard and ordinary empty arguments")
+        mutations = []
+        for key, values in {
+            "id": ["renamed_guard", 1],
+            "path": [ordinary["path"], "tools/./check_glyph_runtime_config_webserial_device_write_source_authority.py", None],
+            "category": ["baseline", [], None],
+            "branch_policy": ["content_only", "named_evidence_branch", None],
+            "applicability": ["historical_only", "unsafe_or_mutating", None],
+            "load_bearing": [False, 1, "true", None],
+            "historical": [True, 0, "false", None],
+            "mutation_risk": ["temporary_file_only", "temporary_repository_only", "mutating", None],
+            "required_arguments": [[], ["--campaign-transition", "--extra"],
+                ["--campaign-transition", "--campaign-transition"], ["--extra", "--campaign-transition"],
+                ["--campaign", "transition"], "--campaign-transition", [1], None],
+            "command": [["python", guard["path"], "--campaign-transition"],
+                ["sh", guard["path"], "--campaign-transition"], ["python3", guard["path"]],
+                ["python3", guard["path"], "--campaign-transition", "--extra"],
+                ["python3", "--campaign-transition", guard["path"]],
+                "python3 " + guard["path"] + " --campaign-transition", [1], None],
+        }.items():
+            for value in values:
+                mutations.append((key + "=" + repr(value), {**deepcopy(guard), key: value}))
+        # Nonempty declarations remain forbidden even when generic command
+        # equality holds, and an empty reserved variant cannot use that rule.
+        mutations.extend([
+            ("empty reserved variant", {**guard, "command": ["python3", guard["path"]], "required_arguments": []}),
+            ("arbitrary matching declaration", {**ordinary, "command": ["python3", ordinary["path"], "--campaign-transition"], "required_arguments": ["--campaign-transition"]}),
+            ("paired wrong path", {**guard, "path": ordinary["path"], "command": ["python3", ordinary["path"], "--campaign-transition"]}),
+        ])
+        for label, bad in mutations:
+            manifest = write_manifest(root, [bad], categories)
+            check_load(False, label)
+            check_preflight(False, label)
+        for label, entries in (
+            ("duplicate ID", [guard, deepcopy(guard)]),
+            ("reserved path collision", [guard, {**guard, "id": "alias"}]),
+            ("reserved ID collision", [guard, {**ordinary, "id": guard["id"]}]),
+        ):
+            manifest = write_manifest(root, entries, categories)
+            check_load(False, label)
+            check_preflight(False, label)
+
+        guard_path = root / guard["path"]
+        for label in ("executable", "worktree-executable", "symlink", "directory", "untracked", "nonzero-stage", "parent-symlink"):
+            # Restore via an ordinary write/add; no destructive Git operation.
+            guard_path.write_text("# " + label + "\nraise SystemExit(0)\n")
+            guard_path.chmod(0o644)
+            run_git(root, "add", guard["path"])
+            manifest = write_manifest(root, [guard], categories)
+            if label == "executable":
+                guard_path.chmod(0o755)
+                run_git(root, "add", guard["path"])
+            elif label == "worktree-executable":
+                guard_path.chmod(0o755)
+            elif label == "parent-symlink":
+                (root / "tools").rename(root / "tool-alias-target")
+                (root / "tools").symlink_to("tool-alias-target", target_is_directory=True)
+            elif label == "symlink":
+                guard_path.unlink()
+                guard_path.symlink_to(Path(ordinary["path"]).name)
+                run_git(root, "add", guard["path"])
+            elif label == "directory":
+                guard_path.unlink()
+                guard_path.mkdir()
+            elif label == "untracked":
+                run_git(root, "update-index", "--force-remove", guard["path"])
+            else:
+                blob = subprocess.check_output(["git", "rev-parse", "HEAD:" + guard["path"]], cwd=root, text=True).strip()
+                run_git(root, "update-index", "--force-remove", guard["path"])
+                subprocess.run(["git", "update-index", "--index-info"], cwd=root, text=True,
+                    input=f"100644 {blob} 1\t{guard['path']}\n", check=True, capture_output=True)
+            if label != "directory":
+                refresh_census(root)
+            check_load(False, label)
+            check_preflight(False, label)
+            if label == "parent-symlink":
+                (root / "tools").unlink()
+                (root / "tool-alias-target").rename(root / "tools")
+            if guard_path.is_symlink():
+                guard_path.unlink()
+            elif guard_path.is_dir():
+                guard_path.rmdir()
+        guard_path.write_text("import glyph_argument_helper\nraise SystemExit(0)\n")
+        helper = root / "tools/glyph_argument_helper.py"
+        helper.write_text("# inert dependency fixture\n")
+        run_git(root, "add", guard["path"], "tools/glyph_argument_helper.py")
+        manifest = write_manifest(root, [guard], categories)
+        check_load(False, "missing declared direct helper")
+        check_preflight(False, "missing declared direct helper")
+        guard["source_dependencies"] = ["tools/glyph_argument_helper.py"]
+        manifest = write_manifest(root, [guard], categories)
+        check_load(True, "declared direct helper")
+        check_preflight(True, "declared direct helper")
+
+        # Keep the actual command and checker execution path. Only immutable
+        # campaign authority is outside this deliberately inert fixture.
+        probe = ("import os, sys, subprocess\n"
+                 "assert sys.argv[1:] == ['--campaign-transition'], sys.argv\n"
+                 "assert os.environ['GLYPH_CHECKER_BASE']\n"
+                 "assert os.environ['GLYPH_CHECKER_EXPECTED_MERGE_BASE']\n"
+                 "assert os.environ['PYTHONHASHSEED'] == '0'\n"
+                 "assert os.environ['GIT_CONFIG_NOSYSTEM'] == '1'\n"
+                 "assert 'GLYPH_ARGUMENT_POISON' not in os.environ\n"
+                 "print('inert exact singleton argv/context probe: PASS')\n")
+        guard_path.write_text(probe)
+        run_git(root, "add", guard["path"])
+        manifest = write_manifest(root, [guard], categories)
+        with mock.patch.object(campaign, "ROOTS", frozenset()), mock.patch.object(
+                campaign, "authenticate", return_value={"test_only_inert_probe": True}), mock.patch.dict(
+                os.environ, {"GLYPH_ARGUMENT_POISON": "ambient must not forward"}):
+            code, text = invoke(module, root, manifest, "--json")
+            report = payload(text)
+            if (code or report["canonical_proof"] != "MATCH" or len(report["results"]) != 1
+                    or report["results"][0]["command"] != guard["command"]
+                    or report["results"][0]["isolated_proof"] != "MATCH"
+                    or report["results"][0]["status"] != "PASS"):
+                raise AssertionError("isolated exact argv dispatch failed: " + text)
+            for suffix, expected_kind in (
+                ("raise SystemExit(7)\n", None),
+                ("assert sys.argv[1:] == []\n", None),
+                ("open('README.md', 'a').write('changed')\n", "ISOLATED_REPOSITORY_MUTATION"),
+            ):
+                guard_path.write_text(probe + suffix)
+                run_git(root, "add", guard["path"])
+                manifest = write_manifest(root, [guard], categories)
+                code, text = invoke(module, root, manifest, "--json")
+                report = payload(text)
+                if code != 1 or report["status"] != "FAIL" or report["results"][0]["status"] != "FAIL":
+                    raise AssertionError("failed/changed inert dispatch became PASS: " + text)
+                if expected_kind == "ISOLATED_REPOSITORY_MUTATION" and report["failure_kind"] != expected_kind:
+                    raise AssertionError("isolated mutation was not detected")
+            guard_path.write_text(probe)
+            run_git(root, "add", guard["path"])
+            manifest = write_manifest(root, [guard], categories)
+            original_clone = module.clone_snapshot
+            def mutate_canonical(context_data, parent):
+                clone = original_clone(context_data, parent)
+                (root / "README.md").write_text("deliberate canonical mutation\n")
+                return clone
+            with mock.patch.object(module, "clone_snapshot", side_effect=mutate_canonical):
+                code, text = invoke(module, root, manifest, "--json")
+            report = payload(text)
+            if (code != 1 or report["status"] != "FAIL" or report["canonical_proof"] != "MISMATCH"
+                    or report["failure_kind"] != "CANONICAL_REPOSITORY_MUTATION"):
+                raise AssertionError("changed canonical fingerprint became PASS: " + text)
+            (root / "README.md").write_text("test\n")
+        guard_path.write_text(probe + "# restored before dirty-source case\n")
+        run_git(root, "add", guard["path"])
+        manifest = write_manifest(root, [guard], categories)
+        guard_path.write_text(probe + "# dirty checker\n")
+        check_preflight(False, "dirty guard source")
+    return ["AGG-23-reserved-current-tuple-load-and-preflight-negatives",
+            "AGG-24-reserved-mode-stage-dependency-and-dirty-negatives",
+            "ISO-20-exact-current-argument-dispatch-and-failure-proofs"]
 
 def main() -> int:
     module = load_runner()
@@ -1223,6 +1435,7 @@ def main() -> int:
             raise AssertionError("regenerated census was not accepted after drift repair")
         passed.append("AGG-12-census-freshness-added-removed-renamed-byte-drift")
 
+    passed.extend(gp_val037_current_argument_cases(module))
     passed.extend(isolation_contract_cases(module))
     # The old synthetic repositories exercise only the pre-campaign catalog.
     # They contain no adopted campaign authority and must not impersonate it.

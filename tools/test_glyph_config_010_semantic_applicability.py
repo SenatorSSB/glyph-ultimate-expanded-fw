@@ -168,54 +168,176 @@ def campaign_contract_tests(directory: Path) -> None:
         with patch.object(campaign, "raw_bytes", side_effect=changed_bytes):
             rejected(lambda: campaign.source_contract(root), label)
 
-    # Pure consumer unit controls: all records remain in memory. These mocks
-    # test acceptance plumbing, never hardware evidence or aggregate acceptance.
-    F, P, T, R, E, I, H = (character * 40 for character in "abcdef1")
-    record = dict(work_order="GP-CONFIG-020", candidate=campaign.C, build=F,
-                  parent=P, tree=T, review_commit=R, evidence_commit=E, integration=I)
-    review = dict(candidate_git_sha=F, candidate_base_configurator_sha=P,
-                  done_evidence="independent review of " + F)
-    accepted = dict(review, status="HARDWARE_VALIDATED", hardware_result="PASS", hardware_evidence_gaps=[])
-    def synthetic_git(where, *args):
-        if args == ("rev-list", "--parents", "-n", "1", F):
-            return (F + " " + P).encode()
-        if args == ("rev-parse", F + "^{tree}"):
-            return T.encode()
-        raise AssertionError("unexpected synthetic Git query: " + repr(args))
-    def synthetic_item(where, ref, order):
-        assert order == "GP-CONFIG-020"
-        return review if ref == R else accepted
-    with patch.object(campaign, "_git", side_effect=synthetic_git), \
-         patch.object(campaign, "ancestor", return_value=True), \
-         patch.object(campaign, "verify_correspondence") as correspondence, \
-         patch.object(campaign, "item", side_effect=synthetic_item), \
-         patch.object(framework, "validate_work_order") as work_order, \
-         patch.object(framework, "validate_evidence_record") as evidence:
-        assert campaign.validate_accepted_transition(root, record, H) == F
-        assert correspondence.call_count == 2 and work_order.call_count == evidence.call_count == 1
-        for key, value in (("work_order", "GP-CONFIG-021"), ("work_order", "GP-CONFIG-014"),
-                           ("work_order", "GP-CONFIG-017"), ("candidate", "0" * 40),
-                           ("parent", "0" * 40), ("tree", "0" * 40), ("build", "HEAD")):
-            altered = dict(record, **{key: value})
-            rejected(lambda: campaign.validate_accepted_transition(root, altered, H), "accepted " + key + "=" + value)
-        rejected(lambda: campaign.validate_accepted_transition(root, dict(record, bypass=True), H), "extra record field")
-        for target, key, value in ((review, "done_evidence", "no review identity"),
-                                   (review, "candidate_git_sha", "0" * 40),
-                                   (accepted, "hardware_result", "FAIL"),
-                                   (accepted, "hardware_evidence_gaps", ["missing test"]),
-                                   (accepted, "candidate_git_sha", "0" * 40),
-                                   (accepted, "status", "REVIEW")):
-            saved = copy.deepcopy(target[key])
-            try:
-                target[key] = value
-                rejected(lambda: campaign.validate_accepted_transition(root, record, H), "accepted " + key)
-            finally:
-                target[key] = saved
-        with patch.object(campaign, "ancestor", return_value=False):
-            rejected(lambda: campaign.validate_accepted_transition(root, record, H), "missing accepted ancestry")
-        with patch.object(framework, "validate_evidence_record", side_effect=ValueError("invalid exact evidence")):
-            rejected(lambda: campaign.validate_accepted_transition(root, record, H), "processor validation rejection")
-    print("GP-VAL-037 contract negatives PASS; accepted positive is synthetic unit coverage only")
+    accepted_contract_tests(directory)
+    print("GP-VAL-037 real Git phase and contract negatives PASS; synthetic records stay in disposable clones")
+
+
+def write_queue_item(root: Path, value: dict) -> None:
+    import glyph_campaign_transition as campaign
+    state=campaign.queue(root,'HEAD')
+    state['items']=[value if x['id']=='GP-CONFIG-020' else x for x in state['items']]
+    path=root/campaign.QUEUE
+    text=path.read_text()
+    prefix,tail=text.split('<!-- queue-state:start -->')
+    _,suffix=tail.split('<!-- queue-state:end -->')
+    path.write_text(prefix+'<!-- queue-state:start -->\n```json\n'+json.dumps(state,indent=2)+'\n```\n<!-- queue-state:end -->'+suffix)
+
+
+def fixture_commit(root: Path, message: str) -> str:
+    run(root,'git','add','--all')
+    run(root,'git','commit','--allow-empty','-m','SYNTHETIC TEST ONLY: '+message)
+    return run(root,'git','rev-parse','HEAD').strip()
+
+
+def make_synthetic_accepted_fixture(directory: Path) -> tuple[Path, dict]:
+    """Disposable real Git evidence chronology; never physical acceptance.
+
+    Call only with a fresh temp directory. Returned repository can run actual
+    consumers/aggregates after their normal deterministic manifest/census update.
+    This function performs no firmware build, artifact creation, or publication.
+    """
+    import glyph_campaign_transition as campaign
+    root=directory.resolve()/'accepted-contract'
+    run(ROOT,'git','clone','--quiet','--no-local',str(ROOT),str(root))
+    run(root,'git','config','user.name','Synthetic GP-VAL-037 tests')
+    run(root,'git','config','user.email','synthetic@example.invalid')
+    G=run(root,'git','rev-parse','HEAD').strip()
+    run(root,'git','switch','-c','synthetic-candidate')
+    run(root,'git','merge','--no-ff','--no-edit',campaign.C)
+    P=run(root,'git','rev-parse','HEAD').strip()
+    F=fixture_commit(root,'unbuilt candidate identity; no artifact exists')
+    T=run(root,'git','rev-parse',F+'^{tree}').strip()
+    run(root,'git','switch','--detach',G)
+    run(root,'git','switch','-c','synthetic-evidence')
+    review=campaign.item(root,G,'GP-CONFIG-020')
+    digest='a'*64
+    locator=f'local_backups/hardware-artifacts/{F}/{digest}/firmware.uf2'
+    review.update(status='HARDWARE_TEST_REQUIRED',candidate_git_sha=F,candidate_base_configurator_sha=P,
+        firmware_artifact_build_path='.pio/build/glyph_mk6/firmware.uf2',firmware_artifact_sha256=digest,
+        preserved_firmware_artifact_locator=locator,hardware_result=None,hardware_evidence_gaps=[],
+        hardware_evidence_dependency_satisfied=False,manual_acceptance_protocol_reference=campaign.PROTOCOL,
+        manual_acceptance_protocol_version='GP_CONFIG_020_HW_V1',
+        done_evidence='Synthetic disposable test: no actual build, artifact, review, or hardware result.')
+    protocol=(f'# SYNTHETIC TEST ONLY: GP-CONFIG-020 protocol\n\n'
+        f'- Candidate Git SHA: `{F}`\n- Candidate tree: `{T}`\n'
+        f'- Sole parent / authorized canonical base: `{P}`\n'
+        f'- UF2 SHA-256: `{digest}`\n- Preserved locator: `{locator}`\n'
+        '- Fresh independent postimplementation review: PASS with no findings for the\n'
+        '  exact candidate, build output, custody bytes, correspondence, and protocol.\n')
+    (root/campaign.PROTOCOL).write_text(protocol)
+    write_queue_item(root,review)
+    R=fixture_commit(root,'source-free synthetic review handoff')
+    template=json.loads((root/'docs/calibration/fixtures/gp_config_010_integration_hardware_evidence_2026-09-23.json').read_text())
+    for key in ('candidate_git_sha','candidate_base_configurator_sha','firmware_artifact_build_path',
+                'firmware_artifact_sha256','preserved_firmware_artifact_locator'):
+        template[key]=review[key]
+    template.update(work_order_id='GP-CONFIG-020',candidate_branch=review['branch'],
+        candidate_protocol_reference=campaign.PROTOCOL,candidate_protocol_version=review['manual_acceptance_protocol_version'],
+        tester='SYNTHETIC TEST ONLY; no real controller observation',
+        preconditions=['Synthetic test of validation; no actual build or hardware acceptance.'],
+        steps=[dict(id='SYNTHETIC',instruction='Test validation only',expected='Synthetic record',observed='Synthetic PASS')],
+        negative_regression_checks=[],power_cycle_reconnect_checks=[],anomalies=[],
+        rollback_recovery='Synthetic test only',firmware_profile_state='Synthetic test only',
+        controller_model_revision='Synthetic test only',host_platform_adapter='Synthetic test only',
+        update_method='No update performed',result='PASS',evidence_gaps=[])
+    (root/campaign.EVIDENCE).write_text(json.dumps(template,indent=2)+'\n')
+    payload=fixture_commit(root,'synthetic evidence object after review')
+    accepted=dict(review,status='HARDWARE_VALIDATED',hardware_result='PASS',hardware_evidence_dependency_satisfied=True,
+        hardware_evidence_record='git-json:'+payload+':'+campaign.EVIDENCE)
+    write_queue_item(root,accepted)
+    E=fixture_commit(root,'source-free synthetic processor acceptance')
+    run(root,'git','merge','--no-ff','--no-edit',F)
+    I=run(root,'git','rev-parse','HEAD').strip()
+    record=dict(work_order='GP-CONFIG-020',candidate=campaign.C,build=F,parent=P,tree=T,
+                review_commit=R,evidence_commit=E,integration=I)
+    (root/campaign.TRANSITIONS).write_text(json.dumps(dict(schema_version=1,accepted_transitions=[record]),indent=2)+'\n')
+    fixture_commit(root,'synthetic accepted transition catalog')
+    return root,record
+
+
+def accepted_contract_tests(directory: Path) -> None:
+    import glyph_campaign_transition as campaign
+    root,record=make_synthetic_accepted_fixture(directory)
+    target=run(root,'git','rev-parse','HEAD').strip()
+    assert campaign.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+    assert campaign.validate_accepted_transition(root,record,target)==record['build']
+    # Missing/empty catalogs are tested against actual accepted source + queue.
+    catalog=root/campaign.TRANSITIONS
+    original=catalog.read_bytes()
+    evidence=root/campaign.EVIDENCE
+    evidence_bytes=evidence.read_bytes()
+    try:
+        evidence.write_bytes(evidence_bytes+b'\n')
+        rejected(lambda:campaign.validate_accepted_transition(root,record,target),'current evidence substitution')
+    finally:
+        evidence.write_bytes(evidence_bytes)
+    try:
+        catalog.unlink()
+        rejected(lambda:campaign.authenticate(root),'missing accepted catalog')
+        catalog.write_text('{"schema_version":1,"accepted_transitions":[]}\n')
+        rejected(lambda:campaign.authenticate(root),'empty accepted catalog')
+    finally:
+        catalog.write_bytes(original)
+    for key,value in (('work_order','GP-CONFIG-014'),('work_order','GP-CONFIG-017'),
+                      ('work_order','GP-CONFIG-021'),('candidate','0'*40),('build','HEAD'),
+                      ('parent',campaign.B),('tree','0'*40),
+                      ('review_commit',record['evidence_commit']),
+                      ('evidence_commit',record['integration']),
+                      ('integration',record['review_commit'])):
+        rejected(lambda:campaign.validate_accepted_transition(root,dict(record,**{key:value}),target),
+                 'accepted identity/chronology '+key)
+    rejected(lambda:campaign.validate_accepted_transition(root,dict(record,bypass=True),target),'extra accepted field')
+    protocol=campaign.raw_bytes(root,record['review_commit'],campaign.PROTOCOL).decode()
+    digest='a'*64
+    locator=f'local_backups/hardware-artifacts/{record["build"]}/{digest}/firmware.uf2'
+    campaign.validate_build_review(protocol,record,digest,locator)
+    for label,bad in (
+        ('review failure',protocol.replace('PASS with no findings','FAIL with findings')),
+        ('pending review',protocol.replace('PASS with no findings','PENDING')),
+        ('loose prose','independent review '+record['build']),
+        ('duplicate block',protocol+protocol),
+        ('wrong tree',protocol.replace(record['tree'],'0'*40)),
+        ('wrong artifact',protocol.replace(digest,'b'*64)),
+        ('wrong locator',protocol.replace(locator,'.pio/firmware.uf2')),
+        ('contradictory review',protocol+'\n- Review: FAIL\n'),
+    ):
+        rejected(lambda:campaign.validate_build_review(bad,record,digest,locator),label)
+    # Committed tip rewrites cannot erase accepted history, even when both the
+    # queue and catalog are changed together to claim a candidate-only phase.
+    run(root,'git','switch','-c','synthetic-downgrade',target)
+    downgraded=campaign.item(root,target,'GP-CONFIG-020')
+    downgraded.update(status='REVIEW',hardware_result=None,hardware_evidence_record=None,
+                      hardware_evidence_dependency_satisfied=None)
+    write_queue_item(root,downgraded)
+    catalog.write_text('{"schema_version":1,"accepted_transitions":[]}\n')
+    fixture_commit(root,'attempt to erase accepted queue and catalog')
+    rejected(lambda:campaign.authenticate(root),'committed queue/catalog accepted downgrade')
+    run(root,'git','switch','--detach',target)
+    # Even before the first catalog publication, processor PASS in integrated
+    # ancestry cannot be hidden by replacing only the current queue.
+    run(root,'git','switch','-c','synthetic-pre-catalog-downgrade',record['integration'])
+    write_queue_item(root,downgraded)
+    fixture_commit(root,'attempt to erase processor PASS before catalog')
+    rejected(lambda:campaign.authenticate(root),'committed pre-catalog processor downgrade')
+    run(root,'git','switch','--detach',target)
+    # Boundary injection retains all real commits/objects, changing one input at
+    # a time. No all-ancestor or processor-validation mocks can create a PASS.
+    native_item=campaign.item
+    for which,key,value in (
+        (record['review_commit'],'status','READY'),
+        (record['review_commit'],'candidate_git_sha','0'*40),
+        (record['review_commit'],'firmware_artifact_sha256','b'*64),
+        (record['review_commit'],'preserved_firmware_artifact_locator','.pio/firmware.uf2'),
+        (record['evidence_commit'],'hardware_result','FAIL'),
+        (record['evidence_commit'],'hardware_evidence_gaps',['missing test']),
+        (record['evidence_commit'],'hardware_evidence_record','git-json:'+campaign.C+':'+campaign.EVIDENCE),
+        (target,'status','REVIEW'),
+    ):
+        def altered_item(where,ref,order):
+            value_item=native_item(where,ref,order)
+            return dict(value_item,**{key:value}) if ref==which else value_item
+        with patch.object(campaign,'item',side_effect=altered_item):
+            rejected(lambda:campaign.validate_accepted_transition(root,record,target),'accepted '+key)
 
 
 def main() -> None:

@@ -69,6 +69,41 @@ def validate_checker_command(entry: dict[str, object]) -> None:
         raise ValueError(f"command does not match path/required_arguments: {checker_id}")
 
 
+def campaign_guard_arguments(entry: dict[str, object]) -> bool:
+    """The sole current argument contract adopted by GP-VAL-037.
+
+    Either reserved identity claims the entire contract. In particular, an
+    empty-argument or renamed variant cannot fall back to ordinary selection.
+    """
+    checker_id = "campaign_webserial_source_authority"
+    path = "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py"
+    if entry["id"] != checker_id and entry["path"] != path:
+        return False
+    expected = {
+        "id": checker_id, "path": path,
+        "command": ["python3", path, "--campaign-transition"],
+        "required_arguments": ["--campaign-transition"],
+        "category": "candidate_safety", "applicability": "current",
+        "branch_policy": "content_and_scope", "load_bearing": True,
+        "historical": False, "mutation_risk": "none",
+    }
+    if (any(entry[key] != value for key, value in expected.items())
+            or type(entry["load_bearing"]) is not bool
+            or type(entry["historical"]) is not bool):
+        raise ValueError("invalid reserved campaign guard contract")
+    indexed = git("ls-files", "--stage", "-z", "--", path)
+    records = [record for record in indexed.stdout.split("\0") if record]
+    fields = records[0].split("\t", 1)[0].split() if len(records) == 1 else []
+    if (indexed.returncode or len(records) != 1 or len(fields) != 3
+            or fields[0] != "100644" or fields[2] != "0"
+            or records[0].split("\t", 1)[-1] != path
+            or not (ROOT / path).is_file() or (ROOT / path).is_symlink()
+            or (ROOT / path).stat().st_mode & 0o111
+            or any((ROOT / parent).is_symlink() for parent in PurePosixPath(path).parents)):
+        raise ValueError("campaign guard requires tracked stage-zero regular 100644 file")
+    return True
+
+
 def direct_local_helpers(checker_path: str) -> set[str]:
     source = (ROOT / checker_path).read_text(encoding="utf-8")
     tree = ast.parse(source, filename=checker_path)
@@ -134,6 +169,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if not isinstance(checker_id, str) or checker_id in ids:
             raise ValueError(f"duplicate checker ID: {checker_id}")
         ids.add(checker_id)
+        campaign_arguments = campaign_guard_arguments(entry)
         if entry["category"] not in categories:
             raise ValueError(f"invalid category: {entry['category']}")
         if not isinstance(entry["command"], list) or not all(isinstance(part, str) for part in entry["command"]):
@@ -141,7 +177,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         validate_checker_command(entry)
         validate_dependencies(entry)
         validate_branch_policy(entry)
-        if entry["applicability"] == "current" and (entry["historical"] or not entry["load_bearing"] or entry["required_arguments"] or entry["mutation_risk"] not in {"none", "temporary_file_only", "temporary_repository_only"}):
+        if entry["applicability"] == "current" and (entry["historical"] or not entry["load_bearing"] or (entry["required_arguments"] and not campaign_arguments) or entry["mutation_risk"] not in {"none", "temporary_file_only", "temporary_repository_only"}):
             raise ValueError(f"unsafe current aggregate entry: {checker_id}")
         if entry["historical"] and entry["applicability"] != "historical_only":
             raise ValueError(f"historical checker incorrectly current: {checker_id}")

@@ -91,7 +91,8 @@ def campaign_guard_tests() -> None:
         run(root, "config", "user.email", "guard-control@example.invalid")
         run(root, "branch", "-f", "configurator", ADOPTION)
         guard_main(root, False)
-        for relative in (GUARD, "tools/glyph_campaign_transition.py", "tools/glyph_hardware_correspondence.py"):
+        for relative in (GUARD, "tools/glyph_campaign_transition.py", "tools/glyph_hardware_correspondence.py",
+                         "docs/runtime_config/fixtures/gp_val037_accepted_transitions.json"):
             shutil.copyfile(source / relative, root / relative)
         guard_main(root, False)
         guard_main(root, True)
@@ -170,6 +171,85 @@ def campaign_guard_tests() -> None:
         guard_main(candidate, False, "firmware/source/device paths changed")
     print("campaign_guard_actual_main: PASS; legacy/campaign baseline, C020 legacy rejection, "
           "all phrases/references/claims/source/flashing markers and unfiltered campaign wiring")
+
+
+
+PROTECTED_SCOPE_MAINS = (
+    "check_glyph_generated_source_owned_generator_contract.py",
+    "check_glyph_generated_source_owned_artifact_install.py",
+    "check_glyph_coordinate_native_runtime_profile_contract.py",
+    "check_glyph_generated_source_owned_baseline_artifact.py",
+    "check_glyph_docs_agent_surface.py",
+)
+
+
+def campaign_protected_scope_tests() -> None:
+    """Exercise all five real mains on an ancestry-preserving private composition."""
+    from concurrent.futures import ThreadPoolExecutor
+    from glyph_campaign_transition import ADOPTION, C, GOVERNANCE_PATHS
+    source = Path(__file__).resolve().parents[1]
+    with tempfile.TemporaryDirectory(prefix="glyph-five-campaign-scopes-") as directory:
+        root = Path(directory) / "composed"
+        run(source, "clone", "--shared", "--no-checkout", str(source), str(root))
+        run(root, "checkout", "-b", "scope-test-composition", output(source, "rev-parse", "HEAD"))
+        run(root, "config", "user.name", "Glyph scope test")
+        run(root, "config", "user.email", "scope-test@example.invalid")
+        # Development runs may exercise pending governance edits. In the final
+        # clean aggregate this set is empty, so only committed inputs are used.
+        pending = set(output(source, "diff", "HEAD", "--name-only").splitlines())
+        if not pending <= GOVERNANCE_PATHS:
+            raise AssertionError("scope test refuses non-governance development edits")
+        for relative in pending:
+            shutil.copyfile(source / relative, root / relative)
+        if pending:
+            run(root, "add", "--", *sorted(pending))
+            run(root, "commit", "-m", "private pending governance test snapshot")
+        run(root, "branch", "-f", "configurator", ADOPTION)
+        run(root, "merge", "--no-ff", "--no-edit", C)
+        for ancestor in (ADOPTION, C):
+            run(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
+        env = dict(os.environ, GLYPH_CHECKER_BASE=ADOPTION, PYTHONDONTWRITEBYTECODE="1")
+
+        def actual_main(filename: str, rejection: str | None) -> None:
+            result = subprocess.run([sys.executable, str(root / "tools" / filename)],
+                                    cwd=root, env=env, capture_output=True, text=True,
+                                    check=False, timeout=60)
+            combined = result.stdout + result.stderr
+            if rejection is None:
+                if result.returncode or ": PASS" not in result.stdout:
+                    raise AssertionError(filename + " composed positive failed: " + combined)
+            elif result.returncode == 0 or rejection not in combined:
+                raise AssertionError(filename + " negative lost " + rejection + ": " + combined)
+
+        def all_mains(rejection: str | None = None) -> None:
+            with ThreadPoolExecutor(max_workers=5) as pool:
+                futures = [pool.submit(actual_main, filename, rejection)
+                           for filename in PROTECTED_SCOPE_MAINS]
+                for future in futures:
+                    future.result()
+
+        all_mains()
+        # Changes are confined to the private checkout. Each main must reject
+        # through its real authentication path, without mocking the proof.
+        protected = root / "src/gp_val037_scope_negative.cpp"
+        protected.write_text("// unexpected protected source\n")
+        all_mains("critical")
+        protected.unlink()
+        header = root / "include/core/config_button_validation.hpp"
+        mode = header.stat().st_mode
+        header.chmod(mode | 0o111)
+        all_mains("critical")
+        header.chmod(mode)
+        for relative in ("tools/gp_val037_unknown_negative.txt",
+                         "docs/project/ACTIVE_AGENT_QUEUE.md.bak"):
+            path = root / relative
+            path.write_text("unexpected metadata alias\n")
+            all_mains("unclassified")
+            path.unlink()
+        if output(root, "status", "--porcelain", "--untracked-files=all"):
+            raise AssertionError("five-scope tests left dirty composition")
+    print("campaign_five_scope_actual_mains: PASS; five authenticated candidate positives; "
+          "protected source, executable mode, unknown metadata and alias negatives per main")
 
 
 def main() -> int:
@@ -362,6 +442,7 @@ def main() -> int:
         module.git_lines = original_git_lines
 
     campaign_guard_tests()
+    campaign_protected_scope_tests()
 
     case_ids = (
         "CTX-01-valid-feature-branch",

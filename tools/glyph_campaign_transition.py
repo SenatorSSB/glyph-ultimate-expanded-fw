@@ -2,6 +2,7 @@
 from __future__ import annotations
 import hashlib
 import json
+import re
 import stat
 from pathlib import Path
 from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence, _git, _tree
@@ -9,15 +10,18 @@ from glyph_hardware_correspondence import CorrespondenceError, classify_path, ve
 C = '256bf44cea71f6d5c87aa1675c8dac9f6b79259f'
 B = '3dac79dac4eefcf832510817e8cb5ecd6a27f219'
 C_TREE = '45831eeb88ece9c8b293e2e819ee5ecb362b64ec'
-ADOPTION = 'a8e249eb210b7cd1e010e27dee8f4c61f8fcb537'
+PRIOR_ADOPTION = 'a8e249eb210b7cd1e010e27dee8f4c61f8fcb537'
+ARGUMENT_OPENING = '32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb'
+ADOPTION = '93b3c9ee8f702886f731714281ce143428724a17'
 HANDOFF = '41ba14202450860340e07bea161f7910c3af922c'
 F010 = '1c0ff22646729d26d45eacb4b8322c5baea7de48'
 B010 = '22c639c31ea7006c18a29ec2693c8b18ff688ed4'
 RECEIPTS = {
+ '6cb59e97ddfdb96830432923ac588a76383153b7': 'docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json',
  '9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0': 'docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json',
  '85c1ec43abffb737d080f19190b393c591b862ef': 'docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json',
 }
-ROOTS = frozenset((C, B, ADOPTION, HANDOFF, F010, B010, *RECEIPTS,
+ROOTS = frozenset((C, B, PRIOR_ADOPTION, ARGUMENT_OPENING, ADOPTION, HANDOFF, F010, B010, *RECEIPTS,
  '3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a', '49528e32849069e87f2729c24be35a21b002b6df',
  '3194fd86c5391f19e598acae7879d6898e3e2072','60614dae8150338160b3440aef6b275bf073fecf'))
 CRITICAL = frozenset(('HAL/pico/src/comms/ConfiguratorBackend.cpp',
@@ -35,6 +39,8 @@ FROZEN = tuple('docs/runtime_config/fixtures/'+name+'.json' for name in (
 GOVERNANCE_PATHS = frozenset(('docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md', 'docs/ROADMAP.md', 'docs/project/ACTIVE_AGENT_QUEUE.md', 'docs/agent_framework/HARDWARE_CORRESPONDENCE.md', 'docs/runtime_config/fixtures/runtime_config_validation_manifest.json', 'docs/runtime_config/fixtures/glyph_checker_census.json', 'docs/runtime_config/fixtures/runtime_config_validation_health.json', 'docs/runtime_config/runtime_config_validation_health.md', 'docs/runtime_config/fixtures/gp_val037_accepted_transitions.json', 'tools/glyph_campaign_transition.py', 'tools/glyph_hardware_correspondence.py', 'tools/glyph_checker_context.py', 'tools/check_glyph_checker_context.py', 'tools/check_glyph_config_010_integration_semantic_correspondence.py', 'tools/test_glyph_config_010_semantic_applicability.py', 'tools/test_glyph_hardware_correspondence.py', 'tools/check_glyph_runtime_config_webserial_device_write_source_authority.py', 'tools/check_glyph_generated_source_owned_generator_contract.py', 'tools/check_glyph_generated_source_owned_artifact_install.py', 'tools/check_glyph_coordinate_native_runtime_profile_contract.py', 'tools/check_glyph_generated_source_owned_baseline_artifact.py', 'tools/check_glyph_docs_agent_surface.py', 'tools/run_glyph_runtime_config_validation.py', 'tools/check_glyph_runtime_config_validation_aggregate.py', 'tools/check_glyph_gp_config012_button_mask_characterization.py', 'tools/check_glyph_gp_config013_usb_default_characterization.py', 'tools/check_glyph_config_menu_invalid_state_characterization.py', 'tools/check_glyph_setconfig_runtime_rebinding_characterization.py', 'tools/check_glyph_current_config_persistence_recovery_research.py', 'tools/check_glyph_configurator_setconfig_transaction.py', 'tools/check_glyph_getconfig_raw_load_characterization.py', 'tools/fixtures/configurator_setconfig_host/handler_harness.cpp', 'tools/fixtures/configurator_setconfig_host/include/host_stubs.hpp', 'docs/agent_framework/GP_CONFIG_020_HARDWARE_PROTOCOL.md', 'docs/calibration/gp_config_020_hardware_result.md', 'docs/calibration/fixtures/gp_config_020_hardware_evidence.json'))
 TRANSITIONS = 'docs/runtime_config/fixtures/gp_val037_accepted_transitions.json'
 QUEUE = 'docs/project/ACTIVE_AGENT_QUEUE.md'
+PROTOCOL = 'docs/agent_framework/GP_CONFIG_020_HARDWARE_PROTOCOL.md'
+EVIDENCE = 'docs/calibration/fixtures/gp_config_020_hardware_evidence.json'
 INSERT_INCLUDE = b'#include "core/config_button_validation.hpp"\n'
 INSERT_BODY = b'''    if (!validate_config_button_bindings(candidate)) {
         char errmsg[] = "Config contains an invalid button binding";
@@ -104,6 +110,18 @@ def source_contract(root):
     for ref,path in RECEIPTS.items():
         require(ancestor(root,ref,ADOPTION),'receipt not adopted')
         require(raw_bytes(root,ref,path)==raw_bytes(root,ADOPTION,path),'receipt substitution')
+    # This exact source-free three-commit authority progression is closed.
+    previous = PRIOR_ADOPTION
+    for revision, paths in (
+        (ARGUMENT_OPENING, {'docs/AGENT_CONTEXT.md','docs/CURRENT_STATE.md','docs/ROADMAP.md',QUEUE}),
+        ('6cb59e97ddfdb96830432923ac588a76383153b7', {RECEIPTS['6cb59e97ddfdb96830432923ac588a76383153b7']}),
+        (ADOPTION, {'docs/AGENT_CONTEXT.md','docs/CURRENT_STATE.md','docs/ROADMAP.md',QUEUE}),
+    ):
+        require(_git(root,'rev-list','--parents','-n','1',revision).decode().split()==[revision,previous], 'authority progression parent mismatch')
+        changed=set(filter(None,_git(root,'diff','--no-renames','--name-only','-z',previous,revision).decode().split('\0')))
+        require(changed==paths, 'authority progression path mismatch')
+        for path in paths: raw_bytes(root,revision,path)
+        previous=revision
     authority=item(root,ADOPTION,'GP-VAL-037')
     require(authority['status']=='PREAUTHORIZED' and authority['activation_state']=='ACTIVATABLE','immutable037authority mismatch')
     for token in (C,B,C_TREE,'--campaign-transition','accepted-transition'):
@@ -119,8 +137,32 @@ def source_contract(root):
     require(result['candidate_git_sha']==F010 and result['result']=='PASS' and result['evidence_gaps']==[],'accepted baseline result mismatch')
     return before,after
 
+def validate_build_review(text, record, digest, locator):
+    """Parse the native exact hardware-protocol handoff bullets, never queue prose."""
+    # Wrapped native bullets are folded only within their own item. Require one
+    # occurrence of every identity label, rejecting duplicate/contradictory blocks.
+    labels = {
+        'Candidate Git SHA': '`'+record['build']+'`',
+        'Candidate tree': '`'+record['tree']+'`',
+        'Sole parent / authorized canonical base': '`'+record['parent']+'`',
+        'UF2 SHA-256': '`'+digest+'`',
+        'Preserved locator': '`'+locator+'`',
+        'Fresh independent postimplementation review':
+            'PASS with no findings for the exact candidate, build output, custody bytes, correspondence, and protocol.',
+    }
+    for label,expected in labels.items():
+        pattern=r'^- '+re.escape(label)+r':([^\n]*(?:\n[ \t]+[^\n]+)*)'
+        matches=re.findall(pattern,text,re.MULTILINE)
+        require(len(matches)==1 and ' '.join(matches[0].split())==expected,
+                'missing, duplicate or mismatched build review field: '+label)
+        require(text.casefold().count(label.casefold()+':')==1,'duplicate build review label: '+label)
+    statuses=re.findall(r'review[^\n:]*:\s*(PASS|FAIL|PENDING|NOT_APPROVED|INCOMPLETE)',text,re.IGNORECASE)
+    require([x.upper() for x in statuses]==['PASS'],'contradictory review status')
+
+
 def validate_accepted_transition(root, record, target):
     """Closed consumer: later014/017 need separately adopted literal contracts."""
+    root=Path(root).resolve()
     fields={'work_order','candidate','build','parent','tree','review_commit','evidence_commit','integration'}
     require(type(record) is dict and set(record)==fields,'accepted transition fields mismatch')
     require(record['work_order'] in {'GP-CONFIG-020','GP-CONFIG-014','GP-CONFIG-017'},'unknown campaign order')
@@ -133,19 +175,83 @@ def validate_accepted_transition(root, record, target):
     require(ancestor(root,C,F) and ancestor(root,ADOPTION,F),'built F omitted candidate/governance authority')
     verify_correspondence(root,C,B,target=F,integrated=True,check_worktree=False)
     require(ancestor(root,F,record['integration']) and ancestor(root,record['integration'],target),'reviewed integration ancestry mismatch')
-    review=item(root,record['review_commit'],'GP-CONFIG-020')
-    require(ancestor(root,F,record['review_commit']) and ancestor(root,record['review_commit'],target),'review receipt ancestry mismatch')
-    require(review['candidate_git_sha']==F and review['candidate_base_configurator_sha']==parent,'review built snapshot mismatch')
-    provenance=review['done_evidence']
-    require(isinstance(provenance,str) and F in provenance and 'independent' in provenance.lower() and 'review' in provenance.lower(),'missing exact independent build review provenance')
-    accepted=item(root,record['evidence_commit'],'GP-CONFIG-020')
-    require(ancestor(root,record['review_commit'],record['evidence_commit']) and ancestor(root,record['evidence_commit'],target),'processor receipt ancestry mismatch')
-    require(accepted['status'] in {'HARDWARE_VALIDATED','DONE'} and accepted['hardware_result']=='PASS' and accepted['hardware_evidence_gaps']==[],'missing exact processor PASS')
-    require(accepted['candidate_git_sha']==F and accepted['candidate_base_configurator_sha']==parent,'processor built snapshot mismatch')
+    R,E,I=record['review_commit'],record['evidence_commit'],record['integration']
+    require(R!=E and E!=I and ancestor(root,ADOPTION,R) and ancestor(root,R,E)
+            and ancestor(root,E,I), 'review/PASS/integration chronology mismatch')
+    # Review and evidence are source-free canonical snapshots referencing unmerged F.
+    require(not ancestor(root,F,R) and not ancestor(root,F,E), 'firmware integrated before review/PASS')
+    require(critical_tree(root,R)==critical_tree(root,B)==critical_tree(root,E),
+            'review/PASS snapshots must precede firmware integration')
+    for snapshot in (R,E):
+        verify_correspondence(root,F010,B010,target=snapshot,integrated=True,check_worktree=False)
+    review=item(root,R,'GP-CONFIG-020')
+    accepted=item(root,E,'GP-CONFIG-020')
+    require(review['status'] in {'REVIEW','HARDWARE_TEST_REQUIRED'} and review['hardware_result'] is None,
+            'review is not a pre-hardware handoff')
+    require(accepted['status'] in {'HARDWARE_VALIDATED','DONE'} and accepted['hardware_result']=='PASS'
+            and accepted['hardware_evidence_gaps']==[], 'missing exact processor PASS')
+    for state in (review,accepted):
+        require(state['candidate_git_sha']==F and state['candidate_base_configurator_sha']==parent,
+                'review/processor built snapshot mismatch')
+        require(state['manual_acceptance_protocol_reference']==PROTOCOL, 'unexpected campaign protocol')
+    for key in ('firmware_artifact_sha256','preserved_firmware_artifact_locator','firmware_artifact_build_path',
+                'manual_acceptance_protocol_version','hardware_evidence_contract_reference','hardware_evidence_contract_version'):
+        require(review[key]==accepted[key], 'review/processor identity mismatch: '+key)
+    digest=review['firmware_artifact_sha256']
+    require(isinstance(digest,str) and re.fullmatch('[0-9a-f]{64}',digest) is not None,'invalid reviewed artifact SHA')
+    locator=f'local_backups/hardware-artifacts/{F}/{digest}/firmware.uf2'
+    require(review['preserved_firmware_artifact_locator']==locator,'reviewed artifact locator mismatch')
+    validate_build_review(raw_bytes(root,R,PROTOCOL).decode(),record,digest,locator)
+    # Both native reference forms are immutable at the processor snapshot. A
+    # git-json object must itself follow review and be present before processing.
+    reference=accepted['hardware_evidence_record']
+    if reference=='repo-json:'+EVIDENCE:
+        evidence_root=E
+    else:
+        match=re.fullmatch(r'git-json:([0-9a-f]{40}):'+re.escape(EVIDENCE),str(reference))
+        require(match is not None,'unsupported accepted evidence reference')
+        evidence_root=match.group(1)
+        require(ancestor(root,R,evidence_root) and ancestor(root,evidence_root,E),
+                'hardware evidence object outside review/processor ancestry')
+    require(current_bytes(root,EVIDENCE)==raw_bytes(root,evidence_root,EVIDENCE), 'current accepted evidence substitution')
     from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
-    validate_work_order(accepted,evidence_repo_root=root);validate_evidence_record(accepted,evidence_repo_root=root)
+    immutable_accepted=dict(accepted,hardware_evidence_record='git-json:'+evidence_root+':'+EVIDENCE)
+    validate_work_order(immutable_accepted,evidence_repo_root=root)
+    validate_evidence_record(immutable_accepted,evidence_repo_root=root)
+    current=item(root,target,'GP-CONFIG-020')
+    require(current['status'] in {'HARDWARE_VALIDATED','DONE'} and current['hardware_result']=='PASS'
+            and current['hardware_evidence_gaps']==[], 'accepted catalog/current phase mismatch')
+    for key in ('candidate_git_sha','candidate_base_configurator_sha','firmware_artifact_sha256',
+                'preserved_firmware_artifact_locator','firmware_artifact_build_path','hardware_evidence_record'):
+        require(current[key]==accepted[key], 'current accepted identity drift: '+key)
     verify_correspondence(root,F,parent,target=target,integrated=True,check_worktree=True)
     return F
+
+def prior_accepted_phase(root, head, records):
+    """Acceptance is monotonic across immutable queue/catalog history.
+
+    Looking only at the current queue would let a later edit erase processor
+    PASS and relabel integrated source as an unaccepted candidate.
+    """
+    accepted=False
+    revisions=_git(root,'rev-list','--reverse','--topo-order',ADOPTION+'..'+head,
+                   '--',QUEUE,TRANSITIONS).decode().split()
+    for revision in revisions:
+        state=item(root,revision,'GP-CONFIG-020')
+        accepted |= state['status'] in {'HARDWARE_VALIDATED','DONE'} or state['hardware_result']=='PASS'
+        if TRANSITIONS not in _tree(root,revision):
+            continue
+        catalog=json.loads(raw_bytes(root,revision,TRANSITIONS),object_pairs_hook=unique)
+        require(type(catalog) is dict and set(catalog)=={'schema_version','accepted_transitions'}
+                and type(catalog['schema_version']) is int and catalog['schema_version']==1,
+                'historical transition catalog schema drift')
+        previous=catalog['accepted_transitions']
+        require(type(previous) is list and len(previous)<=1,'historical unadopted transition extension')
+        if previous:
+            require(previous==records,'accepted transition history erased or substituted')
+            accepted=True
+    return accepted
+
 
 def authenticate(root):
     root=Path(root).resolve(); head=_git(root,'rev-parse','HEAD').decode().strip()
@@ -184,15 +290,19 @@ def authenticate(root):
     for path in changed:
         category=classify_path(path)
         if category=='CRITICAL':require(path in critical,'unexpected critical scope input: '+path)
-    location=root/TRANSITIONS
-    if location.exists():
-        value=json.loads(current_bytes(root,TRANSITIONS),object_pairs_hook=unique)
-        require(type(value) is dict and set(value)=={'schema_version','accepted_transitions'} and type(value['schema_version']) is int and value['schema_version']==1,'transition catalog schema drift')
-        records=value['accepted_transitions'];require(type(records) is list and len(records)<=1,'unadopted accepted transition extension')
-        if records:
-            require(current_bytes(root,TRANSITIONS)==raw_bytes(root,head,TRANSITIONS),'uncommitted accepted transition record')
-            require(actual==after,'accepted record on baseline source')
-            validate_accepted_transition(root,records[0],head);phase='ACCEPTED_TRANSITION'
+    value=json.loads(current_bytes(root,TRANSITIONS),object_pairs_hook=unique)
+    require(type(value) is dict and set(value)=={'schema_version','accepted_transitions'} and type(value['schema_version']) is int and value['schema_version']==1,'transition catalog schema drift')
+    records=value['accepted_transitions'];require(type(records) is list and len(records)<=1,'unadopted accepted transition extension')
+    state=item(root,head,'GP-CONFIG-020')
+    require(state['status']!='HARDWARE_FAILED' and state['hardware_result']!='FAIL', 'failed candidate cannot enter campaign phase')
+    claims_acceptance=(state['status'] in {'HARDWARE_VALIDATED','DONE'} or state['hardware_result']=='PASS')
+    historical_acceptance=prior_accepted_phase(root,head,records)
+    require(actual!=after or not (claims_acceptance or historical_acceptance) or bool(records),
+            'accepted phase lacks mandatory transition record')
+    if records:
+        require(current_bytes(root,TRANSITIONS)==raw_bytes(root,head,TRANSITIONS),'uncommitted accepted transition record')
+        require(actual==after,'accepted record on baseline source')
+        validate_accepted_transition(root,records[0],head);phase='ACCEPTED_TRANSITION'
     return {'phase':phase,'candidate':C,'base':B,'target':head,'critical_paths':critical,'changed_paths':frozenset(changed)}
 
 def verify_current_source(root, path, historical_sha256):

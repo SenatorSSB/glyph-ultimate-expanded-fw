@@ -52,6 +52,7 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json',
     'docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json',
     'docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json',
+    'docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json',
     'tools/check_glyph_runtime_config_webserial_device_write_source_authority.py',
     'tools/check_glyph_checker_context.py',
     'tools/check_glyph_generated_source_owned_generator_contract.py',

@@ -486,6 +486,19 @@ class CorrespondenceTests(unittest.TestCase):
 
 
 class ClassificationTests(unittest.TestCase):
+    def test_campaign_receipt_and_source_precedence(self):
+        receipt = "docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json"
+        self.assertEqual(correspondence.classify_path(receipt), "NON_BEHAVIORAL")
+        for alias in (receipt + ".bak", receipt.swapcase(), "./" + receipt,
+                      receipt.replace("current_arguments", "future_arguments")):
+            with self.subTest(alias=alias), self.assertRaises(correspondence.CorrespondenceError):
+                correspondence.classify_path(alias)
+        for source in (HANDLER, "include/core/config_button_validation.hpp",
+                       "src/core/config_button_validation.cpp"):
+            with mock.patch.object(correspondence, "NON_BEHAVIORAL_PATHS",
+                                   correspondence.NON_BEHAVIORAL_PATHS | {source}):
+                self.assertEqual(correspondence.classify_path(source), "CRITICAL")
+
     def test_gp_config_012_exact_host_inventory(self):
         self.assertEqual(len(GP_CONFIG_012_HOST_PATHS), 16)
         for path in GP_CONFIG_012_HOST_PATHS:
