@@ -1,0 +1,26 @@
+#pragma once
+
+enum {
+    HID_KEY_A = 4,
+    HID_KEY_B = 5,
+    HID_KEY_C = 6,
+    HID_KEY_D = 7,
+    HID_KEY_E = 8,
+    HID_KEY_F = 9,
+    HID_KEY_G = 10,
+    HID_KEY_H = 11,
+    HID_KEY_I = 12,
+    HID_KEY_J = 13,
+    HID_KEY_K = 14,
+    HID_KEY_L = 15,
+    HID_KEY_M = 16,
+    HID_KEY_N = 17,
+    HID_KEY_O = 18,
+    HID_KEY_P = 19,
+    HID_KEY_Q = 20,
+    HID_KEY_R = 21,
+    HID_KEY_S = 22,
+    HID_KEY_T = 23,
+    HID_KEY_U = 24,
+    HID_KEY_V = 25,
+};
