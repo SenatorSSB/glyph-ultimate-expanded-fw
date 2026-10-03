@@ -458,10 +458,10 @@ def _validate_processor_evidence(root, record, proof):
     require(_sha(payload) == pins['evidence_sha256']
             and raw_bytes(root, E, EVIDENCE) == payload,
             'processor immutable evidence substitution')
-    from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
+    from check_glyph_agent_framework_docs import validate_work_order
     immutable = dict(accepted, hardware_evidence_record='git-json:' + evidence_root + ':' + EVIDENCE)
+    # HARDWARE_VALIDATED work-order validation invokes native evidence validation.
     validate_work_order(immutable, evidence_repo_root=root)
-    validate_evidence_record(immutable, evidence_repo_root=root)
     evidence = json.loads(payload, object_pairs_hook=unique)
     rows = [row['id'] for row in evidence['steps']]
     require(len(rows) == 11 and set(rows) == {'Baseline', *(f'H{x}' for x in range(1, 11))},
@@ -477,7 +477,8 @@ def _validate_processor_evidence(root, record, proof):
         'processor native result/tuple coupling mismatch')
     return dict(record=dict(record), accepted=accepted, evidence_root=evidence_root,
                 payload=payload, result=result, protocol=raw_bytes(root, R, PROTOCOL),
-                roots=proof)
+                roots=proof, native_item_bytes=json.dumps(immutable, sort_keys=True,
+                    separators=(',', ':'), allow_nan=False).encode())
 
 
 def _validate_processor_target(root, evidence, target):
@@ -496,7 +497,13 @@ def _validate_processor_target(root, evidence, target):
         require(current[key] == accepted[key], 'processor accepted tuple drift: ' + key)
     from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
     native = dict(current, hardware_evidence_record='git-json:' + evidence_root + ':' + EVIDENCE)
-    validate_work_order(native, evidence_repo_root=root)
+    # Reuse only the local immutable native-schema certificate. Complete JSON
+    # equality preserves types (False differs from 0); every changed item and
+    # every DONE publication still receives its own full native validation.
+    require(evidence['roots'].repository == str(root), 'native schema certificate repository mismatch')
+    native_bytes = json.dumps(native, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+    if native['status'] != 'HARDWARE_VALIDATED' or native_bytes != evidence['native_item_bytes']:
+        validate_work_order(native, evidence_repo_root=root)
     if native['status'] == 'DONE':
         validate_evidence_record(native, evidence_repo_root=root)
         from check_glyph_agent_framework_docs import validate_completion_evidence

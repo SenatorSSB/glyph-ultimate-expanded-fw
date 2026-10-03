@@ -1022,8 +1022,11 @@ def processor_contract_tests(directory: Path) -> None:
     run(root, 'git', 'switch', '--detach', E)
     # Every later processor claim needs native work-order validation, even
     # when its exact accepted hardware tuple and immutable payload are intact.
+    assert baseline_item['activation_requires_new_judgment'] is False
+    assert dict(baseline_item, activation_requires_new_judgment=0) == baseline_item
     for label, updates in (
         ('later processor malformed schema', dict(title=None)),
+        ('later processor integer for Boolean schema', dict(activation_requires_new_judgment=0)),
         ('source-free premature DONE', dict(status='DONE', done_evidence='SYNTHETIC prose only')),
     ):
         write_queue_item(root, dict(baseline_item, **updates))
@@ -1109,6 +1112,7 @@ def native_integrated_public_api_tests(directory: Path, source_root: Path, recor
     for label, evidence in (
         ('prose DONE completion', 'SYNTHETIC prose-only completion'),
         ('forged DONE completion', dict(completion, implementation_base_sha='0' * 40)),
+        ('Boolean DONE schema version', dict(completion, schema_version=True)),
     ):
         run(root, 'git', 'switch', '--detach', valid_done)
         write_queue_item(root, dict(accepted, status='DONE', done_evidence=evidence))
