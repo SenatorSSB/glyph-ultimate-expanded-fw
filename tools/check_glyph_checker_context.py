@@ -222,8 +222,14 @@ def campaign_protected_scope_tests() -> None:
             if rejection is None:
                 if result.returncode or ": PASS" not in result.stdout:
                     raise AssertionError(filename + " composed positive failed: " + combined)
-            elif result.returncode == 0 or rejection not in combined:
-                raise AssertionError(filename + " negative lost " + rejection + ": " + combined)
+            else:
+                # Accepted proofs can reject unknown/critical dirty paths at
+                # the finite dirty-inventory gate before the final live scan.
+                expected = [rejection]
+                if rejection in {"critical", "unclassified"}:
+                    expected.append("dirty path outside reviewed governance inventory")
+                if result.returncode == 0 or not any(message in combined for message in expected):
+                    raise AssertionError(filename + " negative lost " + rejection + ": " + combined)
 
         def all_mains(rejection: str | None = None) -> None:
             with ThreadPoolExecutor(max_workers=5) as pool:
