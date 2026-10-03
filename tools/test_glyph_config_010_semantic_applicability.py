@@ -727,6 +727,7 @@ def legacy_applicability_tests(directory: Path) -> None:
     run(historical, "git", "switch", "--detach", CANDIDATE)
     run(historical, "git", "switch", "-c", "glyph/gp-config-010-current-canonical-integration")
     shutil.copyfile(ROOT / CHECKER, historical / CHECKER)
+    shutil.copyfile(ROOT / CLASSIFIER, historical / CLASSIFIER)
     shutil.copyfile(ROOT / CAMPAIGN, historical / CAMPAIGN)
     run(historical, "python3", CHECKER, "--historical")
     run(historical, "git", "switch", "-c", "gp-val-029-wrong-branch")
