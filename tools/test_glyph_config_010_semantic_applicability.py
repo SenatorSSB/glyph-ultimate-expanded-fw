@@ -556,10 +556,111 @@ def accepted_contract_tests(directory: Path) -> None:
 
 
 
+def repaired_blob_prefetch_tests(root: Path) -> None:
+    """Finite blob batches fail atomically; cached bytes never bypass ref modes."""
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    def identity(data):
+        return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+    def reply(oid, data):
+        return oid.encode() + b' blob ' + str(len(data)).encode() + b'\n' + data + b'\n'
+    payloads = (b'first\n\0payload', b'second payload')
+    ids = tuple(identity(data) for data in payloads)
+    replies = tuple(reply(oid, data) for oid, data in zip(ids, payloads))
+    valid = b''.join(replies)
+    assert repair._parse_blob_batch(valid, ids) == dict(zip(ids, payloads))
+    assert repair._parse_blob_batch(b'', ()) == {}
+    for label, data in (
+        ('truncated header', valid[:20]), ('missing reply', replies[0]),
+        ('truncated payload', valid[:-3]), ('missing trailer', valid[:-1]),
+        ('wrong trailer', valid[:-1] + b'x'), ('extra output', valid + b'x'),
+        ('duplicate reply', valid + replies[0]), ('reordered reply', b''.join(reversed(replies))),
+        ('wrong type', valid.replace(b' blob ', b' tree ', 1)),
+        ('wrong declared size', valid.replace(b' blob 14\n', b' blob 13\n', 1)),
+        ('substituted hash', b'0' * 40 + valid[40:]),
+        ('substituted payload', valid.replace(b'first', b'forgd', 1)),
+        ('missing object', ids[0].encode() + b' missing\n'),
+    ):
+        rejected(lambda: repair._parse_blob_batch(data, ids), label)
+    rejected(lambda: repair._parse_blob_batch(valid, (ids[0], ids[0])), 'duplicate requested identities')
+    rejected(lambda: repair._parse_blob_batch(valid, ('HEAD', ids[1])), 'symbolic requested identity')
+
+    paths = ('src/core/config_button_validation.cpp',
+             'tools/fixtures/gp_config020_button_validation/abi_probe.cpp')
+    requests = tuple((repair.C_R, path) for path in paths)
+    native_tree = campaign._tree
+    @campaign._proof_invocation
+    def exercise():
+        inventory = native_tree(root, repair.C_R)
+        oids = tuple(sorted({inventory[path][2] for path in paths}))
+        bodies = {inventory[path][2]: campaign._git(root, 'show', repair.C_R + ':' + path)
+                  for path in paths}
+        output = b''.join(reply(oid, bodies[oid]) for oid in oids)
+        cache = campaign._blob_bytes_cache.get()
+        sentinel = (str(root.resolve()), 'f' * 40)
+        cache[sentinel] = b'preexisting immutable bytes'
+        for label, response, code in (
+            ('partial successful response', output[:-1], 0),
+            ('missing response', reply(oids[0], bodies[oids[0]]), 0),
+            ('missing object response', oids[0].encode() + b' missing\n', 0),
+            ('wrong type response', output.replace(b' blob ', b' tree ', 1), 0),
+            ('wrong hash response', b'0' * 40 + output[40:], 0),
+            ('wrong payload response', output[:output.find(b'\n') + 1] + b'x'
+                + output[output.find(b'\n') + 2:], 0),
+            ('extra response', output + reply(oids[0], bodies[oids[0]]), 0),
+            ('failed process', output, 1),
+        ):
+            previous = dict(cache)
+            with patch.object(repair.subprocess, 'run', return_value=subprocess.CompletedProcess(
+                    ['git', 'cat-file', '--batch'], code, response, b'')):
+                rejected(lambda: repair._prefetch_blobs(root, requests), label)
+            assert cache == previous, label + ' inserted partial bytes'
+        with patch.object(repair.subprocess, 'run', return_value=subprocess.CompletedProcess(
+                ['git', 'cat-file', '--batch'], 0, output, b'')) as process:
+            repair._prefetch_blobs(root, requests + requests)
+            repair._prefetch_blobs(root, requests)
+            assert process.call_count == 1
+            assert process.call_args.args[0] == ['git', 'cat-file', '--batch']
+            assert process.call_args.kwargs['input'] == ('\n'.join(oids) + '\n').encode()
+        assert all(cache[(str(root.resolve()), oid)] == bodies[oid] for oid in oids)
+        previous = dict(cache)
+        for request in (('HEAD', paths[0]), (repair.C_R, 'src/core/')):
+            rejected(lambda: repair._prefetch_blobs(root, (request,)), 'unadopted prefetch input')
+            assert cache == previous
+        def executable(where, ref):
+            value = native_tree(where, ref)
+            if ref == repair.C_R:
+                value[paths[0]] = ('100755', *value[paths[0]][1:])
+            return value
+        with patch.object(campaign, '_tree', side_effect=executable):
+            rejected(lambda: campaign.raw_bytes(root, repair.C_R, paths[0]), 'prefetched mode still checked')
+        with patch.object(repair, '_tree', side_effect=executable):
+            rejected(lambda: repair._prefetch_blobs(root, requests), 'cached prefetch mode still checked')
+        assert cache == previous
+        shared = 'include/core/config_button_validation.hpp'
+        repair._prefetch_blobs(root, ((repair.C_R, shared),))
+        assert native_tree(root, repair.C_R)[shared][2] == native_tree(root, campaign.C)[shared][2]
+        def unsafe_second_ref(where, ref):
+            value = native_tree(where, ref)
+            if ref == campaign.C:
+                value[shared] = ('100755', *value[shared][1:])
+            return value
+        previous = dict(cache)
+        with patch.object(campaign, '_tree', side_effect=unsafe_second_ref):
+            rejected(lambda: campaign.raw_bytes(root, campaign.C, shared), 'shared blob unsafe second ref')
+        with patch.object(repair, '_tree', side_effect=unsafe_second_ref):
+            rejected(lambda: repair._prefetch_blobs(root, ((campaign.C, shared),)), 'shared prefetch unsafe second ref')
+        assert cache == previous
+    exercise()
+    assert campaign._blob_bytes_cache.get() is None
+    rejected(lambda: repair._prefetch_blobs(root, requests), 'prefetch outside invocation')
+
+
 def repaired_contract_tests(directory: Path) -> None:
     """Actual four phases and rejection controls in disposable Git repositories."""
     import glyph_campaign_transition as campaign
     import glyph_c020_abi_repair_transition as repair
+    repaired_blob_prefetch_tests(ROOT)
     historical = directory / 'repair-original-historical'
     run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(historical))
     run(historical, 'git', 'switch', '--detach', 'caf0718472c7752c78838be6f1d48b56932d90b9')

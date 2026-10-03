@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 import glyph_campaign_transition as original
 from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence
@@ -47,6 +48,94 @@ def _sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+# These are exactly the existing immutable source/authority consumers. No
+# directory-prefix or whole-tree blob prefetch is authorized.
+_DECODER_PATHS = tuple('tools/fixtures/gp_config012_button_host/' + path for path in (
+    'generated/config.pb.c', 'generated/config.pb.h', 'nanopb/pb.h',
+    'nanopb/pb_common.c', 'nanopb/pb_common.h', 'nanopb/pb_decode.c',
+    'nanopb/pb_decode.h', 'schema/config.options', 'schema/config.proto'))
+_STATUS_PATHS = ('docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md',
+                 'docs/ROADMAP.md', original.QUEUE)
+_OLD_BASELINE_EVIDENCE = 'docs/calibration/fixtures/gp_config_010_integration_hardware_evidence_2026-09-23.json'
+_PREFETCH_PATHS = (CRITICAL | HOSTS | PROOF_PATHS | frozenset(_DECODER_PATHS)
+    | frozenset(_STATUS_PATHS) | frozenset(original.FROZEN)
+    | frozenset(original.RECEIPTS.values())
+    | frozenset(('docs/planning/portfolio_20261003_1256.md',
+                 _OLD_BASELINE_EVIDENCE, TRANSITIONS, original.TRANSITIONS)))
+
+
+def _parse_blob_batch(raw, identities):
+    """Validate the complete ordered reply before publishing any cached bytes."""
+    require(type(raw) is bytes and type(identities) is tuple
+            and len(identities) == len(set(identities))
+            and all(isinstance(oid, str) and re.fullmatch('[0-9a-f]{40}', oid)
+                    for oid in identities), 'invalid immutable blob batch identities')
+    result = {}
+    offset = 0
+    for oid in identities:
+        end = raw.find(b'\n', offset)
+        require(end >= offset, 'truncated immutable blob batch header')
+        header = re.fullmatch(rb'([0-9a-f]{40}) blob (0|[1-9][0-9]*)', raw[offset:end])
+        require(header is not None and header.group(1).decode() == oid,
+                'immutable blob batch hash/type substitution')
+        size = int(header.group(2))
+        start = end + 1
+        require(size <= len(raw) - start - 1 and raw[start + size:start + size + 1] == b'\n',
+                'truncated immutable blob batch payload/trailer')
+        data = raw[start:start + size]
+        actual = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+        require(actual == oid, 'immutable blob batch content/size hash substitution')
+        result[oid] = data
+        offset = start + size + 1
+    require(offset == len(raw), 'extra/duplicate immutable blob batch output')
+    return result
+
+
+def _prefetch_blobs(root, requests):
+    """One process, finite literal paths, atomic invocation-only raw blob cache."""
+    cache = original._blob_bytes_cache.get()
+    require(cache is not None, 'blob prefetch outside proof invocation')
+    root = Path(root).resolve()
+    root_key = str(root)
+    identities = set()
+    # Repeated paths/refs and shared blobs deduplicate explicitly. Per-ref modes
+    # are checked here and still checked by every later raw_bytes consumer.
+    for ref, path in dict.fromkeys(requests):
+        require(isinstance(ref, str) and re.fullmatch('[0-9a-f]{40}', ref)
+                and path in _PREFETCH_PATHS, 'unadopted immutable blob prefetch input')
+        entry = _tree(root, ref).get(path)
+        require(entry is not None and entry[:2] == ('100644', 'blob')
+                and re.fullmatch('[0-9a-f]{40}', entry[2]),
+                'nonregular immutable blob prefetch source: ' + path)
+        if (root_key, entry[2]) not in cache:
+            identities.add(entry[2])
+    if not identities:
+        return
+    ordered = tuple(sorted(identities))
+    execution = subprocess.run(['git', 'cat-file', '--batch'], cwd=root,
+        input=('\n'.join(ordered) + '\n').encode(), capture_output=True, check=False)
+    require(execution.returncode == 0, 'immutable blob prefetch execution failure')
+    # A malformed/missing/substituted reply leaves the existing cache unchanged.
+    staged = _parse_blob_batch(execution.stdout, ordered)
+    cache.update({(root_key, oid): data for oid, data in staged.items()})
+
+
+def _source_prefetch_requests():
+    requests = [(original.C, path) for path in CRITICAL | HOSTS]
+    requests += [(C_R, path) for path in CRITICAL | HOSTS | PROOF_PATHS]
+    requests += [(FAILED_F, path) for path in CRITICAL | HOSTS]
+    requests += [(original.B, path) for path in (*original.FROZEN, *_DECODER_PATHS,
+                  'HAL/pico/src/comms/ConfiguratorBackend.cpp')]
+    requests += [(ref, path) for ref, path in original.RECEIPTS.items()]
+    requests += [(original.ADOPTION, path) for path in original.RECEIPTS.values()]
+    requests += [(ref, path) for ref in (original.ARGUMENT_OPENING, original.ADOPTION)
+                 for path in _STATUS_PATHS]
+    requests += [(original.HANDOFF, original.QUEUE),
+                 ('60614dae8150338160b3440aef6b275bf073fecf', _OLD_BASELINE_EVIDENCE)]
+    requests += [(ref, pin['path']) for ref, pin in AUTHORITY_BLOBS.items()]
+    return tuple(requests)
+
+
 def _catalog(raw):
     value = json.loads(raw, object_pairs_hook=unique)
     require(type(value) is dict and set(value) == {'schema_version', 'accepted_transitions'}
@@ -61,6 +150,7 @@ def _catalog(raw):
 def source_contract(root):
     """Authenticate original C first, then the independent exact repaired roots."""
     root = Path(root).resolve()
+    _prefetch_blobs(root, _source_prefetch_requests())
     before, old_after = original.source_contract(root)
     for revision, pin in AUTHORITY_BLOBS.items():
         require(_sha(raw_bytes(root, revision, pin['path'])) == pin['sha256'],
@@ -214,8 +304,17 @@ def validate_accepted_transition(root, record, target):
 def _history(root, head, old_records, repaired_records):
     """Check both catalogs over full original topology; no second parent is hidden."""
     accepted = False
-    for revision in _git(root, 'rev-list', '--reverse', '--topo-order',
-                         original.ADOPTION + '..' + head).decode().split():
+    revisions = _git(root, 'rev-list', '--reverse', '--topo-order',
+                     original.ADOPTION + '..' + head).decode().split()
+    requests = []
+    for revision in revisions:
+        inventory = _tree(root, revision)
+        requests.append((revision, original.QUEUE))
+        for path in (original.TRANSITIONS, TRANSITIONS):
+            if path in inventory:
+                requests.append((revision, path))
+    _prefetch_blobs(root, requests)
+    for revision in revisions:
         state = item(root, revision, 'GP-CONFIG-020')
         accepted |= state['status'] in {'HARDWARE_VALIDATED', 'DONE'} or state['hardware_result'] == 'PASS'
         inventory = _tree(root, revision)
