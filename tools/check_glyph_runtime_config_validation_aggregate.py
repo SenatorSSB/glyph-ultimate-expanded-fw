@@ -845,8 +845,34 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
             # that carries C for the omission control, retaining all other roots.
             candidate = proof['candidate']
             candidate_base = proof['base']
-            carrying_candidate = {identity for identity in expected
-                if module.git("merge-base", "--is-ancestor", candidate, identity).returncode == 0}
+            # Test preparation uses the same finite authenticated roots. Read
+            # their complete parent graph once; each disposable import and its
+            # actual object-presence/closure assertions below still run anew.
+            parents = {}
+            for line in module.git_value("rev-list", "--parents", *sorted(expected)).splitlines():
+                identities = line.split()
+                if (not identities or any(len(identity) != 40
+                        or any(char not in '0123456789abcdef' for char in identity)
+                        for identity in identities) or identities[0] in parents):
+                    raise AssertionError("invalid finite catalog parent graph")
+                parents[identities[0]] = tuple(identities[1:])
+            if (not expected <= parents.keys()
+                    or any(parent not in parents for edges in parents.values() for parent in edges)):
+                raise AssertionError("incomplete finite catalog parent graph")
+            ancestors = {}
+            for identity in expected:
+                visited, pending = set(), [identity]
+                while pending:
+                    revision = pending.pop()
+                    if revision not in visited:
+                        visited.add(revision)
+                        pending.extend(parents[revision])
+                ancestors[identity] = visited
+            def carriers(missing):
+                if missing not in parents:
+                    raise AssertionError("missing finite catalog ancestry identity")
+                return {identity for identity in expected if missing in ancestors[identity]}
+            carrying_candidate = carriers(candidate)
             without_candidate = expected - carrying_candidate
             scenarios = [("complete", expected, candidate, True),
                          ("omitted", without_candidate, candidate, False),
@@ -857,8 +883,7 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                 # retaining C_R would otherwise still carry B_R by ancestry.
                 for label, missing in (("omitted-repaired-base", B_R),
                                        ("omitted-repaired-packet", PACKET)):
-                    carrying = {identity for identity in expected
-                        if module.git("merge-base", "--is-ancestor", missing, identity).returncode == 0}
+                    carrying = carriers(missing)
                     scenarios.append((label, expected - carrying, missing, False))
                 # At E, F is deliberately off-head. Processor and immutable
                 # payload roots still belong to every finite consumer's closed
@@ -873,21 +898,27 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                 for label, missing in processor_roots:
                     if missing not in expected:
                         raise AssertionError('authenticated processor root omitted: ' + label)
-                    carrying = {identity for identity in expected
-                        if module.git('merge-base', '--is-ancestor', missing, identity).returncode == 0}
+                    carrying = carriers(missing)
                     reduced = expected - carrying
                     scenarios.append(('omitted-processor-' + label, reduced, missing, False))
                     scenarios.append(('substituted-processor-' + label,
                                       reduced | {candidate_base}, missing, False))
+            # Identical finite root sets have identical immutable pack inputs.
+            # Reuse only raw bytes locally; every scenario imports into its own
+            # repository and independently proves presence/absence and refs.
+            packs = {}
             for label, roots, checked_identity, should_exist in scenarios:
                 clone = parent / label
                 clone.mkdir()
                 run_git(clone, "init", "-b", "catalog-test")
-                packed = subprocess.run(["git", "pack-objects", "--revs", "--stdout"],
-                    cwd=module.ROOT, input=("\n".join(sorted(roots)) + "\n").encode(),
-                    capture_output=True, check=True)
+                packing_roots = tuple(sorted(roots))
+                if packing_roots not in packs:
+                    packed = subprocess.run(["git", "pack-objects", "--revs", "--stdout"],
+                        cwd=module.ROOT, input=("\n".join(packing_roots) + "\n").encode(),
+                        capture_output=True, check=True)
+                    packs[packing_roots] = packed.stdout
                 subprocess.run(["git", "index-pack", "--stdin"], cwd=clone,
-                    input=packed.stdout, capture_output=True, check=True)
+                    input=packs[packing_roots], capture_output=True, check=True)
                 if module.git_value("for-each-ref", "--format=%(refname)", cwd=clone):
                     raise AssertionError("campaign closure imported a ref")
                 found = module.git("cat-file", "-e", checked_identity + "^{commit}", cwd=clone).returncode == 0

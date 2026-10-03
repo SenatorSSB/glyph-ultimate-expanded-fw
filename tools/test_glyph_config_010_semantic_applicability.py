@@ -1191,6 +1191,7 @@ def synthetic_processor_tests(directory: Path) -> None:
     # its exact actual pin check, even though its structural proof is valid.
     rejected(lambda: campaign.authenticate(root), 'synthetic roots in production authenticator')
     for key, value in (('build', ACTUAL_F), ('parent', repair.B_R), ('tree', '0' * 40),
+                       ('artifact_size', 796161),
                        ('review_commit', ACTUAL_R), ('protocol_sha256', '0' * 64),
                        ('review_queue_sha256', '0' * 64), ('authority_commit', R),
                        ('evidence_sha256', '0' * 64), ('result_sha256', '0' * 64)):
