@@ -5,7 +5,9 @@ import json
 import re
 import stat
 from pathlib import Path
-from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence, _git, _tree
+from contextvars import ContextVar
+from functools import wraps
+from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence, _git, _tree as _uncached_tree
 
 C = '256bf44cea71f6d5c87aa1675c8dac9f6b79259f'
 B = '3dac79dac4eefcf832510817e8cb5ecd6a27f219'
@@ -50,6 +52,35 @@ INSERT_BODY = b'''    if (!validate_config_button_bindings(candidate)) {
 
 '''
 
+# Memoize immutable inventories only for one top-level proof invocation. No
+# worktree bytes, index state, symbolic ref, or successful proof is memoized.
+_tree_inventory_cache = ContextVar('campaign_tree_inventory_cache', default=None)
+
+
+def _proof_invocation(function):
+    @wraps(function)
+    def invoke(*args, **kwargs):
+        if _tree_inventory_cache.get() is not None:
+            return function(*args, **kwargs)
+        token = _tree_inventory_cache.set({})
+        try:
+            return function(*args, **kwargs)
+        finally:
+            _tree_inventory_cache.reset(token)
+    return invoke
+
+
+def _tree(root, ref):
+    cache = _tree_inventory_cache.get()
+    if cache is None or not isinstance(ref,str) or re.fullmatch('[0-9a-f]{40}',ref) is None:
+        return _uncached_tree(root,ref)
+    key=(str(Path(root).resolve()),ref)
+    if key not in cache:
+        cache[key]=_uncached_tree(root,ref)
+    # Keep callers from changing the memoized immutable inventory.
+    return dict(cache[key])
+
+
 def require(ok, message):
     if not ok: raise CorrespondenceError(message)
 
@@ -92,6 +123,7 @@ def current_bytes(root, path):
     require(stat.S_ISREG(p.stat().st_mode) and not p.stat().st_mode & 0o111,'nonregular proof input: '+path)
     return p.read_bytes()
 
+@_proof_invocation
 def source_contract(root):
     require(_git(root,'rev-list','--parents','-n','1',C).decode().split()==[C,B],'C020 direct parent mismatch')
     require(_git(root,'rev-parse',C+'^{tree}').decode().strip()==C_TREE,'C020 tree mismatch')
@@ -160,6 +192,7 @@ def validate_build_review(text, record, digest, locator):
     require([x.upper() for x in statuses]==['PASS'],'contradictory review status')
 
 
+@_proof_invocation
 def validate_accepted_transition(root, record, target):
     """Closed consumer: later014/017 need separately adopted literal contracts."""
     root=Path(root).resolve()
@@ -269,6 +302,7 @@ def prior_accepted_phase(root, head, records):
     return accepted
 
 
+@_proof_invocation
 def authenticate(root):
     root=Path(root).resolve(); head=_git(root,'rev-parse','HEAD').decode().strip()
     before,after=source_contract(root)
@@ -284,13 +318,19 @@ def authenticate(root):
             require(current_bytes(root,path)==raw_bytes(root,B,path),'frozen decoder/schema substitution: '+path)
     actual=critical_tree(root,head)
     require(actual in (before,after),'current critical tree outside exact campaign contract')
+    value=json.loads(current_bytes(root,TRANSITIONS),object_pairs_hook=unique)
+    require(type(value) is dict and set(value)=={'schema_version','accepted_transitions'} and type(value['schema_version']) is int and value['schema_version']==1,'transition catalog schema drift')
+    records=value['accepted_transitions'];require(type(records) is list and len(records)<=1,'unadopted accepted transition extension')
     phase='BASELINE'; critical=frozenset()
     if actual==after:
         require(ancestor(root,C,head),'candidate source replay without preserved C ancestry')
         phase='CANDIDATE_VALIDATION_ONLY';critical=CRITICAL
         for path in HOSTS:
             require(current_bytes(root,path)==raw_bytes(root,C,path),'candidate proof host substitution: '+path)
-        verify_correspondence(root,C,B,target=head,integrated=True,check_worktree=True)
+        # A nonempty catalog must pass validate_accepted_transition below, whose
+        # final F->HEAD proof always checks the live worktree. Avoid scanning it
+        # twice; an empty candidate catalog retains its own full live check.
+        verify_correspondence(root,C,B,target=head,integrated=True,check_worktree=not bool(records))
     else:
         verify_correspondence(root,F010,B010,target=head,integrated=True,check_worktree=True)
     # All historical observations remain frozen, even when current source changes.
@@ -306,9 +346,6 @@ def authenticate(root):
     for path in changed:
         category=classify_path(path)
         if category=='CRITICAL':require(path in critical,'unexpected critical scope input: '+path)
-    value=json.loads(current_bytes(root,TRANSITIONS),object_pairs_hook=unique)
-    require(type(value) is dict and set(value)=={'schema_version','accepted_transitions'} and type(value['schema_version']) is int and value['schema_version']==1,'transition catalog schema drift')
-    records=value['accepted_transitions'];require(type(records) is list and len(records)<=1,'unadopted accepted transition extension')
     state=item(root,head,'GP-CONFIG-020')
     require(state['status']!='HARDWARE_FAILED' and state['hardware_result']!='FAIL', 'failed candidate cannot enter campaign phase')
     claims_acceptance=(state['status'] in {'HARDWARE_VALIDATED','DONE'} or state['hardware_result']=='PASS')
@@ -324,6 +361,7 @@ def authenticate(root):
         phase='ACCEPTED_TRANSITION'
     return {'phase':phase,'candidate':C,'base':B,'target':head,'critical_paths':critical,'accepted_metadata_paths':accepted_metadata,'changed_paths':frozenset(changed)}
 
+@_proof_invocation
 def verify_current_source(root, path, historical_sha256):
     """Prove exact B/C first, then expose frozen B bytes for historical assertions."""
     root=Path(root); old=raw_bytes(root,B,path)

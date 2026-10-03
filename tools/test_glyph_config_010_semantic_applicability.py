@@ -257,12 +257,95 @@ def make_synthetic_accepted_fixture(directory: Path) -> tuple[Path, dict]:
     return root,record
 
 
+def accepted_live_input_tests(root: Path) -> None:
+    """Every call rechecks live inputs after a successful accepted proof."""
+    import glyph_campaign_transition as campaign
+    assert campaign.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+    source=root/'src/core/config_button_validation.cpp'
+    original=source.read_bytes()
+    mode=source.stat().st_mode
+    try:
+        source.write_bytes(original+b'\n// rejected dirty source\n')
+        rejected(lambda:campaign.authenticate(root),'fresh accepted dirty source')
+        run(root,'git','add','--','src/core/config_button_validation.cpp')
+        source.write_bytes(original)
+        rejected(lambda:campaign.authenticate(root),'fresh accepted staged source')
+    finally:
+        source.write_bytes(original)
+        run(root,'git','add','--','src/core/config_button_validation.cpp')
+    try:
+        source.chmod(mode|0o111)
+        rejected(lambda:campaign.authenticate(root),'fresh accepted executable mode')
+    finally:
+        source.chmod(mode)
+    ignored=root/'src/core/.gp_val037_ignored.cpp'
+    exclude=root/'.git/info/exclude'
+    previous_exclude=exclude.read_bytes()
+    try:
+        exclude.write_bytes(previous_exclude+b'\nsrc/core/.gp_val037_ignored.cpp\n')
+        ignored.write_text('// rejected ignored critical source\n')
+        rejected(lambda:campaign.authenticate(root),'fresh accepted ignored critical source')
+    finally:
+        ignored.unlink()
+        exclude.write_bytes(previous_exclude)
+    frozen=root/campaign.FROZEN[0]
+    prior=frozen.read_bytes()
+    try:
+        frozen.write_bytes(prior+b'\n')
+        rejected(lambda:campaign.authenticate(root),'fresh accepted historical fixture substitution')
+    finally:
+        frozen.write_bytes(prior)
+    assert campaign.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+
+
+def tree_inventory_cache_tests(root: Path) -> None:
+    """Only full immutable inventory reads are reused, within one invocation."""
+    import glyph_campaign_transition as campaign
+    native=campaign._uncached_tree
+    calls=[]
+    def counted(where,ref):
+        calls.append((str(Path(where).resolve()),ref))
+        return native(where,ref)
+    with patch.object(campaign,'_uncached_tree',side_effect=counted):
+        campaign.source_contract(root)
+        assert calls.count((str(root.resolve()),campaign.B))==1
+        campaign.source_contract(root)
+        assert calls.count((str(root.resolve()),campaign.B))==2
+    assert campaign._tree_inventory_cache.get() is None
+    @campaign._proof_invocation
+    def symbolic_and_immutable():
+        value=campaign._tree(root,campaign.B)
+        value.clear()
+        assert campaign._tree(root,campaign.B)
+        campaign._tree(root,'HEAD')
+        campaign._tree(root,'HEAD')
+    calls.clear()
+    with patch.object(campaign,'_uncached_tree',side_effect=counted):
+        symbolic_and_immutable()
+    assert calls.count((str(root.resolve()),campaign.B))==1
+    assert calls.count((str(root.resolve()),'HEAD'))==2
+    @campaign._proof_invocation
+    def failed():
+        campaign._tree(root,campaign.B)
+        raise ValueError('synthetic invocation failure')
+    rejected(failed,'cache reset on failure')
+    assert campaign._tree_inventory_cache.get() is None
+
+
 def accepted_contract_tests(directory: Path) -> None:
     import glyph_campaign_transition as campaign
     root,record=make_synthetic_accepted_fixture(directory)
     target=run(root,'git','rev-parse','HEAD').strip()
-    assert campaign.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+    with patch.object(campaign,'verify_correspondence',wraps=campaign.verify_correspondence) as live_proofs:
+        assert campaign.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+        calls=live_proofs.call_args_list
+        assert any(call.args[1]==campaign.C and call.kwargs.get('target')==target
+                   and call.kwargs['check_worktree'] is False for call in calls)
+        assert any(call.args[1]==record['build'] and call.kwargs.get('target')==target
+                   and call.kwargs['check_worktree'] is True for call in calls)
     assert campaign.validate_accepted_transition(root,record,target)==record['build']
+    accepted_live_input_tests(root)
+    tree_inventory_cache_tests(root)
     # Missing/empty catalogs are tested against actual accepted source + queue.
     catalog=root/campaign.TRANSITIONS
     original=catalog.read_bytes()
