@@ -432,6 +432,42 @@ def accepted_contract_tests(directory: Path) -> None:
             rejected(lambda:campaign.validate_accepted_transition(root,record,target),'accepted '+key)
 
 
+def legacy_applicability_tests(directory: Path) -> None:
+    """Keep legacy positive scope and exact historical identity coverage separate."""
+    canonical = Path(directory) / "canonical"
+    run(ROOT, "git", "clone", "--quiet", "--no-local", str(ROOT), str(canonical))
+    run(canonical, "git", "switch", "--detach", BASE)
+    shutil.copyfile(ROOT / CHECKER, canonical / CHECKER)
+    shutil.copyfile(ROOT / CLASSIFIER, canonical / CLASSIFIER)
+    shutil.copyfile(ROOT / CAMPAIGN, canonical / CAMPAIGN)
+    run(canonical, "python3", CHECKER)
+    run(canonical, "git", "config", "user.name", "GP-VAL-029 self-test")
+    run(canonical, "git", "config", "user.email", "gp-val-029@example.invalid")
+    prebuild=canonical / "tools/check_glyph_prebuild_git_identity.py"
+    prebuild.write_text(prebuild.read_text()+"\n# isolated legacy H1 validation self-test delta\n")
+    run(canonical, "git", "add", "--", "tools/check_glyph_prebuild_git_identity.py")
+    run(canonical, "git", "commit", "-m", "legacy prebuild correspondence positive")
+    run(canonical, "python3", CHECKER)
+    # A separate clone keeps the dirty-source case out of historical proof.
+    historical = Path(directory) / "historical"
+    run(ROOT, "git", "clone", "--quiet", "--no-local", str(ROOT), str(historical))
+    run(historical, "git", "switch", "--detach", CANDIDATE)
+    run(historical, "git", "switch", "-c", "glyph/gp-config-010-current-canonical-integration")
+    shutil.copyfile(ROOT / CHECKER, historical / CHECKER)
+    shutil.copyfile(ROOT / CAMPAIGN, historical / CAMPAIGN)
+    run(historical, "python3", CHECKER, "--historical")
+    run(historical, "git", "switch", "-c", "gp-val-029-wrong-branch")
+    run(historical, "python3", CHECKER, "--historical", expected=1)
+    run(historical, "git", "switch", "glyph/gp-config-010-current-canonical-integration")
+    run(historical, "git", "config", "user.name", "GP-VAL-029 self-test")
+    run(historical, "git", "config", "user.email", "gp-val-029@example.invalid")
+    (historical / "docs/ROADMAP.md").write_text((historical / "docs/ROADMAP.md").read_text() + "\nnegative parent\n")
+    run(historical, "git", "add", "docs/ROADMAP.md")
+    run(historical, "git", "commit", "-m", "gp-val-029-wrong-parent")
+    run(historical, "python3", CHECKER, "--historical", expected=1)
+    run(historical, "python3", "-c", "import sys; sys.path.insert(0, 'tools'); import glyph_hardware_correspondence as c; c.NON_BEHAVIORAL_PATHS = c.NON_BEHAVIORAL_PATHS | {'platformio.ini'}; assert c.classify_path('platformio.ini') == 'CRITICAL'")
+
+
 def main() -> None:
     with tempfile.TemporaryDirectory(prefix="gp-val-029-") as directory:
         root = Path(directory) / "repo"
@@ -443,7 +479,10 @@ def main() -> None:
         commit_change(root, "docs/ROADMAP.md", "\nGP-VAL-029 isolated scope control.\n", "gp-val-029-positive")
         run(root, "python3", CHECKER)
         commit_change(root, "tools/check_glyph_prebuild_git_identity.py", "\n# isolated H1 validation self-test delta\n", "gp-val-029-ready-prerequisite")
-        run(root, "python3", CHECKER)
+        # Legacy correspondence permits this path; the adopted campaign has a
+        # narrower finite inventory and must continue to reject it.
+        result=run(root, "python3", CHECKER, expected=1)
+        assert 'unreviewed governance/host delta' in result
         for label, path, data in (
             ("unknown-doc", "docs/unknown_gp_val_029.md", "unknown\n"),
             ("unknown-tool", "tools/unknown_gp_val_029.py", "# unknown\n"),
@@ -457,31 +496,7 @@ def main() -> None:
         with (root / "src/core/mode_selection.cpp").open("a") as stream:
             stream.write("\n// dirty negative\n")
         run(root, "python3", CHECKER, expected=1)
-        canonical = Path(directory) / "canonical"
-        run(ROOT, "git", "clone", "--quiet", "--no-local", str(ROOT), str(canonical))
-        run(canonical, "git", "switch", "--detach", BASE)
-        shutil.copyfile(ROOT / CHECKER, canonical / CHECKER)
-        shutil.copyfile(ROOT / CLASSIFIER, canonical / CLASSIFIER)
-        shutil.copyfile(ROOT / CAMPAIGN, canonical / CAMPAIGN)
-        run(canonical, "python3", CHECKER)
-        # A separate clone keeps the dirty-source case out of historical proof.
-        historical = Path(directory) / "historical"
-        run(ROOT, "git", "clone", "--quiet", "--no-local", str(ROOT), str(historical))
-        run(historical, "git", "switch", "--detach", CANDIDATE)
-        run(historical, "git", "switch", "-c", "glyph/gp-config-010-current-canonical-integration")
-        shutil.copyfile(ROOT / CHECKER, historical / CHECKER)
-        shutil.copyfile(ROOT / CAMPAIGN, historical / CAMPAIGN)
-        run(historical, "python3", CHECKER, "--historical")
-        run(historical, "git", "switch", "-c", "gp-val-029-wrong-branch")
-        run(historical, "python3", CHECKER, "--historical", expected=1)
-        run(historical, "git", "switch", "glyph/gp-config-010-current-canonical-integration")
-        run(historical, "git", "config", "user.name", "GP-VAL-029 self-test")
-        run(historical, "git", "config", "user.email", "gp-val-029@example.invalid")
-        (historical / "docs/ROADMAP.md").write_text((historical / "docs/ROADMAP.md").read_text() + "\nnegative parent\n")
-        run(historical, "git", "add", "docs/ROADMAP.md")
-        run(historical, "git", "commit", "-m", "gp-val-029-wrong-parent")
-        run(historical, "python3", CHECKER, "--historical", expected=1)
-        run(historical, "python3", "-c", "import sys; sys.path.insert(0, 'tools'); import glyph_hardware_correspondence as c; c.NON_BEHAVIORAL_PATHS = c.NON_BEHAVIORAL_PATHS | {'platformio.ini'}; assert c.classify_path('platformio.ini') == 'CRITICAL'")
+        legacy_applicability_tests(Path(directory))
     print("gp_val_029_semantic_applicability: PASS; canonical, unrelated descendant, historical identity and negatives")
 
 
