@@ -52,9 +52,10 @@ INSERT_BODY = b'''    if (!validate_config_button_bindings(candidate)) {
 
 '''
 
-# Memoize immutable inventories only for one top-level proof invocation. No
+# Memoize immutable inventories/blob bytes only for one proof invocation. No
 # worktree bytes, index state, symbolic ref, or successful proof is memoized.
 _tree_inventory_cache = ContextVar('campaign_tree_inventory_cache', default=None)
+_blob_bytes_cache = ContextVar('campaign_blob_bytes_cache', default=None)
 
 
 def _proof_invocation(function):
@@ -63,9 +64,11 @@ def _proof_invocation(function):
         if _tree_inventory_cache.get() is not None:
             return function(*args, **kwargs)
         token = _tree_inventory_cache.set({})
+        blob_token = _blob_bytes_cache.set({})
         try:
             return function(*args, **kwargs)
         finally:
+            _blob_bytes_cache.reset(blob_token)
             _tree_inventory_cache.reset(token)
     return invoke
 
@@ -91,7 +94,7 @@ def unique(pairs):
     return result
 
 def queue(root, ref):
-    raw = _git(root,'show',ref+':'+QUEUE).decode()
+    raw = raw_bytes(root,ref,QUEUE).decode()
     require(raw.count('<!-- queue-state:start -->')==1 and raw.count('<!-- queue-state:end -->')==1,'queue marker drift')
     raw=raw.split('<!-- queue-state:start -->')[1].split('<!-- queue-state:end -->')[0].strip()
     require(raw.startswith('```json') and raw.endswith('```'),'queue fence drift')
@@ -115,7 +118,15 @@ def critical_tree(root, ref):
 def raw_bytes(root, ref, path):
     entry=_tree(root,ref).get(path)
     require(entry is not None and entry[:2]==('100644','blob'),'nonregular proof source: '+path)
-    return _git(root,'show',ref+':'+path)
+    cache=_blob_bytes_cache.get()
+    if cache is None or not isinstance(ref,str) or re.fullmatch('[0-9a-f]{40}',ref) is None:
+        return _git(root,'show',ref+':'+path)
+    # Distinct immutable commits may name the same blob. Keep every per-ref
+    # mode/type check above and reparse callers' JSON; only bytes are shared.
+    key=(str(Path(root).resolve()),entry[2])
+    if key not in cache:
+        cache[key]=_git(root,'show',ref+':'+path)
+    return cache[key]
 
 def current_bytes(root, path):
     p=root/path

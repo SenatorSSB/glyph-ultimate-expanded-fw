@@ -330,6 +330,45 @@ def tree_inventory_cache_tests(root: Path) -> None:
         raise ValueError('synthetic invocation failure')
     rejected(failed,'cache reset on failure')
     assert campaign._tree_inventory_cache.get() is None
+    assert campaign._blob_bytes_cache.get() is None
+    # Distinct immutable refs with one blob share bytes, while symbolic HEAD
+    # reads and decoded queue dictionaries remain fresh.
+    actual_git=campaign._git
+    shows=[]
+    def observed_git(where,*args):
+        if args[0]=='show': shows.append(args[1])
+        return actual_git(where,*args)
+    path='src/core/mode_selection.cpp'
+    @campaign._proof_invocation
+    def blobs():
+        assert campaign.raw_bytes(root,campaign.B,path)==campaign.raw_bytes(root,campaign.F010,path)
+        campaign.raw_bytes(root,'HEAD',path)
+        campaign.raw_bytes(root,'HEAD',path)
+        first=campaign.queue(root,campaign.ADOPTION)
+        first['items'].clear()
+        assert campaign.queue(root,campaign.ADOPTION)['items']
+    with patch.object(campaign,'_git',side_effect=observed_git):
+        blobs()
+        blobs()
+    assert shows.count(campaign.B+':'+path)==2
+    assert shows.count(campaign.F010+':'+path)==0
+    assert shows.count('HEAD:'+path)==4
+    assert shows.count(campaign.ADOPTION+':'+campaign.QUEUE)==2
+    assert campaign._blob_bytes_cache.get() is None
+    native_tree=campaign._tree
+    def executable(where,ref):
+        value=native_tree(where,ref)
+        if ref==campaign.F010:
+            entry=value[path]
+            value[path]=('100755',*entry[1:])
+        return value
+    @campaign._proof_invocation
+    def mode_still_checked():
+        campaign.raw_bytes(root,campaign.B,path)
+        with patch.object(campaign,'_tree',side_effect=executable):
+            rejected(lambda:campaign.raw_bytes(root,campaign.F010,path),'cached blob still requires regular mode')
+    mode_still_checked()
+    assert campaign._blob_bytes_cache.get() is None
 
 
 def accepted_contract_tests(directory: Path) -> None:
