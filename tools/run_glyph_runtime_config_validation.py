@@ -534,6 +534,18 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
     if any(entry["id"] == "gp_config_010_integration_semantic_correspondence"
            and entry["command"] == GP_CONFIG_010_SEMANTIC_COMMAND for entry in selected):
         roots.add(GP_CONFIG_010_HISTORICAL_CANDIDATE)
+    # GP-VAL-037 finite proof roots, selected independently of framework execution.
+    campaign_consumers = [('gp_config_012_button_mask_characterization', ['python3', 'tools/check_glyph_gp_config012_button_mask_characterization.py']), ('gp_config_013_usb_default_characterization', ['python3', 'tools/check_glyph_gp_config013_usb_default_characterization.py']), ('gp_config_010_integration_semantic_correspondence', ['python3', 'tools/check_glyph_config_010_integration_semantic_correspondence.py']), ('configurator_setconfig_transaction', ['python3', 'tools/check_glyph_configurator_setconfig_transaction.py']), ('current_config_persistence_recovery_research', ['python3', 'tools/check_glyph_current_config_persistence_recovery_research.py']), ('getconfig_raw_load_characterization', ['python3', 'tools/check_glyph_getconfig_raw_load_characterization.py']), ('setconfig_runtime_rebinding_characterization', ['python3', 'tools/check_glyph_setconfig_runtime_rebinding_characterization.py']), ('config_menu_invalid_state_characterization', ['python3', 'tools/check_glyph_config_menu_invalid_state_characterization.py']), ('checker_context', ['python3', 'tools/check_glyph_checker_context.py']), ('generated_source_contract', ['python3', 'tools/check_glyph_generated_source_owned_generator_contract.py']), ('generated_baseline_artifact', ['python3', 'tools/check_glyph_generated_source_owned_baseline_artifact.py']), ('artifact_install', ['python3', 'tools/check_glyph_generated_source_owned_artifact_install.py']), ('coordinate_native_contract', ['python3', 'tools/check_glyph_coordinate_native_runtime_profile_contract.py']), ('docs_agent_surface', ['python3', 'tools/check_glyph_docs_agent_surface.py']), ('campaign_webserial_source_authority', ['python3', 'tools/check_glyph_runtime_config_webserial_device_write_source_authority.py', '--campaign-transition'])]
+    if any(entry['id'] == identity and entry['command'] == command
+           for entry in selected for identity, command in campaign_consumers):
+        from glyph_campaign_transition import ROOTS, TRANSITIONS, authenticate
+        authenticate(ROOT)
+        roots.update(ROOTS)
+        catalog_path = ROOT / TRANSITIONS
+        if catalog_path.exists():
+            catalog = json.loads(catalog_path.read_text(), object_pairs_hook=pairs)
+            for record in catalog['accepted_transitions']:
+                roots.update(record[k] for k in ('build', 'parent', 'review_commit', 'evidence_commit', 'integration'))
     if not has("agent_framework", "check_glyph_agent_framework_docs.py"):
         return refs, roots
     path = "docs/project/ACTIVE_AGENT_QUEUE.md"

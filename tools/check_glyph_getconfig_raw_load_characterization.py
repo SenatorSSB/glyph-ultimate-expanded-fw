@@ -3,6 +3,8 @@
 from __future__ import annotations
 import copy, hashlib, json, subprocess, tempfile
 from pathlib import Path
+from glyph_campaign_transition import verify_current_source
+from check_glyph_configurator_setconfig_transaction import compile_translation_unit, ContractError
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "docs/runtime_config/fixtures/getconfig_raw_load_characterization.json"
@@ -21,6 +23,7 @@ def pairs(items):
         result[key] = value
     return result
 def load():
+    require(hashlib.sha256(FIXTURE.read_bytes()).hexdigest() == "c81f187323d0da42facf145dd6b976e990435337f18c5510bd5312d429b70891", "frozen historical fixture drift")
     value = json.loads(FIXTURE.read_text(), object_pairs_hook=pairs)
     require(list(value) == ["schema_name","schema_version","work_order","production_sources","cases","observations"], "fixture schema")
     require(value["schema_name"] == "glyph_getconfig_raw_load_characterization" and value["schema_version"] == 1 and value["work_order"] == "GP-PERSIST-002", "fixture identity")
@@ -34,7 +37,10 @@ def load():
 def correspondence():
     get_text, raw_text = SOURCE_GET.read_text(), SOURCE_RAW.read_text()
     expected = {row["path"]: row["sha256"] for row in load()["production_sources"]}
-    require(hashlib.sha256(SOURCE_GET.read_bytes()).hexdigest() == expected["HAL/pico/src/comms/ConfiguratorBackend.cpp"], "HandleGetConfig source drift")
+    frozen = verify_current_source(ROOT, "HAL/pico/src/comms/ConfiguratorBackend.cpp", expected["HAL/pico/src/comms/ConfiguratorBackend.cpp"])
+    start = "bool ConfiguratorBackend::HandleGetConfig()"
+    end = "bool ConfiguratorBackend::HandleSetConfig()"
+    require(get_text[get_text.index(start):get_text.index(end)] == frozen.decode()[frozen.decode().index(start):frozen.decode().index(end)], "GET body drift")
     require(hashlib.sha256(SOURCE_RAW.read_bytes()).hexdigest() == expected["HAL/pico/src/core/Persistence.cpp"], "LoadConfigRaw source drift")
     require("bool ConfiguratorBackend::HandleGetConfig()" in get_text and "persistence.LoadConfigRaw(_out, false);" in get_text, "GET source anchors")
     require("size_t Persistence::LoadConfigRaw(Print &out, bool validate)" in raw_text and "out.write((uint8_t)value);" in raw_text, "raw source anchors")
@@ -43,6 +49,11 @@ def correspondence():
         require(text.count(f'"../../../HAL/pico/src/{"comms/ConfiguratorBackend.cpp" if include == "ConfiguratorBackend.cpp" else "core/Persistence.cpp"}"') == 1, f"literal {include} include")
         require("HandleGetConfig() {" not in text and "LoadConfigRaw(Print &out" not in text, "copied production body")
 def compile_run(source, expected):
+    if source == GET:
+        for historical in (True, False):
+            output = compile_translation_unit(GET, historical=historical)
+            require(all(line in output for line in expected), "GET historical/current output drift")
+        return
     with tempfile.TemporaryDirectory(prefix="glyph-getconfig-host-") as td:
         binary = Path(td) / "host"
         include = ROOT / ("tools/fixtures/configurator_setconfig_host/include" if source == GET else "tools/fixtures/getconfig_raw_host/include")
@@ -67,7 +78,7 @@ def main():
         compile_run(GET, ["case=invalid_check_no_raw_load result=PASS","case=raw_result_ignored_packet_end_wins result=PASS","case=packet_end_failure_propagates result=PASS"])
         print("glyph_getconfig_raw_load_characterization: PASS; 11 cases; H1 research only")
         return 0
-    except (OSError, subprocess.SubprocessError, Error, ValueError, KeyError, TypeError) as exc:
+    except (OSError, subprocess.SubprocessError, Error, ContractError, ValueError, KeyError, TypeError) as exc:
         print(f"glyph_getconfig_raw_load_characterization: FAIL: {exc}")
         return 1
 if __name__ == "__main__": raise SystemExit(main())

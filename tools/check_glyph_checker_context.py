@@ -6,6 +6,12 @@ from __future__ import annotations
 import subprocess
 import tempfile
 import importlib.util
+import contextlib
+import io
+import os
+import shutil
+import sys
+from unittest.mock import patch
 from pathlib import Path
 
 from glyph_checker_context import ScopeValidationError, collect_checker_context, validate_feature_scope
@@ -51,6 +57,119 @@ def fresh_repo(parent: Path) -> Path:
     run(root, "add", "docs/baseline.md")
     run(root, "commit", "-m", "baseline")
     return root
+
+
+GUARD = "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py"
+AUTHORITY_DOC = "docs/runtime_config/runtime_config_webserial_device_write_source_authority.md"
+
+
+def guard_main(root: Path, campaign: bool, expected: str | None = None) -> None:
+    """Exercise the real entry point, including argument handling and all guards."""
+    env = dict(os.environ)
+    env.pop("GLYPH_CHECKER_BASE", None)
+    result = subprocess.run([sys.executable, str(root / GUARD)] +
+                            (["--campaign-transition"] if campaign else []),
+                            cwd=root, env=env, capture_output=True, text=True, check=False)
+    combined = result.stdout + result.stderr
+    if expected is None:
+        if result.returncode or "status=PASS" not in result.stdout:
+            raise AssertionError("actual guard main positive failed: " + combined)
+    elif result.returncode == 0 or expected not in combined:
+        raise AssertionError("actual guard main negative lost " + repr(expected) + ": " + combined)
+
+
+def campaign_guard_tests() -> None:
+    from glyph_campaign_transition import ADOPTION, B, C
+    source = Path(__file__).resolve().parents[1]
+    # These clones borrow objects read-only. Their index, branches and mutations
+    # are private; never update canonical refs or manufacture hardware evidence.
+    with tempfile.TemporaryDirectory(prefix="glyph-campaign-guard-") as directory:
+        root = Path(directory) / "baseline"
+        run(source, "clone", "--shared", "--no-checkout", str(source), str(root))
+        run(root, "checkout", "--detach", ADOPTION)
+        run(root, "config", "user.name", "Glyph guard negative control")
+        run(root, "config", "user.email", "guard-control@example.invalid")
+        run(root, "branch", "-f", "configurator", ADOPTION)
+        guard_main(root, False)
+        for relative in (GUARD, "tools/glyph_campaign_transition.py", "tools/glyph_hardware_correspondence.py"):
+            shutil.copyfile(source / relative, root / relative)
+        guard_main(root, False)
+        guard_main(root, True)
+        spec = importlib.util.spec_from_file_location("campaign_guard_under_test", root / GUARD)
+        if spec is None or spec.loader is None:
+            raise AssertionError("guard import unavailable")
+        guard = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(guard)
+        doc = root / AUTHORITY_DOC
+        original = doc.read_text()
+        for phrase in guard.REQUIRED_PHRASES:
+            doc.write_text(original.replace(phrase, "removed-required-phrase"))
+            guard_main(root, True, "missing required phrase")
+        for reference in guard.REQUIRED_REFERENCES:
+            doc.write_text(original.replace(reference, "removed-required-reference"))
+            guard_main(root, True, "missing required reference")
+        doc.write_text(original + "\nDEVICE_WRITE_IMPLEMENTATION_ALLOWED_BY_SOURCE_AUDIT=true\n")
+        guard_main(root, True, "flag must not be true")
+        for claim in ("WebSerial/device write is implemented", "WebSerial implementation is implemented",
+                      "device-write implementation is implemented", "Runtime-loaded config is implemented",
+                      "Firmware flashing automation is implemented", "Hardware validation is claimed",
+                      "Nunchuk validation is claimed"):
+            doc.write_text(original + "\n" + claim + "\n")
+            guard_main(root, True, "positive implementation claim")
+        doc.write_text(original)
+        # Authenticated campaign main rejects an additional protected input.
+        marker_path = "src/gp_val037_guard_negative.cpp"
+        write(root, marker_path, "// " + guard.FORBIDDEN_SOURCE_MARKERS[0] + "\n")
+        guard_main(root, True, "critical")
+        (root / marker_path).unlink()
+        write(root, "tools/gp_val037_unknown_negative.txt", "unknown metadata\n")
+        guard_main(root, True, "unclassified")
+        (root / "tools/gp_val037_unknown_negative.txt").unlink()
+
+        # Legacy source scans run against content on the private configurator
+        # tip so scope rejection cannot mask a missing marker scan.
+        for marker in guard.FORBIDDEN_SOURCE_MARKERS:
+            write(root, marker_path, "// " + marker + "\n")
+            run(root, "add", marker_path)
+            run(root, "commit", "-m", "isolated source marker negative")
+            run(root, "branch", "-f", "configurator", "HEAD")
+            guard_main(root, False, "blocked runtime/device-write marker")
+        (root / marker_path).unlink()
+        run(root, "add", marker_path)
+        run(root, "commit", "-m", "remove isolated source marker")
+        run(root, "branch", "-f", "configurator", "HEAD")
+        for marker in guard.FLASHING_MARKERS:
+            write(root, "tools/gp_val037_flashing_negative.txt", marker + "\n")
+            guard_main(root, False, "potential flashing automation marker")
+        (root / "tools/gp_val037_flashing_negative.txt").unlink()
+
+        # Instrument only the already independently tested authentication seam
+        # to prove main passes its unfiltered inventory to the real flashing scan.
+        # This is a wiring negative, never an authenticated campaign positive.
+        import glyph_campaign_transition
+        removed = "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+        target = root / removed
+        original_source = target.read_bytes()
+        for marker in guard.FLASHING_MARKERS:
+            target.write_text(marker + "\n")
+            proof = {"critical_paths": frozenset({removed}), "changed_paths": frozenset({removed})}
+            captured = io.StringIO()
+            with patch.object(glyph_campaign_transition, "authenticate", return_value=proof), \
+                 patch.object(sys, "argv", [str(root / GUARD), "--campaign-transition"]), \
+                 contextlib.redirect_stdout(captured):
+                result = guard.main()
+            if result != 1 or "potential flashing automation marker" not in captured.getvalue():
+                raise AssertionError("campaign main filtered flashing input: " + marker)
+        target.write_bytes(original_source)
+
+        candidate = Path(directory) / "candidate"
+        run(source, "clone", "--shared", "--no-checkout", str(source), str(candidate))
+        run(candidate, "checkout", "--detach", C)
+        run(candidate, "branch", "-f", "configurator", B)
+        shutil.copyfile(source / GUARD, candidate / GUARD)
+        guard_main(candidate, False, "firmware/source/device paths changed")
+    print("campaign_guard_actual_main: PASS; legacy/campaign baseline, C020 legacy rejection, "
+          "all phrases/references/claims/source/flashing markers and unfiltered campaign wiring")
 
 
 def main() -> int:
@@ -241,6 +360,8 @@ def main() -> int:
             raise AssertionError("historical exact-branch checker unexpectedly lost branch-specific policy")
     finally:
         module.git_lines = original_git_lines
+
+    campaign_guard_tests()
 
     case_ids = (
         "CTX-01-valid-feature-branch",

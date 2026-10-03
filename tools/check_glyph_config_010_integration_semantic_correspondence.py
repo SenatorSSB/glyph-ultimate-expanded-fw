@@ -82,6 +82,27 @@ def unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
     return result
 
 
+
+def verify_historical_patch(value, integration_candidate=INTEGRATION_CANDIDATE):
+    """Preserve legacy evidence; exact full-index proof removes abbreviation variance."""
+    path = value['source_path']
+    historical = git('diff', '--no-ext-diff', value['historical_base'], value['historical_candidate'], '--', path)
+    integration = git('diff', '--no-ext-diff', value['authorized_integration_base'], integration_candidate, '--', path)
+    require(historical == integration, 'historical/integration patch mismatch')
+    for ref, expected in ((value['historical_base'], value['base_source_blob']),
+                          (value['authorized_integration_base'], value['base_source_blob']),
+                          (value['historical_candidate'], CURRENT_SOURCE_BLOB),
+                          (integration_candidate, CURRENT_SOURCE_BLOB)):
+        entry = git('ls-tree', ref, '--', path).decode().split()
+        require(entry[:3] == ['100644', 'blob', expected], 'historical patch blob/mode substitution')
+    stable = git('diff', '--no-ext-diff', '--full-index', value['historical_base'], value['historical_candidate'], '--', path)
+    current = git('diff', '--no-ext-diff', '--full-index', value['authorized_integration_base'], integration_candidate, '--', path)
+    require(stable == current and hashlib.sha256(stable).hexdigest() == '87013a73d9a8e1bbeca848255bc4a3b4118e1814d43e690ae66f4de5a71d1f42', 'stable historical patch substitution')
+    def body(raw):
+        return b'\n'.join(line for line in raw.split(b'\n') if not line.startswith(b'index '))
+    require(body(historical) == body(stable), 'abbreviation fallback changed patch body')
+    return 'LEGACY_EXACT' if hashlib.sha256(integration).hexdigest() == value['exact_source_diff_sha256'] else 'STABLE_FULL_INDEX_EXACT'
+
 def current_main() -> int:
     """Prove accepted content and finite scope on a current canonical descendant."""
     try:
@@ -113,7 +134,7 @@ def current_main() -> int:
         require(object_id(INTEGRATION_CANDIDATE, source_path) == CURRENT_SOURCE_BLOB, "integration candidate source drift")
         historical_diff = git("diff", "--no-ext-diff", value["historical_base"], value["historical_candidate"], "--", source_path)
         integration_diff = git("diff", "--no-ext-diff", value["authorized_integration_base"], INTEGRATION_CANDIDATE, "--", source_path)
-        require(historical_diff == integration_diff and hashlib.sha256(integration_diff).hexdigest() == value["exact_source_diff_sha256"], "historical production patch drift")
+        verify_historical_patch(value)
         require(object_id(value["accepted_x1_candidate"], baseline_path) == CURRENT_BASELINE_BLOB, "accepted X1 table drift")
         require(object_id(value["authorized_integration_base"], baseline_path) == CURRENT_BASELINE_BLOB, "integration base table drift")
         for path, expected in ((source_path, CURRENT_SOURCE_BLOB), (baseline_path, CURRENT_BASELINE_BLOB)):
@@ -129,8 +150,13 @@ def current_main() -> int:
             require(entry["classification"] == "EXACT_SOURCE_MATCH" and entry["source"] in source,
                     f"semantic source/classification drift: {entry.get('id')}")
         require(value["behaviorally_relevant_differences"] == [], "behaviorally relevant difference")
-        verify_correspondence(ROOT, INTEGRATION_CANDIDATE, value["authorized_integration_base"],
-                              target=head, integrated=True, check_worktree=True)
+        from glyph_campaign_transition import ADOPTION, authenticate
+        if subprocess.run(['git', 'merge-base', '--is-ancestor', ADOPTION, head], cwd=ROOT, capture_output=True).returncode == 0:
+            proof = authenticate(ROOT)
+            print('- campaign phase: ' + proof['phase'])
+        else:
+            verify_correspondence(ROOT, INTEGRATION_CANDIDATE, value["authorized_integration_base"],
+                                  target=head, integrated=True, check_worktree=True)
         print("glyph_config_010_integration_semantic_correspondence: PASS (current descendant)")
         print("- production semantics: 8 EXACT_SOURCE_MATCH")
         print("- generated baseline: exact accepted GP-X1-002 28-table blob")
@@ -179,7 +205,7 @@ def main() -> int:
         historical_diff = git("diff", "--no-ext-diff", value["historical_base"], value["historical_candidate"], "--", source_path)
         integration_diff = git("diff", "--no-ext-diff", value["authorized_integration_base"], head, "--", source_path)
         require(historical_diff == integration_diff, "exact production source diff drift")
-        require(hashlib.sha256(integration_diff).hexdigest() == value["exact_source_diff_sha256"], "source diff digest drift")
+        verify_historical_patch(value, head)
 
         semantics = value["semantics"]
         require([entry["id"] for entry in semantics] == EXPECTED_IDS, "semantic inventory missing, duplicate, or reordered")

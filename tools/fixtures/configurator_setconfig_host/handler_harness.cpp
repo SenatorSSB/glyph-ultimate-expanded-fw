@@ -29,6 +29,10 @@ enum class Scenario {
     OutOfRangeCustom,
     SaveFailure,
     Success,
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+    InvalidButtonBinding,
+    InvalidBindingCount,
+#endif
 };
 
 Scenario scenario;
@@ -98,13 +102,22 @@ void require(bool condition, const std::string &message) {
 
 Config accepted_config() {
     Config result;
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+    std::memset(&result, 0, sizeof(result));
+    result.rgb_brightness = 77;
+#else
     std::memset(&result, 0x3c, sizeof(result));
+#endif
     return result;
 }
 
 Config valid_candidate() {
     Config result;
+    #ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+    std::memset(&result, 0, sizeof(result));
+#else
     std::memset(&result, 0xa5, sizeof(result));
+#endif
     result.game_mode_configs_count = 1;
     result.communication_backend_configs_count = 1;
     result.custom_modes_count = 1;
@@ -115,6 +128,13 @@ Config valid_candidate() {
     result.game_mode_configs[0].mode_id = MODE_MELEE;
     result.game_mode_configs[0].keyboard_mode_config = 0;
     result.game_mode_configs[0].custom_mode_config = 0;
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+    result.game_mode_configs[0].activation_binding_count = 1;
+    result.game_mode_configs[0].activation_binding[0] = BTN_LF1;
+    result.game_mode_configs[0].button_remapping_count = 1;
+    result.game_mode_configs[0].button_remapping[0].physical_button = BTN_MB12;
+    result.game_mode_configs[0].button_remapping[0].activates = BTN_UNSPECIFIED;
+#endif
     return result;
 }
 
@@ -143,6 +163,11 @@ std::vector<uint8_t> expected_response(Scenario current) {
             return response(CMD_ERROR, "Keyboard mode ID 2 is for game mode 1 but only 1 keyboard modes are defined");
         case Scenario::OutOfRangeCustom:
             return response(CMD_ERROR, "Custom mode ID 2 is for game mode config 1 but only 1 custom modes are defined");
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+        case Scenario::InvalidButtonBinding:
+        case Scenario::InvalidBindingCount:
+            return response(CMD_ERROR, "Config contains an invalid button binding", true);
+#endif
         case Scenario::SaveFailure:
             return response(CMD_ERROR, "Failed to save config to memory", true);
         case Scenario::Success:
@@ -162,6 +187,10 @@ const char *name(Scenario current) {
         case Scenario::OutOfRangeCustom: return "out_of_range_custom_config";
         case Scenario::SaveFailure: return "save_failure";
         case Scenario::Success: return "full_success";
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+        case Scenario::InvalidButtonBinding: return "invalid_button_binding";
+        case Scenario::InvalidBindingCount: return "invalid_binding_count";
+#endif
     }
     return "unknown";
 }
@@ -189,6 +218,17 @@ Config candidate_for(Scenario current) {
             result.game_mode_configs[0].mode_id = MODE_CUSTOM;
             result.game_mode_configs[0].custom_mode_config = 2;
             break;
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+        case Scenario::InvalidButtonBinding: {
+            result.game_mode_configs[0].activation_binding_count = 1;
+            const unsigned invalid = 64;
+            std::memcpy(&result.game_mode_configs[0].activation_binding[0], &invalid, sizeof(invalid));
+            break;
+        }
+        case Scenario::InvalidBindingCount:
+            result.game_mode_configs[0].activation_binding_count = 5;
+            break;
+#endif
         default:
             break;
     }
@@ -303,8 +343,16 @@ int main() {
         for (Scenario current : cases) {
             run_case(current);
         }
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+        run_case(Scenario::InvalidButtonBinding);
+        run_case(Scenario::InvalidBindingCount);
+#endif
         std::cout << "production_source=HAL/pico/src/comms/ConfiguratorBackend.cpp\n";
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+        std::cout << "production_handler_cases=11 actual_validator=linked result=PASS\n";
+#else
         std::cout << "production_handler_cases=9 result=PASS\n";
+#endif
         return 0;
     } catch (const std::exception &error) {
         std::cerr << "result=FAIL error=" << error.what() << "\n";

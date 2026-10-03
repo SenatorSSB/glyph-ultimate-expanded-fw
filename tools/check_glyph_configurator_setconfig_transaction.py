@@ -6,7 +6,10 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import shutil
 import tempfile
+
+from glyph_campaign_transition import verify_current_source
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "HAL/pico/src/comms/ConfiguratorBackend.cpp"
@@ -48,7 +51,7 @@ def validate_fixture(value: dict[str, object]) -> list[str]:
     source = value["production_source"]
     require(type(source) is dict and list(source) == ["path", "sha256", "method"], "source schema")
     require(source["path"] == SOURCE.relative_to(ROOT).as_posix(), "source path")
-    require(source["sha256"] == hashlib.sha256(SOURCE.read_bytes()).hexdigest(), "source digest")
+    verify_current_source(ROOT, source["path"], source["sha256"])
     require(source["method"] == "literal translation-unit include compiled by host C++ compiler", "source method")
     build = value["build_contract"]
     require(type(build) is dict and list(build) == ["translation_unit", "production_header", "stub_include_root"], "build schema")
@@ -112,36 +115,70 @@ def validate_correspondence() -> None:
     require("pb_decode(&istream, Config_fields, &_config)" not in handler, "production decode targets live config")
 
 
-def compile_and_run(expected_names: list[str]) -> str:
+HISTORICAL_SOURCE_SHA256 = "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876"
+
+
+def compile_translation_unit(harness: Path, historical: bool = False) -> str:
+    """Run a literal production TU in an isolated mirror; never replace the live tree."""
+    frozen = verify_current_source(ROOT, SOURCE.relative_to(ROOT).as_posix(), HISTORICAL_SOURCE_SHA256)
+    current = SOURCE.read_bytes()
+    require(hashlib.sha256((ROOT / "tools/fixtures/gp_config012_button_host/generated/config.pb.h").read_bytes()).hexdigest() == "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323", "frozen generated schema/ABI dependency drift")
+    require(hashlib.sha256((ROOT / "tools/fixtures/gp_config012_button_host/nanopb/pb.h").read_bytes()).hexdigest() == "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2", "frozen generated schema/ABI dependency drift")
+
+    repaired = not historical and current != frozen
     with tempfile.TemporaryDirectory(prefix="glyph-setconfig-host-") as temp:
-        binary = Path(temp) / "configurator_setconfig_host"
-        command = [
-            "c++", "-std=c++17", "-Wall", "-Wextra", "-pedantic",
-            f"-I{STUB_INCLUDE}", f"-I{ROOT / 'HAL/pico/include'}",
-            str(HARNESS), "-o", str(binary),
-        ]
-        compiled = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+        mirror = Path(temp)
+        shutil.copytree(HOST_ROOT, mirror / HOST_ROOT.relative_to(ROOT))
+        for relative in (harness.relative_to(ROOT).as_posix(),
+                         "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+                         "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+                         "HAL/pico/src/comms/ConfiguratorBackend.cpp", "HAL/pico/include/comms/ConfiguratorBackend.hpp"):
+            destination = mirror / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes((ROOT / relative).read_bytes())
+        (mirror / SOURCE.relative_to(ROOT)).write_bytes(frozen if historical else current)
+        command = ["c++", "-std=c++17", "-Wall", "-Wextra", "-pedantic",
+                   f"-I{mirror / STUB_INCLUDE.relative_to(ROOT)}", f"-I{mirror / 'HAL/pico/include'}"]
+        if repaired:
+            for relative in ("include/core/config_button_validation.hpp", "src/core/config_button_validation.cpp"):
+                destination = mirror / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes((ROOT / relative).read_bytes())
+            command += ["-DGLYPH_ACTUAL_BUTTON_VALIDATOR", f"-I{mirror / 'include'}",
+                        f"-I{mirror / 'tools/fixtures/gp_config012_button_host/nanopb'}",
+                        str(mirror / "src/core/config_button_validation.cpp")]
+        binary = mirror / "host"
+        command += [str(mirror / harness.relative_to(ROOT)), "-o", str(binary)]
+        compiled = subprocess.run(command, cwd=mirror, capture_output=True, text=True, check=False)
         require(compiled.returncode == 0, f"host compile failed:\n{compiled.stdout}{compiled.stderr}")
-        executed = subprocess.run([str(binary)], cwd=ROOT, capture_output=True, text=True, check=False)
+        executed = subprocess.run([str(binary)], cwd=mirror, capture_output=True, text=True, check=False)
         require(executed.returncode == 0, f"host harness failed:\n{executed.stdout}{executed.stderr}")
-        lines = executed.stdout.splitlines()
-        require(lines[: len(expected_names)] == [f"case={name} result=PASS" for name in expected_names],
-                "host case output drift")
-        require(lines[len(expected_names):] == [
-            "production_source=HAL/pico/src/comms/ConfiguratorBackend.cpp",
-            "production_handler_cases=9 result=PASS",
-        ], "host production correspondence output drift")
         return executed.stdout
+
+
+def compile_and_run(expected_names: list[str]) -> str:
+    outputs = []
+    repaired = hashlib.sha256(SOURCE.read_bytes()).hexdigest() != HISTORICAL_SOURCE_SHA256
+    for historical in (True, False):
+        names = expected_names + (["invalid_button_binding", "invalid_binding_count"] if repaired and not historical else [])
+        output = compile_translation_unit(HARNESS, historical=historical)
+        require(output.splitlines() == [f"case={name} result=PASS" for name in names] + [
+            "production_source=HAL/pico/src/comms/ConfiguratorBackend.cpp",
+            "production_handler_cases=11 actual_validator=linked result=PASS" if repaired and not historical else "production_handler_cases=9 result=PASS",
+        ], "host production correspondence output drift")
+        outputs.append(("historical" if historical else "current") + " translation-unit proof:\n" + output)
+    return "".join(outputs)
 
 
 def main() -> int:
     try:
+        require(hashlib.sha256(FIXTURE.read_bytes()).hexdigest() == "f483e7d371189663098dbec44b77c7cedf7274dc389d0513fc4cf7ca7a238d8f", "frozen historical fixture drift")
         value = json.loads(FIXTURE.read_text(encoding="utf-8"), object_pairs_hook=pairs)
         expected_names = validate_fixture(value)
         validate_correspondence()
         output = compile_and_run(expected_names)
         print(output, end="")
-        print("glyph_configurator_setconfig_transaction: PASS; compiled exact production handler; 9 cases")
+        print("glyph_configurator_setconfig_transaction: PASS; separate historical/current literal TU proofs")
         return 0
     except (OSError, subprocess.SubprocessError, ContractError, KeyError, TypeError, ValueError) as exc:
         print(f"glyph_configurator_setconfig_transaction: FAIL: {exc}")

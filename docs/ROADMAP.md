@@ -9,11 +9,11 @@ and `docs/calibration/INDEX.md`.
 ## Current Baseline
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-037","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-037, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 GP-VAL-040 scope event is resolved by the 2026-10-03 post-opening Curator receipt and finite three-checker/two-host-literal amendment. Separate GP-VAL-040 implementation, composed scope/mode/identity regression proof, full affected aggregate, independent review and strict DONE remain required before preserved KBD resumption. No implementation, Keyboard repair or hardware acceptance is claimed. Exact candidate `4fb7c1e9507547774ff9f55cd7788355648d5d1e` remains unmerged; prior recovery MATCH and original fingerprint-failure UNKNOWN records are preserved. At that GP-VAL-040 adoption, C020/037, USB023/042 and GLYPH-UD-026 were unchanged. GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator receipt: explicit authenticated campaign WebSerial main becomes load-bearing, legacy Step15 controls remain separate, unchanged storage guard must PASS, and all seven coupled current consumers retain separate historical/current proof with the actual validator. GP-VAL-037 is PREAUTHORIZED/ACTIVATABLE; a separate supervisor must freshly authenticate objective prerequisites and deliver candidate plus accepted-transition governance, full required validation, independent review and strict DONE. C020 stays REVIEW at `256bf44cea71f6d5c87aa1675c8dac9f6b79259f`, parent `3dac79dac4eefcf832510817e8cb5ecd6a27f219`, tree `45831eeb88ece9c8b293e2e819ee5ecb362b64ec`, unmodified and unmerged. Its later actual F build, artifact custody and exact hardware PASS remain mandatory. Prior accepted-baseline judgment, KBD exact REVIEW candidate and GP-VAL-040 amended ACTIVATABLE authority remain intact. This adoption changes no firmware or implementation checker and claims no new aggregate, hardware acceptance or strict DONE.
@@ -342,3 +342,5 @@ automation is implemented or approved by this roadmap.
 Archived failed implementation diagnostics remain important evidence, but they
 are not current work. Start from `docs/archive/README.md` for the concise map,
 then open the original packets only when needed.
+
+GP-VAL-037 was mechanically activated READY on 2026-10-03 from exact adopted `a8e249eb210b7cd1e010e27dee8f4c61f8fcb537` after independent source, critical-tree, original UF2/evidence, strict predecessor completion and clean candidate rechecks. Implementation is in progress; no completion or new hardware acceptance is claimed. Original mechanical conditions remain preserved as prerequisites.

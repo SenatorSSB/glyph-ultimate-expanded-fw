@@ -262,3 +262,21 @@ def validate_feature_scope(
             raise ScopeValidationError(f"{reason} changed: {path}")
         if allowed_paths is not None and not _matches_allowlist(path, allowed_paths):
             raise ScopeValidationError(f"out-of-scope changed path: {path}")
+
+
+def authenticated_campaign_context(context: CheckerContext) -> CheckerContext:
+    """Remove only authenticated C020 critical entries from a local scope view."""
+    from dataclasses import replace
+    from glyph_campaign_transition import ADOPTION, authenticate
+    # Historical checkers and small unit repositories retain their original context.
+    if _git_returncode(context.repo_root, ["merge-base", "--is-ancestor", ADOPTION, context.head]):
+        return context
+    try:
+        proof = authenticate(context.repo_root)
+    except ValueError as exc:
+        raise ScopeValidationError(str(exc)) from exc
+    removed = proof['critical_paths']
+    return replace(context,
+        committed_paths=context.committed_paths - removed,
+        staged_paths=context.staged_paths - removed,
+        unstaged_paths=context.unstaged_paths - removed)

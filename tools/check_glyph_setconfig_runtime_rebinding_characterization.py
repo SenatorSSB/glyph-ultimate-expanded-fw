@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import hashlib
+
+from glyph_campaign_transition import verify_current_source
 import json
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -53,9 +56,9 @@ def load() -> dict:
 def correspondence(value: dict) -> None:
     for record in value["production_sources"]:
         path = ROOT / record["path"]
-        text = path.read_text(encoding="utf-8")
-        require(hashlib.sha256(path.read_bytes()).hexdigest() == record["sha256"], f"source drift: {record['path']}")
+        text = verify_current_source(ROOT, record["path"], record["sha256"]).decode("utf-8")
         for anchor in record["anchors"]:
+            require(anchor in path.read_text(encoding="utf-8"), f"current source anchor missing: {anchor}")
             require(anchor in text, f"missing source anchor {anchor} in {record['path']}")
 
     setconfig = (ROOT / "HAL/pico/src/comms/ConfiguratorBackend.cpp").read_text(encoding="utf-8")
@@ -98,14 +101,26 @@ def adversarial(value: dict) -> None:
     require("hardware acceptance" in value["observations"]["non_claims"], "hardware non-claim")
 
 
+
+def verify_frozen_fixture() -> None:
+    """Retain every historical observation, including fields not used below."""
+    historical = subprocess.check_output([
+        "git", "show",
+        "3dac79dac4eefcf832510817e8cb5ecd6a27f219:" + FIXTURE.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT)
+    require(FIXTURE.is_file() and not FIXTURE.is_symlink() and
+            FIXTURE.read_bytes() == historical, "frozen historical fixture changed")
+
 def main() -> int:
     try:
+        verify_frozen_fixture()
         value = load()
         correspondence(value)
         adversarial(value)
         print("glyph_setconfig_runtime_rebinding_characterization: PASS; 13 cases; H1 research only")
+        print("historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED")
         return 0
-    except (OSError, KeyError, TypeError, ValueError, Error) as exc:
+    except (OSError, subprocess.SubprocessError, KeyError, TypeError, ValueError, Error) as exc:
         print(f"glyph_setconfig_runtime_rebinding_characterization: FAIL: {exc}")
         return 1
 

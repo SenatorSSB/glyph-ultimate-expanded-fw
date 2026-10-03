@@ -33,6 +33,32 @@ CORRESPONDENCE_CRITICAL_PATHS = frozenset({
 
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
+    'tools/glyph_checker_context.py',
+    'tools/check_glyph_config_menu_invalid_state_characterization.py',
+    'tools/check_glyph_getconfig_raw_load_characterization.py',
+    'tools/check_glyph_setconfig_runtime_rebinding_characterization.py',
+
+    # GP-VAL-037: literal reviewed host roles; critical classification remains first.
+    'tools/glyph_campaign_transition.py',
+    'docs/runtime_config/fixtures/gp_val037_accepted_transitions.json',
+    'tools/check_glyph_gp_config020_button_validation.py',
+    'tools/fixtures/gp_config020_button_validation/decoder_harness.cpp',
+    'tools/fixtures/gp_config020_button_validation/include/Adafruit_TinyUSB.h',
+    'tools/fixtures/gp_config020_button_validation/setconfig_harness.cpp',
+    'tools/fixtures/gp_config020_button_validation/validation_harness.cpp',
+    'docs/agent_framework/GP_CONFIG_020_HARDWARE_PROTOCOL.md',
+    'docs/calibration/gp_config_020_hardware_result.md',
+    'docs/calibration/fixtures/gp_config_020_hardware_evidence.json',
+    'docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json',
+    'docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json',
+    'docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json',
+    'tools/check_glyph_runtime_config_webserial_device_write_source_authority.py',
+    'tools/check_glyph_checker_context.py',
+    'tools/check_glyph_generated_source_owned_generator_contract.py',
+    'tools/check_glyph_generated_source_owned_artifact_install.py',
+    'tools/check_glyph_coordinate_native_runtime_profile_contract.py',
+    'tools/check_glyph_generated_source_owned_baseline_artifact.py',
+
     'docs/AGENT_CONTEXT.md',
     'docs/CURRENT_STATE.md',
     'docs/ROADMAP.md',

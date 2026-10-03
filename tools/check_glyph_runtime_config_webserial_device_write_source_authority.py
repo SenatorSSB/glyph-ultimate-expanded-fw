@@ -150,8 +150,8 @@ def ensure_no_positive_claims(text: str) -> None:
             fail(f"source authority doc contains positive implementation claim: {pattern}")
 
 
-def ensure_changed_scope() -> None:
-    changed = changed_paths_against_base()
+def ensure_changed_scope(changed=None) -> None:
+    changed = changed_paths_against_base() if changed is None else changed
     forbidden = [
         path
         for path in changed
@@ -200,8 +200,8 @@ def ensure_no_runtime_write_symbols_added() -> None:
                     fail(f"blocked runtime/device-write marker {marker!r} found in {path.relative_to(REPO_ROOT)}")
 
 
-def ensure_no_flashing_automation_changed() -> None:
-    changed = changed_paths_against_base()
+def ensure_no_flashing_automation_changed(changed=None) -> None:
+    changed = changed_paths_against_base() if changed is None else changed
     for relpath in changed:
         path = REPO_ROOT / relpath
         if not path.exists() or not path.is_file():
@@ -220,9 +220,23 @@ def main() -> int:
         require_phrases(text)
         ensure_flag_false(text)
         ensure_no_positive_claims(text)
-        ensure_changed_scope()
+        campaign = sys.argv[1:] == ["--campaign-transition"]
+        if sys.argv[1:] and not campaign:
+            fail("expected no arguments or --campaign-transition")
+        original = None
+        if campaign:
+            from glyph_campaign_transition import authenticate
+            from glyph_hardware_correspondence import classify_path
+            proof = authenticate(REPO_ROOT)
+            original = sorted(proof['changed_paths'])
+            # Authentication proves complete exact critical/metadata inventory first.
+            residual = [p for p in original if p not in proof['critical_paths']
+                        and classify_path(p) != 'NON_BEHAVIORAL']
+            ensure_changed_scope(residual)
+        else:
+            ensure_changed_scope()
         ensure_no_runtime_write_symbols_added()
-        ensure_no_flashing_automation_changed()
+        ensure_no_flashing_automation_changed(original)
     except (OSError, ValueError, WebSerialSourceAuthorityError) as exc:
         print("status=FAIL")
         print(f"error={exc}")

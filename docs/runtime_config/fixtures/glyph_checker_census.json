@@ -1197,14 +1197,18 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 12977,
+      "file_size_bytes": 19843,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
         "CTX-18-historical-exact-branch-remains-specific",
+        "branch",
         "branch-policy",
         "branch-specific",
+        "branches",
+        "candidate",
         "configurator",
+        "evidence.",
         "exact-branch",
         "historical-branch",
         "historical_branch_policy",
@@ -1219,16 +1223,20 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 270,
+      "line_count": 391,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
         "CTX-18-historical-exact-branch-remains-specific",
+        "branch",
         "branch-policy",
         "branch-specific",
+        "branches",
+        "candidate",
         "configurator",
+        "evidence.",
         "exact-branch",
         "historical-branch",
         "historical_branch_policy",
@@ -1241,6 +1249,7 @@
       ],
       "python_module": "tools.check_glyph_checker_context",
       "referenced_repository_path_prefixes": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
         "docs/WORKFLOW.md",
         "docs/allowed.md",
         "docs/base-advance.md",
@@ -1251,19 +1260,26 @@
         "docs/project/ACTIVE_AGENT_QUEUE.md.bak",
         "docs/rename-me.md",
         "docs/runtime_config/",
+        "docs/runtime_config/runtime_config_webserial_device_write_source_authority.md",
         "include/committed.hpp",
         "src/committed.cpp",
         "src/configurator_only.cpp",
+        "src/gp_val037_guard_negative.cpp",
         "src/protected.cpp",
         "src/renamed.cpp",
         "src/staged.cpp",
         "src/unstaged.cpp",
+        "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+        "tools/glyph_campaign_transition.py",
+        "tools/glyph_hardware_correspondence.py",
+        "tools/gp_val037_flashing_negative.txt",
+        "tools/gp_val037_unknown_negative.txt",
         "tools/not_allowed.py"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "f68eb7e597aaae012fb55f6207603aa241cf5219afe8137085ab20e931bfd33c",
+      "sha256": "00977641278c8a4277a39c8abde52614876c1d3b9071a6044e739e320e49b1af",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -2213,16 +2229,18 @@
       },
       "checker_id": "config_010_integration_semantic_correspondence",
       "defines_main": true,
-      "file_size_bytes": 14319,
+      "file_size_bytes": 16211,
       "hard_coded_branch_like_strings": [
         "accepted_x1_candidate",
         "branch",
         "candidate",
         "candidate_branch",
+        "evidence",
         "gp_config_010_integration_hardware_evidence_2026-09-23.json",
         "historical_candidate",
         "historical_candidate_blob",
         "historical_candidate_source_blob",
+        "integration_candidate",
         "integration_candidate_source_blob"
       ],
       "imported_local_modules": [],
@@ -2230,7 +2248,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 216,
+      "line_count": 242,
       "parse_error": null,
       "path": "tools/check_glyph_config_010_integration_semantic_correspondence.py",
       "potential_branch_identity_signals": [
@@ -2238,10 +2256,12 @@
         "branch",
         "candidate",
         "candidate_branch",
+        "evidence",
         "gp_config_010_integration_hardware_evidence_2026-09-23.json",
         "historical_candidate",
         "historical_candidate_blob",
         "historical_candidate_source_blob",
+        "integration_candidate",
         "integration_candidate_source_blob"
       ],
       "potential_mutation_signals": [
@@ -2270,7 +2290,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "9b2eaa86148ba615d84f37bcf0a9176a45444dd4117fb59f86a2e6cfede58b56",
+      "sha256": "cae243130ec33d6b743d50d54cede3b8ed75c37261ea91433eca72d9daa1faae",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -2406,22 +2426,23 @@
       },
       "checker_id": "config_menu_invalid_state_characterization",
       "defines_main": true,
-      "file_size_bytes": 4839,
+      "file_size_bytes": 5520,
       "hard_coded_branch_like_strings": [
         "evidence"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
+      "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 85,
+      "line_count": 99,
       "parse_error": null,
       "path": "tools/check_glyph_config_menu_invalid_state_characterization.py",
       "potential_branch_identity_signals": [
         "evidence"
       ],
       "potential_mutation_signals": [
+        "subprocess.check_output",
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_config_menu_invalid_state_characterization",
@@ -2437,7 +2458,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "1103e0713b3b0d7db1a5acab0d8bf5121c45899c0a0c244d8466179bbd7f0b42",
+      "sha256": "fd756c19540d8cf43fec0f80b26ea39286aaed0cf5551207a784bbfda0542ae3",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -2501,7 +2522,7 @@
       },
       "checker_id": "configurator_setconfig_transaction",
       "defines_main": true,
-      "file_size_bytes": 7229,
+      "file_size_bytes": 10147,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator"
@@ -2511,7 +2532,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 152,
+      "line_count": 189,
       "parse_error": null,
       "path": "tools/check_glyph_configurator_setconfig_transaction.py",
       "potential_branch_identity_signals": [
@@ -2527,12 +2548,17 @@
         "HAL/pico/include/comms/ConfiguratorBackend.hpp",
         "HAL/pico/src/comms/ConfiguratorBackend.cpp",
         "docs/runtime_config/fixtures/configurator_setconfig_transaction.json",
-        "tools/fixtures/configurator_setconfig_host"
+        "include/core/config_button_validation.hpp",
+        "src/core/config_button_validation.cpp",
+        "tools/fixtures/configurator_setconfig_host",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb.h"
       ],
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "03dcd5a729781016df48c0b2d5bc2d51efb8373abb03be15a98e8d529f158425",
+      "sha256": "ac4cba460b3b81ffc2e8ffabb0984ddbd74a2d08783d19f76a187f5492b2c50f",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -2676,7 +2702,7 @@
       },
       "checker_id": "coordinate_native_runtime_profile_contract",
       "defines_main": true,
-      "file_size_bytes": 81864,
+      "file_size_bytes": 81932,
       "hard_coded_branch_like_strings": [
         "accepted_evidence",
         "accepted_evidence.",
@@ -2705,7 +2731,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1692,
+      "line_count": 1693,
       "parse_error": null,
       "path": "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
       "potential_branch_identity_signals": [
@@ -2815,7 +2841,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "f5782b407dd735189cdd221171158a763142f25cd520e5f2f8858ff3b5d40bb2",
+      "sha256": "4c82bacae406c55dfa1e9d99002645e060835f614f6a571bbe20d8c6ccd32a30",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -2836,7 +2862,7 @@
       },
       "checker_id": "current_config_persistence_recovery_research",
       "defines_main": true,
-      "file_size_bytes": 63466,
+      "file_size_bytes": 66950,
       "hard_coded_branch_like_strings": [
         "branches",
         "candidate",
@@ -2855,7 +2881,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1056,
+      "line_count": 1115,
       "parse_error": null,
       "path": "tools/check_glyph_current_config_persistence_recovery_research.py",
       "potential_branch_identity_signals": [
@@ -2895,7 +2921,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "a51d43bcb4f6447bdd7f4a286d51048627da612db715a9d3361c778518156529",
+      "sha256": "993cd9a1fec8f6b8efcf6e0f1c356c49bf8dab470c14f7e40f2264388a8e51fe",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -3467,7 +3493,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 23052,
+      "file_size_bytes": 23120,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -3504,7 +3530,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 575,
+      "line_count": 576,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -3606,7 +3632,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "9a5ec8a4cec0682117ab90ca8319a65e8f56d279fb089b4aab15cd6ce1cc9811",
+      "sha256": "3982115c3f941be8867f1d1f9da81b2bed2188a857d79444c177ee77a8aac95b",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5287,7 +5313,7 @@
       },
       "checker_id": "generated_source_owned_artifact_install",
       "defines_main": true,
-      "file_size_bytes": 26775,
+      "file_size_bytes": 26843,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5315,7 +5341,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 604,
+      "line_count": 605,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_artifact_install.py",
       "potential_branch_identity_signals": [
@@ -5404,7 +5430,7 @@
         "runtime_config_docs",
         "source_owned_generator_modes"
       ],
-      "sha256": "5e2953e7aca33e045af945ee5e4446135f76c629e5852e0ebcf27cc6864c9d6b",
+      "sha256": "fd7fd0d4badee7e4acbcb4a62ac85327ea72705eeba8b20df405a631f2ced4f4",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5425,7 +5451,7 @@
       },
       "checker_id": "generated_source_owned_baseline_artifact",
       "defines_main": true,
-      "file_size_bytes": 19984,
+      "file_size_bytes": 20291,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
@@ -5435,12 +5461,14 @@
         "evidence",
         "validate_branch"
       ],
-      "imported_local_modules": [],
+      "imported_local_modules": [
+        "glyph_checker_context"
+      ],
       "imports_argparse": false,
-      "imports_glyph_checker_context": false,
+      "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 482,
+      "line_count": 487,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
       "potential_branch_identity_signals": [
@@ -5487,7 +5515,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "a0dbaef516467f3490469bebb28bc5d02b5faa40af5b8e4c1889d88d19e4a7bc",
+      "sha256": "894cca11854f0e374435bc07ddd66375ee2a53d328152026012c6e547fe12145",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -5508,7 +5536,7 @@
       },
       "checker_id": "generated_source_owned_generator_contract",
       "defines_main": true,
-      "file_size_bytes": 41655,
+      "file_size_bytes": 41723,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5532,7 +5560,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 905,
+      "line_count": 906,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_generator_contract.py",
       "potential_branch_identity_signals": [
@@ -5620,7 +5648,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "23e01cb6131f4f0a0fd59ee70ed2bb41e21b13ad2281ed0472ab3e0d72d83bd2",
+      "sha256": "41fa214fa9ba761bc812ea719dc05f10763c45b60fe6c9260419e4f3a0639b6e",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5972,7 +6000,7 @@
       },
       "checker_id": "getconfig_raw_load_characterization",
       "defines_main": true,
-      "file_size_bytes": 5610,
+      "file_size_bytes": 6465,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator"
@@ -5982,7 +6010,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": true,
-      "line_count": 73,
+      "line_count": 84,
       "parse_error": null,
       "path": "tools/check_glyph_getconfig_raw_load_characterization.py",
       "potential_branch_identity_signals": [
@@ -6007,7 +6035,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "81c081e363939640620a97d38d62b06b1941f460f2d82dee77dd569a9b75c777",
+      "sha256": "3c60b114598225dddbbd0bf5b4100a3263a5c2b569f92cae9ffb658389a2824a",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -6163,7 +6191,7 @@
       },
       "checker_id": "gp_config012_button_mask_characterization",
       "defines_main": true,
-      "file_size_bytes": 22559,
+      "file_size_bytes": 23468,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -6175,9 +6203,9 @@
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
+      "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 391,
+      "line_count": 408,
       "parse_error": null,
       "path": "tools/check_glyph_gp_config012_button_mask_characterization.py",
       "potential_branch_identity_signals": [
@@ -6189,6 +6217,7 @@
         "shift_evidence.append"
       ],
       "potential_mutation_signals": [
+        "subprocess.check_output",
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_gp_config012_button_mask_characterization",
@@ -6215,7 +6244,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "e4174bdb5d249204bf1425a4ec6b54bd5c6ffb7a33fdd05283772304d4a4c13e",
+      "sha256": "cd4b24dc0b5ee9a17fc4316e8184f8cd8f031db1783d077d1abeb10c427eb85c",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -6236,7 +6265,7 @@
       },
       "checker_id": "gp_config013_usb_default_characterization",
       "defines_main": true,
-      "file_size_bytes": 17244,
+      "file_size_bytes": 17961,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
@@ -6248,7 +6277,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 320,
+      "line_count": 335,
       "parse_error": null,
       "path": "tools/check_glyph_gp_config013_usb_default_characterization.py",
       "potential_branch_identity_signals": [
@@ -6258,6 +6287,7 @@
         "configurator"
       ],
       "potential_mutation_signals": [
+        "subprocess.check_output",
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_gp_config013_usb_default_characterization",
@@ -6293,7 +6323,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "8d7b4a7b569ffdbfc5aae23925e73f819d3f11d931381c6c9c21eb4603672a0f",
+      "sha256": "f2c6c46f4d956457357a0dd731c5f0c46035daecabdeee81485905434a8260ea",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -11370,16 +11400,18 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 65643,
+      "file_size_bytes": 74274,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
         "branch_policy",
         "candidate",
         "candidate_preparation",
+        "carrying_candidate",
         "configurator",
         "done_evidence",
         "evidence.json",
+        "evidence_commit",
         "hardware-evidence",
         "hardware_evidence_record",
         "historical-candidate",
@@ -11390,14 +11422,15 @@
         "origin/configurator",
         "original_candidate",
         "substitute-candidate",
-        "unrelated-branch"
+        "unrelated-branch",
+        "without_candidate"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1122,
+      "line_count": 1243,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -11406,9 +11439,11 @@
         "branch_policy",
         "candidate",
         "candidate_preparation",
+        "carrying_candidate",
         "configurator",
         "done_evidence",
         "evidence.json",
+        "evidence_commit",
         "hardware-evidence",
         "hardware_evidence_record",
         "historical-candidate",
@@ -11419,7 +11454,8 @@
         "origin/configurator",
         "original_candidate",
         "substitute-candidate",
-        "unrelated-branch"
+        "unrelated-branch",
+        "without_candidate"
       ],
       "potential_mutation_signals": [
         "subprocess.check_output",
@@ -11456,15 +11492,16 @@
         "artifact_custody_provenance",
         "build_declarations_hooks",
         "ci_workflows",
+        "coordinate_native_profile",
         "generated_source_owned",
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "e94e5a2f75760f8719ab863e639f209c2e3fcb90f22cc16d7328240709f5dcce",
+      "sha256": "80b447d9391ffbda875ccede8841c60c2eaeea0edf94d58e68c3fbef20adb808",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
-        "coordinate_native": false,
+        "coordinate_native": true,
         "docs_navigation": true,
         "generated_source_owned_artifacts": true,
         "hardware_results": true,
@@ -11644,7 +11681,7 @@
       },
       "checker_id": "runtime_config_webserial_device_write_source_authority",
       "defines_main": true,
-      "file_size_bytes": 8256,
+      "file_size_bytes": 9089,
       "hard_coded_branch_like_strings": [
         "branch",
         "configurator"
@@ -11654,7 +11691,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 239,
+      "line_count": 253,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
       "potential_branch_identity_signals": [
@@ -11688,7 +11725,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "39148ddc529dd8c415ef1dd267eb0ab79634017b58b9fd8da2ae2d2006464fdc",
+      "sha256": "f0307bbbc176390b7979c3a734982d785b7c925e2c8da0c6a0382ab221e4fd9f",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -11925,22 +11962,24 @@
       },
       "checker_id": "setconfig_runtime_rebinding_characterization",
       "defines_main": true,
-      "file_size_bytes": 4952,
+      "file_size_bytes": 5679,
       "hard_coded_branch_like_strings": [
         "candidate"
       ],
       "imported_local_modules": [],
       "imports_argparse": false,
       "imports_glyph_checker_context": false,
-      "invokes_git": false,
-      "invokes_subprocess": false,
-      "line_count": 114,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 129,
       "parse_error": null,
       "path": "tools/check_glyph_setconfig_runtime_rebinding_characterization.py",
       "potential_branch_identity_signals": [
         "candidate"
       ],
-      "potential_mutation_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.check_output"
+      ],
       "python_module": "tools.check_glyph_setconfig_runtime_rebinding_characterization",
       "referenced_repository_path_prefixes": [
         "HAL/pico/include/comms/NeoPixelBackend.hpp",
@@ -11956,7 +11995,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "e04442c0333e5e4c1df921e4b80633d0122145c8c74b2fcb50a36f7e6e0b7831",
+      "sha256": "1880f5177cd27b4a24a0519e7f527ee6a3bdca4b7766cbd5a8c148c300f359be",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

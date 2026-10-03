@@ -96,9 +96,9 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
     ]
   },
   "runway": {
-    "immediate_ready": 1,
-    "recorded_preauthorized": 13,
-    "mechanically_activatable_preauthorized": 2,
+    "immediate_ready": 2,
+    "recorded_preauthorized": 12,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -331,7 +331,7 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
     {
       "id": "GP-VAL-037",
       "title": "C020 candidate-phase governance",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-037-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -345,16 +345,15 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
       ],
       "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022–025; source evidence only, no new hardware acceptance. Independent current source/evidence review at 8b050cfa1c87b65823f464695ff425efba99ebb2, immutable 0118 algorithm step 5, exact F010 evidence snapshot 60614dae8150338160b3440aef6b275bf073fecf and 234-entry critical equality to B020/current canonical. Source specialist and fresh independent Curator reviewer required. Fresh live b4e7ad7d4f54ae5aeb06314c08e8e07a0fb19579, exact C020 actual-main failures/storage PASS, immutable 0151 lines515–531 and incorporated 0118/Frozen observations, complete current manifest seven-consumer inventory and read-only source review. Event receipt git-json:85c1ec43abffb737d080f19190b393c591b862ef:docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json; fresh independent val037_guard_review PASS required for adoption.",
       "dependencies_prerequisites": [
-        "Preserve the exact committed GP-CONFIG-020 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
-      ],
-      "substantive_authorization_rationale": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics. NEW independent Curator judgment names the exact accepted GP-CONFIG-010 integration baseline because complete critical-tree equality at B020/current canonical and immutable exact artifact PASS objectively authenticate that root; no C020 physical acceptance inheritance or new product policy. NEW independent Curator judgment resolves historical WebSerial scope versus actual-main PASS through an explicit authenticated campaign invocation and one load-bearing manifest entry, preserving legacy proofs, capability prohibitions and complete historical/current consumer validation. All seven directly coupled Configurator consumers and real-helper transaction consequences are finitely specified now; no new product or source behavior.",
-      "mechanical_activation_conditions": [
+        "Preserve the exact committed GP-CONFIG-020 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware.",
         "Strict DONE correspondence for GP-CONFIG-013 and GP-VAL-036, plus GP-CONFIG-010 exact accepted built/tested integration F 1c0ff22646729d26d45eacb4b8322c5baea7de48 (direct parent 22c639c31ea7006c18a29ec2693c8b18ff688ed4, tree cf5ba50e707d5c0a6b1728619718f28b2dceff93) and its preserved 791552-byte UF2 SHA-256 4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476. Authenticate GP-CONFIG-010 strict DONE and immutable Revision-2 evidence 60614dae8150338160b3440aef6b275bf073fecf:docs/calibration/fixtures/gp_config_010_integration_hardware_evidence_2026-09-23.json (SHA-256 5f87066df7a06a44340790237fcf3a1ec0adfc0f9a51cb46edb1c9d6dbc38a54), exact candidate/artifact PASS and empty gaps; complete critical-tree modes/types/blobs must equal that F at preserved B020 and current canonical. This exact F is the starting accepted critical chain defined below. Missing objective proof stays WAITING; contradiction invalidates. C020 is not an accepted hardware predecessor and needs no physical PASS before source-free GP-VAL-037 candidate-phase governance.",
         "GP-CONFIG-020 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-020 scope; expected full-aggregate failure does not bar candidate creation.",
         "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
         "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded.",
         " Authenticate actual pending opening b4e7ad7d4f54ae5aeb06314c08e8e07a0fb19579, immutable post-opening receipt 85c1ec43abffb737d080f19190b393c591b862ef:docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json and reviewed descendant adoption; freshly recheck exact C020 handoff and every original source/accepted-baseline objective prerequisite. This finite guard/consumer validation architecture is resolved authority, not an implementation PASS. No new substantive judgment or unreviewed metadata/source progression; missing objective evidence WAITING, contradiction invalidates."
       ],
+      "substantive_authorization_rationale": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics. NEW independent Curator judgment names the exact accepted GP-CONFIG-010 integration baseline because complete critical-tree equality at B020/current canonical and immutable exact artifact PASS objectively authenticate that root; no C020 physical acceptance inheritance or new product policy. NEW independent Curator judgment resolves historical WebSerial scope versus actual-main PASS through an explicit authenticated campaign invocation and one load-bearing manifest entry, preserving legacy proofs, capability prohibitions and complete historical/current consumer validation. All seven directly coupled Configurator consumers and real-helper transaction consequences are finitely specified now; no new product or source behavior.",
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
@@ -381,7 +380,7 @@ GP-VAL-037 guard applicability is resolved by the 2026-10-03 immutable Curator r
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7580,11 +7579,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":13,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-037","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 13; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-037, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -8610,3 +8609,5 @@ source requires syntax validation; no firmware build or hardware is required.
 Default live GitHub read failed DNS; identical permitted network retry verified
 canonical b4e7ad7 and immutable Planner 49528e before publication.
 No hardware, device, new owner decision, Nunchuk or root-cause claim is added.
+
+GP-VAL-037 was mechanically activated READY on 2026-10-03 from exact adopted `a8e249eb210b7cd1e010e27dee8f4c61f8fcb537` after independent source, critical-tree, original UF2/evidence, strict predecessor completion and clean candidate rechecks. Implementation is in progress; no completion or new hardware acceptance is claimed. Original mechanical conditions remain preserved as prerequisites.

@@ -18,6 +18,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from unittest import mock
 from pathlib import Path
 from typing import Any
 
@@ -722,6 +723,120 @@ def gp_config_010_historical_object_cases(module: Any) -> list[str]:
     return ["ISO-15-exact-config-010-selection-and-local-failure",
             "ISO-16-config-010-omission-substitution-bounded-closure-and-no-ref"]
 
+def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
+    """Actual adopted authority selects finite roots without the framework checker."""
+    import glyph_campaign_transition as campaign
+    from glyph_hardware_correspondence import CorrespondenceError
+
+    original_root, original_env = module.ROOT, module.EXECUTION_ENV
+    module.ROOT = RUNNER_PATH.resolve().parent.parent
+    consumers = {
+        "gp_config_012_button_mask_characterization": "check_glyph_gp_config012_button_mask_characterization.py",
+        "gp_config_013_usb_default_characterization": "check_glyph_gp_config013_usb_default_characterization.py",
+        "gp_config_010_integration_semantic_correspondence": "check_glyph_config_010_integration_semantic_correspondence.py",
+        "configurator_setconfig_transaction": "check_glyph_configurator_setconfig_transaction.py",
+        "current_config_persistence_recovery_research": "check_glyph_current_config_persistence_recovery_research.py",
+        "getconfig_raw_load_characterization": "check_glyph_getconfig_raw_load_characterization.py",
+        "setconfig_runtime_rebinding_characterization": "check_glyph_setconfig_runtime_rebinding_characterization.py",
+        "config_menu_invalid_state_characterization": "check_glyph_config_menu_invalid_state_characterization.py",
+        "checker_context": "check_glyph_checker_context.py",
+        "generated_source_contract": "check_glyph_generated_source_owned_generator_contract.py",
+        "generated_baseline_artifact": "check_glyph_generated_source_owned_baseline_artifact.py",
+        "artifact_install": "check_glyph_generated_source_owned_artifact_install.py",
+        "coordinate_native_contract": "check_glyph_coordinate_native_runtime_profile_contract.py",
+        "docs_agent_surface": "check_glyph_docs_agent_surface.py",
+        "campaign_webserial_source_authority": "check_glyph_runtime_config_webserial_device_write_source_authority.py",
+    }
+    expected = set(campaign.ROOTS)
+    # Authenticate the real source first. A test double below only observes calls
+    # and never replaces this positive or makes an invalid repository pass.
+    campaign.authenticate(module.ROOT)
+    catalog_path = module.ROOT / campaign.TRANSITIONS
+    if catalog_path.exists():
+        for record in json.loads(catalog_path.read_text())["accepted_transitions"]:
+            expected.update(record[key] for key in ("build", "parent", "review_commit", "evidence_commit", "integration"))
+    selected_entries = []
+    try:
+        for checker_id, filename in consumers.items():
+            selected = entry(checker_id)
+            selected["path"] = "tools/" + filename
+            selected["command"] = ["python3", selected["path"]]
+            if checker_id == "campaign_webserial_source_authority":
+                selected["command"].append("--campaign-transition")
+            selected_entries.append(selected)
+            with mock.patch.object(campaign, "authenticate", wraps=campaign.authenticate) as authenticated:
+                refs, roots = module.required_catalog([selected])
+                authenticated.assert_called_once_with(module.ROOT)
+            wanted = expected.copy()
+            wanted_refs = {}
+            if checker_id == "gp_config_010_integration_semantic_correspondence":
+                wanted.add(module.GP_CONFIG_010_HISTORICAL_CANDIDATE)
+            if checker_id == "generated_baseline_artifact":
+                identity = module.git_value("rev-parse", "--verify", "refs/heads/configurator^{commit}")
+                wanted.add(identity)
+                wanted_refs["refs/heads/configurator"] = identity
+            if roots != wanted or refs != wanted_refs:
+                raise AssertionError("campaign consumer finite catalog differs: " + checker_id)
+            for altered in ({**selected, "id": checker_id + "_lookalike"},
+                            {**selected, "command": selected["command"] + ["--unexpected"]}):
+                with mock.patch.object(campaign, "authenticate", side_effect=AssertionError("near-match authenticated")):
+                    if module.required_catalog([altered]) != ({}, set()):
+                        raise AssertionError("near-match consumer received catalog roots")
+        guard = selected_entries[-1]
+        with mock.patch.object(campaign, "authenticate", side_effect=CorrespondenceError("authority deliberately unavailable")):
+            try:
+                module.required_catalog([guard])
+            except CorrespondenceError:
+                pass
+            else:
+                raise AssertionError("campaign authentication failure became empty/accepted catalog")
+        # No framework entry is selected above. Conversely framework alone must
+        # not invoke campaign authority or select off-head C020 by proximity.
+        framework = entry("agent_framework")
+        framework["command"] = ["python3", "tools/check_glyph_agent_framework_docs.py"]
+        with mock.patch.object(campaign, "authenticate", side_effect=AssertionError("framework selected campaign")):
+            module.required_catalog([framework])
+        with tempfile.TemporaryDirectory(prefix="glyph-val037-catalog-closure-") as directory:
+            parent = Path(directory)
+            closure = {line.split(" ", 1)[0] for line in module.git_value(
+                "rev-list", "--objects", *sorted(expected)).splitlines()}
+            # Pack only selected immutable closures, never all refs or alternates.
+            # Accepted-phase roots can also descend from C. Remove every root
+            # that carries C for the omission control, retaining all other roots.
+            carrying_candidate = {identity for identity in expected
+                if module.git("merge-base", "--is-ancestor", campaign.C, identity).returncode == 0}
+            without_candidate = expected - carrying_candidate
+            for label, roots in (("complete", expected), ("omitted", without_candidate),
+                                 ("substituted", without_candidate | {campaign.B})):
+                clone = parent / label
+                clone.mkdir()
+                run_git(clone, "init", "-b", "catalog-test")
+                packed = subprocess.run(["git", "pack-objects", "--revs", "--stdout"],
+                    cwd=module.ROOT, input=("\n".join(sorted(roots)) + "\n").encode(),
+                    capture_output=True, check=True)
+                subprocess.run(["git", "index-pack", "--stdin"], cwd=clone,
+                    input=packed.stdout, capture_output=True, check=True)
+                if module.git_value("for-each-ref", "--format=%(refname)", cwd=clone):
+                    raise AssertionError("campaign closure imported a ref")
+                found = module.git("cat-file", "-e", campaign.C + "^{commit}", cwd=clone).returncode == 0
+                if found != (label == "complete"):
+                    raise AssertionError("campaign omission/substitution root identity failure: " + label)
+                if label == "complete":
+                    objects = set(module.git_value("cat-file", "--batch-all-objects", "--batch-check=%(objectname)", cwd=clone).splitlines())
+                    if objects != closure:
+                        raise AssertionError("campaign transfer exceeded or missed exact selected closure")
+                    for identity in expected:
+                        if module.git_value("rev-parse", identity + "^{commit}", cwd=clone) != identity:
+                            raise AssertionError("campaign exact root absent in reduced repository")
+                    if any(line.startswith("?") for line in module.git_value(
+                            "rev-list", "--objects", "--missing=print", *sorted(expected), cwd=clone).splitlines()):
+                        raise AssertionError("campaign reduced closure missing an object")
+    finally:
+        module.ROOT, module.EXECUTION_ENV = original_root, original_env
+    return ["ISO-17-campaign-exact-consumer-before-framework-selection",
+            "ISO-18-campaign-authority-failure-and-near-match-rejection",
+            "ISO-19-campaign-reduced-closure-omission-substitution-no-ref"]
+
 def main() -> int:
     module = load_runner()
     passed: list[str] = []
@@ -1022,7 +1137,7 @@ def main() -> int:
             module.census_freshness = original_census_freshness
         needle = f"unclassified strong-signal checker: {omitted['path']}"
         if result != 1 or needle not in text:
-            raise AssertionError("strong-signal checker absent from manifest/exclusions was accepted")
+            raise AssertionError("strong-signal omission probe did not reach expected rejection: " + text)
         exclusions.append(omitted)
         probe.write_text(json.dumps(actual_manifest), encoding="utf-8")
         # Use a disposable minimal manifest for the synthetic probes; the
@@ -1109,8 +1224,14 @@ def main() -> int:
         passed.append("AGG-12-census-freshness-added-removed-renamed-byte-drift")
 
     passed.extend(isolation_contract_cases(module))
-    passed.extend(topology_catalog_cases(module))
-    passed.extend(gp_config_010_historical_object_cases(module))
+    # The old synthetic repositories exercise only the pre-campaign catalog.
+    # They contain no adopted campaign authority and must not impersonate it.
+    import glyph_campaign_transition as campaign
+    with mock.patch.object(campaign, "ROOTS", frozenset()), mock.patch.object(
+            campaign, "authenticate", side_effect=lambda root: {"test_only_legacy_catalog": str(root)}):
+        passed.extend(topology_catalog_cases(module))
+        passed.extend(gp_config_010_historical_object_cases(module))
+    passed.extend(gp_val037_campaign_catalog_cases(module))
 
     if set(REQUIRED) != set(entry("schema_probe")):
         raise AssertionError("adversarial manifest entry no longer matches the runner schema")

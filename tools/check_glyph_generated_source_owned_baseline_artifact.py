@@ -463,7 +463,12 @@ def main() -> int:
     branch = validate_branch()
     fixture = load_json_object(FIXTURE)
     validate_fixture(fixture)
-    validate_changed_paths(changed_paths(branch))
+    paths = changed_paths(branch)
+    from glyph_checker_context import collect_checker_context, authenticated_campaign_context
+    context = collect_checker_context(repo_root=REPO_ROOT)
+    authenticated = authenticated_campaign_context(context)
+    removed = context.changed_paths - authenticated.changed_paths
+    validate_changed_paths(paths - removed)
     validate_identity_header_includes_generated_baseline()
     validate_not_included_by_ultimate()
     validate_manifest_classification(load_json_object(MANIFEST))

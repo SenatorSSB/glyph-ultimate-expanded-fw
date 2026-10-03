@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import copy
 import hashlib
+
+from glyph_campaign_transition import verify_current_source
 import json
 import re
 import subprocess
@@ -758,7 +760,10 @@ def source_bytes(root: Path = ROOT) -> dict[str, bytes]:
     for path in SOURCE_IDENTITIES:
         file = root / path
         require(file.is_file() and not file.is_symlink(), f"source must remain regular: {path}")
-        result[path] = file.read_bytes()
+        # Historical step positions stay rooted in the accepted 005 body.
+        # The separate current coverage proof below uses actual current bytes.
+        result[path] = (verify_current_source(root, path, SOURCE_OVERLAYS[path][2])
+                        if path in SOURCE_OVERLAYS else file.read_bytes())
     return result
 
 
@@ -919,8 +924,49 @@ def validate_git_sources(root: Path = ROOT) -> None:
     require(actual == {p: ("100644", "blob", blob) for p, (blob, _) in SOURCE_IDENTITIES.items()},
             "immutable repository base source objects unavailable or drifted")
     for path, (_, blob, _) in SOURCE_OVERLAYS.items():
-        observed = subprocess.check_output(["git", "hash-object", "--", path], cwd=root, text=True).strip()
+        data = verify_current_source(root, path, SOURCE_OVERLAYS[path][2])
+        observed = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
         require(observed == blob, f"current source overlay Git blob drifted: {path}")
+
+
+def current_step_coverage(value: dict, historical: dict[str, bytes]) -> list[dict]:
+    """Prove current positions separately; never rewrite frozen current_steps."""
+    result = []
+    positions = {}
+    for row in value["current_steps"]:
+        path = row["source"]
+        text = (ROOT / path).read_text(encoding="utf-8")
+        begin = text.index(row["function_start"])
+        end = text.index(row["function_end"], begin) if row["function_end"] else len(text)
+        position = text.find(row["fragment"], positions.get(row["group"], begin), end)
+        require(position >= 0, f"current ordered operation missing: {row['id']}")
+        positions[row["group"]] = position + len(row["fragment"])
+        result.append({"id": row["id"], "source": path,
+                       "line_start": text[:position].count("\n") + 1,
+                       "line_end": text[:position + len(row["fragment"])].count("\n") + 1})
+    path = "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+    current = (ROOT / path).read_bytes()
+    old = historical[path]
+    if current != old:
+        # Authentication validates the complete candidate contract, not just
+        # these fragments. This is its distinct current insertion coverage.
+        require(verify_current_source(ROOT, path, SOURCE_OVERLAYS[path][2]) == old,
+                "historical/current transition mismatch")
+        text = current.decode("utf-8")
+        insertion = '    if (!validate_config_button_bindings(candidate)) {\n'
+        require(text.count(insertion) == 1, "unique current validation insertion")
+        validation = text.index(insertion)
+        require(text.index("pb_decode(&istream, Config_fields, &candidate)") < validation <
+                text.index("candidate.default_backend_config >") <
+                text.index("persistence.SaveConfig(candidate)") < text.index("_config = candidate;"),
+                "current decode/validation/reference/save/publication order")
+        result.append({"id": "gp_config020_binding_validation", "source": path,
+                       "line_start": text[:validation].count("\n") + 1,
+                       "line_end": text[:text.index("\n    }", validation)].count("\n") + 1})
+        require(any(row["line_start"] != original["line_start"]
+                    for row, original in zip(result, value["current_steps"])
+                    if row["source"] == path), "current shifted positions not proved")
+    return result
 
 
 def coverage(value: dict) -> str:
@@ -1036,14 +1082,27 @@ def adversarial(value: dict, sources: dict[str, bytes]) -> int:
     return len(tests) + 5
 
 
+
+def verify_frozen_fixture() -> None:
+    """Retain every historical observation, including fields not used below."""
+    historical = subprocess.check_output([
+        "git", "show",
+        "3dac79dac4eefcf832510817e8cb5ecd6a27f219:" + FIXTURE.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT)
+    require(FIXTURE.is_file() and not FIXTURE.is_symlink() and
+            FIXTURE.read_bytes() == historical, "frozen historical fixture changed")
+
 def main() -> int:
     try:
+        verify_frozen_fixture()
         value = load_text(FIXTURE.read_text(encoding="utf-8"))
         sources = source_bytes()
         validate(value, sources)
         validate_git_sources()
         validate_doc(DOC.read_text(encoding="utf-8"), value)
         count = adversarial(value, sources)
+        print("historical_current_steps=FROZEN current_step_coverage=" +
+              json.dumps(current_step_coverage(value, sources), sort_keys=True, separators=(",", ":")))
         print(f"glyph_current_config_persistence_recovery_research: PASS; {len(STEP_IDENTITIES)} ordered steps; "
               f"{len(BLOB_IDENTITIES)} immutable upstream blobs; {count} negative cases; H1 research only")
         return 0

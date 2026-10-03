@@ -15,6 +15,7 @@ from glyph_checker_context import (
     CheckerContextError,
     CheckerContext,
     collect_checker_context,
+    authenticated_campaign_context,
     validate_feature_scope,
 )
 
@@ -557,7 +558,7 @@ def validate_surface_scope(context: CheckerContext) -> None:
 
 def main() -> int:
     try:
-        context = collect_checker_context(repo_root=REPO_ROOT)
+        context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))
         validate_surface_scope(context)
     except CheckerContextError as exc:
         fail(str(exc))

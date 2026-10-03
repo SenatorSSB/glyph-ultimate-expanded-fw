@@ -22,6 +22,7 @@ from glyph_checker_context import (
     DEFAULT_PROTECTED_PREFIXES,
     CheckerContextError,
     collect_checker_context,
+    authenticated_campaign_context,
     validate_feature_scope,
 )
 
@@ -1656,7 +1657,7 @@ def main() -> int:
         print(f"- export package: {rel(OFFLINE_EXPORT_PACKAGE_FIXTURE)}")
         return 0
     try:
-        context = collect_checker_context(repo_root=REPO_ROOT)
+        context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))
         validate_feature_scope(
             context,
             allowed_paths=("docs/runtime_config/", "docs/export/", "docs/agent_framework/", "docs/project/ACTIVE_AGENT_QUEUE.md", "docs/AGENT_CONTEXT.md", "docs/CURRENT_STATE.md", "docs/ROADMAP.md", "tools/", ".github/workflows/build.yml", "AGENTS.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"),

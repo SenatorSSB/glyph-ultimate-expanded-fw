@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import hashlib
+
+from glyph_campaign_transition import verify_current_source
 import json
 import re
 import shutil
@@ -97,13 +99,14 @@ def validate_source(value: dict[str, object]) -> None:
         require(path not in seen, f"duplicate production/dependency path: {path}")
         seen.add(path)
         file = regular(path)
-        require(sha256(file) == item["sha256"], f"source/dependency SHA-256 drift: {path}")
+        historical = verify_current_source(ROOT, path, item["sha256"])
         blob = subprocess.run(["git", "rev-parse", f"{BASE}:{path}"], cwd=ROOT,
                               capture_output=True, text=True)
         require(blob.returncode == 0 and blob.stdout.strip() == item["blob"],
                 f"source/dependency Git blob drift: {path}")
-        text = file.read_text(encoding="utf-8", errors="strict")
+        text = historical.decode("utf-8", errors="strict")
         for anchor in item["anchors"]:
+            require(anchor in file.read_text(encoding="utf-8"), f"current source anchor missing: {anchor}")
             require(anchor in text, f"source anchor missing: {path}: {anchor}")
 
     p014 = json.loads(regular(P014.relative_to(ROOT).as_posix()).read_text(encoding="utf-8"),
@@ -298,8 +301,19 @@ def validate_adversarial_identity() -> None:
         else: raise ContractError("substituted dependency negative was accepted")
 
 
+
+def verify_frozen_fixture() -> None:
+    """Retain every historical observation, including fields not used below."""
+    historical = subprocess.check_output([
+        "git", "show",
+        "3dac79dac4eefcf832510817e8cb5ecd6a27f219:" + FIXTURE.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT)
+    require(FIXTURE.is_file() and not FIXTURE.is_symlink() and
+            FIXTURE.read_bytes() == historical, "frozen historical fixture changed")
+
 def main() -> int:
     try:
+        verify_frozen_fixture()
         value = read_fixture()
         validate_source(value)
         validate_adversarial_identity()
@@ -310,8 +324,9 @@ def main() -> int:
             require(sanitized == output, "sanitized/ordinary harness observations differ")
         print("GP-CONFIG-013 exact-source host characterization PASS")
         print(output, end="")
+        print("historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED")
         return 0
-    except (ContractError, KeyError, OSError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
+    except (ContractError, KeyError, OSError, subprocess.SubprocessError, ValueError) as exc:
         print(f"GP-CONFIG-013 characterization FAIL: {exc}")
         return 1
 

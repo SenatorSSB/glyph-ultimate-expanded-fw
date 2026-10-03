@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import hashlib
+
+from glyph_campaign_transition import verify_current_source
 import json
 from pathlib import Path
 import subprocess
@@ -35,9 +37,9 @@ def load() -> dict:
 def validate_sources(value: dict) -> None:
     for record in value["production_sources"]:
         path = ROOT / record["path"]
-        require(hashlib.sha256(path.read_bytes()).hexdigest() == record["sha256"], f"source drift: {record['path']}")
-        text = path.read_text(encoding="utf-8")
+        text = verify_current_source(ROOT, record["path"], record["sha256"]).decode("utf-8")
         for anchor in record["anchors"]:
+            require(anchor in path.read_text(encoding="utf-8"), f"current source anchor missing: {anchor}")
             require(anchor in text, f"missing anchor: {record['path']}:{anchor}")
     text = HARNESS.read_text(encoding="utf-8")
     for include in [
@@ -54,8 +56,19 @@ def run_case(binary: Path, name: str) -> tuple[int, str, str]:
     completed = subprocess.run([str(binary), name], cwd=ROOT, capture_output=True, text=True, check=False)
     return completed.returncode, completed.stdout, completed.stderr
 
+
+def verify_frozen_fixture() -> None:
+    """Retain every historical observation, including fields not used below."""
+    historical = subprocess.check_output([
+        "git", "show",
+        "3dac79dac4eefcf832510817e8cb5ecd6a27f219:" + FIXTURE.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT)
+    require(FIXTURE.is_file() and not FIXTURE.is_symlink() and
+            FIXTURE.read_bytes() == historical, "frozen historical fixture changed")
+
 def main() -> int:
     try:
+        verify_frozen_fixture()
         value = load()
         validate_sources(value)
         with tempfile.TemporaryDirectory(prefix="glyph-config-menu-host-") as temp:
@@ -76,6 +89,7 @@ def main() -> int:
                 print(f"case={name} result=SANITIZER_FAILURE")
         print("production_sources=16 translation_units=3 result=PASS")
         print("glyph_config_menu_invalid_state_characterization: PASS; 5 cases; H1 host-only")
+        print("historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED")
         return 0
     except (OSError, subprocess.SubprocessError, ContractError, KeyError, TypeError, ValueError) as exc:
         print(f"glyph_config_menu_invalid_state_characterization: FAIL: {exc}")

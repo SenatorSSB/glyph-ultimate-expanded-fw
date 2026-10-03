@@ -64,6 +64,9 @@ class COBSPrint : public Print {
 
 }  // namespace packetio
 
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+#include "../../gp_config012_button_host/generated/config.pb.h"
+#else
 using pb_size_t = size_t;
 
 enum Command {
@@ -150,6 +153,17 @@ inline constexpr int DeviceInfo_msg = 0;
 #define Config_fields (&Config_msg)
 #define DeviceInfo_fields (&DeviceInfo_msg)
 
+#endif
+#ifdef GLYPH_ACTUAL_BUTTON_VALIDATOR
+#undef Config_fields
+#undef DeviceInfo_fields
+inline constexpr int host_config_descriptor = 0;
+inline constexpr int host_device_descriptor = 0;
+#define Config_fields (&host_config_descriptor)
+#define DeviceInfo_fields (&host_device_descriptor)
+struct pb_istream_s { const char *errmsg; };
+struct pb_ostream_s { size_t bytes_written; };
+#else
 struct pb_istream_t {
     const char *errmsg;
 };
@@ -157,6 +171,8 @@ struct pb_istream_t {
 struct pb_ostream_t {
     size_t bytes_written;
 };
+
+#endif
 
 pb_istream_t as_pb_istream(Stream &stream);
 pb_ostream_t as_pb_ostream(Print &output);

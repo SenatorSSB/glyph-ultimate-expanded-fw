@@ -284,3 +284,40 @@ complete toolchain/dependency resolution, or a new hardware PASS.
 Run the focused model tests with
 `python3 tools/test_glyph_hardware_correspondence.py`, together with the operator,
 agent-surface and ordinary affected repository validators.
+
+## GP-VAL-037 finite C020 campaign
+
+`glyph_campaign_transition.authenticate` is a separate semantic proof. The legacy
+`verify_correspondence` API remains strict: new critical source never inherits
+GP-CONFIG-010 hardware acceptance. The immutable 0118/0151 adoption, exact C020
+handoff, accepted-baseline receipt and guard-applicability receipt bind this lane.
+The candidate, direct parent, tree and complete recursive raw inventory are
+literal identities. The only production delta is the reviewed validator header,
+implementation and exact Configurator insertion; all other critical entries,
+28-table/X1 source and frozen decoder/schema remain unchanged.
+
+The proof reports `BASELINE`, `CANDIDATE_VALIDATION_ONLY`, or
+`ACCEPTED_TRANSITION`. Candidate compositions retain C020 as an ancestor and use
+exact candidate host bytes. Only authenticated critical entries are removed from
+scope checking; unknown paths, modes, aliases and dirty critical inputs fail.
+The explicit WebSerial `--campaign-transition` main checks the full unfiltered
+inventory for capability/flashing markers. Legacy Step15 remains separate.
+
+The initially empty `gp_val037_accepted_transitions.json` is not PASS evidence.
+A later record contains exactly work_order, candidate, build, parent, tree,
+review_commit, evidence_commit and integration. Only the literal adopted C020
+contract is implemented. The consumer reserves the closed 020/014/017 order set;
+014/017 remain rejected until their separately authorized literal contracts exist.
+Each accepted record must prove preserved C ancestry, actual F direct parent/tree,
+C-to-F strict critical correspondence, exact independent review recorded in the
+immutable queue, native processor PASS and empty gaps for F/artifact, and reviewed
+integration ancestry. The native artifact locator contract remains mandatory;
+actual UF2 custody and rehash remain the separate build/operator gate. Synthetic
+records used in disposable tests never become repository evidence.
+
+Original seven characterization fixtures remain byte-frozen. Separate current
+proofs authenticate the reviewed insertion and unchanged observed bodies. Current
+transaction and raw GET translation units compile the actual helper against the
+frozen generated Config schema. Historical line coverage and observations remain
+separate. GP-CONFIG-010 keeps its legacy patch digest; a pinned full-index digest
+and exact blob/mode/patch-body comparison handles only Git abbreviation variance.

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import hashlib
+
+from glyph_campaign_transition import verify_current_source
 import json
 import re
 import shutil
@@ -175,9 +177,12 @@ def validate_source(value: dict[str, object]) -> tuple[str, dict[str, str]]:
     texts: dict[str, str] = {}
     for item in sources:
         path = regular(ROOT, item["path"])
-        require(sha256(path) == item["sha256"], f"production source drift: {item['path']}")
-        text = path.read_text(encoding="utf-8")
+        # Authenticate the current transition separately; these frozen producer
+        # observations describe B020, while the unchanged mask bodies below
+        # are compiled from the current checkout.
+        text = verify_current_source(ROOT, item["path"], item["sha256"]).decode("utf-8")
         for anchor in item["anchors"]:
+            require(anchor in path.read_text(encoding="utf-8"), f"current source anchor missing: {anchor}")
             require(anchor in text, f"production source anchor missing: {item['path']}: {anchor}")
         texts[item["path"]] = text
     helper = texts[SOURCE_PATHS[0]]
@@ -358,8 +363,19 @@ def validate_fixture(value: dict[str, object]) -> None:
             "injected enum matrix drift")
 
 
+
+def verify_frozen_fixture() -> None:
+    """Retain every historical observation, including fields not used below."""
+    historical = subprocess.check_output([
+        "git", "show",
+        "3dac79dac4eefcf832510817e8cb5ecd6a27f219:" + FIXTURE.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT)
+    require(FIXTURE.is_file() and not FIXTURE.is_symlink() and
+            FIXTURE.read_bytes() == historical, "frozen historical fixture changed")
+
 def main() -> int:
     try:
+        verify_frozen_fixture()
         value = json.loads(regular(ROOT, FIXTURE.relative_to(ROOT).as_posix()).read_text(encoding="utf-8"),
                            object_pairs_hook=pairs)
         validate_fixture(value)
@@ -381,6 +397,7 @@ def main() -> int:
         print(output, end="")
         print("sanitizer enum-read and shift cases: PASS; caller reachability: 4/4")
         print("glyph_gp_config012_button_mask_characterization: PASS; exact 0.4.9.2 closure; H1 host only")
+        print("historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED")
         return 0
     except (OSError, subprocess.SubprocessError, ContractError, KeyError, TypeError, ValueError) as exc:
         print(f"glyph_gp_config012_button_mask_characterization: FAIL: {exc}")
