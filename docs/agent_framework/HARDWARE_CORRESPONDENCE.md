@@ -306,6 +306,12 @@ scope checking; unknown paths, modes, aliases and dirty critical inputs fail.
 The explicit WebSerial `--campaign-transition` main checks the full unfiltered
 inventory for capability/flashing markers. Legacy Step15 remains separate.
 
+In the accepted phase, shared scope views may also remove only the exact C020
+protocol, evidence and present result file after their regular-file modes and
+current bytes match the immutable processor snapshot. The protocol must also
+match the independent review snapshot. Candidate and baseline phases receive no
+result-file exemption. Content and flashing scans retain the full inventory.
+
 The initially empty `gp_val037_accepted_transitions.json` is not PASS evidence.
 A later record contains exactly work_order, candidate, build, parent, tree,
 review_commit, evidence_commit and integration. Only the literal adopted C020

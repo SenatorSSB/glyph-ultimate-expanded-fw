@@ -250,9 +250,31 @@ def campaign_protected_scope_tests() -> None:
             path.write_text("unexpected metadata alias\n")
             all_mains("unclassified")
             path.unlink()
+        # Accepted phase must prove each exact result path before scope removal.
+        from glyph_campaign_transition import authenticate
+        metadata = authenticate(root)['accepted_metadata_paths']
+        for relative in sorted(metadata):
+            path = root / relative
+            original, mode = path.read_bytes(), path.stat().st_mode
+            try:
+                path.write_bytes(original + b"\nsubstituted accepted metadata\n")
+                all_mains("substitution")
+            finally:
+                path.write_bytes(original)
+            try:
+                path.chmod(mode | 0o111)
+                all_mains("regular")
+            finally:
+                path.chmod(mode)
+            alias = root / (relative + ".bak")
+            try:
+                alias.write_bytes(original)
+                all_mains("unclassified")
+            finally:
+                alias.unlink()
         if output(root, "status", "--porcelain", "--untracked-files=all"):
             raise AssertionError("five-scope tests left dirty composition")
-    print("campaign_five_scope_actual_mains: PASS; five authenticated candidate positives; "
+    print("campaign_five_scope_actual_mains: PASS; five authenticated composed-phase positives; "
           "protected source, executable mode, unknown metadata and alias negatives per main")
 
 

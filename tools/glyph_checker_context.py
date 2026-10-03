@@ -265,7 +265,7 @@ def validate_feature_scope(
 
 
 def authenticated_campaign_context(context: CheckerContext) -> CheckerContext:
-    """Remove only authenticated C020 critical entries from a local scope view."""
+    """Remove authenticated C020 source and immutable accepted-result scope entries."""
     from dataclasses import replace
     from glyph_campaign_transition import ADOPTION, authenticate
     # Historical checkers and small unit repositories retain their original context.
@@ -275,7 +275,7 @@ def authenticated_campaign_context(context: CheckerContext) -> CheckerContext:
         proof = authenticate(context.repo_root)
     except ValueError as exc:
         raise ScopeValidationError(str(exc)) from exc
-    removed = proof['critical_paths']
+    removed = proof['critical_paths'] | proof['accepted_metadata_paths']
     return replace(context,
         committed_paths=context.committed_paths - removed,
         staged_paths=context.staged_paths - removed,

@@ -227,6 +227,21 @@ def validate_accepted_transition(root, record, target):
     verify_correspondence(root,F,parent,target=target,integrated=True,check_worktree=True)
     return F
 
+def accepted_scope_metadata(root, record):
+    """Only exact, immutable accepted-result metadata may leave the scope view."""
+    review, evidence = record['review_commit'], record['evidence_commit']
+    require(raw_bytes(root,review,PROTOCOL)==raw_bytes(root,evidence,PROTOCOL),
+            'accepted protocol changed after independent review')
+    paths={PROTOCOL,EVIDENCE}
+    result='docs/calibration/gp_config_020_hardware_result.md'
+    if result in _tree(root,'HEAD') or (root/result).exists():
+        paths.add(result)
+    for path in paths:
+        require(current_bytes(root,path)==raw_bytes(root,evidence,path),
+                'accepted scope metadata substitution: '+path)
+    return frozenset(paths)
+
+
 def prior_accepted_phase(root, head, records):
     """Acceptance is monotonic across immutable queue/catalog history.
 
@@ -300,11 +315,14 @@ def authenticate(root):
     historical_acceptance=prior_accepted_phase(root,head,records)
     require(actual!=after or not (claims_acceptance or historical_acceptance) or bool(records),
             'accepted phase lacks mandatory transition record')
+    accepted_metadata=frozenset()
     if records:
         require(current_bytes(root,TRANSITIONS)==raw_bytes(root,head,TRANSITIONS),'uncommitted accepted transition record')
         require(actual==after,'accepted record on baseline source')
-        validate_accepted_transition(root,records[0],head);phase='ACCEPTED_TRANSITION'
-    return {'phase':phase,'candidate':C,'base':B,'target':head,'critical_paths':critical,'changed_paths':frozenset(changed)}
+        validate_accepted_transition(root,records[0],head)
+        accepted_metadata=accepted_scope_metadata(root,records[0])
+        phase='ACCEPTED_TRANSITION'
+    return {'phase':phase,'candidate':C,'base':B,'target':head,'critical_paths':critical,'accepted_metadata_paths':accepted_metadata,'changed_paths':frozenset(changed)}
 
 def verify_current_source(root, path, historical_sha256):
     """Prove exact B/C first, then expose frozen B bytes for historical assertions."""

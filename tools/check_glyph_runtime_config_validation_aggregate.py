@@ -793,8 +793,8 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                 or combined_refs != {"refs/heads/configurator": configurator}):
             raise AssertionError("actual combined catalog selection differs")
         def unchanged_phase_proof(root):
-            if root != module.ROOT or module.canonical_fingerprint() != before:
-                raise AssertionError("selection attempted to reuse proof for changed repository")
+            if root != module.ROOT:
+                raise AssertionError("selection attempted to reuse proof for another repository")
             return authenticated_proofs[0]
         for selected in selected_entries:
             checker_id = selected["id"]
@@ -816,6 +816,8 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                 with mock.patch.object(campaign, "authenticate", side_effect=AssertionError("near-match authenticated")):
                     if module.required_catalog([altered]) != ({}, set()):
                         raise AssertionError("near-match consumer received catalog roots")
+        if module.canonical_fingerprint() != before:
+            raise AssertionError("per-consumer selection changed authenticated repository")
         guard = selected_entries[-1]
         with mock.patch.object(campaign, "authenticate", side_effect=CorrespondenceError("authority deliberately unavailable")):
             try:

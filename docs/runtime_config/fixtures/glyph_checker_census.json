@@ -1197,7 +1197,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 24534,
+      "file_size_bytes": 25445,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1223,7 +1223,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 476,
+      "line_count": 498,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1284,7 +1284,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "ba97f1f4c9c606062578a903fde7a56df16ca78df708c377017a3e0cab1b96f9",
+      "sha256": "e6dc96c4fcad931933c21b19de92a6453f017460cdb89651b3d086a04dca0898",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -11405,7 +11405,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 88734,
+      "file_size_bytes": 88835,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -11436,7 +11436,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1480,
+      "line_count": 1482,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -11507,7 +11507,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "272543cc7dac99ebfab5f0b505e0c6a11b8861a1b5a84fa3b184cf0389cfc4bd",
+      "sha256": "6210d32d3989711f5d5548c0ffeb5aa9df1694ba629e0151c102579f00d37dc3",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

@@ -241,6 +241,8 @@ def make_synthetic_accepted_fixture(directory: Path) -> tuple[Path, dict]:
         controller_model_revision='Synthetic test only',host_platform_adapter='Synthetic test only',
         update_method='No update performed',result='PASS',evidence_gaps=[])
     (root/campaign.EVIDENCE).write_text(json.dumps(template,indent=2)+'\n')
+    (root/'docs/calibration/gp_config_020_hardware_result.md').write_text(
+        '# SYNTHETIC TEST ONLY\nNo actual controller result; disposable validation fixture.\n')
     payload=fixture_commit(root,'synthetic evidence object after review')
     accepted=dict(review,status='HARDWARE_VALIDATED',hardware_result='PASS',hardware_evidence_dependency_satisfied=True,
         hardware_evidence_record='git-json:'+payload+':'+campaign.EVIDENCE)
