@@ -860,6 +860,25 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
                     carrying = {identity for identity in expected
                         if module.git("merge-base", "--is-ancestor", missing, identity).returncode == 0}
                     scenarios.append((label, expected - carrying, missing, False))
+                # At E, F is deliberately off-head. Processor and immutable
+                # payload roots still belong to every finite consumer's closed
+                # catalog, independent of framework selection. Remove every
+                # carrier so incidental ancestry cannot hide a missing root.
+                from glyph_c020_abi_repair_transition import PROCESSOR_R, BUILT_F
+                processor_roots = [('F', BUILT_F), ('R', PROCESSOR_R)]
+                for key in ('evidence_commit', 'evidence_root'):
+                    identity = proof.get(key)
+                    if identity is not None:
+                        processor_roots.append((key, identity))
+                for label, missing in processor_roots:
+                    if missing not in expected:
+                        raise AssertionError('authenticated processor root omitted: ' + label)
+                    carrying = {identity for identity in expected
+                        if module.git('merge-base', '--is-ancestor', missing, identity).returncode == 0}
+                    reduced = expected - carrying
+                    scenarios.append(('omitted-processor-' + label, reduced, missing, False))
+                    scenarios.append(('substituted-processor-' + label,
+                                      reduced | {candidate_base}, missing, False))
             for label, roots, checked_identity, should_exist in scenarios:
                 clone = parent / label
                 clone.mkdir()

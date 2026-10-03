@@ -1,9 +1,10 @@
-"""Finite adopted GP-VAL-043 proof; host/object evidence is never acceptance."""
+"""Finite adopted GP-VAL-043/044 proofs with separate processor and source phases."""
 from __future__ import annotations
 import hashlib
 import json
 import re
 import subprocess
+from dataclasses import dataclass
 from pathlib import Path
 import glyph_campaign_transition as original
 from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence
@@ -44,6 +45,41 @@ accepted_scope_metadata = original.accepted_scope_metadata
 MAPPING_SHA256 = '384ee809533060731f57843095b9642c1286a24f1afcce71d54f786b9eda8f8a'
 AUTHORITY_BLOBS = {'76cb953cd6bfe5398db11669f3d195175361700c': {'path': 'docs/planning/portfolio_20261003_1256.md', 'sha256': '7f82758bdf36f461e3ed2c43f3a089782f8fac40ef7b80158145b14a3ffadb93'}, '5a82aa06e116cb8c8580cee87a55f1ea98f406cb': {'path': 'docs/project/ACTIVE_AGENT_QUEUE.md', 'sha256': 'e106153598a1357b28204f07068dbdfe94398400c5f488dd6a65417388571a0a'}, '0f7fe50b3b5f385397a9737bc4c0a50ddda683c8': {'path': 'docs/project/ACTIVE_AGENT_QUEUE.md', 'sha256': '5daec97e7ba3abfa35d189ba672d05ff29a2043a0b28c57ba93ff26ea0905ff5'}, 'c7bc3364b51959a47d1fa0ba7b11df2db2c46770': {'path': 'docs/project/ACTIVE_AGENT_QUEUE.md', 'sha256': 'e8e4370cb555c359c5955035eeee220a4f1fb326ab11e4f5ad9248ea36b8c797'}}
 
+PROCESSOR_RECEIPT = 'd9d1e72bb18a5e1dbdf05c829a1d11362893933f'
+PROCESSOR_ADOPTION = 'd2f78cd3a3fa38c60d04dab54236ee630ead379e'
+PROCESSOR_AUTHORITY = {
+    PROCESSOR_RECEIPT: '2660d3c629f16ea77b9872dba67bff40af57deddba49e1a7996fede7ffd0ae20',
+    PROCESSOR_ADOPTION: '262f93a44bd48553c002f9542d2bdd2e1476b51adf0da2d27507f6e327e27a97',
+}
+RESULT = 'docs/calibration/gp_config_020_hardware_result.md'
+PROCESSOR_PINS = dict(
+    review_commit='040735f6916c7a77924ef53f1b4a873281f2cb7f',
+    build='7db4f447d5e796367071b7143fa6c9274c70ae5e',
+    parent='de36d24422a67e8be7992217856c76e8420a71f6',
+    tree='4b5b63ce56219a508e2b71745438a609dd5661c3',
+    artifact_sha256='7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500',
+    artifact_size=796160,
+    protocol_sha256='ca6914ea8526e871760c7033a0b3df5aa1e07ba7e4c266cfbaa0aae5193a3421',
+    review_queue_sha256='2702f7a177a474fc9501cd930dd1deacfae51e3e9127f6c1a9d29d34ea5abac6',
+    evidence_sha256='39a3977fbbc0b4d2db4f1187eba7d233de5056faceae47b734b2068f26051d42',
+    result_sha256='9e69b3fc87366b9c61174df4a8c9865603ce95b295cbeaefcc9cbd81bf1f15d5',
+    authority_commit=PROCESSOR_RECEIPT, authority_adoption=PROCESSOR_ADOPTION)
+# Public roots remain finite literal identities, including off-ancestry build F.
+ROOTS |= frozenset((PROCESSOR_RECEIPT, PROCESSOR_ADOPTION,
+                   PROCESSOR_PINS['review_commit'], PROCESSOR_PINS['build'],
+                   PROCESSOR_PINS['parent']))
+PROCESSOR_R = PROCESSOR_PINS['review_commit']
+BUILT_F = PROCESSOR_PINS['build']
+
+
+@dataclass(frozen=True)
+class ProcessorRoots:
+    repository: str
+    pins: tuple
+
+    def values(self):
+        return dict(self.pins)
+
 def _sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
@@ -62,6 +98,7 @@ _PREFETCH_PATHS = (CRITICAL | HOSTS | PROOF_PATHS | frozenset(_DECODER_PATHS)
     | frozenset(original.RECEIPTS.values())
     | frozenset(('docs/planning/portfolio_20261003_1256.md',
                  _OLD_BASELINE_EVIDENCE, TRANSITIONS, original.TRANSITIONS)))
+_PREFETCH_PATHS |= frozenset((PROTOCOL, EVIDENCE, RESULT))
 
 
 def _parse_blob_batch(raw, identities):
@@ -233,6 +270,224 @@ def source_contract(root):
 F010 = original.F010
 B010 = original.B010
 
+
+@original._proof_invocation
+def processor_authority(root):
+    """Authenticate the immutable review and complete descendant READY order."""
+    _prefetch_blobs(root, [(ref, original.QUEUE) for ref in PROCESSOR_AUTHORITY])
+    for ref, digest in PROCESSOR_AUTHORITY.items():
+        require(_sha(raw_bytes(root, ref, original.QUEUE)) == digest,
+                'processor authority substitution: ' + ref)
+    require(_git(root, 'rev-list', '--parents', '-n', '1', PROCESSOR_RECEIPT).decode().split()
+            == [PROCESSOR_RECEIPT, PROCESSOR_PINS['review_commit']],
+            'processor receipt direct review parent mismatch')
+    require(ancestor(root, PROCESSOR_RECEIPT, PROCESSOR_ADOPTION),
+            'processor adoption lacks independent receipt')
+    text = raw_bytes(root, PROCESSOR_RECEIPT, original.QUEUE).decode()
+    start, end = '<!-- c020-processor-curation:start -->', '<!-- c020-processor-curation:end -->'
+    require(text.count(start) == text.count(end) == 1, 'processor authority marker drift')
+    block = text.split(start)[1].split(end)[0].strip()
+    require(block.startswith('```json\n') and block.endswith('\n```'), 'processor receipt fence drift')
+    receipt = json.loads(block[8:-4], object_pairs_hook=unique)
+    order = item(root, PROCESSOR_ADOPTION, 'GP-VAL-044')
+    require(receipt['schema_name'] == 'glyph_c020_processor_phase_authorization_review'
+            and type(receipt['schema_version']) is int and receipt['schema_version'] == 1
+            and receipt['subject_id'] == order['id'] == 'GP-VAL-044'
+            and receipt['disposition'] == order['status'] == 'READY'
+            and receipt['canonical_base'] == PROCESSOR_PINS['review_commit']
+            and receipt['tested_F'] == PROCESSOR_PINS['build']
+            and receipt['artifact_sha256'] == PROCESSOR_PINS['artifact_sha256']
+            and receipt['scope_sha256'] == _sha(order['scope'].encode()),
+            'processor authority/work-order coupling mismatch')
+    from check_glyph_agent_framework_docs import validate_work_order
+    validate_work_order(order, evidence_repo_root=Path(root))
+    prior = {x['id']: x for x in queue(root, PROCESSOR_RECEIPT)['items']}
+    adopted = {x['id']: x for x in queue(root, PROCESSOR_ADOPTION)['items']}
+    require(len(prior) == 96 and set(adopted) == set(prior) | {'GP-VAL-044'}
+            and all(adopted[key] == value for key, value in prior.items()),
+            'processor adoption changed prior work orders')
+    return frozenset(PROCESSOR_AUTHORITY)
+
+
+@original._proof_invocation
+def authenticate_processor_roots(root, pins=None):
+    """Structural proof accepts explicit immutable pins; production uses literals.
+
+    Explicit pins are a bounded test API. They do not enter authenticate(), the
+    campaign dispatcher, real catalogs, or the production object-root export.
+    """
+    root = Path(root).resolve()
+    pins = dict(PROCESSOR_PINS if pins is None else pins)
+    require(set(pins) == set(PROCESSOR_PINS), 'processor pin fields mismatch')
+    for key in ('review_commit', 'build', 'parent', 'tree', 'authority_commit', 'authority_adoption'):
+        require(isinstance(pins[key], str) and re.fullmatch('[0-9a-f]{40}', pins[key]),
+                'nonimmutable processor root: ' + key)
+    for key in ('artifact_sha256', 'protocol_sha256', 'review_queue_sha256',
+                'evidence_sha256', 'result_sha256'):
+        require(isinstance(pins[key], str) and re.fullmatch('[0-9a-f]{64}', pins[key]),
+                'malformed processor digest: ' + key)
+    require(type(pins['artifact_size']) is int and pins['artifact_size'] > 0,
+            'invalid processor artifact size')
+    require(pins['authority_commit'] == PROCESSOR_RECEIPT
+            and pins['authority_adoption'] == PROCESSOR_ADOPTION,
+            'unadopted processor authority roots')
+    processor_authority(root)
+    source_contract(root)
+    R, F, parent = (pins[key] for key in ('review_commit', 'build', 'parent'))
+    # The actual review predates044; explicit structural review fixtures must
+    # retain the actual adopted authority in their disposable history.
+    require(R == PROCESSOR_PINS['review_commit'] or ancestor(root, PROCESSOR_ADOPTION, R),
+            'structural review lacks separately adopted authority')
+    require(_sha(raw_bytes(root, R, original.QUEUE)) == pins['review_queue_sha256'],
+            'processor reviewed queue substitution')
+    require(_git(root, 'rev-list', '--parents', '-n', '1', F).decode().split() == [F, parent],
+            'processor F direct parent mismatch')
+    require(_git(root, 'rev-parse', F + '^{tree}').decode().strip() == pins['tree'],
+            'processor F tree mismatch')
+    require(ancestor(root, C_R, F) and ancestor(root, B_R, F),
+            'processor F lacks repaired candidate/governance ancestry')
+    verify_correspondence(root, C_R, B_R, target=F, integrated=True, check_worktree=False)
+    for path in HOSTS | PROOF_PATHS:
+        require(raw_bytes(root, F, path) == raw_bytes(root, C_R, path),
+                'processor F candidate host/proof substitution: ' + path)
+    require(not ancestor(root, F, R)
+            and critical_tree(root, R) == critical_tree(root, B_R),
+            'processor review contains candidate source')
+    verify_correspondence(root, F010, B010, target=R, integrated=True, check_worktree=False)
+    require(_sha(raw_bytes(root, R, PROTOCOL)) == pins['protocol_sha256'],
+            'processor protocol substitution')
+    review = item(root, R, 'GP-CONFIG-020')
+    require(review['status'] in {'REVIEW', 'HARDWARE_TEST_REQUIRED'}
+            and review['hardware_result'] is None
+            and review['candidate_git_sha'] == F
+            and review['candidate_base_configurator_sha'] == parent
+            and review['firmware_artifact_sha256'] == pins['artifact_sha256']
+            and review['manual_acceptance_protocol_reference'] == PROTOCOL,
+            'processor review identity/phase mismatch')
+    locator = f"local_backups/hardware-artifacts/{F}/{pins['artifact_sha256']}/firmware.uf2"
+    require(review['preserved_firmware_artifact_locator'] == locator,
+            'processor reviewed locator mismatch')
+    validate_build_review(raw_bytes(root, R, PROTOCOL).decode(), pins,
+                          pins['artifact_sha256'], locator)
+    size = re.findall(r'^- UF2 size: `([0-9]+)` bytes\s*$',
+                      raw_bytes(root, R, PROTOCOL).decode(), re.MULTILINE)
+    require(size == [str(pins['artifact_size'])], 'processor reviewed artifact size mismatch')
+    return ProcessorRoots(str(root), tuple(sorted(pins.items())))
+
+
+_PROCESSOR_IDENTITIES = (
+    'branch', 'candidate_git_sha', 'candidate_base_configurator_sha', 'firmware_artifact_sha256',
+    'preserved_firmware_artifact_locator', 'firmware_artifact_build_path',
+    'manual_acceptance_protocol_reference', 'manual_acceptance_protocol_version',
+    'hardware_evidence_contract_reference', 'hardware_evidence_contract_version')
+
+
+def _live_processor_item(raw):
+    text = raw.decode()
+    start, end = '<!-- queue-state:start -->', '<!-- queue-state:end -->'
+    require(text.count(start) == text.count(end) == 1, 'live processor queue marker drift')
+    block = text.split(start)[1].split(end)[0].strip()
+    require(block.startswith('```json') and block.endswith('```'), 'live processor queue fence drift')
+    states = json.loads(block[7:-3], object_pairs_hook=unique)['items']
+    states = [state for state in states if state['id'] == 'GP-CONFIG-020']
+    require(len(states) == 1, 'live processor queue order missing/duplicate')
+    return states[0]
+
+
+@original._proof_invocation
+def validate_processor_transition(root, record, target, *, structural_roots=None):
+    """Prove E using immutable native payloads before any source integration."""
+    root = Path(root).resolve()
+    proof = authenticate_processor_roots(root) if structural_roots is None else structural_roots
+    require(type(proof) is ProcessorRoots and proof.repository == str(root),
+            'processor roots belong to another repository')
+    pins = proof.values()
+    # Reauthenticate even explicit proofs; no stale invocation or hand-built
+    # dataclass can supply unproved pins.
+    require(authenticate_processor_roots(root, pins) == proof, 'processor roots substitution')
+    fields = {'work_order', 'candidate', 'build', 'parent', 'tree', 'review_commit', 'evidence_commit'}
+    require(type(record) is dict and set(record) == fields
+            and record['work_order'] == 'GP-CONFIG-020' and record['candidate'] == C_R,
+            'processor transition fields/candidate mismatch')
+    for key in fields - {'work_order', 'candidate'}:
+        require(isinstance(record[key], str) and re.fullmatch('[0-9a-f]{40}', record[key]),
+                'nonimmutable processor transition: ' + key)
+    require(all(record[key] == pins[key] for key in ('build', 'parent', 'tree', 'review_commit')),
+            'processor transition differs from authenticated roots')
+    R, E, F = record['review_commit'], record['evidence_commit'], record['build']
+    require(R != E and ancestor(root, R, E) and ancestor(root, E, target),
+            'processor review/E/target chronology mismatch')
+    require(ancestor(root, PROCESSOR_ADOPTION, E), 'processor E lacks adopted044 repair authority')
+    require(not ancestor(root, F, E) and critical_tree(root, E) == critical_tree(root, B_R),
+            'processor E integrated candidate source')
+    verify_correspondence(root, F010, B010, target=E, integrated=True, check_worktree=False)
+    for catalog in (original.TRANSITIONS, TRANSITIONS):
+        for snapshot in (R, E):
+            if catalog in _tree(root, snapshot):
+                require(_catalog(raw_bytes(root, snapshot, catalog)) == [],
+                        'processor review/E contains accepted integration catalog')
+    review, accepted = item(root, R, 'GP-CONFIG-020'), item(root, E, 'GP-CONFIG-020')
+    require(accepted['status'] == 'HARDWARE_VALIDATED' and accepted['hardware_result'] == 'PASS'
+            and accepted['hardware_evidence_gaps'] == []
+            and accepted['hardware_evidence_dependency_satisfied'] is True,
+            'processor E lacks complete native PASS')
+    for key in _PROCESSOR_IDENTITIES:
+        require(review[key] == accepted[key], 'processor review/E identity drift: ' + key)
+    reference = accepted['hardware_evidence_record']
+    if reference == 'repo-json:' + EVIDENCE:
+        evidence_root = E
+    else:
+        match = re.fullmatch(r'git-json:([0-9a-f]{40}):' + re.escape(EVIDENCE), str(reference))
+        require(match is not None, 'unsupported processor evidence reference')
+        evidence_root = match.group(1)
+        require(ancestor(root, R, evidence_root) and ancestor(root, evidence_root, E),
+                'processor payload outside review/E ancestry')
+    payload = raw_bytes(root, evidence_root, EVIDENCE)
+    require(_sha(payload) == pins['evidence_sha256']
+            and raw_bytes(root, E, EVIDENCE) == payload,
+            'processor immutable evidence substitution')
+    from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
+    immutable = dict(accepted, hardware_evidence_record='git-json:' + evidence_root + ':' + EVIDENCE)
+    validate_work_order(immutable, evidence_repo_root=root)
+    validate_evidence_record(immutable, evidence_repo_root=root)
+    evidence = json.loads(payload, object_pairs_hook=unique)
+    rows = [row['id'] for row in evidence['steps']]
+    require(len(rows) == 11 and set(rows) == {'Baseline', *(f'H{x}' for x in range(1, 11))},
+            'processor evidence required rows missing/duplicate')
+    require(raw_bytes(root, R, PROTOCOL) == raw_bytes(root, E, PROTOCOL),
+            'processor protocol changed after review')
+    result = raw_bytes(root, E, RESULT)
+    require(_sha(result) == pins['result_sha256'], 'processor immutable result substitution')
+    text = result.decode()
+    require(all(value in text for value in (
+        F, pins['tree'], pins['parent'], R, pins['artifact_sha256'], pins['protocol_sha256'],
+        review['preserved_firmware_artifact_locator'], 'HARDWARE_VALIDATED', 'PASS')),
+        'processor native result/tuple coupling mismatch')
+    current = item(root, target, 'GP-CONFIG-020')
+    require(current['status'] in {'HARDWARE_VALIDATED', 'DONE'} and current['hardware_result'] == 'PASS'
+            and current['hardware_evidence_gaps'] == []
+            and current['hardware_evidence_dependency_satisfied'] is True,
+            'processor PASS downgraded at target')
+    for key in (*_PROCESSOR_IDENTITIES, 'hardware_evidence_record'):
+        require(current[key] == accepted[key], 'processor accepted tuple drift: ' + key)
+    live_keys = (*_PROCESSOR_IDENTITIES, 'hardware_evidence_record', 'status', 'hardware_result',
+                 'hardware_evidence_gaps', 'hardware_evidence_dependency_satisfied')
+    # Queue docs may be edited, but live/index physical identity and acceptance
+    # never inherit authority from a different committed item.
+    head_state = item(root, _git(root, 'rev-parse', 'HEAD').decode().strip(), 'GP-CONFIG-020')
+    for raw in (current_bytes(root, original.QUEUE), _git(root, 'show', ':' + original.QUEUE)):
+        live = _live_processor_item(raw)
+        require(all(live[key] == head_state[key] for key in live_keys),
+                'live/index processor tuple or acceptance substitution')
+    for path, data in ((EVIDENCE, payload), (RESULT, result),
+                       (PROTOCOL, raw_bytes(root, R, PROTOCOL))):
+        require(raw_bytes(root, target, path) == data and current_bytes(root, path) == data,
+                'processor current metadata substitution: ' + path)
+    return dict(evidence_commit=E, evidence_root=evidence_root,
+                accepted_metadata_paths=frozenset((EVIDENCE, RESULT)),
+                object_roots=frozenset((R, F, pins['parent'], E, evidence_root,
+                                       PROCESSOR_RECEIPT, PROCESSOR_ADOPTION)))
+
 @original._proof_invocation
 def validate_accepted_transition(root, record, target):
     """Closed consumer: later014/017 need separately adopted literal contracts."""
@@ -244,6 +499,17 @@ def validate_accepted_transition(root, record, target):
     F=record['build']; parent=record['parent']
     for key in fields-{'work_order'}:
         value=record[key]; require(isinstance(value,str) and len(value)==40 and all(c in '0123456789abcdef' for c in value),'nonimmutable transition identity: '+key)
+    if ancestor(root, PROCESSOR_ADOPTION, target):
+        require(all(record[key] == PROCESSOR_PINS[key]
+                    for key in ('build', 'parent', 'tree', 'review_commit')),
+                'accepted transition differs from actual processor pins')
+        require(_catalog(raw_bytes(root, target, TRANSITIONS)) == [record]
+                and current_bytes(root, TRANSITIONS) == raw_bytes(root, target, TRANSITIONS),
+                'accepted transition lacks genuine committed catalog')
+        observations = processor_history(root, target, [], [record])
+        require(observations['processor'] is not None
+                and record['evidence_commit'] == observations['processor']['evidence_commit'],
+                'accepted transition replaced earliest processor E')
     require(_git(root,'rev-list','--parents','-n','1',F).decode().split()==[F,parent],'built F direct parent mismatch')
     require(_git(root,'rev-parse',F+'^{tree}').decode().strip()==record['tree'],'built F tree mismatch')
     require(ancestor(root,C_R,F) and ancestor(root,B_R,F),'built F omitted candidate/governance authority')
@@ -304,6 +570,7 @@ def validate_accepted_transition(root, record, target):
 def _history(root, head, old_records, repaired_records):
     """Check both catalogs over full original topology; no second parent is hidden."""
     accepted = False
+    introductions = {}
     revisions = _git(root, 'rev-list', '--reverse', '--topo-order',
                      original.ADOPTION + '..' + head).decode().split()
     requests = []
@@ -327,7 +594,78 @@ def _history(root, head, old_records, repaired_records):
                     require(previous == records and previous[0].get('candidate') == candidate,
                             'accepted transition history erased or substituted')
                     accepted = True
+                    if not any(ancestor(root, prior, revision)
+                               for prior in introductions.get(catalog_path, ())):
+                        introductions.setdefault(catalog_path, []).append(revision)
+            else:
+                previous = []
+            if any(ancestor(root, prior, revision) for prior in introductions.get(catalog_path, ())):
+                require(previous == records, 'accepted transition catalog deleted in history')
     return accepted
+
+
+@original._proof_invocation
+def processor_history(root, head, old_records, repaired_records, *, structural_roots=None):
+    """Authenticate every claim over full topology and retain the earliest E."""
+    root = Path(root).resolve()
+    roots = authenticate_processor_roots(root) if structural_roots is None else structural_roots
+    require(type(roots) is ProcessorRoots and roots.repository == str(root),
+            'history roots belong to another repository')
+    pins = roots.values()
+    revisions = _git(root, 'rev-list', '--reverse', '--topo-order',
+                     original.ADOPTION + '..' + head).decode().split()
+    requests = []
+    for revision in revisions:
+        inventory = _tree(root, revision)
+        requests.append((revision, original.QUEUE))
+        requests.extend((revision, path) for path in (original.TRANSITIONS, TRANSITIONS)
+                        if path in inventory)
+    _prefetch_blobs(root, requests)
+    earliest, integrated = None, False
+    introductions = {}
+    for revision in revisions:
+        state = item(root, revision, 'GP-CONFIG-020')
+        catalogs = {}
+        for path, expected, candidate in ((original.TRANSITIONS, old_records, original.C),
+                                         (TRANSITIONS, repaired_records, C_R)):
+            previous = _catalog(raw_bytes(root, revision, path)) if path in _tree(root, revision) else []
+            catalogs[path] = previous
+            if previous:
+                require(previous == expected and previous[0].get('candidate') == candidate,
+                        'accepted transition history erased or substituted')
+                integrated = True
+                if not any(ancestor(root, prior, revision) for prior in introductions.get(path, ())):
+                    introductions.setdefault(path, []).append(revision)
+            if any(ancestor(root, prior, revision) for prior in introductions.get(path, ())):
+                require(previous == expected, 'accepted transition catalog deleted in history')
+        claims = state['status'] in {'HARDWARE_VALIDATED', 'DONE'} or state['hardware_result'] == 'PASS'
+        if claims:
+            if earliest is None:
+                require(not any(catalogs.values()), 'integrated acceptance lacks earlier processor E')
+                record = dict(work_order='GP-CONFIG-020', candidate=C_R,
+                              **{key: pins[key] for key in ('build', 'parent', 'tree', 'review_commit')},
+                              evidence_commit=revision)
+                earliest = validate_processor_transition(root, record, revision, structural_roots=roots)
+            record = dict(work_order='GP-CONFIG-020', candidate=C_R,
+                          **{key: pins[key] for key in ('build', 'parent', 'tree', 'review_commit')},
+                          evidence_commit=earliest['evidence_commit'])
+            validate_processor_transition(root, record, revision, structural_roots=roots)
+            actual = critical_tree(root, revision)
+            if actual == critical_tree(root, B_R):
+                require(state['status'] == 'HARDWARE_VALIDATED' and not any(catalogs.values())
+                        and not ancestor(root, pins['build'], revision),
+                        'source-free processor claims integrated acceptance')
+            else:
+                require(actual == critical_tree(root, C_R) and ancestor(root, pins['build'], revision),
+                        'processor history source/ancestry mismatch')
+        elif earliest is not None and ancestor(root, earliest['evidence_commit'], revision):
+            require(False, 'processor history downgraded or erased PASS')
+    if earliest is not None:
+        record = dict(work_order='GP-CONFIG-020', candidate=C_R,
+                      **{key: pins[key] for key in ('build', 'parent', 'tree', 'review_commit')},
+                      evidence_commit=earliest['evidence_commit'])
+        validate_processor_transition(root, record, head, structural_roots=roots)
+    return dict(processor=earliest, integrated=integrated)
 
 
 @original._proof_invocation
@@ -338,12 +676,23 @@ def authenticate(root):
     for args in [('diff', '--name-only', '-z'), ('diff', '--cached', '--name-only', '-z'),
                  ('ls-files', '--others', '--exclude-standard', '-z')]:
         dirty.update(filter(None, _git(root, *args).decode().split('\0')))
+    # Ignores are not evidence authority. Reject ignored documentation inputs
+    # too; local artifact custody/build/cache roots retain their existing seam.
+    ignored = set(filter(None, _git(root, 'ls-files', '--others', '--ignored',
+                                   '--exclude-standard', '-z').decode().split('\0')))
+    dirty.update(path for path in ignored if path.split('/', 1)[0].casefold() == 'docs')
     require(dirty <= GOVERNANCE_PATHS, 'dirty path outside reviewed governance inventory')
     # Accepted metadata is immutable under the existing final correspondence proof.
     # Reject its live substitutions before expensive source validation. A catalog
     # here can only cause rejection; every successful call still authenticates it.
     accepted_literals = frozenset((PROTOCOL, EVIDENCE,
         'docs/calibration/gp_config_020_hardware_result.md', MAPPING))
+    committed_state = item(root, head, 'GP-CONFIG-020')
+    if (committed_state['status'] in {'HARDWARE_VALIDATED', 'DONE'}
+            or committed_state['hardware_result'] == 'PASS'):
+        require(not dirty & (accepted_literals | {TRANSITIONS, original.TRANSITIONS}),
+                'accepted metadata substitution or nonregular file mode: '
+                + repr(sorted(dirty & (accepted_literals | {TRANSITIONS, original.TRANSITIONS}))))
     if dirty & (accepted_literals | {TRANSITIONS, original.TRANSITIONS}):
         inventory = _tree(root, head)
         for catalog in (TRANSITIONS, original.TRANSITIONS):
@@ -351,8 +700,35 @@ def authenticate(root):
             if dirty & protected and catalog in inventory and _catalog(raw_bytes(root, head, catalog)):
                 require(False, 'accepted metadata substitution or nonregular file mode: '
                         + repr(sorted(dirty & protected)))
+    if (ancestor(root, PROCESSOR_ADOPTION, head)
+            and (committed_state['status'] in {'HARDWARE_VALIDATED', 'DONE'}
+                 or committed_state['hardware_result'] == 'PASS')):
+        # Cheap rejection checks precede the full authority/source/history
+        # proof. These checks cannot return a successful phase on their own.
+        require(committed_state['hardware_result'] == 'PASS'
+                and committed_state['hardware_evidence_dependency_satisfied'] is True
+                and committed_state['hardware_evidence_gaps'] == [],
+                'processor current PASS dependency/gaps mismatch')
+        reviewed = item(root, PROCESSOR_R, 'GP-CONFIG-020')
+        require(all(committed_state[key] == reviewed[key] for key in _PROCESSOR_IDENTITIES),
+                'processor current reviewed tuple mismatch')
+        live_keys = (*_PROCESSOR_IDENTITIES, 'hardware_evidence_record', 'status', 'hardware_result',
+                     'hardware_evidence_gaps', 'hardware_evidence_dependency_satisfied')
+        for raw in (current_bytes(root, original.QUEUE), _git(root, 'show', ':' + original.QUEUE)):
+            live = _live_processor_item(raw)
+            require(all(live[key] == committed_state[key] for key in live_keys),
+                    'live/index processor tuple or acceptance substitution')
+        for path, digest in ((EVIDENCE, PROCESSOR_PINS['evidence_sha256']),
+                             (RESULT, PROCESSOR_PINS['result_sha256']),
+                             (PROTOCOL, PROCESSOR_PINS['protocol_sha256'])):
+            immutable = raw_bytes(root, head, path)
+            require(_sha(immutable) == digest and current_bytes(root, path) == immutable,
+                    'processor current immutable metadata substitution: ' + path)
     require(ancestor(root, B_R, head), 'repaired campaign snapshot lacks adopted authority')
     before, old_after, after = source_contract(root)
+    # Fixed off-ancestry roots are exported even for historical repaired phases;
+    # authenticate them independently of current phase or catalog selection.
+    authenticate_processor_roots(root)
     delta = set(filter(None, _git(root, 'diff', '--no-renames', '--name-only', '-z', B_R, head).decode().split('\0')))
     require(delta <= GOVERNANCE_PATHS | CRITICAL | HOSTS,
             'unreviewed governance/host delta: ' + repr(sorted(delta - GOVERNANCE_PATHS - CRITICAL - HOSTS)))
@@ -392,14 +768,42 @@ def authenticate(root):
     state = item(root, head, 'GP-CONFIG-020')
     require(state['status'] != 'HARDWARE_FAILED' and state['hardware_result'] != 'FAIL', 'failed candidate cannot enter campaign phase')
     claims = state['status'] in {'HARDWARE_VALIDATED', 'DONE'} or state['hardware_result'] == 'PASS'
-    history = _history(root, head, old_records, repaired_records)
-    require(not (claims or history) or bool(records), 'accepted phase lacks mandatory transition record')
+    processor = None
+    adopted_processor = ancestor(root, PROCESSOR_ADOPTION, head)
+    if adopted_processor:
+        observations = processor_history(root, head, old_records, repaired_records)
+        processor = observations['processor']
+        require(not observations['integrated'] or bool(records),
+                'accepted phase lacks mandatory transition record')
+        require(not claims or processor is not None, 'processor claim lacks authenticated E')
+        require(processor is None or actual == before or bool(records),
+                'integrated processor acceptance lacks mandatory transition record')
+    else:
+        history = _history(root, head, old_records, repaired_records)
+        require(not (claims or history) or bool(records), 'accepted phase lacks mandatory transition record')
     accepted_metadata = frozenset()
     roots = set(ROOTS)
+    if processor is not None:
+        roots.update(processor['object_roots'])
+        if actual == before:
+            require(not records and state['status'] == 'HARDWARE_VALIDATED'
+                    and not ancestor(root, BUILT_F, head),
+                    'source-free processor cannot authorize source/catalog/DONE')
+            phase = 'SOURCE_FREE_PROCESSOR'
+            accepted_metadata = processor['accepted_metadata_paths']
     if records:
         require(current_bytes(root, catalog_path) == raw_bytes(root, head, catalog_path), 'uncommitted accepted transition record')
         require(actual != before, 'accepted record on baseline source')
         validate = validate_accepted_transition if candidate == C_R else original.validate_accepted_transition
+        if adopted_processor:
+            require(candidate == C_R and processor is not None
+                    and records[0]['review_commit'] == PROCESSOR_R
+                    and records[0]['evidence_commit'] == processor['evidence_commit']
+                    and all(records[0][key] == PROCESSOR_PINS[key]
+                            for key in ('build', 'parent', 'tree')),
+                    'integrated transition differs from authenticated processor E/tuple')
+            require(ancestor(root, processor['evidence_commit'], records[0]['integration']),
+                    'integrated transition omitted authenticated processor E')
         validate(root, records[0], head)
         accepted_metadata = accepted_scope_metadata(root, records[0])
         phase = 'ACCEPTED_TRANSITION'
@@ -408,6 +812,9 @@ def authenticate(root):
         match = re.fullmatch(r'git-json:([0-9a-f]{40}):' + re.escape(EVIDENCE), str(evidence_ref))
         if match:
             roots.add(match.group(1))
-    return {'phase': phase, 'contract': 'c020_abi_repair', 'candidate': candidate, 'base': base,
+    proof = {'phase': phase, 'contract': 'c020_abi_repair', 'candidate': candidate, 'base': base,
             'target': head, 'critical_paths': critical, 'accepted_metadata_paths': accepted_metadata,
             'changed_paths': frozenset(changed), 'object_roots': frozenset(roots)}
+    if processor is not None:
+        proof.update(evidence_commit=processor['evidence_commit'], evidence_root=processor['evidence_root'])
+    return proof
