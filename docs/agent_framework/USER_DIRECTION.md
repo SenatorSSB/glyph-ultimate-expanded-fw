@@ -359,6 +359,76 @@ required post-reconnect visibility and LT4-to-Ult13 checks were not completed.
 - Direction: `default_usb_backend_config` is required one-based configuration. Reject Config before publication/acceptance when omitted and decoded zero, explicitly zero, or greater than `communication_backend_configs_count`. Zero has no no-USB meaning. Do not silently fall back to index 1 or another backend. Apply at all beta-relevant Config acceptance seams including external and persisted loading. Rejected candidates preserve existing accepted/live state and follow separately approved persisted recovery. This selects index validity only; no further referenced backend-type eligibility rule. Additional type constraints require separate source evidence and authority.
 - Effect: resolves the USB-default policy left undecided by GLYPH-UD-025 and completed GP-CONFIG-013 characterization; other GLYPH-UD-025 support/reboot/non-claims remain active. Firmware repair still follows the complete gated GP-CONFIG-023 order.
 
+### GLYPH-UD-027
+
+- Type: `Directive`
+- Status: `Active`
+- Source: direct project-owner message "OWNER DIRECTIVE — FORCE GOVERNANCE
+  REVISION NOW", supplied 2026-10-04 in daemon task
+  `01a0fcbd-2b4c-7d31-9088-42a22e260b57`, userMessage
+  `01a106b6-5a49-7812-b18d-3188826d23b7`; independently retrieved in full by
+  the GP-VAL-044 Implementation Supervisor, not inferred from a peer summary.
+- Direction: separate product/firmware validation from framework self-validation.
+  This Revision-3 decision supersedes conflicting Revision-2 progression rules
+  while retaining their historical records and the exact-candidate safety model.
+  Tier 1 candidate-critical proof always blocks; Tier 2 directly affected
+  regression proof blocks where affected. Tier 3 framework health is tracked
+  debt, not an automatic candidate blocker, unless a concrete Tier-1/Tier-2
+  safety contradiction is identified. A timeout means incomplete execution,
+  never PASS and not by itself a firmware-safety finding.
+- Mandatory safety: exact committed candidate SHA/tree and build inputs,
+  canonical Mk6 build where required, exact UF2 SHA-256/size and owner-held
+  content-addressed custody, focused changed-behavior tests, every directly
+  affected consumer, relevant current/historical correspondence and negative
+  controls, exact critical source correspondence, relevant snapshot/mutation/
+  isolation proof, fresh independent implementation and integration review,
+  required Config backup/restoration, and exact H2/H3 human physical PASS before
+  behavior-changing source integration. Independent HEP must validate candidate,
+  artifact, protocol, required rows and gaps and classify the result; human
+  observations remain distinct from inference. No unsupported behavior or root
+  cause claims; Nunchuk remains NOT_TESTED. No expanded firmware/device/flashing
+  automation or automatic public release.
+- Immediate finite execution: independently review exact source-free GP-VAL-044
+  candidate `d6fbbbf083c385d7cdfa82627ea2184bb9ded19e` and its focused/affected
+  evidence. If no concrete safety contradiction exists, integrate it source-free
+  and publish separate strict GP-VAL-044 DONE on that proof basis, preserving
+  incomplete/failed aggregates as debt. No new Planner/Curator interpretation
+  cycle or new GP-VAL is required for this existing framework failure. Then
+  resume HEP using the already-complete preserved physical observations with
+  no physical retest. Exact C020 F remains
+  `7db4f447d5e796367071b7143fa6c9274c70ae5e`, artifact SHA-256
+  `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`.
+  Preserve `R -> E -> I`: source-free processor evidence E must not require the
+  integrated source catalog at I. Only independently accepted HEP PASS permits
+  later exact tested C020 source integration, focused integration proof, fresh
+  independent integration review and strict C020 DONE. This decision is not HEP
+  acceptance and confers no physical PASS itself.
+- Framework debt, nonblocking absent a concrete safety contradiction:
+  unexplained nested-preflight failure; aggregate runtime over 300 seconds;
+  recursive validation cost; duplicated synthetic topology work; validator/
+  governance coupling; expensive repeated Git-object proof construction.
+  Preserve the original FAIL/incomplete reports and unknown root cause. In
+  particular GP-VAL-044's nested-preflight FAIL and bounded 300-second timeout
+  remain failures/incomplete, not PASS; the later diagnostic 307.80-second
+  45/46 run with all 46 isolated proofs and canonical MATCH also remains FAIL.
+  Its nested 0.7-second setup PermissionError has UNPROVEN cause. None is
+  asserted to establish a contradictory firmware-safety fact.
+- Deferred scope: production 300-second aggregate and 120-second checker limits
+  are unchanged. GP-VAL-011 remains otherwise OWNER_DEFERRED / NONEXECUTABLE;
+  do not reopen it broadly to complete C020. After C020 DONE, perform one bounded
+  Revision-3 control-plane simplification of authorization/runway, supervisor,
+  scheduled-runner, Planner/Curator boundaries, hardware lifecycle and validation
+  tiers. Before a future GP-VAL, require `UNPROVEN_SAFETY_FACT` naming a concrete
+  firmware/product safety property; otherwise record framework debt. Per logical
+  product order, permit at most one ordinary candidate-governance successor and
+  one exceptional validation-repair successor; a third needs owner approval
+  unless hardware FAIL, a new firmware/source defect or a new product/domain
+  decision justifies it. Timeouts, runner mechanics, topology and proof
+  performance do not qualify. Planner/Curator remain for substantive unresolved
+  authority, not mechanical identities, already-authorized transitions or
+  timeout churn. The later broad documentation simplification is not performed
+  by this finite GP-VAL-044 completion.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is
