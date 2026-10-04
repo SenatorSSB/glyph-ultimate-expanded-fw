@@ -429,6 +429,58 @@ required post-reconnect visibility and LT4-to-Ult13 checks were not completed.
   timeout churn. The later broad documentation simplification is not performed
   by this finite GP-VAL-044 completion.
 
+### GLYPH-UD-028
+
+- Type: `Directive`
+- Status: `Active`
+- Source: direct project-owner message "ADDENDUM — CROSS-THREAD MCP
+  AUTHORIZATION", supplied 2026-10-04 in daemon task
+  `01a0fcbd-2b4c-7d31-9088-42a22e260b57`, userMessage
+  `01a106eb-f269-7df2-86a8-ad68eae156a6`; independently retrieved in full by
+  the post-C020 Control-plane Implementation Supervisor together with the
+  complete GLYPH-UD-027 source directive. Not inferred from a worker summary.
+- Direction: expressly authorize available cross-thread MCP orchestration
+  transport between the known Glyph daemon, Planner, Curator, Implementation
+  Supervisor, Hardware Evidence Processor and role-specific workers created
+  or reused for this exact campaign. Purposes include dispatch, ACK/status,
+  WORKER_RESULT, role results, completion/blockers, requesting the next
+  authorized worker, write-lock release and exact identity handoff. Restrict
+  targets to known existing Glyph workers, exact-campaign workers, the parent
+  daemon and daemon-selected successors; no broadcast or unrelated chats.
+- Identity: where practical prefix daemon messages with
+  `OWNER_AUTHORIZED_GLYPH_ORCHESTRATION`; include sender/receiver role,
+  project, exact work order, current canonical SHA, scope and expected return
+  destination. The receiving worker still requires valid independent
+  role/work-order authority. Transport grants no repository permission,
+  firmware/Config/hardware/flashing/public-release/product semantics, role
+  authority expansion or bypass of substantive Planner/Curator requirements.
+- Rejection handling: accepted sends continue normally without unnecessary
+  duplicate delivery. A rejected send is only
+  `CROSS_THREAD_MESSAGE_REJECTED`, not assignment failure. Do not repeatedly
+  retry or bypass rejection. Continue locally authorized work when receipt is
+  not a dependency, persist the same logical result durably, and rely on
+  daemon readback/polling. A rejected ACK is not an implementation stop and
+  creates neither a GP-VAL nor a Curator obligation. Messaging friction is
+  framework/orchestration debt unless it prevents a concrete safety fact.
+- Durability: prefer canonical/authorized commits, then pushed worker branches,
+  then authorized repository handoff files, stable reported local handoffs,
+  and accessible transcripts. Important implementation/evidence must not rely
+  exclusively on temporary storage. Attempt WORKER_RESULT through available
+  MCP first; after rejection report
+  `WORKER_RESULT_PERSISTED_FOR_DAEMON_READBACK` with work order, result, branch,
+  implementation/candidate SHA, canonical, handoff path and next action.
+- Chaining: process successful callbacks immediately, refresh canonical and
+  dispatch the next deterministic authorized transition without a heartbeat
+  delay. The existing ten-minute poll is idle fallback: inspect active/recent
+  workers and missing callbacks, refs/commits and durable results, reconstruct
+  and independently verify identities, then route the next transition.
+  Inspect the prior worker/thread, branch and handoff before replacement;
+  replace only when definitively failed, abandoned or unable to continue.
+- Serialization: only one canonical-writing worker may hold the daemon's
+  write/publication lock. Concurrent communication does not permit concurrent
+  publication. No account/settings change or transport test is authorized by
+  this addendum. It applies under GLYPH-UD-027 Revision 3.
+
 ## Publishing Rules
 
 New entries must identify the human source and date. If a direction is
