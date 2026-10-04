@@ -1,5 +1,7 @@
 # Active Agent Queue
 
+GP-VAL-040 is DONE through independently reviewed live source-free integration `7eed931aa04d1dbdddb8ef13431fbe150f5382a7` and separate strict completion correspondence. The finite three-checker/two-host amendment, 64 correspondence tests, 57 actual scope observations and all five current/composed full protected consumers pass; exact Keyboard C/B/tree/raw inventory, five host pins and 28 dependencies are preserved. Native and composed full aggregates remain actual FAIL/incomplete with UNAVAILABLE final canonical proof; missing historical objects and synthetic READY reconstruction without Keyboard ancestry remain Tier-3 framework debt after independent review, with no concrete Tier-1/Tier-2 contradiction or full aggregate PASS claim. Separate preserved Keyboard integration follows this DONE. Current source remains accepted C020; exact C014 F/artifact/protocol stay frozen at hardware wait. No Keyboard policy, device action or physical acceptance is claimed.
+
 ## Current Persistent Campaign
 
 GP-CONFIG-014 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `e5c455637056ac535347c1176dd41c9a9d84d85a` (sole composition parent `3369819a34f82d579e21adff125a25de854f1b9b`, tree `5459271c2219e021414eda37c9155c5ea7a983cf`). The exact Mk6 build passed; the resolved 21-role decoder closure and owner-held UF2 custody passed. Preserved UF2 SHA-256 `9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af`, 796672 bytes, is at `local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2`. All 27 actual focused/affected candidate checks pass with full native fingerprint MATCH; tracked source/index/modes remain unchanged through build/custody. Fresh independent review approves the exact source/build/custody/correspondence and conditional staged protocol GP_CONFIG_014_HW_V1. Actual native full aggregate FAIL / AGGREGATE_TIMEOUT is retained with 11 completed PASS results; full aggregate PASS is claimed only if that actual report says PASS. Production 300/120 deadlines stay unchanged; existing aggregate/setup limitations remain honest Tier-3 framework debt. This canonical handoff contains five docs/control-plane paths and no candidate source. GP-VAL-034 is strict DONE at source-free `62b559ae5ee2d6dee0ff54aeb56b2653d86253c6`; exact original C014 `a3664be5354ec4253122eb2e738e70e5dfdb9ccc` and earlier handoff reports remain preserved. First owner action is one connection on accepted firmware in normal gameplay mode and a baseline report; no firmware or Config change yet. Fresh current Config/raw identity, validated restoration, concrete valid profiles and expected outputs are objective prerequisites before mutation; physical evidence remains pending. All other 96 orders and exact C020 DONE/PASS remain unchanged. The persistent H3 executor reaches hardware wait and releases canonical publication authority for isolated H1 work; after exact human HEP PASS the same worker resumes integration/DONE and the next named chain. Nunchuk NOT_TESTED; root cause UNPROVEN.
@@ -137,12 +139,12 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 9,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 1,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -1114,7 +1116,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-040",
       "title": "Keyboard host finite correspondence",
-      "status": "READY",
+      "status": "DONE",
       "branch": "codex/gp-val-040-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1152,7 +1154,30 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact finite reviewed source-free governance diff, original C/B/tree/raw inventory conformance and closed object proof; focused consumer/strict correspondence negatives; full affected aggregate with canonical/isolated MATCH; independent review and reviewed live integration; later strict DONE correspondence. Temporary composed-C validation preserves all KBD critical bytes and observations. No actual KBD integration is prerequisite to GP-VAL-040 DONE; separate KBD resumption follows GP-VAL-040 DONE.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "38ecceabb136ae0285bc31f1f1ad6a3116bd2059",
+        "reviewed_implementation_sha": "7eed931aa04d1dbdddb8ef13431fbe150f5382a7",
+        "prior_canonical_integration_sha": "7eed931aa04d1dbdddb8ef13431fbe150f5382a7",
+        "reviewed_changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "tools/check_glyph_checker_context.py",
+          "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+          "tools/check_glyph_generated_source_owned_artifact_install.py",
+          "tools/check_glyph_generated_source_owned_generator_contract.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent val040_tier_review APPROVED exact7eed931aa04d1dbdddb8ef13431fbe150f5382a7; twelve authorized source-free paths, current034 helper/auth/runner/policy exact, all96otherorders and frozen014tuple preserved. Subsequent independent review finds no concreteTier1/2 contradiction in recorded aggregate limits or synthetic reconstruction failure. Separate completion snapshot independently reviewed before publication.",
+        "validation_provenance": "Revision3 focused proof:64realGit correspondence testsPASS; exactKBD C4fb7c1e/B328c6a1/treea847f1/rawf8cc5721 ninepath inventory, fivehostpins,28dependencies and234B/Ccritical equality preserved; current236critical entries exactly acceptedC020F7db4f447.57actualfive-main scope observations and fullcontext five-main/WebSerial positives/negativesPASS. Allfive full current and allfive full composed actualprotectedmainsPASS; bounded baseline-ref setup correction retained. Manifest/census/health/framework/navigation/sequence/surface-integration PASS; current010eightEXACT_SOURCE_MATCH and accepted28tableblob/strictfiniteinventoryPASS; preserved historicalC and037/043 realphase/negative proofsPASS. ExactKBDhost103observations/118identitynegatives/fiveexecutablemutants/ASanUBSanPASS; genuineacceptedC020correspondence and focusednativefingerprintMATCH. Actual nativegovernance aggregateFAIL/AGGREGATE_TIMEOUT300 after11PASS withisolatedMATCH; finalcanonicalproofUNAVAILABLE. ActualcomposedaggregateFAIL/AGGREGATE_TIMEOUT300 after25PASS/isolatedMATCH, unchanged034syntheticREADYreconstruction copiesKBDhosts withoutcandidateancestry and correctlyFAILS; realROOT/fullconsumersPASS and same034fulltestsPASS ongovernance including genuineKBDcomposition/negatives. InitialcomposedsetupFAIL missingf477object/MATCH and broadhistorical010selftestFAIL fetching unapproved84e999draft remain preserved Tier3 topologydebt, no fullaggregate/historicalsuitePASS claim. Production300/120 deadlines unchanged. No source/build/device/firmware/Keyboardpolicy/hardwareacceptance change; NunchukNOT_TESTED/rootcauseUNPROVEN."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -7888,11 +7913,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-040","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":9,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":9,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-040, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 9; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 9; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
