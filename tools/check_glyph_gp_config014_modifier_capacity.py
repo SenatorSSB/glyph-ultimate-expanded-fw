@@ -1,0 +1,290 @@
+#!/usr/bin/env python3
+"""Exact GP-CONFIG-014 repaired-current host proof; no firmware/device action."""
+from __future__ import annotations
+import hashlib
+import json
+import os
+import shutil
+import stat
+import subprocess
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+BASE = '8b8e45b17a5670bbf983360faf87bdf9d6b50ce2'
+BASE_TREE = 'c0fb05a67baf0b77627e99d9e019d7299338e236'
+PINS = {'include/modes/CustomControllerMode.hpp': {'sha256': '8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414',
+                                            'blob': '9658f5e15f50887caaaf5a71efc0096e9677d144'},
+ 'src/modes/CustomControllerMode.cpp': {'sha256': '4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31',
+                                        'blob': '8cb336f31acd4c324b3ae1f8ef0827c14f15ee85'},
+ 'HAL/pico/include/util/state_util.hpp': {'sha256': 'db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81',
+                                          'blob': '40b8aeb9c4db3268696c49f20b3278efabc7688c'},
+ 'config/glyph/env.ini': {'sha256': 'c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf',
+                          'blob': 'fac4e20461ad632ca1d65826241a4a9c73630f04'},
+ 'docs/runtime_config/fixtures/custom_modifier_cache_characterization.json': {'sha256': 'ca259e765e4e22571917e7d1b88a7f90d655dad2a42d0d681e5850a42525fe73',
+                                                                              'blob': 'bcddc9fb5b031832333774312939253b0ec2d9ba'},
+ 'docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json': {'sha256': 'a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f',
+                                                                   'blob': '25d32a1fc1cc9c39626eadd4dca4835103579d80'},
+ 'docs/runtime_config/fixtures/setconfig_runtime_rebinding_characterization.json': {'sha256': 'a369f807072f82e83d5e57de01803dd97d8c44634ed12412ecd74f08672addc1',
+                                                                                    'blob': '9289bd57501514c0857e3733e008340998192198'},
+ 'include/core/ControllerMode.hpp': {'sha256': 'bbac9de7fd0ad758bd7e8b47c40eb2315b377ef32c8ebc08e4e87be0482d3f47',
+                                     'blob': '97136730b3fa05b61c9335f7950ec39a5b1c5dab'},
+ 'include/core/InputMode.hpp': {'sha256': 'dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee',
+                                'blob': '02f3cfd54c47cf2b8f4587a2d519d0682240eec4'},
+ 'include/core/socd.hpp': {'sha256': '88ff9be552e89f0c92a1548662fc4bf9b6fd4408b242f6f42bec8ecf70e6fc91',
+                           'blob': '5d912b274ba54fde5e07a575cf9bec84da07c9bb'},
+ 'include/core/state.hpp': {'sha256': 'c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3',
+                            'blob': 'ff3aa94df61fd6a41448799fa1d6f508c41ecd0f'},
+ 'platformio.ini': {'sha256': '99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9',
+                    'blob': '4d56f8630c1b12e84cd12f40ce05a4dc71b9362e'},
+ 'src/core/ControllerMode.cpp': {'sha256': '1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8',
+                                 'blob': 'ca74124dec2a4dc060bb5a89c3f0e3b87bab6c4e'},
+ 'src/core/InputMode.cpp': {'sha256': '080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7',
+                            'blob': 'f1388a1948fc73f7525463db219a53f5af1e6b7b'},
+ 'src/core/socd.cpp': {'sha256': '5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3',
+                       'blob': '81a0d53fae96305c07d5943f4785b33b02ca1949'},
+ 'tools/check_glyph_custom_modifier_cache_characterization.py': {'sha256': 'a3b1f22e2b46e01ef92e6a38fdddce960ed32dd20ebfbe07cb53480729c86753',
+                                                                 'blob': 'c1c77ded0d54ed2276743e8185500b73219d5f4b'},
+ 'tools/check_glyph_setconfig_runtime_rebinding_characterization.py': {'sha256': '1880f5177cd27b4a24a0519e7f527ee6a3bdca4b7766cbd5a8c148c300f359be',
+                                                                       'blob': '744c1e5f639a97928ffb73e3daa88ffee342de35'},
+ 'tools/fixtures/custom_modifier_cache_host/include/stdlib.hpp': {'sha256': '5ac8a59792b52d62e66789be9df10fba4dae09282d909f9c544c0743a5c81d96',
+                                                                  'blob': '69174efd59a682a5b40106ba4d6f8fcb87a944f7'},
+ 'tools/fixtures/custom_modifier_cache_host/modifier_cache_harness.cpp': {'sha256': 'ec8c7d9c3d4a050190e3b0f5bf42578a88e224154b5fe9b89923f46e66b859df',
+                                                                          'blob': '433603b1529f696ac5ab113346ba70fa492d8f07'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/LICENSE.nanopb.txt': {'sha256': 'e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d',
+                                                                         'blob': 'd11c9af1d7e469e9a5357a660fd184f58c3a4ff2'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/README.md': {'sha256': 'e463383c4c9add1840f50b7b93763f076ae3853174cda79e5b5194fab5fbf40d',
+                                                                'blob': 'e3d9376dc0e38658f5886695e9f52fb6481110d4'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/config.options': {'sha256': '6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805',
+                                                                     'blob': '7175d8463ade5b0cd45f1a5f8f99be44f5719c3c'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/config.pb.h': {'sha256': '532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3',
+                                                                  'blob': '9b8d8eb9e771e3a791356a94681cb5c89ce93e74'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/config.proto': {'sha256': '2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b',
+                                                                   'blob': 'a58a2bf4dd827ad92482f1ac30c3d56bbea93c05'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/haybox-proto.library.json': {'sha256': '2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e',
+                                                                                'blob': '04da440b92d5da9cd4ee3c33a58c5ef8830e8198'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/pb.h': {'sha256': 'a2ecdca9fdaeef5f4972ed983540c0d6fb0a5c402a2e0b0349d7e1bc5e188d29',
+                                                           'blob': '10249bb651f72e17f2789c435edf0dfd398d2183'},
+ 'tools/fixtures/custom_modifier_cache_host/schema/provenance.json': {'sha256': 'fca4d0d34165ee3d48b37864e357482d867b879ca1430433a81575de910cc59b',
+                                                                      'blob': '66db26dfd20f49b47cb0ddd524c6f3e832a69355'},
+ 'tools/fixtures/gp_config012_button_host/generated/config.pb.c': {'sha256': 'd7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626',
+                                                                   'blob': 'c59855ecb19be7f5193833d94fe41cc1828ffb14'},
+ 'tools/fixtures/gp_config012_button_host/generated/config.pb.h': {'sha256': 'bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323',
+                                                                   'blob': '01d0dda2ae768dd0f18c0f338a74c55e613bb199'},
+ 'tools/fixtures/gp_config012_button_host/nanopb/pb.h': {'sha256': 'e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2',
+                                                         'blob': '3f181d873a81d82c27c56874f6a63328f38eaaf3'},
+ 'tools/fixtures/gp_config012_button_host/nanopb/pb_common.c': {'sha256': '8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516',
+                                                                'blob': '6aee76b1efa1e6f2f3fe7d43629da9b2114eea19'},
+ 'tools/fixtures/gp_config012_button_host/nanopb/pb_common.h': {'sha256': '6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd',
+                                                                'blob': '58aa90f76d58596d3f45a120b65b4a0bff7fd688'},
+ 'tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c': {'sha256': 'f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632',
+                                                                'blob': '0f71c33b1bd99e531c9eacda5f9b012ddb3c8339'},
+ 'tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h': {'sha256': 'fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87',
+                                                                'blob': '1ef9d56c6e0b6430f9067cbb911c7e697d034e24'},
+ 'tools/fixtures/gp_config012_button_host/schema/config.options': {'sha256': '6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805',
+                                                                   'blob': '7175d8463ade5b0cd45f1a5f8f99be44f5719c3c'},
+ 'tools/fixtures/gp_config012_button_host/schema/config.proto': {'sha256': '2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b',
+                                                                 'blob': 'a58a2bf4dd827ad92482f1ac30c3d56bbea93c05'}}
+HARNESS = 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp'
+HARNESS_SHA256 = 'c3bc2211bfa09fb79eba88571bd77731957b18e3434e2d945e443d2f9f066dd3'
+FIXTURE = 'docs/runtime_config/fixtures/gp_config014_modifier_capacity.json'
+FIXTURE_SHA256 = 'f8234beb96be85d04226e98b5ccb7fc88aa5e39a3ecf32fba5dbd3ff6b26b78e'
+CASES = ['initial', 'valid_0', 'valid_1', 'valid_2', 'valid_3', 'valid_4', 'valid_5', 'valid_6', 'valid_7', 'valid_8', 'valid_9', 'valid_10', 'valid_11', 'valid_12', 'valid_13', 'valid_14', 'valid_15', 'valid_16', 'valid_17', 'valid_18', 'valid_19', 'valid_20', 'outputs', 'direct_21_seeded', 'direct_max_seeded', 'direct_21_fresh', 'direct_max_fresh', 'live_21', 'live_max', 'rebind']
+PRODUCTION = frozenset(('include/modes/CustomControllerMode.hpp','src/modes/CustomControllerMode.cpp'))
+HOST_PATHS = frozenset((HARNESS, FIXTURE, 'tools/check_glyph_gp_config014_modifier_capacity.py', 'docs/runtime_config/gp_config014_modifier_capacity.md'))
+ROOT_METADATA = frozenset(('docs/runtime_config/fixtures/runtime_config_validation_manifest.json', 'docs/runtime_config/fixtures/glyph_checker_census.json', 'docs/runtime_config/fixtures/runtime_config_validation_health.json', 'docs/runtime_config/runtime_config_validation_health.md'))
+CRITICAL_ROOTS = frozenset(('src','include','hal','backend','lib','active','storage','config','builder_scripts','scripts','boards','variants','patches','proto'))
+CRITICAL_FILES = frozenset(('platformio.ini','glyph_nuker','.gitmodules','.gitignore','.gitattributes','cmakelists.txt','makefile','sconstruct','sconscript','library.json','library.properties','requirements.txt','platformio.lock','tools/check_glyph_profile_adapter_prewrite.py'))
+
+class Error(AssertionError): pass
+
+def require(ok, message):
+    if not ok: raise Error(message)
+
+def sha(data): return hashlib.sha256(data).hexdigest()
+def blob(data): return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+def git(root,*args):
+    return subprocess.run(['git',*args],cwd=root,capture_output=True,check=True).stdout
+
+def unique(pairs):
+    result={}
+    for key,value in pairs:
+        require(key not in result,'duplicate JSON key: '+key); result[key]=value
+    return result
+
+def regular(root,path):
+    file=root/path
+    require(file.is_file(), 'missing regular file: '+path)
+    for p in (file,*file.parents):
+        if p==root.parent: break
+        require(not p.is_symlink(),'symlink: '+path)
+    require(stat.S_ISREG(file.stat().st_mode) and not file.stat().st_mode&0o111,'mode not regular100644: '+path)
+    return file.read_bytes()
+
+def validate_pins(root):
+    for path,identity in PINS.items():
+        data=regular(root,path)
+        require(sha(data)==identity['sha256'] and blob(data)==identity['blob'],'immutable bytes drift: '+path)
+    require(sha(regular(root,HARNESS))==HARNESS_SHA256,'harness drift')
+    require(sha(regular(root,FIXTURE))==FIXTURE_SHA256,'fixture drift; reseal cannot authorize source')
+    value=json.loads(regular(root,FIXTURE),object_pairs_hook=unique)
+    require(value['base']==BASE and value['cases']==CASES and value['generated_extent']==20,'fixture contract')
+    for path in HOST_PATHS: regular(root,path)
+    require(regular(root,HARNESS).count(b'#include "../../../src/modes/CustomControllerMode.cpp"')==1,'production cpp include exactly once')
+
+def critical(path):
+    p=path.casefold()
+    return p.split('/')[0] in CRITICAL_ROOTS or p in CRITICAL_FILES or p.startswith('.github/workflows/') or '/.github/workflows/' in p
+
+def tree(root,ref):
+    result={}
+    for record in git(root,'ls-tree','-rz',ref).split(b'\0'):
+        if record:
+            meta,path=record.split(b'\t'); mode,kind,obj=meta.decode().split()
+            result[path.decode()]=(mode,kind,obj)
+    return result
+
+def compare_critical(before,after):
+    expected={p:e for p,e in before.items() if critical(p)}
+    for path in PRODUCTION:
+        require(expected[path][0:2]==('100644','blob'),'unsafe base source mode')
+        expected[path]=('100644','blob',PINS[path]['blob'])
+    require({p:e for p,e in after.items() if critical(p)}==expected,'unexpected critical tree/source inventory')
+
+def candidate_inventory(paths, complete=False):
+    require(PRODUCTION|HOST_PATHS <= paths <= PRODUCTION|HOST_PATHS|ROOT_METADATA,'candidate full inventory outside finite contract')
+    if complete:
+        require(paths==PRODUCTION|HOST_PATHS|ROOT_METADATA,'committed candidate must contain all exact ten paths')
+
+def candidate_parent(parents):
+    require(parents==[BASE], 'candidate is not direct child of exact B')
+
+def candidate_modes(before, after, paths):
+    for path in paths:
+        require(after.get(path,(None,))[:2]==('100644','blob'), 'candidate path mode/type: '+path)
+        if path in before:
+            require(before[path][:2]==('100644','blob'), 'candidate old mode/type: '+path)
+
+def authenticate(root):
+    require(git(root,'rev-parse',BASE+'^{tree}').decode().strip()==BASE_TREE,'base tree drift')
+    before=tree(root,BASE); head=git(root,'rev-parse','HEAD').decode().strip()
+    git(root,'merge-base','--is-ancestor',BASE,head)
+    after=tree(root,head)
+    # Before commit, the adopted exact source is a worktree overlay on B.
+    if head==BASE:
+        changed=set(git(root,'diff','--name-only',BASE).decode().splitlines())
+        changed.update(git(root,'ls-files','--others','--exclude-standard').decode().splitlines())
+        candidate_inventory(changed)
+    else:
+        source_commits=git(root,'rev-list',BASE+'..'+head,'--',*sorted(PRODUCTION)).decode().splitlines()
+        require(len(source_commits)==1,'source transition must be a single exact candidate')
+        c=source_commits[0]
+        candidate_parent(git(root,'show','-s','--format=%P',c).decode().strip().split())
+        ct=tree(root,c)
+        paths={p for p in before.keys()|ct.keys() if before.get(p)!=ct.get(p)}
+        candidate_inventory(paths,complete=True); candidate_modes(before,ct,paths)
+        compare_critical(before,ct)
+    for path in PRODUCTION: after[path]=('100644','blob',PINS[path]['blob']) if head==BASE else after.get(path)
+    compare_critical(before,after)
+    for path,entry in after.items():
+        if critical(path) and entry[1]=='blob':
+            file=root/path
+            require(file.is_file() and not file.is_symlink(), 'critical worktree type drift: '+path)
+            require(all(not x.is_symlink() for x in file.parents if x!=root.parent), 'critical parent symlink: '+path)
+            require(entry[0] in ('100644','100755') and bool(file.stat().st_mode&0o111)==(entry[0]=='100755'), 'critical worktree mode drift: '+path)
+            require(blob(file.read_bytes())==entry[2],'critical worktree differs from expected tree: '+path)
+    for path in git(root,'ls-files','--others','--exclude-standard').decode().splitlines():
+        require(not critical(path),'untracked critical input: '+path)
+    for path in PINS:
+        if path not in PRODUCTION:
+            require(before.get(path)==after.get(path) and before.get(path,(None,))[0]=='100644','dependency tracked custody drift: '+path)
+            stage=git(root,'ls-files','--stage','--',path).decode().strip().split()
+            require(stage[:3]==['100644',PINS[path]['blob'],'0'], 'dependency index custody drift: '+path)
+    return head
+
+def compile_host(root,out,short=False,schema=None):
+    command=['c++','-std=c++17','-O1','-g','-fno-omit-frame-pointer','-fsanitize=address,undefined,bounds','-fno-sanitize-recover=all','-ftrivial-auto-var-init=pattern']
+    if short: command+=['-fshort-enums']
+    command += ['-I'+str(schema or root/'tools/fixtures/gp_config012_button_host/generated'),'-I'+str(root/'tools/fixtures/gp_config012_button_host/nanopb'),'-I'+str(root/'tools/fixtures/custom_modifier_cache_host/include'),'-I'+str(root/'include'),'-I'+str(root/'HAL/pico/include'),str(root/HARNESS),*[str(root/p) for p in ('src/core/ControllerMode.cpp','src/core/InputMode.cpp','src/core/socd.cpp')],'-o',str(out)]
+    return subprocess.run(command,cwd=root,text=True,capture_output=True)
+
+def run(binary,case):
+    env=dict(os.environ,ASAN_OPTIONS='detect_leaks=0:halt_on_error=1:allow_user_poisoning=1',UBSAN_OPTIONS='halt_on_error=1:print_stacktrace=1')
+    return subprocess.run([str(binary),case],text=True,capture_output=True,env=env)
+
+def rejected(call,label):
+    try: call()
+    except (Error,OSError,subprocess.SubprocessError): return
+    raise Error('negative accepted: '+label)
+
+def negatives(temp):
+    # Disposable overlays never modify source, schema, historical assets, or index.
+    scratch=temp/'overlay'
+    for path in set(PINS)|HOST_PATHS:
+        target=scratch/path; target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(ROOT/path,target)
+    validate_pins(scratch)
+    p=scratch/'src/modes/CustomControllerMode.cpp'; old=p.read_bytes()
+    altered=old.replace(b'#include',b'#inclvde',1)
+    require(len(altered)==len(old) and sum(a!=b for a,b in zip(old,altered))==1, 'exact one-byte substitution')
+    p.write_bytes(altered); rejected(lambda:validate_pins(scratch),'one-byte production substitution')
+    p.write_bytes(old); p.chmod(0o755); rejected(lambda:validate_pins(scratch),'source executable mode'); p.chmod(0o644)
+    p.unlink(); p.symlink_to(ROOT/'src/modes/CustomControllerMode.cpp'); rejected(lambda:validate_pins(scratch),'source symlink'); p.unlink(); p.write_bytes(old)
+    p=scratch/FIXTURE; oldfixture=p.read_bytes(); value=json.loads(oldfixture); value['candidate_source_pins']['src/modes/CustomControllerMode.cpp']['sha256']=sha(altered)
+    p.write_text(json.dumps(value)); (scratch/'src/modes/CustomControllerMode.cpp').write_bytes(altered)
+    rejected(lambda:validate_pins(scratch),'coordinated source and mutable fixture checksum reseal')
+    p.write_bytes(oldfixture); (scratch/'src/modes/CustomControllerMode.cpp').write_bytes(old)
+    before=tree(ROOT,BASE); expected=dict(before)
+    for path in PRODUCTION: expected[path]=('100644','blob',PINS[path]['blob'])
+    compare_critical(before,expected)
+    for label,change in [('extra critical',('src/adjacent.cpp',('100644','blob','0'*40))),('mode',('include/modes/CustomControllerMode.hpp',('100755','blob',PINS['include/modes/CustomControllerMode.hpp']['blob']))),('source',('src/modes/CustomControllerMode.cpp',('100644','blob','0'*40)))]:
+        altered=dict(expected); altered[change[0]]=change[1]; rejected(lambda:compare_critical(before,altered),label)
+    rejected(lambda:candidate_inventory(PRODUCTION|HOST_PATHS|{'docs/runtime_config/adjacent.json'}),'adjacent inventory path')
+    rejected(lambda:candidate_inventory(PRODUCTION|HOST_PATHS-{HARNESS}),'missing inventory path')
+    rejected(lambda:candidate_inventory(PRODUCTION|HOST_PATHS,complete=True),'committed ten-path inventory missing root metadata')
+    candidate_parent([BASE])
+    for parents in ([],['0'*40],[BASE,'0'*40]):
+        rejected(lambda:candidate_parent(parents),'wrong/missing/merge candidate parent')
+    unsafe=dict(expected); unsafe[HARNESS]=('100755','blob','0'*40)
+    rejected(lambda:candidate_modes(before,unsafe,{HARNESS}),'candidate host executable mode')
+    # Schema mismatch must fail the production equality assertion, not a host assertion.
+    gen=ROOT/'tools/fixtures/gp_config012_button_host/generated/config.pb.h'
+    for extent in (19,21):
+        schema=temp/('extent'+str(extent)); schema.mkdir()
+        (schema/'config.pb.h').write_bytes(gen.read_bytes().replace(b'AnalogModifier modifiers[20];',('AnalogModifier modifiers['+str(extent)+'];').encode()))
+        for short in (False,True):
+            result=compile_host(ROOT,temp/('extent-bin'+str(extent)),short,schema)
+            require(result.returncode!=0 and 'custom modifier cache capacity must match generated schema' in result.stderr,'schema mismatch escaped production static_assert')
+    header=scratch/'include/modes/CustomControllerMode.hpp'; cpp=scratch/'src/modes/CustomControllerMode.cpp'
+    h=header.read_bytes(); c=cpp.read_bytes()
+    controls=[('cache10',h.replace(b'_modifier_button_masks[kMaxCustomModeModifiers]{}',b'_modifier_button_masks[10]{}'),c,'valid_20'),('direct_guard',h,c.replace(b'    if (custom_mode_config.modifiers_count > kMaxCustomModeModifiers) {\n        return;\n    }\n\n',b''),'direct_21_seeded'),('live_guard',h,c.replace(b'_custom_mode_config == nullptr ||\n        _custom_mode_config->modifiers_count > kMaxCustomModeModifiers',b'_custom_mode_config == nullptr'),'live_21'),('pointer_init',h.replace(b'_custom_mode_config = nullptr',b'_custom_mode_config'),c,'initial'),('cache_init',h.replace(b'_modifier_button_masks[kMaxCustomModeModifiers]{}',b'_modifier_button_masks[kMaxCustomModeModifiers]'),c,'initial')]
+    for label,altered_h,altered_c,case in controls:
+        require(altered_h!=h or altered_c!=c,'mutation did not apply: '+label)
+        header.write_bytes(altered_h); cpp.write_bytes(altered_c)
+        for short in (False,True):
+            binary=temp/(label+str(short)); result=compile_host(scratch,binary,short)
+            require(result.returncode==0,'negative host compile failure: '+label+' '+result.stderr)
+            result=run(binary,case)
+            require(result.returncode!=0 and any(x in result.stderr for x in ('Sanitizer','runtime error:','ASSERTION:')),'behavior mutation survived: '+label)
+        header.write_bytes(h); cpp.write_bytes(c)
+    print('negative_controls=PASS schema19/21 both layouts; cache10; direct/live guards; pointer/cache initializers; immutable bytes/mode/path/parent/inventory')
+
+def main():
+    try:
+        validate_pins(ROOT); head=authenticate(ROOT)
+        with tempfile.TemporaryDirectory(prefix='glyph-config014-host-') as directory:
+            temp=Path(directory)
+            for short in (False,True):
+                binary=temp/('short' if short else 'ordinary'); result=compile_host(ROOT,binary,short)
+                require(result.returncode==0,'host compile failed: '+result.stderr)
+                for case in CASES:
+                    result=run(binary,case)
+                    require(result.returncode==0 and 'case='+case+' PASS' in result.stdout,'case failed '+case+': '+result.stderr)
+                print('layout='+('short-enums' if short else 'ordinary')+' cases='+str(len(CASES))+' PASS')
+            negatives(temp)
+        print('glyph_gp_config014_modifier_capacity: PASS; exact production source; base='+BASE+' current='+head)
+        print('firmware_build=NOT_RUN physical_reachability=UNKNOWN hardware_acceptance=PENDING Nunchuk=NOT_TESTED root_cause=UNPROVEN GP-CONFIG-018=SEPARATE')
+        return 0
+    except (Error,OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError) as exc:
+        print('glyph_gp_config014_modifier_capacity: FAIL: '+str(exc)); return 1
+
+if __name__=='__main__': raise SystemExit(main())

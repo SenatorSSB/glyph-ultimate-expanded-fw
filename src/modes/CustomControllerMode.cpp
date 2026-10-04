@@ -11,6 +11,10 @@ void CustomControllerMode::SetConfig(
     GameModeConfig &config,
     const CustomModeConfig &custom_mode_config
 ) {
+    if (custom_mode_config.modifiers_count > kMaxCustomModeModifiers) {
+        return;
+    }
+
     InputMode::SetConfig(config);
     _custom_mode_config = &custom_mode_config;
     for (size_t i = 0; i < custom_mode_config.modifiers_count; i++) {
@@ -62,7 +66,8 @@ void CustomControllerMode::UpdateDigitalOutputs(const InputState &inputs, Output
 }
 
 void CustomControllerMode::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
-    if (_custom_mode_config == nullptr) {
+    if (_custom_mode_config == nullptr ||
+        _custom_mode_config->modifiers_count > kMaxCustomModeModifiers) {
         return;
     }
 
