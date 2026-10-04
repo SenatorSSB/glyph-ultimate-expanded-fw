@@ -1,0 +1,96 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-014",
+  "candidate_branch": "codex/gp-config-014-built-f",
+  "candidate_git_sha": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+  "candidate_base_configurator_sha": "3369819a34f82d579e21adff125a25de854f1b9b",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_014_HW_V1",
+  "firmware_artifact_filename": "firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6, owner-reported",
+  "firmware_profile_state": "Owner-installed exact preserved C014 F; owner explicitly confirmed expected About identity e5c4556. Literal screen text not separately transcribed. Tested temporary C014 M0/M10/M11/M20/Prio after validated writes and reboot, unchanged original Ultimate; final restored original Config and ordinary controls all normal.",
+  "update_method": "Owner installed preserved exact UF2; specific copy method not separately transcribed in consolidated report. No processor/reviewer device operation.",
+  "host_platform_adapter": "GameCube: Glyph Mk6, Nintendo Switch with official Nintendo GameCube Adapter WUP-028. Ordinary USB: this Mac, XInput, owner-reported. Temporary modifier_0 and capacity coordinates are mini-screen observations; host/game output for M0 not observable because temporary profile lacks normal A/B activation. Explicit GC and USB gameplay coverage is Ultimate/X1 plus representative reconnect/high-entry tests; no platform-wide compatibility claim.",
+  "preconditions": [
+    "Actual human report directly read from daemon chat01a0fcbd-2b4c-7d31-9088-42a22e260b57 userMessage01a1091d-c23b-70e1-8862-c369d58d48c3. Verbatim owner message and all24 session files are archived byte-exact in result packet. Processor/reviewer did not perform physical tests.",
+    "Source-free reviewed handoff R38ecceabb136ae0285bc31f1f1ad6a3116bd2059 precedes E. Starting live canonical0336dbb1596fcfba64eb2af5559cc16f01243e0b. F e5c455637056ac535347c1176dd41c9a9d84d85a/tree5459271c2219e021414eda37c9155c5ea7a983cf has sole composition parent3369819a34f82d579e21adff125a25de854f1b9b and contains reviewed originalC a3664be5354ec4253122eb2e738e70e5dfdb9ccc. E contains no candidate source or I catalog; integration/DONE remains separate.",
+    "Exact committed-before-build reviewed F/build reports and twelve saved handoff/custody reports freshly hashed. Actual fallback build PASS, RAM78960/262144, flash386056/1568768; 21-role resolved decoder closure PASS. Historic full aggregate FAIL/300-second TIMEOUT and postbuild full fingerprint UNAVAILABLE remain framework debt, never PASS. No rebuild.",
+    "Owner reports pre-update PRE_HANDOFF_VERIFIED for exact F/hash/size; original native custody log is preserved. Processor independently rehashed owner-held regular non-symlink0444 exact UF2796672bytes. Accepted C020 rollback retained/rehashed7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500/796160bytes; not flashed in this run.",
+    "Fresh original Config4201bytes SHA256f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480. Restoration JSONc4088147d6d6c84497208db47458748f5343a61d281431ce8237ce517267c645; native encode/decode exact and existing required-binding guard[]. Immediate and post-owner-reboot raw restoration readbacks exactly equal original. GET_CONFIG proves stored bytes, not live RAM.",
+    "Capacity artifact JSON6e67fe39820e371a048ef6c378be0ed488193f3ae949409bb6f2ecf1b3cd65ce encodes4956bytes/d47c326727ca894d3887e5e74605a7adb39c969d478ed0bb77f021772c895c89. Combo JSONaeda5e1b48d511b7c2697ffcd2cda79ecdde92d9c75149f53231d0e1a25f57c1 encodes4956bytes/dd4e9084d5e816c66594506f501f04b887b2a0fa7dbc3413b4ad824897e890e0. Priority JSONc206b808a1f20f9abbda5283357e6d9751a2a25d15ab105695cba959952bde73 encodes5022bytes/61ef1dd18676cc120fcf0ef59ebf7bdabed5ddd4bd8770e8926cbe1b39dbc23d. Every expected/raw independent readback matches. All passed owner-session pre-write validation and processor offline existing guard; Ultimate semantic object remains unchanged.",
+    "Owner provided test timestamp2026-10-04T22:46:32Z. Individual physical-row completion timestamps unknown; no invented times. Explicit About expected-short confirmation satisfies identity; no literal transcription claim. Earlier accepted baseline carried from immutable C020 evidence; no new C020 physical test claimed.",
+    "No attributed/blocking C014 anomalies or gaps. Non-attributed RGB/startup observation is retained verbatim separately below/result, classified OBSERVED_NONATTRIBUTED/NONBLOCKING by direct owner and source inspection; empty anomalies does not erase that separate observation."
+  ],
+  "steps": [
+    {
+      "id": "modifier_0",
+      "instruction": "Select validated C014 M0 custom mode with0modifiers after owner Config write/reboot; capacity artifact, profile14/custom1.",
+      "expected": "Nine-direction neutral[128,128]; L/R[28,128]/[228,128]; D/U[128,28]/[128,228]; diagonals combine, release neutral.",
+      "observed": "PASS owner: all match on mini-screen. Temporary profile has no normal A/B activation; Switch gameplay output not observable, not inferred."
+    },
+    {
+      "id": "modifier_10",
+      "instruction": "C014 M10 profile15/custom2;10modifiers, highest entry9 BTN_LT2; capacity artifact.",
+      "expected": "LT2 nine-directions neutral[128,128]; L/R[78,128]/[178,128]; D/U[128,28]/[128,228]; diagonals[78/178,28/228]; release neutral.",
+      "observed": "PASS owner: all confirmed; MB2, LF2, LT2 each halve horizontal input; three stacked modifiers signed-13/+12. MB1 opens mini-screen menu and was not direct modifier-row evidence. Highest entry9 LT2 is exercised."
+    },
+    {
+      "id": "modifier_11",
+      "instruction": "C014 M11 profile16/custom3;11modifiers, highest entry10 BTN_LT3; capacity artifact.",
+      "expected": "LT3 same full0.5 nine-direction table; LT2+LT3 left/right[103,128]/[153,128]; neutral/release.",
+      "observed": "PASS owner: the tables work as expected. Entry10 LT3 and stacked pair exercised; no anomaly."
+    },
+    {
+      "id": "modifier_20",
+      "instruction": "C014 M20 profile17/custom4;20modifiers, highest entry19 BTN_RF1; capacity artifact.",
+      "expected": "RF1 full0.5 nine-direction table; LT2+RF1 L/R[103,128]/[153,128]; neutral/release.",
+      "observed": "PASS owner: the whole table works; MB2, LT2, LT3, RF1 stack as expected. Entry19 RF1 exercised."
+    },
+    {
+      "id": "combos_modifiers",
+      "instruction": "C014 M20 combo artifact and C014 Prio profile18/custom5 priority artifact; press combinations and release.",
+      "expected": "MB2+LF2+L/R gives A plus base[28,128]/[228,128]; plusLT2+L gives A/[78,128]; LT2+LT3+L=[103,128],noA. Priority compound then MB2+LF2 override ->[153,128],includingL/R; withD[153,28]; release neutral.",
+      "observed": "PASS owner: all confirmed; priority all match. Exact source sequential compound/override semantics preserved; no stuck input."
+    },
+    {
+      "id": "ultimate_x1",
+      "instruction": "Unchanged original Ultimate, LT5 sole X1; GameCube Switch/officialWUP-028 and Mac XInput, directions/releases.",
+      "expected": "Source kX1Table: N[128,128]; LD/D/RD[93,51]/[128,51]/[163,51]; L/R[93,128]/[163,128]; LU/U/RU[93,205]/[128,205]/[163,205]; release neutral.",
+      "observed": "PASS owner: GC all match; USB all match. Ultimate configured SOCD_2IP as observed; unchanged profile, not custom SOCD precedence."
+    },
+    {
+      "id": "reconnect_reboot",
+      "instruction": "C014 M20 capacity artifact; ordinary L, RF1+L and release before/after owner reconnect and reboot in requiredGC/USB contexts.",
+      "expected": "OrdinaryL[28,128]; RF1+L[78,128]; release[128,128]; stable ordinary/high-entry behavior.",
+      "observed": "PASS owner: all work on both Switch and Mac. No disconnect/freeze/stuck input. Separate non-attributed RGB/startup observation retained; no C014 attribution."
+    },
+    {
+      "id": "owner_config_restoration",
+      "instruction": "Owner restores original prevalidated JSON, independent immediate and post-owner-reboot raw readbacks, normal controls.",
+      "expected": "Original raw4201bytes/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480; Ultimate originalL[61,128],RF1 A,unchangedX1,cleanneutral/release.",
+      "observed": "PASS owner: confirmed all normal. Processor independently proves original/immediate/postreboot complete raw byte equality and native roundtrip; temporary profile/default edits absent from final raw Config."
+    }
+  ],
+  "negative_regression_checks": [
+    "Invalid count21/oversized physical submission NOT_TESTED/HOST_ONLY. Host proof separate from physical acceptance. NunchukNOT_TESTED; root causeUNPROVEN.",
+    "Temporary custom SOCD Down/Left precedence observed; original UltimateSOCD_2IP retained. No same-session rebind coherence, stored-load/RGB, broadplatform/release-wide claim.",
+    "OBSERVED_NONATTRIBUTED/NONBLOCKING: On Mac, entering temporary C014 M20 from another profile could leave RGBs white; starting Mac with M20 already selected could show colors after a \"No console detected\" -> retry sequence. TemporaryM20 omittedrgbConfig (zero); unchanged exact F NeoPixelBackend.hpp lines46-50 sets _config=nullptr for zero. This does not prove the root cause of observed white/color/connection-order behavior or C014 attribution. Separate ordinary source-backed profile RGB/startup reproduction is a bounded follow-up, not an automatic blocker."
+  ],
+  "power_cycle_reconnect_checks": [
+    "Owner rebooted after valid Config/profile changes under frozen protocol. Required reconnect_reboot row explicitly all work on both Switch and Mac, representative ordinary/high-entry/neutral.",
+    "Original restored raw captured immediately and again after owner reboot equals complete pre-test raw. Final owner confirmed all normal."
+  ],
+  "result": "PASS",
+  "anomalies": [],
+  "rollback_recovery": "Original prevalidated Config restored through owner manual route. Independent immediate and post-reboot raw equality4201bytes/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 and final owner confirmed all normal. C020 rollback retained, not flashed. No processor/reviewer Config/device write, flash, rebuild or hardware test.",
+  "tester": "Project owner, human observations; independent HEP processing and fresh reviewer",
+  "tested_at": "2026-10-04T22:46:32Z",
+  "evidence_gaps": []
+}

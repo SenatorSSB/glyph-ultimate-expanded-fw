@@ -1,5 +1,7 @@
 # Active Agent Queue
 
+C014 source-free HEP evidence records exact owner-reported GP_CONFIG_014_HW_V1 PASS at F e5c455637056ac535347c1176dd41c9a9d84d85a/tree5459271c2219e021414eda37c9155c5ea7a983cf, UF2 SHA-2569ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/796672bytes. Eight required rows pass; native record repo-json:docs/calibration/fixtures/gp_config_014_hardware_evidence.json and result docs/calibration/gp_config_014_hardware_result.md preserve verbatim owner observations and complete session bytes. Original4201byte Config is restored byte-exact immediately and after reboot (SHA-256f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480). Mini-screen capacity observations are bounded; GC/Switch/WUP-028 and MacXInput Ultimate/X1/reconnect coverage passed. About expectede5c4556 explicitly confirmed, literalnottranscribed. RGB observation remains OBSERVED_NONATTRIBUTED/NONBLOCKING, rootcauseUNPROVEN; invalid21/oversizedHOST_ONLY/NOT_TESTED, NunchukNOT_TESTED. Fresh independent HEP/Sol review and focused Revision-3 proof apply; no fullaggregatePASS. Firmware/protocol/catalogs unchanged, F unintegrated; separate sameH3 exactintegration/strictDONE then017 remain next. All98otherorders including024/045WAITING and owner rawKeyboard policy preserved. Owner-exclusive worktree remains reserved; permitted session reads complete, no more HEP reads required.
+
 Independent packet0028 curation is complete. Same-base immutable receipt `3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b` and its descendant adoption authorize GP-CONFIG-024/GP-VAL-045 as PREAUTHORIZED/WAITING behind existing023 exact DONE/PASS; no immediate implementation. The [binding source-free adjudication](../agent_framework/PORTFOLIO_20261005_0028_CURATOR.md) preserves all97priororders, completed040/KBD/041/019 and frozen014F/artifact/protocol. Direct owner conditional and independently fetched original Glyph/main HayBox bytes select PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT; no transformed-output repair or executable GP-KBD-002 is authorized. Original-input remap/SOCD discrepancies stay truthful; required physical/RC Keyboard rows remain pending. Allthree proposals are consumed, no globalwait accepted, and current marker defines liveness. Existing014->017->021->022->023 chain remains intact; owner hardware worktree is exclusive and was never entered/inspected/polled. Nunchuk NOT_TESTED; root cause UNPROVEN. Earlier characterization summaries retain their completion-time evidence; this current disposition supersedes their unresolved-policy instructions.
 
 GP-VAL-040 is DONE through independently reviewed live source-free integration `7eed931aa04d1dbdddb8ef13431fbe150f5382a7` and separate strict completion correspondence. The finite three-checker/two-host amendment, 64 correspondence tests, 57 actual scope observations and all five current/composed full protected consumers pass; exact Keyboard C/B/tree/raw inventory, five host pins and 28 dependencies are preserved. Native and composed full aggregates remain actual FAIL/incomplete with UNAVAILABLE final canonical proof; missing historical objects and synthetic READY reconstruction without Keyboard ancestry remain Tier-3 framework debt after independent review, with no concrete Tier-1/Tier-2 contradiction or full aggregate PASS claim. Separate preserved Keyboard integration follows this DONE. Current source remains accepted C020; exact C014 F/artifact/protocol stay frozen at hardware wait. No Keyboard policy, device action or physical acceptance is claimed.
@@ -12,7 +14,7 @@ GP-CONFIG-019 characterization is DONE after reviewed exact original-C ancestry 
 
 ## Current Persistent Campaign
 
-GP-CONFIG-014 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `e5c455637056ac535347c1176dd41c9a9d84d85a` (sole composition parent `3369819a34f82d579e21adff125a25de854f1b9b`, tree `5459271c2219e021414eda37c9155c5ea7a983cf`). The exact Mk6 build passed; the resolved 21-role decoder closure and owner-held UF2 custody passed. Preserved UF2 SHA-256 `9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af`, 796672 bytes, is at `local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2`. All 27 actual focused/affected candidate checks pass with full native fingerprint MATCH; tracked source/index/modes remain unchanged through build/custody. Fresh independent review approves the exact source/build/custody/correspondence and conditional staged protocol GP_CONFIG_014_HW_V1. Actual native full aggregate FAIL / AGGREGATE_TIMEOUT is retained with 11 completed PASS results; full aggregate PASS is claimed only if that actual report says PASS. Production 300/120 deadlines stay unchanged; existing aggregate/setup limitations remain honest Tier-3 framework debt. This canonical handoff contains five docs/control-plane paths and no candidate source. GP-VAL-034 is strict DONE at source-free `62b559ae5ee2d6dee0ff54aeb56b2653d86253c6`; exact original C014 `a3664be5354ec4253122eb2e738e70e5dfdb9ccc` and earlier handoff reports remain preserved. First owner action is one connection on accepted firmware in normal gameplay mode and a baseline report; no firmware or Config change yet. Fresh current Config/raw identity, validated restoration, concrete valid profiles and expected outputs are objective prerequisites before mutation; physical evidence remains pending. All other 96 orders and exact C020 DONE/PASS remain unchanged. The persistent H3 executor reaches hardware wait and releases canonical publication authority for isolated H1 work; after exact human HEP PASS the same worker resumes integration/DONE and the next named chain. Nunchuk NOT_TESTED; root cause UNPROVEN.
+At the historical reviewed C014 handoff, GP-CONFIG-014 was HARDWARE_TEST_REQUIRED at exact committed-before-build F `e5c455637056ac535347c1176dd41c9a9d84d85a` (sole composition parent `3369819a34f82d579e21adff125a25de854f1b9b`, tree `5459271c2219e021414eda37c9155c5ea7a983cf`). The exact Mk6 build passed; the resolved 21-role decoder closure and owner-held UF2 custody passed. Preserved UF2 SHA-256 `9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af`, 796672 bytes, is at `local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2`. All 27 actual focused/affected candidate checks pass with full native fingerprint MATCH; tracked source/index/modes remain unchanged through build/custody. Fresh independent review approves the exact source/build/custody/correspondence and conditional staged protocol GP_CONFIG_014_HW_V1. Actual native full aggregate FAIL / AGGREGATE_TIMEOUT is retained with 11 completed PASS results; full aggregate PASS is claimed only if that actual report says PASS. Production 300/120 deadlines stay unchanged; existing aggregate/setup limitations remain honest Tier-3 framework debt. This canonical handoff contains five docs/control-plane paths and no candidate source. GP-VAL-034 is strict DONE at source-free `62b559ae5ee2d6dee0ff54aeb56b2653d86253c6`; exact original C014 `a3664be5354ec4253122eb2e738e70e5dfdb9ccc` and earlier handoff reports remain preserved. First owner action is one connection on accepted firmware in normal gameplay mode and a baseline report; no firmware or Config change yet. Fresh current Config/raw identity, validated restoration, concrete valid profiles and expected outputs are objective prerequisites before mutation; physical evidence remains pending. All other 96 orders and exact C020 DONE/PASS remain unchanged. The persistent H3 executor reaches hardware wait and releases canonical publication authority for isolated H1 work; after exact human HEP PASS the same worker resumes integration/DONE and the next named chain. Nunchuk NOT_TESTED; root cause UNPROVEN.
 
 ## Historical GP-CONFIG-014 Candidate Handoff at5205ba5
 
@@ -157,14 +159,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 10,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 1,
+    "hardware_pending": 0,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
     "PLANNING_REQUIRED",
-    "HARDWARE_TEST_REQUIRED",
     "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -526,7 +527,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-014",
       "title": "Capacity repair",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "HARDWARE_VALIDATED",
       "branch": "codex/gp-config-014-built-f",
       "objective": "Exact ten-versus-twenty mismatch and historical GP-CONFIG-011 support only capacity/assertion/initialization/impossible-count guards; future accepted predecessor identity is mechanical.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -573,18 +574,15 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": false,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": "e5c455637056ac535347c1176dd41c9a9d84d85a",
       "candidate_base_configurator_sha": "3369819a34f82d579e21adff125a25de854f1b9b",
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
       "firmware_artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
-      "hardware_evidence_gaps": [
-        "Exact human GP_CONFIG_014_HW_V1 observations for eight required rows and both actual gameplay contexts are pending.",
-        "Fresh owner Config backup, byte-exact restoration route, concrete valid 0/10/11/20 artifacts and source-derived expected outputs await staged owner input before any mutation."
-      ]
+      "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_config_014_hardware_evidence.json",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": []
     },
     {
       "id": "GP-VAL-034",
@@ -8127,11 +8125,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 10; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 10; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
