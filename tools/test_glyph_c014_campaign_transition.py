@@ -50,6 +50,10 @@ def reject(call, label):
     raise AssertionError('false acceptance: ' + label)
 
 def new_repository(directory):
+    # Authenticate the actual current phase before making synthetic fixtures.
+    # The real repository's source, index and acceptance metadata remain intact.
+    current = proof.authenticate(ROOT)
+    current_critical = proof.critical_tree(ROOT, current['target'])
     root = Path(directory).resolve()
     subprocess.run(['git', '-c', 'init.templateDir=', 'init', '-q', str(root)], check=True)
     objects = Path(git(ROOT, 'rev-parse', '--git-path', 'objects'))
@@ -64,10 +68,31 @@ def new_repository(directory):
     # below against independent literal pins, even when freshly committed.
     paths = set(git(ROOT, 'diff', '--name-only', proof.READY).splitlines())
     paths |= set(git(ROOT, 'ls-files', '--others', '--exclude-standard').splitlines())
-    assert paths <= proof.GOVERNANCE_PATHS
+    assert paths <= proof.GOVERNANCE_PATHS | proof.CRITICAL
+    critical = paths & proof.CRITICAL
+    if critical:
+        assert critical == proof.CRITICAL
+        assert current['phase'] in {'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'}
+        assert current_critical == proof.critical_tree(ROOT, proof.C)
+    # Only the authenticated exact014 source is omitted. The synthetic fixture
+    # starts at READY's accepted020 source, then composes immutable C itself.
+    paths -= proof.CRITICAL | {proof.PROTOCOL, proof.EVIDENCE, proof.RESULT}
     for path in paths:
         assert (ROOT / path).is_file() and not (ROOT / path).is_symlink(), path
         write(root, path, (ROOT / path).read_bytes())
+    # Preserve every other current queue item and governance byte. Replace only
+    # the014 entry so actual F/PASS data cannot seed a synthetic baseline proof.
+    text = (root / proof.QUEUE).read_text()
+    begin, end = '<!-- queue-state:start -->', '<!-- queue-state:end -->'
+    left, tail = text.split(begin, 1); block, right = tail.split(end, 1)
+    data = proof.parsed_queue(text.encode())
+    slots = [i for i, value in enumerate(data['items']) if value['id'] == 'GP-CONFIG-014']
+    assert len(slots) == 1
+    data['items'][slots[0]] = proof.item(ROOT, proof.READY, 'GP-CONFIG-014')
+    write(root, proof.QUEUE, left + begin + '\n```json\n' + json.dumps(data, indent=2) + '\n```\n' + end + right)
+    write(root, proof.TRANSITIONS, json.dumps(dict(schema_version=1, accepted_transitions=[]), indent=2) + '\n')
+    assert not any((root / path).exists() for path in (proof.PROTOCOL, proof.EVIDENCE, proof.RESULT))
+    print('PASS authenticated current', current['phase'], 'before isolated READY reconstruction')
     return root, commit(root, 'bounded034 implementation')
 
 def composition(root, base, candidate):
