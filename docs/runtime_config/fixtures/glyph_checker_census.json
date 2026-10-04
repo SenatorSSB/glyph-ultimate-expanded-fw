@@ -1198,7 +1198,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 27230,
+      "file_size_bytes": 27247,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1288,7 +1288,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "3ae98d24164989108c16ecd904e7efa284e1136b8c8ee5a35e51e29f59ba5750",
+      "sha256": "c76f645d2c035054d207306a0c5c1d461056092e3f6bca0ffde70b51639c8dcc",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -5462,7 +5462,7 @@
       },
       "checker_id": "generated_source_owned_baseline_artifact",
       "defines_main": true,
-      "file_size_bytes": 20319,
+      "file_size_bytes": 20332,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
@@ -5527,7 +5527,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "b587a09ef02fc0be6df94a87170ec335213b881759b1a047cd0db7fc2684b6f1",
+      "sha256": "0d223703b35fc4e912706082b0625f44b6c9038b6e4db4d9da82dc654c927cd0",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

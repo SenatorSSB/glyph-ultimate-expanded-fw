@@ -273,7 +273,7 @@ def campaign_protected_scope_tests() -> None:
         all_mains("critical")
         header.chmod(mode)
         for relative in ("tools/gp_val037_unknown_negative.txt",
-                         "docs/project/ACTIVE_AGENT_QUEUE.md.bak", "docs/WORKFLOW.md.bak"):
+                         "docs/project/ACTIVE_AGENT_QUEUE.md.bak", "docs/WORKFLOW.md.bak", "AGENTS.md.bak"):
             path = root / relative
             path.write_text("unexpected metadata alias\n")
             all_mains("unclassified")
