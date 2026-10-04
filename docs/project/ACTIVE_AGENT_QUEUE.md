@@ -1,5 +1,9 @@
 # Active Agent Queue
 
+## Current GP-CONFIG-014 Candidate Cycle
+
+Mechanical activation is recorded against live canonical `58eb21c70a41080db21238cad79539859c5407f3`: strict C020/037 completion, exact accepted C020 source/artifact/physical PASS, immutable sensitive dependencies and generated modifier extent 20 pass. Source-specialist report SHA-256 `9e5926d72a1df299a38f09a3c401fdd3e2480c9a59af07a62f001e2603f1ba8c` binds the exact annex and accepted progression. The next candidate must use exact repaired header blob `9658f5e15f50887caaaf5a71efc0096e9677d144` and source blob `8cb336f31acd4c324b3ae1f8ef0827c14f15ee85`. Fresh C014 identity is an output. Candidate creation stops at the existing GP-VAL-034 source-free handoff; build, firmware integration and hardware/device/Config action remain gated. All other orders and paused GP-VAL-040/KBD are preserved. Nunchuk remains NOT_TESTED and root cause UNPROVEN.
+
 ## Current Post-C020 Revision-3 Policy
 
 The bounded owner-directed control-plane pass implements GLYPH-UD-027 and
@@ -14,13 +18,13 @@ this pass creates no new order and rewrites no historical queue or DONE record.
 Production runner, 300/120 deadlines, cancellation, resources and isolation
 are unchanged; GP-VAL-011 stays OWNER_DEFERRED / NONEXECUTABLE.
 
-All 97 structured orders and runway markers are preserved. GP-CONFIG-014
-remains PREAUTHORIZED/WAITING: 020/037 completion is satisfied, but the next
-release worker must live-verify its exact source/default/schema/decoder annex,
-generated extent 20, finite intervening deltas and absence of pending failure
-before mechanical activation. Fresh C014 is the output, not a prerequisite;
+At the completed owner-directed pass all 97 structured orders were preserved.
+The separate GP-CONFIG-014 cycle has now verified its source/default/schema/decoder
+annex, generated extent 20, finite intervening deltas and absence of pending failure.
+The machine queue/marker records its mechanical activation; fresh C014 remains
+the output, not a prerequisite;
 then its named GP-VAL-034 successor and all build/custody/review/human PASS gates
-remain. This pass does not activate or execute H3 work. The unchanged runway
+remain. The completed owner-directed policy pass did not activate H3 work; the separate014 cycle records its own activation. The unchanged runway
 marker defines executable supply. Paused GP-VAL-040/KBD stays paused; Nunchuk is NOT_TESTED and root cause
 UNPROVEN. The daemon resumes only the next already-authorized release step
 after this bounded pass is reviewed, published and live-verified.
@@ -129,12 +133,12 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
-    "recorded_preauthorized": 12,
+    "immediate_ready": 2,
+    "recorded_preauthorized": 11,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 3,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
@@ -500,8 +504,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-014",
       "title": "Capacity repair",
-      "status": "PREAUTHORIZED",
-      "branch": "codex/gp-config-014-release-safety",
+      "status": "READY",
+      "branch": "codex/gp-config-014-current-capacity",
       "objective": "Exact ten-versus-twenty mismatch and historical GP-CONFIG-011 support only capacity/assertion/initialization/impossible-count guards; future accepted predecessor identity is mechanical.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H3",
@@ -518,11 +522,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "The predictable successor is GP-VAL-034; no new Planner/Curator loop for missing future candidate identity."
       ],
       "substantive_authorization_rationale": "Exact ten-versus-twenty mismatch and historical GP-CONFIG-011 support only capacity/assertion/initialization/impossible-count guards; future accepted predecessor identity is mechanical.",
-      "mechanical_activation_conditions": [
-        "Strict DONE correspondence and exact physical F/artifact PASS with no gaps for hardware-bearing GP-CONFIG-020, GP-VAL-037; named governance predecessor DONE; no pending hardware failure.",
-        "Before creating fresh C on newly verified clean canonical B, source/default/schema/decoder dependencies equal immutable annex or named accepted transition. Only finite intervening deltas in adopted campaign contract; generated modifier extent 20, physical RGB domain 36 and relevant semantic invariants unchanged.",
-        "Create fresh current-base candidate under this exact source scope; candidate C identity is OUTPUT of this activation, not its prerequisite. Old 014 candidate/017 checkpoint are evidence only. Commit exact C and conformance inventory before the named successor governance activation; no build/integration until successor DONE."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
@@ -549,9 +549,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -7856,11 +7856,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-014","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-014, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -9449,3 +9449,502 @@ Proof: 24 focused/current checks PASS, native integrated public API and strict D
 Fresh Sol independent review SHA-256: `a485094ee45b643a7e3c6f55f5e06863cba8c3b8fface12f2b7f85cf854f947a`. Focused proof SHA-256: `a28b66ac3c8da523b5145250cc8b115bf97661f1355b8547e551e3a3afd6f1d3`. Negative proof SHA-256: `f5ad9043fc28a765887bd395fec939f64ac98104000c844731877a11122f4b20`. Preservation proof SHA-256: `aed00ef67ca55a481b6853d7def140a633b8ff845733bba3ba42690ff5374efa`. These identities are also preserved in the strict queue completion evidence.
 
 GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfied, but its fresh source/default/schema dependency activation checks are not evaluated by this task. Every other queue object and authorization/runway signal remains unchanged. The next daemon action is bounded Revision 3 control-plane simplification; this invocation stops after reviewed strict DONE publication and live verification. The automatic approval review rejected cross-chat ACK delivery; no retry or bypass was attempted, and the complete worker result is saved for direct readback.
+
+
+## 2026-10-04 GP-CONFIG-014 mechanical activation
+
+<!-- gp-config014-activation:start -->
+```json
+{
+  "work_order": "GP-CONFIG-014",
+  "mode": "MECHANICAL_ACTIVATION",
+  "base": "58eb21c70a41080db21238cad79539859c5407f3",
+  "original_conditions": [
+    "Strict DONE correspondence and exact physical F/artifact PASS with no gaps for hardware-bearing GP-CONFIG-020, GP-VAL-037; named governance predecessor DONE; no pending hardware failure.",
+    "Before creating fresh C on newly verified clean canonical B, source/default/schema/decoder dependencies equal immutable annex or named accepted transition. Only finite intervening deltas in adopted campaign contract; generated modifier extent 20, physical RGB domain 36 and relevant semantic invariants unchanged.",
+    "Create fresh current-base candidate under this exact source scope; candidate C identity is OUTPUT of this activation, not its prerequisite. Old 014 candidate/017 checkpoint are evidence only. Commit exact C and conformance inventory before the named successor governance activation; no build/integration until successor DONE."
+  ],
+  "conditions_result": "SATISFIED; fresh candidate is OUTPUT",
+  "source_specialist_sha256": "9e5926d72a1df299a38f09a3c401fdd3e2480c9a59af07a62f001e2603f1ba8c",
+  "source_specialist_report": {
+    "schema_name": "glyph_gp_config014_source_authority_report",
+    "schema_version": 1,
+    "role": "READ_ONLY_SOURCE_BUILD_AUTHORITY_SPECIALIST",
+    "head": "58eb21c70a41080db21238cad79539859c5407f3",
+    "tree": "6746800abe01da58be2ed5f07140b8a566223b17",
+    "live_remote_verified": "58eb21c70a41080db21238cad79539859c5407f3",
+    "live_verification": {
+      "ordinary": "DNS failure: Could not resolve host github.com",
+      "identical_permitted_escalation": "PASS; live configurator58eb21c70a41080db21238cad79539859c5407f3",
+      "command": "git ls-remote --refs origin refs/heads/configurator"
+    },
+    "assessment": "ACTIVATABLE_IN_CLEAN_COMMITTED_CHECKOUT",
+    "assessment_scope": "Source/mechanical prerequisites only. Root retains authoritative activation and candidate construction; separate independent review follows.",
+    "conditions": [
+      {
+        "condition": "GP-CONFIG-020 strict DONE",
+        "state": "SATISFIED",
+        "evidence": "validate_completion_evidence on exact58eb21 PASS; reviewed integrationa59c627 and later completion6266e88"
+      },
+      {
+        "condition": "GP-VAL-037 strict DONE",
+        "state": "SATISFIED",
+        "evidence": "validate_completion_evidence on exact58eb21 PASS; integrationcaf0718 and completion3801760"
+      },
+      {
+        "condition": "C020 exact built F/artifact physical PASS/accepted critical chain",
+        "state": "SATISFIED",
+        "evidence": "Independent exact committed authenticate ACCEPTED_TRANSITION; candidate3138ade/F7db4f447/earliest E6b36d99/integrationbce59d34/review040735f; processor PASS and empty gaps; no retest claim"
+      },
+      {
+        "condition": "No pending hardware failure",
+        "state": "SATISFIED",
+        "evidence": "No queue item hardware_result FAIL or status HARDWARE_FAILED; curation_obligation.pending false; C020 empty gaps"
+      },
+      {
+        "condition": "Header/cpp equal immutable base annex",
+        "state": "SATISFIED",
+        "evidence": "Both mode100644; current committed/worktree bytes equal annex, identities below"
+      },
+      {
+        "condition": "Schema/default/domain/decoder/build source dependencies",
+        "state": "SATISFIED",
+        "evidence": "55 distinct rows authenticated:45 exact; handler named accepted C020;9 finite governed checker deltas authenticated; defaults, buildselectors, schema and source-owned Ultimate/X1 unchanged"
+      },
+      {
+        "condition": "Generated modifier extent20",
+        "state": "SATISFIED",
+        "evidence": "Authenticated tracked0.4.9.2 generated header has AnalogModifier modifiers[20]; historical011 generated header independently retains20"
+      },
+      {
+        "condition": "Physical RGB domain36",
+        "state": "SATISFIED",
+        "evidence": "36 unique nonzero BTN names in unchanged Mk6 pixel_to_button_mappings, list in annex analysis"
+      },
+      {
+        "condition": "Only named accepted intervening deltas",
+        "state": "SATISFIED",
+        "evidence": "74 original-annex-toHEAD paths: accepted C020 three firmware entries; named013/036 host records;037/043/044 finite governance; named queue/status/receipts; exact independently owner-directed027/028 finite metadata. Strict013/036/043/044 completion PASS; authenticate checks full critical tree and finite delta envelope"
+      },
+      {
+        "condition": "Fresh exactC014 parent/inventory/conformance",
+        "state": "WAITING_OUTPUT",
+        "evidence": "Candidate identity is output of activation, not prerequisite. No C014 created by specialist"
+      },
+      {
+        "condition": "034 DONE before firmware build",
+        "state": "WAITING_NEXT_PHASE",
+        "evidence": "Named ordinary successor; candidate preserves exactC then034 separate source-free governance. No build/integration authorized in this specialist task"
+      },
+      {
+        "condition": "FreshC014 build/custody/physical PASS",
+        "state": "WAITING_NEXT_PHASE",
+        "evidence": "Separate future exact committedF/artifact acceptance required; predecessor hardware never acceptsC014"
+      }
+    ],
+    "original_checkout_limitations": {
+      "ignored_documentation": [
+        "docs/.DS_Store",
+        "docs/calibration/.DS_Store",
+        "docs/calibration/fixtures/.DS_Store",
+        "docs/export/manual_captures/.DS_Store"
+      ],
+      "native_authenticate_result": "FAIL dirty path outside reviewed governance inventory; no ignored file deleted or policy weakened",
+      "committed_snapshot_result": "PASS in disposable detached exactHEAD checkout",
+      "local_pio": "Stale historical0.4.9.1 generated/Nanopb cache hashes differ from authenticated0.4.9.2 closure; NEVER use as candidate authority. Clean futureF must resolve and hash actual selected dependencies separately. This report claims tracked/accepted source authority, not local .pio build acceptance."
+    },
+    "predecessor_artifact_readback": {
+      "path": "local_backups/hardware-artifacts/7db4f447d5e796367071b7143fa6c9274c70ae5e/7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500/firmware.uf2",
+      "bytes": 796160,
+      "sha256": "7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500",
+      "actual_match": true
+    },
+    "annex_analysis": "/private/tmp/glyph-config014/source-annex-analysis.json",
+    "packets": [
+      {
+        "commit": "49528e32849069e87f2729c24be35a21b002b6df",
+        "path": "docs/planning/portfolio_20261002_0151.md",
+        "sha256": "96a38a0cc08739aa23b8942c7d0a33dbfda683221cbda92785e204548796d4c4",
+        "parent": "d9ad6132ca0912398839673cc0da24e54a924210"
+      },
+      {
+        "commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+        "path": "docs/planning/portfolio_20261002_0118.md",
+        "sha256": "d23e4dd5befd5d805c2362161e735fccc0516b7f970374ce1a94952eb9062ba8",
+        "parent": "d9ad6132ca0912398839673cc0da24e54a924210"
+      }
+    ],
+    "metadata_mapping": [
+      {
+        "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "annex_blob": "3e934f2f5aae13a36310a35d273727da60723abe",
+        "annex_sha256": "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876",
+        "current_mode": "100644",
+        "current_blob": "6ca93c96c944ee539a2d409e32889306c1eafac7",
+        "current_sha256": "68bc7756eacb63c6831709c803349d52206ed7a271dc49b0cd33d6c53f0c3c38",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "EXACT_ACCEPTED_C020_SOURCE_TRANSITION",
+        "last_change": "3138ade526cabde23a0abedcb94acae8512579d1 Repair C020 Button ABI assertions and prove both enum layouts",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/glyph_checker_context.py",
+        "annex_blob": "a73fb4a058b8ee5704533bcd11a00c495c5f55dc",
+        "annex_sha256": "fe66f28bbbe39583d576cdddc6fcc57ec14239b6326ad36c7ae5245f9b4c4168",
+        "current_mode": "100644",
+        "current_blob": "fc6e5141919f3d081ea1c0bff9cc56093c620e27",
+        "current_sha256": "2559686a996221c3630c923a6758b14a7854036f5931b91b143044d34e709ba3",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "d26abf1cf8a11c7c18216240231c658fe8bc5e25 Authenticate exact C020 ABI repair through finite governance contract",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/glyph_hardware_correspondence.py",
+        "annex_blob": "40f784846a8929ba64ab20296a13a1b3b112754b",
+        "annex_sha256": "c2efd5b8a5771f09d9563cf13b63d9631701ef60bcff5f9785dc028c99df0df1",
+        "current_mode": "100644",
+        "current_blob": "6e5289d109adf132bc06a368ff5e8dabfb00ad35",
+        "current_sha256": "c20397ed2293b1a6aa8ac7c369045b2e99cf2058e61eece191e2d8481d9fad17",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "5ac2247644b2415b07457fa0e91c419cfceee498 Implement owner-directed Revision 3 control-plane contracts",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/check_glyph_config_010_integration_semantic_correspondence.py",
+        "annex_blob": "004158bc9bb278258f49369323b7d7d259e32aed",
+        "annex_sha256": "9b2eaa86148ba615d84f37bcf0a9176a45444dd4117fb59f86a2e6cfede58b56",
+        "current_mode": "100644",
+        "current_blob": "a54888a26245a4d0c5848a99f77baf4a9daac011",
+        "current_sha256": "cae243130ec33d6b743d50d54cede3b8ed75c37261ea91433eca72d9daa1faae",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "c0916f93ad280f995f39d30a3381389423cad4e4 Checkpoint incomplete GP-VAL-037 governance pending runner authority",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/check_glyph_generated_source_owned_generator_contract.py",
+        "annex_blob": "674004964ec77196df1a8f04abc8c90780f8252b",
+        "annex_sha256": "23e01cb6131f4f0a0fd59ee70ed2bb41e21b13ad2281ed0472ab3e0d72d83bd2",
+        "current_mode": "100644",
+        "current_blob": "49af8c698a715bb762baedc0762f6f7fc63cd2f5",
+        "current_sha256": "0bf07fa03f1a407f4f58b44727b55982614986113b66e4ca372a2564aa650db3",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "d4d79a227daa0a76229b3cfe6badd494c6391e01 Repair exact workflow scope and preserve concise current-state contract",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+        "annex_blob": "30a50d97ea4e6421031b163b197cc187d838a110",
+        "annex_sha256": "a0dbaef516467f3490469bebb28bc5d02b5faa40af5b8e4c1889d88d19e4a7bc",
+        "current_mode": "100644",
+        "current_blob": "bcf5d3cee30515666a48fc3f80325e42cf7f19e3",
+        "current_sha256": "0d223703b35fc4e912706082b0625f44b6c9038b6e4db4d9da82dc654c927cd0",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "58eb21c70a41080db21238cad79539859c5407f3 Admit exact agent contract metadata and reject its adjacent alias",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/check_glyph_generated_source_owned_artifact_install.py",
+        "annex_blob": "bf143f2dfff195263489f202fa3f39b9ec03bec0",
+        "annex_sha256": "5e2953e7aca33e045af945ee5e4446135f76c629e5852e0ebcf27cc6864c9d6b",
+        "current_mode": "100644",
+        "current_blob": "0405603cf994247ee5f3503afa5a66e405590125",
+        "current_sha256": "5624483ef7cd7f0f62670e831891031297e8d4882137154e99c385ccc60d8de2",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "d4d79a227daa0a76229b3cfe6badd494c6391e01 Repair exact workflow scope and preserve concise current-state contract",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+        "annex_blob": "0d010f5cddcb5bda89699626697eef54f4d1329a",
+        "annex_sha256": "f5782b407dd735189cdd221171158a763142f25cd520e5f2f8858ff3b5d40bb2",
+        "current_mode": "100644",
+        "current_blob": "031b684bdf2122ef8b9dbc93d460dcebe6378958",
+        "current_sha256": "99ce7da1add6cd601894001ab14dfe01f50593dee757853d38b1567d5353a221",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "d4d79a227daa0a76229b3cfe6badd494c6391e01 Repair exact workflow scope and preserve concise current-state contract",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/check_glyph_docs_agent_surface.py",
+        "annex_blob": "d13cc649f43ff89059120a0a72f6c0dce3888483",
+        "annex_sha256": "9a5ec8a4cec0682117ab90ca8319a65e8f56d279fb089b4aab15cd6ce1cc9811",
+        "current_mode": "100644",
+        "current_blob": "3bf4ca6e3f68847db495403dd2f5e0f219dfe178",
+        "current_sha256": "3982115c3f941be8867f1d1f9da81b2bed2188a857d79444c177ee77a8aac95b",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "c0916f93ad280f995f39d30a3381389423cad4e4 Checkpoint incomplete GP-VAL-037 governance pending runner authority",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      },
+      {
+        "path": "tools/run_glyph_runtime_config_validation.py",
+        "annex_blob": "ffd910f865fd7483e6544a1b11c203b879c5138a",
+        "annex_sha256": "a28d4a21fc88fb36248bca36a3e8da5da980122ac2c9253ff0f0e530e6841b52",
+        "current_mode": "100644",
+        "current_blob": "148999e8b12c68e641c2f1278c71390f92e74cec",
+        "current_sha256": "05f98c6c9f24d3c5fec7cb165f9ed7e40091423bfc49d3996317b70c04a06f27",
+        "match": false,
+        "worktree_matches_committed": true,
+        "classification": "NAMED_REVIEWED_CONTROL_PLANE_PROGRESSION",
+        "last_change": "d26abf1cf8a11c7c18216240231c658fe8bc5e25 Authenticate exact C020 ABI repair through finite governance contract",
+        "authentication": "glyph_campaign_transition.authenticate exact committed snapshot ACCEPTED_TRANSITION"
+      }
+    ],
+    "current_production_scope": [
+      {
+        "path": "include/modes/CustomControllerMode.hpp",
+        "mode": "100644",
+        "blob": "7c073b2e91f3950c2f1a785940b39539dda433b5",
+        "sha256": "0d4c8a7dbfd53d84745e2931739730bfeb760a47b20a5cba1b1c0531775e5744"
+      },
+      {
+        "path": "src/modes/CustomControllerMode.cpp",
+        "mode": "100644",
+        "blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626",
+        "sha256": "a85d36b53fc17b3a7da46d835761558a97052432ac10226b94985263fa8468a6"
+      }
+    ],
+    "required_candidate_blobs": [
+      {
+        "path": "include/modes/CustomControllerMode.hpp",
+        "mode": "100644",
+        "blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+        "sha256": "8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414"
+      },
+      {
+        "path": "src/modes/CustomControllerMode.cpp",
+        "mode": "100644",
+        "blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+        "sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31"
+      }
+    ],
+    "tracked_decoder_closure": [
+      {
+        "path": "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+        "mode": "100644",
+        "blob": "3f181d873a81d82c27c56874f6a63328f38eaaf3",
+        "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+        "role": "nanopb_pb_h",
+        "expected_sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+        "mode": "100644",
+        "blob": "0f71c33b1bd99e531c9eacda5f9b012ddb3c8339",
+        "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+        "role": "nanopb_pb_decode_c",
+        "expected_sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+        "mode": "100644",
+        "blob": "1ef9d56c6e0b6430f9067cbb911c7e697d034e24",
+        "sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+        "role": "nanopb_pb_decode_h",
+        "expected_sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+        "mode": "100644",
+        "blob": "6aee76b1efa1e6f2f3fe7d43629da9b2114eea19",
+        "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+        "role": "nanopb_pb_common_c",
+        "expected_sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+        "mode": "100644",
+        "blob": "58aa90f76d58596d3f45a120b65b4a0bff7fd688",
+        "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+        "role": "nanopb_pb_common_h",
+        "expected_sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+        "mode": "100644",
+        "blob": "c59855ecb19be7f5193833d94fe41cc1828ffb14",
+        "sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+        "role": "generated_c",
+        "expected_sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "mode": "100644",
+        "blob": "01d0dda2ae768dd0f18c0f338a74c55e613bb199",
+        "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+        "role": "generated_h",
+        "expected_sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/schema/config.proto",
+        "mode": "100644",
+        "blob": "a58a2bf4dd827ad92482f1ac30c3d56bbea93c05",
+        "sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+        "role": "config_proto",
+        "expected_sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+        "matches": true
+      },
+      {
+        "path": "tools/fixtures/gp_config012_button_host/schema/config.options",
+        "mode": "100644",
+        "blob": "7175d8463ade5b0cd45f1a5f8f99be44f5719c3c",
+        "sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+        "role": "config_options",
+        "expected_sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+        "matches": true
+      }
+    ],
+    "implementation_contract": [
+      "Copy exact two historical repaired blobs; do not reconstruct or reformat them. 0118 says any other repair bytes require fresh source/Curator judgment.",
+      "Header names kMaxCustomModeModifiers=20; std::extent equality assertion; pointer=nullptr; capacity20 zero mask cache.",
+      "SetConfig direct modifiers_count>20 returns before InputMode::SetConfig, pointer assignment and either cache mutation.",
+      "UpdateAnalogOutputs null/live count>20 guard precedes direction lookup/UpdateDirections/modifier cache/trigger/analog reads.",
+      "0..20 valid loops/masks/combo behavior/order/priorities/axis arithmetic remain exact. Digital processing is unchanged. No stale-valid-rebind018 policy correction."
+    ],
+    "finite_new_host_path_recommendations": [
+      "tools/check_glyph_gp_config014_modifier_capacity.py",
+      "tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp",
+      "docs/runtime_config/gp_config014_modifier_capacity.md",
+      "docs/runtime_config/fixtures/gp_config014_modifier_capacity.json"
+    ],
+    "host_inventory_authority": "0118/014/034 leave new host filenames as future finite exact C inventory; regular100644 paths only, outside production/include roots. These are recommendations, not existing reserved authority. Freeze after exact C commit and independently review. Three hardware literals remain only the exact014 queue paths.",
+    "meaningful_candidate_proof": [
+      "Use real production header/cpp plus ControllerMode/InputMode/socd and tracked authenticated config.pb.h/pb.h. No duplicated implementation. Compile ASan/UBSan/bounds with -fno-sanitize-recover=all and frame pointers. Keep historical011 assets frozen.",
+      "Initial unconfigured instance: normal construction, assert nullptr and every20 modifier cache entry zero; call both paths and verify outputs/state unchanged. Avoid placement zeroing that conceals missing initializers.",
+      "For0,10,11,20 fresh accepted configs: independently compute all populated modifier masks, verify last cache index/count; process representative active/inactive modifiers. 11/20 all must PASS under sanitizers. Assert exact outputs for compound/override, overlapping modifiers/order, combo filtering, priority and triggers. Preserve source-supported arithmetic rather than imposing new expected semantics.",
+      "Direct oversize21 and pb_size_t maximum: first seed validInputMode/class pointer/masks/combo masks/filtered state, snapshot full prior class state and pointed inputcfg; attempt oversize with different config; assert all state/output unchanged and no InputMode mutation. Test fresh unconfigured oversize as well.",
+      "Live count21 after valid20SetConfig: guard allows reading pointer/count only. Poison modifier cache and modifier/direction/analog arrays with ASan where available while excluding count; call analog and assert unchanged outputs/all class state, no UpdateDirections/analog access. Test high count as well. Do not claim digital path refuses livecount.",
+      "Compile exact candidate header with copy of authenticated generated header modified modifiers[20] to[19]/[21]; both MUST fail at equalityassert. No changed real schema.",
+      "Negative source/cache/guard omission controls, one-byte substitutions, path/mode/parent/inventory failures; fixture checksum reseal alone cannot authorize altered source."
+    ],
+    "baseline_executed_checks": [
+      {
+        "command": "python3 -B tools/check_glyph_custom_modifier_cache_characterization.py",
+        "context": "exact58eb21 disposable committed snapshot; header/cpp equal historical011 identities",
+        "result": "PASS 8 cases;0/10success,11/20expectedSANITIZER_FAILURE;H1 only"
+      },
+      {
+        "command": "python3 -B tools/check_glyph_gp_config012_button_mask_characterization.py",
+        "context": "same exact snapshot",
+        "result": "PASS; authenticated0.4.9.2 closure; frozen historical observation/current acceptedC020;enum+shift sanitizer/caller4of4"
+      },
+      {
+        "command": "validate_completion_evidence(single named item, exact58eb21)",
+        "result": "PASS each020/037/013/036/043/044"
+      },
+      {
+        "command": "glyph_campaign_transition.authenticate(exact committed58eb21)",
+        "result": "ACCEPTED_TRANSITION in disposable clean checkout;original ignored-doc gate limitation preserved"
+      }
+    ],
+    "affected_consumers_before034": [
+      {
+        "consumer": "Five exact protected guards named034",
+        "tier": 2,
+        "candidate_expected_result": "REJECT exact two changed production paths until separate034 authenticatesC014. Do not bypass/allowinclude/prefix/reseal"
+      },
+      {
+        "consumer": "tools/check_glyph_custom_modifier_cache_characterization.py",
+        "tier": 2,
+        "candidate_expected_result": "Exact old source/hash guard rejects changed header/cpp;034 preserves immutable011 replay on old source and adds distinct repaired-current014"
+      },
+      {
+        "consumer": "tools/check_glyph_gp_config012_button_mask_characterization.py",
+        "tier": 2,
+        "candidate_expected_result": "Custom SetConfig caller bytes/hashes change;034 needs exact named guard/capacity transformation current overlay with historical012 frozen; mask arithmetic and valid semantics unchanged"
+      },
+      {
+        "consumer": "tools/check_glyph_setconfig_runtime_rebinding_characterization.py",
+        "tier": 2,
+        "candidate_expected_result": "Whole custom cpp digest changes; preserve13 historical cases and valid replacement/coherence limits, add source-bound exact capacity/guard overlay; no018policy"
+      },
+      {
+        "consumer": "tools/check_glyph_config_010_integration_semantic_correspondence.py and glyph_campaign_transition",
+        "tier": 1,
+        "candidate_expected_result": "Current criticaltree outside accepted020 until034 preciseC014 candidate/accepted transition implemented; keep source-owned Ultimate/X1/010 historical+current proof"
+      },
+      {
+        "consumer": "Neighbor realSetConfig transaction, complete Config validation/domain/count limits, InputMode/remap/socd, menus/persistence, KBD/019 exact overlays",
+        "tier": 2,
+        "candidate_expected_result": "Applicable unchanged functions/bodies must be demonstrated; no silent whole-file hash reseal. Use existing neighbors plus exact new capacity runtime proof"
+      },
+      {
+        "consumer": "Manifest/census/health/framework/queue/sequence/navigation/surface",
+        "tier": "directly affected contract consumers2;global recursive health3",
+        "candidate_expected_result": "Run focused required consumers with truthful expected successor gate; preserve fullaggregate debt and do not claim unrun aggregatePASS"
+      }
+    ],
+    "recommended_commands": [
+      "python3 -B tools/check_glyph_gp_config014_modifier_capacity.py",
+      "python3 -B tools/check_glyph_custom_modifier_cache_characterization.py [historical exact source replay after034]",
+      "python3 -B tools/check_glyph_gp_config012_button_mask_characterization.py [historical+repairedcurrent after034]",
+      "python3 -B tools/check_glyph_setconfig_runtime_rebinding_characterization.py [historical+current after034]",
+      "python3 -B tools/check_glyph_config_010_integration_semantic_correspondence.py [exact applicable current/historical roots after034]",
+      "python3 -B tools/check_glyph_configurator_setconfig_transaction.py [both authenticatedABI modes through existing consumer]",
+      "python3 -B tools/check_glyph_gp_config020_button_validation.py",
+      "git diff-tree -r --no-renames --raw -z B014 C014"
+    ],
+    "object_closure": {
+      "roots_file": "/private/tmp/glyph-config014/finite-object-roots.json",
+      "root_count": 29,
+      "snapshot_setup": "git clone --no-checkout --shared <local canonical> <disposable>; git checkout --detach58eb21. Uses local read-only alternates, no object-store copy/network fetch. This does not establish aggregate reduced-object isolation.",
+      "finite_import_command": "git -C <control> fetch --no-write-fetch-head --no-tags <local canonical> <fullSHA roots from finite-object-roots.json>",
+      "additional_current_root": "58eb21c70a41080db21238cad79539859c5407f3",
+      "proof_file": "/private/tmp/glyph-config014/source-transition-proof.json"
+    },
+    "not_performed": [
+      "Authoritative repository mutation",
+      "Firmware build/link/UF2",
+      "034 implementation/execution",
+      "Config/device operation or physical testing",
+      "Full aggregate",
+      "Independent self-approval"
+    ],
+    "safety_nonclaims": [
+      "Fresh014 source has no hardware acceptance yet",
+      "018valid same-session rebind semantics unchanged/unresolved",
+      "NunchukNOT_TESTED",
+      "Root causeUNPROVEN",
+      "Host sanitizer proof does not establish physical reachability",
+      "Current localpio cache is not accepted build dependency evidence"
+    ],
+    "evidence_file_sha256": {
+      "/private/tmp/glyph-config014/source-annex-analysis.json": "b61cc48a835383cfbd76cc0a4221016a0ef0243958f5670a458f9729c072a7ce",
+      "/private/tmp/glyph-config014/source-transition-proof.json": "15ffaa73c8c747f2ff26bcdf9195a219754b438131a03d7de793b4a0dcc5d585",
+      "/private/tmp/glyph-config014/finite-object-roots.json": "de57383c29d74248dd4a4f7001618bd6f52960789efc7e663ab93902778ab66a"
+    }
+  },
+  "before_status": "PREAUTHORIZED",
+  "after_status": "READY",
+  "firmware_changes": false,
+  "other96_orders_unchanged": true,
+  "protected_repair_blobs": {
+    "include/modes/CustomControllerMode.hpp": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+    "src/modes/CustomControllerMode.cpp": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85"
+  }
+}
+```
+<!-- gp-config014-activation:end -->
