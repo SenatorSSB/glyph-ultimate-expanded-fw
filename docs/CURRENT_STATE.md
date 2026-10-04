@@ -1,21 +1,6 @@
 # Glyph Current State
 
-## Current GP-VAL-040 H1 Preparation
-
-The latest verified owner resume supersedes the historical pause. GP-VAL-040
-is mechanically READY on canonical `5205ba518d1d5fa19e7584d6c6d5210932091b3e`:
-exact preserved KBD C/B/tree/raw inventory and all 28 dependency pins pass;
-B/C share 234 critical entries, and current has 236 critical files matching only the accepted
-C020 three-path source transition. The candidate remains unmerged. Preparation
-adds the five exact host classifications and only the two authorized host
-literals at each of the three feature-scope mains. Focused scope/identity/mode
-negatives and independent implementation review remain required before
-integration and later strict DONE. No Keyboard policy or hardware result is
-selected. The separate unchanged C020 finite metadata catalog rejects a
-composed KBD head before feature scope; source and independent review classify
-that result as FRAMEWORK_VALIDATION_DEBT under Revision 3, subject to passing
-the applicable focused proofs. Preserve the actual FAIL; no aggregate PASS is
-claimed and no authentication predicate is changed.
+Current H1 preparation: the latest verified owner resume supersedes the historical pause. GP-VAL-040 is mechanically READY at `5205ba518d1d5fa19e7584d6c6d5210932091b3e`; exact preserved KBD identity, 28 dependency pins and accepted C020 critical overlay pass. The candidate remains unmerged. Five finite host classifications and three two-literal scope changes are under focused validation and independent review before integration/strict DONE. The unchanged C020 metadata-catalog rejection remains honest FRAMEWORK_VALIDATION_DEBT under Revision 3; no aggregate PASS, Keyboard policy or hardware result is claimed. See HARDWARE_CORRESPONDENCE.md for the exact proof boundary.
 
 Status label: CURRENT. <!-- current-runway:start -->
 {"ready_ids":["GP-VAL-040","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
