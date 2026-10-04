@@ -197,7 +197,10 @@ def campaign_protected_scope_tests() -> None:
     from glyph_campaign_transition import ADOPTION, C, GOVERNANCE_PATHS, authenticate
     source = Path(__file__).resolve().parents[1]
     source_proof = authenticate(source)
-    if source_proof['contract'] == 'c020_abi_repair':
+    capacity_phase = source_proof['contract'] == 'c014_capacity'
+    if capacity_phase:
+        from glyph_c014_campaign_transition import B as base, C as candidate, GOVERNANCE_PATHS
+    elif source_proof['contract'] == 'c020_abi_repair':
         from glyph_c020_abi_repair_transition import B_R, GOVERNANCE_PATHS
         base, candidate = B_R, source_proof['candidate']
     else:
@@ -226,10 +229,30 @@ def campaign_protected_scope_tests() -> None:
             # E must exercise the real scope mains before any F/C_R integration.
             # Its evidence removal conveys no protected-source exemption.
             proof = authenticate(root)
-            if proof['critical_paths'] or not proof['accepted_metadata_paths']:
+            if ((proof['critical_paths'] and not capacity_phase)
+                    or not proof['accepted_metadata_paths']):
                 raise AssertionError('source-free processor context has source authority')
         else:
-            run(root, "merge", "--no-ff", "--no-edit", candidate)
+            if capacity_phase:
+                previous = output(root, 'rev-parse', 'HEAD')
+                merge = subprocess.run(['git', 'merge', '--no-ff', '--no-commit', candidate],
+                                       cwd=root, capture_output=True, text=True)
+                conflicts = set(output(root, 'diff', '--name-only', '--diff-filter=U').splitlines())
+                # Both sides carry the independently authored host proof and
+                # metadata. Preserve reviewed governance bytes; production
+                # conflicts never receive an automatic resolution.
+                if not conflicts <= GOVERNANCE_PATHS:
+                    raise AssertionError('candidate composition has non-governance conflict')
+                if merge.returncode and not conflicts:
+                    raise AssertionError(merge.stderr)
+                for relative in conflicts:
+                    exact = subprocess.run(['git', 'show', previous + ':' + relative],
+                                           cwd=root, capture_output=True, check=True).stdout
+                    (root / relative).write_bytes(exact)
+                    run(root, 'add', '--', relative)
+                run(root, 'commit', '--no-edit')
+            else:
+                run(root, "merge", "--no-ff", "--no-edit", candidate)
         for ancestor in ((base,) if processor_phase else (base, candidate)):
             run(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
         env = dict(os.environ, GLYPH_CHECKER_BASE=base, PYTHONDONTWRITEBYTECODE="1")

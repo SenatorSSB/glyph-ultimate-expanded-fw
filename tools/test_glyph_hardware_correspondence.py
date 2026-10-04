@@ -88,6 +88,35 @@ GP_CONFIG_013_COUPLED_PATHS = (
 
 
 class CorrespondenceTests(unittest.TestCase):
+    def test_gp_val034_literal_hosts_preserve_critical_precedence(self):
+        paths = (
+            'tools/glyph_c014_campaign_transition.py',
+            'tools/test_glyph_c014_campaign_transition.py',
+            'docs/runtime_config/fixtures/gp_val034_c014_transition.json',
+            'docs/runtime_config/fixtures/gp_val034_accepted_transitions.json',
+            'tools/check_glyph_custom_modifier_cache_characterization.py',
+            'tools/check_glyph_gp_config014_modifier_capacity.py',
+            'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp',
+            'docs/runtime_config/fixtures/gp_config014_modifier_capacity.json',
+            'docs/runtime_config/gp_config014_modifier_capacity.md',
+            'docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md',
+            'docs/calibration/gp_config_014_hardware_result.md',
+            'docs/calibration/fixtures/gp_config_014_hardware_evidence.json',
+        )
+        for path in paths:
+            self.assertEqual(correspondence.classify_path(path), 'NON_BEHAVIORAL')
+            for alias in (path + '.bak', path.swapcase(), path.replace('014', '014x')):
+                if alias == path:
+                    continue
+                with self.assertRaises(correspondence.CorrespondenceError):
+                    correspondence.classify_path(alias)
+        critical = {'include/modes/CustomControllerMode.hpp',
+                    'src/modes/CustomControllerMode.cpp', 'platformio.ini'}
+        with mock.patch.object(correspondence, 'NON_BEHAVIORAL_PATHS',
+                               correspondence.NON_BEHAVIORAL_PATHS | critical):
+            for path in critical:
+                self.assertEqual(correspondence.classify_path(path), 'CRITICAL')
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="glyph-correspondence-")
         self.addCleanup(self.temp.cleanup)

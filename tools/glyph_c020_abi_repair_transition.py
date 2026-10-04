@@ -981,3 +981,35 @@ def authenticate(root):
     if processor is not None:
         proof.update(evidence_commit=processor['evidence_commit'], evidence_root=processor['evidence_root'])
     return proof
+
+
+@original._proof_invocation
+def authenticate_committed_predecessor(root, target):
+    """Run the unchanged C020 proof in an actual immutable local checkout.
+
+    The caller still proves its own current tree/index/worktree. This interface
+    certifies the separately named accepted predecessor, never current C014.
+    Objects remain in the local source store; there is no fetch or object copy.
+    """
+    import tempfile
+    root = Path(root).resolve()
+    require(isinstance(target, str) and re.fullmatch('[0-9a-f]{40}', target),
+            'predecessor must be an immutable full commit')
+    _git(root, 'cat-file', '-e', target + '^{commit}')
+    objects = Path(_git(root, 'rev-parse', '--git-path', 'objects').decode().strip())
+    if not objects.is_absolute():
+        objects = root / objects
+    objects = objects.resolve(strict=True)
+    with tempfile.TemporaryDirectory(prefix='glyph-c020-immutable-predecessor-') as directory:
+        snapshot = Path(directory)
+        subprocess.run(['git', '-c', 'init.templateDir=', 'init', '-q', str(snapshot)],
+                       check=True, capture_output=True)
+        (snapshot / '.git/objects/info/alternates').write_text(str(objects) + '\n')
+        subprocess.run(['git', '-C', str(snapshot), '-c', 'core.hooksPath=/dev/null',
+                        'checkout', '--detach', '--quiet', target],
+                       check=True, capture_output=True)
+        proof = authenticate(snapshot)
+        require(proof['phase'] == 'ACCEPTED_TRANSITION'
+                and proof['candidate'] == C_R and proof['target'] == target,
+                'predecessor lacks actual repaired C020 accepted proof')
+        return dict(proof)

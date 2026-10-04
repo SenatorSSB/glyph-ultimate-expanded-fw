@@ -382,3 +382,24 @@ acceptance tests reconstruct a source-free adopted base before review and
 processor records; they never establish controller acceptance. Actual acceptance
 still requires the exact built snapshot, independent review, preserved artifact,
 processor-accepted human PASS, empty gaps and reviewed integration chronology.
+
+## GP-VAL-034 capacity transition
+
+The separate finite C014 proof authenticates immutable candidate
+`a3664be5354ec4253122eb2e738e70e5dfdb9ccc` and direct base
+`8b8e45b17a5670bbf983360faf87bdf9d6b50ce2`. Only its two exact
+CustomControllerMode entries may differ in the 236-entry critical inventory.
+The accepted C020 predecessor is proved at that immutable base; C014 then
+receives its own full current source, index, worktree, mode and ancestry proof.
+The five protected scope filters retain their content checks after removing
+only entries certified by that proof.
+
+Capacity host tools and the separate mapping/catalog are exact regular 100644
+literals in `glyph_hardware_correspondence.py`; this does not classify either
+production entry as nonbehavioral. The original C014 host pins and historical
+011/012/rebinding evidence remain immutable. Current tool overlays require the
+separate reviewed034 inventory. Candidate validation grants no physical
+acceptance. Source-free R and E preserve accepted C020 firmware; E precedes I
+and requires no I catalog. Actual I requires exact C014 F/build/artifact/review,
+complete processor PASS, the genuine ordered catalog and current critical-tree
+correspondence. C014 cannot inherit prior010/020 controller acceptance.

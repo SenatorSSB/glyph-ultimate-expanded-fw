@@ -751,6 +751,9 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
         "coordinate_native_contract": "check_glyph_coordinate_native_runtime_profile_contract.py",
         "docs_agent_surface": "check_glyph_docs_agent_surface.py",
         "campaign_webserial_source_authority": "check_glyph_runtime_config_webserial_device_write_source_authority.py",
+        "custom_modifier_cache_characterization": "check_glyph_custom_modifier_cache_characterization.py",
+        "gp_config014_modifier_capacity": "check_glyph_gp_config014_modifier_capacity.py",
+        "gp_val034_c014_transition": "test_glyph_c014_campaign_transition.py",
     }
     expected = set(campaign.ROOTS)
     current_argument_authority = {
@@ -785,7 +788,7 @@ def gp_val037_campaign_catalog_cases(module: Any) -> list[str]:
         if len(authenticated_proofs) != 1 or module.canonical_fingerprint() != before:
             raise AssertionError("actual catalog phase authentication changed repository")
         proof = authenticated_proofs[0]
-        if proof.get('contract') == 'c020_abi_repair':
+        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity'}:
             expected.update(proof['object_roots'])
         else:
             catalog_path = module.ROOT / campaign.TRANSITIONS
@@ -1004,6 +1007,46 @@ def gp_val043_runner_proof_cases(module: Any) -> list[str]:
     return ["ISO-21-repaired-authenticated-proof-roots-and-malformed-rejection",
             "ISO-22-repaired-catalog-not-root-authority",
             "ISO-23-repaired-exact-argv-and-authentication-setup-failure"]
+
+def gp_val034_catalog_cases(module: Any) -> list[str]:
+    """New consumers select only immutable proof roots, never catalog values."""
+    import glyph_campaign_transition as campaign
+    with tempfile.TemporaryDirectory(prefix='glyph-val034-catalog-') as directory:
+        root = fresh_root(Path(directory))
+        identity = module.git_value('rev-parse', 'HEAD', cwd=root)
+        proof = dict(contract='c014_capacity', object_roots=frozenset({identity}))
+        consumers = (
+            ('custom_modifier_cache_characterization', 'check_glyph_custom_modifier_cache_characterization.py'),
+            ('gp_config014_modifier_capacity', 'check_glyph_gp_config014_modifier_capacity.py'),
+            ('gp_val034_c014_transition', 'test_glyph_c014_campaign_transition.py'),
+        )
+        catalog = root / 'docs/runtime_config/fixtures/gp_val034_accepted_transitions.json'
+        catalog.write_text('{"accepted_transitions":[{"build":"' + 'b' * 40 + '"}]}\n')
+        with mock.patch.object(module, 'ROOT', root), mock.patch.object(campaign, 'ROOTS', frozenset()):
+            for checker_id, filename in consumers:
+                selected = entry(checker_id)
+                selected.update(path='tools/' + filename, command=['python3', 'tools/' + filename])
+                with mock.patch.object(campaign, 'authenticate', return_value=proof) as actual:
+                    if module.required_catalog([selected]) != ({}, {identity}):
+                        raise AssertionError('014 finite consumer roots differ')
+                    actual.assert_called_once_with(root)
+                for bad in (None, {identity}, frozenset(), frozenset({'A' * 40}), frozenset({'0' * 39})):
+                    with mock.patch.object(campaign, 'authenticate', return_value=dict(proof, object_roots=bad)):
+                        try:
+                            module.required_catalog([selected])
+                        except ValueError:
+                            pass
+                        else:
+                            raise AssertionError('malformed014 proof roots accepted')
+                for near in ({**selected, 'id': checker_id + '_alias'},
+                             {**selected, 'command': selected['command'] + ['--unexpected']},
+                             {**selected, 'applicability': 'historical_only'}):
+                    with mock.patch.object(campaign, 'authenticate', side_effect=AssertionError('near014 selection')):
+                        if module.required_catalog([near]) != ({}, set()):
+                            raise AssertionError('near014 consumer granted roots')
+    return ['ISO-24-014-exact-current-consumers-and-authenticated-roots',
+            'ISO-25-014-malformed-roots-and-catalog-self-authority-rejected']
+
 
 def gp_val037_current_argument_cases(module: Any) -> list[str]:
     """Exercise the actual load/preflight and argv path in disposable repositories.
@@ -1593,6 +1636,7 @@ def main() -> int:
 
     passed.extend(gp_val037_current_argument_cases(module))
     passed.extend(gp_val043_runner_proof_cases(module))
+    passed.extend(gp_val034_catalog_cases(module))
     passed.extend(isolation_contract_cases(module))
     # The old synthetic repositories exercise only the pre-campaign catalog.
     # They contain no adopted campaign authority and must not impersonate it.

@@ -57,6 +57,14 @@ def correspondence(value: dict) -> None:
     for record in value["production_sources"]:
         path = ROOT / record["path"]
         text = verify_current_source(ROOT, record["path"], record["sha256"]).decode("utf-8")
+        if record["path"] == "src/modes/CustomControllerMode.cpp":
+            # Exact014 authentication grants only its capacity/guard overlay.
+            # Compare all old/new valid replacement statements and their order.
+            from check_glyph_gp_config012_button_mask_characterization import section, valid_custom_body
+            current = path.read_text(encoding="utf-8")
+            valid_custom_body(
+                section(current, "void CustomControllerMode::SetConfig(", "void CustomControllerMode::UpdateDigitalOutputs"),
+                section(text, "void CustomControllerMode::SetConfig(", "void CustomControllerMode::UpdateDigitalOutputs"))
         for anchor in record["anchors"]:
             require(anchor in path.read_text(encoding="utf-8"), f"current source anchor missing: {anchor}")
             require(anchor in text, f"missing source anchor {anchor} in {record['path']}")
@@ -120,7 +128,7 @@ def main() -> int:
         print("glyph_setconfig_runtime_rebinding_characterization: PASS; 13 cases; H1 research only")
         print("historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED")
         return 0
-    except (OSError, subprocess.SubprocessError, KeyError, TypeError, ValueError, Error) as exc:
+    except (OSError, subprocess.SubprocessError, KeyError, TypeError, ValueError, AssertionError) as exc:
         print(f"glyph_setconfig_runtime_rebinding_characterization: FAIL: {exc}")
         return 1
 

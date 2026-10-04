@@ -1,0 +1,95 @@
+{
+  "schema_name": "glyph_gp_val034_c014_transition",
+  "schema_version": 1,
+  "work_order": "GP-VAL-034",
+  "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+  "base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+  "tree": "287732689ce5ef069db72148a78926f4f5376ea0",
+  "raw_inventory_sha256": "c40d8aadf736832b52a746455d940b29296522c281f49b3ab314e3d22c1d11aa",
+  "entries": [
+    {
+      "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "8b73122486937fbd6abce1775eeb5250e5f95e0c",
+      "new_blob": "24ffaf9e025c6b5f9c544c501cdc499ee0a5197f",
+      "status": "M"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_config014_modifier_capacity.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "b2e82d56344def541273dbee81ac2ff9dfe41085",
+      "status": "A"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "8341353eec008ddce28a36749b02ecda1e52563d",
+      "new_blob": "7fd63e6320d3097ad5b4693ec48ce1482e23ec3f",
+      "status": "M"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "3b4b93b4c2666f0bbf406207b419310dcb9b0ba1",
+      "new_blob": "1cc6072690c9fe92d05f9b0206334db7c13a96d7",
+      "status": "M"
+    },
+    {
+      "path": "docs/runtime_config/gp_config014_modifier_capacity.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "7362d3451404804fed35ebb30239510d5573bb64",
+      "status": "A"
+    },
+    {
+      "path": "docs/runtime_config/runtime_config_validation_health.md",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "65523bae6b71a0b4ec207511bad1bdc1aab924c4",
+      "new_blob": "248d7b75a174833524b00d007dc5aefa1d45eec3",
+      "status": "M"
+    },
+    {
+      "path": "include/modes/CustomControllerMode.hpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "7c073b2e91f3950c2f1a785940b39539dda433b5",
+      "new_blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+      "status": "M"
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626",
+      "new_blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+      "status": "M"
+    },
+    {
+      "path": "tools/check_glyph_gp_config014_modifier_capacity.py",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "16aff228b6629a924d048b87b8fee6520aacee7f",
+      "status": "A"
+    },
+    {
+      "path": "tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "3bc32107295c0fb6867d1dc04af55c6efd0a04e5",
+      "status": "A"
+    }
+  ],
+  "handoff": "5205ba518d1d5fa19e7584d6c6d5210932091b3e",
+  "ready": "7911692afed3e68becefd8e3c90413d4e230ea82",
+  "review_sha256": "fe541546300d8699419f8bde909157953b68084dc1926965e2873b752ecb7f07",
+  "validation_sha256": "0478af5ce5e4bd94c8c3442b0049972e6ade18140e975624ce614be9e0b412ae"
+}

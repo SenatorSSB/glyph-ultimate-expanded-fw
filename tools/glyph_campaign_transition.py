@@ -379,6 +379,9 @@ def authenticate(root):
 @_proof_invocation
 def verify_current_source(root, path, historical_sha256):
     """Prove exact B/C first, then expose frozen B bytes for historical assertions."""
+    if _c014_present(Path(root)):
+        from glyph_c014_campaign_transition import verify_current_source as capacity
+        return capacity(root, path, historical_sha256)
     root=Path(root); old=raw_bytes(root,B,path)
     require(hashlib.sha256(old).hexdigest()==historical_sha256,'historical source identity mismatch: '+path)
     actual=current_bytes(root,path)
@@ -393,9 +396,22 @@ def verify_current_source(root, path, historical_sha256):
 authenticate_original = authenticate
 
 
+def _c014_present(root):
+    """A capacity proof literal selects its complete contract or fails closed."""
+    head = _git(root, 'rev-parse', 'HEAD').decode().strip()
+    paths = ('docs/runtime_config/fixtures/gp_val034_c014_transition.json',
+             'docs/runtime_config/fixtures/gp_val034_accepted_transitions.json',
+             'tools/glyph_c014_campaign_transition.py')
+    inventory = _tree(root, head)
+    return any(path in inventory or (root / path).exists() for path in paths)
+
+
 @_proof_invocation
 def authenticate(root):
     root = Path(root).resolve()
+    if _c014_present(root):
+        from glyph_c014_campaign_transition import authenticate as capacity
+        return capacity(root)
     head = _git(root, 'rev-parse', 'HEAD').decode().strip()
     B_R = "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8"
     MAPPING = "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json"

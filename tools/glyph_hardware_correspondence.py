@@ -34,6 +34,19 @@ CORRESPONDENCE_CRITICAL_PATHS = frozenset({
 
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
+    # GP-VAL-034: exact host/governance literals; firmware remains critical.
+    'tools/glyph_c014_campaign_transition.py',
+    'tools/test_glyph_c014_campaign_transition.py',
+    'docs/runtime_config/fixtures/gp_val034_c014_transition.json',
+    'docs/runtime_config/fixtures/gp_val034_accepted_transitions.json',
+    'tools/check_glyph_custom_modifier_cache_characterization.py',
+    'tools/check_glyph_gp_config014_modifier_capacity.py',
+    'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp',
+    'docs/runtime_config/fixtures/gp_config014_modifier_capacity.json',
+    'docs/runtime_config/gp_config014_modifier_capacity.md',
+    'docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md',
+    'docs/calibration/gp_config_014_hardware_result.md',
+    'docs/calibration/fixtures/gp_config_014_hardware_evidence.json',
     # Owner-directed bounded Revision-3 control-plane contracts, not a prefix.
     'AGENTS.md',
     'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md',

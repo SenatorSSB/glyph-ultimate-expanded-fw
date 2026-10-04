@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import hashlib
+import sys
+import stat
 import json
 import shutil
 import subprocess
@@ -278,22 +280,84 @@ def adversarial(value: dict) -> None:
         rejected("untracked schema header")
 
 
+HISTORICAL_BASE = "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2"
+HISTORICAL_CHECKER_SHA256 = "a3b1f22e2b46e01ef92e6a38fdddce960ed32dd20ebfbe07cb53480729c86753"
+HISTORICAL_CHECKER_BLOB = "c1c77ded0d54ed2276743e8185500b73219d5f4b"
+
+
+def replay_historical(root: Path = ROOT) -> None:
+    """Execute the immutable real-source checker, including its eight old cases."""
+    from glyph_c014_campaign_transition import authenticate, verify_historical_dependency
+    context = authenticate(root)
+    checker = "tools/check_glyph_custom_modifier_cache_characterization.py"
+    original_checker = verify_historical_dependency(
+        root, checker, HISTORICAL_CHECKER_BLOB, HISTORICAL_CHECKER_SHA256)
+    closure = [
+        *SOURCE_PATHS, FIXTURE.relative_to(ROOT).as_posix(),
+        HARNESS.relative_to(ROOT).as_posix(), checker,
+        "tools/fixtures/custom_modifier_cache_host/include/stdlib.hpp",
+        *(str(SCHEMA_DIR / name) for name in [*SCHEMA_FILES, "provenance.json"]),
+    ]
+    with tempfile.TemporaryDirectory(prefix="glyph-011-immutable-replay-") as directory:
+        replay = Path(directory)
+        for relative in closure:
+            entry = subprocess.check_output(
+                ["git", "ls-tree", HISTORICAL_BASE, "--", relative], cwd=root).decode().strip()
+            metadata, name = entry.split("\t", 1)
+            mode, kind, object_id = metadata.split()
+            require(name == relative and mode == "100644" and kind == "blob",
+                    "unsafe historical replay entry: " + relative)
+            data = subprocess.check_output(["git", "cat-file", "blob", object_id], cwd=root)
+            require(hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+                    == object_id, "historical blob mismatch: " + relative)
+            if relative == checker:
+                require(data == original_checker, "historical checker authority mismatch")
+            elif relative not in ("include/modes/CustomControllerMode.hpp",
+                                   "src/modes/CustomControllerMode.cpp"):
+                live = regular_file(root, Path(relative))
+                require(live.read_bytes() == data and stat.S_ISREG(live.stat().st_mode)
+                        and not live.stat().st_mode & 0o111,
+                        "historical dependency live bytes/mode drift: " + relative)
+                committed = subprocess.check_output(
+                    ["git", "ls-tree", "HEAD", "--", relative], cwd=root).decode().strip()
+                require(committed == entry, "historical dependency committed custody: " + relative)
+                stage = subprocess.check_output(
+                    ["git", "ls-files", "--stage", "--", relative], cwd=root).decode().strip()
+                require(stage == "100644 " + object_id + " 0\t" + relative,
+                        "historical dependency index custody: " + relative)
+            target = replay / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+        subprocess.run(["git", "-c", "init.templateDir=", "init", "-q", str(replay)], check=True)
+        subprocess.run(["git", "-c", "core.autocrlf=false", "add", "--", *closure],
+                       cwd=replay, check=True)
+        result = subprocess.run([sys.executable, str(replay / checker)], cwd=replay,
+                                text=True, capture_output=True)
+        require(result.returncode == 0, "immutable011 actual replay failed:\n" + result.stdout + result.stderr)
+        require("PASS; 8 cases; H1 characterization only" in result.stdout,
+                "immutable011 replay completion missing")
+        print(result.stdout, end="")
+        print("historical011=FROZEN actual_replay=8 expected_11_20=SANITIZER_FAILURE")
+    if context["phase"] in ("CANDIDATE_VALIDATION_ONLY", "ACCEPTED_TRANSITION"):
+        current = subprocess.run([sys.executable, str(root / "tools/check_glyph_gp_config014_modifier_capacity.py")],
+                                 cwd=root, text=True, capture_output=True)
+        require(current.returncode == 0, "distinct repaired014 current proof failed:\n" + current.stdout + current.stderr)
+        require("layout=ordinary cases=30 PASS" in current.stdout and
+                "layout=short-enums cases=30 PASS" in current.stdout,
+                "distinct014 dual-layout completion missing")
+        print(current.stdout, end="")
+    else:
+        print("current_source=ACCEPTED_C020 repaired014_current=NOT_ACTIVE")
+
+
 def main() -> int:
     try:
-        value = json.loads(FIXTURE.read_text(encoding="utf-8"))
-        validate_fixture(value)
-        validate_correspondence(value)
-        expected = value["expected_results"]
-        with tempfile.TemporaryDirectory(prefix="glyph-custom-modifier-") as temp:
-            binary = Path(temp) / "modifier_cache_harness"
-            compile_harness(binary)
-            run_cases(binary, expected)
-        adversarial(value)
-    except (OSError, subprocess.SubprocessError, json.JSONDecodeError, KeyError, TypeError, Error) as exc:
+        replay_historical()
+    except (OSError, subprocess.SubprocessError, json.JSONDecodeError, KeyError, TypeError, ValueError, AssertionError) as exc:
         print(f"glyph_custom_modifier_cache_characterization: FAIL: {exc}")
         return 1
-    print("glyph_custom_modifier_cache_characterization: PASS; 8 cases; H1 characterization only")
-    print("physical_reachability=UNKNOWN hardware_acceptance=NOT_APPLICABLE")
+    print("glyph_custom_modifier_cache_characterization: PASS; immutable011 replay and authenticated current applicability")
+    print("physical_reachability=UNKNOWN hardware_acceptance=NOT_CLAIMED")
     return 0
 
 
