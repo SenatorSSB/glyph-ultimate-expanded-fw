@@ -3115,7 +3115,7 @@ def check_revision_three_self_test() -> None:
 
 
 
-PERSISTENT_BATCH_POLICY = {'owner_direction': 'GLYPH-UD-029', 'persistent_campaign_workers': True, 'canonical_writers': 1, 'branch_work_without_canonical_lock': True, 'mechanical_transition_requires_new_full_chat': False, 'mechanical_transition_requires_planner_or_curator': False, 'preauthorized_activation_requires_objective_conditions': True, 'exact_candidate_preserved': True, 'fresh_independent_review': True, 'H2_H3_merge_requires_exact_human_HEP_PASS': True, 'max_pending_H3': 1, 'new_GP_VAL_requires_UNPROVEN_SAFETY_FACT': True, 'historical_pause_requires_chronology_check': True, 'transport_grants_action_authority': False}
+PERSISTENT_BATCH_POLICY = {'owner_direction': 'GLYPH-UD-029', 'persistent_campaign_workers': True, 'canonical_writers': 1, 'branch_work_without_canonical_lock': True, 'mechanical_transition_requires_new_full_chat': False, 'mechanical_transition_requires_planner_or_curator': False, 'preauthorized_activation_requires_objective_conditions': True, 'exact_candidate_preserved': True, 'fresh_independent_review': True, 'H2_H3_merge_requires_exact_human_HEP_PASS': True, 'max_pending_H3': 1, 'new_GP_VAL_requires_UNPROVEN_SAFETY_FACT': True, 'historical_pause_requires_chronology_check': True, 'transport_grants_action_authority': False, 'ordinary_governance_successors_per_product': 1, 'exceptional_validation_repairs_per_product': 1, 'exceptional_repair_requires_concrete_Tier1_or_Tier2_defect': True, 'further_successors_require_direct_owner_approval': True}
 
 
 def validate_persistent_batch_policy(value: object) -> None:

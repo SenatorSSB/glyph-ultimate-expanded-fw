@@ -179,6 +179,11 @@ work/review may proceed without that lock when frozen inputs remain unchanged.
 Retain the H3 lock through the logical chain and release at hardware wait or a
 genuine substantive stop. Rejected transport uses durable readback. Preserve
 chronology: a historical pause cannot override a newer verified owner resume.
+Within each named product chain, allow at most one ordinary governance successor
+and one exceptional validation repair for a concrete Tier-1 or Tier-2 defect.
+Any further successor requires direct owner approval. This limit prospectively
+supersedes broader Revision-3 exception wording within these named chains;
+historical policy and evidence remain preserved.
 Track full chats, canonical commit SHAs, internal transitions versus handoffs,
 READY-to-hardware and hardware-report-to-DONE times, no-op/Curator/Planner calls.
 
@@ -198,7 +203,11 @@ READY-to-hardware and hardware-report-to-DONE times, no-op/Curator/Planner calls
   "max_pending_H3": 1,
   "new_GP_VAL_requires_UNPROVEN_SAFETY_FACT": true,
   "historical_pause_requires_chronology_check": true,
-  "transport_grants_action_authority": false
+  "transport_grants_action_authority": false,
+  "ordinary_governance_successors_per_product": 1,
+  "exceptional_validation_repairs_per_product": 1,
+  "exceptional_repair_requires_concrete_Tier1_or_Tier2_defect": true,
+  "further_successors_require_direct_owner_approval": true
 }
 ```
 <!-- persistent-batch-policy:end -->

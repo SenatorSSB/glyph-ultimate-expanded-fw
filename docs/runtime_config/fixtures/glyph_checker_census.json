@@ -483,7 +483,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 185966,
+      "file_size_bytes": 186190,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -669,7 +669,7 @@
         "artifact_custody_provenance",
         "hardware_evidence_contracts"
       ],
-      "sha256": "7f7d3a8f6f668c018371b726459b92fd2d3ddcad0d58fc7d40c1063f7766b596",
+      "sha256": "8f531e45f0847d7fb6d0f014d8a1f1f10064edef065d11a001c44b9876c10262",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
