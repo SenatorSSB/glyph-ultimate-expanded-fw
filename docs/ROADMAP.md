@@ -20,8 +20,8 @@ release worker must live-verify its exact source/default/schema/decoder annex,
 generated extent 20, finite intervening deltas and absence of pending failure
 before mechanical activation. Fresh C014 is the output, not a prerequisite;
 then its named GP-VAL-034 successor and all build/custody/review/human PASS gates
-remain. This pass does not activate or execute H3 work. GP-CONFIG-019 remains
-READY. Paused GP-VAL-040/KBD stays paused; Nunchuk is NOT_TESTED and root cause
+remain. This pass does not activate or execute H3 work. The unchanged runway
+marker defines executable supply. Paused GP-VAL-040/KBD stays paused; Nunchuk is NOT_TESTED and root cause
 UNPROVEN. The daemon resumes only the next already-authorized release step
 after this bounded pass is reviewed, published and live-verified.
 
