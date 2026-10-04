@@ -1198,7 +1198,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 27247,
+      "file_size_bytes": 33346,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1225,7 +1225,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 526,
+      "line_count": 630,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1253,12 +1253,17 @@
       "python_module": "tools.check_glyph_checker_context",
       "referenced_repository_path_prefixes": [
         "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/gp_val040_forbidden.cpp",
+        "backend/kbd.cpp",
         "docs/WORKFLOW.md",
         "docs/WORKFLOW.md.bak",
         "docs/allowed.md",
         "docs/base-advance.md",
         "docs/base.md",
         "docs/baseline.md",
+        "docs/calibration/config.pb",
+        "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
+        "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/feature.md",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/project/ACTIVE_AGENT_QUEUE.md.bak",
@@ -1281,14 +1286,16 @@
         "tools/glyph_hardware_correspondence.py",
         "tools/gp_val037_flashing_negative.txt",
         "tools/gp_val037_unknown_negative.txt",
-        "tools/not_allowed.py"
+        "tools/not_allowed.py",
+        "tools/storage/input.json",
+        "tools/write/input.json"
       ],
       "runtime_config_relevance_signals": [
         "coordinate_native_profile",
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "c76f645d2c035054d207306a0c5c1d461056092e3f6bca0ffde70b51639c8dcc",
+      "sha256": "9bdc4e5b4e634225aedb0d1fbffcaa0f085b369eb61a256a2799f993853d241d",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -2711,7 +2718,7 @@
       },
       "checker_id": "coordinate_native_runtime_profile_contract",
       "defines_main": true,
-      "file_size_bytes": 81952,
+      "file_size_bytes": 82101,
       "hard_coded_branch_like_strings": [
         "accepted_evidence",
         "accepted_evidence.",
@@ -2775,6 +2782,8 @@
         "docs/ROADMAP.md",
         "docs/WORKFLOW.md",
         "docs/agent_framework/",
+        "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
+        "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/checker-only",
         "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
@@ -2851,7 +2860,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "99ce7da1add6cd601894001ab14dfe01f50593dee757853d38b1567d5353a221",
+      "sha256": "94591962187775dc1068b335fa64d2f5e0d57318c2c40098d203cfb74ce74b76",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5323,7 +5332,7 @@
       },
       "checker_id": "generated_source_owned_artifact_install",
       "defines_main": true,
-      "file_size_bytes": 26863,
+      "file_size_bytes": 27012,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5386,7 +5395,9 @@
         "docs/agent_framework/",
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+        "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
         "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
+        "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/",
@@ -5441,7 +5452,7 @@
         "runtime_config_docs",
         "source_owned_generator_modes"
       ],
-      "sha256": "5624483ef7cd7f0f62670e831891031297e8d4882137154e99c385ccc60d8de2",
+      "sha256": "445074933b11205c83629dba253ba4456c12446e15ec228d0aeae51c97ca3944",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5548,7 +5559,7 @@
       },
       "checker_id": "generated_source_owned_generator_contract",
       "defines_main": true,
-      "file_size_bytes": 41743,
+      "file_size_bytes": 41892,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5604,7 +5615,9 @@
         "docs/agent_framework/",
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+        "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
         "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
+        "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
         "docs/runtime_config/",
@@ -5661,7 +5674,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "0bf07fa03f1a407f4f58b44727b55982614986113b66e4ca372a2564aa650db3",
+      "sha256": "c0ad9be229747e6e4fdd3281dab6de394963c5787ff0e20bc334301f0493979a",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,

@@ -382,3 +382,59 @@ acceptance tests reconstruct a source-free adopted base before review and
 processor records; they never establish controller acceptance. Actual acceptance
 still requires the exact built snapshot, independent review, preserved artifact,
 processor-accepted human PASS, empty gaps and reviewed integration chronology.
+
+## GP-VAL-040 preserved Keyboard host inventory
+
+This extension adds only five source-free outputs of KBD C
+`4fb7c1e9507547774ff9f55cd7788355648d5d1e`, direct parent
+`328c6a1bfb09eb035c2065d0de080283307f34d6`, tree
+`a847f1dab9e7918ec49d5dd887b009adf087c87f`. The complete recursive
+NUL-delimited raw old/new mode/blob/path inventory has nine regular `100644`
+entries and SHA-256
+`f8cc5721ad63f142d535aae73087c9466d1891e3010ea241fd03688aa81f6ad5`.
+Four entries modify existing manifest/census/health metadata. The five additions
+are literal NON_BEHAVIORAL paths:
+
+- `docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json`
+- `docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md`
+- `tools/check_glyph_gp_kbd_001_keyboard_pipeline.py`
+- `tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp`
+- `tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp`
+
+The report and fixture preserve the original observations. The checker compiles
+the explicit host harness with a host-only TUKeyboard stub; production source
+does not include these files. PlatformIO source filters, include roots and
+extra script exclude their directories. All 28 immutable dependency pins match
+B/C/current; B and C share all 234 critical entries. Current canonical has 236
+critical entries, matching exactly the accepted C020 validator transition.
+This accepted source difference is separately authenticated; it is never
+resealed into the historical KBD fixture.
+
+The three amended feature-scope calls gain only the two calibration literals.
+Their protected parameters, ancestry rules and content checks stay unchanged.
+Feature matching retains casefold semantics and no mode check. Strict
+correspondence rejects unknown aliases, executable blobs, symlinks and gitlinks;
+critical source/build membership always takes precedence. Separate pinned C
+host-blob checks reject renamed/deleted/substituted experiment evidence. Generic
+metadata correspondence intentionally permits regular metadata evolution and
+deletion, so its PASS alone does not preserve immutable experiment observations.
+The exact committed C/B/tree/raw inventory is required; mutable manifest entries
+never provide path or byte authority.
+
+`gp_val040_host_scope_tests()` exercises the actual scope calls of all five
+protected mains on genuine synthetic Git feature contexts. The unchanged
+authentication helper returns those contexts because they have no campaign
+ancestry or repaired markers. A sentinel after the real scope call limits that
+proof to scope wiring; it claims neither content nor campaign authentication
+PASS. Actual full-main governance validation and real preserved-C strict
+correspondence remain separate obligations. No original check is omitted.
+
+The repaired C020 authentication module also owns a separate finite metadata
+catalog. Its unchanged B_R-to-head catalog rejects the five known KBD additions
+before feature-scope validation. GP-VAL-040 grants no edits to that module.
+Source and independent Revision-3 review find no new source/acceptance
+contradiction in that rejection; keep its actual FAIL as
+FRAMEWORK_VALIDATION_DEBT when the applicable focused proofs pass. Never report
+composed full mains or an unexecuted/incomplete aggregate as PASS. This
+classification grants no Keyboard repair, device operation or physical
+acceptance, and KBD integration still follows GP-VAL-040 strict DONE.

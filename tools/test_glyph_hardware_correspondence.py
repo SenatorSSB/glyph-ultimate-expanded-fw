@@ -3,6 +3,8 @@ from __future__ import annotations
 
 from contextlib import redirect_stdout
 import io
+import hashlib
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -645,6 +647,173 @@ class ClassificationTests(unittest.TestCase):
     def test_critical_precedence_over_inventory(self):
         with mock.patch.object(correspondence, "NON_BEHAVIORAL_PATHS", {HANDLER, GENERATED, "platformio.ini"}):
             for path in correspondence.NON_BEHAVIORAL_PATHS:
+                self.assertEqual(correspondence.classify_path(path), "CRITICAL")
+
+
+# Literal pins from the preserved nine-path C, independent of mutable manifests.
+KBD_C = "4fb7c1e9507547774ff9f55cd7788355648d5d1e"
+KBD_B = "328c6a1bfb09eb035c2065d0de080283307f34d6"
+KBD_TREE = "a847f1dab9e7918ec49d5dd887b009adf087c87f"
+KBD_RAW_SHA256 = "f8cc5721ad63f142d535aae73087c9466d1891e3010ea241fd03688aa81f6ad5"
+KBD_HOST_BLOBS = {
+    "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json": "ea61079fcbb3962b1da9c301de7c3d3867ee4db3",
+    "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md": "66592c2bb5a9c4860d4a72accdab52e72080b8fc",
+    "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py": "fad8c930329b3317ddf7c07bfec725ac1a7f457f",
+    "tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp": "4bd11a0168f8f0f2308aefd6f7b2942156c9ba9c",
+    "tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp": "d9bbaf7cccd5b35f65b6bd8b0462d78c9bf4fd63",
+}
+
+
+class KeyboardCorrespondenceTests(unittest.TestCase):
+    """Finite synthetic negatives; inherited regressions run in their own class."""
+    setUp = CorrespondenceTests.setUp
+    git = CorrespondenceTests.git
+    write = CorrespondenceTests.write
+    commit = CorrespondenceTests.commit
+    verify = CorrespondenceTests.verify
+    def test_gp_kbd_001_whole_inventory_and_aliases(self):
+        self.git("switch", "-q", "-c", "kbd-candidate", self.base)
+        for path in tuple(KBD_HOST_BLOBS) + GP_CONFIG_013_COUPLED_PATHS:
+            self.write(path, "synthetic KBD host input\n")
+        self.candidate = self.commit("exact nine host paths")
+        self.assertEqual(self.verify()["candidate_paths"], {
+            path: "NON_BEHAVIORAL" for path in tuple(KBD_HOST_BLOBS) + GP_CONFIG_013_COUPLED_PATHS})
+        for path in KBD_HOST_BLOBS:
+            for alias in (path + ".bak", path.swapcase(), "other/" + path):
+                with self.subTest(alias=alias), self.assertRaises(correspondence.CorrespondenceError):
+                    correspondence.classify_path(alias)
+            with mock.patch.object(correspondence, "CORRESPONDENCE_CRITICAL_PATHS",
+                                   correspondence.CORRESPONDENCE_CRITICAL_PATHS | {path}):
+                self.assertEqual(correspondence.classify_path(path), "CRITICAL")
+        for path in ("docs/calibration/fixtures/gp_kbd_001_extra.json",
+                     "tools/fixtures/gp_kbd_001_keyboard_pipeline/extra.cpp"):
+            with self.assertRaises(correspondence.CorrespondenceError):
+                correspondence.classify_path(path)
+
+    def test_gp_kbd_001_modes_and_types(self):
+        for index, path in enumerate(KBD_HOST_BLOBS):
+            for mode in ("100755", "120000", "160000"):
+                with self.subTest(path=path, mode=mode):
+                    self.git("switch", "-q", "-c", f"kbd-mode-{index}-{mode}", self.candidate)
+                    if mode == "160000":
+                        blob = self.candidate
+                    else:
+                        blob = self.git("hash-object", "-w", "--stdin")
+                    self.git("update-index", "--add", "--cacheinfo", f"{mode},{blob},{path}")
+                    self.git("commit", "-q", "-m", "unsafe KBD entry")
+                    with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
+                        self.verify(check_worktree=False)
+
+
+class PreservedKeyboardIdentityTests(unittest.TestCase):
+    """Requires the exact preserved C/B objects; absence fails, never skips."""
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="glyph-preserved-kbd-")
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name) / "repo"
+        source = Path(__file__).resolve().parents[1]
+        self.git_at(source, "clone", "--shared", "--no-checkout", str(source), str(self.root))
+        self.git("checkout", "-q", "-b", "preserved-kbd", KBD_C)
+        self.git("config", "user.name", "Preserved KBD negative control")
+        self.git("config", "user.email", "kbd-control@example.invalid")
+        self.git("config", "core.filemode", "true")
+        self.assertEqual(self.git("rev-list", "--parents", "-1", KBD_C), KBD_C + " " + KBD_B)
+        self.assertEqual(self.git("rev-parse", KBD_C + "^{tree}"), KBD_TREE)
+        raw = subprocess.run(["git", "diff-tree", "--no-commit-id", "--no-renames", "--raw", "-r", "-z", KBD_B, KBD_C],
+                             cwd=self.root, capture_output=True, check=True).stdout
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), KBD_RAW_SHA256)
+
+    def git_at(self, root, *args):
+        result = subprocess.run(["git", *args], cwd=root, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return result.stdout.strip()
+
+    def git(self, *args):
+        return self.git_at(self.root, *args)
+
+    def assert_pinned_hosts(self, target="HEAD"):
+        for path, blob in KBD_HOST_BLOBS.items():
+            expected = f"100644 blob {blob}\t{path}"
+            self.assertEqual(self.git("ls-tree", KBD_C, "--", path), expected)
+            self.assertEqual(self.git("ls-tree", target, "--", path), expected,
+                             "preserved KBD host inventory substitution: " + path)
+
+    def test_preserved_kbd_identity_dependencies_and_strict_correspondence(self):
+        self.assert_pinned_hosts()
+        proof = correspondence.verify_correspondence(self.root, KBD_C, KBD_B, integrated=True)
+        self.assertEqual(len(proof["candidate_paths"]), 9)
+        self.assertTrue(all(value == "NON_BEHAVIORAL" for value in proof["candidate_paths"].values()))
+        fixture = json.loads(self.git("show", KBD_C + ":" + next(iter(KBD_HOST_BLOBS))))
+        self.assertEqual(len(fixture["sources"]), 28)
+        for path, pin in fixture["sources"].items():
+            for revision in (KBD_B, KBD_C):
+                self.assertEqual(self.git("ls-tree", revision, "--", path),
+                                 f'{pin["mode"]} blob {pin["git_blob"]}\t{path}')
+                raw = subprocess.run(["git", "show", revision + ":" + path], cwd=self.root,
+                                     capture_output=True, check=True).stdout
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), pin["sha256"])
+        before, after = correspondence._tree(self.root, KBD_B), correspondence._tree(self.root, KBD_C)
+        critical = {path: entry for path, entry in before.items()
+                    if (path.split("/", 1)[0].casefold() in correspondence.CRITICAL_ROOTS
+                        or path.casefold() in correspondence.CRITICAL_FILES
+                        or path in correspondence.CORRESPONDENCE_CRITICAL_PATHS
+                        or path.casefold().startswith(".github/workflows/"))}
+        # Unchanged paths need not be classified metadata; inspect critical roots
+        # directly so unknown ordinary documentation is not trusted or required.
+        self.assertEqual(len(critical), 234)
+        self.assertEqual(critical, {path: after[path] for path in critical})
+
+    def test_preserved_kbd_host_rename_delete_and_byte_substitution(self):
+        for index, path in enumerate(KBD_HOST_BLOBS):
+            original = (self.root / path).read_bytes()
+            for operation in ("delete", "rename", "substitute"):
+                with self.subTest(path=path, operation=operation):
+                    self.git("switch", "-q", "-c", f"kbd-host-{index}-{operation}", KBD_C)
+                    location = self.root / path
+                    if operation == "rename":
+                        location.rename(location.with_name(location.name + ".bak"))
+                    elif operation == "delete":
+                        location.unlink()
+                    else:
+                        location.write_bytes(original + b"\nsubstituted observation\n")
+                    self.git("add", "--all")
+                    self.git("commit", "-q", "-m", "candidate host substitution")
+                    with self.assertRaisesRegex(AssertionError, "preserved KBD host inventory substitution"):
+                        self.assert_pinned_hosts()
+                    if operation == "rename":
+                        with self.assertRaisesRegex(correspondence.CorrespondenceError, "unclassified"):
+                            correspondence.verify_correspondence(self.root, KBD_C, KBD_B, integrated=True)
+        # Generic metadata correspondence intentionally permits regular content
+        # evolution/deletion. Immutable candidate host pins close this separate
+        # experiment-evidence obligation; do not claim the generic API does it.
+
+    def test_preserved_kbd_critical_dirty_staged_untracked_ignored_and_downgrade(self):
+        handler = self.root / HANDLER
+        original = handler.read_bytes()
+        handler.write_bytes(original + b"\ncritical substitution\n")
+        try:
+            for staged in (False, True):
+                if staged:
+                    self.git("add", "--", HANDLER)
+                with self.assertRaisesRegex(correspondence.CorrespondenceError, "dirty critical"):
+                    correspondence.verify_correspondence(self.root, KBD_C, KBD_B, integrated=True)
+        finally:
+            handler.write_bytes(original)
+            self.git("add", "--", HANDLER)
+        for ignored in (False, True):
+            path = "src/gp_val040_untracked_critical.cpp"
+            location = self.root / path
+            if ignored:
+                (self.root / ".git/info/exclude").write_text(path + "\n")
+            location.write_text("untracked critical source\n")
+            try:
+                with self.assertRaisesRegex(correspondence.CorrespondenceError, "critical"):
+                    correspondence.verify_correspondence(self.root, KBD_C, KBD_B, integrated=True)
+            finally:
+                location.unlink()
+        for path in (HANDLER, GENERATED, "platformio.ini", "config/glyph/env.ini"):
+            with mock.patch.object(correspondence, "NON_BEHAVIORAL_PATHS",
+                                   correspondence.NON_BEHAVIORAL_PATHS | {path}):
                 self.assertEqual(correspondence.classify_path(path), "CRITICAL")
 
 

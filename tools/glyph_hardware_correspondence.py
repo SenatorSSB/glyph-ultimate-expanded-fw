@@ -34,6 +34,13 @@ CORRESPONDENCE_CRITICAL_PATHS = frozenset({
 
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
+    # GP-VAL-040: five exact source-free outputs of preserved KBD C.
+    'docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json',
+    'docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md',
+    'tools/check_glyph_gp_kbd_001_keyboard_pipeline.py',
+    'tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp',
+    'tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp',
+
     # Owner-directed bounded Revision-3 control-plane contracts, not a prefix.
     'AGENTS.md',
     'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md',

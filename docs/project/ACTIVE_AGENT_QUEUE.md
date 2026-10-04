@@ -133,9 +133,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
-    "recorded_preauthorized": 11,
-    "mechanically_activatable_preauthorized": 2,
+    "immediate_ready": 2,
+    "recorded_preauthorized": 10,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -1077,7 +1077,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-040",
       "title": "Keyboard host finite correspondence",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-040-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Classify exact future source-free experiment paths only; no source transition or policy.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1094,18 +1094,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve the exact committed GP-KBD-001 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
       "substantive_authorization_rationale": "Independent Curator verified the two regular 100644 host additions are required outputs of authorized KBD characterization outside production build selection. Exact source proves three independent current feature-scope calls need these two literals; inherited GP-VAL-036 implementation scope was insufficient. The finite amendment resolves validation edit/test authority now, preserving protected/critical precedence and strict modes/aliases via composed gates; no product or Keyboard semantics are selected.",
-      "mechanical_activation_conditions": [
-        "GP-KBD-001 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-KBD-001 scope; expected full-aggregate failure does not bar candidate creation.",
-        "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
-        "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded.",
-        "Reverify the committed exact KBD C/B/tree/raw nine-path 100644 inventory, all 28 pinned dependencies and 234 critical entries, closed consumed object roots, clean working/index/ignored critical state and current source-free progression. Current event receipt resolves only the proven three-checker validation-surface gap. Any contradiction returns new bounded curation; no unreviewed scope expansion."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
         "Hardware FAIL, invalid predecessor acceptance, unsafe/unavailable required physical recovery/operator route, candidate replay/rebase or changed critical C-to-F bytes."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract. Reauthorized by independent Curator on 2026-10-03 under immutable post-opening event receipt git-json:a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58:docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json. Later adoption clears only this scope event. Amendment is explicit implementation authority for separate GP-VAL-040 invocation, not implementation/DONE.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract. Reauthorized by independent Curator on 2026-10-03 under immutable post-opening event receipt git-json:a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58:docs/agent_framework/curation_receipts/gp_val040_finite_scope_20261003.json. Later adoption clears only this scope event. Amendment is explicit implementation authority for separate GP-VAL-040 invocation, not implementation/DONE. Mechanical activation at live canonical 5205ba518d1d5fa19e7584d6c6d5210932091b3e under independently verified current owner batch resume (turn 01a107a0-5354-7ec1-b641-048100012da1; message 01a107a0-5399-7fb2-95b5-3361eecd386e): exact C/B/tree/raw nine-path inventory, all 28 mode/blob/SHA pins, B/C 234 critical equality and exact accepted C020 three-path overlay/current 236 critical equality independently pass. Current clone/index/ignored critical state is clean. Source specialist and independent preimplementation review classify unchanged repaired C020 five-host finite catalog rejection as Revision-3 FRAMEWORK_VALIDATION_DEBT, with no UNPROVEN_SAFETY_FACT identified; directly affected scope/correspondence proofs remain required. Original Preauthorization conditions remain immutable in parent queue; activation creates no firmware, Keyboard policy or acceptance authority.",
       "automated_validation": [
         "Apply the exact local scope validation matrix plus adopted finite algorithm and all negative controls. Authenticate literal production bodies/schema/decoder, old versus current observations, omission/one-byte substitution and modes; retain historical 005/010/011/012/016 and accepted Ultimate/X1 table/source authority. No silent hash reseal.",
         "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate.",
@@ -1126,7 +1121,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -7856,11 +7851,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-040","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-040, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 10; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

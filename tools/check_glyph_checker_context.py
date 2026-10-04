@@ -191,6 +191,109 @@ PROTECTED_SCOPE_MAINS = (
 )
 
 
+
+GP_VAL040_HOST_DOCS = (
+    "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
+    "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
+)
+
+
+def gp_val040_host_scope_tests() -> None:
+    """Test actual main scope calls; the sentinel claims no content/auth PASS.
+
+    Small real Git repositories deliberately have no campaign ancestry or repair
+    markers. The unchanged authenticated_campaign_context returns their genuine
+    feature context. No authentication predicate is mocked or disabled.
+    """
+    class ScopeReached(Exception):
+        pass
+
+    source = Path(__file__).resolve().parents[1]
+    observations = 0
+    for number, filename in enumerate(PROTECTED_SCOPE_MAINS):
+        spec = importlib.util.spec_from_file_location(f"gp_val040_scope_{number}", source / "tools" / filename)
+        if spec is None or spec.loader is None:
+            raise AssertionError("actual scope consumer import unavailable: " + filename)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory(prefix="glyph-kbd-scope-") as directory:
+            root = fresh_repo(Path(directory))
+            if filename == "check_glyph_generated_source_owned_baseline_artifact.py":
+                # This legacy main validates its fixture before scope. Copy its
+                # genuine fixed file inputs into the synthetic baseline so its
+                # real relative-path/content precheck can run without mocks.
+                for name, value in tuple(vars(module).items()):
+                    if isinstance(value, Path) and value.is_relative_to(source) and value.is_file():
+                        relative = value.relative_to(source)
+                        target = root / relative
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copyfile(value, target)
+                        setattr(module, name, target)
+                run(root, "add", "--all")
+                run(root, "commit", "-m", "unchanged legacy fixture inputs")
+                if module.BASE_BRANCH != "configurator":
+                    run(root, "branch", module.BASE_BRANCH)
+            run(root, "switch", "-c", "feature-exact-kbd-scope")
+            cases = [(GP_VAL040_HOST_DOCS, None)]
+            cases.extend(((path,), None) for path in GP_VAL040_HOST_DOCS)
+            # Only the three amended calls need exact calibration literals.
+            if number < 3:
+                cases.extend(((alias,), "out-of-scope") for path in GP_VAL040_HOST_DOCS
+                             for alias in (path + ".bak", path.replace("gp_kbd_001", "gp_kbd_002")))
+            cases.append((("unknown/kbd-host.txt",), "out-of-scope"))
+            cases.extend((GP_VAL040_HOST_DOCS + (path,), "protected") for path in (
+                "HAL/pico/src/gp_val040_forbidden.cpp", "backend/kbd.cpp",
+                "docs/calibration/config.pb", "tools/storage/input.json", "tools/write/input.json"))
+            legacy = filename == "check_glyph_generated_source_owned_baseline_artifact.py"
+            scope_name = "validate_changed_paths" if legacy else "validate_feature_scope"
+            real_scope = getattr(module, scope_name)
+            for paths, rejection in cases:
+                reached = []
+                scope_rejections = []
+
+                def scope_at_main(context, **kwargs):
+                    genuine = collect_checker_context(repo_root=root, base="configurator") if legacy else context
+                    if legacy and set(context) != genuine.changed_paths:
+                        raise AssertionError("legacy main scope lost changed inputs")
+                    reached.append(genuine)
+                    try:
+                        real_scope(context, **kwargs)
+                    except Exception as exc:
+                        scope_rejections.append(str(exc))
+                        raise
+                    raise ScopeReached()
+
+                for path in paths:
+                    write(root, path, "scope-only synthetic input\n")
+                try:
+                    with patch.object(module, "REPO_ROOT", root), \
+                         patch.object(module, scope_name, scope_at_main), \
+                         patch.dict(os.environ, {"GLYPH_CHECKER_BASE": "configurator"}), \
+                         patch.object(sys, "argv", [filename]), \
+                         contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                        try:
+                            module.main()
+                        except ScopeReached:
+                            if rejection is not None:
+                                raise AssertionError(filename + " accepted forbidden scope " + repr(paths))
+                        except (Exception, SystemExit) as exc:
+                            if rejection is None:
+                                raise AssertionError(filename + " rejected exact host literals") from exc
+                            # Validate with the real consumer parameters again;
+                            # a main's generic failure wrapper cannot fake PASS.
+                            if not scope_rejections or (rejection not in scope_rejections[0] and not (legacy and any(word in scope_rejections[0] for word in ("forbidden", "out-of-scope")))):
+                                raise AssertionError(filename + " lost expected scope rejection " + rejection) from exc
+                        else:
+                            raise AssertionError(filename + " bypassed actual scope call")
+                    if len(reached) != 1 or reached[0].repo_root != root.resolve():
+                        raise AssertionError("actual scope did not receive the genuine Git context")
+                    observations += 1
+                finally:
+                    for path in paths:
+                        (root / path).unlink()
+    print(f"gp_val040_actual_main_scope: PASS; consumers=5; observations={observations}; scope-only")
+
+
 def campaign_protected_scope_tests() -> None:
     """Exercise all five real mains on an ancestry-preserving private composition."""
     from concurrent.futures import ThreadPoolExecutor
@@ -495,6 +598,7 @@ def main() -> int:
     finally:
         module.git_lines = original_git_lines
 
+    gp_val040_host_scope_tests()
     campaign_guard_tests()
     campaign_protected_scope_tests()
 
