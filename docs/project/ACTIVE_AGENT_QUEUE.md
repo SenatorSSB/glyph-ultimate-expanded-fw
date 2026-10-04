@@ -7888,11 +7888,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-040","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":9,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 10; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-040, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 9; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
