@@ -4,7 +4,7 @@ GP-VAL-040 is DONE through independently reviewed live source-free integration `
 
 GP-KBD-001 characterization is DONE through reviewed exact-C source-free integration `38705460afc7061fbebb71d186ed7b9da7051276` and separate strict completion correspondence after GP-VAL-040 DONE. Original C `4fb7c1e9507547774ff9f55cd7788355648d5d1e`, its five host blobs and 28 dependency pins are preserved; current 236 critical entries remain exact accepted C020. Host 103 observations, 118 identity negatives, five mutants, sanitizer checks and all five protected full consumers pass. Full aggregate FAIL/incomplete and synthetic topology debt remain honest; no full aggregate PASS or hardware acceptance is claimed. The supported ordinary Keyboard path transforms a copy but maps original inputs; that finding still requires a separate bounded repair/disposition packet before release. No SOCD policy, firmware repair or Keyboard exclusion is selected. Same H1 executor continues preserved019/041 as existing authority permits; exact C014 hardware tuple remains frozen.
 
-GP-VAL-041 is REVIEW under adopted receipt `6eb288e61a0d148530474eef12bd0aa3243e8526` and its binding finite contract. Prepared H1 implementation classifies only the exact original019 hosts, separate current-proof files and read-only authority; three actual scope calls add only the two report literals. The current014 catalogue authenticates immutable C019/B019/tree/raw5 inventory, four original host bytes when composed, separate committed current overlay, exact acceptedF020 current34 inputs and precise historical sidebranch chronology. Required actual governance/composed consumers, negatives, fresh current host execution and independent review precede source-free integration and separate strict041DONE. Original019 C `fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d` remains REVIEW and unmerged until that completion; historical32/12/18 pins stay immutable. Earlier external proof remains its original execution, never relabeled.040/KBDDONE, current236critical and frozen014F/artifact/protocol/pendingstate remain exact. Aggregate FAIL/incomplete remains honest Revision3 framework debt; no firmware, naming/Keyboard policy, device or hardware acceptance change.
+GP-VAL-041 is DONE after reviewed source-free integration `2279ee1923004cca4b05c9f6ccc3272e810080cb` and separate strict DIRECT_ANCESTRY completion. Its exact21-path finite scope preserves immutable original019 identity/evidence, adds only the two calibration literals to three actual scope calls, and authenticates the separate current proof and exact acceptedF020 source compatibility. Focused correspondence, actual affected consumers, historical/current host proofs and required negatives pass with native fingerprint MATCH; completed bounded source-safety cases retain the earlier combined120-second timeout and diagnostic assertion failure as historical incomplete/failed observations. Global aggregate FAIL/incomplete remains honest Revision3 framework debt; no full aggregate PASS is claimed. Preserved original019 C `fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d` remains REVIEW and unmerged; the same H1 executor now resumes its separate integration and strictDONE.040/KBDDONE, current236critical and frozen014F/artifact/protocol/pendingstate remain exact. No firmware, naming/Keyboard policy, device or hardware acceptance change. Nunchuk NOT_TESTED; root cause UNPROVEN.
 
 ## Current Persistent Campaign
 
@@ -1282,7 +1282,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-041",
       "title": "USB-name host finite correspondence",
-      "status": "REVIEW",
+      "status": "DONE",
       "branch": "codex/gp-val-041-release-safety",
       "objective": "Authenticate the exact preserved GP-CONFIG-019 five-host candidate and a separately source-bound accepted-C020 current proof through the reviewed finite scope; no firmware, naming-policy or product repair.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1322,7 +1322,39 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact immutable019identity and finite paths/modes/blobs/source conformance; focused/regression/actualaffectedcurrent+historicalconsumers and requirednegativesPASS; nativefingerprintMATCH; freshindependentreview; reviewedsource-free live041integration followedby separate strict completion correspondence. Revision3 aggregateFAIL/incomplete remains honestTier3debt absentconcreteTier1/2 contradiction, neverPASS. Onlystrict041DONE resumes preserved019; nofirmware/hardware/productpolicy authority.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "c1a9f0fb9e1d3461d813b31d1643344e3e34d223",
+        "reviewed_implementation_sha": "2279ee1923004cca4b05c9f6ccc3272e810080cb",
+        "prior_canonical_integration_sha": "2279ee1923004cca4b05c9f6ccc3272e810080cb",
+        "reviewed_changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_val041_usb_name_current_acceptance.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_checker_context.py",
+          "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+          "tools/check_glyph_generated_source_owned_artifact_install.py",
+          "tools/check_glyph_generated_source_owned_generator_contract.py",
+          "tools/check_glyph_gp_config019_usb_name_selection.py",
+          "tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp",
+          "tools/glyph_c014_campaign_transition.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/test_glyph_c014_campaign_transition.py",
+          "tools/test_glyph_hardware_correspondence.py"
+        ],
+        "independent_review_provenance": "Fresh independent val041_independent_review approves exact2279 implementation and all21authorizedregular100644paths; separate strictcompletion independently reviewed before publication.",
+        "validation_provenance": "68 correspondence tests;04057/04163actualscope observations;fullcontext actualPASS; all directlyaffectedactual25consumers covered,17unchangedhost/metadata PASS plus final8governance and8exactpreservedC composition PASS with pairedfullnativeMATCH. Fresh named019historical/current realdecoder/validator proof:18historicalobservations/160negatives/32sourcepins/12fragments and current18original+8valid+12decodedinvalid/34acceptedF020inputs/ASanUBSan PASS. Original034phase,negative,KBD and041hosts,overlays,authority,history groupsPASS. Criticalsamecases bounded splitPASS source live/index/committed and genuineC014currenthostpositive/threecriticalsource negatives. Root2279nativebefore/afterMATCH,finite43roots13209objects. Prior wholecritical120TIMEOUT and externalstderr-onlydiagnostic assertionFAIL preserved. Prior globalaggregate300FAIL/TIMEOUT and historical/synthetic setup limitations remain Tier3frameworkdebt absent concreteTier1/2 contradiction; no fullsuite/globalaggregatePASS claimed, no deadline/runner/resource/cancellation/policy change. Current236critical exactacceptedF020; original019C/B/tree/raw5 and32/12/18 immutable; frozen014F/artifact/protocol/hardwarepending exact. No source/build/device/Config/flashing/naming/Keyboard/hardwareacceptance change; NunchukNOT_TESTED/rootcauseUNPROVEN."
+      },
       "stop_conditions": [
         "Any unexpected source/product/policy/architecture/validation authority, extra edit path, critical drift, falsecurrentequivalence, weakenednegative/auth/history/hardware fact or missing exact conformance stops; no general exemption, hashreseal, broad019historyskip, deadlinechange or extra GP-VAL. Missingobjectiveprerequisite is WAITING; newsubstantivejudgment returns preciseCURATION_REQUIRED.",
         "Keep candidate C019/base/tree/rawfive inventory and originalfour fixture/report/harness/stub files exact; originalchecker immutableatC while currentoverlayseparatelypinned. No019integration before reviewed041integration and separate strictDONE.",
