@@ -71,6 +71,32 @@ ROOTS |= frozenset((PROCESSOR_RECEIPT, PROCESSOR_ADOPTION,
 PROCESSOR_R = PROCESSOR_PINS['review_commit']
 BUILT_F = PROCESSOR_PINS['build']
 
+# Direct owner Revision-3 is a single reviewed committed document, not a
+# general documentation/prefix exception or an evidence/catalog exemption.
+OWNER_DIRECTION = 'docs/agent_framework/USER_DIRECTION.md'
+OWNER_DIRECTION_AUTHORITY = '0efef62a9d4a6254466325eeb0e33184a4848fab'
+OWNER_DIRECTION_SHA256 = '4fd9bec943f3c24427e5db5e87c093f8002f5715bdccdc4ef0acd27633fbd8a7'
+
+
+def _owner_direction_scope(root, head, delta):
+    if OWNER_DIRECTION not in delta:
+        return frozenset()
+    require(ancestor(root, OWNER_DIRECTION_AUTHORITY, head),
+            'owner direction lacks exact adopted authority ancestry')
+    require(_git(root, 'rev-list', '--parents', '-n', '1', OWNER_DIRECTION_AUTHORITY)
+            .decode().split() == [OWNER_DIRECTION_AUTHORITY, PROCESSOR_ADOPTION],
+            'owner direction authority parent mismatch')
+    require(_git(root, 'diff', '--name-only', PROCESSOR_ADOPTION,
+                 OWNER_DIRECTION_AUTHORITY).decode().splitlines() == [OWNER_DIRECTION],
+            'owner direction authority changed another path')
+    authoritative = raw_bytes(root, OWNER_DIRECTION_AUTHORITY, OWNER_DIRECTION)
+    require(_sha(authoritative) == OWNER_DIRECTION_SHA256
+            and raw_bytes(root, head, OWNER_DIRECTION) == authoritative
+            and current_bytes(root, OWNER_DIRECTION) == authoritative
+            and _git(root, 'show', ':' + OWNER_DIRECTION) == authoritative,
+            'owner direction immutable committed/live/index substitution')
+    return frozenset((OWNER_DIRECTION,))
+
 
 @dataclass(frozen=True)
 class ProcessorRoots:
@@ -789,8 +815,10 @@ def authenticate(root):
     # authenticate them independently of current phase or catalog selection.
     processor_roots = _authenticate_processor_roots(root, None, (before, old_after, after))
     delta = set(filter(None, _git(root, 'diff', '--no-renames', '--name-only', '-z', B_R, head).decode().split('\0')))
-    require(delta <= GOVERNANCE_PATHS | CRITICAL | HOSTS,
-            'unreviewed governance/host delta: ' + repr(sorted(delta - GOVERNANCE_PATHS - CRITICAL - HOSTS)))
+    owner_scope = _owner_direction_scope(root, head, delta)
+    require(delta <= GOVERNANCE_PATHS | CRITICAL | HOSTS | owner_scope,
+            'unreviewed governance/host delta: '
+            + repr(sorted(delta - GOVERNANCE_PATHS - CRITICAL - HOSTS - owner_scope)))
     for revision, path in original.RECEIPTS.items():
         require(current_bytes(root, path) == raw_bytes(root, revision, path), 'current authority receipt substitution')
     for path in _tree(root, original.B):

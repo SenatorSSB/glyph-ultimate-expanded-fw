@@ -49,6 +49,52 @@ def rejected(call, label: str) -> None:
     raise AssertionError("negative accepted: " + label)
 
 
+def owner_revision3_direction_tests(directory: Path) -> None:
+    """Only the exact committed owner record can extend campaign scope."""
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    root = directory / 'owner-direction-contract'
+    run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(root))
+    run(root, 'git', 'config', 'user.name', 'Disposable owner direction test')
+    run(root, 'git', 'config', 'user.email', 'owner-direction@example.invalid')
+    run(root, 'git', 'merge', '--no-ff', '--no-edit', repair.OWNER_DIRECTION_AUTHORITY)
+    positive = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    assert campaign.authenticate(root)['phase'] == 'BASELINE'
+    run(root, 'python3', 'tools/check_glyph_docs_agent_surface.py')
+    path = root / repair.OWNER_DIRECTION
+    authoritative = path.read_bytes()
+    path.write_bytes(authoritative + b'\nsubstitution\n')
+    rejected(lambda: campaign.authenticate(root), 'dirty owner direction')
+    run(root, 'git', 'add', '--', repair.OWNER_DIRECTION)
+    path.write_bytes(authoritative)
+    rejected(lambda: campaign.authenticate(root), 'staged owner direction')
+    run(root, 'git', 'add', '--', repair.OWNER_DIRECTION)
+    for label in ('executable owner direction', 'symlink owner direction'):
+        run(root, 'git', 'switch', '--detach', positive)
+        if label.startswith('executable'):
+            path.chmod(path.stat().st_mode | 0o111)
+        else:
+            path.unlink()
+            path.symlink_to('../../README.md')
+        fixture_commit(root, label)
+        rejected(lambda: campaign.authenticate(root), label)
+    run(root, 'git', 'switch', '--detach', positive)
+    path.write_bytes(authoritative + b'\nforged committed direction\n')
+    fixture_commit(root, 'forged owner record')
+    rejected(lambda: campaign.authenticate(root), 'committed owner substitution')
+    run(root, 'git', 'switch', '--detach', positive)
+    alias = root / (repair.OWNER_DIRECTION + '.bak')
+    alias.write_bytes(authoritative)
+    fixture_commit(root, 'adjacent owner alias')
+    rejected(lambda: campaign.authenticate(root), 'owner prefix alias')
+    # Exact bytes are insufficient without the separately reviewed authority.
+    run(root, 'git', 'switch', '--detach', repair.PROCESSOR_ADOPTION)
+    path.write_bytes(authoritative)
+    fixture_commit(root, 'replayed owner record without adopted ancestry')
+    rejected(lambda: campaign.authenticate(root), 'owner authority replay')
+    print('Revision-3 exact committed owner scope and actual consumer controls PASS; disposable only')
+
+
 def stable_historical_tests(root: Path) -> None:
     import check_glyph_config_010_integration_semantic_correspondence as checker
     value = json.loads(checker.FIXTURE.read_text())
@@ -1255,6 +1301,7 @@ def main() -> None:
         import glyph_campaign_transition as campaign
         campaign._proof_invocation(processor_contract_tests)(Path(directory))
         assert campaign._tree_inventory_cache.get() is None and campaign._blob_bytes_cache.get() is None
+        owner_revision3_direction_tests(Path(directory))
         commit_change(root, "docs/ROADMAP.md", "\nGP-VAL-029 isolated scope control.\n", "gp-val-029-positive")
         run(root, "python3", CHECKER)
         commit_change(root, "tools/check_glyph_prebuild_git_identity.py", "\n# isolated H1 validation self-test delta\n", "gp-val-029-ready-prerequisite")
