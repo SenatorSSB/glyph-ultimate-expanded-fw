@@ -465,3 +465,32 @@ exact Keyboard coexistence contract described above; its committed helper
 literals and authentication modules are preserved byte-for-byte. Current
 composed consumers must be checked again on that contract. GP-VAL-040 strict
 DONE remains a separate prerequisite to Keyboard integration.
+
+## GP-VAL-041 original USB-name inventory and current proof
+
+The post-opening [finite contract](GP_VAL_041_FINITE_SCOPE_CURATOR_20261004.md)
+authorizes only the five original C019 host paths, three separate current-proof
+paths and its two read-only authority literals in strict metadata classification.
+Original C `fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d`, sole B
+`d2f78cd3a3fa38c60d04dab54236ee630ead379e`, tree
+`240ce04d0fc6c47d4ceb005c2e9dd6b9485a89ac` and recursive raw five-path SHA-256
+`c6e56845b9c63577c46a11db1660aa5881160ea6022c324e7fac62b14971a711`
+remain immutable. The original four fixture/report/harness/stub files must be
+byte-exact when present. The original checker stays immutable at C; its current
+version and all three current-proof files require separate committed pins.
+
+These host paths are outside the unchanged firmware source filters, include
+roots and build hooks. Critical source precedence, regular100644 modes and
+unknown-path rejection remain mandatory. The actual three feature scope calls
+add only the two original calibration literals; detached explicit-base scope
+regressions compose their real calls with strict correspondence. Full actual
+consumer authentication and immutable host identity remain separate checks.
+
+The current014 catalogue authenticates only the exact original019 historical
+sidebranch after candidate/base/tree/raw inventory and critical equality proof.
+It preserves all034/KBD and accepted020/014 history and hardware gates. Current
+proof pins all34 inputs to accepted F020, retains the original32-source and
+12-fragment identities, and executes the original18 observations alongside
+8 valid and12 decoded-invalid controls using the real validator and decoder.
+Historical host PASS cannot substitute for current-source proof. No naming
+policy, firmware repair or controller acceptance follows from characterization.

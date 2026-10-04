@@ -1202,7 +1202,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 35575,
+      "file_size_bytes": 36907,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1221,6 +1221,7 @@
         "historical_branch_policy",
         "module.validate_branch",
         "renamed-feature-branch",
+        "scope_candidate",
         "unrelated-feature-branch"
       ],
       "imported_local_modules": [
@@ -1230,7 +1231,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 663,
+      "line_count": 682,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1251,6 +1252,7 @@
         "historical_branch_policy",
         "module.validate_branch",
         "renamed-feature-branch",
+        "scope_candidate",
         "unrelated-feature-branch"
       ],
       "potential_mutation_signals": [
@@ -1268,7 +1270,9 @@
         "docs/base.md",
         "docs/baseline.md",
         "docs/calibration/config.pb",
+        "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
         "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
+        "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
         "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/feature.md",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
@@ -1301,7 +1305,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "a01cd99c7f4d6c56572db8d1834e476ea3b6c9aae537b469f1a046bcf4ba4acb",
+      "sha256": "8650a4500d575b29a8dd264b749e335656e3b2569d1fbd8f7e8a545a5d19635f",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -2724,7 +2728,7 @@
       },
       "checker_id": "coordinate_native_runtime_profile_contract",
       "defines_main": true,
-      "file_size_bytes": 82101,
+      "file_size_bytes": 82258,
       "hard_coded_branch_like_strings": [
         "accepted_evidence",
         "accepted_evidence.",
@@ -2788,7 +2792,9 @@
         "docs/ROADMAP.md",
         "docs/WORKFLOW.md",
         "docs/agent_framework/",
+        "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
         "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
+        "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
         "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/checker-only",
         "docs/export/",
@@ -2866,7 +2872,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "94591962187775dc1068b335fa64d2f5e0d57318c2c40098d203cfb74ce74b76",
+      "sha256": "02891b27f43e675c6291ee50c4ee4ffbd597e2bef3199fd6590190fabde9d8b0",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5342,7 +5348,7 @@
       },
       "checker_id": "generated_source_owned_artifact_install",
       "defines_main": true,
-      "file_size_bytes": 27012,
+      "file_size_bytes": 27169,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5405,8 +5411,10 @@
         "docs/agent_framework/",
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+        "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
         "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
         "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
+        "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
         "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
@@ -5462,7 +5470,7 @@
         "runtime_config_docs",
         "source_owned_generator_modes"
       ],
-      "sha256": "445074933b11205c83629dba253ba4456c12446e15ec228d0aeae51c97ca3944",
+      "sha256": "187cf3390f5f90679593e50b79d48ba0391e7f11e92c1aaecaac5cf95d32dd85",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5569,7 +5577,7 @@
       },
       "checker_id": "generated_source_owned_generator_contract",
       "defines_main": true,
-      "file_size_bytes": 41892,
+      "file_size_bytes": 42049,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5625,8 +5633,10 @@
         "docs/agent_framework/",
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
+        "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
         "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
         "docs/calibration/generated_canonical_grid_candidate_hardware_result_2026-07-19.md",
+        "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
         "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
         "docs/export/",
         "docs/project/ACTIVE_AGENT_QUEUE.md",
@@ -5684,7 +5694,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "c0ad9be229747e6e4fdd3281dab6de394963c5787ff0e20bc334301f0493979a",
+      "sha256": "3635a92b16aa922fd295e6b7c8e2d71a909f8d6be76bcd7ee1f707caf82d8cd0",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -6474,6 +6484,103 @@
         "runtime_config_docs"
       ],
       "sha256": "b9296f5b33d73e7946e415645535e07ad364b5211803dfecfef2a6e764f85c46",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "gp_config019_usb_name_selection",
+      "defines_main": true,
+      "file_size_bytes": 32405,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate_successor",
+        "configurator",
+        "evidence",
+        "original_candidate",
+        "source_candidates"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 461,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config019_usb_name_selection.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate_successor",
+        "configurator",
+        "evidence",
+        "original_candidate",
+        "source_candidates"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config019_usb_name_selection",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/comms/backend_init.hpp",
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/include/display/ConfigMenu.hpp",
+        "HAL/pico/include/display/DefaultConfigMenu.hpp",
+        "HAL/pico/include/util/state_util.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/src/display/ConfigMenu.cpp",
+        "HAL/pico/src/display/DefaultConfigMenu.cpp",
+        "HAL/pico/src/reboot.cpp",
+        "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
+        "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
+        "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
+        "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
+        "docs/runtime_config/gp_val041_usb_name_current_acceptance.md",
+        "include/display/GlyphConfigMenu.hpp",
+        "include/glyph_overrides.hpp",
+        "include/reboot.hpp",
+        "src/config.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_utils.cpp",
+        "src/core/mode_selection.cpp",
+        "src/display/GlyphConfigMenu.cpp",
+        "tools/check_glyph_gp_config019_usb_name_selection.py",
+        "tools/fixtures/gp_config012_button_host",
+        "tools/fixtures/gp_config012_button_host/LICENSE.nanopb.txt",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+        "tools/fixtures/gp_config012_button_host/schema/config.options",
+        "tools/fixtures/gp_config012_button_host/schema/config.proto",
+        "tools/fixtures/gp_config019_usb_name_selection",
+        "tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp",
+        "tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp",
+        "tools/fixtures/gp_config019_usb_name_selection/main.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "runtime_config_docs"
+      ],
+      "sha256": "d48d819bab33fe84207ccb7d0d0efe8d1489523020b59918994742edc8997e03",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

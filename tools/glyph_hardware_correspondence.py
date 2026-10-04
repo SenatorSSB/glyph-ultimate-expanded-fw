@@ -34,6 +34,18 @@ CORRESPONDENCE_CRITICAL_PATHS = frozenset({
 
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
+    # GP-VAL-041: finite original019 hosts, separate current proof and read-only authority.
+    'docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json',
+    'docs/calibration/gp_config_019_usb_name_selection_characterization.md',
+    'tools/check_glyph_gp_config019_usb_name_selection.py',
+    'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',
+    'tools/fixtures/gp_config019_usb_name_selection/main.cpp',
+    'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp',
+    'docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json',
+    'docs/runtime_config/gp_val041_usb_name_current_acceptance.md',
+    'docs/agent_framework/GP_VAL_041_FINITE_SCOPE_CURATOR_20261004.md',
+    'docs/agent_framework/curation_receipts/gp_val041_finite_scope_20261004.json',
+
     # GP-VAL-034: exact host/governance literals; firmware remains critical.
     'tools/glyph_c014_campaign_transition.py',
     'tools/test_glyph_c014_campaign_transition.py',

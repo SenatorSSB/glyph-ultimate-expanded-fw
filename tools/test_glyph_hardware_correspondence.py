@@ -946,5 +946,132 @@ class PreservedKeyboardIdentityTests(unittest.TestCase):
                 self.assertEqual(correspondence.classify_path(path), "CRITICAL")
 
 
+# Original019 remains a separate immutable five-path experiment.
+CONFIG019_C = "fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d"
+CONFIG019_B = "d2f78cd3a3fa38c60d04dab54236ee630ead379e"
+CONFIG019_TREE = "240ce04d0fc6c47d4ceb005c2e9dd6b9485a89ac"
+CONFIG019_RAW = "c6e56845b9c63577c46a11db1660aa5881160ea6022c324e7fac62b14971a711"
+CONFIG019_HOST_BLOBS = {
+    "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json": "de08edbad80d33f053f5af8ffd61c0781f181812",
+    "docs/calibration/gp_config_019_usb_name_selection_characterization.md": "eae7a289aacc8c0d9ea9455ec0ce812d7f7a7c63",
+    "tools/check_glyph_gp_config019_usb_name_selection.py": "103a7cd22b96a3f806a88771d9b54cc20105999d",
+    "tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp": "ffccc37ce24592e783646b17fdd3339c5e368128",
+    "tools/fixtures/gp_config019_usb_name_selection/main.cpp": "1f91f2ad54bd7148c5089d0f4c9d211b9e0978e6",
+}
+CONFIG019_OVERLAY_AUTHORITY_PATHS = (
+    "tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp",
+    "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
+    "docs/runtime_config/gp_val041_usb_name_current_acceptance.md",
+    "docs/agent_framework/GP_VAL_041_FINITE_SCOPE_CURATOR_20261004.md",
+    "docs/agent_framework/curation_receipts/gp_val041_finite_scope_20261004.json",
+)
+
+
+class UsbNameCorrespondenceTests(unittest.TestCase):
+    setUp = CorrespondenceTests.setUp
+    git = CorrespondenceTests.git
+    write = CorrespondenceTests.write
+    commit = CorrespondenceTests.commit
+    verify = CorrespondenceTests.verify
+
+    def test_usb_name_finite_original_overlay_and_authority_membership(self):
+        paths = tuple(CONFIG019_HOST_BLOBS) + CONFIG019_OVERLAY_AUTHORITY_PATHS
+        self.git("switch", "-q", "-c", "usb-name-candidate", self.base)
+        for path in paths:
+            self.write(path, "synthetic regular host metadata\n")
+            self.assertEqual(correspondence.classify_path(path), "NON_BEHAVIORAL")
+            for alias in (path + ".bak", path.swapcase(), "other/" + path):
+                with self.subTest(alias=alias), self.assertRaises(correspondence.CorrespondenceError):
+                    correspondence.classify_path(alias)
+            with mock.patch.object(correspondence, "CORRESPONDENCE_CRITICAL_PATHS",
+                                   correspondence.CORRESPONDENCE_CRITICAL_PATHS | {path}):
+                self.assertEqual(correspondence.classify_path(path), "CRITICAL")
+        self.candidate = self.commit("finite019 original/overlay/authority synthetic inventory")
+        self.assertEqual(self.verify()["candidate_paths"], dict.fromkeys(paths, "NON_BEHAVIORAL"))
+        for alias in ("tools/fixtures/gp_config019_usb_name_selection/extra.cpp",
+                      "docs/calibration/fixtures/gp_config_019_extra.json"):
+            with self.assertRaises(correspondence.CorrespondenceError):
+                correspondence.classify_path(alias)
+
+    def test_usb_name_original_overlay_and_authority_modes(self):
+        for index, path in enumerate(tuple(CONFIG019_HOST_BLOBS) + CONFIG019_OVERLAY_AUTHORITY_PATHS):
+            for mode in ("100755", "120000", "160000"):
+                with self.subTest(path=path, mode=mode):
+                    self.git("switch", "-q", "-c", f"usb-mode-{index}-{mode}", self.candidate)
+                    blob = self.candidate if mode == "160000" else self.git("hash-object", "-w", "--stdin")
+                    self.git("update-index", "--add", "--cacheinfo", f"{mode},{blob},{path}")
+                    self.git("commit", "-q", "-m", "unsafe019 metadata mode")
+                    with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
+                        self.verify(check_worktree=False)
+
+
+class PreservedUsbNameIdentityTests(unittest.TestCase):
+    git_at = PreservedKeyboardIdentityTests.git_at
+    git = PreservedKeyboardIdentityTests.git
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="glyph-preserved019-")
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name) / "repo"
+        source = Path(__file__).resolve().parents[1]
+        self.git_at(source, "clone", "--shared", "--no-checkout", str(source), str(self.root))
+        self.git("checkout", "-q", "-b", "preserved019", CONFIG019_C)
+        self.git("config", "user.name", "019 negative controls")
+        self.git("config", "user.email", "019@example.invalid")
+        self.assertEqual(self.git("rev-list", "--parents", "-1", CONFIG019_C), CONFIG019_C + " " + CONFIG019_B)
+        self.assertEqual(self.git("rev-parse", CONFIG019_C + "^{tree}"), CONFIG019_TREE)
+        raw = subprocess.run(["git", "diff-tree", "-r", "--no-renames", "--raw", "-z", CONFIG019_B, CONFIG019_C],
+                             cwd=self.root, capture_output=True, check=True).stdout
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), CONFIG019_RAW)
+
+    def assert_original_hosts(self, target="HEAD"):
+        for path, blob in CONFIG019_HOST_BLOBS.items():
+            self.assertEqual(self.git("ls-tree", target, "--", path), f"100644 blob {blob}\t{path}",
+                             "immutable019 host substitution: " + path)
+
+    def test_original019_exact_five_hosts_32_sources_and_critical_equality(self):
+        self.assert_original_hosts()
+        proof = correspondence.verify_correspondence(self.root, CONFIG019_C, CONFIG019_B, integrated=True)
+        self.assertEqual(proof["candidate_paths"], dict.fromkeys(CONFIG019_HOST_BLOBS, "NON_BEHAVIORAL"))
+        fixture = json.loads(self.git("show", CONFIG019_C + ":" + next(iter(CONFIG019_HOST_BLOBS))))
+        self.assertEqual(len(fixture["production_sources"]), 32)
+        for pin in fixture["production_sources"]:
+            for revision in (CONFIG019_B, CONFIG019_C):
+                self.assertEqual(self.git("ls-tree", revision, "--", pin["path"]),
+                                 f'{pin["mode"]} blob {pin["blob"]}\t{pin["path"]}')
+                raw = subprocess.run(["git", "show", revision + ":" + pin["path"]], cwd=self.root,
+                                     capture_output=True, check=True).stdout
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), pin["sha256"])
+        before, after = correspondence._tree(self.root, CONFIG019_B), correspondence._tree(self.root, CONFIG019_C)
+        critical = {path: entry for path, entry in before.items()
+                    if path.split("/", 1)[0].casefold() in correspondence.CRITICAL_ROOTS
+                    or path.casefold() in correspondence.CRITICAL_FILES
+                    or path in correspondence.CORRESPONDENCE_CRITICAL_PATHS
+                    or path.casefold().startswith(".github/workflows/")}
+        self.assertEqual(len(critical), 234)
+        self.assertEqual(critical, {path: after[path] for path in critical})
+
+    def test_original019_delete_rename_and_byte_substitution(self):
+        for index, path in enumerate(CONFIG019_HOST_BLOBS):
+            original = (self.root / path).read_bytes()
+            for operation in ("delete", "rename", "substitute"):
+                with self.subTest(path=path, operation=operation):
+                    self.git("switch", "-q", "-c", f"019-{index}-{operation}", CONFIG019_C)
+                    location = self.root / path
+                    if operation == "rename":
+                        location.rename(location.with_name(location.name + ".bak"))
+                    elif operation == "delete":
+                        location.unlink()
+                    else:
+                        location.write_bytes(original + b"X")
+                    self.git("add", "--all")
+                    self.git("commit", "-q", "-m", "immutable019 host substitution")
+                    with self.assertRaisesRegex(AssertionError, "immutable019 host substitution"):
+                        self.assert_original_hosts()
+                    if operation == "rename":
+                        with self.assertRaisesRegex(correspondence.CorrespondenceError, "unclassified"):
+                            correspondence.verify_correspondence(self.root, CONFIG019_C, CONFIG019_B, integrated=True)
+
+
 if __name__ == "__main__":
     unittest.main()

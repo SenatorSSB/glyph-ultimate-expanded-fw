@@ -201,7 +201,7 @@ GP_VAL040_HOST_DOCS = (
 )
 
 
-def gp_val040_host_scope_tests() -> None:
+def gp_val040_host_scope_tests(host_docs=GP_VAL040_HOST_DOCS, mains=PROTECTED_SCOPE_MAINS, label="gp_val040", detached=False) -> None:
     """Test actual main scope calls; the sentinel claims no content/auth PASS.
 
     Small real Git repositories deliberately have no campaign ancestry or repair
@@ -213,13 +213,13 @@ def gp_val040_host_scope_tests() -> None:
 
     source = Path(__file__).resolve().parents[1]
     observations = 0
-    for number, filename in enumerate(PROTECTED_SCOPE_MAINS):
-        spec = importlib.util.spec_from_file_location(f"gp_val040_scope_{number}", source / "tools" / filename)
+    for number, filename in enumerate(mains):
+        spec = importlib.util.spec_from_file_location(f"{label}_scope_{number}", source / "tools" / filename)
         if spec is None or spec.loader is None:
             raise AssertionError("actual scope consumer import unavailable: " + filename)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
-        with tempfile.TemporaryDirectory(prefix="glyph-kbd-scope-") as directory:
+        with tempfile.TemporaryDirectory(prefix=f"glyph-{label}-scope-") as directory:
             root = fresh_repo(Path(directory))
             if filename == "check_glyph_generated_source_owned_baseline_artifact.py":
                 # This legacy main validates its fixture before scope. Copy its
@@ -237,14 +237,19 @@ def gp_val040_host_scope_tests() -> None:
                 if module.BASE_BRANCH != "configurator":
                     run(root, "branch", module.BASE_BRANCH)
             run(root, "switch", "-c", "feature-exact-kbd-scope")
-            cases = [(GP_VAL040_HOST_DOCS, None)]
-            cases.extend(((path,), None) for path in GP_VAL040_HOST_DOCS)
+            if detached:
+                run(root, "commit", "--allow-empty", "-m", "scope correspondence candidate")
+                tested_base = output(root, "rev-parse", "configurator")
+                scope_candidate = output(root, "rev-parse", "HEAD")
+                run(root, "switch", "--detach")
+            cases = [(host_docs, None)]
+            cases.extend(((path,), None) for path in host_docs)
             # Only the three amended calls need exact calibration literals.
             if number < 3:
-                cases.extend(((alias,), "out-of-scope") for path in GP_VAL040_HOST_DOCS
-                             for alias in (path + ".bak", path.replace("gp_kbd_001", "gp_kbd_002")))
+                cases.extend(((alias,), "out-of-scope") for path in host_docs
+                             for alias in (path + ".bak", path.replace("gp_kbd_001", "gp_kbd_002").replace("gp_config_019", "gp_config_020")))
             cases.append((("unknown/kbd-host.txt",), "out-of-scope"))
-            cases.extend((GP_VAL040_HOST_DOCS + (path,), "protected") for path in (
+            cases.extend((host_docs + (path,), "protected") for path in (
                 "HAL/pico/src/gp_val040_forbidden.cpp", "backend/kbd.cpp",
                 "docs/calibration/config.pb", "tools/storage/input.json", "tools/write/input.json"))
             legacy = filename == "check_glyph_generated_source_owned_baseline_artifact.py"
@@ -290,11 +295,21 @@ def gp_val040_host_scope_tests() -> None:
                             raise AssertionError(filename + " bypassed actual scope call")
                     if len(reached) != 1 or reached[0].repo_root != root.resolve():
                         raise AssertionError("actual scope did not receive the genuine Git context")
+                    if detached:
+                        from glyph_hardware_correspondence import CorrespondenceError, verify_correspondence
+                        try:
+                            verify_correspondence(root, scope_candidate, tested_base, integrated=True)
+                        except CorrespondenceError:
+                            if rejection is None:
+                                raise AssertionError("exact scope literals failed strict correspondence")
+                        else:
+                            if rejection is not None:
+                                raise AssertionError("forbidden scope passed strict correspondence")
                     observations += 1
                 finally:
                     for path in paths:
                         (root / path).unlink()
-    print(f"gp_val040_actual_main_scope: PASS; consumers=5; observations={observations}; scope-only")
+    print(f"{label}_actual_main_scope: PASS; consumers={len(mains)}; observations={observations}; scope-only")
 
 
 def campaign_protected_scope_tests() -> None:
@@ -632,6 +647,10 @@ def main() -> int:
         module.git_lines = original_git_lines
 
     gp_val040_host_scope_tests()
+    gp_val040_host_scope_tests((
+        "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
+        "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
+    ), PROTECTED_SCOPE_MAINS[:3], "gp_val041", detached=True)
     campaign_guard_tests()
     campaign_protected_scope_tests()
 
