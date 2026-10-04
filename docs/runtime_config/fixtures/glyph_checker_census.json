@@ -1202,7 +1202,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 28887,
+      "file_size_bytes": 29476,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1212,6 +1212,7 @@
         "branch-specific",
         "branches",
         "candidate",
+        "capacity_candidate_present",
         "configurator",
         "evidence",
         "evidence.",
@@ -1229,7 +1230,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 551,
+      "line_count": 559,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1241,6 +1242,7 @@
         "branch-specific",
         "branches",
         "candidate",
+        "capacity_candidate_present",
         "configurator",
         "evidence",
         "evidence.",
@@ -1292,7 +1294,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "48828602e3851ba2ca09cadd17785d036279c8bc9cad4c51b26b559e1a907e5a",
+      "sha256": "54f95be79d2f6a61cda7248ef6eb48fb8ad1eef55fa9f59afdeb34c186cfd0ba",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

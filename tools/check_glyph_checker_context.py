@@ -79,6 +79,8 @@ def guard_main(root: Path, campaign: bool, expected: str | None = None) -> None:
         if campaign and expected in {"critical", "unclassified"}:
             reasons.extend(("dirty path outside reviewed governance inventory",
                             "dirty path outside finite C014 governance"))
+        if campaign and expected == "substitution":
+            reasons.append("014 changed immutable C020 metadata")
         if result.returncode == 0 or not any(reason in combined for reason in reasons):
             raise AssertionError("actual guard main negative lost " + repr(expected) + ": " + combined)
 
@@ -234,7 +236,11 @@ def campaign_protected_scope_tests() -> None:
                     or not proof['accepted_metadata_paths']):
                 raise AssertionError('source-free processor context has source authority')
         else:
-            if capacity_phase:
+            # A repaired current F/I already contains the exact authenticated C.
+            # Compose only when that immutable candidate is still off-head.
+            capacity_candidate_present = (capacity_phase and
+                output(root, 'merge-base', candidate, 'HEAD') == candidate)
+            if capacity_phase and not capacity_candidate_present:
                 previous = output(root, 'rev-parse', 'HEAD')
                 merge = subprocess.run(['git', 'merge', '--no-ff', '--no-commit', candidate],
                                        cwd=root, capture_output=True, text=True)
@@ -252,7 +258,7 @@ def campaign_protected_scope_tests() -> None:
                     (root / relative).write_bytes(exact)
                     run(root, 'add', '--', relative)
                 run(root, 'commit', '--no-edit')
-            else:
+            elif not capacity_phase:
                 run(root, "merge", "--no-ff", "--no-edit", candidate)
         for ancestor in ((base,) if processor_phase else (base, candidate)):
             run(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
@@ -273,6 +279,8 @@ def campaign_protected_scope_tests() -> None:
                 if rejection in {"critical", "unclassified"}:
                     expected.extend(("dirty path outside reviewed governance inventory",
                                      "dirty path outside finite C014 governance"))
+                if rejection == "substitution":
+                    expected.append("014 changed immutable C020 metadata")
                 if result.returncode == 0 or not any(message in combined for message in expected):
                     raise AssertionError(filename + " negative lost " + rejection + ": " + combined)
 
