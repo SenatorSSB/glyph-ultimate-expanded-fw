@@ -613,3 +613,26 @@ the full aggregate gate remains failure-bearing.
   passed. The exact upstream decoder/generated fixture bytes were retained;
   `git diff --check` identifies their preserved whitespace.
 - stop conditions: none. No firmware build or hardware work was applicable.
+
+## Persistent campaign execution under GLYPH-UD-029
+
+The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
+return-after-mechanical-transition rules within its named H3 and H1 chains.
+Reuse the existing campaign executor through objective PREAUTHORIZED activation,
+the ordinary governance successor, product resume, focused Revision-3 validation,
+fresh independent review, exact committed build/custody and hardware handoff.
+No new full chat, Planner or Curator is required for these mechanical transitions.
+Live queue scope and substantive decisions remain authoritative. Retain exact
+candidates; never merge behavior-changing H2/H3 before exact human HEP PASS.
+The canonical publication lock permits one writer; isolated dedicated branch
+work/review may proceed without that lock when frozen inputs remain unchanged.
+Retain the H3 lock through the logical chain and release at hardware wait or a
+genuine substantive stop. Rejected transport uses durable readback. Preserve
+chronology: a historical pause cannot override a newer verified owner resume.
+Within each named product chain, allow at most one ordinary governance successor
+and one exceptional validation repair for a concrete Tier-1 or Tier-2 defect.
+Any further successor requires direct owner approval. This limit prospectively
+supersedes broader Revision-3 exception wording within these named chains;
+historical policy and evidence remain preserved.
+Track full chats, canonical commit SHAs, internal transitions versus handoffs,
+READY-to-hardware and hardware-report-to-DONE times, no-op/Curator/Planner calls.

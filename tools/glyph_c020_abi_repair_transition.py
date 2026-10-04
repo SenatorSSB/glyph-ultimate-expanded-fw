@@ -98,6 +98,12 @@ REVISION_THREE_PATHS = frozenset((
     'tools/check_glyph_agent_framework_docs.py',
 ))
 
+# Exact source-free owner batch record; historical D0/D1 authority is retained.
+PERSISTENT_BATCH_AUTHORITY = '793c04c333e86c7656b7c3142bbab8a7c4a78b08'
+PERSISTENT_BATCH_PARENT = '5205ba518d1d5fa19e7584d6c6d5210932091b3e'
+PERSISTENT_BATCH_DIRECTION_SHA256 = '30a2d3b3836eb24dc674ba36a564a78892e099b9d36400665af8791176ae12bc'
+PERSISTENT_BATCH_PATHS = frozenset(('AGENTS.md', 'docs/WORKFLOW.md', 'docs/agent_framework/README.md', 'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md', 'docs/agent_framework/SUPERVISOR_CONTRACT.md', 'docs/agent_framework/SUBAGENT_CONTRACTS.md', 'docs/agent_framework/SCHEDULED_TASKS.md', 'docs/agent_framework/CYCLE_STATE_MACHINE.md', 'docs/agent_framework/PROMPT_TEMPLATES.md', 'tools/check_glyph_agent_framework_docs.py', 'tools/test_glyph_hardware_correspondence.py') )
+
 
 def _owner_direction_scope(root, head, delta):
     if OWNER_DIRECTION not in delta:
@@ -130,6 +136,31 @@ def _owner_direction_scope(root, head, delta):
                     and _git(root, 'show', ':' + path) == committed
                     and _git(root, 'ls-files', '--stage', '--', path).decode().split()[:1] == ['100644'],
                     'Revision-3 metadata live/index/mode substitution: ' + path)
+    # Only exact D2 ancestry selects this branch. Earlier contexts never need
+    # the future object; an unrelated local object or branch name grants nothing.
+    if PERSISTENT_BATCH_AUTHORITY in _git(root, 'rev-list', head).decode().split():
+        require(_git(root, 'rev-list', '--parents', '-n', '1', PERSISTENT_BATCH_AUTHORITY)
+                .decode().split() == [PERSISTENT_BATCH_AUTHORITY, PERSISTENT_BATCH_PARENT]
+                and ancestor(root, REVISION_THREE_AUTHORITY, PERSISTENT_BATCH_PARENT),
+                'persistent batch authority ancestry/parent mismatch')
+        require(_git(root, 'diff', '--name-only', PERSISTENT_BATCH_PARENT,
+                     PERSISTENT_BATCH_AUTHORITY).decode().splitlines() == [OWNER_DIRECTION],
+                'persistent batch authority changed another path')
+        previous = raw_bytes(root, REVISION_THREE_AUTHORITY, OWNER_DIRECTION)
+        record = raw_bytes(root, PERSISTENT_BATCH_AUTHORITY, OWNER_DIRECTION)
+        require(record.startswith(previous) and len(record) > len(previous)
+                and _sha(record) == PERSISTENT_BATCH_DIRECTION_SHA256
+                and _tree(root, PERSISTENT_BATCH_AUTHORITY)[OWNER_DIRECTION][:2] == ('100644', 'blob'),
+                'persistent batch changed earlier direction or record mode/hash')
+        authority, digest = PERSISTENT_BATCH_AUTHORITY, PERSISTENT_BATCH_DIRECTION_SHA256
+        scope = scope | PERSISTENT_BATCH_PATHS
+        for path in PERSISTENT_BATCH_PATHS & delta:
+            committed = raw_bytes(root, head, path)
+            require(_tree(root, head)[path][:2] == ('100644', 'blob')
+                    and current_bytes(root, path) == committed
+                    and _git(root, 'show', ':' + path) == committed
+                    and _git(root, 'ls-files', '--stage', '--', path).decode().split()[:1] == ['100644'],
+                    'persistent batch metadata live/index/mode substitution: ' + path)
     authoritative = raw_bytes(root, authority, OWNER_DIRECTION)
     require(_sha(authoritative) == digest
             and raw_bytes(root, head, OWNER_DIRECTION) == authoritative
@@ -950,3 +981,35 @@ def authenticate(root):
     if processor is not None:
         proof.update(evidence_commit=processor['evidence_commit'], evidence_root=processor['evidence_root'])
     return proof
+
+
+@original._proof_invocation
+def authenticate_committed_predecessor(root, target):
+    """Run the unchanged C020 proof in an actual immutable local checkout.
+
+    The caller still proves its own current tree/index/worktree. This interface
+    certifies the separately named accepted predecessor, never current C014.
+    Objects remain in the local source store; there is no fetch or object copy.
+    """
+    import tempfile
+    root = Path(root).resolve()
+    require(isinstance(target, str) and re.fullmatch('[0-9a-f]{40}', target),
+            'predecessor must be an immutable full commit')
+    _git(root, 'cat-file', '-e', target + '^{commit}')
+    objects = Path(_git(root, 'rev-parse', '--git-path', 'objects').decode().strip())
+    if not objects.is_absolute():
+        objects = root / objects
+    objects = objects.resolve(strict=True)
+    with tempfile.TemporaryDirectory(prefix='glyph-c020-immutable-predecessor-') as directory:
+        snapshot = Path(directory)
+        subprocess.run(['git', '-c', 'init.templateDir=', 'init', '-q', str(snapshot)],
+                       check=True, capture_output=True)
+        (snapshot / '.git/objects/info/alternates').write_text(str(objects) + '\n')
+        subprocess.run(['git', '-C', str(snapshot), '-c', 'core.hooksPath=/dev/null',
+                        'checkout', '--detach', '--quiet', target],
+                       check=True, capture_output=True)
+        proof = authenticate(snapshot)
+        require(proof['phase'] == 'ACCEPTED_TRANSITION'
+                and proof['candidate'] == C_R and proof['target'] == target,
+                'predecessor lacks actual repaired C020 accepted proof')
+        return dict(proof)

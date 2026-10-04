@@ -572,12 +572,18 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         roots.add(GP_CONFIG_010_HISTORICAL_CANDIDATE)
     # GP-VAL-037 finite proof roots, selected independently of framework execution.
     campaign_consumers = [('gp_config_012_button_mask_characterization', ['python3', 'tools/check_glyph_gp_config012_button_mask_characterization.py']), ('gp_config_013_usb_default_characterization', ['python3', 'tools/check_glyph_gp_config013_usb_default_characterization.py']), ('gp_config_010_integration_semantic_correspondence', ['python3', 'tools/check_glyph_config_010_integration_semantic_correspondence.py']), ('configurator_setconfig_transaction', ['python3', 'tools/check_glyph_configurator_setconfig_transaction.py']), ('current_config_persistence_recovery_research', ['python3', 'tools/check_glyph_current_config_persistence_recovery_research.py']), ('getconfig_raw_load_characterization', ['python3', 'tools/check_glyph_getconfig_raw_load_characterization.py']), ('setconfig_runtime_rebinding_characterization', ['python3', 'tools/check_glyph_setconfig_runtime_rebinding_characterization.py']), ('config_menu_invalid_state_characterization', ['python3', 'tools/check_glyph_config_menu_invalid_state_characterization.py']), ('checker_context', ['python3', 'tools/check_glyph_checker_context.py']), ('generated_source_contract', ['python3', 'tools/check_glyph_generated_source_owned_generator_contract.py']), ('generated_baseline_artifact', ['python3', 'tools/check_glyph_generated_source_owned_baseline_artifact.py']), ('artifact_install', ['python3', 'tools/check_glyph_generated_source_owned_artifact_install.py']), ('coordinate_native_contract', ['python3', 'tools/check_glyph_coordinate_native_runtime_profile_contract.py']), ('docs_agent_surface', ['python3', 'tools/check_glyph_docs_agent_surface.py']), ('campaign_webserial_source_authority', ['python3', 'tools/check_glyph_runtime_config_webserial_device_write_source_authority.py', '--campaign-transition'])]
-    if any(entry['id'] == identity and entry['command'] == command
+    campaign_consumers.extend([
+        ('custom_modifier_cache_characterization', ['python3', 'tools/check_glyph_custom_modifier_cache_characterization.py']),
+        ('gp_config014_modifier_capacity', ['python3', 'tools/check_glyph_gp_config014_modifier_capacity.py']),
+        ('gp_val034_c014_transition', ['python3', 'tools/test_glyph_c014_campaign_transition.py']),
+    ])
+    if any(entry['applicability'] == 'current'
+           and entry['id'] == identity and entry['command'] == command
            for entry in selected for identity, command in campaign_consumers):
         from glyph_campaign_transition import ROOTS, TRANSITIONS, authenticate
         proof = authenticate(ROOT)
         roots.update(ROOTS)
-        if proof.get('contract') == 'c020_abi_repair':
+        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity'}:
             # GP-VAL-043 exports only roots whose finite candidate, authority and
             # accepted-transition contracts passed the actual phase proof. The
             # mutable mapping/catalog never supplies runner authority by itself.
@@ -585,7 +591,7 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
             if (type(repaired_roots) is not frozenset or not repaired_roots
                     or any(not isinstance(identity, str) or re.fullmatch(r'[0-9a-f]{40}', identity) is None
                            for identity in repaired_roots)):
-                raise ValueError('invalid authenticated C020 ABI repair object roots')
+                raise ValueError('invalid authenticated campaign object roots')
             roots.update(repaired_roots)
         else:
             # Original037 keeps its authenticated historical catalog contract.

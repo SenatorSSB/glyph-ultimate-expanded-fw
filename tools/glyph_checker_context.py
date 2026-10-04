@@ -265,13 +265,15 @@ def validate_feature_scope(
 
 
 def authenticated_campaign_context(context: CheckerContext) -> CheckerContext:
-    """Remove authenticated C020 source and immutable accepted-result scope entries."""
+    """Remove only source/result entries certified by the current finite proof."""
     from dataclasses import replace
     from glyph_campaign_transition import ADOPTION, authenticate
     # Historical checkers and small unit repositories retain their original context.
     repair_markers = (
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
+        "docs/runtime_config/fixtures/gp_val034_c014_transition.json",
+        "docs/runtime_config/fixtures/gp_val034_accepted_transitions.json",
     )
     if (_git_returncode(context.repo_root, ["merge-base", "--is-ancestor", ADOPTION, context.head])
             and not any((context.repo_root / path).exists() for path in repair_markers)):

@@ -91,7 +91,20 @@ def section(source: str, start: str, end: str | None) -> str:
     return source[begin:finish].rstrip() + "\n"
 
 
-def production_fragments() -> tuple[str, dict[str, str]]:
+DIRECT_CAPACITY_GUARD = "    if (custom_mode_config.modifiers_count > kMaxCustomModeModifiers) {\n        return;\n    }\n\n"
+
+
+def valid_custom_body(current: str, historical: str) -> str:
+    """Permit exactly the capacity guard; all valid 0..20 statements stay exact."""
+    if current == historical:
+        return current
+    require(current.count(DIRECT_CAPACITY_GUARD) == 1, "exact direct capacity guard missing")
+    normalized = current.replace(DIRECT_CAPACITY_GUARD, "", 1)
+    require(normalized == historical, "valid0..20 SetConfig body/order drift beyond capacity guard")
+    return normalized
+
+
+def production_fragments(historical_custom: str | None = None) -> tuple[str, dict[str, str]]:
     custom = regular(ROOT, "src/modes/CustomControllerMode.cpp").read_text(encoding="utf-8")
     mode = regular(ROOT, "src/core/mode_selection.cpp").read_text(encoding="utf-8")
     config = regular(ROOT, "src/core/config_utils.cpp").read_text(encoding="utf-8")
@@ -102,8 +115,19 @@ def production_fragments() -> tuple[str, dict[str, str]]:
     require(custom_body.count("make_button_mask(") == 2, "custom modifier/combo caller census drift")
     require(mode_body.count("make_button_mask(") == 1, "mode activation caller census drift")
     require(config_body.count("make_button_mask(") == 1, "backend activation caller census drift")
-    return "\n".join((custom_body, mode_body, config_body)), {
-        "custom_modifier_and_combo": hashlib.sha256(custom_body.encode()).hexdigest(),
+    normalized = custom_body
+    if historical_custom is not None:
+        normalized = valid_custom_body(custom_body, section(historical_custom,
+            "void CustomControllerMode::SetConfig(", "void CustomControllerMode::UpdateDigitalOutputs"))
+    # The frozen ten-entry isolation harness only calls counts <=10. Compile
+    # the actual current caller, resolving its exact authenticated capacity.
+    preamble = ""
+    if DIRECT_CAPACITY_GUARD in custom_body:
+        header = regular(ROOT, "include/modes/CustomControllerMode.hpp").read_text(encoding="utf-8")
+        require("kMaxCustomModeModifiers = 20" in header, "current capacity constant drift")
+        preamble = "static constexpr size_t kMaxCustomModeModifiers = 20;\n"
+    return preamble + "\n".join((custom_body, mode_body, config_body)), {
+        "custom_modifier_and_combo": hashlib.sha256(normalized.encode()).hexdigest(),
         "mode_activation": hashlib.sha256(mode_body.encode()).hexdigest(),
         "backend_activation": hashlib.sha256(config_body.encode()).hexdigest(),
     }
@@ -219,7 +243,7 @@ def validate_source(value: dict[str, object]) -> tuple[str, dict[str, str]]:
     require(named_bindings, "default activation binding source inventory empty")
     require(value["default_activation_bindings"] == named_bindings,
             "source-supported default activation binding matrix drift")
-    return production_fragments()
+    return production_fragments(texts["src/modes/CustomControllerMode.cpp"])
 
 
 def compile_variant(temp: Path, name: str, sanitizers: list[str]) -> Path:
@@ -380,6 +404,16 @@ def main() -> int:
                            object_pairs_hook=pairs)
         validate_fixture(value)
         validate_identity_adversarial_controls()
+        historical_body = "void fixture() {\n    original();\n}\n"
+        require(valid_custom_body(historical_body, historical_body) == historical_body, "body identity control")
+        for altered in (historical_body.replace("original", "changed"),
+                        DIRECT_CAPACITY_GUARD + historical_body + DIRECT_CAPACITY_GUARD):
+            try:
+                valid_custom_body(altered, historical_body)
+            except ContractError:
+                pass
+            else:
+                raise ContractError("valid body/guard substitution negative accepted")
         validate_provenance(value)
         fragments, fragment_hashes = validate_source(value)
         require(value["production_fragment_sha256"] == fragment_hashes, "production function correspondence drift")

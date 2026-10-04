@@ -383,6 +383,36 @@ processor records; they never establish controller acceptance. Actual acceptance
 still requires the exact built snapshot, independent review, preserved artifact,
 processor-accepted human PASS, empty gaps and reviewed integration chronology.
 
+## GP-VAL-034 capacity transition
+
+The separate finite C014 proof authenticates immutable candidate
+`a3664be5354ec4253122eb2e738e70e5dfdb9ccc` and direct base
+`8b8e45b17a5670bbf983360faf87bdf9d6b50ce2`. Only its two exact
+CustomControllerMode entries may differ in the 236-entry critical inventory.
+The accepted C020 predecessor is proved at that immutable base; C014 then
+receives its own full current source, index, worktree, mode and ancestry proof.
+The five protected scope filters retain their content checks after removing
+only entries certified by that proof.
+
+Capacity host tools and the separate mapping/catalog are exact regular 100644
+literals in `glyph_hardware_correspondence.py`; this does not classify either
+production entry as nonbehavioral. The original C014 host pins and historical
+011/012/rebinding evidence remain immutable. Current tool overlays require the
+separate reviewed034 inventory. Candidate validation grants no physical
+acceptance. Source-free R and E preserve accepted C020 firmware; E precedes I
+and requires no I catalog. Actual I requires exact C014 F/build/artifact/review,
+complete processor PASS, the genuine ordered catalog and current critical-tree
+correspondence. C014 cannot inherit prior010/020 controller acceptance.
+
+The shared034 KBD overlay is limited to the five exact host files from preserved
+Ckbd `4fb7c1e9507547774ff9f55cd7788355648d5d1e` and its original unchanged 28
+source/dependency entries. The helper authenticates their original identities,
+complete committed/index/live bytes and regular100644 modes when present.
+These host literals are non-behavioral; production/source-critical precedence
+remains unchanged. GP-VAL-040 strict DONE remains a separate prerequisite to
+KBD publication. Future019 identities or additional files require the named041
+consequence; they receive no authority from this finite set.
+
 ## GP-VAL-040 preserved Keyboard host inventory
 
 This extension adds only five source-free outputs of KBD C
@@ -429,12 +459,9 @@ proof to scope wiring; it claims neither content nor campaign authentication
 PASS. Actual full-main governance validation and real preserved-C strict
 correspondence remain separate obligations. No original check is omitted.
 
-The repaired C020 authentication module also owns a separate finite metadata
-catalog. Its unchanged B_R-to-head catalog rejects the five known KBD additions
-before feature-scope validation. GP-VAL-040 grants no edits to that module.
-Source and independent Revision-3 review find no new source/acceptance
-contradiction in that rejection; keep its actual FAIL as
-FRAMEWORK_VALIDATION_DEBT when the applicable focused proofs pass. Never report
-composed full mains or an unexecuted/incomplete aggregate as PASS. This
-classification grants no Keyboard repair, device operation or physical
-acceptance, and KBD integration still follows GP-VAL-040 strict DONE.
+The earlier composed-main FAIL observations from the C020 five-host catalog
+remain immutable historical evidence. GP-VAL-034 now supplies the authenticated
+exact Keyboard coexistence contract described above; its committed helper
+literals and authentication modules are preserved byte-for-byte. Current
+composed consumers must be checked again on that contract. GP-VAL-040 strict
+DONE remains a separate prerequisite to Keyboard integration.

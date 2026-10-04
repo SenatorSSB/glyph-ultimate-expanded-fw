@@ -3114,6 +3114,44 @@ def check_revision_three_self_test() -> None:
     pass_line("Revision-3 classification/safety/successor/transport-policy negative controls validate")
 
 
+
+PERSISTENT_BATCH_POLICY = {'owner_direction': 'GLYPH-UD-029', 'persistent_campaign_workers': True, 'canonical_writers': 1, 'branch_work_without_canonical_lock': True, 'mechanical_transition_requires_new_full_chat': False, 'mechanical_transition_requires_planner_or_curator': False, 'preauthorized_activation_requires_objective_conditions': True, 'exact_candidate_preserved': True, 'fresh_independent_review': True, 'H2_H3_merge_requires_exact_human_HEP_PASS': True, 'max_pending_H3': 1, 'new_GP_VAL_requires_UNPROVEN_SAFETY_FACT': True, 'historical_pause_requires_chronology_check': True, 'transport_grants_action_authority': False, 'ordinary_governance_successors_per_product': 1, 'exceptional_validation_repairs_per_product': 1, 'exceptional_repair_requires_concrete_Tier1_or_Tier2_defect': True, 'further_successors_require_direct_owner_approval': True}
+
+
+def validate_persistent_batch_policy(value: object) -> None:
+    if json.dumps(value, sort_keys=True, separators=(",", ":")) != json.dumps(PERSISTENT_BATCH_POLICY, sort_keys=True, separators=(",", ":")):
+        fail("invalid persistent campaign policy")
+
+
+def check_persistent_batch_surface() -> None:
+    text = read_required("docs/agent_framework/SUPERVISOR_CONTRACT.md")
+    start, end = "<!-- persistent-batch-policy:start -->", "<!-- persistent-batch-policy:end -->"
+    if text.count(start) != 1 or text.count(end) != 1:
+        fail("missing unique persistent campaign policy")
+    body = text.split(start, 1)[1].split(end, 1)[0].strip()
+    if not body.startswith("```json\n") or not body.endswith("```"):
+        fail("persistent campaign policy must be one fenced JSON object")
+    validate_persistent_batch_policy(_revision_three_json(body[8:-3]))
+    for path in ('AGENTS.md', 'docs/WORKFLOW.md', 'docs/agent_framework/README.md', 'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md', 'docs/agent_framework/SUPERVISOR_CONTRACT.md', 'docs/agent_framework/SUBAGENT_CONTRACTS.md', 'docs/agent_framework/SCHEDULED_TASKS.md', 'docs/agent_framework/CYCLE_STATE_MACHINE.md', 'docs/agent_framework/PROMPT_TEMPLATES.md'):
+        require_phrase(path, "GLYPH-UD-029")
+    require_phrase("docs/agent_framework/USER_DIRECTION.md", "01a1078b-f2a9-77c2-b3bd-c0f0aaba5d74")
+    for key in PERSISTENT_BATCH_POLICY:
+        value = PERSISTENT_BATCH_POLICY[key]
+        variant = dict(PERSISTENT_BATCH_POLICY)
+        variant[key] = not value if type(value) is bool else 2 if type(value) is int else "GLYPH-UD-028"
+        try:
+            validate_persistent_batch_policy(variant)
+        except FrameworkDocsError:
+            continue
+        fail("persistent campaign safety substitution accepted: " + key)
+    for bad in (dict(PERSISTENT_BATCH_POLICY, canonical_writers=True), dict(PERSISTENT_BATCH_POLICY, max_pending_H3=1.0), {}):
+        try:
+            validate_persistent_batch_policy(bad)
+        except FrameworkDocsError:
+            continue
+        fail("persistent campaign type/omission substitution accepted")
+    pass_line("persistent campaign directive, safety and chronology controls validate")
+
 def check_revision_three_surface() -> None:
     text = read_required("docs/agent_framework/VALIDATION_AND_GATES.md")
     start, end = "<!-- revision-three-validation:start -->", "<!-- revision-three-validation:end -->"
@@ -3142,6 +3180,7 @@ def check_revision_three_surface() -> None:
     require_phrase("docs/agent_framework/USER_DIRECTION.md", "GLYPH-UD-028")
     require_phrase("docs/agent_framework/WORK_ORDER_TEMPLATE.md", "UNPROVEN_SAFETY_FACT")
     check_revision_three_self_test()
+    check_persistent_batch_surface()
     pass_line("current Revision-3 policy and prospective GP-VAL contracts validate; historical orders preserved")
 
 

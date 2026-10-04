@@ -28,6 +28,18 @@ def run(root: Path, *command: str, expected: int = 0) -> str:
     result = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
     if result.returncode != expected:
         raise AssertionError(f"{command!r}: expected {expected}, got {result.returncode}\n{result.stdout}{result.stderr}")
+    if (command[:2] == ('git', 'clone') and '--no-local' in command
+            and (ROOT / 'docs/runtime_config/fixtures/gp_val034_c014_transition.json').is_file()):
+        # A source-free034 checkout does not place C014 on its ancestry. Import
+        # only the new proof's literal off-head closure into this disposable
+        # test clone; the unchanged historical checkers still authenticate it.
+        import glyph_c014_campaign_transition as capacity
+        target = Path(command[-1])
+        transfer = subprocess.run(['git', 'fetch', '--quiet', '--no-tags',
+            '--no-write-fetch-head', str(ROOT), *sorted(capacity.ROOTS)],
+            cwd=target, env=env, text=True, capture_output=True)
+        if transfer.returncode:
+            raise AssertionError('034 historical test object closure: ' + transfer.stderr)
     return result.stdout
 
 
@@ -111,10 +123,19 @@ def owner_control_plane_tests(directory: Path) -> None:
     head = run(root, 'git', 'rev-parse', 'HEAD').strip()
     delta = set(run(root, 'git', 'diff', '--name-only', repair.B_R, head).splitlines())
     scope = repair._owner_direction_scope(root, head, delta)
-    assert scope == repair.REVISION_THREE_PATHS | {repair.OWNER_DIRECTION}
+    expected_scope = repair.REVISION_THREE_PATHS | {repair.OWNER_DIRECTION}
+    if campaign.ancestor(root, repair.PERSISTENT_BATCH_AUTHORITY, head):
+        expected_scope |= repair.PERSISTENT_BATCH_PATHS
+    assert scope == expected_scope
     proof = campaign.authenticate(root)
-    assert proof['phase'] == 'ACCEPTED_TRANSITION'
-    assert proof['candidate'] == repair.C_R
+    if proof['contract'] == 'c014_capacity':
+        import glyph_c014_campaign_transition as capacity
+        assert proof['phase'] in {'BASELINE', 'CANDIDATE_VALIDATION_ONLY',
+                                  'SOURCE_FREE_PROCESSOR', 'ACCEPTED_TRANSITION'}
+        assert proof['candidate'] == capacity.C
+    else:
+        assert proof['phase'] == 'ACCEPTED_TRANSITION'
+        assert proof['candidate'] == repair.C_R
     assert not (scope & proof['accepted_metadata_paths'])
     run(root, 'python3', 'tools/check_glyph_docs_agent_surface.py')
     for name in sorted(repair.REVISION_THREE_PATHS):
