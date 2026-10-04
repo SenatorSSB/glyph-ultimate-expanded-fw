@@ -47,6 +47,12 @@ NON_BEHAVIORAL_PATHS = frozenset({
     'docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md',
     'docs/calibration/gp_config_014_hardware_result.md',
     'docs/calibration/fixtures/gp_config_014_hardware_evidence.json',
+    # Exact preserved KBD host overlay named by the adopted034 contract.
+    'docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json',
+    'docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md',
+    'tools/check_glyph_gp_kbd_001_keyboard_pipeline.py',
+    'tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp',
+    'tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp',
     # Owner-directed bounded Revision-3 control-plane contracts, not a prefix.
     'AGENTS.md',
     'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md',

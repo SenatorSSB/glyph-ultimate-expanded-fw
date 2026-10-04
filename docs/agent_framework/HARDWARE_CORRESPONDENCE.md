@@ -403,3 +403,12 @@ acceptance. Source-free R and E preserve accepted C020 firmware; E precedes I
 and requires no I catalog. Actual I requires exact C014 F/build/artifact/review,
 complete processor PASS, the genuine ordered catalog and current critical-tree
 correspondence. C014 cannot inherit prior010/020 controller acceptance.
+
+The shared034 KBD overlay is limited to the five exact host files from preserved
+Ckbd `4fb7c1e9507547774ff9f55cd7788355648d5d1e` and its original unchanged 28
+source/dependency entries. The helper authenticates their original identities,
+complete committed/index/live bytes and regular100644 modes when present.
+These host literals are non-behavioral; production/source-critical precedence
+remains unchanged. GP-VAL-040 strict DONE remains a separate prerequisite to
+KBD publication. Future019 identities or additional files require the named041
+consequence; they receive no authority from this finite set.

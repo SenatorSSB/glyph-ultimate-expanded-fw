@@ -77,7 +77,8 @@ def guard_main(root: Path, campaign: bool, expected: str | None = None) -> None:
     else:
         reasons = [expected]
         if campaign and expected in {"critical", "unclassified"}:
-            reasons.append("dirty path outside reviewed governance inventory")
+            reasons.extend(("dirty path outside reviewed governance inventory",
+                            "dirty path outside finite C014 governance"))
         if result.returncode == 0 or not any(reason in combined for reason in reasons):
             raise AssertionError("actual guard main negative lost " + repr(expected) + ": " + combined)
 
@@ -270,7 +271,8 @@ def campaign_protected_scope_tests() -> None:
                 # the finite dirty-inventory gate before the final live scan.
                 expected = [rejection]
                 if rejection in {"critical", "unclassified"}:
-                    expected.append("dirty path outside reviewed governance inventory")
+                    expected.extend(("dirty path outside reviewed governance inventory",
+                                     "dirty path outside finite C014 governance"))
                 if result.returncode == 0 or not any(message in combined for message in expected):
                     raise AssertionError(filename + " negative lost " + rejection + ": " + combined)
 

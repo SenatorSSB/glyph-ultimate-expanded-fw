@@ -189,11 +189,58 @@ def negatives(root, A, before, after, F, E, I, J):
         assert proof.verify_historical_dependency(root,p,blob,proof.sha(raw))==raw
 
 
+
+def kbd_coexistence(root, A):
+    # Exact known objects come from the finite proof closure and local alternates.
+    git(root,'cat-file','-e',proof.KBD_C+'^{commit}')
+    K = composition(root,A,proof.KBD_C)
+    context = proof.authenticate(root)
+    assert context['phase'] == 'BASELINE' and context['kbd_host_paths'] == proof.KBD_HOSTS
+    assert {proof.KBD_C,proof.KBD_B,proof.KBD_AUTHORITY} <= context['object_roots']
+    print('PASS source-free034 plus exact preserved KBD composition, 28 dependencies unchanged')
+    T = composition(root,K,proof.C)
+    context = proof.authenticate(root)
+    assert context['phase'] == 'CANDIDATE_VALIDATION_ONLY' and context['kbd_host_paths'] == proof.KBD_HOSTS
+    assert proof.critical_tree(root,T) == proof.critical_tree(root,proof.C)
+    print('PASS exact014 plus preserved KBD composition, complete critical equality')
+    path='tools/check_glyph_gp_kbd_001_keyboard_pipeline.py'
+    raw=(root/path).read_bytes()
+    write(root,path,raw+b'\n')
+    reject(lambda:proof.authenticate_kbd_coexistence(root,T),'KBD live host substitution')
+    git(root,'add','--',path)
+    write(root,path,raw)
+    reject(lambda:proof.authenticate_kbd_coexistence(root,T),'KBD index host substitution')
+    git(root,'add','--',path)
+    write(root,path,raw+b'\n');N=commit(root,'KBD newly committed host alteration')
+    reject(lambda:proof.authenticate_kbd_coexistence(root,N),'KBD newly committed/index/live altered host')
+    checkout(root,T);(root/path).unlink();N=commit(root,'KBD omitted required host')
+    reject(lambda:proof.authenticate_kbd_coexistence(root,N),'KBD missing finite host')
+    checkout(root,T);(root/path).chmod(0o755);N=commit(root,'KBD executable host')
+    reject(lambda:proof.authenticate_kbd_coexistence(root,N),'KBD100755 host')
+    checkout(root,T);(root/path).unlink();(root/path).symlink_to('check_glyph_gp_config014_modifier_capacity.py')
+    N=commit(root,'KBD symlink host')
+    reject(lambda:proof.authenticate_kbd_coexistence(root,N),'KBD120000 host')
+    checkout(root,T);dep='src/core/InputMode.cpp';write(root,dep,(root/dep).read_bytes()+b'\n');N=commit(root,'KBD dependency source alteration')
+    reject(lambda:proof.authenticate(root),'KBD source drift retains critical precedence')
+    reject(lambda:proof.authenticate_kbd_coexistence(root,N),'KBD literal dependency source alteration')
+    checkout(root,T);unknown='tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp.bak';write(root,unknown,'unknown adjacent host\n')
+    N=commit(root,'KBD adjacent unknown host')
+    reject(lambda:proof.authenticate(root),'KBD unknown adjacent path')
+    checkout(root,proof.KBD_C)
+    alter_queue(root,'GP-CONFIG-020',status='REVIEW')
+    bad = commit(root,'nonliteral old KBD sidebranch queue alteration')
+    N = composition(root,A,bad)
+    reject(lambda:proof.authenticate(root),'nonliteral old sidebranch receives no history exemption')
+    checkout(root,A)
+
+
 def main():
+    began = time.monotonic()
     with tempfile.TemporaryDirectory(prefix='glyph-c014-transition-tests-') as directory:
         root,A=new_repository(directory)
         before,after,M,F,R,E,I,J=phases(root,A)
         negatives(root,A,before,after,F,E,I,J)
-    print('PASS GP-VAL-034 finite native source/phase/history negative corpus')
+        kbd_coexistence(root,A)
+    print('PASS GP-VAL-034 finite native source/phase/history negative corpus; seconds',round(time.monotonic()-began,3))
 
 if __name__=='__main__': main()

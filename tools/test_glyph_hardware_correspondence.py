@@ -102,10 +102,15 @@ class CorrespondenceTests(unittest.TestCase):
             'docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md',
             'docs/calibration/gp_config_014_hardware_result.md',
             'docs/calibration/fixtures/gp_config_014_hardware_evidence.json',
+            'docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json',
+            'docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md',
+            'tools/check_glyph_gp_kbd_001_keyboard_pipeline.py',
+            'tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp',
+            'tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp',
         )
         for path in paths:
             self.assertEqual(correspondence.classify_path(path), 'NON_BEHAVIORAL')
-            for alias in (path + '.bak', path.swapcase(), path.replace('014', '014x')):
+            for alias in (path + '.bak', path.swapcase(), path.replace('014', '014x'), path.replace('kbd_001', 'kbd_001x')):
                 if alias == path:
                     continue
                 with self.assertRaises(correspondence.CorrespondenceError):
