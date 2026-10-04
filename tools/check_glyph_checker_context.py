@@ -248,6 +248,10 @@ def gp_val040_host_scope_tests(host_docs=GP_VAL040_HOST_DOCS, mains=PROTECTED_SC
             if number < 3:
                 cases.extend(((alias,), "out-of-scope") for path in host_docs
                              for alias in (path + ".bak", path.replace("gp_kbd_001", "gp_kbd_002").replace("gp_config_019", "gp_config_020")))
+            if detached:
+                cases.extend(((path.swapcase(),), "strict_alias") for path in host_docs)
+                cases.extend(((path,), "strict_" + mode) for path in host_docs
+                             for mode in ("100755", "120000", "160000"))
             cases.append((("unknown/kbd-host.txt",), "out-of-scope"))
             cases.extend((host_docs + (path,), "protected") for path in (
                 "HAL/pico/src/gp_val040_forbidden.cpp", "backend/kbd.cpp",
@@ -273,6 +277,14 @@ def gp_val040_host_scope_tests(host_docs=GP_VAL040_HOST_DOCS, mains=PROTECTED_SC
 
                 for path in paths:
                     write(root, path, "scope-only synthetic input\n")
+                if rejection == "strict_100755":
+                    (root / paths[0]).chmod(0o755)
+                elif rejection == "strict_120000":
+                    file = root / paths[0]
+                    file.unlink()
+                    file.symlink_to(root / "docs/baseline.md")
+                elif rejection == "strict_160000":
+                    run(root, "update-index", "--add", "--cacheinfo", "160000," + scope_candidate + "," + paths[0])
                 try:
                     with patch.object(module, "REPO_ROOT", root), \
                          patch.object(module, scope_name, scope_at_main), \
@@ -282,7 +294,7 @@ def gp_val040_host_scope_tests(host_docs=GP_VAL040_HOST_DOCS, mains=PROTECTED_SC
                         try:
                             module.main()
                         except ScopeReached:
-                            if rejection is not None:
+                            if rejection is not None and not rejection.startswith("strict_"):
                                 raise AssertionError(filename + " accepted forbidden scope " + repr(paths))
                         except (Exception, SystemExit) as exc:
                             if rejection is None:
@@ -309,6 +321,8 @@ def gp_val040_host_scope_tests(host_docs=GP_VAL040_HOST_DOCS, mains=PROTECTED_SC
                 finally:
                     for path in paths:
                         (root / path).unlink()
+                    if rejection == "strict_160000":
+                        run(root, "update-index", "--force-remove", "--", paths[0])
     print(f"{label}_actual_main_scope: PASS; consumers={len(mains)}; observations={observations}; scope-only")
 
 

@@ -10,6 +10,7 @@ import shutil
 import subprocess
 import tempfile
 import time
+from unittest.mock import patch
 import glyph_c014_campaign_transition as proof
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,7 +63,11 @@ def new_repository(directory):
     (root / '.git/objects/info/alternates').write_text(str(objects.resolve()) + '\n')
     git(root, 'config', 'user.name', 'Synthetic proof test')
     git(root, 'config', 'user.email', 'synthetic-proof@example.invalid')
-    checkout(root, proof.READY)
+    # The041 adoption already has exact KBD ancestry. Keep it when rebuilding
+    # a current fixture; never copy immutable hosts onto a root lacking ancestry.
+    checkout(root, proof.CONFIG019_ADOPTION)
+    if proof.ancestor(ROOT, proof.CONFIG019_C, current['target']):
+        composition(root, proof.CONFIG019_ADOPTION, proof.CONFIG019_C)
     # A finite draft composition. Never copies caches, objects, ignored files or
     # arbitrary current repository contents. A checker substitution is rejected
     # below against independent literal pins, even when freshly committed.
@@ -91,6 +96,11 @@ def new_repository(directory):
     data['items'][slots[0]] = proof.item(ROOT, proof.READY, 'GP-CONFIG-014')
     write(root, proof.QUEUE, left + begin + '\n```json\n' + json.dumps(data, indent=2) + '\n```\n' + end + right)
     write(root, proof.TRANSITIONS, json.dumps(dict(schema_version=1, accepted_transitions=[]), indent=2) + '\n')
+    # The adopted root contains the real pending014 protocol. Remove only these
+    # synthetic014 evidence slots along with replacing its queue entry above;
+    # the actual ROOT and all other evidence remain untouched.
+    for path in (proof.PROTOCOL, proof.EVIDENCE, proof.RESULT):
+        if (root / path).exists(): (root / path).unlink()
     assert not any((root / path).exists() for path in (proof.PROTOCOL, proof.EVIDENCE, proof.RESULT))
     print('PASS authenticated current', current['phase'], 'before isolated READY reconstruction')
     return root, commit(root, 'bounded034 implementation')
@@ -105,7 +115,7 @@ def composition(root, base, candidate):
     for path in proof.GOVERNANCE_PATHS:
         if path in proof._tree(root, base):
             write(root, path, proof.raw_bytes(root, base, path))
-    return commit(root, 'exact candidate composition')
+    return commit(root, 'exact candidate composition', empty=True)
 
 def phases(root, A):
     began = time.monotonic(); baseline = proof.authenticate(root)
@@ -268,4 +278,213 @@ def main():
         kbd_coexistence(root,A)
     print('PASS GP-VAL-034 finite native source/phase/history negative corpus; seconds',round(time.monotonic()-began,3))
 
-if __name__=='__main__': main()
+# The original matrix is retained in the original group below.
+
+
+def config019_positive(root, A):
+    assert proof.authenticate_config019_contract(root) == proof.CONFIG019_HOSTS
+    assert proof.authenticate_config019_coexistence(root, A) == frozenset()
+    assert not any((root / p).exists() for p in proof.CONFIG019_ORIGINAL_HOSTS)
+    K = composition(root, A, proof.CONFIG019_C)
+    observed = proof.authenticate(root)
+    assert observed['phase'] == 'BASELINE' and observed['config019_host_paths'] == proof.CONFIG019_HOSTS
+    assert {proof.CONFIG019_C, proof.CONFIG019_B, proof.CONFIG019_ADOPTION,
+            proof.CONFIG019_RECEIPT_COMMIT, proof.CONFIG019_F020} <= observed['object_roots']
+    print('PASS exact019 composition, immutable32/12 and independently pinned current34 proof')
+    return K
+
+
+def config019_hosts(root, A):
+    K = config019_positive(root, A)
+    for path in sorted(proof.CONFIG019_ORIGINAL_HOSTS):
+        checkout(root, K); raw = (root / path).read_bytes()
+        write(root, path, raw + b'\n')
+        reject(lambda: proof.authenticate_config019_coexistence(root, K), '019 original live substitution ' + path)
+        git(root, 'add', '--', path); write(root, path, raw)
+        reject(lambda: proof.authenticate_config019_coexistence(root, K), '019 original index substitution ' + path)
+        write(root, path, raw + b'\n'); N = commit(root, '019 committed original substitution')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '019 original committed substitution ' + path)
+        checkout(root, K); (root / path).unlink(); N = commit(root, '019 omitted original')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '019 omitted original ' + path)
+    checkout(root, K)
+    for path in proof.CONFIG019_ORIGINAL_HOSTS: (root / path).unlink()
+    N = commit(root, '019 all original hosts deleted')
+    reject(lambda: proof.authenticate_config019_coexistence(root, N), '019 complete deletion cannot erase ancestry obligation')
+    checkout(root, A)
+    for path in proof.CONFIG019_ORIGINAL_HOSTS: write(root, path, proof.raw_bytes(root, proof.CONFIG019_C, path))
+    N = commit(root, '019 copied original hosts without exact candidate ancestry')
+    reject(lambda: proof.authenticate_config019_coexistence(root, N), '019 copied hosts are not integration')
+    checkout(root, K)
+    path = sorted(proof.CONFIG019_ORIGINAL_HOSTS)[0]
+    for kind in ('executable', 'symlink', 'gitlink', 'rename'):
+        checkout(root, K)
+        if kind == 'executable': (root / path).chmod(0o755)
+        elif kind == 'symlink': (root / path).unlink(); (root / path).symlink_to('missing-host')
+        elif kind == 'rename': (root / path).rename(root / (path + '.bak'))
+        else:
+            git(root, 'update-index', '--add', '--cacheinfo', '160000,' + proof.CONFIG019_C + ',' + path)
+            git(root, 'commit', '-q', '-m', 'SYNTHETIC PROOF TEST:019 gitlink')
+        N = git(root, 'rev-parse', 'HEAD') if kind == 'gitlink' else commit(root, '019 unsafe type or rename')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '019 original ' + kind)
+    for path in ('docs/calibration/gp_config_019_usb_name_selection_characterization.md.bak',
+                 'docs/calibration/GP_CONFIG_019_usb_name_selection_characterization.md',
+                 'tools/fixtures/gp_config019_usb_name_selection/unknown.cpp'):
+        checkout(root, K); write(root, path, 'unknown finite host lookalike\n'); N = commit(root, '019 unknown adjacent/alias')
+        reject(lambda: proof.authenticate(root), '019 unknown/adjacent/case alias ' + path)
+    checkout(root, A)
+
+
+def config019_overlays(root, A):
+    for path in sorted(proof.CONFIG019_OVERLAY_PATHS):
+        checkout(root, A); raw = (root / path).read_bytes()
+        write(root, path, raw + b'\n')
+        reject(lambda: proof.authenticate_config019_coexistence(root, A), '041 overlay live substitution ' + path)
+        git(root, 'add', '--', path); write(root, path, raw)
+        reject(lambda: proof.authenticate_config019_coexistence(root, A), '041 overlay index substitution ' + path)
+        write(root, path, raw + b'\n'); N = commit(root, '041 committed overlay substitution')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '041 newly committed overlay substitution ' + path)
+        checkout(root, A); (root / path).unlink(); N = commit(root, '041 omitted overlay')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '041 omitted overlay ' + path)
+    checkout(root, A)
+    for path in proof.CONFIG019_OVERLAY_PATHS: (root / path).unlink()
+    N = commit(root, '041 complete overlay deletion after introduction')
+    reject(lambda: proof.authenticate_config019_coexistence(root, N), '041 total deletion does not revive historical route')
+    for kind in ('executable', 'symlink', 'gitlink'):
+        checkout(root, A); path = proof.CONFIG019_CHECKER
+        if kind == 'executable': (root / path).chmod(0o755)
+        elif kind == 'symlink': (root / path).unlink(); (root / path).symlink_to('missing-current-checker')
+        else:
+            git(root, 'update-index', '--add', '--cacheinfo', '160000,' + proof.CONFIG019_C + ',' + path)
+            git(root, 'commit', '-q', '-m', 'SYNTHETIC PROOF TEST:041 overlay gitlink')
+        N = git(root, 'rev-parse', 'HEAD') if kind == 'gitlink' else commit(root, '041 unsafe current overlay type')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '041 current overlay ' + kind)
+    checkout(root, A)
+    for flag, undo in (('--assume-unchanged', '--no-assume-unchanged'), ('--skip-worktree', '--no-skip-worktree')):
+        path = proof.CONFIG019_CHECKER; git(root, 'update-index', flag, path)
+        reject(lambda: proof.authenticate_config019_coexistence(root, A), '041 overlay index flag trap ' + flag)
+        git(root, 'update-index', undo, path)
+    # False current acceptance cannot become an authenticated fixture, even in a
+    # clean new commit with a forged PASS row and no other source changes.
+    path = 'docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json'
+    forged = json.loads((root / path).read_text()); forged['current_fragments']['acceptance'] = '0' * 64
+    forged['current_expected_rows'][-1] = 'current_result PASS no controls executed'
+    write(root, path, json.dumps(forged, indent=2) + '\n'); N = commit(root, '041 forged current acceptance')
+    reject(lambda: proof.authenticate_config019_coexistence(root, N), '041 false acceptance fragment/observations')
+    checkout(root, A)
+
+
+def config019_authority(root, A):
+    assert proof.authenticate_config019_coexistence(root, A) == frozenset()
+    for path in proof.CONFIG019_AUTHORITY_PINS:
+        checkout(root, A); raw = (root / path).read_bytes(); write(root, path, raw + b'\n')
+        reject(lambda: proof.authenticate_config019_coexistence(root, A), '041 authorization live substitution ' + path)
+        N = commit(root, '041 committed authorization substitution')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '041 authorization committed substitution ' + path)
+    checkout(root, A)
+    path = 'docs/runtime_config/fixtures/runtime_config_validation_manifest.json'
+    for change in ('omit', 'command', 'source', 'roots'):
+        checkout(root, A); manifest = json.loads((root / path).read_text())
+        entries = [e for e in manifest['entries'] if e['id'] == 'gp_config019_usb_name_selection']
+        assert len(entries) == 1
+        if change == 'omit': manifest['entries'].remove(entries[0])
+        elif change == 'command': entries[0]['command'] = ['python3', proof.CONFIG019_CHECKER, '--route', 'historical']
+        elif change == 'source': entries[0]['source_dependencies'].remove('src/core/config_button_validation.cpp')
+        else: entries[0]['path'] = 'tools/fake-config019.py'
+        write(root, path, json.dumps(manifest, indent=2) + '\n'); N = commit(root, '041 manifest omission/substitution')
+        reject(lambda: proof.authenticate_config019_coexistence(root, N), '041 manifest ' + change)
+    checkout(root, A)
+    # Mutable tables cannot invent a different original authority/source fact.
+    for name, value in (('CONFIG019_C', proof.KBD_C), ('CONFIG019_B', proof.B),
+                        ('CONFIG019_TREE', '0' * 40), ('CONFIG019_RAW', '0' * 64),
+                        ('CONFIG019_RECEIPT_COMMIT', '0' * 40), ('CONFIG019_ADOPTION', proof.READY),
+                        ('CONFIG019_F020', proof.CONFIG019_C)):
+        with patch.object(proof, name, value):
+            reject(lambda: proof.authenticate_config019_contract(root), '041 wrong/missing literal root ' + name)
+    pins = {p: dict(v) for p, v in proof.CONFIG019_HOST_PINS.items()}
+    pins[proof.CONFIG019_CHECKER]['sha256'] = '0' * 64
+    with patch.object(proof, 'CONFIG019_HOST_PINS', pins):
+        reject(lambda: proof.authenticate_config019_contract(root), '019 tampered candidate pin cannot reseal authority')
+    pins = {p: dict(v) for p, v in proof.CONFIG019_CURRENT_SOURCE_PINS.items()}
+    pins['HAL/pico/src/comms/ConfiguratorBackend.cpp'] = proof.CONFIG019_DEPENDENCY_PINS['HAL/pico/src/comms/ConfiguratorBackend.cpp']
+    with patch.object(proof, 'CONFIG019_CURRENT_SOURCE_PINS', pins):
+        reject(lambda: proof.authenticate_config019_contract(root), '019 historical acceptance is not current accepted proof')
+    with patch.object(proof, 'CONFIG019_FRAGMENT_PINS', dict(proof.CONFIG019_FRAGMENT_PINS, acceptance='0' * 64)):
+        reject(lambda: proof.authenticate_config019_contract(root), '019 historical fragment table cannot reseal evidence')
+    checkout(root, A)
+
+
+def config019_history(root, A):
+    K = config019_positive(root, A)
+    before, after = proof.source_contract(root)
+    proof.history(root, K, before, after)
+    # Only the actual C gets a historical qualification. A descendant changing
+    # accepted020, followed by restoration at merge, must still fail history.
+    checkout(root, proof.CONFIG019_C)
+    alter_queue(root, 'GP-CONFIG-020', status='REVIEW', hardware_result=None)
+    bad = commit(root, 'nonliteral019 historical sidebranch accepted020 mutation')
+    N = composition(root, A, bad)
+    reject(lambda: proof.history(root, N, before, after), '019 arbitrary old descendant gets no history skip')
+    checkout(root, proof.CONFIG019_B)
+    for path in proof.CONFIG019_HOSTS: write(root, path, proof.raw_bytes(root, proof.CONFIG019_C, path))
+    replay = commit(root, '019 replay of identical host tree with different candidate identity')
+    assert replay != proof.CONFIG019_C
+    N = composition(root, A, replay)
+    reject(lambda: proof.authenticate_config019_coexistence(root, N), '019 replay/rebase is not exact candidate ancestry')
+    checkout(root, A)
+
+
+def config019_critical(root, A):
+    for path in ('HAL/pico/src/comms/ConfiguratorBackend.cpp', 'src/core/config_button_validation.cpp'):
+        checkout(root, A); raw = (root / path).read_bytes(); write(root, path, raw + b'\n')
+        reject(lambda: proof.authenticate_config019_coexistence(root, A), '019 live accepted source substitution ' + path)
+        git(root, 'add', '--', path); write(root, path, raw)
+        reject(lambda: proof.authenticate_config019_coexistence(root, A), '019 index accepted source substitution ' + path)
+        write(root, path, raw + b'\n'); N = commit(root, '019 source substitution')
+        reject(lambda: proof.authenticate(root), '019 committed source retains critical precedence ' + path)
+    checkout(root, A)
+    K = config019_positive(root, A); T = composition(root, K, proof.C)
+    observed = proof.authenticate(root)
+    assert observed['phase'] == 'CANDIDATE_VALIDATION_ONLY' and observed['config019_host_paths'] == proof.CONFIG019_HOSTS
+    checker = root / proof.CONFIG019_CHECKER
+    def named_checker():
+        result = subprocess.run(['python3', '-B', str(checker), '--route', 'current'], cwd=root,
+                                capture_output=True, text=True, timeout=120)
+        if result.returncode: raise AssertionError(result.stdout + result.stderr)
+        return result.stdout
+    print('PASS current019 real decoder/validator/acceptance on exact authenticated014 candidate:', named_checker().splitlines()[-1])
+    for path in sorted(proof.CRITICAL | {'src/core/InputMode.cpp'}):
+        checkout(root, T); write(root, path, (root / path).read_bytes() + b'\n'); N = commit(root, '019 rejects near014/third-critical source')
+        reject(named_checker, '019 current checker rejects one-byte014/third-critical ' + path)
+    checkout(root, A)
+
+
+def original034_historical(root):
+    checkout(root, '62b559ae5ee2d6dee0ff54aeb56b2653d86253c6')
+    context = proof.authenticate(root)
+    assert context['phase'] == 'BASELINE' and context['config019_host_paths'] == frozenset()
+    print('PASS original034 historical committed baseline without future019 overlay')
+
+
+def run_group(group):
+    began = time.monotonic()
+    with tempfile.TemporaryDirectory(prefix='glyph-c014-transition-tests-') as directory:
+        root, A = new_repository(directory)
+        if group in ('original', 'original-phases', 'original-negatives', 'original-kbd'):
+            original034_historical(root); checkout(root, A)
+            if group != 'original-kbd':
+                before, after, M, F, R, E, I, J = phases(root, A)
+                if group in ('original', 'original-negatives'):
+                    negatives(root, A, before, after, F, E, I, J)
+            if group in ('original', 'original-kbd'): kbd_coexistence(root, A)
+        else:
+            globals()['config019_' + group](root, A)
+    print('PASS finite native034/041 group', group, 'seconds', round(time.monotonic() - began, 3))
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    groups = ('original', 'hosts', 'overlays', 'authority', 'history', 'critical')
+    parser.add_argument('--group', choices=('all', *groups, 'original-phases', 'original-negatives', 'original-kbd'), default='all')
+    selected = parser.parse_args().group
+    for group in groups if selected == 'all' else (selected,): run_group(group)

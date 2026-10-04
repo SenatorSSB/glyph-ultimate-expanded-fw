@@ -1202,7 +1202,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 36907,
+      "file_size_bytes": 37808,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1231,7 +1231,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 682,
+      "line_count": 696,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1305,7 +1305,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "8650a4500d575b29a8dd264b749e335656e3b2569d1fbd8f7e8a545a5d19635f",
+      "sha256": "a16983cb730064514510c6d8ae100b84f69e455dbc15f05a57e225a9cedab3e1",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
