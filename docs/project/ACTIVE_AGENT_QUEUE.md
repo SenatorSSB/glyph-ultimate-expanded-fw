@@ -510,7 +510,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "id": "GP-CONFIG-014",
       "title": "Capacity repair",
       "status": "HARDWARE_TEST_REQUIRED",
-      "branch": "codex/gp-config-014-current-capacity",
+      "branch": "codex/gp-config-014-built-f",
       "objective": "Exact ten-versus-twenty mismatch and historical GP-CONFIG-011 support only capacity/assertion/initialization/impossible-count guards; future accepted predecessor identity is mechanical.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H3",
