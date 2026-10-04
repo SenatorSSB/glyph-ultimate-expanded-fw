@@ -55,6 +55,8 @@ def owner_revision3_direction_tests(directory: Path) -> None:
     import glyph_c020_abi_repair_transition as repair
     root = directory / 'owner-direction-contract'
     run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(root))
+    run(root, 'git', 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head', str(ROOT),
+        *sorted(repair.ROOTS | {repair.OWNER_DIRECTION_AUTHORITY}))
     run(root, 'git', 'config', 'user.name', 'Disposable owner direction test')
     run(root, 'git', 'config', 'user.email', 'owner-direction@example.invalid')
     expected_phase = campaign.authenticate(root)['phase']
