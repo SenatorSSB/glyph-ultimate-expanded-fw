@@ -8307,19 +8307,23 @@ a separately published canonical queue adoption. It contains no self-SHA.
 {
   "schema_name": "glyph_curator_packet_receipt",
   "schema_version": 1,
-  "packet_id": "glyph-portfolio-20261003-1256",
-  "planning_branch": "planning/portfolio-20261003-1256",
-  "planning_commit": "76cb953cd6bfe5398db11669f3d195175361700c",
-  "packet_base_configurator_sha": "38017600deb243b5e281edec6d0d378b997d9e40",
-  "curation_branch": "curation/portfolio-20261003-1256-review",
-  "review_date": "2026-10-03",
+  "packet_id": "glyph-portfolio-20261005-0028",
+  "planning_branch": "planning/portfolio-20261005-0028",
+  "planning_commit": "fbf2d1c99569ddee3e5432501ddc868bbdee4990",
+  "packet_base_configurator_sha": "2c10ff7c19a5ea8a945339d94246218e2f16dcc2",
+  "curation_branch": "curation/portfolio-20261005-0028",
+  "review_date": "2026-10-05",
   "initial_reviewed_dispositions": [
     {
-      "candidate_id": "GP-CONFIG-020",
-      "disposition": "REPAIR_REAUTHORIZATION"
+      "candidate_id": "GP-CONFIG-024",
+      "disposition": "PREAUTHORIZED"
     },
     {
-      "candidate_id": "GP-VAL-043",
+      "candidate_id": "GP-KBD-002",
+      "disposition": "EVIDENCE_GATED"
+    },
+    {
+      "candidate_id": "GP-VAL-045",
       "disposition": "PREAUTHORIZED"
     }
   ],
