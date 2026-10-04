@@ -329,7 +329,18 @@ def config019_hosts(root, A):
     for path in ('docs/calibration/gp_config_019_usb_name_selection_characterization.md.bak',
                  'docs/calibration/GP_CONFIG_019_usb_name_selection_characterization.md',
                  'tools/fixtures/gp_config019_usb_name_selection/unknown.cpp'):
-        checkout(root, K); write(root, path, 'unknown finite host lookalike\n'); N = commit(root, '019 unknown adjacent/alias')
+        checkout(root, K)
+        if 'GP_CONFIG_019' in path:
+            # Construct a real case-alias tree entry even on case-insensitive
+            # filesystems; do not merely overwrite the canonical file bytes.
+            source = 'docs/calibration/gp_config_019_usb_name_selection_characterization.md'
+            blob = proof.CONFIG019_HOST_PINS[source]['blob']
+            git(root, 'update-index', '--add', '--cacheinfo', '100644,' + blob + ',' + path)
+            git(root, 'commit', '-q', '-m', 'SYNTHETIC PROOF TEST:019 actual case-alias entry')
+            N = git(root, 'rev-parse', 'HEAD')
+            assert path in proof._tree(root, N)
+        else:
+            write(root, path, 'unknown finite host lookalike\n'); N = commit(root, '019 unknown adjacent/alias')
         reject(lambda: proof.authenticate(root), '019 unknown/adjacent/case alias ' + path)
     checkout(root, A)
 

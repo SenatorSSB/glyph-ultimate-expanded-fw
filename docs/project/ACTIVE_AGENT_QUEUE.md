@@ -154,7 +154,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   },
   "signals": [
     "PLANNING_REQUIRED",
-    "HARDWARE_TEST_REQUIRED"
+    "HARDWARE_TEST_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
