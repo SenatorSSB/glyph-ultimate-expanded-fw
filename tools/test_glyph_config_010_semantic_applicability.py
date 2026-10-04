@@ -6,6 +6,7 @@ import os
 import copy
 import json
 import hashlib
+import re
 import sys
 from unittest.mock import patch
 from pathlib import Path
@@ -46,6 +47,55 @@ def rejected(call, label: str) -> None:
     except (ValueError, AssertionError, OSError):
         return
     raise AssertionError("negative accepted: " + label)
+
+
+def owner_revision3_direction_tests(directory: Path) -> None:
+    """Only the exact committed owner record can extend campaign scope."""
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    root = directory / 'owner-direction-contract'
+    run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(root))
+    run(root, 'git', 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head', str(ROOT),
+        *sorted(repair.ROOTS | {repair.OWNER_DIRECTION_AUTHORITY}))
+    run(root, 'git', 'config', 'user.name', 'Disposable owner direction test')
+    run(root, 'git', 'config', 'user.email', 'owner-direction@example.invalid')
+    expected_phase = campaign.authenticate(root)['phase']
+    run(root, 'git', 'merge', '--no-ff', '--no-edit', repair.OWNER_DIRECTION_AUTHORITY)
+    positive = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    assert campaign.authenticate(root)['phase'] == expected_phase
+    run(root, 'python3', 'tools/check_glyph_docs_agent_surface.py')
+    path = root / repair.OWNER_DIRECTION
+    authoritative = path.read_bytes()
+    path.write_bytes(authoritative + b'\nsubstitution\n')
+    rejected(lambda: campaign.authenticate(root), 'dirty owner direction')
+    run(root, 'git', 'add', '--', repair.OWNER_DIRECTION)
+    path.write_bytes(authoritative)
+    rejected(lambda: campaign.authenticate(root), 'staged owner direction')
+    run(root, 'git', 'add', '--', repair.OWNER_DIRECTION)
+    for label in ('executable owner direction', 'symlink owner direction'):
+        run(root, 'git', 'switch', '--detach', positive)
+        if label.startswith('executable'):
+            path.chmod(path.stat().st_mode | 0o111)
+        else:
+            path.unlink()
+            path.symlink_to('../../README.md')
+        fixture_commit(root, label)
+        rejected(lambda: campaign.authenticate(root), label)
+    run(root, 'git', 'switch', '--detach', positive)
+    path.write_bytes(authoritative + b'\nforged committed direction\n')
+    fixture_commit(root, 'forged owner record')
+    rejected(lambda: campaign.authenticate(root), 'committed owner substitution')
+    run(root, 'git', 'switch', '--detach', positive)
+    alias = root / (repair.OWNER_DIRECTION + '.bak')
+    alias.write_bytes(authoritative)
+    fixture_commit(root, 'adjacent owner alias')
+    rejected(lambda: campaign.authenticate(root), 'owner prefix alias')
+    # Exact bytes are insufficient without the separately reviewed authority.
+    run(root, 'git', 'switch', '--detach', repair.PROCESSOR_ADOPTION)
+    path.write_bytes(authoritative)
+    fixture_commit(root, 'replayed owner record without adopted ancestry')
+    rejected(lambda: campaign.authenticate(root), 'owner authority replay')
+    print('Revision-3 exact committed owner scope and actual consumer controls PASS; disposable only')
 
 
 def stable_historical_tests(root: Path) -> None:
@@ -806,6 +856,402 @@ def repaired_contract_tests(directory: Path) -> None:
     print('GP-VAL-043 four actual Git phases and mandatory identity/source/ABI/acceptance negatives PASS; SYNTHETIC TEST ONLY')
 
 
+PRESERVED_E = '84e999693c5ef058c3a116c1632baa818add6ddb'
+ACTUAL_R = '040735f6916c7a77924ef53f1b4a873281f2cb7f'
+ACTUAL_F = '7db4f447d5e796367071b7143fa6c9274c70ae5e'
+
+
+def make_processor_fixture(directory: Path, *, git_reference: bool = False) -> tuple[Path, dict]:
+    """Replay preserved native bytes in disposable source-free governance only.
+
+    This checkpoint is deliberately returned BEFORE any candidate integration.
+    It preserves the original failed E object and adds no hardware observation.
+    """
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    root = directory.resolve() / 'processor-contract'
+    run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(root))
+    run(root, 'git', 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head',
+        str(ROOT), *sorted(repair.ROOTS | {PRESERVED_E, ACTUAL_R, ACTUAL_F}))
+    run(root, 'git', 'config', 'user.name', 'Disposable GP-VAL-044 validation')
+    run(root, 'git', 'config', 'user.email', 'validation@example.invalid')
+    # ROOT can be I during a phase aggregate. Its source is never copied into E.
+    run(root, 'git', 'switch', '--detach', repair.PROCESSOR_ADOPTION)
+    excluded = {campaign.TRANSITIONS, repair.TRANSITIONS, repair.PROTOCOL,
+                repair.EVIDENCE, 'docs/calibration/gp_config_020_hardware_result.md',
+                campaign.QUEUE, 'docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md', 'docs/ROADMAP.md'}
+    for path in sorted(repair.GOVERNANCE_PATHS - repair.PROOF_PATHS - excluded):
+        source = ROOT / path
+        if source.is_file():
+            destination = root / path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+    G = fixture_commit(root, 'reviewed source-free044 validation overlay')
+    assert campaign.critical_tree(root, G) == campaign.critical_tree(root, repair.B_R)
+    assert campaign.authenticate(root)['phase'] == 'BASELINE'
+    result_path = 'docs/calibration/gp_config_020_hardware_result.md'
+    for path, digest in ((repair.EVIDENCE, '39a3977fbbc0b4d2db4f1187eba7d233de5056faceae47b734b2068f26051d42'),
+                         (result_path, '9e69b3fc87366b9c61174df4a8c9865603ce95b295cbeaefcc9cbd81bf1f15d5')):
+        data = campaign.raw_bytes(root, PRESERVED_E, path)
+        assert hashlib.sha256(data).hexdigest() == digest
+        (root / path).parent.mkdir(parents=True, exist_ok=True)
+        (root / path).write_bytes(data)
+    payload = fixture_commit(root, 'immutable native git-json payload before processor') if git_reference else None
+    accepted = campaign.item(root, G, 'GP-CONFIG-020')
+    previous = campaign.item(root, PRESERVED_E, 'GP-CONFIG-020')
+    for key in ('status', 'hardware_result', 'hardware_evidence_record',
+                'hardware_evidence_dependency_satisfied', 'hardware_evidence_gaps'):
+        accepted[key] = previous[key]
+    if git_reference:
+        accepted['hardware_evidence_record'] = 'git-json:' + payload + ':' + repair.EVIDENCE
+    write_queue_item(root, accepted)
+    # Preserve current queue authority while deriving only the coupled pending
+    # count/signal and status mirrors for this private processor checkpoint.
+    state = campaign.queue(root, 'HEAD')
+    state['items'] = [accepted if x['id'] == 'GP-CONFIG-020' else x for x in state['items']]
+    state['runway']['hardware_pending'] = sum(x['status'] == 'HARDWARE_TEST_REQUIRED' for x in state['items'])
+    if not state['runway']['hardware_pending']:
+        state['signals'] = [x for x in state['signals'] if x != 'HARDWARE_TEST_REQUIRED']
+    queue_path = root / campaign.QUEUE
+    text = queue_path.read_text()
+    text = re.sub(r'(<!-- queue-state:start -->\s*```json\s*).*?(\s*```\s*<!-- queue-state:end -->)',
+                  lambda m: m[1] + json.dumps(state, indent=2) + m[2], text, flags=re.S)
+    queue_path.write_text(text)
+    for path in (campaign.QUEUE, 'docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md', 'docs/ROADMAP.md'):
+        file = root / path
+        text = file.read_text()
+        def marker(match):
+            value = json.loads(match[2])
+            value['hardware_pending'] = state['runway']['hardware_pending']
+            return match[1] + json.dumps(value, separators=(',', ':')) + match[3]
+        text = re.sub(r'(<!-- current-runway:start -->\s*)(.*?)(\s*<!-- current-runway:end -->)',
+                      marker, text, flags=re.S)
+        text = re.sub(r'(Hardware-pending: )\d+', lambda m: m[1] + str(state['runway']['hardware_pending']), text)
+        file.write_text(text)
+    E = fixture_commit(root, 'preserved native payload source-free processor checkpoint')
+    record = dict(work_order='GP-CONFIG-020', candidate=repair.C_R, build=ACTUAL_F,
+                  parent='de36d24422a67e8be7992217856c76e8420a71f6',
+                  tree='4b5b63ce56219a508e2b71745438a609dd5661c3',
+                  review_commit=ACTUAL_R, evidence_commit=E)
+    assert not campaign.ancestor(root, ACTUAL_F, E)
+    return root, record
+
+
+def processor_contract_tests(directory: Path) -> None:
+    """Actual pinned R/F, standalone E and retained E before source integration."""
+    from dataclasses import replace
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    import glyph_checker_context as context
+    root, record = make_processor_fixture(directory)
+    E = record['evidence_commit']
+    proof = campaign.authenticate(root)
+    assert proof['phase'] == 'SOURCE_FREE_PROCESSOR'
+    assert proof['critical_paths'] == frozenset()
+    metadata = frozenset((repair.EVIDENCE, 'docs/calibration/gp_config_020_hardware_result.md'))
+    assert proof['accepted_metadata_paths'] == metadata
+    assert {ACTUAL_R, ACTUAL_F, E} <= proof['object_roots']
+    processor = repair.validate_processor_transition(root, record, E)
+    assert processor['evidence_commit'] == E and processor['evidence_root'] == E
+    raw_context = context.collect_checker_context(repo_root=root, base=repair.PROCESSOR_ADOPTION)
+    protected = 'HAL/pico/src/comms/ConfiguratorBackend.cpp'
+    # A metadata exemption must never remove candidate/protected source from
+    # any of the three inventories even when the input context includes it.
+    probe = replace(raw_context, committed_paths=raw_context.committed_paths | {protected},
+                    staged_paths=frozenset({protected}), unstaged_paths=frozenset({protected}))
+    filtered = context.authenticated_campaign_context(probe)
+    assert protected in filtered.committed_paths & filtered.staged_paths & filtered.unstaged_paths
+    assert not metadata & filtered.changed_paths
+    historical = campaign.raw_bytes(root, campaign.B, protected)
+    assert campaign.verify_current_source(root, protected, hashlib.sha256(historical).hexdigest()) == historical
+    source = root / protected
+    original_source = source.read_bytes()
+    try:
+        source.write_bytes(campaign.raw_bytes(root, repair.C_R, protected))
+        rejected(lambda: campaign.verify_current_source(root, protected,
+                 hashlib.sha256(historical).hexdigest()), 'processor candidate source overlay')
+    finally:
+        source.write_bytes(original_source)
+    # Native malformed schema, row, dependency and immutable-reference controls
+    # use committed source-free snapshots; no helper/schema mock can create PASS.
+    baseline_item = campaign.item(root, E, 'GP-CONFIG-020')
+    for label, updates in (
+        ('processor downgrade', dict(status='HARDWARE_TEST_REQUIRED', hardware_result=None)),
+        ('processor dependency', dict(hardware_evidence_dependency_satisfied=False)),
+        ('processor gaps', dict(hardware_evidence_gaps=['missing'])),
+        ('candidate identity', dict(candidate_git_sha='0' * 40)),
+        ('artifact identity', dict(firmware_artifact_sha256='0' * 64)),
+        ('evidence reference', dict(hardware_evidence_record='git-json:' + ACTUAL_R + ':' + repair.EVIDENCE)),
+    ):
+        run(root, 'git', 'switch', '--detach', E)
+        write_queue_item(root, dict(baseline_item, **updates))
+        fixture_commit(root, label)
+        rejected(lambda: campaign.authenticate(root), label)
+    run(root, 'git', 'switch', '--detach', E)
+    for path in sorted(metadata):
+        file = root / path
+        original, mode = file.read_bytes(), file.stat().st_mode
+        try:
+            file.write_bytes(original + b'\nsubstitution\n')
+            rejected(lambda: campaign.authenticate(root), 'dirty processor metadata ' + path)
+            run(root, 'git', 'add', '--', path)
+            file.write_bytes(original)
+            rejected(lambda: campaign.authenticate(root), 'staged processor metadata ' + path)
+        finally:
+            file.write_bytes(original)
+            run(root, 'git', 'add', '--', path)
+        try:
+            file.chmod(mode | 0o111)
+            rejected(lambda: campaign.authenticate(root), 'executable processor metadata')
+        finally:
+            file.chmod(mode)
+        try:
+            file.unlink()
+            file.symlink_to('../GP_CONFIG_020_HARDWARE_PROTOCOL.md')
+            rejected(lambda: campaign.authenticate(root), 'symlink processor metadata')
+        finally:
+            file.unlink()
+            file.write_bytes(original)
+            file.chmod(mode)
+    for path in (repair.EVIDENCE + '.bak', 'docs/calibration/gp_config_020_hardware_result.md.bak'):
+        alias = root / path
+        try:
+            alias.write_text('metadata alias\n')
+            rejected(lambda: campaign.authenticate(root), 'processor alias ' + path)
+        finally:
+            alias.unlink()
+    ignored_path = repair.EVIDENCE + '.bak'
+    ignored = root / ignored_path
+    exclude = root / '.git/info/exclude'
+    previous_exclude = exclude.read_bytes()
+    try:
+        exclude.write_bytes(previous_exclude + ('\n' + ignored_path + '\n').encode())
+        ignored.write_text('ignored adjacent processor metadata\n')
+        rejected(lambda: campaign.authenticate(root), 'ignored processor metadata')
+    finally:
+        ignored.unlink()
+        exclude.write_bytes(previous_exclude)
+    for key, value in (('build', campaign.C), ('parent', repair.B_R), ('tree', '0' * 40),
+                       ('review_commit', E), ('evidence_commit', ACTUAL_F)):
+        rejected(lambda: repair.validate_processor_transition(root, dict(record, **{key: value}), E), key)
+    # Missing schema/required physical rows and evidence erasure cannot be
+    # legitimized by changing a digest. The authenticated actual digest stays
+    # pinned while each malformed payload is committed in its own descendant.
+    evidence = root / repair.EVIDENCE
+    original_evidence = evidence.read_bytes()
+    for label, change in (
+        ('missing evidence schema', lambda x: {k: v for k, v in x.items() if k != 'schema_version'}),
+        ('missing hardware row', lambda x: dict(x, steps=x['steps'][:-1])),
+        ('empty hardware rows', lambda x: dict(x, steps=[])),
+    ):
+        run(root, 'git', 'switch', '--detach', E)
+        evidence.write_text(json.dumps(change(json.loads(original_evidence)), indent=2) + '\n')
+        fixture_commit(root, label)
+        rejected(lambda: campaign.authenticate(root), label)
+    run(root, 'git', 'switch', '--detach', E)
+    evidence.unlink()
+    fixture_commit(root, 'delete accepted native evidence')
+    rejected(lambda: campaign.authenticate(root), 'committed processor evidence deletion')
+    run(root, 'git', 'switch', '--detach', E)
+    for catalog in (repair.TRANSITIONS, campaign.TRANSITIONS):
+        file = root / catalog
+        original = file.read_bytes()
+        try:
+            file.write_text(json.dumps(dict(schema_version=1, accepted_transitions=[dict(record, integration=E)])))
+            rejected(lambda: campaign.authenticate(root), 'catalog supplied on source-free E')
+        finally:
+            file.write_bytes(original)
+    G = run(root, 'git', 'rev-parse', E + '^').strip()
+    run(root, 'git', 'switch', '-c', 'synthetic-hidden-invalid-processor', G)
+    write_queue_item(root, dict(baseline_item, hardware_evidence_record=None))
+    invalid_prior = fixture_commit(root, 'fabricated invalid earlier processor claim')
+    run(root, 'git', 'switch', '--detach', E)
+    run(root, 'git', 'merge', '--no-ff', '-s', 'ours', '--no-edit', invalid_prior)
+    rejected(lambda: campaign.authenticate(root), 'hidden second-parent invalid processor claim')
+    run(root, 'git', 'switch', '--detach', E)
+    # Every later processor claim needs native work-order validation, even
+    # when its exact accepted hardware tuple and immutable payload are intact.
+    assert baseline_item['activation_requires_new_judgment'] is False
+    assert dict(baseline_item, activation_requires_new_judgment=0) == baseline_item
+    for label, updates in (
+        ('later processor malformed schema', dict(title=None)),
+        ('later processor integer for Boolean schema', dict(activation_requires_new_judgment=0)),
+        ('source-free premature DONE', dict(status='DONE', done_evidence='SYNTHETIC prose only')),
+    ):
+        write_queue_item(root, dict(baseline_item, **updates))
+        fixture_commit(root, label)
+        rejected(lambda: campaign.authenticate(root), label)
+        write_queue_item(root, baseline_item)
+        fixture_commit(root, 'restore valid processor state after ' + label)
+        rejected(lambda: campaign.authenticate(root), 'historical ' + label + ' after restoration')
+        run(root, 'git', 'switch', '--detach', E)
+    # A clean source-free descendant retains earliest E, exact evidence and
+    # empty protected-source authority. It is still authenticated before I.
+    descendant = fixture_commit(root, 'source-free retained processor descendant')
+    retained = campaign.authenticate(root)
+    assert retained['phase'] == 'SOURCE_FREE_PROCESSOR' and not retained['critical_paths']
+    assert retained['evidence_commit'] == E and {ACTUAL_F, ACTUAL_R, E} <= retained['object_roots']
+    assert repair.validate_processor_transition(root, record, descendant)['evidence_commit'] == E
+    # Preserve the old code's actual mandatory rejection. Its immutable SHA
+    # never becomes a label for the repaired overlay tested above.
+    run(root, 'git', 'switch', '--detach', PRESERVED_E)
+    old = run(root, sys.executable, '-B',
+              'tools/check_glyph_runtime_config_webserial_device_write_source_authority.py',
+              '--campaign-transition', expected=1)
+    assert 'accepted phase lacks mandatory transition record' in old
+    run(root, 'git', 'switch', '--detach', descendant)
+    assert campaign.authenticate(root)['evidence_commit'] == E
+    with tempfile.TemporaryDirectory(prefix='gp-val044-git-json-') as native_dir:
+        native, native_record = make_processor_fixture(Path(native_dir), git_reference=True)
+        native_proof = campaign.authenticate(native)
+        payload = campaign.item(native, native_record['evidence_commit'], 'GP-CONFIG-020')['hardware_evidence_record'].split(':')[1]
+        assert native_proof['evidence_root'] == payload != native_proof['evidence_commit']
+        assert {payload, native_proof['evidence_commit'], ACTUAL_F, ACTUAL_R} <= native_proof['object_roots']
+        assert campaign.ancestor(native, ACTUAL_R, payload)
+        assert campaign.ancestor(native, payload, native_proof['evidence_commit'])
+    synthetic_processor_tests(directory)
+    print('GP-VAL-044 actual pinned standalone E/E descendant native proof and scope/metadata negatives PASS; disposable overlay only')
+
+
+def native_integrated_public_api_tests(directory: Path, source_root: Path, record: dict) -> None:
+    """External postcheckpoint regression on an already-composed actual I.
+
+    Call only after all fifteen E/E-descendant mains passed before I was made.
+    This function integrates no F and publishes no completion or acceptance.
+    It validates native strict DONE mechanics only in a disposable descendant.
+    """
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    import check_glyph_agent_framework_docs as framework
+    assert record['build'] == ACTUAL_F and record['review_commit'] == ACTUAL_R
+    root = directory / 'native-I-public-api'
+    run(source_root, 'git', 'clone', '--quiet', '--no-local', str(source_root), str(root))
+    run(root, 'git', 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head', str(ROOT),
+        *sorted(repair.ROOTS | {PRESERVED_E, ACTUAL_F}))
+    run(root, 'git', 'config', 'user.name', 'Disposable GP-VAL-044 native API proof')
+    run(root, 'git', 'config', 'user.email', 'native-api@example.invalid')
+    target = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    assert repair.validate_accepted_transition(root, record, target) == ACTUAL_F
+    for key, value in (('build', campaign.C), ('review_commit', record['evidence_commit']),
+                       ('evidence_commit', record['integration'])):
+        rejected(lambda: repair.validate_accepted_transition(root, dict(record, **{key: value}), target),
+                 'direct native accepted API ' + key)
+    catalog = root / repair.TRANSITIONS
+    original_catalog = catalog.read_bytes()
+    try:
+        catalog.write_text('{"schema_version":1,"accepted_transitions":[]}\n')
+        rejected(lambda: repair.validate_accepted_transition(root, record, target),
+                 'direct native accepted API requires genuine catalog')
+    finally:
+        catalog.write_bytes(original_catalog)
+    accepted = campaign.item(root, target, 'GP-CONFIG-020')
+    paths = run(root, 'git', 'diff', '--name-only', repair.B_R, repair.C_R).splitlines()
+    completion = dict(schema_name=framework.COMPLETION_EVIDENCE_NAME,
+                      schema_version=framework.COMPLETION_EVIDENCE_VERSION, mode='DIRECT_ANCESTRY',
+                      implementation_base_sha=repair.B_R, reviewed_implementation_sha=repair.C_R,
+                      prior_canonical_integration_sha=record['integration'], reviewed_changed_paths=sorted(paths),
+                      independent_review_provenance='SYNTHETIC TEST ONLY: native schema mechanics',
+                      validation_provenance='SYNTHETIC TEST ONLY: no published C020 completion')
+    # Prove a structurally complete native DONE first, so malformed DONE
+    # controls cannot pass through an unconditional refusal of every DONE.
+    write_queue_item(root, dict(accepted, status='DONE', done_evidence=completion))
+    valid_done = fixture_commit(root, 'native strict completion structural positive only')
+    assert repair.validate_accepted_transition(root, record, valid_done) == ACTUAL_F
+    assert campaign.authenticate(root)['phase'] == 'ACCEPTED_TRANSITION'
+    for label, evidence in (
+        ('prose DONE completion', 'SYNTHETIC prose-only completion'),
+        ('forged DONE completion', dict(completion, implementation_base_sha='0' * 40)),
+        ('Boolean DONE schema version', dict(completion, schema_version=True)),
+    ):
+        run(root, 'git', 'switch', '--detach', valid_done)
+        write_queue_item(root, dict(accepted, status='DONE', done_evidence=evidence))
+        invalid = fixture_commit(root, label)
+        rejected(lambda: repair.validate_accepted_transition(root, record, invalid), label)
+        rejected(lambda: campaign.authenticate(root), 'authenticated ' + label)
+        write_queue_item(root, dict(accepted, status='DONE', done_evidence=completion))
+        restored = fixture_commit(root, 'restore valid completion after ' + label)
+        rejected(lambda: repair.validate_accepted_transition(root, record, restored), 'historical ' + label)
+        rejected(lambda: campaign.authenticate(root), 'restored historical ' + label)
+    print('GP-VAL-044 direct native accepted API and strict later DONE/history regressions PASS; disposable postcheckpoint only')
+
+
+def synthetic_processor_tests(directory: Path) -> None:
+    """Separately authenticated structural roots confer no production acceptance."""
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    parent = directory / 'explicit-synthetic-roots'
+    parent.mkdir()
+    root, actual_record = make_processor_fixture(parent)
+    actual_E = actual_record['evidence_commit']
+    G = run(root, 'git', 'rev-parse', actual_E + '^').strip()
+    run(root, 'git', 'switch', '--detach', G)
+    run(root, 'git', 'merge', '--no-ff', '--no-edit', repair.C_R)
+    P = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    F = fixture_commit(root, 'unbuilt synthetic F; no artifact or controller test')
+    T = run(root, 'git', 'rev-parse', F + '^{tree}').strip()
+    run(root, 'git', 'switch', '--detach', G)
+    review = campaign.item(root, G, 'GP-CONFIG-020')
+    digest = 'a' * 64
+    locator = f'local_backups/hardware-artifacts/{F}/{digest}/firmware.uf2'
+    review.update(candidate_git_sha=F, candidate_base_configurator_sha=P,
+                  firmware_artifact_sha256=digest, preserved_firmware_artifact_locator=locator)
+    protocol = (f'# SYNTHETIC TEST ONLY; no actual hardware or build\n\n'
+        f'- Candidate Git SHA: `{F}`\n- Candidate tree: `{T}`\n'
+        f'- Sole parent / authorized canonical base: `{P}`\n'
+        f'- UF2 SHA-256: `{digest}`\n- UF2 size: `796160` bytes\n'
+        f'- Preserved locator: `{locator}`\n'
+        '- Fresh independent postimplementation review: PASS with no findings for the\n'
+        '  exact candidate, build output, custody bytes, correspondence, and protocol.\n')
+    (root / repair.PROTOCOL).write_text(protocol)
+    write_queue_item(root, review)
+    R = fixture_commit(root, 'source-free synthetic immutable review')
+    evidence = json.loads(campaign.raw_bytes(root, PRESERVED_E, repair.EVIDENCE))
+    for key in ('candidate_git_sha', 'candidate_base_configurator_sha',
+                'firmware_artifact_sha256', 'preserved_firmware_artifact_locator'):
+        evidence[key] = review[key]
+    evidence['tester'] = 'SYNTHETIC TEST ONLY; no controller observations'
+    evidence['preconditions'] = ['Synthetic validation only; no artifact or controller test.']
+    for step in evidence['steps']:
+        step['observed'] = 'SYNTHETIC TEST ONLY; no controller observation'
+    evidence_bytes = (json.dumps(evidence, indent=2) + '\n').encode()
+    (root / repair.EVIDENCE).write_bytes(evidence_bytes)
+    result = (f'SYNTHETIC TEST ONLY; no controller acceptance\nHARDWARE_VALIDATED PASS\n'
+              f'{F}\n{T}\n{P}\n{R}\n{digest}\n{locator}\n'
+              f'{hashlib.sha256(protocol.encode()).hexdigest()}\n')
+    (root / repair.RESULT).write_text(result)
+    payload = fixture_commit(root, 'synthetic native payload before processor')
+    accepted = dict(review, status='HARDWARE_VALIDATED', hardware_result='PASS',
+                    hardware_evidence_dependency_satisfied=True, hardware_evidence_gaps=[],
+                    hardware_evidence_record='git-json:' + payload + ':' + repair.EVIDENCE)
+    write_queue_item(root, accepted)
+    E = fixture_commit(root, 'source-free synthetic processor')
+    record = dict(work_order='GP-CONFIG-020', candidate=repair.C_R, build=F, parent=P, tree=T,
+                  review_commit=R, evidence_commit=E)
+    pins = dict(review_commit=R, build=F, parent=P, tree=T, artifact_sha256=digest,
+                artifact_size=796160, protocol_sha256=hashlib.sha256(protocol.encode()).hexdigest(),
+                review_queue_sha256=hashlib.sha256(campaign.raw_bytes(root, R, campaign.QUEUE)).hexdigest(),
+                evidence_sha256=hashlib.sha256(evidence_bytes).hexdigest(),
+                result_sha256=hashlib.sha256(result.encode()).hexdigest(),
+                authority_commit=repair.PROCESSOR_RECEIPT, authority_adoption=repair.PROCESSOR_ADOPTION)
+    roots = repair.authenticate_processor_roots(root, pins)
+    proof = repair.validate_processor_transition(root, record, E, structural_roots=roots)
+    assert proof['evidence_root'] == payload and {F, R, E, payload} <= proof['object_roots']
+    # Production has no synthetic-root flag: the same real Git graph must fail
+    # its exact actual pin check, even though its structural proof is valid.
+    rejected(lambda: campaign.authenticate(root), 'synthetic roots in production authenticator')
+    for key, value in (('build', ACTUAL_F), ('parent', repair.B_R), ('tree', '0' * 40),
+                       ('artifact_size', 796161),
+                       ('review_commit', ACTUAL_R), ('protocol_sha256', '0' * 64),
+                       ('review_queue_sha256', '0' * 64), ('authority_commit', R),
+                       ('evidence_sha256', '0' * 64), ('result_sha256', '0' * 64)):
+        def altered_proof():
+            changed = repair.authenticate_processor_roots(root, dict(pins, **{key: value}))
+            repair.validate_processor_transition(root, record, E, structural_roots=changed)
+        rejected(altered_proof, 'synthetic root substitution ' + key)
+    rejected(lambda: repair.authenticate_processor_roots(root, dict(pins, bypass=True)), 'extra synthetic-root field')
+    rejected(lambda: repair.validate_processor_transition(ROOT, record, E, structural_roots=roots), 'root-bound structural proof')
+
+
 def legacy_applicability_tests(directory: Path) -> None:
     """Keep legacy positive scope and exact historical identity coverage separate."""
     canonical = Path(directory) / "canonical"
@@ -852,6 +1298,13 @@ def main() -> None:
         run(root, "python3", CHECKER)
         campaign_contract_tests(Path(directory))
         repaired_contract_tests(Path(directory))
+        # Reuse the already audited immutable root/SHA caches only within this
+        # test invocation. Every live dirty/index/metadata input is still read
+        # anew by each authenticator call and its rejection controls above.
+        import glyph_campaign_transition as campaign
+        campaign._proof_invocation(processor_contract_tests)(Path(directory))
+        assert campaign._tree_inventory_cache.get() is None and campaign._blob_bytes_cache.get() is None
+        owner_revision3_direction_tests(Path(directory))
         commit_change(root, "docs/ROADMAP.md", "\nGP-VAL-029 isolated scope control.\n", "gp-val-029-positive")
         run(root, "python3", CHECKER)
         commit_change(root, "tools/check_glyph_prebuild_git_identity.py", "\n# isolated H1 validation self-test delta\n", "gp-val-029-ready-prerequisite")

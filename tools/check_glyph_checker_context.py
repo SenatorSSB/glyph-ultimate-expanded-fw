@@ -221,8 +221,16 @@ def campaign_protected_scope_tests() -> None:
             run(root, "add", "--", *sorted(pending))
             run(root, "commit", "-m", "private pending governance test snapshot")
         run(root, "branch", "-f", "configurator", base)
-        run(root, "merge", "--no-ff", "--no-edit", candidate)
-        for ancestor in (base, candidate):
+        processor_phase = source_proof['phase'] == 'SOURCE_FREE_PROCESSOR'
+        if processor_phase:
+            # E must exercise the real scope mains before any F/C_R integration.
+            # Its evidence removal conveys no protected-source exemption.
+            proof = authenticate(root)
+            if proof['critical_paths'] or not proof['accepted_metadata_paths']:
+                raise AssertionError('source-free processor context has source authority')
+        else:
+            run(root, "merge", "--no-ff", "--no-edit", candidate)
+        for ancestor in ((base,) if processor_phase else (base, candidate)):
             run(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
         env = dict(os.environ, GLYPH_CHECKER_BASE=base, PYTHONDONTWRITEBYTECODE="1")
 
@@ -258,7 +266,8 @@ def campaign_protected_scope_tests() -> None:
         protected.write_text("// unexpected protected source\n")
         all_mains("critical")
         protected.unlink()
-        header = root / "include/core/config_button_validation.hpp"
+        header = root / ("HAL/pico/src/comms/ConfiguratorBackend.cpp" if processor_phase
+                         else "include/core/config_button_validation.hpp")
         mode = header.stat().st_mode
         header.chmod(mode | 0o111)
         all_mains("critical")

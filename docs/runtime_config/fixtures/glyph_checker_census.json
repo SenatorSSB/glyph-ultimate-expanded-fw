@@ -1197,7 +1197,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 26590,
+      "file_size_bytes": 27206,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1208,6 +1208,7 @@
         "branches",
         "candidate",
         "configurator",
+        "evidence",
         "evidence.",
         "exact-branch",
         "historical-branch",
@@ -1223,7 +1224,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 517,
+      "line_count": 526,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1236,6 +1237,7 @@
         "branches",
         "candidate",
         "configurator",
+        "evidence",
         "evidence.",
         "exact-branch",
         "historical-branch",
@@ -1284,7 +1286,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "958d2ba013425f5f4b8316e2cb0045b9e6b468a9603385d81286202c245694cf",
+      "sha256": "ed3dbfb81686d1b888da1b88f7b2ad08d29e3cc7992d498766904b814f63c58a",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -11405,7 +11407,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 94433,
+      "file_size_bytes": 97507,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -11419,6 +11421,7 @@
         "done_evidence",
         "evidence.json",
         "evidence_commit",
+        "evidence_root",
         "hardware-evidence",
         "hardware_evidence_record",
         "historical-candidate",
@@ -11437,7 +11440,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1563,
+      "line_count": 1613,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -11453,6 +11456,7 @@
         "done_evidence",
         "evidence.json",
         "evidence_commit",
+        "evidence_root",
         "hardware-evidence",
         "hardware_evidence_record",
         "historical-candidate",
@@ -11510,7 +11514,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "c9e619b2de57187d2332a5665d3a14f812359033cd66ca959ef13ac45c6f981b",
+      "sha256": "ebbfc7434438f649d6ce63a1a60e480fdb8a5752e5e6b10f4920e35d597107bf",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
