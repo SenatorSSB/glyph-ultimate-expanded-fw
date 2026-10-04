@@ -1,8 +1,8 @@
 # Active Agent Queue
 
-## Current GP-CONFIG-014 Candidate Cycle
+## Current GP-CONFIG-014 Candidate Handoff
 
-Mechanical activation is recorded against live canonical `58eb21c70a41080db21238cad79539859c5407f3`: strict C020/037 completion, exact accepted C020 source/artifact/physical PASS, immutable sensitive dependencies and generated modifier extent 20 pass. Source-specialist report SHA-256 `9e5926d72a1df299a38f09a3c401fdd3e2480c9a59af07a62f001e2603f1ba8c` binds the exact annex and accepted progression. The next candidate must use exact repaired header blob `9658f5e15f50887caaaf5a71efc0096e9677d144` and source blob `8cb336f31acd4c324b3ae1f8ef0827c14f15ee85`. Fresh C014 identity is an output. Candidate creation stops at the existing GP-VAL-034 source-free handoff; build, firmware integration and hardware/device/Config action remain gated. All other orders and paused GP-VAL-040/KBD are preserved. Nunchuk remains NOT_TESTED and root cause UNPROVEN.
+Exact candidate `a3664be5354ec4253122eb2e738e70e5dfdb9ccc`, tree `287732689ce5ef069db72148a78926f4f5376ea0`, is published and independently approved on `codex/gp-config-014-current-capacity`, with sole direct live-verified base `8b8e45b17a5670bbf983360faf87bdf9d6b50ce2`. Its ten-path inventory contains only the two exact adopted production repairs and eight proof/metadata paths. Both enum layouts pass all 30 sanitizer cases and negative controls; ten actual focused/affected checks pass. Fifteen actual safety checks remain unpassed at the named GP-VAL-034 contract; full aggregate PASS is not claimed and no gate is waived. The queue records C014 REVIEW and GP-VAL-034 PREAUTHORIZED/ACTIVATABLE after all objective conditions pass. The canonical handoff is source-free; candidate firmware is unmerged. Dispatch GP-VAL-034 next, preserving exact C; stop before firmware build/custody/hardware/integration until its required governance is DONE. C014 hardware acceptance is PENDING, build NOT_RUN, artifact NONE. Existing C020/037 exact DONE/PASS and all other 95 orders remain unchanged. Paused040/KBD stays paused; Nunchuk NOT_TESTED and root cause UNPROVEN.
 
 ## Current Post-C020 Revision-3 Policy
 
@@ -33,7 +33,7 @@ The C020/044 summaries below record the preceding lifecycle, not a request to
 repeat completed work, rebuild or physically retest.
 
 
-GP-CONFIG-020 is DONE after reviewed live integration `a59c62793c52130612f39558b7c7e5a70a8c8cf4` and separate strict DIRECT_ANCESTRY completion correspondence under GLYPH-UD-027 Revision 3. Tested source merge `bce59d34bcb6b4158a5f755293f20102c7a0abb9` follows source-free HEP evidence E `6b36d99b0624047558ed8f9ede83dcaee78e72a9`; the GP-VAL-043 catalog preserves reviewed R, earliest E and that merge. Exact tested F remains `7db4f447d5e796367071b7143fa6c9274c70ae5e`, tree `4b5b63ce56219a508e2b71745438a609dd5661c3`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`, 796160 bytes. All 24 focused/affected checks and required negative controls pass; fresh independent Sol review approves the exact integration. Source, build inputs, protocol and hardware evidence stay byte-exact. The queue preserves PASS with empty gaps and every other order. HEP PASS is owner-reported GC and Mac XInput evidence; pre/post persisted Config remains exactly 4201 bytes, SHA-256 `f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480`. Invalid-binding physical submission remains HOST_ONLY/NOT_TESTED. Existing aggregate FAIL/incomplete and ignored Finder/TinyUSB metadata failures remain framework debt; no full aggregate PASS is claimed. Paused GP-VAL-040/KBD remains paused, Nunchuk remains NOT_TESTED and root cause remains unproven. The next daemon action is bounded Revision 3 control-plane simplification before the remaining stack.
+GP-CONFIG-020 is DONE after reviewed live integration `a59c62793c52130612f39558b7c7e5a70a8c8cf4` and separate strict DIRECT_ANCESTRY completion correspondence under GLYPH-UD-027 Revision 3. Tested source merge `bce59d34bcb6b4158a5f755293f20102c7a0abb9` follows source-free HEP evidence E `6b36d99b0624047558ed8f9ede83dcaee78e72a9`; the GP-VAL-043 catalog preserves reviewed R, earliest E and that merge. Exact tested F remains `7db4f447d5e796367071b7143fa6c9274c70ae5e`, tree `4b5b63ce56219a508e2b71745438a609dd5661c3`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`, 796160 bytes. All 24 focused/affected checks and required negative controls pass; fresh independent Sol review approves the exact integration. Source, build inputs, protocol and hardware evidence stay byte-exact. The queue preserves PASS with empty gaps and every other order. HEP PASS is owner-reported GC and Mac XInput evidence; pre/post persisted Config remains exactly 4201 bytes, SHA-256 `f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480`. Invalid-binding physical submission remains HOST_ONLY/NOT_TESTED. Existing aggregate FAIL/incomplete and ignored Finder/TinyUSB metadata failures remain framework debt; no full aggregate PASS is claimed. Paused GP-VAL-040/KBD remains paused, Nunchuk remains NOT_TESTED and root cause remains unproven. The post-C020 Revision 3 control-plane pass is complete; the current C014 handoff above defines the next daemon action.
 
 Status label: CURRENT.
 
@@ -133,9 +133,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 2,
+    "immediate_ready": 1,
     "recorded_preauthorized": 11,
-    "mechanically_activatable_preauthorized": 1,
+    "mechanically_activatable_preauthorized": 2,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -504,7 +504,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-014",
       "title": "Capacity repair",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-config-014-current-capacity",
       "objective": "Exact ten-versus-twenty mismatch and historical GP-CONFIG-011 support only capacity/assertion/initialization/impossible-count guards; future accepted predecessor identity is mechanical.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -552,8 +552,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": true,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+      "candidate_base_configurator_sha": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -614,9 +614,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -7856,11 +7856,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-014","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-014, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -9948,3 +9948,1227 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config014-activation:end -->
+
+
+## 2026-10-04 Exact GP-CONFIG-014 candidate handoff
+
+<!-- gp-config014-handoff:start -->
+```json
+{
+  "schema_name": "glyph_gp_config014_exact_candidate_handoff",
+  "schema_version": 1,
+  "base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+  "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+  "candidate_tree": "287732689ce5ef069db72148a78926f4f5376ea0",
+  "candidate_parent": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+  "candidate_branch": "codex/gp-config-014-current-capacity",
+  "candidate_published_live_verified": true,
+  "source_free_canonical": true,
+  "candidate_firmware_integrated": false,
+  "inventory": [
+    {
+      "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "8b73122486937fbd6abce1775eeb5250e5f95e0c",
+      "new_blob": "24ffaf9e025c6b5f9c544c501cdc499ee0a5197f",
+      "status": "M"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_config014_modifier_capacity.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "b2e82d56344def541273dbee81ac2ff9dfe41085",
+      "status": "A"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "8341353eec008ddce28a36749b02ecda1e52563d",
+      "new_blob": "7fd63e6320d3097ad5b4693ec48ce1482e23ec3f",
+      "status": "M"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "3b4b93b4c2666f0bbf406207b419310dcb9b0ba1",
+      "new_blob": "1cc6072690c9fe92d05f9b0206334db7c13a96d7",
+      "status": "M"
+    },
+    {
+      "path": "docs/runtime_config/gp_config014_modifier_capacity.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "7362d3451404804fed35ebb30239510d5573bb64",
+      "status": "A"
+    },
+    {
+      "path": "docs/runtime_config/runtime_config_validation_health.md",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "65523bae6b71a0b4ec207511bad1bdc1aab924c4",
+      "new_blob": "248d7b75a174833524b00d007dc5aefa1d45eec3",
+      "status": "M"
+    },
+    {
+      "path": "include/modes/CustomControllerMode.hpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "7c073b2e91f3950c2f1a785940b39539dda433b5",
+      "new_blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+      "status": "M"
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626",
+      "new_blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+      "status": "M"
+    },
+    {
+      "path": "tools/check_glyph_gp_config014_modifier_capacity.py",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "16aff228b6629a924d048b87b8fee6520aacee7f",
+      "status": "A"
+    },
+    {
+      "path": "tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "3bc32107295c0fb6867d1dc04af55c6efd0a04e5",
+      "status": "A"
+    }
+  ],
+  "raw_inventory_sha256": "c40d8aadf736832b52a746455d940b29296522c281f49b3ab314e3d22c1d11aa",
+  "protected_repair_blobs": {
+    "include/modes/CustomControllerMode.hpp": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+    "src/modes/CustomControllerMode.cpp": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85"
+  },
+  "source_specialist_sha256": "9e5926d72a1df299a38f09a3c401fdd3e2480c9a59af07a62f001e2603f1ba8c",
+  "source_specialist_canonical_locator": "git:8b8e45b17a5670bbf983360faf87bdf9d6b50ce2:docs/project/ACTIVE_AGENT_QUEUE.md#gp-config014-activation",
+  "activation_validation_sha256": "4f5c58bcae527fcbd898f2275fcebd08bbf248596b6ad20010709c3045c2e1c0",
+  "activation_review_sha256": "1eb0f0124d95b01a85913ae0b69bd33b4c8123f3d782b0add88828caa39a0d91",
+  "reports": {
+    "candidate-validation.json": {
+      "sha256": "0478af5ce5e4bd94c8c3442b0049972e6ade18140e975624ce614be9e0b412ae",
+      "report": {
+        "schema_name": "glyph_gp_config014_exact_candidate_validation",
+        "schema_version": 1,
+        "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+        "base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+        "tree": "287732689ce5ef069db72148a78926f4f5376ea0",
+        "parent": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+        "inventory": [
+          {
+            "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "8b73122486937fbd6abce1775eeb5250e5f95e0c",
+            "new_blob": "24ffaf9e025c6b5f9c544c501cdc499ee0a5197f",
+            "status": "M"
+          },
+          {
+            "path": "docs/runtime_config/fixtures/gp_config014_modifier_capacity.json",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "b2e82d56344def541273dbee81ac2ff9dfe41085",
+            "status": "A"
+          },
+          {
+            "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "8341353eec008ddce28a36749b02ecda1e52563d",
+            "new_blob": "7fd63e6320d3097ad5b4693ec48ce1482e23ec3f",
+            "status": "M"
+          },
+          {
+            "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "3b4b93b4c2666f0bbf406207b419310dcb9b0ba1",
+            "new_blob": "1cc6072690c9fe92d05f9b0206334db7c13a96d7",
+            "status": "M"
+          },
+          {
+            "path": "docs/runtime_config/gp_config014_modifier_capacity.md",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "7362d3451404804fed35ebb30239510d5573bb64",
+            "status": "A"
+          },
+          {
+            "path": "docs/runtime_config/runtime_config_validation_health.md",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "65523bae6b71a0b4ec207511bad1bdc1aab924c4",
+            "new_blob": "248d7b75a174833524b00d007dc5aefa1d45eec3",
+            "status": "M"
+          },
+          {
+            "path": "include/modes/CustomControllerMode.hpp",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "7c073b2e91f3950c2f1a785940b39539dda433b5",
+            "new_blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+            "status": "M"
+          },
+          {
+            "path": "src/modes/CustomControllerMode.cpp",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626",
+            "new_blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+            "status": "M"
+          },
+          {
+            "path": "tools/check_glyph_gp_config014_modifier_capacity.py",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "16aff228b6629a924d048b87b8fee6520aacee7f",
+            "status": "A"
+          },
+          {
+            "path": "tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "3bc32107295c0fb6867d1dc04af55c6efd0a04e5",
+            "status": "A"
+          }
+        ],
+        "raw_inventory_sha256": "c40d8aadf736832b52a746455d940b29296522c281f49b3ab314e3d22c1d11aa",
+        "context": {
+          "head": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+          "branch": "codex/gp-config-014-current-capacity",
+          "branch_ref": "refs/heads/codex/gp-config-014-current-capacity",
+          "detached": false,
+          "base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+          "merge_base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+          "expected_merge_base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+          "comparison_ref": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+          "required_refs": {},
+          "object_roots": [
+            "0086b1c6c00e6e9478f06fe719220ef400185f68",
+            "0086b388cd230b65e3b9dee0be2e69600b3ae3a0",
+            "01d43af2878a207f20379d46dcee62a842f31810",
+            "040735f6916c7a77924ef53f1b4a873281f2cb7f",
+            "040fcc9fa94c1e42a538c35cf2b7a1a830c492ca",
+            "0450eb109f46c03e0d10f4114be6b261c7e70074",
+            "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+            "04ea022dd0eb0c6d01771f260aff6bb4af6ae104",
+            "06903092e086e65904be1ae09e6f377fac50728e",
+            "0a5dd751c391198140ed146853a69fc825d902c7",
+            "0b792540f2f3887da1b2ccc8784c3e07b7316be6",
+            "0f7f71bfff4b9488d8b148c6eb155ad20cc05589",
+            "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+            "0fbaebfc4729439f10f5e541e995547e46399e8b",
+            "11df2f077466df59b192610a7b03818442d747b4",
+            "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
+            "161dfcf1003f822f5f83014e8b10f426265acb6c",
+            "18a71efaa9f268f6ae255987554fd2b2e6ff26ce",
+            "18f451024d8f822cafbf450a80272c2b729c5e7b",
+            "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+            "1cfb8ab2315dbccb85544a1c7c44ee7c87b37369",
+            "1e1ad3af210b483c968649f6363e2503a9c968ee",
+            "1f9e58cd15d5d8df5cb07aeca2e03eaf4c81d953",
+            "1fe57c6885e72c1054be3ae9814e912003a8646c",
+            "220b8a1d27bbd31d00f707303b546fe59b3765dd",
+            "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+            "244837e424c3369b7b4ba0b836ded29d67d5ba87",
+            "256bf44cea71f6d5c87aa1675c8dac9f6b79259f",
+            "26e3ca148df4de6fb9c10806f97204cc17164f52",
+            "2759a37b8908bd68be8fd830ced313e9ec16bed2",
+            "28426e4ba4763a99f0ca13491c023af77665c79c",
+            "2982e4aef11b5da01b65fac706cb81d7068835bf",
+            "2aae124c99a54af8b9d66f8b2b5864dd75f2471c",
+            "2b2a48e14e9d621b13038d7a8f29e57713ef462a",
+            "2d468884e5fa812d33886e2520b8251d9ca970be",
+            "2d95d6ba87843708aea56b98d1cd0bb563309c9d",
+            "2fbda7a674555e23cc6d003f2c0bfa02a97fafc8",
+            "2fd9a827b90b2079f981d75e836833dc99ec7b10",
+            "305557cdcdb9857b54ccae0790f71046ca87a4e1",
+            "3138ade526cabde23a0abedcb94acae8512579d1",
+            "3171837fcfe8fa8b9f6ab1d1a8891478c98c76a3",
+            "3194fd86c5391f19e598acae7879d6898e3e2072",
+            "31c825ddd6ecbfa3a063ab82c1346a2037ed6637",
+            "320fd3fcfbcb810c62171a7be90c55929b6d9b9d",
+            "32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb",
+            "325defbbf7e1cdefe6f7578a924b96073c95dcb6",
+            "327f442b9df6d0c0a15a6ff8365b3c06071323cc",
+            "33694f3a67f336c25b3c82008b3511d06a490016",
+            "33e24e0bb8ddc6e0ac0a72f9d572b1369dd98939",
+            "34a6c1bc9a9e13dcdf412c8b56a5c53011383503",
+            "35265beb3fe152f27a50325dd595cdffae703df7",
+            "36e9d5f6782011b560a761c9e26b1b4937d1298f",
+            "38017600deb243b5e281edec6d0d378b997d9e40",
+            "38d57ee2ced51a37475e299fb08a368877a0e507",
+            "3a9d41a9927983f1ba5d1e4ff6cf74af57ac634f",
+            "3b4a7c950e1b14e24a88c951c19313f6134f4ea3",
+            "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+            "3c4f3a915938ee3eef8e6f7402853bd127cf3f78",
+            "3ca30cc8cd39dc69c94ba4120812fae00735d5d4",
+            "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+            "40e38fcf51acd43a2a2cab085cf9848ad4ee3483",
+            "40ebce02e34bd0097925b79fbe1e6a21fc63516a",
+            "41ba14202450860340e07bea161f7910c3af922c",
+            "42008cd7ddf7b63adb5840fad9c62657c95a87e6",
+            "437f87e8086a50f0dfbd834176b80d245c1ed307",
+            "44e7a9e76228dc64f5e1b4b6fc84f26f87e976fe",
+            "46f71c956f1e6866fb9b4f325d7ca751a0741734",
+            "49528e32849069e87f2729c24be35a21b002b6df",
+            "4e50be81716117022318d8dcdc7aa60c4390b605",
+            "50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144",
+            "5554328c00c43853008b3f82d4744ee08099782b",
+            "575ed922ffb2812a1838e645e636fe2ac59abae9",
+            "58242472fb47d899bc84ab34db06803d4b778c50",
+            "597a39545f156bd1e032edaf21085ef44589adcb",
+            "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+            "60614dae8150338160b3440aef6b275bf073fecf",
+            "60e0cc1f784cc5b4638b0b662cd0e4cb6c2001dd",
+            "6305781ec7b4099e615f772dc979c3a493626a89",
+            "63616108477bff72e1cda49572a56601782bac3b",
+            "6603249af47f83b7dd4c17214529df7c127011b8",
+            "66fa47dee9dfe04df26be50a20ac74331924cc60",
+            "6823da0c8219dc93a404906fe1be3aaeeb3736d5",
+            "68dd958fe200618399582929c7c1665c941185e0",
+            "6affdecb526b5571e507cf51d62d3b819b2926bb",
+            "6b36d99b0624047558ed8f9ede83dcaee78e72a9",
+            "6cb59e97ddfdb96830432923ac588a76383153b7",
+            "6d3c2812a45d4d59caab9699cdcd080bf1d7571f",
+            "6daa76a301069beef6207731bbc8beaae4451aa1",
+            "6e616fa8adb78b98865e7bd1db1766ac0f56464f",
+            "70c02afda69f08711aac715b7a46be6aa1095735",
+            "70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8",
+            "70f5d3b119a2881c9cae52c2c3cf91c75b186257",
+            "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
+            "74ae24364b84520d4e0e39240beb9867653cc7b9",
+            "76cb953cd6bfe5398db11669f3d195175361700c",
+            "76f6f12ffa053cbabf55d6be64b41ddb89bc292d",
+            "774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718",
+            "783334b7476f2c68335d6f312669eac72e78316f",
+            "797113740c2a601e6231642140863b26dac4aa1e",
+            "79ac6bf1164143d6011a3dad46d047b72352b2a6",
+            "7a042fbdd1dc28db8efbd7c59e1730565fe33288",
+            "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+            "7a3c242d5197ffaec3c3a4884cd62da978e955b3",
+            "7afd85e5d353692b1e3fa015af985ba5e0a46f4d",
+            "7ca129e218b292c0aa64b38577848dd8b63a4c66",
+            "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+            "7f9b097ba0c840afbc5f4d104dfa1756a3dce97c",
+            "83b0e69822676381f4ad432cb97907ae438a5517",
+            "84ba70d28629134c92d0b0d25c9d05fb4bd2596c",
+            "85c1ec43abffb737d080f19190b393c591b862ef",
+            "885daf198be7445bec9fa565eca6d3b2784c7842",
+            "8992f1de9c586a29cd102340f8acce49a1a54456",
+            "8b4babd8ebea7e4f363b694eeb27435a47befbe7",
+            "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+            "8d1f49334973429d7b094dbcb3b86d669c465cae",
+            "8d4b69c64316757f1ef23532ee000fa0ac71da5f",
+            "92bad797c3e7e0c32dea2768e1da32870d2aecd8",
+            "933456a61269d47603f54b31aea33274a6381f6d",
+            "933dd3c93bdce798218e863ac50a5573325a10ef",
+            "93b3c9ee8f702886f731714281ce143428724a17",
+            "952e08998c0c0954773cac88d3067f0721912334",
+            "9550a1bf1309383e351f4f9e66663562fc9f13ac",
+            "9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1",
+            "97267efcf5962a6dfa28a551670455aa3bd91c65",
+            "9ac48cd8eb3aa3a673ba85bdc836b664e6b913aa",
+            "9c0324969a2adbe7d13e611e2f636df6fab4d690",
+            "9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0",
+            "9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db",
+            "9dff89d835ccb0bb45dd10c79305b9fef5096263",
+            "a1225102179639f06bb00a6735987824b85972ae",
+            "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+            "a44b3786b362335801fae32048617d332a9ead85",
+            "a49117062282efc077417143c325cae3c55bff4e",
+            "a59c62793c52130612f39558b7c7e5a70a8c8cf4",
+            "a5ec9012684d7c8e45ef4fbd57aa3a4ac755de55",
+            "a63c50d7701480fffaf75b01e2f5f10883e12aa5",
+            "a669992a3379afa3d89593a7f1d46a2a2987dabd",
+            "a747dd54b02b207483142331d8b5be1113fc951e",
+            "a861964418a9b0e84abb89b2146f8430a5e7c69b",
+            "a8e249eb210b7cd1e010e27dee8f4c61f8fcb537",
+            "aa01750618a50727156881b22a088f1ef55a09d5",
+            "ab6e609cf973d8735c034d160966faef780cf90b",
+            "af77f8f702ab83d74cdf1625cacf763c820ccef5",
+            "afb3121277d12bbd0aa78555f975840f1c8dbb96",
+            "b0162560779f10e568de80cff2baf04aae0447a9",
+            "b0255a3b8e80cafc65d20526aa42769b1b402316",
+            "b0aa22aff74ae7711dad219330b1490e930b8714",
+            "b2a5712afb9f79d94e3c3f6c92f288e1d60328fe",
+            "b9a0a20549909a22a1552f216ded7941b7a26a71",
+            "bc76af250eb61e68daae8b1a91acb6412ecd95a0",
+            "bce59d34bcb6b4158a5f755293f20102c7a0abb9",
+            "bcf5831c00f8ab3a34576e544d9b795eac89e826",
+            "bf9affbb4de1fe97b0e80057daf6d95127db4d2c",
+            "c664d858ad656554d990196f3c46472ca9ebc46e",
+            "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+            "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
+            "caf0718472c7752c78838be6f1d48b56932d90b9",
+            "caf0822cf3de97a49a7d9b13c920a9951cb24ee2",
+            "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+            "cb742cb0dad1a87019100697dcf15ed8459f31e5",
+            "ccb01a1ac3c8a21f69358bc345242303503ffbde",
+            "cccfe43f3b1ffbba82573d3583db8aeb61e2de04",
+            "d170509476ecb4bd1fa0fc371cd3c73391ad4f55",
+            "d2f78cd3a3fa38c60d04dab54236ee630ead379e",
+            "d360ff36586133890e9faf07811cc04a806fdbbf",
+            "d392a115e8c48d81d3609a3c6479d21d21608aa9",
+            "d3e5303f3e0584a279ce4a6c5cd82ed1d0c4e8c0",
+            "d5050847d3f850951b3f47865dc8a91aedea0834",
+            "d8220daee328eae517c5ed10a1a78460b4f46ba7",
+            "d849fbecb9712751284d9540d8c030aa30273fa7",
+            "d9d1e72bb18a5e1dbdf05c829a1d11362893933f",
+            "da20f4afaea61e3f48d16ab19e2fb2e2e25e7775",
+            "dae87ac468f3c9ce6512fc96f855083054668a29",
+            "db2502dca3b820d8744ed6d567e5173702dc65ed",
+            "de36d24422a67e8be7992217856c76e8420a71f6",
+            "def48ddd72a095f4ea150de9eca9164eed6c32e6",
+            "e2523d94eb1023f0146cee9fd975453125c67fa2",
+            "e41e4ea1017b5abde4f17eed1a4bc50404238c75",
+            "e8ab9b86408d1c89f3b35a07949782d9e3c414ff",
+            "e96ae3025ccadd91e581295fadd73059b9d2c611",
+            "ea5ae10022bc9face69644c5ae9f7ad322940658",
+            "ecbbf5beecae5a5f8837d4261298c8304e2dec96",
+            "efdea79269753e14cc8e6fc75df24830854672f9",
+            "f0a1eab7f75c6c037983e4d7290c63f800f2ede6",
+            "f2fd0892ea9856573c59142ca854fe56585454b8",
+            "f37a0ed72bf1f211cad62a10747f5259ac96fdd5",
+            "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
+            "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+            "f657715b26d26587a931074ce7dd12c698785290",
+            "f72bff6fd752f6b3643557743058b3a40888c8d8",
+            "f8610327da8283c914c0e9b478276e67aea0f4bb",
+            "fb3d96fd8eb2f51081a663a7f729710e74e780f7",
+            "fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f",
+            "fceebd9793d276480dfa4e72149ecc6e4e383c2c",
+            "fd6044109ce3af2311c32875979dc37849dd75be",
+            "ffc007552abc848051841362b0b0ac4c1a7d087b"
+          ]
+        },
+        "full_native_fingerprint": {
+          "before": "fa8cb053d159c40857bc2ea8576b1fc56a8bb564e1cea07ac2ec987e2fc44774",
+          "after": "fa8cb053d159c40857bc2ea8576b1fc56a8bb564e1cea07ac2ec987e2fc44774",
+          "result": "MATCH"
+        },
+        "results": [
+          {
+            "id": "gp_config014_modifier_capacity",
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config014_modifier_capacity.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 13.557483584008878,
+            "log": "/private/tmp/glyph-config014/candidate-01-gp_config014_modifier_capacity.log",
+            "predicted_named034_gate": false,
+            "output_tail": "layout=ordinary cases=30 PASS\nlayout=short-enums cases=30 PASS\nnegative_controls=PASS schema19/21 both layouts; cache10; direct/live guards; pointer/cache initializers; immutable bytes/mode/path/parent/inventory\nglyph_gp_config014_modifier_capacity: PASS; exact production source; base=8b8e45b17a5670bbf983360faf87bdf9d6b50ce2 current=a3664be5354ec4253122eb2e738e70e5dfdb9ccc\nfirmware_build=NOT_RUN physical_reachability=UNKNOWN hardware_acceptance=PENDING Nunchuk=NOT_TESTED root_cause=UNPROVEN GP-CONFIG-018=SEPARATE\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "gp_config020_button_validation",
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config020_button_validation.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 6.476523916993756,
+            "log": "/private/tmp/glyph-config014/candidate-02-gp_config020_button_validation.log",
+            "predicted_named034_gate": false,
+            "output_tail": "pected_offset=0 result=PASS\nclass=remap_activates data_size=4 offset=4 stride=4 capacity=1 expected_offset=4 result=PASS\nclass=socd_dir1 data_size=4 offset=0 stride=4 capacity=1 expected_offset=0 result=PASS\nclass=socd_dir2 data_size=4 offset=4 stride=4 capacity=1 expected_offset=4 result=PASS\nclass=backend_activation data_size=4 offset=8 stride=4 capacity=2 expected_offset=8 result=PASS\nclass=modifier_button data_size=4 offset=4 stride=4 capacity=3 expected_offset=4 result=PASS\nclass=combo_button data_size=4 offset=4 stride=4 capacity=3 expected_offset=4 result=PASS\nclass=digital_button data_size=4 offset=4 stride=4 capacity=18 expected_offset=4 result=PASS\nclass=stick_button data_size=4 offset=80 stride=4 capacity=8 expected_offset=80 result=PASS\nclass=trigger_button data_size=4 offset=0 stride=4 capacity=1 expected_offset=0 result=PASS\nclass=keyboard_button data_size=4 offset=0 stride=4 capacity=1 expected_offset=0 result=PASS\nbutton_class_count=12 result=PASS\nnamed_ids=1..60 per class result=PASS\nraw_0..255_all_classes highbyte_or_overflow_refusal result=PASS\nextent_absence_disable_sentinel_rgb_exclusion accepted_defaults result=PASS\ncase=malformed_decode result=PASS\ncase=invalid_default_backend_index result=PASS\ncase=invalid_default_game_mode_reference result=PASS\ncase=invalid_keyboard_mode_condition result=PASS\ncase=invalid_custom_mode_condition result=PASS\ncase=out_of_range_keyboard_config result=PASS\ncase=out_of_range_custom_config result=PASS\ncase=invalid_button_binding result=PASS\ncase=save_failure result=PASS\ncase=full_success result=PASS\nproduction_source=HAL/pico/src/comms/ConfiguratorBackend.cpp\nmocked_validator_transaction_cases=10 result=PASS\nwire_raw=256 decoded_classes=12 rejected_or_decode_failed=0 result=PASS\nwire_raw=257 decoded_classes=12 rejected_or_decode_failed=0 result=PASS\nwire_raw=300 decoded_classes=12 rejected_or_decode_failed=0 result=PASS\nwire_raw=4294967295 decoded_classes=12 rejected_or_decode_failed=0 result=PASS\nwire_raw=18446744073709551615 decoded_classes=0 rejected_or_decode_failed=12 result=PASS\ndecoded_named_ids=1..60 across 12 classes result=PASS\ndecoded_raw=0..255,256,257,300,uint32max,uint64max across 12 classes result=PASS\nmalformed_trailing_last_element_overflow result=PASS\nbinding_order_mask_identity_no_mutation result=PASS\nnegative_control=ordinary_typed_invalid_enum_read result=SANITIZER_DETECTED\nglyph_gp_config020_button_validation: PASS; dual-ABI host and descriptor proof; mocked transaction characterized\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "validation_health",
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_validation_health.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 0.09231200002250262,
+            "log": "/private/tmp/glyph-config014/candidate-03-validation_health.log",
+            "predicted_named034_gate": false,
+            "output_tail": "glyph_runtime_config_validation_health: PASS; census_count=213; manifest_entries=53; baseline=116d34322837fe1f6f724c820b49ccb0d24d6787\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "docs_navigation",
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_navigation.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 0.0641323339950759,
+            "log": "/private/tmp/glyph-config014/candidate-04-docs_navigation.log",
+            "predicted_named034_gate": false,
+            "output_tail": "glyph_docs_navigation: PASS\n- README.md\n- AGENTS.md\n- docs/AGENT_CONTEXT.md\n- docs/CURRENT_STATE.md\n- docs/ROADMAP.md\n- docs/WORKFLOW.md\n- docs/archive/README.md\n- docs/calibration/README.md\n- docs/calibration/INDEX.md\n- docs/calibration/archive_policy.md\n- docs/export/README.md\n- docs/runtime_config/README.md\n- docs/runtime_config/IMPLEMENTATION_BOUNDARY.md\n- docs/runtime_config/coordinate_native_runtime_profile_contract.md\n- docs/runtime_config/source_owned_table_symbol_map.md\n- docs/runtime_config/runtime_config_activation_alternatives_a_f.md\n- docs/runtime_config/source_authority_intake_workflow.md\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json\n- docs/agent_framework/README.md\n- docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md\n- docs/agent_framework/WORK_ORDER_TEMPLATE.md\n- docs/agent_framework/HARDWARE_EVIDENCE.md\n- docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md\n- docs/agent_framework/USER_DIRECTION.md\n- docs/agent_framework/SCHEDULED_TASKS.md\n- docs/agent_framework/MODEL_ROUTING.md\n- docs/agent_framework/SUPERVISOR_CONTRACT.md\n- docs/agent_framework/SUBAGENT_CONTRACTS.md\n- docs/agent_framework/VALIDATION_AND_GATES.md\n- docs/project/ACTIVE_AGENT_QUEUE.md\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "agent_framework",
+            "command": [
+              "python3",
+              "tools/check_glyph_agent_framework_docs.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 13.716511167003773,
+            "log": "/private/tmp/glyph-config014/candidate-05-agent_framework.log",
+            "predicted_named034_gate": false,
+            "output_tail": "PASS: required docs and JSON schemas exist and parse\nPASS: current framework surface is Codex/OpenAI-only\nPASS: model routing includes all required Codex/OpenAI roles and fields\nPASS: Planner/Curator packet object and survivor adversarial cases validate\nPASS: new zero/nonzero Planner receipts and accepted-wait adversarial cases validate\nPASS: current queue/status mirrors match machine-derived runway state\nPASS: current human-readable runway summaries match machine state\nPASS: current prose contains no duplicated unguarded runway claims\nPASS: canonical queue, runway counts, and zero-runway liveness validate\nPASS: completion correspondence direct/replay and negative Git corpus validate\nPASS: Revision 2 authorization, evidence, and user-direction surfaces validate\nPASS: Revision-3 classification/safety/successor/transport-policy negative controls validate\nPASS: current Revision-3 policy and prospective GP-VAL contracts validate; historical orders preserved\nPASS: firmware implementation authority and hardware merge gate are reconciled\nPASS: legacy project-local control plane is explicitly superseded\nPASS: delegation discovery and accountability adversarial self-tests validate\nPASS: native delegation discovery, role boundaries, and reporting validate\nPASS: four exact scheduled/manual task configurations validate\nPASS: sandbox network/live-remote retry and authentication safety validate\nPASS: branch classifications and judge verdicts are documented\nPASS: AGENTS.md points to framework entrypoints\nPASS: forbidden active claims absent and required non-claims preserved\nPASS: runner prompt and scripts/agent_runner.py are absent\nglyph_agent_framework_docs: PASS\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "agentic_sequence",
+            "command": [
+              "python3",
+              "tools/check_glyph_agentic_sequence_protocol.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 0.07502983399899676,
+            "log": "/private/tmp/glyph-config014/candidate-06-agentic_sequence.log",
+            "predicted_named034_gate": false,
+            "output_tail": "glyph_agentic_sequence_protocol; status=PASS; user_intervention_gates=8; hardware_status=not_new_hardware_result\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "check_glyph_checker_census",
+            "command": [
+              "python3",
+              "tools/check_glyph_checker_census.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 1.3254521670169197,
+            "log": "/private/tmp/glyph-config014/candidate-07-check_glyph_checker_census.log",
+            "predicted_named034_gate": false,
+            "output_tail": "glyph_checker_census: PASS; entries=213\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "test_glyph_docs_agent_surface_integration",
+            "command": [
+              "python3",
+              "tools/test_glyph_docs_agent_surface_integration.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 7.057617125014076,
+            "log": "/private/tmp/glyph-config014/candidate-08-test_glyph_docs_agent_surface_integration.log",
+            "predicted_named034_gate": false,
+            "output_tail": "............\n----------------------------------------------------------------------\nRan 12 tests in 6.297s\n\nOK\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "gp_config_010_mode_activation_capacity",
+            "command": [
+              "python3",
+              "tools/check_glyph_config_010_mode_activation_capacity.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 1.7330540000111796,
+            "log": "/private/tmp/glyph-config014/candidate-09-gp_config_010_mode_activation_capacity.log",
+            "predicted_named034_gate": true,
+            "output_tail": "case=count_0 result=PASS\ncase=count_10 result=PASS\ncase=count_11 result=PASS\ncase=count_13 result=PASS\ncase=count_30 result=PASS\ncase=count_31 result=PASS\ncase=indices_0_to_12 result=PASS\nglyph_config_010_mode_activation_capacity: PASS; 7 cases; authenticated current host fixture\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "gp_config_012_button_mask_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config012_button_mask_characterization.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.502136958995834,
+            "log": "/private/tmp/glyph-config014/candidate-10-gp_config_012_button_mask_characterization.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_gp_config012_button_mask_characterization: FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "gp_config_013_usb_default_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config013_usb_default_characterization.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.9435298329917714,
+            "log": "/private/tmp/glyph-config014/candidate-11-gp_config_013_usb_default_characterization.log",
+            "predicted_named034_gate": true,
+            "output_tail": "GP-CONFIG-013 characterization FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "gp_config_010_integration_semantic_correspondence",
+            "command": [
+              "python3",
+              "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.7744105000165291,
+            "log": "/private/tmp/glyph-config014/candidate-12-gp_config_010_integration_semantic_correspondence.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_config_010_integration_semantic_correspondence: FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "configurator_setconfig_transaction",
+            "command": [
+              "python3",
+              "tools/check_glyph_configurator_setconfig_transaction.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.5009238329948857,
+            "log": "/private/tmp/glyph-config014/candidate-13-configurator_setconfig_transaction.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_configurator_setconfig_transaction: FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "current_config_persistence_recovery_research",
+            "command": [
+              "python3",
+              "tools/check_glyph_current_config_persistence_recovery_research.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.6484219580015633,
+            "log": "/private/tmp/glyph-config014/candidate-14-current_config_persistence_recovery_research.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_current_config_persistence_recovery_research: FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "getconfig_raw_load_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_getconfig_raw_load_characterization.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.6696195410040673,
+            "log": "/private/tmp/glyph-config014/candidate-15-getconfig_raw_load_characterization.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_getconfig_raw_load_characterization: FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "neopixel_null_sendreport_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_neopixel_null_sendreport_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 0.6709279170027003,
+            "log": "/private/tmp/glyph-config014/candidate-16-neopixel_null_sendreport_characterization.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_neopixel_null_sendreport_characterization: PASS; 9 isolated cases; 9 adversarial contracts; H1 host evidence; physical reachability UNKNOWN\n",
+            "classification": "ACTUAL_PASS"
+          },
+          {
+            "id": "setconfig_runtime_rebinding_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_setconfig_runtime_rebinding_characterization.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.714608957991004,
+            "log": "/private/tmp/glyph-config014/candidate-17-setconfig_runtime_rebinding_characterization.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_setconfig_runtime_rebinding_characterization: FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "config_menu_invalid_state_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_config_menu_invalid_state_characterization.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.8222907499875873,
+            "log": "/private/tmp/glyph-config014/candidate-18-config_menu_invalid_state_characterization.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_config_menu_invalid_state_characterization: FAIL: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "custom_modifier_cache_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_custom_modifier_cache_characterization.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 0.09570254199206829,
+            "log": "/private/tmp/glyph-config014/candidate-19-custom_modifier_cache_characterization.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_custom_modifier_cache_characterization: FAIL: source drift: include/modes/CustomControllerMode.hpp\n",
+            "exact_refusal": "immutable011 header source hash differs from repaired C014",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "generated_source_contract",
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_generator_contract.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.729041332990164,
+            "log": "/private/tmp/glyph-config014/candidate-20-generated_source_contract.log",
+            "predicted_named034_gate": true,
+            "output_tail": "se CorrespondenceError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nglyph_hardware_correspondence.CorrespondenceError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_generator_contract.py\", line 876, in main\n    context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_checker_context.py\", line 282, in authenticated_campaign_context\n    raise ScopeValidationError(str(exc)) from exc\nglyph_checker_context.ScopeValidationError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_generator_contract.py\", line 906, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_generator_contract.py\", line 883, in main\n    fail(str(exc))\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_generator_contract.py\", line 206, in fail\n    raise GeneratedSourceOwnedGeneratorContractError(message)\nGeneratedSourceOwnedGeneratorContractError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "generated_baseline_artifact",
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.7616558329900727,
+            "log": "/private/tmp/glyph-config014/candidate-21-generated_baseline_artifact-after-ref-setup.log",
+            "predicted_named034_gate": true,
+            "output_tail": "e/tmp/glyph-config014/candidate/tools/glyph_campaign_transition.py\", line 413, in authenticate\n    return repaired(root)\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_campaign_transition.py\", line 65, in invoke\n    return function(*args, **kwargs)\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_c020_abi_repair_transition.py\", line 861, in authenticate\n    require(delta <= GOVERNANCE_PATHS | CRITICAL | HOSTS | owner_scope,\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            'unreviewed governance/host delta: '\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            + repr(sorted(delta - GOVERNANCE_PATHS - CRITICAL - HOSTS - owner_scope)))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_campaign_transition.py\", line 90, in require\n    if not ok: raise CorrespondenceError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nglyph_hardware_correspondence.CorrespondenceError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_baseline_artifact.py\", line 488, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_baseline_artifact.py\", line 470, in main\n    authenticated = authenticated_campaign_context(context)\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_checker_context.py\", line 282, in authenticated_campaign_context\n    raise ScopeValidationError(str(exc)) from exc\nglyph_checker_context.ScopeValidationError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "artifact_install",
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_artifact_install.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.984403749986086,
+            "log": "/private/tmp/glyph-config014/candidate-22-artifact_install.log",
+            "predicted_named034_gate": true,
+            "output_tail": " not ok: raise CorrespondenceError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nglyph_hardware_correspondence.CorrespondenceError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_artifact_install.py\", line 582, in main\n    context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_checker_context.py\", line 282, in authenticated_campaign_context\n    raise ScopeValidationError(str(exc)) from exc\nglyph_checker_context.ScopeValidationError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_artifact_install.py\", line 605, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_artifact_install.py\", line 589, in main\n    fail(str(exc))\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_artifact_install.py\", line 172, in fail\n    raise GeneratedSourceOwnedArtifactInstallError(message)\nGeneratedSourceOwnedArtifactInstallError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "coordinate_native_contract",
+            "command": [
+              "python3",
+              "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.7070981249853503,
+            "log": "/private/tmp/glyph-config014/candidate-23-coordinate_native_contract.log",
+            "predicted_named034_gate": true,
+            "output_tail": "pondenceError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nglyph_hardware_correspondence.CorrespondenceError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_coordinate_native_runtime_profile_contract.py\", line 1660, in main\n    context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_checker_context.py\", line 282, in authenticated_campaign_context\n    raise ScopeValidationError(str(exc)) from exc\nglyph_checker_context.ScopeValidationError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_coordinate_native_runtime_profile_contract.py\", line 1693, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_coordinate_native_runtime_profile_contract.py\", line 1667, in main\n    fail(str(exc))\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_coordinate_native_runtime_profile_contract.py\", line 354, in fail\n    raise CoordinateNativeRuntimeProfileContractError(message)\nCoordinateNativeRuntimeProfileContractError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "docs_agent_surface",
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_agent_surface.py"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.5775042909954209,
+            "log": "/private/tmp/glyph-config014/candidate-24-docs_agent_surface.log",
+            "predicted_named034_gate": true,
+            "output_tail": "^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_campaign_transition.py\", line 90, in require\n    if not ok: raise CorrespondenceError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nglyph_hardware_correspondence.CorrespondenceError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_docs_agent_surface.py\", line 561, in main\n    context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))\n  File \"/private/tmp/glyph-config014/candidate/tools/glyph_checker_context.py\", line 282, in authenticated_campaign_context\n    raise ScopeValidationError(str(exc)) from exc\nglyph_checker_context.ScopeValidationError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_docs_agent_surface.py\", line 576, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_docs_agent_surface.py\", line 564, in main\n    fail(str(exc))\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_docs_agent_surface.py\", line 120, in fail\n    raise AgentSurfaceError(message)\nAgentSurfaceError: unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          },
+          {
+            "id": "campaign_webserial_source_authority",
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+              "--campaign-transition"
+            ],
+            "status": "FAIL_OR_INCOMPLETE",
+            "exit_code": 1,
+            "failure_kind": null,
+            "duration_seconds": 1.472236667003017,
+            "log": "/private/tmp/glyph-config014/candidate-25-campaign_webserial_source_authority.log",
+            "predicted_named034_gate": true,
+            "output_tail": "glyph_runtime_config_webserial_device_write_source_authority\nstatus=FAIL\nerror=unreviewed governance/host delta: ['docs/runtime_config/fixtures/gp_config014_modifier_capacity.json', 'docs/runtime_config/gp_config014_modifier_capacity.md', 'include/modes/CustomControllerMode.hpp', 'src/modes/CustomControllerMode.cpp', 'tools/check_glyph_gp_config014_modifier_capacity.py', 'tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp']\n",
+            "exact_refusal": "current closedC020 campaign contract rejects exact C014 two source/four proof paths",
+            "classification": "UNPASSED_NAMED_GP_VAL_034_SAFETY_GATE",
+            "gate_pass_claimed": false
+          }
+        ],
+        "full_aggregate_run": false,
+        "firmware_build_run": false,
+        "hardware_acceptance": "PENDING; named034 prerequisite",
+        "canonical_source_integration": false,
+        "initial_baseline_local_ref_setup_refusal": {
+          "id": "generated_baseline_artifact",
+          "command": [
+            "python3",
+            "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+          ],
+          "status": "FAIL_OR_INCOMPLETE",
+          "exit_code": 1,
+          "failure_kind": null,
+          "duration_seconds": 0.17323454198776744,
+          "log": "/private/tmp/glyph-config014/candidate-21-generated_baseline_artifact.log",
+          "predicted_named034_gate": true,
+          "output_tail": "Traceback (most recent call last):\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_baseline_artifact.py\", line 488, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_baseline_artifact.py\", line 464, in main\n    branch = validate_branch()\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_baseline_artifact.py\", line 198, in validate_branch\n    fail(f\"{BASE_BRANCH} must be an ancestor of HEAD\")\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/glyph-config014/candidate/tools/check_glyph_generated_source_owned_baseline_artifact.py\", line 134, in fail\n    raise GeneratedSourceOwnedBaselineArtifactError(message)\nGeneratedSourceOwnedBaselineArtifactError: configurator must be an ancestor of HEAD\n"
+        },
+        "focused_ref_setup_followup": {
+          "reason": "Initial isolated clone lacked localconfigurator required by unchanged baseline checker. Added exact already-liveverified B branch; no source/test edit.",
+          "local_configurator": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+          "fingerprint_before": "8e28d5bb90053d6b8366c1c5aa2a20cc26ea9ae1de8a87d678f243e91fbade22",
+          "fingerprint_after": "8e28d5bb90053d6b8366c1c5aa2a20cc26ea9ae1de8a87d678f243e91fbade22",
+          "result": "MATCH"
+        },
+        "status": "PASS_BOUNDED_CANDIDATE_CONFORMANCE_STOP_AT_UNPASSED_034",
+        "actual_pass_count": 10,
+        "actual_fail_count": 15,
+        "unexpected_failures": [],
+        "required_named034_unpassed_gates": [
+          "gp_config_012_button_mask_characterization",
+          "gp_config_013_usb_default_characterization",
+          "gp_config_010_integration_semantic_correspondence",
+          "configurator_setconfig_transaction",
+          "current_config_persistence_recovery_research",
+          "getconfig_raw_load_characterization",
+          "setconfig_runtime_rebinding_characterization",
+          "config_menu_invalid_state_characterization",
+          "custom_modifier_cache_characterization",
+          "generated_source_contract",
+          "generated_baseline_artifact",
+          "artifact_install",
+          "coordinate_native_contract",
+          "docs_agent_surface",
+          "campaign_webserial_source_authority"
+        ],
+        "gate_waivers": false,
+        "firmware_build_authorized_now": false,
+        "physical_acceptance": false,
+        "critical_tree_proof": {
+          "base_count": 236,
+          "candidate_count": 236,
+          "changed_paths": [
+            "include/modes/CustomControllerMode.hpp",
+            "src/modes/CustomControllerMode.cpp"
+          ],
+          "other_critical_entries": "EXACT"
+        },
+        "actual_tracked_bytes_modes_index_head": "MATCH",
+        "tracked_path_count": 1396,
+        "closure": "all33 finite required roots verified with no missing objects; clean tracked/index/tree; no untracked/ignored critical inputs"
+      }
+    },
+    "candidate-review.json": {
+      "sha256": "fe541546300d8699419f8bde909157953b68084dc1926965e2873b752ecb7f07",
+      "report": {
+        "schema_name": "glyph_gp_config014_independent_candidate_review",
+        "schema_version": 1,
+        "reviewer": "/root/config014_review",
+        "verdict": "APPROVED_FOR_EXACT_CANDIDATE_PUBLICATION_AND_SOURCE_FREE_HANDOFF_ONLY",
+        "reviewed_sha": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+        "reviewed_tree": "287732689ce5ef069db72148a78926f4f5376ea0",
+        "base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+        "parent": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+        "classification": "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
+        "hardware_risk": "H3",
+        "blocking_findings_for_bounded_candidate_handoff": [],
+        "unpassed_safety_gates": [
+          "gp_config_012_button_mask_characterization",
+          "gp_config_013_usb_default_characterization",
+          "gp_config_010_integration_semantic_correspondence",
+          "configurator_setconfig_transaction",
+          "current_config_persistence_recovery_research",
+          "getconfig_raw_load_characterization",
+          "setconfig_runtime_rebinding_characterization",
+          "config_menu_invalid_state_characterization",
+          "custom_modifier_cache_characterization",
+          "generated_source_contract",
+          "generated_baseline_artifact",
+          "artifact_install",
+          "coordinate_native_contract",
+          "docs_agent_surface",
+          "campaign_webserial_source_authority"
+        ],
+        "gate_waivers": false,
+        "build_or_firmware_integration_approved": false,
+        "hardware_acceptance": false,
+        "raw_inventory_sha256": "c40d8aadf736832b52a746455d940b29296522c281f49b3ab314e3d22c1d11aa",
+        "inventory": [
+          {
+            "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "8b73122486937fbd6abce1775eeb5250e5f95e0c",
+            "new_blob": "24ffaf9e025c6b5f9c544c501cdc499ee0a5197f",
+            "status": "M"
+          },
+          {
+            "path": "docs/runtime_config/fixtures/gp_config014_modifier_capacity.json",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "b2e82d56344def541273dbee81ac2ff9dfe41085",
+            "status": "A"
+          },
+          {
+            "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "8341353eec008ddce28a36749b02ecda1e52563d",
+            "new_blob": "7fd63e6320d3097ad5b4693ec48ce1482e23ec3f",
+            "status": "M"
+          },
+          {
+            "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "3b4b93b4c2666f0bbf406207b419310dcb9b0ba1",
+            "new_blob": "1cc6072690c9fe92d05f9b0206334db7c13a96d7",
+            "status": "M"
+          },
+          {
+            "path": "docs/runtime_config/gp_config014_modifier_capacity.md",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "7362d3451404804fed35ebb30239510d5573bb64",
+            "status": "A"
+          },
+          {
+            "path": "docs/runtime_config/runtime_config_validation_health.md",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "65523bae6b71a0b4ec207511bad1bdc1aab924c4",
+            "new_blob": "248d7b75a174833524b00d007dc5aefa1d45eec3",
+            "status": "M"
+          },
+          {
+            "path": "include/modes/CustomControllerMode.hpp",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "7c073b2e91f3950c2f1a785940b39539dda433b5",
+            "new_blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+            "status": "M"
+          },
+          {
+            "path": "src/modes/CustomControllerMode.cpp",
+            "old_mode": "100644",
+            "new_mode": "100644",
+            "old_blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626",
+            "new_blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+            "status": "M"
+          },
+          {
+            "path": "tools/check_glyph_gp_config014_modifier_capacity.py",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "16aff228b6629a924d048b87b8fee6520aacee7f",
+            "status": "A"
+          },
+          {
+            "path": "tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp",
+            "old_mode": "000000",
+            "new_mode": "100644",
+            "old_blob": "0000000000000000000000000000000000000000",
+            "new_blob": "3bc32107295c0fb6867d1dc04af55c6efd0a04e5",
+            "status": "A"
+          }
+        ],
+        "validation_report_sha256": "0478af5ce5e4bd94c8c3442b0049972e6ade18140e975624ce614be9e0b412ae",
+        "independent_verification": [
+          "Actual new host checker executed independently on exact committed C: ordinary30 and short-enums30 cases PASS with ASan/UBSan/bounds; all mutation, source custody, parent/mode/inventory, schema19/21 static_assert negatives PASS",
+          "Exact adopted header9658f5e15f50887caaaf5a71efc0096e9677d144 and cpp8cb336f31acd4c324b3ae1f8ef0827c14f15ee85, regular100644, direct live-verified B; source delta only required capacity/assertion/nullptr/zero cache and direct/live guards",
+          "All236 critical tree/index/worktree entries independently compared; only2authorized source entries differ; no assume-unchanged/skip-worktree/symlink/ignored/staged/untracked critical input",
+          "Exact10path1558byte recursive raw-z inventory; all100644. Four new proof paths outside unchanged firmware filters/include roots/build scripts",
+          "All52existing manifest entries/topfields exact; immutable011checker/fixture/harness/schema assets unchanged and existingcurrent/loadbearing entry retained",
+          "Actual census213 and health53manifest47currentloadbearing PASS independently",
+          "Manifest16dependencies cover actual compilation inputs; remaining constantPINS validated by actual checker and exact dependency custody; no concrete omitted-dependency safety gap",
+          "Frozen root25consumer checks reviewed:10actualPASS,15actualFAIL retained as named034safety prerequisites; initial baseline local-ref setup failure preserved and actualscope refusal established on corrected exactB with separate full fingerprintMATCH",
+          "Full native before/after fingerprintMATCH; no fullaggregate,firmwarebuild,device/hardware action or physicalacceptance claimed"
+        ],
+        "source_semantics": "All valid0..20 masks/order/combo/priorities/arithmetic preserved by exact repaired blob comparison and host controls; direct>20 exits before InputMode/pointer/cache mutation; live>20 exits before cache/analog processing.018rebind/transaction/USB/invalidbutton policy excluded.",
+        "next_stop": "Preserve exact C and complete source-free GP-VAL-034 handoff. Separate authorized034 implementation must close actual affected gates before any firmware build/custody/physicalPASS/integration.",
+        "limitations": [
+          "Host evidence only; actual target compile/build and physical acceptance pending",
+          "Historical011 remains valid historical evidence, currently source-hash refuses repaired source pending034 genuine historical replay",
+          "NunchukNOT_TESTED; rootcauseUNPROVEN"
+        ]
+      }
+    },
+    "historical010-validation.json": {
+      "sha256": "059796d5d106f891ec0ae2bdc6a92a40f1b39ecb2d90d7f6b33148eb2c9eb72c",
+      "report": {
+        "schema_name": "glyph_gp_config014_preserved_historical010",
+        "status": "PASS",
+        "head": "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+        "tree": "cf5ba50e707d5c0a6b1728619718f28b2dceff93",
+        "branch": "glyph/gp-config-010-current-canonical-integration",
+        "command": [
+          "python3",
+          "-B",
+          "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+        ],
+        "checker_provenance": "exact original committed010 checker in genuine historical checkout; original interface no --historical argument",
+        "stdout": "glyph_config_010_integration_semantic_correspondence: PASS\n- production semantics: 8 EXACT_SOURCE_MATCH\n- behaviorally relevant differences: 0\n- generated baseline: exact accepted GP-X1-002 28-table blob\n",
+        "stderr": "",
+        "source_freeze": "clean exact committed historical tree, no bytecode/source modifications",
+        "shared_object_readonly_source": "/private/tmp/glyph-config014/candidate",
+        "hardware_acceptance_claim": false,
+        "currentC014_010_mode_capacity": "actualPASS in separate candidate-validation report"
+      }
+    },
+    "pre034-manifest-source-followup.json": {
+      "sha256": "9793c2b9cf47ea9626376a743648e9695bdefd06e290bb49d3f551c37ae54890",
+      "report": {
+        "schema_name": "glyph_gp_config014_pre034_manifest_source_followup",
+        "schema_version": 1,
+        "decision": "KEEP_EXISTING_011_CURRENT_LOAD_BEARING_UNTIL_034_REAL_REPLAY_IMPLEMENTED",
+        "base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+        "base_delta_from_prior_authority": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md"
+        ],
+        "source_delta": "NONE",
+        "manifest_advice": "Add distinct current repaired014 proof entry and preserve011entry unchanged. Record expected named034 safety refusal in health/handoff; do not remove/markhistorical011 merely to improve aggregate. Later034 may use an authenticated replay/combinedhistorical+current checker path consistent with adopted contract. A historical_only runner entry alone is exclusion, not replay.",
+        "exact_immutable_authority": {
+          "commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "path": "docs/planning/portfolio_20261002_0118.md",
+          "lines327": "Preserve011oldcapacity failures on historicalsource and bind separate repaired-current014proof",
+          "lines331_339": "Finite named amendments; every overlay requiresold/new extractedbody+validcontrolequality and substitutionnegative; declared aggregate must exercise historical evidence/current safety through authenticated roots, not omit formerlyloadbearingchecker"
+        },
+        "implementation_evidence": {
+          "011checker": "tools/check_glyph_custom_modifier_cache_characterization.py:120-125 reads/hashes ROOT current productionfiles; no historicalroot parameter",
+          "runner": "tools/run_glyph_runtime_config_validation.py:846 selects only applicabilitycurrent; historical_only would exclude011"
+        },
+        "pre034_statuses": "PREDICTED from source, not claimed executed on freshC014",
+        "direct_refusals": [
+          {
+            "checker": "custom_modifier_cache_characterization",
+            "cause": "Exact current header/cpp no longer match immutable011hashes",
+            "required034proof": "Actual historical011source replay + distinct current014runtime sanitizer proof"
+          },
+          {
+            "checker": "gp_config012_button_mask_characterization",
+            "cause": "CustomSetConfig caller hash differs; verify_current_source authenticates C020-onlycriticaltree",
+            "required034proof": "Exact capacity/guard overlay retains unchangedmake_button_maskand frozen012caller/decodehistory"
+          },
+          {
+            "checker": "setconfig_runtime_rebinding_characterization",
+            "cause": "Changed customcpp and currentC020criticaltree authentication",
+            "required034proof": "Exact014overlay and validinputbody/result equality;13cases frozen;018unmodified"
+          },
+          {
+            "checker": "Five protected034checkers",
+            "cause": "Customheader/cpp are CRITICAL; C020-only acceptedcampaigncannot authenticate fresh014",
+            "required034proof": "Exacttwo C014blobs,parent/path/mode/inventory/conformance receipt; eachnegative retainsfailclosed"
+          },
+          {
+            "checker": "gp_config010integration semantic/currentcampaign/WebSerialguard and sevenConfigurator neighbors",
+            "cause": "Shared authenticate may reject currentcriticaltree before unchanged bodyproofs, even when neighbor productionbytesunchanged",
+            "required034proof": "Authenticate exactC014candidateandacceptedtransition. Preserve010current/historicalsource/tableproof and all neighborold/currentobservationsoverlays; nohashreseal"
+          },
+          {
+            "checker": "manifest/census/health/frameworksurface",
+            "cause": "New exactfour finite proofpaths and changedentrycensus/phase",
+            "required034proof": "Root boundedentry/census/health consequences; honest expectedgate and no fullaggregatePASS claim"
+          }
+        ],
+        "source_proof_closure": [
+          "Exacttworepaired historical014blobs",
+          "All othercurrent criticalentries equalfreshB014",
+          "Tracked0.4.9.2decoder/schema hashes and extent20",
+          "Immutable011fixture/harness/schema + source baseline58eb21 independently passed8cases",
+          "Frozen012fixture/callerhistorical proof + repaired014currentruntimeproof",
+          "CurrentacceptedC020source/build/artifact/E/Ichain",
+          "010source/tablehistoricaloperands below",
+          "No018policychange or old010physicalPASSinheritance"
+        ],
+        "exact010operands_beyond_finite29": {
+          "historical_candidate": "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+          "historical_base": "28426e4ba4763a99f0ca13491c023af77665c79c",
+          "accepted_x1_candidate": "f657715b26d26587a931074ce7dd12c698785290",
+          "reviewed_canonical": "2fd9a827b90b2079f981d75e836833dc99ec7b10"
+        },
+        "minimum_offcanonical_import": "git -C <control> fetch --no-write-fetch-head --no-tags <local canonical> f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+        "complete_finite_import": "git -C <control> fetch --no-write-fetch-head --no-tags <local canonical> f4771e17430fd1ea3f1e3e5339a83dfe648290a3 28426e4ba4763a99f0ca13491c023af77665c79c f657715b26d26587a931074ce7dd12c698785290 2fd9a827b90b2079f981d75e836833dc99ec7b10",
+        "verification": "git -C <control> cat-file -e <SHA>^{commit} for allfour; fixtureexpectsf477directparent28426; verifyhistoricalpatchold/newregular100644blobs. Otherthree commonly arrive as ancestryof selectedroots; verify actualavailability rather than assume.",
+        "010historical_entry": "--historicalrequires exact1c0ff226HEAD and branchglyph/gp-config-010-current-canonical-integration; use separate exacthistoricalcheckout/branch. Running --historical on C014 is an expectedidentityfailure, not historicalproof. Currentmain still reads f477/28426/f657/2fd9.",
+        "no_mutation": "Read-only followup. Existing frozen source-specialist.json remains unchanged; no build/device/fullaggregate."
+      }
+    }
+  },
+  "gp_val034_activation": {
+    "status": "ACTIVATABLE",
+    "formal_conditions": [
+      "Strict DONE correspondence for GP-VAL-037; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
+      "GP-CONFIG-014 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-014 scope; expected full-aggregate failure does not bar candidate creation.",
+      "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
+      "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
+    ],
+    "objective_evidence": [
+      {
+        "id": "strict037DONE",
+        "result": "SATISFIED",
+        "evidence": "Authenticated strict DIRECT_ANCESTRY correspondence preserved in source-specialist; no missing completion."
+      },
+      {
+        "id": "hardwarePredecessorPASS",
+        "result": "SATISFIED",
+        "evidence": "Exact C020 F7db4f447/artifact7743fcbe/796160bytes accepted by HEP; emptygaps, strict020DONE preserved."
+      },
+      {
+        "id": "acceptedCriticalChain",
+        "result": "SATISFIED",
+        "evidence": "Existing037/043/044 closed accepted chain authenticates B; exact C020 source retained."
+      },
+      {
+        "id": "cleanCommittedC",
+        "result": "SATISFIED",
+        "evidence": "Exact clean Ca3664be5354ec4253122eb2e738e70e5dfdb9ccc with full tracked/index/HEAD byte/mode conformance."
+      },
+      {
+        "id": "liveDirectB",
+        "result": "SATISFIED",
+        "evidence": "Only direct parent 8b8e45b17a5670bbf983360faf87bdf9d6b50ce2 was live-verified at creation and again before/after publication; no replay/rebase."
+      },
+      {
+        "id": "completeInventory",
+        "result": "SATISFIED",
+        "evidence": "Recursive raw-z1558bytesSHA256c40d8aadf736832b52a746455d940b29296522c281f49b3ab314e3d22c1d11aa; exacttenpaths, all newmode100644."
+      },
+      {
+        "id": "independentConformance",
+        "result": "SATISFIED",
+        "evidence": "Separate source specialist and fresh independent reviewer approve exact adopted two blobs and full host proof, source/build-role conformance only; no build claimed."
+      },
+      {
+        "id": "generatedExtent",
+        "result": "SATISFIED",
+        "evidence": "Authenticated current0.4.9.2 generated modifier extent20 unchanged; extent19/21 negative compilation proves static equality."
+      },
+      {
+        "id": "otherCriticalExact",
+        "result": "SATISFIED",
+        "evidence": "236entries; exactlytwoapproved production deltas; all other critical bytes/modes equal B."
+      },
+      {
+        "id": "dependencyAnnex",
+        "result": "SATISFIED",
+        "evidence": "55row immutable annex and named finite authenticated predecessor metadata/source progressions verified; schema/default/decoder/domain36 preserved."
+      },
+      {
+        "id": "noExpansionOrFailure",
+        "result": "SATISFIED",
+        "evidence": "No new policy/product/source authority, forbidden capability, pending hardware failure or invalid acceptance; separate018 untouched."
+      },
+      {
+        "id": "cleanObjectClosure",
+        "result": "SATISFIED",
+        "evidence": "All33finite roots locally present; no missingobjects, dirty/staged/untracked/ignoredcritical inputs. Candidate host proof and focused freeze MATCH."
+      }
+    ],
+    "new_judgment_required": false,
+    "invalidation_present": false,
+    "execute034_in_this_invocation": false
+  },
+  "hardware": {
+    "status": "PENDING_NAMED_034_THEN_BUILD_CUSTODY_REVIEW_PHYSICAL_PASS",
+    "build": "NOT_RUN",
+    "artifact": null,
+    "result": null,
+    "predecessor020_acceptance": "UNCHANGED",
+    "nunchuk": "NOT_TESTED",
+    "root_cause": "UNPROVEN"
+  },
+  "gate_waivers": false,
+  "full_aggregate_pass_claimed": false,
+  "other95_orders_unchanged": true,
+  "paused040_kbd_unchanged": true,
+  "next_daemon_action": "Dispatch GP-VAL-034 immediately under existing bounded authority; authenticate exact published C014 and close named actual gates. Do not rebuild/retest C020, execute another order, resume paused040/KBD or build/integrate014 before034 DONE.",
+  "transport": {
+    "ack_delivery": "CROSS_THREAD_MESSAGE_REJECTED",
+    "fallback": "durable canonical receipt and /private/tmp/glyph-config014/worker-result.json readback",
+    "retry_rejected_message": false
+  }
+}
+```
+<!-- gp-config014-handoff:end -->
