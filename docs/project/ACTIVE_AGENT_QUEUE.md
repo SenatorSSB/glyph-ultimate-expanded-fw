@@ -78,7 +78,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "resolution": null,
     "provenance": {
       "opened_by_role": "Glyph Implementation Supervisor",
-      "opening_reference": "git-json:13fa7120315bcff65482481fd7def8255b8ee2c5:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "opening_reference": "git-json:12cad41ee8157010c512e4772ff62ffdb68771e6:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
         "GP-VAL-041"
       ],
