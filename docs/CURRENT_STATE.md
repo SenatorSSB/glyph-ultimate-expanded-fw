@@ -85,25 +85,21 @@ historical completion prose below does not authorize implementation.
 ## Forward Direction
 
 - Next docs/tools direction: source-owned realization generator hardening.
-- Current docs/checker queue includes activation-alternatives and
-  source-owned table symbol-map claim-invariant hardening.
-- Next safe queue: keep coordinate-native offline pipeline, bundle manifest,
-  and export-package checks aligned with their fixtures.
+- Current docs/checker queue includes activation-alternatives and source-owned table symbol-map claim-invariant hardening.
+- Next safe queue: keep coordinate-native offline pipeline, bundle manifest, and export-package checks aligned with their fixtures.
 - Future X1 values or other table ownership require separate explicit authority; a behavior-changing candidate must also pass the exact-candidate hardware lifecycle.
 - Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 - Offline dry-run evaluator: `tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed positive and negative cases under `docs/runtime_config/fixtures/`.
 - Browser/protobuf/persistence as future infrastructure is likely solvable, but it follows the runtime model and does not define the canonical profile.
-- The neutral app-owned profile remains canonical; firmware remains a
-  deterministic coordinate-output backend and must not own game semantics.
+- The neutral app-owned profile remains canonical; firmware remains a deterministic coordinate-output backend and must not own game semantics.
 
 ## Readiness
 
 - Ready for docs/tools and checker work: yes.
 - Ready for coordinate-native negative-corpus, positive-corpus, and validator follow-up work: yes,
   including deterministic selection semantics and offline dry-run fixtures.
-- Ready for source-owned generator/evaluator design: yes, when source-backed and
-  scoped outside active firmware behavior.
+- Ready for source-owned generator/evaluator design: yes, when source-backed and scoped outside active firmware behavior.
 - Candidate-generation diff diagnosis is documented and executable; the current
   classification is `TABLE_CONTENT_DIFFERENT`, so this remains hardware-candidate
   material rather than a canonicalization-only branch.
