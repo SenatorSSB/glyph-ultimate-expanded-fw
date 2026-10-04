@@ -1,5 +1,7 @@
 # Active Agent Queue
 
+C020 source-free hardware evidence records exact owner-reported GP_CONFIG_020_HW_V1 PASS with empty gaps at F `7db4f447d5e796367071b7143fa6c9274c70ae5e`, tree `4b5b63ce56219a508e2b71745438a609dd5661c3`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500` (796160 bytes). Evidence: `repo-json:docs/calibration/fixtures/gp_config_020_hardware_evidence.json`; result: `docs/calibration/gp_config_020_hardware_result.md`. Fresh independent HEP/Sol review and focused blocking proof under GLYPH-UD-027 apply to this new source-free E descendant of strict GP-VAL-044 DONE `a1f995251809bec519df06dba37e6ec8c78ab767`; the earlier unapproved draft remains historical, unchanged and unapproved. Baseline critical source remains unchanged, F is not integrated, and both accepted source catalogs remain empty. H1-H5/H7-H10 are PASS; H6 is independently Config-backed NOT_APPLICABLE (Ultimate42remaps, no omitted/zero activates). About version7db4f44 matches F; GC on docked Switch with Official MOD.WUP-028 adapter and owner-reported Mac XInput passed. Pre/post persisted Config raw payloads are exactly equal:4201bytes, SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480; restoration roundtrip/dry-run/required-binding guard PASS; no restoration write or rollback. Physical invalid-binding submission remains HOST_ONLY/NOT_TESTED, Nunchuk NOT_TESTED, root cause UNPROVEN. No rebuild, device action or physical retest. Preserved aggregate FAIL/incomplete remains nonblocking framework debt absent a concrete safety contradiction; no full aggregate PASS is claimed. Separate independently reviewed exact tested C020 source integration I and strict DONE remain required after this E; paused040/KBD remains paused.
+
 Status label: CURRENT.
 
 This is the only canonical executable work queue for the Glyph repository.
@@ -14,7 +16,7 @@ Git, but it is not current candidate supply or implementation authority.
 
 ## Current C020 Evidence-Phase Repair Authority
 
-GP-VAL-043 is DONE through reviewed source-free integration `774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718` and later strict completion correspondence. Repaired C020 is HARDWARE_TEST_REQUIRED at exact built F_R `7db4f447d5e796367071b7143fa6c9274c70ae5e`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`, 796160 bytes, with source-free protocol `GP_CONFIG_020_HW_V1` and preserved owner-held custody. The full Mk6 build, resolved 21-role decoder closure and independent exact-source/build/artifact/protocol review passed. The first isolated 46-check aggregate had a canonical-fingerprint mutation FAIL of unknown cause; its bounded repeat passed 46/46 with MATCH and an unchanged before/after repository snapshot. The candidate is unmerged. Complete exact human evidence and independent processor/reviewer PASS are preserved locally. GP-VAL-044 repairs the E/I validation conflict under GLYPH-UD-027; separate resumed HEP evidence publication and then tested source integration remain required; original GP-VAL-037 and GP-VAL-043 DONE histories remain intact.
+GP-VAL-043 is DONE through reviewed source-free integration `774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718` and later strict completion correspondence. Repaired At the historical F_R handoff, C020 was HARDWARE_TEST_REQUIRED at exact built F_R `7db4f447d5e796367071b7143fa6c9274c70ae5e`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`, 796160 bytes, with source-free protocol `GP_CONFIG_020_HW_V1` and preserved owner-held custody. The full Mk6 build, resolved 21-role decoder closure and independent exact-source/build/artifact/protocol review passed. The first isolated 46-check aggregate had a canonical-fingerprint mutation FAIL of unknown cause; its bounded repeat passed 46/46 with MATCH and an unchanged before/after repository snapshot. The candidate is unmerged. Complete exact human evidence and independent processor/reviewer PASS are preserved locally. GP-VAL-044 repaired the E/I validation conflict under GLYPH-UD-027; the new independent HEP records source-free PASS, and separate tested source integration remains required; original GP-VAL-037 and GP-VAL-043 DONE histories remain intact.
 
 GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7752c78838be6f1d48b56932d90b9`; its original candidate contract, receipts, runner-entry judgment and all historical evidence remain intact. Its resolved event provenance below records that earlier judgment, not a new pending event. The original C020 candidate and failed actual F remain preserved and unmerged. The failed build produced no UF2 or physical result. Corrected immutable1256 packet and same-base Curator receipt authorize only a new bounded representation/proof repair attempt and the separate finite GP-VAL-043 successor. No product/domain/schema/ABI/buildflag change is authorized. The machine-derived queue and mirrors define executability. New C_R must receive both host ABI proofs, postcommit actual-target diagnostic object proof and fresh independent source review before043 activation. No full firmware link/UF2 until043 strict DONE; exact built F_R/artifact custody, review and processor-accepted human hardware PASS with empty gaps precede source integration. KBD/040/019 and every94 unrelated order remain unchanged. No implementation, build, device, hardware acceptance or public release occurs in this curation.
 
@@ -102,14 +104,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 12,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 1,
+    "hardware_pending": 0,
     "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
-    "HARDWARE_TEST_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -200,7 +201,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-020",
       "title": "Actual-binding rejection: target ABI repair",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "HARDWARE_VALIDATED",
       "branch": "codex/gp-config-020-repaired-built-f",
       "objective": "Repair the false four-byte Button representation assertions without changing complete-object validation, named domain, enum/schema/build flags or SetConfig transaction semantics; create a new exact reviewed H3 candidate.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -249,17 +250,15 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": false,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": "7db4f447d5e796367071b7143fa6c9274c70ae5e",
       "candidate_base_configurator_sha": "de36d24422a67e8be7992217856c76e8420a71f6",
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/7db4f447d5e796367071b7143fa6c9274c70ae5e/7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500/firmware.uf2",
       "firmware_artifact_sha256": "7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
-      "hardware_evidence_gaps": [
-        "Exact human GP_CONFIG_020_HW_V1 physical observations and independent Hardware Evidence Processor PASS are pending."
-      ]
+      "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_config_020_hardware_evidence.json",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": []
     },
     {
       "id": "GP-VAL-036",
@@ -7797,11 +7796,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 12; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -9378,4 +9377,4 @@ This immutable source-free review records the separately reported finite E/I def
 ```
 <!-- c020-processor-curation:end -->
 
-Canonical firmware source is unchanged. Complete exact human GP_CONFIG_020_HW_V1 evidence and independent processor/reviewer PASS are preserved in unapproved source-free draft `84e999693c5ef058c3a116c1632baa818add6ddb`; the original draft publication failed because its guard demanded I at required preintegration E. The earlier synthetic phase test omitted standalone E; GP-VAL-044 directly tests that checkpoint. GP-VAL-044 is DONE through reviewed source-free integration `6823da0c8219dc93a404906fe1be3aaeeb3736d5` and later strict completion correspondence under direct owner GLYPH-UD-027. Exact original implementation `d6fbbbf083c385d7cdfa82627ea2184bb9ded19e` and supplemental reviewed implementation `9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1` authenticate SOURCE_FREE_PROCESSOR E separately from accepted source I. Standalone E, E descendant, synthetic I and accepted descendant each passed all fifteen actual consumers; focused negatives, relevant history/correspondence and frozen snapshots passed. New exact committed owner-record allowance passed baseline/E/I direct regressions. Current integration consumers passed in an exact independent committed checkout with full native fingerprint MATCH; original tracked/index/ref/byte snapshot MATCH, but original full native fingerprint is UNAVAILABLE due to a pre-existing ignored TinyUSB dependency directory (untouched). Full phase aggregates are not claimed complete: original nested-preflight FAIL, bounded 300-second timeout/incomplete and later 307.80-second 45/46 diagnostic FAIL remain nonblocking FRAMEWORK_VALIDATION_DEBT under Revision-3, with unknown cause, not PASS. Recursive validation cost, duplicated topology, validator coupling, repeated Git-object proof and ignored-directory enumeration remain debt; production 300/120 limits and otherwise deferred GP-VAL-011 are unchanged. Synthetic fixtures confer no human acceptance. Separate HEP must now resume preserved complete physical observations with no physical retest or rebuild, independently classify exact C020 F/artifact/protocol/rows/gaps and publish source-free E; only then separate tested C020 source integration and strict DONE may follow. Canonical C020 remains HARDWARE_TEST_REQUIRED with unchanged identity/result/gaps; no hardware PASS, source integration or C020 DONE is published by044. Old failed evidence draft and reports remain immutable;037/043 DONE and all96 other orders are preserved. Paused040/KBD stay paused; Nunchuk remains NOT_TESTED and root cause remains unproven. Broad Revision-3 control-plane simplification is deferred until C020 DONE. The queue/markers define executability. After reviewed source-free044 integration and strict DONE, separate HEP resumes the preserved exact evidence on fresh canonical and publishes validated source-free E; only then separate C020 source integration may publish I/catalog and strict DONE. No physical retest or rebuilt artifact is requested. Canonical020 hardware-pending identity/result fields stay exact;037/043 DONE, all96 prior orders, owner directions and paused040/KBD remain preserved.
+Canonical firmware source is unchanged. Complete exact human GP_CONFIG_020_HW_V1 evidence and independent processor/reviewer PASS are preserved in unapproved source-free draft `84e999693c5ef058c3a116c1632baa818add6ddb`; the original draft publication failed because its guard demanded I at required preintegration E. The earlier synthetic phase test omitted standalone E; GP-VAL-044 directly tests that checkpoint. GP-VAL-044 is DONE through reviewed source-free integration `6823da0c8219dc93a404906fe1be3aaeeb3736d5` and later strict completion correspondence under direct owner GLYPH-UD-027. Exact original implementation `d6fbbbf083c385d7cdfa82627ea2184bb9ded19e` and supplemental reviewed implementation `9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1` authenticate SOURCE_FREE_PROCESSOR E separately from accepted source I. Standalone E, E descendant, synthetic I and accepted descendant each passed all fifteen actual consumers; focused negatives, relevant history/correspondence and frozen snapshots passed. New exact committed owner-record allowance passed baseline/E/I direct regressions. Current integration consumers passed in an exact independent committed checkout with full native fingerprint MATCH; original tracked/index/ref/byte snapshot MATCH, but original full native fingerprint is UNAVAILABLE due to a pre-existing ignored TinyUSB dependency directory (untouched). Full phase aggregates are not claimed complete: original nested-preflight FAIL, bounded 300-second timeout/incomplete and later 307.80-second 45/46 diagnostic FAIL remain nonblocking FRAMEWORK_VALIDATION_DEBT under Revision-3, with unknown cause, not PASS. Recursive validation cost, duplicated topology, validator coupling, repeated Git-object proof and ignored-directory enumeration remain debt; production 300/120 limits and otherwise deferred GP-VAL-011 are unchanged. Synthetic fixtures confer no human acceptance. Separate HEP must now resume preserved complete physical observations with no physical retest or rebuild, independently classify exact C020 F/artifact/protocol/rows/gaps and publish source-free E; only then separate tested C020 source integration and strict DONE may follow. At044 completion, canonical C020 remained HARDWARE_TEST_REQUIRED with unchanged identity/result/gaps; no hardware PASS, source integration or C020 DONE was published by044. Old failed evidence draft and reports remain immutable;037/043 DONE and all96 other orders are preserved. Paused040/KBD stay paused; Nunchuk remains NOT_TESTED and root cause remains unproven. Broad Revision-3 control-plane simplification is deferred until C020 DONE. The queue/markers define executability. After reviewed source-free044 integration and strict DONE, separate HEP resumes the preserved exact evidence on fresh canonical and publishes validated source-free E; only then separate C020 source integration may publish I/catalog and strict DONE. No physical retest or rebuilt artifact is requested. At044 completion, canonical020 hardware-pending identity/result fields stayed exact;037/043 DONE, all96 prior orders, owner directions and paused040/KBD remain preserved.

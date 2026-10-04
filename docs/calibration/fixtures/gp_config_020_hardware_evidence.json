@@ -1,0 +1,114 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-020",
+  "candidate_branch": "codex/gp-config-020-repaired-built-f",
+  "candidate_git_sha": "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+  "candidate_base_configurator_sha": "de36d24422a67e8be7992217856c76e8420a71f6",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/7db4f447d5e796367071b7143fa6c9274c70ae5e/7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6 (model Glyph; revision Mk6; About screen device glyph_mk6)",
+  "firmware_profile_state": "Owner-installed exact preserved C020 UF2; Ultimate throughout; About Firmware Glyph HayBox, Version 7db4f44, Device glyph_mk6. Full Git SHA unavailable on existing device screen; exact full F/artifact pair bound by verified custody and owner installation report.",
+  "update_method": "Project owner entered existing update mode and manually copied the verified preserved firmware.uf2 to RPI-RP2. No agent flashing or device-write automation.",
+  "host_platform_adapter": "GameCube backend on docked Nintendo Switch through Official Nintendo GameCube Adapter MOD.WUP-028: Glyph USB-C -> GameCube cable end -> adapter -> Switch dock USB-A. USB gameplay on this Mac with XInput. Host/backend/adapter are owner reports; no platform-wide compatibility claim.",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_020_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_020_HW_V1",
+  "preconditions": [
+    "Human evidence: final consolidated HARDWARE_OBSERVATIONS_FOR_PROCESSOR directly posted by project owner to daemon chat 01a0fcbd-2b4c-7d31-9088-42a22e260b57, user message 01a102f8-96bf-7ec3-a0e2-d5b9fe49b4a7; original observations/captures in operator chat 01a102c8-e3ce-77b2-a776-7776b8283cf0. Supplemental metadata fills initial unreported fields; older omissions are not contradictory observations. Processor and reviewer did not perform controller testing.",
+    "Source-free independently reviewed build/custody/protocol handoff R=040735f6916c7a77924ef53f1b4a873281f2cb7f precedes this source-free processor evidence E. F sole parent de36d24422a67e8be7992217856c76e8420a71f6, tree 4b5b63ce56219a508e2b71745438a609dd5661c3. Queue base field is the composition parent; source-free build starting canonical ea55cb4a284bfde3812bedccb70c380a6b85d48e. F, exact preserved bytes and frozen protocol SHA-256 ca6914ea8526e871760c7033a0b3df5aa1e07ba7e4c266cfbaa0aae5193a3421 are unchanged; no rebuild.",
+    "Pre-test capture local_backups/gp-config-020-hw-20261003T172806Z/pre-test-backup.json generatedAtUtc 2026-10-03T17:28:52.442906+00:00; preservation session began 2026-10-03T17:28:06Z. tested_at records session start, not an invented exact time for every physical row.",
+    "Pre-test Config raw payload 4201 bytes, SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480. Extracted local_backups/gp-config-020-hw-20261003T172806Z/pre-test-config-restoration.json equals the captured config object; independent native decode/re-encode is byte-exact; offline dry-run and required-binding guard PASS without opening serial. GET_CONFIG captures persisted bytes, not live RAM.",
+    "Actual pre-update native custody output in operator command exec-4a00548b-60f3-4f6f-9b56-baf6e513111b: PRE_HANDOFF_VERIFIED, exact F/hash/locator, size 796160. This precedes owner flashed report 01a102d5-14ab-7f61-ab69-5ffa9f0b948b and manual-copy report 01a102d8-2580-7761-92e1-b77fe265fbb2. Processor re-read preserved regular non-symlink 0444 file and independently matched size/hash; later verification is not substituted for pre-update custody.",
+    "Accepted rollback custody was verified before update in operator command exec-f43caae4-7e42-44fd-af3e-2fd845f45e72: F010 1c0ff22646729d26d45eacb4b8322c5baea7de48, UF2 SHA-256 4312f6a64fd1009e231aab2015e3ce67f862abd88a8ea31cd545db0e91e27476, 791552 bytes. No rollback performed.",
+    "Supplemental About observation user message 01a102f0-2435-73f1-aecf-21b107c76818 matches candidate short identity 7db4f44. Candidate config/glyph/common/src/display/AboutMenu.cpp displays FIRMWARE_VERSION and builder_scripts/arduino_pico.py derives short Git HEAD. GC adapter report 01a102f3-9d5d-73c3-8057-1c1ef7598af9 and backend report 01a102f5-2958-7b92-9777-14a1640bfa2b supply context."
+  ],
+  "steps": [
+    {
+      "id": "Baseline",
+      "instruction": "Connect existing accepted firmware in normal gameplay mode before changing firmware or Config.",
+      "expected": "Normal dashboard and ordinary connection without anomaly.",
+      "observed": "PASS, owner-reported: connected to this Mac through normal USB, neither flash nor Configurator mode; all normal as the last time. Host enumerated Raspberry Pi Pico USB; no anomaly."
+    },
+    {
+      "id": "H1",
+      "instruction": "After owner manual update from the verified preserved UF2, connect in normal GameCube mode.",
+      "expected": "Clean startup, normal dashboard/profile, stable connection and device short firmware identity matching F.",
+      "observed": "PASS, owner-reported: all good on those; clean GameCube startup, stable Ultimate profile. Supplemental existing About screen: Firmware Glyph HayBox; Version 7db4f44; Device glyph_mk6. Short identity matches F; full SHA is unavailable on this screen."
+    },
+    {
+      "id": "H2",
+      "instruction": "Press the existing Left horizontal binding, then release.",
+      "expected": "Accepted horizontal output; return to neutral without stuck input.",
+      "observed": "PASS, owner-reported: Left X=-67; back to 0, and nothing stuck."
+    },
+    {
+      "id": "H3",
+      "instruction": "Press the existing Up vertical binding, then release.",
+      "expected": "Accepted vertical output; return to neutral without stuck input.",
+      "observed": "PASS, owner-reported: Up Y=77 as expected; releasing put it back to 0 and nothing is stuck. Owner also reported expected Right, Down and diagonals."
+    },
+    {
+      "id": "H4",
+      "instruction": "Press the existing A face-button binding, then release.",
+      "expected": "A appears and registers; clean release.",
+      "observed": "PASS, owner-reported: miniscreen showed A and game registered A. Owner explicitly confirmed release and stated all buttons are released at the end; consolidated human report confirms clean release."
+    },
+    {
+      "id": "H5",
+      "instruction": "Exercise existing LT5/X1 modifier across nine directions, then release all inputs.",
+      "expected": "Established modifier mapping/profile output preserved, with clean release.",
+      "observed": "PASS, owner-reported: LT5 (X1 modifier) gave the expected [35,77] offset table to the nine directions. Owner explicitly stated inputs are always released; consolidated human report confirms clean release."
+    },
+    {
+      "id": "H6",
+      "instruction": "Exercise an existing remap-disable binding if present in the preserved Ultimate Config.",
+      "expected": "Existing disabled operation stays disabled; if absent, Config-supported NOT_APPLICABLE.",
+      "observed": "NOT_APPLICABLE: fresh pre-test Ultimate Config independently decoded and inspected: 42 remaps, zero omitted activates, zero BTN_UNSPECIFIED/zero activates. No remap-disable binding in the tested Ultimate profile; no temporary binding invented. Other profiles are outside this row."
+    },
+    {
+      "id": "H7",
+      "instruction": "Disconnect and reconnect, then repeat ordinary controls and check profile/neutral.",
+      "expected": "Clean startup, stable dashboard/profile, unchanged ordinary controls and neutral.",
+      "observed": "PASS, owner-reported: did that and repeated all previous tests, still identical; explicitly tested all of them with the same results as the previous power cycle. Stable Ultimate profile and neutral confirmed in consolidated human report."
+    },
+    {
+      "id": "H8",
+      "instruction": "Reboot using the existing owner-controlled method.",
+      "expected": "Accepted profile and ordinary bindings return without stuck input or connection failure.",
+      "observed": "PASS, owner-reported: already doing that for the past two power cycles, all normal. Consolidated report confirms accepted profile/bindings with no stuck input or disconnection."
+    },
+    {
+      "id": "H9",
+      "instruction": "Connect in ordinary Mac USB gameplay context and exercise existing Left and A bindings with releases.",
+      "expected": "Stable connection, established direction and A output, clean releases; actual host/backend recorded.",
+      "observed": "PASS, owner-reported: this Mac, XInput; redid previous tests, all identical, all good. Owner explicitly confirmed all prior tests were repeated; Left X=-67 to 0 and A registration/release identical. Backend identity is owner-reported, not device-reported; no other platform claim."
+    },
+    {
+      "id": "H10",
+      "instruction": "Capture persisted Config again in Configurator mode and compare complete raw payload.",
+      "expected": "Post-test raw Config exactly equals pre-test backup.",
+      "observed": "PASS: operator read-only GET_CONFIG capture at 2026-10-03T17:51:49.285092+00:00; independently compared pre/post raw bytes: 4201 bytes each, SHA-256 f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480, exact equality. No Config write/restoration/rollback required."
+    }
+  ],
+  "negative_regression_checks": [
+    "Valid existing Left, Up, A and LT5/X1 mappings and releases preserved in the reported Ultimate GC/USB contexts; H6 is Config-backed NOT_APPLICABLE.",
+    "Physical invalid-binding submission: NOT_TESTED / HOST_ONLY; physical rejection UNKNOWN. Host decoder/validator/handler evidence is separate and never physical PASS.",
+    "Nunchuk: NOT_TESTED. Stored-load acceptance, RGB, other profiles/platforms and release-wide safety excluded; root cause remains UNPROVEN."
+  ],
+  "power_cycle_reconnect_checks": [
+    "H7 owner-reported reconnect repeated all prior controls identically, stable profile and neutral.",
+    "H8 owner-reported two power cycles all normal. H9 USB repeat passed.",
+    "H10 fresh persisted readback after those cycles exactly matched pre-test raw bytes; no Config restoration write required. Final owner report: Ultimate normal GameCube gameplay and all prior tests working identically."
+  ],
+  "result": "PASS",
+  "anomalies": [],
+  "rollback_recovery": "No Config write, restoration write or rollback needed. Complete post-test raw persisted Config equals pre-test 4201 bytes/hash exactly. Existing rollback artifact was available and verified. Final state: exact C020 firmware, unchanged Config, Ultimate, normal GC gameplay on Switch/official adapter; ordinary Mac XInput tests passed.",
+  "tester": "Project owner (human-supplied observations; independent Hardware Evidence Processor validation)",
+  "tested_at": "2026-10-03T17:28:06Z",
+  "evidence_gaps": []
+}
