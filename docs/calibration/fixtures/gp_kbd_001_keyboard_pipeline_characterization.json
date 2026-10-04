@@ -1,0 +1,266 @@
+{
+  "schema_name": "glyph_gp_kbd_001_keyboard_pipeline",
+  "schema_version": 1,
+  "base": "328c6a1bfb09eb035c2065d0de080283307f34d6",
+  "authority": "d9ad6132ca0912398839673cc0da24e54a924210",
+  "sources": {
+    "HAL/pico/src/core/KeyboardMode.cpp": {
+      "git_blob": "a14f01d030dad62305fc0accdc07d224c61eefcf",
+      "sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d",
+      "mode": "100644"
+    },
+    "src/modes/CustomKeyboardMode.cpp": {
+      "git_blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def",
+      "mode": "100644"
+    },
+    "src/core/InputMode.cpp": {
+      "git_blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+      "mode": "100644"
+    },
+    "src/core/socd.cpp": {
+      "git_blob": "81a0d53fae96305c07d5943f4785b33b02ca1949",
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+      "mode": "100644"
+    },
+    "HAL/pico/include/core/KeyboardMode.hpp": {
+      "git_blob": "81ad10d78f86da84fd8b1e51fb3857a463014f1e",
+      "sha256": "6bc35650a119ec942e26015dcb36361ffb284e0f8221134ccd5776ebdfb7a7b5",
+      "mode": "100644"
+    },
+    "include/modes/CustomKeyboardMode.hpp": {
+      "git_blob": "79a2725ca7703dfdabbd1c186d197e2250122c86",
+      "sha256": "c907de266f4ebeea8518511cf725c57bf52c85c0c9827f25cc2a7d20381f9464",
+      "mode": "100644"
+    },
+    "include/core/InputMode.hpp": {
+      "git_blob": "02f3cfd54c47cf2b8f4587a2d519d0682240eec4",
+      "sha256": "dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee",
+      "mode": "100644"
+    },
+    "include/core/socd.hpp": {
+      "git_blob": "5d912b274ba54fde5e07a575cf9bec84da07c9bb",
+      "sha256": "88ff9be552e89f0c92a1548662fc4bf9b6fd4408b242f6f42bec8ecf70e6fc91",
+      "mode": "100644"
+    },
+    "include/core/state.hpp": {
+      "git_blob": "ff3aa94df61fd6a41448799fa1d6f508c41ecd0f",
+      "sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3",
+      "mode": "100644"
+    },
+    "HAL/pico/include/util/state_util.hpp": {
+      "git_blob": "40b8aeb9c4db3268696c49f20b3278efabc7688c",
+      "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81",
+      "mode": "100644"
+    },
+    "HAL/pico/include/stdlib.hpp": {
+      "git_blob": "6bc7bc5ee7f56de07116608399af228314dab004",
+      "sha256": "676ecc6f5a9b333bf2c55a9df11ddf037a83fe217788c17f887fae4851ea90bc",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/glyph_overrides.hpp": {
+      "git_blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+      "sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/display/GlyphConfigMenu.cpp": {
+      "git_blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+      "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0",
+      "mode": "100644"
+    },
+    "HAL/pico/src/display/DefaultConfigMenu.cpp": {
+      "git_blob": "bf855a584b3e859083d98a1aa49a38daee9204f5",
+      "sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/backend_init.cpp": {
+      "git_blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+      "sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea",
+      "mode": "100644"
+    },
+    "src/core/mode_selection.cpp": {
+      "git_blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+      "sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/config.cpp": {
+      "git_blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5",
+      "mode": "100644"
+    },
+    "platformio.ini": {
+      "git_blob": "4d56f8630c1b12e84cd12f40ce05a4dc71b9362e",
+      "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9",
+      "mode": "100644"
+    },
+    "config/glyph/env.ini": {
+      "git_blob": "fac4e20461ad632ca1d65826241a4a9c73630f04",
+      "sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf",
+      "mode": "100644"
+    },
+    "builder_scripts/arduino_pico.py": {
+      "git_blob": "35381a91ad5aa4ffdbcd362365c1bf9fbd13136e",
+      "sha256": "676b20e42500cb0b5f671892250a2c063e21a31459ed542ad48a9481a7fce0af",
+      "mode": "100644"
+    },
+    "tools/glyph_tracked_worktree_integrity.py": {
+      "git_blob": "f653b4619ee0ce8a8c35d972fa591545522c0be7",
+      "sha256": "604bea90c4b3cb2cbb0fdf023918da7ba45d1be7d128c2b40050e09e5a220fc7",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.h": {
+      "git_blob": "01d0dda2ae768dd0f18c0f338a74c55e613bb199",
+      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb.h": {
+      "git_blob": "3f181d873a81d82c27c56874f6a63328f38eaaf3",
+      "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/schema/config.proto": {
+      "git_blob": "a58a2bf4dd827ad92482f1ac30c3d56bbea93c05",
+      "sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/schema/config.options": {
+      "git_blob": "7175d8463ade5b0cd45f1a5f8f99be44f5719c3c",
+      "sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/include/Arduino.h": {
+      "git_blob": "7a3d1de2a3400cb7ee45750c25491e9b434f2608",
+      "sha256": "70de967f79f47db90cb5864847e129e4d6c322dcfa08338cd31ddf601354dc20",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/include/pico/stdlib.h": {
+      "git_blob": "9bf1084ddd04162e6b0fe39f56f52b6d46cbd1c9",
+      "sha256": "0990f6f853b296816a654c1a4d4ccd8593bc819a1d591af8f01ab238926c41d4",
+      "mode": "100644"
+    },
+    "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json": {
+      "git_blob": "25d32a1fc1cc9c39626eadd4dca4835103579d80",
+      "sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+      "mode": "100644"
+    }
+  },
+  "host_assets": {
+    "tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp": "c3423bb79fec9dc1b5a221e74e44ce04488fb7aceff86360e2aa4f302f36e9cf",
+    "tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp": "6c6701107f94b540a3819de3f5207f37b7bb5f26cb95ebcb92381f1056c1b0b7"
+  },
+  "observations": [
+    "idle:0:0:0:",
+    "plain_0:1:1:1:1,",
+    "plain_0_release:0:0:0:",
+    "plain_1:2:2:2:2,",
+    "plain_1_release:0:0:0:",
+    "plain_2:4:4:4:3,",
+    "plain_2_release:0:0:0:",
+    "plain_3:8:8:8:4,",
+    "plain_3_release:0:0:0:",
+    "plain_4:16:16:16:5,",
+    "plain_4_release:0:0:0:",
+    "plain_5:32:32:32:6,",
+    "plain_5_release:0:0:0:",
+    "plain_6:64:64:64:7,",
+    "plain_6_release:0:0:0:",
+    "plain_7:128:128:128:8,",
+    "plain_7_release:0:0:0:",
+    "plain_8:4294967296:4294967296:4294967296:9,",
+    "plain_8_release:0:0:0:",
+    "plain_9:8589934592:8589934592:8589934592:10,",
+    "plain_9_release:0:0:0:",
+    "plain_10:17179869184:17179869184:17179869184:11,",
+    "plain_10_release:0:0:0:",
+    "plain_11:34359738368:34359738368:34359738368:12,",
+    "plain_11_release:0:0:0:",
+    "plain_12:68719476736:68719476736:68719476736:13,",
+    "plain_12_release:0:0:0:",
+    "plain_13:137438953472:137438953472:137438953472:14,",
+    "plain_13_release:0:0:0:",
+    "plain_14:65536:65536:65536:15,",
+    "plain_14_release:0:0:0:",
+    "plain_15:131072:131072:131072:16,",
+    "plain_15_release:0:0:0:",
+    "plain_16:262144:262144:262144:17,",
+    "plain_16_release:0:0:0:",
+    "plain_17:524288:524288:524288:18,",
+    "plain_17_release:0:0:0:",
+    "plain_18:1048576:1048576:1048576:19,",
+    "plain_18_release:0:0:0:",
+    "plain_19:2097152:2097152:2097152:20,",
+    "plain_19_release:0:0:0:",
+    "plain_20:4194304:4194304:4194304:21,",
+    "plain_20_release:0:0:0:",
+    "plain_21:8388608:8388608:8388608:22,",
+    "plain_21_release:0:0:0:",
+    "plain_22:16777216:16777216:16777216:23,",
+    "plain_22_release:0:0:0:",
+    "plain_23:33554432:33554432:33554432:24,",
+    "plain_23_release:0:0:0:",
+    "plain_24:67108864:67108864:67108864:25,",
+    "plain_24_release:0:0:0:",
+    "plain_25:134217728:134217728:134217728:26,",
+    "plain_25_release:0:0:0:",
+    "plain_26:268435456:268435456:268435456:27,",
+    "plain_26_release:0:0:0:",
+    "plain_27:536870912:536870912:536870912:28,",
+    "plain_27_release:0:0:0:",
+    "plain_28:1073741824:1073741824:1073741824:29,",
+    "plain_28_release:0:0:0:",
+    "plain_29:2147483648:2147483648:2147483648:30,",
+    "plain_29_release:0:0:0:",
+    "plain_30:1099511627776:1099511627776:1099511627776:31,",
+    "plain_30_release:0:0:0:",
+    "plain_31:2199023255552:2199023255552:2199023255552:32,",
+    "plain_31_release:0:0:0:",
+    "plain_32:4398046511104:4398046511104:4398046511104:33,",
+    "plain_32_release:0:0:0:",
+    "plain_33:8796093022208:8796093022208:8796093022208:34,",
+    "plain_33_release:0:0:0:",
+    "plain_34:17592186044416:17592186044416:17592186044416:35,",
+    "plain_34_release:0:0:0:",
+    "socd_0_simultaneous:5:5:0:1,3,",
+    "socd_0_first:4:4:4:3,",
+    "socd_0_second:5:5:1:1,3,",
+    "socd_0_release_second:4:4:4:3,",
+    "socd_0_reverse_first:1:1:1:1,",
+    "socd_0_reverse_second:5:5:4:1,3,",
+    "socd_0_release:0:0:0:",
+    "socd_1_simultaneous:8800387989504:8800387989504:0:9,34,",
+    "socd_1_first:4294967296:4294967296:4294967296:9,",
+    "socd_1_second:8800387989504:8800387989504:8796093022208:9,34,",
+    "socd_1_release_second:4294967296:4294967296:4294967296:9,",
+    "socd_1_reverse_first:8796093022208:8796093022208:8796093022208:34,",
+    "socd_1_reverse_second:8800387989504:8800387989504:4294967296:9,34,",
+    "socd_1_release:0:0:0:",
+    "default_unmap_49:281474976710656:0:0:",
+    "default_unmap_50:562949953421312:0:0:",
+    "default_unmap_51:1125899906842624:0:0:",
+    "default_unmap_52:2251799813685248:0:0:",
+    "default_unmap_53:4503599627370496:0:0:",
+    "default_unmap_54:9007199254740992:0:0:",
+    "default_mb7_outside_count:18014398509481984:18014398509481984:18014398509481984:",
+    "remap_plain:65536:4:4:15,",
+    "remap_socd_second:65537:5:1:1,15,",
+    "remap_release:0:0:0:",
+    "unmap_mapped_key:65536:0:0:15,",
+    "both_pairs_simultaneous:8800387989509:8800387989509:0:1,3,9,34,",
+    "duplicate_physical_first_wins:65536:2:2:15,",
+    "shared_target_first_only:65536:2:2:15,",
+    "shared_target_second_only:131072:2:2:16,",
+    "shared_target_both:196608:2:2:15,16,",
+    "shared_target_release:0:0:0:",
+    "unspecified_key_skipped:65536:65536:65536:15,",
+    "lifecycle:8:8:released"
+  ],
+  "limitations": [
+    "Host TUKeyboard call observations only; no USB transport, rollover, physical report or acceptance proof.",
+    "HID_KEY tokens mapped to distinct host identifiers 1..35 in literal default order; numeric Pico HID encoding untested.",
+    "All literal production translation units and headers copied after exact Git base/blob/SHA256 authentication; GP-CONFIG012 generated header and Nanopb header tracked closure only; no decoding execution claim.",
+    "Injected remapping controls are test configs only, not selected policy or source-default changes.",
+    "Route files are source-hash evidence; menu/device/reboot behavior not executed.",
+    "Nunchuk NOT_TESTED; root cause and physical effect UNKNOWN."
+  ]
+}
