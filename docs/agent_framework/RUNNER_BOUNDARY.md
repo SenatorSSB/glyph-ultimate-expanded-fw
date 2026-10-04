@@ -21,6 +21,14 @@ workflow: `CUSTOM_RUNNER_NOT_REQUIRED`.
 
 ## Future Relationship
 
+Current Revision 3 GLYPH-UD-027/028 documents validation classification and
+known-Glyph transport fallback only. Tier 1 always blocks, Tier 2 blocks when
+affected, Tier 3 is framework debt absent concrete contradiction; incomplete
+execution is not PASS. This pass creates no runner or external schedule and
+changes no production deadlines, cancellation, resource handling or isolation.
+Single canonical writer remains absolute. ACK/result transport rejection falls
+back to durable readback; it authorizes no retry bypass or account mutation.
+
 The framework docs, schemas, queue, and examples may later be consumed by a
 runner only if a concrete unmet requirement justifies it, such as headless CI,
 a machine API, provider-neutral orchestration, strict external budgets,

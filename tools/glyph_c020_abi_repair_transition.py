@@ -76,6 +76,26 @@ BUILT_F = PROCESSOR_PINS['build']
 OWNER_DIRECTION = 'docs/agent_framework/USER_DIRECTION.md'
 OWNER_DIRECTION_AUTHORITY = '0efef62a9d4a6254466325eeb0e33184a4848fab'
 OWNER_DIRECTION_SHA256 = '4fd9bec943f3c24427e5db5e87c093f8002f5715bdccdc4ef0acd27633fbd8a7'
+# The separately committed transport addendum preserves D0 and extends only
+# the finite owner-directed control-plane pass. No evidence/source exemption.
+REVISION_THREE_AUTHORITY = '47c087533db46cbde9d78108a6c9bdff34c33bcd'
+REVISION_THREE_BASE = '6266e880343e38c35fe0828df3c5164562e7b9d0'
+REVISION_THREE_DIRECTION_SHA256 = '13a05d5f05ac33b2e2bbea7119ab79e3c4b3c3bc61ab9932582891a0112558a7'
+REVISION_THREE_PATHS = frozenset((
+    'AGENTS.md', 'docs/WORKFLOW.md', 'docs/agent_framework/README.md',
+    'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md',
+    'docs/agent_framework/SUPERVISOR_CONTRACT.md',
+    'docs/agent_framework/SUBAGENT_CONTRACTS.md',
+    'docs/agent_framework/SCHEDULED_TASKS.md',
+    'docs/agent_framework/HARDWARE_EVIDENCE.md',
+    'docs/agent_framework/HARDWARE_CORRESPONDENCE.md',
+    'docs/agent_framework/VALIDATION_AND_GATES.md',
+    'docs/agent_framework/WORK_ORDER_TEMPLATE.md',
+    'docs/agent_framework/CYCLE_STATE_MACHINE.md',
+    'docs/agent_framework/JUDGE_WATCHDOG_CONTRACT.md',
+    'docs/agent_framework/RUNNER_BOUNDARY.md',
+    'docs/agent_framework/PROMPT_TEMPLATES.md',
+))
 
 
 def _owner_direction_scope(root, head, delta):
@@ -89,13 +109,34 @@ def _owner_direction_scope(root, head, delta):
     require(_git(root, 'diff', '--name-only', PROCESSOR_ADOPTION,
                  OWNER_DIRECTION_AUTHORITY).decode().splitlines() == [OWNER_DIRECTION],
             'owner direction authority changed another path')
-    authoritative = raw_bytes(root, OWNER_DIRECTION_AUTHORITY, OWNER_DIRECTION)
-    require(_sha(authoritative) == OWNER_DIRECTION_SHA256
+    authority, digest, scope = OWNER_DIRECTION_AUTHORITY, OWNER_DIRECTION_SHA256, frozenset()
+    # Inspect HEAD's existing closure, not an optional future object. Historical
+    # reduced repositories need not carry D1 when their target predates it.
+    if REVISION_THREE_AUTHORITY in _git(root, 'rev-list', head).decode().split():
+        require(_git(root, 'rev-list', '--parents', '-n', '1', REVISION_THREE_AUTHORITY)
+                .decode().split() == [REVISION_THREE_AUTHORITY, REVISION_THREE_BASE]
+                and ancestor(root, OWNER_DIRECTION_AUTHORITY, REVISION_THREE_AUTHORITY),
+                'Revision-3 addendum authority ancestry/parent mismatch')
+        require(_git(root, 'diff', '--name-only', REVISION_THREE_BASE,
+                     REVISION_THREE_AUTHORITY).decode().splitlines() == [OWNER_DIRECTION],
+                'Revision-3 addendum authority changed another path')
+        authority, digest, scope = (REVISION_THREE_AUTHORITY,
+                                   REVISION_THREE_DIRECTION_SHA256, REVISION_THREE_PATHS)
+        # Exact committed regular metadata only; live and index remain equal.
+        for path in scope & delta:
+            committed = raw_bytes(root, head, path)
+            require(current_bytes(root, path) == committed
+                    and _git(root, 'show', ':' + path) == committed
+                    and _git(root, 'ls-files', '--stage', '--', path).decode().split()[:1] == ['100644'],
+                    'Revision-3 metadata live/index/mode substitution: ' + path)
+    authoritative = raw_bytes(root, authority, OWNER_DIRECTION)
+    require(_sha(authoritative) == digest
             and raw_bytes(root, head, OWNER_DIRECTION) == authoritative
             and current_bytes(root, OWNER_DIRECTION) == authoritative
-            and _git(root, 'show', ':' + OWNER_DIRECTION) == authoritative,
+            and _git(root, 'show', ':' + OWNER_DIRECTION) == authoritative
+            and _git(root, 'ls-files', '--stage', '--', OWNER_DIRECTION).decode().split()[:1] == ['100644'],
             'owner direction immutable committed/live/index substitution')
-    return frozenset((OWNER_DIRECTION,))
+    return scope | frozenset((OWNER_DIRECTION,))
 
 
 @dataclass(frozen=True)

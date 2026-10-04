@@ -483,7 +483,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 171428,
+      "file_size_bytes": 183082,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -542,7 +542,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 3634,
+      "line_count": 3809,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -613,6 +613,7 @@
         "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
         "docs/agent_framework/CYCLE_STATE_MACHINE.md",
         "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
+        "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
         "docs/agent_framework/JUDGE_WATCHDOG_CONTRACT.md",
         "docs/agent_framework/MODEL_ROUTING.md",
@@ -664,7 +665,7 @@
         "artifact_custody_provenance",
         "hardware_evidence_contracts"
       ],
-      "sha256": "1d4f5c2651bbbce167463d06650c834035c4bda5288a48baac7e273536171522",
+      "sha256": "9fc706275674d254181ac667b262d163e959cdca05ef63eed1ab157b93d928e3",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,

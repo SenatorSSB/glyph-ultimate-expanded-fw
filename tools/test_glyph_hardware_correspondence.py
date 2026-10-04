@@ -21,6 +21,13 @@ DOC = "docs/AGENT_CONTEXT.md"
 GENERATED = "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
 STUB = "tools/fixtures/configurator_setconfig_host/include/config.pb.h"
 AGGREGATE_RUNNER = "tools/run_glyph_runtime_config_validation.py"
+REVISION_THREE_DOCS = (
+    "AGENTS.md", "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
+    "docs/agent_framework/SUPERVISOR_CONTRACT.md", "docs/agent_framework/SCHEDULED_TASKS.md",
+    "docs/agent_framework/CYCLE_STATE_MACHINE.md", "docs/agent_framework/PROMPT_TEMPLATES.md",
+    "docs/agent_framework/JUDGE_WATCHDOG_CONTRACT.md", "docs/agent_framework/RUNNER_BOUNDARY.md",
+    "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
+)
 X1_HOST_PATHS = (
     "docs/agent_framework/GP_X1_002_HARDWARE_PROTOCOL.md",
     "docs/agent_framework/SUBAGENT_CONTRACTS.md",
@@ -125,6 +132,41 @@ class CorrespondenceTests(unittest.TestCase):
         report = self.verify()
         self.assertEqual(set(report["target_paths"]), {CENSUS, DOC, STUB})
         self.assertTrue(report["normal_metadata_validation_required"])
+
+    def test_revision_three_exact_contracts_and_critical_precedence(self):
+        for path in REVISION_THREE_DOCS:
+            self.write(path, "synthetic source-free contract\n")
+        self.commit("bounded Revision-3 metadata")
+        self.assertEqual(self.verify()["target_paths"], {p: "NON_BEHAVIORAL" for p in REVISION_THREE_DOCS})
+        for path in REVISION_THREE_DOCS:
+            with mock.patch.object(correspondence, "CORRESPONDENCE_CRITICAL_PATHS",
+                                   correspondence.CORRESPONDENCE_CRITICAL_PATHS | {path}):
+                self.assertEqual(correspondence.classify_path(path), "CRITICAL")
+            for alias in (path + ".bak", path.lower(), "other/" + path):
+                if alias == path:
+                    continue
+                with self.subTest(alias=alias), self.assertRaises(correspondence.CorrespondenceError):
+                    correspondence.classify_path(alias)
+
+    def test_revision_three_contract_modes_are_never_metadata(self):
+        for number, path in enumerate(REVISION_THREE_DOCS):
+            for kind in ("executable", "symlink", "gitlink"):
+                with self.subTest(path=path, kind=kind):
+                    self.git("switch", "-q", "-c", f"r3-mode-{number}-{kind}", self.candidate)
+                    if kind == "executable":
+                        self.write(path, "metadata\n")
+                        (self.root / path).chmod(0o755)
+                        self.commit("executable metadata")
+                    elif kind == "symlink":
+                        location = self.root / path
+                        location.parent.mkdir(parents=True, exist_ok=True)
+                        location.symlink_to("README.md")
+                        self.commit("symlink metadata")
+                    else:
+                        self.git("update-index", "--add", "--cacheinfo", f"160000,{self.candidate},{path}")
+                        self.git("commit", "-q", "-m", "gitlink metadata")
+                    with self.assertRaisesRegex(correspondence.CorrespondenceError, "unsupported"):
+                        self.verify(check_worktree=False)
 
     def test_x1_candidate_style_delta_and_later_evidence_are_exactly_classified(self):
         evidence = X1_HOST_PATHS[2]

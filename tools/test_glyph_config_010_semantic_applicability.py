@@ -98,6 +98,70 @@ def owner_revision3_direction_tests(directory: Path) -> None:
     print('Revision-3 exact committed owner scope and actual consumer controls PASS; disposable only')
 
 
+def owner_control_plane_tests(directory: Path) -> None:
+    """Actual accepted consumer plus finite D1 authority/mode controls; synthetic only."""
+    import glyph_campaign_transition as campaign
+    import glyph_c020_abi_repair_transition as repair
+    root = directory / 'owner-control-plane'
+    run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(root))
+    run(root, 'git', 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head', str(ROOT),
+        *sorted(repair.ROOTS))
+    run(root, 'git', 'config', 'user.name', 'Disposable Revision-3 test')
+    run(root, 'git', 'config', 'user.email', 'revision-three@example.invalid')
+    head = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    delta = set(run(root, 'git', 'diff', '--name-only', repair.B_R, head).splitlines())
+    scope = repair._owner_direction_scope(root, head, delta)
+    assert scope == repair.REVISION_THREE_PATHS | {repair.OWNER_DIRECTION}
+    proof = campaign.authenticate(root)
+    assert proof['phase'] == 'ACCEPTED_TRANSITION'
+    assert proof['candidate'] == repair.C_R
+    assert not (scope & proof['accepted_metadata_paths'])
+    run(root, 'python3', 'tools/check_glyph_docs_agent_surface.py')
+    for name in sorted(repair.REVISION_THREE_PATHS):
+        location = root / name
+        exact = location.read_bytes()
+        location.write_bytes(exact + b'\nsynthetic substitution\n')
+        rejected(lambda: repair._owner_direction_scope(root, head, delta), 'dirty control-plane ' + name)
+        run(root, 'git', 'add', '--', name)
+        location.write_bytes(exact)
+        rejected(lambda: repair._owner_direction_scope(root, head, delta), 'staged control-plane ' + name)
+        run(root, 'git', 'add', '--', name)
+    with patch.object(repair, 'REVISION_THREE_DIRECTION_SHA256', '0' * 64):
+        rejected(lambda: repair._owner_direction_scope(root, head, delta), 'forged D1 digest')
+    with patch.object(repair, 'REVISION_THREE_BASE', repair.PROCESSOR_ADOPTION):
+        rejected(lambda: repair._owner_direction_scope(root, head, delta), 'forged D1 parent')
+    # HEAD/index mode checks apply even if the live bytes have been restored.
+    mode_path = 'docs/agent_framework/SUPERVISOR_CONTRACT.md'
+    for kind in ('executable', 'symlink', 'gitlink'):
+        run(root, 'git', 'switch', '--detach', head)
+        location = root / mode_path
+        if kind == 'executable':
+            location.chmod(0o755)
+        elif kind == 'symlink':
+            location.unlink()
+            location.symlink_to('README.md')
+        else:
+            run(root, 'git', 'update-index', '--cacheinfo', f'160000,{head},{mode_path}')
+            run(root, 'git', 'commit', '-m', 'synthetic gitlink contract')
+        if kind != 'gitlink':
+            fixture_commit(root, 'synthetic ' + kind + ' contract')
+        bad = run(root, 'git', 'rev-parse', 'HEAD').strip()
+        rejected(lambda: repair._owner_direction_scope(root, bad, delta), 'D1 metadata ' + kind)
+    run(root, 'git', 'switch', '--detach', head)
+    alias = root / (mode_path + '.bak')
+    alias.write_text('synthetic adjacent contract alias\n')
+    fixture_commit(root, 'synthetic unreviewed adjacent path')
+    rejected(lambda: campaign.authenticate(root), 'D1 prefix alias')
+    run(root, 'git', 'switch', '--detach', repair.REVISION_THREE_BASE)
+    old = run(root, 'git', 'rev-parse', 'HEAD').strip()
+    assert repair._owner_direction_scope(root, old, {repair.OWNER_DIRECTION}) == {repair.OWNER_DIRECTION}
+    (root / repair.OWNER_DIRECTION).write_bytes(
+        repair.raw_bytes(ROOT, repair.REVISION_THREE_AUTHORITY, repair.OWNER_DIRECTION))
+    fixture_commit(root, 'synthetic D1 bytes replay without authority ancestry')
+    rejected(lambda: campaign.authenticate(root), 'D1 authority replay')
+    print('Revision-3 bounded control-plane authority/mode and actual accepted consumer controls PASS; disposable only')
+
+
 def stable_historical_tests(root: Path) -> None:
     import check_glyph_config_010_integration_semantic_correspondence as checker
     value = json.loads(checker.FIXTURE.read_text())
@@ -1305,6 +1369,7 @@ def main() -> None:
         campaign._proof_invocation(processor_contract_tests)(Path(directory))
         assert campaign._tree_inventory_cache.get() is None and campaign._blob_bytes_cache.get() is None
         owner_revision3_direction_tests(Path(directory))
+        owner_control_plane_tests(Path(directory))
         commit_change(root, "docs/ROADMAP.md", "\nGP-VAL-029 isolated scope control.\n", "gp-val-029-positive")
         run(root, "python3", CHECKER)
         commit_change(root, "tools/check_glyph_prebuild_git_identity.py", "\n# isolated H1 validation self-test delta\n", "gp-val-029-ready-prerequisite")

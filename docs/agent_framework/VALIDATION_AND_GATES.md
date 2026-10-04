@@ -11,7 +11,82 @@ Work orders also receive behavioral-effect risk `H0`, `H1`, `H2`, or `H3` as
 defined in `WORK_ORDER_TEMPLATE.md`. Branch classification and hardware risk
 are complementary: risk follows actual effect, not file location.
 
-## Classifications
+## Current Revision-3 Validation Policy
+
+GLYPH-UD-027 is current progression authority. Historical Revision-2 records,
+exact hardware identities and strict DONE correspondence remain evidence;
+conflicting global/meta-validation progression rules are superseded, not
+retroactively rewritten. This policy does not redesign the production runner,
+deadlines, cancellation, resources or isolation.
+
+<!-- revision-three-validation:start -->
+```json
+{
+  "revision": 3,
+  "owner_direction": "GLYPH-UD-027",
+  "transport_direction": "GLYPH-UD-028",
+  "tiers": {
+    "1": "ALWAYS_BLOCKING",
+    "2": "DIRECTLY_AFFECTED_BLOCKING",
+    "3": "NONBLOCKING_UNLESS_CONCRETE_TIER1_OR_TIER2_CONTRADICTION"
+  },
+  "timeout_is_pass": false,
+  "source_free_E_requires_I_catalog": false,
+  "accepted_I_requires_catalog": true,
+  "future_GP_VAL_requires_UNPROVEN_SAFETY_FACT": true,
+  "ordinary_governance_successors_per_product": 1,
+  "exceptional_validation_repairs_per_product": 1,
+  "third_successor_exceptions": [
+    "OWNER_APPROVAL",
+    "HARDWARE_FAIL",
+    "NEW_FIRMWARE_SOURCE_DEFECT",
+    "NEW_PRODUCT_DOMAIN_DECISION"
+  ],
+  "transport_grants_action_authority": false,
+  "rejected_transport_repeated_retry": false,
+  "canonical_writers": 1
+}
+```
+<!-- revision-three-validation:end -->
+
+| Tier | Required proof | Progression |
+| --- | --- | --- |
+| 1 — candidate-critical | Changed behavior/source tests, critical source/build-input correspondence, required target compile/build, exact committed SHA/tree/UF2 hash/size/custody, physical acceptance, Config preservation and changed-path negatives | Always blocking; FAIL, TIMEOUT, INCOMPLETE or UNAVAILABLE never becomes PASS |
+| 2 — affected regression | Every directly affected source/validation-interface consumer, neighboring Config behavior and relevant current/historical correspondence | Blocking when directly affected; classify applicability with source-backed evidence and independent review, not to evade a failed gate |
+| 3 — framework health | Global aggregate, global synthetic topology, framework performance and broad historical/proof/runtime optimization | Track FAIL/incomplete as FRAMEWORK_VALIDATION_DEBT; nonblocking unless it reveals a concrete Tier-1/Tier-2 contradiction |
+
+A framework failure blocks only when it prevents establishing a named concrete
+required safety fact or contradicts candidate-critical/affected proof. A
+timeout means execution did not complete within its engineering budget, not
+firmware unsafety. Preserve the raw result; never report an unexecuted,
+incomplete or failed aggregate as PASS. The 300-second aggregate and 120-second
+checker limits remain unchanged. GP-VAL-011 remains OWNER_DEFERRED /
+NONEXECUTABLE; this policy is not authority for its redesign.
+
+Framework changes require focused unit/regression tests, actual directly
+affected consumers, fresh independent review, and relevant frozen canonical
+mutation/isolation proof. Do not require recursive proof of every historical
+framework topology or a new meta-governance campaign. Product candidates still
+need every applicable Tier-1/Tier-2 gate, exact identity, relevant negative and
+correspondence controls, review, custody and required human hardware PASS.
+
+Before a future GP-VAL proposal/authorization, record
+`UNPROVEN_SAFETY_FACT` naming a concrete firmware/product safety property with
+source/evidence provenance. Framework timeout, runner mechanics, topology and
+proof performance alone are framework debt, not that fact. Independent review
+must establish substance; a field or checker PASS is not semantic authority.
+Use the prospective contract in WORK_ORDER_TEMPLATE.md without rewriting any
+existing work order, immutable receipt or DONE record.
+
+Per logical product order: at most one ordinary candidate-governance successor
+and one exceptional validation-repair successor. A third (or another over-limit
+successor) requires explicit owner approval unless supported by hardware FAIL,
+a newly discovered firmware/source defect, or a new product/domain decision.
+Record the exact exception/provenance; timeout, runner mechanics, topology and
+performance are not exceptions. Do not create a GP-VAL or Planner/Curator loop
+merely to complete an already-authorized mechanical transition.
+
+## Branch Classifications
 
 `DOCS_CHECKER_ONLY`
 

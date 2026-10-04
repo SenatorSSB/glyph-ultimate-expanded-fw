@@ -8,6 +8,24 @@ lane. No agent may fabricate hardware execution or PASS.
 
 ## Lifecycle
 
+Current Revision 3 GLYPH-UD-027 and VALIDATION_AND_GATES.md preserve every
+exact-candidate safety invariant. Tier 1 always blocks, Tier 2 blocks when
+directly affected, Tier 3 remains honest framework debt unless a concrete
+Tier-1/Tier-2 contradiction exists. Neither timeout nor synthetic PASS supplies
+human acceptance. Required build, review, Config safety and physical PASS
+remain mandatory.
+
+For reviewed handoff R, source-free processor evidence E, and tested source
+integration I, preserve `R -> E -> I`. E must descend from R with F still
+unintegrated, unchanged critical baseline/protocol, exact tested tuple and
+complete independently validated human observations. E requires no I catalog,
+contains no candidate source replay and cannot mark source integration/DONE.
+At I, preserve the same immutable E and accepted tuple, F ancestry, genuine
+accepted-transition catalog and critical tested source correspondence; fresh
+integration review and separate strict DONE still follow. Relevant focused
+and actual affected-consumer checks suffice without recursive global topology
+proof. Existing accepted catalog/history monotonicity is not relaxed.
+
 ```text
 READY
   -> IMPLEMENTED

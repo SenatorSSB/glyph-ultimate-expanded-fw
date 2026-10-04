@@ -1,4 +1,33 @@
 # Glyph Current State
+
+## Current Post-C020 Revision-3 Policy
+
+The bounded owner-directed control-plane pass implements GLYPH-UD-027 and
+transport-only GLYPH-UD-028 in the active authorization, supervisor,
+Planner/Curator, scheduled-role and hardware contracts. Tier 1 always blocks;
+Tier 2 blocks when directly affected; Tier 3 FAIL/incomplete remains honest
+FRAMEWORK_VALIDATION_DEBT unless it reveals a concrete safety contradiction.
+Required exact source/build/artifact/custody/review/Config/human hardware gates
+are unchanged. Source-free R -> E -> I retains immutable E and genuine I catalog.
+Future GP-VAL needs UNPROVEN_SAFETY_FACT and the bounded successor contract;
+this pass creates no new order and rewrites no historical queue or DONE record.
+Production runner, 300/120 deadlines, cancellation, resources and isolation
+are unchanged; GP-VAL-011 stays OWNER_DEFERRED / NONEXECUTABLE.
+
+All 97 structured orders and runway markers are preserved. GP-CONFIG-014
+remains PREAUTHORIZED/WAITING: 020/037 completion is satisfied, but the next
+release worker must live-verify its exact source/default/schema/decoder annex,
+generated extent 20, finite intervening deltas and absence of pending failure
+before mechanical activation. Fresh C014 is the output, not a prerequisite;
+then its named GP-VAL-034 successor and all build/custody/review/human PASS gates
+remain. This pass does not activate or execute H3 work. GP-CONFIG-019 remains
+READY. Paused GP-VAL-040/KBD stays paused; Nunchuk is NOT_TESTED and root cause
+UNPROVEN. The daemon resumes only the next already-authorized release step
+after this bounded pass is reviewed, published and live-verified.
+
+The C020/044 summaries below record the preceding lifecycle, not a request to
+repeat completed work, rebuild or physically retest.
+
 Status label: CURRENT. <!-- current-runway:start -->
 {"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":12,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->

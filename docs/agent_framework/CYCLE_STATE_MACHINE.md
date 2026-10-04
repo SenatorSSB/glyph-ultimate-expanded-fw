@@ -46,7 +46,14 @@ implementation is deferred.
    - Require compact returns with evidence and unknowns.
 
 6. Validate
-   - Run required checkers.
+   - Use current Revision 3 GLYPH-UD-027 and VALIDATION_AND_GATES.md: Tier 1
+     always blocks, Tier 2 blocks when directly affected, Tier 3 is honest
+     framework debt unless a concrete Tier-1/Tier-2 contradiction exists.
+   - Run focused regressions, all directly affected actual consumers, relevant
+     historical correspondence/negatives, review and frozen mutation/isolation.
+     Never relabel FAIL/TIMEOUT/incomplete as PASS or require recursive global
+     topology meta-proof. Future GP-VAL requires UNPROVEN_SAFETY_FACT and the
+     WORK_ORDER_TEMPLATE.md successor limits, not scheduling-cost churn.
    - Run build only when source/build-affecting files require it.
    - Do not request hardware for docs/checker-only branches with active
      behavior unchanged.
@@ -59,6 +66,8 @@ implementation is deferred.
    - `FORBIDDEN_OR_UNSAFE`
 
 8. Publish candidate, merge, or stop
+   - Preserve R -> E -> I: source-free E requires no I catalog; later accepted
+     I still requires immutable E, exact tested source/catalog and review.
    - Merge recommendation is allowed only after validation and gate review.
    - Active behavior change requires build proof and hardware PASS before
      merge.
@@ -98,6 +107,11 @@ implementation is deferred.
      supporting signals, not the exclusive portfolio liveness state.
 
 11. Return compact final report
+    - Follow GLYPH-UD-028 transport-only known-Glyph ACK/WORKER_RESULT delivery.
+      CROSS_THREAD_MESSAGE_REJECTED falls back to durable canonical/pushed
+      result and readback, no repeated retry or duplicate worker. Successful
+      callbacks chain immediately; ten-minute polling is idle fallback.
+      Canonical write/publication authority remains single-writer.
     - Delegation guidance, capability discovery, native availability,
       specialists, reviewer, and exact no-use reason.
     - Summary.

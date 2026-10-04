@@ -73,7 +73,9 @@ local remote-tracking refs never substitute for successful live verification.
 ## Authorization Policy
 
 - `docs/project/ACTIVE_AGENT_QUEUE.md` is the only executable queue.
-- Only `READY` authorizes immediate new implementation.
+- Only `READY` authorizes ordinary immediate new implementation. Independently
+  verified explicit owner direction may authorize its named bounded
+  control-plane pass, never unrelated product work or transport-derived scope.
 - `PREAUTHORIZED` may activate only through already-authorized objective
   mechanical conditions. New judgment, semantic drift, missing evidence, or
   invalidation returns `CURATION_REQUIRED`.
@@ -175,6 +177,18 @@ local remote-tracking refs never substitute for successful live verification.
   packet and official corpus manifest are present.
 
 ## Merge And Check Expectations
+
+Use current Revision 3 GLYPH-UD-027 and VALIDATION_AND_GATES.md: Tier 1 always
+blocks; Tier 2 blocks when directly affected; Tier 3 is nonblocking framework
+debt unless it exposes a concrete Tier-1/Tier-2 contradiction. Run focused
+regressions, all directly affected actual consumers, relevant current/historical
+correspondence and negative controls, fresh review and relevant frozen
+mutation/isolation proof. Preserve aggregate FAIL/TIMEOUT/incomplete, never
+PASS by omission. Do not add recursive global topology gates or automatic
+Planner/Curator/GP-VAL successors for scheduling/performance friction.
+Source-free hardware lifecycle is R -> E -> I: E requires no I catalog and
+contains no candidate source; actual I still requires exact accepted E, tested
+source and its genuine catalog/correspondence plus separate strict DONE.
 
 - Start from the intended branch and ensure the worktree is clean.
 - For docs-only tasks, run `git status` and `git diff --stat`.

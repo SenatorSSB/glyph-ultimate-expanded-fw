@@ -18,6 +18,25 @@ GP-VAL-014's useful ancestry and narrow protected-source applicability checks.
 
 ## Classification and scope
 
+Current Revision 3 GLYPH-UD-027 uses Tier-1/Tier-2 relevant correspondence,
+negative controls and mutation/isolation proof; global aggregate/topology
+FAIL/incomplete is framework debt unless a concrete safety contradiction
+exists. No failure is relabelled PASS. R -> E -> I remains exact: source-free
+processor E must not require I's catalog; accepted source I still requires
+the same immutable E, genuine committed catalog and tested source ancestry.
+
+The bounded post-C020 owner pass additionally classifies only the exact existing
+AGENTS.md, authorization/runway, supervisor, scheduled-task, cycle-state,
+prompt-template, judge/watchdog, runner-boundary and work-order-template paths
+listed literally in glyph_hardware_correspondence.py. They are agent policy
+inputs, not firmware/compiler/build inputs under the source filters below.
+Repaired campaign use is authenticated by the exact separately committed
+GLYPH-UD-028 owner document, ancestry and regular committed/live/index bytes.
+The old GLYPH-UD-027 identity remains valid for historical heads. No prefix or
+adjacent alias is exempt; source, protocol, artifact, evidence, catalog and
+history predicates remain unchanged. Classification never grants action
+authority; actual affected docs/framework consumers and focused negatives apply.
+
 `CRITICAL` covers conservative firmware roots (`src`, `include`, `HAL`/`hal`,
 `backend`, `lib`, `active`, `storage`, `config`), build hooks/scripts, boards,
 variants, patches, protocol inputs and declared build controls. PlatformIO,

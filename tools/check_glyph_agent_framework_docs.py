@@ -2971,6 +2971,180 @@ def check_queue_contract() -> None:
     pass_line("canonical queue, runway counts, and zero-runway liveness validate")
 
 
+REVISION_THREE_POLICY = {
+    "revision": 3, "owner_direction": "GLYPH-UD-027", "transport_direction": "GLYPH-UD-028",
+    "tiers": {"1": "ALWAYS_BLOCKING", "2": "DIRECTLY_AFFECTED_BLOCKING",
+              "3": "NONBLOCKING_UNLESS_CONCRETE_TIER1_OR_TIER2_CONTRADICTION"},
+    "timeout_is_pass": False, "source_free_E_requires_I_catalog": False,
+    "accepted_I_requires_catalog": True, "future_GP_VAL_requires_UNPROVEN_SAFETY_FACT": True,
+    "ordinary_governance_successors_per_product": 1, "exceptional_validation_repairs_per_product": 1,
+    "third_successor_exceptions": ["OWNER_APPROVAL", "HARDWARE_FAIL",
+                                   "NEW_FIRMWARE_SOURCE_DEFECT", "NEW_PRODUCT_DOMAIN_DECISION"],
+    "transport_grants_action_authority": False, "rejected_transport_repeated_retry": False,
+    "canonical_writers": 1,
+}
+# Exact pre-Revision-3 inventory at C020 DONE6266e880; no retrospective fields.
+REVISION_THREE_LEGACY_GP_VAL = frozenset(f"GP-VAL-{n:03}" for n in range(1, 45) if n != 18)
+
+
+def revision_three_validation_disposition(tier: int, result: str, affected: bool,
+                                         contradiction: bool) -> str:
+    """Policy classification only; never changes an execution result or runs a gate."""
+    if (type(tier) is not int or tier not in (1, 2, 3)
+            or type(result) is not str
+            or result not in {"PASS", "FAIL", "TIMEOUT", "INCOMPLETE", "UNAVAILABLE", "NOT_RUN"}
+            or type(affected) is not bool or type(contradiction) is not bool):
+        fail("invalid Revision-3 validation classification")
+    if contradiction:
+        return "BLOCKING"
+    if result == "PASS":
+        return "PASS"
+    return "BLOCKING" if tier == 1 or (tier == 2 and affected) else "FRAMEWORK_VALIDATION_DEBT"
+
+
+def _revision_three_json(raw: str) -> object:
+    def unique(pairs: list[tuple[str, object]]) -> dict[str, object]:
+        result: dict[str, object] = {}
+        for key, value in pairs:
+            if key in result:
+                fail("duplicate Revision-3 JSON key")
+            result[key] = value
+        return result
+    try:
+        return json.loads(raw, object_pairs_hook=unique)
+    except (ValueError, TypeError) as exc:
+        fail(f"invalid Revision-3 JSON: {exc}")
+
+
+def validate_revision_three_policy(value: object) -> None:
+    # Serialization equality distinguishes integer/Boolean/float substitutions.
+    if json.dumps(value, sort_keys=True) != json.dumps(REVISION_THREE_POLICY, sort_keys=True):
+        fail("Revision-3 policy mutation or incomplete contract")
+
+
+def validate_revision_three_proposal(value: object) -> None:
+    fields = {"UNPROVEN_SAFETY_FACT", "safety_fact_kind", "evidence", "logical_product_order",
+              "ordinary_governance_successors", "exceptional_validation_repairs",
+              "exception_kind", "exception_provenance"}
+    if type(value) is not dict or set(value) != fields:
+        fail("future GP-VAL requires closed Revision-3 safety/successor contract")
+    for field in ("UNPROVEN_SAFETY_FACT", "evidence", "logical_product_order"):
+        require_nonempty_string(value[field], field)
+        if "<" in value[field] or ">" in value[field]:
+            fail("future GP-VAL cannot use unresolved template placeholders")
+    if value["safety_fact_kind"] != "FIRMWARE_PRODUCT":
+        fail("future GP-VAL needs concrete firmware/product safety, not framework debt")
+    if (not re.fullmatch(r"GP-[A-Z0-9]+-\d{3}", value["logical_product_order"])
+            or value["logical_product_order"].startswith("GP-VAL-")):
+        fail("future GP-VAL must name its logical product order")
+    counts = [value[k] for k in ("ordinary_governance_successors", "exceptional_validation_repairs")]
+    if any(type(n) is not int or n < 0 for n in counts) or sum(counts) == 0:
+        fail("future GP-VAL successor counts include proposed and prior successors")
+    exception = value["exception_kind"]
+    if exception == "NONE":
+        if value["exception_provenance"] is not None or any(n > 1 for n in counts):
+            fail("over-limit/third successor requires substantive exception provenance")
+    elif exception in REVISION_THREE_POLICY["third_successor_exceptions"]:
+        require_nonempty_string(value["exception_provenance"], "exception_provenance")
+    else:
+        fail("runner/timeout/topology/performance is not a successor exception")
+    # Syntactic conformance is not source authority: independent review must
+    # establish the concrete fact, evidence, actual logical history and counts.
+
+
+def validate_revision_three_future_orders(items: list[dict[str, object]]) -> None:
+    for item in items:
+        if not item["id"].startswith("GP-VAL-") or item["id"] in REVISION_THREE_LEGACY_GP_VAL:
+            continue
+        rationale = item["substantive_authorization_rationale"]
+        start, end = "<!-- revision-three-proposal:start -->", "<!-- revision-three-proposal:end -->"
+        if rationale.count(start) != 1 or rationale.count(end) != 1:
+            fail("future GP-VAL missing unique UNPROVEN_SAFETY_FACT/successor contract")
+        raw = rationale.split(start, 1)[1].split(end, 1)[0].strip()
+        validate_revision_three_proposal(_revision_three_json(raw))
+
+
+def check_revision_three_self_test() -> None:
+    def rejects(action: object) -> None:
+        try:
+            action()
+        except FrameworkDocsError:
+            return
+        fail("Revision-3 negative unexpectedly accepted")
+    for result in ("FAIL", "TIMEOUT", "INCOMPLETE", "UNAVAILABLE", "NOT_RUN"):
+        assert revision_three_validation_disposition(1, result, False, False) == "BLOCKING"
+        assert revision_three_validation_disposition(2, result, True, False) == "BLOCKING"
+        for tier, affected in ((2, False), (3, False), (3, True)):
+            assert revision_three_validation_disposition(tier, result, affected, False) == "FRAMEWORK_VALIDATION_DEBT"
+            assert revision_three_validation_disposition(tier, result, affected, True) == "BLOCKING"
+    assert revision_three_validation_disposition(3, "PASS", False, True) == "BLOCKING"
+    assert revision_three_validation_disposition(1, "PASS", True, False) == "PASS"
+    rejects(lambda: revision_three_validation_disposition(True, "PASS", True, False))
+    rejects(lambda: revision_three_validation_disposition(3, "PARTIAL", False, False))
+    rejects(lambda: revision_three_validation_disposition(3, [], False, False))
+    rejects(lambda: _revision_three_json('{"revision":3,"revision":3}'))
+    for key, value in (("timeout_is_pass", True), ("accepted_I_requires_catalog", False),
+                       ("source_free_E_requires_I_catalog", True), ("canonical_writers", 2),
+                       ("transport_grants_action_authority", True),
+                       ("rejected_transport_repeated_retry", True), ("revision", 3.0)):
+        rejects(lambda k=key, v=value: validate_revision_three_policy(dict(REVISION_THREE_POLICY, **{k: v})))
+    validate_revision_three_policy(REVISION_THREE_POLICY)
+    good = {"UNPROVEN_SAFETY_FACT": "Config count must not exceed the firmware mask cache before reads",
+            "safety_fact_kind": "FIRMWARE_PRODUCT", "evidence": "source/host evidence, synthetic test only",
+            "logical_product_order": "GP-CONFIG-014", "ordinary_governance_successors": 1,
+            "exceptional_validation_repairs": 1, "exception_kind": "NONE", "exception_provenance": None}
+    validate_revision_three_proposal(good)
+    for key, value in (("UNPROVEN_SAFETY_FACT", ""), ("UNPROVEN_SAFETY_FACT", "<unknown>"),
+                       ("safety_fact_kind", "FRAMEWORK_HEALTH"), ("logical_product_order", "GP-VAL-045"),
+                       ("evidence", ""), ("ordinary_governance_successors", True),
+                       ("exceptional_validation_repairs", -1), ("ordinary_governance_successors", 2),
+                       ("exception_kind", "TIMEOUT"), ("exception_kind", "RUNNER_MECHANICS"),
+                       ("exception_kind", "TOPOLOGY"), ("exception_kind", "PERFORMANCE")):
+        rejects(lambda k=key, v=value: validate_revision_three_proposal(dict(good, **{k: v})))
+    for exception in REVISION_THREE_POLICY["third_successor_exceptions"]:
+        over = dict(good, ordinary_governance_successors=2, exception_kind=exception)
+        rejects(lambda value=over: validate_revision_three_proposal(value))
+        validate_revision_three_proposal(dict(over, exception_provenance="synthetic exact substantive authority"))
+    for key in good:
+        rejects(lambda k=key: validate_revision_three_proposal({n: v for n, v in good.items() if n != k}))
+    rejects(lambda: validate_revision_three_future_orders([{"id": "GP-VAL-045", "substantive_authorization_rationale": "timeout"}]))
+    marker = "<!-- revision-three-proposal:start -->" + json.dumps(good) + "<!-- revision-three-proposal:end -->"
+    validate_revision_three_future_orders([{"id": "GP-VAL-045", "substantive_authorization_rationale": marker}])
+    rejects(lambda: validate_revision_three_future_orders([{"id": "GP-VAL-045", "substantive_authorization_rationale": marker + marker}]))
+    pass_line("Revision-3 classification/safety/successor/transport-policy negative controls validate")
+
+
+def check_revision_three_surface() -> None:
+    text = read_required("docs/agent_framework/VALIDATION_AND_GATES.md")
+    start, end = "<!-- revision-three-validation:start -->", "<!-- revision-three-validation:end -->"
+    if text.count(start) != 1 or text.count(end) != 1:
+        fail("missing unique current Revision-3 validation policy")
+    body = text.split(start, 1)[1].split(end, 1)[0].strip()
+    if not body.startswith("```json\n") or not body.endswith("```"):
+        fail("Revision-3 policy must be one fenced JSON object")
+    validate_revision_three_policy(_revision_three_json(body[8:-3]))
+    validate_revision_three_future_orders(load_queue_state()["items"])
+    for path in ("AGENTS.md", "docs/WORKFLOW.md", "docs/agent_framework/README.md",
+                 "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md", "docs/agent_framework/SUPERVISOR_CONTRACT.md",
+                 "docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/agent_framework/HARDWARE_EVIDENCE.md",
+                 "docs/agent_framework/HARDWARE_CORRESPONDENCE.md", "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
+                 "docs/agent_framework/CYCLE_STATE_MACHINE.md", "docs/agent_framework/JUDGE_WATCHDOG_CONTRACT.md",
+                 "docs/agent_framework/PROMPT_TEMPLATES.md", "docs/agent_framework/RUNNER_BOUNDARY.md"):
+        require_phrase(path, "GLYPH-UD-027")
+    for section in extract_task_sections(read_required("docs/agent_framework/SCHEDULED_TASKS.md")).values():
+        for phrase in ("GLYPH-UD-027", "VALIDATION_AND_GATES.md", "GLYPH-UD-028", "single writer"):
+            if normalize(phrase) not in normalize(section):
+                fail("scheduled role missing current Revision-3 policy adoption")
+    for phrase in ("OWNER_AUTHORIZED_GLYPH_ORCHESTRATION", "CROSS_THREAD_MESSAGE_REJECTED",
+                   "WORKER_RESULT_PERSISTED_FOR_DAEMON_READBACK", "Ten-minute polling is idle fallback",
+                   "Transport grants no action authority", "Inspect the prior worker", "single canonical"):
+        require_phrase("docs/agent_framework/SCHEDULED_TASKS.md", phrase)
+    require_phrase("docs/agent_framework/USER_DIRECTION.md", "GLYPH-UD-028")
+    require_phrase("docs/agent_framework/WORK_ORDER_TEMPLATE.md", "UNPROVEN_SAFETY_FACT")
+    check_revision_three_self_test()
+    pass_line("current Revision-3 policy and prospective GP-VAL contracts validate; historical orders preserved")
+
+
 def check_revision_two_surface() -> None:
     for phrase in (
         "READY is immediately executable",
@@ -3614,6 +3788,7 @@ def main() -> int:
         check_queue_contract()
         check_completion_correspondence_self_test()
         check_revision_two_surface()
+        check_revision_three_surface()
         check_firmware_implementation_authority()
         check_legacy_control_plane_supersession()
         check_native_delegation_contract()

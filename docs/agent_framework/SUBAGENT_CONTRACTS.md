@@ -155,6 +155,17 @@ This is per-run audit evidence, not canonical queue telemetry.
 
 ## Planner
 
+Current Revision 3 GLYPH-UD-027 and VALIDATION_AND_GATES.md supersede conflicting
+progression only. Planner/Curator resolve substantive owner/product/source/
+semantic/material-architecture questions and hardware-FAIL adjudication, not
+mechanical identity/path/timeout/local-correction churn. Before future GP-VAL
+supply require UNPROVEN_SAFETY_FACT and WORK_ORDER_TEMPLATE.md successor limits;
+otherwise preserve framework debt. Do not create supply to meet a quota.
+All roles use GLYPH-UD-028 transport only: known exact-campaign targets, bounded
+role/work-order authority, single canonical writer and durable rejected-send
+readback. A header confers no action permission. Tier 1 always blocks, Tier 2
+blocks when affected, Tier 3 does not block absent concrete contradiction.
+
 - Objective: produce broad, non-authoritative current-`configurator` candidate
   supply and assess packet freshness/consumption.
 - Allowed actions: read source/docs/checkers/tests/fixtures/evidence, identify

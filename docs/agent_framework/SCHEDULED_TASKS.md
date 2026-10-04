@@ -8,6 +8,49 @@ never quotas. Cadence must be retuned from observed implementation duration,
 collision rate, validation cost, Preauthorization invalidation, and hardware
 throughput.
 
+## Revision-3 Campaign And Transport Contract
+
+Current progression follows GLYPH-UD-027 and VALIDATION_AND_GATES.md, preserving
+historical Revision-2 receipts/DONE and exact-candidate safety. Tier 1 always
+blocks; Tier 2 blocks when directly affected; Tier 3 is FRAMEWORK_VALIDATION_DEBT
+unless a concrete Tier-1/Tier-2 contradiction exists. Preserve raw FAIL,
+TIMEOUT, INCOMPLETE and UNAVAILABLE, never relabel as PASS. Framework changes
+need focused regressions, all actual affected consumers, review and relevant
+frozen mutation/isolation; no recursive global topology campaign. Future GP-VAL
+requires UNPROVEN_SAFETY_FACT and WORK_ORDER_TEMPLATE.md successor limits.
+Planner/Curator handle substantive owner/product/source/semantic/architecture
+or hardware-FAIL choices, not mechanical SHA/path/correction/timeout churn.
+
+GLYPH-UD-028 explicitly authorizes available cross-thread MCP transport for
+known existing Glyph campaign workers, exact-campaign threads and daemon-
+selected successors only. Use OWNER_AUTHORIZED_GLYPH_ORCHESTRATION where
+practical with sender/receiver identity and role, Glyph/HayBox project, exact
+work order, current canonical SHA, scope and expected return destination.
+Transport grants no action authority: receiving workers need valid bounded
+role/work-order authority. No broadcast, unrelated chats, firmware/device/
+Config/public-release scope, permission expansion or account/settings mutation.
+
+Attempt WORKER_ACK and WORKER_RESULT via available MCP when possible. Accepted
+sends continue without needless duplicate delivery. CROSS_THREAD_MESSAGE_REJECTED
+means no repeated retry or bypass, no assignment failure or new GP-VAL/Curator
+obligation. Continue authorized local work when delivery is not a dependency,
+persist the same logical result and use daemon readback. Prefer authorized
+canonical commit, pushed branch, authorized repository handoff, stable reported
+local handoff, then accessible transcript; temporary files must not be the only
+important implementation/evidence copy. After rejection report
+WORKER_RESULT_PERSISTED_FOR_DAEMON_READBACK with order/result/branch/SHA/
+canonical/handoff/next action. No transport test is required.
+
+Successful callbacks trigger immediate live refresh and deterministic authorized
+successor dispatch. Ten-minute polling is idle fallback: inspect known workers,
+missing callbacks, refs and handoffs, reconstruct and verify results. Inspect
+the prior worker/thread/branch/handoff before creating a duplicate; replacement
+requires definitive failure, abandonment or inability to continue. The daemon
+serializes the absolute single canonical write/publication lock. Concurrent
+communication never authorizes concurrent publication or a second work order
+inside a worker's bounded invocation. These remain repository contract prompts,
+not changes to an external schedule or production runner.
+
 ## Glyph Implementation Supervisor
 
 ```text
@@ -46,6 +89,10 @@ configurator
 
 Execute one bounded implementation cycle from current repository truth. A
 timer is a heartbeat, never a quota; a truthful no-op is success.
+
+Apply current Revision 3 GLYPH-UD-027, VALIDATION_AND_GATES.md and the
+Revision-3 Campaign And Transport Contract above, including GLYPH-UD-028
+transport-only authority, known targets, rejection/readback and single writer.
 
 Read completely before acting:
 - AGENTS.md
@@ -172,9 +219,12 @@ Nunchuk remains NOT_TESTED and root cause remains unproven unless new direct
 evidence exists.
 
 Classify behavioral effect H0-H3, regardless of file location. Run focused
-checks while editing. Then inspect the exact diff, obtain fresh independent
-review, repair material findings, re-review repaired scope, and run the full
-required final gate on the exact snapshot to publish. Use the canonical
+checks while editing. On the exact frozen snapshot run applicable Tier-1 and
+directly affected Tier-2 checks, relevant correspondence/negatives and
+mutation/isolation proof; obtain fresh independent review, repair material
+findings and re-review repaired scope. Track Tier-3 aggregate FAIL/incomplete
+as debt unless it contradicts a concrete safety fact; do not start recursive
+global topology or another GP-VAL merely for a timeout. Use the canonical
 `pio run -e glyph_mk6` build whenever the work order or touched behavior
 requires it; use the documented wrapper only when the canonical command is
 unavailable and report the fallback.
@@ -210,11 +260,13 @@ modified substitute, live-verify configurator, then publish that queue item as
 DONE. Any mismatch returns HARDWARE_EVIDENCE_MISMATCH, CURATION_REQUIRED, or
 HARDWARE_TEST_REQUIRED without merging.
 
-For H0/H1 that are merge-eligible, update canonical status/queue in the same
-validated snapshot, commit and push the focused branch, live-verify the remote
+For H0/H1 that are merge-eligible, commit and push the focused branch,
+live-verify the remote
 feature ref, refresh live configurator, reconcile drift and rerun invalidated
 checks, publish according to docs/WORKFLOW.md, and verify the exact live remote
-configurator commit. Never force-push ordinary work.
+configurator commit. Publish strict queue DONE correspondence separately after
+live implementation integration, with current-state/runway mirrors reconciled.
+Never force-push ordinary work.
 
 When no work is executable, report separately:
 - Immediate Ready runway;
@@ -306,6 +358,10 @@ Repository:
 
 Canonical branch:
 configurator
+
+Apply current Revision 3 GLYPH-UD-027, VALIDATION_AND_GATES.md and the
+Revision-3 Campaign And Transport Contract above, including GLYPH-UD-028
+transport-only authority, known targets, rejection/readback and single writer.
 
 Read completely:
 - AGENTS.md
@@ -536,6 +592,10 @@ Repository:
 Canonical branch:
 configurator
 
+Apply current Revision 3 GLYPH-UD-027, VALIDATION_AND_GATES.md and the
+Revision-3 Campaign And Transport Contract above, including GLYPH-UD-028
+transport-only authority, known targets, rejection/readback and single writer.
+
 Read completely:
 - AGENTS.md
 - docs/AGENT_CONTEXT.md
@@ -696,6 +756,10 @@ Repository:
 Canonical branch:
 configurator
 
+Apply current Revision 3 GLYPH-UD-027, VALIDATION_AND_GATES.md and the
+Revision-3 Campaign And Transport Contract above, including GLYPH-UD-028
+transport-only authority, known targets, rejection/readback and single writer.
+
 Read completely:
 - AGENTS.md
 - docs/AGENT_CONTEXT.md
@@ -771,6 +835,10 @@ For exact complete PASS, record HARDWARE_VALIDATED for that candidate/artifact
 pair and update the work order/control-plane evidence state so the exact
 candidate may become merge-eligible. Do not merge or publish runtime source;
 publication remains an Implementation Supervisor/recovery responsibility.
+Preserve R -> E -> I: reviewed source-free handoff R precedes source-free
+processor E. E contains no candidate source, requires no accepted I catalog,
+and confers no source integration or DONE. Only later I integrates exact tested
+source with the same immutable E and genuine accepted catalog/correspondence.
 
 For FAIL, record HARDWARE_FAILED, preserve the result, ensure failed active
 source cannot enter configurator, and always add supporting REPAIR_REQUIRED.

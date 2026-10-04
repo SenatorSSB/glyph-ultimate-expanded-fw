@@ -34,6 +34,16 @@ CORRESPONDENCE_CRITICAL_PATHS = frozenset({
 
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
+    # Owner-directed bounded Revision-3 control-plane contracts, not a prefix.
+    'AGENTS.md',
+    'docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md',
+    'docs/agent_framework/SUPERVISOR_CONTRACT.md',
+    'docs/agent_framework/SCHEDULED_TASKS.md',
+    'docs/agent_framework/CYCLE_STATE_MACHINE.md',
+    'docs/agent_framework/PROMPT_TEMPLATES.md',
+    'docs/agent_framework/JUDGE_WATCHDOG_CONTRACT.md',
+    'docs/agent_framework/RUNNER_BOUNDARY.md',
+    'docs/agent_framework/WORK_ORDER_TEMPLATE.md',
     'tools/glyph_checker_context.py',
     'tools/check_glyph_config_menu_invalid_state_characterization.py',
     'tools/check_glyph_getconfig_raw_load_characterization.py',

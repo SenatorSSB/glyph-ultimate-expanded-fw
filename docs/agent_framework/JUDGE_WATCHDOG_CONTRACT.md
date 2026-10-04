@@ -7,6 +7,15 @@ required action.
 
 ## Verdicts
 
+Use current Revision 3 GLYPH-UD-027 and VALIDATION_AND_GATES.md. Tier 1 always
+blocks; Tier 2 blocks when directly affected; Tier 3 remains honest framework
+debt unless a concrete Tier-1/Tier-2 contradiction is identified. A DONE verdict
+requires every applicable safety/regression gate, not an automatic global
+meta-proof. FAIL/TIMEOUT/incomplete never becomes PASS. No new GP-VAL without
+UNPROVEN_SAFETY_FACT; enforce one ordinary plus one exceptional successor and
+exact substantive exceptions. Rejected transport is readback debt, not a reason
+to restart governance. Hardware/source/review boundaries are not overridden.
+
 - `DONE`: Objective is complete, validation passed, and gates are satisfied.
 - `CONTINUE`: A concrete next delta remains and is within scope.
 - `BLOCKED`: Work cannot continue without user input, missing source evidence,

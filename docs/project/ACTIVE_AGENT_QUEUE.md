@@ -1,5 +1,34 @@
 # Active Agent Queue
 
+## Current Post-C020 Revision-3 Policy
+
+The bounded owner-directed control-plane pass implements GLYPH-UD-027 and
+transport-only GLYPH-UD-028 in the active authorization, supervisor,
+Planner/Curator, scheduled-role and hardware contracts. Tier 1 always blocks;
+Tier 2 blocks when directly affected; Tier 3 FAIL/incomplete remains honest
+FRAMEWORK_VALIDATION_DEBT unless it reveals a concrete safety contradiction.
+Required exact source/build/artifact/custody/review/Config/human hardware gates
+are unchanged. Source-free R -> E -> I retains immutable E and genuine I catalog.
+Future GP-VAL needs UNPROVEN_SAFETY_FACT and the bounded successor contract;
+this pass creates no new order and rewrites no historical queue or DONE record.
+Production runner, 300/120 deadlines, cancellation, resources and isolation
+are unchanged; GP-VAL-011 stays OWNER_DEFERRED / NONEXECUTABLE.
+
+All 97 structured orders and runway markers are preserved. GP-CONFIG-014
+remains PREAUTHORIZED/WAITING: 020/037 completion is satisfied, but the next
+release worker must live-verify its exact source/default/schema/decoder annex,
+generated extent 20, finite intervening deltas and absence of pending failure
+before mechanical activation. Fresh C014 is the output, not a prerequisite;
+then its named GP-VAL-034 successor and all build/custody/review/human PASS gates
+remain. This pass does not activate or execute H3 work. GP-CONFIG-019 remains
+READY. Paused GP-VAL-040/KBD stays paused; Nunchuk is NOT_TESTED and root cause
+UNPROVEN. The daemon resumes only the next already-authorized release step
+after this bounded pass is reviewed, published and live-verified.
+
+The C020/044 summaries below record the preceding lifecycle, not a request to
+repeat completed work, rebuild or physically retest.
+
+
 GP-CONFIG-020 is DONE after reviewed live integration `a59c62793c52130612f39558b7c7e5a70a8c8cf4` and separate strict DIRECT_ANCESTRY completion correspondence under GLYPH-UD-027 Revision 3. Tested source merge `bce59d34bcb6b4158a5f755293f20102c7a0abb9` follows source-free HEP evidence E `6b36d99b0624047558ed8f9ede83dcaee78e72a9`; the GP-VAL-043 catalog preserves reviewed R, earliest E and that merge. Exact tested F remains `7db4f447d5e796367071b7143fa6c9274c70ae5e`, tree `4b5b63ce56219a508e2b71745438a609dd5661c3`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`, 796160 bytes. All 24 focused/affected checks and required negative controls pass; fresh independent Sol review approves the exact integration. Source, build inputs, protocol and hardware evidence stay byte-exact. The queue preserves PASS with empty gaps and every other order. HEP PASS is owner-reported GC and Mac XInput evidence; pre/post persisted Config remains exactly 4201 bytes, SHA-256 `f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480`. Invalid-binding physical submission remains HOST_ONLY/NOT_TESTED. Existing aggregate FAIL/incomplete and ignored Finder/TinyUSB metadata failures remain framework debt; no full aggregate PASS is claimed. Paused GP-VAL-040/KBD remains paused, Nunchuk remains NOT_TESTED and root cause remains unproven. The next daemon action is bounded Revision 3 control-plane simplification before the remaining stack.
 
 Status label: CURRENT.

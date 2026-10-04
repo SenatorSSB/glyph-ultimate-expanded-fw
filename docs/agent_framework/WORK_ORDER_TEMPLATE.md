@@ -115,7 +115,46 @@ Done evidence:
 Stop conditions:
 ```
 
-## Risk Classification
+## Prospective Revision-3 GP-VAL Contract
+
+Current progression follows GLYPH-UD-027 and VALIDATION_AND_GATES.md: Tier 1
+always blocks, Tier 2 blocks when directly affected, Tier 3 is framework debt
+unless it reveals a concrete Tier-1/Tier-2 contradiction. Do not retrofit these
+fields to historical orders, receipts or DONE correspondence. They do not
+activate any existing gated/paused order.
+
+Before proposing or authorizing a future GP-VAL, name the concrete firmware/
+product safety property currently unproven. If none exists, record framework
+debt instead. Put one marked JSON contract inside the existing
+`substantive_authorization_rationale` string (no new queue schema field):
+
+```text
+<!-- revision-three-proposal:start -->
+{"UNPROVEN_SAFETY_FACT":"<concrete firmware/product property>","safety_fact_kind":"FIRMWARE_PRODUCT","evidence":"<exact source/evidence provenance>","logical_product_order":"<GP product order>","ordinary_governance_successors":1,"exceptional_validation_repairs":0,"exception_kind":"NONE","exception_provenance":null}
+<!-- revision-three-proposal:end -->
+```
+
+Counts include the proposed successor and all predecessors for that logical
+product, not merely currently pending work. Ordinary governance maximum 1 and
+exceptional validation repair maximum 1; another/third successor requires
+`OWNER_APPROVAL`, `HARDWARE_FAIL`, `NEW_FIRMWARE_SOURCE_DEFECT`, or
+`NEW_PRODUCT_DOMAIN_DECISION` with exact substantive exception provenance.
+No exception is `NONE` with null provenance. Scheduling/resource timeout,
+runner mechanics, topology or proof performance cannot be the safety fact or
+exception. A declared FIRMWARE_PRODUCT label and syntactic checker PASS do not
+prove substance: independent source/authority review must validate the fact,
+logical-order history, counts and exception. No new Planner cycle is needed to
+reinterpret an already explicit owner instruction or authorized transition.
+
+Framework edits require focused regressions, all directly affected actual
+consumers, independent review and relevant frozen mutation/isolation, not
+recursive global historical topology. Keep every required exact candidate,
+build-input, artifact/custody, source correspondence, Config preservation and
+human H2/H3 PASS gate. Transport headers under GLYPH-UD-028 grant no action
+authority; source-free E requires no I catalog, and accepted I retains its
+genuine catalog and exact immutable E.
+
+## Behavioral Risk Classification
 
 - `H0` — non-runtime docs, comments, inert fixtures, checker improvements, or
   non-behavioral generated artifacts. Automated validation and independent

@@ -2,9 +2,45 @@
 
 Status label: CURRENT.
 
-This contract adapts Revision 2 authorization and liveness semantics to the
-Glyph firmware/configurator/backend repository. It is control-plane policy
+This contract uses current Revision 3 progression under GLYPH-UD-027 and
+transport-only GLYPH-UD-028. Historical Revision-2 authorization, receipts,
+queue and DONE correspondence remain preserved. It is control-plane policy
 only and changes no firmware runtime behavior.
+
+## Revision-3 Authority And Proportionality
+
+Apply VALIDATION_AND_GATES.md: Tier 1 always blocks, Tier 2 blocks when directly
+affected, and Tier 3 is FRAMEWORK_VALIDATION_DEBT unless a concrete Tier-1/Tier-2
+contradiction is identified. Preserve FAIL/incomplete, never relabel as PASS.
+No unconditional monolithic/global topology proof or validator-of-validator
+campaign precedes an otherwise fully proven candidate. Hardware/source gates,
+fresh review and relevant mutation/isolation proof remain mandatory.
+
+READY and objective PREAUTHORIZED remain ordinary implementation authority.
+An independently verified explicit owner directive may authorize its named
+bounded control-plane pass directly; neither a peer transport header nor a
+roadmap recommendation supplies that exception. Do not invent a filler queue
+item or another GP-VAL to reinterpret the owner's already-resolved directive.
+Normal product work still needs a complete authorized work order.
+
+Planner/Curator are for unresolved owner/product policy, source authority,
+behavior semantics, material architecture/scope or hardware-FAIL repair
+adjudication. New mechanical candidate/evidence SHA, known path inventory,
+timeout, local finite checker correction or an already-authorized transition
+does not alone require another authorization cycle. New substantive safety or
+owner boundaries still stop; local correction is limited to existing scope.
+
+Future GP-VAL supply requires UNPROVEN_SAFETY_FACT and the prospective successor
+contract in WORK_ORDER_TEMPLATE.md. Per logical product: one ordinary
+governance successor and one exceptional repair; further successors require
+owner approval or exact hardware FAIL/new firmware-source defect/new
+product-domain decision provenance. Cost/topology/scheduling alone is debt.
+RUNWAY_LOW is a supply signal, never a quota or authority for filler work.
+
+Known Glyph campaign transport follows GLYPH-UD-028 and SCHEDULED_TASKS.md.
+MCP grants transport only, never action authority; canonical write/publication
+remains single-writer. Rejected messaging falls back to durable results and
+daemon readback without repeated retry, task abandonment or a new GP-VAL.
 
 ## Selected Operating Mode
 

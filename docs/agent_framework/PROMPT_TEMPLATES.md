@@ -61,7 +61,18 @@ Required classification:
   FORBIDDEN_OR_UNSAFE
 
 Verification:
-- ...
+- Current Revision 3 GLYPH-UD-027 / VALIDATION_AND_GATES.md: Tier 1 always
+  blocks; Tier 2 blocks when directly affected; Tier 3 is framework debt unless
+  a concrete Tier-1/Tier-2 contradiction exists. Focused regressions, all actual
+  affected consumers, relevant correspondence/negatives, fresh review and frozen
+  mutation/isolation; no recursive global topology and no false FAIL/incomplete
+  aggregate PASS. Future GP-VAL needs UNPROVEN_SAFETY_FACT and successor limits.
+- R -> E -> I: E needs no I catalog; I retains immutable E/tested source/catalog.
+- GLYPH-UD-028 transport only: known Glyph targets, exact sender/receiver role,
+  work order, canonical, scope and return destination; no action authority.
+  Rejected ACK/result -> durable readback, no repeated retry or duplicate.
+  Successful callbacks chain immediately; ten-minute poll is idle fallback.
+  One canonical-writing worker only.
 
 Final report:
 - Delegation:

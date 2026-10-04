@@ -13,6 +13,14 @@ consultative Planner/Curator roles and a hard manual H2/H3 hardware lane.
 
 ## Scope
 
+Current progression is Revision 3 (GLYPH-UD-027), defined in
+VALIDATION_AND_GATES.md: Tier 1 always blocks, Tier 2 blocks when directly
+affected, Tier 3 is tracked framework debt unless a concrete Tier-1/Tier-2
+contradiction exists. Preserve historical Revision-2 evidence and exact
+hardware/source safety; no false aggregate PASS or recursive meta-campaign.
+GLYPH-UD-028 authorizes known-campaign orchestration transport only, with
+durable polling fallback; it creates no action authority or concurrent writer.
+
 Repo-only scope:
 
 - Glyph / HayBox firmware-backend behavior and realization boundaries.
