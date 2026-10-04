@@ -1,8 +1,12 @@
 # Active Agent Queue
 
-## Current GP-CONFIG-014 Candidate Handoff
+## Current Persistent Campaign
 
-Exact candidate `a3664be5354ec4253122eb2e738e70e5dfdb9ccc`, tree `287732689ce5ef069db72148a78926f4f5376ea0`, is published and independently approved on `codex/gp-config-014-current-capacity`, with sole direct live-verified base `8b8e45b17a5670bbf983360faf87bdf9d6b50ce2`. Its ten-path inventory contains only the two exact adopted production repairs and eight proof/metadata paths. Both enum layouts pass all 30 sanitizer cases and negative controls; ten actual focused/affected checks pass. Fifteen actual safety checks remain unpassed at the named GP-VAL-034 contract; full aggregate PASS is not claimed and no gate is waived. The queue records C014 REVIEW and GP-VAL-034 PREAUTHORIZED/ACTIVATABLE after all objective conditions pass. The canonical handoff is source-free; candidate firmware is unmerged. Dispatch GP-VAL-034 next, preserving exact C; stop before firmware build/custody/hardware/integration until its required governance is DONE. C014 hardware acceptance is PENDING, build NOT_RUN, artifact NONE. Existing C020/037 exact DONE/PASS and all other 95 orders remain unchanged. Paused040/KBD stays paused; Nunchuk NOT_TESTED and root cause UNPROVEN.
+GLYPH-UD-029 and current owner resume userMessage `01a107a0-5399-7fb2-95b5-3361eecd386e` authorize persistent execution. GP-VAL-034 is mechanically READY after the exact C014 handoff; the same H3 worker retains sole canonical publication authority and continues034 -> preserved014 -> exact build/custody/review -> HARDWARE_REQUIRED. Independent H1 work may proceed in isolated branches without canonical authority. The earlier H1 pause is historical and superseded. No firmware source, controller acceptance or build is added by this source-free policy/activation pass.
+
+## Preserved GP-CONFIG-014 Candidate Handoff at5205ba5
+
+Exact candidate `a3664be5354ec4253122eb2e738e70e5dfdb9ccc`, tree `287732689ce5ef069db72148a78926f4f5376ea0`, is published and independently approved on `codex/gp-config-014-current-capacity`, with sole direct live-verified base `8b8e45b17a5670bbf983360faf87bdf9d6b50ce2`. Its ten-path inventory contains only the two exact adopted production repairs and eight proof/metadata paths. Both enum layouts pass all 30 sanitizer cases and negative controls; ten actual focused/affected checks pass. Fifteen actual safety checks remain unpassed at the named GP-VAL-034 contract; full aggregate PASS is not claimed and no gate is waived. At5205ba5 the queue recorded C014 REVIEW and GP-VAL-034 PREAUTHORIZED/ACTIVATABLE; this source-free batch adoption now mechanically promotes034 to READY. The canonical handoff is source-free; candidate firmware is unmerged. The same persistent H3 executor now continues GP-VAL-034, preserving exact C; stop before firmware build/custody/hardware/integration until its required governance is DONE. C014 hardware acceptance is PENDING, build NOT_RUN, artifact NONE. Existing C020/037 exact DONE/PASS and all other 95 orders remain unchanged. The owner has resumed isolated H1 branch work; Nunchuk NOT_TESTED and root cause UNPROVEN.
 
 ## Current Post-C020 Revision-3 Policy
 
@@ -25,7 +29,7 @@ The machine queue/marker records its mechanical activation; fresh C014 remains
 the output, not a prerequisite;
 then its named GP-VAL-034 successor and all build/custody/review/human PASS gates
 remain. The completed owner-directed policy pass did not activate H3 work; the separate014 cycle records its own activation. The unchanged runway
-marker defines executable supply. Paused GP-VAL-040/KBD stays paused; Nunchuk is NOT_TESTED and root cause
+marker defines executable supply. The owner has resumed isolated H1 branch work; Nunchuk is NOT_TESTED and root cause
 UNPROVEN. The daemon resumes only the next already-authorized release step
 after this bounded pass is reviewed, published and live-verified.
 
@@ -33,7 +37,7 @@ The C020/044 summaries below record the preceding lifecycle, not a request to
 repeat completed work, rebuild or physically retest.
 
 
-GP-CONFIG-020 is DONE after reviewed live integration `a59c62793c52130612f39558b7c7e5a70a8c8cf4` and separate strict DIRECT_ANCESTRY completion correspondence under GLYPH-UD-027 Revision 3. Tested source merge `bce59d34bcb6b4158a5f755293f20102c7a0abb9` follows source-free HEP evidence E `6b36d99b0624047558ed8f9ede83dcaee78e72a9`; the GP-VAL-043 catalog preserves reviewed R, earliest E and that merge. Exact tested F remains `7db4f447d5e796367071b7143fa6c9274c70ae5e`, tree `4b5b63ce56219a508e2b71745438a609dd5661c3`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`, 796160 bytes. All 24 focused/affected checks and required negative controls pass; fresh independent Sol review approves the exact integration. Source, build inputs, protocol and hardware evidence stay byte-exact. The queue preserves PASS with empty gaps and every other order. HEP PASS is owner-reported GC and Mac XInput evidence; pre/post persisted Config remains exactly 4201 bytes, SHA-256 `f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480`. Invalid-binding physical submission remains HOST_ONLY/NOT_TESTED. Existing aggregate FAIL/incomplete and ignored Finder/TinyUSB metadata failures remain framework debt; no full aggregate PASS is claimed. Paused GP-VAL-040/KBD remains paused, Nunchuk remains NOT_TESTED and root cause remains unproven. The post-C020 Revision 3 control-plane pass is complete; the current C014 handoff above defines the next daemon action.
+GP-CONFIG-020 is DONE after reviewed live integration `a59c62793c52130612f39558b7c7e5a70a8c8cf4` and separate strict DIRECT_ANCESTRY completion correspondence under GLYPH-UD-027 Revision 3. Tested source merge `bce59d34bcb6b4158a5f755293f20102c7a0abb9` follows source-free HEP evidence E `6b36d99b0624047558ed8f9ede83dcaee78e72a9`; the GP-VAL-043 catalog preserves reviewed R, earliest E and that merge. Exact tested F remains `7db4f447d5e796367071b7143fa6c9274c70ae5e`, tree `4b5b63ce56219a508e2b71745438a609dd5661c3`, UF2 SHA-256 `7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500`, 796160 bytes. All 24 focused/affected checks and required negative controls pass; fresh independent Sol review approves the exact integration. Source, build inputs, protocol and hardware evidence stay byte-exact. The queue preserves PASS with empty gaps and every other order. HEP PASS is owner-reported GC and Mac XInput evidence; pre/post persisted Config remains exactly 4201 bytes, SHA-256 `f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480`. Invalid-binding physical submission remains HOST_ONLY/NOT_TESTED. Existing aggregate FAIL/incomplete and ignored Finder/TinyUSB metadata failures remain framework debt; no full aggregate PASS is claimed. The owner has resumed isolated H1 branch work, Nunchuk remains NOT_TESTED and root cause remains unproven. The post-C020 Revision 3 control-plane pass is complete; the current C014 handoff above defines the next daemon action.
 
 Status label: CURRENT.
 
@@ -133,9 +137,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
-    "recorded_preauthorized": 11,
-    "mechanically_activatable_preauthorized": 2,
+    "immediate_ready": 2,
+    "recorded_preauthorized": 10,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
     "effective_authorized_runway": 3,
@@ -566,7 +570,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-034",
       "title": "C014 governance",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-034-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -583,12 +587,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve the exact committed GP-CONFIG-014 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
       "substantive_authorization_rationale": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
-      "mechanical_activation_conditions": [
-        "Strict DONE correspondence for GP-VAL-037; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
-        "GP-CONFIG-014 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-014 scope; expected full-aggregate failure does not bar candidate creation.",
-        "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
-        "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
@@ -614,7 +613,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
@@ -7856,11 +7855,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":11,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-034","GP-CONFIG-019"],"immediate_ready":2,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":3,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 11; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-034, GP-CONFIG-019; Immediate Ready: 2; Recorded Preauthorized: 10; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 3; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -9437,7 +9436,7 @@ This immutable source-free review records the separately reported finite E/I def
 ```
 <!-- c020-processor-curation:end -->
 
-Canonical firmware source is unchanged. Complete exact human GP_CONFIG_020_HW_V1 evidence and independent processor/reviewer PASS are preserved in unapproved source-free draft `84e999693c5ef058c3a116c1632baa818add6ddb`; the original draft publication failed because its guard demanded I at required preintegration E. The earlier synthetic phase test omitted standalone E; GP-VAL-044 directly tests that checkpoint. GP-VAL-044 is DONE through reviewed source-free integration `6823da0c8219dc93a404906fe1be3aaeeb3736d5` and later strict completion correspondence under direct owner GLYPH-UD-027. Exact original implementation `d6fbbbf083c385d7cdfa82627ea2184bb9ded19e` and supplemental reviewed implementation `9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1` authenticate SOURCE_FREE_PROCESSOR E separately from accepted source I. Standalone E, E descendant, synthetic I and accepted descendant each passed all fifteen actual consumers; focused negatives, relevant history/correspondence and frozen snapshots passed. New exact committed owner-record allowance passed baseline/E/I direct regressions. Current integration consumers passed in an exact independent committed checkout with full native fingerprint MATCH; original tracked/index/ref/byte snapshot MATCH, but original full native fingerprint is UNAVAILABLE due to a pre-existing ignored TinyUSB dependency directory (untouched). Full phase aggregates are not claimed complete: original nested-preflight FAIL, bounded 300-second timeout/incomplete and later 307.80-second 45/46 diagnostic FAIL remain nonblocking FRAMEWORK_VALIDATION_DEBT under Revision-3, with unknown cause, not PASS. Recursive validation cost, duplicated topology, validator coupling, repeated Git-object proof and ignored-directory enumeration remain debt; production 300/120 limits and otherwise deferred GP-VAL-011 are unchanged. Synthetic fixtures confer no human acceptance. Separate HEP must now resume preserved complete physical observations with no physical retest or rebuild, independently classify exact C020 F/artifact/protocol/rows/gaps and publish source-free E; only then separate tested C020 source integration and strict DONE may follow. At044 completion, canonical C020 remained HARDWARE_TEST_REQUIRED with unchanged identity/result/gaps; no hardware PASS, source integration or C020 DONE was published by044. Old failed evidence draft and reports remain immutable;037/043 DONE and all96 other orders are preserved. Paused040/KBD stay paused; Nunchuk remains NOT_TESTED and root cause remains unproven. Broad Revision-3 control-plane simplification is deferred until C020 DONE. The queue/markers define executability. After reviewed source-free044 integration and strict DONE, separate HEP resumes the preserved exact evidence on fresh canonical and publishes validated source-free E; only then separate C020 source integration may publish I/catalog and strict DONE. No physical retest or rebuilt artifact is requested. At044 completion, canonical020 hardware-pending identity/result fields stayed exact;037/043 DONE, all96 prior orders, owner directions and paused040/KBD remain preserved.
+Canonical firmware source is unchanged. Complete exact human GP_CONFIG_020_HW_V1 evidence and independent processor/reviewer PASS are preserved in unapproved source-free draft `84e999693c5ef058c3a116c1632baa818add6ddb`; the original draft publication failed because its guard demanded I at required preintegration E. The earlier synthetic phase test omitted standalone E; GP-VAL-044 directly tests that checkpoint. GP-VAL-044 is DONE through reviewed source-free integration `6823da0c8219dc93a404906fe1be3aaeeb3736d5` and later strict completion correspondence under direct owner GLYPH-UD-027. Exact original implementation `d6fbbbf083c385d7cdfa82627ea2184bb9ded19e` and supplemental reviewed implementation `9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1` authenticate SOURCE_FREE_PROCESSOR E separately from accepted source I. Standalone E, E descendant, synthetic I and accepted descendant each passed all fifteen actual consumers; focused negatives, relevant history/correspondence and frozen snapshots passed. New exact committed owner-record allowance passed baseline/E/I direct regressions. Current integration consumers passed in an exact independent committed checkout with full native fingerprint MATCH; original tracked/index/ref/byte snapshot MATCH, but original full native fingerprint is UNAVAILABLE due to a pre-existing ignored TinyUSB dependency directory (untouched). Full phase aggregates are not claimed complete: original nested-preflight FAIL, bounded 300-second timeout/incomplete and later 307.80-second 45/46 diagnostic FAIL remain nonblocking FRAMEWORK_VALIDATION_DEBT under Revision-3, with unknown cause, not PASS. Recursive validation cost, duplicated topology, validator coupling, repeated Git-object proof and ignored-directory enumeration remain debt; production 300/120 limits and otherwise deferred GP-VAL-011 are unchanged. Synthetic fixtures confer no human acceptance. Separate HEP must now resume preserved complete physical observations with no physical retest or rebuild, independently classify exact C020 F/artifact/protocol/rows/gaps and publish source-free E; only then separate tested C020 source integration and strict DONE may follow. At044 completion, canonical C020 remained HARDWARE_TEST_REQUIRED with unchanged identity/result/gaps; no hardware PASS, source integration or C020 DONE was published by044. Old failed evidence draft and reports remain immutable;037/043 DONE and all96 other orders are preserved. The owner has resumed isolated H1 branch work; Nunchuk remains NOT_TESTED and root cause remains unproven. Broad Revision-3 control-plane simplification is deferred until C020 DONE. The queue/markers define executability. After reviewed source-free044 integration and strict DONE, separate HEP resumes the preserved exact evidence on fresh canonical and publishes validated source-free E; only then separate C020 source integration may publish I/catalog and strict DONE. No physical retest or rebuilt artifact is requested. At044 completion, canonical020 hardware-pending identity/result fields stayed exact;037/043 DONE, all96 prior orders, owner directions and paused040/KBD remain preserved.
 
 
 ## 2026-10-04 GP-CONFIG-020 Revision 3 integration result
@@ -11172,3 +11171,153 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config014-handoff:end -->
+
+
+## 2026-10-04 Persistent owner batch adoption and034 activation
+
+<!-- glyph-ud029-adoption:start -->
+```json
+{
+  "schema_name": "glyph_persistent_batch_owner_adoption",
+  "schema_version": 1,
+  "owner_direction": "GLYPH-UD-029",
+  "owner_record": "793c04c333e86c7656b7c3142bbab8a7c4a78b08",
+  "owner_parent": "5205ba518d1d5fa19e7584d6c6d5210932091b3e",
+  "owner_document_sha256": "30a2d3b3836eb24dc674ba36a564a78892e099b9d36400665af8791176ae12bc",
+  "old_owner_prefix_preserved": true,
+  "batch_directive": {
+    "schema_name": "glyph_verified_owner_batch_directive",
+    "source_thread_id": "01a0fcbd-2b4c-7d31-9088-42a22e260b57",
+    "user_message_id": "01a1078b-f2a9-77c2-b3bd-c0f0aaba5d74",
+    "source_kind": "actual userMessage independently read with read_thread",
+    "text": "OWNER DIRECTIVE \u2014 SWITCH TO PERSISTENT BATCH EXECUTION NOW\n\nThis supersedes the daemon's current chat-per-transition operating style.\n\nThe existing safety model remains active, including Revision 3.\n\nThe problem being corrected is orchestration throughput.\n\nThe daemon has made many tens of worker/chat calls while completing only a\nsmall fraction of the release stack. Excessive worker creation, context reload,\nACK traffic, polling, and mechanical handoff between separate conversations is\nnow itself a material project bottleneck.\n\nDo NOT continue using a new full worker chat for every READY -> candidate ->\nGP-VAL -> resume -> build -> handoff transition.\n\n===============================================================================\nNEW OPERATING MODEL\n===============================================================================\n\nUse a small number of LONG-LIVED FULL WORKER THREADS.\n\nPreferred topology:\n\nDAEMON\n|\n+-- H3 CAMPAIGN EXECUTOR\n|\n+-- H1 CAMPAIGN EXECUTOR\n|\n+-- CURATOR / AUTHORITY WORKER\n|\n+-- HARDWARE EVIDENCE PROCESSOR\n|\n+-- optional fresh independent reviewers / specialists\n\nThese workers persist across multiple mechanically related transitions.\n\nDo not discard/recreate them after every commit.\n\n===============================================================================\nH3 CAMPAIGN EXECUTOR\n===============================================================================\n\nMaintain ONE persistent full worker responsible for the serialized H3 stack:\n\nGP-CONFIG-014\n-> GP-CONFIG-017\n-> GP-CONFIG-021\n-> GP-CONFIG-022\n-> GP-CONFIG-023\n\nsubject to live prerequisites and existing queue authority.\n\nFor each logical H3 item, that SAME executor should carry the item from:\n\nREADY\n-> implementation\n-> ordinary candidate-governance successor\n-> resume\n-> focused Revision-3 validation\n-> fresh independent review\n-> exact Mk6 build\n-> artifact custody\n-> HARDWARE_REQUIRED\n\nwithout returning control to the daemon after every mechanical transition.\n\nIt may use its own fresh reviewer subagents.\n\nIt may execute a mechanically activated GP-VAL successor itself when:\n\n- that successor is already PREAUTHORIZED;\n- activation criteria are objective;\n- no new semantic/owner decision is required.\n\nDo NOT create another full Implementation Supervisor thread just because the\nwork-order ID changes from CONFIG to VAL and back again.\n\nTreat:\n\nCONFIG-014 -> VAL-034 -> CONFIG-014\n\nas ONE logical execution chain.\n\nSame for:\n\nCONFIG-017 -> VAL-035 -> CONFIG-017\n\nCONFIG-021 -> VAL-038 -> CONFIG-021\n\nCONFIG-022 -> VAL-039 -> CONFIG-022\n\nCONFIG-023 -> VAL-042 -> CONFIG-023\n\n===============================================================================\nH1 CAMPAIGN EXECUTOR\n===============================================================================\n\nMaintain a separate persistent H1 worker for:\n\nGP-VAL-040 -> GP-KBD-001 completion\nGP-CONFIG-019 -> GP-VAL-041 -> GP-CONFIG-019 completion\n\nand other genuinely H1 release-critical characterization work.\n\nThe H1 executor should continue through mechanical successors itself.\n\nDo not create a new full chat for every characterization/governance step.\n\nThe H1 executor may work while:\n\n- H3 executor is waiting for human hardware;\n- H3 artifact is frozen;\n- its work cannot change frozen H3 source/build inputs.\n\nCanonical publication remains serialized.\n\n===============================================================================\nCANONICAL WRITE LOCK\n===============================================================================\n\nKeep exactly one canonical writer at a time.\n\nBUT:\n\nthe write lock must NOT mean only one worker may make progress.\n\nWorkers without the canonical lock may:\n\n- inspect;\n- implement on dedicated branches;\n- run tests;\n- prepare candidate commits;\n- obtain independent review;\n- prepare exact handoff state.\n\nThey may NOT publish to `configurator` until the daemon grants the lock.\n\nThis allows branch-level useful concurrency while preserving canonical safety.\n\n===============================================================================\nWORK-CONSERVING SCHEDULER\n===============================================================================\n\nThe daemon must keep workers productive whenever safe work exists.\n\nAt every state transition ask:\n\n\"Is there executable work that can proceed without violating the current frozen\ncandidate or canonical-write lock?\"\n\nIf YES, dispatch/continue it immediately.\n\nDo not leave both executors idle while:\n\n- a mechanical successor is executable;\n- an H1 lane can proceed;\n- a branch can be prepared safely;\n- a reviewer can work;\n- hardware is pending.\n\n===============================================================================\nNO CHAT FOR MECHANICAL TRANSITIONS\n===============================================================================\n\nThe following are NOT reasons to create a new full worker:\n\n- candidate SHA became known;\n- successor GP-VAL became mechanically activatable;\n- candidate paths became known;\n- branch name became known;\n- review is needed;\n- a build is now permitted;\n- artifact hash became known;\n- source-free HEP publication became permitted;\n- predecessor must resume after GP-VAL DONE.\n\nHandle these inside the existing persistent executor.\n\n===============================================================================\nWHEN A NEW FULL THREAD IS JUSTIFIED\n===============================================================================\n\nCreate a new full peer thread only when one of these applies:\n\n1. independent Curator judgment is required;\n2. genuine Planner work is required;\n3. Hardware Evidence Processor independence is required;\n4. a worker is dead/stale/corrupted;\n5. fresh role independence requires a new context;\n6. a separate long-running H1/H3 lane needs parallelism.\n\nOtherwise reuse the persistent worker.\n\n===============================================================================\nREVISION-3 VALIDATION MODEL\n===============================================================================\n\nUse GLYPH-UD-027 aggressively.\n\nTier 1:\nblocking.\n\nTier 2:\nblocking when directly affected.\n\nTier 3:\nframework health debt unless it reveals a concrete Tier-1/Tier-2\ncontradiction.\n\nBefore spawning ANY validation/governance successor not already in the queue,\nrequire:\n\n`UNPROVEN_SAFETY_FACT = <specific concrete safety fact>`\n\nIf that cannot be stated, do not create another work order.\n\nRecord framework debt instead.\n\n===============================================================================\nNO RECURSIVE VALIDATION CHAINS\n===============================================================================\n\nFor one logical product task:\n\nmaximum normal path:\n\nPRODUCT WORK\n-> ONE ordinary validation/governance successor\n-> PRODUCT RESUME\n\nOne exceptional repair successor is allowed only for a concrete Tier-1/Tier-2\ndefect.\n\nAnything beyond that requires direct owner approval.\n\nDo not regenerate the C020 GP-VAL-037 -> 043 -> 044 pattern.\n\n===============================================================================\nCURATOR USAGE\n===============================================================================\n\nThe persistent Curator worker is for:\n\n- genuine source-authority decisions;\n- owner-policy incorporation;\n- architecture decisions;\n- hardware FAIL recovery;\n- newly discovered concrete safety facts.\n\nDo NOT send mechanical transitions to Curator.\n\nDo NOT send timeouts or orchestration friction to Curator unless they expose a\nspecific candidate-safety issue.\n\n===============================================================================\nPLANNER USAGE\n===============================================================================\n\nDo not call Planner routinely.\n\nPlanner is used only when:\n\n- executable runway is genuinely exhausted;\n- a new substantive release blocker is discovered;\n- source/product architecture needs new decomposition.\n\nDo not use Planner to restate an existing authorized chain.\n\n===============================================================================\nPOLLING / MCP\n===============================================================================\n\nCross-thread MCP remains owner-authorized.\n\nWorkers should send results immediately when MCP succeeds.\n\nIf MCP is rejected:\n\n- continue locally;\n- persist results;\n- daemon reads the worker at the next poll.\n\nDo not create a replacement worker merely because messaging failed.\n\nTen-minute polling is fallback only.\n\nDo not delay known executable transitions until the next poll.\n\n===============================================================================\nCURRENT LIVE STARTING POINT\n===============================================================================\n\nAt issuance, expected live canonical is:\n\n`8b8e45b17a5670bbf983360faf87bdf9d6b50ce2`\n\nLive-verify before action.\n\nKnown current supply:\n\nREADY:\n- GP-CONFIG-014\n- GP-CONFIG-019\n\nMechanically activatable PREAUTHORIZED:\n- one item, live-resolve exact ID\n\nGP-CONFIG-020:\nDONE\n\nRevision-3 control-plane pass:\nDONE\n\nCross-thread transport addendum:\nrecorded\n\nNo hardware currently pending.\n\n===============================================================================\nIMMEDIATE EXECUTION ORDER\n===============================================================================\n\nPrimary H3 worker:\n\nSTART / CONTINUE GP-CONFIG-014 NOW.\n\nDo not stop after merely creating its candidate.\n\nCarry the complete logical chain:\n\nC014\n-> VAL034 if mechanically activated\n-> resume C014\n-> Revision-3 Tier-1/Tier-2 validation\n-> fresh review\n-> Mk6 build\n-> artifact custody\n-> hardware handoff\n\nThen stop only for actual owner hardware.\n\nDuring that hardware wait:\n\nH1 worker should advance:\n\n1. GP-VAL-040\n2. GP-KBD-001 completion\n3. GP-CONFIG-019\n4. GP-VAL-041\n5. GP-CONFIG-019 completion\n\nas live prerequisites permit.\n\nAfter C014 hardware PASS and integration:\n\nsame H3 executor immediately proceeds to C017.\n\nThen:\n\nC021\nC022\nC023\n\nNo fresh full implementation thread per order unless the current persistent H3\nworker is no longer usable.\n\n===============================================================================\nHARDWARE LOOP\n===============================================================================\n\nWhen H3 reaches hardware:\n\n1. freeze exact candidate/artifact;\n2. send owner exact one-action-at-a-time protocol;\n3. while owner tests, continue safe H1 work;\n4. when observations return, persistent HEP validates;\n5. PASS -> same H3 campaign resumes integration/DONE;\n6. immediately proceed to next H3 item.\n\nDo not spend hardware wait time idle.\n\n===============================================================================\nTHROUGHPUT METRICS\n===============================================================================\n\nTrack these metrics visibly:\n\n- full worker chats created per logical product order;\n- canonical commits per logical product order;\n- mechanical handoffs per logical product order;\n- wall-clock time READY -> HARDWARE_REQUIRED;\n- wall-clock time hardware report -> DONE;\n- no-op worker calls;\n- Curator calls;\n- Planner calls.\n\nTargets after this directive:\n\nFULL IMPLEMENTATION WORKER CHATS PER PRODUCT ORDER:\n<= 1 persistent campaign worker\n\nPLANNER CALLS:\n0 unless genuinely substantive\n\nCURATOR CALLS:\n0 for mechanical execution\n\nNO-OP WORKER CALLS:\n0\n\nMECHANICAL TRANSITION LATENCY:\nimmediate\n\nHARDWARE REPORT -> HEP START:\nimmediate\n\nHEP PASS -> INTEGRATION START:\nimmediate\n\n===============================================================================\nANTI-IDLE RULE\n===============================================================================\n\nIf the daemon has:\n\n- no hardware waiting;\n- READY work;\n- no active write-capable worker;\n\nthat is an orchestration defect.\n\nDispatch work immediately.\n\nIf hardware is waiting and independent H1 work exists:\n\nleaving the H1 executor idle is an orchestration defect.\n\n===============================================================================\nANTI-CHAT-SPAM RULE\n===============================================================================\n\nBefore spawning a full peer chat, ask:\n\n\"Can an existing persistent worker legally perform this transition?\"\n\nIf YES:\n\nreuse it.\n\nIf NO:\n\nstate the exact independence/capability reason for spawning a new thread.\n\nRecord unnecessary thread creation as orchestration debt.\n\n===============================================================================\nORIGINAL DAEMON MISSION REMAINS\n===============================================================================\n\nDo not stop after C014 or another intermediate milestone.\n\nContinue until the bounded public-beta release stack is resolved:\n\n- C020 DONE\n- C014 DONE\n- C017 DONE\n- C021 DONE\n- C022 DONE\n- C023 DONE\n- KBD lane resolved\n- C019 USB lane resolved\n- release blockers resolved\n- GP-REL-001 / exact RC reached\n- final human publication decision is the remaining gate\n\nThe daemon's job is to finish the campaign, not to supervise one work order at a\ntime indefinitely.\n\n===============================================================================\nREPORTING\n===============================================================================\n\nDo not send routine verbose status updates after every commit.\n\nNotify the owner when:\n\n- hardware action is required;\n- owner policy is required;\n- a concrete Tier-1/Tier-2 defect is discovered;\n- an H3 work order reaches DONE;\n- the final RC/publication decision is reached.\n\nOtherwise keep executing.\n\nUse concise periodic daemon status only when requested.\n"
+  },
+  "current_resume": {
+    "source_thread_id": "01a0fcbd-2b4c-7d31-9088-42a22e260b57",
+    "turn_id": "01a107a0-5354-7ec1-b641-048100012da1",
+    "startedAt": 1791129310,
+    "user_message": {
+      "type": "userMessage",
+      "id": "01a107a0-5399-7fb2-95b5-3361eecd386e",
+      "content": [
+        {
+          "type": "text",
+          "text": "well that was days old message, not relevant anymore, proceed normally\n"
+        }
+      ]
+    },
+    "verified_current_resume": true,
+    "newer_than_historical_pause": true
+  },
+  "gp_val034_original_conditions": [
+    "Strict DONE correspondence for GP-VAL-037; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
+    "GP-CONFIG-014 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-014 scope; expected full-aggregate failure does not bar candidate creation.",
+    "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
+    "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
+  ],
+  "gp_val034_assessment": {
+    "status": "ACTIVATABLE",
+    "formal_conditions": [
+      "Strict DONE correspondence for GP-VAL-037; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
+      "GP-CONFIG-014 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-014 scope; expected full-aggregate failure does not bar candidate creation.",
+      "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
+      "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
+    ],
+    "objective_evidence": [
+      {
+        "id": "strict037DONE",
+        "result": "SATISFIED",
+        "evidence": "Authenticated strict DIRECT_ANCESTRY correspondence preserved in source-specialist; no missing completion."
+      },
+      {
+        "id": "hardwarePredecessorPASS",
+        "result": "SATISFIED",
+        "evidence": "Exact C020 F7db4f447/artifact7743fcbe/796160bytes accepted by HEP; emptygaps, strict020DONE preserved."
+      },
+      {
+        "id": "acceptedCriticalChain",
+        "result": "SATISFIED",
+        "evidence": "Existing037/043/044 closed accepted chain authenticates B; exact C020 source retained."
+      },
+      {
+        "id": "cleanCommittedC",
+        "result": "SATISFIED",
+        "evidence": "Exact clean Ca3664be5354ec4253122eb2e738e70e5dfdb9ccc with full tracked/index/HEAD byte/mode conformance."
+      },
+      {
+        "id": "liveDirectB",
+        "result": "SATISFIED",
+        "evidence": "Only direct parent 8b8e45b17a5670bbf983360faf87bdf9d6b50ce2 was live-verified at creation and again before/after publication; no replay/rebase."
+      },
+      {
+        "id": "completeInventory",
+        "result": "SATISFIED",
+        "evidence": "Recursive raw-z1558bytesSHA256c40d8aadf736832b52a746455d940b29296522c281f49b3ab314e3d22c1d11aa; exacttenpaths, all newmode100644."
+      },
+      {
+        "id": "independentConformance",
+        "result": "SATISFIED",
+        "evidence": "Separate source specialist and fresh independent reviewer approve exact adopted two blobs and full host proof, source/build-role conformance only; no build claimed."
+      },
+      {
+        "id": "generatedExtent",
+        "result": "SATISFIED",
+        "evidence": "Authenticated current0.4.9.2 generated modifier extent20 unchanged; extent19/21 negative compilation proves static equality."
+      },
+      {
+        "id": "otherCriticalExact",
+        "result": "SATISFIED",
+        "evidence": "236entries; exactlytwoapproved production deltas; all other critical bytes/modes equal B."
+      },
+      {
+        "id": "dependencyAnnex",
+        "result": "SATISFIED",
+        "evidence": "55row immutable annex and named finite authenticated predecessor metadata/source progressions verified; schema/default/decoder/domain36 preserved."
+      },
+      {
+        "id": "noExpansionOrFailure",
+        "result": "SATISFIED",
+        "evidence": "No new policy/product/source authority, forbidden capability, pending hardware failure or invalid acceptance; separate018 untouched."
+      },
+      {
+        "id": "cleanObjectClosure",
+        "result": "SATISFIED",
+        "evidence": "All33finite roots locally present; no missingobjects, dirty/staged/untracked/ignoredcritical inputs. Candidate host proof and focused freeze MATCH."
+      }
+    ],
+    "new_judgment_required": false,
+    "invalidation_present": false,
+    "execute034_in_this_invocation": false
+  },
+  "gp_val034_status_before": "PREAUTHORIZED/ACTIVATABLE",
+  "gp_val034_status_after": "READY",
+  "other96_queue_objects_unchanged": true,
+  "critical_source_build_inputs_unchanged": true,
+  "firmware_build_run": false,
+  "hardware_acceptance": false,
+  "owner_scope_paths": [
+    "AGENTS.md",
+    "docs/WORKFLOW.md",
+    "docs/agent_framework/README.md",
+    "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
+    "docs/agent_framework/SUPERVISOR_CONTRACT.md",
+    "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+    "docs/agent_framework/SCHEDULED_TASKS.md",
+    "docs/agent_framework/CYCLE_STATE_MACHINE.md",
+    "docs/agent_framework/PROMPT_TEMPLATES.md",
+    "tools/check_glyph_agent_framework_docs.py",
+    "tools/test_glyph_hardware_correspondence.py"
+  ],
+  "lock": "soleH3publication; isolatedH1branchwork permitted",
+  "metrics": {
+    "new_full_chats": 0,
+    "planner_calls": 0,
+    "curator_calls": 0,
+    "no_op_calls": 0,
+    "mechanical_daemon_handoffs": 0
+  },
+  "pause_chronology": "Old01a102c4pause predates ownerbatch01a1078b and currentresume01a107a0; no freshpause authority.",
+  "next_action": "SamepersistentH3worker executes alreadyauthorized034 thenresumes exactC014; nohandoff/newchat."
+}
+```
+<!-- glyph-ud029-adoption:end -->

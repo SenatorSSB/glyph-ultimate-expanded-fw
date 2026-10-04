@@ -648,5 +648,99 @@ class ClassificationTests(unittest.TestCase):
                 self.assertEqual(correspondence.classify_path(path), "CRITICAL")
 
 
+class PersistentOwnerDirectionTests(unittest.TestCase):
+    """The new literal record cannot rewrite prior direction or source authority."""
+    def setUp(self):
+        import glyph_c020_abi_repair_transition as campaign
+        self.campaign = campaign
+        self.temp = tempfile.TemporaryDirectory(prefix="glyph-owner-batch-")
+        self.addCleanup(self.temp.cleanup)
+        self.root = (Path(self.temp.name) / "repo").resolve()
+        self.command("clone", "--shared", "--no-checkout", str(Path(__file__).resolve().parents[1]), str(self.root), cwd=Path(self.temp.name))
+        self.command("switch", "--detach", campaign.PERSISTENT_BATCH_AUTHORITY)
+
+    def command(self, *args, cwd=None):
+        result = subprocess.run(["git", *args], cwd=cwd or self.root, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return result.stdout.strip()
+
+    def scope(self):
+        return self.campaign._owner_direction_scope(self.root, self.command("rev-parse", "HEAD"), {self.campaign.OWNER_DIRECTION})
+
+    def test_exact_D2_and_historical_D1(self):
+        self.assertEqual(self.scope(), self.campaign.REVISION_THREE_PATHS | self.campaign.PERSISTENT_BATCH_PATHS | {self.campaign.OWNER_DIRECTION})
+        self.command("switch", "--detach", self.campaign.REVISION_THREE_AUTHORITY)
+        self.assertEqual(self.scope(), self.campaign.REVISION_THREE_PATHS | {self.campaign.OWNER_DIRECTION})
+
+    def test_no_source_or_evidence_or_prefix_authority(self):
+        scope = self.scope()
+        for path in self.campaign.PERSISTENT_BATCH_PATHS:
+            self.assertIn(path, scope)
+            for alias in (path + ".bak", path.swapcase(), "prefix/" + path):
+                self.assertNotIn(alias, scope)
+        for path in (HANDLER, "include/modes/CustomControllerMode.hpp", "src/modes/CustomControllerMode.cpp", "platformio.ini", self.campaign.PROTOCOL, self.campaign.EVIDENCE, self.campaign.RESULT, self.campaign.TRANSITIONS):
+            self.assertNotIn(path, scope)
+
+    def test_live_and_index_substitution(self):
+        path = self.root / self.campaign.OWNER_DIRECTION
+        path.write_bytes(path.read_bytes() + b"unreviewed\n")
+        with self.assertRaises(correspondence.CorrespondenceError):
+            self.scope()
+        self.command("add", self.campaign.OWNER_DIRECTION)
+        path.write_bytes(self.campaign.raw_bytes(self.root, self.campaign.PERSISTENT_BATCH_AUTHORITY, self.campaign.OWNER_DIRECTION))
+        with self.assertRaises(correspondence.CorrespondenceError):
+            self.scope()
+
+    def test_mode_and_symlink_substitution(self):
+        path = self.root / self.campaign.OWNER_DIRECTION
+        path.chmod(0o755)
+        with self.assertRaises(correspondence.CorrespondenceError):
+            self.scope()
+        path.chmod(0o644)
+        data = path.read_bytes()
+        target = Path(self.temp.name) / "external-direction.md"
+        target.write_bytes(data)
+        path.unlink()
+        path.symlink_to(target)
+        with self.assertRaises(correspondence.CorrespondenceError):
+            self.scope()
+
+    def test_parent_hash_and_earlier_direction_reseal(self):
+        with mock.patch.object(self.campaign, "PERSISTENT_BATCH_PARENT", self.campaign.REVISION_THREE_AUTHORITY):
+            with self.assertRaises(correspondence.CorrespondenceError):
+                self.scope()
+        with mock.patch.object(self.campaign, "PERSISTENT_BATCH_DIRECTION_SHA256", "0" * 64):
+            with self.assertRaises(correspondence.CorrespondenceError):
+                self.scope()
+        original = self.campaign.raw_bytes
+        bad = original(self.root, self.campaign.PERSISTENT_BATCH_AUTHORITY, self.campaign.OWNER_DIRECTION).replace(b"GLYPH-UD-028", b"GLYPH-UD-000", 1)
+        def changed(root, ref, path):
+            return bad if ref == self.campaign.PERSISTENT_BATCH_AUTHORITY and path == self.campaign.OWNER_DIRECTION else original(root, ref, path)
+        import hashlib
+        with mock.patch.object(self.campaign, "raw_bytes", side_effect=changed), mock.patch.object(self.campaign, "PERSISTENT_BATCH_DIRECTION_SHA256", hashlib.sha256(bad).hexdigest()):
+            with self.assertRaises(correspondence.CorrespondenceError):
+                self.scope()
+
+    def test_extra_record_path_and_record_mode(self):
+        original = self.campaign._git
+        def changed(root, *args):
+            if args[:2] == ("diff", "--name-only") and args[-1] == self.campaign.PERSISTENT_BATCH_AUTHORITY:
+                return (self.campaign.OWNER_DIRECTION + "\n" + self.campaign.EVIDENCE + "\n").encode()
+            return original(root, *args)
+        with mock.patch.object(self.campaign, "_git", side_effect=changed):
+            with self.assertRaises(correspondence.CorrespondenceError):
+                self.scope()
+        original_tree = self.campaign._tree
+        def changed_tree(root, ref):
+            value = dict(original_tree(root, ref))
+            if ref == self.campaign.PERSISTENT_BATCH_AUTHORITY:
+                entry = value[self.campaign.OWNER_DIRECTION]
+                value[self.campaign.OWNER_DIRECTION] = ("100755", entry[1], entry[2])
+            return value
+        with mock.patch.object(self.campaign, "_tree", side_effect=changed_tree):
+            with self.assertRaises(correspondence.CorrespondenceError):
+                self.scope()
+
+
 if __name__ == "__main__":
     unittest.main()

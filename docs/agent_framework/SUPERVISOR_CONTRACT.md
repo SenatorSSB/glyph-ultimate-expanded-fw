@@ -163,3 +163,42 @@ Final report:
 - stop conditions
 - follow-ups
 ```
+
+## Persistent campaign execution under GLYPH-UD-029
+
+The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
+return-after-mechanical-transition rules within its named H3 and H1 chains.
+Reuse the existing campaign executor through objective PREAUTHORIZED activation,
+the ordinary governance successor, product resume, focused Revision-3 validation,
+fresh independent review, exact committed build/custody and hardware handoff.
+No new full chat, Planner or Curator is required for these mechanical transitions.
+Live queue scope and substantive decisions remain authoritative. Retain exact
+candidates; never merge behavior-changing H2/H3 before exact human HEP PASS.
+The canonical publication lock permits one writer; isolated dedicated branch
+work/review may proceed without that lock when frozen inputs remain unchanged.
+Retain the H3 lock through the logical chain and release at hardware wait or a
+genuine substantive stop. Rejected transport uses durable readback. Preserve
+chronology: a historical pause cannot override a newer verified owner resume.
+Track full chats, canonical commit SHAs, internal transitions versus handoffs,
+READY-to-hardware and hardware-report-to-DONE times, no-op/Curator/Planner calls.
+
+<!-- persistent-batch-policy:start -->
+```json
+{
+  "owner_direction": "GLYPH-UD-029",
+  "persistent_campaign_workers": true,
+  "canonical_writers": 1,
+  "branch_work_without_canonical_lock": true,
+  "mechanical_transition_requires_new_full_chat": false,
+  "mechanical_transition_requires_planner_or_curator": false,
+  "preauthorized_activation_requires_objective_conditions": true,
+  "exact_candidate_preserved": true,
+  "fresh_independent_review": true,
+  "H2_H3_merge_requires_exact_human_HEP_PASS": true,
+  "max_pending_H3": 1,
+  "new_GP_VAL_requires_UNPROVEN_SAFETY_FACT": true,
+  "historical_pause_requires_chronology_check": true,
+  "transport_grants_action_authority": false
+}
+```
+<!-- persistent-batch-policy:end -->
