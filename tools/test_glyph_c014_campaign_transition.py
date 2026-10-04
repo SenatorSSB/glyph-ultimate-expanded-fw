@@ -330,6 +330,14 @@ def config019_hosts(root, A):
                  'docs/calibration/GP_CONFIG_019_usb_name_selection_characterization.md',
                  'tools/fixtures/gp_config019_usb_name_selection/unknown.cpp'):
         checkout(root, K)
+        # Removing a duplicate case-alias index entry during checkout can also
+        # remove the canonical working file on a case-insensitive filesystem.
+        # Restore only these exact known hosts, then prove the baseline before
+        # testing the next unknown path; a missing host must not fake rejection.
+        for original in proof.CONFIG019_ORIGINAL_HOSTS:
+            if (root / original).exists() or (root / original).is_symlink(): (root / original).unlink()
+            write(root, original, proof.raw_bytes(root, K, original))
+        assert proof.authenticate(root)['config019_host_paths'] == proof.CONFIG019_HOSTS
         if 'GP_CONFIG_019' in path:
             # Construct a real case-alias tree entry even on case-insensitive
             # filesystems; do not merely overwrite the canonical file bytes.
