@@ -2710,7 +2710,7 @@
       },
       "checker_id": "coordinate_native_runtime_profile_contract",
       "defines_main": true,
-      "file_size_bytes": 81932,
+      "file_size_bytes": 81952,
       "hard_coded_branch_like_strings": [
         "accepted_evidence",
         "accepted_evidence.",
@@ -2772,6 +2772,7 @@
         "docs/AGENT_CONTEXT.md",
         "docs/CURRENT_STATE.md",
         "docs/ROADMAP.md",
+        "docs/WORKFLOW.md",
         "docs/agent_framework/",
         "docs/checker-only",
         "docs/export/",
@@ -2849,7 +2850,7 @@
         "identity_runtime_tables",
         "runtime_config_docs"
       ],
-      "sha256": "4c82bacae406c55dfa1e9d99002645e060835f614f6a571bbe20d8c6ccd32a30",
+      "sha256": "99ce7da1add6cd601894001ab14dfe01f50593dee757853d38b1567d5353a221",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5321,7 +5322,7 @@
       },
       "checker_id": "generated_source_owned_artifact_install",
       "defines_main": true,
-      "file_size_bytes": 26843,
+      "file_size_bytes": 26863,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5380,6 +5381,7 @@
         "docs/AGENT_CONTEXT.md",
         "docs/CURRENT_STATE.md",
         "docs/ROADMAP.md",
+        "docs/WORKFLOW.md",
         "docs/agent_framework/",
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
@@ -5438,7 +5440,7 @@
         "runtime_config_docs",
         "source_owned_generator_modes"
       ],
-      "sha256": "fd7fd0d4badee7e4acbcb4a62ac85327ea72705eeba8b20df405a631f2ced4f4",
+      "sha256": "5624483ef7cd7f0f62670e831891031297e8d4882137154e99c385ccc60d8de2",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5459,7 +5461,7 @@
       },
       "checker_id": "generated_source_owned_baseline_artifact",
       "defines_main": true,
-      "file_size_bytes": 20291,
+      "file_size_bytes": 20319,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
@@ -5476,7 +5478,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 487,
+      "line_count": 488,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
       "potential_branch_identity_signals": [
@@ -5498,6 +5500,7 @@
         "docs/CURRENT_STATE.md",
         "docs/ROADMAP",
         "docs/ROADMAP.md",
+        "docs/WORKFLOW",
         "docs/agent_framework/",
         "docs/calibration/",
         "docs/export/",
@@ -5523,7 +5526,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "894cca11854f0e374435bc07ddd66375ee2a53d328152026012c6e547fe12145",
+      "sha256": "b587a09ef02fc0be6df94a87170ec335213b881759b1a047cd0db7fc2684b6f1",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -5544,7 +5547,7 @@
       },
       "checker_id": "generated_source_owned_generator_contract",
       "defines_main": true,
-      "file_size_bytes": 41723,
+      "file_size_bytes": 41743,
       "hard_coded_branch_like_strings": [
         "alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
         "branch",
@@ -5596,6 +5599,7 @@
         "docs/AGENT_CONTEXT.md",
         "docs/CURRENT_STATE.md",
         "docs/ROADMAP.md",
+        "docs/WORKFLOW.md",
         "docs/agent_framework/",
         "docs/calibration/INDEX.md",
         "docs/calibration/alt_b_generated_table_alias_candidate_hardware_result_2026-07-09.md",
@@ -5656,7 +5660,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "41fa214fa9ba761bc812ea719dc05f10763c45b60fe6c9260419e4f3a0639b6e",
+      "sha256": "0bf07fa03f1a407f4f58b44727b55982614986113b66e4ca372a2564aa650db3",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
