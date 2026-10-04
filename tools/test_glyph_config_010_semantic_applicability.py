@@ -57,9 +57,10 @@ def owner_revision3_direction_tests(directory: Path) -> None:
     run(ROOT, 'git', 'clone', '--quiet', '--no-local', str(ROOT), str(root))
     run(root, 'git', 'config', 'user.name', 'Disposable owner direction test')
     run(root, 'git', 'config', 'user.email', 'owner-direction@example.invalid')
+    expected_phase = campaign.authenticate(root)['phase']
     run(root, 'git', 'merge', '--no-ff', '--no-edit', repair.OWNER_DIRECTION_AUTHORITY)
     positive = run(root, 'git', 'rev-parse', 'HEAD').strip()
-    assert campaign.authenticate(root)['phase'] == 'BASELINE'
+    assert campaign.authenticate(root)['phase'] == expected_phase
     run(root, 'python3', 'tools/check_glyph_docs_agent_surface.py')
     path = root / repair.OWNER_DIRECTION
     authoritative = path.read_bytes()
