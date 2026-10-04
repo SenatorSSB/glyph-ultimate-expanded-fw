@@ -486,3 +486,80 @@ required post-reconnect visibility and LT4-to-Ult13 checks were not completed.
 New entries must identify the human source and date. If a direction is
 superseded, retain it and identify the superseding entry. Observations and
 hypotheses are evidence inputs, not automatic work authorization.
+
+## Persistent batch execution
+
+### GLYPH-UD-029
+
+- Type: `Directive`
+- Status: `Active`
+- Source: direct project-owner message "OWNER DIRECTIVE — SWITCH TO PERSISTENT
+  BATCH EXECUTION NOW", supplied 2026-10-04 in daemon task
+  `01a0fcbd-2b4c-7d31-9088-42a22e260b57`, actual userMessage
+  `01a1078b-f2a9-77c2-b3bd-c0f0aaba5d74`; independently retrieved in full by
+  the existing H3 Implementation Supervisor. The complete verified local
+  readback has SHA-256
+  `058f99066e4a2a1dd8d7daa5af8a0767ebfd840264bf9dd1d60d3f10adf309e8`.
+  This is owner direction, not authority inferred from a peer transport header.
+- Direction: reuse a small set of persistent full H3, H1, Curator/authority and
+  Hardware Evidence Processor workers. The H3 worker executes the existing
+  authorized sequence C014 -> C017 -> C021 -> C022 -> C023. Within each logical
+  item, carry READY -> implementation -> its already PREAUTHORIZED ordinary
+  governance successor -> product resume -> focused Revision-3 validation ->
+  fresh independent review -> exact committed Mk6 build -> artifact custody ->
+  HARDWARE_REQUIRED in the same worker. Objective activation and routine
+  mechanical transitions do not require another full chat, daemon handoff,
+  Planner or Curator. Preserve live prerequisites and exact candidate identity.
+- Named chains: C014 -> VAL034 -> C014, C017 -> VAL035 -> C017,
+  C021 -> VAL038 -> C021, C022 -> VAL039 -> C022, C023 -> VAL042 -> C023.
+  The existing H1 worker carries VAL040 -> KBD001 and C019 -> VAL041 -> C019
+  under live authority. The owner explicitly resumes this H1 lane; its earlier
+  pause remains historical. H1 branch work may proceed concurrently when it
+  cannot change frozen H3 source/build inputs; independent checkouts and stable
+  validation intervals preserve proof fingerprints.
+- Serialization: one canonical writer/publication lock at a time. The lock
+  controls publication to `configurator`; other workers may inspect, implement
+  dedicated branches, run tests, prepare commits, obtain review and prepare
+  handoffs without that lock. Retain the H3 lock through its logical chain;
+  release at genuine hardware wait or substantive stop. Do not mutate another
+  worker's checkout or publish concurrently. The daemon grants later canonical
+  publication authority and reassesses changed assumptions.
+- Safety: GLYPH-UD-027 Revision 3 and GLYPH-UD-028 transport remain active.
+  Tier 1 blocks; directly affected Tier 2 blocks; Tier 3 remains honest
+  framework debt unless it exposes a concrete Tier-1/Tier-2 contradiction.
+  Never merge behavior-changing H2/H3 before exact tested candidate/artifact
+  human PASS validated by independent HEP. One pending H3 candidate at a time.
+  No automatic flashing, device/Config write, public release, game-semantic
+  decision, unsupported backend claim or Nunchuk acceptance is authorized.
+- Successor limit: normal product -> one existing ordinary governance successor
+  -> product resume. One exceptional repair successor requires a concrete
+  Tier-1/Tier-2 defect; further recursion requires direct owner approval.
+  Any proposed new validation order requires
+  `UNPROVEN_SAFETY_FACT = <specific concrete safety fact>`; timeout or
+  orchestration friction alone creates no order. Curator is for genuine
+  source/owner/architecture decisions, hardware FAIL recovery or new safety
+  facts; Planner is for genuinely exhausted runway or substantive decomposition.
+- Hardware loop: freeze exact committed candidate and preserved artifact; send
+  the owner the exact protocol one action at a time. H1 may progress safely
+  during the wait. Actual observations go to persistent independent HEP.
+  After HEP PASS the same H3 worker integrates/completes the exact accepted item
+  and continues the next authorized H3 item immediately. Human publication
+  remains the final release gate.
+- Transport and throughput: send meaningful milestone, blocker, hardware or
+  lock updates through authorized MCP when it succeeds. After rejection persist
+  the same logical result and continue locally; daemon polling is fallback.
+  No replacement worker or repeated ACK traffic solely for transport failure.
+  New full chats are justified only by genuine independence/capability needs,
+  a failed worker, or a separate long-running H1/H3 lane. Keep productive safe
+  work moving through known transitions without waiting for a heartbeat.
+- Metrics from this directive: full chats created per logical product order,
+  canonical commits with SHAs, internal transitions versus daemon handoffs,
+  READY -> HARDWARE_REQUIRED and hardware-report -> DONE timestamps, no-op
+  calls, Curator calls and Planner calls. Reuse existing executors; mechanical
+  execution targets zero Planner/Curator/no-op calls and immediate transitions.
+- Supersession: within these named persistent chains this directive supersedes
+  default one-new-order-per-invocation and return-after-mechanical-handoff
+  instructions, including the earlier C014 candidate-only stop and H1 pause.
+  Prior instructions/evidence stay preserved; substantive authority, live queue
+  scope, independent review, exact source/build/custody and human hardware gates
+  remain required. This directive creates no new product work order.
