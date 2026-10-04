@@ -2,7 +2,7 @@
 
 ## Current Persistent Campaign
 
-GP-VAL-034 is strict DONE after reviewed source-free live integration `16bc1b51353dc175ea2e5cffb04e09e8e075b892`. Its 25-path implementation preserves all236 critical entries and the exact C014 candidate. Required cumulative27consumer coverage and final directlyaffectedninechecks, immutable011/current014 host proofs, five actual protected-check phases/negatives, finite KBD coexistence and frozen fingerprint pass. Full governance aggregate at A3 522619b0c6e2136d16b13d83f24fa93b3d9bede3 actual FAIL, failure_kind=AGGREGATE_TIMEOUT, canonical_proof=UNAVAILABLE; full aggregate PASS is not claimed unless actual report PASS. Two synthetic accepted A3 aggregate SETUP_FAILURE reports are retained with zero checker executions and canonical MATCH. They and the aggregate timeout remain Tier-3 framework debt after the affected A4 gates and independent accepted-current suite PASS; no full aggregate PASS is claimed. Production300/120 deadlines unchanged. The same GLYPH-UD-029 worker resumes preserved C014 `a3664be5354ec4253122eb2e738e70e5dfdb9ccc`: compose an exact descendant, commit before Mk6 build, verify resolved dependencies and UF2 custody, obtain fresh review, then publish source-free HARDWARE_REQUIRED. Firmware source remains unmerged; no build/artifact/controller PASS is produced by034. The sole H3 publication lock remains held through this chain; isolated H1 branch work continues without canonical authority. Exact C020 DONE/PASS and all other96 queue orders remain unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN.
+GP-CONFIG-014 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `e5c455637056ac535347c1176dd41c9a9d84d85a` (sole composition parent `3369819a34f82d579e21adff125a25de854f1b9b`, tree `5459271c2219e021414eda37c9155c5ea7a983cf`). The exact Mk6 build passed; the resolved 21-role decoder closure and owner-held UF2 custody passed. Preserved UF2 SHA-256 `9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af`, 796672 bytes, is at `local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2`. All 27 actual focused/affected candidate checks pass with full native fingerprint MATCH; tracked source/index/modes remain unchanged through build/custody. Fresh independent review approves the exact source/build/custody/correspondence and conditional staged protocol GP_CONFIG_014_HW_V1. Actual native full aggregate FAIL / AGGREGATE_TIMEOUT is retained with 11 completed PASS results; full aggregate PASS is claimed only if that actual report says PASS. Production 300/120 deadlines stay unchanged; existing aggregate/setup limitations remain honest Tier-3 framework debt. This canonical handoff contains five docs/control-plane paths and no candidate source. GP-VAL-034 is strict DONE at source-free `62b559ae5ee2d6dee0ff54aeb56b2653d86253c6`; exact original C014 `a3664be5354ec4253122eb2e738e70e5dfdb9ccc` and earlier handoff reports remain preserved. First owner action is one connection on accepted firmware in normal gameplay mode and a baseline report; no firmware or Config change yet. Fresh current Config/raw identity, validated restoration, concrete valid profiles and expected outputs are objective prerequisites before mutation; physical evidence remains pending. All other 96 orders and exact C020 DONE/PASS remain unchanged. The persistent H3 executor reaches hardware wait and releases canonical publication authority for isolated H1 work; after exact human HEP PASS the same worker resumes integration/DONE and the next named chain. Nunchuk NOT_TESTED; root cause UNPROVEN.
 
 ## Historical GP-CONFIG-014 Candidate Handoff at5205ba5
 
@@ -141,13 +141,14 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 10,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
+    "hardware_pending": 1,
     "effective_authorized_runway": 2,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "RUNWAY_LOW",
+    "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -508,7 +509,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-014",
       "title": "Capacity repair",
-      "status": "REVIEW",
+      "status": "HARDWARE_TEST_REQUIRED",
       "branch": "codex/gp-config-014-current-capacity",
       "objective": "Exact ten-versus-twenty mismatch and historical GP-CONFIG-011 support only capacity/assertion/initialization/impossible-count guards; future accepted predecessor identity is mechanical.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -555,16 +556,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": true,
-      "candidate_git_sha": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
-      "candidate_base_configurator_sha": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "hardware_evidence_dependency_satisfied": false,
+      "candidate_git_sha": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+      "candidate_base_configurator_sha": "3369819a34f82d579e21adff125a25de854f1b9b",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+      "firmware_artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact future F build, UF2 custody and physical PASS not produced."
+        "Exact human GP_CONFIG_014_HW_V1 observations for eight required rows and both actual gameplay contexts are pending.",
+        "Fresh owner Config backup, byte-exact restoration route, concrete valid 0/10/11/20 artifacts and source-derived expected outputs await staged owner input before any mutation."
       ]
     },
     {
@@ -7891,11 +7893,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-019"],"immediate_ready":1,"recorded_preauthorized":10,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 10; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-019; Immediate Ready: 1; Recorded Preauthorized: 10; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -13481,3 +13483,705 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-val034-completion:end -->
+
+
+## GP-CONFIG-014 exact built hardware handoff
+
+<!-- gp-config014-hardware-handoff:start -->
+```json
+{
+  "schema_name": "glyph_gp_config014_exact_hardware_handoff",
+  "schema_version": 1,
+  "source_free_canonical": true,
+  "starting_canonical": "62b559ae5ee2d6dee0ff54aeb56b2653d86253c6",
+  "candidate": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+  "candidate_parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+  "candidate_tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+  "original_candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+  "artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
+  "artifact_size": 796672,
+  "preserved_locator": "local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+  "protocol_version": "GP_CONFIG_014_HW_V1",
+  "protocol_sha256": "044f7b9a0f8227142bad666e5c10cabca2a020888ddbf23fc7d80d244245c1c0",
+  "reports": {
+    "014-F-composition.json": {
+      "sha256": "1810f06dab2032a3eb004c30fe48c3b3ec0493b8a773c66795609d3e226c3b56",
+      "report": {
+        "candidate": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+        "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+        "composition_base": "62b559ae5ee2d6dee0ff54aeb56b2653d86253c6",
+        "preserved_candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+        "composition_merge": "3369819a34f82d579e21adff125a25de854f1b9b",
+        "merge_parents": [
+          "62b559ae5ee2d6dee0ff54aeb56b2653d86253c6",
+          "a3664be5354ec4253122eb2e738e70e5dfdb9ccc"
+        ],
+        "raw_inventory_sha256": "21bee686766818ed244473c29c5c924307e08c225de7a605f07f22a958354b26",
+        "changed_paths": [
+          "include/modes/CustomControllerMode.hpp",
+          "src/modes/CustomControllerMode.cpp"
+        ],
+        "critical_source_build_entries": 236,
+        "complete_critical_tree_equals_C": true,
+        "all97_queue_objects_equal_D": true,
+        "native_phase": "CANDIDATE_VALIDATION_ONLY",
+        "commit_before_build": true,
+        "firmware_build_run": false,
+        "device_actions": false
+      }
+    },
+    "014-F-validation.json": {
+      "sha256": "45f127957edcdb8b23375f5bbb902638082f82f1230a981e8d0ffc4df96d3d1c",
+      "report": {
+        "status": "PASS",
+        "head": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+        "native_phase": "CANDIDATE_VALIDATION_ONLY",
+        "contract": "c014_capacity",
+        "results": [
+          {
+            "command": [
+              "python3",
+              "tools/test_glyph_c014_campaign_transition.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-01-test_glyph_c014_campaign_transition.py.log",
+            "duration_seconds": 106.79410125000868
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config014_modifier_capacity.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-02-check_glyph_gp_config014_modifier_capacity.py.log",
+            "duration_seconds": 53.24837387498701
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_custom_modifier_cache_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-03-check_glyph_custom_modifier_cache_characterization.py.log",
+            "duration_seconds": 66.13576720800484
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config012_button_mask_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-04-check_glyph_gp_config012_button_mask_characterization.py.log",
+            "duration_seconds": 18.05109158300911
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_setconfig_runtime_rebinding_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-05-check_glyph_setconfig_runtime_rebinding_characterization.py.log",
+            "duration_seconds": 14.814983791002305
+          },
+          {
+            "command": [
+              "python3",
+              "tools/test_glyph_hardware_correspondence.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-06-test_glyph_hardware_correspondence.py.log",
+            "duration_seconds": 20.498323625011835
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_checker_census.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-07-check_glyph_checker_census.py.log",
+            "duration_seconds": 1.3710515840211883
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_validation_health.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-08-check_glyph_runtime_config_validation_health.py.log",
+            "duration_seconds": 0.08481520798522979
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-09-check_glyph_config_010_integration_semantic_correspondence.py.log",
+            "duration_seconds": 7.474297457985813
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config013_usb_default_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-10-check_glyph_gp_config013_usb_default_characterization.py.log",
+            "duration_seconds": 10.947978041978786
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_configurator_setconfig_transaction.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-11-check_glyph_configurator_setconfig_transaction.py.log",
+            "duration_seconds": 28.96642262500245
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_current_config_persistence_recovery_research.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-12-check_glyph_current_config_persistence_recovery_research.py.log",
+            "duration_seconds": 23.084695958998054
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_getconfig_raw_load_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-13-check_glyph_getconfig_raw_load_characterization.py.log",
+            "duration_seconds": 32.55534904199885
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_neopixel_null_sendreport_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-14-check_glyph_neopixel_null_sendreport_characterization.py.log",
+            "duration_seconds": 0.7265683750156313
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_config_menu_invalid_state_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-15-check_glyph_config_menu_invalid_state_characterization.py.log",
+            "duration_seconds": 9.478694624995114
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+              "--campaign-transition"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-16-check_glyph_runtime_config_webserial_device_write_source_authority.py.log",
+            "duration_seconds": 7.467175500001758
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_checker_context.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-17-check_glyph_checker_context.py.log",
+            "duration_seconds": 71.942106625007
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_agent_framework_docs.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-18-check_glyph_agent_framework_docs.py.log",
+            "duration_seconds": 14.22467570900335
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_agentic_sequence_protocol.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-19-check_glyph_agentic_sequence_protocol.py.log",
+            "duration_seconds": 0.08992175001185387
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_navigation.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-20-check_glyph_docs_navigation.py.log",
+            "duration_seconds": 0.0964261670014821
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_agent_surface.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-21-check_glyph_docs_agent_surface.py.log",
+            "duration_seconds": 7.397700875008013
+          },
+          {
+            "command": [
+              "python3",
+              "tools/test_glyph_docs_agent_surface_integration.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-22-test_glyph_docs_agent_surface_integration.py.log",
+            "duration_seconds": 6.534235583996633
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_generator_contract.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-23-check_glyph_generated_source_owned_generator_contract.py.log",
+            "duration_seconds": 11.773844959010603
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-24-check_glyph_generated_source_owned_baseline_artifact.py.log",
+            "duration_seconds": 7.377796540997224
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_artifact_install.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-25-check_glyph_generated_source_owned_artifact_install.py.log",
+            "duration_seconds": 8.815583582996624
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-26-check_glyph_coordinate_native_runtime_profile_contract.py.log",
+            "duration_seconds": 17.139839833020233
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_validation_aggregate.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "log": "/private/tmp/glyph-config014/014-F-focused-27-check_glyph_runtime_config_validation_aggregate.py.log",
+            "duration_seconds": 110.97779279199312
+          }
+        ],
+        "full_native_fingerprint": {
+          "before": "c273f717b7adefa01b9aef9d3f3eb9a9add39cb0ff8dc489723c5aaaaba276c7",
+          "after": "c273f717b7adefa01b9aef9d3f3eb9a9add39cb0ff8dc489723c5aaaaba276c7",
+          "result": "MATCH"
+        },
+        "critical_source_build_equal_exact_C14": true,
+        "all97_queue_orders_unchanged": true,
+        "full_aggregate_run": false,
+        "firmware_build_run": false,
+        "device_actions": false
+      }
+    },
+    "014-build-and-custody.json": {
+      "sha256": "072a492fb07b65809513083987e2e3b58a8534899e30652bda2603e537fc2b58",
+      "report": {
+        "status": "PASS",
+        "candidate": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+        "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+        "canonical_build_command": "pio run -e glyph_mk6",
+        "actual_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+        "fallback_reason": "pio is unavailable on inherited PATH; authorized fallback calls isolated .venv/bin/python -m platformio with F-local core directory",
+        "build_log_sha256": "f5d493ab3b49c4574d45ad4c33e8bdc512c10213d9d7e7cd7cff6b036a39627a",
+        "build_log": "/private/tmp/glyph-config014/014-build-logs/glyph_mk6_build.log",
+        "ram": "RAM:   [===       ]  30.1% (used 78960 bytes from 262144 bytes)",
+        "flash": "Flash: [==        ]  24.6% (used 386056 bytes from 1568768 bytes)",
+        "isolated_runtime_observation": "/private/tmp/glyph-config014/build/.venv\n/private/tmp/glyph-config014/build/.venv/lib/python3.14/site-packages/platformio/__init__.py\n6.1.19\n6.33.6\n1.80.0",
+        "build_output": ".pio/build/glyph_mk6/firmware.uf2",
+        "artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
+        "artifact_size": 796672,
+        "preserved_locator": "local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+        "preserved_absolute_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+        "custody_status": "PRESERVED_AND_VERIFIED",
+        "custody_readback": "PASS; exact regular nonsymlink read-only bytes rehashed",
+        "resolved_decoder_closure": "PASS",
+        "resolved_decoder_closure_audit": {
+          "status": "PASS",
+          "candidate": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "immutable_observed_snapshot": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+          "immutable_report_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+          "native_API": [
+            "load_report",
+            "validate_record unchanged historical739c identity",
+            "validate_tracked actualF",
+            "verify_package_identities actualF",
+            "verify_resolved actualF21roles/includeedges/selectedencode/regeneration/versions"
+          ],
+          "current_exact_HEAD_clean_bound_separately": true,
+          "closure_roles": 21,
+          "immutable_role_hashes_unchanged": true,
+          "report_or_checker_mutations": false,
+          "cli_historical_identity_result": "FAIL retained; F is a distinct committed candidate, not immutable observed snapshot739c",
+          "initial_cli_log_sha256": "c465e6aa8b0294cd600ca3ebc3929cb5a548efa5d25859ef5dfaf4ec0f1f6b4b",
+          "reproducibility_claim": false
+        },
+        "resolved_decoder_closure_report_sha256": "ea3d573f8bbffa084d9dad4d1536b847cf8a76411a8d042e75f32721026d128a",
+        "tracked_source_before_after": "MATCH",
+        "tracked_source_proof": {
+          "head": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+          "index_sha256": "2461319a785cd214233a428e435fd684c61289da5a06da2c9d695e1866138d0e",
+          "flags_sha256": "17b3aa9139f50b6cd435a22cb9cf6746cb7f36f516b348ab41a20d00b0818810",
+          "tracked_sha256": "c4750c18dbb748f23d330e85f1a85c8baee30fecee29ab485c296ac012a35949",
+          "tracked_entries": 1400,
+          "critical_entries": 236,
+          "critical_tree_equal_C14": true,
+          "tracked_direct_bytes_modes_verified": true
+        },
+        "full_native_postbuild_fingerprint": {
+          "status": "UNAVAILABLE",
+          "reason": "unsupported repository path type: .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/",
+          "before_after_claim": "No full native MATCH claim; exact tracked source/index/modes verified separately"
+        },
+        "rollback": {
+          "candidate": "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+          "artifact_sha256": "7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500",
+          "bytes": 796160,
+          "locator": "local_backups/hardware-artifacts/7db4f447d5e796367071b7143fa6c9274c70ae5e/7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500/firmware.uf2",
+          "rehashed": true
+        },
+        "prior_build_outputs_reused": false,
+        "reproducibility_claim": false,
+        "hardware_acceptance": false,
+        "device_actions": false
+      }
+    },
+    "014-build-review.json": {
+      "sha256": "7d9e8402f055712967a6afe638d2bc46b0664a1bad11ea0f10844070d982af19",
+      "report": {
+        "schema_version": 1,
+        "work_order": "GP-CONFIG-014",
+        "review_role": "fresh independent exact committed candidate/build/custody/protocol review after strict GP-VAL-034 DONE",
+        "reviewed_at": "2026-10-04T18:17:33.981846+00:00",
+        "reviewed_sha": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "reviewed_tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+        "sole_parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+        "composition_merge_parents": [
+          "62b559ae5ee2d6dee0ff54aeb56b2653d86253c6",
+          "a3664be5354ec4253122eb2e738e70e5dfdb9ccc"
+        ],
+        "verdict": "APPROVED",
+        "blocking_findings": [],
+        "approval_scope": "Exact committed candidate F, actual Mk6 build, preserved UF2 custody and the exact conditional hardware protocol are approved for the source-free hardware handoff. This does not approve concrete temporary profile artifacts, automatic device operations, human hardware PASS, firmware integration or product DONE.",
+        "protocol_path": "/private/tmp/glyph-config014/014-protocol-final.md",
+        "protocol_sha256": "044f7b9a0f8227142bad666e5c10cabca2a020888ddbf23fc7d80d244245c1c0",
+        "protocol_version": "GP_CONFIG_014_HW_V1",
+        "artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
+        "artifact_size": 796672,
+        "preserved_locator": "local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+        "preserved_absolute_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+        "live_provenance": {
+          "ordinary_minimal_read_only_verification": "PASS immediately before review receipt",
+          "configurator": "62b559ae5ee2d6dee0ff54aeb56b2653d86253c6",
+          "preserved_candidate_branch": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+          "built_candidate_branch": "e5c455637056ac535347c1176dd41c9a9d84d85a"
+        },
+        "source_authority": {
+          "committed_before_build": true,
+          "F_tree_equals_M": true,
+          "only_two_exact_100644_production_paths_differ_from_source_free_D": [
+            "include/modes/CustomControllerMode.hpp",
+            "src/modes/CustomControllerMode.cpp"
+          ],
+          "complete236critical_tree_equals_preserved_C14": true,
+          "all_governance_and97queue_objects_equal_D": true,
+          "raw_NUL_full40_inventory_sha256": "21bee686766818ed244473c29c5c924307e08c225de7a605f07f22a958354b26",
+          "valid_0_through_20": "Original valid statement bodies/order, masks, combos, priorities and arithmetic preserved. Capacity20/static generated-extent equality, null pointer/zero cache initialization and exact direct/live count guards only; no018 coherence claim.",
+          "current1400tracked_HEAD_index_live_bytes_modes": "independently PASS after build and final protocol readback",
+          "tracked_source_index_flags_before_after": "MATCH"
+        },
+        "actual_validation": {
+          "focused_actual_consumers": 27,
+          "status": "PASS",
+          "native_phase": "CANDIDATE_VALIDATION_ONLY",
+          "full_native_prebuild_fingerprint": "MATCH",
+          "current014_host": "Actual current source30cases under both enum ABIs plus schema/capacity/guard/init negative controls PASS",
+          "historical011": "Immutable original eight-case unsafe corpus preserved and executed separately from current014 PASS",
+          "adjacent010012rebind_framework_hardware_scope_controls": "PASS per actual27 focused receipts"
+        },
+        "actual_build": {
+          "canonical_command": "pio run -e glyph_mk6",
+          "executed_command": "./scripts/build-glyph-mk6-quiet.sh",
+          "authorized_fallback_reason": "pio is unavailable on inherited PATH; authorized fallback calls isolated .venv/bin/python -m platformio with F-local core directory",
+          "status": "PASS",
+          "seconds": 27.042,
+          "ram_bytes": 78960,
+          "flash_bytes": 386056,
+          "build_log_sha256": "f5d493ab3b49c4574d45ad4c33e8bdc512c10213d9d7e7cd7cff6b036a39627a",
+          "UF2_generated_from_exact_F": true,
+          "ELF_clean_short_F_identity": "e5c4556",
+          "ELF_DIRTY_identity_present": false,
+          "old_build_outputs_reused": false,
+          "reviewer_ran_build": false,
+          "reproducibility_claim": false
+        },
+        "resolved_dependency_review": {
+          "status": "PASS",
+          "independent_unchanged_native_API_executed": [
+            "load_report(F)",
+            "validate_record(record) with original default historical identity",
+            "validate_tracked(record,F)",
+            "verify_package_identities(record,F)",
+            "verify_resolved(record,roles,F,F/.venv/bin/python)"
+          ],
+          "immutable_report_snapshot": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+          "immutable_report_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+          "roles": 21,
+          "selected_nanopb_C_and_pb_encode": "PASS",
+          "actual_schema_options_generated_C_header_include_edges": "PASS",
+          "actual_host_generator_versions_and_regeneration": "PASS",
+          "actual_package_metadata_and_both_proto_commits": "PASS",
+          "checker_schema_record_or_source_mutations": false,
+          "historical_CLI_limit": "Actual --resolved-root CLI FAIL is retained because F is not its immutable historical739c snapshot. No CLI PASS or historical identity substitution claimed. The unchanged remaining APIs were run on actualF with independent exactF/clean/index/live/source binding."
+        },
+        "custody": {
+          "produced_UF2_and_owner_copy_byte_equal": true,
+          "owner_copy": "Regular nonsymlink path, readonly0444, exact SHA256 and796672 bytes verified independently",
+          "native_atomic_verify_preserved_API": "PASS for F and accepted020 rollback; O_NOFOLLOW regular open and stable fstat/hash",
+          "accepted020rollback_candidate": "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+          "accepted020rollback_sha256": "7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500",
+          "accepted020rollback_bytes": 796160,
+          "rollback_rebuild_or_retest": false
+        },
+        "conditional_hardware_route": {
+          "first_action_only": "Connect existing accepted firmware once in normal gameplay, record model/revision/backend/host, normal startup/profile and anomaly; no firmware or Config change, then wait for observation.",
+          "following_actions_require": [
+            "Complete raw owner Config preservation and byte-exact decode/re-encode",
+            "Unchanged Ultimate guard for original and temporary Config artifacts",
+            "Authenticated exactF .pio schema/options/generated ABI, all counts/references/buttons/string lengths/ranges/finite arithmetic and available slots reviewed offline",
+            "Independent review of each concrete valid0/10/11/20 profile and source-derived expected output/observable entry9/10/19",
+            "Owner-held exactF and accepted020rollback custody verified immediately before manual install using existing owner recovery route",
+            "No11/20 activation on accepted020 ten-slot firmware",
+            "Existing generic manual tool from exactF/root/.venv only; no agent write/flashing or new writer",
+            "Independent complete raw readback against reviewed encoded bytes after each manual write, then owner reboot before gameplay",
+            "Exact original restoration immediately and after owner reboot, including menu/default/watchdog changes",
+            "Actual GameCube and ordinary supportedUSB contexts plus all eight physical rows, independent HEP exactF/artifact/protocol PASS before source integration"
+          ],
+          "fresh_owner_Config_and_profile_artifacts": "WAITING_FOR_OWNER_INPUT; no concrete artifact approval yet",
+          "physical_PASS": false,
+          "source_candidate_integrated": false,
+          "Nunchuk": "NOT_TESTED",
+          "root_cause": "UNPROVEN"
+        },
+        "protocol_final_readback": {
+          "only_mechanical_change": "Fresh independent review line PENDING to PASS after actual content approval",
+          "exact_final_bytes_read_independently": true,
+          "no_other_protocol_changes": true,
+          "all8required_rows_and_identity_fields": "PASS"
+        },
+        "honest_framework_debt": {
+          "full_aggregate_PASS_claimed": false,
+          "actual_F_aggregate": {
+            "status": "FAIL",
+            "failure_kind": "AGGREGATE_TIMEOUT",
+            "seconds": 300.3751208749891,
+            "native_limits": "300aggregate/120checker unchanged",
+            "completed_actual_PASS_with_isolated_MATCH": 11,
+            "interrupted_checker": "getconfig_raw_load_characterization",
+            "interrupted_isolated_and_internal_canonical_proof": "UNAVAILABLE at exhausted budget",
+            "separate_full_native_fingerprint": "MATCH",
+            "classification": "Tier3 aggregate coverage debt; no concrete consumer contradiction exposed, all27 focused actual affected gates passed"
+          },
+          "initial_focus_setup": "Zero checker executions; missing private local configurator ref corrected at fresh live D, original report retained",
+          "historical_resolved_CLI_failure": "Historical-only HEAD739c condition rejected actualF; retained, no CLI PASS claimed, current dependency proof independently complete via unchanged APIs",
+          "postbuild_full_native_fingerprint": {
+            "status": "UNAVAILABLE",
+            "reason": "unsupported repository path type: .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/",
+            "MATCH_claim": false,
+            "independent_current_tracked1400_index_modes_and236critical_binding": "PASS"
+          },
+          "prior034debt": "Original A3 aggregate timeout and both accepted synthetic setup failures remain historical, no omission or fullPASS claim."
+        },
+        "report_provenance": [
+          {
+            "path": "/private/tmp/glyph-config014/014-F-source-review.json",
+            "sha256": "62738440220d71c92435e6467ea30e9245648703c2a12803895ff23e8a620a1b"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-F-composition.json",
+            "sha256": "1810f06dab2032a3eb004c30fe48c3b3ec0493b8a773c66795609d3e226c3b56"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-F-inventory.raw",
+            "sha256": "21bee686766818ed244473c29c5c924307e08c225de7a605f07f22a958354b26"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-F-validation.json",
+            "sha256": "45f127957edcdb8b23375f5bbb902638082f82f1230a981e8d0ffc4df96d3d1c"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-F-aggregate.json",
+            "sha256": "262f49428d725444c9fd6a36130d9822ef50a1f884c239bec9e6a9aaccb2ca05"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-F-aggregate-freeze.json",
+            "sha256": "01ed36dcc8ab05e6b2f80acea8aca4d776e2b9faa4f4f4c8566d0d0b74ba053f"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-F-focused-initial-setup.json",
+            "sha256": "92b0824c9957a57376927e67c2992f6b162f04dcd7e3b5ab24b39cb57267754d"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-build-source-before.json",
+            "sha256": "dc171af43a6c3e87a30bfa4f330239422926f3cf5ee8919194ef56a79a0e44c7"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-build-source-after.json",
+            "sha256": "dc171af43a6c3e87a30bfa4f330239422926f3cf5ee8919194ef56a79a0e44c7"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-build-and-custody.json",
+            "sha256": "072a492fb07b65809513083987e2e3b58a8534899e30652bda2603e537fc2b58"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-resolved-decoder-closure.json",
+            "sha256": "cdf54c6dd806d7370a000bc8356d6b9ad3834df774cab042004402e2915dd745"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-resolved-decoder-closure-initial.log",
+            "sha256": "c465e6aa8b0294cd600ca3ebc3929cb5a548efa5d25859ef5dfaf4ec0f1f6b4b"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-resolved-closure-independent.json",
+            "sha256": "4244b3fad7b7c363f9ffc181b4c49b2e1bf0aa19416162a1c8be2d10e572e7de"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-custody-independent.json",
+            "sha256": "43b35c8fb6bfad8860c94ae7020d8679f51880c64b35a97ffd48980b2383c567"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-final-readback-independent.json",
+            "sha256": "4e0cc27f0b7859f4a26dbe586964e5d57e07ebaa51384d7106c69f09942399df"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/014-protocol-final.md",
+            "sha256": "044f7b9a0f8227142bad666e5c10cabca2a020888ddbf23fc7d80d244245c1c0"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/034-review.json",
+            "sha256": "afe77d3ba63b952deaf180a8b5c642b2cf2f1890b9148515be8455d65a2636a0"
+          },
+          {
+            "path": "/private/tmp/glyph-config014/034-completion-review.json",
+            "sha256": "126f1b5af1f5d1f59aad72bea40e4be169da481e75f10e052a41334543d82547"
+          }
+        ],
+        "reviewer_device_or_canonical_actions": false,
+        "publisher": "Root remains sole canonical publisher. Only separate source-free HARDWARE_TEST_REQUIRED handoff may follow this approval; behavior-changing source remains unmerged until exact human HEP PASS."
+      }
+    },
+    "014-F-aggregate-freeze.json": {
+      "sha256": "01ed36dcc8ab05e6b2f80acea8aca4d776e2b9faa4f4f4c8566d0d0b74ba053f",
+      "report": {
+        "head": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "exit_code": 1,
+        "elapsed_seconds": 300.3751208749891,
+        "aggregate_status": "FAIL",
+        "failure_kind": "AGGREGATE_TIMEOUT",
+        "native_aggregate_canonical_proof": "UNAVAILABLE",
+        "independent_full_native_fingerprint": {
+          "before": "83d095c60307d111f8c35ee9f8c936e1d3d1eea41df76bd44c6600047b4a7224",
+          "after": "83d095c60307d111f8c35ee9f8c936e1d3d1eea41df76bd44c6600047b4a7224",
+          "result": "MATCH"
+        },
+        "timeouts_unchanged": "300secondsaggregate/120secondschecker",
+        "hardware_acceptance": false
+      }
+    }
+  },
+  "aggregate_report_sha256": "262f49428d725444c9fd6a36130d9822ef50a1f884c239bec9e6a9aaccb2ca05",
+  "aggregate_status": "FAIL",
+  "aggregate_failure_kind": "AGGREGATE_TIMEOUT",
+  "aggregate_full_PASS_claimed": false,
+  "other96_orders_unchanged": true,
+  "candidate_source_integrated": false,
+  "hardware_result": null,
+  "hardware_evidence_gaps": [
+    "Exact human GP_CONFIG_014_HW_V1 observations for eight required rows and both actual gameplay contexts are pending.",
+    "Fresh owner Config backup, byte-exact restoration route, concrete valid 0/10/11/20 artifacts and source-derived expected outputs await staged owner input before any mutation."
+  ],
+  "first_action": "Connect once on existing accepted firmware in normal gameplay mode; report model/revision/backend/host/normal startup and any anomaly. No firmware or Config change.",
+  "write_lock_release": "At exact reviewed source-free pending publication/live verification and true hardware wait",
+  "callback": "Rejected transport retained; durable canonical and worker result readback; no retry"
+}
+```
+<!-- gp-config014-hardware-handoff:end -->
