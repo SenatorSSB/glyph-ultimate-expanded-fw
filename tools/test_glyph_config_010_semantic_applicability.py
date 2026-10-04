@@ -130,6 +130,31 @@ def owner_control_plane_tests(directory: Path) -> None:
         rejected(lambda: repair._owner_direction_scope(root, head, delta), 'forged D1 digest')
     with patch.object(repair, 'REVISION_THREE_BASE', repair.PROCESSOR_ADOPTION):
         rejected(lambda: repair._owner_direction_scope(root, head, delta), 'forged D1 parent')
+    actual_git = repair._git
+    def forged_authority_diff(where, *args):
+        if args == ('diff', '--name-only', repair.REVISION_THREE_BASE, repair.REVISION_THREE_AUTHORITY):
+            return (repair.OWNER_DIRECTION + '\nAGENTS.md\n').encode()
+        return actual_git(where, *args)
+    with patch.object(repair, '_git', side_effect=forged_authority_diff):
+        rejected(lambda: repair._owner_direction_scope(root, head, delta), 'forged D1 authority path inventory')
+    # This finite allowance cannot erase acceptance or change protected bytes.
+    for label, path, payload in (
+        ('catalog erasure', repair.TRANSITIONS, b'[]\n'),
+        ('evidence substitution', repair.EVIDENCE, b'{}\n'),
+        ('protocol drift', repair.PROTOCOL, b'forged protocol\n'),
+        ('candidate source drift', 'src/core/config_button_validation.cpp', b'forged source\n'),
+    ):
+        run(root, 'git', 'switch', '--detach', head)
+        (root / path).write_bytes(payload)
+        fixture_commit(root, 'synthetic ' + label)
+        rejected(lambda: campaign.authenticate(root), 'D1 retains ' + label + ' rejection')
+    run(root, 'git', 'switch', '--detach', head)
+    downgraded = copy.deepcopy(repair.item(root, head, 'GP-CONFIG-020'))
+    downgraded.update(status='HARDWARE_TEST_REQUIRED', hardware_result=None,
+                     hardware_evidence_dependency_satisfied=False)
+    write_queue_item(root, downgraded)
+    fixture_commit(root, 'synthetic processor downgrade')
+    rejected(lambda: campaign.authenticate(root), 'D1 retains processor downgrade rejection')
     # HEAD/index mode checks apply even if the live bytes have been restored.
     mode_path = 'docs/agent_framework/SUPERVISOR_CONTRACT.md'
     for kind in ('executable', 'symlink', 'gitlink'):
@@ -155,6 +180,10 @@ def owner_control_plane_tests(directory: Path) -> None:
     run(root, 'git', 'switch', '--detach', repair.REVISION_THREE_BASE)
     old = run(root, 'git', 'rev-parse', 'HEAD').strip()
     assert repair._owner_direction_scope(root, old, {repair.OWNER_DIRECTION}) == {repair.OWNER_DIRECTION}
+    (root / mode_path).write_text('synthetic new contract without adopted D1\n')
+    fixture_commit(root, 'synthetic control-plane scope without adopted D1')
+    rejected(lambda: campaign.authenticate(root), 'control-plane metadata before D1 authority')
+    run(root, 'git', 'switch', '--detach', repair.REVISION_THREE_BASE)
     (root / repair.OWNER_DIRECTION).write_bytes(
         repair.raw_bytes(ROOT, repair.REVISION_THREE_AUTHORITY, repair.OWNER_DIRECTION))
     fixture_commit(root, 'synthetic D1 bytes replay without authority ancestry')
