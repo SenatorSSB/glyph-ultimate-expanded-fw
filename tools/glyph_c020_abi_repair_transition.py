@@ -95,6 +95,7 @@ REVISION_THREE_PATHS = frozenset((
     'docs/agent_framework/JUDGE_WATCHDOG_CONTRACT.md',
     'docs/agent_framework/RUNNER_BOUNDARY.md',
     'docs/agent_framework/PROMPT_TEMPLATES.md',
+    'tools/check_glyph_agent_framework_docs.py',
 ))
 
 

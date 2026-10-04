@@ -28,7 +28,9 @@ the same immutable E, genuine committed catalog and tested source ancestry.
 The bounded post-C020 owner pass additionally classifies only the exact existing
 AGENTS.md, authorization/runway, supervisor, scheduled-task, cycle-state,
 prompt-template, judge/watchdog, runner-boundary and work-order-template paths
-listed literally in glyph_hardware_correspondence.py. They are agent policy
+listed literally in glyph_hardware_correspondence.py, and their exact existing
+check_glyph_agent_framework_docs.py consumer in the repaired campaign scope.
+They are agent policy
 inputs, not firmware/compiler/build inputs under the source filters below.
 Repaired campaign use is authenticated by the exact separately committed
 GLYPH-UD-028 owner document, ancestry and regular committed/live/index bytes.
