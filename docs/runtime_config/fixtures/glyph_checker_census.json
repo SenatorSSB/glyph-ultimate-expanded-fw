@@ -1198,7 +1198,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 27206,
+      "file_size_bytes": 27230,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1254,6 +1254,7 @@
       "referenced_repository_path_prefixes": [
         "HAL/pico/src/comms/ConfiguratorBackend.cpp",
         "docs/WORKFLOW.md",
+        "docs/WORKFLOW.md.bak",
         "docs/allowed.md",
         "docs/base-advance.md",
         "docs/base.md",
@@ -1287,7 +1288,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "ed3dbfb81686d1b888da1b88f7b2ad08d29e3cc7992d498766904b814f63c58a",
+      "sha256": "3ae98d24164989108c16ecd904e7efa284e1136b8c8ee5a35e51e29f59ba5750",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
