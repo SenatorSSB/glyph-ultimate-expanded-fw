@@ -1,6 +1,6 @@
 # Active Agent Queue
 
-C014 source-free HEP evidence records exact owner-reported GP_CONFIG_014_HW_V1 PASS at F e5c455637056ac535347c1176dd41c9a9d84d85a/tree5459271c2219e021414eda37c9155c5ea7a983cf, UF2 SHA-2569ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/796672bytes. Eight required rows pass; native record repo-json:docs/calibration/fixtures/gp_config_014_hardware_evidence.json and result docs/calibration/gp_config_014_hardware_result.md preserve verbatim owner observations and complete session bytes. Original4201byte Config is restored byte-exact immediately and after reboot (SHA-256f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480). Mini-screen capacity observations are bounded; GC/Switch/WUP-028 and MacXInput Ultimate/X1/reconnect coverage passed. About expectede5c4556 explicitly confirmed, literalnottranscribed. RGB observation remains OBSERVED_NONATTRIBUTED/NONBLOCKING, rootcauseUNPROVEN; invalid21/oversizedHOST_ONLY/NOT_TESTED, NunchukNOT_TESTED. Fresh independent HEP/Sol review and focused Revision-3 proof apply; no fullaggregatePASS. Firmware/protocol/catalogs unchanged, F unintegrated; separate sameH3 exactintegration/strictDONE then017 remain next. All98otherorders including024/045WAITING and owner rawKeyboard policy preserved. Owner-exclusive worktree remains reserved; permitted session reads complete, no more HEP reads required.
+GP-CONFIG-014 is DONE after reviewed exact tested-source integration `3895736cd7caa7e308f08ff1403cdf6777d98545` and separate strict DIRECT_ANCESTRY completion. Source merge `d786c244183343f89287a040055b7eaeae1e41f3` follows source-free HEP E `6a10c02909ba27136a427c0360969770988a4684`; native034 catalog preserves earliest reviewed R043f29, final handoffR38ec, originalCa3664 and exact testedF `e5c455637056ac535347c1176dd41c9a9d84d85a`/tree5459271c2219e021414eda37c9155c5ea7a983cf. Preserved UF2 SHA256 `9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af`,796672bytes, remains the accepted artifact; all236critical source/build entries match it. Native source/index/history/custody and actualcurrent dualABI30cases each+negative controls, neighboring012current and immutable011 replay PASS; fresh independent integrationreview approves exact scope. Actual26wrapper result9PASS/17preexisting scopeFAIL/nativefingerprintMATCH and originalF aggregateFAIL/TIMEOUT remain honest Revision3 frameworkdebt; no fullaggregatePASS or rebuild/retest. HEP preserves exact eightrow ownerPASS, Aboutconfirmation withoutliteral, mini-screen vsactualhost distinctions, GC/Switch/WUP028+MacXInput Ultimate/X1/reconnect, originalConfig4201bytes f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byteexactrestoration. RGB OBSERVED_NONATTRIBUTED/NONBLOCKING; invalid21/oversized HOST_ONLY, Nunchuk NOT_TESTED; rootcauseUNPROVEN. All98otherorders,024/045WAITING and owneroriginalrawKeyboard policy preserved. SamepersistentH3 retains solepublication lock and immediately evaluates existing017 objectiveactivation then035; no newPlanner/Curator. No furtherHEPread required; owner-exclusive hardwareworktree permissionrelease is requested from daemon atthisDONE, with no removal/repointing/cleaning.
 
 Independent packet0028 curation is complete. Same-base immutable receipt `3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b` and its descendant adoption authorize GP-CONFIG-024/GP-VAL-045 as PREAUTHORIZED/WAITING behind existing023 exact DONE/PASS; no immediate implementation. The [binding source-free adjudication](../agent_framework/PORTFOLIO_20261005_0028_CURATOR.md) preserves all97priororders, completed040/KBD/041/019 and frozen014F/artifact/protocol. Direct owner conditional and independently fetched original Glyph/main HayBox bytes select PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT; no transformed-output repair or executable GP-KBD-002 is authorized. Original-input remap/SOCD discrepancies stay truthful; required physical/RC Keyboard rows remain pending. Allthree proposals are consumed, no globalwait accepted, and current marker defines liveness. Existing014->017->021->022->023 chain remains intact; owner hardware worktree is exclusive and was never entered/inspected/polled. Nunchuk NOT_TESTED; root cause UNPROVEN. Earlier characterization summaries retain their completion-time evidence; this current disposition supersedes their unresolved-policy instructions.
 
@@ -527,7 +527,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-014",
       "title": "Capacity repair",
-      "status": "HARDWARE_VALIDATED",
+      "status": "DONE",
       "branch": "codex/gp-config-014-built-f",
       "objective": "Exact ten-versus-twenty mismatch and historical GP-CONFIG-011 support only capacity/assertion/initialization/impossible-count guards; future accepted predecessor identity is mechanical.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -566,7 +566,21 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "6a10c02909ba27136a427c0360969770988a4684",
+        "reviewed_implementation_sha": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "prior_canonical_integration_sha": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "reviewed_changed_paths": [
+          "docs/runtime_config/fixtures/gp_val034_accepted_transitions.json",
+          "include/modes/CustomControllerMode.hpp",
+          "src/modes/CustomControllerMode.cpp"
+        ],
+        "independent_review_provenance": "Fresh independent postimplementation val034_review (trusted model gpt-6.1-sol) APPROVED exact source/catalog integration 3895736cd7caa7e308f08ff1403cdf6777d98545; report SHA256 92a2716a14181f93670ed7bacc40d3ecdfbe7eb570f8bb36094104414535d6a9. Source specialist independently verifies exact236critical/testedF, preserved hardware tuple and nativehistory. Separate strict completion independently reviewed before publication.",
+        "validation_provenance": "Revision3: actual native source_contract/current_integrity236/processor_record/history/catalog/ancestry PASS; all source/buildcritical entries equal exact physically tested F e5c455637056ac535347c1176dd41c9a9d84d85a; UF2 SHA256 9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af size796672 freshly rehashed. GP_CONFIG_014_HW_V1 eightrow owner HEP PASS and byteexact4201 Config restoration f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 unchanged. Actualcurrent01430cases eachordinary/shortenums plus alloriginalnegativecontrols PASS; actualcurrent012fourcallerfragmentdecoder/sanitizer proof PASS; immutable actual011eightcases preserves historicalunsafe11/20. Actual26wrapperchecks9PASS17FAIL samepreexisting Curatorliteral scope error beforefailedbodies; nativefullfingerprintMATCH. These actualFAIL remain independently adjudicated Tier3 frameworkdebt absentconcreteTier1/Tier2contradiction, neverPASS. OriginalF aggregateFAIL/300.375s TIMEOUT retained; no newfullaggregatePASS/build/retest. Relevant frozenhistorical005/010/011/012/016 and Ultimate/X1 authority preserved; 019/KBD overlays/source coexistence authenticated. About ownerconfirmation retained withoutinventedliteral; miniscreen vsactualhost bounds preserved; RGB OBSERVED_NONATTRIBUTED/NONBLOCKING; invalid21HOST_ONLY, NunchukNOT_TESTED, rootcauseUNPROVEN."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -14421,3 +14435,1141 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config014-hardware-handoff:end -->
+
+
+## GP-CONFIG-014 exact tested integration and strict completion
+
+<!-- gp-config014-completion:start -->
+```json
+{
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-014",
+  "implementation_base": "6a10c02909ba27136a427c0360969770988a4684",
+  "reviewed_live_integration": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+  "source_merge": "d786c244183343f89287a040055b7eaeae1e41f3",
+  "critical236_exact_tested_F": true,
+  "other98_orders_unchanged": true,
+  "firmware_rebuilds": 0,
+  "physical_retests": 0,
+  "owner_reserved_worktree_access": "NONE",
+  "reports": {
+    "014-integration-preflight.json": {
+      "sha256": "c04ac55b9e3ebf1ada630ecab0911a640d581a2b79f30be8a9463b8012a832ab",
+      "report": {
+        "status": "PASS_RELEVANT_BLOCKING_PROOF",
+        "E": "6a10c02909ba27136a427c0360969770988a4684",
+        "F": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "I": "d786c244183343f89287a040055b7eaeae1e41f3",
+        "A": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "tree": "bacda7f7aaa2343fc23fae5aef076437b9ddb204",
+        "source_paths": [
+          "include/modes/CustomControllerMode.hpp",
+          "src/modes/CustomControllerMode.cpp"
+        ],
+        "critical236_tested_equal": true,
+        "all99_orders_unchanged": true,
+        "processor": {
+          "work_order": "GP-CONFIG-014",
+          "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+          "build": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+          "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+          "review_commit": "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+          "evidence_commit": "6a10c02909ba27136a427c0360969770988a4684",
+          "integration": "d786c244183343f89287a040055b7eaeae1e41f3"
+        },
+        "artifact_rehash": "PASS",
+        "saved_HEP_report_hashes": "MATCH",
+        "native_source_contract": "PASS",
+        "native_current_integrity": "PASS",
+        "native_history": "PASS",
+        "full_authenticate": {
+          "status": "FAIL",
+          "error": "unreviewed C014 governance/source delta",
+          "exception": "CorrespondenceError"
+        },
+        "no_rebuild_or_retest": true
+      }
+    },
+    "014-integration-focused-validation.json": {
+      "sha256": "6c3f1f52d71f73feb00a39fd9888c9a67f2c83a056a0e78e386cc2653cd32cd5",
+      "report": {
+        "kind": "FOCUSED_ACTUAL_C014_INTEGRATION_CONSUMERS",
+        "head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "results": [
+          {
+            "command": [
+              "python3",
+              "tools/test_glyph_hardware_correspondence.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 39.372,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-01-test_glyph_hardware_correspondence.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_checker_census.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 1.53,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-02-check_glyph_checker_census.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_validation_health.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 0.117,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-03-check_glyph_runtime_config_validation_health.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 2.148,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-04-check_glyph_config_010_integration_semantic_correspondence.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config012_button_mask_characterization.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.845,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-05-check_glyph_gp_config012_button_mask_characterization.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config013_usb_default_characterization.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 2.032,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-06-check_glyph_gp_config013_usb_default_characterization.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_configurator_setconfig_transaction.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 2.051,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-07-check_glyph_configurator_setconfig_transaction.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_current_config_persistence_recovery_research.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.818,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-08-check_glyph_current_config_persistence_recovery_research.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_getconfig_raw_load_characterization.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.87,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-09-check_glyph_getconfig_raw_load_characterization.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_neopixel_null_sendreport_characterization.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 2.03,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-10-check_glyph_neopixel_null_sendreport_characterization.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_setconfig_runtime_rebinding_characterization.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.829,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-11-check_glyph_setconfig_runtime_rebinding_characterization.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_config_menu_invalid_state_characterization.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 2.339,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-12-check_glyph_config_menu_invalid_state_characterization.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_custom_modifier_cache_characterization.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.834,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-13-check_glyph_custom_modifier_cache_characterization.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+              "--campaign-transition"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.837,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-14-check_glyph_runtime_config_webserial_device_write_source_authority.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_agent_framework_docs.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 15.868,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-15-check_glyph_agent_framework_docs.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_agentic_sequence_protocol.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 0.081,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-16-check_glyph_agentic_sequence_protocol.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_navigation.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 0.062,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-17-check_glyph_docs_navigation.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_agent_surface.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.983,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-18-check_glyph_docs_agent_surface.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/test_glyph_docs_agent_surface_integration.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 6.827,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-19-test_glyph_docs_agent_surface_integration.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_generator_contract.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.888,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-20-check_glyph_generated_source_owned_generator_contract.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.925,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-21-check_glyph_generated_source_owned_baseline_artifact.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_artifact_install.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.922,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-22-check_glyph_generated_source_owned_artifact_install.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.878,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-23-check_glyph_coordinate_native_runtime_profile_contract.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config014_modifier_capacity.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 1.743,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-24-check_glyph_gp_config014_modifier_capacity.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_config019_usb_name_selection.py"
+            ],
+            "status": "FAIL",
+            "exit_code": 1,
+            "duration_seconds": 2.574,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-25-check_glyph_gp_config019_usb_name_selection.log"
+          },
+          {
+            "command": [
+              "python3",
+              "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "duration_seconds": 13.266,
+            "log": "/private/tmp/glyph-config014/014-integration-focused-26-check_glyph_gp_kbd_001_keyboard_pipeline.log"
+          }
+        ],
+        "full_native_preservation": {
+          "before": "654f677658017335cb65eccdfd0d0a8095b321aeea5ba45520449827fe3f2aef",
+          "after": "654f677658017335cb65eccdfd0d0a8095b321aeea5ba45520449827fe3f2aef",
+          "status": "MATCH"
+        },
+        "full_aggregate_run": false,
+        "production_limits_unchanged": true,
+        "status": "FAIL"
+      }
+    },
+    "014-integration-native-host.json": {
+      "sha256": "bb8cc88d020a356f1e24178863dfcda4ea591b43a2f6d0215d807b4c5d1cb565",
+      "report": {
+        "head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "status": "PASS",
+        "proof_scope": "Actual unchanged native host compile/case/negative APIs after native source_contract/current_integrity/history/overlays and explicit immutable pin validation. Full wrapper scope-context failure preserved separately. No patch/monkeypatch/reseal/allowlist edits.",
+        "results": [
+          {
+            "layout": "ordinary",
+            "actual_current_source": true,
+            "cases": 30,
+            "status": "PASS"
+          },
+          {
+            "layout": "short-enums",
+            "actual_current_source": true,
+            "cases": 30,
+            "status": "PASS"
+          }
+        ],
+        "original_negative_controls": "PASS",
+        "critical236": "MATCH_TESTED_F",
+        "hardware_acceptance": "Existing exact HEP PASS; no new observations",
+        "production_mutations": "NONE"
+      }
+    },
+    "014-integration-neighbor-native.json": {
+      "sha256": "2240e7a903c7f191347b1aae3b26f963f28a169685b79c1567226d01f57dfacc",
+      "report": {
+        "status": "PASS",
+        "head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "012_current_actual_native_compile_decoder_sanitizers": "PASS",
+        "012_four_current_callers": "PASS",
+        "011_immutable_actual_replay_eightcases": "PASS",
+        "historical_unsafe11_20": "Preserved expected sanitizer failures; no hardware safety promotion",
+        "proof_method": "Unmodified native fragment/compile/decoder/sanitizer APIs and actual immutable historical checker. Separate exact source/index/host pin proof. Full wrappers scope-context FAIL preserved. No monkeypatch/source changes/reseal."
+      }
+    },
+    "014-integration-native-host-initial.json": {
+      "sha256": "4fc97eb8c1bfeaadec694102defbc37d9867a49f38e32a3cee48f11e5f617658",
+      "report": {
+        "status": "SETUP_FAILURE",
+        "checker_executions": 0,
+        "error": "validate_pins(governed=True) -> verify_historical_dependency -> full authenticate rejects preexisting curator scope path",
+        "source_changed": false,
+        "compile_or_cases_run": false
+      }
+    },
+    "c014-integration-source.json": {
+      "sha256": "4601f5a69b7d4a4bc82aeba4c5e1ea2f26382efa214c3ac8b922e9d0fbd152f0",
+      "report": {
+        "role": "read-only C014 source/custody specialist",
+        "checked_at": "2026-10-05T07:42:00.799957+00:00",
+        "expected_evidence_commit": "6a10c02909ba27136a427c0360969770988a4684",
+        "tested_F": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "original_C": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+        "baseline_B": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+        "blockers": [],
+        "framework_failures": [
+          {
+            "check": "native_full_authenticate_honest_debt",
+            "status": "FAIL",
+            "exception": "CorrespondenceError",
+            "error": "unreviewed C014 governance/source delta"
+          },
+          {
+            "check": "current_A_full_correspondence_actual_result",
+            "status": "FAIL",
+            "exception": "CorrespondenceError",
+            "error": "unclassified correspondence path: docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md"
+          }
+        ],
+        "checks": {
+          "expected_sourcefree_head": {
+            "status": "FAIL",
+            "exception": "AssertionError",
+            "error": "head differs from expected E"
+          },
+          "f_exact_tree_parent": {
+            "status": "PASS",
+            "value": {
+              "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+              "parent": "3369819a34f82d579e21adff125a25de854f1b9b"
+            }
+          },
+          "native_source_contract": {
+            "status": "PASS",
+            "value": {
+              "baseline_entries": 236,
+              "candidate_entries": 236
+            }
+          },
+          "f_equals_original_c_all236critical": {
+            "status": "PASS",
+            "value": 236
+          },
+          "e_equals_accepted020_baseline_all236critical": {
+            "status": "PASS",
+            "value": 236
+          },
+          "current_e_critical_index_worktree": {
+            "status": "FAIL",
+            "exception": "CorrespondenceError",
+            "error": "critical index differs from committed source"
+          },
+          "two_exact_production_blobs": {
+            "status": "PASS",
+            "value": {
+              "include/modes/CustomControllerMode.hpp": {
+                "before": [
+                  "100644",
+                  "blob",
+                  "7c073b2e91f3950c2f1a785940b39539dda433b5"
+                ],
+                "after": [
+                  "100644",
+                  "blob",
+                  "9658f5e15f50887caaaf5a71efc0096e9677d144"
+                ]
+              },
+              "src/modes/CustomControllerMode.cpp": {
+                "before": [
+                  "100644",
+                  "blob",
+                  "bdd8b398657758ae8adbacdf6e06d3e55f6b9626"
+                ],
+                "after": [
+                  "100644",
+                  "blob",
+                  "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85"
+                ]
+              }
+            }
+          },
+          "native_processor_record": {
+            "status": "PASS",
+            "value": {
+              "work_order": "GP-CONFIG-014",
+              "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+              "build": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+              "parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+              "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+              "review_commit": "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+              "evidence_commit": "6a10c02909ba27136a427c0360969770988a4684",
+              "evidence_root": "6a10c02909ba27136a427c0360969770988a4684"
+            }
+          },
+          "native_history": {
+            "status": "PASS",
+            "value": {
+              "earliest_E": "6a10c02909ba27136a427c0360969770988a4684",
+              "integrated": null
+            }
+          },
+          "native_C_to_F_correspondence": {
+            "status": "PASS",
+            "value": {
+              "phase": "integrated",
+              "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+              "tested_base": "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+              "target": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+              "candidate_paths": {
+                "docs/runtime_config/fixtures/glyph_checker_census.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/gp_config014_modifier_capacity.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/runtime_config_validation_health.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/runtime_config_validation_manifest.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/gp_config014_modifier_capacity.md": "NON_BEHAVIORAL",
+                "docs/runtime_config/runtime_config_validation_health.md": "NON_BEHAVIORAL",
+                "include/modes/CustomControllerMode.hpp": "CRITICAL",
+                "src/modes/CustomControllerMode.cpp": "CRITICAL",
+                "tools/check_glyph_gp_config014_modifier_capacity.py": "NON_BEHAVIORAL",
+                "tools/fixtures/gp_config014_modifier_capacity/modifier_capacity_harness.cpp": "NON_BEHAVIORAL"
+              },
+              "target_paths": {
+                "AGENTS.md": "NON_BEHAVIORAL",
+                "docs/AGENT_CONTEXT.md": "NON_BEHAVIORAL",
+                "docs/CURRENT_STATE.md": "NON_BEHAVIORAL",
+                "docs/ROADMAP.md": "NON_BEHAVIORAL",
+                "docs/WORKFLOW.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/CYCLE_STATE_MACHINE.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/HARDWARE_CORRESPONDENCE.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/PROMPT_TEMPLATES.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/README.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/SCHEDULED_TASKS.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/SUBAGENT_CONTRACTS.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/SUPERVISOR_CONTRACT.md": "NON_BEHAVIORAL",
+                "docs/agent_framework/USER_DIRECTION.md": "NON_BEHAVIORAL",
+                "docs/project/ACTIVE_AGENT_QUEUE.md": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/glyph_checker_census.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/gp_val034_accepted_transitions.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/gp_val034_c014_transition.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/runtime_config_validation_health.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/fixtures/runtime_config_validation_manifest.json": "NON_BEHAVIORAL",
+                "docs/runtime_config/runtime_config_validation_health.md": "NON_BEHAVIORAL",
+                "tools/check_glyph_agent_framework_docs.py": "NON_BEHAVIORAL",
+                "tools/check_glyph_checker_context.py": "NON_BEHAVIORAL",
+                "tools/check_glyph_custom_modifier_cache_characterization.py": "NON_BEHAVIORAL",
+                "tools/check_glyph_gp_config012_button_mask_characterization.py": "NON_BEHAVIORAL",
+                "tools/check_glyph_gp_config014_modifier_capacity.py": "NON_BEHAVIORAL",
+                "tools/check_glyph_runtime_config_validation_aggregate.py": "NON_BEHAVIORAL",
+                "tools/check_glyph_setconfig_runtime_rebinding_characterization.py": "NON_BEHAVIORAL",
+                "tools/glyph_c014_campaign_transition.py": "NON_BEHAVIORAL",
+                "tools/glyph_c020_abi_repair_transition.py": "NON_BEHAVIORAL",
+                "tools/glyph_campaign_transition.py": "NON_BEHAVIORAL",
+                "tools/glyph_checker_context.py": "NON_BEHAVIORAL",
+                "tools/glyph_hardware_correspondence.py": "NON_BEHAVIORAL",
+                "tools/run_glyph_runtime_config_validation.py": "NON_BEHAVIORAL",
+                "tools/test_glyph_c014_campaign_transition.py": "NON_BEHAVIORAL",
+                "tools/test_glyph_config_010_semantic_applicability.py": "NON_BEHAVIORAL",
+                "tools/test_glyph_hardware_correspondence.py": "NON_BEHAVIORAL"
+              },
+              "dirty_paths": {},
+              "normal_metadata_validation_required": true
+            }
+          },
+          "native_full_authenticate_honest_debt": {
+            "status": "FAIL",
+            "exception": "CorrespondenceError",
+            "error": "unreviewed C014 governance/source delta"
+          },
+          "valid0to20_full_cpp_statements_order_unchanged": {
+            "status": "PASS",
+            "value": {
+              "direct_guard_exact": true,
+              "live_guard_exact": true,
+              "all_other_cpp_bytes_equal": true
+            }
+          },
+          "exact_header_capacity_extent_initializers_only": {
+            "status": "PASS",
+            "value": {
+              "capacity": 20,
+              "schema_equality_assert": true,
+              "pointer_null_initialized": true,
+              "modifier_cache_zero_initialized": true
+            }
+          },
+          "mask_helper_unchanged": {
+            "status": "PASS",
+            "value": "PASS"
+          },
+          "seven_historical_proof_files_frozen_B_F_E_live": {
+            "status": "PASS",
+            "value": {
+              "docs/runtime_config/fixtures/custom_modifier_cache_characterization.json": "ca259e765e4e22571917e7d1b88a7f90d655dad2a42d0d681e5850a42525fe73",
+              "docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json": "ca2da3a4d6dd53bd980734cfb59594d4f121daa7cfff0e1202c288304f0ada54",
+              "docs/runtime_config/fixtures/setconfig_runtime_rebinding_characterization.json": "a369f807072f82e83d5e57de01803dd97d8c44634ed12412ecd74f08672addc1",
+              "tools/fixtures/custom_modifier_cache_host/modifier_cache_harness.cpp": "ec8c7d9c3d4a050190e3b0f5bf42578a88e224154b5fe9b89923f46e66b859df",
+              "tools/fixtures/custom_modifier_cache_host/schema/provenance.json": "fca4d0d34165ee3d48b37864e357482d867b879ca1430433a81575de910cc59b",
+              "tools/fixtures/gp_config012_button_host/button_harness.cpp": "0a064e469c48531a741cf0a00de80774b1def521a893f5732c722f3216731380",
+              "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f"
+            }
+          },
+          "exact034_host_overlay:tools/check_glyph_custom_modifier_cache_characterization.py": {
+            "status": "PASS",
+            "value": {
+              "blob": "d5d71dc0ab97a525585cb0b2f21296c81ea1a5a2",
+              "sha256": "fcc0a671a6ac5a1262f125567e84f2ffe0c56ee12c9533ad994ebd0b45701935",
+              "mode": "100644"
+            }
+          },
+          "exact034_host_overlay:tools/check_glyph_gp_config012_button_mask_characterization.py": {
+            "status": "PASS",
+            "value": {
+              "blob": "bc03ec9b0beac7c96876022d37673746052ab4d8",
+              "sha256": "f515c1c806494acaf60d38dc2d92aaef10e1d292998abe322161fda6ea0cfcd1",
+              "mode": "100644"
+            }
+          },
+          "exact034_host_overlay:tools/check_glyph_gp_config014_modifier_capacity.py": {
+            "status": "PASS",
+            "value": {
+              "blob": "7e91f2c1415b6de55766d8cf6c694a93ed36a50d",
+              "sha256": "b9296f5b33d73e7946e415645535e07ad364b5211803dfecfef2a6e764f85c46",
+              "mode": "100644"
+            }
+          },
+          "exact034_host_overlay:tools/check_glyph_setconfig_runtime_rebinding_characterization.py": {
+            "status": "PASS",
+            "value": {
+              "blob": "4d5fbc036c1d68105d86a2cdf09002b63a388271",
+              "sha256": "54e93cb3a9c4d757eb2517772ddf86b44d03c6f55bfc1c032eede30381a6a437",
+              "mode": "100644"
+            }
+          },
+          "014_original_historical_dependency_pins_preserved": {
+            "status": "PASS",
+            "value": {
+              "pin_count": 36,
+              "original_checker_sha256": "9bf6a9a2eb96bf7515d799662ef5c428266fc1fbd0baec8c42c6bf009126225a"
+            }
+          },
+          "011_eight_old_unsafe_cases_preserved": {
+            "status": "PASS",
+            "value": {
+              "setconfig_0": "PASS",
+              "setconfig_10": "PASS",
+              "setconfig_11": "SANITIZER_FAILURE",
+              "setconfig_20": "SANITIZER_FAILURE",
+              "process_0": "PASS",
+              "process_10": "PASS",
+              "process_11": "SANITIZER_FAILURE",
+              "process_20": "SANITIZER_FAILURE"
+            }
+          },
+          "012_mask10_and_rebind13_frozen_observations": {
+            "status": "PASS",
+            "value": {
+              "012_isolation": 10,
+              "rebind_cases": 13,
+              "018_policy_claim": "NONE"
+            }
+          },
+          "saved_reviewed_report_hashes": {
+            "status": "PASS",
+            "value": {
+              "034-review.json": {
+                "sha256": "afe77d3ba63b952deaf180a8b5c642b2cf2f1890b9148515be8455d65a2636a0",
+                "expected": "afe77d3ba63b952deaf180a8b5c642b2cf2f1890b9148515be8455d65a2636a0",
+                "match": true
+              },
+              "034-completion-review.json": {
+                "sha256": "126f1b5af1f5d1f59aad72bea40e4be169da481e75f10e052a41334543d82547",
+                "expected": "126f1b5af1f5d1f59aad72bea40e4be169da481e75f10e052a41334543d82547",
+                "match": true
+              },
+              "014-F-validation.json": {
+                "sha256": "45f127957edcdb8b23375f5bbb902638082f82f1230a981e8d0ffc4df96d3d1c",
+                "expected": "45f127957edcdb8b23375f5bbb902638082f82f1230a981e8d0ffc4df96d3d1c",
+                "match": true
+              },
+              "014-F-aggregate.json": {
+                "sha256": "262f49428d725444c9fd6a36130d9822ef50a1f884c239bec9e6a9aaccb2ca05",
+                "expected": "262f49428d725444c9fd6a36130d9822ef50a1f884c239bec9e6a9aaccb2ca05",
+                "match": true
+              },
+              "014-F-aggregate-freeze.json": {
+                "sha256": "01ed36dcc8ab05e6b2f80acea8aca4d776e2b9faa4f4f4c8566d0d0b74ba053f",
+                "expected": "01ed36dcc8ab05e6b2f80acea8aca4d776e2b9faa4f4f4c8566d0d0b74ba053f",
+                "match": true
+              },
+              "014-build-and-custody.json": {
+                "sha256": "072a492fb07b65809513083987e2e3b58a8534899e30652bda2603e537fc2b58",
+                "expected": "072a492fb07b65809513083987e2e3b58a8534899e30652bda2603e537fc2b58",
+                "match": true
+              },
+              "014-build-review.json": {
+                "sha256": "7d9e8402f055712967a6afe638d2bc46b0664a1bad11ea0f10844070d982af19",
+                "expected": "7d9e8402f055712967a6afe638d2bc46b0664a1bad11ea0f10844070d982af19",
+                "match": true
+              },
+              "014-hardware-handoff-validation.json": {
+                "sha256": "aaa6d8a748d99b05a05f60ebd56eddda6c4a1e1dfcad2f9a40fdedef7f486de6",
+                "expected": "aaa6d8a748d99b05a05f60ebd56eddda6c4a1e1dfcad2f9a40fdedef7f486de6",
+                "match": true
+              },
+              "014-hardware-handoff-review.json": {
+                "sha256": "8297061db3605c3d1dd05b8ac98e2fc19bd25ea373db5cbdc3dcc4c67662e47f",
+                "expected": "8297061db3605c3d1dd05b8ac98e2fc19bd25ea373db5cbdc3dcc4c67662e47f",
+                "match": true
+              },
+              "014-publication-verification.json": {
+                "sha256": "dde6b2fb7b864bea16e5da7607c8078e579a5ef12e23cf74c64e254406f3c763",
+                "expected": "dde6b2fb7b864bea16e5da7607c8078e579a5ef12e23cf74c64e254406f3c763",
+                "match": true
+              },
+              "014-owner-final-custody-verification.log": {
+                "sha256": "583af807c8ce3f88026881e77b17744a0075d2896afeb9ca655618aa71622183",
+                "expected": "583af807c8ce3f88026881e77b17744a0075d2896afeb9ca655618aa71622183",
+                "match": true
+              }
+            }
+          },
+          "ownerheld_named_UF2_fresh_read_hash": {
+            "status": "PASS",
+            "value": {
+              "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+              "sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
+              "bytes": 796672,
+              "mode": "0o444",
+              "regular_nonsymlink_all_parents": true
+            }
+          },
+          "HEP_and_fresh_review_exact_tuple": {
+            "status": "PASS",
+            "value": {
+              "worker_result": "DONE",
+              "hardware_status": {
+                "classification": "PASS",
+                "required_rows": [
+                  "modifier_0",
+                  "modifier_10",
+                  "modifier_11",
+                  "modifier_20",
+                  "combos_modifiers",
+                  "ultimate_x1",
+                  "reconnect_reboot",
+                  "owner_config_restoration"
+                ],
+                "report_source": "Direct owner daemon userMessage01a1091d-c23b-70e1-8862-c369d58d48c3",
+                "tested_at": "2026-10-04T22:46:32Z",
+                "context": "GlyphMk6 GC/Switch/officialWUP-028; MacXInput",
+                "About": "Owner explicitly confirmed expected e5c4556; literal nottranscribed; contract does not strictlyrequireliteral; no supplement/retest.",
+                "row_bounds": "modifier0 and capacity coordinates mini-screen observations; no M0 Switchgame evidence. Ultimate/X1 and reconnect/high-entry bothGC/USB explicitly ownerobserved.",
+                "Config_restoration": "PASS exactpre/immediate/postreboot4201bytes/hash equality",
+                "nonattributed_RGB_observation": "OBSERVED_NONATTRIBUTED/NONBLOCKING: On Mac, entering temporary C014 M20 from another profile could leave RGBs white; starting Mac with M20 already selected could show colors after a \"No console detected\" -> retry sequence. TemporaryM20 omittedrgbConfig (zero); unchanged exact F NeoPixelBackend.hpp lines46-50 sets _config=nullptr for zero. This does not prove the root cause of observed white/color/connection-order behavior or C014 attribution. Separate ordinary source-backed profile RGB/startup reproduction is a bounded follow-up, not an automatic blocker.",
+                "invalid21_oversized": "HOST_ONLY/NOT_TESTED",
+                "Nunchuk": "NOT_TESTED",
+                "root_cause": "UNPROVEN",
+                "performed_by_processor_or_reviewer": false
+              },
+              "review_publication_verdict": "PASS",
+              "review_hardware_classification": "PASS",
+              "review_sha256": "a59c23059d57ca305f382efc063d826a3357e3bb0a3d6d34b28026da8c9023f9",
+              "worker_sha256": "f85566c3471086b7823014f809515c496b7c20463fffc60a7163dd37c9303f67"
+            }
+          }
+        },
+        "starting_head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "starting_git_status": "",
+        "ending_head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "ending_git_status": "",
+        "live_remote": {
+          "verification": "default DNS failure; identical network-enabled read PASS",
+          "configurator": "6a10c02909ba27136a427c0360969770988a4684",
+          "built_f": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "original_c": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc"
+        },
+        "no_build_retest_device_source_mutation": true,
+        "reserved_owner_worktree_access": "NONE",
+        "hardware_boundaries": {
+          "owner_reported_protocol": "GP_CONFIG_014_HW_V1",
+          "Nunchuk": "NOT_TESTED",
+          "invalid21_oversized": "HOST_ONLY/NOT_TESTED",
+          "root_cause": "UNPROVEN",
+          "rgb": "OBSERVED_NONATTRIBUTED/NONBLOCKING",
+          "full_aggregate": "no new run; historical FAIL/TIMEOUT retained"
+        },
+        "status": "PASS_RELEVANT_SOURCE_CUSTODY",
+        "earlier_snapshot_harness_observation": {
+          "requested_head": "6a10c02909ba27136a427c0360969770988a4684",
+          "actual_clean_head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+          "failures": [
+            {
+              "check": "expected_sourcefree_head",
+              "status": "FAIL",
+              "exception": "AssertionError",
+              "error": "head differs from expected E"
+            },
+            {
+              "check": "current_e_critical_index_worktree",
+              "status": "FAIL",
+              "exception": "CorrespondenceError",
+              "error": "critical index differs from committed source"
+            }
+          ],
+          "classification": "Root authorized integration advanced E to I to A during this read-only pass; expected-E checkout assertion and E-baseline index comparison were stale harness assumptions, not source contradiction. No fresh E worktree integrity PASS claimed against A."
+        },
+        "root_confirmed_frozen_assembly": {
+          "A": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+          "I": "d786c244183343f89287a040055b7eaeae1e41f3",
+          "E": "6a10c02909ba27136a427c0360969770988a4684",
+          "F": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "authority": "Direct root confirmation to source specialist; root owns integration/publication."
+        },
+        "current_checks": {
+          "exact_A_clean_head": {
+            "status": "PASS",
+            "value": {
+              "head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+              "tree": "bacda7f7aaa2343fc23fae5aef076437b9ddb204",
+              "status": ""
+            }
+          },
+          "A_sole_direct_I_child": {
+            "status": "PASS",
+            "value": "PASS"
+          },
+          "I_direct_exact_E_F_merge": {
+            "status": "PASS",
+            "value": {
+              "parents": [
+                "6a10c02909ba27136a427c0360969770988a4684",
+                "e5c455637056ac535347c1176dd41c9a9d84d85a"
+              ],
+              "changed_critical_paths": [
+                "include/modes/CustomControllerMode.hpp",
+                "src/modes/CustomControllerMode.cpp"
+              ]
+            }
+          },
+          "A_I_C_F_all236critical_byte_mode_blob_equal": {
+            "status": "PASS",
+            "value": 236
+          },
+          "actual_A_committed_index_live_integrity": {
+            "status": "PASS",
+            "value": "236 HEAD/index/live critical bytes and modes match; ignored/untracked/assume/skip traps checked"
+          },
+          "HEP_E_tuple_unchanged_atA": {
+            "status": "PASS",
+            "value": {
+              "E": "6a10c02909ba27136a427c0360969770988a4684",
+              "F": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+              "protocol_sha256": "044f7b9a0f8227142bad666e5c10cabca2a020888ddbf23fc7d80d244245c1c0",
+              "evidence_sha256": "c33ca59f6b9ad0a54b7a1e91a2ce72f19c549e561b639864d18787829adafce9",
+              "result_sha256": "74c7fda0dde03fa77a7f7ca9551db9cd7dadb4db5d202f09b5d46827441d2ae6"
+            }
+          },
+          "native_accepted_history_atA": {
+            "status": "PASS",
+            "value": {
+              "earliest_E": "6a10c02909ba27136a427c0360969770988a4684",
+              "accepted_catalog": {
+                "work_order": "GP-CONFIG-014",
+                "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+                "build": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+                "parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+                "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+                "review_commit": "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+                "evidence_commit": "6a10c02909ba27136a427c0360969770988a4684",
+                "integration": "d786c244183343f89287a040055b7eaeae1e41f3"
+              }
+            }
+          },
+          "all99_native_orders_byte_objects_unchanged_E_to_A": {
+            "status": "PASS",
+            "value": {
+              "count": 99,
+              "GP-CONFIG-014": "HARDWARE_VALIDATED"
+            }
+          },
+          "current_A_full_correspondence_actual_result": {
+            "status": "FAIL",
+            "exception": "CorrespondenceError",
+            "error": "unclassified correspondence path: docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md"
+          },
+          "carried_immutable_checks_scope_unchanged": {
+            "status": "PASS",
+            "value": {
+              "all_prior_immutable_checks": "scope unchanged; rerun source_contract, F/C/E tree comparisons and current host/mapping equality",
+              "prior_E_worktree_check": "FAIL harness observation only"
+            }
+          }
+        },
+        "exact_reviewed_source_assembly": "3895736cd7caa7e308f08ff1403cdf6777d98545"
+      }
+    },
+    "014-integration-review.json": {
+      "sha256": "92a2716a14181f93670ed7bacc40d3ecdfbe7eb570f8bb36094104414535d6a9",
+      "report": {
+        "schema_version": 1,
+        "work_order": "GP-CONFIG-014",
+        "review_role": "Fresh independent postimplementation exact tested-source integration review",
+        "reviewed_at": "2026-10-05T07:55:31.300598+00:00",
+        "reviewed_sha": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+        "reviewed_tree": "bacda7f7aaa2343fc23fae5aef076437b9ddb204",
+        "verdict": "APPROVED",
+        "blocking_findings": [],
+        "reviewer_model": {
+          "model": "gpt-6.1-sol",
+          "effort": "high",
+          "eligible": true,
+          "independently_verified": "Exact session_meta /root/val034_review and latest turn_context/collaboration settings model gpt-6.1-sol.",
+          "session_metadata_path": "/Users/rasmus.pekkarinen/.codex/sessions/2026/10/04/rollout-2026-10-04T19-30-26-01a107c0-9ebf-7193-a2c0-b516eaa6bf33.jsonl",
+          "implemented_built_or_operated_candidate": false
+        },
+        "approval_scope": "Exact frozen tested-source integration/catalog assembly A. Separate immediate strict DONE and current summary follow publication. No rebuild, physical retest, new policy, unrelated integration or reserved-checkout release by this reviewer.",
+        "assembly": {
+          "E": "6a10c02909ba27136a427c0360969770988a4684",
+          "F": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "I": "d786c244183343f89287a040055b7eaeae1e41f3",
+          "A": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+          "I_parent_order": [
+            "6a10c02909ba27136a427c0360969770988a4684",
+            "e5c455637056ac535347c1176dd41c9a9d84d85a"
+          ],
+          "A_sole_parent": "d786c244183343f89287a040055b7eaeae1e41f3",
+          "E_to_I_only_paths": [
+            "include/modes/CustomControllerMode.hpp",
+            "src/modes/CustomControllerMode.cpp"
+          ],
+          "I_to_A_only_path": "docs/runtime_config/fixtures/gp_val034_accepted_transitions.json",
+          "entries": "Exact regular100644 blobs/index/live modes",
+          "all236critical_equal_tested_F": true,
+          "all99_orders_and_queue_bytes_unchanged_E_to_A": true,
+          "all1419_tracked_HEAD_index_live_blob_mode_flags": "PASS"
+        },
+        "native_accepted_facts": {
+          "source_contract": "PASS",
+          "current_integrity": "PASS",
+          "processor_record": "PASS",
+          "history": "PASS",
+          "catalog": "PASS",
+          "accepted_tuple": {
+            "work_order": "GP-CONFIG-014",
+            "candidate": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+            "build": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+            "parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+            "tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+            "review_commit": "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+            "evidence_commit": "6a10c02909ba27136a427c0360969770988a4684",
+            "integration": "d786c244183343f89287a040055b7eaeae1e41f3"
+          },
+          "earliest_native_protocol_build_review_R": "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+          "separate_branch_corrected_whole_handoff_reviewed_R": "38ecceabb136ae0285bc31f1f1ad6a3116bd2059",
+          "chronology": "Both R snapshots precede source-free E. F is not ancestor of E. I follows E and exact tested F; sole I child introduces genuine I catalog tuple. Full authenticate wrapper remains actual FAIL."
+        },
+        "source_history_preservation": {
+          "frozen_C020_protocol_evidence_result_catalog": "BYTE_EXACT_B_HEAD_INDEX_LIVE",
+          "historical_frozen_fixtures_and_original_C014_hosts": "UNCHANGED",
+          "actual_native_host_overlay_KBD019_coexistence": "PASS",
+          "H1_KBD019_characterization_and_original_raw_Keyboard_owner_policy": "PRESERVED",
+          "behavior_scope": "Exact adopted20-slot cache/generated extent assertion/initialized pointer and cache/SetConfig and analog impossible-count guards. Valid0..20 order/masks/arithmetic/combo/priority retained;018 remains separate.",
+          "current_docs": "Existing source-free HEP prose describes its evidence snapshot; immediate strict-DONE summary must record this subsequent integration. No new unresolved authority conflict in this three-path assembly."
+        },
+        "hardware_custody": {
+          "F": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "F_tree": "5459271c2219e021414eda37c9155c5ea7a983cf",
+          "F_sole_parent": "3369819a34f82d579e21adff125a25de854f1b9b",
+          "artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
+          "artifact_bytes": 796672,
+          "protocol": "GP_CONFIG_014_HW_V1",
+          "protocol_sha256": "044f7b9a0f8227142bad666e5c10cabca2a020888ddbf23fc7d80d244245c1c0",
+          "native_preserved_rehash": "PASS regular nonsymlink0444 exact796672 bytes",
+          "prior_exact_build_closure_and_review": "Preserved approved exactF; saved report hashes verified, no rebuild",
+          "independent_HEP_exact_E": "HARDWARE_VALIDATED/PASS, eight required owner rows, empty gaps; fresh independent HEP review publication PASS",
+          "E_protocol_evidence_result_A": "BYTE_EXACT_HEAD_INDEX_LIVE",
+          "actual_owner_and_resume": {
+            "status": "PASS",
+            "physical_report_message_id": "01a1091d-c23b-70e1-8862-c369d58d48c3",
+            "verbatim_actual_app_user_message_sha256": "9d24c46707027845339e087e08b4b040fefb4b9df6847b56f42e6cd94cbb0983",
+            "actual_owner_message_equals_preserved_archive": true,
+            "newer_resume_message_id": "01a10af0-d419-7810-abc5-9c76f4a30019",
+            "newer_resume_verified_from_actual_app_thread": true,
+            "older_pause_superseded": true
+          },
+          "durable_bundle_and_restoration": {
+            "status": "PASS",
+            "decoded_bundle_sha256": "a041daa5a8f2f7bb811a89be99bf266c79e1e52650d7b93b9dbf022e5205f6fc",
+            "files": 42,
+            "each42_embedded_hash_size": "MATCH",
+            "safe_HEP_copy_files_independently_compared": 29,
+            "original_pre_immediate_postreboot_raw": "BYTE_EXACT_4201_f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480",
+            "three_temporary_expected_and_raw_readback_pairs": "BYTE_EXACT",
+            "reserved_checkout_reads": false
+          },
+          "hardware_retest": "NONE",
+          "limits": [
+            "Mini-screen modifier_0/capacity scope retained; GC/Switch/WUP028 and MacXInput coverage from Ultimate/X1 and reconnect/high-entry rows.",
+            "Owner confirmed expected About e5c4556; literal not separately transcribed.",
+            "RGB OBSERVED_NONATTRIBUTED/NONBLOCKING; root cause UNPROVEN.",
+            "Invalid21/oversized physical HOST_ONLY/NOT_TESTED; Nunchuk NOT_TESTED."
+          ]
+        },
+        "required_validation": {
+          "reviewer_actual_current_native_host": {
+            "status": "PASS",
+            "reviewed_sha": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+            "results": [
+              {
+                "layout": "ordinary",
+                "actual_current_source": true,
+                "cases": 30,
+                "status": "PASS"
+              },
+              {
+                "layout": "short-enums",
+                "actual_current_source": true,
+                "cases": 30,
+                "status": "PASS"
+              }
+            ],
+            "proof_scope": "Unchanged native compile_host/run APIs on actual current source after exact whole-critical tree/current integrity and explicit immutable dependency/harness/fixture pins. Full wrapper still actual scope FAIL; no monkeypatch or scope change.",
+            "hardware_observations": "NONE",
+            "firmware_build": "NOT_RUN"
+          },
+          "root_actual_current_native_host": "Both30case ABI layouts plus original negative controls PASS on unchanged native APIs after exact source/current/pins. Initial scope-dependent setup FAIL retained.",
+          "root_native012_and011": "Actual012fourcaller fragment/decoder/sanitizers PASS; immutable011eightcases PASS with historicalunsafe11/20 sanitizer observations retained.",
+          "actual_KBD_main": "PASS103observations/118identity negatives/5mutants/ASan_UBSan.",
+          "required_Tier1_and_affected_Tier2_basis": "Exact source/artifact/protocol/humanE acceptance/current integrity/history/catalog and all tested build/source inputs plus actual current host and affected decoder proofs establish required facts. No concrete safety contradiction found."
+        },
+        "honest_framework_debt": {
+          "tier": 3,
+          "full_authenticate": {
+            "status": "FAIL",
+            "exception": "CorrespondenceError",
+            "error": "unreviewed C014 governance/source delta",
+            "only_preexisting_outside_scope": "docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md",
+            "classification": "Tier3 finite scope applicability debt; no new scope path or safety contradiction"
+          },
+          "immutable_preexisting_outside_scope": "100644 blob0353396a4d17ff4781f90fa1995ff877211ce6f4 docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md at starting0336/E/A; sole outside finite scope path unchanged.",
+          "actual_focused_status": "FAIL",
+          "actual_focused_pass_count": 9,
+          "actual_focused_fail_count": 17,
+          "failed_body_execution_claimed": false,
+          "failure_classification": "All17 actual failures contain same preexisting full-authenticate scope mismatch. Unchanged primitives/host APIs prove required facts separately; full wrappers are not claimed PASS.",
+          "019_scope_failure": "Its guard expressly allows exact C014 source differences and candidate/accepted phase. Actual failure is the same full authenticate scope condition; native019 custody/compatibility contract PASS. No fragment/host safety contradiction exposed.",
+          "full_native_fingerprint": {
+            "status": "LATER_PROBE_MISMATCH_UNPROVEN",
+            "head": "3895736cd7caa7e308f08ff1403cdf6777d98545",
+            "focused_window_before_after": "MATCH",
+            "focused_window_fingerprint": "654f677658017335cb65eccdfd0d0a8095b321aeea5ba45520449827fe3f2aef",
+            "later_reviewer_probe": "bfa587e1dd58d065527ac8a9f5372fab6c65a27df5222b35a6405b5f3cf4e98e",
+            "immediate_read_only_repeat": "bfa587e1dd58d065527ac8a9f5372fab6c65a27df5222b35a6405b5f3cf4e98e",
+            "later_repeat": "MATCH",
+            "cause": "UNPROVEN; ordinary status calls after focused window can refresh index stat cache, but original index bytes are unavailable for comparison. No proven cause is assigned.",
+            "bounds": "Independent1419tracked HEAD/index/live blob/mode/flag verification and236critical exactF equality PASS. No final global MATCH with focused snapshot claimed."
+          },
+          "full_aggregate": "NOT_RUN for this integration; originalF11PASS then300.375s timeout and prior debt retained, no full aggregate PASS.",
+          "validation_code_or_deadline_changes": "NONE; no monkeypatch, allowlist edits or reseal.",
+          "summary_count_correction": "Review uses actual9PASS/17FAIL entries; earlier root10/16 prose was an arithmetic error, without result alteration."
+        },
+        "live_provenance": {
+          "ordinary_read_only_attempt": "DNS failure",
+          "same_permitted_network_retry": "PASS",
+          "configurator": "6a10c02909ba27136a427c0360969770988a4684",
+          "built_F_ref": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "reviewer_publication": false
+        },
+        "report_provenance": {
+          "014-integration-preflight.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-preflight.json",
+            "sha256": "c04ac55b9e3ebf1ada630ecab0911a640d581a2b79f30be8a9463b8012a832ab"
+          },
+          "014-integration-focused-validation.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-focused-validation.json",
+            "sha256": "6c3f1f52d71f73feb00a39fd9888c9a67f2c83a056a0e78e386cc2653cd32cd5"
+          },
+          "014-integration-validation-basis.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-validation-basis.json",
+            "sha256": "7334d42c1b1c40856a2cb49c85b84d0abd353efd94167ff4dfe95f27de62d454"
+          },
+          "014-integration-native-host.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-native-host.json",
+            "sha256": "bb8cc88d020a356f1e24178863dfcda4ea591b43a2f6d0215d807b4c5d1cb565"
+          },
+          "014-integration-native-host-initial.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-native-host-initial.json",
+            "sha256": "4fc97eb8c1bfeaadec694102defbc37d9867a49f38e32a3cee48f11e5f617658"
+          },
+          "014-integration-neighbor-native.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-neighbor-native.json",
+            "sha256": "2240e7a903c7f191347b1aae3b26f963f28a169685b79c1567226d01f57dfacc"
+          },
+          "014-integration-independent-native.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-independent-native.json",
+            "sha256": "3f819d571ecbec9ddb6f4d475cce5c4f6e15fd4b514d9b536b3ef665f55c16bf"
+          },
+          "014-integration-independent-host.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-independent-host.json",
+            "sha256": "e96732ccf1f6cdc493c4467411c8794f5309370f2c9035579d33805179e8a801"
+          },
+          "014-integration-independent-bundle.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-independent-bundle.json",
+            "sha256": "0c2e2e5b924e6dd983e3fb792a2a21eccd94f6e450082bc6e4c2131da02da161"
+          },
+          "014-integration-independent-owner.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-independent-owner.json",
+            "sha256": "b9c73127f14573f2e71a3b6cb64ff5872b3c1df12ae581438677db0883fea063"
+          },
+          "014-integration-independent-freeze.json": {
+            "path": "/private/tmp/glyph-config014/014-integration-independent-freeze.json",
+            "sha256": "4c647a1fbfd876be0bd7f6a5faf8f9b1014e3f32f41186b438a344d36ed9ebe8"
+          }
+        },
+        "HEP_provenance": {
+          "worker-result.json": {
+            "path": "/private/tmp/glyph-c014-hep/worker-result.json",
+            "sha256": "f85566c3471086b7823014f809515c496b7c20463fffc60a7163dd37c9303f67"
+          },
+          "reviewer-final.json": {
+            "path": "/private/tmp/glyph-c014-hep/reviewer-final.json",
+            "sha256": "a59c23059d57ca305f382efc063d826a3357e3bb0a3d6d34b28026da8c9023f9"
+          },
+          "session-proof.json": {
+            "path": "/private/tmp/glyph-c014-hep/session-proof.json",
+            "sha256": "8c4a8c0e0a8b5eda33255a95cf6f9c6f254e1ebd688fac26dc136f2f59c2b1e5"
+          },
+          "identity-custody-proof.json": {
+            "path": "/private/tmp/glyph-c014-hep/identity-custody-proof.json",
+            "sha256": "785909314d3aee538b18272b325aca7c2c7437c9f2aaf4b3a6846b17c954cb75"
+          },
+          "scope-preservation-proof.json": {
+            "path": "/private/tmp/glyph-c014-hep/scope-preservation-proof.json",
+            "sha256": "54f73327afa30960825d7735c0db0aee884d4c0e17190ff8495ee42df4467e68"
+          }
+        },
+        "reviewer_actions": {
+          "production_source_queue_ref_mutations": false,
+          "firmware_build": false,
+          "device_operations_or_physical_retest": false,
+          "reserved_checkout_access": false,
+          "audit_outputs": "/private/tmp/glyph-config014",
+          "publisher": "Root sole publisher"
+        }
+      }
+    }
+  },
+  "next_step": "SamepersistentH3 immediate017objectiveactivation then candidate035logicalchain; daemon recordreservationpermissionrelease only"
+}
+```
+<!-- gp-config014-completion:end -->
