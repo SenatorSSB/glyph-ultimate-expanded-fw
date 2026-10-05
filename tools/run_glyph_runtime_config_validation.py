@@ -211,6 +211,19 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if entry["historical"] and entry["applicability"] != "historical_only":
             raise ValueError(f"historical checker incorrectly current: {checker_id}")
         entries.append(entry)
+    #035 reserves both actual native proof lanes. Focused selection may choose a
+    #subset after load; the complete current manifest cannot silently omit one.
+    c017_markers = ('docs/runtime_config/fixtures/gp_val035_c017_transition.json',
+                    'docs/runtime_config/fixtures/gp_val035_accepted_transitions.json',
+                    'tools/glyph_c017_campaign_transition.py')
+    c017_ready = '9ce55e71eff2be6fee366b52434042985de263e6'
+    if (any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c017_markers) or
+            git('merge-base', '--is-ancestor', c017_ready, 'HEAD').returncode == 0):
+        for identity in ('neopixel_null_sendreport_characterization',
+                         'gp_config017_neopixel_repaired_current'):
+            rows = [entry for entry in entries if entry['id'] == identity]
+            if len(rows) != 1 or not c017_replay_arguments(rows[0]):
+                raise ValueError('missing required035 current load-bearing proof: ' + identity)
     exclusions: list[dict[str, object]] = []
     exclusion_ids: set[str] = set()
     exclusion_paths: set[str] = set()

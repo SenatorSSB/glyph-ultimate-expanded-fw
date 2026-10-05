@@ -38,6 +38,8 @@ HISTORICAL_WRAPPER = 'tools/check_glyph_neopixel_historical_replay.py'
 HISTORICAL_WRAPPER_BLOB = 'b8f5ba1dd5574b5c5801ad38ac08081c62cb3c43'
 HISTORICAL_WRAPPER_SHA256 = '2a9d3c8eef434d890dc1cf9eeec8fe3ca5f37235de68417a6146dcd6d621c9da'
 CRITICAL = frozenset((SOURCE,))
+REQUIRED_ROWS = ('identity', 'static_rgb', 'dynamic_rgb', 'mode_changes',
+                 'reconnect_reboot', 'ultimate_x1', 'owner_config_restoration')
 HOSTS = frozenset((
     PROTOCOL,
     'docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json',
@@ -221,6 +223,39 @@ def predecessor_contract(root: Path):
     return dict(processor, c020_object_roots=c020['object_roots']), accepted
 
 
+def _preserve_accepted_predecessors(root: Path, head: str):
+    """Latch both completed H3 tuples and records at every intervening commit."""
+    c020 = item(root, B, 'GP-CONFIG-020')
+    c014 = item(root, B, 'GP-CONFIG-014')
+    paths = (previous.predecessor.PROTOCOL, previous.predecessor.EVIDENCE,
+             previous.predecessor.RESULT, previous.predecessor.TRANSITIONS,
+             previous.PROTOCOL, previous.EVIDENCE, previous.RESULT,
+             previous.TRANSITIONS)
+    revisions = [B] + _git(root, 'rev-list', '--reverse', '--topo-order', B + '..' + head).decode().split()
+    for revision in revisions:
+        for order, accepted in (('GP-CONFIG-020', c020), ('GP-CONFIG-014', c014)):
+            row = item(root, revision, order)
+            require(row['status'] == 'DONE' and row['hardware_result'] == 'PASS'
+                    and row['hardware_evidence_gaps'] == []
+                    and previous.same_acceptance(row, accepted),
+                    '017 intervening revision erased/downgraded accepted ' + order)
+        for path in paths:
+            require(raw_bytes(root, revision, path) == raw_bytes(root, B, path),
+                    '017 intervening revision replaced accepted predecessor metadata: ' + path)
+    for path in paths:
+        expected = raw_bytes(root, B, path)
+        require(current_bytes(root, path) == expected and
+                _git(root, 'show', ':' + path) == expected,
+                '017 live/index predecessor metadata substitution: ' + path)
+    for raw in (current_bytes(root, QUEUE), _git(root, 'show', ':' + QUEUE)):
+        for order, accepted in (('GP-CONFIG-020', c020), ('GP-CONFIG-014', c014)):
+            row = previous.state_from(raw, order)
+            require(row['status'] == 'DONE' and row['hardware_result'] == 'PASS'
+                    and row['hardware_evidence_gaps'] == []
+                    and previous.same_acceptance(row, accepted),
+                    '017 live/index predecessor queue substitution: ' + order)
+
+
 def _stage_and_live(root: Path, head: str, path: str, expected: tuple[str, str, str]):
     require(expected[:2] == ('100644', 'blob'), 'unsafe017 host mode: ' + path)
     stage = list(filter(None, _git(root, 'ls-files', '--stage', '-z', '--', path)
@@ -301,6 +336,71 @@ def verify019_overlay(root: Path, head: str):
     return previous.CONFIG019_HOSTS
 
 
+def _manifest_pair(root: Path, head: str):
+    """Require both original016 and repaired017 load-bearing wrapper lanes."""
+    path = 'docs/runtime_config/fixtures/runtime_config_validation_manifest.json'
+    raw = current_bytes(root, path)
+    require(raw == raw_bytes(root, head, path) and _git(root, 'show', ':' + path) == raw,
+            '017 manifest live/index substitution')
+    manifest = json.loads(raw, object_pairs_hook=unique)
+    base = json.loads(raw_bytes(root, B, path), object_pairs_hook=unique)
+    original_id = 'neopixel_null_sendreport_characterization'
+    repaired_id = 'gp_config017_neopixel_repaired_current'
+    def entry(document, identity):
+        rows = [row for row in document['entries'] if row['id'] == identity]
+        require(len(rows) == 1, '017 manifest lane missing/duplicate: ' + identity)
+        return rows[0]
+    prior = entry(base, original_id)
+    old = entry(manifest, original_id)
+    original = dict(prior)
+    original.update(path=HISTORICAL_WRAPPER,
+                    command=['python3', HISTORICAL_WRAPPER],
+                    source_dependencies=sorted(set(prior['source_dependencies']) |
+                        {'tools/check_glyph_neopixel_null_sendreport_characterization.py',
+                         'tools/glyph_c017_campaign_transition.py'}),
+                    reason=('GP-VAL-035 current load-bearing authenticated replay: unchanged '
+                            'original016 ninecase/ninecontract main executes on its literal '
+                            'originalsource; separate unchanged C017 current main executes '
+                            'actual repairedphase or explicit exactC private source replay, '
+                            'both time ABIs/36neg. Preserve original code/fixtures and physical '
+                            'UNKNOWN; no hardware acceptance.'))
+    require(old == original and old['category'] == 'configurator'
+            and old['applicability'] == 'current' and old['load_bearing'] is True
+            and old['historical'] is False and old['mutation_risk'] == 'temporary_file_only'
+            and old['required_arguments'] == [],
+            '017 original016 wrapper manifest lane substitution')
+    repaired_deps = frozenset((
+        SOURCE, 'HAL/pico/include/rgb/ButtonLocations.hpp',
+        'HAL/pico/src/rgb/ButtonLocations.cpp', 'config/glyph/common/src/config.cpp',
+        'config/glyph/glyph_mk6/include/neopixel_definitions.hpp',
+        'docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json',
+        'docs/runtime_config/gp_config_017_neopixel_repaired_current.md',
+        'tools/check_glyph_gp_config_017_neopixel_repaired_current.py',
+        'tools/fixtures/custom_modifier_cache_host/schema/config.pb.h',
+        'tools/fixtures/gp_config012_button_host/generated/config.pb.h',
+        'tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h',
+        'tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp',
+        'tools/fixtures/neopixel_null_host/include/config.pb.h',
+        'tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp',
+        'tools/glyph_c017_campaign_transition.py'))
+    repaired = entry(manifest, repaired_id)
+    require(repaired == {
+        'id': repaired_id, 'path': HISTORICAL_WRAPPER,
+        'command': ['python3', HISTORICAL_WRAPPER, '--repaired-current'],
+        'category': 'candidate_safety', 'applicability': 'current',
+        'branch_policy': 'content_and_scope', 'required_arguments': ['--repaired-current'],
+        'mutation_risk': 'temporary_file_only',
+        'source_dependencies': sorted(repaired_deps),
+        'load_bearing': True, 'historical': False,
+        'reason': original['reason']},
+        '017 repaired-current wrapper manifest lane substitution')
+    for source in ('tools/check_glyph_neopixel_null_sendreport_characterization.py',
+                   'docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json'):
+        require(_tree(root, head).get(source) == _tree(root, B).get(source)
+                and current_bytes(root, source) == raw_bytes(root, B, source),
+                '017 changed original016 checker or evidence: ' + source)
+
+
 def _current_integrity(root: Path, head: str, expected: dict):
     """Check every critical byte and finite dirty host, including ignored inputs."""
     require(critical_tree(root, head) == expected, '017 current critical tree substitution')
@@ -349,7 +449,8 @@ def _current_integrity(root: Path, head: str, expected: dict):
 def _catalog(raw: bytes):
     value = json.loads(raw, object_pairs_hook=unique)
     require(set(value) == {'schema_version', 'accepted_transitions'} and
-            value['schema_version'] == 1 and type(value['accepted_transitions']) is list and
+            type(value['schema_version']) is int and value['schema_version'] == 1 and
+            type(value['accepted_transitions']) is list and
             len(value['accepted_transitions']) <= 1, '017 catalog fields/count substitution')
     fields = {'work_order', 'candidate', 'build', 'parent', 'tree',
               'review_commit', 'evidence_commit', 'integration'}
@@ -361,12 +462,72 @@ def _catalog(raw: bytes):
     return value['accepted_transitions']
 
 
+def _reviewed_build(root: Path, state: dict, before: dict, after: dict,
+                    protocol: bytes):
+    F = state['candidate_git_sha']; parent = state['candidate_base_configurator_sha']
+    require(isinstance(parent, str) and re.fullmatch('[0-9a-f]{40}', parent),
+            '017 build parent identity invalid')
+    composition = _git(root, 'rev-list', '--parents', '-n', '1', parent).decode().split()
+    require(len(composition) == 3 and composition[0] == parent and composition[2] == C,
+            '017 build parent is not exact [035 DONE,C017] composition merge')
+    governance = composition[1]
+    require(ancestor(root, READY, governance), '017 composition omitted 035 READY ancestry')
+    from check_glyph_agent_framework_docs import validate_completion_evidence
+    done_seen = False
+    for revision in _git(root, 'rev-list', '--reverse', '--topo-order', READY + '..' + governance).decode().split():
+        row = item(root, revision, 'GP-VAL-035')
+        if row['status'] == 'DONE':
+            payload = previous.parsed_queue(raw_bytes(root, revision, QUEUE))
+            validate_completion_evidence(row, row['done_evidence'],
+                policy=payload['completion_correspondence'],
+                publication_sha=revision, repo_root=root)
+            require(row['hardware_result'] is None
+                    and row['canonical_build'] == 'NOT_REQUIRED: source-free H1 governance/characterization; stop on firmware/build change.'
+                    and critical_tree(root, revision) == before,
+                    '017 035 DONE lacks source-free completion correspondence')
+            done_seen = True
+        elif done_seen:
+            require(False, '017 035 DONE downgraded before build')
+        require(critical_tree(root, revision) == before,
+                '017 candidate source entered canonical before reviewed F')
+    require(done_seen and item(root, governance, 'GP-VAL-035')['status'] == 'DONE'
+            and _catalog(raw_bytes(root, governance, TRANSITIONS)) == []
+            and critical_tree(root, governance) == before,
+            '017 build parent lacks latched strict035 DONE snapshot')
+    dt, mt = _tree(root, governance), _tree(root, parent)
+    require({path for path in dt.keys() | mt.keys() if dt.get(path) != mt.get(path)} == CRITICAL
+            and mt[SOURCE] == ('100644', 'blob', NEW_SOURCE_BLOB)
+            and _git(root, 'rev-parse', parent + '^{tree}').decode().strip() ==
+                _git(root, 'rev-parse', F + '^{tree}').decode().strip(),
+            '017 composition changed input outside sole HAL source or F rebuilt tree')
+    require(all(isinstance(x, str) and re.fullmatch('[0-9a-f]{40}', x) for x in (F, parent))
+            and _git(root, 'rev-list', '--parents', '-n', '1', F).decode().split() == [F, parent]
+            and ancestor(root, C, F) and ancestor(root, READY, F)
+            and critical_tree(root, parent) == after
+            and critical_tree(root, F) == after,
+            '017 build F lacks candidate/strict035 DONE/source-free parent')
+    verify_correspondence(root, C, B, target=F, integrated=True, check_worktree=False)
+    digest = state['firmware_artifact_sha256']
+    tree = _git(root, 'rev-parse', F + '^{tree}').decode().strip()
+    locator = f'local_backups/hardware-artifacts/{F}/{digest}/firmware.uf2'
+    require(isinstance(digest, str) and re.fullmatch('[0-9a-f]{64}', digest)
+            and state['preserved_firmware_artifact_locator'] == locator
+            and state['firmware_artifact_build_path'] == '.pio/build/glyph_mk6/firmware.uf2'
+            and state['manual_acceptance_protocol_reference'] == PROTOCOL
+            and state['manual_acceptance_protocol_version'] == 'GP_CONFIG_017_HW_V1',
+            '017 artifact/protocol identity mismatch')
+    previous.original.validate_build_review(protocol.decode(),
+        {'build': F, 'parent': parent, 'tree': tree}, digest, locator)
+    return F, parent, tree
+
+
 @previous.original._proof_invocation
 def authenticate(root: Path):
     root = Path(root).resolve()
     head = _git(root, 'rev-parse', 'HEAD').decode().strip()
     before, after = source_contract(root)
     predecessor, old_accepted = predecessor_contract(root)
+    _preserve_accepted_predecessors(root, head)
     current = critical_tree(root, head)
     require(current in (before, after), '017 current source outside B/C critical trees')
     dirty = _current_integrity(root, head, current)
@@ -380,7 +541,16 @@ def authenticate(root: Path):
                 '017 deleted/nonregular changed path: ' + path)
     for path in HOSTS:
         if path in tree:
-            require(tree[path] == _tree(root, C)[path], '017 candidate host substitution: ' + path)
+            if path == PROTOCOL and tree[path] != _tree(root, C)[path]:
+                state = item(root, head, 'GP-CONFIG-017')
+                require(state['status'] in {'REVIEW', 'HARDWARE_TEST_REQUIRED',
+                                            'HARDWARE_VALIDATED', 'DONE'},
+                        '017 protocol changed outside reviewed hardware phase')
+                _reviewed_build(root, state, before, after,
+                                current_bytes(root, PROTOCOL))
+            else:
+                require(tree[path] == _tree(root, C)[path],
+                        '017 candidate host substitution: ' + path)
             _stage_and_live(root, head, path, tree[path])
     require(tree.get(HISTORICAL_WRAPPER) == ('100644', 'blob', HISTORICAL_WRAPPER_BLOB)
             and sha(current_bytes(root, HISTORICAL_WRAPPER)) == HISTORICAL_WRAPPER_SHA256,
@@ -388,19 +558,24 @@ def authenticate(root: Path):
     _stage_and_live(root, head, HISTORICAL_WRAPPER, tree[HISTORICAL_WRAPPER])
     for path in METADATA:
         require(tree.get(path, ())[:2] == ('100644', 'blob'), '017 metadata mode substitution: ' + path)
+    _manifest_pair(root, head)
     require(current_bytes(root, MAPPING) == raw_bytes(root, head, MAPPING)
             and _git(root, 'show', ':' + MAPPING) == current_bytes(root, MAPPING),
             '017 uncommitted mapping')
-    records = _catalog(current_bytes(root, TRANSITIONS))
-    require(records == (_catalog(raw_bytes(root, head, TRANSITIONS)) if TRANSITIONS in tree else []),
+    _stage_and_live(root, head, MAPPING, tree[MAPPING])
+    catalog_raw = current_bytes(root, TRANSITIONS)
+    records = _catalog(catalog_raw)
+    require(TRANSITIONS in tree and catalog_raw == raw_bytes(root, head, TRANSITIONS)
+            and _git(root, 'show', ':' + TRANSITIONS) == catalog_raw,
             '017 uncommitted accepted catalog')
+    _stage_and_live(root, head, TRANSITIONS, tree[TRANSITIONS])
     state = item(root, head, 'GP-CONFIG-017')
+    _stage_and_live(root, head, QUEUE, tree[QUEUE])
+    for raw in (current_bytes(root, QUEUE), _git(root, 'show', ':' + QUEUE)):
+        require(previous.state_from(raw, 'GP-CONFIG-017') == state,
+                '017 live/index queue tuple substitution')
     require(state['status'] != 'HARDWARE_FAILED' and state['hardware_result'] != 'FAIL',
             'failed017 cannot validate')
-    for path in (previous.PROTOCOL, previous.EVIDENCE, previous.RESULT, previous.TRANSITIONS):
-        require(raw_bytes(root, head, path) == raw_bytes(root, B, path)
-                and current_bytes(root, path) == raw_bytes(root, B, path),
-                '017 replaced accepted014 record: ' + path)
     for path in previous.original.FROZEN:
         require(current_bytes(root, path) == raw_bytes(root, previous.original.B, path),
                 '017 changed frozen historical fixture: ' + path)
@@ -423,6 +598,8 @@ def authenticate(root: Path):
     elif ancestor(root, C, head):
         require(False, '017 candidate ancestry with original source')
     processor = None
+    first_catalog = None
+    done = False
     # Scan immutable queue history for the first real processor transition.
     # A later DONE row or catalog cannot self-declare an earlier HEP PASS.
     for revision in _git(root, 'rev-list', '--reverse', '--topo-order', READY + '..' + head).decode().split():
@@ -442,33 +619,49 @@ def authenticate(root: Path):
             else:
                 require(previous.same_acceptance(row, processor['native']),
                         '017 processor acceptance downgraded/replaced')
+            require(not done or row['status'] == 'DONE',
+                    '017 DONE status downgraded')
         elif processor is not None:
             require(False, '017 processor PASS erased/downgraded')
-        if TRANSITIONS in _tree(root, revision):
-            introduced = _catalog(raw_bytes(root, revision, TRANSITIONS))
-            if introduced:
-                require(processor is not None and len(introduced) == 1,
-                        '017 catalog precedes processor')
-                _accepted(root, revision, introduced[0], processor, after)
+        introduced = (_catalog(raw_bytes(root, revision, TRANSITIONS))
+                      if TRANSITIONS in _tree(root, revision) else [])
+        if introduced:
+            require(processor is not None and len(introduced) == 1,
+                    '017 catalog precedes processor')
+            if first_catalog is None:
+                first_catalog = introduced[0]
+            require(introduced == [first_catalog],
+                    '017 accepted catalog replaced')
+            _accepted(root, revision, first_catalog, processor, after)
+        elif first_catalog is not None:
+            require(False, '017 accepted catalog removed')
+        if row['status'] == 'DONE':
+            require(introduced, '017 DONE before accepted catalog')
+            from check_glyph_agent_framework_docs import validate_completion_evidence
+            queue_payload = previous.parsed_queue(raw_bytes(root, revision, QUEUE))
+            validate_completion_evidence(row, row['done_evidence'],
+                policy=queue_payload['completion_correspondence'],
+                publication_sha=revision, repo_root=root)
+            done = True
     require((state['hardware_result'] == 'PASS' or state['status'] in {'HARDWARE_VALIDATED', 'DONE'})
             == (processor is not None), '017 current processor status/history mismatch')
     if processor:
-        current_native = dict(state)
-        if (head == processor['evidence_commit'] and
-                current_native['hardware_evidence_record'] == 'repo-json:' + EVIDENCE):
-            current_native['hardware_evidence_record'] = (
-                'git-json:' + processor['evidence_root'] + ':' + EVIDENCE)
-        require(previous.same_acceptance(current_native, processor['native']),
+        require(previous.same_acceptance(state, processor['native']),
                 '017 current acceptance tuple differs from first E')
         for path in (PROTOCOL, EVIDENCE, RESULT):
             require(current_bytes(root, path) == raw_bytes(root, head, path)
-                    and _git(root, 'show', ':' + path) == current_bytes(root, path),
+                    and _git(root, 'show', ':' + path) == current_bytes(root, path)
+                    and raw_bytes(root, head, path) == processor[
+                        {PROTOCOL: 'protocol', EVIDENCE: 'payload', RESULT: 'result'}[path]],
                     '017 accepted evidence/protocol/result live/index substitution: ' + path)
+            _stage_and_live(root, head, path, tree[path])
         if current == before:
-            require(not records, 'source-free017 processor has accepted catalog')
+            require(not records and first_catalog is None,
+                    'source-free017 processor has accepted catalog')
             phase = 'SOURCE_FREE_PROCESSOR'
         else:
-            require(len(records) == 1, 'integrated017 PASS lacks accepted catalog')
+            require(len(records) == 1 and records[0] == first_catalog,
+                    'integrated017 PASS lacks first accepted catalog')
             _accepted(root, head, records[0], processor, after)
             phase = 'ACCEPTED_TRANSITION'
     else:
@@ -497,19 +690,10 @@ def authenticate(root: Path):
 
 def _processor(root: Path, head: str, state: dict, before: dict, after: dict):
     """Validate actual future E; this path is unreachable from candidate fixtures."""
-    F = state['candidate_git_sha']; parent = state['candidate_base_configurator_sha']
-    require(all(isinstance(x, str) and re.fullmatch('[0-9a-f]{40}', x) for x in (F, parent))
-            and _git(root, 'rev-list', '--parents', '-n', '1', F).decode().split() == [F, parent]
-            and ancestor(root, C, F) and critical_tree(root, F) == after,
-            '017 build F parent/source mismatch')
-    verify_correspondence(root, C, B, target=F, integrated=True, check_worktree=False)
-    digest = state['firmware_artifact_sha256']
-    require(isinstance(digest, str) and re.fullmatch('[0-9a-f]{64}', digest)
-            and state['preserved_firmware_artifact_locator'] ==
-            f'local_backups/hardware-artifacts/{F}/{digest}/firmware.uf2'
-            and state['manual_acceptance_protocol_reference'] == PROTOCOL
-            and state['manual_acceptance_protocol_version'] == 'GP_CONFIG_017_HW_V1',
-            '017 artifact/protocol identity mismatch')
+    F, parent, tree = _reviewed_build(root, state, before, after,
+                                      raw_bytes(root, head, PROTOCOL))
+    require(not ancestor(root, F, head) and critical_tree(root, head) == before,
+            '017 processor E must be source-free')
     reference = state['hardware_evidence_record']
     if reference == 'repo-json:' + EVIDENCE:
         evidence_root = head
@@ -520,12 +704,22 @@ def _processor(root: Path, head: str, state: dict, before: dict, after: dict):
     require(ancestor(root, evidence_root, head), '017 evidence root after E')
     payload = raw_bytes(root, evidence_root, EVIDENCE)
     from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
-    validate_work_order(state, evidence_repo_root=root)
-    validate_evidence_record(state, evidence_repo_root=root)
+    validated = dict(state, hardware_evidence_record=
+        'git-json:' + evidence_root + ':' + EVIDENCE)
+    validate_work_order(validated, evidence_repo_root=root)
+    validate_evidence_record(validated, evidence_repo_root=root)
     evidence = json.loads(payload, object_pairs_hook=unique)
+    rows = {row['id']: row for row in evidence['steps']}
     require(evidence['anomalies'] == evidence['evidence_gaps'] == []
-            and len({row['id'] for row in evidence['steps']}) == len(evidence['steps']),
-            '017 evidence gaps/duplicate rows')
+            and len(rows) == len(evidence['steps'])
+            and all(row in rows and rows[row]['observed'].strip().startswith('PASS')
+                    for row in REQUIRED_ROWS),
+            '017 required physical row missing/failing or evidence gaps')
+    protocol = raw_bytes(root, head, PROTOCOL)
+    require(all(token in protocol.decode() for token in
+                ('identity', 'static RGB', 'dynamic RGB', 'mode changes',
+                 'reconnect and reboot', 'Ultimate and X1', 'owner Config restoration')),
+            '017 reviewed protocol omitted required physical row')
     review = None
     for revision in _git(root, 'rev-list', '--reverse', '--topo-order', READY + '..' + head).decode().split():
         row = item(root, revision, 'GP-CONFIG-017')
@@ -537,10 +731,10 @@ def _processor(root: Path, head: str, state: dict, before: dict, after: dict):
             and critical_tree(root, review) == before
             and raw_bytes(root, review, PROTOCOL) == raw_bytes(root, head, PROTOCOL),
             '017 missing reviewed source-free R/protocol')
-    return {'build': F, 'parent': parent, 'tree': _git(root, 'rev-parse', F + '^{tree}').decode().strip(),
+    return {'build': F, 'parent': parent, 'tree': tree,
             'review_commit': review, 'evidence_commit': head, 'evidence_root': evidence_root,
-            'payload': payload, 'native': dict(state, hardware_evidence_record=
-                'git-json:' + evidence_root + ':' + EVIDENCE)}
+            'payload': payload, 'protocol': raw_bytes(root, review, PROTOCOL),
+            'result': raw_bytes(root, head, RESULT), 'native': state}
 
 
 def _accepted(root: Path, head: str, record: dict, processor: dict, after: dict):

@@ -41,6 +41,10 @@ def main() -> int:
         assert current['source_candidates'][proof.SOURCE] == proof.C
         assert proof.critical_tree(ROOT, current['target']) == after
     rejected(lambda: proof._catalog(b'{}'), 'catalog omission')
+    rejected(lambda: proof._catalog(b'{"schema_version":true,"accepted_transitions":[]}'),
+             'boolean schema version')
+    rejected(lambda: proof._catalog(b'{"schema_version":1,"schema_version":1,"accepted_transitions":[]}'),
+             'duplicate catalog field')
     rejected(lambda: proof._catalog(b'{"schema_version":1,"accepted_transitions":[{},{}]}'),
              'extra accepted transitions')
     rejected(lambda: proof._catalog(json.dumps({
