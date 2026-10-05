@@ -8169,7 +8169,7 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
