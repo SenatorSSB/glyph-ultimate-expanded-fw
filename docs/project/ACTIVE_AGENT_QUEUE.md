@@ -1,6 +1,6 @@
 # Active Agent Queue
 
-GP-CONFIG-014 is DONE after reviewed exact tested-source integration `3895736cd7caa7e308f08ff1403cdf6777d98545` and separate strict DIRECT_ANCESTRY completion. Source merge `d786c244183343f89287a040055b7eaeae1e41f3` follows source-free HEP E `6a10c02909ba27136a427c0360969770988a4684`; native034 catalog preserves earliest reviewed R043f29, final handoffR38ec, originalCa3664 and exact testedF `e5c455637056ac535347c1176dd41c9a9d84d85a`/tree5459271c2219e021414eda37c9155c5ea7a983cf. Preserved UF2 SHA256 `9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af`,796672bytes, remains the accepted artifact; all236critical source/build entries match it. Native source/index/history/custody and actualcurrent dualABI30cases each+negative controls, neighboring012current and immutable011 replay PASS; fresh independent integrationreview approves exact scope. Actual26wrapper result9PASS/17preexisting scopeFAIL/nativefingerprintMATCH and originalF aggregateFAIL/TIMEOUT remain honest Revision3 frameworkdebt; no fullaggregatePASS or rebuild/retest. HEP preserves exact eightrow ownerPASS, Aboutconfirmation withoutliteral, mini-screen vsactualhost distinctions, GC/Switch/WUP028+MacXInput Ultimate/X1/reconnect, originalConfig4201bytes f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byteexactrestoration. RGB OBSERVED_NONATTRIBUTED/NONBLOCKING; invalid21/oversized HOST_ONLY, Nunchuk NOT_TESTED; rootcauseUNPROVEN. All98otherorders,024/045WAITING and owneroriginalrawKeyboard policy preserved. SamepersistentH3 retains solepublication lock and immediately evaluates existing017 objectiveactivation then035; no newPlanner/Curator. No furtherHEPread required; owner-exclusive hardwareworktree permissionrelease is requested from daemon atthisDONE, with no removal/repointing/cleaning. GP-CONFIG-017 is now READY after objective activation: exact014/034 strictDONE, C014 testedF/artifact/HEP PASS with emptygaps, native accepted020->014 sourcechain and unchanged 0118/0151 annex NeoPixelheader/Glyphcaller/default/schema/decoder/domain36 plus immutable016 closure. Only the specified existing-null-block movement before speed access is authorized, retaining time/diff/prevTime and every nonnull path. Fresh current-base C017 and completeinventory/conformance are outputs; old12path checkpoint is evidence only. Preserve actual016historical replay and add nonnull static/dynamic multipleupdate timing equality. GP-VAL-035 remains PREAUTHORIZED/WAITING until committed clean C017/B/tree/inventory and independentconformance; no build or sourceintegration before035DONE. No newpolicy/fallback/RGBsemantics, devicewrites or inherited014physicalPASS. SameH3 immediately continues017/035 with solelock; reservation permissionrelease is requested via durable daemonreadback, not confirmed.
+GP-CONFIG-017 is REVIEW at exact published clean C `478f438804275f3e0c23e6f36bfd26e34aa343bf`, tree `d7bd33ae51c5984090c9a1b0af863aa0957d0840`, sole direct live-verified base B `a6b7750e271324972c51915563fe0dc22f941f95`. Independent Sol conformance report SHA-256 `692494a498d88139fc146b4558acb413efe3698e110f4a881a8ad43856354dc6` approves candidate publication and the source-free GP-VAL-035 handoff. Its complete eleven-path inventory contains one exact existing-null-block move in NeoPixelBackend.hpp and ten host/protocol/metadata entries; all other235 critical inputs and original016 closure are unchanged. Actual current host proof passes both time ABIs,56 null updates, static/SHIFT/XWAVE traces and recovery,36 negatives; immutable original016 replay passes9cases+9contracts. Focused candidate result is actual6PASS/7FAIL: four protected wrappers and010 reject current critical context, baseline artifact stops at ancestry precondition, original016 current-main rejects repaired source. No five scope-body PASS is claimed. Aggregate actualFAIL/SETUP_FAILURE at current critical context executes zero checkers; native fingerprintMATCH,300/120 deadlines unchanged. GP-VAL-035 is READY after all four recorded objective conditions pass; its original conditions and exact review/inventory are preserved in the queue receipt. Same persistent H3 retains sole publication authority and immediately executes035. Canonical handoff carries only four source-free status docs; C017 firmware remains unmerged/unbuilt, artifactNONE, hardwarePENDING. All97 other orders and accepted014/020 exactPASS remain unchanged; no inherited014 acceptance. All five full scope bodies, historical/current010/016 and affected proofs remain035 obligations before DONE, then exact F build/custody/review and humanPASS. Hardware-worktree permissionrelease is independently daemon-confirmed; accessNONE. Nunchuk NOT_TESTED; root cause UNPROVEN; physical null reachability UNKNOWN.
 
 Independent packet0028 curation is complete. Same-base immutable receipt `3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b` and its descendant adoption authorize GP-CONFIG-024/GP-VAL-045 as PREAUTHORIZED/WAITING behind existing023 exact DONE/PASS; no immediate implementation. The [binding source-free adjudication](../agent_framework/PORTFOLIO_20261005_0028_CURATOR.md) preserves all97priororders, completed040/KBD/041/019 and frozen014F/artifact/protocol. Direct owner conditional and independently fetched original Glyph/main HayBox bytes select PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT; no transformed-output repair or executable GP-KBD-002 is authorized. Original-input remap/SOCD discrepancies stay truthful; required physical/RC Keyboard rows remain pending. Allthree proposals are consumed, no globalwait accepted, and current marker defines liveness. Existing014->017->021->022->023 chain remains intact; owner hardware worktree is exclusive and was never entered/inspected/polled. Nunchuk NOT_TESTED; root cause UNPROVEN. Earlier characterization summaries retain their completion-time evidence; this current disposition supersedes their unresolved-policy instructions.
 
@@ -156,7 +156,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   },
   "runway": {
     "immediate_ready": 1,
-    "recorded_preauthorized": 9,
+    "recorded_preauthorized": 8,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
@@ -695,7 +695,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-017",
       "title": "Null RGB ordering",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-config-017-release-safety",
       "objective": "Source and GP-CONFIG-016 support moving only the existing null branch before speed access while preserving time bookkeeping/non-null behavior; no fallback choice.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -743,8 +743,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+      "candidate_base_configurator_sha": "a6b7750e271324972c51915563fe0dc22f941f95",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -757,7 +757,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-035",
       "title": "C017 governance",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-035-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -774,12 +774,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve the exact committed GP-CONFIG-017 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
       "substantive_authorization_rationale": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
-      "mechanical_activation_conditions": [
-        "Strict DONE correspondence for GP-VAL-034; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
-        "GP-CONFIG-017 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-017 scope; expected full-aggregate failure does not bar candidate creation.",
-        "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
-        "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
@@ -805,9 +800,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -8135,11 +8130,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-017"],"immediate_ready":1,"recorded_preauthorized":9,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-035"],"immediate_ready":1,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-017; Immediate Ready: 1; Recorded Preauthorized: 9; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-035; Immediate Ready: 1; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -16987,3 +16982,498 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config017-activation:end -->
+
+
+## Exact GP-CONFIG-017 handoff and objective GP-VAL-035 activation
+
+<!-- gp-config017-handoff-val035-activation:start -->
+```json
+{
+  "schema_name": "glyph_gp_config017_candidate_handoff_val035_activation",
+  "schema_version": 1,
+  "canonical_base": "a6b7750e271324972c51915563fe0dc22f941f95",
+  "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+  "candidate_tree": "d7bd33ae51c5984090c9a1b0af863aa0957d0840",
+  "candidate_direct_parent": "a6b7750e271324972c51915563fe0dc22f941f95",
+  "candidate_branch": "codex/gp-config-017-release-safety",
+  "live_verified_candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+  "live_verified_canonical": "a6b7750e271324972c51915563fe0dc22f941f95",
+  "source_free_canonical": true,
+  "original_mechanical_conditions": [
+    "Strict DONE correspondence for GP-VAL-034; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
+    "GP-CONFIG-017 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-017 scope; expected full-aggregate failure does not bar candidate creation.",
+    "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
+    "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
+  ],
+  "objective_conditions_result": [
+    "Strict034DONE and exact014F/artifact acceptedPASS with emptygaps; immutableB native source/history/catalog proofPASS, old034 fullauthenticate known scopeFAIL retained.",
+    "Clean committed directparent C/B/tree and complete11path raw-z inventory; B liveverified at creation and feature publication; fresh independent exact conformanceAPPROVED.",
+    "Single exact approved HAL guard movement, allother235critical equalB/accepted014F; ten sourcefree regular100644 inputs outside unchangedbuildfilters/include/extra script; original016closure unchanged.",
+    "No product/policy/authority expansion, forbiddencapability, dirty/staged/untracked/ignoredcritical input or failedhardware; reviewed local finite object closure."
+  ],
+  "review_sha256": "692494a498d88139fc146b4558acb413efe3698e110f4a881a8ad43856354dc6",
+  "independent_review": {
+    "schema_version": 1,
+    "role": "fresh independent exact GP-CONFIG-017 candidate conformance review",
+    "reviewer_model": "gpt-6.1-sol",
+    "reviewed_sha": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+    "candidate_git_sha": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+    "reviewed_tree": "d7bd33ae51c5984090c9a1b0af863aa0957d0840",
+    "base_live_READY": "a6b7750e271324972c51915563fe0dc22f941f95",
+    "verdict": "APPROVED",
+    "blocking_findings": [],
+    "approval_scope": "Exact candidate feature publication, source-free handoff and objective GP-VAL-035 activation prerequisite only. Firmware build/integration/hardware acceptance remain gated by035 DONE and subsequent exact snapshot requirements.",
+    "candidate_conformance": {
+      "sole_direct_parent": "a6b7750e271324972c51915563fe0dc22f941f95",
+      "complete_inventory_path_count": 11,
+      "raw_inventory_sha256": "4a5674c786726f30a98067560807e4739ba6c2c644b706425f03c552171792d2",
+      "inventory": [
+        {
+          "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "843eb9b937ccebc616679b0ced24b805d8a6290d",
+          "new_blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+          "status": "M",
+          "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+          "firmware_build_input": true
+        },
+        {
+          "path": "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "c48f4a2d75ce5aeccb5a111a2b9bf95fecd77f8e",
+          "status": "A",
+          "sha256": "4873d3d87eda224fc378069387f7cfa388c0b7ff37809a386bf29cffb5306e12",
+          "firmware_build_input": false
+        },
+        {
+          "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "bc6157cbe2e5624e39dc88cb4987c8e61729fb81",
+          "new_blob": "e07db6b16ba2eaf34572cf65d18f73fa2998f635",
+          "status": "M",
+          "sha256": "1ba1f6d3016d57eeaf58c51421f9937e27310b8ab42e65ababb6c20995ab1666",
+          "firmware_build_input": false
+        },
+        {
+          "path": "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "f36c2d5530f35fb3b25101d66a22c162afd862b9",
+          "status": "A",
+          "sha256": "8b097e9df6d0d7807e469f8ed18b362b67a6b5eb2322ad5550dd33c3204510db",
+          "firmware_build_input": false
+        },
+        {
+          "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "806b755406ea3435387aad3f6f7f868082328651",
+          "new_blob": "f0c5a076ea0d1729dc2d1a1ec32e06958ea1b56a",
+          "status": "M",
+          "sha256": "ab6aeef00b8c2412bb23b5ff9360978ccf2165f73f91bac09e05cef49534ea0e",
+          "firmware_build_input": false
+        },
+        {
+          "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "d64f767d9bc45957f3bdfc1aa9f205e1c86e164e",
+          "new_blob": "74391ebcf0b185a214cd2c7dadd3cf8acf5b070f",
+          "status": "M",
+          "sha256": "ee86acad5e53041772385d6b16638f75d18676d5cbf0fb9c98fb2f442d52addd",
+          "firmware_build_input": false
+        },
+        {
+          "path": "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "1c5ffcdf7fb1088a92be7771409a6a80dcc4d077",
+          "status": "A",
+          "sha256": "54785336077a2314e0622060b4e771f1b15f8649d5686d8a612399a7e8929ea2",
+          "firmware_build_input": false
+        },
+        {
+          "path": "docs/runtime_config/runtime_config_validation_health.md",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "b6d262b0c860e9cae04e5d4966b4b81d3fdcd48c",
+          "new_blob": "a4b24de2d8b142549f41274c0c8d9e1c467cd8bc",
+          "status": "M",
+          "sha256": "96b15a60b8aad1a1e3402f9646ce4e1b0642d45f592a930391f8f5fdaa37cf08",
+          "firmware_build_input": false
+        },
+        {
+          "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "ad88fee6d08ba913bc75c0fb2aecefc4b6d8ea10",
+          "status": "A",
+          "sha256": "28fd0fb0485a1483e0ec0beab4657ad4746ea11a0149e67eaa78ca62ff245a29",
+          "firmware_build_input": false
+        },
+        {
+          "path": "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "1b77f0d75f96c409612bce13463b47ea73b7ac6a",
+          "status": "A",
+          "sha256": "ab8265928fbd359362aa70dd5547ac1876d001515a79764159513ada960388db",
+          "firmware_build_input": false
+        },
+        {
+          "path": "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "5c150f5c725be18f97720032c80585c9d250bb86",
+          "status": "A",
+          "sha256": "872855d12e5d3b6dd4404403a963988da3295339c5497b9a6d6501ec33abcad7",
+          "firmware_build_input": false
+        }
+      ],
+      "production": "Only HAL/pico/include/comms/NeoPixelBackend.hpp: exact existing null block before first speed dereference, all other bytes including EOF unchanged. Time/diff/prevTime, blank, brightness0, show, return and every nonnull branch remain byte-exact.",
+      "production_blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+      "production_sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+      "critical_count": 236,
+      "other235_critical": "exact B and accepted testedC014F",
+      "all1425_HEAD_index_live_modes_flags": "PASS; unchanged existing executable modes retained, all11 candidate paths regular100644",
+      "original016_closure": "Unchanged original checker, fixture, harness, FastLED/config/communication stubs and schema; no reseal.",
+      "scope_classifier_runner_build_filters": "All five existing scope checker files/shared context/hardware classifier/runner/platformio/env/builder bytes exactB; HAL remains CRITICAL.",
+      "queue_catalog_accepted_hardware": "All99 items and accepted020/C014 protocol/evidence/result/catalog bytes exactB;017READY/035WAITING, accepted014PASS preserved.",
+      "manifest": "Only one new current load-bearing017 entry appended. Every original entry/exclusion unchanged, original016 remains load-bearing."
+    },
+    "independent_actual_host": {
+      "invocation": "Unchanged native authenticate_inputs/prove APIs, real production literal includes, fixed original/current source and host pins. Original immutable016 checker separately executed as unchanged main in a finite private original-source closure.",
+      "time_representations": [
+        "debug struct absolute_time_t",
+        "NDEBUG scalar absolute_time_t"
+      ],
+      "seven_null_cases": "Original header actual sanitizer failures preserved; repaired four updates blank76/brightness0 with exact time bookkeeping.",
+      "nonnull": "Static, SHIFT and XWAVE old/repaired full76-pixel traces equal over four updates; nonzero hue trajectories, wrap and brightness/show checked.",
+      "recovery": "Two null updates followed by each valid mode match original500ms reference including timing/result.",
+      "negative_controls": 36,
+      "historical016": "9 original cases plus9 adversarial contracts PASS",
+      "physical_null_reachability": "UNKNOWN",
+      "FastLED_target_color_conversion": "SYNTHETIC; no physical-color claim"
+    },
+    "actual_validation_limits": {
+      "focused_status": "FAIL",
+      "actual_pass": 6,
+      "actual_failed_or_incomplete": 7,
+      "full_native_fingerprint_window": {
+        "before": "07e28dc57189dbb674e3c9e89f9354844a794e5744897f963bf5a78aa6b02ab1",
+        "after": "07e28dc57189dbb674e3c9e89f9354844a794e5744897f963bf5a78aa6b02ab1",
+        "result": "MATCH"
+      },
+      "four_protected_wrappers_and010": "Actual FAIL at current critical tree outside accepted020/C014; protected bodies not claimed executed.",
+      "baseline_artifact": "Actual FAIL configurator must be an ancestor of HEAD before HAL filter; ordinary private local-ref setup later repaired for aggregate, initial failed observation retained.",
+      "original016_current_main": "Actual FAIL production source drift on repaired header; independent unchanged original-source replay PASS separately.",
+      "aggregate_initial": {
+        "status": "FAIL",
+        "failure_kind": "SETUP_FAILURE",
+        "reason": "git rev-parse --verify refs/heads/configurator^{commit} failed: fatal: Needed a single revision",
+        "checker_executions": 0,
+        "canonical_proof": "MATCH"
+      },
+      "aggregate_current": {
+        "status": "FAIL",
+        "failure_kind": "SETUP_FAILURE",
+        "reason": "current critical tree outside accepted020/C014",
+        "checker_executions": 0,
+        "canonical_proof": "MATCH",
+        "production_timeouts": "300 aggregate /120 per checker unchanged"
+      },
+      "full_aggregate_or_five_scope_bodies_PASS_claimed": false,
+      "035_obligations": "All five actual candidate positives and protected-source/mode/alias/substitution negatives, separate baseline HAL filter, historical/current010 and016, full affected aggregate, finite identity/catalog chronology and fresh independent review remain required. No validator or production runner modification/waiver."
+    },
+    "execution_environment": {
+      "initial": "Actual FAIL before compile: strict temporary closure parent check refused symlink /var in default macOS TMPDIR.",
+      "independent_observation": "Default tempfile root is /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T; /var resolves to /private/var. /private/tmp is a real directory.",
+      "correction": "Same unchanged candidate/checker succeeds with TMPDIR=/private/tmp; symlink protection preserved.",
+      "classification": "Execution-environment limitation, not source conformance defect. Initial rawFAIL retained."
+    },
+    "protocol_review": {
+      "status": "APPROVED_STAGED_DRAFT_ONLY",
+      "sha256": "4873d3d87eda224fc378069387f7cfa388c0b7ff37809a386bf29cffb5306e12",
+      "boundaries": "Before firmware/Config change require exact future F/parent/tree/artifact custody, supported restoration/rollback, actual current Config and concrete valid profiles/expectations; one dependent owner action at a time. No automated writes or forced undocumented null state. Final filled build/custody/operator protocol requires fresh review."
+    },
+    "live_verification": {
+      "ordinary_attempt": "DNS failure inconclusive; unchanged read-only network retry succeeded.",
+      "configurator": "a6b7750e271324972c51915563fe0dc22f941f95",
+      "frozen014_branch": "e5c455637056ac535347c1176dd41c9a9d84d85a"
+    },
+    "non_claims": {
+      "firmware_build": "NOT_RUN",
+      "hardware_acceptance": "NOT_CLAIMED",
+      "physical_null_reachability": "UNKNOWN",
+      "Nunchuk": "NOT_TESTED",
+      "root_cause": "UNPROVEN",
+      "reserved_hardware_worktree_access": false,
+      "reviewer_repository_ref_mutation_or_publication": false
+    },
+    "report_provenance": {
+      "candidate-independent-source.json": {
+        "path": "/private/tmp/glyph-config017/candidate-independent-source.json",
+        "sha256": "8f7d14f54a632ee73277be1c6805fb568f6c27cfe46f61f055500000d15b1f25"
+      },
+      "candidate-independent-source.log": {
+        "path": "/private/tmp/glyph-config017/candidate-independent-source.log",
+        "sha256": "ff9cdd959c64ef25eb3fab9af4cc23c30744566d8e7ca29310f2b7a3288f9bd3"
+      },
+      "candidate-independent-host.json": {
+        "path": "/private/tmp/glyph-config017/candidate-independent-host.json",
+        "sha256": "b84cba0c4f1609c1ad827d1f8bd1af47140869452ec03c83cb668e5eedb36f50"
+      },
+      "candidate-independent-host.log": {
+        "path": "/private/tmp/glyph-config017/candidate-independent-host.log",
+        "sha256": "1ef7dc5e702d7cddafa20947f5162a78b9004f12352d4ecf5e7a86ebe045d210"
+      },
+      "candidate-independent-original016.json": {
+        "path": "/private/tmp/glyph-config017/candidate-independent-original016.json",
+        "sha256": "68ae5f286d37dc10e538120ab84ae793b71614134bf0106a67b0efad89c495ec"
+      },
+      "candidate-independent-original016.log": {
+        "path": "/private/tmp/glyph-config017/candidate-independent-original016.log",
+        "sha256": "a2cecadbd4140bb6d74e6a9816421fbb1bc1a11528d528c9cc785104305fc3fb"
+      },
+      "candidate-independent-filters.json": {
+        "path": "/private/tmp/glyph-config017/candidate-independent-filters.json",
+        "sha256": "e40c0137fc055066e76a4b22db3ded47b3d8d9d8507199c316a8eaad7e993146"
+      },
+      "candidate-source.json": {
+        "path": "/private/tmp/glyph-config017/candidate-source.json",
+        "sha256": "c91c5ebb25ad5fcc6a85dbe609693fb5dbeed2292029e702a7f06ad6d39a8a28"
+      },
+      "candidate-host-initial.json": {
+        "path": "/private/tmp/glyph-config017/candidate-host-initial.json",
+        "sha256": "cfd14e1de96eb7cd8925085e358db4c03c5de679871b142190adcc4b30dd3e8b"
+      },
+      "candidate-host.json": {
+        "path": "/private/tmp/glyph-config017/candidate-host.json",
+        "sha256": "027bfe2cd6a8300bb69398cabbda2569048a797210dcfc99910ad2e6ebd3e8e4"
+      },
+      "candidate-host.log": {
+        "path": "/private/tmp/glyph-config017/candidate-host.log",
+        "sha256": "e72bda4a8b23791fd0baeb6dae734065d12d816a65ad20a2d7c9c578a45a4852"
+      },
+      "candidate-validation.json": {
+        "path": "/private/tmp/glyph-config017/candidate-validation.json",
+        "sha256": "4f4cd56855d119545af3d773fade341935fc9dd46213bc852f13b0b251d4e120"
+      },
+      "candidate-aggregate.json": {
+        "path": "/private/tmp/glyph-config017/candidate-aggregate.json",
+        "sha256": "ccde40bdb7a647ddb1df6448f75648cb7640eda0f78562f828c54644abeb953f"
+      },
+      "candidate-aggregate-initial-setup.json": {
+        "path": "/private/tmp/glyph-config017/candidate-aggregate-initial-setup.json",
+        "sha256": "ffcf3c614e863c38f6bf68db099dc14ae5a1f6ca02a86b08cf61a6e535177cbd"
+      },
+      "candidate-01-check_glyph_checker_census.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-01-check_glyph_checker_census.py.log",
+        "sha256": "2abb72c09225c02f24d4f20e4411eb299594d0da04befc2c224d251247f3b909"
+      },
+      "candidate-02-check_glyph_runtime_config_validation_health.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-02-check_glyph_runtime_config_validation_health.py.log",
+        "sha256": "0d048a468be8685216cea8122eaef2ea072a24bcbf3a146d948352f2a170bba7"
+      },
+      "candidate-03-check_glyph_agent_framework_docs.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-03-check_glyph_agent_framework_docs.py.log",
+        "sha256": "da50f44675b972166479594e0ac706a7c17d159d27c4f9c7fad302b14dacfea2"
+      },
+      "candidate-04-check_glyph_agentic_sequence_protocol.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-04-check_glyph_agentic_sequence_protocol.py.log",
+        "sha256": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b"
+      },
+      "candidate-05-check_glyph_docs_navigation.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-05-check_glyph_docs_navigation.py.log",
+        "sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+      },
+      "candidate-06-check_glyph_docs_agent_surface.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-06-check_glyph_docs_agent_surface.py.log",
+        "sha256": "0ef7768d2b242eee72163a4b625398e746cdec84d721b2c03edefc18c7e1ce84"
+      },
+      "candidate-07-test_glyph_docs_agent_surface_integration.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-07-test_glyph_docs_agent_surface_integration.py.log",
+        "sha256": "9815794a61cae59614fa945dfe5844267c0953ea7fac176573f4742f7f629fb6"
+      },
+      "candidate-08-check_glyph_generated_source_owned_generator_contract.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-08-check_glyph_generated_source_owned_generator_contract.py.log",
+        "sha256": "238ee420d1d724ed8033d6cc259dcc9961c5b7756903696efc08c5541f55ebb3"
+      },
+      "candidate-09-check_glyph_generated_source_owned_artifact_install.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-09-check_glyph_generated_source_owned_artifact_install.py.log",
+        "sha256": "0934329487e0eb5624014ce7a8fc1dfbf9d878eed3082c2a288e9c9f3d4bca06"
+      },
+      "candidate-10-check_glyph_coordinate_native_runtime_profile_contract.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-10-check_glyph_coordinate_native_runtime_profile_contract.py.log",
+        "sha256": "f189cc36add005b2d08013fc0d70e650d368a7f7b2eed73c1199e0be331753a6"
+      },
+      "candidate-11-check_glyph_generated_source_owned_baseline_artifact.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-11-check_glyph_generated_source_owned_baseline_artifact.py.log",
+        "sha256": "1cb82f46cbe80ba9e6d6e787f6df1abefc14eb1faac25415fddcc8a6ee9fcd02"
+      },
+      "candidate-12-check_glyph_config_010_integration_semantic_correspondence.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-12-check_glyph_config_010_integration_semantic_correspondence.py.log",
+        "sha256": "8180ed7177ab277ccf9b4bf0395b3137e8cc8ee304bb81905c0e0e8035472145"
+      },
+      "candidate-13-check_glyph_neopixel_null_sendreport_characterization.py.log": {
+        "path": "/private/tmp/glyph-config017/candidate-13-check_glyph_neopixel_null_sendreport_characterization.py.log",
+        "sha256": "a1eea283aae37caeaa3d96f985589c2abd0e33da7d0716d027de7d8a6c650364"
+      }
+    },
+    "checked_at": "2026-10-05T08:58:54.154199+00:00"
+  },
+  "source_proof_sha256": "c91c5ebb25ad5fcc6a85dbe609693fb5dbeed2292029e702a7f06ad6d39a8a28",
+  "source_proof": {
+    "status": "PASS",
+    "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+    "base": "a6b7750e271324972c51915563fe0dc22f941f95",
+    "tree": "d7bd33ae51c5984090c9a1b0af863aa0957d0840",
+    "raw_inventory_sha256": "4a5674c786726f30a98067560807e4739ba6c2c644b706425f03c552171792d2",
+    "entries": [
+      {
+        "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "843eb9b937ccebc616679b0ced24b805d8a6290d",
+        "new_blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+        "status": "M",
+        "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+        "firmware_build_input": true
+      },
+      {
+        "path": "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "c48f4a2d75ce5aeccb5a111a2b9bf95fecd77f8e",
+        "status": "A",
+        "sha256": "4873d3d87eda224fc378069387f7cfa388c0b7ff37809a386bf29cffb5306e12",
+        "firmware_build_input": false
+      },
+      {
+        "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "bc6157cbe2e5624e39dc88cb4987c8e61729fb81",
+        "new_blob": "e07db6b16ba2eaf34572cf65d18f73fa2998f635",
+        "status": "M",
+        "sha256": "1ba1f6d3016d57eeaf58c51421f9937e27310b8ab42e65ababb6c20995ab1666",
+        "firmware_build_input": false
+      },
+      {
+        "path": "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "f36c2d5530f35fb3b25101d66a22c162afd862b9",
+        "status": "A",
+        "sha256": "8b097e9df6d0d7807e469f8ed18b362b67a6b5eb2322ad5550dd33c3204510db",
+        "firmware_build_input": false
+      },
+      {
+        "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "806b755406ea3435387aad3f6f7f868082328651",
+        "new_blob": "f0c5a076ea0d1729dc2d1a1ec32e06958ea1b56a",
+        "status": "M",
+        "sha256": "ab6aeef00b8c2412bb23b5ff9360978ccf2165f73f91bac09e05cef49534ea0e",
+        "firmware_build_input": false
+      },
+      {
+        "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "d64f767d9bc45957f3bdfc1aa9f205e1c86e164e",
+        "new_blob": "74391ebcf0b185a214cd2c7dadd3cf8acf5b070f",
+        "status": "M",
+        "sha256": "ee86acad5e53041772385d6b16638f75d18676d5cbf0fb9c98fb2f442d52addd",
+        "firmware_build_input": false
+      },
+      {
+        "path": "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "1c5ffcdf7fb1088a92be7771409a6a80dcc4d077",
+        "status": "A",
+        "sha256": "54785336077a2314e0622060b4e771f1b15f8649d5686d8a612399a7e8929ea2",
+        "firmware_build_input": false
+      },
+      {
+        "path": "docs/runtime_config/runtime_config_validation_health.md",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "b6d262b0c860e9cae04e5d4966b4b81d3fdcd48c",
+        "new_blob": "a4b24de2d8b142549f41274c0c8d9e1c467cd8bc",
+        "status": "M",
+        "sha256": "96b15a60b8aad1a1e3402f9646ce4e1b0642d45f592a930391f8f5fdaa37cf08",
+        "firmware_build_input": false
+      },
+      {
+        "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "ad88fee6d08ba913bc75c0fb2aecefc4b6d8ea10",
+        "status": "A",
+        "sha256": "28fd0fb0485a1483e0ec0beab4657ad4746ea11a0149e67eaa78ca62ff245a29",
+        "firmware_build_input": false
+      },
+      {
+        "path": "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "1b77f0d75f96c409612bce13463b47ea73b7ac6a",
+        "status": "A",
+        "sha256": "ab8265928fbd359362aa70dd5547ac1876d001515a79764159513ada960388db",
+        "firmware_build_input": false
+      },
+      {
+        "path": "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "5c150f5c725be18f97720032c80585c9d250bb86",
+        "status": "A",
+        "sha256": "872855d12e5d3b6dd4404403a963988da3295339c5497b9a6d6501ec33abcad7",
+        "firmware_build_input": false
+      }
+    ],
+    "path_count": 11,
+    "critical_entries": 236,
+    "only_critical_delta": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+    "source_delta": "Exact existing null block movement before speed; every other byte retained",
+    "all_other235_equal_B_and_tested014": true,
+    "tracked_worktree_index_mode_flags": "PASS1425",
+    "original016_closure_unchanged": true,
+    "predecessor014_native_source_contract_history_custody_catalog": "PASS_AT_IMMUTABLE_B017",
+    "old034_full_authenticate": "Known scope FAIL retained, not called PASS",
+    "firmware_build": "NOT_RUN",
+    "hardware_acceptance": false,
+    "reserved_worktree_access": "NONE"
+  },
+  "hardware": {
+    "firmware_build": "NOT_RUN",
+    "artifact": null,
+    "hardware_result": null,
+    "physical_null_reachability": "UNKNOWN",
+    "predecessorPASS_not_inherited": true
+  },
+  "gate_waivers": false,
+  "other97_orders_unchanged": true,
+  "same_executor_next_step": "035 implementation, full affected proof and independentreview/sourcefreeintegration/strictDONE; then preservedC017 exactF build/custody/review/hardwarehandoff",
+  "transport": "Prior callback automaticreviewREJECTED; durablecanonical/local readback, no retry/bypass"
+}
+```
+<!-- gp-config017-handoff-val035-activation:end -->
