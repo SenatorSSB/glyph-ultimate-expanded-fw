@@ -1,0 +1,209 @@
+{
+  "schema_name": "glyph_gp_config_017_neopixel_repaired_current",
+  "schema_version": 2,
+  "work_order": "GP-CONFIG-017",
+  "base": "a6b7750e271324972c51915563fe0dc22f941f95",
+  "source_contract": "one exact existing null block moved before speed access; all other header bytes including EOF unchanged",
+  "cases": [
+    "startup_null",
+    "no_mode",
+    "no_config",
+    "zero_rgb_index",
+    "out_of_range_rgb_index",
+    "unsupported_animation",
+    "unknown_animation_enum",
+    "valid_static",
+    "valid_dynamic"
+  ],
+  "dynamic_subcases": [
+    "RGB_ANIM_RAINBOW_SHIFT",
+    "RGB_ANIM_RAINBOW_XWAVE_LEFT"
+  ],
+  "time_layouts": [
+    "debug-struct-time",
+    "NDEBUG-scalar-time"
+  ],
+  "elapsed_microseconds": [
+    100000,
+    250000,
+    500000,
+    1025000
+  ],
+  "physical_mapping": {
+    "pixels": 76,
+    "unique_targets": 36
+  },
+  "current_pins": {
+    "HAL/pico/include/comms/NeoPixelBackend.hpp": {
+      "mode": "100644",
+      "blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+      "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b"
+    },
+    "HAL/pico/include/rgb/ButtonLocations.hpp": {
+      "mode": "100644",
+      "blob": "a291b9ff6ed8482a2caa7452362eafa3077b13f1",
+      "sha256": "4b1a0aa989c2c162e0700b0d30c22f0f1653dc27708ad8cc51f27c97cdb6cb05"
+    },
+    "HAL/pico/src/rgb/ButtonLocations.cpp": {
+      "mode": "100644",
+      "blob": "d59b490890477b359c98c9a8c09e7f3f42e8a883",
+      "sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f"
+    },
+    "config/glyph/common/src/config.cpp": {
+      "mode": "100644",
+      "blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5"
+    },
+    "config/glyph/env.ini": {
+      "mode": "100644",
+      "blob": "fac4e20461ad632ca1d65826241a4a9c73630f04",
+      "sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf"
+    },
+    "config/glyph/glyph_mk6/include/neopixel_definitions.hpp": {
+      "mode": "100644",
+      "blob": "252c624733f2aee65be51b363f46957658957a78",
+      "sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32"
+    },
+    "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json": {
+      "mode": "100644",
+      "blob": "6646c82f303cbc9d89c91a44bd8fe6d1494f00fe",
+      "sha256": "92d9f40b6b548037532bc2974dd2eeaa1699f8696c9637f273e9e7d54cdf016b"
+    },
+    "platformio.ini": {
+      "mode": "100644",
+      "blob": "4d56f8630c1b12e84cd12f40ce05a4dc71b9362e",
+      "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9"
+    },
+    "tools/check_glyph_neopixel_null_sendreport_characterization.py": {
+      "mode": "100644",
+      "blob": "7f1ecd243c190c703d031c8376458bfccbec14d0",
+      "sha256": "a6204924f1d94b4e87abc9535fe67af8e6387302f2aa98e2c48c9170c63712e8"
+    },
+    "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h": {
+      "mode": "100644",
+      "blob": "9b8d8eb9e771e3a791356a94681cb5c89ce93e74",
+      "sha256": "532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3"
+    },
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.h": {
+      "mode": "100644",
+      "blob": "01d0dda2ae768dd0f18c0f338a74c55e613bb199",
+      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323"
+    },
+    "tools/fixtures/neopixel_null_host/include/FastLED.h": {
+      "mode": "100644",
+      "blob": "e60dd96418f1def42a2b2ac4dd760873a127db09",
+      "sha256": "01a4ad9d08b879495c0115f2ea167704949e3bcf690d427ab4a9b21b70625f9e"
+    },
+    "tools/fixtures/neopixel_null_host/include/config.pb.h": {
+      "mode": "100644",
+      "blob": "2ebb970f544622a4452410cea1822cae79c0fb46",
+      "sha256": "8e96d2814f29b04889c6bc25ae38faae492ede8f94631355891d7f63f5e7aa53"
+    },
+    "tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp": {
+      "mode": "100644",
+      "blob": "a0cad046c3fb51dd7c06006f09b90b465f7c9e76",
+      "sha256": "71c30c37faee0c7653d2150215c5abff49aba43454c5e436e6e95c008d858ff9"
+    },
+    "tools/fixtures/neopixel_null_host/neo_harness.cpp": {
+      "mode": "100644",
+      "blob": "c9a0ec576c7126798b9ef908cdd0b0a047baf322",
+      "sha256": "85f6d0922c20a20da2258cf2e871b9c35b644508a1b3b1f13b7e28529dd62c0e"
+    },
+    "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp": {
+      "mode": "100644",
+      "blob": "5c150f5c725be18f97720032c80585c9d250bb86",
+      "sha256": "872855d12e5d3b6dd4404403a963988da3295339c5497b9a6d6501ec33abcad7"
+    },
+    "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h": {
+      "mode": "100644",
+      "blob": "1b77f0d75f96c409612bce13463b47ea73b7ac6a",
+      "sha256": "ab8265928fbd359362aa70dd5547ac1876d001515a79764159513ada960388db"
+    }
+  },
+  "original_base_pins": {
+    "HAL/pico/include/comms/NeoPixelBackend.hpp": {
+      "mode": "100644",
+      "blob": "843eb9b937ccebc616679b0ced24b805d8a6290d",
+      "sha256": "a3a83278a2f13464f6fa15de7f611ec4189f40fcf14f0ce44ce0b8e6cc890dbc"
+    },
+    "HAL/pico/include/rgb/ButtonLocations.hpp": {
+      "mode": "100644",
+      "blob": "a291b9ff6ed8482a2caa7452362eafa3077b13f1",
+      "sha256": "4b1a0aa989c2c162e0700b0d30c22f0f1653dc27708ad8cc51f27c97cdb6cb05"
+    },
+    "HAL/pico/src/rgb/ButtonLocations.cpp": {
+      "mode": "100644",
+      "blob": "d59b490890477b359c98c9a8c09e7f3f42e8a883",
+      "sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f"
+    },
+    "config/glyph/common/src/config.cpp": {
+      "mode": "100644",
+      "blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5"
+    },
+    "config/glyph/env.ini": {
+      "mode": "100644",
+      "blob": "fac4e20461ad632ca1d65826241a4a9c73630f04",
+      "sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf"
+    },
+    "config/glyph/glyph_mk6/include/neopixel_definitions.hpp": {
+      "mode": "100644",
+      "blob": "252c624733f2aee65be51b363f46957658957a78",
+      "sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32"
+    },
+    "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json": {
+      "mode": "100644",
+      "blob": "6646c82f303cbc9d89c91a44bd8fe6d1494f00fe",
+      "sha256": "92d9f40b6b548037532bc2974dd2eeaa1699f8696c9637f273e9e7d54cdf016b"
+    },
+    "platformio.ini": {
+      "mode": "100644",
+      "blob": "4d56f8630c1b12e84cd12f40ce05a4dc71b9362e",
+      "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9"
+    },
+    "tools/check_glyph_neopixel_null_sendreport_characterization.py": {
+      "mode": "100644",
+      "blob": "7f1ecd243c190c703d031c8376458bfccbec14d0",
+      "sha256": "a6204924f1d94b4e87abc9535fe67af8e6387302f2aa98e2c48c9170c63712e8"
+    },
+    "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h": {
+      "mode": "100644",
+      "blob": "9b8d8eb9e771e3a791356a94681cb5c89ce93e74",
+      "sha256": "532f7ac324a57895caf82950ee36c6900d883a42188e5d6bbc2d3507318538f3"
+    },
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.h": {
+      "mode": "100644",
+      "blob": "01d0dda2ae768dd0f18c0f338a74c55e613bb199",
+      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323"
+    },
+    "tools/fixtures/neopixel_null_host/include/FastLED.h": {
+      "mode": "100644",
+      "blob": "e60dd96418f1def42a2b2ac4dd760873a127db09",
+      "sha256": "01a4ad9d08b879495c0115f2ea167704949e3bcf690d427ab4a9b21b70625f9e"
+    },
+    "tools/fixtures/neopixel_null_host/include/config.pb.h": {
+      "mode": "100644",
+      "blob": "2ebb970f544622a4452410cea1822cae79c0fb46",
+      "sha256": "8e96d2814f29b04889c6bc25ae38faae492ede8f94631355891d7f63f5e7aa53"
+    },
+    "tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp": {
+      "mode": "100644",
+      "blob": "a0cad046c3fb51dd7c06006f09b90b465f7c9e76",
+      "sha256": "71c30c37faee0c7653d2150215c5abff49aba43454c5e436e6e95c008d858ff9"
+    },
+    "tools/fixtures/neopixel_null_host/neo_harness.cpp": {
+      "mode": "100644",
+      "blob": "c9a0ec576c7126798b9ef908cdd0b0a047baf322",
+      "sha256": "85f6d0922c20a20da2258cf2e871b9c35b644508a1b3b1f13b7e28529dd62c0e"
+    }
+  },
+  "non_claims": [
+    "physical null reachability",
+    "FastLED target HSV-to-RGB conversion",
+    "target execution",
+    "RGB fallback policy",
+    "hardware acceptance",
+    "Nunchuk",
+    "root cause"
+  ]
+}

@@ -8,7 +8,7 @@
   },
   "repository_checker_census": {
     "artifact": "docs/runtime_config/fixtures/glyph_checker_census.json",
-    "discovered_count": 215,
+    "discovered_count": 216,
     "validated": true
   },
   "aggregate_census_freshness": {
@@ -18,8 +18,8 @@
     "result": "PASS"
   },
   "curated_runtime_config_scope": {
-    "manifest_entry_count": 56,
-    "current_load_bearing_count": 50,
+    "manifest_entry_count": 57,
+    "current_load_bearing_count": 51,
     "historical_or_evidentiary_count": 6,
     "explicit_exclusion_count": 41
   },

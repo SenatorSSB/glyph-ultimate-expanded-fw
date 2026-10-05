@@ -6714,6 +6714,78 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_config_017_neopixel_repaired_current",
+      "defines_main": true,
+      "file_size_bytes": 25514,
+      "hard_coded_branch_like_strings": [
+        "candidate_identity",
+        "evidence",
+        "omitted_null_branch"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 238,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+      "potential_branch_identity_signals": [
+        "candidate_identity",
+        "evidence",
+        "omitted_null_branch"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config_017_neopixel_repaired_current",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "HAL/pico/include/rgb/ButtonLocations.hpp",
+        "HAL/pico/src/rgb/ButtonLocations.cpp",
+        "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+        "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json",
+        "include/FastLED.h",
+        "include/copied",
+        "include/neopixel_definitions.hpp",
+        "src/config.cpp",
+        "tools/check_glyph_neopixel_null_sendreport_characterization.py",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config017_neopixel_repaired_current",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+        "tools/fixtures/neopixel_null_host/include",
+        "tools/fixtures/neopixel_null_host/include/FastLED.h",
+        "tools/fixtures/neopixel_null_host/include/config.pb.h",
+        "tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp",
+        "tools/fixtures/neopixel_null_host/neo_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "runtime_config_docs"
+      ],
+      "sha256": "28fd0fb0485a1483e0ec0beab4657ad4746ea11a0149e67eaa78ca62ff245a29",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gp_kbd_001_keyboard_pipeline",
       "defines_main": true,
       "file_size_bytes": 10210,

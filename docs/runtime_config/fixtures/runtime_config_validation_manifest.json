@@ -57,7 +57,38 @@
     {"id":"table_replacement_contract","path":"tools/check_glyph_source_owned_table_replacement_generator_contract.py","command":["python3","tools/check_glyph_source_owned_table_replacement_generator_contract.py"],"category":"historical_evidence","applicability":"historical_only","branch_policy":"named_evidence_branch","required_arguments":[],"mutation_risk":"none","source_dependencies":["tools/extract_glyph_identity_runtime_tables.py","tools/generate_source_owned_runtime_config.py"],"load_bearing":false,"historical":true,"reason":"superseded 27-table contract"},
     {"id":"candidate_generation","path":"tools/check_glyph_source_owned_candidate_generation.py","command":["python3","tools/check_glyph_source_owned_candidate_generation.py"],"category":"candidate_safety","applicability":"current","branch_policy":"content_only","required_arguments":[],"mutation_risk":"temporary_repository_only","source_dependencies":["tools/prepare_source_owned_candidate_branch.py","tools/source_owned_generator_modes.py"],"load_bearing":true,"historical":false,"reason":"isolated candidate-preparation safety validation and writer closure"},
     {"id":"latest_y2_hardware_evidence","path":"tools/check_glyph_latest_y2_layout_source_owned_port.py","command":["python3","tools/check_glyph_latest_y2_layout_source_owned_port.py"],"category":"historical_evidence","applicability":"historical_only","branch_policy":"named_evidence_branch","required_arguments":[],"mutation_risk":"none","source_dependencies":["tools/extract_glyph_identity_runtime_tables.py"],"load_bearing":false,"historical":true,"reason":"hardware result evidence"},
-    {"id":"campaign_webserial_source_authority","path":"tools/check_glyph_runtime_config_webserial_device_write_source_authority.py","command":["python3","tools/check_glyph_runtime_config_webserial_device_write_source_authority.py","--campaign-transition"],"category":"candidate_safety","applicability":"current","branch_policy":"content_and_scope","required_arguments":["--campaign-transition"],"mutation_risk":"none","source_dependencies":["docs/runtime_config/runtime_config_webserial_device_write_source_authority.md","tools/glyph_campaign_transition.py","tools/glyph_hardware_correspondence.py","docs/runtime_config/fixtures/gp_val037_accepted_transitions.json","docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json","docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json","docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json","docs/project/ACTIVE_AGENT_QUEUE.md","tools/glyph_c020_abi_repair_transition.py","docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json","docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"],"load_bearing":true,"historical":false,"reason":"GP-VAL-037 authenticated campaign actual-main guard; legacy Step15 separately retained"}
+    {"id":"campaign_webserial_source_authority","path":"tools/check_glyph_runtime_config_webserial_device_write_source_authority.py","command":["python3","tools/check_glyph_runtime_config_webserial_device_write_source_authority.py","--campaign-transition"],"category":"candidate_safety","applicability":"current","branch_policy":"content_and_scope","required_arguments":["--campaign-transition"],"mutation_risk":"none","source_dependencies":["docs/runtime_config/runtime_config_webserial_device_write_source_authority.md","tools/glyph_campaign_transition.py","tools/glyph_hardware_correspondence.py","docs/runtime_config/fixtures/gp_val037_accepted_transitions.json","docs/agent_framework/curation_receipts/gp_val037_predecessor_20261003.json","docs/agent_framework/curation_receipts/gp_val037_guard_applicability_20261003.json","docs/agent_framework/curation_receipts/gp_val037_current_arguments_20261003.json","docs/project/ACTIVE_AGENT_QUEUE.md","tools/glyph_c020_abi_repair_transition.py","docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json","docs/runtime_config/fixtures/gp_val043_accepted_transitions.json"],"load_bearing":true,"historical":false,"reason":"GP-VAL-037 authenticated campaign actual-main guard; legacy Step15 separately retained"},
+    {
+      "id": "gp_config017_neopixel_repaired_current",
+      "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+      "command": [
+        "python3",
+        "tools/check_glyph_gp_config_017_neopixel_repaired_current.py"
+      ],
+      "category": "candidate_safety",
+      "applicability": "current",
+      "branch_policy": "content_and_scope",
+      "required_arguments": [],
+      "mutation_risk": "temporary_file_only",
+      "source_dependencies": [
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "HAL/pico/include/rgb/ButtonLocations.hpp",
+        "HAL/pico/src/rgb/ButtonLocations.cpp",
+        "config/glyph/glyph_mk6/include/neopixel_definitions.hpp",
+        "config/glyph/common/src/config.cpp",
+        "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+        "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+        "tools/fixtures/neopixel_null_host/include/config.pb.h",
+        "tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h"
+      ],
+      "load_bearing": true,
+      "historical": false,
+      "reason": "GP-CONFIG-017 exact production null-guard ordering with both time layouts, seven null categories, static and both dynamic multiupdate equality, null bookkeeping and substitutions. Original016 remains separately load-bearing and immutable until035 adds actual authenticated historical replay. Host proof is separate from exact-artifact hardware acceptance."
+    }
   ],
   "strong_signal_exclusions": [
     {"id":"artifact_postprocessor_provenance","path":"tools/check_glyph_artifact_postprocessor_provenance.py","reason":"NOT_CURRENT_RUNTIME_CONFIG_LANE","detail":"artifact postprocessing provenance is an offline evidence lane outside current runtime-config validation"},
