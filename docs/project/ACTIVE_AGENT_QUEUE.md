@@ -1,6 +1,6 @@
 # Active Agent Queue
 
-GP-CONFIG-017 is REVIEW at exact published clean C `478f438804275f3e0c23e6f36bfd26e34aa343bf`, tree `d7bd33ae51c5984090c9a1b0af863aa0957d0840`, sole direct live-verified base B `a6b7750e271324972c51915563fe0dc22f941f95`. Independent Sol conformance report SHA-256 `692494a498d88139fc146b4558acb413efe3698e110f4a881a8ad43856354dc6` approves candidate publication and the source-free GP-VAL-035 handoff. Its complete eleven-path inventory contains one exact existing-null-block move in NeoPixelBackend.hpp and ten host/protocol/metadata entries; all other235 critical inputs and original016 closure are unchanged. Actual current host proof passes both time ABIs,56 null updates, static/SHIFT/XWAVE traces and recovery,36 negatives; immutable original016 replay passes9cases+9contracts. Focused candidate result is actual6PASS/7FAIL: four protected wrappers and010 reject current critical context, baseline artifact stops at ancestry precondition, original016 current-main rejects repaired source. No five scope-body PASS is claimed. Aggregate actualFAIL/SETUP_FAILURE at current critical context executes zero checkers; native fingerprintMATCH,300/120 deadlines unchanged. The machine-derived queue records GP-VAL-035 READY after all four recorded objective conditions pass; its original conditions and exact review/inventory are preserved in the queue receipt. Same persistent H3 retains sole publication authority and immediately executes035. Canonical handoff carries only four source-free status docs; C017 firmware remains unmerged/unbuilt, artifactNONE, hardwarePENDING. All97 other orders and accepted014/020 exactPASS remain unchanged; no inherited014 acceptance. All five full scope bodies, historical/current010/016 and affected proofs remain035 obligations before DONE, then exact F build/custody/review and humanPASS. Hardware-worktree permissionrelease is independently daemon-confirmed; accessNONE. Nunchuk NOT_TESTED; root cause UNPROVEN; physical null reachability UNKNOWN.
+GP-CONFIG-017 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `5994f1657e45e0883c6c75468a19be7e3b49a72c`, sole composition parent `a7b8758a4d9d353fcfeb0592cc155b4f50f4f358`, tree `0404687bb795e78f0f607fbad865369578615cff`. Mk6 build, resolved21-role decoder closure and owner-held UF2 custody PASS. Preserved UF2 SHA-256 `e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5`, 796672 bytes, locator `local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2`. All15 actual focused checks PASS/nativeMATCH; independent source witnesses verify all1430tracked modes/index/live,236critical==C017 and99queue==strict035DONE. Exact runtime/cache source pins,19prebuild decoder roles and native tracked source/index proof remain unchanged through build/custody. Fresh independent review approves exact source/build/custody/correspondence and conditional staged GP_CONFIG_017_HW_V1. Actual native full aggregate FAIL/AGGREGATE_TIMEOUT/nativeUNAVAILABLE retained with13 outcomes; outer fullnativeMATCH,300/120 unchanged. Unchanged034 synthetic applicability FAIL remains separate honestTier3 debt; additional root prebuild cache-classification FAIL stopped before compilation and remains retained, with exact copied-cache pins/native build integrity and actual decoder proof supplying the final build basis. No fullaggregatePASS or post-cache fullcampaignauthenticatePASS. This canonical handoff has five source-free docs/control-plane paths; candidateHAL remains unmerged. GP-VAL-035 strictDONE `ace41056887ec08616a5c67f026880e1b0d8e81a`; originalC017 `478f438804275f3e0c23e6f36bfd26e34aa343bf` preserved. First owner action: one connection on accepted firmware in normal gameplay mode, model/backend/host/profile/startup/RGB baseline and anomalies. No firmware or Config change yet. Fresh Config/raw backup, safe byte-exact restoration and actual static/SHIFT/XWAVE profiles/expectations precede any mutation; ordinary menu selection persists Config after intentional disconnect/reboot. Required seven physical rows pending; no inherited014 acceptance. All98otherorders and exact014/020PASS unchanged. Persistent H3 reaches hardwarewait and releases solecanonical authority only after reviewed pending publication/liveverification. Existing ownerchain resumes only after actual exact humanHEP PASS. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN.
 
 Independent packet0028 curation is complete. Same-base immutable receipt `3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b` and its descendant adoption authorize GP-CONFIG-024/GP-VAL-045 as PREAUTHORIZED/WAITING behind existing023 exact DONE/PASS; no immediate implementation. The [binding source-free adjudication](../agent_framework/PORTFOLIO_20261005_0028_CURATOR.md) preserves all97priororders, completed040/KBD/041/019 and frozen014F/artifact/protocol. Direct owner conditional and independently fetched original Glyph/main HayBox bytes select PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT; no transformed-output repair or executable GP-KBD-002 is authorized. Original-input remap/SOCD discrepancies stay truthful; required physical/RC Keyboard rows remain pending. Allthree proposals are consumed, no globalwait accepted, and current marker defines liveness. Existing014->017->021->022->023 chain remains intact; owner hardware worktree is exclusive and was never entered/inspected/polled. Nunchuk NOT_TESTED; root cause UNPROVEN. Earlier characterization summaries retain their completion-time evidence; this current disposition supersedes their unresolved-policy instructions.
 
@@ -14,7 +14,7 @@ GP-CONFIG-019 characterization is DONE after reviewed exact original-C ancestry 
 
 ## Current Persistent Campaign
 
-At the historical reviewed C014 handoff, GP-CONFIG-014 was HARDWARE_TEST_REQUIRED at exact committed-before-build F `e5c455637056ac535347c1176dd41c9a9d84d85a` (sole composition parent `3369819a34f82d579e21adff125a25de854f1b9b`, tree `5459271c2219e021414eda37c9155c5ea7a983cf`). The exact Mk6 build passed; the resolved 21-role decoder closure and owner-held UF2 custody passed. Preserved UF2 SHA-256 `9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af`, 796672 bytes, is at `local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2`. All 27 actual focused/affected candidate checks pass with full native fingerprint MATCH; tracked source/index/modes remain unchanged through build/custody. Fresh independent review approves the exact source/build/custody/correspondence and conditional staged protocol GP_CONFIG_014_HW_V1. Actual native full aggregate FAIL / AGGREGATE_TIMEOUT is retained with 11 completed PASS results; full aggregate PASS is claimed only if that actual report says PASS. Production 300/120 deadlines stay unchanged; existing aggregate/setup limitations remain honest Tier-3 framework debt. This canonical handoff contains five docs/control-plane paths and no candidate source. GP-VAL-034 is strict DONE at source-free `62b559ae5ee2d6dee0ff54aeb56b2653d86253c6`; exact original C014 `a3664be5354ec4253122eb2e738e70e5dfdb9ccc` and earlier handoff reports remain preserved. First owner action is one connection on accepted firmware in normal gameplay mode and a baseline report; no firmware or Config change yet. Fresh current Config/raw identity, validated restoration, concrete valid profiles and expected outputs are objective prerequisites before mutation; physical evidence remains pending. All other 96 orders and exact C020 DONE/PASS remain unchanged. The persistent H3 executor reaches hardware wait and releases canonical publication authority for isolated H1 work; after exact human HEP PASS the same worker resumes integration/DONE and the next named chain. Nunchuk NOT_TESTED; root cause UNPROVEN.
+GP-CONFIG-017 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `5994f1657e45e0883c6c75468a19be7e3b49a72c`, sole composition parent `a7b8758a4d9d353fcfeb0592cc155b4f50f4f358`, tree `0404687bb795e78f0f607fbad865369578615cff`. Mk6 build, resolved21-role decoder closure and owner-held UF2 custody PASS. Preserved UF2 SHA-256 `e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5`, 796672 bytes, locator `local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2`. All15 actual focused checks PASS/nativeMATCH; independent source witnesses verify all1430tracked modes/index/live,236critical==C017 and99queue==strict035DONE. Exact runtime/cache source pins,19prebuild decoder roles and native tracked source/index proof remain unchanged through build/custody. Fresh independent review approves exact source/build/custody/correspondence and conditional staged GP_CONFIG_017_HW_V1. Actual native full aggregate FAIL/AGGREGATE_TIMEOUT/nativeUNAVAILABLE retained with13 outcomes; outer fullnativeMATCH,300/120 unchanged. Unchanged034 synthetic applicability FAIL remains separate honestTier3 debt; additional root prebuild cache-classification FAIL stopped before compilation and remains retained, with exact copied-cache pins/native build integrity and actual decoder proof supplying the final build basis. No fullaggregatePASS or post-cache fullcampaignauthenticatePASS. This canonical handoff has five source-free docs/control-plane paths; candidateHAL remains unmerged. GP-VAL-035 strictDONE `ace41056887ec08616a5c67f026880e1b0d8e81a`; originalC017 `478f438804275f3e0c23e6f36bfd26e34aa343bf` preserved. First owner action: one connection on accepted firmware in normal gameplay mode, model/backend/host/profile/startup/RGB baseline and anomalies. No firmware or Config change yet. Fresh Config/raw backup, safe byte-exact restoration and actual static/SHIFT/XWAVE profiles/expectations precede any mutation; ordinary menu selection persists Config after intentional disconnect/reboot. Required seven physical rows pending; no inherited014 acceptance. All98otherorders and exact014/020PASS unchanged. Persistent H3 reaches hardwarewait and releases solecanonical authority only after reviewed pending publication/liveverification. Existing ownerchain resumes only after actual exact humanHEP PASS. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN.
 
 ## Historical GP-CONFIG-014 Candidate Handoff at5205ba5
 
@@ -155,18 +155,19 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 8,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "hardware_pending": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW",
-    "PLANNER_REFRESH_REQUIRED"
+    "PLANNER_REFRESH_REQUIRED",
+    "PLANNING_REQUIRED",
+    "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -695,8 +696,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-017",
       "title": "Null RGB ordering",
-      "status": "READY",
-      "branch": "codex/gp-config-017-release-safety",
+      "status": "HARDWARE_TEST_REQUIRED",
+      "branch": "codex/gp-config-017-built-f",
       "objective": "Source and GP-CONFIG-016 support moving only the existing null branch before speed access while preserving time bookkeeping/non-null behavior; no fallback choice.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H3",
@@ -742,16 +743,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
-      "candidate_base_configurator_sha": "a6b7750e271324972c51915563fe0dc22f941f95",
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "hardware_evidence_dependency_satisfied": false,
+      "candidate_git_sha": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+      "candidate_base_configurator_sha": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+      "firmware_artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact future F build, UF2 custody and physical PASS not produced."
+        "Exact human GP_CONFIG_017_HW_V1 observations for seven required rows in recorded Mk6 GC and ordinary supported USB contexts are pending.",
+        "Fresh owner Config/raw backup, byte-exact validated restoration route, actual valid static/SHIFT/XWAVE profiles and concrete expectations must be established before mutation; unavailable safe profile remains a gap."
       ]
     },
     {
@@ -8163,11 +8165,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-017"],"immediate_ready":1,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-017; Immediate Ready: 1; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -22619,3 +22621,1910 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-val035-completion:end -->
+
+
+## GP-CONFIG-017 exact built hardware handoff
+
+<!-- gp-config017-hardware-handoff:start -->
+```json
+{
+  "prior_current_summaries": {
+    "docs/project/ACTIVE_AGENT_QUEUE.md": "GP-CONFIG-017 is REVIEW at exact published clean C `478f438804275f3e0c23e6f36bfd26e34aa343bf`, tree `d7bd33ae51c5984090c9a1b0af863aa0957d0840`, sole direct live-verified base B `a6b7750e271324972c51915563fe0dc22f941f95`. Independent Sol conformance report SHA-256 `692494a498d88139fc146b4558acb413efe3698e110f4a881a8ad43856354dc6` approves candidate publication and the source-free GP-VAL-035 handoff. Its complete eleven-path inventory contains one exact existing-null-block move in NeoPixelBackend.hpp and ten host/protocol/metadata entries; all other235 critical inputs and original016 closure are unchanged. Actual current host proof passes both time ABIs,56 null updates, static/SHIFT/XWAVE traces and recovery,36 negatives; immutable original016 replay passes9cases+9contracts. Focused candidate result is actual6PASS/7FAIL: four protected wrappers and010 reject current critical context, baseline artifact stops at ancestry precondition, original016 current-main rejects repaired source. No five scope-body PASS is claimed. Aggregate actualFAIL/SETUP_FAILURE at current critical context executes zero checkers; native fingerprintMATCH,300/120 deadlines unchanged. The machine-derived queue records GP-VAL-035 READY after all four recorded objective conditions pass; its original conditions and exact review/inventory are preserved in the queue receipt. Same persistent H3 retains sole publication authority and immediately executes035. Canonical handoff carries only four source-free status docs; C017 firmware remains unmerged/unbuilt, artifactNONE, hardwarePENDING. All97 other orders and accepted014/020 exactPASS remain unchanged; no inherited014 acceptance. All five full scope bodies, historical/current010/016 and affected proofs remain035 obligations before DONE, then exact F build/custody/review and humanPASS. Hardware-worktree permissionrelease is independently daemon-confirmed; accessNONE. Nunchuk NOT_TESTED; root cause UNPROVEN; physical null reachability UNKNOWN.",
+    "docs/AGENT_CONTEXT.md": "GP-VAL-035 is strict DONE after independently reviewed source-free live integration `424387e08695bd9c58d2a16326b93143c8ca405d` and later structured completion. Its22regular paths keep all236critical inputs exact accepted014F. Final15actualchecks in source-free and preservedC-composed contexts PASS/MATCH; allfive fullprotected consumers, original016fullreplay and C017bothABIs/36negatives execute. Exactfinalmodule native26phase/history cases and independent current014/predecessor/inventory proofs PASS; repaired actualfalseacceptances and all earlier rawfailures remain retained. Both actual aa203 source-free/composed full aggregates FAIL/AGGREGATE_TIMEOUT/UNAVAILABLE, with12/9 recorded results; no fullaggregate PASS. Both29-check focused reports contain28actualPASS and one unchanged034 broad synthetic fixture admission FAIL with nativeMATCH. That namespace applicability failure is explicit Revision3 Tier3 debt, separately from aggregate timeout; native014 immutableB017/current source/history and actualcurrent014 host remain independently proved. Production300/120 deadlines unchanged. Existing GP-CONFIG-017 mechanically resumes READY within the same authorized campaign; exactpublishedC `478f438804275f3e0c23e6f36bfd26e34aa343bf`/B `a6b7750e271324972c51915563fe0dc22f941f95` remain frozen. Samepersistent executor retains soleH3publication authority and next composes C ancestry, commits exactF before Mk6build, verifies dependencies/RAM/flash/ownerUF2custody and freshreview, then source-freehardwarehandoff. C017firmware remains unmerged/unbuilt, artifactNONE, physicalPASSpending; all97otherorders and accepted014/020PASS unchanged. No newPlanner/Curator/fullchat or additionalworkorder. Hardware-worktree permissionrelease remains daemon-confirmed, accessNONE. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN.",
+    "docs/ROADMAP.md": "GP-VAL-035 is strict DONE after independently reviewed source-free live integration `424387e08695bd9c58d2a16326b93143c8ca405d` and later structured completion. Its22regular paths keep all236critical inputs exact accepted014F. Final15actualchecks in source-free and preservedC-composed contexts PASS/MATCH; allfive fullprotected consumers, original016fullreplay and C017bothABIs/36negatives execute. Exactfinalmodule native26phase/history cases and independent current014/predecessor/inventory proofs PASS; repaired actualfalseacceptances and all earlier rawfailures remain retained. Both actual aa203 source-free/composed full aggregates FAIL/AGGREGATE_TIMEOUT/UNAVAILABLE, with12/9 recorded results; no fullaggregate PASS. Both29-check focused reports contain28actualPASS and one unchanged034 broad synthetic fixture admission FAIL with nativeMATCH. That namespace applicability failure is explicit Revision3 Tier3 debt, separately from aggregate timeout; native014 immutableB017/current source/history and actualcurrent014 host remain independently proved. Production300/120 deadlines unchanged. Existing GP-CONFIG-017 mechanically resumes READY within the same authorized campaign; exactpublishedC `478f438804275f3e0c23e6f36bfd26e34aa343bf`/B `a6b7750e271324972c51915563fe0dc22f941f95` remain frozen. Samepersistent executor retains soleH3publication authority and next composes C ancestry, commits exactF before Mk6build, verifies dependencies/RAM/flash/ownerUF2custody and freshreview, then source-freehardwarehandoff. C017firmware remains unmerged/unbuilt, artifactNONE, physicalPASSpending; all97otherorders and accepted014/020PASS unchanged. No newPlanner/Curator/fullchat or additionalworkorder. Hardware-worktree permissionrelease remains daemon-confirmed, accessNONE. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN."
+  },
+  "schema_name": "glyph_gp_config017_exact_hardware_handoff",
+  "schema_version": 1,
+  "source_free_canonical": true,
+  "starting_canonical": "ace41056887ec08616a5c67f026880e1b0d8e81a",
+  "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+  "candidate_parent": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+  "candidate_tree": "0404687bb795e78f0f607fbad865369578615cff",
+  "original_candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+  "artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+  "artifact_size": 796672,
+  "preserved_locator": "local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+  "protocol_version": "GP_CONFIG_017_HW_V1",
+  "protocol_sha256": "05645e32a49b83656da0b32ff12e61956e51fa229ff8490d3e41787624570bcf",
+  "reports": {
+    "017-F-composition.json": {
+      "sha256": "5e82832d51663e19eeadef86cea5d9e84bf71338179882a86f6bf41764c0546a",
+      "report": {
+        "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "parent": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+        "tree": "0404687bb795e78f0f607fbad865369578615cff",
+        "composition_base": "ace41056887ec08616a5c67f026880e1b0d8e81a",
+        "preserved_candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+        "composition_merge": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+        "merge_parents": [
+          "ace41056887ec08616a5c67f026880e1b0d8e81a",
+          "478f438804275f3e0c23e6f36bfd26e34aa343bf"
+        ],
+        "raw_inventory_sha256": "b880c363115d81bfcc2281cfd65ed6e9c64f53773933d953ebe644c0dd85876a",
+        "changed_paths": [
+          "HAL/pico/include/comms/NeoPixelBackend.hpp"
+        ],
+        "critical_source_build_entries": 236,
+        "complete_critical_tree_equals_C": true,
+        "all99_queue_objects_equal_D": true,
+        "native_phase": "CANDIDATE_VALIDATION_ONLY",
+        "commit_before_build": true,
+        "firmware_build_run": false,
+        "device_actions": false,
+        "reserved_worktree_access": "NONE"
+      }
+    },
+    "017-F-focused-validation.json": {
+      "sha256": "0e9bc015a28c4d0cdd3e8becd3eac1d88905f8bc3937fc9d43d4bf0da3fba1ed",
+      "report": {
+        "head": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+        "status": "PASS",
+        "results": [
+          {
+            "id": "gp_val035_c017_transition",
+            "command": [
+              "python3",
+              "tools/test_glyph_c017_campaign_transition.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 19.067633875005413,
+            "log": "/private/tmp/glyph-config017/017-F-focused-01-gp_val035_c017_transition.log"
+          },
+          {
+            "id": "gp_config_010_integration_semantic_correspondence",
+            "command": [
+              "python3",
+              "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 11.068011666997336,
+            "log": "/private/tmp/glyph-config017/017-F-focused-02-gp_config_010_integration_semantic_correspondence.log"
+          },
+          {
+            "id": "neopixel_null_sendreport_characterization",
+            "command": [
+              "python3",
+              "tools/check_glyph_neopixel_historical_replay.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 24.60033708298579,
+            "log": "/private/tmp/glyph-config017/017-F-focused-03-neopixel_null_sendreport_characterization.log"
+          },
+          {
+            "id": "validation_health",
+            "command": [
+              "python3",
+              "tools/check_glyph_runtime_config_validation_health.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 0.10575833299662918,
+            "log": "/private/tmp/glyph-config017/017-F-focused-04-validation_health.log"
+          },
+          {
+            "id": "generated_source_contract",
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_generator_contract.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 15.20175316699897,
+            "log": "/private/tmp/glyph-config017/017-F-focused-05-generated_source_contract.log"
+          },
+          {
+            "id": "generated_baseline_artifact",
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 22.57173475000309,
+            "log": "/private/tmp/glyph-config017/017-F-focused-06-generated_baseline_artifact.log"
+          },
+          {
+            "id": "artifact_install",
+            "command": [
+              "python3",
+              "tools/check_glyph_generated_source_owned_artifact_install.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 13.392336874996545,
+            "log": "/private/tmp/glyph-config017/017-F-focused-07-artifact_install.log"
+          },
+          {
+            "id": "coordinate_native_contract",
+            "command": [
+              "python3",
+              "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 22.357213000010233,
+            "log": "/private/tmp/glyph-config017/017-F-focused-08-coordinate_native_contract.log"
+          },
+          {
+            "id": "docs_navigation",
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_navigation.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 0.07945225000730716,
+            "log": "/private/tmp/glyph-config017/017-F-focused-09-docs_navigation.log"
+          },
+          {
+            "id": "docs_agent_surface",
+            "command": [
+              "python3",
+              "tools/check_glyph_docs_agent_surface.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 11.376623375021154,
+            "log": "/private/tmp/glyph-config017/017-F-focused-10-docs_agent_surface.log"
+          },
+          {
+            "id": "agent_framework",
+            "command": [
+              "python3",
+              "tools/check_glyph_agent_framework_docs.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 14.113020624994533,
+            "log": "/private/tmp/glyph-config017/017-F-focused-11-agent_framework.log"
+          },
+          {
+            "id": "agentic_sequence",
+            "command": [
+              "python3",
+              "tools/check_glyph_agentic_sequence_protocol.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 0.08313670800998807,
+            "log": "/private/tmp/glyph-config017/017-F-focused-12-agentic_sequence.log"
+          },
+          {
+            "id": "gp_config017_neopixel_repaired_current",
+            "command": [
+              "python3",
+              "tools/check_glyph_neopixel_historical_replay.py",
+              "--repaired-current"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 45.65400983399013,
+            "log": "/private/tmp/glyph-config017/017-F-focused-13-gp_config017_neopixel_repaired_current.log"
+          },
+          {
+            "id": "check_glyph_checker_census",
+            "command": [
+              "python3",
+              "tools/check_glyph_checker_census.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 1.393143624998629,
+            "log": "/private/tmp/glyph-config017/017-F-focused-14-check_glyph_checker_census.log"
+          },
+          {
+            "id": "test_glyph_docs_agent_surface_integration",
+            "command": [
+              "python3",
+              "tools/test_glyph_docs_agent_surface_integration.py"
+            ],
+            "status": "PASS",
+            "exit_code": 0,
+            "failure_kind": null,
+            "duration_seconds": 6.410829041997204,
+            "log": "/private/tmp/glyph-config017/017-F-focused-15-test_glyph_docs_agent_surface_integration.log"
+          }
+        ],
+        "full_native_fingerprint": {
+          "before": "2e8fc4a06d6ba2ac1331b46e29c0700ca05bd6c6dd3c0e41d3caa0cccd942e49",
+          "after": "2e8fc4a06d6ba2ac1331b46e29c0700ca05bd6c6dd3c0e41d3caa0cccd942e49",
+          "result": "MATCH"
+        },
+        "firmware_build": false,
+        "hardware_acceptance": false
+      }
+    },
+    "017-build-and-custody.json": {
+      "sha256": "52e3a6b66279f0087fc3cf84403c8aba82c8aece89d6468977976ce3390e6eae",
+      "report": {
+        "status": "PASS",
+        "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "parent": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+        "tree": "0404687bb795e78f0f607fbad865369578615cff",
+        "canonical_build_command": "pio run -e glyph_mk6",
+        "actual_build_command": "./scripts/build-glyph-mk6-quiet.sh",
+        "fallback_reason": "pio is unavailable on inherited PATH; authorized fallback calls isolated .venv/bin/python -m platformio with F-local core directory",
+        "build_log_sha256": "175e68a2c98c831d982185571c132c8096ef368aaa86bf1788ced72b7631220d",
+        "build_log": "/private/tmp/glyph-config017/017-build-logs/glyph_mk6_build.log",
+        "ram": "RAM:   [===       ]  30.1% (used 78960 bytes from 262144 bytes)",
+        "flash": "Flash: [==        ]  24.6% (used 386184 bytes from 1568768 bytes)",
+        "isolated_runtime_observation": "/private/tmp/glyph-config017/build/.venv\n/private/tmp/glyph-config017/build/.venv/lib/python3.14/site-packages/platformio/__init__.py\n6.1.19\n6.33.6\n1.80.0",
+        "build_output": ".pio/build/glyph_mk6/firmware.uf2",
+        "artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+        "artifact_size": 796672,
+        "preserved_locator": "local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+        "preserved_absolute_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+        "custody_status": "PRESERVED_AND_VERIFIED",
+        "custody_readback": "PASS; exact regular nonsymlink read-only bytes rehashed",
+        "resolved_decoder_closure": "PASS",
+        "resolved_decoder_closure_audit": {
+          "status": "PASS",
+          "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+          "immutable_observed_snapshot": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+          "immutable_report_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+          "native_API": [
+            "load_report",
+            "validate_record unchanged historical739c identity",
+            "validate_tracked actualF",
+            "verify_package_identities actualF",
+            "verify_resolved actualF21roles/includeedges/selectedencode/regeneration/versions"
+          ],
+          "current_exact_HEAD_clean_bound_separately": true,
+          "closure_roles": 21,
+          "immutable_role_hashes_unchanged": true,
+          "report_or_checker_mutations": false,
+          "cli_historical_identity_result": "FAIL retained; F is a distinct committed candidate, not immutable observed snapshot739c",
+          "initial_cli_log_sha256": "c465e6aa8b0294cd600ca3ebc3929cb5a548efa5d25859ef5dfaf4ec0f1f6b4b",
+          "reproducibility_claim": false,
+          "earlier_cli_argument_failure": {
+            "path": "/private/tmp/glyph-config017/017-resolved-decoder-closure-cli-argument-initial.log",
+            "sha256": "bf7488d0c0d4fa124786065fc61ea15503f25ea5dc599bcf7eef437fed6d9b45",
+            "reason": "Initial invocation lacked required --python; correct two-argument CLI then rejected actual distinct F against immutable observed739c. Actual native API21role PASS proof unchanged, no rerun claim."
+          }
+        },
+        "resolved_decoder_closure_report_sha256": "ea3d573f8bbffa084d9dad4d1536b847cf8a76411a8d042e75f32721026d128a",
+        "tracked_source_before_after": "MATCH",
+        "tracked_source_proof": {
+          "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+          "tree": "0404687bb795e78f0f607fbad865369578615cff",
+          "tracked_count": 1430,
+          "index_sha256": "53c3896a60ebe5a2cc91ae3fe8b2a2f52ea64e70691bafbb4aade4dfc9906f21",
+          "flags_sha256": "19c1968d3572dc9164a86a9be4702737628012ac4d9b514e045f732373694df5",
+          "tracked_live_bytes_modes": "PASS_NATIVE_DIVERGENCE_EMPTY",
+          "critical236": "EXACT_C017",
+          "critical_tree": {
+            ".gitattributes": [
+              "100644",
+              "blob",
+              "3244aa00c82c51bd52f86e097bed54e8d9ab5c15"
+            ],
+            ".github/workflows/build-device-config.yml": [
+              "100644",
+              "blob",
+              "40f8ca91fefc64674c08c03183595983c5054d1f"
+            ],
+            ".github/workflows/build.yml": [
+              "100644",
+              "blob",
+              "00fa03b585fb34ae70201504da45f4fded36ffb3"
+            ],
+            ".gitignore": [
+              "100644",
+              "blob",
+              "a001566ff3bca51110c507fd2e64c10636914795"
+            ],
+            "HAL/avr/avr_nousb/include/comms/backend_init.hpp": [
+              "100644",
+              "blob",
+              "0d778251f8cace9b12afb0806d2619a11a9c596e"
+            ],
+            "HAL/avr/avr_nousb/include/config_defaults.hpp": [
+              "100644",
+              "blob",
+              "8668191f050450ea36ca16f199f8d52b36e077d4"
+            ],
+            "HAL/avr/avr_nousb/include/core/KeyboardMode.hpp": [
+              "100644",
+              "blob",
+              "e1730fdeb248f22119cda5046572a0135849ae4c"
+            ],
+            "HAL/avr/avr_nousb/include/core/keycodes.h": [
+              "100644",
+              "blob",
+              "21ebd1c2bf0f71e6cf696e2e8a93ef742995e0cb"
+            ],
+            "HAL/avr/avr_nousb/src/comms/backend_init.cpp": [
+              "100644",
+              "blob",
+              "5767254295b49daf8e89a7d0374429075c0a2bfc"
+            ],
+            "HAL/avr/avr_nousb/src/comms/console_detection.cpp": [
+              "100644",
+              "blob",
+              "a679e359564875875c236373f0713d6b0eb57b8e"
+            ],
+            "HAL/avr/avr_nousb/src/core/KeyboardMode.cpp": [
+              "100644",
+              "blob",
+              "66cc370a840b0380fea6d7fb58253e7c9ee60639"
+            ],
+            "HAL/avr/avr_usb/include/comms/DInputBackend.hpp": [
+              "100644",
+              "blob",
+              "f0e7b78525cce4ef8878e9eff7f0c2d73d682ffe"
+            ],
+            "HAL/avr/avr_usb/include/comms/backend_init.hpp": [
+              "100644",
+              "blob",
+              "0d778251f8cace9b12afb0806d2619a11a9c596e"
+            ],
+            "HAL/avr/avr_usb/include/config_defaults.hpp": [
+              "100644",
+              "blob",
+              "68a030b7b7dc91f42a6219d0b534b4e2f54b2a38"
+            ],
+            "HAL/avr/avr_usb/include/core/KeyboardMode.hpp": [
+              "100644",
+              "blob",
+              "42e5a23b82398187bd1dd33654a4b1abbdfb1781"
+            ],
+            "HAL/avr/avr_usb/src/comms/DInputBackend.cpp": [
+              "100644",
+              "blob",
+              "72349eb4faa551fbf396607a6c83cd88d3a7fcff"
+            ],
+            "HAL/avr/avr_usb/src/comms/backend_init.cpp": [
+              "100644",
+              "blob",
+              "405541aca05ade36dc9ba2540e68ac1ac434d3b8"
+            ],
+            "HAL/avr/avr_usb/src/comms/console_detection.cpp": [
+              "100644",
+              "blob",
+              "e639e0a04d8ac6e34dd4624f74399bfd63285e6a"
+            ],
+            "HAL/avr/avr_usb/src/core/KeyboardMode.cpp": [
+              "100644",
+              "blob",
+              "5e3f5692af4a84d2879ca765caf1fe864c72e068"
+            ],
+            "HAL/avr/include/comms/GamecubeBackend.hpp": [
+              "100644",
+              "blob",
+              "2780d77408f00dc4aedf2ae48fc18d26c72c0c86"
+            ],
+            "HAL/avr/include/comms/N64Backend.hpp": [
+              "100644",
+              "blob",
+              "34a141facc08791cb14af527b5bea7c3315b9298"
+            ],
+            "HAL/avr/include/gpio.hpp": [
+              "100644",
+              "blob",
+              "0188727f560331026ee080212d343d66a7839b20"
+            ],
+            "HAL/avr/include/input/NunchukInput.hpp": [
+              "100644",
+              "blob",
+              "f3f299024a07cba6a112b5d2c81a36b7e335a6a6"
+            ],
+            "HAL/avr/include/serial.hpp": [
+              "100644",
+              "blob",
+              "9d05798bbca779e229e32b20d1c9c81f23e3eaa1"
+            ],
+            "HAL/avr/include/stdlib.hpp": [
+              "100644",
+              "blob",
+              "6a2eb5cf41f9e6e660413d33cd0bec707aa3bf01"
+            ],
+            "HAL/avr/include/util/state_util.hpp": [
+              "100644",
+              "blob",
+              "1efaaa4de7b84bd250190411e313fddec1d16602"
+            ],
+            "HAL/avr/proto/config.options": [
+              "100644",
+              "blob",
+              "dfaf43e5707f604ab6d0f7931446dcafced9f28c"
+            ],
+            "HAL/avr/src/comms/GamecubeBackend.cpp": [
+              "100644",
+              "blob",
+              "370d6f71233728c309d33aba0000ecdb13dd92b3"
+            ],
+            "HAL/avr/src/comms/N64Backend.cpp": [
+              "100644",
+              "blob",
+              "fbda08683f5dcd1829a114b8d1fb30b10010a325"
+            ],
+            "HAL/avr/src/gpio.cpp": [
+              "100644",
+              "blob",
+              "9a9f84e07c1f5e8fed30ff49239268e06b91e265"
+            ],
+            "HAL/avr/src/input/NunchukInput.cpp": [
+              "100644",
+              "blob",
+              "9344d7054ff72bd36a8e8236c5a5c060be658f0b"
+            ],
+            "HAL/avr/src/reboot.cpp": [
+              "100644",
+              "blob",
+              "3c4f98ea4cd4f374a5e50482afd479828080c02d"
+            ],
+            "HAL/avr/src/serial.cpp": [
+              "100644",
+              "blob",
+              "f12ab2ce50abd6ae3d775d328a315e7b0a12410e"
+            ],
+            "HAL/pico/include/comms/ConfiguratorBackend.hpp": [
+              "100644",
+              "blob",
+              "28f4f61abde0caab6f6f75b281750f85d7c5ff08"
+            ],
+            "HAL/pico/include/comms/DInputBackend.hpp": [
+              "100644",
+              "blob",
+              "1758c361b4b3c0fa71b84d55799f4617ab93f8eb"
+            ],
+            "HAL/pico/include/comms/GamecubeBackend.hpp": [
+              "100644",
+              "blob",
+              "c08c3e7e7508106976ec6296e24f220cf84d3bd8"
+            ],
+            "HAL/pico/include/comms/N64Backend.hpp": [
+              "100644",
+              "blob",
+              "f82c676bedb6a917755e82f7a00d15458eb2e24c"
+            ],
+            "HAL/pico/include/comms/NeoPixelBackend.hpp": [
+              "100644",
+              "blob",
+              "4724544d5989fdf403c5e6e0accab721371bc9d3"
+            ],
+            "HAL/pico/include/comms/NesBackend.hpp": [
+              "100644",
+              "blob",
+              "83378a88428661d02371dd606014c55c2e7eaaa9"
+            ],
+            "HAL/pico/include/comms/NintendoSwitchBackend.hpp": [
+              "100644",
+              "blob",
+              "0d16ac393e4678382caee9b57ce2b030bc16e182"
+            ],
+            "HAL/pico/include/comms/SnesBackend.hpp": [
+              "100644",
+              "blob",
+              "aca980c9998ecb4d431502a997c9d9d3953be85f"
+            ],
+            "HAL/pico/include/comms/XInputBackend.hpp": [
+              "100644",
+              "blob",
+              "d0f884c9568b7f84f086aee96333dcff6136160c"
+            ],
+            "HAL/pico/include/comms/backend_init.hpp": [
+              "100644",
+              "blob",
+              "783cb54e5d01d33e931136e9cbb15f696a510029"
+            ],
+            "HAL/pico/include/config_defaults.hpp": [
+              "100644",
+              "blob",
+              "9f74b0dda4e1467495d16f642e1b649f8929dc6b"
+            ],
+            "HAL/pico/include/core/KeyboardMode.hpp": [
+              "100644",
+              "blob",
+              "81ad10d78f86da84fd8b1e51fb3857a463014f1e"
+            ],
+            "HAL/pico/include/core/Persistence.hpp": [
+              "100644",
+              "blob",
+              "43cbd3f39b4c9a09ecc855b0f2704b2081a45981"
+            ],
+            "HAL/pico/include/display/ConfigMenu.hpp": [
+              "100644",
+              "blob",
+              "b896fa08480d15fbb4b35e345de6cb66555bddff"
+            ],
+            "HAL/pico/include/display/ConfigMenuAssets/GlyphMenuBitmaps.h": [
+              "100644",
+              "blob",
+              "d3ac8e30c1df919d830afdc4ca13123337b9aa1b"
+            ],
+            "HAL/pico/include/display/DefaultConfigMenu.hpp": [
+              "100644",
+              "blob",
+              "49a6e62839320ea96f6d8a954af5828d75dc6287"
+            ],
+            "HAL/pico/include/display/DisplayMode.hpp": [
+              "100644",
+              "blob",
+              "4121c4538517b89e6b9b4de93284f9dd0bded1e0"
+            ],
+            "HAL/pico/include/display/InputDisplay.hpp": [
+              "100644",
+              "blob",
+              "641dc7e68da7d5ed039bd0d5d8ce2e37cbc4369d"
+            ],
+            "HAL/pico/include/display/RemapMenu.hpp": [
+              "100644",
+              "blob",
+              "2d05bc182482da054e1074c9fc14e144cef689ef"
+            ],
+            "HAL/pico/include/display/RgbBrightnessMenu.hpp": [
+              "100644",
+              "blob",
+              "d44ee328e78de21fd040c62f9d1b92d09d9ade0f"
+            ],
+            "HAL/pico/include/game_utils/Ult_adc.h": [
+              "100644",
+              "blob",
+              "539eb6cc7c0df382107fde930618104a28f71470"
+            ],
+            "HAL/pico/include/gpio.hpp": [
+              "100644",
+              "blob",
+              "5122a908e2bd34616fc02962b20f2794df107624"
+            ],
+            "HAL/pico/include/input/DebouncedGpioButtonInput.hpp": [
+              "100644",
+              "blob",
+              "916c34d9bbfc40fdd24383a3b9af0d7bed9dde76"
+            ],
+            "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp": [
+              "100644",
+              "blob",
+              "bd6d6dd843c5359a284330d3b96c3ca2e5db9c7a"
+            ],
+            "HAL/pico/include/input/GamecubeControllerInput.hpp": [
+              "100644",
+              "blob",
+              "c4e2913a1412bb492275971a72d46d264b3bb488"
+            ],
+            "HAL/pico/include/input/NunchukInput.hpp": [
+              "100644",
+              "blob",
+              "9984f6dafc269481134cb167d63c915919ba249c"
+            ],
+            "HAL/pico/include/input/Pca9671Input.hpp": [
+              "100644",
+              "blob",
+              "1ed9d4041ee911ea450bacf4337044ab498590d9"
+            ],
+            "HAL/pico/include/input/debounce.hpp": [
+              "100644",
+              "blob",
+              "f9b7c450eaa70d9c9f4fe65e6690152b19bc4595"
+            ],
+            "HAL/pico/include/rgb/ButtonLocations.hpp": [
+              "100644",
+              "blob",
+              "a291b9ff6ed8482a2caa7452362eafa3077b13f1"
+            ],
+            "HAL/pico/include/serial.hpp": [
+              "100644",
+              "blob",
+              "9d05798bbca779e229e32b20d1c9c81f23e3eaa1"
+            ],
+            "HAL/pico/include/stdlib.hpp": [
+              "100644",
+              "blob",
+              "6bc7bc5ee7f56de07116608399af228314dab004"
+            ],
+            "HAL/pico/include/tempfix.h": [
+              "100644",
+              "blob",
+              "55d54c295ba047fa2c8a8a297163c9eca0770712"
+            ],
+            "HAL/pico/include/tusb_config_pico.h": [
+              "100644",
+              "blob",
+              "31568e512d12fd0bbc2e079c52fbf572a614eb93"
+            ],
+            "HAL/pico/include/util/state_util.hpp": [
+              "100644",
+              "blob",
+              "40b8aeb9c4db3268696c49f20b3278efabc7688c"
+            ],
+            "HAL/pico/src/comms/ConfiguratorBackend.cpp": [
+              "100644",
+              "blob",
+              "6ca93c96c944ee539a2d409e32889306c1eafac7"
+            ],
+            "HAL/pico/src/comms/DInputBackend.cpp": [
+              "100644",
+              "blob",
+              "e1941c5548cc8761e025b691f619be0faf8b1165"
+            ],
+            "HAL/pico/src/comms/GamecubeBackend.cpp": [
+              "100644",
+              "blob",
+              "8e7d839cbc5b77377aae8c08dfd550c45274d8a0"
+            ],
+            "HAL/pico/src/comms/N64Backend.cpp": [
+              "100644",
+              "blob",
+              "308e39087df954da072fd32b058366c51c7cecf2"
+            ],
+            "HAL/pico/src/comms/NesBackend.cpp": [
+              "100644",
+              "blob",
+              "c59063e02ea96a49876b56f3a8f3b3cd975c371a"
+            ],
+            "HAL/pico/src/comms/NintendoSwitchBackend.cpp": [
+              "100644",
+              "blob",
+              "4b388ecca60b1eedaef5fcd8656d71d2f2be97c6"
+            ],
+            "HAL/pico/src/comms/SnesBackend.cpp": [
+              "100644",
+              "blob",
+              "161e30eb958a27ebe6dea71ce4627014390bd17f"
+            ],
+            "HAL/pico/src/comms/XInputBackend.cpp": [
+              "100644",
+              "blob",
+              "1699e06253a93cb5f492282b5d43ce26fe8cfd0e"
+            ],
+            "HAL/pico/src/comms/backend_init.cpp": [
+              "100644",
+              "blob",
+              "f7726a0063dd05409d7464d947a47efc675bdbef"
+            ],
+            "HAL/pico/src/comms/console_detection.cpp": [
+              "100644",
+              "blob",
+              "93a82ab7af00b967fd8c7f63844cfecbcc71dd70"
+            ],
+            "HAL/pico/src/core/KeyboardMode.cpp": [
+              "100644",
+              "blob",
+              "a14f01d030dad62305fc0accdc07d224c61eefcf"
+            ],
+            "HAL/pico/src/core/Persistence.cpp": [
+              "100644",
+              "blob",
+              "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7"
+            ],
+            "HAL/pico/src/display/ConfigMenu.cpp": [
+              "100644",
+              "blob",
+              "f1a5f978fadd90fdffd7af19966444fd0748936b"
+            ],
+            "HAL/pico/src/display/DefaultConfigMenu.cpp": [
+              "100644",
+              "blob",
+              "bf855a584b3e859083d98a1aa49a38daee9204f5"
+            ],
+            "HAL/pico/src/display/InputDisplay.cpp": [
+              "100644",
+              "blob",
+              "c3ccd582bf95f7c5d6c1e0cfcf6e95df90659ea0"
+            ],
+            "HAL/pico/src/display/RemapMenu.cpp": [
+              "100644",
+              "blob",
+              "d0cb4fb353c3ef1668e8a04aa55c99874662fae7"
+            ],
+            "HAL/pico/src/display/RgbBrightnessMenu.cpp": [
+              "100644",
+              "blob",
+              "f06778790cf88b639a33baa3800276ad82d4a90e"
+            ],
+            "HAL/pico/src/game_utils/Rivals2_adc.cpp": [
+              "100644",
+              "blob",
+              "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+            ],
+            "HAL/pico/src/game_utils/Ult_adc.c": [
+              "100644",
+              "blob",
+              "4448fc28c2358289c5f6102107c7d947b6d6bc54"
+            ],
+            "HAL/pico/src/gpio.cpp": [
+              "100644",
+              "blob",
+              "39a8f859e1c9e3ac570adc5d06e711009cd86ae5"
+            ],
+            "HAL/pico/src/input/GamecubeControllerInput.cpp": [
+              "100644",
+              "blob",
+              "120488b50f8dcab833f609028d401f0146270121"
+            ],
+            "HAL/pico/src/input/NunchukInput.cpp": [
+              "100644",
+              "blob",
+              "eafb9b79cc7c024c89118b0dda6fc8874fe51e86"
+            ],
+            "HAL/pico/src/input/Pca9671Input.cpp": [
+              "100644",
+              "blob",
+              "fd501853c7ce1c7a2476b725c36598c83dcb7f34"
+            ],
+            "HAL/pico/src/reboot.cpp": [
+              "100644",
+              "blob",
+              "796c7f4b7337004b6f68a59c9e775e55f4578742"
+            ],
+            "HAL/pico/src/rgb/ButtonLocations.cpp": [
+              "100644",
+              "blob",
+              "d59b490890477b359c98c9a8c09e7f3f42e8a883"
+            ],
+            "HAL/pico/src/serial.cpp": [
+              "100644",
+              "blob",
+              "0430a44f8434e6c51c8abc29418e9c6ce1e9982e"
+            ],
+            "builder_scripts/arduino_pico.py": [
+              "100644",
+              "blob",
+              "35381a91ad5aa4ffdbcd362365c1bf9fbd13136e"
+            ],
+            "config/glyph/.clang-format": [
+              "100644",
+              "blob",
+              "ad08d3a29c12a629554d3587bee8b87d8f762ee2"
+            ],
+            "config/glyph/.github/workflows/build.yml": [
+              "100644",
+              "blob",
+              "8254ee56cc82c7fd5e4fd2da7c02412311eaca1a"
+            ],
+            "config/glyph/LICENSE": [
+              "100644",
+              "blob",
+              "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+            ],
+            "config/glyph/common/include/LEDTemplates.hpp": [
+              "100644",
+              "blob",
+              "c5c22831246faf2d06c7a77e63b0f790570e363e"
+            ],
+            "config/glyph/common/include/display/AboutMenu.hpp": [
+              "100644",
+              "blob",
+              "5ff112b06e4e9d6d783126a40667e30769df7ca8"
+            ],
+            "config/glyph/common/include/display/Font4x7Fixed.h": [
+              "100644",
+              "blob",
+              "25363c38671aee95ff6b7284e3e122b0c274bdd4"
+            ],
+            "config/glyph/common/include/display/GlyphConfigMenu.hpp": [
+              "100644",
+              "blob",
+              "ab18e1ba53f3eb4f355784b5d6a0a87f65929249"
+            ],
+            "config/glyph/common/include/display/MenuButtonHints.hpp": [
+              "100644",
+              "blob",
+              "7b9c85a34a20e95c44564031a2b6bfabed03fbfe"
+            ],
+            "config/glyph/common/include/display/OopsieMenu.hpp": [
+              "100644",
+              "blob",
+              "4e80bb3afa6fdd00da7e8fdc26808fb0db84efe6"
+            ],
+            "config/glyph/common/include/display/Picopixel.h": [
+              "100644",
+              "blob",
+              "463b1b562ddc156efece7a432a031f701d4a287e"
+            ],
+            "config/glyph/common/include/glyph_overrides.hpp": [
+              "100644",
+              "blob",
+              "90cc393759e91c8acacd6edef9ecb05b86d7fdc8"
+            ],
+            "config/glyph/common/include/icons/12x12bitmaps.hpp": [
+              "100644",
+              "blob",
+              "0ae4f61b69a20792de7a082982929f87fffe76c0"
+            ],
+            "config/glyph/common/include/icons/12x12buttons.hpp": [
+              "100644",
+              "blob",
+              "e56b9eec94b14477c59f8379f86dfb32b782ac71"
+            ],
+            "config/glyph/common/include/icons/16x16bitmaps.hpp": [
+              "100644",
+              "blob",
+              "242a856254b555a0b3dcb67d2200c0ae8e0c2e56"
+            ],
+            "config/glyph/common/include/icons/menubases.hpp": [
+              "100644",
+              "blob",
+              "382c94953d7931c02147e04c915963fc59dd1117"
+            ],
+            "config/glyph/common/include/icons/splashscreen.hpp": [
+              "100644",
+              "blob",
+              "fda47105d3d85bcd731f4af5714cc4d4a93cd09b"
+            ],
+            "config/glyph/common/src/LEDTemplates.cpp": [
+              "100644",
+              "blob",
+              "f15011835ccf8a095be447ec07b7a78949e71844"
+            ],
+            "config/glyph/common/src/config.cpp": [
+              "100644",
+              "blob",
+              "701e4ac8c0a635b77ef4282f29109f7bb0bea726"
+            ],
+            "config/glyph/common/src/display/AboutMenu.cpp": [
+              "100644",
+              "blob",
+              "e73bd0ad49d47b774573c71d781e31847904ed98"
+            ],
+            "config/glyph/common/src/display/GlyphConfigMenu.cpp": [
+              "100644",
+              "blob",
+              "819549dfdf2de34d5ceebed58fa30d278da4f4cb"
+            ],
+            "config/glyph/common/src/display/MenuButtonHints.cpp": [
+              "100644",
+              "blob",
+              "c6930cd7c7847acddf6085be6cdc1f1b2d05ae22"
+            ],
+            "config/glyph/common/src/display/OopsieMenu.cpp": [
+              "100644",
+              "blob",
+              "f0410e4d3771345d3b06054437ee10a9084b4a7d"
+            ],
+            "config/glyph/env.ini": [
+              "100644",
+              "blob",
+              "fac4e20461ad632ca1d65826241a4a9c73630f04"
+            ],
+            "config/glyph/glyph_mk6/include/button_positions.hpp": [
+              "100644",
+              "blob",
+              "b5b908d9a25cb021d5b22fc238173455e8fde1db"
+            ],
+            "config/glyph/glyph_mk6/include/glyph_pinout.hpp": [
+              "100644",
+              "blob",
+              "3cde279fc38c08e58ddc4283f324c14222d299e8"
+            ],
+            "config/glyph/glyph_mk6/include/matrix_definition.hpp": [
+              "100644",
+              "blob",
+              "870532bef36d7e28e8decf6ff152b131a6db5ef7"
+            ],
+            "config/glyph/glyph_mk6/include/neopixel_definitions.hpp": [
+              "100644",
+              "blob",
+              "252c624733f2aee65be51b363f46957658957a78"
+            ],
+            "config/glyph/glyph_protoA/include/button_positions.hpp": [
+              "100644",
+              "blob",
+              "1654a12591cfe9fcaac781eea53cfba1507ab140"
+            ],
+            "config/glyph/glyph_protoA/include/glyph_pinout.hpp": [
+              "100644",
+              "blob",
+              "82ad7af430b4d7fd58d58511cf414b52bbcc10c8"
+            ],
+            "config/glyph/glyph_protoA/include/matrix_definition.hpp": [
+              "100644",
+              "blob",
+              "60c6e76058d7b6a9d213383a21c6f55ccc8a0653"
+            ],
+            "config/glyph/glyph_protoA/include/neopixel_definitions.hpp": [
+              "100644",
+              "blob",
+              "6a661fbcf244dd01ce88e3f52542e4d8bad24141"
+            ],
+            "config/glyph/meta.yaml": [
+              "100644",
+              "blob",
+              "b875b765da097f247823d9550b9d417b0f657656"
+            ],
+            "glyph_nuker": [
+              "100755",
+              "blob",
+              "d0524944a90503a8881281b6673b1f46e36f9383"
+            ],
+            "include/comms/B0XXInputViewer.hpp": [
+              "100644",
+              "blob",
+              "47713956220032521addcefab1ba89425a3c067c"
+            ],
+            "include/comms/IntegratedDisplay.hpp": [
+              "100644",
+              "blob",
+              "743c5e184e5a9f14f17a8d00a534fe40279a3d52"
+            ],
+            "include/comms/console_detection.hpp": [
+              "100644",
+              "blob",
+              "9ddea46d534af36bb828dd23caf839acc0952ad9"
+            ],
+            "include/core/CommunicationBackend.hpp": [
+              "100644",
+              "blob",
+              "5d661430dfe58dcc9abb7f89cb9149fd5f94ea8d"
+            ],
+            "include/core/ControllerMode.hpp": [
+              "100644",
+              "blob",
+              "97136730b3fa05b61c9335f7950ec39a5b1c5dab"
+            ],
+            "include/core/InputMode.hpp": [
+              "100644",
+              "blob",
+              "02f3cfd54c47cf2b8f4587a2d519d0682240eec4"
+            ],
+            "include/core/InputSource.hpp": [
+              "100644",
+              "blob",
+              "ad3fa9bb10f606186fa8b6527a47678155bac538"
+            ],
+            "include/core/config_button_validation.hpp": [
+              "100644",
+              "blob",
+              "1b6e3dc98a9b6c0eb1f04e077c86382eaee324bb"
+            ],
+            "include/core/config_utils.hpp": [
+              "100644",
+              "blob",
+              "6d8fa67d146f3700f9add9181667e4da69b5b262"
+            ],
+            "include/core/mode_selection.hpp": [
+              "100644",
+              "blob",
+              "79ee24de665870f8b614be6b019f36f80a170b77"
+            ],
+            "include/core/pinout.hpp": [
+              "100644",
+              "blob",
+              "794268925073d9235d7b26ed71ce57ede233d528"
+            ],
+            "include/core/socd.hpp": [
+              "100644",
+              "blob",
+              "5d912b274ba54fde5e07a575cf9bec84da07c9bb"
+            ],
+            "include/core/state.hpp": [
+              "100644",
+              "blob",
+              "ff3aa94df61fd6a41448799fa1d6f508c41ecd0f"
+            ],
+            "include/img/remap.hpp": [
+              "100644",
+              "blob",
+              "c0f50e5691a098dbc9dd50348e1cd352e3c5d775"
+            ],
+            "include/img/remap.png": [
+              "100644",
+              "blob",
+              "1a60e1ec301b014f1d43212974fe93545a576583"
+            ],
+            "include/img/update.hpp": [
+              "100644",
+              "blob",
+              "06d897ff3b884a37960cfa767dcc2fdd0ee88d91"
+            ],
+            "include/img/update.png": [
+              "100644",
+              "blob",
+              "6d98a7d28260ecfbec9a251ad535efea0af91950"
+            ],
+            "include/input/GpioButtonInput.hpp": [
+              "100644",
+              "blob",
+              "fdc4c9b68ff4d8ebb2265cd9fbca40901e9d800f"
+            ],
+            "include/input/SwitchMatrixInput.hpp": [
+              "100644",
+              "blob",
+              "d499de645867413f1eda280afd292640c7dcbc39"
+            ],
+            "include/modes/64.hpp": [
+              "100644",
+              "blob",
+              "52983b70702b57f752e8e96cabf857255cba57ea"
+            ],
+            "include/modes/CustomControllerMode.hpp": [
+              "100644",
+              "blob",
+              "9658f5e15f50887caaaf5a71efc0096e9677d144"
+            ],
+            "include/modes/CustomKeyboardMode.hpp": [
+              "100644",
+              "blob",
+              "79a2725ca7703dfdabbd1c186d197e2250122c86"
+            ],
+            "include/modes/DefaultKeyboardMode.hpp": [
+              "100644",
+              "blob",
+              "cf1a0b3e62c4d8ddb1c11d51dde5188b3d21a703"
+            ],
+            "include/modes/FgcMode.hpp": [
+              "100644",
+              "blob",
+              "cd197cbe7c84c63cd675b81b1315250523894dcb"
+            ],
+            "include/modes/Melee18Button.hpp": [
+              "100644",
+              "blob",
+              "f2eb70b37e4e84e4646f239ba518b99b1a784da0"
+            ],
+            "include/modes/Melee20Button.hpp": [
+              "100644",
+              "blob",
+              "c44baed2ea01e075ca115481928e8003a702ec72"
+            ],
+            "include/modes/ProjectM.hpp": [
+              "100644",
+              "blob",
+              "cd730fbb6868bcd9bb71708ceee7b35b46cfae21"
+            ],
+            "include/modes/Rivals2.hpp": [
+              "100644",
+              "blob",
+              "7cf4ff25a848b01829533e8e8e5b3aee959b4d82"
+            ],
+            "include/modes/RivalsOfAether.hpp": [
+              "100644",
+              "blob",
+              "130e4a1d348e0a6160e5ea4a57cb30418c71546f"
+            ],
+            "include/modes/SenscopePrototype.hpp": [
+              "100644",
+              "blob",
+              "136400741b59e189d9bd334ca659c8ae19fd7aba"
+            ],
+            "include/modes/Ultimate.hpp": [
+              "100644",
+              "blob",
+              "d7f93c9f65ca51f734cea73eccbbeb54643016ff"
+            ],
+            "include/modes/WordProcessorMode.hpp": [
+              "100644",
+              "blob",
+              "686d3f82ccc9378f5f9ca0bc1a9ac7b7389463a3"
+            ],
+            "include/modes/extra/DarkSouls.hpp": [
+              "100644",
+              "blob",
+              "3b2fa8d99eb0b1f02771da31ab28183ce408b98f"
+            ],
+            "include/modes/extra/HollowKnight.hpp": [
+              "100644",
+              "blob",
+              "9668e4e313919ad9d5f0d48cab7ee888dec2a2c7"
+            ],
+            "include/modes/extra/MKWii.hpp": [
+              "100644",
+              "blob",
+              "02d7074639783138eade09b0088503719b175bdd"
+            ],
+            "include/modes/extra/MultiVersus.hpp": [
+              "100644",
+              "blob",
+              "ae4abcc7757b97e1065af7fded0bb6af7d11a057"
+            ],
+            "include/modes/extra/RocketLeague.hpp": [
+              "100644",
+              "blob",
+              "032b514d6e42d1ace44879eeacdb47a7472d888c"
+            ],
+            "include/modes/extra/SaltAndSanctuary.hpp": [
+              "100644",
+              "blob",
+              "2b85bbd60a12126117cfff306635c19f717e56b8"
+            ],
+            "include/modes/extra/ShovelKnight.hpp": [
+              "100644",
+              "blob",
+              "cdceafbd0ebcb3c472da0b1e11d7210fce150ef7"
+            ],
+            "include/modes/extra/ToughLoveArena.hpp": [
+              "100644",
+              "blob",
+              "7f5d0fd0d605afc28c481373b992fdb4290ec393"
+            ],
+            "include/modes/extra/Ultimate2.hpp": [
+              "100644",
+              "blob",
+              "88f2d69f495228f9ab4767427c721f32554f8a0b"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeBuildFlags.hpp": [
+              "100644",
+              "blob",
+              "0326fe08999152deacfdde97c06a1020fe31eb32"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeDigital.hpp": [
+              "100644",
+              "blob",
+              "2bf3e0dbdfaa46fb22678adf54181aeece229ef7"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeDirection.hpp": [
+              "100644",
+              "blob",
+              "ba4253d2239b49565f426dddb150793cb231ee0b"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeForce.hpp": [
+              "100644",
+              "blob",
+              "e8e5a39a7f7a20b6167679988c18275bf5187166"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeModifier.hpp": [
+              "100644",
+              "blob",
+              "09b09dd7e2259c86baaab4748139d2b5dff2ce8e"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeOutput.hpp": [
+              "100644",
+              "blob",
+              "26b508034eb913ea367f0e32f7c3b6def11dc5b2"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeResolver.hpp": [
+              "100644",
+              "blob",
+              "e90259cae8dd55059e9c3e1ccafd00a048d4b1b0"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeSelfTest.hpp": [
+              "100644",
+              "blob",
+              "93f8bd5ed7bf63d40f98fafa1e4a1ade678bfaf8"
+            ],
+            "include/prototypes/senscope/SenscopePrototypeTypes.hpp": [
+              "100644",
+              "blob",
+              "64ebfdb3eb46cb75718d18f6f7d5a7be9c34202e"
+            ],
+            "include/reboot.hpp": [
+              "100644",
+              "blob",
+              "506e0c5784eaa9d5da632e05504fef4928b20e52"
+            ],
+            "lib/TUCompositeHID/include/TUCompositeHID.hpp": [
+              "100644",
+              "blob",
+              "dce350df36575cdc43a532896cd25ac8d5527a9f"
+            ],
+            "lib/TUCompositeHID/include/TUGamepad.hpp": [
+              "100644",
+              "blob",
+              "2e4c33a2a9fb01a31307e563edea2dc9f22470a2"
+            ],
+            "lib/TUCompositeHID/include/TUKeyboard.hpp": [
+              "100644",
+              "blob",
+              "7e4305865e63483e98f7d902d6f43a0a112c808f"
+            ],
+            "lib/TUCompositeHID/src/TUCompositeHID.cpp": [
+              "100644",
+              "blob",
+              "acaa6b8c0732423de785132834d680b04b95bd5e"
+            ],
+            "lib/TUCompositeHID/src/TUGamepad.cpp": [
+              "100644",
+              "blob",
+              "aaefa0940928387fc850650eefd18239a73e0821"
+            ],
+            "lib/TUCompositeHID/src/TUKeyboard.cpp": [
+              "100644",
+              "blob",
+              "d3ac6cbc5c1604bcb8bbe3bcb0b7fec16b032cc3"
+            ],
+            "platformio.ini": [
+              "100644",
+              "blob",
+              "4d56f8630c1b12e84cd12f40ce05a4dc71b9362e"
+            ],
+            "scripts/build-glyph-mk6-quiet.sh": [
+              "100755",
+              "blob",
+              "e35164eeb512cec678a2f138b2b13f2b52263dc6"
+            ],
+            "scripts/build-glyph-mk6-senscope-playtest-quiet.sh": [
+              "100755",
+              "blob",
+              "ff5f34f06be5218670c13098b7d5df17bf97c327"
+            ],
+            "scripts/pio-local.sh": [
+              "100755",
+              "blob",
+              "deaabc271a8268dcd1f29c473f48beadf979cf7f"
+            ],
+            "src/comms/B0XXInputViewer.cpp": [
+              "100644",
+              "blob",
+              "e9b3dfe4e11011dda0bb7b9faa436770fcafae44"
+            ],
+            "src/comms/IntegratedDisplay.cpp": [
+              "100644",
+              "blob",
+              "67263adc7fc9520594df39dc85eed8d8973b39ac"
+            ],
+            "src/core/CommunicationBackend.cpp": [
+              "100644",
+              "blob",
+              "9e4b8ca4fdca9512dbabe08cf291e7eb0ffe0a03"
+            ],
+            "src/core/ControllerMode.cpp": [
+              "100644",
+              "blob",
+              "ca74124dec2a4dc060bb5a89c3f0e3b87bab6c4e"
+            ],
+            "src/core/InputMode.cpp": [
+              "100644",
+              "blob",
+              "f1388a1948fc73f7525463db219a53f5af1e6b7b"
+            ],
+            "src/core/InputSource.cpp": [
+              "100644",
+              "blob",
+              "6f9b782489a42b87ac9fd9a3b2665a6554cbae7c"
+            ],
+            "src/core/config_button_validation.cpp": [
+              "100644",
+              "blob",
+              "70a7cee746fd42d1cfaff11f6043650bbfcc4c74"
+            ],
+            "src/core/config_utils.cpp": [
+              "100644",
+              "blob",
+              "beeb1202f67f61ce717e0e020cb3dd339dfa6206"
+            ],
+            "src/core/mode_selection.cpp": [
+              "100644",
+              "blob",
+              "7d659d3133271c2ed956a16d8f5e3eda73040f81"
+            ],
+            "src/core/socd.cpp": [
+              "100644",
+              "blob",
+              "81a0d53fae96305c07d5943f4785b33b02ca1949"
+            ],
+            "src/input/GpioButtonInput.cpp": [
+              "100644",
+              "blob",
+              "69fc2ee1cfb877d769571554830b859a4d5c73b8"
+            ],
+            "src/modes/64.cpp": [
+              "100644",
+              "blob",
+              "7c65c0c7ee0579e133c358f5357b3200e1531a1f"
+            ],
+            "src/modes/CustomControllerMode.cpp": [
+              "100644",
+              "blob",
+              "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85"
+            ],
+            "src/modes/CustomKeyboardMode.cpp": [
+              "100644",
+              "blob",
+              "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8"
+            ],
+            "src/modes/DefaultKeyboardMode.cpp": [
+              "100644",
+              "blob",
+              "c016527ab7763210745c00e02d10e14948004354"
+            ],
+            "src/modes/FgcMode.cpp": [
+              "100644",
+              "blob",
+              "5d6817ce4481f3fd05598df9052d4db38dcab77b"
+            ],
+            "src/modes/Melee18Button.cpp": [
+              "100644",
+              "blob",
+              "80dc835778202dfa32ef66a737b2142b8874d08e"
+            ],
+            "src/modes/Melee20Button.cpp": [
+              "100644",
+              "blob",
+              "b144810d7033dcc12d97ab9979b8a6128b82d4e3"
+            ],
+            "src/modes/ProjectM.cpp": [
+              "100644",
+              "blob",
+              "e321b3254d9c3374d9069cc4c91bfe95f3f0cfaf"
+            ],
+            "src/modes/Rivals2.cpp": [
+              "100644",
+              "blob",
+              "f464e5e775e39c9030f3c0d9f1ce28345a6933e4"
+            ],
+            "src/modes/RivalsOfAether.cpp": [
+              "100644",
+              "blob",
+              "374687b48ea0cd439bb7ce01c6543d907fedfc4e"
+            ],
+            "src/modes/SenscopePrototype.cpp": [
+              "100644",
+              "blob",
+              "8ef6cdcb35d55011bab35a617414749f4fa64a02"
+            ],
+            "src/modes/Ultimate.cpp": [
+              "100644",
+              "blob",
+              "37b9bad7d8a1cab66d0073b8314987df0329dddb"
+            ],
+            "src/modes/UltimateIdentityRuntimeTables.hpp": [
+              "100644",
+              "blob",
+              "1249b2f8b702eca1522a915e08ae9bd442a74d78"
+            ],
+            "src/modes/UltimateRuntimeConfigInterpreter.hpp": [
+              "100644",
+              "blob",
+              "29a30df2c45e3ae4ce90af47775f0b8f94b8cc83"
+            ],
+            "src/modes/UltimateRuntimeConfigParser.hpp": [
+              "100644",
+              "blob",
+              "d432b21f9ea3e0745ccb05b581b33c9c9f32adfc"
+            ],
+            "src/modes/extra/DarkSouls.cpp": [
+              "100644",
+              "blob",
+              "9f4798d5cb1faf6d806be7085ecca70a588f63b8"
+            ],
+            "src/modes/extra/HollowKnight.cpp": [
+              "100644",
+              "blob",
+              "51503b796240aa516ee7b77e54677780854e7e2d"
+            ],
+            "src/modes/extra/MKWii.cpp": [
+              "100644",
+              "blob",
+              "ab809f32a1280754ed30a6a16bd02e9e2e146df0"
+            ],
+            "src/modes/extra/MultiVersus.cpp": [
+              "100644",
+              "blob",
+              "88f112b34422aeecc3b526014460a38da724e1f6"
+            ],
+            "src/modes/extra/RocketLeague.cpp": [
+              "100644",
+              "blob",
+              "9225d78c91b34eacf0d6616d83426b7ca5475785"
+            ],
+            "src/modes/extra/SaltAndSanctuary.cpp": [
+              "100644",
+              "blob",
+              "0392ebc5818c68fd2ea84757635b74ccfc0aa196"
+            ],
+            "src/modes/extra/ShovelKnight.cpp": [
+              "100644",
+              "blob",
+              "2bdafd8d0cf415aab86b3edef26615edfdfade1b"
+            ],
+            "src/modes/extra/ToughLoveArena.cpp": [
+              "100644",
+              "blob",
+              "3e20768a7bdca95a17532d2fd8a3ab7b4318781c"
+            ],
+            "src/modes/extra/Ultimate2.cpp": [
+              "100644",
+              "blob",
+              "9397328363ac2cbcaa5711acfaaa1a68d84cf92c"
+            ],
+            "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp": [
+              "100644",
+              "blob",
+              "bac7668aa517d88a43ef49f9468481316a468544"
+            ],
+            "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp": [
+              "100644",
+              "blob",
+              "40a0b4703b3cbc5800acca5f2fdc3229bd82844a"
+            ],
+            "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp": [
+              "100644",
+              "blob",
+              "03a8dd8e89af5c415ae3aab8574dbd4b068240d1"
+            ],
+            "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp": [
+              "100644",
+              "blob",
+              "440dffa1ceb23a8967de89b349c189f667ec3521"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeDigital.cpp": [
+              "100644",
+              "blob",
+              "d068d99241953bc3059fad1d0247f72a5a12b517"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeDirection.cpp": [
+              "100644",
+              "blob",
+              "a88ba78e781c58d7655a284ee9621e8088ca8a2e"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeForce.cpp": [
+              "100644",
+              "blob",
+              "1da94c03338816ccbe9fb84ebdca471e5107fe3f"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeModifier.cpp": [
+              "100644",
+              "blob",
+              "636f8fb1ad44376f252f812fb060a7df5e799b87"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeOutput.cpp": [
+              "100644",
+              "blob",
+              "04fb81320f86f84729c4a7c116f5f2270075d871"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeResolver.cpp": [
+              "100644",
+              "blob",
+              "b829ccaf2315dd823b4b57e574983261440a66f4"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeSelfTest.cpp": [
+              "100644",
+              "blob",
+              "7372928723b1ed5f9e2de0642a5cf740e69d684a"
+            ],
+            "src/prototypes/senscope/SenscopePrototypeValidation.cpp": [
+              "100644",
+              "blob",
+              "2cbb10713e955fc7d096894c3cb1255578924285"
+            ],
+            "tools/check_glyph_profile_adapter_prewrite.py": [
+              "100755",
+              "blob",
+              "174df0825bc9cf5de65f647e6e379fb52826ef54"
+            ]
+          }
+        },
+        "full_native_postbuild_fingerprint": {
+          "status": "UNAVAILABLE",
+          "reason": "unsupported repository path type: .pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/",
+          "before_after_claim": "No full native MATCH claim; exact tracked source/index/modes verified separately"
+        },
+        "rollback": {
+          "candidate": "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "artifact_sha256": "9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af",
+          "bytes": 796672,
+          "locator": "local_backups/hardware-artifacts/e5c455637056ac535347c1176dd41c9a9d84d85a/9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/firmware.uf2",
+          "rehashed": true
+        },
+        "prior_build_outputs_reused": false,
+        "reproducibility_claim": false,
+        "hardware_acceptance": false,
+        "device_actions": false
+      }
+    },
+    "017-build-review.json": {
+      "sha256": "d8b51f119989e87f4635d9c214485d5689d55a73097b6f496b39b3a5dc47cc4a",
+      "report": {
+        "reviewed_sha": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "reviewed_tree": "0404687bb795e78f0f607fbad865369578615cff",
+        "sole_parent": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+        "verdict": "APPROVED",
+        "blocking_findings": [],
+        "reviewer": {
+          "agent": "/root/val034_review",
+          "model": "gpt-6.1-sol",
+          "eligible_owner_model": true,
+          "independent_role": "Postimplementation source/build/custody/protocol review; no implementation or device actions"
+        },
+        "scope": "Exact committed F source, actual build and artifact custody, resolved dependency proof, and final conditional staged hardware protocol. No firmware integration, hardware acceptance, physical test result, or future owner Config artifact approval.",
+        "approved_protocol_content_sha256": "dbf43a5f990007f4175ee6852cd7432f98baf93263cb60236cc18879333dfe17",
+        "approved_protocol_snapshot": "/private/tmp/glyph-config017/017-protocol-preliminary-approved-content.md",
+        "protocol_review_line": "PASS; actual preliminary approval preceded sole mechanical review-line replacement.",
+        "artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+        "artifact_size": 796672,
+        "independent_evidence": {
+          "source": "Native source contract PASS; real M parents strict035DONE G and frozen C017, sole F child; all236 critical equal C017, all99 queue objects equal G, all1430 tracked HEAD/index/live/modes/flags exact. G to F changes only NeoPixelBackend.hpp. Expected About prefix 5994f165 is source-grounded.",
+          "build_and_custody": "Actual authorized fallback build PASS; RAM78960/262144, flash386184/1568768. Independently rehashed built UF2 and owner-preserved regular nonsymlink read-only UF2, both exact hash/796672. ELF contains clean 5994f165 and no 5994f165-DIRTY. Native clean candidate proof PASS and before/after tracked-source proof byte-identical.",
+          "rollback": "Accepted014 original UF2 rehashed exact9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/796672, regular nonsymlink mode0444; no rebuild or substitution.",
+          "dependencies": "Whole copied runtime/cache proof binds72873 paths/bytes/modes/symlink targets and excludes prior build outputs; immutable19 prebuild source roles PASS. Root actual unchanged native API21-role resolved proof PASS. Reviewer independently executed unchanged load_report/validate_record/validate_tracked/verify_package_identities and rehashed all21 role sizes/hashes. verify_resolved invocation and checker source inspected; separate exact F source bound. No report/checker mutation or monkeypatch.",
+          "focused": "Actual15 PASS including all five protected full bodies, historical016 and current017 host wrapper proofs; native focused window MATCH before runtime copy."
+        },
+        "protocol_assessment": {
+          "first_action": "Only one connection on existing accepted firmware, normal gameplay baseline observation, then wait for owner report.",
+          "before_mutation": [
+            "Resolve baseline anomalies and confirm existing manual read/restore/update/recovery route.",
+            "Fresh full stored owner Config raw backup and complete decode/reencode byte equality using exact F-local .venv and authenticated resolved schema; extract only config object.",
+            "Unchanged dry-run plus independent fixed capacities/enums/strings/ranges/button domains/source1-based references/sentinels/default indices/finite modifier arithmetic for original and each temporary artifact.",
+            "Concrete valid static/SHIFT/XWAVE profiles and expected outputs must be reviewed from actual owner Config before selection. Menu profile selection persists default mode and deliberately disconnects/reboots, so it follows the Config backup gate.",
+            "Each separately authorized owner manual write must report success and reviewed encoded-byte readback equality, then reboot before gameplay and repeat stored readback.",
+            "Seven required rows use actual profile/backend/host expected versus observed behavior; restoration immediately and postreboot must equal original count/hash.",
+            "Preserved exact F UF2 rehash immediately before owner manual update; no agent device write, forced null, invalid payload, new writer or automated flashing."
+          ],
+          "current_profiles_or_test_artifact": "Not supplied or approved; remain objective prerequisites.",
+          "stop_conditions": "Wrong identity, failed row, stuck input, unexpected disconnect/output, unsafe route, or restoration failure stops testing and uses established accepted014 rollback/restoration.",
+          "physical_null_reachability": "UNKNOWN",
+          "root_cause": "UNPROVEN",
+          "Nunchuk": "NOT_TESTED",
+          "hardware_acceptance": "NOT_CLAIMED"
+        },
+        "retained_debt": [
+          {
+            "kind": "Tier3 synthetic namespace applicability",
+            "actual": "Unchanged034 fixture admission FAIL before phase assertions; immutable014 predecessor/source/history and actual current host evidence remain valid. No034 full-suite PASS claimed."
+          },
+          {
+            "kind": "Tier3 aggregate budget",
+            "actual": "Actual unchanged300/120 aggregate FAIL at300.089829 seconds,13 results11PASS plus034FAIL and final setconfig AGGREGATE_TIMEOUT; native final canonical proof UNAVAILABLE. Separate outer native full fingerprint MATCH. No aggregate PASS."
+          },
+          {
+            "kind": "Tier3 ignored cache applicability",
+            "actual": "Extra root prebuild current_integrity call rejected ignored cache workflow before compilation; rawFAIL retained. Native tracked source, copied cache pins and actual decoder/build proof supply scoped basis. No post-cache fullauthenticate PASS."
+          },
+          {
+            "kind": "Historical CLI identity applicability",
+            "actual": "Initial missing --python CLI argument failure retained; corrected CLI rejected distinct actual F against immutable observed739c. Unchanged native API closure PASS; no historical CLI PASS claimed."
+          },
+          {
+            "kind": "Postbuild fingerprint availability",
+            "actual": "Full native fingerprint UNAVAILABLE at ignored Adafruit_TinyUSB_XInput embedded dependency directory. Exact tracked source/index/mode proof MATCH; no full postbuild MATCH."
+          }
+        ],
+        "report_provenance": [
+          {
+            "path": "/private/tmp/glyph-config017/017-F-independent-source.json",
+            "sha256": "be37223ec83d8b3bcb65a97f9a42ae0f06e30c3f6f4eb95c8fd5711666d8d9e3"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-F-independent-build-custody.json",
+            "sha256": "539e7f55252e97cbd439e8aeb637bc134ae8663bf60fbecefc159fdd95d51485"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-build-and-custody.json",
+            "sha256": "52e3a6b66279f0087fc3cf84403c8aba82c8aece89d6468977976ce3390e6eae"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-F-composition.json",
+            "sha256": "5e82832d51663e19eeadef86cea5d9e84bf71338179882a86f6bf41764c0546a"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-F-source-witness.json",
+            "sha256": "fbfe3e03e0c5c551718a60d02fe11baa17cf3569c36ce6a77048caa413184e33"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-F-focused-validation.json",
+            "sha256": "0e9bc015a28c4d0cdd3e8becd3eac1d88905f8bc3937fc9d43d4bf0da3fba1ed"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-F-aggregate.json",
+            "sha256": "ee82b36e8ba3449293e2f2d3fb6352845eb271836403edd70fe8640147815f8c"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-F-aggregate-freeze.json",
+            "sha256": "e22e8d84506ad8f5f960a6af52c46e660d268282acb190a13194ca28bee6cb4c"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-build-execution.json",
+            "sha256": "21d8828dc5da0d67bea4e186ff11e9d153b863f9c8bb9c2418f1426b67cdc23c"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-build-source-before.json",
+            "sha256": "da37be06c1ac42818786e9686bd5fd78c701a1eb3dc44ca781a430ffb30de835"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-build-source-after.json",
+            "sha256": "da37be06c1ac42818786e9686bd5fd78c701a1eb3dc44ca781a430ffb30de835"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-copied-runtime-cache-proof.json",
+            "sha256": "670de8d8046fa4098d6c4d68fc0285526851830a398e1fd9134397c1db036b9b"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-resolved-decoder-closure.json",
+            "sha256": "d0f44764f2b3327ff689d32617e5c7853b7b2ef9f759c52742cb2130fca65206"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-compiled-artifact-identity.json",
+            "sha256": "b9c33d1273c8e769ddf23d4a08134dbfe2abcc9529d06facccdf2a612335edb6"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-build-preparation-initial-failure.json",
+            "sha256": "0e38fb35a60e5da2f298b537f906a30d9563297fb75aae698e73353cfa9d9615"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-resolved-decoder-closure-initial.log",
+            "sha256": "c465e6aa8b0294cd600ca3ebc3929cb5a548efa5d25859ef5dfaf4ec0f1f6b4b"
+          },
+          {
+            "path": "/private/tmp/glyph-config017/017-resolved-decoder-closure-cli-argument-initial.log",
+            "sha256": "bf7488d0c0d4fa124786065fc61ea15503f25ea5dc599bcf7eef437fed6d9b45"
+          }
+        ],
+        "reserved_hardware_worktree_access": false,
+        "reviewer_builds_or_device_actions": false,
+        "source_or_repository_mutations": false,
+        "created_utc": "2026-10-05T11:14:17.488285+00:00",
+        "protocol_sha256": "05645e32a49b83656da0b32ff12e61956e51fa229ff8490d3e41787624570bcf",
+        "protocol_path": "/private/tmp/glyph-config017/017-protocol-final.md",
+        "final_readback": {
+          "approved_content_sha256": "dbf43a5f990007f4175ee6852cd7432f98baf93263cb60236cc18879333dfe17",
+          "only_changed_bytes": "Single Fresh independent postimplementation review PENDING line replaced with exact native PASS line.",
+          "unchanged_native_validate_build_review": "PASS",
+          "full_final_digest_readback": "MATCH"
+        },
+        "preliminary_review": {
+          "path": "/private/tmp/glyph-config017/017-build-review-preliminary.json",
+          "sha256": "20d30d96139ecb382f810952a42ff22b4b6f9a29696e55e9f798ce1ba7965971"
+        }
+      }
+    },
+    "017-F-aggregate-freeze.json": {
+      "sha256": "e22e8d84506ad8f5f960a6af52c46e660d268282acb190a13194ca28bee6cb4c",
+      "report": {
+        "head": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "exit_code": 1,
+        "elapsed_seconds": 300.0898290830082,
+        "aggregate_status": "FAIL",
+        "failure_kind": "AGGREGATE_TIMEOUT",
+        "native_aggregate_canonical_proof": "UNAVAILABLE",
+        "recorded_results": 13,
+        "independent_full_native_fingerprint": {
+          "before": "4f346b1e7f80026881baccab0491742f1fd074132545e342002b4b964f91e6e9",
+          "after": "4f346b1e7f80026881baccab0491742f1fd074132545e342002b4b964f91e6e9",
+          "result": "MATCH"
+        },
+        "timeouts_unchanged": "300secondsaggregate/120secondschecker",
+        "hardware_acceptance": false
+      }
+    },
+    "017-F-source-witness.json": {
+      "sha256": "fbfe3e03e0c5c551718a60d02fe11baa17cf3569c36ce6a77048caa413184e33",
+      "report": {
+        "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "parent": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+        "composition_base": "ace41056887ec08616a5c67f026880e1b0d8e81a",
+        "preserved_candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+        "root": "/private/tmp/glyph-config017/build",
+        "status": "PASS",
+        "firmware_build_by_witness": "NOT_RUN",
+        "device_actions": false,
+        "hardware_acceptance": "NOT_CLAIMED",
+        "reserved_worktree_access": "NONE",
+        "custody_before": {
+          "tracked_count": 1430,
+          "mode_counts": {
+            "100644": 1401,
+            "100755": 29
+          },
+          "HEAD_index_live_mode_blob_equality": "PASS",
+          "all_flags": "H",
+          "head_tree": "0404687bb795e78f0f607fbad865369578615cff",
+          "status_porcelain": ""
+        },
+        "source_inventory": {
+          "critical_entries": 236,
+          "F_C_exact_critical_tree": "PASS",
+          "all99_queue_G_equality": "PASS",
+          "changed_paths": [
+            "HAL/pico/include/comms/NeoPixelBackend.hpp"
+          ],
+          "raw_inventory_sha256": "b880c363115d81bfcc2281cfd65ed6e9c64f53773933d953ebe644c0dd85876a",
+          "source_mode_blob": [
+            "100644",
+            "blob",
+            "4724544d5989fdf403c5e6e0accab721371bc9d3"
+          ]
+        },
+        "exact_guard_movement": "PASS; unchanged null block moved before speed read, EOF preserved",
+        "native_authentication": {
+          "phase": "CANDIDATE_VALIDATION_ONLY",
+          "target": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+          "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+          "base": "a6b7750e271324972c51915563fe0dc22f941f95"
+        },
+        "current_host_proof": {
+          "command": [
+            "python3",
+            "-B",
+            "tools/check_glyph_gp_config_017_neopixel_repaired_current.py"
+          ],
+          "exit": 0,
+          "log": "017-F-current-host-witness.log",
+          "output": "layout=debug-struct-time cases=9 PASS; static+SHIFT+XWAVE fourupdates; null-null-valid timing PASS\nlayout=NDEBUG-scalar-time cases=9 PASS; static+SHIFT+XWAVE fourupdates; null-null-valid timing PASS\nnegative_controls=36 PASS; source/harness/schema/fixture omissions and single-byte substitutions; guard/bookkeeping/nonnull mutants; literal include/copied body/reseal\nglyph_gp_config_017_neopixel_repaired_current: PASS; exact source/header/caller/host/dependencies; base=a6b7750e271324972c51915563fe0dc22f941f95\nphysical_null_reachability=UNKNOWN FastLED_color_conversion=SYNTHETIC firmware_build=NOT_RUN hardware_acceptance=NOT_CLAIMED Nunchuk=NOT_TESTED root_cause=UNPROVEN"
+        },
+        "custody_after": {
+          "tracked_count": 1430,
+          "mode_counts": {
+            "100644": 1401,
+            "100755": 29
+          },
+          "HEAD_index_live_mode_blob_equality": "PASS",
+          "all_flags": "H",
+          "head_tree": "0404687bb795e78f0f607fbad865369578615cff",
+          "status_porcelain": ""
+        },
+        "duration_seconds": 46.14866775000701
+      }
+    },
+    "017-F-independent-source.json": {
+      "sha256": "be37223ec83d8b3bcb65a97f9a42ae0f06e30c3f6f4eb95c8fd5711666d8d9e3",
+      "report": {
+        "reviewed_sha": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "tree": "0404687bb795e78f0f607fbad865369578615cff",
+        "status": "PASS",
+        "sole_parent": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+        "M_parents": [
+          "ace41056887ec08616a5c67f026880e1b0d8e81a",
+          "478f438804275f3e0c23e6f36bfd26e34aa343bf"
+        ],
+        "G_to_F_only_path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "critical_count": 236,
+        "critical_tree": "EXACT_C017",
+        "all99_queue_objects": "EXACT_G",
+        "tracked_HEAD_index_live_modes_flags": 1430,
+        "native_source_contract": "PASS",
+        "source_sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+        "expected_About_prefix": "5994f165",
+        "scope": "Read-only immutable contract/tracked-source proof during runtime build; no full ignored-file fingerprint claim",
+        "firmware_build_by_reviewer": "NOT_RUN",
+        "hardware": "NOT_CLAIMED"
+      }
+    },
+    "017-copied-runtime-cache-proof.json": {
+      "sha256": "670de8d8046fa4098d6c4d68fc0285526851830a398e1fd9134397c1db036b9b",
+      "report": {
+        "status": "PASS",
+        "roots": [
+          {
+            "relative_root": ".venv",
+            "rows": 3382,
+            "inventory_sha256": "068a5349ee506bafb7a70eaeafb5ea9869e391c9efc1deac57a4eea002954d75",
+            "exact_paths_bytes_modes_symlink_targets": true
+          },
+          {
+            "relative_root": ".platformio-home",
+            "rows": 68432,
+            "inventory_sha256": "a67341555e841b2a4953f1dcf298b938d67f12b1a65b257ea6e02d00b59ae6d5",
+            "exact_paths_bytes_modes_symlink_targets": true
+          },
+          {
+            "relative_root": ".pio/libdeps",
+            "rows": 1059,
+            "inventory_sha256": "e3d9605fe4627d6e522856e4811daf59f13745638242cbae5ac2ee0ed66bc32e",
+            "exact_paths_bytes_modes_symlink_targets": true
+          }
+        ],
+        "source": "/private/tmp/glyph-config017/build-runtime-cache",
+        "destination": "/private/tmp/glyph-config017/build",
+        "no_build_outputs": true,
+        "firmware_acceptance": false
+      }
+    },
+    "017-prebuild-decoder-source-proof.json": {
+      "sha256": "479a7341e23e18c3e0c8c7157f080e7bdd7f03ee2fa077a57cc245737d1b0752",
+      "report": {
+        "status": "PASS",
+        "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "roles": [
+          "nanopb_package",
+          "nanopb_generator",
+          "nanopb_pb_h",
+          "nanopb_pb_decode_c",
+          "nanopb_platformio_generator",
+          "nanopb_generator_proto_init",
+          "nanopb_generator_utils",
+          "nanopb_generator_nanopb_pb2",
+          "nanopb_generator_nanopb_proto",
+          "nanopb_protoc",
+          "nanopb_pb_decode_h",
+          "nanopb_pb_common_c",
+          "nanopb_pb_common_h",
+          "proto_package",
+          "config_proto",
+          "config_options",
+          "other_proto_package",
+          "other_config_proto",
+          "other_config_options"
+        ],
+        "immutable_report_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+        "generated_outputs_absent": true
+      }
+    },
+    "017-build-preparation-initial-failure.json": {
+      "sha256": "0e38fb35a60e5da2f298b537f906a30d9563297fb75aae698e73353cfa9d9615",
+      "report": {
+        "status": "FAIL_BEFORE_BUILD",
+        "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "phase": "Root extra prebuild runtime-cache campaign invocation",
+        "exception": "glyph_hardware_correspondence.CorrespondenceError: 017 dirty critical input: .pio/libdeps/glyph_mk6/Adafruit SSD1306/.github/workflows/githubci.yml",
+        "firmware_build_run": false,
+        "firmware_outputs_absent": true,
+        "source_changed": false,
+        "tool_session": 24413
+      }
+    },
+    "017-compiled-artifact-identity.json": {
+      "sha256": "b9c33d1273c8e769ddf23d4a08134dbfe2abcc9529d06facccdf2a612335edb6",
+      "report": {
+        "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "git_short_identity": "5994f165",
+        "compiled_clean_identity_present_in_elf": true,
+        "uf2_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+        "uf2_bytes": 796672,
+        "hardware_acceptance": false
+      }
+    },
+    "017-resolved-decoder-closure.json": {
+      "sha256": "d0f44764f2b3327ff689d32617e5c7853b7b2ef9f759c52742cb2130fca65206",
+      "report": {
+        "status": "PASS",
+        "candidate": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "immutable_observed_snapshot": "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+        "immutable_report_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+        "native_API": [
+          "load_report",
+          "validate_record unchanged historical739c identity",
+          "validate_tracked actualF",
+          "verify_package_identities actualF",
+          "verify_resolved actualF21roles/includeedges/selectedencode/regeneration/versions"
+        ],
+        "current_exact_HEAD_clean_bound_separately": true,
+        "closure_roles": 21,
+        "immutable_role_hashes_unchanged": true,
+        "report_or_checker_mutations": false,
+        "cli_historical_identity_result": "FAIL retained; F is a distinct committed candidate, not immutable observed snapshot739c",
+        "initial_cli_log_sha256": "c465e6aa8b0294cd600ca3ebc3929cb5a548efa5d25859ef5dfaf4ec0f1f6b4b",
+        "reproducibility_claim": false,
+        "earlier_cli_argument_failure": {
+          "path": "/private/tmp/glyph-config017/017-resolved-decoder-closure-cli-argument-initial.log",
+          "sha256": "bf7488d0c0d4fa124786065fc61ea15503f25ea5dc599bcf7eef437fed6d9b45",
+          "reason": "Initial invocation lacked required --python; correct two-argument CLI then rejected actual distinct F against immutable observed739c. Actual native API21role PASS proof unchanged, no rerun claim."
+        }
+      }
+    }
+  },
+  "aggregate_report_sha256": "ee82b36e8ba3449293e2f2d3fb6352845eb271836403edd70fe8640147815f8c",
+  "aggregate_status": "FAIL",
+  "aggregate_failure_kind": "AGGREGATE_TIMEOUT",
+  "aggregate_full_PASS_claimed": false,
+  "other98_orders_unchanged": true,
+  "candidate_source_integrated": false,
+  "hardware_result": null,
+  "hardware_evidence_gaps": [
+    "Exact human GP_CONFIG_017_HW_V1 observations for seven required rows in recorded Mk6 GC and ordinary supported USB contexts are pending.",
+    "Fresh owner Config/raw backup, byte-exact validated restoration route, actual valid static/SHIFT/XWAVE profiles and concrete expectations must be established before mutation; unavailable safe profile remains a gap."
+  ],
+  "first_action": "Connect once on accepted firmware in normal gameplay mode; report model/revision/backend/host/profile/startup/RGB and any anomaly. No firmware or Config change.",
+  "write_lock_release": "At exact reviewed source-free pending publication/live verification and true hardware wait",
+  "callback": "Rejected transport retained; durable canonical and worker result readback; no retry"
+}
+```
+<!-- gp-config017-hardware-handoff:end -->
