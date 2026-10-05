@@ -695,7 +695,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-017",
       "title": "Null RGB ordering",
-      "status": "REVIEW",
+      "status": "READY",
       "branch": "codex/gp-config-017-release-safety",
       "objective": "Source and GP-CONFIG-016 support moving only the existing null branch before speed access while preserving time bookkeeping/non-null behavior; no fallback choice.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -757,7 +757,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-035",
       "title": "C017 governance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "codex/gp-val-035-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -794,7 +794,40 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "9ce55e71eff2be6fee366b52434042985de263e6",
+        "reviewed_implementation_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+        "prior_canonical_integration_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+          "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json",
+          "docs/runtime_config/fixtures/gp_val035_c017_transition.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+          "tools/check_glyph_gp_config019_usb_name_selection.py",
+          "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+          "tools/check_glyph_neopixel_historical_replay.py",
+          "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+          "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+          "tools/glyph_c014_campaign_transition.py",
+          "tools/glyph_c017_campaign_transition.py",
+          "tools/glyph_campaign_transition.py",
+          "tools/glyph_checker_context.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/run_glyph_runtime_config_validation.py",
+          "tools/test_glyph_c017_campaign_transition.py"
+        ],
+        "independent_review_provenance": "Fresh independent Sol val034_review APPROVED exact424 424387e08695bd9c58d2a16326b93143c8ca405d; report SHA25649cd901c2d06153848866552b295bb09d93bd8214ed4bc1a12da5e5c681a0e2f. Separate source-free completion snapshot independently reviewed before publication.",
+        "validation_provenance": "Final424 actual15 focused consumers PASS in source-free and genuine exactC-composed contexts, both fullnativefingerprintMATCH. Allfive fullscope bodies,010semantic,unchanged original0169cases/9contracts and C017dualtimeABIs56nullupdates/staticSHIFTXWAVE/recovery36negatives execute. 26freshnativephase/history/correspondence cases PASS at exactfinalmodule;16earlierrow/review/build/protocol controls carriedonlythrough unchanged-functionASTaudit. Native43initialnegative observations retain rawFAIL and two reproducedfalseacceptances; exact424targeted and independent controlsreject repairedindexflags/strictbool; committedE-descendantprotocol/evidence/resultreplace-restore nowreject. Five initial localexpected-string omissions retain actualcorrectnative rejection. Independent all1430HEAD/index/live/modes/flags,22regularsourcefree paths,236critical==accepted014F and exact99queue objects PASS. Both actual aa203 source-free/composed full aggregates FAIL/AGGREGATE_TIMEOUT/UNAVAILABLE, with12/9 recorded results; no fullaggregate PASS. Both29-check focused reports contain28actualPASS and one unchanged034 broad synthetic fixture admission FAIL with nativeMATCH. That namespace applicability failure is explicit Revision3 Tier3 debt, separately from aggregate timeout; native014 immutableB017/current source/history and actualcurrent014 host remain independently proved. Production300/120 deadlines unchanged. No firmwarebuild/device/physicalPASS; NunchukNOT_TESTED,rootcauseUNPROVEN,physicalnullUNKNOWN."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -8130,11 +8163,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-035"],"immediate_ready":1,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-017"],"immediate_ready":1,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-035; Immediate Ready: 1; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-017; Immediate Ready: 1; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -17477,3 +17510,5112 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config017-handoff-val035-activation:end -->
+
+
+## GP-VAL-035 source-free strict completion
+
+<!-- gp-val035-completion:start -->
+```json
+{
+  "schema_version": 1,
+  "work_order": "GP-VAL-035",
+  "implementation": "424387e08695bd9c58d2a16326b93143c8ca405d",
+  "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+  "prior_live_integration": "424387e08695bd9c58d2a16326b93143c8ca405d",
+  "source_free": true,
+  "reviewed_changed_paths": [
+    "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+    "docs/runtime_config/fixtures/glyph_checker_census.json",
+    "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+    "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json",
+    "docs/runtime_config/fixtures/gp_val035_c017_transition.json",
+    "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+    "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+    "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+    "docs/runtime_config/runtime_config_validation_health.md",
+    "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+    "tools/check_glyph_gp_config019_usb_name_selection.py",
+    "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+    "tools/check_glyph_neopixel_historical_replay.py",
+    "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+    "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+    "tools/glyph_c014_campaign_transition.py",
+    "tools/glyph_c017_campaign_transition.py",
+    "tools/glyph_campaign_transition.py",
+    "tools/glyph_checker_context.py",
+    "tools/glyph_hardware_correspondence.py",
+    "tools/run_glyph_runtime_config_validation.py",
+    "tools/test_glyph_c017_campaign_transition.py"
+  ],
+  "critical_entries_unchanged": 236,
+  "other97_orders_unchanged": true,
+  "product_resume": {
+    "id": "GP-CONFIG-017",
+    "from_status": "REVIEW",
+    "to_status": "READY",
+    "basis": "Existing completeREADY authorization and fixedordinarysuccessor nowstrictDONE; mechanicalsamecampaignresume, no newsubstantiveauthority.",
+    "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+    "candidate_base": "a6b7750e271324972c51915563fe0dc22f941f95"
+  },
+  "independent_review_sha256": "49cd901c2d06153848866552b295bb09d93bd8214ed4bc1a12da5e5c681a0e2f",
+  "independent_review": {
+    "schema_version": 1,
+    "reviewed_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+    "reviewed_tree": "b3dcae7ef2ccedd74bf62ac3a11627db8dd3db71",
+    "implementation_base": "9ce55e71eff2be6fee366b52434042985de263e6",
+    "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+    "verdict": "APPROVED",
+    "blocking_findings": [],
+    "reviewer": {
+      "agent_path": "/root/val034_review",
+      "model": "gpt-6.1-sol",
+      "eligibility": "Permitted Sol model independently established from trusted local session metadata",
+      "role": "Independent postimplementation reviewer; no implementation or publication role"
+    },
+    "approval_scope": "Exact source-free GP-VAL-035 implementation and finite C017 governance applicability. Subsequent strict DONE, build/custody/protocol and exact owner HEP acceptance are separate required transitions.",
+    "current_state": {
+      "changed_paths": 22,
+      "tracked_HEAD_index_live_modes_flags": 1430,
+      "critical_paths": 236,
+      "critical_tree": "Exact035READY/B017/testedF014; no firmware delta",
+      "queue": "All99 objects unchanged:035READY/017REVIEW",
+      "firmware_build": "NOT_RUN",
+      "C017_hardware_acceptance": "NOT_CLAIMED",
+      "reserved_hardware_worktree_access": false
+    },
+    "source_review": {
+      "inventory": [
+        {
+          "path": "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "c48f4a2d75ce5aeccb5a111a2b9bf95fecd77f8e"
+          ],
+          "sha256": "4873d3d87eda224fc378069387f7cfa388c0b7ff37809a386bf29cffb5306e12"
+        },
+        {
+          "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "old": [
+            "100644",
+            "blob",
+            "bc6157cbe2e5624e39dc88cb4987c8e61729fb81"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "95fc94408529f44fe17edafcaf047beb123b3aa0"
+          ],
+          "sha256": "05815748231224cfd4e16f7c7e9dad6443b8c57abc6eb4109a83cee0537de683"
+        },
+        {
+          "path": "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "f36c2d5530f35fb3b25101d66a22c162afd862b9"
+          ],
+          "sha256": "8b097e9df6d0d7807e469f8ed18b362b67a6b5eb2322ad5550dd33c3204510db"
+        },
+        {
+          "path": "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "c6bcb9418be0297b5ca1b0ecffe6c489610865e7"
+          ],
+          "sha256": "28546f315297149dfccd4eff5976e7adb29542df7946a0108dcb7e38f703bf1c"
+        },
+        {
+          "path": "docs/runtime_config/fixtures/gp_val035_c017_transition.json",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "372f13ec9ba7c224f6ed289ee02ace1fd228f5db"
+          ],
+          "sha256": "d4937c33a9086585f3d1743ea853cebd246cd5b5bb740a31ea08cc546c5fa5b0"
+        },
+        {
+          "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "old": [
+            "100644",
+            "blob",
+            "806b755406ea3435387aad3f6f7f868082328651"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "17f4edbda39bafa960361fb22345235179047913"
+          ],
+          "sha256": "359d7be909569f01066bbe2528abcc9248a818444c97b1a65ade48ea36639b0d"
+        },
+        {
+          "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "old": [
+            "100644",
+            "blob",
+            "d64f767d9bc45957f3bdfc1aa9f205e1c86e164e"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "3dd2d2afcc92c08a10b0d5b47687f8b45f224e49"
+          ],
+          "sha256": "cd5a4e3212a31f3413dc845d305bf2552ff54148130e850fe6aa65cb599a75d1"
+        },
+        {
+          "path": "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "1c5ffcdf7fb1088a92be7771409a6a80dcc4d077"
+          ],
+          "sha256": "54785336077a2314e0622060b4e771f1b15f8649d5686d8a612399a7e8929ea2"
+        },
+        {
+          "path": "docs/runtime_config/runtime_config_validation_health.md",
+          "old": [
+            "100644",
+            "blob",
+            "b6d262b0c860e9cae04e5d4966b4b81d3fdcd48c"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "cae295f68b2eb54eef545ac63e060e5ff97583a0"
+          ],
+          "sha256": "57a8f6350ccaf9a37b451914892b7a6d25da8e21eae95e5cd56294a05177230d"
+        },
+        {
+          "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+          "old": [
+            "100644",
+            "blob",
+            "bcf5d3cee30515666a48fc3f80325e42cf7f19e3"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "a808536d923c57467fdf1b152d2b6e520f08a8f1"
+          ],
+          "sha256": "438d1c461d55f61f6e1b6010435e7e56fbe321d8042abf3842202ed69d090cf1"
+        },
+        {
+          "path": "tools/check_glyph_gp_config019_usb_name_selection.py",
+          "old": [
+            "100644",
+            "blob",
+            "c942ea5c5ff790728fb0f5af7848c8003ec378b0"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "d291ba978816d9ea0caea3eefeb798ad8e5ebbe6"
+          ],
+          "sha256": "27b0e5afa9cf1637a71dc00a60fd6702382d364824eedecebe09923e3e558d42"
+        },
+        {
+          "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "ad88fee6d08ba913bc75c0fb2aecefc4b6d8ea10"
+          ],
+          "sha256": "28fd0fb0485a1483e0ec0beab4657ad4746ea11a0149e67eaa78ca62ff245a29"
+        },
+        {
+          "path": "tools/check_glyph_neopixel_historical_replay.py",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "b8f5ba1dd5574b5c5801ad38ac08081c62cb3c43"
+          ],
+          "sha256": "2a9d3c8eef434d890dc1cf9eeec8fe3ca5f37235de68417a6146dcd6d621c9da"
+        },
+        {
+          "path": "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "1b77f0d75f96c409612bce13463b47ea73b7ac6a"
+          ],
+          "sha256": "ab8265928fbd359362aa70dd5547ac1876d001515a79764159513ada960388db"
+        },
+        {
+          "path": "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "5c150f5c725be18f97720032c80585c9d250bb86"
+          ],
+          "sha256": "872855d12e5d3b6dd4404403a963988da3295339c5497b9a6d6501ec33abcad7"
+        },
+        {
+          "path": "tools/glyph_c014_campaign_transition.py",
+          "old": [
+            "100644",
+            "blob",
+            "9a1afcdf45f765be8cece5e5d6a31a693c253f51"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "2ee3fe6b04e9921036b4de5aedb31c7e242f1556"
+          ],
+          "sha256": "d52b24d5a0bca5df383148ea1f6b02cfbaff8fed734ee5dc86e9ee924bbd4433"
+        },
+        {
+          "path": "tools/glyph_c017_campaign_transition.py",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "56cb4488d9bf7e2f9c49a12f92cfef1d491febb6"
+          ],
+          "sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a"
+        },
+        {
+          "path": "tools/glyph_campaign_transition.py",
+          "old": [
+            "100644",
+            "blob",
+            "cebef71dde24fabdf62ea1f56e3141733c40c935"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "aac5bd7f58e03a4b4cafd546fafb9deab8b8085f"
+          ],
+          "sha256": "b4d517fcabc15a89caa0ae943b6c7010e01c5a508e9c1d790f32ca7be45a04fa"
+        },
+        {
+          "path": "tools/glyph_checker_context.py",
+          "old": [
+            "100644",
+            "blob",
+            "593307a8a81a051b6d0b945364ef63b824e1ca6d"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "d7450b6501ba85d13013d470f937df98098ccbfe"
+          ],
+          "sha256": "c0a77b1e82010737047257ff465c0abecbd7a4986b88f99b8db3b85cd0a0787e"
+        },
+        {
+          "path": "tools/glyph_hardware_correspondence.py",
+          "old": [
+            "100644",
+            "blob",
+            "971cdefaeac119003a309444fa7f1fc332736550"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "fffc32c881cd828fa1da74e5eb4960bccca8356c"
+          ],
+          "sha256": "05edb45114b1a3be063fbf99d005d70a2c6552e0ad138d706e956c4030006f5b"
+        },
+        {
+          "path": "tools/run_glyph_runtime_config_validation.py",
+          "old": [
+            "100644",
+            "blob",
+            "cef571af79a7482615eb8d56c547ee53e7f620da"
+          ],
+          "new": [
+            "100644",
+            "blob",
+            "fc63a52cf940098850529fdf73c02ce202067300"
+          ],
+          "sha256": "825586f50459e52f4024e56374fb8c164f84b24fd92124abdd93d7a06b11fc29"
+        },
+        {
+          "path": "tools/test_glyph_c017_campaign_transition.py",
+          "old": null,
+          "new": [
+            "100644",
+            "blob",
+            "2c9fd7c267d97a389992ff3e540ad910d0fbd964"
+          ],
+          "sha256": "9001cdd3aa88996c8dacf7785cc59e8e80d0c771af1921d392dbc1b7179df33e"
+        }
+      ],
+      "raw_inventory_sha256": "039ff9c7afd6959bd917b92f26dd69ca2cdd57bf9e6da69caa7e024320aa088f",
+      "candidate_contract": "Exact immutable C/B/tree/full11path envelope; one speed/guard reorder with235 other source inputs retained",
+      "019_overlay": "Literal guard-only delta; original constants/fixtures retained; only exact helper manifest dependency added",
+      "original016": "Checker, fixture, harness/stubs unchanged; actual original9cases/9contracts main executed through mandatory current wrapper",
+      "four_other_protected_checkers": "Byte-exact READY; independent HAL filters unchanged",
+      "runner": "Both exact current load-bearing wrapper lanes required in complete manifest; strict booleans/IDs/arguments/stage/modes; only selected authenticated finite roots; unchanged300/120 deadlines/isolation",
+      "no_self_authorization": "Immutable candidate/mapping/host pins plus independent reviewed implementation inventory; no self-authored receipt reseals source"
+    },
+    "closed_findings": [
+      "Current and intervening accepted020/014 native tuples and eight metadata records preserved",
+      "First-E/catalog/DONE chronology latched; competing PASS/catalog rejected",
+      "Strict035DONE\u2192exactM[G,C]\u2192soleF topology and reviewed build/artifact/protocol required",
+      "Filled hardware protocol admitted only under exact hardware-phase identity",
+      "Catalog schema rejects boolean version",
+      "Both original016 and repaired017 current lanes mandatory",
+      "Evidence/queue/catalog HEAD/index/live/mode/flags bound",
+      "Legitimate C/M/F side branches distinguished from first-E descendants",
+      "Predecessor/manifest assume-unchanged flags reject",
+      "Repaired load_bearing=1 rejects",
+      "Per-E-descendant protocol/evidence/result substitution and erase/restore reject"
+    ],
+    "actual_final_validation": {
+      "sourcefree": {
+        "actual_pass": 15,
+        "report": {
+          "path": "/private/tmp/glyph-config017/035-final-424-validation.json",
+          "sha256": "9b3b40874ae84efdc111ee679176b4bf8a698a7c3ce3e1b7fc24cb53895c8779"
+        },
+        "fingerprint": {
+          "before": "b4f4d34704928a5a67a8081c81d9a4110745bfa7d9ff12aa8ce5ddebf277072c",
+          "after": "b4f4d34704928a5a67a8081c81d9a4110745bfa7d9ff12aa8ce5ddebf277072c",
+          "result": "MATCH"
+        }
+      },
+      "candidate_composition": {
+        "head": "ec5f5df19c0fbf778e9526a53257ea49f3be10f1",
+        "parents": [
+          "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "478f438804275f3e0c23e6f36bfd26e34aa343bf"
+        ],
+        "actual_pass": 15,
+        "report": {
+          "path": "/private/tmp/glyph-config017/035-final-composed-424-validation.json",
+          "sha256": "b48a4b410e83b3ac9cf1f0d11e938268a82db07d659422726bc904ffcee7576a"
+        },
+        "fingerprint": {
+          "before": "e53eaf67c9558fcf71126bd1ea729da186bc99f27545a833909cd99ba8cb3ed1",
+          "after": "e53eaf67c9558fcf71126bd1ea729da186bc99f27545a833909cd99ba8cb3ed1",
+          "result": "MATCH"
+        }
+      },
+      "independent_native": {
+        "035-424-independent-native-baseline.json": {
+          "reviewed_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "status": "PASS",
+          "phase": "BASELINE",
+          "contract": "c017_neopixel",
+          "critical_count": 236,
+          "source_owner_neopixel": null,
+          "object_root_count": 54,
+          "literal_C_B": {
+            "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+            "base": "a6b7750e271324972c51915563fe0dc22f941f95"
+          },
+          "elapsed_seconds": 11.226045332994545,
+          "scope": "Actual unchanged native authenticate baseline on frozen current checkout; no synthetic hardware acceptance"
+        },
+        "035-424-independent-history.json": {
+          "reviewed_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "status": "PASS",
+          "classification": "SYNTHETIC_PHASE_PROOF_ONLY",
+          "basis": "Actual private repaired snapshots of real Git graph; exact final module bytes; no hardware observations/artifact/build",
+          "module_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+          "module_blob": "56cb4488d9bf7e2f9c49a12f92cfef1d491febb6",
+          "results": [
+            {
+              "case": "snapshot_commit",
+              "status": "PASS",
+              "sha": "91c3d66997426c827b6aac4768cff3dc3b838fbd",
+              "phase": "ACCEPTED_TRANSITION",
+              "evidence_commit": "d7535498f58f66e633bf87857a2259de88707c5c",
+              "elapsed_seconds": 13.856072624999797
+            },
+            {
+              "case": "strict_DONE",
+              "status": "PASS",
+              "sha": "6f937c8eff79048562bc674cf6750acead89887e",
+              "phase": "ACCEPTED_TRANSITION",
+              "evidence_commit": "d7535498f58f66e633bf87857a2259de88707c5c",
+              "elapsed_seconds": 13.046137333993101
+            },
+            {
+              "case": "sourcefree_snapshot",
+              "status": "PASS",
+              "sha": "16acbaac385c54eda1169670b45540ad9af68d3f",
+              "phase": "SOURCE_FREE_PROCESSOR",
+              "evidence_commit": "d7535498f58f66e633bf87857a2259de88707c5c",
+              "elapsed_seconds": 12.287816416996066
+            }
+          ],
+          "root": "/private/tmp/glyph-config017/reviewer-035-424-history"
+        },
+        "035-424-independent-negatives.json": {
+          "reviewed_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "classification": "SYNTHETIC_NEGATIVES_ONLY",
+          "status": "PASS",
+          "cases": [
+            {
+              "case": "predecessor_metadata_assume_unchanged",
+              "status": "REJECTED",
+              "exception": "CorrespondenceError",
+              "reason": "017 host index flag trap: docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md",
+              "seconds": 9.425174291973235
+            },
+            {
+              "case": "manifest_assume_unchanged",
+              "status": "REJECTED",
+              "exception": "CorrespondenceError",
+              "reason": "017 host index flag trap: docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+              "seconds": 10.732082792004803
+            },
+            {
+              "case": "repaired_load_bearing_integer_boolean",
+              "status": "REJECTED",
+              "exception": "CorrespondenceError",
+              "reason": "017 repaired-current wrapper manifest lane substitution",
+              "seconds": 9.851516374998027
+            }
+          ],
+          "root": "/private/tmp/glyph-config017/reviewer-035-424-negatives"
+        }
+      },
+      "fresh_history_matrix": {
+        "report": {
+          "path": "/private/tmp/glyph-config017/035-phase-history-final-report.json",
+          "sha256": "babb7f314e735b645d031dcfda2149a337cd5b7b32e28ca564d0160e9d3eb6c9"
+        },
+        "actual_outcomes": 26,
+        "breakdown": {
+          "retained_accepted_done_metadata_catalog_matrix": 17,
+          "single_parent_integration_catalog_and_DONE": 2,
+          "accepted020014_queue_and_evidence_history_controls": 6,
+          "fresh_frozen424_baseline": 1
+        },
+        "classification": "Synthetic future phase/history tests; actual native calls; no real artifact/build/hardware observation"
+      },
+      "prior_neighbor_execution": [
+        {
+          "report": {
+            "path": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-validation.json",
+            "sha256": "0d46bb236011c4222698038b1dcb0ded9042c345bd5b17aad6e5cb615cc07864"
+          },
+          "head": "aa203dc260456b94a1732ec20c62163269831da0",
+          "actual_pass": 28,
+          "actual_fail": 1,
+          "failure": "unchanged034 synthetic fixture admission assertion before phase proofs",
+          "fingerprint": {
+            "before": "89af86f064c27324be4e397c007de8bf6a380a294c740a96b41722f01b9c0461",
+            "after": "89af86f064c27324be4e397c007de8bf6a380a294c740a96b41722f01b9c0461",
+            "result": "MATCH"
+          }
+        },
+        {
+          "report": {
+            "path": "/private/tmp/glyph-config017/035-composed-aa203-repeat-validation.json",
+            "sha256": "8c7e07593819d9084f73880d0309b3d5d260f75c93253ca6216201bd4d70e46b"
+          },
+          "head": "fabf399494be68f58af6aea37d70c497515f18ac",
+          "actual_pass": 28,
+          "actual_fail": 1,
+          "failure": "unchanged034 synthetic fixture admission assertion before phase proofs",
+          "fingerprint": {
+            "before": "7b87c05dc49dd4f165aa503ca9c88dbfdfcc10874e268fef5d488b79cd54e972",
+            "after": "7b87c05dc49dd4f165aa503ca9c88dbfdfcc10874e268fef5d488b79cd54e972",
+            "result": "MATCH"
+          }
+        }
+      ],
+      "carried_sourcefree_controls": {
+        "actual_aa_cases": 16,
+        "positives": 2,
+        "negative_rejections": 14,
+        "fresh_final_rerun_claimed": false,
+        "functions_independently_AST_equal": [
+          "_reviewed_build",
+          "_processor",
+          "_catalog",
+          "source_contract",
+          "predecessor_contract"
+        ]
+      }
+    },
+    "retained_debt": {
+      "classification": "Revision3 Tier3; no remaining concrete Tier1/affectedTier2 contradiction found",
+      "native034_current_suite": {
+        "status": "ACTUAL_FAIL/MATCH",
+        "basis": "Unchanged broad synthetic fixture constructor line76 rejects new035 namespace before substantive phase proof. Native unchanged014 source_contract/history at immutableB017 and current accepted-predecessor preservation independently pass. Actual014 host dualABI proof retained.",
+        "budget_related": false,
+        "full_native034_suite_PASS": false
+      },
+      "aggregates": [
+        {
+          "report": {
+            "path": "/private/tmp/glyph-config017/035-frozen-aa203-aggregate.json",
+            "sha256": "8044f9a02ae9c6f6b14a46eefde693764d7e508c248bb59811cf4162ca695296"
+          },
+          "head": "aa203dc260456b94a1732ec20c62163269831da0",
+          "status": "FAIL",
+          "actual_results": 12,
+          "counts": {
+            "PASS": 10,
+            "FAIL": 2
+          },
+          "canonical_proof": "UNAVAILABLE",
+          "terminal_id": "gp_config_010_integration_semantic_correspondence",
+          "terminal_failure_kind": "AGGREGATE_TIMEOUT",
+          "terminal_isolated_proof": "UNAVAILABLE",
+          "deadline_seconds": 300.0,
+          "per_checker_ceiling_seconds": 120.0,
+          "fresh_final_snapshot_rerun_claimed": false
+        },
+        {
+          "report": {
+            "path": "/private/tmp/glyph-config017/035-composed-aa203-aggregate.json",
+            "sha256": "e64d28af5f142df8fd44ff63eb2abb0fb1595a4de1e2fc59a8d0fb0527d95d66"
+          },
+          "head": "fabf399494be68f58af6aea37d70c497515f18ac",
+          "status": "FAIL",
+          "actual_results": 9,
+          "counts": {
+            "PASS": 7,
+            "FAIL": 2
+          },
+          "canonical_proof": "UNAVAILABLE",
+          "terminal_id": "gp_config_013_usb_default_characterization",
+          "terminal_failure_kind": "AGGREGATE_TIMEOUT",
+          "terminal_isolated_proof": "UNAVAILABLE",
+          "deadline_seconds": 300.0,
+          "per_checker_ceiling_seconds": 120.0,
+          "fresh_final_snapshot_rerun_claimed": false
+        }
+      ],
+      "full_aggregate_PASS": false,
+      "earlier_failures": "Initial setup/category zero-body failures, incomplete accepted-I graph test, raw43-control sevenFAIL, three metadata erase/restore false acceptances and preliminary catalog boolean acceptance retained. Five raw negative-harness failures were correct rejection with missing expected diagnostic strings; two actual flag/bool false acceptances repaired and rerun.",
+      "fingerprint_scope": "Reported validation windows MATCH only; independent tracked/index/live proof separate; no unbounded final-global fingerprint claim"
+    },
+    "report_provenance": [
+      {
+        "path": "/private/tmp/glyph-config017/035-424-independent-source.json",
+        "sha256": "11940025a055ca41a6356e45eb7d1e7fde800d9690e842e75e0f46a0a3bbf071"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-424-independent-native-baseline.json",
+        "sha256": "c2cdbd38c37e5fc1e207802c5301c4d6c9e7dc364f86388387a91919fd5ff9a7"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-424-independent-history.json",
+        "sha256": "e5f4199e07420ed8610f4fb0937768634b08e9a8ec88b75a248c3b404ef3faa2"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-424-independent-negatives.json",
+        "sha256": "005b8c7d89086363287cefb531d9cc124614ad2c493a7dd989e3ba34fae1976b"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-final-424-validation.json",
+        "sha256": "9b3b40874ae84efdc111ee679176b4bf8a698a7c3ce3e1b7fc24cb53895c8779"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-final-composed-424-validation.json",
+        "sha256": "b48a4b410e83b3ac9cf1f0d11e938268a82db07d659422726bc904ffcee7576a"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-phase-history-final-report.json",
+        "sha256": "babb7f314e735b645d031dcfda2149a337cd5b7b32e28ca564d0160e9d3eb6c9"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-repaired-snapshot-report.json",
+        "sha256": "7a4df1b591f3883a71f00a0812adf8b3e28fc8e6e57502b86e9a3b37b873ae19"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-single-parent-integration-report.json",
+        "sha256": "31570dcb4c731476504193cd3aa823baf5234682f7b31b1507988625087c25aa"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-repaired-predecessor-history-report.json",
+        "sha256": "92d96ecde4fe43420bd122338684db1a45d91b3f9a0a7c00ab26f170804e9e63"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-repair-scope-function-equivalence.json",
+        "sha256": "50e3fef5b96e20444fd9d0115f21b4566636c9d1a21f77fd4b7c418e3bccd266"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-sourcefree-negative-report.json",
+        "sha256": "bc3b5b1cfd17ce19570cac4fa67ad97b74adb283f8c73400e1aa06a5420429be"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-sourcefree-history-report.json",
+        "sha256": "8729dd795d990d92bcd1952a8e882c80ccc2196f4fc59c3f9e9f58cd253327e7"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-native-negatives.json",
+        "sha256": "40c487f8219b07428c5cea883c77336fb8041dd85861c244a3b93c79977cad96"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-native-negative-audit.json",
+        "sha256": "d0da6c2b3dd927e61b61c51e1ffbb2b71c768413076a9f06c7ae77f1e6d17b2c"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-final-targeted-negatives.json",
+        "sha256": "ac2b96435e7b5889b90b89a0d88d9310ebe3446eb87bf31ac24b75c262895839"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-scope-source-report.json",
+        "sha256": "d31042b6b5419cba7f427f773652de70c2d5641888678b8452205fa833953864"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-final-inventory.json",
+        "sha256": "7dfa80ea8e8678a2ee550025df6ac80debc105184f47e1c7733dcc37bc037252"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-frozen424-proof.json",
+        "sha256": "a6714468753af5f5d93fc73472738d2a266f2536a555ed1193e78ded04e2f7dc"
+      },
+      {
+        "path": "/private/tmp/glyph-config017/035-final-validation-basis.json",
+        "sha256": "aa84af287dd460c6cf7c4f5ffe3f477600053bb0904ed5a3b3910f480a31ebeb"
+      }
+    ],
+    "limits": [
+      "No firmware merge/build/custody/device action approved or performed",
+      "Current017 host proof uses both time ABIs and36negativecontrols; host FastLED color conversion synthetic; physical null reachability unknown",
+      "Future exactF017/UF2 custody, concrete staged protocol review and exact owner HEP PASS required before firmware integration",
+      "No further work order, successor or framework waiver authorized by this review"
+    ]
+  },
+  "validation": {
+    "work_order": "GP-VAL-035",
+    "frozen_implementation": "424387e08695bd9c58d2a16326b93143c8ca405d",
+    "canonical_base": "9ce55e71eff2be6fee366b52434042985de263e6",
+    "source_free": true,
+    "required_focused_validation": "PASS",
+    "final_native_fingerprint": "MATCH_BOTH_CONTEXTS",
+    "full_aggregate": "Actual FAIL AGGREGATE_TIMEOUT UNAVAILABLE at aa203; no full aggregate PASS",
+    "native034_selftest": "Actual FAIL at unchanged broad synthetic fixture admission line76; Tier3 namespace applicability debt; no fullsuite PASS. Native014 immutableB017/current source/history plus actualcurrent014host proof preserved.",
+    "previous_failures": "All actualinitialsetup/harness-failure/false-acceptance logs preserved; corrected controls rerun exactly with finalmodule, no raw FAIL rewrite.",
+    "cumulative_basis": "Final424actual15requiredconsumers inbothcontexts plus unchanged-bodyaa28actualneighborPASS/current034syntheticFAIL; exactmodule delta audit and independent current014/source/history primitives; row/review/build functions unchanged and 26freshnativeE/I/DONE/metadata/catalog/predecessor-history cases actual PASS.",
+    "reports": {
+      "035-final-424-validation.json": {
+        "path": "/private/tmp/glyph-config017/035-final-424-validation.json",
+        "sha256": "9b3b40874ae84efdc111ee679176b4bf8a698a7c3ce3e1b7fc24cb53895c8779",
+        "report": {
+          "head": "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+          "status": "PASS",
+          "results": [
+            {
+              "id": "gp_val035_c017_transition",
+              "command": [
+                "python3",
+                "tools/test_glyph_c017_campaign_transition.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 20.568817749997834,
+              "log": "/private/tmp/glyph-config017/035-final-424-01-gp_val035_c017_transition.log"
+            },
+            {
+              "id": "gp_config_010_integration_semantic_correspondence",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 11.775006207986735,
+              "log": "/private/tmp/glyph-config017/035-final-424-02-gp_config_010_integration_semantic_correspondence.log"
+            },
+            {
+              "id": "neopixel_null_sendreport_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 24.80891066600452,
+              "log": "/private/tmp/glyph-config017/035-final-424-03-neopixel_null_sendreport_characterization.log"
+            },
+            {
+              "id": "validation_health",
+              "command": [
+                "python3",
+                "tools/check_glyph_runtime_config_validation_health.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.09529662498971447,
+              "log": "/private/tmp/glyph-config017/035-final-424-04-validation_health.log"
+            },
+            {
+              "id": "generated_source_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_generator_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 15.087464291980723,
+              "log": "/private/tmp/glyph-config017/035-final-424-05-generated_source_contract.log"
+            },
+            {
+              "id": "generated_baseline_artifact",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 21.990149417018984,
+              "log": "/private/tmp/glyph-config017/035-final-424-06-generated_baseline_artifact.log"
+            },
+            {
+              "id": "artifact_install",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_artifact_install.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 12.11577025000588,
+              "log": "/private/tmp/glyph-config017/035-final-424-07-artifact_install.log"
+            },
+            {
+              "id": "coordinate_native_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 20.706725333002396,
+              "log": "/private/tmp/glyph-config017/035-final-424-08-coordinate_native_contract.log"
+            },
+            {
+              "id": "docs_navigation",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_navigation.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.07136112501029857,
+              "log": "/private/tmp/glyph-config017/035-final-424-09-docs_navigation.log"
+            },
+            {
+              "id": "docs_agent_surface",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_agent_surface.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 12.010996709024766,
+              "log": "/private/tmp/glyph-config017/035-final-424-10-docs_agent_surface.log"
+            },
+            {
+              "id": "agent_framework",
+              "command": [
+                "python3",
+                "tools/check_glyph_agent_framework_docs.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 15.467226791020948,
+              "log": "/private/tmp/glyph-config017/035-final-424-11-agent_framework.log"
+            },
+            {
+              "id": "agentic_sequence",
+              "command": [
+                "python3",
+                "tools/check_glyph_agentic_sequence_protocol.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.09711712499847636,
+              "log": "/private/tmp/glyph-config017/035-final-424-12-agentic_sequence.log"
+            },
+            {
+              "id": "gp_config017_neopixel_repaired_current",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py",
+                "--repaired-current"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 51.09194212500006,
+              "log": "/private/tmp/glyph-config017/035-final-424-13-gp_config017_neopixel_repaired_current.log"
+            },
+            {
+              "id": "check_glyph_checker_census",
+              "command": [
+                "python3",
+                "tools/check_glyph_checker_census.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 1.4889275830064435,
+              "log": "/private/tmp/glyph-config017/035-final-424-14-check_glyph_checker_census.log"
+            },
+            {
+              "id": "test_glyph_docs_agent_surface_integration",
+              "command": [
+                "python3",
+                "tools/test_glyph_docs_agent_surface_integration.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 7.016822165984195,
+              "log": "/private/tmp/glyph-config017/035-final-424-15-test_glyph_docs_agent_surface_integration.log"
+            }
+          ],
+          "full_native_fingerprint": {
+            "before": "b4f4d34704928a5a67a8081c81d9a4110745bfa7d9ff12aa8ce5ddebf277072c",
+            "after": "b4f4d34704928a5a67a8081c81d9a4110745bfa7d9ff12aa8ce5ddebf277072c",
+            "result": "MATCH"
+          },
+          "firmware_build": false,
+          "hardware_acceptance": false
+        }
+      },
+      "035-final-composed-424-validation.json": {
+        "path": "/private/tmp/glyph-config017/035-final-composed-424-validation.json",
+        "sha256": "b48a4b410e83b3ac9cf1f0d11e938268a82db07d659422726bc904ffcee7576a",
+        "report": {
+          "head": "ec5f5df19c0fbf778e9526a53257ea49f3be10f1",
+          "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+          "status": "PASS",
+          "results": [
+            {
+              "id": "gp_val035_c017_transition",
+              "command": [
+                "python3",
+                "tools/test_glyph_c017_campaign_transition.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 20.495193250011653,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-01-gp_val035_c017_transition.log"
+            },
+            {
+              "id": "gp_config_010_integration_semantic_correspondence",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 11.59419025000534,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-02-gp_config_010_integration_semantic_correspondence.log"
+            },
+            {
+              "id": "neopixel_null_sendreport_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 26.05450983400806,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-03-neopixel_null_sendreport_characterization.log"
+            },
+            {
+              "id": "validation_health",
+              "command": [
+                "python3",
+                "tools/check_glyph_runtime_config_validation_health.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.08292729099048302,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-04-validation_health.log"
+            },
+            {
+              "id": "generated_source_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_generator_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 16.1083036250202,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-05-generated_source_contract.log"
+            },
+            {
+              "id": "generated_baseline_artifact",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 22.0486222920008,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-06-generated_baseline_artifact.log"
+            },
+            {
+              "id": "artifact_install",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_artifact_install.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 12.161998833005782,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-07-artifact_install.log"
+            },
+            {
+              "id": "coordinate_native_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 20.839101624995237,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-08-coordinate_native_contract.log"
+            },
+            {
+              "id": "docs_navigation",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_navigation.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.07864645900554024,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-09-docs_navigation.log"
+            },
+            {
+              "id": "docs_agent_surface",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_agent_surface.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 10.697446207981557,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-10-docs_agent_surface.log"
+            },
+            {
+              "id": "agent_framework",
+              "command": [
+                "python3",
+                "tools/check_glyph_agent_framework_docs.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 14.707795291004004,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-11-agent_framework.log"
+            },
+            {
+              "id": "agentic_sequence",
+              "command": [
+                "python3",
+                "tools/check_glyph_agentic_sequence_protocol.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.08719433398800902,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-12-agentic_sequence.log"
+            },
+            {
+              "id": "gp_config017_neopixel_repaired_current",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py",
+                "--repaired-current"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 46.804240583005594,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-13-gp_config017_neopixel_repaired_current.log"
+            },
+            {
+              "id": "check_glyph_checker_census",
+              "command": [
+                "python3",
+                "tools/check_glyph_checker_census.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 1.481210915982956,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-14-check_glyph_checker_census.log"
+            },
+            {
+              "id": "test_glyph_docs_agent_surface_integration",
+              "command": [
+                "python3",
+                "tools/test_glyph_docs_agent_surface_integration.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 6.863366750010755,
+              "log": "/private/tmp/glyph-config017/035-final-composed-424-15-test_glyph_docs_agent_surface_integration.log"
+            }
+          ],
+          "full_native_fingerprint": {
+            "before": "e53eaf67c9558fcf71126bd1ea729da186bc99f27545a833909cd99ba8cb3ed1",
+            "after": "e53eaf67c9558fcf71126bd1ea729da186bc99f27545a833909cd99ba8cb3ed1",
+            "result": "MATCH"
+          },
+          "firmware_build": false,
+          "hardware_acceptance": false
+        }
+      },
+      "035-final-targeted-negatives.json": {
+        "path": "/private/tmp/glyph-config017/035-final-targeted-negatives.json",
+        "sha256": "ac2b96435e7b5889b90b89a0d88d9310ebe3446eb87bf31ac24b75c262895839",
+        "report": {
+          "status": "PASS",
+          "results": [
+            {
+              "case": "predecessor_metadata_flags",
+              "status": "PASS",
+              "exit_code": 1,
+              "expected_rejection": "017 host index flag trap",
+              "seconds": 9.24337920898688,
+              "log": "/private/tmp/glyph-config017/035-final-predecessor_metadata_flags.log",
+              "tested_root": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_flags",
+              "module_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+              "frozen_implementation": "424387e08695bd9c58d2a16326b93143c8ca405d",
+              "synthetic_test_only": true
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_integer_boolean",
+              "status": "PASS",
+              "exit_code": 1,
+              "expected_rejection": "017 repaired-current wrapper manifest lane substitution",
+              "seconds": 9.726623041991843,
+              "log": "/private/tmp/glyph-config017/035-final-gp_config017_neopixel_repaired_current_integer_boolean.log",
+              "tested_root": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_integer_boolean",
+              "module_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+              "frozen_implementation": "424387e08695bd9c58d2a16326b93143c8ca405d",
+              "synthetic_test_only": true
+            }
+          ]
+        }
+      },
+      "035-repaired-snapshot-report.json": {
+        "path": "/private/tmp/glyph-config017/035-repaired-snapshot-report.json",
+        "sha256": "7a4df1b591f3883a71f00a0812adf8b3e28fc8e6e57502b86e9a3b37b873ae19",
+        "report": {
+          "classification": "SYNTHETIC_TEST_ONLY_REPAIRED_SNAPSHOT",
+          "module_snapshot_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+          "module_snapshot_blob": "56cb4488d9bf7e2f9c49a12f92cfef1d491febb6",
+          "prior_frozen_basis": "aa203dc260456b94a1732ec20c62163269831da0",
+          "snapshot_commit": "91c3d66997426c827b6aac4768cff3dc3b838fbd",
+          "original_graph": {
+            "G": "df2f9cf855c9dde71ca2d22324eef0533de20a8c",
+            "M": "979000fc30bea0194c33c5a53bcf96f8ea11d636",
+            "F": "69390b4d110e36b397b6407ae1f6237bdece306e",
+            "R": "8f04a98df6043ea0eb784c11cd85c18842e1eb3d",
+            "E": "d7535498f58f66e633bf87857a2259de88707c5c",
+            "J": "1e833c3b4f6778756fbb13980c150a082c20190f"
+          },
+          "root": "/private/tmp/glyph-config017/035-repair-snapshot-root-01612c9a",
+          "results": [
+            {
+              "case": "01_actual_accepted_positive_after_repair",
+              "exit": 0,
+              "synthetic_HEAD": "91c3d66997426c827b6aac4768cff3dc3b838fbd",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/01_actual_accepted_positive_after_repair.log",
+              "result": "PASS"
+            },
+            {
+              "case": "02_actual_strict_DONE_positive_after_repair",
+              "exit": 0,
+              "synthetic_HEAD": "6f937c8eff79048562bc674cf6750acead89887e",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/02_actual_strict_DONE_positive_after_repair.log",
+              "result": "PASS"
+            },
+            {
+              "case": "03_actual_sourcefree_E_after_repair",
+              "exit": 0,
+              "synthetic_HEAD": "16acbaac385c54eda1169670b45540ad9af68d3f",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/03_actual_sourcefree_E_after_repair.log",
+              "result": "PASS"
+            },
+            {
+              "case": "history_metadata_replace_restore_protocol",
+              "exit": 1,
+              "synthetic_HEAD": "3cdcc2e1712771921157d41ff790ed15fba4a89d",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/history_metadata_replace_restore_protocol.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "history_metadata_replace_restore_evidence",
+              "exit": 1,
+              "synthetic_HEAD": "0577697cfde40c5f0aeb646ded0c8406801accaa",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/history_metadata_replace_restore_evidence.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "history_metadata_replace_restore_result",
+              "exit": 1,
+              "synthetic_HEAD": "31bebea1f6fc4924bd603ef19b597e13803d2e62",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/history_metadata_replace_restore_result.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "actual_E_descendant_erase_restore",
+              "exit": 1,
+              "synthetic_HEAD": "6f642440dee490a8567bf0ce88b5d2b6cb24a1e9",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/actual_E_descendant_erase_restore.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "DONE_downgrade",
+              "exit": 1,
+              "synthetic_HEAD": "47b6e8dad7fe197e7e99f3ccefc1af1b4dd3918c",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/DONE_downgrade.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "accepted_PASS_erased",
+              "exit": 1,
+              "synthetic_HEAD": "581e3daf6085e5b9a17fea9927d5e27ef410ac91",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/accepted_PASS_erased.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "bad017_completion",
+              "exit": 1,
+              "synthetic_HEAD": "6e7731d28cd93ec535a7e2dc035ffe72b982b376",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/bad017_completion.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "catalog_removed",
+              "exit": 1,
+              "synthetic_HEAD": "0777ba9b47e9163b2fa04cc15ee2c10a016bbbfd",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/catalog_removed.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "catalog_replaced",
+              "exit": 1,
+              "synthetic_HEAD": "fcedea2bb9e3522b9c3b4bef14a0681743755760",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/catalog_replaced.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "catalog_erase_restore_history",
+              "exit": 1,
+              "synthetic_HEAD": "be7629201392358988878cdd4e69a44db0f452fc",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/catalog_erase_restore_history.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "catalog_before_first_E",
+              "exit": 1,
+              "synthetic_HEAD": "34207b059156074a0a1885a0d621da7b3d510aac",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/catalog_before_first_E.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "repaired_source_without_F_ancestry",
+              "exit": 1,
+              "synthetic_HEAD": "e794043fd8aa1339c3cde93ccc31d28f31e54c9d",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/repaired_source_without_F_ancestry.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "90_single_parent_accepted_descendant",
+              "exit": 0,
+              "synthetic_HEAD": "0f2de395c454262f9fbfd1ee0b9159b784f1e42f",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/90_single_parent_accepted_descendant.log",
+              "result": "PASS"
+            },
+            {
+              "case": "99_actual_strict_DONE_positive_recheck",
+              "exit": 0,
+              "synthetic_HEAD": "6f937c8eff79048562bc674cf6750acead89887e",
+              "log": "/private/tmp/glyph-config017/035-repair-snapshot-logs-01612c9a/99_actual_strict_DONE_positive_recheck.log",
+              "result": "PASS"
+            }
+          ],
+          "status": "PASS",
+          "shared_source_edited": false,
+          "real_hardware_acceptance": false,
+          "firmware_build": "NOT_RUN",
+          "validator_monkeypatches": false,
+          "final_implementation_approval": "NOT_CLAIMED",
+          "strict_DONE": "6f937c8eff79048562bc674cf6750acead89887e",
+          "sourcefree_snapshot": "16acbaac385c54eda1169670b45540ad9af68d3f",
+          "original_catalog_record": {
+            "work_order": "GP-CONFIG-017",
+            "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+            "build": "69390b4d110e36b397b6407ae1f6237bdece306e",
+            "parent": "979000fc30bea0194c33c5a53bcf96f8ea11d636",
+            "tree": "0d2cb5ac1a336648df174a2bae53bbcc7ef0e7f5",
+            "review_commit": "8f04a98df6043ea0eb784c11cd85c18842e1eb3d",
+            "evidence_commit": "d7535498f58f66e633bf87857a2259de88707c5c",
+            "integration": "7fc395407fcb6eb762ce1602d8d721611faffa45"
+          },
+          "frozen424_binding": {
+            "frozen_input": "424387e08695bd9c58d2a16326b93143c8ca405d",
+            "root": "/private/tmp/glyph-config017/035-frozen424-sourcefree-root",
+            "exit": 0,
+            "status": "PASS",
+            "module_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+            "module_blob": "56cb4488d9bf7e2f9c49a12f92cfef1d491febb6",
+            "aa_to424_paths": [
+              "tools/glyph_c017_campaign_transition.py"
+            ],
+            "raw_diff_sha256": "134297586bd6b86a306bb9c4c9bedfca882aec01f0df125e01952334200c9241",
+            "source_critical_delta": "NONE",
+            "exact_snapshot_byte_equivalence": true,
+            "log": "035-frozen424-sourcefree-native.log",
+            "firmware_build": "NOT_RUN",
+            "hardware_acceptance": "NOT_CLAIMED",
+            "synthetic_future_matrix_is_separate": true
+          },
+          "sourcefree_controls_scope_equivalence": {
+            "original": "aa203dc260456b94a1732ec20c62163269831da0",
+            "repaired": "424387e08695bd9c58d2a16326b93143c8ca405d",
+            "functions_unchanged": {
+              "_reviewed_build": true,
+              "_processor": true,
+              "_catalog": true,
+              "source_contract": true,
+              "predecessor_contract": true
+            },
+            "scope": "AST structural equality; sourcefree14row/review/build/protocol negatives carried only; no fresh negative execution claimed"
+          },
+          "all17_actual_outcomes_count": 17
+        }
+      },
+      "035-frozen424-proof.json": {
+        "path": "/private/tmp/glyph-config017/035-frozen424-proof.json",
+        "sha256": "a6714468753af5f5d93fc73472738d2a266f2536a555ed1193e78ded04e2f7dc",
+        "report": {
+          "frozen_input": "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "root": "/private/tmp/glyph-config017/035-frozen424-sourcefree-root",
+          "exit": 0,
+          "status": "PASS",
+          "module_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+          "module_blob": "56cb4488d9bf7e2f9c49a12f92cfef1d491febb6",
+          "aa_to424_paths": [
+            "tools/glyph_c017_campaign_transition.py"
+          ],
+          "raw_diff_sha256": "134297586bd6b86a306bb9c4c9bedfca882aec01f0df125e01952334200c9241",
+          "source_critical_delta": "NONE",
+          "exact_snapshot_byte_equivalence": true,
+          "log": "035-frozen424-sourcefree-native.log",
+          "firmware_build": "NOT_RUN",
+          "hardware_acceptance": "NOT_CLAIMED",
+          "synthetic_future_matrix_is_separate": true
+        }
+      },
+      "035-repair-scope-function-equivalence.json": {
+        "path": "/private/tmp/glyph-config017/035-repair-scope-function-equivalence.json",
+        "sha256": "50e3fef5b96e20444fd9d0115f21b4566636c9d1a21f77fd4b7c418e3bccd266",
+        "report": {
+          "original": "aa203dc260456b94a1732ec20c62163269831da0",
+          "repaired": "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "functions_unchanged": {
+            "_reviewed_build": true,
+            "_processor": true,
+            "_catalog": true,
+            "source_contract": true,
+            "predecessor_contract": true
+          },
+          "scope": "AST structural equality; sourcefree14row/review/build/protocol negatives carried only; no fresh negative execution claimed"
+        }
+      },
+      "035-sourcefree-negative-report.json": {
+        "path": "/private/tmp/glyph-config017/035-sourcefree-negative-report.json",
+        "sha256": "bc3b5b1cfd17ce19570cac4fa67ad97b74adb283f8c73400e1aa06a5420429be",
+        "report": {
+          "classification": "SYNTHETIC_TEST_ONLY",
+          "frozen_input": "aa203dc260456b94a1732ec20c62163269831da0",
+          "module_sha256": "3b30b320b6d9703949e8fc3d9831f96bc51fce75947f43e44ee3eb13ff8c6cbd",
+          "results": [
+            {
+              "case": "00_first_E_positive_control",
+              "exit": 0,
+              "synthetic_HEAD": "9ad524cb0edd333ef1290879bfe4576a4e779895",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/00_first_E_positive_control.log",
+              "result": "PASS"
+            },
+            {
+              "case": "missing_row_identity",
+              "exit": 1,
+              "synthetic_HEAD": "b4cc30318085da21383822882ad0def16df070f7",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/missing_row_identity.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "missing_row_static_rgb",
+              "exit": 1,
+              "synthetic_HEAD": "03873840b956194aec5565bd4e645eb7dcc56042",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/missing_row_static_rgb.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "missing_row_dynamic_rgb",
+              "exit": 1,
+              "synthetic_HEAD": "1b62636ddbc357f661440cb37c3e5219a27bc7f8",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/missing_row_dynamic_rgb.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "missing_row_mode_changes",
+              "exit": 1,
+              "synthetic_HEAD": "9f43156920f25ccb7397af43da2918b6ddb5004b",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/missing_row_mode_changes.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "missing_row_reconnect_reboot",
+              "exit": 1,
+              "synthetic_HEAD": "a157a080ac1b55c1c7ccd93e9cc6561dd71ae7b9",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/missing_row_reconnect_reboot.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "missing_row_ultimate_x1",
+              "exit": 1,
+              "synthetic_HEAD": "91b2e5936e6177f8eba24b297ace58a236e93bc4",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/missing_row_ultimate_x1.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "missing_row_owner_config_restoration",
+              "exit": 1,
+              "synthetic_HEAD": "a04cc2ccf77687d93372dc48a992f29732980d4e",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/missing_row_owner_config_restoration.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "failing_required_row",
+              "exit": 1,
+              "synthetic_HEAD": "2edd391302a4a9bc22cae2a3ce1b0cc31664c4ea",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/failing_required_row.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "duplicate_required_row",
+              "exit": 1,
+              "synthetic_HEAD": "8f5ec2def09ecd108ae5ea2c17e527e22a1eef09",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/duplicate_required_row.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "evidence_gaps",
+              "exit": 1,
+              "synthetic_HEAD": "2e4a5c4a149a6f8e5648db2624d14f5b69f5fcb7",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/evidence_gaps.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "review_missing",
+              "exit": 1,
+              "synthetic_HEAD": "9c6f834da034e4e76d15026efcedf86c6f3fb7c9",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/review_missing.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "review_failed",
+              "exit": 1,
+              "synthetic_HEAD": "d1f2eef94b6182e5428620fb34578f5672d9cfa7",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/review_failed.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "build_identity_wrong",
+              "exit": 1,
+              "synthetic_HEAD": "78ded248d5752ab4d369480511282190488db9af",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/build_identity_wrong.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "protocol_required_token_missing",
+              "exit": 1,
+              "synthetic_HEAD": "b747f9bb1f7d4b6a6996a86d7762c0961a0b2df9",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/protocol_required_token_missing.log",
+              "result": "REJECTED"
+            },
+            {
+              "case": "99_first_E_positive_recheck",
+              "exit": 0,
+              "synthetic_HEAD": "90d9c590902f3108f0195d38e32770464ac6156b",
+              "log": "/private/tmp/glyph-config017/035-sourcefree-negative-logs-aa203dc2/99_first_E_positive_recheck.log",
+              "result": "PASS"
+            }
+          ],
+          "status": "PASS",
+          "real_hardware_acceptance": false,
+          "firmware_build": "NOT_RUN",
+          "validator_monkeypatches": false
+        }
+      },
+      "035-single-parent-integration-report.json": {
+        "path": "/private/tmp/glyph-config017/035-single-parent-integration-report.json",
+        "sha256": "31570dcb4c731476504193cd3aa823baf5234682f7b31b1507988625087c25aa",
+        "report": {
+          "classification": "SYNTHETIC_TEST_ONLY",
+          "status": "PASS",
+          "module_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+          "root": "/private/tmp/glyph-config017/035-single-parent-integration-root",
+          "actual_single_parent_integration": "43f124ea777a9e6ac3dbbe82f381f33ad4a23495",
+          "sole_parent": "7fc395407fcb6eb762ce1602d8d721611faffa45",
+          "original_merge_ancestors": [
+            "d7535498f58f66e633bf87857a2259de88707c5c",
+            "69390b4d110e36b397b6407ae1f6237bdece306e"
+          ],
+          "first_catalog": "7d82a46e90106af1fcb7c41954ca297b67e722f2",
+          "strict_DONE": "db672200b8e1413d3a94d0f697439a6e0e0f742a",
+          "results": [
+            {
+              "case": "01_single_parent_integration_catalog_positive",
+              "exit": 0,
+              "synthetic_HEAD": "7d82a46e90106af1fcb7c41954ca297b67e722f2",
+              "log": "/private/tmp/glyph-config017/035-single-parent-integration-logs/01_single_parent_integration_catalog_positive.log",
+              "result": "PASS"
+            },
+            {
+              "case": "02_single_parent_integration_strict_DONE_positive",
+              "exit": 0,
+              "synthetic_HEAD": "db672200b8e1413d3a94d0f697439a6e0e0f742a",
+              "log": "/private/tmp/glyph-config017/035-single-parent-integration-logs/02_single_parent_integration_strict_DONE_positive.log",
+              "result": "PASS"
+            }
+          ],
+          "firmware_build": "NOT_RUN",
+          "real_hardware_acceptance": false,
+          "native_validators_monkeypatched": false
+        }
+      },
+      "035-scope-source-report.json": {
+        "path": "/private/tmp/glyph-config017/035-scope-source-report.json",
+        "sha256": "d31042b6b5419cba7f427f773652de70c2d5641888678b8452205fa833953864",
+        "report": {
+          "commit": "aa203dc260456b94a1732ec20c62163269831da0",
+          "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+          "clone": "/private/tmp/glyph-config017/035-scope-clone",
+          "scope": "actual full consumers and live disposable worktree negatives; no hardware/build claim",
+          "positive": [
+            {
+              "context": "feature",
+              "checks": [
+                {
+                  "checker": "docs_agent_surface",
+                  "pass": true,
+                  "branch": "- branch: codex/035-scope-feature",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/feature-check_glyph_docs_agent_surface.log"
+                },
+                {
+                  "checker": "generated_source_owned_generator_contract",
+                  "pass": true,
+                  "branch": "- branch: codex/035-scope-feature",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/feature-check_glyph_generated_source_owned_generator_contract.log"
+                },
+                {
+                  "checker": "generated_source_owned_artifact_install",
+                  "pass": true,
+                  "branch": "- branch: codex/035-scope-feature",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/feature-check_glyph_generated_source_owned_artifact_install.log"
+                },
+                {
+                  "checker": "coordinate_native_runtime_profile_contract",
+                  "pass": true,
+                  "branch": "- branch: codex/035-scope-feature",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/feature-check_glyph_coordinate_native_runtime_profile_contract.log"
+                },
+                {
+                  "checker": "generated_source_owned_baseline_artifact",
+                  "pass": true,
+                  "branch": "- branch: codex/035-scope-feature",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/feature-check_glyph_generated_source_owned_baseline_artifact.log"
+                }
+              ]
+            },
+            {
+              "context": "detached",
+              "checks": [
+                {
+                  "checker": "docs_agent_surface",
+                  "pass": true,
+                  "branch": "- branch: detached HEAD",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/detached-check_glyph_docs_agent_surface.log"
+                },
+                {
+                  "checker": "generated_source_owned_generator_contract",
+                  "pass": true,
+                  "branch": "- branch: detached HEAD",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/detached-check_glyph_generated_source_owned_generator_contract.log"
+                },
+                {
+                  "checker": "generated_source_owned_artifact_install",
+                  "pass": true,
+                  "branch": "- branch: detached HEAD",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/detached-check_glyph_generated_source_owned_artifact_install.log"
+                },
+                {
+                  "checker": "coordinate_native_runtime_profile_contract",
+                  "pass": true,
+                  "branch": "- branch: detached HEAD",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/detached-check_glyph_coordinate_native_runtime_profile_contract.log"
+                },
+                {
+                  "checker": "generated_source_owned_baseline_artifact",
+                  "pass": true,
+                  "branch": "- branch: detached HEAD",
+                  "log": "/private/tmp/glyph-config017/035-scope-logs/detached-check_glyph_generated_source_owned_baseline_artifact.log"
+                }
+              ]
+            }
+          ],
+          "negative": [
+            {
+              "case": "protected-source",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 critical live mode/bytes substitution: src/modes/Ultimate.cpp"
+            },
+            {
+              "case": "protected-hal",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 critical live mode/bytes substitution: HAL/pico/include/comms/NeoPixelBackend.hpp"
+            },
+            {
+              "case": "hal-sibling",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 dirty critical input: HAL/pico/include/comms/035_scope_sibling.hpp"
+            },
+            {
+              "case": "build-addition",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 dirty critical input: builder_scripts/035_scope_negative.py"
+            },
+            {
+              "case": "ignored-critical",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 dirty critical input: HAL/pico/include/comms/035_scope_ignored.hpp"
+            },
+            {
+              "case": "symlink-critical",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 critical missing/symlink input: HAL/pico/include/comms/NeoPixelBackend.hpp"
+            },
+            {
+              "case": "mode-critical",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 critical live mode/bytes substitution: HAL/pico/include/comms/NeoPixelBackend.hpp"
+            },
+            {
+              "case": "pathalias-backslash",
+              "exit": 1,
+              "expected_rejection": "AgentSurfaceError: 017 dirty path outside finite governance: HAL\\pico\\035_scope_alias.hpp",
+              "log": "/private/tmp/glyph-config017/035-scope-logs/negative-pathalias.log"
+            }
+          ],
+          "clone_clean": true,
+          "all_expected": true
+        }
+      },
+      "035-native-negatives.json": {
+        "path": "/private/tmp/glyph-config017/035-native-negatives.json",
+        "sha256": "40c487f8219b07428c5cea883c77336fb8041dd85861c244a3b93c79977cad96",
+        "report": {
+          "frozen_sha": "aa203dc260456b94a1732ec20c62163269831da0",
+          "status": "FAIL",
+          "synthetic_test_only": true,
+          "actual_hardware_acceptance": false,
+          "results": [
+            {
+              "case": "real_frozen_baseline",
+              "status": "PASS",
+              "seconds": 12.612503167008981,
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "critical_dirty",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 9.37411274999613,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_dirty.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "critical_staged",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 9.751986750023207,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "critical_committed",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.24244654198992,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_committed.log",
+              "head": "a5fb01bd2ba340d1b42367c5502f34769fa4fc98"
+            },
+            {
+              "case": "protected_sibling",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.193107416009298,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/protected_sibling.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "source_addition",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.138472165999701,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/source_addition.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "build_addition",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.054683624999598,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/build_addition.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "critical_assume_unchanged",
+              "expected_diagnostic": [
+                "017 critical index flag trap"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 9.769222917006118,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_assume_unchanged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "critical_skip_worktree",
+              "expected_diagnostic": [
+                "017 critical index flag trap"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.494188084005145,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_skip_worktree.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "fixture_substitution",
+              "expected_diagnostic": [
+                "017 candidate host substitution",
+                "017 changed original016"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.340715583006386,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/fixture_substitution.log",
+              "head": "2b8777049352e2b5b55f6b2c3c88013c91d459b5"
+            },
+            {
+              "case": "harness_substitution",
+              "expected_diagnostic": [
+                "017 candidate host substitution",
+                "017 changed original016"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.053948874992784,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/harness_substitution.log",
+              "head": "f35b2b372100ad45629aa2b6a9dc7d3026fc7378"
+            },
+            {
+              "case": "original016_checker_substitution",
+              "expected_diagnostic": [
+                "017 candidate host substitution",
+                "017 changed original016"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 11.55887924999115,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/original016_checker_substitution.log",
+              "head": "8e071557b96d64ea947acfb999305966bd0ac716"
+            },
+            {
+              "case": "accepted014_live",
+              "expected_diagnostic": [
+                "017 live/index predecessor queue substitution",
+                "017 intervening revision erased/downgraded"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.442212000023574,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/accepted014_live.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "accepted020_staged",
+              "expected_diagnostic": [
+                "017 live/index predecessor queue substitution",
+                "017 intervening revision erased/downgraded"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.512097250000807,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/accepted020_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "accepted014_committed",
+              "expected_diagnostic": [
+                "017 live/index predecessor queue substitution",
+                "017 intervening revision erased/downgraded"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.23868791598943,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/accepted014_committed.log",
+              "head": "4651b29e86444576300cc658248474fd9a57e49e"
+            },
+            {
+              "case": "predecessor_metadata_live",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.263778374996036,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_live.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "predecessor_metadata_staged",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.595992334012408,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "predecessor_metadata_mode",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 10.515416082984302,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_mode.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "predecessor_metadata_flags",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 0,
+              "status": "FAIL",
+              "seconds": 13.900368000002345,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_flags.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "catalog_boolean_schema",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.882241833023727,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_boolean_schema.log",
+              "head": "c5185ccbeca0972ad1a56733cf08210cc94a019f"
+            },
+            {
+              "case": "catalog_staged",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.72657224998693,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "catalog_flags",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.953524250013288,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_flags.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "catalog_mode",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 10.762375374994008,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_mode.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_removed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.710381999990204,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_removed_runner.log",
+              "head": "b8c364656ce14c996a32c285eaf103556ca68013"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_removed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.046892042009858,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_removed_native.log",
+              "head": "b8c364656ce14c996a32c285eaf103556ca68013"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_renamed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 5.100635874987347,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_renamed_runner.log",
+              "head": "7c83d098320853c5e29b7eed86879ebd91b08d1c"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_renamed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.27934495799127,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_renamed_native.log",
+              "head": "7c83d098320853c5e29b7eed86879ebd91b08d1c"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_integer_boolean_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 5.063015166000696,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_integer_boolean_runner.log",
+              "head": "0f4dd729d9f0fee33c86cf0f07717f91e1cbe93b"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_integer_boolean_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.089981500001159,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_integer_boolean_native.log",
+              "head": "0f4dd729d9f0fee33c86cf0f07717f91e1cbe93b"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_argument_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 5.592483749991516,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_argument_runner.log",
+              "head": "cfc325b5e91129f4d9755b7db25ad7c5c7bda7bf"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_argument_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.967672417027643,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_argument_native.log",
+              "head": "cfc325b5e91129f4d9755b7db25ad7c5c7bda7bf"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_historical_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 4.893544042017311,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_historical_runner.log",
+              "head": "236864bf08421a333ea3a74045736506db2060bb"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_historical_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.543018083990319,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_historical_native.log",
+              "head": "236864bf08421a333ea3a74045736506db2060bb"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_removed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.401045665988931,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_removed_runner.log",
+              "head": "e4a557db2d36e6019455b001014f9d23dfcc59f6"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_removed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.813561666989699,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_removed_native.log",
+              "head": "e4a557db2d36e6019455b001014f9d23dfcc59f6"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_renamed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.397866875020554,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_renamed_runner.log",
+              "head": "c5c5924e4fcaa2f7d342c10eb3b8bac0c9defb4d"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_renamed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.993332834012108,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_renamed_native.log",
+              "head": "c5c5924e4fcaa2f7d342c10eb3b8bac0c9defb4d"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_integer_boolean_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.036992415989516,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_integer_boolean_runner.log",
+              "head": "523f94c1b01746ca54f6a903b18bde3458e0a470"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_integer_boolean_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 0,
+              "status": "FAIL",
+              "seconds": 12.988854499999434,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_integer_boolean_native.log",
+              "head": "523f94c1b01746ca54f6a903b18bde3458e0a470"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_argument_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.036357166012749,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_argument_runner.log",
+              "head": "e8d3b545d98ec498a777c3e2cdc60fa327400b7a"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_argument_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.7598565829976,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_argument_native.log",
+              "head": "e8d3b545d98ec498a777c3e2cdc60fa327400b7a"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_historical_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.32186837500194,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_historical_runner.log",
+              "head": "9d038b9b1f50c3b932c66200750c71b63e3895c7"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_historical_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.69450462498935,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_historical_native.log",
+              "head": "9d038b9b1f50c3b932c66200750c71b63e3895c7"
+            }
+          ]
+        }
+      },
+      "035-native-negative-audit.json": {
+        "path": "/private/tmp/glyph-config017/035-native-negative-audit.json",
+        "sha256": "d0da6c2b3dd927e61b61c51e1ffbb2b71c768413076a9f06c7ae77f1e6d17b2c",
+        "report": {
+          "original_raw_report_sha256": "40c487f8219b07428c5cea883c77336fb8041dd85861c244a3b93c79977cad96",
+          "original_report_status": "FAIL",
+          "frozen_aa_sha": "aa203dc260456b94a1732ec20c62163269831da0",
+          "interpretation": "Preserve actual raw native outcomes; five initial temporary-harness diagnostic strings missed the correct native rejection, two true acceptance defects repaired and rerun separately at exact424 module. No raw FAIL rewritten to PASS.",
+          "results": [
+            {
+              "case": "real_frozen_baseline",
+              "status": "PASS",
+              "seconds": 12.612503167008981,
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "critical_dirty",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 9.37411274999613,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_dirty.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "raw_harness_status": "FAIL",
+              "actual_expected_control": "REJECTED",
+              "native_rejection": "017 critical live mode/bytes substitution"
+            },
+            {
+              "case": "critical_staged",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 9.751986750023207,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "raw_harness_status": "FAIL",
+              "actual_expected_control": "REJECTED",
+              "native_rejection": "017 critical index differs from committed tree"
+            },
+            {
+              "case": "critical_committed",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.24244654198992,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_committed.log",
+              "head": "a5fb01bd2ba340d1b42367c5502f34769fa4fc98",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "protected_sibling",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.193107416009298,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/protected_sibling.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "source_addition",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.138472165999701,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/source_addition.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "build_addition",
+              "expected_diagnostic": [
+                "017 current source outside",
+                "017 dirty critical",
+                "017 dirty path outside"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.054683624999598,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/build_addition.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "critical_assume_unchanged",
+              "expected_diagnostic": [
+                "017 critical index flag trap"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 9.769222917006118,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_assume_unchanged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "critical_skip_worktree",
+              "expected_diagnostic": [
+                "017 critical index flag trap"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.494188084005145,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/critical_skip_worktree.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "fixture_substitution",
+              "expected_diagnostic": [
+                "017 candidate host substitution",
+                "017 changed original016"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.340715583006386,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/fixture_substitution.log",
+              "head": "2b8777049352e2b5b55f6b2c3c88013c91d459b5",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "harness_substitution",
+              "expected_diagnostic": [
+                "017 candidate host substitution",
+                "017 changed original016"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.053948874992784,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/harness_substitution.log",
+              "head": "f35b2b372100ad45629aa2b6a9dc7d3026fc7378",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "original016_checker_substitution",
+              "expected_diagnostic": [
+                "017 candidate host substitution",
+                "017 changed original016"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 11.55887924999115,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/original016_checker_substitution.log",
+              "head": "8e071557b96d64ea947acfb999305966bd0ac716",
+              "raw_harness_status": "FAIL",
+              "actual_expected_control": "REJECTED",
+              "native_rejection": "017 unreviewed governance/source delta"
+            },
+            {
+              "case": "accepted014_live",
+              "expected_diagnostic": [
+                "017 live/index predecessor queue substitution",
+                "017 intervening revision erased/downgraded"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.442212000023574,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/accepted014_live.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "accepted020_staged",
+              "expected_diagnostic": [
+                "017 live/index predecessor queue substitution",
+                "017 intervening revision erased/downgraded"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.512097250000807,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/accepted020_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "accepted014_committed",
+              "expected_diagnostic": [
+                "017 live/index predecessor queue substitution",
+                "017 intervening revision erased/downgraded"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.23868791598943,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/accepted014_committed.log",
+              "head": "4651b29e86444576300cc658248474fd9a57e49e",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "predecessor_metadata_live",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.263778374996036,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_live.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "predecessor_metadata_staged",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.595992334012408,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "predecessor_metadata_mode",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 10.515416082984302,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_mode.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "raw_harness_status": "FAIL",
+              "actual_expected_control": "REJECTED",
+              "native_rejection": "nonregular proof input"
+            },
+            {
+              "case": "predecessor_metadata_flags",
+              "expected_diagnostic": [
+                "017 live/index predecessor metadata",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 0,
+              "status": "FAIL",
+              "seconds": 13.900368000002345,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/predecessor_metadata_flags.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "FALSE_ACCEPTANCE_REPAIRED_SEPARATELY"
+            },
+            {
+              "case": "catalog_boolean_schema",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.882241833023727,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_boolean_schema.log",
+              "head": "c5185ccbeca0972ad1a56733cf08210cc94a019f",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "catalog_staged",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.72657224998693,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_staged.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "catalog_flags",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.953524250013288,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_flags.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "catalog_mode",
+              "expected_diagnostic": [
+                "017 catalog fields",
+                "017 uncommitted accepted catalog",
+                "017 host index",
+                "017 host working",
+                "017 host index flag",
+                "unsafe017 host"
+              ],
+              "exit_code": 1,
+              "status": "FAIL",
+              "seconds": 10.762375374994008,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/catalog_mode.log",
+              "head": "aa203dc260456b94a1732ec20c62163269831da0",
+              "raw_harness_status": "FAIL",
+              "actual_expected_control": "REJECTED",
+              "native_rejection": "nonregular proof input"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_removed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.710381999990204,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_removed_runner.log",
+              "head": "b8c364656ce14c996a32c285eaf103556ca68013",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_removed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.046892042009858,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_removed_native.log",
+              "head": "b8c364656ce14c996a32c285eaf103556ca68013",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_renamed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 5.100635874987347,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_renamed_runner.log",
+              "head": "7c83d098320853c5e29b7eed86879ebd91b08d1c",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_renamed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.27934495799127,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_renamed_native.log",
+              "head": "7c83d098320853c5e29b7eed86879ebd91b08d1c",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_integer_boolean_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 5.063015166000696,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_integer_boolean_runner.log",
+              "head": "0f4dd729d9f0fee33c86cf0f07717f91e1cbe93b",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_integer_boolean_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.089981500001159,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_integer_boolean_native.log",
+              "head": "0f4dd729d9f0fee33c86cf0f07717f91e1cbe93b",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_argument_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 5.592483749991516,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_argument_runner.log",
+              "head": "cfc325b5e91129f4d9755b7db25ad7c5c7bda7bf",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_argument_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 11.967672417027643,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_argument_native.log",
+              "head": "cfc325b5e91129f4d9755b7db25ad7c5c7bda7bf",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_historical_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 4.893544042017311,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_historical_runner.log",
+              "head": "236864bf08421a333ea3a74045736506db2060bb",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "neopixel_null_sendreport_characterization_historical_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.543018083990319,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/neopixel_null_sendreport_characterization_historical_native.log",
+              "head": "236864bf08421a333ea3a74045736506db2060bb",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_removed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.401045665988931,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_removed_runner.log",
+              "head": "e4a557db2d36e6019455b001014f9d23dfcc59f6",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_removed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.813561666989699,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_removed_native.log",
+              "head": "e4a557db2d36e6019455b001014f9d23dfcc59f6",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_renamed_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.397866875020554,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_renamed_runner.log",
+              "head": "c5c5924e4fcaa2f7d342c10eb3b8bac0c9defb4d",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_renamed_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.993332834012108,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_renamed_native.log",
+              "head": "c5c5924e4fcaa2f7d342c10eb3b8bac0c9defb4d",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_integer_boolean_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.036992415989516,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_integer_boolean_runner.log",
+              "head": "523f94c1b01746ca54f6a903b18bde3458e0a470",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_integer_boolean_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 0,
+              "status": "FAIL",
+              "seconds": 12.988854499999434,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_integer_boolean_native.log",
+              "head": "523f94c1b01746ca54f6a903b18bde3458e0a470",
+              "actual_expected_control": "FALSE_ACCEPTANCE_REPAIRED_SEPARATELY"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_argument_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.036357166012749,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_argument_runner.log",
+              "head": "e8d3b545d98ec498a777c3e2cdc60fa327400b7a",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_argument_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.7598565829976,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_argument_native.log",
+              "head": "e8d3b545d98ec498a777c3e2cdc60fa327400b7a",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_historical_runner",
+              "expected_diagnostic": [
+                "missing required035",
+                "reserved035",
+                "unsafe current aggregate",
+                "historical checker"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 12.32186837500194,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_historical_runner.log",
+              "head": "9d038b9b1f50c3b932c66200750c71b63e3895c7",
+              "actual_expected_control": "PASS"
+            },
+            {
+              "case": "gp_config017_neopixel_repaired_current_historical_native",
+              "expected_diagnostic": [
+                "017 manifest lane",
+                "017 original016 wrapper",
+                "017 repaired-current wrapper"
+              ],
+              "exit_code": 1,
+              "status": "PASS",
+              "seconds": 10.69450462498935,
+              "log": "/private/tmp/glyph-config017/negative035-aa203dc260/gp_config017_neopixel_repaired_current_historical_native.log",
+              "head": "9d038b9b1f50c3b932c66200750c71b63e3895c7",
+              "actual_expected_control": "PASS"
+            }
+          ]
+        }
+      },
+      "035-frozen-aa203-repeat-validation.json": {
+        "path": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-validation.json",
+        "sha256": "0d46bb236011c4222698038b1dcb0ded9042c345bd5b17aad6e5cb615cc07864",
+        "report": {
+          "head": "aa203dc260456b94a1732ec20c62163269831da0",
+          "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+          "status": "FAIL",
+          "results": [
+            {
+              "id": "gp_val035_c017_transition",
+              "command": [
+                "python3",
+                "tools/test_glyph_c017_campaign_transition.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 23.37990525001078,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-01-gp_val035_c017_transition.log"
+            },
+            {
+              "id": "gp_config019_usb_name_selection",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config019_usb_name_selection.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 82.64936420900631,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-02-gp_config019_usb_name_selection.log"
+            },
+            {
+              "id": "gp_kbd_001_keyboard_pipeline",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 16.054747040994698,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-03-gp_kbd_001_keyboard_pipeline.log"
+            },
+            {
+              "id": "gp_val034_c014_transition",
+              "command": [
+                "python3",
+                "tools/test_glyph_c014_campaign_transition.py"
+              ],
+              "status": "FAIL_OR_INCOMPLETE",
+              "exit_code": 1,
+              "failure_kind": null,
+              "duration_seconds": 18.479412375018,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-04-gp_val034_c014_transition.log"
+            },
+            {
+              "id": "gp_config014_modifier_capacity",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config014_modifier_capacity.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 55.50720191601431,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-05-gp_config014_modifier_capacity.log"
+            },
+            {
+              "id": "gp_config_007_transaction_stage_schema",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config_007_transaction_stage_schema.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.08547466600430198,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-06-gp_config_007_transaction_stage_schema.log"
+            },
+            {
+              "id": "gp_config_012_button_mask_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config012_button_mask_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 32.244234957994195,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-07-gp_config_012_button_mask_characterization.log"
+            },
+            {
+              "id": "gp_config_013_usb_default_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config013_usb_default_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 16.588603084004717,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-08-gp_config_013_usb_default_characterization.log"
+            },
+            {
+              "id": "gp_config020_button_validation",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config020_button_validation.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 6.161466540972469,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-09-gp_config020_button_validation.log"
+            },
+            {
+              "id": "gp_config_010_integration_semantic_correspondence",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 13.04359137499705,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-10-gp_config_010_integration_semantic_correspondence.log"
+            },
+            {
+              "id": "configurator_setconfig_transaction",
+              "command": [
+                "python3",
+                "tools/check_glyph_configurator_setconfig_transaction.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 46.33419129200047,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-11-configurator_setconfig_transaction.log"
+            },
+            {
+              "id": "current_config_persistence_recovery_research",
+              "command": [
+                "python3",
+                "tools/check_glyph_current_config_persistence_recovery_research.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 34.73043741701986,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-12-current_config_persistence_recovery_research.log"
+            },
+            {
+              "id": "getconfig_raw_load_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_getconfig_raw_load_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 46.19562333301292,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-13-getconfig_raw_load_characterization.log"
+            },
+            {
+              "id": "neopixel_null_sendreport_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 27.129943500010995,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-14-neopixel_null_sendreport_characterization.log"
+            },
+            {
+              "id": "setconfig_runtime_rebinding_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_setconfig_runtime_rebinding_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 23.83261629199842,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-15-setconfig_runtime_rebinding_characterization.log"
+            },
+            {
+              "id": "config_menu_invalid_state_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_menu_invalid_state_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 13.11106004199246,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-16-config_menu_invalid_state_characterization.log"
+            },
+            {
+              "id": "custom_modifier_cache_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_custom_modifier_cache_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 26.6891432920238,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-17-custom_modifier_cache_characterization.log"
+            },
+            {
+              "id": "validation_health",
+              "command": [
+                "python3",
+                "tools/check_glyph_runtime_config_validation_health.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.09727858297992498,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-18-validation_health.log"
+            },
+            {
+              "id": "generated_source_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_generator_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 16.580556750006508,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-19-generated_source_contract.log"
+            },
+            {
+              "id": "generated_baseline_artifact",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 24.883326874987688,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-20-generated_baseline_artifact.log"
+            },
+            {
+              "id": "artifact_install",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_artifact_install.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 13.99351862500771,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-21-artifact_install.log"
+            },
+            {
+              "id": "coordinate_native_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 23.28634104100638,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-22-coordinate_native_contract.log"
+            },
+            {
+              "id": "docs_navigation",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_navigation.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.13325100002111867,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-23-docs_navigation.log"
+            },
+            {
+              "id": "docs_agent_surface",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_agent_surface.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 11.303781333001098,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-24-docs_agent_surface.log"
+            },
+            {
+              "id": "agent_framework",
+              "command": [
+                "python3",
+                "tools/check_glyph_agent_framework_docs.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 15.409183957992354,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-25-agent_framework.log"
+            },
+            {
+              "id": "agentic_sequence",
+              "command": [
+                "python3",
+                "tools/check_glyph_agentic_sequence_protocol.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.0843530000129249,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-26-agentic_sequence.log"
+            },
+            {
+              "id": "gp_config017_neopixel_repaired_current",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py",
+                "--repaired-current"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 51.58594987500692,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-27-gp_config017_neopixel_repaired_current.log"
+            },
+            {
+              "id": "check_glyph_checker_census",
+              "command": [
+                "python3",
+                "tools/check_glyph_checker_census.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 1.8988714999868535,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-28-check_glyph_checker_census.log"
+            },
+            {
+              "id": "test_glyph_docs_agent_surface_integration",
+              "command": [
+                "python3",
+                "tools/test_glyph_docs_agent_surface_integration.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 7.087179041001946,
+              "log": "/private/tmp/glyph-config017/035-frozen-aa203-repeat-29-test_glyph_docs_agent_surface_integration.log"
+            }
+          ],
+          "full_native_fingerprint": {
+            "before": "89af86f064c27324be4e397c007de8bf6a380a294c740a96b41722f01b9c0461",
+            "after": "89af86f064c27324be4e397c007de8bf6a380a294c740a96b41722f01b9c0461",
+            "result": "MATCH"
+          },
+          "firmware_build": false,
+          "hardware_acceptance": false
+        }
+      },
+      "035-composed-aa203-repeat-validation.json": {
+        "path": "/private/tmp/glyph-config017/035-composed-aa203-repeat-validation.json",
+        "sha256": "8c7e07593819d9084f73880d0309b3d5d260f75c93253ca6216201bd4d70e46b",
+        "report": {
+          "head": "fabf399494be68f58af6aea37d70c497515f18ac",
+          "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+          "status": "FAIL",
+          "results": [
+            {
+              "id": "gp_val035_c017_transition",
+              "command": [
+                "python3",
+                "tools/test_glyph_c017_campaign_transition.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 23.71012858301401,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-01-gp_val035_c017_transition.log"
+            },
+            {
+              "id": "gp_config019_usb_name_selection",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config019_usb_name_selection.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 82.92353208301938,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-02-gp_config019_usb_name_selection.log"
+            },
+            {
+              "id": "gp_kbd_001_keyboard_pipeline",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 14.358932625007583,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-03-gp_kbd_001_keyboard_pipeline.log"
+            },
+            {
+              "id": "gp_val034_c014_transition",
+              "command": [
+                "python3",
+                "tools/test_glyph_c014_campaign_transition.py"
+              ],
+              "status": "FAIL_OR_INCOMPLETE",
+              "exit_code": 1,
+              "failure_kind": null,
+              "duration_seconds": 18.624070915975608,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-04-gp_val034_c014_transition.log"
+            },
+            {
+              "id": "gp_config014_modifier_capacity",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config014_modifier_capacity.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 84.25978100000066,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-05-gp_config014_modifier_capacity.log"
+            },
+            {
+              "id": "gp_config_007_transaction_stage_schema",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config_007_transaction_stage_schema.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.07705683400854468,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-06-gp_config_007_transaction_stage_schema.log"
+            },
+            {
+              "id": "gp_config_012_button_mask_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config012_button_mask_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 30.934926832997007,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-07-gp_config_012_button_mask_characterization.log"
+            },
+            {
+              "id": "gp_config_013_usb_default_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config013_usb_default_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 16.392961750010727,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-08-gp_config_013_usb_default_characterization.log"
+            },
+            {
+              "id": "gp_config020_button_validation",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config020_button_validation.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 6.168049375002738,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-09-gp_config020_button_validation.log"
+            },
+            {
+              "id": "gp_config_010_integration_semantic_correspondence",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 13.065459332981845,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-10-gp_config_010_integration_semantic_correspondence.log"
+            },
+            {
+              "id": "configurator_setconfig_transaction",
+              "command": [
+                "python3",
+                "tools/check_glyph_configurator_setconfig_transaction.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 45.43144637500518,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-11-configurator_setconfig_transaction.log"
+            },
+            {
+              "id": "current_config_persistence_recovery_research",
+              "command": [
+                "python3",
+                "tools/check_glyph_current_config_persistence_recovery_research.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 34.72723429201869,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-12-current_config_persistence_recovery_research.log"
+            },
+            {
+              "id": "getconfig_raw_load_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_getconfig_raw_load_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 45.47057633299846,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-13-getconfig_raw_load_characterization.log"
+            },
+            {
+              "id": "neopixel_null_sendreport_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 26.003489833994536,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-14-neopixel_null_sendreport_characterization.log"
+            },
+            {
+              "id": "setconfig_runtime_rebinding_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_setconfig_runtime_rebinding_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 36.68525712500559,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-15-setconfig_runtime_rebinding_characterization.log"
+            },
+            {
+              "id": "config_menu_invalid_state_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_menu_invalid_state_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 13.221016416006023,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-16-config_menu_invalid_state_characterization.log"
+            },
+            {
+              "id": "custom_modifier_cache_characterization",
+              "command": [
+                "python3",
+                "tools/check_glyph_custom_modifier_cache_characterization.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 102.01056091699866,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-17-custom_modifier_cache_characterization.log"
+            },
+            {
+              "id": "validation_health",
+              "command": [
+                "python3",
+                "tools/check_glyph_runtime_config_validation_health.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.08562687499215826,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-18-validation_health.log"
+            },
+            {
+              "id": "generated_source_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_generator_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 16.111771916999714,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-19-generated_source_contract.log"
+            },
+            {
+              "id": "generated_baseline_artifact",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 24.39513583300868,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-20-generated_baseline_artifact.log"
+            },
+            {
+              "id": "artifact_install",
+              "command": [
+                "python3",
+                "tools/check_glyph_generated_source_owned_artifact_install.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 13.500119082978927,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-21-artifact_install.log"
+            },
+            {
+              "id": "coordinate_native_contract",
+              "command": [
+                "python3",
+                "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 21.500115000002552,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-22-coordinate_native_contract.log"
+            },
+            {
+              "id": "docs_navigation",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_navigation.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.11723774997517467,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-23-docs_navigation.log"
+            },
+            {
+              "id": "docs_agent_surface",
+              "command": [
+                "python3",
+                "tools/check_glyph_docs_agent_surface.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 11.39478354199673,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-24-docs_agent_surface.log"
+            },
+            {
+              "id": "agent_framework",
+              "command": [
+                "python3",
+                "tools/check_glyph_agent_framework_docs.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 14.596164957998553,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-25-agent_framework.log"
+            },
+            {
+              "id": "agentic_sequence",
+              "command": [
+                "python3",
+                "tools/check_glyph_agentic_sequence_protocol.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 0.08909766699071042,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-26-agentic_sequence.log"
+            },
+            {
+              "id": "gp_config017_neopixel_repaired_current",
+              "command": [
+                "python3",
+                "tools/check_glyph_neopixel_historical_replay.py",
+                "--repaired-current"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 46.4016878750117,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-27-gp_config017_neopixel_repaired_current.log"
+            },
+            {
+              "id": "check_glyph_checker_census",
+              "command": [
+                "python3",
+                "tools/check_glyph_checker_census.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 1.443724208016647,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-28-check_glyph_checker_census.log"
+            },
+            {
+              "id": "test_glyph_docs_agent_surface_integration",
+              "command": [
+                "python3",
+                "tools/test_glyph_docs_agent_surface_integration.py"
+              ],
+              "status": "PASS",
+              "exit_code": 0,
+              "failure_kind": null,
+              "duration_seconds": 6.844934666005429,
+              "log": "/private/tmp/glyph-config017/035-composed-aa203-repeat-29-test_glyph_docs_agent_surface_integration.log"
+            }
+          ],
+          "full_native_fingerprint": {
+            "before": "7b87c05dc49dd4f165aa503ca9c88dbfdfcc10874e268fef5d488b79cd54e972",
+            "after": "7b87c05dc49dd4f165aa503ca9c88dbfdfcc10874e268fef5d488b79cd54e972",
+            "result": "MATCH"
+          },
+          "firmware_build": false,
+          "hardware_acceptance": false
+        }
+      },
+      "035-frozen-aa203-aggregate.json": {
+        "path": "/private/tmp/glyph-config017/035-frozen-aa203-aggregate.json",
+        "sha256": "8044f9a02ae9c6f6b14a46eefde693764d7e508c248bb59811cf4162ca695296",
+        "report": {
+          "aggregate_timeout_seconds": 300.0,
+          "canonical_proof": "UNAVAILABLE",
+          "census_freshness": {
+            "applicability": "current",
+            "category": "baseline",
+            "id": "checker_census_freshness",
+            "load_bearing": true,
+            "path": "tools/check_glyph_checker_census.py",
+            "status": "PASS"
+          },
+          "cleanup_error": "AGGREGATE_TIMEOUT during disposable cleanup",
+          "context": {
+            "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "branch": "codex/gp-val-035-release-safety",
+            "branch_ref": "refs/heads/codex/gp-val-035-release-safety",
+            "comparison_ref": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "detached": false,
+            "expected_merge_base": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "head": "aa203dc260456b94a1732ec20c62163269831da0",
+            "merge_base": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "object_roots": [
+              "0086b1c6c00e6e9478f06fe719220ef400185f68",
+              "0086b388cd230b65e3b9dee0be2e69600b3ae3a0",
+              "01d43af2878a207f20379d46dcee62a842f31810",
+              "040735f6916c7a77924ef53f1b4a873281f2cb7f",
+              "040fcc9fa94c1e42a538c35cf2b7a1a830c492ca",
+              "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+              "0450eb109f46c03e0d10f4114be6b261c7e70074",
+              "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+              "04ea022dd0eb0c6d01771f260aff6bb4af6ae104",
+              "06903092e086e65904be1ae09e6f377fac50728e",
+              "0a5dd751c391198140ed146853a69fc825d902c7",
+              "0b792540f2f3887da1b2ccc8784c3e07b7316be6",
+              "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+              "0eb7f23b9f6b765e717d5e7455faa615695f0ebb",
+              "0efef62a9d4a6254466325eeb0e33184a4848fab",
+              "0f7f71bfff4b9488d8b148c6eb155ad20cc05589",
+              "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+              "0fbaebfc4729439f10f5e541e995547e46399e8b",
+              "11df2f077466df59b192610a7b03818442d747b4",
+              "12cad41ee8157010c512e4772ff62ffdb68771e6",
+              "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
+              "161dfcf1003f822f5f83014e8b10f426265acb6c",
+              "16bc1b51353dc175ea2e5cffb04e09e8e075b892",
+              "18a71efaa9f268f6ae255987554fd2b2e6ff26ce",
+              "18f451024d8f822cafbf450a80272c2b729c5e7b",
+              "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+              "1cfb8ab2315dbccb85544a1c7c44ee7c87b37369",
+              "1e1ad3af210b483c968649f6363e2503a9c968ee",
+              "1f9e58cd15d5d8df5cb07aeca2e03eaf4c81d953",
+              "1fe57c6885e72c1054be3ae9814e912003a8646c",
+              "220b8a1d27bbd31d00f707303b546fe59b3765dd",
+              "2279ee1923004cca4b05c9f6ccc3272e810080cb",
+              "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+              "244837e424c3369b7b4ba0b836ded29d67d5ba87",
+              "256bf44cea71f6d5c87aa1675c8dac9f6b79259f",
+              "26e3ca148df4de6fb9c10806f97204cc17164f52",
+              "2759a37b8908bd68be8fd830ced313e9ec16bed2",
+              "2982e4aef11b5da01b65fac706cb81d7068835bf",
+              "2aae124c99a54af8b9d66f8b2b5864dd75f2471c",
+              "2b2a48e14e9d621b13038d7a8f29e57713ef462a",
+              "2c10ff7c19a5ea8a945339d94246218e2f16dcc2",
+              "2d468884e5fa812d33886e2520b8251d9ca970be",
+              "2d95d6ba87843708aea56b98d1cd0bb563309c9d",
+              "2fbda7a674555e23cc6d003f2c0bfa02a97fafc8",
+              "2fd9a827b90b2079f981d75e836833dc99ec7b10",
+              "3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b",
+              "305557cdcdb9857b54ccae0790f71046ca87a4e1",
+              "3138ade526cabde23a0abedcb94acae8512579d1",
+              "3171837fcfe8fa8b9f6ab1d1a8891478c98c76a3",
+              "3194fd86c5391f19e598acae7879d6898e3e2072",
+              "31c825ddd6ecbfa3a063ab82c1346a2037ed6637",
+              "320fd3fcfbcb810c62171a7be90c55929b6d9b9d",
+              "32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb",
+              "325defbbf7e1cdefe6f7578a924b96073c95dcb6",
+              "327f442b9df6d0c0a15a6ff8365b3c06071323cc",
+              "328c6a1bfb09eb035c2065d0de080283307f34d6",
+              "33694f3a67f336c25b3c82008b3511d06a490016",
+              "3369819a34f82d579e21adff125a25de854f1b9b",
+              "33e24e0bb8ddc6e0ac0a72f9d572b1369dd98939",
+              "34a6c1bc9a9e13dcdf412c8b56a5c53011383503",
+              "35265beb3fe152f27a50325dd595cdffae703df7",
+              "36e9d5f6782011b560a761c9e26b1b4937d1298f",
+              "38017600deb243b5e281edec6d0d378b997d9e40",
+              "38705460afc7061fbebb71d186ed7b9da7051276",
+              "3895736cd7caa7e308f08ff1403cdf6777d98545",
+              "38d57ee2ced51a37475e299fb08a368877a0e507",
+              "38ecceabb136ae0285bc31f1f1ad6a3116bd2059",
+              "3a9d41a9927983f1ba5d1e4ff6cf74af57ac634f",
+              "3b4a7c950e1b14e24a88c951c19313f6134f4ea3",
+              "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+              "3c4f3a915938ee3eef8e6f7402853bd127cf3f78",
+              "3c752b1a13db13d1a99690e25743aa7411909e2c",
+              "3ca30cc8cd39dc69c94ba4120812fae00735d5d4",
+              "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+              "40e38fcf51acd43a2a2cab085cf9848ad4ee3483",
+              "40ebce02e34bd0097925b79fbe1e6a21fc63516a",
+              "41ba14202450860340e07bea161f7910c3af922c",
+              "42008cd7ddf7b63adb5840fad9c62657c95a87e6",
+              "437f87e8086a50f0dfbd834176b80d245c1ed307",
+              "44e7a9e76228dc64f5e1b4b6fc84f26f87e976fe",
+              "46f71c956f1e6866fb9b4f325d7ca751a0741734",
+              "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+              "47c087533db46cbde9d78108a6c9bdff34c33bcd",
+              "49528e32849069e87f2729c24be35a21b002b6df",
+              "4e50be81716117022318d8dcdc7aa60c4390b605",
+              "4fb7c1e9507547774ff9f55cd7788355648d5d1e",
+              "50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144",
+              "5205ba518d1d5fa19e7584d6c6d5210932091b3e",
+              "5554328c00c43853008b3f82d4744ee08099782b",
+              "575ed922ffb2812a1838e645e636fe2ac59abae9",
+              "58242472fb47d899bc84ab34db06803d4b778c50",
+              "597a39545f156bd1e032edaf21085ef44589adcb",
+              "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+              "60614dae8150338160b3440aef6b275bf073fecf",
+              "60e0cc1f784cc5b4638b0b662cd0e4cb6c2001dd",
+              "6305781ec7b4099e615f772dc979c3a493626a89",
+              "63616108477bff72e1cda49572a56601782bac3b",
+              "6603249af47f83b7dd4c17214529df7c127011b8",
+              "66fa47dee9dfe04df26be50a20ac74331924cc60",
+              "6823da0c8219dc93a404906fe1be3aaeeb3736d5",
+              "68dd958fe200618399582929c7c1665c941185e0",
+              "6a10c02909ba27136a427c0360969770988a4684",
+              "6affdecb526b5571e507cf51d62d3b819b2926bb",
+              "6b36d99b0624047558ed8f9ede83dcaee78e72a9",
+              "6cb59e97ddfdb96830432923ac588a76383153b7",
+              "6d3c2812a45d4d59caab9699cdcd080bf1d7571f",
+              "6daa76a301069beef6207731bbc8beaae4451aa1",
+              "6e616fa8adb78b98865e7bd1db1766ac0f56464f",
+              "6eb288e61a0d148530474eef12bd0aa3243e8526",
+              "70c02afda69f08711aac715b7a46be6aa1095735",
+              "70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8",
+              "70f5d3b119a2881c9cae52c2c3cf91c75b186257",
+              "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
+              "732ac4c9be1b683bae49ac8f67ace8ffc2777a6b",
+              "74ae24364b84520d4e0e39240beb9867653cc7b9",
+              "76cb953cd6bfe5398db11669f3d195175361700c",
+              "76f6f12ffa053cbabf55d6be64b41ddb89bc292d",
+              "774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718",
+              "783334b7476f2c68335d6f312669eac72e78316f",
+              "7911692afed3e68becefd8e3c90413d4e230ea82",
+              "793c04c333e86c7656b7c3142bbab8a7c4a78b08",
+              "797113740c2a601e6231642140863b26dac4aa1e",
+              "79ac6bf1164143d6011a3dad46d047b72352b2a6",
+              "7a042fbdd1dc28db8efbd7c59e1730565fe33288",
+              "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+              "7a3c242d5197ffaec3c3a4884cd62da978e955b3",
+              "7afd85e5d353692b1e3fa015af985ba5e0a46f4d",
+              "7ca129e218b292c0aa64b38577848dd8b63a4c66",
+              "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+              "7eed931aa04d1dbdddb8ef13431fbe150f5382a7",
+              "7f9b097ba0c840afbc5f4d104dfa1756a3dce97c",
+              "83b0e69822676381f4ad432cb97907ae438a5517",
+              "84ba70d28629134c92d0b0d25c9d05fb4bd2596c",
+              "85c1ec43abffb737d080f19190b393c591b862ef",
+              "885daf198be7445bec9fa565eca6d3b2784c7842",
+              "8992f1de9c586a29cd102340f8acce49a1a54456",
+              "8b4babd8ebea7e4f363b694eeb27435a47befbe7",
+              "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+              "8c04262c66613d46b933b1b739c01c575cb0c580",
+              "8d1f49334973429d7b094dbcb3b86d669c465cae",
+              "8d4b69c64316757f1ef23532ee000fa0ac71da5f",
+              "92bad797c3e7e0c32dea2768e1da32870d2aecd8",
+              "933456a61269d47603f54b31aea33274a6381f6d",
+              "933dd3c93bdce798218e863ac50a5573325a10ef",
+              "93b3c9ee8f702886f731714281ce143428724a17",
+              "952e08998c0c0954773cac88d3067f0721912334",
+              "9550a1bf1309383e351f4f9e66663562fc9f13ac",
+              "9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1",
+              "97267efcf5962a6dfa28a551670455aa3bd91c65",
+              "9ac48cd8eb3aa3a673ba85bdc836b664e6b913aa",
+              "9c0324969a2adbe7d13e611e2f636df6fab4d690",
+              "9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0",
+              "9ce55e71eff2be6fee366b52434042985de263e6",
+              "9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db",
+              "9dff89d835ccb0bb45dd10c79305b9fef5096263",
+              "a1225102179639f06bb00a6735987824b85972ae",
+              "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+              "a44b3786b362335801fae32048617d332a9ead85",
+              "a49117062282efc077417143c325cae3c55bff4e",
+              "a59c62793c52130612f39558b7c7e5a70a8c8cf4",
+              "a5ec9012684d7c8e45ef4fbd57aa3a4ac755de55",
+              "a63c50d7701480fffaf75b01e2f5f10883e12aa5",
+              "a669992a3379afa3d89593a7f1d46a2a2987dabd",
+              "a6b7750e271324972c51915563fe0dc22f941f95",
+              "a747dd54b02b207483142331d8b5be1113fc951e",
+              "a861964418a9b0e84abb89b2146f8430a5e7c69b",
+              "a8e249eb210b7cd1e010e27dee8f4c61f8fcb537",
+              "aa01750618a50727156881b22a088f1ef55a09d5",
+              "aa203dc260456b94a1732ec20c62163269831da0",
+              "ab6e609cf973d8735c034d160966faef780cf90b",
+              "af77f8f702ab83d74cdf1625cacf763c820ccef5",
+              "afb3121277d12bbd0aa78555f975840f1c8dbb96",
+              "b0162560779f10e568de80cff2baf04aae0447a9",
+              "b0255a3b8e80cafc65d20526aa42769b1b402316",
+              "b0aa22aff74ae7711dad219330b1490e930b8714",
+              "b2a5712afb9f79d94e3c3f6c92f288e1d60328fe",
+              "b55ee1301733700b7187bd650ec33f09ca3db1c8",
+              "b9a0a20549909a22a1552f216ded7941b7a26a71",
+              "bbb08a32d531044d2b68cece3a29ee5578014e59",
+              "bc76af250eb61e68daae8b1a91acb6412ecd95a0",
+              "bce59d34bcb6b4158a5f755293f20102c7a0abb9",
+              "bcf5831c00f8ab3a34576e544d9b795eac89e826",
+              "bf9affbb4de1fe97b0e80057daf6d95127db4d2c",
+              "c1a9f0fb9e1d3461d813b31d1643344e3e34d223",
+              "c664d858ad656554d990196f3c46472ca9ebc46e",
+              "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+              "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
+              "caf0718472c7752c78838be6f1d48b56932d90b9",
+              "caf0822cf3de97a49a7d9b13c920a9951cb24ee2",
+              "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+              "cb742cb0dad1a87019100697dcf15ed8459f31e5",
+              "ccb01a1ac3c8a21f69358bc345242303503ffbde",
+              "cccfe43f3b1ffbba82573d3583db8aeb61e2de04",
+              "d170509476ecb4bd1fa0fc371cd3c73391ad4f55",
+              "d2f78cd3a3fa38c60d04dab54236ee630ead379e",
+              "d360ff36586133890e9faf07811cc04a806fdbbf",
+              "d392a115e8c48d81d3609a3c6479d21d21608aa9",
+              "d3e5303f3e0584a279ce4a6c5cd82ed1d0c4e8c0",
+              "d5050847d3f850951b3f47865dc8a91aedea0834",
+              "d786c244183343f89287a040055b7eaeae1e41f3",
+              "d8220daee328eae517c5ed10a1a78460b4f46ba7",
+              "d849fbecb9712751284d9540d8c030aa30273fa7",
+              "d9ad6132ca0912398839673cc0da24e54a924210",
+              "d9d1e72bb18a5e1dbdf05c829a1d11362893933f",
+              "da20f4afaea61e3f48d16ab19e2fb2e2e25e7775",
+              "dae87ac468f3c9ce6512fc96f855083054668a29",
+              "db2502dca3b820d8744ed6d567e5173702dc65ed",
+              "de36d24422a67e8be7992217856c76e8420a71f6",
+              "def48ddd72a095f4ea150de9eca9164eed6c32e6",
+              "e2523d94eb1023f0146cee9fd975453125c67fa2",
+              "e41e4ea1017b5abde4f17eed1a4bc50404238c75",
+              "e5c455637056ac535347c1176dd41c9a9d84d85a",
+              "e8ab9b86408d1c89f3b35a07949782d9e3c414ff",
+              "e96ae3025ccadd91e581295fadd73059b9d2c611",
+              "ea5ae10022bc9face69644c5ae9f7ad322940658",
+              "ecbbf5beecae5a5f8837d4261298c8304e2dec96",
+              "efdea79269753e14cc8e6fc75df24830854672f9",
+              "f0a1eab7f75c6c037983e4d7290c63f800f2ede6",
+              "f2fd0892ea9856573c59142ca854fe56585454b8",
+              "f37a0ed72bf1f211cad62a10747f5259ac96fdd5",
+              "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
+              "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+              "f657715b26d26587a931074ce7dd12c698785290",
+              "f72bff6fd752f6b3643557743058b3a40888c8d8",
+              "f8610327da8283c914c0e9b478276e67aea0f4bb",
+              "fb3d96fd8eb2f51081a663a7f729710e74e780f7",
+              "fbf2d1c99569ddee3e5432501ddc868bbdee4990",
+              "fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f",
+              "fceebd9793d276480dfa4e72149ecc6e4e383c2c",
+              "fd6044109ce3af2311c32875979dc37849dd75be",
+              "fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d",
+              "ffc007552abc848051841362b0b0ac4c1a7d087b"
+            ],
+            "required_refs": {
+              "refs/heads/configurator": "9ce55e71eff2be6fee366b52434042985de263e6"
+            }
+          },
+          "excluded": [
+            {
+              "applicability": "historical_only",
+              "id": "current_x1_regression_subset",
+              "reason": "preserves immutable GP-X1-001 offset-41 source/evidence correspondence; GP-X1-002 candidate checks do not reuse that PASS"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "gp_x1_002_candidate",
+              "reason": "preserves the immutable GP-X1-002 exact-candidate scope; integrated descendants use GP-VAL-015/027 correspondence and ordinary current validators"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "identity_runtime_behavior_evaluator",
+              "reason": "superseded May-28 behavior-case fixture remains historical evidence"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "reconstructed_authority",
+              "reason": "preserved source-authority evidence"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "table_replacement_contract",
+              "reason": "superseded 27-table contract"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "latest_y2_hardware_evidence",
+              "reason": "hardware result evidence"
+            },
+            {
+              "applicability": "excluded",
+              "id": "neopixel_null_sendreport_characterization_direct_duplicate",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "gp_config017_neopixel_repaired_current_direct_duplicate",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "artifact_postprocessor_provenance",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_validation",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "active_runtime_config_state_contract",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "active_runtime_config_state_source_owned_preselection",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "active_storage_publication_model",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "candidate_state_materialization_scaffold",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "clean_room_adapter_invalid_corpus",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "clean_room_adapter_invalid_corpus_fixture",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "coordinate_native_runtime_plan",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "diagnostic_active_storage_published",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "diagnostic_generated_source_owned_baseline_active",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "diagnostic_parsed_candidate_present_source_owned_published",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "firmware_workstream_roadmap",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "future_tilt_patch_scope",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "generated_source_owned_realization_design",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "generated_source_owned_schema_scaffold",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "hot_path_parse_status_guardrail",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "identity_runtime_behavior_cases",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "latest_layout_y2_port_plan",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "native_ultimate_table_runtime_scope",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_export_candidate_diff",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_export_target_contract",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_manual_capture_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "parser_hotpath_postmortem_next_boundary",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase3_generated_constants_preview",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase6_bounded_config_architecture",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase6_bounded_config_schema_candidate",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase7a_activation_failure_root_cause_analysis",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase7a_activation_repair_minimal",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "public_manual_workflow_release_candidate",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_binary_offline_roundtrip",
+              "reason": "REQUIRES_NONCANONICAL_ARGUMENT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_device_write_safety_plan",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_firmware_binary_parser_plan",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_flashing_automation_safety_boundary",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_manual_load_path_plan",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "source_owned_table_replacement_design",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "generated_constants_phase3_integration_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "implementation_planning_packets",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "public_manual_workflow_release_candidate_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_interpreter_source_baseline_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "ultimate_preservation_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            }
+          ],
+          "failure_kind": "AGGREGATE_TIMEOUT",
+          "final_proof_error": "AGGREGATE_TIMEOUT during git rev-parse --absolute-git-dir",
+          "manifest_entries": 58,
+          "message": null,
+          "phase": "checker:gp_config_010_integration_semantic_correspondence",
+          "phase_before_cleanup": "checker:gp_config_010_integration_semantic_correspondence",
+          "results": [
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/test_glyph_c017_campaign_transition.py"
+              ],
+              "duration_seconds": 22.386,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_val035_c017_transition",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_c017_campaign_transition: PASS; phase=BASELINE; 236 critical entries; exact 014 predecessor; source-free proof is not hardware PASS"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config019_usb_name_selection.py"
+              ],
+              "duration_seconds": 77.812,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config019_usb_name_selection",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "gp_config019_usb_name_selection: PASS; explicit both host proof; hardware=NOT_CLAIMED"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py"
+              ],
+              "duration_seconds": 12.203,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_kbd_001_keyboard_pipeline",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "PASS GP-KBD-001: 103 input observations; lifecycle; 118 identity negatives; 5 executable mutants rejected; ASan/UBSan; literal source host only"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/test_glyph_c014_campaign_transition.py"
+              ],
+              "duration_seconds": 18.431,
+              "exit_code": 1,
+              "failure_kind": null,
+              "id": "gp_val034_c014_transition",
+              "isolated_proof": "MATCH",
+              "status": "FAIL",
+              "stderr_summary": [
+                "AssertionError"
+              ],
+              "stdout_summary": [],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config014_modifier_capacity.py"
+              ],
+              "duration_seconds": 55.213,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config014_modifier_capacity",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "firmware_build=NOT_RUN physical_reachability=UNKNOWN hardware_acceptance=PENDING Nunchuk=NOT_TESTED root_cause=UNPROVEN GP-CONFIG-018=SEPARATE"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config_007_transaction_stage_schema.py"
+              ],
+              "duration_seconds": 0.047,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config_007_transaction_stage_schema",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_gp_config_007_transaction_stage_schema: PASS; schema=v2 stages=10"
+              ],
+              "timeout_seconds": 69.9475117920083
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_010_mode_activation_capacity.py"
+              ],
+              "duration_seconds": 0.951,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config_010_mode_activation_capacity",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_config_010_mode_activation_capacity: PASS; 7 cases; authenticated current host fixture"
+              ],
+              "timeout_seconds": 69.46781729199574
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config012_button_mask_characterization.py"
+              ],
+              "duration_seconds": 29.596,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config_012_button_mask_characterization",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED"
+              ],
+              "timeout_seconds": 68.12012370800949
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config013_usb_default_characterization.py"
+              ],
+              "duration_seconds": 16.967,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config_013_usb_default_characterization",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED"
+              ],
+              "timeout_seconds": 38.10310670800391
+            },
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config020_button_validation.py"
+              ],
+              "duration_seconds": 6.456,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config020_button_validation",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_gp_config020_button_validation: PASS; dual-ABI host and descriptor proof; mocked transaction characterized"
+              ],
+              "timeout_seconds": 20.603523249999853
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_prov_014_decoder_closure.py"
+              ],
+              "duration_seconds": 0.114,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_prov_014_decoder_closure",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_gp_prov_014_decoder_closure: PASS; one observed snapshot; record/tracked inputs verified"
+              ],
+              "timeout_seconds": 13.61261545799789
+            },
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+              ],
+              "duration_seconds": 13.012,
+              "exit_code": -15,
+              "failure_kind": "AGGREGATE_TIMEOUT",
+              "id": "gp_config_010_integration_semantic_correspondence",
+              "isolated_proof": "UNAVAILABLE",
+              "proof_error": "AGGREGATE_TIMEOUT during git rev-parse --absolute-git-dir",
+              "status": "FAIL",
+              "stderr_summary": [],
+              "stdout_summary": [],
+              "timeout_seconds": 12.985724208003376
+            }
+          ],
+          "retained_temporary_directory": "/private/tmp/glyph-runtime-config-validation-r6znyhe9",
+          "status": "FAIL",
+          "strong_signal_exclusions": 43
+        }
+      },
+      "035-composed-aa203-aggregate.json": {
+        "path": "/private/tmp/glyph-config017/035-composed-aa203-aggregate.json",
+        "sha256": "e64d28af5f142df8fd44ff63eb2abb0fb1595a4de1e2fc59a8d0fb0527d95d66",
+        "report": {
+          "aggregate_timeout_seconds": 300.0,
+          "canonical_proof": "UNAVAILABLE",
+          "census_freshness": {
+            "applicability": "current",
+            "category": "baseline",
+            "id": "checker_census_freshness",
+            "load_bearing": true,
+            "path": "tools/check_glyph_checker_census.py",
+            "status": "PASS"
+          },
+          "cleanup_error": "AGGREGATE_TIMEOUT during disposable cleanup",
+          "context": {
+            "base": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "branch": "codex/proof035-independent-composition",
+            "branch_ref": "refs/heads/codex/proof035-independent-composition",
+            "comparison_ref": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "detached": false,
+            "expected_merge_base": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "head": "fabf399494be68f58af6aea37d70c497515f18ac",
+            "merge_base": "9ce55e71eff2be6fee366b52434042985de263e6",
+            "object_roots": [
+              "0086b1c6c00e6e9478f06fe719220ef400185f68",
+              "0086b388cd230b65e3b9dee0be2e69600b3ae3a0",
+              "01d43af2878a207f20379d46dcee62a842f31810",
+              "040735f6916c7a77924ef53f1b4a873281f2cb7f",
+              "040fcc9fa94c1e42a538c35cf2b7a1a830c492ca",
+              "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+              "0450eb109f46c03e0d10f4114be6b261c7e70074",
+              "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+              "04ea022dd0eb0c6d01771f260aff6bb4af6ae104",
+              "06903092e086e65904be1ae09e6f377fac50728e",
+              "0a5dd751c391198140ed146853a69fc825d902c7",
+              "0b792540f2f3887da1b2ccc8784c3e07b7316be6",
+              "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+              "0eb7f23b9f6b765e717d5e7455faa615695f0ebb",
+              "0efef62a9d4a6254466325eeb0e33184a4848fab",
+              "0f7f71bfff4b9488d8b148c6eb155ad20cc05589",
+              "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+              "0fbaebfc4729439f10f5e541e995547e46399e8b",
+              "11df2f077466df59b192610a7b03818442d747b4",
+              "12cad41ee8157010c512e4772ff62ffdb68771e6",
+              "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
+              "161dfcf1003f822f5f83014e8b10f426265acb6c",
+              "16bc1b51353dc175ea2e5cffb04e09e8e075b892",
+              "18a71efaa9f268f6ae255987554fd2b2e6ff26ce",
+              "18f451024d8f822cafbf450a80272c2b729c5e7b",
+              "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+              "1cfb8ab2315dbccb85544a1c7c44ee7c87b37369",
+              "1e1ad3af210b483c968649f6363e2503a9c968ee",
+              "1f9e58cd15d5d8df5cb07aeca2e03eaf4c81d953",
+              "1fe57c6885e72c1054be3ae9814e912003a8646c",
+              "220b8a1d27bbd31d00f707303b546fe59b3765dd",
+              "2279ee1923004cca4b05c9f6ccc3272e810080cb",
+              "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+              "244837e424c3369b7b4ba0b836ded29d67d5ba87",
+              "256bf44cea71f6d5c87aa1675c8dac9f6b79259f",
+              "26e3ca148df4de6fb9c10806f97204cc17164f52",
+              "2759a37b8908bd68be8fd830ced313e9ec16bed2",
+              "2982e4aef11b5da01b65fac706cb81d7068835bf",
+              "2aae124c99a54af8b9d66f8b2b5864dd75f2471c",
+              "2b2a48e14e9d621b13038d7a8f29e57713ef462a",
+              "2c10ff7c19a5ea8a945339d94246218e2f16dcc2",
+              "2d468884e5fa812d33886e2520b8251d9ca970be",
+              "2d95d6ba87843708aea56b98d1cd0bb563309c9d",
+              "2fbda7a674555e23cc6d003f2c0bfa02a97fafc8",
+              "2fd9a827b90b2079f981d75e836833dc99ec7b10",
+              "3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b",
+              "305557cdcdb9857b54ccae0790f71046ca87a4e1",
+              "3138ade526cabde23a0abedcb94acae8512579d1",
+              "3171837fcfe8fa8b9f6ab1d1a8891478c98c76a3",
+              "3194fd86c5391f19e598acae7879d6898e3e2072",
+              "31c825ddd6ecbfa3a063ab82c1346a2037ed6637",
+              "320fd3fcfbcb810c62171a7be90c55929b6d9b9d",
+              "32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb",
+              "325defbbf7e1cdefe6f7578a924b96073c95dcb6",
+              "327f442b9df6d0c0a15a6ff8365b3c06071323cc",
+              "328c6a1bfb09eb035c2065d0de080283307f34d6",
+              "33694f3a67f336c25b3c82008b3511d06a490016",
+              "3369819a34f82d579e21adff125a25de854f1b9b",
+              "33e24e0bb8ddc6e0ac0a72f9d572b1369dd98939",
+              "34a6c1bc9a9e13dcdf412c8b56a5c53011383503",
+              "35265beb3fe152f27a50325dd595cdffae703df7",
+              "36e9d5f6782011b560a761c9e26b1b4937d1298f",
+              "38017600deb243b5e281edec6d0d378b997d9e40",
+              "38705460afc7061fbebb71d186ed7b9da7051276",
+              "3895736cd7caa7e308f08ff1403cdf6777d98545",
+              "38d57ee2ced51a37475e299fb08a368877a0e507",
+              "38ecceabb136ae0285bc31f1f1ad6a3116bd2059",
+              "3a9d41a9927983f1ba5d1e4ff6cf74af57ac634f",
+              "3b4a7c950e1b14e24a88c951c19313f6134f4ea3",
+              "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+              "3c4f3a915938ee3eef8e6f7402853bd127cf3f78",
+              "3c752b1a13db13d1a99690e25743aa7411909e2c",
+              "3ca30cc8cd39dc69c94ba4120812fae00735d5d4",
+              "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+              "40e38fcf51acd43a2a2cab085cf9848ad4ee3483",
+              "40ebce02e34bd0097925b79fbe1e6a21fc63516a",
+              "41ba14202450860340e07bea161f7910c3af922c",
+              "42008cd7ddf7b63adb5840fad9c62657c95a87e6",
+              "437f87e8086a50f0dfbd834176b80d245c1ed307",
+              "44e7a9e76228dc64f5e1b4b6fc84f26f87e976fe",
+              "46f71c956f1e6866fb9b4f325d7ca751a0741734",
+              "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+              "47c087533db46cbde9d78108a6c9bdff34c33bcd",
+              "49528e32849069e87f2729c24be35a21b002b6df",
+              "4e50be81716117022318d8dcdc7aa60c4390b605",
+              "4fb7c1e9507547774ff9f55cd7788355648d5d1e",
+              "50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144",
+              "5205ba518d1d5fa19e7584d6c6d5210932091b3e",
+              "5554328c00c43853008b3f82d4744ee08099782b",
+              "575ed922ffb2812a1838e645e636fe2ac59abae9",
+              "58242472fb47d899bc84ab34db06803d4b778c50",
+              "597a39545f156bd1e032edaf21085ef44589adcb",
+              "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+              "60614dae8150338160b3440aef6b275bf073fecf",
+              "60e0cc1f784cc5b4638b0b662cd0e4cb6c2001dd",
+              "6305781ec7b4099e615f772dc979c3a493626a89",
+              "63616108477bff72e1cda49572a56601782bac3b",
+              "6603249af47f83b7dd4c17214529df7c127011b8",
+              "66fa47dee9dfe04df26be50a20ac74331924cc60",
+              "6823da0c8219dc93a404906fe1be3aaeeb3736d5",
+              "68dd958fe200618399582929c7c1665c941185e0",
+              "6a10c02909ba27136a427c0360969770988a4684",
+              "6affdecb526b5571e507cf51d62d3b819b2926bb",
+              "6b36d99b0624047558ed8f9ede83dcaee78e72a9",
+              "6cb59e97ddfdb96830432923ac588a76383153b7",
+              "6d3c2812a45d4d59caab9699cdcd080bf1d7571f",
+              "6daa76a301069beef6207731bbc8beaae4451aa1",
+              "6e616fa8adb78b98865e7bd1db1766ac0f56464f",
+              "6eb288e61a0d148530474eef12bd0aa3243e8526",
+              "70c02afda69f08711aac715b7a46be6aa1095735",
+              "70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8",
+              "70f5d3b119a2881c9cae52c2c3cf91c75b186257",
+              "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
+              "732ac4c9be1b683bae49ac8f67ace8ffc2777a6b",
+              "74ae24364b84520d4e0e39240beb9867653cc7b9",
+              "76cb953cd6bfe5398db11669f3d195175361700c",
+              "76f6f12ffa053cbabf55d6be64b41ddb89bc292d",
+              "774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718",
+              "783334b7476f2c68335d6f312669eac72e78316f",
+              "7911692afed3e68becefd8e3c90413d4e230ea82",
+              "793c04c333e86c7656b7c3142bbab8a7c4a78b08",
+              "797113740c2a601e6231642140863b26dac4aa1e",
+              "79ac6bf1164143d6011a3dad46d047b72352b2a6",
+              "7a042fbdd1dc28db8efbd7c59e1730565fe33288",
+              "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+              "7a3c242d5197ffaec3c3a4884cd62da978e955b3",
+              "7afd85e5d353692b1e3fa015af985ba5e0a46f4d",
+              "7ca129e218b292c0aa64b38577848dd8b63a4c66",
+              "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+              "7eed931aa04d1dbdddb8ef13431fbe150f5382a7",
+              "7f9b097ba0c840afbc5f4d104dfa1756a3dce97c",
+              "83b0e69822676381f4ad432cb97907ae438a5517",
+              "84ba70d28629134c92d0b0d25c9d05fb4bd2596c",
+              "85c1ec43abffb737d080f19190b393c591b862ef",
+              "885daf198be7445bec9fa565eca6d3b2784c7842",
+              "8992f1de9c586a29cd102340f8acce49a1a54456",
+              "8b4babd8ebea7e4f363b694eeb27435a47befbe7",
+              "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+              "8c04262c66613d46b933b1b739c01c575cb0c580",
+              "8d1f49334973429d7b094dbcb3b86d669c465cae",
+              "8d4b69c64316757f1ef23532ee000fa0ac71da5f",
+              "92bad797c3e7e0c32dea2768e1da32870d2aecd8",
+              "933456a61269d47603f54b31aea33274a6381f6d",
+              "933dd3c93bdce798218e863ac50a5573325a10ef",
+              "93b3c9ee8f702886f731714281ce143428724a17",
+              "952e08998c0c0954773cac88d3067f0721912334",
+              "9550a1bf1309383e351f4f9e66663562fc9f13ac",
+              "9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1",
+              "97267efcf5962a6dfa28a551670455aa3bd91c65",
+              "9ac48cd8eb3aa3a673ba85bdc836b664e6b913aa",
+              "9c0324969a2adbe7d13e611e2f636df6fab4d690",
+              "9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0",
+              "9ce55e71eff2be6fee366b52434042985de263e6",
+              "9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db",
+              "9dff89d835ccb0bb45dd10c79305b9fef5096263",
+              "a1225102179639f06bb00a6735987824b85972ae",
+              "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+              "a44b3786b362335801fae32048617d332a9ead85",
+              "a49117062282efc077417143c325cae3c55bff4e",
+              "a59c62793c52130612f39558b7c7e5a70a8c8cf4",
+              "a5ec9012684d7c8e45ef4fbd57aa3a4ac755de55",
+              "a63c50d7701480fffaf75b01e2f5f10883e12aa5",
+              "a669992a3379afa3d89593a7f1d46a2a2987dabd",
+              "a6b7750e271324972c51915563fe0dc22f941f95",
+              "a747dd54b02b207483142331d8b5be1113fc951e",
+              "a861964418a9b0e84abb89b2146f8430a5e7c69b",
+              "a8e249eb210b7cd1e010e27dee8f4c61f8fcb537",
+              "aa01750618a50727156881b22a088f1ef55a09d5",
+              "ab6e609cf973d8735c034d160966faef780cf90b",
+              "af77f8f702ab83d74cdf1625cacf763c820ccef5",
+              "afb3121277d12bbd0aa78555f975840f1c8dbb96",
+              "b0162560779f10e568de80cff2baf04aae0447a9",
+              "b0255a3b8e80cafc65d20526aa42769b1b402316",
+              "b0aa22aff74ae7711dad219330b1490e930b8714",
+              "b2a5712afb9f79d94e3c3f6c92f288e1d60328fe",
+              "b55ee1301733700b7187bd650ec33f09ca3db1c8",
+              "b9a0a20549909a22a1552f216ded7941b7a26a71",
+              "bbb08a32d531044d2b68cece3a29ee5578014e59",
+              "bc76af250eb61e68daae8b1a91acb6412ecd95a0",
+              "bce59d34bcb6b4158a5f755293f20102c7a0abb9",
+              "bcf5831c00f8ab3a34576e544d9b795eac89e826",
+              "bf9affbb4de1fe97b0e80057daf6d95127db4d2c",
+              "c1a9f0fb9e1d3461d813b31d1643344e3e34d223",
+              "c664d858ad656554d990196f3c46472ca9ebc46e",
+              "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+              "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
+              "caf0718472c7752c78838be6f1d48b56932d90b9",
+              "caf0822cf3de97a49a7d9b13c920a9951cb24ee2",
+              "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+              "cb742cb0dad1a87019100697dcf15ed8459f31e5",
+              "ccb01a1ac3c8a21f69358bc345242303503ffbde",
+              "cccfe43f3b1ffbba82573d3583db8aeb61e2de04",
+              "d170509476ecb4bd1fa0fc371cd3c73391ad4f55",
+              "d2f78cd3a3fa38c60d04dab54236ee630ead379e",
+              "d360ff36586133890e9faf07811cc04a806fdbbf",
+              "d392a115e8c48d81d3609a3c6479d21d21608aa9",
+              "d3e5303f3e0584a279ce4a6c5cd82ed1d0c4e8c0",
+              "d5050847d3f850951b3f47865dc8a91aedea0834",
+              "d786c244183343f89287a040055b7eaeae1e41f3",
+              "d8220daee328eae517c5ed10a1a78460b4f46ba7",
+              "d849fbecb9712751284d9540d8c030aa30273fa7",
+              "d9ad6132ca0912398839673cc0da24e54a924210",
+              "d9d1e72bb18a5e1dbdf05c829a1d11362893933f",
+              "da20f4afaea61e3f48d16ab19e2fb2e2e25e7775",
+              "dae87ac468f3c9ce6512fc96f855083054668a29",
+              "db2502dca3b820d8744ed6d567e5173702dc65ed",
+              "de36d24422a67e8be7992217856c76e8420a71f6",
+              "def48ddd72a095f4ea150de9eca9164eed6c32e6",
+              "e2523d94eb1023f0146cee9fd975453125c67fa2",
+              "e41e4ea1017b5abde4f17eed1a4bc50404238c75",
+              "e5c455637056ac535347c1176dd41c9a9d84d85a",
+              "e8ab9b86408d1c89f3b35a07949782d9e3c414ff",
+              "e96ae3025ccadd91e581295fadd73059b9d2c611",
+              "ea5ae10022bc9face69644c5ae9f7ad322940658",
+              "ecbbf5beecae5a5f8837d4261298c8304e2dec96",
+              "efdea79269753e14cc8e6fc75df24830854672f9",
+              "f0a1eab7f75c6c037983e4d7290c63f800f2ede6",
+              "f2fd0892ea9856573c59142ca854fe56585454b8",
+              "f37a0ed72bf1f211cad62a10747f5259ac96fdd5",
+              "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
+              "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+              "f657715b26d26587a931074ce7dd12c698785290",
+              "f72bff6fd752f6b3643557743058b3a40888c8d8",
+              "f8610327da8283c914c0e9b478276e67aea0f4bb",
+              "fabf399494be68f58af6aea37d70c497515f18ac",
+              "fb3d96fd8eb2f51081a663a7f729710e74e780f7",
+              "fbf2d1c99569ddee3e5432501ddc868bbdee4990",
+              "fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f",
+              "fceebd9793d276480dfa4e72149ecc6e4e383c2c",
+              "fd6044109ce3af2311c32875979dc37849dd75be",
+              "fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d",
+              "ffc007552abc848051841362b0b0ac4c1a7d087b"
+            ],
+            "required_refs": {
+              "refs/heads/configurator": "9ce55e71eff2be6fee366b52434042985de263e6"
+            }
+          },
+          "excluded": [
+            {
+              "applicability": "historical_only",
+              "id": "current_x1_regression_subset",
+              "reason": "preserves immutable GP-X1-001 offset-41 source/evidence correspondence; GP-X1-002 candidate checks do not reuse that PASS"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "gp_x1_002_candidate",
+              "reason": "preserves the immutable GP-X1-002 exact-candidate scope; integrated descendants use GP-VAL-015/027 correspondence and ordinary current validators"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "identity_runtime_behavior_evaluator",
+              "reason": "superseded May-28 behavior-case fixture remains historical evidence"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "reconstructed_authority",
+              "reason": "preserved source-authority evidence"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "table_replacement_contract",
+              "reason": "superseded 27-table contract"
+            },
+            {
+              "applicability": "historical_only",
+              "id": "latest_y2_hardware_evidence",
+              "reason": "hardware result evidence"
+            },
+            {
+              "applicability": "excluded",
+              "id": "neopixel_null_sendreport_characterization_direct_duplicate",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "gp_config017_neopixel_repaired_current_direct_duplicate",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "artifact_postprocessor_provenance",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_validation",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "active_runtime_config_state_contract",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "active_runtime_config_state_source_owned_preselection",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "active_storage_publication_model",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "candidate_state_materialization_scaffold",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "clean_room_adapter_invalid_corpus",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "clean_room_adapter_invalid_corpus_fixture",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "coordinate_native_runtime_plan",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "diagnostic_active_storage_published",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "diagnostic_generated_source_owned_baseline_active",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "diagnostic_parsed_candidate_present_source_owned_published",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "firmware_workstream_roadmap",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "future_tilt_patch_scope",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "generated_source_owned_realization_design",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "generated_source_owned_schema_scaffold",
+              "reason": "DUPLICATE_COVERAGE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "hot_path_parse_status_guardrail",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "identity_runtime_behavior_cases",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "latest_layout_y2_port_plan",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "native_ultimate_table_runtime_scope",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_export_candidate_diff",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_export_target_contract",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "official_configurator_manual_capture_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "parser_hotpath_postmortem_next_boundary",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase3_generated_constants_preview",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase6_bounded_config_architecture",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase6_bounded_config_schema_candidate",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase7a_activation_failure_root_cause_analysis",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "phase7a_activation_repair_minimal",
+              "reason": "HISTORICAL_BRANCH_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "public_manual_workflow_release_candidate",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_binary_offline_roundtrip",
+              "reason": "REQUIRES_NONCANONICAL_ARGUMENT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_device_write_safety_plan",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_firmware_binary_parser_plan",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_flashing_automation_safety_boundary",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_manual_load_path_plan",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "source_owned_table_replacement_design",
+              "reason": "SUPERSEDED_CONTRACT"
+            },
+            {
+              "applicability": "excluded",
+              "id": "generated_constants_phase3_integration_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "implementation_planning_packets",
+              "reason": "NOT_CURRENT_RUNTIME_CONFIG_LANE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "public_manual_workflow_release_candidate_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "runtime_config_interpreter_source_baseline_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            },
+            {
+              "applicability": "excluded",
+              "id": "ultimate_preservation_hardware_result",
+              "reason": "HARDWARE_RESULT_EVIDENCE"
+            }
+          ],
+          "failure_kind": "AGGREGATE_TIMEOUT",
+          "final_proof_error": "AGGREGATE_TIMEOUT during git rev-parse --absolute-git-dir",
+          "manifest_entries": 58,
+          "message": null,
+          "phase": "checker:gp_config_013_usb_default_characterization",
+          "phase_before_cleanup": "checker:gp_config_013_usb_default_characterization",
+          "results": [
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/test_glyph_c017_campaign_transition.py"
+              ],
+              "duration_seconds": 22.784,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_val035_c017_transition",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_c017_campaign_transition: PASS; phase=CANDIDATE_VALIDATION_ONLY; 236 critical entries; exact 014 predecessor; source-free proof is not hardware PASS"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config019_usb_name_selection.py"
+              ],
+              "duration_seconds": 77.559,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config019_usb_name_selection",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "gp_config019_usb_name_selection: PASS; explicit both host proof; hardware=NOT_CLAIMED"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py"
+              ],
+              "duration_seconds": 11.455,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_kbd_001_keyboard_pipeline",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "PASS GP-KBD-001: 103 input observations; lifecycle; 118 identity negatives; 5 executable mutants rejected; ASan/UBSan; literal source host only"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/test_glyph_c014_campaign_transition.py"
+              ],
+              "duration_seconds": 18.357,
+              "exit_code": 1,
+              "failure_kind": null,
+              "id": "gp_val034_c014_transition",
+              "isolated_proof": "MATCH",
+              "status": "FAIL",
+              "stderr_summary": [
+                "AssertionError"
+              ],
+              "stdout_summary": [],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "candidate_safety",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config014_modifier_capacity.py"
+              ],
+              "duration_seconds": 80.853,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config014_modifier_capacity",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "firmware_build=NOT_RUN physical_reachability=UNKNOWN hardware_acceptance=PENDING Nunchuk=NOT_TESTED root_cause=UNPROVEN GP-CONFIG-018=SEPARATE"
+              ],
+              "timeout_seconds": 120.0
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config_007_transaction_stage_schema.py"
+              ],
+              "duration_seconds": 0.04,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config_007_transaction_stage_schema",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_gp_config_007_transaction_stage_schema: PASS; schema=v2 stages=10"
+              ],
+              "timeout_seconds": 45.46259295899654
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_config_010_mode_activation_capacity.py"
+              ],
+              "duration_seconds": 0.807,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config_010_mode_activation_capacity",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "glyph_config_010_mode_activation_capacity: PASS; 7 cases; authenticated current host fixture"
+              ],
+              "timeout_seconds": 45.00564558399492
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config012_button_mask_characterization.py"
+              ],
+              "duration_seconds": 32.054,
+              "exit_code": 0,
+              "failure_kind": null,
+              "id": "gp_config_012_button_mask_characterization",
+              "isolated_proof": "MATCH",
+              "status": "PASS",
+              "stderr_summary": [],
+              "stdout_summary": [
+                "historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED"
+              ],
+              "timeout_seconds": 43.734359750000294
+            },
+            {
+              "applicability": "current",
+              "category": "configurator",
+              "command": [
+                "python3",
+                "tools/check_glyph_gp_config013_usb_default_characterization.py"
+              ],
+              "duration_seconds": 11.159,
+              "exit_code": -15,
+              "failure_kind": "AGGREGATE_TIMEOUT",
+              "id": "gp_config_013_usb_default_characterization",
+              "isolated_proof": "UNAVAILABLE",
+              "proof_error": "AGGREGATE_TIMEOUT during git rev-parse --absolute-git-dir",
+              "status": "FAIL",
+              "stderr_summary": [],
+              "stdout_summary": [],
+              "timeout_seconds": 11.151868083979934
+            }
+          ],
+          "retained_temporary_directory": "/private/tmp/glyph-runtime-config-validation-hvprq2sb",
+          "status": "FAIL",
+          "strong_signal_exclusions": 43
+        }
+      },
+      "035-phase-history-final-report.json": {
+        "path": "/private/tmp/glyph-config017/035-phase-history-final-report.json",
+        "sha256": "babb7f314e735b645d031dcfda2149a337cd5b7b32e28ca564d0160e9d3eb6c9",
+        "report": {
+          "classification": "SYNTHETIC_TEST_ONLY_FUTURE_PHASE_HISTORY_WITH_SEPARATE_REAL_FROZEN_BASELINE",
+          "status": "PASS",
+          "final_frozen_shared_commit": "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "exact_module_sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+          "fresh_actual_native_cases": 26,
+          "fresh_actual_breakdown": {
+            "retained_accepted_done_metadata_catalog_matrix": 17,
+            "single_parent_integration_catalog_and_DONE": 2,
+            "accepted020014_queue_and_evidence_history_controls": 6,
+            "fresh_frozen424_baseline": 1
+          },
+          "reports": {
+            "035-repaired-snapshot-report.json": {
+              "path": "/private/tmp/glyph-config017/035-repaired-snapshot-report.json",
+              "sha256": "7a4df1b591f3883a71f00a0812adf8b3e28fc8e6e57502b86e9a3b37b873ae19",
+              "status": "PASS"
+            },
+            "035-single-parent-integration-report.json": {
+              "path": "/private/tmp/glyph-config017/035-single-parent-integration-report.json",
+              "sha256": "31570dcb4c731476504193cd3aa823baf5234682f7b31b1507988625087c25aa",
+              "status": "PASS"
+            },
+            "035-repaired-predecessor-history-report.json": {
+              "path": "/private/tmp/glyph-config017/035-repaired-predecessor-history-report.json",
+              "sha256": "92d96ecde4fe43420bd122338684db1a45d91b3f9a0a7c00ab26f170804e9e63",
+              "status": "PASS"
+            },
+            "035-frozen424-proof.json": {
+              "path": "/private/tmp/glyph-config017/035-frozen424-proof.json",
+              "sha256": "a6714468753af5f5d93fc73472738d2a266f2536a555ed1193e78ded04e2f7dc",
+              "status": "PASS"
+            }
+          },
+          "scope_carried_sourcefree_row_review_build_protocol_controls": {
+            "report": "/private/tmp/glyph-config017/035-sourcefree-negative-report.json",
+            "actual_old_frozen_cases": 16,
+            "status": "PASS",
+            "fresh_rerun_claimed": false,
+            "function_equivalence_audit": "/private/tmp/glyph-config017/035-repair-scope-function-equivalence.json"
+          },
+          "preserved_before_repair_failures": {
+            "native_accepted_positive_rejected_pending_C_M_F_sidebranch": "/private/tmp/glyph-config017/035-synthetic-history-report.json",
+            "three_metadata_restore_false_acceptances": "/private/tmp/glyph-config017/035-sourcefree-history-report.json",
+            "earlier_test_assembly_observations": [
+              "/private/tmp/glyph-config017/035-ed1a-incomplete-report.json",
+              "/private/tmp/glyph-config017/035-aa203dc2-pre-E-incomplete-report.json"
+            ]
+          },
+          "firmware_build": "NOT_RUN",
+          "actual_artifact_created": false,
+          "device_actions": false,
+          "real_hardware_acceptance": "NOT_CLAIMED",
+          "final_repository_approval": "NOT_CLAIMED",
+          "validator_monkeypatches": false,
+          "shared_repository_writes": false,
+          "no_missing_requested_legitimate_cases": true
+        }
+      }
+    },
+    "firmware_build": false,
+    "hardware_acceptance": false,
+    "reserved_worktree_access": "NONE",
+    "created_utc": "2026-10-05T10:11:51.753238+00:00"
+  },
+  "prior_activation_summary": "GP-CONFIG-017 is REVIEW at exact published clean C `478f438804275f3e0c23e6f36bfd26e34aa343bf`, tree `d7bd33ae51c5984090c9a1b0af863aa0957d0840`, sole direct live-verified base B `a6b7750e271324972c51915563fe0dc22f941f95`. Independent Sol conformance report SHA-256 `692494a498d88139fc146b4558acb413efe3698e110f4a881a8ad43856354dc6` approves candidate publication and the source-free GP-VAL-035 handoff. Its complete eleven-path inventory contains one exact existing-null-block move in NeoPixelBackend.hpp and ten host/protocol/metadata entries; all other235 critical inputs and original016 closure are unchanged. Actual current host proof passes both time ABIs,56 null updates, static/SHIFT/XWAVE traces and recovery,36 negatives; immutable original016 replay passes9cases+9contracts. Focused candidate result is actual6PASS/7FAIL: four protected wrappers and010 reject current critical context, baseline artifact stops at ancestry precondition, original016 current-main rejects repaired source. No five scope-body PASS is claimed. Aggregate actualFAIL/SETUP_FAILURE at current critical context executes zero checkers; native fingerprintMATCH,300/120 deadlines unchanged. The machine-derived queue records GP-VAL-035 READY after all four recorded objective conditions pass; its original conditions and exact review/inventory are preserved in the queue receipt. Same persistent H3 retains sole publication authority and immediately executes035. Canonical handoff carries only four source-free status docs; C017 firmware remains unmerged/unbuilt, artifactNONE, hardwarePENDING. All97 other orders and accepted014/020 exactPASS remain unchanged; no inherited014 acceptance. All five full scope bodies, historical/current010/016 and affected proofs remain035 obligations before DONE, then exact F build/custody/review and humanPASS. Hardware-worktree permissionrelease is independently daemon-confirmed; accessNONE. Nunchuk NOT_TESTED; root cause UNPROVEN; physical null reachability UNKNOWN.",
+  "next_step": "Sameexecutor exactC-preserving M thencommittedF/Mk6build/custody/freshreview/sourcefreehardwarehandoff; no H3merge beforeactualexactownerHEPPASS",
+  "firmware_build": false,
+  "hardware_acceptance": false,
+  "reserved_worktree_access": "NONE"
+}
+```
+<!-- gp-val035-completion:end -->
