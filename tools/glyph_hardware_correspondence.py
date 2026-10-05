@@ -34,6 +34,21 @@ CORRESPONDENCE_CRITICAL_PATHS = frozenset({
 
 # Exact, reviewed paths only. Membership never overrides a critical input.
 NON_BEHAVIORAL_PATHS = frozenset({
+    # GP-VAL-035 finite source-free literals; HAL retains critical precedence.
+    'tools/glyph_c017_campaign_transition.py',
+    'tools/test_glyph_c017_campaign_transition.py',
+    'tools/check_glyph_neopixel_historical_replay.py',
+    'docs/runtime_config/fixtures/gp_val035_c017_transition.json',
+    'docs/runtime_config/fixtures/gp_val035_accepted_transitions.json',
+    'docs/calibration/gp_config_017_hardware_result.md',
+    'docs/calibration/fixtures/gp_config_017_hardware_evidence.json',
+    'docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md',
+    'docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md',
+    'docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json',
+    'docs/runtime_config/gp_config_017_neopixel_repaired_current.md',
+    'tools/check_glyph_gp_config_017_neopixel_repaired_current.py',
+    'tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h',
+    'tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp',
     # GP-VAL-041: finite original019 hosts, separate current proof and read-only authority.
     'docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json',
     'docs/calibration/gp_config_019_usb_name_selection_characterization.md',

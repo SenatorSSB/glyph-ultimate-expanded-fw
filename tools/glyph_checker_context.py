@@ -274,6 +274,8 @@ def authenticated_campaign_context(context: CheckerContext) -> CheckerContext:
         "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
         "docs/runtime_config/fixtures/gp_val034_c014_transition.json",
         "docs/runtime_config/fixtures/gp_val034_accepted_transitions.json",
+        "docs/runtime_config/fixtures/gp_val035_c017_transition.json",
+        "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json",
     )
     if (_git_returncode(context.repo_root, ["merge-base", "--is-ancestor", ADOPTION, context.head])
             and not any((context.repo_root / path).exists() for path in repair_markers)):

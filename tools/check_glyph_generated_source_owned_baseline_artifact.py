@@ -186,6 +186,16 @@ def current_branch() -> str:
 
 
 def validate_branch() -> str:
+    from glyph_c017_campaign_transition import present, authenticate
+    if present(REPO_ROOT):
+        from glyph_checker_context import collect_checker_context
+        context = collect_checker_context(repo_root=REPO_ROOT)
+        authenticate(REPO_ROOT)
+        if context.base_commit is None or context.base_is_ancestor is not True:
+            fail('authenticated campaign requires an ancestor comparison base')
+        if context.expected_merge_base and context.merge_base != context.expected_merge_base:
+            fail('authenticated campaign merge base mismatch')
+        return context.branch or 'detached HEAD'
     branch = current_branch()
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", BASE_BRANCH, "HEAD"],
@@ -207,6 +217,10 @@ def status_path(status_line: str) -> str:
 
 
 def changed_paths(branch: str) -> set[str]:
+    from glyph_c017_campaign_transition import present
+    if present(REPO_ROOT):
+        from glyph_checker_context import collect_checker_context
+        return set(collect_checker_context(repo_root=REPO_ROOT).changed_paths)
     paths: set[str] = set()
     if branch != MERGED_BRANCH:
         paths.update(git_lines(["diff", "--name-only", f"{BASE_BRANCH}...HEAD"]))

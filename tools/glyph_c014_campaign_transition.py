@@ -976,3 +976,25 @@ def authenticate_config019_coexistence(root, head):
     require(len(entries) == 1 and sha(json.dumps(entries[0], sort_keys=True, separators=(',', ':')).encode())
             == CONFIG019_MANIFEST_ENTRY_SHA256, '041 exact authenticated019 manifest entry mismatch')
     return CONFIG019_HOSTS if integrated else frozenset()
+
+
+# Preserve the original014 callable and its closed constants for historical
+# snapshots. The exact035 marker selects the separately authorized extension.
+authenticate_014_original = authenticate
+authenticate_config019_coexistence_014_original = authenticate_config019_coexistence
+
+@original._proof_invocation
+def authenticate(root):
+    from glyph_c017_campaign_transition import present
+    if present(Path(root)):
+        from glyph_c017_campaign_transition import authenticate as neopixel
+        return neopixel(root)
+    return authenticate_014_original(root)
+
+@original._proof_invocation
+def authenticate_config019_coexistence(root, head):
+    from glyph_c017_campaign_transition import present
+    if present(Path(root)):
+        from glyph_c017_campaign_transition import verify019_overlay
+        return verify019_overlay(root, head)
+    return authenticate_config019_coexistence_014_original(root, head)

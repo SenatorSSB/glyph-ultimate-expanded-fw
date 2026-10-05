@@ -1,0 +1,125 @@
+{
+  "schema_name": "glyph_gp_val035_c017_transition",
+  "schema_version": 1,
+  "work_order": "GP-VAL-035",
+  "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+  "base": "a6b7750e271324972c51915563fe0dc22f941f95",
+  "tree": "d7bd33ae51c5984090c9a1b0af863aa0957d0840",
+  "raw_inventory_sha256": "4a5674c786726f30a98067560807e4739ba6c2c644b706425f03c552171792d2",
+  "entries": [
+    {
+      "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "843eb9b937ccebc616679b0ced24b805d8a6290d",
+      "new_blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+      "status": "M",
+      "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+      "firmware_build_input": true
+    },
+    {
+      "path": "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "c48f4a2d75ce5aeccb5a111a2b9bf95fecd77f8e",
+      "status": "A",
+      "sha256": "4873d3d87eda224fc378069387f7cfa388c0b7ff37809a386bf29cffb5306e12",
+      "firmware_build_input": false
+    },
+    {
+      "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "bc6157cbe2e5624e39dc88cb4987c8e61729fb81",
+      "new_blob": "e07db6b16ba2eaf34572cf65d18f73fa2998f635",
+      "status": "M",
+      "sha256": "1ba1f6d3016d57eeaf58c51421f9937e27310b8ab42e65ababb6c20995ab1666",
+      "firmware_build_input": false
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "f36c2d5530f35fb3b25101d66a22c162afd862b9",
+      "status": "A",
+      "sha256": "8b097e9df6d0d7807e469f8ed18b362b67a6b5eb2322ad5550dd33c3204510db",
+      "firmware_build_input": false
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "806b755406ea3435387aad3f6f7f868082328651",
+      "new_blob": "f0c5a076ea0d1729dc2d1a1ec32e06958ea1b56a",
+      "status": "M",
+      "sha256": "ab6aeef00b8c2412bb23b5ff9360978ccf2165f73f91bac09e05cef49534ea0e",
+      "firmware_build_input": false
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "d64f767d9bc45957f3bdfc1aa9f205e1c86e164e",
+      "new_blob": "74391ebcf0b185a214cd2c7dadd3cf8acf5b070f",
+      "status": "M",
+      "sha256": "ee86acad5e53041772385d6b16638f75d18676d5cbf0fb9c98fb2f442d52addd",
+      "firmware_build_input": false
+    },
+    {
+      "path": "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "1c5ffcdf7fb1088a92be7771409a6a80dcc4d077",
+      "status": "A",
+      "sha256": "54785336077a2314e0622060b4e771f1b15f8649d5686d8a612399a7e8929ea2",
+      "firmware_build_input": false
+    },
+    {
+      "path": "docs/runtime_config/runtime_config_validation_health.md",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "b6d262b0c860e9cae04e5d4966b4b81d3fdcd48c",
+      "new_blob": "a4b24de2d8b142549f41274c0c8d9e1c467cd8bc",
+      "status": "M",
+      "sha256": "96b15a60b8aad1a1e3402f9646ce4e1b0642d45f592a930391f8f5fdaa37cf08",
+      "firmware_build_input": false
+    },
+    {
+      "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "ad88fee6d08ba913bc75c0fb2aecefc4b6d8ea10",
+      "status": "A",
+      "sha256": "28fd0fb0485a1483e0ec0beab4657ad4746ea11a0149e67eaa78ca62ff245a29",
+      "firmware_build_input": false
+    },
+    {
+      "path": "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "1b77f0d75f96c409612bce13463b47ea73b7ac6a",
+      "status": "A",
+      "sha256": "ab8265928fbd359362aa70dd5547ac1876d001515a79764159513ada960388db",
+      "firmware_build_input": false
+    },
+    {
+      "path": "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "5c150f5c725be18f97720032c80585c9d250bb86",
+      "status": "A",
+      "sha256": "872855d12e5d3b6dd4404403a963988da3295339c5497b9a6d6501ec33abcad7",
+      "firmware_build_input": false
+    }
+  ],
+  "handoff": "0eb7f23b9f6b765e717d5e7455faa615695f0ebb",
+  "ready": "9ce55e71eff2be6fee366b52434042985de263e6",
+  "review_sha256": "692494a498d88139fc146b4558acb413efe3698e110f4a881a8ad43856354dc6",
+  "source_proof_sha256": "c91c5ebb25ad5fcc6a85dbe609693fb5dbeed2292029e702a7f06ad6d39a8a28"
+}

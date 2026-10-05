@@ -5491,12 +5491,13 @@
       },
       "checker_id": "generated_source_owned_baseline_artifact",
       "defines_main": true,
-      "file_size_bytes": 20332,
+      "file_size_bytes": 21182,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
         "candidate.view",
         "configurator",
+        "context.branch",
         "current_branch",
         "evidence",
         "validate_branch"
@@ -5508,7 +5509,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 488,
+      "line_count": 502,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
       "potential_branch_identity_signals": [
@@ -5516,6 +5517,7 @@
         "candidate",
         "candidate.view",
         "configurator",
+        "context.branch",
         "current_branch",
         "evidence",
         "validate_branch"
@@ -5556,7 +5558,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "0d223703b35fc4e912706082b0625f44b6c9038b6e4db4d9da82dc654c927cd0",
+      "sha256": "438d1c461d55f61f6e1b6010435e7e56fbe321d8042abf3842202ed69d090cf1",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -6504,7 +6506,7 @@
       },
       "checker_id": "gp_config019_usb_name_selection",
       "defines_main": true,
-      "file_size_bytes": 32405,
+      "file_size_bytes": 32807,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate_successor",
@@ -6518,7 +6520,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 461,
+      "line_count": 467,
       "parse_error": null,
       "path": "tools/check_glyph_gp_config019_usb_name_selection.py",
       "potential_branch_identity_signals": [
@@ -6580,7 +6582,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "d48d819bab33fe84207ccb7d0d0efe8d1489523020b59918994742edc8997e03",
+      "sha256": "27b0e5afa9cf1637a71dc00a60fd6702382d364824eedecebe09923e3e558d42",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -6696,6 +6698,78 @@
         "runtime_config_docs"
       ],
       "sha256": "30d4585295c187863a6326df35dc918aea29f20d8f3105aaafb484a543203d89",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "gp_config_017_neopixel_repaired_current",
+      "defines_main": true,
+      "file_size_bytes": 25514,
+      "hard_coded_branch_like_strings": [
+        "candidate_identity",
+        "evidence",
+        "omitted_null_branch"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 238,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+      "potential_branch_identity_signals": [
+        "candidate_identity",
+        "evidence",
+        "omitted_null_branch"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config_017_neopixel_repaired_current",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "HAL/pico/include/rgb/ButtonLocations.hpp",
+        "HAL/pico/src/rgb/ButtonLocations.cpp",
+        "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+        "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json",
+        "include/FastLED.h",
+        "include/copied",
+        "include/neopixel_definitions.hpp",
+        "src/config.cpp",
+        "tools/check_glyph_neopixel_null_sendreport_characterization.py",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config017_neopixel_repaired_current",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+        "tools/fixtures/neopixel_null_host/include",
+        "tools/fixtures/neopixel_null_host/include/FastLED.h",
+        "tools/fixtures/neopixel_null_host/include/config.pb.h",
+        "tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp",
+        "tools/fixtures/neopixel_null_host/neo_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "runtime_config_docs"
+      ],
+      "sha256": "28fd0fb0485a1483e0ec0beab4657ad4746ea11a0149e67eaa78ca62ff245a29",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -7902,6 +7976,68 @@
         "runtime_config": false,
         "source_owned": false,
         "y2_tilt3": true
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "neopixel_historical_replay",
+      "defines_main": true,
+      "file_size_bytes": 15981,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "evidence",
+        "source_candidates"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 260,
+      "parse_error": null,
+      "path": "tools/check_glyph_neopixel_historical_replay.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "evidence",
+        "source_candidates"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_neopixel_historical_replay",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "HAL/pico/include/rgb/ButtonLocations.hpp",
+        "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+        "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json",
+        "src/config.cpp",
+        "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+        "tools/check_glyph_neopixel_null_sendreport_characterization.py",
+        "tools/fixtures/custom_modifier_cache_host/schema/config.pb.h",
+        "tools/fixtures/neopixel_null_host/include/FastLED.h",
+        "tools/fixtures/neopixel_null_host/include/config.pb.h",
+        "tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp",
+        "tools/fixtures/neopixel_null_host/neo_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "2a9d3c8eef434d890dc1cf9eeec8fe3ca5f37235de68417a6146dcd6d621c9da",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
       }
     },
     {

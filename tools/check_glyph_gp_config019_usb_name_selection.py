@@ -244,14 +244,20 @@ def guard_critical_inputs(head):
     accepted = {p: entry for p, entry in _tree(REPOSITORY_ROOT, ACCEPTED_F020).items() if critical(p)}
     committed = {p: entry for p, entry in _tree(REPOSITORY_ROOT, head).items() if critical(p)}
     if committed != accepted:
-        from glyph_c014_campaign_transition import authenticate, CRITICAL, C
-        differences = {p for p in committed.keys() | accepted.keys() if committed.get(p) != accepted.get(p)}
-        require(differences <= CRITICAL, 'critical drift outside existing exact C014 candidate')
+        from glyph_campaign_transition import authenticate
         proof = authenticate(REPOSITORY_ROOT)
-        require(proof['target'] == head and proof['phase'] in
-                {'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'} and
-                all(proof['source_candidates'].get(p) == C for p in differences),
-                'C014 source compatibility lacks existing authenticated phase')
+        differences = {p for p in committed.keys() | accepted.keys() if committed.get(p) != accepted.get(p)}
+        require(differences <= proof['critical_paths'], 'critical drift outside authenticated campaign source')
+        phase = (proof['phase'] in {'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'} or
+                 (proof.get('contract') == 'c017_neopixel' and
+                  proof['phase'] in {'BASELINE', 'SOURCE_FREE_PROCESSOR'} and
+                  proof.get('predecessor_phase') == 'ACCEPTED_TRANSITION'))
+        require(proof['target'] == head and phase and
+                all(proof['source_candidates'].get(p) is not None and
+                    git_read('show', head + ':' + p) ==
+                    git_read('show', proof['source_candidates'][p] + ':' + p)
+                    for p in differences),
+                'current source compatibility lacks exact authenticated campaign ownership')
     require(not ignored_critical_worktree_paths(REPOSITORY_ROOT) and
             not untracked_critical_worktree_paths(REPOSITORY_ROOT), 'ignored/untracked critical input')
     require(not any(critical(p) for p in tracked_worktree_divergence(REPOSITORY_ROOT)),

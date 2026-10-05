@@ -104,6 +104,35 @@ def campaign_guard_arguments(entry: dict[str, object]) -> bool:
     return True
 
 
+def c017_replay_arguments(entry: dict[str, object]) -> bool:
+    """Two exact035 source replay commands retain actual current load-bearing proof."""
+    path = 'tools/check_glyph_neopixel_historical_replay.py'
+    identities = {
+        'neopixel_null_sendreport_characterization': ('configurator', []),
+        'gp_config017_neopixel_repaired_current': ('candidate_safety', ['--repaired-current']),
+    }
+    if entry['id'] not in identities and entry['path'] != path:
+        return False
+    if entry['id'] not in identities:
+        raise ValueError('unrecognized reserved035 replay identity')
+    category, arguments = identities[entry['id']]
+    expected = dict(path=path, command=['python3', path, *arguments],
+                    required_arguments=arguments, category=category,
+                    applicability='current', branch_policy='content_and_scope',
+                    load_bearing=True, historical=False, mutation_risk='temporary_file_only')
+    if (any(entry[key] != value for key, value in expected.items()) or
+            type(entry['load_bearing']) is not bool or type(entry['historical']) is not bool):
+        raise ValueError('invalid reserved035 replay command/phase contract')
+    indexed = git('ls-files', '--stage', '-z', '--', path)
+    expected_stage = '100644 ' + git('rev-parse', ':' + path).stdout.strip() + ' 0\t' + path + '\0'
+    if (indexed.returncode or indexed.stdout != expected_stage or
+            not (ROOT / path).is_file() or (ROOT / path).is_symlink() or
+            (ROOT / path).stat().st_mode & 0o111 or
+            any((ROOT / parent).is_symlink() for parent in PurePosixPath(path).parents)):
+        raise ValueError('reserved035 replay requires exact stage-zero regular100644 file')
+    return True
+
+
 def direct_local_helpers(checker_path: str) -> set[str]:
     source = (ROOT / checker_path).read_text(encoding="utf-8")
     tree = ast.parse(source, filename=checker_path)
@@ -169,7 +198,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if not isinstance(checker_id, str) or checker_id in ids:
             raise ValueError(f"duplicate checker ID: {checker_id}")
         ids.add(checker_id)
-        campaign_arguments = campaign_guard_arguments(entry)
+        campaign_arguments = campaign_guard_arguments(entry) or c017_replay_arguments(entry)
         if entry["category"] not in categories:
             raise ValueError(f"invalid category: {entry['category']}")
         if not isinstance(entry["command"], list) or not all(isinstance(part, str) for part in entry["command"]):
@@ -576,6 +605,10 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         ('custom_modifier_cache_characterization', ['python3', 'tools/check_glyph_custom_modifier_cache_characterization.py']),
         ('gp_config014_modifier_capacity', ['python3', 'tools/check_glyph_gp_config014_modifier_capacity.py']),
         ('gp_val034_c014_transition', ['python3', 'tools/test_glyph_c014_campaign_transition.py']),
+        ('gp_val035_c017_transition', ['python3', 'tools/test_glyph_c017_campaign_transition.py']),
+        ('neopixel_null_sendreport_characterization', ['python3', 'tools/check_glyph_neopixel_historical_replay.py']),
+        ('gp_config017_neopixel_repaired_current', ['python3', 'tools/check_glyph_neopixel_historical_replay.py', '--repaired-current']),
+        ('gp_config019_usb_name_selection', ['python3', 'tools/check_glyph_gp_config019_usb_name_selection.py']),
     ])
     if any(entry['applicability'] == 'current'
            and entry['id'] == identity and entry['command'] == command
@@ -583,7 +616,7 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         from glyph_campaign_transition import ROOTS, TRANSITIONS, authenticate
         proof = authenticate(ROOT)
         roots.update(ROOTS)
-        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity'}:
+        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity', 'c017_neopixel'}:
             # GP-VAL-043 exports only roots whose finite candidate, authority and
             # accepted-transition contracts passed the actual phase proof. The
             # mutable mapping/catalog never supplies runner authority by itself.
