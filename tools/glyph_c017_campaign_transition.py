@@ -247,6 +247,8 @@ def _preserve_accepted_predecessors(root: Path, head: str):
         require(current_bytes(root, path) == expected and
                 _git(root, 'show', ':' + path) == expected,
                 '017 live/index predecessor metadata substitution: ' + path)
+        _stage_and_live(root, head, path, _tree(root, head)[path])
+    _stage_and_live(root, head, QUEUE, _tree(root, head)[QUEUE])
     for raw in (current_bytes(root, QUEUE), _git(root, 'show', ':' + QUEUE)):
         for order, accepted in (('GP-CONFIG-020', c020), ('GP-CONFIG-014', c014)):
             row = previous.state_from(raw, order)
@@ -342,6 +344,7 @@ def _manifest_pair(root: Path, head: str):
     raw = current_bytes(root, path)
     require(raw == raw_bytes(root, head, path) and _git(root, 'show', ':' + path) == raw,
             '017 manifest live/index substitution')
+    _stage_and_live(root, head, path, _tree(root, head)[path])
     manifest = json.loads(raw, object_pairs_hook=unique)
     base = json.loads(raw_bytes(root, B, path), object_pairs_hook=unique)
     original_id = 'neopixel_null_sendreport_characterization'
@@ -384,7 +387,8 @@ def _manifest_pair(root: Path, head: str):
         'tools/fixtures/neopixel_null_host/include/core/CommunicationBackend.hpp',
         'tools/glyph_c017_campaign_transition.py'))
     repaired = entry(manifest, repaired_id)
-    require(repaired == {
+    require(repaired.get('load_bearing') is True and repaired.get('historical') is False
+            and repaired == {
         'id': repaired_id, 'path': HISTORICAL_WRAPPER,
         'command': ['python3', HISTORICAL_WRAPPER, '--repaired-current'],
         'category': 'candidate_safety', 'applicability': 'current',
@@ -601,9 +605,19 @@ def authenticate(root: Path):
     first_catalog = None
     done = False
     # Scan immutable queue history for the first real processor transition.
-    # A later DONE row or catalog cannot self-declare an earlier HEP PASS.
+    # C, M and F are side-branch ancestors of the final integration but are not
+    # descendants of E. Their pending rows must remain pending; only actual
+    # descendants of E inherit its latched PASS, catalog and DONE obligations.
     for revision in _git(root, 'rev-list', '--reverse', '--topo-order', READY + '..' + head).decode().split():
         row = item(root, revision, 'GP-CONFIG-017')
+        introduced = (_catalog(raw_bytes(root, revision, TRANSITIONS))
+                      if TRANSITIONS in _tree(root, revision) else [])
+        if processor is not None and not ancestor(root, processor['evidence_commit'], revision):
+            require(row['hardware_result'] is None
+                    and row['status'] not in {'HARDWARE_VALIDATED', 'DONE'}
+                    and not introduced,
+                    '017 competing PASS/catalog/DONE outside first E ancestry')
+            continue
         if row['hardware_result'] == 'PASS' or row['status'] in {'HARDWARE_VALIDATED', 'DONE'}:
             require(row['hardware_result'] == 'PASS' and
                     row['status'] in {'HARDWARE_VALIDATED', 'DONE'} and
@@ -623,8 +637,12 @@ def authenticate(root: Path):
                     '017 DONE status downgraded')
         elif processor is not None:
             require(False, '017 processor PASS erased/downgraded')
-        introduced = (_catalog(raw_bytes(root, revision, TRANSITIONS))
-                      if TRANSITIONS in _tree(root, revision) else [])
+        if processor is not None:
+            for path, key in ((PROTOCOL, 'protocol'), (EVIDENCE, 'payload'),
+                              (RESULT, 'result')):
+                require(_tree(root, revision).get(path, ())[:2] == ('100644', 'blob')
+                        and raw_bytes(root, revision, path) == processor[key],
+                        '017 accepted evidence/protocol/result erased/replaced: ' + path)
         if introduced:
             require(processor is not None and len(introduced) == 1,
                     '017 catalog precedes processor')
