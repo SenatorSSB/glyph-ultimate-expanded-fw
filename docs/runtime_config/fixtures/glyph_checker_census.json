@@ -1082,7 +1082,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "f171268548848d7731bb2f2678aff321d919719419ae5087f04ee9abe93eb126",
+      "sha256": "c1e9cc339471f2d0e80439ccab8159cc78d5c660b9136eefa86ad174ab12446f",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

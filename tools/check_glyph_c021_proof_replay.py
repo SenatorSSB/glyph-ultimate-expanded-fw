@@ -25,7 +25,7 @@ ENGINE='tools/check_glyph_gp_config021_persisted_recovery.py'
 ENGINE_BLOB='a3d3dd9186c7f885316adca16706d360e652dd90'
 ENGINE_SHA='2dc78d118dd2936ad9544a297ef00a66a140f90dc58152c87c2abbe423ef556d'
 FIXTURE='docs/runtime_config/fixtures/gp_val038_c021_consumer_replay.json'
-FIXTURE_SHA='6724b99d5bb66f086a91fc7676fc08aa6488015783bbc134deaf8a8776a6cf31'
+FIXTURE_SHA='f79910067ee547fdf3db98b865dd130ee2883e1be8a445222bb8cdb10b4726b7'
 PHASES={'BASELINE','CANDIDATE_VALIDATION_ONLY','SOURCE_FREE_PROCESSOR','ACCEPTED_TRANSITION'}
 CONSUMERS=('persistence', 'raw_get', 'transaction005', 'rebind008', 'menu009', 'button012', 'usb013', 'button020', 'kbd001', 'usb019', 'neopixel016_017', 'modifier011', 'modifier014', 'transition035')
 

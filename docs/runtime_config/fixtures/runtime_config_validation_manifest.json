@@ -49,7 +49,7 @@
       ],
       "load_bearing": true,
       "historical": false,
-      "reason": "Authenticated unchanged original035 main executes on its exact immutable B021 full snapshot; separately the actual current038 transition test executes new finite source/lifecycle gates. Preserve earlier evidence and all build/hardware gates; no physical acceptance inferred."
+      "reason": "Authenticated unchanged original035 main executes on its exact immutable B021 full snapshot; paired full public current038 admission uses --current-only. The full noarg038 synthetic lifecycle is a separate mandatory current/load-bearing manifest entry. Preserve earlier evidence and all build/hardware gates; no physical acceptance inferred."
     },
     {
       "id": "gp_config019_usb_name_selection",
