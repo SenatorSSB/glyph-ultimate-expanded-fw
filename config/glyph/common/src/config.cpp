@@ -27,6 +27,7 @@
 #include <config.pb.h>
 #include "hardware/sync.h"
 #include "pico/lock_core.h"
+#include "pico/mutex.h"
 
 extern bool LED_OK;
 extern bool SCREEN_OK;
@@ -52,7 +53,68 @@ size_t input_source_count = sizeof(input_sources) / sizeof(InputSource *);
 Adafruit_SSD1306 display(128, 64, &OLED_WIRE_INSTANCE);
 
 bool failed_detection = false;
-bool main_setup_done = false;
+namespace {
+
+// SDK runtime initializes .mutex_array before main launches core1. setup1 can
+// therefore acquire this lock even while core0 has not entered setup yet.
+auto_init_mutex(boot_state_mutex);
+
+enum class BootOutcome { Pending, Normal, StoredConfigRejected, StorageFailure, DefaultsRejected };
+struct BootSnapshot {
+    BootOutcome outcome = BootOutcome::Pending;
+    bool display_ready = false;
+};
+BootSnapshot boot_state;
+
+BootSnapshot read_boot_state() {
+    mutex_enter_blocking(&boot_state_mutex);
+    const BootSnapshot snapshot = boot_state;
+    mutex_exit(&boot_state_mutex);
+    return snapshot;
+}
+
+void publish_boot_state(BootOutcome outcome, bool display_ready) {
+    mutex_enter_blocking(&boot_state_mutex);
+    // A boot decision is permanent. No gameplay or menu path can clear refusal.
+    if (boot_state.outcome == BootOutcome::Pending) {
+        boot_state = BootSnapshot{ outcome, display_ready };
+    }
+    mutex_exit(&boot_state_mutex);
+}
+
+bool refused(BootOutcome outcome) {
+    return outcome != BootOutcome::Pending && outcome != BootOutcome::Normal;
+}
+
+void draw_recovery_page(BootOutcome outcome) {
+    display.clearDisplay();
+    display.setFont(nullptr);
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0, 0);
+    if (outcome == BootOutcome::StoredConfigRejected) {
+        display.println("Stored Config rejected");
+    } else if (outcome == BootOutcome::DefaultsRejected) {
+        display.println("Config defaults rejected");
+    } else {
+        display.println("Config storage failure");
+    }
+    display.println("Recovery required");
+    display.println("Operation refused");
+    display.display();
+}
+
+void refuse_boot(BootOutcome outcome, bool display_ready) {
+    watchdog_hw->scratch[0] = 0;
+    watchdog_hw->scratch[1] = 0;
+    if (display_ready) {
+        draw_recovery_page(outcome);
+    }
+    // All core0 display work precedes release. Only core1 draws after acquire.
+    publish_boot_state(outcome, display_ready);
+}
+
+}  // namespace
 
 
 void setup() {
@@ -65,15 +127,18 @@ void setup() {
     Wire1.setClock(1'000'000UL);
     Wire1.begin();
 
-    if (display.begin(SSD1306_SWITCHCAPVCC, 0x3C, false, false)) {
+    const bool display_ready = display.begin(SSD1306_SWITCHCAPVCC, 0x3C, false, false);
+    if (display_ready) {
         display.clearDisplay();
     }
 
     // Check bootsel button hold as early as possible for safety.
     if (inputs.mb1) {
         // Show update splash image
-        display.drawBitmap(0, 0, Bitmap_Update, 128, 64, 1);
-        display.display();
+        if (display_ready) {
+            display.drawBitmap(0, 0, Bitmap_Update, 128, 64, 1);
+            display.display();
+        }
 
         FastLED.addLeds<NEOPIXEL, LED_PIN>(bootloaderRGB, LED_COUNT);
         FastLED.setMaxPowerInVoltsAndMilliamps(5, 200);
@@ -82,14 +147,25 @@ void setup() {
         FastLED.show();
 
         reboot_bootloader();
-    } else {
+    } else if (display_ready) {
         display.drawBitmap(0, 0, Bitmap_Glyph_Splashscreen, 128, 64, 1);
         display.display();
     }
 
-    // Attempt to load config, or write default config to flash if failed to load config.
-    if (!persistence.LoadConfig(config)) {
-        persistence.SaveConfig(config);
+    // Defaults are private until validated and a complete stored load succeeds.
+    // Boolean open failure cannot prove absence on the selected filesystem API.
+    ConfigValidationError validation_error;
+    if (!persistence.SetValidator(validate_config_semantics) ||
+        !persistence.ValidateConfig(config, validation_error)) {
+        refuse_boot(BootOutcome::DefaultsRejected, display_ready);
+        return;
+    }
+    const Persistence::LoadResult load_result = persistence.LoadConfigChecked(config);
+    if (load_result != Persistence::LoadResult::Loaded) {
+        refuse_boot(load_result == Persistence::LoadResult::Rejected
+                        ? BootOutcome::StoredConfigRejected : BootOutcome::StorageFailure,
+                    display_ready);
+        return;
     }
 
     // Create array of input sources to be used.
@@ -113,11 +189,12 @@ void setup() {
         backend_count = 1;
     } 
 
-    main_setup_done = true;
+    publish_boot_state(BootOutcome::Normal, display_ready);
 }
 
 void loop() {
-    if(backends[0] == nullptr) return;
+    if (read_boot_state().outcome != BootOutcome::Normal) return;
+    if (backends == nullptr || backend_count == 0 || backends[0] == nullptr) return;
     select_mode(backends, backend_count, config);
 
     for (size_t i = 0; i < backend_count; i++) {
@@ -132,22 +209,24 @@ void loop() {
 /* Second core handles OLED display */
 IntegratedDisplay *display_backend = nullptr;
 
-RgbBrightnessMenu rgb_brightness_menu(config);
-
 InputDisplay *input_viewer = nullptr;
-
-AboutMenu about_menu(config);
-
-RemapMenu remap_menu;
 
 /* Second core also handles RGB */
 NeoPixelBackend<LED_PIN, LED_COUNT> *led_backend = nullptr;
 
 void setup1() {
-    while (!main_setup_done) {
+    BootSnapshot snapshot = read_boot_state();
+    while (snapshot.outcome == BootOutcome::Pending) {
         delay(1);
+        snapshot = read_boot_state();
     }
-    // These have to be initialized after backends.
+    if (refused(snapshot.outcome)) {
+        return;
+    }
+    // These have to be initialized after validated backends.
+    static RgbBrightnessMenu rgb_brightness_menu(config);
+    static AboutMenu about_menu(config);
+    static RemapMenu remap_menu;
 
     /** rgb zone **/
     led_backend = new NeoPixelBackend<LED_PIN, LED_COUNT>(
@@ -223,6 +302,14 @@ void dummyloop() {
 }
 
 void loop1() {
+    const BootSnapshot snapshot = read_boot_state();
+    if (refused(snapshot.outcome)) {
+        if (snapshot.display_ready) {
+            draw_recovery_page(snapshot.outcome);
+        }
+        return;
+    }
+    if (snapshot.outcome != BootOutcome::Normal) return;
     if (display_backend == nullptr) {
         return;
     }

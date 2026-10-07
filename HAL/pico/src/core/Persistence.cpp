@@ -25,15 +25,88 @@
 #include <pb_decode.h>
 #include <pb_encode.h>
 
+#include <cstring>
+
+namespace {
+
+struct ConfigFileReader {
+    File *file;
+    bool io_failed = false;
+};
+
+bool read_config_file(pb_istream_t *stream, pb_byte_t *buffer, size_t count) {
+    ConfigFileReader &reader = *static_cast<ConfigFileReader *>(stream->state);
+    // Nanopb may request a skipped field with a null buffer. Keep that read
+    // bounded, and distinguish short/error I/O from a complete malformed payload.
+    uint8_t skipped[32];
+    while (count != 0) {
+        const size_t chunk = buffer == nullptr && count > sizeof(skipped)
+            ? sizeof(skipped) : count;
+        uint8_t *destination = buffer != nullptr ? buffer : skipped;
+        const int read = reader.file->read(destination, chunk);
+        if (read < 0 || static_cast<size_t>(read) != chunk) {
+            reader.io_failed = true;
+            return false;
+        }
+        count -= chunk;
+        if (buffer != nullptr) buffer += chunk;
+    }
+    return true;
+}
+
+}  // namespace
+
 Persistence::Persistence() {
-    LittleFS.begin();
+    _configuration_ok = LittleFS.setConfig(LittleFSConfig(false));
+    if (_configuration_ok) {
+        _mounted = LittleFS.begin();
+    }
 }
 
 Persistence::~Persistence() {
-    LittleFS.end();
+    if (_mounted) {
+        LittleFS.end();
+    }
+}
+
+bool Persistence::IsAvailable() const {
+    return _configuration_ok && _mounted;
+}
+
+bool Persistence::SetValidator(ConfigSemanticValidator validator) {
+    if (validator == nullptr) {
+        return false;
+    }
+    if (_validator != nullptr) {
+        return _validator == validator;
+    }
+    _validator = validator;
+    return true;
+}
+
+bool Persistence::ValidateConfig(const Config &config, ConfigValidationError &error) const {
+    error = ConfigValidationError{};
+    if (_validator == nullptr) {
+        static const char message[] = "Config validator is not installed";
+        std::memcpy(error.message, message, sizeof(message));
+        error.length = sizeof(message);
+        return false;
+    }
+    // Every adapter receives an already bounded object. The generic callback
+    // retains the existing binding and reference rules; 022 can add its adapter.
+    if (!validate_config_extents(config)) {
+        static const char message[] = "Config contains an invalid button binding";
+        std::memcpy(error.message, message, sizeof(message));
+        error.length = sizeof(message);
+        return false;
+    }
+    return _validator(config, error);
 }
 
 bool Persistence::SaveConfig(Config &config) {
+    if (!IsAvailable()) {
+        return false;
+    }
     // Make sure config encodes correctly.
     size_t encoded_size;
     if (!pb_get_encoded_size(&encoded_size, Config_fields, &config)) {
@@ -78,39 +151,67 @@ bool Persistence::SaveConfig(Config &config) {
 }
 
 bool Persistence::LoadConfig(Config &config) {
-    // Open file to load config data from.
+    return LoadConfigChecked(config) == LoadResult::Loaded;
+}
+
+Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
+    if (!IsAvailable() || _validator == nullptr) {
+        return LoadResult::StorageFailure;
+    }
+
+    // Config is too large for the core stack. This boot-owned candidate never
+    // becomes active and is reset for every attempt, including partial decodes.
+    static Config candidate;
+    candidate = Config_init_default;
+
     File config_file = LittleFS.open(config_filename, "r");
     if (!config_file) {
-        return false;
+        // The selected Boolean FS API cannot distinguish absence from I/O failure.
+        // Absent remains reserved for positively proved absence; it is not inferred.
+        return LoadResult::StorageFailure;
     }
 
-    if (!CheckSavedConfig(config_file)) {
+    LoadResult failure = LoadResult::Rejected;
+    if (!CheckSavedConfig(config_file, &failure)) {
         config_file.close();
-        return false;
+        return failure;
+    }
+    const size_t file_size = config_file.size();
+    if (file_size < config_offset || !config_file.seek(config_offset)) {
+        config_file.close();
+        return LoadResult::StorageFailure;
     }
 
-    // Seek to start of Protobuf data.
-    if (!config_file.seek(config_offset)) {
+    ConfigFileReader reader{ &config_file };
+    pb_istream_t istream{};
+    istream.callback = read_config_file;
+    istream.state = &reader;
+    istream.bytes_left = file_size - config_offset;
+    if (!pb_decode(&istream, Config_fields, &candidate)) {
         config_file.close();
-        return false;
+        return reader.io_failed ? LoadResult::StorageFailure : LoadResult::Rejected;
+    }
+    if (istream.bytes_left != 0 || config_file.position() != file_size ||
+        config_file.size() != file_size) {
+        config_file.close();
+        return LoadResult::StorageFailure;
     }
 
-    // Reset config defaults first, so config is completely replaced rather than merged with
-    // defaults.
-    config = Config_init_default;
-
-    // Decode streamed Protobuf data into config struct.
-    pb_istream_t istream = as_pb_istream(config_file, (size_t)config_file.available());
-    if (!pb_decode(&istream, Config_fields, &config)) {
+    ConfigValidationError error;
+    if (!ValidateConfig(candidate, error)) {
         config_file.close();
-        return false;
+        return LoadResult::Rejected;
     }
 
     config_file.close();
-    return true;
+    config = candidate;
+    return LoadResult::Loaded;
 }
 
 bool Persistence::CheckSavedConfig() {
+    if (!IsAvailable()) {
+        return false;
+    }
     // Open file to load config data from.
     File config_file = LittleFS.open(config_filename, "r");
     if (!config_file) {
@@ -123,6 +224,9 @@ bool Persistence::CheckSavedConfig() {
 }
 
 size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
+    if (!IsAvailable()) {
+        return false;
+    }
     // Open file to load config data from.
     File config_file = LittleFS.open(config_filename, "r");
     if (!config_file) {
@@ -151,33 +255,44 @@ size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
     return true;
 }
 
-bool Persistence::CheckSavedConfig(File &config_file) {
-    size_t file_size = config_file.size();
-
-    // Read file header.
-    ConfigHeader header;
-    size_t bytes_read = config_file.read((uint8_t *)&header, sizeof(ConfigHeader));
-    if (bytes_read < sizeof(ConfigHeader)) {
+bool Persistence::CheckSavedConfig(File &config_file, LoadResult *failure) {
+    if (failure != nullptr) {
+        *failure = LoadResult::Rejected;
+    }
+    const size_t file_size = config_file.size();
+    if (file_size < config_offset) {
+        return false;
+    }
+    if (!config_file.seek(0)) {
+        if (failure != nullptr) *failure = LoadResult::StorageFailure;
         return false;
     }
 
-    // Validate config length.
-    size_t config_size = file_size - config_offset;
+    ConfigHeader header;
+    const int bytes_read = config_file.read((uint8_t *)&header, sizeof(ConfigHeader));
+    if (bytes_read != static_cast<int>(sizeof(ConfigHeader))) {
+        if (failure != nullptr) *failure = LoadResult::StorageFailure;
+        return false;
+    }
+    const size_t config_size = file_size - config_offset;
     if (config_size != header.config_size) {
         return false;
     }
 
-    // Calculate CRC for file contents and compare with CRC in header.
     CRC32 crc;
-    int value;
-    while ((value = config_file.read()) != -1) {
+    for (size_t i = 0; i < config_size; ++i) {
+        const int value = config_file.read();
+        if (value < 0) {
+            if (failure != nullptr) *failure = LoadResult::StorageFailure;
+            return false;
+        }
         crc.update((uint8_t)value);
     }
-    if (crc.finalize() != header.config_crc) {
+    if (config_file.position() != file_size || config_file.size() != file_size) {
+        if (failure != nullptr) *failure = LoadResult::StorageFailure;
         return false;
     }
-
-    return true;
+    return crc.finalize() == header.config_crc;
 }
 
 Persistence persistence;

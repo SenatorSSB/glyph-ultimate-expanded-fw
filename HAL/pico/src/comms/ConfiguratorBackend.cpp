@@ -19,7 +19,7 @@
 
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
-#include "core/config_button_validation.hpp"
+#include "core/config_validation.hpp"
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
 
@@ -179,98 +179,10 @@ bool ConfiguratorBackend::HandleSetConfig() {
         return false;
     }
 
-    if (!validate_config_button_bindings(candidate)) {
-        char errmsg[] = "Config contains an invalid button binding";
-        WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
+    ConfigValidationError validation_error;
+    if (!persistence.ValidateConfig(candidate, validation_error)) {
+        WritePacket(CMD_ERROR, (uint8_t *)validation_error.message, validation_error.length);
         return false;
-    }
-
-    if (candidate.default_backend_config > candidate.communication_backend_configs_count) {
-        char errmsg[75];
-        size_t errmsg_len = snprintf(
-            errmsg,
-            sizeof(errmsg),
-            "Default backend ID is %d but only %d backend configs are defined",
-            (uint8_t)candidate.default_backend_config,
-            (uint8_t)candidate.communication_backend_configs_count
-        );
-        WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
-        return false;
-    }
-
-    for (size_t i = 0; i < candidate.communication_backend_configs_count; i++) {
-        uint8_t default_mode_id = candidate.communication_backend_configs[i].default_mode_config;
-        if (default_mode_id > candidate.game_mode_configs_count) {
-            char errmsg[75];
-            size_t errmsg_len = snprintf(
-                errmsg,
-                sizeof(errmsg),
-                "Default mode ID is %d for backend %d but only %d modes are defined",
-                (uint8_t)default_mode_id,
-                (uint8_t)i + 1,
-                (uint8_t)candidate.game_mode_configs_count
-            );
-            WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
-            return false;
-        }
-    }
-
-    for (size_t i = 0; i < candidate.game_mode_configs_count; i++) {
-        const GameModeConfig &gamemode_config = candidate.game_mode_configs[i];
-        uint8_t keyboard_mode_id = gamemode_config.keyboard_mode_config;
-        uint8_t custom_mode_id = gamemode_config.custom_mode_config;
-
-        if (keyboard_mode_id > 0 && gamemode_config.mode_id != MODE_KEYBOARD) {
-            char errmsg[80];
-            size_t errmsg_len = snprintf(
-                errmsg,
-                sizeof(errmsg),
-                "keyboard_mode_id is set for game mode %d but mode_id is not MODE_KEYBOARD",
-                (uint8_t)i + 1
-            );
-            WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
-            return false;
-        }
-
-        if (custom_mode_id > 0 && gamemode_config.mode_id != MODE_CUSTOM) {
-            char errmsg[75];
-            size_t errmsg_len = snprintf(
-                errmsg,
-                sizeof(errmsg),
-                "custom_mode_id is set for game mode %d but mode_id is not MODE_CUSTOM",
-                (uint8_t)i + 1
-            );
-            WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
-            return false;
-        }
-
-        if (keyboard_mode_id > candidate.keyboard_modes_count) {
-            char errmsg[85];
-            size_t errmsg_len = snprintf(
-                errmsg,
-                sizeof(errmsg),
-                "Keyboard mode ID %d is for game mode %d but only %d keyboard modes are defined",
-                (uint8_t)keyboard_mode_id,
-                (uint8_t)i + 1,
-                (uint8_t)candidate.keyboard_modes_count
-            );
-            WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
-            return false;
-        }
-
-        if (custom_mode_id > candidate.custom_modes_count) {
-            char errmsg[85];
-            size_t errmsg_len = snprintf(
-                errmsg,
-                sizeof(errmsg),
-                "Custom mode ID %d is for game mode config %d but only %d custom modes are defined",
-                (uint8_t)custom_mode_id,
-                (uint8_t)i + 1,
-                (uint8_t)candidate.custom_modes_count
-            );
-            WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
-            return false;
-        }
     }
 
     if (!persistence.SaveConfig(candidate)) {

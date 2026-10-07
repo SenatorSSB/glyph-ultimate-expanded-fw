@@ -20,6 +20,7 @@
 
 #include <LittleFS.h>
 #include <config.pb.h>
+#include "core/config_validation.hpp"
 
 class Persistence {
   public:
@@ -31,6 +32,13 @@ class Persistence {
     Persistence();
     ~Persistence();
 
+    enum class LoadResult { Loaded, Absent, Rejected, StorageFailure };
+
+    bool SetValidator(ConfigSemanticValidator validator);
+    bool ValidateConfig(const Config &config, ConfigValidationError &error) const;
+    bool IsAvailable() const;
+    LoadResult LoadConfigChecked(Config &config);
+
     bool SaveConfig(Config &config);
     bool LoadConfig(Config &config);
     bool CheckSavedConfig();
@@ -41,7 +49,11 @@ class Persistence {
   private:
     static constexpr char config_filename[] = "config.bin";
 
-    bool CheckSavedConfig(File &config_file);
+    bool _configuration_ok = false;
+    bool _mounted = false;
+    ConfigSemanticValidator _validator = nullptr;
+
+    bool CheckSavedConfig(File &config_file, LoadResult *failure = nullptr);
 };
 
 extern Persistence persistence;
