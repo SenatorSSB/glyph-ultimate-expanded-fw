@@ -1,5 +1,7 @@
 # Active Agent Queue
 
+GP-CONFIG-017 source-free HEP records exact owner-reported GP_CONFIG_017_HW_V1 PASS: F5994f1657e45e0883c6c75468a19be7e3b49a72c/tree0404687bb795e78f0f607fbad865369578615cff, UF2e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672bytes; literalAbout Glyph HayBox/5994f165/glyph_mk6. Sevenrows pass; native repo-json:docs/calibration/fixtures/gp_config_017_hardware_evidence.json and result docs/calibration/gp_config_017_hardware_result.md preserve completeverbatimreport/sessionbytes. SeparateSHIFT/XWAVE RGB andactualRF10A onMacXInput satisfy ordinarysupportedUSB; humanPARTIAL solely for untestednativeSwitch is preserved/explained, not a protocolgap. DynamicGameCube excluded; directnativeSwitch dynamicNOT_TESTED. ActualUltimate/X1 GC/Switch/WUP028+MacXInput andcleanrelease pass; originalConfig4201bytes/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byteexact immediate/postrebootrestoration. No anomalyreported; forced/nullRGBNOT_TESTED, physicalnullreachabilityUNKNOWN, rootcauseUNPROVEN,NunchukNOT_TESTED. Exactcriticalsource/protocol/catalog unchanged,017F unintegrated; separate sameH3 integration/freshreview/strictDONE then021 remainsnext. All98otherorders/rawKeyboardpolicy preserved; actualaggregateFAIL/TIMEOUT/nativeUNAVAILABLE retained, no fullaggregatePASS/rebuild/retest. Frozenowner testenvironment remainsprotected, no supplementrequired.
+
 GP-CONFIG-017 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `5994f1657e45e0883c6c75468a19be7e3b49a72c`, sole composition parent `a7b8758a4d9d353fcfeb0592cc155b4f50f4f358`, tree `0404687bb795e78f0f607fbad865369578615cff`. Mk6 build, resolved21-role decoder closure and owner-held UF2 custody PASS. Preserved UF2 SHA-256 `e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5`, 796672 bytes, locator `local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2`. All15 actual focused checks PASS/nativeMATCH; independent source witnesses verify all1430tracked modes/index/live,236critical==C017 and99queue==strict035DONE. Exact runtime/cache source pins,19prebuild decoder roles and native tracked source/index proof remain unchanged through build/custody. Fresh independent review approves exact source/build/custody/correspondence and conditional staged GP_CONFIG_017_HW_V1. Actual native full aggregate FAIL/AGGREGATE_TIMEOUT/nativeUNAVAILABLE retained with13 outcomes; outer fullnativeMATCH,300/120 unchanged. Unchanged034 synthetic applicability FAIL remains separate honestTier3 debt; additional root prebuild cache-classification FAIL stopped before compilation and remains retained, with exact copied-cache pins/native build integrity and actual decoder proof supplying the final build basis. No fullaggregatePASS or post-cache fullcampaignauthenticatePASS. This canonical handoff has five source-free docs/control-plane paths; candidateHAL remains unmerged. GP-VAL-035 strictDONE `ace41056887ec08616a5c67f026880e1b0d8e81a`; originalC017 `478f438804275f3e0c23e6f36bfd26e34aa343bf` preserved. First owner action: one connection on accepted firmware in normal gameplay mode, model/backend/host/profile/startup/RGB baseline and anomalies. No firmware or Config change yet. Fresh Config/raw backup, safe byte-exact restoration and actual static/SHIFT/XWAVE profiles/expectations precede any mutation; ordinary menu selection persists Config after intentional disconnect/reboot. Required seven physical rows pending; no inherited014 acceptance. All98otherorders and exact014/020PASS unchanged. Persistent H3 reaches hardwarewait and releases solecanonical authority only after reviewed pending publication/liveverification. Existing ownerchain resumes only after actual exact humanHEP PASS. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN.
 
 Independent packet0028 curation is complete. Same-base immutable receipt `3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b` and its descendant adoption authorize GP-CONFIG-024/GP-VAL-045 as PREAUTHORIZED/WAITING behind existing023 exact DONE/PASS; no immediate implementation. The [binding source-free adjudication](../agent_framework/PORTFOLIO_20261005_0028_CURATOR.md) preserves all97priororders, completed040/KBD/041/019 and frozen014F/artifact/protocol. Direct owner conditional and independently fetched original Glyph/main HayBox bytes select PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT; no transformed-output repair or executable GP-KBD-002 is authorized. Original-input remap/SOCD discrepancies stay truthful; required physical/RC Keyboard rows remain pending. Allthree proposals are consumed, no globalwait accepted, and current marker defines liveness. Existing014->017->021->022->023 chain remains intact; owner hardware worktree is exclusive and was never entered/inspected/polled. Nunchuk NOT_TESTED; root cause UNPROVEN. Earlier characterization summaries retain their completion-time evidence; this current disposition supersedes their unresolved-policy instructions.
@@ -159,15 +161,14 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 8,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 1,
+    "hardware_pending": 0,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
     "PLANNER_REFRESH_REQUIRED",
-    "PLANNING_REQUIRED",
-    "HARDWARE_TEST_REQUIRED"
+    "PLANNING_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -696,7 +697,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-017",
       "title": "Null RGB ordering",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "HARDWARE_VALIDATED",
       "branch": "codex/gp-config-017-built-f",
       "objective": "Source and GP-CONFIG-016 support moving only the existing null branch before speed access while preserving time bookkeeping/non-null behavior; no fallback choice.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -743,18 +744,15 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": false,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
       "candidate_base_configurator_sha": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
       "firmware_artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
-      "hardware_evidence_gaps": [
-        "Exact human GP_CONFIG_017_HW_V1 observations for seven required rows in recorded Mk6 GC and ordinary supported USB contexts are pending.",
-        "Fresh owner Config/raw backup, byte-exact validated restoration route, actual valid static/SHIFT/XWAVE profiles and concrete expectations must be established before mutation; unavailable safe profile remains a gap."
-      ]
+      "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_config_017_hardware_evidence.json",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": []
     },
     {
       "id": "GP-VAL-035",
@@ -8165,11 +8163,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

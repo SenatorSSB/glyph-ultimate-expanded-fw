@@ -1,0 +1,89 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-017",
+  "candidate_branch": "codex/gp-config-017-built-f",
+  "candidate_git_sha": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+  "candidate_base_configurator_sha": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_017_HW_V1",
+  "firmware_artifact_filename": "firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6 / glyph_mk6, owner-reported; separate physical revision not reported",
+  "firmware_profile_state": "Exact preserved F017 installed; literal About Firmware: Glyph HayBox; Version: 5994f165; Device: glyph_mk6. Static Ultimate #3, temporary C017 SHIFT #14 and XWAVE #15 exercised; final original Config byte-exactly restored.",
+  "update_method": "Owner manual preserved-UF2 update using established route; no processor device operation, rebuild or flashing automation.",
+  "host_platform_adapter": "GameCube path: Glyph Mk6 to Nintendo Switch with official WUP-028 adapter. Ordinary supported USB: Mac/XInput. Dynamic profiles #14/#15 exclude GameCube; actual RF10/A host output observed on Mac/XInput. Direct native Nintendo Switch USB dynamic output NOT_TESTED.",
+  "preconditions": [
+    "Actual owner handoff/resume user messages01a115ba-efdc-78d1-ab8d-d00b9e49a9c0 and01a1164b-63f2-70f3-a873-e2e36a0177b4 independently read from daemon01a0fcbd-2b4c-7d31-9088-42a22e260b57; attachment supplied via owner01a115bb-619c-7230-9ca3-06275d3aebe5. Complete attachment is preserved verbatim with all12session files and original build/custody/review reports in durable result bundle. Human labels are distinct from processor judgment.",
+    "Source-free E begins at live b446b4c5a627d3ab9fc45b6198cccdb5f9275f14. F5994f1657e45e0883c6c75468a19be7e3b49a72c/tree0404687bb795e78f0f607fbad865369578615cff, sole parenta7b8758a4d9d353fcfeb0592cc155b4f50f4f358 and preserved originalC478f438804275f3e0c23e6f36bfd26e34aa343bf are frozen. Protocol SHA25605645e32a49b83656da0b32ff12e61956e51fa229ff8490d3e41787624570bcf unchanged. E contains no tested source, accepted017 I catalog or strictDONE.",
+    "Owner reports pre-update rehash/size/custody matched; processor independently rehashes regular nonsymlink0444 exactC017 UF2796672bytes/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5. Accepted014 rollback separately rehashed9ea39ed952c9f08d7134b8527ed93e37edcd09482fd198c5be2ae59f3c80e8af/796672bytes; rollback not flashed by processor.",
+    "Exact committed-before-build Mk6 authorized fallback build PASS; RAM78960/262144, flash386184/1568768; resolved21-role decoder closure and original independent build/custody/protocol reviews reauthenticated. Original15focusedPASS/nativeMATCH retained. FullaggregateFAIL/AGGREGATE_TIMEOUT, original034 syntheticFAIL, root prebuild cache applicabilityFAIL, postbuild fullnativeUNAVAILABLE remain honest framework debt, never aggregatePASS. No rebuild.",
+    "Fresh original raw4201bytes/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480; wrapper64f41baa781824f9d1b3938c66460ffb89d282eb204d75d6ebbde3fe9a67fc0e and restorationJSONc4088147d6d6c84497208db47458748f5343a61d281431ce8237ce517267c645 verified. Actual native offline encode/decode/required guard passes unchanged; all populated fixed capacities, enum/string/8bit ranges and1basedRGB/profile references source-checked. Safe original zero RGB mapping sentinels/repeats are preserved under source max(0,button-1) and ordered mapping behavior.",
+    "TemporaryJSON9ed27e5eb3ef16b30d2679ac6091175defe2809124a9cd2e21a533a6ac7381d0 encodes4875bytes/246704f87a1da502533ca616b723f88c4162b86592234be424cc978ad9044c62, identical independent stored raw and every temporary wrapper. Only two profiles/two RGB records append; original13profiles/RGB and all other fields including Ultimate unchanged. Final XInput default3 preserved. Immediate/postreboot restoration reads equal complete original raw. Stored GET_CONFIG equality is not alone an active RAM claim.",
+    "Owner session artifact timestamp20261006T214547Z supplies tested_at; individual physical-row/completion times unknown. Each reported baseline is fresh same-profile accepted014 reference allowed by017 protocol; no inherited014acceptance substitutes for017 observations.",
+    "Human dynamic row and both profile labels PARTIAL are retained verbatim. The sole reason is direct native Nintendo Switch USB not exercised. Binding GP_CONFIG_017_HW_V1 requires both ordinary animations and usable controls; its actual GC and supported USB output requirement is met by Ultimate/X1 in both contexts and dynamic Mac/XInput RF10/A observations. Both dynamic profiles deliberately exclude GameCube. The protocol adds no dynamic native-Switch gate; processor classifies dynamic PASS, no required gap or supplement. Direct native-Switch dynamic behavior remains NOT_TESTED; no platform-wide compatibility claim."
+  ],
+  "steps": [
+    {
+      "id": "identity",
+      "instruction": "Owner opens About after exact manual update.",
+      "expected": "Firmware Glyph HayBox; version5994f165; deviceglyph_mk6, exactF/tree/UF2/custody.",
+      "observed": "PASS owner literal display matches all three fields; exact hash/size/custody matched, independently rehashed."
+    },
+    {
+      "id": "static_rgb",
+      "instruction": "Ultimate #3/RGB #3 under same-profile accepted014 reference then017; mapped controls and Switch A.",
+      "expected": "Brightness20, static#22D3EE LF1-LF4,LT1-LT2,RF1-RF8,RT1-RT5,MB1 lit; LF5-LF8,LT3-LT6,RF9-RF16 off. RF1 actualA; LF3/LF1/LF2/LF5 left/right/up/down.",
+      "observed": "PASS owner all RGB/controls and actual Switch/game output matched on017 and same-profile reference."
+    },
+    {
+      "id": "dynamic_rgb",
+      "instruction": "Separately select C017 SHIFT #14/RGB14 then XWAVE #15/RGB15 on Mac/XInput; several ordinary updates and actual RF10/A.",
+      "expected": "Both brightness20/speed2; eligible LF8,LF7,LF6,LT6,RF10-RF12,RF1,RF13-RF15,RF5,RF16,MB1, others excluded/off. SHIFT shared hue/half hue delta; XWAVE source starter spatial relationships. RF10->RF1->A host output and FGC controls usable.",
+      "observed": "PASS processor: owner reports both separate SHIFT and XWAVE RGB, actualRF10A and controls matched under017 and same-profile014 reference on Mac/XInput. Human PARTIAL only for untested directnativeSwitch is retained; protocol ordinary supportedUSB/actualhost satisfied, GameCube excluded bytheseprofiles; no requiredgap."
+    },
+    {
+      "id": "mode_changes",
+      "instruction": "Existing normal menu selection among established static/dynamic profiles.",
+      "expected": "Source normal selection may intentionally disconnect/reboot and persist non-Configurator1based default; selectedRGB/controls usable with cleanrelease.",
+      "observed": "PASS owner normal transitions/reconnects; final observedXInputdefault3 as expected. Saved storedConfig default3 independentlyverified; no unexpected disconnect/stuckinput reported."
+    },
+    {
+      "id": "reconnect_reboot",
+      "instruction": "Normal reconnect then reboot and profile switches.",
+      "expected": "Selected ordinary profile/RGB available and controls usable with neutral/release.",
+      "observed": "PASS owner all normal after reconnects/profile switches, selectedRGB and cleancontrols; no No-console/retry/white/blank/freeze/connection-order anomaly reported."
+    },
+    {
+      "id": "ultimate_x1",
+      "instruction": "Unchanged originalUltimate and actual X1 binding LT5; GC/Switch/WUP028 and ordinaryMac/XInput, directions/releases.",
+      "expected": "Source kX1Table neutral128,128; LD/D/RD93,51/128,51/163,51; L/R93,128/163,128; LU/U/RU93,205/128,205/163,205. Cleanneutral onrelease; digitalA and ordinarycontrol output.",
+      "observed": "PASS owner GC/Switch and USB actual outputs allmatched; X1 normalcenter-relative\u00b135/\u00b177, equivalentraw93/51through163/205. Cleanreleases; no mini-screenonly acceptance."
+    },
+    {
+      "id": "owner_config_restoration",
+      "instruction": "Restore fresh original using validated owner manualConfig route; independent immediate and postreboot readbacks and originalstatecontrols.",
+      "expected": "Complete original4201bytes/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 bothtimes; normaloriginalprofileusable.",
+      "observed": "PASS owner reports original restored and originalstate matrix allmatched; independentnative wrappers/rawdecode/reencode immediate/postreboot are byteexact. No invented literal CMD_SUCCESS transcript."
+    }
+  ],
+  "negative_regression_checks": [
+    "Forced/null invalidRGB NOT_TESTED; physicalnullreachabilityUNKNOWN; rootcauseUNPROVEN; NunchukNOT_TESTED. OrdinaryPASS and absence of anomalies do not prove nullpath executed.",
+    "Human dynamic row and both profile labels PARTIAL are retained verbatim. The sole reason is direct native Nintendo Switch USB not exercised. Binding GP_CONFIG_017_HW_V1 requires both ordinary animations and usable controls; its actual GC and supported USB output requirement is met by Ultimate/X1 in both contexts and dynamic Mac/XInput RF10/A observations. Both dynamic profiles deliberately exclude GameCube. The protocol adds no dynamic native-Switch gate; processor classifies dynamic PASS, no required gap or supplement. Direct native-Switch dynamic behavior remains NOT_TESTED; no platform-wide compatibility claim."
+  ],
+  "power_cycle_reconnect_checks": [
+    "Owner reports normal intentional menu disconnect/reboot and default persistence, selected RGB and controls normal, clean releases; no stuck input or unexpected disconnect reported.",
+    "Original Config restored through validated owner route; immediate and after-reboot full stored readbacks match original4201bytes/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480; ordinary original-state matrix all matched."
+  ],
+  "result": "PASS",
+  "anomalies": [],
+  "rollback_recovery": "Original Config restored byte-exact immediately and after reboot; owner reports original-state matrix all matched. C017 remains installed. Accepted014 rollback preserved/rehashed; no processor/reviewer write, flash, device test or rebuild.",
+  "tester": "Project owner; independent HEP processing and fresh Sol evidence review",
+  "tested_at": "2026-10-06T21:45:47Z",
+  "evidence_gaps": []
+}
