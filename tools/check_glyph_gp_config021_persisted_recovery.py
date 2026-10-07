@@ -1,0 +1,468 @@
+#!/usr/bin/env python3
+"""Finite C021 literal host proof. CLI requires the exact committed candidate inputs."""
+from __future__ import annotations
+import concurrent.futures
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import shlex
+import time
+import stat
+import subprocess
+import sys
+import tempfile
+
+ROOT = Path(__file__).resolve().parents[1]
+BASE = 'c6887115f2e44f0803eb0956ebb574633cec53be'
+HOST = 'tools/fixtures/gp_config021_persisted_recovery'
+DECODE = 'tools/fixtures/gp_config012_button_host'
+FIXTURE = 'docs/runtime_config/fixtures/gp_config021_persisted_recovery.json'
+REPORT = 'docs/runtime_config/gp_config021_persisted_recovery.md'
+CHECKER = 'tools/check_glyph_gp_config021_persisted_recovery.py'
+SOURCES = ('HAL/pico/include/core/Persistence.hpp','HAL/pico/src/core/Persistence.cpp',
+           'HAL/pico/src/comms/ConfiguratorBackend.cpp','config/glyph/common/src/config.cpp',
+           'include/core/config_validation.hpp','src/core/config_validation.cpp')
+# Final reviewed literal inventories are installed after startup inputs freeze.
+PINS = {'HAL/pico/include/comms/ConfiguratorBackend.hpp': {'mode': '100644', 'blob': '28f4f61abde0caab6f6f75b281750f85d7c5ff08', 'sha256': '253a9ab7eeb11f1a059765d78a5633b32ff8e895ec68099275ba97eab277c0a0'}, 'HAL/pico/include/comms/DInputBackend.hpp': {'mode': '100644', 'blob': '1758c361b4b3c0fa71b84d55799f4617ab93f8eb', 'sha256': 'd647b49a4c338f0abaa03b9a3d9518f7a3a25b4b51cce0d1c830d8c98742475e'}, 'HAL/pico/include/comms/GamecubeBackend.hpp': {'mode': '100644', 'blob': 'c08c3e7e7508106976ec6296e24f220cf84d3bd8', 'sha256': '222893f7441a9a539318de2e67babe0f34c9634468ab90a5f3f952c57ba3c73c'}, 'HAL/pico/include/comms/N64Backend.hpp': {'mode': '100644', 'blob': 'f82c676bedb6a917755e82f7a00d15458eb2e24c', 'sha256': '50a1b0f125346b5881c2665c3da2fbb0485aa563dbf98aedc70bb8c105047cd0'}, 'HAL/pico/include/comms/NeoPixelBackend.hpp': {'mode': '100644', 'blob': '4724544d5989fdf403c5e6e0accab721371bc9d3', 'sha256': '71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b'}, 'HAL/pico/include/comms/NesBackend.hpp': {'mode': '100644', 'blob': '83378a88428661d02371dd606014c55c2e7eaaa9', 'sha256': 'a07f99ec7da25c529c42b62e2d8d92faa1ef8b6b1052e55a1b401063f1cd8f12'}, 'HAL/pico/include/comms/NintendoSwitchBackend.hpp': {'mode': '100644', 'blob': '0d16ac393e4678382caee9b57ce2b030bc16e182', 'sha256': '201faa4dbaaddb5badf274e350f17ab9d6b3e6e286de321094d590e0c031540c'}, 'HAL/pico/include/comms/SnesBackend.hpp': {'mode': '100644', 'blob': 'aca980c9998ecb4d431502a997c9d9d3953be85f', 'sha256': 'a55c6001beb1d42c82a5ff81b603add089e15687e43700bfec7afe106922d925'}, 'HAL/pico/include/comms/XInputBackend.hpp': {'mode': '100644', 'blob': 'd0f884c9568b7f84f086aee96333dcff6136160c', 'sha256': 'e0cf78a9c800461f4636b0e4ecebc47a52f7b1e001f709af210373f4bf9229cf'}, 'HAL/pico/include/core/KeyboardMode.hpp': {'mode': '100644', 'blob': '81ad10d78f86da84fd8b1e51fb3857a463014f1e', 'sha256': '6bc35650a119ec942e26015dcb36361ffb284e0f8221134ccd5776ebdfb7a7b5'}, 'HAL/pico/include/core/Persistence.hpp': {'mode': '100644', 'blob': 'a73d15f088a63cab63100c22f177026ca3436901', 'sha256': 'eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8'}, 'HAL/pico/include/display/ConfigMenu.hpp': {'mode': '100644', 'blob': 'b896fa08480d15fbb4b35e345de6cb66555bddff', 'sha256': '16c4c1da62c3b0309a51779780727d1191b6c7bb4bff1a6b1bde2c69c68a8088'}, 'HAL/pico/include/display/ConfigMenuAssets/GlyphMenuBitmaps.h': {'mode': '100644', 'blob': 'd3ac8e30c1df919d830afdc4ca13123337b9aa1b', 'sha256': '2571a4f5d3f7952ba007ef022cc24e24bb9069f4e99e94c2e193dd398c0e4dd7'}, 'HAL/pico/include/display/DefaultConfigMenu.hpp': {'mode': '100644', 'blob': '49a6e62839320ea96f6d8a954af5828d75dc6287', 'sha256': '94c6404c37fa6de41563ba06fe839a169b2281d990d8bde36d61c6f29238fa7f'}, 'HAL/pico/include/display/DisplayMode.hpp': {'mode': '100644', 'blob': '4121c4538517b89e6b9b4de93284f9dd0bded1e0', 'sha256': '6dfa4950dc2280df961de0198ea3a01c0a271b2f8fc3334374463793fa316a29'}, 'HAL/pico/include/display/InputDisplay.hpp': {'mode': '100644', 'blob': '641dc7e68da7d5ed039bd0d5d8ce2e37cbc4369d', 'sha256': '4f06b4ec13b1359b676e7945e0be473231192e70256fc81c2ed563bb09e987d4'}, 'HAL/pico/include/display/RemapMenu.hpp': {'mode': '100644', 'blob': '2d05bc182482da054e1074c9fc14e144cef689ef', 'sha256': 'fed30a80b3f4a76dd09a0eaa3a7742d8cf953ca77aff5b18c70d5df06700c135'}, 'HAL/pico/include/display/RgbBrightnessMenu.hpp': {'mode': '100644', 'blob': 'd44ee328e78de21fd040c62f9d1b92d09d9ade0f', 'sha256': 'd752ea83abefeaccd390d58df6826a001397038f650a5539ac5342cf6a23c521'}, 'HAL/pico/include/gpio.hpp': {'mode': '100644', 'blob': '5122a908e2bd34616fc02962b20f2794df107624', 'sha256': '0a1bf79395451be05260e928a2c5197e2804f04e9d375f43d35378f1bc406553'}, 'HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp': {'mode': '100644', 'blob': 'bd6d6dd843c5359a284330d3b96c3ca2e5db9c7a', 'sha256': '45c3dfd010eebbcce79329df30f71f3d25a33759b30ecbe9fe2cc95fa1e5df30'}, 'HAL/pico/include/input/debounce.hpp': {'mode': '100644', 'blob': 'f9b7c450eaa70d9c9f4fe65e6690152b19bc4595', 'sha256': '75327d780827f78b87993fcb9dc584b67ec9847346112f19a3a8b3918e7503ae'}, 'HAL/pico/include/rgb/ButtonLocations.hpp': {'mode': '100644', 'blob': 'a291b9ff6ed8482a2caa7452362eafa3077b13f1', 'sha256': '4b1a0aa989c2c162e0700b0d30c22f0f1653dc27708ad8cc51f27c97cdb6cb05'}, 'HAL/pico/include/serial.hpp': {'mode': '100644', 'blob': '9d05798bbca779e229e32b20d1c9c81f23e3eaa1', 'sha256': '829424b1189ab60bb604a994a44257779c4cc38155108afd73250fc960698297'}, 'HAL/pico/include/stdlib.hpp': {'mode': '100644', 'blob': '6bc7bc5ee7f56de07116608399af228314dab004', 'sha256': '676ecc6f5a9b333bf2c55a9df11ddf037a83fe217788c17f887fae4851ea90bc'}, 'HAL/pico/include/util/state_util.hpp': {'mode': '100644', 'blob': '40b8aeb9c4db3268696c49f20b3278efabc7688c', 'sha256': 'db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81'}, 'HAL/pico/src/comms/ConfiguratorBackend.cpp': {'mode': '100644', 'blob': '1c324fddfbf22879ad1c974ace2ec8ff1605f711', 'sha256': 'e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121'}, 'HAL/pico/src/comms/DInputBackend.cpp': {'mode': '100644', 'blob': 'e1941c5548cc8761e025b691f619be0faf8b1165', 'sha256': '2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea'}, 'HAL/pico/src/comms/GamecubeBackend.cpp': {'mode': '100644', 'blob': '8e7d839cbc5b77377aae8c08dfd550c45274d8a0', 'sha256': '48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329'}, 'HAL/pico/src/comms/N64Backend.cpp': {'mode': '100644', 'blob': '308e39087df954da072fd32b058366c51c7cecf2', 'sha256': '8cdf98be87caaeb23b9a0412a6bfd08bc98615a2f64f6e5ea3096a9fb60535ce'}, 'HAL/pico/src/comms/NesBackend.cpp': {'mode': '100644', 'blob': 'c59063e02ea96a49876b56f3a8f3b3cd975c371a', 'sha256': '60b721c48257df2a8d2783f666cfb4ffdb75c61eb649978b4b64c69ceade0fa2'}, 'HAL/pico/src/comms/NintendoSwitchBackend.cpp': {'mode': '100644', 'blob': '4b388ecca60b1eedaef5fcd8656d71d2f2be97c6', 'sha256': 'c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25'}, 'HAL/pico/src/comms/SnesBackend.cpp': {'mode': '100644', 'blob': '161e30eb958a27ebe6dea71ce4627014390bd17f', 'sha256': 'cbe6b62c117469b0ba970b17c939d1966cff0078e09e51242aa2c106d6941660'}, 'HAL/pico/src/comms/XInputBackend.cpp': {'mode': '100644', 'blob': '1699e06253a93cb5f492282b5d43ce26fe8cfd0e', 'sha256': 'b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862'}, 'HAL/pico/src/comms/backend_init.cpp': {'mode': '100644', 'blob': 'f7726a0063dd05409d7464d947a47efc675bdbef', 'sha256': '8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea'}, 'HAL/pico/src/comms/console_detection.cpp': {'mode': '100644', 'blob': '93a82ab7af00b967fd8c7f63844cfecbcc71dd70', 'sha256': 'f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c'}, 'HAL/pico/src/core/KeyboardMode.cpp': {'mode': '100644', 'blob': 'a14f01d030dad62305fc0accdc07d224c61eefcf', 'sha256': 'a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d'}, 'HAL/pico/src/core/Persistence.cpp': {'mode': '100644', 'blob': '69e4f0c327b43e940e2e8cf4cf32b65e349f9a97', 'sha256': '07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f'}, 'HAL/pico/src/display/ConfigMenu.cpp': {'mode': '100644', 'blob': 'f1a5f978fadd90fdffd7af19966444fd0748936b', 'sha256': '5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be'}, 'HAL/pico/src/display/DefaultConfigMenu.cpp': {'mode': '100644', 'blob': 'bf855a584b3e859083d98a1aa49a38daee9204f5', 'sha256': '279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20'}, 'HAL/pico/src/display/InputDisplay.cpp': {'mode': '100644', 'blob': 'c3ccd582bf95f7c5d6c1e0cfcf6e95df90659ea0', 'sha256': '761f3a5bb6357a278042356e25c691ef82bb45030ee6588cd6571a08e2e6480b'}, 'HAL/pico/src/display/RemapMenu.cpp': {'mode': '100644', 'blob': 'd0cb4fb353c3ef1668e8a04aa55c99874662fae7', 'sha256': '3707564737f8e9f4652e1daddedb6f0e40c94a2cc741d89bc29760d94a39b7fb'}, 'HAL/pico/src/display/RgbBrightnessMenu.cpp': {'mode': '100644', 'blob': 'f06778790cf88b639a33baa3800276ad82d4a90e', 'sha256': '2a1cf75ef2db9c933404c5a60d4850836b0ba6faf16579a6d7f258701afad650'}, 'HAL/pico/src/gpio.cpp': {'mode': '100644', 'blob': '39a8f859e1c9e3ac570adc5d06e711009cd86ae5', 'sha256': '141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c'}, 'HAL/pico/src/reboot.cpp': {'mode': '100644', 'blob': '796c7f4b7337004b6f68a59c9e775e55f4578742', 'sha256': 'f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e'}, 'HAL/pico/src/rgb/ButtonLocations.cpp': {'mode': '100644', 'blob': 'd59b490890477b359c98c9a8c09e7f3f42e8a883', 'sha256': '348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f'}, 'HAL/pico/src/serial.cpp': {'mode': '100644', 'blob': '0430a44f8434e6c51c8abc29418e9c6ce1e9982e', 'sha256': '4a38620ffc8683d55d61d88a262ebc1f2a9f830dbd086fca8733f0253e222e4d'}, 'builder_scripts/arduino_pico.py': {'mode': '100644', 'blob': '35381a91ad5aa4ffdbcd362365c1bf9fbd13136e', 'sha256': '676b20e42500cb0b5f671892250a2c063e21a31459ed542ad48a9481a7fce0af'}, 'config/glyph/common/include/LEDTemplates.hpp': {'mode': '100644', 'blob': 'c5c22831246faf2d06c7a77e63b0f790570e363e', 'sha256': '913df323d7eebe69146dec8e03cb4cc944a927b56d482a039a67f3cd3e42ec53'}, 'config/glyph/common/include/display/AboutMenu.hpp': {'mode': '100644', 'blob': '5ff112b06e4e9d6d783126a40667e30769df7ca8', 'sha256': 'decc5c33755d07974c906bb68a0a77c083c7349cc329cc3a838177069418736f'}, 'config/glyph/common/include/display/Font4x7Fixed.h': {'mode': '100644', 'blob': '25363c38671aee95ff6b7284e3e122b0c274bdd4', 'sha256': '697738b9192b5c97872ccf3b0a6f94970e1f3df95d88efa8bb27958d85079d5f'}, 'config/glyph/common/include/display/GlyphConfigMenu.hpp': {'mode': '100644', 'blob': 'ab18e1ba53f3eb4f355784b5d6a0a87f65929249', 'sha256': '428ad8033d9a03adbf51526a7cb494287da0525e6c493f83f8c19d8d366f64d7'}, 'config/glyph/common/include/display/MenuButtonHints.hpp': {'mode': '100644', 'blob': '7b9c85a34a20e95c44564031a2b6bfabed03fbfe', 'sha256': '2773d48665657301e72c071114eba137f7ab0fc257e845ee0419664a750ebfed'}, 'config/glyph/common/include/display/OopsieMenu.hpp': {'mode': '100644', 'blob': '4e80bb3afa6fdd00da7e8fdc26808fb0db84efe6', 'sha256': 'd4b29b14d2421b284b7a3d42f3c717ece9df2e9e45026190b10901f277c8df24'}, 'config/glyph/common/include/display/Picopixel.h': {'mode': '100644', 'blob': '463b1b562ddc156efece7a432a031f701d4a287e', 'sha256': '035c01e6d48efdfef1e4de6152d0d03910210e449236506ec7c8f71799073363'}, 'config/glyph/common/include/glyph_overrides.hpp': {'mode': '100644', 'blob': '90cc393759e91c8acacd6edef9ecb05b86d7fdc8', 'sha256': 'ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d'}, 'config/glyph/common/include/icons/12x12bitmaps.hpp': {'mode': '100644', 'blob': '0ae4f61b69a20792de7a082982929f87fffe76c0', 'sha256': '6c8b930223444cc753e2e1ba0a77886fc49879eaf1360db8e7f50686e7c1891e'}, 'config/glyph/common/include/icons/16x16bitmaps.hpp': {'mode': '100644', 'blob': '242a856254b555a0b3dcb67d2200c0ae8e0c2e56', 'sha256': 'd7dea73e0a0ffaac25d3cd095a11bd71e4c12a000492e58279f8320904d843e2'}, 'config/glyph/common/include/icons/menubases.hpp': {'mode': '100644', 'blob': '382c94953d7931c02147e04c915963fc59dd1117', 'sha256': 'ec71e2e9d304782edffb457ff46aac6151644a4a9fc80c1299de2055486b7873'}, 'config/glyph/common/include/icons/splashscreen.hpp': {'mode': '100644', 'blob': 'fda47105d3d85bcd731f4af5714cc4d4a93cd09b', 'sha256': '241acda95bcb2b4ced277e020c85c0afc6ff4108acc817094682f4d9c6b41fa2'}, 'config/glyph/common/src/LEDTemplates.cpp': {'mode': '100644', 'blob': 'f15011835ccf8a095be447ec07b7a78949e71844', 'sha256': 'a30275c41a87d152fc653caf084c80a9dfb59493b73c40639e8eedbeb6c264a7'}, 'config/glyph/common/src/config.cpp': {'mode': '100644', 'blob': 'd78359d1df10dc70cef8a03b487c2bbfcc80ada3', 'sha256': 'a5fe03b570d058644d13285b895648110196b8cffbe4a4a053b92d2bead19558'}, 'config/glyph/common/src/display/AboutMenu.cpp': {'mode': '100644', 'blob': 'e73bd0ad49d47b774573c71d781e31847904ed98', 'sha256': 'd53f71f87cb407c477b588f28cbd4ebadb522326f560e1209b8a3bacb832beee'}, 'config/glyph/common/src/display/GlyphConfigMenu.cpp': {'mode': '100644', 'blob': '819549dfdf2de34d5ceebed58fa30d278da4f4cb', 'sha256': '4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0'}, 'config/glyph/common/src/display/MenuButtonHints.cpp': {'mode': '100644', 'blob': 'c6930cd7c7847acddf6085be6cdc1f1b2d05ae22', 'sha256': '99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc'}, 'config/glyph/common/src/display/OopsieMenu.cpp': {'mode': '100644', 'blob': 'f0410e4d3771345d3b06054437ee10a9084b4a7d', 'sha256': 'f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2'}, 'config/glyph/env.ini': {'mode': '100644', 'blob': 'fac4e20461ad632ca1d65826241a4a9c73630f04', 'sha256': 'c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf'}, 'config/glyph/glyph_mk6/include/button_positions.hpp': {'mode': '100644', 'blob': 'b5b908d9a25cb021d5b22fc238173455e8fde1db', 'sha256': '73b84b62bec59650ed5a027b0d6100bb09109618c65611ca6bf37b8877736e2f'}, 'config/glyph/glyph_mk6/include/glyph_pinout.hpp': {'mode': '100644', 'blob': '3cde279fc38c08e58ddc4283f324c14222d299e8', 'sha256': '1ac5e4278fb72b8c918a6bb307521927afb8d27142aba278bd0f7bfb219e4ab6'}, 'config/glyph/glyph_mk6/include/matrix_definition.hpp': {'mode': '100644', 'blob': '870532bef36d7e28e8decf6ff152b131a6db5ef7', 'sha256': 'c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1'}, 'config/glyph/glyph_mk6/include/neopixel_definitions.hpp': {'mode': '100644', 'blob': '252c624733f2aee65be51b363f46957658957a78', 'sha256': 'f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32'}, 'docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json': {'mode': '100644', 'blob': '25d32a1fc1cc9c39626eadd4dca4835103579d80', 'sha256': 'a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f'}, 'docs/runtime_config/gp_config021_persisted_recovery.md': {'mode': '100644', 'blob': '83178867007fc44d06d942e81849211ac291bf67', 'sha256': '57fb36ec9276e7054c9704e6082a5d664aef83c67770d4d3356b249a6beef30a'}, 'docs/runtime_config/gp_prov_014_decoder_closure.md': {'mode': '100644', 'blob': 'ca1c80486340c97a3d06cb3e9c7d35a749c97a38', 'sha256': '93bda0975f70bb9a92da9bef33ec74d2d99f397c46bb9bb2ebfa9079d4fbddc8'}, 'include/comms/B0XXInputViewer.hpp': {'mode': '100644', 'blob': '47713956220032521addcefab1ba89425a3c067c', 'sha256': '3c64aa64e551830da8c4779686e2f289457dcdbe405319533b9bc8a44e14833f'}, 'include/comms/IntegratedDisplay.hpp': {'mode': '100644', 'blob': '743c5e184e5a9f14f17a8d00a534fe40279a3d52', 'sha256': '8b66db83f79a251ac1d6fe80ad88f131c973c3c7b5191579ec787dc2423fdcae'}, 'include/comms/console_detection.hpp': {'mode': '100644', 'blob': '9ddea46d534af36bb828dd23caf839acc0952ad9', 'sha256': 'dfde769f360b8cac0b9e0deaa4d2f35f53d26f0f3c6fff769e6727d31b8a7e8e'}, 'include/core/CommunicationBackend.hpp': {'mode': '100644', 'blob': '5d661430dfe58dcc9abb7f89cb9149fd5f94ea8d', 'sha256': 'bfee254cb9175cdff2fe81406648c0b53d4e35b158a5a120ba985b0dd62bd6c1'}, 'include/core/ControllerMode.hpp': {'mode': '100644', 'blob': '97136730b3fa05b61c9335f7950ec39a5b1c5dab', 'sha256': 'bbac9de7fd0ad758bd7e8b47c40eb2315b377ef32c8ebc08e4e87be0482d3f47'}, 'include/core/InputMode.hpp': {'mode': '100644', 'blob': '02f3cfd54c47cf2b8f4587a2d519d0682240eec4', 'sha256': 'dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee'}, 'include/core/InputSource.hpp': {'mode': '100644', 'blob': 'ad3fa9bb10f606186fa8b6527a47678155bac538', 'sha256': '10c5e42a7c624ff89d3ab14389a071fab9f332a973fff7db3791358334aa500a'}, 'include/core/config_button_validation.hpp': {'mode': '100644', 'blob': '1b6e3dc98a9b6c0eb1f04e077c86382eaee324bb', 'sha256': '176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f'}, 'include/core/config_utils.hpp': {'mode': '100644', 'blob': '6d8fa67d146f3700f9add9181667e4da69b5b262', 'sha256': 'c4aaf06ebaf36422510a9f746bec20cbdc87bef099de2981c456719c637e076f'}, 'include/core/config_validation.hpp': {'mode': '100644', 'blob': '92042dd4745bce79b1d7d773edacba302e8a6d7c', 'sha256': 'b4d9c4937402406dc0cbd25ec83f27ea859f49258e4219272aa9dee75c52c4d5'}, 'include/core/mode_selection.hpp': {'mode': '100644', 'blob': '79ee24de665870f8b614be6b019f36f80a170b77', 'sha256': '277d5e9cc1a4e165f571b4b3601614ef0caa21f6ff39f0bf8ae26b2dab3dd17e'}, 'include/core/pinout.hpp': {'mode': '100644', 'blob': '794268925073d9235d7b26ed71ce57ede233d528', 'sha256': '6ec5dcf6130383825a1fb5c0ce573a563a97719d7015cef68cb4c7e7cabf906a'}, 'include/core/socd.hpp': {'mode': '100644', 'blob': '5d912b274ba54fde5e07a575cf9bec84da07c9bb', 'sha256': '88ff9be552e89f0c92a1548662fc4bf9b6fd4408b242f6f42bec8ecf70e6fc91'}, 'include/core/state.hpp': {'mode': '100644', 'blob': 'ff3aa94df61fd6a41448799fa1d6f508c41ecd0f', 'sha256': 'c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3'}, 'include/img/remap.hpp': {'mode': '100644', 'blob': 'c0f50e5691a098dbc9dd50348e1cd352e3c5d775', 'sha256': '62cd1efb2f2fa30089b4a11f236712c582cf3b99b23dc350676cd2f858f1fbff'}, 'include/img/update.hpp': {'mode': '100644', 'blob': '06d897ff3b884a37960cfa767dcc2fdd0ee88d91', 'sha256': 'ae7cb4bd3ea6d3e8d1f581b75612bf0f1254cde142b37c494e2bc7087fcebbcf'}, 'include/input/SwitchMatrixInput.hpp': {'mode': '100644', 'blob': 'd499de645867413f1eda280afd292640c7dcbc39', 'sha256': '9f7fa65db078877d53cc851c8a906ac6c37ddbbb615f28266fc35bcd301f88f6'}, 'include/modes/64.hpp': {'mode': '100644', 'blob': '52983b70702b57f752e8e96cabf857255cba57ea', 'sha256': '2839f6573877ff438e674e8e3c406850e02c2624bac7c79975cbe637e3b99442'}, 'include/modes/CustomControllerMode.hpp': {'mode': '100644', 'blob': '9658f5e15f50887caaaf5a71efc0096e9677d144', 'sha256': '8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414'}, 'include/modes/CustomKeyboardMode.hpp': {'mode': '100644', 'blob': '79a2725ca7703dfdabbd1c186d197e2250122c86', 'sha256': 'c907de266f4ebeea8518511cf725c57bf52c85c0c9827f25cc2a7d20381f9464'}, 'include/modes/FgcMode.hpp': {'mode': '100644', 'blob': 'cd197cbe7c84c63cd675b81b1315250523894dcb', 'sha256': '90b854be77c26b268399f0f6d3849e27f804f83b4ab61eaedede34d83353da78'}, 'include/modes/Melee20Button.hpp': {'mode': '100644', 'blob': 'c44baed2ea01e075ca115481928e8003a702ec72', 'sha256': '38dfa8a874455d3f865c722bf6bfe4ebf607292085375440cb46ccf294c53cd6'}, 'include/modes/ProjectM.hpp': {'mode': '100644', 'blob': 'cd730fbb6868bcd9bb71708ceee7b35b46cfae21', 'sha256': '35f2e3695bfc8c209400a5c66f2ba81f02341ed22f24591ab044beac09c9d115'}, 'include/modes/Rivals2.hpp': {'mode': '100644', 'blob': '7cf4ff25a848b01829533e8e8e5b3aee959b4d82', 'sha256': '90bfc5ab82915b63f41504c78a50e8e8565df44734c36016428b3dba3f5b20dc'}, 'include/modes/RivalsOfAether.hpp': {'mode': '100644', 'blob': '130e4a1d348e0a6160e5ea4a57cb30418c71546f', 'sha256': '5feadf8205b79807bd467184aa0a195e07fcc090af367010a7aaf3e77d0afb0e'}, 'include/modes/SenscopePrototype.hpp': {'mode': '100644', 'blob': '136400741b59e189d9bd334ca659c8ae19fd7aba', 'sha256': '8c17dd70815e30e356355cc7f28a199441f92872d63dcae6277ff86ae609bcd1'}, 'include/modes/Ultimate.hpp': {'mode': '100644', 'blob': 'd7f93c9f65ca51f734cea73eccbbeb54643016ff', 'sha256': '5e4adf71353d77f0b147f55eb6215d5a014128af55ccf6725914ded15752a031'}, 'include/prototypes/senscope/SenscopePrototypeBuildFlags.hpp': {'mode': '100644', 'blob': '0326fe08999152deacfdde97c06a1020fe31eb32', 'sha256': '0486efd34d98a2a89620bdf3159a609e5c3bb3b1d0170db1380446ec5c75ff4c'}, 'include/prototypes/senscope/SenscopePrototypeDigital.hpp': {'mode': '100644', 'blob': '2bf3e0dbdfaa46fb22678adf54181aeece229ef7', 'sha256': 'd08c02c66b0258c9d9bbae9d53a04f1375edc6f3a8579808c2609199dac475e7'}, 'include/prototypes/senscope/SenscopePrototypeDirection.hpp': {'mode': '100644', 'blob': 'ba4253d2239b49565f426dddb150793cb231ee0b', 'sha256': 'c9b1e29aecaa6993f12324503a8631f9625c8917883677cca3ff7baba05a5dd3'}, 'include/prototypes/senscope/SenscopePrototypeForce.hpp': {'mode': '100644', 'blob': 'e8e5a39a7f7a20b6167679988c18275bf5187166', 'sha256': 'c3ea72442fa9ff1ac263d24453da61d6ceaa061d4a033251d8a4d47be1e387be'}, 'include/prototypes/senscope/SenscopePrototypeModifier.hpp': {'mode': '100644', 'blob': '09b09dd7e2259c86baaab4748139d2b5dff2ce8e', 'sha256': '14aaddebe44ac170a53889564bf3202a9d28cb6ed79f4ebf7f9d344f04f16ca8'}, 'include/prototypes/senscope/SenscopePrototypeOutput.hpp': {'mode': '100644', 'blob': '26b508034eb913ea367f0e32f7c3b6def11dc5b2', 'sha256': '7e79a6b10b35dd56fbc49a38b14caa796ce05f7acf9eefb04e549a334070af29'}, 'include/prototypes/senscope/SenscopePrototypeResolver.hpp': {'mode': '100644', 'blob': 'e90259cae8dd55059e9c3e1ccafd00a048d4b1b0', 'sha256': '001f6b923bbab6917f8a86030e2235550f2b865ce40ecc273a072c7456dd9fc5'}, 'include/prototypes/senscope/SenscopePrototypeSelfTest.hpp': {'mode': '100644', 'blob': '93f8bd5ed7bf63d40f98fafa1e4a1ade678bfaf8', 'sha256': '39d0151759e199e2e70e1e74716e1beff8b38f8d5fb6f38efac8ea28b1e2d0a1'}, 'include/prototypes/senscope/SenscopePrototypeTypes.hpp': {'mode': '100644', 'blob': '64ebfdb3eb46cb75718d18f6f7d5a7be9c34202e', 'sha256': '1c3cd07ddcee4ce1cb4f5d33b66392c88b7217bf5dc9d021a1cf058bf4c5d0fe'}, 'include/reboot.hpp': {'mode': '100644', 'blob': '506e0c5784eaa9d5da632e05504fef4928b20e52', 'sha256': 'bcc6237cd7c3b85e263cdfd2f265aaf257537a75fc6518acb4edf5f0ab14ef6d'}, 'lib/TUCompositeHID/include/TUCompositeHID.hpp': {'mode': '100644', 'blob': 'dce350df36575cdc43a532896cd25ac8d5527a9f', 'sha256': 'a1b6a39213696018fb11e7694baff07c255b042b9bfce5989592a2403031763d'}, 'lib/TUCompositeHID/include/TUGamepad.hpp': {'mode': '100644', 'blob': '2e4c33a2a9fb01a31307e563edea2dc9f22470a2', 'sha256': '4e8b6b3ad56bfa5506a5febb5a4c018b7ac68fc9d35ae926b7ade55fd2a61c06'}, 'lib/TUCompositeHID/include/TUKeyboard.hpp': {'mode': '100644', 'blob': '7e4305865e63483e98f7d902d6f43a0a112c808f', 'sha256': '29421cd802dc74ffb930ffbff16045cc3764d4129327751b0949d3dbb873e7d7'}, 'lib/TUCompositeHID/src/TUCompositeHID.cpp': {'mode': '100644', 'blob': 'acaa6b8c0732423de785132834d680b04b95bd5e', 'sha256': '8dda015db9bb7a458d106ed7a415ccfa2a2888bc6c9ebdcc03f240fa96e8d294'}, 'lib/TUCompositeHID/src/TUGamepad.cpp': {'mode': '100644', 'blob': 'aaefa0940928387fc850650eefd18239a73e0821', 'sha256': 'b43911537a77fde06fb1a2c13482f30f59869b15470367c2b47c0ae16c6b2b0e'}, 'lib/TUCompositeHID/src/TUKeyboard.cpp': {'mode': '100644', 'blob': 'd3ac6cbc5c1604bcb8bbe3bcb0b7fec16b032cc3', 'sha256': 'bc046bbf1b998caf53bc58deed4b4927da050a9e3d24cf9a1e7da0373ab41ca9'}, 'platformio.ini': {'mode': '100644', 'blob': '4d56f8630c1b12e84cd12f40ce05a4dc71b9362e', 'sha256': '99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9'}, 'src/comms/B0XXInputViewer.cpp': {'mode': '100644', 'blob': 'e9b3dfe4e11011dda0bb7b9faa436770fcafae44', 'sha256': '4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e'}, 'src/comms/IntegratedDisplay.cpp': {'mode': '100644', 'blob': '67263adc7fc9520594df39dc85eed8d8973b39ac', 'sha256': '37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e'}, 'src/core/CommunicationBackend.cpp': {'mode': '100644', 'blob': '9e4b8ca4fdca9512dbabe08cf291e7eb0ffe0a03', 'sha256': '9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575'}, 'src/core/ControllerMode.cpp': {'mode': '100644', 'blob': 'ca74124dec2a4dc060bb5a89c3f0e3b87bab6c4e', 'sha256': '1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8'}, 'src/core/InputMode.cpp': {'mode': '100644', 'blob': 'f1388a1948fc73f7525463db219a53f5af1e6b7b', 'sha256': '080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7'}, 'src/core/InputSource.cpp': {'mode': '100644', 'blob': '6f9b782489a42b87ac9fd9a3b2665a6554cbae7c', 'sha256': 'daeefea10d724ea5be8c9ea4faeee3d0d8716a4e091a3ce57537604d4b111ad8'}, 'src/core/config_button_validation.cpp': {'mode': '100644', 'blob': '70a7cee746fd42d1cfaff11f6043650bbfcc4c74', 'sha256': '4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d'}, 'src/core/config_utils.cpp': {'mode': '100644', 'blob': 'beeb1202f67f61ce717e0e020cb3dd339dfa6206', 'sha256': 'b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab'}, 'src/core/config_validation.cpp': {'mode': '100644', 'blob': '46fd7df78b160f1f874614852c4784583f7dc727', 'sha256': 'd9536b639e8a36d834a8f7df1923789e559db59061255454767332a7f0c74b0e'}, 'src/core/mode_selection.cpp': {'mode': '100644', 'blob': '7d659d3133271c2ed956a16d8f5e3eda73040f81', 'sha256': '8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44'}, 'src/core/socd.cpp': {'mode': '100644', 'blob': '81a0d53fae96305c07d5943f4785b33b02ca1949', 'sha256': '5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3'}, 'src/modes/64.cpp': {'mode': '100644', 'blob': '7c65c0c7ee0579e133c358f5357b3200e1531a1f', 'sha256': 'ee374d38fc3293e884e97dddb2d48a0fd410a9a4b84f5311206f3b5921a4ca49'}, 'src/modes/CustomControllerMode.cpp': {'mode': '100644', 'blob': '8cb336f31acd4c324b3ae1f8ef0827c14f15ee85', 'sha256': '4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31'}, 'src/modes/CustomKeyboardMode.cpp': {'mode': '100644', 'blob': '60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8', 'sha256': '90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def'}, 'src/modes/FgcMode.cpp': {'mode': '100644', 'blob': '5d6817ce4481f3fd05598df9052d4db38dcab77b', 'sha256': '236de331e38c68a221f44ececf4444b601b3c1e56b1ac20bb6422390720f5ef0'}, 'src/modes/Melee20Button.cpp': {'mode': '100644', 'blob': 'b144810d7033dcc12d97ab9979b8a6128b82d4e3', 'sha256': '42f9be54340a918172194ecf152bb1aaad8762da9f5f04c4f52925a679929522'}, 'src/modes/ProjectM.cpp': {'mode': '100644', 'blob': 'e321b3254d9c3374d9069cc4c91bfe95f3f0cfaf', 'sha256': 'ad3b3c1b80e1157a13adb3b3166569f8f955d2f94462426aeb5ea31070a94c2a'}, 'src/modes/Rivals2.cpp': {'mode': '100644', 'blob': 'f464e5e775e39c9030f3c0d9f1ce28345a6933e4', 'sha256': '44242d673f75fa417168f69c63075345eaabad6c8ef5b90393ef01b56ddd329c'}, 'src/modes/RivalsOfAether.cpp': {'mode': '100644', 'blob': '374687b48ea0cd439bb7ce01c6543d907fedfc4e', 'sha256': 'ccc04805c353d4beec97164d45ac0a5dfb0792e5816b4cf1882f3ec7a7e80c4e'}, 'src/modes/SenscopePrototype.cpp': {'mode': '100644', 'blob': '8ef6cdcb35d55011bab35a617414749f4fa64a02', 'sha256': 'cadadf8668701d6296e69688519e1a0679835150e9135d6e1b5f9369e23d01c8'}, 'src/modes/Ultimate.cpp': {'mode': '100644', 'blob': '37b9bad7d8a1cab66d0073b8314987df0329dddb', 'sha256': 'a40d24db990f0f59ab20ba76257596210e9ccca459415e78235374c2996b2dfd'}, 'src/modes/UltimateIdentityRuntimeTables.hpp': {'mode': '100644', 'blob': '1249b2f8b702eca1522a915e08ae9bd442a74d78', 'sha256': 'a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb'}, 'src/modes/UltimateRuntimeConfigInterpreter.hpp': {'mode': '100644', 'blob': '29a30df2c45e3ae4ce90af47775f0b8f94b8cc83', 'sha256': '8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108'}, 'src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp': {'mode': '100644', 'blob': '40a0b4703b3cbc5800acca5f2fdc3229bd82844a', 'sha256': 'e9984660752cecba91a2fbc0fc4cbfe1f940f02389d55a3753dd0022c2f0069d'}, 'src/prototypes/senscope/SenscopePrototypeDigital.cpp': {'mode': '100644', 'blob': 'd068d99241953bc3059fad1d0247f72a5a12b517', 'sha256': '1e070471ad29d1ed9ed753b05187e92bc9166228ef0b961068d03befe10cc5cd'}, 'src/prototypes/senscope/SenscopePrototypeDirection.cpp': {'mode': '100644', 'blob': 'a88ba78e781c58d7655a284ee9621e8088ca8a2e', 'sha256': '852bc5f9886e1e69c9e978b12cbac8a37482926972a06f2fa38799d51693641e'}, 'src/prototypes/senscope/SenscopePrototypeForce.cpp': {'mode': '100644', 'blob': '1da94c03338816ccbe9fb84ebdca471e5107fe3f', 'sha256': '413f62bacc6b2ce2c71525ebd82df11e0292467d8ff845a27744b3bcae295efe'}, 'src/prototypes/senscope/SenscopePrototypeModifier.cpp': {'mode': '100644', 'blob': '636f8fb1ad44376f252f812fb060a7df5e799b87', 'sha256': '0b7f895499d6a203f772fde35298524698b4822fd64063187bc05c13fafd9cde'}, 'src/prototypes/senscope/SenscopePrototypeOutput.cpp': {'mode': '100644', 'blob': '04fb81320f86f84729c4a7c116f5f2270075d871', 'sha256': 'cac775337faba93ee47cebed2035557e1a92b04f5ade9b32e8a695560b09e623'}, 'src/prototypes/senscope/SenscopePrototypeResolver.cpp': {'mode': '100644', 'blob': 'b829ccaf2315dd823b4b57e574983261440a66f4', 'sha256': '24a20cdb21a7d8ad3a1ff775f4c1c34fc08c190c15db38744d8afb7e1db04d31'}, 'src/prototypes/senscope/SenscopePrototypeSelfTest.cpp': {'mode': '100644', 'blob': '7372928723b1ed5f9e2de0642a5cf740e69d684a', 'sha256': 'f20a15b5e751a6bd531967112fe53c54fffd1f969e549c5b0e9f8e3465bb0c79'}, 'src/prototypes/senscope/SenscopePrototypeValidation.cpp': {'mode': '100644', 'blob': '2cbb10713e955fc7d096894c3cb1255578924285', 'sha256': '5b39b461a168a5eb84b581797805f4a1a7a7b5fd7db2a64d1ada37cbdcdbc528'}, 'tools/fixtures/gp_config012_button_host/LICENSE.nanopb.txt': {'mode': '100644', 'blob': 'd11c9af1d7e469e9a5357a660fd184f58c3a4ff2', 'sha256': 'e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d'}, 'tools/fixtures/gp_config012_button_host/generated/config.pb.c': {'mode': '100644', 'blob': 'c59855ecb19be7f5193833d94fe41cc1828ffb14', 'sha256': 'd7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626'}, 'tools/fixtures/gp_config012_button_host/generated/config.pb.h': {'mode': '100644', 'blob': '01d0dda2ae768dd0f18c0f338a74c55e613bb199', 'sha256': 'bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323'}, 'tools/fixtures/gp_config012_button_host/nanopb/pb.h': {'mode': '100644', 'blob': '3f181d873a81d82c27c56874f6a63328f38eaaf3', 'sha256': 'e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2'}, 'tools/fixtures/gp_config012_button_host/nanopb/pb_common.c': {'mode': '100644', 'blob': '6aee76b1efa1e6f2f3fe7d43629da9b2114eea19', 'sha256': '8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516'}, 'tools/fixtures/gp_config012_button_host/nanopb/pb_common.h': {'mode': '100644', 'blob': '58aa90f76d58596d3f45a120b65b4a0bff7fd688', 'sha256': '6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd'}, 'tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c': {'mode': '100644', 'blob': '0f71c33b1bd99e531c9eacda5f9b012ddb3c8339', 'sha256': 'f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632'}, 'tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h': {'mode': '100644', 'blob': '1ef9d56c6e0b6430f9067cbb911c7e697d034e24', 'sha256': 'fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87'}, 'tools/fixtures/gp_config012_button_host/schema/config.options': {'mode': '100644', 'blob': '7175d8463ade5b0cd45f1a5f8f99be44f5719c3c', 'sha256': '6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805'}, 'tools/fixtures/gp_config012_button_host/schema/config.proto': {'mode': '100644', 'blob': 'a58a2bf4dd827ad92482f1ac30c3d56bbea93c05', 'sha256': '2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp': {'mode': '100644', 'blob': '9c816b2da2acf90a1294bac4dcbf01895c322607', 'sha256': 'd225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h': {'mode': '100644', 'blob': 'bbed4924c5a67f5d74fbc4356d7715bb3f81e4a2', 'sha256': '712027e87b9709c1aeb2b6094011c25455e6802fbf66010e8f6f780a92983b69'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md': {'mode': '100644', 'blob': '8ecd1de63a5a5749098af433c848f77ab1954a1c', 'sha256': '7041a7de46488bca009b0d82317c9e7bb6634749ed0cd3956a5ef8041664b36e'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt': {'mode': '100644', 'blob': '172ce13ac5386e185ac6ba041b65ce34f054ff51', 'sha256': 'f48cb755a19ac13aca731273a99da22383debe9bd892ac037819bea742b1babe'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp': {'mode': '100644', 'blob': '31e62a30021170fc78d0f553f6c08d150eb45b6d', 'sha256': 'd7f49ba5088c75beffac09c6b3e8b22abbf2db111125e90e18d3746837e95e4c'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE': {'mode': '100644', 'blob': '0a041280bd00a9d068f503b8ee7ce35214bd24a1', 'sha256': 'e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp': {'mode': '100644', 'blob': '1e4508404042f16c6189b95a5e744048fa6b95fc', 'sha256': '1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h': {'mode': '100644', 'blob': '7bf54f0f3ec820f6d5943cdba5f3450eb77b8e41', 'sha256': 'acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h': {'mode': '100644', 'blob': 'dffd5cb74462a3f4b7e7a29d4328568debf0105a', 'sha256': '0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/library.json': {'mode': '100644', 'blob': 'db460b28dbd992758bf388786f5b2e50417ea624', 'sha256': 'b38c58f849f48821c23740ab3e972fd4fb6bd861e47135f7e1315150be0d1037'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h': {'mode': '100644', 'blob': 'e1718206cea79452748a5ef49ac97f67c33a9192', 'sha256': '88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/library.nanopb-arduino.json': {'mode': '100644', 'blob': '91e7bf2b535469b967d99bdd7262a5dfbe0589fb', 'sha256': '7921e2464098e0d08c15147df7dd0a131b49812be2739ed37c02c550bf08f4a8'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE': {'mode': '100644', 'blob': '0a041280bd00a9d068f503b8ee7ce35214bd24a1', 'sha256': 'e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.cpp': {'mode': '100644', 'blob': '3f11bc50b082fb05b45c5c588440ce408cbb7cf9', 'sha256': 'f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp': {'mode': '100644', 'blob': '3e5a91dfd321e3f8583132455d41308e521e8309', 'sha256': 'cf1ca013c2f2e049bde4b410d6568384f8d0c1dcb44d82cd418cd71db8e136f3'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp': {'mode': '100644', 'blob': '151ee3dfd5eedf3e4ca9f3704849d5235cb6739f', 'sha256': 'f98bb3a985033934e5c9aa312a0729e0d35ed0167e0eb01cc309a4480b575899'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/library.json': {'mode': '100644', 'blob': 'a5e5eea76bc9b6c3aadd52f3fd718e1867a09b89', 'sha256': '7afd8086bfee7907f963b7b38a3a2bcbfe0136c43ab1e47ea8d6e968d5fdd3fa'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h': {'mode': '100644', 'blob': '6df4262c531ab2a09669b4cb4fe12e36f66806ba', 'sha256': '2fc037980c1841c55e4004adb4e87a1ae550173519896a710b78d48394bb24ed'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h': {'mode': '100644', 'blob': '45207b0a99cb58a0dae1a71f7b0ed21b22fbce15', 'sha256': '47c1d2a93fccf06237e00691dcd69036b5b7cfb54dd21416bcc97844d4132453'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h': {'mode': '100644', 'blob': '5a50a840f192a831287469190dc35aa73e84d01b', 'sha256': '3d39e2da342d981461094c69d73229d88a345549499b5069b6e430e76a704dac'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp': {'mode': '100644', 'blob': '941e8cd9ab3732d212ae4dbaff1bd802becdee8e', 'sha256': 'fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h': {'mode': '100644', 'blob': 'b9df8fb4e43721c923bee4fc22eb1f3ff0763f35', 'sha256': '678fd01f158f519d2fee8ffbf027937fb14d4b40d141c618d6c16ea4e4b38a1a'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c': {'mode': '100644', 'blob': '1ce4b4c771f83c4315061a82c6e9b48da0ac2681', 'sha256': 'debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed'}, 'tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h': {'mode': '100644', 'blob': '6dc089da307a10a6d440e70acb2775ed6e7fb07c', 'sha256': '9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf'}, 'tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp': {'mode': '100644', 'blob': '4522f333eafddd42b061243c36a232928bd7f96f', 'sha256': '0951794f79b39ac63535af69b580092212e4647066c200ce6df188482e09560d'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h': {'mode': '100644', 'blob': 'f1ba6b8c807abccadef22a1ede3ccb48576161e4', 'sha256': '854797409140abd8761a44625980a83b73dc62f973e9c8bef94d071cf447eb59'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h': {'mode': '100644', 'blob': '747df16fadbb6b783f4614eb010e4124dc9d4428', 'sha256': 'f1a8348ce2b2fed336e269b851bf1031789268802741e9c20a24f8e7d7f2ef57'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h': {'mode': '100644', 'blob': '14c209b58e66445bb7030a9c422eb5d044504058', 'sha256': '02acc526601a3bc61fc434690198eae72da75869e43ad9e24ffc21ead9e72ce0'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp': {'mode': '100644', 'blob': '627a573e764b9a93ef98bb2dc9acee3d06495b93', 'sha256': '0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h': {'mode': '100644', 'blob': '23df581ad95652ad7a6fe532403ec2d5739b59ce', 'sha256': '7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab'}, 'tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h': {'mode': '100644', 'blob': '36bfb46732ed7cf4993bd580ada48acbbde2ec31', 'sha256': '6fbf22c418b965c8b3bd1d20d8412d13950043b34ac61ed1f7b5b9bfa4f4ad5d'}, 'tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h': {'mode': '100644', 'blob': '797a8431635ace12ce267586bf07b5f6e8f1aadf', 'sha256': 'f720ec13215f1adbc31ebe561651428c45dd05a3c0b3025d6cbd49be772d57a9'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Print.h': {'mode': '100644', 'blob': '844cb148d07f7e46f00461031cc58d4066ca61e2', 'sha256': '4950bf9f0a8ec926ce95c225ecf47c6401ae6df17c4353460e1378c4053c9d8a'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Stream.h': {'mode': '100644', 'blob': '463203667c6ee47f83fb414b8bb324ea747e4dd1', 'sha256': '61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0'}, 'tools/fixtures/gp_config021_persisted_recovery/include/Wire.h': {'mode': '100644', 'blob': '41d6693ccef478e626683040ee06e80003c7cbeb', 'sha256': '9e4b6a768ab81737df13372d053225d92c98bfd433de1af55b4bb54fa725321f'}, 'tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h': {'mode': '100644', 'blob': '0e74d11a5f4652c6bd0c31e2a93d8493e64896de', 'sha256': '5c29ced4a047d158ff1e929f9c1679c3eed08cf4f129fb555f7e67d8c981dce3'}, 'tools/fixtures/gp_config021_persisted_recovery/include/avr/pgmspace.h': {'mode': '100644', 'blob': '1fcc7e8f6abc7a23ab8e8d8a6378f8c294a5737d', 'sha256': '3f2de365e7cc1c6e874e9735d4be23e871fe03333bc3328f34810cd670c15467'}, 'tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h': {'mode': '100644', 'blob': '0b3c8f06a3bfe82e8f671bc5f6bd96d5821c2fd3', 'sha256': '47568bbfdd939867e0e0a78613f46a03e6277c4c16661a729ccdd09b988160ea'}, 'tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h': {'mode': '100644', 'blob': '8ebb6944512278873c11f5d71cc98bd4ba3f01e3', 'sha256': 'f0221f7ab67c22e5ee206c7c8801bd5e09db61c76bf1f7d668495b92f958d5ab'}, 'tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp': {'mode': '100644', 'blob': 'df311e33148ad1559a99bea1b3d5821827b0ad06', 'sha256': 'd87bf97b2ed727954698b931c70d1f0cd8ec9fff70d8bc5b76ed398476365f00'}, 'tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h': {'mode': '100644', 'blob': 'f4ed924aaa1af713065aba8cdf9bfa4b9561f3b0', 'sha256': 'a2ff6f0ceb9a050416c56ba2d587348c77259a02dd0ba1fc9f81db3c58cc439c'}, 'tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h': {'mode': '100644', 'blob': '5bac0151270606e7bb51e965ff4cd2edc806948d', 'sha256': '430c019c88bae951f854bc9fd98615ffc7ef419d6894f5d17edf30278392ba5b'}, 'tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h': {'mode': '100644', 'blob': 'd2369ff79c72c95477dcf9991d9dcf51334111bb', 'sha256': '0531eca33b73e7de9fa6db45f9b9bb5670e7760665a35b9450bdde264b5b4d8b'}, 'tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h': {'mode': '100644', 'blob': '6f70f09beec2219624baeca92e2cd7deaa104fb4', 'sha256': 'b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201'}, 'tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h': {'mode': '100644', 'blob': '05826db89d1ed9b69fcd6c6c8a42e7a372950262', 'sha256': '2213c23f05f2d03183470a64548b7cfddf78a57d80cb09fc74fe745f3df43408'}, 'tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h': {'mode': '100644', 'blob': '6f70f09beec2219624baeca92e2cd7deaa104fb4', 'sha256': 'b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201'}, 'tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h': {'mode': '100644', 'blob': 'b42d0ee3c0ef24cd8e351fb44e2d69655a760b12', 'sha256': 'de247bcb527348f3a965565be09f0774eebf1203fed7be09e3a1a6e5ad825dc1'}, 'tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h': {'mode': '100644', 'blob': '4df644fda488d22b8f0f848d7915dbc6aed1a7ca', 'sha256': '7ee1334c6ec489ba911676c855833b1c1d516b4bd572a39801c526a1fd3c09c9'}, 'tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp': {'mode': '100644', 'blob': '0a6bc5bc41b5c7ece46cb9711c381b87d9687efe', 'sha256': 'c576e52cfe594883fa0a78e96e9521a77c1a1633d0b098bedac4a28733b62e7b'}, 'tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp': {'mode': '100644', 'blob': 'e2b61760ef2ab046a1f73b3ca644da3effa5fc1b', 'sha256': 'e744c7eeec31865b0a3dc954ca8c40982901c9c5ad94605941343f109db833cb'}, 'tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp': {'mode': '100644', 'blob': 'c31d8414186766df146ada28e1d48f2c47b29c1c', 'sha256': '629ddf994e2a55a9f55bf568aeff09e56f89c68a22e4b27a3364eef77759ed1d'}, 'tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp': {'mode': '100644', 'blob': '934a08d293d0026887eed90ef41f3a9ba1bfab2a', 'sha256': '71a2b7c65c2478f5ffb97127cb5ff5efeabba52290d2e40fd7552657e42b1e80'}, 'tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp': {'mode': '100644', 'blob': 'c76e44472155d585367840e6e80cae2588abdbdf', 'sha256': '78b9f36eff61d82999cce1f988ee011aaf947120faa2cdc34b81d6b78dd0cb5e'}, 'tools/glyph_hardware_correspondence.py': {'mode': '100644', 'blob': 'fffc32c881cd828fa1da74e5eb4960bccca8356c', 'sha256': '05edb45114b1a3be063fbf99d005d70a2c6552e0ad138d706e956c4030006f5b'}, 'tools/glyph_tracked_worktree_integrity.py': {'mode': '100644', 'blob': 'f653b4619ee0ce8a8c35d972fa591545522c0be7', 'sha256': '604bea90c4b3cb2cbb0fdf023918da7ba45d1be7d128c2b40050e09e5a220fc7'}}
+FIXTURE_SHA256 = '1950bf1e0de54275e14755d1cbde42964c64731770a58958eb2c2106358c424c'
+APP_UNITS = ['config/glyph/common/src/config.cpp', 'HAL/pico/src/core/Persistence.cpp', 'src/core/config_validation.cpp', 'src/core/config_button_validation.cpp', 'src/core/CommunicationBackend.cpp', 'src/core/InputSource.cpp', 'src/core/mode_selection.cpp', 'HAL/pico/src/comms/backend_init.cpp', 'src/comms/IntegratedDisplay.cpp', 'config/glyph/common/src/display/AboutMenu.cpp', 'config/glyph/common/src/display/GlyphConfigMenu.cpp', 'config/glyph/common/src/display/MenuButtonHints.cpp', 'config/glyph/common/src/display/OopsieMenu.cpp', 'HAL/pico/src/display/RemapMenu.cpp', 'HAL/pico/src/display/InputDisplay.cpp', 'HAL/pico/src/display/RgbBrightnessMenu.cpp', 'HAL/pico/src/display/ConfigMenu.cpp', 'HAL/pico/src/display/DefaultConfigMenu.cpp', 'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp', 'tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp', 'tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp', 'src/core/InputMode.cpp', 'src/core/ControllerMode.cpp', 'src/core/config_utils.cpp', 'src/core/socd.cpp', 'HAL/pico/src/core/KeyboardMode.cpp', 'HAL/pico/src/gpio.cpp', 'HAL/pico/src/reboot.cpp', 'HAL/pico/src/serial.cpp', 'HAL/pico/src/comms/console_detection.cpp', 'HAL/pico/src/comms/ConfiguratorBackend.cpp', 'HAL/pico/src/comms/GamecubeBackend.cpp', 'HAL/pico/src/comms/N64Backend.cpp', 'HAL/pico/src/comms/NesBackend.cpp', 'HAL/pico/src/comms/SnesBackend.cpp', 'HAL/pico/src/comms/XInputBackend.cpp', 'HAL/pico/src/comms/DInputBackend.cpp', 'HAL/pico/src/comms/NintendoSwitchBackend.cpp', 'src/comms/B0XXInputViewer.cpp', 'lib/TUCompositeHID/src/TUCompositeHID.cpp', 'lib/TUCompositeHID/src/TUGamepad.cpp', 'lib/TUCompositeHID/src/TUKeyboard.cpp', 'config/glyph/common/src/LEDTemplates.cpp', 'HAL/pico/src/rgb/ButtonLocations.cpp', 'src/modes/Ultimate.cpp', 'src/modes/Melee20Button.cpp', 'src/modes/ProjectM.cpp', 'src/modes/RivalsOfAether.cpp', 'src/modes/Rivals2.cpp', 'src/modes/FgcMode.cpp', 'src/modes/64.cpp', 'src/modes/SenscopePrototype.cpp', 'src/modes/CustomKeyboardMode.cpp', 'src/modes/CustomControllerMode.cpp', 'tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp', 'src/prototypes/senscope/SenscopePrototypeModifier.cpp', 'src/prototypes/senscope/SenscopePrototypeSelfTest.cpp', 'src/prototypes/senscope/SenscopePrototypeDigital.cpp', 'src/prototypes/senscope/SenscopePrototypeForce.cpp', 'src/prototypes/senscope/SenscopePrototypeResolver.cpp', 'src/prototypes/senscope/SenscopePrototypeValidation.cpp', 'src/prototypes/senscope/SenscopePrototypeOutput.cpp', 'src/prototypes/senscope/SenscopePrototypeDirection.cpp']
+C_UNITS = [DECODE+'/nanopb/pb_common.c',DECODE+'/nanopb/pb_decode.c',HOST+'/dependencies/pb_encode.c',DECODE+'/generated/config.pb.c']
+GENERAL_UNITS = ['src/core/config_validation.cpp','src/core/config_button_validation.cpp',
+                 'HAL/pico/src/core/Persistence.cpp',HOST+'/dependencies/CRC32.cpp',HOST+'/dependencies/pb_arduino.cpp',
+                 'src/core/CommunicationBackend.cpp','HAL/pico/src/comms/ConfiguratorBackend.cpp']
+INCLUDES = [HOST+'/include',HOST+'/dependencies',HOST+'/dependencies/joybus',HOST+'/dependencies/nes',
+            DECODE+'/generated',DECODE+'/nanopb','include','HAL/pico/include',
+            'config/glyph/common/include','config/glyph/glyph_mk6/include','lib/TUCompositeHID/include','src','.']
+STARTUP_CASES = [
+    (kind,schedule,screen) for kind in ('rejected','normal','configurator')
+    for schedule in ('early','during','late') for screen in ('display','failed')
+] + [
+    (kind,schedule,screen) for kind in ('missing','open','defaults','mount','config')
+    for schedule in ('early','late') for screen in ('display','failed')
+] + [('mb1','late','display'),('mb1','late','failed')]
+
+class ContractError(AssertionError): pass
+
+def require(condition, message):
+    if not condition: raise ContractError(message)
+
+def digest(raw): return hashlib.sha256(raw).hexdigest()
+
+def blob(raw): return hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+
+def regular(root, path):
+    require(isinstance(path,str) and not Path(path).is_absolute() and '..' not in Path(path).parts,'unsafe literal input path')
+    file=root/path
+    for part in (file,*file.parents):
+        if part==root: break
+        require(not part.is_symlink(),'symlink input/ancestor: '+path)
+    require(file.is_file() and stat.S_ISREG(file.stat().st_mode) and stat.S_IMODE(file.stat().st_mode)==0o644,
+            'regular100644 input required: '+path)
+    return file.read_bytes()
+
+def git(root,*args):
+    return subprocess.check_output(['git',*args],cwd=root,timeout=20)
+
+def pairs(items):
+    out={}
+    for key,value in items:
+        require(key not in out,'duplicate fixture key: '+key);out[key]=value
+    return out
+
+def _live_inputs(root):
+    for path,pin in PINS.items():
+        raw=regular(root,path)
+        require(pin['mode']=='100644' and digest(raw)==pin['sha256'] and blob(raw)==pin['blob'],
+                'literal source/host/dependency identity: '+path)
+
+def _function(text,start,end):
+    require(text.count(start)==1,'missing/duplicate source function: '+start)
+    a=text.index(start);b=text.index(end,a+len(start)) if end else len(text)
+    return text[a:b]
+
+def source_contract(root):
+    return _source_contract({p:regular(root,p).decode() for p in SOURCES})
+
+def _source_contract(texts):
+    p=texts[SOURCES[1]];h=texts[SOURCES[0]];s=texts[SOURCES[2]];app=texts[SOURCES[3]];v=texts[SOURCES[5]]
+    ctor=_function(p,'Persistence::Persistence()', 'Persistence::~Persistence()')
+    require('LittleFS.setConfig(LittleFSConfig(false))' in ctor and '_mounted = LittleFS.begin();' in ctor and
+            ctor.index('setConfig')<ctor.index('begin()') and 'if (_configuration_ok)' in ctor,'configure-before-mount/noformat contract')
+    install=_function(p,'bool Persistence::SetValidator(', 'bool Persistence::ValidateConfig(')
+    require(install.count('_validator = validator;')==1 and install.index('validator == nullptr')<install.index('_validator = validator;') and
+            install.index('return _validator == validator;')<install.index('_validator = validator;'),'stable callback installation')
+    validate=_function(p,'bool Persistence::ValidateConfig(', 'bool Persistence::SaveConfig(')
+    require(validate.index('_validator == nullptr')<validate.index('validate_config_extents(config)')<validate.index('return _validator(config, error);'),'bounded callback before semantics')
+    load=_function(p,'Persistence::LoadResult Persistence::LoadConfigChecked(', 'bool Persistence::CheckSavedConfig()')
+    require('!IsAvailable() || _validator == nullptr' in load and 'static Config candidate;' in load and
+            'candidate = Config_init_default;' in load and load.index('candidate = Config_init_default;')<load.index('LittleFS.open'),'private candidate/reset/storage guard')
+    require(load.count('config = candidate;')==1 and 'pb_decode(&istream, Config_fields, &candidate)' in load and
+            load.index('pb_decode(')<load.index('ValidateConfig(candidate, error)')<load.index('config = candidate;') and
+            'SaveConfig(' not in load,'transactional load/publication/no badfile save')
+    require('reader.io_failed ? LoadResult::StorageFailure : LoadResult::Rejected' in load and
+            'istream.bytes_left != 0' in load and 'config_file.position() != file_size' in load and
+            'config_file.size() != file_size' in load,'decoder exact I/O/full extent contract')
+    for marker in ('bool Persistence::SaveConfig(', 'bool Persistence::CheckSavedConfig()', 'size_t Persistence::LoadConfigRaw('):
+        a=p.index(marker);body=p[p.index('{',a)+1:]
+        require(body.lstrip().startswith('if (!IsAvailable())'),'public storage availability guard: '+marker)
+    require('File *file;' in p and 'const int read = reader.file->read(destination, chunk);' in p and
+            'reader.io_failed = true;' in p and 'uint8_t skipped[32];' in p,'literal File decoder reader')
+    require('const uint32_t custom_mode_id = mode.custom_mode_config;' in v and
+            'custom_mode_id > config.custom_modes_count' in v and
+            v.index('validate_config_extents(config)')<v.index('validate_config_button_bindings(config)')<v.index('config.default_backend_config >'),'original-width/order semantic contract')
+    extent=_function(v,'bool validate_config_extents(', 'bool validate_config_semantics(')
+    for field in ('game_mode_configs','communication_backend_configs','custom_modes','keyboard_modes','rgb_configs','socd_pairs','button_remapping','activation_binding','applicable_backends','menu_button_icon','digital_button_mappings','stick_direction_mappings','analog_trigger_mappings','modifiers','button_combo_mappings','buttons_to_keycodes','button_colors','buttons'):
+        require(field+'_count' in extent,'complete nested extent role: '+field)
+    setbody=_function(s,'bool ConfiguratorBackend::HandleSetConfig()', 'bool ConfiguratorBackend::HandleUnknownCommand(')
+    require('static Config candidate;' in setbody and 'candidate = Config_init_default;' in setbody and
+            setbody.index('pb_decode(&istream, Config_fields, &candidate)')<setbody.index('persistence.ValidateConfig(candidate, validation_error)')<
+            setbody.index('persistence.SaveConfig(candidate)')<setbody.index('_config = candidate;') and
+            setbody.count('_config = candidate;')==1 and 'validation_error.length' in setbody,'SET shared semantic/save/publication contract')
+    require('auto_init_mutex(boot_state_mutex);' in app,'pre-core1 SDK primitive initialization')
+    for start,end in [('BootSnapshot read_boot_state()', 'void publish_boot_state('),('void publish_boot_state(', 'bool refused(')]:
+        lock=_function(app,start,end)
+        require(lock.index('mutex_enter_blocking(&boot_state_mutex);')<lock.index('mutex_exit(&boot_state_mutex);'),'source acquire/publish synchronization')
+    refuse=_function(app,'void refuse_boot(', '}  // namespace')
+    require('watchdog_hw->scratch[0] = 0;' in refuse and 'watchdog_hw->scratch[1] = 0;' in refuse and
+            'if (display_ready)' in refuse and refuse.index('draw_recovery_page')<refuse.index('publish_boot_state'),'refusal scratch/display ownership')
+    setup=_function(app,'void setup()', 'void loop()')
+    require(setup.index('if (inputs.mb1)')<setup.index('reboot_bootloader();')<setup.index('persistence.LoadConfigChecked(config)') and
+            setup.index('persistence.SetValidator(validate_config_semantics)')<setup.index('persistence.ValidateConfig(config, validation_error)')<setup.index('persistence.LoadConfigChecked(config)')<setup.index('initialize_backends(') and
+            'SaveConfig(' not in setup and 'load_result != Persistence::LoadResult::Loaded' in setup,'preload MB1/defaults and permanent load refusal')
+    loop=_function(app,'void loop()', '/* Second core handles OLED display */')
+    require(loop.index('read_boot_state().outcome != BootOutcome::Normal')<loop.index('backends'),'core0 permanent gate before pointers')
+    setup1=_function(app,'void setup1()', 'void dummyloop()')
+    require(setup1.index('while (snapshot.outcome == BootOutcome::Pending)')<setup1.index('if (refused(snapshot.outcome))')<setup1.index('static RgbBrightnessMenu')<setup1.index('backends[0]'),'core1 refusal before all normal construction')
+    loop1=_function(app,'void loop1()', None)
+    require(loop1.index('if (refused(snapshot.outcome))')<loop1.index('if (snapshot.display_ready)')<loop1.index('draw_recovery_page(snapshot.outcome);')<loop1.index('snapshot.outcome != BootOutcome::Normal')<loop1.index('display_backend'),'unconditional core1 recovery redraw/gate')
+    for role in ('LoadConfigChecked','ConfigSemanticValidator','SetValidator','IsAvailable','ValidateConfig'):
+        require(role in h,'Persistence public source role: '+role)
+    return True
+
+def _entry_custody(root,head,path,identity):
+    require(git(root,'ls-tree','-z',head,'--',path)==('100644 blob '+identity+'\t'+path+'\0').encode(),'committed mode/blob mismatch: '+path)
+    require(git(root,'ls-files','--stage','-z','--',path)==('100644 '+identity+' 0\t'+path+'\0').encode(),'stage0 mode/blob mismatch: '+path)
+    require(git(root,'ls-files','-v','-z','--',path)==('H '+path+'\0').encode(),'index flag trap: '+path)
+
+def _fixture_identity(root):
+    raw=regular(root,FIXTURE)
+    require(digest(raw)==FIXTURE_SHA256,'independent fixture substitution')
+    require(json.loads(raw,object_pairs_hook=pairs)==fixture_contract(),'finite fixture omission/substitution')
+
+def authenticate_inputs(root):
+    require(PINS and FIXTURE_SHA256!='PENDING_FINAL_STARTUP_FREEZE','checker input catalogue not frozen')
+    require(Path(git(root,'rev-parse','--show-toplevel').decode().strip()).resolve()==root.resolve(),'repository/root mismatch')
+    head=git(root,'rev-parse','HEAD').decode().strip()
+    require(git(root,'show','-s','--format=%P',head).decode().strip()==BASE,'C021 sole-parent approved B contract')
+    _live_inputs(root)
+    for path,pin in PINS.items():
+        _entry_custody(root,head,path,pin['blob'])
+    # Checker/fixture use committed custody; fixture has an independent reviewed
+    # digest and contains no candidate SHA or checker self-hash cycle.
+    for path in (CHECKER,FIXTURE,REPORT):
+        current=regular(root,path);identity=blob(current)
+        require(git(root,'ls-tree','-z',head,'--',path)==('100644 blob '+identity+'\t'+path+'\0').encode(),'committed artifact custody: '+path)
+        require(git(root,'ls-files','--stage','-z','--',path)==('100644 '+identity+' 0\t'+path+'\0').encode() and
+                git(root,'ls-files','-v','-z','--',path)==('H '+path+'\0').encode(),'artifact index/flag custody: '+path)
+    _fixture_identity(root)
+    # All active critical bytes must be B plus exactly the six authorized paths.
+    from glyph_hardware_correspondence import classify_path
+    changed=git(root,'diff-tree','--no-commit-id','--name-only','-r',BASE,head).decode().splitlines()
+    critical={p for p in changed if classify_path(p)=='CRITICAL'}
+    require(critical==set(SOURCES),'critical change scope beyond six C021 paths')
+    old=git(root,'show',BASE+':HAL/pico/include/comms/backend_init.hpp')
+    adapter=regular(root,HOST+'/include/comms/backend_init.hpp')
+    before=b'detect_console_t detect_console = &detect_console,'
+    after=b'detect_console_t detect_console_fn = &detect_console,'
+    require(old.count(before)==1 and old.replace(before,after,1)==adapter,'adapter exceeds declaration-only parameter rename')
+    old_save=_function(git(root,'show',BASE+':'+SOURCES[1]).decode(),'bool Persistence::SaveConfig(', 'bool Persistence::LoadConfig(')
+    current_save=_function(regular(root,SOURCES[1]).decode(),'bool Persistence::SaveConfig(', 'bool Persistence::LoadConfig(')
+    guard='    if (!IsAvailable()) {\n        return false;\n    }\n'
+    require(current_save.count(guard)==1 and current_save.replace(guard,'',1)==old_save,'SaveConfig successful body drift beyond availability guard')
+    source_contract(root)
+    require(git(root,'rev-parse','HEAD').decode().strip()==head,'HEAD changed during authentication')
+    return head
+
+def fixture_contract():
+    return {'schema_name':'glyph_gp_config021_persisted_recovery','schema_version':1,'base':BASE,
+            'classification':'CANDIDATE_HOST_SOURCE_PROOF_ONLY','source_paths':list(SOURCES),'inputs':PINS,
+            'app_units':APP_UNITS,'c_units':C_UNITS,'startup_cases':[list(c) for c in STARTUP_CASES],
+            'abi_flags':['-fshort-enums','-fno-short-enums'],'decoder_provenance':{'fixture': 'docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json', 'nanopb_commit': '160d4f09e5fabb2b66aa2dea32d4f38ace2c4b3f', 'tag': '0.4.9.2', 'generated_header_version': 40, 'schema_selector': 'https://github.com/GregTurbo/HayBox-proto#db4e2f6'},'non_claims':['firmware build','target ABI proof','physical acceptance','actual COBS wire framing','SaveConfig disk atomicity','power-loss recovery','all-admitted-config startup safety','Nunchuk/root cause']}
+
+def _run(command,cwd,env=None,timeout=20):
+    result=subprocess.run(list(map(str,command)),cwd=cwd,env=env,capture_output=True,text=True,timeout=timeout)
+    return result
+
+def _dependency_paths(path,root):
+    text=path.read_text().replace('\\\n',' ')
+    deps=[]
+    for value in shlex.split(text.split(':',1)[1]):
+        resolved=(root/Path(value)).resolve()
+        if sys.platform=='darwin' and resolved==Path('/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/SDKSettings.json').resolve():
+            continue  # Clang emits this selected toolchain metadata despite -MMD.
+        require(resolved.is_relative_to(root.resolve()),'non-system compile dependency outside finite root: '+value)
+        deps.append(resolved.relative_to(root.resolve()).as_posix())
+    return set(deps)
+
+def run_host(root,temporary,*,negative_controls=True,pins=None):
+    """Explicit preparatory host execution; main always authenticates before it."""
+    root=Path(root).resolve();temporary=Path(temporary).resolve();temporary.mkdir(parents=True,exist_ok=True)
+    require(not temporary.is_relative_to(root),'temporary output must be outside repository')
+    cc=shutil.which('cc');cxx=shutil.which('c++');require(cc and cxx,'host compilers unavailable')
+    evidence={'classification':'LITERAL_HOST_PROOF_ONLY','root':str(root),'abis':{},'dependencies':[],
+              'negative_controls':[],'firmware':'NOT_BUILT','hardware':'NOT_CLAIMED','actual_cobs_wire':'NOT_TESTED'}
+    deps=set();commands=[]
+    compiler_records=[]
+    for compiler in (cc,cxx):
+        result=_run([compiler,'--version'],root)
+        require(result.returncode==0 and not result.stderr,'compiler version unavailable')
+        compiler_records.append({'command':[compiler,'--version'],'stdout':result.stdout})
+    evidence['toolchain']=compiler_records
+    evidence['known_compile_warning_suppressions']=[{'path':path,'source_sha256':digest(regular(root,path)),'flag':flag,'original_diagnostic':diagnostic,'scope':'EXACT_UNCHANGED_TU_MACOS_HOST_ONLY'} for path,flag,diagnostic in [('HAL/pico/src/comms/console_detection.cpp','-Wno-tautological-constant-out-of-range-compare',"result of comparison of constant -1 with expression of type 'const uint8_t' is always true"),('HAL/pico/src/comms/NintendoSwitchBackend.cpp','-Wno-gnu-designator','use of GNU old-style field designator extension')]]
+    if sys.platform=='darwin':
+        metadata=Path('/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/SDKSettings.json').resolve()
+        evidence['system_toolchain_metadata']={'classification':'SELECTED_CLANG_SDK_METADATA','path':str(metadata),'sha256':digest(metadata.read_bytes()),'command':compiler_records}
+    for label,abi in [('short','-fshort-enums'),('ordinary','-fno-short-enums')]:
+        directory=temporary/label;directory.mkdir(exist_ok=True)
+        include_flags=['-I'+str(root/p) for p in INCLUDES]
+        protections=['-fsanitize=address,undefined,enum,shift','-fno-sanitize-recover=all','-fno-omit-frame-pointer']
+        defines=['-DFIRMWARE_NAME="host"','-DFIRMWARE_VERSION="host"','-DDEVICE_NAME="host"']
+        common=['-O0','-g',abi,*protections,*include_flags]
+        c_flags=['-std=c99',*common]
+        cpp_flags=['-std=gnu++17','-Wno-missing-field-initializers','-Wno-non-c-typedef-for-linkage',*defines,*common]
+        startup_flags=[*cpp_flags,*(['-fPIE'] if sys.platform!='darwin' else []),'-DNDEBUG','-finstrument-functions','-ffunction-sections','-fdata-sections']
+        object_map={};compile_specs=[]
+        for graph,units,compiler,flags in [('c',C_UNITS,cc,c_flags),('general',GENERAL_UNITS,cxx,cpp_flags),('startup',APP_UNITS,cxx,startup_flags)]:
+            for index,path in enumerate(units):
+                obj=directory/(graph+'-'+str(index)+'.o');dep=obj.with_suffix('.d')
+                warning_flags=(['-Wno-tautological-constant-out-of-range-compare'] if path=='HAL/pico/src/comms/console_detection.cpp' else ['-Wno-gnu-designator'] if path=='HAL/pico/src/comms/NintendoSwitchBackend.cpp' else []) if sys.platform=='darwin' else []
+                cmd=[compiler,*flags,*warning_flags,'-MMD','-MF',str(dep),'-c',str(root/path),'-o',str(obj)]
+                compile_specs.append((graph,path,obj,dep,cmd))
+        for suite in ('semantic','persistence','setconfig'):
+            path=HOST+'/'+suite+'_harness.cpp';obj=directory/(suite+'-harness.o');dep=obj.with_suffix('.d')
+            compile_specs.append(('harness',path,obj,dep,[cxx,*cpp_flags,'-MMD','-MF',str(dep),'-c',str(root/path),'-o',str(obj)]))
+        def compile_one(spec):
+            graph,path,obj,dep,command=spec;result=_run(command,root,timeout=60)
+            (directory/(obj.stem+'.compile.log')).write_text(json.dumps(command)+'\n'+result.stdout+result.stderr)
+            require(result.returncode==0 and not result.stderr,'actual TU compile failed: '+path+'\n'+result.stdout+result.stderr)
+            actual=_dependency_paths(dep,root)
+            if pins is not None:require(actual<=set(pins),'compile dependency absent from finite pins: '+str(sorted(actual-set(pins))))
+            return graph,path,obj,actual,command
+        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+            for graph,path,obj,actual,command in executor.map(compile_one,compile_specs):
+                object_map[(graph,path)]=obj;deps|=actual;commands.append(command)
+        c_objects=[object_map[('c',p)] for p in C_UNITS]
+        def link(suite,objects,startup=False):
+            binary=directory/suite;command=[cxx,*protections,*((['-Wl,-dead_strip','-Wl,-export_dynamic'] if sys.platform=='darwin' else ['-pie','-Wl,--gc-sections','-Wl,--export-dynamic']) if startup else []),*map(str,objects),'-o',str(binary)]
+            result=_run(command,root,timeout=60);commands.append(command)
+            (directory/(suite+'.link.log')).write_text(json.dumps(command)+'\n'+result.stdout+result.stderr)
+            require(result.returncode==0 and not result.stderr,'actual '+suite+' link failed\n'+result.stdout+result.stderr);return binary
+        binaries={}
+        for suite,units in [('semantic',GENERAL_UNITS[:2]),('persistence',GENERAL_UNITS[:5]),('setconfig',GENERAL_UNITS)]:
+            binaries[suite]=link(suite,[object_map[('general',p)] for p in units]+([] if suite=='semantic' else c_objects)+[object_map[('harness',HOST+'/'+suite+'_harness.cpp')]])
+        binaries['startup']=link('startup',[object_map[('startup',p)] for p in APP_UNITS]+c_objects,True)
+        rows={}
+        for suite in ('semantic','persistence','setconfig'):
+            result=_run([binaries[suite]],root,timeout=30);(directory/(suite+'.run.log')).write_text(result.stdout+result.stderr)
+            require(result.returncode==0 and not result.stderr,'actual '+suite+' cases failed\n'+result.stdout+result.stderr)
+            expected={'semantic':1077 if label=='short' else 1173,'persistence':326,'setconfig':868}[suite]
+            marker={'semantic':'semantic_case=','persistence':'persistence_case=','setconfig':'set_case='}[suite]
+            require(sum(line.startswith(marker) for line in result.stdout.splitlines())==expected,'full '+suite+' case census')
+            rows[suite]={'cases':expected,'summary':[s for s in result.stdout.splitlines() if '_matrix ' in s],'stdout_sha256':digest(result.stdout.encode())}
+        result=_run([binaries['setconfig'],'--missing-callback'],root)
+        (directory/'setconfig.missing-callback.log').write_text(result.stdout+result.stderr)
+        require(result.returncode==0 and not result.stderr and 'set_missing_callback cases=1' in result.stdout,'fresh missing shared callback SET proof')
+        rows['setconfig']['missing_callback_cases']=1
+        offsets=_rgb_offsets(binaries['startup'],directory/'startup.nm.json',root)
+        def startup_one(case):
+            kind,schedule,screen=case
+            env=_startup_environment(kind,offsets)
+            command=[binaries['startup'],kind,schedule,screen];result=_run(command,root,env=env,timeout=10)
+            return {'case':list(case),'exit':result.returncode,'stdout':result.stdout,'stderr':result.stderr}
+        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+            startup=list(executor.map(startup_one,STARTUP_CASES))
+        (directory/'startup.actual.json').write_text(json.dumps(startup,indent=2)+'\n')
+        for item in startup:
+            require(item['exit']==0 and not item['stderr'] and 'case=whole_startup_' in item['stdout'],'actual whole startup failed: '+str(item))
+        require(len(startup)==40,'whole startup corpus complete');rows['startup']={'cases':startup}
+        if negative_controls:
+            evidence['negative_controls']+=_runtime_negatives(root,directory,label,abi,object_map,c_objects,cpp_flags,startup_flags,protections,cxx)
+        evidence['abis'][label]=rows
+    evidence['dependencies']=sorted(deps);evidence['commands']=commands
+    if negative_controls:evidence['negative_controls']+=_identity_and_architecture_negatives(root,temporary)
+    (temporary/'execution.json').write_text(json.dumps(evidence,indent=2)+'\n')
+    return evidence
+
+def _startup_environment(kind,offsets):
+    env=dict(os.environ)
+    for key in ('GLYPH_HOST_MOUNT_FAIL','GLYPH_HOST_CONFIG_FAIL','GLYPH_HOST_RGB_CTOR_OFFSETS'):
+        env.pop(key,None)
+    env['GLYPH_HOST_RGB_CTOR_OFFSETS']=offsets
+    if kind=='mount':env['GLYPH_HOST_MOUNT_FAIL']='1'
+    if kind=='config':env['GLYPH_HOST_CONFIG_FAIL']='1'
+    return env
+
+def _rgb_offsets(binary,log,root):
+    command=['nm',str(binary)];result=_run(command,root)
+    require(result.returncode==0 and not result.stderr,'actual executable nm failure')
+    rows=[line.split() for line in result.stdout.splitlines()]
+    ctors=[row for row in rows if len(row)==3 and re.fullmatch(r'__?ZN15NeoPixelBackendILh11ELi76EEC[12]E.*',row[2])]
+    require(len(ctors)==2 and all(row[1].lower()=='t' for row in ctors),'exact two defined RGB template constructors required')
+    bases=[row for row in rows if len(row)==3 and row[2]=='__mh_execute_header']
+    require(sys.platform!='darwin' or len(bases)==1,'actual mac executable image base required')
+    base=int(bases[0][0],16) if sys.platform=='darwin' else 0
+    addresses=[int(row[0],16) for row in ctors]
+    # Defined text symbols bound the executable text; positive constructors must
+    # lie inside that actual image, never inherited offsets or hardcoded values.
+    text_addresses=[int(row[0],16) for row in rows if len(row)==3 and row[1].lower()=='t']
+    require(len(set(addresses))==2 and all(base<a<=max(text_addresses) for a in addresses),'invalid/out-of-image RGB constructor offsets')
+    offsets=','.join(hex(a-base) for a in addresses)
+    log.write_text(json.dumps({'command':command,'binary_sha256':digest(binary.read_bytes()),'constructors':ctors,'image_base':bases,'offsets':offsets},indent=2)+'\n')
+    return offsets
+
+def _runtime_negatives(root,directory,label,abi,object_map,c_objects,cpp_flags,startup_flags,protections,cxx):
+    controls=[
+        ('fullwidth_narrowing',SOURCES[5],'const uint32_t custom_mode_id = mode.custom_mode_config;','const uint8_t custom_mode_id = mode.custom_mode_config;','semantic',None),
+        ('automatic_format',SOURCES[1],'LittleFSConfig(false)','LittleFSConfig(true)','persistence',None),
+        ('ignore_mount_failure',SOURCES[1],'_mounted = LittleFS.begin();','LittleFS.begin(); _mounted = true;','persistence',None),
+        ('missing_callback_install',SOURCES[1],'    _validator = validator;','    /* omitted installation */','persistence',None),
+        ('bypass_callback',SOURCES[1],'return _validator(config, error);','return true;','persistence',None),
+        ('early_caller_publication',SOURCES[1],'candidate = Config_init_default;','candidate = Config_init_default; config = candidate;','persistence',None),
+        ('save_rejected_stored_config',SOURCES[1],'if (!ValidateConfig(candidate, error)) {','if (!ValidateConfig(candidate, error)) { SaveConfig(candidate);','persistence',None),
+        ('SET_bypass_validation',SOURCES[2],'!persistence.ValidateConfig(candidate, validation_error)','false','setconfig',None),
+        ('scratch0_omission',SOURCES[3],'watchdog_hw->scratch[0] = 0;','','startup',('rejected','late','display')),
+        ('scratch1_omission',SOURCES[3],'watchdog_hw->scratch[1] = 0;','','startup',('rejected','late','display')),
+        ('failed_display_draw',SOURCES[3],'if (display_ready) {\n        draw_recovery_page(outcome);','{\n        draw_recovery_page(outcome);','startup',('rejected','late','failed')),
+        ('initial_recovery_draw_omission',SOURCES[3],'        draw_recovery_page(outcome);','','startup',('rejected','late','display')),
+        ('core0_gate_omission',SOURCES[3],'    if (read_boot_state().outcome != BootOutcome::Normal) return;','','startup',('rejected','late','display')),
+        ('core1_redraw_omission',SOURCES[3],'            draw_recovery_page(snapshot.outcome);','','startup',('rejected','late','display')),
+        ('load_refusal_return_omission',SOURCES[3],'                    display_ready);\n        return;','                    display_ready);','startup',('rejected','late','display')),
+        ('setup1_refusal_branch_omission',SOURCES[3],'    if (refused(snapshot.outcome)) {\n        return;\n    }','','startup',('rejected','late','display')),
+    ]
+    records=[]
+    def one(control):
+        name,path,before,after,suite,case=control
+        variant=directory/('negative-'+name);variant.mkdir()
+        raw=(root/path).read_text();require(raw.count(before)==1,'runtime mutation anchor missing/ambiguous: '+name)
+        changed=variant/Path(path).name;changed.write_text(raw.replace(before,after,1))
+        obj=variant/'mutant.o';flags=startup_flags if suite=='startup' else cpp_flags
+        compile_command=[cxx,*flags,'-c',str(changed),'-o',str(obj)]
+        result=_run(compile_command,root,timeout=60)
+        (variant/'compile.log').write_text(json.dumps(compile_command)+'\n'+result.stdout+result.stderr)
+        require(result.returncode==0,'mutation did not compile (not runtime evidence): '+name+' '+result.stderr)
+        graph='startup' if suite=='startup' else 'general'
+        units=APP_UNITS if suite=='startup' else GENERAL_UNITS[:2] if suite=='semantic' else GENERAL_UNITS[:5] if suite=='persistence' else GENERAL_UNITS
+        objects=[obj if p==path else object_map[(graph,p)] for p in units]
+        if suite!='semantic':objects+=c_objects
+        if suite!='startup':objects+=[object_map[('harness',HOST+'/'+suite+'_harness.cpp')]]
+        binary=variant/'actual-mutant'
+        link_flags=(['-Wl,-dead_strip','-Wl,-export_dynamic'] if sys.platform=='darwin' else ['-pie','-Wl,--gc-sections','-Wl,--export-dynamic']) if suite=='startup' else []
+        link_command=[cxx,*protections,*link_flags,*map(str,objects),'-o',str(binary)]
+        result=_run(link_command,root,timeout=60);(variant/'link.log').write_text(json.dumps(link_command)+'\n'+result.stdout+result.stderr)
+        require(result.returncode==0,'mutation did not link (not runtime evidence): '+name+' '+result.stderr)
+        command=[binary];env=None
+        if case:
+            command+=list(case);env=_startup_environment(case[0],_rgb_offsets(binary,variant/'nm.json',root))
+        result=_run(command,root,env=env,timeout=10)
+        (variant/'run.log').write_text(result.stdout+result.stderr)
+        require(result.returncode!=0,'executable mutant survived: '+name)
+        combined=result.stdout+result.stderr
+        require('FAIL:' in combined or 'runtime error:' in combined or 'ERROR: AddressSanitizer:' in combined,'mutant lacks assertion/sanitizer evidence: '+name)
+        return {'test':name,'abi':label,'classification':'ACTUAL_LITERAL_TU_RUNTIME_REJECTION','exit':result.returncode,'compile_command':compile_command,'link_command':link_command,'run_command':list(map(str,command)),'stderr_sha256':digest(result.stderr.encode()),'failure_excerpt':(result.stdout+result.stderr)[-1200:]}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+        records=list(executor.map(one,controls))
+    return records
+
+def _identity_and_architecture_negatives(root,temporary):
+    records=[]
+    original={p:regular(root,p).decode() for p in SOURCES}
+    _source_contract(original)
+    controls=[('fullwidth_source',SOURCES[5],'const uint32_t custom_mode_id = mode.custom_mode_config;','const uint8_t custom_mode_id = mode.custom_mode_config;'),
+              ('noformat_source',SOURCES[1],'LittleFSConfig(false)','LittleFSConfig(true)'),
+              ('ignore_mount_source',SOURCES[1],'_mounted = LittleFS.begin();','LittleFS.begin(); _mounted = true;'),
+              ('private_candidate_reset_source',SOURCES[1],'    candidate = Config_init_default;',''),
+              ('callback_source',SOURCES[1],'return _validator(config, error);','return true;'),
+              ('SET_validation_source',SOURCES[2],'persistence.ValidateConfig(candidate, validation_error)','true'),
+              ('SDK_init_source',SOURCES[3],'auto_init_mutex(boot_state_mutex);','mutex_t boot_state_mutex;'),
+              ('scratch0_source',SOURCES[3],'watchdog_hw->scratch[0] = 0;',''),
+              ('scratch1_source',SOURCES[3],'watchdog_hw->scratch[1] = 0;',''),
+              ('core0_gate_source',SOURCES[3],'    if (read_boot_state().outcome != BootOutcome::Normal) return;','')]
+    for name,path,before,after in controls:
+        changed=dict(original);require(before in changed[path],'structural mutation anchor missing: '+name)
+        changed[path]=changed[path].replace(before,after,1)
+        try:_source_contract(changed)
+        except (ContractError,ValueError):records.append({'test':name,'classification':'ARCHITECTURAL_SOURCE_REJECTION','result':'REJECTED'})
+        else:raise ContractError('structural negative admitted: '+name)
+    if PINS:
+        closed=temporary/'identity-closure';closed.mkdir()
+        for path in PINS:
+            target=closed/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(regular(root,path));target.chmod(0o644)
+        _live_inputs(closed)
+        paths=[SOURCES[5],SOURCES[0],DECODE+'/generated/config.pb.h',HOST+'/dependencies/pb_encode.c',HOST+'/startup_harness.cpp']
+        for path in paths:
+            target=closed/path;raw=target.read_bytes()
+            for name in ('omission','substitution','executable','symlink'):
+                if name=='omission':target.unlink()
+                elif name=='substitution':target.write_bytes(raw+b'\nsubstitution\n')
+                elif name=='executable':target.chmod(0o755)
+                else:target.unlink();target.symlink_to(closed/SOURCES[1])
+                try:_live_inputs(closed)
+                except (ContractError,OSError):records.append({'test':path+'/'+name,'classification':'ACTUAL_INPUT_IDENTITY_REJECTION','result':'REJECTED'})
+                else:raise ContractError('input negative admitted: '+path+'/'+name)
+                if target.is_symlink():target.unlink()
+                target.write_bytes(raw);target.chmod(0o644)
+        _live_inputs(closed)
+        fixture_target=closed/FIXTURE;fixture_target.parent.mkdir(parents=True,exist_ok=True)
+        fixture_raw=regular(root,FIXTURE);fixture_target.write_bytes(fixture_raw)
+        _fixture_identity(closed)
+        for name in ('omission','substitution'):
+            if name=='omission':fixture_target.unlink()
+            else:fixture_target.write_bytes(fixture_raw+b' ')
+            try:_fixture_identity(closed)
+            except (ContractError,OSError):records.append({'test':'fixture/'+name,'classification':'ACTUAL_INPUT_IDENTITY_REJECTION','result':'REJECTED'})
+            else:raise ContractError('fixture negative admitted: '+name)
+            fixture_target.write_bytes(fixture_raw)
+        parent=closed/HOST/'dependencies';renamed=parent.with_name('held-dependencies');parent.rename(renamed);parent.symlink_to(renamed,target_is_directory=True)
+        try:_live_inputs(closed)
+        except (ContractError,OSError):records.append({'test':'dependency_parent_symlink','classification':'ACTUAL_INPUT_IDENTITY_REJECTION','result':'REJECTED'})
+        else:raise ContractError('parent symlink admitted')
+        parent.unlink();renamed.rename(parent);_live_inputs(closed)
+        # Actual finite Git HEAD/index traps, independent of synthetic parentage.
+        git(closed,'init','-q');git(closed,'config','user.name','Synthetic host proof');git(closed,'config','user.email','synthetic@example.invalid')
+        git(closed,'add','--','.');git(closed,'commit','-q','-m','SYNTHETIC_TEST_ONLY finite identity closure')
+        path=SOURCES[5];raw=regular(closed,path);identity=blob(raw);head=git(closed,'rev-parse','HEAD').decode().strip()
+        _entry_custody(closed,head,path,identity)
+        controls=('staged_substitution','assume_unchanged','skip_worktree','HEAD_wrong_stage_expected')
+        for name in controls:
+            if name=='staged_substitution':
+                (closed/path).write_bytes(raw+b'\n');git(closed,'add','--',path)
+            elif name=='assume_unchanged':git(closed,'update-index','--assume-unchanged','--',path)
+            elif name=='skip_worktree':git(closed,'update-index','--skip-worktree','--',path)
+            else:
+                (closed/path).write_bytes(raw+b'\n');git(closed,'add','--',path);git(closed,'commit','-q','-m','SYNTHETIC_TEST_ONLY different HEAD')
+                head=git(closed,'rev-parse','HEAD').decode().strip()
+                (closed/path).write_bytes(raw);git(closed,'add','--',path)
+            try:_entry_custody(closed,head,path,identity)
+            except ContractError:records.append({'test':name,'classification':'ACTUAL_GIT_CUSTODY_REJECTION','result':'REJECTED'})
+            else:raise ContractError('Git custody trap admitted: '+name)
+            if name=='assume_unchanged':git(closed,'update-index','--no-assume-unchanged','--',path)
+            if name=='skip_worktree':git(closed,'update-index','--no-skip-worktree','--',path)
+            (closed/path).write_bytes(raw);git(closed,'add','--',path)
+    return records
+
+def main():
+    try:
+        require(len(sys.argv)==1,'no-argument checker contract')
+        head=authenticate_inputs(ROOT)
+        with tempfile.TemporaryDirectory(prefix='glyph-c021-host-',dir='/private/tmp' if Path('/private/tmp').is_dir() else None) as name:
+            evidence=run_host(ROOT,Path(name),pins=PINS)
+        require(authenticate_inputs(ROOT)==head,'HEAD/worktree changed during actual proof')
+        print('glyph_gp_config021_persisted_recovery: PASS; semantic=1077/1173 persistence=326/326 SET=868+1/868+1 startup=40/40')
+        print('negative_controls='+str(len(evidence['negative_controls']))+' firmware=NOT_BUILT hardware=NOT_CLAIMED actual_COBS_wire=NOT_TESTED')
+        return 0
+    except (OSError,ValueError,ContractError,subprocess.SubprocessError) as error:
+        print('glyph_gp_config021_persisted_recovery: FAIL: '+str(error));return 1
+if __name__=='__main__':raise SystemExit(main())

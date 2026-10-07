@@ -1,0 +1,676 @@
+{
+  "schema_name": "glyph_gp_val038_c021_transition",
+  "schema_version": 1,
+  "work_order": "GP-VAL-038",
+  "candidate": "a170bd40a51741582913324bfecbc14ce9b3211d",
+  "base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+  "tree": "91ca6d86c2fa28b55ef5a6b3623b25748b167feb",
+  "raw_inventory_sha256": "09ac5a6ae8db4d0cba50731187057394a3a8819969abd769f331765b58d7878d",
+  "entries": [
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "43cbd3f39b4c9a09ecc855b0f2704b2081a45981",
+      "new_blob": "a73d15f088a63cab63100c22f177026ca3436901",
+      "status": "M",
+      "new_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+      "bytes": 1824
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "6ca93c96c944ee539a2d409e32889306c1eafac7",
+      "new_blob": "1c324fddfbf22879ad1c974ace2ec8ff1605f711",
+      "status": "M",
+      "new_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+      "bytes": 5812
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+      "new_blob": "69e4f0c327b43e940e2e8cf4cf32b65e349f9a97",
+      "status": "M",
+      "new_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+      "bytes": 8940
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "new_blob": "d78359d1df10dc70cef8a03b487c2bbfcc80ada3",
+      "status": "M",
+      "new_sha256": "a5fe03b570d058644d13285b895648110196b8cffbe4a4a053b92d2bead19558",
+      "bytes": 11964
+    },
+    {
+      "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "95fc94408529f44fe17edafcaf047beb123b3aa0",
+      "new_blob": "29edcfb2d7d5f7af57e8736fef979bb5f31214c9",
+      "status": "M",
+      "new_sha256": "8193049f9c52613ee38202f7121437bf1ad1605a52e68070070ccdb66c376548",
+      "bytes": 596577
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_config021_persisted_recovery.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "6704ef0183d7469b803156a44cec76e2e18469d9",
+      "status": "A",
+      "new_sha256": "1950bf1e0de54275e14755d1cbde42964c64731770a58958eb2c2106358c424c",
+      "bytes": 55965
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "17f4edbda39bafa960361fb22345235179047913",
+      "new_blob": "abbc6848ab55ad3757b6daa7ca1e847eb55ed25f",
+      "status": "M",
+      "new_sha256": "4f5b7ef0ff5c1ae7a811c904a37bff0e68d7e4b4268f02ea404efd9ec1c30c9c",
+      "bytes": 3032
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "3dd2d2afcc92c08a10b0d5b47687f8b45f224e49",
+      "new_blob": "edbe6da8e01f7e2fd4eac782b9b1a3ccfa5d3a39",
+      "status": "M",
+      "new_sha256": "53d134879e38dd7c2fc22d4d7953b6a458e3d9013fb38af4a5a715f14a4cf389",
+      "bytes": 100628
+    },
+    {
+      "path": "docs/runtime_config/gp_config021_persisted_recovery.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "83178867007fc44d06d942e81849211ac291bf67",
+      "status": "A",
+      "new_sha256": "57fb36ec9276e7054c9704e6082a5d664aef83c67770d4d3356b249a6beef30a",
+      "bytes": 5714
+    },
+    {
+      "path": "docs/runtime_config/runtime_config_validation_health.md",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "cae295f68b2eb54eef545ac63e060e5ff97583a0",
+      "new_blob": "ac59b2dd6908e7111e2db3330f19bc1dc13b3441",
+      "status": "M",
+      "new_sha256": "3f319f138421f73474dceff82582b3b06ff1048fafaca67ea93d1a306651f759",
+      "bytes": 7117
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "92042dd4745bce79b1d7d773edacba302e8a6d7c",
+      "status": "A",
+      "new_sha256": "b4d9c4937402406dc0cbd25ec83f27ea859f49258e4219272aa9dee75c52c4d5",
+      "bytes": 559
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "46fd7df78b160f1f874614852c4784583f7dc727",
+      "status": "A",
+      "new_sha256": "d9536b639e8a36d834a8f7df1923789e559db59061255454767332a7f0c74b0e",
+      "bytes": 6620
+    },
+    {
+      "path": "tools/check_glyph_gp_config021_persisted_recovery.py",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "a3d3dd9186c7f885316adca16706d360e652dd90",
+      "status": "A",
+      "new_sha256": "2dc78d118dd2936ad9544a297ef00a66a140f90dc58152c87c2abbe423ef556d",
+      "bytes": 83500
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "9c816b2da2acf90a1294bac4dcbf01895c322607",
+      "status": "A",
+      "new_sha256": "d225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918",
+      "bytes": 1164
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "bbed4924c5a67f5d74fbc4356d7715bb3f81e4a2",
+      "status": "A",
+      "new_sha256": "712027e87b9709c1aeb2b6094011c25455e6802fbf66010e8f6f780a92983b69",
+      "bytes": 2007
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "8ecd1de63a5a5749098af433c848f77ab1954a1c",
+      "status": "A",
+      "new_sha256": "7041a7de46488bca009b0d82317c9e7bb6634749ed0cd3956a5ef8041664b36e",
+      "bytes": 1105
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "172ce13ac5386e185ac6ba041b65ce34f054ff51",
+      "status": "A",
+      "new_sha256": "f48cb755a19ac13aca731273a99da22383debe9bd892ac037819bea742b1babe",
+      "bytes": 1457
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "31e62a30021170fc78d0f553f6c08d150eb45b6d",
+      "status": "A",
+      "new_sha256": "d7f49ba5088c75beffac09c6b3e8b22abbf2db111125e90e18d3746837e95e4c",
+      "bytes": 2892
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "0a041280bd00a9d068f503b8ee7ce35214bd24a1",
+      "status": "A",
+      "new_sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "bytes": 7652
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "1e4508404042f16c6189b95a5e744048fa6b95fc",
+      "status": "A",
+      "new_sha256": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+      "bytes": 2331
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "7bf54f0f3ec820f6d5943cdba5f3450eb77b8e41",
+      "status": "A",
+      "new_sha256": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+      "bytes": 1609
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "dffd5cb74462a3f4b7e7a29d4328568debf0105a",
+      "status": "A",
+      "new_sha256": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+      "bytes": 3694
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/library.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "db460b28dbd992758bf388786f5b2e50417ea624",
+      "status": "A",
+      "new_sha256": "b38c58f849f48821c23740ab3e972fd4fb6bd861e47135f7e1315150be0d1037",
+      "bytes": 63
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "e1718206cea79452748a5ef49ac97f67c33a9192",
+      "status": "A",
+      "new_sha256": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+      "bytes": 1233
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/library.nanopb-arduino.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "91e7bf2b535469b967d99bdd7262a5dfbe0589fb",
+      "status": "A",
+      "new_sha256": "7921e2464098e0d08c15147df7dd0a131b49812be2739ed37c02c550bf08f4a8",
+      "bytes": 520
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "0a041280bd00a9d068f503b8ee7ce35214bd24a1",
+      "status": "A",
+      "new_sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "bytes": 7652
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "3f11bc50b082fb05b45c5c588440ce408cbb7cf9",
+      "status": "A",
+      "new_sha256": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b",
+      "bytes": 1761
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "3e5a91dfd321e3f8583132455d41308e521e8309",
+      "status": "A",
+      "new_sha256": "cf1ca013c2f2e049bde4b410d6568384f8d0c1dcb44d82cd418cd71db8e136f3",
+      "bytes": 1959
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "151ee3dfd5eedf3e4ca9f3704849d5235cb6739f",
+      "status": "A",
+      "new_sha256": "f98bb3a985033934e5c9aa312a0729e0d35ed0167e0eb01cc309a4480b575899",
+      "bytes": 1976
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/library.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "a5e5eea76bc9b6c3aadd52f3fd718e1867a09b89",
+      "status": "A",
+      "new_sha256": "7afd8086bfee7907f963b7b38a3a2bcbfe0136c43ab1e47ea8d6e968d5fdd3fa",
+      "bytes": 60
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "6df4262c531ab2a09669b4cb4fe12e36f66806ba",
+      "status": "A",
+      "new_sha256": "2fc037980c1841c55e4004adb4e87a1ae550173519896a710b78d48394bb24ed",
+      "bytes": 3619
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "45207b0a99cb58a0dae1a71f7b0ed21b22fbce15",
+      "status": "A",
+      "new_sha256": "47c1d2a93fccf06237e00691dcd69036b5b7cfb54dd21416bcc97844d4132453",
+      "bytes": 427
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "5a50a840f192a831287469190dc35aa73e84d01b",
+      "status": "A",
+      "new_sha256": "3d39e2da342d981461094c69d73229d88a345549499b5069b6e430e76a704dac",
+      "bytes": 552
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "941e8cd9ab3732d212ae4dbaff1bd802becdee8e",
+      "status": "A",
+      "new_sha256": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5",
+      "bytes": 946
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "b9df8fb4e43721c923bee4fc22eb1f3ff0763f35",
+      "status": "A",
+      "new_sha256": "678fd01f158f519d2fee8ffbf027937fb14d4b40d141c618d6c16ea4e4b38a1a",
+      "bytes": 386
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "1ce4b4c771f83c4315061a82c6e9b48da0ac2681",
+      "status": "A",
+      "new_sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      "bytes": 30784
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "6dc089da307a10a6d440e70acb2775ed6e7fb07c",
+      "status": "A",
+      "new_sha256": "9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf",
+      "bytes": 7176
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "4522f333eafddd42b061243c36a232928bd7f96f",
+      "status": "A",
+      "new_sha256": "0951794f79b39ac63535af69b580092212e4647066c200ce6df188482e09560d",
+      "bytes": 802
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "f1ba6b8c807abccadef22a1ede3ccb48576161e4",
+      "status": "A",
+      "new_sha256": "854797409140abd8761a44625980a83b73dc62f973e9c8bef94d071cf447eb59",
+      "bytes": 1148
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "747df16fadbb6b783f4614eb010e4124dc9d4428",
+      "status": "A",
+      "new_sha256": "f1a8348ce2b2fed336e269b851bf1031789268802741e9c20a24f8e7d7f2ef57",
+      "bytes": 783
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "14c209b58e66445bb7030a9c422eb5d044504058",
+      "status": "A",
+      "new_sha256": "02acc526601a3bc61fc434690198eae72da75869e43ad9e24ffc21ead9e72ce0",
+      "bytes": 2205
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "627a573e764b9a93ef98bb2dc9acee3d06495b93",
+      "status": "A",
+      "new_sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c",
+      "bytes": 4555
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "23df581ad95652ad7a6fe532403ec2d5739b59ce",
+      "status": "A",
+      "new_sha256": "7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab",
+      "bytes": 2255
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "36bfb46732ed7cf4993bd580ada48acbbde2ec31",
+      "status": "A",
+      "new_sha256": "6fbf22c418b965c8b3bd1d20d8412d13950043b34ac61ed1f7b5b9bfa4f4ad5d",
+      "bytes": 1207
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "797a8431635ace12ce267586bf07b5f6e8f1aadf",
+      "status": "A",
+      "new_sha256": "f720ec13215f1adbc31ebe561651428c45dd05a3c0b3025d6cbd49be772d57a9",
+      "bytes": 4989
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Print.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "844cb148d07f7e46f00461031cc58d4066ca61e2",
+      "status": "A",
+      "new_sha256": "4950bf9f0a8ec926ce95c225ecf47c6401ae6df17c4353460e1378c4053c9d8a",
+      "bytes": 221
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Stream.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "463203667c6ee47f83fb414b8bb324ea747e4dd1",
+      "status": "A",
+      "new_sha256": "61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0",
+      "bytes": 457
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/Wire.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "41d6693ccef478e626683040ee06e80003c7cbeb",
+      "status": "A",
+      "new_sha256": "9e4b6a768ab81737df13372d053225d92c98bfd433de1af55b4bb54fa725321f",
+      "bytes": 248
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "0e74d11a5f4652c6bd0c31e2a93d8493e64896de",
+      "status": "A",
+      "new_sha256": "5c29ced4a047d158ff1e929f9c1679c3eed08cf4f129fb555f7e67d8c981dce3",
+      "bytes": 553
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/avr/pgmspace.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "1fcc7e8f6abc7a23ab8e8d8a6378f8c294a5737d",
+      "status": "A",
+      "new_sha256": "3f2de365e7cc1c6e874e9735d4be23e871fe03333bc3328f34810cd670c15467",
+      "bytes": 52
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "0b3c8f06a3bfe82e8f671bc5f6bd96d5821c2fd3",
+      "status": "A",
+      "new_sha256": "47568bbfdd939867e0e0a78613f46a03e6277c4c16661a729ccdd09b988160ea",
+      "bytes": 383
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "8ebb6944512278873c11f5d71cc98bd4ba3f01e3",
+      "status": "A",
+      "new_sha256": "f0221f7ab67c22e5ee206c7c8801bd5e09db61c76bf1f7d668495b92f958d5ab",
+      "bytes": 665
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "df311e33148ad1559a99bea1b3d5821827b0ad06",
+      "status": "A",
+      "new_sha256": "d87bf97b2ed727954698b931c70d1f0cd8ec9fff70d8bc5b76ed398476365f00",
+      "bytes": 5307
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "f4ed924aaa1af713065aba8cdf9bfa4b9561f3b0",
+      "status": "A",
+      "new_sha256": "a2ff6f0ceb9a050416c56ba2d587348c77259a02dd0ba1fc9f81db3c58cc439c",
+      "bytes": 174
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "5bac0151270606e7bb51e965ff4cd2edc806948d",
+      "status": "A",
+      "new_sha256": "430c019c88bae951f854bc9fd98615ffc7ef419d6894f5d17edf30278392ba5b",
+      "bytes": 180
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "d2369ff79c72c95477dcf9991d9dcf51334111bb",
+      "status": "A",
+      "new_sha256": "0531eca33b73e7de9fa6db45f9b9bb5670e7760665a35b9450bdde264b5b4d8b",
+      "bytes": 205
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "6f70f09beec2219624baeca92e2cd7deaa104fb4",
+      "status": "A",
+      "new_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+      "bytes": 13
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "05826db89d1ed9b69fcd6c6c8a42e7a372950262",
+      "status": "A",
+      "new_sha256": "2213c23f05f2d03183470a64548b7cfddf78a57d80cb09fc74fe745f3df43408",
+      "bytes": 38
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "6f70f09beec2219624baeca92e2cd7deaa104fb4",
+      "status": "A",
+      "new_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+      "bytes": 13
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "b42d0ee3c0ef24cd8e351fb44e2d69655a760b12",
+      "status": "A",
+      "new_sha256": "de247bcb527348f3a965565be09f0774eebf1203fed7be09e3a1a6e5ad825dc1",
+      "bytes": 567
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "4df644fda488d22b8f0f848d7915dbc6aed1a7ca",
+      "status": "A",
+      "new_sha256": "7ee1334c6ec489ba911676c855833b1c1d516b4bd572a39801c526a1fd3c09c9",
+      "bytes": 1033
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "0a6bc5bc41b5c7ece46cb9711c381b87d9687efe",
+      "status": "A",
+      "new_sha256": "c576e52cfe594883fa0a78e96e9521a77c1a1633d0b098bedac4a28733b62e7b",
+      "bytes": 27574
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "e2b61760ef2ab046a1f73b3ca644da3effa5fc1b",
+      "status": "A",
+      "new_sha256": "e744c7eeec31865b0a3dc954ca8c40982901c9c5ad94605941343f109db833cb",
+      "bytes": 4312
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "c31d8414186766df146ada28e1d48f2c47b29c1c",
+      "status": "A",
+      "new_sha256": "629ddf994e2a55a9f55bf568aeff09e56f89c68a22e4b27a3364eef77759ed1d",
+      "bytes": 20649
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "934a08d293d0026887eed90ef41f3a9ba1bfab2a",
+      "status": "A",
+      "new_sha256": "71a2b7c65c2478f5ffb97127cb5ff5efeabba52290d2e40fd7552657e42b1e80",
+      "bytes": 18396
+    },
+    {
+      "path": "tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "c76e44472155d585367840e6e80cae2588abdbdf",
+      "status": "A",
+      "new_sha256": "78b9f36eff61d82999cce1f988ee011aaf947120faa2cdc34b81d6b78dd0cb5e",
+      "bytes": 8447
+    }
+  ],
+  "handoff": "80a22333fd783bcd89ac46bab10c219b3cbaf8f6",
+  "ready": "80a22333fd783bcd89ac46bab10c219b3cbaf8f6",
+  "review_sha256": "6d90b29bf0c8de5a03057abd2dc304b46e9b16745ccafd245778aff76f61d134",
+  "source_proof_sha256": "f1a3a90beb9e953374302e2537351ee6a08c63b6d289b2120ca8dc554a3724c1",
+  "conformance_sha256": "2c38eb6a389fa33d0f22648cbc49797fbe81402ecebf8638152b432d7c0a4c51"
+}
