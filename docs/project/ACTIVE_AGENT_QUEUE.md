@@ -2,7 +2,7 @@
 
 ## Current GP-CONFIG-021 handoff and GP-VAL-038 activation
 
-GP-CONFIG-021 candidate `a170bd40a51741582913324bfecbc14ce9b3211d`, tree `91ca6d86c2fa28b55ef5a6b3623b25748b167feb`, is committed, published and independently approved against sole direct live-verified base `c6887115f2e44f0803eb0956ebb574633cec53be`. The complete66-path inventory authenticates six adopted production deltas and60 source-free proof/metadata paths;232 untouched critical entries equal acceptedB/F017. Both host layouts and69 negative controls PASS through independently executed byte-exact host engines. The actual standalone CLI FAIL on56 unclassified coupled host literals and two aggregate SETUP_FAILURE/source_context results with zero checker execution remain recorded. GP-CONFIG-021 is REVIEW and existing GP-VAL-038 is mechanically READY for its finite admission/current-versus-historical governance repair; all affected and protected actual checks remain mandatory before038 strictDONE. The same GLYPH-UD-029 executor continues038 then preserved021 composition, exact committed build/custody/review and hardware handoff. Canonical firmware remains accepted017;021 target build, UF2 and hardware acceptance are pending. No physical invalid Config write is authorized. Other98orders and accepted hardware tuples remain unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN.
+GP-CONFIG-021 candidate `a170bd40a51741582913324bfecbc14ce9b3211d`, tree `91ca6d86c2fa28b55ef5a6b3623b25748b167feb`, is committed, published and independently approved against sole direct live-verified base `c6887115f2e44f0803eb0956ebb574633cec53be`. The complete66-path inventory authenticates six adopted production deltas and60 source-free proof/metadata paths;232 untouched critical entries equal acceptedB/F017. Both host layouts and69 negative controls PASS through independently executed byte-exact host engines. The actual standalone CLI FAIL on56 unclassified coupled host literals and two aggregate SETUP_FAILURE/source_context results with zero checker execution remain recorded. GP-CONFIG-021 is REVIEW and existing GP-VAL-038 is mechanically READY for its finite admission/current-versus-historical governance repair; all affected and protected actual checks remain mandatory before038 strictDONE. The same GLYPH-UD-029 executor continues038 then preserved021 composition, exact committed build/custody/review and hardware handoff. Canonical firmware remains accepted017;021 target build, UF2 and hardware acceptance are pending. No physical invalid Config write is authorized. The97 unrelated orders and accepted hardware tuples remain unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN.
 
 GP-CONFIG-017 is DONE after reviewed exact tested-source integration `a9232dd71dbaac888d343227bbdc8f2d66bcb20a` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a` follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b`; the native035 catalog preserves original C, exact F/M/tree, earliest reviewed R and accepted E. All236 critical source/build inputs equal tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`. The accepted UF2 remains e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5,796672bytes, freshly rehashed. Seven owner-reported GP_CONFIG_017_HW_V1 rows PASS with empty gaps; Mac/XInput satisfies SHIFT/XWAVE actual-host coverage, GC/Switch/WUP-028 and Mac/XInput Ultimate/X1 pass, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored byte-exactly before and after reboot. Initial focused19PASS/navigationFAIL and repaired7metadataPASS both preserve nativeMATCH; the actual failure remains recorded. Fresh independent integration review approves exact source/catalog/correspondence. Historical aggregate FAIL/TIMEOUT and framework debt remain honest; no full aggregate PASS, rebuild or retest. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. All98 other orders and accepted014/020 evidence remain unchanged. The same H3 executor next evaluates existing021/038 authority, source conformance and a safely executable rejected-storage test/recovery route. No C021 candidate, device operation or new work order is claimed. The owner test environment stays frozen and untouched. The initial2026-10-02 adoption recorded RUNWAY_OK; the marker at the C017 completion snapshot recorded PLANNING_REQUIRED; the current marker above supersedes it.
 
@@ -26097,9 +26097,9 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
       "target_limit": "Host locks and platform doubles do not prove target SDK ABI, actual mutex_array linkage/initialization, intercore hardware behavior, physical bus/display behavior, or target RAM/flash."
     },
     "metadata": {
-      "postcommit_manifest": "Actual PASS; 59 entries, 43 exclusions; all prior 58 entry objects, category/schema/exclusions unchanged; one current load-bearing candidate_safety entry added.",
+      "postcommit_manifest": "Actual PASS; 59\u0020entries, 43 exclusions; all prior 58 entry objects, category/schema/exclusions unchanged; one current load-bearing candidate_safety entry added.",
       "census": "Root actual PASS; 218 checkers.",
-      "health": "Root actual PASS; 59 current entries, 53 load-bearing.",
+      "health": "Root actual PASS; 59\u0020current\u0020entries, 53 load-bearing.",
       "diff_check": "Full diff-check FAIL retained for whitespace in four byte-identical upstream dependency copies. Remaining 62 paths PASS. No upstream bytes were rewritten to manufacture a full PASS."
     },
     "retained_actual_failures": [
@@ -26966,9 +26966,9 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
     "physical_invalid_write_authorized": false
   },
   "gate_waivers": false,
-  "other98_orders_unchanged": true,
   "same_executor_next_step": "Implement existing READY GP-VAL-038 with exact candidate admission and separate affected current/historical proofs; retain immutable C021. No build before038 strictDONE; no behavior-changing source merge before exact HEP PASS.",
-  "transport": "Durable canonical source-free readback; persistent GLYPH-UD-029 executor, no new full chat/Planner/Curator."
+  "transport": "Durable canonical source-free readback; persistent GLYPH-UD-029 executor, no new full chat/Planner/Curator.",
+  "other97_orders_unchanged": true
 }
 ```
 <!-- gp-config021-handoff-val038-activation:end -->
