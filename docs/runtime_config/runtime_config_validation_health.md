@@ -75,7 +75,7 @@ The current source-owned contract is 28 ordered tables ending in
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.
 
 <!-- validation-health-summary:start -->
-Current summary: manifest entries = 58; current load-bearing checks = 52.
+Current summary: manifest entries = 59; current load-bearing checks = 53.
 <!-- validation-health-summary:end -->
 
 The two repaired load-bearing baseline failures were
@@ -110,3 +110,9 @@ seam; it does not install source, create a candidate, or change firmware
 behavior. The added behavior evaluator remains superseded historical evidence
 because its May-28 behavior-case dependency is historical; it is not a current
 aggregate PASS.
+
+The C021 candidate checker binds its six production files and finite host inputs
+to the committed candidate. It separately exercises persisted acceptance, SET,
+shared semantic checks and startup refusal in both host enum layouts, with
+source and identity negative controls. Target build and physical acceptance
+remain later gates; all historical failures and observations remain preserved.
