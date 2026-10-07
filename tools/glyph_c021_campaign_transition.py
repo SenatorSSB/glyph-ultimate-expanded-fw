@@ -402,6 +402,20 @@ def _consumer_contract(root: Path, head: str):
 def _preserve_original_current_inputs(root: Path, head: str):
     baseline = _tree(root, B)
     actual = _tree(root, head)
+    # This protected body's only allocated delta is its authentication import.
+    # Retain the original presence predicate, content checks and scope filters.
+    artifact_checker = 'tools/check_glyph_generated_source_owned_baseline_artifact.py'
+    old_import = b'    from glyph_c017_campaign_transition import present, authenticate\n'
+    original_body = raw_bytes(root, B, artifact_checker)
+    require(original_body.count(old_import) == 1,
+            '021 protected artifact original admission seam substitution')
+    expected_body = original_body.replace(old_import,
+        b'    from glyph_c017_campaign_transition import present\n'
+        b'    from glyph_campaign_transition import authenticate\n', 1)
+    require(actual.get(artifact_checker, ())[:2] == ('100644', 'blob')
+            and current_bytes(root, artifact_checker) == expected_body,
+            '021 protected artifact body outside exact admission import')
+    _stage_and_live(root, head, artifact_checker, actual[artifact_checker])
     frozen = (previous.GOVERNANCE_PATHS | stateutil.KBD_HOSTS |
               stateutil.CONFIG019_HOSTS | frozenset((previous.HISTORICAL_WRAPPER,
               'docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md'))) - SHARED_CURRENT_PATHS
