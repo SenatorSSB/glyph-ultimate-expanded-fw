@@ -63,6 +63,7 @@ SHARED_CURRENT_PATHS = frozenset((
     'tools/glyph_hardware_correspondence.py', 'tools/run_glyph_runtime_config_validation.py',
     'tools/check_glyph_runtime_config_validation_aggregate.py',
     'tools/check_glyph_docs_agent_surface.py',
+    'tools/check_glyph_generated_source_owned_baseline_artifact.py',
     'tools/check_glyph_config_010_integration_semantic_correspondence.py')) | METADATA
 REQUIRED_ROWS = ('valid_stored_boot', 'rejected_file', 'persistent_refusal',
                  'display_failure_refusal', 'no_gameplay_reports',
