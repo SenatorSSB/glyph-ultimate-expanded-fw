@@ -1,8 +1,8 @@
 # Active Agent Queue
 
-## Current GP-VAL-038 product validation
+## Current GP-VAL-038 DONE and preserved GP-CONFIG-021 continuation
 
-GP-VAL-038 finite implementation and product validation are complete pending fresh final independent review, source-free publication and separate strict DONE. Preserved C021 is a170bd40a51741582913324bfecbc14ce9b3211d/tree91ca6d86c2fa28b55ef5a6b3623b25748b167feb, soleB c6887115f2e44f0803eb0956ebb574633cec53be; original66-path inventory/214pins are unchanged. BothABI C engines pass69negativecontrols/194MMD and current RAWGET/namebinding/SET/keyboard/custom bridges36MMD, including original-full-width256 validation through realSET/Load/startup refusal. Allfive protected full bodies pass feature,detached explicitB and genuine C21 composition;76actual admission negatives pass. Source-free236critical equal acceptedF017; privatecomposition238critical equal C21 with onlysixproduction deltas. Independent native custody and consumer coverage report no concrete product contradiction. Verified newer owner message01a11767-b407-74e0-969e-df163870b79c limits038 to eight Tier1/Tier2 product facts; unrelated aggregate/setup/source-context/synthetic-topology/fullhistorical-budget failures remain FRAMEWORK_VALIDATION_DEBT, never PASS and no recursive successor. Actual originalC CLI FAIL, original011TIMEOUT100, global setup failures, oldsynthetic missing-moduleFAIL and finalfullunitTIMEOUT120 remain preserved; prior301controlsPASS117 is separate. Canonical firmware remains accepted017. After reviewed source-free038 integration and strictDONE, the same GLYPH-UD-029 executor immediately resumes preserved021 for genuine composition, exact committed build/custody/review and hardware handoff. Targetbuild/artifact/hardware are pending; no physical invalidConfig write is authorized. All97 unrelated orders and accepted014/020/017 tuples remain exact. Nunchuk NOT_TESTED; root cause UNPROVEN.
+GP-VAL-038 is DONE through independently reviewed live source-free integration a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604 and separate strict DIRECT_ANCESTRY completion. Exact preserved C021 a170bd40a51741582913324bfecbc14ce9b3211d/tree91ca6d86c2fa28b55ef5a6b3623b25748b167feb retains its soleB c6887115f2e44f0803eb0956ebb574633cec53be,66-path inventory and214pins. Actual bothABI C engines69controls194MMD, currentbridges36MMD, original-full-width256 pure/realSET/Load/startup,15protected full bodies and76native admission negativesPASS. Current236critical equal acceptedF017; genuine private238criticalcomposition equals C21 with onlysixsource changes. Fresh independent product-bounded review APPROVED; original13Bfullmains/unchanged-body correspondence and7finalmetadataPASS. Actual native aggregateFAIL019TIMEOUT120 with035PASS72.956 and all measured sourcefingerprintsMATCH; old011TIMEOUT100, finalfullunitTIMEOUT120 versus earlier301controlsPASS117, originalCLI/setup/synthetic failures remain honestFRAMEWORK_VALIDATION_DEBT. Verified owner message01a11767-b407-74e0-969e-df163870b79c requires eight product facts and immediate preserved021 continuation, without globalgreen or recursive successor. Canonical firmware remains accepted017; targetbuild/artifact/hardware pending. The same GLYPH-UD-029 executor now resumes preserved021 for exact genuine composition, committed emptyF, build/custody/review and hardware handoff. Zero new READY runway is separate from this authorized unfinished-product continuation; no Planner/Curator call is required for it. No physical invalidConfig write is authorized. All98 other queue objects, accepted014/020/017 evidence and every earlier failure remain unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN.
 
 GP-CONFIG-017 is DONE after reviewed exact tested-source integration `a9232dd71dbaac888d343227bbdc8f2d66bcb20a` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a` follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b`; the native035 catalog preserves original C, exact F/M/tree, earliest reviewed R and accepted E. All236 critical source/build inputs equal tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`. The accepted UF2 remains e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5,796672bytes, freshly rehashed. Seven owner-reported GP_CONFIG_017_HW_V1 rows PASS with empty gaps; Mac/XInput satisfies SHIFT/XWAVE actual-host coverage, GC/Switch/WUP-028 and Mac/XInput Ultimate/X1 pass, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored byte-exactly before and after reboot. Initial focused19PASS/navigationFAIL and repaired7metadataPASS both preserve nativeMATCH; the actual failure remains recorded. Fresh independent integration review approves exact source/catalog/correspondence. Historical aggregate FAIL/TIMEOUT and framework debt remain honest; no full aggregate PASS, rebuild or retest. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. All98 other orders and accepted014/020 evidence remain unchanged. The same H3 executor next evaluates existing021/038 authority, source conformance and a safely executable rejected-storage test/recovery route. No C021 candidate, device operation or new work order is claimed. The owner test environment stays frozen and untouched. The initial2026-10-02 adoption recorded RUNWAY_OK; the marker at the C017 completion snapshot recorded PLANNING_REQUIRED; the current marker above supersedes it.
 
@@ -161,17 +161,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 6,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -932,7 +933,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-038",
       "title": "C021 recovery candidate governance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "codex/gp-val-038-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -970,7 +971,95 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "80a22333fd783bcd89ac46bab10c219b3cbaf8f6",
+        "reviewed_implementation_sha": "a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604",
+        "prior_canonical_integration_sha": "a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604",
+        "reviewed_changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_config021_persisted_recovery.json",
+          "docs/runtime_config/fixtures/gp_val038_accepted_transitions.json",
+          "docs/runtime_config/fixtures/gp_val038_c021_consumer_replay.json",
+          "docs/runtime_config/fixtures/gp_val038_c021_transition.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_config021_persisted_recovery.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_c021_proof_replay.py",
+          "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+          "tools/check_glyph_gp_config021_persisted_recovery.py",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/library.json",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/library.nanopb-arduino.json",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.cpp",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/library.json",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+          "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+          "tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Print.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Stream.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/Wire.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/avr/pgmspace.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp",
+          "tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h",
+          "tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h",
+          "tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp",
+          "tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp",
+          "tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp",
+          "tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp",
+          "tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp",
+          "tools/fixtures/gp_val038_c021_current_consumers/current_consumer_harness.cpp",
+          "tools/fixtures/gp_val038_c021_current_consumers/getconfig_harness.cpp",
+          "tools/glyph_c021_campaign_transition.py",
+          "tools/glyph_campaign_transition.py",
+          "tools/glyph_checker_context.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/run_glyph_runtime_config_validation.py",
+          "tools/test_glyph_c021_campaign_transition.py"
+        ],
+        "independent_review_provenance": "Fresh independent val034_review APPROVED exact a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604; review SHA256 404bffbe54df9de656b960a8d909ef37151a808d5b4ee77edef28dfd3f6dd9c9. Verified newer owner product-boundary user message01a11767-b407-74e0-969e-df163870b79c. Source-free governance only; exactC21 is preserved, targetbuild/hardware remain pending.",
+        "validation_provenance": "Actual exactC bothABI69controls194MMD plus36currentbridgeMMD, full-width256 pure/realSET/Load/startup,15protected full-body positives across feature/detached/genuineCcomposition,76native admission rejections,236/238exactsource custody, original13Bfullmains and unchanged-body correspondence,7finalmetadata and actual currentadmissionPASS. Native aggregate actualFAIL:035PASS72.956/019CHECKER_TIMEOUT120.005, original+isolatedMATCH. FinalfullunitTIMEOUT120, prior301PASS117, old011TIMEOUT100 and oldsynthetic/context/setup failures preserved as FRAMEWORK_VALIDATION_DEBT; no fullaggregatePASS. Registration repair onlyone derivedcensusrow+one directmanifestdependency. Separate strictcompletion, no firmwarebehavior/build/device/hardwareacceptance."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -8175,11 +8264,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-038"],"immediate_ready":1,"recorded_preauthorized":6,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":6,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-038; Immediate Ready: 1; Recorded Preauthorized: 6; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 6; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
