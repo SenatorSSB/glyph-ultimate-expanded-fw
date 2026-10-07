@@ -5565,7 +5565,7 @@
       },
       "checker_id": "generated_source_owned_baseline_artifact",
       "defines_main": true,
-      "file_size_bytes": 21182,
+      "file_size_bytes": 21223,
       "hard_coded_branch_like_strings": [
         "branch",
         "candidate",
@@ -5583,7 +5583,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 502,
+      "line_count": 503,
       "parse_error": null,
       "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
       "potential_branch_identity_signals": [
@@ -5632,7 +5632,7 @@
         "runtime_config_docs",
         "runtime_config_interpreter"
       ],
-      "sha256": "438d1c461d55f61f6e1b6010435e7e56fbe321d8042abf3842202ed69d090cf1",
+      "sha256": "6730f524e46e0399fc1ea2a33d860d2260097c4e142091a499b44c0accfe8f27",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
