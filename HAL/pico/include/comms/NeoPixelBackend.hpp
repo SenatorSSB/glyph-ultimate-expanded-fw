@@ -143,8 +143,6 @@ template <uint8_t data_pin, int led_count> class NeoPixelBackend : public Commun
         #endif
         prevTime = time;
         float interval = 0.08;
-        uint8_t deltaHue = (diff/1000) * (interval * _config->speed);
-
         if(_config == nullptr) {
             for (int i = 0; i < led_count; i++) {
                 Button button = this->_button_mappings[i];
@@ -154,6 +152,8 @@ template <uint8_t data_pin, int led_count> class NeoPixelBackend : public Commun
             FastLED.show();
             return;
         }
+
+        uint8_t deltaHue = (diff/1000) * (interval * _config->speed);
 
         RgbAnimationId id = _config->animation;
 
