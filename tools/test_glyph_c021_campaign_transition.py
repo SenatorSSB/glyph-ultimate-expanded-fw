@@ -228,9 +228,62 @@ def phase_controls(root, head, before, after, observations):
             'physical_acceptance':'NOT_CLAIMED','firmware_build':'NOT_RUN'}
 
 
+def display_disposition_controls(observations):
+    """Actual exact-case receipt and fail-closed boundary; no hardware stimulus."""
+    head = git(ROOT, 'rev-parse', 'HEAD').decode().strip()
+    if proof.EVIDENCE not in proof._tree(ROOT, head):
+        return
+    import copy
+    import base64
+    import hashlib
+    import zlib
+    evidence = json.loads(proof.raw_bytes(ROOT, head, proof.EVIDENCE))
+    result = proof.raw_bytes(ROOT, head, proof.RESULT)
+    if evidence['candidate_git_sha'] != proof.DISPLAY_DISPOSITION_F:
+        return
+    F = proof.DISPLAY_DISPOSITION_F
+    proof._hardware_rows(evidence, result, F)
+    for identity in proof.REQUIRED_ROWS:
+        bad = copy.deepcopy(evidence)
+        bad['steps'] = [row for row in bad['steps'] if row['id'] != identity]
+        rejected(lambda bad=bad: proof._hardware_rows(bad, result, F),
+                 'owner disposition cannot waive missing row ' + identity, observations)
+    for identity in proof.REQUIRED_ROWS:
+        bad = copy.deepcopy(evidence)
+        next(row for row in bad['steps'] if row['id'] == identity)['observed'] = (
+            'PASS synthetic false physical claim' if identity == 'display_failure_refusal' else 'NOT_TESTED')
+        rejected(lambda bad=bad: proof._hardware_rows(bad, result, F),
+                 'owner disposition cannot relabel/unexercise ' + identity, observations)
+    rejected(lambda: proof._hardware_rows(evidence, result, 'a' * 40),
+             'owner display disposition cannot transfer to another F', observations)
+    rejected(lambda: proof._hardware_rows(evidence, b'', F),
+             'owner display disposition cannot omit durable authority', observations)
+    receipt = proof._result_json_block(result, 'c021-display-disposition')
+    bad_receipt = copy.deepcopy(receipt)
+    bad_receipt['conditions']['safe_reviewed_actual_begin_false_stimulus'] = 'UNKNOWN'
+    def replace_block(original, marker, value):
+        text = original.decode(); start = '<!-- ' + marker + ':start -->'; end = '<!-- ' + marker + ':end -->'
+        prefix, rest = text.split(start); _, suffix = rest.split(end)
+        return (prefix + start + '\n```json\n' + json.dumps(value, indent=2) + '\n```\n' + end + suffix).encode()
+    bad_result = replace_block(result, 'c021-display-disposition', bad_receipt)
+    rejected(lambda: proof._hardware_rows(evidence, bad_result, F),
+             'owner display disposition cannot substitute authority or safe-route condition', observations)
+    bundle = proof._result_json_block(result, 'c021-evidence-bundle')
+    archive = json.loads(zlib.decompress(base64.b64decode(bundle['payload'])))
+    del archive['files']['display-specialist.json']
+    raw = json.dumps(archive, sort_keys=True, separators=(',', ':')).encode()
+    bad_bundle = dict(bundle, file_count=len(archive['files']), uncompressed_sha256=hashlib.sha256(raw).hexdigest(),
+                      payload=base64.b64encode(zlib.compress(raw)).decode())
+    bad_result = replace_block(result, 'c021-evidence-bundle', bad_bundle)
+    rejected(lambda: proof._hardware_rows(evidence, bad_result, F),
+             'owner display disposition cannot omit actual source/host proof', observations)
+    proof._hardware_rows(evidence, result, F)
+
+
 def main():
     begun = time.monotonic(); observations = []
     current = proof.authenticate(ROOT)
+    display_disposition_controls(observations)
     before, after = proof.source_contract(ROOT)
     assert len(before) == 236 and len(after) == 238
     assert current['contract'] == 'c021_persisted_recovery'

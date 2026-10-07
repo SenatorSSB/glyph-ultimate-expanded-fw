@@ -676,6 +676,62 @@ def _lifecycle(root: Path, head: str, before: dict, after: dict):
             'evidence_commit': processor['evidence_commit'] if processor else None}
 
 
+DISPLAY_DISPOSITION_F = '59033b0d9341c7568b77292f3035347f3853fb84'
+DISPLAY_DISPOSITION_STATUS = 'HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE'
+DISPLAY_DISPOSITION_SHA256 = '5fa87f8f38cbc890b6b6f5ec688885dc174e68e186704e39a59cf4d8539de8f8'
+
+
+def _result_json_block(result: bytes, marker: str):
+    text = result.decode()
+    start, end = '<!-- ' + marker + ':start -->', '<!-- ' + marker + ':end -->'
+    require(text.count(start) == text.count(end) == 1, '021 disposition marker missing/duplicate')
+    block = text.split(start)[1].split(end)[0].strip()
+    require(block.startswith('```json\n') and block.endswith('\n```'), '021 disposition fence substitution')
+    return json.loads(block[8:-4], object_pairs_hook=unique)
+
+
+def _hardware_rows(evidence: dict, result: bytes, F: str):
+    """One verified owner exception; all other physical gates remain mandatory.
+
+    The exact receipt freezes actual owner authority and independently reviewed
+    source/host evidence. It neither grants another candidate an exception nor
+    labels the unexercised display condition as a physical PASS.
+    """
+    rows = {row['id']: row for row in evidence['steps']}
+    require(evidence['anomalies'] == evidence['evidence_gaps'] == []
+            and len(rows) == len(evidence['steps'])
+            and all(row in rows and rows[row]['observed'].strip().startswith('PASS')
+                    for row in REQUIRED_ROWS if row != 'display_failure_refusal'),
+            '021 required physical row missing/failing or evidence gaps')
+    require('display_failure_refusal' in rows, '021 required display row missing')
+    display = rows['display_failure_refusal']['observed'].strip()
+    if F != DISPLAY_DISPOSITION_F:
+        require(display.startswith('PASS'), '021 display exception lacks exact owner-authorized F')
+        return
+    require(display.startswith(DISPLAY_DISPOSITION_STATUS + ';'),
+            '021 unexercised display row relabeled or disposition substituted')
+    receipt = _result_json_block(result, 'c021-display-disposition')
+    receipt_raw = (json.dumps(receipt, sort_keys=True, indent=2) + '\n').encode()
+    require(sha(receipt_raw) == DISPLAY_DISPOSITION_SHA256,
+            '021 exact owner display disposition/conditions/proof substituted')
+    require(receipt['F'] == F and receipt['classification'] == DISPLAY_DISPOSITION_STATUS
+            and receipt['physical_test_executed'] is False and receipt['physical_PASS'] is False,
+            '021 display disposition identity/classification substitution')
+    import base64
+    import zlib
+    bundle = _result_json_block(result, 'c021-evidence-bundle')
+    archive_raw = zlib.decompress(base64.b64decode(bundle['payload'], validate=True))
+    require(sha(archive_raw) == bundle['uncompressed_sha256'], '021 evidence bundle substituted')
+    archive = json.loads(archive_raw, object_pairs_hook=unique)
+    require(len(archive['files']) == bundle['file_count'], '021 evidence bundle count mismatch')
+    for name, digest in receipt['proof_files'].items():
+        entry = archive['files'].get(name)
+        require(entry is not None, '021 disposition proof missing: ' + name)
+        raw = base64.b64decode(entry['base64'], validate=True)
+        require(len(raw) == entry['size_bytes'] and sha(raw) == entry['sha256'] == digest,
+                '021 disposition proof bytes substituted: ' + name)
+
+
 def _processor(root: Path, head: str, state: dict, before: dict, after: dict):
     """Validate actual future E; this path is unreachable from candidate fixtures."""
     F, parent, tree = _reviewed_build(root, state, before, after,
@@ -697,12 +753,7 @@ def _processor(root: Path, head: str, state: dict, before: dict, after: dict):
     validate_work_order(validated, evidence_repo_root=root)
     validate_evidence_record(validated, evidence_repo_root=root)
     evidence = json.loads(payload, object_pairs_hook=unique)
-    rows = {row['id']: row for row in evidence['steps']}
-    require(evidence['anomalies'] == evidence['evidence_gaps'] == []
-            and len(rows) == len(evidence['steps'])
-            and all(row in rows and rows[row]['observed'].strip().startswith('PASS')
-                    for row in REQUIRED_ROWS),
-            '021 required physical row missing/failing or evidence gaps')
+    _hardware_rows(evidence, raw_bytes(root, head, RESULT), F)
     protocol = raw_bytes(root, head, PROTOCOL)
     require(all(token in protocol.decode() for token in
                 REQUIRED_ROWS),

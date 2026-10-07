@@ -1,0 +1,89 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-021",
+  "candidate_branch": "codex/gp-config-021-build",
+  "candidate_git_sha": "59033b0d9341c7568b77292f3035347f3853fb84",
+  "candidate_base_configurator_sha": "c5635056a44726655e5b14b00f0edd48cb169d07",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/59033b0d9341c7568b77292f3035347f3853fb84/1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/firmware.uf2",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_021_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_021_HW_V1",
+  "firmware_artifact_filename": "firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6 / glyph_mk6; separate physical revision not reported",
+  "firmware_profile_state": "Exact C021 About version59033b0 on valid original; invalid one-field Ultimate profile3 customModeConfig256 caused refusal; final exact accepted017 About5994f165 and owner original Config restored.",
+  "update_method": "Owner manual preserved-UF2 MB1/ROM BOOTSEL/RPI-RP2 update and exact rollback; no HEP device action, target build or flashing automation.",
+  "host_platform_adapter": "GameCube: Glyph Mk6 to official WUP-028 to Nintendo Switch; ordinary supported USB: Mac/XInput. Valid Ultimate profile3/RGB3 and LT5 X1 host/game output observed.",
+  "preconditions": [
+    "Actual owner message01a1188f-7f0a-75e1-8d15-290ff1a7f646, turn01a1188f-7da0-79d0-8dd4-5d2b050ad0b8, independently read from daemon01a0fcbd-2b4c-7d31-9088-42a22e260b57 on2026-10-08. Actual complete operator owner messages/prompts independently read from01a11857-0d97-78e0-948e-d3dad0ec160c; explicit invalid-write approval01a11878-5dad-7310-913d-fefb43a4d20f follows exact artifact/recovery packet. Preserve complete original messages and20session files in durable bundle.",
+    "Source-free E starts at liveR b741bec617478f22b9729e33aa622a60e74cc673. ExactF59033b0d9341c7568b77292f3035347f3853fb84/treeef53ee8e549b99e1dc5c5a53ba4b345cb4adbee7 is sole empty child ofMc5635056a44726655e5b14b00f0edd48cb169d07; genuineM parents strict038DONEfe7848cd057ff0ad5a634cca6cd6d346be761fcc and originalCa170bd40a51741582913324bfecbc14ce9b3211d. All238criticalF entries equalC. Canonical236critical entries remain accepted017; no source integration/catalog/DONE in E.",
+    "Protocol GP_CONFIG_021_HW_V1 SHA256ee13426f1409ee7308af5fd3c9e5d3e4e9eca8f7155211a6eb509619c04a7996 is preserved byte-exact. Original protocol remains historical binding handoff; verified newer direct owner overrides only display_failure_refusal acceptance treatment. Exact receipt and original authority/actual source-host proof are frozen in result with negative controls, never a general waiver or physicalPASS relabel.",
+    "Fresh rehash confirms regular nonsymlink0444 C021UF2 1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/802304bytes and accepted017rollbacke68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672bytes. Actual owner operator preupdate rechecks reported exact. Both reviewed payload/enclosing-sector ranges exclude filesystem/EEPROM; not a general media guarantee.",
+    "Exact committed-before-build Mk6 buildPASS105784/262144RAM,388976/1568768flash,21decoder+12selected dependency/source pins, linked mutex startup witness, original cleanF host replay and independent build/custody/protocol approvals freshly authenticated. Original standaloneCLI/ignoredcache/missing historical objects/withdrawn8characterAbout/synthetic/aggregate timeout failures retained as honest framework debt; no full aggregatePASS or rebuild.",
+    "Actual native offline roundtrip and ordinary binding guard on authenticatedschema2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b pass all9wrappers; all populated capacities/enums/strings/ranges/default/profile/RGB/button refs reviewed. No custom modes populated; modifier arithmetic vacuous. Original raw4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480; invalidraw4204/616f6a54a97f1340780c898c9f149c9bda2da204a28dbd0d5eb17711cb0c2c14. Exactlyone scalar MODE_ULTIMATE profile3 Ultimate customModeConfig0to256; native raw decode retains fullwidth256. Encoder valid is not C021 semantic acceptance.",
+    "Latest actual direct owner explicitly states report suppression and rejected-file reboot physically exercised. Earlier operator refusal prompt/result is grouped and lacks a detailed reboot/report-instrument transcript; this distinction is preserved. No invented literal refusal-page text, reboot count, enumeration state, wire-capture method or timestamps. Owner report is evidence authority for those six physical rows; raw recovery confirms retained bad bytes.",
+    "HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE; no physical failed-display-init stimulus was executed and no physical PASS is claimed. Actual selected SSD1306 begin false requires framebuffer allocation failure; OLED manipulation does not establish it. No safe reviewed supported owner route exists. Fresh exact-source host proof passes both enum ABIs, all40 startup schedules each, including rejected begin-false early/during/late,69 negatives and194 compiler dependencies. Permanent refusal gates both cores before backend/menu/RGB/Configurator or invalid state publication. Owner message01a1188f-7f0a-75e1-8d15-290ff1a7f646 authorizes this single-row evidence boundary; six other physical rows remain mandatory."
+  ],
+  "steps": [
+    {
+      "id": "valid_stored_boot",
+      "instruction": "Exact valid C021 original Config, both actual GC/Switch/WUP028 and Mac/XInput; source-derived Ultimate3/RGB3/LT5X1 matrix.",
+      "expected": "About59033b0; ordinary menus/RGB/control output/release, no unexpected disconnect or rewrite.",
+      "observed": "PASS actual owner all normal/working/version59033b0 then all match on both paths. RF1A, LF3/LF1/LF2/LF5 directions, LT5X1 whole9way table and cleanrelease; RGB3#22D3EE brightness20 and normal menus. Independent postC021stored read is original4201bytes/hash/completeequality."
+    },
+    {
+      "id": "rejected_file",
+      "instruction": "Independently reviewed owner-derived sole Ultimate3 custom reference0to256, explicit owner approved write on exact accepted017, actual rawGET then exactC021 manualupdate.",
+      "expected": "C017 stored literal256; C021 rejects before normal publication; badfile untouched.",
+      "observed": "PASS owner refusal all match; priorC017GET4204bytes/616f6a54a97f1340780c898c9f149c9bda2da204a28dbd0d5eb17711cb0c2c14 literal256; postrefusal exactC017recoveryGET identical beforeoriginalrestoration. No synthetic fixture or inherited predecessor acceptance."
+    },
+    {
+      "id": "persistent_refusal",
+      "instruction": "Rejected persisted Config on exactC021 with ordinary operationaldisplay, input/update attempts.",
+      "expected": "Persistent refusal page; normal dashboard/menu/fallback/gameplay unavailable.",
+      "observed": "PASS grouped owner refusal all match and latestdirectowner expected persistent refusal physically exercised. Literalpage text and exactattempt count not supplied; no invented transcription."
+    },
+    {
+      "id": "display_failure_refusal",
+      "instruction": "No physicalstimulus; actualselecteddriver/source and focusedbothABI failed-init proof, verified owner narrowdisposition.",
+      "expected": "Rejected Config remains permanentlyrefused independentlyof successful displayinit; no invalid/partialstate publication.",
+      "observed": "HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE; no physical failed-display-init stimulus was executed and no physical PASS is claimed. Actual selected SSD1306 begin false requires framebuffer allocation failure; OLED manipulation does not establish it. No safe reviewed supported owner route exists. Fresh exact-source host proof passes both enum ABIs, all40 startup schedules each, including rejected begin-false early/during/late,69 negatives and194 compiler dependencies. Permanent refusal gates both cores before backend/menu/RGB/Configurator or invalid state publication. Owner message01a1188f-7f0a-75e1-8d15-290ff1a7f646 authorizes this single-row evidence boundary; six other physical rows remain mandatory."
+    },
+    {
+      "id": "no_gameplay_reports",
+      "instruction": "Actual refused C021 ordinaryGC and supportedUSB contexts; directowner report suppression observations.",
+      "expected": "No normalgameplay/reports/backend/menu/Configurator publication in refusedboot.",
+      "observed": "PASS latest actual direct owner expressly states this physicalbehavior was exercised and mustbe evaluated, along with prior grouped refusalallmatch. No normal reports/controlleroperation inrefusal reported. Exact reportinstrument/enumeration/packettrace and held-inputdetails not supplied, not invented."
+    },
+    {
+      "id": "rejected_file_reboot",
+      "instruction": "Ordinary reboot retaining rejectedpayload and subsequent exact017 recoveryraw comparison.",
+      "expected": "Same refusal/no normalgameplay afterreboot; rejectedraw unchanged.",
+      "observed": "PASS latest directowner explicitly reports rejected-file reboot/persistence physicalbehavior exercised; accepted017recoveryGET byte-exact4204/616f6a54a97f1340780c898c9f149c9bda2da204a28dbd0d5eb17711cb0c2c14 literal256. Individualreboot count/time not supplied."
+    },
+    {
+      "id": "recovery_restoration",
+      "instruction": "Established MB1/BOOTSEL exact017rollback, rejectedreadback, originalrestore and ordinaryreboot/readback/finalcompactmatrix.",
+      "expected": "RollbackAbout5994f165; badraw equality before restore; original4201/hash equality immediate/postreboot; ordinarygameplay/RGB/release.",
+      "observed": "PASS owner versionconfirmedconnected; actual rejectedraw equality andliteral256; restorationwrite reportedcomplete byoperator, independentimmediateread and postrebootread byteexactoriginal. Owner postrebootallnormalconnected, final originalprofile/RGB/face/direction/X1/neutral and no unexpecteddisconnect. No invented literal CMD_SUCCESS."
+    }
+  ],
+  "negative_regression_checks": [
+    "NunchukNOT_TESTED; rootcauseUNPROVEN. No physical failed-display test, corrupted storage, unsafe stimulus, full retest or controller action by HEP/reviewer.",
+    "HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE; no physical failed-display-init stimulus was executed and no physical PASS is claimed. Actual selected SSD1306 begin false requires framebuffer allocation failure; OLED manipulation does not establish it. No safe reviewed supported owner route exists. Fresh exact-source host proof passes both enum ABIs, all40 startup schedules each, including rejected begin-false early/during/late,69 negatives and194 compiler dependencies. Permanent refusal gates both cores before backend/menu/RGB/Configurator or invalid state publication. Owner message01a1188f-7f0a-75e1-8d15-290ff1a7f646 authorizes this single-row evidence boundary; six other physical rows remain mandatory."
+  ],
+  "power_cycle_reconnect_checks": [
+    "Latest direct owner reports rejected-file reboot repeats persistent refusal/no gameplay; exact accepted017 recovery raw equals the rejected4204byte payload before restoration.",
+    "Original restoration immediate and afterreboot both4201bytes/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480, complete bytes equal. Actual owner finalpostreboot all normal and connected."
+  ],
+  "result": "PASS",
+  "anomalies": [],
+  "rollback_recovery": "Owner MB1/BOOTSEL route confirmed, exact accepted017 installed and About5994f165 observed; raw rejected payload byte-identical/literal256 before exact original restoration immediate/postreboot, final gameplay/RGB/neutral/releases normal. Final physical firmware accepted017. No processor device action.",
+  "tester": "Project owner observations; independent Hardware Evidence Processor, read-only source-host specialist and fresh independent evidence reviewer",
+  "tested_at": "2026-10-07T21:56:16Z",
+  "evidence_gaps": []
+}
