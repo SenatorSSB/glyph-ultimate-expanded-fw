@@ -1,5 +1,9 @@
 # Active Agent Queue
 
+## Current GP-CONFIG-021 activation
+
+GP-CONFIG-021 is READY on live-verified canonical `e4aeac97ba6e344db456cd9acbc9ebe1e6e61d71` after strict017/035/020 completion, exact hardware-bearing predecessor PASS with no gaps, immutable source/default/schema/decoder and finite accepted020/014/017 transitions. All236critical entries equal acceptedF017. The independently verified owner width directive resolves the bounded custom-reference defect; source-defined zero and valid-reference behavior remain unchanged. Source-grounded staged manual recovery is independently reviewed; physical invalid writes await explicit owner action after the exact candidate/artifact/protocol gates. Fresh C021 is an output. Commit C and exact conformance inventory, activate existing038, and do not build/integrate C021 before038 strictDONE. Firmware remains accepted017; no C021 source, build, UF2 or hardware PASS is claimed. Other98orders and all accepted hardware tuples remain unchanged. Historical failures/debt remain preserved. Nunchuk NOT_TESTED; root cause UNPROVEN.
+
 GP-CONFIG-017 is DONE after reviewed exact tested-source integration `a9232dd71dbaac888d343227bbdc8f2d66bcb20a` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a` follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b`; the native035 catalog preserves original C, exact F/M/tree, earliest reviewed R and accepted E. All236 critical source/build inputs equal tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`. The accepted UF2 remains e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5,796672bytes, freshly rehashed. Seven owner-reported GP_CONFIG_017_HW_V1 rows PASS with empty gaps; Mac/XInput satisfies SHIFT/XWAVE actual-host coverage, GC/Switch/WUP-028 and Mac/XInput Ultimate/X1 pass, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored byte-exactly before and after reboot. Initial focused19PASS/navigationFAIL and repaired7metadataPASS both preserve nativeMATCH; the actual failure remains recorded. Fresh independent integration review approves exact source/catalog/correspondence. Historical aggregate FAIL/TIMEOUT and framework debt remain honest; no full aggregate PASS, rebuild or retest. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. All98 other orders and accepted014/020 evidence remain unchanged. The same H3 executor next evaluates existing021/038 authority, source conformance and a safely executable rejected-storage test/recovery route. No C021 candidate, device operation or new work order is claimed. The owner test environment stays frozen and untouched. The initial2026-10-02 adoption recorded RUNWAY_OK; current marker records PLANNING_REQUIRED.
 
 GP-CONFIG-017 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `5994f1657e45e0883c6c75468a19be7e3b49a72c`, sole composition parent `a7b8758a4d9d353fcfeb0592cc155b4f50f4f358`, tree `0404687bb795e78f0f607fbad865369578615cff`. Mk6 build, resolved21-role decoder closure and owner-held UF2 custody PASS. Preserved UF2 SHA-256 `e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5`, 796672 bytes, locator `local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2`. All15 actual focused checks PASS/nativeMATCH; independent source witnesses verify all1430tracked modes/index/live,236critical==C017 and99queue==strict035DONE. Exact runtime/cache source pins,19prebuild decoder roles and native tracked source/index proof remain unchanged through build/custody. Fresh independent review approves exact source/build/custody/correspondence and conditional staged GP_CONFIG_017_HW_V1. Actual native full aggregate FAIL/AGGREGATE_TIMEOUT/nativeUNAVAILABLE retained with13 outcomes; outer fullnativeMATCH,300/120 unchanged. Unchanged034 synthetic applicability FAIL remains separate honestTier3 debt; additional root prebuild cache-classification FAIL stopped before compilation and remains retained, with exact copied-cache pins/native build integrity and actual decoder proof supplying the final build basis. No fullaggregatePASS or post-cache fullcampaignauthenticatePASS. This canonical handoff has five source-free docs/control-plane paths; candidateHAL remains unmerged. GP-VAL-035 strictDONE `ace41056887ec08616a5c67f026880e1b0d8e81a`; originalC017 `478f438804275f3e0c23e6f36bfd26e34aa343bf` preserved. First owner action: one connection on accepted firmware in normal gameplay mode, model/backend/host/profile/startup/RGB baseline and anomalies. No firmware or Config change yet. Fresh Config/raw backup, safe byte-exact restoration and actual static/SHIFT/XWAVE profiles/expectations precede any mutation; ordinary menu selection persists Config after intentional disconnect/reboot. Required seven physical rows pending; no inherited014 acceptance. All98otherorders and exact014/020PASS unchanged. Persistent H3 reaches hardwarewait and releases solecanonical authority only after reviewed pending publication/liveverification. Existing ownerchain resumes only after actual exact humanHEP PASS. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN.
@@ -157,18 +161,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 0,
-    "recorded_preauthorized": 8,
+    "immediate_ready": 1,
+    "recorded_preauthorized": 7,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNER_REFRESH_REQUIRED",
-    "PLANNING_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -865,36 +868,32 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-021",
       "title": "Transactional persisted acceptance and latched recovery",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-config-021-release-safety",
       "objective": "GLYPH-UD-023 supplies refusal fallback. Current OLED APIs cannot establish visible warning reliability, so the adopted narrower refusal path skips all output/save-capable construction. Source-compatible private candidate, callback and early dual-core branches resolve architecture now; build/hardware proof remains mandatory.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H3",
       "behavioral_claim": "GLYPH-UD-023 supplies refusal fallback. Current OLED APIs cannot establish visible warning reliability, so the adopted narrower refusal path skips all output/save-capable construction. Source-compatible private candidate, callback and early dual-core branches resolve architecture now; build/hardware proof remains mandatory.",
-      "scope": "GP-CONFIG-021 adopted narrowed scope: only HAL/pico/include/core/Persistence.hpp, HAL/pico/src/core/Persistence.cpp, HAL/pico/src/comms/ConfiguratorBackend.cpp, config/glyph/common/src/config.cpp, new include/core/config_validation.hpp and src/core/config_validation.cpp plus closed coupled source-free proofs/status. Private static bounded Config candidate, reset/decode/nested extent checks and the shared pure allocation-free reference+020 binding validator precede assignment. Failed load preserves accepted caller bytes; rejected existing file stays byte-for-byte untouched. Extract existing reference checks and errors faithfully; do not select USB-default validity/fallback or other enum policy. Nonnull startup-installed generic semantic-validator callback is installed before first LoadConfig or Configurator construction, never changed during gameplay; 022 installs the Glyph RGB adapter. One boot-time load owner; private candidate never active; no concurrent candidate reuse. Distinct bounded results for positively proved absent file, rejected existing file, storage/open/I/O failure; arbitrary failed open is never absence. Preserve normal valid load; only positively proved absence retains existing first-boot default initialization/save policy. Independently validate source defaults before any normal consumption; invalid defaults refuse operation. On rejected existing Config or ambiguous storage/open/I/O failure, latch operation refusal before initialize_backends, setup_mode_activation_bindings and all normal backend/menu/RGB construction. No normal reports, save or Configurator transport occurs on that boot. Clear watchdog scratch[0]/[1] for refused recovery; skipping initialize_backends prevents its hidden save. loop, setup1 and loop1 branch before any backends[0], display_backend or led_backend dereference, independent of active game mode. Publish stable boot refusal/display ownership through verified platform intercore synchronization, not volatile/plain main_setup_done alone. Draw an initial dedicated recovery page only if display.begin succeeds, transfer ownership to core1 and redraw unconditionally; no drawing/transfer after allocation failure. Page explicitly says Stored Config rejected (or storage failure), Recovery required, Operation refused; validated defaults held privately do not imply active gameplay/profile load. No menu input can dismiss recovery or save. Physical OLED visibility is not claimed from software ACK; best-effort screen is supplementary to unconditional operation refusal. No runtime health probe, default-backed gameplay, normal dashboard success, storage format migration, disk atomicity/power-loss redesign, delete/rename/overwrite/backup rotation. Independent host proofs: all decode/header/CRC/seek/reference/binding/I/O failures, caller byte equality, private default validation, no write routes, file hash equality and watchdog/reboot recurrence, valid load after failure, absent vs ambiguous failure, no reports with missing/failed display or either core handoff, persistent refusal screen across menu/no-mode, normal valid startup unchanged. Hardware rows: exact valid stored boot; safely prepared rejected file; persistent operation refusal and warning when display works; refusal with safely testable display failure; GC/USB must emit no normal gameplay reports in refusal; unchanged bad file on reboot; approved recovery/restoration and prior Config intact. Original default-backed gameplay acceptance row is replaced by refusal rows, never counted as PASS. Full exact H3 build/custody/review/PASS before merge; default-backed gameplay expansion requires bounded new source-backed curation.\n\nLiteral hardware metadata: docs/agent_framework/GP_CONFIG_021_HARDWARE_PROTOCOL.md; docs/calibration/gp_config_021_hardware_result.md; docs/calibration/fixtures/gp_config_021_hardware_evidence.json. Only these regular 100644 literals are reserved, not a prefix. Nondestructive mount is part of this exact refusal repair, not a general filesystem architecture: in the existing Persistence constructor, configure the source-supported LittleFSConfig(false) through setConfig BEFORE begin; capture both config success and mount result in bounded private state. No automatic format, format retry, remount, new storage format or dependency-source edit. Configuration/mount failure and unformatted/unknown medium refuse normal operation before any file load/save, backend/menu construction or reports. Do not treat post-autoformat absence as original absence. Every storage method must fail closed on unavailable mount; save remains existing behavior only on successful valid boots/authorized transactions. Independently bind selected LittleFS/FS source bytes and tests to the accepted GP-PERSIST-001 wrapper evidence and actual resolved build dependency; incompatible dependency semantics invalidate, no caret-version inference. Public Boolean open/exists failure alone cannot establish true absence versus I/O failure: classify such uncertainty explicitly as ambiguous storage failure and refuse, preserving bytes. Only independently proven positive absence may retain original firstboot defaults/save; no new absence-detection API or blank-storage initialization authority. If public dependency APIs cannot positively prove absence, the candidate MUST refuse that uncertain boot rather than invent success; this conservative refusal is resolved now, not a future product choice. Host tests include config-setting/mount failure, unformatted medium, false exists/open and ambiguity, no format or write attempt and no consumer construction; valid mounted stored Config unchanged. Physical tests exercise safely reproducible refusal and existing manual recovery, without destructive formatting or flash fault injection. No formatted-firstboot or general persistence guarantee.",
+      "scope": "GP-CONFIG-021 adopted narrowed scope: only HAL/pico/include/core/Persistence.hpp, HAL/pico/src/core/Persistence.cpp, HAL/pico/src/comms/ConfiguratorBackend.cpp, config/glyph/common/src/config.cpp, new include/core/config_validation.hpp and src/core/config_validation.cpp plus closed coupled source-free proofs/status. Private static bounded Config candidate, reset/decode/nested extent checks and the shared pure allocation-free reference+020 binding validator precede assignment. Failed load preserves accepted caller bytes; rejected existing file stays byte-for-byte untouched. Extract existing reference checks and errors faithfully; do not select USB-default validity/fallback or other enum policy. Nonnull startup-installed generic semantic-validator callback is installed before first LoadConfig or Configurator construction, never changed during gameplay; 022 installs the Glyph RGB adapter. One boot-time load owner; private candidate never active; no concurrent candidate reuse. Distinct bounded results for positively proved absent file, rejected existing file, storage/open/I/O failure; arbitrary failed open is never absence. Preserve normal valid load; only positively proved absence retains existing first-boot default initialization/save policy. Independently validate source defaults before any normal consumption; invalid defaults refuse operation. On rejected existing Config or ambiguous storage/open/I/O failure, latch operation refusal before initialize_backends, setup_mode_activation_bindings and all normal backend/menu/RGB construction. No normal reports, save or Configurator transport occurs on that boot. Clear watchdog scratch[0]/[1] for refused recovery; skipping initialize_backends prevents its hidden save. loop, setup1 and loop1 branch before any backends[0], display_backend or led_backend dereference, independent of active game mode. Publish stable boot refusal/display ownership through verified platform intercore synchronization, not volatile/plain main_setup_done alone. Draw an initial dedicated recovery page only if display.begin succeeds, transfer ownership to core1 and redraw unconditionally; no drawing/transfer after allocation failure. Page explicitly says Stored Config rejected (or storage failure), Recovery required, Operation refused; validated defaults held privately do not imply active gameplay/profile load. No menu input can dismiss recovery or save. Physical OLED visibility is not claimed from software ACK; best-effort screen is supplementary to unconditional operation refusal. No runtime health probe, default-backed gameplay, normal dashboard success, storage format migration, disk atomicity/power-loss redesign, delete/rename/overwrite/backup rotation. Independent host proofs: all decode/header/CRC/seek/reference/binding/I/O failures, caller byte equality, private default validation, no write routes, file hash equality and watchdog/reboot recurrence, valid load after failure, absent vs ambiguous failure, no reports with missing/failed display or either core handoff, persistent refusal screen across menu/no-mode, normal valid startup unchanged. Hardware rows: exact valid stored boot; safely prepared rejected file; persistent operation refusal and warning when display works; refusal with safely testable display failure; GC/USB must emit no normal gameplay reports in refusal; unchanged bad file on reboot; approved recovery/restoration and prior Config intact. Original default-backed gameplay acceptance row is replaced by refusal rows, never counted as PASS. Full exact H3 build/custody/review/PASS before merge; default-backed gameplay expansion requires bounded new source-backed curation.\n\nLiteral hardware metadata: docs/agent_framework/GP_CONFIG_021_HARDWARE_PROTOCOL.md; docs/calibration/gp_config_021_hardware_result.md; docs/calibration/fixtures/gp_config_021_hardware_evidence.json. Only these regular 100644 literals are reserved, not a prefix. Nondestructive mount is part of this exact refusal repair, not a general filesystem architecture: in the existing Persistence constructor, configure the source-supported LittleFSConfig(false) through setConfig BEFORE begin; capture both config success and mount result in bounded private state. No automatic format, format retry, remount, new storage format or dependency-source edit. Configuration/mount failure and unformatted/unknown medium refuse normal operation before any file load/save, backend/menu construction or reports. Do not treat post-autoformat absence as original absence. Every storage method must fail closed on unavailable mount; save remains existing behavior only on successful valid boots/authorized transactions. Independently bind selected LittleFS/FS source bytes and tests to the accepted GP-PERSIST-001 wrapper evidence and actual resolved build dependency; incompatible dependency semantics invalidate, no caret-version inference. Public Boolean open/exists failure alone cannot establish true absence versus I/O failure: classify such uncertainty explicitly as ambiguous storage failure and refuse, preserving bytes. Only independently proven positive absence may retain original firstboot defaults/save; no new absence-detection API or blank-storage initialization authority. If public dependency APIs cannot positively prove absence, the candidate MUST refuse that uncertain boot rather than invent success; this conservative refusal is resolved now, not a future product choice. Host tests include config-setting/mount failure, unformatted medium, false exists/open and ambiguity, no format or write attempt and no consumer construction; valid mounted stored Config unchanged. Physical tests exercise safely reproducible refusal and existing manual recovery, without destructive formatting or flash fault injection. No formatted-firstboot or general persistence guarantee.\n\nVerified actual owner message 01a1167e-986b-7030-9f14-af7d095ce839, turn 01a1167e-97bd-7ac3-a822-b1ecc8b29a15, approves only the bounded original-full-32-bit custom reference validation before narrowing. Preserve authoritative zero behavior, all valid references and corresponding error meanings; no fallback/sentinel/wrap or hardcoded255 limit. Cover zero/first/highest/above-count/255/256/larger/UINT32_MAX;256 must not validate as0. Independent actual transcript readback and supplement bind this authority. Continue existing021\u2192038\u2192021 chain; no new Planner/product policy/recursive governance. This approval supplies no physical invalid Config write authority.",
       "explicit_excluded_scope": "No firmware/build/source changes under an H1 order. No scope beyond exact named H3 repair. No runtime-loaded profile/config, RuntimeConfigView/active publication change, new device/WebSerial/protobuf/backend writer, flashing automation, storage format/power-loss recovery redesign, Senscope/game semantics, official Configurator compatibility, Nunchuk or root-cause claim. No GP-VAL-011 reopening, blanket source exemption, branch-name authority, historical evidence rewrite, fallback/USB/naming/Keyboard/rebind policy invention.",
       "touched_planes": [
         "existing Config persistence",
         "firmware runtime",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance.",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Current accepted canonical e4aeac97ba6e344db456cd9acbc9ebe1e6e61d71 has all236critical exact accepted F017;67source-annex entries are verified with sole new accepted017 NeoPixel transition. Full-width correction authority is the independently verified actual owner directive above.",
       "dependencies_prerequisites": [
         "Mechanical predecessors: GP-CONFIG-017, GP-VAL-035, GP-CONFIG-020.",
         "The predictable successor is GP-VAL-038; no new Planner/Curator loop for missing future candidate identity."
       ],
       "substantive_authorization_rationale": "GLYPH-UD-023 supplies refusal fallback. Current OLED APIs cannot establish visible warning reliability, so the adopted narrower refusal path skips all output/save-capable construction. Source-compatible private candidate, callback and early dual-core branches resolve architecture now; build/hardware proof remains mandatory. Accepted GP-PERSIST-001 and local wrapper source show implicit autoformat before setup; owner preservation/refusal direction requires disabling that exact existing mechanism and retaining mount failure rather than formatting.",
-      "mechanical_activation_conditions": [
-        "Strict DONE correspondence and exact physical F/artifact PASS with no gaps for hardware-bearing GP-CONFIG-017, GP-VAL-035, GP-CONFIG-020; named governance predecessor DONE; no pending hardware failure.",
-        "Before creating fresh C on newly verified clean canonical B, source/default/schema/decoder dependencies equal immutable annex or named accepted transition. Only finite intervening deltas in adopted campaign contract; generated modifier extent 20, physical RGB domain 36 and relevant semantic invariants unchanged.",
-        "Create fresh current-base candidate under this exact source scope; candidate C identity is OUTPUT of this activation, not its prerequisite. Old 014 candidate/017 checkpoint are evidence only. Commit exact C and conformance inventory before the named successor governance activation; no build/integration until successor DONE."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
         "Hardware FAIL, invalid predecessor acceptance, unsafe/unavailable required physical recovery/operator route, candidate replay/rebase or changed critical C-to-F bytes."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract. Verified actual owner message 01a1167e-986b-7030-9f14-af7d095ce839, turn 01a1167e-97bd-7ac3-a822-b1ecc8b29a15, approves only the bounded original-full-32-bit custom reference validation before narrowing. Preserve authoritative zero behavior, all valid references and corresponding error meanings; no fallback/sentinel/wrap or hardcoded255 limit. Cover zero/first/highest/above-count/255/256/larger/UINT32_MAX;256 must not validate as0. Independent actual transcript readback and supplement bind this authority. Continue existing021\u2192038\u2192021 chain; no new Planner/product policy/recursive governance. This approval supplies no physical invalid Config write authority.",
       "automated_validation": [
         "Authenticate nondestructive LittleFSConfig(false), checked setConfig/begin result and refusal on mount/unformatted/ambiguous absence; no automatic format/save or normal consumer construction. Historical mount-autoformat observation stays immutable; separate repaired-current proof. Resolved dependency source must match supported API semantics.",
         "Apply the exact local scope validation matrix plus adopted finite algorithm and all negative controls. Authenticate literal production bodies/schema/decoder, old versus current observations, omission/one-byte substitution and modes; retain historical 005/010/011/012/016 and accepted Ultimate/X1 table/source authority. No silent hash reseal.",
@@ -916,9 +915,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -8180,11 +8179,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":8,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-021"],"immediate_ready":1,"recorded_preauthorized":7,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 8; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-021; Immediate Ready: 1; Recorded Preauthorized: 7; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -25147,3 +25146,726 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config017-completion:end -->
+
+
+## 2026-10-07 GP-CONFIG-021 mechanical activation
+
+<!-- gp-config021-activation:start -->
+```json
+{
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-021",
+  "mode": "MECHANICAL_ACTIVATION",
+  "base": "e4aeac97ba6e344db456cd9acbc9ebe1e6e61d71",
+  "recorded_utc": "2026-10-07T13:22:03.832306+00:00",
+  "original_conditions": [
+    "Strict DONE correspondence and exact physical F/artifact PASS with no gaps for hardware-bearing GP-CONFIG-017, GP-VAL-035, GP-CONFIG-020; named governance predecessor DONE; no pending hardware failure.",
+    "Before creating fresh C on newly verified clean canonical B, source/default/schema/decoder dependencies equal immutable annex or named accepted transition. Only finite intervening deltas in adopted campaign contract; generated modifier extent 20, physical RGB domain 36 and relevant semantic invariants unchanged.",
+    "Create fresh current-base candidate under this exact source scope; candidate C identity is OUTPUT of this activation, not its prerequisite. Old 014 candidate/017 checkpoint are evidence only. Commit exact C and conformance inventory before the named successor governance activation; no build/integration until successor DONE."
+  ],
+  "conditions_result": "SATISFIED; fresh candidate C is OUTPUT",
+  "strict_predecessors": {
+    "GP-CONFIG-017": {
+      "schema_name": "glyph_done_completion_evidence",
+      "schema_version": 1,
+      "mode": "DIRECT_ANCESTRY",
+      "implementation_base_sha": "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+      "reviewed_implementation_sha": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+      "prior_canonical_integration_sha": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+      "reviewed_changed_paths": [
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "docs/AGENT_CONTEXT.md",
+        "docs/CURRENT_STATE.md",
+        "docs/ROADMAP.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
+        "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json"
+      ],
+      "independent_review_provenance": "Fresh independent Sol val034_review APPROVED exact integration a9232dd71dbaac888d343227bbdc8f2d66bcb20a and tree ded7c519f96650c3f63cbabd44b59c961dc6e8b7; report SHA256 d59f6afb879ad9382136d7d7819ad8fd80e695efa05019641a84e10907248e0d. Independent native accepted transition, source/index, exact236critical/testedF, genuineR-E-Jcatalog, immutablehardwaretuple/protocol/evidence and freshUF2hash verified. Separate strict completion independently reviewed before publication.",
+      "validation_provenance": "Revision3 candidate-critical/affected regression basis: native017 ACCEPTED_TRANSITION and critical236 exact testedF5994f1657e45e0883c6c75468a19be7e3b49a72c. Actual initial20focused results19PASS/1navigationFAIL with nativeMATCH; navigation sentence restored in solechild and7fresh metadata checksPASS/nativeMATCH. Cumulative unchanged19PASS plus7freshmetadata, not20freshfinalchecks. Allfive full protected consumers,010semantics,original016historicalreplay,current017dualtimeABI/36negatives,014capacity,019selection,KBDpipeline and hardwarecorrespondence execute. InitialnavigationFAIL retained. Preserved testedUF2 e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672bytes freshly rehashed; owner HEP GP_CONFIG_017_HW_V1 sevenrowPASS and emptygaps unchanged, About5994f165/glyph_mk6, Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byteexact immediate/postreboot. HistoricalaggregateFAIL/TIMEOUT, synthetic034/cacheapplicabilityFAIL and nativeUNAVAILABLE retained; no fullaggregatePASS/rebuild/retest. DirectSwitchdynamic and forcednullinvalidRGB NOT_TESTED; physicalnullUNKNOWN/rootcauseUNPROVEN/NunchukNOT_TESTED."
+    },
+    "GP-CONFIG-017hardware": {
+      "candidate_git_sha": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+      "firmware_artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": []
+    },
+    "GP-VAL-035": {
+      "schema_name": "glyph_done_completion_evidence",
+      "schema_version": 1,
+      "mode": "DIRECT_ANCESTRY",
+      "implementation_base_sha": "9ce55e71eff2be6fee366b52434042985de263e6",
+      "reviewed_implementation_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+      "prior_canonical_integration_sha": "424387e08695bd9c58d2a16326b93143c8ca405d",
+      "reviewed_changed_paths": [
+        "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+        "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+        "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json",
+        "docs/runtime_config/fixtures/gp_val035_c017_transition.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+        "docs/runtime_config/runtime_config_validation_health.md",
+        "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+        "tools/check_glyph_gp_config019_usb_name_selection.py",
+        "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+        "tools/check_glyph_neopixel_historical_replay.py",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+        "tools/glyph_c014_campaign_transition.py",
+        "tools/glyph_c017_campaign_transition.py",
+        "tools/glyph_campaign_transition.py",
+        "tools/glyph_checker_context.py",
+        "tools/glyph_hardware_correspondence.py",
+        "tools/run_glyph_runtime_config_validation.py",
+        "tools/test_glyph_c017_campaign_transition.py"
+      ],
+      "independent_review_provenance": "Fresh independent Sol val034_review APPROVED exact424 424387e08695bd9c58d2a16326b93143c8ca405d; report SHA25649cd901c2d06153848866552b295bb09d93bd8214ed4bc1a12da5e5c681a0e2f. Separate source-free completion snapshot independently reviewed before publication.",
+      "validation_provenance": "Final424 actual15 focused consumers PASS in source-free and genuine exactC-composed contexts, both fullnativefingerprintMATCH. Allfive fullscope bodies,010semantic,unchanged original0169cases/9contracts and C017dualtimeABIs56nullupdates/staticSHIFTXWAVE/recovery36negatives execute. 26freshnativephase/history/correspondence cases PASS at exactfinalmodule;16earlierrow/review/build/protocol controls carriedonlythrough unchanged-functionASTaudit. Native43initialnegative observations retain rawFAIL and two reproducedfalseacceptances; exact424targeted and independent controlsreject repairedindexflags/strictbool; committedE-descendantprotocol/evidence/resultreplace-restore nowreject. Five initial localexpected-string omissions retain actualcorrectnative rejection. Independent all1430HEAD/index/live/modes/flags,22regularsourcefree paths,236critical==accepted014F and exact99queue objects PASS. Both actual aa203 source-free/composed full aggregates FAIL/AGGREGATE_TIMEOUT/UNAVAILABLE, with12/9 recorded results; no fullaggregate PASS. Both29-check focused reports contain28actualPASS and one unchanged034 broad synthetic fixture admission FAIL with nativeMATCH. That namespace applicability failure is explicit Revision3 Tier3 debt, separately from aggregate timeout; native014 immutableB017/current source/history and actualcurrent014 host remain independently proved. Production300/120 deadlines unchanged. No firmwarebuild/device/physicalPASS; NunchukNOT_TESTED,rootcauseUNPROVEN,physicalnullUNKNOWN."
+    },
+    "GP-CONFIG-020": {
+      "schema_name": "glyph_done_completion_evidence",
+      "schema_version": 1,
+      "mode": "DIRECT_ANCESTRY",
+      "implementation_base_sha": "a669992a3379afa3d89593a7f1d46a2a2987dabd",
+      "reviewed_implementation_sha": "a59c62793c52130612f39558b7c7e5a70a8c8cf4",
+      "prior_canonical_integration_sha": "a59c62793c52130612f39558b7c7e5a70a8c8cf4",
+      "reviewed_changed_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "docs/AGENT_CONTEXT.md",
+        "docs/CURRENT_STATE.md",
+        "docs/ROADMAP.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
+        "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/gp_config020_abi_repair.json",
+        "docs/runtime_config/fixtures/gp_val043_accepted_transitions.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/gp_config020_abi_repair.md",
+        "docs/runtime_config/runtime_config_validation_health.md",
+        "include/core/config_button_validation.hpp",
+        "src/core/config_button_validation.cpp",
+        "tools/check_glyph_gp_config020_button_validation.py",
+        "tools/fixtures/gp_config020_button_validation/abi_probe.cpp",
+        "tools/fixtures/gp_config020_button_validation/decoder_harness.cpp",
+        "tools/fixtures/gp_config020_button_validation/include/Adafruit_TinyUSB.h",
+        "tools/fixtures/gp_config020_button_validation/setconfig_harness.cpp",
+        "tools/fixtures/gp_config020_button_validation/validation_harness.cpp"
+      ],
+      "independent_review_provenance": "Fresh independent Sol reviewer /root/c020_r3_review APPROVED exact committed a59c62793c52130612f39558b7c7e5a70a8c8cf4, tree bcd10467de8d69f433a414592eb16efd55a60ec6, source merge bce59d34bcb6b4158a5f755293f20102c7a0abb9; report SHA-256 a485094ee45b643a7e3c6f55f5e06863cba8c3b8fface12f2b7f85cf854f947a, zero blocking findings. Independently checked native ACCEPTED_TRANSITION, earliest E 6b36d99b0624047558ed8f9ede83dcaee78e72a9, 236 critical source/build entries equal exact tested F 7db4f447d5e796367071b7143fa6c9274c70ae5e, preserved UF2 7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500 (796160 bytes), direct owner HEP PASS and frozen protocol/evidence/result. Prior canonical integration independently live-verified on GitHub before this separate completion snapshot.",
+      "validation_provenance": "GLYPH-UD-027 Revision 3 focused/affected proof: all 24 actual focused and consumer checks PASS; both host Button ABIs, actual-helper SetConfig transaction, source/default/schema/history/correspondence and metadata/status gates. Focused report SHA-256 a28b66ac3c8da523b5145250cc8b115bf97661f1355b8547e551e3a3afd6f1d3; complete authoritative native fingerprint 8bdb54e5b306c24338036969f6f6294a9d15af79dc5ab6c292a8bb6d77b9a613 before/after MATCH with zero component changes. Actual native integrated API, strict later DONE/history/forged-catalog, accepted live-input negatives, 50 hardware-correspondence tests and historical patch/body/mode/source controls PASS; negative report SHA-256 f5ad9043fc28a765887bd395fec939f64ac98104000c844731877a11122f4b20. Initial missing historical-object setup FAIL and disposable raw-index differences retained honestly; successful historical retry full native MATCH, authoritative checkout untouched. Preservation report SHA-256 aed00ef67ca55a481b6853d7def140a633b8ff845733bba3ba42690ff5374efa; exact earliest E/R/I chronology, frozen protocol/evidence/result and owner-held artifact independently rehashed. No rebuild, physical retest or device/config write. Existing aggregate FAIL/incomplete, ignored Finder/TinyUSB metadata failures and primary fingerprint UNAVAILABLE remain framework debt; full aggregate not run or claimed PASS. Physical invalid-binding submission HOST_ONLY/NOT_TESTED, Nunchuk NOT_TESTED, root cause UNPROVEN."
+    },
+    "GP-CONFIG-020hardware": {
+      "candidate_git_sha": "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+      "firmware_artifact_sha256": "7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/7db4f447d5e796367071b7143fa6c9274c70ae5e/7743fcbe3d71ec4159e6da5026a1b4560cbbef4d1654cb80b8907fcce344b500/firmware.uf2",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": []
+    }
+  },
+  "source_authority_sha256": "d926d737113350c6e847c8d5e2c92c2b15fd8bc207ae5231aa165a65d1d5ecf1",
+  "independent_host_review_sha256": "837d9f1a500fcc1301b484ee85891cf3fde99014aecb528d3a325b667179e1cf",
+  "source_annex_current_D": [
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "blob": "43cbd3f39b4c9a09ecc855b0f2704b2081a45981",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/comms/IntegratedDisplay.cpp",
+      "blob": "67263adc7fc9520594df39dc85eed8d8973b39ac",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "include/comms/IntegratedDisplay.hpp",
+      "blob": "743c5e184e5a9f14f17a8d00a534fe40279a3d52",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/include/display/DisplayMode.hpp",
+      "blob": "4121c4538517b89e6b9b4de93284f9dd0bded1e0",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/src/display/OopsieMenu.cpp",
+      "blob": "f0410e4d3771345d3b06054437ee10a9084b4a7d",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/include/display/OopsieMenu.hpp",
+      "blob": "4e80bb3afa6fdd00da7e8fdc26808fb0db84efe6",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/display/ConfigMenu.cpp",
+      "blob": "f1a5f978fadd90fdffd7af19966444fd0748936b",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "blob": "bf855a584b3e859083d98a1aa49a38daee9204f5",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/include/comms/backend_init.hpp",
+      "blob": "783cb54e5d01d33e931136e9cbb15f696a510029",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/comms/console_detection.cpp",
+      "blob": "93a82ab7af00b967fd8c7f63844cfecbcc71dd70",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/comms/XInputBackend.cpp",
+      "blob": "1699e06253a93cb5f492282b5d43ce26fe8cfd0e",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/comms/DInputBackend.cpp",
+      "blob": "e1941c5548cc8761e025b691f619be0faf8b1165",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+      "blob": "4b388ecca60b1eedaef5fcd8656d71d2f2be97c6",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/core/KeyboardMode.cpp",
+      "blob": "a14f01d030dad62305fc0accdc07d224c61eefcf",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/modes/CustomKeyboardMode.cpp",
+      "blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/core/InputMode.cpp",
+      "blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/core/socd.cpp",
+      "blob": "81a0d53fae96305c07d5943f4785b33b02ca1949",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/neopixel_definitions.hpp",
+      "blob": "252c624733f2aee65be51b363f46957658957a78",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/matrix_definition.hpp",
+      "blob": "870532bef36d7e28e8decf6ff152b131a6db5ef7",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/rgb/ButtonLocations.cpp",
+      "blob": "d59b490890477b359c98c9a8c09e7f3f42e8a883",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/include/util/state_util.hpp",
+      "blob": "40b8aeb9c4db3268696c49f20b3278efabc7688c",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/core/config_utils.cpp",
+      "blob": "beeb1202f67f61ce717e0e020cb3dd339dfa6206",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "blob": "6ca93c96c944ee539a2d409e32889306c1eafac7",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/display/ConfigMenu.cpp",
+      "blob": "f1a5f978fadd90fdffd7af19966444fd0748936b",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "blob": "bf855a584b3e859083d98a1aa49a38daee9204f5",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "platformio.ini",
+      "blob": "4d56f8630c1b12e84cd12f40ce05a4dc71b9362e",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "config/glyph/env.ini",
+      "blob": "fac4e20461ad632ca1d65826241a4a9c73630f04",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "include/modes/CustomControllerMode.hpp",
+      "blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+      "blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": true
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/core/InputMode.cpp",
+      "blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/core/socd.cpp",
+      "blob": "81a0d53fae96305c07d5943f4785b33b02ca1949",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/modes/CustomKeyboardMode.cpp",
+      "blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "HAL/pico/src/core/KeyboardMode.cpp",
+      "blob": "a14f01d030dad62305fc0accdc07d224c61eefcf",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/modes/Ultimate.cpp",
+      "blob": "37b9bad7d8a1cab66d0073b8314987df0329dddb",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "blob": "1249b2f8b702eca1522a915e08ae9bd442a74d78",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+      "blob": "29a30df2c45e3ae4ce90af47775f0b8f94b8cc83",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "blob": "40a0b4703b3cbc5800acca5f2fdc3229bd82844a",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/schema/config.proto",
+      "blob": "a58a2bf4dd827ad92482f1ac30c3d56bbea93c05",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/schema/config.options",
+      "blob": "7175d8463ade5b0cd45f1a5f8f99be44f5719c3c",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+      "blob": "01d0dda2ae768dd0f18c0f338a74c55e613bb199",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+      "blob": "c59855ecb19be7f5193833d94fe41cc1828ffb14",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json",
+      "blob": "85bc20e74404f62fcbd67b6be4f18968a35d3482",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
+      "blob": "25d32a1fc1cc9c39626eadd4dca4835103579d80",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json",
+      "blob": "6646c82f303cbc9d89c91a44bd8fe6d1494f00fe",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/glyph_checker_context.py",
+      "blob": "d7450b6501ba85d13013d470f937df98098ccbfe",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/glyph_hardware_correspondence.py",
+      "blob": "fffc32c881cd828fa1da74e5eb4960bccca8356c",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/check_glyph_config_010_integration_semantic_correspondence.py",
+      "blob": "a54888a26245a4d0c5848a99f77baf4a9daac011",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_generator_contract.py",
+      "blob": "e4a02f123fe9c38751ef852ea9bdc6855e0d4e8f",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+      "blob": "a808536d923c57467fdf1b152d2b6e520f08a8f1",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_artifact_install.py",
+      "blob": "d5be430d8fa1c272a966a34ec393b5ac2dd28253",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+      "blob": "73e5983b8d545410578c9d822d111be7d8a0e8ea",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/check_glyph_docs_agent_surface.py",
+      "blob": "3bf4ca6e3f68847db495403dd2f5e0f219dfe178",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": "tools/run_glyph_runtime_config_validation.py",
+      "blob": "fc63a52cf940098850529fdf73c02ce202067300",
+      "mode": "100644",
+      "annex_equal": false,
+      "accepted017_transition": false
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "blob": "00fa03b585fb34ae70201504da45f4fded36ffb3",
+      "mode": "100644",
+      "annex_equal": true,
+      "accepted017_transition": false
+    }
+  ],
+  "critical_entries": 236,
+  "critical_exact_accepted_F017": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+  "dependencies_rehashed": true,
+  "owner_width_approval": {
+    "source_thread": "01a0fcbd-2b4c-7d31-9088-42a22e260b57",
+    "turn": "01a1167e-97bd-7ac3-a822-b1ecc8b29a15",
+    "startedAt": 1791378757,
+    "user_message": {
+      "type": "userMessage",
+      "id": "01a1167e-986b-7030-9f14-af7d095ce839",
+      "content": [
+        {
+          "type": "text",
+          "text": "Approved.\n\nFor GP-CONFIG-021, correct the reference validation so that the original full\\\n32-bit decoded reference value is checked before any narrowing/truncating cast.\n\nObserved defect:\n\n`256` is currently truncated to `0`, allowing the intended invalid-reference\\\nrejection to be bypassed or misclassified.\n\nThis is a concrete validation/safety defect.\n\nValidate the full-width reference value first.\n\nOnly after the value has passed all applicable validity checks may it be\\\nnarrowed to the representation used by downstream code.\n\nPreserve all currently valid references and their behavior.\n\nPreserve existing error messages for the corresponding invalid-reference\\\nclasses unless a message is objectively impossible to preserve without changing\\\nits meaning.\n\nDo not introduce a new fallback or sentinel interpretation.\n\nDo not reinterpret zero.\n\nDo not modulo/wrap invalid values into the valid domain.\n\nFor a one-based reference with valid count `N`, validation should conceptually\\\noperate on the original decoded value:\n\n- `0` -> existing invalid-zero/reference rejection\n- `1` -> valid when `N >= 1`\n- `N` -> valid\n- `N + 1` -> invalid\n- `255` -> valid only if actually within the source-defined valid domain/count\n- `256` -> invalid when outside the valid domain; MUST NOT truncate to `0`\n- larger representable 32-bit values -> invalid when outside the valid domain\n- maximum decoded 32-bit value -> reject safely without overflow\n\nThe precise source-defined domain/count remains authoritative.\n\nDo not hard-code `255` as a semantic limit unless the actual schema/source\\\nrequires it.\n\nThe prepared one-line correction may be used if independent inspection confirms\\\nthat it:\n\n1. performs validation on the original full-width value;\n2. preserves valid-value behavior;\n3. preserves the existing downstream representation after successful\\\n   validation;\n4. changes no unrelated storage/publication behavior;\n5. preserves existing error messages;\n6. cannot introduce overflow or signedness problems.\n\nDo not apply the patch merely because it is one line; review the exact type flow\\\nfirst.\n\nAdd focused tests covering at minimum:\n\n- zero;\n- first valid reference;\n- highest valid reference;\n- first value above valid count;\n- `255`;\n- `256`;\n- a substantially larger 32-bit value;\n- maximum value representable by the decoded field, where practical.\n\nExplicitly prove:\n\n`256 != 0 for validation purposes`\n\nand that no invalid full-width value becomes valid after narrowing.\n\nAlso retain all existing valid-reference tests and error-message assertions.\n\nClassify this as a concrete Tier-1/Tier-2 validation defect discovered during\\\nGP-CONFIG-021 implementation.\n\nIt does NOT require a new Planner cycle.\n\nIt does NOT require a new product-policy decision.\n\nIt does NOT justify recursive validation-governance work.\n\nImplement the bounded correction, run focused and directly affected regression\\\nproof, obtain the required independent review, and continue the existing\\\nGP-CONFIG-021 -> GP-VAL-038 -> GP-CONFIG-021 persistent chain.\n\nIf the exact code inspection reveals that the field is not actually 32-bit at\\\nthe authoritative decode boundary, or that widening the check would alter valid\\\nsource-defined semantics, STOP and report that contradiction rather than\\\ngeneralizing this approval.\n"
+        }
+      ]
+    }
+  },
+  "owner_width_approval_sha256": "ce638216b55b453c4828e40c1da008d63570f706b49f75202d2eba4d8e27d32d",
+  "supplemental_authority": "Only full-width custom reference validation correction approved. Source-defined zero behavior and valid references/errors remain authoritative; no physical invalid write authorization.",
+  "physical_operator_route": "SOURCE_GROUNDED_STAGED_MANUAL_ROUTE_INDEPENDENTLY_REVIEWED; actual device steps await exact candidate/custody/protocol and explicit owner authorization",
+  "candidate": null,
+  "build": null,
+  "hardware": "NOT_TESTED",
+  "firmware_changes": false,
+  "other98_orders_unchanged": true,
+  "preparation_observations": [
+    {
+      "status": "FAIL",
+      "stage": "initial_current_D_annex_comparison",
+      "reason": "Historical source report E contains pre017 NeoPixel blob; D has independently accepted017 transition."
+    },
+    {
+      "status": "PASS",
+      "stage": "explicit_current_D_annex_and_critical_comparison",
+      "reason": "All67 annex rows authenticated, sole new accepted017 NeoPixel delta explicitly mapped; all236critical exacttestedF17; source/index clean."
+    }
+  ],
+  "physical_operator_route_review": {
+    "schema_version": 1,
+    "reviewer": "/root/val034_review",
+    "model": "gpt-6.1-sol",
+    "recorded_utc": "2026-10-07T13:31:51.742685+00:00",
+    "verdict": "APPROVED_SOURCE_GROUNDED_STAGED_ROUTE",
+    "blocking_findings": [],
+    "reviewed_base": "e4aeac97ba6e344db456cd9acbc9ebe1e6e61d71",
+    "accepted_rollback_F": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+    "approved_scope": "Source and accepted-artifact basis for staged current017 preparation, future021 refusal test and manual accepted017 rollback/restoration. This resolves the preactivation route-availability concern; it grants no physical action, candidate-code approval or hardware PASS.",
+    "authority_and_timing": [
+      "Original current queue mechanical conditions make fresh C an output of activation. No future candidate hardware PASS is inferred before READY.",
+      "Original invalidation names unsafe/unavailable required physical recovery/operator route. The reviewed packet now establishes a bounded source-grounded staged route; no concrete unsafe/unavailable contradiction remains for preactivation.",
+      "Actual newer owner width directive authorizes the bounded source correction and C021\u2192038\u2192C021 continuation. The earlier owner-decision-required scope verdict and PENDING source-route assessment remain preserved chronologically, not current stops.",
+      "Intentional physical256 write remains a separately explicit future owner stage under the exact reviewed C021 protocol; old017 protocol and new width approval alone do not permit it."
+    ],
+    "independently_established_facts": [
+      "Authenticated current source setup reads physical MB1 and calls reboot_bootloader before LoadConfig. The wrapper reaches selected RP2040Support.rebootToBootloader\u2192reset_usb_boot(0,0) with nonreturning wait.",
+      "The preserved accepted017 UF2 is regular nonsymlink0444,796672bytes, exacte68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5. Independent parsing verifies1556 unique complete nonoverlapping contiguous256byte payload blocks, ordinaryflash family flag0x2000 and RP2040family0xe48bff56.",
+      "UF2 payload interval[0x10000000,0x10061400), enclosing4KB sectors[0x10000000,0x10062000), both exclude filesystem[0x1017f000,0x101ff000) and reservedEEPROM[0x101ff000,0x10200000).",
+      "Selected2MB pico board, tracked0.5m filesystem declaration, builder formula/4096EEPROMreserve, linker substitution, accepted build log and actual embedded UF2 partition words agree. This establishes address separation for this exact rollback artifact, not a generic flash-tool preservation guarantee.",
+      "Independent32 finite source/cache/evidence pin checks passed, including immutable tracked modes/blobs and seven accepted wrapper SHA256/computed Git-blob content pins; no new whole-cache scan or build.",
+      "Previously independently executed actualcurrent017 handler/save/decode/load and literalwriter encoder/bindings/COBS proof establishes synthetic one-field256 preparation. MODE_ULTIMATE raw custom-field non-consumption is source-grounded with finite16384-output host comparison support; exact owner-derived artifact remains later proof.",
+      "Existing accepted017 normal Configurator route plus original immediate/postreboot byte-exact restoration is preserved historical hardware evidence. Rejected021 restoration itself is futureNOT_TESTED evidence."
+    ],
+    "architecture_assessment": {
+      "scope_conformance": "The source-only six-path implementation approach follows adopted private bounded candidate, nested extent checks, shared pure callback, checked noautoformat mount, ambiguous-absence refusal, transactional caller preservation, permanent report/save/Configurator refusal and guarded dual-core/display ownership.",
+      "width_and_zero": "Uses originaluint32 custom reference throughout validation and diagnostics; generateduint8 other references retain actualdecode boundaries. Preserves source-specific existing zero behavior and corresponding error order, no new USB/RGB/enum policy.",
+      "bootloader_and_display": "Current017 display draw lacks begin-result guard. Future021 must preserve pre-load MB1 escape even displayfailure and guard drawing; this is a future source/host obligation, not assumed existing safety.",
+      "no_product_implementation_approval": "APIs, exact code, synchronization initialization before core1 launch, noformat/mount failure behavior, and producer/load/error tests require subsequent fresh implementation review."
+    },
+    "required_future_gates": [
+      "Fresh C under reviewed liveREADY/base and exact adopted source scope; required governance038 strictDONE before build/integration, mandatory affected source/history/host proofs.",
+      "Actual021 preserves MB1 escape before stored load/refusal, drawing guard and noautoformat startup/mount. All early core schedules/refusal paths preserve bad stored bytes with no consumer/report/save/Configurator construction.",
+      "Exact futureF/UF2 and resolved dependency review independently verify FS mapping plus every payload and enclosing sector exclusion. Do not use erase-all/nuke/uploadfs/arbitrary flashing tools.",
+      "Owner confirms existing manual bootloader and content-addressed accepted017 rollback workflow, with source-grounded stopping conditions; no automated device path.",
+      "Fresh complete owner original backup/rawSHA/decode/reencode equality; one existingMODE_ULTIMATE custom0\u2192256 field only; independent complete artifact/domain/binding/reference/consumer review using exact current sources/decoder. Synthetic host profile is not an owner artifact.",
+      "Separately explicit owner physical-write authorization under reviewed staged021 protocol before ordinarySET on accepted017. Success and exact raw readback required; any anomaly stops.",
+      "Actual021 refused boot, no normalGCUSB reports, warning when displayworks, reboot recurrence and byte retention; displayfailure only safely testable. No newfaultcommand, corruption/CRC/powerloss/filesystem manipulation.",
+      "Manual exact accepted017 rollback through preserved pre-load bootloader, exactbadpayload readback via accepted017, restore fresh original with ordinarywriter and immediate/postreboot exactraw equality plus ordinary behavior. All rejected021 physical recovery rows remainNOT_TESTED until actual owner observations."
+    ],
+    "limitations": [
+      "Approval is of an established staged source route suitable for activation preparation, not blanket physical safety or flash/media behavior.",
+      "A valid filesystem is retained throughout this semantic-rejection route. Existing accepted017 global mount can autoformat on mount failure; arbitrary damaged/unformatted storage recovery is excluded. Future021 must disable that automatic mechanism and refuse unknown/mount failures.",
+      "Host platform FS/transport doubles and host headerABI do not prove physical flash preservation. Address parsing does not prove arbitrary tooling avoids mass erase.",
+      "No target build, new linking, device/serial/flashing action, repository/ref edit, frozen017 build access or reserved014hardwareworktree access occurred."
+    ],
+    "reviewed_inputs": {
+      "source_route": {
+        "path": "/private/tmp/glyph-config021/operator-route-source.json",
+        "bytes": 18498,
+        "sha256": "ab7a2b20aeaf071ba0a4f27a6f2f828c90faa20c5bcd14454c0114738fb0cde6"
+      },
+      "source_architecture": {
+        "path": "/private/tmp/glyph-config021/source-implementation-approach.json",
+        "bytes": 17958,
+        "sha256": "01dbbbb9ce4de5db7f5b35aeb2805062c369cf86fd87ecfccab930ebb7e7ebbd"
+      },
+      "independent_source_audit": {
+        "path": "/private/tmp/glyph-config021/independent-operator-route-source-audit.json",
+        "bytes": 3684,
+        "sha256": "7a1c66b120389c00e9b2b4b522683d78eacbef2b1105d7382d1deeb2da866c35"
+      },
+      "width_authority_supplement": {
+        "path": "/private/tmp/glyph-config021/independent-reference-width-authority-supplement.json",
+        "bytes": 6237,
+        "sha256": "24c7321eb82a5ed39a918f996bfb36da87a7fc29090c20b7c65894d76f3d8c21"
+      },
+      "independent_host_review": {
+        "path": "/private/tmp/glyph-config021/independent-reference256-host-review.json",
+        "bytes": 19317,
+        "sha256": "837d9f1a500fcc1301b484ee85891cf3fde99014aecb528d3a325b667179e1cf"
+      },
+      "prior_route_assessment": {
+        "path": "/private/tmp/glyph-config021/independent-preactivation-route-assessment.json",
+        "bytes": 5733,
+        "sha256": "b4e0d2b131eaf9d489a2eed3bf5379c46618117f837331c44eff88ac8ab0c72e"
+      },
+      "initial_audit_failure": {
+        "path": "/private/tmp/glyph-config021/independent-operator-route-initial-audit-failure.json",
+        "bytes": 529,
+        "sha256": "3ee6e85f2ab3e58867087cff0eab6a17454fb3af32aa95bcb2a167fc5e34d210"
+      }
+    },
+    "initial_audit_failure_scope": "Outside-repository audit initially looked for a dependency-package blob in the firmware Git object namespace. Missing object corrected by checking actual package content SHA256 and computed Git-blob pins; no production/proof changes or bypass.",
+    "physical_invalid_write_authorized": false,
+    "physical_safety_PASS": false,
+    "activation_commit_approved_by_this_report": false,
+    "future_C021_source_build_hardware_approved": false
+  },
+  "physical_invalid_write_authorized": false
+}
+```
+<!-- gp-config021-activation:end -->
