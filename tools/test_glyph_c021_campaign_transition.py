@@ -34,7 +34,7 @@ def rejected(fn, label, observations):
 
 
 def snapshot(parent, pack, head):
-    root = parent / 'repository'; root.mkdir()
+    root = parent / 'repository'; root.mkdir(); root = root.resolve()
     git(root, 'init', '-q')
     git(root, 'index-pack', '--stdin', data=pack)
     git(root, 'update-ref', 'refs/heads/synthetic038', head)
