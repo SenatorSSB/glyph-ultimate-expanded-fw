@@ -1,8 +1,8 @@
 # Active Agent Queue
 
-## Current GP-VAL-038 DONE and preserved GP-CONFIG-021 continuation
+## Current GP-CONFIG-021 exact hardware wait
 
-GP-VAL-038 is DONE through independently reviewed live source-free integration a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604 and separate strict DIRECT_ANCESTRY completion. Exact preserved C021 a170bd40a51741582913324bfecbc14ce9b3211d/tree91ca6d86c2fa28b55ef5a6b3623b25748b167feb retains its soleB c6887115f2e44f0803eb0956ebb574633cec53be,66-path inventory and214pins. Actual bothABI C engines69controls194MMD, currentbridges36MMD, original-full-width256 pure/realSET/Load/startup,15protected full bodies and76native admission negativesPASS. Current236critical equal acceptedF017; genuine private238criticalcomposition equals C21 with onlysixsource changes. Fresh independent product-bounded review APPROVED; original13Bfullmains/unchanged-body correspondence and7finalmetadataPASS. Actual native aggregateFAIL019TIMEOUT120 with035PASS72.956 and all measured sourcefingerprintsMATCH; old011TIMEOUT100, finalfullunitTIMEOUT120 versus earlier301controlsPASS117, originalCLI/setup/synthetic failures remain honestFRAMEWORK_VALIDATION_DEBT. Verified owner message01a11767-b407-74e0-969e-df163870b79c requires eight product facts and immediate preserved021 continuation, without globalgreen or recursive successor. Canonical firmware remains accepted017; targetbuild/artifact/hardware pending. The same GLYPH-UD-029 executor now resumes preserved021 for exact genuine composition, committed emptyF, build/custody/review and hardware handoff. Zero new READY runway is separate from this authorized unfinished-product continuation; no Planner/Curator call is required for it. No physical invalidConfig write is authorized. All98 other queue objects, accepted014/020/017 evidence and every earlier failure remain unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN.
+GP-CONFIG-021 is HARDWARE_TEST_REQUIRED at exact committed-before-build F 59033b0d9341c7568b77292f3035347f3853fb84, sole empty parent M c5635056a44726655e5b14b00f0edd48cb169d07, tree ef53ee8e549b99e1dc5c5a53ba4b345cb4adbee7. GenuineM parents are strict038 DONE fe7848cd057ff0ad5a634cca6cd6d346be761fcc and preservedC a170bd40a51741582913324bfecbc14ce9b3211d. Exact Mk6 build PASS, RAM105784/262144 and flash388976/1568768. Preserved UF2 1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970,802304bytes,0444 content-addressed locator local_backups/hardware-artifacts/59033b0d9341c7568b77292f3035347f3853fb84/1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/firmware.uf2. All238criticalinputs equal C021; all1498tracked HEAD/index/live modes/Hflags exact. BothABI actual cleanF replay69negatives194MMD and currentbridges36MMD PASS104.174s; focused metadata final7PASS. Selected21decoder roles and12dependency/sourcepins PASS, actual linked ARM mutexarray initialized beforemain, UF2 payloads and enclosingsectors excludeFS/EEPROM. Fresh independent exactcandidate/build/custody/source/protocol review APPROVED. Global originalCLI/setup/synthetic/historical/aggregate timeout results remain FRAMEWORK_VALIDATION_DEBT, neverPASS. CachebearingF currentwrapper rejected ignored dependencyworkflow; originalC CLI onF rejected soleparent; temporary cleanF metadata proof omitted unrelated historical evidenceobject twice, finite unchangedqueue-named object support repaired the privateharness and finalframeworkPASS. Canonicalfirmware remains accepted017; candidatefirmware is unmerged. All98other queueobjects and accepted014/020/017 evidence unchanged. Source-grounded conditional staged GP_CONFIG_021_HW_V1 requires fresh owneroriginalbackup/domainreview, exact onefield256artifact independentreview and separatelyexplicitphysicalwriteapproval; safelytestableactualdisplayfailure route unresolved remains honest hardwaregap. First owneraction is one accepted017 normalconnection/baseline, no firmwareorConfigchange. Allsevenphysicalrows pending, no hardwarePASS. Existing sameexecutor GLYPH-UD-029 chain reaches hardwarewait; solepublicationauthority releases onlyafter reviewedsourcefreependingpublication/liveverification. No newchats/Planner/Curator/successor. NunchukNOT_TESTED; rootcauseUNPROVEN.
 
 GP-CONFIG-017 is DONE after reviewed exact tested-source integration `a9232dd71dbaac888d343227bbdc8f2d66bcb20a` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a` follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b`; the native035 catalog preserves original C, exact F/M/tree, earliest reviewed R and accepted E. All236 critical source/build inputs equal tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`. The accepted UF2 remains e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5,796672bytes, freshly rehashed. Seven owner-reported GP_CONFIG_017_HW_V1 rows PASS with empty gaps; Mac/XInput satisfies SHIFT/XWAVE actual-host coverage, GC/Switch/WUP-028 and Mac/XInput Ultimate/X1 pass, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored byte-exactly before and after reboot. Initial focused19PASS/navigationFAIL and repaired7metadataPASS both preserve nativeMATCH; the actual failure remains recorded. Fresh independent integration review approves exact source/catalog/correspondence. Historical aggregate FAIL/TIMEOUT and framework debt remain honest; no full aggregate PASS, rebuild or retest. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. All98 other orders and accepted014/020 evidence remain unchanged. The same H3 executor next evaluates existing021/038 authority, source conformance and a safely executable rejected-storage test/recovery route. No C021 candidate, device operation or new work order is claimed. The owner test environment stays frozen and untouched. The initial2026-10-02 adoption recorded RUNWAY_OK; the marker at the C017 completion snapshot recorded PLANNING_REQUIRED; the current marker above supersedes it.
 
@@ -165,14 +165,15 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 6,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
+    "hardware_pending": 1,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
     "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "PLANNER_REFRESH_REQUIRED",
+    "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -869,8 +870,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-021",
       "title": "Transactional persisted acceptance and latched recovery",
-      "status": "REVIEW",
-      "branch": "codex/gp-config-021-release-safety",
+      "status": "HARDWARE_TEST_REQUIRED",
+      "branch": "codex/gp-config-021-build",
       "objective": "GLYPH-UD-023 supplies refusal fallback. Current OLED APIs cannot establish visible warning reliability, so the adopted narrower refusal path skips all output/save-capable construction. Source-compatible private candidate, callback and early dual-core branches resolve architecture now; build/hardware proof remains mandatory.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H3",
@@ -918,16 +919,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": true,
-      "candidate_git_sha": "a170bd40a51741582913324bfecbc14ce9b3211d",
-      "candidate_base_configurator_sha": "c6887115f2e44f0803eb0956ebb574633cec53be",
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "hardware_evidence_dependency_satisfied": false,
+      "candidate_git_sha": "59033b0d9341c7568b77292f3035347f3853fb84",
+      "candidate_base_configurator_sha": "c5635056a44726655e5b14b00f0edd48cb169d07",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/59033b0d9341c7568b77292f3035347f3853fb84/1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/firmware.uf2",
+      "firmware_artifact_sha256": "1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970",
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact future F build, UF2 custody and physical PASS not produced."
+        "All seven exact human GP_CONFIG_021_HW_V1 rows are pending; no inherited predecessor or host acceptance.",
+        "Fresh valid owner Config/raw backup, exact one-field MODE_ULTIMATE custom_mode_config0-to256 artifact independent review and separately explicit intentional physical-write approval precede that stage.",
+        "A safely testable reviewed physical display-failure route must be established; missing OLED is not proof of display.begin false. Unavailable route stays an explicit gap, never PASS."
       ]
     },
     {
@@ -8264,11 +8267,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":6,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":6,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 6; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 6; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -27186,3 +27189,1380 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-val038-product-boundary-and-validation:end -->
+
+
+## GP-CONFIG-021 exact built hardware handoff
+
+<!-- gp-config021-hardware-handoff:start -->
+```json
+{
+  "schema_name": "glyph_gp_config021_exact_hardware_handoff",
+  "schema_version": 1,
+  "starting_canonical": "fe7848cd057ff0ad5a634cca6cd6d346be761fcc",
+  "source_free_canonical": true,
+  "candidate": "59033b0d9341c7568b77292f3035347f3853fb84",
+  "parent": "c5635056a44726655e5b14b00f0edd48cb169d07",
+  "tree": "ef53ee8e549b99e1dc5c5a53ba4b345cb4adbee7",
+  "preserved_C": "a170bd40a51741582913324bfecbc14ce9b3211d",
+  "artifact_sha256": "1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970",
+  "artifact_bytes": 802304,
+  "preserved_locator": "local_backups/hardware-artifacts/59033b0d9341c7568b77292f3035347f3853fb84/1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/firmware.uf2",
+  "protocol_version": "GP_CONFIG_021_HW_V1",
+  "protocol_sha256": "ee13426f1409ee7308af5fd3c9e5d3e4e9eca8f7155211a6eb509619c04a7996",
+  "reports": {
+    "021-exact-committed-prebuild-candidate.json": {
+      "sha256": "648845a56e89fc3d0c8bc9a62136284ed943e1f3b6cf1b9d9e17fabcbd12ef45",
+      "report": {
+        "candidate": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "parent": "c5635056a44726655e5b14b00f0edd48cb169d07",
+        "tree": "ef53ee8e549b99e1dc5c5a53ba4b345cb4adbee7",
+        "composition_parents": [
+          "fe7848cd057ff0ad5a634cca6cd6d346be761fcc",
+          "a170bd40a51741582913324bfecbc14ce9b3211d"
+        ],
+        "strict_governance_DONE": "fe7848cd057ff0ad5a634cca6cd6d346be761fcc",
+        "preserved_C": "a170bd40a51741582913324bfecbc14ce9b3211d",
+        "preserved_C_tree": "91ca6d86c2fa28b55ef5a6b3623b25748b167feb",
+        "critical238_exact_C": true,
+        "only_six_critical_delta_D_to_M": [
+          "HAL/pico/include/core/Persistence.hpp",
+          "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+          "HAL/pico/src/core/Persistence.cpp",
+          "config/glyph/common/src/config.cpp",
+          "include/core/config_validation.hpp",
+          "src/core/config_validation.cpp"
+        ],
+        "F_sole_empty_child_M": true,
+        "clean_tracked_stage_live": true,
+        "source_correspondence": "PASS",
+        "pack_sha256": "e3bca45cfcdf87bca4a07ca027f2b99ff934d4a839538782a6b3faf663da1565",
+        "checkout": "/private/tmp/glyph-config021/build",
+        "build": "NOT_RUN",
+        "artifact": "NONE",
+        "hardware": "PENDING"
+      }
+    },
+    "021-copied-cache-proof.json": {
+      "sha256": "38f9534c50926cfaa168d8e52a424e191b958d671e8108434e1f6e1bb92530fd",
+      "report": {
+        "candidate": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "copied_only": [
+          ".venv",
+          ".platformio-home",
+          ".pio/libdeps"
+        ],
+        "source": "/private/tmp/glyph-config017/build-runtime-cache",
+        "destination": "/private/tmp/glyph-config021/build",
+        "non_generated19_and_selected12_hashes": "PASS",
+        "records": [
+          {
+            "role": "nanopb_package",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/library.json",
+            "sha256": "01f2027fcd3c19b304581c0bba7a9f0096a16842874e6686a38d168a69d952fe",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_generator",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py",
+            "sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_pb_h",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/pb.h",
+            "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_pb_decode_c",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c",
+            "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_platformio_generator",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/generator/platformio_generator.py",
+            "sha256": "3dd541f77affb32d0a6515ce472612e364a9042024f2d2f79a8e66da43b68312",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_generator_proto_init",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/__init__.py",
+            "sha256": "b387c9a6a553ed2184cf8c67243bb26b27bd46baf44465f0d5ffeb139c365105",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_generator_utils",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/_utils.py",
+            "sha256": "6d091e256cdda09002c357da4901d259078fe1ef53a010392a251dd1107d6313",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_generator_nanopb_pb2",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/nanopb_pb2.py",
+            "sha256": "fe72409165c1973e05a41dbeee1292246d02fe1a0f05c4424270e771e2b4dbb4",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_generator_nanopb_proto",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/nanopb.proto",
+            "sha256": "1a50d0822c5ba4395297755b11864af952053be3e0dc44c860f988b1b73c3c55",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_protoc",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/generator/protoc",
+            "sha256": "6bc34847cc6c0c9ef6ec6137beceef6b05c378f248dee6a7086e5b2166ffc71d",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_pb_decode_h",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.h",
+            "sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_pb_common_c",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c",
+            "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+            "matches_record": true
+          },
+          {
+            "role": "nanopb_pb_common_h",
+            "relative_path": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.h",
+            "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+            "matches_record": true
+          },
+          {
+            "role": "proto_package",
+            "relative_path": ".pio/libdeps/glyph_mk6/HayBox-proto/library.json",
+            "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+            "matches_record": true
+          },
+          {
+            "role": "config_proto",
+            "relative_path": ".pio/libdeps/glyph_mk6/HayBox-proto/config.proto",
+            "sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+            "matches_record": true
+          },
+          {
+            "role": "config_options",
+            "relative_path": ".pio/libdeps/glyph_mk6/HayBox-proto/config.options",
+            "sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+            "matches_record": true
+          },
+          {
+            "role": "other_proto_package",
+            "relative_path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/library.json",
+            "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+            "matches_record": true
+          },
+          {
+            "role": "other_config_proto",
+            "relative_path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/config.proto",
+            "sha256": "09a75613866c8508d50cccd5c1ef31280fecb2ee0042576c6688091a5919cce4",
+            "matches_record": true
+          },
+          {
+            "role": "other_config_options",
+            "relative_path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/config.options",
+            "sha256": "460f9b4c09cdffb042866db27e574d090dfd7d8a4deda9c08479b2ed6f741599",
+            "matches_record": true
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/package.json",
+            "sha256": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960",
+            "bytes": 401
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp",
+            "sha256": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50",
+            "bytes": 10545
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.h",
+            "sha256": "c188a6b49d593855d839162dd112c6a81ef4142dd5da82d59dcb983916521763",
+            "bytes": 6582
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp",
+            "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+            "bytes": 5490
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h",
+            "sha256": "6036f92f824ee8257da051ed37fe01e7dfdedece33c772ae6321036dc0f412f9",
+            "bytes": 20151
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp",
+            "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+            "bytes": 8305
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/include/pico/mutex.h",
+            "sha256": "2be135f02167c261996f2fd91089deabbec2de007223df2913cde930c9412161",
+            "bytes": 11905
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_runtime/runtime.c",
+            "sha256": "c6b63ea7bebb1a0dc6b108664d048ed53ad61e9b04a4fae2439b6ba93891bb19",
+            "bytes": 10978
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S",
+            "sha256": "1329e3005bb9b2424ebeda04fc784e215926e57612eef8321f7df715797fcecd",
+            "bytes": 9107
+          },
+          {
+            "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_standard_link/memmap_default.ld",
+            "sha256": "33821d53e8b3cc52bac6c31ef6d281fba8fccf6669c9f057e748c2f85e03df6f",
+            "bytes": 6930
+          },
+          {
+            "path": ".platformio-home/platforms/raspberrypi/platform.json",
+            "sha256": "0a231fcd03b7237339210b431260169f426c77dc877121620f9ec524b482c0fd",
+            "bytes": 2510
+          },
+          {
+            "path": ".platformio-home/packages/toolchain-rp2040-earlephilhower/package.json",
+            "sha256": "2d4cbf63aee9cc13f3b2a8344aebef39338afbf15850602e39a97ce6956ca086",
+            "bytes": 222
+          }
+        ],
+        "build_objects_copied": false,
+        "generated_proto_copied": false,
+        "fresh_dependency_resolution": false
+      }
+    },
+    "021-exact-F-target-build.json": {
+      "sha256": "bd99be76acaa061d85f5b3ca506c8a05916364b867b62d7d37a4d777889c48e8",
+      "report": {
+        "candidate": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "command": [
+          "/private/tmp/glyph-config021/build/.venv/bin/python",
+          "-m",
+          "platformio",
+          "run",
+          "-e",
+          "glyph_mk6"
+        ],
+        "PLATFORMIO_CORE_DIR": "/private/tmp/glyph-config021/build/.platformio-home",
+        "started_utc": "2026-10-07T18:17:23.773120+00:00",
+        "completed_utc": "2026-10-07T18:17:56.733465+00:00",
+        "seconds": 32.96037049998995,
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/private/tmp/glyph-config021/021-exact-F-target-build.log",
+        "head_after": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "tracked_status_after": ""
+      }
+    },
+    "021-exact-F-artifact-custody.json": {
+      "sha256": "945087b286fce6ed557721d9492f948182374a14acd80af6bd655252b43524f4",
+      "report": {
+        "candidate": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "artifact_sha256": "1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970",
+        "bytes": 802304,
+        "status": "PRESERVED_AND_VERIFIED",
+        "absolute_locator": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/59033b0d9341c7568b77292f3035347f3853fb84/1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/firmware.uf2",
+        "relative_locator": "local_backups/hardware-artifacts/59033b0d9341c7568b77292f3035347f3853fb84/1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/firmware.uf2",
+        "mode": "0444",
+        "primary_custody_readback": "PASS",
+        "candidate_clean_before_after": "PASS",
+        "existing_tool": "glyph_hardware_artifact_custody.preserve and verify_preserved; explicit root to primary contentaddressed artifacts; no primary Git mutation",
+        "rollback_locator": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+        "rollback_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+        "rollback_bytes": 796672,
+        "pre_handoff_verify": "PASS read-only verify_preserved",
+        "hardware": "PENDING"
+      }
+    },
+    "021-target-source-build-witness.json": {
+      "sha256": "7e065c8f44038dd0136eb167ecf027ea552b0d9468af92fb6bdf4812a8cfad8d",
+      "report": {
+        "kind": "GP_CONFIG_021_TARGET_SOURCE_BUILD_WITNESS",
+        "status": "PASS_READ_ONLY_WITNESS",
+        "candidate": {
+          "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+          "parent": "c5635056a44726655e5b14b00f0edd48cb169d07",
+          "tree": "ef53ee8e549b99e1dc5c5a53ba4b345cb4adbee7",
+          "clean": true
+        },
+        "build_log": {
+          "path": "/private/tmp/glyph-config021/021-exact-F-target-build.log",
+          "sha256": "0d50ccd39215decb3fcf980ce790b5c01af85b3f93435170669b572ded7a0a00",
+          "success_marker": true,
+          "ram_used_bytes": 105784,
+          "ram_capacity_bytes": 262144,
+          "flash_used_bytes": 388976,
+          "flash_capacity_bytes": 1568768
+        },
+        "selected_dependency_sources": {
+          "decoder_roles": [
+            {
+              "role": "nanopb_package",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/library.json",
+              "sha256": "01f2027fcd3c19b304581c0bba7a9f0096a16842874e6686a38d168a69d952fe",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_generator",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py",
+              "sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_pb_h",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/pb.h",
+              "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_pb_decode_c",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c",
+              "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_platformio_generator",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/platformio_generator.py",
+              "sha256": "3dd541f77affb32d0a6515ce472612e364a9042024f2d2f79a8e66da43b68312",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_generator_proto_init",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/__init__.py",
+              "sha256": "b387c9a6a553ed2184cf8c67243bb26b27bd46baf44465f0d5ffeb139c365105",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_generator_utils",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/_utils.py",
+              "sha256": "6d091e256cdda09002c357da4901d259078fe1ef53a010392a251dd1107d6313",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_generator_nanopb_pb2",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/nanopb_pb2.py",
+              "sha256": "fe72409165c1973e05a41dbeee1292246d02fe1a0f05c4424270e771e2b4dbb4",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_generator_nanopb_proto",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/proto/nanopb.proto",
+              "sha256": "1a50d0822c5ba4395297755b11864af952053be3e0dc44c860f988b1b73c3c55",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_protoc",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/generator/protoc",
+              "sha256": "6bc34847cc6c0c9ef6ec6137beceef6b05c378f248dee6a7086e5b2166ffc71d",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_pb_decode_h",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.h",
+              "sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_pb_common_c",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c",
+              "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+              "matches_pinned": true
+            },
+            {
+              "role": "nanopb_pb_common_h",
+              "path": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.h",
+              "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+              "matches_pinned": true
+            },
+            {
+              "role": "proto_package",
+              "path": ".pio/libdeps/glyph_mk6/HayBox-proto/library.json",
+              "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+              "matches_pinned": true
+            },
+            {
+              "role": "config_proto",
+              "path": ".pio/libdeps/glyph_mk6/HayBox-proto/config.proto",
+              "sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+              "matches_pinned": true
+            },
+            {
+              "role": "config_options",
+              "path": ".pio/libdeps/glyph_mk6/HayBox-proto/config.options",
+              "sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+              "matches_pinned": true
+            },
+            {
+              "role": "other_proto_package",
+              "path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/library.json",
+              "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+              "matches_pinned": true
+            },
+            {
+              "role": "other_config_proto",
+              "path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/config.proto",
+              "sha256": "09a75613866c8508d50cccd5c1ef31280fecb2ee0042576c6688091a5919cce4",
+              "matches_pinned": true
+            },
+            {
+              "role": "other_config_options",
+              "path": ".pio/libdeps/glyph_mk6/HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa/config.options",
+              "sha256": "460f9b4c09cdffb042866db27e574d090dfd7d8a4deda9c08479b2ed6f741599",
+              "matches_pinned": true
+            },
+            {
+              "role": "generated_c",
+              "path": ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.c",
+              "sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+              "matches_pinned": true
+            },
+            {
+              "role": "generated_h",
+              "path": ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+              "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+              "matches_pinned": true
+            }
+          ],
+          "decoder_role_count": 21,
+          "all_21_match": true,
+          "framework_sdk_platform_toolchain": [
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/package.json",
+              "sha256": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp",
+              "sha256": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.h",
+              "sha256": "c188a6b49d593855d839162dd112c6a81ef4142dd5da82d59dcb983916521763",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp",
+              "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h",
+              "sha256": "6036f92f824ee8257da051ed37fe01e7dfdedece33c772ae6321036dc0f412f9",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp",
+              "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/include/pico/mutex.h",
+              "sha256": "2be135f02167c261996f2fd91089deabbec2de007223df2913cde930c9412161",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_runtime/runtime.c",
+              "sha256": "c6b63ea7bebb1a0dc6b108664d048ed53ad61e9b04a4fae2439b6ba93891bb19",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S",
+              "sha256": "1329e3005bb9b2424ebeda04fc784e215926e57612eef8321f7df715797fcecd",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_standard_link/memmap_default.ld",
+              "sha256": "33821d53e8b3cc52bac6c31ef6d281fba8fccf6669c9f057e748c2f85e03df6f",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/platforms/raspberrypi/platform.json",
+              "sha256": "0a231fcd03b7237339210b431260169f426c77dc877121620f9ec524b482c0fd",
+              "matches_preparation": true
+            },
+            {
+              "path": ".platformio-home/packages/toolchain-rp2040-earlephilhower/package.json",
+              "sha256": "2d4cbf63aee9cc13f3b2a8344aebef39338afbf15850602e39a97ce6956ca086",
+              "matches_preparation": true
+            }
+          ],
+          "all_12_match": true,
+          "generated_c_sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+          "generated_h_sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323"
+        },
+        "include_edges": {
+          "declared_persistence": [
+            "HAL/pico/src/core/Persistence.cpp:#include <LittleFS.h>",
+            "HAL/pico/src/core/Persistence.cpp:#include <pb_decode.h>",
+            "HAL/pico/src/core/Persistence.cpp:#include <pb_encode.h>"
+          ],
+          "declared_startup": [
+            "config/glyph/common/src/config.cpp:#include <config.pb.h>",
+            "config/glyph/common/src/config.cpp:#include \"pico/mutex.h\""
+          ],
+          "selected_paths_seen_in_sconsign": [
+            ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h",
+            ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+            ".pio/libdeps/glyph_mk6/Nanopb/pb.h"
+          ],
+          "compiled_objects": {
+            "persistence": {
+              "path": ".pio/build/glyph_mk6/src/HAL/pico/src/core/Persistence.cpp.o",
+              "sha256": "78e79d04089a4759ef63761e4be81ba6b17428e6768270b44e691d6c0c6eecaa"
+            },
+            "config_startup": {
+              "path": ".pio/build/glyph_mk6/src/config/glyph/common/src/config.cpp.o",
+              "sha256": "b4d62d6554538bf35773011424e61a06efe98e5476cda5f37684a603fe8abe3b"
+            },
+            "framework_fs": {
+              "path": ".pio/build/glyph_mk6/FrameworkArduino/FS.cpp.o",
+              "sha256": "e0f052637eb80f5e16810e7b7e21446d2d31d2c6720ae426e4d1ac52559a7add"
+            },
+            "littlefs": {
+              "path": ".pio/build/glyph_mk6/libb5f/LittleFS/LittleFS.cpp.o",
+              "sha256": "8e37fcef831a1fca07be6d827b3c2c5b3d287bc9a8820c4695f32c1696f0da61"
+            },
+            "generated_config_c": {
+              "path": ".pio/build/glyph_mk6/nanopb/generated-build/config.pb.c.o",
+              "sha256": "2f5eeafd3af6e6d03b201510e4fc7fc18518125da609cbe49cd96f219e6e236b"
+            }
+          },
+          "limit": "Source directives, selected SCons path presence, and linked objects observed; per-object compiler dependency files were not emitted. No claim of a freshly resolved dependency graph."
+        },
+        "elf": {
+          "path": "/private/tmp/glyph-config021/build/.pio/build/glyph_mk6/firmware.elf",
+          "sha256": "d4515f4c3fa7b5088822ac9775157ec1e96d6bc007ed9c0da205e687f8977848",
+          "file_output": "/private/tmp/glyph-config021/build/.pio/build/glyph_mk6/firmware.elf: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked, with debug_info, not stripped",
+          "size_output": "text\t   data\t    bss\t    dec\t    hex\tfilename\n 388976\t  12032\t  96952\t 497960\t  79928\t/private/tmp/glyph-config021/build/.pio/build/glyph_mk6/firmware.elf",
+          "symbols_hex": {
+            "boot_state_mutex": "0x20002268",
+            "mutex_array_start": "0x20002268",
+            "mutex_array_end": "0x200022d8",
+            "mutex_init": "0x10029f18",
+            "runtime_init": "0x1002c300",
+            "platform_entry": "0x10003106",
+            "main": "0x100289a8",
+            "main1": "0x10028934",
+            "setup": "0x1001fbd4",
+            "setup1": "0x1001ef58"
+          },
+          "boot_symbol_in_input_mutex_section": true,
+          "mutex_within_linked_array": true,
+          "runtime_init_calls_mutex_init": true,
+          "entry_calls_runtime_init_before_main": true,
+          "main_launches_core1_before_setup": true,
+          "main1_calls_setup1": true,
+          "disassembly_log": "/private/tmp/glyph-config021/021-target-source-build-witness-disassembly.log",
+          "disassembly_log_sha256": "db77a8c9966bdff8d498fbe96db628e4bdd90eeb42183103a937fdbb483bae95",
+          "startup_proof_pass": true
+        },
+        "uf2": {
+          "path": "/private/tmp/glyph-config021/build/.pio/build/glyph_mk6/firmware.uf2",
+          "sha256": "1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970",
+          "bytes": 802304,
+          "blocks": 1567,
+          "payload_bytes_each": 256,
+          "family_id_hex": "0xe48bff56",
+          "address_min_hex": "0x10000000",
+          "address_max_end_hex": "0x10061f00",
+          "program_region_end_exclusive_hex": "0x1017f000",
+          "filesystem_region_hex": [
+            "0x1017f000",
+            "0x101ff000"
+          ],
+          "eeprom_start_hex": "0x101ff000",
+          "block_errors": [],
+          "no_fs_or_eeprom_overlap": true
+        },
+        "nonclaims": [
+          "No firmware runtime execution",
+          "No controller or hardware PASS",
+          "No device/config write",
+          "No custody/readback/pre-handoff artifact acceptance by this witness",
+          "No full aggregate PASS",
+          "No fresh network dependency resolution",
+          "No prior accepted017 artifact replacement"
+        ]
+      }
+    },
+    "021-independent-operator-route-review.json": {
+      "sha256": "9e4876aa9ebc11f9fa74b08f46eca9ccfc52f39342dfc6c6d26a3aa46d258ef9",
+      "report": {
+        "classification": "READ_ONLY_INDEPENDENT_SOURCE_AND_STAGED_OPERATOR_ROUTE_REVIEW",
+        "established_source_facts": [
+          {
+            "fact": "Accepted017 HandleSetConfig decodes a complete candidate, narrows the generated uint32 custom_mode_config to uint8 for its two reference tests, then persists the candidate and reports success. Its LoadConfig checks stored header/CRC and decodes without a semantic reference check. The 256-to-zero gap is therefore source backed; actual host execution remains supporting evidence, not physical proof.",
+            "sources": [
+              "5994f165:HAL/pico/src/comms/ConfiguratorBackend.cpp:162-285",
+              "5994f165:HAL/pico/src/core/Persistence.cpp:80-108",
+              "/private/tmp/glyph-config021/reference256-host-proof.json"
+            ]
+          },
+          {
+            "fact": "MODE_ULTIMATE dispatch calls Ultimate SetConfig without consuming the custom reference; MODE_CUSTOM dispatch checks and uses that reference. A 256 value on a MODE_CUSTOM row is excluded from this route.",
+            "sources": [
+              "5994f165:src/core/mode_selection.cpp:112-115,140-149"
+            ]
+          },
+          {
+            "fact": "C021 validates the uint32 custom reference before stored publication and refuses a stored invalid Config before backend initialization. Refusal clears watchdog scratch, keeps normal reports and second-core consumers inactive, and has no Configurator recovery path. Physical behavior remains untested.",
+            "sources": [
+              "59033b0:src/core/config_validation.cpp:103-145",
+              "59033b0:config/glyph/common/src/config.cpp:95-111,120-203,214-250"
+            ]
+          },
+          {
+            "fact": "C021 checks physical MB1 and calls the ROM bootloader before stored Config load/refusal; recovery-page and bootloader drawings are guarded by display.begin result. The accepted017 MB1 path also precedes LoadConfig, though its drawing is not guarded.",
+            "sources": [
+              "59033b0:config/glyph/common/src/config.cpp:120-175",
+              "5994f165:config/glyph/common/src/config.cpp:65-96"
+            ]
+          },
+          {
+            "fact": "The exact preserved accepted017 UF2 at its primary content-addressed path independently hashes to e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5, 796672 bytes. Its 1556 valid unique RP2040-family 256-byte payload blocks cover [0x10000000,0x10061400); enclosing 4KB sectors end at 0x10062000. The selected FS is [0x1017f000,0x101ff000), so these addressed payloads and sectors do not overlap FS or EEPROM. This does not prove arbitrary flash-tool or physical media preservation.",
+            "sources": [
+              "primary accepted017 content-addressed firmware.uf2",
+              "/private/tmp/glyph-config021/operator-route-source.json:accepted017_artifact,filesystem_binding"
+            ]
+          },
+          {
+            "fact": "Selected Adafruit_SSD1306::begin returns false when its framebuffer allocation fails; it reaches true after display init commands without a physical-OLED presence test. An absent or disconnected OLED does not establish the begin-false branch.",
+            "sources": [
+              "/private/tmp/glyph-config021/build/.pio/libdeps/glyph_mk6/Adafruit SSD1306/Adafruit_SSD1306.cpp:496-500,627-635"
+            ]
+          },
+          {
+            "fact": "The existing serial tool backup JSON stores rawConfigPayloadBase64 plus decoded config, but does not include raw byte count or SHA; its --write readback_verified means decode and required-binding checks, not byte-exact equality. The operator must compute count/SHA and independently compare GET raw bytes to the reviewed encoded bytes and to the fresh original during restoration.",
+            "sources": [
+              "tools/glyph_serial_config_tool.py:380-394,396-430,520-560,627-660"
+            ]
+          }
+        ],
+        "hardware_PASS": false,
+        "limits_and_unknowns": [
+          "No fresh owner Config has been selected or examined for this review; a suitable ordinary MODE_ULTIMATE row and byte-exact original restoration are pending actual evidence.",
+          "No physical invalid write, rejected C021 boot, recovery, display-failure stimulus, or hardware PASS has occurred in this review.",
+          "The old accepted017 LittleFS constructor uses default begin and can autoformat on mount failure, while its setup can save defaults after a failed load. Route depends on a valid retained filesystem and excludes arbitrary corruption/mount failure; the exact addressed UF2 alone cannot guarantee all physical flash behavior.",
+          "C021 refused mode offers no Configurator read/write path. Recovery requires the pre-load MB1 ROM bootloader route and a successful exact accepted017 rollback before the old Configurator can restore original raw bytes.",
+          "The source-authority JSON retains an older pending owner-width decision and pending-route statement; later authority and reviews must be checked separately. This report grants no implementation, publication, or device authority."
+        ],
+        "physical_safety_PASS": false,
+        "physical_write_authorized": false,
+        "recorded_utc": "2026-10-07T18:22:08.215421+00:00",
+        "repository_or_device_mutated": false,
+        "required_prephysical_gates": [
+          "Resolve and record separate explicit owner authorization for the intentional semantic-invalid 256 physical write under the reviewed C021 protocol. Historical GP-CONFIG-017 write approval and source/width authorization do not authorize this stage.",
+          "Fresh owner-selected complete accepted017 GET backup on the actual device; independently derive raw byte count/SHA, verify decode/re-encode equality, confirm exactly one existing MODE_ULTIMATE row with custom reference 0, and independently review source domains/bindings/counts/defaults and all consumers for the actual profile. The synthetic host fixture is insufficient.",
+          "Derive a temporary artifact with exactly one decoded field transition 0 to 256; preserve all unrelated decoded fields, array order/count/defaults/backend/buttons/RGB. Protobuf re-encoding may alter more than one raw byte, so compare full decoded semantics and the exact reviewed encoded payload rather than assuming a one-byte raw diff.",
+          "Before any firmware update, independently rehash exact future C021 F/UF2 and check all target payloads, enclosing sectors, selected FS/EEPROM partition and manual update workflow. Keep primary accepted017 UF2 custody; prohibit erase-all, nuke, filesystem uploads and unreviewed tools.",
+          "On accepted017, require SET success and a separate GET whose raw payload equals the exact reviewed temporary encoded bytes; stop on any mismatch. Do not rely on the serial tool readback_verified line alone.",
+          "After C021 update, observe exact firmware identity, refused boot on first and repeated boots, no ordinary GC/USB reports, warning only if display is functional, and bad stored bytes retained. No Configurator operation is assumed while refused.",
+          "Before relying on recovery, owner confirms the physical MB1/BOOTSEL and manual UF2-copy route. Roll back exact accepted017 image without mass erase; GET the retained temporary payload there, then write the fresh original through the existing writer. Independently verify original raw byte count/SHA immediately and after reboot, plus ordinary accepted behavior. Stop on any anomaly.",
+          "Treat physical display-begin-false row as NOT_TESTED unless an independently reviewed, safe and authorized stimulus exists. Do not unplug OLED as a proxy, sabotage allocation, introduce a fault command, corrupt storage/CRC, interrupt power, or manipulate filesystem."
+        ],
+        "reviewed_inputs": [
+          "/private/tmp/glyph-config021/source-authority.json",
+          "/private/tmp/glyph-config021/operator-route-source.json",
+          "/private/tmp/glyph-config021/reference256-host-proof.json",
+          "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+          "docs/agent_framework/GP_CONFIG_005_HARDWARE_OPERATOR.md",
+          "exact Git objects for accepted017 and C021 F",
+          "primary accepted017 content-addressed UF2"
+        ],
+        "reviewer": "/root/abi_independent_review",
+        "schema_version": 1,
+        "scope": {
+          "C": "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "F": "59033b0d9341c7568b77292f3035347f3853fb84",
+          "accepted017_F": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+          "candidate_worktree_clean_at_F": true,
+          "review_only": true,
+          "six_production_paths_unchanged_C_to_F": true
+        },
+        "staged_route_assessment": "A protocol may stage a future owner-selected complete accepted017 backup, independently reviewed derived artifact changing only the existing ordinary MODE_ULTIMATE row custom_mode_config 0 to 256 at the decoded-field level, an explicit later owner-authorized ordinary SET/readback on accepted017, exact C021 refusal observations, and manual exact accepted017 UF2 rollback with original raw-byte restoration. This establishes a source-grounded test plan, not a blanket physical safety or acceptance claim.",
+        "verdict": "SOURCE_BACKED_STAGED_ROUTE_REVIEWABLE; PHYSICAL_WRITE_AND_REJECTED021_RECOVERY_NOT_YET_AUTHORIZED_OR_TESTED"
+      }
+    },
+    "021-exact-F-independent-build-protocol-review.json": {
+      "sha256": "b96d419e11d22c87e7102b0dd1cfb8184120a4272ed55d746b2cc8734cba2b3d",
+      "report": {
+        "artifact_custody": {
+          "address_separation": "PASS for exact listed UF2 payloads and enclosing sectors; no arbitrary flash-tool or media guarantee",
+          "candidate_UF2": {
+            "RP2040_family_id": "0xe48bff56",
+            "blocks": 1567,
+            "contiguous_target_interval": "[0x10000000,0x10061f00)",
+            "embedded_partition_words": [
+              "0x1017f000",
+              "0x101ff000",
+              "0x101ff000",
+              "0x17f000"
+            ],
+            "enclosing_4KB_sector_end_exclusive": "0x10062000",
+            "magic_and_number_set_complete": true,
+            "ordinary_flash_family_flag": "0x2000",
+            "payload_bytes_each": 256
+          },
+          "candidate_bytes": 802304,
+          "candidate_primary": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/59033b0d9341c7568b77292f3035347f3853fb84/1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/firmware.uf2",
+          "candidate_sha256": "1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970",
+          "custody_record": {
+            "bytes": 1332,
+            "path": "/private/tmp/glyph-config021/021-exact-F-artifact-custody.json",
+            "sha256": "945087b286fce6ed557721d9492f948182374a14acd80af6bd655252b43524f4"
+          },
+          "primary_equals_exact_build_output": true,
+          "primary_mode": "0444",
+          "rollback_F": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+          "rollback_bytes": 796672,
+          "rollback_enclosing_4KB_sector_end_exclusive": "0x10062000",
+          "rollback_payload_interval": "[0x10000000,0x10061400)",
+          "rollback_primary": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
+          "rollback_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+          "selected_EEPROM_interval": "[0x101ff000,0x10200000)",
+          "selected_FS_interval": "[0x1017f000,0x101ff000)"
+        },
+        "blocking_findings": [],
+        "blocking_findings_for_paper_handoff": [],
+        "candidate": {
+          "F": "59033b0d9341c7568b77292f3035347f3853fb84",
+          "F_is_empty_child_of_parent_tree": true,
+          "branch": "codex/gp-config-021-build",
+          "critical_correspondence": {
+            "C_to_F_all_tree_entries_equal": true,
+            "all_21_changes_docs_or_tools": true,
+            "all_C_to_F_changed_paths": 21,
+            "changed": [],
+            "classification": "glyph_hardware_correspondence.classify_path CRITICAL",
+            "count": 238
+          },
+          "parent": "c5635056a44726655e5b14b00f0edd48cb169d07",
+          "preserved_C": "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "production_source_unchanged_from_C": true,
+          "tracked_checkout_audit": {
+            "HEAD_entries": 1498,
+            "all_index_stage_zero_and_modes_and_oids_match_HEAD": true,
+            "all_live_Git_blob_and_executable_or_symlink_modes_match": true,
+            "all_ls_files_v_flags_H": true,
+            "index_entries": 1498,
+            "live_entries": 1498,
+            "mismatches": 0
+          },
+          "tree": "ef53ee8e549b99e1dc5c5a53ba4b345cb4adbee7"
+        },
+        "classification": "FRESH_INDEPENDENT_EXACT_COMMITTED_F_BUILD_CUSTODY_PROTOCOL_REVIEW",
+        "hardware_PASS": false,
+        "paper_handoff_approved": true,
+        "physical_invalid_write_authorized": false,
+        "protocol_review": {
+          "associated_route_review": {
+            "bytes": 8924,
+            "path": "/private/tmp/glyph-config021/021-independent-operator-route-review.json",
+            "sha256": "9e4876aa9ebc11f9fa74b08f46eca9ccfc52f39342dfc6c6d26a3aa46d258ef9"
+          },
+          "checks": [
+            "Exact F/tree/parent/UF2/rollback identities and build figures match readbacks.",
+            "Starts with accepted017 ordinary baseline observation and one dependent owner action at a time.",
+            "Requires fresh complete owner original backup, independently calculated raw bytes/count/SHA, decode/reencode equality and all source-domain checks.",
+            "Requires valid-C021 boot then accepted017 return and complete raw equality before the 256 stage.",
+            "Limits 256 artifact to one existing MODE_ULTIMATE decoded field and preserves all unrelated fields, arrays, defaults, backend, buttons and RGB.",
+            "Requires independent owner-derived artifact review and separate explicit owner approval before intentional invalid-reference write.",
+            "Requires actual raw GET byte equality because existing serial tool backup omits count/SHA and its readback_verified only checks bindings.",
+            "Requires exact candidate and rollback UF2 rehash/address review; forbids erase-all, filesystem manipulation and new fault/write tooling.",
+            "Treats disconnected OLED as insufficient to establish display.begin false and keeps that physical row NOT_TESTED/PARTIAL until a safe reviewed route exists.",
+            "Requires MB1 pre-load recovery, exact accepted017 rollback, retained bad-payload equality, original restoration immediate/postreboot byte/count/SHA equality, ordinary behavior and all seven rows PASS before merge."
+          ],
+          "compiled_identity_correction": {
+            "F_source_build_artifact_unchanged": true,
+            "actual_owner_display_observation": "NOT_TESTED",
+            "corrected_operator_expectation": "59033b0",
+            "earlier_review_status": "The earlier eight-character About expectation was wrong; historical report and protocol are preserved but superseded for operator use.",
+            "exactly_one_prose_replacement": true,
+            "linked_ELF_and_primary_UF2_strings": [
+              "59033b0"
+            ],
+            "linked_ELF_sha256": "d4515f4c3fa7b5088822ac9775157ec1e96d6bc007ed9c0da205e687f8977848",
+            "prior_operator_expectation": "59033b0d",
+            "prior_reviewed_protocol_sha256": "5ca4996e18ef60e916ac69436fa7c0bf7e93ef2de9612059eb625398be923df8",
+            "source": "builder_scripts/arduino_pico.py git rev-parse --short HEAD; AboutMenu.cpp prints FIRMWARE_VERSION"
+          },
+          "final": {
+            "bytes": 12653,
+            "path": "/private/tmp/glyph-config021/GP_CONFIG_021_HARDWARE_PROTOCOL.final.md",
+            "sha256": "ee13426f1409ee7308af5fd3c9e5d3e4e9eca8f7155211a6eb509619c04a7996"
+          },
+          "final_status": "HARDWARE_TEST_REQUIRED; independent review PASS with no findings for exact paper handoff, physical observations pending",
+          "result": "PASS for corrected exact paper protocol SHA ee13426f...; all physical rows remain pending."
+        },
+        "protocol_sha256": "ee13426f1409ee7308af5fd3c9e5d3e4e9eca8f7155211a6eb509619c04a7996",
+        "recorded_utc": "2026-10-07T18:31:29.952835+00:00",
+        "retained_limits_and_failures": [
+          "Original standalone C021 CLI failure, build-checkout ignored-cache guard failure, two initial exact-F framework checker missing-object failures, historical framework timeouts and unrun full aggregate are not converted to PASS. The clean current replay and finite queue-supported final framework PASS are separately identified.",
+          "No physical invalid-Config write is authorized by this review. Fresh owner profile selection, exact derived payload and explicit later write approval are pending.",
+          "No controller, display-failure, rejected-file persistence or recovery observation has occurred. Physical HEP PASS and source merge remain forbidden until the exact seven-row evidence contract is met.",
+          "No Git publication, firmware/device/config write, build, or repository mutation was performed in this review.",
+          "The first independent protocol review missed an eight-character About-screen expectation. Exact linked firmware uses seven-character 59033b0. The original protocol/review and withdrawn 7d382ae4 pending-publication review are preserved as failed chronology; corrected exact protocol alone is approved for later source-free publication."
+        ],
+        "reviewed_sha": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "reviewer": "/root/abi_independent_review",
+        "schema_version": 1,
+        "source_merge_approved": false,
+        "source_review": [
+          "Exactly six production source paths differ from the source-free canonical base. F shares the merged parent tree, and all production source equals preserved C. Source diff was read for no-autoformat mount, bounded CRC/decode/semantic validation, shared SET/load validator, uint32 custom-reference check, transactional caller publication and refused dual-core startup.",
+          "C021 constructor calls LittleFS.setConfig(LittleFSConfig(false)) before begin; selected LittleFS code only formats after failed mount when _autoFormat is true. Open ambiguity returns StorageFailure and does not publish defaults or write config.bin.",
+          "The exact generated target config.pb.h declares custom_mode_config uint32_t. Semantic validation rejects nonzero256 on MODE_ULTIMATE before SaveConfig/publication; accepted017 source had narrowed this field to uint8. Existing Ultimate mode-selection does not consume the custom reference.",
+          "Core0 checks MB1 before stored load. On refusal it clears scratch0/1, draws only after successful display begin, publishes permanent refusal, and skips backend initialization. Core1 waits for that outcome and returns before menu/RGB construction; both loops gate ordinary operation.",
+          "No physical controller behavior, actual flash/media preservation or supported display-begin-false stimulus is inferred from source or host checks."
+        ],
+        "target_build_and_correspondence": {
+          "build_log": {
+            "bytes": 29994,
+            "path": "/private/tmp/glyph-config021/021-exact-F-target-build.log",
+            "sha256": "0d50ccd39215decb3fcf980ce790b5c01af85b3f93435170669b572ded7a0a00"
+          },
+          "build_status": "PASS exact committed F glyph_mk6 PlatformIO, exit0, 105784/262144 RAM and 388976/1568768 flash",
+          "build_summary": {
+            "bytes": 624,
+            "path": "/private/tmp/glyph-config021/021-exact-F-target-build.json",
+            "sha256": "bd99be76acaa061d85f5b3ca506c8a05916364b867b62d7d37a4d777889c48e8"
+          },
+          "clean_current_replay": {
+            "bytes": 1053,
+            "path": "/private/tmp/glyph-config021/038-final-F021-clean-current-replay.json",
+            "sha256": "641a1f17b51faa5135f097affec3bd6815dc378df6209381f4fbed7568c996ed"
+          },
+          "focused_current_replay": "PASS in clean exact-F proof checkout: semantic 1077/1173, Persistence326/326, SET868+1/868+1, startup40/40, negatives69, MMD194, RAWGET11+2, name/binding20, SET transactions25, keyboard/custom consumer2. Report explicitly retains original-C standalone CLI failure and no hardware claim.",
+          "include_edge_limit": "Selected include directives, SCons path presence and linked objects witnessed; compiler per-object depfiles were not emitted, so no MMD target edge is claimed.",
+          "initial_framework_failure": {
+            "bytes": 1002,
+            "path": "/private/tmp/glyph-config021/038-final-F021-check_glyph_agent_framework_docs.json",
+            "sha256": "1595f04e72654db736fbf09b56e104abe7e440f746fa1a3b6b72f37eeedf16f0"
+          },
+          "metadata": "Seven focused metadata checks PASS on exact F after finite unchanged-queue object support. Initial and intermediate framework docs attempts failed on missing historical Git objects and remain separately preserved; the later actual check PASS is in 038-final-F021-queue-support-framework.json. No tracked source/fixture/body change is implied.",
+          "mutex_linkage": "Direct nm/objdump of exact ELF: boot_state_mutex=__mutex_array_start=0x20002268; array end=0x200022d8. runtime_init loop calls mutex_init on array entries. Platform entry branches to runtime_init before main; linked Arduino main launches core1 before setup, and main1 calls setup1. The static lock is initialized before either setup uses it.",
+          "supported_framework_pass": {
+            "bytes": 2411,
+            "path": "/private/tmp/glyph-config021/038-final-F021-queue-support-framework.json",
+            "sha256": "fd0cc0fb64dec3f03496f5ff22951ed2acd358f13851cb43e5b26617c8273ee0"
+          },
+          "target_source_build_witness": {
+            "bytes": 13277,
+            "path": "/private/tmp/glyph-config021/021-target-source-build-witness.json",
+            "sha256": "7e065c8f44038dd0136eb167ecf027ea552b0d9468af92fb6bdf4812a8cfad8d"
+          },
+          "tracked_and_selected_dependency_correspondence": "Independent 1498 tracked HEAD/index/live audit plus independent rehash of 21 decoder roles, 12 selected framework/SDK/platform/toolchain sources, five compiled objects and exact ELF: 39/39 hashes match witness."
+        },
+        "verdict": "APPROVED_FOR_PREPARED_EXACT_F_HARDWARE_HANDOFF_ONLY"
+      }
+    },
+    "038-final-F021-clean-current-replay.json": {
+      "sha256": "641a1f17b51faa5135f097affec3bd6815dc378df6209381f4fbed7568c996ed",
+      "report": {
+        "label": "F021-clean-current-replay",
+        "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "root": "/private/tmp/glyph-config021/F021-proof",
+        "command": [
+          "/usr/local/bin/python3",
+          "-B",
+          "-u",
+          "tools/check_glyph_c021_proof_replay.py"
+        ],
+        "environment_scope": {
+          "GLYPH_CHECKER_BASE": "c6887115f2e44f0803eb0956ebb574633cec53be",
+          "GLYPH_CHECKER_EXPECTED_MERGE_BASE": "c6887115f2e44f0803eb0956ebb574633cec53be"
+        },
+        "status": "PASS",
+        "exit": 0,
+        "failure": null,
+        "seconds": 104.1740000830032,
+        "stdout": "glyph_c021_proof_replay: PASS; AUTHENTICATED_CURRENT_C021_SOURCE_HOST_PROOF phase=CANDIDATE_VALIDATION_ONLY consumer=None\nsemantic=1077/1173 Persistence=326/326 SET=868+1/868+1 startup=40/40 negatives=69 MMD=194\ncurrent RAWGET=11+2/11+2 name_binding=20/20 SET_transactions=25/25 keyboard/custom_consumer_observations=2/2\noriginal_C_standalone_CLI=RETAINED_FAIL hardware=NOT_CLAIMED target_build=NOT_RUN COBS_wire=NOT_TESTED\n",
+        "stderr": "",
+        "final_head": "59033b0d9341c7568b77292f3035347f3853fb84"
+      }
+    },
+    "021-exact-F-metadata-checks-final.json": {
+      "sha256": "282f805b2c5befff06779c8ad263e1c9aa72014ce01230916e493e7b30eedd7b",
+      "report": {
+        "candidate": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "status": "PASS",
+        "checks": [
+          {
+            "path": "/private/tmp/glyph-config021/038-final-F021-check_glyph_checker_census.json",
+            "sha256": "0d64694def18fe3a5a97d46084eefe5bbaa4d19e5a42625f756e2887e4748dc7",
+            "status": "PASS",
+            "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+            "seconds": 2.2254599999869242
+          },
+          {
+            "path": "/private/tmp/glyph-config021/038-final-F021-check_glyph_runtime_config_validation_health.json",
+            "sha256": "013168e0e3c03e66934186384102616025a99c552dc08c00a1a3a015c0176daa",
+            "status": "PASS",
+            "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+            "seconds": 0.03737829194869846
+          },
+          {
+            "path": "/private/tmp/glyph-config021/038-final-F021-check_glyph_agentic_sequence_protocol.json",
+            "sha256": "bf553ea79ccf6ec6d1308488dc3664ec58e9c2733fc984175507b731ba963def",
+            "status": "PASS",
+            "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+            "seconds": 0.029984666034579277
+          },
+          {
+            "path": "/private/tmp/glyph-config021/038-final-F021-check_glyph_docs_navigation.json",
+            "sha256": "888fb2f9ac246c950f4cefd48fa96d2d14dbf3738258350c32c6ea49ac0a6933",
+            "status": "PASS",
+            "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+            "seconds": 0.06275941600324586
+          },
+          {
+            "path": "/private/tmp/glyph-config021/038-final-F021-check_glyph_docs_agent_surface.json",
+            "sha256": "774b4b406a0673eeb6192da2f704d52ecae4eae2591cd077513bc82abedfb892",
+            "status": "PASS",
+            "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+            "seconds": 20.014010458020493
+          },
+          {
+            "path": "/private/tmp/glyph-config021/038-final-F021-test_glyph_docs_agent_surface_integration.json",
+            "sha256": "8299866f2f9f31f249507949618fab9901b92986649dafb901ad2bca95f610b3",
+            "status": "PASS",
+            "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+            "seconds": 7.112919958017301
+          },
+          {
+            "path": "/private/tmp/glyph-config021/038-final-F021-queue-support-framework.json",
+            "sha256": "fd0cc0fb64dec3f03496f5ff22951ed2acd358f13851cb43e5b26617c8273ee0",
+            "status": "PASS",
+            "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+            "seconds": 14.90369158302201
+          }
+        ],
+        "earlier_failures_retained": [
+          "038-final-F021-check_glyph_agent_framework_docs.json",
+          "038-final-F021-complete-support-framework.json"
+        ],
+        "failure_scope": "Temporary isolated proof object support omitted unrelated historical completion evidence; finite immutable queue-named commit support restored, no source change."
+      }
+    },
+    "038-final-F021-queue-support-framework.json": {
+      "sha256": "fd0cc0fb64dec3f03496f5ff22951ed2acd358f13851cb43e5b26617c8273ee0",
+      "report": {
+        "label": "F021-queue-support-framework",
+        "head": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "root": "/private/tmp/glyph-config021/F021-proof",
+        "command": [
+          "/usr/local/bin/python3",
+          "-B",
+          "-u",
+          "tools/check_glyph_agent_framework_docs.py"
+        ],
+        "environment_scope": {
+          "GLYPH_CHECKER_BASE": "c6887115f2e44f0803eb0956ebb574633cec53be",
+          "GLYPH_CHECKER_EXPECTED_MERGE_BASE": "c6887115f2e44f0803eb0956ebb574633cec53be"
+        },
+        "status": "PASS",
+        "exit": 0,
+        "failure": null,
+        "seconds": 14.90369158302201,
+        "stdout": "PASS: required docs and JSON schemas exist and parse\nPASS: current framework surface is Codex/OpenAI-only\nPASS: model routing includes all required Codex/OpenAI roles and fields\nPASS: Planner/Curator packet object and survivor adversarial cases validate\nPASS: new zero/nonzero Planner receipts and accepted-wait adversarial cases validate\nPASS: current queue/status mirrors match machine-derived runway state\nPASS: current human-readable runway summaries match machine state\nPASS: current prose contains no duplicated unguarded runway claims\nPASS: canonical queue, runway counts, and zero-runway liveness validate\nPASS: completion correspondence direct/replay and negative Git corpus validate\nPASS: Revision 2 authorization, evidence, and user-direction surfaces validate\nPASS: Revision-3 classification/safety/successor/transport-policy negative controls validate\nPASS: persistent campaign directive, safety and chronology controls validate\nPASS: current Revision-3 policy and prospective GP-VAL contracts validate; historical orders preserved\nPASS: firmware implementation authority and hardware merge gate are reconciled\nPASS: legacy project-local control plane is explicitly superseded\nPASS: delegation discovery and accountability adversarial self-tests validate\nPASS: native delegation discovery, role boundaries, and reporting validate\nPASS: four exact scheduled/manual task configurations validate\nPASS: sandbox network/live-remote retry and authentication safety validate\nPASS: branch classifications and judge verdicts are documented\nPASS: AGENTS.md points to framework entrypoints\nPASS: forbidden active claims absent and required non-claims preserved\nPASS: runner prompt and scripts/agent_runner.py are absent\nglyph_agent_framework_docs: PASS\n",
+        "stderr": "",
+        "final_head": "59033b0d9341c7568b77292f3035347f3853fb84"
+      }
+    },
+    "021-F-proof-queue-object-support.json": {
+      "sha256": "3acd4806ae495175da061b51b49329987ab5b28b13d2d6f168a73978b613cfee",
+      "report": {
+        "classification": "PRIVATE_METADATA_EVIDENCE_SUPPORT",
+        "source_queue": "/private/tmp/glyph-config017-resume/integration/docs/project/ACTIVE_AGENT_QUEUE.md",
+        "source_HEAD": "fe7848cd057ff0ad5a634cca6cd6d346be761fcc",
+        "root_rule": "finite full40 Git commit identities already named in unchanged parsed canonical queue; verified commit type",
+        "object_roots": [
+          "0086b1c6c00e6e9478f06fe719220ef400185f68",
+          "0086b388cd230b65e3b9dee0be2e69600b3ae3a0",
+          "01d43af2878a207f20379d46dcee62a842f31810",
+          "03c04c7669c85fee02ff52eb11f75d35fecc9040",
+          "03d5bea14cc8beaf0be1b58e713c3b2cbc9efcd1",
+          "040735f6916c7a77924ef53f1b4a873281f2cb7f",
+          "040fcc9fa94c1e42a538c35cf2b7a1a830c492ca",
+          "0450eb109f46c03e0d10f4114be6b261c7e70074",
+          "045bca0d1450c261c3c60ccf5ef86f7302bd3dbc",
+          "04ea022dd0eb0c6d01771f260aff6bb4af6ae104",
+          "063bc51de8d2b75949546de50104d7cf9e4c8b05",
+          "06903092e086e65904be1ae09e6f377fac50728e",
+          "091834bbb35f785cb67212110339af31a8b64e08",
+          "0a5dd751c391198140ed146853a69fc825d902c7",
+          "0abb9cc1494786e7d6ad6f6abf499608b6c5c565",
+          "0b792540f2f3887da1b2ccc8784c3e07b7316be6",
+          "0bb9e29a2ba8f92483c8a0177997efe32d400030",
+          "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+          "0e180e9671b78f8ed3c2a5c9220a4fcafbfae598",
+          "0efef62a9d4a6254466325eeb0e33184a4848fab",
+          "0f5123ff3560aa19c9fed0fb27581dfd3ffa1311",
+          "0f7f71bfff4b9488d8b148c6eb155ad20cc05589",
+          "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+          "0fbaebfc4729439f10f5e541e995547e46399e8b",
+          "0fd9e30f158fa41b06ea193c32a854a36e8cab31",
+          "11df2f077466df59b192610a7b03818442d747b4",
+          "12cad41ee8157010c512e4772ff62ffdb68771e6",
+          "13a0e76e4de39f6fc7e9c80d210315cb19adf316",
+          "1516ea458003e2948965471b535c3bcb0b4d39e0",
+          "1597c01b416b6aa697d73efc7d2c2b3695dc3e5c",
+          "161dfcf1003f822f5f83014e8b10f426265acb6c",
+          "16bc1b51353dc175ea2e5cffb04e09e8e075b892",
+          "16e1e98d7b82ccf788552db4fcce0818b78e10a9",
+          "174cac2a61b39de543d110fb9319465961501812",
+          "18a71efaa9f268f6ae255987554fd2b2e6ff26ce",
+          "18f451024d8f822cafbf450a80272c2b729c5e7b",
+          "1977ef0d6ec1a65d02947a0b7dae2675c2e8228c",
+          "1b0364ce16b1c20fcea6dfef3ed12130c5c27093",
+          "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+          "1c15b71d2d1658c1fde13689f925c7372308dc1d",
+          "1cfb8ab2315dbccb85544a1c7c44ee7c87b37369",
+          "1e1ad3af210b483c968649f6363e2503a9c968ee",
+          "1f9e58cd15d5d8df5cb07aeca2e03eaf4c81d953",
+          "1fe57c6885e72c1054be3ae9814e912003a8646c",
+          "220b8a1d27bbd31d00f707303b546fe59b3765dd",
+          "2279ee1923004cca4b05c9f6ccc3272e810080cb",
+          "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+          "244837e424c3369b7b4ba0b836ded29d67d5ba87",
+          "24d18bb666985fedd51d8820971c92ae55db9da7",
+          "256bf44cea71f6d5c87aa1675c8dac9f6b79259f",
+          "26b939fa3d3664e839cab8076eea60ddb0f67e9f",
+          "26e3ca148df4de6fb9c10806f97204cc17164f52",
+          "2759a37b8908bd68be8fd830ced313e9ec16bed2",
+          "28426e4ba4763a99f0ca13491c023af77665c79c",
+          "2982e4aef11b5da01b65fac706cb81d7068835bf",
+          "2a80462ba2801192154e42ee4bebb9b1b43ca699",
+          "2aae124c99a54af8b9d66f8b2b5864dd75f2471c",
+          "2b2a48e14e9d621b13038d7a8f29e57713ef462a",
+          "2b734b26439e9028717becf0010e345cb5efce6c",
+          "2c10ff7c19a5ea8a945339d94246218e2f16dcc2",
+          "2d468884e5fa812d33886e2520b8251d9ca970be",
+          "2d50315600e9528df5daa0db57c9e27b7a710732",
+          "2d95d6ba87843708aea56b98d1cd0bb563309c9d",
+          "2f8e93cfe1430a33ef082829d6c9e0340fd66fbf",
+          "2fbda7a674555e23cc6d003f2c0bfa02a97fafc8",
+          "2fd9a827b90b2079f981d75e836833dc99ec7b10",
+          "3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b",
+          "305557cdcdb9857b54ccae0790f71046ca87a4e1",
+          "30f5e348762eafec8ee2845d9d2c002ef5ebe18f",
+          "3138ade526cabde23a0abedcb94acae8512579d1",
+          "3171837fcfe8fa8b9f6ab1d1a8891478c98c76a3",
+          "3194fd86c5391f19e598acae7879d6898e3e2072",
+          "31bdbbc83f3129ecb9cbf5bc4ad20e073bdd60a4",
+          "31c825ddd6ecbfa3a063ab82c1346a2037ed6637",
+          "320fd3fcfbcb810c62171a7be90c55929b6d9b9d",
+          "32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb",
+          "325defbbf7e1cdefe6f7578a924b96073c95dcb6",
+          "327f442b9df6d0c0a15a6ff8365b3c06071323cc",
+          "328c6a1bfb09eb035c2065d0de080283307f34d6",
+          "33694f3a67f336c25b3c82008b3511d06a490016",
+          "3369819a34f82d579e21adff125a25de854f1b9b",
+          "33e24e0bb8ddc6e0ac0a72f9d572b1369dd98939",
+          "34a6c1bc9a9e13dcdf412c8b56a5c53011383503",
+          "34f430886fb808ce70df81e21d926aef05ed7169",
+          "35265beb3fe152f27a50325dd595cdffae703df7",
+          "354ec374f3676e1288e590b09d277729aa94989f",
+          "36e9d5f6782011b560a761c9e26b1b4937d1298f",
+          "37b6d7e5573703f9854674e424b526cf7f5dd1a8",
+          "38017600deb243b5e281edec6d0d378b997d9e40",
+          "3810732a0daa3d4c771d205da5b76d8f7a63dbf4",
+          "38705460afc7061fbebb71d186ed7b9da7051276",
+          "387a2a7b27d11b81c3c571aaf07cf543af626757",
+          "3895736cd7caa7e308f08ff1403cdf6777d98545",
+          "38d50a3a3785b6b92ac6bac4fdf98dc5c3d890e5",
+          "38d57ee2ced51a37475e299fb08a368877a0e507",
+          "38ecceabb136ae0285bc31f1f1ad6a3116bd2059",
+          "3a6714cc056960c0d04f69401942b50e58ce4150",
+          "3a7ed95213d01f2d4ab4cd8e11e2b5376b2980b3",
+          "3a9d41a9927983f1ba5d1e4ff6cf74af57ac634f",
+          "3b4a7c950e1b14e24a88c951c19313f6134f4ea3",
+          "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "3c445363ba15a403597efb7c288e3489db8a5fe0",
+          "3c4f3a915938ee3eef8e6f7402853bd127cf3f78",
+          "3c752b1a13db13d1a99690e25743aa7411909e2c",
+          "3ca30cc8cd39dc69c94ba4120812fae00735d5d4",
+          "3d8866e4a1b38baddded12eb27a6a634a7832f40",
+          "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+          "3e668694f1826ff079b6ecb529d6e3706d8184e7",
+          "3fb785749d8653e91bb8e4b3a73a01be03aaf9cb",
+          "40e38fcf51acd43a2a2cab085cf9848ad4ee3483",
+          "40ebce02e34bd0097925b79fbe1e6a21fc63516a",
+          "4174001e39f23d2dcb438c232bb3b4e498d153a4",
+          "41ba14202450860340e07bea161f7910c3af922c",
+          "42008cd7ddf7b63adb5840fad9c62657c95a87e6",
+          "424387e08695bd9c58d2a16326b93143c8ca405d",
+          "4351b951916abbfbcaffec6f4512571a17d15ca5",
+          "437f87e8086a50f0dfbd834176b80d245c1ed307",
+          "44e7a9e76228dc64f5e1b4b6fc84f26f87e976fe",
+          "46f71c956f1e6866fb9b4f325d7ca751a0741734",
+          "47813ecef8d98fc489a207b16e365c4b8e71f2c1",
+          "47f9b122a7eb60073c114e6568b4d0005ce1edb2",
+          "4859c94c038125f42da6771ad5f1a0396df2333c",
+          "49528e32849069e87f2729c24be35a21b002b6df",
+          "4ce08a163d4e2c18f05f85da1c73e52a16a479a2",
+          "4d6f0ed73bff368546c983c6fe2fcf3be7bcef3e",
+          "4e38028b97ed07e894368564b9f9cdce87ba9c55",
+          "4e50be81716117022318d8dcdc7aa60c4390b605",
+          "4fb7c1e9507547774ff9f55cd7788355648d5d1e",
+          "50a6357eddf0d9c83d31233666c451806fb1f424",
+          "50a7a2c9ab0cfe5d32eea2f3d86146afa6a5c144",
+          "5205ba518d1d5fa19e7584d6c6d5210932091b3e",
+          "522619b0c6e2136d16b13d83f24fa93b3d9bede3",
+          "523fe2506359b68203f7f816ee9cb6a15a775c58",
+          "525296975bcd6791e8e3a57945b2c47e0fc16ef0",
+          "5554328c00c43853008b3f82d4744ee08099782b",
+          "55eaec9bde837e149647627f67e2bf7c34135cca",
+          "565626cdf7014820fcc401bf1f776669b1cf57d6",
+          "575ed922ffb2812a1838e645e636fe2ac59abae9",
+          "57a2413cebe4b85e6d7d2160485700f5d1148ab9",
+          "57a2a4c8d14f5ca906adfd6e73b0eee144c0d41f",
+          "58242472fb47d899bc84ab34db06803d4b778c50",
+          "597a39545f156bd1e032edaf21085ef44589adcb",
+          "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+          "5a3031c1fe02e39f6fec6c921c44d285dfad43ee",
+          "5a47d0b23a8daceb60a26ed5ff547cb413d45589",
+          "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+          "5c7a716728414e38eb136b0ca56bc2fb9781135d",
+          "60614dae8150338160b3440aef6b275bf073fecf",
+          "60e0cc1f784cc5b4638b0b662cd0e4cb6c2001dd",
+          "6152c70e20e00bcb6dda1efb19bf527e341a78fe",
+          "6305781ec7b4099e615f772dc979c3a493626a89",
+          "63616108477bff72e1cda49572a56601782bac3b",
+          "64c9875c53095964ea7a540c7112104ea1a4ab8f",
+          "6536b723336a21ee773a4fa6f367887a97e020cc",
+          "6603249af47f83b7dd4c17214529df7c127011b8",
+          "66f1d25622a79e7ac4298b7558c6013410eabc07",
+          "66fa47dee9dfe04df26be50a20ac74331924cc60",
+          "6823da0c8219dc93a404906fe1be3aaeeb3736d5",
+          "6856ddefd5ea61d8097b2e8523f20200787b49ad",
+          "68dd958fe200618399582929c7c1665c941185e0",
+          "6a10c02909ba27136a427c0360969770988a4684",
+          "6a21c4f442f3de6fe2da42094dbdc32f68c95d2a",
+          "6affdecb526b5571e507cf51d62d3b819b2926bb",
+          "6b0061489cb67d345f212f75268455c181ba271f",
+          "6b36d99b0624047558ed8f9ede83dcaee78e72a9",
+          "6b6424dc9f915530b4a3386cd3864671a236d4e6",
+          "6b8ebcd404dcbfe9b579eed41fb35b889e9da598",
+          "6bc34852e1c823fdeda10f42cc370e5cdec8056e",
+          "6cb59e97ddfdb96830432923ac588a76383153b7",
+          "6d372d91bc22dbc26963300bb3bfcbcdf6101843",
+          "6d3c2812a45d4d59caab9699cdcd080bf1d7571f",
+          "6daa76a301069beef6207731bbc8beaae4451aa1",
+          "6e616fa8adb78b98865e7bd1db1766ac0f56464f",
+          "6eb288e61a0d148530474eef12bd0aa3243e8526",
+          "6f7be340568a03069f605503c5ad67dc7f692bda",
+          "70c02afda69f08711aac715b7a46be6aa1095735",
+          "70c9b0c0c0722b0fd658d5b393ea6a100e1b31a8",
+          "70f5d3b119a2881c9cae52c2c3cf91c75b186257",
+          "71a0467ec0748a582643cb74235f2e66af95b0c5",
+          "71dc9979a78ae2174a232884e1692f833ea80de3",
+          "721cd20388c39beefe6b1b85ce25228a7efe6a0e",
+          "732ac4c9be1b683bae49ac8f67ace8ffc2777a6b",
+          "739c9c58acfde78de1639cd18be5a7c60fa06f1a",
+          "74ae24364b84520d4e0e39240beb9867653cc7b9",
+          "766237660e96189064203c3dc6e00cbdbe0df2c5",
+          "7688ee287491ff05898038045f5c1918be09f675",
+          "76cb953cd6bfe5398db11669f3d195175361700c",
+          "76f6f12ffa053cbabf55d6be64b41ddb89bc292d",
+          "774f2fa2ba397fe3f9cdaf8c92c36ec4f11f9718",
+          "783334b7476f2c68335d6f312669eac72e78316f",
+          "7911692afed3e68becefd8e3c90413d4e230ea82",
+          "79608f5e4ceb91209ffe5d5581b985bb5fe7c347",
+          "797113740c2a601e6231642140863b26dac4aa1e",
+          "79ac6bf1164143d6011a3dad46d047b72352b2a6",
+          "7a042fbdd1dc28db8efbd7c59e1730565fe33288",
+          "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+          "7a3c242d5197ffaec3c3a4884cd62da978e955b3",
+          "7afd85e5d353692b1e3fa015af985ba5e0a46f4d",
+          "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
+          "7ca129e218b292c0aa64b38577848dd8b63a4c66",
+          "7db3cfb56c0630b7bf41c3634fa460440812ac04",
+          "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+          "7eed931aa04d1dbdddb8ef13431fbe150f5382a7",
+          "7f9b097ba0c840afbc5f4d104dfa1756a3dce97c",
+          "80a22333fd783bcd89ac46bab10c219b3cbaf8f6",
+          "8220bc4c05c5fcb53f0bc5a7a52f0646bea311cd",
+          "830f519e95a72c85abea8593c11f1097e5248d49",
+          "83b0e69822676381f4ad432cb97907ae438a5517",
+          "84ba70d28629134c92d0b0d25c9d05fb4bd2596c",
+          "84e999693c5ef058c3a116c1632baa818add6ddb",
+          "85c1ec43abffb737d080f19190b393c591b862ef",
+          "885daf198be7445bec9fa565eca6d3b2784c7842",
+          "896a06c092bfa2f99339c944fceffda957e4478d",
+          "8992f1de9c586a29cd102340f8acce49a1a54456",
+          "8b050cfa1c87b65823f464695ff425efba99ebb2",
+          "8b2c8932304ecf5c56149eb91ec5ddd7511c59e8",
+          "8b4babd8ebea7e4f363b694eeb27435a47befbe7",
+          "8c04262c66613d46b933b1b739c01c575cb0c580",
+          "8d1f49334973429d7b094dbcb3b86d669c465cae",
+          "8d4b69c64316757f1ef23532ee000fa0ac71da5f",
+          "92bad797c3e7e0c32dea2768e1da32870d2aecd8",
+          "92c3e6b44e66314bde72e99783b22867d3abcf7d",
+          "933456a61269d47603f54b31aea33274a6381f6d",
+          "933dd3c93bdce798218e863ac50a5573325a10ef",
+          "93b3c9ee8f702886f731714281ce143428724a17",
+          "952e08998c0c0954773cac88d3067f0721912334",
+          "9550a1bf1309383e351f4f9e66663562fc9f13ac",
+          "9550cb0dd27c943ebb5f7b5ccdc812a50efb7de1",
+          "970d223ae60a522573f1f0da8c3a6a79273cab39",
+          "97267efcf5962a6dfa28a551670455aa3bd91c65",
+          "9ac48cd8eb3aa3a673ba85bdc836b664e6b913aa",
+          "9c0324969a2adbe7d13e611e2f636df6fab4d690",
+          "9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0",
+          "9c7377c8d8e69f8353f275f5acdbfd02fcf07fe2",
+          "9c94b5449b8065cb02aa0689ca0564720238b80c",
+          "9ce55e71eff2be6fee366b52434042985de263e6",
+          "9d1f6cf3ac064d5df7c63fe0d90a0fae8eca48db",
+          "9d4c20cd9f90b0c1b00d3fd3d1cfcacae365b115",
+          "9dff89d835ccb0bb45dd10c79305b9fef5096263",
+          "9ea6c4e4aa23587c540bcd1b36ebd0c2b88b8907",
+          "a0373bde823856c4835bb5aed429d0b402eadd48",
+          "a04e995c1fadc1f8d403c88cea147fb8f99f8939",
+          "a06a3673bc5d35bf2c3eec1eb4c32f618798449f",
+          "a09ba09d35621b3742ee37f961c012f542ce64c0",
+          "a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604",
+          "a1225102179639f06bb00a6735987824b85972ae",
+          "a14b81e3b7fde50c7584dbd1f73f0f42a72a89cd",
+          "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "a3c554ab5b8ee266bb8c1f789d8d103c7aef2e86",
+          "a40e446c09b3f69e699ad697be3eda874a122f62",
+          "a44b3786b362335801fae32048617d332a9ead85",
+          "a49117062282efc077417143c325cae3c55bff4e",
+          "a4c41f84ece9a10bdd65cb46bb7693902fcd44f7",
+          "a59c62793c52130612f39558b7c7e5a70a8c8cf4",
+          "a5ec9012684d7c8e45ef4fbd57aa3a4ac755de55",
+          "a5fec34a6ea07a9c6dd0b307e79e863e59a0ae58",
+          "a63c50d7701480fffaf75b01e2f5f10883e12aa5",
+          "a669992a3379afa3d89593a7f1d46a2a2987dabd",
+          "a747dd54b02b207483142331d8b5be1113fc951e",
+          "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+          "a7bf7dab6980703fd0003b985d05e0e70b2b7468",
+          "a861964418a9b0e84abb89b2146f8430a5e7c69b",
+          "a8e249eb210b7cd1e010e27dee8f4c61f8fcb537",
+          "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+          "aa01750618a50727156881b22a088f1ef55a09d5",
+          "aacff861c7958eefee9fad86e271489ec956ad8e",
+          "ab6e609cf973d8735c034d160966faef780cf90b",
+          "ab8e68ede84468c89365b7f5144889c5728e0583",
+          "ae1d15b9a7941934b26d4371b0ea0e10691629cb",
+          "af77f8f702ab83d74cdf1625cacf763c820ccef5",
+          "afb3121277d12bbd0aa78555f975840f1c8dbb96",
+          "b0162560779f10e568de80cff2baf04aae0447a9",
+          "b0255a3b8e80cafc65d20526aa42769b1b402316",
+          "b0aa22aff74ae7711dad219330b1490e930b8714",
+          "b2a5712afb9f79d94e3c3f6c92f288e1d60328fe",
+          "b2ff798314c9e42f189f280fc1413d6601cef127",
+          "b34ed5b31e8140ef9e0484f8e98e0be942d1169c",
+          "b4e7ad7d4f54ae5aeb06314c08e8e07a0fb19579",
+          "b81c299e1449fc319788a35763b71d3e73d906f1",
+          "b90bcd9cd1595a87123fccf0d9543c55adc3282c",
+          "b9a0a20549909a22a1552f216ded7941b7a26a71",
+          "bbb08a32d531044d2b68cece3a29ee5578014e59",
+          "bc76af250eb61e68daae8b1a91acb6412ecd95a0",
+          "bce59d34bcb6b4158a5f755293f20102c7a0abb9",
+          "bcf5831c00f8ab3a34576e544d9b795eac89e826",
+          "bd0582ba73268a7023edd6c338374aed23907194",
+          "bf9affbb4de1fe97b0e80057daf6d95127db4d2c",
+          "c0916f93ad280f995f39d30a3381389423cad4e4",
+          "c1a9f0fb9e1d3461d813b31d1643344e3e34d223",
+          "c3f3438172c8de977d390c9a2fb2c1037262e2a9",
+          "c4a4ddfb82b2ec7b650202be427ef5797f5092fe",
+          "c6427a35cb8bb5081fcce7d6502eb8357fac08ba",
+          "c664d858ad656554d990196f3c46472ca9ebc46e",
+          "c6887115f2e44f0803eb0956ebb574633cec53be",
+          "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+          "c8d77f0197ae44545c26953c2dca9b160b2f505a",
+          "c91dad6ac3a4a8629e93179d152b882b862a7fd9",
+          "ca7bd671be6437c3cbaf3730f9739a089b272399",
+          "caf0718472c7752c78838be6f1d48b56932d90b9",
+          "caf0822cf3de97a49a7d9b13c920a9951cb24ee2",
+          "caf37e10673896b3bf5e2815875a93310b3f3ac1",
+          "cb742cb0dad1a87019100697dcf15ed8459f31e5",
+          "cbd8b2fab4ca9558d6483564262a4ab9b0a8a69a",
+          "cc57c4fcbcf25c5e33fab21fd5b8312e0543c8dd",
+          "ccb01a1ac3c8a21f69358bc345242303503ffbde",
+          "cccfe43f3b1ffbba82573d3583db8aeb61e2de04",
+          "cf31dfd60b8247a9af19f2c417d8e712d63781ad",
+          "d170509476ecb4bd1fa0fc371cd3c73391ad4f55",
+          "d1ca9abb6dcfbedb7e33cddd96bc54e7da0a6b5e",
+          "d2ec100a57e11fa0e0708b4ffd31a53ea7a6bbb8",
+          "d2f78cd3a3fa38c60d04dab54236ee630ead379e",
+          "d360ff36586133890e9faf07811cc04a806fdbbf",
+          "d392a115e8c48d81d3609a3c6479d21d21608aa9",
+          "d3e5303f3e0584a279ce4a6c5cd82ed1d0c4e8c0",
+          "d5050847d3f850951b3f47865dc8a91aedea0834",
+          "d6fbbbf083c385d7cdfa82627ea2184bb9ded19e",
+          "d70bc26d43a8ce5c4fca9b0263e2e018815039e1",
+          "d740821ad94d7f9adee4dbeb06ead52f9c76bcc6",
+          "d8220daee328eae517c5ed10a1a78460b4f46ba7",
+          "d849fbecb9712751284d9540d8c030aa30273fa7",
+          "d94eb6d629f9e8e73e893971a3f47c4485cf17ee",
+          "d9ad6132ca0912398839673cc0da24e54a924210",
+          "d9d1e72bb18a5e1dbdf05c829a1d11362893933f",
+          "da20f4afaea61e3f48d16ab19e2fb2e2e25e7775",
+          "dae87ac468f3c9ce6512fc96f855083054668a29",
+          "db2502dca3b820d8744ed6d567e5173702dc65ed",
+          "de1d1a23f25368717a038bd4ca3d66a4a33d89a7",
+          "de36d24422a67e8be7992217856c76e8420a71f6",
+          "def48ddd72a095f4ea150de9eca9164eed6c32e6",
+          "dfc92adf2910532e24f429f61ea3c1fe7026425a",
+          "e2523d94eb1023f0146cee9fd975453125c67fa2",
+          "e30fd2435fac5986c6536ae876dd956d9431ef73",
+          "e41e4ea1017b5abde4f17eed1a4bc50404238c75",
+          "e4aeac97ba6e344db456cd9acbc9ebe1e6e61d71",
+          "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "e6f66e3a95b8538f167c13b862d598dadfa31603",
+          "e8ab9b86408d1c89f3b35a07949782d9e3c414ff",
+          "e96ae3025ccadd91e581295fadd73059b9d2c611",
+          "ea5ae10022bc9face69644c5ae9f7ad322940658",
+          "ebdb7f3d728320c4c6ee229f040cb98a29a8b524",
+          "ecbbf5beecae5a5f8837d4261298c8304e2dec96",
+          "efdea79269753e14cc8e6fc75df24830854672f9",
+          "f0a1eab7f75c6c037983e4d7290c63f800f2ede6",
+          "f1977c1104472d1e58733a14a11acf83fef3139b",
+          "f2fd0892ea9856573c59142ca854fe56585454b8",
+          "f37a0ed72bf1f211cad62a10747f5259ac96fdd5",
+          "f38af61a88b8458ff376825607fcc33060a6e907",
+          "f466ac50e23ff62ecc0825de44501b30a8f0e23b",
+          "f4771e17430fd1ea3f1e3e5339a83dfe648290a3",
+          "f657715b26d26587a931074ce7dd12c698785290",
+          "f72bff6fd752f6b3643557743058b3a40888c8d8",
+          "f78577e59ad279c0d1b832c4eb0f043de2df51f9",
+          "f8610327da8283c914c0e9b478276e67aea0f4bb",
+          "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+          "fb3d96fd8eb2f51081a663a7f729710e74e780f7",
+          "fbf2d1c99569ddee3e5432501ddc868bbdee4990",
+          "fc5ef65027ee18c21cbdb9e3b347e70a16c7eb3f",
+          "fceebd9793d276480dfa4e72149ecc6e4e383c2c",
+          "fd6044109ce3af2311c32875979dc37849dd75be",
+          "fddc676c16c509c1ca7fe74acf3e266a789d05d2",
+          "fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d",
+          "ffba28772d8559df4b356de9b3a3f02248d16c07",
+          "ffc007552abc848051841362b0b0ac4c1a7d087b"
+        ],
+        "pack_sha256": "e8c4c023611bd72df25bf8a1a0a966dbfdfee86d80a0774041c53eb25d99e2e6",
+        "no_network_or_source_changes": true,
+        "prior_framework_FAIL": "retained twice; fixedROOTS and campaign-only roots did not include unrelated hardware completion evidence",
+        "repair_status": "full queue-named commit support added; final actual checker result separate"
+      }
+    }
+  },
+  "all98_other_queue_objects_unchanged": true,
+  "candidate_source_integrated": false,
+  "hardware_result": null,
+  "hardware_evidence_gaps": [
+    "All seven exact human GP_CONFIG_021_HW_V1 rows are pending; no inherited predecessor or host acceptance.",
+    "Fresh valid owner Config/raw backup, exact one-field MODE_ULTIMATE custom_mode_config0-to256 artifact independent review and separately explicit intentional physical-write approval precede that stage.",
+    "A safely testable reviewed physical display-failure route must be established; missing OLED is not proof of display.begin false. Unavailable route stays an explicit gap, never PASS."
+  ],
+  "physical_invalid_write_authorized": false,
+  "first_action": "One connection on accepted017 normalgameplay; baseline report. No firmware or Config change.",
+  "lock_release": "Only reviewed source-free pending publication/live verification at hardwarewait"
+}
+```
+<!-- gp-config021-hardware-handoff:end -->
