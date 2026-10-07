@@ -1,8 +1,8 @@
 # Active Agent Queue
 
-## Current GP-CONFIG-021 activation
+## Current GP-CONFIG-021 handoff and GP-VAL-038 activation
 
-Mechanical GP-CONFIG-021 activation is recorded against live-verified canonical `e4aeac97ba6e344db456cd9acbc9ebe1e6e61d71` after strict017/035/020 completion, exact hardware-bearing predecessor PASS with no gaps, immutable source/default/schema/decoder and finite accepted020/014/017 transitions. All236critical entries equal acceptedF017. The independently verified owner width directive resolves the bounded custom-reference defect; source-defined zero and valid-reference behavior remain unchanged. Source-grounded staged manual recovery is independently reviewed; physical invalid writes await explicit owner action after the exact candidate/artifact/protocol gates. Fresh C021 is an output. Commit C and exact conformance inventory, activate existing038, and do not build/integrate C021 before038 strictDONE. Firmware remains accepted017; no C021 source, build, UF2 or hardware PASS is claimed. Other98orders and all accepted hardware tuples remain unchanged. Historical failures/debt remain preserved. Nunchuk NOT_TESTED; root cause UNPROVEN.
+GP-CONFIG-021 candidate `a170bd40a51741582913324bfecbc14ce9b3211d`, tree `91ca6d86c2fa28b55ef5a6b3623b25748b167feb`, is committed, published and independently approved against sole direct live-verified base `c6887115f2e44f0803eb0956ebb574633cec53be`. The complete66-path inventory authenticates six adopted production deltas and60 source-free proof/metadata paths;232 untouched critical entries equal acceptedB/F017. Both host layouts and69 negative controls PASS through independently executed byte-exact host engines. The actual standalone CLI FAIL on56 unclassified coupled host literals and two aggregate SETUP_FAILURE/source_context results with zero checker execution remain recorded. GP-CONFIG-021 is REVIEW and existing GP-VAL-038 is mechanically READY for its finite admission/current-versus-historical governance repair; all affected and protected actual checks remain mandatory before038 strictDONE. The same GLYPH-UD-029 executor continues038 then preserved021 composition, exact committed build/custody/review and hardware handoff. Canonical firmware remains accepted017;021 target build, UF2 and hardware acceptance are pending. No physical invalid Config write is authorized. Other98orders and accepted hardware tuples remain unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN.
 
 GP-CONFIG-017 is DONE after reviewed exact tested-source integration `a9232dd71dbaac888d343227bbdc8f2d66bcb20a` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a` follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b`; the native035 catalog preserves original C, exact F/M/tree, earliest reviewed R and accepted E. All236 critical source/build inputs equal tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`. The accepted UF2 remains e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5,796672bytes, freshly rehashed. Seven owner-reported GP_CONFIG_017_HW_V1 rows PASS with empty gaps; Mac/XInput satisfies SHIFT/XWAVE actual-host coverage, GC/Switch/WUP-028 and Mac/XInput Ultimate/X1 pass, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored byte-exactly before and after reboot. Initial focused19PASS/navigationFAIL and repaired7metadataPASS both preserve nativeMATCH; the actual failure remains recorded. Fresh independent integration review approves exact source/catalog/correspondence. Historical aggregate FAIL/TIMEOUT and framework debt remain honest; no full aggregate PASS, rebuild or retest. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. All98 other orders and accepted014/020 evidence remain unchanged. The same H3 executor next evaluates existing021/038 authority, source conformance and a safely executable rejected-storage test/recovery route. No C021 candidate, device operation or new work order is claimed. The owner test environment stays frozen and untouched. The initial2026-10-02 adoption recorded RUNWAY_OK; the marker at the C017 completion snapshot recorded PLANNING_REQUIRED; the current marker above supersedes it.
 
@@ -162,7 +162,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   },
   "runway": {
     "immediate_ready": 1,
-    "recorded_preauthorized": 7,
+    "recorded_preauthorized": 6,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
@@ -868,7 +868,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-021",
       "title": "Transactional persisted acceptance and latched recovery",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-config-021-release-safety",
       "objective": "GLYPH-UD-023 supplies refusal fallback. Current OLED APIs cannot establish visible warning reliability, so the adopted narrower refusal path skips all output/save-capable construction. Source-compatible private candidate, callback and early dual-core branches resolve architecture now; build/hardware proof remains mandatory.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -918,8 +918,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": true,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "a170bd40a51741582913324bfecbc14ce9b3211d",
+      "candidate_base_configurator_sha": "c6887115f2e44f0803eb0956ebb574633cec53be",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -932,7 +932,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-038",
       "title": "C021 recovery candidate governance",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-038-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -980,9 +980,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -8179,11 +8179,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-021"],"immediate_ready":1,"recorded_preauthorized":7,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-038"],"immediate_ready":1,"recorded_preauthorized":6,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-021; Immediate Ready: 1; Recorded Preauthorized: 7; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-038; Immediate Ready: 1; Recorded Preauthorized: 6; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -25869,3 +25869,1111 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config021-activation:end -->
+
+## GP-CONFIG-021 Candidate Handoff and GP-VAL-038 Mechanical Activation
+
+<!-- gp-config021-handoff-val038-activation:start -->
+```json
+{
+  "schema_name": "glyph_gp_config021_candidate_handoff_val038_activation",
+  "schema_version": 1,
+  "canonical_base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+  "candidate": "a170bd40a51741582913324bfecbc14ce9b3211d",
+  "candidate_tree": "91ca6d86c2fa28b55ef5a6b3623b25748b167feb",
+  "candidate_direct_parent": "c6887115f2e44f0803eb0956ebb574633cec53be",
+  "candidate_branch": "codex/gp-config-021-release-safety",
+  "live_verified_candidate": "a170bd40a51741582913324bfecbc14ce9b3211d",
+  "live_verified_canonical": "c6887115f2e44f0803eb0956ebb574633cec53be",
+  "source_free_canonical": true,
+  "original_mechanical_conditions": [
+    "Strict DONE correspondence for GP-VAL-035; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
+    "GP-CONFIG-021 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-021 scope; expected full-aggregate failure does not bar candidate creation.",
+    "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
+    "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
+  ],
+  "objective_conditions_result": [
+    "Strict035DONE and strict017/020DONE; accepted predecessor exact F/artifact PASS with empty gaps and authenticated020/014/017 critical chain.",
+    "Clean committed sole directparent C/B/tree and complete66-path raw NUL inventory; canonicalB and featureC live-verified; fresh independent exact conformance APPROVED.",
+    "Six adopted production paths only;232 other critical entries equalB/acceptedF017;60 source-free regular100644 proof/metadata paths outside unchanged firmware build filters/include roots/extra scripts.",
+    "No product/policy/authority expansion, forbidden capability, dirty/staged/untracked/ignored critical input or failed hardware. Native HEAD/index/live/flags and finite object/source closure independently verified."
+  ],
+  "review_sha256": "6d90b29bf0c8de5a03057abd2dc304b46e9b16745ccafd245778aff76f61d134",
+  "independent_review": {
+    "classification": "FRESH_INDEPENDENT_EXACT_C021_CANDIDATE_CONFORMANCE_REVIEW",
+    "reviewed_sha": "a170bd40a51741582913324bfecbc14ce9b3211d",
+    "reviewed_tree": "91ca6d86c2fa28b55ef5a6b3623b25748b167feb",
+    "base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "sole_parent": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "reviewer": {
+      "agent_path": "/root/val034_review",
+      "model": "gpt-6.1-sol",
+      "independent_of_implementation": true,
+      "eligibility": "Sol permitted; session model independently confirmed earlier in this persistent review."
+    },
+    "verdict": "APPROVED",
+    "blocking_findings": [],
+    "approval_scope": "Exact frozen C021 candidate conformance, candidate feature publication and mechanical activation of its existing ordinary GP-VAL-038 governance successor. This approval does not establish strict standalone CLI admission, protected consumer execution, GP-VAL-038 completion, target firmware build, integration, or physical acceptance.",
+    "scope_basis": "The complete READY work order and independently verified bounded owner full-width directive authorize this six-source candidate. The ordinary governance successor must extend authenticated finite candidate/replay admission and execute the affected safety obligations. The preserved admission defect is required successor work, not a passed check or a waiver.",
+    "source_and_custody": {
+      "raw_inventory_sha256": "09ac5a6ae8db4d0cba50731187057394a3a8819969abd769f331765b58d7878d",
+      "complete_changed_paths": [
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "config/glyph/common/src/config.cpp",
+        "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/gp_config021_persisted_recovery.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/gp_config021_persisted_recovery.md",
+        "docs/runtime_config/runtime_config_validation_health.md",
+        "include/core/config_validation.hpp",
+        "src/core/config_validation.cpp",
+        "tools/check_glyph_gp_config021_persisted_recovery.py",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/library.json",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/library.nanopb-arduino.json",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/library.json",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+        "tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Print.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Stream.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Wire.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/avr/pgmspace.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h",
+        "tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp"
+      ],
+      "changed_path_count": 66,
+      "all_changed_files_regular_mode": "100644",
+      "production_changes": [
+        {
+          "path": "HAL/pico/include/core/Persistence.hpp",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "43cbd3f39b4c9a09ecc855b0f2704b2081a45981",
+          "new_blob": "a73d15f088a63cab63100c22f177026ca3436901",
+          "status": "M",
+          "new_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+          "bytes": 1824
+        },
+        {
+          "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "6ca93c96c944ee539a2d409e32889306c1eafac7",
+          "new_blob": "1c324fddfbf22879ad1c974ace2ec8ff1605f711",
+          "status": "M",
+          "new_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+          "bytes": 5812
+        },
+        {
+          "path": "HAL/pico/src/core/Persistence.cpp",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+          "new_blob": "69e4f0c327b43e940e2e8cf4cf32b65e349f9a97",
+          "status": "M",
+          "new_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+          "bytes": 8940
+        },
+        {
+          "path": "config/glyph/common/src/config.cpp",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+          "new_blob": "d78359d1df10dc70cef8a03b487c2bbfcc80ada3",
+          "status": "M",
+          "new_sha256": "a5fe03b570d058644d13285b895648110196b8cffbe4a4a053b92d2bead19558",
+          "bytes": 11964
+        },
+        {
+          "path": "include/core/config_validation.hpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "92042dd4745bce79b1d7d773edacba302e8a6d7c",
+          "status": "A",
+          "new_sha256": "b4d9c4937402406dc0cbd25ec83f27ea859f49258e4219272aa9dee75c52c4d5",
+          "bytes": 559
+        },
+        {
+          "path": "src/core/config_validation.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "46fd7df78b160f1f874614852c4784583f7dc727",
+          "status": "A",
+          "new_sha256": "d9536b639e8a36d834a8f7df1923789e559db59061255454767332a7f0c74b0e",
+          "bytes": 6620
+        }
+      ],
+      "all_tracked_HEAD_index_stage0_live_modes_flags_verified": 1490,
+      "critical_total": 238,
+      "untouched_critical_equal_ready_B_and_tested_F017": 232,
+      "six_production_pins_match_prior_source_review": true,
+      "queue_blob_identical_to_ready_base": true,
+      "all99_queue_objects_unchanged": true,
+      "untracked_paths": 0,
+      "ignored_paths": 3,
+      "untracked_or_ignored_critical_paths": [],
+      "pio_build_outputs_absent": true,
+      "final_head_tree_and_clean_tracked_diff_rechecked": true,
+      "fingerprint_limit": "Independent audit proves current HEAD/stage/live bytes, modes and flags. It makes no final raw-index global fingerprint MATCH claim."
+    },
+    "source_authority_and_behavior": {
+      "owner_directive_message": "01a1167e-986b-7030-9f14-af7d095ce839",
+      "fullwidth": "Only the owner-approved generated uint32 custom reference correction changes narrowed raw admission: 256 cannot wrap to zero. Source-defined zero and valid references, count/type checks, error order and downstream representation remain as reviewed.",
+      "pure_validator": "Generated top and nested extents are checked before iteration; source reference/type/order checks and immutable 020 binding validation are shared through allocation-free validation.",
+      "persistence": "No-format mount configuration and its result precede begin. Private reset candidate, exact header/I/O/CRC/decoder bounds and semantic callback precede caller assignment. Storage uncertainty refuses. Successful SaveConfig body is preserved byte for byte except the leading mounted-availability guard.",
+      "startup": "Mutex-protected Pending/Normal/refusal publication prevents normal construction/report/save/Configurator paths on refusal. MB1 remains before Load. Recovery drawing requires successful display initialization; core0/core1 refusal gates and scratch0/1 clearing were exercised.",
+      "scope_limits": "No new default USB/RGB validity policy, blanket zero prohibition, atomic file-write or power-loss guarantee, neutral-schema change, physical transport acceptance, or proven underlying hardware root cause."
+    },
+    "actual_independent_host_proof": {
+      "entry": "Unchanged native run_host API with literal 214 PINS after independent complete source/index/live audit, native _live_inputs, fixture identity and source_contract; no monkeypatch or classifier override.",
+      "verdict": "PASS_HOST_BODY_ONLY",
+      "elapsed_seconds": 50.53534129197942,
+      "ABIs": [
+        "ordinary enum",
+        "short enum"
+      ],
+      "actual_MMD_repository_dependencies": 194,
+      "input_pin_catalogue": 214,
+      "manifest_dependency_catalogue_including_fixture": 215,
+      "controls_total": 69,
+      "controls": {
+        "actual_literal_TU_runtime_rejection": 32,
+        "architectural_source_rejection": 10,
+        "actual_input_identity_rejection": 23,
+        "actual_Git_custody_rejection": 4
+      },
+      "all_runtime_mutants_actually_compiled_linked_and_rejected": true,
+      "all_input_hashes_unchanged": true,
+      "harness_cases": {
+        "semantic_short": 1077,
+        "semantic_ordinary": 1173,
+        "persistence_each_ABI": 326,
+        "setconfig_each_ABI": 868,
+        "fresh_missing_callback_each_ABI": 1,
+        "whole_startup_each_ABI": 40
+      },
+      "platform_boundary": "Host mutex/display/FS/time/bus doubles model platform seams. Own application/backend/menu/mode/report translation units remain literal; the sole application header adapter changes one default-argument parameter name. Sanitizers are fatal; positive startup observers and refusal poison-pointer loops prevent zero-counter masking.",
+      "instrumentation_limit": "Constructor counters are entry events, not object counts. Exact nm constructor addresses/image base and exact dladdr function matches were reviewed. NDEBUG does not disable harness requirements.",
+      "target_limit": "Host locks and platform doubles do not prove target SDK ABI, actual mutex_array linkage/initialization, intercore hardware behavior, physical bus/display behavior, or target RAM/flash."
+    },
+    "metadata": {
+      "postcommit_manifest": "Actual PASS; 59 entries, 43 exclusions; all prior 58 entry objects, category/schema/exclusions unchanged; one current load-bearing candidate_safety entry added.",
+      "census": "Root actual PASS; 218 checkers.",
+      "health": "Root actual PASS; 59 current entries, 53 load-bearing.",
+      "diff_check": "Full diff-check FAIL retained for whitespace in four byte-identical upstream dependency copies. Remaining 62 paths PASS. No upstream bytes were rewritten to manufacture a full PASS."
+    },
+    "retained_actual_failures": [
+      {
+        "check": "Strict committed no-argument C021 CLI",
+        "result": "FAIL",
+        "message": "unclassified correspondence path: docs/runtime_config/fixtures/gp_config021_persisted_recovery.json",
+        "classification": "Concrete standalone checker admission/integration defect; 56 new proof literals require bounded ordinary GP-VAL-038 exact admission/current replay repair. Affected obligation remains open before successor DONE/build."
+      },
+      {
+        "check": "Full aggregate attempt 1",
+        "result": "FAIL SETUP_FAILURE",
+        "phase": "source_context",
+        "message": "Missing local refs/heads/configurator",
+        "executed_entries": 0,
+        "canonical_proof": "MATCH",
+        "census": "PASS"
+      },
+      {
+        "check": "Full aggregate attempt 2 after local configurator base ref repair",
+        "result": "FAIL SETUP_FAILURE",
+        "phase": "source_context",
+        "message": "017 current source outside B/C critical trees",
+        "executed_entries": 0,
+        "canonical_proof": "MATCH",
+        "census": "PASS"
+      }
+    ],
+    "mandatory_before_target_build": [
+      "GP-VAL-038 must authenticate immutable exact C/B/full 66-path reviewed inventory, dependency pins, original checker bodies and finite current/replay arguments; preserve the standalone CLI FAIL chronology and repair admission without self-whitelisting or re-sealing candidate inputs.",
+      "Execute all five protected full checker bodies and affected current/composed/history/acceptance/negative consumer obligations against the authenticated candidate extension. Their C aggregate bodies were not executed and are not claimed PASS here.",
+      "Complete independently reviewed strict ordinary GP-VAL-038 DONE before resuming exact target build. Preserve real aggregate failures/timeouts and any applicable older synthetic admission debt without claiming full aggregate PASS.",
+      "Target proof must establish actual selected SDK mutex/runtime/crt0/linker initialization and mutex_array retention before main/core1, ABI/closure and RAM/flash margins, exact compiled source identity, resolved dependencies and UF2 exclusion of filesystem sectors.",
+      "Fresh exact-build custody/protocol review and later explicit owner physical stage remain required. Candidate approval authorizes no invalid physical Config write, flash, device action, hardware PASS or firmware integration."
+    ],
+    "historical_evidence": "Earlier owner-decision-required assessment remains valid historical chronology; independently read owner width approval supersedes that pending decision only within its named correction. Earlier failed compilation, observer/fixture runs, staged manifest setup failure, cache/build/aggregate/framework observations remain preserved, without inferring a physical root cause.",
+    "live_remote": "Independent ordinary verification failed DNS; identical permitted escalated read-only verification succeeded with canonical B021 and frozen F017 unchanged. Candidate feature branch was absent before publication; no account credentials changed.",
+    "provenance": [
+      {
+        "path": "/private/tmp/glyph-config021/candidate-conformance.json",
+        "sha256": "2c38eb6a389fa33d0f22648cbc49797fbe81402ecebf8638152b432d7c0a4c51"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/candidate-raw-inventory.bin",
+        "sha256": "09ac5a6ae8db4d0cba50731187057394a3a8819969abd769f331765b58d7878d"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/independent-c-native-source-audit.json",
+        "sha256": "edbabbc25f642442441b8e96b76432b725a7bd658cae3aa7aef7db4b3ea8bb8c"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/independent-c-extra-paths-audit.json",
+        "sha256": "729c62e614b02f60fd248c8101137767e1d9a494491d9e8deed719dcbe7ca0e9"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/independent-host-api-proof.json",
+        "sha256": "ae9a1167d362ad612f2656f0050d575044a1e798f48e7acab1547d61b62f1a1b"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/independent-host-api-execution/execution.json",
+        "sha256": "f6a8ced5c9e9e25e95dcf0c1056b14bf750512f1f3f84aa0836d979f94d44718"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/candidate-component-custody-proof.json",
+        "sha256": "9c38f6cd7edcf02c28d5f71622733c6d19327d2fd3584b2879fe9071a336e3cd"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/candidate-native-integrity.json",
+        "sha256": "c007fb385378a57ace330866b8cc19a2da25e003114b1e22cec187893769a2a6"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/committed-c-host-check.log",
+        "sha256": "4d7f74fd5527924e4349357e7930f568449cd9b7d9c02b84a189eb6b4b27c103"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/committed-c-manifest-check.log",
+        "sha256": "210a603b8d1f68e1a26a43994f7b770ff15e8f0901eeeef680db146f94197866"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/committed-c-full-aggregate.json",
+        "sha256": "6228c3df5aaa1ce9cda269dc31c4a9277d20e4417018c538b532a296ae5666df"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/committed-c-full-aggregate2.json",
+        "sha256": "4cd95e9691fde51209bf250e4841f37b09d9626e787ce9e735ff4632bb2321af"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/candidate-diff-check-classification.json",
+        "sha256": "3f33f921b20a9418301a0a4022b6ecce9e0c69de2249b10e148e79dc62c62312"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/candidate-full-diff-check.log",
+        "sha256": "559da01d41784d57fae081d4575529ecd21585c5e32bac098631d4814103655b"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/owner-width-approval-readback.json",
+        "sha256": "ce638216b55b453c4828e40c1da008d63570f706b49f75202d2eba4d8e27d32d"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/independent-reference-width-authority-supplement.json",
+        "sha256": "24c7321eb82a5ed39a918f996bfb36da87a7fc29090c20b7c65894d76f3d8c21"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/independent-operator-route-review.json",
+        "sha256": "7d76926dfaa0b982d3180eb9c719196d772d8fde4c6eba37d26ae3c885ad909e"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/operator-route-source.json",
+        "sha256": "ab7a2b20aeaf071ba0a4f27a6f2f828c90faa20c5bcd14454c0114738fb0cde6"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/source-draft-independent-review.json",
+        "sha256": "8020bffd04d4343788ccd96386fcdee9a123311e43d33e4a2ef9316c54f7372e"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/host-adapter-independent-review.json",
+        "sha256": "6e6e36e039884f222dc355398a60aeacf2a24996f2c9b919c43a5924f2238cda"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/startup-observer-repair-independent-review.json",
+        "sha256": "2a75bf36d25e250884cfb30892dc187f24bb46cad75030619cae948703c6e7c8"
+      },
+      {
+        "path": "/private/tmp/glyph-config021/host-work/checker-c-strict-cli-assessment.json",
+        "sha256": "ee5712cee108b875b3fdcf67c19b421cf919554abaad03bb11e2347446dbd3b3"
+      }
+    ],
+    "written_at_utc": "2026-10-07T15:54:43.363643+00:00"
+  },
+  "source_proof_sha256": "f1a3a90beb9e953374302e2537351ee6a08c63b6d289b2120ca8dc554a3724c1",
+  "source_proof": {
+    "schema_version": 1,
+    "classification": "EXACT_C021_SOURCE_HOST_CONFORMANCE_CANDIDATE_ONLY",
+    "candidate": "a170bd40a51741582913324bfecbc14ce9b3211d",
+    "base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "tree": "91ca6d86c2fa28b55ef5a6b3623b25748b167feb",
+    "direct_parent": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "complete_inventory_count": 66,
+    "raw_inventory_sha256": "09ac5a6ae8db4d0cba50731187057394a3a8819969abd769f331765b58d7878d",
+    "critical_total": 238,
+    "untouched_critical_equal_B": 232,
+    "source_paths": [
+      "HAL/pico/include/core/Persistence.hpp",
+      "HAL/pico/src/core/Persistence.cpp",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "config/glyph/common/src/config.cpp",
+      "include/core/config_validation.hpp",
+      "src/core/config_validation.cpp"
+    ],
+    "source_frozen_sha256": "29668cd5fa4165c60f72d9c72f86094820923327b8b4a9e82b0300ecc93bc075",
+    "fixture_sha256": "1950bf1e0de54275e14755d1cbde42964c64731770a58958eb2c2106358c424c",
+    "runtime_host_engine": {
+      "result": "PASS",
+      "full_evidence_sha256": "65c810b396cb75267192dab0c9912ffdbe48228a86f7c6db12d283be86dd5663",
+      "literal_MMD_dependencies": 194,
+      "negative_controls": 69,
+      "enum_abis": [
+        "short",
+        "ordinary"
+      ],
+      "root_elapsed_seconds": 47.115434999985155,
+      "independent_elapsed_seconds": 50.535
+    },
+    "component_custody_body_proof_sha256": "9c38f6cd7edcf02c28d5f71622733c6d19327d2fd3584b2879fe9071a336e3cd",
+    "native_integrity_sha256": "c007fb385378a57ace330866b8cc19a2da25e003114b1e22cec187893769a2a6",
+    "retained_failures": {
+      "standalone_C_CLI": "FAIL_56_NEW_HOST_LITERAL_ADMISSION_DEFECT",
+      "aggregate1": "FAIL_SETUP_MISSING_LOCAL_CONFIGURATOR_REF_ZERO_ENTRY_EXECUTIONS",
+      "aggregate2": "FAIL_SOURCE_CONTEXT_017_CURRENT_SOURCE_OUTSIDE_B_C_TREES_ZERO_ENTRY_EXECUTIONS",
+      "full_diff_check": "FAIL_EXACT_UPSTREAM_WHITESPACE_4_LITERAL_BYTE_COPIES_REMAINING62_PASS"
+    },
+    "mandatory_038_repair": "Authenticated exact C/B/inventory/custody and current/replay admission; unchanged C engine; all affected/protected current and historical consumer proofs. No pin reseal, C amendment or classifier override.",
+    "target_build": "NOT_BUILT",
+    "firmware_source_integrated": false,
+    "physical_invalid_write_authorized": false,
+    "physical_acceptance": "NOT_CLAIMED",
+    "source_free_canonical": true,
+    "other98_orders_unchanged": true
+  },
+  "conformance_sha256": "2c38eb6a389fa33d0f22648cbc49797fbe81402ecebf8638152b432d7c0a4c51",
+  "conformance": {
+    "classification": "EXACT_COMMITTED_C021_CONFORMANCE_INPUT_NOT_INDEPENDENT_APPROVAL",
+    "candidate": "a170bd40a51741582913324bfecbc14ce9b3211d",
+    "base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "tree": "91ca6d86c2fa28b55ef5a6b3623b25748b167feb",
+    "direct_parent": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "complete_inventory_count": 66,
+    "raw_inventory_sha256": "09ac5a6ae8db4d0cba50731187057394a3a8819969abd769f331765b58d7878d",
+    "raw_inventory_file": "/private/tmp/glyph-config021/candidate-raw-inventory.bin",
+    "inventory": [
+      {
+        "path": "HAL/pico/include/core/Persistence.hpp",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "43cbd3f39b4c9a09ecc855b0f2704b2081a45981",
+        "new_blob": "a73d15f088a63cab63100c22f177026ca3436901",
+        "status": "M",
+        "new_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+        "bytes": 1824
+      },
+      {
+        "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "6ca93c96c944ee539a2d409e32889306c1eafac7",
+        "new_blob": "1c324fddfbf22879ad1c974ace2ec8ff1605f711",
+        "status": "M",
+        "new_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+        "bytes": 5812
+      },
+      {
+        "path": "HAL/pico/src/core/Persistence.cpp",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+        "new_blob": "69e4f0c327b43e940e2e8cf4cf32b65e349f9a97",
+        "status": "M",
+        "new_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+        "bytes": 8940
+      },
+      {
+        "path": "config/glyph/common/src/config.cpp",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+        "new_blob": "d78359d1df10dc70cef8a03b487c2bbfcc80ada3",
+        "status": "M",
+        "new_sha256": "a5fe03b570d058644d13285b895648110196b8cffbe4a4a053b92d2bead19558",
+        "bytes": 11964
+      },
+      {
+        "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "95fc94408529f44fe17edafcaf047beb123b3aa0",
+        "new_blob": "29edcfb2d7d5f7af57e8736fef979bb5f31214c9",
+        "status": "M",
+        "new_sha256": "8193049f9c52613ee38202f7121437bf1ad1605a52e68070070ccdb66c376548",
+        "bytes": 596577
+      },
+      {
+        "path": "docs/runtime_config/fixtures/gp_config021_persisted_recovery.json",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "6704ef0183d7469b803156a44cec76e2e18469d9",
+        "status": "A",
+        "new_sha256": "1950bf1e0de54275e14755d1cbde42964c64731770a58958eb2c2106358c424c",
+        "bytes": 55965
+      },
+      {
+        "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "17f4edbda39bafa960361fb22345235179047913",
+        "new_blob": "abbc6848ab55ad3757b6daa7ca1e847eb55ed25f",
+        "status": "M",
+        "new_sha256": "4f5b7ef0ff5c1ae7a811c904a37bff0e68d7e4b4268f02ea404efd9ec1c30c9c",
+        "bytes": 3032
+      },
+      {
+        "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "3dd2d2afcc92c08a10b0d5b47687f8b45f224e49",
+        "new_blob": "edbe6da8e01f7e2fd4eac782b9b1a3ccfa5d3a39",
+        "status": "M",
+        "new_sha256": "53d134879e38dd7c2fc22d4d7953b6a458e3d9013fb38af4a5a715f14a4cf389",
+        "bytes": 100628
+      },
+      {
+        "path": "docs/runtime_config/gp_config021_persisted_recovery.md",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "83178867007fc44d06d942e81849211ac291bf67",
+        "status": "A",
+        "new_sha256": "57fb36ec9276e7054c9704e6082a5d664aef83c67770d4d3356b249a6beef30a",
+        "bytes": 5714
+      },
+      {
+        "path": "docs/runtime_config/runtime_config_validation_health.md",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "cae295f68b2eb54eef545ac63e060e5ff97583a0",
+        "new_blob": "ac59b2dd6908e7111e2db3330f19bc1dc13b3441",
+        "status": "M",
+        "new_sha256": "3f319f138421f73474dceff82582b3b06ff1048fafaca67ea93d1a306651f759",
+        "bytes": 7117
+      },
+      {
+        "path": "include/core/config_validation.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "92042dd4745bce79b1d7d773edacba302e8a6d7c",
+        "status": "A",
+        "new_sha256": "b4d9c4937402406dc0cbd25ec83f27ea859f49258e4219272aa9dee75c52c4d5",
+        "bytes": 559
+      },
+      {
+        "path": "src/core/config_validation.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "46fd7df78b160f1f874614852c4784583f7dc727",
+        "status": "A",
+        "new_sha256": "d9536b639e8a36d834a8f7df1923789e559db59061255454767332a7f0c74b0e",
+        "bytes": 6620
+      },
+      {
+        "path": "tools/check_glyph_gp_config021_persisted_recovery.py",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "a3d3dd9186c7f885316adca16706d360e652dd90",
+        "status": "A",
+        "new_sha256": "2dc78d118dd2936ad9544a297ef00a66a140f90dc58152c87c2abbe423ef556d",
+        "bytes": 83500
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "9c816b2da2acf90a1294bac4dcbf01895c322607",
+        "status": "A",
+        "new_sha256": "d225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918",
+        "bytes": 1164
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "bbed4924c5a67f5d74fbc4356d7715bb3f81e4a2",
+        "status": "A",
+        "new_sha256": "712027e87b9709c1aeb2b6094011c25455e6802fbf66010e8f6f780a92983b69",
+        "bytes": 2007
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "8ecd1de63a5a5749098af433c848f77ab1954a1c",
+        "status": "A",
+        "new_sha256": "7041a7de46488bca009b0d82317c9e7bb6634749ed0cd3956a5ef8041664b36e",
+        "bytes": 1105
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "172ce13ac5386e185ac6ba041b65ce34f054ff51",
+        "status": "A",
+        "new_sha256": "f48cb755a19ac13aca731273a99da22383debe9bd892ac037819bea742b1babe",
+        "bytes": 1457
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "31e62a30021170fc78d0f553f6c08d150eb45b6d",
+        "status": "A",
+        "new_sha256": "d7f49ba5088c75beffac09c6b3e8b22abbf2db111125e90e18d3746837e95e4c",
+        "bytes": 2892
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "0a041280bd00a9d068f503b8ee7ce35214bd24a1",
+        "status": "A",
+        "new_sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+        "bytes": 7652
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "1e4508404042f16c6189b95a5e744048fa6b95fc",
+        "status": "A",
+        "new_sha256": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+        "bytes": 2331
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "7bf54f0f3ec820f6d5943cdba5f3450eb77b8e41",
+        "status": "A",
+        "new_sha256": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+        "bytes": 1609
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "dffd5cb74462a3f4b7e7a29d4328568debf0105a",
+        "status": "A",
+        "new_sha256": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+        "bytes": 3694
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/library.json",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "db460b28dbd992758bf388786f5b2e50417ea624",
+        "status": "A",
+        "new_sha256": "b38c58f849f48821c23740ab3e972fd4fb6bd861e47135f7e1315150be0d1037",
+        "bytes": 63
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "e1718206cea79452748a5ef49ac97f67c33a9192",
+        "status": "A",
+        "new_sha256": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+        "bytes": 1233
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/library.nanopb-arduino.json",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "91e7bf2b535469b967d99bdd7262a5dfbe0589fb",
+        "status": "A",
+        "new_sha256": "7921e2464098e0d08c15147df7dd0a131b49812be2739ed37c02c550bf08f4a8",
+        "bytes": 520
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "0a041280bd00a9d068f503b8ee7ce35214bd24a1",
+        "status": "A",
+        "new_sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+        "bytes": 7652
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "3f11bc50b082fb05b45c5c588440ce408cbb7cf9",
+        "status": "A",
+        "new_sha256": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b",
+        "bytes": 1761
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "3e5a91dfd321e3f8583132455d41308e521e8309",
+        "status": "A",
+        "new_sha256": "cf1ca013c2f2e049bde4b410d6568384f8d0c1dcb44d82cd418cd71db8e136f3",
+        "bytes": 1959
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "151ee3dfd5eedf3e4ca9f3704849d5235cb6739f",
+        "status": "A",
+        "new_sha256": "f98bb3a985033934e5c9aa312a0729e0d35ed0167e0eb01cc309a4480b575899",
+        "bytes": 1976
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/library.json",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "a5e5eea76bc9b6c3aadd52f3fd718e1867a09b89",
+        "status": "A",
+        "new_sha256": "7afd8086bfee7907f963b7b38a3a2bcbfe0136c43ab1e47ea8d6e968d5fdd3fa",
+        "bytes": 60
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "6df4262c531ab2a09669b4cb4fe12e36f66806ba",
+        "status": "A",
+        "new_sha256": "2fc037980c1841c55e4004adb4e87a1ae550173519896a710b78d48394bb24ed",
+        "bytes": 3619
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "45207b0a99cb58a0dae1a71f7b0ed21b22fbce15",
+        "status": "A",
+        "new_sha256": "47c1d2a93fccf06237e00691dcd69036b5b7cfb54dd21416bcc97844d4132453",
+        "bytes": 427
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "5a50a840f192a831287469190dc35aa73e84d01b",
+        "status": "A",
+        "new_sha256": "3d39e2da342d981461094c69d73229d88a345549499b5069b6e430e76a704dac",
+        "bytes": 552
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "941e8cd9ab3732d212ae4dbaff1bd802becdee8e",
+        "status": "A",
+        "new_sha256": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5",
+        "bytes": 946
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "b9df8fb4e43721c923bee4fc22eb1f3ff0763f35",
+        "status": "A",
+        "new_sha256": "678fd01f158f519d2fee8ffbf027937fb14d4b40d141c618d6c16ea4e4b38a1a",
+        "bytes": 386
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "1ce4b4c771f83c4315061a82c6e9b48da0ac2681",
+        "status": "A",
+        "new_sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+        "bytes": 30784
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "6dc089da307a10a6d440e70acb2775ed6e7fb07c",
+        "status": "A",
+        "new_sha256": "9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf",
+        "bytes": 7176
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "4522f333eafddd42b061243c36a232928bd7f96f",
+        "status": "A",
+        "new_sha256": "0951794f79b39ac63535af69b580092212e4647066c200ce6df188482e09560d",
+        "bytes": 802
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "f1ba6b8c807abccadef22a1ede3ccb48576161e4",
+        "status": "A",
+        "new_sha256": "854797409140abd8761a44625980a83b73dc62f973e9c8bef94d071cf447eb59",
+        "bytes": 1148
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "747df16fadbb6b783f4614eb010e4124dc9d4428",
+        "status": "A",
+        "new_sha256": "f1a8348ce2b2fed336e269b851bf1031789268802741e9c20a24f8e7d7f2ef57",
+        "bytes": 783
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "14c209b58e66445bb7030a9c422eb5d044504058",
+        "status": "A",
+        "new_sha256": "02acc526601a3bc61fc434690198eae72da75869e43ad9e24ffc21ead9e72ce0",
+        "bytes": 2205
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "627a573e764b9a93ef98bb2dc9acee3d06495b93",
+        "status": "A",
+        "new_sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c",
+        "bytes": 4555
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "23df581ad95652ad7a6fe532403ec2d5739b59ce",
+        "status": "A",
+        "new_sha256": "7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab",
+        "bytes": 2255
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "36bfb46732ed7cf4993bd580ada48acbbde2ec31",
+        "status": "A",
+        "new_sha256": "6fbf22c418b965c8b3bd1d20d8412d13950043b34ac61ed1f7b5b9bfa4f4ad5d",
+        "bytes": 1207
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "797a8431635ace12ce267586bf07b5f6e8f1aadf",
+        "status": "A",
+        "new_sha256": "f720ec13215f1adbc31ebe561651428c45dd05a3c0b3025d6cbd49be772d57a9",
+        "bytes": 4989
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Print.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "844cb148d07f7e46f00461031cc58d4066ca61e2",
+        "status": "A",
+        "new_sha256": "4950bf9f0a8ec926ce95c225ecf47c6401ae6df17c4353460e1378c4053c9d8a",
+        "bytes": 221
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Stream.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "463203667c6ee47f83fb414b8bb324ea747e4dd1",
+        "status": "A",
+        "new_sha256": "61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0",
+        "bytes": 457
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/Wire.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "41d6693ccef478e626683040ee06e80003c7cbeb",
+        "status": "A",
+        "new_sha256": "9e4b6a768ab81737df13372d053225d92c98bfd433de1af55b4bb54fa725321f",
+        "bytes": 248
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "0e74d11a5f4652c6bd0c31e2a93d8493e64896de",
+        "status": "A",
+        "new_sha256": "5c29ced4a047d158ff1e929f9c1679c3eed08cf4f129fb555f7e67d8c981dce3",
+        "bytes": 553
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/avr/pgmspace.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "1fcc7e8f6abc7a23ab8e8d8a6378f8c294a5737d",
+        "status": "A",
+        "new_sha256": "3f2de365e7cc1c6e874e9735d4be23e871fe03333bc3328f34810cd670c15467",
+        "bytes": 52
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "0b3c8f06a3bfe82e8f671bc5f6bd96d5821c2fd3",
+        "status": "A",
+        "new_sha256": "47568bbfdd939867e0e0a78613f46a03e6277c4c16661a729ccdd09b988160ea",
+        "bytes": 383
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "8ebb6944512278873c11f5d71cc98bd4ba3f01e3",
+        "status": "A",
+        "new_sha256": "f0221f7ab67c22e5ee206c7c8801bd5e09db61c76bf1f7d668495b92f958d5ab",
+        "bytes": 665
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "df311e33148ad1559a99bea1b3d5821827b0ad06",
+        "status": "A",
+        "new_sha256": "d87bf97b2ed727954698b931c70d1f0cd8ec9fff70d8bc5b76ed398476365f00",
+        "bytes": 5307
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "f4ed924aaa1af713065aba8cdf9bfa4b9561f3b0",
+        "status": "A",
+        "new_sha256": "a2ff6f0ceb9a050416c56ba2d587348c77259a02dd0ba1fc9f81db3c58cc439c",
+        "bytes": 174
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "5bac0151270606e7bb51e965ff4cd2edc806948d",
+        "status": "A",
+        "new_sha256": "430c019c88bae951f854bc9fd98615ffc7ef419d6894f5d17edf30278392ba5b",
+        "bytes": 180
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "d2369ff79c72c95477dcf9991d9dcf51334111bb",
+        "status": "A",
+        "new_sha256": "0531eca33b73e7de9fa6db45f9b9bb5670e7760665a35b9450bdde264b5b4d8b",
+        "bytes": 205
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "6f70f09beec2219624baeca92e2cd7deaa104fb4",
+        "status": "A",
+        "new_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+        "bytes": 13
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "05826db89d1ed9b69fcd6c6c8a42e7a372950262",
+        "status": "A",
+        "new_sha256": "2213c23f05f2d03183470a64548b7cfddf78a57d80cb09fc74fe745f3df43408",
+        "bytes": 38
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "6f70f09beec2219624baeca92e2cd7deaa104fb4",
+        "status": "A",
+        "new_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+        "bytes": 13
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "b42d0ee3c0ef24cd8e351fb44e2d69655a760b12",
+        "status": "A",
+        "new_sha256": "de247bcb527348f3a965565be09f0774eebf1203fed7be09e3a1a6e5ad825dc1",
+        "bytes": 567
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "4df644fda488d22b8f0f848d7915dbc6aed1a7ca",
+        "status": "A",
+        "new_sha256": "7ee1334c6ec489ba911676c855833b1c1d516b4bd572a39801c526a1fd3c09c9",
+        "bytes": 1033
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "0a6bc5bc41b5c7ece46cb9711c381b87d9687efe",
+        "status": "A",
+        "new_sha256": "c576e52cfe594883fa0a78e96e9521a77c1a1633d0b098bedac4a28733b62e7b",
+        "bytes": 27574
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "e2b61760ef2ab046a1f73b3ca644da3effa5fc1b",
+        "status": "A",
+        "new_sha256": "e744c7eeec31865b0a3dc954ca8c40982901c9c5ad94605941343f109db833cb",
+        "bytes": 4312
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "c31d8414186766df146ada28e1d48f2c47b29c1c",
+        "status": "A",
+        "new_sha256": "629ddf994e2a55a9f55bf568aeff09e56f89c68a22e4b27a3364eef77759ed1d",
+        "bytes": 20649
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "934a08d293d0026887eed90ef41f3a9ba1bfab2a",
+        "status": "A",
+        "new_sha256": "71a2b7c65c2478f5ffb97127cb5ff5efeabba52290d2e40fd7552657e42b1e80",
+        "bytes": 18396
+      },
+      {
+        "path": "tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "c76e44472155d585367840e6e80cae2588abdbdf",
+        "status": "A",
+        "new_sha256": "78b9f36eff61d82999cce1f988ee011aaf947120faa2cdc34b81d6b78dd0cb5e",
+        "bytes": 8447
+      }
+    ],
+    "critical_total": 238,
+    "untouched_critical_equal_base": 232,
+    "source_six_only_production_delta": true,
+    "source_free_new_files": "outside literal PIO src/HAL/config filters, include roots and extra scripts; no PIO declarations changed",
+    "clean_HEAD_index_live": true,
+    "target_build": "NOT_BUILT",
+    "hardware": "NOT_CLAIMED"
+  },
+  "hardware": {
+    "target_build": "NOT_RUN",
+    "artifact": null,
+    "acceptance": "PENDING",
+    "physical_invalid_write_authorized": false
+  },
+  "gate_waivers": false,
+  "other98_orders_unchanged": true,
+  "same_executor_next_step": "Implement existing READY GP-VAL-038 with exact candidate admission and separate affected current/historical proofs; retain immutable C021. No build before038 strictDONE; no behavior-changing source merge before exact HEP PASS.",
+  "transport": "Durable canonical source-free readback; persistent GLYPH-UD-029 executor, no new full chat/Planner/Curator."
+}
+```
+<!-- gp-config021-handoff-val038-activation:end -->
