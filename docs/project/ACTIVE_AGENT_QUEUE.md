@@ -944,7 +944,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "validation infrastructure",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance.",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Independently verified newer owner clarification, daemon turn 01a11767-b3ad-7822-bf09-c93bfae4cbcf, user message 01a11767-b407-74e0-969e-df163870b79c: apply GLYPH-UD-027 to the eight finite C021 admission/execution/full-width/negative/current-historical/protected/native/review facts. Preserve unrelated aggregate/setup/source-context/synthetic-topology/historical-budget results as FRAMEWORK_VALIDATION_DEBT; do not require global green or create a successor without a concrete UNPROVEN_SAFETY_FACT. Immediately resume preserved021 after strict038DONE. Exact original owner text and readback digest are recorded below.",
       "dependencies_prerequisites": [
         "Preserve the exact committed GP-CONFIG-021 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
@@ -958,7 +958,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract.",
       "automated_validation": [
         "Apply the exact local scope validation matrix plus adopted finite algorithm and all negative controls. Authenticate literal production bodies/schema/decoder, old versus current observations, omission/one-byte substitution and modes; retain historical 005/010/011/012/016 and accepted Ultimate/X1 table/source authority. No silent hash reseal.",
-        "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate."
+        "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate.",
+        "The newer verified owner product-boundary above controls prior aggregate wording: affected actual C021/protected consumers, exact source/candidate correspondence and fresh independent review must pass; unrelated global/source-context/synthetic/full-historical budget failures remain honest debt absent a specific contradiction in the eight product facts. No global framework repair or additional validation successor for such debt."
       ],
       "canonical_build": "NOT_REQUIRED: source-free H1 governance/characterization; stop on firmware/build change.",
       "expected_artifact": "NOT_APPLICABLE",
@@ -26972,3 +26973,127 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config021-handoff-val038-activation:end -->
+
+
+## GP-VAL-038 product-boundary authority and actual validation
+
+<!-- gp-val038-product-boundary-and-validation:start -->
+```json
+{
+  "schema_name": "glyph_gp_val038_product_bounded_validation_result",
+  "schema_version": 1,
+  "work_order": "GP-VAL-038",
+  "candidate": "a170bd40a51741582913324bfecbc14ce9b3211d",
+  "candidate_tree": "91ca6d86c2fa28b55ef5a6b3623b25748b167feb",
+  "candidate_base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+  "implementation_code_sha": "5764ca01073d7d4cd1ab83fb3a6b1b7460b4a13c",
+  "derived_registration_sha": "916c00e3a91d98223b50e983ed5c74534019d463",
+  "owner_directive": {
+    "schema_name": "glyph_gp_val038_verified_owner_product_boundary",
+    "thread_id": "01a0fcbd-2b4c-7d31-9088-42a22e260b57",
+    "turn_id": "01a11767-b3ad-7822-bf09-c93bfae4cbcf",
+    "message_id": "01a11767-b407-74e0-969e-df163870b79c",
+    "content": [
+      {
+        "type": "text",
+        "text": "OWNER CLARIFICATION \u2014 GP-VAL-038 MUST REMAIN PRODUCT-BOUNDED\n\nApply GLYPH-UD-027 Revision 3 strictly to the currently executing\\\nGP-VAL-038.\n\nThe purpose of GP-VAL-038 is to establish the finite admission and\\\ncurrent-versus-historical proof necessary for the existing GP-CONFIG-021\\\ncandidate.\n\nIt is NOT authority to repair or make green the global validation framework.\n\nCurrent known state:\n\nC021 candidate:\\\n`a170bd40a51741582913324bfecbc14ce9b3211d`\n\nTree:\\\n`91ca6d86c2fa28b55ef5a6b3623b25748b167feb`\n\nKnown product evidence:\n\n- independent implementation review APPROVED;\n- both host layouts PASS;\n- 69 negative controls PASS;\n- full-width reference validation correction included;\n- untouched critical inputs remain exact accepted C017.\n\nKnown framework/proof failures include:\n\n- standalone CLI failure on 56 unclassified coupled host literals;\n- aggregate SETUP_FAILURE/source_context results where zero actual checkers ran;\n- any current aggregate timeout/incomplete results.\n\n038 must establish:\n\n1. the exact C021 candidate is admitted under the intended finite scope;\n2. the directly affected actual consumers execute against that candidate;\n3. the full-width reference cases, including 256, execute in the intended\\\n   validation domain;\n4. required negative controls pass;\n5. relevant current-versus-historical correspondence passes;\n6. protected/affected actual consumers pass;\n7. native source/candidate correspondence remains exact;\n8. fresh independent review approves the result.\n\nIf those Tier-1/Tier-2 facts are established, GP-VAL-038 may complete.\n\nDo NOT block GP-VAL-038 merely because:\n\n- the global aggregate times out;\n- aggregate setup fails before checker execution;\n- a synthetic/global topology proof fails;\n- full historical framework proof exceeds its budget;\n- framework source-context construction fails independently of the candidate.\n\nPreserve every such result honestly as:\n\n`FRAMEWORK_VALIDATION_DEBT`\n\nDo not relabel it PASS.\n\nBut do not require it to become PASS before 038 DONE unless it identifies a\\\nspecific contradiction in one of the required Tier-1/Tier-2 safety facts above.\n\nRepair/classify the 56 coupled host literals only to the extent necessary to\\\nprove that actual affected C021 consumers are correctly scoped and executed.\n\nDo not generalize this into a broad historical checker taxonomy rewrite.\n\nOnce exact affected admission/execution is proved, stop expanding that repair.\n\nDo NOT create GP-VAL-046 or another validation successor for:\n\n- timeout;\n- aggregate setup;\n- source-context setup;\n- framework performance;\n- synthetic topology completeness.\n\nA new successor requires a concrete:\n\n`UNPROVEN_SAFETY_FACT = <firmware/product fact>`\n\nIf no such product fact exists, record debt and continue.\n\nAfter GP-VAL-038 strict DONE, immediately resume the existing C021 chain toward\\\nexact build/custody/review/hardware handoff.\n"
+      }
+    ],
+    "independently_read": true
+  },
+  "owner_directive_readback_sha256": "682efcc8cb7ab3446ee7c4e758e77e8054081c86c15ac8ab52cfde333b3df32c",
+  "acceptance_basis": "Eight owner-named Tier-1/Tier-2 facts only; finite candidate and directly affected current consumers. Independent final review and separate live integration/strict completion remain pending.",
+  "actual_product_proofs": {
+    "exact_immutable_C": "PASS original214pins and66inventory retained",
+    "current_engine": "PASS both ABI layouts,69 negativecontrols,194MMD; original32-bit references including256; real semantic/Persistence/SET/startup execution",
+    "current_consumers": "PASS bothABI RAWGET11+2,namebinding20,SETtransactions25,keyboard/custom2;36MMD",
+    "protected_consumers": "PASS five unchanged full content/scope bodies in feature,detached explicitB and genuine private C21 composition;15actual results",
+    "native_correspondence": "PASS sourcefree236equalacceptedF017; genuineM238equalC21; onlysixcriticaldeltas",
+    "admission_controls": "PASS76 actual source/index/build/sibling/mode/host/protected-body refusal controls",
+    "historical_current": "13originalB fullmain PASS; unchanged selector/menu/USB/mode/keyboard/custom/RGB bodies retain B==C mode/blob proof; separate C21 admission/load/SET/startup/currentconsumer proof. Old011 fullmain TIMEOUT retained; old011 eight-case primitive evidence unchanged.",
+    "process_ownership": "PASS native120 cancellation controls child+grandchild; production300/120 clocks unchanged"
+  },
+  "reports": [
+    {
+      "name": "038-final-candidate-main.json",
+      "sha256": "eb6614d650e3857a55f455690dff01ef5c483033ed620abba3fb936fb569167b",
+      "status": "PASS"
+    },
+    {
+      "name": "038-final-protected-feature.json",
+      "sha256": "5ac10ac7af2889b2087e352e237fcdafec046f739234cc2d96baf3cca7e94f14",
+      "status": "PASS"
+    },
+    {
+      "name": "038-final-protected-detached.json",
+      "sha256": "9921c5c06b859c87a22b601f52144867d435d859b0ea27c70735f423ca89b526",
+      "status": "PASS"
+    },
+    {
+      "name": "038-final-protected-composed.json",
+      "sha256": "94915a093e27615eec5806d2792f72175acaf12d7789d309b62e8dd33bb4fd7c",
+      "status": "PASS"
+    },
+    {
+      "name": "038-product-admission-controls.json",
+      "sha256": "43de408b1f23feba854b347f80bf2ac8d98eb59f6d725d86aa77dc578a60e9bb",
+      "status": "PASS"
+    },
+    {
+      "name": "038-product-consumer-coverage-assessment.json",
+      "sha256": "ba51106636df818b2df164b5aab21efb906453791772b78b14ad6ee0b47f179a",
+      "status": "READ_ONLY_ASSESSMENT"
+    },
+    {
+      "name": "038-5764-independent-custody-audit.json",
+      "sha256": "d1a6dc6479a6177efa2ede4fa886bdef1de3a07024bcf745e04ff7821e4e6530",
+      "status": "READ_ONLY_ASSESSMENT"
+    },
+    {
+      "name": "038-5764-independent-composed-custody.json",
+      "sha256": "f870952286862ebffe5c8842e9a893b1cd920f52787922dcaff46e62ed8fcfa3",
+      "status": "READ_ONLY_ASSESSMENT"
+    }
+  ],
+  "retained_debt": [
+    {
+      "classification": "FRAMEWORK_VALIDATION_DEBT",
+      "actual": "OriginalC standalone CLI FAIL56unclassifiedhostliterals; initialaggregate SETUP_FAILURE/source_context0executed",
+      "disposition": "Exact56hostliteral admission and actual scoped currentexecution now separately proved; originalfailuresretained."
+    },
+    {
+      "classification": "FRAMEWORK_VALIDATION_DEBT",
+      "actual": "Old011 fullnative main TIMEOUT100; full paired14 wrappers not claimedPASS",
+      "disposition": "Affectedcandidateconsumerdomains pass separately; unchanged old011 body/inputs/evidence preserved."
+    },
+    {
+      "classification": "FRAMEWORK_VALIDATION_DEBT",
+      "actual": "Old-context constructedADOPTION copiedcurrentdispatcher withoutnew021module; ModuleNotFoundError beforecampaignproof",
+      "disposition": "Actualfivefeature/detached/composed fullbodies and currentproductcontrolsPASS; do not expand oldsyntheticroot."
+    },
+    {
+      "classification": "FRAMEWORK_VALIDATION_DEBT",
+      "actual": "Full038unit actual301controlsPASS117.328atc59; final5764fullunit actualTIMEOUT120.004",
+      "disposition": "No finalfullunitPASS claim; actual native productadmission76PASS separately."
+    },
+    {
+      "classification": "REPAIRED_DIRECTLY_AFFECTED_REGISTRATION",
+      "actual": "5764censusFAILartifactdrift; afterrefreshmanifestFAILmissingdirectglyph_campaign_transitiondependency",
+      "disposition": "One censusentry3derivedfields and one literalmanifestdependency added; rawFAILsretained."
+    },
+    {
+      "classification": "REPAIRED_LOCAL_IMPORT_DEFECT",
+      "actual": "1bbartifact/context bodyImportError missinggenericpresent export",
+      "disposition": "Existing017presencepredicate preserved; onlyauthenticateimport routescurrent; exactoriginalbodytransform enforced."
+    }
+  ],
+  "unproven_safety_fact": null,
+  "global_aggregate_PASS": false,
+  "target_build": "NOT_RUN",
+  "hardware_acceptance": "PENDING",
+  "physical_invalid_Config_write_authorized": false,
+  "unrelated_orders_preserved": 97,
+  "no_new_successor": true
+}
+```
+<!-- gp-val038-product-boundary-and-validation:end -->
